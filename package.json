@@ -27,7 +27,6 @@
     "postcss-loader": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^6.0.8",
     "react-router-dom": "^5.2.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
@@ -39,12 +38,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.4",
-    "install": "^0.13.0",
     "lodash": "^4.17.19",
-    "moment": "^2.27.0",
-    "ordering-api-sdk": "github:sergioaok/ordering-api-sdk#v0.0.4",
+    "polished": "^3.6.6",
     "prop-types": "^15.7.2",
-    "socket.io-client": "^2.3.0"
+    "styled-components": "^5.1.1"
   },
   "peerDependencies": {
     "react": ">=16.13.1",

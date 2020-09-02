@@ -1,0 +1,3 @@
+node_modules/
+cypress/integration/examples
+.DS_Store
