@@ -16,6 +16,7 @@
     "@babel/core": "^7.10.4",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/plugin-syntax-jsx": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
@@ -23,6 +24,7 @@
     "css-loader": "^3.6.0",
     "cypress": "^4.11.0",
     "eslint-plugin-cypress": "^2.11.1",
+    "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.3.0",
     "postcss-loader": "^3.0.0",
     "react": "^16.13.1",
@@ -41,6 +43,7 @@
     "lodash": "^4.17.19",
     "polished": "^3.6.6",
     "prop-types": "^15.7.2",
+    "react-icons": "^3.11.0",
     "styled-components": "^5.1.1"
   },
   "peerDependencies": {

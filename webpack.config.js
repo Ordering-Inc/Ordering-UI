@@ -5,6 +5,7 @@ module.exports = {
   entry: './index-template.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
@@ -48,6 +49,14 @@ module.exports = {
           },
           {
             loader: 'sass-loader' // compiles Sass to CSS
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader'
           }
         ]
       }
