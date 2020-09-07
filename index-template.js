@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 // import { SessionProvider } from '../ordering-components/src/contexts/SessionContext'
+// import { SessionProvider } from '../ordering-components/dist/bundle'
 
 import { Router } from './template/router'
 

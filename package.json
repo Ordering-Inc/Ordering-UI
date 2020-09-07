@@ -4,7 +4,8 @@
   "description": "Ordering Internal Dashboard",
   "main": "index.js",
   "scripts": {
-    "build": "npx webpack --mode=production",
+    "clean": "shx rm -rf _bundles lib lib-esm",
+    "build": "npm run clean && webpack --mode=production",
     "build-dev": "npx webpack --mode=development",
     "serve": "npx webpack-dev-server",
     "lint": "standard",
@@ -41,6 +42,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.4",
     "lodash": "^4.17.19",
+    "ordering-components": "github:sergioaok/ordering-components#testnpm",
     "polished": "^3.6.6",
     "prop-types": "^15.7.2",
     "react-icons": "^3.11.0",

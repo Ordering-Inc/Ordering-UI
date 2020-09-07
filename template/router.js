@@ -3,10 +3,15 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  useParams
+  useParams,
+  Redirect,
+  Link
 } from 'react-router-dom'
+import { useSession, useLanguage } from 'ordering-components'
 import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
+import { LoginForm } from '../src/components/LoginForm'
+import { Ordering } from 'ordering-api-sdk'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -15,7 +20,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const ordering = new Ordering()
+
 export const Router = () => {
+  const [{ auth }] = useSession()
+  const [, t] = useLanguage()
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -28,10 +37,32 @@ export const Router = () => {
           Home
         </Route>
         <Route exact path='/signin'>
-          Login
+          {
+            !auth
+              ? (
+                <LoginForm
+                  ordering={ordering}
+                  elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
+                  elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                  useLoginByCellphone
+                />
+              )
+              : <Redirect to='/' />
+          }
         </Route>
         <Route exact path='/login'>
-          Login
+          {
+            !auth
+              ? (
+                <LoginForm
+                  ordering={ordering}
+                  elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
+                  elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                  useLoginByCellphone
+                />
+              )
+              : <Redirect to='/' />
+          }
         </Route>
         <Route exact path='/signup'>
           Signup

@@ -6,18 +6,14 @@ import {
 import { Select } from '../../Select'
 import { useLocation, Link } from 'react-router-dom'
 
-// import { useSession } from 'ordering-components'
+import { useSession } from 'ordering-components'
 
 import logoHeader from '../../../template/logo-header.svg'
 import logoHeaderInvert from '../../../template/logo-header-invert.svg'
 
 export const Header = (props) => {
   const location = useLocation()
-  // const [{ auth }] = useSession()
-  const auth = false
-  console.warn('Get auth from context')
-
-  console.log(auth)
+  const [{ auth }] = useSession()
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
