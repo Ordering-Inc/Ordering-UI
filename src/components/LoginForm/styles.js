@@ -18,6 +18,12 @@ export const Triangle = styled.div`
   &::after {
     position: absolute;
     content: '';
+    height: 100%;
+    width: 0;
+    /* border: 10px solid #333; */
+    /* border-top: 50% solid transparent;
+    border-bottom: 50% solid transparent; */
+    /* border-right:25vh solid blue; */
   }
 `
 
@@ -25,5 +31,5 @@ export const FormSide = styled.div`
 `
 
 export const HeroSide = styled.div`
-
+  /* font: normal normal bold 106px/148px Tajawal; */
 `

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   BrowserRouter,
   Switch,
@@ -13,12 +13,36 @@ import { createGlobalStyle } from 'styled-components'
 import { LoginForm } from '../src/components/LoginForm'
 import { Ordering } from 'ordering-api-sdk'
 
+const fontName = 'Montserrat'
+
 const GlobalStyle = createGlobalStyle`
   body {
+    font-family: '${fontName}', sans-serif;
     margin: 0;
     color: #333;
   }
 `
+
+const FontTheme = ({ fontName, children }) => {
+  useEffect(() => {
+    if (window.document.getElementById('theme-font-styles')) {
+      return
+    }
+
+    const fontTheme = window.document.createElement('link')
+    fontTheme.id = 'theme-font-styles'
+    fontTheme.rel = 'stylesheet'
+    fontTheme.async = true
+    fontTheme.defer = true
+    fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
+
+    window.document.body.appendChild(fontTheme)
+    return () => {
+      fontTheme.remove()
+    }
+  })
+  return children
+}
 
 const ordering = new Ordering()
 
@@ -28,73 +52,75 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Header />
-      <Switch>
-        <Route exact path='/home'>
-          Home
-        </Route>
-        <Route exact path='/'>
-          Home
-        </Route>
-        <Route exact path='/signin'>
-          {
-            !auth
-              ? (
-                <LoginForm
-                  ordering={ordering}
-                  elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                  elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
-                  useLoginByCellphone
-                />
-              )
-              : <Redirect to='/' />
-          }
-        </Route>
-        <Route exact path='/login'>
-          {
-            !auth
-              ? (
-                <LoginForm
-                  ordering={ordering}
-                  elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                  elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
-                  useLoginByCellphone
-                />
-              )
-              : <Redirect to='/' />
-          }
-        </Route>
-        <Route exact path='/signup'>
-          Signup
-        </Route>
-        <Route exact path='/password/forgot'>
-          Password forgot
-        </Route>
-        <Route exact path='/password/reset'>
-          Password reset
-        </Route>
-        <Route exact path='/profile'>
-          Profile
-        </Route>
-        <Route exact path='/p/:page'>
-          <Page />
-        </Route>
-        <Route exact path='/search'>
-          Search
-        </Route>
-        <Route exact path='/store/:store'>
-          <Store />
-        </Route>
-        <Route exact path='/checkout'>
-          Checkout
-        </Route>
-        <Route exact path='/order/:orderId'>
-          <Order />
-        </Route>
-        <Route path='*'>
-          404
-        </Route>
-      </Switch>
+      <FontTheme fontName={fontName}>
+        <Header />
+        <Switch>
+          <Route exact path='/home'>
+            Home
+          </Route>
+          <Route exact path='/'>
+            Home
+          </Route>
+          <Route exact path='/signin'>
+            {
+              !auth
+                ? (
+                  <LoginForm
+                    ordering={ordering}
+                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    useLoginByCellphone
+                  />
+                )
+                : <Redirect to='/' />
+            }
+          </Route>
+          <Route exact path='/login'>
+            {
+              !auth
+                ? (
+                  <LoginForm
+                    ordering={ordering}
+                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    useLoginByCellphone
+                  />
+                )
+                : <Redirect to='/' />
+            }
+          </Route>
+          <Route exact path='/signup'>
+            Signup
+          </Route>
+          <Route exact path='/password/forgot'>
+            Password forgot
+          </Route>
+          <Route exact path='/password/reset'>
+            Password reset
+          </Route>
+          <Route exact path='/profile'>
+            Profile
+          </Route>
+          <Route exact path='/p/:page'>
+            <Page />
+          </Route>
+          <Route exact path='/search'>
+            Search
+          </Route>
+          <Route exact path='/store/:store'>
+            <Store />
+          </Route>
+          <Route exact path='/checkout'>
+            Checkout
+          </Route>
+          <Route exact path='/order/:orderId'>
+            <Order />
+          </Route>
+          <Route path='*'>
+            404
+          </Route>
+        </Switch>
+      </FontTheme>
       {/* <Footer /> */}
     </BrowserRouter>
   )
