@@ -1,50 +1,45 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Popup } from 'ordering-components'
-import { customStyles } from './styles'
+import { PopupDialog, PopupWrap, PopupBackDrop, PopupActions, PopupTitle, PopupContent } from './styles'
+
+import { Button } from '../../styles/Buttons'
 
 const ConfirmationUI = (props) => {
   const {
     title,
+    content,
     onAccept,
     onCancel,
-    onClose
+    onClose,
+    acceptText,
+    closeText
   } = props
   return (
-    <>
-      {title && <h2>{title}</h2>}
-      <p>Do you want to delete Card</p>
-      {(onCancel || onAccept || onClose) && (
-        <div>
-          {onAccept && <button onClick={() => onAccept()}>Accept</button>}
-          {onCancel && <button onClick={() => onCancel()}>Cancel</button>}
-          {onClose && <button onClick={() => onClose()}>Close</button>}
-        </div>)}
-    </>
+    <PopupWrap className='popup'>
+      <PopupDialog>
+        {title && <PopupTitle>{title}</PopupTitle>}
+        {content && <PopupContent>{content}</PopupContent>}
+        {(onCancel || onAccept || onClose) && (
+          <PopupActions>
+            {onClose && <Button outline onClick={() => onClose()}>{closeText}</Button>}
+            {onCancel && <Button onClick={() => onCancel()}>Cancel</Button>}
+            {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText}</Button>}
+          </PopupActions>)}
+      </PopupDialog>
+    </PopupWrap>
   )
-}
-
-const [modalIsOpen, setIsOpen] = useState(false)
-
-// const openModal = () => {
-//   setIsOpen(true)
-// }
-
-const closeModal = () => {
-  setIsOpen(false)
 }
 
 export const Confirmation = (props) => {
   const popupProps = {
     ...props,
-    UIComponent: ConfirmationUI,
-    open: modalIsOpen,
-    style: customStyles,
-    onAccept: () => closeModal(),
-    onCancel: () => closeModal(),
-    onClose: () => closeModal(),
-    title: 'Confirmation'
+    UIComponent: ConfirmationUI
   }
+
   return (
-    <Popup {...popupProps} />
+    <>
+      <PopupBackDrop className='popup-backdrop' />
+      <Popup {...popupProps} />
+    </>
   )
 }

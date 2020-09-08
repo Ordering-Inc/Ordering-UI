@@ -2,8 +2,6 @@ import React from 'react'
 import { LoginForm as LoginFormController, useLanguage } from 'ordering-components'
 import { LoginContainer, Triangle, FormSide, HeroSide } from './styles'
 
-// import { Confirmation } from '../Confirmation'
-
 import logoHeader from '../../../template/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
@@ -52,7 +50,6 @@ const LoginFormUI = (props) => {
             {t('NEW_ON_PLATFORM')} <a href={linkToForgetPassword}>{t('RESET_PASSWORD')}</a>
           </>
         )}
-        {/* <Confirmation /> */}
       </FormSide>
     </LoginContainer>
   )
