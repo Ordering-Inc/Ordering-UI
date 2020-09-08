@@ -13,6 +13,8 @@ import { createGlobalStyle } from 'styled-components'
 import { LoginForm } from '../src/components/LoginForm'
 import { Ordering } from 'ordering-api-sdk'
 
+import { HomePage } from '../template/Pages/Home'
+
 const fontName = 'Montserrat'
 
 const GlobalStyle = createGlobalStyle`
@@ -56,10 +58,10 @@ export const Router = () => {
         <Header />
         <Switch>
           <Route exact path='/home'>
-            Home
+            <HomePage />
           </Route>
           <Route exact path='/'>
-            Home
+            <HomePage />
           </Route>
           <Route exact path='/signin'>
             {
