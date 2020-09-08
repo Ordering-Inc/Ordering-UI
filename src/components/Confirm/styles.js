@@ -63,3 +63,9 @@ export const PopupContent = styled.p`
   opacity: 1;
   text-transform: capitalize;
 `
+
+export const PopupIcon = styled.span`
+  float: right;
+  font-size: 30px;
+  cursor: pointer;
+`
