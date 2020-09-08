@@ -26,7 +26,7 @@ export const PopupWrap = styled.div`
 export const PopupDialog = styled.div`
   background-color: #FFF;
   padding: 20px;
-  width: 80%;
+  width: 70%;
   border-radius: 10px;
 `
 
@@ -47,17 +47,19 @@ export const PopupActions = styled.div`
 
 export const PopupTitle = styled.h2`
   text-align: left;
-  font: normal normal bold 50px/70px Tajawal;
+  font: normal normal bold 35px/70px Tajawal;
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;
   margin-top: 0px;
+  text-transform: capitalize;
 `
 
 export const PopupContent = styled.p`
   text-align: left;
-  font: normal normal normal 35px/49px Tajawal;
+  font: normal normal normal 20px/49px Tajawal;
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;
+  text-transform: capitalize;
 `

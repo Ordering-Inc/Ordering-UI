@@ -4,7 +4,7 @@ import { PopupDialog, PopupWrap, PopupBackDrop, PopupActions, PopupTitle, PopupC
 
 import { Button } from '../../styles/Buttons'
 
-const ConfirmationUI = (props) => {
+const ConfirmUI = (props) => {
   const {
     title,
     content,
@@ -30,10 +30,10 @@ const ConfirmationUI = (props) => {
   )
 }
 
-export const Confirmation = (props) => {
+export const Confirm = (props) => {
   const popupProps = {
     ...props,
-    UIComponent: ConfirmationUI
+    UIComponent: ConfirmUI
   }
 
   return (
