@@ -214,7 +214,8 @@ export const TextContent = styled.div`
     }
     &.center {
       h1 {
-        font-size: 30px;
+        font-size: 24px;
+        text-align: center;
       }
     }
   }

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HeroContainer = styled.div`
   width: 100%;
@@ -16,8 +16,11 @@ export const ContentWrapper = styled.div`
       width: 180px;
     }
     input {
-      width: 50%;
+      width: 98%;
       margin-bottom: 15px;
+    }
+    @media (max-width: 480px) {
+      font-size: 40px;
     }
 `
 
@@ -44,4 +47,26 @@ export const Slogan = styled.p`
   @media (max-width: 480px) {
     font-size: 18px;
   }
+`
+
+export const WrapInput = styled.label`
+  ${({ withIcon }) => withIcon && css`
+    position: relative;
+    width: calc(50% + 70px);
+    &::before {
+      content: "";
+      position: absolute;
+      right: 10px;
+      top: 0;
+      bottom: 20px;
+      width: 20px;
+      background: url(${withIcon}) center / contain no-repeat;
+    }
+    @media (max-width: 480px) {
+      &::before {
+        right: 0px;
+        bottom: 0px;
+      }
+    }
+  `}
 `
