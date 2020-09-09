@@ -29,6 +29,9 @@ export const Title = styled.h1`
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #00000029;
   opacity: 1;
+  @media (max-width: 480px) {
+    font-size: 40px;
+  }
 `
 
 export const Slogan = styled.p`
@@ -38,4 +41,7 @@ export const Slogan = styled.p`
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
 `

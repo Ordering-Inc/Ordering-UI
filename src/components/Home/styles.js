@@ -7,10 +7,10 @@ export const HomeContainer = styled.div`
 `
 export const HomeSection = styled.div`
   display: flex;
-  align-items: center;
-  padding: 50px 0px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px 50px 20px;
   background: #FFF;
-  justify-content: space-between;
 
   ${({ column }) => column && css`
     flex-direction: column;
@@ -21,13 +21,25 @@ export const HomeSection = styled.div`
   `}
 
   ${({ bgimage }) => bgimage && css`
-    background-image: url(${bgimage});
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url(${bgimage});
     background-repeat: no-repeat, repeat;
     width: 100%;
     background-size: cover;
     object-fit: cover;
     background-position: center;
+    min-height: 350px;
+    justify-content: center;
+    align-items: center;
   `}
+  @media (max-width: 942px) {
+    flex-direction: column;
+    &.reverse {
+      flex-direction: column-reverse;
+    }
+  }
 `
 
 export const HomeTitle = styled.div`
@@ -42,16 +54,18 @@ export const HomeTitle = styled.div`
   span {
     color: #D81212;
   }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 33px;
+    }
+  }
 `
 
 export const StepsBlock = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 15px;
-  /*
-  > * {
-    margin: 0px 50px;
-  }
-  */
   div {
     display: flex;
     flex-direction: column;
@@ -63,6 +77,12 @@ export const StepsBlock = styled.div`
     h3 {
       font-weight: normal;
       text-align: center;
+    }
+  }
+  @media (max-width: 1042px) {
+    div {
+      width: 100%;
+      margin-bottom: 20px;
     }
   }
 `
@@ -104,7 +124,8 @@ export const StepsBlock = styled.div`
 export const ImageContent = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 50%;
+  margin-top: 40px;
+  width: 50%;
   div {
     display: flex;
     justify-content: center;
@@ -117,6 +138,10 @@ export const ImageContent = styled.div`
       max-width: 100%;
     }
   }
+  @media (max-width: 942px) {
+    margin-top: 40px;
+    width: 100%;
+  }
 `
 
 export const WrapTextContent = styled.div`
@@ -126,9 +151,9 @@ export const WrapTextContent = styled.div`
 export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 250px;
+  justify-content: center;
+  width: 50%;
   div {
-    padding: 0px 80px;
     h1 > span {
       color: #D81212;
     }
@@ -151,10 +176,34 @@ export const TextContent = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: 100%;
     }
 
     button {
       width: 122px;
+    }
+  }
+  @media (max-width: 942px) {
+    width: 100%;
+    text-align: center;
+    &.center {
+      h1 {
+        font-size: 45px;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 20px;
+    }
+    div {
+      text-align: left;
+      margin-top: 25px;
+    }
+    &.center {
+      h1 {
+        font-size: 30px;
+      }
     }
   }
 `

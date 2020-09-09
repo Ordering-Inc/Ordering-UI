@@ -55,6 +55,9 @@ export const Menu = styled.div`
   > :last-child {
     margin-right: 10px;
   }
+  @media (max-width: 410px) {
+    display: none
+  }
 `
 
 export const MenuItem = styled.div`

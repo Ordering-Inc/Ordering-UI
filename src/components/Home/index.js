@@ -1,7 +1,4 @@
 import React from 'react'
-import { VscLocation, VscHome } from 'react-icons/vsc'
-import { BiDrink } from 'react-icons/bi'
-import { GrDeliver } from 'react-icons/gr'
 import { RiAppleLine } from 'react-icons/ri'
 import { AiOutlineAndroid } from 'react-icons/ai'
 import { HomeHero } from '../HomeHero'
@@ -20,6 +17,14 @@ import {
   Icons
 } from './styles'
 
+import locationSvg from '../../../template/assets/location-icon.svg'
+import businessSvg from '../../../template/assets/store-icon.svg'
+import productSvg from '../../../template/assets/product-icon.svg'
+import deliverySvg from '../../../template/assets/delivery-icon.svg'
+import burgerImage from '../../../template/assets/burger-image.png'
+import socialMedia from '../../../template/assets/social-media.png'
+import foodBg from '../../../template/assets/food-bg.png'
+
 export const Home = (props) => {
   return (
     <HomeContainer>
@@ -33,19 +38,19 @@ export const Home = (props) => {
         </HomeTitle>
         <StepsBlock>
           <div>
-            <VscLocation />
+            <img src={locationSvg} />
             <h3>Add Address</h3>
           </div>
           <div>
-            <VscHome />
+            <img src={businessSvg} />
             <h3>Select your Business</h3>
           </div>
           <div>
-            <BiDrink />
+            <img src={productSvg} />
             <h3>Choose your Product</h3>
           </div>
           <div>
-            <GrDeliver />
+            <img src={deliverySvg} />
             <h3>Your package arrives</h3>
           </div>
         </StepsBlock>
@@ -54,19 +59,21 @@ export const Home = (props) => {
       <HomeSection>
         <ImageContent>
           <div>
-            <img src='https://picsum.photos/1024/768' alt='img' />
+            <img src={burgerImage} alt='img' />
           </div>
         </ImageContent>
         <TextContent>
-          <div>
-            <h1>We deliver more than <span>food</span></h1>
-            <p>With the largest on-demand network in the industry, you can explore your city, find its hidden hotspots, and watch as we bring your new favorite right to your door.</p>
-            <p>Download the app for iOS or Android for free.</p>
-          </div>
+          <WrapTextContent>
+            <div>
+              <h1>We deliver more than <span>food</span></h1>
+              <p>With the largest on-demand network in the industry, you can explore your city, find its hidden hotspots, and watch as we bring your new favorite right to your door.</p>
+              <p>Download the app for iOS or Android for free.</p>
+            </div>
+          </WrapTextContent>
         </TextContent>
       </HomeSection>
 
-      <HomeSection bgColor='#F8F8F8'>
+      <HomeSection bgColor='#F8F8F8' className='reverse'>
         <TextContent>
           <WrapTextContent>
             <div>
@@ -82,12 +89,12 @@ export const Home = (props) => {
         </TextContent>
         <ImageContent>
           <div>
-            <img src='https://picsum.photos/1024/768' alt='img' />
+            <img src={socialMedia} alt='img' />
           </div>
         </ImageContent>
       </HomeSection>
 
-      <HomeSection bgimage='https://picsum.photos/1024/768'>
+      <HomeSection bgimage={foodBg}>
         <TextContent className='center'>
           <div>
             <h1>Something for everyone</h1>
