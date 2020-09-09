@@ -40,6 +40,9 @@ export const HomeSection = styled.div`
       flex-direction: column-reverse;
     }
   }
+  @media (max-width: 942px) {
+    padding: 0px 10px 20px;
+  }
 `
 
 export const HomeTitle = styled.div`
@@ -56,7 +59,8 @@ export const HomeTitle = styled.div`
   }
   @media (max-width: 480px) {
     h1 {
-      font-size: 33px;
+      font-size: 30px;
+      margin: 0px;
     }
   }
 `
@@ -146,6 +150,14 @@ export const ImageContent = styled.div`
 
 export const WrapTextContent = styled.div`
   padding: 20px;
+  div {
+    padding: 0px 70px;
+  }
+  @media (max-width: 942px) {
+    div {
+      padding: 0px 0px;
+    }
+  }
 `
 
 export const TextContent = styled.div`
