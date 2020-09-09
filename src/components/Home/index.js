@@ -28,7 +28,7 @@ import foodBg from '../../../template/assets/food-bg.png'
 export const Home = (props) => {
   return (
     <HomeContainer>
-      <HomeHero />
+      <HomeHero {...props} />
 
       <HomeSection bgColor='#F8F8F8' column>
         <HomeTitle>

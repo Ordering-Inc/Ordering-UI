@@ -58,10 +58,10 @@ export const Router = () => {
         <Header />
         <Switch>
           <Route exact path='/home'>
-            <HomePage />
+            <HomePage ordering={ordering} />
           </Route>
           <Route exact path='/'>
-            <HomePage />
+            <HomePage ordering={ordering} />
           </Route>
           <Route exact path='/signin'>
             {
