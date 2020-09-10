@@ -18,13 +18,14 @@ import { Button } from '../../styles/Buttons'
 
 const AddressListUI = (props) => {
   const {
+    handleDelete,
     onAddAddress
   } = props
   return (
     <AddressListContainer>
       <Button className='add' color='primary' onClick={() => onAddAddress()}>Add Address</Button>
       <AddressListUl>
-        {[...Array(2)].map((x, i) =>
+        {[...Array(2)].map((address, i) =>
           <AddressItem key={i}>
             <div>
               <input type='radio' id={i} name='address' />
@@ -34,7 +35,7 @@ const AddressListUI = (props) => {
               <a>
                 <img src={pencil} alt='edit' />
               </a>
-              <a>
+              <a onClick={() => handleDelete(address)}>
                 <img src={trash} alt='delete' />
               </a>
             </AddressItemActions>
