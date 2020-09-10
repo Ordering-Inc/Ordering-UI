@@ -27,6 +27,16 @@ export const FormControl = styled.form`
     box-sizing: border-box;
     margin: 10px 0px;
     height: 43px;
+    &:nth-child(2),
+    &:nth-child(3) {
+      width: 48%;
+    }
+    @media (max-width: 480px) {
+      &:nth-child(2),
+      &:nth-child(3) {
+        width: 100%;
+      }
+    }
   }
 
   .input-autocomplete {
@@ -59,12 +69,6 @@ export const FormControl = styled.form`
         color: #FFF;
         background: ${darken(0.07, '#CCC')};
       }
-    }
-  }
-
-  @media (max-width: 1027px) {
-    input {
-      width: 100%;
     }
   }
 `
