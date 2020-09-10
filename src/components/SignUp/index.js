@@ -26,8 +26,6 @@ import {FacebookLoginButton} from "../FacebookLogin"
 
 const SignUpFormUI = (props) => {
   const {
-    useLoginByEmail,
-    useLoginByCellphone,
     hanldeChangeInput,
     handleButtonSignupClick,
     elementLinkToLogin,
@@ -73,11 +71,11 @@ const SignUpFormUI = (props) => {
             <Tabs variant='primary'>
               <Tab
               >
-                {t('LOGIN_WITH_EMAIL')}
+                {t('SIGNUP_WITH_EMAIL')}
               </Tab>
               <Tab
               >
-                {t('LOGIN_WITH_CELLPHONE')}
+                {t('SIGNUP_WITH_CELLPHONE')}
               </Tab>
             </Tabs>
           </SignUpWith>
