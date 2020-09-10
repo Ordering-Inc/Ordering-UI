@@ -11,13 +11,18 @@ const theme = {
 
 export const Tabs = styled.div`
   display: flex;
-
+  
   ${({ variant }) => variant === 'primary' && css`
     color: ${theme.colors.primary};
   `}
+  
 `
 
 export const Tab = styled.div`
   padding: 10px 15px;
   cursor: pointer;
+
+  ${({ active }) => !active && css`
+  color: #CBCBCB ;
+`}
 `

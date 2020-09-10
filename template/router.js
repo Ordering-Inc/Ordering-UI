@@ -53,7 +53,6 @@ export const Router = () => {
     <BrowserRouter>
       <GlobalStyle />
       <FontTheme fontName={fontName}>
-        <Header />
         <Switch>
           <Route exact path='/home'>
             Home
