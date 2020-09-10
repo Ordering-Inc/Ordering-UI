@@ -1,4 +1,12 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+export const Container = styled.div`
+  ${({ zx }) => zx && css`
+    .popup {
+      z-index: ${zx} !important;
+    }
+  `}
+`
 
 export const ModalBackDrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
@@ -19,15 +27,25 @@ export const ModalWrap = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 1001;
+  z-index: 1002 !important;
   outline: none;
+  box-sizing: border-box;
 `
 
 export const ModalDialog = styled.div`
   background-color: #FFF;
   padding: 20px;
-  width: 45%;
+  width: 50%;
   border-radius: 10px;
+  box-sizing: border-box;
+  @media (max-width: 860px) {
+    width: 80%;
+  }
+  @media (max-width: 480px) {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0px;
+  }
 `
 
 export const ModalActions = styled.div`

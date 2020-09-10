@@ -8,7 +8,8 @@ import {
   ModalActions,
   ModalTitle,
   // ModalContent,
-  ModalIcon
+  ModalIcon,
+  Container
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -49,9 +50,9 @@ export const Modal = (props) => {
   }
 
   return (
-    <>
+    <Container zx={props.zx}>
       <ModalBackDrop className='popup-backdrop' />
       <Popup {...ModalProps} />
-    </>
+    </Container>
   )
 }

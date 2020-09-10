@@ -1,5 +1,7 @@
 import React from 'react'
-import { VscEdit, VscTrash } from 'react-icons/vsc'
+
+import trash from '../../../template/assets/trash.svg'
+import pencil from '../../../template/assets/pencil.svg'
 
 import {
   AddressList as AddressListController
@@ -15,22 +17,25 @@ import {
 import { Button } from '../../styles/Buttons'
 
 const AddressListUI = (props) => {
+  const {
+    onAddAddress
+  } = props
   return (
     <AddressListContainer>
-      <Button className='add' color='primary'>Add Address</Button>
+      <Button className='add' color='primary' onClick={() => onAddAddress()}>Add Address</Button>
       <AddressListUl>
         {[...Array(2)].map((x, i) =>
           <AddressItem key={i}>
             <div>
-              <input type='radio' name='address' />
-              <label>Address</label>
+              <input type='radio' id={i} name='address' />
+              <label htmlFor={i}>Address</label>
             </div>
             <AddressItemActions>
               <a>
-                <VscEdit />
+                <img src={pencil} alt='edit' />
               </a>
               <a>
-                <VscTrash />
+                <img src={trash} alt='delete' />
               </a>
             </AddressItemActions>
           </AddressItem>

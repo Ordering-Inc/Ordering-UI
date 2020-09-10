@@ -14,16 +14,34 @@ import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
 
-// import { useSession } from 'ordering-components'
+import { useSession } from 'ordering-components'
 
 import locationIcon from '../../../template/assets/input-location-icon.svg'
 
 export const HomeHero = (props) => {
-  // const [{ auth }] = useSession()
+  const [{ user, auth }] = useSession()
 
-  const [modalIsOpen, setModalIsOpen] = useState(true)
+  const [modalFormIsOpen, setModalFormIsOpen] = useState(false)
+  const [modalListIsOpen, setModalListIsOpen] = useState(false)
 
-  const closeModal = () => setModalIsOpen(false)
+  const closeModal = (modal) => {
+    if (modal === 'form') {
+      setModalFormIsOpen(false)
+    } else {
+      setModalListIsOpen(false)
+    }
+  }
+
+  const onBusinessClick = () => {
+    if (!user?.address) {
+      // setModalFormIsOpen(true)
+      setModalListIsOpen(true)
+    } else {
+      /**
+       * Put here function to redirect business
+       */
+    }
+  }
 
   return (
     <HeroContainer>
@@ -31,37 +49,48 @@ export const HomeHero = (props) => {
         <Title>All We need is Food</Title>
         <Slogan>Let's start to order food now</Slogan>
         <WrapInput withIcon={locationIcon}>
-          <Input placeholder='Address or Zip Code' />
+          <Input onClick={() => onBusinessClick()} placeholder={user?.address || 'Address or Zip Code'} />
         </WrapInput>
         <Button
           color='primary'
-          onClick={() => setModalIsOpen(true)}
+          onClick={() => onBusinessClick()}
         >
           Find Business
         </Button>
       </ContentWrapper>
-      {modalIsOpen && (
+      {((user?.address && modalFormIsOpen) || modalFormIsOpen) && (
         <Modal
+          zx='1002'
           title='Address'
-          open={modalIsOpen}
-          onClose={() => closeModal()}
+          open={modalFormIsOpen}
+          onClose={() => closeModal('form')}
         >
-          {/* <AddressForm
+          <AddressForm
             userId={1}
             useValidationFileds
-            accessToken='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGl2NC1mZWF0dXJlcy5vcmRlcmluZy5jb1wvdjQwMFwvZW5cL2x1aXN2NFwvYXV0aCIsImlhdCI6MTU5OTU3ODMwMiwiZXhwIjoxNjMxMTE0MzAyLCJuYmYiOjE1OTk1NzgzMDIsImp0aSI6Ik9lS1h1dlh4OWJBZEttbloiLCJzdWIiOjEsInBydiI6ImRjODczOTBlY2E3ZmZkZTUwMTQyYTNiZjQxOGY4ZGFjZmE1ZmNhNjAiLCJsZXZlbCI6MH0.kSkbL7Lvtz_IYsUwOyt0fi6BlP_E93OZk5cLZLrb1kc'
+            accessToken={auth || 'any text'}
             ordering={props.ordering}
-            onCancel={() => closeModal()}
-            onSaveAddressForm={() => closeModal()}
-          /> */}
+            onCancel={() => closeModal('form')}
+            onSaveAddressForm={() => closeModal('form')}
+          />
+        </Modal>)}
+
+      {!user?.address && modalListIsOpen && (
+        <Modal
+          title='Address'
+          open={modalListIsOpen}
+          onClose={() => closeModal()}
+          onCancel={() => closeModal()}
+          onAccept={() => closeModal()}
+        >
           <AddressList
             userId={1}
-            accessToken='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGl2NC1mZWF0dXJlcy5vcmRlcmluZy5jb1wvdjQwMFwvZW5cL2x1aXN2NFwvYXV0aCIsImlhdCI6MTU5OTU3ODMwMiwiZXhwIjoxNjMxMTE0MzAyLCJuYmYiOjE1OTk1NzgzMDIsImp0aSI6Ik9lS1h1dlh4OWJBZEttbloiLCJzdWIiOjEsInBydiI6ImRjODczOTBlY2E3ZmZkZTUwMTQyYTNiZjQxOGY4ZGFjZmE1ZmNhNjAiLCJsZXZlbCI6MH0.kSkbL7Lvtz_IYsUwOyt0fi6BlP_E93OZk5cLZLrb1kc'
+            accessToken={auth || 'any text'}
             ordering={props.ordering}
             changeOrderAddressWithDefault
+            onAddAddress={() => setModalFormIsOpen(true)}
           />
-        </Modal>
-      )}
+        </Modal>)}
     </HeroContainer>
   )
 }

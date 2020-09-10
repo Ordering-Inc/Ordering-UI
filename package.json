@@ -45,6 +45,7 @@
     "ordering-components": "github:sergioaok/ordering-components#testnpm",
     "polished": "^3.6.6",
     "prop-types": "^15.7.2",
+    "react-hook-form": "^6.8.1",
     "react-icons": "^3.11.0",
     "styled-components": "^5.1.1"
   },
