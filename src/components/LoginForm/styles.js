@@ -14,8 +14,8 @@ export const LoginContainer = styled.div`
   }
 `
 
-export const Triangle = styled.div`
-  /*  position: absolute;
+/*export const Triangle = styled.div`
+    position: absolute;
     height: 100%;
     width: 100%;
     border: 100vw solid #d81212;
@@ -38,8 +38,9 @@ export const Triangle = styled.div`
   /* border-top: 50% solid transparent;
     border-bottom: 50% solid transparent; 
      border-right:25vh solid blue; 
-  }*/
-`
+  }
+`*/
+
 export const HeroSide = styled.div`
   display: flex;
   justify-content: center;
@@ -60,6 +61,15 @@ export const HeroSide = styled.div`
       width: 200px;
     }
   }
+`
+
+export const TitleHeroSide = styled.div`
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 400px;
 `
 
 export const FormSide = styled.div`
@@ -94,15 +104,6 @@ export const FormSide = styled.div`
 `}
 `
 
-export const TitleFormSide = styled.div`
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  height: 400px;
-`
-
 export const NewOnPlatform = styled.div`
 `
 
@@ -117,10 +118,11 @@ export const SocialIcons = styled.div`
     margin: 25px;
     border: 3px solid #d81212;
     border-radius: 100%;
+    cursor: pointer;
   }
 `
 
-export const LoginBy = styled.div`
+export const LoginWith = styled.div`
   > div {
     justify-content: center;
     flex-wrap: wrap;

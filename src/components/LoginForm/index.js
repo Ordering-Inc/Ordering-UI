@@ -10,9 +10,9 @@ import {
   FormInput,
   ForgotPassword,
   SocialIcons,
-  TitleFormSide,
-  LoginBy,
-  NewOnPlatform
+  TitleHeroSide,
+  LoginWith,
+  NewOnPlatform,
 } from './styles'
 // import triangle from '../../../template/triangle.svg'
 
@@ -22,7 +22,8 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
-import { FaFacebookF, AiOutlineGoogle, FaApple } from 'react-icons/all'
+import { AiOutlineGoogle, FaApple } from 'react-icons/all' 
+import {FacebookLoginButton} from "../FacebookLogin"
 
 const LoginFormUI = (props) => {
   const {
@@ -35,16 +36,17 @@ const LoginFormUI = (props) => {
     linkToForgetPassword,
     elementLinkToSignup,
     elementLinkToForgotPassword,
-    loginTab
+    loginTab,
+    ordering
   } = props
   const [, t] = useLanguage()
   return (
     <LoginContainer>
       <HeroSide>
-        <TitleFormSide>
+        <TitleHeroSide>
           <h1>Hello Friend!</h1>
           <p>Enter your credentials and start journey with us.</p>
-        </TitleFormSide>
+        </TitleHeroSide>
         {/* <div style={{ position: "absolute" }}>
           <img
             src={triangle}
@@ -76,11 +78,11 @@ const LoginFormUI = (props) => {
 
         {loginTab !== 'cellphone' && (
           <SocialIcons>
-            <FaFacebookF /> <FaApple /> <AiOutlineGoogle />
+            <FacebookLoginButton ordering={ordering} appId=''/> <FaApple /> <AiOutlineGoogle />
           </SocialIcons>
         )}
         {useLoginByEmail && useLoginByCellphone && (
-          <LoginBy>
+          <LoginWith>
             <Tabs variant='primary'>
               <Tab
                 onClick={() => hanldeChangeTab('email')}
@@ -95,16 +97,18 @@ const LoginFormUI = (props) => {
                 {t('LOGIN_WITH_CELLPHONE')}
               </Tab>
             </Tabs>
-          </LoginBy>
+          </LoginWith>
         )}
         {loginTab === 'email' ? (
           <FormInput>
             <Input
+              type="email"
               name='email'
               placeholder='Email'
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Input
+              type="password"
               name='password'
               placeholder='Password'
               onChange={(e) => hanldeChangeInput(e)}
@@ -132,7 +136,7 @@ const LoginFormUI = (props) => {
         )}
         {linkToForgetPassword && (
           <>
-            {t('NEW_ON_PLATFORM')}{' '}
+            {t('NEW_ON_PLATFORM')}
             <a href={linkToForgetPassword}>{t('RESET_PASSWORD')}</a>
           </>
         )}
