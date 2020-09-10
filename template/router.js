@@ -8,9 +8,10 @@ import {
   Link
 } from 'react-router-dom'
 import { useSession, useLanguage } from 'ordering-components'
-import { Header } from '../src/components/Header'
+//import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
-import { LoginForm } from '../src/components/LoginForm'
+//import { LoginForm } from '../src/components/LoginForm'
+import {SignUp} from "../src/components/SignUp"
 import { Ordering } from 'ordering-api-sdk'
 
 const fontName = 'Montserrat'
@@ -53,7 +54,6 @@ export const Router = () => {
     <BrowserRouter>
       <GlobalStyle />
       <FontTheme fontName={fontName}>
-        <Header />
         <Switch>
           <Route exact path='/home'>
             Home
@@ -61,14 +61,13 @@ export const Router = () => {
           <Route exact path='/'>
             Home
           </Route>
-          <Route exact path='/signin'>
+          <Route exact path='/signup'>
             {
               !auth
                 ? (
-                  <LoginForm
+                  <SignUp
                     ordering={ordering}
-                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToLogin={<Link to='/login'>{t('LOGIN_ACCOUNT')}</Link>}
                     useLoginByCellphone
                   />
                 )
@@ -79,7 +78,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <LoginForm
+                  <SignUp
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
