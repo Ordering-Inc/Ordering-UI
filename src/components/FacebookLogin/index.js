@@ -2,7 +2,7 @@ import React from 'react'
 import {
   FacebookLoginButton as FacebookLoginController,
 } from 'ordering-components'
-import { FaFacebookF } from 'react-icons/all' 
+import { FaFacebookF } from 'react-icons/fa' 
 
 const FacebookLoginButtonUI = (props) => {
     const {handleFacebookLogin} = props
