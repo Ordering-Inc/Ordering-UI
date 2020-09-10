@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
-import { LoginForm } from './index'
+import { Login } from './Pages/Login'
 import { Ordering } from 'ordering-api-sdk'
 
 const fontName = 'Montserrat'
@@ -63,7 +63,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <LoginForm
+                  <Login
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
@@ -77,7 +77,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <LoginForm
+                  <Login
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
