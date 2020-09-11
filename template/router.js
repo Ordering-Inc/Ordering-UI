@@ -11,7 +11,7 @@ import { useSession, useLanguage } from 'ordering-components'
 // import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
 // import { LoginForm } from '../src/components/LoginForm'
-import { ForgotPass } from './pages/ForgotPassword'
+import { ForgotPassword } from './pages/ForgotPassword'
 import { Ordering } from 'ordering-api-sdk'
 
 const fontName = 'Montserrat'
@@ -65,7 +65,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <ForgotPass
+                  <ForgotPassword
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
@@ -79,7 +79,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <ForgotPass
+                  <ForgotPassword
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
@@ -95,7 +95,7 @@ export const Router = () => {
           <Route exact path='/password/forgot'>
             {
               !auth ? (
-                <ForgotPass ordering={ordering} />
+                <ForgotPassword ordering={ordering} />
               )
                 : <Redirect to='/' />
             }

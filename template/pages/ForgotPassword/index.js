@@ -1,8 +1,8 @@
 import React from 'react'
-import { ForgotPassword } from '../../../src/components/ForgotPassword'
+import { ForgotPasswordForm } from '../../../src/components/ForgotPasswordForm'
 
-export const ForgotPass = (props) => {
+export const ForgotPassword = (props) => {
   return (
-    <ForgotPassword {...props} />
+    <ForgotPasswordForm {...props} />
   )
 }

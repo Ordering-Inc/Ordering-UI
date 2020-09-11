@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  ForgotPasswordForm,
+  ForgotPasswordForm as ForgotPasswordController,
   useLanguage
 } from 'ordering-components'
 import {
@@ -48,7 +48,7 @@ const ForgotPasswordUI = (props) => {
             <Input
               type='email'
               name='email'
-              placeholder='Email'
+              placeholder={t('EMAIL')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Button color='primary' onClick={() => handleButtonForgotPasswordClick()}>
@@ -61,10 +61,10 @@ const ForgotPasswordUI = (props) => {
   )
 }
 
-export const ForgotPassword = (props) => {
+export const ForgotPasswordForm = (props) => {
   const ForgotPasswordProps = {
     ...props,
     UIComponent: ForgotPasswordUI
   }
-  return <ForgotPasswordForm {...ForgotPasswordProps} />
+  return <ForgotPasswordController {...ForgotPasswordProps} />
 }
