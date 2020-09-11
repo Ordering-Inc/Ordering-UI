@@ -12,7 +12,7 @@ import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
 import { LoginForm } from '../src/components/LoginForm'
 import { Ordering } from 'ordering-api-sdk'
-import { BusinessListing } from './Pages/BusinessListing'
+import { BusinessList } from './Pages/BusinessList'
 
 const fontName = 'Montserrat'
 
@@ -118,7 +118,7 @@ export const Router = () => {
             <Order />
           </Route>
           <Route exact path='/business'>
-            <BusinessListing ordering={ordering} />
+            <BusinessList ordering={ordering} />
           </Route>
           <Route path='*'>
             404
