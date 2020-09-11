@@ -52,7 +52,7 @@ const ForgotPasswordUI = (props) => {
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Button color='primary' onClick={() => handleButtonForgotPasswordClick()}>
-              {t('RECOVER_PASSWORD')}
+              {t('FRONT_RECOVER_PASSWORD')}
             </Button>
           </FormInput>
         )}
