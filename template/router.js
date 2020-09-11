@@ -8,9 +8,10 @@ import {
   Link
 } from 'react-router-dom'
 import { useSession, useLanguage } from 'ordering-components'
-import { Header } from '../src/components/Header'
+// import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
-import { LoginForm } from '../src/components/LoginForm'
+// import { LoginForm } from '../src/components/LoginForm'
+import { ForgotPass } from './pages/ForgotPassword'
 import { Ordering } from 'ordering-api-sdk'
 
 const fontName = 'Montserrat'
@@ -53,7 +54,6 @@ export const Router = () => {
     <BrowserRouter>
       <GlobalStyle />
       <FontTheme fontName={fontName}>
-        <Header />
         <Switch>
           <Route exact path='/home'>
             Home
@@ -65,7 +65,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <LoginForm
+                  <ForgotPass
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
@@ -79,7 +79,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <LoginForm
+                  <ForgotPass
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
@@ -93,7 +93,12 @@ export const Router = () => {
             Signup
           </Route>
           <Route exact path='/password/forgot'>
-            Password forgot
+            {
+              !auth ? (
+                <ForgotPass ordering={ordering} />
+              )
+                : <Redirect to='/' />
+            }
           </Route>
           <Route exact path='/password/reset'>
             Password reset
