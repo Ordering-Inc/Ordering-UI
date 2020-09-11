@@ -8,10 +8,10 @@ import {
   Link
 } from 'react-router-dom'
 import { useSession, useLanguage } from 'ordering-components'
-//import { Header } from '../src/components/Header'
+// import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
-//import { LoginForm } from '../src/components/LoginForm'
-import {SignUp} from "../src/components/SignUp"
+// import { LoginForm } from '../src/components/LoginForm'
+import { SignUp } from './pages/SignUp'
 import { Ordering } from 'ordering-api-sdk'
 
 const fontName = 'Montserrat'
@@ -67,7 +67,7 @@ export const Router = () => {
                 ? (
                   <SignUp
                     ordering={ordering}
-                    elementLinkToLogin={<Link to='/login'>{t('LOGIN_ACCOUNT')}</Link>}
+                    elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
                     useLoginByCellphone
                   />
                 )

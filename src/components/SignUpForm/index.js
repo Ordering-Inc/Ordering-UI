@@ -11,7 +11,7 @@ import {
   SocialIcons,
   TitleHeroSide,
   SignUpWith,
-  AlreadyRegistered,
+  AlreadyRegistered
 } from './styles'
 // import triangle from '../../../template/triangle.svg'
 
@@ -21,8 +21,8 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
-import { AiOutlineGoogle, FaApple } from 'react-icons/all' 
-import {FacebookLoginButton} from "../FacebookLogin"
+import { AiOutlineGoogle, FaApple } from 'react-icons/all'
+import { FacebookLoginButton } from '../FacebookLogin'
 
 const SignUpFormUI = (props) => {
   const {
@@ -52,65 +52,60 @@ const SignUpFormUI = (props) => {
       </HeroSide>
       <FormSide>
         <img src={logoHeader} alt='Logo login' />
-        { (
+        {
           <AlreadyRegistered>
             {elementLinkToLogin && (
               <>
-                {t('ALREADY_HAVE_ACCOUNT')} {elementLinkToLogin}
+                {t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')} {elementLinkToLogin}
               </>
             )}
           </AlreadyRegistered>
-        )}
-        {(
+        }
+        {
           <SocialIcons>
-            <FacebookLoginButton ordering={ordering} appId=''/> <FaApple /> <AiOutlineGoogle />
+            <FacebookLoginButton ordering={ordering} appId='' /> <FaApple />{' '}
+            <AiOutlineGoogle />
           </SocialIcons>
-        )}
-        {(
+        }
+        {
           <SignUpWith>
             <Tabs variant='primary'>
-              <Tab
-              >
-                {t('SIGNUP_WITH_EMAIL')}
-              </Tab>
-              <Tab
-              >
-                {t('SIGNUP_WITH_CELLPHONE')}
-              </Tab>
+              <Tab>Signup by Email</Tab>
+              <Tab>Signup by Cellphone</Tab>
             </Tabs>
           </SignUpWith>
-        )}
-        {(
+        }
+        {
           <FormInput>
             <Input
-              type="text"
+              type='text'
               name='name'
-              placeholder='First name'
+              placeholder={t('LOGIN_CREATE_FIRST_NAME')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Input
-              type="email"
+              type='email'
               name='email'
-              placeholder='Email'
+              placeholder={t('EMAIL')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Input
-              type="password"
+              type='password'
               name='password'
-              placeholder='Password'
+              placeholder={t('PASSWORD')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Button color='primary' onClick={() => handleButtonSignupClick()}>
-              Sign Up
+              {t('SIGNUP')}
             </Button>
           </FormInput>
-        )}
+        }
       </FormSide>
     </LoginContainer>
   )
 }
 
-export const SignUp = (props) => {
+export const SignUpForm = (props) => {
   const loginControllerProps = {
     ...props,
     UIComponent: SignUpFormUI
