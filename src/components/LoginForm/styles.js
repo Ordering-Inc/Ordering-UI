@@ -14,7 +14,7 @@ export const LoginContainer = styled.div`
   }
 `
 
-/*export const Triangle = styled.div`
+/* export const Triangle = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
@@ -30,16 +30,16 @@ export const LoginContainer = styled.div`
     border-right: 25vh solid #f8f8f8;
   }
   */
-  /*&::after {
+/* &::after {
     content: "";
     height: 100%;
     width: 0;
     /* border: 10px solid #333; */
-  /* border-top: 50% solid transparent;
-    border-bottom: 50% solid transparent; 
-     border-right:25vh solid blue; 
+/* border-top: 50% solid transparent;
+    border-bottom: 50% solid transparent;
+     border-right:25vh solid blue;
   }
-`*/
+` */
 
 export const HeroSide = styled.div`
   display: flex;

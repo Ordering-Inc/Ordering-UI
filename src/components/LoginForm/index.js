@@ -12,7 +12,7 @@ import {
   SocialIcons,
   TitleHeroSide,
   LoginWith,
-  NewOnPlatform,
+  NewOnPlatform
 } from './styles'
 // import triangle from '../../../template/triangle.svg'
 
@@ -22,8 +22,8 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
-import { AiOutlineGoogle, FaApple } from 'react-icons/all' 
-import {FacebookLoginButton} from "../FacebookLogin"
+import { AiOutlineGoogle, FaApple } from 'react-icons/all'
+import { FacebookLoginButton } from '../FacebookLogin'
 
 const LoginFormUI = (props) => {
   const {
@@ -78,7 +78,7 @@ const LoginFormUI = (props) => {
 
         {loginTab !== 'cellphone' && (
           <SocialIcons>
-            <FacebookLoginButton ordering={ordering} appId=''/> <FaApple /> <AiOutlineGoogle />
+            <FacebookLoginButton ordering={ordering} appId='' /> <FaApple /> <AiOutlineGoogle />
           </SocialIcons>
         )}
         {useLoginByEmail && useLoginByCellphone && (
@@ -88,13 +88,13 @@ const LoginFormUI = (props) => {
                 onClick={() => hanldeChangeTab('email')}
                 active={loginTab === 'email'}
               >
-                {t('LOGIN_WITH_EMAIL')}
+                Login by Email
               </Tab>
               <Tab
                 onClick={() => hanldeChangeTab('cellphone')}
                 active={loginTab === 'cellphone'}
               >
-                {t('LOGIN_WITH_CELLPHONE')}
+                Login by Cellphone
               </Tab>
             </Tabs>
           </LoginWith>
@@ -102,19 +102,19 @@ const LoginFormUI = (props) => {
         {loginTab === 'email' ? (
           <FormInput>
             <Input
-              type="email"
+              type='email'
               name='email'
-              placeholder='Email'
+              placeholder={t('EMAIL')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Input
-              type="password"
+              type='password'
               name='password'
-              placeholder='Password'
+              placeholder={t('PASSWORD')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Button color='primary' onClick={() => handleButtonLoginClick()}>
-              Login
+              {t('LOGIN')}
             </Button>
           </FormInput>
         ) : (
