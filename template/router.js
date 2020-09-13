@@ -8,9 +8,10 @@ import {
   Link
 } from 'react-router-dom'
 import { useSession, useLanguage } from 'ordering-components'
-import { Header } from '../src/components/Header'
+// import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
 import { LoginForm } from '../src/components/LoginForm'
+import { UserProfileForm } from '../src/components/UserProfileForm'
 import { Ordering } from 'ordering-api-sdk'
 
 const fontName = 'Montserrat'
@@ -53,7 +54,6 @@ export const Router = () => {
     <BrowserRouter>
       <GlobalStyle />
       <FontTheme fontName={fontName}>
-        <Header />
         <Switch>
           <Route exact path='/home'>
             Home
@@ -99,7 +99,7 @@ export const Router = () => {
             Password reset
           </Route>
           <Route exact path='/profile'>
-            Profile
+            <UserProfileForm ordering={ordering} userId={1} accessToken='TOKEN' />
           </Route>
           <Route exact path='/p/:page'>
             <Page />
