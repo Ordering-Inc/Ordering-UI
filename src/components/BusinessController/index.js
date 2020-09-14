@@ -34,7 +34,6 @@ const BusinessControllerUI = (props) => {
   const [, t] = useLanguage()
 
   const types = ['food', 'laundry', 'alcohol', 'groceries']
-  const businessType = business && Object.keys(types.map(t => { return { [t]: business[t] } }).find(t => t))[0]
   const formatAmount = (amount = 0) => `$ ${amount.toFixed(2)}`
   const dateFormatted = (date) => {
     if (!date) return
@@ -45,8 +44,18 @@ const BusinessControllerUI = (props) => {
     return `${formatHour}:${formatMinute}`
   }
 
+  const getBusinessType = () => {
+    if (Object.keys(business).length <= 0) return 'none'
+    const typeObj = types.map(t => {
+      return { [t]: business[t] }
+    }).reduce((r, c) => ({ ...r, ...c }), {})
+    const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])[0]
+    return businessType[0]
+  }
+
   return (
     <ContainerCard>
+      {/* <WrapperBusinessCard onClick={() => handleClick('clicked<zasd')}> */}
       <WrapperBusinessCard>
         <BusinessHero>
           {business?.header ? (
@@ -93,14 +102,14 @@ const BusinessControllerUI = (props) => {
                 )}
               </div>
               <div>
-                {typeof business === 'object' ? (
-                  <p>{businessType}</p>
+                {Object.keys(business).length > 0 ? (
+                  <p>{getBusinessType()}</p>
                 ) : (
                   <Skeleton width={100} />
                 )}
               </div>
               <div>
-                {typeof business === 'object' ? (
+                {Object.keys(business).length > 0 ? (
                   <>
                     {orderState?.options?.type === 1 ? (
                       <p className='bullet'>
@@ -145,8 +154,7 @@ const BusinessControllerUI = (props) => {
 export const BusinessController = (props) => {
   const businessControllerProps = {
     ...props,
-    UIComponent: BusinessControllerUI,
-    handleCustomClick: () => { console.log('Clicked') }
+    UIComponent: BusinessControllerUI
   }
 
   return (

@@ -13,8 +13,9 @@ export const BusinessListing = (props) => {
     ordering
   } = props
 
-  const [businessesList, setBusinessesList] = useState({ businesses: [], loading: false, error: null })
+  const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
   const [paginationProps, setPaginationProps] = useState({ currentPage: null, pageSize: 20, totalPages: null })
+  const [businessTypeSelected, setBusinessTypeSelected] = useState(null)
   const [isFetching, setIsFetching] = useState(false)
 
   const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
@@ -30,18 +31,19 @@ export const BusinessListing = (props) => {
         ...businessesList,
         loading: true
       })
-      const params = ['id', 'name', 'header', 'logo', 'name', 'today', 'delivery_price', 'minimum', 'description', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers']
+      // const params = ['id', 'name', 'header', 'logo', 'name', 'today', 'delivery_price', 'minimum', 'description', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers']
       const parameters = {
         location: '40.7539143,-73.9810162', // provide this props from search options component
         type: 1 // provide this props from search options component
         // page: paginationProps.page + 1,
         // page_size: paginationProps.pageSize
       }
-      const { content: { result, pagination } } = await ordering.businesses().select(params).parameters(parameters).get()
+      const where = businessTypeSelected ? [{ attribute: businessTypeSelected, value: true }] : []
+      const { content: { result, pagination } } = await ordering.businesses().parameters(parameters).where(where).get()
       setBusinessesList({
         ...businessesList,
         loading: false,
-        businesses: [...businessesList.businesses, ...result]
+        businesses: isFetching ? [...businessesList.businesses, ...result] : result
       })
       setIsFetching(false)
       setPaginationProps({
@@ -70,18 +72,37 @@ export const BusinessListing = (props) => {
 
   useEffect(() => {
     getBusinesses()
-  }, [])
+  }, [businessTypeSelected])
+
+  // const handlerClickBusiness = (e) => { console.log('VALUE', e) }
 
   return (
     <BusinessContainer>
-      <BusinessTypeFilter ordering={props.ordering} />
+      <BusinessTypeFilter
+        ordering={props.ordering}
+        handleChangeBusinessType={(val) => setBusinessTypeSelected(val)}
+      />
       <BusinessList>
-        {businessesList.businesses && businessesList.businesses.length > 0 ? (
+        {/* {!businessesList.loading && !businessesList.error &&
+          businessesList.businesses && businessesList.businesses.length > 0 ? (
+            businessesList.businesses.map((item, i) => (
+              <BusinessController
+                key={i}
+                ordering={props.ordering}
+                business={item}
+                // handleCustomClick={(e) => handlerClickBusiness(e)}
+              />
+            ))
+          ) : (
+            <h1>Not Found elements </h1>
+          )} */}
+        {!businessesList.loading && !businessesList.error && businessesList.businesses && businessesList.businesses.length > 0 ? (
           businessesList.businesses.map((item, i) => (
             <BusinessController
               key={i}
               ordering={props.ordering}
               business={item}
+              // handleCustomClick={(e) => handlerClickBusiness(e)}
             />
           ))
         ) : (
@@ -89,6 +110,7 @@ export const BusinessListing = (props) => {
         )}
         {businessesList.loading && [...Array(isFetching ? 3 : 6).keys()].map(i => (
           <BusinessController
+            business={{}}
             ordering={props.ordering}
             key={i}
           />
