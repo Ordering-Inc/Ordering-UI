@@ -1,7 +1,7 @@
 import React from 'react'
-import { UserProfileForm as UserProfileController, useLanguage } from 'ordering-components'
+import { UserProfileForm as UserProfileController, useLanguage,ExamineClick,DragAndDrop } from 'ordering-components'
 
-import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera } from './styles'
+import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera,ButtonLogin } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -9,9 +9,14 @@ import { Button } from '../../styles/Buttons'
 import { GiPhotoCamera } from 'react-icons/gi'
 
 const UserProfileFormUI = (props) => {
-  const { hanldeChangeInput, handleButtonUpdateClick, handlechangeImage } = props
+  const { hanldeChangeInput, handleButtonUpdateClick, handlechangeImage,formState,showField } = props
   const [, t] = useLanguage()
-
+  const handleFiles = (files) => {
+    if (files.length === 1) {
+      console.log(files[0])
+      handlechangeImage(files[0])
+    }
+  }
   const inputs = [
     { name: 'name', placeholder: t('NAME'), requiredMessage: 'Name is required', type: 'text' },
     { name: 'lastname', placeholder: t('Last Name'), requiredMessage: 'Lastname is required', type: 'text' },
@@ -23,14 +28,26 @@ const UserProfileFormUI = (props) => {
 
   return (
     <UserProfileContainer>
-      <UserImage> <Image onDrop={handlechangeImage}><img src='https://concepto.de/wp-content/uploads/2015/03/paisaje-e1549600034372.jpg' /></Image> <Camera><GiPhotoCamera /></Camera></UserImage>
+      <UserImage> 
+        <ExamineClick onFiles={handleFiles}>
+         <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)}>
+           <Image><img src={formState.changes.photo}/></Image>
+         </DragAndDrop>
+        </ExamineClick>
+     <Camera><GiPhotoCamera /></Camera></UserImage>
       <SideForm>
         <FormInput>
           {inputs.map((_input) => (
-            <Input key={_input.name} name={_input.name} type={_input.type} placeholder={_input.placeholder} onChange={hanldeChangeInput} />
+            <React.Fragment key={_input.name}>
+              {showField(_input.name) && (
+                <Input key={_input.name} name={_input.name} type={_input.type} placeholder={_input.placeholder} onChange={hanldeChangeInput} />
+              )}
+            </React.Fragment>
           ))}
-          <Button color='primary' onClick={handleButtonUpdateClick}>Update</Button>
         </FormInput>
+        <ButtonLogin>
+          <Button color='primary' onClick={handleButtonUpdateClick}>Update</Button>
+        </ButtonLogin>
       </SideForm>
     </UserProfileContainer>
   )

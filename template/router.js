@@ -84,6 +84,7 @@ export const Router = () => {
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
+                    useDefualtSessionManager
                   />
                 )
                 : <Redirect to='/' />
@@ -99,7 +100,7 @@ export const Router = () => {
             Password reset
           </Route>
           <Route exact path='/profile'>
-            <UserProfileForm ordering={ordering} userId={1} accessToken='TOKEN' />
+          {(<UserProfileForm ordering={ordering} userId={1} accessToken='TOKEN' />)}
           </Route>
           <Route exact path='/p/:page'>
             <Page />
