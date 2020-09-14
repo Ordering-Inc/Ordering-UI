@@ -6,7 +6,7 @@ export const ContainerCard = styled.div`
   height: 300px;
   width: 360px;
   border-radius: 10px;
-  margin: 10px;
+  margin: 30px 20px;
 `
 
 export const WrapperBusinessCard = styled.div`
@@ -86,6 +86,7 @@ export const BusinessContent = styled.div`
   margin-top: 15px;
   max-height: 75px;
 `
+
 export const WrapperBusinessLogo = styled.div`
   max-width: 75px;
   max-height: 75px;
