@@ -83,7 +83,7 @@ export const BusinessListing = (props) => {
         handleChangeBusinessType={(val) => setBusinessTypeSelected(val)}
       />
       <BusinessList>
-        {/* {!businessesList.loading && !businessesList.error &&
+        {isFetching ? (
           businessesList.businesses && businessesList.businesses.length > 0 ? (
             businessesList.businesses.map((item, i) => (
               <BusinessController
@@ -94,19 +94,22 @@ export const BusinessListing = (props) => {
               />
             ))
           ) : (
-            <h1>Not Found elements </h1>
-          )} */}
-        {!businessesList.loading && !businessesList.error && businessesList.businesses && businessesList.businesses.length > 0 ? (
-          businessesList.businesses.map((item, i) => (
-            <BusinessController
-              key={i}
-              ordering={props.ordering}
-              business={item}
-              // handleCustomClick={(e) => handlerClickBusiness(e)}
-            />
-          ))
+            <h1>Not Found elementss </h1>
+          )
         ) : (
-          !businessesList.loading && !businessesList.error && (<h1>Not Found elements </h1>)
+          !businessesList.loading && !businessesList.error &&
+            businessesList.businesses && businessesList.businesses.length > 0 ? (
+              businessesList.businesses.map((item, i) => (
+                <BusinessController
+                  key={i}
+                  ordering={props.ordering}
+                  business={item}
+                  // handleCustomClick={(e) => handlerClickBusiness(e)}
+                />
+              ))
+            ) : (
+              !businessesList.loading && !businessesList.error && (<h1>Not Found elements </h1>)
+            )
         )}
         {businessesList.loading && [...Array(isFetching ? 3 : 6).keys()].map(i => (
           <BusinessController
