@@ -8,8 +8,8 @@ import { LoginContainer, Triangle, FormSide, HeroSide } from './styles'
 import logoHeader from '../../../template/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
-import { Input } from '../../Inputs'
-import { ButtonPrimary } from '../../Buttons'
+import { Input } from '../../styles/Inputs'
+import { ButtonPrimary } from '../../styles/Buttons'
 
 const LoginFormUI = (props) => {
   const {

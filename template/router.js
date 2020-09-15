@@ -11,6 +11,7 @@ import { useSession, useLanguage } from 'ordering-components'
 // import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
 // import { LoginForm } from '../src/components/LoginForm'
+import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { Ordering } from 'ordering-api-sdk'
 import { BusinessesList } from './Pages/BusinessesList'
@@ -95,7 +96,12 @@ export const Router = () => {
             Signup
           </Route>
           <Route exact path='/password/forgot'>
-            Password forgot
+            {
+              !auth ? (
+                <ForgotPassword ordering={ordering} />
+              )
+                : <Redirect to='/' />
+            }
           </Route>
           <Route exact path='/password/reset'>
             Password reset
