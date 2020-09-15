@@ -130,7 +130,7 @@ export const Router = ({ ordering }) => {
             <Page />
           </Route>
           <Route exact path='/search'>
-            Search
+            <BusinessesList ordering={ordering} />
           </Route>
           <Route exact path='/store/:store'>
             <Store />
@@ -140,9 +140,6 @@ export const Router = ({ ordering }) => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
-          </Route>
-          <Route exact path='/businesses'>
-            <BusinessesList ordering={ordering} />
           </Route>
           <Route path='*'>
             404

@@ -25,11 +25,10 @@ const BusinessControllerUI = (props) => {
   const {
     isSkeleton,
     business,
-    isBusinessClose,
     getBusinessOffer,
     formatNumber,
-    orderState
-    // handleClick
+    orderState,
+    handleClick
   } = props
 
   const [, t] = useLanguage()
@@ -56,11 +55,10 @@ const BusinessControllerUI = (props) => {
 
   return (
     <ContainerCard isSkeleton={isSkeleton}>
-      {/* <WrapperBusinessCard onClick={() => handleClick('clicked<zasd')}> */}
-      <WrapperBusinessCard>
+      <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => handleClick(business?.slug)}>
         <BusinessHero>
           {business?.header ? (
-            <BusinessHeader bgimage={business?.header} isClosed={isBusinessClose}>
+            <BusinessHeader bgimage={business?.header} isClosed={business?.open}>
               <BusinessTags>
                 {business?.featured &&
                   <span className='crown'>
@@ -68,10 +66,10 @@ const BusinessControllerUI = (props) => {
                   </span>}
                 <div>
                   {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || '$0.00'}</span>}
-                  {isBusinessClose && <span>{t('PREORDER')}</span>}
+                  {business?.open && <span>{t('PREORDER')}</span>}
                 </div>
               </BusinessTags>
-              {isBusinessClose && <h1>{t('CLOSED')}</h1>}
+              {business?.open && <h1>{t('CLOSED')}</h1>}
             </BusinessHeader>
           ) : (
             <Skeleton height={100} />
