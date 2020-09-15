@@ -3,7 +3,7 @@ import {
   Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink
 } from './styles'
 
-import { Select } from '../../Select'
+import { Select } from '../../styles/Select'
 import { useLocation, Link } from 'react-router-dom'
 
 import { useSession } from 'ordering-components'
