@@ -8,13 +8,12 @@ import {
   Link
 } from 'react-router-dom'
 import { useSession, useLanguage } from 'ordering-components'
-// import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
-// import { LoginForm } from '../src/components/LoginForm'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { Ordering } from 'ordering-api-sdk'
 import { BusinessesList } from './Pages/BusinessesList'
+import { Login } from './Pages/Login'
 
 import { HomePage } from '../template/Pages/Home'
 
@@ -82,7 +81,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <SignUp
+                  <Login
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
@@ -92,8 +91,19 @@ export const Router = () => {
                 : <Redirect to='/' />
             }
           </Route>
-          <Route exact path='/signup'>
-            Signup
+          <Route exact path='/signin'>
+            {
+              !auth
+                ? (
+                  <Login
+                    ordering={ordering}
+                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    useLoginByCellphone
+                  />
+                )
+                : <Redirect to='/' />
+            }
           </Route>
           <Route exact path='/password/forgot'>
             {
