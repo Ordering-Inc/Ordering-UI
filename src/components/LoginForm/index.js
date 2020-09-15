@@ -1,7 +1,8 @@
 import React from 'react'
 import {
   LoginForm as LoginFormController,
-  useLanguage
+  useLanguage,
+  useConfig
 } from 'ordering-components'
 import {
   LoginContainer,
@@ -40,6 +41,7 @@ const LoginFormUI = (props) => {
     ordering
   } = props
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   return (
     <LoginContainer>
       <HeroSide>
@@ -78,7 +80,8 @@ const LoginFormUI = (props) => {
 
         {loginTab !== 'cellphone' && (
           <SocialIcons>
-            <FacebookLoginButton ordering={ordering} appId='' /> <FaApple /> <AiOutlineGoogle />
+            {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} />} <FaApple />
+            <AiOutlineGoogle />
           </SocialIcons>
         )}
         {useLoginByEmail && useLoginByCellphone && (
