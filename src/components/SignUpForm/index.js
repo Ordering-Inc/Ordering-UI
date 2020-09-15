@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+
 import {
   SignupForm as SignUpController,
-  useLanguage
+  useLanguage,
+  useConfig
 } from 'ordering-components'
 import {
   LoginContainer,
@@ -29,9 +32,26 @@ const SignUpFormUI = (props) => {
     hanldeChangeInput,
     handleButtonSignupClick,
     elementLinkToLogin,
-    ordering
+    ordering,
+    useChekoutFileds,
+    validationFields,
+    showField,
+    isRequiredField,
+    formState,
+    handleSuccessSignup
   } = props
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const { handleSubmit, register, errors } = useForm()
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const onSubmit = () => {
+    handleButtonSignupClick()
+    // handleSuccessSignup(formState.result.result)
+  }
+  if (!(useChekoutFileds && validationFields.loading)) {
+    console.log(Object.values(validationFields.fields))
+  }
   return (
     <LoginContainer>
       <HeroSide>
@@ -51,6 +71,7 @@ const SignUpFormUI = (props) => {
         </div> */}
       </HeroSide>
       <FormSide>
+
         <img src={logoHeader} alt='Logo login' />
         {
           <AlreadyRegistered>
@@ -63,7 +84,7 @@ const SignUpFormUI = (props) => {
         }
         {
           <SocialIcons>
-            <FacebookLoginButton ordering={ordering} appId='' /> <FaApple />{' '}
+            {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} />} <FaApple />
             <AiOutlineGoogle />
           </SocialIcons>
         }
@@ -76,30 +97,28 @@ const SignUpFormUI = (props) => {
           </SignUpWith>
         }
         {
-          <FormInput>
-            <Input
-              type='text'
-              name='name'
-              placeholder={t('LOGIN_CREATE_FIRST_NAME', 'Name')}
-              onChange={(e) => hanldeChangeInput(e)}
-            />
-            <Input
-              type='email'
-              name='email'
-              placeholder={t('EMAIL', 'Email')}
-              onChange={(e) => hanldeChangeInput(e)}
-            />
-            <Input
-              type='password'
-              name='password'
-              placeholder={t('PASSWORD', 'Password')}
-              onChange={(e) => hanldeChangeInput(e)}
-            />
-            <Button color='primary' onClick={() => handleButtonSignupClick()}>
-              {t('SIGNUP', 'Sign up')}
-            </Button>
-          </FormInput>
+          (useChekoutFileds && validationFields.loading) && <p>Loading Form...</p>
         }
+        <FormInput onSubmit={handleSubmit(onSubmit)}>
+          {
+            !(useChekoutFileds && validationFields.loading) && (
+              <>
+                {Object.values(validationFields.fields).map(field => (
+                  showField(field.name) && (
+                    <Input
+                      key={field.id} type={field.enabled && field.required ? field.type : 'hidden'} name={field.code} required={field.required} placeholder={field.name} onChange={hanldeChangeInput} ref={register({
+                        required: isRequiredField(field.code) ? 'error' : null
+                      })}
+                    />)
+                ))}
+                <Input type='password' name='password' required placeholder='Password' onChange={hanldeChangeInput} />
+              </>
+            )
+          }
+          <Button color='primary' type='submit'>
+            {t('SIGNUP', 'Sign up')}
+          </Button>
+        </FormInput>
       </FormSide>
     </LoginContainer>
   )

@@ -129,7 +129,7 @@ export const SignUpWith = styled.div`
   }
 `
 
-export const FormInput = styled.div`
+export const FormInput = styled.form`
   width: 100%;
   > * {
     margin: 10px;

@@ -71,17 +71,15 @@ export const Router = ({ ordering }) => {
           </Route>
           <Route exact path='/signup'>
             {
-              !auth
-                ? (
-                  <SignUp
-                    ordering={ordering}
-                    elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
-                    useLoginByCellphone
-                    useChekoutFileds
-                    handleSuccessSignup={handleSuccessSignup}
-                  />
-                )
-                : <Redirect to='/' />
+              (
+                <SignUp
+                  ordering={ordering}
+                  elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
+                  useLoginByCellphone
+                  useChekoutFileds
+                  handleSuccessSignup={handleSuccessSignup}
+                />
+              )
             }
           </Route>
           <Route exact path='/login'>
