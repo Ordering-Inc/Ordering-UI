@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const ContainerCard = styled.div`
   max-width: 400px;
   max-height: 300px;
-  height: 300px;
+  height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '300px'};
   width: 360px;
   border-radius: 10px;
   margin: 30px 20px;

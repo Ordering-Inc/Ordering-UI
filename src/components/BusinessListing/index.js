@@ -116,6 +116,7 @@ export const BusinessListing = (props) => {
             business={{}}
             ordering={props.ordering}
             key={i}
+            isSkeleton
           />
         ))}
         {businessesList.error && businessesList.error.length > 0 && (

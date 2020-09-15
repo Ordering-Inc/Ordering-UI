@@ -23,6 +23,7 @@ import {
 
 const BusinessControllerUI = (props) => {
   const {
+    isSkeleton,
     business,
     isBusinessClose,
     getBusinessOffer,
@@ -54,7 +55,7 @@ const BusinessControllerUI = (props) => {
   }
 
   return (
-    <ContainerCard>
+    <ContainerCard isSkeleton={isSkeleton}>
       {/* <WrapperBusinessCard onClick={() => handleClick('clicked<zasd')}> */}
       <WrapperBusinessCard>
         <BusinessHero>
