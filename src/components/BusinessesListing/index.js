@@ -5,10 +5,10 @@ import {
   ErrorMessage
 } from './styles'
 
-import { BusinessTypeFilter } from '../../../src/components/BusinessTypeFilter'
-import { BusinessController } from '../../../src/components/BusinessController'
+import { BusinessTypeFilter } from '../BusinessTypeFilter'
+import { BusinessController } from '../BusinessController'
 
-export const BusinessListing = (props) => {
+export const BusinessesListing = (props) => {
   const {
     ordering
   } = props
