@@ -1,17 +1,35 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import { SessionProvider } from '../ordering-components/src/contexts/SessionContext'
-// import { SessionProvider } from '../ordering-components/dist/bundle'
-
 import { Router } from './template/router'
+import { OrderingProvider } from 'ordering-components'
+import { Ordering } from 'ordering-api-sdk'
 
 const wrapper = document.getElementById('app')
-// ReactDOM.render(
-//   <SessionProvider>
-//     <Router />
-//   </SessionProvider>, wrapper)
+const configFile = {
+  project: 'demo',
+  api: {
+    url: 'https://apiv4.ordering.co',
+    language: 'en',
+    version: 'v400'
+  },
+  socket: {
+    url: 'https://socket.ordering.co'
+  }
+}
+const ordering = new Ordering({
+  url: 'https://apiv4.ordering.co',
+  project: 'demo',
+  language: 'en',
+  version: 'v400'
+})
 
-ReactDOM.render(<Router />, wrapper)
+ReactDOM.render(
+  <OrderingProvider settings={configFile}>
+    <Router ordering={ordering} />
+  </OrderingProvider>
+  , wrapper)
+
+// ReactDOM.render(<Router />, wrapper)
 
 // import {
 //   ButtonPrimary,

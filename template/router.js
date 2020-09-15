@@ -11,7 +11,6 @@ import { useSession, useLanguage } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
-import { Ordering } from 'ordering-api-sdk'
 import { BusinessesList } from './Pages/BusinessesList'
 import { Login } from './Pages/Login'
 
@@ -48,11 +47,17 @@ const FontTheme = ({ fontName, children }) => {
   return children
 }
 
-const ordering = new Ordering()
-
-export const Router = () => {
-  const [{ auth }] = useSession()
+export const Router = ({ ordering }) => {
+  const [{ auth }, sessionDispatch] = useSession()
   const [, t] = useLanguage()
+
+  const handleSuccessSignup = (user) => {
+    sessionDispatch({
+      type: 'login',
+      user,
+      token: user.session.access_token
+    })
+  }
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -72,6 +77,8 @@ export const Router = () => {
                     ordering={ordering}
                     elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
                     useLoginByCellphone
+                    useChekoutFileds
+                    handleSuccessSignup={handleSuccessSignup}
                   />
                 )
                 : <Redirect to='/' />

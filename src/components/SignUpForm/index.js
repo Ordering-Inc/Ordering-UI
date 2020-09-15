@@ -36,8 +36,8 @@ const SignUpFormUI = (props) => {
     <LoginContainer>
       <HeroSide>
         <TitleHeroSide>
-          <h1>Welcome!</h1>
-          <p>Enter your personal details and start journey with us.</p>
+          <h1>{t('TITLE_LOGIN', 'Welcome!')}</h1>
+          <p>{t('SUBTITLE_LOGIN', 'Enter your personal details and start journey with us.')}</p>
         </TitleHeroSide>
         {/* <div style={{ position: "absolute" }}>
           <img
@@ -70,8 +70,8 @@ const SignUpFormUI = (props) => {
         {
           <SignUpWith>
             <Tabs variant='primary'>
-              <Tab>Signup by Email</Tab>
-              <Tab>Signup by Cellphone</Tab>
+              <Tab>{t('SIGNUP_WITH_EMAIL', 'Signup by Email')}</Tab>
+              <Tab>{t('SIGNUP_WITH_CELLPHONE', 'Signup by Cellphone')}</Tab>
             </Tabs>
           </SignUpWith>
         }
@@ -80,23 +80,23 @@ const SignUpFormUI = (props) => {
             <Input
               type='text'
               name='name'
-              placeholder={t('LOGIN_CREATE_FIRST_NAME')}
+              placeholder={t('LOGIN_CREATE_FIRST_NAME', 'Name')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Input
               type='email'
               name='email'
-              placeholder={t('EMAIL')}
+              placeholder={t('EMAIL', 'Email')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Input
               type='password'
               name='password'
-              placeholder={t('PASSWORD')}
+              placeholder={t('PASSWORD', 'Password')}
               onChange={(e) => hanldeChangeInput(e)}
             />
             <Button color='primary' onClick={() => handleButtonSignupClick()}>
-              {t('SIGNUP')}
+              {t('SIGNUP', 'Sign up')}
             </Button>
           </FormInput>
         }
