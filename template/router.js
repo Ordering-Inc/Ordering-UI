@@ -12,7 +12,11 @@ import { useSession, useLanguage } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 // import { LoginForm } from '../src/components/LoginForm'
 import { ForgotPassword } from './pages/ForgotPassword'
+import { SignUp } from './pages/SignUp'
 import { Ordering } from 'ordering-api-sdk'
+import { BusinessesList } from './Pages/BusinessesList'
+
+import { HomePage } from '../template/Pages/Home'
 
 const fontName = 'Montserrat'
 
@@ -56,19 +60,18 @@ export const Router = () => {
       <FontTheme fontName={fontName}>
         <Switch>
           <Route exact path='/home'>
-            Home
+            <HomePage ordering={ordering} />
           </Route>
           <Route exact path='/'>
-            Home
+            <HomePage ordering={ordering} />
           </Route>
-          <Route exact path='/signin'>
+          <Route exact path='/signup'>
             {
               !auth
                 ? (
-                  <ForgotPassword
+                  <SignUp
                     ordering={ordering}
-                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
                     useLoginByCellphone
                   />
                 )
@@ -79,7 +82,7 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <ForgotPassword
+                  <SignUp
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
@@ -120,6 +123,9 @@ export const Router = () => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
+          </Route>
+          <Route exact path='/businesses'>
+            <BusinessesList ordering={ordering} />
           </Route>
           <Route path='*'>
             404

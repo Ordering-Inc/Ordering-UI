@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 import { Button } from '../Buttons'
 
@@ -23,6 +23,10 @@ export const Input = styled.input`
   &:focus {
     border-color: ${() => darken(0.07, '#CCC')};
   }
+
+  ${({ w }) => w && css`
+    width: ${w}%
+  `}
 `
 
 export const InputGroup = styled.div`
