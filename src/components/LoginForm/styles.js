@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
   background: #f8f8f8;
@@ -96,12 +96,7 @@ export const FormSide = styled.div`
       width: 200px;
     }
   }
-  ${({ withCellphone }) => withCellphone && css`
-  justify-content: center;
-  > img {
-    margin: 0 0 60px 0;
-  }
-`}
+  
 `
 
 export const NewOnPlatform = styled.div`
@@ -129,7 +124,7 @@ export const LoginWith = styled.div`
   }
 `
 
-export const FormInput = styled.div`
+export const FormInput = styled.form`
   width: 100%;
   > * {
     margin: 10px;
