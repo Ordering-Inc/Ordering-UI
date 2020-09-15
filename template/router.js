@@ -12,6 +12,7 @@ import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
 import { LoginForm } from '../src/components/LoginForm'
 import { Ordering } from 'ordering-api-sdk'
+import { BusinessesList } from './Pages/BusinessesList'
 
 import { HomePage } from '../template/Pages/Home'
 
@@ -117,6 +118,9 @@ export const Router = () => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
+          </Route>
+          <Route exact path='/businesses'>
+            <BusinessesList ordering={ordering} />
           </Route>
           <Route path='*'>
             404
