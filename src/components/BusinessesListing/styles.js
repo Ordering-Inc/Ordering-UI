@@ -9,9 +9,8 @@ export const BusinessContainer = styled.div`
 export const BusinessList = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  div {
-    flex-grow: 1;
+  > * {
+    flex: 1 1 360px;
   }
 `
 
