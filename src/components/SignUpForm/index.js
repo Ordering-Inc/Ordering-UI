@@ -127,7 +127,7 @@ const SignUpFormUI = (props) => {
                         key={field.id}
                         type={field.enabled && field.required ? field.type : 'hidden'}
                         name={field.code}
-                        placeholder={field.name}
+                        placeholder={t(field.name)}
                         onChange={hanldeChangeInput}
                         ref={register({
                           required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
@@ -144,7 +144,7 @@ const SignUpFormUI = (props) => {
                 <Input
                   type='password'
                   name='password'
-                  placeholder='Password'
+                  placeholder={t('FRONT_VISUALS_PASSWORD')}
                   onChange={hanldeChangeInput}
                   required
                   ref={register({
