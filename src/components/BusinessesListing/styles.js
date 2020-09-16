@@ -22,3 +22,21 @@ export const ErrorMessage = styled.span`
   color: #D81313;
   font-weight: bold;
 `
+
+export const NotFoundBusinesses = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      opacity: 0.5;
+      margin-right: 10px;
+    }
+  }
+`

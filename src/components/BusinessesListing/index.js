@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage
+  ErrorMessage,
+  NotFoundBusinesses
 } from './styles'
 import { Redirect } from 'react-router-dom'
+
+import { Button } from '../../styles/Buttons'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
@@ -86,7 +89,7 @@ export const BusinessesListing = (props) => {
       <BusinessList>
         {isFetching ? (
           businessesList.businesses && businessesList.businesses.length > 0 ? (
-            businessesList.businesses.map((item, i) => (
+            !businessesList.businesses.map((item, i) => (
               <BusinessController
                 className='card'
                 key={i}
@@ -96,11 +99,17 @@ export const BusinessesListing = (props) => {
               />
             ))
           ) : (
-            <h1>Not Found elementss </h1>
+            <NotFoundBusinesses>
+              <h1>Not Found elements </h1>
+              <div>
+                <h3>Select other address</h3>
+                <Button color='primary'>Change</Button>
+              </div>
+            </NotFoundBusinesses>
           )
         ) : (
           !businessesList.loading && !businessesList.error &&
-            businessesList.businesses && businessesList.businesses.length > 0 ? (
+            !businessesList.businesses && businessesList.businesses.length > 0 ? (
               businessesList.businesses.map((item, i) => (
                 <BusinessController
                   className='card'
@@ -111,7 +120,15 @@ export const BusinessesListing = (props) => {
                 />
               ))
             ) : (
-              !businessesList.loading && !businessesList.error && (<h1>Not Found elements </h1>)
+              !businessesList.loading && !businessesList.error && (
+                <NotFoundBusinesses>
+                  <h1>Not Found elements </h1>
+                  <div>
+                    <h3>Select other address</h3>
+                    <Button color='primary'>Change</Button>
+                  </div>
+                </NotFoundBusinesses>
+              )
             )
         )}
         {businessesList.loading && [...Array(isFetching ? 3 : 8).keys()].map(i => (
