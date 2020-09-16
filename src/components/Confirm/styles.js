@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
-export const PopupBackDrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-`
+// export const PopupBackDrop = styled.div`
+//   background-color: rgba(0, 0, 0, 0.4);
+//   position: fixed;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   z-index: 1000;
+// `
 
 export const PopupWrap = styled.div`
   display: flex;
@@ -42,26 +42,32 @@ export const PopupActions = styled.div`
     &:nth-child(1) {
       margin-right: 25px;
     }
+    &:last-child {
+      margin-right: 0;
+    }
   }
 `
 
 export const PopupTitle = styled.h2`
   text-align: left;
-  font: normal normal bold 35px/70px Tajawal;
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;
   margin-top: 0px;
-  text-transform: capitalize;
 `
 
-export const PopupContent = styled.p`
+export const PopupContent = styled.div`
   text-align: left;
-  font: normal normal normal 20px/49px Tajawal;
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;
-  text-transform: capitalize;
+  ul {
+    padding-left: 30px;
+    li {
+      margin-top: 7px;
+      margin-bottom: 7px;
+    }
+  }
 `
 
 export const PopupIcon = styled.span`
