@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+
 import {
   HeroContainer,
   ContentWrapper,
@@ -15,19 +15,33 @@ import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
 
-import { useSession } from 'ordering-components'
+import { useSession, useOrder, useLanguage } from 'ordering-components'
 
 import locationIcon from '../../../template/assets/input-location-icon.svg'
 
 export const HomeHero = (props) => {
+  const {
+    onFindBusiness
+  } = props
+
   const [{ user, auth }] = useSession()
+  const [orderState] = useOrder()
+  const [, t] = useLanguage()
 
   const [modalFormIsOpen, setModalFormIsOpen] = useState(false)
   const [modalListIsOpen, setModalListIsOpen] = useState(false)
 
-  const [isRedirect, setIsRedirect] = useState(false)
-
   const [curAddress, setCurAddress] = useState(null)
+
+  const onBusinessClick = ({ from }) => {
+    if (from === 'button' && auth && user?.address) {
+      onFindBusiness()
+    } else if (from === 'input' && auth) {
+      setModalListIsOpen(true)
+    } else {
+      setModalFormIsOpen(true)
+    }
+  }
 
   const closeModal = (type) => {
     if (type === 'form') {
@@ -40,23 +54,26 @@ export const HomeHero = (props) => {
     }
   }
 
-  const onBusinessClick = () => {
-    auth ? setModalListIsOpen(true) : setModalFormIsOpen(true)
-  }
-
-  const handleSelectAddress = (address) => {
+  const handleEditAddress = (address) => {
     setCurAddress(address)
-    switchModalsOpen()
+    switchModalsState()
   }
 
   const handlerRedirectAddress = () => {
     setModalListIsOpen(false)
-    setIsRedirect(true)
+    onFindBusiness()
   }
 
-  const switchModalsOpen = () => {
+  const switchModalsState = () => {
     setModalFormIsOpen(true)
     setModalListIsOpen(false)
+  }
+
+  const handlerSaveAddressForm = ({ type }) => {
+    closeModal(type)
+    if (!auth && orderState?.options?.address?.location) {
+      onFindBusiness()
+    }
   }
 
   return (
@@ -64,12 +81,12 @@ export const HomeHero = (props) => {
       <ContentWrapper>
         <Title>All We need is Food</Title>
         <Slogan>Let's start to order food now</Slogan>
-        <WrapInput onClick={() => onBusinessClick()} withIcon={locationIcon}>
+        <WrapInput onClick={() => onBusinessClick({ from: 'input' })} withIcon={locationIcon}>
           <Input type='text' disabled placeholder={user?.address || 'Address or Zip Code'} />
         </WrapInput>
         <Button
           color='primary'
-          onClick={() => onBusinessClick()}
+          onClick={() => onBusinessClick({ from: 'button' })}
         >
           Find Business
         </Button>
@@ -78,8 +95,9 @@ export const HomeHero = (props) => {
       {modalFormIsOpen && (
         <Modal
           zx='1002'
-          title='Address'
+          title={t('ADDRESS')}
           open={modalFormIsOpen}
+          closeOnBackdrop={false}
           onClose={() => closeModal('form')}
         >
           <AddressForm
@@ -87,14 +105,15 @@ export const HomeHero = (props) => {
             useValidationFileds
             address={curAddress}
             onCancel={() => closeModal('form')}
-            onSaveAddressForm={() => closeModal('form')}
+            onSaveAddressForm={() => handlerSaveAddressForm({ type: 'form' })}
           />
         </Modal>)}
 
       {modalListIsOpen && (
         <Modal
-          title='Address'
+          title={t('ADDRESS')}
           open={modalListIsOpen}
+          closeOnBackdrop={false}
           onClose={() => closeModal()}
           onCancel={() => closeModal()}
           onAccept={() => handlerRedirectAddress()}
@@ -102,11 +121,10 @@ export const HomeHero = (props) => {
           <AddressList
             ordering={props.ordering}
             changeOrderAddressWithDefault
-            handleClickAddress={handleSelectAddress}
-            onAddAddress={() => switchModalsOpen()}
+            handleClickAddress={handleEditAddress}
+            onAddAddress={() => switchModalsState()}
           />
         </Modal>)}
-      {isRedirect && <Redirect to='/search' />}
     </HeroContainer>
   )
 }

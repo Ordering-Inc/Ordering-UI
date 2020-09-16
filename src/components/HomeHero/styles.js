@@ -52,6 +52,9 @@ export const Slogan = styled.p`
 `
 
 export const WrapInput = styled.label`
+  input {
+    cursor: pointer;
+  }
   ${({ withIcon }) => withIcon && css`
     position: relative;
     width: calc(50% + 70px);

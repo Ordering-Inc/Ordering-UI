@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FiPlus } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
   GoogleAutocompleteInput,
-  GoogleGpsButton
+  GoogleGpsButton,
+  useLanguage
 } from 'ordering-components'
+import { Alert } from '../Confirm'
 
 import {
   FormControl,
@@ -34,9 +36,12 @@ const AddressFormUI = (props) => {
     hanldeChangeInput,
     saveAddress
   } = props
+  const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
+
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const onSubmit = (values) => {
     saveAddress()
@@ -70,6 +75,31 @@ const AddressFormUI = (props) => {
     })
   }
 
+  useEffect(() => {
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result || [t('ERROR')]
+      })
+    }
+  }, [formState])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
   return (
     <>
       <FormControl onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +117,6 @@ const AddressFormUI = (props) => {
                 required: isRequiredField('address') ? 'Address is required' : null
               })}
             />
-            {!formState.changes?.location && errors.address && <i style={{ color: '#c10000' }}>{errors.address.message}</i>}
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
             <GoogleGpsButton
@@ -141,6 +170,15 @@ const AddressFormUI = (props) => {
           </Button>
         </FormActions>
       </FormControl>
+      <Alert
+        title={t('ADDRESS')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
