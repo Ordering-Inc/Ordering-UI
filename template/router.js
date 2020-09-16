@@ -139,9 +139,9 @@ export const Router = ({ ordering }) => {
           <Route exact path='/p/:page'>
             <Page />
           </Route>
-          {/* <Route exact path='/search'>
-            Search
-          </Route> */}
+          <Route exact path='/search'>
+            <BusinessesList ordering={ordering} />
+          </Route>
           <Route exact path='/store/:store'>
             <Store />
           </Route>
@@ -150,9 +150,6 @@ export const Router = ({ ordering }) => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
-          </Route>
-          <Route exact path='/search'>
-            <BusinessesList ordering={ordering} />
           </Route>
           <Route path='*'>
             404

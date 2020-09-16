@@ -1,16 +1,17 @@
 import styled, { css } from 'styled-components'
 
 export const ContainerCard = styled.div`
-  max-width: 400px;
+  ${'' /* max-width: 360px; */}
+  ${'' /* width: 360px; */}
   max-height: 300px;
   height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '300px'};
-  width: 360px;
   border-radius: 10px;
   margin: 30px 20px;
 `
 
 export const WrapperBusinessCard = styled.div`
   border-radius: 10px;
+  cursor: ${({ isSkeleton }) => isSkeleton ? 'default' : 'pointer'};
 `
 
 export const BusinessHero = styled.div`
@@ -65,10 +66,17 @@ export const BusinessTags = styled.div`
     color: #FFC917;
   }
 
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
   span {
     background-color: #6C6C6C;
+    font-size: 12px;
     color: #FFF;
-    padding: 10px;
+    padding: 8px;
     border-radius: 10px;
     margin-right: 10px;
     &:last-child {
@@ -100,7 +108,6 @@ export const BusinessLogo = styled.div`
   height: 100%;
   box-sizing: border-box;
   position: relative;
-  border: 1px solid #000;
 
   ${({ bgimage }) => bgimage && css`
     background-image: url(${bgimage});

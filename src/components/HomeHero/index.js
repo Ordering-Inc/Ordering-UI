@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import {
   HeroContainer,
   ContentWrapper,
@@ -24,23 +25,38 @@ export const HomeHero = (props) => {
   const [modalFormIsOpen, setModalFormIsOpen] = useState(false)
   const [modalListIsOpen, setModalListIsOpen] = useState(false)
 
-  const closeModal = (modal) => {
-    if (modal === 'form') {
+  const [isRedirect, setIsRedirect] = useState(false)
+
+  const [curAddress, setCurAddress] = useState(null)
+
+  const closeModal = (type) => {
+    if (type === 'form') {
       setModalFormIsOpen(false)
+      if (auth) {
+        setModalListIsOpen(true)
+      }
     } else {
       setModalListIsOpen(false)
     }
   }
 
   const onBusinessClick = () => {
-    if (!user?.address) {
-      // setModalFormIsOpen(true)
-      setModalListIsOpen(true)
-    } else {
-      /**
-       * Put here function to redirect business
-       */
-    }
+    auth ? setModalListIsOpen(true) : setModalFormIsOpen(true)
+  }
+
+  const handleSelectAddress = (address) => {
+    setCurAddress(address)
+    switchModalsOpen()
+  }
+
+  const handlerRedirectAddress = () => {
+    setModalListIsOpen(false)
+    setIsRedirect(true)
+  }
+
+  const switchModalsOpen = () => {
+    setModalFormIsOpen(true)
+    setModalListIsOpen(false)
   }
 
   return (
@@ -48,8 +64,8 @@ export const HomeHero = (props) => {
       <ContentWrapper>
         <Title>All We need is Food</Title>
         <Slogan>Let's start to order food now</Slogan>
-        <WrapInput withIcon={locationIcon}>
-          <Input onClick={() => onBusinessClick()} placeholder={user?.address || 'Address or Zip Code'} />
+        <WrapInput onClick={() => onBusinessClick()} withIcon={locationIcon}>
+          <Input type='text' disabled placeholder={user?.address || 'Address or Zip Code'} />
         </WrapInput>
         <Button
           color='primary'
@@ -58,7 +74,8 @@ export const HomeHero = (props) => {
           Find Business
         </Button>
       </ContentWrapper>
-      {((user?.address && modalFormIsOpen) || modalFormIsOpen) && (
+
+      {modalFormIsOpen && (
         <Modal
           zx='1002'
           title='Address'
@@ -66,31 +83,30 @@ export const HomeHero = (props) => {
           onClose={() => closeModal('form')}
         >
           <AddressForm
-            userId={1}
-            useValidationFileds
-            accessToken={auth || 'any text'}
             ordering={props.ordering}
+            useValidationFileds
+            address={curAddress}
             onCancel={() => closeModal('form')}
             onSaveAddressForm={() => closeModal('form')}
           />
         </Modal>)}
 
-      {!user?.address && modalListIsOpen && (
+      {modalListIsOpen && (
         <Modal
           title='Address'
           open={modalListIsOpen}
           onClose={() => closeModal()}
           onCancel={() => closeModal()}
-          onAccept={() => closeModal()}
+          onAccept={() => handlerRedirectAddress()}
         >
           <AddressList
-            userId={1}
-            accessToken={auth || 'any text'}
             ordering={props.ordering}
             changeOrderAddressWithDefault
-            onAddAddress={() => setModalFormIsOpen(true)}
+            handleClickAddress={handleSelectAddress}
+            onAddAddress={() => switchModalsOpen()}
           />
         </Modal>)}
+      {isRedirect && <Redirect to='/search' />}
     </HeroContainer>
   )
 }

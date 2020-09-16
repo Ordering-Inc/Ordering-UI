@@ -9,9 +9,8 @@ export const BusinessContainer = styled.div`
 export const BusinessList = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  div {
-    flex-grow: 1;
+  > * {
+    flex: 1 1 360px;
   }
 `
 
@@ -22,4 +21,22 @@ export const ErrorMessage = styled.span`
   margin: 0px 15px;
   color: #D81313;
   font-weight: bold;
+`
+
+export const NotFoundBusinesses = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      opacity: 0.5;
+      margin-right: 10px;
+    }
+  }
 `

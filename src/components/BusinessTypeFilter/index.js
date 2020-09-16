@@ -8,13 +8,14 @@ import { TypeContainer } from './styles'
 const BusinessTypeFilterUI = (props) => {
   const {
     businessTypes,
+    currentTypeSelected,
     handleChangeBusinessType
   } = props
   return (
     <TypeContainer>
       <Tabs variant='primary'>
         {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
-          <Tab key={i} onClick={() => handleChangeBusinessType(type.value)}>
+          <Tab active={type.value === currentTypeSelected} key={i} onClick={() => handleChangeBusinessType(type.value)}>
             {type.key}
           </Tab>
         ))}
@@ -33,7 +34,9 @@ export const BusinessTypeFilter = (props) => {
       { key: 'Alcohol', value: 'alcohol' },
       { key: 'Groceries', value: 'groceries' },
       { key: 'Laundry', value: 'laundry' }
-    ]
+    ],
+    onChangeBusinessType: props.handleChangeBusinessType,
+    defaultBusinessType: null
   }
 
   return (

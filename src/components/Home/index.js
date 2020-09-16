@@ -50,7 +50,7 @@ export const Home = (props) => {
             <h3>Choose your Product</h3>
           </div>
           <div>
-            <img src={deliverySvg} />
+            <img src={deliverySvg} width='88' height='88' />
             <h3>Your package arrives</h3>
           </div>
         </StepsBlock>

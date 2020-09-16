@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
+import { FiPlus } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
-  // useSession,
   GoogleAutocompleteInput,
   GoogleGpsButton
 } from 'ordering-components'
@@ -34,10 +34,9 @@ const AddressFormUI = (props) => {
     hanldeChangeInput,
     saveAddress
   } = props
-  // const [{ auth }] = useSession()
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
-  const [addressTag, setAddressTag] = useState(null)
+  const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
 
   const onSubmit = (values) => {
     saveAddress()
@@ -57,7 +56,6 @@ const AddressFormUI = (props) => {
   }
 
   const handleChangeAddress = (address) => {
-    console.log(address)
     setState({
       ...state,
       selectedFromAutocomplete: true
@@ -102,12 +100,14 @@ const AddressFormUI = (props) => {
           name='internal_number'
           placeholder='Internal number'
           ref={register}
+          defaultValue={addressState.address.internal_number}
           onChange={hanldeChangeInput}
         />
         <Input
           name='zipcode'
           placeholder='Zip code'
           ref={register}
+          defaultValue={addressState.address.zipcode}
           onChange={hanldeChangeInput}
         />
         <Input
@@ -116,26 +116,29 @@ const AddressFormUI = (props) => {
           w='100'
           placeholder='Address Notes'
           ref={register}
+          defaultValue={addressState.address.address_notes}
           onChange={hanldeChangeInput}
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>
           <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
-            <img src={company} alt='Home' />
+            <img src={home} alt='Home' />
           </Button>
           <Button className={addressTag === 'office' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('office')}>
-            <img src={heart} alt='Office' />
+            <img src={company} alt='Office' />
           </Button>
           <Button className={addressTag === 'favorite' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('favorite')}>
-            <img src={home} alt='Favorite' />
+            <img src={heart} alt='Favorite' />
           </Button>
           <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
-            <img src={home} alt='Other' />  {/** Change this image for a plus image */}
+            <span><FiPlus /></span>
           </Button>
         </AddressTagSection>
         <FormActions>
           <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>Cancel</Button>
-          <Button type='submit' disabled={formState.loading} color='primary'>{addressState.address?.id ? 'Update' : 'Add'}</Button>
+          <Button type='submit' disabled={formState.loading} color='primary'>
+            {addressState.address?.id ? 'Update' : 'Add'}
+          </Button>
         </FormActions>
       </FormControl>
     </>

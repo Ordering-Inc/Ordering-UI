@@ -23,6 +23,6 @@ export const Tab = styled.div`
   cursor: pointer;
 
   ${({ active }) => !active && css`
-  color: #CBCBCB ;
-`}
+    color: #CBCBCB ;
+  `}
 `

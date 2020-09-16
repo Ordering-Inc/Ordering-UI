@@ -2,21 +2,27 @@ import React, { useEffect, useState } from 'react'
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage
+  ErrorMessage,
+  NotFoundBusinesses
 } from './styles'
+import { Redirect } from 'react-router-dom'
+
+import { Button } from '../../styles/Buttons'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
 
 export const BusinessesListing = (props) => {
   const {
-    ordering
+    ordering,
+    propsToFetch
   } = props
 
   const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
   const [paginationProps, setPaginationProps] = useState({ currentPage: null, pageSize: 20, totalPages: null })
   const [businessTypeSelected, setBusinessTypeSelected] = useState(null)
   const [isFetching, setIsFetching] = useState(false)
+  const [isRedirect, setIsRedirect] = useState(null)
 
   const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
 
@@ -31,7 +37,6 @@ export const BusinessesListing = (props) => {
         ...businessesList,
         loading: true
       })
-      // const params = ['id', 'name', 'header', 'logo', 'name', 'today', 'delivery_price', 'minimum', 'description', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers']
       const parameters = {
         location: '40.7539143,-73.9810162', // provide this props from search options component
         type: 1 // provide this props from search options component
@@ -39,11 +44,12 @@ export const BusinessesListing = (props) => {
         // page_size: paginationProps.pageSize
       }
       const where = businessTypeSelected ? [{ attribute: businessTypeSelected, value: true }] : []
-      const { content: { result, pagination } } = await ordering.businesses().parameters(parameters).where(where).get()
+      const { content: { result, pagination } } = await ordering.businesses().select(propsToFetch).parameters(parameters).where(where).get()
+      const businesses = result.filter(prop => prop.reviews.total > 0)
       setBusinessesList({
         ...businessesList,
         loading: false,
-        businesses: isFetching ? [...businessesList.businesses, ...result] : result
+        businesses: isFetching ? [...businessesList.businesses, ...businesses] : businesses
       })
       setIsFetching(false)
       setPaginationProps({
@@ -74,8 +80,6 @@ export const BusinessesListing = (props) => {
     getBusinesses()
   }, [businessTypeSelected])
 
-  // const handlerClickBusiness = (e) => { console.log('VALUE', e) }
-
   return (
     <BusinessContainer>
       <BusinessTypeFilter
@@ -85,34 +89,51 @@ export const BusinessesListing = (props) => {
       <BusinessList>
         {isFetching ? (
           businessesList.businesses && businessesList.businesses.length > 0 ? (
-            businessesList.businesses.map((item, i) => (
+            !businessesList.businesses.map((item, i) => (
               <BusinessController
+                className='card'
                 key={i}
                 ordering={props.ordering}
                 business={item}
-                // handleCustomClick={(e) => handlerClickBusiness(e)}
+                handleCustomClick={(slug) => setIsRedirect(slug)}
               />
             ))
           ) : (
-            <h1>Not Found elementss </h1>
+            <NotFoundBusinesses>
+              <h1>Not Found elements </h1>
+              <div>
+                <h3>Select other address</h3>
+                <Button color='primary'>Change</Button>
+              </div>
+            </NotFoundBusinesses>
           )
         ) : (
           !businessesList.loading && !businessesList.error &&
-            businessesList.businesses && businessesList.businesses.length > 0 ? (
+            !businessesList.businesses && businessesList.businesses.length > 0 ? (
               businessesList.businesses.map((item, i) => (
                 <BusinessController
+                  className='card'
                   key={i}
                   ordering={props.ordering}
                   business={item}
-                  // handleCustomClick={(e) => handlerClickBusiness(e)}
+                  handleCustomClick={(slug) => setIsRedirect(slug)}
                 />
               ))
             ) : (
-              !businessesList.loading && !businessesList.error && (<h1>Not Found elements </h1>)
+              !businessesList.loading && !businessesList.error && (
+                <NotFoundBusinesses>
+                  <h1>Not Found elements </h1>
+                  <div>
+                    <h3>Select other address</h3>
+                    <Button color='primary'>Change</Button>
+                  </div>
+                </NotFoundBusinesses>
+              )
             )
         )}
-        {businessesList.loading && [...Array(isFetching ? 3 : 6).keys()].map(i => (
+        {businessesList.loading && [...Array(isFetching ? 3 : 8).keys()].map(i => (
           <BusinessController
+            className='card'
             business={{}}
             ordering={props.ordering}
             key={i}
@@ -124,6 +145,7 @@ export const BusinessesListing = (props) => {
             <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
           ))
         )}
+        {isRedirect && <Redirect to={`/store/${isRedirect}`} />}
       </BusinessList>
     </BusinessContainer>
   )

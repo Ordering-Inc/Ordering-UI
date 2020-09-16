@@ -102,6 +102,13 @@ export const AddressTagSection = styled.div`
     align-items: center;
     width: 46px;
     height: 46px;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 35px;
+    }
   }
 
   button.active {

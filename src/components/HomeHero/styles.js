@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components'
 
 export const HeroContainer = styled.div`
   width: 100%;
-  height: calc(100vh - 45px);
+  /* uncomment if there is a header */
+  /* height: calc(100vh - 45px); */
+  height: 100vh;
   background-color: #000000;
 `
 

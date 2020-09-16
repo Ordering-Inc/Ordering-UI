@@ -25,9 +25,34 @@ export const AddressItem = styled.li`
   border-top: 1px solid #00000029;
 
   label {
-    font-size: 20px;
+    font-size: 15px;
     margin-left: 5px;
     font-weight: bold;
+  }
+
+  .wrapAddress {
+    display: flex;
+    align-items: center;
+
+    span {
+      cursor: pointer;
+      margin-right: 10px;
+      &.radio {
+        color: #D81212;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .address {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+
+    span:last-child {
+      opacity: 0.5;
+      font-size: 12px;
+    }
   }
 
   &:last-child {
@@ -44,11 +69,18 @@ export const AddressItemActions = styled.div`
     font-size: 30px;
 
     &:nth-child(1) {
-      color: #F2BB40;
+      svg {
+        color: #F2BB40;
+      }
     }
 
     &:nth-child(2) {
-      color: #D81212;
+      svg {
+        color: #D81212;
+      }
     }
+  }
+  a.disabled {
+    pointer-events: none;
   }
 `
