@@ -52,6 +52,7 @@ export const Router = ({ ordering }) => {
   const [, t] = useLanguage()
 
   const handleSuccessSignup = (user) => {
+    console.log('user of handlesucces', user)
     sessionDispatch({
       type: 'login',
       user,
@@ -71,15 +72,17 @@ export const Router = ({ ordering }) => {
           </Route>
           <Route exact path='/signup'>
             {
-              (
-                <SignUp
-                  ordering={ordering}
-                  elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
-                  useLoginByCellphone
-                  useChekoutFileds
-                  handleSuccessSignup={handleSuccessSignup}
-                />
-              )
+              !auth
+                ? (
+                  <SignUp
+                    ordering={ordering}
+                    elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
+                    useLoginByCellphone
+                    useChekoutFileds
+                    handleSuccessSignup={handleSuccessSignup}
+                  />
+                )
+                : <Redirect to='/' />
             }
           </Route>
           <Route exact path='/login'>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Confirm } from '../Confirm'
 
 import {
   SignupForm as SignUpController,
@@ -38,20 +39,49 @@ const SignUpFormUI = (props) => {
     showField,
     isRequiredField,
     formState,
-    handleSuccessSignup
+    handleSuccessSignup,
+    useLoginByCellphone,
+    useLoginByEmail
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(true)
 
   const onSubmit = () => {
     handleButtonSignupClick()
-    // handleSuccessSignup(formState.result.result)
+    if (!formState.loading && formState.result.result && !formState.result.error) {
+      handleSuccessSignup(formState.result.result)
+    }
   }
-  if (!(useChekoutFileds && validationFields.loading)) {
-    console.log(Object.values(validationFields.fields))
+
+  const handleErrors = () => {
+    if (errors) {
+      setModalIsOpen(true)
+    }
   }
+  const inputs = [
+    { name: 'name', placeholder: 'Firstname', requiredMessage: 'Name is required', type: 'text' },
+    { name: 'email', placeholder: 'Email', requiredMessage: 'Email is required', type: 'text' },
+    { name: 'password', placeholder: 'Password', requiredMessage: 'Password is required', type: 'password' }
+  ]
+
+  const Alert = (name, content) => (
+    <>
+      <Confirm
+        title='Error'
+        content={name ? errors[name].message : content}
+        acceptText='Yes'
+        closeText='Cancel'
+        open={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+        onAccept={() => setModalIsOpen(false)}
+        onCancel={() => setModalIsOpen(false)}
+      />
+    </>
+
+  )
+
   return (
     <LoginContainer>
       <HeroSide>
@@ -89,12 +119,13 @@ const SignUpFormUI = (props) => {
           </SocialIcons>
         }
         {
-          <SignUpWith>
-            <Tabs variant='primary'>
-              <Tab>{t('SIGNUP_WITH_EMAIL', 'Signup by Email')}</Tab>
-              <Tab>{t('SIGNUP_WITH_CELLPHONE', 'Signup by Cellphone')}</Tab>
-            </Tabs>
-          </SignUpWith>
+          useLoginByCellphone && useLoginByEmail &&
+            <SignUpWith>
+              <Tabs variant='primary'>
+                <Tab>{t('SIGNUP_WITH_EMAIL', 'Signup by Email')}</Tab>
+                <Tab>{t('SIGNUP_WITH_CELLPHONE', 'Signup by Cellphone')}</Tab>
+              </Tabs>
+            </SignUpWith>
         }
         {
           (useChekoutFileds && validationFields.loading) && <p>Loading Form...</p>
@@ -103,23 +134,43 @@ const SignUpFormUI = (props) => {
           {
             !(useChekoutFileds && validationFields.loading) && (
               <>
-                {Object.values(validationFields.fields).map(field => (
-                  showField(field.name) && (
-                    <Input
-                      key={field.id} type={field.enabled && field.required ? field.type : 'hidden'} name={field.code} required={field.required} placeholder={field.name} onChange={hanldeChangeInput} ref={register({
-                        required: isRequiredField(field.code) ? 'error' : null
-                      })}
-                    />)
-                ))}
-                <Input type='password' name='password' required placeholder='Password' onChange={hanldeChangeInput} />
+                {
+                  inputs.map((_input) => (
+                    showField(_input.name) && (
+                      <React.Fragment key={_input.name}>
+                        <Input
+                          name={_input.name}
+                          type={_input.type}
+                          placeholder={_input.placeholder}
+                          onChange={hanldeChangeInput}
+                          ref={register({
+                            required: isRequiredField(_input.name) ? _input.requiredMessage : null
+                          })}
+                        />
+                      </React.Fragment>
+                    )
+                  ))
+                }
               </>
             )
           }
-          <Button color='primary' type='submit'>
-            {t('SIGNUP', 'Sign up')}
+          <Button color='primary' type='submit' onClick={handleErrors}>
+            {formState.loading ? 'loading' : t('SIGNUP', 'Sign up')}
           </Button>
         </FormInput>
       </FormSide>
+      <>
+        {
+          inputs.map(_input => (
+            <React.Fragment key={_input.name}>
+              {errors[_input.name]?.message && modalIsOpen && Alert(_input.name)}
+            </React.Fragment>
+          ))
+        }
+      </>
+      {
+        !formState.loading && formState.result?.error && modalIsOpen && Alert('', formState.result.result[0])
+      }
     </LoginContainer>
   )
 }
