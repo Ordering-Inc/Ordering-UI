@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
   background: #f8f8f8;
@@ -80,6 +80,8 @@ export const FormSide = styled.div`
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
+  flex-wrap: wrap;
+  align-content: center;
   flex: 1;
   > img {
     width: 139px;
@@ -96,12 +98,7 @@ export const FormSide = styled.div`
       width: 200px;
     }
   }
-  ${({ withCellphone }) => withCellphone && css`
-  justify-content: center;
-  > img {
-    margin: 0 0 60px 0;
-  }
-`}
+
 `
 
 export const AlreadyRegistered = styled.div`

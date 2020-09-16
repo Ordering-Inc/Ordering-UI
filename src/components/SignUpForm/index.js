@@ -60,11 +60,6 @@ const SignUpFormUI = (props) => {
       setModalIsOpen(true)
     }
   }
-  const inputs = [
-    { name: 'name', placeholder: 'Firstname', requiredMessage: 'Name is required', type: 'text' },
-    { name: 'email', placeholder: 'Email', requiredMessage: 'Email is required', type: 'text' },
-    { name: 'password', placeholder: 'Password', requiredMessage: 'Password is required', type: 'password' }
-  ]
 
   const Alert = (name, content) => (
     <>
@@ -135,39 +130,31 @@ const SignUpFormUI = (props) => {
             !(useChekoutFileds && validationFields.loading) && (
               <>
                 {
-                  inputs.map((_input) => (
-                    showField(_input.name) && (
-                      <React.Fragment key={_input.name}>
-                        <Input
-                          name={_input.name}
-                          type={_input.type}
-                          placeholder={_input.placeholder}
-                          onChange={hanldeChangeInput}
-                          ref={register({
-                            required: isRequiredField(_input.name) ? _input.requiredMessage : null
-                          })}
-                        />
-                      </React.Fragment>
+                  Object.values(validationFields.fields).map(field => (
+                    showField(field.code) && (
+                      <Input
+                        key={field.id}
+                        type={field.enabled && field.required ? field.type : 'hidden'}
+                        name={field.code}
+                        placeholder={field.name}
+                        onChange={hanldeChangeInput}
+                        ref={register({
+                          required: isRequiredField(field.code) ? 'error' : null
+                        })}
+                        required={field.required}
+                      />
                     )
                   ))
                 }
+                <Input type='password' name='password' required placeholder='Password' onChange={hanldeChangeInput} />
               </>
             )
           }
-          <Button color='primary' type='submit' onClick={handleErrors}>
-            {formState.loading ? 'loading' : t('SIGNUP', 'Sign up')}
+          <Button color='primary' type='submit' onClick={handleErrors} disabled={formState.loading}>
+            {formState.loading ? t('LOADING') : t('SIGNUP', 'Sign up')}
           </Button>
         </FormInput>
       </FormSide>
-      <>
-        {
-          inputs.map(_input => (
-            <React.Fragment key={_input.name}>
-              {errors[_input.name]?.message && modalIsOpen && Alert(_input.name)}
-            </React.Fragment>
-          ))
-        }
-      </>
       {
         !formState.loading && formState.result?.error && modalIsOpen && Alert('', formState.result.result[0])
       }
