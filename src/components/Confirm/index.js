@@ -4,7 +4,6 @@ import { Popup, useLanguage } from 'ordering-components'
 import {
   PopupDialog,
   PopupWrap,
-  PopupBackDrop,
   PopupActions,
   PopupTitle,
   PopupContent,
@@ -16,6 +15,7 @@ import { Button } from '../../styles/Buttons'
 const ConfirmUI = (props) => {
   const {
     title,
+    children,
     content,
     onAccept,
     onCancel,
@@ -25,20 +25,32 @@ const ConfirmUI = (props) => {
   } = props
   const [, t] = useLanguage()
   return (
-    <PopupWrap className='popup'>
-      <PopupDialog>
-        <PopupIcon>
-          <MdClose onClick={() => onClose()} />
-        </PopupIcon>
-        {title && <PopupTitle>{title}</PopupTitle>}
-        {content && <PopupContent>{content}</PopupContent>}
-        {(onCancel || onAccept || onClose) && (
-          <PopupActions>
-            {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
-            {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
-          </PopupActions>)}
-      </PopupDialog>
-    </PopupWrap>
+    <>
+      <PopupWrap className='popup'>
+        <PopupDialog className='popup-dialog'>
+          <PopupIcon>
+            <MdClose onClick={() => onClose()} />
+          </PopupIcon>
+          {title && <PopupTitle>{title}</PopupTitle>}
+          <PopupContent>
+            {content && typeof content === 'string' && content}
+            {content && typeof content === 'object' && Array.isArray(content) && (
+              <ul>
+                {content.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            )}
+            {children}
+          </PopupContent>
+          {(onCancel || onAccept || onClose) && (
+            <PopupActions>
+              {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
+              {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+            </PopupActions>)}
+        </PopupDialog>
+      </PopupWrap>
+    </>
   )
 }
 
@@ -49,9 +61,8 @@ export const Confirm = (props) => {
   }
 
   return (
-    <>
-      <PopupBackDrop className='popup-backdrop' />
-      <Popup {...popupProps} />
-    </>
+    <Popup {...popupProps} />
   )
 }
+
+export const Alert = Confirm

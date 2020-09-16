@@ -24,6 +24,16 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     color: #333;
   }
+  
+  .popup-backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
 `
 
 const FontTheme = ({ fontName, children }) => {
@@ -40,10 +50,10 @@ const FontTheme = ({ fontName, children }) => {
     fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
 
     window.document.body.appendChild(fontTheme)
-    return () => {
-      fontTheme.remove()
-    }
-  })
+    // return () => {
+    //   fontTheme.remove()
+    // }
+  }, [])
   return children
 }
 
@@ -130,9 +140,9 @@ export const Router = ({ ordering }) => {
           <Route exact path='/p/:page'>
             <Page />
           </Route>
-          <Route exact path='/search'>
+          {/* <Route exact path='/search'>
             Search
-          </Route>
+          </Route> */}
           <Route exact path='/store/:store'>
             <Store />
           </Route>
@@ -142,7 +152,7 @@ export const Router = ({ ordering }) => {
           <Route exact path='/order/:orderId'>
             <Order />
           </Route>
-          <Route exact path='/businesses'>
+          <Route exact path='/search'>
             <BusinessesList ordering={ordering} />
           </Route>
           <Route path='*'>
