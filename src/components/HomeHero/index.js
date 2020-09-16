@@ -61,7 +61,9 @@ export const HomeHero = (props) => {
 
   const handlerRedirectAddress = () => {
     setModalListIsOpen(false)
-    onFindBusiness()
+    if (orderState?.options?.address?.location) {
+      onFindBusiness()
+    }
   }
 
   const switchModalsState = () => {

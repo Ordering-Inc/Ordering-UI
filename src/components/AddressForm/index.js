@@ -129,14 +129,14 @@ const AddressFormUI = (props) => {
           name='internal_number'
           placeholder='Internal number'
           ref={register}
-          defaultValue={addressState.address.internal_number}
+          defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
         />
         <Input
           name='zipcode'
           placeholder='Zip code'
           ref={register}
-          defaultValue={addressState.address.zipcode}
+          defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
         />
         <Input
@@ -145,7 +145,7 @@ const AddressFormUI = (props) => {
           w='100'
           placeholder='Address Notes'
           ref={register}
-          defaultValue={addressState.address.address_notes}
+          defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
           onChange={hanldeChangeInput}
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
