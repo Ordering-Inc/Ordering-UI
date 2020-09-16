@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Confirm } from '../Confirm'
-
+import { Alert } from '../Confirm'
 import {
   SignupForm as SignUpController,
   useLanguage,
@@ -17,7 +16,6 @@ import {
   SignUpWith,
   AlreadyRegistered
 } from './styles'
-// import triangle from '../../../template/triangle.svg'
 
 import logoHeader from '../../../template/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -46,7 +44,32 @@ const SignUpFormUI = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
-  const [modalIsOpen, setModalIsOpen] = useState(true)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  useEffect(() => { // manejando errors de api
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result || [t('ERROR')]
+      })
+    }
+  }, [formState])
+
+  useEffect(() => { // manejando errores de la UI
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
   const onSubmit = () => {
     handleButtonSignupClick()
@@ -55,28 +78,6 @@ const SignUpFormUI = (props) => {
     }
   }
 
-  const handleErrors = () => {
-    if (errors) {
-      setModalIsOpen(true)
-    }
-  }
-
-  const Alert = (name, content) => (
-    <>
-      <Confirm
-        title='Error'
-        content={name ? errors[name].message : content}
-        acceptText='Yes'
-        closeText='Cancel'
-        open={modalIsOpen}
-        onClose={() => setModalIsOpen(false)}
-        onAccept={() => setModalIsOpen(false)}
-        onCancel={() => setModalIsOpen(false)}
-      />
-    </>
-
-  )
-
   return (
     <LoginContainer>
       <HeroSide>
@@ -84,16 +85,6 @@ const SignUpFormUI = (props) => {
           <h1>{t('TITLE_LOGIN', 'Welcome!')}</h1>
           <p>{t('SUBTITLE_LOGIN', 'Enter your personal details and start journey with us.')}</p>
         </TitleHeroSide>
-        {/* <div style={{ position: "absolute" }}>
-          <img
-            src={triangle}
-            style={{
-              display: "inline-block",
-              width: "1000px",
-              height: "700px",
-            }}
-          />
-        </div> */}
       </HeroSide>
       <FormSide>
 
@@ -125,7 +116,7 @@ const SignUpFormUI = (props) => {
         {
           (useChekoutFileds && validationFields.loading) && <p>Loading Form...</p>
         }
-        <FormInput onSubmit={handleSubmit(onSubmit)}>
+        <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
           {
             !(useChekoutFileds && validationFields.loading) && (
               <>
@@ -139,25 +130,48 @@ const SignUpFormUI = (props) => {
                         placeholder={field.name}
                         onChange={hanldeChangeInput}
                         ref={register({
-                          required: isRequiredField(field.code) ? 'error' : null
+                          required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
+                          pattern: {
+                            value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
+                            message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+                          }
                         })}
                         required={field.required}
                       />
                     )
                   ))
                 }
-                <Input type='password' name='password' required placeholder='Password' onChange={hanldeChangeInput} />
+                <Input
+                  type='password'
+                  name='password'
+                  placeholder='Password'
+                  onChange={hanldeChangeInput}
+                  required
+                  ref={register({
+                    required: isRequiredField('password') ? t('VALIDATION_ERROR_REQUIRED', 'password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                    minLength: {
+                      value: 5,
+                      message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                    }
+                  })}
+                />
               </>
             )
           }
-          <Button color='primary' type='submit' onClick={handleErrors} disabled={formState.loading}>
-            {formState.loading ? t('LOADING') : t('SIGNUP', 'Sign up')}
+          <Button color='primary' type='submit' disabled={formState.loading}>
+            {formState.loading ? t('LOADING') + '...' : t('SIGNUP', 'Sign up')}
           </Button>
         </FormInput>
       </FormSide>
-      {
-        !formState.loading && formState.result?.error && modalIsOpen && Alert('', formState.result.result[0])
-      }
+      <Alert
+        title={t('SIGNUP', 'Sign up')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </LoginContainer>
   )
 }

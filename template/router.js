@@ -62,7 +62,6 @@ export const Router = ({ ordering }) => {
   const [, t] = useLanguage()
 
   const handleSuccessSignup = (user) => {
-    console.log('user of handlesucces', user)
     sessionDispatch({
       type: 'login',
       user,

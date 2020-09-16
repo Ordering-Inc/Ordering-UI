@@ -8,7 +8,7 @@ export const LoginContainer = styled.div`
   position: relative;
   flex-direction: column;
   height: 100vh;
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     width: 100vw;
     flex-direction: row;
   }
@@ -50,11 +50,11 @@ export const HeroSide = styled.div`
   z-index: 100;
   text-align: center;
   flex: 1;
-  height: 100%;
+ /* height: 100%; */
   max-height: 300px;
   /*font: normal normal bold 106px/148px Tajawal;*/
   /*letter-spacing: 1.06px;*/
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     flex: 1.2;
     max-height: 100%;
     > img {
@@ -91,7 +91,7 @@ export const FormSide = styled.div`
     text-decoration: none;
     color: #d81212;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     width: 40%;
     > img {
       margin-top: 0;
@@ -141,7 +141,7 @@ export const FormInput = styled.form`
     width: 65%;
     padding: 8px
   }
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     > * {
       margin: 10px;
       width: 60%;
