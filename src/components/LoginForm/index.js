@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   LoginForm as LoginFormController,
   useLanguage,
   useConfig
 } from 'ordering-components'
-import { Confirm } from '../Confirm'
+import { Alert } from '../Confirm'
 import {
   LoginContainer,
   FormSide,
@@ -17,7 +17,6 @@ import {
   LoginWith,
   NewOnPlatform
 } from './styles'
-// import triangle from '../../../template/triangle.svg'
 
 import logoHeader from '../../../template/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -46,37 +45,44 @@ const LoginFormUI = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const onSubmit = async (values) => {
-    const error = await formState.result.error
-    if (error) {
-      console.log(formState.result.result[0])
-    }
+  const onSubmit = async () => {
     handleButtonLoginClick()
   }
-  const handleErrors = () => {
-    if (errors) {
-      setModalIsOpen(true)
+
+  useEffect(() => {
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result || [t('ERROR')]
+      })
     }
+  }, [formState])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
+
   return (
     <LoginContainer>
       <HeroSide>
         <TitleHeroSide>
-          <h1>Hello Friend!</h1>
-          <p>Enter your credentials and start journey with us.</p>
+          <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
+          <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
         </TitleHeroSide>
-        {/* <div style={{ position: "absolute" }}>
-          <img
-            src={triangle}
-            style={{
-              display: "inline-block",
-              width: "1000px",
-              height: "700px",
-            }}
-          />
-        </div> */}
       </HeroSide>
       <FormSide>
         <img src={logoHeader} alt='Logo login' />
@@ -107,7 +113,7 @@ const LoginFormUI = (props) => {
                   onClick={() => hanldeChangeTab('email')}
                   active={loginTab === 'email'}
                 >
-                Login by Email
+                  {t('LOGIN_WITH_EMAIL', 'Login with Emai')}
                 </Tab>
               )}
               {useLoginByCellphone && (
@@ -115,7 +121,7 @@ const LoginFormUI = (props) => {
                   onClick={() => hanldeChangeTab('cellphone')}
                   active={loginTab === 'cellphone'}
                 >
-                Login by Cellphone
+                  {t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}
                 </Tab>
               )}
 
@@ -125,7 +131,7 @@ const LoginFormUI = (props) => {
         <>
           {(useLoginByCellphone || useLoginByEmail) &&
             (
-              <FormInput onSubmit={handleSubmit(onSubmit)}>
+              <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
                 {
                   useLoginByEmail && loginTab === 'email' && (
                     <Input
@@ -133,10 +139,10 @@ const LoginFormUI = (props) => {
                       name='email'
                       placeholder={t('EMAIL')}
                       ref={register({
-                        required: 'Email is required',
+                        required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: 'Invalid email address'
+                          message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
                         }
                       })}
                       onChange={(e) => hanldeChangeInput(e)}
@@ -150,7 +156,7 @@ const LoginFormUI = (props) => {
                       name='cellphone'
                       placeholder='Cellphone'
                       ref={register({
-                        required: 'Cellphone is required'
+                        required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
                       })}
                       onChange={(e) => hanldeChangeInput(e)}
                     />
@@ -161,12 +167,16 @@ const LoginFormUI = (props) => {
                   name='password'
                   placeholder={t('PASSWORD')}
                   ref={register({
-                    required: 'Password is required'
+                    required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
+                    minLength: {
+                      value: 5,
+                      message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                    }
                   })}
                   onChange={(e) => hanldeChangeInput(e)}
                 />
-                <Button color='primary' type='submit' onClick={handleErrors}>
-                  {formState.loading ? t('LOADING') : loginTab === 'email' ? t('LOGIN') : 'Get verify Code'}
+                <Button color='primary' type='submit' disabled={formState.loading}>
+                  {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
                 </Button>
               </FormInput>
             )}
@@ -182,40 +192,16 @@ const LoginFormUI = (props) => {
           </>
         )}
       </FormSide>
-      {loginTab === 'email' ? (errors.email || errors.password) && modalIsOpen &&
-        <Confirm
-          title='Error'
-          content={errors?.email?.message || errors?.password?.message}
-          acceptText='Yes'
-          closeText='Cancel'
-          open={modalIsOpen}
-          onClose={() => setModalIsOpen(false)}
-          onAccept={() => setModalIsOpen(false)}
-          onCancel={() => setModalIsOpen(false)}
-        /> : (errors.cellphone || errors.password) && modalIsOpen &&
-          <Confirm
-            title='Error'
-            content={errors?.cellphone?.message || errors?.password?.message}
-            acceptText='Yes'
-            closeText='Cancel'
-            open={modalIsOpen}
-            onClose={() => setModalIsOpen(false)}
-            onAccept={() => setModalIsOpen(false)}
-            onCancel={() => setModalIsOpen(false)}
-          />}
-      {!formState.loading && !errors.email && !errors.cellphone && !errors.password && formState.result?.error && modalIsOpen &&
-        <Confirm
-          title='Error'
-          content={formState.result.result[0]}
-          acceptText='Yes'
-          closeText='Cancel'
-          open={modalIsOpen}
-          onClose={() => setModalIsOpen(false)}
-          onAccept={() => setModalIsOpen(false)}
-          onCancel={() => setModalIsOpen(false)}
-        />}
+      <Alert
+        title={t('LOGIN')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </LoginContainer>
-
   )
 }
 
