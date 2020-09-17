@@ -6,6 +6,16 @@ export const ContainerCard = styled.div`
   height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '300px'};
   border-radius: 10px;
   margin: 30px 20px;
+
+  width: calc(33% - 40px);
+
+  @media (max-width: 992px) {
+    width: calc(50% - 40px);
+  }
+
+  @media (max-width: 680px) {
+    width: calc(100% - 40px);
+  }
 `
 
 export const WrapperBusinessCard = styled.div`
