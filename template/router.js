@@ -15,6 +15,7 @@ import { BusinessesList } from './Pages/BusinessesList'
 import { Login } from './Pages/Login'
 
 import { HomePage } from '../template/Pages/Home'
+import { Header } from './components/Header'
 
 const fontName = 'Montserrat'
 
@@ -22,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: '${fontName}', sans-serif;
     margin: 0;
+    background-color: #F8F8F8;
     color: #333;
   }
   
@@ -72,6 +74,7 @@ export const Router = ({ ordering }) => {
     <BrowserRouter>
       <GlobalStyle />
       <FontTheme fontName={fontName}>
+        <Header />
         <Switch>
           <Route exact path='/home'>
             <HomePage ordering={ordering} />

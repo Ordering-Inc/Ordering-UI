@@ -20,8 +20,6 @@ export const BusinessesListing = (props) => {
   const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
   const [paginationProps, setPaginationProps] = useState({ currentPage: 0, pageSize: 10, totalItems: null, totalPages: null })
   const [businessTypeSelected, setBusinessTypeSelected] = useState(null)
-  // const [businesses, setBusinesses] = useState([])
-  // const [isRedirect, setIsRedirect] = useState(null)
   const [orderState] = useOrder()
   const [ordering] = useApi()
 
@@ -83,23 +81,27 @@ export const BusinessesListing = (props) => {
     getBusinesses(true)
   }, [orderState, businessTypeSelected])
 
-  useEffect(() => {
-    console.log('CHANGE ORDERING?')
-  }, [ordering])
-
   const handleBusinessClick = (business) => {
     console.log(business)
+  }
+
+  const handleChangeBusinessType = (businessType) => {
+    setBusinessesList({
+      ...businessesList,
+      businesses: []
+    })
+    setBusinessTypeSelected(businessType)
   }
 
   return (
     <BusinessContainer>
       <BusinessTypeFilter
         ordering={props.ordering}
-        handleChangeBusinessType={(val) => setBusinessTypeSelected(val)}
+        handleChangeBusinessType={handleChangeBusinessType}
       />
       <BusinessList>
         {
-          !businessesList.loading && businessesList.businesses.length === 0 && (
+          !businessesList.loading && !businessTypeSelected && businessesList.businesses.length === 0 && (
             <NotFoundBusinesses>
               <h1>Not Found elements</h1>
               <div>
@@ -119,7 +121,7 @@ export const BusinessesListing = (props) => {
             />
           ))
         }
-        {/* {businessesList.loading && (
+        {businessesList.loading && (
           [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()].map(i => (
             <BusinessController
               key={i}
@@ -129,7 +131,7 @@ export const BusinessesListing = (props) => {
               isSkeleton
             />
           ))
-        )} */}
+        )}
         {businessesList.error && businessesList.error.length > 0 && (
           businessesList.error.map((e, i) => (
             <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
