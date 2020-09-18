@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { VscWarning } from 'react-icons/vsc'
 import {
@@ -19,18 +19,31 @@ import {
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
+import { ProductForm } from '../ProductForm'
+import { Modal } from '../Modal'
 
 const BusinessProductsListingUI = (props) => {
   const {
     isAllCategory,
     categorySelected,
     productsList,
-    handlerClickCategory,
-    onProductClick
+    handlerClickCategory
   } = props
 
   const { business, categories, loading, error } = props.business
   const [, t] = useLanguage()
+
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [product, setProduct] = useState(props.product)
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+  }
+
+  const onProductClick = (product) => {
+    setProduct(product)
+    setModalIsOpen(true)
+  }
 
   return (
     <ProductsContainer>
@@ -53,6 +66,17 @@ const BusinessProductsListingUI = (props) => {
                 onProductClick={onProductClick}
               />
             </WrapContent>
+
+            {modalIsOpen && (
+              <Modal
+                width='70%'
+                open={modalIsOpen}
+                onClose={() => closeModal()}
+              >
+                <ProductForm
+                  product={product}
+                />
+              </Modal>)}
           </>
         )
       }

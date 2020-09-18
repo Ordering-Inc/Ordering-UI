@@ -13,7 +13,8 @@ import {
 const BusinessProductsListUI = (props) => {
   const {
     isAllCategory,
-    categories
+    categories,
+    onProductClick
   } = props
 
   const { products, loading, error } = props.productsList
@@ -33,6 +34,7 @@ const BusinessProductsListUI = (props) => {
                         key={product.id}
                         isSoldOut={product.inventoried && !product.quantity}
                         product={product}
+                        onProductClick={onProductClick}
                       />
                     ))}
                   </ProductsListing>
@@ -50,6 +52,7 @@ const BusinessProductsListUI = (props) => {
                 key={product.id}
                 isSoldOut={product.inventoried && !product.quantity}
                 product={product}
+                onProductClick={onProductClick}
               />
             ))}
           </ProductsListing>
