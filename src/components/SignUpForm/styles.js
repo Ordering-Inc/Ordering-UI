@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
   background: #f8f8f8;
@@ -8,7 +8,7 @@ export const LoginContainer = styled.div`
   position: relative;
   flex-direction: column;
   height: 100vh;
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     width: 100vw;
     flex-direction: row;
   }
@@ -50,11 +50,11 @@ export const HeroSide = styled.div`
   z-index: 100;
   text-align: center;
   flex: 1;
-  height: 100%;
+ /* height: 100%; */
   max-height: 300px;
   /*font: normal normal bold 106px/148px Tajawal;*/
   /*letter-spacing: 1.06px;*/
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     flex: 1.2;
     max-height: 100%;
     > img {
@@ -80,6 +80,8 @@ export const FormSide = styled.div`
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
+  flex-wrap: wrap;
+  align-content: center;
   flex: 1;
   > img {
     width: 139px;
@@ -89,19 +91,14 @@ export const FormSide = styled.div`
     text-decoration: none;
     color: #d81212;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     width: 40%;
     > img {
       margin-top: 0;
       width: 200px;
     }
   }
-  ${({ withCellphone }) => withCellphone && css`
-  justify-content: center;
-  > img {
-    margin: 0 0 60px 0;
-  }
-`}
+
 `
 
 export const AlreadyRegistered = styled.div`
@@ -129,7 +126,7 @@ export const SignUpWith = styled.div`
   }
 `
 
-export const FormInput = styled.div`
+export const FormInput = styled.form`
   width: 100%;
   > * {
     margin: 10px;
@@ -144,7 +141,7 @@ export const FormInput = styled.div`
     width: 65%;
     padding: 8px
   }
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     > * {
       margin: 10px;
       width: 60%;
