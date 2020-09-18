@@ -44,28 +44,9 @@ export const Header = (props) => {
               )
             }
             {/* <Select options={languages} defaultValue={1} /> */}
-            <LanguageSelector UIComponent={LanguageSelectorUI} ordering={ordering} onChangeLanguage={() => {}} />
           </Menu>
         </RightHeader>
       </InnerHeader>
     </HeaderType>
-  )
-}
-
-const LanguageSelectorUI = (props) => {
-  const {
-    languages,
-    currentLanguage,
-    handleChangeLanguage
-  } = props
-  const _languages = languages.loading ? [] : languages.languages.map(language => {
-    return {
-      value: language.code, content: language.name, showOnSelected: language.code.toUpperCase()
-    }
-  })
-  return (
-    <>
-      <Select options={_languages} defaultValue={currentLanguage} onChange={(languageId) => handleChangeLanguage(languageId)} />
-    </>
   )
 }
