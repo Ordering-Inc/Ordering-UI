@@ -101,7 +101,7 @@ export const Router = ({ ordering }) => {
                   <Login
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
                   />
                 )
@@ -115,7 +115,7 @@ export const Router = ({ ordering }) => {
                   <Login
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
                   />
                 )
