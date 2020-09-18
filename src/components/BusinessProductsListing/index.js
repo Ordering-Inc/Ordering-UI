@@ -1,7 +1,10 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import { VscWarning } from 'react-icons/vsc'
 import {
   // ProductsListing,
+  useApi,
+  useOrder,
   useLanguage
 } from 'ordering-components'
 
@@ -93,9 +96,24 @@ const BusinessProductsListingUI = (props) => {
 }
 
 export const BusinessProductsListing = (props) => {
+  const { store } = useParams()
+  const [ordering] = useApi()
+  const [orderState] = useOrder()
+
+  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'categories']
+  const businessParams = {
+    type: orderState.options?.type || 1,
+    location: `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}` || '40.7539143,-73.9810162'
+    // time: asap,
+  }
+
   const businessProductslistingProps = {
     ...props,
     UIComponent: BusinessProductsListingUI,
+    slug: store,
+    ordering: ordering,
+    businessProps: businessProps,
+    businessParams: businessParams,
     handlerClickCategory: (e) => { console.log(e) }
   }
 
