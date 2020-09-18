@@ -12,7 +12,7 @@ import {
 } from './styles'
 // import triangle from '../../../template/triangle.svg'
 
-import logoHeader from '../../../template/logo-header.svg'
+import logoHeader from '../../../template/assets/images/logo-header.svg'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'

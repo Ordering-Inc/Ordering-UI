@@ -17,6 +17,7 @@ export const Select = (props) => {
     defaultValue,
     onChange
   } = props
+
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(option => option.value === defaultValue)
   const [selectedOption, setSelectedOption] = useState(defaultOption)
@@ -37,6 +38,12 @@ export const Select = (props) => {
     document.addEventListener('mousedown', closeSelect)
     return () => document.removeEventListener('mousedown', closeSelect)
   })
+
+  useEffect(() => {
+    const _defaultOption = options?.find(option => option.value === defaultValue)
+    setSelectedOption(_defaultOption)
+    setValue(defaultValue)
+  }, [defaultValue, options])
 
   const handleChangeOption = (option) => {
     setSelectedOption(option)
@@ -65,17 +72,6 @@ export const Select = (props) => {
           </Options>
         )
       }
-      {/* {
-        open && (
-          <Options>
-            <Option selected><FaMotorcycle /> Delivery</Option>
-            <Option><FaCarSide /> Pickup</Option>
-            <Option><FaStore /> Eat in</Option>
-            <Option><FaParking /> Curbside</Option>
-            <Option><FaRoad /> Drive thru</Option>
-          </Options>
-        )
-      } */}
     </SelectInput>
   )
 }

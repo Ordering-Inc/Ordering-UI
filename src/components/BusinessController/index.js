@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage, useApi } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 
 import deliver from '../../../template/assets/delivery-icon.svg'
@@ -18,7 +18,8 @@ import {
   BusinessContent,
   BusinessLogo,
   BusinessInfo,
-  BusinessInfoItem
+  BusinessInfoItem,
+  BusinessName
 } from './styles'
 
 const BusinessControllerUI = (props) => {
@@ -53,107 +54,122 @@ const BusinessControllerUI = (props) => {
     return businessType[0]
   }
 
+  const optimizeImage = (url, params, fallback) => {
+    if (!url && fallback) return fallback
+    params = params && params.length > 0 ? `,${params}` : ''
+    if (url != null && url.indexOf('res.cloudinary.com') !== -1) {
+      var parts = url.split('upload')
+      url = `${parts[0]}upload/f_auto,q_auto${params}${parts[1]}`
+    }
+    return url
+  }
+
   return (
-    <ContainerCard isSkeleton={isSkeleton}>
-      <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => handleClick(business?.slug)}>
-        <BusinessHero>
-          {business?.header ? (
-            <BusinessHeader bgimage={business?.header} isClosed={business?.open}>
-              <BusinessTags>
-                {business?.featured &&
-                  <span className='crown'>
-                    <img src={crown} alt='crown-icon' />
-                  </span>}
-                <div>
-                  {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || '$0.00'}</span>}
-                  {business?.open && <span>{t('PREORDER')}</span>}
-                </div>
-              </BusinessTags>
-              {business?.open && <h1>{t('CLOSED')}</h1>}
-            </BusinessHeader>
-          ) : (
-            <Skeleton height={100} />
-          )}
-        </BusinessHero>
-        <BusinessContent>
-          <WrapperBusinessLogo>
-            {business?.logo ? (
-              <BusinessLogo bgimage={business?.logo} />
+    <>
+      <ContainerCard isSkeleton={isSkeleton}>
+        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => handleClick(business?.slug)}>
+          <BusinessHero>
+            {business?.header ? (
+              <BusinessHeader bgimage={optimizeImage(business?.header, 'h_400,c_limit')} isClosed={!business?.open}>
+                <BusinessTags>
+                  {business?.featured &&
+                    <span className='crown'>
+                      <img src={crown} alt='crown-icon' />
+                    </span>}
+                  <div>
+                    {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || '$0.00'}</span>}
+                    {!business?.open && <span>{t('PREORDER')}</span>}
+                  </div>
+                </BusinessTags>
+                {!business?.open && <h1>{t('CLOSED')}</h1>}
+              </BusinessHeader>
             ) : (
-              <Skeleton height={70} width={70} />
+              <Skeleton height={100} />
             )}
-          </WrapperBusinessLogo>
-          <BusinessInfo className='info'>
-            <BusinessInfoItem>
-              <div>
-                {business?.name ? (
-                  <p className='bold'>{business?.name}</p>
-                ) : (
-                  <Skeleton width={100} />
-                )}
-                {business?.reviews?.total >= 0 ? (
-                  <p className='reviews'>
-                    <img src={star} alt='star-icon' />
-                    {business?.reviews?.total}
-                  </p>
-                ) : (
-                  <Skeleton width={100} />
-                )}
-              </div>
-              <div>
-                {Object.keys(business).length > 0 ? (
-                  <p>{getBusinessType()}</p>
-                ) : (
-                  <Skeleton width={100} />
-                )}
-              </div>
-              <div>
-                {Object.keys(business).length > 0 ? (
-                  <>
-                    {orderState?.options?.type === 1 ? (
-                      <p className='bullet'>
-                        <img src={clock} alt='clock-icon' />
-                        {dateFormatted(business?.delivery_time) || <Skeleton width={100} />}
-                      </p>
-                    ) : (
-                      <p className='bullet'>
-                        <img src={clock} alt='clock-icon' />
-                        {dateFormatted(business?.pickup_time) || <Skeleton width={100} />}
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  <Skeleton width={70} />
-                )}
-                {business?.distance >= 0 ? (
-                  <p className='bullet'>
-                    <img src={locationMarker} alt='location-icon' />
-                    {formatNumber(business?.distance)} KM
-                  </p>
-                ) : (
-                  <Skeleton width={70} />
-                )}
-                {business?.delivery_price >= 0 ? (
-                  <p>
-                    <img src={deliver} alt='deliver-icon' />
-                    {business && formatAmount(business?.delivery_price)}
-                  </p>
-                ) : (
-                  <Skeleton width={70} />
-                )}
-              </div>
-            </BusinessInfoItem>
-          </BusinessInfo>
-        </BusinessContent>
-      </WrapperBusinessCard>
-    </ContainerCard>
+          </BusinessHero>
+          <BusinessContent>
+            <WrapperBusinessLogo>
+              {business?.logo ? (
+                <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
+              ) : (
+                <Skeleton height={70} width={70} />
+              )}
+            </WrapperBusinessLogo>
+            <BusinessInfo className='info'>
+              <BusinessInfoItem>
+                <div>
+                  {business?.name ? (
+                    <BusinessName>{business?.name}</BusinessName>
+                    // <p className='bold'>{business?.name}</p>
+                  ) : (
+                    <Skeleton width={100} />
+                  )}
+                  {business?.reviews?.total > 0 ? (
+                    <p className='reviews'>
+                      <img src={star} alt='star-icon' />
+                      {business?.reviews?.total}
+                    </p>
+                  ) : (
+                    business?.reviews?.total !== 0 && <Skeleton width={50} />
+                  )}
+                </div>
+                <div>
+                  {Object.keys(business).length > 0 ? (
+                    <p>{getBusinessType()}</p>
+                  ) : (
+                    <Skeleton width={100} />
+                  )}
+                </div>
+                <div>
+                  {Object.keys(business).length > 0 ? (
+                    <>
+                      {orderState?.options?.type === 1 ? (
+                        <p className='bullet'>
+                          <img src={clock} alt='clock-icon' />
+                          {dateFormatted(business?.delivery_time) || <Skeleton width={100} />}
+                        </p>
+                      ) : (
+                        <p className='bullet'>
+                          <img src={clock} alt='clock-icon' />
+                          {dateFormatted(business?.pickup_time) || <Skeleton width={100} />}
+                        </p>
+                      )}
+                    </>
+                  ) : (
+                    <Skeleton width={70} />
+                  )}
+                  {business?.distance >= 0 ? (
+                    <p className='bullet'>
+                      <img src={locationMarker} alt='location-icon' />
+                      {formatNumber(business?.distance)} KM
+                    </p>
+                  ) : (
+                    <Skeleton width={70} />
+                  )}
+                  {business?.delivery_price >= 0 ? (
+                    <p>
+                      <img src={deliver} alt='deliver-icon' />
+                      {business && formatAmount(business?.delivery_price)}
+                    </p>
+                  ) : (
+                    <Skeleton width={70} />
+                  )}
+                </div>
+              </BusinessInfoItem>
+            </BusinessInfo>
+          </BusinessContent>
+        </WrapperBusinessCard>
+      </ContainerCard>
+    </>
   )
 }
 
 export const BusinessController = (props) => {
+  const [ordering] = useApi() // REPLACE WITH API CONTEXT
   const businessControllerProps = {
     ...props,
-    UIComponent: BusinessControllerUI
+    UIComponent: BusinessControllerUI,
+    ordering
   }
 
   return (

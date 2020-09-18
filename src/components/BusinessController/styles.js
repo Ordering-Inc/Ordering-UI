@@ -1,12 +1,21 @@
-import styled, { css } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
 
 export const ContainerCard = styled.div`
-  ${'' /* max-width: 360px; */}
-  ${'' /* width: 360px; */}
   max-height: 300px;
   height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '300px'};
   border-radius: 10px;
   margin: 30px 20px;
+
+  width: calc(33% - 40px);
+
+  @media (max-width: 992px) {
+    width: calc(50% - 40px);
+  }
+
+  @media (max-width: 680px) {
+    width: calc(100% - 40px);
+  }
 `
 
 export const WrapperBusinessCard = styled.div`
@@ -18,18 +27,12 @@ export const BusinessHero = styled.div`
   border-radius: 10px;
 `
 
-export const BusinessHeader = styled.div`
+const BusinessHeaderStyled = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   position: relative;
-
-  background-image: ${({ bgimage, isClosed }) =>
-    isClosed
-      ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bgimage})`
-      : `url(${bgimage})`
-  };
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
@@ -48,6 +51,21 @@ export const BusinessHeader = styled.div`
     min-height: 175px;
   }
 `
+
+export const BusinessHeader = (props) => {
+  const style = {}
+  if (props.bgimage && !props.isClosed) {
+    style.backgroundImage = `url(${props.bgimage})`
+  } else {
+    style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage})`
+  }
+
+  return (
+    <BusinessHeaderStyled {...props} style={style}>
+      {props.children}
+    </BusinessHeaderStyled>
+  )
+}
 
 export const BusinessTags = styled.div`
   display: flex;
@@ -102,16 +120,12 @@ export const WrapperBusinessLogo = styled.div`
   width: 75px;
 `
 
-export const BusinessLogo = styled.div`
+const BusinessLogoStyled = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   position: relative;
-
-  ${({ bgimage }) => bgimage && css`
-    background-image: url(${bgimage});
-  `}
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
@@ -119,6 +133,19 @@ export const BusinessLogo = styled.div`
   min-height: 75px;
   border-radius: 10px;
 `
+
+export const BusinessLogo = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
+  }
+
+  return (
+    <BusinessLogoStyled {...props} style={style}>
+      {props.children}
+    </BusinessLogoStyled>
+  )
+}
 
 export const BusinessInfo = styled.div`
   display: flex;
@@ -138,7 +165,6 @@ export const BusinessInfoItem = styled.div`
       display: flex;
       align-items: center;
       margin: 0px;
-      text-transform: capitalize;
       img {
         margin-right: 4px;
       }
@@ -150,4 +176,11 @@ export const BusinessInfoItem = styled.div`
       font-size: 14px;
     }
   }
+`
+
+export const BusinessName = styled.p`
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `

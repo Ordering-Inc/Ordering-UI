@@ -37,7 +37,7 @@ export const Options = styled.div`
   margin-top: -18px;
   margin-left: -1px;
   padding-top: 18px;
-  z-index: 0;
+  z-index: 10;
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;
@@ -58,7 +58,7 @@ export const Selected = styled.div`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  z-index: 1;
+  z-index: 11;
 
   svg {
     vertical-align: text-top;

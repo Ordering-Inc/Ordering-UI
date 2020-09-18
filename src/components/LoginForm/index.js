@@ -18,7 +18,7 @@ import {
   NewOnPlatform
 } from './styles'
 
-import logoHeader from '../../../template/logo-header.svg'
+import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'

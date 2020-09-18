@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessTypeFilter as BusinessTypeFilterController } from 'ordering-components'
+import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 'ordering-components'
 
 import { Tabs, Tab } from '../../styles/Tabs'
 
@@ -11,12 +11,13 @@ const BusinessTypeFilterUI = (props) => {
     currentTypeSelected,
     handleChangeBusinessType
   } = props
+  const [, t] = useLanguage()
   return (
     <TypeContainer>
       <Tabs variant='primary'>
-        {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
-          <Tab active={type.value === currentTypeSelected} key={i} onClick={() => handleChangeBusinessType(type.value)}>
-            {type.key}
+        {businessTypes && businessTypes.length > 0 && businessTypes.map((type) => (
+          <Tab active={type.value === currentTypeSelected} key={type.value} onClick={() => handleChangeBusinessType(type.value)}>
+            {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
           </Tab>
         ))}
       </Tabs>
@@ -35,8 +36,8 @@ export const BusinessTypeFilter = (props) => {
       { key: 'Groceries', value: 'groceries' },
       { key: 'Laundry', value: 'laundry' }
     ],
-    onChangeBusinessType: props.handleChangeBusinessType,
-    defaultBusinessType: null
+    defaultBusinessType: props.defaultBusinessType || null,
+    onChangeBusinessType: props.handleChangeBusinessType
   }
 
   return (
