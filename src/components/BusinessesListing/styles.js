@@ -9,9 +9,6 @@ export const BusinessContainer = styled.div`
 export const BusinessList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  > * {
-    flex: 1 1 360px;
-  }
 `
 
 export const ErrorMessage = styled.span`

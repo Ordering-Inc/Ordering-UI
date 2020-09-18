@@ -16,6 +16,7 @@ import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
 
 import { HomePage } from '../template/Pages/Home'
+import { Header } from './components/Header'
 
 const fontName = 'Montserrat'
 
@@ -23,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: '${fontName}', sans-serif;
     margin: 0;
+    background-color: #F8F8F8;
     color: #333;
   }
   
@@ -73,6 +75,7 @@ export const Router = ({ ordering }) => {
     <BrowserRouter>
       <GlobalStyle />
       <FontTheme fontName={fontName}>
+        <Header />
         <Switch>
           <Route exact path='/home'>
             <HomePage ordering={ordering} />
@@ -102,7 +105,7 @@ export const Router = ({ ordering }) => {
                   <Login
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
                   />
                 )
@@ -116,7 +119,7 @@ export const Router = ({ ordering }) => {
                   <Login
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
                   />
                 )

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Select } from '../../styles/Selects'
+import { Select } from '../../../src/styles/Selects'
 
 const theme = {
   colors: {

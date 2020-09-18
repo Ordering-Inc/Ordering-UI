@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-export const LoginContainer = styled.div`
+export const ForgotPasswordContainer = styled.div`
   background: #f8f8f8;
   display: flex;
   flex: 1;
@@ -8,7 +8,7 @@ export const LoginContainer = styled.div`
   position: relative;
   flex-direction: column;
   height: 100vh;
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     width: 100vw;
     flex-direction: row;
   }
@@ -54,7 +54,7 @@ export const HeroSide = styled.div`
   max-height: 300px;
   /*font: normal normal bold 106px/148px Tajawal;*/
   /*letter-spacing: 1.06px;*/
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     flex: 1.2;
     max-height: 100%;
     > img {
@@ -89,47 +89,16 @@ export const FormSide = styled.div`
     text-decoration: none;
     color: #d81212;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     width: 40%;
     > img {
       margin-top: 0;
       width: 200px;
     }
   }
-  ${({ withCellphone }) => withCellphone && css`
-  justify-content: center;
-  > img {
-    margin: 0 0 60px 0;
-  }
-`}
 `
 
-export const AlreadyRegistered = styled.div`
-`
-
-export const SocialIcons = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  > * {
-    color: #d81212;
-    width: 42px;
-    height: 42px;
-    margin: 25px;
-    border: 3px solid #d81212;
-    border-radius: 100%;
-    cursor: pointer;
-  }
-`
-
-export const SignUpWith = styled.div`
-  > div {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-`
-
-export const FormInput = styled.div`
+export const FormInput = styled.form`
   width: 100%;
   > * {
     margin: 10px;
@@ -144,7 +113,7 @@ export const FormInput = styled.div`
     width: 65%;
     padding: 8px
   }
-  @media (min-width: 480px) {
+  @media (min-width: 980px) {
     > * {
       margin: 10px;
       width: 60%;
@@ -154,8 +123,4 @@ export const FormInput = styled.div`
       width: 65%;
     }
   }
-`
-
-export const ForgotPassword = styled.div`
-  margin: 10px 0;
 `

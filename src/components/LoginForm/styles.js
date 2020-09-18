@@ -5,11 +5,11 @@ export const LoginContainer = styled.div`
   display: flex;
   flex: 1;
   flex-wrap: 1;
-  position: relative;
+  /* position: relative; */
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   @media (min-width: 980px) {
-    width: 100vw;
+    /* width: 100vw; */
     flex-direction: row;
   }
 `
@@ -80,10 +80,11 @@ export const FormSide = styled.div`
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
+  padding: 30px 20px;
   flex: 1;
   > img {
     width: 139px;
-    margin-top: 2vh;
+    margin-bottom: 15px;
   }
   a {
     text-decoration: none;
