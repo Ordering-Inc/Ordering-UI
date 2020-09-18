@@ -29,7 +29,7 @@ export const BusinessTypeFilter = (props) => {
   const businessTypeFilterProps = {
     ...props,
     UIComponent: BusinessTypeFilterUI,
-    businessTypes: [
+    businessTypes: props.businessTypes || [
       { key: 'All', value: null },
       { key: 'Food', value: 'food' },
       { key: 'Alcohol', value: 'alcohol' },
