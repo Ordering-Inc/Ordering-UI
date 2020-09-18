@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
 
 export const CardContainer = styled.div`
   display: flex;
@@ -76,16 +77,23 @@ export const WrapLogo = styled.div`
   width: 75px;
 `
 
-export const CardLogo = styled.div`
+const CardLogoStyled = styled.div`
   box-sizing: border-box;
   position: relative;
-
-  ${({ image }) => image && css`
-    background-image: url(${image});
-  `}
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
   min-height: 75px;
   border-radius: 10px;
 `
+export const CardLogo = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
+  }
+  return (
+    <CardLogoStyled {...props} style={style}>
+      {props.children}
+    </CardLogoStyled>
+  )
+}

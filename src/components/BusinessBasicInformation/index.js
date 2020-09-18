@@ -8,6 +8,8 @@ import { CgDetailsMore } from 'react-icons/cg'
 
 import { useOrder } from 'ordering-components'
 
+import { optimizeImage, formatPrice } from '../../utils'
+
 import {
   BusinessContainer,
   BusinessContent,
@@ -28,8 +30,6 @@ export const BusinessBasicInformation = (props) => {
   const [orderState] = useOrder()
 
   const formatNumber = (num) => Math.round(num * 1e2) / 1e2
-
-  const formatAmount = (amount = 0) => `$ ${amount.toFixed(2)}`
 
   const dateFormatted = (date) => {
     if (!date) return
@@ -54,7 +54,7 @@ export const BusinessBasicInformation = (props) => {
       <BusinessContent>
         <WrapperBusinessLogo>
           {!loading ? (
-            <BusinessLogo bgimage={business?.logo} />
+            <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
           ) : (
             <Skeleton height={70} width={70} />
           )}
@@ -114,7 +114,7 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <p>
                   <GrDeliver />
-                  {business && formatAmount(business?.delivery_price || 0)}
+                  {business && formatPrice(business?.delivery_price || 0)}
                 </p>
               ) : (
                 <Skeleton width={70} />

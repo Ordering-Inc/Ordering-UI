@@ -1,6 +1,7 @@
-import styled, { css } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
 
-export const BusinessContainer = styled.div`
+const BusinessContainerStyled = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
@@ -8,11 +9,6 @@ export const BusinessContainer = styled.div`
   position: relative;
   max-height: 260px;
   height: 260px;
-  background-color: ${({ isSkeleton }) => isSkeleton && '#F8F8F8'};
-
-  background-image: ${({ bgimage }) =>
-    `url(${bgimage})`
-  };
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
@@ -21,6 +17,20 @@ export const BusinessContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
 `
+export const BusinessContainer = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
+  }
+  if (props.isSkeleton) {
+    style.backgroundColor = '#F8F8F8'
+  }
+  return (
+    <BusinessContainerStyled {...props} style={style}>
+      {props.children}
+    </BusinessContainerStyled>
+  )
+}
 
 export const BusinessContent = styled.div`
   display: flex;
@@ -39,16 +49,12 @@ export const WrapperBusinessLogo = styled.div`
   width: 75px;
 `
 
-export const BusinessLogo = styled.div`
+const BusinessLogoStyled = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   position: relative;
-
-  ${({ bgimage }) => bgimage && css`
-    background-image: url(${bgimage});
-  `}
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
@@ -56,6 +62,17 @@ export const BusinessLogo = styled.div`
   min-height: 75px;
   border-radius: 10px;
 `
+export const BusinessLogo = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
+  }
+  return (
+    <BusinessLogoStyled {...props} style={style}>
+      {props.children}
+    </BusinessLogoStyled>
+  )
+}
 
 export const BusinessInfo = styled.div`
   display: flex;

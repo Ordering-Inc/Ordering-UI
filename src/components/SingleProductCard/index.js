@@ -1,5 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { optimizeImage, formatPrice } from '../../utils'
 
 import {
   CardContainer,
@@ -14,8 +15,6 @@ export const SingleProductCard = (props) => {
     isSkeleton
   } = props
 
-  const formatPrice = (price) => `$ ${price.toFixed(2)}`
-
   return (
     <CardContainer>
       <CardInfo>
@@ -29,7 +28,7 @@ export const SingleProductCard = (props) => {
       </CardInfo>
       {product?.images ? (
         <WrapLogo>
-          <CardLogo image={product?.images} />
+          <CardLogo bgimage={optimizeImage(product?.images, 'h_200,c_limit')} />
         </WrapLogo>
       ) : (
         <Skeleton height={75} width={75} />
