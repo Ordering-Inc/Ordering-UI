@@ -42,7 +42,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.4",
     "lodash": "^4.17.19",
-    "ordering-components": "github:sergioaok/ordering-components#beta-0.0.1-2",
+    "ordering-components": "github:sergioaok/ordering-components#development",
     "polished": "^3.6.6",
     "prop-types": "^15.7.2",
     "react-hook-form": "^6.8.1",
