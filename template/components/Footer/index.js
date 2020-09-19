@@ -22,7 +22,7 @@ export const Footer = () => {
           <a href={t('FOOTER_QL2_3_HREF')}>{t('FOOTER_QL2_3')}</a>
         </Content>
         <SocialMedia>
-          <h5>{t('FOOTER_QL2_TITLE')}</h5>
+          <h5>{t('FOOTER_QL3_TITLE')}</h5>
           <SocialIcon><AiFillFacebook href={t('FOOTER_QL3_1_HREF')} /></SocialIcon>
           <SocialIcon><ImInstagram href={t('FOOTER_QL3_2_HREF')} /></SocialIcon>
           <SocialIcon><AiFillTwitterSquare href={t('FOOTER_QL3_3_HREF')} /></SocialIcon>
