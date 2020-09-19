@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form'
 import {
   LoginForm as LoginFormController,
   useLanguage,
-  useConfig
+  useConfig,
+  useSession
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import {
@@ -46,9 +47,18 @@ const LoginFormUI = (props) => {
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [, sessionDispatch] = useSession()
 
   const onSubmit = async () => {
     handleButtonLoginClick()
+  }
+
+  const handleSuccessFacebook = (user) => {
+    sessionDispatch({
+      type: 'login',
+      user,
+      token: user.session.access_token
+    })
   }
 
   useEffect(() => {
@@ -101,8 +111,9 @@ const LoginFormUI = (props) => {
           )}
         </NewOnPlatform>
         <SocialIcons>
-          {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} />} <FaApple />
-          <AiOutlineGoogle />
+          {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
+          {/* <FaApple />
+          <AiOutlineGoogle /> */}
         </SocialIcons>
         {useLoginByEmail && useLoginByCellphone && (
           <LoginWith>

@@ -84,7 +84,7 @@ export const HomeHero = (props) => {
         <Title>All We need is Food</Title>
         <Slogan>Let's start to order food now</Slogan>
         <WrapInput onClick={() => onBusinessClick({ from: 'input' })} withIcon={locationIcon}>
-          <Input type='text' disabled placeholder={user?.address || 'Address or Zip Code'} />
+          <Input type='text' disabled placeholder={orderState?.options?.address?.address || 'Address or Zip Code'} />
         </WrapInput>
         <Button
           color='primary'
