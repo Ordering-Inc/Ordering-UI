@@ -20,6 +20,9 @@ export const Content = styled.div`
   width: 33%;
   margin: 15px 0;
   > * {
+    display: block;
+    text-decoration: none;
+    color: initial;
     font-size: 12px;
     margin: 10px 0;
   }
@@ -27,6 +30,7 @@ export const Content = styled.div`
 @media (min-width: 410px) {
     width: 30%;
     > * {
+    
     font-size: 14px;
     margin: 10px 0;
   }
@@ -45,15 +49,20 @@ export const SocialMedia = styled.div`
     width: 20%;
     > * {
     font-size: 14px;
-    margin: 10px 0;
+    margin: 10px 3px;
   }
   }
 /* background-color: #333; */
 `
 export const SocialIcon = styled.span`
   > * {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
+  }
+  @media (min-width: 640px) {
+    > * {
+    width: 30px;
+    height: 30px;
   }
 `
 
