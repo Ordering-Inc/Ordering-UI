@@ -16,6 +16,7 @@ import { Login } from './Pages/Login'
 
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
+import { Footer } from './components/Footer'
 
 const fontName = 'Montserrat'
 
@@ -159,7 +160,7 @@ export const Router = ({ ordering }) => {
           </Route>
         </Switch>
       </FontTheme>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   )
 }
