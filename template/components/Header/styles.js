@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Select } from '../../Selects'
+import { Select } from '../../../src/styles/Selects'
 
 const theme = {
   colors: {
@@ -54,6 +54,9 @@ export const Menu = styled.div`
 
   > :last-child {
     margin-right: 10px;
+  }
+  @media (max-width: 410px) {
+    display: none
   }
 `
 

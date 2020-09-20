@@ -4,14 +4,11 @@ export const UserProfileContainer = styled.div`
   background-color: #F8F8F8;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   text-align: center;
-  flex-direction: column;
-  @media (min-width: 480px) {
-    height: 100vh;
-    flex-direction: row;
-    justify-content: space-evenly;
-  }
+  flex: 1;
+  width: 100%;
+  height: 100vh;
 `
 
 export const UserImage = styled.div`
@@ -19,7 +16,7 @@ export const UserImage = styled.div`
   height: 30%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   @media (min-width: 480px) {
   align-items: flex-end;
@@ -65,18 +62,97 @@ export const Camera = styled.div`
 export const SideForm = styled.div`
   width: 100%;
   height: 70%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  flex-direction: column;
   > *{
-    margin: 15px 0;
+    margin: 30px 0;
   }
   @media (min-width: 480px) {
   width: 60%;
   height: 100%;
   };
+`
+
+export const UserData = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  > * {
+    margin: 10px;
+    width: 75%;
+  }
+  > button {
+    width: 80px;
+  }
+`
+
+export const SavedPlaces = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+`
+
+export const Place = styled.div`
+`
+export const AddressListUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin-top: 40px;
+`
+
+export const AddressItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0px;
+  border-top: 1px solid #00000029;
+
+  label {
+    font-size: 15px;
+    margin-left: 5px;
+    font-weight: bold;
+  }
+
+  .wrapAddress {
+    display: flex;
+    align-items: center;
+
+    span {
+      cursor: pointer;
+      margin-right: 10px;
+      &.radio {
+        color: #D81212;
+        font-size: 24px;
+      }
+    }
+  }
+`
+export const AddressItemActions = styled.div`
+  display: flex;
+  align-items: center;
+  a {
+    cursor: pointer;
+    margin: 0px 5px;
+    font-size: 30px;
+
+    &:nth-child(1) {
+      svg {
+        color: #F2BB40;
+      }
+    }
+
+    &:nth-child(2) {
+      svg {
+        color: #D81212;
+      }
+    }
+  }
+  a.disabled {
+    pointer-events: none;
+  }
 `
 
 export const FormInput = styled.div`
@@ -88,14 +164,15 @@ export const FormInput = styled.div`
   > input{
     padding: 15px 20px
   }
+
   @media (min-width: 480px) {
     > * {
     width: 35%;
   }
   > input{
-    padding: 10px 20px
+    padding: 3px 10px
   }
-  };
+};
   `
 export const ButtonLogin = styled.div`
   width: 100%;

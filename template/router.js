@@ -8,11 +8,15 @@ import {
   Link
 } from 'react-router-dom'
 import { useSession, useLanguage } from 'ordering-components'
-// import { Header } from '../src/components/Header'
 import { createGlobalStyle } from 'styled-components'
-import { LoginForm } from '../src/components/LoginForm'
-import { UserProfileForm } from '../src/components/UserProfileForm'
-import { Ordering } from 'ordering-api-sdk'
+import { ForgotPassword } from './pages/ForgotPassword'
+import { SignUp } from './pages/SignUp'
+import { BusinessesList } from './Pages/BusinessesList'
+import { Login } from './Pages/Login'
+import { Profile } from './Pages/Profile'
+
+import { HomePage } from '../template/Pages/Home'
+import { Header } from './components/Header'
 
 const fontName = 'Montserrat'
 
@@ -20,7 +24,18 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: '${fontName}', sans-serif;
     margin: 0;
+    background-color: #F8F8F8;
     color: #333;
+  }
+  
+  .popup-backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
   }
 `
 
@@ -38,38 +53,46 @@ const FontTheme = ({ fontName, children }) => {
     fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
 
     window.document.body.appendChild(fontTheme)
-    return () => {
-      fontTheme.remove()
-    }
-  })
+    // return () => {
+    //   fontTheme.remove()
+    // }
+  }, [])
   return children
 }
 
-const ordering = new Ordering()
-
-export const Router = () => {
-  const [{ auth }] = useSession()
+export const Router = ({ ordering }) => {
+  const [{ auth,user }, sessionDispatch] = useSession()
   const [, t] = useLanguage()
+  console.log(user)
+  const handleSuccessSignup = (user) => {
+    sessionDispatch({
+      type: 'login',
+      user,
+      token: user.session.access_token
+    })
+  }
   return (
     <BrowserRouter>
       <GlobalStyle />
       <FontTheme fontName={fontName}>
+        <Header />
         <Switch>
           <Route exact path='/home'>
-            Home
+            <HomePage ordering={ordering} />
           </Route>
           <Route exact path='/'>
-            Home
+            <HomePage ordering={ordering} />
           </Route>
-          <Route exact path='/signin'>
+          <Route exact path='/signup'>
             {
               !auth
                 ? (
-                  <LoginForm
+                  <SignUp
                     ordering={ordering}
-                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
                     useLoginByCellphone
+                    useChekoutFileds
+                    handleSuccessSignup={handleSuccessSignup}
                   />
                 )
                 : <Redirect to='/' />
@@ -79,10 +102,10 @@ export const Router = () => {
             {
               !auth
                 ? (
-                  <LoginForm
+                  <Login
                     ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/signup'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
                     useDefualtSessionManager
                   />
@@ -90,23 +113,41 @@ export const Router = () => {
                 : <Redirect to='/' />
             }
           </Route>
-          <Route exact path='/signup'>
-            Signup
+          <Route exact path='/signin'>
+            {
+              !auth
+                ? (
+                  <Login
+                    ordering={ordering}
+                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                    useLoginByCellphone
+                  />
+                )
+                : <Redirect to='/' />
+            }
           </Route>
           <Route exact path='/password/forgot'>
-            Password forgot
+            {
+              !auth ? (
+                <ForgotPassword ordering={ordering} />
+              )
+                : <Redirect to='/' />
+            }
           </Route>
           <Route exact path='/password/reset'>
             Password reset
           </Route>
           <Route exact path='/profile'>
-          {(<UserProfileForm ordering={ordering} userId={1} accessToken='TOKEN' />)}
+            {auth
+              ? (<Profile ordering={ordering} userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+              : <Redirect to='/login' />}
           </Route>
           <Route exact path='/p/:page'>
             <Page />
-          </Route>
+          </Route>s
           <Route exact path='/search'>
-            Search
+            <BusinessesList ordering={ordering} />
           </Route>
           <Route exact path='/store/:store'>
             <Store />
