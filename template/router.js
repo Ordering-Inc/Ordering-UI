@@ -13,6 +13,7 @@ import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
 import { Login } from './Pages/Login'
+import { Profile } from './Pages/Profile'
 
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
@@ -60,7 +61,7 @@ const FontTheme = ({ fontName, children }) => {
 }
 
 export const Router = () => {
-  const [{ auth }, sessionDispatch] = useSession()
+  const [{ auth,user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
@@ -144,7 +145,9 @@ export const Router = () => {
             Password reset
           </Route>
           <Route exact path='/profile'>
-            Profile
+            {auth
+              ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+              : <Redirect to='/login' />}
           </Route>
           <Route exact path='/p/:page'>
             <Page />
