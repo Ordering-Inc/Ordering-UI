@@ -61,9 +61,8 @@ const FontTheme = ({ fontName, children }) => {
 }
 
 export const Router = ({ ordering }) => {
-  const [{ auth,user }, sessionDispatch] = useSession()
+  const [{ auth, user }, sessionDispatch] = useSession()
   const [, t] = useLanguage()
-  console.log(user)
   const handleSuccessSignup = (user) => {
     sessionDispatch({
       type: 'login',

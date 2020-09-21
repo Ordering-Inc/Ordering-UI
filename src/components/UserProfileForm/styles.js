@@ -26,8 +26,8 @@ export const UserImage = styled.div`
 `
 
 export const Image = styled.div`
-  width: 206px;
-  height: 206px;
+  width: 170px;
+  height: 170px;
   border: 2px solid #D81212;
   border-radius: 100%;
   overflow: hidden;
@@ -51,7 +51,7 @@ export const Image = styled.div`
 `
 
 export const Camera = styled.div`
-  width:248px; /**206px + 42px */
+  width:212px; /**170px + 42px */
   > * {
     margin-top: 10px;
     width: 42px;
@@ -65,9 +65,10 @@ export const SideForm = styled.div`
   text-align: center;
   > *{
     margin: 30px 0;
+    margin-left: 50px;
   }
   @media (min-width: 480px) {
-  width: 60%;
+  width: 70%;
   height: 100%;
   };
 `
@@ -75,90 +76,35 @@ export const SideForm = styled.div`
 export const UserData = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   text-align: left;
   width: 100%;
+  height: 200px;
   > * {
-    margin: 10px;
+    margin: 5px 0;
     width: 75%;
   }
   > button {
     width: 80px;
+    background: #F8F8F8;
   }
 `
 
 export const SavedPlaces = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   text-align: left;
+  width: 100%;
 `
 
 export const Place = styled.div`
 `
-export const AddressListUl = styled.ul`
-  display: flex;
-  flex-direction: column;
-  padding: 0px;
-  margin-top: 40px;
-`
 
-export const AddressItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0px;
-  border-top: 1px solid #00000029;
-
-  label {
-    font-size: 15px;
-    margin-left: 5px;
-    font-weight: bold;
-  }
-
-  .wrapAddress {
-    display: flex;
-    align-items: center;
-
-    span {
-      cursor: pointer;
-      margin-right: 10px;
-      &.radio {
-        color: #D81212;
-        font-size: 24px;
-      }
-    }
-  }
-`
-export const AddressItemActions = styled.div`
-  display: flex;
-  align-items: center;
-  a {
-    cursor: pointer;
-    margin: 0px 5px;
-    font-size: 30px;
-
-    &:nth-child(1) {
-      svg {
-        color: #F2BB40;
-      }
-    }
-
-    &:nth-child(2) {
-      svg {
-        color: #D81212;
-      }
-    }
-  }
-  a.disabled {
-    pointer-events: none;
-  }
-`
-
-export const FormInput = styled.div`
+export const FormInput = styled.form`
   width: 100%;
+  height: 200px;
+  text-align: left;
   > * {
-    margin: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
     width: 75%;
   }
   > input{
@@ -167,23 +113,17 @@ export const FormInput = styled.div`
 
   @media (min-width: 480px) {
     > * {
-    width: 35%;
+    width: 40%;
   }
-  > input{
-    padding: 3px 10px
+  > input {
+    padding: 8px 10px
+  }
+  > div { 
+    padding: 0px 10px
+  }
+  > button {
+    box-sizing: initial;
+    width: 39%
   }
 };
   `
-export const ButtonLogin = styled.div`
-  width: 100%;
-  > button{
-    width: 85%;
-    padding: 5px 0;
-  }
-  @media (min-width: 480px){
-    
-  > button{
-    width: 43%;
-  }
- }
-`
