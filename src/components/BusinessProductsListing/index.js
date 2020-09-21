@@ -36,13 +36,15 @@ const BusinessProductsListingUI = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [product, setProduct] = useState(props.product)
 
-  const closeModal = () => {
-    setModalIsOpen(false)
-  }
-
   const onProductClick = (product) => {
     setProduct(product)
     setModalIsOpen(true)
+  }
+
+  const handlerProductAction = (product) => {
+    if (Object.keys(product).length) {
+      setModalIsOpen(false)
+    }
   }
 
   return (
@@ -67,18 +69,18 @@ const BusinessProductsListingUI = (props) => {
               />
             </WrapContent>
 
-            {modalIsOpen && (
-              <Modal
-                width='70%'
-                open={modalIsOpen}
-                closeOnBackdrop={false}
-                onClose={() => closeModal()}
-              >
-                <ProductForm
-                  product={product}
-                  ordering={props.ordering}
-                />
-              </Modal>)}
+            <Modal
+              width='70%'
+              open={modalIsOpen}
+              closeOnBackdrop={false}
+              onClose={() => setModalIsOpen(false)}
+            >
+              <ProductForm
+                product={product}
+                ordering={props.ordering}
+                onSave={handlerProductAction}
+              />
+            </Modal>
           </>
         )
       }

@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import {
   ProductForm as ProductOptions,
   useSession,
-  useLanguage
+  useLanguage,
+  useOrder
 } from 'ordering-components'
 
 import { formatPrice } from '../../utils'
@@ -45,6 +46,7 @@ const ProductOptionsUI = (props) => {
   const [{ auth }] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [orderState] = useOrder()
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -148,7 +150,13 @@ const ProductOptionsUI = (props) => {
               onClick={handleSave}
               disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
             >
-              <span>{editMode ? 'Save' : 'Add to Cart'}</span>
+              {orderState.loading ? (
+                <span>Loading...</span>
+              ) : (
+                <span>
+                  {editMode ? 'Save' : 'Add to Cart'}
+                </span>
+              )}
               <span>{productCart.total && formatPrice(productCart.total)}</span>
             </Button>
           ) : (
