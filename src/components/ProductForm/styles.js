@@ -5,12 +5,22 @@ export const ProductContainer = styled.div`
   display: flex;
   height: 500px;
   padding: 10px 0px;
+  @media (max-width: 1200px) {
+    flex-wrap: wrap;
+    overflow: auto;
+  }
 `
 
 export const WrapperImage = styled.div`
-  width: 50%;
+  width: calc(50% - 10px);
   border-radius: 10px;
   margin-right: 10px;
+
+  @media (max-width: 1200px) {
+    height: 300px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
 `
 
 const ProductImageStyled = styled.div`
@@ -39,7 +49,7 @@ export const ProductImage = (props) => {
 export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: calc(50% - 20px);
   padding: 0px 10px;
 
   h1 {
@@ -63,6 +73,13 @@ export const ProductInfo = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+  }
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    h1, p {
+      text-align: center;
+    }
   }
 `
 
