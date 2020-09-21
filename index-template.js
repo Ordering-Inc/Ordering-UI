@@ -6,7 +6,7 @@ import { OrderingProvider } from 'ordering-components'
 const configFile = {
   project: 'luisv4',
   api: {
-    url: 'https://apiv4-features.ordering.co',
+    url: 'http://apiv4-features.ordering.co',
     language: 'en',
     version: 'v400'
   },
