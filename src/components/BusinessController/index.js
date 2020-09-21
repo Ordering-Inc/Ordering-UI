@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage, useApi } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 
 import deliver from '../../../template/assets/delivery-icon.svg'
@@ -165,11 +165,9 @@ const BusinessControllerUI = (props) => {
 }
 
 export const BusinessController = (props) => {
-  const [ordering] = useApi() // REPLACE WITH API CONTEXT
   const businessControllerProps = {
     ...props,
-    UIComponent: BusinessControllerUI,
-    ordering
+    UIComponent: BusinessControllerUI
   }
 
   return (

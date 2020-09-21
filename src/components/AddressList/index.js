@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { TiPencil } from 'react-icons/ti'
 import { VscTrash } from 'react-icons/vsc'
@@ -6,7 +6,7 @@ import { VscTrash } from 'react-icons/vsc'
 import { IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/io'
 
 import {
-  AddressList as AddressListController
+  AddressList as AddressListController, useLanguage
 } from 'ordering-components'
 
 import {
@@ -17,21 +17,75 @@ import {
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
+import { Modal } from '../Modal'
+import { AddressForm } from '../AddressForm'
+import { Confirm } from '../Confirm'
 
 const AddressListUI = (props) => {
   const {
     actionStatus,
     addressList,
     handleDelete,
-    onAddAddress,
-    handleClickAddress,
+    setAddressList,
     handleSetDefault
   } = props
 
+  const [, t] = useLanguage()
+
+  const [curAddress, setCurAddress] = useState(false)
+  const [addressOpen, setAddessOpen] = useState(false)
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
+  const openAddress = (address) => {
+    setCurAddress(address)
+    setAddessOpen(true)
+  }
+
+  const handleSaveAddress = (address) => {
+    let found = false
+    const addresses = addressList.addresses.map(_address => {
+      if (_address.id === address.id) {
+        Object.assign(_address, address)
+        found = true
+      } else if (address.default) {
+        _address.default = false
+      }
+      return _address
+    })
+    if (!found) {
+      addresses.push(address)
+    }
+    setAddressList({
+      ...addressList,
+      addresses
+    })
+    setAddessOpen(false)
+  }
+
+  const handleDeleteClick = (address) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_ADDRESS', 'Are you sure that you want to delete the address?'),
+      handleOnAccept: () => {
+        handleDelete(address)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
+
+  /**
+   * Close modals and alerts
+   */
+  useEffect(() => {
+    return () => {
+      setConfirm({ ...confirm, open: false })
+      setAddessOpen(false)
+    }
+  }, [])
+
   return (
     <AddressListContainer>
-      <Button className='add' color='primary' onClick={() => onAddAddress()}>Add Address</Button>
-
+      <Button className='add' color='primary' onClick={() => openAddress({})}>{t('ADD_ADDRESS', 'Add Address')}</Button>
       {!addressList.loading && !addressList.error ? (
         <>
           {addressList.addresses && addressList.addresses.length > 0 ? (
@@ -48,10 +102,10 @@ const AddressListUI = (props) => {
                     </div>
                   </div>
                   <AddressItemActions>
-                    <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => handleClickAddress(address)}>
+                    <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
                       <TiPencil />
                     </a>
-                    <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => handleDelete(address)}>
+                    <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
                       <VscTrash />
                     </a>
                   </AddressItemActions>
@@ -59,20 +113,44 @@ const AddressListUI = (props) => {
               ))}
             </AddressListUl>
           ) : (
-            <p>Not found addresses</p>
+            <p>{t('NOT_FOUND_ADDRESS.', 'Not found addresses.')}</p>
           )}
         </>
       ) : (
         <>
           {addressList.error && addressList.error.length > 0 ? (
             addressList.error.map((e, i) => (
-              <p key={i}>ERROR: [{e}]</p>
+              <p key={i}>{t('ERROR')}: [{e}]</p>
             ))
           ) : (
-            <p>Loading...</p>
+            <p>{t('LOADING', 'Loading...')}</p>
           )}
         </>
       )}
+      <Modal
+        title={t('ADDRESS')}
+        open={addressOpen}
+        closeOnBackdrop={false}
+        onClose={() => setAddessOpen(false)}
+      >
+        <AddressForm
+          useValidationFileds
+          address={curAddress}
+          onCancel={() => setAddessOpen(false)}
+          onSaveAddress={handleSaveAddress}
+        />
+      </Modal>
+
+      <Confirm
+        title={t('SEARCH')}
+        content={confirm.content}
+        acceptText={t('ACCEPT')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </AddressListContainer>
   )
 }

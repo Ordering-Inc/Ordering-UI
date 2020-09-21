@@ -127,7 +127,6 @@ export const BusinessesListing = (props) => {
               key={i}
               className='card'
               business={{}}
-              ordering={props.ordering} // REPLACE WITH API CONTEXT
               isSkeleton
             />
           ))
