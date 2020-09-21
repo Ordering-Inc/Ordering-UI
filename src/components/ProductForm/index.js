@@ -1,12 +1,18 @@
-import React from 'react'
-import { ProductForm as ProductOptions, useSession } from 'ordering-components'
+import React, { useState } from 'react'
+import {
+  ProductForm as ProductOptions,
+  useSession,
+  useLanguage
+} from 'ordering-components'
 
 import { formatPrice } from '../../utils'
 
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
+import { LoginForm } from '../LoginForm'
 
+import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 
 import {
@@ -15,6 +21,7 @@ import {
   ProductImage,
   ProductInfo,
   ProductEdition,
+  SectionTitle,
   ProductActions,
   ProductComment
 } from './styles'
@@ -36,6 +43,18 @@ const ProductOptionsUI = (props) => {
   } = props
 
   const [{ auth }] = useSession()
+  const [, t] = useLanguage()
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      closeModal()
+    }
+  }
 
   return (
     <ProductContainer>
@@ -43,27 +62,32 @@ const ProductOptionsUI = (props) => {
         <ProductImage bgimage={product?.images} />
       </WrapperImage>
       <ProductInfo>
-        <h1>{product?.name}</h1>
-        {product?.description && <p>{product?.description}</p>}
+        <div>
+          <h1>{product?.name}</h1>
+          {product?.description && <p>{product?.description}</p>}
+        </div>
         <ProductEdition>
-          {
-            product?.ingredients.map(ingredient => (
-              <ProductIngredient
-                key={ingredient.id}
-                onChange={handleChangeIngredientState}
-                state={productCart.ingredients[`id:${ingredient.id}`]}
-                ingredient={ingredient}
-              />
-            ))
-          }
+          {product?.ingredients.length > 0 && (<SectionTitle>Ingredients</SectionTitle>)}
+          {product?.ingredients.map(ingredient => (
+            <ProductIngredient
+              key={ingredient.id}
+              onChange={handleChangeIngredientState}
+              state={productCart.ingredients[`id:${ingredient.id}`]}
+              ingredient={ingredient}
+            />
+          ))}
           {
             product?.extras.map(extra => extra.options.map(option => {
               const currentState = productCart.options[`id:${option.id}`] || {}
               return (
-                <React.Fragment key={option.id}>
+                <div key={option.id}>
                   {
                     showOption(option) && (
-                      <ProductOption option={option} currentState={currentState} error={errors[`id:${option.id}`]}>
+                      <ProductOption
+                        option={option}
+                        currentState={currentState}
+                        error={errors[`id:${option.id}`]}
+                      >
                         {
                           option.suboptions.map(suboption => {
                             const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
@@ -83,67 +107,75 @@ const ProductOptionsUI = (props) => {
                       </ProductOption>
                     )
                   }
-                </React.Fragment>
+                </div>
               )
             }))
           }
           <ProductComment>
-            <p>Special comment:</p>
+            <SectionTitle>Special comment</SectionTitle>
             <textarea
               rows={4}
               defaultValue={productCart.comment}
             />
           </ProductComment>
-          {/* {
-            isSoldOut && <button type='button' disabled>Sold out</button>
-          } */}
-          {/* <p>Max: {maxProductQuantity}</p>
-          <p>Sold out: {isSoldOut ? 'Yes' : 'No'}</p> */}
         </ProductEdition>
         <ProductActions>
           {productCart && (
             <div>
               <Button
-                className='incdec'
+                className={`incdec ${isSoldOut ? 'disabled' : ''}`}
                 circle
                 outline
                 onClick={decrement}
-                disabled={productCart.quantity === 1}
+                disabled={productCart.quantity === 1 || isSoldOut}
               >-
               </Button>
               <span>{productCart.quantity}</span>
               <Button
-                className='incdec'
+                className={`incdec ${isSoldOut ? 'disabled' : ''}`}
                 circle
                 outline
                 onClick={increment}
-                disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity}
+                disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
               >+
               </Button>
             </div>)}
 
           {productCart && !isSoldOut && auth ? (
             <Button
-              className='add'
+              className={`add ${Object.keys(errors).length > 0 ? 'disabled' : ''}`}
               color='primary'
               onClick={handleSave}
-              disabled={maxProductQuantity === 0}
+              disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
             >
               <span>{editMode ? 'Save' : 'Add to Cart'}</span>
               <span>{productCart.total && formatPrice(productCart.total)}</span>
             </Button>
           ) : (
             <Button
-              className='add'
+              className={`add ${isSoldOut ? 'disabled' : ''}`}
               color='primary'
               outline
-              // onClick={} // open login modal
+              disabled={isSoldOut}
+              onClick={() => setModalIsOpen(true)}
             >
-              Login / Sign Up
+              {isSoldOut ? 'Sold out' : 'Login / Sign Up'}
             </Button>
           )}
         </ProductActions>
       </ProductInfo>
+      {modalIsOpen && (
+        <Modal
+          title={t('LOGIN')}
+          open={modalIsOpen}
+          closeOnBackdrop={false}
+          onClose={() => closeModal()}
+        >
+          <LoginForm
+            ordering={props.ordering}
+            handleSuccessLogin={handleSuccessLogin}
+          />
+        </Modal>)}
     </ProductContainer>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { ProductIngredient as ProductIngredientController } from 'ordering-components'
+import { BiCheckboxSquare, BiCheckbox } from 'react-icons/bi'
 
 import { Container } from './styles'
 
@@ -11,8 +12,17 @@ const ProductIngredientUI = (props) => {
   } = props
 
   return (
-    <Container selected={state?.selected} onClick={() => toggleSelect()}>
-      {ingredient.id}. {ingredient.name}
+    <Container onClick={() => toggleSelect()}>
+      <span>
+        {state?.selected ? (
+          <BiCheckboxSquare />
+        ) : (
+          <BiCheckbox />
+        )}
+      </span>
+      <span>
+        {ingredient.name}
+      </span>
     </Container>
   )
 }

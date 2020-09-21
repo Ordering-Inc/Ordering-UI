@@ -1,7 +1,12 @@
 import React from 'react'
 import { ProductOption as ProductOptionController } from 'ordering-components'
 
-// import {  } from './styles'
+import {
+  Container,
+  WrapHeader,
+  Title,
+  Flag
+} from './styles'
 
 const ProductOptionUI = (props) => {
   const {
@@ -9,12 +14,6 @@ const ProductOptionUI = (props) => {
     option,
     error
   } = props
-
-  const optionStyles = {
-    padding: 15,
-    border: '1px solid',
-    borderColor: error ? '#c10000' : '#ccc'
-  }
 
   let maxMin = `(Min: ${option.min} / Max: ${option.max})`
   if (option.min === 1 && option.max === 1) {
@@ -26,10 +25,13 @@ const ProductOptionUI = (props) => {
   }
 
   return (
-    <div style={optionStyles}>
-      {option.id}. {option.name} {maxMin}
+    <Container className={`${error ? 'error' : ''}`}>
+      <WrapHeader>
+        <Title>{option.name}</Title>
+        <Flag>{maxMin}</Flag>
+      </WrapHeader>
       {children}
-    </div>
+    </Container>
   )
 }
 

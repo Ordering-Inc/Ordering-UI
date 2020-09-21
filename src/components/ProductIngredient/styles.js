@@ -1,7 +1,20 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  border-bottom: 1px solid #CCC;
-  padding: 15px;
-  background-color: ${({ selected }) => selected ? '#EEE' : null}
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+
+  span {
+    text-transform: capitalize;
+  }
+
+  span:nth-child(1) {
+    margin-right: 10px;
+    svg {
+      color: #D81212;
+      font-size: 25px;
+    }
+  }
 `

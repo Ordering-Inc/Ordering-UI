@@ -71,10 +71,12 @@ const BusinessProductsListingUI = (props) => {
               <Modal
                 width='70%'
                 open={modalIsOpen}
+                closeOnBackdrop={false}
                 onClose={() => closeModal()}
               >
                 <ProductForm
                   product={product}
+                  ordering={props.ordering}
                 />
               </Modal>)}
           </>

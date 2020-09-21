@@ -51,7 +51,6 @@ export const ProductInfo = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-top: 0px;
-    padding-bottom: 10px;
   }
 
   p {
@@ -69,6 +68,14 @@ export const ProductInfo = styled.div`
 
 export const ProductEdition = styled.div`
   overflow: auto;
+`
+
+export const SectionTitle = styled.h3`
+  font-size: 20px;
+  padding: 15px;
+  margin: 0px;
+  text-transform: capitalize;
+  background-color: #F7F7F7;
 `
 
 export const ProductComment = styled.div`
@@ -107,5 +114,9 @@ export const ProductActions = styled.div`
       float: right;
       margin-right: 10px;
     }
+  }
+
+  button.disabled {
+    opacity: 0.5;
   }
 `
