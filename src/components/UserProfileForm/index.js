@@ -71,8 +71,8 @@ const UserProfileFormUI = (props) => {
   return (
     <UserProfileContainer>
       <UserImage>
-        <ExamineClick onFiles={handleFiles}>
-          <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)}>
+        <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg'>
+          <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg'>
             <Image>{formState.changes.photo && formState.loading ? 'loading image' : <img src={(!formState.changes.photo || formState.result?.result === 'Network Error') ? user.photo : formState.changes.photo} />}</Image>
           </DragAndDrop>
         </ExamineClick>
