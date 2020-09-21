@@ -6,7 +6,7 @@ import {
 import { Select } from '../../../src/styles/Select'
 import { useLocation, Link } from 'react-router-dom'
 
-import { useSession, LanguageSelector, useApi } from 'ordering-components'
+import { useSession, LanguageSelector } from 'ordering-components'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
@@ -17,11 +17,6 @@ export const Header = (props) => {
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
-
-  // const languages = [{ value: 1, content: 'English', showOnSelected: 'EN' }, { value: 3, content: 'Español', showOnSelected: 'ES' }]
-  // console.log(languages)
-
-  const [ordering] = useApi()
 
   return (
     <HeaderType>
@@ -43,8 +38,7 @@ export const Header = (props) => {
                 </>
               )
             }
-            {/* <Select options={languages} defaultValue={1} /> */}
-            <LanguageSelector UIComponent={LanguageSelectorUI} ordering={ordering} onChangeLanguage={() => {}} />
+            <LanguageSelector UIComponent={LanguageSelectorUI} onChangeLanguage={() => {}} />
           </Menu>
         </RightHeader>
       </InnerHeader>

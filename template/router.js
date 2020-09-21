@@ -7,7 +7,7 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage } from 'ordering-components'
+import { useSession, useLanguage, useOrder } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
@@ -17,7 +17,7 @@ import { Login } from './Pages/Login'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 
-const fontName = 'Montserrat'
+const fontName = 'Nunito'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -59,8 +59,9 @@ const FontTheme = ({ fontName, children }) => {
   return children
 }
 
-export const Router = ({ ordering }) => {
+export const Router = () => {
   const [{ auth }, sessionDispatch] = useSession()
+  const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
   const handleSuccessSignup = (user) => {
@@ -77,17 +78,25 @@ export const Router = ({ ordering }) => {
         <Header />
         <Switch>
           <Route exact path='/home'>
-            <HomePage ordering={ordering} />
+            <HomePage />
+            {/* {
+              orderStatus.options?.address?.location
+                ? <Redirect to='/search' />
+                : <HomePage />
+            } */}
           </Route>
           <Route exact path='/'>
-            <HomePage ordering={ordering} />
+            {
+              orderStatus.options?.address?.location
+                ? <Redirect to='/search' />
+                : <HomePage />
+            }
           </Route>
           <Route exact path='/signup'>
             {
               !auth
                 ? (
                   <SignUp
-                    ordering={ordering}
                     elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
                     useLoginByCellphone
                     useChekoutFileds
@@ -102,7 +111,6 @@ export const Router = ({ ordering }) => {
               !auth
                 ? (
                   <Login
-                    ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
@@ -116,7 +124,6 @@ export const Router = ({ ordering }) => {
               !auth
                 ? (
                   <Login
-                    ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
@@ -128,7 +135,7 @@ export const Router = ({ ordering }) => {
           <Route exact path='/password/forgot'>
             {
               !auth ? (
-                <ForgotPassword ordering={ordering} />
+                <ForgotPassword />
               )
                 : <Redirect to='/' />
             }
@@ -143,7 +150,11 @@ export const Router = ({ ordering }) => {
             <Page />
           </Route>
           <Route exact path='/search'>
-            <BusinessesList ordering={ordering} />
+            {
+              orderStatus.options?.address?.location
+                ? <BusinessesList />
+                : <Redirect to='/home' />
+            }
           </Route>
           <Route exact path='/store/:store'>
             <Store />

@@ -18,115 +18,88 @@ import { AddressList } from '../AddressList'
 import { useSession, useOrder, useLanguage } from 'ordering-components'
 
 import locationIcon from '../../../template/assets/input-location-icon.svg'
+import { Alert } from '../Confirm'
 
 export const HomeHero = (props) => {
   const {
     onFindBusiness
   } = props
 
-  const [{ user, auth }] = useSession()
+  const [{ auth }] = useSession()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const [modals, setModals] = useState({ listOpen: false, formOpen: false })
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const [modalFormIsOpen, setModalFormIsOpen] = useState(false)
-  const [modalListIsOpen, setModalListIsOpen] = useState(false)
+  const handleFindBusinesses = () => {
+    if (!orderState?.options?.address?.location) {
+      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select an address to search')] })
+      return
+    }
+    setModals({ listOpen: false, formOpen: false })
+    onFindBusiness && onFindBusiness()
+  }
 
-  const [curAddress, setCurAddress] = useState(null)
-
-  const onBusinessClick = ({ from }) => {
-    if (from === 'button' && auth && user?.address) {
-      onFindBusiness()
-    } else if (from === 'input' && auth) {
-      setModalListIsOpen(true)
+  const handleAddressInput = () => {
+    if (auth) {
+      setModals({ ...modals, listOpen: true })
     } else {
-      setModalFormIsOpen(true)
-    }
-  }
-
-  const closeModal = (type) => {
-    if (type === 'form') {
-      setModalFormIsOpen(false)
-      if (auth) {
-        setModalListIsOpen(true)
-      }
-    } else {
-      setModalListIsOpen(false)
-    }
-  }
-
-  const handleEditAddress = (address) => {
-    setCurAddress(address)
-    switchModalsState()
-  }
-
-  const handlerRedirectAddress = () => {
-    setModalListIsOpen(false)
-    if (orderState?.options?.address?.location) {
-      onFindBusiness()
-    }
-  }
-
-  const switchModalsState = () => {
-    setModalFormIsOpen(true)
-    setModalListIsOpen(false)
-  }
-
-  const handlerSaveAddressForm = ({ type }) => {
-    closeModal(type)
-    if (!auth && orderState?.options?.address?.location) {
-      onFindBusiness()
+      setModals({ ...modals, formOpen: true })
     }
   }
 
   return (
     <HeroContainer>
       <ContentWrapper>
-        <Title>All We need is Food</Title>
-        <Slogan>Let's start to order food now</Slogan>
-        <WrapInput onClick={() => onBusinessClick({ from: 'input' })} withIcon={locationIcon}>
-          <Input type='text' disabled placeholder={orderState?.options?.address?.address || 'Address or Zip Code'} />
+        <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
+        <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
+        <WrapInput onClick={handleAddressInput} withIcon={locationIcon}>
+          <Input type='text' disabled placeholder={orderState?.options?.address?.address || t('TYPE_ADDRESS', 'Type address')} />
         </WrapInput>
         <Button
           color='primary'
-          onClick={() => onBusinessClick({ from: 'button' })}
+          onClick={handleFindBusinesses}
         >
-          Find Business
+          {t('FIND_BUSINESSES', 'Find businesses')}
         </Button>
       </ContentWrapper>
 
-      {modalFormIsOpen && (
-        <Modal
-          zx='1002'
-          title={t('ADDRESS')}
-          open={modalFormIsOpen}
-          closeOnBackdrop={false}
-          onClose={() => closeModal('form')}
-        >
-          <AddressForm
-            ordering={props.ordering}
-            useValidationFileds
-            address={curAddress}
-            onCancel={() => closeModal('form')}
-            onSaveAddressForm={() => handlerSaveAddressForm({ type: 'form' })}
-          />
-        </Modal>)}
+      <Modal
+        title={t('ADDRESS')}
+        open={modals.formOpen}
+        closeOnBackdrop={false}
+        onClose={() => setModals({ ...modals, formOpen: false })}
+      >
+        <AddressForm
+          useValidationFileds
+          address={orderState?.options?.address || {}}
+          onClose={() => setModals({ ...modals, formOpen: false })}
+          onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+        />
+      </Modal>
 
-      {modalListIsOpen && (
-        <Modal
-          title={t('ADDRESS')}
-          open={modalListIsOpen}
-          closeOnBackdrop={false}
-          onClose={() => closeModal()}
-          onCancel={() => closeModal()}
-          onAccept={() => handlerRedirectAddress()}
-        >
-          <AddressList
-            ordering={props.ordering}
-            changeOrderAddressWithDefault
-            handleClickAddress={handleEditAddress}
-            onAddAddress={() => switchModalsState()}
-          />
-        </Modal>)}
+      <Modal
+        title={t('ADDRESSES')}
+        open={modals.listOpen}
+        closeOnBackdrop={false}
+        onClose={() => setModals({ ...modals, listOpen: false })}
+        onCancel={() => setModals({ ...modals, listOpen: false })}
+        onAccept={() => handleFindBusinesses()}
+      >
+        <AddressList
+          changeOrderAddressWithDefault
+        />
+      </Modal>
+
+      <Alert
+        title={t('SEARCH')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </HeroContainer>
   )
 }

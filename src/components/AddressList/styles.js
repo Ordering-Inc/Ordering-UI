@@ -35,6 +35,7 @@ export const AddressItem = styled.li`
     align-items: center;
 
     span {
+      display: flex;
       cursor: pointer;
       margin-right: 10px;
       &.radio {
@@ -64,6 +65,7 @@ export const AddressItemActions = styled.div`
   display: flex;
   align-items: center;
   a {
+    display: flex;
     cursor: pointer;
     margin: 0px 5px;
     font-size: 30px;
@@ -81,6 +83,9 @@ export const AddressItemActions = styled.div`
     }
   }
   a.disabled {
+    svg {
+      color: #CCC;
+    }
     pointer-events: none;
   }
 `
