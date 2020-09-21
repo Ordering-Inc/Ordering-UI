@@ -4,7 +4,8 @@ import { Alert } from '../Confirm'
 import {
   SignupForm as SignUpController,
   useLanguage,
-  useConfig
+  useConfig,
+  useSession
 } from 'ordering-components'
 import {
   LoginContainer,
@@ -45,8 +46,17 @@ const SignUpFormUI = (props) => {
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [, sessionDispatch] = useSession()
 
-  useEffect(() => { // manejando errors de api
+  const handleSuccessFacebook = (user) => {
+    sessionDispatch({
+      type: 'login',
+      user,
+      token: user.session.access_token
+    })
+  }
+
+  useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
@@ -55,7 +65,7 @@ const SignUpFormUI = (props) => {
     }
   }, [formState])
 
-  useEffect(() => { // manejando errores de la UI
+  useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setAlertState({
         open: true,
@@ -100,8 +110,9 @@ const SignUpFormUI = (props) => {
         }
         {
           <SocialIcons>
-            {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} />} <FaApple />
-            <AiOutlineGoogle />
+            {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
+            {/* <FaApple />
+            <AiOutlineGoogle /> */}
           </SocialIcons>
         }
         {

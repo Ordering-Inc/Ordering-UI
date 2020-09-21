@@ -8,16 +8,6 @@ export const Container = styled.div`
   `}
 `
 
-export const ModalBackDrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-`
-
 export const ModalWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -65,11 +55,12 @@ export const ModalActions = styled.div`
 
 export const ModalTitle = styled.h2`
   text-align: left;
-  font: normal normal bold 35px/70px Tajawal;
+  font-size: 30px;
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;
   margin: 0px 0px;
+  margin-bottom: 20px;
   padding-left: 10px;
   text-transform: capitalize;
 `

@@ -26,7 +26,7 @@ const ConfirmUI = (props) => {
   const [, t] = useLanguage()
   return (
     <>
-      <PopupWrap className='popup'>
+      <PopupWrap>
         <PopupDialog className='popup-dialog'>
           <PopupIcon>
             <MdClose onClick={() => onClose()} />

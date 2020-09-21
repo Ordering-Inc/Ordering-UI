@@ -32,7 +32,6 @@ const AddressFormUI = (props) => {
     isRequiredField,
     updateChanges,
     onCancel,
-    onSaveAddressForm,
     hanldeChangeInput,
     saveAddress
   } = props
@@ -46,7 +45,6 @@ const AddressFormUI = (props) => {
   const onSubmit = (values) => {
     saveAddress()
     if (!formState.loading) {
-      onSaveAddressForm()
     }
   }
 
