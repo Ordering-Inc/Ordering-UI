@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter,
   Switch,
@@ -7,13 +7,13 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useApi } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
 import { Login } from './Pages/Login'
-
+import { BusinessInformation } from '../src/components/BusinessInformation'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 
@@ -62,7 +62,13 @@ const FontTheme = ({ fontName, children }) => {
 export const Router = () => {
   const [{ auth }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
+  const [ordering] = useApi()
   const [, t] = useLanguage()
+  const [business, setBusiness] = useState({})
+
+  useEffect(() => {
+    getBusiness()
+  }, [])
 
   const handleSuccessSignup = (user) => {
     sessionDispatch({
@@ -71,6 +77,11 @@ export const Router = () => {
       token: user.session.access_token
     })
   }
+  const getBusiness = async () => {
+    const { content: { result } } = await ordering.businesses(41).get()
+    setBusiness(result)
+  }
+
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -164,6 +175,9 @@ export const Router = () => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
+          </Route>
+          <Route exact path='/business_information'>{/** delete this */}
+            <BusinessInformation business={business} />
           </Route>
           <Route path='*'>
             404
