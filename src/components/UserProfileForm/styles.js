@@ -91,11 +91,17 @@ export const UserData = styled.div`
 `
 
 export const SavedPlaces = styled.div`
+  width: 60%;
+  > div{
+  display: flex;
+  flex-direction: column-reverse;
+  width: 60%;
+  }
+  > button{
+    width: 50%
+  }
   text-align: left;
   width: 100%;
-`
-
-export const Place = styled.div`
 `
 
 export const FormInput = styled.form`

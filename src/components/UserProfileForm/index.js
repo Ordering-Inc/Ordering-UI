@@ -3,6 +3,7 @@ import { UserProfileForm as UserProfileController, useLanguage, useSession, Exam
 
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
+import { AddressList } from '../AddressList'
 
 import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera, UserData, SavedPlaces } from './styles'
 
@@ -145,7 +146,7 @@ const UserProfileFormUI = (props) => {
               ? 'loading user'
               : (
                 <UserData>
-                  <h5>{user.name} {user.lastname}</h5>
+                  <h4>{user.name} {user.lastname}</h4>
                   <p>{user.email}</p>
                   <p>{user.country_phone_code} {user.cellphone}</p>
                   <Button color='primary' outline onClick={() => setEdit(true)}>Edit</Button>
@@ -155,6 +156,7 @@ const UserProfileFormUI = (props) => {
 
         <SavedPlaces>
           <h5>Saved Places</h5>
+          <AddressList addressList={user.addresses} />
         </SavedPlaces>
       </SideForm>
       <Alert
