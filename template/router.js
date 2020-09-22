@@ -62,7 +62,7 @@ const FontTheme = ({ fontName, children }) => {
 export const Router = () => {
   const [{ auth }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
-  const [ordering] = useApi()
+  const [ordering] = useApi() // for use business, delete this after
   const [, t] = useLanguage()
   const [business, setBusiness] = useState({})
 
@@ -77,7 +77,7 @@ export const Router = () => {
       token: user.session.access_token
     })
   }
-  const getBusiness = async () => {
+  const getBusiness = async () => { // example of business, delete this after
     const { content: { result } } = await ordering.businesses(41).get()
     setBusiness(result)
   }
@@ -177,7 +177,7 @@ export const Router = () => {
             <Order />
           </Route>
           <Route exact path='/business_information'>{/** delete this */}
-            <BusinessInformation business={business} />
+            <BusinessInformation business={business} ordering={ordering} />
           </Route>
           <Route path='*'>
             404

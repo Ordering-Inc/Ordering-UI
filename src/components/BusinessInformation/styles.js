@@ -66,6 +66,10 @@ export const Information = styled.div`
     margin-block-start: 0.4em;
   }
 `
+export const Stars = styled.div`
+  
+`
+
 export const BusinessContent = styled.div`
   height: 80%;
 `
@@ -108,4 +112,8 @@ export const BusinessGallery = styled.div`
       margin: 10px 0;
     }
   }
+`
+
+export const BusinessVideos = styled.div`
+
 `
