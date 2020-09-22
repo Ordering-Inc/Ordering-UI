@@ -63,7 +63,10 @@ export const Information = styled.div`
   }
   > p {
     margin-block-end: 0;
-    margin-block-start: 0.4em;
+    margin-block-start: 0.3em;
+    > svg{
+      vertical-align: middle
+    }
   }
 `
 export const Stars = styled.div`
@@ -78,9 +81,19 @@ export const FlexTabs = styled.div`
   display: flex;
   justify-content: space-around;
   height: 10%;
+  padding-top: 30px;
 `
 export const BusinessLocation = styled.div`
   height: 20%;
+`
+export const Map = styled.div`
+  width: 100%;
+  height: 20vh;
+  > div{
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
 `
 
 export const BusinessOpeningTime = styled.div`
@@ -100,20 +113,28 @@ export const Times = styled.div`
 `
 
 export const DeliveryDetails = styled.div`
-
+  display: flex;
+  justify-content: space-around; 
 `
 export const BusinessGallery = styled.div`
 
   > div {
     display: flex; 
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-wrap: wrap;
     > img {
-      margin: 10px 0;
+      margin: 10px 10px;
     }
   }
 `
 
 export const BusinessVideos = styled.div`
-
+  > div {
+    display: flex; 
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    > iframe {
+      margin: 10px 10px;
+    }
+  }
 `
