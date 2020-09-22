@@ -13,23 +13,33 @@ import {
 const BusinessProductsListUI = (props) => {
   const {
     isAllCategory,
-    business,
-    productsList,
-    paginationProducts
+    categories
+    // business,
+    // productsList,
+    // paginationProducts
   } = props
 
-  const elementsList = isAllCategory && !business?.business?.lazy_load_products_recommended
-    ? { loading: business?.loading, error: business?.error, categories: business?.business?.categories }
-    : { ...productsList, categories: business?.business?.categories, isFromProductsList: true }
+  // const { products, loading, error } = props.productsList
+  const { productsToShow, loading, error } = props.categoriesToShow
+
+  const getCategoryName = (categoryId) => categories.find(category => category.id === categoryId)?.name
 
   return (
     <ProductsContainer>
-      {isAllCategory && elementsList.isFromProductsList && (
-        elementsList?.categories?.map(category => (
-          <WrapAllCategories key={category.id}>
-            <h3>{category.name}</h3>
+      {
+        !loading && Object.keys(productsToShow).length === 0 && (
+          <div>
+            <h1>Not Found elements</h1>
+          </div>
+        )
+      }
+
+      {
+        Object.keys(productsToShow).map(category => (
+          <WrapAllCategories key={productsToShow[category].categoryId}>
+            {isAllCategory && <h3>{getCategoryName(productsToShow[category].categoryId)}</h3>}
             <ProductsListing>
-              {elementsList?.products?.map(product => product.category_id === category.id && (
+              {productsToShow[category]?.products.map(product => (
                 <SingleProductCard
                   key={product.id}
                   isSoldOut={product.inventoried && !product.quantity}
@@ -39,40 +49,11 @@ const BusinessProductsListUI = (props) => {
             </ProductsListing>
           </WrapAllCategories>
         ))
-      )}
+      }
 
-      {isAllCategory && !elementsList.isFromProductsList && (
-        elementsList?.categories?.map(category => (
-          <WrapAllCategories key={category.id}>
-            <h3>{category.name}</h3>
-            <ProductsListing>
-              {category?.products?.map(product => (
-                <SingleProductCard
-                  key={product.id}
-                  isSoldOut={product.inventoried && !product.quantity}
-                  product={product}
-                />
-              ))}
-            </ProductsListing>
-          </WrapAllCategories>
-        ))
-      )}
-
-      {!isAllCategory && (
+      {loading && (
         <ProductsListing>
-          {elementsList?.products?.map((product) => (
-            <SingleProductCard
-              key={product.id}
-              isSoldOut={product.inventoried && !product.quantity}
-              product={product}
-            />
-          ))}
-        </ProductsListing>
-      )}
-
-      {elementsList?.loading && (
-        <ProductsListing>
-          {[...Array(paginationProducts.nextPageItems ? paginationProducts.nextPageItems : 12).keys()].map(i => (
+          {[...Array(12).keys()].map(i => (
             <SingleProductCard
               key={i}
               isSkeleton
@@ -80,18 +61,68 @@ const BusinessProductsListUI = (props) => {
         </ProductsListing>
       )}
 
-      {elementsList?.loading && (elementsList?.products?.length === 0 || elementsList?.categories?.length === 0) && (
-        <div>
-          <h1>Not Found elements</h1>
-        </div>
-      )}
-
-      {elementsList?.error && elementsList?.length > 0 && (
-        elementsList?.error.map((e, i) => (
+      {error && error.length > 0 && (
+        error.map((e, i) => (
           <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
         ))
       )}
     </ProductsContainer>
+    // <ProductsContainer>
+    //   {
+    //     !loading && products?.length === 0 && (
+    //       <div>
+    //         <h1>Not Found elements</h1>
+    //       </div>
+    //     )
+    //   }
+
+  //   {
+  //     isAllCategory && categories.map(category => (
+  //       <WrapAllCategories key={category.id}>
+  //         <h3>{category.name}</h3>
+  //         <ProductsListing>
+  //           {products.map(product => product.category_id === category.id && (
+  //             <SingleProductCard
+  //               key={product.id}
+  //               isSoldOut={product.inventoried && !product.quantity}
+  //               product={product}
+  //             />
+  //           ))}
+  //         </ProductsListing>
+  //       </WrapAllCategories>
+  //     ))
+  //   }
+
+  //   {
+  //     !isAllCategory && (
+  //       <ProductsListing>
+  //         {products.map((product) => (
+  //           <SingleProductCard
+  //             key={product.id}
+  //             isSoldOut={product.inventoried && !product.quantity}
+  //             product={product}
+  //           />
+  //         ))}
+  //       </ProductsListing>
+  //     )
+  //   }
+
+  // {loading && (
+  //   <ProductsListing>
+  //     {[...Array(paginationProducts.nextPageItems ? paginationProducts.nextPageItems : 12).keys()].map(i => (
+  //       <SingleProductCard
+  //         key={i}
+  //         isSkeleton
+  //       />))}
+  //   </ProductsListing>
+  // )}
+
+  // {error && error.length > 0 && (
+  //   error.map((e, i) => (
+  //     <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
+  //   ))
+  // )}
+  // </ProductsContainer>
   )
 }
 

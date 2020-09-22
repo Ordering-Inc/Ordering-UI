@@ -24,10 +24,11 @@ const BusinessProductsListingUI = (props) => {
   const {
     isAllCategory,
     categorySelected,
-    productsList,
-    handlerClickCategory,
-    onProductClick,
-    paginationProducts
+    categoriesToShow,
+    // productsList,
+    // onProductClick,
+    // paginationProducts,
+    handlerClickCategory
   } = props
 
   const { business, categories, loading, error } = props.business
@@ -48,25 +49,26 @@ const BusinessProductsListingUI = (props) => {
             />
             <WrapContent>
               <BusinessProductsList
-                business={props.business}
                 categories={categories}
-                productsList={productsList}
                 isAllCategory={!isAllCategory}
-                onProductClick={onProductClick}
-                paginationProducts={paginationProducts}
+                categoriesToShow={categoriesToShow}
+                // productsList={productsList}
+                // onProductClick={onProductClick}
+                // paginationProducts={paginationProducts}
               />
             </WrapContent>
           </>
         )
       }
       {
-        !loading && !business.id && (
+        !loading && !Object.keys(business).length && (
           <ProductsNotFound>
             <h1>{t('NOT_FOUND_BUSINESS')}</h1>
             <VscWarning />
           </ProductsNotFound>
         )
       }
+
       {loading && (
         <>
           <BusinessBasicInformation
@@ -79,12 +81,13 @@ const BusinessProductsListingUI = (props) => {
           />
           <WrapContent>
             <BusinessProductsList
-              business={props.business}
               categories={categories}
-              productsList={productsList}
               isAllCategory={!isAllCategory}
-              onProductClick={onProductClick}
-              paginationProducts={paginationProducts}
+              categoriesToShow={categoriesToShow}
+              // business={props.business}
+              // productsList={productsList}
+              // onProductClick={onProductClick}
+              // paginationProducts={paginationProducts}
             />
           </WrapContent>
         </>
@@ -105,7 +108,7 @@ export const BusinessProductsListing = (props) => {
   const [ordering] = useApi()
   const [orderState] = useOrder()
 
-  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'products', 'categories']
+  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'products']
   const businessParams = {
     type: orderState.options?.type || 1,
     location: orderState.options?.address?.location
