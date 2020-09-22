@@ -26,7 +26,8 @@ const BusinessProductsListingUI = (props) => {
     categorySelected,
     productsList,
     handlerClickCategory,
-    onProductClick
+    onProductClick,
+    paginationProducts
   } = props
 
   const { business, categories, loading, error } = props.business
@@ -47,10 +48,12 @@ const BusinessProductsListingUI = (props) => {
             />
             <WrapContent>
               <BusinessProductsList
+                business={props.business}
                 categories={categories}
                 productsList={productsList}
                 isAllCategory={!isAllCategory}
                 onProductClick={onProductClick}
+                paginationProducts={paginationProducts}
               />
             </WrapContent>
           </>
@@ -76,10 +79,12 @@ const BusinessProductsListingUI = (props) => {
           />
           <WrapContent>
             <BusinessProductsList
+              business={props.business}
               categories={categories}
               productsList={productsList}
               isAllCategory={!isAllCategory}
               onProductClick={onProductClick}
+              paginationProducts={paginationProducts}
             />
           </WrapContent>
         </>
@@ -100,10 +105,12 @@ export const BusinessProductsListing = (props) => {
   const [ordering] = useApi()
   const [orderState] = useOrder()
 
-  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'categories']
+  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'products', 'categories']
   const businessParams = {
     type: orderState.options?.type || 1,
-    location: `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}` || '40.7539143,-73.9810162'
+    location: orderState.options?.address?.location
+      ? `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`
+      : '40.7539143,-73.9810162'
     // time: asap,
   }
 

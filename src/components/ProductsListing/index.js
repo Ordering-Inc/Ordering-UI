@@ -13,9 +13,11 @@ export const ProductsListing = (props) => {
   const [categoryValue, setCategoryValue] = useState(null)
   const [business, setBusiness] = useState({ business: {}, categories: [], loading: true, error: null })
   const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
-  const [paginationProps, setPaginationProps] = useState({ currentPage: 0, pageSize: 10, totalItems: null, totalPages: 0, isPagination: false })
+  const [paginationProps, setPaginationProps] = useState({ currentPage: 0, pageSize: 10, totalItems: null, totalPages: 0 })
 
   const [orderState] = useOrder()
+
+  const productsRecommended = business.business.lazy_load_products_recommended
 
   const isMatchCategory = (categoryId) => {
     if (!categoryValue) return true
@@ -30,26 +32,37 @@ export const ProductsListing = (props) => {
         loading: true
       })
       const parameters = {
-        ...businessParams
-        // page: newFetch ? 1 : paginationProps.currentPage + 1,
-        // page_size: paginationProps.pageSize
+        ...businessParams,
+        page: newFetch ? 1 : paginationProps.currentPage + 1,
+        page_size: paginationProps.pageSize
       }
-      const { content: { result, pagination } } = categoryValue
-        ? await ordering
+
+      let resultApi = []
+      let paginationApi = {}
+      if (categoryValue) {
+        const { content: { result, pagination } } = await ordering
           .businesses(businessId)
           .categories(categoryValue)
           .products()
           .parameters(parameters)
           .get()
-        : await ordering
+        resultApi = result
+        paginationApi = pagination
+      }
+
+      if (productsRecommended && !categoryValue) {
+        const { content: { result, pagination } } = await ordering
           .businesses(businessId)
           .products()
           .parameters(parameters)
           .get()
+        resultApi = result
+        paginationApi = pagination
+      }
 
       const productsFiltered = categoryValue
-        ? result.filter(product => isMatchCategory(product.category_id))
-        : result
+        ? resultApi?.filter(product => isMatchCategory(product.category_id))
+        : resultApi
 
       productsList.products = newFetch
         ? productsFiltered
@@ -60,16 +73,15 @@ export const ProductsListing = (props) => {
         loading: false
       })
       let nextPageItems = 0
-      if (pagination && pagination.current_page !== pagination.total_pages) {
-        const remainingItems = pagination.total - productsList.products.length
-        nextPageItems = remainingItems < pagination.page_size ? remainingItems : pagination.page_size
+      if (paginationApi.current_page !== paginationApi.total_pages) {
+        const remainingItems = paginationApi.total - productsList.products.length
+        nextPageItems = remainingItems < paginationApi.page_size ? remainingItems : paginationApi.page_size
       }
       setPaginationProps({
         ...paginationProps,
-        currentPage: pagination.current_page,
-        totalPages: pagination.total_pages,
-        nextPageItems,
-        isPagination: !!pagination
+        currentPage: paginationApi.current_page,
+        totalPages: paginationApi.total_pages,
+        nextPageItems
       })
     } catch (error) {
       setProductsList({
@@ -124,12 +136,6 @@ export const ProductsListing = (props) => {
   }, [orderState, categoryValue])
 
   useEffect(() => {
-    if (business.business?.id) {
-      getProducts()
-    }
-  }, [business])
-
-  useEffect(() => {
     getBusiness()
   }, [])
 
@@ -144,7 +150,6 @@ export const ProductsListing = (props) => {
           productsList={productsList}
           paginationProducts={paginationProps}
           handlerClickCategory={(val) => setCategoryValue(val)}
-          // handlerChangeSearch={(val) => setSearchValue(val)}
         />
       )}
     </>

@@ -13,66 +13,81 @@ import {
 const BusinessProductsListUI = (props) => {
   const {
     isAllCategory,
-    categories
+    business,
+    productsList,
+    paginationProducts
   } = props
 
-  const { products, loading, error } = props.productsList
+  const elementsList = isAllCategory && !business?.business?.lazy_load_products_recommended
+    ? { loading: business?.loading, error: business?.error, categories: business?.business?.categories }
+    : { ...productsList, categories: business?.business?.categories, isFromProductsList: true }
 
   return (
     <ProductsContainer>
-      {
-        !loading && isAllCategory && (
-          <>
-            {
-              categories.map(category => (
-                <WrapAllCategories key={category.id}>
-                  <h3>{category.name}</h3>
-                  <ProductsListing>
-                    {products?.map(product => product.category_id === category.id && (
-                      <SingleProductCard
-                        key={product.id}
-                        isSoldOut={product.inventoried && !product.quantity}
-                        product={product}
-                      />
-                    ))}
-                  </ProductsListing>
-                </WrapAllCategories>
-              ))
-            }
-          </>
-        )
-      }
-      {
-        !loading && !isAllCategory && (
-          <ProductsListing>
-            {products?.map((product) => (
-              <SingleProductCard
-                key={product.id}
-                isSoldOut={product.inventoried && !product.quantity}
-                product={product}
-              />
-            ))}
-          </ProductsListing>
-        )
-      }
-      {loading && (
+      {isAllCategory && elementsList.isFromProductsList && (
+        elementsList?.categories?.map(category => (
+          <WrapAllCategories key={category.id}>
+            <h3>{category.name}</h3>
+            <ProductsListing>
+              {elementsList?.products?.map(product => product.category_id === category.id && (
+                <SingleProductCard
+                  key={product.id}
+                  isSoldOut={product.inventoried && !product.quantity}
+                  product={product}
+                />
+              ))}
+            </ProductsListing>
+          </WrapAllCategories>
+        ))
+      )}
+
+      {isAllCategory && !elementsList.isFromProductsList && (
+        elementsList?.categories?.map(category => (
+          <WrapAllCategories key={category.id}>
+            <h3>{category.name}</h3>
+            <ProductsListing>
+              {category?.products?.map(product => (
+                <SingleProductCard
+                  key={product.id}
+                  isSoldOut={product.inventoried && !product.quantity}
+                  product={product}
+                />
+              ))}
+            </ProductsListing>
+          </WrapAllCategories>
+        ))
+      )}
+
+      {!isAllCategory && (
         <ProductsListing>
-          {[...Array(12).keys()].map(i => (
+          {elementsList?.products?.map((product) => (
+            <SingleProductCard
+              key={product.id}
+              isSoldOut={product.inventoried && !product.quantity}
+              product={product}
+            />
+          ))}
+        </ProductsListing>
+      )}
+
+      {elementsList?.loading && (
+        <ProductsListing>
+          {[...Array(paginationProducts.nextPageItems ? paginationProducts.nextPageItems : 12).keys()].map(i => (
             <SingleProductCard
               key={i}
               isSkeleton
             />))}
         </ProductsListing>
       )}
-      {
-        !loading && products.length === 0 && (
-          <div>
-            <h1>Not Found elements</h1>
-          </div>
-        )
-      }
-      {error && error.length > 0 && (
-        error.map((e, i) => (
+
+      {elementsList?.loading && (elementsList?.products?.length === 0 || elementsList?.categories?.length === 0) && (
+        <div>
+          <h1>Not Found elements</h1>
+        </div>
+      )}
+
+      {elementsList?.error && elementsList?.length > 0 && (
+        elementsList?.error.map((e, i) => (
           <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
         ))
       )}
