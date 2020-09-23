@@ -36,6 +36,10 @@ const GlobalStyle = createGlobalStyle`
     right: 0;
     z-index: 1000;
   }
+
+  .popup-component {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 `
 
 const FontTheme = ({ fontName, children }) => {

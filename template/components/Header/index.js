@@ -1,19 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink
 } from './styles'
 
-import { Select } from '../../../src/styles/Select'
 import { useLocation, Link } from 'react-router-dom'
 
-import { useSession, LanguageSelector } from 'ordering-components'
+import { useSession, useOrder } from 'ordering-components'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
+import { LanguageSelector } from '../../../src/components/LanguageSelector'
+import { useLanguage } from 'ordering-components/_modules/contexts/LanguageContext'
+import { AddressesPopover } from '../../../src/components/AddressesPopover'
+import { UserPopover } from '../../../src/components/UserPopover'
+import { MomentPopover } from '../../../src/components/MomentPopover'
 
 export const Header = (props) => {
   const location = useLocation()
-  const [{ auth }] = useSession()
+  const [, t] = useLanguage()
+  const [{ user, auth }] = useSession()
+  // const [orderStatus] = useOrder()
+  const [openPopover, setOpenPopover] = useState({ open: false })
+
+  const handleTogglePopover = (type) => {
+    setOpenPopover({
+      type,
+      open: openPopover.type === type ? !openPopover.open : true
+    })
+  }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
@@ -33,33 +47,30 @@ export const Header = (props) => {
             {
               !auth && (
                 <>
-                  <MenuLink to='/signin'>Sign In</MenuLink>
-                  <MenuLink to='/signup' highlight={1}>Sign Up</MenuLink>
+                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign up')}</MenuLink>
+                  <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
                 </>
               )
             }
-            <LanguageSelector UIComponent={LanguageSelectorUI} onChangeLanguage={() => {}} />
+            <MomentPopover
+              open={openPopover.open && openPopover.type === 'moment'}
+              onClick={() => handleTogglePopover('moment')}
+              onClose={() => handleTogglePopover('moment')}
+            />
+            <AddressesPopover
+              open={openPopover.open && openPopover.type === 'addresses'}
+              onClick={() => handleTogglePopover('addresses')}
+              onClose={() => handleTogglePopover('addresses')}
+            />
+            <UserPopover
+              open={openPopover.open && openPopover.type === 'user'}
+              onClick={() => handleTogglePopover('user')}
+              onClose={() => handleTogglePopover('user')}
+            />
+            <LanguageSelector />
           </Menu>
         </RightHeader>
       </InnerHeader>
     </HeaderType>
-  )
-}
-
-const LanguageSelectorUI = (props) => {
-  const {
-    languages,
-    currentLanguage,
-    handleChangeLanguage
-  } = props
-  const _languages = languages.loading ? [] : languages.languages.map(language => {
-    return {
-      value: language.code, content: language.name, showOnSelected: language.code.toUpperCase()
-    }
-  })
-  return (
-    <>
-      <Select options={_languages} defaultValue={currentLanguage} onChange={(languageId) => handleChangeLanguage(languageId)} />
-    </>
   )
 }
