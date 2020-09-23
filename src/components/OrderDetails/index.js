@@ -211,7 +211,7 @@ const OrderDetailsUI = (props) => {
                 <td>{formatPrice(order?.delivery_zone_price)}</td>
               </tr>
               <tr>
-                <td>Tax (10%)</td>
+                <td>Tax (2%)</td>
                 <td>{formatPrice(order?.tax_total)}</td>
               </tr>
               <tr>
