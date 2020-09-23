@@ -5,7 +5,7 @@ import {
 
 import { useLocation, Link } from 'react-router-dom'
 
-import { useSession, useOrder } from 'ordering-components'
+import { useSession } from 'ordering-components'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
@@ -18,7 +18,7 @@ import { MomentPopover } from '../../../src/components/MomentPopover'
 export const Header = (props) => {
   const location = useLocation()
   const [, t] = useLanguage()
-  const [{ user, auth }] = useSession()
+  const [{ auth }] = useSession()
   // const [orderStatus] = useOrder()
   const [openPopover, setOpenPopover] = useState({ open: false })
 
@@ -62,11 +62,15 @@ export const Header = (props) => {
               onClick={() => handleTogglePopover('addresses')}
               onClose={() => handleTogglePopover('addresses')}
             />
-            <UserPopover
-              open={openPopover.open && openPopover.type === 'user'}
-              onClick={() => handleTogglePopover('user')}
-              onClose={() => handleTogglePopover('user')}
-            />
+            {
+              auth && (
+                <UserPopover
+                  open={openPopover.open && openPopover.type === 'user'}
+                  onClick={() => handleTogglePopover('user')}
+                  onClose={() => handleTogglePopover('user')}
+                />
+              )
+            }
             <LanguageSelector />
           </Menu>
         </RightHeader>
