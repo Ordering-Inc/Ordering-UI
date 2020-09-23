@@ -4,12 +4,14 @@ import { UserProfileForm as UserProfileController, useLanguage, useSession, Exam
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import { AddressList } from '../AddressList'
+import {MyOrders} from '../MyOrders'
 
-import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera, UserData, SavedPlaces } from './styles'
+import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera, UserData, SavedPlaces,FlexTabs } from './styles'
 
 import { Input } from '../../styles/Inputs'
 // import { Select } from '../../styles/Select'
 import { Button } from '../../styles/Buttons'
+import {Tabs,Tab} from '../../styles/Tabs'
 
 import { GiPhotoCamera } from 'react-icons/gi'
 
@@ -19,6 +21,7 @@ const UserProfileFormUI = (props) => {
   const [{ user }] = useSession()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [tabValue,setTabValue] = useState('My Account')
   const [edit, setEdit] = useState(false)
 
   useEffect(() => {
@@ -69,7 +72,15 @@ const UserProfileFormUI = (props) => {
   console.log(errors)
 
   return (
-    <UserProfileContainer>
+    <>
+    <FlexTabs>
+      <Tabs variant='primary'>
+        <Tab onClick={() => setTabValue('My Account')} active={tabValue === 'My Account'}>My Account</Tab>
+        <Tab onClick={() => setTabValue('My Orders')} active={tabValue === 'My Orders'}>My Orders</Tab>
+      </Tabs>
+    </FlexTabs>
+    {tabValue === 'My Account' ? (
+      <UserProfileContainer>
       <UserImage>
         <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg'>
           <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg'>
@@ -169,6 +180,8 @@ const UserProfileFormUI = (props) => {
         closeOnBackdrop={false}
       />
     </UserProfileContainer>
+    ) : <MyOrders />} 
+    </>
   )
 }
 

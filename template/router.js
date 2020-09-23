@@ -14,7 +14,7 @@ import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
 import { Login } from './Pages/Login'
 import { Profile } from './Pages/Profile'
-
+import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 
@@ -147,6 +147,11 @@ export const Router = () => {
           <Route exact path='/profile'>
             {auth
               ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+              : <Redirect to='/login' />}
+          </Route>
+          <Route exact path='/profile/my_orders'>
+            {auth
+              ? (<MyOrders />)
               : <Redirect to='/login' />}
           </Route>
           <Route exact path='/p/:page'>

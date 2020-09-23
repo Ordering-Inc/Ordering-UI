@@ -11,6 +11,14 @@ export const UserProfileContainer = styled.div`
   height: 100vh;
 `
 
+export const FlexTabs = styled.div`
+width: 50%;
+margin: 0 auto;
+  > div{
+    justify-content: space-evenly
+  }
+`
+
 export const UserImage = styled.div`
   width: 90%;
   height: 30%;
