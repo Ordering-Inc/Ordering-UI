@@ -13,6 +13,7 @@ import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
 import { Login } from './Pages/Login'
+import { OrderDetailsPage } from './Pages/OrderDetails'
 
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
@@ -164,6 +165,9 @@ export const Router = () => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
+          </Route>
+          <Route exact path='/confirmation'>
+            <OrderDetailsPage />
           </Route>
           <Route path='*'>
             404
