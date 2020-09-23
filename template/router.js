@@ -14,7 +14,8 @@ import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
 import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
-
+import { Profile } from './Pages/Profile'
+import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 
@@ -36,6 +37,10 @@ const GlobalStyle = createGlobalStyle`
     left: 0;
     right: 0;
     z-index: 1000;
+  }
+
+  .popup-component {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 `
 
@@ -61,7 +66,7 @@ const FontTheme = ({ fontName, children }) => {
 }
 
 export const Router = () => {
-  const [{ auth }, sessionDispatch] = useSession()
+  const [{ auth,user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
@@ -145,7 +150,14 @@ export const Router = () => {
             Password reset
           </Route>
           <Route exact path='/profile'>
-            Profile
+            {auth
+              ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+              : <Redirect to='/login' />}
+          </Route>
+          <Route exact path='/profile/my_orders'>
+            {auth
+              ? (<MyOrders />)
+              : <Redirect to='/login' />}
           </Route>
           <Route exact path='/p/:page'>
             <Page />

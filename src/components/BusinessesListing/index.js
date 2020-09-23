@@ -14,7 +14,8 @@ import { useOrder, useApi } from 'ordering-components'
 
 export const BusinessesListing = (props) => {
   const {
-    propsToFetch
+    propsToFetch,
+    onBusinessClick
   } = props
 
   const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
@@ -23,7 +24,7 @@ export const BusinessesListing = (props) => {
   const [orderState] = useOrder()
   const [ordering] = useApi()
 
-  const getBusinesses = async (newFetch, page) => {
+  const getBusinesses = async (newFetch) => {
     try {
       setBusinessesList({ ...businessesList, loading: true })
       const parameters = {
@@ -82,7 +83,7 @@ export const BusinessesListing = (props) => {
   }, [orderState, businessTypeSelected])
 
   const handleBusinessClick = (business) => {
-    console.log(business)
+    onBusinessClick && onBusinessClick(business)
   }
 
   const handleChangeBusinessType = (businessType) => {

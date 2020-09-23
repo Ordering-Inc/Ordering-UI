@@ -67,7 +67,7 @@ const BusinessControllerUI = (props) => {
   return (
     <>
       <ContainerCard isSkeleton={isSkeleton}>
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => handleClick(business?.slug)}>
+        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => handleClick(business)}>
           <BusinessHero>
             {business?.header ? (
               <BusinessHeader bgimage={optimizeImage(business?.header, 'h_400,c_limit')} isClosed={!business?.open}>

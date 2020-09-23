@@ -27,7 +27,8 @@ const AddressListUI = (props) => {
     addressList,
     handleDelete,
     setAddressList,
-    handleSetDefault
+    handleSetDefault,
+    popover
   } = props
 
   const [, t] = useLanguage()
@@ -85,7 +86,19 @@ const AddressListUI = (props) => {
 
   return (
     <AddressListContainer>
-      <Button className='add' color='primary' onClick={() => openAddress({})}>{t('ADD_ADDRESS', 'Add Address')}</Button>
+      {
+        (!popover || !addressOpen) && <Button className='add' color='primary' onClick={() => openAddress({})}>{t('ADD_ADDRESS', 'Add Address')}</Button>
+      }
+      {
+        popover && addressOpen && (
+          <AddressForm
+            useValidationFileds
+            address={curAddress}
+            onCancel={() => setAddessOpen(false)}
+            onSaveAddress={handleSaveAddress}
+          />
+        )
+      }
       {!addressList.loading && !addressList.error ? (
         <>
           {addressList.addresses && addressList.addresses.length > 0 ? (
@@ -127,24 +140,28 @@ const AddressListUI = (props) => {
           )}
         </>
       )}
-      <Modal
-        title={t('ADDRESS')}
-        open={addressOpen}
-        closeOnBackdrop={false}
-        onClose={() => setAddessOpen(false)}
-      >
-        <AddressForm
-          useValidationFileds
-          address={curAddress}
-          onCancel={() => setAddessOpen(false)}
-          onSaveAddress={handleSaveAddress}
-        />
-      </Modal>
+      {
+        !popover && (
+          <Modal
+            title={t('ADDRESS', 'Address')}
+            open={!popover && addressOpen}
+            closeOnBackdrop={false}
+            onClose={() => setAddessOpen(false)}
+          >
+            <AddressForm
+              useValidationFileds
+              address={curAddress}
+              onCancel={() => setAddessOpen(false)}
+              onSaveAddress={handleSaveAddress}
+            />
+          </Modal>
+        )
+      }
 
       <Confirm
-        title={t('SEARCH')}
+        title={t('SEARCH', 'Search')}
         content={confirm.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={confirm.open}
         onClose={() => setConfirm({ ...confirm, open: false })}
         onCancel={() => setConfirm({ ...confirm, open: false })}
