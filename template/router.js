@@ -166,7 +166,7 @@ export const Router = () => {
           <Route exact path='/order/:orderId'>
             <Order />
           </Route>
-          <Route exact path='/confirmation'>
+          <Route exact path='/orders/:orderId'>
             <OrderDetailsPage />
           </Route>
           <Route path='*'>

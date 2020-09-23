@@ -8,8 +8,6 @@ import { OrderDetails as OrderDetailsController } from '../OrderDetailsComponent
 import { Button } from '../../styles/Buttons'
 import logoHeader from '../../../template/assets/images/logo-header.svg'
 
-import pending from '../../../template/assets/order/PENDING.svg'
-
 import {
   Container,
   Header,
@@ -41,11 +39,12 @@ import {
   DriverInfo,
   DriverActions,
   OrderBillTitle,
-  // OrderProducts,
-  // ProductItem,
-  // ProductImage,
-  // ProductInfo,
-  // OrderBill,
+  OrderProducts,
+  ProductItem,
+  WrapperProductImage,
+  ProductImage,
+  ProductInfo,
+  OrderBill,
   ReviewsAction
 } from './styles'
 
@@ -89,7 +88,7 @@ const OrderDetailsUI = (props) => {
           </HeaderText>
           <HeaderText>
             <h1>{t('ORDER_TOTAL', 'Total')}</h1>
-            <p>{formatPrice(order?.total || 0)}</p>
+            <h1>{formatPrice(order?.total || 0)}</h1>
           </HeaderText>
         </HeaderInfo>
       </Header>
@@ -179,26 +178,29 @@ const OrderDetailsUI = (props) => {
         <OrderBillTitle>
           Your Order
         </OrderBillTitle>
-        {/* <OrderProducts>
-          {order.products.map(product => (
+        <OrderProducts>
+          {order?.products.map(product => (
             <ProductItem key={product.id}>
-              <div>
-                <span>{product.quantity}</span>
-                <ProductImage bgimage={product.images} />
+              <div className='info'>
+                <p>{product.quantity}</p>
+                <p><BiCaretDown /></p>
+                <WrapperProductImage>
+                  <ProductImage bgimage={product.images} />
+                </WrapperProductImage>
                 <ProductInfo>
                   <h1>{product.name}</h1>
-                  {product.ingredients.length && <p>{product.ingredients[0].name}</p>}
+                  {product.ingredients.length > 0 && <span>{product.ingredients[0].name}</span>}
                 </ProductInfo>
               </div>
-              <div>
-                <span>{product.quantity}</span>
+              <div className='price'>
+                <span>{formatPrice(product.price)}</span>
               </div>
             </ProductItem>
           ))}
-        </OrderProducts> */}
+        </OrderProducts>
 
-        {/* <OrderBill>
-          <table style={{ width: '100%' }}>
+        <OrderBill>
+          <table>
             <tbody>
               <tr>
                 <td>Subtotal</td>
@@ -216,20 +218,25 @@ const OrderDetailsUI = (props) => {
                 <td>Driver tip (0%)</td>
                 <td>{formatPrice(order?.driver_tip)}</td>
               </tr>
+            </tbody>
+          </table>
+          <table className='total'>
+            <tbody>
               <tr>
                 <td>Total</td>
                 <td>{formatPrice(order?.total)}</td>
               </tr>
             </tbody>
           </table>
-        </OrderBill> */}
+        </OrderBill>
 
-        {/* {(order?.status === 1 || order?.status === 11) && ()} */}
-        <ReviewsAction>
-          <Button color='primary'>
-            Review your Order
-          </Button>
-        </ReviewsAction>
+        {(order?.status === 1 || order?.status === 11) && (
+          <ReviewsAction>
+            <Button color='primary'>
+              Review your Order
+            </Button>
+          </ReviewsAction>
+        )}
       </Content>
     </Container>
   )

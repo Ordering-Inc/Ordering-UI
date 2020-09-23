@@ -277,6 +277,7 @@ export const CustomerInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-transform: capitalize;
   h1, span {
     margin: 0px;
   }
@@ -294,7 +295,6 @@ export const CustomerInfo = styled.div`
 export const DriverTitle = styled(CustomerTitle)``
 
 export const OrderDriver = styled(OrderCustomer)`
-  display: flex;
   justify-content: space-between;
 `
 
@@ -335,11 +335,101 @@ export const DriverActions = styled(BusinessActions)``
 
 export const OrderBillTitle = styled(CustomerTitle)``
 
-// OrderProducts
-// ProductItem
-// ProductImage
-// ProductInfo
-// OrderBill
+export const OrderProducts = styled(OrderCustomer)``
+
+export const ProductItem = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #BFBFBF;
+  padding-bottom: 10px;
+
+  div.info {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    p {
+      font-size: 20px;
+      margin: 0px 5px;
+      svg {
+        cursor: pointer;
+      }
+    }
+  }
+
+  div.price {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    span {
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+`
+
+export const WrapperProductImage = styled(BusinessLogoWrapper)``
+
+const ProductImageStyled = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  min-height: 75px;
+  border-radius: 10px;
+`
+
+export const ProductImage = (props) => {
+  return (
+    <ProductImageStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </ProductImageStyled>
+  )
+}
+
+export const ProductInfo = styled(CustomerInfo)`
+  margin-left: 10px;
+`
+
+export const OrderBill = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  table {
+    width: 80%;
+    font-size: 18px;
+    tr td:nth-child(2) {
+      text-align: right;
+    }
+  }
+
+  table.total {
+    border-top: 1px solid #BFBFBF;
+    margin-top: 15px;
+    tr {
+      font-size: 20px;
+      td:nth-child(1) {
+        font-weight: bold;
+        padding-top: 10px;
+      }
+      td:nth-child(2) {
+        font-weight: bold;
+        color: #D81212;
+        padding-top: 10px;
+      }
+    }
+  }
+`
+
 export const ReviewsAction = styled.div`
   width: 100%;
   display: flex;
