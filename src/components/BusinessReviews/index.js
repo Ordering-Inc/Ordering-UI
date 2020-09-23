@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { BusinessReviews as BusinessReviewController } from 'ordering-components'
 
-import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores,ScoreDiv } from './styles'
+import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv } from './styles'
 import { Select } from '../../styles/Select'
 
-import {AiOutlineStar,AiOutlineCalendar} from 'react-icons/ai'
+import { AiOutlineStar, AiOutlineCalendar } from 'react-icons/ai'
 
 const Score = ({ star, text }) => (
   <ScoreDiv>
-    <AiOutlineStar color='#D81212'/> {star}
+    <AiOutlineStar color='#D81212' /> {star}
     <p>{text}</p>
   </ScoreDiv>
 )
@@ -49,39 +49,39 @@ export const BusinessReviewsUI = (props) => {
   })
   return (
     <>
-    {!reviewsList.loading ? (
-      <>
-      <ReviewOf>
-        <h3>Reviews of {businessName}</h3>
-        <Select placeholder='Date'/>
-        <Select options={options} defaultValue={puntajes[0]} onChange={(val) => onChangeOption(val)} />
-      </ReviewOf>
-      <Content>
-        <h3><AiOutlineStar color='#D81212'/> {stars}</h3>
-        {actualReviews.map((review) => (
-          <ReviewContainer key={review.id}>
-            <Comments>
-              <div>
-                <h4>Nombre?</h4>
-              </div>
-              <div>
-                <p><AiOutlineStar color='#D81212'/> {review.total}</p>
-              </div>
-              <Comment>
-                <p>{review.comment}</p>
-              </Comment>
-            </Comments>
-            <Scores>
-              <Score star={review.quality} text='Quality of products' />
-              <Score star={review.delivery} text='Punctuality' />
-              <Score star={review.service} text='Service' />
-              <Score star={review.package} text='Product Packaging' />
-            </Scores>
-          </ReviewContainer>
-        ))}
-      </Content>
-      </>
-    ) : 'laading'}
+      {!reviewsList.loading ? (
+        <>
+          <ReviewOf>
+            <h3>Reviews of {businessName}</h3>
+            <Select placeholder='Date' />
+            <Select options={options} defaultValue={puntajes[0]} onChange={(val) => onChangeOption(val)} />
+          </ReviewOf>
+          <Content>
+            <h3><AiOutlineStar color='#D81212' /> {stars}</h3>
+            {actualReviews.map((review) => (
+              <ReviewContainer key={review.id}>
+                <Comments>
+                  <div>
+                    <h4>Nombre?</h4>
+                  </div>
+                  <div>
+                    <p><AiOutlineStar color='#D81212' /> {review.total}</p>
+                  </div>
+                  <Comment>
+                    <p title={review.comment}>{review.comment}</p>
+                  </Comment>
+                </Comments>
+                <Scores>
+                  <Score star={review.quality} text='Quality of products' />
+                  <Score star={review.delivery} text='Punctuality' />
+                  <Score star={review.service} text='Service' />
+                  <Score star={review.package} text='Product Packaging' />
+                </Scores>
+              </ReviewContainer>
+            ))}
+          </Content>
+        </>
+      ) : 'laading'}
     </>
   )
 }

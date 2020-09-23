@@ -10,9 +10,9 @@ export const ReviewOf = styled.div`
 `
 
 export const Content = styled.div`
- > h3{
-   color: '#D81212';
- }
+  > h3 {
+    color: "#D81212";
+  }
 `
 
 export const ReviewContainer = styled.div`
@@ -25,15 +25,15 @@ export const ReviewContainer = styled.div`
 `
 
 export const Comments = styled.div`
- display: flex;
- justify-content: space-between;
- align-items: center;
- flex-wrap: wrap;
- width: 100%;
- overflow: hidden
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: hidden;
 `
 export const Comment = styled.div`
-width: 60%
+  width: 60%;
 `
 export const Scores = styled.div`
   display: flex;

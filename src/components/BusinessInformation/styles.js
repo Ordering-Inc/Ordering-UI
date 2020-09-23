@@ -37,41 +37,38 @@ export const BussinessTitle = styled.div`
   z-index: 1000;
   display: inline-flex;
   width: 50%;
-  background: #FFFFFF;
+  background: #ffffff;
   align-items: center;
   margin-left: 10px;
   margin-bottom: 10px;
   border-radius: 16px;
   padding: 10px;
-
 `
 export const HeaderImage = styled.div`
-    width: 20%;
-    margin-top: auto;
-    > img {
-     width: 100%;
-    }
+  width: 20%;
+  margin-top: auto;
+  > img {
+    width: 100%;
+  }
 `
 
 export const Information = styled.div`
   display: inline-flex;
   flex-direction: column;
   flex: 1;
-  > h5{
+  > h5 {
     margin-block-end: 0.8em;
     margin-block-start: 0.8em;
   }
   > p {
     margin-block-end: 0;
     margin-block-start: 0.3em;
-    > svg{
-      vertical-align: middle
+    > svg {
+      vertical-align: middle;
     }
   }
 `
-export const Stars = styled.div`
-  
-`
+export const Stars = styled.div``
 
 export const BusinessContent = styled.div`
   height: 80%;
@@ -89,37 +86,34 @@ export const BusinessLocation = styled.div`
 export const Map = styled.div`
   width: 100%;
   height: 20vh;
-  > div{
+  > div {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
   }
 `
 
-export const BusinessOpeningTime = styled.div`
-
-`
+export const BusinessOpeningTime = styled.div``
 
 export const Times = styled.div`
   display: flex;
   justify-content: space-between;
   text-align: center;
   > div {
-  padding: 0 5px;
-    > h4{
-    color: #D81212
+    padding: 0 5px;
+    > h4 {
+      color: #d81212;
     }
   }
 `
 
 export const DeliveryDetails = styled.div`
   display: flex;
-  justify-content: space-around; 
+  justify-content: space-around;
 `
 export const BusinessGallery = styled.div`
-
   > div {
-    display: flex; 
+    display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     > img {
@@ -130,7 +124,7 @@ export const BusinessGallery = styled.div`
 
 export const BusinessVideos = styled.div`
   > div {
-    display: flex; 
+    display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     > iframe {

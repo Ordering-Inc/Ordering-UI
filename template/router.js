@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   BrowserRouter,
   Switch,
@@ -7,13 +7,12 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useApi } from 'ordering-components'
+import { useSession, useLanguage, useOrder } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
 import { Login } from './Pages/Login'
-import { BusinessInformation } from '../src/components/BusinessInformation'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 
