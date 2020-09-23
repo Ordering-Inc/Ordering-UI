@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { useOrder } from 'ordering-components'
+import React, { useEffect, useState } from 'react'
+import { useOrder, useLanguage } from 'ordering-components'
 
 export const ProductsListing = (props) => {
   const {
@@ -11,269 +11,131 @@ export const ProductsListing = (props) => {
   } = props
 
   const [orderState] = useOrder()
+  const [, t] = useLanguage()
 
-  const [categorySelected, setCategorySelecategorySelected] = useState(null)
-  const [business, setBusiness] = useState({ business: {}, categories: [], loading: true, error: null })
+  const [categorySelected, setCategorySelected] = useState({ id: null, name: t('ALL', 'All') })
+  const [businessState, setBusinessState] = useState({ business: {}, loading: true, error: null })
+  const [categoriesState, setCategoriesState] = useState({})
 
-  const [isProductsLimit, setIsProductsLimit] = useState(null)
-
-  const [categoriesToShow, setCategoriesToShow] = useState({ loading: true, error: null, data: {}, productsToShow: {} })
-
-  const [paginationProps, setPaginationProps] = useState({ currentPage: 0, pageSize: 10, totalItems: null, totalPages: 0 })
-
-  const getProductsFromCategories = () => {
-    let categoryToSave = {}
-    return business?.business?.categories?.forEach(category => {
-      categoryToSave = {
-        ...categoryToSave,
-        [`categoryId:${category.id}`]: {
-          categoryId: category.id,
-          products: category.products
-        }
-      }
-      setCategoriesToShow({
-        ...categoriesToShow,
-        data: categoryToSave,
-        productsToShow: categoryToSave
-      })
-    })
+  const categoryStateDefault = {
+    loading: true,
+    pagination: { currentPage: 0, pageSize: 20, totalItems: null, totalPages: 0, nextPageItems: 10 },
+    products: []
   }
 
-  const productsFormatted = (products = [], pagination = {}) => {
-    const categoryToSave = {}
-    products.forEach(product => {
-      if (categoryToSave[`categoryId:${product.category_id}`]) {
-        categoryToSave[`categoryId:${product.category_id}`].products.push(product)
-      } else {
-        categoryToSave[`categoryId:${product.category_id}`] = {
-          categoryId: product.category_id,
-          products: [product],
-          pagination
-        }
-      }
-    })
-    return categoryToSave
+  const [categoryState, setCategoryState] = useState(categoryStateDefault)
+  const [errors, setErrors] = useState(null)
+
+  /**
+   * Change category selected
+   * @param {Object} category Category object
+   */
+  const handleChangeCategory = (category) => {
+    if (category?.id === categorySelected?.id) return
+    setCategorySelected(category)
   }
 
   const getProducts = async (newFetch) => {
-    const parameters = {
-      ...businessParams,
-      page: newFetch ? 1 : paginationProps.currentPage + 1,
-      page_size: paginationProps.pageSize
+    if (!businessState.business.lazy_load_products_recommended) {
+      const categoryState = {
+        ...categoryStateDefault,
+        loading: false
+      }
+      if (categorySelected.id) {
+        categoryState.products = businessState.business.categories?.find(category => category.id === categorySelected.id)?.products || []
+      } else {
+        categoryState.products = businessState.business.categories?.reduce((products, category) => [...products, ...category.products], []) || []
+      }
+      setCategoryState({ ...categoryState })
+      return
     }
-    let _result = []
-    let _pagination = []
+
+    const categoryKey = categorySelected.id ? `categoryId:${categorySelected.id}` : 'all'
+    const categoryState = categoriesState[categoryKey] || categoryStateDefault
+
+    const pagination = categoryState.pagination
+    if (pagination.currentPage > 0 && pagination.currentPage === pagination.totalPages) {
+      setCategoryState({ ...categoryState, loading: false })
+      return
+    }
+
+    setCategoryState({ ...categoryState, loading: true })
+
+    const parameters = {
+      type: orderState.options?.type || 1,
+      page: newFetch ? 1 : pagination.currentPage + 1,
+      page_size: pagination.pageSize
+    }
 
     try {
-      if (!categoriesToShow.data[`categoryId:${categorySelected}`] && categorySelected) {
-        const { content: { result, pagination } } = await ordering
-          .businesses(business.business?.id)
-          .categories(categorySelected)
-          .products()
-          .parameters(parameters)
-          .get()
-        _result = result
-        _pagination = pagination
+      const functionFetch = categorySelected.id ? ordering.businesses(businessState.business.id).categories(categorySelected.id).products() : ordering.businesses(businessState.business.id).products()
+      const { content: { error, result, pagination } } = await functionFetch.parameters(parameters).get()
+      if (!error) {
+        const newcategoryState = {
+          pagination: {
+            ...categoryState.pagination,
+            currentPage: pagination.current_page,
+            totalItems: pagination.total,
+            totalPages: pagination.total_pages
+          },
+          loading: false,
+          products: [...categoryState.products, ...result]
+        }
+        categoriesState[categoryKey] = newcategoryState
+        setCategoryState({ ...newcategoryState })
+        setCategoriesState({ ...categoriesState })
+      } else {
+        setErrors(result)
       }
-      if (isProductsLimit && !categorySelected) {
-        const { content: { result, pagination } } = await ordering
-          .businesses(business.business?.id)
-          .products()
-          .parameters(parameters)
-          .get()
-        _result = result
-        _pagination = pagination
-      }
-      categoriesToShow.loading = false
     } catch (e) {
-      setCategoriesToShow({
-        ...categoriesToShow,
-        loading: false,
-        error: [e]
-      })
+      console.log(e)
+      setErrors([e.message])
     }
-    // setCategoriesToShow({
-    //   ...categoriesToShow,
-    //   productsToShow: productsFormatted(_result, _pagination)
-    // })
-
-    console.log(_result)
-
-    const products = categorySelected
-      ? { [`categoryId:${categorySelected}`]: categoriesToShow.data[`categoryId:${categorySelected}`] }
-      : isProductsLimit ? productsFormatted(_result) : categoriesToShow.data
-
-    setCategoriesToShow({
-      ...categoriesToShow,
-      data: products,
-      productsToShow: products
-    })
   }
-
-  // const [productsList, setProductsList] = useState({ products: [], loading: false, error: false })
-
-  // const productsRecommended = business.business.lazy_load_products_recommended
-
-  // const isMatchCategory = (categoryId) => {
-  //   if (!categorySelected) return true
-  //   return Number(categoryId) === Number(categorySelected)
-  // }
-
-  // const getProductsFromCategories = (categories) => {
-  //   const products = []
-  //   categories.map(category => products.push(category.products))
-  //   return products
-  // }
-
-  // const getProducts = async (newFetch) => {
-  //   console.log(newFetch, categorySelected)
-  //   const businessId = business.business?.id
-  //   try {
-  //     setProductsList({
-  //       ...productsList,
-  //       loading: true
-  //     })
-  //     const parameters = {
-  //       ...businessParams,
-  //       page: newFetch ? 1 : paginationProps.currentPage + 1,
-  //       page_size: paginationProps.pageSize
-  //     }
-  //     let resultApi = []
-  //     let paginationApi = {}
-
-  //     if (categorySelected) {
-  //       const { content: { result, pagination } } = await ordering
-  //         .businesses(businessId)
-  //         .categories(categorySelected)
-  //         .products()
-  //         .parameters(parameters)
-  //         .get()
-  //       resultApi = result
-  //       paginationApi = pagination
-  //     }
-  //     if (productsRecommended && !categorySelected) {
-  //       const { content: { result, pagination } } = await ordering
-  //         .businesses(businessId)
-  //         .products()
-  //         .parameters(parameters)
-  //         .get()
-  //       resultApi = result
-  //       paginationApi = pagination
-  //     }
-  //     if (!productsRecommended && !categorySelected) {
-  //       const products = [].concat(...getProductsFromCategories(business.business.categories))
-  //       console.log('products', products)
-  //       setProductsList({
-  //         ...productsList,
-  //         products,
-  //         loading: false
-  //       })
-  //       return
-  //     }
-  //     const productsFiltered = categorySelected
-  //       ? resultApi?.filter(product => isMatchCategory(product.category_id))
-  //       : resultApi
-
-  //     productsList.products = newFetch
-  //       ? productsFiltered
-  //       : [...productsList.products, ...productsFiltered]
-
-  //     setProductsList({
-  //       ...productsList,
-  //       loading: false
-  //     })
-  //     let nextPageItems = 0
-  //     if (paginationApi.current_page !== paginationApi.total_pages) {
-  //       const remainingItems = paginationApi.total - productsList.products.length
-  //       nextPageItems = remainingItems < paginationApi.page_size ? remainingItems : paginationApi.page_size
-  //     }
-  //     setPaginationProps({
-  //       ...paginationProps,
-  //       currentPage: paginationApi.current_page,
-  //       totalPages: paginationApi.total_pages,
-  //       nextPageItems
-  //     })
-  //   } catch (error) {
-  //     setProductsList({
-  //       ...productsList,
-  //       loading: false,
-  //       error
-  //     })
-  //   }
-  // }
 
   const getBusiness = async () => {
     try {
-      setBusiness({
-        ...business,
-        loading: true
-      })
+      setBusinessState({ ...businessState, loading: true })
       const { content: { result } } = await ordering
         .businesses(slug)
         .select(businessProps)
         .parameters(businessParams)
         .get()
-      const categories = [
-        { id: null, name: 'All' },
-        ...result.categories
-      ]
-      setIsProductsLimit(result.lazy_load_products_recommended)
-      setBusiness({
-        ...business,
+      setBusinessState({
+        ...businessState,
         business: result,
-        categories,
         loading: false
       })
     } catch (e) {
-      setBusiness({
-        ...business,
+      setBusinessState({
+        ...businessState,
         loading: false,
         error: [e]
       })
-      categoriesToShow.loading = false
-      categoriesToShow.error = [e]
     }
   }
 
-  // const handleScroll = useCallback(() => {
-  //   const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
-  //   const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
-  //   if (badScrollPosition || productsList.loading || !hasMore) return
-  //   getProducts()
-  // }, [productsList, paginationProps])
-
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll)
-  //   return () => window.removeEventListener('scroll', handleScroll)
-  // }, [handleScroll])
+  useEffect(() => {
+    if (orderState.loading || businessState.loading) return
+    getProducts()
+  }, [orderState, categorySelected, businessState])
 
   useEffect(() => {
-    if (orderState.loading || !orderState.options?.address?.location) return
-    getProducts(true)
-  }, [orderState, categorySelected])
-
-  useEffect(() => {
-    if (!isProductsLimit) {
-      getProductsFromCategories()
+    if (!orderState.loading) {
+      getBusiness()
     }
-  }, [business])
-
-  useEffect(() => {
-    getBusiness()
-  }, [])
+  }, [orderState])
 
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
-          isAllCategory={!!categorySelected}
           categorySelected={categorySelected}
-          business={business}
-          categoriesToShow={categoriesToShow}
-          // productsList={productsList}
-          // paginationProducts={paginationProps}
-          handlerClickCategory={(val) => setCategorySelecategorySelected(val)}
+          categoryState={categoryState}
+          business={businessState}
+          handleChangeCategory={handleChangeCategory}
+          getNextProducts={getProducts}
         />
       )}
     </>

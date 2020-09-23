@@ -6,123 +6,78 @@ import { SingleProductCard } from '../SingleProductCard'
 import {
   ProductsContainer,
   ProductsListing,
-  WrapAllCategories,
-  ErrorMessage
+  WrapAllCategories
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
   const {
-    isAllCategory,
-    categories
-    // business,
-    // productsList,
-    // paginationProducts
+    category,
+    categories,
+    categoryState
   } = props
-
-  // const { products, loading, error } = props.productsList
-  const { productsToShow, loading, error } = props.categoriesToShow
-
-  const getCategoryName = (categoryId) => categories.find(category => category.id === categoryId)?.name
 
   return (
     <ProductsContainer>
       {
-        !loading && Object.keys(productsToShow).length === 0 && (
-          <div>
-            <h1>Not Found elements</h1>
-          </div>
-        )
-      }
-
-      {
-        Object.keys(productsToShow).map(category => (
-          <WrapAllCategories key={productsToShow[category].categoryId}>
-            {isAllCategory && <h3>{getCategoryName(productsToShow[category].categoryId)}</h3>}
-            <ProductsListing>
-              {productsToShow[category]?.products.map(product => (
+        category.id && (
+          <ProductsListing>
+            {
+              categoryState.products?.map(product => (
                 <SingleProductCard
                   key={product.id}
                   isSoldOut={product.inventoried && !product.quantity}
                   product={product}
                 />
-              ))}
-            </ProductsListing>
-          </WrapAllCategories>
-        ))
+              ))
+            }
+            {
+              categoryState.loading && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+                <SingleProductCard
+                  key={`skeleton:${i}`}
+                  isSkeleton
+                />
+              ))
+            }
+          </ProductsListing>
+        )
       }
 
-      {loading && (
-        <ProductsListing>
-          {[...Array(12).keys()].map(i => (
-            <SingleProductCard
-              key={i}
-              isSkeleton
-            />))}
-        </ProductsListing>
-      )}
-
-      {error && error.length > 0 && (
-        error.map((e, i) => (
-          <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
-        ))
-      )}
+      {
+        !category.id && categories.filter(category => category.id !== null).map((category, i, _categories) => {
+          const products = categoryState.products?.filter(product => product.category_id === category.id) || []
+          return (
+            <React.Fragment key={category.id}>
+              {
+                products.length > 0 && (
+                  <WrapAllCategories>
+                    <h3>{category.name}</h3>
+                    <ProductsListing>
+                      {
+                        products.map(product => (
+                          <SingleProductCard
+                            key={product.id}
+                            isSoldOut={product.inventoried && !product.quantity}
+                            product={product}
+                          />
+                        ))
+                      }
+                      {
+                        categoryState.loading && (i + 1) === _categories.length && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+                          <SingleProductCard
+                            key={`skeleton:${i}`}
+                            isSkeleton
+                          />
+                        ))
+                      }
+                    </ProductsListing>
+                  </WrapAllCategories>
+                )
+              }
+            </React.Fragment>
+          )
+        })
+      }
     </ProductsContainer>
-    // <ProductsContainer>
-    //   {
-    //     !loading && products?.length === 0 && (
-    //       <div>
-    //         <h1>Not Found elements</h1>
-    //       </div>
-    //     )
-    //   }
-
-  //   {
-  //     isAllCategory && categories.map(category => (
-  //       <WrapAllCategories key={category.id}>
-  //         <h3>{category.name}</h3>
-  //         <ProductsListing>
-  //           {products.map(product => product.category_id === category.id && (
-  //             <SingleProductCard
-  //               key={product.id}
-  //               isSoldOut={product.inventoried && !product.quantity}
-  //               product={product}
-  //             />
-  //           ))}
-  //         </ProductsListing>
-  //       </WrapAllCategories>
-  //     ))
-  //   }
-
-  //   {
-  //     !isAllCategory && (
-  //       <ProductsListing>
-  //         {products.map((product) => (
-  //           <SingleProductCard
-  //             key={product.id}
-  //             isSoldOut={product.inventoried && !product.quantity}
-  //             product={product}
-  //           />
-  //         ))}
-  //       </ProductsListing>
-  //     )
-  //   }
-
-  // {loading && (
-  //   <ProductsListing>
-  //     {[...Array(paginationProducts.nextPageItems ? paginationProducts.nextPageItems : 12).keys()].map(i => (
-  //       <SingleProductCard
-  //         key={i}
-  //         isSkeleton
-  //       />))}
-  //   </ProductsListing>
-  // )}
-
-  // {error && error.length > 0 && (
-  //   error.map((e, i) => (
-  //     <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
-  //   ))
-  // )}
-  // </ProductsContainer>
   )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { VscWarning } from 'react-icons/vsc'
 import {
@@ -22,17 +22,29 @@ import { BusinessProductsList } from '../BusinessProductsList'
 
 const BusinessProductsListingUI = (props) => {
   const {
-    isAllCategory,
     categorySelected,
-    categoriesToShow,
+    categoryState,
+    getNextProducts,
     // productsList,
     // onProductClick,
     // paginationProducts,
-    handlerClickCategory
+    handleChangeCategory
   } = props
 
-  const { business, categories, loading, error } = props.business
+  const { business, loading, error } = props.business
   const [, t] = useLanguage()
+
+  const handleScroll = useCallback(() => {
+    const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
+    const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
+    if (badScrollPosition || categoryState.loading || !hasMore) return
+    getNextProducts()
+  }, [categoryState])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <ProductsContainer>
@@ -43,29 +55,18 @@ const BusinessProductsListingUI = (props) => {
               business={props.business}
             />
             <BusinessProductsCategories
-              categories={categories}
+              categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
               categorySelected={categorySelected}
-              onClickCategory={handlerClickCategory}
+              onClickCategory={handleChangeCategory}
             />
             <WrapContent>
               <BusinessProductsList
-                categories={categories}
-                isAllCategory={!isAllCategory}
-                categoriesToShow={categoriesToShow}
-                // productsList={productsList}
-                // onProductClick={onProductClick}
-                // paginationProducts={paginationProducts}
+                categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                category={categorySelected}
+                categoryState={categoryState}
               />
             </WrapContent>
           </>
-        )
-      }
-      {
-        !loading && !Object.keys(business).length && (
-          <ProductsNotFound>
-            <h1>{t('NOT_FOUND_BUSINESS')}</h1>
-            <VscWarning />
-          </ProductsNotFound>
         )
       }
 
@@ -81,17 +82,23 @@ const BusinessProductsListingUI = (props) => {
           />
           <WrapContent>
             <BusinessProductsList
-              categories={categories}
-              isAllCategory={!isAllCategory}
-              categoriesToShow={categoriesToShow}
-              // business={props.business}
-              // productsList={productsList}
-              // onProductClick={onProductClick}
-              // paginationProducts={paginationProducts}
+              categories={[]}
+              category={categorySelected}
+              categoryState={categoryState}
             />
           </WrapContent>
         </>
       )}
+
+      {
+        !loading && !Object.keys(business).length && (
+          <ProductsNotFound>
+            <h1>{t('NOT_FOUND_BUSINESS')}</h1>
+            <VscWarning />
+          </ProductsNotFound>
+        )
+      }
+
       {error && error.length > 0 && (
         <ProductsNotFound>
           {error.map((e, i) => (
