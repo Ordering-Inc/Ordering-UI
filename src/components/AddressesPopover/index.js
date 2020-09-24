@@ -1,12 +1,14 @@
 import React, { useRef, useEffect } from 'react'
-import { useOrder, useLanguage } from 'ordering-components'
+import { useOrder, useLanguage, useSession } from 'ordering-components'
 import { AddressList } from '../AddressList'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
+import { AddressForm } from '../AddressForm'
 
 export const AddressesPopover = (props) => {
   const { open } = props
-  const [orderStatus] = useOrder()
+  const [orderState] = useOrder()
+  const [userState] = useSession()
   const [, t] = useLanguage()
   const referenceElement = useRef()
   const popperElement = useRef()
@@ -28,7 +30,7 @@ export const AddressesPopover = (props) => {
 
   useEffect(() => {
     forceUpdate && forceUpdate()
-  }, [open, orderStatus])
+  }, [open, orderState])
 
   const handleClickOutside = (e) => {
     if (!open) return
@@ -49,13 +51,32 @@ export const AddressesPopover = (props) => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>{orderStatus.options?.address?.address || t('SELECT_AN_ADDRESS', 'Select an address')}</HeaderItem>
+      <HeaderItem ref={referenceElement} onClick={props.onClick}>{orderState.options?.address?.address || t('SELECT_AN_ADDRESS', 'Select an address')}</HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <div style={{ fontSize: '30px', fontWeight: 'bold' }}>{t('ADDRESSES', 'Addresses')}</div>
-        <AddressList
-          popover
-          changeOrderAddressWithDefault
-        />
+        {
+          userState.auth && (
+            <>
+              <div style={{ fontSize: '30px', fontWeight: 'bold' }}>{t('ADDRESSES', 'Addresses')}</div>
+              <AddressList
+                popover
+                changeOrderAddressWithDefault
+              />
+            </>
+          )
+        }
+        {
+          !userState.auth && (
+            <>
+              <div style={{ fontSize: '30px', fontWeight: 'bold' }}>{t('ADDRES', 'Address')}</div>
+              <AddressForm
+                useValidationFileds
+                address={orderState?.options?.address || {}}
+                onClose={() => props.onClose && props.onClose()}
+                onSaveAddress={() => props.onClose && props.onClose()}
+              />
+            </>
+          )
+        }
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
     </div>

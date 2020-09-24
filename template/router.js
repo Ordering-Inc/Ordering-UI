@@ -12,11 +12,13 @@ import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
+import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
+import { Footer } from './components/Footer'
 
 const fontName = 'Nunito'
 
@@ -169,7 +171,7 @@ export const Router = () => {
             }
           </Route>
           <Route exact path='/store/:store'>
-            <Store />
+            <BusinessProductsList />
           </Route>
           <Route exact path='/checkout'>
             Checkout
@@ -182,7 +184,7 @@ export const Router = () => {
           </Route>
         </Switch>
       </FontTheme>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   )
 }
@@ -195,18 +197,6 @@ function Page () {
   return (
     <div>
       <h3>Page: {page}</h3>
-    </div>
-  )
-}
-
-function Store () {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
-  const { store } = useParams()
-
-  return (
-    <div>
-      <h3>Store: {store}</h3>
     </div>
   )
 }
