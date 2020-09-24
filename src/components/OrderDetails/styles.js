@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import orderBackground from '../../../template/assets/order-background.png'
 
 export const Container = styled.div`
   display: flex;
@@ -22,7 +21,6 @@ const HeaderStyled = styled.div`
 
 export const Header = (props) => {
   const style = {}
-  style.backgroundImage = `url(${orderBackground})`
 
   return (
     <HeaderStyled style={style}>
@@ -335,15 +333,22 @@ export const DriverActions = styled(BusinessActions)``
 
 export const OrderBillTitle = styled(CustomerTitle)``
 
-export const OrderProducts = styled(OrderCustomer)``
+export const OrderProducts = styled(OrderCustomer)`
+  flex-direction: column;
+`
+
+export const WrapperProductItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
 
 export const ProductItem = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   border-bottom: 1px solid #BFBFBF;
-  padding-bottom: 10px;
+  padding: 10px 0px;
 
   div.info {
     display: flex;
@@ -439,4 +444,35 @@ export const ReviewsAction = styled.div`
     color: #FFF;
     width: 40%;
   }
+`
+
+export const FootActions = styled.div`
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #D81212;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  svg {
+    margin-left: 5px;
+    transform: rotate(90deg)
+  }
+`
+export const SkeletonBlock = styled.div`
+  width: ${({ width }) => width && `${width}%`};
+  border-radius: 16px;
+`
+
+export const SkeletonBlockWrapp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  line-height: 40px;
 `
