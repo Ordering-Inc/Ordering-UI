@@ -162,11 +162,7 @@ const OrderDetailsUI = (props) => {
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  {getOrderStatus(order?.status)?.slug ? (
-                    <img src={require(`../../../template/assets/order/${getOrderStatus(order?.status)?.slug}.svg`)} alt='' />
-                  ) : (
-                    <img src='https://picsum.photos/75' alt='' />
-                  )}
+                  <img src={require(`../../../template/assets/order/${getOrderStatus(order?.status)?.slug}.svg`)} alt='' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>
