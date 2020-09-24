@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { VscWarning } from 'react-icons/vsc'
 import {
@@ -24,15 +24,18 @@ import { Modal } from '../Modal'
 
 const BusinessProductsListingUI = (props) => {
   const {
-    isAllCategory,
     categorySelected,
-    productsList,
-    handlerClickCategory
+    categoryState,
+    getNextProducts,
+    // productsList,
+    // onProductClick,
+    // paginationProducts,
+    handleChangeCategory
   } = props
 
-  const { business, categories, loading, error } = props.business
+  const { business, loading, error } = props.business
   const [, t] = useLanguage()
-
+  
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [product, setProduct] = useState(props.product)
 
@@ -47,6 +50,18 @@ const BusinessProductsListingUI = (props) => {
     }
   }
 
+  const handleScroll = useCallback(() => {
+    const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
+    const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
+    if (badScrollPosition || categoryState.loading || !hasMore) return
+    getNextProducts()
+  }, [categoryState])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
+
   return (
     <ProductsContainer>
       {
@@ -56,42 +71,34 @@ const BusinessProductsListingUI = (props) => {
               business={props.business}
             />
             <BusinessProductsCategories
-              categories={categories}
+              categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
               categorySelected={categorySelected}
-              onClickCategory={handlerClickCategory}
+              onClickCategory={handleChangeCategory}
             />
             <WrapContent>
               <BusinessProductsList
-                categories={categories}
-                productsList={productsList}
-                isAllCategory={!isAllCategory}
+                categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                category={categorySelected}
+                categoryState={categoryState}
                 onProductClick={onProductClick}
               />
             </WrapContent>
-
-            <Modal
-              width='70%'
-              open={modalIsOpen}
-              closeOnBackdrop={false}
-              onClose={() => setModalIsOpen(false)}
-            >
-              <ProductForm
-                product={product}
-                ordering={props.ordering}
-                onSave={handlerProductAction}
-              />
-            </Modal>
           </>
         )
       }
-      {
-        !loading && !business.id && (
-          <ProductsNotFound>
-            <h1>{t('NOT_FOUND_BUSINESS')}</h1>
-            <VscWarning />
-          </ProductsNotFound>
-        )
-      }
+
+      <Modal
+        width='70%'
+        open={modalIsOpen}
+        closeOnBackdrop={false}
+        onClose={() => setModalIsOpen(false)}
+      >
+        <ProductForm
+          product={product}
+          ordering={props.ordering}
+          onSave={handlerProductAction}
+        />
+      </Modal>
       {loading && (
         <>
           <BusinessBasicInformation
@@ -104,14 +111,23 @@ const BusinessProductsListingUI = (props) => {
           />
           <WrapContent>
             <BusinessProductsList
-              categories={categories}
-              productsList={productsList}
-              isAllCategory={!isAllCategory}
-              onProductClick={onProductClick}
+              categories={[]}
+              category={categorySelected}
+              categoryState={categoryState}
             />
           </WrapContent>
         </>
       )}
+
+      {
+        !loading && !Object.keys(business).length && (
+          <ProductsNotFound>
+            <h1>{t('NOT_FOUND_BUSINESS')}</h1>
+            <VscWarning />
+          </ProductsNotFound>
+        )
+      }
+
       {error && error.length > 0 && (
         <ProductsNotFound>
           {error.map((e, i) => (
@@ -128,10 +144,12 @@ export const BusinessProductsListing = (props) => {
   const [ordering] = useApi()
   const [orderState] = useOrder()
 
-  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'categories']
+  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'products']
   const businessParams = {
     type: orderState.options?.type || 1,
-    location: `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}` || '40.7539143,-73.9810162'
+    location: orderState.options?.address?.location
+      ? `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`
+      : '40.7539143,-73.9810162'
     // time: asap,
   }
 

@@ -1,0 +1,38 @@
+import React, { useRef, useEffect, useState } from 'react'
+
+export const Image = React.forwardRef((props, ref) => {
+  const imageRef = ref || useRef(ref)
+  const [error, setError] = useState(false)
+  const [remove, setRemove] = useState(false)
+
+  const onError = (e) => {
+    if (!error) {
+      setError(true)
+    } else {
+      setRemove(true)
+    }
+  }
+
+  useEffect(() => {
+    if (imageRef.current) {
+      imageRef.current.onerror = onError
+    }
+  }, [imageRef, error])
+
+  return (
+    <>
+      {
+        !error && <img className={props.className} style={props.style} src={props.src} ref={imageRef} />
+      }
+      {
+        error && !remove && typeof props.fallback === 'string' && <img className={props.className} style={props.style} src={props.fallback} ref={imageRef} />
+      }
+      {
+        error && remove && typeof props.fallback === 'string' && <div className={props.className} style={props.style} ref={imageRef} />
+      }
+      {
+        error && typeof props.fallback !== 'string' && <div className={props.className} style={props.style} ref={imageRef}>{props.fallback}</div>
+      }
+    </>
+  )
+})

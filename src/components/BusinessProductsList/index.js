@@ -12,61 +12,74 @@ import {
 
 const BusinessProductsListUI = (props) => {
   const {
-    isAllCategory,
+    category,
     categories,
-    onProductClick
+    categoryState
   } = props
-
-  const { products, loading, error } = props.productsList
 
   return (
     <ProductsContainer>
       {
-        !loading && isAllCategory && (
-          <>
+        category.id && (
+          <ProductsListing>
             {
-              categories.map(category => (
-                <WrapAllCategories key={category.id}>
-                  <h3>{category.name}</h3>
-                  <ProductsListing>
-                    {products?.map(product => product.category_id === category.id && (
-                      <SingleProductCard
-                        key={product.id}
-                        isSoldOut={product.inventoried && !product.quantity}
-                        product={product}
-                        onProductClick={onProductClick}
-                      />
-                    ))}
-                  </ProductsListing>
-                </WrapAllCategories>
+              categoryState.products?.map(product => (
+                <SingleProductCard
+                  key={product.id}
+                  isSoldOut={product.inventoried && !product.quantity}
+                  product={product}
+                  onProductClick={onProductClick}
+                />
               ))
             }
-          </>
-        )
-      }
-      {
-        !loading && !isAllCategory && (
-          <ProductsListing>
-            {products?.map((product) => (
-              <SingleProductCard
-                key={product.id}
-                isSoldOut={product.inventoried && !product.quantity}
-                product={product}
-                onProductClick={onProductClick}
-              />
-            ))}
+            {
+              categoryState.loading && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+                <SingleProductCard
+                  key={`skeleton:${i}`}
+                  isSkeleton
+                />
+              ))
+            }
           </ProductsListing>
         )
       }
-      {loading && (
-        <ProductsListing>
-          {[...Array(12).keys()].map(i => (
-            <SingleProductCard
-              key={i}
-              isSkeleton
-            />))}
-        </ProductsListing>
-      )}
+
+      {
+        !category.id && categories.filter(category => category.id !== null).map((category, i, _categories) => {
+          const products = categoryState.products?.filter(product => product.category_id === category.id) || []
+          return (
+            <React.Fragment key={category.id}>
+              {
+                products.length > 0 && (
+                  <WrapAllCategories>
+                    <h3>{category.name}</h3>
+                    <ProductsListing>
+                      {
+                        products.map(product => (
+                          <SingleProductCard
+                            key={product.id}
+                            isSoldOut={product.inventoried && !product.quantity}
+                            product={product}
+                            onProductClick={onProductClick}
+                          />
+                        ))
+                      }
+                      {
+                        categoryState.loading && (i + 1) === _categories.length && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+                          <SingleProductCard
+                            key={`skeleton:${i}`}
+                            isSkeleton
+                          />
+                        ))
+                      }
+                    </ProductsListing>
+                  </WrapAllCategories>
+                )
+              }
+            </React.Fragment>
+          )
+        })
+      }
       {
         !loading && products.length === 0 && (
           <div>
