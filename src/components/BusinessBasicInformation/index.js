@@ -23,9 +23,10 @@ const types = ['food', 'laundry', 'alcohol', 'groceries']
 
 export const BusinessBasicInformation = (props) => {
   const {
-    isSkeleton
+    isSkeleton,
+    businessState
   } = props
-  const { business, loading } = props.business
+  const { business, loading } = businessState
 
   const [orderState] = useOrder()
 

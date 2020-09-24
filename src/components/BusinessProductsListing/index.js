@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { VscWarning } from 'react-icons/vsc'
 import {
@@ -19,20 +19,34 @@ import {
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
+import { ProductForm } from '../ProductForm'
+import { Modal } from '../Modal'
 
 const BusinessProductsListingUI = (props) => {
   const {
+    businessState,
     categorySelected,
     categoryState,
     getNextProducts,
-    // productsList,
-    // onProductClick,
-    // paginationProducts,
     handleChangeCategory
   } = props
 
-  const { business, loading, error } = props.business
+  const { business, loading, error } = businessState
   const [, t] = useLanguage()
+  
+  const [openProduct, setModalIsOpen] = useState(false)
+  const [curProduct, setCurProduct] = useState(props.product)
+
+  const onProductClick = (product) => {
+    setCurProduct(product)
+    setModalIsOpen(true)
+  }
+
+  const handlerProductAction = (product) => {
+    if (Object.keys(product).length) {
+      setModalIsOpen(false)
+    }
+  }
 
   const handleScroll = useCallback(() => {
     const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
@@ -52,7 +66,7 @@ const BusinessProductsListingUI = (props) => {
         !loading && business.id && (
           <>
             <BusinessBasicInformation
-              business={props.business}
+              businessState={businessState}
             />
             <BusinessProductsCategories
               categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
@@ -64,16 +78,30 @@ const BusinessProductsListingUI = (props) => {
                 categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
                 category={categorySelected}
                 categoryState={categoryState}
+                onProductClick={onProductClick}
               />
             </WrapContent>
           </>
         )
       }
 
+      <Modal
+        width='70%'
+        open={openProduct}
+        closeOnBackdrop={false}
+        onClose={() => setModalIsOpen(false)}
+      >
+        <ProductForm
+          product={curProduct}
+          businessId={businessState?.business?.id}
+          // ordering={props.ordering}
+          onSave={handlerProductAction}
+        />
+      </Modal>
       {loading && (
         <>
           <BusinessBasicInformation
-            business={{ business: {}, loading: true }}
+            businessState={{ business: {}, loading: true }}
             isSkeleton
           />
           <BusinessProductsCategories

@@ -12,11 +12,12 @@ import {
 export const SingleProductCard = (props) => {
   const {
     product,
-    isSkeleton
+    isSkeleton,
+    onProductClick
   } = props
 
   return (
-    <CardContainer>
+    <CardContainer onClick={() => onProductClick(product)}>
       <CardInfo>
         {product?.name ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
         {(product?.description || isSkeleton) && <p>{product?.description || <Skeleton width={100} />}</p>}

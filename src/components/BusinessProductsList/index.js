@@ -7,13 +7,15 @@ import {
   ProductsContainer,
   ProductsListing,
   WrapAllCategories
+  // ErrorMessage
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
   const {
     category,
     categories,
-    categoryState
+    categoryState,
+    onProductClick
   } = props
 
   return (
@@ -27,6 +29,7 @@ const BusinessProductsListUI = (props) => {
                   key={product.id}
                   isSoldOut={product.inventoried && !product.quantity}
                   product={product}
+                  onProductClick={onProductClick}
                 />
               ))
             }
@@ -58,6 +61,7 @@ const BusinessProductsListUI = (props) => {
                             key={product.id}
                             isSoldOut={product.inventoried && !product.quantity}
                             product={product}
+                            onProductClick={onProductClick}
                           />
                         ))
                       }
@@ -77,6 +81,18 @@ const BusinessProductsListUI = (props) => {
           )
         })
       }
+      {
+        !categoryState.loading && categoryState.products.length === 0 && (
+          <div>
+            <h1>Not Found elements</h1>
+          </div>
+        )
+      }
+      {/* {error && error.length > 0 && (
+        error.map((e, i) => (
+          <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
+        ))
+      )} */}
     </ProductsContainer>
   )
 }
