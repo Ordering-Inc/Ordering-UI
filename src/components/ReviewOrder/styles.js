@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ReviewOrderContainer = styled.div`
+export const ReviewOrderContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,14 +36,11 @@ export const Comments = styled.div`
   display: flex;
   width: 80%;
   flex-direction: column;
-  align-items: baseline;
-  > div {
+  > input {
   width: 100%;
-    > input {
-      width: 64%;
-    }
   }
 `
 export const Send = styled.div`
   width: 80%;
+  margin: 20px 0;
 `

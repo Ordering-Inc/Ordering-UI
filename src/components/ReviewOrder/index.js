@@ -1,68 +1,126 @@
-import React, { useState } from 'react'
-import { OrderReview as ReviewOrderController } from 'ordering-components'
-import { ReviewOrderContainer, Reviews, Categories, Category, Stars, Comments,Send } from './styles'
+import React, { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+
+import { OrderReview as ReviewOrderController, useLanguage } from 'ordering-components'
+import { ReviewOrderContainer, Reviews, Categories, Category, Stars, Comments, Send } from './styles'
 import { Modal } from '../Modal'
+import { Alert } from '../Confirm'
 import { AiFillStar } from 'react-icons/ai'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
- 
-const ReviewOrderUI = (props) => {
-  const { open } = props
-  const [reviewOpen, setReviewOpen] = useState(open)
-  const [rating, setRating] = useState(0)
 
-  const StarsComponent = () => (
+const ReviewOrderUI = (props) => {
+  const { open, order, stars, handleChangeInput, handleChangeRating, handleSendReview, formState } = props
+  const [, t] = useLanguage()
+  const [reviewOpen, setReviewOpen] = useState(open)
+  const { handleSubmit, register, errors } = useForm()
+  const [hover, setHover] = useState(stars)
+  const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
+
+  useEffect(() => {
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        success: false,
+        content: formState.result?.result || [t('ERROR')]
+      })
+    }
+    if (!formState.loading && !formState.result?.error && alertState.success) {
+      setAlertState({
+        ...alertState,
+        open: true,
+        title: t('REVIEW_SUCCESS'),
+        content: t('REVIEW_SUCCESS')
+      })
+    }
+  }, [formState])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        success: false,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
+  const onSubmit = values => {
+    setAlertState({ ...alertState, success: true })
+    handleSendReview()
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  const StarsComponent = ({ name }) => (
     [...Array(5)].map((star, i) => (
-      <label key={i}>
-        <input type='radio' name='rating' value={i + 1} onClick={() => setRating(i + 1)} />
-        <AiFillStar color={(i + 1) <= rating ? 'yellow' : 'gray'} size={25} />
+      <label key={i} onMouseLeave={() => setHover(stars)}>
+        <input type='radio' name={name} value={i + 1} onClick={(e) => handleChangeRating(e)} />
+        <AiFillStar color={(i + 1) <= (hover[name] || stars[name]) ? 'yellow' : 'gray'} size={25} onMouseEnter={() => setHover({ [name]: (i + 1) })} />
       </label>
     ))
   )
-
   return (
-    <Modal open={reviewOpen} onClose={() => setReviewOpen(false)} closeOnBackdrop={false} title='Write a Review'>
-      <ReviewOrderContainer>
-        <Reviews>
-          <h2>Reviews:</h2>
-          <Categories>
-            <Category>
-              <p>Quality of Product:</p>
-              <Stars>
-                <StarsComponent name='rating' />
-              </Stars>
-            </Category>
-            <Category>
-              <p>Punctuality:</p>
-              <Stars>
-                <StarsComponent name='rating' />
-              </Stars>
-            </Category>
-            <Category>
-              <p>Service:</p>
-              <Stars>
-                <StarsComponent name='rating' />
-              </Stars>
-            </Category>
-            <Category>
-              <p>Product Packaging:</p>
-              <Stars>
-                <StarsComponent name='rating' />
-              </Stars>
-            </Category>
-          </Categories>
-        </Reviews>
-        <Comments>
-          <Category>
+    <Modal open={reviewOpen} onClose={() => setReviewOpen(false)} closeOnBackdrop={false} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
+      {order && (
+        <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
+          <Reviews>
+            <h2>Reviews:</h2>
+            <Categories>
+              <Category onMouseLeave={() => setHover(stars)}>
+                <p>Quality of Product:</p>
+                <Stars>
+                  <StarsComponent name='quality' />
+                </Stars>
+              </Category>
+              <Category onMouseLeave={() => setHover(stars)}>
+                <p>Punctuality:</p>
+                <Stars>
+                  <StarsComponent name='punctiality' />
+                </Stars>
+              </Category>
+              <Category onMouseLeave={() => setHover(stars)}>
+                <p>Service:</p>
+                <Stars>
+                  <StarsComponent name='service' />
+                </Stars>
+              </Category>
+              <Category onMouseLeave={() => setHover(stars)}>
+                <p>Product Packaging:</p>
+                <Stars>
+                  <StarsComponent name='packaging' />
+                </Stars>
+              </Category>
+            </Categories>
+          </Reviews>
+          <Comments>
             <h2>Comments:</h2>
-            <Input placeholder='Comments' />
-          </Category>
-        </Comments>
-        <Send>
-          <Button color='primary'>Send a Review</Button>
-        </Send>
-      </ReviewOrderContainer>
+            <Input
+              placeholder='Comments' name='comments' onChange={(e) => handleChangeInput(e)} ref={register({
+                required: 'The field comments is required'
+              })}
+            />
+          </Comments>
+          <Send>
+            <Button color='primary' type='submit'>Send a Review</Button>
+          </Send>
+          <Alert
+            title={t('ORDER REVIEW')}
+            content={alertState.content}
+            acceptText={t('ACCEPT')}
+            open={alertState.open}
+            onClose={() => closeAlert()}
+            onAccept={() => closeAlert()}
+            closeOnBackdrop={false}
+          />
+        </ReviewOrderContainer>
+      )}
     </Modal>
   )
 }
