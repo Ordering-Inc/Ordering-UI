@@ -39,11 +39,11 @@ export const Select = (props) => {
     return () => document.removeEventListener('mousedown', closeSelect)
   })
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const _defaultOption = options?.find(option => option.value === defaultValue)
     setSelectedOption(_defaultOption)
-    setValue(defaultValue)
-  }, [defaultValue, options])
+    setValue(defaultValue)    
+  }, [defaultValue, options]) */
 
   const handleChangeOption = (option) => {
     setSelectedOption(option)

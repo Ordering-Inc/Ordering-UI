@@ -14,33 +14,10 @@ const Score = ({ star, text }) => (
 )
 
 export const BusinessReviewsUI = (props) => {
-  const { businessName, stars, reviewsList } = props
+  const { businessName, stars, reviewsList, handleClickOption } = props
 
-  const [actualReviews, setActualReviews] = useState(reviewsList.reviews)
-
-  useEffect(() => {
-    if (reviewsList.reviews) {
-      const reviews = reviewsList.reviews.length &&
-      reviewsList.reviews.sort((a, b) => {
-        return new Date(b.created_at) - new Date(a.created_at)
-      })
-      setActualReviews(reviews)
-    }
-  }, [])
-
-  useEffect(() => {
-    setActualReviews(reviewsList.reviews)
-  }, [reviewsList.reviews])
-
-  console.log(reviewsList)
-  const onChangeOption = (val = null) => {
-    const reviews = val !== 'All' ? reviewsList.reviews.filter(review => (review.total >= val) && (review.total < val + 1))
-      : reviewsList.reviews
-
-    setActualReviews(reviews)
-  }
   const puntajes = ['All', 1, 2, 3, 4, 5]
-  const options = puntajes.map(puntaje => {
+  const _options = puntajes.map(puntaje => {
     return {
       value: puntaje,
       content: puntaje,
@@ -54,11 +31,11 @@ export const BusinessReviewsUI = (props) => {
           <ReviewOf>
             <h3>Reviews of {businessName}</h3>
             <Select placeholder='Date' />
-            <Select options={options} defaultValue={puntajes[0]} onChange={(val) => onChangeOption(val)} />
+            <Select options={_options} defaultValue={puntajes[0]} onChange={(val) => handleClickOption(val)} />
           </ReviewOf>
           <Content>
             <h3><AiOutlineStar color='#D81212' /> {stars}</h3>
-            {actualReviews.map((review) => (
+            {reviewsList?.reviews.map((review) => (
               <ReviewContainer key={review.id}>
                 <Comments>
                   <div>
@@ -81,7 +58,7 @@ export const BusinessReviewsUI = (props) => {
             ))}
           </Content>
         </>
-      ) : 'laading'}
+      ) : 'loading'}
     </>
   )
 }
