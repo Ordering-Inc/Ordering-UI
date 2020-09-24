@@ -6,8 +6,7 @@ import {
   ModalWrap,
   ModalActions,
   ModalTitle,
-  ModalIcon,
-  Container
+  ModalIcon
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -48,8 +47,6 @@ export const Modal = (props) => {
   }
 
   return (
-    <Container zx={props.zx}>
-      <Popup {...ModalProps} />
-    </Container>
+    <Popup {...ModalProps} />
   )
 }

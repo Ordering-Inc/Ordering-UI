@@ -12,9 +12,12 @@ import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
+import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
 import { OrderDetailsPage } from './Pages/OrderDetails'
 
+import { Profile } from './Pages/Profile'
+import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 
@@ -36,6 +39,10 @@ const GlobalStyle = createGlobalStyle`
     left: 0;
     right: 0;
     z-index: 1000;
+  }
+
+  .popup-component {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 `
 
@@ -61,7 +68,7 @@ const FontTheme = ({ fontName, children }) => {
 }
 
 export const Router = () => {
-  const [{ auth }, sessionDispatch] = useSession()
+  const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
@@ -145,7 +152,14 @@ export const Router = () => {
             Password reset
           </Route>
           <Route exact path='/profile'>
-            Profile
+            {auth
+              ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+              : <Redirect to='/login' />}
+          </Route>
+          <Route exact path='/profile/my_orders'>
+            {auth
+              ? (<MyOrders />)
+              : <Redirect to='/login' />}
           </Route>
           <Route exact path='/p/:page'>
             <Page />
@@ -158,7 +172,7 @@ export const Router = () => {
             }
           </Route>
           <Route exact path='/store/:store'>
-            <Store />
+            <BusinessProductsList />
           </Route>
           <Route exact path='/checkout'>
             Checkout
@@ -187,18 +201,6 @@ function Page () {
   return (
     <div>
       <h3>Page: {page}</h3>
-    </div>
-  )
-}
-
-function Store () {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
-  const { store } = useParams()
-
-  return (
-    <div>
-      <h3>Store: {store}</h3>
     </div>
   )
 }

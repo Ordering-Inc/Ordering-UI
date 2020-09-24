@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import {
   HeroContainer,
@@ -47,6 +47,10 @@ export const HomeHero = (props) => {
       setModals({ ...modals, formOpen: true })
     }
   }
+
+  useEffect(() => {
+    return () => setModals({ listOpen: false, formOpen: false })
+  }, [])
 
   return (
     <HeroContainer>
