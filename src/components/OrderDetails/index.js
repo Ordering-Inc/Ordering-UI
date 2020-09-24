@@ -237,17 +237,27 @@ const OrderDetailsUI = (props) => {
                     <td>{formatPrice(order?.subtotal)}</td>
                   </tr>
                   <tr>
+                    <td>Tax (10%)</td>
+                    <td>{formatPrice(order?.totalTax)}</td>
+                  </tr>
+                  <tr>
                     <td>Delivery Fee</td>
-                    <td>{formatPrice(order?.delivery_zone_price)}</td>
+                    <td>{formatPrice(order?.deliveryFee)}</td>
                   </tr>
                   <tr>
-                    <td>Tax (2%)</td>
-                    {/* <td>{formatPrice(order?.tax_total)}</td> */}
-                  </tr>
-                  <tr>
-                    <td>Driver tip (0%)</td>
+                    <td>Driver tips (0%)</td>
                     <td>{formatPrice(order?.driver_tip)}</td>
                   </tr>
+                  <tr>
+                    <td>Service Fee(9%)</td>
+                    <td>{formatPrice(order?.serviceFee || 0)}</td>
+                  </tr>
+                  {order?.discount > 0 && (
+                    <tr>
+                      <td>Discount</td>
+                      <td>{formatPrice(order?.discount)}</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
               <table className='total'>
