@@ -6,15 +6,16 @@ import { SingleProductCard } from '../SingleProductCard'
 import {
   ProductsContainer,
   ProductsListing,
-  WrapAllCategories,
-  ErrorMessage
+  WrapAllCategories
+  // ErrorMessage
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
   const {
     category,
     categories,
-    categoryState
+    categoryState,
+    onProductClick
   } = props
 
   return (
@@ -81,17 +82,17 @@ const BusinessProductsListUI = (props) => {
         })
       }
       {
-        !loading && products.length === 0 && (
+        !categoryState.loading && categoryState.products.length === 0 && (
           <div>
             <h1>Not Found elements</h1>
           </div>
         )
       }
-      {error && error.length > 0 && (
+      {/* {error && error.length > 0 && (
         error.map((e, i) => (
           <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
         ))
-      )}
+      )} */}
     </ProductsContainer>
   )
 }

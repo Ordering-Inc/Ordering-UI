@@ -133,7 +133,7 @@ export const ProductsListing = (props) => {
           {...props}
           categorySelected={categorySelected}
           categoryState={categoryState}
-          business={businessState}
+          businessState={businessState}
           handleChangeCategory={handleChangeCategory}
           getNextProducts={getProducts}
         />
