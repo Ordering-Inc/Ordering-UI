@@ -7,18 +7,20 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage } from 'ordering-components'
+import { useSession, useLanguage, useOrder } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
+import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
-
+import { Profile } from './Pages/Profile'
+import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 
-const fontName = 'Montserrat'
+const fontName = 'Nunito'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -36,6 +38,10 @@ const GlobalStyle = createGlobalStyle`
     left: 0;
     right: 0;
     z-index: 1000;
+  }
+
+  .popup-component {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 `
 
@@ -60,8 +66,9 @@ const FontTheme = ({ fontName, children }) => {
   return children
 }
 
-export const Router = ({ ordering }) => {
-  const [{ auth }, sessionDispatch] = useSession()
+export const Router = () => {
+  const [{ auth,user }, sessionDispatch] = useSession()
+  const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
   const handleSuccessSignup = (user) => {
@@ -78,17 +85,25 @@ export const Router = ({ ordering }) => {
         <Header />
         <Switch>
           <Route exact path='/home'>
-            <HomePage ordering={ordering} />
+            <HomePage />
+            {/* {
+              orderStatus.options?.address?.location
+                ? <Redirect to='/search' />
+                : <HomePage />
+            } */}
           </Route>
           <Route exact path='/'>
-            <HomePage ordering={ordering} />
+            {
+              orderStatus.options?.address?.location
+                ? <Redirect to='/search' />
+                : <HomePage />
+            }
           </Route>
           <Route exact path='/signup'>
             {
               !auth
                 ? (
                   <SignUp
-                    ordering={ordering}
                     elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
                     useLoginByCellphone
                     useChekoutFileds
@@ -103,7 +118,6 @@ export const Router = ({ ordering }) => {
               !auth
                 ? (
                   <Login
-                    ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
@@ -117,7 +131,6 @@ export const Router = ({ ordering }) => {
               !auth
                 ? (
                   <Login
-                    ordering={ordering}
                     elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
                     elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
                     useLoginByCellphone
@@ -129,7 +142,7 @@ export const Router = ({ ordering }) => {
           <Route exact path='/password/forgot'>
             {
               !auth ? (
-                <ForgotPassword ordering={ordering} />
+                <ForgotPassword />
               )
                 : <Redirect to='/' />
             }
@@ -138,16 +151,27 @@ export const Router = ({ ordering }) => {
             Password reset
           </Route>
           <Route exact path='/profile'>
-            Profile
+            {auth
+              ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+              : <Redirect to='/login' />}
+          </Route>
+          <Route exact path='/profile/my_orders'>
+            {auth
+              ? (<MyOrders />)
+              : <Redirect to='/login' />}
           </Route>
           <Route exact path='/p/:page'>
             <Page />
           </Route>
           <Route exact path='/search'>
-            <BusinessesList ordering={ordering} />
+            {
+              orderStatus.options?.address?.location
+                ? <BusinessesList />
+                : <Redirect to='/home' />
+            }
           </Route>
           <Route exact path='/store/:store'>
-            <Store />
+            <BusinessProductsList />
           </Route>
           <Route exact path='/checkout'>
             Checkout
@@ -173,18 +197,6 @@ function Page () {
   return (
     <div>
       <h3>Page: {page}</h3>
-    </div>
-  )
-}
-
-function Store () {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
-  const { store } = useParams()
-
-  return (
-    <div>
-      <h3>Store: {store}</h3>
     </div>
   )
 }

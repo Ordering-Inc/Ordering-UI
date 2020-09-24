@@ -4,12 +4,9 @@ import { Popup, useLanguage } from 'ordering-components'
 import {
   ModalDialog,
   ModalWrap,
-  ModalBackDrop,
   ModalActions,
   ModalTitle,
-  // ModalContent,
-  ModalIcon,
-  Container
+  ModalIcon
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -26,8 +23,8 @@ const ModalUI = (props) => {
   } = props
   const [, t] = useLanguage()
   return (
-    <ModalWrap className='popup'>
-      <ModalDialog>
+    <ModalWrap>
+      <ModalDialog className='popup-dialog' width={props.width}>
         <ModalIcon>
           <MdClose onClick={() => onClose()} />
         </ModalIcon>
@@ -50,9 +47,6 @@ export const Modal = (props) => {
   }
 
   return (
-    <Container zx={props.zx}>
-      <ModalBackDrop className='popup-backdrop' />
-      <Popup {...ModalProps} />
-    </Container>
+    <Popup {...ModalProps} />
   )
 }
