@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
   BrowserRouter,
   Switch,
@@ -7,7 +7,7 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useApi } from 'ordering-components'
+import { useSession, useLanguage, useOrder } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
@@ -17,7 +17,6 @@ import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
-import { ReviewOrder } from '../src/components/ReviewOrder'
 
 const fontName = 'Nunito'
 
@@ -69,19 +68,7 @@ export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
-  const [ordering] = useApi()
-  const [order, setOrder] = useState(null)
 
-  useEffect(() => {
-    getOrders()
-  }, [])
-
-  const getOrders = async () => {
-    const { content: { error, result } } = await ordering.orders().where([{ attribute: 'status', value: [1, 11] }]).get()
-    if (!error && result.length > 0) {
-      setOrder(result[0])
-    }
-  }
   const handleSuccessSignup = (user) => {
     sessionDispatch({
       type: 'login',
@@ -189,9 +176,6 @@ export const Router = () => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
-          </Route>
-          <Route path='/review_orders'>
-            <ReviewOrder open order={order} />
           </Route>
           <Route path='*'>
             404
