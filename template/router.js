@@ -19,7 +19,7 @@ import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
-
+import { UpsellingPage } from '../src/components/UpsellingPage'
 const fontName = 'Nunito'
 
 const GlobalStyle = createGlobalStyle`
@@ -67,7 +67,7 @@ const FontTheme = ({ fontName, children }) => {
 }
 
 export const Router = () => {
-  const [{ auth,user }, sessionDispatch] = useSession()
+  const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
@@ -178,6 +178,9 @@ export const Router = () => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
+          </Route>
+          <Route exact path='/upselling_Page'>
+            <UpsellingPage open />
           </Route>
           <Route path='*'>
             404
