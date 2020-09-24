@@ -14,6 +14,8 @@ import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
 import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
+import { OrderDetailsPage } from './Pages/OrderDetails'
+
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
@@ -67,7 +69,7 @@ const FontTheme = ({ fontName, children }) => {
 }
 
 export const Router = () => {
-  const [{ auth,user }, sessionDispatch] = useSession()
+  const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
@@ -178,6 +180,9 @@ export const Router = () => {
           </Route>
           <Route exact path='/order/:orderId'>
             <Order />
+          </Route>
+          <Route exact path='/orders/:orderId'>
+            <OrderDetailsPage />
           </Route>
           <Route path='*'>
             404
