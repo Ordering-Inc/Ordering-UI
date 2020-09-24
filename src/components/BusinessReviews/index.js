@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { BusinessReviews as BusinessReviewController } from 'ordering-components'
 
 import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv } from './styles'
@@ -17,7 +17,7 @@ export const BusinessReviewsUI = (props) => {
   const { businessName, stars, reviewsList, handleClickOption } = props
 
   const puntajes = ['All', 1, 2, 3, 4, 5]
-  const _options = puntajes.map(puntaje => {
+  const _options = reviewsList.loading ? [] : puntajes.map(puntaje => {
     return {
       value: puntaje,
       content: puntaje,
@@ -34,7 +34,7 @@ export const BusinessReviewsUI = (props) => {
             <Select options={_options} defaultValue={puntajes[0]} onChange={(val) => handleClickOption(val)} />
           </ReviewOf>
           <Content>
-            <h3><AiOutlineStar color='#D81212' /> {stars}</h3>
+            <h3><AiOutlineStar color='#D81212' />{stars}</h3>
             {reviewsList?.reviews.map((review) => (
               <ReviewContainer key={review.id}>
                 <Comments>
