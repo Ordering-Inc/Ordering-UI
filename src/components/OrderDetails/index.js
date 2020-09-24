@@ -43,11 +43,6 @@ import {
   DriverActions,
   OrderBillTitle,
   OrderProducts,
-  // WrapperProductItem,
-  // ProductItem,
-  // WrapperProductImage,
-  // ProductImage,
-  // ProductInfo,
   OrderBill,
   ReviewsAction,
   FootActions,
@@ -85,6 +80,14 @@ const OrderDetailsUI = (props) => {
     return objectStatus && objectStatus
   }
 
+  const getImage = (slug) => {
+    try {
+      return slug && require(`../../../template/assets/order/${slug}.svg`)
+    } catch (error) {
+      return 'https://picsum.photos/75'
+    }
+  }
+
   return (
     <Container>
       {loading && (
@@ -115,6 +118,7 @@ const OrderDetailsUI = (props) => {
 
       {order && Object.keys(order).length > 0 && (
         <>
+          {console.log(getImage())}
           <Header>
             <HeaderInfo>
               <HeaderLogo bgimage={logoHeader} />
@@ -162,7 +166,7 @@ const OrderDetailsUI = (props) => {
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  <img src={require(`../../../template/assets/order/${getOrderStatus(order?.status)?.slug}.svg`)} alt='' />
+                  <img src={getImage(getOrderStatus(order?.status)?.slug)} alt='' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>
