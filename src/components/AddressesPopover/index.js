@@ -34,7 +34,9 @@ export const AddressesPopover = (props) => {
 
   const handleClickOutside = (e) => {
     if (!open) return
-    if (!popperElement.current?.contains(e.target) && e.target !== referenceElement.current) {
+    const outsidePopover = !popperElement.current?.contains(e.target)
+    const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
+    if (outsidePopover && outsidePopoverMenu) {
       props.onClose && props.onClose()
     }
   }
