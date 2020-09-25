@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 import {
   MyOrders as MyOrdersController,
   GoogleMaps,
-  WrapperGoogleMaps,
-} from "ordering-components";
+  WrapperGoogleMaps
+} from 'ordering-components'
 import {
   MyOrdersContainer,
   MyOrdersTitle,
@@ -18,12 +18,12 @@ import {
   OrdersPast,
   IndividualOrderPast,
   OrderPastContent,
-  Reorder,
-} from "./styles";
-import { Button } from "../../styles/Buttons";
+  Reorder
+} from './styles'
+import { Button } from '../../styles/Buttons'
 export const MyOrdersUI = (props) => {
-  const { activeOrders, previousOrders } = props;
-  const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps);
+  const { activeOrders, previousOrders } = props
+  const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
   return (
     <MyOrdersContainer>
       {activeOrders && (
@@ -36,17 +36,17 @@ export const MyOrdersUI = (props) => {
               <Card key={order.id}>
                 <Map>
                   <GoogleMapsMap
-                    apiKey="AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk"
+                    apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
                     location={order.business?.location}
                     mapControls={{
                       zoomControl: false,
                       streetViewControl: true,
                       fullscreenControl: true,
-                      mapTypeId: "satellite", // 'roadmap', 'satellite', 'hybrid', 'terrain'
+                      mapTypeId: 'satellite', // 'roadmap', 'satellite', 'hybrid', 'terrain'
                       mapTypeControl: true,
                       mapTypeControlOptions: {
-                        mapTypeIds: ["roadmap", "satellite"],
-                      },
+                        mapTypeIds: ['roadmap', 'satellite']
+                      }
                     }}
                   />
                 </Map>
@@ -63,11 +63,11 @@ export const MyOrdersUI = (props) => {
                     <h5>
                       ${order.products.reduce((acc, cur) => acc + cur.price, 0)}
                     </h5>
-                    <p>{order.status === 0 ? "pending" : ""}</p>
+                    <p>{order.status === 0 ? 'pending' : ''}</p>
                   </Price>
                 </Content>
                 <OpenOrder>
-                  <Button color="primary">Open Order</Button>
+                  <Button color='primary'>Open Order</Button>
                 </OpenOrder>
               </Card>
             ))}
@@ -93,8 +93,8 @@ export const MyOrdersUI = (props) => {
                   </BusinessInformation>
                 </OrderPastContent>
                 <Reorder>
-                  <p>{order.status === 1 || 11 ? "Complete" : ""}</p>
-                  <Button color="primary">Reorder</Button>
+                  <p>{order.status === (1 || 11) ? 'Complete' : ''}</p>
+                  <Button color='primary'>Reorder</Button>
                 </Reorder>
               </IndividualOrderPast>
             ))}
@@ -102,14 +102,14 @@ export const MyOrdersUI = (props) => {
         </>
       )}
     </MyOrdersContainer>
-  );
-};
+  )
+}
 
 export const MyOrders = (props) => {
   const MyOrdersProps = {
     ...props,
-    UIComponent: MyOrdersUI,
-  };
+    UIComponent: MyOrdersUI
+  }
 
-  return <MyOrdersController {...MyOrdersProps} />;
-};
+  return <MyOrdersController {...MyOrdersProps} />
+}
