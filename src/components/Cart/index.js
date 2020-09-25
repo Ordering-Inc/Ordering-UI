@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 import { Cart as CartController, useOrder, useLanguage } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
@@ -21,8 +22,10 @@ const CartUI = (props) => {
     changeQuantity,
     getProductMax,
     offsetDisabled,
-    removeProduct
+    removeProduct,
+    onClickCheckout
   } = props
+  const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
@@ -38,6 +41,11 @@ const CartUI = (props) => {
         setConfirm({ ...confirm, open: false })
       }
     })
+  }
+
+  const handleClickCheckout = () => {
+    history.push(`/checkout/${cart.uuid}`)
+    onClickCheckout()
   }
 
   useEffect(() => {
@@ -102,7 +110,10 @@ const CartUI = (props) => {
           </OrderBill>
         )}
         <CheckoutAction>
-          <Button color='primary'>
+          <Button
+            color='primary'
+            onClick={() => handleClickCheckout()}
+          >
             Checkout
           </Button>
         </CheckoutAction>

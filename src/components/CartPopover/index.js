@@ -72,6 +72,7 @@ export const CartPopover = (props) => {
                 key={cart.uuid}
                 cart={cart}
                 isProducts={cart.products.length}
+                onClickCheckout={props.onClose}
               />
             ))}
           {Object.keys(orderState.carts).length === 0 && <NotFound>{t('CART_ERROR', 'You don\'t have cars available')}</NotFound>}
