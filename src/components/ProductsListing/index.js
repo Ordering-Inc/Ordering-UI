@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useOrder, useLanguage } from 'ordering-components'
+import { CancelToken } from 'ordering-api-sdk'
 
 export const ProductsListing = (props) => {
+  console.log('Move ProductsListing to ordering-componenets')
   const {
     slug,
     ordering,
@@ -16,6 +18,7 @@ export const ProductsListing = (props) => {
   const [categorySelected, setCategorySelected] = useState({ id: null, name: t('ALL', 'All') })
   const [businessState, setBusinessState] = useState({ business: {}, loading: true, error: null })
   const [categoriesState, setCategoriesState] = useState({})
+  const requestsState = {}
 
   const categoryStateDefault = {
     loading: true,
@@ -69,7 +72,9 @@ export const ProductsListing = (props) => {
 
     try {
       const functionFetch = categorySelected.id ? ordering.businesses(businessState.business.id).categories(categorySelected.id).products() : ordering.businesses(businessState.business.id).products()
-      const { content: { error, result, pagination } } = await functionFetch.parameters(parameters).get()
+      const source = CancelToken.source()
+      requestsState.products = source
+      const { content: { error, result, pagination } } = await functionFetch.parameters(parameters).get({ cancelToken: source.token })
       if (!error) {
         const newcategoryState = {
           pagination: {
@@ -87,31 +92,37 @@ export const ProductsListing = (props) => {
       } else {
         setErrors(result)
       }
-    } catch (e) {
-      console.log(e)
-      setErrors([e.message])
+    } catch (err) {
+      if (err.constructor.name !== 'Cancel') {
+        setErrors([err.message])
+      }
     }
   }
 
   const getBusiness = async () => {
     try {
       setBusinessState({ ...businessState, loading: true })
+      const source = CancelToken.source()
+      requestsState.business = source
+      // setRequestsState({ ...requestsState })
       const { content: { result } } = await ordering
         .businesses(slug)
         .select(businessProps)
         .parameters(businessParams)
-        .get()
+        .get({ cancelToken: source.token })
       setBusinessState({
         ...businessState,
         business: result,
         loading: false
       })
-    } catch (e) {
-      setBusinessState({
-        ...businessState,
-        loading: false,
-        error: [e]
-      })
+    } catch (err) {
+      if (err.constructor.name !== 'Cancel') {
+        setBusinessState({
+          ...businessState,
+          loading: false,
+          error: [err.message]
+        })
+      }
     }
   }
 
@@ -126,11 +137,45 @@ export const ProductsListing = (props) => {
     }
   }, [orderState])
 
+  /**
+   * Cancel business request on unmount
+   */
+  useEffect(() => {
+    return () => {
+      if (requestsState.business) {
+        requestsState.business.cancel()
+      }
+    }
+  }, [])
+
+  /**
+   * Cancel products request on unmount
+   */
+  useEffect(() => {
+    return () => {
+      if (requestsState.products) {
+        requestsState.products.cancel()
+      }
+    }
+  }, [businessState])
+
+  /**
+   * Cancel products request on unmount and pagination
+   */
+  useEffect(() => {
+    return () => {
+      if (requestsState.products) {
+        requestsState.products.cancel()
+      }
+    }
+  }, [categoryState])
+
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
+          errors={errors}
           categorySelected={categorySelected}
           categoryState={categoryState}
           businessState={businessState}
