@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import moment from 'moment'
-import { Cart as CartController, useOrder } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import { formatPrice } from '../../utils'
+
+import { Confirm } from '../Confirm'
 
 import {
   CartContainer,
@@ -20,8 +22,28 @@ const CartUI = (props) => {
     offsetDisabled,
     removeProduct
   } = props
+  const [, t] = useLanguage()
   const [orderState] = useOrder()
   const momentFormatted = moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
+  const handleDeleteClick = (product, quantity) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
+      handleOnAccept: () => {
+        removeProduct(product)
+        // changeQuantity(product, quantity)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
+
+  useEffect(() => {
+    return () => {
+      setConfirm({ ...confirm, open: false })
+    }
+  }, [])
 
   return (
     <CartContainer>
@@ -39,7 +61,7 @@ const CartUI = (props) => {
             changeQuantity={changeQuantity}
             getProductMax={getProductMax}
             offsetDisabled={offsetDisabled}
-            removeProduct={removeProduct}
+            onDeleteProduct={handleDeleteClick}
           />
         ))}
         <OrderBill>
@@ -80,6 +102,16 @@ const CartUI = (props) => {
           </Button>
         </CheckoutAction>
       </BusinessItemAccordion>
+      <Confirm
+        title={t('PRODUCT', 'Product')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </CartContainer>
   )
 }

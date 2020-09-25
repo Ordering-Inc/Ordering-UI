@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { BiCaretDown } from 'react-icons/bi'
 import { VscTrash } from 'react-icons/vsc'
+import { TiPencil } from 'react-icons/ti'
 import { useLanguage, useOrder } from 'ordering-components'
 
 import { Button } from '../../styles/Buttons'
@@ -13,7 +14,8 @@ import {
   AccordionContent,
   WrapperProductImage,
   ProductImage,
-  ContentInfo
+  ContentInfo,
+  ProductActions
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -23,7 +25,7 @@ export const ProductItemAccordion = (props) => {
     changeQuantity,
     getProductMax,
     offsetDisabled,
-    removeProduct
+    onDeleteProduct
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -44,10 +46,22 @@ export const ProductItemAccordion = (props) => {
     )
   }
 
+  const handleChangeQuantity = (value) => {
+    if (parseInt(value) === 0) {
+      onDeleteProduct(product)
+    } else {
+      changeQuantity(product, parseInt(value))
+    }
+  }
+
+  const onEditProduct = () => {
+    // put here code for show productForm component for edit the product
+  }
+
   return (
     <AccordionSection isValid={product?.valid ?? true}>
-      <Accordion className={`accordion ${setActive}`} onClick={toggleAccordion}>
-        <div className='info'>
+      <Accordion className={`accordion ${setActive}`}>
+        <div className='info' onClick={toggleAccordion}>
           <p>{product.quantity}</p>
           <WrapperProductImage>
             <ProductImage bgimage={product.images || 'https://picsum.photos/1418/1422'} />
@@ -73,14 +87,24 @@ export const ProductItemAccordion = (props) => {
         ) : (
           <div className='price'>
             {isCartProduct && (
-              <span
-                className='delete'
-                onClick={() => removeProduct(product)}
-                disabled={orderState.loading}
-              >
-                <VscTrash />
-              </span>)}
-            <div>
+              <div>
+                <span
+                  className='edit'
+                  onClick={() => onEditProduct()}
+                  disabled={orderState.loading}
+                >
+                  <TiPencil />
+                </span>
+                <span
+                  className='delete'
+                  onClick={() => onDeleteProduct(product)}
+                  disabled={orderState.loading}
+                >
+                  <VscTrash />
+                </span>
+              </div>
+            )}
+            <div style={{ width: '100%', justifyContent: 'flex-end' }} onClick={toggleAccordion}>
               <span>{formatPrice(product.total || product.price)}</span>
               <p>
                 <BiCaretDown className={`${setRotate}`} />
@@ -96,17 +120,17 @@ export const ProductItemAccordion = (props) => {
       >
         {isCartProduct ? (
           <>
-            <div>
+            <ProductActions>
               <Button
                 color='primary'
                 circle
-                onClick={() => changeQuantity(product, product.quantity - 1)}
+                onClick={() => handleChangeQuantity(product.quantity - 1)}
                 disabled={orderState.loading || !product.valid}
               >-
               </Button>
               <select
                 value={product.quantity}
-                onChange={(e) => changeQuantity(product, parseInt(e.target.value))}
+                onChange={(e) => handleChangeQuantity(Number(e.target.value))}
               >
                 {[...Array(getProductMax(product) + 1).keys()].map((value, i) => (
                   <option
@@ -125,24 +149,24 @@ export const ProductItemAccordion = (props) => {
                 disabled={orderState.loading || !product.valid || getProductMax(product) === product.quantity}
               >+
               </Button>
-            </div>
+            </ProductActions>
             {Object.keys(product.ingredients).length > 0 && (
               <ul>
-                {Object.keys(product.ingredients).map(ingredient => (
-                  <li key={product.ingredients[ingredient].id}>
-                    <span>{product.ingredients[ingredient].name}</span>
+                {Object.values(product.ingredients).map(ingredient => (
+                  <li key={ingredient.id}>
+                    <span>{ingredient.name}</span>
                   </li>
                 ))}
               </ul>
             )}
-            {Object.keys(product.options).length > 0 && (
+            {Object.values(product.options).length > 0 && (
               <ul>
-                {Object.keys(product.options).map(option => (
-                  <li key={product.options[option].id}>
-                    <span style={{ fontWeight: 'bold' }}>{product.options[option].name}:</span>&nbsp;
-                    {Object.keys(product.options[option].suboptions).map(suboption => (
-                      <span key={product.options[option].suboptions[suboption].id}>
-                        {product.options[option].suboptions[suboption].name} {`[${product.options[option].suboptions[suboption].position}]`}
+                {Object.values(product.options).map(option => (
+                  <li key={option.id}>
+                    <span style={{ fontWeight: 'bold' }}>{option.name}:</span>&nbsp;
+                    {Object.values(option.suboptions).map(suboption => (
+                      <span key={suboption.id}>
+                        {suboption.name} {`[${suboption.position}]`}
                       </span>
                     ))}
                   </li>

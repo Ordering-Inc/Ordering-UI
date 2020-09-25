@@ -66,12 +66,18 @@ export const Accordion = styled.div`
       font-weight: bold;
       font-size: 20px;
     }
-    span.delete {
+    span.delete,
+    span.edit {
       svg {
         font-size: 20px;
-        color: #D81212;
         margin-right: 5px;
       }
+    }
+    span.delete svg {
+      color: #D81212;
+    }
+    span.edit svg {
+      color: #F2BB40;
     }
     p {
       font-size: 20px;
@@ -162,4 +168,12 @@ export const AccordionText = styled.div`
   font-weight: 400;
   font-size: 14px;
   padding: 18px;
+`
+
+export const ProductActions = styled.div`
+  display: flex;
+  justify-content: center;
+  > * {
+    margin: 5px;
+  }
 `
