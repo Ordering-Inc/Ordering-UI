@@ -17,7 +17,9 @@ export const BusinessItemAccordion = (props) => {
     isClosed,
     moment,
     business,
-    orderTotal
+    orderTotal,
+    isProducts,
+    isValidProducts
   } = props
 
   const [setActive, setActiveState] = useState('')
@@ -27,7 +29,7 @@ export const BusinessItemAccordion = (props) => {
   const content = useRef(null)
 
   const toggleAccordion = () => {
-    if (isClosed) return
+    if (isClosed || !isProducts) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
       setActive === 'active' ? '0px' : '500px'
@@ -50,13 +52,27 @@ export const BusinessItemAccordion = (props) => {
             <h1>{business.name}</h1>
           </ContentInfo>
         </div>
-        <div className='total'>
-          <span>{formatPrice(orderTotal)}</span>
-          <p>
-            <BiCaretDown className={`${setRotate}`} />
-          </p>
-        </div>
-        {isClosed && (<span className='closed'>Closed at {moment}</span>)}
+
+        {isClosed && (
+          <div className='total'>
+            <p>Closed {moment}</p>
+          </div>
+        )}
+
+        {!isClosed && !isProducts && (
+          <div className='total'>
+            <p>No Products</p>
+          </div>
+        )}
+
+        {!isClosed && isProducts && (
+          <div className='total'>
+            {isValidProducts && <span>{formatPrice(orderTotal)}</span>}
+            <p>
+              <BiCaretDown className={`${setRotate}`} />
+            </p>
+          </div>
+        )}
       </Accordion>
 
       <AccordionContent

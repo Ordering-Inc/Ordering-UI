@@ -1,19 +1,20 @@
 import React, { useEffect, useRef } from 'react'
+import { IoIosBasket } from 'react-icons/io'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
   PopoverBody,
-  PopoverArrow
+  PopoverArrow,
+  NotFound
 } from './styles'
-import { useOrder } from 'ordering-components'
+import { useOrder, useLanguage } from 'ordering-components'
 
-import CartIcon from '../../../template/assets/cart-icon.svg'
 import { Cart } from '../Cart'
 
 export const CartPopover = (props) => {
   const { open } = props
   const [orderState] = useOrder()
-  // const [, t] = useLanguage()
+  const [, t] = useLanguage()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -58,7 +59,10 @@ export const CartPopover = (props) => {
   return (
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
-        <img src={CartIcon} alt='cart' width='28' height='28' />
+        <span>
+          <IoIosBasket />
+          {Object.keys(orderState.carts).length > 0 && <p>{Object.keys(orderState.carts).length}</p>}
+        </span>
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <div>
@@ -67,8 +71,10 @@ export const CartPopover = (props) => {
               <Cart
                 key={cart.uuid}
                 cart={cart}
+                isProducts={cart.products.length}
               />
             ))}
+          {Object.keys(orderState.carts).length === 0 && <NotFound>{t('CART_ERROR', 'You don\'t have cars available')}</NotFound>}
         </div>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>

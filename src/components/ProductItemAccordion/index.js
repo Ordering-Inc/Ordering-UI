@@ -36,7 +36,26 @@ export const ProductItemAccordion = (props) => {
 
   const content = useRef(null)
 
+  const productInfo = () => {
+    if (isCartProduct) {
+      const ingredients = Object.values(product.ingredients ?? {})
+      let options = Object.values(product.options ?? {})
+
+      options = options.map(option => {
+        option.suboptions = Object.values(option.suboptions ?? {})
+        return option
+      })
+      return {
+        ...productInfo,
+        ingredients,
+        options
+      }
+    }
+    return product
+  }
+
   const toggleAccordion = () => {
+    if (!product?.valid_menu && isCartProduct) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
       setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
@@ -55,39 +74,61 @@ export const ProductItemAccordion = (props) => {
   }
 
   const onEditProduct = () => {
-    // put here code for show productForm component for edit the product
+    // put here code for show productForm component to edit product
   }
 
   return (
-    <AccordionSection isValid={product?.valid ?? true}>
-      <Accordion className={`accordion ${setActive}`}>
+    <AccordionSection>
+      <Accordion isValid={product?.valid ?? true} className={`accordion ${setActive}`}>
         <div className='info' onClick={toggleAccordion}>
           <p>{product.quantity}</p>
           <WrapperProductImage>
-            <ProductImage bgimage={product.images || 'https://picsum.photos/1418/1422'} />
+            <ProductImage bgimage={product.images || 'https://picsum.photos/78/80'} />
           </WrapperProductImage>
           <ContentInfo>
             <h1>{product.name}</h1>
             {product.comment && (<span>{product.comment}</span>)}
           </ContentInfo>
         </div>
-        {product.valid === false ? (
+        {!product?.valid_menu && isCartProduct && (
           <div className='error'>
-            <span>
-              <VscTrash />
-            </span>
-            {(!product.valid_menu || !product.valid_quantity) && (
-              !product.valid_menu ? (
-                <span style={{ color: '#D81313' }}>{t('PRODUCT_MENU_ERROR', 'Menu error')}</span>
-              ) : (
-                <span style={{ color: '#D81313' }}>{t('PRODUCT_QUANTITY_ERROR', 'Not available')}</span>
-              )
-            )}
+            <div className='actions'>
+              <span
+                className='delete'
+                onClick={() => onDeleteProduct(product)}
+                disabled={orderState.loading}
+              >
+                <VscTrash />
+              </span>
+            </div>
+            <span style={{ color: '#D81313' }}>{t('PRODUCT_QUANTITY_ERROR', 'Not available')}</span>
           </div>
-        ) : (
+        )}
+        {isCartProduct && product?.valid_menu && !product?.valid_quantity && (
+          <div className='error'>
+            <div className='actions'>
+              <span
+                className='edit'
+                onClick={() => onEditProduct()}
+                disabled={orderState.loading}
+              >
+                <TiPencil />
+              </span>
+              <span
+                className='delete'
+                onClick={() => onDeleteProduct(product)}
+                disabled={orderState.loading}
+              >
+                <VscTrash />
+              </span>
+            </div>
+            <span style={{ color: '#D81313' }}>{t('PRODUCT_QUANTITY_ERROR', 'Not available')}</span>
+          </div>
+        )}
+        {(product?.valid || !isCartProduct) && (
           <div className='price'>
             {isCartProduct && (
-              <div>
+              <div className='actions'>
                 <span
                   className='edit'
                   onClick={() => onEditProduct()}
@@ -118,88 +159,62 @@ export const ProductItemAccordion = (props) => {
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
       >
-        {isCartProduct ? (
-          <>
-            <ProductActions>
-              <Button
-                color='primary'
-                circle
-                onClick={() => handleChangeQuantity(product.quantity - 1)}
-                disabled={orderState.loading || !product.valid}
-              >-
-              </Button>
-              <select
-                value={product.quantity}
-                onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-              >
-                {[...Array(getProductMax(product) + 1).keys()].map((value, i) => (
-                  <option
-                    key={i}
-                    value={i}
-                    disabled={offsetDisabled(product) < i && i !== 0}
-                  >
-                    {i === 0 ? 'Remove' : i}
-                  </option>
-                ))}
-              </select>
-              <Button
-                color='primary'
-                circle
-                onClick={() => changeQuantity(product, product.quantity + 1)}
-                disabled={orderState.loading || !product.valid || getProductMax(product) === product.quantity}
-              >+
-              </Button>
-            </ProductActions>
-            {Object.keys(product.ingredients).length > 0 && (
-              <ul>
-                {Object.values(product.ingredients).map(ingredient => (
-                  <li key={ingredient.id}>
-                    <span>{ingredient.name}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-            {Object.values(product.options).length > 0 && (
-              <ul>
-                {Object.values(product.options).map(option => (
-                  <li key={option.id}>
-                    <span style={{ fontWeight: 'bold' }}>{option.name}:</span>&nbsp;
-                    {Object.values(option.suboptions).map(suboption => (
-                      <span key={suboption.id}>
-                        {suboption.name} {`[${suboption.position}]`}
-                      </span>
-                    ))}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        ) : (
-          <>
-            {product.ingredients.length > 0 && (
-              <ul>
-                {product.ingredients.map(ingredient => (
-                  <li key={ingredient.id}>
-                    <span>{ingredient.name}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-            {product.options.length > 0 && (
-              <ul>
-                {product.options.map(option => (
-                  <li key={option.id}>
-                    <span style={{ fontWeight: 'bold' }}>{option.name}:</span>&nbsp;
-                    {option.suboptions.map(suboption => (
-                      <span key={suboption.id}>
-                        {suboption.name} {`[${suboption.position}]`}
-                      </span>
-                    ))}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
+        {isCartProduct && (
+          <ProductActions>
+            <Button
+              color='primary'
+              circle
+              onClick={() => handleChangeQuantity(product.quantity - 1)}
+              disabled={orderState.loading || !product.valid}
+            >-
+            </Button>
+            <select
+              value={product.quantity}
+              onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+            >
+              {[...Array(getProductMax(product) + 1).keys()].map((value, i) => (
+                <option
+                  key={i}
+                  value={i}
+                  disabled={offsetDisabled(product) < i && i !== 0}
+                >
+                  {i === 0 ? 'Remove' : i}
+                </option>
+              ))}
+            </select>
+            <Button
+              color='primary'
+              circle
+              onClick={() => changeQuantity(product, product.quantity + 1)}
+              disabled={orderState.loading || !product.valid || getProductMax(product) === product.quantity}
+            >+
+            </Button>
+          </ProductActions>
+        )}
+        {productInfo().ingredients.length > 0 && (
+          <ul>
+            {productInfo().ingredients.map(ingredient => (
+              <li key={ingredient.id}>
+                <span>{ingredient.name}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {productInfo().options.length > 0 && (
+          <ul>
+            {productInfo().options.map(option => (
+              <li key={option.id}>
+                <span style={{ fontWeight: 'bold' }}>{option.name}</span>
+                <ul>
+                  {option.suboptions.map(suboption => (
+                    <li key={suboption.id}>
+                      {suboption.name} {`[${suboption.position}]`}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
         )}
       </AccordionContent>
     </AccordionSection>

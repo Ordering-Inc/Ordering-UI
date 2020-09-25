@@ -1,29 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const AccordionSectionStyled = styled.div`
+export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 10px 0px;
 `
 
-export const AccordionSection = (props) => {
-  const style = {}
-  if (!props.isValid) {
-    style.opacity = '0.5'
-  }
-  return (
-    <AccordionSectionStyled
-      {...props}
-      style={style}
-    >
-      {props.children}
-    </AccordionSectionStyled>
-  )
-}
-
-export const Accordion = styled.div`
+const AccordionStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -66,19 +51,6 @@ export const Accordion = styled.div`
       font-weight: bold;
       font-size: 20px;
     }
-    span.delete,
-    span.edit {
-      svg {
-        font-size: 20px;
-        margin-right: 5px;
-      }
-    }
-    span.delete svg {
-      color: #D81212;
-    }
-    span.edit svg {
-      color: #F2BB40;
-    }
     p {
       font-size: 20px;
       margin: 0px 5px;
@@ -88,23 +60,48 @@ export const Accordion = styled.div`
     }
   }
 
+  div.actions {
+    display: flex;
+    justify-content: flex-end;
+    span svg {
+      font-size: 20px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    span.delete svg {
+      color: #D81212;
+    }
+    span.edit svg {
+      color: #F2BB40;
+    }
+  }
+
   div.error {
     width: 35%;
     display: flex;
     flex-direction: column;
 
     span {
-      margin-right: 15px;
       font-size: 18px;
       text-align: right;
-      svg {
-        font-size: 24px;
-        color: #D81212;
-        cursor: pointer;
-      }
     }
   }
 `
+
+export const Accordion = (props) => {
+  const style = {}
+  if (!props.isValid) {
+    style.opacity = '0.5'
+  }
+  return (
+    <AccordionStyled
+      {...props}
+      style={style}
+    >
+      {props.children}
+    </AccordionStyled>
+  )
+}
 
 export const WrapperProductImage = styled.div`
   max-width: 75px;
@@ -162,6 +159,9 @@ export const ContentInfo = styled.div`
 export const AccordionContent = styled.div`
   overflow: hidden;
   transition: max-height 0.6s ease;
+  ul {
+    list-style-type: none;
+  }
 `
 
 export const AccordionText = styled.div`

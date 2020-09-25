@@ -17,6 +17,7 @@ import {
 const CartUI = (props) => {
   const {
     cart,
+    isProducts,
     changeQuantity,
     getProductMax,
     offsetDisabled,
@@ -24,7 +25,7 @@ const CartUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const momentFormatted = moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
+  const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const handleDeleteClick = (product, quantity) => {
@@ -50,8 +51,10 @@ const CartUI = (props) => {
       <BusinessItemAccordion
         orderTotal={cart?.total}
         business={cart?.business}
-        isClosed={!cart?.valid}
+        isClosed={!cart?.valid_schedule}
         moment={momentFormatted}
+        isProducts={isProducts}
+        isValidProducts={cart?.valid_products}
       >
         {cart?.products?.length && cart?.products.map(product => (
           <ProductItemAccordion
@@ -64,38 +67,40 @@ const CartUI = (props) => {
             onDeleteProduct={handleDeleteClick}
           />
         ))}
-        <OrderBill>
-          <table>
-            <tbody>
-              <tr>
-                <td>Subtotal</td>
-                <td>{formatPrice(cart?.subtotal || 0)}</td>
-              </tr>
-              <tr>
-                <td>Tax (10%)</td>
-                <td>{formatPrice(cart?.tax || 0)}</td>
-              </tr>
-              <tr>
-                <td>Delivery Fee</td>
-                <td>{formatPrice(cart?.delivery_price || 0)}</td>
-              </tr>
-              <tr>
-                <td>Driver tips (0%)</td>
-                <td>{formatPrice(cart?.driver_tip || 0)}</td>
-              </tr>
-              <tr>
-                <td>Service Fee(9%)</td>
-                <td>{formatPrice(cart?.service_fee || 0)}</td>
-              </tr>
-              {cart?.discount > 0 && (
+        {cart?.valid_products && (
+          <OrderBill>
+            <table>
+              <tbody>
                 <tr>
-                  <td>Discount</td>
-                  <td>{formatPrice(cart?.discount || 0)}</td>
+                  <td>Subtotal</td>
+                  <td>{formatPrice(cart?.subtotal || 0)}</td>
                 </tr>
-              )}
-            </tbody>
-          </table>
-        </OrderBill>
+                <tr>
+                  <td>Tax (10%)</td>
+                  <td>{formatPrice(cart?.tax || 0)}</td>
+                </tr>
+                <tr>
+                  <td>Delivery Fee</td>
+                  <td>{formatPrice(cart?.delivery_price || 0)}</td>
+                </tr>
+                <tr>
+                  <td>Driver tips (0%)</td>
+                  <td>{formatPrice(cart?.driver_tip || 0)}</td>
+                </tr>
+                <tr>
+                  <td>Service Fee(9%)</td>
+                  <td>{formatPrice(cart?.service_fee || 0)}</td>
+                </tr>
+                {cart?.discount > 0 && (
+                  <tr>
+                    <td>Discount</td>
+                    <td>{formatPrice(cart?.discount || 0)}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </OrderBill>
+        )}
         <CheckoutAction>
           <Button color='primary'>
             Checkout

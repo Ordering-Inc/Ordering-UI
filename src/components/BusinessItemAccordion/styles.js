@@ -74,15 +74,6 @@ export const Accordion = styled.div`
       }
     }
   }
-
-  span.closed {
-    position: absolute;
-    bottom: 0;
-    right: 10px;
-    color: #D81313;
-    font-size: 17px;
-    font-weight: bold;
-  }
 `
 
 export const WrapperBusinessLogo = styled.div`
