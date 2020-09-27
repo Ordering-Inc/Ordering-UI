@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   MyOrders as MyOrdersController,
   GoogleMaps,
@@ -20,10 +20,21 @@ import {
   OrderPastContent,
   Reorder
 } from './styles'
+import { Messages } from '../Messages'
+
 import { Button } from '../../styles/Buttons'
 export const MyOrdersUI = (props) => {
   const { activeOrders, previousOrders } = props
   const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
+  const [open, setOpen] = useState(false)
+  const [orderId,setOrderId] = useState(null)
+  const [order,setOrder] = useState({})
+
+  const handleMessages = (orderID,order) => {
+    setOrderId(orderID)
+    setOrder(order)
+    setOpen(true);
+  }
   return (
     <MyOrdersContainer>
       {activeOrders && (
@@ -89,7 +100,7 @@ export const MyOrdersUI = (props) => {
                   <BusinessInformation>
                     <h5>{order.business.name}</h5>
                     <p>{order.created_at}</p>
-                    <p>View order</p>
+                    <p name='view' onClick={() => handleMessages(order.id, order)}>View order</p>
                   </BusinessInformation>
                 </OrderPastContent>
                 <Reorder>
@@ -101,6 +112,7 @@ export const MyOrdersUI = (props) => {
           </OrdersPast>
         </>
       )}
+      <Messages open={open} setOpen={setOpen} orderId={orderId} order={order} />
     </MyOrdersContainer>
   )
 }

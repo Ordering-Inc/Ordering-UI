@@ -61,6 +61,11 @@ export const BusinessInformation = styled.div`
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
   }
+  > p[name]{
+    color: #D81313;
+    cursor: pointer
+  }
+  
 `
 
 export const OpenOrder = styled.div`
@@ -95,6 +100,7 @@ export const IndividualOrderPast = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
+ 
 `
 export const OrderPastContent = styled.div`
   display: inline-flex;
