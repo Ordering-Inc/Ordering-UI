@@ -23,12 +23,13 @@ import {
 } from './styles'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
-
+import { ReviewOrder } from '../ReviewOrder'
 import { Button } from '../../styles/Buttons'
 export const MyOrdersUI = (props) => {
   const { activeOrders, previousOrders } = props
   const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
   const [open, setOpen] = useState(false)
+  const [openReview, setOpenReview] = useState(false)
   const [orderId, setOrderId] = useState(null)
   const [order, setOrder] = useState({})
 
@@ -37,6 +38,13 @@ export const MyOrdersUI = (props) => {
     setOrder(order)
     setOpen(true)
   }
+
+  const handleReviewOpen = (order, orderId) => {
+    setOrder(order)
+    setOrderId(orderId)
+    setOpenReview(true)
+  }
+
   return (
     <MyOrdersContainer>
       {activeOrders && (
@@ -99,6 +107,7 @@ export const MyOrdersUI = (props) => {
           <OrdersPast>
             {previousOrders.map((order) => (
               <IndividualOrderPast key={order.id}>
+                {console.log(order)}
                 <OrderPastContent>
                   <Logo>
                     <img src={order.business?.logo} />
@@ -111,6 +120,9 @@ export const MyOrdersUI = (props) => {
                 </OrderPastContent>
                 <Reorder>
                   <p>{order.status === 1 || order.status === 11 ? 'Complete' : ''}</p>
+                  {(order.status === 1 || order.status === 11) && !order.review && (
+                    <Button color='primary' onClick={() => handleReviewOpen(order, order.id)}>Review Now</Button>
+                  )}
                   <Button color='primary'>Reorder</Button>
                 </Reorder>
               </IndividualOrderPast>
@@ -120,6 +132,9 @@ export const MyOrdersUI = (props) => {
       )}
       <Modal open={open} onClose={() => setOpen(false)}>
         <Messages open={open} setOpen={setOpen} orderId={orderId} order={order} />
+      </Modal>
+      <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
+        <ReviewOrder order={order} />
       </Modal>
     </MyOrdersContainer>
   )

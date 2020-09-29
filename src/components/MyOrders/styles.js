@@ -99,24 +99,34 @@ export const OrdersPast = styled.div`
   margin: 0 auto;
 `
 export const IndividualOrderPast = styled.div`
-  height: 10%;
   width: 100%;
   display: flex;
+  height: 140px;
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
- 
+  
 `
 export const OrderPastContent = styled.div`
   display: inline-flex;
-  width: 35%;
+  width: 45%;
   align-items: center;
   padding: 10px 0;
+ 
 `
 export const Reorder = styled.div`
   display: flex;
   flex-direction: column;
+  width: 20%;
   text-align: center;
+  align-items: center;
+  justify-content: center;
   > p {
     color: #53ad26;
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+  > button {
+    margin: 5px 0;
+    width: 80%
   }
 `
