@@ -3,6 +3,10 @@ import { StripeElementsForm as StripeElementsFormController } from 'ordering-com
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
+import {
+  ErrorMessage
+} from './styles'
+
 import { CardForm } from '../CardForm'
 
 const StripeElementsFormUI = (props) => {
@@ -12,7 +16,8 @@ const StripeElementsFormUI = (props) => {
     businessId,
     requirements,
     onNewCard,
-    toSave
+    toSave,
+    onCancel
   } = props
   return (
     <>
@@ -24,10 +29,11 @@ const StripeElementsFormUI = (props) => {
             toSave={toSave}
             requirements={requirements}
             businessId={businessId}
+            handleCancel={onCancel}
           />
         </Elements>
       ) : (
-        <p>Something is wrong :(</p>
+        <ErrorMessage>Something is wrong!</ErrorMessage>
       )}
     </>
   )

@@ -1,13 +1,20 @@
 import React from 'react'
 import { CardElement } from '@stripe/react-stripe-js'
-import { CardForm as CardFormController } from 'ordering-components'
-import './style.css'
+import { CardForm as CardFormController, useLanguage } from 'ordering-components'
+
+import {
+  FormStripe,
+  FormRow,
+  ErrorMessage,
+  FormActions
+} from './styles'
+
+import { Button } from '../../styles/Buttons'
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
     base: {
       color: '#32325d',
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
       fontSmoothing: 'antialiased',
       fontSize: '16px',
       '::placeholder': {
@@ -26,23 +33,26 @@ const CardFormUI = (props) => {
     error,
     loading,
     handleSubmit,
-    handleChange
+    handleChange,
+    handleCancel
   } = props
+
+  const [, t] = useLanguage()
+
   return (
-    <form className='stripe' onSubmit={handleSubmit}>
-      <div className='form-row'>
-        <label htmlFor='card-element'>
-          Credit or debit card
-        </label>
+    <FormStripe onSubmit={handleSubmit}>
+      <FormRow>
         <CardElement
-          id='card-element'
           options={CARD_ELEMENT_OPTIONS}
           onChange={handleChange}
         />
-        <div className='card-errors' role='alert'>{error}</div>
-      </div>
-      <button type='submit'>{loading ? 'Loading...' : 'Ok'}</button>
-    </form>
+        <ErrorMessage>{error}</ErrorMessage>
+      </FormRow>
+      <FormActions>
+        <Button type='button' onClick={() => handleCancel()}>{t('CANCEL', 'cancel')}</Button>
+        <Button color='primary' type='submit'>{loading ? 'Loading...' : 'Add'}</Button>
+      </FormActions>
+    </FormStripe>
   )
 }
 

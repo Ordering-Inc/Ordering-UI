@@ -15,6 +15,7 @@ import { Button } from '../../styles/Buttons'
 const UserDetailsUI = (props) => {
   const {
     isEdit,
+    cartStatus,
     formState,
     userState,
     validationFields,
@@ -45,10 +46,12 @@ const UserDetailsUI = (props) => {
         <Container>
           <Header>
             <h1>Customer Details</h1>
-            {!isEdit ? (
-              <TiPencil className='edit' onClick={() => onEditUserClick()} />
-            ) : (
-              <FcCancel className='cancel' onClick={() => onEditUserClick()} />
+            {cartStatus !== 2 && (
+              !isEdit ? (
+                <TiPencil className='edit' onClick={() => onEditUserClick()} />
+              ) : (
+                <FcCancel className='cancel' onClick={() => onEditUserClick()} />
+              )
             )}
           </Header>
 
@@ -77,7 +80,7 @@ const UserDetailsUI = (props) => {
                 type='submit'
                 disabled={Object.keys(formState.changes).length === 0}
               >
-                {formState.loading ? 'Loading...' : 'Update'}
+                {formState.loading ? 'Updating...' : 'Update'}
                 {!formState.loading && formState.result && formState.result.error && (<span>{formState.result.result}</span>)}
               </Button>
             </div>

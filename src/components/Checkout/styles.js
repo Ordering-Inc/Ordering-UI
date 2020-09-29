@@ -41,6 +41,7 @@ export const PaymentMethodContainer = styled.div`
 export const DriverTipContainer = styled(PaymentMethodContainer)``
 
 export const CartContainer = styled(PaymentMethodContainer)`
+  margin-bottom: 20px;
   h1 {
     margin: 20px 0px;
   }
@@ -61,5 +62,32 @@ export const WrapperPlaceOrderButton = styled.div`
     &:disabled {
       opacity: 0.5;
     }
+  }
+`
+
+export const WarningMessage = styled.div`
+  width: 100%;
+  height: 150px;
+  max-height: 300px;
+  background-color: #F2BB40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  border-radius: 10px;
+  position: relative;
+
+  svg {
+    position: absolute;
+    font-size: 30px;
+    top: 0;
+    left: 0;
+    margin: 11px;
+  }
+
+  h1 {
+    font-size: 20px;
+    margin: 0px 60px;
+    text-align: center;
   }
 `

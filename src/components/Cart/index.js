@@ -33,13 +33,12 @@ const CartUI = (props) => {
   const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
-  const handleDeleteClick = (product, quantity) => {
+  const handleDeleteClick = (product) => {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
       handleOnAccept: () => {
         removeProduct(product)
-        // changeQuantity(product, quantity)
         setConfirm({ ...confirm, open: false })
       }
     })

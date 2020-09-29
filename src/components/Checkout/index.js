@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
-import { loadStripe } from '@stripe/stripe-js'
-import { Checkout as CheckoutController, useOrder, useSession, useApi } from 'ordering-components'
+import React, { useEffect, useState } from 'react'
+import { VscWarning } from 'react-icons/vsc'
+import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage } from 'ordering-components'
 
 import {
   Container,
@@ -10,7 +9,8 @@ import {
   PaymentMethodContainer,
   DriverTipContainer,
   CartContainer,
-  WrapperPlaceOrderButton
+  WrapperPlaceOrderButton,
+  WarningMessage
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -33,11 +33,20 @@ const CheckoutUI = (props) => {
   } = props
 
   const [{ options }] = useOrder()
+  const [, t] = useLanguage()
 
   return (
     <Container>
       {businessId && (
         <WrappContainer>
+          {cart?.status === 2 && (
+            <WarningMessage>
+              <VscWarning />
+              <h1>
+                {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
+              </h1>
+            </WarningMessage>
+          )}
           <AddressDetails
             businessId={businessId}
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
@@ -45,6 +54,7 @@ const CheckoutUI = (props) => {
           <UserDetailsContainer>
             <div className='user'>
               <UserDetails
+                cartStatus={cart?.status}
                 businessId={businessId}
                 useValidationFields
                 useDefualtSessionManager
@@ -67,46 +77,51 @@ const CheckoutUI = (props) => {
             </div>
           </UserDetailsContainer>
 
-          <PaymentMethodContainer>
-            <h1>Payment Method</h1>
-            {businessDetails.business && (
-              <PaymentOptions
-                businessId={businessId}
-                paymethods={businessDetails?.business?.paymethods}
-                onPaymentChange={handlePaymethodChange}
-              />
-            )}
-          </PaymentMethodContainer>
+          {cart?.status !== 2 && (
+            <PaymentMethodContainer>
+              <h1>Payment Method</h1>
+              {businessDetails.business && (
+                <PaymentOptions
+                  businessId={businessId}
+                  paymethods={businessDetails?.business?.paymethods}
+                  onPaymentChange={handlePaymethodChange}
+                />
+              )}
+            </PaymentMethodContainer>
+          )}
 
-          {options.type === 1 && (
+          {options.type === 1 && cart?.status !== 2 && (
             <DriverTipContainer>
               <h1>Driver Tip</h1>
               <DriverTips
                 businessId={businessId}
                 driverTipsOptions={[0, 10, 15, 20, 25]}
                 useOrderContext
-                // handlerChangeDriverOption={(value) => handlerValues({ field: 'driver_tips', value: value / 100 })}
               />
             </DriverTipContainer>
           )}
 
-          <CartContainer>
-            <h1>Your Order</h1>
-            <Cart
-              cart={cart}
-              isProducts={cart.products.length}
-            />
-          </CartContainer>
+          {cart && (
+            <CartContainer>
+              <h1>Your Order</h1>
+              <Cart
+                cart={cart}
+                isProducts={cart?.products?.length || 0}
+              />
+            </CartContainer>
+          )}
 
-          <WrapperPlaceOrderButton>
-            <Button
-              color='primary'
-              disabled={!cart?.valid || !paymethodSelected || placing}
-              onClick={() => handlerClickPlaceOrder()}
-            >
-              {placing ? 'Placing...' : 'Place Order'}
-            </Button>
-          </WrapperPlaceOrderButton>
+          {cart?.status !== 2 && (
+            <WrapperPlaceOrderButton>
+              <Button
+                color='primary'
+                disabled={!cart?.valid || !paymethodSelected || placing}
+                onClick={() => handlerClickPlaceOrder()}
+              >
+                {placing ? 'Placing...' : 'Place Order'}
+              </Button>
+            </WrapperPlaceOrderButton>
+          )}
         </WrappContainer>
       )}
     </Container>
@@ -114,73 +129,45 @@ const CheckoutUI = (props) => {
 }
 
 export const Checkout = (props) => {
-  const { cartUuid } = useParams()
+  const {
+    query,
+    cartUuid,
+    handleOrderRedirect
+  } = props
+
   const [{ carts }, { confirmCart }] = useOrder()
   const [{ token }] = useSession()
   const [ordering] = useApi()
+
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
   const [businessId, setBusinessId] = useState(null)
-
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search)
-  }
-  const query = useQuery()
-
-  const actionsBeforePlace = async (paymethod, cart) => {
-    switch (paymethod.gateway) {
-      case 'stripe':
-      case 'stripe_connect':
-      case 'stripe_direct': {
-        const stripe = await loadStripe(paymethod.paymethod.credentials.publishable)
-        await stripe.confirmCardPayment(cart.paymethod_data.result.client_secret)
-        return true
-      }
-      case 'stripe_redirect': {
-        const stripe = await loadStripe(paymethod.paymethod.credentials.publishable)
-        stripe.confirmBancontactPayment(
-          cart.paymethod_data.result.client_secret,
-          {
-            payment_method: {
-              billing_details: cart.paymethod_data.data.owner
-            },
-            return_url: `http://localhost:8300/checkout/${cartUuid}`
-          }
-        ).then((result) => {
-          console.log(result)
-        })
-        return true
-      }
-      default:
-        return true
-    }
-  }
 
   const getOrder = async (cartId) => {
     setCartState({ ...cartState, loading: true })
     const response = await fetch(`${ordering.root}/carts/${cartId}`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
     const { error, result } = await response.json()
-    // console.log(error, result)
+
     if (result.status === 1 && result.order?.uuid) {
-      alert(`REDIRECT TO /orders/${result.order.uuid}`)
+      handleOrderRedirect(result.order.uuid)
       setCartState({ ...cartState, loading: false })
     } else if (result.status === 2 && result.paymethod_data.gateway === 'stripe_redirect' && query.get('payment_intent')) {
-      console.log('Confirm order')
-      // const result = await confirmCart(cartUuid)
-      // console.log(result)
+      try {
+        await confirmCart(cartUuid)
+        handleOrderRedirect(result.order.uuid)
+      } catch (error) {
+        console.log(error)
+      }
+    } else if (result.status === 4) {
+      alert('The payment has not been successful, try again!')
     } else {
       setCartState({
         ...cartState,
         loading: false,
         cart: result
       })
+      setBusinessId(result.business_id)
     }
   }
-
-  useEffect(() => {
-    setBusinessId(
-      Object.values(carts).find(cart => cart.uuid === cartUuid)?.business_id
-    )
-  }, [carts])
 
   useEffect(() => {
     if (token && cartUuid && !cartState.cart) {
@@ -188,18 +175,16 @@ export const Checkout = (props) => {
     }
   }, [token, cartUuid])
 
+  useEffect(() => {
+    setBusinessId(
+      Object.values(carts).find(cart => cart.uuid === cartUuid)?.business_id
+    )
+  }, [carts])
+
   const checkoutProps = {
     ...props,
     UIComponent: CheckoutUI,
-    cartUuid,
-    businessId,
-    actionsBeforePlace,
-    onPlaceOrderClick: (data, paymethod, cart) => {
-      console.log('onPlaceOrderClick event', data, paymethod, cart)
-      if (cart.order?.uuid) {
-        alert(`REDIRECT TO /orders/${cart.order.uuid}`)
-      }
-    }
+    businessId
   }
   return (
     <CheckoutController {...checkoutProps} />

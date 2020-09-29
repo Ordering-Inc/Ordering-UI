@@ -1,19 +1,42 @@
 import React, { useState } from 'react'
-import { PaymentOptionStripe as PaymentOptionStripeController, useSession } from 'ordering-components'
+import Skeleton from 'react-loading-skeleton'
+import { PaymentOptionStripe as PaymentOptionStripeController, useSession, useLanguage } from 'ordering-components'
+
+import { IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/io'
+import { VscTrash } from 'react-icons/vsc'
+
+import { getIconCard } from '../../utils'
 
 import { Modal } from '../Modal'
+import { Confirm } from '../Confirm'
 import { StripeElementsForm } from '../StripeElementsForm'
+
+import { Button } from '../../styles/Buttons'
+
+import {
+  OptionStripeContainer,
+  WarningMessage,
+  CardItem,
+  CardItemContent,
+  CardItemActions,
+  WrapperItems,
+  ActionsModal,
+  BlockLoading
+} from './styles'
 
 const PaymentOptionStripeUI = (props) => {
   const {
+    onSelectCard,
+    onCancel,
     deleteCard,
     cardSelected,
     cardsList,
-    handleSelectCard,
     handleCardClick,
     handleNewCard
   } = props
   const [{ token }] = useSession()
+  const [, t] = useLanguage()
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const [addCartOpen, setAddCardOpen] = useState(false)
 
@@ -22,70 +45,105 @@ const PaymentOptionStripeUI = (props) => {
     handleNewCard(card)
   }
 
-  return (
-    <>
-      {!token && <strong style={{ color: 'red' }}>Sorry, you need to login to use this method</strong>}
+  const handleDeleteCard = (card) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_CARD', 'Are you sure that you want to delete the card?'),
+      handleOnAccept: () => {
+        deleteCard(card)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
 
-      {token && (
-        <>
-          <div>
-            {!cardsList.loading && !cardsList.error ? (
-              <>
-                {cardsList.cards && cardsList.cards.length > 0 ? (
-                  cardsList.cards.map((card, i) => (
-                    <div key={i} style={{ padding: '5px' }} onClick={() => handleCardClick(card)}>
-                      <input
-                        type='radio'
-                        name='card'
-                        value={card.id}
-                        style={{ marginLeft: '5px' }}
-                        checked={card.id === cardSelected?.id}
-                        readOnly
-                      />
-                      <span>{`XXXX-XXXX-XXXX-${card.last4}`} ({card.brand})</span>
-                      <button onClick={() => deleteCard(card)}>Delete</button>
-                    </div>
-                  ))
-                ) : (
-                  <p>❌ Not Found ❌</p>
-                )}
-              </>
-            ) : (
-              <>
-                {cardsList.error && cardsList.error.length > 0 ? (
-                  cardsList.error.map((e, i) => (
-                    <p key={i}>ERROR: [{e}]</p>
-                  ))
-                ) : (
-                  <p>Loading...</p>
-                )}
-              </>
-            )}
-          </div>
-          {handleSelectCard && <button style={{ margin: '10px 0px' }} onClick={() => handleSelectCard(cardSelected)} disabled={!cardSelected}>Accept</button>}
-          <button style={{ margin: '10px 0px' }} onClick={() => setAddCardOpen(true)}>Add card</button>
-        </>
+  return (
+    <OptionStripeContainer>
+      {!token && <WarningMessage>Sorry, you need to login to use this method</WarningMessage>}
+
+      {token && cardsList.cards && cardsList.cards.length > 0 && (
+        <WrapperItems>
+          {cardsList.cards.map((card, i) => (
+            <CardItem key={i}>
+              <CardItemContent onClick={() => handleCardClick(card)}>
+                <span className='checks'>
+                  {card.id === cardSelected?.id ? (
+                    <IoIosRadioButtonOn />
+                  ) : (
+                    <IoIosRadioButtonOff />
+                  )}
+                </span>
+                <span className='brand'>
+                  {getIconCard(card.brand)}
+                </span>
+                <span>
+                  XXXX-XXXX-XXXX-{card.last4}
+                </span>
+              </CardItemContent>
+              <CardItemActions>
+                <VscTrash onClick={() => handleDeleteCard(card)} />
+              </CardItemActions>
+            </CardItem>
+          ))}
+          <Button className='addcard' color='primary' onClick={() => setAddCardOpen(true)}>
+            {t('ADD_CARD', 'Add Card')}
+          </Button>
+          <ActionsModal>
+            <Button onClick={() => onCancel()}>
+              {t('CANCEL', 'Cancel')}
+            </Button>
+            <Button color='primary' onClick={() => onSelectCard(cardSelected)} disabled={!cardSelected}>
+              {t('ACCEPT', 'Accept')}
+            </Button>
+          </ActionsModal>
+        </WrapperItems>
+      )}
+
+      {token && cardsList.loading && (
+        [...Array(5).keys()].map(i => (
+          <BlockLoading key={i}>
+            <Skeleton height={50} />
+          </BlockLoading>
+        ))
+      )}
+
+      {token && !cardsList.loading && cardsList.cards && cardsList.cards.length === 0 && (
+        <CardItem>
+          <span>No cards</span>
+        </CardItem>
+      )}
+
+      {token && cardsList.error && cardsList.error.length > 0 && (
+        cardsList.error.map((e, i) => (
+          <p key={i}>ERROR: [{e}]</p>
+        ))
       )}
 
       <Modal
         className='modal-info'
         open={addCartOpen}
-        onCancel={() => setAddCardOpen(false)}
         onClose={() => setAddCardOpen(false)}
-        title='Add card'
+        title='Add credit or debit card'
       >
-        <button onClick={() => setAddCardOpen(false)}>x</button>
-        <div>
-          <StripeElementsForm
-            businessId={props.businessId}
-            publicKey={props.publicKey}
-            toSave
-            // clientSecret={props.clientSecret}
-            onNewCard={_handleNewCard}
-          />
-        </div>
+        <StripeElementsForm
+          businessId={props.businessId}
+          publicKey={props.publicKey}
+          toSave
+          // clientSecret={props.clientSecret}
+          onCancel={() => setAddCardOpen(false)}
+          onNewCard={_handleNewCard}
+        />
       </Modal>
-    </>
+      <Confirm
+        title={t('CARD', 'Card')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
+    </OptionStripeContainer>
   )
 }
 

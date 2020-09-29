@@ -1,6 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { IoIosCash, IoIosCard } from 'react-icons/io'
+import { IoIosCash, IoIosCard, IoIosRadioButtonOn } from 'react-icons/io'
 import { FaStripe, FaCcStripe, FaStripeS } from 'react-icons/fa'
 import { GrStripe } from 'react-icons/gr'
 import { PaymentOptions as PaymentOptionsController } from 'ordering-components'
@@ -8,11 +8,17 @@ import { PaymentOptions as PaymentOptionsController } from 'ordering-components'
 import { Modal } from '../Modal'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
+import { StripeElementsForm } from '../StripeElementsForm'
+import { StripeRedirectForm } from '../StripeRedirectForm'
+
+import { getIconCard } from '../../utils'
 
 import {
   PaymentMethodsContainer,
   PaymentMethodsList,
-  PayCard
+  PayCard,
+  PayCardSelected,
+  CardItemContent
 } from './styles'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
@@ -43,6 +49,7 @@ const PaymentOptionsUI = (props) => {
     handlePaymethodClick,
     handlePaymethodDataChange
   } = props
+
   return (
     <PaymentMethodsContainer>
       <PaymentMethodsList>
@@ -84,71 +91,73 @@ const PaymentOptionsUI = (props) => {
         />
       )}
 
-      {stripeOptions.includes(paymethodSelected?.paymethod?.gateway) && paymethodSelected.data?.card && (
-        <p>Card: **** **** **** {paymethodSelected.data?.card?.last4} ({paymethodSelected.data?.card?.brand})</p>
+      {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && (
+        <PayCardSelected>
+          <CardItemContent>
+            <span className='checks'>
+              <IoIosRadioButtonOn />
+            </span>
+            <span className='brand'>
+              {getIconCard(paymethodData?.card?.brand)}
+            </span>
+            <span>
+              XXXX-XXXX-XXXX-{paymethodData?.card?.last4}
+            </span>
+          </CardItemContent>
+        </PayCardSelected>
       )}
+      {/* <p>Card: **** **** **** {paymethodData?.card?.last4} ({paymethodData?.card?.brand})</p> */}
 
       {/* Stripe */}
       <Modal
         className='modal-info'
         open={['stripe', 'stripe_connect'].includes(paymethodSelected?.gateway) && !paymethodData.id}
-        onCancel={() => handlePaymethodClick(null)}
         onClose={() => handlePaymethodClick(null)}
         title='Select a card'
       >
-        <button onClick={() => handlePaymethodClick(null)}>x</button>
         {['stripe', 'stripe_connect'].includes(paymethodSelected?.gateway) && (
-          <div>
-            <PaymentOptionStripe
-              paymethod={paymethodSelected}
-              businessId={props.businessId}
-              publicKey={paymethodSelected.credentials.publishable}
-              payType={paymethodsList?.name}
-              handleSelectCard={handlePaymethodDataChange}
-            />
-          </div>
+          <PaymentOptionStripe
+            paymethod={paymethodSelected}
+            businessId={props.businessId}
+            publicKey={paymethodSelected.credentials.publishable}
+            payType={paymethodsList?.name}
+            onSelectCard={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+          />
         )}
       </Modal>
 
       {/* Stripe direct */}
-      {/* <Modal
+      <Modal
         className='modal-info'
         open={paymethodSelected?.gateway === 'stripe_direct' && !paymethodData.id}
-        onCancel={() => handlePaymethodClick(null)}
         onClose={() => handlePaymethodClick(null)}
         title='Add card'
       >
-        <button onClick={() => handlePaymethodClick(null)}>x</button>
         {paymethodSelected?.gateway === 'stripe_direct' && (
-          <div>
-            <StripeElementsForm
-              businessId={props.businessId}
-              publicKey={paymethodSelected.credentials.publishable}
-              handleSource={handlePaymethodDataChange}
-            />
-          </div>
+          <StripeElementsForm
+            businessId={props.businessId}
+            publicKey={paymethodSelected.credentials.publishable}
+            handleSource={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+          />
         )}
-      </Modal> */}
+      </Modal>
 
       {/* Stripe Redirect */}
-      {/* <Modal
+      <Modal
         className='modal-info'
         open={['stripe_redirect'].includes(paymethodSelected?.gateway) && !paymethodData.type}
-        onAccept={() => handlePaymethodClick(null)}
         onClose={() => handlePaymethodClick(null)}
         title='Stripe Redirect'
       >
-        <button onClick={() => handlePaymethodClick(null)}>x</button>
-        <div>
-          <StripeRedirectForm
-            businessId={props.businessId}
-            user={user}
-            currency={props.currency}
-            paymethods={[{ name: 'Bancontact', value: 'bancontact' }]}
-            handleStripeRedirect={handlePaymethodDataChange}
-          />
-        </div>
-      </Modal> */}
+        <StripeRedirectForm
+          businessId={props.businessId}
+          currency={props.currency}
+          paymethods={[{ name: 'Bancontact', value: 'bancontact' }]}
+          handleStripeRedirect={handlePaymethodDataChange}
+        />
+      </Modal>
     </PaymentMethodsContainer>
   )
 }
