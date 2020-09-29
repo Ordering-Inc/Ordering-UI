@@ -67,7 +67,7 @@ const FontTheme = ({ fontName, children }) => {
 }
 
 export const Router = () => {
-  const [{ auth,user }, sessionDispatch] = useSession()
+  const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
