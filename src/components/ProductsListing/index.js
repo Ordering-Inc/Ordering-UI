@@ -8,7 +8,6 @@ export const ProductsListing = (props) => {
     slug,
     ordering,
     businessProps,
-    businessParams,
     UIComponent
   } = props
 
@@ -104,11 +103,23 @@ export const ProductsListing = (props) => {
       setBusinessState({ ...businessState, loading: true })
       const source = CancelToken.source()
       requestsState.business = source
-      // setRequestsState({ ...requestsState })
+      const parameters = {
+        type: orderState.options?.type || 1,
+        location: orderState.options?.address?.location
+          ? `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`
+          : null
+      }
+      if (orderState.options?.moment) {
+        const parts = orderState.options?.moment.split(' ')
+        const dateParts = parts[0].split('-')
+        const timeParts = parts[1].split(':')
+        const moment = Date.UTC(dateParts[0], dateParts[1] - 1, dateParts[2], timeParts[0], timeParts[1], timeParts[2]) / 1000
+        parameters.timestamp = moment
+      }
       const { content: { result } } = await ordering
         .businesses(slug)
         .select(businessProps)
-        .parameters(businessParams)
+        .parameters(parameters)
         .get({ cancelToken: source.token })
       setBusinessState({
         ...businessState,
