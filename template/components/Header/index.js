@@ -14,6 +14,7 @@ import { useLanguage } from 'ordering-components/_modules/contexts/LanguageConte
 import { AddressesPopover } from '../../../src/components/AddressesPopover'
 import { UserPopover } from '../../../src/components/UserPopover'
 import { MomentPopover } from '../../../src/components/MomentPopover'
+import { CartPopover } from '../../../src/components/CartPopover'
 
 export const Header = (props) => {
   const location = useLocation()
@@ -71,6 +72,11 @@ export const Header = (props) => {
                 />
               )
             }
+            <CartPopover
+              open={openPopover.open && openPopover.type === 'cart'}
+              onClick={() => handleTogglePopover('cart')}
+              onClose={() => handleTogglePopover('cart')}
+            />
             <LanguageSelector />
           </Menu>
         </RightHeader>

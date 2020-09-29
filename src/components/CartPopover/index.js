@@ -1,12 +1,19 @@
-import React, { useRef, useEffect } from 'react'
-import { useOrder, useLanguage } from 'ordering-components'
+import React, { useEffect, useRef } from 'react'
+import { IoIosBasket } from 'react-icons/io'
 import { usePopper } from 'react-popper'
-import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
-import { MomentControl } from '../MomentControl'
+import {
+  HeaderItem,
+  PopoverBody,
+  PopoverArrow,
+  NotFound
+} from './styles'
+import { useOrder, useLanguage } from 'ordering-components'
 
-export const MomentPopover = (props) => {
+import { Cart } from '../Cart'
+
+export const CartPopover = (props) => {
   const { open } = props
-  const [orderStatus] = useOrder()
+  const [orderState] = useOrder()
   const [, t] = useLanguage()
   const referenceElement = useRef()
   const popperElement = useRef()
@@ -28,7 +35,7 @@ export const MomentPopover = (props) => {
 
   useEffect(() => {
     forceUpdate && forceUpdate()
-  }, [open, orderStatus])
+  }, [open, orderState])
 
   const handleClickOutside = (e) => {
     if (!open) return
@@ -44,26 +51,31 @@ export const MomentPopover = (props) => {
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [open])
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
+  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
 
-  const momentProps = {
-    // minDate: new Date('2020-09-22 18:00'),
-    maxDate: new Date('2020-09-30 10:00')
-  }
-
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>{orderStatus.options?.moment || t('ASAP', 'ASAP')}</HeaderItem>
+      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+        <span>
+          <IoIosBasket />
+          {Object.keys(orderState.carts).length > 0 && <p>{Object.keys(orderState.carts).length}</p>}
+        </span>
+      </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        {/* <div style={{ fontSize: '25px', fontWeight: 'bold' }}>{t('SELECT_A_DATE', 'Select a date')}</div> */}
-        {/* <AddressList
-          popover
-          changeOrderAddressWithDefault
-        /> */}
-        <MomentControl {...momentProps} />
+        <div>
+          {orderState.carts && Object.keys(orderState.carts).length > 0 &&
+            Object.values(orderState.carts).map(cart => (
+              <Cart
+                key={cart.uuid}
+                cart={cart}
+                isProducts={cart.products.length}
+              />
+            ))}
+          {Object.keys(orderState.carts).length === 0 && <NotFound>{t('CART_ERROR', 'You don\'t have cars available')}</NotFound>}
+        </div>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
     </div>

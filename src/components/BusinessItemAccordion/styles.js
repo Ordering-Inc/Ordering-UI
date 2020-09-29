@@ -1,19 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const AccordionSection = styled.div`
+const AccordionSectionStyled = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  border-bottom: 1px solid #BFBFBF;
   padding: 10px 0px;
+  box-shadow: 0px 3px 6px #00000029;
+  opacity: 1;
 `
 
-const AccordionStyled = styled.div`
+export const AccordionSection = (props) => {
+  const style = {}
+  if (props.isClosed) {
+    style.filter = 'brightness(0.4)'
+    style.background = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'
+  } else {
+    style.background = '#F8F8F8 0% 0% no-repeat padding-box'
+  }
+  return (
+    <AccordionSectionStyled
+      {...props}
+      style={style}
+    >
+      {props.children}
+    </AccordionSectionStyled>
+  )
+}
+
+export const Accordion = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
+  cursor: ${({ isClosed }) => isClosed ? 'not-allowed' : 'pointer'};
   transition: background-color 0.6s ease;
+  position: relative;
 
   .rotate {
     transform: rotate(180deg);
@@ -33,20 +55,13 @@ const AccordionStyled = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    p {
-      font-size: 20px;
-      margin: 0px 5px;
-    }
   }
 
-  div.price {
+  div.total {
     width: 35%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    div {
-      display: flex;
-    }
+    align-items: center;
+    justify-content: flex-end;
     span {
       font-weight: bold;
       font-size: 20px;
@@ -54,63 +69,21 @@ const AccordionStyled = styled.div`
     p {
       font-size: 20px;
       margin: 0px 5px;
-    }
-    svg {
-      cursor: pointer;
-    }
-  }
-
-  div.actions {
-    display: flex;
-    justify-content: flex-end;
-    span svg {
-      font-size: 20px;
-      margin-right: 5px;
-      cursor: pointer;
-    }
-    span.delete svg {
-      color: #D81212;
-    }
-    span.edit svg {
-      color: #F2BB40;
-    }
-  }
-
-  div.error {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-
-    span {
-      font-size: 18px;
-      text-align: right;
+      svg {
+        cursor: pointer;
+      }
     }
   }
 `
 
-export const Accordion = (props) => {
-  const style = {}
-  if (!props.isValid) {
-    style.opacity = '0.5'
-  }
-  return (
-    <AccordionStyled
-      {...props}
-      style={style}
-    >
-      {props.children}
-    </AccordionStyled>
-  )
-}
-
-export const WrapperProductImage = styled.div`
+export const WrapperBusinessLogo = styled.div`
   max-width: 75px;
   max-height: 75px;
   height: 75px;
   width: 75px;
 `
 
-const ProductImageStyled = styled.div`
+const BusinessLogoStyled = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
@@ -124,14 +97,14 @@ const ProductImageStyled = styled.div`
   border-radius: 10px;
 `
 
-export const ProductImage = (props) => {
+export const BusinessLogo = (props) => {
   return (
-    <ProductImageStyled
+    <BusinessLogoStyled
       {...props}
       style={{ backgroundImage: `url(${props.bgimage})` }}
     >
       {props.children}
-    </ProductImageStyled>
+    </BusinessLogoStyled>
   )
 }
 
@@ -157,23 +130,12 @@ export const ContentInfo = styled.div`
 `
 
 export const AccordionContent = styled.div`
-  overflow: hidden;
+  overflow: auto;
   transition: max-height 0.6s ease;
-  ul {
-    list-style-type: none;
-  }
 `
 
 export const AccordionText = styled.div`
   font-weight: 400;
   font-size: 14px;
   padding: 18px;
-`
-
-export const ProductActions = styled.div`
-  display: flex;
-  justify-content: center;
-  > * {
-    margin: 5px;
-  }
 `
