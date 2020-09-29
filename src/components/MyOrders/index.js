@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   MyOrders as MyOrdersController,
   GoogleMaps,
@@ -79,7 +80,11 @@ export const MyOrdersUI = (props) => {
                   </Price>
                 </Content>
                 <OpenOrder>
-                  <Button color='primary'>Open Order</Button>
+                  <Link to={'/order/' + order.id}>
+                    <Button color='primary'>
+                      Open Order
+                    </Button>
+                  </Link>
                 </OpenOrder>
               </Card>
             ))}

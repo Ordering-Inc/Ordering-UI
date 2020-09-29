@@ -74,9 +74,11 @@ export const OpenOrder = styled.div`
   height: 15%;
   width: 95%;
   margin: auto;
-  > button {
+  > a {
+    > button {
     width: 100%;
     height: 100%;
+  }
   }
 `
 export const Price = styled.div`

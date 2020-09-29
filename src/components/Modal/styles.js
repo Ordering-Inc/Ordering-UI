@@ -20,6 +20,7 @@ export const ModalWrap = styled.div`
   z-index: 1002 !important;
   outline: none;
   box-sizing: border-box;
+  overflow-y: auto;
 `
 
 export const ModalDialog = styled.div`
@@ -28,6 +29,8 @@ export const ModalDialog = styled.div`
   width: ${({ width }) => width || '50%'};
   border-radius: 10px;
   box-sizing: border-box;
+  margin-top: auto;
+  margin-bottom: auto;
   @media (max-width: 860px) {
     width: 80%;
   }

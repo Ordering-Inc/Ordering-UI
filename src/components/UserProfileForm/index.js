@@ -9,7 +9,6 @@ import { MyOrders } from '../MyOrders'
 import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera, UserData, SavedPlaces, FlexTabs } from './styles'
 
 import { Input } from '../../styles/Inputs'
-// import { Select } from '../../styles/Select'
 import { Button } from '../../styles/Buttons'
 import { Tabs, Tab } from '../../styles/Tabs'
 
@@ -69,7 +68,6 @@ const UserProfileFormUI = (props) => {
     }
     setEdit(false)
   }
-  console.log(errors)
 
   return (
     <>

@@ -32,7 +32,9 @@ export const MomentPopover = (props) => {
 
   const handleClickOutside = (e) => {
     if (!open) return
-    if (!popperElement.current?.contains(e.target) && e.target !== referenceElement.current) {
+    const outsidePopover = !popperElement.current?.contains(e.target)
+    const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
+    if (outsidePopover && outsidePopoverMenu) {
       props.onClose && props.onClose()
     }
   }
@@ -47,20 +49,18 @@ export const MomentPopover = (props) => {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
 
+  const currentDate = new Date()
+  currentDate.setTime(currentDate.getTime() + (6 * 24 * 60 * 60 * 1000))
+  currentDate.setHours(23)
+  currentDate.setMinutes(59)
   const momentProps = {
-    // minDate: new Date('2020-09-22 18:00'),
-    maxDate: new Date('2020-09-30 10:00')
+    maxDate: currentDate
   }
 
   return (
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>{orderStatus.options?.moment || t('ASAP', 'ASAP')}</HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        {/* <div style={{ fontSize: '25px', fontWeight: 'bold' }}>{t('SELECT_A_DATE', 'Select a date')}</div> */}
-        {/* <AddressList
-          popover
-          changeOrderAddressWithDefault
-        /> */}
         <MomentControl {...momentProps} />
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>

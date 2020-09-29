@@ -33,7 +33,7 @@ const BusinessProductsListingUI = (props) => {
 
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
-  
+
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
 
