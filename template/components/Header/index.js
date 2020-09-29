@@ -5,12 +5,11 @@ import {
 
 import { useLocation, Link } from 'react-router-dom'
 
-import { useSession } from 'ordering-components'
+import { useSession, useLanguage } from 'ordering-components'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
 import { LanguageSelector } from '../../../src/components/LanguageSelector'
-import { useLanguage } from 'ordering-components/_modules/contexts/LanguageContext'
 import { AddressesPopover } from '../../../src/components/AddressesPopover'
 import { UserPopover } from '../../../src/components/UserPopover'
 import { MomentPopover } from '../../../src/components/MomentPopover'
@@ -20,13 +19,19 @@ export const Header = (props) => {
   const location = useLocation()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
-  // const [orderStatus] = useOrder()
-  const [openPopover, setOpenPopover] = useState({ open: false })
+  const [openPopover, setOpenPopover] = useState({})
 
   const handleTogglePopover = (type) => {
     setOpenPopover({
-      type,
-      open: openPopover.type === type ? !openPopover.open : true
+      ...openPopover,
+      [type]: !openPopover[type]
+    })
+  }
+
+  const handleClosePopover = (type) => {
+    setOpenPopover({
+      ...openPopover,
+      [type]: false
     })
   }
 
@@ -54,29 +59,31 @@ export const Header = (props) => {
               )
             }
             <MomentPopover
-              open={openPopover.open && openPopover.type === 'moment'}
+              open={openPopover.moment}
               onClick={() => handleTogglePopover('moment')}
-              onClose={() => handleTogglePopover('moment')}
+              onClose={() => handleClosePopover('moment')}
             />
             <AddressesPopover
-              open={openPopover.open && openPopover.type === 'addresses'}
+              open={openPopover.addresses}
               onClick={() => handleTogglePopover('addresses')}
-              onClose={() => handleTogglePopover('addresses')}
+              onClose={() => handleClosePopover('addresses')}
             />
             {
               auth && (
-                <UserPopover
-                  open={openPopover.open && openPopover.type === 'user'}
-                  onClick={() => handleTogglePopover('user')}
-                  onClose={() => handleTogglePopover('user')}
-                />
+                <>
+                  <UserPopover
+                    open={openPopover.user}
+                    onClick={() => handleTogglePopover('user')}
+                    onClose={() => handleClosePopover('user')}
+                  />
+                  <CartPopover
+                    open={openPopover.cart}
+                    onClick={() => handleTogglePopover('cart')}
+                    onClose={() => handleClosePopover('cart')}
+                  />
+                </>
               )
             }
-            <CartPopover
-              open={openPopover.open && openPopover.type === 'cart'}
-              onClick={() => handleTogglePopover('cart')}
-              onClose={() => handleTogglePopover('cart')}
-            />
             <LanguageSelector />
           </Menu>
         </RightHeader>
