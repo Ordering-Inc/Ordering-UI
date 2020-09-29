@@ -19,7 +19,6 @@ import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
-import { Messages } from '../src/components/Messages'
 
 const fontName = 'Nunito'
 
@@ -180,6 +179,7 @@ export const Router = () => {
           <Route exact path='/order/:orderId'>
             <Order />
           </Route>
+
           <Route path='*'>
             404
           </Route>

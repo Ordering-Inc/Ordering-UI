@@ -151,12 +151,16 @@ export const MessagesUI = (props) => {
                       </>
                     )}
                     <> to {t(getStatus(parseInt(message.change.new, 10)))} </>
-                    <p>{moment(message.created_at, 'YYYYMMDD').fromNow()}</p>
+                    <p>
+                      {
+                        moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()
+                      }
+                    </p>
                   </BubbleConsole>
                 ) : (
                   <BubbleConsole>
                     <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong> was assigned as driver {message.comment && (<><br /> {message.comment.length}</>)}
-                    <p>{moment(message.created_at, 'YYYYMMDD').fromNow()}</p>
+                    <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
                   </BubbleConsole>
                 )
               )}
