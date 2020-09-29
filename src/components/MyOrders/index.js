@@ -20,6 +20,7 @@ import {
   OrderPastContent,
   Reorder
 } from './styles'
+import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 
 import { Button } from '../../styles/Buttons'
@@ -27,13 +28,13 @@ export const MyOrdersUI = (props) => {
   const { activeOrders, previousOrders } = props
   const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
   const [open, setOpen] = useState(false)
-  const [orderId,setOrderId] = useState(null)
-  const [order,setOrder] = useState({})
+  const [orderId, setOrderId] = useState(null)
+  const [order, setOrder] = useState({})
 
-  const handleMessages = (orderID,order) => {
+  const handleMessages = (orderID, order) => {
     setOrderId(orderID)
     setOrder(order)
-    setOpen(true);
+    setOpen(true)
   }
   return (
     <MyOrdersContainer>
@@ -104,7 +105,7 @@ export const MyOrdersUI = (props) => {
                   </BusinessInformation>
                 </OrderPastContent>
                 <Reorder>
-                  <p>{order.status === (1 || 11) ? 'Complete' : ''}</p>
+                  <p>{order.status === 1 || order.status === 11 ? 'Complete' : ''}</p>
                   <Button color='primary'>Reorder</Button>
                 </Reorder>
               </IndividualOrderPast>
@@ -112,7 +113,9 @@ export const MyOrdersUI = (props) => {
           </OrdersPast>
         </>
       )}
-      <Messages open={open} setOpen={setOpen} orderId={orderId} order={order} />
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Messages open={open} setOpen={setOpen} orderId={orderId} order={order} />
+      </Modal>
     </MyOrdersContainer>
   )
 }

@@ -44,6 +44,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.4",
     "lodash": "^4.17.19",
+    "moment": "^2.29.0",
     "ordering-components": "github:sergioaok/ordering-components#development",
     "polished": "^3.6.6",
     "prop-types": "^15.7.2",

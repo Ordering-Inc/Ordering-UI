@@ -19,6 +19,7 @@ import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
+import { Messages } from '../src/components/Messages'
 
 const fontName = 'Nunito'
 
@@ -67,7 +68,7 @@ const FontTheme = ({ fontName, children }) => {
 }
 
 export const Router = () => {
-  const [{ auth,user }, sessionDispatch] = useSession()
+  const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
 
@@ -155,7 +156,7 @@ export const Router = () => {
               ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
               : <Redirect to='/login' />}
           </Route>
-          <Route exact path='/profile/my_orders'>
+          <Route exact path='/profile/orders'>
             {auth
               ? (<MyOrders />)
               : <Redirect to='/login' />}

@@ -11,11 +11,13 @@ export const MyOrdersTitle = styled.div`
 
 export const ActiveOrders = styled.div`
   text-align: center;
-  display: inline-flex;
+  display: flex;
+  overflow: auto;
+  width: auto;
 `
 
 export const Card = styled.div`
-  width: 400px;
+  min-width: 400px;
   margin: 0 10px;
   display: inline-block;
   background: white;
