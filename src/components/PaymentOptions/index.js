@@ -7,6 +7,7 @@ import { PaymentOptions as PaymentOptionsController } from 'ordering-components'
 
 import { Modal } from '../Modal'
 import { PaymentOptionCash } from '../PaymentOptionCash'
+import { PaymentOptionStripe } from '../PaymentOptionStripe'
 
 import {
   PaymentMethodsContainer,
@@ -87,28 +88,8 @@ const PaymentOptionsUI = (props) => {
         <p>Card: **** **** **** {paymethodSelected.data?.card?.last4} ({paymethodSelected.data?.card?.brand})</p>
       )}
 
-      {/* Stripe direct */}
-      {/* <Modal
-        className='modal-info'
-        open={paymethodSelected?.gateway === 'stripe_direct' && !paymethodData.id}
-        onCancel={() => handlePaymethodClick(null)}
-        onClose={() => handlePaymethodClick(null)}
-        title='Add card'
-      >
-        <button onClick={() => handlePaymethodClick(null)}>x</button>
-        {paymethodSelected?.gateway === 'stripe_direct' && (
-          <div>
-            <StripeElementsForm
-              businessId={props.businessId}
-              publicKey={paymethodSelected.credentials.publishable}
-              handleSource={handlePaymethodDataChange}
-            />
-          </div>
-        )}
-      </Modal> */}
-
       {/* Stripe */}
-      {/* <Modal
+      <Modal
         className='modal-info'
         open={['stripe', 'stripe_connect'].includes(paymethodSelected?.gateway) && !paymethodData.id}
         onCancel={() => handlePaymethodClick(null)}
@@ -124,6 +105,26 @@ const PaymentOptionsUI = (props) => {
               publicKey={paymethodSelected.credentials.publishable}
               payType={paymethodsList?.name}
               handleSelectCard={handlePaymethodDataChange}
+            />
+          </div>
+        )}
+      </Modal>
+
+      {/* Stripe direct */}
+      {/* <Modal
+        className='modal-info'
+        open={paymethodSelected?.gateway === 'stripe_direct' && !paymethodData.id}
+        onCancel={() => handlePaymethodClick(null)}
+        onClose={() => handlePaymethodClick(null)}
+        title='Add card'
+      >
+        <button onClick={() => handlePaymethodClick(null)}>x</button>
+        {paymethodSelected?.gateway === 'stripe_direct' && (
+          <div>
+            <StripeElementsForm
+              businessId={props.businessId}
+              publicKey={paymethodSelected.credentials.publishable}
+              handleSource={handlePaymethodDataChange}
             />
           </div>
         )}
