@@ -13,6 +13,24 @@ export const OrderBill = styled.div`
       text-align: right;
     }
   }
+  table.total {
+    border-top: 1px solid #EAEAEA;
+    padding-top: 10px;
+    tr {
+      td:nth-child(1) {
+        font-weight: bold;
+      }
+      td:nth-child(2) {
+        font-weight: bold;
+        color: #D81212;
+      }
+    }
+  }
+`
+
+export const CouponContainer = styled.div`
+  width: 100%;
+  margin: 10px 0px;
 `
 
 export const CheckoutAction = styled.div`

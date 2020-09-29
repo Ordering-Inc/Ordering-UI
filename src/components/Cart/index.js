@@ -8,11 +8,13 @@ import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import { formatPrice } from '../../utils'
 
 import { Confirm } from '../Confirm'
+import { CouponControl } from '../CouponControl'
 
 import {
   CartContainer,
   OrderBill,
-  CheckoutAction
+  CheckoutAction,
+  CouponContainer
 } from './styles'
 
 const CartUI = (props) => {
@@ -107,16 +109,31 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
+            <CouponContainer>
+              <CouponControl
+                businessId={cart.business_id}
+              />
+            </CouponContainer>
+            <table className='total'>
+              <tbody>
+                <tr>
+                  <td>Total</td>
+                  <td>{formatPrice(cart?.total)}</td>
+                </tr>
+              </tbody>
+            </table>
           </OrderBill>
         )}
-        <CheckoutAction>
-          <Button
-            color='primary'
-            onClick={() => handleClickCheckout()}
-          >
-            Checkout
-          </Button>
-        </CheckoutAction>
+        {onClickCheckout && (
+          <CheckoutAction>
+            <Button
+              color='primary'
+              onClick={() => handleClickCheckout()}
+            >
+              Checkout
+            </Button>
+          </CheckoutAction>
+        )}
       </BusinessItemAccordion>
       <Confirm
         title={t('PRODUCT', 'Product')}

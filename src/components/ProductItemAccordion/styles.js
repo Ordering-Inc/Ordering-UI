@@ -14,6 +14,7 @@ const AccordionStyled = styled.div`
   justify-content: space-between;
   cursor: pointer;
   transition: background-color 0.6s ease;
+  margin: 0px 20px;
 
   .rotate {
     transform: rotate(180deg);
@@ -173,6 +174,10 @@ export const AccordionText = styled.div`
 export const ProductActions = styled.div`
   display: flex;
   justify-content: center;
+
+  button:disabled {
+    opacity: 0.5;
+  }
   > * {
     margin: 5px;
   }

@@ -36,6 +36,7 @@ export const Accordion = styled.div`
   cursor: ${({ isClosed }) => isClosed ? 'not-allowed' : 'pointer'};
   transition: background-color 0.6s ease;
   position: relative;
+  margin: 0px 20px;
 
   .rotate {
     transform: rotate(180deg);
