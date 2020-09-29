@@ -67,7 +67,7 @@ export const AddressesPopover = (props) => {
         {
           !userState.auth && (
             <>
-              <div style={{ fontSize: '30px', fontWeight: 'bold' }}>{t('ADDRES', 'Address')}</div>
+              <div style={{ fontSize: '30px', fontWeight: 'bold' }}>{t('ADDRESS', 'Address')}</div>
               <AddressForm
                 useValidationFileds
                 address={orderState?.options?.address || {}}
