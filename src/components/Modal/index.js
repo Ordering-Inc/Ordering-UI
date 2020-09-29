@@ -6,8 +6,7 @@ import {
   ModalWrap,
   ModalActions,
   ModalTitle,
-  ModalIcon,
-  Container
+  ModalIcon
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -25,7 +24,7 @@ const ModalUI = (props) => {
   const [, t] = useLanguage()
   return (
     <ModalWrap>
-      <ModalDialog className='popup-dialog'>
+      <ModalDialog className='popup-dialog' width={props.width}>
         <ModalIcon>
           <MdClose onClick={() => onClose()} />
         </ModalIcon>
@@ -48,8 +47,6 @@ export const Modal = (props) => {
   }
 
   return (
-    <Container zx={props.zx}>
-      <Popup {...ModalProps} />
-    </Container>
+    <Popup {...ModalProps} />
   )
 }

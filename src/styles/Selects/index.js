@@ -19,12 +19,6 @@ export const Option = styled.div`
     }
   `}
 
-  :first-child {
-    border-top-width: 2px;
-    border-top-style: solid;
-    border-top-color: #AAA;
-  }
-
   svg {
     vertical-align: text-top;
   }
@@ -32,17 +26,22 @@ export const Option = styled.div`
 
 export const Options = styled.div`
   position: absolute;
-  width: 100%;
   background-color: #CCC;
-  margin-top: -18px;
-  margin-left: -1px;
-  padding-top: 18px;
+  margin-top: 7px;
   z-index: 10;
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;
-  border-radius: 0 0 17px 17px;
+  border-radius: 15px;
   overflow: hidden;
+  ${({ position }) => position?.toLowerCase() === 'left' && css`
+    left: 0;
+    margin-left: -1px;
+  `}
+  ${({ position }) => position?.toLowerCase() === 'right' && css`
+    right: 0;
+    margin-right: -1px;
+  `}
 `
 
 export const Selected = styled.div`
@@ -50,7 +49,9 @@ export const Selected = styled.div`
   padding-right: 15px;
   cursor: pointer;
   position: relative;
-  padding-right: 36px;
+  display: flex;
+  align-items: center;
+  /* padding-right: 36px; */
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -62,6 +63,8 @@ export const Selected = styled.div`
 
   svg {
     vertical-align: text-top;
+    display: flex;
+    margin-left: 7px;
   }
 `
 
@@ -83,12 +86,23 @@ export const Select = styled.div`
 `
 
 export const Chevron = styled.div`
-  position: absolute;
-  top: 0;
-  right: 10px;
   font-size: 16px;
 
   svg {
     vertical-align: text-top;
+  }
+`
+
+export const SelectImage = styled.div`
+  width: 28px;
+  height: 28px;
+  border-radius: 1000px;
+  margin-right: 5px;
+  overflow: hidden;
+
+
+  img {
+    width: 100%;
+    height: 100%;
   }
 `

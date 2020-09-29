@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
+import { CancelToken } from 'ordering-api-sdk'
+
 import {
   BusinessContainer,
   BusinessList,
@@ -13,8 +15,10 @@ import { BusinessController } from '../BusinessController'
 import { useOrder, useApi } from 'ordering-components'
 
 export const BusinessesListing = (props) => {
+  console.log('Move BusinessesListing to ordering-componenets')
   const {
-    propsToFetch
+    propsToFetch,
+    onBusinessClick
   } = props
 
   const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
@@ -22,8 +26,9 @@ export const BusinessesListing = (props) => {
   const [businessTypeSelected, setBusinessTypeSelected] = useState(null)
   const [orderState] = useOrder()
   const [ordering] = useApi()
+  const requestsState = {}
 
-  const getBusinesses = async (newFetch, page) => {
+  const getBusinesses = async (newFetch) => {
     try {
       setBusinessesList({ ...businessesList, loading: true })
       const parameters = {
@@ -37,8 +42,9 @@ export const BusinessesListing = (props) => {
         where.push({ attribute: businessTypeSelected, value: true })
       }
 
-      const { content: { result, pagination } } = await ordering.businesses().select(propsToFetch).parameters(parameters).where(where).get()
-
+      const source = CancelToken.source()
+      requestsState.businesses = source
+      const { content: { result, pagination } } = await ordering.businesses().select(propsToFetch).parameters(parameters).where(where).get({ cancelToken: source.token })
       businessesList.businesses = newFetch ? result : [...businessesList.businesses, ...result]
       setBusinessesList({
         ...businessesList,
@@ -55,14 +61,24 @@ export const BusinessesListing = (props) => {
         totalPages: pagination.total_pages,
         nextPageItems
       })
-    } catch (e) {
-      setBusinessesList({
-        ...businessesList,
-        loading: false,
-        error: [e.message]
-      })
+    } catch (err) {
+      if (err.constructor.name !== 'Cancel') {
+        setBusinessesList({
+          ...businessesList,
+          loading: false,
+          error: [err.message]
+        })
+      }
     }
   }
+
+  useEffect(() => {
+    return () => {
+      if (requestsState.businesses) {
+        requestsState.businesses.cancel()
+      }
+    }
+  }, [paginationProps])
 
   const handleScroll = useCallback(() => {
     const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
@@ -82,7 +98,7 @@ export const BusinessesListing = (props) => {
   }, [orderState, businessTypeSelected])
 
   const handleBusinessClick = (business) => {
-    console.log(business)
+    onBusinessClick && onBusinessClick(business)
   }
 
   const handleChangeBusinessType = (businessType) => {
