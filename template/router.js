@@ -80,6 +80,7 @@ export const Router = () => {
       token: user.session.access_token
     })
   }
+
   return (
     <BrowserRouter>
       <GlobalStyle />

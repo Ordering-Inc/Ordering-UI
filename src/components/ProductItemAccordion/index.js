@@ -22,6 +22,7 @@ export const ProductItemAccordion = (props) => {
   const {
     isCartProduct,
     product,
+    formatPrice,
     changeQuantity,
     getProductMax,
     offsetDisabled,

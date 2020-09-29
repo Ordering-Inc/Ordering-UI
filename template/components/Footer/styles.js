@@ -6,7 +6,7 @@ export const FooterContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  border-top: 1px solid #A8A8A8;
+  border-top: 1px solid #D9D9D9;
   text-align: left;
   padding: 30px 0 45px 0;
   flex-wrap: wrap;
@@ -26,8 +26,7 @@ export const Content = styled.div`
     font-size: 12px;
     margin: 10px 0;
   }
-/* background-color: #333; */
-@media (min-width: 410px) {
+  @media (min-width: 410px) {
     width: 30%;
     > * {
     
@@ -52,7 +51,6 @@ export const SocialMedia = styled.div`
     margin: 10px 3px;
   }
   }
-/* background-color: #333; */
 `
 export const SocialIcon = styled.span`
   > * {
@@ -61,8 +59,9 @@ export const SocialIcon = styled.span`
   }
   @media (min-width: 640px) {
     > * {
-    width: 30px;
-    height: 30px;
+      width: 30px;
+      height: 30px;
+    }
   }
 `
 
