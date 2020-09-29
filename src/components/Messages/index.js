@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Messages as MessagesController,
   useLanguage
@@ -38,6 +38,7 @@ export const MessagesUI = (props) => {
 
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
+
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
   }
@@ -115,6 +116,8 @@ export const MessagesUI = (props) => {
 
   const onSubmit = async () => {
     handleSend()
+    setImage('')
+    setMessage('')
   }
 
   return (
@@ -204,7 +207,7 @@ export const MessagesUI = (props) => {
             onChange={onChangeMessage}
             name='message'
             ref={register({
-              required: !image && 'Write something'
+              required: !image ? 'Write something' : false
             })}
           />
           <label for='chat_image'>
@@ -223,9 +226,9 @@ export const MessagesUI = (props) => {
             </Button>
           )}
           <Button
-            color={errors.message?.message ? 'secondary' : 'primary'}
+            color={(errors.message?.message && !image) ? 'secondary' : 'primary'}
             type='submit'
-            disabled={errors.message?.message}
+            disabled={(errors.message?.message && !image)}
           >
             <FiSend />
           Send
