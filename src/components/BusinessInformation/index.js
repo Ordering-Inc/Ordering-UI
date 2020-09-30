@@ -1,15 +1,16 @@
 /* eslint-disable no-useless-escape */
 import React, { useState } from 'react'
-import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps } from 'ordering-components'
+
+import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
-import { BusinessInformationContainer, Header, BussinessTitle, Information, HeaderImage, BusinessContent, FlexTabs, BusinessLocation, Map, BusinessOpeningTime, Times, DeliveryDetails, BusinessGallery, BusinessVideos } from './styles'
+import { BusinessInformationContainer, Header, BusinessContent, BusinessBasicContent, FlexTabs, BusinessLocation, Map, BusinessOpeningTime, Times, DeliveryDetails, BusinessGallery, BusinessVideos, BusinessInfo, BusinessInfoItem, WrapperBusinessLogo, BusinessLogo } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 
-import { AiFillStar, AiOutlineClockCircle } from 'react-icons/ai'
-import { GrDeliver } from 'react-icons/gr'
+import { GrDeliver, FaStar, FiClock, VscLocation } from 'react-icons/all'
 
 export const BusinessInformationUI = (props) => {
-  const { business, businessLocation, businessSchedule, businessPhotos, businessVideos } = props
+  const { business, getBusinessType, dateFormatted, formatNumber, formatPrice, optimizeImage, businessLocation, businessSchedule, businessPhotos, businessVideos } = props
+  const [orderState] = useOrder()
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
@@ -34,20 +35,50 @@ export const BusinessInformationUI = (props) => {
   return (
     <BusinessInformationContainer>
       <Header img={business.header}>
-        <BussinessTitle>
-          {business?.logo && (
-            <HeaderImage>
-              <img src={business.logo} />
-            </HeaderImage>
-          )}
-          <Information>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <h5>{business.name}</h5>
-              <h5><AiFillStar color='yellow' /> {business.reviews?.total}</h5>
-            </div>
-            <p><AiOutlineClockCircle />{business.delivery_time}min * <GrDeliver />${business.delivery_price}</p>
-          </Information>
-        </BussinessTitle>
+        <BusinessBasicContent>
+          <WrapperBusinessLogo>
+            <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
+          </WrapperBusinessLogo>
+          <BusinessInfo className='info'>
+            <BusinessInfoItem>
+              <div>
+                <p className='bold'>{business?.name}</p>
+                <p>
+                  <FaStar className='start' />
+                  {business?.reviews?.total}
+                </p>
+
+              </div>
+              <div>
+                <p>{getBusinessType()}</p>
+
+              </div>
+              <div>
+                <>
+                  {orderState?.options?.type === 1 ? (
+                    <p>
+                      <FiClock />
+                      {dateFormatted(business?.delivery_time)}
+                    </p>
+                  ) : (
+                    <p>
+                      <FiClock />
+                      {dateFormatted(business?.pickup_time)}
+                    </p>
+                  )}
+                </>
+                <p>
+                  <VscLocation />
+                  {formatNumber(business?.distance) || 0} KM
+                </p>
+                <p>
+                  <GrDeliver />
+                  {business && formatPrice(business?.delivery_price || 0)}
+                </p>
+              </div>
+            </BusinessInfoItem>
+          </BusinessInfo>
+        </BusinessBasicContent>
       </Header>
       <BusinessContent>
         {business.reviews && (
@@ -70,7 +101,7 @@ export const BusinessInformationUI = (props) => {
               <BusinessLocation>
                 <h4>Business Location</h4>
                 <>
-                  {businessLocation.location && (businessLocation.googleMapsControls || business.googleMapsControls) && (
+                  {businessLocation.location && (
                     <Map>
                       <GoogleMapsMap
                         apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
@@ -101,15 +132,15 @@ export const BusinessInformationUI = (props) => {
                 <DeliveryDetails>
                   <span />
                   <div>
-                    <h5>Delivery Fee:</h5>
-                    <h5>Minimun Order:</h5>
-                    <h5>Distance:</h5>
+                    <h5>Delivery Fee: {formatPrice(business.service_fee)}</h5>
+                    <h5>Minimun Order: {formatPrice(business.minimum)}</h5>
+                    <h5>Distance: {formatNumber(business?.distance) || 0} KM</h5>
                   </div>
                   <span />
                   <div>
                     <h5>Order Type Time:</h5>
-                    <h5>Delivery Time:</h5>
-                    <h5>Pickup Time:</h5>
+                    <h5>Delivery Time: {dateFormatted(business?.delivery_time)}</h5>
+                    <h5>Pickup Time: {dateFormatted(business?.pickup_time)}</h5>
                   </div>
                   <span />
                 </DeliveryDetails>
