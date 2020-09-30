@@ -47,6 +47,14 @@ const CheckoutUI = (props) => {
               </h1>
             </WarningMessage>
           )}
+          {cart?.status === 4 && (
+            <WarningMessage>
+              <VscWarning />
+              <h1>
+                {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
+              </h1>
+            </WarningMessage>
+          )}
           <AddressDetails
             businessId={businessId}
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
@@ -157,8 +165,6 @@ export const Checkout = (props) => {
       } catch (error) {
         console.log(error)
       }
-    } else if (result.status === 4) {
-      alert('The payment has not been successful, please try again!')
     } else {
       setCartState({
         ...cartState,
