@@ -60,6 +60,18 @@ const PaymentOptionStripeUI = (props) => {
     <OptionStripeContainer>
       {!token && <WarningMessage>Sorry, you need to login to use this method</WarningMessage>}
 
+      {token && !cardsList.loading && cardsList.cards && cardsList.cards.length === 0 && (
+        <CardItem>
+          <span>No cards</span>
+        </CardItem>
+      )}
+
+      {token && cardsList.error && cardsList.error.length > 0 && (
+        cardsList.error.map((e, i) => (
+          <p key={i}>ERROR: [{e}]</p>
+        ))
+      )}
+
       {token && cardsList.cards && cardsList.cards.length > 0 && (
         <WrapperItems>
           {cardsList.cards.map((card, i) => (
@@ -84,6 +96,11 @@ const PaymentOptionStripeUI = (props) => {
               </CardItemActions>
             </CardItem>
           ))}
+        </WrapperItems>
+      )}
+
+      {token && !cardsList.loading && (
+        <WrapperItems>
           <Button className='addcard' color='primary' onClick={() => setAddCardOpen(true)}>
             {t('ADD_CARD', 'Add Card')}
           </Button>
@@ -96,26 +113,6 @@ const PaymentOptionStripeUI = (props) => {
             </Button>
           </ActionsModal>
         </WrapperItems>
-      )}
-
-      {token && cardsList.loading && (
-        [...Array(5).keys()].map(i => (
-          <BlockLoading key={i}>
-            <Skeleton height={50} />
-          </BlockLoading>
-        ))
-      )}
-
-      {token && !cardsList.loading && cardsList.cards && cardsList.cards.length === 0 && (
-        <CardItem>
-          <span>No cards</span>
-        </CardItem>
-      )}
-
-      {token && cardsList.error && cardsList.error.length > 0 && (
-        cardsList.error.map((e, i) => (
-          <p key={i}>ERROR: [{e}]</p>
-        ))
       )}
 
       <Modal
@@ -133,6 +130,7 @@ const PaymentOptionStripeUI = (props) => {
           onNewCard={_handleNewCard}
         />
       </Modal>
+
       <Confirm
         title={t('CARD', 'Card')}
         content={confirm.content}
@@ -143,6 +141,14 @@ const PaymentOptionStripeUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+
+      {token && cardsList.loading && (
+        [...Array(5).keys()].map(i => (
+          <BlockLoading key={i}>
+            <Skeleton height={50} />
+          </BlockLoading>
+        ))
+      )}
     </OptionStripeContainer>
   )
 }
