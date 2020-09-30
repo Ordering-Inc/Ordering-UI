@@ -70,7 +70,9 @@ const PaymentOptionsUI = (props) => {
 
         {paymethodsList.loading && (
           [...Array(6).keys()].map(i => (
-            <Skeleton key={i} width={130} height={60} style={{ marginLeft: '10px' }} />
+            <PayCard key={i} isSkeleton>
+              <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
+            </PayCard>
           ))
         )}
 
@@ -106,7 +108,6 @@ const PaymentOptionsUI = (props) => {
           </CardItemContent>
         </PayCardSelected>
       )}
-      {/* <p>Card: **** **** **** {paymethodData?.card?.last4} ({paymethodData?.card?.brand})</p> */}
 
       {/* Stripe */}
       <Modal

@@ -59,7 +59,6 @@ const UserDetailsUI = (props) => {
             {inputs.map((_input) => (
               <div key={_input.name}>
                 <Input
-                  w={70}
                   name={_input.name}
                   type={_input.type}
                   placeholder={_input.placeholder}

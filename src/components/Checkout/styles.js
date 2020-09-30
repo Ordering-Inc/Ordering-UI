@@ -9,12 +9,17 @@ export const Container = styled.div`
 export const WrappContainer = styled.div`
   width: 80%;
   margin: auto;
+
+  @media (max-width: 512px) {
+    width: 90%;
+  }
 `
 
 export const UserDetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px 0px;
+  flex-wrap: wrap;
 
   div.user {
     width: 50%;
@@ -24,6 +29,13 @@ export const UserDetailsContainer = styled.div`
     h1 {
       margin: 0px;
       font-size: 24px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    div.user,
+    div.business {
+      width: 100%;
     }
   }
 `
@@ -54,13 +66,20 @@ export const WrapperPlaceOrderButton = styled.div`
   margin: 20px 0px;
 
   button {
-    width: 50%;
-    padding: 10px 20px;
+    width: 70%;
+    padding: 5px 20px;
     color: #FFF;
     cursor: pointer;
 
     &:disabled {
       opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  @media (max-width: 512px) {
+    button {
+      width: 100%;
     }
   }
 `

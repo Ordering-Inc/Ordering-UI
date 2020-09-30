@@ -26,6 +26,12 @@ export const OrderBill = styled.div`
       }
     }
   }
+
+  @media (max-width: 410px) {
+    table {
+      font-size: 16px;
+    }
+  }
 `
 
 export const CouponContainer = styled.div`

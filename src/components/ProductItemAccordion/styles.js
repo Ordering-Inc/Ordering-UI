@@ -59,6 +59,20 @@ const AccordionStyled = styled.div`
     svg {
       cursor: pointer;
     }
+
+    @media (max-width: 512px) {
+      span,
+      p {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      span,
+      p {
+        font-size: 14px;
+      }
+    }
   }
 
   div.actions {
@@ -109,6 +123,13 @@ export const WrapperProductImage = styled.div`
   max-height: 75px;
   height: 75px;
   width: 75px;
+
+  @media (max-width: 410px) {
+    max-width: 65px;
+    max-height: 65px;
+    height: 65px;
+    width: 65px;
+  }
 `
 
 const ProductImageStyled = styled.div`
@@ -118,10 +139,9 @@ const ProductImageStyled = styled.div`
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
-  background-size: cover;
+  background-size: contain;
   object-fit: cover;
   background-position: center;
-  min-height: 75px;
   border-radius: 10px;
 `
 
@@ -143,17 +163,26 @@ export const ContentInfo = styled.div`
   text-transform: capitalize;
   margin-left: 10px;
   width: 65%;
-  h1, span {
+  h1.name, span {
     margin: 0px;
   }
 
-  h1 {
+  h1.name {
     font-size: 20px;
   }
 
   span {
     font-size: 18px;
     opacity: 0.8;
+  }
+
+  @media (max-width: 512px) {
+    h1.name {
+      font-size: 16px;
+    }
+    span {
+      font-size: 14px;
+    }
   }
 `
 

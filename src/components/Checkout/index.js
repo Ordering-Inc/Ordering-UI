@@ -158,7 +158,7 @@ export const Checkout = (props) => {
         console.log(error)
       }
     } else if (result.status === 4) {
-      alert('The payment has not been successful, try again!')
+      alert('The payment has not been successful, please try again!')
     } else {
       setCartState({
         ...cartState,

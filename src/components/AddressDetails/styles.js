@@ -14,7 +14,7 @@ export const Header = styled.div`
 export const Map = styled.div`
   img {
     width: 100%;
-    height: 350px;
+    height: 220px;
     object-fit: cover;
     border-radius: 15px;
   }
@@ -26,6 +26,9 @@ export const Text = styled.h1`
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   svg {
     color: #F2BB40;
     margin-left: 5px;
@@ -35,5 +38,22 @@ export const Text = styled.h1`
     font-size: 18px;
     color: #D81212;
     margin-left: 5px;
+  }
+
+  @media (max-width: 580px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 410px) {
+    font-size: 16px;
+    span {
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 370px) {
+    font-size: 14px;
+    span {
+      font-size: 14px;
+    }
   }
 `

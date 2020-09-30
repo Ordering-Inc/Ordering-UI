@@ -74,6 +74,20 @@ export const Accordion = styled.div`
         cursor: pointer;
       }
     }
+
+    @media (max-width: 410px) {
+      span,
+      p {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      span,
+      p {
+        font-size: 14px;
+      }
+    }
   }
 `
 
@@ -127,6 +141,12 @@ export const ContentInfo = styled.div`
   span {
     font-size: 18px;
     opacity: 0.8;
+  }
+
+  @media (max-width: 410px) {
+    h1 {
+      font-size: 18px;
+    }
   }
 `
 
