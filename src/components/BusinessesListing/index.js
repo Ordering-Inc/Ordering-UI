@@ -37,6 +37,14 @@ export const BusinessesListing = (props) => {
         page: newFetch ? 1 : paginationProps.currentPage + 1,
         page_size: paginationProps.pageSize
       }
+      if (orderState.options?.moment) {
+        const parts = orderState.options?.moment.split(' ')
+        const dateParts = parts[0].split('-')
+        const timeParts = parts[1].split(':')
+        const moment = Date.UTC(dateParts[0], dateParts[1] - 1, dateParts[2], timeParts[0], timeParts[1], timeParts[2]) / 1000
+        console.log(moment)
+        parameters.timestamp = moment
+      }
       const where = []
       if (businessTypeSelected) {
         where.push({ attribute: businessTypeSelected, value: true })
@@ -62,6 +70,7 @@ export const BusinessesListing = (props) => {
         nextPageItems
       })
     } catch (err) {
+      console.log(err)
       if (err.constructor.name !== 'Cancel') {
         setBusinessesList({
           ...businessesList,
@@ -92,8 +101,12 @@ export const BusinessesListing = (props) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  /**
+   * Listening order option and filter changes
+   */
   useEffect(() => {
     if (orderState.loading || !orderState.options?.address?.location) return
+    console.log(orderState.options)
     getBusinesses(true)
   }, [orderState, businessTypeSelected])
 

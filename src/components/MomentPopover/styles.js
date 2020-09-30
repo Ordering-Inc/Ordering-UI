@@ -1,7 +1,12 @@
 import styled from 'styled-components'
+import { HeaderInvert } from '../../../template/components/Header/styles'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
+  color: #333;
+  ${HeaderInvert} & {
+    color: #FFF;
+  }
 `
 
 export const PopoverBody = styled.div`
