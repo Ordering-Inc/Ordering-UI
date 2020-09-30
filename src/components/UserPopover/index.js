@@ -33,14 +33,16 @@ export const UserPopover = (props) => {
 
   const handleClickOutside = (e) => {
     if (!open) return
-    if (!popperElement.current?.contains(e.target) && e.target !== referenceElement.current) {
+    const outsidePopover = !popperElement.current?.contains(e.target)
+    const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
+    if (outsidePopover && outsidePopoverMenu) {
       props.onClose && props.onClose()
     }
   }
 
   useEffect(() => {
-    window.addEventListener('click', handleClickOutside)
-    return () => window.removeEventListener('click', handleClickOutside)
+    window.addEventListener('mouseup', handleClickOutside)
+    return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [open])
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', minWidth: '150px' }
@@ -50,7 +52,9 @@ export const UserPopover = (props) => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}><DropDownCircleImage src={sessionState.user.photo} fallback={<FaUserAlt />} /></HeaderItem>
+      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+        <DropDownCircleImage src={sessionState.user.photo} fallback={<FaUserAlt />} />
+      </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
           <PopoverListLink to='/profile'>

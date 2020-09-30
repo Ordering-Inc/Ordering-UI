@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter,
   Switch,
@@ -7,13 +7,15 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useApi } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
 import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
+import { OrderDetailsPage } from './Pages/OrderDetails'
+
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
@@ -70,6 +72,12 @@ export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
+  const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
+  const [ordering] = useApi()
+
+  useEffect(() => {
+    getProducts()
+  }, [])
 
   const handleSuccessSignup = (user) => {
     sessionDispatch({
@@ -78,6 +86,32 @@ export const Router = () => {
       token: user.session.access_token
     })
   }
+  const getProducts = async () => {
+    try {
+      setProductsList({
+        ...productsList,
+        loading: true
+      })
+      const { content: { result } } = await ordering
+        .businesses(41)
+        .products()
+        .parameters({ type: 1 })
+        .get()
+
+      setProductsList({
+        ...productsList,
+        loading: false,
+        products: result
+      })
+    } catch (error) {
+      setProductsList({
+        ...productsList,
+        loading: false,
+        error
+      })
+    }
+  }
+
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -179,8 +213,11 @@ export const Router = () => {
           <Route exact path='/order/:orderId'>
             <Order />
           </Route>
-          <Route exact path='/upselling_Page'>
-            <UpsellingPage open />
+          <Route exact path='/upselling_page'>
+            <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)}/>
+          </Route>
+          <Route exact path='/orders/:orderId'>
+            <OrderDetailsPage />
           </Route>
           <Route path='*'>
             404
