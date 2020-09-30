@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { FiClock } from 'react-icons/fi'
 import { VscLocation } from 'react-icons/vsc'
 import { GrDeliver } from 'react-icons/gr'
 import { FaStar } from 'react-icons/fa'
 import { CgDetailsMore } from 'react-icons/cg'
+import { Modal } from '../Modal'
+import { BusinessInformation } from '../BusinessInformation'
 
 import { useOrder } from 'ordering-components'
 
@@ -29,6 +31,8 @@ export const BusinessBasicInformation = (props) => {
   const { business, loading } = businessState
 
   const [orderState] = useOrder()
+
+  const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
 
   const formatNumber = (num) => Math.round(num * 1e2) / 1e2
 
@@ -121,11 +125,14 @@ export const BusinessBasicInformation = (props) => {
                 <Skeleton width={70} />
               )}
 
-              {!loading && <p><CgDetailsMore className='popup' /></p>}
+              {!loading && <p><CgDetailsMore className='popup' onClick={() => setOpenBusinessInformation(true)} /></p>}
             </div>
           </BusinessInfoItem>
         </BusinessInfo>
       </BusinessContent>
+      <Modal open={openBusinessInformation} onClose={() => setOpenBusinessInformation(false)}>
+        <BusinessInformation business={business} />
+      </Modal>
     </BusinessContainer>
   )
 }
