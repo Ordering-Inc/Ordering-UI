@@ -21,7 +21,7 @@ margin: 0 auto;
 
 export const UserImage = styled.div`
   width: 90%;
-  height: 30%;
+  height: 15%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
