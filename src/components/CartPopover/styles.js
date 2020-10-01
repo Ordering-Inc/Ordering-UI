@@ -49,3 +49,8 @@ export const NotFound = styled.h1`
   font-weight: 500;
   opacity: 0.8;
 `
+
+export const WrapperCarts = styled.div`
+  max-height: 450px;
+  overflow: auto;
+`

@@ -5,7 +5,8 @@ import {
   HeaderItem,
   PopoverBody,
   PopoverArrow,
-  NotFound
+  NotFound,
+  WrapperCarts
 } from './styles'
 import { useOrder, useLanguage } from 'ordering-components'
 
@@ -67,7 +68,7 @@ export const CartPopover = (props) => {
         </span>
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <div>
+        <WrapperCarts>
           {orderState.carts && cartsWithProducts.length > 0 &&
             cartsWithProducts.map(cart => (
               <div key={cart.uuid}>
@@ -81,7 +82,7 @@ export const CartPopover = (props) => {
               </div>
             ))}
           {cartsWithProducts.length === 0 && <NotFound>{t('CART_ERROR', 'You don\'t have cars available')}</NotFound>}
-        </div>
+        </WrapperCarts>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
     </div>
