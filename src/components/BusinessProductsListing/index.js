@@ -2,9 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { VscWarning } from 'react-icons/vsc'
 import {
-  // ProductsListing,
   useApi,
-  useOrder,
   useLanguage
 } from 'ordering-components'
 
