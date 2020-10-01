@@ -9,4 +9,10 @@ export const CategoriesContainer = styled.div`
   position: sticky;
   top: 0;
   border-bottom: 1px solid #D9D9D9;
+
+  div.category {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `
