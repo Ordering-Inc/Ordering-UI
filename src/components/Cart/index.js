@@ -8,7 +8,9 @@ import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import { formatPrice } from '../../utils'
 
 import { Confirm } from '../Confirm'
+import { Modal } from '../Modal'
 import { CouponControl } from '../CouponControl'
+import { ProductForm } from '../ProductForm'
 
 import {
   CartContainer,
@@ -33,6 +35,8 @@ const CartUI = (props) => {
   const [orderState] = useOrder()
   const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [openProduct, setModalIsOpen] = useState(false)
+  const [curProduct, setCurProduct] = useState(null)
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -45,6 +49,12 @@ const CartUI = (props) => {
     })
   }
 
+  const handleEditProduct = (product) => {
+    console.log(product)
+    // setCurProduct(product)
+    // setModalIsOpen(true)
+  }
+
   const handleClickCheckout = () => {
     history.push(`/checkout/${cart.uuid}`)
     onClickCheckout()
@@ -55,6 +65,12 @@ const CartUI = (props) => {
       setConfirm({ ...confirm, open: false })
     }
   }, [])
+
+  const handlerProductAction = (product) => {
+    if (Object.keys(product).length) {
+      setModalIsOpen(false)
+    }
+  }
 
   return (
     <CartContainer>
@@ -75,6 +91,7 @@ const CartUI = (props) => {
             getProductMax={getProductMax}
             offsetDisabled={offsetDisabled}
             onDeleteProduct={handleDeleteClick}
+            onEditProduct={handleEditProduct}
           />
         ))}
         {cart?.valid_products && (
@@ -145,6 +162,19 @@ const CartUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='70%'
+        open={openProduct}
+        closeOnBackdrop={false}
+        onClose={() => setModalIsOpen(false)}
+      >
+        <ProductForm
+          isCartProduct
+          product={curProduct}
+          businessId={cart?.business_id}
+          onSave={handlerProductAction}
+        />
+      </Modal>
     </CartContainer>
   )
 }
