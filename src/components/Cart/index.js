@@ -50,9 +50,8 @@ const CartUI = (props) => {
   }
 
   const handleEditProduct = (product) => {
-    console.log(product)
-    // setCurProduct(product)
-    // setModalIsOpen(true)
+    setCurProduct(product)
+    setModalIsOpen(true)
   }
 
   const handleClickCheckout = () => {
@@ -170,8 +169,10 @@ const CartUI = (props) => {
       >
         <ProductForm
           isCartProduct
-          product={curProduct}
-          businessId={cart?.business_id}
+          productCart={curProduct}
+          businessId={curProduct?.business_id}
+          categoryId={curProduct?.category_id}
+          productId={curProduct?.id}
           onSave={handlerProductAction}
         />
       </Modal>

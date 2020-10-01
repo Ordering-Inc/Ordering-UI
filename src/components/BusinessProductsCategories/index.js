@@ -25,7 +25,7 @@ const BusinessProductsCategoriesUI = (props) => {
         </Tabs>
       ) : (
         <Tabs variant='primary'>
-          {[...Array(6).keys()].map(i => (
+          {[...Array(4).keys()].map(i => (
             <Tab key={i}>
               <Skeleton width={100} />
             </Tab>
