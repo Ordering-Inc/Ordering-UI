@@ -5,7 +5,8 @@ import {
   HeaderItem,
   PopoverBody,
   PopoverArrow,
-  NotFound
+  NotFound,
+  WrapperCarts
 } from './styles'
 import { useOrder, useLanguage } from 'ordering-components'
 
@@ -32,6 +33,8 @@ export const CartPopover = (props) => {
   })
 
   const { styles, attributes, forceUpdate } = popper
+
+  const cartsWithProducts = Object.values(orderState?.carts).filter(cart => cart.products.length > 0)
 
   useEffect(() => {
     forceUpdate && forceUpdate()
@@ -61,21 +64,25 @@ export const CartPopover = (props) => {
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
         <span>
           <IoIosBasket />
-          {Object.keys(orderState.carts).length > 0 && <p>{Object.keys(orderState.carts).length}</p>}
+          {cartsWithProducts.length > 0 && <p>{cartsWithProducts.length}</p>}
         </span>
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <div>
-          {orderState.carts && Object.keys(orderState.carts).length > 0 &&
-            Object.values(orderState.carts).map(cart => (
-              <Cart
-                key={cart.uuid}
-                cart={cart}
-                isProducts={cart.products.length}
-              />
+        <WrapperCarts>
+          {orderState.carts && cartsWithProducts.length > 0 &&
+            cartsWithProducts.map(cart => (
+              <div key={cart.uuid}>
+                {cart.products.length > 0 && (
+                  <Cart
+                    cart={cart}
+                    isProducts={cart.products.length}
+                    onClickCheckout={props.onClose}
+                  />
+                )}
+              </div>
             ))}
-          {Object.keys(orderState.carts).length === 0 && <NotFound>{t('CART_ERROR', 'You don\'t have cars available')}</NotFound>}
-        </div>
+          {cartsWithProducts.length === 0 && <NotFound>{t('CART_ERROR', 'You don\'t have cars available')}</NotFound>}
+        </WrapperCarts>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
     </div>

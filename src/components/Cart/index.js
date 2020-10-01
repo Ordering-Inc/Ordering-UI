@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 import { Cart as CartController, useOrder, useLanguage } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
@@ -7,11 +8,13 @@ import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import { formatPrice } from '../../utils'
 
 import { Confirm } from '../Confirm'
+import { CouponControl } from '../CouponControl'
 
 import {
   CartContainer,
   OrderBill,
-  CheckoutAction
+  CheckoutAction,
+  CouponContainer
 } from './styles'
 
 const CartUI = (props) => {
@@ -21,23 +24,29 @@ const CartUI = (props) => {
     changeQuantity,
     getProductMax,
     offsetDisabled,
-    removeProduct
+    removeProduct,
+    onClickCheckout
   } = props
+  const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
-  const handleDeleteClick = (product, quantity) => {
+  const handleDeleteClick = (product) => {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
       handleOnAccept: () => {
         removeProduct(product)
-        // changeQuantity(product, quantity)
         setConfirm({ ...confirm, open: false })
       }
     })
+  }
+
+  const handleClickCheckout = () => {
+    history.push(`/checkout/${cart.uuid}`)
+    onClickCheckout()
   }
 
   useEffect(() => {
@@ -99,13 +108,31 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
+            <CouponContainer>
+              <CouponControl
+                businessId={cart.business_id}
+              />
+            </CouponContainer>
+            <table className='total'>
+              <tbody>
+                <tr>
+                  <td>Total</td>
+                  <td>{formatPrice(cart?.total)}</td>
+                </tr>
+              </tbody>
+            </table>
           </OrderBill>
         )}
-        <CheckoutAction>
-          <Button color='primary'>
-            Checkout
-          </Button>
-        </CheckoutAction>
+        {onClickCheckout && (
+          <CheckoutAction>
+            <Button
+              color='primary'
+              onClick={() => handleClickCheckout()}
+            >
+              Checkout
+            </Button>
+          </CheckoutAction>
+        )}
       </BusinessItemAccordion>
       <Confirm
         title={t('PRODUCT', 'Product')}

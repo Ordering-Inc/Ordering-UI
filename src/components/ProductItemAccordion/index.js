@@ -22,7 +22,6 @@ export const ProductItemAccordion = (props) => {
   const {
     isCartProduct,
     product,
-    formatPrice,
     changeQuantity,
     getProductMax,
     offsetDisabled,
@@ -87,7 +86,7 @@ export const ProductItemAccordion = (props) => {
             <ProductImage bgimage={product.images || 'https://picsum.photos/78/80'} />
           </WrapperProductImage>
           <ContentInfo>
-            <h1>{product.name}</h1>
+            <h1 className='name'>{product.name}</h1>
             {product.comment && (<span>{product.comment}</span>)}
           </ContentInfo>
         </div>
@@ -147,7 +146,7 @@ export const ProductItemAccordion = (props) => {
               </div>
             )}
             <div style={{ width: '100%', justifyContent: 'flex-end' }} onClick={toggleAccordion}>
-              <span>{formatPrice(product.total || product.price)}</span>
+              <span className='product-price'>{formatPrice(product.total || product.price)}</span>
               <p>
                 <BiCaretDown className={`${setRotate}`} />
               </p>

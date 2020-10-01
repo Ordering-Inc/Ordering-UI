@@ -118,7 +118,6 @@ const OrderDetailsUI = (props) => {
 
       {order && Object.keys(order).length > 0 && (
         <>
-          {console.log(getImage())}
           <Header>
             <HeaderInfo>
               <HeaderLogo bgimage={logoHeader} />
@@ -300,7 +299,7 @@ export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
     UIComponent: OrderDetailsUI,
-    orderId: Number(orderId)
+    orderId
   }
 
   return (

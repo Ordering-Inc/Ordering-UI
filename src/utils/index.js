@@ -1,3 +1,6 @@
+import React from 'react'
+import { FaCcMastercard, FaCcVisa, FaCreditCard } from 'react-icons/fa'
+
 export const optimizeImage = (url, params, fallback) => {
   if (!url && fallback) return fallback
   params = params && params.length > 0 ? `,${params}` : ''
@@ -13,3 +16,15 @@ export const optimizeImage = (url, params, fallback) => {
  * @param {Number} price
  */
 export const formatPrice = (price) => `$ ${price.toFixed(2)}`
+
+export const getIconCard = (brand = '') => {
+  const value = brand.toLowerCase()
+  switch (value) {
+    case 'visa':
+      return <FaCcVisa />
+    case 'mastercard':
+      return <FaCcMastercard />
+    default:
+      return <FaCreditCard />
+  }
+}

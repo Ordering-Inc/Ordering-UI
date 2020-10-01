@@ -6,12 +6,12 @@ import { OrderingProvider } from 'ordering-components'
 const configFile = {
   project: 'luisv4',
   api: {
-    url: 'http://apiv4-features.ordering.co',
+    url: 'https://apiv4-dev.ordering.co',
     language: 'en',
     version: 'v400'
   },
   socket: {
-    url: 'https://socket-staging.ordering.co'
+    url: 'https://socket-dev.ordering.co'
   }
 }
 
