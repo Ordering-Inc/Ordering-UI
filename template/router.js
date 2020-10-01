@@ -16,6 +16,7 @@ import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
 import { OrderDetailsPage } from './Pages/OrderDetails'
 import { CheckoutPage } from './Pages/Checkout'
+import { Cms } from './Pages/Cms'
 
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
@@ -188,6 +189,9 @@ export const Router = () => {
           </Route>
           <Route exact path='/checkout/:cartUuid'>
             <CheckoutPage />
+          </Route>
+          <Route exact path='/pages/:pageSlug'>
+            <Cms />
           </Route>
           <Route path='*'>
             404
