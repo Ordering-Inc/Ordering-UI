@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { FiClock } from 'react-icons/fi'
 import { VscLocation } from 'react-icons/vsc'
 import { GrDeliver } from 'react-icons/gr'
 import { FaStar } from 'react-icons/fa'
 import { CgDetailsMore } from 'react-icons/cg'
+import { Modal } from '../Modal'
+import { BusinessInformation } from '../BusinessInformation'
 
-import { useOrder } from 'ordering-components'
+import { useOrder, useApi } from 'ordering-components'
 
 import { optimizeImage, formatPrice } from '../../utils'
 
@@ -30,6 +32,16 @@ export const BusinessBasicInformation = (props) => {
 
   const [orderState] = useOrder()
 
+  const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
+
+  const [ordering] = useApi()
+
+  const [result, setResult] = useState({})
+
+  useEffect(() => {
+    getCompleteBusiness()
+  }, [loading])
+
   const formatNumber = (num) => Math.round(num * 1e2) / 1e2
 
   const dateFormatted = (date) => {
@@ -48,6 +60,11 @@ export const BusinessBasicInformation = (props) => {
     }).reduce((r, c) => ({ ...r, ...c }), {})
     const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])[0]
     return businessType[0]
+  }
+
+  const getCompleteBusiness = async () => {
+    const { content: { result } } = await ordering.businesses(business.id).get()
+    setResult(result)
   }
 
   return (
@@ -121,11 +138,14 @@ export const BusinessBasicInformation = (props) => {
                 <Skeleton width={70} />
               )}
 
-              {!loading && <p><CgDetailsMore className='popup' /></p>}
+              {!loading && <p><CgDetailsMore className='popup' onClick={() => setOpenBusinessInformation(true)} /></p>}
             </div>
           </BusinessInfoItem>
         </BusinessInfo>
       </BusinessContent>
+      <Modal open={openBusinessInformation} onClose={() => setOpenBusinessInformation(false)}>
+        <BusinessInformation business={result} getBusinessType={getBusinessType} formatPrice={formatPrice} formatNumber={formatNumber} dateFormatted={dateFormatted} optimizeImage={optimizeImage} />
+      </Modal>
     </BusinessContainer>
   )
 }
