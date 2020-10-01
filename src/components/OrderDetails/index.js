@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
 import { FiPhone } from 'react-icons/fi'
@@ -49,6 +49,7 @@ const OrderDetailsUI = (props) => {
     formatPrice
   } = props
   const [, t] = useLanguage()
+  const history = useHistory()
 
   const { order, loading, error } = props.order
 
@@ -246,11 +247,11 @@ const OrderDetailsUI = (props) => {
             )}
 
             <FootActions>
-              <a>
+              {/* <a>
                 Support
                 <BiCaretUp />
-              </a>
-              <a>
+              </a> */}
+              <a onClick={() => history.push('/profile/orders')}>
                 My Orders
                 <BiCaretUp />
               </a>

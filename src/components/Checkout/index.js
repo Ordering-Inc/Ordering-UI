@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { VscWarning } from 'react-icons/vsc'
+import Skeleton from 'react-loading-skeleton'
 import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage } from 'ordering-components'
 
 import {
@@ -21,117 +22,159 @@ import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 
+import { DriverTipsOptions } from '../../utils'
+
 const CheckoutUI = (props) => {
   const {
-    cart,
+    cartState,
     placing,
-    businessId,
     businessDetails,
     paymethodSelected,
     handlePaymethodChange,
     handlerClickPlaceOrder
   } = props
 
+  const { cart, loading, error } = cartState
+
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
 
   return (
     <Container>
-      {businessId && (
-        <WrappContainer>
-          {cart?.status === 2 && (
-            <WarningMessage>
-              <VscWarning />
-              <h1>
-                {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
-              </h1>
-            </WarningMessage>
-          )}
-          {cart?.status === 4 && (
-            <WarningMessage>
-              <VscWarning />
-              <h1>
-                {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
-              </h1>
-            </WarningMessage>
-          )}
+      <WrappContainer>
+        {cart?.status === 2 && (
+          <WarningMessage>
+            <VscWarning />
+            <h1>
+              {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
+            </h1>
+          </WarningMessage>
+        )}
+        {cart?.status === 4 && (
+          <WarningMessage>
+            <VscWarning />
+            <h1>
+              {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
+            </h1>
+          </WarningMessage>
+        )}
+
+        {loading ? (
+          <div style={{ width: '100%', marginBottom: '20px' }}>
+            <Skeleton height={35} style={{ marginBottom: '10px' }} />
+            <Skeleton height={150} />
+          </div>
+        ) : (
           <AddressDetails
-            businessId={businessId}
+            businessId={cart?.business_id}
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
           />
-          <UserDetailsContainer>
-            <div className='user'>
+        )}
+
+        <UserDetailsContainer>
+          <div className='user'>
+            {loading ? (
+              <div>
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+              </div>
+            ) : (
               <UserDetails
                 cartStatus={cart?.status}
-                businessId={businessId}
+                businessId={cart?.business_id}
                 useValidationFields
                 useDefualtSessionManager
                 useSessionUser
               />
+            )}
+          </div>
+          {(businessDetails?.loading || loading) && (
+            <div className='business'>
+              <div>
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+              </div>
             </div>
+          )}
+          {!loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
             <div className='business'>
               <h1>Business Details</h1>
               <div>
-                <p>{businessDetails?.business?.name || '-'}</p>
-                <p>{businessDetails?.business?.email || '-'}</p>
-                <p>{businessDetails?.business?.cellphone || '-'}</p>
-                <p>{businessDetails?.business?.address || '-'}</p>
+                <p>{businessDetails?.business?.name}</p>
+                <p>{businessDetails?.business?.email}</p>
+                <p>{businessDetails?.business?.cellphone}</p>
+                <p>{businessDetails?.business?.address}</p>
               </div>
-              {businessDetails?.error && businessDetails?.error?.length > 0 && (
-                businessDetails?.error.map((e, i) => (
-                  <p key={i}>ERROR: [{e}]</p>
-                ))
-              )}
             </div>
-          </UserDetailsContainer>
-
-          {cart?.status !== 2 && (
-            <PaymentMethodContainer>
-              <h1>Payment Method</h1>
-              {businessDetails.business && (
-                <PaymentOptions
-                  businessId={businessId}
-                  paymethods={businessDetails?.business?.paymethods}
-                  onPaymentChange={handlePaymethodChange}
-                />
-              )}
-            </PaymentMethodContainer>
           )}
+          {businessDetails?.error && businessDetails?.error?.length > 0 && (
+            <div className='business'>
+              <h1>Business Details</h1>
+              {businessDetails?.error.map((e, i) => (
+                <p key={i}>ERROR: [{e}]</p>
+              ))}
+            </div>
+          )}
+        </UserDetailsContainer>
 
-          {options.type === 1 && cart?.status !== 2 && (
-            <DriverTipContainer>
-              <h1>Driver Tip</h1>
-              <DriverTips
-                businessId={businessId}
-                driverTipsOptions={[0, 10, 15, 20, 25]}
-                useOrderContext
+        {!loading && cart && cart?.status !== 2 && (
+          <PaymentMethodContainer>
+            <h1>Payment Method</h1>
+            {businessDetails.business && (
+              <PaymentOptions
+                businessId={cart?.business_id}
+                paymethods={businessDetails?.business?.paymethods}
+                onPaymentChange={handlePaymethodChange}
               />
-            </DriverTipContainer>
-          )}
+            )}
+          </PaymentMethodContainer>
+        )}
 
-          {cart && (
-            <CartContainer>
-              <h1>Your Order</h1>
-              <Cart
-                cart={cart}
-                isProducts={cart?.products?.length || 0}
-              />
-            </CartContainer>
-          )}
+        {!loading && cart && options.type === 1 && cart?.status !== 2 && (
+          <DriverTipContainer>
+            <h1>Driver Tip</h1>
+            <DriverTips
+              businessId={cart?.business_id}
+              driverTipsOptions={DriverTipsOptions}
+              useOrderContext
+            />
+          </DriverTipContainer>
+        )}
 
-          {cart?.status !== 2 && (
-            <WrapperPlaceOrderButton>
-              <Button
-                color='primary'
-                disabled={!cart?.valid || !paymethodSelected || placing}
-                onClick={() => handlerClickPlaceOrder()}
-              >
-                {placing ? 'Placing...' : 'Place Order'}
-              </Button>
-            </WrapperPlaceOrderButton>
-          )}
-        </WrappContainer>
-      )}
+        {!loading && cart && (
+          <CartContainer>
+            <h1>Your Order</h1>
+            <Cart
+              cart={cart}
+              isProducts={cart?.products?.length || 0}
+            />
+          </CartContainer>
+        )}
+
+        {!loading && cart && cart?.status !== 2 && (
+          <WrapperPlaceOrderButton>
+            <Button
+              color='primary'
+              disabled={!cart?.valid || !paymethodSelected || placing}
+              onClick={() => handlerClickPlaceOrder()}
+            >
+              {placing ? 'Placing...' : 'Place Order'}
+            </Button>
+          </WrapperPlaceOrderButton>
+        )}
+
+        {error && error?.length > 0 && (
+          error.map((e, i) => (
+            <p key={i}>ERROR: [{e}]</p>
+          ))
+        )}
+      </WrappContainer>
     </Container>
   )
 }
@@ -143,12 +186,11 @@ export const Checkout = (props) => {
     handleOrderRedirect
   } = props
 
-  const [{ carts }, { confirmCart }] = useOrder()
+  const [, { confirmCart }] = useOrder()
   const [{ token }] = useSession()
   const [ordering] = useApi()
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
-  const [businessId, setBusinessId] = useState(null)
 
   const getOrder = async (cartId) => {
     setCartState({ ...cartState, loading: true })
@@ -171,26 +213,20 @@ export const Checkout = (props) => {
         loading: false,
         cart: result
       })
-      setBusinessId(result.business_id)
     }
   }
 
   useEffect(() => {
-    if (token && cartUuid && !cartState.cart) {
+    if (token && cartUuid) {
       getOrder(cartUuid)
     }
   }, [token, cartUuid])
 
-  useEffect(() => {
-    setBusinessId(
-      Object.values(carts).find(cart => cart.uuid === cartUuid)?.business_id
-    )
-  }, [carts])
-
   const checkoutProps = {
     ...props,
     UIComponent: CheckoutUI,
-    businessId
+    cartState,
+    businessId: cartState.cart?.business_id
   }
   return (
     <CheckoutController {...checkoutProps} />

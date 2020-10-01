@@ -25,7 +25,8 @@ const CartUI = (props) => {
     getProductMax,
     offsetDisabled,
     removeProduct,
-    onClickCheckout
+    onClickCheckout,
+    isHideCheckoutButtom
   } = props
   const history = useHistory()
   const [, t] = useLanguage()
@@ -123,7 +124,7 @@ const CartUI = (props) => {
             </table>
           </OrderBill>
         )}
-        {onClickCheckout && (
+        {onClickCheckout && isHideCheckoutButtom && (
           <CheckoutAction>
             <Button
               color='primary'

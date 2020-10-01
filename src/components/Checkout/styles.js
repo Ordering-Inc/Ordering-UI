@@ -26,6 +26,7 @@ export const UserDetailsContainer = styled.div`
   }
 
   div.business {
+    width: 50%;
     h1 {
       margin: 0px;
       font-size: 24px;

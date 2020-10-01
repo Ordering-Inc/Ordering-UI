@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { FcCancel } from 'react-icons/fc'
 import { TiPencil } from 'react-icons/ti'
+import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController } from 'ordering-components'
 
 import {
@@ -36,17 +37,25 @@ const UserDetailsUI = (props) => {
 
   return (
     <>
-      {((useValidationFields && validationFields.loading) || userState.loading) && <p>Loading form ...</p>}
+      {((useValidationFields && validationFields.loading) || userState.loading) && (
+        <Container>
+          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+        </Container>
+      )}
 
-      {(useValidationFields || !validationFields.loading) && !userState.loading && userState.result && userState.result.error && (
+      {userState.result && userState.result.error && (
         <p>{userState.result.result}</p>
       )}
 
-      {(useValidationFields || !validationFields.loading) && !userState.loading && userState.result && !userState.result.error && userState.result.result && (
+      {!((useValidationFields && validationFields.loading) || userState.loading) && userState.result && userState.result.result && (
         <Container>
           <Header>
             <h1>Customer Details</h1>
-            {cartStatus !== 2 && (
+            {!userState.result.error && (useValidationFields || !validationFields.loading) && cartStatus !== 2 && (
               !isEdit ? (
                 <TiPencil className='edit' onClick={() => onEditUserClick()} />
               ) : (
@@ -54,7 +63,6 @@ const UserDetailsUI = (props) => {
               )
             )}
           </Header>
-
           <form onSubmit={handleSubmit(handleButtonUpdateClick)}>
             {inputs.map((_input) => (
               <div key={_input.name}>
