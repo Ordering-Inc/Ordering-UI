@@ -103,6 +103,8 @@ export const ProductComment = styled.div`
   textarea{
     font-size: 1.5em;
     padding: 5px;
+    margin: 1px;
+    border: 1px solid #000
   }
 `
 
@@ -138,13 +140,13 @@ export const ProductActions = styled.div`
     opacity: 0.5;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 720px) {
     flex-direction: column;
     > * {
       margin: 10px 0;
     }
     div{
-      width: 80%;
+      width: 60%;
       margin: 10px 0;
       button.incdec {
       width: 50px;
@@ -156,5 +158,11 @@ export const ProductActions = styled.div`
       font-size: 2em;
     }
     }
+  }
+
+  @media (max-width: 480) {
+    div{
+      width: 80%;
+  }
   }
 `
