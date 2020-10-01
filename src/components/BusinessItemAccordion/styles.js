@@ -36,6 +36,7 @@ export const Accordion = styled.div`
   cursor: ${({ isClosed }) => isClosed ? 'not-allowed' : 'pointer'};
   transition: background-color 0.6s ease;
   position: relative;
+  margin: 0px 20px;
 
   .rotate {
     transform: rotate(180deg);
@@ -71,6 +72,20 @@ export const Accordion = styled.div`
       margin: 0px 5px;
       svg {
         cursor: pointer;
+      }
+    }
+
+    @media (max-width: 410px) {
+      span,
+      p {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      span,
+      p {
+        font-size: 14px;
       }
     }
   }
@@ -126,6 +141,12 @@ export const ContentInfo = styled.div`
   span {
     font-size: 18px;
     opacity: 0.8;
+  }
+
+  @media (max-width: 410px) {
+    h1 {
+      font-size: 18px;
+    }
   }
 `
 

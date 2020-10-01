@@ -43,13 +43,13 @@ export const BusinessItemAccordion = (props) => {
     <AccordionSection isClosed={isClosed}>
       <Accordion isClosed={isClosed} className={`accordion ${setActive}`} onClick={toggleAccordion}>
         <div className='info'>
-          {business.logo && (
+          {business?.logo && (
             <WrapperBusinessLogo>
-              <BusinessLogo bgimage={business.logo} />
+              <BusinessLogo bgimage={business?.logo} />
             </WrapperBusinessLogo>
           )}
           <ContentInfo>
-            <h1>{business.name}</h1>
+            <h1>{business?.name}</h1>
           </ContentInfo>
         </div>
 
