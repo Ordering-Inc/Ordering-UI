@@ -15,6 +15,7 @@ import { BusinessesList } from './Pages/BusinessesList'
 import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
 import { OrderDetailsPage } from './Pages/OrderDetails'
+import { Cms } from '../src/components/Cms'
 
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
@@ -184,6 +185,9 @@ export const Router = () => {
           </Route>
           <Route exact path='/orders/:orderId'>
             <OrderDetailsPage />
+          </Route>
+          <Route path='/pages/:pageSlug'>
+            <Cms />
           </Route>
           <Route path='*'>
             404
