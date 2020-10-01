@@ -122,8 +122,8 @@ export const Router = () => {
               !auth
                 ? (
                   <Login
-                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create an account')}</Link>}
+                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset Password')}</Link>}
                     useLoginByCellphone
                   />
                 )
