@@ -62,8 +62,8 @@ export const Camera = styled.div`
   width:212px; /**170px + 42px */
   > * {
     margin-top: 10px;
-    width: 42px;
-    height: 42px;
+    width: 30px;
+    height: 30px;
   }
 `
 
