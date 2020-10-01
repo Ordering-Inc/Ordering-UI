@@ -56,20 +56,8 @@ export const MyOrdersUI = (props) => {
             {activeOrders.map((order) => (
               <Card key={order.id}>
                 <Map>
-                  <GoogleMapsMap
-                    apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-                    location={order.business?.location}
-                    mapControls={{
-                      zoomControl: false,
-                      streetViewControl: true,
-                      fullscreenControl: true,
-                      mapTypeId: 'satellite', // 'roadmap', 'satellite', 'hybrid', 'terrain'
-                      mapTypeControl: true,
-                      mapTypeControlOptions: {
-                        mapTypeIds: ['roadmap', 'satellite']
-                      }
-                    }}
-                  />
+                {console.log(order)}
+                  <img src={`https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${order.business.location.lat},${order.business.location.lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${order.business.location.lat},${order.business.location.lng}&key=AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk`} />
                 </Map>
                 <Content>
                   <Logo>

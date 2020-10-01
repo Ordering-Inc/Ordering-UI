@@ -27,10 +27,9 @@ export const Card = styled.div`
 export const Map = styled.div`
   width: 100%;
   height: 40%;
-  > div {
-    position: relative !important;
-    width: 100% !important;
-    height: 100% !important;
+  img{
+    width: 100%;
+    height: 100%;
   }
 `
 
