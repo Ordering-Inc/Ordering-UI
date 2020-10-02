@@ -1,6 +1,14 @@
 import React, { useState } from 'react'
 import {
-  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink
+  Header as HeaderContainer,
+  HeaderInvert,
+  InnerHeader,
+  LogoHeader,
+  LeftHeader,
+  RightHeader,
+  Menu,
+  MenuLink,
+  WrapOptions
 } from './styles'
 
 import { useLocation, Link } from 'react-router-dom'
@@ -9,6 +17,8 @@ import { useSession, useLanguage } from 'ordering-components'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
+import logo from '../../assets/images/logo.svg'
+
 import { LanguageSelector } from '../../../src/components/LanguageSelector'
 import { AddressesPopover } from '../../../src/components/AddressesPopover'
 import { UserPopover } from '../../../src/components/UserPopover'
@@ -45,7 +55,8 @@ export const Header = (props) => {
         <LeftHeader>
           <LogoHeader>
             <Link to='/'>
-              <img src={isHome ? logoHeaderInvert : logoHeader} />
+              <img className='hide-resp' src={isHome ? logoHeaderInvert : logoHeader} />
+              <img className='show-resp' src={logo} />
             </Link>
           </LogoHeader>
           <Menu>
@@ -62,16 +73,18 @@ export const Header = (props) => {
                 </>
               )
             }
-            <MomentPopover
-              open={openPopover.moment}
-              onClick={() => handleTogglePopover('moment')}
-              onClose={() => handleClosePopover('moment')}
-            />
-            <AddressesPopover
-              open={openPopover.addresses}
-              onClick={() => handleTogglePopover('addresses')}
-              onClose={() => handleClosePopover('addresses')}
-            />
+            <WrapOptions className='hide-in-responsive'>
+              <AddressesPopover
+                open={openPopover.addresses}
+                onClick={() => handleTogglePopover('addresses')}
+                onClose={() => handleClosePopover('addresses')}
+              />
+              <MomentPopover
+                open={openPopover.moment}
+                onClick={() => handleTogglePopover('moment')}
+                onClose={() => handleClosePopover('moment')}
+              />
+            </WrapOptions>
             {
               auth && (
                 <>
@@ -90,6 +103,22 @@ export const Header = (props) => {
             }
             <LanguageSelector />
           </Menu>
+        </RightHeader>
+      </InnerHeader>
+      <InnerHeader className='sub-menu'>
+        <LeftHeader className='item'>
+          <AddressesPopover
+            open={openPopover.addresses}
+            onClick={() => handleTogglePopover('addresses')}
+            onClose={() => handleClosePopover('addresses')}
+          />
+        </LeftHeader>
+        <RightHeader className='item'>
+          <MomentPopover
+            open={openPopover.moment}
+            onClick={() => handleTogglePopover('moment')}
+            onClose={() => handleClosePopover('moment')}
+          />
         </RightHeader>
       </InnerHeader>
     </HeaderType>

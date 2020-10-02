@@ -41,6 +41,9 @@ export const Options = styled.div`
   ${({ position }) => position?.toLowerCase() === 'right' && css`
     right: 0;
     margin-right: -1px;
+    @media (max-width: 380px) {
+      margin-right: 8px;
+    }
   `}
 `
 

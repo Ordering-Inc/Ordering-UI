@@ -2,10 +2,23 @@ import styled from 'styled-components'
 import { HeaderInvert } from '../../../template/components/Header/styles'
 
 export const HeaderItem = styled.div`
+  display: flex;
+  align-items: center;
   cursor: pointer;
   color: #333;
   ${HeaderInvert} & {
     color: #FFF;
+  }
+
+  p {
+    margin: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  span svg {
+    font-size: 20px;
   }
 `
 

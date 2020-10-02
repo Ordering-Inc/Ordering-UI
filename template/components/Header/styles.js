@@ -14,7 +14,30 @@ const theme = {
 export const Header = styled.div`
   display: flex;
   width: 100%;
-  /* background-color: #333; */
+
+  div.sub-menu {
+    display: none;
+  }
+
+  @media (max-width: 820px) {
+    flex-direction: column;
+
+    div.sub-menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin: 5px 0px;
+      width: 100%;
+
+      div.item {
+        width: 45%;
+      }
+    }
+
+    .hide-in-responsive {
+      display: none;
+    }
+  }
 `
 
 export const InnerHeader = styled.div`
@@ -28,6 +51,21 @@ export const LogoHeader = styled.div`
     height: 45px;
     margin: 0;
     vertical-align: middle;
+
+  }
+  img.show-resp {
+    display: none;
+  }
+
+  @media (max-width: 576px) {
+    img.show-resp {
+      margin-left: 5px;
+      display: block;
+      height: 36px;
+    }
+    img.hide-resp {
+      display: none
+    }
   }
 `
 
@@ -55,9 +93,7 @@ export const Menu = styled.div`
 
   > :last-child {
     margin-right: 10px;
-  }
-  @media (max-width: 410px) {
-    display: none
+    margin-left: 0px;
   }
 `
 
@@ -80,7 +116,6 @@ export const MenuLink = styled(Link)`
 `
 
 export const HeaderInvert = styled(Header)`
-  width: 100%;
   display: flex;
   background-color: #333;
 
@@ -92,5 +127,14 @@ export const HeaderInvert = styled(Header)`
 
   & ${MenuLink} {
     color: #FFF;
+  }
+`
+
+export const WrapOptions = styled.div`
+  display: flex;
+  align-items: center;
+
+  > :first-child {
+    margin-right: 10px;
   }
 `

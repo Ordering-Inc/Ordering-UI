@@ -7,6 +7,13 @@ export const HeaderItem = styled.div`
   ${HeaderInvert} & {
     color: #FFF;
   }
+
+  p {
+    margin: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `
 
 export const PopoverBody = styled.div`
