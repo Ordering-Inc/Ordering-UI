@@ -75,6 +75,7 @@ export const AddressesPopover = (props) => {
                 useValidationFileds
                 address={orderState?.options?.address || {}}
                 onClose={() => props.onClose && props.onClose()}
+                onCancel={() => props.onClose && props.onClose()}
                 onSaveAddress={() => props.onClose && props.onClose()}
               />
             </>
