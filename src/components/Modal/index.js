@@ -3,7 +3,6 @@ import { MdClose } from 'react-icons/md'
 import { Popup, useLanguage } from 'ordering-components'
 import {
   ModalDialog,
-  ModalWrap,
   ModalActions,
   ModalTitle,
   ModalIcon
@@ -23,20 +22,18 @@ const ModalUI = (props) => {
   } = props
   const [, t] = useLanguage()
   return (
-    <ModalWrap>
-      <ModalDialog className='popup-dialog' width={props.width}>
-        <ModalIcon>
-          <MdClose onClick={() => onClose()} />
-        </ModalIcon>
-        {title && <ModalTitle>{title}</ModalTitle>}
-        {children}
-        {(onCancel || onAccept) && (
-          <ModalActions>
-            {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
-            {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
-          </ModalActions>)}
-      </ModalDialog>
-    </ModalWrap>
+    <ModalDialog className='popup-dialog' width={props.width}>
+      <ModalIcon>
+        <MdClose onClick={() => onClose()} />
+      </ModalIcon>
+      {title && <ModalTitle>{title}</ModalTitle>}
+      {children}
+      {(onCancel || onAccept) && (
+        <ModalActions>
+          {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
+          {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+        </ModalActions>)}
+    </ModalDialog>
   )
 }
 

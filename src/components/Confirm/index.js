@@ -3,7 +3,6 @@ import { MdClose } from 'react-icons/md'
 import { Popup, useLanguage } from 'ordering-components'
 import {
   PopupDialog,
-  PopupWrap,
   PopupActions,
   PopupTitle,
   PopupContent,
@@ -25,32 +24,28 @@ const ConfirmUI = (props) => {
   } = props
   const [, t] = useLanguage()
   return (
-    <>
-      <PopupWrap>
-        <PopupDialog className='popup-dialog'>
-          <PopupIcon>
-            <MdClose onClick={() => onClose()} />
-          </PopupIcon>
-          {title && <PopupTitle>{title}</PopupTitle>}
-          <PopupContent>
-            {content && typeof content === 'string' && content}
-            {content && typeof content === 'object' && Array.isArray(content) && (
-              <ul>
-                {content.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            )}
-            {children}
-          </PopupContent>
-          {(onCancel || onAccept || onClose) && (
-            <PopupActions>
-              {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
-              {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
-            </PopupActions>)}
-        </PopupDialog>
-      </PopupWrap>
-    </>
+    <PopupDialog className='popup-dialog'>
+      <PopupIcon>
+        <MdClose onClick={() => onClose()} />
+      </PopupIcon>
+      {title && <PopupTitle>{title}</PopupTitle>}
+      <PopupContent>
+        {content && typeof content === 'string' && content}
+        {content && typeof content === 'object' && Array.isArray(content) && (
+          <ul>
+            {content.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        )}
+        {children}
+      </PopupContent>
+      {(onCancel || onAccept || onClose) && (
+        <PopupActions>
+          {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
+          {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+        </PopupActions>)}
+    </PopupDialog>
   )
 }
 
