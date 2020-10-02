@@ -57,10 +57,10 @@ export const UserPopover = (props) => {
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
-          <PopoverListLink to='/profile'>
+          <PopoverListLink onClick={props.onClose} to='/profile'>
             <FaRegAddressCard /> {t('PROFILE', 'Profile')}
           </PopoverListLink>
-          <PopoverListLink to='/profile/orders'>
+          <PopoverListLink onClick={props.onClose} to='/profile/orders'>
             <FaRegListAlt /> {t('ORDERS', 'Orders')}
           </PopoverListLink>
           <PopoverListIteLogout />
