@@ -24,13 +24,13 @@ const UserProfileFormUI = (props) => {
   const [edit, setEdit] = useState(false)
 
   useEffect(() => {
-    if (!formState.loading && formState.result?.error) {
+    if ((!formState.loading && formState.result?.error)) {
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR')]
       })
     }
-  }, [formState])
+  }, [formState.loading])
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -63,7 +63,6 @@ const UserProfileFormUI = (props) => {
 
   const onSubmit = () => {
     if (Object.keys(formState.changes).length !== 0) {
-      console.log('cambios')
       handleButtonUpdateClick()
     }
     setEdit(false)
@@ -82,7 +81,7 @@ const UserProfileFormUI = (props) => {
           <UserImage>
             <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg'>
               <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg'>
-                <Image>{formState.changes.photo && formState.loading ? 'loading image' : <img src={(!formState.changes.photo || formState.result?.result === 'Network Error') ? user.photo : formState.changes.photo} />}</Image>
+                <Image>{formState.changes.photo && formState.loading ? 'loading image' : <img src={(!formState.changes.photo || formState.result?.result === 'Network Error' || formState.result.error) ? user.photo : formState.changes.photo} />}</Image>
               </DragAndDrop>
             </ExamineClick>
             <Camera><GiPhotoCamera /></Camera>
