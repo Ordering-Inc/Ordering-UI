@@ -15,7 +15,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
     { value: 2, content: t('PICKUP', 'Pickup') },
     { value: 3, content: t('EAT_IN', 'Eat in') },
     { value: 4, content: t('CURBSIDE', 'Curbside') },
-    { value: 5, content: t('DRIVER_THRU', 'drive thru') }
+    { value: 5, content: t('DRIVE_THRU', 'Drive thru') }
   ]
   return (
     <Select options={orderTypes} defaultValue={orderState.options?.type || 1} onChange={(orderType) => handleChangeOrderType(orderType)} />
