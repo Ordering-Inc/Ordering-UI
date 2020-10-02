@@ -1,16 +1,15 @@
 import styled from 'styled-components'
 
 export const ForgotPasswordContainer = styled.div`
-  background: #f8f8f8;
   display: flex;
   flex: 1;
   flex-wrap: 1;
-  position: relative;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 45px);
+  font-size: 1.2em;
   @media (min-width: 980px) {
-    width: 100vw;
     flex-direction: row;
+    min-width: auto;
   }
 `
 
@@ -52,10 +51,13 @@ export const HeroSide = styled.div`
   flex: 1;
   height: 100%;
   max-height: 300px;
+  font-size: 1.3em;
   /*font: normal normal bold 106px/148px Tajawal;*/
   /*letter-spacing: 1.06px;*/
   @media (min-width: 980px) {
+    padding: 0 100px;
     flex: 1.2;
+    font-size: 1.2em;
     max-height: 100%;
     > img {
       width: 200px;
@@ -64,12 +66,11 @@ export const HeroSide = styled.div`
 `
 
 export const TitleHeroSide = styled.div`
-  z-index: 1000;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  height: 400px;
 `
 
 export const FormSide = styled.div`
@@ -81,6 +82,7 @@ export const FormSide = styled.div`
   width: 100%;
   height: 100%;
   flex: 1;
+  max-height: 30%;
   > img {
     width: 139px;
     margin-top: 2vh;
@@ -91,6 +93,9 @@ export const FormSide = styled.div`
   }
   @media (min-width: 980px) {
     width: 40%;
+    height: 50%;
+    max-height: 100%;
+    align-self: center;
     > img {
       margin-top: 0;
       width: 200px;
@@ -108,9 +113,9 @@ export const FormInput = styled.form`
     padding: 15px 20px
   }
   > :last-child {
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 20px;
-    width: 65%;
+    width: 67%;
     padding: 8px
   }
   @media (min-width: 980px) {
@@ -119,8 +124,8 @@ export const FormInput = styled.form`
       width: 60%;
     }
     > :last-child {
-      margin-top: 50px;
-      width: 65%;
+      margin-top: 10px;
+      width: 67%;
     }
   }
 `
