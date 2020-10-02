@@ -27,14 +27,13 @@ import { DriverTipsOptions } from '../../utils'
 const CheckoutUI = (props) => {
   const {
     cartState,
+    cart,
     placing,
     businessDetails,
     paymethodSelected,
     handlePaymethodChange,
     handlerClickPlaceOrder
   } = props
-
-  const { cart, loading, error } = cartState
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
@@ -59,7 +58,7 @@ const CheckoutUI = (props) => {
           </WarningMessage>
         )}
 
-        {loading ? (
+        {cartState.loading ? (
           <div style={{ width: '100%', marginBottom: '20px' }}>
             <Skeleton height={35} style={{ marginBottom: '10px' }} />
             <Skeleton height={150} />
@@ -73,7 +72,7 @@ const CheckoutUI = (props) => {
 
         <UserDetailsContainer>
           <div className='user'>
-            {loading ? (
+            {cartState.loading ? (
               <div>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -91,7 +90,7 @@ const CheckoutUI = (props) => {
               />
             )}
           </div>
-          {(businessDetails?.loading || loading) && (
+          {(businessDetails?.loading || cartState.loading) && (
             <div className='business'>
               <div>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -102,7 +101,7 @@ const CheckoutUI = (props) => {
               </div>
             </div>
           )}
-          {!loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
+          {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
             <div className='business'>
               <h1>Business Details</h1>
               <div>
@@ -123,7 +122,7 @@ const CheckoutUI = (props) => {
           )}
         </UserDetailsContainer>
 
-        {!loading && cart && cart?.status !== 2 && (
+        {!cartState.loading && cart && cart?.status !== 2 && (
           <PaymentMethodContainer>
             <h1>Payment Method</h1>
             {businessDetails.business && (
@@ -136,7 +135,7 @@ const CheckoutUI = (props) => {
           </PaymentMethodContainer>
         )}
 
-        {!loading && cart && options.type === 1 && cart?.status !== 2 && (
+        {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && (
           <DriverTipContainer>
             <h1>Driver Tip</h1>
             <DriverTips
@@ -147,7 +146,7 @@ const CheckoutUI = (props) => {
           </DriverTipContainer>
         )}
 
-        {!loading && cart && (
+        {!cartState.loading && cart && (
           <CartContainer>
             <h1>Your Order</h1>
             <Cart
@@ -157,7 +156,7 @@ const CheckoutUI = (props) => {
           </CartContainer>
         )}
 
-        {!loading && cart && cart?.status !== 2 && (
+        {!cartState.loading && cart && cart?.status !== 2 && (
           <WrapperPlaceOrderButton>
             <Button
               color='primary'
@@ -169,11 +168,11 @@ const CheckoutUI = (props) => {
           </WrapperPlaceOrderButton>
         )}
 
-        {error && error?.length > 0 && (
+        {/* {error && error?.length > 0 && (
           error.map((e, i) => (
             <p key={i}>ERROR: [{e}]</p>
           ))
-        )}
+        )} */}
       </WrappContainer>
     </Container>
   )
