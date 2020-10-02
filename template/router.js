@@ -45,6 +45,9 @@ const GlobalStyle = createGlobalStyle`
 
   .popup-component {
     background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 

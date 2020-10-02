@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { useLanguage, useSession } from 'ordering-components'
+import { useLanguage, useSession, LogoutAction as LogoutActionController } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow, PopoverList, PopoverListItem, PopoverListLink } from './styles'
 import { DropDownCircleImage } from '../Dropdown/style'
@@ -63,7 +63,7 @@ export const UserPopover = (props) => {
           <PopoverListLink to='/profile/orders'>
             <FaRegListAlt /> {t('ORDERS', 'Orders')}
           </PopoverListLink>
-          <PopoverListIteLogout />
+          <PopoverListItemLogout />
         </PopoverList>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
@@ -71,12 +71,21 @@ export const UserPopover = (props) => {
   )
 }
 
-const PopoverListIteLogout = (props) => {
+const LogoutActionUI = (props) => {
   const [, t] = useLanguage()
 
   return (
     <PopoverListItem onClick={props.handleLogoutClick}>
       <FaSignOutAlt /> {t('LOGOUT', 'Logout')}
     </PopoverListItem>
+  )
+}
+
+const PopoverListItemLogout = (props) => {
+  const logoutActionProps = {
+    UIComponent: LogoutActionUI
+  }
+  return (
+    <LogoutActionController {...logoutActionProps} />
   )
 }
