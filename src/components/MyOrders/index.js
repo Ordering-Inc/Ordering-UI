@@ -76,7 +76,7 @@ export const MyOrdersUI = (props) => {
                   </Price>
                 </Content>
                 <OpenOrder>
-                  <Link to={'/order/' + order.id}>
+                  <Link to={'/orders/' + order.id}>
                     <Button color='primary'>
                       Open Order
                     </Button>
@@ -103,7 +103,9 @@ export const MyOrdersUI = (props) => {
                   <BusinessInformation>
                     <h5>{order.business.name}</h5>
                     <p>{order.created_at}</p>
-                    <p name='view' onClick={() => handleMessages(order.id, order)}>View order</p>
+                    <Link to={'/orders/' + order.id}>
+                     <p name='view' onClick={() => handleMessages(order.id, order)}>View order</p>
+                    </Link>
                   </BusinessInformation>
                 </OrderPastContent>
                 <Reorder>
@@ -118,9 +120,9 @@ export const MyOrdersUI = (props) => {
           </OrdersPast>
         </>
       )}
-      <Modal open={open} onClose={() => setOpen(false)}>
+      {/*<Modal open={open} onClose={() => setOpen(false)}>
         <Messages open={open} setOpen={setOpen} orderId={orderId} order={order} />
-      </Modal>
+      </Modal>*/}
       <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
         <ReviewOrder order={order} />
       </Modal>

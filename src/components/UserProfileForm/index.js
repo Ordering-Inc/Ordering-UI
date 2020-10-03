@@ -12,7 +12,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { Tabs, Tab } from '../../styles/Tabs'
 
-import { GiPhotoCamera } from 'react-icons/gi'
+import { GiPhotoCamera,BsPerson,AiOutlineUnorderedList } from 'react-icons/all'
 
 const UserProfileFormUI = (props) => {
   const { hanldeChangeInput, handleButtonUpdateClick, handlechangeImage, formState, showField, validationFields, isRequiredField, useChekoutFileds } = props
@@ -73,8 +73,8 @@ const UserProfileFormUI = (props) => {
     <>
       <FlexTabs>
         <Tabs variant='primary'>
-          <Tab onClick={() => setTabValue('My Account')} active={tabValue === 'My Account'}>My Account</Tab>
-          <Tab onClick={() => setTabValue('My Orders')} active={tabValue === 'My Orders'}>My Orders</Tab>
+          <Tab onClick={() => setTabValue('My Account')} active={tabValue === 'My Account'}><BsPerson /> My Account</Tab>
+          <Tab onClick={() => setTabValue('My Orders')} active={tabValue === 'My Orders'}><AiOutlineUnorderedList /> My Orders</Tab>
         </Tabs>
       </FlexTabs>
       {tabValue === 'My Account' ? (
