@@ -2,22 +2,32 @@ import styled from 'styled-components'
 
 export const MessagesContainer = styled.div`
   width: 100%;
-  height: 85vh;
 `
 
 export const HeaderProfile = styled.div`
   display: flex;
   > div {
-    > p {
+     p {
       margin-left: 10px;
+      margin-block-end: 0.1em;
+      margin-block-start: 0.5em
+    }
+    p:last-child{
+      margin-block-start: 0.1em
     }
   }
 `
 export const Image = styled.div`
-  width: 15%;
-   > img {
+  width: 10%;
+  height: 60px;
+   img {
     width: 100%;
     border-radius: 16px;
+  }
+  img[name]{
+    border: 1px solid #D81212;
+    border-radius: 50%;
+    height: 100%
   }
 `
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   Messages as MessagesController,
   useLanguage
@@ -33,7 +33,9 @@ export const MessagesUI = (props) => {
     image,
     sendMessage,
     setImage,
-    setMessage
+    setMessage,
+    business,
+    driver
   } = props
 
   const [, t] = useLanguage()
@@ -124,11 +126,30 @@ export const MessagesUI = (props) => {
     <MessagesContainer>
       <HeaderProfile>
         <Image>
-          <img src={order.business?.logo} />
+          {
+            business && (
+              <img src={order.business?.logo} />
+            )
+          }
+          {
+            driver && (
+              <img src={order.driver?.photo} name='driver' />
+            )
+          }
         </Image>
         <div>
-          <p>{order.business?.name}</p>
-          <p>Online</p>
+          {business && (
+            <>
+              <p>{order.business?.name}</p>
+              <p>Online</p>
+            </>
+          )}
+          {driver && (
+            <>
+              <p>{order.driver?.name}</p>
+              <p>Online</p>
+            </>
+          )}
         </div>
       </HeaderProfile>
       {!messages.loading ? (

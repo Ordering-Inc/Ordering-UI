@@ -1,5 +1,5 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
 import { FiPhone } from 'react-icons/fi'
@@ -10,6 +10,9 @@ import { Button } from '../../styles/Buttons'
 import logoHeader from '../../../template/assets/images/logo-header.svg'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
+import { Modal } from '../Modal'
+import { Messages } from '../Messages'
+import { ReviewOrder } from '../ReviewOrder'
 
 import {
   Container,
@@ -55,6 +58,8 @@ const OrderDetailsUI = (props) => {
     formatPrice
   } = props
   const [, t] = useLanguage()
+  const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
+  const [openReview, setOpenReview] = useState(false)
 
   const { order, loading, error } = props.order
 
@@ -147,7 +152,7 @@ const OrderDetailsUI = (props) => {
                   <FiPhone />
                 </span>
                 <span>
-                  <HiOutlineChat />
+                  <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
                 </span>
                 <span>
                   <BiCaretDown />
@@ -207,7 +212,7 @@ const OrderDetailsUI = (props) => {
                       <FiPhone />
                     </span>
                     <span>
-                      <HiOutlineChat />
+                      <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
                     </span>
                   </DriverActions>
                 </OrderDriver>
@@ -269,9 +274,9 @@ const OrderDetailsUI = (props) => {
               </table>
             </OrderBill>
 
-            {(order?.status === 1 || order?.status === 11) && (
+            {(order?.status === 1 || order?.status === 11) && !order.review && (
               <ReviewsAction>
-                <Button color='primary'>
+                <Button color='primary' onClick={() => setOpenReview(true)}>
                   Review your Order
                 </Button>
               </ReviewsAction>
@@ -282,14 +287,20 @@ const OrderDetailsUI = (props) => {
                 Support
                 <BiCaretUp />
               </a>
-              <a>
+              <Link to='/profile/orders'>
                 My Orders
                 <BiCaretUp />
-              </a>
+              </Link>
             </FootActions>
           </Content>
         </>
       )}
+      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })}>
+        <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
+      </Modal>
+      <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
+        <ReviewOrder order={order} />
+      </Modal>
     </Container>
   )
 }

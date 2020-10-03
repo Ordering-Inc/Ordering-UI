@@ -18,18 +18,23 @@ export const ActiveOrders = styled.div`
 
 export const Card = styled.div`
   min-width: 400px;
-  margin: 0 10px;
+  margin: 10px;
   display: inline-block;
   background: white;
   height: 250px;
   border-radius: 16px;
+  text-align: left;
 `
+
 export const Map = styled.div`
   width: 100%;
   height: 40%;
   img{
     width: 100%;
     height: 100%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    image-rendering: -webkit-optimize-contrast;
   }
 `
 
@@ -100,8 +105,15 @@ export const OrdersPast = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  div[name]{
+    height: 80%;
+  }
   div:last-child{
     border-bottom: none;
+  }
+  p{
+    margin-block-end: 0;
+    margin-block-start: 0;
   }
 `
 export const IndividualOrderPast = styled.div`
