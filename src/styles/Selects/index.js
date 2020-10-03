@@ -28,7 +28,7 @@ export const Options = styled.div`
   position: absolute;
   background-color: #CCC;
   margin-top: 7px;
-  z-index: 10;
+  z-index: 10000;
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;

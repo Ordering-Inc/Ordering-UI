@@ -125,7 +125,7 @@ const ProductOptionsUI = (props) => {
           {productCart && (
             <div>
               <Button
-                className={`incdec ${isSoldOut ? 'disabled' : ''}`}
+                className={`incdec ${(isSoldOut || productCart.quantity === 1) ? 'disabled' : ''}`}
                 circle
                 outline
                 onClick={decrement}
@@ -134,7 +134,7 @@ const ProductOptionsUI = (props) => {
               </Button>
               <span>{productCart.quantity}</span>
               <Button
-                className={`incdec ${isSoldOut ? 'disabled' : ''}`}
+                className={`incdec ${(maxProductQuantity <= 0 || isSoldOut || productCart.quantity >= maxProductQuantity) ? 'disabled' : ''}`}
                 circle
                 outline
                 onClick={increment}
