@@ -6,7 +6,7 @@ import {
   useLanguage
 } from 'ordering-components'
 
-import { ProductsListing } from '../ProductsListing' // Replace this component in ordering-components
+import { ProductsListing } from '../ProductsListing' // move this component in ordering-components
 
 import {
   ProductsContainer,
@@ -19,6 +19,8 @@ import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { ProductForm } from '../ProductForm'
 import { Modal } from '../Modal'
+
+const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
   const {
@@ -47,7 +49,8 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleScroll = useCallback(() => {
-    const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
+    const innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL
+    const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
     if (badScrollPosition || categoryState.loading || !hasMore) return
     getNextProducts()
