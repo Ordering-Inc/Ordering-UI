@@ -16,9 +16,10 @@ import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
 import { OrderDetailsPage } from './Pages/OrderDetails'
 import { CheckoutPage } from './Pages/Checkout'
-
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
+import { PageNotFound } from './Pages/PageNotFound'
+
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
@@ -190,7 +191,7 @@ export const Router = () => {
             <CheckoutPage />
           </Route>
           <Route path='*'>
-            404
+            <PageNotFound />
           </Route>
         </Switch>
       </FontTheme>
