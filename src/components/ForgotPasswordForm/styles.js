@@ -71,6 +71,18 @@ export const TitleHeroSide = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 0 10px;
+  font-size: 1em;
+  @media (min-width: 980px) {
+    flex: 1.2;
+    padding: 0 50px;
+    > img {
+      width: 200px;
+    }
+  }
+  @media (max-width: 480px) {
+    font-size: 0.8em;
+  }
 `
 
 export const FormSide = styled.div`
@@ -82,7 +94,6 @@ export const FormSide = styled.div`
   width: 100%;
   height: 100%;
   flex: 1;
-  max-height: 30%;
   > img {
     width: 139px;
     margin-top: 2vh;
