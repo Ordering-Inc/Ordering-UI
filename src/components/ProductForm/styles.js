@@ -6,6 +6,7 @@ export const ProductContainer = styled.div`
   height: 100%;
   padding: 10px 0px;
   padding-left: 15px;
+  max-height: calc(100vh - 40px);
   @media (max-width: 1200px) {
     flex-wrap: wrap;
     overflow: auto;
@@ -127,6 +128,11 @@ export const ProductActions = styled.div`
     }
   }
 
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   button.add {
     width: 65%;
     padding: 5px 10px;
@@ -134,14 +140,9 @@ export const ProductActions = styled.div`
       float: right;
       margin-right: 10px;
     }
-    &:disabled {
+    &.soldout {
       width: 100%;
     }
-  }
-
-  button.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 
   @media (max-width: 720px) {
@@ -167,6 +168,6 @@ export const ProductActions = styled.div`
   @media (max-width: 480) {
     div{
       width: 80%;
-  }
+    }
   }
 `

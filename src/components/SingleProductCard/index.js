@@ -24,16 +24,16 @@ export const SingleProductCard = (props) => {
   const [stateConfig] = useConfig()
   const [orderState] = useOrder()
 
-  const editMode = typeof product.code !== 'undefined'
+  const editMode = typeof product?.code !== 'undefined'
 
-  const removeToBalance = editMode ? product.quantity : 0
+  const removeToBalance = editMode ? product?.quantity : 0
   const cart = orderState.carts[`businessId:${businessId}`]
-  const productCart = cart?.products?.find(prod => prod.id === product.id)
+  const productCart = cart?.products?.find(prod => prod.id === product?.id)
   const totalBalance = (productCart?.quantity || 0) - removeToBalance
 
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 
-  const productBalance = (cart?.products?.reduce((sum, _product) => sum + (product && _product.id === product.id ? _product.quantity : 0), 0) || 0) - removeToBalance
+  const productBalance = (cart?.products?.reduce((sum, _product) => sum + (product && _product.id === product?.id ? _product.quantity : 0), 0) || 0) - removeToBalance
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - productBalance
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig
 
