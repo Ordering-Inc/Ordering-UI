@@ -230,7 +230,7 @@ export const ModalIcon = styled.span`
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background: #d81212;
+  background: rgba(0,0,0,0.1);
   border-radius: 50%;
   z-index: 1;
   position: absolute;
