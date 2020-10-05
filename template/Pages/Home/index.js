@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RiAppleLine } from 'react-icons/ri'
 import { AiOutlineAndroid } from 'react-icons/ai'
 import { HomeHero } from '../../../src/components/HomeHero'
@@ -31,6 +31,8 @@ export const HomePage = (props) => {
   const handlerFindBusiness = () => {
     history.push('/search')
   }
+
+ 
 
   return (
     <HomeContainer>
