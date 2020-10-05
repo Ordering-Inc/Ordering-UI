@@ -4,6 +4,7 @@ import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
 import { MomentControl } from '../MomentControl'
 import { isADateValid } from '../../utils'
+import { FaRegClock } from 'react-icons/fa'
 
 export const MomentPopover = (props) => {
   const { open } = props
@@ -60,11 +61,8 @@ export const MomentPopover = (props) => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem
-        ref={referenceElement}
-        onClick={props.onClick}
-      >
-        {isADateValid(orderStatus.options?.moment) || t('ASAP', 'ASAP')}
+      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+        <FaRegClock /> {isADateValid(orderStatus.options?.moment) || t('ASAP', 'ASAP')}
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <MomentControl {...momentProps} />

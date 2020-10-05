@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useParams } from 'react-router-dom'
 import {
   useApi,
   useLanguage
@@ -138,7 +137,6 @@ const BusinessProductsListingUI = (props) => {
 }
 
 export const BusinessProductsListing = (props) => {
-  const { store } = useParams()
   const [ordering] = useApi()
 
   const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'products']
@@ -146,7 +144,7 @@ export const BusinessProductsListing = (props) => {
   const businessProductslistingProps = {
     ...props,
     UIComponent: BusinessProductsListingUI,
-    slug: store,
+    slug: props.store,
     ordering: ordering,
     businessProps: businessProps,
     handlerClickCategory: (e) => { console.log(e) }

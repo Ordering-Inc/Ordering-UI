@@ -13,16 +13,12 @@ export const ProductsListing = (props) => {
   } = props
 
   const [orderState] = useOrder()
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
 
   const [categorySelected, setCategorySelected] = useState({ id: null, name: t('ALL', 'All') })
   const [businessState, setBusinessState] = useState({ business: {}, loading: true, error: null })
   const [categoriesState, setCategoriesState] = useState({})
-  const [orderOptions, setOrderOptions] = useState({
-    type: orderState?.options?.type,
-    moment: orderState?.options?.moment,
-    location: orderState?.options?.address?.location
-  })
+  const [orderOptions, setOrderOptions] = useState()
   const requestsState = {}
 
   const categoryStateDefault = {
@@ -149,10 +145,10 @@ export const ProductsListing = (props) => {
   }, [orderState, categorySelected, businessState])
 
   useEffect(() => {
-    if (!orderState.loading) {
+    if (!orderState.loading && orderOptions && !languageState.loading) {
       getBusiness()
     }
-  }, [orderOptions])
+  }, [orderOptions, languageState])
 
   useEffect(() => {
     if (!orderState.loading) {

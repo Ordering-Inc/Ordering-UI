@@ -83,7 +83,6 @@ export const BusinessesListing = (props) => {
         nextPageItems
       })
     } catch (err) {
-      console.log(err)
       if (err.constructor.name !== 'Cancel') {
         setBusinessesList({
           ...businessesList,
