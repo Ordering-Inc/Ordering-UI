@@ -66,6 +66,7 @@ export const AddressesPopover = (props) => {
               <AddressList
                 popover
                 changeOrderAddressWithDefault
+                onClosePopover={props.onClose}
               />
             </>
           )
