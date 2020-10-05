@@ -23,6 +23,7 @@ import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
+import ScrollToTop from '../src/utils/ScrollToTop'
 import { UpsellingPage } from '../src/components/UpsellingPage'
 const fontName = 'Nunito'
 
@@ -33,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #F8F8F8;
     color: #333;
   }
-  
+
   .popup-backdrop {
     background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
@@ -122,118 +123,120 @@ export const Router = () => {
       <GlobalStyle />
       <FontTheme fontName={fontName}>
         <Header />
-        <Switch>
-          <Route exact path='/home'>
-            <HomePage />
-            {/* {
-              orderStatus.options?.address?.location
-                ? <Redirect to='/search' />
-                : <HomePage />
-            } */}
-          </Route>
-          <Route exact path='/'>
-            {
-              orderStatus.options?.address?.location
-                ? <Redirect to='/search' />
-                : <HomePage />
-            }
-          </Route>
-          <Route exact path='/signup'>
-            {
-              !auth
-                ? (
-                  <SignUp
-                    elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
-                    useLoginByCellphone
-                    useChekoutFileds
-                    handleSuccessSignup={handleSuccessSignup}
-                  />
+        <ScrollToTop>
+          <Switch>
+            <Route exact path='/home'>
+              <HomePage />
+              {/* {
+                      orderStatus.options?.address?.location
+                        ? <Redirect to='/search' />
+                        : <HomePage />
+                    } */}
+            </Route>
+            <Route exact path='/'>
+              {
+                      orderStatus.options?.address?.location
+                        ? <Redirect to='/search' />
+                        : <HomePage />
+              }
+            </Route>
+            <Route exact path='/signup'>
+              {
+                !auth
+                  ? (
+                    <SignUp
+                      elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
+                      useLoginByCellphone
+                      useChekoutFileds
+                      handleSuccessSignup={handleSuccessSignup}
+                    />
+                  )
+                  : <Redirect to='/' />
+              }
+            </Route>
+            <Route exact path='/login'>
+              {
+                !auth
+                  ? (
+                    <Login
+                      elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
+                      elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                      useLoginByCellphone
+                    />
+                  )
+                  : <Redirect to='/' />
+              }
+            </Route>
+            <Route exact path='/signin'>
+              {
+                !auth
+                  ? (
+                    <Login
+                      elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
+                      elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                      useLoginByCellphone
+                    />
+                  )
+                  : <Redirect to='/' />
+              }
+            </Route>
+            <Route exact path='/password/forgot'>
+              {
+                !auth ? (
+                  <ForgotPassword />
                 )
-                : <Redirect to='/' />
-            }
-          </Route>
-          <Route exact path='/login'>
-            {
-              !auth
-                ? (
-                  <Login
-                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
-                    useLoginByCellphone
-                  />
-                )
-                : <Redirect to='/' />
-            }
-          </Route>
-          <Route exact path='/signin'>
-            {
-              !auth
-                ? (
-                  <Login
-                    elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                    elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
-                    useLoginByCellphone
-                  />
-                )
-                : <Redirect to='/' />
-            }
-          </Route>
-          <Route exact path='/password/forgot'>
-            {
-              !auth ? (
-                <ForgotPassword />
-              )
-                : <Redirect to='/' />
-            }
-          </Route>
-          <Route exact path='/password/reset'>
-            Password reset
-          </Route>
-          <Route exact path='/profile'>
-            {auth
-              ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
-              : <Redirect to='/login' />}
-          </Route>
-          <Route exact path='/profile/orders'>
-            {auth
-              ? (<MyOrders />)
-              : <Redirect to='/login' />}
-          </Route>
-          <Route exact path='/p/:page'>
-            <Page />
-          </Route>
-          <Route exact path='/search'>
-            {
-              orderStatus.options?.address?.location
-                ? <BusinessesList />
-                : <Redirect to='/home' />
-            }
-          </Route>
-          <Route exact path='/store/:store'>
-            <BusinessProductsList />
-          </Route>
-          <Route exact path='/checkout'>
-            Checkout
-          </Route>
-          <Route exact path='/order/:orderId'>
-            <Order />
-          </Route>
-          <Route exact path='/upselling_page'>
-            <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)}/>
-          </Route>
-          <Route exact path='/orders/:orderId'>
-            <OrderDetailsPage />
-          </Route>
-          <Route exact path='/checkout/:cartUuid'>
-            <CheckoutPage />
-          </Route>
-          <Route exact path='/pages/:pageSlug'>
-            <Cms />
-          </Route>
-          <Route path='*'>
-            404
-          </Route>
-        </Switch>
+                  : <Redirect to='/' />
+              }
+            </Route>
+            <Route exact path='/password/reset'>
+                    Password reset
+            </Route>
+            <Route exact path='/profile'>
+              {auth
+                ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+                : <Redirect to='/login' />}
+            </Route>
+            <Route exact path='/profile/orders'>
+              {auth
+                ? (<MyOrders />)
+                : <Redirect to='/login' />}
+            </Route>
+            <Route exact path='/p/:page'>
+              <Page />
+            </Route>
+            <Route exact path='/search'>
+              {
+                orderStatus.options?.address?.location
+                  ? <BusinessesList />
+                  : <Redirect to='/home' />
+              }
+            </Route>
+            <Route exact path='/store/:store'>
+              <BusinessProductsList />
+            </Route>
+            <Route exact path='/checkout'>
+              Checkout
+            </Route>
+            <Route exact path='/order/:orderId'>
+              <Order />
+            </Route>
+            <Route exact path='/orders/:orderId'>
+              <OrderDetailsPage />
+            </Route>
+            <Route exact path='/checkout/:cartUuid'>
+              <CheckoutPage />
+            </Route>
+            <Route exact path='/upselling_page'>
+              <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)}/>
+            </Route>
+            <Route exact path='/pages/:pageSlug'>
+              <Cms />
+            </Route>
+            <Route path='*'>
+              404
+            </Route>
+          </Switch>
+        </ScrollToTop>
       </FontTheme>
       <Footer />
     </BrowserRouter>
