@@ -28,3 +28,5 @@ export const getIconCard = (brand = '') => {
       return <FaCreditCard />
   }
 }
+
+export const DriverTipsOptions = [0, 10, 15, 20, 25]

@@ -17,6 +17,11 @@ export const ProductsListing = (props) => {
   const [categorySelected, setCategorySelected] = useState({ id: null, name: t('ALL', 'All') })
   const [businessState, setBusinessState] = useState({ business: {}, loading: true, error: null })
   const [categoriesState, setCategoriesState] = useState({})
+  const [orderOptions, setOrderOptions] = useState({
+    type: orderState?.options?.type,
+    moment: orderState?.options?.moment,
+    location: orderState?.options?.address?.location
+  })
   const requestsState = {}
 
   const categoryStateDefault = {
@@ -146,7 +151,17 @@ export const ProductsListing = (props) => {
     if (!orderState.loading) {
       getBusiness()
     }
-  }, [orderState])
+  }, [orderOptions])
+
+  useEffect(() => {
+    if (!orderState.loading) {
+      setOrderOptions({
+        type: orderState?.options?.type,
+        moment: orderState?.options?.moment,
+        location: orderState?.options?.address?.location
+      })
+    }
+  }, [JSON.stringify(orderState?.options)])
 
   /**
    * Cancel business request on unmount

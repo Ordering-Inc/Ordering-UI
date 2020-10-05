@@ -10,4 +10,10 @@ export const CategoriesContainer = styled.div`
   top: 0;
   border-bottom: 1px solid #D9D9D9;
   text-align: center;
+
+  div.category {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import { TiPencil } from 'react-icons/ti'
 import { VscTrash } from 'react-icons/vsc'
@@ -136,7 +137,10 @@ const AddressListUI = (props) => {
               <p key={i}>{t('ERROR')}: [{e}]</p>
             ))
           ) : (
-            <p>{t('LOADING', 'Loading...')}</p>
+            <AddressListUl>
+              <Skeleton height={50} style={{ marginBottom: '10px' }} />
+              <Skeleton height={50} style={{ marginBottom: '10px' }} />
+            </AddressListUl>
           )}
         </>
       )}
