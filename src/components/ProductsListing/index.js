@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useOrder, useLanguage } from 'ordering-components'
 import { CancelToken } from 'ordering-api-sdk'
+import { isADateValid } from '../../utils'
 
 export const ProductsListing = (props) => {
   console.log('Move ProductsListing to ordering-componenets')
@@ -114,7 +115,7 @@ export const ProductsListing = (props) => {
           ? `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`
           : null
       }
-      if (orderState.options?.moment) {
+      if (orderState.options?.moment && isADateValid(orderState.options?.moment)) {
         const parts = orderState.options?.moment.split(' ')
         const dateParts = parts[0].split('-')
         const timeParts = parts[1].split(':')
