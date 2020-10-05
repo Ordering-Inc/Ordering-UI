@@ -57,7 +57,7 @@ export const Header = (props) => {
             {
               !auth && (
                 <>
-                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign up')}</MenuLink>
+                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
                   <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
                 </>
               )
