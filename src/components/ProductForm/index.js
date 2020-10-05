@@ -125,7 +125,7 @@ const ProductOptionsUI = (props) => {
           {productCart && !isSoldOut && maxProductQuantity && (
             <div>
               <Button
-                className={`incdec ${(isSoldOut || productCart.quantity === 1) ? 'disabled' : ''}`}
+                className='incdec'
                 circle
                 outline
                 onClick={decrement}
@@ -134,7 +134,7 @@ const ProductOptionsUI = (props) => {
               </Button>
               <span>{productCart.quantity}</span>
               <Button
-                className={`incdec ${(maxProductQuantity <= 0 || isSoldOut || productCart.quantity >= maxProductQuantity) ? 'disabled' : ''}`}
+                className='incdec'
                 circle
                 outline
                 onClick={increment}
@@ -145,7 +145,7 @@ const ProductOptionsUI = (props) => {
 
           {productCart && !isSoldOut && maxProductQuantity && auth ? (
             <Button
-              className={`add ${Object.keys(errors).length > 0 ? 'disabled' : ''}`}
+              className='add'
               color='primary'
               onClick={handleSave}
               disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
@@ -161,7 +161,7 @@ const ProductOptionsUI = (props) => {
             </Button>
           ) : (
             <Button
-              className={`add ${isSoldOut || maxProductQuantity === 0 ? 'disabled' : ''}`}
+              className={`add ${!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''}`}
               color='primary'
               outline
               disabled={isSoldOut || maxProductQuantity === 0}
