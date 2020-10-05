@@ -48,7 +48,6 @@ export const SocialMedia = styled.div`
   @media (min-width: 410px) {
     text-align: center;
     width: 20%;
-    text-align: left;
   }
 `
 
