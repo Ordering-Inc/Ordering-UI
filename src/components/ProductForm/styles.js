@@ -134,11 +134,13 @@ export const ProductActions = styled.div`
       float: right;
       margin-right: 10px;
     }
+    &:disabled {
+      width: 100%;
+    }
   }
 
   button.disabled {
     opacity: 0.5;
-    width: 100%;
     cursor: not-allowed;
   }
 
