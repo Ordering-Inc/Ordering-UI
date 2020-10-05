@@ -14,6 +14,8 @@ import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
 import { useOrder, useApi } from 'ordering-components'
 
+const PIXELS_TO_SCROLL = 300
+
 export const BusinessesListing = (props) => {
   console.log('Move BusinessesListing to ordering-componenets')
   const {
@@ -90,7 +92,8 @@ export const BusinessesListing = (props) => {
   }, [paginationProps])
 
   const handleScroll = useCallback(() => {
-    const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
+    const innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL
+    const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (badScrollPosition || businessesList.loading || !hasMore) return
     getBusinesses()

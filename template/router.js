@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter,
   Switch,
@@ -7,7 +7,7 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useApi } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
@@ -16,15 +16,15 @@ import { BusinessProductsList } from './Pages/BusinessProductsList'
 import { Login } from './Pages/Login'
 import { OrderDetailsPage } from './Pages/OrderDetails'
 import { CheckoutPage } from './Pages/Checkout'
+import { Cms } from './Pages/Cms'
 
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
-
 import ScrollToTop from '../src/utils/ScrollToTop'
-
+import { UpsellingPage } from '../src/components/UpsellingPage'
 const fontName = 'Nunito'
 
 const GlobalStyle = createGlobalStyle`
@@ -42,11 +42,14 @@ const GlobalStyle = createGlobalStyle`
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 2000;
   }
 
   .popup-component {
     background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 
@@ -75,6 +78,12 @@ export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
+  const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
+  const [ordering] = useApi()
+
+  useEffect(() => {
+    getProducts()
+  }, [])
 
   const handleSuccessSignup = (user) => {
     sessionDispatch({
@@ -82,6 +91,31 @@ export const Router = () => {
       user,
       token: user.session.access_token
     })
+  }
+  const getProducts = async () => {
+    try {
+      setProductsList({
+        ...productsList,
+        loading: true
+      })
+      const { content: { result } } = await ordering
+        .businesses(41)
+        .products()
+        .parameters({ type: 1 })
+        .get()
+
+      setProductsList({
+        ...productsList,
+        loading: false,
+        products: result
+      })
+    } catch (error) {
+      setProductsList({
+        ...productsList,
+        loading: false,
+        error
+      })
+    }
   }
 
   return (
@@ -191,6 +225,12 @@ export const Router = () => {
             </Route>
             <Route exact path='/checkout/:cartUuid'>
               <CheckoutPage />
+            </Route>
+            <Route exact path='/upselling_page'>
+              <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)}/>
+            </Route>
+            <Route exact path='/pages/:pageSlug'>
+              <Cms />
             </Route>
             <Route path='*'>
               404
