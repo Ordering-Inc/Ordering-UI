@@ -9,8 +9,10 @@ export const CardContainer = styled.div`
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
-  background-color: #fff;
   cursor: pointer;
+  position: relative;
+
+  background: ${({ soldOut }) => soldOut ? 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,.5))' : '#FFF'};
 
   @media (max-width: 992px) {
     width: calc(50% - 40px);
@@ -18,6 +20,15 @@ export const CardContainer = styled.div`
   @media (max-width: 680px) {
     width: calc(100% - 40px);
   }
+`
+
+export const SoldOut = styled.span`
+  position: absolute;
+  background: #D6D6D6 0% 0% no-repeat padding-box;
+  border-radius: 23px;
+  padding: 5px 10px;
+  top: 10px;
+  right: 4px;
 `
 
 export const CardInfo = styled.div`
@@ -30,7 +41,7 @@ export const CardInfo = styled.div`
 
   h1 {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: ${({ soldOut }) => soldOut ? 'bold' : '500'};
     text-align: left;
     color: #263238;
     overflow: hidden;
@@ -40,7 +51,7 @@ export const CardInfo = styled.div`
 
   p {
     font-size: 16px;
-    font-weight: 200;
+    font-weight: font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};;
     text-align: left;
 
     display: -webkit-box;
@@ -90,6 +101,9 @@ export const CardLogo = (props) => {
   const style = {}
   if (props.bgimage) {
     style.backgroundImage = `url(${props.bgimage})`
+  }
+  if (props.soldOut) {
+    style.filter = 'brightness(50%)'
   }
   return (
     <CardLogoStyled {...props} style={style}>

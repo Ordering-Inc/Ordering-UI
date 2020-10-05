@@ -143,7 +143,7 @@ const ProductOptionsUI = (props) => {
               </Button>
             </div>)}
 
-          {productCart && !isSoldOut && auth ? (
+          {productCart && !isSoldOut && maxProductQuantity && auth ? (
             <Button
               className={`add ${Object.keys(errors).length > 0 ? 'disabled' : ''}`}
               color='primary'
@@ -161,13 +161,13 @@ const ProductOptionsUI = (props) => {
             </Button>
           ) : (
             <Button
-              className={`add ${isSoldOut ? 'disabled' : ''}`}
+              className={`add ${isSoldOut || maxProductQuantity === 0 ? 'disabled' : ''}`}
               color='primary'
               outline
-              disabled={isSoldOut}
+              disabled={isSoldOut || maxProductQuantity === 0}
               onClick={() => setModalIsOpen(true)}
             >
-              {isSoldOut ? 'Sold out' : 'Login / Sign Up'}
+              {isSoldOut || maxProductQuantity === 0 ? 'Sold out' : 'Login / Sign Up'}
             </Button>
           )}
         </ProductActions>

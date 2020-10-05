@@ -78,6 +78,7 @@ const BusinessProductsListingUI = (props) => {
                 categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
                 category={categorySelected}
                 categoryState={categoryState}
+                businessId={business.id}
                 onProductClick={onProductClick}
               />
             </WrapContent>
@@ -94,7 +95,6 @@ const BusinessProductsListingUI = (props) => {
         <ProductForm
           product={curProduct}
           businessId={businessState?.business?.id}
-          // ordering={props.ordering}
           onSave={handlerProductAction}
         />
       </Modal>
