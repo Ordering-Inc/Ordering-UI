@@ -227,9 +227,13 @@ export const BusinessVideos = styled.div`
 export const ModalIcon = styled.span`
   left: 95%;
   font-size: 30px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+  background: #d81212;
+  border-radius: 50%;
   z-index: 1;
   position: absolute;
   color: white;
-  top: 2px;
+  top: 5px;
 `

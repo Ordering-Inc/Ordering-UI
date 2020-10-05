@@ -25,7 +25,7 @@ export const ModalWrap = styled.div`
 
 export const ModalDialog = styled.div`
   background-color: #FFF;
-  /* padding: 20px;*/
+  padding: ${({ padding }) => padding || '20px'};
   width: ${({ width }) => width || '50%'};
   border-radius: 10px;
   box-sizing: border-box;
