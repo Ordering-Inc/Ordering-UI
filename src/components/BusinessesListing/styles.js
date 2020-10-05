@@ -25,9 +25,18 @@ export const NotFoundBusinesses = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  height: calc(100vh - 45px);
-  margin: auto;
+  width: 50%;
+  height: 100vh;
+  margin: 10px auto;
+
+  div.image {
+    max-width: 300px;
+    max-width: 300px;
+
+    img {
+      width: 300px;
+    }
+  }
 
   h1 {
     opacity: 0.5;
@@ -41,22 +50,24 @@ export const NotFoundBusinesses = styled.div`
     align-items: center;
 
     button {
-      padding: 10px 60px;
+      padding: 2px 60px;
     }
   }
 
-  @media (max-width: 410px) {
+  @media (max-width: 576px) {
+    width: 80%;
     h1 {
       font-size: 24px;
-    }
-    div button {
-      padding: 5px 40px;
     }
   }
 
   @media (max-width: 360px) {
     h1 {
       font-size: 20px;
+    }
+    div button {
+      padding-left: 40px;
+      padding-right: 40px;
     }
   }
 `

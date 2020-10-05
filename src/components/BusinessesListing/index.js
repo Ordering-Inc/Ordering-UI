@@ -11,6 +11,8 @@ import {
 
 import { Button } from '../../styles/Buttons'
 
+import noBusinesses from '../../../template/assets/no-businesses.svg'
+
 import { Modal } from '../Modal'
 import { Alert } from '../Confirm'
 import { AddressForm } from '../AddressForm'
@@ -154,14 +156,19 @@ export const BusinessesListing = (props) => {
 
   return (
     <BusinessContainer>
-      <BusinessTypeFilter
-        ordering={props.ordering}
-        handleChangeBusinessType={handleChangeBusinessType}
-      />
+      {!businessesList.loading && businessesList.businesses.length > 0 && (
+        <BusinessTypeFilter
+          ordering={props.ordering}
+          handleChangeBusinessType={handleChangeBusinessType}
+        />
+      )}
       <BusinessList>
         {
           !businessesList.loading && !businessTypeSelected && businessesList.businesses.length === 0 && (
             <NotFoundBusinesses>
+              <div className='image'>
+                <img src={noBusinesses} alt='noBusinesses' />
+              </div>
               <h1>{t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change address.')}</h1>
               <div>
                 <Button
