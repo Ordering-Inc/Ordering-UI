@@ -163,7 +163,7 @@ export const BusinessesListing = (props) => {
         {
           !businessesList.loading && !businessTypeSelected && businessesList.businesses.length === 0 && (
             <NotFoundBusinesses>
-              <h1>No businesses to delivery / pick up at this address, please change address.</h1>
+              <h1>{t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change address.')}</h1>
               <div>
                 <Button
                   outline

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import { VscWarning } from 'react-icons/vsc'
 import {
   useApi,
   useLanguage
@@ -122,8 +121,7 @@ const BusinessProductsListingUI = (props) => {
       {
         !loading && !Object.keys(business).length && (
           <ProductsNotFound>
-            <h1>{t('NOT_FOUND_BUSINESS')}</h1>
-            <VscWarning />
+            <h1>{t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}</h1>
           </ProductsNotFound>
         )
       }
