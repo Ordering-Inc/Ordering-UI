@@ -4,6 +4,7 @@ import { AddressList } from '../AddressList'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
 import { AddressForm } from '../AddressForm'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 
 export const AddressesPopover = (props) => {
   const { open } = props
@@ -54,7 +55,9 @@ export const AddressesPopover = (props) => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>{orderState.options?.address?.address || t('SELECT_AN_ADDRESS', 'Select an address')}</HeaderItem>
+      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+        <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
+      </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         {
           userState.auth && (
