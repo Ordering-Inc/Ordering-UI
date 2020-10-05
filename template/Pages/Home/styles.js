@@ -50,6 +50,7 @@ export const HomeTitle = styled.div`
   h1 {
     text-align: center;
     font: normal normal normal 45px/79px Lobster;
+    font-family: Lobster;
     letter-spacing: 0px;
     color: #263238;
     font-weight: bold;

@@ -18,6 +18,7 @@ import { AddressList } from '../AddressList'
 import { useSession, useOrder, useLanguage } from 'ordering-components'
 
 import locationIcon from '../../../template/assets/input-location-icon.svg'
+import homeBusiness from '../../../template/assets/homeBusiness.png'
 import { Alert } from '../Confirm'
 
 export const HomeHero = (props) => {
@@ -53,7 +54,7 @@ export const HomeHero = (props) => {
   }, [])
 
   return (
-    <HeroContainer>
+    <HeroContainer bgimage={homeBusiness}>
       <ContentWrapper>
         <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
         <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
