@@ -122,7 +122,7 @@ const ProductOptionsUI = (props) => {
           </ProductComment>
         </ProductEdition>
         <ProductActions>
-          {productCart && (
+          {productCart && !isSoldOut && maxProductQuantity && (
             <div>
               <Button
                 className={`incdec ${(isSoldOut || productCart.quantity === 1) ? 'disabled' : ''}`}

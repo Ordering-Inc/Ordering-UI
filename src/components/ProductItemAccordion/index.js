@@ -189,13 +189,16 @@ export const ProductItemAccordion = (props) => {
           </ProductActions>
         )}
         {productInfo().ingredients.length > 0 && (
-          <ul>
-            {productInfo().ingredients.map(ingredient => (
-              <li key={ingredient.id}>
-                <span>{ingredient.name}</span>
-              </li>
-            ))}
-          </ul>
+          <>
+            <span>{t('INGREDIENTS', 'Ingredients')}</span>
+            <ul>
+              {productInfo().ingredients.map(ingredient => (
+                <li key={ingredient.id}>
+                  <span>{ingredient.name}</span>
+                </li>
+              ))}
+            </ul>
+          </>
         )}
         {productInfo().options.length > 0 && (
           <ul>

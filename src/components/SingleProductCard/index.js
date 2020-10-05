@@ -28,7 +28,8 @@ export const SingleProductCard = (props) => {
 
   const removeToBalance = editMode ? product.quantity : 0
   const cart = orderState.carts[`businessId:${businessId}`]
-  const totalBalance = (cart?.quantity || 0) - removeToBalance
+  const productCart = cart?.products?.find(prod => prod.id === product.id)
+  const totalBalance = (productCart?.quantity || 0) - removeToBalance
 
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 

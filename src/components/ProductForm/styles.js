@@ -138,6 +138,8 @@ export const ProductActions = styled.div`
 
   button.disabled {
     opacity: 0.5;
+    width: 100%;
+    cursor: not-allowed;
   }
 
   @media (max-width: 720px) {

@@ -23,6 +23,7 @@ export const CardContainer = styled.div`
 `
 
 export const SoldOut = styled.span`
+  font-weight: bold;
   position: absolute;
   background: #D6D6D6 0% 0% no-repeat padding-box;
   border-radius: 23px;
