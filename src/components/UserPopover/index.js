@@ -81,7 +81,7 @@ const LogoutActionUI = (props) => {
   )
 }
 
-const PopoverListItemLogout = (props) => {
+const PopoverListItemLogout = () => {
   const logoutActionProps = {
     UIComponent: LogoutActionUI
   }

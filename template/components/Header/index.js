@@ -14,6 +14,7 @@ import { AddressesPopover } from '../../../src/components/AddressesPopover'
 import { UserPopover } from '../../../src/components/UserPopover'
 import { MomentPopover } from '../../../src/components/MomentPopover'
 import { CartPopover } from '../../../src/components/CartPopover'
+import { OrderTypeSelectorHeader } from '../../../src/components/OrderTypeSelectorHeader'
 
 export const Header = (props) => {
   const location = useLocation()
@@ -47,6 +48,9 @@ export const Header = (props) => {
               <img src={isHome ? logoHeaderInvert : logoHeader} />
             </Link>
           </LogoHeader>
+          <Menu>
+            <OrderTypeSelectorHeader />
+          </Menu>
         </LeftHeader>
         <RightHeader>
           <Menu>
