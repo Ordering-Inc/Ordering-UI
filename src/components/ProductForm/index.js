@@ -7,7 +7,7 @@ import {
 } from 'ordering-components'
 
 import { formatPrice, scrollTo } from '../../utils'
-import { useWindowSize } from '../../utils/useWindowSize'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
