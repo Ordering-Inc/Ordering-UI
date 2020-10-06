@@ -69,6 +69,7 @@ export const StepsBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-end;
   margin-top: 15px;
   div {
     display: flex;
@@ -82,6 +83,27 @@ export const StepsBlock = styled.div`
       font-weight: normal;
       text-align: center;
     }
+  }
+  .line::after{
+    content: '';
+    position: absolute;
+    border: 2px solid red;
+    transform: translateY(-50%);
+    right: 100%;
+    border-radius: 50%
+  }
+  .line::before{
+    content: '';
+    position: absolute;
+    border: 2px solid red;
+    left: 100%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+  }
+  .line{
+    position: relative;
+    border: 1px solid red;
+    align-self: center;
   }
   @media (max-width: 1042px) {
     div {
@@ -133,7 +155,7 @@ export const ImageContent = styled.div`
   div {
     display: flex;
     justify-content: center;
-    max-height: 300px;
+    max-height: 400px;
     max-width:100%;
     img {
       width: auto;
@@ -231,7 +253,7 @@ export const Icons = styled.div`
     margin: 0px 10px
   }
   svg {
-    font-size: 40px;
+    font-size: 4em;
     fill: #D81212;
   }
 `
