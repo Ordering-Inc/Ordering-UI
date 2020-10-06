@@ -6,7 +6,7 @@ import {
 } from './styles'
 
 import { useSession, useLanguage } from 'ordering-components'
-import { useWindowSize } from '../../../src/utils/useWindowSize'
+import { useWindowSize } from '../../../src/hooks/useWindowSize'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
