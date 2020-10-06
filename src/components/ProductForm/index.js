@@ -6,7 +6,8 @@ import {
   useOrder
 } from 'ordering-components'
 
-import { formatPrice } from '../../utils'
+import { formatPrice, scrollTo } from '../../utils'
+import { useWindowSize } from '../../utils/useWindowSize'
 
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
@@ -43,6 +44,7 @@ const ProductOptionsUI = (props) => {
     handleChangeSuboptionState
   } = props
 
+  const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -58,8 +60,20 @@ const ProductOptionsUI = (props) => {
     }
   }
 
+  const handleSaveProduct = () => {
+    const isErrors = Object.values(errors).length > 0
+    if (!isErrors) {
+      handleSave && handleSave()
+      return
+    }
+    const myElement = document.getElementsByClassName('error')[0]
+    const container = document.getElementById('product_edition')
+    const topPos = myElement.offsetTop - (windowSize.width > 1200 ? 106 : 40)
+    scrollTo(container, topPos, 1250)
+  }
+
   return (
-    <ProductContainer>
+    <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
       <WrapperImage>
         <ProductImage bgimage={product?.images} />
       </WrapperImage>
@@ -68,7 +82,7 @@ const ProductOptionsUI = (props) => {
           <h1>{product?.name}</h1>
           {product?.description && <p>{product?.description}</p>}
         </div>
-        <ProductEdition>
+        <ProductEdition id={`${windowSize.width > 1200 && 'product_edition'}`}>
           {product?.ingredients.length > 0 && (<SectionTitle>Ingredients</SectionTitle>)}
           {product?.ingredients.map(ingredient => (
             <ProductIngredient
@@ -82,7 +96,7 @@ const ProductOptionsUI = (props) => {
             product?.extras.map(extra => extra.options.map(option => {
               const currentState = productCart.options[`id:${option.id}`] || {}
               return (
-                <div key={option.id}>
+                <div key={option.id} className={`${errors[`id:${option.id}`] && 'error'}`}>
                   {
                     showOption(option) && (
                       <ProductOption
@@ -145,10 +159,10 @@ const ProductOptionsUI = (props) => {
 
           {productCart && !isSoldOut && maxProductQuantity && auth ? (
             <Button
-              className='add'
+              className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
               color='primary'
-              onClick={handleSave}
-              disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
+              onClick={() => handleSaveProduct()}
+              // disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
             >
               {orderState.loading ? (
                 <span>Loading...</span>
