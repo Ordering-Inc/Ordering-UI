@@ -47,10 +47,9 @@ export const HomeSection = styled.div`
 
 export const HomeTitle = styled.div`
   width: 100%;
-  h1 {
+  h2 {
     text-align: center;
     font: normal normal normal 45px/79px Lobster;
-    font-family: Lobster;
     letter-spacing: 0px;
     color: #263238;
     font-weight: bold;
@@ -59,7 +58,7 @@ export const HomeTitle = styled.div`
     color: #D81212;
   }
   @media (max-width: 480px) {
-    h1 {
+    h2 {
       font-size: 30px;
       margin: 0px;
     }
@@ -151,6 +150,9 @@ export const ImageContent = styled.div`
 
 export const WrapTextContent = styled.div`
   padding: 20px;
+  h2{
+    font: normal normal normal 64px/80px Lobster;
+  }
   div {
     padding: 0px 70px;
   }
@@ -167,7 +169,7 @@ export const TextContent = styled.div`
   justify-content: center;
   width: 50%;
   div {
-    h1 > span {
+    h2 > span {
       color: #D81212;
     }
   }
@@ -179,7 +181,7 @@ export const TextContent = styled.div`
     height: 100%;
     width: 100%;
 
-    h1 {
+    h2 {
       font-size: 70px;
       color: #FFF;
     }
@@ -200,13 +202,13 @@ export const TextContent = styled.div`
     width: 100%;
     text-align: center;
     &.center {
-      h1 {
+      h2 {
         font-size: 45px;
       }
     }
   }
   @media (max-width: 480px) {
-    h1 {
+    h2 {
       font-size: 20px;
     }
     div {
@@ -214,7 +216,7 @@ export const TextContent = styled.div`
       margin-top: 25px;
     }
     &.center {
-      h1 {
+      h2 {
         font-size: 24px;
         text-align: center;
       }
@@ -232,4 +234,7 @@ export const Icons = styled.div`
     font-size: 40px;
     fill: #D81212;
   }
+`
+export const HomeFooter = styled.div`
+  font: normal normal normal 128px/160px Lobster;
 `

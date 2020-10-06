@@ -14,7 +14,8 @@ import {
   ImageContent,
   WrapTextContent,
   TextContent,
-  Icons
+  Icons,
+  HomeFooter
 } from './styles'
 
 import locationSvg from '../../../template/assets/location-icon.svg'
@@ -26,13 +27,14 @@ import socialMedia from '../../../template/assets/social-media.png'
 import foodBg from '../../../template/assets/food-bg.png'
 
 export const HomePage = (props) => {
+  const { FontHomeTheme } = props
+  const fontName = 'Lobster'
+
   const history = useHistory()
 
   const handlerFindBusiness = () => {
     history.push('/search')
   }
-
- 
 
   return (
     <HomeContainer>
@@ -40,12 +42,11 @@ export const HomePage = (props) => {
         {...props}
         onFindBusiness={handlerFindBusiness}
       />
-
       <HomeSection bgColor='#F8F8F8' column>
         <HomeTitle>
-          <h1>
+          <h2>
             Steps to place <span>an order</span>
-          </h1>
+          </h2>
         </HomeTitle>
         <StepsBlock>
           <div>
@@ -66,7 +67,6 @@ export const HomePage = (props) => {
           </div>
         </StepsBlock>
       </HomeSection>
-
       <HomeSection>
         <ImageContent>
           <div>
@@ -76,7 +76,9 @@ export const HomePage = (props) => {
         <TextContent>
           <WrapTextContent>
             <div>
-              <h1>We deliver more than <span>food</span></h1>
+              <FontHomeTheme fontName={fontName}>
+                <h2>We deliver more than <span>food</span></h2>
+              </FontHomeTheme>
               <p>With the largest on-demand network in the industry, you can explore your city, find its hidden hotspots, and watch as we bring your new favorite right to your door.</p>
               <p>Download the app for iOS or Android for free.</p>
             </div>
@@ -88,7 +90,9 @@ export const HomePage = (props) => {
         <TextContent>
           <WrapTextContent>
             <div>
-              <h1>Download <span>our apps</span></h1>
+              <FontHomeTheme fontName={fontName}>
+                <h2>Download <span>our apps</span></h2>
+              </FontHomeTheme>
               <p>The best ordering experience on your smartphone.</p>
               <p>For speedy ordering and delivery updates, get the apps now.</p>
             </div>
@@ -104,17 +108,18 @@ export const HomePage = (props) => {
           </div>
         </ImageContent>
       </HomeSection>
-
       <HomeSection bgimage={foodBg}>
         <TextContent className='center'>
-          <div>
-            <h1>Something for everyone</h1>
+          <HomeFooter>
+            <FontHomeTheme fontName={fontName}>
+              <h2>Something for everyone</h2>
+            </FontHomeTheme>
             <div>
               <Button color='primary'>
                 View Menu
               </Button>
             </div>
-          </div>
+          </HomeFooter>
         </TextContent>
       </HomeSection>
     </HomeContainer>

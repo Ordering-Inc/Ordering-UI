@@ -75,6 +75,27 @@ const FontTheme = ({ fontName, children }) => {
   return children
 }
 
+const FontHomeTheme = ({ fontName, children }) => {
+  useEffect(() => {
+    if (window.document.getElementById('theme-font-home-title')) {
+      return
+    }
+
+    const fontTheme = window.document.createElement('link')
+    fontTheme.id = 'theme-font-home-title'
+    fontTheme.rel = 'stylesheet'
+    fontTheme.async = true
+    fontTheme.defer = true
+    fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
+
+    window.document.body.appendChild(fontTheme)
+    // return () => {
+    //   fontTheme.remove()
+    // }
+  }, [])
+  return children
+}
+
 export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
@@ -142,7 +163,7 @@ export const Router = () => {
               <ScrollToTop>
                 <Switch>
                   <Route exact path='/home'>
-                    <HomePage />
+                    <HomePage FontHomeTheme={FontHomeTheme}/>
                     {/* {
                             orderStatus.options?.address?.location
                               ? <Redirect to='/search' />
@@ -153,7 +174,7 @@ export const Router = () => {
                     {
                             orderStatus.options?.address?.location
                               ? <Redirect to='/search' />
-                              : <HomePage />
+                              : <HomePage FontHomeTheme={FontHomeTheme}/>
                     }
                   </Route>
                   <Route exact path='/signup'>

@@ -23,7 +23,8 @@ import { Alert } from '../Confirm'
 
 export const HomeHero = (props) => {
   const {
-    onFindBusiness
+    onFindBusiness,
+    FontHomeTheme
   } = props
 
   const [{ auth }] = useSession()
@@ -32,27 +33,6 @@ export const HomeHero = (props) => {
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const fontName = 'Lobster'
-
-  const FontTheme = ({ fontName, children }) => {
-    useEffect(() => {
-      if (window.document.getElementById('theme-font-home-title')) {
-        return
-      }
-
-      const fontTheme = window.document.createElement('link')
-      fontTheme.id = 'theme-font-home-title'
-      fontTheme.rel = 'stylesheet'
-      fontTheme.async = true
-      fontTheme.defer = true
-      fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
-
-      window.document.body.appendChild(fontTheme)
-      // return () => {
-      //   fontTheme.remove()
-      // }
-    }, [])
-    return children
-  }
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -78,10 +58,10 @@ export const HomeHero = (props) => {
   return (
     <HeroContainer bgimage={homeBusiness}>
       <ContentWrapper>
-        <FontTheme fontName={fontName}>
+        <FontHomeTheme fontName={fontName}>
           <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
           <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
-        </FontTheme>
+        </FontHomeTheme>
         <WrapInput onClick={handleAddressInput} withIcon={locationIcon}>
           <Input type='text' disabled placeholder={orderState?.options?.address?.address || t('TYPE_ADDRESS', 'Type address')} />
         </WrapInput>
@@ -106,7 +86,6 @@ export const HomeHero = (props) => {
           onSaveAddress={() => setModals({ ...modals, formOpen: false })}
         />
       </Modal>
-
       <Modal
         title={t('ADDRESSES')}
         open={modals.listOpen}
