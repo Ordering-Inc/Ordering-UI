@@ -110,7 +110,7 @@ const CartUI = (props) => {
                   <td>{formatPrice(cart?.delivery_price || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Driver tips (0%)</td>
+                  <td>Driver tips ({cart?.driver_tip_rate}%)</td>
                   <td>{formatPrice(cart?.driver_tip || 0)}</td>
                 </tr>
                 <tr>

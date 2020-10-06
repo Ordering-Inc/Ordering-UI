@@ -46,7 +46,8 @@ export const CartPopover = (props) => {
     if (!open) return
     const outsidePopover = !popperElement.current?.contains(e.target)
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
-    if (outsidePopover && outsidePopoverMenu) {
+    const outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target)
+    if (outsidePopover && outsidePopoverMenu && outsideModal) {
       props.onClose && props.onClose()
     }
   }
