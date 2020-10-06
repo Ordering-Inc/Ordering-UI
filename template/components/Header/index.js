@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import {
-  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink
+  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink,
+  SubMenu
 } from './styles'
 
 import { useSession, useLanguage } from 'ordering-components'
@@ -97,7 +98,7 @@ export const Header = (props) => {
         </RightHeader>
       </InnerHeader>
       {windowSize.width <= 820 && (
-        <InnerHeader className='sub-menu'>
+        <SubMenu>
           <MomentPopover
             open={openPopover.moment}
             onClick={() => handleTogglePopover('moment')}
@@ -108,7 +109,7 @@ export const Header = (props) => {
             onClick={() => handleTogglePopover('addresses')}
             onClose={() => handleClosePopover('addresses')}
           />
-        </InnerHeader>
+        </SubMenu>
       )}
     </HeaderType>
   )

@@ -15,17 +15,8 @@ export const Header = styled.div`
   display: flex;
   width: 100%;
 
-  .sub-menu {
-    display: none;
-  }
-
   @media (max-width: 820px) {
     flex-direction: column;
-    .sub-menu{
-      display: flex;
-      justify-content: space-around;
-      margin: 0px;
-    }
   }
 `
 
@@ -124,5 +115,15 @@ export const HeaderInvert = styled(Header)`
 
   & ${MenuLink} {
     color: #FFF;
+  }
+`
+
+export const SubMenu = styled(InnerHeader)`
+  display: none;
+
+  @media (max-width: 820px) {
+    display: flex;
+    justify-content: space-around;
+    margin: 0px;
   }
 `
