@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 export const ProductContainer = styled.div`
   display: flex;
-  height: 100%;
+  height: 80vh;
   padding: 10px 0px;
   padding-left: 15px;
-  max-height: calc(100vh - 40px);
+
   @media (max-width: 1200px) {
     flex-wrap: wrap;
     overflow: auto;
@@ -16,12 +16,10 @@ export const ProductContainer = styled.div`
 export const WrapperImage = styled.div`
   width: calc(50% - 10px);
   border-radius: 16px;
-  /*margin-right: 10px;*/
 
   @media (max-width: 1200px) {
     height: 300px;
     width: 100%;
-    /*margin-bottom: 10px;*/
   }
 `
 
@@ -84,6 +82,9 @@ export const ProductInfo = styled.div`
 
 export const ProductEdition = styled.div`
   overflow: auto;
+  .error {
+    background-color: #FFC917;
+  }
 `
 
 export const SectionTitle = styled.h3`
@@ -128,9 +129,9 @@ export const ProductActions = styled.div`
     }
   }
 
-  button:disabled {
+  button:disabled,
+  button.disabled {
     opacity: 0.5;
-    cursor: not-allowed;
   }
 
   button.add {
