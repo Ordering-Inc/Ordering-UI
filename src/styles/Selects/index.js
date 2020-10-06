@@ -66,6 +66,12 @@ export const Selected = styled.div`
     display: flex;
     margin-left: 7px;
   }
+
+  @media (max-width: 380px) {
+    padding-left: 9px;
+    padding-right: 9px;
+    font-size: 13px;
+  }
 `
 
 export const Select = styled.div`

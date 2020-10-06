@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import { useLocation, Link } from 'react-router-dom'
 import {
   Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink
 } from './styles'
 
-import { useLocation, Link } from 'react-router-dom'
-
 import { useSession, useLanguage } from 'ordering-components'
+import { useWindowSize } from '../../../src/utils/useWindowSize'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
@@ -36,6 +36,8 @@ export const Header = (props) => {
       [type]: false
     })
   }
+
+  const windowSize = useWindowSize()
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
@@ -94,18 +96,20 @@ export const Header = (props) => {
           </Menu>
         </RightHeader>
       </InnerHeader>
-      <InnerHeader className='sub-menu'>
-        <MomentPopover
-          open={openPopover.moment}
-          onClick={() => handleTogglePopover('moment')}
-          onClose={() => handleClosePopover('moment')}
-        />
-        <AddressesPopover
-          open={openPopover.addresses}
-          onClick={() => handleTogglePopover('addresses')}
-          onClose={() => handleClosePopover('addresses')}
-        />
-      </InnerHeader>
+      {windowSize.width <= 820 && (
+        <InnerHeader className='sub-menu'>
+          <MomentPopover
+            open={openPopover.moment}
+            onClick={() => handleTogglePopover('moment')}
+            onClose={() => handleClosePopover('moment')}
+          />
+          <AddressesPopover
+            open={openPopover.addresses}
+            onClick={() => handleTogglePopover('addresses')}
+            onClose={() => handleClosePopover('addresses')}
+          />
+        </InnerHeader>
+      )}
     </HeaderType>
   )
 }
