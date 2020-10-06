@@ -60,7 +60,7 @@ export const MomentPopover = (props) => {
   }
 
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <div className='moment-popover' style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
         <FaRegClock /> {isADateValid(orderStatus.options?.moment) || t('ASAP', 'ASAP')}
       </HeaderItem>

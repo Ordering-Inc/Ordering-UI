@@ -14,7 +14,19 @@ const theme = {
 export const Header = styled.div`
   display: flex;
   width: 100%;
-  /* background-color: #333; */
+
+  .sub-menu {
+    display: none;
+  }
+
+  @media (max-width: 820px) {
+    flex-direction: column;
+    .sub-menu{
+      display: flex;
+      justify-content: space-around;
+      margin: 0px;
+    }
+  }
 `
 
 export const InnerHeader = styled.div`
@@ -22,12 +34,28 @@ export const InnerHeader = styled.div`
   width: 100%;
   color: #FFF;
   justify-content: space-between;
+  width: 98%;
+  margin: 20px auto 10px;
 `
+
 export const LogoHeader = styled.div`
   img {
     height: 45px;
     margin: 0;
     vertical-align: middle;
+  }
+
+  img:nth-child(2) {
+    display: none;
+  }
+
+  @media (max-width: 576px) {
+    img:nth-child(1) {
+      display: none;
+    }
+    img:nth-child(2) {
+      display: block;
+    }
   }
 `
 
@@ -56,8 +84,12 @@ export const Menu = styled.div`
   > :last-child {
     margin-right: 10px;
   }
-  @media (max-width: 410px) {
-    display: none
+
+  @media (max-width: 820px) {
+    .moment-popover,
+    .address-popover {
+      display: none;
+    }
   }
 `
 

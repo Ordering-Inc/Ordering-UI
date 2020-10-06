@@ -9,6 +9,7 @@ import { useSession, useLanguage } from 'ordering-components'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
+import logo from '../../assets/images/logo.svg'
 import { LanguageSelector } from '../../../src/components/LanguageSelector'
 import { AddressesPopover } from '../../../src/components/AddressesPopover'
 import { UserPopover } from '../../../src/components/UserPopover'
@@ -46,6 +47,7 @@ export const Header = (props) => {
           <LogoHeader>
             <Link to='/'>
               <img src={isHome ? logoHeaderInvert : logoHeader} />
+              <img src={logo} />
             </Link>
           </LogoHeader>
           <Menu>
@@ -91,6 +93,18 @@ export const Header = (props) => {
             <LanguageSelector />
           </Menu>
         </RightHeader>
+      </InnerHeader>
+      <InnerHeader className='sub-menu'>
+        <MomentPopover
+          open={openPopover.moment}
+          onClick={() => handleTogglePopover('moment')}
+          onClose={() => handleClosePopover('moment')}
+        />
+        <AddressesPopover
+          open={openPopover.addresses}
+          onClick={() => handleTogglePopover('addresses')}
+          onClose={() => handleClosePopover('addresses')}
+        />
       </InnerHeader>
     </HeaderType>
   )
