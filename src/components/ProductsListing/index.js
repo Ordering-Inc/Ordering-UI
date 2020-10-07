@@ -124,9 +124,10 @@ export const ProductsListing = (props) => {
           .products(productId)
           .parameters(parameters)
           .get({ cancelToken: source.token })
+        const product = Array.isArray(result) ? null : result
         setProductModal({
           ...productModal,
-          product: result,
+          product,
           loading: false
         })
       } catch (e) {
