@@ -1,7 +1,9 @@
 import React from 'react'
+import Skeleton from 'react-loading-skeleton'
+
 import { BusinessReviews as BusinessReviewController, useLanguage } from 'ordering-components'
 
-import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv } from './styles'
+import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv, SkeletonContainer } from './styles'
 import { Select } from '../../styles/Select'
 
 import { AiOutlineStar, AiOutlineCalendar } from 'react-icons/ai'
@@ -16,45 +18,61 @@ const Score = ({ star, text }) => (
 export const BusinessReviewsUI = (props) => {
   const { businessName, stars, reviewsList, handleClickOption } = props
   const [, t] = useLanguage()
-  const puntajes = [1, 2, 3, 4, 5]
-  const _options = reviewsList.loading ? [] : puntajes.map(puntaje => {
+  const values = [1, 2, 3, 4, 5]
+  const options = reviewsList.loading ? [] : values.map(value => {
     return {
-      value: puntaje,
-      content: puntaje,
-      showOnSelected: puntaje
+      value: value,
+      content: value,
+      showOnSelected: value
     }
   })
   return (
     <>
-      {!reviewsList.loading ? (
-        <>
-          <ReviewOf>
-            <h3>Reviews of {businessName}</h3>
-            <Select options={_options} defaultValue={puntajes[puntajes.length - 1]} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} />
-          </ReviewOf>
-          <Content>
-            <h3><AiOutlineStar color='#D81212' />{stars}</h3>
-            {reviewsList?.reviews.map((review) => (
-              <ReviewContainer key={review.id}>
-                <Comments>
+      <>
+        <ReviewOf>
+          {!reviewsList.loading ? <h3>Reviews of {businessName}</h3> : <Skeleton width={200} />}
+          {!reviewsList.loading ? <Select options={options} defaultValue={options[options.length - 1]?.showOnSelected} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} /> : <Skeleton width={200} height={30} />}
+        </ReviewOf>
+        <Content>
+          <h3>{!reviewsList.loading ? <><AiOutlineStar color='#D81212' />{stars}</> : <Skeleton width={100} height={30} />}</h3>
+          {!reviewsList.loading ? reviewsList?.reviews.map((review) => (
+            <ReviewContainer key={review.id}>
+              <Comments>
+                <div>
+                  <p><AiOutlineStar color='#D81212' /> {review.total}</p>
+                </div>
+                <Comment>
+                  <p title={review.comment}>{review.comment}</p>
+                </Comment>
+              </Comments>
+              <Scores>
+                <Score star={review.quality} text={t('QUALITY_OF_PRODUCTS', 'Quality of products')} />
+                <Score star={review.delivery} text={t('PUNCTUALITY', 'Punctuality')} />
+                <Score star={review.service} text={t('SERVICE', 'Service')} />
+                <Score star={review.package} text={t('PRODUCT_PACKAGING', 'Product Packaging')} />
+              </Scores>
+            </ReviewContainer>
+          )) : (
+            <>
+              {[...Array(2)].map((item, i) => (
+                <SkeletonContainer key={i}>
                   <div>
-                    <p><AiOutlineStar color='#D81212' /> {review.total}</p>
+                    <Skeleton width={100} height={30} />
+                    <Skeleton width={100} />
+                    <Skeleton width={100} />
                   </div>
-                  <Comment>
-                    <p title={review.comment}>{review.comment}</p>
-                  </Comment>
-                </Comments>
-                <Scores>
-                  <Score star={review.quality} text={t('QUALITY_OF_PRODUCTS', 'Quality of products')} />
-                  <Score star={review.delivery} text={t('PUNCTUALITY', 'Punctuality')} />
-                  <Score star={review.service} text={t('SERVICE', 'Service')} />
-                  <Score star={review.package} text={t('PRODUCT_PACKAGING', 'Product Packaging')} />
-                </Scores>
-              </ReviewContainer>
-            ))}
-          </Content>
-        </>
-      ) : 'loading'}
+                  <div>
+                    <Skeleton width={150} height={50} />
+                    <Skeleton width={150} height={50} />
+                    <Skeleton width={150} height={50} />
+                    <Skeleton width={150} height={50} />
+                  </div>
+                </SkeletonContainer>
+              ))}
+            </>
+          )}
+        </Content>
+      </>
     </>
   )
 }
