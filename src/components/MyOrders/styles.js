@@ -69,6 +69,7 @@ export const BusinessInformation = styled.div`
   > p {
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
+    color : #9A9A9A;
   }
   a{
     text-decoration: none;
@@ -117,6 +118,8 @@ export const OrdersPast = styled.div`
   p{
     margin-block-end: 0;
     margin-block-start: 0;
+    color: #9A9A9A
+
   }
 `
 export const IndividualOrderPast = styled.div`
