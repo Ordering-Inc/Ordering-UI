@@ -7,6 +7,9 @@ export const ProductsListing = (props) => {
   console.log('Move ProductsListing to ordering-componenets')
   const {
     slug,
+    categoryId,
+    productId,
+    isInitialRender,
     ordering,
     businessProps,
     UIComponent
@@ -20,6 +23,7 @@ export const ProductsListing = (props) => {
   const [categoriesState, setCategoriesState] = useState({})
   const [orderOptions, setOrderOptions] = useState()
   const [requestsState, setRequestsState] = useState({})
+  const [productModal, setProductModal] = useState({ product: null, loading: false, error: null })
 
   const categoryStateDefault = {
     loading: true,
@@ -100,6 +104,46 @@ export const ProductsListing = (props) => {
       }
     }
   }
+
+  const getProduct = async () => {
+    if (categoryId && productId && businessState.business.id) {
+      try {
+        setProductModal({
+          ...productModal,
+          loading: true
+        })
+        const source = CancelToken.source()
+        requestsState.product = source
+        const parameters = {
+          type: orderState.options?.type || 1
+        }
+
+        const { content: { result } } = await ordering
+          .businesses(businessState.business.id)
+          .categories(categoryId)
+          .products(productId)
+          .parameters(parameters)
+          .get({ cancelToken: source.token })
+        setProductModal({
+          ...productModal,
+          product: result,
+          loading: false
+        })
+      } catch (e) {
+        setProductModal({
+          ...productModal,
+          loading: false,
+          error: [e]
+        })
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (isInitialRender) {
+      getProduct()
+    }
+  }, [JSON.stringify(businessState.business?.id)])
 
   const getBusiness = async () => {
     try {
@@ -192,8 +236,10 @@ export const ProductsListing = (props) => {
           categorySelected={categorySelected}
           categoryState={categoryState}
           businessState={businessState}
+          productModal={productModal}
           handleChangeCategory={handleChangeCategory}
           getNextProducts={getProducts}
+          updateProductModal={(val) => setProductModal({ ...productModal, product: val })}
         />
       )}
     </>

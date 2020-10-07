@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import {
   ProductForm as ProductOptions,
   useSession,
@@ -13,6 +14,7 @@ import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
 import { LoginForm } from '../LoginForm'
+import { ProductShare } from '../ProductShare'
 
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
@@ -30,6 +32,7 @@ import {
 
 const ProductOptionsUI = (props) => {
   const {
+    businessSlug,
     editMode,
     isSoldOut,
     product,
@@ -74,6 +77,11 @@ const ProductOptionsUI = (props) => {
 
   return (
     <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
+      <ProductShare
+        slug={businessSlug}
+        categoryId={product.category_id}
+        productId={product.id}
+      />
       <WrapperImage>
         <ProductImage bgimage={product?.images} />
       </WrapperImage>
