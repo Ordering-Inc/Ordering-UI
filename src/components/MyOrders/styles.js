@@ -47,11 +47,11 @@ export const Content = styled.div`
 `
 export const Logo = styled.div`
   width: 20%;
-  height: 100%;
   > img {
     width: 100%;
     height: 100%;
     border-radius: 16px;
+    object-fit: contain;
   }
 `
 export const BusinessInformation = styled.div`
@@ -129,7 +129,8 @@ export const OrderPastContent = styled.div`
   width: 45%;
   align-items: center;
   padding: 10px 0;
- 
+  img{
+  }
 `
 export const Reorder = styled.div`
   display: flex;
@@ -147,4 +148,49 @@ export const Reorder = styled.div`
     margin: 5px 0;
     width: 80%
   }
+`
+
+export const SkeletonOrder = styled.div`
+  text-align: center;
+  display: flex;
+  width: auto;
+`
+
+export const SkeletonCard = styled.div`
+  margin: 20px 10px 20px 10px;
+`
+
+export const SkeletonMap = styled.div`
+  border-radius: 16px;
+`
+
+export const SkeletonContent = styled.div`
+    display: inline-flex;
+    width: 100%;
+    > *{
+      margin: 5px;
+    }
+`
+export const SkeletonText = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left
+`
+
+export const SkeletonOrdersPast = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  > *{
+    margin: 20px 0;
+  }
+`
+
+export const SkeletonReorder = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: center;
+  left: 60%;
 `
