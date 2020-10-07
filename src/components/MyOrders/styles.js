@@ -14,6 +14,9 @@ export const ActiveOrders = styled.div`
   display: flex;
   overflow: auto;
   width: auto;
+  > :first-child {
+    margin-left: 30px;
+  };
 `
 
 export const Card = styled.div`
@@ -154,6 +157,7 @@ export const SkeletonOrder = styled.div`
   text-align: center;
   display: flex;
   width: auto;
+  margin: 0 auto;
 `
 
 export const SkeletonCard = styled.div`
