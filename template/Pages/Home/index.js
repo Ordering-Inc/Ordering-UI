@@ -16,7 +16,8 @@ import {
   WrapTextContent,
   TextContent,
   Icons,
-  HomeFooter
+  HomeFooter,
+  Line
 } from './styles'
 
 import locationSvg from '../../../template/assets/location-icon.svg'
@@ -75,17 +76,17 @@ export const HomePage = (props) => {
             <img src={locationSvg} />
             <h3>{t('ADD_ADDRESS', 'Add Address')}</h3>
           </div>
-          <div className='line' />
+          <Line />
           <div>
             <img src={businessSvg} />
             <h3>{t('SELECT_YOUR_BUSINESS', 'Select your Business')}</h3>
           </div>
-          <div className='line' />
+          <Line />
           <div>
             <img src={productSvg} />
             <h3>{t('CHOOSE_YOUR_PRODUCT', 'Choose your Product')}</h3>
           </div>
-          <div className='line' />
+          <Line />
           <div>
             <img src={deliverySvg} width='88' height='88' />
             <h3>{t('YOUR_PACKAGE_ARRIVES', 'Your package arrives')}</h3>

@@ -84,27 +84,7 @@ export const StepsBlock = styled.div`
       text-align: center;
     }
   }
-  .line::after{
-    content: '';
-    position: absolute;
-    border: 2px solid red;
-    transform: translateY(-50%);
-    right: 100%;
-    border-radius: 50%
-  }
-  .line::before{
-    content: '';
-    position: absolute;
-    border: 2px solid red;
-    left: 100%;
-    transform: translateY(-50%);
-    border-radius: 50%;
-  }
-  .line{
-    position: relative;
-    border: 1px solid red;
-    align-self: center;
-  }
+  
   @media (max-width: 1042px) {
     div {
       width: 100%;
@@ -259,4 +239,26 @@ export const Icons = styled.div`
 `
 export const HomeFooter = styled.div`
   font: normal normal normal 128px/160px Lobster;
+`
+
+export const Line = styled.div`
+    position: relative;
+    border: 1px solid red;
+    align-self: center;
+    &::after{
+      content: '';
+      position: absolute;
+      border: 2px solid red;
+      transform: translateY(-50%);
+      right: 100%;
+      border-radius: 50%
+    }
+    &::before{
+      content: '';
+      position: absolute;
+      border: 2px solid red;
+      left: 100%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+    }
 `
