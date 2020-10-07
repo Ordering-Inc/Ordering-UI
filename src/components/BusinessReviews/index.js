@@ -16,7 +16,7 @@ const Score = ({ star, text }) => (
 export const BusinessReviewsUI = (props) => {
   const { businessName, stars, reviewsList, handleClickOption } = props
 
-  const puntajes = ['All', 1, 2, 3, 4, 5]
+  const puntajes = [1, 2, 3, 4, 5]
   const _options = reviewsList.loading ? [] : puntajes.map(puntaje => {
     return {
       value: puntaje,
@@ -30,17 +30,13 @@ export const BusinessReviewsUI = (props) => {
         <>
           <ReviewOf>
             <h3>Reviews of {businessName}</h3>
-            <Select placeholder='Date' />
-            <Select options={_options} defaultValue={puntajes[0]} onChange={(val) => handleClickOption(val)} />
+            <Select options={_options} defaultValue={puntajes[puntajes.length - 1]} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} />
           </ReviewOf>
           <Content>
             <h3><AiOutlineStar color='#D81212' />{stars}</h3>
             {reviewsList?.reviews.map((review) => (
               <ReviewContainer key={review.id}>
                 <Comments>
-                  <div>
-                    <h4>Nombre?</h4>
-                  </div>
                   <div>
                     <p><AiOutlineStar color='#D81212' /> {review.total}</p>
                   </div>

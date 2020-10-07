@@ -51,6 +51,7 @@ export const Selected = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  flex: 1;
   /* padding-right: 36px; */
 
   -webkit-touch-callout: none;
@@ -66,6 +67,12 @@ export const Selected = styled.div`
     display: flex;
     margin-left: 7px;
   }
+  ${props => props.InitialIcon && css`
+      padding-left: 5px;
+      > svg{
+        padding-right: 5px;
+      }
+  `}
 `
 
 export const Select = styled.div`
@@ -87,10 +94,12 @@ export const Select = styled.div`
 
 export const Chevron = styled.div`
   font-size: 16px;
-
   svg {
     vertical-align: text-top;
   }
+`
+export const TextContent = styled.div`
+  flex: 1;
 `
 
 export const SelectImage = styled.div`

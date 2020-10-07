@@ -7,7 +7,8 @@ import {
   Selected,
   Options,
   Option,
-  Chevron
+  Chevron,
+  TextContent
 } from '../Selects'
 
 export const Select = (props) => {
@@ -15,7 +16,9 @@ export const Select = (props) => {
     placeholder,
     options,
     defaultValue,
-    onChange
+    onChange,
+    notAsync,
+    InitialIcon
   } = props
 
   const [open, setOpen] = useState(false)
@@ -41,9 +44,11 @@ export const Select = (props) => {
   }, [open])
 
   useEffect(() => {
-    const _defaultOption = options?.find(option => option.value === defaultValue)
-    setSelectedOption(_defaultOption)
-    setValue(defaultValue)
+    if (!notAsync) {
+      const _defaultOption = options?.find(option => option.value === defaultValue)
+      setSelectedOption(_defaultOption)
+      setValue(defaultValue)
+    }
   }, [defaultValue, options])
 
   const handleChangeOption = (option) => {
@@ -58,7 +63,7 @@ export const Select = (props) => {
         !selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>
       }
       {
-        selectedOption && <Selected>{selectedOption.showOnSelected || selectedOption.content}<Chevron><BsChevronDown /></Chevron></Selected>
+        selectedOption && <Selected InitialIcon={InitialIcon}>{InitialIcon && <InitialIcon />} <TextContent>{selectedOption.showOnSelected || selectedOption.content}</TextContent> <Chevron><BsChevronDown /></Chevron></Selected>
       }
       {
         open && options && (
