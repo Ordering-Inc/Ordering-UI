@@ -230,16 +230,13 @@ export const Router = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
-                  <Route exact path='/checkout'>
-                    Checkout
-                  </Route>
                   <Route exact path='/order/:orderId'>
                     <Order />
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     <OrderDetailsPage />
                   </Route>
-                  <Route exact path='/checkout/:cartUuid'>
+                  <Route path='/checkout/:cartUuid?'>
                     <CheckoutPage />
                   </Route>
                   <Route exact path='/upselling_page'>

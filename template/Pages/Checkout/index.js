@@ -53,6 +53,12 @@ export const CheckoutPage = (props) => {
     },
     handleOrderRedirect: (uuid) => {
       history.push(`/orders/${uuid}`)
+    },
+    handleCheckoutRedirect: (uuid) => {
+      history.push(`/checkout/${uuid}`)
+    },
+    handleSearchRedirect: () => {
+      history.push('/search')
     }
   }
   return (

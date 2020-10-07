@@ -6,7 +6,7 @@ export const BusinessProductsList = (props) => {
   const { store } = useParams()
   const history = useHistory()
 
-  const businessProductsListingProps = {
+  const businessProductsProps = {
     ...props,
     store,
     productRedirect: ({ slug, category, product }) => {
@@ -14,10 +14,13 @@ export const BusinessProductsList = (props) => {
         return history.push(`/store/${slug}`)
       }
       return history.push(`/store/${slug}?category=${category}&product=${product}`)
+    },
+    handleSearchRedirect: () => {
+      history.push('/search')
     }
   }
 
   return (
-    <BusinessProductsListing {...businessProductsListingProps} />
+    <BusinessProductsListing {...businessProductsProps} />
   )
 }

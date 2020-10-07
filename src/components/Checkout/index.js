@@ -11,10 +11,21 @@ import {
   DriverTipContainer,
   CartContainer,
   WrapperPlaceOrderButton,
-  WarningMessage
+  WarningMessage,
+  NotFound,
+  NotFoundImage,
+  CartsList,
+  CartItem,
+  CartItemWrapper,
+  LogoWrapper,
+  CartItemLogo,
+  CartItemInfo,
+  CartItemActions
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
+
+import { NotFoundSource } from '../NotFoundSource'
 
 import { AddressDetails } from '../AddressDetails'
 import { UserDetails } from '../UserDetails'
@@ -22,7 +33,7 @@ import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 
-import { DriverTipsOptions } from '../../utils'
+import { DriverTipsOptions, formatPrice } from '../../utils'
 
 const CheckoutUI = (props) => {
   const {
@@ -167,12 +178,6 @@ const CheckoutUI = (props) => {
             </Button>
           </WrapperPlaceOrderButton>
         )}
-
-        {/* {error && error?.length > 0 && (
-          error.map((e, i) => (
-            <p key={i}>ERROR: [{e}]</p>
-          ))
-        )} */}
       </WrappContainer>
     </Container>
   )
@@ -182,35 +187,46 @@ export const Checkout = (props) => {
   const {
     query,
     cartUuid,
-    handleOrderRedirect
+    handleOrderRedirect,
+    handleCheckoutRedirect,
+    handleSearchRedirect
   } = props
 
-  const [, { confirmCart }] = useOrder()
+  const [{ carts }, { confirmCart }] = useOrder()
   const [{ token }] = useSession()
   const [ordering] = useApi()
+  const [, t] = useLanguage()
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
 
   const getOrder = async (cartId) => {
-    setCartState({ ...cartState, loading: true })
-    const response = await fetch(`${ordering.root}/carts/${cartId}`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
-    const { error, result } = await response.json()
+    try {
+      setCartState({ ...cartState, loading: true })
+      const response = await fetch(`${ordering.root}/carts/${cartId}`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
+      const { result } = await response.json()
 
-    if (result.status === 1 && result.order?.uuid) {
-      handleOrderRedirect(result.order.uuid)
-      setCartState({ ...cartState, loading: false })
-    } else if (result.status === 2 && result.paymethod_data.gateway === 'stripe_redirect' && query.get('payment_intent')) {
-      try {
-        await confirmCart(cartUuid)
+      if (result.status === 1 && result.order?.uuid) {
         handleOrderRedirect(result.order.uuid)
-      } catch (error) {
-        console.log(error)
+        setCartState({ ...cartState, loading: false })
+      } else if (result.status === 2 && result.paymethod_data.gateway === 'stripe_redirect' && query.get('payment_intent')) {
+        try {
+          await confirmCart(cartUuid)
+          handleOrderRedirect(result.order.uuid)
+        } catch (error) {
+          console.log(error)
+        }
+      } else {
+        setCartState({
+          ...cartState,
+          loading: false,
+          cart: result
+        })
       }
-    } else {
+    } catch (e) {
       setCartState({
         ...cartState,
         loading: false,
-        cart: result
+        error: [e.toString()]
       })
     }
   }
@@ -228,6 +244,49 @@ export const Checkout = (props) => {
     businessId: cartState.cart?.business_id
   }
   return (
-    <CheckoutController {...checkoutProps} />
+    <>
+      {!cartUuid && carts && Object.keys(carts).length === 0 && (
+        <NotFoundSource
+          content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
+          btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+          onClickButton={handleSearchRedirect}
+        />
+      )}
+      {!cartUuid && carts && Object.values(carts).length > 0 && (
+        <CartsList>
+          {Object.values(carts).map(cart => (
+            <CartItem
+              key={cart.uuid}
+            >
+              <CartItemWrapper>
+                <LogoWrapper>
+                  <CartItemLogo bgimage={cart?.business?.logo} />
+                </LogoWrapper>
+                <CartItemInfo>
+                  <h1>{cart?.business?.name}</h1>
+                  <p>{formatPrice(cart?.total)}</p>
+                </CartItemInfo>
+              </CartItemWrapper>
+              <CartItemActions>
+                <Button
+                  color='primary'
+                  onClick={() => handleCheckoutRedirect(cart.uuid)}
+                >
+                  Pay
+                </Button>
+              </CartItemActions>
+            </CartItem>
+          ))}
+        </CartsList>
+      )}
+      {cartState.error && cartState.error?.length > 0 && (
+        <NotFoundSource
+          content={t('ERROR_CART', 'Sorry, an error has occurred.')}
+          btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+          onClickButton={handleSearchRedirect}
+        />
+      )}
+      {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
+    </>
   )
 }

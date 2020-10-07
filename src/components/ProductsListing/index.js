@@ -44,15 +44,15 @@ export const ProductsListing = (props) => {
   }
 
   const getProducts = async (newFetch) => {
-    if (!businessState.business.lazy_load_products_recommended) {
+    if (!businessState?.business?.lazy_load_products_recommended) {
       const categoryState = {
         ...categoryStateDefault,
         loading: false
       }
       if (categorySelected.id) {
-        categoryState.products = businessState.business.categories?.find(category => category.id === categorySelected.id)?.products || []
+        categoryState.products = businessState?.business?.categories?.find(category => category.id === categorySelected.id)?.products || []
       } else {
-        categoryState.products = businessState.business.categories?.reduce((products, category) => [...products, ...category.products], []) || []
+        categoryState.products = businessState?.business?.categories?.reduce((products, category) => [...products, ...category.products], []) || []
       }
       setCategoryState({ ...categoryState })
       return
