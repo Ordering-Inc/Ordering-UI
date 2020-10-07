@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessReviews as BusinessReviewController } from 'ordering-components'
+import { BusinessReviews as BusinessReviewController, useLanguage } from 'ordering-components'
 
 import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv } from './styles'
 import { Select } from '../../styles/Select'
@@ -15,7 +15,7 @@ const Score = ({ star, text }) => (
 
 export const BusinessReviewsUI = (props) => {
   const { businessName, stars, reviewsList, handleClickOption } = props
-
+  const [, t] = useLanguage()
   const puntajes = [1, 2, 3, 4, 5]
   const _options = reviewsList.loading ? [] : puntajes.map(puntaje => {
     return {
@@ -45,10 +45,10 @@ export const BusinessReviewsUI = (props) => {
                   </Comment>
                 </Comments>
                 <Scores>
-                  <Score star={review.quality} text='Quality of products' />
-                  <Score star={review.delivery} text='Punctuality' />
-                  <Score star={review.service} text='Service' />
-                  <Score star={review.package} text='Product Packaging' />
+                  <Score star={review.quality} text={t('QUALITY_OF_PRODUCTS', 'Quality of products')} />
+                  <Score star={review.delivery} text={t('PUNCTUALITY', 'Punctuality')} />
+                  <Score star={review.service} text={t('SERVICE', 'Service')} />
+                  <Score star={review.package} text={t('PRODUCT_PACKAGING', 'Product Packaging')} />
                 </Scores>
               </ReviewContainer>
             ))}
