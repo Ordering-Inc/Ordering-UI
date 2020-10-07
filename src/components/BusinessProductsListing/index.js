@@ -139,7 +139,34 @@ const BusinessProductsListingUI = (props) => {
 export const BusinessProductsListing = (props) => {
   const [ordering] = useApi()
 
-  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'products']
+  const businessProps = [
+    'id',
+    'name',
+    'header',
+    'logo',
+    'name',
+    'open',
+    'about',
+    'description',
+    'address',
+    'location',
+    'schedule',
+    'service_fee',
+    'delivery_price',
+    'distance',
+    'delivery_time',
+    'gallery',
+    'pickup_time',
+    'reviews',
+    'featured',
+    'offers',
+    'food',
+    'laundry',
+    'alcohol',
+    'groceries',
+    'slug',
+    'products'
+  ]
 
   const businessProductslistingProps = {
     ...props,

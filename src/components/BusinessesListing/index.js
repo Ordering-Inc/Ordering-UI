@@ -121,7 +121,6 @@ export const BusinessesListing = (props) => {
    */
   useEffect(() => {
     if (orderState.loading || !orderState.options?.address?.location) return
-    console.log(orderState.options)
     getBusinesses(true)
   }, [orderState, businessTypeSelected])
 
