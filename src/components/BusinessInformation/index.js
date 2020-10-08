@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 
-import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder } from 'ordering-components'
+import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder, getLanguage } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import { BusinessInformationContainer, Header, BusinessContent, BusinessBasicContent, FlexTabs, BusinessLocation, Map, BusinessOpeningTime, Times, DeliveryDetails, BusinessGallery, BusinessVideos, BusinessInfo, BusinessInfoItem, WrapperBusinessLogo, BusinessLogo } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
-import { getLanguage } from 'ordering-components'
 
 import { GrDeliver, FaStar, FiClock, VscLocation } from 'react-icons/all'
 
