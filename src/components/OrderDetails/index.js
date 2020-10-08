@@ -4,10 +4,11 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
 import { FiPhone } from 'react-icons/fi'
 import { HiOutlineChat } from 'react-icons/hi'
-import { BiCaretDown, BiCaretUp } from 'react-icons/bi'
+import { BiCaretUp } from 'react-icons/bi'
 
 import { Button } from '../../styles/Buttons'
 import logoHeader from '../../../template/assets/images/logo-header.svg'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
 
@@ -46,7 +47,8 @@ import {
 
 const OrderDetailsUI = (props) => {
   const {
-    formatPrice
+    formatPrice,
+    handleOrderRedirect
   } = props
   const [, t] = useLanguage()
   const history = useHistory()
@@ -282,8 +284,12 @@ const OrderDetailsUI = (props) => {
           <p key={i}>ERROR: [{e}]</p>
         ))}
 
-      {!loading && Object.keys(order).length === 0 && (
-        <p>Not Found elements</p>
+      {!loading && !order && (
+        <NotFoundSource
+          content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
+          btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
+          onClickButton={handleOrderRedirect}
+        />
       )}
     </Container>
   )

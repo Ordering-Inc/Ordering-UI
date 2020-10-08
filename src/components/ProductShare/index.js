@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { FiShare2 } from 'react-icons/fi'
 import { ProductShare as ProductShareController } from 'ordering-components'
 
@@ -9,17 +9,34 @@ import {
 
 const ProductShareUI = (props) => {
   const {
-    shareButton,
+    updateShowValue,
     showShareButton,
     urlToShare
   } = props
 
+  const iconElement = useRef()
+  const contentElement = useRef()
+
+  const handleClickOutside = (e) => {
+    const outsideIcon = !iconElement.current?.contains(e.target)
+    const outsideButtonsShare = !contentElement.current?.contains(e.target)
+    if (outsideIcon && outsideButtonsShare) {
+      updateShowValue && updateShowValue(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('mouseup', handleClickOutside)
+    return () => window.removeEventListener('mouseup', handleClickOutside)
+  }, [])
+
   return (
     <>
-      <IconShare>
-        <FiShare2 onClick={() => shareButton()} />
+      <IconShare ref={iconElement}>
+        <FiShare2 onClick={() => updateShowValue(!showShareButton)} />
       </IconShare>
       <ShareButtons
+        ref={contentElement}
         className='a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style'
         data-a2a-url={urlToShare}
         showShareButton={showShareButton}
