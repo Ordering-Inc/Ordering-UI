@@ -6,7 +6,7 @@ export const NotFound = styled.div`
   justify-content: center;
   align-items: center;
   width: 50%;
-  height: 100vh;
+  height: 100%;
   margin: 10px auto;
 
   h1 {

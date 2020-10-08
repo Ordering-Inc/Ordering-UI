@@ -155,7 +155,9 @@ const BusinessProductsListingUI = (props) => {
         )}
 
         {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
-          <h1>Sorry, we couldn't find the requested product.</h1>
+          <NotFoundSource
+            content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
+          />
         )}
 
         {(productModal.product || curProduct) && (
