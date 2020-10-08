@@ -7,7 +7,7 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useApi } from 'ordering-components'
+import { useSession, useLanguage, useOrder } from 'ordering-components'
 import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
@@ -79,13 +79,7 @@ export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
-  const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
-  const [ordering] = useApi()
   const [loaded, setLoaded] = useState(!auth)
-
-  useEffect(() => {
-    getProducts()
-  }, [])
 
   useEffect(() => {
     if (!loaded && !orderStatus.loading) {
@@ -99,31 +93,6 @@ export const Router = () => {
       user,
       token: user.session.access_token
     })
-  }
-  const getProducts = async () => {
-    try {
-      setProductsList({
-        ...productsList,
-        loading: true
-      })
-      const { content: { result } } = await ordering
-        .businesses(41)
-        .products()
-        .parameters({ type: 1 })
-        .get()
-
-      setProductsList({
-        ...productsList,
-        loading: false,
-        products: result
-      })
-    } catch (error) {
-      setProductsList({
-        ...productsList,
-        loading: false,
-        error
-      })
-    }
   }
 
   return (
@@ -243,7 +212,7 @@ export const Router = () => {
                     <CheckoutPage />
                   </Route>
                   <Route exact path='/upselling_page'>
-                    <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)} />
+                    <UpsellingPage businessId={41} products={[]} onSave={(productCart) => console.log(productCart)} />
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />

@@ -45,7 +45,7 @@ export const Details = styled.div`
   flex-direction: column;
   align-items: center;
   > div {
-    min-height: 45px;
+    height: 100%;
     > p {
       margin-block-start: 0.1em;
       margin-block-end: 0.1em;
