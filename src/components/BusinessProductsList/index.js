@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductsList } from 'ordering-components'
+import { ProductsList, getLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
 
@@ -17,6 +17,8 @@ const BusinessProductsListUI = (props) => {
     categoryState,
     onProductClick
   } = props
+
+  const [, t] = getLanguage()
 
   return (
     <ProductsContainer>
@@ -84,7 +86,7 @@ const BusinessProductsListUI = (props) => {
       {
         !categoryState.loading && categoryState.products.length === 0 && (
           <div>
-            <h1>Not Found elements</h1>
+            <h1>{t('PRODUCT_LIST_NOT_FOUND', 'Not Found elements')}</h1>
           </div>
         )
       }
