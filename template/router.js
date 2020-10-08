@@ -26,6 +26,9 @@ import { Footer } from './components/Footer'
 import ScrollToTop from '../src/utils/ScrollToTop'
 import { UpsellingPage } from '../src/components/UpsellingPage'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
+import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
+
+import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 const fontName = 'Nunito'
 
 const GlobalStyle = createGlobalStyle`
@@ -82,6 +85,7 @@ export const Router = () => {
   const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
   const [ordering] = useApi()
   const [loaded, setLoaded] = useState(!auth)
+  const onlineStatus = useOnlineStatus()
 
   useEffect(() => {
     getProducts()
@@ -136,7 +140,16 @@ export const Router = () => {
           )
         }
         {
-          loaded && (
+          !onlineStatus && (
+            <>
+              <Header />
+              <NotNetworkConnectivity />
+              <Footer />
+            </>
+          )
+        }
+        {
+          loaded && onlineStatus && (
             <>
               <Header />
               <ScrollToTop>
