@@ -18,10 +18,12 @@ const BusinessProductsCategoriesUI = (props) => {
   const [categoriesElement, setCategoriesElement] = useState([])
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
-      setWidth(window.innerWidth)
-    })
+    window.addEventListener('resize', handleResize)
     handleScroll()
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [width])
 
   useEffect(() => {
@@ -29,6 +31,10 @@ const BusinessProductsCategoriesUI = (props) => {
     setCategoriesElement(element)
     handleScroll()
   }, [isSkeleton, categoriesElement])
+
+  const handleResize = () => {
+    setWidth(window.innerWidth)
+  }
 
   const scrolling = (left) => {
     const element = document.getElementById('categories')

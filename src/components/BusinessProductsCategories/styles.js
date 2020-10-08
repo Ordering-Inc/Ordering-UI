@@ -22,7 +22,7 @@ export const CategoriesContainer = styled.div`
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    opacity: 0.9;
+    opacity: 0.7;
     align-self: center;
     top: 0;
     position: sticky;
