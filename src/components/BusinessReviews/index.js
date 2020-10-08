@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessReviews as BusinessReviewController } from 'ordering-components'
+import { BusinessReviews as BusinessReviewController, getLanguage } from 'ordering-components'
 
 import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv } from './styles'
 import { Select } from '../../styles/Select'
@@ -24,13 +24,14 @@ export const BusinessReviewsUI = (props) => {
       showOnSelected: puntaje
     }
   })
+  const [, t] = getLanguage()
   return (
     <>
       {!reviewsList.loading ? (
         <>
           <ReviewOf>
-            <h3>Reviews of {businessName}</h3>
-            <Select placeholder='Date' />
+            <h3>{t('REVIEWS_OF', 'Reviews of')} {businessName}</h3>
+            <Select placeholder={t('DATE', 'Date')} />
             <Select options={_options} defaultValue={puntajes[0]} onChange={(val) => handleClickOption(val)} />
           </ReviewOf>
           <Content>
@@ -39,7 +40,7 @@ export const BusinessReviewsUI = (props) => {
               <ReviewContainer key={review.id}>
                 <Comments>
                   <div>
-                    <h4>Nombre?</h4>
+                    <h4>{t('REVIEW_COMMENT', 'Nombre?')}</h4>
                   </div>
                   <div>
                     <p><AiOutlineStar color='#D81212' /> {review.total}</p>
@@ -49,16 +50,16 @@ export const BusinessReviewsUI = (props) => {
                   </Comment>
                 </Comments>
                 <Scores>
-                  <Score star={review.quality} text='Quality of products' />
-                  <Score star={review.delivery} text='Punctuality' />
-                  <Score star={review.service} text='Service' />
-                  <Score star={review.package} text='Product Packaging' />
+                  <Score star={review.quality} text={t('REVIEW_QUALITY', 'Quality of products')} />
+                  <Score star={review.delivery} text={t('REVIEW_PUNCTUALITY', 'Punctuality')} />
+                  <Score star={review.service} text={t('REVIEW_SERVICE', 'Service')} />
+                  <Score star={review.package} text={t('REVIEW_PRODUCT_PACKAGING', 'Product Packaging')} />
                 </Scores>
               </ReviewContainer>
             ))}
           </Content>
         </>
-      ) : 'loading'}
+      ) : t('LOADING', 'loading')}
     </>
   )
 }
