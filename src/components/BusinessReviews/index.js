@@ -18,12 +18,20 @@ const Score = ({ star, text }) => (
 export const BusinessReviewsUI = (props) => {
   const { businessName, stars, reviewsList, handleClickOption } = props
   const [, t] = useLanguage()
-  const values = [1, 2, 3, 4, 5]
+  const values = ['all', 1, 2, 3, 4, 5]
   const options = reviewsList.loading ? [] : values.map(value => {
-    return {
-      value: value,
-      content: value,
-      showOnSelected: value
+    if (value === 'all') {
+      return {
+        value: value,
+        content: value.toUpperCase(),
+        showOnSelected: value.toUpperCase()
+      }
+    } else {
+      return {
+        value: value,
+        content: value,
+        showOnSelected: value
+      }
     }
   })
   return (
@@ -32,7 +40,7 @@ export const BusinessReviewsUI = (props) => {
         <>
           <ReviewOf>
             {!reviewsList.loading ? <h3>Reviews of {businessName}</h3> : <Skeleton width={200} />}
-            {!reviewsList.loading ? <Select options={options} defaultValue={options[options.length - 1]?.showOnSelected} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} /> : <Skeleton width={200} height={30} />}
+            {!reviewsList.loading ? <Select options={options} defaultValue={options[0].value} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} /> : <Skeleton width={200} height={30} />}
           </ReviewOf>
           <Content>
             <h3>{!reviewsList.loading ? <><AiOutlineStar color='#D81212' />{stars}</> : <Skeleton width={100} height={30} />}</h3>
