@@ -11,14 +11,19 @@ const OrderTypeSelectorHeaderUI = (props) => {
   const [, t] = useLanguage()
 
   const orderTypes = [
-    { value: 1, content: t('DELIVERY', 'Delivery') },
-    { value: 2, content: t('PICKUP', 'Pickup') },
-    { value: 3, content: t('EAT_IN', 'Eat in') },
-    { value: 4, content: t('CURBSIDE', 'Curbside') },
-    { value: 5, content: t('DRIVE_THRU', 'Drive thru') }
+    { value: 1, content: t('DELIVERY', 'Delivery'), icon: 'delivery' },
+    { value: 2, content: t('PICKUP', 'Pickup'), icon: 'pickup' },
+    { value: 3, content: t('EAT_IN', 'Eat in'), icon: 'eatin' },
+    { value: 4, content: t('CURBSIDE', 'Curbside'), icon: 'curbside' },
+    { value: 5, content: t('DRIVE_THRU', 'Drive thru'), icon: 'drivethru' }
   ]
   return (
-    <Select options={orderTypes} defaultValue={orderState.options?.type || 1} onChange={(orderType) => handleChangeOrderType(orderType)} />
+    <Select
+      withIcons
+      options={orderTypes}
+      defaultValue={orderState.options?.type || 1}
+      onChange={(orderType) => handleChangeOrderType(orderType)}
+    />
   )
 }
 
