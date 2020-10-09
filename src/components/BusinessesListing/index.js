@@ -209,7 +209,7 @@ export const BusinessesListing = (props) => {
               <div className='image'>
                 <img src={noBusinesses} alt='noBusinesses' />
               </div>
-              <h1>{t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters.')}</h1>
+              <h1>{t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}</h1>
               <div>
                 <Button
                   outline

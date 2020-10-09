@@ -6,6 +6,8 @@ import { isADateValid } from '../../utils'
 export const ProductsListing = (props) => {
   console.log('Move ProductsListing to ordering-componenets')
   const {
+    isSearchByName,
+    isSearchByDescription,
     slug,
     ordering,
     businessProps,
@@ -16,6 +18,7 @@ export const ProductsListing = (props) => {
   const [languageState, t] = useLanguage()
 
   const [categorySelected, setCategorySelected] = useState({ id: null, name: t('ALL', 'All') })
+  const [searchValue, setSearchValue] = useState(null)
   const [businessState, setBusinessState] = useState({ business: {}, loading: true, error: null })
   const [categoriesState, setCategoriesState] = useState({})
   const [orderOptions, setOrderOptions] = useState()
@@ -39,6 +42,16 @@ export const ProductsListing = (props) => {
     setCategorySelected(category)
   }
 
+  const handleChangeSearch = (search) => {
+    setSearchValue(search)
+  }
+
+  const isMatchSearch = (name, description) => {
+    if (!searchValue) return true
+    return (name.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByName) ||
+      (description.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByDescription)
+  }
+
   const getProducts = async (newFetch) => {
     if (!businessState.business.lazy_load_products_recommended) {
       const categoryState = {
@@ -46,9 +59,19 @@ export const ProductsListing = (props) => {
         loading: false
       }
       if (categorySelected.id) {
-        categoryState.products = businessState.business.categories?.find(category => category.id === categorySelected.id)?.products || []
+        const productsFiltered = businessState.business.categories?.find(
+          category => category.id === categorySelected.id
+        )?.products.filter(
+          product => isMatchSearch(product.name, product.description)
+        )
+        categoryState.products = productsFiltered || []
       } else {
-        categoryState.products = businessState.business.categories?.reduce((products, category) => [...products, ...category.products], []) || []
+        const productsFiltered = businessState.business.categories?.reduce(
+          (products, category) => [...products, ...category.products], []
+        ).filter(
+          product => isMatchSearch(product.name, product.description)
+        )
+        categoryState.products = productsFiltered || []
       }
       setCategoryState({ ...categoryState })
       return
@@ -142,7 +165,7 @@ export const ProductsListing = (props) => {
   useEffect(() => {
     if (orderState.loading || businessState.loading) return
     getProducts()
-  }, [orderState, categorySelected, businessState])
+  }, [orderState, categorySelected, businessState, searchValue])
 
   useEffect(() => {
     if (!orderState.loading && orderOptions && !languageState.loading) {
@@ -200,9 +223,11 @@ export const ProductsListing = (props) => {
           {...props}
           errors={errors}
           categorySelected={categorySelected}
+          searchValue={searchValue}
           categoryState={categoryState}
           businessState={businessState}
           handleChangeCategory={handleChangeCategory}
+          handleChangeSearch={handleChangeSearch}
           getNextProducts={getProducts}
         />
       )}

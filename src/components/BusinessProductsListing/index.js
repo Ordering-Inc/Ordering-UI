@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import {
-  useApi,
-  useLanguage
-} from 'ordering-components'
+import { useLanguage } from 'ordering-components'
 
 import { ProductsListing } from '../ProductsListing' // move this component in ordering-components
 
@@ -17,6 +14,7 @@ import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { ProductForm } from '../ProductForm'
 import { Modal } from '../Modal'
+import { SearchBar } from '../SearchBar'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -24,9 +22,11 @@ const BusinessProductsListingUI = (props) => {
   const {
     businessState,
     categorySelected,
+    searchValue,
     categoryState,
     getNextProducts,
-    handleChangeCategory
+    handleChangeCategory,
+    handleChangeSearch
   } = props
 
   const { business, loading, error } = businessState
@@ -66,6 +66,10 @@ const BusinessProductsListingUI = (props) => {
           <>
             <BusinessBasicInformation
               businessState={businessState}
+            />
+            <SearchBar
+              onSearch={handleChangeSearch}
+              search={searchValue}
             />
             <BusinessProductsCategories
               categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
@@ -137,17 +141,9 @@ const BusinessProductsListingUI = (props) => {
 }
 
 export const BusinessProductsListing = (props) => {
-  const [ordering] = useApi()
-
-  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'products']
-
   const businessProductslistingProps = {
     ...props,
-    UIComponent: BusinessProductsListingUI,
-    slug: props.store,
-    ordering: ordering,
-    businessProps: businessProps,
-    handlerClickCategory: (e) => { console.log(e) }
+    UIComponent: BusinessProductsListingUI
   }
 
   return (
