@@ -16,6 +16,7 @@ const BusinessContainerStyled = styled.div`
   min-height: 200px;
   justify-content: flex-start;
   align-items: flex-end;
+  border-radius: 10px;
 `
 export const BusinessContainer = (props) => {
   const style = {}
