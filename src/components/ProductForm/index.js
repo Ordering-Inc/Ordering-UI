@@ -69,7 +69,7 @@ const ProductOptionsUI = (props) => {
           {product?.description && <p>{product?.description}</p>}
         </div>
         <ProductEdition>
-          {product?.ingredients.length > 0 && (<SectionTitle>Ingredients</SectionTitle>)}
+          {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
           {product?.ingredients.map(ingredient => (
             <ProductIngredient
               key={ingredient.id}
@@ -114,7 +114,7 @@ const ProductOptionsUI = (props) => {
             }))
           }
           <ProductComment>
-            <SectionTitle>Special comment</SectionTitle>
+            <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
             <textarea
               rows={4}
               defaultValue={productCart.comment}
@@ -151,10 +151,10 @@ const ProductOptionsUI = (props) => {
               disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
             >
               {orderState.loading ? (
-                <span>Loading...</span>
+                <span>{t('LOADING', 'Loading...')}</span>
               ) : (
                 <span>
-                  {editMode ? 'Save' : 'Add to Cart'}
+                  {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
                 </span>
               )}
               <span>{productCart.total && formatPrice(productCart.total)}</span>
@@ -167,7 +167,7 @@ const ProductOptionsUI = (props) => {
               disabled={isSoldOut}
               onClick={() => setModalIsOpen(true)}
             >
-              {isSoldOut ? 'Sold out' : 'Login / Sign Up'}
+              {isSoldOut ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
             </Button>
           )}
         </ProductActions>

@@ -125,7 +125,7 @@ const SignUpFormUI = (props) => {
             </SignUpWith>
         }
         {
-          (useChekoutFileds && validationFields.loading) && <p>Loading Form...</p>
+          (useChekoutFileds && validationFields.loading) && <p>{t('LOADING_FORM', 'Loading Form...')}</p>
         }
         <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
           {
