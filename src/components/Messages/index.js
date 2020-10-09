@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   Messages as MessagesController,
   useLanguage
@@ -33,7 +33,9 @@ export const MessagesUI = (props) => {
     image,
     sendMessage,
     setImage,
-    setMessage
+    setMessage,
+    business,
+    driver
   } = props
 
   const [, t] = useLanguage()
@@ -124,18 +126,37 @@ export const MessagesUI = (props) => {
     <MessagesContainer>
       <HeaderProfile>
         <Image>
-          <img src={order.business?.logo} />
+          {
+            business && (
+              <img src={order.business?.logo} />
+            )
+          }
+          {
+            driver && (
+              <img src={order.driver?.photo} name='driver' />
+            )
+          }
         </Image>
         <div>
-          <p>{order.business?.name}</p>
-          <p>Online</p>
+          {business && (
+            <>
+              <p>{order.business?.name}</p>
+              <p>{t('ONLINE', 'Online')}</p>
+            </>
+          )}
+          {driver && (
+            <>
+              <p>{order.driver?.name}</p>
+              <p>{t('ONLINE', 'Online')}</p>
+            </>
+          )}
         </div>
       </HeaderProfile>
       {!messages.loading ? (
         <Chat>
           <MessageConsole>
             <BubbleConsole>
-            Order placed for {order.created_at} via {order.app_id}
+              {t('ORDER_PLACED_FOR', 'Order placed for')} {order.created_at} {t('VIA', 'via')} {order.app_id}
               <p>{moment(order.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
             </BubbleConsole>
           </MessageConsole>
@@ -144,13 +165,13 @@ export const MessagesUI = (props) => {
               {message.type === 1 && (
                 message.change?.attribute !== 'driver_id' ? (
                   <BubbleConsole>
-                  Order <strong>{message.change.attribute} </strong> Changed from {' '}
+                    {t('ORDER', 'Order')} <strong>{message.change.attribute} </strong> {t('CHANGED_FROM', 'Changed from')} {' '}
                     {message.change.old !== null && (
                       <>
                         <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
                       </>
                     )}
-                    <> to {t(getStatus(parseInt(message.change.new, 10)))} </>
+                    <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
                     <p>
                       {
                         moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()
@@ -159,7 +180,7 @@ export const MessagesUI = (props) => {
                   </BubbleConsole>
                 ) : (
                   <BubbleConsole>
-                    <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong> was assigned as driver {message.comment && (<><br /> {message.comment.length}</>)}
+                    <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong> {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')} {message.comment && (<><br /> {message.comment.length}</>)}
                     <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
                   </BubbleConsole>
                 )
@@ -194,20 +215,20 @@ export const MessagesUI = (props) => {
           ))}
         </Chat>
       ) : (
-        <span>Loading Messages...</span>
+        <span>{t('LOADING_MESSAGES', 'Loading Messages...')}</span>
       )}
       <SendForm>
         <div>
           <input name='business' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.business} />
-          <label>Business</label>
+          <label>{t('BUSINESS', 'Business')}</label>
           <input name='administrator' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.administrator} />
-          <label>Administrator</label>
+          <label>{t('ADMINISTRATOR', 'Administrator')}</label>
           <input name='driver' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.driver} />
-          <label>Driver</label>
+          <label>{t('DRIVER', 'Driver')}</label>
         </div>
         <Send onSubmit={handleSubmit(onSubmit)} noValidate>
           <Input
-            placeholder='Write a message'
+            placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
             onChange={onChangeMessage}
             name='message'
             ref={register({
@@ -226,7 +247,7 @@ export const MessagesUI = (props) => {
           </label>
           {image && (
             <Button circle onClick={removeImage} name='delete'>
-            X
+              {t('DELETE', 'X')}
             </Button>
           )}
           <Button
@@ -235,9 +256,9 @@ export const MessagesUI = (props) => {
             disabled={(errors.message?.message && !image)}
           >
             <FiSend />
-          Send
+            {t('SEND', 'Send')}
           </Button>
-          {sendMessage.loading && <span> Sending Message...</span>}
+          {sendMessage.loading && <span> {t('SENDING_MESSAGE', 'Sending Message...')}</span>}
           {sendMessage.error && (
             <>
               <br />

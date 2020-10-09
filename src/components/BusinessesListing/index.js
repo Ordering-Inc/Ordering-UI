@@ -14,6 +14,8 @@ import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
 import { useOrder, useApi } from 'ordering-components'
 
+const PIXELS_TO_SCROLL = 300
+
 export const BusinessesListing = (props) => {
   console.log('Move BusinessesListing to ordering-componenets')
   const {
@@ -42,7 +44,6 @@ export const BusinessesListing = (props) => {
         const dateParts = parts[0].split('-')
         const timeParts = parts[1].split(':')
         const moment = Date.UTC(dateParts[0], dateParts[1] - 1, dateParts[2], timeParts[0], timeParts[1], timeParts[2]) / 1000
-        console.log(moment)
         parameters.timestamp = moment
       }
       const where = []
@@ -70,7 +71,6 @@ export const BusinessesListing = (props) => {
         nextPageItems
       })
     } catch (err) {
-      console.log(err)
       if (err.constructor.name !== 'Cancel') {
         setBusinessesList({
           ...businessesList,
@@ -90,7 +90,8 @@ export const BusinessesListing = (props) => {
   }, [paginationProps])
 
   const handleScroll = useCallback(() => {
-    const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
+    const innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL
+    const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (badScrollPosition || businessesList.loading || !hasMore) return
     getBusinesses()
@@ -106,7 +107,6 @@ export const BusinessesListing = (props) => {
    */
   useEffect(() => {
     if (orderState.loading || !orderState.options?.address?.location) return
-    console.log(orderState.options)
     getBusinesses(true)
   }, [orderState, businessTypeSelected])
 

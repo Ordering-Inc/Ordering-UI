@@ -8,7 +8,9 @@ import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import { formatPrice } from '../../utils'
 
 import { Confirm } from '../Confirm'
+import { Modal } from '../Modal'
 import { CouponControl } from '../CouponControl'
+import { ProductForm } from '../ProductForm'
 
 import {
   CartContainer,
@@ -25,13 +27,16 @@ const CartUI = (props) => {
     getProductMax,
     offsetDisabled,
     removeProduct,
-    onClickCheckout
+    onClickCheckout,
+    isHideCheckoutButtom
   } = props
   const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [openProduct, setModalIsOpen] = useState(false)
+  const [curProduct, setCurProduct] = useState(null)
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -44,6 +49,11 @@ const CartUI = (props) => {
     })
   }
 
+  const handleEditProduct = (product) => {
+    setCurProduct(product)
+    setModalIsOpen(true)
+  }
+
   const handleClickCheckout = () => {
     history.push(`/checkout/${cart.uuid}`)
     onClickCheckout()
@@ -54,6 +64,12 @@ const CartUI = (props) => {
       setConfirm({ ...confirm, open: false })
     }
   }, [])
+
+  const handlerProductAction = (product) => {
+    if (Object.keys(product).length) {
+      setModalIsOpen(false)
+    }
+  }
 
   return (
     <CartContainer>
@@ -74,6 +90,7 @@ const CartUI = (props) => {
             getProductMax={getProductMax}
             offsetDisabled={offsetDisabled}
             onDeleteProduct={handleDeleteClick}
+            onEditProduct={handleEditProduct}
           />
         ))}
         {cart?.valid_products && (
@@ -81,28 +98,28 @@ const CartUI = (props) => {
             <table>
               <tbody>
                 <tr>
-                  <td>Subtotal</td>
+                  <td>{t('SUBTOTAL', 'Subtotal')}</td>
                   <td>{formatPrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Tax (10%)</td>
+                  <td>{t('TAX', 'Tax')} (10%)</td>
                   <td>{formatPrice(cart?.tax || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Delivery Fee</td>
+                  <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                   <td>{formatPrice(cart?.delivery_price || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Driver tips (0%)</td>
+                  <td>{t('DRIVER_TIP', 'Driver tip')} (0%)</td>
                   <td>{formatPrice(cart?.driver_tip || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Service Fee(9%)</td>
+                  <td>{t('SERVICE_FEE', 'Service Fee')}(9%)</td>
                   <td>{formatPrice(cart?.service_fee || 0)}</td>
                 </tr>
                 {cart?.discount > 0 && (
                   <tr>
-                    <td>Discount</td>
+                    <td>{t('DISCOUNT', 'Discount')}</td>
                     <td>{formatPrice(cart?.discount || 0)}</td>
                   </tr>
                 )}
@@ -116,20 +133,20 @@ const CartUI = (props) => {
             <table className='total'>
               <tbody>
                 <tr>
-                  <td>Total</td>
+                  <td>{t('TOTAL', 'Total')}</td>
                   <td>{formatPrice(cart?.total)}</td>
                 </tr>
               </tbody>
             </table>
           </OrderBill>
         )}
-        {onClickCheckout && (
+        {onClickCheckout && isHideCheckoutButtom && (
           <CheckoutAction>
             <Button
               color='primary'
               onClick={() => handleClickCheckout()}
             >
-              Checkout
+              {t('CHECKOUT', 'Checkout')}
             </Button>
           </CheckoutAction>
         )}
@@ -144,6 +161,21 @@ const CartUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='70%'
+        open={openProduct}
+        closeOnBackdrop={false}
+        onClose={() => setModalIsOpen(false)}
+      >
+        <ProductForm
+          isCartProduct
+          productCart={curProduct}
+          businessId={curProduct?.business_id}
+          categoryId={curProduct?.category_id}
+          productId={curProduct?.id}
+          onSave={handlerProductAction}
+        />
+      </Modal>
     </CartContainer>
   )
 }

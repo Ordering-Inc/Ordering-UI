@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const ProductsContainer = styled.div`
-  display: block;
+  width: 95%;
+  margin: 20px auto 0px;
 `
 
 export const WrapContent = styled.div`

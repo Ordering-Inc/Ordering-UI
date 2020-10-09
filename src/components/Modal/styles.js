@@ -8,21 +8,6 @@ export const Container = styled.div`
   `}
 `
 
-export const ModalWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1002 !important;
-  outline: none;
-  box-sizing: border-box;
-  overflow-y: auto;
-`
-
 export const ModalDialog = styled.div`
   background-color: #FFF;
   padding: ${({ padding }) => padding || '20px'};

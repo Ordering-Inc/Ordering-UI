@@ -3,6 +3,7 @@ import { useOrder, useLanguage } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
 import { MomentControl } from '../MomentControl'
+import { FaRegClock } from 'react-icons/fa'
 
 export const MomentPopover = (props) => {
   const { open } = props
@@ -59,7 +60,9 @@ export const MomentPopover = (props) => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>{orderStatus.options?.moment || t('ASAP', 'ASAP')}</HeaderItem>
+      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+        <FaRegClock /> {orderStatus.options?.moment || t('ASAP', 'ASAP')}
+      </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <MomentControl {...momentProps} />
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />

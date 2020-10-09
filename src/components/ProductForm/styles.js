@@ -3,8 +3,9 @@ import styled from 'styled-components'
 
 export const ProductContainer = styled.div`
   display: flex;
-  height: 500px;
+  height: 100%;
   padding: 10px 0px;
+  padding-left: 15px;
   @media (max-width: 1200px) {
     flex-wrap: wrap;
     overflow: auto;
@@ -13,13 +14,13 @@ export const ProductContainer = styled.div`
 
 export const WrapperImage = styled.div`
   width: calc(50% - 10px);
-  border-radius: 10px;
-  margin-right: 10px;
+  border-radius: 16px;
+  /*margin-right: 10px;*/
 
   @media (max-width: 1200px) {
     height: 300px;
     width: 100%;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
   }
 `
 
@@ -50,7 +51,7 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(50% - 20px);
-  padding: 0px 10px;
+  padding: 10px;
 
   h1 {
     font-size: 24px;
@@ -58,7 +59,6 @@ export const ProductInfo = styled.div`
     text-align: left;
     color: #263238;
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
     margin-top: 0px;
   }
@@ -68,16 +68,14 @@ export const ProductInfo = styled.div`
     font-weight: 200;
     text-align: left;
     margin-top: 0px;
-
     display: -webkit-box;
-    -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
+    word-wrap: break-word;
+}
 
   @media (max-width: 1200px) {
     width: 100%;
-    h1, p {
+    h1 {
       text-align: center;
     }
   }
@@ -98,10 +96,15 @@ export const SectionTitle = styled.h3`
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 0px;
   p {
-    font-weight: bold;
+    font-weight: 300;
     margin-bottom: 5px;
+  }
+  textarea{
+    font-size: 1.5em;
+    padding: 5px;
+    margin: 1px;
+    border: 1px solid #000
   }
 `
 
@@ -135,5 +138,31 @@ export const ProductActions = styled.div`
 
   button.disabled {
     opacity: 0.5;
+  }
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+    > * {
+      margin: 10px 0;
+    }
+    div{
+      width: 60%;
+      margin: 10px 0;
+      button.incdec {
+      width: 50px;
+      height: 50px;
+      font-size: 2em;
+      padding-bottom: 2px
+    }
+    span{
+      font-size: 2em;
+    }
+    }
+  }
+
+  @media (max-width: 480) {
+    div{
+      width: 80%;
+  }
   }
 `

@@ -1,5 +1,5 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
 import { FiPhone } from 'react-icons/fi'
@@ -10,9 +10,13 @@ import { Button } from '../../styles/Buttons'
 import logoHeader from '../../../template/assets/images/logo-header.svg'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
+import { Modal } from '../Modal'
+import { Messages } from '../Messages'
+import { ReviewOrder } from '../ReviewOrder'
 
 import {
   Container,
+  WrapperContainer,
   Header,
   HeaderInfo,
   HeaderLogo,
@@ -20,28 +24,21 @@ import {
   Content,
   OrderBusiness,
   BusinessWrapper,
-  BusinessLogoWrapper,
+  LogoWrapper,
   BusinessLogo,
   BusinessInfo,
-  BusinessActions,
+  ActionsBlock,
   OrderInfo,
   OrderData,
   StatusBar,
   OrderStatus,
   StatusImage,
-  CustomerTitle,
+  SectionTitle,
   OrderCustomer,
-  WrapperCustomerPhoto,
-  CustomerPhoto,
-  CustomerInfo,
-  DriverTitle,
+  PhotoBlock,
+  InfoBlock,
   OrderDriver,
   WrapperDriver,
-  WrapperDriverPhoto,
-  DriverPhoto,
-  DriverInfo,
-  DriverActions,
-  OrderBillTitle,
   OrderProducts,
   OrderBill,
   ReviewsAction,
@@ -55,6 +52,8 @@ const OrderDetailsUI = (props) => {
     formatPrice
   } = props
   const [, t] = useLanguage()
+  const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
+  const [openReview, setOpenReview] = useState(false)
 
   const { order, loading, error } = props.order
 
@@ -90,34 +89,8 @@ const OrderDetailsUI = (props) => {
 
   return (
     <Container>
-      {loading && (
-        <>
-          <SkeletonBlock width={100}>
-            <Skeleton height={250} />
-          </SkeletonBlock>
-          <SkeletonBlockWrapp>
-            <SkeletonBlock width={80}>
-              <Skeleton height={100} />
-              <Skeleton height={100} />
-              <Skeleton height={100} />
-              <Skeleton height={100} />
-              <Skeleton height={200} />
-            </SkeletonBlock>
-          </SkeletonBlockWrapp>
-        </>
-      )}
-
-      {error && error.length > 0 &&
-        error.map((e, i) => (
-          <p key={i}>ERROR: [{e}]</p>
-        ))}
-
-      {!loading && Object.keys(order).length === 0 && (
-        <p>Not Found elements</p>
-      )}
-
       {order && Object.keys(order).length > 0 && (
-        <>
+        <WrapperContainer>
           <Header>
             <HeaderInfo>
               <HeaderLogo bgimage={logoHeader} />
@@ -134,31 +107,31 @@ const OrderDetailsUI = (props) => {
           <Content>
             <OrderBusiness>
               <BusinessWrapper>
-                <BusinessLogoWrapper>
+                <LogoWrapper>
                   <BusinessLogo bgimage={order?.business?.logo} />
-                </BusinessLogoWrapper>
+                </LogoWrapper>
                 <BusinessInfo>
                   <h1>{order?.business?.name}</h1>
                   <p>{order?.business?.address}</p>
                 </BusinessInfo>
               </BusinessWrapper>
-              <BusinessActions>
+              <ActionsBlock>
                 <span>
                   <FiPhone />
                 </span>
                 <span>
-                  <HiOutlineChat />
+                  <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
                 </span>
                 <span>
                   <BiCaretDown />
                 </span>
-              </BusinessActions>
+              </ActionsBlock>
             </OrderBusiness>
 
             <OrderInfo>
               <OrderData>
-                <h1>Order #{order?.id}</h1>
-                <p>Date and time for your order</p>
+                <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
+                <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>{order?.delivery_datetime}</p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
@@ -170,53 +143,53 @@ const OrderDetailsUI = (props) => {
               </OrderStatus>
             </OrderInfo>
 
-            <CustomerTitle>
-              Customer
-            </CustomerTitle>
+            <SectionTitle>
+              {t('CUSTOMER', 'Customer')}
+            </SectionTitle>
             <OrderCustomer>
               {order?.customer?.photo && (
-                <WrapperCustomerPhoto>
-                  <CustomerPhoto bgimage={order?.customer?.photo} />
-                </WrapperCustomerPhoto>
+                <div>
+                  <PhotoBlock src={order?.customer?.photo} />
+                </div>
               )}
-              <CustomerInfo>
+              <InfoBlock>
                 <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                 <span>{order?.customer?.address}</span>
-              </CustomerInfo>
+              </InfoBlock>
             </OrderCustomer>
 
             {order?.driver && (
               <>
-                <DriverTitle>
-                  Your Driver
-                </DriverTitle>
+                <SectionTitle>
+                  {t('YOUR_DRIVER', 'Your Driver')}
+                </SectionTitle>
                 <OrderDriver>
                   <WrapperDriver>
-                    {order?.customer?.photo && (
-                      <WrapperDriverPhoto>
-                        <DriverPhoto bgimage={order?.driver?.photo} />
-                      </WrapperDriverPhoto>
+                    {!order?.customer?.photo && (
+                      <div>
+                        <PhotoBlock src={order?.driver?.photo} />
+                      </div>
                     )}
-                    <DriverInfo>
+                    <InfoBlock>
                       <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                      <span>Driver</span>
-                    </DriverInfo>
+                      <span>{t('DRIVER', 'Driver')}</span>
+                    </InfoBlock>
                   </WrapperDriver>
-                  <DriverActions>
+                  <ActionsBlock>
                     <span>
                       <FiPhone />
                     </span>
                     <span>
-                      <HiOutlineChat />
+                      <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
                     </span>
-                  </DriverActions>
+                  </ActionsBlock>
                 </OrderDriver>
               </>
             )}
 
-            <OrderBillTitle>
-              Your Order
-            </OrderBillTitle>
+            <SectionTitle>
+              {t('YOUR_ORDER', 'Your Order')}
+            </SectionTitle>
             <OrderProducts>
               {order?.products?.length && order?.products.map(product => (
                 <ProductItemAccordion
@@ -232,28 +205,28 @@ const OrderDetailsUI = (props) => {
               <table>
                 <tbody>
                   <tr>
-                    <td>Subtotal</td>
+                    <td>{t('SUBTOTAL', 'Subtotal')}</td>
                     <td>{formatPrice(order?.subtotal)}</td>
                   </tr>
                   <tr>
-                    <td>Tax (10%)</td>
+                    <td>{t('TAX', 'Tax')} (10%)</td>
                     <td>{formatPrice(order?.totalTax)}</td>
                   </tr>
                   <tr>
-                    <td>Delivery Fee</td>
+                    <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                     <td>{formatPrice(order?.deliveryFee)}</td>
                   </tr>
                   <tr>
-                    <td>Driver tips (0%)</td>
+                    <td>{t('DRIVER_TIP', 'Driver tip')} (0%)</td>
                     <td>{formatPrice(order?.driver_tip)}</td>
                   </tr>
                   <tr>
-                    <td>Service Fee(9%)</td>
+                    <td>{t('SERVICE FEE', 'Service Fee')} (9%)</td>
                     <td>{formatPrice(order?.serviceFee || 0)}</td>
                   </tr>
                   {order?.discount > 0 && (
                     <tr>
-                      <td>Discount</td>
+                      <td>{t('DISCOUNT', 'Discount')}</td>
                       <td>{formatPrice(order?.discount)}</td>
                     </tr>
                   )}
@@ -262,34 +235,67 @@ const OrderDetailsUI = (props) => {
               <table className='total'>
                 <tbody>
                   <tr>
-                    <td>Total</td>
+                    <td>{t('TOTAL', 'Total')}</td>
                     <td>{formatPrice(order?.total)}</td>
                   </tr>
                 </tbody>
               </table>
             </OrderBill>
 
-            {(order?.status === 1 || order?.status === 11) && (
+            {(order?.status === 1 || order?.status === 11) && !order.review && (
               <ReviewsAction>
-                <Button color='primary'>
-                  Review your Order
+                <Button color='primary' onClick={() => setOpenReview(true)}>
+                  {t('REVIEW_ORDER', 'Review your Order')}
                 </Button>
               </ReviewsAction>
             )}
 
             <FootActions>
-              <a>
+              {/* <a>
                 Support
                 <BiCaretUp />
               </a>
-              <a>
-                My Orders
+              */}
+              <Link to='/profile/orders'>
+                {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
-              </a>
+              </Link>
             </FootActions>
           </Content>
-        </>
+        </WrapperContainer>
       )}
+
+      {loading && (
+        <WrapperContainer>
+          <SkeletonBlock width={100}>
+            <Skeleton height={250} />
+          </SkeletonBlock>
+          <SkeletonBlockWrapp>
+            <SkeletonBlock width={80}>
+              <Skeleton height={100} />
+              <Skeleton height={100} />
+              <Skeleton height={100} />
+              <Skeleton height={100} />
+              <Skeleton height={200} />
+            </SkeletonBlock>
+          </SkeletonBlockWrapp>
+        </WrapperContainer>
+      )}
+
+      {error && error.length > 0 &&
+        error.map((e, i) => (
+          <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
+        ))}
+
+      {!loading && Object.keys(order).length === 0 && (
+        <p>{t('NOT_FOUND_ELEMENTS', 'Not Found elements')}</p>
+      )}
+      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })}>
+        <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
+      </Modal>
+      <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
+        <ReviewOrder order={order} />
+      </Modal>
     </Container>
   )
 }

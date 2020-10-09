@@ -16,7 +16,7 @@ const BusinessTypeFilterUI = (props) => {
     <TypeContainer>
       <Tabs variant='primary'>
         {businessTypes && businessTypes.length > 0 && businessTypes.map((type) => (
-          <Tab active={type.value === currentTypeSelected} key={type.value} onClick={() => handleChangeBusinessType(type.value)}>
+          <Tab className='category' active={type.value === currentTypeSelected} key={type.value} onClick={() => handleChangeBusinessType(type.value)}>
             {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
           </Tab>
         ))}
