@@ -87,12 +87,6 @@ export const Selected = styled.div`
     padding-right: 9px;
     font-size: 13px;
   }
-  ${props => props.InitialIcon && css`
-      padding-left: 5px;
-      > svg{
-        padding-right: 5px;
-      }
-  `}
 `
 
 export const Select = styled.div`
@@ -118,7 +112,8 @@ export const Chevron = styled.div`
     vertical-align: text-top;
   }
 `
-export const TextContent = styled.div`
+
+export const Header = styled.div`
   flex: 1;
 `
 
