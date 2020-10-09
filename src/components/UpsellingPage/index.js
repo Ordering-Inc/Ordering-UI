@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useOrder } from 'ordering-components'
+import { useOrder, getLanguage } from 'ordering-components'
 import { Modal } from '../Modal'
 import { Container, UpsellingContainer, Item, Image, Details } from './styles'
 import { Button } from '../../styles/Buttons'
@@ -9,6 +9,7 @@ export const UpsellingPage = (props) => {
   const [orderState, { addProduct }] = useOrder()
   const [upsellingProducts, setUpsellingProducts] = useState([])
   const [modalOpen, setModalOpen] = useState(true)
+  const [, t] = getLanguage()
 
   useEffect(() => {
     handleProductsOfCart()
@@ -49,7 +50,7 @@ export const UpsellingPage = (props) => {
   }
 
   return (
-    <Modal title='Do you want something else?' open={modalOpen} onClose={() => setModalOpen(false)}>
+    <Modal title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')} open={modalOpen} onClose={() => setModalOpen(false)}>
       <Container>
         <UpsellingContainer>
           {
@@ -63,14 +64,14 @@ export const UpsellingPage = (props) => {
                     <p>{product.name}</p>
                   </div>
                   <p>${product.price}</p>
-                  <Button color='primary' onClick={handleAddProductUpselling}>Add</Button>
+                  <Button color='primary' onClick={handleAddProductUpselling}>{t('ADD', 'Add')}</Button>
                 </Details>
               </Item>
             ))
           }
         </UpsellingContainer>
         <Button color='secondary' outline onClick={() => setModalOpen(false)}>
-          No, Thanks
+          {t('NO_THANKS', 'No, Thanks')}
         </Button>
       </Container>
     </Modal>
