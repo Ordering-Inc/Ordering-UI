@@ -8,6 +8,10 @@ export const UserProfileContainer = styled.div`
   text-align: center;
   flex: 1;
   width: 100%;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export const FlexTabs = styled.div`
@@ -67,16 +71,22 @@ export const Camera = styled.div`
 `
 
 export const SideForm = styled.div`
-  width: 100%;
-  height: 70%;
+  
+  width: 70%;
+  height: 100%;
   text-align: center;
   > *{
     margin: 30px 0;
     margin-left: 50px;
   }
-  @media (min-width: 480px) {
-  width: 70%;
-  height: 100%;
+  @media (max-width: 480px) {
+    width: 100%;
+    height: 70%;
+    > *{
+    margin: 0;
+    margin-left: 0;
+    margin-top: 20px;
+  }
   };
 `
 
@@ -95,6 +105,11 @@ export const UserData = styled.div`
     width: 80px;
     background: #F8F8F8;
   }
+  @media (max-width: 480px){
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
 `
 
 export const SavedPlaces = styled.div`
@@ -109,11 +124,25 @@ export const SavedPlaces = styled.div`
   }
   text-align: left;
   width: 100%;
+
+  @media (max-width: 480px){
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+      > div{
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      margin: 0 auto;
+      width: 80%;
+    }
+  }
 `
 
 export const FormInput = styled.form`
   width: 100%;
-  height: 200px;
   text-align: left;
   > * {
     margin-top: 10px;
@@ -136,7 +165,22 @@ export const FormInput = styled.form`
   }
   > button {
     box-sizing: initial;
-    width: 39%
+    width: 39%;
   }
-};
-  `
+}
+  @media (max-width: 480px){
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    > *{
+      margin-right: 0;
+      margin-top: 20px;
+    }
+    > button {
+    box-sizing: initial;
+    width: 79%;
+  }
+  }
+`
