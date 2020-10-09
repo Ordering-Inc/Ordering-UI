@@ -212,7 +212,7 @@ export const Router = () => {
                     <CheckoutPage />
                   </Route>
                   <Route exact path='/upselling_page'>
-                    <UpsellingPage businessId={41} products={[]} onSave={(productCart) => console.log(productCart)} />
+                    <UpsellingPage businessId={41} onSave={(productCart) => console.log(productCart)} />
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />
