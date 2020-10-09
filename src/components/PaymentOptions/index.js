@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { IoIosCash, IoIosCard, IoIosRadioButtonOn } from 'react-icons/io'
 import { FaStripe, FaCcStripe, FaStripeS } from 'react-icons/fa'
 import { GrStripe } from 'react-icons/gr'
-import { PaymentOptions as PaymentOptionsController } from 'ordering-components'
+import { PaymentOptions as PaymentOptionsController, getLanguage } from 'ordering-components'
 
 import { Modal } from '../Modal'
 import { PaymentOptionCash } from '../PaymentOptionCash'
@@ -49,6 +49,7 @@ const PaymentOptionsUI = (props) => {
     handlePaymethodClick,
     handlePaymethodDataChange
   } = props
+  const [, t] = getLanguage()
 
   return (
     <PaymentMethodsContainer>
@@ -78,11 +79,11 @@ const PaymentOptionsUI = (props) => {
 
         {paymethodsList.error && paymethodsList.error.length > 0 && (
           paymethodsList.error.map((e, i) => (
-            <p key={i}>ERROR: [{e}]</p>
+            <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
           )))}
 
         {!paymethodsList.loading && !paymethodsList.error && paymethodsList.paymethods.length === 0 && (
-          <p>No payment methods!</p>
+          <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>
         )}
       </PaymentMethodsList>
 
