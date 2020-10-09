@@ -5,7 +5,8 @@ import { isADateValid } from '../../utils'
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage
+  ErrorMessage,
+  WrapperSearch
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -197,10 +198,12 @@ export const BusinessesListing = (props) => {
       <BusinessTypeFilter
         handleChangeBusinessType={handleChangeBusinessType}
       />
-      <SearchBar
-        onSearch={handleChangeSearch}
-        search={searchValue}
-      />
+      <WrapperSearch>
+        <SearchBar
+          onSearch={handleChangeSearch}
+          search={searchValue}
+        />
+      </WrapperSearch>
       <BusinessList>
         {
           !businessesList.loading && businessesList.businesses.length === 0 && (

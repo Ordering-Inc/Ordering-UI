@@ -7,8 +7,7 @@ export const BusinessSearch = styled.div`
   justify-content: flex-end;
 
   input {
-    width: 250px;
-    margin: 0px 20px;
+    width: 200px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
     background-image: url(${searchIcon});
@@ -16,8 +15,14 @@ export const BusinessSearch = styled.div`
     background-repeat: no-repeat;
     background-size: 15px;
 
-    &:focus {
-      width: 50%;
+    @media (min-width: 681px) {
+      &:focus {
+        width: 50%;
+      }
+    }
+
+    @media (max-width: 680px) {
+      width: 100%;
     }
   }
 `
