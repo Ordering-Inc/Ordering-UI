@@ -34,7 +34,7 @@ const MomentControlUI = (props) => {
         (BeforeComponent, i) => <BeforeComponent key={i} {...props} />
       )}
 
-      <h2>Select a Delivery Date</h2>
+      <h2>{t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')}</h2>
       <Days>
         {
           datesList.slice(0, 6).map(date => {
@@ -52,7 +52,7 @@ const MomentControlUI = (props) => {
           })
         }
       </Days>
-      <h2>Desired Delivery Time</h2>
+      <h2>{t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')}</h2>
       <Hours>
         <Hour selected={isAsap} onClick={() => handleAsap()}>{t('ASAP', 'As soon as posible')}</Hour>
         {/* <Hour>{t('SCHEDULE_FOR_LATER', 'Schedule for later')}</Hour> */}

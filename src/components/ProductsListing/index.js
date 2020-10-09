@@ -19,7 +19,7 @@ export const ProductsListing = (props) => {
   const [businessState, setBusinessState] = useState({ business: {}, loading: true, error: null })
   const [categoriesState, setCategoriesState] = useState({})
   const [orderOptions, setOrderOptions] = useState()
-  const requestsState = {}
+  const [requestsState, setRequestsState] = useState({})
 
   const categoryStateDefault = {
     loading: true,
@@ -75,6 +75,7 @@ export const ProductsListing = (props) => {
       const functionFetch = categorySelected.id ? ordering.businesses(businessState.business.id).categories(categorySelected.id).products() : ordering.businesses(businessState.business.id).products()
       const source = CancelToken.source()
       requestsState.products = source
+      setRequestsState({ ...requestsState })
       const { content: { error, result, pagination } } = await functionFetch.parameters(parameters).get({ cancelToken: source.token })
       if (!error) {
         const newcategoryState = {
@@ -105,6 +106,7 @@ export const ProductsListing = (props) => {
       setBusinessState({ ...businessState, loading: true })
       const source = CancelToken.source()
       requestsState.business = source
+      setRequestsState({ ...requestsState })
       const parameters = {
         type: orderState.options?.type || 1,
         location: orderState.options?.address?.location
@@ -140,8 +142,9 @@ export const ProductsListing = (props) => {
   }
 
   useEffect(() => {
-    if (orderState.loading || businessState.loading) return
-    getProducts()
+    if (!orderState.loading && !businessState.loading) {
+      getProducts()
+    }
   }, [orderState, categorySelected, businessState])
 
   useEffect(() => {
@@ -161,37 +164,24 @@ export const ProductsListing = (props) => {
   }, [JSON.stringify(orderState?.options)])
 
   /**
-   * Cancel business request on unmount
+   * Cancel business request
    */
   useEffect(() => {
+    const request = requestsState.business
     return () => {
-      if (requestsState.business) {
-        requestsState.business.cancel()
-      }
+      request && request.cancel()
     }
-  }, [])
-
-  /**
-   * Cancel products request on unmount
-   */
-  useEffect(() => {
-    return () => {
-      if (requestsState.products) {
-        requestsState.products.cancel()
-      }
-    }
-  }, [businessState])
+  }, [requestsState.business])
 
   /**
    * Cancel products request on unmount and pagination
    */
   useEffect(() => {
+    const request = requestsState.products
     return () => {
-      if (requestsState.products) {
-        requestsState.products.cancel()
-      }
+      request && request.cancel()
     }
-  }, [categoryState])
+  }, [requestsState.products])
 
   return (
     <>
