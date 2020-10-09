@@ -1,5 +1,5 @@
 import React from 'react'
-import { StripeElementsForm as StripeElementsFormController } from 'ordering-components'
+import { StripeElementsForm as StripeElementsFormController, useLanguage } from 'ordering-components'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
@@ -19,6 +19,7 @@ const StripeElementsFormUI = (props) => {
     toSave,
     onCancel
   } = props
+  const [, t] = useLanguage()
   return (
     <>
       {publicKey ? (
@@ -33,7 +34,7 @@ const StripeElementsFormUI = (props) => {
           />
         </Elements>
       ) : (
-        <ErrorMessage>Something is wrong!</ErrorMessage>
+        <ErrorMessage>{t('SOMETHING_WRONG', 'Something is wrong!')}</ErrorMessage>
       )}
     </>
   )
