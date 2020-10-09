@@ -95,7 +95,6 @@ export const UserData = styled.div`
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  width: 100%;
   height: 200px;
   > * {
     margin: 5px 0;
@@ -113,17 +112,16 @@ export const UserData = styled.div`
 `
 
 export const SavedPlaces = styled.div`
-  width: 60%;
   > div{
   display: flex;
   flex-direction: column-reverse;
   width: 60%;
   }
-  > button{
-    width: 50%
+  button{
+    width: 50%;
+    align-self: flex-end;
   }
   text-align: left;
-  width: 100%;
 
   @media (max-width: 480px){
     align-items: center;

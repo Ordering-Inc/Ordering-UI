@@ -100,7 +100,11 @@ const UserProfileFormUI = (props) => {
                                 {
                                   field.code === 'mobile_phone' &&
                                     <Input
-                                      placeholder={t('country_phone_code', 'Mobile Phone Country Code')} name='country_phone_code' defaultValue={user.country_phone_code} onChange={hanldeChangeInput} ref={register({
+                                      placeholder={t('country_phone_code', 'Mobile Phone Country Code')}
+                                      name='country_phone_code'
+                                      defaultValue={user.country_phone_code}
+                                      onChange={hanldeChangeInput}
+                                      ref={register({
                                         required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
                                         pattern: {
                                           value: /^(\+?\d{1,3}|\d{1,4})$/,
