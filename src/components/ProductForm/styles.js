@@ -66,6 +66,7 @@ export const ProductInfo = styled.div`
     text-align: left;
     color: #263238;
     overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
     margin-top: 0px;
   }
@@ -75,9 +76,12 @@ export const ProductInfo = styled.div`
     font-weight: 200;
     text-align: left;
     margin-top: 0px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    word-wrap: break-word;
+
+    line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
   @media (max-width: 1200px) {
