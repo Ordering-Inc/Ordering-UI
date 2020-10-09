@@ -4,6 +4,13 @@ import { HeaderInvert } from '../../../template/components/Header/styles'
 export const HeaderItem = styled.div`
   cursor: pointer;
   color: #333;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+  }
+
   ${HeaderInvert} & {
     color: #FFF;
   }

@@ -25,7 +25,8 @@ export const ProductItemAccordion = (props) => {
     changeQuantity,
     getProductMax,
     offsetDisabled,
-    onDeleteProduct
+    onDeleteProduct,
+    onEditProduct
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -73,10 +74,6 @@ export const ProductItemAccordion = (props) => {
     }
   }
 
-  const onEditProduct = () => {
-    // put here code for show productForm component to edit product
-  }
-
   return (
     <AccordionSection>
       <Accordion isValid={product?.valid ?? true} className={`accordion ${setActive}`}>
@@ -109,7 +106,7 @@ export const ProductItemAccordion = (props) => {
             <div className='actions'>
               <span
                 className='edit'
-                onClick={() => onEditProduct()}
+                onClick={() => onEditProduct(product)}
                 disabled={orderState.loading}
               >
                 <TiPencil />
@@ -131,7 +128,7 @@ export const ProductItemAccordion = (props) => {
               <div className='actions'>
                 <span
                   className='edit'
-                  onClick={() => onEditProduct()}
+                  onClick={() => onEditProduct(product)}
                   disabled={orderState.loading}
                 >
                   <TiPencil />

@@ -22,13 +22,13 @@ const UserProfileFormUI = (props) => {
   const [edit, setEdit] = useState(false)
 
   useEffect(() => {
-    if (!formState.loading && formState.result?.error) {
+    if ((!formState.loading && formState.result?.error)) {
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR')]
       })
     }
-  }, [formState])
+  }, [formState.loading])
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -61,7 +61,6 @@ const UserProfileFormUI = (props) => {
 
   const onSubmit = () => {
     if (Object.keys(formState.changes).length !== 0) {
-      console.log('cambios')
       handleButtonUpdateClick()
     }
     setEdit(false)

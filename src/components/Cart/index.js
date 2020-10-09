@@ -8,7 +8,9 @@ import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import { formatPrice } from '../../utils'
 
 import { Confirm } from '../Confirm'
+import { Modal } from '../Modal'
 import { CouponControl } from '../CouponControl'
+import { ProductForm } from '../ProductForm'
 
 import {
   CartContainer,
@@ -25,13 +27,16 @@ const CartUI = (props) => {
     getProductMax,
     offsetDisabled,
     removeProduct,
-    onClickCheckout
+    onClickCheckout,
+    isHideCheckoutButtom
   } = props
   const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [openProduct, setModalIsOpen] = useState(false)
+  const [curProduct, setCurProduct] = useState(null)
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -44,6 +49,11 @@ const CartUI = (props) => {
     })
   }
 
+  const handleEditProduct = (product) => {
+    setCurProduct(product)
+    setModalIsOpen(true)
+  }
+
   const handleClickCheckout = () => {
     history.push(`/checkout/${cart.uuid}`)
     onClickCheckout()
@@ -54,6 +64,12 @@ const CartUI = (props) => {
       setConfirm({ ...confirm, open: false })
     }
   }, [])
+
+  const handlerProductAction = (product) => {
+    if (Object.keys(product).length) {
+      setModalIsOpen(false)
+    }
+  }
 
   return (
     <CartContainer>
@@ -74,6 +90,7 @@ const CartUI = (props) => {
             getProductMax={getProductMax}
             offsetDisabled={offsetDisabled}
             onDeleteProduct={handleDeleteClick}
+            onEditProduct={handleEditProduct}
           />
         ))}
         {cart?.valid_products && (
@@ -123,7 +140,7 @@ const CartUI = (props) => {
             </table>
           </OrderBill>
         )}
-        {onClickCheckout && (
+        {onClickCheckout && isHideCheckoutButtom && (
           <CheckoutAction>
             <Button
               color='primary'
@@ -144,6 +161,21 @@ const CartUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='70%'
+        open={openProduct}
+        closeOnBackdrop={false}
+        onClose={() => setModalIsOpen(false)}
+      >
+        <ProductForm
+          isCartProduct
+          productCart={curProduct}
+          businessId={curProduct?.business_id}
+          categoryId={curProduct?.category_id}
+          productId={curProduct?.id}
+          onSave={handlerProductAction}
+        />
+      </Modal>
     </CartContainer>
   )
 }

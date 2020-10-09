@@ -15,7 +15,7 @@ export const optimizeImage = (url, params, fallback) => {
  * TODO: refactor this method with current currency or some context about it
  * @param {Number} price
  */
-export const formatPrice = (price) => `$ ${price.toFixed(2)}`
+export const formatPrice = (price) => price ? `$ ${price.toFixed(2)}` : '$ 0.00'
 
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
@@ -28,3 +28,5 @@ export const getIconCard = (brand = '') => {
       return <FaCreditCard />
   }
 }
+
+export const DriverTipsOptions = [0, 10, 15, 20, 25]

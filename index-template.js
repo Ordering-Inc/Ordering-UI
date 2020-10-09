@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router } from './template/router'
 import { OrderingProvider } from 'ordering-components'
+import { Alert } from './src/components/Confirm'
 
 const configFile = {
   project: 'luisv4',
@@ -17,7 +18,7 @@ const configFile = {
 
 const wrapper = document.getElementById('app')
 ReactDOM.render(
-  <OrderingProvider settings={configFile}>
+  <OrderingProvider Alert={Alert} settings={configFile}>
     <Router />
   </OrderingProvider>
   , wrapper)

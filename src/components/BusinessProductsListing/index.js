@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useParams } from 'react-router-dom'
 import { VscWarning } from 'react-icons/vsc'
 import {
-  // ProductsListing,
   useApi,
-  useOrder,
   useLanguage
 } from 'ordering-components'
 
-import { ProductsListing } from '../ProductsListing' // Replace this component in ordering-components
+import { ProductsListing } from '../ProductsListing' // move this component in ordering-components
 
 import {
   ProductsContainer,
@@ -21,6 +18,8 @@ import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { ProductForm } from '../ProductForm'
 import { Modal } from '../Modal'
+
+const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
   const {
@@ -49,7 +48,8 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleScroll = useCallback(() => {
-    const badScrollPosition = window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight
+    const innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL
+    const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
     if (badScrollPosition || categoryState.loading || !hasMore) return
     getNextProducts()
@@ -88,7 +88,7 @@ const BusinessProductsListingUI = (props) => {
       <Modal
         width='70%'
         open={openProduct}
-        closeOnBackdrop={false}
+        closeOnBackdrop
         onClose={() => setModalIsOpen(false)}
       >
         <ProductForm
@@ -139,15 +139,41 @@ const BusinessProductsListingUI = (props) => {
 }
 
 export const BusinessProductsListing = (props) => {
-  const { store } = useParams()
   const [ordering] = useApi()
 
-  const businessProps = ['id', 'name', 'header', 'logo', 'name', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'products']
+  const businessProps = [
+    'id',
+    'name',
+    'header',
+    'logo',
+    'name',
+    'open',
+    'about',
+    'description',
+    'address',
+    'location',
+    'schedule',
+    'service_fee',
+    'delivery_price',
+    'distance',
+    'delivery_time',
+    'gallery',
+    'pickup_time',
+    'reviews',
+    'featured',
+    'offers',
+    'food',
+    'laundry',
+    'alcohol',
+    'groceries',
+    'slug',
+    'products'
+  ]
 
   const businessProductslistingProps = {
     ...props,
     UIComponent: BusinessProductsListingUI,
-    slug: store,
+    slug: props.store,
     ordering: ordering,
     businessProps: businessProps,
     handlerClickCategory: (e) => { console.log(e) }

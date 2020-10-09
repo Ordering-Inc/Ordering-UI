@@ -16,6 +16,7 @@ import { ReviewOrder } from '../ReviewOrder'
 
 import {
   Container,
+  WrapperContainer,
   Header,
   HeaderInfo,
   HeaderLogo,
@@ -23,28 +24,21 @@ import {
   Content,
   OrderBusiness,
   BusinessWrapper,
-  BusinessLogoWrapper,
+  LogoWrapper,
   BusinessLogo,
   BusinessInfo,
-  BusinessActions,
+  ActionsBlock,
   OrderInfo,
   OrderData,
   StatusBar,
   OrderStatus,
   StatusImage,
-  CustomerTitle,
+  SectionTitle,
   OrderCustomer,
-  WrapperCustomerPhoto,
-  CustomerPhoto,
-  CustomerInfo,
-  DriverTitle,
+  PhotoBlock,
+  InfoBlock,
   OrderDriver,
   WrapperDriver,
-  WrapperDriverPhoto,
-  DriverPhoto,
-  DriverInfo,
-  DriverActions,
-  OrderBillTitle,
   OrderProducts,
   OrderBill,
   ReviewsAction,
@@ -95,34 +89,8 @@ const OrderDetailsUI = (props) => {
 
   return (
     <Container>
-      {loading && (
-        <>
-          <SkeletonBlock width={100}>
-            <Skeleton height={250} />
-          </SkeletonBlock>
-          <SkeletonBlockWrapp>
-            <SkeletonBlock width={80}>
-              <Skeleton height={100} />
-              <Skeleton height={100} />
-              <Skeleton height={100} />
-              <Skeleton height={100} />
-              <Skeleton height={200} />
-            </SkeletonBlock>
-          </SkeletonBlockWrapp>
-        </>
-      )}
-
-      {error && error.length > 0 &&
-        error.map((e, i) => (
-          <p key={i}>ERROR: [{e}]</p>
-        ))}
-
-      {!loading && Object.keys(order).length === 0 && (
-        <p>Not Found elements</p>
-      )}
-
       {order && Object.keys(order).length > 0 && (
-        <>
+        <WrapperContainer>
           <Header>
             <HeaderInfo>
               <HeaderLogo bgimage={logoHeader} />
@@ -139,15 +107,15 @@ const OrderDetailsUI = (props) => {
           <Content>
             <OrderBusiness>
               <BusinessWrapper>
-                <BusinessLogoWrapper>
+                <LogoWrapper>
                   <BusinessLogo bgimage={order?.business?.logo} />
-                </BusinessLogoWrapper>
+                </LogoWrapper>
                 <BusinessInfo>
                   <h1>{order?.business?.name}</h1>
                   <p>{order?.business?.address}</p>
                 </BusinessInfo>
               </BusinessWrapper>
-              <BusinessActions>
+              <ActionsBlock>
                 <span>
                   <FiPhone />
                 </span>
@@ -157,7 +125,7 @@ const OrderDetailsUI = (props) => {
                 <span>
                   <BiCaretDown />
                 </span>
-              </BusinessActions>
+              </ActionsBlock>
             </OrderBusiness>
 
             <OrderInfo>
@@ -175,53 +143,53 @@ const OrderDetailsUI = (props) => {
               </OrderStatus>
             </OrderInfo>
 
-            <CustomerTitle>
+            <SectionTitle>
               Customer
-            </CustomerTitle>
+            </SectionTitle>
             <OrderCustomer>
               {order?.customer?.photo && (
-                <WrapperCustomerPhoto>
-                  <CustomerPhoto bgimage={order?.customer?.photo} />
-                </WrapperCustomerPhoto>
+                <div>
+                  <PhotoBlock src={order?.customer?.photo} />
+                </div>
               )}
-              <CustomerInfo>
+              <InfoBlock>
                 <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                 <span>{order?.customer?.address}</span>
-              </CustomerInfo>
+              </InfoBlock>
             </OrderCustomer>
 
             {order?.driver && (
               <>
-                <DriverTitle>
+                <SectionTitle>
                   Your Driver
-                </DriverTitle>
+                </SectionTitle>
                 <OrderDriver>
                   <WrapperDriver>
-                    {order?.customer?.photo && (
-                      <WrapperDriverPhoto>
-                        <DriverPhoto bgimage={order?.driver?.photo} />
-                      </WrapperDriverPhoto>
+                    {!order?.customer?.photo && (
+                      <div>
+                        <PhotoBlock src={order?.driver?.photo} />
+                      </div>
                     )}
-                    <DriverInfo>
+                    <InfoBlock>
                       <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
                       <span>Driver</span>
-                    </DriverInfo>
+                    </InfoBlock>
                   </WrapperDriver>
-                  <DriverActions>
+                  <ActionsBlock>
                     <span>
                       <FiPhone />
                     </span>
                     <span>
                       <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
                     </span>
-                  </DriverActions>
+                  </ActionsBlock>
                 </OrderDriver>
               </>
             )}
 
-            <OrderBillTitle>
+            <SectionTitle>
               Your Order
-            </OrderBillTitle>
+            </SectionTitle>
             <OrderProducts>
               {order?.products?.length && order?.products.map(product => (
                 <ProductItemAccordion
@@ -283,17 +251,44 @@ const OrderDetailsUI = (props) => {
             )}
 
             <FootActions>
-              <a>
+              {/* <a>
                 Support
                 <BiCaretUp />
               </a>
+              */}
               <Link to='/profile/orders'>
                 My Orders
                 <BiCaretUp />
               </Link>
             </FootActions>
           </Content>
-        </>
+        </WrapperContainer>
+      )}
+
+      {loading && (
+        <WrapperContainer>
+          <SkeletonBlock width={100}>
+            <Skeleton height={250} />
+          </SkeletonBlock>
+          <SkeletonBlockWrapp>
+            <SkeletonBlock width={80}>
+              <Skeleton height={100} />
+              <Skeleton height={100} />
+              <Skeleton height={100} />
+              <Skeleton height={100} />
+              <Skeleton height={200} />
+            </SkeletonBlock>
+          </SkeletonBlockWrapp>
+        </WrapperContainer>
+      )}
+
+      {error && error.length > 0 &&
+        error.map((e, i) => (
+          <p key={i}>ERROR: [{e}]</p>
+        ))}
+
+      {!loading && Object.keys(order).length === 0 && (
+        <p>Not Found elements</p>
       )}
       <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })}>
         <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />

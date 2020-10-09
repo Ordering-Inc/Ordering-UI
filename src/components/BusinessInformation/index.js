@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 import React, { useState } from 'react'
 
 import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder } from 'ordering-components'
@@ -26,7 +25,7 @@ export const BusinessInformationUI = (props) => {
   }
 
   const formatUrlVideo = (url) => {
-    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
     const match = url.match(regExp)
     const id = (match && match[7].length === 11) ? match[7] : false
     return `https://www.youtube-nocookie.com/embed/${id}`
@@ -138,7 +137,6 @@ export const BusinessInformationUI = (props) => {
                   </div>
                   <span />
                   <div>
-                    <h5>Order Type Time:</h5>
                     <h5>Delivery Time: {dateFormatted(business?.delivery_time)}</h5>
                     <h5>Pickup Time: {dateFormatted(business?.pickup_time)}</h5>
                   </div>
