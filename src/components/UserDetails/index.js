@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { FcCancel } from 'react-icons/fc'
 import { TiPencil } from 'react-icons/ti'
 import Skeleton from 'react-loading-skeleton'
-import { UserDetails as UserDetailsController, getLanguage } from 'ordering-components'
+import { UserDetails as UserDetailsController, useLanguage } from 'ordering-components'
 
 import {
   Container,
@@ -26,7 +26,7 @@ const UserDetailsUI = (props) => {
     handleChangeInput,
     onEditUserClick
   } = props
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
 
   const { handleSubmit, register, errors } = useForm()
 

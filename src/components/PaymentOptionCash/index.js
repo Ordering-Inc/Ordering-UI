@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { getLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components'
 
 import {
   PaymentCashContainer,
@@ -16,7 +16,7 @@ export const PaymentOptionCash = (props) => {
     orderTotal,
     onChangeData
   } = props
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
 
   const { handleSubmit, register, errors } = useForm()
 

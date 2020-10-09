@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useApi, getLanguage } from 'ordering-components'
+import { useApi, useLanguage } from 'ordering-components'
 import { CancelToken } from 'ordering-api-sdk'
 import { CmsError } from './styles'
 
@@ -17,7 +17,7 @@ export const Cms = (props) => {
   const [error, setError] = useState(null)
   const [ordering] = useApi()
   const requestsState = {}
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
   /**
    * Method used to get the page by slug
    */

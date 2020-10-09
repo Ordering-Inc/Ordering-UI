@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder, getLanguage } from 'ordering-components'
+import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder, useLanguage } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import { BusinessInformationContainer, Header, BusinessContent, BusinessBasicContent, FlexTabs, BusinessLocation, Map, BusinessOpeningTime, Times, DeliveryDetails, BusinessGallery, BusinessVideos, BusinessInfo, BusinessInfoItem, WrapperBusinessLogo, BusinessLogo } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -13,7 +13,7 @@ export const BusinessInformationUI = (props) => {
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
 
   const openingTime = ({ open, close }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val

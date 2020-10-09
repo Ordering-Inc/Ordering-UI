@@ -1,5 +1,5 @@
 import React from 'react'
-import { StripeElementsForm as StripeElementsFormController, getLanguage } from 'ordering-components'
+import { StripeElementsForm as StripeElementsFormController, useLanguage } from 'ordering-components'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
@@ -19,7 +19,7 @@ const StripeElementsFormUI = (props) => {
     toSave,
     onCancel
   } = props
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
   return (
     <>
       {publicKey ? (

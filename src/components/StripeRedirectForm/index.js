@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { StripeRedirectForm as StripeRedirectFormController, useSession, getLanguage } from 'ordering-components'
+import { StripeRedirectForm as StripeRedirectFormController, useSession, useLanguage } from 'ordering-components'
 
 import {
   FormRedirect,
@@ -24,7 +24,7 @@ const StripeRedirectFormUI = (props) => {
 
   const [{ user }] = useSession()
   const { handleSubmit, register, errors, formState } = useForm()
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
 
   return (
     <FormRedirect onSubmit={handleSubmit(handleSubmitPaymentMethod)}>

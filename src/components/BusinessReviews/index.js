@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessReviews as BusinessReviewController, getLanguage } from 'ordering-components'
+import { BusinessReviews as BusinessReviewController, useLanguage } from 'ordering-components'
 
 import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv } from './styles'
 import { Select } from '../../styles/Select'
@@ -24,7 +24,7 @@ export const BusinessReviewsUI = (props) => {
       showOnSelected: puntaje
     }
   })
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
   return (
     <>
       {!reviewsList.loading ? (

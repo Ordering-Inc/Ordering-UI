@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useOrder, getLanguage } from 'ordering-components'
+import { useOrder, useLanguage } from 'ordering-components'
 import { Modal } from '../Modal'
 import { Container, UpsellingContainer, Item, Image, Details } from './styles'
 import { Button } from '../../styles/Buttons'
@@ -9,7 +9,7 @@ export const UpsellingPage = (props) => {
   const [orderState, { addProduct }] = useOrder()
   const [upsellingProducts, setUpsellingProducts] = useState([])
   const [modalOpen, setModalOpen] = useState(true)
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
 
   useEffect(() => {
     handleProductsOfCart()

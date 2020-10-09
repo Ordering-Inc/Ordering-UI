@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { IoIosCash, IoIosCard, IoIosRadioButtonOn } from 'react-icons/io'
 import { FaStripe, FaCcStripe, FaStripeS } from 'react-icons/fa'
 import { GrStripe } from 'react-icons/gr'
-import { PaymentOptions as PaymentOptionsController, getLanguage } from 'ordering-components'
+import { PaymentOptions as PaymentOptionsController, useLanguage } from 'ordering-components'
 
 import { Modal } from '../Modal'
 import { PaymentOptionCash } from '../PaymentOptionCash'
@@ -49,7 +49,7 @@ const PaymentOptionsUI = (props) => {
     handlePaymethodClick,
     handlePaymethodDataChange
   } = props
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
 
   return (
     <PaymentMethodsContainer>

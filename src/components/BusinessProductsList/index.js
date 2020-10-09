@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductsList, getLanguage } from 'ordering-components'
+import { ProductsList, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
 
@@ -18,7 +18,7 @@ const BusinessProductsListUI = (props) => {
     onProductClick
   } = props
 
-  const [, t] = getLanguage()
+  const [, t] = useLanguage()
 
   return (
     <ProductsContainer>
