@@ -126,8 +126,8 @@ const OrderDetailsUI = (props) => {
 
             <OrderInfo>
               <OrderData>
-                <h1>Order #{order?.id}</h1>
-                <p>Date and time for your order</p>
+                <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
+                <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>{order?.delivery_datetime}</p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
@@ -140,7 +140,7 @@ const OrderDetailsUI = (props) => {
             </OrderInfo>
 
             <SectionTitle>
-              Customer
+              {t('CUSTOMER', 'Customer')}
             </SectionTitle>
             <OrderCustomer>
               {order?.customer?.photo && (
@@ -157,7 +157,7 @@ const OrderDetailsUI = (props) => {
             {order?.driver && (
               <>
                 <SectionTitle>
-                  Your Driver
+                  {t('YOUR_DRIVER', 'Your Driver')}
                 </SectionTitle>
                 <OrderDriver>
                   <WrapperDriver>
@@ -168,7 +168,7 @@ const OrderDetailsUI = (props) => {
                     )}
                     <InfoBlock>
                       <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                      <span>Driver</span>
+                      <span>{t('DRIVER', 'Driver')}</span>
                     </InfoBlock>
                   </WrapperDriver>
                   <ActionsBlock>
@@ -184,7 +184,7 @@ const OrderDetailsUI = (props) => {
             )}
 
             <SectionTitle>
-              Your Order
+              {t('YOUR_ORDER', 'Your Order')}
             </SectionTitle>
             <OrderProducts>
               {order?.products?.length && order?.products.map(product => (
@@ -201,28 +201,28 @@ const OrderDetailsUI = (props) => {
               <table>
                 <tbody>
                   <tr>
-                    <td>Subtotal</td>
+                    <td>{t('SUBTOTAL', 'Subtotal')}</td>
                     <td>{formatPrice(order?.subtotal)}</td>
                   </tr>
                   <tr>
-                    <td>Tax (10%)</td>
+                    <td>{t('TAX', 'Tax')} (10%)</td>
                     <td>{formatPrice(order?.totalTax)}</td>
                   </tr>
                   <tr>
-                    <td>Delivery Fee</td>
+                    <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                     <td>{formatPrice(order?.deliveryFee)}</td>
                   </tr>
                   <tr>
-                    <td>Driver tips (0%)</td>
+                    <td>{t('DRIVER_TIP', 'Driver tip')} (0%)</td>
                     <td>{formatPrice(order?.driver_tip)}</td>
                   </tr>
                   <tr>
-                    <td>Service Fee(9%)</td>
+                    <td>{t('SERVICE FEE', 'Service Fee')} (9%)</td>
                     <td>{formatPrice(order?.serviceFee || 0)}</td>
                   </tr>
                   {order?.discount > 0 && (
                     <tr>
-                      <td>Discount</td>
+                      <td>{t('DISCOUNT', 'Discount')}</td>
                       <td>{formatPrice(order?.discount)}</td>
                     </tr>
                   )}
@@ -231,7 +231,7 @@ const OrderDetailsUI = (props) => {
               <table className='total'>
                 <tbody>
                   <tr>
-                    <td>Total</td>
+                    <td>{t('TOTAL', 'Total')}</td>
                     <td>{formatPrice(order?.total)}</td>
                   </tr>
                 </tbody>
@@ -241,7 +241,7 @@ const OrderDetailsUI = (props) => {
             {(order?.status === 1 || order?.status === 11) && (
               <ReviewsAction>
                 <Button color='primary'>
-                  Review your Order
+                  {t('REVIEW_ORDER', 'Review your Order')}
                 </Button>
               </ReviewsAction>
             )}
@@ -252,7 +252,7 @@ const OrderDetailsUI = (props) => {
                 <BiCaretUp />
               </a> */}
               <a onClick={() => history.push('/profile/orders')}>
-                My Orders
+                {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
               </a>
             </FootActions>
@@ -279,11 +279,11 @@ const OrderDetailsUI = (props) => {
 
       {error && error.length > 0 &&
         error.map((e, i) => (
-          <p key={i}>ERROR: [{e}]</p>
+          <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
         ))}
 
       {!loading && Object.keys(order).length === 0 && (
-        <p>Not Found elements</p>
+        <p>{t('NOT_FOUND_ELEMENTS', 'Not Found elements')}</p>
       )}
     </Container>
   )
