@@ -68,28 +68,28 @@ export const HomePage = (props) => {
       <HomeSection bgColor='#F8F8F8' column>
         <HomeTitle>
           <h2>
-            {t('HOME_TITLE_CONTENT', 'Steps to place')} <span>{t('AN_ORDER', 'an order')}</span>
+            {t('STEPS_TITLE', 'Steps to place')} <span>{t('STEPS_TITLE_HIGHLIGHT', 'an order')}</span>
           </h2>
         </HomeTitle>
         <StepsBlock>
           <div>
             <img src={locationSvg} />
-            <h3>{t('ADD_ADDRESS', 'Add Address')}</h3>
+            <h3>{t('STEPS_ADDRESS', 'Add Address')}</h3>
           </div>
           <Line />
           <div>
             <img src={businessSvg} />
-            <h3>{t('SELECT_YOUR_BUSINESS', 'Select your Business')}</h3>
+            <h3>{t('STEPS_BUSINESS', 'Select your Business')}</h3>
           </div>
           <Line />
           <div>
             <img src={productSvg} />
-            <h3>{t('CHOOSE_YOUR_PRODUCT', 'Choose your Product')}</h3>
+            <h3>{t('STEPS_PRODUCT', 'Choose your Product')}</h3>
           </div>
           <Line />
           <div>
             <img src={deliverySvg} width='88' height='88' />
-            <h3>{t('YOUR_PACKAGE_ARRIVES', 'Your package arrives')}</h3>
+            <h3>{t('STEPS_ARRIVE', 'Your package arrives')}</h3>
           </div>
         </StepsBlock>
       </HomeSection>
@@ -104,11 +104,11 @@ export const HomePage = (props) => {
             <div>
               <FontHomeTheme fontName={fontName}>
                 <h2>
-                  {t('TEXT_CONTENT_1', 'We deliver more than')}<span> {t('FOOD', 'food')}</span>
+                  {t('HOME_CONTENT_TITLE', 'We deliver more than')} <span>{t('HOME_CONTENT_TITLE_HIGHLIGHT', 'food')}</span>
                 </h2>
               </FontHomeTheme>
               <p>{t('TEXT_CONTENT_PARAGRAPH_1', 'With the largest on-demand network in the industry, you can explore your city, find its hidden hotspots, and watch as we bring your new favorite right to your door.')}</p>
-              <p>{t('DOWNLOAD_APP', 'Download the app for iOS or Android for free.')}</p>
+              <p>{t('HOME_CONTENT_PARAGRAPH_2', 'Download the app for iOS or Android for free.')}</p>
             </div>
           </WrapTextContent>
         </TextContent>
@@ -119,10 +119,10 @@ export const HomePage = (props) => {
           <WrapTextContent>
             <div>
               <FontHomeTheme fontName={fontName}>
-                <h2>{t('TEXT_CONTENT_2', 'Download')} <span>{t('OUR_APPS', 'our apps')}</span></h2>
+                <h2>{t('APPS_TITLE', 'Download')} <span>{t('APPS_TITLE_HIGHLIGHT', 'our apps')}</span></h2>
               </FontHomeTheme>
-              <p>{t('TEXT_CONTENT_PARAGRAPH_2', 'The best ordering experience on your smartphone.')}</p>
-              <p>{t('SPEEDY_ORDERING', 'For speedy ordering and delivery updates, get the apps now.')}</p>
+              <p>{t('APPS_PARAGRAPH_1', 'The best ordering experience on your smartphone.')}</p>
+              <p>{t('APPS_PARAGRAPH_2', 'For speedy ordering and delivery updates, get the apps now.')}</p>
             </div>
             <Icons>
               <RiAppleLine />
@@ -140,11 +140,11 @@ export const HomePage = (props) => {
         <TextContent className='center'>
           <HomeFooter>
             <FontHomeTheme fontName={fontName}>
-              <h2>{t('HOME_TITLE_FOOTER', 'Something for everyone')}</h2>
+              <h2>{t('HOME_CONTENT_HERO', 'Something for Everyone')}</h2>
             </FontHomeTheme>
             <div>
               <Button color='primary'>
-                {t('VIEW_MENU', 'View Menu')}
+                {t('HOME_CONTENT_HERO_BUTTON', 'View Menu')}
               </Button>
             </div>
           </HomeFooter>
