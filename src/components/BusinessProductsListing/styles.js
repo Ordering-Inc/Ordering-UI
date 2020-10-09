@@ -11,18 +11,39 @@ export const WrapContent = styled.div`
 `
 
 export const ProductsNotFound = styled.div`
-  width: 100%;
-  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 80%;
+  height: calc(100vh - 45px);
+  margin: auto;
 
   h1 {
-    opacity: 0.7;
-    margin-right: 10px;
+    opacity: 0.5;
+    text-align: center;
   }
-  svg {
-    font-size: 24px;
-    color: #D81313;
+
+  @media (max-width: 410px) {
+    h1 {
+      font-size: 24px;
+    }
   }
+
+  @media (max-width: 360px) {
+    h1 {
+      font-size: 20px;
+    }
+  }
+`
+
+export const ProductLoading = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`
+
+export const SkeletonItem = styled.div`
+  width: 80%;
+  margin: 0px auto 10px;
 `

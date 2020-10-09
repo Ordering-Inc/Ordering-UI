@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
+import { useLocation, Link } from 'react-router-dom'
 import {
-  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink
+  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink,
+  SubMenu
 } from './styles'
 
-import { useLocation, Link } from 'react-router-dom'
-
 import { useSession, useLanguage } from 'ordering-components'
+import { useWindowSize } from '../../../src/hooks/useWindowSize'
+import { useOnlineStatus } from '../../../src/hooks/useOnlineStatus'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
+import logo from '../../assets/images/logo.svg'
 import { LanguageSelector } from '../../../src/components/LanguageSelector'
 import { AddressesPopover } from '../../../src/components/AddressesPopover'
 import { UserPopover } from '../../../src/components/UserPopover'
@@ -36,6 +39,9 @@ export const Header = (props) => {
     })
   }
 
+  const windowSize = useWindowSize()
+  const onlineStatus = useOnlineStatus()
+
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
 
@@ -46,52 +52,71 @@ export const Header = (props) => {
           <LogoHeader>
             <Link to='/'>
               <img src={isHome ? logoHeaderInvert : logoHeader} />
+              <img src={logo} />
             </Link>
           </LogoHeader>
-          <Menu>
-            <OrderTypeSelectorHeader />
-          </Menu>
+          {onlineStatus && (
+            <Menu>
+              <OrderTypeSelectorHeader />
+            </Menu>
+          )}
         </LeftHeader>
-        <RightHeader>
-          <Menu>
-            {
-              !auth && (
-                <>
-                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
-                  <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
-                </>
-              )
-            }
-            <MomentPopover
-              open={openPopover.moment}
-              onClick={() => handleTogglePopover('moment')}
-              onClose={() => handleClosePopover('moment')}
-            />
-            <AddressesPopover
-              open={openPopover.addresses}
-              onClick={() => handleTogglePopover('addresses')}
-              onClose={() => handleClosePopover('addresses')}
-            />
-            {
-              auth && (
-                <>
-                  <UserPopover
-                    open={openPopover.user}
-                    onClick={() => handleTogglePopover('user')}
-                    onClose={() => handleClosePopover('user')}
-                  />
-                  <CartPopover
-                    open={openPopover.cart}
-                    onClick={() => handleTogglePopover('cart')}
-                    onClose={() => handleClosePopover('cart')}
-                  />
-                </>
-              )
-            }
-            <LanguageSelector />
-          </Menu>
-        </RightHeader>
+        {onlineStatus && (
+          <RightHeader>
+            <Menu>
+              {
+                !auth && (
+                  <>
+                    <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
+                    <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
+                  </>
+                )
+              }
+              <MomentPopover
+                open={openPopover.moment}
+                onClick={() => handleTogglePopover('moment')}
+                onClose={() => handleClosePopover('moment')}
+              />
+              <AddressesPopover
+                open={openPopover.addresses}
+                onClick={() => handleTogglePopover('addresses')}
+                onClose={() => handleClosePopover('addresses')}
+              />
+              {
+                auth && (
+                  <>
+                    <UserPopover
+                      open={openPopover.user}
+                      onClick={() => handleTogglePopover('user')}
+                      onClose={() => handleClosePopover('user')}
+                    />
+                    <CartPopover
+                      open={openPopover.cart}
+                      onClick={() => handleTogglePopover('cart')}
+                      onClose={() => handleClosePopover('cart')}
+                    />
+                  </>
+                )
+              }
+              <LanguageSelector />
+            </Menu>
+          </RightHeader>
+        )}
       </InnerHeader>
+      {windowSize.width <= 820 && onlineStatus && (
+        <SubMenu>
+          <MomentPopover
+            open={openPopover.moment}
+            onClick={() => handleTogglePopover('moment')}
+            onClose={() => handleClosePopover('moment')}
+          />
+          <AddressesPopover
+            open={openPopover.addresses}
+            onClick={() => handleTogglePopover('addresses')}
+            onClose={() => handleClosePopover('addresses')}
+          />
+        </SubMenu>
+      )}
     </HeaderType>
   )
 }

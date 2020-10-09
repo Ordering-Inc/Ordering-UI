@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useOrder, useLanguage } from 'ordering-components'
 import { CancelToken } from 'ordering-api-sdk'
+import { isADateValid } from '../../utils'
 
 export const ProductsListing = (props) => {
   console.log('Move ProductsListing to ordering-componenets')
   const {
     slug,
+    categoryId,
+    productId,
+    isInitialRender,
     ordering,
     businessProps,
     UIComponent
@@ -19,6 +23,7 @@ export const ProductsListing = (props) => {
   const [categoriesState, setCategoriesState] = useState({})
   const [orderOptions, setOrderOptions] = useState()
   const [requestsState, setRequestsState] = useState({})
+  const [productModal, setProductModal] = useState({ product: null, loading: false, error: null })
 
   const categoryStateDefault = {
     loading: true,
@@ -39,15 +44,15 @@ export const ProductsListing = (props) => {
   }
 
   const getProducts = async (newFetch) => {
-    if (!businessState.business.lazy_load_products_recommended) {
+    if (!businessState?.business?.lazy_load_products_recommended) {
       const categoryState = {
         ...categoryStateDefault,
         loading: false
       }
       if (categorySelected.id) {
-        categoryState.products = businessState.business.categories?.find(category => category.id === categorySelected.id)?.products || []
+        categoryState.products = businessState?.business?.categories?.find(category => category.id === categorySelected.id)?.products || []
       } else {
-        categoryState.products = businessState.business.categories?.reduce((products, category) => [...products, ...category.products], []) || []
+        categoryState.products = businessState?.business?.categories?.reduce((products, category) => [...products, ...category.products], []) || []
       }
       setCategoryState({ ...categoryState })
       return
@@ -100,6 +105,47 @@ export const ProductsListing = (props) => {
     }
   }
 
+  const getProduct = async () => {
+    if (categoryId && productId && businessState.business.id) {
+      try {
+        setProductModal({
+          ...productModal,
+          loading: true
+        })
+        const source = CancelToken.source()
+        requestsState.product = source
+        const parameters = {
+          type: orderState.options?.type || 1
+        }
+
+        const { content: { result } } = await ordering
+          .businesses(businessState.business.id)
+          .categories(categoryId)
+          .products(productId)
+          .parameters(parameters)
+          .get({ cancelToken: source.token })
+        const product = Array.isArray(result) ? null : result
+        setProductModal({
+          ...productModal,
+          product,
+          loading: false
+        })
+      } catch (e) {
+        setProductModal({
+          ...productModal,
+          loading: false,
+          error: [e]
+        })
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (isInitialRender) {
+      getProduct()
+    }
+  }, [JSON.stringify(businessState.business?.id)])
+
   const getBusiness = async () => {
     try {
       setBusinessState({ ...businessState, loading: true })
@@ -112,7 +158,7 @@ export const ProductsListing = (props) => {
           ? `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`
           : null
       }
-      if (orderState.options?.moment) {
+      if (orderState.options?.moment && isADateValid(orderState.options?.moment)) {
         const parts = orderState.options?.moment.split(' ')
         const dateParts = parts[0].split('-')
         const timeParts = parts[1].split(':')
@@ -191,8 +237,10 @@ export const ProductsListing = (props) => {
           categorySelected={categorySelected}
           categoryState={categoryState}
           businessState={businessState}
+          productModal={productModal}
           handleChangeCategory={handleChangeCategory}
           getNextProducts={getProducts}
+          updateProductModal={(val) => setProductModal({ ...productModal, product: val })}
         />
       )}
     </>

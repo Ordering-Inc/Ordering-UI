@@ -22,6 +22,15 @@ export const Option = styled.div`
   svg {
     vertical-align: text-top;
   }
+
+  ${({ withIcons }) => withIcons && css`
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      svg {
+        margin-right: 3px;
+      }
+  `}
 `
 
 export const Options = styled.div`
@@ -66,6 +75,17 @@ export const Selected = styled.div`
     vertical-align: text-top;
     display: flex;
     margin-left: 7px;
+    ${({ withIcons }) => withIcons && css`
+      &:nth-child(1) {
+        margin-right: 7px;
+      }
+    `}
+  }
+
+  @media (max-width: 380px) {
+    padding-left: 9px;
+    padding-right: 9px;
+    font-size: 13px;
   }
   ${props => props.InitialIcon && css`
       padding-left: 5px;

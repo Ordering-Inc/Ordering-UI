@@ -12,6 +12,7 @@ import {
 
 const BusinessProductsListUI = (props) => {
   const {
+    businessId,
     category,
     categories,
     categoryState,
@@ -29,8 +30,9 @@ const BusinessProductsListUI = (props) => {
               categoryState.products?.map(product => (
                 <SingleProductCard
                   key={product.id}
-                  isSoldOut={product.inventoried && !product.quantity}
+                  isSoldOut={(product.inventoried && !product.quantity)}
                   product={product}
+                  businessId={businessId}
                   onProductClick={onProductClick}
                 />
               ))
@@ -62,6 +64,7 @@ const BusinessProductsListUI = (props) => {
                           <SingleProductCard
                             key={product.id}
                             isSoldOut={product.inventoried && !product.quantity}
+                            businessId={businessId}
                             product={product}
                             onProductClick={onProductClick}
                           />

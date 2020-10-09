@@ -29,6 +29,7 @@ const AddressListUI = (props) => {
     handleDelete,
     setAddressList,
     handleSetDefault,
+    onClosePopover,
     popover
   } = props
 
@@ -62,6 +63,11 @@ const AddressListUI = (props) => {
       addresses
     })
     setAddessOpen(false)
+  }
+
+  const handleSetAddress = (address) => {
+    handleSetDefault(address)
+    onClosePopover && onClosePopover()
   }
 
   const handleDeleteClick = (address) => {
@@ -106,7 +112,7 @@ const AddressListUI = (props) => {
             <AddressListUl>
               {addressList.addresses.map(address => (
                 <AddressItem key={address.id}>
-                  <div className='wrapAddress' onClick={() => handleSetDefault(address)}>
+                  <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                     <span className='radio'>
                       {address.default ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}
                     </span>

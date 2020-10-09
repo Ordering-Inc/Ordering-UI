@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
-
 import { BsChevronDown } from 'react-icons/bs'
+
+import { GrDeliver } from 'react-icons/gr'
+import { FaTruckPickup, FaCarSide } from 'react-icons/fa'
+import { AiFillShop } from 'react-icons/ai'
+import { GiFoodTruck } from 'react-icons/gi'
 
 import {
   Select as SelectInput,
@@ -8,11 +12,12 @@ import {
   Options,
   Option,
   Chevron,
-  TextContent
+  Header
 } from '../Selects'
 
 export const Select = (props) => {
   const {
+    withIcons,
     placeholder,
     options,
     defaultValue,
@@ -35,6 +40,21 @@ export const Select = (props) => {
       if (!e.target.classList.contains(Selected.styledComponentId) && !e.target.classList.contains(Option.styledComponentId)) {
         setOpen(false)
       }
+    }
+  }
+
+  const getIconType = (name = '') => {
+    switch (name) {
+      case 'pickup':
+        return <FaTruckPickup />
+      case 'eatin':
+        return <AiFillShop />
+      case 'curbside':
+        return <GiFoodTruck />
+      case 'drivethru':
+        return <FaCarSide />
+      default:
+        return <GrDeliver />
     }
   }
 
@@ -63,14 +83,31 @@ export const Select = (props) => {
         !selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>
       }
       {
-        selectedOption && <Selected InitialIcon={InitialIcon}>{InitialIcon && <InitialIcon />} <TextContent>{selectedOption.showOnSelected || selectedOption.content}</TextContent> <Chevron><BsChevronDown /></Chevron></Selected>
+        selectedOption && (
+          <Selected withIcons={withIcons || InitialIcon}>
+            {withIcons && getIconType(selectedOption.icon)}
+            {InitialIcon && <InitialIcon />}
+            <Header>
+              {selectedOption.showOnSelected || selectedOption.content}
+            </Header>
+            <Chevron>
+              <BsChevronDown />
+            </Chevron>
+          </Selected>
+        )
       }
       {
         open && options && (
           <Options position='right'>
             {
               options.map(option => (
-                <Option key={option.value} onClick={() => handleChangeOption(option)} selected={value === option.value}>
+                <Option
+                  key={option.value}
+                  withIcons={withIcons}
+                  selected={value === option.value}
+                  onClick={() => handleChangeOption(option)}
+                >
+                  {withIcons && getIconType(option.icon)}
                   {option.content}
                 </Option>
               ))

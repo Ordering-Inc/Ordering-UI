@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { BiCaretDown } from 'react-icons/bi'
+import { useOrder } from 'ordering-components'
 
 import { formatPrice } from '../../utils'
 
@@ -22,6 +23,8 @@ export const BusinessItemAccordion = (props) => {
     isValidProducts
   } = props
 
+  const [orderState] = useOrder()
+
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
@@ -38,6 +41,15 @@ export const BusinessItemAccordion = (props) => {
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
   }
+
+  useEffect(() => {
+    const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
+    if (cartsLength === 1) {
+      setActiveState('active')
+      setHeightState('500px')
+      setRotateState('accordion__icon rotate')
+    }
+  }, [orderState?.carts])
 
   return (
     <AccordionSection isClosed={isClosed}>

@@ -1,18 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { CancelToken } from 'ordering-api-sdk'
+import { isADateValid } from '../../utils'
 
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage,
-  NotFoundBusinesses
+  ErrorMessage
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
 
+import { NotFoundSource } from '../NotFoundSource'
+
+import { Modal } from '../Modal'
+import { Alert } from '../Confirm'
+import { AddressForm } from '../AddressForm'
+import { AddressList } from '../AddressList'
+
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
-import { useOrder, useApi } from 'ordering-components'
+import { useOrder, useApi, useSession, useLanguage } from 'ordering-components'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -22,6 +29,11 @@ export const BusinessesListing = (props) => {
     propsToFetch,
     onBusinessClick
   } = props
+
+  const [{ auth }] = useSession()
+  const [, t] = useLanguage()
+  const [modals, setModals] = useState({ listOpen: false, formOpen: false })
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
   const [paginationProps, setPaginationProps] = useState({ currentPage: 0, pageSize: 10, totalItems: null, totalPages: null })
@@ -39,10 +51,11 @@ export const BusinessesListing = (props) => {
         page: newFetch ? 1 : paginationProps.currentPage + 1,
         page_size: paginationProps.pageSize
       }
-      if (orderState.options?.moment) {
-        const parts = orderState.options?.moment.split(' ')
-        const dateParts = parts[0].split('-')
-        const timeParts = parts[1].split(':')
+
+      if (orderState.options?.moment && isADateValid(orderState.options?.moment)) {
+        const parts = orderState?.options?.moment?.split(' ')
+        const dateParts = parts[0]?.split('-')
+        const timeParts = parts[1]?.split(':')
         const moment = Date.UTC(dateParts[0], dateParts[1] - 1, dateParts[2], timeParts[0], timeParts[1], timeParts[2]) / 1000
         parameters.timestamp = moment
       }
@@ -122,22 +135,45 @@ export const BusinessesListing = (props) => {
     setBusinessTypeSelected(businessType)
   }
 
+  const handleClickAddress = (e) => {
+    if (auth) {
+      setModals({ ...modals, listOpen: true })
+    } else {
+      setModals({ ...modals, formOpen: true })
+    }
+  }
+
+  const handleFindBusinesses = () => {
+    if (!orderState?.options?.address?.location) {
+      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select an address to search')] })
+      return
+    }
+    setModals({ listOpen: false, formOpen: false })
+    // onFindBusiness && onFindBusiness()
+  }
+
   return (
     <BusinessContainer>
-      <BusinessTypeFilter
-        ordering={props.ordering}
-        handleChangeBusinessType={handleChangeBusinessType}
-      />
+      {!businessesList.loading && businessesList.businesses.length > 0 && (
+        <BusinessTypeFilter
+          ordering={props.ordering}
+          handleChangeBusinessType={handleChangeBusinessType}
+        />
+      )}
       <BusinessList>
         {
           !businessesList.loading && !businessTypeSelected && businessesList.businesses.length === 0 && (
-            <NotFoundBusinesses>
-              <h1>Not Found elements</h1>
-              <div>
-                <h3>Select other address</h3>
-                <Button color='primary'>Change</Button>
-              </div>
-            </NotFoundBusinesses>
+            <NotFoundSource
+              content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change address.')}
+            >
+              <Button
+                outline
+                color='primary'
+                onClick={() => handleClickAddress()}
+              >
+                {t('CHANGE_ADDRESS', 'Select other Address')}
+              </Button>
+            </NotFoundSource>
           )
         }
         {
@@ -166,6 +202,44 @@ export const BusinessesListing = (props) => {
           ))
         )}
       </BusinessList>
+
+      <Modal
+        title={t('ADDRESS')}
+        open={modals.formOpen}
+        closeOnBackdrop={false}
+        onClose={() => setModals({ ...modals, formOpen: false })}
+      >
+        <AddressForm
+          useValidationFileds
+          address={orderState?.options?.address || {}}
+          onClose={() => setModals({ ...modals, formOpen: false })}
+          onCancel={() => setModals({ ...modals, formOpen: false })}
+          onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+        />
+      </Modal>
+
+      <Modal
+        title={t('ADDRESSES')}
+        open={modals.listOpen}
+        closeOnBackdrop={false}
+        onClose={() => setModals({ ...modals, listOpen: false })}
+        onCancel={() => setModals({ ...modals, listOpen: false })}
+        onAccept={() => handleFindBusinesses()}
+      >
+        <AddressList
+          changeOrderAddressWithDefault
+        />
+      </Modal>
+
+      <Alert
+        title={t('SEARCH')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </BusinessContainer>
   )
 }

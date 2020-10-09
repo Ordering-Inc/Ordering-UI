@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import {
   ProductForm as ProductOptions,
   useSession,
@@ -6,12 +7,14 @@ import {
   useOrder
 } from 'ordering-components'
 
-import { formatPrice } from '../../utils'
+import { formatPrice, scrollTo } from '../../utils'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
 import { LoginForm } from '../LoginForm'
+import { ProductShare } from '../ProductShare'
 
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
@@ -29,6 +32,7 @@ import {
 
 const ProductOptionsUI = (props) => {
   const {
+    businessSlug,
     editMode,
     isSoldOut,
     product,
@@ -43,6 +47,7 @@ const ProductOptionsUI = (props) => {
     handleChangeSuboptionState
   } = props
 
+  const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -58,8 +63,25 @@ const ProductOptionsUI = (props) => {
     }
   }
 
+  const handleSaveProduct = () => {
+    const isErrors = Object.values(errors).length > 0
+    if (!isErrors) {
+      handleSave && handleSave()
+      return
+    }
+    const myElement = document.getElementsByClassName('error')[0]
+    const container = document.getElementById('product_edition')
+    const topPos = myElement.offsetTop - (windowSize.width > 1200 ? 106 : 40)
+    scrollTo(container, topPos, 1250)
+  }
+
   return (
-    <ProductContainer>
+    <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
+      <ProductShare
+        slug={businessSlug}
+        categoryId={product.category_id}
+        productId={product.id}
+      />
       <WrapperImage>
         <ProductImage bgimage={product?.images} />
       </WrapperImage>
@@ -68,7 +90,7 @@ const ProductOptionsUI = (props) => {
           <h1>{product?.name}</h1>
           {product?.description && <p>{product?.description}</p>}
         </div>
-        <ProductEdition>
+        <ProductEdition id={`${windowSize.width > 1200 && 'product_edition'}`}>
           {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
           {product?.ingredients.map(ingredient => (
             <ProductIngredient
@@ -82,7 +104,7 @@ const ProductOptionsUI = (props) => {
             product?.extras.map(extra => extra.options.map(option => {
               const currentState = productCart.options[`id:${option.id}`] || {}
               return (
-                <div key={option.id}>
+                <div key={option.id} className={`${errors[`id:${option.id}`] && 'error'}`}>
                   {
                     showOption(option) && (
                       <ProductOption
@@ -122,10 +144,10 @@ const ProductOptionsUI = (props) => {
           </ProductComment>
         </ProductEdition>
         <ProductActions>
-          {productCart && (
+          {productCart && !isSoldOut && maxProductQuantity && (
             <div>
               <Button
-                className={`incdec ${(isSoldOut || productCart.quantity === 1) ? 'disabled' : ''}`}
+                className='incdec'
                 circle
                 outline
                 onClick={decrement}
@@ -134,7 +156,7 @@ const ProductOptionsUI = (props) => {
               </Button>
               <span>{productCart.quantity}</span>
               <Button
-                className={`incdec ${(maxProductQuantity <= 0 || isSoldOut || productCart.quantity >= maxProductQuantity) ? 'disabled' : ''}`}
+                className='incdec'
                 circle
                 outline
                 onClick={increment}
@@ -143,12 +165,12 @@ const ProductOptionsUI = (props) => {
               </Button>
             </div>)}
 
-          {productCart && !isSoldOut && auth ? (
+          {productCart && !isSoldOut && maxProductQuantity && auth ? (
             <Button
-              className={`add ${Object.keys(errors).length > 0 ? 'disabled' : ''}`}
+              className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
               color='primary'
-              onClick={handleSave}
-              disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
+              onClick={() => handleSaveProduct()}
+              // disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
             >
               {orderState.loading ? (
                 <span>{t('LOADING', 'Loading...')}</span>
@@ -161,13 +183,13 @@ const ProductOptionsUI = (props) => {
             </Button>
           ) : (
             <Button
-              className={`add ${isSoldOut ? 'disabled' : ''}`}
+              className={`add ${!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''}`}
               color='primary'
               outline
-              disabled={isSoldOut}
+              disabled={isSoldOut || maxProductQuantity === 0}
               onClick={() => setModalIsOpen(true)}
             >
-              {isSoldOut ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
+              {isSoldOut || maxProductQuantity === 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
             </Button>
           )}
         </ProductActions>
