@@ -98,28 +98,28 @@ const CartUI = (props) => {
             <table>
               <tbody>
                 <tr>
-                  <td>Subtotal</td>
+                  <td>{t('SUBTOTAL', 'Subtotal')}</td>
                   <td>{formatPrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Tax (10%)</td>
+                  <td>{t('TAX', 'Tax')} (10%)</td>
                   <td>{formatPrice(cart?.tax || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Delivery Fee</td>
+                  <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                   <td>{formatPrice(cart?.delivery_price || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Driver tips (0%)</td>
+                  <td>{t('DRIVER_TIP', 'Driver tip')} (0%)</td>
                   <td>{formatPrice(cart?.driver_tip || 0)}</td>
                 </tr>
                 <tr>
-                  <td>Service Fee(9%)</td>
+                  <td>{t('SERVICE_FEE', 'Service Fee')}(9%)</td>
                   <td>{formatPrice(cart?.service_fee || 0)}</td>
                 </tr>
                 {cart?.discount > 0 && (
                   <tr>
-                    <td>Discount</td>
+                    <td>{t('DISCOUNT', 'Discount')}</td>
                     <td>{formatPrice(cart?.discount || 0)}</td>
                   </tr>
                 )}
@@ -133,7 +133,7 @@ const CartUI = (props) => {
             <table className='total'>
               <tbody>
                 <tr>
-                  <td>Total</td>
+                  <td>{t('TOTAL', 'Total')}</td>
                   <td>{formatPrice(cart?.total)}</td>
                 </tr>
               </tbody>
@@ -146,7 +146,7 @@ const CartUI = (props) => {
               color='primary'
               onClick={() => handleClickCheckout()}
             >
-              Checkout
+              {t('CHECKOUT', 'Checkout')}
             </Button>
           </CheckoutAction>
         )}
