@@ -8,6 +8,7 @@ export const UserProfileContainer = styled.div`
   text-align: center;
   flex: 1;
   width: 100%;
+  overflow-x: hidden
 `
 
 export const FlexTabs = styled.div`
