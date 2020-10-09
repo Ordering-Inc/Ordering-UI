@@ -72,8 +72,8 @@ const UserProfileFormUI = (props) => {
     <>
       <FlexTabs>
         <Tabs variant='primary'>
-          <Tab onClick={() => setTabValue('My Account')} active={tabValue === 'My Account'}>My Account</Tab>
-          <Tab onClick={() => setTabValue('My Orders')} active={tabValue === 'My Orders'}>My Orders</Tab>
+          <Tab onClick={() => setTabValue('My Account')} active={tabValue === 'My Account'}>{t('MY_ACCOUNT', 'My Account')}</Tab>
+          <Tab onClick={() => setTabValue('My Orders')} active={tabValue === 'My Orders'}>{t('MY_ORDERS', 'My Orders')}</Tab>
         </Tabs>
       </FlexTabs>
       {tabValue === 'My Account' ? (
@@ -104,7 +104,7 @@ const UserProfileFormUI = (props) => {
                                         required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
                                         pattern: {
                                           value: /^(\+?\d{1,3}|\d{1,4})$/,
-                                          message: 'Bad country Code'
+                                          message: t('BAD_COUNTRY_CODE', 'Bad country Code')
                                         }
                                       })}
                                     />
@@ -142,28 +142,28 @@ const UserProfileFormUI = (props) => {
                           })}
                         />
 
-                        <Button color='primary' type='submit'>Update</Button>
+                        <Button color='primary' type='submit'>{t('UPDATE', 'Update')}</Button>
 
                       </>
-                    ) : <h4>Loading Form...</h4>
+                    ) : <h4>{t('LOADING_FORM', 'Loading Form...')}</h4>
                   }
                 </FormInput>
               )
               : (
                 formState.loading && !formState.changes.photo
-                  ? 'loading user'
+                  ? t('LOADING_USER', 'loading user')
                   : (
                     <UserData>
                       <h4>{user.name} {user.lastname}</h4>
                       <p>{user.email}</p>
                       <p>{user.country_phone_code} {user.cellphone}</p>
-                      <Button color='primary' outline onClick={() => setEdit(true)}>Edit</Button>
+                      <Button color='primary' outline onClick={() => setEdit(true)}>{t('EDIT', 'Edit')}</Button>
                     </UserData>
                   )
               )}
 
             <SavedPlaces>
-              <h5>Saved Places</h5>
+              <h5>{t('SAVED_PLACES', 'Saved Places')}</h5>
               <AddressList addressList={user.addresses} />
             </SavedPlaces>
           </SideForm>
