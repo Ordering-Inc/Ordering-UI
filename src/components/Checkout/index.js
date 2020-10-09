@@ -12,8 +12,6 @@ import {
   CartContainer,
   WrapperPlaceOrderButton,
   WarningMessage,
-  NotFound,
-  NotFoundImage,
   CartsList,
   CartItem,
   CartItemWrapper,
@@ -114,7 +112,7 @@ const CheckoutUI = (props) => {
           )}
           {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
             <div className='business'>
-              <h1>Business Details</h1>
+              <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               <div>
                 <p>{businessDetails?.business?.name}</p>
                 <p>{businessDetails?.business?.email}</p>
@@ -125,9 +123,9 @@ const CheckoutUI = (props) => {
           )}
           {businessDetails?.error && businessDetails?.error?.length > 0 && (
             <div className='business'>
-              <h1>Business Details</h1>
+              <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               {businessDetails?.error.map((e, i) => (
-                <p key={i}>ERROR: [{e}]</p>
+                <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
               ))}
             </div>
           )}
@@ -135,7 +133,7 @@ const CheckoutUI = (props) => {
 
         {!cartState.loading && cart && cart?.status !== 2 && (
           <PaymentMethodContainer>
-            <h1>Payment Method</h1>
+            <h1>{t('PAYMENT_METHOD', 'Payment Method')}</h1>
             {businessDetails.business && (
               <PaymentOptions
                 businessId={cart?.business_id}
@@ -148,7 +146,7 @@ const CheckoutUI = (props) => {
 
         {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && (
           <DriverTipContainer>
-            <h1>Driver Tip</h1>
+            <h1>{t('DRIVER_TIP', 'Driver Tip')}</h1>
             <DriverTips
               businessId={cart?.business_id}
               driverTipsOptions={DriverTipsOptions}
@@ -159,7 +157,7 @@ const CheckoutUI = (props) => {
 
         {!cartState.loading && cart && (
           <CartContainer>
-            <h1>Your Order</h1>
+            <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
             <Cart
               cart={cart}
               isProducts={cart?.products?.length || 0}
@@ -174,10 +172,16 @@ const CheckoutUI = (props) => {
               disabled={!cart?.valid || !paymethodSelected || placing}
               onClick={() => handlerClickPlaceOrder()}
             >
-              {placing ? 'Placing...' : 'Place Order'}
+              {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}
             </Button>
           </WrapperPlaceOrderButton>
         )}
+
+        {/* {error && error?.length > 0 && (
+          error.map((e, i) => (
+            <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
+          ))
+        )} */}
       </WrappContainer>
     </Container>
   )
