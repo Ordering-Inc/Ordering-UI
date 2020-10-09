@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useLanguage } from 'ordering-components'
 
 import {
   PaymentCashContainer,
@@ -15,6 +16,7 @@ export const PaymentOptionCash = (props) => {
     orderTotal,
     onChangeData
   } = props
+  const [, t] = useLanguage()
 
   const { handleSubmit, register, errors } = useForm()
 
@@ -29,7 +31,7 @@ export const PaymentOptionCash = (props) => {
     <PaymentCashContainer>
       <FormCash onSubmit={handleSubmit(() => {})}>
         <WrapperInput>
-          <label>Don’t have exact amount? Let us know with how much will you pay</label>
+          <label>{t('EXACT_AMMOUNT', 'Don’t have exact amount? Let us know with how much will you pay')}</label>
           <Input
             name='cash'
             type='number'
@@ -46,10 +48,10 @@ export const PaymentOptionCash = (props) => {
           />
         </WrapperInput>
         {errors.cash && errors.cash.type === 'required' && (
-          <ErrorText>This field is required</ErrorText>
+          <ErrorText>{t('FIELD_REQUIRED', 'This field is required')}</ErrorText>
         )}
         {errors.cash && errors.cash.type === 'validate' && (
-          <ErrorText>This value must be greater than order total: ${orderTotal}</ErrorText>
+          <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: ${orderTotal}</ErrorText>
         )}
       </FormCash>
     </PaymentCashContainer>
