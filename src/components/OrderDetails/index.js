@@ -118,9 +118,9 @@ const OrderDetailsUI = (props) => {
                 <span>
                   <HiOutlineChat />
                 </span>
-                <span>
+                {/* <span>
                   <BiCaretDown />
-                </span>
+                </span> */}
               </ActionsBlock>
             </OrderBusiness>
 

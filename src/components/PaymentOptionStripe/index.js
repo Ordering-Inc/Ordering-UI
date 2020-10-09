@@ -102,7 +102,7 @@ const PaymentOptionStripeUI = (props) => {
       {token && !cardsList.loading && (
         <WrapperItems>
           <Button className='addcard' color='primary' onClick={() => setAddCardOpen(true)}>
-            {t('ADD_CARD', 'Add Card')}
+            {t('ADD_CARD', 'Add New Payment Card')}
           </Button>
           <ActionsModal>
             <Button onClick={() => onCancel()}>

@@ -53,7 +53,7 @@ export const ProductsListing = (props) => {
   }
 
   const getProducts = async (newFetch) => {
-    if (!businessState.business.lazy_load_products_recommended) {
+    if (!businessState?.business?.lazy_load_products_recommended) {
       const categoryState = {
         ...categoryStateDefault,
         loading: false

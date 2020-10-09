@@ -5,13 +5,12 @@ import { isADateValid } from '../../utils'
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage,
-  NotFoundBusinesses
+  ErrorMessage
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
 
-import noBusinesses from '../../../template/assets/no-businesses.svg'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { Modal } from '../Modal'
 import { Alert } from '../Confirm'
@@ -205,21 +204,17 @@ export const BusinessesListing = (props) => {
       <BusinessList>
         {
           !businessesList.loading && businessesList.businesses.length === 0 && (
-            <NotFoundBusinesses>
-              <div className='image'>
-                <img src={noBusinesses} alt='noBusinesses' />
-              </div>
-              <h1>{t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}</h1>
-              <div>
-                <Button
-                  outline
-                  color='primary'
-                  onClick={() => handleClickAddress()}
-                >
-                  Select other Address
-                </Button>
-              </div>
-            </NotFoundBusinesses>
+            <NotFoundSource
+              content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
+            >
+              <Button
+                outline
+                color='primary'
+                onClick={() => handleClickAddress()}
+              >
+                {t('CHANGE_ADDRESS', 'Select other Address')}
+              </Button>
+            </NotFoundSource>
           )
         }
         {

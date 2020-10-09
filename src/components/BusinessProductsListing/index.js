@@ -9,6 +9,8 @@ import {
   ProductsNotFound
 } from './styles'
 
+import { NotFoundSource } from '../NotFoundSource'
+
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
@@ -62,7 +64,7 @@ const BusinessProductsListingUI = (props) => {
   return (
     <ProductsContainer>
       {
-        !loading && business.id && (
+        !loading && business?.id && (
           <>
             <BusinessBasicInformation
               businessState={businessState}
@@ -122,10 +124,20 @@ const BusinessProductsListingUI = (props) => {
       )}
 
       {
-        !loading && !Object.keys(business).length && (
+        !loading && business && !Object.keys(business).length && (
           <ProductsNotFound>
             <h1>{t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}</h1>
           </ProductsNotFound>
+        )
+      }
+
+      {
+        !loading && !business && (
+          <NotFoundSource
+            content={t('ERROR_STORE_PRODUCTS', 'Sorry, an error has occurred with business selected.')}
+            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+            onClickButton={props.handleSearchRedirect}
+          />
         )
       }
 
