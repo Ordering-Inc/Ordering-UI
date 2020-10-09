@@ -8,7 +8,7 @@ export const BusinessesList = (props) => {
   const businessListingProps = {
     ...props,
     isSearchByName: true,
-    isSearchByDescription: true,
+    isSearchByDescription: false,
     onBusinessClick: (business) => {
       history.push(`/store/${business.slug}`)
     },

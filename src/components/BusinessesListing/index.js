@@ -17,6 +17,7 @@ import { Modal } from '../Modal'
 import { Alert } from '../Confirm'
 import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
+import { SearchBar } from '../SearchBar'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
@@ -27,6 +28,8 @@ const PIXELS_TO_SCROLL = 300
 export const BusinessesListing = (props) => {
   console.log('Move BusinessesListing to ordering-componenets')
   const {
+    isSearchByName,
+    isSearchByDescription,
     propsToFetch,
     onBusinessClick
   } = props
@@ -39,6 +42,7 @@ export const BusinessesListing = (props) => {
   const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
   const [paginationProps, setPaginationProps] = useState({ currentPage: 0, pageSize: 10, totalItems: null, totalPages: null })
   const [businessTypeSelected, setBusinessTypeSelected] = useState(null)
+  const [searchValue, setSearchValue] = useState(null)
   const [orderState] = useOrder()
   const [ordering] = useApi()
   const requestsState = {}
@@ -63,6 +67,31 @@ export const BusinessesListing = (props) => {
       const where = []
       if (businessTypeSelected) {
         where.push({ attribute: businessTypeSelected, value: true })
+      }
+
+      if (searchValue) {
+        if (isSearchByName) {
+          where.push(
+            {
+              attribute: 'name',
+              value: {
+                condition: 'ilike',
+                value: `%${encodeURI(searchValue)}%`
+              }
+            }
+          )
+        }
+        if (isSearchByDescription) {
+          where.push(
+            {
+              attribute: 'description',
+              value: {
+                condition: 'ilike',
+                value: `%${encodeURI(searchValue)}%`
+              }
+            }
+          )
+        }
       }
 
       const source = CancelToken.source()
@@ -123,18 +152,28 @@ export const BusinessesListing = (props) => {
     if (orderState.loading || !orderState.options?.address?.location) return
     console.log(orderState.options)
     getBusinesses(true)
-  }, [orderState, businessTypeSelected])
+  }, [orderState, businessTypeSelected, searchValue])
 
   const handleBusinessClick = (business) => {
     onBusinessClick && onBusinessClick(business)
   }
 
   const handleChangeBusinessType = (businessType) => {
+    if (businessType !== businessTypeSelected) {
+      setBusinessesList({
+        ...businessesList,
+        businesses: []
+      })
+      setBusinessTypeSelected(businessType)
+    }
+  }
+
+  const handleChangeSearch = (search) => {
     setBusinessesList({
       ...businessesList,
       businesses: []
     })
-    setBusinessTypeSelected(businessType)
+    setSearchValue(search)
   }
 
   const handleClickAddress = (e) => {
@@ -156,20 +195,21 @@ export const BusinessesListing = (props) => {
 
   return (
     <BusinessContainer>
-      {!businessesList.loading && businessesList.businesses.length > 0 && (
-        <BusinessTypeFilter
-          ordering={props.ordering}
-          handleChangeBusinessType={handleChangeBusinessType}
-        />
-      )}
+      <BusinessTypeFilter
+        handleChangeBusinessType={handleChangeBusinessType}
+      />
+      <SearchBar
+        onSearch={handleChangeSearch}
+        search={searchValue}
+      />
       <BusinessList>
         {
-          !businessesList.loading && !businessTypeSelected && businessesList.businesses.length === 0 && (
+          !businessesList.loading && businessesList.businesses.length === 0 && (
             <NotFoundBusinesses>
               <div className='image'>
                 <img src={noBusinesses} alt='noBusinesses' />
               </div>
-              <h1>{t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change address.')}</h1>
+              <h1>{t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters.')}</h1>
               <div>
                 <Button
                   outline
