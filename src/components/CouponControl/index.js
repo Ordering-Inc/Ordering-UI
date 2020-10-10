@@ -36,13 +36,13 @@ const CouponControlUI = (props) => {
     <CouponContainer>
       {couponDefault ? (
         <Button onClick={() => onRemoveCoupon()}>
-          Remove {couponDefault} coupon
+          {t('REMOVE', 'Remove')} {couponDefault} {t('COUPON', 'coupon')}
         </Button>
       ) : (
         <>
           <Input
             w={45}
-            placeholder='Discount coupon'
+            placeholder={t('DISCOUNT_COUPON', 'Discount coupon')}
             onChange={(e) => onChangeInputCoupon(e.target.value)}
           />
           <Button
@@ -50,7 +50,7 @@ const CouponControlUI = (props) => {
             disabled={!couponInput}
             onClick={handleButtonApplyClick}
           >
-            Apply
+            {t('APPLY', 'Apply')}
           </Button>
         </>
       )}

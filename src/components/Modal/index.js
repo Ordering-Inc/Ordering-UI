@@ -22,7 +22,7 @@ const ModalUI = (props) => {
   } = props
   const [, t] = useLanguage()
   return (
-    <ModalDialog className='popup-dialog' width={props.width}>
+    <ModalDialog className='popup-dialog' width={props.width} padding={props.padding}>
       <ModalIcon>
         <MdClose onClick={() => onClose()} />
       </ModalIcon>

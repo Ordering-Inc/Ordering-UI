@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useOrder, useLanguage } from 'ordering-components'
 import { CancelToken } from 'ordering-api-sdk'
+import { isADateValid } from '../../utils'
 
 export const ProductsListing = (props) => {
   console.log('Move ProductsListing to ordering-componenets')
   const {
+    isSearchByName,
+    isSearchByDescription,
     slug,
     ordering,
     businessProps,
@@ -15,10 +18,11 @@ export const ProductsListing = (props) => {
   const [languageState, t] = useLanguage()
 
   const [categorySelected, setCategorySelected] = useState({ id: null, name: t('ALL', 'All') })
+  const [searchValue, setSearchValue] = useState(null)
   const [businessState, setBusinessState] = useState({ business: {}, loading: true, error: null })
   const [categoriesState, setCategoriesState] = useState({})
   const [orderOptions, setOrderOptions] = useState()
-  const requestsState = {}
+  const [requestsState, setRequestsState] = useState({})
 
   const categoryStateDefault = {
     loading: true,
@@ -38,16 +42,36 @@ export const ProductsListing = (props) => {
     setCategorySelected(category)
   }
 
+  const handleChangeSearch = (search) => {
+    setSearchValue(search)
+  }
+
+  const isMatchSearch = (name, description) => {
+    if (!searchValue) return true
+    return (name.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByName) ||
+      (description.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByDescription)
+  }
+
   const getProducts = async (newFetch) => {
-    if (!businessState.business.lazy_load_products_recommended) {
+    if (!businessState?.business?.lazy_load_products_recommended) {
       const categoryState = {
         ...categoryStateDefault,
         loading: false
       }
       if (categorySelected.id) {
-        categoryState.products = businessState.business.categories?.find(category => category.id === categorySelected.id)?.products || []
+        const productsFiltered = businessState.business.categories?.find(
+          category => category.id === categorySelected.id
+        )?.products.filter(
+          product => isMatchSearch(product.name, product.description)
+        )
+        categoryState.products = productsFiltered || []
       } else {
-        categoryState.products = businessState.business.categories?.reduce((products, category) => [...products, ...category.products], []) || []
+        const productsFiltered = businessState.business.categories?.reduce(
+          (products, category) => [...products, ...category.products], []
+        ).filter(
+          product => isMatchSearch(product.name, product.description)
+        )
+        categoryState.products = productsFiltered || []
       }
       setCategoryState({ ...categoryState })
       return
@@ -74,6 +98,7 @@ export const ProductsListing = (props) => {
       const functionFetch = categorySelected.id ? ordering.businesses(businessState.business.id).categories(categorySelected.id).products() : ordering.businesses(businessState.business.id).products()
       const source = CancelToken.source()
       requestsState.products = source
+      setRequestsState({ ...requestsState })
       const { content: { error, result, pagination } } = await functionFetch.parameters(parameters).get({ cancelToken: source.token })
       if (!error) {
         const newcategoryState = {
@@ -104,13 +129,14 @@ export const ProductsListing = (props) => {
       setBusinessState({ ...businessState, loading: true })
       const source = CancelToken.source()
       requestsState.business = source
+      setRequestsState({ ...requestsState })
       const parameters = {
         type: orderState.options?.type || 1,
         location: orderState.options?.address?.location
           ? `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`
           : null
       }
-      if (orderState.options?.moment) {
+      if (orderState.options?.moment && isADateValid(orderState.options?.moment)) {
         const parts = orderState.options?.moment.split(' ')
         const dateParts = parts[0].split('-')
         const timeParts = parts[1].split(':')
@@ -139,9 +165,10 @@ export const ProductsListing = (props) => {
   }
 
   useEffect(() => {
-    if (orderState.loading || businessState.loading) return
-    getProducts()
-  }, [orderState, categorySelected, businessState])
+    if (!orderState.loading && !businessState.loading) {
+      getProducts()
+    }
+  }, [orderState, categorySelected, businessState, searchValue])
 
   useEffect(() => {
     if (!orderState.loading && orderOptions && !languageState.loading) {
@@ -160,37 +187,24 @@ export const ProductsListing = (props) => {
   }, [JSON.stringify(orderState?.options)])
 
   /**
-   * Cancel business request on unmount
+   * Cancel business request
    */
   useEffect(() => {
+    const request = requestsState.business
     return () => {
-      if (requestsState.business) {
-        requestsState.business.cancel()
-      }
+      request && request.cancel()
     }
-  }, [])
-
-  /**
-   * Cancel products request on unmount
-   */
-  useEffect(() => {
-    return () => {
-      if (requestsState.products) {
-        requestsState.products.cancel()
-      }
-    }
-  }, [businessState])
+  }, [requestsState.business])
 
   /**
    * Cancel products request on unmount and pagination
    */
   useEffect(() => {
+    const request = requestsState.products
     return () => {
-      if (requestsState.products) {
-        requestsState.products.cancel()
-      }
+      request && request.cancel()
     }
-  }, [categoryState])
+  }, [requestsState.products])
 
   return (
     <>
@@ -199,9 +213,11 @@ export const ProductsListing = (props) => {
           {...props}
           errors={errors}
           categorySelected={categorySelected}
+          searchValue={searchValue}
           categoryState={categoryState}
           businessState={businessState}
           handleChangeCategory={handleChangeCategory}
+          handleChangeSearch={handleChangeSearch}
           getNextProducts={getProducts}
         />
       )}

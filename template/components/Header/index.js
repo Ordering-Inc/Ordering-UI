@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
+import { useLocation, Link } from 'react-router-dom'
 import {
-  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink
+  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink,
+  SubMenu
 } from './styles'
 
-import { useLocation, Link } from 'react-router-dom'
-
 import { useSession, useLanguage } from 'ordering-components'
+import { useWindowSize } from '../../../src/hooks/useWindowSize'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
+import logo from '../../assets/images/logo.svg'
 import { LanguageSelector } from '../../../src/components/LanguageSelector'
 import { AddressesPopover } from '../../../src/components/AddressesPopover'
 import { UserPopover } from '../../../src/components/UserPopover'
@@ -36,6 +38,8 @@ export const Header = (props) => {
     })
   }
 
+  const windowSize = useWindowSize()
+
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
 
@@ -46,22 +50,19 @@ export const Header = (props) => {
           <LogoHeader>
             <Link to='/'>
               <img src={isHome ? logoHeaderInvert : logoHeader} />
+              <img src={logo} />
             </Link>
           </LogoHeader>
-          <Menu>
-            <OrderTypeSelectorHeader />
-          </Menu>
-        </LeftHeader>
-        <RightHeader>
           <Menu>
             {
               !auth && (
                 <>
-                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign up')}</MenuLink>
+                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
                   <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
                 </>
               )
             }
+            <OrderTypeSelectorHeader />
             <MomentPopover
               open={openPopover.moment}
               onClick={() => handleTogglePopover('moment')}
@@ -72,6 +73,18 @@ export const Header = (props) => {
               onClick={() => handleTogglePopover('addresses')}
               onClose={() => handleClosePopover('addresses')}
             />
+          </Menu>
+        </LeftHeader>
+        <RightHeader>
+          <Menu>
+            {
+              !auth && (
+                <>
+                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
+                  <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
+                </>
+              )
+            }
             {
               auth && (
                 <>
@@ -92,6 +105,20 @@ export const Header = (props) => {
           </Menu>
         </RightHeader>
       </InnerHeader>
+      {windowSize.width <= 820 && (
+        <SubMenu>
+          <MomentPopover
+            open={openPopover.moment}
+            onClick={() => handleTogglePopover('moment')}
+            onClose={() => handleClosePopover('moment')}
+          />
+          <AddressesPopover
+            open={openPopover.addresses}
+            onClick={() => handleTogglePopover('addresses')}
+            onClose={() => handleClosePopover('addresses')}
+          />
+        </SubMenu>
+      )}
     </HeaderType>
   )
 }

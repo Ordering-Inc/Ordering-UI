@@ -144,9 +144,11 @@ export const ProductItemAccordion = (props) => {
             )}
             <div style={{ width: '100%', justifyContent: 'flex-end' }} onClick={toggleAccordion}>
               <span className='product-price'>{formatPrice(product.total || product.price)}</span>
-              <p>
-                <BiCaretDown className={`${setRotate}`} />
-              </p>
+              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || isCartProduct) && (
+                <p>
+                  <BiCaretDown className={`${setRotate}`} />
+                </p>
+              )}
             </div>
           </div>
         )}
@@ -188,10 +190,11 @@ export const ProductItemAccordion = (props) => {
             </Button>
           </ProductActions>
         )}
-        {productInfo().ingredients.length > 0 && (
+        {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => ingredient.selected) && (
           <ul>
-            {productInfo().ingredients.map(ingredient => (
-              <li key={ingredient.id}>
+            <p>{t('INGREDIENTS', 'Ingredients')}</p>
+            {productInfo().ingredients.map(ingredient => ingredient.selected && (
+              <li className='ingredient' key={ingredient.id}>
                 <span>{ingredient.name}</span>
               </li>
             ))}
