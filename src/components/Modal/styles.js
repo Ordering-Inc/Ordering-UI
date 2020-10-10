@@ -16,6 +16,7 @@ export const ModalDialog = styled.div`
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
+  max-height: 100%;
   @media (max-width: 860px) {
     width: 80%;
   }

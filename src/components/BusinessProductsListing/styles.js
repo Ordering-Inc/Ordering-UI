@@ -10,19 +10,33 @@ export const WrapContent = styled.div`
   background: #F8F8F8;
 `
 
+export const WrapperSearch = styled.div`
+  margin: 15px 0px 0px;
+`
+
 export const ProductsNotFound = styled.div`
-  width: 100%;
-  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 80%;
+  height: calc(100vh - 45px);
+  margin: auto;
 
   h1 {
-    opacity: 0.7;
-    margin-right: 10px;
+    opacity: 0.5;
+    text-align: center;
   }
-  svg {
-    font-size: 24px;
-    color: #D81313;
+
+  @media (max-width: 410px) {
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    h1 {
+      font-size: 20px;
+    }
   }
 `

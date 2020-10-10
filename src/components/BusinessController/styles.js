@@ -162,6 +162,7 @@ export const BusinessInfoItem = styled.div`
     display: flex;
     justify-content: space-between;
     p {
+      text-transform: capitalize;
       display: flex;
       align-items: center;
       margin: 0px;
