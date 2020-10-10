@@ -10,7 +10,6 @@ import {
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
-
 import { NotFoundSource } from '../NotFoundSource'
 
 import { Modal } from '../Modal'
@@ -173,6 +172,23 @@ export const BusinessesListing = (props) => {
       businesses: []
     })
     setSearchValue(search)
+  }
+
+  const handleClickAddress = (e) => {
+    if (auth) {
+      setModals({ ...modals, listOpen: true })
+    } else {
+      setModals({ ...modals, formOpen: true })
+    }
+  }
+
+  const handleFindBusinesses = () => {
+    if (!orderState?.options?.address?.location) {
+      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select an address to search')] })
+      return
+    }
+    setModals({ listOpen: false, formOpen: false })
+    // onFindBusiness && onFindBusiness()
   }
 
   const handleClickAddress = (e) => {

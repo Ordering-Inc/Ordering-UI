@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useLanguage } from 'ordering-components'
+import {
+  useApi,
+  useLanguage
+} from 'ordering-components'
 
 import { ProductsListing } from '../ProductsListing' // move this component in ordering-components
 
