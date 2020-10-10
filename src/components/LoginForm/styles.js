@@ -5,7 +5,7 @@ export const LoginContainer = styled.div`
   flex: 1;
   flex-wrap: 1;
   flex-direction: column;
-  min-height: calc(100vh - 45px);
+  height: calc(100vh - 75px);
   font-size: 1.2em;
   @media (min-width: 980px) {
     flex-direction: row;
@@ -88,7 +88,7 @@ export const FormSide = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   height: 100%;
   padding: 30px 20px;
   flex: 1;
@@ -118,14 +118,36 @@ export const SocialIcons = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+  flex-direction: column;
   > * {
     color: #d81212;
-    width: 42px;
+
+    /*width: 42px;
     height: 42px;
     margin: 25px;
     border: 3px solid #d81212;
     border-radius: 100%;
-    cursor: pointer;
+    cursor: pointer;*/
+  }
+`
+
+export const SocialButtons = styled.div`
+   width: 100%;
+   font-size: 1.2em;
+   margin-top: 5px;
+  > * {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 55%;
+    padding: 5px;
+    color: black;
+  }
+  @media (min-width: 980px) {
+    > * {
+      margin-top: 3px;
+      width: 55%;
+    }
   }
 `
 
@@ -134,35 +156,37 @@ export const LoginWith = styled.div`
     justify-content: center;
     flex-wrap: wrap;
   }
+  font-size: 1.2em;
 `
 
 export const FormInput = styled.form`
   width: 100%;
   > * {
-    margin: 10px;
-    width: 60%;
+    margin: 5px;
+    width: 55%;
   }
   > input{
-    padding: 15px 20px
+    padding: 10px 20px
   }
-  > :last-child {
-    margin-top: 50px;
+  button {
+    margin-top: 10px;
     margin-bottom: 20px;
-    width: 65%;
-    padding: 8px
+    width: 55%;
+    padding: 5px
   }
   @media (min-width: 980px) {
     > * {
       margin: 10px;
-      width: 60%;
+      width: 55%;
     }
-    > :last-child {
-      margin-top: 50px;
-      width: 65%;
+    button {
+      margin-top: 10px;
+      width: 55%;
     }
   }
 `
 
 export const ForgotPassword = styled.div`
-  margin: 10px 0;
+  margin: 10px auto;
+  width: auto;
 `

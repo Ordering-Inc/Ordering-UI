@@ -16,10 +16,12 @@ import {
   SocialIcons,
   TitleHeroSide,
   LoginWith,
-  NewOnPlatform
+  NewOnPlatform,
+  SocialButtons
 } from './styles'
 
 import logoHeader from '../../../template/assets/images/logo-header.svg'
+import iconFacebook from '../../../template/assets/IconFacebook.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
@@ -97,24 +99,6 @@ const LoginFormUI = (props) => {
       <FormSide>
         <img src={logoHeader} alt='Logo login' />
 
-        <NewOnPlatform>
-          {elementLinkToSignup && (
-            <>
-              {t('NEW_ON_PLATFORM', 'New on Ordering?')} {elementLinkToSignup}
-            </>
-          )}
-          {linkToSignup && (
-            <>
-              {t('NEW_ON_PLATFORM', 'New on Ordering?')}
-              <a href={linkToSignup}>{t('CREATE_AN_ACCOUNT', 'Create an account')}</a>
-            </>
-          )}
-        </NewOnPlatform>
-        <SocialIcons>
-          {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
-          {/* <FaApple />
-          <AiOutlineGoogle /> */}
-        </SocialIcons>
         {useLoginByEmail && useLoginByCellphone && (
           <LoginWith>
             <Tabs variant='primary'>
@@ -186,22 +170,46 @@ const LoginFormUI = (props) => {
                   })}
                   onChange={(e) => hanldeChangeInput(e)}
                 />
+                <ForgotPassword>
+                  {t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
+                </ForgotPassword>
                 <Button color='primary' type='submit' disabled={formState.loading}>
                   {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
                 </Button>
               </FormInput>
             )}
         </>
-
-        <ForgotPassword>
-          {t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
-        </ForgotPassword>
         {linkToForgetPassword && (
           <>
             {t('NEW_ON_PLATFORM')}
-            <a href={linkToForgetPassword}>{t('RESET_PASSWORD','Reset Password')}</a>
+            <a href={linkToForgetPassword}>{t('RESET_PASSWORD', 'Reset Password')}</a>
           </>
         )}
+        <NewOnPlatform>
+          {elementLinkToSignup && (
+            <>
+              {t('NEW_ON_PLATFORM', 'New on Ordering?')} {elementLinkToSignup}
+            </>
+          )}
+          {linkToSignup && (
+            <>
+              {t('NEW_ON_PLATFORM', 'New on Ordering?')}
+              <a href={linkToSignup}>{t('CREATE_AN_ACCOUNT', 'Create an account')}</a>
+            </>
+          )}
+        </NewOnPlatform>
+        {/* <SocialIcons>
+          {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
+          {/* <FaApple />
+                  <AiOutlineGoogle />
+        </SocialIcons> */}
+        <SocialButtons>
+          <Button color='secondary' initialIcon>
+            <img src={iconFacebook} width={30} />
+            <span>Login with Facebook</span>
+          </Button>
+
+        </SocialButtons>
       </FormSide>
       <Alert
         title={t('LOGIN')}
