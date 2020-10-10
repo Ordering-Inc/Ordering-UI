@@ -122,9 +122,9 @@ const OrderDetailsUI = (props) => {
                 <span>
                   <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
                 </span>
-                <span>
+                {/* <span>
                   <BiCaretDown />
-                </span>
+                </span> */}
               </ActionsBlock>
             </OrderBusiness>
 

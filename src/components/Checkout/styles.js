@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -109,5 +110,143 @@ export const WarningMessage = styled.div`
     font-size: 20px;
     margin: 0px 60px;
     text-align: center;
+  }
+`
+
+export const NotFound = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100vh;
+  margin: 10px auto;
+
+  h1 {
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  @media (max-width: 576px) {
+    width: 80%;
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    h1 {
+      font-size: 20px;
+    }
+  }
+`
+
+export const NotFoundImage = styled.div`
+  max-width: 300px;
+  max-width: 300px;
+
+  img {
+    width: 300px;
+  }
+`
+
+export const CartsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+
+  @media (max-width: 380px) {
+    width: 90%;
+  }
+`
+
+export const CartItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background: #F8F8F8 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  opacity: 1;
+  margin: 20px 0px;
+  padding: 10px;
+`
+
+export const CartItemWrapper = styled.div`
+  width: 80%;
+  display: flex;
+`
+
+export const LogoWrapper = styled.div`
+  max-width: 75px;
+  max-height: 75px;
+  height: 75px;
+  width: 75px;
+`
+
+const CartItemLogoStyled = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: contain;
+  object-fit: cover;
+  background-position: center;
+  min-height: 75px;
+  border-radius: 10px;
+`
+
+export const CartItemLogo = (props) => {
+  return (
+    <CartItemLogoStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </CartItemLogoStyled>
+  )
+}
+
+export const CartItemInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 75%;
+  h1,
+  p {
+    margin: 3px 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+  p {
+    font-size: 15px;
+    opacity: 0.8;
+    color: #D81212;
+    font-weight: bold;
+  }
+
+  ${'' /* @media (max-width: 380px) {
+    width: 65%;
+  } */}
+`
+
+export const CartItemActions = styled.div`
+  ${'' /* width: 20%; */}
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  button {
+    cursor: pointer;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 14px;
   }
 `

@@ -161,7 +161,7 @@ export const Router = () => {
                       !auth
                         ? (
                           <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
+                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
                             useLoginByCellphone
                             useChekoutFileds
                             handleSuccessSignup={handleSuccessSignup}
@@ -175,8 +175,8 @@ export const Router = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -188,8 +188,8 @@ export const Router = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -230,16 +230,13 @@ export const Router = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
-                  <Route exact path='/checkout'>
-                    Checkout
-                  </Route>
                   <Route exact path='/order/:orderId'>
                     <Order />
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     <OrderDetailsPage />
                   </Route>
-                  <Route exact path='/checkout/:cartUuid'>
+                  <Route path='/checkout/:cartUuid?'>
                     <CheckoutPage />
                   </Route>
                   <Route exact path='/upselling_page'>

@@ -10,12 +10,13 @@ export const Container = styled.div`
 
 export const ModalDialog = styled.div`
   background-color: #FFF;
-  padding: 20px;
+  padding: ${({ padding }) => padding || '20px'};
   width: ${({ width }) => width || '50%'};
   border-radius: 10px;
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
+  max-height: 100%;
   @media (max-width: 860px) {
     width: 80%;
   }
@@ -57,4 +58,5 @@ export const ModalIcon = styled.span`
   float: right;
   font-size: 30px;
   cursor: pointer;
+  z-index: 1;
 `

@@ -191,6 +191,14 @@ export const AccordionContent = styled.div`
   transition: max-height 0.6s ease;
   ul {
     list-style-type: none;
+    p {
+      font-weight: bold;
+      margin-bottom: 0px;
+    }
+
+    li.ingredient {
+      padding-left: 40px;
+    }
   }
 `
 
