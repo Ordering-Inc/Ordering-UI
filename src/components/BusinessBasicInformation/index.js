@@ -131,7 +131,7 @@ export const BusinessBasicInformation = (props) => {
         </BusinessInfo>
       </BusinessContent>
 
-      <Modal open={openBusinessInformation} onClose={() => setOpenBusinessInformation(false)}>
+      <Modal open={openBusinessInformation} onClose={() => setOpenBusinessInformation(false)} width='70%' padding='0'>
         <BusinessInformation
           business={business}
           getBusinessType={getBusinessType}
@@ -139,6 +139,7 @@ export const BusinessBasicInformation = (props) => {
           formatNumber={formatNumber}
           dateFormatted={dateFormatted}
           optimizeImage={optimizeImage}
+          onClose={setOpenBusinessInformation}
         />
       </Modal>
     </BusinessContainer>
