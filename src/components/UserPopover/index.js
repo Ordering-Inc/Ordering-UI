@@ -63,7 +63,7 @@ export const UserPopover = (props) => {
           <PopoverListLink onClick={props.onClose} to='/profile/orders'>
             <FaRegListAlt /> {t('ORDERS', 'Orders')}
           </PopoverListLink>
-          <PopoverListItemLogout />
+          <PopoverListItemLogout onClick={props.onClose} />
         </PopoverList>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
