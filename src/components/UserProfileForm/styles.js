@@ -124,13 +124,16 @@ export const UserData = styled.div`
 
 export const SavedPlaces = styled.div`
   width: 70%;
-  > div{
-  display: flex;
-  flex-direction: column-reverse;
+  h5{
+    font-size: 1.2em
   }
   button{
     width: 50%;
     align-self: flex-end;
+  }
+  > div{
+  display: flex;
+  flex-direction: column-reverse;
   }
   text-align: left;
 
