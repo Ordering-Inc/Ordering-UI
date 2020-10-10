@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder } from 'ordering-components'
+import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder, useLanguage } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import { BusinessInformationContainer, Header, BusinessContent, BusinessBasicContent, FlexTabs, BusinessLocation, Map, BusinessOpeningTime, Times, DeliveryDetails, BusinessGallery, BusinessVideos, BusinessInfo, BusinessInfoItem, WrapperBusinessLogo, BusinessLogo } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -13,6 +13,7 @@ export const BusinessInformationUI = (props) => {
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
+  const [, t] = useLanguage()
 
   const openingTime = ({ open, close }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
@@ -84,11 +85,11 @@ export const BusinessInformationUI = (props) => {
           <FlexTabs>
             <Tabs variant='primary'>
               <Tab onClick={() => setTabValue('General Info')} active={tabValue === 'General Info'}>
-                     General Info
+                {t('GENERAL_INFO', 'General Info')}
               </Tab>
               {business.reviews && (
                 <Tab onClick={() => setTabValue('Reviews')} active={tabValue === 'Reviews'}>
-                     Reviews
+                  {t('REVIEWS', 'Reviews')}
                 </Tab>
               )}
             </Tabs>
@@ -98,7 +99,7 @@ export const BusinessInformationUI = (props) => {
           <>
             {businessLocation.location && (
               <BusinessLocation>
-                <h4>Business Location</h4>
+                <h4>{t('BUSINESS_LOCATION', 'Business location')}</h4>
                 <>
                   {businessLocation.location && (
                     <Map>
@@ -114,7 +115,7 @@ export const BusinessInformationUI = (props) => {
             )}
             {businessSchedule.length > 0 && (
               <BusinessOpeningTime>
-                <h4>Business Opening Time</h4>
+                <h4>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</h4>
                 <Times>
                   {businessSchedule.map((Schedule, i) => (
                     <React.Fragment key={i}>
@@ -131,14 +132,14 @@ export const BusinessInformationUI = (props) => {
                 <DeliveryDetails>
                   <span />
                   <div>
-                    <h5>Delivery Fee: {formatPrice(business.service_fee)}</h5>
-                    <h5>Minimun Order: {formatPrice(business.minimum)}</h5>
-                    <h5>Distance: {formatNumber(business?.distance) || 0} KM</h5>
+                    <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {formatPrice(business.service_fee)}</h5>
+                    <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {formatPrice(business.minimum)}</h5>
+                    <h5>{t('DISTANCE', 'Distance:')} {formatNumber(business?.distance) || 0} {t('KM', 'KM')}</h5>
                   </div>
                   <span />
                   <div>
-                    <h5>Delivery Time: {dateFormatted(business?.delivery_time)}</h5>
-                    <h5>Pickup Time: {dateFormatted(business?.pickup_time)}</h5>
+                    <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {dateFormatted(business?.delivery_time)}</h5>
+                    <h5>{t('PICKUP_TIME', 'Pickup Time:')} {dateFormatted(business?.pickup_time)}</h5>
                   </div>
                   <span />
                 </DeliveryDetails>
@@ -146,7 +147,7 @@ export const BusinessInformationUI = (props) => {
             )}
             {businessPhotos.length > 0 && (
               <BusinessGallery>
-                <h4>Business Photo Gallery</h4>
+                <h4>{t('BUSINESS_PHOTO_GALLERY', 'Business Photo Gallery')}</h4>
                 <div>
                   {
                     businessPhotos.map((photo, i) => (
@@ -158,7 +159,7 @@ export const BusinessInformationUI = (props) => {
             )}
             {businessVideos.length > 0 && (
               <BusinessVideos>
-                <h4>Business Videos</h4>
+                <h4>{t('BUSINESS_VIDEOS', 'Business Videos')}</h4>
                 <div>
                   {businessVideos.map((video, i) => (
                     <iframe key={i} src={formatUrlVideo(video.video)} width='191' height='128' frameBorder='0' allow='autoplay; encrypted-media' allowFullScreen />
