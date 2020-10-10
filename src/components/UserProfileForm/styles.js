@@ -165,6 +165,7 @@ export const SavedPlaces = styled.div`
 
 export const FormInput = styled.form`
   text-align: left;
+  height: 200px;
   > *{
     margin-top: 10px;
     margin-right: 10px;
@@ -178,6 +179,7 @@ export const FormInput = styled.form`
   }
 
   @media (max-width: 720px){
+    height: auto;
     > * {
       width: 75%;
     } 
