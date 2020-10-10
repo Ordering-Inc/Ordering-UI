@@ -8,6 +8,7 @@ export const UserProfileContainer = styled.div`
   text-align: center;
   flex: 1;
   width: 100%;
+  overflow-x: hidden
 `
 
 export const FlexTabs = styled.div`
@@ -20,7 +21,7 @@ margin: 0 auto;
 
 export const UserImage = styled.div`
   width: 90%;
-  height: 30%;
+  height: 15%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -61,8 +62,8 @@ export const Camera = styled.div`
   width:212px; /**170px + 42px */
   > * {
     margin-top: 10px;
-    width: 42px;
-    height: 42px;
+    width: 30px;
+    height: 30px;
   }
 `
 

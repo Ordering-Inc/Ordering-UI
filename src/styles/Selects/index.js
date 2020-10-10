@@ -28,7 +28,7 @@ export const Options = styled.div`
   position: absolute;
   background-color: #CCC;
   margin-top: 7px;
-  z-index: 10;
+  z-index: 10000;
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;
@@ -65,6 +65,12 @@ export const Selected = styled.div`
     vertical-align: text-top;
     display: flex;
     margin-left: 7px;
+  }
+
+  @media (max-width: 380px) {
+    padding-left: 9px;
+    padding-right: 9px;
+    font-size: 13px;
   }
 `
 

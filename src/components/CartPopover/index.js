@@ -9,10 +9,12 @@ import {
   WrapperCarts
 } from './styles'
 import { useOrder, useLanguage } from 'ordering-components'
+import { useLocation } from 'react-router-dom'
 
 import { Cart } from '../Cart'
 
 export const CartPopover = (props) => {
+  const location = useLocation()
   const { open } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()
@@ -44,7 +46,8 @@ export const CartPopover = (props) => {
     if (!open) return
     const outsidePopover = !popperElement.current?.contains(e.target)
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
-    if (outsidePopover && outsidePopoverMenu) {
+    const outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target)
+    if (outsidePopover && outsidePopoverMenu && outsideModal) {
       props.onClose && props.onClose()
     }
   }
@@ -54,9 +57,18 @@ export const CartPopover = (props) => {
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [open])
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px' }
+  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
+  }
+
+  const uuidParams = () => {
+    const { pathname } = location
+    const splited = pathname.split('/')
+    if (splited[1] === 'checkout') {
+      return splited[2] && splited[2]
+    }
+    return 'no-checkout'
   }
 
   return (
@@ -77,6 +89,7 @@ export const CartPopover = (props) => {
                     cart={cart}
                     isProducts={cart.products.length}
                     onClickCheckout={props.onClose}
+                    isHideCheckoutButtom={uuidParams() && (uuidParams() !== cart.uuid || uuidParams() === 'no-checkout')}
                   />
                 )}
               </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import { TiPencil } from 'react-icons/ti'
 import { VscTrash } from 'react-icons/vsc'
@@ -28,6 +29,7 @@ const AddressListUI = (props) => {
     handleDelete,
     setAddressList,
     handleSetDefault,
+    onClosePopover,
     popover
   } = props
 
@@ -61,6 +63,11 @@ const AddressListUI = (props) => {
       addresses
     })
     setAddessOpen(false)
+  }
+
+  const handleSetAddress = (address) => {
+    handleSetDefault(address)
+    onClosePopover && onClosePopover()
   }
 
   const handleDeleteClick = (address) => {
@@ -105,7 +112,7 @@ const AddressListUI = (props) => {
             <AddressListUl>
               {addressList.addresses.map(address => (
                 <AddressItem key={address.id}>
-                  <div className='wrapAddress' onClick={() => handleSetDefault(address)}>
+                  <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                     <span className='radio'>
                       {address.default ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}
                     </span>
@@ -136,7 +143,10 @@ const AddressListUI = (props) => {
               <p key={i}>{t('ERROR')}: [{e}]</p>
             ))
           ) : (
-            <p>{t('LOADING', 'Loading...')}</p>
+            <AddressListUl>
+              <Skeleton height={50} style={{ marginBottom: '10px' }} />
+              <Skeleton height={50} style={{ marginBottom: '10px' }} />
+            </AddressListUl>
           )}
         </>
       )}

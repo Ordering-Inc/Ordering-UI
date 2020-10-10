@@ -5,7 +5,13 @@ import orderBackground from '../../../template/assets/order-background.png'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 30px;
+  width: 100%;
+  margin-top: 20px;
+`
+
+export const WrapperContainer = styled.div`
+  width: 90%;
+  margin: auto;
 `
 
 const HeaderStyled = styled.div`
@@ -18,6 +24,11 @@ const HeaderStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   border-radius: 16px;
+  max-height: 350px;
+
+  @media (max-width: 768px) {
+    background-position: bottom;
+  }
 `
 
 export const Header = (props) => {
@@ -35,10 +46,18 @@ export const HeaderInfo = styled.div`
   background-color: #D81212;
   display: flex;
   flex-direction: column;
-  width: 40%;
-  padding: 20px 40px 20px 20px;
+  width: 50%;
+  padding: 20px 20px 30px;
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
+
+  @media (max-width: 660px) {
+    width: 55%;
+  }
+
+  @media (max-width: 380px) {
+    width: 60%;
+  }
 `
 
 export const HeaderLogo = styled.div`
@@ -54,15 +73,19 @@ export const HeaderLogo = styled.div`
   background-repeat: no-repeat, repeat;
   background-size: contain;
   object-fit: cover;
-  min-height: 83px;
+  min-height: 75px;
   border-radius: 10px;
+
+  @media (max-width: 660px) {
+    min-height: 60px;
+  }
 `
 
 export const HeaderText = styled.div`
   display: flex;
   color: #FFF;
-  margin: 20px 0px;
   text-align: center;
+  margin: 0px 20px;
 
   ${({ column }) => column && css`
     flex-direction: column;
@@ -74,6 +97,18 @@ export const HeaderText = styled.div`
 
   h1 {
     margin: 0px;
+    font-size: 24px;
+  }
+
+  @media (max-width: 576px) {
+    margin: 0px;
+
+    h1 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 14px;
+    }
   }
 `
 
@@ -81,6 +116,10 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 80px;
+
+  @media (max-width: 768px) {
+    margin: 10px 0px;
+  }
 `
 
 export const OrderBusiness = styled.div`
@@ -98,7 +137,7 @@ export const BusinessWrapper = styled.div`
   display: flex;
 `
 
-export const BusinessLogoWrapper = styled.div`
+export const LogoWrapper = styled.div`
   max-width: 75px;
   max-height: 75px;
   height: 75px;
@@ -134,8 +173,13 @@ export const BusinessInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  h1, p {
+  width: 75%;
+  h1,
+  p {
     margin: 3px 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   h1 {
@@ -145,18 +189,31 @@ export const BusinessInfo = styled.div`
     font-size: 15px;
     opacity: 0.8;
   }
+
+  @media (max-width: 380px) {
+    width: 65%;
+  }
 `
 
-export const BusinessActions = styled.div`
-  max-width: 20%;
+export const ActionsBlock = styled.div`
+  width: 20%;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   > * {
-    margin-right: 10px;
+    margin-right: 5px;
   }
   svg {
     font-size: 24px;
     cursor: pointer;
+  }
+
+  @media (max-width: 390px) {
+    flex-direction: column;
+
+    svg {
+      font-size: 20px;
+    }
   }
 `
 
@@ -183,6 +240,23 @@ export const OrderData = styled.div`
   }
   p.date {
     font-weight: bold;
+  }
+
+  @media (max-width: 576px) {
+    width: 80%;
+  }
+
+  @media (max-width: 480px) {
+    width: 75%;
+  }
+
+  @media (max-width: 410px) {
+    h1 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
+    }
   }
 `
 
@@ -217,6 +291,20 @@ export const OrderStatus = styled.div`
     font-weight: bold;
     text-transform: uppercase;
   }
+
+  @media (max-width: 576px) {
+    width: 20%;
+    max-width: 20%;
+  }
+
+  @media (max-width: 410px) {
+    width: 25%;
+    max-width: 25%;
+
+    span {
+      font-size: 13px;
+    }
+  }
 `
 
 export const StatusImage = styled.div`
@@ -232,54 +320,48 @@ export const StatusImage = styled.div`
     border-radius: 10px;
     margin-top: 15px;
   }
+
+  @media (max-width: 410px) {
+    img {
+      width: 70px;
+      height: 70px;
+    }
+  }
 `
 
-export const CustomerTitle = styled.h1`
-  margin-top: 0px;
+export const SectionTitle = styled.h1`
+  margin: 0px;
   font-size: 26px;
+
+  @media (max-width: 410px) {
+    font-size: 24px;
+  }
 `
 
 export const OrderCustomer = styled.div`
   display: flex;
   margin: 10px 0px 20px;
+  width: 100%;
 `
 
-export const WrapperCustomerPhoto = styled(BusinessLogoWrapper)`
-  border-radius: 100%;
+export const PhotoBlock = styled.img`
+  border-radius: 50%;
+  width: 75px;
   margin-right: 10px;
 `
-const CustomerPhotoStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  min-height: 75px;
-  border-radius: 100%;
-`
 
-export const CustomerPhoto = (props) => {
-  return (
-    <CustomerPhotoStyled
-      {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
-    >
-      {props.children}
-    </CustomerPhotoStyled>
-  )
-}
-
-export const CustomerInfo = styled.div`
+export const InfoBlock = styled.div`
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-transform: capitalize;
-  h1, span {
+  h1,
+  span {
     margin: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   h1 {
@@ -292,119 +374,18 @@ export const CustomerInfo = styled.div`
   }
 `
 
-export const DriverTitle = styled(CustomerTitle)``
-
 export const OrderDriver = styled(OrderCustomer)`
-  justify-content: space-between;
-`
-
-export const WrapperDriver = styled.div`
-  display: flex;
-`
-
-export const WrapperDriverPhoto = styled(WrapperCustomerPhoto)``
-
-const DriverPhotoStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  min-height: 75px;
-  border-radius: 100%;
-`
-
-export const DriverPhoto = (props) => {
-  return (
-    <DriverPhotoStyled
-      {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
-    >
-      {props.children}
-    </DriverPhotoStyled>
-  )
-}
-
-export const DriverInfo = styled(CustomerInfo)``
-
-export const DriverActions = styled(BusinessActions)``
-
-export const OrderBillTitle = styled(CustomerTitle)``
-
-export const OrderProducts = styled(OrderCustomer)`
-  flex-direction: column;
-`
-
-export const WrapperProductItem = styled.div`
-  display: flex;
   justify-content: space-between;
   align-items: center;
 `
 
-export const ProductItem = styled.div`
-  width: 100%;
+export const WrapperDriver = styled.div`
   display: flex;
+  width: 100%;
+`
+
+export const OrderProducts = styled(OrderCustomer)`
   flex-direction: column;
-  border-bottom: 1px solid #BFBFBF;
-  padding: 10px 0px;
-
-  div.info {
-    display: flex;
-    align-items: center;
-    width: 80%;
-    p {
-      font-size: 20px;
-      margin: 0px 5px;
-      svg {
-        cursor: pointer;
-      }
-    }
-  }
-
-  div.price {
-    width: 20%;
-    display: flex;
-    justify-content: flex-end;
-    span {
-      font-weight: bold;
-      font-size: 20px;
-    }
-  }
-`
-
-export const WrapperProductImage = styled(BusinessLogoWrapper)``
-
-const ProductImageStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  min-height: 75px;
-  border-radius: 10px;
-`
-
-export const ProductImage = (props) => {
-  return (
-    <ProductImageStyled
-      {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
-    >
-      {props.children}
-    </ProductImageStyled>
-  )
-}
-
-export const ProductInfo = styled(CustomerInfo)`
-  margin-left: 10px;
 `
 
 export const OrderBill = styled.div`
@@ -441,10 +422,19 @@ export const ReviewsAction = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin: 20px 0px;
+
   button {
-    padding: 10px 30px;
+    width: 70%;
+    padding: 5px 20px;
     color: #FFF;
-    width: 40%;
+    cursor: pointer;
+  }
+
+  @media (max-width: 512px) {
+    button {
+      width: 100%;
+    }
   }
 `
 

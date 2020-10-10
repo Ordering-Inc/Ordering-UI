@@ -4,6 +4,7 @@ import { AddressList } from '../AddressList'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
 import { AddressForm } from '../AddressForm'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 
 export const AddressesPopover = (props) => {
   const { open } = props
@@ -36,7 +37,8 @@ export const AddressesPopover = (props) => {
     if (!open) return
     const outsidePopover = !popperElement.current?.contains(e.target)
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
-    if (outsidePopover && outsidePopoverMenu) {
+    const outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target)
+    if (outsidePopover && outsidePopoverMenu && outsideModal) {
       props.onClose && props.onClose()
     }
   }
@@ -46,14 +48,16 @@ export const AddressesPopover = (props) => {
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [open])
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px' }
+  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
 
   return (
-    <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>{orderState.options?.address?.address || t('SELECT_AN_ADDRESS', 'Select an address')}</HeaderItem>
+    <div className='address-popover' style={{ overflow: 'hidden' }}>
+      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+        <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
+      </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         {
           userState.auth && (
@@ -62,6 +66,7 @@ export const AddressesPopover = (props) => {
               <AddressList
                 popover
                 changeOrderAddressWithDefault
+                onClosePopover={props.onClose}
               />
             </>
           )
@@ -74,6 +79,7 @@ export const AddressesPopover = (props) => {
                 useValidationFileds
                 address={orderState?.options?.address || {}}
                 onClose={() => props.onClose && props.onClose()}
+                onCancel={() => props.onClose && props.onClose()}
                 onSaveAddress={() => props.onClose && props.onClose()}
               />
             </>

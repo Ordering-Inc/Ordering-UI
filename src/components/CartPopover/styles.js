@@ -33,6 +33,10 @@ export const PopoverBody = styled.div`
   border-radius: 10px;
   max-width: 500px;
   z-index: 1001;
+
+  @media (max-width: 479px) {
+    width: 90vw !important;
+  }
 `
 
 export const PopoverArrow = styled.div`
@@ -51,6 +55,6 @@ export const NotFound = styled.h1`
 `
 
 export const WrapperCarts = styled.div`
-  max-height: 450px;
-  overflow: auto;
+  max-height: 500px;
+  margin-bottom: 10px;
 `

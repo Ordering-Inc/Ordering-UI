@@ -25,7 +25,8 @@ export const ProductItemAccordion = (props) => {
     changeQuantity,
     getProductMax,
     offsetDisabled,
-    onDeleteProduct
+    onDeleteProduct,
+    onEditProduct
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -73,10 +74,6 @@ export const ProductItemAccordion = (props) => {
     }
   }
 
-  const onEditProduct = () => {
-    // put here code for show productForm component to edit product
-  }
-
   return (
     <AccordionSection>
       <Accordion isValid={product?.valid ?? true} className={`accordion ${setActive}`}>
@@ -109,7 +106,7 @@ export const ProductItemAccordion = (props) => {
             <div className='actions'>
               <span
                 className='edit'
-                onClick={() => onEditProduct()}
+                onClick={() => onEditProduct(product)}
                 disabled={orderState.loading}
               >
                 <TiPencil />
@@ -131,7 +128,7 @@ export const ProductItemAccordion = (props) => {
               <div className='actions'>
                 <span
                   className='edit'
-                  onClick={() => onEditProduct()}
+                  onClick={() => onEditProduct(product)}
                   disabled={orderState.loading}
                 >
                   <TiPencil />
@@ -147,9 +144,11 @@ export const ProductItemAccordion = (props) => {
             )}
             <div style={{ width: '100%', justifyContent: 'flex-end' }} onClick={toggleAccordion}>
               <span className='product-price'>{formatPrice(product.total || product.price)}</span>
-              <p>
-                <BiCaretDown className={`${setRotate}`} />
-              </p>
+              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || isCartProduct) && (
+                <p>
+                  <BiCaretDown className={`${setRotate}`} />
+                </p>
+              )}
             </div>
           </div>
         )}
@@ -191,10 +190,11 @@ export const ProductItemAccordion = (props) => {
             </Button>
           </ProductActions>
         )}
-        {productInfo().ingredients.length > 0 && (
+        {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => ingredient.selected) && (
           <ul>
-            {productInfo().ingredients.map(ingredient => (
-              <li key={ingredient.id}>
+            <p>{t('INGREDIENTS', 'Ingredients')}</p>
+            {productInfo().ingredients.map(ingredient => ingredient.selected && (
+              <li className='ingredient' key={ingredient.id}>
                 <span>{ingredient.name}</span>
               </li>
             ))}

@@ -4,6 +4,13 @@ import { HeaderInvert } from '../../../template/components/Header/styles'
 export const HeaderItem = styled.div`
   cursor: pointer;
   color: #333;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+  }
+
   ${HeaderInvert} & {
     color: #FFF;
   }
@@ -16,6 +23,10 @@ export const PopoverBody = styled.div`
   border-radius: 10px;
   max-width: 500px;
   z-index: 1001;
+
+  @media (max-width: 479px) {
+    width: 90vw !important;
+  }
 `
 
 export const PopoverArrow = styled.div`

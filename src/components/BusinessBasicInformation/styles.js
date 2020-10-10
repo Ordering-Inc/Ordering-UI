@@ -16,6 +16,7 @@ const BusinessContainerStyled = styled.div`
   min-height: 200px;
   justify-content: flex-start;
   align-items: flex-end;
+  border-radius: 10px;
 `
 export const BusinessContainer = (props) => {
   const style = {}
@@ -40,6 +41,10 @@ export const BusinessContent = styled.div`
   margin: 20px;
   max-height: 75px;
   width: 340px;
+
+  @media (max-width: 380px) {
+    margin: 3px;
+  }
 `
 
 export const WrapperBusinessLogo = styled.div`

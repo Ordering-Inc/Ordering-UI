@@ -8,29 +8,15 @@ export const Container = styled.div`
   `}
 `
 
-export const ModalWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1002 !important;
-  outline: none;
-  box-sizing: border-box;
-  overflow-y: auto;
-`
-
 export const ModalDialog = styled.div`
   background-color: #FFF;
-  padding: 20px;
+  padding: ${({ padding }) => padding || '20px'};
   width: ${({ width }) => width || '50%'};
   border-radius: 10px;
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
+  max-height: 100%;
   @media (max-width: 860px) {
     width: 80%;
   }
@@ -72,4 +58,5 @@ export const ModalIcon = styled.span`
   float: right;
   font-size: 30px;
   cursor: pointer;
+  z-index: 1;
 `
