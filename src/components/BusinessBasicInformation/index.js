@@ -4,7 +4,7 @@ import { FiClock } from 'react-icons/fi'
 import { VscLocation } from 'react-icons/vsc'
 import { GrDeliver } from 'react-icons/gr'
 import { FaStar } from 'react-icons/fa'
-import { CgDetailsMore } from 'react-icons/cg'
+import { BsExclamationCircle } from 'react-icons/bs'
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 
@@ -125,7 +125,7 @@ export const BusinessBasicInformation = (props) => {
                 <Skeleton width={70} />
               )}
 
-              {!loading && <p><CgDetailsMore className='popup' onClick={() => setOpenBusinessInformation(true)} /></p>}
+              {!loading && <p><BsExclamationCircle className='popup' onClick={() => setOpenBusinessInformation(true)} /></p>}
             </div>
           </BusinessInfoItem>
         </BusinessInfo>
