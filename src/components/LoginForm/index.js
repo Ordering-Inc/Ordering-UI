@@ -194,7 +194,7 @@ const LoginFormUI = (props) => {
         </>
 
         <ForgotPassword>
-          {t('FORGOT_YOUT_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
+          {t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
         </ForgotPassword>
         {linkToForgetPassword && (
           <>
