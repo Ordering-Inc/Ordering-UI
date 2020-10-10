@@ -19,13 +19,15 @@ export const TypeContainer = styled.div`
 `
 
 export const ImageContainer = styled.div`
+  width: 150px;
     img{
       border-radius: 50%;
-      width: 150px;
+      width: 100%;
     }
      ${({ active }) => active && css`
       img{
-        border: 1px solid red ;
+        border: 1px solid red;
+        padding: 4px 2px 0px 2px;
       }
   `}
 `
