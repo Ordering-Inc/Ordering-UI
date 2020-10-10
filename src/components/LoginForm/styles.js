@@ -1,16 +1,15 @@
 import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
-  background: #f8f8f8;
   display: flex;
   flex: 1;
   flex-wrap: 1;
-  /* position: relative; */
   flex-direction: column;
-  /* height: 100vh; */
+  min-height: calc(100vh - 45px);
+  font-size: 1.2em;
   @media (min-width: 980px) {
-    /* width: 100vw; */
     flex-direction: row;
+    min-width: auto;
   }
 `
 
@@ -52,6 +51,7 @@ export const HeroSide = styled.div`
   flex: 1;
   /* height: 100%; */
   max-height: 300px;
+  font-size: 1.5em;
   /*font: normal normal bold 106px/148px Tajawal;*/
   /*letter-spacing: 1.06px;*/
   @media (min-width: 980px) {
@@ -64,12 +64,23 @@ export const HeroSide = styled.div`
 `
 
 export const TitleHeroSide = styled.div`
-  z-index: 1000;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  height: 400px;
+  padding: 0 10px;
+  font-size: 1em;
+  @media (min-width: 980px) {
+    flex: 1.2;
+    padding: 0 50px;
+    > img {
+      width: 200px;
+    }
+  }
+  @media (max-width: 480px) {
+    font-size: 0.8em;
+  }
 `
 
 export const FormSide = styled.div`
@@ -78,7 +89,6 @@ export const FormSide = styled.div`
   align-items: center;
   text-align: center;
   justify-content: space-evenly;
-  width: 100%;
   height: 100%;
   padding: 30px 20px;
   flex: 1;
@@ -92,6 +102,7 @@ export const FormSide = styled.div`
   }
   @media (min-width: 980px) {
     width: 40%;
+    height: auto;
     > img {
       margin-top: 0;
       width: 200px;

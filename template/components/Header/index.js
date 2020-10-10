@@ -54,6 +54,14 @@ export const Header = (props) => {
             </Link>
           </LogoHeader>
           <Menu>
+            {
+              !auth && (
+                <>
+                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
+                  <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
+                </>
+              )
+            }
             <OrderTypeSelectorHeader />
             <MomentPopover
               open={openPopover.moment}
