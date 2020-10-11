@@ -67,11 +67,13 @@ export const Header = (props) => {
               open={openPopover.moment}
               onClick={() => handleTogglePopover('moment')}
               onClose={() => handleClosePopover('moment')}
+
             />
             <AddressesPopover
               open={openPopover.addresses}
               onClick={() => handleTogglePopover('addresses')}
               onClose={() => handleClosePopover('addresses')}
+
             />
           </Menu>
         </LeftHeader>
@@ -97,6 +99,7 @@ export const Header = (props) => {
                     open={openPopover.cart}
                     onClick={() => handleTogglePopover('cart')}
                     onClose={() => handleClosePopover('cart')}
+                    auth={auth}
                   />
                 </>
               )

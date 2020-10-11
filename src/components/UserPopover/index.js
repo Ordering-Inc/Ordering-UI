@@ -49,7 +49,6 @@ export const UserPopover = (props) => {
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
-
   return (
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
@@ -63,7 +62,7 @@ export const UserPopover = (props) => {
           <PopoverListLink onClick={props.onClose} to='/profile/orders'>
             <FaRegListAlt /> {t('ORDERS', 'Orders')}
           </PopoverListLink>
-          <PopoverListItemLogout onClick={props.onClose} />
+          <PopoverListItemLogout onClose={props.onClose} />
         </PopoverList>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
@@ -74,16 +73,21 @@ export const UserPopover = (props) => {
 const LogoutActionUI = (props) => {
   const [, t] = useLanguage()
 
+  const handleClick = () => {
+    props.handleLogoutClick()
+    props.onClose()
+  }
   return (
-    <PopoverListItem onClick={props.handleLogoutClick}>
+    <PopoverListItem onClick={handleClick}>
       <FaSignOutAlt /> {t('LOGOUT', 'Logout')}
     </PopoverListItem>
   )
 }
 
-const PopoverListItemLogout = () => {
+const PopoverListItemLogout = (props) => {
   const logoutActionProps = {
-    UIComponent: LogoutActionUI
+    UIComponent: LogoutActionUI,
+    onClose: props.onClose
   }
   return (
     <LogoutActionController {...logoutActionProps} />
