@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLocation } from 'react-router-dom'
 import {
-  useApi,
   useLanguage
 } from 'ordering-components'
 
@@ -13,7 +11,8 @@ import {
   WrapContent,
   ProductsNotFound,
   ProductLoading,
-  SkeletonItem
+  SkeletonItem,
+  WrapperSearch
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -23,6 +22,7 @@ import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { ProductForm } from '../ProductForm'
 import { Modal } from '../Modal'
+import { SearchBar } from '../SearchBar'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -31,6 +31,7 @@ const BusinessProductsListingUI = (props) => {
     isInitialRender,
     businessState,
     categorySelected,
+    searchValue,
     categoryState,
     categoryId,
     productId,
@@ -39,7 +40,8 @@ const BusinessProductsListingUI = (props) => {
     handleChangeCategory,
     handleUpdateInitialRender,
     updateProductModal,
-    productRedirect
+    productRedirect,
+    handleChangeSearch
   } = props
 
   const { business, loading, error } = businessState
@@ -109,6 +111,12 @@ const BusinessProductsListingUI = (props) => {
             <BusinessBasicInformation
               businessState={businessState}
             />
+            <WrapperSearch>
+              <SearchBar
+                onSearch={handleChangeSearch}
+                search={searchValue}
+              />
+            </WrapperSearch>
             <BusinessProductsCategories
               categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
               categorySelected={categorySelected}
@@ -191,16 +199,18 @@ const BusinessProductsListingUI = (props) => {
 
       {
         !loading && business && !Object.keys(business).length && (
-          <ProductsNotFound>
-            <h1>{t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}</h1>
-          </ProductsNotFound>
+          <NotFoundSource
+            content={t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}
+            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+            onClickButton={props.handleSearchRedirect}
+          />
         )
       }
 
       {
         !loading && !business && (
           <NotFoundSource
-            content={t('ERROR_STORE_PRODUCTS', 'Sorry, an error has occurred with business selected.')}
+            content={t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.')}
             btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
             onClickButton={props.handleSearchRedirect}
           />
@@ -219,51 +229,12 @@ const BusinessProductsListingUI = (props) => {
 }
 
 export const BusinessProductsListing = (props) => {
-  const [ordering] = useApi()
-  const { search } = useLocation()
-  const [category, product] = search && search.substring(1).split('&')
-  const categoryId = category && category.split('=')[1]
-  const productId = product && product.split('=')[1]
   const [isInitialRender, setIsInitialRender] = useState(false)
-
-  const businessProps = [
-    'id',
-    'name',
-    'header',
-    'logo',
-    'name',
-    'open',
-    'about',
-    'description',
-    'address',
-    'location',
-    'schedule',
-    'service_fee',
-    'delivery_price',
-    'distance',
-    'delivery_time',
-    'gallery',
-    'pickup_time',
-    'reviews',
-    'featured',
-    'offers',
-    'food',
-    'laundry',
-    'alcohol',
-    'groceries',
-    'slug',
-    'products'
-  ]
 
   const businessProductslistingProps = {
     ...props,
     UIComponent: BusinessProductsListingUI,
-    slug: props.store,
-    categoryId,
-    productId,
     isInitialRender,
-    ordering: ordering,
-    businessProps: businessProps,
     handleUpdateInitialRender: (val) => setIsInitialRender(val)
   }
 

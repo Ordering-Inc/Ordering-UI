@@ -5,8 +5,19 @@ export const HeroContainer = styled.div`
   /* uncomment if there is a header */
   /* height: calc(100vh - 45px); */
   height: 100vh;
-  background-color: #000000;
-`
+  button{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  ${({ bgimage }) => bgimage && css`
+    background-image: url(${bgimage});
+    background-repeat: no-repeat, repeat;
+    width: 100%;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center;
+    min-height: 500px;
+  `}`
 
 export const ContentWrapper = styled.div`
     display: flex;
@@ -18,7 +29,7 @@ export const ContentWrapper = styled.div`
       width: 180px;
     }
     input {
-      width: 98%;
+      width: 97%;
       margin-bottom: 15px;
     }
     @media (max-width: 480px) {
@@ -54,6 +65,7 @@ export const Slogan = styled.p`
 export const WrapInput = styled.label`
   input {
     cursor: pointer;
+    background: rgba(0,0,0,0.1)
   }
   ${({ withIcon }) => withIcon && css`
     position: relative;
@@ -61,10 +73,10 @@ export const WrapInput = styled.label`
     &::before {
       content: "";
       position: absolute;
-      right: 10px;
+      right: 5px;
       top: 0;
-      bottom: 20px;
-      width: 20px;
+      bottom: 18px;
+      width: 15px;
       background: url(${withIcon}) center / contain no-repeat;
     }
     @media (max-width: 480px) {

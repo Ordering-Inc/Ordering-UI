@@ -10,6 +10,10 @@ export const WrapContent = styled.div`
   background: #F8F8F8;
 `
 
+export const WrapperSearch = styled.div`
+  margin: 15px 0px 0px;
+`
+
 export const ProductsNotFound = styled.div`
   display: flex;
   flex-direction: column;

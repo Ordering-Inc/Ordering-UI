@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const BusinessInformationContainer = styled.div`
   width: 100%;
+  position: relative;
 `
 const BusinessHeaderStyled = styled.div`
   display: flex;
@@ -17,6 +18,14 @@ const BusinessHeaderStyled = styled.div`
   min-height: 200px;
   justify-content: left;
   align-items: flex-end;
+  position: relative;
+  img{
+    position: absolute;
+    width: 100%;
+    height: calc(100% + 50px);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
 `
 
 export const Header = (props) => {
@@ -60,6 +69,7 @@ export const BusinessBasicContent = styled.div`
   margin: 20px;
   max-height: 75px;
   width: 340px;
+  z-index: 1;
 `
 
 export const WrapperBusinessLogo = styled.div`
@@ -153,6 +163,7 @@ export const Stars = styled.div``
 
 export const BusinessContent = styled.div`
   height: 80%;
+  padding: 0 20px;
 `
 
 export const FlexTabs = styled.div`
@@ -212,4 +223,17 @@ export const BusinessVideos = styled.div`
       margin: 10px 10px;
     }
   }
+`
+export const ModalIcon = styled.span`
+  left: 95%;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  z-index: 1;
+  position: absolute;
+  color: white;
+  top: 5px;
 `
