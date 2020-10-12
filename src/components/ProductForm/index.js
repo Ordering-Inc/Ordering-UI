@@ -172,7 +172,6 @@ const ProductOptionsUI = (props) => {
               className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
               color='primary'
               onClick={() => handleSaveProduct()}
-              // disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
             >
               {orderState.loading ? (
                 <span>{t('LOADING', 'Loading...')}</span>
