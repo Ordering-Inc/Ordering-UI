@@ -11,7 +11,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { ProfileOptions } from './ProfileOptions'
 
-import { GiPhotoCamera } from 'react-icons/Gi'
+import { GiPhotoCamera } from 'react-icons/gi'
 
 const UserProfileFormUI = (props) => {
   const { hanldeChangeInput, handleButtonUpdateClick, handlechangeImage, formState, showField, validationFields, isRequiredField, useChekoutFileds } = props

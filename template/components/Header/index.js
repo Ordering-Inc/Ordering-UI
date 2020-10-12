@@ -7,6 +7,7 @@ import {
 
 import { useSession, useLanguage } from 'ordering-components'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
+import { useOnlineStatus } from '../../../src/hooks/useOnlineStatus'
 
 import logoHeader from '../../assets/images/logo-header.svg'
 import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
@@ -39,6 +40,7 @@ export const Header = (props) => {
   }
 
   const windowSize = useWindowSize()
+  const onlineStatus = useOnlineStatus()
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
@@ -53,62 +55,56 @@ export const Header = (props) => {
               <img src={logo} />
             </Link>
           </LogoHeader>
-          <Menu>
-            {
-              !auth && (
-                <>
-                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
-                  <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
-                </>
-              )
-            }
-            <OrderTypeSelectorHeader />
-            <MomentPopover
-              open={openPopover.moment}
-              onClick={() => handleTogglePopover('moment')}
-              onClose={() => handleClosePopover('moment')}
-
-            />
-            <AddressesPopover
-              open={openPopover.addresses}
-              onClick={() => handleTogglePopover('addresses')}
-              onClose={() => handleClosePopover('addresses')}
-
-            />
-          </Menu>
+          {onlineStatus && (
+            <Menu>
+              <OrderTypeSelectorHeader />
+              <MomentPopover
+                open={openPopover.moment}
+                onClick={() => handleTogglePopover('moment')}
+                onClose={() => handleClosePopover('moment')}
+              />
+              <AddressesPopover
+                open={openPopover.addresses}
+                onClick={() => handleTogglePopover('addresses')}
+                onClose={() => handleClosePopover('addresses')}
+              />
+            </Menu>
+          )}
         </LeftHeader>
-        <RightHeader>
-          <Menu>
-            {
-              !auth && (
-                <>
-                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
-                  <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
-                </>
-              )
-            }
-            {
-              auth && (
-                <>
-                  <UserPopover
-                    open={openPopover.user}
-                    onClick={() => handleTogglePopover('user')}
-                    onClose={() => handleClosePopover('user')}
-                  />
-                  <CartPopover
-                    open={openPopover.cart}
-                    onClick={() => handleTogglePopover('cart')}
-                    onClose={() => handleClosePopover('cart')}
-                    auth={auth}
-                  />
-                </>
-              )
-            }
-            <LanguageSelector />
-          </Menu>
-        </RightHeader>
+        {onlineStatus && (
+          <RightHeader>
+            <Menu>
+              {
+                !auth && (
+                  <>
+                    <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
+                    <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
+                  </>
+                )
+              }
+              {
+                auth && (
+                  <>
+                    <UserPopover
+                      open={openPopover.user}
+                      onClick={() => handleTogglePopover('user')}
+                      onClose={() => handleClosePopover('user')}
+                    />
+                    <CartPopover
+                      open={openPopover.cart}
+                      onClick={() => handleTogglePopover('cart')}
+                      onClose={() => handleClosePopover('cart')}
+                      auth={auth}
+                    />
+                  </>
+                )
+              }
+              <LanguageSelector />
+            </Menu>
+          </RightHeader>
+        )}
       </InnerHeader>
-      {windowSize.width <= 820 && (
+      {windowSize.width <= 820 && onlineStatus && (
         <SubMenu>
           <MomentPopover
             open={openPopover.moment}
