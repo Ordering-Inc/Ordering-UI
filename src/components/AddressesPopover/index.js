@@ -48,13 +48,13 @@ export const AddressesPopover = (props) => {
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [open])
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px' }
+  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
 
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <div className='address-popover' style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
         <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
       </HeaderItem>
@@ -66,6 +66,7 @@ export const AddressesPopover = (props) => {
               <AddressList
                 popover
                 changeOrderAddressWithDefault
+                onClosePopover={props.onClose}
               />
             </>
           )

@@ -17,15 +17,18 @@ import { Login } from './Pages/Login'
 import { OrderDetailsPage } from './Pages/OrderDetails'
 import { CheckoutPage } from './Pages/Checkout'
 import { Cms } from './Pages/Cms'
-
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
+import { PageNotFound } from './Pages/PageNotFound'
 import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import ScrollToTop from '../src/utils/ScrollToTop'
 import { UpsellingPage } from '../src/components/UpsellingPage'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
+import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
+
+import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 const fontName = 'Nunito'
 
 const GlobalStyle = createGlobalStyle`
@@ -80,6 +83,7 @@ export const Router = () => {
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
   const [loaded, setLoaded] = useState(!auth)
+  const onlineStatus = useOnlineStatus()
 
   useEffect(() => {
     if (!loaded && !orderStatus.loading) {
@@ -105,7 +109,16 @@ export const Router = () => {
           )
         }
         {
-          loaded && (
+          !onlineStatus && (
+            <>
+              <Header />
+              <NotNetworkConnectivity />
+              <Footer />
+            </>
+          )
+        }
+        {
+          loaded && onlineStatus && (
             <>
               <Header />
               <ScrollToTop>
@@ -130,7 +143,7 @@ export const Router = () => {
                       !auth
                         ? (
                           <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
+                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
                             useLoginByCellphone
                             useChekoutFileds
                             handleSuccessSignup={handleSuccessSignup}
@@ -144,8 +157,8 @@ export const Router = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -157,8 +170,8 @@ export const Router = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -199,16 +212,13 @@ export const Router = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
-                  <Route exact path='/checkout'>
-                    Checkout
-                  </Route>
                   <Route exact path='/order/:orderId'>
                     <Order />
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     <OrderDetailsPage />
                   </Route>
-                  <Route exact path='/checkout/:cartUuid'>
+                  <Route path='/checkout/:cartUuid?'>
                     <CheckoutPage />
                   </Route>
                   <Route exact path='/upselling_page'>
@@ -218,7 +228,7 @@ export const Router = () => {
                     <Cms />
                   </Route>
                   <Route path='*'>
-                    404
+                    <PageNotFound />
                   </Route>
                 </Switch>
                 <Footer />

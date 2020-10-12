@@ -47,7 +47,7 @@ export const HomeSection = styled.div`
 
 export const HomeTitle = styled.div`
   width: 100%;
-  h1 {
+  h2 {
     text-align: center;
     font: normal normal normal 45px/79px Lobster;
     letter-spacing: 0px;
@@ -58,7 +58,7 @@ export const HomeTitle = styled.div`
     color: #D81212;
   }
   @media (max-width: 480px) {
-    h1 {
+    h2 {
       font-size: 30px;
       margin: 0px;
     }
@@ -69,6 +69,7 @@ export const StepsBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-end;
   margin-top: 15px;
   div {
     display: flex;
@@ -83,6 +84,7 @@ export const StepsBlock = styled.div`
       text-align: center;
     }
   }
+  
   @media (max-width: 1042px) {
     div {
       width: 100%;
@@ -133,7 +135,7 @@ export const ImageContent = styled.div`
   div {
     display: flex;
     justify-content: center;
-    max-height: 300px;
+    max-height: 400px;
     max-width:100%;
     img {
       width: auto;
@@ -150,6 +152,9 @@ export const ImageContent = styled.div`
 
 export const WrapTextContent = styled.div`
   padding: 20px;
+  h2{
+    font: normal normal normal 64px/80px Lobster;
+  }
   div {
     padding: 0px 70px;
   }
@@ -166,7 +171,7 @@ export const TextContent = styled.div`
   justify-content: center;
   width: 50%;
   div {
-    h1 > span {
+    h2 > span {
       color: #D81212;
     }
   }
@@ -178,7 +183,7 @@ export const TextContent = styled.div`
     height: 100%;
     width: 100%;
 
-    h1 {
+    h2 {
       font-size: 70px;
       color: #FFF;
     }
@@ -199,13 +204,13 @@ export const TextContent = styled.div`
     width: 100%;
     text-align: center;
     &.center {
-      h1 {
+      h2 {
         font-size: 45px;
       }
     }
   }
   @media (max-width: 480px) {
-    h1 {
+    h2 {
       font-size: 20px;
     }
     div {
@@ -213,7 +218,7 @@ export const TextContent = styled.div`
       margin-top: 25px;
     }
     &.center {
-      h1 {
+      h2 {
         font-size: 24px;
         text-align: center;
       }
@@ -228,7 +233,32 @@ export const Icons = styled.div`
     margin: 0px 10px
   }
   svg {
-    font-size: 40px;
+    font-size: 4em;
     fill: #D81212;
   }
+`
+export const HomeFooter = styled.div`
+  font: normal normal normal 128px/160px Lobster;
+`
+
+export const Line = styled.div`
+    position: relative;
+    border: 1px solid red;
+    align-self: center;
+    &::after{
+      content: '';
+      position: absolute;
+      border: 2px solid red;
+      transform: translateY(-50%);
+      right: 100%;
+      border-radius: 50%
+    }
+    &::before{
+      content: '';
+      position: absolute;
+      border: 2px solid red;
+      left: 100%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+    }
 `

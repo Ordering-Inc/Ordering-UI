@@ -46,7 +46,8 @@ export const CartPopover = (props) => {
     if (!open) return
     const outsidePopover = !popperElement.current?.contains(e.target)
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
-    if (outsidePopover && outsidePopoverMenu) {
+    const outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target)
+    if (outsidePopover && outsidePopoverMenu && outsideModal) {
       props.onClose && props.onClose()
     }
   }
@@ -56,7 +57,7 @@ export const CartPopover = (props) => {
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [open])
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px' }
+  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }

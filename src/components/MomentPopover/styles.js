@@ -23,6 +23,10 @@ export const PopoverBody = styled.div`
   border-radius: 10px;
   max-width: 500px;
   z-index: 1001;
+
+  @media (max-width: 479px) {
+    width: 90vw !important;
+  }
 `
 
 export const PopoverArrow = styled.div`

@@ -24,6 +24,10 @@ export const WrapperItems = styled.div`
     margin-top: 20px;
     padding-top: 8px;
     padding-bottom: 8px;
+
+    @media (max-width: 380px) {
+      width: 100%;
+    }
   }
 `
 
