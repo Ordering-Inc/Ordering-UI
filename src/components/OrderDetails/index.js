@@ -4,10 +4,11 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
 import { FiPhone } from 'react-icons/fi'
 import { HiOutlineChat } from 'react-icons/hi'
-import { BiCaretDown, BiCaretUp } from 'react-icons/bi'
+import { BiCaretUp } from 'react-icons/bi'
 
 import { Button } from '../../styles/Buttons'
 import logoHeader from '../../../template/assets/images/logo-header.svg'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
@@ -49,7 +50,8 @@ import {
 
 const OrderDetailsUI = (props) => {
   const {
-    formatPrice
+    formatPrice,
+    handleOrderRedirect
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
@@ -287,8 +289,12 @@ const OrderDetailsUI = (props) => {
           <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
         ))}
 
-      {!loading && Object.keys(order).length === 0 && (
-        <p>{t('NOT_FOUND_ELEMENTS', 'Not Found elements')}</p>
+      {!loading && !order && (
+        <NotFoundSource
+          content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
+          btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
+          onClickButton={handleOrderRedirect}
+        />
       )}
       <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })}>
         <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />

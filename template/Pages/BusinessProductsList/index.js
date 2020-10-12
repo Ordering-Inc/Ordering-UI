@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useApi } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
 
@@ -7,6 +7,11 @@ export const BusinessProductsList = (props) => {
   const { store } = useParams()
   const history = useHistory()
   const [ordering] = useApi()
+  const { search } = useLocation()
+
+  const [category, product] = search && search.substring(1).split('&')
+  const categoryId = category && category.split('=')[1]
+  const productId = product && product.split('=')[1]
 
   const businessProductsProps = {
     ...props,
@@ -14,6 +19,8 @@ export const BusinessProductsList = (props) => {
     isSearchByName: true,
     isSearchByDescription: false,
     slug: store,
+    categoryId,
+    productId,
     businessProps: [
       'id',
       'name',
@@ -44,6 +51,12 @@ export const BusinessProductsList = (props) => {
     ],
     handleSearchRedirect: () => {
       history.push('/search')
+    },
+    productRedirect: ({ slug, category, product }) => {
+      if (!category && !product) {
+        return history.push(`/store/${slug}`)
+      }
+      return history.push(`/store/${slug}?category=${category}&product=${product}`)
     }
   }
 

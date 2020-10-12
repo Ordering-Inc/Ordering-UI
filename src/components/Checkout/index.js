@@ -12,8 +12,6 @@ import {
   CartContainer,
   WrapperPlaceOrderButton,
   WarningMessage,
-  NotFound,
-  NotFoundImage,
   CartsList,
   CartItem,
   CartItemWrapper,

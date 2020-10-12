@@ -9,6 +9,9 @@ export const ProductsListing = (props) => {
     isSearchByName,
     isSearchByDescription,
     slug,
+    categoryId,
+    productId,
+    isInitialRender,
     ordering,
     businessProps,
     UIComponent
@@ -23,6 +26,7 @@ export const ProductsListing = (props) => {
   const [categoriesState, setCategoriesState] = useState({})
   const [orderOptions, setOrderOptions] = useState()
   const [requestsState, setRequestsState] = useState({})
+  const [productModal, setProductModal] = useState({ product: null, loading: false, error: null })
 
   const categoryStateDefault = {
     loading: true,
@@ -124,6 +128,47 @@ export const ProductsListing = (props) => {
     }
   }
 
+  const getProduct = async () => {
+    if (categoryId && productId && businessState.business.id) {
+      try {
+        setProductModal({
+          ...productModal,
+          loading: true
+        })
+        const source = CancelToken.source()
+        requestsState.product = source
+        const parameters = {
+          type: orderState.options?.type || 1
+        }
+
+        const { content: { result } } = await ordering
+          .businesses(businessState.business.id)
+          .categories(categoryId)
+          .products(productId)
+          .parameters(parameters)
+          .get({ cancelToken: source.token })
+        const product = Array.isArray(result) ? null : result
+        setProductModal({
+          ...productModal,
+          product,
+          loading: false
+        })
+      } catch (e) {
+        setProductModal({
+          ...productModal,
+          loading: false,
+          error: [e]
+        })
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (isInitialRender) {
+      getProduct()
+    }
+  }, [JSON.stringify(businessState.business?.id)])
+
   const getBusiness = async () => {
     try {
       setBusinessState({ ...businessState, loading: true })
@@ -216,9 +261,11 @@ export const ProductsListing = (props) => {
           searchValue={searchValue}
           categoryState={categoryState}
           businessState={businessState}
+          productModal={productModal}
           handleChangeCategory={handleChangeCategory}
           handleChangeSearch={handleChangeSearch}
           getNextProducts={getProducts}
+          updateProductModal={(val) => setProductModal({ ...productModal, product: val })}
         />
       )}
     </>
