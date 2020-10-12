@@ -5,11 +5,14 @@ export const LoginContainer = styled.div`
   flex: 1;
   flex-wrap: 1;
   flex-direction: column;
-  height: calc(100vh - 75px);
-  font-size: 1.2em;
+  height: auto;
+  button{
+    box-sizing: content-box;
+  }
   @media (min-width: 980px) {
     flex-direction: row;
     min-width: auto;
+    height: calc(100vh - 75px);
   }
 `
 
@@ -51,7 +54,7 @@ export const HeroSide = styled.div`
   flex: 1;
   /* height: 100%; */
   max-height: 300px;
-  font-size: 1.5em;
+  font-size: 1.7em;
   /*font: normal normal bold 106px/148px Tajawal;*/
   /*letter-spacing: 1.06px;*/
   @media (min-width: 980px) {
@@ -92,6 +95,7 @@ export const FormSide = styled.div`
   height: 100%;
   padding: 30px 20px;
   flex: 1;
+  font-size: 1em;
   > img {
     width: 139px;
     margin-bottom: 15px;
@@ -103,6 +107,7 @@ export const FormSide = styled.div`
   @media (min-width: 980px) {
     width: 40%;
     height: auto;
+    font-size: 1.2em;
     > img {
       margin-top: 0;
       width: 200px;
@@ -120,6 +125,7 @@ export const SocialIcons = styled.div`
   flex-wrap: wrap;
   width: 100%;
   flex-direction: column;
+  
   > * {
     color: #d81212;
 
@@ -134,19 +140,24 @@ export const SocialIcons = styled.div`
 
 export const SocialButtons = styled.div`
    width: 100%;
-   font-size: 1.2em;
    margin-top: 5px;
   > * {
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 20px;
     width: 55%;
     padding: 5px;
     color: black;
   }
+
   @media (min-width: 980px) {
     > * {
       margin-top: 3px;
       width: 55%;
+    }
+  }
+  @media (max-width: 480px){
+    > * {
+      width: 70%;
     }
   }
 `
@@ -164,25 +175,25 @@ export const FormInput = styled.form`
   > * {
     margin: 5px;
     width: 55%;
-  }
-  > input{
     padding: 10px 20px
   }
   button {
     margin-top: 10px;
-    margin-bottom: 20px;
-    width: 55%;
-    padding: 5px
+    width: 60%;
+    padding: 5px;
   }
   @media (min-width: 980px) {
     > * {
       margin: 10px;
-      width: 55%;
+    }
+  }
+  @media (max-width: 480px){
+    > * {
+      width: 70%;
     }
     button {
-      margin-top: 10px;
-      width: 55%;
-    }
+    width: 79%;
+  }
   }
 `
 

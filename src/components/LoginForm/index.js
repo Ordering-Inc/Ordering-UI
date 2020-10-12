@@ -42,8 +42,7 @@ const LoginFormUI = (props) => {
     elementLinkToSignup,
     elementLinkToForgotPassword,
     formState,
-    loginTab,
-    ordering
+    loginTab
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -204,11 +203,12 @@ const LoginFormUI = (props) => {
                   <AiOutlineGoogle />
         </SocialIcons> */}
         <SocialButtons>
-          <Button color='secondary' initialIcon>
-            <img src={iconFacebook} width={30} />
-            <span>Login with Facebook</span>
-          </Button>
-
+          {
+            configs?.facebook_id &&
+            (
+              <FacebookLoginButton appId={configs?.facebook_id?.value} handleSuccessFacebookLogin={handleSuccessFacebook} />
+            )
+          }
         </SocialButtons>
       </FormSide>
       <Alert
