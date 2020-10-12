@@ -11,6 +11,10 @@ export const BusinessList = styled.div`
   flex-wrap: wrap;
 `
 
+export const WrapperSearch = styled.div`
+  margin: 10px 20px 0px;
+`
+
 export const ErrorMessage = styled.span`
   padding: 20px;
   width: 100%;
@@ -25,15 +29,49 @@ export const NotFoundBusinesses = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 50%;
+  height: 100vh;
+  margin: 10px auto;
+
+  div.image {
+    max-width: 300px;
+    max-width: 300px;
+
+    img {
+      width: 300px;
+    }
+  }
+
+  h1 {
+    opacity: 0.5;
+    text-align: center;
+  }
 
   div {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    h3 {
-      opacity: 0.5;
-      margin-right: 10px;
+
+    button {
+      padding: 2px 60px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    width: 80%;
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    h1 {
+      font-size: 20px;
+    }
+    div button {
+      padding-left: 40px;
+      padding-right: 40px;
     }
   }
 `

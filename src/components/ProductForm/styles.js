@@ -3,24 +3,32 @@ import styled from 'styled-components'
 
 export const ProductContainer = styled.div`
   display: flex;
-  height: 100%;
+  height: 80vh;
   padding: 10px 0px;
   padding-left: 15px;
+  position: relative;
+
   @media (max-width: 1200px) {
     flex-wrap: wrap;
     overflow: auto;
+  }
+
+  @media (max-width: 576px) {
+    padding-left: 0px;
+  }
+
+  @media (max-width: 480px) {
+    height: 90vh;
   }
 `
 
 export const WrapperImage = styled.div`
   width: calc(50% - 10px);
   border-radius: 16px;
-  /*margin-right: 10px;*/
 
   @media (max-width: 1200px) {
     height: 300px;
     width: 100%;
-    /*margin-bottom: 10px;*/
   }
 `
 
@@ -59,6 +67,7 @@ export const ProductInfo = styled.div`
     text-align: left;
     color: #263238;
     overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
     margin-top: 0px;
   }
@@ -68,9 +77,12 @@ export const ProductInfo = styled.div`
     font-weight: 200;
     text-align: left;
     margin-top: 0px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    word-wrap: break-word;
+
+    line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
   @media (max-width: 1200px) {
@@ -79,10 +91,26 @@ export const ProductInfo = styled.div`
       text-align: center;
     }
   }
+
+  @media (max-width: 410px) {
+    padding: 10px 0px;
+  }
+
+  @media (max-width: 380px) {
+    h1 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 14px;
+    }
+  }
 `
 
 export const ProductEdition = styled.div`
   overflow: auto;
+  .error {
+    background-color: #FFC917;
+  }
 `
 
 export const SectionTitle = styled.h3`
@@ -122,9 +150,17 @@ export const ProductActions = styled.div`
     align-items: center;
 
     button.incdec {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border: 1px solid #000;
       color: #000;
     }
+  }
+
+  button:disabled,
+  button.disabled {
+    opacity: 0.5;
   }
 
   button.add {
@@ -134,10 +170,9 @@ export const ProductActions = styled.div`
       float: right;
       margin-right: 10px;
     }
-  }
-
-  button.disabled {
-    opacity: 0.5;
+    &.soldout {
+      width: 100%;
+    }
   }
 
   @media (max-width: 720px) {
@@ -145,24 +180,39 @@ export const ProductActions = styled.div`
     > * {
       margin: 10px 0;
     }
-    div{
+    div {
       width: 60%;
       margin: 10px 0;
       button.incdec {
-      width: 50px;
-      height: 50px;
-      font-size: 2em;
-      padding-bottom: 2px
+        width: 50px;
+        height: 50px;
+        font-size: 2em;
+        padding-bottom: 2px
+      }
+      span{
+        font-size: 2em;
+      }
     }
-    span{
-      font-size: 2em;
+  }
+
+  @media (max-width: 576px) {
+    div {
+      button.incdec {
+        width: 35px;
+        height: 35px;
+      }
+      span{
+        font-size: 1.5em;
+      }
     }
+    button.add {
+      width: 100%;
     }
   }
 
   @media (max-width: 480) {
-    div{
+    div {
       width: 80%;
-  }
+    }
   }
 `

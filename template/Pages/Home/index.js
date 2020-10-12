@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useLanguage } from 'ordering-components'
 import { RiAppleLine } from 'react-icons/ri'
 import { AiOutlineAndroid } from 'react-icons/ai'
 import { HomeHero } from '../../../src/components/HomeHero'
@@ -14,7 +15,9 @@ import {
   ImageContent,
   WrapTextContent,
   TextContent,
-  Icons
+  Icons,
+  HomeFooter,
+  Line
 } from './styles'
 
 import locationSvg from '../../../template/assets/location-icon.svg'
@@ -26,10 +29,33 @@ import socialMedia from '../../../template/assets/social-media.png'
 import foodBg from '../../../template/assets/food-bg.png'
 
 export const HomePage = (props) => {
+  const fontName = 'Lobster'
+  const [, t] = useLanguage()
   const history = useHistory()
 
   const handlerFindBusiness = () => {
     history.push('/search')
+  }
+
+  const FontHomeTheme = ({ fontName, children }) => {
+    useEffect(() => {
+      if (window.document.getElementById('theme-font-home-title')) {
+        return
+      }
+
+      const fontTheme = window.document.createElement('link')
+      fontTheme.id = 'theme-font-home-title'
+      fontTheme.rel = 'stylesheet'
+      fontTheme.async = true
+      fontTheme.defer = true
+      fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
+
+      window.document.body.appendChild(fontTheme)
+      return () => {
+        fontTheme.remove()
+      }
+    }, [])
+    return children
   }
 
   return (
@@ -37,34 +63,36 @@ export const HomePage = (props) => {
       <HomeHero
         {...props}
         onFindBusiness={handlerFindBusiness}
+        FontHomeTheme={FontHomeTheme}
       />
-
       <HomeSection bgColor='#F8F8F8' column>
         <HomeTitle>
-          <h1>
-            Steps to place <span>an order</span>
-          </h1>
+          <h2>
+            {t('STEPS_TITLE', 'Steps to place')} <span>{t('STEPS_TITLE_HIGHLIGHT', 'an order')}</span>
+          </h2>
         </HomeTitle>
         <StepsBlock>
           <div>
             <img src={locationSvg} />
-            <h3>Add Address</h3>
+            <h3>{t('STEPS_ADDRESS', 'Add Address')}</h3>
           </div>
+          <Line />
           <div>
             <img src={businessSvg} />
-            <h3>Select your Business</h3>
+            <h3>{t('STEPS_BUSINESS', 'Select your Business')}</h3>
           </div>
+          <Line />
           <div>
             <img src={productSvg} />
-            <h3>Choose your Product</h3>
+            <h3>{t('STEPS_PRODUCT', 'Choose your Product')}</h3>
           </div>
+          <Line />
           <div>
             <img src={deliverySvg} width='88' height='88' />
-            <h3>Your package arrives</h3>
+            <h3>{t('STEPS_ARRIVE', 'Your package arrives')}</h3>
           </div>
         </StepsBlock>
       </HomeSection>
-
       <HomeSection>
         <ImageContent>
           <div>
@@ -74,9 +102,13 @@ export const HomePage = (props) => {
         <TextContent>
           <WrapTextContent>
             <div>
-              <h1>We deliver more than <span>food</span></h1>
-              <p>With the largest on-demand network in the industry, you can explore your city, find its hidden hotspots, and watch as we bring your new favorite right to your door.</p>
-              <p>Download the app for iOS or Android for free.</p>
+              <FontHomeTheme fontName={fontName}>
+                <h2>
+                  {t('HOME_CONTENT_TITLE', 'We deliver more than')} <span>{t('HOME_CONTENT_TITLE_HIGHLIGHT', 'food')}</span>
+                </h2>
+              </FontHomeTheme>
+              <p>{t('TEXT_CONTENT_PARAGRAPH_1', 'With the largest on-demand network in the industry, you can explore your city, find its hidden hotspots, and watch as we bring your new favorite right to your door.')}</p>
+              <p>{t('HOME_CONTENT_PARAGRAPH_2', 'Download the app for iOS or Android for free.')}</p>
             </div>
           </WrapTextContent>
         </TextContent>
@@ -86,9 +118,11 @@ export const HomePage = (props) => {
         <TextContent>
           <WrapTextContent>
             <div>
-              <h1>Download <span>our apps</span></h1>
-              <p>The best ordering experience on your smartphone.</p>
-              <p>For speedy ordering and delivery updates, get the apps now.</p>
+              <FontHomeTheme fontName={fontName}>
+                <h2>{t('APPS_TITLE', 'Download')} <span>{t('APPS_TITLE_HIGHLIGHT', 'our apps')}</span></h2>
+              </FontHomeTheme>
+              <p>{t('APPS_PARAGRAPH_1', 'The best ordering experience on your smartphone.')}</p>
+              <p>{t('APPS_PARAGRAPH_2', 'For speedy ordering and delivery updates, get the apps now.')}</p>
             </div>
             <Icons>
               <RiAppleLine />
@@ -102,17 +136,18 @@ export const HomePage = (props) => {
           </div>
         </ImageContent>
       </HomeSection>
-
       <HomeSection bgimage={foodBg}>
         <TextContent className='center'>
-          <div>
-            <h1>Something for everyone</h1>
+          <HomeFooter>
+            <FontHomeTheme fontName={fontName}>
+              <h2>{t('HOME_CONTENT_HERO', 'Something for Everyone')}</h2>
+            </FontHomeTheme>
             <div>
               <Button color='primary'>
-                View Menu
+                {t('HOME_CONTENT_HERO_BUTTON', 'View Menu')}
               </Button>
             </div>
-          </div>
+          </HomeFooter>
         </TextContent>
       </HomeSection>
     </HomeContainer>

@@ -100,7 +100,7 @@ const AddressFormUI = (props) => {
 
   return (
     <>
-      <FormControl onSubmit={handleSubmit(onSubmit)}>
+      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         <AddressWrap className='google-control'>
           <WrapAddressInput>
             <GoogleAutocompleteInput

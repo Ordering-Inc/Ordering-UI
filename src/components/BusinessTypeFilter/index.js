@@ -3,7 +3,12 @@ import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 
 
 import { Tabs, Tab } from '../../styles/Tabs'
 
-import { TypeContainer } from './styles'
+import { TypeContainer, ImageContainer } from './styles'
+import food from '../../../template/assets/category-food.png'
+import groceries from '../../../template/assets/category-groceries.png'
+import alcohol from '../../../template/assets/category-alcohol.png'
+import laundry from '../../../template/assets/category-laundry.png'
+import all from '../../../template/assets/category-all.png'
 
 const BusinessTypeFilterUI = (props) => {
   const {
@@ -12,11 +17,19 @@ const BusinessTypeFilterUI = (props) => {
     handleChangeBusinessType
   } = props
   const [, t] = useLanguage()
+  const images = [{ image: all, value: 'all' }, { image: food, value: 'food' }, { image: groceries, value: 'groceries' }, { image: alcohol, value: 'alcohol' }, { image: laundry, value: 'laundry' }]
   return (
     <TypeContainer>
       <Tabs variant='primary'>
-        {businessTypes && businessTypes.length > 0 && businessTypes.map((type) => (
+        {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
           <Tab className='category' active={type.value === currentTypeSelected} key={type.value} onClick={() => handleChangeBusinessType(type.value)}>
+            {!type.value || i > (images.length - 1) ? <ImageContainer active={type.value === currentTypeSelected}><img src={images[0].image} /></ImageContainer> : ''}
+            {images.map(image => (
+              <React.Fragment key={image.value}>
+                {image.value === type.value ? <ImageContainer active={type.value === currentTypeSelected}><img src={image.image} /></ImageContainer> : ''}
+              </React.Fragment>
+            )
+            )}
             {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
           </Tab>
         ))}

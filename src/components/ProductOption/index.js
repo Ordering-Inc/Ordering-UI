@@ -11,8 +11,7 @@ import {
 const ProductOptionUI = (props) => {
   const {
     children,
-    option,
-    error
+    option
   } = props
 
   let maxMin = `(Min: ${option.min} / Max: ${option.max})`
@@ -25,7 +24,7 @@ const ProductOptionUI = (props) => {
   }
 
   return (
-    <Container className={`${error ? 'error' : ''}`}>
+    <Container>
       <WrapHeader>
         <Title>{option.name}</Title>
         <Flag>{maxMin}</Flag>
