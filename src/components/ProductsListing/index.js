@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useOrder, useLanguage } from 'ordering-components'
 import { CancelToken } from 'ordering-api-sdk'
+import { isADateValid } from '../../utils'
 
 export const ProductsListing = (props) => {
   console.log('Move ProductsListing to ordering-componenets')
   const {
+    isSearchByName,
+    isSearchByDescription,
     slug,
+    categoryId,
+    productId,
+    isInitialRender,
     ordering,
     businessProps,
     UIComponent
@@ -15,10 +21,12 @@ export const ProductsListing = (props) => {
   const [languageState, t] = useLanguage()
 
   const [categorySelected, setCategorySelected] = useState({ id: null, name: t('ALL', 'All') })
+  const [searchValue, setSearchValue] = useState(null)
   const [businessState, setBusinessState] = useState({ business: {}, loading: true, error: null })
   const [categoriesState, setCategoriesState] = useState({})
   const [orderOptions, setOrderOptions] = useState()
   const [requestsState, setRequestsState] = useState({})
+  const [productModal, setProductModal] = useState({ product: null, loading: false, error: null })
 
   const categoryStateDefault = {
     loading: true,
@@ -38,16 +46,36 @@ export const ProductsListing = (props) => {
     setCategorySelected(category)
   }
 
+  const handleChangeSearch = (search) => {
+    setSearchValue(search)
+  }
+
+  const isMatchSearch = (name, description) => {
+    if (!searchValue) return true
+    return (name.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByName) ||
+      (description.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByDescription)
+  }
+
   const getProducts = async (newFetch) => {
-    if (!businessState.business.lazy_load_products_recommended) {
+    if (!businessState?.business?.lazy_load_products_recommended) {
       const categoryState = {
         ...categoryStateDefault,
         loading: false
       }
       if (categorySelected.id) {
-        categoryState.products = businessState.business.categories?.find(category => category.id === categorySelected.id)?.products || []
+        const productsFiltered = businessState.business.categories?.find(
+          category => category.id === categorySelected.id
+        )?.products.filter(
+          product => isMatchSearch(product.name, product.description)
+        )
+        categoryState.products = productsFiltered || []
       } else {
-        categoryState.products = businessState.business.categories?.reduce((products, category) => [...products, ...category.products], []) || []
+        const productsFiltered = businessState.business.categories?.reduce(
+          (products, category) => [...products, ...category.products], []
+        ).filter(
+          product => isMatchSearch(product.name, product.description)
+        )
+        categoryState.products = productsFiltered || []
       }
       setCategoryState({ ...categoryState })
       return
@@ -100,6 +128,47 @@ export const ProductsListing = (props) => {
     }
   }
 
+  const getProduct = async () => {
+    if (categoryId && productId && businessState.business.id) {
+      try {
+        setProductModal({
+          ...productModal,
+          loading: true
+        })
+        const source = CancelToken.source()
+        requestsState.product = source
+        const parameters = {
+          type: orderState.options?.type || 1
+        }
+
+        const { content: { result } } = await ordering
+          .businesses(businessState.business.id)
+          .categories(categoryId)
+          .products(productId)
+          .parameters(parameters)
+          .get({ cancelToken: source.token })
+        const product = Array.isArray(result) ? null : result
+        setProductModal({
+          ...productModal,
+          product,
+          loading: false
+        })
+      } catch (e) {
+        setProductModal({
+          ...productModal,
+          loading: false,
+          error: [e]
+        })
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (isInitialRender) {
+      getProduct()
+    }
+  }, [JSON.stringify(businessState.business?.id)])
+
   const getBusiness = async () => {
     try {
       setBusinessState({ ...businessState, loading: true })
@@ -112,7 +181,7 @@ export const ProductsListing = (props) => {
           ? `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`
           : null
       }
-      if (orderState.options?.moment) {
+      if (orderState.options?.moment && isADateValid(orderState.options?.moment)) {
         const parts = orderState.options?.moment.split(' ')
         const dateParts = parts[0].split('-')
         const timeParts = parts[1].split(':')
@@ -144,7 +213,7 @@ export const ProductsListing = (props) => {
     if (!orderState.loading && !businessState.loading) {
       getProducts()
     }
-  }, [orderState, categorySelected, businessState])
+  }, [orderState, categorySelected, businessState, searchValue])
 
   useEffect(() => {
     if (!orderState.loading && orderOptions && !languageState.loading) {
@@ -189,10 +258,14 @@ export const ProductsListing = (props) => {
           {...props}
           errors={errors}
           categorySelected={categorySelected}
+          searchValue={searchValue}
           categoryState={categoryState}
           businessState={businessState}
+          productModal={productModal}
           handleChangeCategory={handleChangeCategory}
+          handleChangeSearch={handleChangeSearch}
           getNextProducts={getProducts}
+          updateProductModal={(val) => setProductModal({ ...productModal, product: val })}
         />
       )}
     </>

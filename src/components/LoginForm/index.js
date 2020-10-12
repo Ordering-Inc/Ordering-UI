@@ -100,13 +100,13 @@ const LoginFormUI = (props) => {
         <NewOnPlatform>
           {elementLinkToSignup && (
             <>
-              {t('NEW_ON_PLATFORM')} {elementLinkToSignup}
+              {t('NEW_ON_PLATFORM', 'New on Ordering?')} {elementLinkToSignup}
             </>
           )}
           {linkToSignup && (
             <>
-              {t('NEW_ON_PLATFORM')}
-              <a href={linkToSignup}>{t('CREATE_AN_ACCOUNT')}</a>
+              {t('NEW_ON_PLATFORM', 'New on Ordering?')}
+              <a href={linkToSignup}>{t('CREATE_AN_ACCOUNT', 'Create an account')}</a>
             </>
           )}
         </NewOnPlatform>
@@ -124,7 +124,7 @@ const LoginFormUI = (props) => {
                   onClick={() => hanldeChangeTab('email')}
                   active={loginTab === 'email'}
                 >
-                  {t('LOGIN_WITH_EMAIL', 'Login with Emai')}
+                  {t('LOGIN_WITH_EMAIL', 'Login with Email')}
                 </Tab>
               )}
               {useLoginByCellphone && (
@@ -194,12 +194,12 @@ const LoginFormUI = (props) => {
         </>
 
         <ForgotPassword>
-          {t('FORGOT_YOUT_PASSWORD')} {elementLinkToForgotPassword}
+          {t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
         </ForgotPassword>
         {linkToForgetPassword && (
           <>
             {t('NEW_ON_PLATFORM')}
-            <a href={linkToForgetPassword}>{t('RESET_PASSWORD')}</a>
+            <a href={linkToForgetPassword}>{t('RESET_PASSWORD','Reset Password')}</a>
           </>
         )}
       </FormSide>

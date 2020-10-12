@@ -1,7 +1,8 @@
 import React from 'react'
-import { ProductsList } from 'ordering-components'
+import { ProductsList, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
+import { NotFoundSource } from '../NotFoundSource'
 
 import {
   ProductsContainer,
@@ -12,11 +13,14 @@ import {
 
 const BusinessProductsListUI = (props) => {
   const {
+    businessId,
     category,
     categories,
     categoryState,
     onProductClick
   } = props
+
+  const [, t] = useLanguage()
 
   return (
     <ProductsContainer>
@@ -27,8 +31,9 @@ const BusinessProductsListUI = (props) => {
               categoryState.products?.map(product => (
                 <SingleProductCard
                   key={product.id}
-                  isSoldOut={product.inventoried && !product.quantity}
+                  isSoldOut={(product.inventoried && !product.quantity)}
                   product={product}
+                  businessId={businessId}
                   onProductClick={onProductClick}
                 />
               ))
@@ -60,6 +65,7 @@ const BusinessProductsListUI = (props) => {
                           <SingleProductCard
                             key={product.id}
                             isSoldOut={product.inventoried && !product.quantity}
+                            businessId={businessId}
                             product={product}
                             onProductClick={onProductClick}
                           />
@@ -83,9 +89,9 @@ const BusinessProductsListUI = (props) => {
       }
       {
         !categoryState.loading && categoryState.products.length === 0 && (
-          <div>
-            <h1>Not Found elements</h1>
-          </div>
+          <NotFoundSource
+            content={t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
+          />
         )
       }
       {/* {error && error.length > 0 && (

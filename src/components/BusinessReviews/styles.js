@@ -50,3 +50,18 @@ export const ScoreDiv = styled.div`
   border: 1px solid #ccc;
   border-radius: 16px;
 `
+
+export const SkeletonContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding: 30px 0;
+    > div{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+`

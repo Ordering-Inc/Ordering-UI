@@ -26,6 +26,9 @@ import { Footer } from './components/Footer'
 import ScrollToTop from '../src/utils/ScrollToTop'
 import { UpsellingPage } from '../src/components/UpsellingPage'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
+import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
+
+import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 const fontName = 'Nunito'
 
 const GlobalStyle = createGlobalStyle`
@@ -82,6 +85,7 @@ export const Router = () => {
   const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
   const [ordering] = useApi()
   const [loaded, setLoaded] = useState(!auth)
+  const onlineStatus = useOnlineStatus()
 
   useEffect(() => {
     getProducts()
@@ -136,7 +140,16 @@ export const Router = () => {
           )
         }
         {
-          loaded && (
+          !onlineStatus && (
+            <>
+              <Header />
+              <NotNetworkConnectivity />
+              <Footer />
+            </>
+          )
+        }
+        {
+          loaded && onlineStatus && (
             <>
               <Header />
               <ScrollToTop>
@@ -161,7 +174,7 @@ export const Router = () => {
                       !auth
                         ? (
                           <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
+                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
                             useLoginByCellphone
                             useChekoutFileds
                             handleSuccessSignup={handleSuccessSignup}
@@ -175,8 +188,8 @@ export const Router = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -188,8 +201,8 @@ export const Router = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -230,16 +243,13 @@ export const Router = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
-                  <Route exact path='/checkout'>
-                    Checkout
-                  </Route>
                   <Route exact path='/order/:orderId'>
                     <Order />
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     <OrderDetailsPage />
                   </Route>
-                  <Route exact path='/checkout/:cartUuid'>
+                  <Route path='/checkout/:cartUuid?'>
                     <CheckoutPage />
                   </Route>
                   <Route exact path='/upselling_page'>
