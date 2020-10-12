@@ -60,8 +60,8 @@ export const HomeHero = (props) => {
       <ContentWrapper>
         <FontHomeTheme fontName={fontName}>
           <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-          <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
         </FontHomeTheme>
+        <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
         <WrapInput onClick={handleAddressInput} withIcon={locationIcon}>
           <Input type='text' disabled placeholder={orderState?.options?.address?.address || t('TYPE_ADDRESS', 'Type address')} />
         </WrapInput>
