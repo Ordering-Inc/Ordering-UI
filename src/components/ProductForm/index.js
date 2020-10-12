@@ -77,11 +77,13 @@ const ProductOptionsUI = (props) => {
 
   return (
     <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
-      <ProductShare
-        slug={businessSlug}
-        categoryId={product.category_id}
-        productId={product.id}
-      />
+      {product && (
+        <ProductShare
+          slug={businessSlug}
+          categoryId={product?.category_id}
+          productId={product?.id}
+        />
+      )}
       <WrapperImage>
         <ProductImage bgimage={product?.images} />
       </WrapperImage>
