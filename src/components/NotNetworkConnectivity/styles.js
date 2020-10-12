@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const NotFound = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,7 +28,7 @@ export const NotFound = styled.div`
   }
 `
 
-export const NotFoundImage = styled.div`
+export const Image = styled.div`
   max-width: 300px;
   max-width: 300px;
 
