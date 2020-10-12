@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import {
-  useApi,
   useLanguage
 } from 'ordering-components'
 
@@ -10,6 +10,8 @@ import {
   ProductsContainer,
   WrapContent,
   ProductsNotFound,
+  ProductLoading,
+  SkeletonItem,
   WrapperSearch
 } from './styles'
 
@@ -26,12 +28,19 @@ const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
   const {
+    isInitialRender,
     businessState,
     categorySelected,
     searchValue,
     categoryState,
+    categoryId,
+    productId,
+    productModal,
     getNextProducts,
     handleChangeCategory,
+    handleUpdateInitialRender,
+    updateProductModal,
+    productRedirect,
     handleChangeSearch
   } = props
 
@@ -42,6 +51,11 @@ const BusinessProductsListingUI = (props) => {
   const [curProduct, setCurProduct] = useState(props.product)
 
   const onProductClick = (product) => {
+    productRedirect({
+      slug: business?.slug,
+      product: product.id,
+      category: product.category_id
+    })
     setCurProduct(product)
     setModalIsOpen(true)
   }
@@ -50,6 +64,15 @@ const BusinessProductsListingUI = (props) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
     }
+  }
+
+  const closeModalProductForm = () => {
+    setModalIsOpen(false)
+    handleUpdateInitialRender(false)
+    updateProductModal(null)
+    productRedirect({
+      slug: business?.slug
+    })
   }
 
   const handleScroll = useCallback(() => {
@@ -64,6 +87,21 @@ const BusinessProductsListingUI = (props) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
+
+  useEffect(() => {
+    if (categoryId && productId && isInitialRender) {
+      if (productModal?.product?.id) {
+        setCurProduct(productModal.product)
+      }
+      setModalIsOpen(true)
+    }
+  }, [productModal])
+
+  useEffect(() => {
+    if (categoryId && productId) {
+      handleUpdateInitialRender(true)
+    }
+  }, [])
 
   return (
     <ProductsContainer>
@@ -101,13 +139,43 @@ const BusinessProductsListingUI = (props) => {
         width='70%'
         open={openProduct}
         closeOnBackdrop
-        onClose={() => setModalIsOpen(false)}
+        onClose={() => closeModalProductForm()}
       >
-        <ProductForm
-          product={curProduct}
-          businessId={businessState?.business?.id}
-          onSave={handlerProductAction}
-        />
+
+        {productModal.loading && (
+          <ProductLoading>
+            <SkeletonItem>
+              <Skeleton height={45} />
+            </SkeletonItem>
+            <SkeletonItem>
+              <Skeleton height={45} />
+            </SkeletonItem>
+            <SkeletonItem>
+              <Skeleton height={45} />
+            </SkeletonItem>
+          </ProductLoading>
+        )}
+
+        {productModal.error && productModal.error.length > 0 && (
+          productModal.error.map((e, i) => (
+            <p key={i}>ERROR: [{e.message}]</p>
+          ))
+        )}
+
+        {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
+          <NotFoundSource
+            content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
+          />
+        )}
+
+        {(productModal.product || curProduct) && (
+          <ProductForm
+            businessSlug={business?.slug}
+            product={productModal.product || curProduct}
+            businessId={business?.id}
+            onSave={handlerProductAction}
+          />
+        )}
       </Modal>
       {loading && (
         <>
@@ -161,9 +229,13 @@ const BusinessProductsListingUI = (props) => {
 }
 
 export const BusinessProductsListing = (props) => {
+  const [isInitialRender, setIsInitialRender] = useState(false)
+
   const businessProductslistingProps = {
     ...props,
-    UIComponent: BusinessProductsListingUI
+    UIComponent: BusinessProductsListingUI,
+    isInitialRender,
+    handleUpdateInitialRender: (val) => setIsInitialRender(val)
   }
 
   return (

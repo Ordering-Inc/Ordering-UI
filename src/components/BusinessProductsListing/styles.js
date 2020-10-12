@@ -40,3 +40,14 @@ export const ProductsNotFound = styled.div`
     }
   }
 `
+
+export const ProductLoading = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`
+
+export const SkeletonItem = styled.div`
+  width: 80%;
+  margin: 0px auto 10px;
+`

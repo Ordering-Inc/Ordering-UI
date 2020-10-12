@@ -6,6 +6,7 @@ export const ProductContainer = styled.div`
   height: 80vh;
   padding: 10px 0px;
   padding-left: 15px;
+  position: relative;
 
   @media (max-width: 1200px) {
     flex-wrap: wrap;
