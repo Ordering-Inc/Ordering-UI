@@ -29,6 +29,9 @@ export const Content = styled.div`
     font-size: 12px;
     margin: 10px 0;
   }
+  a{
+    font-weight: bold;
+  }
 
   @media (min-width: 410px) {
     width: 30%;
@@ -44,7 +47,7 @@ export const SocialMedia = styled.div`
    margin-block-end: 1em;
    margin-block-start: 1em; 
   }
- 
+  
   @media (min-width: 410px) {
     text-align: center;
     width: 20%;
