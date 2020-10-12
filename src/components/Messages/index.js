@@ -157,7 +157,7 @@ export const MessagesUI = (props) => {
           <MessageConsole>
             <BubbleConsole>
               {t('ORDER_PLACED_FOR', 'Order placed for')} {order.created_at} {t('VIA', 'via')} {order.app_id}
-              <p>{moment(order.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+              <p>{moment.utc(order.created_at).fromNow()}</p>
             </BubbleConsole>
           </MessageConsole>
           {messages?.messages.map((message) => (
@@ -174,14 +174,14 @@ export const MessagesUI = (props) => {
                     <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
                     <p>
                       {
-                        moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()
+                        moment.utc(message.created_at).fromNow()
                       }
                     </p>
                   </BubbleConsole>
                 ) : (
                   <BubbleConsole>
                     <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong> {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')} {message.comment && (<><br /> {message.comment.length}</>)}
-                    <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+                    <p>{moment.utc(message.created_at).fromNow()}</p>
                   </BubbleConsole>
                 )
               )}
@@ -193,7 +193,7 @@ export const MessagesUI = (props) => {
                 <MessageCustomer>
                   <BubbleCustomer>
                     {message.comment}
-                    <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+                    <p>{moment.utc(message.created_at).fromNow()}</p>
                   </BubbleCustomer>
                 </MessageCustomer>
               )}
@@ -202,12 +202,12 @@ export const MessagesUI = (props) => {
                   {message.comment && (
                     <BubbleCustomer>
                       {message.comment}
-                      <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+                      <p>{moment.utc(message.created_at).fromNow()}</p>
                     </BubbleCustomer>
                   )}
                   <BubbleCustomer>
                     <img src={message.source} width='200px' height='150px' />
-                    <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+                    <p>{moment.utc(message.created_at).fromNow()}</p>
                   </BubbleCustomer>
                 </MessageCustomer>
               )}
