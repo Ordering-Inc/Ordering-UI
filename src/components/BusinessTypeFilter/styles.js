@@ -23,11 +23,12 @@ export const ImageContainer = styled.div`
     img{
       border-radius: 50%;
       width: 100%;
+      border: 1px solid transparent;
+      padding: 4px 2px 0px 2px;
     }
      ${({ active }) => active && css`
-      img{
-        border: 1px solid red;
-        padding: 4px 2px 0px 2px;
+      img {
+        border-color: red;
       }
   `}
 `
