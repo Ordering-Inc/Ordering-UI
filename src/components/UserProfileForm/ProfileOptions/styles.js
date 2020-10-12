@@ -14,4 +14,7 @@ export const FlexTabs = styled.div`
       position: relative;
       top: 2px
     }
+    @media (max-width: 480px){
+      width: 100%
+    }
 `
