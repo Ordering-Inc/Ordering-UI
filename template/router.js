@@ -174,7 +174,7 @@ export const Router = () => {
                       !auth
                         ? (
                           <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN')}</Link>}
+                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
                             useLoginByCellphone
                             useChekoutFileds
                             handleSuccessSignup={handleSuccessSignup}
@@ -188,8 +188,8 @@ export const Router = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -201,8 +201,8 @@ export const Router = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD')}</Link>}
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )

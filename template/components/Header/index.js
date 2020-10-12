@@ -58,6 +58,16 @@ export const Header = (props) => {
           {onlineStatus && (
             <Menu>
               <OrderTypeSelectorHeader />
+              <MomentPopover
+                open={openPopover.moment}
+                onClick={() => handleTogglePopover('moment')}
+                onClose={() => handleClosePopover('moment')}
+              />
+              <AddressesPopover
+                open={openPopover.addresses}
+                onClick={() => handleTogglePopover('addresses')}
+                onClose={() => handleClosePopover('addresses')}
+              />
             </Menu>
           )}
         </LeftHeader>
@@ -72,16 +82,6 @@ export const Header = (props) => {
                   </>
                 )
               }
-              <MomentPopover
-                open={openPopover.moment}
-                onClick={() => handleTogglePopover('moment')}
-                onClose={() => handleClosePopover('moment')}
-              />
-              <AddressesPopover
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-              />
               {
                 auth && (
                   <>

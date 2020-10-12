@@ -71,7 +71,7 @@ const ProductOptionsUI = (props) => {
     }
     const myElement = document.getElementsByClassName('error')[0]
     const container = document.getElementById('product_edition')
-    const topPos = myElement.offsetTop - (windowSize.width > 1200 ? 106 : 40)
+    const topPos = myElement.offsetTop - container.offsetTop
     scrollTo(container, topPos, 1250)
   }
 
