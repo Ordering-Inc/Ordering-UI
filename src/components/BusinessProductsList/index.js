@@ -2,6 +2,7 @@ import React from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
+import { NotFoundSource } from '../NotFoundSource'
 
 import {
   ProductsContainer,
@@ -88,9 +89,9 @@ const BusinessProductsListUI = (props) => {
       }
       {
         !categoryState.loading && categoryState.products.length === 0 && (
-          <div>
-            <h1>{t('PRODUCT_LIST_NOT_FOUND', 'Not Found elements')}</h1>
-          </div>
+          <NotFoundSource
+            content={t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
+          />
         )
       }
       {/* {error && error.length > 0 && (

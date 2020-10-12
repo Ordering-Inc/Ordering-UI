@@ -11,6 +11,10 @@ export const BusinessList = styled.div`
   flex-wrap: wrap;
 `
 
+export const WrapperSearch = styled.div`
+  margin: 10px 20px 0px;
+`
+
 export const ErrorMessage = styled.span`
   padding: 20px;
   width: 100%;
