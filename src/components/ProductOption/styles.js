@@ -18,6 +18,14 @@ export const Title = styled.h3`
   font-size: 20px;
   margin: 0px;
   text-transform: capitalize;
+
+  @media (max-width: 380px) {
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 70%;
+  }
 `
 
 export const Flag = styled.span`
@@ -26,4 +34,8 @@ export const Flag = styled.span`
   text-transform: capitalize;
   color: #A52121;
   font-weight: bold;
+
+  @media (max-width: 380px) {
+    font-size: 13px;
+  }
 `

@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 
 import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder, useLanguage } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
-import { BusinessInformationContainer, Header, BusinessContent, BusinessBasicContent, FlexTabs, BusinessLocation, Map, BusinessOpeningTime, Times, DeliveryDetails, BusinessGallery, BusinessVideos, BusinessInfo, BusinessInfoItem, WrapperBusinessLogo, BusinessLogo } from './styles'
+import { BusinessInformationContainer, Header, BusinessContent, BusinessBasicContent, FlexTabs, BusinessLocation, Map, BusinessOpeningTime, Times, DeliveryDetails, BusinessGallery, BusinessVideos, BusinessInfo, BusinessInfoItem, WrapperBusinessLogo, BusinessLogo, ModalIcon } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { GrDeliver, FaStar, FiClock, VscLocation } from 'react-icons/all'
+import { MdClose } from 'react-icons/md'
 
 export const BusinessInformationUI = (props) => {
-  const { business, getBusinessType, dateFormatted, formatNumber, formatPrice, optimizeImage, businessLocation, businessSchedule, businessPhotos, businessVideos } = props
+  const { business, getBusinessType, dateFormatted, formatNumber, formatPrice, optimizeImage, businessLocation, businessSchedule, businessPhotos, businessVideos, onClose } = props
   const [orderState] = useOrder()
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
@@ -34,7 +35,11 @@ export const BusinessInformationUI = (props) => {
 
   return (
     <BusinessInformationContainer>
-      <Header img={business.header}>
+      <ModalIcon>
+        <MdClose onClick={() => onClose()} />
+      </ModalIcon>
+      <Header>
+        <img src={business.header} />
         <BusinessBasicContent>
           <WrapperBusinessLogo>
             <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />

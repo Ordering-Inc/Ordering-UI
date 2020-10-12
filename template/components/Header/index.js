@@ -54,7 +54,25 @@ export const Header = (props) => {
             </Link>
           </LogoHeader>
           <Menu>
+            {
+              !auth && (
+                <>
+                  <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
+                  <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
+                </>
+              )
+            }
             <OrderTypeSelectorHeader />
+            <MomentPopover
+              open={openPopover.moment}
+              onClick={() => handleTogglePopover('moment')}
+              onClose={() => handleClosePopover('moment')}
+            />
+            <AddressesPopover
+              open={openPopover.addresses}
+              onClick={() => handleTogglePopover('addresses')}
+              onClose={() => handleClosePopover('addresses')}
+            />
           </Menu>
         </LeftHeader>
         <RightHeader>
@@ -67,16 +85,6 @@ export const Header = (props) => {
                 </>
               )
             }
-            <MomentPopover
-              open={openPopover.moment}
-              onClick={() => handleTogglePopover('moment')}
-              onClose={() => handleClosePopover('moment')}
-            />
-            <AddressesPopover
-              open={openPopover.addresses}
-              onClick={() => handleTogglePopover('addresses')}
-              onClose={() => handleClosePopover('addresses')}
-            />
             {
               auth && (
                 <>
