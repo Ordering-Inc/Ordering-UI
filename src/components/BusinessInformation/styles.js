@@ -4,8 +4,10 @@ import styled from 'styled-components'
 export const BusinessInformationContainer = styled.div`
   width: 100%;
   position: relative;
+  height: 80vh;
+  overflow: auto;
 `
-const BusinessHeaderStyled = styled.div`
+export const BusinessHeader = styled.div`
   display: flex;
   width: 100%;
   height: 20%;
@@ -13,13 +15,13 @@ const BusinessHeaderStyled = styled.div`
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: cover;
-  object-fit: cover;
   background-position: center;
   min-height: 200px;
   justify-content: left;
   align-items: flex-end;
   position: relative;
   img{
+    object-fit: cover;
     position: absolute;
     width: 100%;
     height: calc(100% + 50px);
@@ -27,20 +29,6 @@ const BusinessHeaderStyled = styled.div`
     border-top-right-radius: 16px;
   }
 `
-
-export const Header = (props) => {
-  const style = {}
-  if (props.img) {
-    style.backgroundImage = `url(${props.img})`
-  } else {
-    style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.img})`
-  }
-  return (
-    <BusinessHeaderStyled {...props} style={style}>
-      {props.children}
-    </BusinessHeaderStyled>
-  )
-}
 
 export const BussinessTitle = styled.div`
   z-index: 1000;
@@ -159,7 +147,6 @@ export const Information = styled.div`
     }
   }
 `
-export const Stars = styled.div``
 
 export const BusinessContent = styled.div`
   height: 80%;
@@ -172,9 +159,11 @@ export const FlexTabs = styled.div`
   height: 10%;
   padding-top: 30px;
 `
-export const BusinessLocation = styled.div`
-  height: 20%;
+
+export const SectionTitle = styled.h3`
+  font-weight: bold;
 `
+
 export const Map = styled.div`
   width: 100%;
   height: 20vh;
@@ -185,55 +174,94 @@ export const Map = styled.div`
   }
 `
 
-export const BusinessOpeningTime = styled.div``
+export const ScheduleSection = styled.div`
+  width: 100%;
+  margin-bottom: 25px;
+`
 
-export const Times = styled.div`
+export const ScheduleContainer = styled.div`
+  width: 90%;
+  margin: auto;
   display: flex;
   justify-content: space-between;
-  text-align: center;
-  > div {
-    padding: 0 5px;
-    > h4 {
-      color: #d81212;
-    }
+
+  @media (max-width: 768px) {
+    overflow: auto;
+    width: 100%;
   }
 `
 
-export const DeliveryDetails = styled.div`
+export const ScheduleBlock = styled.div`
   display: flex;
-  justify-content: space-around;
-`
-export const BusinessGallery = styled.div`
-  > div {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    > img {
-      margin: 10px 10px;
-    }
+  flex-direction: column;
+  text-align: center;
+  padding: 0px 15px;
+  border-right: 1px solid #CCC;
+  width: 15%;
+
+  h4 {
+    margin: 0px 0px 3px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #D81212;
+  }
+  p {
+    margin: 0px;
+    font-size: 14px;
+  }
+
+  &:last-child {
+    border: 0;
   }
 `
 
-export const BusinessVideos = styled.div`
+export const DeliveryInfo = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px 0px;
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+
+  div {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    div {
+      width: 100%;
+
+      &:last-child {
+        h5:not(:last-child) {
+          margin-top: 0px;
+        }
+      }
+    }
+  }
+`
+export const BusinessMediaContent = styled.div`
   > div {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    > img,
     > iframe {
+      object-fit: cover;
+      border-radius: 10px;
       margin: 10px 10px;
+      width: calc(25% - 20px);
+
+      @media (max-width: 992px) {
+        width: calc(33% - 20px);
+      }
+
+      @media (max-width: 680px) {
+        width: calc(50% - 20px);
+      }
+
+      @media (max-width: 480px) {
+        width: calc(100% - 12px);
+      }
     }
   }
-`
-export const ModalIcon = styled.span`
-  left: 95%;
-  font-size: 30px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  background: rgba(0,0,0,0.1);
-  border-radius: 50%;
-  z-index: 1;
-  position: absolute;
-  color: white;
-  top: 5px;
 `
