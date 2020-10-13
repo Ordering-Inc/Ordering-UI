@@ -4,7 +4,7 @@ import { Container, UpsellingContainer, Item, Image, Details } from './styles'
 import { Button } from '../../styles/Buttons'
 
 const UpsellingPageUI = (props) => {
-  const { upsellingProducts, productsList, handleAddProductUpselling, setModalOpen } = props
+  const { upsellingProducts, productsList, handleAddProductUpselling, handleUpsellingPage } = props
   const [, t] = useLanguage()
 
   return (
@@ -37,7 +37,7 @@ const UpsellingPageUI = (props) => {
           ) : 'loading'
         }
       </UpsellingContainer>
-      <Button color='secondary' outline onClick={() => setModalOpen(false)}>
+      <Button color='secondary' outline onClick={() => handleUpsellingPage(false)}>
         {t('NO_THANKS', 'No, Thanks')}
       </Button>
     </Container>

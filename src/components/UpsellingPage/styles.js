@@ -5,8 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 80vh;
-  overflow: auto;
   > button {
     width: 45%;
     margin-top: 20px;
@@ -17,7 +15,6 @@ export const UpsellingContainer = styled.div`
   flex-wrap:wrap;
   justify-content: center;
   height: 100%;
-  overflow: auto;
 `
 
 export const Item = styled.div`
@@ -26,7 +23,6 @@ export const Item = styled.div`
   width: 25%;
   margin: 10px;
   padding: 10px;
-  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;

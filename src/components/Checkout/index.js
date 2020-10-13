@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { VscWarning } from 'react-icons/vsc'
 import Skeleton from 'react-loading-skeleton'
 import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage } from 'ordering-components'
-import { Modal } from '../Modal'
 
 import {
   Container,
@@ -33,7 +32,6 @@ import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 
 import { DriverTipsOptions, formatPrice } from '../../utils'
-import { UpsellingPage } from '../UpsellingPage'
 
 const CheckoutUI = (props) => {
   const {
@@ -48,7 +46,6 @@ const CheckoutUI = (props) => {
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
-  const [modalOpen, setModalOpen] = useState(true)
 
   return (
     <Container>
@@ -69,6 +66,7 @@ const CheckoutUI = (props) => {
             </h1>
           </WarningMessage>
         )}
+
         {cartState.loading ? (
           <div style={{ width: '100%', marginBottom: '20px' }}>
             <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -184,9 +182,6 @@ const CheckoutUI = (props) => {
           ))
         )} */}
       </WrappContainer>
-      <Modal title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')} open={modalOpen} onClose={() => setModalOpen(false)}>
-        <UpsellingPage setModalOpen={setModalOpen} />
-      </Modal>
     </Container>
   )
 }
@@ -197,8 +192,7 @@ export const Checkout = (props) => {
     cartUuid,
     handleOrderRedirect,
     handleCheckoutRedirect,
-    handleSearchRedirect,
-    handleCheckoutListRedirect
+    handleSearchRedirect
   } = props
 
   const [{ carts }, { confirmCart }] = useOrder()
@@ -207,10 +201,6 @@ export const Checkout = (props) => {
   const [, t] = useLanguage()
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
-
-  const handlePaid = (uuid) => {
-    handleCheckoutRedirect(uuid)
-  }
 
   const getOrder = async (cartId) => {
     try {
@@ -229,12 +219,10 @@ export const Checkout = (props) => {
           console.log(error)
         }
       } else {
-        const cart = Array.isArray(result) ? null : result
         setCartState({
           ...cartState,
           loading: false,
-          cart,
-          error: cart ? null : result
+          cart: result
         })
       }
     } catch (e) {
@@ -285,7 +273,7 @@ export const Checkout = (props) => {
               <CartItemActions>
                 <Button
                   color='primary'
-                  onClick={() => handlePaid(cart.uuid)}
+                  onClick={() => handleCheckoutRedirect(cart.uuid)}
                 >
                   Pay
                 </Button>
@@ -296,9 +284,9 @@ export const Checkout = (props) => {
       )}
       {cartState.error && cartState.error?.length > 0 && (
         <NotFoundSource
-          content={t('ERROR_CART', 'Sorry, the selected cart was not found.')}
-          btnTitle={t('CHECKOUT_REDIRECT', 'Go to Checkout list')}
-          onClickButton={handleCheckoutListRedirect}
+          content={t('ERROR_CART', 'Sorry, an error has occurred.')}
+          btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+          onClickButton={handleSearchRedirect}
         />
       )}
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
