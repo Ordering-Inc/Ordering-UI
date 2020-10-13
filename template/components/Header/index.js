@@ -94,6 +94,7 @@ export const Header = (props) => {
                       open={openPopover.cart}
                       onClick={() => handleTogglePopover('cart')}
                       onClose={() => handleClosePopover('cart')}
+                      auth={auth}
                     />
                   </>
                 )
