@@ -15,7 +15,8 @@ import {
   WrapperProductImage,
   ProductImage,
   ContentInfo,
-  ProductActions
+  ProductActions,
+  ProductComment
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -84,7 +85,6 @@ export const ProductItemAccordion = (props) => {
           </WrapperProductImage>
           <ContentInfo>
             <h1 className='name'>{product.name}</h1>
-            {product.comment && (<span>{product.comment}</span>)}
           </ContentInfo>
         </div>
         {!product?.valid_menu && isCartProduct && (
@@ -144,7 +144,7 @@ export const ProductItemAccordion = (props) => {
             )}
             <div style={{ width: '100%', justifyContent: 'flex-end' }} onClick={toggleAccordion}>
               <span className='product-price'>{formatPrice(product.total || product.price)}</span>
-              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || isCartProduct) && (
+              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || isCartProduct || product.comment) && (
                 <p>
                   <BiCaretDown className={`${setRotate}`} />
                 </p>
@@ -189,6 +189,11 @@ export const ProductItemAccordion = (props) => {
             >+
             </Button>
           </ProductActions>
+        )}
+        {product.comment && (
+          <ProductComment>
+            <span>{product.comment}</span>
+          </ProductComment>
         )}
         {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => ingredient.selected) && (
           <ul>

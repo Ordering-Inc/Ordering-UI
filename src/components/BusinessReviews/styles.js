@@ -31,6 +31,15 @@ export const Comments = styled.div`
   flex-wrap: wrap;
   width: 100%;
   overflow: hidden;
+
+  div p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    svg {
+      margin-right: 5px;
+    }
+  }
 `
 export const Comment = styled.div`
   width: 60%;
@@ -49,6 +58,20 @@ export const ScoreDiv = styled.div`
   height: auto;
   border: 1px solid #ccc;
   border-radius: 16px;
+  padding: 10px 0px;
+
+  p {
+    margin: 0px;
+  }
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      margin-right: 5px;
+    }
+  }
 `
 
 export const SkeletonContainer = styled.div`

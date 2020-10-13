@@ -15,7 +15,7 @@ import { Cart } from '../Cart'
 
 export const CartPopover = (props) => {
   const location = useLocation()
-  const { open } = props
+  const { open, auth } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const referenceElement = useRef()
@@ -56,6 +56,10 @@ export const CartPopover = (props) => {
     window.addEventListener('mouseup', handleClickOutside)
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [open])
+
+  useEffect(() => {
+    props.onClose()
+  }, [auth])
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
