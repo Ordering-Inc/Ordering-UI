@@ -10,7 +10,11 @@ const FacebookLoginButtonUI = (props) => {
   const [, t] = useLanguage()
   const { handleFacebookLogin } = props
   return (
-    <Button color='secondary' initialIcon onClick={() => handleFacebookLogin()}>
+    <Button
+      initialIcon
+      color='secondary'
+      onClick={() => handleFacebookLogin()}
+    >
       <img src={iconFacebook} width={30} />
       <span>{t('LOGIN_WITH_FACEBOOK', 'Login with Facebook')}</span>
     </Button>

@@ -13,7 +13,6 @@ import {
   HeroSide,
   FormInput,
   ForgotPassword,
-  SocialIcons,
   TitleHeroSide,
   LoginWith,
   NewOnPlatform,
@@ -21,14 +20,14 @@ import {
 } from './styles'
 
 import logoHeader from '../../../template/assets/images/logo-header.svg'
-import iconFacebook from '../../../template/assets/IconFacebook.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-
-import { AiOutlineGoogle, FaApple } from 'react-icons/all'
 import { FacebookLoginButton } from '../FacebookLogin'
+
+/** Icons for mobile design */
+// import { AiOutlineGoogle, FaApple } from 'react-icons/all'
 
 const LoginFormUI = (props) => {
   const {
@@ -97,12 +96,10 @@ const LoginFormUI = (props) => {
       </HeroSide>
       <FormSide>
         <img src={logoHeader} alt='Logo login' />
-
         {useLoginByEmail && useLoginByCellphone && (
           <LoginWith>
             <Tabs variant='primary'>
               {useLoginByEmail && (
-
                 <Tab
                   onClick={() => hanldeChangeTab('email')}
                   active={loginTab === 'email'}
@@ -118,7 +115,6 @@ const LoginFormUI = (props) => {
                   {t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}
                 </Tab>
               )}
-
             </Tabs>
           </LoginWith>
         )}
@@ -164,7 +160,9 @@ const LoginFormUI = (props) => {
                     required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
                     minLength: {
                       value: 5,
-                      message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                      message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.')
+                        .replace('_attribute_', t('PASSWORD', 'Password'))
+                        .replace('_min_', 8)
                     }
                   })}
                   onChange={(e) => hanldeChangeInput(e)}
@@ -172,7 +170,11 @@ const LoginFormUI = (props) => {
                 <ForgotPassword>
                   {t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
                 </ForgotPassword>
-                <Button color='primary' type='submit' disabled={formState.loading}>
+                <Button
+                  color='primary'
+                  type='submit'
+                  disabled={formState.loading}
+                >
                   {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
                 </Button>
               </FormInput>
@@ -197,11 +199,18 @@ const LoginFormUI = (props) => {
             </>
           )}
         </NewOnPlatform>
+
+        {/** Code for mobile design */}
         {/* <SocialIcons>
-          {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
-          {/* <FaApple />
-                  <AiOutlineGoogle />
+          {configs?.facebook_id &&
+            <FacebookLoginButton
+              appId={configs.facebook_id.value}
+              handleSuccessFacebookLogin={handleSuccessFacebook}
+            />}
+          <FaApple />
+          <AiOutlineGoogle />
         </SocialIcons> */}
+
         <SocialButtons>
           {
             configs?.facebook_id &&
