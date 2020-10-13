@@ -169,6 +169,7 @@ const CartUI = (props) => {
       >
         <ProductForm
           isCartProduct
+          productCart={curProduct}
           businessSlug={cart?.business?.slug}
           businessId={curProduct?.business_id}
           categoryId={curProduct?.category_id}
