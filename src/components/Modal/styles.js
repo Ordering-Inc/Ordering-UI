@@ -16,13 +16,15 @@ export const ModalDialog = styled.div`
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
-  max-height: 100%;
+  max-height: 80vh;
+  overflow: auto;
   @media (max-width: 860px) {
     width: 80%;
   }
   @media (max-width: 480px) {
     width: 100vw;
     height: 100vh;
+    max-height: 100vh;
     border-radius: 0px;
   }
 `

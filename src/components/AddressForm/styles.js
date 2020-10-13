@@ -27,13 +27,14 @@ export const FormControl = styled.form`
     box-sizing: border-box;
     margin: 10px 0px;
     height: 43px;
-    &:nth-child(2),
-    &:nth-child(3) {
+    &.internal_number,
+    &.zipcode {
       width: 48%;
     }
-    @media (max-width: 480px) {
-      &:nth-child(2),
-      &:nth-child(3) {
+
+    @media (max-width: 620px) {
+      &.internal_number,
+      &.zipcode  {
         width: 100%;
       }
     }
@@ -113,5 +114,16 @@ export const AddressTagSection = styled.div`
 
   button.active {
     border: 1px solid #D81212;
+  }
+`
+
+export const WrapperMap = styled.div`
+  width: 100%;
+  height: 250px;
+  > div {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 15px;
   }
 `
