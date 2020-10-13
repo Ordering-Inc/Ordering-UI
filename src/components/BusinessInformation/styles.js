@@ -171,6 +171,7 @@ export const Map = styled.div`
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
+    border-radius: 15px;
   }
 `
 
