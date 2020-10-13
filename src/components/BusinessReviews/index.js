@@ -5,11 +5,13 @@ import { BusinessReviews as BusinessReviewController, useLanguage } from 'orderi
 import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv, SkeletonContainer } from './styles'
 import { Select } from '../../styles/Select'
 
-import { AiOutlineStar, AiOutlineCalendar } from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai'
 
 const Score = ({ star, text }) => (
   <ScoreDiv>
-    <AiOutlineStar color='#D81212' /> {star}
+    <span>
+      <AiOutlineStar color='#D81212' /> {star}
+    </span>
     <p>{text}</p>
   </ScoreDiv>
 )
@@ -40,7 +42,6 @@ export const BusinessReviewsUI = (props) => {
           <ReviewOf>
             {!reviewsList.loading ? <h3>{t('REVIEWS_OF', 'Reviews of')} {businessName}</h3> : <Skeleton width={200} />}
             {!reviewsList.loading ? <Select options={options} defaultValue={options[0].value} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} /> : <Skeleton width={200} height={30} />}
-            {/* <Select placeholder={t('DATE', 'Date')} > */}
           </ReviewOf>
           <Content>
             <h3>{!reviewsList.loading ? <><AiOutlineStar color='#D81212' />{stars}</> : <Skeleton width={100} height={30} />}</h3>
