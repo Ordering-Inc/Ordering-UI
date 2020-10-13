@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const ProductContainer = styled.div`
   display: flex;
-  height: 80vh;
+  max-height: 80vh;
   padding: 10px 0px;
   padding-left: 15px;
   position: relative;
