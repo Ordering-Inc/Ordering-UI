@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 0px 10px;
   max-height: 60vh;
   overflow: auto;
 
