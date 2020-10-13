@@ -5,7 +5,9 @@ import {
   AddressForm as AddressFormController,
   GoogleAutocompleteInput,
   GoogleGpsButton,
-  useLanguage
+  useLanguage,
+  GoogleMaps,
+  WrapperGoogleMaps
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 
@@ -14,7 +16,8 @@ import {
   FormActions,
   AddressWrap,
   WrapAddressInput,
-  AddressTagSection
+  AddressTagSection,
+  WrapperMap
 } from './styles'
 
 import company from '../../../template/assets/company.svg'
@@ -26,6 +29,7 @@ import { Input } from '../../styles/Inputs'
 
 const AddressFormUI = (props) => {
   const {
+    googleMapsControls,
     formState,
     addressState,
     validationFields,
@@ -39,6 +43,7 @@ const AddressFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
+  const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -101,6 +106,15 @@ const AddressFormUI = (props) => {
   return (
     <>
       <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+        {addressState?.address?.location && (
+          <WrapperMap>
+            <GoogleMapsMap
+              apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+              location={{ ...addressState?.address?.location, zoom: googleMapsControls.defaultZoom }}
+              mapControls={googleMapsControls}
+            />
+          </WrapperMap>
+        )}
         <AddressWrap className='google-control'>
           <WrapAddressInput>
             <GoogleAutocompleteInput
@@ -124,6 +138,7 @@ const AddressFormUI = (props) => {
             />}
         </AddressWrap>
         <Input
+          className='internal_number'
           name='internal_number'
           placeholder='Internal number'
           ref={register}
@@ -131,6 +146,7 @@ const AddressFormUI = (props) => {
           onChange={hanldeChangeInput}
         />
         <Input
+          className='zipcode'
           name='zipcode'
           placeholder='Zip code'
           ref={register}
@@ -182,9 +198,21 @@ const AddressFormUI = (props) => {
 }
 
 export const AddressForm = (props) => {
+  const googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  }
   const addressFormProps = {
     ...props,
-    UIComponent: AddressFormUI
+    UIComponent: AddressFormUI,
+    googleMapsControls
   }
 
   return <AddressFormController {...addressFormProps} />
