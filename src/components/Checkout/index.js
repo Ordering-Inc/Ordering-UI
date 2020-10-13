@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { VscWarning } from 'react-icons/vsc'
 import Skeleton from 'react-loading-skeleton'
 import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage } from 'ordering-components'
+import { Modal } from '../Modal'
 
 import {
   Container,
@@ -32,6 +33,7 @@ import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 
 import { DriverTipsOptions, formatPrice } from '../../utils'
+import { UpsellingPage } from '../UpsellingPage'
 
 const CheckoutUI = (props) => {
   const {
@@ -46,6 +48,7 @@ const CheckoutUI = (props) => {
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
+  const [modalOpen, setModalOpen] = useState(true)
 
   return (
     <Container>
@@ -66,7 +69,6 @@ const CheckoutUI = (props) => {
             </h1>
           </WarningMessage>
         )}
-
         {cartState.loading ? (
           <div style={{ width: '100%', marginBottom: '20px' }}>
             <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -78,7 +80,6 @@ const CheckoutUI = (props) => {
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
           />
         )}
-
         <UserDetailsContainer>
           <div className='user'>
             {cartState.loading ? (
@@ -183,6 +184,9 @@ const CheckoutUI = (props) => {
           ))
         )} */}
       </WrappContainer>
+      <Modal title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')} open={modalOpen} onClose={() => setModalOpen(false)}>
+        <UpsellingPage setModalOpen={setModalOpen} />
+      </Modal>
     </Container>
   )
 }
@@ -202,6 +206,10 @@ export const Checkout = (props) => {
   const [, t] = useLanguage()
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
+
+  const handlePaid = (uuid) => {
+    handleCheckoutRedirect(uuid)
+  }
 
   const getOrder = async (cartId) => {
     try {
@@ -274,7 +282,7 @@ export const Checkout = (props) => {
               <CartItemActions>
                 <Button
                   color='primary'
-                  onClick={() => handleCheckoutRedirect(cart.uuid)}
+                  onClick={() => handlePaid(cart.uuid)}
                 >
                   Pay
                 </Button>
