@@ -12,6 +12,7 @@ export const FooterContainer = styled.div`
   flex-wrap: wrap;
   h5 {
     font-size: 1.2em;
+    text-transform: uppercase;
   }
   @media (min-width: 410px) {
     flex-direction: row;
