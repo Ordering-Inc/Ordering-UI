@@ -4,6 +4,8 @@ export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+  max-height: 60vh;
+  overflow: auto;
 
   button.add {
     height: 50px;
