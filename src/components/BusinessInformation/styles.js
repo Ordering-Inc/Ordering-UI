@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const BusinessInformationContainer = styled.div`
   width: 100%;
   position: relative;
-  height: 80vh;
+  max-height: 80vh;
   overflow: auto;
 `
 export const BusinessHeader = styled.div`
