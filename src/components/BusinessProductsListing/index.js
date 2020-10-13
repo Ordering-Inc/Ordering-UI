@@ -62,6 +62,9 @@ const BusinessProductsListingUI = (props) => {
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
+      productRedirect({
+        slug: business?.slug
+      })
     }
   }
 
