@@ -84,6 +84,7 @@ export const HomeHero = (props) => {
           address={orderState?.options?.address || {}}
           onClose={() => setModals({ ...modals, formOpen: false })}
           onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+          onCancel={() => setModals({ ...modals, formOpen: false })}
         />
       </Modal>
       <Modal

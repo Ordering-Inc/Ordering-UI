@@ -219,3 +219,8 @@ export const ProductActions = styled.div`
     margin: 5px;
   }
 `
+
+export const ProductComment = styled.div`
+  padding-left: 40px;
+  margin-top: 5px;
+`

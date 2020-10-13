@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { UserProfileForm as UserProfileController, useLanguage, useSession, ExamineClick, DragAndDrop } from 'ordering-components'
+import Skeleton from 'react-loading-skeleton'
 
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import { AddressList } from '../AddressList'
 
-import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera, UserData, SavedPlaces } from './styles'
+import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera, UserData, SavedPlaces, SkeletonForm } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -71,9 +72,18 @@ const UserProfileFormUI = (props) => {
       <ProfileOptions value={t('MY_ACCOUNT', 'My Account')} />
       <UserProfileContainer>
         <UserImage>
-          <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg'>
-            <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg'>
-              <Image>{formState.changes.photo && formState.loading ? 'loading image' : <img src={(!formState.changes.photo || formState.result?.result === 'Network Error') ? user.photo : formState.changes.photo} />}</Image>
+          <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
+            <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
+              <Image>{formState.changes.photo && formState.loading
+                ? <div><Skeleton /></div>
+                : (
+                  <img
+                    src={(!formState.changes.photo || formState.result?.result === 'Network Error')
+                      ? user.photo
+                      : formState.changes.photo}
+                  />
+                )}
+              </Image>
             </DragAndDrop>
           </ExamineClick>
           <Camera><GiPhotoCamera /></Camera>
@@ -137,21 +147,23 @@ const UserProfileFormUI = (props) => {
                       <Button color='primary' type='submit'>{t('UPDATE', 'Update')}</Button>
 
                     </>
-                  ) : <h4>{t('LOADING', 'Loading...')}</h4>
+                  ) : (
+                    <SkeletonForm>{[...Array(6)].map((item, i) => (
+                      <Skeleton key={i} />
+                    ))}
+                    </SkeletonForm>
+                  )
                 }
               </FormInput>
             )
             : (
-              formState.loading && !formState.changes.photo
-                ? t('LOADING', 'Loading...')
-                : (
-                  <UserData>
-                    <h4>{user.name} {user.lastname}</h4>
-                    <p>{user.email}</p>
-                    <p>{user.country_phone_code} {user.cellphone}</p>
-                    <Button color='primary' outline onClick={() => setEdit(true)}>{t('EDIT', 'Edit')}</Button>
-                  </UserData>
-                )
+
+              <UserData>
+                {formState.loading && !formState.changes.photo ? <Skeleton width={100} height={20} /> : <h4>{user.name} {user.lastname}</h4>}
+                {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.email}</p>}
+                {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.country_phone_code} {user.cellphone}</p>}
+                {formState.loading && !formState.changes.photo ? <Skeleton width={80} height={40} /> : <Button color='primary' outline onClick={() => setEdit(true)}>{t('EDIT', 'Edit')}</Button>}
+              </UserData>
             )}
 
           <SavedPlaces>

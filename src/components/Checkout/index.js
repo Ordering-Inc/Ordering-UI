@@ -197,7 +197,8 @@ export const Checkout = (props) => {
     cartUuid,
     handleOrderRedirect,
     handleCheckoutRedirect,
-    handleSearchRedirect
+    handleSearchRedirect,
+    handleCheckoutListRedirect
   } = props
 
   const [{ carts }, { confirmCart }] = useOrder()
@@ -228,10 +229,12 @@ export const Checkout = (props) => {
           console.log(error)
         }
       } else {
+        const cart = Array.isArray(result) ? null : result
         setCartState({
           ...cartState,
           loading: false,
-          cart: result
+          cart,
+          error: cart ? null : result
         })
       }
     } catch (e) {
@@ -293,9 +296,9 @@ export const Checkout = (props) => {
       )}
       {cartState.error && cartState.error?.length > 0 && (
         <NotFoundSource
-          content={t('ERROR_CART', 'Sorry, an error has occurred.')}
-          btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-          onClickButton={handleSearchRedirect}
+          content={t('ERROR_CART', 'Sorry, the selected cart was not found.')}
+          btnTitle={t('CHECKOUT_REDIRECT', 'Go to Checkout list')}
+          onClickButton={handleCheckoutListRedirect}
         />
       )}
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
