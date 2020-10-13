@@ -8,7 +8,11 @@ export const UserProfileContainer = styled.div`
   text-align: center;
   flex: 1;
   width: 100%;
-  overflow-x: hidden
+  overflow-x: hidden;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export const FlexTabs = styled.div`
@@ -20,16 +24,17 @@ margin: 0 auto;
 `
 
 export const UserImage = styled.div`
-  width: 90%;
-  height: 15%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  @media (min-width: 480px) {
   align-items: flex-end;
-  width: 30%;
-  height: 100%;
+  @media (max-width: 480px) {
+    align-items: center;
+    width: 100%;
+  }
+  @media (max-width: 720px){
+    width: 40%
   }
 `
 
@@ -47,6 +52,16 @@ export const Image = styled.div`
     border: none;
     overflow: hidden;
   };
+  > div {
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+    border: none;
+    overflow: hidden;
+  };
+  span {
+    height: 100%;
+  }
   @media (min-width: 480px) {
     > img {
     width: 100%;
@@ -68,16 +83,21 @@ export const Camera = styled.div`
 `
 
 export const SideForm = styled.div`
-  width: 100%;
-  height: 70%;
-  text-align: center;
+  width: 70%;
   > *{
     margin: 30px 0;
     margin-left: 50px;
   }
-  @media (min-width: 480px) {
-  width: 70%;
-  height: 100%;
+  @media (max-width: 720px){
+    width: 60%
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+    > *{
+    margin: 0;
+    margin-left: 0;
+    margin-top: 20px;
+  }
   };
 `
 
@@ -86,7 +106,6 @@ export const UserData = styled.div`
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  width: 100%;
   height: 200px;
   > * {
     margin: 5px 0;
@@ -96,48 +115,120 @@ export const UserData = styled.div`
     width: 80px;
     background: #F8F8F8;
   }
+  @media (max-width: 480px){
+    align-items: center;
+    text-align: center;
+  }
+
 `
 
 export const SavedPlaces = styled.div`
-  width: 60%;
+  width: 70%;
+  h5{
+    font-size: 1.2em
+  }
+  button{
+    width: 50%;
+    align-self: flex-end;
+  }
   > div{
   display: flex;
   flex-direction: column-reverse;
-  width: 60%;
-  }
-  > button{
-    width: 50%
   }
   text-align: left;
-  width: 100%;
+
+  @media (max-width: 480px){
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+      > div{
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      margin: 0 auto;
+      width: 80%;
+    }
+    button{
+    width: inherit;
+    align-self: center;
+  }
+
+  }
+  @media (max-width: 980px){
+    button{
+      width: 75%
+    }
+  }
 `
 
 export const FormInput = styled.form`
-  width: 100%;
-  height: 200px;
   text-align: left;
-  > * {
+  height: 200px;
+  > *{
     margin-top: 10px;
     margin-right: 10px;
-    width: 75%;
-  }
-  > input{
-    padding: 15px 20px
+    padding: 10px 15px;
+    width: 33%;
   }
 
-  @media (min-width: 480px) {
-    > * {
-    width: 40%;
-  }
-  > input {
-    padding: 8px 10px
-  }
-  > div { 
-    padding: 0px 10px
-  }
   > button {
     box-sizing: initial;
-    width: 39%
+    padding: 3px 15px;
   }
-};
-  `
+
+  @media (max-width: 720px){
+    height: auto;
+    > * {
+      width: 75%;
+    } 
+  }
+  
+  @media (max-width: 480px){
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    > *{
+      margin-right: 0;
+      margin-top: 20px;
+    }
+    > input{
+    padding: 10px 15px;
+    width: 80%;
+    }
+    > button {
+    margin-top: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 80%;
+  }
+  }
+
+`
+export const SkeletonForm = styled.div`
+  width: 70%;
+  height: auto;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0;
+  > * {
+    width: 45%;
+    margin: 10px;
+    display: inline;
+    height: 25px;
+    span{
+      border-radius: 16px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  @media (max-width: 480px){
+    width: 100%;
+    justify-content: center;
+    > *{
+      width: 80%
+    }
+  }
+`

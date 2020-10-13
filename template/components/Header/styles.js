@@ -26,7 +26,7 @@ export const InnerHeader = styled.div`
   color: #FFF;
   justify-content: space-between;
   width: 98%;
-  margin: 20px auto 10px;
+  margin: 10px auto;
 `
 
 export const LogoHeader = styled.div`
