@@ -38,6 +38,7 @@ export const Map = styled.div`
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     image-rendering: -webkit-optimize-contrast;
+    object-fit: cover;
   }
 `
 
