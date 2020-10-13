@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
+  BusinessAndProductList,
   useLanguage
 } from 'ordering-components'
-
-import { ProductsListing } from '../ProductsListing' // move this component in ordering-components
 
 import {
   ProductsContainer,
@@ -239,6 +238,6 @@ export const BusinessProductsListing = (props) => {
   }
 
   return (
-    <ProductsListing {...businessProductslistingProps} />
+    <BusinessAndProductList {...businessProductslistingProps} />
   )
 }
