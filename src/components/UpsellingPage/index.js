@@ -19,7 +19,6 @@ const UpsellingPageUI = (props) => {
       handleUpsellingPage()
     }
   }
-  console.log(upsellingProducts)
   return (
     <Container>
       <UpsellingContainer>
@@ -57,7 +56,11 @@ const UpsellingPageUI = (props) => {
       {!productsList.loading
         ? (
           <CloseUpselling>
-            <Button color='secondary' outline onClick={() => handleUpsellingPage(false)}>
+            <Button
+              color='secondary'
+              outline
+              onClick={() => handleUpsellingPage(false)}
+            >
               {t('NO_THANKS', 'No, Thanks')}
             </Button>
           </CloseUpselling>
