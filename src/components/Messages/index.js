@@ -141,7 +141,9 @@ export const MessagesUI = (props) => {
         <Chat>
           <MessageConsole>
             <BubbleConsole>
-              {t('ORDER_PLACED_FOR', 'Order placed for')} {moment.utc(order.created_at).format('YYYY/MM/DD HH:mm A')} {t('VIA', 'via')} {order.app_id}
+              {t('ORDER_PLACED_FOR', 'Order placed for')}
+              {moment.utc(order.created_at).format('YYYY/MM/DD HH:mm A')}
+              {t('VIA', 'via')} {order.app_id}
               <p>{moment.utc(order.created_at).fromNow()}</p>
             </BubbleConsole>
           </MessageConsole>
@@ -150,7 +152,9 @@ export const MessagesUI = (props) => {
               {message.type === 1 && (
                 message.change?.attribute !== 'driver_id' ? (
                   <BubbleConsole>
-                    {t('ORDER', 'Order')} <strong>{message.change.attribute} </strong> {t('CHANGED_FROM', 'Changed from')} {' '}
+                    {t('ORDER', 'Order')}
+                    <strong>{message.change.attribute} </strong>
+                    {t('CHANGED_FROM', 'Changed from')} {' '}
                     {message.change.old !== null && (
                       <>
                         <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
@@ -165,7 +169,9 @@ export const MessagesUI = (props) => {
                   </BubbleConsole>
                 ) : (
                   <BubbleConsole>
-                    <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong> {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')} {message.comment && (<><br /> {message.comment.length}</>)}
+                    <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                    {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                    {message.comment && (<><br /> {message.comment.length}</>)}
                     <p>{moment.utc(message.created_at).fromNow()}</p>
                   </BubbleConsole>
                 )
@@ -204,11 +210,26 @@ export const MessagesUI = (props) => {
       )}
       <SendForm>
         <div>
-          <input name='business' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.business} />
+          <input
+            name='business'
+            type='checkbox'
+            onChange={handleCanRead}
+            defaultChecked={canRead.business}
+          />
           <label>{t('BUSINESS', 'Business')}</label>
-          <input name='administrator' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.administrator} />
+          <input
+            name='administrator'
+            type='checkbox'
+            onChange={handleCanRead}
+            defaultChecked={canRead.administrator}
+          />
           <label>{t('ADMINISTRATOR', 'Administrator')}</label>
-          <input name='driver' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.driver} />
+          <input
+            name='driver'
+            type='checkbox'
+            onChange={handleCanRead}
+            defaultChecked={canRead.driver}
+          />
           <label>{t('DRIVER', 'Driver')}</label>
         </div>
         <Send onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -231,7 +252,11 @@ export const MessagesUI = (props) => {
             <BsCardImage />
           </label>
           {image && (
-            <Button circle onClick={removeImage} name='delete'>
+            <Button
+              circle
+              onClick={removeImage}
+              name='delete'
+            >
               {t('DELETE', 'X')}
             </Button>
           )}
@@ -243,7 +268,9 @@ export const MessagesUI = (props) => {
             <FiSend />
             {t('SEND', 'Send')}
           </Button>
-          {sendMessage.loading && <span> {t('SENDING_MESSAGE', 'Sending Message...')}</span>}
+          {sendMessage.loading && (
+            <span> {t('SENDING_MESSAGE', 'Sending Message...')}</span>
+          )}
           {sendMessage.error && (
             <>
               <br />
