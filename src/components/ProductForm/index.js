@@ -144,7 +144,7 @@ const ProductOptionsUI = (props) => {
           </ProductComment>
         </ProductEdition>
         <ProductActions>
-          {productCart && !isSoldOut && maxProductQuantity && (
+          {productCart && !isSoldOut && maxProductQuantity > 0 && (
             <div>
               <Button
                 className='incdec'
@@ -164,7 +164,6 @@ const ProductOptionsUI = (props) => {
               >+
               </Button>
             </div>)}
-
           {productCart && !isSoldOut && maxProductQuantity && auth ? (
             <Button
               className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
