@@ -1,7 +1,8 @@
 import React from 'react'
 import { UpsellingPage as UpsellingPageController, useLanguage } from 'ordering-components'
-import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling } from './styles'
+import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling, SkeletonContainer } from './styles'
 import { Button } from '../../styles/Buttons'
+import Skeleton from 'react-loading-skeleton'
 
 const UpsellingPageUI = (props) => {
   const { upsellingProducts, productsList, handleAddProductUpselling, handleUpsellingPage } = props
@@ -33,7 +34,11 @@ const UpsellingPageUI = (props) => {
                 )
               }
             </>
-          ) : 'loading'
+          ) : [...Array(6)].map((item, i) => (
+            <SkeletonContainer key={i}>
+              <Skeleton width={150} height={300} />
+            </SkeletonContainer>
+          ))
         }
       </UpsellingContainer>
       {!productsList.loading

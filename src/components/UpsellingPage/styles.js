@@ -41,6 +41,7 @@ export const Image = styled.div`
     border-radius: 16px;
   }
 `
+
 export const Details = styled.div`
   height: 50%;
   display: flex;
@@ -69,4 +70,16 @@ export const CloseUpselling = styled.div`
   @media (max-height: 640px){
     top: 80%;
   }
+`
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  width: 25%;
+  margin: 10px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border-radius: 9px;
+  overflow: hidden;
 `
