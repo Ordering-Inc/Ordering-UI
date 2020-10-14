@@ -5,6 +5,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding-bottom: 20px;
+  position: relative;
   > button {
     width: 45%;
     margin-top: 20px;
@@ -53,5 +55,18 @@ export const Details = styled.div`
   }
   > button {
     width: 50%
+  }
+`
+
+export const CloseUpselling = styled.div`
+  width: inherit;
+  position: fixed;
+  text-align: center;
+  top: 84%;
+  button{
+    width: 20%;
+  }
+  @media (max-height: 640px){
+    top: 80%;
   }
 `

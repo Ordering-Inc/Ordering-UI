@@ -1,12 +1,11 @@
 import React from 'react'
 import { UpsellingPage as UpsellingPageController, useLanguage } from 'ordering-components'
-import { Container, UpsellingContainer, Item, Image, Details } from './styles'
+import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling } from './styles'
 import { Button } from '../../styles/Buttons'
 
 const UpsellingPageUI = (props) => {
   const { upsellingProducts, productsList, handleAddProductUpselling, handleUpsellingPage } = props
   const [, t] = useLanguage()
-
   return (
     <Container>
       <UpsellingContainer>
@@ -37,9 +36,16 @@ const UpsellingPageUI = (props) => {
           ) : 'loading'
         }
       </UpsellingContainer>
-      <Button color='secondary' outline onClick={() => handleUpsellingPage(false)}>
-        {t('NO_THANKS', 'No, Thanks')}
-      </Button>
+      {!productsList.loading
+        ? (
+          <CloseUpselling>
+            <Button color='primary' outline onClick={() => handleUpsellingPage(false)}>
+              {t('NO_THANKS', 'No, Thanks')}
+            </Button>
+          </CloseUpselling>
+        )
+        : ''}
+
     </Container>
   )
 }

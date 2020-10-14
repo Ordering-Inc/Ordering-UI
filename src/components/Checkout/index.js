@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { VscWarning } from 'react-icons/vsc'
 import Skeleton from 'react-loading-skeleton'
 import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage } from 'ordering-components'
+import { Modal } from '../Modal'
+import { UpsellingPage } from '../UpsellingPage'
 
 import {
   Container,
@@ -199,8 +201,21 @@ export const Checkout = (props) => {
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
+  const [openUpselling, setOpenUpselling] = useState(false)
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
+
+  const [cartToPay, setCartToPay] = useState({})
+
+  const handleOpenUpsellingPage = (cart) => {
+    setCartToPay(cart)
+    setOpenUpselling(true)
+  }
+
+  const handleCloseUpsellingPage = () => {
+    setOpenUpselling(false)
+    handleCheckoutRedirect(cartToPay.uuid)
+  }
 
   const getOrder = async (cartId) => {
     try {
@@ -246,6 +261,8 @@ export const Checkout = (props) => {
     cartState,
     businessId: cartState.cart?.business_id
   }
+
+  console.log(cartToPay)
   return (
     <>
       {!cartUuid && carts && Object.keys(carts).length === 0 && (
@@ -273,7 +290,7 @@ export const Checkout = (props) => {
               <CartItemActions>
                 <Button
                   color='primary'
-                  onClick={() => handleCheckoutRedirect(cart.uuid)}
+                  onClick={() => handleOpenUpsellingPage(cart)}
                 >
                   Pay
                 </Button>
@@ -290,6 +307,17 @@ export const Checkout = (props) => {
         />
       )}
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
+      <Modal
+        title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
+        open={openUpselling}
+        onClose={() => handleCloseUpsellingPage()}
+      >
+        <UpsellingPage
+          businessId={cartToPay.business_id}
+          cartProducts={cartToPay.products}
+          handleUpsellingPage={handleCloseUpsellingPage}
+        />
+      </Modal>
     </>
   )
 }
