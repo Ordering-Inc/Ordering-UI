@@ -24,7 +24,6 @@ import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import ScrollToTop from '../src/utils/ScrollToTop'
-import { UpsellingPage } from '../src/components/UpsellingPage'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 
@@ -220,9 +219,6 @@ export const Router = () => {
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     <CheckoutPage />
-                  </Route>
-                  <Route exact path='/upselling_page'>
-                    <UpsellingPage businessId={41} onSave={(productCart) => console.log(productCart)} />
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />
