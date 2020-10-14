@@ -5,17 +5,18 @@ import {
   HeaderItem,
   PopoverBody,
   PopoverArrow,
-  NotFound,
-  WrapperCarts
+  WrapperCarts,
+  WrappNotCarts
 } from './styles'
 import { useOrder, useLanguage } from 'ordering-components'
 import { useLocation } from 'react-router-dom'
+import notFound from '../../../template/assets/not-found.svg'
 
 import { Cart } from '../Cart'
 
 export const CartPopover = (props) => {
   const location = useLocation()
-  const { open } = props
+  const { open, auth } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const referenceElement = useRef()
@@ -57,6 +58,10 @@ export const CartPopover = (props) => {
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [open])
 
+  useEffect(() => {
+    props.onClose()
+  }, [auth])
+
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
@@ -94,7 +99,12 @@ export const CartPopover = (props) => {
                 )}
               </div>
             ))}
-          {cartsWithProducts.length === 0 && <NotFound>{t('CART_ERROR', 'You don\'t have cars available')}</NotFound>}
+          {cartsWithProducts.length === 0 && (
+            <WrappNotCarts>
+              <img src={notFound} alt='notFound' />
+              <h1>{t('CART_ERROR', 'You don\'t have carts available')}</h1>
+            </WrappNotCarts>
+          )}
         </WrapperCarts>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>

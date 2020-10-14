@@ -80,4 +80,8 @@ export const Content = styled.h1`
   text-transform: capitalize;
   margin-top: 0px;
   padding-bottom: 50px;
+
+  @media (max-width: 380px) {
+    font-size: 25px;
+  }
 `

@@ -60,8 +60,8 @@ export const HomeHero = (props) => {
       <ContentWrapper>
         <FontHomeTheme fontName={fontName}>
           <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-          <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
         </FontHomeTheme>
+        <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
         <WrapInput onClick={handleAddressInput} withIcon={locationIcon}>
           <Input type='text' disabled placeholder={orderState?.options?.address?.address || t('TYPE_ADDRESS', 'Type address')} />
         </WrapInput>
@@ -84,6 +84,7 @@ export const HomeHero = (props) => {
           address={orderState?.options?.address || {}}
           onClose={() => setModals({ ...modals, formOpen: false })}
           onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+          onCancel={() => setModals({ ...modals, formOpen: false })}
         />
       </Modal>
       <Modal

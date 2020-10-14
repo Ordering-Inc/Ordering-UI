@@ -27,6 +27,17 @@ export const Button = styled.button`
     background: ${() => darken(0.07, '#CCC')};
   }
 
+  ${({ initialIcon }) => initialIcon && css`
+    padding-left: 30px !important;
+    text-align: left;
+    img{
+      vertical-align: middle;
+    }
+    span {
+      padding-left: inherit
+    }
+  `}
+
   ${({ outline }) => outline && css`
     background: #FFF;
     color: #CCC;

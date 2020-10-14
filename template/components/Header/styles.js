@@ -26,7 +26,7 @@ export const InnerHeader = styled.div`
   color: #FFF;
   justify-content: space-between;
   width: 98%;
-  margin: 20px auto 10px;
+  margin: 10px auto;
 `
 
 export const LogoHeader = styled.div`
@@ -80,6 +80,15 @@ export const Menu = styled.div`
     .moment-popover,
     .address-popover {
       display: none;
+    }
+  }
+
+  @media (max-width: 380px) {
+    > * {
+      margin: 0px 1px;
+    }
+    > :last-child {
+      margin-right: 2px;
     }
   }
 `

@@ -12,7 +12,7 @@ export const CardContainer = styled.div`
   cursor: pointer;
   position: relative;
 
-  background: ${({ soldOut }) => soldOut ? 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,.5))' : '#FFF'};
+  background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
 
   @media (max-width: 992px) {
     width: calc(50% - 40px);
@@ -28,14 +28,16 @@ export const SoldOut = styled.span`
   background: #D6D6D6 0% 0% no-repeat padding-box;
   border-radius: 23px;
   padding: 5px 10px;
-  top: 10px;
-  right: 4px;
+  top: 8px;
+  right: 6px;
+  text-transform: uppercase;
+  font-size: 14px;
 `
 
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 280px;
+  max-width: 250px;
   > * {
     margin: 5px;
   }
@@ -52,7 +54,7 @@ export const CardInfo = styled.div`
 
   p {
     font-size: 16px;
-    font-weight: font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};;
+    font-weight: font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};
     text-align: left;
 
     display: -webkit-box;
@@ -62,7 +64,7 @@ export const CardInfo = styled.div`
   }
 
   span {
-    color: #D81313;
+    color: ${({ soldOut }) => soldOut ? '#A02525' : '#D81212'};
     font-weight: bold;
     font-size: 15px;
   }
@@ -87,6 +89,7 @@ export const WrapLogo = styled.div`
   max-height: 75px;
   height: 75px;
   width: 75px;
+  margin-right: 5px;
 `
 
 const CardLogoStyled = styled.div`
@@ -104,7 +107,7 @@ export const CardLogo = (props) => {
     style.backgroundImage = `url(${props.bgimage})`
   }
   if (props.soldOut) {
-    style.filter = 'brightness(50%)'
+    style.filter = 'brightness(70%)'
   }
   return (
     <CardLogoStyled {...props} style={style}>
