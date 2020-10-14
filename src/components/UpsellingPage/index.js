@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { UpsellingPage as UpsellingPageController, useLanguage } from 'ordering-components'
 import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling, SkeletonContainer } from './styles'
 import { Button } from '../../styles/Buttons'
@@ -7,6 +7,19 @@ import Skeleton from 'react-loading-skeleton'
 const UpsellingPageUI = (props) => {
   const { upsellingProducts, productsList, handleAddProductUpselling, handleUpsellingPage } = props
   const [, t] = useLanguage()
+
+  useEffect(() => {
+    if (!productsList.loading) {
+      emptyProductList()
+    }
+  }, [productsList.loading])
+
+  const emptyProductList = () => {
+    if (!upsellingProducts.length) {
+      handleUpsellingPage()
+    }
+  }
+  console.log(upsellingProducts)
   return (
     <Container>
       <UpsellingContainer>
@@ -44,7 +57,7 @@ const UpsellingPageUI = (props) => {
       {!productsList.loading
         ? (
           <CloseUpselling>
-            <Button color='primary' outline onClick={() => handleUpsellingPage(false)}>
+            <Button color='secondary' outline onClick={() => handleUpsellingPage(false)}>
               {t('NO_THANKS', 'No, Thanks')}
             </Button>
           </CloseUpselling>

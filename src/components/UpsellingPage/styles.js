@@ -17,6 +17,7 @@ export const UpsellingContainer = styled.div`
   flex-wrap:wrap;
   justify-content: center;
   height: 100%;
+  min-height: 405px;
 `
 
 export const Item = styled.div`
@@ -30,11 +31,14 @@ export const Item = styled.div`
   text-align: center;
   border-radius: 9px;
   overflow: hidden;
+  @media (max-width: 720px){
+    width: 30%;
+  }
 `
 
 export const Image = styled.div`
   width: 100%;
-  height: 50%;
+  height: 40%;
   > img{
     width: 100%;
     height: 100%;
@@ -43,7 +47,7 @@ export const Image = styled.div`
 `
 
 export const Details = styled.div`
-  height: 50%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +64,7 @@ export const Details = styled.div`
 `
 
 export const CloseUpselling = styled.div`
-  width: inherit;
+  width: 100%;
   position: fixed;
   text-align: center;
   top: 84%;
@@ -69,6 +73,14 @@ export const CloseUpselling = styled.div`
   }
   @media (max-height: 640px){
     top: 80%;
+  }
+  @media (max-width: 720px){
+    button{
+      width: 40%;
+    }
+  }
+  @media (max-width: 480px){
+    top: 95%;
   }
 `
 
