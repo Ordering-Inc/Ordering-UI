@@ -40,8 +40,8 @@ export const ProductItemAccordion = (props) => {
 
   const productInfo = () => {
     if (isCartProduct) {
-      const ingredients = Object.values(product.ingredients ?? {})
-      let options = Object.values(product.options ?? {})
+      const ingredients = JSON.parse(JSON.stringify(Object.values(product.ingredients ?? {})))
+      let options = JSON.parse(JSON.stringify(Object.values(product.options ?? {})))
 
       options = options.map(option => {
         option.suboptions = Object.values(option.suboptions ?? {})
