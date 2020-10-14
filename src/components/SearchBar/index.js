@@ -6,7 +6,7 @@ import {
   BusinessSearch
 } from './styles'
 
-export const SearchBar = ({ onSearch, search }) => {
+export const SearchBar = ({ onSearch, search, placeholder }) => {
   let timeout = null
 
   const el = useRef()
@@ -34,6 +34,7 @@ export const SearchBar = ({ onSearch, search }) => {
       <Input
         ref={el}
         name='search'
+        placeholder={placeholder}
       />
     </BusinessSearch>
   )
