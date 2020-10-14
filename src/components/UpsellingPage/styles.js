@@ -18,6 +18,7 @@ export const UpsellingContainer = styled.div`
   justify-content: center;
   height: 100%;
   min-height: 405px;
+  overflow: auto;
 `
 
 export const Item = styled.div`
@@ -32,7 +33,8 @@ export const Item = styled.div`
   border-radius: 9px;
   overflow: hidden;
   @media (max-width: 720px){
-    width: 30%;
+    width: 35%;
+    overflow: auto;
   }
 `
 
@@ -59,28 +61,22 @@ export const Details = styled.div`
     }
   }
   > button {
-    width: 50%
+    width: 70%
   }
+
 `
 
 export const CloseUpselling = styled.div`
   width: 100%;
-  position: fixed;
   text-align: center;
   top: 84%;
   button{
-    width: 20%;
-  }
-  @media (max-height: 640px){
-    top: 80%;
+    width: 40%;
   }
   @media (max-width: 720px){
     button{
-      width: 40%;
+      width: 60%;
     }
-  }
-  @media (max-width: 480px){
-    top: 95%;
   }
 `
 
