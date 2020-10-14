@@ -10,8 +10,6 @@ import {
   Image,
   Chat,
   BubbleCustomer,
-  BubbleBusines,
-  MessageBusiness,
   MessageCustomer,
   SendForm,
   Send,
@@ -67,19 +65,6 @@ export const MessagesUI = (props) => {
     }
     reader.onerror = error => {
       console.log(error)
-    }
-  }
-
-  const getRole = (level) => {
-    switch (level) {
-      case 0:
-        return 'admin'
-      case 2:
-        return 'business'
-      case 4:
-        return 'driver'
-      default:
-        return 'Customer'
     }
   }
 
@@ -156,7 +141,7 @@ export const MessagesUI = (props) => {
         <Chat>
           <MessageConsole>
             <BubbleConsole>
-              {t('ORDER_PLACED_FOR', 'Order placed for')} {order.created_at} {t('VIA', 'via')} {order.app_id}
+              {t('ORDER_PLACED_FOR', 'Order placed for')} {moment.utc(order.created_at).format('YYYY/MM/DD HH:mm A')} {t('VIA', 'via')} {order.app_id}
               <p>{moment.utc(order.created_at).fromNow()}</p>
             </BubbleConsole>
           </MessageConsole>
