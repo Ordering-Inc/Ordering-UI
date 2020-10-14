@@ -141,9 +141,9 @@ export const MessagesUI = (props) => {
         <Chat>
           <MessageConsole>
             <BubbleConsole>
-              {t('ORDER_PLACED_FOR', 'Order placed for')}
-              {moment.utc(order.created_at).format('YYYY/MM/DD HH:mm A')}
-              {t('VIA', 'via')} {order.app_id}
+              {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+              <strong>{moment.utc(order.created_at).format('YYYY/MM/DD hh:mm A')}</strong> {' '}
+              {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
               <p>{moment.utc(order.created_at).fromNow()}</p>
             </BubbleConsole>
           </MessageConsole>
