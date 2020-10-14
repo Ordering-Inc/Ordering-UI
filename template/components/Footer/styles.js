@@ -21,7 +21,7 @@ export const FooterContainer = styled.div`
 `
 
 export const Content = styled.div`
-  width: 33%;
+  width: 50%;
   margin: 15px 0;
   > * {
     display: block;
@@ -43,7 +43,7 @@ export const Content = styled.div`
   }
 `
 export const SocialMedia = styled.div`
-  width: 33%;
+  width: 50%;
   h5{
    margin-block-end: 1em;
    margin-block-start: 1em; 
