@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import {
   ProductForm as ProductOptions,
@@ -200,12 +201,17 @@ const ProductOptionsUI = (props) => {
           open={modalIsOpen}
           closeOnBackdrop={false}
           onClose={() => closeModal()}
+          width='60%'
         >
           <LoginForm
-            ordering={props.ordering}
             handleSuccessLogin={handleSuccessLogin}
+            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+            useLoginByCellphone
+            popup='popup'
           />
-        </Modal>)}
+        </Modal>
+      )}
     </ProductContainer>
   )
 }

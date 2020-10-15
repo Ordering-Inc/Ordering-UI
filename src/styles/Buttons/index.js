@@ -34,7 +34,7 @@ export const Button = styled.button`
       vertical-align: middle;
     }
     span {
-      padding-left: inherit
+      padding-left: 15%
     }
   `}
 
