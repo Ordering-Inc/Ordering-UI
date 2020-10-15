@@ -6,6 +6,10 @@ export const LoginContainer = styled.div`
   flex-wrap: 1;
   flex-direction: column;
   height: auto;
+  
+  button{
+    box-sizing: content-box;
+  }
 
   .popup {
     font-size: 0.9em;
@@ -13,14 +17,11 @@ export const LoginContainer = styled.div`
       width: 80%
     }
   }
-  
-  button{
-    box-sizing: content-box;
-  }
+
   @media (min-width: 980px) {
     flex-direction: row;
     min-width: auto;
-    height: calc(100vh - 75px);
+    height: calc(100vh - 45px);
   }
 `
 
@@ -195,14 +196,14 @@ export const FormInput = styled.form`
     width: 55%;
     padding: 10px 20px
   }
-  button {
+  > button {
     margin-top: 10px;
     width: 60%;
     padding: 5px;
   }
 
   &.popup{
-    button{
+  > button{
       width: 85%
     }
   }

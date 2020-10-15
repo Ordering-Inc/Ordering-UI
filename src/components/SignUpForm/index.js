@@ -8,11 +8,11 @@ import {
   useSession
 } from 'ordering-components'
 import {
-  LoginContainer,
+  SignUpContainer,
   FormSide,
   HeroSide,
   FormInput,
-  SocialIcons,
+  SocialButtons,
   TitleHeroSide,
   SignUpWith,
   AlreadyRegistered
@@ -24,7 +24,8 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
-import { AiOutlineGoogle, FaApple } from 'react-icons/all'
+/** icons for mobile design */
+// import { AiOutlineGoogle, FaApple } from 'react-icons/all'
 import { FacebookLoginButton } from '../FacebookLogin'
 
 const SignUpFormUI = (props) => {
@@ -32,7 +33,6 @@ const SignUpFormUI = (props) => {
     hanldeChangeInput,
     handleButtonSignupClick,
     elementLinkToLogin,
-    ordering,
     useChekoutFileds,
     validationFields,
     showField,
@@ -89,7 +89,7 @@ const SignUpFormUI = (props) => {
   }
 
   return (
-    <LoginContainer>
+    <SignUpContainer>
       <HeroSide>
         <TitleHeroSide>
           <h1>{t('TITLE_LOGIN', 'Welcome!')}</h1>
@@ -99,21 +99,13 @@ const SignUpFormUI = (props) => {
       <FormSide>
 
         <img src={logoHeader} alt='Logo login' />
-        {
-          <AlreadyRegistered>
-            {elementLinkToLogin && (
-              <>
-                {t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')} {elementLinkToLogin}
-              </>
-            )}
-          </AlreadyRegistered>
-        }
-        {
+        {/** for mobile design
           <SocialIcons>
             {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
             {/* <FaApple />
-            <AiOutlineGoogle /> */}
+            <AiOutlineGoogle />
           </SocialIcons>
+          */
         }
         {
           useLoginByCellphone && useLoginByEmail &&
@@ -173,6 +165,23 @@ const SignUpFormUI = (props) => {
             {formState.loading ? t('LOADING') + '...' : t('SIGNUP', 'Sign up')}
           </Button>
         </FormInput>
+        {
+          <AlreadyRegistered>
+            {elementLinkToLogin && (
+              <>
+                {t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')} {elementLinkToLogin}
+              </>
+            )}
+          </AlreadyRegistered>
+        }
+        <SocialButtons>
+          {
+            configs?.facebook_id &&
+            (
+              <FacebookLoginButton appId={configs?.facebook_id?.value} handleSuccessFacebookLogin={handleSuccessFacebook} />
+            )
+          }
+        </SocialButtons>
       </FormSide>
       <Alert
         title={t('SIGNUP', 'Sign up')}
@@ -183,7 +192,7 @@ const SignUpFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-    </LoginContainer>
+    </SignUpContainer>
   )
 }
 

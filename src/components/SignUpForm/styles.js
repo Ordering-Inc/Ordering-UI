@@ -1,17 +1,18 @@
 import styled from 'styled-components'
 
-export const LoginContainer = styled.div`
-  background: #f8f8f8;
+export const SignUpContainer = styled.div`
   display: flex;
   flex: 1;
   flex-wrap: 1;
-  /* position: relative; */
   flex-direction: column;
-  min-height: calc(100vh - 45px); 
-  font-size: 1.2em;
+  height: auto;
+  button{
+    box-sizing: content-box;
+  }
   @media (min-width: 980px) {
-    min-width: auto;
     flex-direction: row;
+    min-width: auto;
+    min-height: calc(100vh - 45px); 
   }
 `
 
@@ -50,10 +51,10 @@ export const HeroSide = styled.div`
   background: #d81212;
   z-index: 100;
   text-align: center;
-  font-size: 1.5em;
   flex: 1;
  /* height: 100%; */
   max-height: 300px;
+  font-size: 1.7em;
   /*font: normal normal bold 106px/148px Tajawal;*/
   /*letter-spacing: 1.06px;*/
   @media (min-width: 980px) {
@@ -90,10 +91,12 @@ export const FormSide = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  height: 100%;
   padding: 30px 20px;
   align-content: center;
   flex: 1;
+  font-size: 1em;
   > img {
     width: 139px;
     margin-bottom: 15px;
@@ -105,6 +108,7 @@ export const FormSide = styled.div`
   @media (min-width: 980px) {
     width: 40%;
     height: auto;
+    font-size: 1.2em;
     > img {
       margin-top: 0;
       width: 200px;
@@ -131,40 +135,62 @@ export const SocialIcons = styled.div`
   }
 `
 
+export const SocialButtons = styled.div`
+   width: 100%;
+   margin-top: 5px;
+  > * {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 55%;
+    padding: 5px;
+    color: black;
+  }
+
+  @media (min-width: 980px) {
+    > * {
+      margin-top: 3px;
+      width: 55%;
+    }
+  }
+  @media (max-width: 480px){
+    > * {
+      width: 70%;
+    }
+  }
+`
+
 export const SignUpWith = styled.div`
   > div {
     justify-content: center;
     flex-wrap: wrap;
   }
+  font-size: 1.2em;
 `
 
 export const FormInput = styled.form`
   width: 100%;
   > * {
-    margin: 10px;
-    width: 60%;
+    margin: 5px;
+    width: 55%;
+    padding: 10px 20px
   }
-  > input{
-    padding: 15px 20px
-  }
-  > :last-child {
+  > button {
     margin-top: 50px;
     margin-bottom: 20px;
-    width: 65%;
-    padding: 8px
+    width: 60%;
+    padding: 5px;
   }
   @media (min-width: 980px) {
     > * {
       margin: 10px;
-      width: 60%;
     }
-    > :last-child {
+    > button {
       margin-top: 50px;
-      width: 65%;
     }
   }
 `
 
 export const ForgotPassword = styled.div`
-  margin: 10px 0;
+  margin: 10px auto;
+  width: auto;
 `
