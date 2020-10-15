@@ -32,40 +32,28 @@ import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 const fontName = 'Nunito'
 
 const GlobalStyle = createGlobalStyle`
-  /** Scrollbar style */
-
+  /** Mozilla scrollbar*/
   * {
-    scroll-behavior: smooth;
+    scrollbar-color: #CCC !important;
+    scrollbar-width: thin !important;
   }
+
+  /** Scrollbar for browser based on webkit */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-button {
-    width: 0px;
+    width: 6px;
     height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: #e1e1e1;
-    border: 0px none #FFF;
-    border-radius: 50px;
+    background: #CCCCCC;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #FFF;
+    background: #AFAFAF;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #6b6b6b;
   }
   ::-webkit-scrollbar-track {
-    background: #666666;
-    border: 0px none #FFF;
-    border-radius: 50px;
-  }
-  ::-webkit-scrollbar-track:hover {
-    background: #666666;
-  }
-  ::-webkit-scrollbar-track:active {
-    background: #333333;
-  }
-  ::-webkit-scrollbar-corner {
-    background: transparent;
+    background: rgba(204, 204, 204, 0.3);
   }
 
   body {
