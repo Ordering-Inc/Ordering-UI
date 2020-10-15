@@ -117,6 +117,7 @@ const BusinessProductsListingUI = (props) => {
               <SearchBar
                 onSearch={handleChangeSearch}
                 search={searchValue}
+                placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
               />
             </WrapperSearch>
             <BusinessProductsCategories

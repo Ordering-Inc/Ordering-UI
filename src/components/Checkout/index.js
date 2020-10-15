@@ -194,7 +194,8 @@ export const Checkout = (props) => {
     handleOrderRedirect,
     handleCheckoutRedirect,
     handleSearchRedirect,
-    handleCheckoutListRedirect
+    handleCheckoutListRedirect,
+    handleStoreRedirect
   } = props
 
   const [{ carts }, { confirmCart }] = useOrder()
@@ -271,16 +272,27 @@ export const Checkout = (props) => {
                 </LogoWrapper>
                 <CartItemInfo>
                   <h1>{cart?.business?.name}</h1>
-                  <p>{formatPrice(cart?.total)}</p>
+                  {cart.products.length > 0 && (<p>{formatPrice(cart?.total)}</p>)}
+                  {cart.products.length === 0 && (<p>{t('NOT_PRODUCTS', 'No products')}</p>)}
                 </CartItemInfo>
               </CartItemWrapper>
               <CartItemActions>
-                <Button
-                  color='primary'
-                  onClick={() => handleCheckoutRedirect(cart.uuid)}
-                >
-                  Pay
-                </Button>
+                {cart.products.length ? (
+                  <Button
+                    color='primary'
+                    onClick={() => handleCheckoutRedirect(cart.uuid)}
+                  >
+                    {t('PAY_CART', 'Pay order')}
+                  </Button>
+                ) : (
+                  <Button
+                    className='not-products'
+                    color='secundary'
+                    onClick={() => handleStoreRedirect(cart.business.slug)}
+                  >
+                    {t('ADD_PRODUCTS', 'Go to store')}
+                  </Button>
+                )}
               </CartItemActions>
             </CartItem>
           ))}
