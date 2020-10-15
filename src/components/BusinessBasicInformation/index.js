@@ -131,7 +131,13 @@ export const BusinessBasicInformation = (props) => {
         </BusinessInfo>
       </BusinessContent>
 
-      <Modal open={openBusinessInformation} onClose={() => setOpenBusinessInformation(false)} width='70%' padding='0'>
+      <Modal
+        width='70%'
+        open={openBusinessInformation}
+        onClose={() => setOpenBusinessInformation(false)}
+        padding='0'
+        hideCloseDefault
+      >
         <BusinessInformation
           business={business}
           getBusinessType={getBusinessType}

@@ -1,36 +1,60 @@
 import React, { useState } from 'react'
-
-import { BusinessInformation as BusinessInformationController, GoogleMaps, WrapperGoogleMaps, useOrder, useLanguage } from 'ordering-components'
+import { formatUrlVideo } from '../../utils'
+import { MdClose } from 'react-icons/md'
+import {
+  BusinessInformation as BusinessInformationController,
+  GoogleMaps,
+  WrapperGoogleMaps,
+  useOrder,
+  useLanguage
+} from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
-import { BusinessInformationContainer, Header, BusinessContent, BusinessBasicContent, FlexTabs, BusinessLocation, Map, BusinessOpeningTime, Times, DeliveryDetails, BusinessGallery, BusinessVideos, BusinessInfo, BusinessInfoItem, WrapperBusinessLogo, BusinessLogo, ModalIcon } from './styles'
+import {
+  BusinessInformationContainer,
+  BusinessHeader,
+  BusinessContent,
+  BusinessBasicContent,
+  FlexTabs,
+  SectionTitle,
+  Map,
+  ScheduleBlock,
+  ScheduleSection,
+  ScheduleContainer,
+  DeliveryInfo,
+  BusinessMediaContent,
+  BusinessInfo,
+  BusinessInfoItem,
+  WrapperBusinessLogo,
+  BusinessLogo,
+  ModalIcon
+} from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { GrDeliver, FaStar, FiClock, VscLocation } from 'react-icons/all'
-import { MdClose } from 'react-icons/md'
 
 export const BusinessInformationUI = (props) => {
-  const { business, getBusinessType, dateFormatted, formatNumber, formatPrice, optimizeImage, businessLocation, businessSchedule, businessPhotos, businessVideos, onClose } = props
+  const {
+    business,
+    getBusinessType,
+    dateFormatted,
+    formatNumber,
+    formatPrice,
+    optimizeImage,
+    businessLocation,
+    businessSchedule,
+    businessPhotos,
+    businessVideos,
+    onClose
+  } = props
   const [orderState] = useOrder()
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
   const [, t] = useLanguage()
 
-  const openingTime = ({ open, close }) => {
+  const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
-    return (
-      <div>
-        <p>{`${checkTime(open?.hour)}:${checkTime(open?.minute)}`}</p>
-        <p>{`${checkTime(close?.hour)}:${checkTime(close?.minute)}`}</p>
-      </div>
-    )
-  }
-
-  const formatUrlVideo = (url) => {
-    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
-    const match = url.match(regExp)
-    const id = (match && match[7].length === 11) ? match[7] : false
-    return `https://www.youtube-nocookie.com/embed/${id}`
+    return `${checkTime(hour)}:${checkTime(minute)}`
   }
 
   return (
@@ -38,7 +62,7 @@ export const BusinessInformationUI = (props) => {
       <ModalIcon>
         <MdClose onClick={() => onClose()} />
       </ModalIcon>
-      <Header>
+      <BusinessHeader>
         <img src={business.header} />
         <BusinessBasicContent>
           <WrapperBusinessLogo>
@@ -84,7 +108,7 @@ export const BusinessInformationUI = (props) => {
             </BusinessInfoItem>
           </BusinessInfo>
         </BusinessBasicContent>
-      </Header>
+      </BusinessHeader>
       <BusinessContent>
         {business.reviews && (
           <FlexTabs>
@@ -103,56 +127,49 @@ export const BusinessInformationUI = (props) => {
         {tabValue === 'General Info' ? (
           <>
             {businessLocation.location && (
-              <BusinessLocation>
-                <h4>{t('BUSINESS_LOCATION', 'Business location')}</h4>
-                <>
-                  {businessLocation.location && (
-                    <Map>
-                      <GoogleMapsMap
-                        apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-                        location={businessLocation.location}
-                        mapControls={businessLocation.googleMapsControls || business.googleMapsControls}
-                      />
-                    </Map>
-                  )}
-                </>
-              </BusinessLocation>
+              <>
+                <SectionTitle>{t('BUSINESS_LOCATION', 'Business location')}</SectionTitle>
+                {businessLocation.location && (
+                  <Map>
+                    <GoogleMapsMap
+                      apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+                      location={businessLocation.location}
+                      mapControls={businessLocation.googleMapsControls || business.googleMapsControls}
+                    />
+                  </Map>
+                )}
+              </>
             )}
-            {businessSchedule.length > 0 && (
-              <BusinessOpeningTime>
-                <h4>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</h4>
-                <Times>
-                  {businessSchedule.map((Schedule, i) => (
-                    <React.Fragment key={i}>
-                      <div>
-                        <h4>
-                          {daysOfWeek[i]}
-                        </h4>
-                        {openingTime(Schedule.lapses[0])}
-                      </div>
-                      <p style={{ border: '1px solid #ccc', display: daysOfWeek[i] === 'Sat' && 'none' }} />
-                    </React.Fragment>
-                  ))}
-                </Times>
-                <DeliveryDetails>
-                  <span />
+            {businessSchedule?.length > 0 && (
+              <>
+                <SectionTitle>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</SectionTitle>
+                <ScheduleSection>
+                  <ScheduleContainer>
+                    {businessSchedule.map((schedule, i) => (
+                      <ScheduleBlock key={i}>
+                        <h4>{daysOfWeek[i]}</h4>
+                        <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
+                        <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
+                      </ScheduleBlock>
+                    ))}
+                  </ScheduleContainer>
+                </ScheduleSection>
+                <DeliveryInfo>
                   <div>
                     <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {formatPrice(business.service_fee)}</h5>
                     <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {formatPrice(business.minimum)}</h5>
                     <h5>{t('DISTANCE', 'Distance:')} {formatNumber(business?.distance) || 0} {t('KM', 'KM')}</h5>
                   </div>
-                  <span />
                   <div>
                     <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {dateFormatted(business?.delivery_time)}</h5>
                     <h5>{t('PICKUP_TIME', 'Pickup Time:')} {dateFormatted(business?.pickup_time)}</h5>
                   </div>
-                  <span />
-                </DeliveryDetails>
-              </BusinessOpeningTime>
+                </DeliveryInfo>
+              </>
             )}
-            {businessPhotos.length > 0 && (
-              <BusinessGallery>
-                <h4>{t('BUSINESS_PHOTO_GALLERY', 'Business Photo Gallery')}</h4>
+            {businessPhotos?.length > 0 && (
+              <BusinessMediaContent>
+                <SectionTitle>{t('BUSINESS_PHOTO_GALLERY', 'Business Photo Gallery')}</SectionTitle>
                 <div>
                   {
                     businessPhotos.map((photo, i) => (
@@ -160,22 +177,29 @@ export const BusinessInformationUI = (props) => {
                     ))
                   }
                 </div>
-              </BusinessGallery>
+              </BusinessMediaContent>
             )}
-            {businessVideos.length > 0 && (
-              <BusinessVideos>
-                <h4>{t('BUSINESS_VIDEOS', 'Business Videos')}</h4>
+            {businessVideos?.length > 0 && (
+              <BusinessMediaContent>
+                <SectionTitle>{t('BUSINESS_VIDEOS', 'Business Videos')}</SectionTitle>
                 <div>
                   {businessVideos.map((video, i) => (
                     <iframe key={i} src={formatUrlVideo(video.video)} width='191' height='128' frameBorder='0' allow='autoplay; encrypted-media' allowFullScreen />
                   ))}
                 </div>
-              </BusinessVideos>
+              </BusinessMediaContent>
             )}
           </>
         ) : (
           <>
-            {business.reviews?.reviews && <BusinessReviews businessId={business.id} reviews={business.reviews?.reviews} businessName={business.name} stars={business.reviews?.total} />}
+            {business.reviews?.reviews && (
+              <BusinessReviews
+                businessId={business.id}
+                reviews={business.reviews?.reviews}
+                businessName={business.name}
+                stars={business.reviews?.total}
+              />
+            )}
           </>
         )}
       </BusinessContent>
