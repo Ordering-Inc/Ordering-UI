@@ -202,6 +202,7 @@ const ProductOptionsUI = (props) => {
           closeOnBackdrop={false}
           onClose={() => closeModal()}
           width='60%'
+          maxHeight='90vh'
         >
           <LoginForm
             handleSuccessLogin={handleSuccessLogin}

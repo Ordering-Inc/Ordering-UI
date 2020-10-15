@@ -106,6 +106,10 @@ export const FormSide = styled.div`
     text-decoration: none;
     color: #d81212;
   }
+  &.popup{
+    padding: 30px 0;
+    padding-left: 5px;
+  }
   @media (max-width: 980px) {
     font-size: 1em;
     height: 100%;
@@ -119,6 +123,9 @@ export const FormSide = styled.div`
 `
 
 export const NewOnPlatform = styled.div`
+  &.popup{
+    font-size: 0.8em
+    }
 `
 
 export const SocialIcons = styled.div`
@@ -157,7 +164,7 @@ export const SocialButtons = styled.div`
     }
   &.popup{
     button{
-      width: 83%;
+      width: 79%;
       span{
         padding-left: 10%;
       }
@@ -180,9 +187,9 @@ export const SocialButtons = styled.div`
 export const LoginWith = styled.div`
   > div {
     justify-content: center;
-    flex-wrap: wrap;
   }
   font-size: 1.1em;
+
 `
 
 export const FormInput = styled.form`
