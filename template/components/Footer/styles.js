@@ -31,7 +31,7 @@ export const FooterContainer = styled.div`
   @media (max-width: 640px) {
     flex-direction: column;
     > * {
-      margin: 0 25% 0 35%;
+      margin: 0 25% 0 25%;
     }
     > :first-child{
     margin-left: auto
@@ -57,7 +57,10 @@ export const Content = styled.div`
     width: 50%;
     margin-bottom: 20px;
     > * {
-      font-size: 12px;
+      font-size: 16px;
+    }
+    h5{
+      font-size: 16px;
     }
   }
 `
@@ -76,6 +79,9 @@ export const SocialMedia = styled.div`
   @media (max-width: 640px) {
     width: 50%;
     margin-bottom: 20px;
+    h5{
+      font-size: 16px;
+    }
   }
 `
 
@@ -97,18 +103,21 @@ export const SocialIcon = styled.div`
     margin: 0 5px;  
   }
   @media(max-width: 720px){
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     margin: 0 5px;  
   }
 `
 
 export const Copy = styled.div`
   margin: 0;
-  align-self: center;
   margin-top: 10px;
   width: 80%;
   text-align: center;
   font-size: 12px;
   color: #868686;
+  @media (max-width: 640px){
+    margin: auto;
+  }
+
 `
