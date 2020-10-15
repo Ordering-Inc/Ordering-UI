@@ -159,11 +159,12 @@ const ProductOptionsUI = (props) => {
                   rows={4}
                   defaultValue={productCart.comment}
                   onChange={handleChangeCommentState}
+                  disabled={!(productCart && !isSoldOut && maxProductQuantity)}
                 />
               </ProductComment>
             </ProductEdition>
             <ProductActions>
-              {productCart && !isSoldOut && maxProductQuantity && (
+              {productCart && !isSoldOut && maxProductQuantity > 0 && (
                 <div>
                   <Button
                     className='incdec'

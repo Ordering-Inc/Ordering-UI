@@ -171,6 +171,7 @@ export const ProductActions = styled.div`
     }
     &.soldout {
       width: 100%;
+      cursor: not-allowed;
     }
   }
 
