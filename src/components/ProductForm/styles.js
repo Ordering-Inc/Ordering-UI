@@ -82,13 +82,10 @@ export const ProductInfo = styled.div`
 
   @media (max-width: 1200px) {
     width: 100%;
+    padding: 0px;
     h1 {
       text-align: center;
     }
-  }
-
-  @media (max-width: 700px) {
-    padding: 0px
   }
 
   @media (max-width: 410px) {
