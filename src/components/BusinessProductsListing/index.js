@@ -39,7 +39,7 @@ const BusinessProductsListingUI = (props) => {
     handleChangeCategory,
     handleUpdateInitialRender,
     updateProductModal,
-    productRedirect,
+    onProductRedirect,
     handleChangeSearch
   } = props
 
@@ -50,7 +50,7 @@ const BusinessProductsListingUI = (props) => {
   const [curProduct, setCurProduct] = useState(props.product)
 
   const onProductClick = (product) => {
-    productRedirect({
+    onProductRedirect({
       slug: business?.slug,
       product: product.id,
       category: product.category_id
@@ -62,9 +62,7 @@ const BusinessProductsListingUI = (props) => {
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
-      productRedirect({
-        slug: business?.slug
-      })
+      onProductRedirect()
     }
   }
 
@@ -72,9 +70,7 @@ const BusinessProductsListingUI = (props) => {
     setModalIsOpen(false)
     handleUpdateInitialRender(false)
     updateProductModal(null)
-    productRedirect({
-      slug: business?.slug
-    })
+    onProductRedirect()
   }
 
   const handleScroll = useCallback(() => {
