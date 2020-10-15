@@ -9,6 +9,7 @@ export const Container = styled.div`
 `
 
 export const ModalDialog = styled.div`
+  position: relative;
   background-color: #FFF;
   padding: ${({ padding }) => padding || '20px'};
   width: ${({ width }) => width || '50%'};
@@ -57,7 +58,9 @@ export const ModalTitle = styled.h2`
 `
 
 export const ModalIcon = styled.span`
-  float: right;
+  position: absolute;
+  right: 5px;
+  top: 6px;
   font-size: 30px;
   cursor: pointer;
   z-index: 1;

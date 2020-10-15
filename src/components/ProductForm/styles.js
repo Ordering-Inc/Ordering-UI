@@ -4,7 +4,6 @@ import styled from 'styled-components'
 export const ProductContainer = styled.div`
   display: flex;
   max-height: 80vh;
-  padding-left: 15px;
   position: relative;
 
   @media (max-width: 1200px) {
@@ -12,12 +11,9 @@ export const ProductContainer = styled.div`
     overflow: auto;
   }
 
-  @media (max-width: 576px) {
-    padding-left: 0px;
-  }
-
   @media (max-width: 480px) {
     height: 90vh;
+    max-height: 100vh;
   }
 `
 
@@ -89,6 +85,10 @@ export const ProductInfo = styled.div`
     h1 {
       text-align: center;
     }
+  }
+
+  @media (max-width: 700px) {
+    padding: 0px
   }
 
   @media (max-width: 410px) {
@@ -213,5 +213,14 @@ export const ProductActions = styled.div`
     div {
       width: 80%;
     }
+  }
+`
+export const SkeletonBlock = styled.div`
+  width: ${({ width }) => width && `${width}%`};
+  border-radius: 16px;
+  margin: auto;
+
+  span {
+    margin-bottom: 10px;
   }
 `
