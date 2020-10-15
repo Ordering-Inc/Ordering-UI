@@ -84,8 +84,8 @@ const ProductOptionsUI = (props) => {
     <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
       {loading && (
         <SkeletonBlock width={90}>
-          <Skeleton variant='text' />
-          <Skeleton variant='text' />
+          <Skeleton variant='rect' height={50} />
+          <Skeleton variant='rect' height={50} />
           <Skeleton variant='rect' height={200} />
         </SkeletonBlock>
       )}

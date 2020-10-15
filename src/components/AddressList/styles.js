@@ -4,8 +4,6 @@ export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 10px;
-  max-height: 60vh;
-  overflow: auto;
 
   button.add {
     height: 50px;
@@ -43,6 +41,10 @@ export const AddressItem = styled.li`
       &.radio {
         color: #D81212;
         font-size: 24px;
+      }
+
+      @media (max-width: 380px) {
+        font-size: 14px;
       }
     }
   }
