@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Skeleton from 'react-loading-skeleton'
 
 import {
   ProductForm as ProductOptions,
@@ -28,7 +29,8 @@ import {
   ProductEdition,
   SectionTitle,
   ProductActions,
-  ProductComment
+  ProductComment,
+  SkeletonBlock
 } from './styles'
 
 const ProductOptionsUI = (props) => {
@@ -36,7 +38,7 @@ const ProductOptionsUI = (props) => {
     businessSlug,
     editMode,
     isSoldOut,
-    product,
+    productObject,
     productCart,
     increment,
     decrement,
@@ -45,9 +47,11 @@ const ProductOptionsUI = (props) => {
     errors,
     handleSave,
     handleChangeIngredientState,
-    handleChangeSuboptionState
+    handleChangeSuboptionState,
+    handleChangeCommentState
   } = props
 
+  const { product, loading, error } = productObject
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [, t] = useLanguage()
@@ -78,123 +82,140 @@ const ProductOptionsUI = (props) => {
 
   return (
     <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
-      <ProductShare
-        slug={businessSlug}
-        categoryId={product.category_id}
-        productId={product.id}
-      />
-      <WrapperImage>
-        <ProductImage bgimage={product?.images} />
-      </WrapperImage>
-      <ProductInfo>
-        <div>
-          <h1>{product?.name}</h1>
-          {product?.description && <p>{product?.description}</p>}
-        </div>
-        <ProductEdition id={`${windowSize.width > 1200 && 'product_edition'}`}>
-          {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
-          {product?.ingredients.map(ingredient => (
-            <ProductIngredient
-              key={ingredient.id}
-              onChange={handleChangeIngredientState}
-              state={productCart.ingredients[`id:${ingredient.id}`]}
-              ingredient={ingredient}
-            />
-          ))}
-          {
-            product?.extras.map(extra => extra.options.map(option => {
-              const currentState = productCart.options[`id:${option.id}`] || {}
-              return (
-                <div key={option.id} className={`${errors[`id:${option.id}`] && 'error'}`}>
-                  {
-                    showOption(option) && (
-                      <ProductOption
-                        option={option}
-                        currentState={currentState}
-                        error={errors[`id:${option.id}`]}
-                      >
-                        {
-                          option.suboptions.map(suboption => {
-                            const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
-                            const balance = productCart.options[`id:${option.id}`]?.balance || 0
-                            return (
-                              <ProductOptionSubOption
-                                key={suboption.id}
-                                onChange={handleChangeSuboptionState}
-                                balance={balance}
-                                option={option}
-                                suboption={suboption}
-                                state={currentState}
-                              />
-                            )
-                          })
-                        }
-                      </ProductOption>
-                    )
-                  }
-                </div>
-              )
-            }))
-          }
-          <ProductComment>
-            <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
-            <textarea
-              rows={4}
-              defaultValue={productCart.comment}
-            />
-          </ProductComment>
-        </ProductEdition>
-        <ProductActions>
-          {productCart && !isSoldOut && maxProductQuantity && (
-            <div>
-              <Button
-                className='incdec'
-                circle
-                outline
-                onClick={decrement}
-                disabled={productCart.quantity === 1 || isSoldOut}
-              >-
-              </Button>
-              <span>{productCart.quantity}</span>
-              <Button
-                className='incdec'
-                circle
-                outline
-                onClick={increment}
-                disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
-              >+
-              </Button>
-            </div>)}
+      {loading && (
+        <SkeletonBlock width={90}>
+          <Skeleton variant='rect' height={50} />
+          <Skeleton variant='rect' height={50} />
+          <Skeleton variant='rect' height={200} />
+        </SkeletonBlock>
+      )}
 
-          {productCart && !isSoldOut && maxProductQuantity && auth ? (
-            <Button
-              className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
-              color='primary'
-              onClick={() => handleSaveProduct()}
-              // disabled={maxProductQuantity === 0 || Object.keys(errors).length > 0}
-            >
-              {orderState.loading ? (
-                <span>{t('LOADING', 'Loading...')}</span>
+      {product && !loading && !error && (
+        <ProductShare
+          slug={businessSlug}
+          categoryId={product?.category_id}
+          productId={product?.id}
+        />
+      )}
+
+      {!loading && !error && product && (
+        <>
+          <WrapperImage>
+            <ProductImage bgimage={product?.images} />
+          </WrapperImage>
+          <ProductInfo>
+            <div>
+              <h1>{product?.name}</h1>
+              {product?.description && <p>{product?.description}</p>}
+            </div>
+            <ProductEdition id={`${windowSize.width > 1200 && 'product_edition'}`}>
+              {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
+              {product?.ingredients.map(ingredient => (
+                <ProductIngredient
+                  key={ingredient.id}
+                  onChange={handleChangeIngredientState}
+                  state={productCart.ingredients[`id:${ingredient.id}`]}
+                  ingredient={ingredient}
+                />
+              ))}
+              {
+                product?.extras.map(extra => extra.options.map(option => {
+                  const currentState = productCart.options[`id:${option.id}`] || {}
+                  return (
+                    <div key={option.id} className={`${errors[`id:${option.id}`] && 'error'}`}>
+                      {
+                        showOption(option) && (
+                          <ProductOption
+                            option={option}
+                            currentState={currentState}
+                            error={errors[`id:${option.id}`]}
+                          >
+                            {
+                              option.suboptions.map(suboption => {
+                                const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
+                                const balance = productCart.options[`id:${option.id}`]?.balance || 0
+                                return (
+                                  <ProductOptionSubOption
+                                    key={suboption.id}
+                                    onChange={handleChangeSuboptionState}
+                                    balance={balance}
+                                    option={option}
+                                    suboption={suboption}
+                                    state={currentState}
+                                  />
+                                )
+                              })
+                            }
+                          </ProductOption>
+                        )
+                      }
+                    </div>
+                  )
+                }))
+              }
+              <ProductComment>
+                <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
+                <textarea
+                  rows={4}
+                  defaultValue={productCart.comment}
+                  onChange={handleChangeCommentState}
+                  disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                />
+              </ProductComment>
+            </ProductEdition>
+            <ProductActions>
+              {productCart && !isSoldOut && maxProductQuantity > 0 && (
+                <div>
+                  <Button
+                    className='incdec'
+                    circle
+                    outline
+                    onClick={decrement}
+                    disabled={productCart.quantity === 1 || isSoldOut}
+                  >-
+                  </Button>
+                  <span>{productCart.quantity}</span>
+                  <Button
+                    className='incdec'
+                    circle
+                    outline
+                    onClick={increment}
+                    disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
+                  >+
+                  </Button>
+                </div>)}
+
+              {productCart && !isSoldOut && maxProductQuantity && auth ? (
+                <Button
+                  className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
+                  color='primary'
+                  onClick={() => handleSaveProduct()}
+                >
+                  {orderState.loading ? (
+                    <span>{t('LOADING', 'Loading...')}</span>
+                  ) : (
+                    <span>
+                      {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
+                    </span>
+                  )}
+                  <span>{productCart.total && formatPrice(productCart.total)}</span>
+                </Button>
               ) : (
-                <span>
-                  {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
-                </span>
+                <Button
+                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''}`}
+                  color='primary'
+                  outline
+                  disabled={isSoldOut || maxProductQuantity === 0}
+                  onClick={() => setModalIsOpen(true)}
+                >
+                  {isSoldOut || maxProductQuantity === 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
+                </Button>
               )}
-              <span>{productCart.total && formatPrice(productCart.total)}</span>
-            </Button>
-          ) : (
-            <Button
-              className={`add ${!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''}`}
-              color='primary'
-              outline
-              disabled={isSoldOut || maxProductQuantity === 0}
-              onClick={() => setModalIsOpen(true)}
-            >
-              {isSoldOut || maxProductQuantity === 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
-            </Button>
-          )}
-        </ProductActions>
-      </ProductInfo>
+            </ProductActions>
+          </ProductInfo>
+        </>
+      )}
+
       {modalIsOpen && (
         <Modal
           title={t('LOGIN')}
@@ -202,7 +223,6 @@ const ProductOptionsUI = (props) => {
           closeOnBackdrop={false}
           onClose={() => closeModal()}
           width='60%'
-          maxHeight='90vh'
         >
           <LoginForm
             handleSuccessLogin={handleSuccessLogin}
@@ -213,6 +233,9 @@ const ProductOptionsUI = (props) => {
           />
         </Modal>
       )}
+      {error && error.length > 0 && error.map((e, i) => (
+        <p key={i}>Error: [{e}]</p>
+      ))}
     </ProductContainer>
   )
 }

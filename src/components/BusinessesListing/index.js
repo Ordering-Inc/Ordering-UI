@@ -81,6 +81,7 @@ const BusinessesListingUI = (props) => {
         <SearchBar
           onSearch={handleChangeSearch}
           search={searchValue}
+          placeholder={t('SEARCH_BUSINESS', 'Search Businesses')}
         />
       </WrapperSearch>
       <BusinessList>
@@ -121,7 +122,7 @@ const BusinessesListingUI = (props) => {
         )}
         {businessesList.error && businessesList.error.length > 0 && (
           businessesList.error.map((e, i) => (
-            <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
+            <ErrorMessage key={i}>ERROR: [{e?.message || e}]</ErrorMessage>
           ))
         )}
       </BusinessList>

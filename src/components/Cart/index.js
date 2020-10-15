@@ -102,7 +102,7 @@ const CartUI = (props) => {
                   <td>{formatPrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('TAX', 'Tax')} (10%)</td>
+                  <td>{t('TAX', 'Tax')} ({cart?.business?.tax}%)</td>
                   <td>{formatPrice(cart?.tax || 0)}</td>
                 </tr>
                 <tr>
@@ -114,7 +114,7 @@ const CartUI = (props) => {
                   <td>{formatPrice(cart?.driver_tip || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('SERVICE_FEE', 'Service Fee')}(9%)</td>
+                  <td>{t('SERVICE_FEE', 'Service Fee')} ({cart?.business?.service_fee}%)</td>
                   <td>{formatPrice(cart?.service_fee || 0)}</td>
                 </tr>
                 {cart?.discount > 0 && (
@@ -170,6 +170,7 @@ const CartUI = (props) => {
         <ProductForm
           isCartProduct
           productCart={curProduct}
+          businessSlug={cart?.business?.slug}
           businessId={curProduct?.business_id}
           categoryId={curProduct?.category_id}
           productId={curProduct?.id}

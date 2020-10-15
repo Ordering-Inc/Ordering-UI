@@ -53,7 +53,7 @@ export const Title = styled.h1`
 export const Slogan = styled.p`
   margin: 0px;
   text-align: left;
-  font: normal normal 300 25px/48px Tajawal;
+  font-size: 1.5em;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
