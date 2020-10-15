@@ -10,19 +10,19 @@ export const Footer = () => {
     <>
       <FooterContainer>
         <Content>
-          <h5>{t('FOOTER_QL1_TITLE')}</h5>
+          <h5><strong>{t('FOOTER_QL1_TITLE')}</strong></h5>
           <a href={t('FOOTER_QL1_1_HREF')}> {t('FOOTER_QL1_1')} </a>
           <a href={t('FOOTER_QL1_2_HREF')}>{t('FOOTER_QL1_2')}</a>
           <a href={t('FOOTER_QL1_3_HREF')}>{t('FOOTER_QL1_3')}</a>
         </Content>
         <Content>
-          <h5>{t('FOOTER_QL2_TITLE')}</h5>
+          <h5><strong>{t('FOOTER_QL2_TITLE')}</strong></h5>
           <a href={t('FOOTER_QL2_1_HREF')}>{t('FOOTER_QL2_1')}</a>
           <a href={t('FOOTER_QL2_2_HREF')}>{t('FOOTER_QL2_2')}</a>
           <a href={t('FOOTER_QL2_3_HREF')}>{t('FOOTER_QL2_3')}</a>
         </Content>
         <SocialMedia>
-          <h5>{t('FOOTER_QL3_TITLE')}</h5>
+          <h5><strong>{t('FOOTER_QL3_TITLE')}</strong></h5>
           <div>
             <SocialIcon><AiOutlineFacebook href={t('FOOTER_QL3_1_HREF')} /></SocialIcon>
             <SocialIcon><AiOutlineInstagram href={t('FOOTER_QL3_2_HREF')} /></SocialIcon>
