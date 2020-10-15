@@ -31,7 +31,7 @@ export const FooterContainer = styled.div`
   @media (max-width: 640px) {
     flex-direction: column;
     > * {
-      margin: 0 25% 0 35%;
+      margin: 0 25% 0 25%;
     }
     > :first-child{
     margin-left: auto
