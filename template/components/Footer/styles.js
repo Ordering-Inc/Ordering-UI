@@ -118,9 +118,6 @@ export const Copy = styled.div`
   color: #868686;
   @media (max-width: 640px){
     margin: auto;
-    margin-right: 20%;
   }
-  @media (max-width: 410px){
-    margin-right: 16%;
-  }
+
 `
