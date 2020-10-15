@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { formatUrlVideo } from '../../utils'
+import { MdClose } from 'react-icons/md'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMaps,
@@ -24,7 +25,8 @@ import {
   BusinessInfo,
   BusinessInfoItem,
   WrapperBusinessLogo,
-  BusinessLogo
+  BusinessLogo,
+  ModalIcon
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 
@@ -41,7 +43,8 @@ export const BusinessInformationUI = (props) => {
     businessLocation,
     businessSchedule,
     businessPhotos,
-    businessVideos
+    businessVideos,
+    onClose
   } = props
   const [orderState] = useOrder()
   const [tabValue, setTabValue] = useState('General Info')
@@ -56,6 +59,9 @@ export const BusinessInformationUI = (props) => {
 
   return (
     <BusinessInformationContainer>
+      <ModalIcon>
+        <MdClose onClick={() => onClose()} />
+      </ModalIcon>
       <BusinessHeader>
         <img src={business.header} />
         <BusinessBasicContent>

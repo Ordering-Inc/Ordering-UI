@@ -4,7 +4,6 @@ import styled from 'styled-components'
 export const BusinessInformationContainer = styled.div`
   width: 100%;
   position: relative;
-  max-height: 80vh;
   overflow: auto;
 `
 export const BusinessHeader = styled.div`
@@ -20,6 +19,7 @@ export const BusinessHeader = styled.div`
   justify-content: left;
   align-items: flex-end;
   position: relative;
+
   img{
     object-fit: cover;
     position: absolute;
@@ -265,4 +265,18 @@ export const BusinessMediaContent = styled.div`
       }
     }
   }
+`
+
+export const ModalIcon = styled.span`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+  right: 5px;
+  top: 5px;
+  z-index: 1;
+  background: rgba(0,0,0,0.1);
 `
