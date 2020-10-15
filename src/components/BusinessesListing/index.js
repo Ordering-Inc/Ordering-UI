@@ -81,7 +81,7 @@ const BusinessesListingUI = (props) => {
         <SearchBar
           onSearch={handleChangeSearch}
           search={searchValue}
-          placeholder={t('SEARCH_BUSINESS', 'Search Business')}
+          placeholder={t('SEARCH_BUSINESS', 'Search Businesses')}
         />
       </WrapperSearch>
       <BusinessList>
