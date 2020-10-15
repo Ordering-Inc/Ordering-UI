@@ -1,7 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { BiCaretDown } from 'react-icons/bi'
-import { VscTrash } from 'react-icons/vsc'
-import { TiPencil } from 'react-icons/ti'
+import { TiPencil, IoIosArrowDown, VscTrash } from 'react-icons/all'
 import { useLanguage, useOrder } from 'ordering-components'
 
 import { Button } from '../../styles/Buttons'
@@ -146,7 +144,7 @@ export const ProductItemAccordion = (props) => {
               <span className='product-price'>{formatPrice(product.total || product.price)}</span>
               {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || isCartProduct || product.comment) && (
                 <p>
-                  <BiCaretDown className={`${setRotate}`} />
+                  <IoIosArrowDown className={`${setRotate}`} />
                 </p>
               )}
             </div>

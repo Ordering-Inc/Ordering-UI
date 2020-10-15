@@ -8,6 +8,8 @@ import star from '../../../template/assets/star.svg'
 import locationMarker from '../../../template/assets/location-marker.svg'
 import clock from '../../../template/assets/clock.svg'
 
+import { convertHoursToMinutes } from '../../utils'
+
 import {
   ContainerCard,
   WrapperBusinessCard,
@@ -36,14 +38,6 @@ const BusinessControllerUI = (props) => {
 
   const types = ['food', 'laundry', 'alcohol', 'groceries']
   const formatAmount = (amount = 0) => `$ ${amount.toFixed(2)}`
-  const dateFormatted = (date) => {
-    if (!date) return
-    const hour = date.split(':')[0]
-    const minute = date.split(':')[1]
-    const formatHour = hour < 10 ? `0${hour}` : hour
-    const formatMinute = minute < 10 ? `0${minute}` : minute
-    return `${formatHour}:${formatMinute}`
-  }
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return 'none'
@@ -126,12 +120,12 @@ const BusinessControllerUI = (props) => {
                       {orderState?.options?.type === 1 ? (
                         <p className='bullet'>
                           <img src={clock} alt='clock-icon' />
-                          {dateFormatted(business?.delivery_time) || <Skeleton width={100} />}
+                          {convertHoursToMinutes(business?.delivery_time) || <Skeleton width={100} />}
                         </p>
                       ) : (
                         <p className='bullet'>
                           <img src={clock} alt='clock-icon' />
-                          {dateFormatted(business?.pickup_time) || <Skeleton width={100} />}
+                          {convertHoursToMinutes(business?.pickup_time) || <Skeleton width={100} />}
                         </p>
                       )}
                     </>

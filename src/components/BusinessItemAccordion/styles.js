@@ -43,51 +43,7 @@ export const Accordion = styled.div`
   }
 
   .accordion__icon {
-    margin-left: auto;
     transition: transform 0.6s ease;
-  }
-
-  div.info {
-    display: flex;
-    align-items: center;
-    width: 65%;
-    h1 {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-
-  div.total {
-    width: 35%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    span {
-      font-weight: bold;
-      font-size: 20px;
-    }
-    p {
-      font-size: 20px;
-      margin: 0px 5px;
-      svg {
-        cursor: pointer;
-      }
-    }
-
-    @media (max-width: 410px) {
-      span,
-      p {
-        font-size: 16px;
-      }
-    }
-
-    @media (max-width: 360px) {
-      span,
-      p {
-        font-size: 14px;
-      }
-    }
   }
 `
 
@@ -141,6 +97,11 @@ export const ContentInfo = styled.div`
   span {
     font-size: 18px;
     opacity: 0.8;
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 3px;
+    }
   }
 
   @media (max-width: 410px) {
@@ -159,4 +120,67 @@ export const AccordionText = styled.div`
   font-weight: 400;
   font-size: 14px;
   padding: 18px;
+`
+
+export const BusinessInfo = styled.div`
+  display: flex;
+  align-items: center;
+  width: 45%;
+
+  h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+`
+
+export const BusinessTotal = styled.div`
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-size: 20px;
+    margin: 0px 5px;
+
+    &:nth-child(1) {
+      font-weight: bold;
+    }
+  }
+
+  @media (max-width: 410px) {
+    p {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    p {
+      font-size: 14px;
+    }
+  }
+`
+
+export const BusinessActions = styled.div`
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  svg {
+    font-size: 28px;
+
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+
+    &:nth-child(1) {
+      color: #CCC;
+    }
+
+    &:nth-child(2) {
+      color: #D81212;
+    }
+  }
 `

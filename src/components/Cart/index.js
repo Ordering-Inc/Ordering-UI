@@ -22,6 +22,7 @@ import {
 const CartUI = (props) => {
   const {
     cart,
+    clearCart,
     isProducts,
     changeQuantity,
     getProductMax,
@@ -59,6 +60,10 @@ const CartUI = (props) => {
     onClickCheckout()
   }
 
+  const handleStoreRedirect = (slug) => {
+    history.push(`/store/${slug}`)
+  }
+
   useEffect(() => {
     return () => {
       setConfirm({ ...confirm, open: false })
@@ -71,6 +76,17 @@ const CartUI = (props) => {
     }
   }
 
+  const handleClearProducts = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCTS', 'Are you sure that you want to delete all products?'),
+      handleOnAccept: () => {
+        clearCart(cart?.uuid)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
+
   return (
     <CartContainer>
       <BusinessItemAccordion
@@ -80,8 +96,10 @@ const CartUI = (props) => {
         moment={momentFormatted}
         isProducts={isProducts}
         isValidProducts={cart?.valid_products}
+        handleClearProducts={handleClearProducts}
+        handleStoreRedirect={handleStoreRedirect}
       >
-        {cart?.products?.length && cart?.products.map(product => (
+        {cart?.products?.length > 0 && cart?.products.map(product => (
           <ProductItemAccordion
             key={product.code}
             isCartProduct

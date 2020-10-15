@@ -83,3 +83,14 @@ export const formatUrlVideo = (url) => {
   const id = (match && match[7].length === 11) ? match[7] : false
   return `https://www.youtube-nocookie.com/embed/${id}`
 }
+
+/**
+ * Function to convert delivery time in minutes
+ * @param {string} time business delivery time
+ */
+export const convertHoursToMinutes = (time) => {
+  if (!time) return '0min'
+  const [hour, minute] = time.split(':')
+  const result = (parseInt(hour, 10) * 60) + parseInt(minute, 10)
+  return `${result}min`
+}
