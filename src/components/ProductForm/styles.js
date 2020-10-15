@@ -3,9 +3,7 @@ import styled from 'styled-components'
 
 export const ProductContainer = styled.div`
   display: flex;
-  height: 80vh;
-  padding: 10px 0px;
-  padding-left: 15px;
+  max-height: 80vh;
   position: relative;
 
   @media (max-width: 1200px) {
@@ -13,12 +11,9 @@ export const ProductContainer = styled.div`
     overflow: auto;
   }
 
-  @media (max-width: 576px) {
-    padding-left: 0px;
-  }
-
   @media (max-width: 480px) {
     height: 90vh;
+    max-height: 100vh;
   }
 `
 
@@ -87,6 +82,7 @@ export const ProductInfo = styled.div`
 
   @media (max-width: 1200px) {
     width: 100%;
+    padding: 0px;
     h1 {
       text-align: center;
     }
@@ -172,6 +168,7 @@ export const ProductActions = styled.div`
     }
     &.soldout {
       width: 100%;
+      cursor: not-allowed;
     }
   }
 
@@ -214,5 +211,14 @@ export const ProductActions = styled.div`
     div {
       width: 80%;
     }
+  }
+`
+export const SkeletonBlock = styled.div`
+  width: ${({ width }) => width && `${width}%`};
+  border-radius: 16px;
+  margin: auto;
+
+  span {
+    margin-bottom: 10px;
   }
 `

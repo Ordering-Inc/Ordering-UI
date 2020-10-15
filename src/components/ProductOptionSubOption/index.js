@@ -2,6 +2,7 @@ import React from 'react'
 import { ProductOptionSuboption as ProductSubOptionController } from 'ordering-components'
 import { IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/io'
 import { RiCheckboxBlankCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
+import { BiCheckboxSquare, BiCheckbox } from 'react-icons/bi'
 import { BsCircleHalf } from 'react-icons/bs'
 
 import { formatPrice } from '../../utils'
@@ -48,15 +49,23 @@ const ProductOptionSubOptionUI = (props) => {
     <Container onClick={() => toggleSelect()}>
       <WrapperInfo>
         <span>
-          {state?.selected ? (
-            <IoIosRadioButtonOn />
+          {option.max > 1 ? (
+            state?.selected ? (
+              <BiCheckboxSquare />
+            ) : (
+              <BiCheckbox />
+            )
           ) : (
-            <IoIosRadioButtonOff />
+            state?.selected ? (
+              <IoIosRadioButtonOn />
+            ) : (
+              <IoIosRadioButtonOff />
+            )
           )}
         </span>
-        <span>
+        <h3>
           {suboption.name}
-        </span>
+        </h3>
       </WrapperInfo>
       <WrapperActions>
         {option.allow_suboption_quantity && (

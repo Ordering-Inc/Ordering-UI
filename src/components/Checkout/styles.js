@@ -172,7 +172,7 @@ export const CartItem = styled.div`
 `
 
 export const CartItemWrapper = styled.div`
-  width: 80%;
+  width: 60%;
   display: flex;
 `
 
@@ -230,20 +230,24 @@ export const CartItemInfo = styled.div`
     color: #D81212;
     font-weight: bold;
   }
-
-  ${'' /* @media (max-width: 380px) {
-    width: 65%;
-  } */}
 `
 
 export const CartItemActions = styled.div`
-  ${'' /* width: 20%; */}
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
   button {
     cursor: pointer;
+    color: #FFF;
+
+    @media (max-width: 360px) {
+      font-size: 14px;
+    }
+  }
+
+  span {
+    font-weight: bold;
   }
 
   @media (max-width: 576px) {
