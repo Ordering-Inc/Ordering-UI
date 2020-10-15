@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {PageNotFoundContainer} from './styles'
+import { PageNotFoundContainer } from './styles'
 import error404 from '../../../template/assets/images/error404.svg'
 
 export const PageNotFound = () => {
