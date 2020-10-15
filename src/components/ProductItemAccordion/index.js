@@ -190,11 +190,6 @@ export const ProductItemAccordion = (props) => {
             </Button>
           </ProductActions>
         )}
-        {product.comment && (
-          <ProductComment>
-            <span>{product.comment}</span>
-          </ProductComment>
-        )}
         {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => ingredient.selected) && (
           <ul>
             <p>{t('INGREDIENTS', 'Ingredients')}</p>
@@ -213,13 +208,19 @@ export const ProductItemAccordion = (props) => {
                 <ul>
                   {option.suboptions.map(suboption => (
                     <li key={suboption.id}>
-                      {suboption.name} {`[${suboption.position}]`}
+                      {suboption.quantity} - {suboption.name} {`(${suboption.position})`} {formatPrice(suboption.price)}
                     </li>
                   ))}
                 </ul>
               </li>
             ))}
           </ul>
+        )}
+        {product.comment && (
+          <ProductComment>
+            <p>{t('SPECIAL_COMMENT', 'Special Comment')}</p>
+            <h3>{product.comment}</h3>
+          </ProductComment>
         )}
       </AccordionContent>
     </AccordionSection>
