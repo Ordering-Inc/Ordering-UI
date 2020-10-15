@@ -11,4 +11,8 @@ export const CouponContainer = styled.div`
       opacity: 0.5;
     }
   }
+
+  input {
+    width: 50%;
+  }
 `

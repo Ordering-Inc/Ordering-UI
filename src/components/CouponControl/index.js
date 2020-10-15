@@ -41,7 +41,6 @@ const CouponControlUI = (props) => {
       ) : (
         <>
           <Input
-            w={45}
             placeholder={t('DISCOUNT_COUPON', 'Discount coupon')}
             onChange={(e) => onChangeInputCoupon(e.target.value)}
           />

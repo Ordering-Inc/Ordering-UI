@@ -132,6 +132,10 @@ export const BusinessInfo = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  @media (max-width: 480px) {
+    width: 70%;
+  }
 `
 
 export const BusinessTotal = styled.div`
@@ -149,16 +153,8 @@ export const BusinessTotal = styled.div`
     }
   }
 
-  @media (max-width: 410px) {
-    p {
-      font-size: 16px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    p {
-      font-size: 14px;
-    }
+  @media (max-width: 480px) {
+    display: none;
   }
 `
 

@@ -24,83 +24,6 @@ const AccordionStyled = styled.div`
     margin-left: auto;
     transition: transform 0.6s ease;
   }
-
-  div.info {
-    display: flex;
-    align-items: center;
-    width: 65%;
-    h1 {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    p {
-      font-size: 20px;
-      margin: 0px 5px;
-    }
-  }
-
-  div.price {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    div {
-      display: flex;
-    }
-    span {
-      font-weight: bold;
-      font-size: 20px;
-    }
-    p {
-      font-size: 20px;
-      margin: 0px 5px;
-    }
-    svg {
-      cursor: pointer;
-    }
-
-    @media (max-width: 512px) {
-      span,
-      p {
-        font-size: 16px;
-      }
-    }
-
-    @media (max-width: 360px) {
-      span,
-      p {
-        font-size: 14px;
-      }
-    }
-  }
-
-  div.actions {
-    display: flex;
-    justify-content: flex-end;
-    span svg {
-      font-size: 20px;
-      margin-right: 5px;
-      cursor: pointer;
-    }
-    span.delete svg {
-      color: #D81212;
-    }
-    span.edit svg {
-      color: #F2BB40;
-    }
-  }
-
-  div.error {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-
-    span {
-      font-size: 18px;
-      text-align: right;
-    }
-  }
 `
 
 export const Accordion = (props) => {
@@ -163,25 +86,27 @@ export const ContentInfo = styled.div`
   text-transform: capitalize;
   margin-left: 10px;
   width: 65%;
-  h1.name, span {
+
+  h3 {
+    font-size: 16px;
     margin: 0px;
   }
 
-  h1.name {
-    font-size: 20px;
-  }
-
   span {
-    font-size: 18px;
-    opacity: 0.8;
-  }
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
 
-  @media (max-width: 512px) {
-    h1.name {
-      font-size: 16px;
-    }
-    span {
+    p {
+      margin: 0px;
       font-size: 14px;
+    }
+
+    div svg {
+      font-size: 20px;
+      &:nth-child(1) {
+        margin-right: 3px;
+      }
     }
   }
 `
@@ -189,16 +114,11 @@ export const ContentInfo = styled.div`
 export const AccordionContent = styled.div`
   overflow: hidden;
   transition: max-height 0.6s ease;
-  ul {
-    list-style-type: none;
-    p {
-      font-weight: bold;
-      margin-bottom: 0px;
-    }
+  width: 80%;
+  margin: auto;
 
-    li.ingredient {
-      padding-left: 40px;
-    }
+  @media (max-width: 480px) {
+    width: 100%;
   }
 `
 
@@ -206,18 +126,6 @@ export const AccordionText = styled.div`
   font-weight: 400;
   font-size: 14px;
   padding: 18px;
-`
-
-export const ProductActions = styled.div`
-  display: flex;
-  justify-content: center;
-
-  button:disabled {
-    opacity: 0.5;
-  }
-  > * {
-    margin: 5px;
-  }
 `
 
 export const ProductComment = styled.div`
@@ -235,5 +143,127 @@ export const ProductComment = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+`
+
+export const ProductInfo = styled.div`
+  display: flex;
+  align-items: center;
+  width: 70%;
+
+  h1,
+  h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  p {
+    font-size: 20px;
+    margin: 0px 5px;
+  }
+
+  @media (max-width: 480px) {
+    width: 80%;
+  }
+
+  @media (max-width: 410px) {
+    width: 100%;
+  }
+`
+
+export const ProductError = styled.div`
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    font-size: 18px;
+    text-align: right;
+  }
+`
+
+export const ProductActions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
+
+export const ProductActionsEdit = styled.span`
+  svg {
+    font-size: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+`
+
+export const ProductActionsDelete = styled(ProductActionsEdit)``
+
+export const ProductPriceSection = styled.div`
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @media (max-width: 480px) {
+    width: 20%;
+  }
+`
+
+export const ProductPrice = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  p,
+  span {
+    font-size: 20px;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  p {
+    margin: 0px 5px;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+
+  @media (max-width: 512px) {
+    span,
+    p {
+      font-size: 14px;
+    }
+  }
+`
+
+export const ProductSelect = styled.select`
+  width: 42px;
+  height: 50px;
+  border: 0;
+  background-color: transparent;
+  font-size: 18px;
+`
+
+export const ProductNotAvailable = styled.span`
+  color: #D81212;
+`
+
+export const ProductOptionsList = styled.ul`
+  list-style-type: none;
+
+  .suboption {
+    margin-left: -25px;
+  }
+
+  p {
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+
+  li.ingredient {
+    padding-left: 15px;
   }
 `

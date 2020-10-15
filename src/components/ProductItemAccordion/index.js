@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { TiPencil, IoIosArrowDown, VscTrash } from 'react-icons/all'
 import { useLanguage, useOrder } from 'ordering-components'
-
-import { Button } from '../../styles/Buttons'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { formatPrice } from '../../utils'
 
@@ -13,8 +12,17 @@ import {
   WrapperProductImage,
   ProductImage,
   ContentInfo,
+  ProductComment,
+  ProductInfo,
+  ProductError,
   ProductActions,
-  ProductComment
+  ProductActionsEdit,
+  ProductActionsDelete,
+  ProductPriceSection,
+  ProductPrice,
+  ProductNotAvailable,
+  ProductSelect,
+  ProductOptionsList
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -29,6 +37,7 @@ export const ProductItemAccordion = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
+  const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -73,82 +82,113 @@ export const ProductItemAccordion = (props) => {
     }
   }
 
+  const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
+    const pos = position ? `(${position})` : ''
+    return `${quantity} x ${name} ${pos} +${price}`
+  }
+
   return (
     <AccordionSection>
       <Accordion isValid={product?.valid ?? true} className={`accordion ${setActive}`}>
-        <div className='info' onClick={toggleAccordion}>
-          <p>{product.quantity}</p>
-          <WrapperProductImage>
+        <ProductInfo>
+          <ProductSelect
+            value={product.quantity}
+            onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+          >
+            {[...Array(getProductMax(product) + 1)].map((v, i) => (
+              <option
+                key={i}
+                value={i}
+                disabled={offsetDisabled(product) < i && i !== 0}
+              >
+                {i === 0 ? 'Remove' : i}
+              </option>
+            ))}
+          </ProductSelect>
+          <WrapperProductImage onClick={toggleAccordion}>
             <ProductImage bgimage={product.images || 'https://picsum.photos/78/80'} />
           </WrapperProductImage>
           <ContentInfo>
-            <h1 className='name'>{product.name}</h1>
-          </ContentInfo>
-        </div>
-        {!product?.valid_menu && isCartProduct && (
-          <div className='error'>
-            <div className='actions'>
-              <span
-                className='delete'
-                onClick={() => onDeleteProduct(product)}
-                disabled={orderState.loading}
-              >
-                <VscTrash />
+            <h3 onClick={toggleAccordion}>{product.name}</h3>
+            {windowSize.width <= 410 && (
+              <span>
+                <p onClick={toggleAccordion}>{formatPrice(product.total || product.price)}</p>
+                <div>
+                  <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
+                  <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
+                </div>
               </span>
-            </div>
-            <span style={{ color: '#D81313' }}>{t('PRODUCT_QUANTITY_ERROR', 'Not available')}</span>
-          </div>
-        )}
-        {isCartProduct && product?.valid_menu && !product?.valid_quantity && (
-          <div className='error'>
-            <div className='actions'>
-              <span
-                className='edit'
-                onClick={() => onEditProduct(product)}
-                disabled={orderState.loading}
-              >
-                <TiPencil />
-              </span>
-              <span
-                className='delete'
-                onClick={() => onDeleteProduct(product)}
-                disabled={orderState.loading}
-              >
-                <VscTrash />
-              </span>
-            </div>
-            <span style={{ color: '#D81313' }}>{t('PRODUCT_QUANTITY_ERROR', 'Not available')}</span>
-          </div>
-        )}
-        {(product?.valid || !isCartProduct) && (
-          <div className='price'>
-            {isCartProduct && (
-              <div className='actions'>
-                <span
-                  className='edit'
-                  onClick={() => onEditProduct(product)}
-                  disabled={orderState.loading}
-                >
-                  <TiPencil />
-                </span>
-                <span
-                  className='delete'
-                  onClick={() => onDeleteProduct(product)}
-                  disabled={orderState.loading}
-                >
-                  <VscTrash />
-                </span>
-              </div>
             )}
-            <div style={{ width: '100%', justifyContent: 'flex-end' }} onClick={toggleAccordion}>
-              <span className='product-price'>{formatPrice(product.total || product.price)}</span>
+          </ContentInfo>
+        </ProductInfo>
+
+        {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
+          <ProductPriceSection>
+            <ProductPrice onClick={toggleAccordion}>
+              <span>
+                {formatPrice(product.total || product.price)}
+              </span>
               {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || isCartProduct || product.comment) && (
-                <p>
+                <p onClick={toggleAccordion}>
                   <IoIosArrowDown className={`${setRotate}`} />
                 </p>
               )}
-            </div>
-          </div>
+            </ProductPrice>
+            {isCartProduct && (
+              <ProductActions>
+                <ProductActionsEdit
+                  onClick={() => onEditProduct(product)}
+                  disabled={orderState.loading}
+                >
+                  <TiPencil color='#F2BB40' />
+                </ProductActionsEdit>
+                <ProductActionsDelete
+                  onClick={() => onDeleteProduct(product)}
+                  disabled={orderState.loading}
+                >
+                  <VscTrash color='#D81212' />
+                </ProductActionsDelete>
+              </ProductActions>
+            )}
+          </ProductPriceSection>
+        )}
+
+        {isCartProduct && product?.valid_menu && !product?.valid_quantity && (
+          <ProductError>
+            <ProductActions>
+              <ProductActionsEdit
+                onClick={() => onEditProduct(product)}
+                disabled={orderState.loading}
+              >
+                <TiPencil color='#F2BB40' />
+              </ProductActionsEdit>
+              <ProductActionsDelete
+                onClick={() => onDeleteProduct(product)}
+                disabled={orderState.loading}
+              >
+                <VscTrash color='#D81212' />
+              </ProductActionsDelete>
+            </ProductActions>
+            <ProductNotAvailable>
+              {t('PRODUCT_QUANTITY_ERROR', 'Not available')}
+            </ProductNotAvailable>
+          </ProductError>
+        )}
+
+        {!product?.valid_menu && isCartProduct && (
+          <ProductError>
+            <ProductActions>
+              <ProductActionsDelete
+                onClick={() => onDeleteProduct(product)}
+                disabled={orderState.loading}
+              >
+                <VscTrash color='#D81212' />
+              </ProductActionsDelete>
+            </ProductActions>
+            <ProductNotAvailable>
+              {t('PRODUCT_QUANTITY_ERROR', 'Not available')}
+            </ProductNotAvailable>
+          </ProductError>
         )}
       </Accordion>
 
@@ -156,63 +196,36 @@ export const ProductItemAccordion = (props) => {
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
       >
-        {isCartProduct && (
-          <ProductActions>
-            <Button
-              color='primary'
-              circle
-              onClick={() => handleChangeQuantity(product.quantity - 1)}
-              disabled={orderState.loading || !product.valid}
-            >-
-            </Button>
-            <select
-              value={product.quantity}
-              onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-            >
-              {[...Array(getProductMax(product) + 1).keys()].map((value, i) => (
-                <option
-                  key={i}
-                  value={i}
-                  disabled={offsetDisabled(product) < i && i !== 0}
-                >
-                  {i === 0 ? 'Remove' : i}
-                </option>
-              ))}
-            </select>
-            <Button
-              color='primary'
-              circle
-              onClick={() => changeQuantity(product, product.quantity + 1)}
-              disabled={orderState.loading || !product.valid || getProductMax(product) === product.quantity}
-            >+
-            </Button>
-          </ProductActions>
-        )}
         {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => ingredient.selected) && (
-          <ul>
+          <ProductOptionsList>
             <p>{t('INGREDIENTS', 'Ingredients')}</p>
             {productInfo().ingredients.map(ingredient => ingredient.selected && (
               <li className='ingredient' key={ingredient.id}>
                 <span>{ingredient.name}</span>
               </li>
             ))}
-          </ul>
+          </ProductOptionsList>
         )}
         {productInfo().options.length > 0 && (
-          <ul>
+          <ProductOptionsList>
             {productInfo().options.map(option => (
               <li key={option.id}>
                 <span style={{ fontWeight: 'bold' }}>{option.name}</span>
-                <ul>
+                <ProductOptionsList className='suboption'>
                   {option.suboptions.map(suboption => (
                     <li key={suboption.id}>
-                      {suboption.quantity} - {suboption.name} {`(${suboption.position})`} {formatPrice(suboption.price)}
+                      {getFormattedSubOptionName({
+                        quantity: suboption.quantity,
+                        name: suboption.name,
+                        position: (suboption.position !== 'whole') ? suboption.position : '',
+                        price: formatPrice(suboption.price)
+                      })}
                     </li>
                   ))}
-                </ul>
+                </ProductOptionsList>
               </li>
             ))}
-          </ul>
+          </ProductOptionsList>
         )}
         {product.comment && (
           <ProductComment>
