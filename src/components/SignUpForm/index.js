@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import {
   SignupForm as SignUpController,
@@ -15,7 +16,8 @@ import {
   SocialButtons,
   TitleHeroSide,
   SignUpWith,
-  AlreadyRegistered
+  AlreadyRegistered,
+  SkeletonContainer
 } from './styles'
 
 import logoHeader from '../../../template/assets/images/logo-header.svg'
@@ -116,12 +118,9 @@ const SignUpFormUI = (props) => {
               </Tabs>
             </SignUpWith>
         }
-        {
-          (useChekoutFileds && validationFields.loading) && <p>{t('LOADING_FORM', 'Loading Form...')}</p>
-        }
         <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
           {
-            !(useChekoutFileds && validationFields.loading) && (
+            !(useChekoutFileds && validationFields.loading) ? (
               <>
                 {
                   Object.values(validationFields.fields).map(field => (
@@ -158,6 +157,12 @@ const SignUpFormUI = (props) => {
                     }
                   })}
                 />
+              </>
+            ) : (
+              <>
+                {[...Array(3)].map((item, i) => (
+                  <Skeleton key={i} height={50} />
+                ))}
               </>
             )
           }
