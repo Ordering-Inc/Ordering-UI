@@ -222,5 +222,18 @@ export const ProductActions = styled.div`
 
 export const ProductComment = styled.div`
   padding-left: 40px;
-  margin-top: 5px;
+
+  p {
+    font-weight: bold;
+    margin: 0px;
+  }
+
+  h3 {
+    font-weight: normal;
+    text-transform: capitalize;
+    margin: 0px 20px 0px 40px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `

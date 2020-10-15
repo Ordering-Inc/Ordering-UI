@@ -62,6 +62,9 @@ const BusinessProductsListingUI = (props) => {
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
+      productRedirect({
+        slug: business?.slug
+      })
     }
   }
 
@@ -220,7 +223,7 @@ const BusinessProductsListingUI = (props) => {
       {error && error.length > 0 && (
         <ProductsNotFound>
           {error.map((e, i) => (
-            <p key={i}>ERROR: [{e.message}]</p>
+            <p key={i}>ERROR: [{e?.message || e}]</p>
           ))}
         </ProductsNotFound>
       )}
