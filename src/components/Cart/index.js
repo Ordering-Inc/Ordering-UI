@@ -67,7 +67,6 @@ const CartUI = (props) => {
   }
 
   useEffect(() => {
-    console.log(orderState.carts)
     return () => {
       setConfirm({ ...confirm, open: false })
     }

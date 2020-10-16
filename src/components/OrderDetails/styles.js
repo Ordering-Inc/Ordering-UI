@@ -267,7 +267,6 @@ const StatusBarStyled = styled.div`
 `
 
 export const StatusBar = (props) => {
-  console.log(props)
   return (
     <StatusBarStyled
       {...props}

@@ -264,7 +264,6 @@ export const Checkout = (props) => {
     businessId: cartState.cart?.business_id
   }
 
-  console.log(cartToPay)
   return (
     <>
       {!cartUuid && carts && Object.keys(carts).length === 0 && (
