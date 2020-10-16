@@ -2,15 +2,6 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 import { Button } from '../Buttons'
 
-const theme = {
-  colors: {
-    primary: '#D81313',
-    primaryContrast: '#FFF',
-    secundary: '#9A9A9A',
-    secundaryContrast: '#000'
-  }
-}
-
 export const Input = styled.input`
   background: #FFF;
   color: #BBB;
@@ -25,14 +16,14 @@ export const Input = styled.input`
   }
 
   ${({ w }) => w && css`
-    width: ${w}%
+    width: 20%;
   `}
 
-  ::placeholder,
-  ::-webkit-input-placeholder {
+  &::placeholder,
+  &::-webkit-input-placeholder {
     color: #CBCBCB;
   }
-  :-ms-input-placeholder {
+  &:-ms-input-placeholder {
     color: #CBCBCB;
   }
 `
@@ -85,26 +76,26 @@ export const InputGroupRight = styled(InputGroupLeft)`
 
 export const InputPrimary = styled(Input)`
   background: #FFF;
-  color: ${theme.colors.primary};
-  border-color: ${theme.colors.primary};
+  color: ${props => props.theme.colors.primary};
+  border-color: ${props => props.theme.colors.primary};
 
   &:focus {
-    border-color: ${() => darken(0.1, theme.colors.primary)};
+    border-color: ${props => darken(0.1, props.theme.colors.primary)};
   }
 `
 
 export const InputSecundary = styled(Input)`
   background: #FFF;
-  color: ${theme.colors.secundary};
-  border-color: ${theme.colors.secundary};
+  color: ${props => props.theme.colors.secundary};
+  border-color: ${props => props.theme.colors.secundary};
 
   &:focus {
-    border-color: ${() => darken(0.1, theme.colors.secundary)};
+    border-color: ${props => darken(0.1, props.theme.colors.secundary)};
   }
 `
 export const InputGroupPrimary = styled(InputGroup)`
   & > ${InputGroupLeft} {
-    color: ${theme.colors.primary};
-    border-color: ${theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
+    border-color: ${props => props.theme.colors.primary};
   }
 `

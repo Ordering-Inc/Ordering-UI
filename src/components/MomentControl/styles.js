@@ -24,7 +24,7 @@ export const Day = styled.div`
 
   ${({ selected }) => selected && css`
     font-weight: bold;
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
   `}
 
 
@@ -66,7 +66,7 @@ export const Hour = styled.div`
   margin-bottom: 5px;
 
   ${({ selected }) => selected && css`
-    border-color: #D81212;
-    color: #D81212;
+    border-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
   `}
 `
