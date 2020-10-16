@@ -24,11 +24,11 @@ export const Footer = () => {
         <SocialMedia>
           <h5><strong>{t('FOOTER_QL3_TITLE')}</strong></h5>
           <div>
-            <SocialIcon><AiOutlineFacebook href={t('FOOTER_QL3_1_HREF')} /></SocialIcon>
-            <SocialIcon><AiOutlineInstagram href={t('FOOTER_QL3_2_HREF')} /></SocialIcon>
-            <SocialIcon><AiOutlineTwitter href={t('FOOTER_QL3_3_HREF')} /></SocialIcon>
-            <SocialIcon><AiOutlineYoutube href={t('FOOTER_QL3_4_HREF')} /></SocialIcon>
-            <SocialIcon><AiOutlineWhatsApp href={t('FOOTER_QL3_5_HREF')} /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_1_HREF')}><AiOutlineFacebook /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_2_HREF')}><AiOutlineInstagram /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_3_HREF')}><AiOutlineTwitter /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_4_HREF')}><AiOutlineYoutube /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_5_HREF')}><AiOutlineWhatsApp /></SocialIcon>
           </div>
         </SocialMedia>
         <Copy>
