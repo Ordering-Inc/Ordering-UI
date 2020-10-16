@@ -28,10 +28,8 @@ export const Item = styled.div`
   justify-content: flex-start;
   text-align: center;
   border-radius: 9px;
-  overflow: hidden;
   @media (max-width: 720px){
-    width: 35%;
-    overflow: auto;
+    width: 25%;
   }
 `
 
@@ -48,12 +46,13 @@ export const Details = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 0.9em;
-  overflow: hidden;
   > div {
-     h5 {
+    width: 100%;
+     h3 {
       margin-block-start: 0.1em;
       margin-block-end: 0.1em;
-      text-align: left;
+      text-align: center;
+      overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -65,8 +64,13 @@ export const Details = styled.div`
   > button {
     width: 50%;
     margin: 5px auto;
+    font-size: 0.9em;
   }
-
+  @media (max-width: 980px){
+    button{
+      width: 65%
+    }
+  }
 `
 
 export const CloseUpselling = styled.div`

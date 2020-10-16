@@ -37,8 +37,9 @@ const CartUI = (props) => {
   const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
-  const [openUpselling, setOpenUpselling] = useState(false)
   const [curProduct, setCurProduct] = useState({})
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -57,17 +58,24 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    setOpenUpselling(false)
     history.push(`/checkout/${cart.uuid}`)
     onClickCheckout()
   }
 
+  const handleOpenUpsellingPage = () => {
+    if (!canOpenUpselling) {
+      handleClickCheckout()
+    } else {
+      setOpenUpselling(true)
+    }
+  }
+
   const handleUpsellingPage = () => {
     handleClickCheckout()
+    setOpenUpselling(false)
   }
 
   useEffect(() => {
-    console.log(orderState.carts)
     return () => {
       setConfirm({ ...confirm, open: false })
     }
@@ -152,7 +160,7 @@ const CartUI = (props) => {
           <CheckoutAction>
             <Button
               color='primary'
-              onClick={() => setOpenUpselling(true)}
+              onClick={() => handleOpenUpsellingPage()}
             >
               {t('CHECKOUT', 'Checkout')}
             </Button>
@@ -185,18 +193,14 @@ const CartUI = (props) => {
           onSave={handlerProductAction}
         />
       </Modal>
-      <Modal
-        title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
-        open={openUpselling}
-        onClose={() => handleUpsellingPage(false)}
-        width='70%'
-      >
-        <UpsellingPage
-          businessId={cart.business_id}
-          cartProducts={cart.products}
-          handleUpsellingPage={handleUpsellingPage}
-        />
-      </Modal>
+      <UpsellingPage
+        businessId={cart.business_id}
+        cartProducts={cart.products}
+        handleUpsellingPage={handleUpsellingPage}
+        openUpselling={openUpselling}
+        canOpenUpselling={canOpenUpselling}
+        setCanOpenUpselling={setCanOpenUpselling}
+      />
     </CartContainer>
   )
 }
