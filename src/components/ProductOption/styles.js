@@ -15,9 +15,8 @@ export const WrapHeader = styled.div`
 `
 
 export const Title = styled.h3`
-  font-size: 20px;
+  font-size: 18px;
   margin: 0px;
-  text-transform: capitalize;
 
   @media (max-width: 380px) {
     font-size: 18px;
@@ -29,11 +28,11 @@ export const Title = styled.h3`
 `
 
 export const Flag = styled.span`
-  font-size: 15px;
+  font-size: 14px;
   margin: 0px;
   text-transform: capitalize;
-  color: ${props => props.theme.colors.primary};
-  font-weight: bold;
+  color: #A52121;
+  font-weight: 500;
 
   @media (max-width: 380px) {
     font-size: 13px;

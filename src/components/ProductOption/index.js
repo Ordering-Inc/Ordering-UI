@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductOption as ProductOptionController } from 'ordering-components'
+import { ProductOption as ProductOptionController, useLanguage } from 'ordering-components'
 
 import {
   Container,
@@ -14,13 +14,15 @@ const ProductOptionUI = (props) => {
     option
   } = props
 
-  let maxMin = `(Min: ${option.min} / Max: ${option.max})`
+  const [, t] = useLanguage()
+
+  let maxMin = `(${t('MIN', 'Min')}: ${option.min} / ${t('MAX', 'Max')}: ${option.max})`
   if (option.min === 1 && option.max === 1) {
-    maxMin = '(Required)'
+    maxMin = t('REQUIRED', 'Required')
   } else if (option.min === 0 && option.max > 0) {
-    maxMin = `(Max: ${option.max})`
+    maxMin = `(${t('MAX', 'Max')}: ${option.max})`
   } else if (option.min > 0 && option.max === 0) {
-    maxMin = `(Min: ${option.min})`
+    maxMin = `(${t('MIN', 'Min')}: ${option.min})`
   }
 
   return (
