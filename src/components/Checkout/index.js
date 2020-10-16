@@ -311,6 +311,7 @@ export const Checkout = (props) => {
         title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
         open={openUpselling}
         onClose={() => handleCloseUpsellingPage()}
+        width='70%'
       >
         <UpsellingPage
           businessId={cartToPay.business_id}

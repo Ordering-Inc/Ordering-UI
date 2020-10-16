@@ -188,6 +188,7 @@ const CartUI = (props) => {
         title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
         open={openUpselling}
         onClose={() => handleUpsellingPage(false)}
+        width='70%'
       >
         <UpsellingPage
           businessId={cart.business_id}

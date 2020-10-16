@@ -33,7 +33,7 @@ const UpsellingPageUI = (props) => {
                     </Image>
                     <Details>
                       <div>
-                        <p>{product.name}</p>
+                        <h5 title={product.name}>{product.name}</h5>
                       </div>
                       <p>${product.price}</p>
                       <Button color='primary' onClick={handleAddProductUpselling}>{t('ADD', 'Add')}</Button>
@@ -46,9 +46,9 @@ const UpsellingPageUI = (props) => {
                 )
               }
             </>
-          ) : [...Array(6)].map((item, i) => (
+          ) : [...Array(8)].map((item, i) => (
             <SkeletonContainer key={i}>
-              <Skeleton width={150} height={300} />
+              <Skeleton width={150} height={250} />
             </SkeletonContainer>
           ))
         }

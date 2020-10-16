@@ -6,7 +6,6 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   padding-bottom: 20px;
-  position: relative;
   > button {
     width: 45%;
     margin-top: 20px;
@@ -16,19 +15,17 @@ export const UpsellingContainer = styled.div`
   display: flex;
   flex-wrap:wrap;
   justify-content: center;
-  height: 100%;
-  min-height: 405px;
   overflow: auto;
 `
 
 export const Item = styled.div`
   display: flex;
   border: 1px solid #ccc;
-  width: 25%;
-  margin: 10px;
+  width: 15%;
+  margin: 20px;
   padding: 10px;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   text-align: center;
   border-radius: 9px;
   overflow: hidden;
@@ -40,28 +37,34 @@ export const Item = styled.div`
 
 export const Image = styled.div`
   width: 100%;
-  height: 40%;
   > img{
     width: 100%;
-    height: 100%;
     border-radius: 16px;
   }
 `
 
 export const Details = styled.div`
-  height: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 0.9em;
+  overflow: hidden;
   > div {
-    height: 100%;
-    > p {
+     h5 {
       margin-block-start: 0.1em;
       margin-block-end: 0.1em;
+      text-align: left;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
+  > p{
+    color: #D81313;
+    margin: 10px auto;
+  }
   > button {
-    width: 70%
+    width: 50%;
+    margin: 5px auto;
   }
 
 `
@@ -69,7 +72,6 @@ export const Details = styled.div`
 export const CloseUpselling = styled.div`
   width: 100%;
   text-align: center;
-  top: 84%;
   button{
     width: 40%;
   }
@@ -82,11 +84,11 @@ export const CloseUpselling = styled.div`
 
 export const SkeletonContainer = styled.div`
   display: flex;
-  width: 25%;
-  margin: 10px;
+  width: 15%;
+  margin: 20px;
   padding: 10px;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   text-align: center;
   border-radius: 9px;
   overflow: hidden;
