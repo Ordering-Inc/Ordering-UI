@@ -4,10 +4,10 @@ export const TypeContainer = styled.div`
   display: flex;
   width: 100%;
   overflow-x: auto;
-  justify-content: stretch;
+  justify-content: flex-start;
   text-align: center;
   > div{
-    flex: 1;
+    margin: 0 auto;
     > div {
     text-overflow: ellipsis;
     white-space: nowrap;
