@@ -104,7 +104,7 @@ export const BusinessInfoItem = styled.div`
           color: #FFC917;
         }
         &.popup {
-          color: #D81313;
+          color: ${props => props.theme.colors.primary};
           cursor: pointer;
         }
       }

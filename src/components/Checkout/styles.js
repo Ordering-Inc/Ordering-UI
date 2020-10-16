@@ -227,7 +227,7 @@ export const CartItemInfo = styled.div`
   p {
     font-size: 15px;
     opacity: 0.8;
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
     font-weight: bold;
   }
 `

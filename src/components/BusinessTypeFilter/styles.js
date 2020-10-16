@@ -33,7 +33,7 @@ export const ImageContainer = styled.div`
     }
      ${({ active }) => active && css`
       img {
-        border-color: #D81313;
+        border-color: ${props => props.theme.colors.primary};
       }
   `}
   ${({ load }) => !load && css`

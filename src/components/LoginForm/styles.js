@@ -47,8 +47,8 @@ export const HeroSide = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  background: #d81212;
+  color: ${props => props.theme.colors.primaryContrast};
+  background: ${props => props.theme.colors.primary};
   z-index: 100;
   text-align: center;
   flex: 1;
@@ -102,7 +102,7 @@ export const FormSide = styled.div`
   }
   a {
     text-decoration: none;
-    color: #d81212;
+    color: ${props => props.theme.colors.primary};
   }
   @media (min-width: 980px) {
     width: 40%;
@@ -127,7 +127,7 @@ export const SocialIcons = styled.div`
   flex-direction: column;
   
   > * {
-    color: #d81212;
+    color: ${props => props.theme.colors.primary}
 
     /*width: 42px;
     height: 42px;

@@ -55,7 +55,7 @@ export const HomeTitle = styled.div`
     font-weight: bold;
   }
   span {
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
   }
   @media (max-width: 480px) {
     h2 {
@@ -100,7 +100,7 @@ export const StepsBlock = styled.div`
 //   margin: 0 auto;
 //   padding-top: 15px;
 //   position: relative;
-//   background: #D81212;
+//   background: ${props => props.theme.colors.primary};
 //   color: white;
 //   font-size: 11px;
 //   letter-spacing: 0.2em;
@@ -172,7 +172,7 @@ export const TextContent = styled.div`
   width: 50%;
   div {
     h2 > span {
-      color: #D81212;
+      color: ${props => props.theme.colors.primary};
     }
   }
   &.center {
@@ -234,7 +234,7 @@ export const Icons = styled.div`
   }
   svg {
     font-size: 4em;
-    fill: #D81212;
+    fill: ${props => props.theme.colors.primary};
   }
 `
 export const HomeFooter = styled.div`

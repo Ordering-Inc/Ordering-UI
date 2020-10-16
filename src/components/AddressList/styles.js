@@ -39,7 +39,7 @@ export const AddressItem = styled.li`
       cursor: pointer;
       margin-right: 10px;
       &.radio {
-        color: #D81212;
+        color: ${props => props.theme.colors.primary};
         font-size: 24px;
       }
 

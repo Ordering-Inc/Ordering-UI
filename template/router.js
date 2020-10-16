@@ -32,11 +32,16 @@ import { ThemeProvider } from '../src/contexts/ThemeContext'
 
 const theme = {
   fonts: {
-    primary: 'Nunito',
+    primary: 'Poppins',
     special: 'Lobster'
   },
   colors: {
-    // primary
+    primary: '#4C72BA',
+    primaryContrast: '#333333',
+    secundary: '#EFEFEF',
+    secundaryContrast: '#000',
+    disabled: '#CBCBCB',
+    disabledContast: '#000'
   }
 }
 

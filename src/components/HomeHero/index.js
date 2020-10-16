@@ -70,7 +70,7 @@ export const HomeHero = (props) => {
       </ContentWrapper>
 
       <Modal
-        title={t('ADDRESS')}
+        title={t('ADDRESS', 'Address')}
         open={modals.formOpen}
         closeOnBackdrop={false}
         onClose={() => setModals({ ...modals, formOpen: false })}
@@ -84,7 +84,7 @@ export const HomeHero = (props) => {
         />
       </Modal>
       <Modal
-        title={t('ADDRESSES')}
+        title={t('ADDRESSES', 'Addresses')}
         open={modals.listOpen}
         closeOnBackdrop={false}
         onClose={() => setModals({ ...modals, listOpen: false })}
@@ -97,9 +97,9 @@ export const HomeHero = (props) => {
       </Modal>
 
       <Alert
-        title={t('SEARCH')}
+        title={t('SEARCH', 'Search')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}

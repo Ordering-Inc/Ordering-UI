@@ -1,23 +1,36 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const HeroContainer = styled.div`
+export const HeroContainerStyled = styled.div`
   width: 100%;
-  /* uncomment if there is a header */
-  /* height: calc(100vh - 45px); */
   height: 100vh;
   button{
     padding-top: 5px;
     padding-bottom: 5px;
   }
   ${({ bgimage }) => bgimage && css`
-    background-image: url(${bgimage});
     background-repeat: no-repeat, repeat;
-    width: 100%;
     background-size: cover;
     object-fit: cover;
     background-position: center;
     min-height: 500px;
-  `}`
+  `}
+`
+
+export const HeroContainer = (props) => {
+  const style = {}
+  if (props.bgimage && !props.isClosed) {
+    style.backgroundImage = `url(${props.bgimage})`
+  } else {
+    style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage})`
+  }
+
+  return (
+    <HeroContainerStyled {...props} style={style}>
+      {props.children}
+    </HeroContainerStyled>
+  )
+}
 
 export const ContentWrapper = styled.div`
     display: flex;

@@ -46,8 +46,8 @@ export const HeroSide = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  background: #d81212;
+  color: ${props => props.theme.colors.primaryConstrast};
+  background: ${props => props.theme.colors.primary};
   z-index: 100;
   text-align: center;
   font-size: 1.5em;
@@ -100,7 +100,7 @@ export const FormSide = styled.div`
   }
   a {
     text-decoration: none;
-    color: #d81212;
+    color: ${props => props.theme.colors.primary};
   }
   @media (min-width: 980px) {
     width: 40%;
@@ -121,11 +121,11 @@ export const SocialIcons = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   > * {
-    color: #d81212;
+    color: ${props => props.theme.colors.primary};
     width: 42px;
     height: 42px;
     margin: 25px;
-    border: 3px solid #d81212;
+    border: 3px solid ${props => props.theme.colors.primary};
     border-radius: 100%;
     cursor: pointer;
   }

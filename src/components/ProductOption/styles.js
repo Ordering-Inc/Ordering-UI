@@ -32,7 +32,7 @@ export const Flag = styled.span`
   font-size: 15px;
   margin: 0px;
   text-transform: capitalize;
-  color: #A52121;
+  color: ${props => props.theme.colors.primary};
   font-weight: bold;
 
   @media (max-width: 380px) {

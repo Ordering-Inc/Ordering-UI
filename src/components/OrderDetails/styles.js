@@ -43,7 +43,7 @@ export const Header = (props) => {
 }
 
 export const HeaderInfo = styled.div`
-  background-color: #D81212;
+  background-color: ${props => props.theme.colors.primary};
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -83,7 +83,7 @@ export const HeaderLogo = styled.div`
 
 export const HeaderText = styled.div`
   display: flex;
-  color: #FFF;
+  color: ${props => props.theme.colors.primaryContrast};
   text-align: center;
   margin: 0px 20px;
 
@@ -263,13 +263,15 @@ export const OrderData = styled.div`
 const StatusBarStyled = styled.div`
   height: 7px;
   margin: 10px 0px 0px;
+  background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
 `
 
 export const StatusBar = (props) => {
+  console.log(props)
   return (
     <StatusBarStyled
       {...props}
-      style={{ background: `linear-gradient(to right, #D81212 ${props.percentage}%,#BFBFBF ${props.percentage}%)` }}
+      // style={{ background: `linear-gradient(to right, #D81212 ${props.percentage}%, #BFBFBF ${props.percentage}%)` }}
     >
       {props.children}
     </StatusBarStyled>
@@ -284,8 +286,8 @@ export const OrderStatus = styled.div`
   flex-direction: column;
   span {
     padding: 5px 10px;
-    border: 1px solid #D81212;
-    color: #D81212;
+    border: 1px solid ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
     text-align: center;
     border-radius: 10px;
     font-weight: bold;
@@ -411,7 +413,7 @@ export const OrderBill = styled.div`
       }
       td:nth-child(2) {
         font-weight: bold;
-        color: #D81212;
+        color: ${props => props.theme.colors.primary};
         padding-top: 10px;
       }
     }
@@ -447,7 +449,7 @@ export const FootActions = styled.div`
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
     cursor: pointer;
     font-weight: bold;
   }

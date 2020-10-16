@@ -13,7 +13,7 @@ export const Container = styled.div`
   span:nth-child(1) {
     margin-right: 10px;
     svg {
-      color: #D81212;
+      color: ${props => props.theme.colors.primary};
       font-size: 25px;
     }
   }
