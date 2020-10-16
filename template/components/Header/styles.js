@@ -82,6 +82,15 @@ export const Menu = styled.div`
       display: none;
     }
   }
+
+  @media (max-width: 380px) {
+    > * {
+      margin: 0px 1px;
+    }
+    > :last-child {
+      margin-right: 2px;
+    }
+  }
 `
 
 export const MenuItem = styled.div`

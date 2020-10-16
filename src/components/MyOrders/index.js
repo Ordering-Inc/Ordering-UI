@@ -34,6 +34,11 @@ import { Button } from '../../styles/Buttons'
 export const MyOrdersUI = (props) => {
   const { activeOrders, previousOrders } = props
   const [, t] = useLanguage()
+  const googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+  const getGoogleMapImage = ({ lat, lng }) => {
+    return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${googleMapKey}`
+  }
+
   return (
     <>
       <ProfileOptions value='My Orders' />
@@ -53,10 +58,10 @@ export const MyOrdersUI = (props) => {
                 )}
               </MyOrdersTitle>
               <ActiveOrders>
-                {!activeOrders.loading ? activeOrders.orders.map((order) => (
+                {!activeOrders.loading ? activeOrders.orders.map(order => (
                   <Card key={order.id}>
                     <Map>
-                      <img src={`https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${order.business.location.lat},${order.business.location.lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${order.business.location.lat},${order.business.location.lng}&key=AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk`} />
+                      <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' />
                     </Map>
                     <Content>
                       <Logo>

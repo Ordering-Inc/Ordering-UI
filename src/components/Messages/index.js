@@ -10,8 +10,6 @@ import {
   Image,
   Chat,
   BubbleCustomer,
-  BubbleBusines,
-  MessageBusiness,
   MessageCustomer,
   SendForm,
   Send,
@@ -67,19 +65,6 @@ export const MessagesUI = (props) => {
     }
     reader.onerror = error => {
       console.log(error)
-    }
-  }
-
-  const getRole = (level) => {
-    switch (level) {
-      case 0:
-        return 'admin'
-      case 2:
-        return 'business'
-      case 4:
-        return 'driver'
-      default:
-        return 'Customer'
     }
   }
 
@@ -156,8 +141,10 @@ export const MessagesUI = (props) => {
         <Chat>
           <MessageConsole>
             <BubbleConsole>
-              {t('ORDER_PLACED_FOR', 'Order placed for')} {order.created_at} {t('VIA', 'via')} {order.app_id}
-              <p>{moment(order.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+              {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+              <strong>{moment.utc(order.created_at).format('YYYY/MM/DD hh:mm A')}</strong> {' '}
+              {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
+              <p>{moment.utc(order.created_at).fromNow()}</p>
             </BubbleConsole>
           </MessageConsole>
           {messages?.messages.map((message) => (
@@ -165,7 +152,9 @@ export const MessagesUI = (props) => {
               {message.type === 1 && (
                 message.change?.attribute !== 'driver_id' ? (
                   <BubbleConsole>
-                    {t('ORDER', 'Order')} <strong>{message.change.attribute} </strong> {t('CHANGED_FROM', 'Changed from')} {' '}
+                    {t('ORDER', 'Order')}
+                    <strong>{message.change.attribute} </strong>
+                    {t('CHANGED_FROM', 'Changed from')} {' '}
                     {message.change.old !== null && (
                       <>
                         <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
@@ -174,14 +163,16 @@ export const MessagesUI = (props) => {
                     <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
                     <p>
                       {
-                        moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()
+                        moment.utc(message.created_at).fromNow()
                       }
                     </p>
                   </BubbleConsole>
                 ) : (
                   <BubbleConsole>
-                    <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong> {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')} {message.comment && (<><br /> {message.comment.length}</>)}
-                    <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+                    <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                    {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                    {message.comment && (<><br /> {message.comment.length}</>)}
+                    <p>{moment.utc(message.created_at).fromNow()}</p>
                   </BubbleConsole>
                 )
               )}
@@ -193,7 +184,7 @@ export const MessagesUI = (props) => {
                 <MessageCustomer>
                   <BubbleCustomer>
                     {message.comment}
-                    <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+                    <p>{moment.utc(message.created_at).fromNow()}</p>
                   </BubbleCustomer>
                 </MessageCustomer>
               )}
@@ -202,12 +193,12 @@ export const MessagesUI = (props) => {
                   {message.comment && (
                     <BubbleCustomer>
                       {message.comment}
-                      <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+                      <p>{moment.utc(message.created_at).fromNow()}</p>
                     </BubbleCustomer>
                   )}
                   <BubbleCustomer>
                     <img src={message.source} width='200px' height='150px' />
-                    <p>{moment(message.created_at, 'YYYY-MM-DD hh:mm:ss').fromNow()}</p>
+                    <p>{moment.utc(message.created_at).fromNow()}</p>
                   </BubbleCustomer>
                 </MessageCustomer>
               )}
@@ -219,11 +210,26 @@ export const MessagesUI = (props) => {
       )}
       <SendForm>
         <div>
-          <input name='business' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.business} />
+          <input
+            name='business'
+            type='checkbox'
+            onChange={handleCanRead}
+            defaultChecked={canRead.business}
+          />
           <label>{t('BUSINESS', 'Business')}</label>
-          <input name='administrator' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.administrator} />
+          <input
+            name='administrator'
+            type='checkbox'
+            onChange={handleCanRead}
+            defaultChecked={canRead.administrator}
+          />
           <label>{t('ADMINISTRATOR', 'Administrator')}</label>
-          <input name='driver' type='checkbox' onChange={handleCanRead} defaultChecked={canRead.driver} />
+          <input
+            name='driver'
+            type='checkbox'
+            onChange={handleCanRead}
+            defaultChecked={canRead.driver}
+          />
           <label>{t('DRIVER', 'Driver')}</label>
         </div>
         <Send onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -246,7 +252,11 @@ export const MessagesUI = (props) => {
             <BsCardImage />
           </label>
           {image && (
-            <Button circle onClick={removeImage} name='delete'>
+            <Button
+              circle
+              onClick={removeImage}
+              name='delete'
+            >
               {t('DELETE', 'X')}
             </Button>
           )}
@@ -258,7 +268,9 @@ export const MessagesUI = (props) => {
             <FiSend />
             {t('SEND', 'Send')}
           </Button>
-          {sendMessage.loading && <span> {t('SENDING_MESSAGE', 'Sending Message...')}</span>}
+          {sendMessage.loading && (
+            <span> {t('SENDING_MESSAGE', 'Sending Message...')}</span>
+          )}
           {sendMessage.error && (
             <>
               <br />

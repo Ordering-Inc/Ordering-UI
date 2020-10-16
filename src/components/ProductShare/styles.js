@@ -5,12 +5,17 @@ export const IconShare = styled.div`
   position: absolute;
   font-size: 25px;
   right: 14px;
-  top: 2px;
+  top: -11px;
   z-index: 9999995;
 
   svg {
     cursor: pointer;
     color: #D81212;
+  }
+
+  @media (max-width: 1200px) {
+    top: 0px;
+    left: 0px;
   }
 `
 

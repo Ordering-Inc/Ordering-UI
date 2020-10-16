@@ -10,10 +10,15 @@ export const Container = styled.div`
 export const WrapperInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 30%;
 
-  span {
+  h3 {
+    margin: 0px;
     text-transform: capitalize;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: normal;
   }
   span:not(:last-child) {
     margin-right: 10px;
@@ -27,7 +32,7 @@ export const WrapperInfo = styled.div`
 export const WrapperActions = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 50%;
+  width: 70%;
 
   span {
     svg {

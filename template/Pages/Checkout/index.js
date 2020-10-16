@@ -62,6 +62,9 @@ export const CheckoutPage = (props) => {
     },
     handleCheckoutListRedirect: () => {
       history.push('/checkout')
+    },
+    handleStoreRedirect: (slug) => {
+      history.push(`/store/${slug}`)
     }
   }
   return (

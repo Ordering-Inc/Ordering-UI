@@ -40,8 +40,8 @@ export const ProductItemAccordion = (props) => {
 
   const productInfo = () => {
     if (isCartProduct) {
-      const ingredients = Object.values(product.ingredients ?? {})
-      let options = Object.values(product.options ?? {})
+      const ingredients = JSON.parse(JSON.stringify(Object.values(product.ingredients ?? {})))
+      let options = JSON.parse(JSON.stringify(Object.values(product.options ?? {})))
 
       options = options.map(option => {
         option.suboptions = Object.values(option.suboptions ?? {})
@@ -190,11 +190,6 @@ export const ProductItemAccordion = (props) => {
             </Button>
           </ProductActions>
         )}
-        {product.comment && (
-          <ProductComment>
-            <span>{product.comment}</span>
-          </ProductComment>
-        )}
         {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => ingredient.selected) && (
           <ul>
             <p>{t('INGREDIENTS', 'Ingredients')}</p>
@@ -213,13 +208,19 @@ export const ProductItemAccordion = (props) => {
                 <ul>
                   {option.suboptions.map(suboption => (
                     <li key={suboption.id}>
-                      {suboption.name} {`[${suboption.position}]`}
+                      {suboption.quantity} - {suboption.name} {`(${suboption.position})`} {formatPrice(suboption.price)}
                     </li>
                   ))}
                 </ul>
               </li>
             ))}
           </ul>
+        )}
+        {product.comment && (
+          <ProductComment>
+            <p>{t('SPECIAL_COMMENT', 'Special Comment')}</p>
+            <h3>{product.comment}</h3>
+          </ProductComment>
         )}
       </AccordionContent>
     </AccordionSection>

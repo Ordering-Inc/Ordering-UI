@@ -27,6 +27,14 @@ export const Input = styled.input`
   ${({ w }) => w && css`
     width: ${w}%
   `}
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: #CBCBCB;
+  }
+  :-ms-input-placeholder {
+    color: #CBCBCB;
+  }
 `
 
 export const InputGroup = styled.div`
