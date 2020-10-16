@@ -24,6 +24,7 @@ const CartUI = (props) => {
     cart,
     clearCart,
     isProducts,
+    isCartCheckout,
     changeQuantity,
     getProductMax,
     offsetDisabled,
@@ -95,6 +96,7 @@ const CartUI = (props) => {
         isClosed={!cart?.valid_schedule}
         moment={momentFormatted}
         isProducts={isProducts}
+        isCartCheckout={isCartCheckout}
         isValidProducts={cart?.valid_products}
         handleClearProducts={handleClearProducts}
         handleStoreRedirect={handleStoreRedirect}

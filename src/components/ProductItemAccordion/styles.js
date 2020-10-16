@@ -6,6 +6,8 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 10px 0px;
+  background: #FFF;
+  border-bottom: 1px solid #CCC;
 `
 
 const AccordionStyled = styled.div`
@@ -258,9 +260,17 @@ export const ProductOptionsList = styled.ul`
     margin-left: -25px;
   }
 
+  p:nth-child(1) {
+    margin-bottom: 0;
+  }
+
   p {
-    font-weight: bold;
-    margin-bottom: 0px;
+    font-weight: 400;
+    margin: 0px;
+  }
+
+  li span {
+    font-weight: 300;
   }
 
   li.ingredient {

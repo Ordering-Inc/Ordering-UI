@@ -17,7 +17,7 @@ export const AccordionSection = (props) => {
     style.filter = 'brightness(0.4)'
     style.background = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'
   } else {
-    style.background = '#F8F8F8 0% 0% no-repeat padding-box'
+    style.background = '#F8F8F8'
   }
   return (
     <AccordionSectionStyled
@@ -36,7 +36,7 @@ export const Accordion = styled.div`
   cursor: ${({ isClosed }) => isClosed ? 'not-allowed' : 'pointer'};
   transition: background-color 0.6s ease;
   position: relative;
-  margin: 0px 20px;
+  margin: 0px 20px 10px;
 
   .rotate {
     transform: rotate(180deg);
@@ -92,6 +92,7 @@ export const ContentInfo = styled.div`
 
   h1 {
     font-size: 20px;
+    font-weight: 500;
   }
 
   span {
@@ -99,6 +100,7 @@ export const ContentInfo = styled.div`
     opacity: 0.8;
     display: flex;
     align-items: center;
+    font-weight: 300;
     svg {
       margin-right: 3px;
     }
@@ -147,9 +149,10 @@ export const BusinessTotal = styled.div`
   p {
     font-size: 20px;
     margin: 0px 5px;
+    font-weight: 300;
 
     &:nth-child(1) {
-      font-weight: bold;
+      font-weight: 500;
     }
   }
 

@@ -128,7 +128,7 @@ export const ProductItemAccordion = (props) => {
               <span>
                 {formatPrice(product.total || product.price)}
               </span>
-              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || isCartProduct || product.comment) && (
+              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
                 <p onClick={toggleAccordion}>
                   <IoIosArrowDown className={`${setRotate}`} />
                 </p>
@@ -210,16 +210,18 @@ export const ProductItemAccordion = (props) => {
           <ProductOptionsList>
             {productInfo().options.map(option => (
               <li key={option.id}>
-                <span style={{ fontWeight: 'bold' }}>{option.name}</span>
+                <p>{option.name}</p>
                 <ProductOptionsList className='suboption'>
                   {option.suboptions.map(suboption => (
                     <li key={suboption.id}>
-                      {getFormattedSubOptionName({
-                        quantity: suboption.quantity,
-                        name: suboption.name,
-                        position: (suboption.position !== 'whole') ? suboption.position : '',
-                        price: formatPrice(suboption.price)
-                      })}
+                      <span>
+                        {getFormattedSubOptionName({
+                          quantity: suboption.quantity,
+                          name: suboption.name,
+                          position: (suboption.position !== 'whole') ? suboption.position : '',
+                          price: formatPrice(suboption.price)
+                        })}
+                      </span>
                     </li>
                   ))}
                 </ProductOptionsList>

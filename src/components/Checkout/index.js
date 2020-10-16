@@ -161,6 +161,7 @@ const CheckoutUI = (props) => {
             <Cart
               cart={cart}
               isProducts={cart?.products?.length || 0}
+              isCartCheckout
             />
           </CartContainer>
         )}

@@ -18,6 +18,7 @@ import {
 
 export const BusinessItemAccordion = (props) => {
   const {
+    isCartCheckout,
     isClosed,
     moment,
     business,
@@ -41,7 +42,7 @@ export const BusinessItemAccordion = (props) => {
     if (isClosed || !isProducts) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
-      setActive === 'active' ? '0px' : '500px'
+      setActive === 'active' ? '0px' : !isCartCheckout ? '500px' : '2048px'
     )
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
