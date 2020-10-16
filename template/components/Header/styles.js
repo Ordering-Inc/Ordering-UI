@@ -2,15 +2,6 @@ import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Select } from '../../../src/styles/Selects'
 
-const theme = {
-  colors: {
-    primary: '#D81313',
-    primaryContrast: '#FFF',
-    secundary: '#9A9A9A',
-    secundaryContrast: '#000'
-  }
-}
-
 export const Header = styled.div`
   display: flex;
   width: 100%;
@@ -104,8 +95,8 @@ export const MenuLink = styled(Link)`
   color: #333;
 
   ${({ highlight }) => highlight && css`
-    background-color: ${theme.colors.primary};
-    color: ${theme.colors.primaryContrast};
+    background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primaryContrast};
     border-radius: 100px;
     padding: 10px 15px;
   `}
@@ -119,7 +110,7 @@ export const HeaderInvert = styled(Header)`
   & ${Select} {
     background-color: transparent;
     border-color: transparent;
-    color: ${theme.colors.primaryContrast}
+    color: ${props => props.theme.colors.primaryContrast}
   }
 
   & ${MenuLink} {

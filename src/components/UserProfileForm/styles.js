@@ -41,7 +41,7 @@ export const UserImage = styled.div`
 export const Image = styled.div`
   width: 170px;
   height: 170px;
-  border: 2px solid #D81212;
+  border: 2px solid ${props => props.theme.colors.primary};
   border-radius: 100%;
   overflow: hidden;
   padding: 20px;

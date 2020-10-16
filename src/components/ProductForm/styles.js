@@ -1,3 +1,4 @@
+import { lighten } from 'polished'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -105,15 +106,16 @@ export const ProductInfo = styled.div`
 export const ProductEdition = styled.div`
   overflow: auto;
   .error {
-    background-color: #FFC917;
+    background-color: ${lighten(0.58, '#A52121')};
   }
 `
 
 export const SectionTitle = styled.h3`
-  font-size: 20px;
+  font-size: 18px;
   padding: 15px;
   margin: 0px;
-  text-transform: capitalize;
+  font-weight: 600;
+  color: #333333;
   background-color: #F7F7F7;
 `
 
@@ -124,11 +126,19 @@ export const ProductComment = styled.div`
     font-weight: 300;
     margin-bottom: 5px;
   }
-  textarea{
-    font-size: 1.5em;
-    padding: 5px;
-    margin: 1px;
-    border: 1px solid #000
+  textarea {
+    font-size: 16px;
+    font-weight: 300;
+    padding: 10px;
+    /* margin: 1px; */
+    border: 1px solid #CCC;
+    outline: none;
+    color: #555;
+    resize: none;
+
+    &:focus {
+      border-color: #555;
+    }
   }
 `
 

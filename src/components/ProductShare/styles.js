@@ -7,10 +7,11 @@ export const IconShare = styled.div`
   right: 14px;
   top: -11px;
   z-index: 9999995;
+  margin: 0 10px;
 
   svg {
     cursor: pointer;
-    color: #D81212;
+    color: #333;
   }
 
   @media (max-width: 1200px) {
@@ -20,7 +21,7 @@ export const IconShare = styled.div`
 `
 
 export const ShareButtons = styled.div`
-  visibility: ${({ showShareButton }) => showShareButton ? 'initial' : 'hidden'};
+  visibility: ${({ showShareButton }) => showShareButton ? 'visible' : 'hidden'};
   right: 0px;
   top: 28px;
   position: absolute !important;

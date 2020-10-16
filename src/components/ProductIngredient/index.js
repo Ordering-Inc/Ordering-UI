@@ -1,8 +1,8 @@
 import React from 'react'
 import { ProductIngredient as ProductIngredientController } from 'ordering-components'
-import { BiCheckboxSquare, BiCheckbox } from 'react-icons/bi'
 
 import { Container } from './styles'
+import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
 
 const ProductIngredientUI = (props) => {
   const {
@@ -15,9 +15,9 @@ const ProductIngredientUI = (props) => {
     <Container onClick={() => toggleSelect()}>
       <span>
         {state?.selected ? (
-          <BiCheckboxSquare />
+          <MdCheckBox />
         ) : (
-          <BiCheckbox />
+          <MdCheckBoxOutlineBlank disabled />
         )}
       </span>
       <span>

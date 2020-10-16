@@ -16,8 +16,7 @@ import {
   SocialButtons,
   TitleHeroSide,
   SignUpWith,
-  AlreadyRegistered,
-  SkeletonContainer
+  AlreadyRegistered
 } from './styles'
 
 import logoHeader from '../../../template/assets/images/logo-header.svg'
@@ -26,8 +25,6 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
-/** icons for mobile design */
-// import { AiOutlineGoogle, FaApple } from 'react-icons/all'
 import { FacebookLoginButton } from '../FacebookLogin'
 
 const SignUpFormUI = (props) => {
@@ -62,7 +59,7 @@ const SignUpFormUI = (props) => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR')]
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
   }, [formState])
@@ -146,7 +143,7 @@ const SignUpFormUI = (props) => {
                 <Input
                   type='password'
                   name='password'
-                  placeholder={t('FRONT_VISUALS_PASSWORD')}
+                  placeholder={t('PASSWORD', 'Password')}
                   onChange={hanldeChangeInput}
                   required
                   ref={register({
@@ -191,7 +188,7 @@ const SignUpFormUI = (props) => {
       <Alert
         title={t('SIGNUP', 'Sign up')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
