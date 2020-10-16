@@ -6,14 +6,14 @@ import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../Modal'
 
 const UpsellingPageUI = (props) => {
-  const { upsellingProducts, productsList, handleAddProductUpselling, handleUpsellingPage, openUpselling, canOpenUpselling, setCanOpenUpselling } = props
+  const { upsellingProducts, handleAddProductUpselling, handleUpsellingPage, openUpselling, canOpenUpselling, setCanOpenUpselling } = props
   const [, t] = useLanguage()
 
   useEffect(() => {
-    if (upsellingProducts.length) {
+    if (upsellingProducts?.products?.length) {
       setCanOpenUpselling(true)
     }
-  }, [upsellingProducts])
+  }, [upsellingProducts.loading])
 
   return (
     <Modal
@@ -25,10 +25,10 @@ const UpsellingPageUI = (props) => {
       <Container>
         <UpsellingContainer>
           {
-            !productsList.loading ? (
+            !upsellingProducts.loading ? (
               <>
                 {
-                  !productsList.error ? upsellingProducts.map(product => (
+                  !upsellingProducts.error ? upsellingProducts.products.map(product => (
                     <Item key={product.id}>
                       <Image>
                         <img src={product.images} />
@@ -43,7 +43,7 @@ const UpsellingPageUI = (props) => {
                     </Item>
                   )) : (
                     <>
-                      {productsList.message}
+                      {upsellingProducts.message}
                     </>
                   )
                 }
