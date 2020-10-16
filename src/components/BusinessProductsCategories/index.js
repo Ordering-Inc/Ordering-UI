@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
+import { AutoScroll, handleScroll } from '../AutoScroll'
 
 import { CategoriesContainer } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -14,7 +14,7 @@ const BusinessProductsCategoriesUI = (props) => {
     categorySelected
   } = props
 
-  const [width, setWidth] = useState(window.innerWidth)
+  /* const [width, setWidth] = useState(window.innerWidth)
   const [categoriesElement, setCategoriesElement] = useState([])
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const BusinessProductsCategoriesUI = (props) => {
     const element = document.getElementById('categories')
     setCategoriesElement(element)
     handleScroll()
-  }, [isSkeleton, categoriesElement])
+  }, [categoriesElement])
 
   const handleResize = () => {
     setWidth(window.innerWidth)
@@ -61,23 +61,19 @@ const BusinessProductsCategoriesUI = (props) => {
         botonRight.classList.remove('hidden')
       }
     }
-  }
+  } */
 
   return (
-    <CategoriesContainer onScroll={() => handleScroll()} id='container'>
+    <CategoriesContainer onScroll={() => handleScroll('container', 'categories')} id='container'>
       {!isSkeleton ? (
         <Tabs variant='primary' id='categories'>
-          {
-            width < categoriesElement.offsetWidth + 50 ? <BsArrowLeft className='left' onClick={() => scrolling('left')} /> : ''
-          }
-          {categories && categories.length && categories.map(category => category.id !== 0 && ( // delete this validation when PR#59 is merged
-            <Tab className='category' active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
-              {category.name}
-            </Tab>
-          ))}
-          {
-            width < categoriesElement.offsetWidth + 50 ? <BsArrowRight className='right' onClick={() => scrolling()} /> : ''
-          }
+          <AutoScroll categories='categories' container='container' length={categories.length}>
+            {categories && categories.length && categories.map(category => category.id !== 0 && ( // delete this validation when PR#59 is merged
+              <Tab className='category' active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
+                {category.name}
+              </Tab>
+            ))}
+          </AutoScroll>
         </Tabs>
       ) : (
         <Tabs variant='primary'>
