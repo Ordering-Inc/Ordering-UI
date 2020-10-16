@@ -1,19 +1,9 @@
 import styled, { css } from 'styled-components'
-
-const theme = {
-  colors: {
-    primary: '#D81313',
-    primaryContrast: '#FFF',
-    secundary: '#9A9A9A',
-    secundaryContrast: '#000'
-  }
-}
-
 export const Tabs = styled.div`
   display: flex;
   
   ${({ variant }) => variant === 'primary' && css`
-    color: ${theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
   `}
   
 `
@@ -23,6 +13,6 @@ export const Tab = styled.div`
   cursor: pointer;
 
   ${({ active }) => !active && css`
-    color: #CBCBCB ;
+    color: ${props => props.theme.colors.disabled};
   `}
 `

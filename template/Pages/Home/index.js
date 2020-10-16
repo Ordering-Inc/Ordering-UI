@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components'
-import { RiAppleLine } from 'react-icons/ri'
-import { AiOutlineAndroid } from 'react-icons/ai'
+import { AiOutlineAndroid, AiOutlineApple } from 'react-icons/ai'
 import { HomeHero } from '../../../src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
 
@@ -29,7 +28,6 @@ import socialMedia from '../../../template/assets/social-media.png'
 import foodBg from '../../../template/assets/food-bg.png'
 
 export const HomePage = (props) => {
-  const fontName = 'Lobster'
   const [, t] = useLanguage()
   const history = useHistory()
 
@@ -37,33 +35,11 @@ export const HomePage = (props) => {
     history.push('/search')
   }
 
-  const FontHomeTheme = ({ fontName, children }) => {
-    useEffect(() => {
-      if (window.document.getElementById('theme-font-home-title')) {
-        return
-      }
-
-      const fontTheme = window.document.createElement('link')
-      fontTheme.id = 'theme-font-home-title'
-      fontTheme.rel = 'stylesheet'
-      fontTheme.async = true
-      fontTheme.defer = true
-      fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
-
-      window.document.body.appendChild(fontTheme)
-      return () => {
-        fontTheme.remove()
-      }
-    }, [])
-    return children
-  }
-
   return (
     <HomeContainer>
       <HomeHero
         {...props}
         onFindBusiness={handlerFindBusiness}
-        FontHomeTheme={FontHomeTheme}
       />
       <HomeSection bgColor='#F8F8F8' column>
         <HomeTitle>
@@ -102,11 +78,9 @@ export const HomePage = (props) => {
         <TextContent>
           <WrapTextContent>
             <div>
-              <FontHomeTheme fontName={fontName}>
-                <h2>
-                  {t('HOME_CONTENT_TITLE', 'We deliver more than')} <span>{t('HOME_CONTENT_TITLE_HIGHLIGHT', 'food')}</span>
-                </h2>
-              </FontHomeTheme>
+              <h2>
+                {t('HOME_CONTENT_TITLE', 'We deliver more than')} <span>{t('HOME_CONTENT_TITLE_HIGHLIGHT', 'food')}</span>
+              </h2>
               <p>{t('TEXT_CONTENT_PARAGRAPH_1', 'With the largest on-demand network in the industry, you can explore your city, find its hidden hotspots, and watch as we bring your new favorite right to your door.')}</p>
               <p>{t('HOME_CONTENT_PARAGRAPH_2', 'Download the app for iOS or Android for free.')}</p>
             </div>
@@ -118,14 +92,12 @@ export const HomePage = (props) => {
         <TextContent>
           <WrapTextContent>
             <div>
-              <FontHomeTheme fontName={fontName}>
-                <h2>{t('APPS_TITLE', 'Download')} <span>{t('APPS_TITLE_HIGHLIGHT', 'our apps')}</span></h2>
-              </FontHomeTheme>
+              <h2>{t('APPS_TITLE', 'Download')} <span>{t('APPS_TITLE_HIGHLIGHT', 'our apps')}</span></h2>
               <p>{t('APPS_PARAGRAPH_1', 'The best ordering experience on your smartphone.')}</p>
               <p>{t('APPS_PARAGRAPH_2', 'For speedy ordering and delivery updates, get the apps now.')}</p>
             </div>
             <Icons>
-              <RiAppleLine />
+              <AiOutlineApple />
               <AiOutlineAndroid />
             </Icons>
           </WrapTextContent>
@@ -139,9 +111,7 @@ export const HomePage = (props) => {
       <HomeSection bgimage={foodBg}>
         <TextContent className='center'>
           <HomeFooter>
-            <FontHomeTheme fontName={fontName}>
-              <h2>{t('HOME_CONTENT_HERO', 'Something for Everyone')}</h2>
-            </FontHomeTheme>
+            <h2>{t('HOME_CONTENT_HERO', 'Something for Everyone')}</h2>
             <div>
               <Button color='primary'>
                 {t('HOME_CONTENT_HERO_BUTTON', 'View Menu')}

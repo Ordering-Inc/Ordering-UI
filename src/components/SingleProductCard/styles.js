@@ -1,3 +1,4 @@
+import { lighten } from 'polished'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -54,7 +55,7 @@ export const CardInfo = styled.div`
 
   p {
     font-size: 16px;
-    font-weight: font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};
+    font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};
     text-align: left;
 
     display: -webkit-box;
@@ -64,7 +65,7 @@ export const CardInfo = styled.div`
   }
 
   span {
-    color: ${({ soldOut }) => soldOut ? '#A02525' : '#D81212'};
+    color: ${({ soldOut, theme }) => soldOut ? lighten(0.05, theme.colors.primary) : theme.colors.primary};
     font-weight: bold;
     font-size: 15px;
   }

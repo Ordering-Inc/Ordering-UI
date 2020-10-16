@@ -36,7 +36,7 @@ export const Text = styled.h1`
   }
   span {
     font-size: 18px;
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
     margin-left: 5px;
   }
 

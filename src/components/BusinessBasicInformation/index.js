@@ -8,7 +8,7 @@ import { BsExclamationCircle } from 'react-icons/bs'
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 
-import { useOrder } from 'ordering-components'
+import { useLanguage, useOrder } from 'ordering-components'
 
 import { optimizeImage, formatPrice, convertHoursToMinutes } from '../../utils'
 
@@ -29,6 +29,7 @@ export const BusinessBasicInformation = (props) => {
     businessState
   } = props
   const { business, loading } = businessState
+  const [, t] = useLanguage()
 
   const [orderState] = useOrder()
 
@@ -101,7 +102,7 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <p>
                   <VscLocation />
-                  {formatNumber(business?.distance) || 0} KM
+                  {formatNumber(business?.distance) || 0} {t('KM', 'km')}
                 </p>
               ) : (
                 <Skeleton width={70} />

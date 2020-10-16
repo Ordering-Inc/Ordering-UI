@@ -55,7 +55,7 @@ export const PayCard = styled.div`
   }
 
   &.active {
-    border: 1px solid #D81212;
+    border: 1px solid ${props => props.theme.colors.primary};
   }
 
   &:not(.active) {
@@ -75,7 +75,7 @@ export const CardItemContent = styled.div`
   font-weight: bold;
 
   .checks svg {
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
     font-size: 22px;
   }
 
