@@ -7,8 +7,7 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useApi } from 'ordering-components'
-import { createGlobalStyle } from 'styled-components'
+import { useSession, useLanguage, useOrder } from 'ordering-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
@@ -24,82 +23,21 @@ import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import ScrollToTop from '../src/utils/ScrollToTop'
-import { UpsellingPage } from '../src/components/UpsellingPage'
+// import { UpsellingPage } from '../src/components/UpsellingPage'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
-const fontName = 'Nunito'
+import { ThemeProvider } from '../src/contexts/ThemeContext'
 
-const GlobalStyle = createGlobalStyle`
-  /** Mozilla scrollbar*/
-  * {
-    scrollbar-color: #CCC !important;
-    scrollbar-width: thin !important;
+const theme = {
+  fonts: {
+    primary: 'Nunito',
+    special: 'Lobster'
+  },
+  colors: {
+    // primary
   }
-
-  /** Scrollbar for browser based on webkit */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 0px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #CCCCCC;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #AFAFAF;
-  }
-  ::-webkit-scrollbar-thumb:active {
-    background: #6b6b6b;
-  }
-  ::-webkit-scrollbar-track {
-    background: rgba(204, 204, 204, 0.3);
-  }
-
-  body {
-    font-family: '${fontName}', sans-serif;
-    margin: 0;
-    background-color: #F8F8F8;
-    color: #333;
-  }
-
-  .popup-backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 2000;
-  }
-
-  .popup-component {
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`
-
-const FontTheme = ({ fontName, children }) => {
-  useEffect(() => {
-    if (window.document.getElementById('theme-font-styles')) {
-      return
-    }
-
-    const fontTheme = window.document.createElement('link')
-    fontTheme.id = 'theme-font-styles'
-    fontTheme.rel = 'stylesheet'
-    fontTheme.async = true
-    fontTheme.defer = true
-    fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
-
-    window.document.body.appendChild(fontTheme)
-    // return () => {
-    //   fontTheme.remove()
-    // }
-  }, [])
-  return children
 }
 
 export const Router = () => {
@@ -156,8 +94,7 @@ export const Router = () => {
 
   return (
     <BrowserRouter>
-      <GlobalStyle />
-      <FontTheme fontName={fontName}>
+      <ThemeProvider theme={theme}>
         {
           !loaded && (
             <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
@@ -291,7 +228,7 @@ export const Router = () => {
             </>
           )
         }
-      </FontTheme>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

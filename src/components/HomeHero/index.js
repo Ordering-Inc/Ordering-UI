@@ -23,8 +23,7 @@ import { Alert } from '../Confirm'
 
 export const HomeHero = (props) => {
   const {
-    onFindBusiness,
-    FontHomeTheme
+    onFindBusiness
   } = props
 
   const [{ auth }] = useSession()
@@ -32,7 +31,6 @@ export const HomeHero = (props) => {
   const [, t] = useLanguage()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const fontName = 'Lobster'
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -58,9 +56,7 @@ export const HomeHero = (props) => {
   return (
     <HeroContainer bgimage={homeBusiness}>
       <ContentWrapper>
-        <FontHomeTheme fontName={fontName}>
-          <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-        </FontHomeTheme>
+        <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
         <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
         <WrapInput onClick={handleAddressInput} withIcon={locationIcon}>
           <Input type='text' disabled placeholder={orderState?.options?.address?.address || t('TYPE_ADDRESS', 'Type address')} />

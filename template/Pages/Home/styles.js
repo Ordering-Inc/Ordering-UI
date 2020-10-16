@@ -153,7 +153,7 @@ export const ImageContent = styled.div`
 export const WrapTextContent = styled.div`
   padding: 20px;
   h2{
-    font: normal normal normal 64px/80px Lobster;
+    font: normal normal normal 64px/80px ${props => props.theme.fonts.special || 'Georgia'};
   }
   div {
     padding: 0px 70px;
@@ -238,7 +238,7 @@ export const Icons = styled.div`
   }
 `
 export const HomeFooter = styled.div`
-  font: normal normal normal 128px/160px Lobster;
+  font: normal normal normal 128px/160px ${props => props.theme.fonts.special || 'Georgia'};
 `
 
 export const Line = styled.div`

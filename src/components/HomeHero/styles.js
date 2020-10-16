@@ -40,7 +40,7 @@ export const ContentWrapper = styled.div`
 export const Title = styled.h1`
   margin: 0px;
   text-align: left;
-  font: normal normal normal 80px Lobster;
+  font: normal normal normal 80px ${props => props.theme.fonts.special || 'Georgia'};
   letter-spacing: 0px;
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #00000029;
@@ -57,6 +57,7 @@ export const Slogan = styled.p`
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
+  margin-bottom: 15px;
   @media (max-width: 480px) {
     font-size: 18px;
   }
