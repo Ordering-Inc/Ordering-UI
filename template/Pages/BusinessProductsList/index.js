@@ -52,11 +52,13 @@ export const BusinessProductsList = (props) => {
     handleSearchRedirect: () => {
       history.push('/search')
     },
-    onProductRedirect: (params) => {
-      if (!params) {
+    onProductRedirect: ({ slug, category, product }) => {
+      if (!category && !product) {
+        if (history.length <= 2) {
+          return history.push(`/store/${slug}`)
+        }
         return history.go(-1)
       }
-      const { slug, category, product } = params
       return history.push(`/store/${slug}?category=${category}&product=${product}`)
     }
   }

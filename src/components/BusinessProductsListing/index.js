@@ -62,7 +62,9 @@ const BusinessProductsListingUI = (props) => {
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
-      onProductRedirect()
+      onProductRedirect({
+        slug: business?.slug
+      })
     }
   }
 
@@ -70,7 +72,9 @@ const BusinessProductsListingUI = (props) => {
     setModalIsOpen(false)
     handleUpdateInitialRender(false)
     updateProductModal(null)
-    onProductRedirect()
+    onProductRedirect({
+      slug: business?.slug
+    })
   }
 
   const handleScroll = useCallback(() => {
