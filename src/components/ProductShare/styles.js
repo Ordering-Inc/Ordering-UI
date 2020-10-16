@@ -10,7 +10,7 @@ export const IconShare = styled.div`
 
   svg {
     cursor: pointer;
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
   }
 
   @media (max-width: 1200px) {

@@ -25,7 +25,7 @@ export const WrapperInfo = styled.div`
   }
   span svg {
     font-size: 23px;
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
   }
 `
 
@@ -36,7 +36,7 @@ export const WrapperActions = styled.div`
 
   span {
     svg {
-      color: #D81212;
+      color: ${props => props.theme.colors.primary};
       font-size: 20px;
       &.reverse {
         transform: rotate(180deg);

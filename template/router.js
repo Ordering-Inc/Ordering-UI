@@ -8,7 +8,6 @@ import {
   Link
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder } from 'ordering-components'
-import { createGlobalStyle } from 'styled-components'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
@@ -28,53 +27,21 @@ import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
-const fontName = 'Nunito'
+import { ThemeProvider } from '../src/contexts/ThemeContext'
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: '${fontName}', sans-serif;
-    margin: 0;
-    background-color: #F8F8F8;
-    color: #333;
+const theme = {
+  fonts: {
+    primary: 'Poppins',
+    special: 'Lobster'
+  },
+  colors: {
+    primary: '#4C72BA',
+    primaryContrast: '#333333',
+    secundary: '#EFEFEF',
+    secundaryContrast: '#000',
+    disabled: '#CBCBCB',
+    disabledContast: '#000'
   }
-
-  .popup-backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 2000;
-  }
-
-  .popup-component {
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`
-
-const FontTheme = ({ fontName, children }) => {
-  useEffect(() => {
-    if (window.document.getElementById('theme-font-styles')) {
-      return
-    }
-
-    const fontTheme = window.document.createElement('link')
-    fontTheme.id = 'theme-font-styles'
-    fontTheme.rel = 'stylesheet'
-    fontTheme.async = true
-    fontTheme.defer = true
-    fontTheme.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@200;300;400;500;700;800;900&display=swap`
-
-    window.document.body.appendChild(fontTheme)
-    // return () => {
-    //   fontTheme.remove()
-    // }
-  }, [])
-  return children
 }
 
 export const Router = () => {
@@ -100,8 +67,7 @@ export const Router = () => {
 
   return (
     <BrowserRouter>
-      <GlobalStyle />
-      <FontTheme fontName={fontName}>
+      <ThemeProvider theme={theme}>
         {
           !loaded && (
             <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
@@ -186,7 +152,7 @@ export const Router = () => {
                     }
                   </Route>
                   <Route exact path='/password/reset'>
-                          Password reset
+                    Password reset
                   </Route>
                   <Route exact path='/profile'>
                     {auth
@@ -232,7 +198,7 @@ export const Router = () => {
             </>
           )
         }
-      </FontTheme>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

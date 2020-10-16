@@ -10,13 +10,13 @@ export const DriverTipContainer = styled.div`
 export const TipCard = styled.div`
   border-radius: 16px;
   padding: 5px 30px;
-  border: 1px solid #D81212;
+  border: 1px solid ${props => props.theme.colors.primary};
   cursor: pointer;
   text-transform: capitalize;
 
   &.active {
-    background-color: #D81212;
-    color: #FFF;
+    background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primaryContrast};
   }
 
   @media (max-width: 650px) {
