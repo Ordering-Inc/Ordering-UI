@@ -61,8 +61,8 @@ const BusinessLogoStyled = styled.div`
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
+  background-size: contain;
+  object-fit: contain;
   background-position: center;
   min-height: 75px;
   border-radius: 10px;

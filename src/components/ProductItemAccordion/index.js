@@ -22,7 +22,8 @@ import {
   ProductPrice,
   ProductNotAvailable,
   ProductSelect,
-  ProductOptionsList
+  ProductOptionsList,
+  ProductQuantity
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -91,20 +92,26 @@ export const ProductItemAccordion = (props) => {
     <AccordionSection>
       <Accordion isValid={product?.valid ?? true} className={`accordion ${setActive}`}>
         <ProductInfo>
-          <ProductSelect
-            value={product.quantity}
-            onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-          >
-            {[...Array(getProductMax(product) + 1)].map((v, i) => (
-              <option
-                key={i}
-                value={i}
-                disabled={offsetDisabled(product) < i && i !== 0}
-              >
-                {i === 0 ? 'Remove' : i}
-              </option>
-            ))}
-          </ProductSelect>
+          {isCartProduct ? (
+            <ProductSelect
+              value={product.quantity}
+              onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+            >
+              {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                <option
+                  key={i}
+                  value={i}
+                  disabled={offsetDisabled(product) < i && i !== 0}
+                >
+                  {i === 0 ? 'Remove' : i}
+                </option>
+              ))}
+            </ProductSelect>
+          ) : (
+            <ProductQuantity>
+              {product?.quantity}
+            </ProductQuantity>
+          )}
           <WrapperProductImage onClick={toggleAccordion}>
             <ProductImage bgimage={product.images || 'https://picsum.photos/78/80'} />
           </WrapperProductImage>

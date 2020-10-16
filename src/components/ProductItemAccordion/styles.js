@@ -277,3 +277,7 @@ export const ProductOptionsList = styled.ul`
     padding-left: 15px;
   }
 `
+
+export const ProductQuantity = styled.span`
+  margin-right: 5px;
+`
