@@ -82,14 +82,14 @@ export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
-  const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
-  const [ordering] = useApi()
+  // const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
+  // const [ordering] = useApi()
   const [loaded, setLoaded] = useState(!auth)
   const onlineStatus = useOnlineStatus()
 
-  useEffect(() => {
-    getProducts()
-  }, [])
+  // useEffect(() => {
+  //   getProducts()
+  // }, [])
 
   useEffect(() => {
     if (!loaded && !orderStatus.loading) {
@@ -104,31 +104,31 @@ export const Router = () => {
       token: user.session.access_token
     })
   }
-  const getProducts = async () => {
-    try {
-      setProductsList({
-        ...productsList,
-        loading: true
-      })
-      const { content: { result } } = await ordering
-        .businesses(41)
-        .products()
-        .parameters({ type: 1 })
-        .get()
+  // const getProducts = async () => {
+  //   try {
+  //     setProductsList({
+  //       ...productsList,
+  //       loading: true
+  //     })
+  //     const { content: { result } } = await ordering
+  //       .businesses(41)
+  //       .products()
+  //       .parameters({ type: 1 })
+  //       .get()
 
-      setProductsList({
-        ...productsList,
-        loading: false,
-        products: result
-      })
-    } catch (error) {
-      setProductsList({
-        ...productsList,
-        loading: false,
-        error
-      })
-    }
-  }
+  //     setProductsList({
+  //       ...productsList,
+  //       loading: false,
+  //       products: result
+  //     })
+  //   } catch (error) {
+  //     setProductsList({
+  //       ...productsList,
+  //       loading: false,
+  //       error
+  //     })
+  //   }
+  // }
 
   return (
     <BrowserRouter>
@@ -218,7 +218,7 @@ export const Router = () => {
                     }
                   </Route>
                   <Route exact path='/password/reset'>
-                          Password reset
+                    Password reset
                   </Route>
                   <Route exact path='/profile'>
                     {auth
@@ -252,9 +252,9 @@ export const Router = () => {
                   <Route path='/checkout/:cartUuid?'>
                     <CheckoutPage />
                   </Route>
-                  <Route exact path='/upselling_page'>
+                  {/* <Route exact path='/upselling_page'>
                     <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)} />
-                  </Route>
+                  </Route> */}
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />
                   </Route>
