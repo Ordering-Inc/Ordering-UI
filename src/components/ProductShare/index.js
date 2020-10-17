@@ -30,23 +30,27 @@ const ProductShareUI = (props) => {
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [])
 
+  const handleClickShare = () => {
+    updateShowValue(!showShareButton)
+  }
+
   return (
     <>
       <IconShare ref={iconElement}>
-        <FiShare2 onClick={() => updateShowValue(!showShareButton)} />
+        <FiShare2 onClick={handleClickShare} />
+        <ShareButtons
+          ref={contentElement}
+          className='a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style'
+          data-a2a-url={urlToShare}
+          showShareButton={showShareButton}
+        >
+          <a className='a2a_button_facebook' />
+          <a className='a2a_button_whatsapp' />
+          <a className='a2a_button_twitter' />
+          <a className='a2a_button_email' />
+          <a className='a2a_dd' href='https://www.addtoany.com/share' />
+        </ShareButtons>
       </IconShare>
-      <ShareButtons
-        ref={contentElement}
-        className='a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style'
-        data-a2a-url={urlToShare}
-        showShareButton={showShareButton}
-      >
-        <a className='a2a_button_facebook' />
-        <a className='a2a_button_whatsapp' />
-        <a className='a2a_button_twitter' />
-        <a className='a2a_button_email' />
-        <a className='a2a_dd' href='https://www.addtoany.com/share' />
-      </ShareButtons>
     </>
   )
 }

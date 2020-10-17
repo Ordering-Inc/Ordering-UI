@@ -36,8 +36,8 @@ const theme = {
     special: 'Lobster'
   },
   colors: {
-    primary: '#4C72BA',
-    primaryContrast: '#333333',
+    primary: '#D83520',
+    primaryContrast: '#FFF',
     secundary: '#EFEFEF',
     secundaryContrast: '#000',
     disabled: '#CBCBCB',
