@@ -1,33 +1,37 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-const AccordionSectionStyled = styled.div`
+export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   border-bottom: 1px solid #BFBFBF;
-  padding: 10px 0px;
+  /* padding: 10px 0px; */
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
+
+  &:last-child {
+    border-bottom: 0;
+  }
 `
 
-export const AccordionSection = (props) => {
-  const style = {}
-  if (props.isClosed) {
-    style.filter = 'brightness(0.4)'
-    style.background = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'
-  } else {
-    style.background = '#F8F8F8'
-  }
-  return (
-    <AccordionSectionStyled
-      {...props}
-      style={style}
-    >
-      {props.children}
-    </AccordionSectionStyled>
-  )
-}
+// export const AccordionSection = (props) => {
+//   const style = {}
+//   // if (props.isClosed) {
+//   //   style.filter = 'brightness(0.4)'
+//   //   style.background = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'
+//   // } else {
+//   //   style.background = '#F8F8F8'
+//   // }
+//   return (
+//     <AccordionSectionStyled
+//       {...props}
+//       style={style}
+//     >
+//       {props.children}
+//     </AccordionSectionStyled>
+//   )
+// }
 
 export const Accordion = styled.div`
   display: flex;
@@ -36,7 +40,13 @@ export const Accordion = styled.div`
   cursor: ${({ isClosed }) => isClosed ? 'not-allowed' : 'pointer'};
   transition: background-color 0.6s ease;
   position: relative;
-  margin: 0px 20px 10px;
+  /* margin: 0px 20px 10px; */
+  padding: 10px;
+  background: #F8F8F8;
+
+  ${props => props.isClosed && css`
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  `}
 
   .rotate {
     transform: rotate(180deg);

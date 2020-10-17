@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const CouponContainer = styled.div`
-  width: 80%;
-  margin: auto;
+  /* width: 80%; */
+  /* margin: auto; */
   display: flex;
   justify-content: flex-start;
   button {

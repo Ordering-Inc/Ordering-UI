@@ -7,7 +7,7 @@ export const AccordionSection = styled.div`
   width: 100%;
   padding: 10px 0px;
   background: #FFF;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #D9D9D9;
 `
 
 const AccordionStyled = styled.div`
@@ -16,7 +16,7 @@ const AccordionStyled = styled.div`
   justify-content: space-between;
   cursor: pointer;
   transition: background-color 0.6s ease;
-  margin: 0px 20px;
+  margin: 0px 10px;
 
   .rotate {
     transform: rotate(180deg);
@@ -90,8 +90,9 @@ export const ContentInfo = styled.div`
   width: 65%;
 
   h3 {
-    font-size: 16px;
+    font-size: 18px;
     margin: 0px;
+    font-weight: 600;
   }
 
   span {
@@ -218,11 +219,11 @@ export const ProductPrice = styled.div`
 
   p,
   span {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   span {
-    font-weight: bold;
+    font-weight: 500;
   }
 
   p {
@@ -242,11 +243,13 @@ export const ProductPrice = styled.div`
 `
 
 export const ProductSelect = styled.select`
-  width: 42px;
+  width: 55px;
   height: 50px;
   border: 0;
   background-color: transparent;
-  font-size: 18px;
+  font-size: 20px;
+  outline: none;
+  margin-right: 5px;
 `
 
 export const ProductNotAvailable = styled.span`

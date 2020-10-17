@@ -35,7 +35,7 @@ const CartUI = (props) => {
   const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
+  const momentFormatted = !orderState?.option?.moment ? t('ASAP', 'ASAP') : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(null)
