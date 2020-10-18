@@ -219,11 +219,11 @@ const ProductOptionsUI = (props) => {
 
       {modalIsOpen && (
         <Modal
-          title={t('LOGIN')}
           open={modalIsOpen}
           closeOnBackdrop={false}
           onClose={() => closeModal()}
           width='60%'
+          padding='0'
         >
           <LoginForm
             handleSuccessLogin={handleSuccessLogin}
