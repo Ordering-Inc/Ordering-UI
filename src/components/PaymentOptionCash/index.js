@@ -28,9 +28,16 @@ export const PaymentOptionCash = (props) => {
     handleSubmit(() => {})(e)
   }
 
+  /**
+   * effect for disable the place button on component did mount
+   */
   useEffect(() => {
     handleChangeCash()
   }, [])
+
+  /**
+   * effect for disable the place button on errors with cash
+   */
   useEffect(() => {
     handleError()
   }, [errors])
