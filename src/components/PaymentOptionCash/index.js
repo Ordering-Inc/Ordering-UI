@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage } from 'ordering-components'
 
@@ -14,17 +14,33 @@ import { Input } from '../../styles/Inputs'
 export const PaymentOptionCash = (props) => {
   const {
     orderTotal,
-    onChangeData
+    onChangeData,
+    setErrorCash
   } = props
   const [, t] = useLanguage()
 
   const { handleSubmit, register, errors } = useForm()
 
   const handleChangeCash = (e) => {
-    let cash = parseFloat(e.target.value)
+    let cash = parseFloat(e?.target?.value)
     cash = isNaN(cash) ? null : cash
     onChangeData && onChangeData({ cash })
     handleSubmit(() => {})(e)
+  }
+
+  useEffect(() => {
+    handleChangeCash()
+  }, [])
+  useEffect(() => {
+    handleError()
+  }, [errors])
+
+  const handleError = () => {
+    if (errors.cash) {
+      setErrorCash(true)
+    } else {
+      setErrorCash(false)
+    }
   }
 
   return (
