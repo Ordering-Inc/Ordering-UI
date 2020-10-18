@@ -1,16 +1,18 @@
 import React from 'react'
 import { CmsContent, useLanguage } from 'ordering-components'
-import { PageNotFound } from '../PageNotFound'
+import { CmsContainer } from './styles'
+import { NotFoundSource } from '../NotFoundSource'
 const CmsUI = (props) => {
   const {
     loading,
     error,
-    body
+    body,
+    handleCmsRedirect
   } = props
   const [, t] = useLanguage()
 
   return (
-    <div>
+    <CmsContainer>
       {
         loading && t('LOADING', 'Loading...')
       }
@@ -24,9 +26,13 @@ const CmsUI = (props) => {
       }
       {
         (!loading && error) &&
-          <PageNotFound />
+          <NotFoundSource
+            content={t('ERROR_PAGE', 'Sorry, the selected page was not found.')}
+            btnTitle={t('PAGE_REDIRECT', 'Go to pages list')}
+            onClickButton={handleCmsRedirect}
+          />
       }
-    </div>
+    </CmsContainer>
   )
 }
 

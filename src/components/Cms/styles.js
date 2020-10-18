@@ -10,3 +10,7 @@ export const CmsError = styled.div`
     color: #D81212
   }
 `
+
+export const CmsContainer = styled.div`
+  padding: 0 20px;
+`
