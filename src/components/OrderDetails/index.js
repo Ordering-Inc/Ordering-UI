@@ -7,7 +7,6 @@ import { HiOutlineChat } from 'react-icons/hi'
 import { BiCaretUp } from 'react-icons/bi'
 
 import { Button } from '../../styles/Buttons'
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -20,7 +19,6 @@ import {
   WrapperContainer,
   Header,
   HeaderInfo,
-  HeaderLogo,
   HeaderText,
   Content,
   OrderBusiness,
@@ -95,7 +93,6 @@ const OrderDetailsUI = (props) => {
         <WrapperContainer>
           <Header>
             <HeaderInfo>
-              <HeaderLogo bgimage={logoHeader} />
               <HeaderText column>
                 <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
                 <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>

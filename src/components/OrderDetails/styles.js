@@ -46,6 +46,7 @@ export const HeaderInfo = styled.div`
   background-color: ${props => props.theme.colors.primary};
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 50%;
   padding: 20px 20px 30px;
   border-top-left-radius: 16px;
@@ -57,6 +58,10 @@ export const HeaderInfo = styled.div`
 
   @media (max-width: 380px) {
     width: 60%;
+  }
+
+  @media (min-width: 768px) {
+    min-height: 300px;
   }
 `
 
