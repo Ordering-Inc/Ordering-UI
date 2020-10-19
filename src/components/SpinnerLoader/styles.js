@@ -41,7 +41,7 @@ export const Spinner = styled.div`
     height: 108px;
     border-radius: 50%;
     border: 8px solid #000;
-    border-color: #d81212 transparent #d81212 transparent;
+    border-color: ${props => `${props.theme.colors.primary} transparent ${props.theme.colors.primary} transparent`};
     animation: spinner-content 1.8518518518518516s linear infinite;
   }
 
@@ -62,15 +62,15 @@ export const Spinner = styled.div`
     height: 8px;
     top: -8px;
     left: 42px;
-    background: #d81212;
+    background: ${props => props.theme.colors.primary};
     border-radius: 50%;
-    box-shadow: 0 100px 0 0 #d81212;
+    box-shadow: 0 100px 0 0 ${props => props.theme.colors.primary};
   }
 
   .spinner-content > div:nth-child(2) div:after {
     left: -8px;
     top: 42px;
-    box-shadow: 100px 0 0 0 #d81212;
+    box-shadow: 100px 0 0 0 ${props => props.theme.colors.primary};
   }
 
   .spinner {

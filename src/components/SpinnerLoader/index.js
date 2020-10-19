@@ -23,13 +23,11 @@ export const SpinnerLoader = (props) => {
           {content}
         </Content>
       )}
-      <div>
-        <Spinner className='spinner'>
-          <div className='spinner-content'>
-            <div />
-          </div>
-        </Spinner>
-      </div>
+      <Spinner className='spinner'>
+        <div className='spinner-content'>
+          <div />
+        </div>
+      </Spinner>
     </Container>
   )
 }

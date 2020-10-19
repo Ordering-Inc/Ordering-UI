@@ -5,7 +5,7 @@ import {
   SubMenu
 } from './styles'
 
-import { useSession, useLanguage } from 'ordering-components'
+import { useSession, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
 import { useOnlineStatus } from '../../../src/hooks/useOnlineStatus'
 
@@ -23,6 +23,7 @@ export const Header = (props) => {
   const location = useLocation()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
+  const [orderState] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
 
   const handleTogglePopover = (type) => {
@@ -50,7 +51,7 @@ export const Header = (props) => {
       <InnerHeader>
         <LeftHeader>
           <LogoHeader>
-            <Link to='/'>
+            <Link to={orderState.options?.address?.location ? '/search' : '/'}>
               <img src={isHome ? logoHeaderInvert : logoHeader} />
               <img src={logo} />
             </Link>

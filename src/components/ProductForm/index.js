@@ -157,6 +157,7 @@ const ProductOptionsUI = (props) => {
                 <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
                 <textarea
                   rows={4}
+                  placeholder={t('SPECIAL_COMMENT', 'Special comment')}
                   defaultValue={productCart.comment}
                   onChange={handleChangeCommentState}
                   disabled={!(productCart && !isSoldOut && maxProductQuantity)}
