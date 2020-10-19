@@ -203,12 +203,12 @@ export const ProductItemAccordion = (props) => {
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
       >
-        {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => ingredient.selected) && (
+        {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
           <ProductOptionsList>
             <p>{t('INGREDIENTS', 'Ingredients')}</p>
-            {productInfo().ingredients.map(ingredient => ingredient.selected && (
+            {productInfo().ingredients.map(ingredient => !ingredient.selected && (
               <li className='ingredient' key={ingredient.id}>
-                <span>{ingredient.name}</span>
+                <span>{t('NO', 'No')} {ingredient.name}</span>
               </li>
             ))}
           </ProductOptionsList>
