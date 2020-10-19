@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { VscWarning } from 'react-icons/vsc'
 import Skeleton from 'react-loading-skeleton'
 import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage } from 'ordering-components'
-import { Modal } from '../Modal'
 import { UpsellingPage } from '../UpsellingPage'
 
 import {
@@ -48,6 +47,21 @@ const CheckoutUI = (props) => {
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+
+  const handleOpenUpsellingPage = () => {
+    if (!canOpenUpselling) {
+      handlerClickPlaceOrder()
+    } else {
+      setOpenUpselling(true)
+    }
+  }
+
+  const handleUpsellingPage = () => {
+    setOpenUpselling(false)
+    handlerClickPlaceOrder()
+  }
 
   return (
     <Container>
@@ -80,6 +94,7 @@ const CheckoutUI = (props) => {
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
           />
         )}
+
         <UserDetailsContainer>
           <div className='user'>
             {cartState.loading ? (
@@ -171,7 +186,7 @@ const CheckoutUI = (props) => {
             <Button
               color='primary'
               disabled={!cart?.valid || !paymethodSelected || placing}
-              onClick={() => handlerClickPlaceOrder()}
+              onClick={() => handleOpenUpsellingPage()}
             >
               {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}
             </Button>
@@ -184,6 +199,14 @@ const CheckoutUI = (props) => {
           ))
         )} */}
       </WrappContainer>
+      <UpsellingPage
+        businessId={cart.business_id}
+        cartProducts={cart.products}
+        handleUpsellingPage={handleUpsellingPage}
+        openUpselling={openUpselling}
+        canOpenUpselling={canOpenUpselling}
+        setCanOpenUpselling={setCanOpenUpselling}
+      />
     </Container>
   )
 }
@@ -203,21 +226,8 @@ export const Checkout = (props) => {
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
-  const [openUpselling, setOpenUpselling] = useState(false)
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
-
-  const [cartToPay, setCartToPay] = useState({})
-
-  const handleOpenUpsellingPage = (cart) => {
-    setCartToPay(cart)
-    setOpenUpselling(true)
-  }
-
-  const handleCloseUpsellingPage = () => {
-    setOpenUpselling(false)
-    handleCheckoutRedirect(cartToPay.uuid)
-  }
 
   const getOrder = async (cartId) => {
     try {
@@ -236,10 +246,12 @@ export const Checkout = (props) => {
           console.log(error)
         }
       } else {
+        const cart = Array.isArray(result) ? null : result
         setCartState({
           ...cartState,
           loading: false,
-          cart: result
+          cart,
+          error: cart ? null : result
         })
       }
     } catch (e) {
@@ -263,7 +275,6 @@ export const Checkout = (props) => {
     cartState,
     businessId: cartState.cart?.business_id
   }
-
   return (
     <>
       {!cartUuid && carts && Object.keys(carts).length === 0 && (
@@ -293,7 +304,7 @@ export const Checkout = (props) => {
                 {cart.products.length ? (
                   <Button
                     color='primary'
-                    onClick={() => handleOpenUpsellingPage(cart)}
+                    onClick={() => handleCheckoutRedirect(cart.uuid)}
                   >
                     {t('PAY_CART', 'Pay order')}
                   </Button>
@@ -313,24 +324,13 @@ export const Checkout = (props) => {
       )}
       {cartState.error && cartState.error?.length > 0 && (
         <NotFoundSource
-          content={t('ERROR_CART', 'Sorry, an error has occurred.')}
-          btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-          onClickButton={handleSearchRedirect}
+          content={t('ERROR_CART', 'Sorry, the selected cart was not found.')}
+          btnTitle={t('CHECKOUT_REDIRECT', 'Go to Checkout list')}
+          onClickButton={handleCheckoutListRedirect}
         />
       )}
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
-      <Modal
-        title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
-        open={openUpselling}
-        onClose={() => handleCloseUpsellingPage()}
-        width='70%'
-      >
-        <UpsellingPage
-          businessId={cartToPay.business_id}
-          cartProducts={cartToPay.products}
-          handleUpsellingPage={handleCloseUpsellingPage}
-        />
-      </Modal>
+
     </>
   )
 }
