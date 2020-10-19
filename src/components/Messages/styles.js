@@ -112,7 +112,7 @@ export const BubbleCustomer = styled.div`
     margin-block-end: initial;
   }
 `
-export const SendForm = styled.form`
+export const SendForm = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 30px;
@@ -139,6 +139,7 @@ export const Send = styled.form`
         > svg{
           width: 100%;
           height: 100%;
+          cursor: pointer
         }
       
     }

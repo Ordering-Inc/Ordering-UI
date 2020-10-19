@@ -25,9 +25,7 @@ export const MessagesUI = (props) => {
   const {
     order,
     messages,
-    canRead,
     handleSend,
-    setCanRead,
     image,
     sendMessage,
     setImage,
@@ -47,13 +45,6 @@ export const MessagesUI = (props) => {
     const input = document.getElementById('chat_image')
     input.value = ''
     setImage(null)
-  }
-
-  const handleCanRead = e => {
-    setCanRead({
-      ...canRead,
-      [e.target.name]: e.target.checked
-    })
   }
 
   const onChangeImage = e => {
@@ -101,12 +92,12 @@ export const MessagesUI = (props) => {
     }
   }
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     handleSend()
-    setImage('')
-    setMessage('')
+    const input = document.getElementById('message')
+    input.value = ''
   }
-
+  console.log(sendMessage)
   return (
     <MessagesContainer>
       <HeaderProfile>
@@ -209,29 +200,6 @@ export const MessagesUI = (props) => {
         <span>{t('LOADING_MESSAGES', 'Loading Messages...')}</span>
       )}
       <SendForm>
-        <div>
-          <input
-            name='business'
-            type='checkbox'
-            onChange={handleCanRead}
-            defaultChecked={canRead.business}
-          />
-          <label>{t('BUSINESS', 'Business')}</label>
-          <input
-            name='administrator'
-            type='checkbox'
-            onChange={handleCanRead}
-            defaultChecked={canRead.administrator}
-          />
-          <label>{t('ADMINISTRATOR', 'Administrator')}</label>
-          <input
-            name='driver'
-            type='checkbox'
-            onChange={handleCanRead}
-            defaultChecked={canRead.driver}
-          />
-          <label>{t('DRIVER', 'Driver')}</label>
-        </div>
         <Send onSubmit={handleSubmit(onSubmit)} noValidate>
           <Input
             placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
@@ -240,8 +208,9 @@ export const MessagesUI = (props) => {
             ref={register({
               required: !image ? 'Write something' : false
             })}
+            id='message'
           />
-          <label for='chat_image'>
+          <label htmlFor='chat_image'>
             <input
               type='file'
               name='image'
@@ -261,16 +230,24 @@ export const MessagesUI = (props) => {
             </Button>
           )}
           <Button
-            color={(errors.message?.message && !image) ? 'secondary' : 'primary'}
+            color='primary'
+            opacity={(errors.message?.message && !image) || sendMessage.loading ? '0.5' : '1'}
             type='submit'
-            disabled={(errors.message?.message && !image)}
+            disabled={(errors.message?.message && !image) || sendMessage.loading}
+
           >
             <FiSend />
-            {t('SEND', 'Send')}
+            {sendMessage.loading ? (
+              <>
+                {t('SENDING_MESSAGE', 'Sending...')}
+              </>
+            )
+              : (
+                <>
+                  {t('SEND', 'send')}
+                </>)}
           </Button>
-          {sendMessage.loading && (
-            <span> {t('SENDING_MESSAGE', 'Sending Message...')}</span>
-          )}
+
           {sendMessage.error && (
             <>
               <br />
