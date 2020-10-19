@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const IconShare = styled.div`
-  position: fixed;
   position: absolute;
   font-size: 25px;
   right: 14px;
@@ -15,6 +14,7 @@ export const IconShare = styled.div`
   }
 
   @media (max-width: 1200px) {
+    position: sticky;
     top: 0px;
     left: 0px;
   }
@@ -25,4 +25,9 @@ export const ShareButtons = styled.div`
   right: 0px;
   top: 28px;
   position: absolute !important;
+
+  @media (max-width: 1200px) {
+    left: -12px;
+    width: 40px;
+  }
 `

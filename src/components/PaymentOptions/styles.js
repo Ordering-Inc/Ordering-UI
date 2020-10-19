@@ -28,6 +28,7 @@ export const PayCard = styled.div`
   border-radius: 10px;
   margin-right: 10px;
   margin-top: 10px;
+  text-align: center;
 
   @media (max-width: 840px) {
     width: calc(20% - 12px);
