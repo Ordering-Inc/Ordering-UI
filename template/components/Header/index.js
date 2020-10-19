@@ -107,15 +107,15 @@ export const Header = (props) => {
       </InnerHeader>
       {windowSize.width <= 820 && onlineStatus && (
         <SubMenu>
-          <MomentPopover
-            open={openPopover.moment}
-            onClick={() => handleTogglePopover('moment')}
-            onClose={() => handleClosePopover('moment')}
-          />
           <AddressesPopover
             open={openPopover.addresses}
             onClick={() => handleTogglePopover('addresses')}
             onClose={() => handleClosePopover('addresses')}
+          />
+          <MomentPopover
+            open={openPopover.moment}
+            onClick={() => handleTogglePopover('moment')}
+            onClose={() => handleClosePopover('moment')}
           />
         </SubMenu>
       )}

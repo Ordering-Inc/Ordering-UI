@@ -30,20 +30,7 @@ import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { ThemeProvider } from '../src/contexts/ThemeContext'
 
-const theme = {
-  fonts: {
-    primary: 'Poppins',
-    special: 'Lobster'
-  },
-  colors: {
-    primary: '#D83520',
-    primaryContrast: '#FFF',
-    secundary: '#EFEFEF',
-    secundaryContrast: '#000',
-    disabled: '#CBCBCB',
-    disabledContast: '#000'
-  }
-}
+import theme from './theme.json'
 
 export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
@@ -99,141 +86,139 @@ export const Router = () => {
 
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        {
-          !loaded && (
-            <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
-          )
-        }
-        {
-          !onlineStatus && (
-            <>
-              <Header />
-              <NotNetworkConnectivity />
-              <Footer />
-            </>
-          )
-        }
-        {
-          loaded && onlineStatus && (
-            <>
-              <Header />
-              <ScrollToTop>
-                <Switch>
-                  <Route exact path='/home'>
-                    <HomePage />
-                    {/* {
-                            orderStatus.options?.address?.location
-                              ? <Redirect to='/search' />
-                              : <HomePage />
-                          } */}
-                  </Route>
-                  <Route exact path='/'>
-                    {
-                            orderStatus.options?.address?.location
-                              ? <Redirect to='/search' />
-                              : <HomePage />
-                    }
-                  </Route>
-                  <Route exact path='/signup'>
-                    {
-                      !auth
-                        ? (
-                          <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                            useLoginByCellphone
-                            useChekoutFileds
-                            handleSuccessSignup={handleSuccessSignup}
-                          />
-                        )
-                        : <Redirect to='/' />
-                    }
-                  </Route>
-                  <Route exact path='/login'>
-                    {
-                      !auth
-                        ? (
-                          <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                            useLoginByCellphone
-                          />
-                        )
-                        : <Redirect to='/' />
-                    }
-                  </Route>
-                  <Route exact path='/signin'>
-                    {
-                      !auth
-                        ? (
-                          <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                            useLoginByCellphone
-                          />
-                        )
-                        : <Redirect to='/' />
-                    }
-                  </Route>
-                  <Route exact path='/password/forgot'>
-                    {
-                      !auth ? (
-                        <ForgotPassword />
+      {
+        !loaded && (
+          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+        )
+      }
+      {
+        !onlineStatus && (
+          <>
+            <Header />
+            <NotNetworkConnectivity />
+            <Footer />
+          </>
+        )
+      }
+      {
+        loaded && onlineStatus && (
+          <>
+            <Header />
+            <ScrollToTop>
+              <Switch>
+                <Route exact path='/home'>
+                  <HomePage />
+                  {/* {
+                          orderStatus.options?.address?.location
+                            ? <Redirect to='/search' />
+                            : <HomePage />
+                        } */}
+                </Route>
+                <Route exact path='/'>
+                  {
+                          orderStatus.options?.address?.location
+                            ? <Redirect to='/search' />
+                            : <HomePage />
+                  }
+                </Route>
+                <Route exact path='/signup'>
+                  {
+                    !auth
+                      ? (
+                        <SignUp
+                          elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                          useLoginByCellphone
+                          useChekoutFileds
+                          handleSuccessSignup={handleSuccessSignup}
+                        />
                       )
-                        : <Redirect to='/' />
-                    }
-                  </Route>
-                  <Route exact path='/password/reset'>
-                    Password reset
-                  </Route>
-                  <Route exact path='/profile'>
-                    {auth
-                      ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
-                      : <Redirect to='/login' />}
-                  </Route>
-                  <Route exact path='/profile/orders'>
-                    {auth
-                      ? (<MyOrders />)
-                      : <Redirect to='/login' />}
-                  </Route>
-                  <Route exact path='/p/:page'>
-                    <Page />
-                  </Route>
-                  <Route exact path='/search'>
-                    {
-                      orderStatus.options?.address?.location
-                        ? <BusinessesList />
-                        : <Redirect to='/home' />
-                    }
-                  </Route>
-                  <Route exact path='/store/:store'>
-                    <BusinessProductsList />
-                  </Route>
-                  <Route exact path='/order/:orderId'>
-                    <Order />
-                  </Route>
-                  <Route exact path='/orders/:orderId'>
-                    <OrderDetailsPage />
-                  </Route>
-                  <Route path='/checkout/:cartUuid?'>
-                    <CheckoutPage />
-                  </Route>
-                  {/* <Route exact path='/upselling_page'>
-                    <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)} />
-                  </Route> */}
-                  <Route exact path='/pages/:pageSlug'>
-                    <Cms />
-                  </Route>
-                  <Route path='*'>
-                    <PageNotFound />
-                  </Route>
-                </Switch>
-                <Footer />
-              </ScrollToTop>
-            </>
-          )
-        }
-      </ThemeProvider>
+                      : <Redirect to='/' />
+                  }
+                </Route>
+                <Route exact path='/login'>
+                  {
+                    !auth
+                      ? (
+                        <Login
+                          elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                          elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                          useLoginByCellphone
+                        />
+                      )
+                      : <Redirect to='/' />
+                  }
+                </Route>
+                <Route exact path='/signin'>
+                  {
+                    !auth
+                      ? (
+                        <Login
+                          elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                          elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                          useLoginByCellphone
+                        />
+                      )
+                      : <Redirect to='/' />
+                  }
+                </Route>
+                <Route exact path='/password/forgot'>
+                  {
+                    !auth ? (
+                      <ForgotPassword />
+                    )
+                      : <Redirect to='/' />
+                  }
+                </Route>
+                <Route exact path='/password/reset'>
+                  Password reset
+                </Route>
+                <Route exact path='/profile'>
+                  {auth
+                    ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+                    : <Redirect to='/login' />}
+                </Route>
+                <Route exact path='/profile/orders'>
+                  {auth
+                    ? (<MyOrders />)
+                    : <Redirect to='/login' />}
+                </Route>
+                <Route exact path='/p/:page'>
+                  <Page />
+                </Route>
+                <Route exact path='/search'>
+                  {
+                    orderStatus.options?.address?.location
+                      ? <BusinessesList />
+                      : <Redirect to='/home' />
+                  }
+                </Route>
+                <Route exact path='/store/:store'>
+                  <BusinessProductsList />
+                </Route>
+                <Route exact path='/order/:orderId'>
+                  <Order />
+                </Route>
+                <Route exact path='/orders/:orderId'>
+                  <OrderDetailsPage />
+                </Route>
+                <Route path='/checkout/:cartUuid?'>
+                  <CheckoutPage />
+                </Route>
+                {/* <Route exact path='/upselling_page'>
+                  <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)} />
+                </Route> */}
+                <Route exact path='/pages/:pageSlug'>
+                  <Cms />
+                </Route>
+                <Route path='*'>
+                  <PageNotFound />
+                </Route>
+              </Switch>
+              <Footer />
+            </ScrollToTop>
+          </>
+        )
+      }
     </BrowserRouter>
   )
 }
