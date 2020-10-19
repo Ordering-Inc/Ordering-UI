@@ -6,7 +6,6 @@ export const LoginContainer = styled.div`
   flex-wrap: 1;
   flex-direction: row;
   min-width: auto;
-  height: calc(100vh - 45px);
   button{
     box-sizing: content-box;
   }
