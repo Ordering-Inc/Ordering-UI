@@ -18,7 +18,6 @@ import {
 
 export const BusinessItemAccordion = (props) => {
   const {
-    isCartCheckout,
     isClosed,
     moment,
     business,
@@ -42,7 +41,7 @@ export const BusinessItemAccordion = (props) => {
     if (isClosed || !isProducts) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
-      setActive === 'active' ? '0px' : !isCartCheckout ? '500px' : '2048px'
+      setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
     )
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
@@ -53,7 +52,7 @@ export const BusinessItemAccordion = (props) => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
     if (cartsLength === 1) {
       setActiveState('active')
-      setHeightState('500px')
+      setHeightState(`${content.current.scrollHeight}px`)
       setRotateState('accordion__icon rotate')
     }
   }, [orderState?.carts])
@@ -115,7 +114,7 @@ export const BusinessItemAccordion = (props) => {
 
       <AccordionContent
         ref={content}
-        style={{ maxHeight: `${setHeight}` }}
+        style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
       >
         {props.children}
       </AccordionContent>

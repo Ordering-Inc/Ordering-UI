@@ -124,8 +124,8 @@ export const ContentInfo = styled.div`
 `
 
 export const AccordionContent = styled.div`
-  overflow: auto;
-  transition: max-height 0.6s ease;
+  overflow: hidden;
+  transition: min-height 0.6s ease;
 `
 
 export const AccordionText = styled.div`

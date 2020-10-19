@@ -87,7 +87,7 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 65%;
+  width: calc(65% - 60px);
 
   h3 {
     font-size: 18px;
@@ -243,7 +243,7 @@ export const ProductPrice = styled.div`
 `
 
 export const ProductSelect = styled.select`
-  width: 55px;
+  max-width: 60px;
   height: 50px;
   border: 0;
   background-color: transparent;
