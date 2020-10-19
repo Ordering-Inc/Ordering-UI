@@ -161,6 +161,7 @@ export const ProductActions = styled.div`
       align-items: center;
       border: 1px solid #000;
       color: #000;
+      line-height: 0px;
     }
   }
 
