@@ -29,6 +29,7 @@ export const MomentPopover = (props) => {
   const { styles, attributes, forceUpdate } = popper
 
   useEffect(() => {
+    if (orderStatus.loading) return
     forceUpdate && forceUpdate()
   }, [open, orderStatus])
 
