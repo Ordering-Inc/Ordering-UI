@@ -1,5 +1,4 @@
 import { lighten } from 'polished'
-import React from 'react'
 import styled from 'styled-components'
 
 export const ProductContainer = styled.div`
@@ -21,35 +20,41 @@ export const ProductContainer = styled.div`
 export const WrapperImage = styled.div`
   width: calc(50% - 10px);
   border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    position: relative;
+    top: -38px;
+  }
+`
+
+export const ProductImage = styled.div`
+  position: relative;
+
+  img {
+    border-radius: 16px;
+    object-fit: cover;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 1201px) {
+    img {
+      width: 100%;
+    }
+  }
 
   @media (max-width: 1200px) {
     height: 300px;
-    width: 100%;
-  }
-`
 
-const ProductImageStyled = styled.div`
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: contain;
-  background-position: center;
-  object-fit: cover;
-  border-radius: 10px;
-`
-export const ProductImage = (props) => {
-  const style = {}
-  if (props.bgimage) {
-    style.backgroundImage = `url(${props.bgimage})`
+    img {
+      object-fit: contain;
+    }
   }
-  return (
-    <ProductImageStyled {...props} style={style}>
-      {props.children}
-    </ProductImageStyled>
-  )
-}
+`
 
 export const ProductInfo = styled.div`
   display: flex;
@@ -84,6 +89,8 @@ export const ProductInfo = styled.div`
   @media (max-width: 1200px) {
     width: 100%;
     padding: 0px;
+    position: relative;
+    top: -38px;
     h1 {
       text-align: center;
     }
