@@ -10,7 +10,7 @@ export const BusinessesList = (props) => {
   const businessListingProps = {
     ...props,
     isSearchByName: true,
-    isSearchByDescription: false,
+    isSearchByDescription: true,
     onBusinessClick: (business) => {
       setBusiness(business)
       history.push(`/store/${business.slug}`)
