@@ -62,7 +62,6 @@ export const PaymentOptionCash = (props) => {
             onChange={handleChangeCash}
             ref={
               register({
-                required: true,
                 validate: value => {
                   return value === '' || value >= orderTotal
                 }
