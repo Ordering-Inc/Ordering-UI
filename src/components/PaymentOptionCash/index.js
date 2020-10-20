@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage } from 'ordering-components'
 
+import { formatPrice } from '../../utils'
+
 import {
   PaymentCashContainer,
   FormCash,
@@ -73,7 +75,7 @@ export const PaymentOptionCash = (props) => {
           <ErrorText>{t('FIELD_REQUIRED', 'This field is required')}</ErrorText>
         )}
         {errors.cash && errors.cash.type === 'validate' && (
-          <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: ${orderTotal}</ErrorText>
+          <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: {formatPrice(orderTotal)}</ErrorText>
         )}
       </FormCash>
     </PaymentCashContainer>
