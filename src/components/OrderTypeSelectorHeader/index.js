@@ -23,6 +23,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
       options={orderTypes}
       defaultValue={orderState.options?.type || 1}
       onChange={(orderType) => handleChangeOrderType(orderType)}
+      notAsync
     />
   )
 }
