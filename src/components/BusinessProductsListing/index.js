@@ -28,6 +28,7 @@ const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
   const {
+    errors,
     isInitialRender,
     businessState,
     categorySelected,
@@ -134,6 +135,7 @@ const BusinessProductsListingUI = (props) => {
                 category={categorySelected}
                 categoryState={categoryState}
                 businessId={business.id}
+                errors={errors}
                 onProductClick={onProductClick}
               />
             </WrapContent>
@@ -198,6 +200,7 @@ const BusinessProductsListingUI = (props) => {
               categories={[]}
               category={categorySelected}
               categoryState={categoryState}
+              isBusinessLoading={loading}
             />
           </WrapContent>
         </>
