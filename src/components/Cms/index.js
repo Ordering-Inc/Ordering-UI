@@ -29,7 +29,7 @@ const CmsUI = (props) => {
           <NotFoundSource
             content={t('ERROR_PAGE', 'Sorry, the selected page was not found.')}
             btnTitle={t('PAGE_REDIRECT', 'Go to pages list')}
-            onClickButton={handleCmsRedirect}
+            onClickButton={() => handleCmsRedirect()}
           />
       }
     </CmsContainer>

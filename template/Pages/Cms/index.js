@@ -11,6 +11,7 @@ export const Cms = (props) => {
     pageSlug,
     handleCmsRedirect: () => {
       history.push('/pages/OrderingPages')
+      window.location.reload()
     }
   }
 

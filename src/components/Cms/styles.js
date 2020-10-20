@@ -12,5 +12,5 @@ export const CmsError = styled.div`
 `
 
 export const CmsContainer = styled.div`
-  padding: 0 20px;
+  padding: 0 30px;
 `
