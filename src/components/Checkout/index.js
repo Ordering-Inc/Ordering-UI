@@ -307,7 +307,7 @@ export const Checkout = (props) => {
                     onClick={() => handleOpenUpsellingPage(cart)}
                     disabled={currentCart?.uuid === cart?.uuid}
                   >
-                    {!(currentCart?.uuid === cart?.uuid) ? t('PAY_CART', 'Pay order') : 'Loading...'}
+                    {!(currentCart?.uuid === cart?.uuid) ? t('PAY_CART', 'Pay order') : t('LOADING', 'Loading...')}
                   </Button>
                 ) : (
                   <Button
