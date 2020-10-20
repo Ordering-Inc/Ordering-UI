@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Messages as MessagesController,
   useLanguage
@@ -21,6 +21,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { BsCardImage, FiSend } from 'react-icons/all'
 import moment from 'moment'
+import { Alert } from '../Confirm'
 
 export const MessagesUI = (props) => {
   const {
@@ -37,14 +38,34 @@ export const MessagesUI = (props) => {
 
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
+  useEffect(() => {
+    if (!sendMessage.loading && sendMessage?.error) {
+      setAlertState({
+        open: true,
+        content: sendMessage.error || [t('ERROR')]
+      })
+    }
+    clearInputs()
+  }, [sendMessage])
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
   }
 
   const removeImage = (e) => {
-    const input = document.getElementById('chat_image')
-    input.value = ''
+    const inputImage = document.getElementById('chat_image')
+    inputImage.value = ''
     setImage(null)
   }
 
@@ -95,13 +116,23 @@ export const MessagesUI = (props) => {
 
   const onSubmit = () => {
     handleSend()
+  }
+
+  const clearInputs = () => {
     const input = document.getElementById('message')
     input.value = ''
     const inputImage = document.getElementById('chat_image')
     inputImage.value = ''
     setImage(null)
+    setMessage('')
   }
-  console.log(sendMessage)
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
   return (
     <MessagesContainer>
       <HeaderProfile>
@@ -185,16 +216,16 @@ export const MessagesUI = (props) => {
               )}
               {message.type === 3 && (
                 <MessageCustomer>
-                  {message.comment && (
-                    <BubbleCustomer>
-                      {message.comment}
-                      <p>{moment.utc(message.created_at).fromNow()}</p>
-                    </BubbleCustomer>
-                  )}
-                  <BubbleCustomer>
+                  <BubbleCustomer name={message.comment && 'image'}>
                     <img src={message.source} width='200px' height='150px' />
-                    <p>{moment.utc(message.created_at).fromNow()}</p>
+                    {message.comment && (
+                      <>
+                        {message.comment}
+                        <p>{moment.utc(message.created_at).fromNow()}</p>
+                      </>
+                    )}
                   </BubbleCustomer>
+
                 </MessageCustomer>
               )}
             </React.Fragment>
@@ -251,16 +282,17 @@ export const MessagesUI = (props) => {
                   </>)}
             </Button>
           </WrapperSendMessageButton>
-
-          {sendMessage.error && (
-            <>
-              <br />
-              <span style={{ color: 'red' }}>{sendMessage.error}</span>
-            </>
-          )}
         </Send>
       </SendForm>
-
+      <Alert
+        title={t('ERROR', 'error')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </MessagesContainer>
   )
 }

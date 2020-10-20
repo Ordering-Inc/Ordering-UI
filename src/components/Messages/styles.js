@@ -80,7 +80,7 @@ export const BubbleConsole = styled.div`
 export const BubbleBusines = styled.div`
   border-radius: 97px 97px 97px 0px;
   padding: 15px;
-  max-width: 60%;
+  max-width: 45%;
   margin-bottom: 10px;
   background: #EFEFEF;
   height: auto;
@@ -96,7 +96,7 @@ export const BubbleBusines = styled.div`
 export const BubbleCustomer = styled.div`
   border-radius: 97px 97px 0px 97px;
   padding: 15px;
-  max-width: 60%;
+  max-width: 45%;
   margin-bottom: 10px;
   background: #D81212;
   color: white;
@@ -111,6 +111,9 @@ export const BubbleCustomer = styled.div`
     margin-block-start: initial;
     margin-block-end: initial;
   }
+  &[name=image]{
+    padding-left: 40px
+  }
 `
 export const SendForm = styled.div`
   display: flex;
@@ -120,7 +123,6 @@ export const SendForm = styled.div`
 `
 
 export const Send = styled.form`
-  background: #FAFAFA;
   align-items: center;
   display: flex;
   margin-top: 3px;
@@ -143,8 +145,6 @@ export const Send = styled.form`
         }
       
     }
-  
-  
 
   > button[name]{
     margin-right: 5px;
