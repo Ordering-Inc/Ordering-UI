@@ -3,7 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 import { useLocation } from 'react-router-dom'
 import {
   BusinessAndProductList,
-  useLanguage
+  useLanguage,
+  useBusiness
 } from 'ordering-components'
 
 import {
@@ -46,6 +47,7 @@ const BusinessProductsListingUI = (props) => {
   } = props
 
   const location = useLocation()
+  const [, { setBusiness }] = useBusiness()
 
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
@@ -108,6 +110,13 @@ const BusinessProductsListingUI = (props) => {
       handleUpdateInitialRender(true)
     }
   }, [])
+
+  useEffect(() => {
+    if (business) {
+      setBusiness(business)
+    }
+    return () => setBusiness({})
+  }, [businessState])
 
   return (
     <ProductsContainer>
