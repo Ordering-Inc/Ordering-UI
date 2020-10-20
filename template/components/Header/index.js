@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import {
   Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink,
@@ -45,6 +45,15 @@ export const Header = (props) => {
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
+
+  const handleAddProduct = () => {
+    console.log('product added')
+  }
+
+  useEffect(() => {
+    window.addEventListener('cart_product_added', handleAddProduct)
+    return () => window.removeEventListener('cart_product_added', handleAddProduct)
+  }, [])
 
   return (
     <HeaderType>
