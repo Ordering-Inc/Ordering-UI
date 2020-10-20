@@ -1,27 +1,33 @@
 import styled from 'styled-components'
 
 export const IconShare = styled.div`
-  position: fixed;
   position: absolute;
   font-size: 25px;
   right: 14px;
   top: -11px;
   z-index: 9999995;
+  margin: 0 10px;
 
   svg {
     cursor: pointer;
-    color: ${props => props.theme.colors.primary};
+    color: #333;
   }
 
   @media (max-width: 1200px) {
+    position: sticky;
     top: 0px;
     left: 0px;
   }
 `
 
 export const ShareButtons = styled.div`
-  visibility: ${({ showShareButton }) => showShareButton ? 'initial' : 'hidden'};
+  visibility: ${({ showShareButton }) => showShareButton ? 'visible' : 'hidden'};
   right: 0px;
   top: 28px;
   position: absolute !important;
+
+  @media (max-width: 1200px) {
+    left: -12px;
+    width: 40px;
+  }
 `

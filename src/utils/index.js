@@ -16,7 +16,7 @@ export const optimizeImage = (url, params, fallback) => {
  * TODO: refactor this method with current currency or some context about it
  * @param {Number} price
  */
-export const formatPrice = (price) => price ? `$ ${price.toFixed(2)}` : '$ 0.00'
+export const formatPrice = (price) => price ? `$${price.toFixed(2)}` : '$0.00'
 
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
@@ -82,4 +82,15 @@ export const formatUrlVideo = (url) => {
   const match = url.match(regExp)
   const id = (match && match[7].length === 11) ? match[7] : false
   return `https://www.youtube-nocookie.com/embed/${id}`
+}
+
+/**
+ * Function to convert delivery time in minutes
+ * @param {string} time business delivery time
+ */
+export const convertHoursToMinutes = (time) => {
+  if (!time) return '0min'
+  const [hour, minute] = time.split(':')
+  const result = (parseInt(hour, 10) * 60) + parseInt(minute, 10)
+  return `${result}min`
 }
