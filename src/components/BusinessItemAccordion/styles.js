@@ -177,19 +177,14 @@ export const BusinessActions = styled.div`
   align-items: center;
   justify-content: flex-end;
 
-  svg {
-    font-size: 28px;
+  span {
+    height: 28px;
+    svg {
+      font-size: 28px;
+    }
 
     &:not(:last-child) {
       margin-right: 5px;
-    }
-
-    &:nth-child(1) {
-      color: #CCC;
-    }
-
-    &:nth-child(2) {
-      color: #D81212;
     }
   }
 `
