@@ -70,6 +70,6 @@ export const WrappNotCarts = styled.div`
 `
 
 export const WrapperCarts = styled.div`
-  max-height: 500px;
+  /* max-height: 500px; */
   margin-bottom: 10px;
 `
