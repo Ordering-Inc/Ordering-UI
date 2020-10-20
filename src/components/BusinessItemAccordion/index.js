@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { BiCaretDown } from 'react-icons/bi'
-import { useOrder } from 'ordering-components'
+import { IoIosArrowDown, FiClock, BiStoreAlt, VscTrash } from 'react-icons/all'
+import { useOrder, useLanguage } from 'ordering-components'
 
-import { formatPrice } from '../../utils'
+import { formatPrice, convertHoursToMinutes } from '../../utils'
 
 import {
   AccordionSection,
@@ -10,7 +10,10 @@ import {
   AccordionContent,
   WrapperBusinessLogo,
   BusinessLogo,
-  ContentInfo
+  ContentInfo,
+  BusinessInfo,
+  BusinessTotal,
+  BusinessActions
 } from './styles'
 
 export const BusinessItemAccordion = (props) => {
@@ -20,10 +23,13 @@ export const BusinessItemAccordion = (props) => {
     business,
     orderTotal,
     isProducts,
-    isValidProducts
+    isValidProducts,
+    handleClearProducts,
+    handleStoreRedirect
   } = props
 
   const [orderState] = useOrder()
+  const [, t] = useLanguage()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -35,7 +41,7 @@ export const BusinessItemAccordion = (props) => {
     if (isClosed || !isProducts) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
-      setActive === 'active' ? '0px' : '500px'
+      setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
     )
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
@@ -46,15 +52,15 @@ export const BusinessItemAccordion = (props) => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
     if (cartsLength === 1) {
       setActiveState('active')
-      setHeightState('500px')
+      setHeightState(`${content.current.scrollHeight}px`)
       setRotateState('accordion__icon rotate')
     }
   }, [orderState?.carts])
 
   return (
     <AccordionSection isClosed={isClosed}>
-      <Accordion isClosed={isClosed} className={`accordion ${setActive}`} onClick={toggleAccordion}>
-        <div className='info'>
+      <Accordion isClosed={isClosed} className={`accordion ${setActive}`}>
+        <BusinessInfo onClick={toggleAccordion}>
           {business?.logo && (
             <WrapperBusinessLogo>
               <BusinessLogo bgimage={business?.logo} />
@@ -62,34 +68,53 @@ export const BusinessItemAccordion = (props) => {
           )}
           <ContentInfo>
             <h1>{business?.name}</h1>
+            {orderState?.options?.type === 1 ? (
+              <span>
+                <FiClock />
+                {convertHoursToMinutes(business?.delivery_time)}
+              </span>
+            ) : (
+              <span>
+                <FiClock />
+                {convertHoursToMinutes(business?.pickup_time)}
+              </span>
+            )}
           </ContentInfo>
-        </div>
+        </BusinessInfo>
+
+        {!isClosed && !!isProducts && (
+          <BusinessTotal onClick={toggleAccordion}>
+            {isValidProducts && orderTotal > 0 && <p>{formatPrice(orderTotal)}</p>}
+            <p>{t('CART_TOTAL', 'Total')}</p>
+          </BusinessTotal>
+        )}
 
         {isClosed && (
-          <div className='total'>
+          <BusinessTotal>
             <p>Closed {moment}</p>
-          </div>
+          </BusinessTotal>
         )}
 
         {!isClosed && !isProducts && (
-          <div className='total'>
+          <BusinessTotal>
             <p>No Products</p>
-          </div>
+          </BusinessTotal>
         )}
 
-        {!isClosed && isProducts && (
-          <div className='total'>
-            {isValidProducts && <span>{formatPrice(orderTotal)}</span>}
-            <p>
-              <BiCaretDown className={`${setRotate}`} />
-            </p>
-          </div>
-        )}
+        <BusinessActions>
+          <BiStoreAlt onClick={() => handleStoreRedirect(business?.slug)} />
+          {!isClosed && !!isProducts && (
+            <>
+              <VscTrash onClick={() => handleClearProducts()} />
+              <IoIosArrowDown onClick={toggleAccordion} className={`${setRotate}`} />
+            </>
+          )}
+        </BusinessActions>
       </Accordion>
 
       <AccordionContent
         ref={content}
-        style={{ maxHeight: `${setHeight}` }}
+        style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
       >
         {props.children}
       </AccordionContent>

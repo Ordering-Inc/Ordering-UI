@@ -305,9 +305,9 @@ export const Checkout = (props) => {
                   <Button
                     color='primary'
                     onClick={() => handleOpenUpsellingPage(cart)}
-                    disabled={currentCart?.uuid === cart?.uuid}
+                    disabled={currentCart?.uuid === cart?.uuid || openUpselling}
                   >
-                    {!(currentCart?.uuid === cart?.uuid) ? t('PAY_CART', 'Pay order') : t('LOADING', 'Loading...')}
+                    {(currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid ? t('LOADING', 'Loading...') : t('PAY_CART', 'Pay order')}
                   </Button>
                 ) : (
                   <Button
@@ -323,7 +323,7 @@ export const Checkout = (props) => {
           ))}
         </CartsList>
       )}
-      {cartState.error && cartState.error?.length > 0 && (
+      {cartUuid && cartState.error && cartState.error?.length > 0 && (
         <NotFoundSource
           content={t('ERROR_CART', 'Sorry, the selected cart was not found.')}
           btnTitle={t('CHECKOUT_REDIRECT', 'Go to Checkout list')}

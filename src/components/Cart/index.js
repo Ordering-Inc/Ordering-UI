@@ -23,7 +23,9 @@ import {
 const CartUI = (props) => {
   const {
     cart,
+    clearCart,
     isProducts,
+    isCartCheckout,
     changeQuantity,
     getProductMax,
     offsetDisabled,
@@ -34,7 +36,7 @@ const CartUI = (props) => {
   const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const momentFormatted = !orderState?.option?.moment ? 'right Now' : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
+  const momentFormatted = !orderState?.option?.moment ? t('ASAP', 'ASAP') : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
@@ -74,6 +76,9 @@ const CartUI = (props) => {
     handleClickCheckout()
     setOpenUpselling(false)
   }
+  const handleStoreRedirect = (slug) => {
+    history.push(`/store/${slug}`)
+  }
 
   useEffect(() => {
     return () => {
@@ -87,6 +92,17 @@ const CartUI = (props) => {
     }
   }
 
+  const handleClearProducts = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCTS', 'Are you sure that you want to delete all products?'),
+      handleOnAccept: () => {
+        clearCart(cart?.uuid)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
+
   return (
     <CartContainer>
       <BusinessItemAccordion
@@ -95,9 +111,12 @@ const CartUI = (props) => {
         isClosed={!cart?.valid_schedule}
         moment={momentFormatted}
         isProducts={isProducts}
+        isCartCheckout={isCartCheckout}
         isValidProducts={cart?.valid_products}
+        handleClearProducts={handleClearProducts}
+        handleStoreRedirect={handleStoreRedirect}
       >
-        {cart?.products?.length && cart?.products.map(product => (
+        {cart?.products?.length > 0 && cart?.products.map(product => (
           <ProductItemAccordion
             key={product.code}
             isCartProduct

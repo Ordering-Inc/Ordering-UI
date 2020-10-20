@@ -88,7 +88,7 @@ export const CartPopover = (props) => {
         <WrapperCarts>
           {orderState.carts && cartsWithProducts.length > 0 &&
             cartsWithProducts.map(cart => (
-              <div key={cart.uuid}>
+              <React.Fragment key={cart.uuid}>
                 {cart.products.length > 0 && (
                   <Cart
                     cart={cart}
@@ -97,7 +97,7 @@ export const CartPopover = (props) => {
                     isHideCheckoutButtom={uuidParams() && (uuidParams() !== cart.uuid || uuidParams() === 'no-checkout')}
                   />
                 )}
-              </div>
+              </React.Fragment>
             ))}
           {cartsWithProducts.length === 0 && (
             <WrappNotCarts>
