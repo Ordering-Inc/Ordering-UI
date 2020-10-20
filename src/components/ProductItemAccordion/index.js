@@ -112,9 +112,11 @@ export const ProductItemAccordion = (props) => {
               {product?.quantity}
             </ProductQuantity>
           )}
-          <WrapperProductImage onClick={toggleAccordion}>
-            <ProductImage bgimage={product.images || 'https://picsum.photos/78/80'} />
-          </WrapperProductImage>
+          {product?.images && (
+            <WrapperProductImage onClick={toggleAccordion}>
+              <ProductImage bgimage={product?.images} />
+            </WrapperProductImage>
+          )}
           <ContentInfo>
             <h3 onClick={toggleAccordion}>{product.name}</h3>
             {windowSize.width <= 410 && (
