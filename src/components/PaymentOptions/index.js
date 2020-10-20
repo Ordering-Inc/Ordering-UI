@@ -91,6 +91,7 @@ const PaymentOptionsUI = (props) => {
         <PaymentOptionCash
           orderTotal={orderTotal}
           onChangeData={handlePaymethodDataChange}
+          setErrorCash={props.setErrorCash}
         />
       )}
 
