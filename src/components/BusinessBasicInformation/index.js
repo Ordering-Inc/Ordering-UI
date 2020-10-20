@@ -136,6 +136,7 @@ export const BusinessBasicInformation = (props) => {
         onClose={() => setOpenBusinessInformation(false)}
         padding='0'
         hideCloseDefault
+        isTransparent
       >
         <BusinessInformation
           business={business}

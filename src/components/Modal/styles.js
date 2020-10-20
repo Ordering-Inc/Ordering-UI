@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const ModalDialog = styled.div`
   position: relative;
-  background-color: #FFF;
+  background-color: ${({ isTransparent }) => isTransparent ? 'transparent' : '#FFF'};
   padding: ${({ padding }) => padding || '20px'};
   width: ${({ width }) => width || '50%'};
   border-radius: 10px;
