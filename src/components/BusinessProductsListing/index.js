@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useLocation } from 'react-router-dom'
 import {
   BusinessAndProductList,
   useLanguage
@@ -39,9 +40,11 @@ const BusinessProductsListingUI = (props) => {
     handleChangeCategory,
     handleUpdateInitialRender,
     updateProductModal,
-    productRedirect,
+    onProductRedirect,
     handleChangeSearch
   } = props
+
+  const location = useLocation()
 
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
@@ -50,7 +53,7 @@ const BusinessProductsListingUI = (props) => {
   const [curProduct, setCurProduct] = useState(props.product)
 
   const onProductClick = (product) => {
-    productRedirect({
+    onProductRedirect({
       slug: business?.slug,
       product: product.id,
       category: product.category_id
@@ -62,7 +65,7 @@ const BusinessProductsListingUI = (props) => {
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
-      productRedirect({
+      onProductRedirect({
         slug: business?.slug
       })
     }
@@ -72,7 +75,7 @@ const BusinessProductsListingUI = (props) => {
     setModalIsOpen(false)
     handleUpdateInitialRender(false)
     updateProductModal(null)
-    productRedirect({
+    onProductRedirect({
       slug: business?.slug
     })
   }
@@ -140,7 +143,7 @@ const BusinessProductsListingUI = (props) => {
 
       <Modal
         width='70%'
-        open={openProduct}
+        open={openProduct && location.search}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
       >

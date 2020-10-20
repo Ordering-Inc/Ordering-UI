@@ -75,7 +75,7 @@ export const ThemeProvider = ({ theme, children }) => {
         font.rel = 'stylesheet'
         font.async = true
         font.defer = true
-        font.href = `https://fonts.googleapis.com/css2?family=${fontFamily}:wght@200;300;400;500;700;800;900&display=swap`
+        font.href = `https://fonts.googleapis.com/css2?family=${fontFamily}:wght@300;400;500;600&display=swap`
 
         window.document.body.appendChild(font)
       }

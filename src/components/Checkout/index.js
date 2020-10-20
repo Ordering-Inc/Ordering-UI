@@ -298,7 +298,7 @@ export const Checkout = (props) => {
           ))}
         </CartsList>
       )}
-      {cartState.error && cartState.error?.length > 0 && (
+      {cartUuid && cartState.error && cartState.error?.length > 0 && (
         <NotFoundSource
           content={t('ERROR_CART', 'Sorry, the selected cart was not found.')}
           btnTitle={t('CHECKOUT_REDIRECT', 'Go to Checkout list')}

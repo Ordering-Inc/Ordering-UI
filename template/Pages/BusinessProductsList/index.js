@@ -52,9 +52,12 @@ export const BusinessProductsList = (props) => {
     handleSearchRedirect: () => {
       history.push('/search')
     },
-    productRedirect: ({ slug, category, product }) => {
+    onProductRedirect: ({ slug, category, product }) => {
       if (!category && !product) {
-        return history.push(`/store/${slug}`)
+        if (history.length <= 2) {
+          return history.push(`/store/${slug}`)
+        }
+        return history.go(-1)
       }
       return history.push(`/store/${slug}?category=${category}&product=${product}`)
     }
