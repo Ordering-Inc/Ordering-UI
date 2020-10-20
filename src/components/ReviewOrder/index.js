@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { OrderReview as ReviewOrderController, useLanguage } from 'ordering-components'
@@ -8,6 +8,7 @@ import { AiFillStar } from 'react-icons/ai'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { ThemeContext } from 'styled-components'
 
 const ReviewOrderUI = (props) => {
   const { stars, handleChangeInput, handleChangeRating, handleSendReview, formState } = props
@@ -15,6 +16,7 @@ const ReviewOrderUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [hover, setHover] = useState(stars)
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
+  const { colors } = useContext(ThemeContext)
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
@@ -60,7 +62,7 @@ const ReviewOrderUI = (props) => {
     [...Array(5)].map((star, i) => (
       <label key={i} onMouseLeave={() => setHover(stars)}>
         <input type='radio' name={name} value={i + 1} onClick={(e) => handleChangeRating(e)} />
-        <AiFillStar color={(i + 1) <= (hover[name] || stars[name]) ? 'yellow' : 'gray'} size={25} onMouseEnter={() => setHover({ [name]: (i + 1) })} />
+        <AiFillStar color={(i + 1) <= (hover[name] || stars[name]) ? colors.primary : 'gray'} size={25} onMouseEnter={() => setHover({ [name]: (i + 1) })} />
       </label>
     ))
   )
