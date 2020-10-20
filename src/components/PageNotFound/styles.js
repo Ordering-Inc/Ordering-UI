@@ -6,6 +6,7 @@ export const PageNotFoundContainer = styled.div`
   align-items: center;
   div{
     width: 60%;
+    padding: 48px 0;
   }
   img {
     width: 100%;
