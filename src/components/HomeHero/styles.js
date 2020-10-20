@@ -53,7 +53,7 @@ export const ContentWrapper = styled.div`
 export const Title = styled.h1`
   margin: 0px;
   text-align: left;
-  font: normal normal normal 80px ${props => props.theme.fonts.special || 'Georgia'};
+  font: normal normal normal 80px ${props => props.theme.fonts.special?.name || 'Georgia'};
   letter-spacing: 0px;
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #00000029;
