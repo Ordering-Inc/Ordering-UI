@@ -268,6 +268,7 @@ export const BusinessMediaContent = styled.div`
 `
 
 export const ModalIcon = styled.span`
+  display: flex;
   position: absolute;
   width: 30px;
   height: 30px;
