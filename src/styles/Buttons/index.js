@@ -18,11 +18,6 @@ export const Button = styled.button`
     background: ${() => darken(0.07, '#CCC')};
   }
 
-  ${({ opacity }) => opacity && css`
-    opacity: ${opacity}
-  }
-  `}
-
   ${({ initialIcon }) => initialIcon && css`
     padding-left: 30px !important;
     text-align: left;

@@ -14,7 +14,8 @@ import {
   SendForm,
   Send,
   MessageConsole,
-  BubbleConsole
+  BubbleConsole,
+  WrapperSendMessageButton
 } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -96,6 +97,9 @@ export const MessagesUI = (props) => {
     handleSend()
     const input = document.getElementById('message')
     input.value = ''
+    const inputImage = document.getElementById('chat_image')
+    inputImage.value = ''
+    setImage(null)
   }
   console.log(sendMessage)
   return (
@@ -229,24 +233,24 @@ export const MessagesUI = (props) => {
               {t('DELETE', 'X')}
             </Button>
           )}
-          <Button
-            color='primary'
-            opacity={(errors.message?.message && !image) || sendMessage.loading ? '0.5' : '1'}
-            type='submit'
-            disabled={(errors.message?.message && !image) || sendMessage.loading}
-
-          >
-            <FiSend />
-            {sendMessage.loading ? (
-              <>
-                {t('SENDING_MESSAGE', 'Sending...')}
-              </>
-            )
-              : (
+          <WrapperSendMessageButton>
+            <Button
+              color='primary'
+              type='submit'
+              disabled={errors.message || sendMessage.loading}
+            >
+              <FiSend />
+              {sendMessage.loading ? (
                 <>
-                  {t('SEND', 'send')}
-                </>)}
-          </Button>
+                  {t('SENDING_MESSAGE', 'Sending...')}
+                </>
+              )
+                : (
+                  <>
+                    {t('SEND', 'send')}
+                  </>)}
+            </Button>
+          </WrapperSendMessageButton>
 
           {sendMessage.error && (
             <>

@@ -144,18 +144,24 @@ export const Send = styled.form`
       
     }
   
-  > button{
+  
 
+  > button[name]{
+    margin-right: 5px;
+  }
+`
+
+export const WrapperSendMessageButton = styled.div`
+  button{
      > svg {
        margin-right: 10px;
        width: 1em;
        height: 1em; 
        vertical-align: middle
      }
-    
-  }
-
-  > button[name]{
-    margin-right: 5px;
+     &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 `
