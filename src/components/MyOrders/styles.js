@@ -2,6 +2,15 @@ import styled from 'styled-components'
 
 export const MyOrdersContainer = styled.div`
   background-color: #f8f8f8;
+ 
+`
+
+export const ImageContainer = styled.div`
+  width: 300px;
+  margin: 0 auto;
+  > img{
+    width: 100%
+  }
 `
 
 export const MyOrdersTitle = styled.div`

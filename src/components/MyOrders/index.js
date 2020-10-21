@@ -21,6 +21,7 @@ import {
   IndividualOrderPast,
   OrderPastContent,
   Reorder,
+  ImageContainer,
   SkeletonOrder,
   SkeletonCard,
   SkeletonMap,
@@ -32,6 +33,9 @@ import {
 
 import { ProfileOptions } from '../UserProfileForm/ProfileOptions'
 import { Button } from '../../styles/Buttons'
+import emptyPastOrders from '../../../template/assets/empty-past-orders.svg'
+import emptyActiveOrders from '../../../template/assets/empty-active-orders.svg'
+
 export const MyOrdersUI = (props) => {
   const { activeOrders, previousOrders } = props
   const history = useHistory()
@@ -61,21 +65,17 @@ export const MyOrdersUI = (props) => {
   return (
     <>
       <ProfileOptions value='My Orders' />
-      {(!activeOrders.loading && !previousOrders.loading && activeOrders.orders.length === 0 && previousOrders.orders.length === 0) || (previousOrders.error || activeOrders.error) ? (
-        <>
-          {previousOrders.error || activeOrders.error ? <h2>{t('ERROR_UNKNOWN', 'An error has ocurred')}</h2> : <h2>{t('ORDERS_NOT_FOUND', 'Not Found Orders')}</h2>}
-        </>
-      ) : (
-        <MyOrdersContainer>
-          {
-            <>
-              <MyOrdersTitle>
-                {!activeOrders.loading ? (
-                  <h3>{t('ACTIVE_ORDERS', 'Active Orders')}</h3>
-                ) : (
-                  <Skeleton width={200} height={20} />
-                )}
-              </MyOrdersTitle>
+      <MyOrdersContainer>
+        {
+          <>
+            <MyOrdersTitle>
+              <h3>{t('ACTIVE_ORDERS', 'Active Orders')}</h3>
+            </MyOrdersTitle>
+            {!activeOrders.loading && activeOrders.orders.length === 0 ? (
+              <ImageContainer>
+                <img src={emptyActiveOrders} />
+              </ImageContainer>
+            ) : (
               <ActiveOrders>
                 {!activeOrders.loading ? activeOrders.orders.map(order => (
                   <Card key={order.id}>
@@ -128,17 +128,22 @@ export const MyOrdersUI = (props) => {
                   </SkeletonOrder>
                 )}
               </ActiveOrders>
-            </>
-          }
-          {
-            <>
-              <MyOrdersTitle>
-                {!previousOrders.loading ? (
-                  <h3>{t('ORDERS_PAST', 'My Orders Past')}</h3>
-                ) : (
-                  <Skeleton width={200} height={20} />
-                )}
-              </MyOrdersTitle>
+            )}
+
+          </>
+        }
+        {
+          <>
+            <MyOrdersTitle>
+              <h3>{t('ORDERS_PAST', 'My Orders Past')}</h3>
+            </MyOrdersTitle>
+            {!previousOrders.loading && previousOrders.orders.length === 0 ? (
+              (
+                <ImageContainer>
+                  <img src={emptyPastOrders} />
+                </ImageContainer>
+              )
+            ) : (
               <OrdersPast>
                 {!previousOrders.loading ? previousOrders.orders.map((order) => (
                   <IndividualOrderPast key={order.id}>
@@ -178,10 +183,10 @@ export const MyOrdersUI = (props) => {
                   </SkeletonOrdersPast>
                 )))}
               </OrdersPast>
-            </>
-          }
-        </MyOrdersContainer>
-      )}
+            )}
+          </>
+        }
+      </MyOrdersContainer>
     </>
   )
 }
