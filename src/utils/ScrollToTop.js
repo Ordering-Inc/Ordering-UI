@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 function ScrollToTop ({ history, children }) {
   useEffect(() => {
     const unlisten = history.listen(() => {
-      if (!window.location.pathname.includes('/store')) {
+      if (!window.location.search.includes('category')) {
         window.scrollTo(0, 0)
       }
     })
