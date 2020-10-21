@@ -67,6 +67,7 @@ export const PageNotFoundText = styled.div`
     span{
       font-size: 1.2rem;
       border-width: 1px;
+      padding: 10px 15px
     }
   }
   @media (max-width: 320px){
