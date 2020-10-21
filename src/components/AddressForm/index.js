@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FiPlus } from 'react-icons/fi'
+import { FiPlus, ImCompass } from 'react-icons/all'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
@@ -135,6 +135,7 @@ const AddressFormUI = (props) => {
               className='gps-button'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               onAddress={handleChangeAddress}
+              IconButton={ImCompass}
             />}
         </AddressWrap>
         <Input

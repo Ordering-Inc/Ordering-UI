@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { darken } from 'polished'
+import locationIcon from '../../../template/assets/location-marker.svg'
 
 export const FormActions = styled.div`
   padding: 10px 0px;
@@ -70,22 +70,25 @@ export const FormControl = styled.form`
 
   .google-control {
     button:nth-child(2) {
-      background: #CCC;
-      color: #FFF;
-      border-color: #CCC;
+      position: absolute;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #FFF;
       padding: 0;
       width: 40px;
       height: 40px;
       line-height: 34px;
       text-align: center;
       border-radius: 50%;
-      border: none;
-      position: absolute;
-      right: 0;
+      border-style: solid;
+      border-width: 1px;
+      border-color: ${props => props.theme.colors.primary};
 
-      &:active {
-        color: #FFF;
-        background: ${darken(0.07, '#CCC')};
+      svg {
+        color: ${props => props.theme.colors.primary};
+        font-size: 20px;
       }
     }
   }
@@ -105,6 +108,14 @@ export const WrapAddressInput = styled.div`
   width: 100%;
   i {
     padding: 0px 10px;
+  }
+
+  input {
+    background-image: url(${locationIcon}) !important;
+    background-position: left 10px center !important;
+    background-repeat: no-repeat !important;
+    background-size: 13px !important;
+    padding: 7px 15px 7px 30px !important;
   }
 `
 
