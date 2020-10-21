@@ -5,6 +5,8 @@ import { OrderingProvider } from 'ordering-components'
 import { Alert } from './src/components/Confirm'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
+import { ThemeProvider } from './src/contexts/ThemeContext'
+import theme from './template/theme.json'
 
 const configFile = {
   project: 'luisv4',
@@ -31,7 +33,9 @@ Sentry.init({
 
 const wrapper = document.getElementById('app')
 ReactDOM.render(
-  <OrderingProvider Alert={Alert} settings={configFile}>
-    <Router />
-  </OrderingProvider>
+  <ThemeProvider theme={theme}>
+    <OrderingProvider Alert={Alert} settings={configFile}>
+      <Router />
+    </OrderingProvider>
+  </ThemeProvider>
   , wrapper)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { formatUrlVideo } from '../../utils'
+import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
 import { MdClose } from 'react-icons/md'
 import {
   BusinessInformation as BusinessInformationController,
@@ -36,7 +36,6 @@ export const BusinessInformationUI = (props) => {
   const {
     business,
     getBusinessType,
-    dateFormatted,
     formatNumber,
     formatPrice,
     optimizeImage,
@@ -87,12 +86,12 @@ export const BusinessInformationUI = (props) => {
                   {orderState?.options?.type === 1 ? (
                     <p>
                       <FiClock />
-                      {dateFormatted(business?.delivery_time)}
+                      {convertHoursToMinutes(business?.delivery_time)}
                     </p>
                   ) : (
                     <p>
                       <FiClock />
-                      {dateFormatted(business?.pickup_time)}
+                      {convertHoursToMinutes(business?.pickup_time)}
                     </p>
                   )}
                 </>
@@ -161,8 +160,8 @@ export const BusinessInformationUI = (props) => {
                     <h5>{t('DISTANCE', 'Distance:')} {formatNumber(business?.distance) || 0} {t('KM', 'KM')}</h5>
                   </div>
                   <div>
-                    <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {dateFormatted(business?.delivery_time)}</h5>
-                    <h5>{t('PICKUP_TIME', 'Pickup Time:')} {dateFormatted(business?.pickup_time)}</h5>
+                    <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {convertHoursToMinutes(business?.delivery_time)}</h5>
+                    <h5>{t('PICKUP_TIME', 'Pickup Time:')} {convertHoursToMinutes(business?.pickup_time)}</h5>
                   </div>
                 </DeliveryInfo>
               </>

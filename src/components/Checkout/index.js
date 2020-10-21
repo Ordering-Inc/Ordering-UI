@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { VscWarning } from 'react-icons/vsc'
 import Skeleton from 'react-loading-skeleton'
 import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage } from 'ordering-components'
+import { UpsellingPage } from '../UpsellingPage'
 
 import {
   Container,
@@ -46,6 +47,7 @@ const CheckoutUI = (props) => {
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
+  const [errorCash, setErrorCash] = useState(true)
 
   return (
     <Container>
@@ -139,6 +141,7 @@ const CheckoutUI = (props) => {
                 businessId={cart?.business_id}
                 paymethods={businessDetails?.business?.paymethods}
                 onPaymentChange={handlePaymethodChange}
+                setErrorCash={setErrorCash}
               />
             )}
           </PaymentMethodContainer>
@@ -169,7 +172,7 @@ const CheckoutUI = (props) => {
           <WrapperPlaceOrderButton>
             <Button
               color='primary'
-              disabled={!cart?.valid || !paymethodSelected || placing}
+              disabled={!cart?.valid || !paymethodSelected || placing || errorCash}
               onClick={() => handlerClickPlaceOrder()}
             >
               {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}
@@ -183,6 +186,7 @@ const CheckoutUI = (props) => {
           ))
         )} */}
       </WrappContainer>
+
     </Container>
   )
 }
@@ -204,6 +208,28 @@ export const Checkout = (props) => {
   const [, t] = useLanguage()
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
+
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [currentCart, setCurrentCart] = useState(null)
+
+  const handleOpenUpsellingPage = (cart) => {
+    setCurrentCart(cart)
+  }
+
+  const handleUpsellingPage = () => {
+    setOpenUpselling(false)
+    setCurrentCart('')
+    setCanOpenUpselling(false)
+    setOpenUpselling(false)
+    handleCheckoutRedirect(currentCart.uuid)
+  }
+
+  useEffect(() => {
+    if (currentCart?.products) {
+      setOpenUpselling(true)
+    }
+  }, [currentCart])
 
   const getOrder = async (cartId) => {
     try {
@@ -280,9 +306,10 @@ export const Checkout = (props) => {
                 {cart.products.length ? (
                   <Button
                     color='primary'
-                    onClick={() => handleCheckoutRedirect(cart.uuid)}
+                    onClick={() => handleOpenUpsellingPage(cart)}
+                    disabled={currentCart?.uuid === cart?.uuid || openUpselling}
                   >
-                    {t('PAY_CART', 'Pay order')}
+                    {(currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid ? t('LOADING', 'Loading...') : t('PAY_CART', 'Pay order')}
                   </Button>
                 ) : (
                   <Button
@@ -298,7 +325,7 @@ export const Checkout = (props) => {
           ))}
         </CartsList>
       )}
-      {cartState.error && cartState.error?.length > 0 && (
+      {cartUuid && cartState.error && cartState.error?.length > 0 && (
         <NotFoundSource
           content={t('ERROR_CART', 'Sorry, the selected cart was not found.')}
           btnTitle={t('CHECKOUT_REDIRECT', 'Go to Checkout list')}
@@ -306,6 +333,16 @@ export const Checkout = (props) => {
         />
       )}
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
+      {currentCart?.products ? (
+        <UpsellingPage
+          businessId={currentCart?.business_id}
+          cartProducts={currentCart?.products}
+          handleUpsellingPage={handleUpsellingPage}
+          openUpselling={openUpselling}
+          canOpenUpselling={canOpenUpselling}
+          setCanOpenUpselling={setCanOpenUpselling}
+        />
+      ) : ''}
     </>
   )
 }

@@ -33,6 +33,7 @@ export const PopoverBody = styled.div`
   border-radius: 10px;
   max-width: 500px;
   z-index: 1001;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
 
   @media (max-width: 479px) {
     width: 90vw !important;
@@ -69,6 +70,6 @@ export const WrappNotCarts = styled.div`
 `
 
 export const WrapperCarts = styled.div`
-  max-height: 500px;
+  /* max-height: 500px; */
   margin-bottom: 10px;
 `

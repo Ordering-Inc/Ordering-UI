@@ -123,7 +123,10 @@ export const SubMenu = styled(InnerHeader)`
 
   @media (max-width: 820px) {
     display: flex;
-    justify-content: space-around;
+    width: 100%;
+    justify-content: space-between;
+    padding: 7px;
+    box-sizing: border-box;
     margin: 0px;
   }
 `

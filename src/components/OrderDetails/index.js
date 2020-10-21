@@ -197,7 +197,6 @@ const OrderDetailsUI = (props) => {
               {order?.products?.length && order?.products.map(product => (
                 <ProductItemAccordion
                   key={product.id}
-                  isProduct
                   product={product}
                   formatPrice={formatPrice}
                 />
