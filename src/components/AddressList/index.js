@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { TiPencil, VscTrash, IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/all'
 
-import { TiPencil } from 'react-icons/ti'
-import { VscTrash } from 'react-icons/vsc'
-
-import { IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/io'
+import notFound from '../../../template/assets/not-found.svg'
 
 import {
-  AddressList as AddressListController, useLanguage
+  AddressList as AddressListController,
+  useLanguage,
+  useOrder
 } from 'ordering-components'
 
 import {
   AddressListContainer,
   AddressListUl,
   AddressItem,
-  AddressItemActions
+  AddressItemActions,
+  WrappNotAddresses
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -35,6 +36,7 @@ const AddressListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [orderState] = useOrder()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddessOpen] = useState(false)
@@ -95,7 +97,15 @@ const AddressListUI = (props) => {
   return (
     <AddressListContainer>
       {
-        (!popover || !addressOpen) && <Button className='add' color='primary' onClick={() => openAddress({})}>{t('ADD_ADDRESS', 'Add Address')}</Button>
+        (!popover || !addressOpen) && (
+          <Button
+            className='add'
+            color='primary'
+            onClick={() => openAddress({})}
+          >
+            {orderState?.loading ? t('LOADING', 'Loading...') : t('ADD_ADDRESS', 'Add Address')}
+          </Button>
+        )
       }
       {
         popover && addressOpen && (
@@ -115,7 +125,7 @@ const AddressListUI = (props) => {
                 <AddressItem key={address.id}>
                   <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                     <span className='radio'>
-                      {address.default ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}
+                      {address.address === orderState?.options?.address?.address ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>
@@ -134,7 +144,10 @@ const AddressListUI = (props) => {
               ))}
             </AddressListUl>
           ) : (
-            <p>{t('NOT_FOUND_ADDRESS.', 'Not found addresses.')}</p>
+            <WrappNotAddresses>
+              <img src={notFound} alt='notFound' />
+              <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
+            </WrappNotAddresses>
           )}
         </>
       ) : (

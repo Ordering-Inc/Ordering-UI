@@ -105,7 +105,15 @@ export const Router = () => {
                           useLoginByCellphone
                         />
                       )
-                      : <Redirect to='/' />
+                      : (
+                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                          orderStatus.options?.address?.location
+                            ? <Redirect to='/search' />
+                            : <Redirect to='/' />
+                        ) : (
+                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                        )
+                      )
                   }
                 </Route>
                 <Route exact path='/signin'>
@@ -118,7 +126,15 @@ export const Router = () => {
                           useLoginByCellphone
                         />
                       )
-                      : <Redirect to='/' />
+                      : (
+                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                          orderStatus.options?.address?.location
+                            ? <Redirect to='/search' />
+                            : <Redirect to='/' />
+                        ) : (
+                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                        )
+                      )
                   }
                 </Route>
                 <Route exact path='/password/forgot'>
@@ -151,7 +167,7 @@ export const Router = () => {
                   {
                     orderStatus.options?.address?.location
                       ? <BusinessesList />
-                      : <Redirect to='/home' />
+                      : <Redirect to='/login' />
                   }
                 </Route>
                 <Route exact path='/store/:store'>
