@@ -53,6 +53,12 @@ export const BusinessItemAccordion = (props) => {
   }
 
   useEffect(() => {
+    if (isCheckout) {
+      toggleAccordion()
+    }
+  }, [location])
+
+  useEffect(() => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
     if (cartsLength === 1 || isCheckout) {
       setActiveState('active')
