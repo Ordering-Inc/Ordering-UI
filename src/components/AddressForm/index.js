@@ -153,11 +153,10 @@ const AddressFormUI = (props) => {
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
         />
-        <Input
+        <textarea
           name='address_notes'
-          type='textarea'
-          w='100'
-          placeholder='Address Notes'
+          rows={4}
+          placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           ref={register}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
           onChange={hanldeChangeInput}

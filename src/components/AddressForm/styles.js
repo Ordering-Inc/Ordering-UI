@@ -41,6 +41,22 @@ export const FormControl = styled.form`
     }
   }
 
+  textarea {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 10px;
+    border: 1px solid #CCC;
+    outline: none;
+    color: #555;
+    resize: none;
+    border-radius: 16px;
+
+    &:focus {
+      border-color: #555;
+    }
+  }
+
   .input-autocomplete {
     width: 100%;
     background: #FFF;
