@@ -29,6 +29,7 @@ export const MomentPopover = (props) => {
   const { styles, attributes, forceUpdate } = popper
 
   useEffect(() => {
+    if (orderStatus.loading) return
     forceUpdate && forceUpdate()
   }, [open, orderStatus])
 
@@ -36,7 +37,8 @@ export const MomentPopover = (props) => {
     if (!open) return
     const outsidePopover = !popperElement.current?.contains(e.target)
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
-    if (outsidePopover && outsidePopoverMenu) {
+    const outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target)
+    if (outsidePopover && outsidePopoverMenu && outsideModal) {
       props.onClose && props.onClose()
     }
   }
@@ -62,7 +64,7 @@ export const MomentPopover = (props) => {
   return (
     <div className='moment-popover' style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
-        <FaRegClock /> {isADateValid(orderStatus.options?.moment) || t('ASAP', 'ASAP')}
+        <FaRegClock /> {orderStatus.options?.moment && isADateValid(orderStatus.options?.moment) ? orderStatus.options?.moment : t('ASAP_ABBREVIATION', 'ASAP')}
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <MomentControl {...momentProps} />

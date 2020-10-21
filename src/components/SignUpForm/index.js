@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import {
   SignupForm as SignUpController,
@@ -8,11 +9,11 @@ import {
   useSession
 } from 'ordering-components'
 import {
-  LoginContainer,
+  SignUpContainer,
   FormSide,
   HeroSide,
   FormInput,
-  SocialIcons,
+  SocialButtons,
   TitleHeroSide,
   SignUpWith,
   AlreadyRegistered
@@ -31,7 +32,6 @@ const SignUpFormUI = (props) => {
     hanldeChangeInput,
     handleButtonSignupClick,
     elementLinkToLogin,
-    ordering,
     useChekoutFileds,
     validationFields,
     showField,
@@ -88,7 +88,7 @@ const SignUpFormUI = (props) => {
   }
 
   return (
-    <LoginContainer>
+    <SignUpContainer>
       <HeroSide>
         <TitleHeroSide>
           <h1>{t('TITLE_LOGIN', 'Welcome!')}</h1>
@@ -98,21 +98,13 @@ const SignUpFormUI = (props) => {
       <FormSide>
 
         <img src={logoHeader} alt='Logo login' />
-        {
-          <AlreadyRegistered>
-            {elementLinkToLogin && (
-              <>
-                {t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account ?')} {elementLinkToLogin}
-              </>
-            )}
-          </AlreadyRegistered>
-        }
-        {
+        {/** for mobile design
           <SocialIcons>
             {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
             {/* <FaApple />
-            <AiOutlineGoogle /> */}
+            <AiOutlineGoogle />
           </SocialIcons>
+          */
         }
         {
           useLoginByCellphone && useLoginByEmail &&
@@ -123,12 +115,9 @@ const SignUpFormUI = (props) => {
               </Tabs>
             </SignUpWith>
         }
-        {
-          (useChekoutFileds && validationFields.loading) && <p>{t('LOADING_FORM', 'Loading Form...')}</p>
-        }
         <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
           {
-            !(useChekoutFileds && validationFields.loading) && (
+            !(useChekoutFileds && validationFields.loading) ? (
               <>
                 {
                   Object.values(validationFields.fields).map(field => (
@@ -166,12 +155,35 @@ const SignUpFormUI = (props) => {
                   })}
                 />
               </>
+            ) : (
+              <>
+                {[...Array(3)].map((item, i) => (
+                  <Skeleton key={i} height={50} />
+                ))}
+              </>
             )
           }
           <Button color='primary' type='submit' disabled={formState.loading}>
             {formState.loading ? t('LOADING') + '...' : t('SIGNUP', 'Sign up')}
           </Button>
         </FormInput>
+        {
+          <AlreadyRegistered>
+            {elementLinkToLogin && (
+              <>
+                {t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')} {elementLinkToLogin}
+              </>
+            )}
+          </AlreadyRegistered>
+        }
+        <SocialButtons>
+          {
+            configs?.facebook_id &&
+            (
+              <FacebookLoginButton appId={configs?.facebook_id?.value} handleSuccessFacebookLogin={handleSuccessFacebook} />
+            )
+          }
+        </SocialButtons>
       </FormSide>
       <Alert
         title={t('SIGNUP', 'Sign up')}
@@ -182,7 +194,7 @@ const SignUpFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-    </LoginContainer>
+    </SignUpContainer>
   )
 }
 

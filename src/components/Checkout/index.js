@@ -46,6 +46,7 @@ const CheckoutUI = (props) => {
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
+  const [errorCash, setErrorCash] = useState(true)
 
   return (
     <Container>
@@ -139,6 +140,7 @@ const CheckoutUI = (props) => {
                 businessId={cart?.business_id}
                 paymethods={businessDetails?.business?.paymethods}
                 onPaymentChange={handlePaymethodChange}
+                setErrorCash={setErrorCash}
               />
             )}
           </PaymentMethodContainer>
@@ -169,7 +171,7 @@ const CheckoutUI = (props) => {
           <WrapperPlaceOrderButton>
             <Button
               color='primary'
-              disabled={!cart?.valid || !paymethodSelected || placing}
+              disabled={!cart?.valid || !paymethodSelected || placing || errorCash}
               onClick={() => handlerClickPlaceOrder()}
             >
               {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}

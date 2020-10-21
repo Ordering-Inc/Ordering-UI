@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { MomentOption } from 'ordering-components'
-import { useLanguage } from 'ordering-components/_modules/contexts/LanguageContext'
-import { Days, Day, DayName, DayNumber, ContentDay, Hours, Hour } from './styles'
+import { MomentOption, useLanguage } from 'ordering-components'
+import { Days, Day, DayName, DayNumber, ContentDay, Hours, Hour, Title } from './styles'
 
 const MomentControlUI = (props) => {
   const {
@@ -34,13 +33,14 @@ const MomentControlUI = (props) => {
         (BeforeComponent, i) => <BeforeComponent key={i} {...props} />
       )}
 
-      <h2>{t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')}</h2>
+      <Title>{t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')}</Title>
       <Days>
         {
           datesList.slice(0, 6).map(date => {
-            const _date = new Date(date)
-            const dayName = t('DAY' + _date.getDay()).substring(0, 3).toUpperCase()
-            const dayNumber = (_date.getDate() + 1 < 10 ? '0' : '') + (_date.getDate() + 1)
+            const dateParts = date.split('-')
+            const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
+            const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 3).toUpperCase()
+            const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
             return (
               <Day key={dayNumber} selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
                 <ContentDay>
@@ -52,7 +52,7 @@ const MomentControlUI = (props) => {
           })
         }
       </Days>
-      <h2>{t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')}</h2>
+      <Title>{t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')}</Title>
       <Hours>
         <Hour selected={isAsap} onClick={() => handleAsap()}>{t('ASAP', 'As soon as posible')}</Hour>
         {/* <Hour>{t('SCHEDULE_FOR_LATER', 'Schedule for later')}</Hour> */}

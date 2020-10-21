@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import {
   MyOrders as MyOrdersController,
-  useLanguage
+  useLanguage,
+  useOrder
 } from 'ordering-components'
 import {
   MyOrdersContainer,
@@ -33,10 +34,28 @@ import { ProfileOptions } from '../UserProfileForm/ProfileOptions'
 import { Button } from '../../styles/Buttons'
 export const MyOrdersUI = (props) => {
   const { activeOrders, previousOrders } = props
+  const history = useHistory()
   const [, t] = useLanguage()
+  const [, { reorder }] = useOrder()
   const googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
   const getGoogleMapImage = ({ lat, lng }) => {
     return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${googleMapKey}`
+  }
+
+  const [reorderLoading, setReorderLoading] = useState(false)
+
+  const handleReorder = async (orderId) => {
+    setReorderLoading(true)
+    try {
+      const { error, result } = await reorder(orderId)
+      if (!error) {
+        history.push(`/checkout/${result.uuid}`)
+      }
+      setReorderLoading(false)
+    } catch (err) {
+      console.log(err)
+      setReorderLoading(false)
+    }
   }
 
   return (
@@ -137,7 +156,7 @@ export const MyOrdersUI = (props) => {
                     </OrderPastContent>
                     <Reorder>
                       <p>{order.status === 1 || order.status === 11 ? t('ORDER_COMPLETED', 'Complete') : ''}</p>
-                      <Button color='primary'>{t('REORDER', 'Reorder')}</Button>
+                      <Button color='primary' onClick={() => handleReorder(order.id)} disabled={reorderLoading}>{reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}</Button>
                     </Reorder>
                   </IndividualOrderPast>
                 )) : ([...Array(3)].map((item, i) => (
