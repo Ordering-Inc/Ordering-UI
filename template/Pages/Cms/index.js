@@ -10,8 +10,7 @@ export const Cms = (props) => {
     ...props,
     pageSlug,
     handleCmsRedirect: () => {
-      history.push('/pages/OrderingPages')
-      window.location.reload()
+      history.push('/pages')
     }
   }
 

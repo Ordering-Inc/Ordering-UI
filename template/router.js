@@ -27,6 +27,7 @@ import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
+import { PagesList } from './Pages/PagesList'
 
 export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
@@ -40,6 +41,29 @@ export const Router = () => {
       setLoaded(true)
     }
   }, [orderStatus])
+
+  const routes = [
+    { name: 'Search Businesses', slug: '/' },
+    { name: 'Home', slug: '/home' },
+    { name: 'Sign Up', slug: '/signup' },
+    { name: 'Login', slug: '/login' },
+    { name: 'Sign In', slug: '/signin' },
+    { name: 'Forgot Password', slug: '/password/forgot' },
+    { name: 'Reset Password', slug: '/password/reset' },
+    { name: 'Profile', slug: '/profile' },
+    { name: 'My Orders', slug: '/profile/orders' },
+    { name: 'Checkout', slug: '/checkout' },
+    { name: 'Pages', slug: '/pages' }
+  ].sort(function (a, b) {
+    if (a.name > b.name) {
+      return 1
+    }
+    if (a.name < b.name) {
+      return -1
+    }
+    // a must be equal to b
+    return 0
+  })
 
   const handleSuccessSignup = (user) => {
     sessionDispatch({
@@ -163,6 +187,9 @@ export const Router = () => {
                 </Route>
                 <Route exact path='/pages/:pageSlug'>
                   <Cms />
+                </Route>
+                <Route exact path='/pages'>
+                  <PagesList routes={routes} />
                 </Route>
                 <Route path='*'>
                   <PageNotFound />
