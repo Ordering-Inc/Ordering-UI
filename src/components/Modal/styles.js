@@ -44,6 +44,10 @@ export const ModalActions = styled.div`
     }
   }
 `
+export const ModalHeader = styled.div`
+  display: flex;
+
+`
 
 export const ModalTitle = styled.h2`
   text-align: left;
@@ -55,6 +59,11 @@ export const ModalTitle = styled.h2`
   margin-bottom: 20px;
   padding-left: 10px;
   text-transform: capitalize;
+  flex: 1;
+`
+
+export const ModalOrderTypes = styled.div`
+  margin-right: 15px;
 `
 
 export const ModalIcon = styled.span`

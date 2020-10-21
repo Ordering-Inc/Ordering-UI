@@ -41,7 +41,8 @@ const LoginFormUI = (props) => {
     elementLinkToSignup,
     elementLinkToForgotPassword,
     formState,
-    loginTab
+    loginTab,
+    popup
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -94,10 +95,10 @@ const LoginFormUI = (props) => {
           <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
         </TitleHeroSide>
       </HeroSide>
-      <FormSide>
+      <FormSide className={popup}>
         <img src={logoHeader} alt='Logo login' />
         {useLoginByEmail && useLoginByCellphone && (
-          <LoginWith>
+          <LoginWith className={popup}>
             <Tabs variant='primary'>
               {useLoginByEmail && (
                 <Tab
@@ -121,7 +122,7 @@ const LoginFormUI = (props) => {
         <>
           {(useLoginByCellphone || useLoginByEmail) &&
             (
-              <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
+              <FormInput onSubmit={handleSubmit(onSubmit)} noValidate className={popup}>
                 {
                   useLoginByEmail && loginTab === 'email' && (
                     <Input
@@ -186,7 +187,7 @@ const LoginFormUI = (props) => {
             <a href={linkToForgetPassword}>{t('RESET_PASSWORD', 'Reset Password')}</a>
           </>
         )}
-        <NewOnPlatform>
+        <NewOnPlatform className={popup}>
           {elementLinkToSignup && (
             <>
               {t('NEW_ON_PLATFORM', 'New on Ordering?')} {elementLinkToSignup}
@@ -211,7 +212,7 @@ const LoginFormUI = (props) => {
           <AiOutlineGoogle />
         </SocialIcons> */}
 
-        <SocialButtons>
+        <SocialButtons className={popup}>
           {
             configs?.facebook_id &&
             (

@@ -85,11 +85,12 @@ export const SocialMedia = styled.div`
   }
 `
 
-export const SocialIcon = styled.div`
+export const SocialIcon = styled.a`
   display: inline-block;
   width: 30px;
   height: 30px;
   margin: 0 10px;
+  color: initial;
   svg {
     width: 100%;
     height: 100%;

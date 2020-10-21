@@ -103,7 +103,7 @@ export const ProductItemAccordion = (props) => {
                   value={i}
                   disabled={offsetDisabled(product) < i && i !== 0}
                 >
-                  {i === 0 ? 'Remove' : i}
+                  {i === 0 ? t('REMOVE', 'Remove') : i}
                 </option>
               ))}
             </ProductSelect>
@@ -227,7 +227,7 @@ export const ProductItemAccordion = (props) => {
                         {getFormattedSubOptionName({
                           quantity: suboption.quantity,
                           name: suboption.name,
-                          position: (suboption.position !== 'whole') ? suboption.position : '',
+                          position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
                           price: formatPrice(suboption.price)
                         })}
                       </span>

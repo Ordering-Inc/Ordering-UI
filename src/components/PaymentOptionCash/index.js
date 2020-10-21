@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage } from 'ordering-components'
+
+import { formatPrice } from '../../utils'
 
 import {
   PaymentCashContainer,
@@ -14,17 +16,40 @@ import { Input } from '../../styles/Inputs'
 export const PaymentOptionCash = (props) => {
   const {
     orderTotal,
-    onChangeData
+    onChangeData,
+    setErrorCash
   } = props
   const [, t] = useLanguage()
 
   const { handleSubmit, register, errors } = useForm()
 
   const handleChangeCash = (e) => {
-    let cash = parseFloat(e.target.value)
+    let cash = parseFloat(e?.target?.value)
     cash = isNaN(cash) ? null : cash
     onChangeData && onChangeData({ cash })
     handleSubmit(() => {})(e)
+  }
+
+  /**
+   * effect for disable the place button on component did mount
+   */
+  useEffect(() => {
+    handleChangeCash()
+  }, [])
+
+  /**
+   * effect for disable the place button on errors with cash
+   */
+  useEffect(() => {
+    handleError()
+  }, [errors])
+
+  const handleError = () => {
+    if (errors.cash) {
+      setErrorCash(true)
+    } else {
+      setErrorCash(false)
+    }
   }
 
   return (
@@ -39,7 +64,6 @@ export const PaymentOptionCash = (props) => {
             onChange={handleChangeCash}
             ref={
               register({
-                required: true,
                 validate: value => {
                   return value === '' || value >= orderTotal
                 }
@@ -51,7 +75,7 @@ export const PaymentOptionCash = (props) => {
           <ErrorText>{t('FIELD_REQUIRED', 'This field is required')}</ErrorText>
         )}
         {errors.cash && errors.cash.type === 'validate' && (
-          <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: ${orderTotal}</ErrorText>
+          <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: {formatPrice(orderTotal)}</ErrorText>
         )}
       </FormCash>
     </PaymentCashContainer>

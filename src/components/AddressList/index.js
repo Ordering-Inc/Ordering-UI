@@ -20,6 +20,7 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
+import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { Confirm } from '../Confirm'
 
 const AddressListUI = (props) => {
@@ -157,6 +158,7 @@ const AddressListUI = (props) => {
             open={!popover && addressOpen}
             closeOnBackdrop={false}
             onClose={() => setAddessOpen(false)}
+            OrderTypeSelectorHeader={OrderTypeSelectorHeader}
           >
             <AddressForm
               useValidationFileds

@@ -1,0 +1,20 @@
+{
+  "fonts": {
+    "primary": {
+      "name": "Poppins",
+      "weights": [300, 400, 500, 600]
+    },
+    "special": {
+      "name": "Lobster",
+      "weights": [400]
+    }
+  },
+  "colors": {
+    "primary": "#D83520",
+    "primaryContrast": "#FFF",
+    "secundary": "#EFEFEF",
+    "secundaryContrast": "#000",
+    "disabled": "#CBCBCB",
+    "disabledContast": "#000"
+  }
+}

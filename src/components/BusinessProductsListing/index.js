@@ -145,7 +145,7 @@ const BusinessProductsListingUI = (props) => {
 
       <Modal
         width='70%'
-        open={openProduct && location.search}
+        open={Boolean(openProduct && location.search)}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
       >
@@ -166,7 +166,7 @@ const BusinessProductsListingUI = (props) => {
 
         {productModal.error && productModal.error.length > 0 && (
           productModal.error.map((e, i) => (
-            <p key={i}>ERROR: [{e.message}]</p>
+            <p key={i}>{t('ERROR', 'Error')}: [{e.message}]</p>
           ))
         )}
 
@@ -229,7 +229,7 @@ const BusinessProductsListingUI = (props) => {
       {error && error.length > 0 && (
         <ProductsNotFound>
           {error.map((e, i) => (
-            <p key={i}>ERROR: [{e?.message || e}]</p>
+            <p key={i}>{t('ERROR', 'Error')}: [{e?.message || e}]</p>
           ))}
         </ProductsNotFound>
       )}
