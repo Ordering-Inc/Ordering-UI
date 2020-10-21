@@ -238,7 +238,10 @@ export const CartItemActions = styled.div`
 
   button {
     cursor: pointer;
-
+    &:disabled{
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     @media (max-width: 360px) {
       font-size: 14px;
     }

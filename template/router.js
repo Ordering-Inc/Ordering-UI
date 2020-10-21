@@ -23,27 +23,17 @@ import { HomePage } from '../template/Pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import ScrollToTop from '../src/utils/ScrollToTop'
-// import { UpsellingPage } from '../src/components/UpsellingPage'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
-import { ThemeProvider } from '../src/contexts/ThemeContext'
-
-import theme from './theme.json'
 
 export const Router = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
-  // const [productsList, setProductsList] = useState({ products: [], loading: true, error: false })
-  // const [ordering] = useApi()
   const [loaded, setLoaded] = useState(!auth)
   const onlineStatus = useOnlineStatus()
-
-  // useEffect(() => {
-  //   getProducts()
-  // }, [])
 
   useEffect(() => {
     if (!loaded && !orderStatus.loading) {
@@ -58,31 +48,6 @@ export const Router = () => {
       token: user.session.access_token
     })
   }
-  // const getProducts = async () => {
-  //   try {
-  //     setProductsList({
-  //       ...productsList,
-  //       loading: true
-  //     })
-  //     const { content: { result } } = await ordering
-  //       .businesses(41)
-  //       .products()
-  //       .parameters({ type: 1 })
-  //       .get()
-
-  //     setProductsList({
-  //       ...productsList,
-  //       loading: false,
-  //       products: result
-  //     })
-  //   } catch (error) {
-  //     setProductsList({
-  //       ...productsList,
-  //       loading: false,
-  //       error
-  //     })
-  //   }
-  // }
 
   return (
     <BrowserRouter>
@@ -108,17 +73,12 @@ export const Router = () => {
               <Switch>
                 <Route exact path='/home'>
                   <HomePage />
-                  {/* {
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <HomePage />
-                        } */}
                 </Route>
                 <Route exact path='/'>
                   {
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <HomePage />
+                    orderStatus.options?.address?.location
+                      ? <Redirect to='/search' />
+                      : <HomePage />
                   }
                 </Route>
                 <Route exact path='/signup'>
@@ -195,18 +155,12 @@ export const Router = () => {
                 <Route exact path='/store/:store'>
                   <BusinessProductsList />
                 </Route>
-                <Route exact path='/order/:orderId'>
-                  <Order />
-                </Route>
                 <Route exact path='/orders/:orderId'>
                   <OrderDetailsPage />
                 </Route>
                 <Route path='/checkout/:cartUuid?'>
                   <CheckoutPage />
                 </Route>
-                {/* <Route exact path='/upselling_page'>
-                  <UpsellingPage products={productsList.products} onSave={(productCart) => console.log(productCart)} />
-                </Route> */}
                 <Route exact path='/pages/:pageSlug'>
                   <Cms />
                 </Route>
@@ -231,18 +185,6 @@ function Page () {
   return (
     <div>
       <h3>Page: {page}</h3>
-    </div>
-  )
-}
-
-function Order () {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
-  const { orderId } = useParams()
-
-  return (
-    <div>
-      <h3>Order ID: {orderId}</h3>
     </div>
   )
 }
