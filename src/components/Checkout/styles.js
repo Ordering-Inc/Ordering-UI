@@ -70,7 +70,6 @@ export const WrapperPlaceOrderButton = styled.div`
   button {
     width: 70%;
     padding: 5px 20px;
-    color: #FFF;
     cursor: pointer;
 
     &:disabled {
@@ -227,7 +226,7 @@ export const CartItemInfo = styled.div`
   p {
     font-size: 15px;
     opacity: 0.8;
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
     font-weight: bold;
   }
 `
@@ -239,7 +238,6 @@ export const CartItemActions = styled.div`
 
   button {
     cursor: pointer;
-    color: #FFF;
 
     @media (max-width: 360px) {
       font-size: 14px;

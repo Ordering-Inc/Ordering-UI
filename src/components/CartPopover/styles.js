@@ -12,7 +12,7 @@ export const HeaderItem = styled.div`
       height: 15px;
       width: 15px;
       margin: 0;
-      background: #D81212;
+      background: ${props => props.theme.colors.primary};
       border-radius: 100%;
       display: flex;
       justify-content: center;
@@ -20,7 +20,7 @@ export const HeaderItem = styled.div`
       font-size: 10px;
     }
     svg {
-      color: #D81212;
+      color: ${props => props.theme.colors.primary};
       font-size: 30px;
     }
   }
@@ -69,6 +69,6 @@ export const WrappNotCarts = styled.div`
 `
 
 export const WrapperCarts = styled.div`
-  max-height: 500px;
+  /* max-height: 500px; */
   margin-bottom: 10px;
 `

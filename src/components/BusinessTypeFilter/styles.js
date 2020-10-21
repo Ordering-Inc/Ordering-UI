@@ -4,8 +4,11 @@ export const TypeContainer = styled.div`
   display: flex;
   width: 100%;
   overflow-x: auto;
-  justify-content: center;
-  div.category {
+  justify-content: flex-start;
+  text-align: center;
+  > div{
+    margin: 0 auto;
+    > div {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -14,8 +17,10 @@ export const TypeContainer = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 100%;
   }
-
+  }
+  
 `
 
 export const ImageContainer = styled.div`
@@ -28,7 +33,10 @@ export const ImageContainer = styled.div`
     }
      ${({ active }) => active && css`
       img {
-        border-color: red;
+        border-color: ${props => props.theme.colors.primary};
       }
+  `}
+  ${({ load }) => !load && css`
+      opacity: 0;
   `}
 `

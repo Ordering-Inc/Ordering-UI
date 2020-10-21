@@ -28,6 +28,7 @@ export const PayCard = styled.div`
   border-radius: 10px;
   margin-right: 10px;
   margin-top: 10px;
+  text-align: center;
 
   @media (max-width: 840px) {
     width: calc(20% - 12px);
@@ -55,7 +56,7 @@ export const PayCard = styled.div`
   }
 
   &.active {
-    border: 1px solid #D81212;
+    border: 1px solid ${props => props.theme.colors.primary};
   }
 
   &:not(.active) {
@@ -75,7 +76,7 @@ export const CardItemContent = styled.div`
   font-weight: bold;
 
   .checks svg {
-    color: #D81212;
+    color: ${props => props.theme.colors.primary};
     font-size: 22px;
   }
 

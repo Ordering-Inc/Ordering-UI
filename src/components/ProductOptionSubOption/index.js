@@ -1,20 +1,18 @@
 import React from 'react'
 import { ProductOptionSuboption as ProductSubOptionController } from 'ordering-components'
-import { IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/io'
-import { RiCheckboxBlankCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
-import { BiCheckboxSquare, BiCheckbox } from 'react-icons/bi'
-import { BsCircleHalf } from 'react-icons/bs'
+import { BsCircleFill, BsCircleHalf, BsDashCircle, BsPlusCircle } from 'react-icons/bs'
 
 import { formatPrice } from '../../utils'
 
-import { Button } from '../../styles/Buttons'
-
 import {
   Container,
-  WrapperInfo,
-  WrapperActions,
-  WrapperIncrementsDecrements
+  SuboptionPrice,
+  QuantityControl,
+  PositionControl,
+  IconControl,
+  Text
 } from './styles'
+import { MdCheckBox, MdCheckBoxOutlineBlank, MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md'
 
 const ProductOptionSubOptionUI = (props) => {
   const {
@@ -47,77 +45,56 @@ const ProductOptionSubOptionUI = (props) => {
   const price = option.with_half_option && suboption.half_price && state.position !== 'whole' ? suboption.half_price : suboption.price
   return (
     <Container onClick={() => toggleSelect()}>
-      <WrapperInfo>
-        <span>
-          {option.max > 1 ? (
-            state?.selected ? (
-              <BiCheckboxSquare />
-            ) : (
-              <BiCheckbox />
-            )
+      <IconControl>
+        {option.max > 1 ? (
+          state?.selected ? (
+            <MdCheckBox />
           ) : (
-            state?.selected ? (
-              <IoIosRadioButtonOn />
-            ) : (
-              <IoIosRadioButtonOff />
-            )
-          )}
-        </span>
-        <h3>
-          {suboption.name}
-        </h3>
-      </WrapperInfo>
-      <WrapperActions>
-        {option.allow_suboption_quantity && (
-          <WrapperIncrementsDecrements>
-            <Button
-              className={`incdec ${state.quantity === 0 ? 'disabled' : ''}`}
-              circle
-              outline
-              onClick={handleDecrement}
-              disabled={state.quantity === 0}
-            >-
-            </Button>
-            <span>{state.quantity}</span>
-            <Button
-              className={`incdec ${disableIncrement ? 'disabled' : ''}`}
-              circle
-              outline
-              onClick={handleIncrement}
-              disabled={disableIncrement}
-            >+
-            </Button>
-          </WrapperIncrementsDecrements>
+            <MdCheckBoxOutlineBlank disabled />
+          )
+        ) : (
+          state?.selected ? (
+            <MdRadioButtonChecked />
+          ) : (
+            <MdRadioButtonUnchecked disabled />
+          )
         )}
-        {option.with_half_option && (
-          <div>
-            <span onClick={(e) => handlePosition(e, 'left')} disabled={!state.selected || state.position === 'left'}>
-              {state.selected && state.position === 'left' ? (
-                <BsCircleHalf className='reverse' />
-              ) : (
-                <RiCheckboxBlankCircleLine />
-              )}
-            </span>
-            <span onClick={(e) => handlePosition(e, 'whole')} disabled={!state.selected || state.position === 'whole'}>
-              {state.selected && state.position === 'whole' ? (
-                <RiCheckboxBlankCircleFill />
-              ) : (
-                <RiCheckboxBlankCircleLine />
-              )}
-            </span>
-            <span onClick={(e) => handlePosition(e, 'right')} disabled={!state.selected || state.position === 'right'}>
-              {state.selected && state.position === 'right' ? (
-                <BsCircleHalf />
-              ) : (
-                <RiCheckboxBlankCircleLine />
-              )}
-            </span>
-          </div>
-        )}
-        <div>
-          <span>+ {formatPrice(price)}</span>
-        </div>
-      </WrapperActions>
+      </IconControl>
+      <Text>{suboption.name}</Text>
+      {option.allow_suboption_quantity && (
+        <QuantityControl>
+          <BsDashCircle
+            disabled={state.quantity === 0}
+            onClick={handleDecrement}
+          />
+          {state.quantity}
+          <BsPlusCircle
+            disabled={disableIncrement}
+            onClick={handleIncrement}
+          />
+        </QuantityControl>
+      )}
+      {
+        option.with_half_option && (
+          <PositionControl>
+            <BsCircleHalf
+              className={['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}
+              onClick={(e) => handlePosition(e, 'left')}
+            />
+            <BsCircleFill
+              className={[state.selected && state.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
+              onClick={(e) => handlePosition(e, 'whole')}
+            />
+            <BsCircleHalf
+              className={[state.selected && state.position === 'right' ? 'selected' : null].filter(classname => classname).join(' ')}
+              onClick={(e) => handlePosition(e, 'right')}
+            />
+          </PositionControl>
+        )
+      }
+      <SuboptionPrice>
+        + {formatPrice(price)}
+      </SuboptionPrice>
     </Container>
   )
 }

@@ -101,7 +101,9 @@ const ProductOptionsUI = (props) => {
       {!loading && !error && product && (
         <>
           <WrapperImage>
-            <ProductImage bgimage={product?.images} />
+            <ProductImage>
+              <img src={product?.images} alt='product' />
+            </ProductImage>
           </WrapperImage>
           <ProductInfo>
             <div>
@@ -157,6 +159,7 @@ const ProductOptionsUI = (props) => {
                 <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
                 <textarea
                   rows={4}
+                  placeholder={t('SPECIAL_COMMENT', 'Special comment')}
                   defaultValue={productCart.comment}
                   onChange={handleChangeCommentState}
                   disabled={!(productCart && !isSoldOut && maxProductQuantity)}

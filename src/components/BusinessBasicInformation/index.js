@@ -8,9 +8,9 @@ import { BsExclamationCircle } from 'react-icons/bs'
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 
-import { useOrder } from 'ordering-components'
+import { useLanguage, useOrder } from 'ordering-components'
 
-import { optimizeImage, formatPrice } from '../../utils'
+import { optimizeImage, formatPrice, convertHoursToMinutes } from '../../utils'
 
 import {
   BusinessContainer,
@@ -29,21 +29,13 @@ export const BusinessBasicInformation = (props) => {
     businessState
   } = props
   const { business, loading } = businessState
+  const [, t] = useLanguage()
 
   const [orderState] = useOrder()
 
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
 
   const formatNumber = (num) => Math.round(num * 1e2) / 1e2
-
-  const dateFormatted = (date) => {
-    if (!date) return
-    const hour = date.split(':')[0]
-    const minute = date.split(':')[1]
-    const formatHour = hour < 10 ? `0${hour}` : hour
-    const formatMinute = minute < 10 ? `0${minute}` : minute
-    return `${formatHour}:${formatMinute}`
-  }
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return 'none'
@@ -94,12 +86,12 @@ export const BusinessBasicInformation = (props) => {
                   {orderState?.options?.type === 1 ? (
                     <p>
                       <FiClock />
-                      {dateFormatted(business?.delivery_time)}
+                      {convertHoursToMinutes(business?.delivery_time)}
                     </p>
                   ) : (
                     <p>
                       <FiClock />
-                      {dateFormatted(business?.pickup_time)}
+                      {convertHoursToMinutes(business?.pickup_time)}
                     </p>
                   )}
                 </>
@@ -110,7 +102,7 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <p>
                   <VscLocation />
-                  {formatNumber(business?.distance) || 0} KM
+                  {formatNumber(business?.distance) || 0} {t('KM', 'km')}
                 </p>
               ) : (
                 <Skeleton width={70} />
@@ -143,7 +135,6 @@ export const BusinessBasicInformation = (props) => {
           getBusinessType={getBusinessType}
           formatPrice={formatPrice}
           formatNumber={formatNumber}
-          dateFormatted={dateFormatted}
           optimizeImage={optimizeImage}
           onClose={setOpenBusinessInformation}
         />

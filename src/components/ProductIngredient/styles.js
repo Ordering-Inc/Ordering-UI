@@ -7,14 +7,19 @@ export const Container = styled.div`
   cursor: pointer;
 
   span {
-    text-transform: capitalize;
+    display: flex;
+    font-weight: 300;
+    color: #555;
   }
 
   span:nth-child(1) {
-    margin-right: 10px;
+    margin-right: 5px;
     svg {
-      color: #D81212;
+      color: ${props => props.theme.colors.primary};
       font-size: 25px;
+      &[disabled] {
+        color: #CBCBCB;
+      }
     }
   }
 `

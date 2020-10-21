@@ -6,68 +6,94 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 10px;
   cursor: pointer;
+
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 `
-export const WrapperInfo = styled.div`
+
+export const IconControl = styled.div`
+  display: flex;
+  color: ${props => props.theme.colors.primary};
+  margin-right: 5px;
+
+  svg {
+    font-size: 25px;
+  }
+
+  svg[disabled] {
+    color: #CBCBCB;
+  }
+`
+export const Text = styled.div`
+  /* display: flex; */
+  flex: 1 1 auto;
+  font-weight: 300;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 5px;
+`
+
+export const QuantityControl = styled.div`
+  display: flex;
+  color: #555;
+  align-items: center;
+  font-weight: 300;
+  font-size: 18px;
+  margin: 0 5px;
+
+  svg {
+    color: ${props => props.theme.colors.primary};
+    font-size: 20px;
+    margin-right: 3px;
+  }
+
+  svg[disabled] {
+    color: #CBCBCB;
+  }
+
+  svg:last-child {
+    margin-left: 3px;
+    margin-right: 0;
+  }
+`
+
+export const PositionControl = styled.div`
   display: flex;
   align-items: center;
-  width: 30%;
+  color: #CBCBCB;
+  font-weight: 300;
+  font-size: 18px;
+  margin: 0 5px;
 
-  h3 {
-    margin: 0px;
-    text-transform: capitalize;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    font-weight: normal;
-  }
-  span:not(:last-child) {
-    margin-right: 10px;
-  }
-  span svg {
-    font-size: 23px;
-    color: #D81212;
-  }
-`
+  svg {
+    font-size: 20px;
+    margin-right: 3px;
 
-export const WrapperActions = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 70%;
-
-  span {
-    svg {
-      color: #D81212;
-      font-size: 20px;
-      &.reverse {
-        transform: rotate(180deg);
-      }
+    &.reverse {
+      transform: rotate(180deg);
     }
-  }
 
-  div:not(:last-child) {
-    margin-right: 10px;
-  }
-
-  div:nth-child(1) {
-    button.incdec {
-      width: 20px;
-      height: 20px;
-      border: 1px solid #000;
-      color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    &.selected {
+      color: ${props => props.theme.colors.primary};
     }
-    button.disabled {
-      opacity: 0.5;
+
+    &:last-child {
+      margin-right: 0;
     }
   }
 `
 
-export const WrapperIncrementsDecrements = styled.div`
+export const SuboptionPrice = styled.div`
   display: flex;
-
-  button, span {
-    margin-right: 5px;
-  }
+  white-space: nowrap;
+  font-weight: 300;
+  font-size: 14px;
+  color: #555;
+  margin-left: 5px;
 `

@@ -1,54 +1,71 @@
 import React, { useState, useEffect } from 'react'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
 import { DivContainer } from './styles'
 
-export const handleScroll = (container, categories) => {
-  const contain = document.getElementById(container)
-  const categoriesElement = document.getElementById(categories)
-  const botonRight = document.getElementsByClassName('right')[0]
-  const botonLeft = document.getElementsByClassName('left')[0]
-  if (botonLeft || botonRight) {
-    if (contain.scrollLeft < 60) {
-      botonLeft.classList.add('hidden')
-    } else {
-      botonLeft.classList.remove('hidden')
-    }
-    if (contain.scrollLeft > categoriesElement?.scrollWidth - contain.offsetWidth - 30) {
-      botonRight.classList.add('hidden')
-    } else {
-      botonRight.classList.remove('hidden')
-    }
-  }
-}
-
-export const AutoScroll = ({ children, categories, container, length }) => {
+export const AutoScroll = ({ children, categories, container }) => {
   const { width } = useWindowSize()
   const [categoriesElement, setCategoriesElement] = useState([])
+
+  useEffect(() => {
+    const containerElement = document.getElementById(container)
+      .addEventListener('scroll', handleScroll)
+
+    return () => {
+      removeEventListener(containerElement)
+    }
+  })
+
   useEffect(() => {
     const element = document.getElementById(categories)
     setCategoriesElement(element)
-    handleScroll(container, categoriesElement)
-  }, [categoriesElement])
+    handleScroll()
+  }, [categoriesElement, width])
+
+  const handleScroll = () => {
+    const containerElement = document.getElementById(container)
+    const categoriesElement = document.getElementById(categories)
+    const botonRight = document.getElementsByClassName('right')[0]
+    const botonLeft = document.getElementsByClassName('left')[0]
+    if (botonLeft || botonRight) {
+      if (containerElement.scrollLeft < 40) {
+        botonLeft.classList.add('hidden')
+      } else {
+        botonLeft.classList.remove('hidden')
+      }
+      if (containerElement.scrollLeft > categoriesElement?.scrollWidth - containerElement.offsetWidth - 10) {
+        botonRight.classList.add('hidden')
+      } else {
+        botonRight.classList.remove('hidden')
+      }
+    }
+  }
 
   const scrolling = (left) => {
-    const element = document.getElementById(categories)
+    const elementContainer = document.getElementById(container)
     if (left) {
-      console.log(element.children[0].children)
-      element.children[0].children[1].scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      elementContainer.scrollBy({
+        top: 0,
+        left: -200,
+        behavior: 'smooth'
+      })
     } else {
-      element.children[0].children[length].scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      elementContainer.scrollBy({
+        top: 0,
+        left: +200,
+        behavior: 'smooth'
+      })
     }
   }
 
   return (
     <DivContainer>
       {
-        width < categoriesElement.offsetWidth + 50 ? <BsArrowLeft className='left' onClick={() => scrolling('left')} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IoIosArrowBack className='left' onClick={() => scrolling('left')} /> : ''
       }
       {children}
       {
-        width < categoriesElement.offsetWidth + 50 ? <BsArrowRight className='right' onClick={() => scrolling()} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IoIosArrowForward className='right' onClick={() => scrolling()} /> : ''
       }
     </DivContainer>
   )
