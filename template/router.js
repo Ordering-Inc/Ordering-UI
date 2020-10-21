@@ -43,7 +43,6 @@ export const Router = () => {
   }, [orderStatus])
 
   const routes = [
-    { name: 'Search Businesses', slug: '/' },
     { name: 'Home', slug: '/home' },
     { name: 'Sign Up', slug: '/signup' },
     { name: 'Login', slug: '/login' },
@@ -52,18 +51,10 @@ export const Router = () => {
     { name: 'Reset Password', slug: '/password/reset' },
     { name: 'Profile', slug: '/profile' },
     { name: 'My Orders', slug: '/profile/orders' },
+    { name: 'Search Businesses', slug: '/search' },
     { name: 'Checkout', slug: '/checkout' },
     { name: 'Pages', slug: '/pages' }
-  ].sort(function (a, b) {
-    if (a.name > b.name) {
-      return 1
-    }
-    if (a.name < b.name) {
-      return -1
-    }
-    // a must be equal to b
-    return 0
-  })
+  ]
 
   const handleSuccessSignup = (user) => {
     sessionDispatch({

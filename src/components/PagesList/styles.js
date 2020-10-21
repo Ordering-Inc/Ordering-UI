@@ -8,13 +8,6 @@ export const PagesListContainer = styled.div`
   a{
     display: inline;
     text-decoration: none;
-    color: blue
+    color: #000
   }
-`
-
-export const Line = styled.div`
-  width: 100%;
-  display: block;
-  border: 1px solid #ccc;
-  margin-bottom: 0.83em
 `

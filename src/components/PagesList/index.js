@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useApi } from 'ordering-components'
-import { PagesListContainer, Line } from './styles'
+import { useApi, useLanguage } from 'ordering-components'
+import { PagesListContainer } from './styles'
 
 export const PagesList = ({ routes }) => {
   const [ordering] = useApi()
   const [roots, setRoots] = useState(routes)
+  const [, t] = useLanguage()
 
   useEffect(() => {
     getPages()
@@ -22,8 +23,7 @@ export const PagesList = ({ routes }) => {
 
   return (
     <PagesListContainer>
-      <h2>Ordering Site Map</h2>
-      <Line />
+      <h2>{t('SITEMAP', 'Site Map')}</h2>
       {roots.map((route, i) => (
         <span key={i}>
           <a href={route?.id ? `pages/${route.slug}` : route.slug}>{route.name}</a>
