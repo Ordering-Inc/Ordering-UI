@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { IoIosArrowDown, FiClock, BiStoreAlt, VscTrash } from 'react-icons/all'
 import { useOrder, useLanguage } from 'ordering-components'
+import { useLocation } from 'react-router-dom'
 
 import { formatPrice, convertHoursToMinutes } from '../../utils'
 
@@ -18,6 +19,7 @@ import {
 
 export const BusinessItemAccordion = (props) => {
   const {
+    uuid,
     isClosed,
     moment,
     business,
@@ -30,6 +32,8 @@ export const BusinessItemAccordion = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const location = useLocation()
+  const isCheckout = location.pathname === `/checkout/${uuid}`
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -50,7 +54,7 @@ export const BusinessItemAccordion = (props) => {
 
   useEffect(() => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
-    if (cartsLength === 1) {
+    if (cartsLength === 1 || isCheckout) {
       setActiveState('active')
       setHeightState(`${content.current.scrollHeight}px`)
       setRotateState('accordion__icon rotate')
