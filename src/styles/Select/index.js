@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 
 import {
@@ -23,6 +23,7 @@ export const Select = (props) => {
   const defaultOption = options?.find(option => option.value === defaultValue)
   const [selectedOption, setSelectedOption] = useState(defaultOption)
   const [value, setValue] = useState(defaultValue)
+  const dropdownReference = useRef()
 
   const handleSelectClick = (e) => {
     setOpen(!open)
@@ -30,15 +31,16 @@ export const Select = (props) => {
 
   const closeSelect = (e) => {
     if (open) {
-      if (!e.target.classList.contains(Selected.styledComponentId) && !e.target.classList.contains(Option.styledComponentId)) {
+      const outsideDropdown = !dropdownReference.current?.contains(e.target)
+      if (outsideDropdown) {
         setOpen(false)
       }
     }
   }
 
   useEffect(() => {
-    document.addEventListener('mousedown', closeSelect)
-    return () => document.removeEventListener('mousedown', closeSelect)
+    document.addEventListener('mouseup', closeSelect)
+    return () => document.removeEventListener('mouseup', closeSelect)
   }, [open])
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export const Select = (props) => {
       }
       {
         open && options && (
-          <Options position='right'>
+          <Options position='right' ref={dropdownReference}>
             {
               options.map(option => (
                 <Option

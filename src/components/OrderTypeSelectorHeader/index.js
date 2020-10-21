@@ -23,8 +23,6 @@ const OrderTypeSelectorHeaderUI = (props) => {
     { value: 5, content: <Option><FaCarSide />{t('DRIVE_THRU', 'Drive thru')}</Option> }
   ]
 
-  console.log(orderState.options?.type)
-
   return (
     <Select
       options={orderTypes}
