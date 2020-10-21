@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 
 import {
@@ -51,7 +52,6 @@ const ProductOptionsUI = (props) => {
   } = props
 
   const { product, loading, error } = productObject
-
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [, t] = useLanguage()
@@ -221,17 +221,21 @@ const ProductOptionsUI = (props) => {
 
       {modalIsOpen && (
         <Modal
-          title={t('LOGIN')}
           open={modalIsOpen}
           closeOnBackdrop={false}
           onClose={() => closeModal()}
+          width='60%'
+          padding='0'
         >
           <LoginForm
-            ordering={props.ordering}
             handleSuccessLogin={handleSuccessLogin}
+            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+            useLoginByCellphone
+            popup='popup'
           />
-        </Modal>)}
-
+        </Modal>
+      )}
       {error && error.length > 0 && error.map((e, i) => (
         <p key={i}>Error: [{e}]</p>
       ))}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { FooterContainer, Content, Copy, SocialMedia, SocialIcon } from './styles'
-import { FaWhatsapp, FaYoutube, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/all'
+import { FaWhatsapp, FaYoutube, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa'
 import { useLanguage } from 'ordering-components'
 
 export const Footer = () => {
@@ -24,11 +24,11 @@ export const Footer = () => {
         <SocialMedia>
           <h5><strong>{t('FOOTER_QL3_TITLE')}</strong></h5>
           <div>
-            <SocialIcon><FaFacebook href={t('FOOTER_QL3_1_HREF')} /></SocialIcon>
-            <SocialIcon><FaInstagram href={t('FOOTER_QL3_2_HREF')} /></SocialIcon>
-            <SocialIcon><FaTwitter href={t('FOOTER_QL3_3_HREF')} /></SocialIcon>
-            <SocialIcon><FaYoutube href={t('FOOTER_QL3_4_HREF')} /></SocialIcon>
-            <SocialIcon><FaWhatsapp href={t('FOOTER_QL3_5_HREF')} /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_1_HREF')}><FaFacebook /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_2_HREF')}><FaInstagram /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_3_HREF')}><FaTwitter /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_4_HREF')}><FaYoutube /></SocialIcon>
+            <SocialIcon href={t('FOOTER_QL3_5_HREF')}><FaWhatsapp /></SocialIcon>
           </div>
         </SocialMedia>
         <Copy>

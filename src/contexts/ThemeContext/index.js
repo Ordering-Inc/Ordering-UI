@@ -38,7 +38,7 @@ export const ThemeProvider = ({ theme, children }) => {
     }
 
     body {
-      font-family: '${theme.fonts.primary || 'Helvetica'}', sans-serif;
+      font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
       margin: 0;
       background-color: #F8F8F8;
       color: #333;
@@ -75,7 +75,7 @@ export const ThemeProvider = ({ theme, children }) => {
         font.rel = 'stylesheet'
         font.async = true
         font.defer = true
-        font.href = `https://fonts.googleapis.com/css2?family=${fontFamily}:wght@300;400;500;600&display=swap`
+        font.href = `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
 
         window.document.body.appendChild(font)
       }
