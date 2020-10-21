@@ -27,6 +27,7 @@ export const FormControl = styled.form`
     box-sizing: border-box;
     margin: 10px 0px;
     height: 43px;
+    width: 100%;
     &.internal_number,
     &.zipcode {
       width: 48%;
@@ -104,11 +105,16 @@ export const AddressTagSection = styled.div`
     width: 46px;
     height: 46px;
 
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
     span {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 35px;
+      font-size: 32px;
     }
   }
 
