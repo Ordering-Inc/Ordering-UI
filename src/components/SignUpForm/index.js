@@ -98,14 +98,6 @@ const SignUpFormUI = (props) => {
       <FormSide>
 
         <img src={logoHeader} alt='Logo login' />
-        {/** for mobile design
-          <SocialIcons>
-            {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
-            {/* <FaApple />
-            <AiOutlineGoogle />
-          </SocialIcons>
-          */
-        }
         {
           useLoginByCellphone && useLoginByEmail &&
             <SignUpWith>

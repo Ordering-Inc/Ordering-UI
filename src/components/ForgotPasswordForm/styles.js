@@ -2,63 +2,35 @@ import styled from 'styled-components'
 
 export const ForgotPasswordContainer = styled.div`
   display: flex;
-  flex: 1;
-  flex-wrap: 1;
-  flex-direction: column;
+  width: 100%;
   height: calc(100vh - 45px);
   font-size: 1.2em;
+
   @media (min-width: 980px) {
     flex-direction: row;
     min-width: auto;
   }
 `
 
-/* export const Triangle = styled.div`
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border: 100vw solid #d81212;
-    border-right: 73vw solid #f8f8f8;
-    background: white;
-    box-sizing: border-box;
-    padding: 0;
-  @media (min-width: 480px) {
-    width: 50%;
-    max-width: 1000px;
-    border: 250px solid #d81212;
-    border-right: 25vh solid #f8f8f8;
-  }
-  */
-/* &::after {
-    content: "";
-    height: 100%;
-    width: 0;
-    /* border: 10px solid #333; */
-/* border-top: 50% solid transparent;
-    border-bottom: 50% solid transparent;
-     border-right:25vh solid blue;
-  }
-` */
-
 export const HeroSide = styled.div`
   display: flex;
+  width: 50%;
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  background: #d81212;
+  background: ${props => props.theme.colors.primary};
   z-index: 100;
   text-align: center;
   flex: 1;
   height: 100%;
   max-height: 300px;
   font-size: 1.3em;
-  /*font: normal normal bold 106px/148px Tajawal;*/
-  /*letter-spacing: 1.06px;*/
+
   @media (min-width: 980px) {
-    padding: 0 100px;
     flex: 1.2;
     font-size: 1.2em;
     max-height: 100%;
+    width: 100%;
     > img {
       width: 200px;
     }
@@ -103,7 +75,7 @@ export const FormSide = styled.div`
     color: #d81212;
   }
   @media (min-width: 980px) {
-    width: 40%;
+    width: 50%;
     height: 50%;
     max-height: 100%;
     align-self: center;
@@ -139,4 +111,9 @@ export const FormInput = styled.form`
       width: 67%;
     }
   }
+`
+
+export const LoginText = styled.div`
+  margin: 10px auto;
+  width: auto;
 `

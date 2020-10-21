@@ -120,66 +120,65 @@ const LoginFormUI = (props) => {
           </LoginWith>
         )}
         <>
-          {(useLoginByCellphone || useLoginByEmail) &&
-            (
-              <FormInput onSubmit={handleSubmit(onSubmit)} noValidate className={popup}>
-                {
-                  useLoginByEmail && loginTab === 'email' && (
-                    <Input
-                      type='email'
-                      name='email'
-                      placeholder={t('EMAIL')}
-                      ref={register({
-                        required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-                        }
-                      })}
-                      onChange={(e) => hanldeChangeInput(e)}
-                    />
-                  )
-                }
-                {
-                  useLoginByCellphone && loginTab === 'cellphone' && (
-                    <Input
-                      type='tel'
-                      name='cellphone'
-                      placeholder='Cellphone'
-                      ref={register({
-                        required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
-                      })}
-                      onChange={(e) => hanldeChangeInput(e)}
-                    />
-                  )
-                }
-                <Input
-                  type='password'
-                  name='password'
-                  placeholder={t('PASSWORD')}
-                  ref={register({
-                    required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
-                    minLength: {
-                      value: 5,
-                      message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.')
-                        .replace('_attribute_', t('PASSWORD', 'Password'))
-                        .replace('_min_', 8)
-                    }
-                  })}
-                  onChange={(e) => hanldeChangeInput(e)}
-                />
-                <ForgotPassword>
-                  {t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
-                </ForgotPassword>
-                <Button
-                  color='primary'
-                  type='submit'
-                  disabled={formState.loading}
-                >
-                  {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
-                </Button>
-              </FormInput>
-            )}
+          {(useLoginByCellphone || useLoginByEmail) && (
+            <FormInput onSubmit={handleSubmit(onSubmit)} noValidate className={popup}>
+              {
+                useLoginByEmail && loginTab === 'email' && (
+                  <Input
+                    type='email'
+                    name='email'
+                    placeholder={t('EMAIL')}
+                    ref={register({
+                      required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+                      }
+                    })}
+                    onChange={(e) => hanldeChangeInput(e)}
+                  />
+                )
+              }
+              {
+                useLoginByCellphone && loginTab === 'cellphone' && (
+                  <Input
+                    type='tel'
+                    name='cellphone'
+                    placeholder='Cellphone'
+                    ref={register({
+                      required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+                    })}
+                    onChange={(e) => hanldeChangeInput(e)}
+                  />
+                )
+              }
+              <Input
+                type='password'
+                name='password'
+                placeholder={t('PASSWORD')}
+                ref={register({
+                  required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
+                  minLength: {
+                    value: 5,
+                    message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.')
+                      .replace('_attribute_', t('PASSWORD', 'Password'))
+                      .replace('_min_', 8)
+                  }
+                })}
+                onChange={(e) => hanldeChangeInput(e)}
+              />
+              <ForgotPassword>
+                {t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
+              </ForgotPassword>
+              <Button
+                color='primary'
+                type='submit'
+                disabled={formState.loading}
+              >
+                {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
+              </Button>
+            </FormInput>
+          )}
         </>
         {linkToForgetPassword && (
           <>
@@ -201,22 +200,13 @@ const LoginFormUI = (props) => {
           )}
         </NewOnPlatform>
 
-        {/** Code for mobile design */}
-        {/* <SocialIcons>
-          {configs?.facebook_id &&
-            <FacebookLoginButton
-              appId={configs.facebook_id.value}
-              handleSuccessFacebookLogin={handleSuccessFacebook}
-            />}
-          <FaApple />
-          <AiOutlineGoogle />
-        </SocialIcons> */}
-
         <SocialButtons className={popup}>
           {
-            configs?.facebook_id &&
-            (
-              <FacebookLoginButton appId={configs?.facebook_id?.value} handleSuccessFacebookLogin={handleSuccessFacebook} />
+            configs?.facebook_id && (
+              <FacebookLoginButton
+                appId={configs?.facebook_id?.value}
+                handleSuccessFacebookLogin={handleSuccessFacebook}
+              />
             )
           }
         </SocialButtons>

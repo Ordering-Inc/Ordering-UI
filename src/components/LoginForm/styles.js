@@ -2,10 +2,8 @@ import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
   display: flex;
-  flex: 1;
-  flex-wrap: 1;
-  flex-direction: row;
-  min-width: auto;
+  width: 100%;
+
   button{
     box-sizing: content-box;
   }
@@ -23,34 +21,8 @@ export const LoginContainer = styled.div`
   }
 `
 
-/* export const Triangle = styled.div`
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border: 100vw solid #d81212;
-    border-right: 73vw solid #f8f8f8;
-    background: white;
-    box-sizing: border-box;
-    padding: 0;
-  @media (min-width: 480px) {
-    width: 50%;
-    max-width: 1000px;
-    border: 250px solid #d81212;
-    border-right: 25vh solid #f8f8f8;
-  }
-  */
-/* &::after {
-    content: "";
-    height: 100%;
-    width: 0;
-    /* border: 10px solid #333; */
-/* border-top: 50% solid transparent;
-    border-bottom: 50% solid transparent;
-     border-right:25vh solid blue;
-  }
-` */
-
 export const HeroSide = styled.div`
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,6 +35,7 @@ export const HeroSide = styled.div`
   font-size: 1.7em;
 
   @media (max-width: 980px) {
+    width: 100%;
     flex: 1;
     min-height: 300px;
   }
@@ -87,6 +60,7 @@ export const TitleHeroSide = styled.div`
 `
 
 export const FormSide = styled.div`
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,37 +68,41 @@ export const FormSide = styled.div`
   justify-content: space-around;
   padding: 30px 20px;
   flex: 1;
-  width: 40%;
   height: auto;
   font-size: 1.2em;
+
   > img {
     margin-top: 0;
     width: 200px;
   }
+
   a {
     text-decoration: none;
     color: ${props => props.theme.colors.primary};
   }
+
   &.popup{
     padding: 30px 0;
     padding-left: 5px;
   }
+
   @media (max-width: 980px) {
     font-size: 1em;
     height: 100%;
     width: 100%;
+
     > img {
       width: 139px;
       margin-bottom: 15px;
     }
   }
-  
+
 `
 
 export const NewOnPlatform = styled.div`
   &.popup{
     font-size: 0.8em
-    }
+  }
 `
 
 export const SocialIcons = styled.div`
@@ -133,22 +111,16 @@ export const SocialIcons = styled.div`
   flex-wrap: wrap;
   width: 100%;
   flex-direction: column;
-  
+
   > * {
     color: ${props => props.theme.colors.primary}
-
-    /*width: 42px;
-    height: 42px;
-    margin: 25px;
-    border: 3px solid #d81212;
-    border-radius: 100%;
-    cursor: pointer;*/
   }
 `
 
 export const SocialButtons = styled.div`
    width: 100%;
    margin-top: 5px;
+
   > * {
     margin-top: 5px;
     margin-bottom: 20px;
@@ -156,11 +128,13 @@ export const SocialButtons = styled.div`
     padding: 5px;
     color: black;
   }
+
   button{
-      span{
-        font-size: 0.8em;
-      }
+    span{
+      font-size: 0.8em;
     }
+  }
+
   &.popup{
     button{
       width: 79%;
@@ -175,6 +149,7 @@ export const SocialButtons = styled.div`
       width: 80%;
     }
   }
+
   @media (max-width: 980px) {
     > * {
       margin-top: 5px;
@@ -187,17 +162,23 @@ export const LoginWith = styled.div`
   > div {
     justify-content: center;
   }
+
   font-size: 1.1em;
 
+  @media (max-width: 992px) {
+    font-size: 0.8em;
+  }
 `
 
 export const FormInput = styled.form`
   width: 100%;
+
   > * {
     margin: 10px;
     width: 55%;
     padding: 10px 20px
   }
+
   > button {
     margin-top: 10px;
     width: 60%;
@@ -205,23 +186,26 @@ export const FormInput = styled.form`
   }
 
   &.popup{
-  > button{
+    > button{
       width: 85%
     }
   }
+
   @media (max-width: 1024px){
     > * {
       width: 80%;
     }
     button {
-    width: 85%;
+      width: 85%;
+    }
   }
-  }
+
   @media (max-width: 980px) {
     > * {
       margin: 5px;
       width: 55%;
     }
+
     > button{
       width: 60%;
       box-sizing: border-box;

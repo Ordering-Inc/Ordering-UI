@@ -124,7 +124,9 @@ export const Router = () => {
                 <Route exact path='/password/forgot'>
                   {
                     !auth ? (
-                      <ForgotPassword />
+                      <ForgotPassword
+                        elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                      />
                     )
                       : <Redirect to='/' />
                   }

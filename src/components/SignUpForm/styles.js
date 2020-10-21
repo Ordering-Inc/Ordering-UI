@@ -10,38 +10,11 @@ export const SignUpContainer = styled.div`
   button{
     box-sizing: content-box;
   }
-  @media (max-width: 980px) { 
+  @media (max-width: 980px) {
    flex-direction: column;
    height: auto;
   }
 `
-
-/* export const Triangle = styled.div`
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border: 100vw solid #d81212;
-    border-right: 73vw solid #f8f8f8;
-    background: white;
-    box-sizing: border-box;
-    padding: 0;
-  @media (min-width: 480px) {
-    width: 50%;
-    max-width: 1000px;
-    border: 250px solid #d81212;
-    border-right: 25vh solid #f8f8f8;
-  }
-  */
-/* &::after {
-    content: "";
-    height: 100%;
-    width: 0;
-    /* border: 10px solid #333; */
-/* border-top: 50% solid transparent;
-    border-bottom: 50% solid transparent;
-     border-right:25vh solid blue;
-  }
-` */
 
 export const HeroSide = styled.div`
   display: flex;
@@ -62,6 +35,7 @@ export const HeroSide = styled.div`
 `
 
 export const TitleHeroSide = styled.div`
+  color: #FFF;
   z-index: 10;
   display: flex;
   flex-direction: column;
