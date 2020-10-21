@@ -66,6 +66,8 @@ const UserProfileFormUI = (props) => {
     setEdit(false)
   }
 
+  console.log(formState.changes)
+
   return (
     <>
       <ProfileOptions value={t('MY_ACCOUNT', 'My Account')} />
@@ -143,7 +145,7 @@ const UserProfileFormUI = (props) => {
                         })}
                       />
 
-                      <Button color='primary' type='submit'>{t('UPDATE', 'Update')}</Button>
+                      <Button color={Object.keys(formState.changes).length ? 'primary' : 'secondary'} type='submit'>{Object.keys(formState.changes).length ? t('UPDATE', 'Update') : t('CANCEL', 'Cancel')}</Button>
 
                     </>
                   ) : (
