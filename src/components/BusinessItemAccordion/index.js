@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { IoIosArrowDown, FiClock, BiStoreAlt, VscTrash } from 'react-icons/all'
-import { useOrder, useLanguage, useEvent } from 'ordering-components'
+import { useOrder, useLanguage } from 'ordering-components'
 
 import { formatPrice, convertHoursToMinutes } from '../../utils'
 
@@ -30,7 +30,6 @@ export const BusinessItemAccordion = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const [events] = useEvent()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -57,17 +56,6 @@ export const BusinessItemAccordion = (props) => {
     setHeightState(`${content.current.scrollHeight}px`)
     setRotateState('accordion__icon rotate')
   }
-
-  const handleOpenPopoverByEvent = (product, cart) => {
-    if (cart.business?.slug === business?.slug) {
-      activeAccordion()
-    }
-  }
-
-  useEffect(() => {
-    events.on('cart_product_added', handleOpenPopoverByEvent)
-    return () => events.off('cart_product_added', handleOpenPopoverByEvent)
-  }, [])
 
   useEffect(() => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
