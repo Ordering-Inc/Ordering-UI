@@ -6,8 +6,7 @@ import {
   ProductForm as ProductOptions,
   useSession,
   useLanguage,
-  useOrder,
-  useEvent
+  useOrder
 } from 'ordering-components'
 
 import { formatPrice, scrollTo } from '../../utils'
@@ -54,7 +53,6 @@ const ProductOptionsUI = (props) => {
 
   const { product, loading, error } = productObject
 
-  const [events] = useEvent()
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [, t] = useLanguage()
@@ -71,15 +69,10 @@ const ProductOptionsUI = (props) => {
     }
   }
 
-  const handleCartProductAdded = (product, cart) => {}
-
   const handleSaveProduct = () => {
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
       handleSave && handleSave()
-      if (!editMode) {
-        events.on('cart_product_added', handleCartProductAdded)
-      }
       return
     }
     const myElement = document.getElementsByClassName('error')[0]

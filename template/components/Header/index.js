@@ -5,7 +5,7 @@ import {
   SubMenu
 } from './styles'
 
-import { useSession, useLanguage, useOrder } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent } from 'ordering-components'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
 import { useOnlineStatus } from '../../../src/hooks/useOnlineStatus'
 
@@ -20,6 +20,7 @@ import { CartPopover } from '../../../src/components/CartPopover'
 import { OrderTypeSelectorHeader } from '../../../src/components/OrderTypeSelectorHeader'
 
 export const Header = (props) => {
+  const [events] = useEvent()
   const location = useLocation()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
@@ -47,12 +48,12 @@ export const Header = (props) => {
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
 
   const handleAddProduct = () => {
-    console.log('product added')
+    handleTogglePopover('cart')
   }
 
   useEffect(() => {
-    window.addEventListener('cart_product_added', handleAddProduct)
-    return () => window.removeEventListener('cart_product_added', handleAddProduct)
+    events.on('cart_product_added', handleAddProduct)
+    return () => events.off('cart_product_added', handleAddProduct)
   }, [])
 
   return (
