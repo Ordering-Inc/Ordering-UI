@@ -175,7 +175,7 @@ export const FormInput = styled.form`
 
   > button {
     box-sizing: initial;
-    padding: 3px 15px;
+    padding: 5px 15px;
   }
 
   @media (max-width: 720px){
