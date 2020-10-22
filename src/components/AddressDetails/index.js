@@ -70,7 +70,6 @@ const AddressDetailsUI = (props) => {
       <Modal
         title={t('ADDRESS')}
         open={modals.formOpen}
-        closeOnBackdrop={false}
         onClose={() => setModals({ ...modals, formOpen: false })}
       >
         <AddressForm
@@ -84,7 +83,6 @@ const AddressDetailsUI = (props) => {
       <Modal
         title={t('ADDRESSES')}
         open={modals.listOpen}
-        closeOnBackdrop={false}
         onClose={() => setModals({ ...modals, listOpen: false })}
         onCancel={() => setModals({ ...modals, listOpen: false })}
         onAccept={() => handleFindBusinesses()}
