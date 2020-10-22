@@ -166,13 +166,22 @@ export const BusinessTotal = styled.div`
     }
   }
 
+  &.closed {
+    flex: 1;
+    p {
+      text-align: center;
+      margin: 0px 20px;
+      font-size: 18px;
+    }
+  }
+
   @media (max-width: 480px) {
     display: none;
   }
 `
 
 export const BusinessActions = styled.div`
-  width: 30%;
+  max-width: 30%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
