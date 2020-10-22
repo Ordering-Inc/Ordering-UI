@@ -52,6 +52,7 @@ const ProductOptionsUI = (props) => {
   } = props
 
   const { product, loading, error } = productObject
+
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [, t] = useLanguage()

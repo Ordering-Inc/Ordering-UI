@@ -40,9 +40,12 @@ export const BusinessItemAccordion = (props) => {
   const [setRotate, setRotateState] = useState('accordion__icon')
 
   const content = useRef(null)
+  const businessStore = useRef(null)
+  const businessDelete = useRef(null)
 
-  const toggleAccordion = () => {
-    if (isClosed || !isProducts) return
+  const toggleAccordion = (e) => {
+    const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
+    if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
       setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
@@ -50,6 +53,12 @@ export const BusinessItemAccordion = (props) => {
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
+  }
+
+  const activeAccordion = () => {
+    setActiveState('active')
+    setHeightState(`${content.current.scrollHeight}px`)
+    setRotateState('accordion__icon rotate')
   }
 
   useEffect(() => {
@@ -61,16 +70,18 @@ export const BusinessItemAccordion = (props) => {
   useEffect(() => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
     if (cartsLength === 1 || isCheckout) {
-      setActiveState('active')
-      setHeightState(`${content.current.scrollHeight}px`)
-      setRotateState('accordion__icon rotate')
+      activeAccordion()
     }
   }, [orderState?.carts])
 
   return (
     <AccordionSection isClosed={isClosed}>
-      <Accordion isClosed={isClosed} className={`accordion ${setActive}`}>
-        <BusinessInfo onClick={toggleAccordion}>
+      <Accordion
+        isClosed={isClosed}
+        className={`accordion ${setActive}`}
+        onClick={(e) => toggleAccordion(e)}
+      >
+        <BusinessInfo>
           {business?.logo && (
             <WrapperBusinessLogo>
               <BusinessLogo bgimage={business?.logo} />
@@ -93,14 +104,14 @@ export const BusinessItemAccordion = (props) => {
         </BusinessInfo>
 
         {!isClosed && !!isProducts && (
-          <BusinessTotal onClick={toggleAccordion}>
+          <BusinessTotal>
             {isValidProducts && orderTotal > 0 && <p>{formatPrice(orderTotal)}</p>}
             <p>{t('CART_TOTAL', 'Total')}</p>
           </BusinessTotal>
         )}
 
         {isClosed && (
-          <BusinessTotal>
+          <BusinessTotal className='closed'>
             <p>Closed {moment}</p>
           </BusinessTotal>
         )}
@@ -112,11 +123,23 @@ export const BusinessItemAccordion = (props) => {
         )}
 
         <BusinessActions>
-          <BiStoreAlt onClick={() => handleStoreRedirect(business?.slug)} />
+          <span
+            ref={businessStore}
+            onClick={() => handleStoreRedirect(business?.slug)}
+          >
+            <BiStoreAlt color='#CCC' />
+          </span>
           {!isClosed && !!isProducts && (
             <>
-              <VscTrash onClick={() => handleClearProducts()} />
-              <IoIosArrowDown onClick={toggleAccordion} className={`${setRotate}`} />
+              <span
+                ref={businessDelete}
+                onClick={() => handleClearProducts()}
+              >
+                <VscTrash color='#D81212' />
+              </span>
+              <span>
+                <IoIosArrowDown className={`${setRotate}`} />
+              </span>
             </>
           )}
         </BusinessActions>
