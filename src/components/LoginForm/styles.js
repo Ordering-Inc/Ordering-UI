@@ -11,7 +11,6 @@ export const LoginContainer = styled.div`
 `
 const Side = styled.div`
   display: flex;
-  width: 50%;
 
   @media (min-width: 1400px) {
     height: calc(100vh - 65px);
@@ -22,6 +21,7 @@ const Side = styled.div`
   }
 `
 export const HeroSide = styled(Side)`
+  width: 55%;
   justify-content: center;
   align-items: center;
   color: ${props => props.theme.colors.primaryContrast};
@@ -57,6 +57,7 @@ export const TitleHeroSide = styled.div`
 `
 
 export const FormSide = styled(Side)`
+  width: 45%;
   flex-direction: column;
   align-items: center;
 
@@ -106,10 +107,18 @@ export const FormInput = styled.form`
 
 export const RedirectLink = styled.div`
   padding: 10px;
-  margin: 10px 0px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+
+  span {
+    margin-right: 5px;
+  }
+
+  a {
+    color: ${props => props.theme.colors.primary};
+    text-decoration: none;
+  }
 
   * {
     margin: 0px;
@@ -124,13 +133,17 @@ export const RedirectLink = styled.div`
     }
   `}
 
+  @media (min-width: 1200px) {
+    font-size: 17px;
+  }
+
   @media (max-width: 360px) {
     flex-direction: column;
   }
 `
 
 export const SocialButtons = styled.div`
-   width: 70%;
+   width: calc(70% - 20px);
    margin-top: 5px;
 
   button {
