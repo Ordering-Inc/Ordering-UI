@@ -156,10 +156,14 @@ export const Router = () => {
                   <BusinessProductsList />
                 </Route>
                 <Route exact path='/orders/:orderId'>
-                  <OrderDetailsPage />
+                  {auth
+                    ? <OrderDetailsPage />
+                    : <Redirect to='/login' />}
                 </Route>
                 <Route path='/checkout/:cartUuid?'>
-                  <CheckoutPage />
+                  {auth
+                    ? <CheckoutPage />
+                    : <Redirect to='/login' />}
                 </Route>
                 <Route exact path='/pages/:pageSlug'>
                   <Cms />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import moment from 'moment'
 import { Cart as CartController, useOrder, useLanguage } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
@@ -30,18 +30,20 @@ const CartUI = (props) => {
     getProductMax,
     offsetDisabled,
     removeProduct,
-    onClickCheckout,
-    isHideCheckoutButtom
+    onClickCheckout
   } = props
   const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
+  const location = useLocation()
   const momentFormatted = !orderState?.option?.moment ? t('ASAP', 'ASAP') : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+
+  const isCheckoutPage = location.pathname === `/checkout/${cart?.uuid}`
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -106,6 +108,7 @@ const CartUI = (props) => {
   return (
     <CartContainer>
       <BusinessItemAccordion
+        uuid={cart?.uuid}
         orderTotal={cart?.total}
         business={cart?.business}
         isClosed={!cart?.valid_schedule}
@@ -175,7 +178,7 @@ const CartUI = (props) => {
             </table>
           </OrderBill>
         )}
-        {onClickCheckout && isHideCheckoutButtom && (
+        {onClickCheckout && !isCheckoutPage && (
           <CheckoutAction>
             <Button
               color='primary'
