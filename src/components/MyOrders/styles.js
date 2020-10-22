@@ -20,7 +20,7 @@ export const ActiveOrders = styled.div`
 `
 
 export const Card = styled.div`
-  min-width: 400px;
+  width: 400px;
   margin: 10px;
   display: inline-block;
   background: white;
