@@ -93,3 +93,23 @@ export const AddressItemActions = styled.div`
     pointer-events: none;
   }
 `
+
+export const WrappNotAddresses = styled.div`
+  height: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 5px auto 0px;
+
+  img {
+    width: 200px;
+  }
+  h1 {
+    margin: 5px 0px 0px;
+    opacity: 0.5;
+    text-align: center;
+    font-size: 24px;
+  }
+`
