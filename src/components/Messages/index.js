@@ -19,7 +19,7 @@ import {
 } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { BsCardImage, FiSend } from 'react-icons/all'
+import { BsCardImage, IoIosSend } from 'react-icons/all'
 import moment from 'moment'
 import { Alert } from '../Confirm'
 
@@ -29,6 +29,7 @@ export const MessagesUI = (props) => {
     messages,
     handleSend,
     image,
+    message,
     sendMessage,
     setImage,
     setMessage,
@@ -39,6 +40,8 @@ export const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  console.log(image)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -64,8 +67,6 @@ export const MessagesUI = (props) => {
   }
 
   const removeImage = (e) => {
-    const inputImage = document.getElementById('chat_image')
-    inputImage.value = ''
     setImage(null)
   }
 
@@ -114,17 +115,16 @@ export const MessagesUI = (props) => {
     }
   }
 
-  const onSubmit = () => {
-    handleSend()
-  }
-
   const clearInputs = () => {
     const input = document.getElementById('message')
-    input.value = ''
-    const inputImage = document.getElementById('chat_image')
-    inputImage.value = ''
-    setImage(null)
+    if (input) {
+      input.value = ''
+    }
     setMessage('')
+  }
+
+  const onSubmit = (values) => {
+    handleSend()
   }
 
   const closeAlert = () => {
@@ -240,10 +240,10 @@ export const MessagesUI = (props) => {
             placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
             onChange={onChangeMessage}
             name='message'
-            ref={register({
-              required: !image ? 'Write something' : false
-            })}
             id='message'
+            ref={register({
+              required: !image
+            })}
           />
           <label htmlFor='chat_image'>
             <input
@@ -261,16 +261,16 @@ export const MessagesUI = (props) => {
               onClick={removeImage}
               name='delete'
             >
-              {t('DELETE', 'X')}
+              {t('X', 'X')}
             </Button>
           )}
           <WrapperSendMessageButton>
             <Button
               color='primary'
               type='submit'
-              disabled={errors.message || sendMessage.loading}
+              disabled={errors.message || sendMessage.loading || (message === '' && !image)}
             >
-              <FiSend />
+              <IoIosSend />
               {sendMessage.loading ? (
                 <>
                   {t('SENDING_MESSAGE', 'Sending...')}

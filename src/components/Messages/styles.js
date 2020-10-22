@@ -153,11 +153,14 @@ export const Send = styled.form`
 
 export const WrapperSendMessageButton = styled.div`
   button{
+    padding-top: 2px;
+    padding-bottom: 2px;
      > svg {
        margin-right: 10px;
        width: 1em;
        height: 1em; 
-       vertical-align: middle
+       vertical-align: middle;
+       color: white
      }
      &:disabled {
       opacity: 0.5;
