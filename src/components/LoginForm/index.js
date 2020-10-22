@@ -36,7 +36,7 @@ const LoginFormUI = (props) => {
     elementLinkToForgotPassword,
     formState,
     loginTab,
-    popup
+    isPopup
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -82,14 +82,14 @@ const LoginFormUI = (props) => {
   }
 
   return (
-    <LoginContainer>
+    <LoginContainer isPopup={isPopup}>
       <HeroSide>
         <TitleHeroSide>
           <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
           <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
         </TitleHeroSide>
       </HeroSide>
-      <FormSide>
+      <FormSide isPopup={isPopup}>
         <img src={logoHeader} alt='Logo login' />
 
         {useLoginByEmail && useLoginByCellphone && (
@@ -118,7 +118,7 @@ const LoginFormUI = (props) => {
         {(useLoginByCellphone || useLoginByEmail) && (
           <FormInput
             noValidate
-            className={popup}
+            isPopup={isPopup}
             onSubmit={handleSubmit(onSubmit)}
           >
             {useLoginByEmail && loginTab === 'email' && (
@@ -177,13 +177,13 @@ const LoginFormUI = (props) => {
         )}
 
         {elementLinkToSignup && (
-          <RedirectLink register>
+          <RedirectLink register isPopup={isPopup}>
             <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
             {elementLinkToSignup}
           </RedirectLink>
         )}
 
-        <SocialButtons className={popup}>
+        <SocialButtons isPopup={isPopup}>
           {configs?.facebook_id && (
             <FacebookLoginButton
               appId={configs?.facebook_id?.value}
