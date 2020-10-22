@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
+  height: 25px;
+
+  svg {
+    color: ${({ isHome }) => isHome ? '#FFF' : '#000'};
+    height: 25px;
+    width: 25px;
+  }
 `
 
 export const PopoverBody = styled.div`
