@@ -5,7 +5,9 @@ import {
   ModalDialog,
   ModalActions,
   ModalTitle,
-  ModalIcon
+  ModalIcon,
+  ModalHeader,
+  ModalOrderTypes
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -19,17 +21,37 @@ const ModalUI = (props) => {
     onClose,
     acceptText,
     cancelText,
-    hideCloseDefault
+    isTransparent,
+    hideCloseDefault,
+    OrderTypeSelectorHeader
   } = props
   const [, t] = useLanguage()
   return (
-    <ModalDialog className='popup-dialog' width={props.width} padding={props.padding}>
+    <ModalDialog
+      className='popup-dialog'
+      width={props.width}
+      padding={props.padding}
+      isTransparent={isTransparent}
+    >
       {!hideCloseDefault && (
         <ModalIcon>
           <MdClose onClick={() => onClose()} />
         </ModalIcon>
       )}
-      {title && <ModalTitle>{title}</ModalTitle>}
+      <ModalHeader>
+        {title && (
+          <ModalTitle>
+            {title}
+          </ModalTitle>
+        )}
+        {OrderTypeSelectorHeader && (
+          <ModalOrderTypes>
+            {
+              <OrderTypeSelectorHeader />
+            }
+          </ModalOrderTypes>
+        )}
+      </ModalHeader>
       {children}
       {(onCancel || onAccept) && (
         <ModalActions>

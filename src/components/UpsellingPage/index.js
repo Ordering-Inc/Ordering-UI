@@ -1,88 +1,86 @@
-import React, { useState, useEffect } from 'react'
-import { useOrder, useLanguage } from 'ordering-components'
-import { Modal } from '../Modal'
-import { Container, UpsellingContainer, Item, Image, Details } from './styles'
+import React, { useEffect } from 'react'
+import { UpsellingPage as UpsellingPageController, useLanguage } from 'ordering-components'
+import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling, SkeletonContainer } from './styles'
 import { Button } from '../../styles/Buttons'
+import Skeleton from 'react-loading-skeleton'
+import { Modal } from '../Modal'
 
-export const UpsellingPage = (props) => {
-  const { onSave, products } = props
-  const [orderState, { addProduct }] = useOrder()
-  const [upsellingProducts, setUpsellingProducts] = useState([])
-  const [modalOpen, setModalOpen] = useState(true)
+const UpsellingPageUI = (props) => {
+  const { upsellingProducts, handleAddProductUpselling, handleUpsellingPage, openUpselling, canOpenUpselling, setCanOpenUpselling } = props
   const [, t] = useLanguage()
 
   useEffect(() => {
-    handleProductsOfCart()
-  }, [products])
-
-  /**
-   * products of the cart
-   */
-  const handleProductsOfCart = () => {
-    const cartProducts = Object.values(orderState.carts).map(cart => {
-      return cart?.products.map(product => {
-        return product
-      })
-    })
-    getUpsellingProducts(cartProducts)
-  }
-
-  /**
-   *
-   * filt products if they are already in the cart
-   * @param {array} cartProducts
-   */
-  const getUpsellingProducts = (cartProducts) => {
-    setUpsellingProducts(products.filter(product => product.upselling && cartProducts.map(cartProduct => {
-      return product.id !== cartProduct.id
-    })))
-  }
-
-  /**
-   * adding product to the cart from upselling
-   * @param {object} product Product object
-   */
-  const handleAddProductUpselling = async (product) => {
-    const successful = await addProduct(product)
-    if (successful) {
-      onSave(product)
+    if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
+      setCanOpenUpselling(true)
+    } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
+      handleUpsellingPage()
     }
-  }
+  }, [upsellingProducts.loading])
 
   return (
-    <Modal title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')} open={modalOpen} onClose={() => setModalOpen(false)}>
-      <Container>
-        <UpsellingContainer>
-          {
-            upsellingProducts.map(product => (
-              <Item key={product.id}>
-                <Image>
-                  <img src={product.images} />
-                </Image>
-                <Details>
-                  <div>
-                    <p>{product.name}</p>
-                  </div>
-                  <p>${product.price}</p>
-                  <Button color='primary' onClick={handleAddProductUpselling}>{t('ADD', 'Add')}</Button>
-                </Details>
-              </Item>
-            ))
-          }
-        </UpsellingContainer>
-        <Button color='secondary' outline onClick={() => setModalOpen(false)}>
-          {t('NO_THANKS', 'No, Thanks')}
-        </Button>
-      </Container>
-    </Modal>
+    <>
+      {!canOpenUpselling ? '' : (
+        <Modal
+          title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
+          open={openUpselling}
+          onClose={() => handleUpsellingPage()}
+          width='70%'
+        >
+          <Container>
+            <UpsellingContainer>
+              {
+                !upsellingProducts.loading ? (
+                  <>
+                    {
+                      !upsellingProducts.error ? upsellingProducts.products.map(product => (
+                        <Item key={product.id}>
+                          <Image>
+                            <img src={product.images} />
+                          </Image>
+                          <Details>
+                            <div>
+                              <h3 title={product.name}>{product.name}</h3>
+                            </div>
+                            <p>${product.price}</p>
+                            <Button color='primary' onClick={handleAddProductUpselling}>{t('ADD', 'Add')}</Button>
+                          </Details>
+                        </Item>
+                      )) : (
+                        <>
+                          {upsellingProducts.message}
+                        </>
+                      )
+                    }
+                  </>
+                ) : [...Array(8)].map((item, i) => (
+                  <SkeletonContainer key={i}>
+                    <Skeleton width={150} height={250} />
+                  </SkeletonContainer>
+                ))
+              }
+            </UpsellingContainer>
+            <CloseUpselling>
+              <Button
+                color='secondary'
+                outline
+                onClick={() => handleUpsellingPage(false)}
+              >
+                {t('NO_THANKS', 'No, Thanks')}
+              </Button>
+            </CloseUpselling>
+
+          </Container>
+        </Modal>
+      )}
+    </>
   )
 }
 
-/* export const UpsellingPage = (props) => {
+export const UpsellingPage = (props) => {
   const UpsellingPageProps = {
     ...props,
     UIComponent: UpsellingPageUI
   }
 
   return <UpsellingPageController {...UpsellingPageProps} />
-} */
+}

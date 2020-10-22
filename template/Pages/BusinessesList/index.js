@@ -8,11 +8,11 @@ export const BusinessesList = (props) => {
   const businessListingProps = {
     ...props,
     isSearchByName: true,
-    isSearchByDescription: false,
+    isSearchByDescription: true,
     onBusinessClick: (business) => {
       history.push(`/store/${business.slug}`)
     },
-    propsToFetch: ['id', 'name', 'header', 'logo', 'name', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
   }
 
   return (

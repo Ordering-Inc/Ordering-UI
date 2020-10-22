@@ -28,6 +28,7 @@ const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
   const {
+    errors,
     isInitialRender,
     businessState,
     categorySelected,
@@ -134,6 +135,7 @@ const BusinessProductsListingUI = (props) => {
                 category={categorySelected}
                 categoryState={categoryState}
                 businessId={business.id}
+                errors={errors}
                 onProductClick={onProductClick}
               />
             </WrapContent>
@@ -143,7 +145,7 @@ const BusinessProductsListingUI = (props) => {
 
       <Modal
         width='70%'
-        open={openProduct && location.search}
+        open={Boolean(openProduct && location.search)}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
       >
@@ -164,7 +166,7 @@ const BusinessProductsListingUI = (props) => {
 
         {productModal.error && productModal.error.length > 0 && (
           productModal.error.map((e, i) => (
-            <p key={i}>ERROR: [{e.message}]</p>
+            <p key={i}>{t('ERROR', 'Error')}: [{e.message}]</p>
           ))
         )}
 
@@ -198,6 +200,7 @@ const BusinessProductsListingUI = (props) => {
               categories={[]}
               category={categorySelected}
               categoryState={categoryState}
+              isBusinessLoading={loading}
             />
           </WrapContent>
         </>
@@ -226,7 +229,7 @@ const BusinessProductsListingUI = (props) => {
       {error && error.length > 0 && (
         <ProductsNotFound>
           {error.map((e, i) => (
-            <p key={i}>ERROR: [{e?.message || e}]</p>
+            <p key={i}>{t('ERROR', 'Error')}: [{e?.message || e}]</p>
           ))}
         </ProductsNotFound>
       )}

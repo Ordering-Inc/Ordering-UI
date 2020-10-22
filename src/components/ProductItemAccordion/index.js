@@ -103,7 +103,7 @@ export const ProductItemAccordion = (props) => {
                   value={i}
                   disabled={offsetDisabled(product) < i && i !== 0}
                 >
-                  {i === 0 ? 'Remove' : i}
+                  {i === 0 ? t('REMOVE', 'Remove') : i}
                 </option>
               ))}
             </ProductSelect>
@@ -112,9 +112,11 @@ export const ProductItemAccordion = (props) => {
               {product?.quantity}
             </ProductQuantity>
           )}
-          <WrapperProductImage onClick={toggleAccordion}>
-            <ProductImage bgimage={product.images || 'https://picsum.photos/78/80'} />
-          </WrapperProductImage>
+          {product?.images && (
+            <WrapperProductImage onClick={toggleAccordion}>
+              <ProductImage bgimage={product?.images} />
+            </WrapperProductImage>
+          )}
           <ContentInfo>
             <h3 onClick={toggleAccordion}>{product.name}</h3>
             {windowSize.width <= 410 && (
@@ -225,7 +227,7 @@ export const ProductItemAccordion = (props) => {
                         {getFormattedSubOptionName({
                           quantity: suboption.quantity,
                           name: suboption.name,
-                          position: (suboption.position !== 'whole') ? suboption.position : '',
+                          position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
                           price: formatPrice(suboption.price)
                         })}
                       </span>

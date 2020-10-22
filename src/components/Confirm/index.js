@@ -10,6 +10,7 @@ import {
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
+import { useTheme } from 'styled-components'
 
 const ConfirmUI = (props) => {
   const {
@@ -55,8 +56,14 @@ export const Confirm = (props) => {
     UIComponent: ConfirmUI
   }
 
+  const theme = useTheme()
+
   return (
-    <Popup {...popupProps} />
+    <>
+      {
+        theme && <Popup {...popupProps} />
+      }
+    </>
   )
 }
 
