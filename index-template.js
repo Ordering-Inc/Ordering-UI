@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import DirectionProvider, { DIRECTIONS } from 'react-with-direction/dist/DirectionProvider'
 import { Router } from './template/router'
 import { OrderingProvider } from 'ordering-components'
 import { Alert } from './src/components/Confirm'
@@ -35,7 +36,9 @@ const wrapper = document.getElementById('app')
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <OrderingProvider Alert={Alert} settings={configFile}>
-      <Router />
+      <DirectionProvider direction={DIRECTIONS.RTL}>
+        <Router />
+      </DirectionProvider>
     </OrderingProvider>
   </ThemeProvider>
   , wrapper)
