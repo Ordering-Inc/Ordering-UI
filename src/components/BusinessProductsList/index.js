@@ -7,16 +7,18 @@ import { NotFoundSource } from '../NotFoundSource'
 import {
   ProductsContainer,
   ProductsListing,
-  WrapAllCategories
-  // ErrorMessage
+  WrapAllCategories,
+  ErrorMessage
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
   const {
+    errors,
     businessId,
     category,
     categories,
     categoryState,
+    isBusinessLoading,
     onProductClick
   } = props
 
@@ -24,31 +26,21 @@ const BusinessProductsListUI = (props) => {
 
   return (
     <ProductsContainer>
-      {
-        category.id && (
-          <ProductsListing>
-            {
-              categoryState.products?.map(product => (
-                <SingleProductCard
-                  key={product.id}
-                  isSoldOut={(product.inventoried && !product.quantity)}
-                  product={product}
-                  businessId={businessId}
-                  onProductClick={onProductClick}
-                />
-              ))
-            }
-            {
-              categoryState.loading && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
-                <SingleProductCard
-                  key={`skeleton:${i}`}
-                  isSkeleton
-                />
-              ))
-            }
-          </ProductsListing>
-        )
-      }
+      {category.id && (
+        <ProductsListing>
+          {
+            categoryState.products?.map(product => (
+              <SingleProductCard
+                key={product.id}
+                isSoldOut={(product.inventoried && !product.quantity)}
+                product={product}
+                businessId={businessId}
+                onProductClick={onProductClick}
+              />
+            ))
+          }
+        </ProductsListing>
+      )}
 
       {
         !category.id && categories.filter(category => category.id !== null).map((category, i, _categories) => {
@@ -87,18 +79,33 @@ const BusinessProductsListUI = (props) => {
           )
         })
       }
+
       {
-        !categoryState.loading && categoryState.products.length === 0 && (
+        (categoryState.loading || isBusinessLoading) && (
+          <ProductsListing>
+            {[...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+              <SingleProductCard
+                key={`skeleton:${i}`}
+                isSkeleton
+              />
+            ))}
+          </ProductsListing>
+        )
+      }
+
+      {
+        !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && (
           <NotFoundSource
             content={t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
           />
         )
       }
-      {/* {error && error.length > 0 && (
-        error.map((e, i) => (
-          <ErrorMessage key={i}>ERROR: [{e.message}]</ErrorMessage>
+
+      {errors && errors.length > 0 && (
+        errors.map((e, i) => (
+          <ErrorMessage key={i}>ERROR: [{e}]</ErrorMessage>
         ))
-      )} */}
+      )}
     </ProductsContainer>
   )
 }

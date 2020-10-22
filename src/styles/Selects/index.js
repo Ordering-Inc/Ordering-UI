@@ -61,7 +61,6 @@ export const Selected = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
-  /* padding-right: 36px; */
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -70,17 +69,6 @@ export const Selected = styled.div`
   -ms-user-select: none;
   user-select: none;
   z-index: 11;
-
-  svg {
-    vertical-align: text-top;
-    display: flex;
-    margin-left: 7px;
-    ${({ withIcons }) => withIcons && css`
-      &:nth-child(1) {
-        margin-right: 7px;
-      }
-    `}
-  }
 
   @media (max-width: 380px) {
     padding-left: 9px;
@@ -107,10 +95,10 @@ export const Select = styled.div`
 `
 
 export const Chevron = styled.div`
-  font-size: 16px;
-  svg {
-    vertical-align: text-top;
-  }
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
 `
 
 export const Header = styled.div`
