@@ -156,7 +156,6 @@ const AddressListUI = (props) => {
           <Modal
             title={t('ADDRESS', 'Address')}
             open={!popover && addressOpen}
-            closeOnBackdrop={false}
             onClose={() => setAddessOpen(false)}
             OrderTypeSelectorHeader={OrderTypeSelectorHeader}
           >

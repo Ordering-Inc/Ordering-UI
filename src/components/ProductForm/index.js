@@ -224,7 +224,6 @@ const ProductOptionsUI = (props) => {
       {modalIsOpen && (
         <Modal
           open={modalIsOpen}
-          closeOnBackdrop={false}
           onClose={() => closeModal()}
           width='60%'
           padding='0'
