@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
+import notImage from '../../../template/assets/not-image.png'
 
 import {
   ProductForm as ProductOptions,
@@ -102,11 +103,9 @@ const ProductOptionsUI = (props) => {
       {!loading && !error && product && (
         <>
           <WrapperImage>
-            {product?.images && (
-              <ProductImage>
-                <img src={product?.images} alt='product' />
-              </ProductImage>
-            )}
+            <ProductImage>
+              <img src={product?.images || notImage} alt='product' />
+            </ProductImage>
           </WrapperImage>
           <ProductInfo>
             <div>
