@@ -4,6 +4,7 @@ export const LoginContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  min-height: 100vh;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -14,6 +15,10 @@ const Side = styled.div`
 
   @media (min-width: 1400px) {
     height: calc(100vh - 65px);
+  }
+
+  @media (max-width: 992px) {
+    width: 50%;
   }
 
   @media (max-width: 768px) {
@@ -60,17 +65,14 @@ export const FormSide = styled(Side)`
   width: 45%;
   flex-direction: column;
   align-items: center;
+  margin: auto;
 
   img {
     width: 200px;
   }
 
-  @media (max-width: 1399px) {
-    margin: 0px 0px 15px;
-  }
-
   @media (max-width: 768px) {
-    margin-top: 20px;
+    margin: 20px 0px;
   }
 `
 
@@ -100,7 +102,7 @@ export const FormInput = styled.form`
     padding: 5px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 992px) {
     width: 90%;
   }
 `
@@ -133,8 +135,16 @@ export const RedirectLink = styled.div`
     }
   `}
 
-  @media (min-width: 1200px) {
+  @media (max-width: 810px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
     font-size: 17px;
+  }
+
+  @media (max-width: 410px) {
+    font-size: 14px;
   }
 
   @media (max-width: 360px) {
@@ -169,7 +179,7 @@ export const SocialButtons = styled.div`
     }
   }
 
-  @media (max-width: 480px) {
-    width: 90%;
+  @media (max-width: 992px) {
+    width: calc(90% - 20px);
   }
 `

@@ -11,7 +11,7 @@ import {
   HeroSide,
   FormInput,
   TitleHeroSide,
-  LoginText
+  RedirectLink
 } from './styles'
 
 import logoHeader from '../../../template/assets/images/logo-header.svg'
@@ -105,9 +105,12 @@ const ForgotPasswordUI = (props) => {
             {alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD') : t('FRONT_RECOVER_PASSWORD')}
           </Button>
         </FormInput>
-        <LoginText>
-          {t('SIGN_IN_MESSAGE', 'Do you want to sign in?')} {elementLinkToLogin}
-        </LoginText>
+        {elementLinkToLogin && (
+          <RedirectLink register>
+            <span>{t('SIGN_IN_MESSAGE', 'Do you want to sign in?')}</span>
+            {elementLinkToLogin}
+          </RedirectLink>
+        )}
       </FormSide>
       <Alert
         title={alertState.title}
