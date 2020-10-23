@@ -2,6 +2,7 @@ import React from 'react'
 import { CmsContent, useLanguage } from 'ordering-components'
 import { CmsContainer } from './styles'
 import { NotFoundSource } from '../NotFoundSource'
+import Skeleton from 'react-loading-skeleton'
 const CmsUI = (props) => {
   const {
     loading,
@@ -14,7 +15,7 @@ const CmsUI = (props) => {
   return (
     <CmsContainer>
       {
-        loading && t('LOADING', 'Loading...')
+        loading && <Skeleton width='100%' height='500px' />
       }
       {
         body && (
