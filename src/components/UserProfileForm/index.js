@@ -66,8 +66,6 @@ const UserProfileFormUI = (props) => {
     setEdit(false)
   }
 
-  console.log(formState.changes)
-
   return (
     <>
       <ProfileOptions value={t('MY_ACCOUNT', 'My Account')} />
