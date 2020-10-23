@@ -61,138 +61,132 @@ export const App = () => {
         )
       }
       {
-        !onlineStatus && (
+        loaded && (
           <>
             <Header isHome={isHome} />
             <NotNetworkConnectivity />
-            <Footer />
-          </>
-        )
-      }
-      {
-        loaded && onlineStatus && (
-          <>
-            <Header isHome={isHome} />
-            <ScrollToTop>
-              <Switch>
-                <Route exact path='/home'>
-                  <HomePage />
-                </Route>
-                <Route exact path='/'>
-                  {
+            {onlineStatus && (
+              <ScrollToTop>
+                <Switch>
+                  <Route exact path='/home'>
+                    <HomePage />
+                  </Route>
+                  <Route exact path='/'>
+                    {
                     orderStatus.options?.address?.location
                       ? <Redirect to='/search' />
                       : <HomePage />
-                  }
-                </Route>
-                <Route exact path='/signup'>
-                  {
-                    !auth
-                      ? (
-                        <SignUp
+                    }
+                  </Route>
+                  <Route exact path='/signup'>
+                    {
+                      !auth
+                        ? (
+                          <SignUp
+                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                            useLoginByCellphone
+                            useChekoutFileds
+                            handleSuccessSignup={handleSuccessSignup}
+                          />
+                        )
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/login'>
+                    {
+                      !auth
+                        ? (
+                          <Login
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                            useLoginByCellphone
+                          />
+                        )
+                        : (
+                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                          orderStatus.options?.address?.location
+                            ? <Redirect to='/search' />
+                            : <Redirect to='/' />
+                        ) : (
+                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                        )
+                        )
+                    }
+                  </Route>
+                  <Route exact path='/signin'>
+                    {
+                      !auth
+                        ? (
+                          <Login
+                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                            useLoginByCellphone
+                          />
+                        )
+                        : (
+                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                          orderStatus.options?.address?.location
+                            ? <Redirect to='/search' />
+                            : <Redirect to='/' />
+                        ) : (
+                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                        )
+                        )
+                    }
+                  </Route>
+                  <Route exact path='/password/forgot'>
+                    {
+                      !auth ? (
+                        <ForgotPassword
                           elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                          useLoginByCellphone
-                          useChekoutFileds
-                          handleSuccessSignup={handleSuccessSignup}
                         />
                       )
-                      : <Redirect to='/' />
-                  }
-                </Route>
-                <Route exact path='/login'>
-                  {
-                    !auth
-                      ? (
-                        <Login
-                          elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                          elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                          useLoginByCellphone
-                        />
-                      )
-                      : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
-                        )
-                      )
-                  }
-                </Route>
-                <Route exact path='/signin'>
-                  {
-                    !auth
-                      ? (
-                        <Login
-                          elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                          elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                          useLoginByCellphone
-                        />
-                      )
-                      : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
-                        )
-                      )
-                  }
-                </Route>
-                <Route exact path='/password/forgot'>
-                  {
-                    !auth ? (
-                      <ForgotPassword
-                        elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                      />
-                    )
-                      : <Redirect to='/' />
-                  }
-                </Route>
-                <Route exact path='/password/reset'>
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/password/reset'>
                   Password reset
-                </Route>
-                <Route exact path='/profile'>
-                  {auth
-                    ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
-                    : <Redirect to='/login' />}
-                </Route>
-                <Route exact path='/profile/orders'>
-                  {auth
-                    ? (<MyOrders />)
-                    : <Redirect to='/login' />}
-                </Route>
-                <Route exact path='/search'>
-                  {
+                  </Route>
+                  <Route exact path='/profile'>
+                    {auth
+                      ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+                      : <Redirect to='/login' />}
+                  </Route>
+                  <Route exact path='/profile/orders'>
+                    {auth
+                      ? (<MyOrders />)
+                      : <Redirect to='/login' />}
+                  </Route>
+                  <Route exact path='/search'>
+                    {
                     orderStatus.options?.address?.location
                       ? <BusinessesList />
-                      : <Redirect to='/login' />
-                  }
-                </Route>
-                <Route exact path='/store/:store'>
-                  <BusinessProductsList />
-                </Route>
-                <Route exact path='/orders/:orderId'>
-                  {auth
-                    ? <OrderDetailsPage />
-                    : <Redirect to='/login' />}
-                </Route>
-                <Route path='/checkout/:cartUuid?'>
-                  {auth
-                    ? <CheckoutPage />
-                    : <Redirect to='/login' />}
-                </Route>
-                <Route exact path='/pages/:pageSlug'>
-                  <Cms />
-                </Route>
-                <Route path='*'>
-                  <PageNotFound />
-                </Route>
-              </Switch>
-              <Footer />
-            </ScrollToTop>
+                      : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/store/:store'>
+                    <BusinessProductsList />
+                  </Route>
+                  <Route exact path='/orders/:orderId'>
+                    {auth
+                      ? <OrderDetailsPage />
+                      : <Redirect to='/login' />}
+                  </Route>
+                  <Route path='/checkout/:cartUuid?'>
+                    {auth
+                      ? <CheckoutPage />
+                      : <Redirect to='/login' />}
+                  </Route>
+                  <Route exact path='/pages/:pageSlug'>
+                    <Cms />
+                  </Route>
+                  <Route path='*'>
+                    <PageNotFound />
+                  </Route>
+                </Switch>
+              </ScrollToTop>
+            )}
+            <Footer />
           </>
         )
       }
