@@ -6,8 +6,7 @@ import {
   GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
-  GoogleMaps,
-  WrapperGoogleMaps
+  GoogleMapsMap
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 
@@ -43,7 +42,6 @@ const AddressFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
-  const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 

@@ -3,8 +3,7 @@ import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
 import { MdClose } from 'react-icons/md'
 import {
   BusinessInformation as BusinessInformationController,
-  GoogleMaps,
-  WrapperGoogleMaps,
+  GoogleMapsMap,
   useOrder,
   useLanguage
 } from 'ordering-components'
@@ -48,7 +47,6 @@ export const BusinessInformationUI = (props) => {
   const [orderState] = useOrder()
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
-  const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
   const [, t] = useLanguage()
 
   const scheduleFormatted = ({ hour, minute }) => {
