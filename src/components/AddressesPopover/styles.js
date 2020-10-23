@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { HeaderInvert } from '../../../template/components/Header/styles'
+import { HeaderInvert } from '../Header/styles'
 
 export const HeaderItem = styled.div`
   cursor: pointer;

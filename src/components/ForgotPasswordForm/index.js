@@ -14,10 +14,9 @@ import {
   RedirectLink
 } from './styles'
 
-import logoHeader from '../../../template/assets/images/logo-header.svg'
-
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { useTheme } from 'styled-components'
 
 const ForgotPasswordUI = (props) => {
   const {
@@ -31,6 +30,7 @@ const ForgotPasswordUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, title: '', content: [], success: false })
   const [, t] = useLanguage()
+  const theme = useTheme()
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -85,7 +85,7 @@ const ForgotPasswordUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide>
-        <img src={logoHeader} alt='Logo' />
+        <img src={theme?.images?.logos?.logotype} alt='Logo' />
         <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
           <Input
             type='text'
