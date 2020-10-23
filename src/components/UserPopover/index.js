@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, useSession, LogoutAction as LogoutActionController } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow, PopoverList, PopoverListItem, PopoverListLink } from './styles'
@@ -26,6 +27,8 @@ export const UserPopover = (props) => {
   })
 
   const { styles, attributes, forceUpdate } = popper
+  const location = useLocation()
+  const isHome = location.pathname === '/' || location.pathname === '/home'
 
   useEffect(() => {
     forceUpdate && forceUpdate()
@@ -51,8 +54,11 @@ export const UserPopover = (props) => {
   }
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>
-        <DropDownCircleImage src={sessionState.user.photo} fallback={<FaUserAlt />} />
+      <HeaderItem isHome={isHome} ref={referenceElement} onClick={props.onClick}>
+        <DropDownCircleImage
+          src={sessionState?.user?.photo}
+          fallback={<FaUserAlt />}
+        />
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>

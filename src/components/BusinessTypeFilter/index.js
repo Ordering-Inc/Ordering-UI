@@ -9,6 +9,7 @@ import groceries from '../../../template/assets/category-groceries.png'
 import alcohol from '../../../template/assets/category-alcohol.png'
 import laundry from '../../../template/assets/category-laundry.png'
 import all from '../../../template/assets/category-all.png'
+import { AutoScroll } from '../AutoScroll'
 
 const BusinessTypeFilterUI = (props) => {
   const {
@@ -21,20 +22,22 @@ const BusinessTypeFilterUI = (props) => {
   const [load, setLoad] = useState(false)
 
   return (
-    <TypeContainer>
-      <Tabs variant='primary'>
-        {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
-          <Tab className='category' active={type.value === currentTypeSelected} key={type.value}>
-            {!type.value || i > (images.length - 1) ? <ImageContainer active={type.value === currentTypeSelected} load={load}><img src={images[0].image} onLoad={() => setLoad(true)} onClick={() => handleChangeBusinessType(type.value)} /></ImageContainer> : ''}
-            {images.map(image => (
-              <React.Fragment key={image.value}>
-                {image.value === type.value ? <ImageContainer active={type.value === currentTypeSelected} load={load}><img src={image.image} onClick={() => handleChangeBusinessType(type.value)} /></ImageContainer> : ''}
-              </React.Fragment>
-            )
-            )}
-            {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
-          </Tab>
-        ))}
+    <TypeContainer id='container'>
+      <Tabs variant='primary' id='categories'>
+        <AutoScroll categories='categories' container='container'>
+          {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
+            <Tab className='category' active={type.value === currentTypeSelected} key={type.value}>
+              {!type.value || i > (images.length - 1) ? <ImageContainer active={type.value === currentTypeSelected} load={load}><img src={images[0].image} onLoad={() => setLoad(true)} onClick={() => handleChangeBusinessType(type.value)} /></ImageContainer> : ''}
+              {images.map(image => (
+                <React.Fragment key={image.value}>
+                  {image.value === type.value ? <ImageContainer active={type.value === currentTypeSelected} load={load}><img src={image.image} onClick={() => handleChangeBusinessType(type.value)} /></ImageContainer> : ''}
+                </React.Fragment>
+              )
+              )}
+              {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
+            </Tab>
+          ))}
+        </AutoScroll>
       </Tabs>
     </TypeContainer>
   )

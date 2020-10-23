@@ -105,10 +105,13 @@ export const ContentInfo = styled.div`
       font-size: 14px;
     }
 
-    div svg {
-      font-size: 20px;
-      &:nth-child(1) {
-        margin-right: 3px;
+    div span {
+      height: 20px;
+      svg {
+        font-size: 20px;
+        &:nth-child(1) {
+          margin-right: 3px;
+        }
       }
     }
   }

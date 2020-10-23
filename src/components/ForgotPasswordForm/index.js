@@ -10,9 +10,9 @@ import {
   FormSide,
   HeroSide,
   FormInput,
-  TitleHeroSide
+  TitleHeroSide,
+  RedirectLink
 } from './styles'
-// import triangle from '../../../template/triangle.svg'
 
 import logoHeader from '../../../template/assets/images/logo-header.svg'
 
@@ -24,7 +24,8 @@ const ForgotPasswordUI = (props) => {
     hanldeChangeInput,
     handleButtonForgotPasswordClick,
     formState,
-    formData
+    formData,
+    elementLinkToLogin
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -85,26 +86,30 @@ const ForgotPasswordUI = (props) => {
       </HeroSide>
       <FormSide>
         <img src={logoHeader} alt='Logo' />
-        {(
-          <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Input
-              type='text'
-              name='email'
-              spellcheck='false'
-              placeholder={t('EMAIL')}
-              onChange={(e) => hanldeChangeInput(e)}
-              ref={register({
-                required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-                }
-              })}
-            />
-            <Button color={formState.loading || alertState.success ? 'secondary' : 'primary'} type='submit' disabled={formState.loading || alertState.success}>
-              {alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD') : t('FRONT_RECOVER_PASSWORD')}
-            </Button>
-          </FormInput>
+        <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
+          <Input
+            type='text'
+            name='email'
+            spellcheck='false'
+            placeholder={t('EMAIL')}
+            onChange={(e) => hanldeChangeInput(e)}
+            ref={register({
+              required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+              }
+            })}
+          />
+          <Button color={formState.loading || alertState.success ? 'secondary' : 'primary'} type='submit' disabled={formState.loading || alertState.success}>
+            {alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD') : t('FRONT_RECOVER_PASSWORD')}
+          </Button>
+        </FormInput>
+        {elementLinkToLogin && (
+          <RedirectLink register>
+            <span>{t('SIGN_IN_MESSAGE', 'Do you want to sign in?')}</span>
+            {elementLinkToLogin}
+          </RedirectLink>
         )}
       </FormSide>
       <Alert
