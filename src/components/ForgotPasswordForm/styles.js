@@ -1,142 +1,147 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ForgotPasswordContainer = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex: 1;
-  flex-wrap: 1;
-  flex-direction: column;
-  height: calc(100vh - 45px);
-  font-size: 1.2em;
-  @media (min-width: 980px) {
-    flex-direction: row;
-    min-width: auto;
+  min-height: 100vh;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `
-
-/* export const Triangle = styled.div`
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border: 100vw solid #d81212;
-    border-right: 73vw solid #f8f8f8;
-    background: white;
-    box-sizing: border-box;
-    padding: 0;
-  @media (min-width: 480px) {
-    width: 50%;
-    max-width: 1000px;
-    border: 250px solid #d81212;
-    border-right: 25vh solid #f8f8f8;
-  }
-  */
-/* &::after {
-    content: "";
-    height: 100%;
-    width: 0;
-    /* border: 10px solid #333; */
-/* border-top: 50% solid transparent;
-    border-bottom: 50% solid transparent;
-     border-right:25vh solid blue;
-  }
-` */
-
-export const HeroSide = styled.div`
+const Side = styled.div`
   display: flex;
+
+  @media (min-width: 1400px) {
+    height: calc(100vh - 65px);
+  }
+
+  @media (max-width: 992px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+export const HeroSide = styled(Side)`
+  width: 55%;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  background: #d81212;
-  z-index: 100;
-  text-align: center;
-  flex: 1;
-  height: 100%;
-  max-height: 300px;
-  font-size: 1.3em;
-  /*font: normal normal bold 106px/148px Tajawal;*/
-  /*letter-spacing: 1.06px;*/
-  @media (min-width: 980px) {
-    padding: 0 100px;
-    flex: 1.2;
-    font-size: 1.2em;
-    max-height: 100%;
-    > img {
-      width: 200px;
-    }
+  color: ${props => props.theme.colors.primaryContrast};
+  background-color:  ${props => props.theme.colors.primary};
+
+  @media (max-width: 768px) {
+    height: calc(50vh - 65px);
   }
 `
 
 export const TitleHeroSide = styled.div`
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0 10px;
-  font-size: 1em;
-  @media (min-width: 980px) {
-    flex: 1.2;
-    padding: 0 50px;
-    > img {
-      width: 200px;
-    }
-  }
-  @media (max-width: 480px) {
-    font-size: 0.8em;
-  }
-`
-
-export const FormSide = styled.div`
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 100%;
-  flex: 1;
-  > img {
-    width: 139px;
-    margin-top: 2vh;
+
+  h1 {
+    font-size: 52px;
   }
-  a {
-    text-decoration: none;
-    color: #d81212;
+
+  h1,
+  p {
+    margin: 0px;
+    color: #FFF;
   }
-  @media (min-width: 980px) {
-    width: 40%;
-    height: 50%;
-    max-height: 100%;
-    align-self: center;
-    > img {
-      margin-top: 0;
-      width: 200px;
+
+  @media (max-width: 576px) {
+    h1 {
+      font-size: 32px;
     }
   }
 `
 
+export const FormSide = styled(Side)`
+  width: 45%;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+
+  img {
+    width: 200px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 20px 0px;
+  }
+`
+
 export const FormInput = styled.form`
-  width: 100%;
-  > * {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+
+  * {
+    padding: 8px 20px;
     margin: 10px;
-    width: 60%;
   }
-  > input{
-    padding: 15px 20px
-  }
-  > :last-child {
+
+  input:not(:last-child) {
     margin-top: 10px;
-    margin-bottom: 20px;
-    width: 67%;
-    padding: 8px
+    margin-bottom: 0px;
   }
-  @media (min-width: 980px) {
-    > * {
-      margin: 10px;
-      width: 60%;
+
+  button {
+    margin-top: 10px;
+    padding: 5px;
+  }
+
+  @media (max-width: 992px) {
+    width: 90%;
+  }
+`
+
+export const RedirectLink = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    margin-right: 5px;
+  }
+
+  a {
+    color: ${props => props.theme.colors.primary};
+    text-decoration: none;
+  }
+
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  ${({ register }) => register && css`
+    width: calc(70% - 20px);
+
+    @media (max-width: 480px) {
+      width: calc(90% - 20px);
     }
-    > :last-child {
-      margin-top: 10px;
-      width: 67%;
-    }
+  `}
+
+  @media (max-width: 810px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 17px;
+  }
+
+  @media (max-width: 410px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 360px) {
+    flex-direction: column;
   }
 `

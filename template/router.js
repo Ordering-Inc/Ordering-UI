@@ -105,7 +105,15 @@ export const Router = () => {
                           useLoginByCellphone
                         />
                       )
-                      : <Redirect to='/' />
+                      : (
+                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                          orderStatus.options?.address?.location
+                            ? <Redirect to='/search' />
+                            : <Redirect to='/' />
+                        ) : (
+                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                        )
+                      )
                   }
                 </Route>
                 <Route exact path='/signin'>
@@ -118,13 +126,23 @@ export const Router = () => {
                           useLoginByCellphone
                         />
                       )
-                      : <Redirect to='/' />
+                      : (
+                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                          orderStatus.options?.address?.location
+                            ? <Redirect to='/search' />
+                            : <Redirect to='/' />
+                        ) : (
+                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                        )
+                      )
                   }
                 </Route>
                 <Route exact path='/password/forgot'>
                   {
                     !auth ? (
-                      <ForgotPassword />
+                      <ForgotPassword
+                        elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                      />
                     )
                       : <Redirect to='/' />
                   }
@@ -149,17 +167,21 @@ export const Router = () => {
                   {
                     orderStatus.options?.address?.location
                       ? <BusinessesList />
-                      : <Redirect to='/home' />
+                      : <Redirect to='/login' />
                   }
                 </Route>
                 <Route exact path='/store/:store'>
                   <BusinessProductsList />
                 </Route>
                 <Route exact path='/orders/:orderId'>
-                  <OrderDetailsPage />
+                  {auth
+                    ? <OrderDetailsPage />
+                    : <Redirect to='/login' />}
                 </Route>
                 <Route path='/checkout/:cartUuid?'>
-                  <CheckoutPage />
+                  {auth
+                    ? <CheckoutPage />
+                    : <Redirect to='/login' />}
                 </Route>
                 <Route exact path='/pages/:pageSlug'>
                   <Cms />

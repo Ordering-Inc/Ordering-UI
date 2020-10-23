@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { DropDownCircleImage } from '../Dropdown/style'
 import {
   Messages as MessagesController,
   useLanguage,
@@ -9,9 +10,6 @@ import Skeleton from 'react-loading-skeleton'
 import {
   MessagesContainer,
   HeaderProfile,
-  HeaderInformation,
-  HeaderName,
-  Status,
   Image,
   Chat,
   BubbleCustomer,
@@ -30,11 +28,12 @@ import {
   MessageConsole,
   BubbleConsole,
   WrapperDeleteImage,
-  WrapperSendMessageButton
+  WrapperSendMessageButton,
+  HeaderOnline
 } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { BsCardImage, IoIosSend } from 'react-icons/all'
+import { BsCardImage, IoIosSend, RiUser2Fill, FaUserAlt } from 'react-icons/all'
 import moment from 'moment'
 import { Alert } from '../Confirm'
 
@@ -173,29 +172,33 @@ export const MessagesUI = (props) => {
         <Image>
           {
             business && (
-              <img src={order.business?.logo} />
+              <DropDownCircleImage
+                src={order.business?.logo}
+                fallback={<FaUserAlt />}
+              />
             )
           }
           {
             driver && (
-              <img src={order.driver?.photo} name='driver' />
+              <DropDownCircleImage
+                src={order.driver?.photo}
+                fallback={<RiUser2Fill />}
+              />
             )
           }
         </Image>
-        <HeaderInformation>
-          {business && (
-            <>
-              <strong><HeaderName>{order.business?.name}</HeaderName></strong>
-              <Status>{t('ONLINE', 'Online')}</Status>
-            </>
-          )}
-          {driver && (
-            <>
-              <strong><HeaderName>{order.driver?.name}</HeaderName></strong>
-              <Status>{t('ONLINE', 'Online')}</Status>
-            </>
-          )}
-        </HeaderInformation>
+        {business && (
+          <HeaderOnline>
+            <h1>{order.business?.name}</h1>
+            <span>{t('ONLINE', 'Online')}</span>
+          </HeaderOnline>
+        )}
+        {driver && (
+          <HeaderOnline>
+            <h1>{order.driver?.name}</h1>
+            <span>{t('ONLINE', 'Online')}</span>
+          </HeaderOnline>
+        )}
       </HeaderProfile>
       {!messages.loading ? (
         <Chat id='chat'>
