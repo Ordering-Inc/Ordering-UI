@@ -60,6 +60,9 @@ export const BusinessProductsList = (props) => {
         return history.go(-1)
       }
       return history.push(`/store/${slug}?category=${category}&product=${product}`)
+    },
+    onCheckoutRedirect: (uuid) => {
+      history.push(`/checkout/${uuid}`)
     }
   }
 
