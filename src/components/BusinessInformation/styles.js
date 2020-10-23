@@ -19,6 +19,7 @@ export const BusinessHeader = styled.div`
   justify-content: left;
   align-items: flex-end;
   position: relative;
+  background-color: #FFF;
 
   img{
     object-fit: cover;

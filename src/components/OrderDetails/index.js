@@ -290,9 +290,11 @@ const OrderDetailsUI = (props) => {
       )}
 
       {error && error.length > 0 &&
-        error.map((e, i) => (
-          <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-        ))}
+        error.map((e, i) => {
+          if (e) {
+            return <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
+          }
+        })}
 
       {!loading && !order && (
         <NotFoundSource

@@ -40,6 +40,8 @@ export const BusinessItemAccordion = (props) => {
   const businessStore = useRef(null)
   const businessDelete = useRef(null)
 
+  const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
+
   const toggleAccordion = (e) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
     if (isClosed || !isProducts || isActionsClick) return
@@ -52,22 +54,23 @@ export const BusinessItemAccordion = (props) => {
     )
   }
 
-  const activeAccordion = () => {
-    setActiveState('active')
-    setHeightState(`${content.current.scrollHeight}px`)
-    setRotateState('accordion__icon rotate')
+  const activeAccordion = (value) => {
+    setActiveState(value ? 'active' : '')
+    setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
+    setRotateState(value ? 'accordion__icon rotate' : 'accordion__icon')
   }
 
   useEffect(() => {
-    if (isCheckout) {
+    if (isCheckout && cartsLength > 1) {
       toggleAccordion()
     }
   }, [location])
 
   useEffect(() => {
-    const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
     if (cartsLength === 1 || isCheckout) {
-      activeAccordion()
+      activeAccordion(true)
+    } else {
+      activeAccordion(false)
     }
   }, [orderState?.carts])
 
