@@ -156,6 +156,7 @@ export const MessagesUI = (props) => {
       input.value = ''
     }
     removeImage()
+    setMessage('')
   }
 
   const onSubmit = (values) => {
