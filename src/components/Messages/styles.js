@@ -2,18 +2,25 @@ import styled from 'styled-components'
 
 export const MessagesContainer = styled.div`
   width: 100%;
+  height: 100%;
 `
 
 export const HeaderProfile = styled.div`
   display: flex;
-  > div {
+  height: 100px;
+  padding: 20px 20px 0 20px;
+  > div {   
      p {
-      margin-left: 10px;
-      margin-block-end: 0.1em;
-      margin-block-start: 0.5em
+       margin-left: 10px;
+      }
+     > strong {
+      > p{
+        margin-block-end: 0.1em;
+      }
     }
-    p:last-child{
-      margin-block-start: 0.1em
+    > p {
+      margin-block-start: 0.1em;
+      font-size: 0.7em
     }
   }
 `
@@ -36,6 +43,8 @@ export const Chat = styled.div`
   overflow: auto;
   height: 55vh;
   flex-direction: column;
+  padding-left: 20px;
+  padding-right: 20px;
 `
 
 export const MessageConsole = styled.div`
@@ -43,11 +52,11 @@ export const MessageConsole = styled.div`
   justify-content: center;
   font-size: 0.8em;
   border-radius: 97px;
-
 `
 
 export const MessageBusiness = styled.div`
   display: flex;
+  flex-wrap: wrap;
   font-size: 0.8em;
 `
 
@@ -79,31 +88,40 @@ export const BubbleConsole = styled.div`
 
 export const BubbleBusines = styled.div`
   border-radius: 97px 97px 97px 0px;
-  padding: 15px;
+  padding: 10px 15px 15px 20px;
   max-width: 45%;
+  min-width: 80px;
   margin-bottom: 10px;
   background: #EFEFEF;
   height: auto;
   overflow: hidden;
+  overflow-wrap: break-word;
+  strong{
+    font-size: 1.1em;
+  }
   > p{
     text-align: right;
     font-size: 0.8em;
     margin-block-start: initial;
     margin-block-end: initial;
   }
+  &[name=image]{
+    padding-left: 40px
+  }
 `
 
 export const BubbleCustomer = styled.div`
   border-radius: 97px 97px 0px 97px;
-  padding: 15px;
+  padding: 10px 15px 15px 20px;
   max-width: 45%;
+  min-width: 80px;
   margin-bottom: 10px;
   background: #D81212;
   color: white;
   overflow-wrap: break-word;
   overflow: hidden;
-  > img{
-    border-radius: 97px;
+  strong{
+    font-size: 1.1em;
   }
   > p{
     text-align: right;
@@ -119,7 +137,7 @@ export const SendForm = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 30px;
-
+  background: #FAFAFA
 `
 
 export const Send = styled.form`
@@ -148,6 +166,7 @@ export const Send = styled.form`
 
   > button[name]{
     margin-right: 5px;
+    margin-left: 5px;
   }
 `
 
@@ -157,8 +176,8 @@ export const WrapperSendMessageButton = styled.div`
     padding-bottom: 2px;
      > svg {
        margin-right: 10px;
-       width: 1em;
-       height: 1em; 
+       width: 1.3em;
+       height: 1.3em; 
        vertical-align: middle;
        color: white
      }

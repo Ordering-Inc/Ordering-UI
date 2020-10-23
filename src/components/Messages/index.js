@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {
   Messages as MessagesController,
-  useLanguage
+  useLanguage,
+  useSession
 } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import {
@@ -11,6 +12,8 @@ import {
   Chat,
   BubbleCustomer,
   MessageCustomer,
+  MessageBusiness,
+  BubbleBusines,
   SendForm,
   Send,
   MessageConsole,
@@ -40,6 +43,7 @@ export const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [{ user }] = useSession()
 
   console.log(image)
 
@@ -151,13 +155,13 @@ export const MessagesUI = (props) => {
         <div>
           {business && (
             <>
-              <p>{order.business?.name}</p>
+              <strong><p>{order.business?.name}</p></strong>
               <p>{t('ONLINE', 'Online')}</p>
             </>
           )}
           {driver && (
             <>
-              <p>{order.driver?.name}</p>
+              <strong><p>{order.driver?.name}</p></strong>
               <p>{t('ONLINE', 'Online')}</p>
             </>
           )}
@@ -195,7 +199,7 @@ export const MessagesUI = (props) => {
                   </BubbleConsole>
                 ) : (
                   <BubbleConsole>
-                    <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                    <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
                     {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
                     {message.comment && (<><br /> {message.comment.length}</>)}
                     <p>{moment.utc(message.created_at).fromNow()}</p>
@@ -206,17 +210,19 @@ export const MessagesUI = (props) => {
           ))}
           {messages?.messages.map((message) => (
             <React.Fragment key={message.id}>
-              {message.type === 2 && (
+              {message.type === 2 && user.id === message.author_id && (
                 <MessageCustomer>
                   <BubbleCustomer>
+                    <strong>{message.author.name}</strong><br />
                     {message.comment}
                     <p>{moment.utc(message.created_at).fromNow()}</p>
                   </BubbleCustomer>
                 </MessageCustomer>
               )}
-              {message.type === 3 && (
+              {message.type === 3 && user.id === message.author_id && (
                 <MessageCustomer>
-                  <BubbleCustomer name={message.comment && 'image'}>
+                  <BubbleCustomer name='image'>
+                    <strong>{message.author.name}</strong><br />
                     <img src={message.source} width='200px' height='150px' />
                     {message.comment && (
                       <>
@@ -225,8 +231,30 @@ export const MessagesUI = (props) => {
                       </>
                     )}
                   </BubbleCustomer>
-
                 </MessageCustomer>
+              )}
+              {message.type === 2 && user.id !== message.author_id && (
+                <MessageBusiness>
+                  <BubbleBusines>
+                    <strong>{message.author.name}</strong><br />
+                    {message.comment}
+                    <p>{moment.utc(message.created_at).fromNow()}</p>
+                  </BubbleBusines>
+                </MessageBusiness>
+              )}
+              {message.type === 3 && user.id !== message.author_id && (
+                <MessageBusiness>
+                  <BubbleBusines name='image'>
+                    <strong>{message.author.name}</strong><br />
+                    <img src={message.source} width='200px' height='150px' />
+                    {message.comment && (
+                      <>
+                        {message.comment}
+                        <p>{moment.utc(message.created_at).fromNow()}</p>
+                      </>
+                    )}
+                  </BubbleBusines>
+                </MessageBusiness>
               )}
             </React.Fragment>
           ))}
@@ -245,21 +273,24 @@ export const MessagesUI = (props) => {
               required: !image
             })}
           />
-          <label htmlFor='chat_image'>
-            <input
-              type='file'
-              name='image'
-              id='chat_image'
-              accept='image/png,image/jpg,image/jpeg'
-              onChange={onChangeImage}
-            />
-            <BsCardImage />
-          </label>
+          {!image && (
+            <label htmlFor='chat_image'>
+              <input
+                type='file'
+                name='image'
+                id='chat_image'
+                accept='image/png,image/jpg,image/jpeg'
+                onChange={onChangeImage}
+              />
+              <BsCardImage />
+            </label>
+          )}
           {image && (
             <Button
               circle
               onClick={removeImage}
               name='delete'
+              disabled={sendMessage.loading}
             >
               {t('X', 'X')}
             </Button>
