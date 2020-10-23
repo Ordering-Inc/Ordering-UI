@@ -18,12 +18,12 @@ import {
   LoginWith
 } from './styles'
 
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
+import { useTheme } from 'styled-components'
 
 const LoginFormUI = (props) => {
   const {
@@ -43,6 +43,7 @@ const LoginFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, sessionDispatch] = useSession()
+  const theme = useTheme()
 
   const onSubmit = async () => {
     handleButtonLoginClick()
@@ -90,7 +91,7 @@ const LoginFormUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img src={logoHeader} alt='Logo login' />
+        <img src={theme?.images?.logos?.logotype} alt='Logo login' />
 
         {useLoginByEmail && useLoginByCellphone && (
           <LoginWith>
