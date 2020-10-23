@@ -1,6 +1,6 @@
 import React from 'react'
 import { CmsContent, useLanguage } from 'ordering-components'
-import { PageNotFound } from '../PageNotFound'
+import { NotFoundSource } from '../NotFoundSource'
 const CmsUI = (props) => {
   const {
     loading,
@@ -24,7 +24,10 @@ const CmsUI = (props) => {
       }
       {
         (!loading && error) &&
-          <PageNotFound />
+          <NotFoundSource
+            content={t('NOT_FOUND_PAGE', 'Sorry, we couldn\'t find the requested page.')}
+            btnTitle={t('PROFILE_PAGES_REDIRECT', 'Go to Pages')}
+          />
       }
     </div>
   )
