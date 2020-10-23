@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { createGlobalStyle, ThemeProvider as ThemeProviderStyled } from 'styled-components'
+import { createGlobalStyle, css, ThemeProvider as ThemeProviderStyled } from 'styled-components'
 
 /**
  * Create ThemeContext
@@ -13,6 +13,7 @@ export const ThemeContext = createContext()
  */
 export const ThemeProvider = ({ children, ...props }) => {
   const [theme, setTheme] = useState(props.theme)
+
   const GlobalStyle = createGlobalStyle`
     /** Mozilla scrollbar*/
     * {
@@ -43,6 +44,10 @@ export const ThemeProvider = ({ children, ...props }) => {
       margin: 0;
       background-color: #F8F8F8;
       color: #333;
+
+      ${theme.rtl && css`
+        direction: rtl;
+      `}
     }
 
     input, textarea, button {
