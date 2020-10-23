@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { Link, useHistory } from 'react-router-dom'
 import {
   MyOrders as MyOrdersController,
+  useEvent,
   useLanguage,
   useOrder
 } from 'ordering-components'
@@ -34,9 +34,9 @@ import { ProfileOptions } from '../UserProfileForm/ProfileOptions'
 import { Button } from '../../styles/Buttons'
 export const MyOrdersUI = (props) => {
   const { activeOrders, previousOrders } = props
-  const history = useHistory()
   const [, t] = useLanguage()
   const [, { reorder }] = useOrder()
+  const [events] = useEvent()
   const googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
   const getGoogleMapImage = ({ lat, lng }) => {
     return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${googleMapKey}`
@@ -49,13 +49,17 @@ export const MyOrdersUI = (props) => {
     try {
       const { error, result } = await reorder(orderId)
       if (!error) {
-        history.push(`/checkout/${result.uuid}`)
+        events.emit('go_to_page', { page: 'checkout', params: { cartUuid: result.uuid } })
       }
       setReorderLoading(false)
     } catch (err) {
       console.log(err)
       setReorderLoading(false)
     }
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
   }
 
   return (
@@ -99,11 +103,11 @@ export const MyOrdersUI = (props) => {
                       </Price>
                     </Content>
                     <OpenOrder>
-                      <Link to={'/orders/' + order.id}>
-                        <Button color='primary'>
-                          {t('OPEN_ORDER', 'Open order')}
-                        </Button>
-                      </Link>
+                      {/* <Link to={'/orders/' + order.id}> */}
+                      <Button color='primary' onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })}>
+                        {t('OPEN_ORDER', 'Open order')}
+                      </Button>
+                      {/* </Link> */}
                     </OpenOrder>
                   </Card>
                 )) : (
@@ -149,9 +153,9 @@ export const MyOrdersUI = (props) => {
                       <BusinessInformation>
                         <h5>{order.business.name}</h5>
                         <p>{order.created_at}</p>
-                        <Link to={'/orders/' + order.id}>
-                          <p name='view'>{t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}</p>
-                        </Link>
+                        {/* <Link to={'/orders/' + order.id}> */}
+                        <p onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })} name='view'>{t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}</p>
+                        {/* </Link> */}
                       </BusinessInformation>
                     </OrderPastContent>
                     <Reorder>

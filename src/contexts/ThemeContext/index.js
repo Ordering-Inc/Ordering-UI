@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { createGlobalStyle, ThemeProvider as ThemeProviderStyled } from 'styled-components'
 
 /**
@@ -11,7 +11,8 @@ export const ThemeContext = createContext()
  * Api provider to manage theme
  * @param {props} props
  */
-export const ThemeProvider = ({ theme, children }) => {
+export const ThemeProvider = ({ children, ...props }) => {
+  const [theme, setTheme] = useState(props.theme)
   const GlobalStyle = createGlobalStyle`
     /** Mozilla scrollbar*/
     * {
@@ -82,8 +83,19 @@ export const ThemeProvider = ({ theme, children }) => {
     })
   }, [])
 
+  const update = (theme) => {
+    setTheme(theme)
+  }
+
+  const merge = (partTheme) => {
+    setTheme({
+      ...theme,
+      ...partTheme
+    })
+  }
+
   return (
-    <ThemeContext.Provider value={[theme]}>
+    <ThemeContext.Provider value={[theme, { update, merge }]}>
       <ThemeProviderStyled theme={theme}>
         <GlobalStyle />
         {children}
