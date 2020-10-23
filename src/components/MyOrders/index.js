@@ -33,6 +33,7 @@ import {
 
 import { ProfileOptions } from '../UserProfileForm/ProfileOptions'
 import { Button } from '../../styles/Buttons'
+import { formatPrice } from '../../utils'
 import emptyPastOrders from '../../../template/assets/empty-past-orders.svg'
 import emptyActiveOrders from '../../../template/assets/empty-active-orders.svg'
 
@@ -93,7 +94,7 @@ export const MyOrdersUI = (props) => {
                       </BusinessInformation>
                       <Price>
                         <h5>
-                        ${order.products.reduce((acc, cur) => acc + cur.price, 0)}
+                          {formatPrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
                         </h5>
                         <p>{order.status === 0 ? t('ORDER_PENDING', 'pending') : ''}</p>
                       </Price>
@@ -129,7 +130,6 @@ export const MyOrdersUI = (props) => {
                 )}
               </ActiveOrders>
             )}
-
           </>
         }
         {
