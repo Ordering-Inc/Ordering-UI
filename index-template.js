@@ -8,6 +8,11 @@ import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import theme from './template/theme.json'
 
+import logotype from './template/assets/images/logotype.svg'
+import logotypeInvert from './template/assets/images/logotype-invert.svg'
+import isotype from './template/assets/images/isotype.svg'
+import isotypeInvert from './template/assets/images/isotype-invert.svg'
+
 const configFile = {
   project: 'luisv4',
   api: {
@@ -30,6 +35,17 @@ Sentry.init({
   // for finer control
   tracesSampleRate: 1.0
 })
+
+const logos = {
+  logotype,
+  logotypeInvert,
+  isotype,
+  isotypeInvert
+}
+
+theme.images = {
+  logos
+}
 
 const wrapper = document.getElementById('app')
 ReactDOM.render(
