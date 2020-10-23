@@ -52,6 +52,7 @@ const ProductOptionsUI = (props) => {
   } = props
 
   const { product, loading, error } = productObject
+
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [, t] = useLanguage()
@@ -101,9 +102,11 @@ const ProductOptionsUI = (props) => {
       {!loading && !error && product && (
         <>
           <WrapperImage>
-            <ProductImage>
-              <img src={product?.images} alt='product' />
-            </ProductImage>
+            {product?.images && (
+              <ProductImage>
+                <img src={product?.images} alt='product' />
+              </ProductImage>
+            )}
           </WrapperImage>
           <ProductInfo>
             <div>
@@ -222,9 +225,8 @@ const ProductOptionsUI = (props) => {
       {modalIsOpen && (
         <Modal
           open={modalIsOpen}
-          closeOnBackdrop={false}
           onClose={() => closeModal()}
-          width='60%'
+          width='70%'
           padding='0'
         >
           <LoginForm
@@ -232,7 +234,7 @@ const ProductOptionsUI = (props) => {
             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
             elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
             useLoginByCellphone
-            popup='popup'
+            isPopup
           />
         </Modal>
       )}

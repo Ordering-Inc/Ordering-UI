@@ -117,7 +117,14 @@ export const BusinessBasicInformation = (props) => {
                 <Skeleton width={70} />
               )}
 
-              {!loading && <p><BsExclamationCircle className='popup' onClick={() => setOpenBusinessInformation(true)} /></p>}
+              {!loading && (
+                <p>
+                  <BsExclamationCircle
+                    className='popup'
+                    onClick={() => setOpenBusinessInformation(true)}
+                  />
+                </p>
+              )}
             </div>
           </BusinessInfoItem>
         </BusinessInfo>
@@ -129,6 +136,7 @@ export const BusinessBasicInformation = (props) => {
         onClose={() => setOpenBusinessInformation(false)}
         padding='0'
         hideCloseDefault
+        isTransparent
       >
         <BusinessInformation
           business={business}

@@ -1,208 +1,185 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const SignUpContainer = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex: 1;
-  flex-wrap: 1;
-  flex-direction: row;
-  min-width: auto;
-  height: calc(100vh - 45px);
-  button{
-    box-sizing: content-box;
-  }
-  @media (max-width: 980px) { 
-   flex-direction: column;
-   height: auto;
+  min-height: 100vh;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `
-
-/* export const Triangle = styled.div`
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border: 100vw solid #d81212;
-    border-right: 73vw solid #f8f8f8;
-    background: white;
-    box-sizing: border-box;
-    padding: 0;
-  @media (min-width: 480px) {
-    width: 50%;
-    max-width: 1000px;
-    border: 250px solid #d81212;
-    border-right: 25vh solid #f8f8f8;
-  }
-  */
-/* &::after {
-    content: "";
-    height: 100%;
-    width: 0;
-    /* border: 10px solid #333; */
-/* border-top: 50% solid transparent;
-    border-bottom: 50% solid transparent;
-     border-right:25vh solid blue;
-  }
-` */
-
-export const HeroSide = styled.div`
+const Side = styled.div`
   display: flex;
+
+  @media (min-width: 1400px) {
+    height: calc(100vh - 65px);
+  }
+
+  @media (max-width: 992px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+export const HeroSide = styled(Side)`
+  width: 55%;
   justify-content: center;
   align-items: center;
-  color: ${props => props.theme.colors.primaryConstrast};
-  background: ${props => props.theme.colors.primary};
-  z-index: 100;
-  text-align: center;
-  flex: 1.2;
-  max-height: 100%;
-  font-size: 1.7em;
+  color: ${props => props.theme.colors.primaryContrast};
+  background-color:  ${props => props.theme.colors.primary};
 
-  @media (max-width: 980px) {
-    flex: 1;
-    min-height: 300px;
+  @media (max-width: 768px) {
+    height: calc(50vh - 65px);
   }
 `
 
 export const TitleHeroSide = styled.div`
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  font-size: 1em;
-  flex: 1.2;
-  padding: 0 50px;
-  @media (max-width: 980px) {
-    padding: 0 10px;
-    flex: 1;
-  }
-  @media (max-width: 480px) {
-    font-size: 0.8em;
-  }
-`
-
-export const FormSide = styled.div`
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  justify-content: space-around;
-  padding: 30px 20px;
-  flex: 1;
-  width: 40%;
-  height: auto;
-  font-size: 1.2em;
-  > img {
-    margin-top: 0;
+
+  h1 {
+    font-size: 52px;
+  }
+
+  h1,
+  p {
+    margin: 0px;
+    color: #FFF;
+  }
+
+  @media (max-width: 576px) {
+    h1 {
+      font-size: 32px;
+    }
+  }
+`
+
+export const FormSide = styled(Side)`
+  width: 45%;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+
+  img {
     width: 200px;
   }
-  a {
-    text-decoration: none;
-    color: ${props => props.theme.colors.primary};
-  }
-  @media (max-width: 980px) {
-    font-size: 1em;
-    height: 100%;
-    width: 100%;
-    > img {
-      width: 139px;
-      margin-bottom: 15px;
-  }
-  }
-  
-`
 
-export const AlreadyRegistered = styled.div`
-`
-
-export const SocialIcons = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  > * {
-    color: ${props => props.theme.colors.primary};
-    width: 42px;
-    height: 42px;
-    margin: 25px;
-    border: 3px solid ${props => props.theme.colors.primary};
-    border-radius: 100%;
-    cursor: pointer;
-  }
-`
-
-export const SocialButtons = styled.div`
-   width: 100%;
-   margin-top: 5px;
-  > * {
-    margin-top: 5px;
-    margin-bottom: 20px;
-    width: 55%;
-    padding: 5px;
-    color: black;
-  }
-  button{
-      span{
-        font-size: 0.8em;
-      }
-    }
-  @media (max-width: 1024px){
-    > * {
-      width: 80%;
-    }
-  }
-  @media (max-width: 980px) {
-    > * {
-      margin-top: 5px;
-      width: 55%;
-    }
+  @media (max-width: 768px) {
+    margin: 20px 0px;
   }
 `
 
 export const SignUpWith = styled.div`
-  > div {
-    justify-content: center;
-    flex-wrap: wrap;
+  @media (max-width: 360px) {
+    font-size: 14px;
   }
-  font-size: 1.1em;
 `
 
 export const FormInput = styled.form`
-  width: 100%;
-  > * {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+
+  * {
+    padding: 8px 20px;
     margin: 10px;
-    width: 55%;
-    padding: 10px 20px
   }
-  > button {
-    margin-top: 50px;
-    margin-bottom: 20px;
-    width: 60%;
+
+  input:not(:last-child) {
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+
+  button {
+    margin-top: 10px;
     padding: 5px;
   }
-  span{
-    border-radius: 16px;
-    margin: 10px 0;
-    width: 55%;
-  }
-  @media (max-width: 1024px) {
-    > * {
-      width: 80%;
-    }
-    > button {
-      width: 85%;
-    }
-  }
-  @media (max-width: 980px) {
-    > * {
-      margin: 5px;
-      width: 55%;
-    }
-    > button{
-      width: 60%;
-      box-sizing: border-box;
-    }
+
+  @media (max-width: 992px) {
+    width: 90%;
   }
 `
 
-export const ForgotPassword = styled.div`
-  margin: 10px auto;
-  width: auto;
+export const RedirectLink = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    margin-right: 5px;
+  }
+
+  a {
+    color: ${props => props.theme.colors.primary};
+    text-decoration: none;
+  }
+
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  ${({ register }) => register && css`
+    width: calc(70% - 20px);
+
+    @media (max-width: 480px) {
+      width: calc(90% - 20px);
+    }
+  `}
+
+  @media (max-width: 810px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 17px;
+  }
+
+  @media (max-width: 410px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 360px) {
+    flex-direction: column;
+  }
+`
+
+export const SocialButtons = styled.div`
+   width: calc(70% - 20px);
+   margin-top: 5px;
+
+  button {
+    width: 100%;
+    padding: 3px;
+    color: #000000;
+
+    img {
+      width: 30px;
+    }
+
+    span{
+      font-size: 0.8em;
+    }
+  }
+
+  &.popup{
+    button{
+      width: 79%;
+      span{
+        padding-left: 10%;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    width: calc(90% - 20px);
+  }
 `

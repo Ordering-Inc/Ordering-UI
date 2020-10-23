@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import {
   Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink,
   SubMenu
 } from './styles'
 
-import { useSession, useLanguage, useOrder } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent } from 'ordering-components'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
 import { useOnlineStatus } from '../../../src/hooks/useOnlineStatus'
 
@@ -20,6 +20,7 @@ import { CartPopover } from '../../../src/components/CartPopover'
 import { OrderTypeSelectorHeader } from '../../../src/components/OrderTypeSelectorHeader'
 
 export const Header = (props) => {
+  const [events] = useEvent()
   const location = useLocation()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
@@ -45,6 +46,15 @@ export const Header = (props) => {
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
+
+  const handleAddProduct = () => {
+    handleTogglePopover('cart')
+  }
+
+  useEffect(() => {
+    events.on('cart_product_added', handleAddProduct)
+    return () => events.off('cart_product_added', handleAddProduct)
+  }, [])
 
   return (
     <HeaderType>

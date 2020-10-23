@@ -16,7 +16,7 @@ export const CategoriesContainer = styled.div`
     white-space: nowrap;
     overflow: hidden;
   }
-  svg{
+/*  svg{
     background: #D9D9D9;
     display: inline-block;
     border-radius: 50%;
@@ -35,5 +35,5 @@ export const CategoriesContainer = styled.div`
   }
   svg.hidden{
     display: none;
-  }
+  }*/
 `
