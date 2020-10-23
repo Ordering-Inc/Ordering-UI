@@ -168,7 +168,7 @@ export const App = () => {
                   {
                     orderStatus.options?.address?.location
                       ? <BusinessesList />
-                      : <Redirect to='/login' />
+                      : <Redirect to='/' />
                   }
                 </Route>
                 <Route exact path='/store/:store'>
