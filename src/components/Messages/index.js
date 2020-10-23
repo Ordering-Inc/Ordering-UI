@@ -5,19 +5,31 @@ import {
   useSession
 } from 'ordering-components'
 import { useForm } from 'react-hook-form'
+import Skeleton from 'react-loading-skeleton'
 import {
   MessagesContainer,
   HeaderProfile,
+  HeaderInformation,
+  HeaderName,
+  Status,
   Image,
   Chat,
   BubbleCustomer,
   MessageCustomer,
+  MyName,
+  PartnerName,
   MessageBusiness,
   BubbleBusines,
+  SkeletonBubbleCustomer,
+  SkeletonBubbleBusiness,
+  ChatImage,
+  TimeofSent,
   SendForm,
   Send,
+  SendImage,
   MessageConsole,
   BubbleConsole,
+  WrapperDeleteImage,
   WrapperSendMessageButton
 } from './styles'
 import { Input } from '../../styles/Inputs'
@@ -45,8 +57,6 @@ export const MessagesUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
 
-  console.log(image)
-
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -65,6 +75,13 @@ export const MessagesUI = (props) => {
     }
     clearInputs()
   }, [sendMessage])
+
+  useEffect(() => {
+    if (!messages.loading) {
+      const chat = document.getElementById('chat')
+      chat.scrollTop = chat.scrollHeight
+    }
+  }, [messages.messages.length])
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
@@ -119,6 +136,19 @@ export const MessagesUI = (props) => {
     }
   }
 
+  const getLevel = (level) => {
+    switch (level) {
+      case 0:
+        return 'Admin'
+      case 1:
+        return 'Business'
+      case 2:
+        return 'Driver'
+      case 3:
+        return 'Customer'
+    }
+  }
+
   const clearInputs = () => {
     const input = document.getElementById('message')
     if (input) {
@@ -152,29 +182,29 @@ export const MessagesUI = (props) => {
             )
           }
         </Image>
-        <div>
+        <HeaderInformation>
           {business && (
             <>
-              <strong><p>{order.business?.name}</p></strong>
-              <p>{t('ONLINE', 'Online')}</p>
+              <strong><HeaderName>{order.business?.name}</HeaderName></strong>
+              <Status>{t('ONLINE', 'Online')}</Status>
             </>
           )}
           {driver && (
             <>
-              <strong><p>{order.driver?.name}</p></strong>
-              <p>{t('ONLINE', 'Online')}</p>
+              <strong><HeaderName>{order.driver?.name}</HeaderName></strong>
+              <Status>{t('ONLINE', 'Online')}</Status>
             </>
           )}
-        </div>
+        </HeaderInformation>
       </HeaderProfile>
       {!messages.loading ? (
-        <Chat>
+        <Chat id='chat'>
           <MessageConsole>
             <BubbleConsole>
               {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
               <strong>{moment.utc(order.created_at).format('YYYY/MM/DD hh:mm A')}</strong> {' '}
               {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
-              <p>{moment.utc(order.created_at).fromNow()}</p>
+              <TimeofSent>{moment.utc(order.created_at).fromNow()}</TimeofSent>
             </BubbleConsole>
           </MessageConsole>
           {messages?.messages.map((message) => (
@@ -191,18 +221,18 @@ export const MessagesUI = (props) => {
                       </>
                     )}
                     <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
-                    <p>
+                    <TimeofSent>
                       {
                         moment.utc(message.created_at).fromNow()
                       }
-                    </p>
+                    </TimeofSent>
                   </BubbleConsole>
                 ) : (
                   <BubbleConsole>
                     <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
                     {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
                     {message.comment && (<><br /> {message.comment.length}</>)}
-                    <p>{moment.utc(message.created_at).fromNow()}</p>
+                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
                   </BubbleConsole>
                 )
               )}
@@ -213,46 +243,46 @@ export const MessagesUI = (props) => {
               {message.type === 2 && user.id === message.author_id && (
                 <MessageCustomer>
                   <BubbleCustomer>
-                    <strong>{message.author.name}</strong><br />
+                    <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
                     {message.comment}
-                    <p>{moment.utc(message.created_at).fromNow()}</p>
+                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
                   </BubbleCustomer>
                 </MessageCustomer>
               )}
               {message.type === 3 && user.id === message.author_id && (
                 <MessageCustomer>
                   <BubbleCustomer name='image'>
-                    <strong>{message.author.name}</strong><br />
-                    <img src={message.source} width='200px' height='150px' />
+                    <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                    <ChatImage><img src={message.source} /></ChatImage>
                     {message.comment && (
                       <>
                         {message.comment}
-                        <p>{moment.utc(message.created_at).fromNow()}</p>
                       </>
                     )}
+                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
                   </BubbleCustomer>
                 </MessageCustomer>
               )}
               {message.type === 2 && user.id !== message.author_id && (
                 <MessageBusiness>
                   <BubbleBusines>
-                    <strong>{message.author.name}</strong><br />
+                    <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
                     {message.comment}
-                    <p>{moment.utc(message.created_at).fromNow()}</p>
+                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
                   </BubbleBusines>
                 </MessageBusiness>
               )}
               {message.type === 3 && user.id !== message.author_id && (
                 <MessageBusiness>
                   <BubbleBusines name='image'>
-                    <strong>{message.author.name}</strong><br />
-                    <img src={message.source} width='200px' height='150px' />
+                    <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                    <ChatImage><img src={message.source} /></ChatImage>
                     {message.comment && (
                       <>
                         {message.comment}
-                        <p>{moment.utc(message.created_at).fromNow()}</p>
                       </>
                     )}
+                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
                   </BubbleBusines>
                 </MessageBusiness>
               )}
@@ -260,7 +290,28 @@ export const MessagesUI = (props) => {
           ))}
         </Chat>
       ) : (
-        <span>{t('LOADING_MESSAGES', 'Loading Messages...')}</span>
+        <Chat>
+          <MessageBusiness>
+            <SkeletonBubbleBusiness>
+              <Skeleton width={200} height={100} />
+            </SkeletonBubbleBusiness>
+          </MessageBusiness>
+          <MessageCustomer>
+            <SkeletonBubbleCustomer>
+              <Skeleton width={250} height={100} />
+            </SkeletonBubbleCustomer>
+          </MessageCustomer>
+          <MessageBusiness>
+            <SkeletonBubbleBusiness>
+              <Skeleton width={150} height={100} />
+            </SkeletonBubbleBusiness>
+          </MessageBusiness>
+          <MessageCustomer>
+            <SkeletonBubbleCustomer>
+              <Skeleton width={200} height={100} />
+            </SkeletonBubbleCustomer>
+          </MessageCustomer>
+        </Chat>
       )}
       <SendForm>
         <Send onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -274,7 +325,7 @@ export const MessagesUI = (props) => {
             })}
           />
           {!image && (
-            <label htmlFor='chat_image'>
+            <SendImage htmlFor='chat_image'>
               <input
                 type='file'
                 name='image'
@@ -283,18 +334,19 @@ export const MessagesUI = (props) => {
                 onChange={onChangeImage}
               />
               <BsCardImage />
-            </label>
+            </SendImage>
           )}
-          {image && (
-            <Button
-              circle
-              onClick={removeImage}
-              name='delete'
-              disabled={sendMessage.loading}
-            >
-              {t('X', 'X')}
-            </Button>
-          )}
+          <WrapperDeleteImage>
+            {image && (
+              <Button
+                circle
+                onClick={removeImage}
+                disabled={sendMessage.loading}
+              >
+                {t('X', 'X')}
+              </Button>
+            )}
+          </WrapperDeleteImage>
           <WrapperSendMessageButton>
             <Button
               color='primary'
