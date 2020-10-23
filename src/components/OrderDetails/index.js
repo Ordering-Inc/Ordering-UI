@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
-import { FiPhone } from 'react-icons/fi'
-import { HiOutlineChat } from 'react-icons/hi'
-import { BiCaretUp } from 'react-icons/bi'
+import { FiPhone, FaUserCircle, HiOutlineChat, BiCaretUp, RiUser2Fill } from 'react-icons/all'
 
 import { Button } from '../../styles/Buttons'
 import logoHeader from '../../../template/assets/images/logo-header.svg'
@@ -150,11 +148,13 @@ const OrderDetailsUI = (props) => {
               {t('CUSTOMER', 'Customer')}
             </SectionTitle>
             <OrderCustomer>
-              {order?.customer?.photo && (
-                <div>
+              <div className='photo'>
+                {order?.customer?.photo ? (
                   <PhotoBlock src={order?.customer?.photo} />
-                </div>
-              )}
+                ) : (
+                  <FaUserCircle />
+                )}
+              </div>
               <InfoBlock>
                 <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                 <span>{order?.customer?.address}</span>
@@ -168,11 +168,13 @@ const OrderDetailsUI = (props) => {
                 </SectionTitle>
                 <OrderDriver>
                   <WrapperDriver>
-                    {!order?.customer?.photo && (
-                      <div>
+                    <div className='photo'>
+                      {order?.driver?.photo ? (
                         <PhotoBlock src={order?.driver?.photo} />
-                      </div>
-                    )}
+                      ) : (
+                        <RiUser2Fill />
+                      )}
+                    </div>
                     <InfoBlock>
                       <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
                       <span>{t('DRIVER', 'Driver')}</span>
