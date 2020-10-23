@@ -45,6 +45,9 @@ export const ProductItemAccordion = (props) => {
   const [setRotate, setRotateState] = useState('accordion__icon')
 
   const content = useRef(null)
+  const productSelect = useRef(null)
+  const productActionsEdit = useRef(null)
+  const productActionsDelete = useRef(null)
 
   const productInfo = () => {
     if (isCartProduct) {
@@ -64,8 +67,9 @@ export const ProductItemAccordion = (props) => {
     return product
   }
 
-  const toggleAccordion = () => {
-    if (!product?.valid_menu && isCartProduct) return
+  const toggleAccordion = (e) => {
+    const isActionsClick = productSelect.current?.contains(e.target) || productActionsEdit.current?.contains(e.target) || productActionsDelete.current?.contains(e.target)
+    if ((!product?.valid_menu && isCartProduct) || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
       setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
@@ -90,10 +94,15 @@ export const ProductItemAccordion = (props) => {
 
   return (
     <AccordionSection>
-      <Accordion isValid={product?.valid ?? true} className={`accordion ${setActive}`}>
+      <Accordion
+        isValid={product?.valid ?? true}
+        className={`accordion ${setActive}`}
+        onClick={(e) => toggleAccordion(e)}
+      >
         <ProductInfo>
           {isCartProduct ? (
             <ProductSelect
+              ref={productSelect}
               value={product.quantity}
               onChange={(e) => handleChangeQuantity(Number(e.target.value))}
             >
@@ -112,17 +121,23 @@ export const ProductItemAccordion = (props) => {
               {product?.quantity}
             </ProductQuantity>
           )}
-          <WrapperProductImage onClick={toggleAccordion}>
-            <ProductImage bgimage={product.images || 'https://picsum.photos/78/80'} />
-          </WrapperProductImage>
+          {product?.images && (
+            <WrapperProductImage>
+              <ProductImage bgimage={product?.images} />
+            </WrapperProductImage>
+          )}
           <ContentInfo>
-            <h3 onClick={toggleAccordion}>{product.name}</h3>
+            <h3>{product.name}</h3>
             {windowSize.width <= 410 && (
               <span>
-                <p onClick={toggleAccordion}>{formatPrice(product.total || product.price)}</p>
+                <p>{formatPrice(product.total || product.price)}</p>
                 <div>
-                  <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
-                  <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
+                  <span ref={productActionsEdit}>
+                    <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
+                  </span>
+                  <span ref={productActionsDelete}>
+                    <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
+                  </span>
                 </div>
               </span>
             )}
@@ -131,12 +146,12 @@ export const ProductItemAccordion = (props) => {
 
         {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
           <ProductPriceSection>
-            <ProductPrice onClick={toggleAccordion}>
+            <ProductPrice>
               <span>
                 {formatPrice(product.total || product.price)}
               </span>
               {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
-                <p onClick={toggleAccordion}>
+                <p>
                   <IoIosArrowDown className={`${setRotate}`} />
                 </p>
               )}
@@ -144,12 +159,14 @@ export const ProductItemAccordion = (props) => {
             {isCartProduct && (
               <ProductActions>
                 <ProductActionsEdit
+                  ref={productActionsEdit}
                   onClick={() => onEditProduct(product)}
                   disabled={orderState.loading}
                 >
                   <TiPencil color='#F2BB40' />
                 </ProductActionsEdit>
                 <ProductActionsDelete
+                  ref={productActionsDelete}
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
@@ -164,12 +181,14 @@ export const ProductItemAccordion = (props) => {
           <ProductError>
             <ProductActions>
               <ProductActionsEdit
+                ref={productActionsEdit}
                 onClick={() => onEditProduct(product)}
                 disabled={orderState.loading}
               >
                 <TiPencil color='#F2BB40' />
               </ProductActionsEdit>
               <ProductActionsDelete
+                ref={productActionsDelete}
                 onClick={() => onDeleteProduct(product)}
                 disabled={orderState.loading}
               >
@@ -186,6 +205,7 @@ export const ProductItemAccordion = (props) => {
           <ProductError>
             <ProductActions>
               <ProductActionsDelete
+                ref={productActionsDelete}
                 onClick={() => onDeleteProduct(product)}
                 disabled={orderState.loading}
               >

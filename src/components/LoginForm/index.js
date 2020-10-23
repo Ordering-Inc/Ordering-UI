@@ -12,43 +12,38 @@ import {
   FormSide,
   HeroSide,
   FormInput,
-  ForgotPassword,
+  RedirectLink,
   TitleHeroSide,
-  LoginWith,
-  NewOnPlatform,
-  SocialButtons
+  SocialButtons,
+  LoginWith
 } from './styles'
 
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
-
-/** Icons for mobile design */
-// import { AiOutlineGoogle, FaApple } from 'react-icons/all'
+import { useTheme } from 'styled-components'
 
 const LoginFormUI = (props) => {
   const {
-    linkToSignup,
     useLoginByEmail,
     useLoginByCellphone,
     hanldeChangeInput,
     hanldeChangeTab,
     handleButtonLoginClick,
-    linkToForgetPassword,
     elementLinkToSignup,
     elementLinkToForgotPassword,
     formState,
     loginTab,
-    popup
+    isPopup
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, sessionDispatch] = useSession()
+  const theme = useTheme()
 
   const onSubmit = async () => {
     handleButtonLoginClick()
@@ -88,17 +83,18 @@ const LoginFormUI = (props) => {
   }
 
   return (
-    <LoginContainer>
+    <LoginContainer isPopup={isPopup}>
       <HeroSide>
         <TitleHeroSide>
           <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
           <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
         </TitleHeroSide>
       </HeroSide>
-      <FormSide className={popup}>
-        <img src={logoHeader} alt='Logo login' />
+      <FormSide isPopup={isPopup}>
+        <img src={theme?.images?.logos?.logotype} alt='Logo login' />
+
         {useLoginByEmail && useLoginByCellphone && (
-          <LoginWith className={popup}>
+          <LoginWith>
             <Tabs variant='primary'>
               {useLoginByEmail && (
                 <Tab
@@ -119,106 +115,82 @@ const LoginFormUI = (props) => {
             </Tabs>
           </LoginWith>
         )}
-        <>
-          {(useLoginByCellphone || useLoginByEmail) &&
-            (
-              <FormInput onSubmit={handleSubmit(onSubmit)} noValidate className={popup}>
-                {
-                  useLoginByEmail && loginTab === 'email' && (
-                    <Input
-                      type='email'
-                      name='email'
-                      placeholder={t('EMAIL')}
-                      ref={register({
-                        required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-                        }
-                      })}
-                      onChange={(e) => hanldeChangeInput(e)}
-                    />
-                  )
-                }
-                {
-                  useLoginByCellphone && loginTab === 'cellphone' && (
-                    <Input
-                      type='tel'
-                      name='cellphone'
-                      placeholder='Cellphone'
-                      ref={register({
-                        required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
-                      })}
-                      onChange={(e) => hanldeChangeInput(e)}
-                    />
-                  )
-                }
-                <Input
-                  type='password'
-                  name='password'
-                  placeholder={t('PASSWORD')}
-                  ref={register({
-                    required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
-                    minLength: {
-                      value: 5,
-                      message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.')
-                        .replace('_attribute_', t('PASSWORD', 'Password'))
-                        .replace('_min_', 8)
-                    }
-                  })}
-                  onChange={(e) => hanldeChangeInput(e)}
-                />
-                <ForgotPassword>
-                  {t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')} {elementLinkToForgotPassword}
-                </ForgotPassword>
-                <Button
-                  color='primary'
-                  type='submit'
-                  disabled={formState.loading}
-                >
-                  {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
-                </Button>
-              </FormInput>
+
+        {(useLoginByCellphone || useLoginByEmail) && (
+          <FormInput
+            noValidate
+            isPopup={isPopup}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            {useLoginByEmail && loginTab === 'email' && (
+              <Input
+                type='email'
+                name='email'
+                placeholder={t('EMAIL')}
+                ref={register({
+                  required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+                  }
+                })}
+                onChange={(e) => hanldeChangeInput(e)}
+              />
             )}
-        </>
-        {linkToForgetPassword && (
-          <>
-            {t('NEW_ON_PLATFORM')}
-            <a href={linkToForgetPassword}>{t('RESET_PASSWORD', 'Reset Password')}</a>
-          </>
+            {useLoginByCellphone && loginTab === 'cellphone' && (
+              <Input
+                type='tel'
+                name='cellphone'
+                placeholder='Cellphone'
+                ref={register({
+                  required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+                })}
+                onChange={(e) => hanldeChangeInput(e)}
+              />
+            )}
+            <Input
+              type='password'
+              name='password'
+              placeholder={t('PASSWORD')}
+              ref={register({
+                required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
+                minLength: {
+                  value: 5,
+                  message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.')
+                    .replace('_attribute_', t('PASSWORD', 'Password'))
+                    .replace('_min_', 8)
+                }
+              })}
+              onChange={(e) => hanldeChangeInput(e)}
+            />
+            <RedirectLink>
+              <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
+              {elementLinkToForgotPassword}
+            </RedirectLink>
+            <Button
+              color='primary'
+              type='submit'
+              disabled={formState.loading}
+            >
+              {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
+            </Button>
+          </FormInput>
         )}
-        <NewOnPlatform className={popup}>
-          {elementLinkToSignup && (
-            <>
-              {t('NEW_ON_PLATFORM', 'New on Ordering?')} {elementLinkToSignup}
-            </>
-          )}
-          {linkToSignup && (
-            <>
-              {t('NEW_ON_PLATFORM', 'New on Ordering?')}
-              <a href={linkToSignup}>{t('CREATE_AN_ACCOUNT', 'Create an account')}</a>
-            </>
-          )}
-        </NewOnPlatform>
 
-        {/** Code for mobile design */}
-        {/* <SocialIcons>
-          {configs?.facebook_id &&
+        {elementLinkToSignup && (
+          <RedirectLink register isPopup={isPopup}>
+            <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
+            {elementLinkToSignup}
+          </RedirectLink>
+        )}
+
+        <SocialButtons isPopup={isPopup}>
+          {configs?.facebook_id && (
             <FacebookLoginButton
-              appId={configs.facebook_id.value}
+              appId={configs?.facebook_id?.value}
               handleSuccessFacebookLogin={handleSuccessFacebook}
-            />}
-          <FaApple />
-          <AiOutlineGoogle />
-        </SocialIcons> */}
-
-        <SocialButtons className={popup}>
-          {
-            configs?.facebook_id &&
-            (
-              <FacebookLoginButton appId={configs?.facebook_id?.value} handleSuccessFacebookLogin={handleSuccessFacebook} />
-            )
-          }
+            />
+          )}
         </SocialButtons>
       </FormSide>
       <Alert

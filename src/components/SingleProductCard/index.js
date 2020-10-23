@@ -42,15 +42,15 @@ export const SingleProductCard = (props) => {
   return (
     <CardContainer soldOut={isSoldOut || maxProductQuantity === 0} onClick={() => onProductClick(product)}>
       <CardInfo soldOut={isSoldOut || maxProductQuantity === 0}>
-        {product?.name ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-        {(product?.description || isSkeleton) && <p>{product?.description || <Skeleton width={100} />}</p>}
-        {product?.price ? (
+        {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
+        {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+        {!isSkeleton ? (
           <span>{formatPrice(product?.price)}</span>
         ) : (
           <Skeleton width={100} />
         )}
       </CardInfo>
-      {product?.images ? (
+      {!isSkeleton ? (
         <WrapLogo>
           <CardLogo soldOut={isSoldOut || maxProductQuantity === 0} bgimage={optimizeImage(product?.images, 'h_200,c_limit')} />
         </WrapLogo>

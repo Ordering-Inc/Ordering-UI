@@ -16,16 +16,16 @@ import {
   SocialButtons,
   TitleHeroSide,
   SignUpWith,
-  AlreadyRegistered
+  RedirectLink
 } from './styles'
 
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
+import { useTheme } from 'styled-components'
 
 const SignUpFormUI = (props) => {
   const {
@@ -46,6 +46,7 @@ const SignUpFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, sessionDispatch] = useSession()
+  const theme = useTheme()
 
   const handleSuccessFacebook = (user) => {
     sessionDispatch({
@@ -96,26 +97,20 @@ const SignUpFormUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide>
+        <img src={theme?.images?.logos?.logotype} alt='Logo login' />
 
-        <img src={logoHeader} alt='Logo login' />
-        {/** for mobile design
-          <SocialIcons>
-            {configs?.facebook_id && <FacebookLoginButton ordering={ordering} appId={configs.facebook_id.value} handleSuccessFacebookLogin={handleSuccessFacebook} />}
-            {/* <FaApple />
-            <AiOutlineGoogle />
-          </SocialIcons>
-          */
-        }
-        {
-          useLoginByCellphone && useLoginByEmail &&
-            <SignUpWith>
-              <Tabs variant='primary'>
-                <Tab>{t('SIGNUP_WITH_EMAIL', 'Signup by Email')}</Tab>
-                <Tab>{t('SIGNUP_WITH_CELLPHONE', 'Signup by Cellphone')}</Tab>
-              </Tabs>
-            </SignUpWith>
-        }
-        <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
+        {useLoginByCellphone && useLoginByEmail && (
+          <SignUpWith>
+            <Tabs variant='primary'>
+              <Tab>{t('SIGNUP_WITH_EMAIL', 'Signup by Email')}</Tab>
+              <Tab>{t('SIGNUP_WITH_CELLPHONE', 'Signup by Cellphone')}</Tab>
+            </Tabs>
+          </SignUpWith>
+        )}
+        <FormInput
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+        >
           {
             !(useChekoutFileds && validationFields.loading) ? (
               <>
@@ -163,26 +158,27 @@ const SignUpFormUI = (props) => {
               </>
             )
           }
-          <Button color='primary' type='submit' disabled={formState.loading}>
+          <Button
+            color='primary'
+            type='submit'
+            disabled={formState.loading}
+          >
             {formState.loading ? t('LOADING') + '...' : t('SIGNUP', 'Sign up')}
           </Button>
         </FormInput>
-        {
-          <AlreadyRegistered>
-            {elementLinkToLogin && (
-              <>
-                {t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')} {elementLinkToLogin}
-              </>
-            )}
-          </AlreadyRegistered>
-        }
+        {elementLinkToLogin && (
+          <RedirectLink register>
+            <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')}</span>
+            {elementLinkToLogin}
+          </RedirectLink>
+        )}
         <SocialButtons>
-          {
-            configs?.facebook_id &&
-            (
-              <FacebookLoginButton appId={configs?.facebook_id?.value} handleSuccessFacebookLogin={handleSuccessFacebook} />
-            )
-          }
+          {configs?.facebook_id && (
+            <FacebookLoginButton
+              appId={configs?.facebook_id?.value}
+              handleSuccessFacebookLogin={handleSuccessFacebook}
+            />
+          )}
         </SocialButtons>
       </FormSide>
       <Alert

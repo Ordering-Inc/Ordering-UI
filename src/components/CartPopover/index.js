@@ -9,13 +9,11 @@ import {
   WrappNotCarts
 } from './styles'
 import { useOrder, useLanguage } from 'ordering-components'
-import { useLocation } from 'react-router-dom'
 import notFound from '../../../template/assets/not-found.svg'
 
 import { Cart } from '../Cart'
 
 export const CartPopover = (props) => {
-  const location = useLocation()
   const { open, auth } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()
@@ -67,15 +65,6 @@ export const CartPopover = (props) => {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
 
-  const uuidParams = () => {
-    const { pathname } = location
-    const splited = pathname.split('/')
-    if (splited[1] === 'checkout') {
-      return splited[2] && splited[2]
-    }
-    return 'no-checkout'
-  }
-
   return (
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
@@ -94,7 +83,6 @@ export const CartPopover = (props) => {
                     cart={cart}
                     isProducts={cart.products.length}
                     onClickCheckout={props.onClose}
-                    isHideCheckoutButtom={uuidParams() && (uuidParams() !== cart.uuid || uuidParams() === 'no-checkout')}
                   />
                 )}
               </React.Fragment>
