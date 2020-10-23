@@ -36,6 +36,7 @@ import { Button } from '../../styles/Buttons'
 import { BsCardImage, IoIosSend, RiUser2Fill, FaUserAlt } from 'react-icons/all'
 import moment from 'moment'
 import { Alert } from '../Confirm'
+import { remove } from 'lodash'
 
 export const MessagesUI = (props) => {
   const {
@@ -72,7 +73,9 @@ export const MessagesUI = (props) => {
         content: sendMessage.error || [t('ERROR')]
       })
     }
-    clearInputs()
+    if (sendMessage.loading) {
+      clearInputs()
+    }
   }, [sendMessage])
 
   useEffect(() => {
@@ -153,7 +156,7 @@ export const MessagesUI = (props) => {
     if (input) {
       input.value = ''
     }
-    setMessage('')
+    removeImage()
   }
 
   const onSubmit = (values) => {
@@ -344,7 +347,6 @@ export const MessagesUI = (props) => {
               <Button
                 circle
                 onClick={removeImage}
-                disabled={sendMessage.loading}
               >
                 {t('X', 'X')}
               </Button>
@@ -354,7 +356,7 @@ export const MessagesUI = (props) => {
             <Button
               color='primary'
               type='submit'
-              disabled={errors.message || sendMessage.loading || (message === '' && !image)}
+              disabled={sendMessage.loading || (message === '' && !image)}
             >
               <IoIosSend />
               {sendMessage.loading ? (
