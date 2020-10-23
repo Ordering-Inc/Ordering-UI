@@ -17,7 +17,7 @@ export const BusinessProductsList = (props) => {
     ...props,
     ordering,
     isSearchByName: true,
-    isSearchByDescription: false,
+    isSearchByDescription: true,
     slug: store,
     categoryId,
     productId,

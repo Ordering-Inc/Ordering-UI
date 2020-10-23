@@ -21,12 +21,18 @@ const ModalUI = (props) => {
     onClose,
     acceptText,
     cancelText,
+    isTransparent,
     hideCloseDefault,
     OrderTypeSelectorHeader
   } = props
   const [, t] = useLanguage()
   return (
-    <ModalDialog className='popup-dialog' width={props.width} padding={props.padding}>
+    <ModalDialog
+      className='popup-dialog'
+      width={props.width}
+      padding={props.padding}
+      isTransparent={isTransparent}
+    >
       {!hideCloseDefault && (
         <ModalIcon>
           <MdClose onClick={() => onClose()} />

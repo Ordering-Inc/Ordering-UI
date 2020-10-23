@@ -7,7 +7,6 @@ import { HiOutlineChat } from 'react-icons/hi'
 import { BiCaretUp } from 'react-icons/bi'
 
 import { Button } from '../../styles/Buttons'
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -47,6 +46,7 @@ import {
   SkeletonBlockWrapp,
   SkeletonBlock
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -56,6 +56,7 @@ const OrderDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
+  const theme = useTheme()
 
   const { order, loading, error } = props.order
 
@@ -95,7 +96,7 @@ const OrderDetailsUI = (props) => {
         <WrapperContainer>
           <Header>
             <HeaderInfo>
-              <HeaderLogo bgimage={logoHeader} />
+              <HeaderLogo bgimage={theme?.images?.logos?.logotype} />
               <HeaderText column>
                 <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
                 <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>

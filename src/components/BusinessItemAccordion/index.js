@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { IoIosArrowDown, FiClock, BiStoreAlt, VscTrash } from 'react-icons/all'
 import { useOrder, useLanguage } from 'ordering-components'
+import { useLocation } from 'react-router-dom'
 
 import { formatPrice, convertHoursToMinutes } from '../../utils'
 
@@ -18,6 +19,7 @@ import {
 
 export const BusinessItemAccordion = (props) => {
   const {
+    uuid,
     isClosed,
     moment,
     business,
@@ -30,15 +32,20 @@ export const BusinessItemAccordion = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const location = useLocation()
+  const isCheckout = location.pathname === `/checkout/${uuid}`
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
 
   const content = useRef(null)
+  const businessStore = useRef(null)
+  const businessDelete = useRef(null)
 
-  const toggleAccordion = () => {
-    if (isClosed || !isProducts) return
+  const toggleAccordion = (e) => {
+    const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
+    if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
       setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
@@ -48,19 +55,33 @@ export const BusinessItemAccordion = (props) => {
     )
   }
 
+  const activeAccordion = () => {
+    setActiveState('active')
+    setHeightState(`${content.current.scrollHeight}px`)
+    setRotateState('accordion__icon rotate')
+  }
+
+  useEffect(() => {
+    if (isCheckout) {
+      toggleAccordion()
+    }
+  }, [location])
+
   useEffect(() => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
-    if (cartsLength === 1) {
-      setActiveState('active')
-      setHeightState(`${content.current.scrollHeight}px`)
-      setRotateState('accordion__icon rotate')
+    if (cartsLength === 1 || isCheckout) {
+      activeAccordion()
     }
   }, [orderState?.carts])
 
   return (
     <AccordionSection isClosed={isClosed}>
-      <Accordion isClosed={isClosed} className={`accordion ${setActive}`}>
-        <BusinessInfo onClick={toggleAccordion}>
+      <Accordion
+        isClosed={isClosed}
+        className={`accordion ${setActive}`}
+        onClick={(e) => toggleAccordion(e)}
+      >
+        <BusinessInfo>
           {business?.logo && (
             <WrapperBusinessLogo>
               <BusinessLogo bgimage={business?.logo} />
@@ -83,14 +104,14 @@ export const BusinessItemAccordion = (props) => {
         </BusinessInfo>
 
         {!isClosed && !!isProducts && (
-          <BusinessTotal onClick={toggleAccordion}>
+          <BusinessTotal>
             {isValidProducts && orderTotal > 0 && <p>{formatPrice(orderTotal)}</p>}
             <p>{t('CART_TOTAL', 'Total')}</p>
           </BusinessTotal>
         )}
 
         {isClosed && (
-          <BusinessTotal>
+          <BusinessTotal className='closed'>
             <p>Closed {moment}</p>
           </BusinessTotal>
         )}
@@ -102,11 +123,23 @@ export const BusinessItemAccordion = (props) => {
         )}
 
         <BusinessActions>
-          <BiStoreAlt onClick={() => handleStoreRedirect(business?.slug)} />
+          <span
+            ref={businessStore}
+            onClick={() => handleStoreRedirect(business?.slug)}
+          >
+            <BiStoreAlt color='#CCC' />
+          </span>
           {!isClosed && !!isProducts && (
             <>
-              <VscTrash onClick={() => handleClearProducts()} />
-              <IoIosArrowDown onClick={toggleAccordion} className={`${setRotate}`} />
+              <span
+                ref={businessDelete}
+                onClick={() => handleClearProducts()}
+              >
+                <VscTrash color='#D81212' />
+              </span>
+              <span>
+                <IoIosArrowDown className={`${setRotate}`} />
+              </span>
             </>
           )}
         </BusinessActions>

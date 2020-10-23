@@ -106,6 +106,7 @@ export const BusinessInfoItem = styled.div`
         &.popup {
           color: ${props => props.theme.colors.primary};
           cursor: pointer;
+          transform: rotate(180deg);
         }
       }
     }

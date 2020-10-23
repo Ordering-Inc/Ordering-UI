@@ -198,8 +198,7 @@ export const Checkout = (props) => {
     handleOrderRedirect,
     handleCheckoutRedirect,
     handleSearchRedirect,
-    handleCheckoutListRedirect,
-    handleStoreRedirect
+    handleCheckoutListRedirect
   } = props
 
   const [{ carts }, { confirmCart }] = useOrder()
@@ -212,6 +211,8 @@ export const Checkout = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
+
+  const cartsWithProducts = Object.values(carts).filter(cart => cart.products.length)
 
   const handleOpenUpsellingPage = (cart) => {
     setCurrentCart(cart)
@@ -277,18 +278,19 @@ export const Checkout = (props) => {
     cartState,
     businessId: cartState.cart?.business_id
   }
+
   return (
     <>
-      {!cartUuid && carts && Object.keys(carts).length === 0 && (
+      {!cartUuid && carts && cartsWithProducts.length === 0 && (
         <NotFoundSource
           content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
           btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
           onClickButton={handleSearchRedirect}
         />
       )}
-      {!cartUuid && carts && Object.values(carts).length > 0 && (
+      {!cartUuid && carts && cartsWithProducts.length > 0 && (
         <CartsList>
-          {Object.values(carts).map(cart => (
+          {cartsWithProducts.map(cart => (
             <CartItem
               key={cart.uuid}
             >
@@ -298,28 +300,17 @@ export const Checkout = (props) => {
                 </LogoWrapper>
                 <CartItemInfo>
                   <h1>{cart?.business?.name}</h1>
-                  {cart.products.length > 0 && (<p>{formatPrice(cart?.total)}</p>)}
-                  {cart.products.length === 0 && (<p>{t('NOT_PRODUCTS', 'No products')}</p>)}
+                  <p>{formatPrice(cart?.total)}</p>
                 </CartItemInfo>
               </CartItemWrapper>
               <CartItemActions>
-                {cart.products.length ? (
-                  <Button
-                    color='primary'
-                    onClick={() => handleOpenUpsellingPage(cart)}
-                    disabled={currentCart?.uuid === cart?.uuid || openUpselling}
-                  >
-                    {(currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid ? t('LOADING', 'Loading...') : t('PAY_CART', 'Pay order')}
-                  </Button>
-                ) : (
-                  <Button
-                    className='not-products'
-                    color='secundary'
-                    onClick={() => handleStoreRedirect(cart.business.slug)}
-                  >
-                    {t('ADD_PRODUCTS', 'Go to store')}
-                  </Button>
-                )}
+                <Button
+                  color='primary'
+                  onClick={() => handleOpenUpsellingPage(cart)}
+                  disabled={currentCart?.uuid === cart?.uuid || openUpselling}
+                >
+                  {(currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid ? t('LOADING', 'Loading...') : t('PAY_CART', 'Pay order')}
+                </Button>
               </CartItemActions>
             </CartItem>
           ))}
