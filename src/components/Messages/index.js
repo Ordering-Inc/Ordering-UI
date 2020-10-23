@@ -36,7 +36,6 @@ import { Button } from '../../styles/Buttons'
 import { BsCardImage, IoIosSend, RiUser2Fill, FaUserAlt } from 'react-icons/all'
 import moment from 'moment'
 import { Alert } from '../Confirm'
-import { remove } from 'lodash'
 
 export const MessagesUI = (props) => {
   const {
