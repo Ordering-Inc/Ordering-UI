@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
-  height: 25px;
+  height: ${({ isPhoto }) => isPhoto ? 'auto' : '25px'};
 
   svg {
     color: ${({ isHome }) => isHome ? '#FFF' : '#000'};
@@ -23,8 +23,8 @@ export const PopoverBody = styled.div`
 `
 
 export const PopoverArrow = styled.div`
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-bottom: 8px solid #FFF;

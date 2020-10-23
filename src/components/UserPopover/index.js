@@ -54,7 +54,12 @@ export const UserPopover = (props) => {
   }
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem isHome={isHome} ref={referenceElement} onClick={props.onClick}>
+      <HeaderItem
+        isPhoto={sessionState?.user?.photo}
+        isHome={isHome}
+        ref={referenceElement}
+        onClick={props.onClick}
+      >
         <DropDownCircleImage
           src={sessionState?.user?.photo}
           fallback={<FaUserAlt />}
