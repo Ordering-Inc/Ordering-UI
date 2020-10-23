@@ -3,18 +3,17 @@ import { useSession, useLanguage, useOrder, useEvent } from 'ordering-components
 import { useTheme } from 'styled-components'
 
 import {
-  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink,
-  SubMenu
+  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink, SubMenu
 } from './styles'
-import { useWindowSize } from '../../../src/hooks/useWindowSize'
-import { useOnlineStatus } from '../../../src/hooks/useOnlineStatus'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import { useOnlineStatus } from '../../hooks/useOnlineStatus'
 
-import { LanguageSelector } from '../../../src/components/LanguageSelector'
-import { AddressesPopover } from '../../../src/components/AddressesPopover'
-import { UserPopover } from '../../../src/components/UserPopover'
-import { MomentPopover } from '../../../src/components/MomentPopover'
-import { CartPopover } from '../../../src/components/CartPopover'
-import { OrderTypeSelectorHeader } from '../../../src/components/OrderTypeSelectorHeader'
+import { LanguageSelector } from '../LanguageSelector'
+import { AddressesPopover } from '../AddressesPopover'
+import { UserPopover } from '../UserPopover'
+import { MomentPopover } from '../MomentPopover'
+import { CartPopover } from '../CartPopover'
+import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 
 export const Header = (props) => {
   const [events] = useEvent()
