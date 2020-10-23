@@ -26,6 +26,10 @@ export const ActiveOrders = styled.div`
   > :first-child {
     margin-left: 30px;
   };
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
 `
 
 export const Card = styled.div`
