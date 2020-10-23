@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { DropDownCircleImage } from '../Dropdown/style'
 import {
   Messages as MessagesController,
   useLanguage,
@@ -18,11 +19,12 @@ import {
   Send,
   MessageConsole,
   BubbleConsole,
-  WrapperSendMessageButton
+  WrapperSendMessageButton,
+  HeaderOnline
 } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { BsCardImage, IoIosSend } from 'react-icons/all'
+import { BsCardImage, IoIosSend, RiUser2Fill, FaUserAlt } from 'react-icons/all'
 import moment from 'moment'
 import { Alert } from '../Confirm'
 
@@ -143,29 +145,33 @@ export const MessagesUI = (props) => {
         <Image>
           {
             business && (
-              <img src={order.business?.logo} />
+              <DropDownCircleImage
+                src={order.business?.logo}
+                fallback={<FaUserAlt />}
+              />
             )
           }
           {
             driver && (
-              <img src={order.driver?.photo} name='driver' />
+              <DropDownCircleImage
+                src={order.driver?.photo}
+                fallback={<RiUser2Fill />}
+              />
             )
           }
         </Image>
-        <div>
-          {business && (
-            <>
-              <strong><p>{order.business?.name}</p></strong>
-              <p>{t('ONLINE', 'Online')}</p>
-            </>
-          )}
-          {driver && (
-            <>
-              <strong><p>{order.driver?.name}</p></strong>
-              <p>{t('ONLINE', 'Online')}</p>
-            </>
-          )}
-        </div>
+        {business && (
+          <HeaderOnline>
+            <h1>{order.business?.name}</h1>
+            <span>{t('ONLINE', 'Online')}</span>
+          </HeaderOnline>
+        )}
+        {driver && (
+          <HeaderOnline>
+            <h1>{order.driver?.name}</h1>
+            <span>{t('ONLINE', 'Online')}</span>
+          </HeaderOnline>
+        )}
       </HeaderProfile>
       {!messages.loading ? (
         <Chat>

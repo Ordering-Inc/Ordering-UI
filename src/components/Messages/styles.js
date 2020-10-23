@@ -9,32 +9,71 @@ export const HeaderProfile = styled.div`
   display: flex;
   height: 100px;
   padding: 20px 20px 0 20px;
-  > div {   
+  div {
      p {
        margin-left: 10px;
       }
-     > strong {
-      > p{
+     strong {
+      p{
         margin-block-end: 0.1em;
       }
     }
-    > p {
+    p {
       margin-block-start: 0.1em;
       font-size: 0.7em
     }
   }
 `
 export const Image = styled.div`
-  width: 10%;
+  width: 60px;
   height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
    img {
     width: 100%;
+    height: auto;
     border-radius: 16px;
+    object-fit: cover;
   }
+
   img[name]{
     border: 1px solid #D81212;
     border-radius: 50%;
     height: 100%
+  }
+
+  svg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #CCC;
+    padding: 6px;
+  }
+`
+
+export const HeaderOnline = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  margin-left: 10px;
+
+  h1,
+  span {
+    margin: 0px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+  span {
+    font-size: 13px;
   }
 `
 
