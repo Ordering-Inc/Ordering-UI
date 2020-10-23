@@ -43,7 +43,7 @@ const CmsUI = (props) => {
         )
       }
       {
-        (loading && error) &&
+        (!loading && error) &&
           <NotFoundSource
             content={t('ERROR_PAGE', 'Sorry, the selected page was not found.')}
             btnTitle={t('PAGE_REDIRECT', 'Go to pages list')}
