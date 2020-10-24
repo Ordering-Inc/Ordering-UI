@@ -278,7 +278,7 @@ export const MessagesUI = (props) => {
                   {message.type === 2 && user.id === message.author_id && (
                     <MessageCustomer>
                       <BubbleCustomer>
-                        {/* <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong> */}
+                        <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
                         {message.comment}
                         <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
                       </BubbleCustomer>
@@ -287,7 +287,7 @@ export const MessagesUI = (props) => {
                   {message.type === 3 && user.id === message.author_id && (
                     <MessageCustomer>
                       <BubbleCustomer name='image'>
-                        {/* <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong> */}
+                        <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
                         <ChatImage><img src={message.source} /></ChatImage>
                         {message.comment && (
                           <>
