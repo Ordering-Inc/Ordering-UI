@@ -8,7 +8,7 @@ export const MyOrdersContainer = styled.div`
 export const ImageContainer = styled.div`
   width: 300px;
   margin: 0 auto;
-  > img{
+  img{
     width: 100%
   }
 `
@@ -34,6 +34,7 @@ export const ActiveOrders = styled.div`
 
 export const Card = styled.div`
   min-width: 400px;
+  width: 400px;
   margin: 10px;
   display: inline-block;
   background: white;
@@ -64,7 +65,7 @@ export const Content = styled.div`
 `
 export const Logo = styled.div`
   width: 20%;
-  > img {
+  img {
     width: 100%;
     height: 100%;
     border-radius: 16px;
@@ -76,11 +77,11 @@ export const BusinessInformation = styled.div`
   flex-direction: column;
   padding: 0 10px;
   width: 70%;
-  > h5 {
+  h5 {
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
   }
-  > p {
+  p {
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
     color : #9A9A9A;
@@ -100,19 +101,18 @@ export const OpenOrder = styled.div`
   height: 15%;
   width: 95%;
   margin: auto;
-  > a {
-    > button {
+  button {
     width: 100%;
     height: 100%;
   }
-  }
 `
 export const Price = styled.div`
-  > h5 {
+  text-align: end;
+  h5 {
     margin-block-end: 1em;
     margin-block-start: 0;
   }
-  > p {
+  p {
     margin-block-end: 0;
     margin-block-start: 1em;
     color: #ff9300;
@@ -149,8 +149,6 @@ export const OrderPastContent = styled.div`
   width: 45%;
   align-items: center;
   padding: 10px 0;
-  img{
-  }
 `
 export const Reorder = styled.div`
   display: flex;
@@ -159,12 +157,12 @@ export const Reorder = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
-  > p {
+  p {
     color: #53ad26;
     margin-block-start: 0;
     margin-block-end: 0;
   }
-  > button {
+  button {
     margin: 5px 0;
     width: 80%
   }

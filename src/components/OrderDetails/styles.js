@@ -343,6 +343,19 @@ export const OrderCustomer = styled.div`
   display: flex;
   margin: 10px 0px 20px;
   width: 100%;
+
+  div.photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+    }
+  }
+
 `
 
 export const PhotoBlock = styled.img`
@@ -383,6 +396,19 @@ export const OrderDriver = styled(OrderCustomer)`
 export const WrapperDriver = styled.div`
   display: flex;
   width: 100%;
+
+  div.photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+    }
+  }
+
 `
 
 export const OrderProducts = styled(OrderCustomer)`

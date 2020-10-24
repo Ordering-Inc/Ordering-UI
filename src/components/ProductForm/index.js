@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
+import notImage from '../../../template/assets/not-image.png'
 
 import {
   ProductForm as ProductOptions,
   useSession,
   useLanguage,
-  useOrder
+  useOrder,
+  useEvent
 } from 'ordering-components'
 
 import { formatPrice, scrollTo } from '../../utils'
@@ -58,6 +59,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
+  const [events] = useEvent()
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -81,6 +83,11 @@ const ProductOptionsUI = (props) => {
     scrollTo(container, topPos, 1250)
   }
 
+  const handleGoToPage = (e, data) => {
+    e.preventDefault()
+    events.emit('go_to_page', data)
+  }
+
   return (
     <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
       {loading && (
@@ -102,11 +109,9 @@ const ProductOptionsUI = (props) => {
       {!loading && !error && product && (
         <>
           <WrapperImage>
-            {product?.images && (
-              <ProductImage>
-                <img src={product?.images} alt='product' />
-              </ProductImage>
-            )}
+            <ProductImage>
+              <img src={product?.images || notImage} alt='product' />
+            </ProductImage>
           </WrapperImage>
           <ProductInfo>
             <div>
@@ -231,8 +236,8 @@ const ProductOptionsUI = (props) => {
         >
           <LoginForm
             handleSuccessLogin={handleSuccessLogin}
-            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+            elementLinkToSignup={<a onClick={(e) => handleGoToPage(e, { page: 'signup' })} href='#'>{t('CREATE_ACCOUNT', 'Create account')}</a>}
+            elementLinkToForgotPassword={<a onClick={(e) => handleGoToPage(e, { page: 'forgot_password' })} href='#'>{t('RESET_PASSWORD', 'Reset password')}</a>}
             useLoginByCellphone
             isPopup
           />

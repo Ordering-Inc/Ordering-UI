@@ -6,13 +6,24 @@ import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import { AddressList } from '../AddressList'
 
-import { UserProfileContainer, UserImage, Image, SideForm, FormInput, Camera, UserData, SavedPlaces, SkeletonForm } from './styles'
+import {
+  UserProfileContainer,
+  UserImage,
+  Image,
+  SideForm,
+  FormInput,
+  Camera,
+  UserData,
+  SavedPlaces,
+  SkeletonForm,
+  UploadImageIcon
+} from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { ProfileOptions } from './ProfileOptions'
 
-import { GiPhotoCamera } from 'react-icons/gi'
+import { GiPhotoCamera, BiImage } from 'react-icons/all'
 
 const UserProfileFormUI = (props) => {
   const { hanldeChangeInput, handleButtonUpdateClick, handlechangeImage, formState, showField, validationFields, isRequiredField, useChekoutFileds } = props
@@ -73,15 +84,27 @@ const UserProfileFormUI = (props) => {
         <UserImage>
           <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
             <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
-              <Image>{formState.changes.photo && formState.loading
-                ? <div><Skeleton /></div>
-                : (
-                  <img
-                    src={(!formState.changes.photo || formState.result?.result === 'Network Error')
-                      ? user.photo
-                      : formState.changes.photo}
-                  />
-                )}
+              <Image isImage={user?.photo || formState?.changes?.photo}>
+                {formState.changes.photo && formState.loading
+                  ? (<div><Skeleton /></div>)
+                  : ((!formState.changes.photo || formState.result?.result === 'Network Error')
+                    ? user?.photo
+                      ? (<img src={user?.photo} alt='user image' />)
+                      : (
+                        <UploadImageIcon>
+                          <BiImage />
+                          <span>{t('DRAG_DROP_IMAGE', 'Put your image here')}</span>
+                        </UploadImageIcon>
+                      )
+                    : formState?.changes?.photo
+                      ? (<img src={formState?.changes?.photo} alt='user image' />)
+                      : (
+                        <UploadImageIcon>
+                          <BiImage />
+                          <span>{t('DRAG_DROP_IMAGE', 'Put your image here')}</span>
+                        </UploadImageIcon>
+                      )
+                  )}
               </Image>
             </DragAndDrop>
           </ExamineClick>

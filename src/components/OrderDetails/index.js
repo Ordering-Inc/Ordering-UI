@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
-import { FiPhone } from 'react-icons/fi'
-import { HiOutlineChat } from 'react-icons/hi'
-import { BiCaretUp } from 'react-icons/bi'
+import { useLanguage, OrderDetails as OrderDetailsController, useEvent } from 'ordering-components'
+import { FiPhone, FaUserCircle, HiOutlineChat, BiCaretUp, RiUser2Fill } from 'react-icons/all'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -57,6 +54,7 @@ const OrderDetailsUI = (props) => {
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
   const theme = useTheme()
+  const [events] = useEvent()
 
   const { order, loading, error } = props.order
 
@@ -88,6 +86,10 @@ const OrderDetailsUI = (props) => {
     } catch (error) {
       return 'https://picsum.photos/75'
     }
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
   }
 
   return (
@@ -151,11 +153,13 @@ const OrderDetailsUI = (props) => {
               {t('CUSTOMER', 'Customer')}
             </SectionTitle>
             <OrderCustomer>
-              {order?.customer?.photo && (
-                <div>
+              <div className='photo'>
+                {order?.customer?.photo ? (
                   <PhotoBlock src={order?.customer?.photo} />
-                </div>
-              )}
+                ) : (
+                  <FaUserCircle />
+                )}
+              </div>
               <InfoBlock>
                 <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                 <span>{order?.customer?.address}</span>
@@ -169,11 +173,13 @@ const OrderDetailsUI = (props) => {
                 </SectionTitle>
                 <OrderDriver>
                   <WrapperDriver>
-                    {!order?.customer?.photo && (
-                      <div>
+                    <div className='photo'>
+                      {order?.driver?.photo ? (
                         <PhotoBlock src={order?.driver?.photo} />
-                      </div>
-                    )}
+                      ) : (
+                        <RiUser2Fill />
+                      )}
+                    </div>
                     <InfoBlock>
                       <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
                       <span>{t('DRIVER', 'Driver')}</span>
@@ -259,10 +265,10 @@ const OrderDetailsUI = (props) => {
                 <BiCaretUp />
               </a>
               */}
-              <Link to='/profile/orders'>
+              <a onClick={() => handleGoToPage({ page: 'orders' })}>
                 {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
-              </Link>
+              </a>
             </FootActions>
           </Content>
         </WrapperContainer>
@@ -310,11 +316,9 @@ const OrderDetailsUI = (props) => {
 }
 
 export const OrderDetails = (props) => {
-  const { orderId } = useParams()
   const orderDetailsProps = {
     ...props,
-    UIComponent: OrderDetailsUI,
-    orderId
+    UIComponent: OrderDetailsUI
   }
 
   return (

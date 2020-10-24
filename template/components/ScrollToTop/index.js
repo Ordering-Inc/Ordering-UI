@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 
-function ScrollToTop ({ history, children }) {
+export const ScrollToTop = withRouter(({ history, children }) => {
+
   useEffect(() => {
-    const unlisten = history.listen(() => {
+    const unlisten = history.listen((data) => {
       if (!window.location.search.includes('category')) {
         window.scrollTo(0, 0)
       }
@@ -14,6 +15,4 @@ function ScrollToTop ({ history, children }) {
   }, [])
 
   return <>{children}</>
-}
-
-export default withRouter(ScrollToTop)
+})
