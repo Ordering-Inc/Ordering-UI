@@ -55,5 +55,9 @@ export const CheckoutAction = styled.div`
     padding: 10px 30px;
     color: #FFF;
     width: 80%;
+    &:disabled{
+      opacity: 0.5;
+      cursor: not-allowed
+    }
   }
 `

@@ -220,9 +220,8 @@ export const Checkout = (props) => {
 
   const handleUpsellingPage = () => {
     setOpenUpselling(false)
-    setCurrentCart('')
+    setCurrentCart(null)
     setCanOpenUpselling(false)
-    setOpenUpselling(false)
     handleCheckoutRedirect(currentCart.uuid)
   }
 
@@ -324,7 +323,7 @@ export const Checkout = (props) => {
         />
       )}
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
-      {currentCart?.products ? (
+      {currentCart?.products && (
         <UpsellingPage
           businessId={currentCart?.business_id}
           cartProducts={currentCart?.products}
@@ -333,7 +332,7 @@ export const Checkout = (props) => {
           canOpenUpselling={canOpenUpselling}
           setCanOpenUpselling={setCanOpenUpselling}
         />
-      ) : ''}
+      )}
     </>
   )
 }
