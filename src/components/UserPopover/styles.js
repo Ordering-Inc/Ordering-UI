@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
@@ -62,7 +61,7 @@ export const PopoverListItem = styled.div`
   ${PopoverListItemStyles}
 `
 
-export const PopoverListLink = styled(Link)`
+export const PopoverListLink = styled.a`
   ${PopoverListItemStyles}
   text-decoration: none;
 `

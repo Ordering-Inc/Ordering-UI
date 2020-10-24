@@ -19,13 +19,13 @@ import {
   RedirectLink
 } from './styles'
 
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
+import { useTheme } from 'styled-components'
 
 const SignUpFormUI = (props) => {
   const {
@@ -46,6 +46,7 @@ const SignUpFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, sessionDispatch] = useSession()
+  const theme = useTheme()
 
   const handleSuccessFacebook = (user) => {
     sessionDispatch({
@@ -96,7 +97,7 @@ const SignUpFormUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide>
-        <img src={logoHeader} alt='Logo login' />
+        <img src={theme?.images?.logos?.logotype} alt='Logo login' />
 
         {useLoginByCellphone && useLoginByEmail && (
           <SignUpWith>

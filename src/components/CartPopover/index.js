@@ -9,13 +9,11 @@ import {
   WrappNotCarts
 } from './styles'
 import { useOrder, useLanguage } from 'ordering-components'
-import { useLocation } from 'react-router-dom'
 import notFound from '../../../template/assets/not-found.svg'
 
 import { Cart } from '../Cart'
 
 export const CartPopover = (props) => {
-  const location = useLocation()
   const { open, auth } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()

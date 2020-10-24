@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
+import { useLanguage, OrderDetails as OrderDetailsController, useEvent } from 'ordering-components'
 import { FiPhone, FaUserCircle, HiOutlineChat, BiCaretUp, RiUser2Fill } from 'react-icons/all'
 
 import { Button } from '../../styles/Buttons'
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -45,6 +43,7 @@ import {
   SkeletonBlockWrapp,
   SkeletonBlock
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -54,6 +53,8 @@ const OrderDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
+  const theme = useTheme()
+  const [events] = useEvent()
 
   const { order, loading, error } = props.order
 
@@ -87,13 +88,17 @@ const OrderDetailsUI = (props) => {
     }
   }
 
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
+  }
+
   return (
     <Container>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
           <Header>
             <HeaderInfo>
-              <HeaderLogo bgimage={logoHeader} />
+              <HeaderLogo bgimage={theme?.images?.logos?.logotype} />
               <HeaderText column>
                 <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
                 <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
@@ -260,10 +265,10 @@ const OrderDetailsUI = (props) => {
                 <BiCaretUp />
               </a>
               */}
-              <Link to='/profile/orders'>
+              <a onClick={() => handleGoToPage({ page: 'orders' })}>
                 {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
-              </Link>
+              </a>
             </FootActions>
           </Content>
         </WrapperContainer>
@@ -287,9 +292,11 @@ const OrderDetailsUI = (props) => {
       )}
 
       {error && error.length > 0 &&
-        error.map((e, i) => (
-          <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-        ))}
+        error.map((e, i) => {
+          if (e) {
+            return <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
+          }
+        })}
 
       {!loading && !order && (
         <NotFoundSource
@@ -309,11 +316,9 @@ const OrderDetailsUI = (props) => {
 }
 
 export const OrderDetails = (props) => {
-  const { orderId } = useParams()
   const orderDetailsProps = {
     ...props,
-    UIComponent: OrderDetailsUI,
-    orderId
+    UIComponent: OrderDetailsUI
   }
 
   return (

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { IoIosArrowDown, FiClock, BiStoreAlt, VscTrash } from 'react-icons/all'
 import { useOrder, useLanguage } from 'ordering-components'
-import { useLocation } from 'react-router-dom'
 
 import { formatPrice, convertHoursToMinutes } from '../../utils'
 
@@ -19,7 +18,7 @@ import {
 
 export const BusinessItemAccordion = (props) => {
   const {
-    uuid,
+    isCheckout,
     isClosed,
     moment,
     business,
@@ -32,8 +31,6 @@ export const BusinessItemAccordion = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const location = useLocation()
-  const isCheckout = location.pathname === `/checkout/${uuid}`
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -42,6 +39,8 @@ export const BusinessItemAccordion = (props) => {
   const content = useRef(null)
   const businessStore = useRef(null)
   const businessDelete = useRef(null)
+
+  const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
 
   const toggleAccordion = (e) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
@@ -55,22 +54,23 @@ export const BusinessItemAccordion = (props) => {
     )
   }
 
-  const activeAccordion = () => {
-    setActiveState('active')
-    setHeightState(`${content.current.scrollHeight}px`)
-    setRotateState('accordion__icon rotate')
+  const activeAccordion = (value) => {
+    setActiveState(value ? 'active' : '')
+    setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
+    setRotateState(value ? 'accordion__icon rotate' : 'accordion__icon')
   }
 
   useEffect(() => {
-    if (isCheckout) {
+    if (isCheckout && cartsLength > 1) {
       toggleAccordion()
     }
   }, [location])
 
   useEffect(() => {
-    const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
     if (cartsLength === 1 || isCheckout) {
-      activeAccordion()
+      activeAccordion(true)
+    } else {
+      activeAccordion(false)
     }
   }, [orderState?.carts])
 

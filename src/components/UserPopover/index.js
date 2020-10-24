@@ -1,15 +1,15 @@
 import React, { useRef, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import { useLanguage, useSession, LogoutAction as LogoutActionController } from 'ordering-components'
+import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow, PopoverList, PopoverListItem, PopoverListLink } from './styles'
 import { DropDownCircleImage } from '../Dropdown/style'
 import { FaUserAlt, FaRegAddressCard, FaRegListAlt, FaSignOutAlt } from 'react-icons/fa'
 
 export const UserPopover = (props) => {
-  const { open } = props
+  const { open, isHome } = props
   const [sessionState] = useSession()
   const [, t] = useLanguage()
+  const [events] = useEvent()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -27,8 +27,6 @@ export const UserPopover = (props) => {
   })
 
   const { styles, attributes, forceUpdate } = popper
-  const location = useLocation()
-  const isHome = location.pathname === '/' || location.pathname === '/home'
 
   useEffect(() => {
     forceUpdate && forceUpdate()
@@ -41,6 +39,11 @@ export const UserPopover = (props) => {
     if (outsidePopover && outsidePopoverMenu) {
       props.onClose && props.onClose()
     }
+  }
+
+  const handleGoToPage = (page) => {
+    events.emit('go_to_page', { page })
+    props.onClick && props.onClick()
   }
 
   useEffect(() => {
@@ -67,10 +70,10 @@ export const UserPopover = (props) => {
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
-          <PopoverListLink onClick={props.onClose} to='/profile'>
+          <PopoverListLink onClick={() => handleGoToPage('profile')}>
             <FaRegAddressCard /> {t('PROFILE', 'Profile')}
           </PopoverListLink>
-          <PopoverListLink onClick={props.onClose} to='/profile/orders'>
+          <PopoverListLink onClick={() => handleGoToPage('orders')}>
             <FaRegListAlt /> {t('ORDERS', 'Orders')}
           </PopoverListLink>
           <PopoverListItemLogout onClose={props.onClose} />
@@ -86,7 +89,7 @@ const LogoutActionUI = (props) => {
 
   const handleClick = () => {
     props.handleLogoutClick()
-    props.onClose()
+    props.onClose && props.onClose()
   }
   return (
     <PopoverListItem onClick={handleClick}>
