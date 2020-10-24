@@ -6,7 +6,7 @@ import { DropDownCircleImage } from '../Dropdown/style'
 import { FaUserAlt, FaRegAddressCard, FaRegListAlt, FaSignOutAlt } from 'react-icons/fa'
 
 export const UserPopover = (props) => {
-  const { open } = props
+  const { open, isHome } = props
   const [sessionState] = useSession()
   const [, t] = useLanguage()
   const [events] = useEvent()
@@ -57,8 +57,16 @@ export const UserPopover = (props) => {
   }
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>
-        <DropDownCircleImage src={sessionState.user.photo} fallback={<FaUserAlt />} />
+      <HeaderItem
+        isPhoto={sessionState?.user?.photo}
+        isHome={isHome}
+        ref={referenceElement}
+        onClick={props.onClick}
+      >
+        <DropDownCircleImage
+          src={sessionState?.user?.photo}
+          fallback={<FaUserAlt />}
+        />
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
