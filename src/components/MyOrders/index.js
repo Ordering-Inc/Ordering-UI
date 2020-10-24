@@ -97,17 +97,15 @@ export const MyOrdersUI = (props) => {
                       </BusinessInformation>
                       <Price>
                         <h5>
-                        ${order.products.reduce((acc, cur) => acc + cur.price, 0)}
+                          ${order.products.reduce((acc, cur) => acc + cur.price, 0)}
                         </h5>
                         <p>{order.status === 0 ? t('ORDER_PENDING', 'pending') : ''}</p>
                       </Price>
                     </Content>
                     <OpenOrder>
-                      {/* <Link to={'/orders/' + order.id}> */}
                       <Button color='primary' onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })}>
                         {t('OPEN_ORDER', 'Open order')}
                       </Button>
-                      {/* </Link> */}
                     </OpenOrder>
                   </Card>
                 )) : (
@@ -153,9 +151,7 @@ export const MyOrdersUI = (props) => {
                       <BusinessInformation>
                         <h5>{order.business.name}</h5>
                         <p>{order.created_at}</p>
-                        {/* <Link to={'/orders/' + order.id}> */}
                         <p onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })} name='view'>{t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}</p>
-                        {/* </Link> */}
                       </BusinessInformation>
                     </OrderPastContent>
                     <Reorder>
