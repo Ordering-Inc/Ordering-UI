@@ -17,9 +17,9 @@ import { AddressList } from '../AddressList'
 
 import { useSession, useOrder, useLanguage } from 'ordering-components'
 
-import locationIcon from '../../../template/assets/input-location-icon.svg'
-import homeBusiness from '../../../template/assets/homeBusiness.png'
 import { Alert } from '../Confirm'
+import { useTheme } from 'styled-components'
+import { HiOutlineLocationMarker } from 'react-icons/hi'
 
 export const HomeHero = (props) => {
   const {
@@ -31,6 +31,7 @@ export const HomeHero = (props) => {
   const [, t] = useLanguage()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const theme = useTheme()
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -54,11 +55,12 @@ export const HomeHero = (props) => {
   }, [])
 
   return (
-    <HeroContainer bgimage={homeBusiness}>
+    <HeroContainer bgimage={theme.images?.general?.homeHero}>
       <ContentWrapper>
         <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
         <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
-        <WrapInput onClick={handleAddressInput} withIcon={locationIcon}>
+        <WrapInput onClick={handleAddressInput} withIcon>
+          <HiOutlineLocationMarker />
           <Input type='text' disabled placeholder={orderState?.options?.address?.address || t('TYPE_ADDRESS', 'Type address')} />
         </WrapInput>
         <Button

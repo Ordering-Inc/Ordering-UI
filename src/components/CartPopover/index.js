@@ -9,14 +9,15 @@ import {
   WrappNotCarts
 } from './styles'
 import { useOrder, useLanguage } from 'ordering-components'
-import notFound from '../../../template/assets/not-found.svg'
 
 import { Cart } from '../Cart'
+import { useTheme } from 'styled-components'
 
 export const CartPopover = (props) => {
   const { open, auth } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const theme = useTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -89,7 +90,7 @@ export const CartPopover = (props) => {
             ))}
           {cartsWithProducts.length === 0 && (
             <WrappNotCarts>
-              <img src={notFound} alt='notFound' />
+              <img src={theme.images?.general?.notFound} alt='Not Found' />
               <h1>{t('CART_ERROR', 'You don\'t have carts available')}</h1>
             </WrappNotCarts>
           )}

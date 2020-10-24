@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { FiPlus, ImCompass } from 'react-icons/all'
+import { FaHome, FaPlus, FaRegBuilding, FaRegHeart } from 'react-icons/fa'
+import { ImCompass } from 'react-icons/im'
+import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
@@ -18,10 +20,6 @@ import {
   AddressTagSection,
   WrapperMap
 } from './styles'
-
-import company from '../../../template/assets/company.svg'
-import heart from '../../../template/assets/heart.svg'
-import home from '../../../template/assets/home.svg'
 
 import { Button } from '../../styles/Buttons'
 import { Input } from '../../styles/Inputs'
@@ -115,6 +113,7 @@ const AddressFormUI = (props) => {
         )}
         <AddressWrap className='google-control'>
           <WrapAddressInput>
+            <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
@@ -163,16 +162,16 @@ const AddressFormUI = (props) => {
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>
           <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
-            <img src={home} alt='Home' />
+            <span><FaHome /></span>
           </Button>
           <Button className={addressTag === 'office' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('office')}>
-            <img src={company} alt='Office' />
+            <span><FaRegBuilding /></span>
           </Button>
           <Button className={addressTag === 'favorite' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('favorite')}>
-            <img src={heart} alt='Favorite' />
+            <span><FaRegHeart /></span>
           </Button>
           <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
-            <span><FiPlus /></span>
+            <span><FaPlus /></span>
           </Button>
         </AddressTagSection>
         <FormActions>

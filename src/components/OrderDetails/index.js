@@ -80,9 +80,9 @@ const OrderDetailsUI = (props) => {
     return objectStatus && objectStatus
   }
 
-  const getImage = (slug) => {
+  const getImage = (status) => {
     try {
-      return slug && require(`../../../template/assets/order/${slug}.svg`)
+      return theme.images?.order?.[`status${status}`]
     } catch (error) {
       return 'https://picsum.photos/75'
     }
@@ -144,7 +144,7 @@ const OrderDetailsUI = (props) => {
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  <img src={getImage(getOrderStatus(order?.status)?.slug)} alt='' />
+                  <img src={getImage(order?.status || 0)} alt='' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>

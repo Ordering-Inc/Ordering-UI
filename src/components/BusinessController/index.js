@@ -2,12 +2,6 @@ import React from 'react'
 import { BusinessController as BusinessSingleCard, useLanguage } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 
-import deliver from '../../../template/assets/delivery-icon.svg'
-import crown from '../../../template/assets/crown.svg'
-import star from '../../../template/assets/star.svg'
-import locationMarker from '../../../template/assets/location-marker.svg'
-import clock from '../../../template/assets/clock.svg'
-
 import { convertHoursToMinutes } from '../../utils'
 
 import {
@@ -21,8 +15,12 @@ import {
   BusinessLogo,
   BusinessInfo,
   BusinessInfoItem,
-  BusinessName
+  BusinessName,
+  Categories,
+  Medadata
 } from './styles'
+import { GrClock, GrDeliver, GrLocation, GrStar } from 'react-icons/gr'
+import { FaCrown } from 'react-icons/fa'
 
 const BusinessControllerUI = (props) => {
   const {
@@ -40,12 +38,14 @@ const BusinessControllerUI = (props) => {
   const formatAmount = (amount = 0) => `$ ${amount.toFixed(2)}`
 
   const getBusinessType = () => {
-    if (Object.keys(business).length <= 0) return 'none'
-    const typeObj = types.map(t => {
-      return { [t]: business[t] }
-    }).reduce((r, c) => ({ ...r, ...c }), {})
-    const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])[0]
-    return businessType[0]
+    if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
+    const _types = []
+    types.forEach(type => {
+      if (business[type]) {
+        _types.push(t(type.toUpperCase(), type))
+      }
+    })
+    return _types.join(', ')
   }
 
   const optimizeImage = (url, params, fallback) => {
@@ -68,7 +68,7 @@ const BusinessControllerUI = (props) => {
                 <BusinessTags>
                   {business?.featured &&
                     <span className='crown'>
-                      <img src={crown} alt='crown-icon' />
+                      <FaCrown />
                     </span>}
                   <div>
                     {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || '$0.00'}</span>}
@@ -94,47 +94,39 @@ const BusinessControllerUI = (props) => {
                 <div>
                   {business?.name ? (
                     <BusinessName>{business?.name}</BusinessName>
-                    // <p className='bold'>{business?.name}</p>
                   ) : (
                     <Skeleton width={100} />
                   )}
                   {business?.reviews?.total > 0 ? (
-                    <p className='reviews'>
-                      <img src={star} alt='star-icon' />
-                      {business?.reviews?.total}
-                    </p>
+                    <div className='reviews'>
+                      <GrStar />
+                      <span>{business?.reviews?.total}</span>
+                    </div>
                   ) : (
                     business?.reviews?.total !== 0 && <Skeleton width={50} />
                   )}
                 </div>
-                <div>
+                <Categories>
+                  {
+                    Object.keys(business).length > 0 ? (
+                      getBusinessType()
+                    ) : (
+                      <Skeleton width={100} />
+                    )
+                  }
+                </Categories>
+                <Medadata>
                   {Object.keys(business).length > 0 ? (
-                    <p>{getBusinessType()}</p>
-                  ) : (
-                    <Skeleton width={100} />
-                  )}
-                </div>
-                <div>
-                  {Object.keys(business).length > 0 ? (
-                    <>
-                      {orderState?.options?.type === 1 ? (
-                        <p className='bullet'>
-                          <img src={clock} alt='clock-icon' />
-                          {convertHoursToMinutes(business?.delivery_time) || <Skeleton width={100} />}
-                        </p>
-                      ) : (
-                        <p className='bullet'>
-                          <img src={clock} alt='clock-icon' />
-                          {convertHoursToMinutes(business?.pickup_time) || <Skeleton width={100} />}
-                        </p>
-                      )}
-                    </>
+                    <p className='bullet'>
+                      <GrClock />
+                      {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
+                    </p>
                   ) : (
                     <Skeleton width={70} />
                   )}
                   {business?.distance >= 0 ? (
                     <p className='bullet'>
-                      <img src={locationMarker} alt='location-icon' />
+                      <GrLocation />
                       {formatNumber(business?.distance)} KM
                     </p>
                   ) : (
@@ -142,13 +134,13 @@ const BusinessControllerUI = (props) => {
                   )}
                   {business?.delivery_price >= 0 ? (
                     <p>
-                      <img src={deliver} alt='deliver-icon' />
+                      <GrDeliver />
                       {business && formatAmount(business?.delivery_price)}
                     </p>
                   ) : (
                     <Skeleton width={70} />
                   )}
-                </div>
+                </Medadata>
               </BusinessInfoItem>
             </BusinessInfo>
           </BusinessContent>
