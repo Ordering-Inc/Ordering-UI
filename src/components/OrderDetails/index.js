@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
+import { useLanguage, OrderDetails as OrderDetailsController, useEvent } from 'ordering-components'
 import { FiPhone, FaUserCircle, HiOutlineChat, BiCaretUp, RiUser2Fill } from 'react-icons/all'
 
 import { Button } from '../../styles/Buttons'
@@ -55,6 +54,7 @@ const OrderDetailsUI = (props) => {
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
   const theme = useTheme()
+  const [events] = useEvent()
 
   const { order, loading, error } = props.order
 
@@ -86,6 +86,10 @@ const OrderDetailsUI = (props) => {
     } catch (error) {
       return 'https://picsum.photos/75'
     }
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
   }
 
   return (
@@ -261,10 +265,10 @@ const OrderDetailsUI = (props) => {
                 <BiCaretUp />
               </a>
               */}
-              <Link to='/profile/orders'>
+              <a onClick={() => handleGoToPage({ page: 'orders' })}>
                 {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
-              </Link>
+              </a>
             </FootActions>
           </Content>
         </WrapperContainer>
@@ -288,9 +292,11 @@ const OrderDetailsUI = (props) => {
       )}
 
       {error && error.length > 0 &&
-        error.map((e, i) => (
-          <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-        ))}
+        error.map((e, i) => {
+          if (e) {
+            return <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
+          }
+        })}
 
       {!loading && !order && (
         <NotFoundSource
@@ -310,11 +316,9 @@ const OrderDetailsUI = (props) => {
 }
 
 export const OrderDetails = (props) => {
-  const { orderId } = useParams()
   const orderDetailsProps = {
     ...props,
-    UIComponent: OrderDetailsUI,
-    orderId
+    UIComponent: OrderDetailsUI
   }
 
   return (

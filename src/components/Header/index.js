@@ -97,6 +97,7 @@ export const Header = (props) => {
                   <>
                     <UserPopover
                       open={openPopover.user}
+                      isHome={isHome}
                       onClick={() => handleTogglePopover('user')}
                       onClose={() => handleClosePopover('user')}
                     />

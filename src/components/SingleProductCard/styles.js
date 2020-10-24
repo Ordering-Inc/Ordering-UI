@@ -29,11 +29,10 @@ export const SoldOut = styled.span`
   background: #D6D6D6 0% 0% no-repeat padding-box;
   border-radius: 23px;
   padding: 5px 10px;
-  top: 15px;
-  right: -15px;
+  top: 8px;
+  right: 6px;
   text-transform: uppercase;
   font-size: 14px;
-  transform: rotate(45deg);
 `
 
 export const CardInfo = styled.div`
@@ -99,6 +98,7 @@ const CardLogoStyled = styled.div`
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: cover;
+  background-position: center;
   object-fit: cover;
   min-height: 75px;
   border-radius: 10px;
