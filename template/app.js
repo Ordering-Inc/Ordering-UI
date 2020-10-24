@@ -8,6 +8,12 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder } from 'ordering-components'
 
+import { Header } from '../src/components/Header'
+import { Footer } from '../src/components/Footer'
+import { SpinnerLoader } from '../src/components/SpinnerLoader'
+import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
+import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
+
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
 import { BusinessesList } from './Pages/BusinessesList'
@@ -19,15 +25,11 @@ import { Cms } from './Pages/Cms'
 import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
 import { PageNotFound } from './Pages/PageNotFound'
-import { HomePage } from '../template/Pages/Home'
-import { Header } from '../src/components/Header'
-import { Footer } from './components/Footer'
-import ScrollToTop from '../src/utils/ScrollToTop'
-import { SpinnerLoader } from '../src/components/SpinnerLoader'
-import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
-import { ListenPageChanges } from './components/ListenPageChanges'
-import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
+import { HomePage } from './Pages/Home'
 import { PagesList } from './Pages/PagesList'
+
+import { ScrollToTop } from './components/ScrollToTop'
+import { ListenPageChanges } from './components/ListenPageChanges'
 
 export const App = () => {
   const [{ auth, user }, sessionDispatch] = useSession()

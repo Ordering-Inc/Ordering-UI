@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLocation } from 'react-router-dom'
 import {
   BusinessAndProductList,
+  useEvent,
   useLanguage
 } from 'ordering-components'
 
@@ -45,13 +45,12 @@ const BusinessProductsListingUI = (props) => {
     handleChangeSearch
   } = props
 
-  const location = useLocation()
-
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
+  const [events] = useEvent()
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -103,11 +102,26 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [productModal])
 
+  const handleChangePage = (data) => {
+    // console.log(Object.entries(data.query || {}).length, openProduct)
+    if (Object.entries(data.query).length === 0 && openProduct) {
+      setModalIsOpen(false)
+    }
+  }
+
   useEffect(() => {
     if (categoryId && productId) {
       handleUpdateInitialRender(true)
     }
+    events.emit('get_current_view')
   }, [])
+
+  useEffect(() => {
+    events.on('change_view', handleChangePage)
+    return () => {
+      events.off('change_view', handleChangePage)
+    }
+  }, [openProduct])
 
   return (
     <ProductsContainer>
@@ -145,7 +159,7 @@ const BusinessProductsListingUI = (props) => {
 
       <Modal
         width='70%'
-        open={Boolean(openProduct && location.search)}
+        open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
       >

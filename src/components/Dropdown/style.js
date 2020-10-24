@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
 import { Image } from '../Image'
 
 export const DropdownStyled = styled.div`
@@ -81,7 +80,7 @@ export const DropdownItemStyled = styled.div`
   ${DropdownItemShared}
 `
 
-export const DropdownItemLink = styled(Link)`
+export const DropdownItemLink = styled.a`
   ${DropdownItemShared}
   text-decoration: none;
 `
