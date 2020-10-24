@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+// import { DropDownCircleImage } from '../Dropdown/style'
 import {
   Messages as MessagesController,
-  useLanguage
+  useLanguage,
+  useSession
 } from 'ordering-components'
 import { useForm } from 'react-hook-form'
+import Skeleton from 'react-loading-skeleton'
 import {
   MessagesContainer,
   HeaderProfile,
@@ -11,24 +14,37 @@ import {
   Chat,
   BubbleCustomer,
   MessageCustomer,
+  MyName,
+  PartnerName,
+  MessageBusiness,
+  BubbleBusines,
+  SkeletonBubbleCustomer,
+  SkeletonBubbleBusiness,
+  ChatImage,
+  TimeofSent,
   SendForm,
   Send,
+  SendImage,
   MessageConsole,
-  BubbleConsole
+  BubbleConsole,
+  WrapperDeleteImage,
+  WrapperSendMessageButton,
+  HeaderOnline
 } from './styles'
+import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { BsCardImage, FiSend } from 'react-icons/all'
+import { BsCardImage, IoIosSend, RiUser2Fill, FaUserAlt } from 'react-icons/all'
 import moment from 'moment'
+import { Alert } from '../Confirm'
 
 export const MessagesUI = (props) => {
   const {
     order,
     messages,
-    canRead,
     handleSend,
-    setCanRead,
     image,
+    message,
     sendMessage,
     setImage,
     setMessage,
@@ -38,22 +54,43 @@ export const MessagesUI = (props) => {
 
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [{ user }] = useSession()
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
+  useEffect(() => {
+    if (!sendMessage.loading && sendMessage?.error) {
+      setAlertState({
+        open: true,
+        content: sendMessage.error || [t('ERROR')]
+      })
+    }
+    if (sendMessage.loading) {
+      clearInputs()
+    }
+  }, [sendMessage])
+
+  useEffect(() => {
+    if (!messages.loading) {
+      const chat = document.getElementById('chat')
+      chat.scrollTop = chat.scrollHeight
+    }
+  }, [messages.messages.length])
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
   }
 
   const removeImage = (e) => {
-    const input = document.getElementById('chat_image')
-    input.value = ''
     setImage(null)
-  }
-
-  const handleCanRead = e => {
-    setCanRead({
-      ...canRead,
-      [e.target.name]: e.target.checked
-    })
   }
 
   const onChangeImage = e => {
@@ -101,185 +138,257 @@ export const MessagesUI = (props) => {
     }
   }
 
-  const onSubmit = async () => {
-    handleSend()
-    setImage('')
+  const getLevel = (level) => {
+    switch (level) {
+      case 0:
+        return 'Admin'
+      case 1:
+        return 'Business'
+      case 2:
+        return 'Driver'
+      case 3:
+        return 'Customer'
+    }
+  }
+
+  const clearInputs = () => {
+    const input = document.getElementById('message')
+    if (input) {
+      input.value = ''
+    }
+    removeImage()
     setMessage('')
   }
 
+  const onSubmit = (values) => {
+    handleSend()
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
   return (
     <MessagesContainer>
       <HeaderProfile>
         <Image>
           {
             business && (
-              <img src={order.business?.logo} />
+              <ImageWithFallback
+                src={order.business?.logo}
+                fallback={<FaUserAlt />}
+              />
             )
           }
           {
             driver && (
-              <img src={order.driver?.photo} name='driver' />
+              <ImageWithFallback
+                src={order.driver?.photo}
+                fallback={<RiUser2Fill />}
+              />
             )
           }
         </Image>
-        <div>
-          {business && (
-            <>
-              <p>{order.business?.name}</p>
-              <p>{t('ONLINE', 'Online')}</p>
-            </>
-          )}
-          {driver && (
-            <>
-              <p>{order.driver?.name}</p>
-              <p>{t('ONLINE', 'Online')}</p>
-            </>
-          )}
-        </div>
+        {business && (
+          <HeaderOnline>
+            <h1>{order.business?.name}</h1>
+            <span>{t('ONLINE', 'Online')}</span>
+          </HeaderOnline>
+        )}
+        {driver && (
+          <HeaderOnline>
+            <h1>{order.driver?.name}</h1>
+            <span>{t('ONLINE', 'Online')}</span>
+          </HeaderOnline>
+        )}
       </HeaderProfile>
-      {!messages.loading ? (
-        <Chat>
-          <MessageConsole>
-            <BubbleConsole>
-              {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-              <strong>{moment.utc(order.created_at).format('YYYY/MM/DD hh:mm A')}</strong> {' '}
-              {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
-              <p>{moment.utc(order.created_at).fromNow()}</p>
-            </BubbleConsole>
-          </MessageConsole>
-          {messages?.messages.map((message) => (
-            <MessageConsole key={message.id}>
-              {message.type === 1 && (
-                message.change?.attribute !== 'driver_id' ? (
-                  <BubbleConsole>
-                    {t('ORDER', 'Order')}
-                    <strong>{message.change.attribute} </strong>
-                    {t('CHANGED_FROM', 'Changed from')} {' '}
-                    {message.change.old !== null && (
-                      <>
-                        <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
-                      </>
-                    )}
-                    <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
-                    <p>
-                      {
-                        moment.utc(message.created_at).fromNow()
-                      }
-                    </p>
-                  </BubbleConsole>
-                ) : (
-                  <BubbleConsole>
-                    <strong>{message.driver.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                    {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                    {message.comment && (<><br /> {message.comment.length}</>)}
-                    <p>{moment.utc(message.created_at).fromNow()}</p>
-                  </BubbleConsole>
-                )
-              )}
-            </MessageConsole>
-          ))}
-          {messages?.messages.map((message) => (
-            <React.Fragment key={message.id}>
-              {message.type === 2 && (
-                <MessageCustomer>
-                  <BubbleCustomer>
-                    {message.comment}
-                    <p>{moment.utc(message.created_at).fromNow()}</p>
-                  </BubbleCustomer>
-                </MessageCustomer>
-              )}
-              {message.type === 3 && (
-                <MessageCustomer>
-                  {message.comment && (
-                    <BubbleCustomer>
-                      {message.comment}
-                      <p>{moment.utc(message.created_at).fromNow()}</p>
-                    </BubbleCustomer>
+      <Chat id='chat'>
+        {
+          messages.loading && (
+            <>
+              <MessageBusiness>
+                <SkeletonBubbleBusiness>
+                  <Skeleton width={200} height={100} />
+                </SkeletonBubbleBusiness>
+              </MessageBusiness>
+              <MessageCustomer>
+                <SkeletonBubbleCustomer>
+                  <Skeleton width={250} height={100} />
+                </SkeletonBubbleCustomer>
+              </MessageCustomer>
+              <MessageBusiness>
+                <SkeletonBubbleBusiness>
+                  <Skeleton width={150} height={100} />
+                </SkeletonBubbleBusiness>
+              </MessageBusiness>
+              <MessageCustomer>
+                <SkeletonBubbleCustomer>
+                  <Skeleton width={200} height={100} />
+                </SkeletonBubbleCustomer>
+              </MessageCustomer>
+            </>
+          )
+        }
+        {
+          !messages.loading && (
+            <>
+              <MessageConsole>
+                <BubbleConsole>
+                  {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                  <strong>{moment.utc(order.created_at).format('YYYY/MM/DD hh:mm A')}</strong> {' '}
+                  {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
+                  <TimeofSent>{moment.utc(order.created_at).fromNow()}</TimeofSent>
+                </BubbleConsole>
+              </MessageConsole>
+              {messages?.messages.map((message) => (
+                <MessageConsole key={message.id}>
+                  {message.type === 1 && (
+                    message.change?.attribute !== 'driver_id' ? (
+                      <BubbleConsole>
+                        {t('ORDER', 'Order')}
+                        <strong>{message.change.attribute} </strong>
+                        {t('CHANGED_FROM', 'Changed from')} {' '}
+                        {message.change.old !== null && (
+                          <>
+                            <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
+                          </>
+                        )}
+                        <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
+                        <TimeofSent>
+                          {
+                            moment.utc(message.created_at).fromNow()
+                          }
+                        </TimeofSent>
+                      </BubbleConsole>
+                    ) : (
+                      <BubbleConsole>
+                        <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                        {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                        {message.comment && (<><br /> {message.comment.length}</>)}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleConsole>
+                    )
                   )}
-                  <BubbleCustomer>
-                    <img src={message.source} width='200px' height='150px' />
-                    <p>{moment.utc(message.created_at).fromNow()}</p>
-                  </BubbleCustomer>
-                </MessageCustomer>
-              )}
-            </React.Fragment>
-          ))}
-        </Chat>
-      ) : (
-        <span>{t('LOADING_MESSAGES', 'Loading Messages...')}</span>
-      )}
+                </MessageConsole>
+              ))}
+              {messages?.messages.map((message) => (
+                <React.Fragment key={message.id}>
+                  {message.type === 2 && user.id === message.author_id && (
+                    <MessageCustomer>
+                      <BubbleCustomer>
+                        <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                        {message.comment}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleCustomer>
+                    </MessageCustomer>
+                  )}
+                  {message.type === 3 && user.id === message.author_id && (
+                    <MessageCustomer>
+                      <BubbleCustomer name='image'>
+                        <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                        <ChatImage><img src={message.source} /></ChatImage>
+                        {message.comment && (
+                          <>
+                            {message.comment}
+                          </>
+                        )}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleCustomer>
+                    </MessageCustomer>
+                  )}
+                  {message.type === 2 && user.id !== message.author_id && (
+                    <MessageBusiness>
+                      <BubbleBusines>
+                        <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                        {message.comment}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleBusines>
+                    </MessageBusiness>
+                  )}
+                  {message.type === 3 && user.id !== message.author_id && (
+                    <MessageBusiness>
+                      <BubbleBusines name='image'>
+                        <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                        <ChatImage><img src={message.source} /></ChatImage>
+                        {message.comment && (
+                          <>
+                            {message.comment}
+                          </>
+                        )}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleBusines>
+                    </MessageBusiness>
+                  )}
+                </React.Fragment>
+              ))}
+            </>
+          )
+        }
+      </Chat>
       <SendForm>
-        <div>
-          <input
-            name='business'
-            type='checkbox'
-            onChange={handleCanRead}
-            defaultChecked={canRead.business}
-          />
-          <label>{t('BUSINESS', 'Business')}</label>
-          <input
-            name='administrator'
-            type='checkbox'
-            onChange={handleCanRead}
-            defaultChecked={canRead.administrator}
-          />
-          <label>{t('ADMINISTRATOR', 'Administrator')}</label>
-          <input
-            name='driver'
-            type='checkbox'
-            onChange={handleCanRead}
-            defaultChecked={canRead.driver}
-          />
-          <label>{t('DRIVER', 'Driver')}</label>
-        </div>
         <Send onSubmit={handleSubmit(onSubmit)} noValidate>
           <Input
             placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
             onChange={onChangeMessage}
             name='message'
+            id='message'
             ref={register({
-              required: !image ? 'Write something' : false
+              required: !image
             })}
           />
-          <label for='chat_image'>
-            <input
-              type='file'
-              name='image'
-              id='chat_image'
-              accept='image/png,image/jpg,image/jpeg'
-              onChange={onChangeImage}
-            />
-            <BsCardImage />
-          </label>
-          {image && (
+          {!image && (
+            <SendImage htmlFor='chat_image'>
+              <input
+                type='file'
+                name='image'
+                id='chat_image'
+                accept='image/png,image/jpg,image/jpeg'
+                onChange={onChangeImage}
+              />
+              <BsCardImage />
+            </SendImage>
+          )}
+          <WrapperDeleteImage>
+            {image && (
+              <Button
+                circle
+                onClick={removeImage}
+              >
+                {t('X', 'X')}
+              </Button>
+            )}
+          </WrapperDeleteImage>
+          <WrapperSendMessageButton>
             <Button
-              circle
-              onClick={removeImage}
-              name='delete'
+              color='primary'
+              type='submit'
+              disabled={sendMessage.loading || (message === '' && !image)}
             >
-              {t('DELETE', 'X')}
+              <IoIosSend />
+              {sendMessage.loading ? (
+                <>
+                  {t('SENDING_MESSAGE', 'Sending...')}
+                </>
+              )
+                : (
+                  <>
+                    {t('SEND', 'send')}
+                  </>)}
             </Button>
-          )}
-          <Button
-            color={(errors.message?.message && !image) ? 'secondary' : 'primary'}
-            type='submit'
-            disabled={(errors.message?.message && !image)}
-          >
-            <FiSend />
-            {t('SEND', 'Send')}
-          </Button>
-          {sendMessage.loading && (
-            <span> {t('SENDING_MESSAGE', 'Sending Message...')}</span>
-          )}
-          {sendMessage.error && (
-            <>
-              <br />
-              <span style={{ color: 'red' }}>{sendMessage.error}</span>
-            </>
-          )}
+          </WrapperSendMessageButton>
         </Send>
       </SendForm>
-
+      <Alert
+        title={t('ERROR', 'error')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </MessagesContainer>
   )
 }

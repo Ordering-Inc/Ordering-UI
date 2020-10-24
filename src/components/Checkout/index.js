@@ -78,6 +78,7 @@ const CheckoutUI = (props) => {
           <AddressDetails
             businessId={cart?.business_id}
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+            mapZoom={15}
           />
         )}
 

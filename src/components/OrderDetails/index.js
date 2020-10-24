@@ -305,7 +305,7 @@ const OrderDetailsUI = (props) => {
           onClickButton={handleOrderRedirect}
         />
       )}
-      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })}>
+      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })} padding='0' width='70%'>
         <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
       </Modal>
       <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
