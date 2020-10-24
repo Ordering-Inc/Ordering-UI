@@ -2,6 +2,7 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { optimizeImage, formatPrice } from '../../utils'
 import { useLanguage, useConfig, useOrder } from 'ordering-components'
+import notImage from '../../../template/assets/not-image.png'
 
 import {
   CardContainer,
@@ -52,7 +53,10 @@ export const SingleProductCard = (props) => {
       </CardInfo>
       {!isSkeleton ? (
         <WrapLogo>
-          <CardLogo soldOut={isSoldOut || maxProductQuantity === 0} bgimage={optimizeImage(product?.images, 'h_200,c_limit')} />
+          <CardLogo
+            soldOut={isSoldOut || maxProductQuantity === 0}
+            bgimage={optimizeImage(product?.images || notImage, 'h_200,c_limit')}
+          />
         </WrapLogo>
       ) : (
         <Skeleton height={75} width={75} />
