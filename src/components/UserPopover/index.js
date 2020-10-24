@@ -6,7 +6,10 @@ import { DropDownCircleImage } from '../Dropdown/style'
 import { FaUserAlt, FaRegAddressCard, FaRegListAlt, FaSignOutAlt } from 'react-icons/fa'
 
 export const UserPopover = (props) => {
-  const { open, isHome } = props
+  const {
+    open,
+    isHome
+  } = props
   const [sessionState] = useSession()
   const [, t] = useLanguage()
   const [events] = useEvent()
