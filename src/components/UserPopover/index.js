@@ -30,8 +30,6 @@ export const UserPopover = (props) => {
   })
 
   const { styles, attributes, forceUpdate } = popper
-  const location = useLocation()
-  const isHome = location.pathname === '/' || location.pathname === '/home'
 
   useEffect(() => {
     forceUpdate && forceUpdate()

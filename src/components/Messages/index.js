@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { DropDownCircleImage } from '../Dropdown/style'
+// import { DropDownCircleImage } from '../Dropdown/style'
 import {
   Messages as MessagesController,
   useLanguage,
@@ -31,6 +31,7 @@ import {
   WrapperSendMessageButton,
   HeaderOnline
 } from './styles'
+import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { BsCardImage, IoIosSend, RiUser2Fill, FaUserAlt } from 'react-icons/all'
@@ -175,7 +176,7 @@ export const MessagesUI = (props) => {
         <Image>
           {
             business && (
-              <DropDownCircleImage
+              <ImageWithFallback
                 src={order.business?.logo}
                 fallback={<FaUserAlt />}
               />
@@ -183,7 +184,7 @@ export const MessagesUI = (props) => {
           }
           {
             driver && (
-              <DropDownCircleImage
+              <ImageWithFallback
                 src={order.driver?.photo}
                 fallback={<RiUser2Fill />}
               />
@@ -203,122 +204,129 @@ export const MessagesUI = (props) => {
           </HeaderOnline>
         )}
       </HeaderProfile>
-      {!messages.loading ? (
-        <Chat id='chat'>
-          <MessageConsole>
-            <BubbleConsole>
-              {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-              <strong>{moment.utc(order.created_at).format('YYYY/MM/DD hh:mm A')}</strong> {' '}
-              {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
-              <TimeofSent>{moment.utc(order.created_at).fromNow()}</TimeofSent>
-            </BubbleConsole>
-          </MessageConsole>
-          {messages?.messages.map((message) => (
-            <MessageConsole key={message.id}>
-              {message.type === 1 && (
-                message.change?.attribute !== 'driver_id' ? (
-                  <BubbleConsole>
-                    {t('ORDER', 'Order')}
-                    <strong>{message.change.attribute} </strong>
-                    {t('CHANGED_FROM', 'Changed from')} {' '}
-                    {message.change.old !== null && (
-                      <>
-                        <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
-                      </>
-                    )}
-                    <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
-                    <TimeofSent>
-                      {
-                        moment.utc(message.created_at).fromNow()
-                      }
-                    </TimeofSent>
-                  </BubbleConsole>
-                ) : (
-                  <BubbleConsole>
-                    <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                    {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                    {message.comment && (<><br /> {message.comment.length}</>)}
-                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
-                  </BubbleConsole>
-                )
-              )}
-            </MessageConsole>
-          ))}
-          {messages?.messages.map((message) => (
-            <React.Fragment key={message.id}>
-              {message.type === 2 && user.id === message.author_id && (
-                <MessageCustomer>
-                  <BubbleCustomer>
-                    <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                    {message.comment}
-                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
-                  </BubbleCustomer>
-                </MessageCustomer>
-              )}
-              {message.type === 3 && user.id === message.author_id && (
-                <MessageCustomer>
-                  <BubbleCustomer name='image'>
-                    <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                    <ChatImage><img src={message.source} /></ChatImage>
-                    {message.comment && (
-                      <>
+      <Chat id='chat'>
+        {
+          messages.loading && (
+            <>
+              <MessageBusiness>
+                <SkeletonBubbleBusiness>
+                  <Skeleton width={200} height={100} />
+                </SkeletonBubbleBusiness>
+              </MessageBusiness>
+              <MessageCustomer>
+                <SkeletonBubbleCustomer>
+                  <Skeleton width={250} height={100} />
+                </SkeletonBubbleCustomer>
+              </MessageCustomer>
+              <MessageBusiness>
+                <SkeletonBubbleBusiness>
+                  <Skeleton width={150} height={100} />
+                </SkeletonBubbleBusiness>
+              </MessageBusiness>
+              <MessageCustomer>
+                <SkeletonBubbleCustomer>
+                  <Skeleton width={200} height={100} />
+                </SkeletonBubbleCustomer>
+              </MessageCustomer>
+            </>
+          )
+        }
+        {
+          !messages.loading && (
+            <>
+              <MessageConsole>
+                <BubbleConsole>
+                  {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                  <strong>{moment.utc(order.created_at).format('YYYY/MM/DD hh:mm A')}</strong> {' '}
+                  {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
+                  <TimeofSent>{moment.utc(order.created_at).fromNow()}</TimeofSent>
+                </BubbleConsole>
+              </MessageConsole>
+              {messages?.messages.map((message) => (
+                <MessageConsole key={message.id}>
+                  {message.type === 1 && (
+                    message.change?.attribute !== 'driver_id' ? (
+                      <BubbleConsole>
+                        {t('ORDER', 'Order')}
+                        <strong>{message.change.attribute} </strong>
+                        {t('CHANGED_FROM', 'Changed from')} {' '}
+                        {message.change.old !== null && (
+                          <>
+                            <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
+                          </>
+                        )}
+                        <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
+                        <TimeofSent>
+                          {
+                            moment.utc(message.created_at).fromNow()
+                          }
+                        </TimeofSent>
+                      </BubbleConsole>
+                    ) : (
+                      <BubbleConsole>
+                        <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                        {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                        {message.comment && (<><br /> {message.comment.length}</>)}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleConsole>
+                    )
+                  )}
+                </MessageConsole>
+              ))}
+              {messages?.messages.map((message) => (
+                <React.Fragment key={message.id}>
+                  {message.type === 2 && user.id === message.author_id && (
+                    <MessageCustomer>
+                      <BubbleCustomer>
+                        {/* <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong> */}
                         {message.comment}
-                      </>
-                    )}
-                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
-                  </BubbleCustomer>
-                </MessageCustomer>
-              )}
-              {message.type === 2 && user.id !== message.author_id && (
-                <MessageBusiness>
-                  <BubbleBusines>
-                    <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                    {message.comment}
-                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
-                  </BubbleBusines>
-                </MessageBusiness>
-              )}
-              {message.type === 3 && user.id !== message.author_id && (
-                <MessageBusiness>
-                  <BubbleBusines name='image'>
-                    <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                    <ChatImage><img src={message.source} /></ChatImage>
-                    {message.comment && (
-                      <>
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleCustomer>
+                    </MessageCustomer>
+                  )}
+                  {message.type === 3 && user.id === message.author_id && (
+                    <MessageCustomer>
+                      <BubbleCustomer name='image'>
+                        {/* <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong> */}
+                        <ChatImage><img src={message.source} /></ChatImage>
+                        {message.comment && (
+                          <>
+                            {message.comment}
+                          </>
+                        )}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleCustomer>
+                    </MessageCustomer>
+                  )}
+                  {message.type === 2 && user.id !== message.author_id && (
+                    <MessageBusiness>
+                      <BubbleBusines>
+                        <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
                         {message.comment}
-                      </>
-                    )}
-                    <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
-                  </BubbleBusines>
-                </MessageBusiness>
-              )}
-            </React.Fragment>
-          ))}
-        </Chat>
-      ) : (
-        <Chat>
-          <MessageBusiness>
-            <SkeletonBubbleBusiness>
-              <Skeleton width={200} height={100} />
-            </SkeletonBubbleBusiness>
-          </MessageBusiness>
-          <MessageCustomer>
-            <SkeletonBubbleCustomer>
-              <Skeleton width={250} height={100} />
-            </SkeletonBubbleCustomer>
-          </MessageCustomer>
-          <MessageBusiness>
-            <SkeletonBubbleBusiness>
-              <Skeleton width={150} height={100} />
-            </SkeletonBubbleBusiness>
-          </MessageBusiness>
-          <MessageCustomer>
-            <SkeletonBubbleCustomer>
-              <Skeleton width={200} height={100} />
-            </SkeletonBubbleCustomer>
-          </MessageCustomer>
-        </Chat>
-      )}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleBusines>
+                    </MessageBusiness>
+                  )}
+                  {message.type === 3 && user.id !== message.author_id && (
+                    <MessageBusiness>
+                      <BubbleBusines name='image'>
+                        <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                        <ChatImage><img src={message.source} /></ChatImage>
+                        {message.comment && (
+                          <>
+                            {message.comment}
+                          </>
+                        )}
+                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                      </BubbleBusines>
+                    </MessageBusiness>
+                  )}
+                </React.Fragment>
+              ))}
+            </>
+          )
+        }
+      </Chat>
       <SendForm>
         <Send onSubmit={handleSubmit(onSubmit)} noValidate>
           <Input

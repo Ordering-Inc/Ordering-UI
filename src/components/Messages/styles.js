@@ -7,8 +7,9 @@ export const MessagesContainer = styled.div`
 
 export const HeaderProfile = styled.div`
   display: flex;
-  height: 100px;
-  padding: 20px 20px 0 20px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #EEEEEE;
+
   div {
      p {
        margin-left: 10px;
@@ -34,7 +35,7 @@ export const HeaderName = styled.p`
 export const Status = styled.p`
   margin-block-start: 0.1em;
   margin-block-end: 0.1em;
-  font-size: 0.7em
+  font-size: 0.7em;
 `
 
 export const Image = styled.div`
@@ -43,12 +44,17 @@ export const Image = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid ${props => props.theme?.colors?.primary};
+  border-radius: 1000px;
+  padding: 5px;
+  box-sizing: border-box;
 
-   img {
+  img {
     width: 100%;
     height: auto;
-    border-radius: 16px;
+    border-radius: 1000px;
     object-fit: cover;
+    border: 1px solid #F5F5F5;
   }
 
   img[name]{
@@ -83,9 +89,12 @@ export const HeaderOnline = styled.div`
 
   h1 {
     font-size: 20px;
+    font-weight: 500;
   }
+
   span {
     font-size: 13px;
+    font-weight: 300;
   }
 `
 
@@ -94,8 +103,7 @@ export const Chat = styled.div`
   overflow: auto;
   height: 55vh;
   flex-direction: column;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
 `
 
 export const MessageConsole = styled.div`
@@ -206,8 +214,9 @@ export const TimeofSent = styled.p`
 export const SendForm = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 30px;
-  background: #FAFAFA
+  padding: 10px 20px;
+  background: #FAFAFA;
+  border-top: 1px solid #EEEEEE;
 `
 
 export const Send = styled.form`
@@ -231,6 +240,7 @@ export const SendImage = styled.label`
     display: none;
   }
   svg {
+    color: #CFD0D0;
     width: 100%;
     height: 100%;
     cursor: pointer
