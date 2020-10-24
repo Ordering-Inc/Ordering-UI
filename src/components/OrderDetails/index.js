@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController } from 'ordering-components'
-import { FiPhone } from 'react-icons/fi'
-import { HiOutlineChat } from 'react-icons/hi'
-import { BiCaretUp } from 'react-icons/bi'
+import { useLanguage, OrderDetails as OrderDetailsController, useEvent } from 'ordering-components'
+import { FiPhone, FaUserCircle, HiOutlineChat, BiCaretUp, RiUser2Fill } from 'react-icons/all'
 
 import { Button } from '../../styles/Buttons'
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -47,6 +43,7 @@ import {
   SkeletonBlockWrapp,
   SkeletonBlock
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -56,6 +53,8 @@ const OrderDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
+  const theme = useTheme()
+  const [events] = useEvent()
 
   const { order, loading, error } = props.order
 
@@ -81,12 +80,16 @@ const OrderDetailsUI = (props) => {
     return objectStatus && objectStatus
   }
 
-  const getImage = (slug) => {
+  const getImage = (status) => {
     try {
-      return slug && require(`../../../template/assets/order/${slug}.svg`)
+      return theme.images?.order?.[`status${status}`]
     } catch (error) {
       return 'https://picsum.photos/75'
     }
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
   }
 
   return (
@@ -95,7 +98,7 @@ const OrderDetailsUI = (props) => {
         <WrapperContainer>
           <Header>
             <HeaderInfo>
-              <HeaderLogo bgimage={logoHeader} />
+              <HeaderLogo bgimage={theme?.images?.logos?.logotype} />
               <HeaderText column>
                 <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
                 <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
@@ -141,7 +144,7 @@ const OrderDetailsUI = (props) => {
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  <img src={getImage(getOrderStatus(order?.status)?.slug)} alt='' />
+                  <img src={getImage(order?.status || 0)} alt='' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>
@@ -150,11 +153,13 @@ const OrderDetailsUI = (props) => {
               {t('CUSTOMER', 'Customer')}
             </SectionTitle>
             <OrderCustomer>
-              {order?.customer?.photo && (
-                <div>
+              <div className='photo'>
+                {order?.customer?.photo ? (
                   <PhotoBlock src={order?.customer?.photo} />
-                </div>
-              )}
+                ) : (
+                  <FaUserCircle />
+                )}
+              </div>
               <InfoBlock>
                 <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                 <span>{order?.customer?.address}</span>
@@ -168,11 +173,13 @@ const OrderDetailsUI = (props) => {
                 </SectionTitle>
                 <OrderDriver>
                   <WrapperDriver>
-                    {!order?.customer?.photo && (
-                      <div>
+                    <div className='photo'>
+                      {order?.driver?.photo ? (
                         <PhotoBlock src={order?.driver?.photo} />
-                      </div>
-                    )}
+                      ) : (
+                        <RiUser2Fill />
+                      )}
+                    </div>
                     <InfoBlock>
                       <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
                       <span>{t('DRIVER', 'Driver')}</span>
@@ -258,10 +265,10 @@ const OrderDetailsUI = (props) => {
                 <BiCaretUp />
               </a>
               */}
-              <Link to='/profile/orders'>
+              <a onClick={() => handleGoToPage({ page: 'orders' })}>
                 {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
-              </Link>
+              </a>
             </FootActions>
           </Content>
         </WrapperContainer>
@@ -285,9 +292,11 @@ const OrderDetailsUI = (props) => {
       )}
 
       {error && error.length > 0 &&
-        error.map((e, i) => (
-          <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-        ))}
+        error.map((e, i) => {
+          if (e) {
+            return <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
+          }
+        })}
 
       {!loading && !order && (
         <NotFoundSource
@@ -296,7 +305,7 @@ const OrderDetailsUI = (props) => {
           onClickButton={handleOrderRedirect}
         />
       )}
-      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })}>
+      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })} padding='0' width='70%'>
         <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
       </Modal>
       <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
@@ -307,11 +316,9 @@ const OrderDetailsUI = (props) => {
 }
 
 export const OrderDetails = (props) => {
-  const { orderId } = useParams()
   const orderDetailsProps = {
     ...props,
-    UIComponent: OrderDetailsUI,
-    orderId
+    UIComponent: OrderDetailsUI
   }
 
   return (

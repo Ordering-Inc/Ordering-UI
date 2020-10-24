@@ -2,6 +2,7 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { optimizeImage, formatPrice } from '../../utils'
 import { useLanguage, useConfig, useOrder } from 'ordering-components'
+import notImage from '../../../template/assets/not-image.png'
 
 import {
   CardContainer,
@@ -42,17 +43,20 @@ export const SingleProductCard = (props) => {
   return (
     <CardContainer soldOut={isSoldOut || maxProductQuantity === 0} onClick={() => onProductClick(product)}>
       <CardInfo soldOut={isSoldOut || maxProductQuantity === 0}>
-        {product?.name ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-        {(product?.description || isSkeleton) && <p>{product?.description || <Skeleton width={100} />}</p>}
-        {product?.price ? (
+        {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
+        {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+        {!isSkeleton ? (
           <span>{formatPrice(product?.price)}</span>
         ) : (
           <Skeleton width={100} />
         )}
       </CardInfo>
-      {product?.images ? (
+      {!isSkeleton ? (
         <WrapLogo>
-          <CardLogo soldOut={isSoldOut || maxProductQuantity === 0} bgimage={optimizeImage(product?.images, 'h_200,c_limit')} />
+          <CardLogo
+            soldOut={isSoldOut || maxProductQuantity === 0}
+            bgimage={optimizeImage(product?.images || notImage, 'h_200,c_limit')}
+          />
         </WrapLogo>
       ) : (
         <Skeleton height={75} width={75} />

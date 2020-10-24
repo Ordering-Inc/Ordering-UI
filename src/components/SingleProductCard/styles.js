@@ -98,6 +98,7 @@ const CardLogoStyled = styled.div`
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: cover;
+  background-position: center;
   object-fit: cover;
   min-height: 75px;
   border-radius: 10px;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import moment from 'moment'
-import { Cart as CartController, useOrder, useLanguage } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -30,10 +29,8 @@ const CartUI = (props) => {
     getProductMax,
     offsetDisabled,
     removeProduct,
-    onClickCheckout,
-    isHideCheckoutButtom
+    onClickCheckout
   } = props
-  const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const momentFormatted = !orderState?.option?.moment ? t('ASAP', 'ASAP') : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
@@ -42,6 +39,8 @@ const CartUI = (props) => {
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [events] = useEvent()
+  const [isCheckout, setIsCheckout] = useState(false)
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -60,7 +59,7 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    history.push(`/checkout/${cart.uuid}`)
+    events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
     onClickCheckout()
   }
 
@@ -77,12 +76,19 @@ const CartUI = (props) => {
     setOpenUpselling(false)
   }
   const handleStoreRedirect = (slug) => {
-    history.push(`/store/${slug}`)
+    events.emit('go_to_page', { page: 'business', params: { store: slug } })
+  }
+
+  const handleChangeView = ({ page, params }) => {
+    setIsCheckout(page === 'checkout' && params?.cartUuid === cart?.uuid)
   }
 
   useEffect(() => {
+    events.on('change_view', handleChangeView)
+    events.emit('get_current_view')
     return () => {
       setConfirm({ ...confirm, open: false })
+      events.off('change_view', handleChangeView)
     }
   }, [])
 
@@ -106,6 +112,8 @@ const CartUI = (props) => {
   return (
     <CartContainer>
       <BusinessItemAccordion
+        uuid={cart?.uuid}
+        isCheckout={isCheckout}
         orderTotal={cart?.total}
         business={cart?.business}
         isClosed={!cart?.valid_schedule}
@@ -175,7 +183,7 @@ const CartUI = (props) => {
             </table>
           </OrderBill>
         )}
-        {onClickCheckout && isHideCheckoutButtom && (
+        {onClickCheckout && !isCheckout && (
           <CheckoutAction>
             <Button
               color='primary'
@@ -199,7 +207,6 @@ const CartUI = (props) => {
       <Modal
         width='70%'
         open={openProduct}
-        closeOnBackdrop={false}
         onClose={() => setModalIsOpen(false)}
       >
         <ProductForm

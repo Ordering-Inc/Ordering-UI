@@ -77,12 +77,33 @@ export const Slogan = styled.p`
 `
 
 export const WrapInput = styled.label`
+  position: relative;
+  
   input {
+    color: #FFF;
+    border-color: #FFF;
     cursor: pointer;
-    background: rgba(0,0,0,0.1)
+    background: rgba(0,0,0,0.1);
+
+    ::placeholder {
+      color: #FFF;
+      opacity: 1;
+    }
+
+    :-ms-input-placeholder {
+      color: #FFF;
+    }
   }
+
+  svg {
+    color: #FFF;
+    position: absolute;
+    right: 0px;
+    font-size: 22px;
+    top: 8px;
+  }
+
   ${({ withIcon }) => withIcon && css`
-    position: relative;
     width: calc(50% + 70px);
     &::before {
       content: "";
@@ -91,7 +112,7 @@ export const WrapInput = styled.label`
       top: 0;
       bottom: 18px;
       width: 15px;
-      background: url(${withIcon}) center / contain no-repeat;
+      /* background: url(${withIcon}) center / contain no-repeat; */
     }
     @media (max-width: 480px) {
       &::before {

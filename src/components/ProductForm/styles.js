@@ -91,6 +91,7 @@ export const ProductInfo = styled.div`
     padding: 0px;
     position: relative;
     top: -38px;
+    margin-top: 10px;
     h1 {
       text-align: center;
     }

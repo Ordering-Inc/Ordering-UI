@@ -45,6 +45,10 @@ export const Image = styled.div`
   border-radius: 100%;
   overflow: hidden;
   padding: 20px;
+  background: ${({ isImage }) => isImage ? '#FFF' : 'rgba(204, 204, 204, 0.2)'};
+  cursor: -webkit-grab;
+  cursor: grab;
+
   > img {
     width: 100%;
     border-radius: 50%;
@@ -59,9 +63,7 @@ export const Image = styled.div`
     border: none;
     overflow: hidden;
   };
-  span {
-    height: 100%;
-  }
+
   @media (min-width: 480px) {
     > img {
     width: 100%;
@@ -230,5 +232,21 @@ export const SkeletonForm = styled.div`
     > *{
       width: 80%
     }
+  }
+`
+
+export const UploadImageIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  span {
+    margin: 0;
+  }
+
+  svg {
+    width: 45px;
+    height: 45px;
   }
 `

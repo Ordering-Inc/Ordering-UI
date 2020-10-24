@@ -1,30 +1,29 @@
-import React, { useState } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useSession, useLanguage, useOrder, useEvent } from 'ordering-components'
+import { useTheme } from 'styled-components'
+
 import {
-  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink,
-  SubMenu
+  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink, SubMenu
 } from './styles'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import { useOnlineStatus } from '../../hooks/useOnlineStatus'
 
-import { useSession, useLanguage, useOrder } from 'ordering-components'
-import { useWindowSize } from '../../../src/hooks/useWindowSize'
-import { useOnlineStatus } from '../../../src/hooks/useOnlineStatus'
-
-import logoHeader from '../../assets/images/logo-header.svg'
-import logoHeaderInvert from '../../assets/images/logo-header-invert.svg'
-import logo from '../../assets/images/logo.svg'
-import { LanguageSelector } from '../../../src/components/LanguageSelector'
-import { AddressesPopover } from '../../../src/components/AddressesPopover'
-import { UserPopover } from '../../../src/components/UserPopover'
-import { MomentPopover } from '../../../src/components/MomentPopover'
-import { CartPopover } from '../../../src/components/CartPopover'
-import { OrderTypeSelectorHeader } from '../../../src/components/OrderTypeSelectorHeader'
+import { LanguageSelector } from '../LanguageSelector'
+import { AddressesPopover } from '../AddressesPopover'
+import { UserPopover } from '../UserPopover'
+import { MomentPopover } from '../MomentPopover'
+import { CartPopover } from '../CartPopover'
+import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 
 export const Header = (props) => {
-  const location = useLocation()
+  const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
   const [orderState] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
+  const theme = useTheme()
+
+  const { isHome } = props
 
   const handleTogglePopover = (type) => {
     setOpenPopover({
@@ -43,18 +42,28 @@ export const Header = (props) => {
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
-  const isHome = location.pathname === '/' || location.pathname === '/home'
   const HeaderType = isHome ? HeaderInvert : HeaderContainer
+
+  const handleAddProduct = () => {
+    handleTogglePopover('cart')
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
+  }
+
+  useEffect(() => {
+    events.on('cart_product_added', handleAddProduct)
+    return () => events.off('cart_product_added', handleAddProduct)
+  }, [])
 
   return (
     <HeaderType>
       <InnerHeader>
         <LeftHeader>
-          <LogoHeader>
-            <Link to={orderState.options?.address?.location ? '/search' : '/'}>
-              <img src={isHome ? logoHeaderInvert : logoHeader} />
-              <img src={logo} />
-            </Link>
+          <LogoHeader onClick={() => handleGoToPage({ page: orderState.options?.address?.location ? 'search' : 'home' })}>
+            <img src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
+            <img src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
           {onlineStatus && (
             <Menu>
@@ -78,8 +87,8 @@ export const Header = (props) => {
               {
                 !auth && (
                   <>
-                    <MenuLink to='/signin'>{t('SIGNIN', 'Sign in')}</MenuLink>
-                    <MenuLink to='/signup' highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
+                    <MenuLink onClick={() => handleGoToPage({ page: 'signin' })}>{t('SIGNIN', 'Sign in')}</MenuLink>
+                    <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
                   </>
                 )
               }
@@ -88,6 +97,7 @@ export const Header = (props) => {
                   <>
                     <UserPopover
                       open={openPopover.user}
+                      isHome={isHome}
                       onClick={() => handleTogglePopover('user')}
                       onClose={() => handleClosePopover('user')}
                     />

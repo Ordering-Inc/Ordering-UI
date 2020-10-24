@@ -19,6 +19,7 @@ export const BusinessHeader = styled.div`
   justify-content: left;
   align-items: flex-end;
   position: relative;
+  background-color: #FFF;
 
   img{
     object-fit: cover;
@@ -149,8 +150,8 @@ export const Information = styled.div`
 `
 
 export const BusinessContent = styled.div`
-  height: 80%;
   padding: 0 20px;
+  background: #FFF;
 `
 
 export const FlexTabs = styled.div`
@@ -219,7 +220,7 @@ export const ScheduleBlock = styled.div`
 export const DeliveryInfo = styled.div`
   display: flex;
   justify-content: flex-start;
-  margin: 10px 0px;
+  margin-top: 10px;
   border-top: 1px solid #CCC;
   border-bottom: 1px solid #CCC;
 
@@ -268,6 +269,7 @@ export const BusinessMediaContent = styled.div`
 `
 
 export const ModalIcon = styled.span`
+  display: flex;
   position: absolute;
   width: 30px;
   height: 30px;

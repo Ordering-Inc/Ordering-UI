@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { darken } from 'polished'
 
 export const FormActions = styled.div`
   padding: 10px 0px;
@@ -27,6 +26,7 @@ export const FormControl = styled.form`
     box-sizing: border-box;
     margin: 10px 0px;
     height: 43px;
+    width: 100%;
     &.internal_number,
     &.zipcode {
       width: 48%;
@@ -37,6 +37,22 @@ export const FormControl = styled.form`
       &.zipcode  {
         width: 100%;
       }
+    }
+  }
+
+  textarea {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 10px;
+    border: 1px solid #CCC;
+    outline: none;
+    color: #555;
+    resize: none;
+    border-radius: 16px;
+
+    &:focus {
+      border-color: #555;
     }
   }
 
@@ -53,22 +69,26 @@ export const FormControl = styled.form`
 
   .google-control {
     button:nth-child(2) {
-      background: #CCC;
-      color: #FFF;
-      border-color: #CCC;
+      position: absolute;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #FFF;
       padding: 0;
-      width: 40px;
-      height: 40px;
+      width: 43px;
+      height: 43px;
       line-height: 34px;
       text-align: center;
       border-radius: 50%;
-      border: none;
-      position: absolute;
-      right: 0;
+      border-style: solid;
+      border-width: 1px;
+      border-color: ${props => props.theme.colors.primary};
+      outline: none;
 
-      &:active {
-        color: #FFF;
-        background: ${darken(0.07, '#CCC')};
+      svg {
+        color: ${props => props.theme.colors.primary};
+        font-size: 20px;
       }
     }
   }
@@ -89,6 +109,21 @@ export const WrapAddressInput = styled.div`
   i {
     padding: 0px 10px;
   }
+
+  svg {
+    position: absolute;
+    color: #9A9A9A;
+    top: 21px;
+    left: 10px;
+    font-size: 20px;
+  }
+
+  input {
+    background-position: left 10px center !important;
+    background-repeat: no-repeat !important;
+    background-size: 13px !important;
+    padding: 7px 15px 7px 30px !important;
+  }
 `
 
 export const AddressTagSection = styled.div`
@@ -104,11 +139,16 @@ export const AddressTagSection = styled.div`
     width: 46px;
     height: 46px;
 
+    img {
+      width: 22px;
+      height: 22px;
+    }
+
     span {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 35px;
+      font-size: 22px;
     }
   }
 

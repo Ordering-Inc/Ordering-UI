@@ -3,21 +3,21 @@ import {
   FacebookLoginButton as FacebookLoginController,
   useLanguage
 } from 'ordering-components'
-import iconFacebook from '../../../template/assets/IconFacebook.svg'
-import { Button } from '../../styles/Buttons'
+import { FaFacebook } from 'react-icons/fa'
+import { FacebookButton } from './styles'
 
 const FacebookLoginButtonUI = (props) => {
   const [, t] = useLanguage()
   const { handleFacebookLogin } = props
   return (
-    <Button
+    <FacebookButton
       initialIcon
       color='secondary'
       onClick={() => handleFacebookLogin()}
     >
-      <img src={iconFacebook} width={30} />
-      <span>{t('LOGIN_WITH_FACEBOOK', 'Login with Facebook')}</span>
-    </Button>
+      <FaFacebook />
+      {t('LOGIN_WITH_FACEBOOK', 'Login with Facebook')}
+    </FacebookButton>
   )
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import notFound from '../../../template/assets/not-found.svg'
+import { useTheme } from 'styled-components'
 import { Button } from '../../styles/Buttons'
 
 import {
@@ -14,10 +14,12 @@ export const NotFoundSource = (props) => {
     onClickButton
   } = props
 
+  const theme = useTheme()
+
   return (
     <NotFound>
       <NotFoundImage>
-        <img src={notFound} alt='notFound' />
+        <img src={theme.images?.general?.notFound} alt='Not Found' />
       </NotFoundImage>
       <h1>{content}</h1>
       {!onClickButton && props.children && (

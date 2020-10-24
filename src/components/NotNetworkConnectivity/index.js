@@ -1,6 +1,6 @@
 import React from 'react'
-
-import notNetwork from '../../../template/assets/images/offline-img.svg'
+import { useTheme } from 'styled-components'
+import { useOnlineStatus } from '../../hooks/useOnlineStatus'
 
 import {
   Container,
@@ -8,10 +8,13 @@ import {
 } from './styles'
 
 export const NotNetworkConnectivity = () => {
+  const onlineStatus = useOnlineStatus()
+  const theme = useTheme()
+
   return (
-    <Container>
+    <Container style={{ display: onlineStatus ? 'none' : 'flex' }}>
       <Image>
-        <img src={notNetwork} alt='no-internet-img' />
+        <img src={theme.images?.general?.notNetwork} alt='Not network' />
       </Image>
     </Container>
   )

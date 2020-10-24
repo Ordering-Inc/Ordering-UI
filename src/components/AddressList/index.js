@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-
-import { TiPencil } from 'react-icons/ti'
-import { VscTrash } from 'react-icons/vsc'
-
-import { IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/io'
+import { TiPencil, VscTrash, IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/all'
 
 import {
-  AddressList as AddressListController, useLanguage
+  AddressList as AddressListController,
+  useLanguage,
+  useOrder
 } from 'ordering-components'
 
 import {
   AddressListContainer,
   AddressListUl,
   AddressItem,
-  AddressItemActions
+  AddressItemActions,
+  WrappNotAddresses
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -22,6 +21,7 @@ import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { Confirm } from '../Confirm'
+import { useTheme } from 'styled-components'
 
 const AddressListUI = (props) => {
   const {
@@ -35,10 +35,12 @@ const AddressListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [orderState] = useOrder()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddessOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const theme = useTheme()
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -95,7 +97,15 @@ const AddressListUI = (props) => {
   return (
     <AddressListContainer>
       {
-        (!popover || !addressOpen) && <Button className='add' color='primary' onClick={() => openAddress({})}>{t('ADD_ADDRESS', 'Add Address')}</Button>
+        (!popover || !addressOpen) && (
+          <Button
+            className='add'
+            color='primary'
+            onClick={() => openAddress({})}
+          >
+            {orderState?.loading ? t('LOADING', 'Loading...') : t('ADD_ADDRESS', 'Add Address')}
+          </Button>
+        )
       }
       {
         popover && addressOpen && (
@@ -115,7 +125,7 @@ const AddressListUI = (props) => {
                 <AddressItem key={address.id}>
                   <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                     <span className='radio'>
-                      {address.default ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}
+                      {address.address === orderState?.options?.address?.address ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>
@@ -134,14 +144,17 @@ const AddressListUI = (props) => {
               ))}
             </AddressListUl>
           ) : (
-            <p>{t('NOT_FOUND_ADDRESS.', 'Not found addresses.')}</p>
+            <WrappNotAddresses>
+              <img src={theme.images?.general?.notFound} alt='Not Found' />
+              <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
+            </WrappNotAddresses>
           )}
         </>
       ) : (
         <>
           {addressList.error && addressList.error.length > 0 ? (
             addressList.error.map((e, i) => (
-              <p key={i}>{t('ERROR')}: [{e}]</p>
+              <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
             ))
           ) : (
             <AddressListUl>
@@ -156,7 +169,6 @@ const AddressListUI = (props) => {
           <Modal
             title={t('ADDRESS', 'Address')}
             open={!popover && addressOpen}
-            closeOnBackdrop={false}
             onClose={() => setAddessOpen(false)}
             OrderTypeSelectorHeader={OrderTypeSelectorHeader}
           >
