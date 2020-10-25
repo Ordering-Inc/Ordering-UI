@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { DropDownCircleImage } from '../Dropdown/style'
 import {
   Messages as MessagesController,
+  useConfig,
   useLanguage,
   useSession
 } from 'ordering-components'
@@ -35,7 +36,7 @@ import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { BsCardImage, IoIosSend, RiUser2Fill, FaUserAlt } from 'react-icons/all'
-import moment from 'moment'
+import moment from 'moment' // REPLACE WITH TIMEAGO
 import { Alert } from '../Confirm'
 
 export const MessagesUI = (props) => {
@@ -56,6 +57,7 @@ export const MessagesUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
+  const [, { parseDate }] = useConfig()
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -237,7 +239,7 @@ export const MessagesUI = (props) => {
               <MessageConsole>
                 <BubbleConsole>
                   {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-                  <strong>{moment.utc(order.created_at).format('YYYY/MM/DD hh:mm A')}</strong> {' '}
+                  <strong>{parseDate(order.created_at)}</strong> {' '}
                   {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
                   <TimeofSent>{moment.utc(order.created_at).fromNow()}</TimeofSent>
                 </BubbleConsole>

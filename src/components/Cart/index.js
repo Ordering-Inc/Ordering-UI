@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import moment from 'moment'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useConfig } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -32,7 +31,6 @@ const CartUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const momentFormatted = !orderState?.option?.moment ? t('ASAP', 'ASAP') : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
@@ -40,7 +38,9 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [events] = useEvent()
   const [isCheckout, setIsCheckout] = useState(false)
-  const [, { parsePrice, parseNumber }] = useConfig()
+  const [, { parsePrice, parseNumber, parseDate }] = useConfig()
+
+  const momentFormatted = !orderState?.option?.moment ? t('ASAP_ABBREVIATION', 'ASAP') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
   const handleDeleteClick = (product) => {
     setConfirm({
