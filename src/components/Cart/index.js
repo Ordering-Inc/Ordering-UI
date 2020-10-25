@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
-import { Cart as CartController, useOrder, useLanguage, useEvent } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useConfig } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-import { formatPrice } from '../../utils'
 
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
@@ -41,6 +40,7 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [events] = useEvent()
   const [isCheckout, setIsCheckout] = useState(false)
+  const [, { parsePrice, parseNumber }] = useConfig()
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -142,28 +142,28 @@ const CartUI = (props) => {
               <tbody>
                 <tr>
                   <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                  <td>{formatPrice(cart?.subtotal || 0)}</td>
+                  <td>{parsePrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('TAX', 'Tax')} ({cart?.business?.tax}%)</td>
-                  <td>{formatPrice(cart?.tax || 0)}</td>
+                  <td>{t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
+                  <td>{parsePrice(cart?.tax || 0)}</td>
                 </tr>
                 <tr>
                   <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                  <td>{formatPrice(cart?.delivery_price || 0)}</td>
+                  <td>{parsePrice(cart?.delivery_price || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('DRIVER_TIP', 'Driver tip')} ({cart?.driver_tip_rate}%)</td>
-                  <td>{formatPrice(cart?.driver_tip || 0)}</td>
+                  <td>{t('DRIVER_TIP', 'Driver tip')} ({parseNumber(cart?.driver_tip_rate)}%)</td>
+                  <td>{parsePrice(cart?.driver_tip || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('SERVICE_FEE', 'Service Fee')} ({cart?.business?.service_fee}%)</td>
-                  <td>{formatPrice(cart?.service_fee || 0)}</td>
+                  <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(cart?.business?.service_fee)}%)</td>
+                  <td>{parsePrice(cart?.service_fee || 0)}</td>
                 </tr>
                 {cart?.discount > 0 && (
                   <tr>
                     <td>{t('DISCOUNT', 'Discount')}</td>
-                    <td>{formatPrice(cart?.discount || 0)}</td>
+                    <td>{parsePrice(cart?.discount || 0)}</td>
                   </tr>
                 )}
               </tbody>
@@ -177,7 +177,7 @@ const CartUI = (props) => {
               <tbody>
                 <tr>
                   <td>{t('TOTAL', 'Total')}</td>
-                  <td>{formatPrice(cart?.total)}</td>
+                  <td>{parsePrice(cart?.total)}</td>
                 </tr>
               </tbody>
             </table>

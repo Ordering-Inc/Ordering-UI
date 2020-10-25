@@ -7,10 +7,11 @@ import {
   useSession,
   useLanguage,
   useOrder,
-  useEvent
+  useEvent,
+  useConfig
 } from 'ordering-components'
 
-import { formatPrice, scrollTo } from '../../utils'
+import { scrollTo } from '../../utils'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../ProductIngredient'
@@ -60,6 +61,7 @@ const ProductOptionsUI = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
   const [events] = useEvent()
+  const [, { parsePrice }] = useConfig()
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -209,7 +211,7 @@ const ProductOptionsUI = (props) => {
                       {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
                     </span>
                   )}
-                  <span>{productCart.total && formatPrice(productCart.total)}</span>
+                  <span>{productCart.total && parsePrice(productCart.total)}</span>
                 </Button>
               ) : (
                 <Button

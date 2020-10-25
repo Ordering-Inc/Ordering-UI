@@ -1,6 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { optimizeImage, formatPrice } from '../../utils'
+import { optimizeImage } from '../../utils'
 import { useLanguage, useConfig, useOrder } from 'ordering-components'
 import notImage from '../../../template/assets/not-image.png'
 
@@ -22,7 +22,7 @@ export const SingleProductCard = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [stateConfig] = useConfig()
+  const [stateConfig, { parsePrice }] = useConfig()
   const [orderState] = useOrder()
 
   const editMode = typeof product?.code !== 'undefined'
@@ -46,7 +46,7 @@ export const SingleProductCard = (props) => {
         {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
         {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
         {!isSkeleton ? (
-          <span>{formatPrice(product?.price)}</span>
+          <span>{parsePrice(product?.price)}</span>
         ) : (
           <Skeleton width={100} />
         )}
