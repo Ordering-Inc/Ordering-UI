@@ -115,9 +115,10 @@ const OrderDetailsUI = (props) => {
                 </BusinessInfo>
               </BusinessWrapper>
               <ActionsBlock>
-                <span>
-                  <FiPhone />
-                </span>
+                {order.driver && order.driver.phone &&
+                  <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                    <FiPhone />
+                  </span>}
                 <span>
                   <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
                 </span>
@@ -176,9 +177,10 @@ const OrderDetailsUI = (props) => {
                     </InfoBlock>
                   </WrapperDriver>
                   <ActionsBlock>
-                    <span>
-                      <FiPhone />
-                    </span>
+                    {order.driver && order.driver.phone &&
+                      <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                        <FiPhone />
+                      </span>}
                     <span>
                       <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
                     </span>
