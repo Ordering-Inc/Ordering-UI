@@ -57,7 +57,6 @@ var CartUI = function CartUI(props) {
   var cart = props.cart,
       clearCart = props.clearCart,
       isProducts = props.isProducts,
-      isCartCheckout = props.isCartCheckout,
       changeQuantity = props.changeQuantity,
       getProductMax = props.getProductMax,
       offsetDisabled = props.offsetDisabled,
@@ -215,7 +214,6 @@ var CartUI = function CartUI(props) {
     isClosed: !(cart === null || cart === void 0 ? void 0 : cart.valid_schedule),
     moment: momentFormatted,
     isProducts: isProducts,
-    isCartCheckout: isCartCheckout,
     isValidProducts: cart === null || cart === void 0 ? void 0 : cart.valid_products,
     handleClearProducts: handleClearProducts,
     handleStoreRedirect: handleStoreRedirect

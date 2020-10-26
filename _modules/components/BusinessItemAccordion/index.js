@@ -58,6 +58,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       _useConfig2 = _slicedToArray(_useConfig, 2),
       parsePrice = _useConfig2[1].parsePrice;
 
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       setActive = _useState2[0],
@@ -97,17 +101,27 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (isCheckout && cartsLength > 1) {
-      toggleAccordion();
-    }
-  }, [location]);
-  (0, _react.useEffect)(function () {
     if (cartsLength === 1 || isCheckout) {
       activeAccordion(true);
     } else {
       activeAccordion(false);
     }
-  }, [orderState === null || orderState === void 0 ? void 0 : orderState.carts]);
+  }, [isCheckout]);
+
+  var handleAddedProduct = function handleAddedProduct(product, cart) {
+    var _cart$business;
+
+    if ((cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (business === null || business === void 0 ? void 0 : business.slug)) {
+      activeAccordion(true);
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    events.on('cart_product_added', handleAddedProduct);
+    return function () {
+      return events.off('cart_product_added', handleAddedProduct);
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, {
     isClosed: isClosed
   }, /*#__PURE__*/_react.default.createElement(_styles.Accordion, {
