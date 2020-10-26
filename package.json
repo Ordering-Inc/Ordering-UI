@@ -1,13 +1,13 @@
 {
   "name": "ordering-ui",
   "version": "0.0.1",
-  "description": "Ordering Internal Dashboard",
-  "main": "index.js",
+  "description": "Ordering UI Components",
+  "main": "./_modules/index.js",
   "scripts": {
-    "clean": "shx rm -rf _bundles lib lib-esm",
-    "build": "npm run clean && webpack --mode=production",
+    "clean": "shx rm -rf _bundles _modules",
+    "build": "npm run clean && babel ./src --out-dir ./_modules && webpack --config webpack.prod.js",
     "build-dev": "npx webpack --mode=development",
-    "serve": "npx webpack-dev-server",
+    "serve": "npx webpack-dev-server --config webpack.dev.js",
     "lint": "standard",
     "test": "cypress open"
   },
@@ -39,7 +39,8 @@
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.2.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.4",
