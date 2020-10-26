@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { VscWarning } from 'react-icons/vsc'
 import Skeleton from 'react-loading-skeleton'
-import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage } from 'ordering-components'
+import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useConfig } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 
 import {
@@ -32,7 +32,7 @@ import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 
-import { DriverTipsOptions, formatPrice } from '../../utils'
+import { DriverTipsOptions } from '../../utils'
 
 const CheckoutUI = (props) => {
   const {
@@ -206,6 +206,7 @@ export const Checkout = (props) => {
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
+  const [, { parsePrice }] = useConfig()
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
 
@@ -301,7 +302,7 @@ export const Checkout = (props) => {
                 </LogoWrapper>
                 <CartItemInfo>
                   <h1>{cart?.business?.name}</h1>
-                  <p>{formatPrice(cart?.total)}</p>
+                  <p>{parsePrice(cart?.total)}</p>
                 </CartItemInfo>
               </CartItemWrapper>
               <CartItemActions>

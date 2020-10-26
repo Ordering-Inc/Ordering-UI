@@ -1,8 +1,6 @@
 import React from 'react'
-import { ProductOptionSuboption as ProductSubOptionController } from 'ordering-components'
+import { ProductOptionSuboption as ProductSubOptionController, useConfig } from 'ordering-components'
 import { BsCircleFill, BsCircleHalf, BsDashCircle, BsPlusCircle } from 'react-icons/bs'
-
-import { formatPrice } from '../../utils'
 
 import {
   Container,
@@ -25,6 +23,8 @@ const ProductOptionSubOptionUI = (props) => {
     toggleSelect,
     changePosition
   } = props
+
+  const [, { parsePrice }] = useConfig()
 
   const handleIncrement = (e) => {
     e.stopPropagation()
@@ -93,7 +93,7 @@ const ProductOptionSubOptionUI = (props) => {
         )
       }
       <SuboptionPrice>
-        + {formatPrice(price)}
+        + {parsePrice(price)}
       </SuboptionPrice>
     </Container>
   )

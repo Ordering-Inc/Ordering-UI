@@ -1,6 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
-import orderBackground from '../../../template/assets/order-background.png'
+import styled, { css, useTheme } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -32,8 +31,9 @@ const HeaderStyled = styled.div`
 `
 
 export const Header = (props) => {
+  const theme = useTheme()
   const style = {}
-  style.backgroundImage = `url(${orderBackground})`
+  style.backgroundImage = `url(${theme.images?.general?.orderDetailsHeader})`
 
   return (
     <HeaderStyled style={style}>

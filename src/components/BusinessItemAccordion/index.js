@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { IoIosArrowDown, FiClock, BiStoreAlt, VscTrash } from 'react-icons/all'
-import { useOrder, useLanguage } from 'ordering-components'
+import { useOrder, useLanguage, useConfig, useEvent } from 'ordering-components'
 
-import { formatPrice, convertHoursToMinutes } from '../../utils'
+import { convertHoursToMinutes } from '../../utils'
 
 import {
   AccordionSection,
@@ -31,6 +31,8 @@ export const BusinessItemAccordion = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const [, { parsePrice }] = useConfig()
+  const [events] = useEvent()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -61,18 +63,23 @@ export const BusinessItemAccordion = (props) => {
   }
 
   useEffect(() => {
-    if (isCheckout && cartsLength > 1) {
-      toggleAccordion()
-    }
-  }, [location])
-
-  useEffect(() => {
     if (cartsLength === 1 || isCheckout) {
       activeAccordion(true)
     } else {
       activeAccordion(false)
     }
-  }, [orderState?.carts])
+  }, [isCheckout])
+
+  const handleAddedProduct = (product, cart) => {
+    if (cart?.business?.slug === business?.slug) {
+      activeAccordion(true)
+    }
+  }
+
+  useEffect(() => {
+    events.on('cart_product_added', handleAddedProduct)
+    return () => events.off('cart_product_added', handleAddedProduct)
+  }, [])
 
   return (
     <AccordionSection isClosed={isClosed}>
@@ -105,20 +112,20 @@ export const BusinessItemAccordion = (props) => {
 
         {!isClosed && !!isProducts && (
           <BusinessTotal>
-            {isValidProducts && orderTotal > 0 && <p>{formatPrice(orderTotal)}</p>}
+            {isValidProducts && orderTotal > 0 && <p>{parsePrice(orderTotal)}</p>}
             <p>{t('CART_TOTAL', 'Total')}</p>
           </BusinessTotal>
         )}
 
         {isClosed && (
           <BusinessTotal className='closed'>
-            <p>Closed {moment}</p>
+            <p>{t('CLOSED', 'Cloed')} {moment}</p>
           </BusinessTotal>
         )}
 
         {!isClosed && !isProducts && (
           <BusinessTotal>
-            <p>No Products</p>
+            <p>{t('NO_PRODUCTS', 'No products')}</p>
           </BusinessTotal>
         )}
 

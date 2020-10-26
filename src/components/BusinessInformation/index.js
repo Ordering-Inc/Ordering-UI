@@ -4,7 +4,8 @@ import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
   useOrder,
-  useLanguage
+  useLanguage,
+  useConfig
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import {
@@ -34,8 +35,6 @@ export const BusinessInformationUI = (props) => {
   const {
     business,
     getBusinessType,
-    formatNumber,
-    formatPrice,
     optimizeImage,
     businessLocation,
     businessSchedule,
@@ -47,6 +46,7 @@ export const BusinessInformationUI = (props) => {
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const [, t] = useLanguage()
+  const [, { parsePrice, parseDistance }] = useConfig()
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
@@ -94,11 +94,11 @@ export const BusinessInformationUI = (props) => {
                 </>
                 <p>
                   <VscLocation />
-                  {formatNumber(business?.distance) || 0} KM
+                  {parseDistance(business?.distance || 0)}
                 </p>
                 <p>
                   <GrDeliver />
-                  {business && formatPrice(business?.delivery_price || 0)}
+                  {business && parsePrice(business?.delivery_price || 0)}
                 </p>
               </div>
             </BusinessInfoItem>
@@ -152,9 +152,9 @@ export const BusinessInformationUI = (props) => {
                 </ScheduleSection>
                 <DeliveryInfo>
                   <div>
-                    <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {formatPrice(business.service_fee)}</h5>
-                    <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {formatPrice(business.minimum)}</h5>
-                    <h5>{t('DISTANCE', 'Distance:')} {formatNumber(business?.distance) || 0} {t('KM', 'KM')}</h5>
+                    <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {parsePrice(business.service_fee)}</h5>
+                    <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {parsePrice(business.minimum)}</h5>
+                    <h5>{t('DISTANCE', 'Distance:')} {parseDistance(business?.distance || 0)}</h5>
                   </div>
                   <div>
                     <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {convertHoursToMinutes(business?.delivery_time)}</h5>

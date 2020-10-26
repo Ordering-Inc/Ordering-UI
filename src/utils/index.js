@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import { FaCcMastercard, FaCcVisa, FaCreditCard } from 'react-icons/fa'
 
 export const optimizeImage = (url, params, fallback) => {
@@ -11,12 +10,6 @@ export const optimizeImage = (url, params, fallback) => {
   }
   return url
 }
-
-/**
- * TODO: refactor this method with current currency or some context about it
- * @param {Number} price
- */
-export const formatPrice = (price) => price ? `$${price.toFixed(2)}` : '$0.00'
 
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
@@ -31,10 +24,6 @@ export const getIconCard = (brand = '') => {
 }
 
 export const DriverTipsOptions = [0, 10, 15, 20, 25]
-
-export const isADateValid = (date) => {
-  return moment(date, 'YYYY-MM-DD HH:mm:ss', true).isValid()
-}
 
 /**
  * Function to calculate time to scroll element

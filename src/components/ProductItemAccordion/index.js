@@ -1,9 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { TiPencil, IoIosArrowDown, VscTrash } from 'react-icons/all'
-import { useLanguage, useOrder } from 'ordering-components'
+import { useConfig, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
-
-import { formatPrice } from '../../utils'
 
 import {
   AccordionSection,
@@ -38,6 +36,7 @@ export const ProductItemAccordion = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
+  const [, { parsePrice }] = useConfig()
   const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')
@@ -130,7 +129,7 @@ export const ProductItemAccordion = (props) => {
             <h3>{product.name}</h3>
             {windowSize.width <= 410 && (
               <span>
-                <p>{formatPrice(product.total || product.price)}</p>
+                <p>{parsePrice(product.total || product.price)}</p>
                 <div>
                   <span ref={productActionsEdit}>
                     <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
@@ -148,7 +147,7 @@ export const ProductItemAccordion = (props) => {
           <ProductPriceSection>
             <ProductPrice>
               <span>
-                {formatPrice(product.total || product.price)}
+                {parsePrice(product.total || product.price)}
               </span>
               {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
                 <p>
@@ -246,7 +245,7 @@ export const ProductItemAccordion = (props) => {
                           quantity: suboption.quantity,
                           name: suboption.name,
                           position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
-                          price: formatPrice(suboption.price)
+                          price: parsePrice(suboption.price)
                         })}
                       </span>
                     </li>

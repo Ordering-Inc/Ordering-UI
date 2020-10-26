@@ -1,8 +1,8 @@
 import React from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage, useConfig } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 
-import { convertHoursToMinutes } from '../../utils'
+import { convertHoursToMinutes, optimizeImage } from '../../utils'
 
 import {
   ContainerCard,
@@ -27,15 +27,14 @@ const BusinessControllerUI = (props) => {
     isSkeleton,
     business,
     getBusinessOffer,
-    formatNumber,
     orderState,
     handleClick
   } = props
 
   const [, t] = useLanguage()
+  const [, { parsePrice, parseDistance, parseNumber }] = useConfig()
 
   const types = ['food', 'laundry', 'alcohol', 'groceries']
-  const formatAmount = (amount = 0) => `$ ${amount.toFixed(2)}`
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -46,16 +45,6 @@ const BusinessControllerUI = (props) => {
       }
     })
     return _types.join(', ')
-  }
-
-  const optimizeImage = (url, params, fallback) => {
-    if (!url && fallback) return fallback
-    params = params && params.length > 0 ? `,${params}` : ''
-    if (url != null && url.indexOf('res.cloudinary.com') !== -1) {
-      var parts = url.split('upload')
-      url = `${parts[0]}upload/f_auto,q_auto${params}${parts[1]}`
-    }
-    return url
   }
 
   return (
@@ -71,7 +60,7 @@ const BusinessControllerUI = (props) => {
                       <FaCrown />
                     </span>}
                   <div>
-                    {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || '$0.00'}</span>}
+                    {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
                     {!business?.open && <span>{t('PREORDER')}</span>}
                   </div>
                 </BusinessTags>
@@ -100,7 +89,7 @@ const BusinessControllerUI = (props) => {
                   {business?.reviews?.total > 0 ? (
                     <div className='reviews'>
                       <GrStar />
-                      <span>{business?.reviews?.total}</span>
+                      <span>{parseNumber(business?.reviews?.total)}</span>
                     </div>
                   ) : (
                     business?.reviews?.total !== 0 && <Skeleton width={50} />
@@ -127,7 +116,7 @@ const BusinessControllerUI = (props) => {
                   {business?.distance >= 0 ? (
                     <p className='bullet'>
                       <GrLocation />
-                      {formatNumber(business?.distance)} KM
+                      {parseDistance(business?.distance)}
                     </p>
                   ) : (
                     <Skeleton width={70} />
@@ -135,7 +124,7 @@ const BusinessControllerUI = (props) => {
                   {business?.delivery_price >= 0 ? (
                     <p>
                       <GrDeliver />
-                      {business && formatAmount(business?.delivery_price)}
+                      {business && parsePrice(business?.delivery_price)}
                     </p>
                   ) : (
                     <Skeleton width={70} />
