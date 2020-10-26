@@ -29,7 +29,6 @@ export const AutoScroll = ({ children, categories, container }) => {
     const categoriesElement = document.getElementById(categories)
     const botonRight = document.getElementsByClassName('right')[0]
     const botonLeft = document.getElementsByClassName('left')[0]
-    console.log(containerElement.scrollLeft)
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
         if ((containerElement.scrollLeft * -1) < 40) {
