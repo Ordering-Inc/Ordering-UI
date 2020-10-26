@@ -53,7 +53,6 @@ import { ProductOptionSubOption } from './components/ProductOptionSubOption'
 import { ProductShare } from './components/ProductShare'
 import { ReviewOrder } from './components/ReviewOrder'
 import { SearchBar } from './components/SearchBar'
-import { SelectPopover } from './components/SelectPopover'
 import { SignUpForm } from './components/SignUpForm'
 import { SingleProductCard } from './components/SingleProductCard'
 import { SpinnerLoader } from './components/SpinnerLoader'
@@ -127,7 +126,6 @@ export {
   ProductShare,
   ReviewOrder,
   SearchBar,
-  SelectPopover,
   SignUpForm,
   SingleProductCard,
   SpinnerLoader,
