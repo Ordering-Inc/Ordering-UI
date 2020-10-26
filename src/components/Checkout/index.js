@@ -48,7 +48,6 @@ const CheckoutUI = (props) => {
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
   const [errorCash, setErrorCash] = useState(true)
-  const [, { parsePrice }] = useConfig()
 
   return (
     <Container>
@@ -207,6 +206,7 @@ export const Checkout = (props) => {
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
+  const [, { parsePrice }] = useConfig()
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
 
