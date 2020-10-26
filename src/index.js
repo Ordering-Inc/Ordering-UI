@@ -21,8 +21,7 @@ import { Cms } from './components/Cms'
 import { Confirm } from './components/Confirm'
 import { CouponControl } from './components/CouponControl'
 import { DriverTips } from './components/DriverTips'
-import { Dropdown } from './components/Dropdown'
-import { FacebookLogin } from './components/FacebookLogin'
+import { FacebookLoginButton } from './components/FacebookLogin'
 import { Footer } from './components/Footer'
 import { ForgotPasswordForm } from './components/ForgotPasswordForm'
 import { Header } from './components/Header'
@@ -94,8 +93,7 @@ export {
   Confirm,
   CouponControl,
   DriverTips,
-  Dropdown,
-  FacebookLogin,
+  FacebookLoginButton,
   Footer,
   ForgotPasswordForm,
   Header,

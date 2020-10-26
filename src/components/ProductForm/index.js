@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import notImage from '../../../template/assets/not-image.png'
 
 import {
   ProductForm as ProductOptions,
@@ -34,6 +33,7 @@ import {
   ProductComment,
   SkeletonBlock
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const ProductOptionsUI = (props) => {
   const {
@@ -62,6 +62,7 @@ const ProductOptionsUI = (props) => {
   const [orderState] = useOrder()
   const [events] = useEvent()
   const [, { parsePrice }] = useConfig()
+  const theme = useTheme()
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -112,7 +113,7 @@ const ProductOptionsUI = (props) => {
         <>
           <WrapperImage>
             <ProductImage>
-              <img src={product?.images || notImage} alt='product' />
+              <img src={product?.images || theme.images?.dommies?.product} alt='product' />
             </ProductImage>
           </WrapperImage>
           <ProductInfo>
