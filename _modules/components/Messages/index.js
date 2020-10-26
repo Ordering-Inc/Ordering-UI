@@ -1,0 +1,319 @@
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Messages = exports.MessagesUI = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _orderingComponents = require("ordering-components");
+
+var _reactHookForm = require("react-hook-form");
+
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
+var _styles = require("./styles");
+
+var _Image = require("../Image");
+
+var _Inputs = require("../../styles/Inputs");
+
+var _Buttons = require("../../styles/Buttons");
+
+var _all = require("react-icons/all");
+
+var _moment = _interopRequireDefault(require("moment"));
+
+var _Confirm = require("../Confirm");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var MessagesUI = function MessagesUI(props) {
+  var _order$business, _order$driver, _order$business2, _order$driver2;
+
+  var order = props.order,
+      messages = props.messages,
+      handleSend = props.handleSend,
+      image = props.image,
+      message = props.message,
+      sendMessage = props.sendMessage,
+      setImage = props.setImage,
+      setMessage = props.setMessage,
+      business = props.business,
+      driver = props.driver;
+
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
+  var _useForm = (0, _reactHookForm.useForm)(),
+      handleSubmit = _useForm.handleSubmit,
+      register = _useForm.register,
+      errors = _useForm.errors;
+
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
+
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 2),
+      parseDate = _useConfig2[1].parseDate;
+
+  (0, _react.useEffect)(function () {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(function (error) {
+          return error.message;
+        })
+      });
+    }
+  }, [errors]);
+  (0, _react.useEffect)(function () {
+    if (!sendMessage.loading && (sendMessage === null || sendMessage === void 0 ? void 0 : sendMessage.error)) {
+      setAlertState({
+        open: true,
+        content: sendMessage.error || [t('ERROR')]
+      });
+    }
+
+    if (sendMessage.loading) {
+      clearInputs();
+    }
+  }, [sendMessage]);
+  (0, _react.useEffect)(function () {
+    if (!messages.loading) {
+      var chat = document.getElementById('chat');
+      chat.scrollTop = chat.scrollHeight;
+    }
+  }, [messages.messages.length]);
+
+  var onChangeMessage = function onChangeMessage(e) {
+    setMessage(e.target.value);
+  };
+
+  var removeImage = function removeImage(e) {
+    setImage(null);
+  };
+
+  var onChangeImage = function onChangeImage(e) {
+    var files = e.target.files[0];
+    var reader = new window.FileReader();
+    reader.readAsDataURL(files);
+
+    reader.onload = function () {
+      setImage(reader.result);
+    };
+
+    reader.onerror = function (error) {
+      console.log(error);
+    };
+  };
+
+  var getStatus = function getStatus(status) {
+    switch (status) {
+      case 0:
+        return 'ORDER_STATUS_PENDING';
+
+      case 1:
+        return 'ORDERS_COMPLETED';
+
+      case 2:
+        return 'ORDER_REJECTED';
+
+      case 3:
+        return 'ORDER_STATUS_IN_BUSINESS';
+
+      case 4:
+        return 'ORDER_READY';
+
+      case 5:
+        return 'ORDER_REJECTED_RESTAURANT';
+
+      case 6:
+        return 'ORDER_STATUS_CANCELLEDBYDRIVER';
+
+      case 7:
+        return 'ORDER_STATUS_ACCEPTEDBYRESTAURANT';
+
+      case 8:
+        return 'ORDER_CONFIRMED_ACCEPTED_BY_DRIVER';
+
+      case 9:
+        return 'ORDER_PICKUP_COMPLETED_BY_DRIVER';
+
+      case 10:
+        return 'ORDER_PICKUP_FAILED_BY_DRIVER';
+
+      case 11:
+        return 'ORDER_DELIVERY_COMPLETED_BY_DRIVER';
+
+      case 12:
+        return 'ORDER_DELIVERY_FAILED_BY_DRIVER';
+
+      default:
+        return status;
+    }
+  };
+
+  var getLevel = function getLevel(level) {
+    switch (level) {
+      case 0:
+        return 'Admin';
+
+      case 1:
+        return 'Business';
+
+      case 2:
+        return 'Driver';
+
+      case 3:
+        return 'Customer';
+    }
+  };
+
+  var clearInputs = function clearInputs() {
+    var input = document.getElementById('message');
+
+    if (input) {
+      input.value = '';
+    }
+
+    removeImage();
+    setMessage('');
+  };
+
+  var onSubmit = function onSubmit(values) {
+    handleSend();
+  };
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.Image, null, business && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo,
+    fallback: /*#__PURE__*/_react.default.createElement(_all.FaUserAlt, null)
+  }), driver && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo,
+    fallback: /*#__PURE__*/_react.default.createElement(_all.RiUser2Fill, null)
+  })), business && /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("span", null, t('ONLINE', 'Online'))), driver && /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.name), /*#__PURE__*/_react.default.createElement("span", null, t('ONLINE', 'Online')))), /*#__PURE__*/_react.default.createElement(_styles.Chat, {
+    id: "chat"
+  }, messages.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBubbleBusiness, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 200,
+    height: 100
+  }))), /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBubbleCustomer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 250,
+    height: 100
+  }))), /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBubbleBusiness, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 150,
+    height: 100
+  }))), /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBubbleCustomer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 200,
+    height: 100
+  })))), !messages.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'via'), " ", /*#__PURE__*/_react.default.createElement("strong", null, order.app_id), ' ', /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, _moment.default.utc(order.created_at).fromNow()))), messages === null || messages === void 0 ? void 0 : messages.messages.map(function (message) {
+    var _message$change, _message$driver, _message$driver2;
+
+    return /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+      key: message.id
+    }, message.type === 1 && (((_message$change = message.change) === null || _message$change === void 0 ? void 0 : _message$change.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), /*#__PURE__*/_react.default.createElement("strong", null, message.change.attribute, " "), t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, t(getStatus(parseInt(message.change.old, 10))), " ")), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, " ", t('TO', 'to'), " ", t(getStatus(parseInt(message.change.new, 10))), " "), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, _moment.default.utc(message.created_at).fromNow())) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver = message.driver) === null || _message$driver === void 0 ? void 0 : _message$driver.name, " ", ' ', " ", ((_message$driver2 = message.driver) === null || _message$driver2 === void 0 ? void 0 : _message$driver2.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, _moment.default.utc(message.created_at).fromNow()))));
+  }), messages === null || messages === void 0 ? void 0 : messages.messages.map(function (message) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: message.id
+    }, message.type === 2 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message.author.name, " (", getLevel(message.author.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, _moment.default.utc(message.created_at).fromNow()))), message.type === 3 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, {
+      name: "image"
+    }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message.author.name, " (", getLevel(message.author.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: message.source
+    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, _moment.default.utc(message.created_at).fromNow()))), message.type === 2 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message.author.name, " (", getLevel(message.author.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, _moment.default.utc(message.created_at).fromNow()))), message.type === 3 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, {
+      name: "image"
+    }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message.author.name, " (", getLevel(message.author.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: message.source
+    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, _moment.default.utc(message.created_at).fromNow()))));
+  }))), /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.Send, {
+    onSubmit: handleSubmit(onSubmit),
+    noValidate: true
+  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    placeholder: t('WRITE_A_MESSAGE', 'Write a message'),
+    onChange: onChangeMessage,
+    name: "message",
+    id: "message",
+    ref: register({
+      required: !image
+    })
+  }), !image && /*#__PURE__*/_react.default.createElement(_styles.SendImage, {
+    htmlFor: "chat_image"
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    type: "file",
+    name: "image",
+    id: "chat_image",
+    accept: "image/png,image/jpg,image/jpeg",
+    onChange: onChangeImage
+  }), /*#__PURE__*/_react.default.createElement(_all.BsCardImage, null)), /*#__PURE__*/_react.default.createElement(_styles.WrapperDeleteImage, null, image && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    circle: true,
+    onClick: removeImage
+  }, t('X', 'X'))), /*#__PURE__*/_react.default.createElement(_styles.WrapperSendMessageButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    type: "submit",
+    disabled: sendMessage.loading || message === '' && !image
+  }, /*#__PURE__*/_react.default.createElement(_all.IoIosSend, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('SEND', 'send')))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('ERROR', 'error'),
+    content: alertState.content,
+    acceptText: t('ACCEPT'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
+};
+
+exports.MessagesUI = MessagesUI;
+
+var Messages = function Messages(props) {
+  var MessagesProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: MessagesUI
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.Messages, MessagesProps);
+};
+
+exports.Messages = Messages;
