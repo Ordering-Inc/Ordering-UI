@@ -18,7 +18,7 @@ import { Cart } from './components/Cart'
 import { CartPopover } from './components/CartPopover'
 import { Checkout } from './components/Checkout'
 import { Cms } from './components/Cms'
-import { Confirm } from './components/Confirm'
+import { Confirm, Alert } from './components/Confirm'
 import { CouponControl } from './components/CouponControl'
 import { DriverTips } from './components/DriverTips'
 import { FacebookLoginButton } from './components/FacebookLogin'
@@ -61,7 +61,7 @@ import { UpsellingPage } from './components/UpsellingPage'
 import { UserDetails } from './components/UserDetails'
 import { UserPopover } from './components/UserPopover'
 import { UserProfileForm } from './components/UserProfileForm'
-import { ThemeContext } from './contexts/ThemeContext'
+import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Button } from './styles/Buttons'
@@ -91,6 +91,7 @@ export {
   Checkout,
   Cms,
   Confirm,
+  Alert,
   CouponControl,
   DriverTips,
   FacebookLoginButton,
@@ -135,6 +136,8 @@ export {
   UserProfileForm,
   // Contexts
   ThemeContext,
+  ThemeProvider,
+  useTheme,
   // Hooks
   useOnlineStatus,
   useWindowSize,
