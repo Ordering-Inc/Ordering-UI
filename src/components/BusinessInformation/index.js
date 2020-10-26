@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
-import { MdClose } from 'react-icons/md'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
@@ -29,7 +28,7 @@ import {
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 
-import { GrDeliver, FaStar, FiClock, VscLocation } from 'react-icons/all'
+import { GrDeliver, FaStar, FiClock, VscLocation, MdClose } from 'react-icons/all'
 
 export const BusinessInformationUI = (props) => {
   const {

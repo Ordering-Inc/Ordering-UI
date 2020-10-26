@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -103,6 +103,10 @@ export const WarningMessage = styled.div`
     top: 0;
     left: 0;
     margin: 11px;
+    ${props => props.theme?.rtl && css`
+        right: 0;
+        left: initial
+    `}  
   }
 
   h1 {
@@ -141,7 +145,6 @@ export const NotFound = styled.div`
 `
 
 export const NotFoundImage = styled.div`
-  max-width: 300px;
   max-width: 300px;
 
   img {

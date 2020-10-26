@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const DivContainer = styled.span`
   display: inherit;
@@ -15,10 +15,18 @@ export const DivContainer = styled.span`
     color: #000000
   }
   svg.right{
-    right: 1%;
+    ${props => props.theme?.rtl ? css`
+      left: 95%;
+    ` : css`
+      right: 1%;
+    `}
   }
   svg.left{
-    left: 1%;
+    ${props => props.theme?.rtl ? css`
+      right: 95%;
+    ` : css`
+      left: 1%;
+    `}    
   }
   svg.hidden{
     display: none;

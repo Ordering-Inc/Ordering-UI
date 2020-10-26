@@ -3,10 +3,12 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
 import { DivContainer } from './styles'
 
+import { useTheme } from '../../contexts/ThemeContext'
+
 export const AutoScroll = ({ children, categories, container }) => {
   const { width } = useWindowSize()
   const [categoriesElement, setCategoriesElement] = useState([])
-
+  const [theme] = useTheme()
   useEffect(() => {
     const containerElement = document.getElementById(container)
       .addEventListener('scroll', handleScroll)
@@ -27,16 +29,30 @@ export const AutoScroll = ({ children, categories, container }) => {
     const categoriesElement = document.getElementById(categories)
     const botonRight = document.getElementsByClassName('right')[0]
     const botonLeft = document.getElementsByClassName('left')[0]
+    console.log(containerElement.scrollLeft)
     if (botonLeft || botonRight) {
-      if (containerElement.scrollLeft < 40) {
-        botonLeft.classList.add('hidden')
+      if (theme?.rtl) {
+        if ((containerElement.scrollLeft * -1) < 40) {
+          botonRight.classList.add('hidden')
+        } else {
+          botonRight.classList.remove('hidden')
+        }
+        if ((containerElement.scrollLeft * -1) > categoriesElement?.scrollWidth - containerElement.offsetWidth - 10) {
+          botonLeft.classList.add('hidden')
+        } else {
+          botonLeft.classList.remove('hidden')
+        }
       } else {
-        botonLeft.classList.remove('hidden')
-      }
-      if (containerElement.scrollLeft > categoriesElement?.scrollWidth - containerElement.offsetWidth - 10) {
-        botonRight.classList.add('hidden')
-      } else {
-        botonRight.classList.remove('hidden')
+        if (containerElement.scrollLeft < 40) {
+          botonLeft.classList.add('hidden')
+        } else {
+          botonLeft.classList.remove('hidden')
+        }
+        if (containerElement.scrollLeft > categoriesElement?.scrollWidth - containerElement.offsetWidth - 10) {
+          botonRight.classList.add('hidden')
+        } else {
+          botonRight.classList.remove('hidden')
+        }
       }
     }
   }
