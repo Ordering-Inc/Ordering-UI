@@ -186,7 +186,8 @@ const ProductOptionsUI = (props) => {
                     outline
                     onClick={decrement}
                     disabled={productCart.quantity === 1 || isSoldOut}
-                  >-
+                  >
+                    <span className='sign'>-</span>
                   </Button>
                   <span>{productCart.quantity}</span>
                   <Button
@@ -195,7 +196,8 @@ const ProductOptionsUI = (props) => {
                     outline
                     onClick={increment}
                     disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
-                  >+
+                  >
+                    <span className='sign'>+</span>
                   </Button>
                 </div>)}
 
