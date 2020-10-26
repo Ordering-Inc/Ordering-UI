@@ -62,18 +62,12 @@ export const BusinessItemAccordion = (props) => {
   }
 
   useEffect(() => {
-    if (isCheckout && cartsLength > 1) {
-      toggleAccordion()
-    }
-  }, [location])
-
-  useEffect(() => {
     if (cartsLength === 1 || isCheckout) {
       activeAccordion(true)
     } else {
       activeAccordion(false)
     }
-  }, [orderState?.carts])
+  }, [isCheckout])
 
   return (
     <AccordionSection isClosed={isClosed}>
