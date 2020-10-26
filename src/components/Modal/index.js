@@ -6,8 +6,7 @@ import {
   ModalActions,
   ModalTitle,
   ModalIcon,
-  ModalHeader,
-  ModalOrderTypes
+  ModalHeader
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -22,8 +21,7 @@ const ModalUI = (props) => {
     acceptText,
     cancelText,
     isTransparent,
-    hideCloseDefault,
-    OrderTypeSelectorHeader
+    hideCloseDefault
   } = props
   const [, t] = useLanguage()
   return (
@@ -43,13 +41,6 @@ const ModalUI = (props) => {
           <ModalTitle>
             {title}
           </ModalTitle>
-        )}
-        {OrderTypeSelectorHeader && (
-          <ModalOrderTypes>
-            {
-              <OrderTypeSelectorHeader />
-            }
-          </ModalOrderTypes>
         )}
       </ModalHeader>
       {children}

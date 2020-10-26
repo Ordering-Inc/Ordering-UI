@@ -62,10 +62,6 @@ export const ModalTitle = styled.h2`
   flex: 1;
 `
 
-export const ModalOrderTypes = styled.div`
-  margin-right: 15px;
-`
-
 export const ModalIcon = styled.span`
   position: absolute;
   right: 5px;
