@@ -19,8 +19,11 @@ import {
   Categories,
   Medadata
 } from './styles'
-import { GrClock, GrDeliver, GrLocation, GrStar } from 'react-icons/gr'
-import { FaCrown } from 'react-icons/fa'
+import GrClock from '@meronex/icons/gr/GrClock'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import GrLocation from '@meronex/icons/gr/GrLocation'
+import GrStar from '@meronex/icons/gr/GrStar'
+import FaCrown from '@meronex/icons/fa/FaCrown'
 
 const BusinessControllerUI = (props) => {
   const {

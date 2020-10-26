@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import { DropDownCircleImage } from '../Dropdown/style'
 import {
   Messages as MessagesController,
   useConfig,
@@ -35,7 +34,10 @@ import {
 import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { BsCardImage, IoIosSend, RiUser2Fill, FaUserAlt } from 'react-icons/all'
+import BsCardImage from '@meronex/icons/bs/BsCardImage'
+import IosSend from '@meronex/icons/ios/IosSend'
+import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import moment from 'moment' // REPLACE WITH TIMEAGO
 import { Alert } from '../Confirm'
 
@@ -368,7 +370,7 @@ export const MessagesUI = (props) => {
               type='submit'
               disabled={sendMessage.loading || (message === '' && !image)}
             >
-              <IoIosSend />
+              <IosSend />
               {sendMessage.loading ? (
                 <>
                   {t('SENDING_MESSAGE', 'Sending...')}

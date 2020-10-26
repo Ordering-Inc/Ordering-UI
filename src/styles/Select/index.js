@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { BsChevronDown } from 'react-icons/bs'
+import BsChevronDown from '@meronex/icons/bs/BsChevronDown'
 
 import {
   Select as SelectInput,

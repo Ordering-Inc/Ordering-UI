@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
-import { MdClose } from 'react-icons/md'
+import MdClose from '@meronex/icons/md/MdClose'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
@@ -29,8 +29,10 @@ import {
   ModalIcon
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
-
-import { GrDeliver, FaStar, FiClock, VscLocation } from 'react-icons/all'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import FaStar from '@meronex/icons/fa/FaStar'
+import FiClock from '@meronex/icons/fi/FiClock'
+import VscLocation from '@meronex/icons/vsc/VscLocation'
 
 export const BusinessInformationUI = (props) => {
   const {
