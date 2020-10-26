@@ -8,6 +8,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #FFF;
+  z-index: 1000;
 
   button {
     position: relative;
@@ -19,6 +20,14 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 578px) {
+      width: 80%;
+    }
+
+    @media (max-width: 380px) {
+      width: 90%;
+    }
   }
 `
 

@@ -259,7 +259,7 @@ const BusinessProductsListingUI = (props) => {
         <FloatingButton
           btnText={t('VIEW_ORDER', 'View Order')}
           btnValue={currentCart?.products?.length}
-          handleButtonClick={() => onCheckoutRedirect(currentCart?.uuid)}
+          handleClick={() => onCheckoutRedirect(currentCart?.uuid)}
         />
       )}
     </>
