@@ -19,7 +19,8 @@ import {
   LogoWrapper,
   CartItemLogo,
   CartItemInfo,
-  CartItemActions
+  CartItemActions,
+  InvalidAddress
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -187,6 +188,12 @@ const CheckoutUI = (props) => {
               {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}
             </Button>
           </WrapperPlaceOrderButton>
+        )}
+
+        {!cart.valid_address && (
+          <InvalidAddress>
+            {t('INVALID_CART_ADDRESS', 'Invalid address selected')}
+          </InvalidAddress>
         )}
 
         {/* {error && error?.length > 0 && (

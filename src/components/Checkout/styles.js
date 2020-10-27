@@ -259,3 +259,7 @@ export const CartItemActions = styled.div`
     font-size: 14px;
   }
 `
+
+export const InvalidAddress = styled.span`
+  margin: auto;
+`
