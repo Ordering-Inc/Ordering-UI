@@ -7,7 +7,7 @@ exports.Alert = exports.Confirm = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _md = require("react-icons/md");
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -55,7 +55,7 @@ var ConfirmUI = function ConfirmUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.PopupDialog, {
     className: "popup-dialog"
-  }, /*#__PURE__*/_react.default.createElement(_styles.PopupIcon, null, /*#__PURE__*/_react.default.createElement(_md.MdClose, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.PopupIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onClose();
     }

@@ -9,11 +9,19 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _io = require("react-icons/io");
+var _IosCash = _interopRequireDefault(require("@meronex/icons/ios/IosCash"));
 
-var _fa = require("react-icons/fa");
+var _IosCard = _interopRequireDefault(require("@meronex/icons/ios/IosCard"));
 
-var _gr = require("react-icons/gr");
+var _IosRadioButtonOn = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOn"));
+
+var _FaStripe = _interopRequireDefault(require("@meronex/icons/Fa/FaStripe"));
+
+var _FaCcStripe = _interopRequireDefault(require("@meronex/icons/Fa/FaCcStripe"));
+
+var _FaStripeS = _interopRequireDefault(require("@meronex/icons/Fa/FaStripeS"));
+
+var _GrStripe = _interopRequireDefault(require("@meronex/icons/gr/GrStripe"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -64,22 +72,22 @@ var stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect'];
 var getPayIcon = function getPayIcon(method) {
   switch (method) {
     case 1:
-      return /*#__PURE__*/_react.default.createElement(_io.IoIosCash, null);
+      return /*#__PURE__*/_react.default.createElement(_IosCash.default, null);
 
     case 22:
-      return /*#__PURE__*/_react.default.createElement(_fa.FaStripe, null);
+      return /*#__PURE__*/_react.default.createElement(_FaStripe.default, null);
 
     case 28:
-      return /*#__PURE__*/_react.default.createElement(_fa.FaCcStripe, null);
+      return /*#__PURE__*/_react.default.createElement(_FaCcStripe.default, null);
 
     case 31:
-      return /*#__PURE__*/_react.default.createElement(_fa.FaStripeS, null);
+      return /*#__PURE__*/_react.default.createElement(_FaStripeS.default, null);
 
     case 32:
-      return /*#__PURE__*/_react.default.createElement(_gr.GrStripe, null);
+      return /*#__PURE__*/_react.default.createElement(_GrStripe.default, null);
 
     default:
-      return /*#__PURE__*/_react.default.createElement(_io.IoIosCard, null);
+      return /*#__PURE__*/_react.default.createElement(_IosCard.default, null);
   }
 };
 
@@ -129,7 +137,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     setErrorCash: props.setErrorCash
   }), stripeOptions.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && (paymethodData === null || paymethodData === void 0 ? void 0 : paymethodData.card) && /*#__PURE__*/_react.default.createElement(_styles.PayCardSelected, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "checks"
-  }, /*#__PURE__*/_react.default.createElement(_io.IoIosRadioButtonOn, null)), /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null)), /*#__PURE__*/_react.default.createElement("span", {
     className: "brand"
   }, (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand)), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.last4))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     className: "modal-info",

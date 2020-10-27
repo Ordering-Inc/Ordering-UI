@@ -17,7 +17,9 @@ var _styles = require("./styles");
 
 var _MomentControl = require("../MomentControl");
 
-var _fa = require("react-icons/fa");
+var _FaRegClock = _interopRequireDefault(require("@meronex/icons/fa/FaRegClock"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -131,7 +133,7 @@ var MomentPopover = function MomentPopover(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
     onClick: props.onClick
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaRegClock, null), " ", ((_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.moment) ? parseDate((_orderStatus$options2 = orderStatus.options) === null || _orderStatus$options2 === void 0 ? void 0 : _orderStatus$options2.moment, {
+  }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, null), " ", ((_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.moment) ? parseDate((_orderStatus$options2 = orderStatus.options) === null || _orderStatus$options2 === void 0 ? void 0 : _orderStatus$options2.moment, {
     outputFormat: 'MM/DD hh:mma'
   }) : t('ASAP_ABBREVIATION', 'ASAP')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,

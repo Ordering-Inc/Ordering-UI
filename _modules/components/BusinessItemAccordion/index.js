@@ -9,13 +9,21 @@ exports.BusinessItemAccordion = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _all = require("react-icons/all");
+var _IosArrowDown = _interopRequireDefault(require("@meronex/icons/ios/IosArrowDown"));
+
+var _FiClock = _interopRequireDefault(require("@meronex/icons/fi/FiClock"));
+
+var _BiStoreAlt = _interopRequireDefault(require("@meronex/icons/bi/BiStoreAlt"));
+
+var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
 
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../utils");
 
 var _styles = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -132,23 +140,23 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, (business === null || business === void 0 ? void 0 : business.logo) && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: business === null || business === void 0 ? void 0 : business.logo
-  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_all.FiClock, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_all.FiClock, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time)))), !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, isValidProducts && orderTotal > 0 && /*#__PURE__*/_react.default.createElement("p", null, parsePrice(orderTotal)), /*#__PURE__*/_react.default.createElement("p", null, t('CART_TOTAL', 'Total'))), isClosed && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time)))), !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, isValidProducts && orderTotal > 0 && /*#__PURE__*/_react.default.createElement("p", null, parsePrice(orderTotal)), /*#__PURE__*/_react.default.createElement("p", null, t('CART_TOTAL', 'Total'))), isClosed && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
     className: "closed"
   }, /*#__PURE__*/_react.default.createElement("p", null, t('CLOSED', 'Cloed'), " ", moment)), !isClosed && !isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, /*#__PURE__*/_react.default.createElement("p", null, t('NO_PRODUCTS', 'No products'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessActions, null, /*#__PURE__*/_react.default.createElement("span", {
     ref: businessStore,
     onClick: function onClick() {
       return handleStoreRedirect(business === null || business === void 0 ? void 0 : business.slug);
     }
-  }, /*#__PURE__*/_react.default.createElement(_all.BiStoreAlt, {
+  }, /*#__PURE__*/_react.default.createElement(_BiStoreAlt.default, {
     color: "#CCC"
   })), !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
     ref: businessDelete,
     onClick: function onClick() {
       return handleClearProducts();
     }
-  }, /*#__PURE__*/_react.default.createElement(_all.VscTrash, {
+  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
     color: "#D81212"
-  })), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_all.IoIosArrowDown, {
+  })), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
   }))))), /*#__PURE__*/_react.default.createElement(_styles.AccordionContent, {
     ref: content,

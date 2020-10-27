@@ -11,9 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _useWindowSize2 = require("../../hooks/useWindowSize");
 
-var _io = require("react-icons/io");
+var _IosArrowForward = _interopRequireDefault(require("@meronex/icons/ios/IosArrowForward"));
+
+var _IosArrowBack = _interopRequireDefault(require("@meronex/icons/ios/IosArrowBack"));
 
 var _styles = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -95,12 +99,12 @@ var AutoScroll = function AutoScroll(_ref) {
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.DivContainer, null, width < categoriesElement.offsetWidth + 50 ? /*#__PURE__*/_react.default.createElement(_io.IoIosArrowBack, {
+  return /*#__PURE__*/_react.default.createElement(_styles.DivContainer, null, width < categoriesElement.offsetWidth + 50 ? /*#__PURE__*/_react.default.createElement(_IosArrowBack.default, {
     className: "left",
     onClick: function onClick() {
       return scrolling('left');
     }
-  }) : '', children, width < categoriesElement.offsetWidth + 50 ? /*#__PURE__*/_react.default.createElement(_io.IoIosArrowForward, {
+  }) : '', children, width < categoriesElement.offsetWidth + 50 ? /*#__PURE__*/_react.default.createElement(_IosArrowForward.default, {
     className: "right",
     onClick: function onClick() {
       return scrolling();

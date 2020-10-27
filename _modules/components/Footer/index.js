@@ -9,7 +9,15 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styles = require("./styles");
 
-var _fa = require("react-icons/fa");
+var _FaWhatsapp = _interopRequireDefault(require("@meronex/icons/fa/FaWhatsapp"));
+
+var _FaYoutube = _interopRequireDefault(require("@meronex/icons/fa/FaYoutube"));
+
+var _FaTwitter = _interopRequireDefault(require("@meronex/icons/fa/FaTwitter"));
+
+var _FaInstagram = _interopRequireDefault(require("@meronex/icons/fa/FaInstagram"));
+
+var _FaFacebook = _interopRequireDefault(require("@meronex/icons/fa/FaFacebook"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -46,15 +54,15 @@ var Footer = function Footer() {
     href: t('FOOTER_QL2_3_HREF')
   }, t('FOOTER_QL2_3'))), /*#__PURE__*/_react.default.createElement(_styles.SocialMedia, null, /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("strong", null, t('FOOTER_QL3_TITLE'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
     href: t('FOOTER_QL3_1_HREF')
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaFacebook, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
+  }, /*#__PURE__*/_react.default.createElement(_FaFacebook.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
     href: t('FOOTER_QL3_2_HREF')
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaInstagram, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
+  }, /*#__PURE__*/_react.default.createElement(_FaInstagram.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
     href: t('FOOTER_QL3_3_HREF')
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaTwitter, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
+  }, /*#__PURE__*/_react.default.createElement(_FaTwitter.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
     href: t('FOOTER_QL3_4_HREF')
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaYoutube, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
+  }, /*#__PURE__*/_react.default.createElement(_FaYoutube.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
     href: t('FOOTER_QL3_5_HREF')
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaWhatsapp, null)))), /*#__PURE__*/_react.default.createElement(_styles.Copy, null, t('FOOTER_COPY', '© 2016 - 2020 Ordering - Create e-commerce Apps and Websites with your brand. All rights reserved. Ordering, Inc.'))));
+  }, /*#__PURE__*/_react.default.createElement(_FaWhatsapp.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.Copy, null, t('FOOTER_COPY', '© 2016 - 2020 Ordering - Create e-commerce Apps and Websites with your brand. All rights reserved. Ordering, Inc.'))));
 };
 
 exports.Footer = Footer;

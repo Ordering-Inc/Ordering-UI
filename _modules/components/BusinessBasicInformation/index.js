@@ -11,15 +11,15 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _fi = require("react-icons/fi");
+var _FiClock = _interopRequireDefault(require("@meronex/icons/fi/FiClock"));
 
-var _vsc = require("react-icons/vsc");
+var _VscLocation = _interopRequireDefault(require("@meronex/icons/vsc/VscLocation"));
 
-var _gr = require("react-icons/gr");
+var _GrDeliver = _interopRequireDefault(require("@meronex/icons/gr/GrDeliver"));
 
-var _fa = require("react-icons/fa");
+var _FaStar = _interopRequireDefault(require("@meronex/icons/fa/FaStar"));
 
-var _bs = require("react-icons/bs");
+var _BsExclamationCircle = _interopRequireDefault(require("@meronex/icons/bs/BsExclamationCircle"));
 
 var _Modal = require("../Modal");
 
@@ -119,19 +119,19 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     className: "bold"
   }, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_fa.FaStar, {
+  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FaStar.default, {
     className: "start"
   }), business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), /*#__PURE__*/_react.default.createElement("div", null, !loading ? /*#__PURE__*/_react.default.createElement("p", null, getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), /*#__PURE__*/_react.default.createElement("div", null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_fi.FiClock, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_fi.FiClock, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement("div", null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_vsc.VscLocation, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_VscLocation.default, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_gr.GrDeliver, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  }), !loading && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_bs.BsExclamationCircle, {
+  }), !loading && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_BsExclamationCircle.default, {
     className: "popup",
     onClick: function onClick() {
       return setOpenBusinessInformation(true);

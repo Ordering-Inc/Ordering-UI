@@ -17,11 +17,13 @@ var _styles = require("./styles");
 
 var _Confirm = require("../Confirm");
 
-var _ai = require("react-icons/ai");
+var _AiFillStar = _interopRequireDefault(require("@meronex/icons/ai/AiFillStar"));
 
 var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -145,7 +147,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
         onClick: function onClick(e) {
           return handleChangeRating(e);
         }
-      }), /*#__PURE__*/_react.default.createElement(_ai.AiFillStar, {
+      }), /*#__PURE__*/_react.default.createElement(_AiFillStar.default, {
         color: i + 1 <= (hover[name] || stars[name]) ? 'yellow' : 'gray',
         size: 25,
         onMouseEnter: function onMouseEnter() {

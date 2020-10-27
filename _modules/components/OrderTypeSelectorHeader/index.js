@@ -11,13 +11,15 @@ var _orderingComponents = require("ordering-components");
 
 var _Select = require("../../styles/Select");
 
-var _fa = require("react-icons/fa");
+var _FaCarSide = _interopRequireDefault(require("@meronex/icons/fa/FaCarSide"));
 
-var _gr = require("react-icons/gr");
+var _FaTruckPickup = _interopRequireDefault(require("@meronex/icons/fa/FaTruckPickup"));
 
-var _ai = require("react-icons/ai");
+var _GrDeliver = _interopRequireDefault(require("@meronex/icons/gr/GrDeliver"));
 
-var _gi = require("react-icons/gi");
+var _AiFillShop = _interopRequireDefault(require("@meronex/icons/ai/AiFillShop"));
+
+var _GiFoodTruck = _interopRequireDefault(require("@meronex/icons/gi/GiFoodTruck"));
 
 var _styles = require("./styles");
 
@@ -49,19 +51,19 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
 
   var orderTypes = [{
     value: 1,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_gr.GrDeliver, null), t('DELIVERY', 'Delivery'))
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), t('DELIVERY', 'Delivery'))
   }, {
     value: 2,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_fa.FaTruckPickup, null), t('PICKUP', 'Pickup'))
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_FaTruckPickup.default, null), t('PICKUP', 'Pickup'))
   }, {
     value: 3,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_ai.AiFillShop, null), t('EAT_IN', 'Eat in'))
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_AiFillShop.default, null), t('EAT_IN', 'Eat in'))
   }, {
     value: 4,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_gi.GiFoodTruck, null), t('CURBSIDE', 'Curbside'))
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_GiFoodTruck.default, null), t('CURBSIDE', 'Curbside'))
   }, {
     value: 5,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_fa.FaCarSide, null), t('DRIVE_THRU', 'Drive thru'))
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null), t('DRIVE_THRU', 'Drive thru'))
   }];
   return /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: orderTypes,

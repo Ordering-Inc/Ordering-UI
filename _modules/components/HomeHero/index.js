@@ -27,7 +27,9 @@ var _Confirm = require("../Confirm");
 
 var _styledComponents = require("styled-components");
 
-var _hi = require("react-icons/hi");
+var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -129,7 +131,7 @@ var HomeHero = function HomeHero(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
     onClick: handleAddressInput,
     withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_hi.HiOutlineLocationMarker, null), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     disabled: true,
     placeholder: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_ADDRESS', 'Type address')

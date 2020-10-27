@@ -7,7 +7,11 @@ exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = expo
 
 var _react = _interopRequireDefault(require("react"));
 
-var _fa = require("react-icons/fa");
+var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
+
+var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
+
+var _FaCreditCard = _interopRequireDefault(require("@meronex/icons/fa/FaCreditCard"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43,13 +47,13 @@ var getIconCard = function getIconCard() {
 
   switch (value) {
     case 'visa':
-      return /*#__PURE__*/_react.default.createElement(_fa.FaCcVisa, null);
+      return /*#__PURE__*/_react.default.createElement(_FaCcVisa.default, null);
 
     case 'mastercard':
-      return /*#__PURE__*/_react.default.createElement(_fa.FaCcMastercard, null);
+      return /*#__PURE__*/_react.default.createElement(_FaCcMastercard.default, null);
 
     default:
-      return /*#__PURE__*/_react.default.createElement(_fa.FaCreditCard, null);
+      return /*#__PURE__*/_react.default.createElement(_FaCreditCard.default, null);
   }
 };
 

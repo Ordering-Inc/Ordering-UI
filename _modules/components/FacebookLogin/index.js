@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _fa = require("react-icons/fa");
+var _FaFacebook = _interopRequireDefault(require("@meronex/icons/fa/FaFacebook"));
 
 var _styles = require("./styles");
 
@@ -45,7 +45,7 @@ var FacebookLoginButtonUI = function FacebookLoginButtonUI(props) {
     onClick: function onClick() {
       return handleFacebookLogin();
     }
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaFacebook, null), t('LOGIN_WITH_FACEBOOK', 'Login with Facebook'));
+  }, /*#__PURE__*/_react.default.createElement(_FaFacebook.default, null), t('LOGIN_WITH_FACEBOOK', 'Login with Facebook'));
 };
 
 var FacebookLoginButton = function FacebookLoginButton(props) {

@@ -11,7 +11,7 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _vsc = require("react-icons/vsc");
+var _VscWarning = _interopRequireDefault(require("@meronex/icons/vsc/VscWarning"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
@@ -89,7 +89,7 @@ var CheckoutUI = function CheckoutUI(props) {
       errorCash = _useState2[0],
       setErrorCash = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContainer, null, (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_vsc.VscWarning, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_vsc.VscWarning, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContainer, null, (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: '100%',
       marginBottom: '20px'

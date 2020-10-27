@@ -13,7 +13,15 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _all = require("react-icons/all");
+var _FiPhone = _interopRequireDefault(require("@meronex/icons/fi/FiPhone"));
+
+var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
+
+var _HiOutlineChat = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineChat"));
+
+var _BiCaretUp = _interopRequireDefault(require("@meronex/icons/bi/BiCaretUp"));
+
+var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
 
 var _Buttons = require("../../styles/Buttons");
 
@@ -187,7 +195,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     column: true
   }, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_MESSAGE', 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("h1", null, parsePrice((order === null || order === void 0 ? void 0 : order.total) || 0))))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_all.FiPhone, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_all.HiOutlineChat, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
     onClick: function onClick() {
       return setOpenMessages({
         driver: false,
@@ -205,11 +213,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     className: "photo"
   }, (order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
     src: order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo
-  }) : /*#__PURE__*/_react.default.createElement(_all.FaUserCircle, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name, " ", order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.lastname), /*#__PURE__*/_react.default.createElement("span", null, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.address))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('YOUR_DRIVER', 'Your Driver')), /*#__PURE__*/_react.default.createElement(_styles.OrderDriver, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriver, null, /*#__PURE__*/_react.default.createElement("div", {
+  }) : /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name, " ", order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.lastname), /*#__PURE__*/_react.default.createElement("span", null, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.address))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('YOUR_DRIVER', 'Your Driver')), /*#__PURE__*/_react.default.createElement(_styles.OrderDriver, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriver, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "photo"
   }, (order === null || order === void 0 ? void 0 : (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
     src: order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo
-  }) : /*#__PURE__*/_react.default.createElement(_all.RiUser2Fill, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.lastname), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER', 'Driver')))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_all.FiPhone, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_all.HiOutlineChat, {
+  }) : /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.lastname), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER', 'Driver')))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
     onClick: function onClick() {
       return setOpenMessages({
         driver: true,
@@ -234,7 +242,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         page: 'orders'
       });
     }
-  }, t('MY_ORDERS', 'My Orders'), /*#__PURE__*/_react.default.createElement(_all.BiCaretUp, null))))), loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  }, t('MY_ORDERS', 'My Orders'), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, null))))), loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 100
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 250

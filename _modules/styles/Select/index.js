@@ -9,9 +9,11 @@ exports.Select = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _bs = require("react-icons/bs");
+var _BsChevronDown = _interopRequireDefault(require("@meronex/icons/bs/BsChevronDown"));
 
 var _Selects = require("../Selects");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -98,7 +100,7 @@ var Select = function Select(props) {
 
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
     onClick: handleSelectClick
-  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_bs.BsChevronDown, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_bs.BsChevronDown, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     position: "right",
     ref: dropdownReference
   }, options.map(function (option) {

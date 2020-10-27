@@ -13,9 +13,11 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _io = require("react-icons/io");
+var _IosRadioButtonOn = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOn"));
 
-var _vsc = require("react-icons/vsc");
+var _IosRadioButtonOff = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOff"));
+
+var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
 
 var _utils = require("../../utils");
 
@@ -123,9 +125,9 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("span", {
       className: "checks"
-    }, card.id === (cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.id) ? /*#__PURE__*/_react.default.createElement(_io.IoIosRadioButtonOn, null) : /*#__PURE__*/_react.default.createElement(_io.IoIosRadioButtonOff, null)), /*#__PURE__*/_react.default.createElement("span", {
+    }, card.id === (cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.id) ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
       className: "brand"
-    }, (0, _utils.getIconCard)(card.brand)), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, /*#__PURE__*/_react.default.createElement(_vsc.VscTrash, {
+    }, (0, _utils.getIconCard)(card.brand)), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
       onClick: function onClick() {
         return handleDeleteCard(card);
       }

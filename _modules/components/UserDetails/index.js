@@ -9,9 +9,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactHookForm = require("react-hook-form");
 
-var _fc = require("react-icons/fc");
+var _FcCancel = _interopRequireDefault(require("@meronex/icons/fc/FcCancel"));
 
-var _ti = require("react-icons/ti");
+var _TiPencil = _interopRequireDefault(require("@meronex/icons/ti/TiPencil"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
@@ -105,12 +105,12 @@ var UserDetailsUI = function UserDetailsUI(props) {
     style: {
       marginBottom: '10px'
     }
-  })), userState.result && userState.result.error && /*#__PURE__*/_react.default.createElement("p", null, userState.result.result), !(useValidationFields && validationFields.loading || userState.loading) && userState.result && userState.result.result && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), !userState.result.error && (useValidationFields || !validationFields.loading) && cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement(_ti.TiPencil, {
+  })), userState.result && userState.result.error && /*#__PURE__*/_react.default.createElement("p", null, userState.result.result), !(useValidationFields && validationFields.loading || userState.loading) && userState.result && userState.result.result && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), !userState.result.error && (useValidationFields || !validationFields.loading) && cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     className: "edit",
     onClick: function onClick() {
       return onEditUserClick();
     }
-  }) : /*#__PURE__*/_react.default.createElement(_fc.FcCancel, {
+  }) : /*#__PURE__*/_react.default.createElement(_FcCancel.default, {
     className: "cancel",
     onClick: function onClick() {
       return onEditUserClick();

@@ -9,7 +9,7 @@ exports.AddressDetails = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _ti = require("react-icons/ti");
+var _TiPencil = _interopRequireDefault(require("@meronex/icons/ti/TiPencil"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -22,6 +22,8 @@ var _Confirm = require("../Confirm");
 var _AddressForm = require("../AddressForm");
 
 var _AddressList = require("../AddressList");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -122,7 +124,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       });
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, userAddress, orderType === 1 && /*#__PURE__*/_react.default.createElement(_ti.TiPencil, {
+  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, userAddress, orderType === 1 && /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     onClick: function onClick() {
       return handleClickAddress();
     }

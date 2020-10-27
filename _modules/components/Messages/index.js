@@ -23,7 +23,13 @@ var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _all = require("react-icons/all");
+var _BsCardImage = _interopRequireDefault(require("@meronex/icons/bs/BsCardImage"));
+
+var _IosSend = _interopRequireDefault(require("@meronex/icons/ios/IosSend"));
+
+var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
+
+var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
@@ -229,10 +235,10 @@ var MessagesUI = function MessagesUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.Image, null, business && /*#__PURE__*/_react.default.createElement(_Image.Image, {
     src: (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo,
-    fallback: /*#__PURE__*/_react.default.createElement(_all.FaUserAlt, null)
+    fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }), driver && /*#__PURE__*/_react.default.createElement(_Image.Image, {
     src: (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo,
-    fallback: /*#__PURE__*/_react.default.createElement(_all.RiUser2Fill, null)
+    fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
   })), business && /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("span", null, t('ONLINE', 'Online'))), driver && /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.name), /*#__PURE__*/_react.default.createElement("span", null, t('ONLINE', 'Online')))), /*#__PURE__*/_react.default.createElement(_styles.Chat, {
     id: "chat"
   }, messages.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBubbleBusiness, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -284,14 +290,14 @@ var MessagesUI = function MessagesUI(props) {
     id: "chat_image",
     accept: "image/png,image/jpg,image/jpeg",
     onChange: onChangeImage
-  }), /*#__PURE__*/_react.default.createElement(_all.BsCardImage, null)), /*#__PURE__*/_react.default.createElement(_styles.WrapperDeleteImage, null, image && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null)), /*#__PURE__*/_react.default.createElement(_styles.WrapperDeleteImage, null, image && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     circle: true,
     onClick: removeImage
   }, t('X', 'X'))), /*#__PURE__*/_react.default.createElement(_styles.WrapperSendMessageButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
     disabled: sendMessage.loading || message === '' && !image
-  }, /*#__PURE__*/_react.default.createElement(_all.IoIosSend, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('SEND', 'send')))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_IosSend.default, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('SEND', 'send')))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'error'),
     content: alertState.content,
     acceptText: t('ACCEPT'),

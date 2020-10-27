@@ -15,7 +15,7 @@ var _styles = require("./styles");
 
 var _Select = require("../../styles/Select");
 
-var _ai = require("react-icons/ai");
+var _AiOutlineStar = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineStar"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,7 +48,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Score = function Score(_ref) {
   var star = _ref.star,
       text = _ref.text;
-  return /*#__PURE__*/_react.default.createElement(_styles.ScoreDiv, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_ai.AiOutlineStar, {
+  return /*#__PURE__*/_react.default.createElement(_styles.ScoreDiv, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_AiOutlineStar.default, {
     color: "#D81212"
   }), " ", star), /*#__PURE__*/_react.default.createElement("p", null, text));
 };
@@ -88,11 +88,11 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
       return handleClickOption(val);
     },
     notAsync: true,
-    InitialIcon: _ai.AiOutlineStar
+    InitialIcon: _AiOutlineStar.default
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 30
-  })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h3", null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ai.AiOutlineStar, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h3", null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_AiOutlineStar.default, {
     color: "#D81212"
   }), stars) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
@@ -100,7 +100,7 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
   })), !reviewsList.loading ? reviewsList === null || reviewsList === void 0 ? void 0 : reviewsList.reviews.map(function (review) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewContainer, {
       key: review.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.Comments, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('REVIEW_COMMENT', 'Name of user'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_ai.AiOutlineStar, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.Comments, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('REVIEW_COMMENT', 'Name of user'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_AiOutlineStar.default, {
       color: "#D81212"
     }), " ", review.total)), /*#__PURE__*/_react.default.createElement(_styles.Comment, null, /*#__PURE__*/_react.default.createElement("p", {
       title: review.comment

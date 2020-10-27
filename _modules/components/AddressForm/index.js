@@ -9,11 +9,17 @@ exports.AddressForm = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _fa = require("react-icons/fa");
+var _FaHome = _interopRequireDefault(require("@meronex/icons/fa/FaHome"));
 
-var _im = require("react-icons/im");
+var _FaPlus = _interopRequireDefault(require("@meronex/icons/fa/FaPlus"));
 
-var _hi = require("react-icons/hi");
+var _FaRegBuilding = _interopRequireDefault(require("@meronex/icons/fa/FaRegBuilding"));
+
+var _FaRegHeart = _interopRequireDefault(require("@meronex/icons/fa/FaRegHeart"));
+
+var _ImCompass = _interopRequireDefault(require("@meronex/icons/im/ImCompass"));
+
+var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
 
 var _reactHookForm = require("react-hook-form");
 
@@ -26,6 +32,8 @@ var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 
 var _Inputs = require("../../styles/Inputs");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -161,7 +169,7 @@ var AddressFormUI = function AddressFormUI(props) {
     mapControls: googleMapsControls
   })), /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
     className: "google-control"
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_hi.HiOutlineLocationMarker, null), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
     className: "input-autocomplete",
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
     name: "address",
@@ -176,7 +184,7 @@ var AddressFormUI = function AddressFormUI(props) {
     className: "gps-button",
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
     onAddress: handleChangeAddress,
-    IconButton: _im.ImCompass
+    IconButton: _ImCompass.default
   })), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "internal_number",
     name: "internal_number",
@@ -210,7 +218,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return handleAddressTag('home');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_fa.FaHome, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaHome.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'office' ? 'active' : '',
     type: "button",
     outline: true,
@@ -218,7 +226,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return handleAddressTag('office');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_fa.FaRegBuilding, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaRegBuilding.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'favorite' ? 'active' : '',
     type: "button",
     outline: true,
@@ -226,7 +234,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return handleAddressTag('favorite');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_fa.FaRegHeart, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaRegHeart.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'other' ? 'active' : '',
     type: "button",
     outline: true,
@@ -234,7 +242,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return handleAddressTag('other');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_fa.FaPlus, null)))), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaPlus.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "button",
     disabled: formState.loading,
     outline: true,

@@ -9,7 +9,7 @@ exports.CartPopover = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _io = require("react-icons/io");
+var _IosBasket = _interopRequireDefault(require("@meronex/icons/ios/IosBasket"));
 
 var _reactPopper = require("react-popper");
 
@@ -20,6 +20,8 @@ var _orderingComponents = require("ordering-components");
 var _Cart = require("../Cart");
 
 var _styledComponents = require("styled-components");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -128,7 +130,7 @@ var CartPopover = function CartPopover(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
     onClick: props.onClick
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_io.IoIosBasket, null), cartsWithProducts.length > 0 && /*#__PURE__*/_react.default.createElement("p", null, cartsWithProducts.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosBasket.default, null), cartsWithProducts.length > 0 && /*#__PURE__*/_react.default.createElement("p", null, cartsWithProducts.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.WrapperCarts, null, orderState.carts && cartsWithProducts.length > 0 && cartsWithProducts.map(function (cart) {

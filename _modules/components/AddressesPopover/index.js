@@ -19,7 +19,9 @@ var _styles = require("./styles");
 
 var _AddressForm = require("../AddressForm");
 
-var _fa = require("react-icons/fa");
+var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -125,7 +127,7 @@ var AddressesPopover = function AddressesPopover(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
     onClick: props.onClick
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaMapMarkerAlt, null), " ", ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.address) === null || _orderState$options$a2 === void 0 ? void 0 : (_orderState$options$a3 = _orderState$options$a2.split(',')) === null || _orderState$options$a3 === void 0 ? void 0 : _orderState$options$a3[0]) || t('SELECT_AN_ADDRESS', 'Select an address')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.address) === null || _orderState$options$a2 === void 0 ? void 0 : (_orderState$options$a3 = _orderState$options$a2.split(',')) === null || _orderState$options$a3 === void 0 ? void 0 : _orderState$options$a3[0]) || t('SELECT_AN_ADDRESS', 'Select an address')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
   }, attributes.popper), userState.auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {

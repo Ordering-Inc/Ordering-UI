@@ -11,7 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _all = require("react-icons/all");
+var _TiPencil = _interopRequireDefault(require("@meronex/icons/ti/TiPencil"));
+
+var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
+
+var _IosRadioButtonOn = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOn"));
+
+var _IosRadioButtonOff = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOff"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -176,19 +182,19 @@ var AddressListUI = function AddressListUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("span", {
       className: "radio"
-    }, address.address === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.address) ? /*#__PURE__*/_react.default.createElement(_all.IoIosRadioButtonOn, null) : /*#__PURE__*/_react.default.createElement(_all.IoIosRadioButtonOff, null)), /*#__PURE__*/_react.default.createElement("div", {
+    }, address.address === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.address) ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
     }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, null, /*#__PURE__*/_react.default.createElement("a", {
       className: actionStatus.loading ? 'disabled' : '',
       onClick: function onClick() {
         return openAddress(address);
       }
-    }, /*#__PURE__*/_react.default.createElement(_all.TiPencil, null)), /*#__PURE__*/_react.default.createElement("a", {
+    }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, null)), /*#__PURE__*/_react.default.createElement("a", {
       className: actionStatus.loading || address.default ? 'disabled' : '',
       onClick: function onClick() {
         return handleDeleteClick(address);
       }
-    }, /*#__PURE__*/_react.default.createElement(_all.VscTrash, null))));
+    }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, null))));
   })) : /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found"

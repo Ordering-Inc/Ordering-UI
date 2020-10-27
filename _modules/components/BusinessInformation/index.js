@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _utils = require("../../utils");
 
-var _md = require("react-icons/md");
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -21,7 +21,15 @@ var _styles = require("./styles");
 
 var _Tabs = require("../../styles/Tabs");
 
-var _all = require("react-icons/all");
+var _GrDeliver = _interopRequireDefault(require("@meronex/icons/gr/GrDeliver"));
+
+var _FaStar = _interopRequireDefault(require("@meronex/icons/fa/FaStar"));
+
+var _FiClock = _interopRequireDefault(require("@meronex/icons/fi/FiClock"));
+
+var _VscLocation = _interopRequireDefault(require("@meronex/icons/vsc/VscLocation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -89,7 +97,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     return "".concat(checkTime(hour), ":").concat(checkTime(minute));
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessInformationContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_md.MdClose, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessInformationContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onClose();
     }
@@ -101,9 +109,9 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
-  }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_all.FaStar, {
+  }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FaStar.default, {
     className: "start"
-  }), business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, getBusinessType())), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_all.FiClock, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_all.FiClock, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_all.VscLocation, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_all.GrDeliver, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0))))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, business.reviews && /*#__PURE__*/_react.default.createElement(_styles.FlexTabs, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+  }), business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, getBusinessType())), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_VscLocation.default, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0))))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, business.reviews && /*#__PURE__*/_react.default.createElement(_styles.FlexTabs, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {

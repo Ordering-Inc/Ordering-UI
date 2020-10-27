@@ -7,7 +7,7 @@ exports.Modal = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _md = require("react-icons/md");
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -56,7 +56,7 @@ var ModalUI = function ModalUI(props) {
     width: props.width,
     padding: props.padding,
     isTransparent: isTransparent
-  }, !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_md.MdClose, {
+  }, !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onClose();
     }

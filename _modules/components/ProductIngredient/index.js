@@ -11,7 +11,9 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _md = require("react-icons/md");
+var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
+
+var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,7 +31,7 @@ var ProductIngredientUI = function ProductIngredientUI(props) {
     onClick: function onClick() {
       return toggleSelect();
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_md.MdCheckBox, null) : /*#__PURE__*/_react.default.createElement(_md.MdCheckBoxOutlineBlank, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
   })), /*#__PURE__*/_react.default.createElement("span", null, ingredient.name));
 };

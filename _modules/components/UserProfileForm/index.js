@@ -27,7 +27,9 @@ var _Buttons = require("../../styles/Buttons");
 
 var _ProfileOptions = require("./ProfileOptions");
 
-var _all = require("react-icons/all");
+var _GiPhotoCamera = _interopRequireDefault(require("@meronex/icons/gi/GiPhotoCamera"));
+
+var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -165,10 +167,10 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   }, formState.changes.photo && formState.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !formState.changes.photo || ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' ? (user === null || user === void 0 ? void 0 : user.photo) ? /*#__PURE__*/_react.default.createElement("img", {
     src: user === null || user === void 0 ? void 0 : user.photo,
     alt: "user image"
-  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_all.BiImage, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE', 'Put your image here'))) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo) ? /*#__PURE__*/_react.default.createElement("img", {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE', 'Put your image here'))) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo) ? /*#__PURE__*/_react.default.createElement("img", {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo,
     alt: "user image"
-  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_all.BiImage, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE', 'Put your image here')))))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_all.GiPhotoCamera, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, edit ? /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE', 'Put your image here')))))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_GiPhotoCamera.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, edit ? /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: handleSubmit(onSubmit)
   }, !(useChekoutFileds && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.values(validationFields.fields).map(function (field) {
     return showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

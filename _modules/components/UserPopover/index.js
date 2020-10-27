@@ -17,7 +17,15 @@ var _styles = require("./styles");
 
 var _style = require("../Dropdown/style");
 
-var _fa = require("react-icons/fa");
+var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
+
+var _FaRegAddressCard = _interopRequireDefault(require("@meronex/icons/fa/FaRegAddressCard"));
+
+var _FaRegListAlt = _interopRequireDefault(require("@meronex/icons/fa/FaRegListAlt"));
+
+var _FaSignOutAlt = _interopRequireDefault(require("@meronex/icons/fa/FaSignOutAlt"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -131,7 +139,7 @@ var UserPopover = function UserPopover(props) {
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
     src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo,
-    fallback: /*#__PURE__*/_react.default.createElement(_fa.FaUserAlt, null)
+    fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   })), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
@@ -139,11 +147,11 @@ var UserPopover = function UserPopover(props) {
     onClick: function onClick() {
       return handleGoToPage('profile');
     }
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaRegAddressCard, null), " ", t('PROFILE', 'Profile')), /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
+  }, /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null), " ", t('PROFILE', 'Profile')), /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
     onClick: function onClick() {
       return handleGoToPage('orders');
     }
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaRegListAlt, null), " ", t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {
+  }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null), " ", t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {
     onClose: props.onClose
   })), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
@@ -166,7 +174,7 @@ var LogoutActionUI = function LogoutActionUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.PopoverListItem, {
     onClick: handleClick
-  }, /*#__PURE__*/_react.default.createElement(_fa.FaSignOutAlt, null), " ", t('LOGOUT', 'Logout'));
+  }, /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null), " ", t('LOGOUT', 'Logout'));
 };
 
 var PopoverListItemLogout = function PopoverListItemLogout(props) {

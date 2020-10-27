@@ -9,11 +9,13 @@ exports.ProductShare = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _fi = require("react-icons/fi");
+var _FiShare = _interopRequireDefault(require("@meronex/icons/fi/FiShare2"));
 
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -56,7 +58,7 @@ var ProductShareUI = function ProductShareUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.IconShare, {
     ref: iconElement
-  }, /*#__PURE__*/_react.default.createElement(_fi.FiShare2, {
+  }, /*#__PURE__*/_react.default.createElement(_FiShare.default, {
     onClick: handleClickShare
   }), /*#__PURE__*/_react.default.createElement(_styles.ShareButtons, {
     ref: contentElement,

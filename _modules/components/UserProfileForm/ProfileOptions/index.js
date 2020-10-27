@@ -13,9 +13,13 @@ var _styles = require("./styles");
 
 var _Tabs = require("../../../styles/Tabs");
 
-var _all = require("react-icons/all");
+var _BsPerson = _interopRequireDefault(require("@meronex/icons/bs/BsPerson"));
+
+var _AiOutlineUnorderedList = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineUnorderedList"));
 
 var _orderingComponents = require("ordering-components");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -62,7 +66,7 @@ var ProfileOptions = function ProfileOptions(_ref) {
         page: 'profile'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_all.BsPerson, null), " ", t('MY_ACCOUNT', 'My account'))), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPerson.default, null), " ", t('MY_ACCOUNT', 'My account'))), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     active: tabValue === 'My Orders'
   }, /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {
@@ -70,7 +74,7 @@ var ProfileOptions = function ProfileOptions(_ref) {
         page: 'orders'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_all.AiOutlineUnorderedList, null), " ", t('MY_ORDERS', 'My orders')))));
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineUnorderedList.default, null), " ", t('MY_ORDERS', 'My orders')))));
 };
 
 exports.ProfileOptions = ProfileOptions;
