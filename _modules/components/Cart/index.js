@@ -109,12 +109,12 @@ var CartUI = function CartUI(props) {
       isCheckout = _useState12[0],
       setIsCheckout = _useState12[1];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      _useConfig2$ = _useConfig2[1],
-      parsePrice = _useConfig2$.parsePrice,
-      parseNumber = _useConfig2$.parseNumber,
-      parseDate = _useConfig2$.parseDate;
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      parseNumber = _useUtils2$.parseNumber,
+      parseDate = _useUtils2$.parseDate;
 
   var momentFormatted = !(orderState === null || orderState === void 0 ? void 0 : (_orderState$option = orderState.option) === null || _orderState$option === void 0 ? void 0 : _orderState$option.moment) ? t('ASAP_ABBREVIATION', 'ASAP') : parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$option2 = orderState.option) === null || _orderState$option2 === void 0 ? void 0 : _orderState$option2.moment, {
     outputFormat: 'YYYY-MM-DD HH:mm'

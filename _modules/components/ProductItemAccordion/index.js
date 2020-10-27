@@ -72,9 +72,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      parsePrice = _useConfig2[1].parsePrice;
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
 
   var windowSize = (0, _useWindowSize.useWindowSize)();
 

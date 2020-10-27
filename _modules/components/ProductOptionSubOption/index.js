@@ -57,9 +57,9 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
       toggleSelect = props.toggleSelect,
       changePosition = props.changePosition;
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      parsePrice = _useConfig2[1].parsePrice;
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
 
   var handleIncrement = function handleIncrement(e) {
     e.stopPropagation();

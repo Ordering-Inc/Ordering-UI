@@ -80,11 +80,11 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      _useConfig2$ = _useConfig2[1],
-      parsePrice = _useConfig2$.parsePrice,
-      parseDistance = _useConfig2$.parseDistance;
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      parseDistance = _useUtils2$.parseDistance;
 
   var scheduleFormatted = function scheduleFormatted(_ref) {
     var hour = _ref.hour,

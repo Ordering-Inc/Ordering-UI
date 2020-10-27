@@ -45,9 +45,12 @@ var SingleProductCard = function SingleProductCard(props) {
       t = _useLanguage2[1];
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      stateConfig = _useConfig2[0],
-      parsePrice = _useConfig2[1].parsePrice;
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      stateConfig = _useConfig2[0];
+
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),

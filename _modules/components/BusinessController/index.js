@@ -58,12 +58,12 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      _useConfig2$ = _useConfig2[1],
-      parsePrice = _useConfig2$.parsePrice,
-      parseDistance = _useConfig2$.parseDistance,
-      parseNumber = _useConfig2$.parseNumber;
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      parseDistance = _useUtils2$.parseDistance,
+      parseNumber = _useUtils2$.parseNumber;
 
   var types = ['food', 'laundry', 'alcohol', 'groceries'];
 

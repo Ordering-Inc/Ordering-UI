@@ -91,11 +91,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      _useConfig2$ = _useConfig2[1],
-      parsePrice = _useConfig2$.parsePrice,
-      parseNumber = _useConfig2$.parseNumber;
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      parseNumber = _useUtils2$.parseNumber;
 
   var _props$order = props.order,
       order = _props$order.order,

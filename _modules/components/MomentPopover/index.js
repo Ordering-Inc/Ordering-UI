@@ -58,9 +58,9 @@ var MomentPopover = function MomentPopover(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      parseDate = _useConfig2[1].parseDate;
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parseDate = _useUtils2[0].parseDate;
 
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
