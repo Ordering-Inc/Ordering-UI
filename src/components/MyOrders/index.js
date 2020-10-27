@@ -4,7 +4,8 @@ import {
   MyOrders as MyOrdersController,
   useEvent,
   useLanguage,
-  useOrder
+  useOrder,
+  useUtils
 } from 'ordering-components'
 import {
   MyOrdersContainer,
@@ -14,6 +15,7 @@ import {
   Map,
   Content,
   Logo,
+  PastLogo,
   BusinessInformation,
   OpenOrder,
   Price,
@@ -33,7 +35,6 @@ import {
 
 import { ProfileOptions } from '../UserProfileForm/ProfileOptions'
 import { Button } from '../../styles/Buttons'
-import { formatPrice } from '../../utils'
 import emptyPastOrders from '../../../template/assets/empty-past-orders.svg'
 import emptyActiveOrders from '../../../template/assets/empty-active-orders.svg'
 
@@ -42,6 +43,7 @@ export const MyOrdersUI = (props) => {
   const [, t] = useLanguage()
   const [, { reorder }] = useOrder()
   const [events] = useEvent()
+  const [{ parsePrice }] = useUtils()
   const googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
   const getGoogleMapImage = ({ lat, lng }) => {
     return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${googleMapKey}`
@@ -98,9 +100,11 @@ export const MyOrdersUI = (props) => {
                       </BusinessInformation>
                       <Price>
                         <h5>
-                          {formatPrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
+                          {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
                         </h5>
-                        <p>{order.status === 0 ? t('ORDER_PENDING', 'pending') : ''}</p>
+                        {order.status === 0 && (
+                          <p>{t('ORDER_PENDING', 'pending')}</p>
+                        )}
                       </Price>
                     </Content>
                     <OpenOrder>
@@ -150,17 +154,19 @@ export const MyOrdersUI = (props) => {
                 {!previousOrders.loading ? previousOrders.orders.map((order) => (
                   <IndividualOrderPast key={order.id}>
                     <OrderPastContent>
-                      <Logo name='order_past'>
+                      <PastLogo>
                         <img src={order.business?.logo} />
-                      </Logo>
+                      </PastLogo>
                       <BusinessInformation>
                         <h5>{order.business.name}</h5>
                         <p>{order.created_at}</p>
-                        <p onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })} name='view'>{t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}</p>
+                        <p name='view_order' onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })}>{t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}</p>
                       </BusinessInformation>
                     </OrderPastContent>
                     <Reorder>
-                      <p>{order.status === 1 || order.status === 11 ? t('ORDER_COMPLETED', 'Complete') : ''}</p>
+                      {(order.status === 1 || order.status === 11) && (
+                        <p>{t('ORDER_COMPLETED', 'Complete')}</p>
+                      )}
                       <Button color='primary' onClick={() => handleReorder(order.id)} disabled={reorderLoading}>{reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}</Button>
                     </Reorder>
                   </IndividualOrderPast>
