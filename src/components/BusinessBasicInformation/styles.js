@@ -93,11 +93,15 @@ export const BusinessInfoItem = styled.div`
   div {
     display: flex;
     justify-content: space-between;
+    h5,
     p {
       display: flex;
       align-items: center;
       margin: 0px;
       text-transform: capitalize;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       svg {
         margin-right: 4px;
         &.start {
