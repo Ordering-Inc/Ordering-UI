@@ -69,7 +69,7 @@ export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 20px 0px 0px;
 
   button {
     width: 70%;
@@ -260,6 +260,8 @@ export const CartItemActions = styled.div`
   }
 `
 
-export const InvalidAddress = styled.span`
-  margin: auto;
+export const InvalidAddress = styled.p`
+  margin: 10px auto 15px;
+  text-align: center;
+  color: ${props => props.theme.colors.primary};
 `

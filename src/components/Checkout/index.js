@@ -192,7 +192,7 @@ const CheckoutUI = (props) => {
 
         {!cart.valid_address && (
           <InvalidAddress>
-            {t('INVALID_CART_ADDRESS', 'Invalid address selected')}
+            {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
           </InvalidAddress>
         )}
 
