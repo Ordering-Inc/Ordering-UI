@@ -1,6 +1,10 @@
 import React from 'react'
 import { FooterContainer, Content, Copy, SocialMedia, SocialIcon } from './styles'
-import { FaWhatsapp, FaYoutube, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa'
+import FaWhatsapp from '@meronex/icons/fa/FaWhatsapp'
+import FaYoutube from '@meronex/icons/fa/FaYoutube'
+import FaTwitter from '@meronex/icons/fa/FaTwitter'
+import FaInstagram from '@meronex/icons/fa/FaInstagram'
+import FaFacebook from '@meronex/icons/fa/FaFacebook'
 import { useLanguage } from 'ordering-components'
 
 export const Footer = () => {

@@ -1,15 +1,15 @@
 import React, { useRef, useEffect } from 'react'
-import { useOrder, useLanguage, useConfig } from 'ordering-components'
+import { useOrder, useLanguage, useUtils } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
 import { MomentControl } from '../MomentControl'
-import { FaRegClock } from 'react-icons/fa'
+import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
 export const MomentPopover = (props) => {
   const { open } = props
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
-  const [, { parseDate }] = useConfig()
+  const [{ parseDate }] = useUtils()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()

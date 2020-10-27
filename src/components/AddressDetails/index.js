@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TiPencil } from 'react-icons/ti'
+import TiPencil from '@meronex/icons/ti/TiPencil'
 import { AddressDetails as AddressDetailsController, useOrder, useLanguage, useSession } from 'ordering-components'
 
 import {

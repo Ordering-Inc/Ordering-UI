@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components'
-import { AiOutlineAndroid, AiOutlineApple } from 'react-icons/ai'
+import AiOutlineAndroid from '@meronex/icons/ai/AiOutlineAndroid'
+import AiOutlineApple from '@meronex/icons/ai/AiOutlineApple'
 import { HomeHero } from '../../../src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
 

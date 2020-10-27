@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.4",
+    "@meronex/icons": "^4.0.0",
     "@popperjs/core": "^2.5.3",
     "@sentry/react": "^5.25.0",
     "@sentry/tracing": "^5.25.0",
@@ -55,7 +56,6 @@
     "polished": "^3.6.6",
     "prop-types": "^15.7.2",
     "react-hook-form": "^6.8.1",
-    "react-icons": "^3.11.0",
     "react-loading-skeleton": "^2.1.1",
     "react-popper": "^2.2.3",
     "styled-components": "^5.1.1"
