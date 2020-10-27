@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage, useConfig } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage, useUtils } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 
 import { convertHoursToMinutes, optimizeImage } from '../../utils'
@@ -35,7 +35,7 @@ const BusinessControllerUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [, { parsePrice, parseDistance, parseNumber }] = useConfig()
+  const [{ parsePrice, parseDistance, parseNumber }] = useUtils()
 
   const types = ['food', 'laundry', 'alcohol', 'groceries']
 

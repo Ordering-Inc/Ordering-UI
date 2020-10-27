@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
-import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useConfig } from 'ordering-components'
+import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useUtils } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 
 import {
@@ -206,7 +206,7 @@ export const Checkout = (props) => {
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
-  const [, { parsePrice }] = useConfig()
+  const [{ parsePrice }] = useUtils()
 
   const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
 

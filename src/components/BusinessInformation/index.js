@@ -6,7 +6,7 @@ import {
   GoogleMapsMap,
   useOrder,
   useLanguage,
-  useConfig
+  useUtils
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import {
@@ -49,7 +49,7 @@ export const BusinessInformationUI = (props) => {
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const [, t] = useLanguage()
-  const [, { parsePrice, parseDistance }] = useConfig()
+  const [{ parsePrice, parseDistance }] = useUtils()
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val

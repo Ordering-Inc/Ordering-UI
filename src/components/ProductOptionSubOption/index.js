@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductOptionSuboption as ProductSubOptionController, useConfig } from 'ordering-components'
+import { ProductOptionSuboption as ProductSubOptionController, useUtils } from 'ordering-components'
 import BsCircleFill from '@meronex/icons/bs/BsCircleFill'
 import BsCircleHalf from '@meronex/icons/bs/BsCircleHalf'
 import BsDashCircle from '@meronex/icons/bs/BsDashCircle'
@@ -30,7 +30,7 @@ const ProductOptionSubOptionUI = (props) => {
     changePosition
   } = props
 
-  const [, { parsePrice }] = useConfig()
+  const [{ parsePrice }] = useUtils()
 
   const handleIncrement = (e) => {
     e.stopPropagation()
