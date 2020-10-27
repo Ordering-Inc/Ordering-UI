@@ -92,6 +92,7 @@ export const MessagesUI = (props) => {
   }
 
   const removeImage = (e) => {
+    console.log(e)
     setImage(null)
   }
 
@@ -245,38 +246,36 @@ export const MessagesUI = (props) => {
                 </BubbleConsole>
               </MessageConsole>
               {messages?.messages.map((message) => (
-                <MessageConsole key={message.id}>
-                  {message.type === 1 && (
-                    message.change?.attribute !== 'driver_id' ? (
-                      <BubbleConsole>
-                        {t('ORDER', 'Order')}
-                        <strong>{message.change.attribute} </strong>
-                        {t('CHANGED_FROM', 'Changed from')} {' '}
-                        {message.change.old !== null && (
-                          <>
-                            <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
-                          </>
-                        )}
-                        <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
-                        <TimeofSent>
-                          {
-                            moment.utc(message.created_at).fromNow()
-                          }
-                        </TimeofSent>
-                      </BubbleConsole>
-                    ) : (
-                      <BubbleConsole>
-                        <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                        {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                        {message.comment && (<><br /> {message.comment.length}</>)}
-                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
-                      </BubbleConsole>
-                    )
-                  )}
-                </MessageConsole>
-              ))}
-              {messages?.messages.map((message) => (
                 <React.Fragment key={message.id}>
+                  {message.type === 1 && (
+                    <MessageConsole key={message.id}>
+                      {message.change?.attribute !== 'driver_id' ? (
+                        <BubbleConsole>
+                          {t('ORDER', 'Order')} {' '}
+                          <strong>{message.change.attribute}</strong> {}
+                          {t('CHANGED_FROM', 'Changed from')} {' '}
+                          {message.change.old !== null && (
+                            <>
+                              <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                            </>
+                          )}
+                          <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                          <TimeofSent>
+                            {
+                              moment.utc(message.created_at).fromNow()
+                            }
+                          </TimeofSent>
+                        </BubbleConsole>
+                      ) : (
+                        <BubbleConsole>
+                          <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                          {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                          {message.comment && (<><br /> {message.comment.length}</>)}
+                          <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                        </BubbleConsole>
+                      )}
+                    </MessageConsole>
+                  )}
                   {message.type === 2 && user.id === message.author_id && (
                     <MessageCustomer>
                       <BubbleCustomer>
@@ -352,16 +351,16 @@ export const MessagesUI = (props) => {
               <BsCardImage />
             </SendImage>
           )}
-          <WrapperDeleteImage>
-            {image && (
+          {image && (
+            <WrapperDeleteImage>
               <Button
                 circle
                 onClick={removeImage}
               >
                 {t('X', 'X')}
               </Button>
-            )}
-          </WrapperDeleteImage>
+            </WrapperDeleteImage>
+          )}
           <WrapperSendMessageButton>
             <Button
               color='primary'

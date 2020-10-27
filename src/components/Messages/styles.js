@@ -66,7 +66,6 @@ export const Image = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid #CCC;
     padding: 6px;
   }
 `
@@ -128,10 +127,10 @@ export const MessageCustomer = styled.div`
 `
 
 export const BubbleConsole = styled.div`
-  border-radius: 97px;
-  padding: 15px;
+  border-radius: 5px;
+  padding: 5px 15px;
   max-width: 30%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   background: #EFEFEF;
   text-align: center;
   height: auto;
@@ -141,23 +140,22 @@ export const BubbleConsole = styled.div`
 
 export const BubbleBusines = styled.div`
   border-radius: 97px 97px 97px 0px;
-  padding: 10px 25px 15px 25px;
+  padding: 10px 25px 10px 25px;
   max-width: 40%;
   min-width: 80px;
   margin-bottom: 10px;
   background: #EFEFEF;
-  height: auto;
   overflow: hidden;
   overflow-wrap: break-word;
   &[name=image]{
-    border-radius: 60px 60px 60px 0px;
-    padding: 10px 30px 15px 30px;
+    border-radius: 40px 40px 40px 0px;
+    width: 100%;
   }
 `
 
 export const BubbleCustomer = styled.div`
   border-radius: 97px 97px 0px 97px;
-  padding: 10px 25px 15px 25px;
+  padding: 10px 25px 10px 25px;
   max-width: 40%;
   min-width: 80px;
   margin-bottom: 10px;
@@ -165,10 +163,10 @@ export const BubbleCustomer = styled.div`
   color: white;
   overflow-wrap: break-word;
   overflow: hidden;
-
+  
   &[name=image]{
-    border-radius: 60px 60px 0px 60px;
-    padding: 10px 30px 15px 30px;
+    border-radius: 40px 40px 0px 40px;
+    width: 100%;
   }
 `
 
@@ -188,27 +186,32 @@ export const ChatImage = styled.div`
   width: 100%;
   img{
     width: 100%;
+    height: 100%;
+    object-fit: contain;
+    vertical-align: middle;
   }
 `
 
 export const PartnerName = styled.p`
   margin-block-start: 0;
-  margin-block-end: 0.2em;
+  margin-block-end: 0.6em;
   font-size: 1.1em;
 `
 
 export const MyName = styled.p`
-    margin-block-start: 0;
-    margin-block-end: 0.2em;
-    font-size: 1.1em;
-    text-align: right;
+  margin-block-start: 0;
+  margin-block-end: 0.6em;
+  font-size: 1.1em;
+  text-align: right;
 `
 
 export const TimeofSent = styled.p`
+  position: relative;
   text-align: right;
   font-size: 0.8em;
-  margin-block-start: initial;
+  margin-block-start: 0.2em;
   margin-block-end: initial;
+  left: 10px;
 `
 
 export const SendForm = styled.div`
@@ -224,7 +227,7 @@ export const Send = styled.form`
   display: flex;
   margin-top: 3px;
   height: auto;
-  > input {
+  input {
     flex: 1;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -234,8 +237,7 @@ export const Send = styled.form`
 export const SendImage = styled.label`
   width: 25px;
   height: 25px;
-  padding-left: 20px;
-  padding-right: 5px;
+  margin: 0px 20px;
   input {
     display: none;
   }
@@ -248,8 +250,7 @@ export const SendImage = styled.label`
 `
 
 export const WrapperDeleteImage = styled.div`
-  margin-right: 10px;
-  margin-left: 10px;
+  margin: 0px 17px;
   button{
     &:disabled {
     cursor: not-allowed;
@@ -259,8 +260,8 @@ export const WrapperDeleteImage = styled.div`
 
 export const WrapperSendMessageButton = styled.div`
   button{
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     svg {
        margin-right: 10px;
        width: 1.5em;
