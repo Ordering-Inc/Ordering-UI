@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage, useConfig } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage, useUtils } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 
 import { convertHoursToMinutes, optimizeImage } from '../../utils'
@@ -19,8 +19,11 @@ import {
   Categories,
   Medadata
 } from './styles'
-import { GrClock, GrDeliver, GrLocation, GrStar } from 'react-icons/gr'
-import { FaCrown } from 'react-icons/fa'
+import GrClock from '@meronex/icons/gr/GrClock'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import GrLocation from '@meronex/icons/gr/GrLocation'
+import GrStar from '@meronex/icons/gr/GrStar'
+import FaCrown from '@meronex/icons/fa/FaCrown'
 
 const BusinessControllerUI = (props) => {
   const {
@@ -32,7 +35,7 @@ const BusinessControllerUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [, { parsePrice, parseDistance, parseNumber }] = useConfig()
+  const [{ parsePrice, parseDistance, parseNumber }] = useUtils()
 
   const types = ['food', 'laundry', 'alcohol', 'groceries']
 

@@ -3,7 +3,10 @@ import { useLanguage, useSession, LogoutAction as LogoutActionController, useEve
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow, PopoverList, PopoverListItem, PopoverListLink } from './styles'
 import { DropDownCircleImage } from '../Dropdown/style'
-import { FaUserAlt, FaRegAddressCard, FaRegListAlt, FaSignOutAlt } from 'react-icons/fa'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
+import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
+import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
 
 export const UserPopover = (props) => {
   const {

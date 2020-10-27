@@ -1,8 +1,12 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { IoIosCash, IoIosCard, IoIosRadioButtonOn } from 'react-icons/io'
-import { FaStripe, FaCcStripe, FaStripeS } from 'react-icons/fa'
-import { GrStripe } from 'react-icons/gr'
+import IosCash from '@meronex/icons/ios/IosCash'
+import IosCard from '@meronex/icons/ios/IosCard'
+import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
+import FaStripe from '@meronex/icons/Fa/FaStripe'
+import FaCcStripe from '@meronex/icons/Fa/FaCcStripe'
+import FaStripeS from '@meronex/icons/Fa/FaStripeS'
+import GrStripe from '@meronex/icons/gr/GrStripe'
 import { PaymentOptions as PaymentOptionsController, useLanguage } from 'ordering-components'
 
 import { Modal } from '../Modal'
@@ -26,7 +30,7 @@ const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
 const getPayIcon = (method) => {
   switch (method) {
     case 1:
-      return <IoIosCash />
+      return <IosCash />
     case 22:
       return <FaStripe />
     case 28:
@@ -36,7 +40,7 @@ const getPayIcon = (method) => {
     case 32:
       return <GrStripe />
     default:
-      return <IoIosCard />
+      return <IosCard />
   }
 }
 
@@ -99,7 +103,7 @@ const PaymentOptionsUI = (props) => {
         <PayCardSelected>
           <CardItemContent>
             <span className='checks'>
-              <IoIosRadioButtonOn />
+              <IosRadioButtonOn />
             </span>
             <span className='brand'>
               {getIconCard(paymethodData?.card?.brand)}

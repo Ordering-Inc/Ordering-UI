@@ -19,7 +19,7 @@ import { useSession, useOrder, useLanguage } from 'ordering-components'
 
 import { Alert } from '../Confirm'
 import { useTheme } from 'styled-components'
-import { HiOutlineLocationMarker } from 'react-icons/hi'
+import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 
 export const HomeHero = (props) => {
   const {

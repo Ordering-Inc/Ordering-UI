@@ -1,5 +1,7 @@
 import React from 'react'
-import { FaCcMastercard, FaCcVisa, FaCreditCard } from 'react-icons/fa'
+import FaCcMastercard from '@meronex/icons/fa/FaCcMastercard'
+import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
+import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
 
 export const optimizeImage = (url, params, fallback) => {
   if (!url && fallback) return fallback
