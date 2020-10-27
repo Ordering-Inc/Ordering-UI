@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Messages as MessagesController,
   useUtils,
@@ -59,6 +59,7 @@ export const MessagesUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
+  const buttonRef = useRef(null)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -103,6 +104,7 @@ export const MessagesUI = (props) => {
     reader.readAsDataURL(files)
     reader.onload = () => {
       setImage(reader.result)
+      buttonRef.current.focus()
     }
     reader.onerror = error => {
       console.log(error)
@@ -353,6 +355,7 @@ export const MessagesUI = (props) => {
               <Button
                 circle
                 onClick={removeImage}
+                type='reset'
               >
                 {t('X', 'X')}
               </Button>
@@ -363,6 +366,7 @@ export const MessagesUI = (props) => {
               color='primary'
               type='submit'
               disabled={sendMessage.loading || (message === '' && !image)}
+              ref={buttonRef}
             >
               <IosSend />
               {sendMessage.loading ? (
