@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { FaHome, FaPlus, FaRegBuilding, FaRegHeart } from 'react-icons/fa'
-import { ImCompass } from 'react-icons/im'
-import { HiOutlineLocationMarker } from 'react-icons/hi'
+import FaHome from '@meronex/icons/fa/FaHome'
+import FaPlus from '@meronex/icons/fa/FaPlus'
+import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
+import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
+import ImCompass from '@meronex/icons/im/ImCompass'
+import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,

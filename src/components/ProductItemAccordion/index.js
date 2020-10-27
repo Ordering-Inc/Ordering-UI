@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react'
-import { TiPencil, IoIosArrowDown, VscTrash } from 'react-icons/all'
+import TiPencil from '@meronex/icons/ti/TiPencil'
+import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
+import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useConfig, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
@@ -151,7 +153,7 @@ export const ProductItemAccordion = (props) => {
               </span>
               {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
                 <p>
-                  <IoIosArrowDown className={`${setRotate}`} />
+                  <IosArrowDown className={`${setRotate}`} />
                 </p>
               )}
             </ProductPrice>

@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useConfig } from 'ordering-components'
-import { FiPhone, FaUserCircle, HiOutlineChat, BiCaretUp, RiUser2Fill } from 'react-icons/all'
+import FiPhone from '@meronex/icons/fi/FiPhone'
+import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
+import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
+import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
+import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'

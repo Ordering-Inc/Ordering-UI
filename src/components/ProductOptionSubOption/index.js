@@ -1,6 +1,9 @@
 import React from 'react'
 import { ProductOptionSuboption as ProductSubOptionController, useConfig } from 'ordering-components'
-import { BsCircleFill, BsCircleHalf, BsDashCircle, BsPlusCircle } from 'react-icons/bs'
+import BsCircleFill from '@meronex/icons/bs/BsCircleFill'
+import BsCircleHalf from '@meronex/icons/bs/BsCircleHalf'
+import BsDashCircle from '@meronex/icons/bs/BsDashCircle'
+import BsPlusCircle from '@meronex/icons/bs/BsPlusCircle'
 
 import {
   Container,
@@ -10,7 +13,10 @@ import {
   IconControl,
   Text
 } from './styles'
-import { MdCheckBox, MdCheckBoxOutlineBlank, MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md'
+import MdCheckBox from '@meronex/icons/md/MdCheckBox'
+import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
+import MdRadioButtonChecked from '@meronex/icons/md/MdRadioButtonChecked'
+import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
 
 const ProductOptionSubOptionUI = (props) => {
   const {
