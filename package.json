@@ -22,7 +22,6 @@
     "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
-    "@popperjs/core": "^2.4.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
     "cypress": "^4.11.0",
@@ -32,7 +31,6 @@
     "postcss-loader": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-popper": "^2.2.3",
     "react-router-dom": "^5.2.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
@@ -46,6 +44,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.4",
+    "@meronex/icons": "^4.0.0",
+    "@popperjs/core": "^2.5.3",
     "@sentry/react": "^5.25.0",
     "@sentry/tracing": "^5.25.0",
     "@stripe/react-stripe-js": "^1.1.2",
@@ -56,8 +56,8 @@
     "polished": "^3.6.6",
     "prop-types": "^15.7.2",
     "react-hook-form": "^6.8.1",
-    "react-icons": "^3.11.0",
     "react-loading-skeleton": "^2.1.1",
+    "react-popper": "^2.2.3",
     "styled-components": "^5.1.1"
   },
   "peerDependencies": {

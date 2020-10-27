@@ -2,7 +2,8 @@ import React from 'react'
 import { ProductIngredient as ProductIngredientController } from 'ordering-components'
 
 import { Container } from './styles'
-import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
+import MdCheckBox from '@meronex/icons/md/MdCheckBox'
+import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 
 const ProductIngredientUI = (props) => {
   const {

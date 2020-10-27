@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useConfig } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -37,7 +37,7 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [events] = useEvent()
   const [isCheckout, setIsCheckout] = useState(false)
-  const [, { parsePrice, parseNumber, parseDate }] = useConfig()
+  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const momentFormatted = !orderState?.option?.moment ? t('ASAP_ABBREVIATION', 'ASAP') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 

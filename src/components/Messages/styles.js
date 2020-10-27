@@ -162,6 +162,12 @@ export const BubbleBusines = styled.div`
     border-radius: 60px 60px 60px 0px;
     padding: 10px 30px 15px 30px;
   }
+  ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 0px 97px;
+      &[name=image]{
+      border-radius: 60px 60px 0px 60px;
+     }
+  `}
 `
 
 export const BubbleCustomer = styled.div`
@@ -179,17 +185,31 @@ export const BubbleCustomer = styled.div`
     border-radius: 60px 60px 0px 60px;
     padding: 10px 30px 15px 30px;
   }
+
+  ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 97px 0px;
+      &[name=image]{
+      border-radius: 60px 60px 60px 0px;
+     }
+  `}
+
 `
 
 export const SkeletonBubbleCustomer = styled.div`
   span{
     border-radius: 97px 97px 0px 97px;
+    ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 97px 0px;
+    `}
   }
 `
 
 export const SkeletonBubbleBusiness = styled.div`
   span{
     border-radius: 97px 97px 97px 0px;
+    ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 0px 97px;
+    `}
   }
 `
 

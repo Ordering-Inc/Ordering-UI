@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useConfig, useLanguage } from 'ordering-components'
+import { useUtils, useLanguage } from 'ordering-components'
 
 import {
   PaymentCashContainer,
@@ -20,7 +20,7 @@ export const PaymentOptionCash = (props) => {
   const [, t] = useLanguage()
 
   const { handleSubmit, register, errors } = useForm()
-  const [, { parsePrice }] = useConfig()
+  const [{ parsePrice }] = useUtils()
 
   const handleChangeCash = (e) => {
     let cash = parseFloat(e?.target?.value)

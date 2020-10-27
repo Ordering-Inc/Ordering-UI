@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
+import IosArrowForward from '@meronex/icons/ios/IosArrowForward'
+import IosArrowBack from '@meronex/icons/ios/IosArrowBack'
 import { DivContainer } from './styles'
 
 import { useTheme } from '../../contexts/ThemeContext'
@@ -76,11 +77,11 @@ export const AutoScroll = ({ children, categories, container }) => {
   return (
     <DivContainer>
       {
-        width < categoriesElement.offsetWidth + 50 ? <IoIosArrowBack className='left' onClick={() => scrolling('left')} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack className='left' onClick={() => scrolling('left')} /> : ''
       }
       {children}
       {
-        width < categoriesElement.offsetWidth + 50 ? <IoIosArrowForward className='right' onClick={() => scrolling()} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowForward className='right' onClick={() => scrolling()} /> : ''
       }
     </DivContainer>
   )

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
+import MdClose from '@meronex/icons/md/MdClose'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
   useOrder,
   useLanguage,
-  useConfig
+  useUtils
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import {
@@ -28,8 +29,10 @@ import {
   ModalIcon
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
-
-import { GrDeliver, FaStar, FiClock, VscLocation, MdClose } from 'react-icons/all'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import FaStar from '@meronex/icons/fa/FaStar'
+import FiClock from '@meronex/icons/fi/FiClock'
+import VscLocation from '@meronex/icons/vsc/VscLocation'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -46,7 +49,7 @@ export const BusinessInformationUI = (props) => {
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const [, t] = useLanguage()
-  const [, { parsePrice, parseDistance }] = useConfig()
+  const [{ parsePrice, parseDistance }] = useUtils()
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
