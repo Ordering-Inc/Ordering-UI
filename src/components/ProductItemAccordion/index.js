@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import TiPencil from '@meronex/icons/ti/TiPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
-import { useConfig, useLanguage, useOrder } from 'ordering-components'
+import { useUtils, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import {
@@ -38,7 +38,7 @@ export const ProductItemAccordion = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const [, { parsePrice }] = useConfig()
+  const [{ parsePrice }] = useUtils()
   const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')

@@ -7,7 +7,7 @@ import {
   useLanguage,
   useOrder,
   useEvent,
-  useConfig
+  useUtils
 } from 'ordering-components'
 
 import { scrollTo } from '../../utils'
@@ -61,7 +61,7 @@ const ProductOptionsUI = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
   const [events] = useEvent()
-  const [, { parsePrice }] = useConfig()
+  const [{ parsePrice }] = useUtils()
   const theme = useTheme()
 
   const closeModal = () => {

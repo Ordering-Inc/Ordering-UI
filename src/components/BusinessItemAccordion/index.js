@@ -3,7 +3,7 @@ import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import FiClock from '@meronex/icons/fi/FiClock'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
-import { useOrder, useLanguage, useConfig, useEvent } from 'ordering-components'
+import { useOrder, useLanguage, useUtils, useEvent } from 'ordering-components'
 
 import { convertHoursToMinutes } from '../../utils'
 
@@ -34,7 +34,7 @@ export const BusinessItemAccordion = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const [, { parsePrice }] = useConfig()
+  const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
 
   const [setActive, setActiveState] = useState('')

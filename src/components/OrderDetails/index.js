@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useConfig } from 'ordering-components'
+import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
@@ -58,7 +58,7 @@ const OrderDetailsUI = (props) => {
   const [openReview, setOpenReview] = useState(false)
   const theme = useTheme()
   const [events] = useEvent()
-  const [, { parsePrice, parseNumber }] = useConfig()
+  const [{ parsePrice, parseNumber }] = useUtils()
 
   const { order, loading, error } = props.order
 

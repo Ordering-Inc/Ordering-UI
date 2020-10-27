@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {
   Messages as MessagesController,
-  useConfig,
+  useUtils,
   useLanguage,
   useSession
 } from 'ordering-components'
@@ -38,7 +38,6 @@ import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import moment from 'moment' // REPLACE WITH TIMEAGO
 import { Alert } from '../Confirm'
 
 export const MessagesUI = (props) => {
@@ -59,7 +58,7 @@ export const MessagesUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
-  const [, { parseDate }] = useConfig()
+  const [{ parseDate, getTimeAgo }] = useUtils()
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -243,7 +242,7 @@ export const MessagesUI = (props) => {
                   {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
                   <strong>{parseDate(order.created_at)}</strong> {' '}
                   {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
-                  <TimeofSent>{moment.utc(order.created_at).fromNow()}</TimeofSent>
+                  <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
                 </BubbleConsole>
               </MessageConsole>
               {messages?.messages.map((message) => (
@@ -260,18 +259,14 @@ export const MessagesUI = (props) => {
                           </>
                         )}
                         <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
-                        <TimeofSent>
-                          {
-                            moment.utc(message.created_at).fromNow()
-                          }
-                        </TimeofSent>
+                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                       </BubbleConsole>
                     ) : (
                       <BubbleConsole>
                         <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
                         {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
                         {message.comment && (<><br /> {message.comment.length}</>)}
-                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                       </BubbleConsole>
                     )
                   )}
@@ -284,7 +279,7 @@ export const MessagesUI = (props) => {
                       <BubbleCustomer>
                         <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
                         {message.comment}
-                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                       </BubbleCustomer>
                     </MessageCustomer>
                   )}
@@ -298,7 +293,7 @@ export const MessagesUI = (props) => {
                             {message.comment}
                           </>
                         )}
-                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                       </BubbleCustomer>
                     </MessageCustomer>
                   )}
@@ -307,7 +302,7 @@ export const MessagesUI = (props) => {
                       <BubbleBusines>
                         <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
                         {message.comment}
-                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                       </BubbleBusines>
                     </MessageBusiness>
                   )}
@@ -321,7 +316,7 @@ export const MessagesUI = (props) => {
                             {message.comment}
                           </>
                         )}
-                        <TimeofSent>{moment.utc(message.created_at).fromNow()}</TimeofSent>
+                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                       </BubbleBusines>
                     </MessageBusiness>
                   )}

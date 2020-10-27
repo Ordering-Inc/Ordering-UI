@@ -9,7 +9,7 @@ import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 
-import { useConfig, useOrder } from 'ordering-components'
+import { useUtils, useOrder } from 'ordering-components'
 
 import { optimizeImage, convertHoursToMinutes } from '../../utils'
 
@@ -35,7 +35,7 @@ export const BusinessBasicInformation = (props) => {
 
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
 
-  const [, { parsePrice, parseDistance }] = useConfig()
+  const [{ parsePrice, parseDistance }] = useUtils()
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return 'none'
