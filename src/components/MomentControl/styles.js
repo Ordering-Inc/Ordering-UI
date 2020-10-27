@@ -13,6 +13,9 @@ export const Days = styled.div`
   overflow: hidden;
   cursor: pointer;
   margin-bottom: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+  position: relative;
 `
 
 export const ContentDay = styled.div`
@@ -32,6 +35,30 @@ export const Day = styled.div`
   align-items: center;
   font-weight: 300;
   color: #9A9A9A;
+  width: calc(100% / 6);
+
+  /**
+    ** Modify this validation in case the dates to display change
+   */
+  @media (max-width: 425px) {
+    width: calc(100% / 3);
+    &:nth-child(1) div,
+    &:nth-child(2) div,
+    &:nth-child(3) div {
+      margin-bottom: 5px;
+    }
+
+    &:nth-child(3) div,
+    &:nth-child(6) div {
+      border-right: 0;
+    }
+
+    &:nth-child(4) div,
+    &:nth-child(5) div,
+    &:nth-child(6) div {
+      margin-top: 5px;
+    }
+  }
 
   ${({ selected }) => selected && css`
     font-weight: 400;
@@ -85,4 +112,19 @@ export const Hour = styled.div`
     border-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
   `}
+`
+
+export const MiddleLine = styled.span`
+  display: none;
+  width: 80%;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: ${props => props.theme.colors.disabled};
+
+  @media (max-width: 425px) {
+    display: block;
+  }
 `
