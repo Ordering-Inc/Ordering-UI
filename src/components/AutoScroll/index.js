@@ -23,7 +23,7 @@ export const AutoScroll = ({ children, categories, container }) => {
     const element = document.getElementById(categories)
     setCategoriesElement(element)
     handleScroll()
-  }, [categoriesElement, width])
+  }, [categoriesElement, width, theme?.rtl])
 
   const handleScroll = () => {
     const containerElement = document.getElementById(container)
