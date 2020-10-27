@@ -136,6 +136,9 @@ export const BubbleConsole = styled.div`
   height: auto;
   overflow: hidden;
   overflow-wrap: break-word;
+  @media (max-width: 1024px){
+    max-width: 40%
+  }
 `
 
 export const BubbleBusines = styled.div`
@@ -150,6 +153,9 @@ export const BubbleBusines = styled.div`
   &[name=image]{
     border-radius: 40px 40px 40px 0px;
     width: 100%;
+  }
+  @media (max-width: 1024px){
+    max-width: 60%
   }
 `
 
@@ -168,6 +174,9 @@ export const BubbleCustomer = styled.div`
   &[name=image]{
     border-radius: 40px 40px 0px 40px;
     width: 100%;
+  }
+  @media (max-width: 1024px){
+    max-width: 60%
   }
 `
 
@@ -216,8 +225,6 @@ export const TimeofSent = styled.p`
 `
 
 export const SendForm = styled.div`
-  display: flex;
-  flex-direction: column;
   padding: 10px 20px;
   background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
@@ -233,6 +240,12 @@ export const Send = styled.form`
     padding-top: 10px;
     padding-bottom: 10px;
   }      
+  @media (max-width: 640px){
+    input{
+      flex: initial;
+      width: 60%;
+    }
+  }
 `
 
 export const SendImage = styled.label`
@@ -244,8 +257,8 @@ export const SendImage = styled.label`
   }
   svg {
     color: #CFD0D0;
-    width: 100%;
-    height: 100%;
+    width: 25px;
+    height: 25px;
     cursor: pointer
   }
 `
@@ -260,6 +273,7 @@ export const WrapperDeleteImage = styled.div`
 `
 
 export const WrapperSendMessageButton = styled.div`
+  white-space: nowrap;
   button{
     padding-top: 7px;
     padding-bottom: 7px;

@@ -94,7 +94,6 @@ export const MessagesUI = (props) => {
   }
 
   const removeImage = (e) => {
-    console.log(e)
     setImage(null)
   }
 
