@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { TiPencil, VscTrash, IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/all'
+import TiPencil from '@meronex/icons/ti/TiPencil'
+import VscTrash from '@meronex/icons/vsc/VscTrash'
+import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
+import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 
 import {
   AddressList as AddressListController,
@@ -125,7 +128,7 @@ const AddressListUI = (props) => {
                 <AddressItem key={address.id}>
                   <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                     <span className='radio'>
-                      {address.address === orderState?.options?.address?.address ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}
+                      {address.address === orderState?.options?.address?.address ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>

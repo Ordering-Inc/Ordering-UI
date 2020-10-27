@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { VscWarning } from 'react-icons/vsc'
+import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useConfig } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'

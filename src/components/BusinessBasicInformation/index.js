@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { FiClock } from 'react-icons/fi'
-import { VscLocation } from 'react-icons/vsc'
-import { GrDeliver } from 'react-icons/gr'
-import { FaStar } from 'react-icons/fa'
-import { BsExclamationCircle } from 'react-icons/bs'
+import FiClock from '@meronex/icons/fi/FiClock'
+import VscLocation from '@meronex/icons/vsc/VscLocation'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import FaStar from '@meronex/icons/fa/FaStar'
+import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
+
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 

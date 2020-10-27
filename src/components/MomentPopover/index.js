@@ -3,7 +3,7 @@ import { useOrder, useLanguage, useConfig } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
 import { MomentControl } from '../MomentControl'
-import { FaRegClock } from 'react-icons/fa'
+import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
 export const MomentPopover = (props) => {
   const { open } = props
