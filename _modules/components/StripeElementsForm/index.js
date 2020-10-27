@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _stripeJs = require("@stripe/stripe-js");
+var _pure = require("@stripe/stripe-js/pure");
 
 var _reactStripeJs = require("@stripe/react-stripe-js");
 
@@ -51,7 +51,7 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
       t = _useLanguage2[1];
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, publicKey ? /*#__PURE__*/_react.default.createElement(_reactStripeJs.Elements, {
-    stripe: (0, _stripeJs.loadStripe)(publicKey)
+    stripe: (0, _pure.loadStripe)(publicKey)
   }, /*#__PURE__*/_react.default.createElement(_CardForm.CardForm, {
     handleSource: handleSource,
     onNewCard: onNewCard,
