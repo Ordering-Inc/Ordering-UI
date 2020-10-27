@@ -32,6 +32,10 @@ export const UserDetailsContainer = styled.div`
       margin: 0px;
       font-size: 24px;
     }
+
+    @media (min-width: 993px) {
+      text-align: center;
+    }
   }
 
   @media (max-width: 760px) {

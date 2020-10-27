@@ -6,7 +6,8 @@ import {
   AddressContainer,
   Header,
   Map,
-  Text
+  Text,
+  WrappMap
 } from './styles'
 
 import { Modal } from '../Modal'
@@ -62,9 +63,11 @@ const AddressDetailsUI = (props) => {
         </Text>
       </Header>
       {showMap && (
-        <Map>
-          <img src={googleMapsUrl} alt='google-maps-location' />
-        </Map>
+        <WrappMap>
+          <Map>
+            <img src={googleMapsUrl} alt='google-maps-location' />
+          </Map>
+        </WrappMap>
       )}
 
       <Modal

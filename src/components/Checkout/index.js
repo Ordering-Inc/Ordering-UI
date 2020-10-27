@@ -49,6 +49,14 @@ const CheckoutUI = (props) => {
   const [, t] = useLanguage()
   const [errorCash, setErrorCash] = useState(true)
 
+  const mapConfigs = {
+    mapZoom: 17,
+    mapSize: {
+      width: 640,
+      height: 190
+    }
+  }
+
   return (
     <Container>
       <WrappContainer>
@@ -78,7 +86,7 @@ const CheckoutUI = (props) => {
           <AddressDetails
             businessId={cart?.business_id}
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-            mapZoom={15}
+            mapConfigs={mapConfigs}
           />
         )}
 
