@@ -158,6 +158,7 @@ export const BubbleCustomer = styled.div`
   padding: 10px 25px 10px 25px;
   max-width: 40%;
   min-width: 80px;
+  height: auto;
   margin-bottom: 10px;
   background: #D81212;
   color: white;
@@ -184,10 +185,10 @@ export const SkeletonBubbleBusiness = styled.div`
 
 export const ChatImage = styled.div`
   width: 100%;
+  height: 300px;
   img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
     vertical-align: middle;
   }
 `
