@@ -23,7 +23,8 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { ProfileOptions } from './ProfileOptions'
 
-import { GiPhotoCamera, BiImage } from 'react-icons/all'
+import GiPhotoCamera from '@meronex/icons/gi/GiPhotoCamera'
+import BiImage from '@meronex/icons/bi/BiImage'
 
 const UserProfileFormUI = (props) => {
   const { hanldeChangeInput, handleButtonUpdateClick, handlechangeImage, formState, showField, validationFields, isRequiredField, useChekoutFileds } = props

@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import notImage from '../../../template/assets/not-image.png'
 
 import {
   ProductForm as ProductOptions,
   useSession,
   useLanguage,
   useOrder,
-  useEvent
+  useEvent,
+  useUtils
 } from 'ordering-components'
 
-import { formatPrice, scrollTo } from '../../utils'
+import { scrollTo } from '../../utils'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../ProductIngredient'
@@ -33,6 +33,7 @@ import {
   ProductComment,
   SkeletonBlock
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const ProductOptionsUI = (props) => {
   const {
@@ -60,6 +61,8 @@ const ProductOptionsUI = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
   const [events] = useEvent()
+  const [{ parsePrice }] = useUtils()
+  const theme = useTheme()
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -110,7 +113,7 @@ const ProductOptionsUI = (props) => {
         <>
           <WrapperImage>
             <ProductImage>
-              <img src={product?.images || notImage} alt='product' />
+              <img src={product?.images || theme.images?.dommies?.product} alt='product' />
             </ProductImage>
           </WrapperImage>
           <ProductInfo>
@@ -209,7 +212,7 @@ const ProductOptionsUI = (props) => {
                       {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
                     </span>
                   )}
-                  <span>{productCart.total && formatPrice(productCart.total)}</span>
+                  <span>{productCart.total && parsePrice(productCart.total)}</span>
                 </Button>
               ) : (
                 <Button

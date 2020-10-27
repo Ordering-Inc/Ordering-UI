@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { FiClock } from 'react-icons/fi'
-import { VscLocation } from 'react-icons/vsc'
-import { GrDeliver } from 'react-icons/gr'
-import { FaStar } from 'react-icons/fa'
-import { BsExclamationCircle } from 'react-icons/bs'
+import FiClock from '@meronex/icons/fi/FiClock'
+import VscLocation from '@meronex/icons/vsc/VscLocation'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import FaStar from '@meronex/icons/fa/FaStar'
+import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
+
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 
-import { useLanguage, useOrder } from 'ordering-components'
+import { useUtils, useOrder } from 'ordering-components'
 
-import { optimizeImage, formatPrice, convertHoursToMinutes } from '../../utils'
+import { optimizeImage, convertHoursToMinutes } from '../../utils'
 
 import {
   BusinessContainer,
@@ -29,13 +30,12 @@ export const BusinessBasicInformation = (props) => {
     businessState
   } = props
   const { business, loading } = businessState
-  const [, t] = useLanguage()
 
   const [orderState] = useOrder()
 
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
 
-  const formatNumber = (num) => Math.round(num * 1e2) / 1e2
+  const [{ parsePrice, parseDistance }] = useUtils()
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return 'none'
@@ -102,7 +102,7 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <p>
                   <VscLocation />
-                  {formatNumber(business?.distance) || 0} {t('KM', 'km')}
+                  {parseDistance(business?.distance || 0)}
                 </p>
               ) : (
                 <Skeleton width={70} />
@@ -111,7 +111,7 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <p>
                   <GrDeliver />
-                  {business && formatPrice(business?.delivery_price || 0)}
+                  {business && parsePrice(business?.delivery_price || 0)}
                 </p>
               ) : (
                 <Skeleton width={70} />
@@ -141,8 +141,6 @@ export const BusinessBasicInformation = (props) => {
         <BusinessInformation
           business={business}
           getBusinessType={getBusinessType}
-          formatPrice={formatPrice}
-          formatNumber={formatNumber}
           optimizeImage={optimizeImage}
           onClose={setOpenBusinessInformation}
         />

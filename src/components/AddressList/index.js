@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { TiPencil, VscTrash, IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/all'
-
-import notFound from '../../../template/assets/not-found.svg'
+import TiPencil from '@meronex/icons/ti/TiPencil'
+import VscTrash from '@meronex/icons/vsc/VscTrash'
+import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
+import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 
 import {
   AddressList as AddressListController,
@@ -23,6 +24,7 @@ import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { Confirm } from '../Confirm'
+import { useTheme } from 'styled-components'
 
 const AddressListUI = (props) => {
   const {
@@ -41,6 +43,7 @@ const AddressListUI = (props) => {
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddessOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const theme = useTheme()
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -125,7 +128,7 @@ const AddressListUI = (props) => {
                 <AddressItem key={address.id}>
                   <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                     <span className='radio'>
-                      {address.address === orderState?.options?.address?.address ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}
+                      {address.address === orderState?.options?.address?.address ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>
@@ -145,7 +148,7 @@ const AddressListUI = (props) => {
             </AddressListUl>
           ) : (
             <WrappNotAddresses>
-              <img src={notFound} alt='notFound' />
+              <img src={theme.images?.general?.notFound} alt='Not Found' />
               <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
             </WrappNotAddresses>
           )}
@@ -154,7 +157,7 @@ const AddressListUI = (props) => {
         <>
           {addressList.error && addressList.error.length > 0 ? (
             addressList.error.map((e, i) => (
-              <p key={i}>{t('ERROR')}: [{e}]</p>
+              <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
             ))
           ) : (
             <AddressListUl>

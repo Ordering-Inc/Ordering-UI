@@ -4,7 +4,7 @@ import { AddressList } from '../AddressList'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
 import { AddressForm } from '../AddressForm'
-import { FaMapMarkerAlt } from 'react-icons/fa'
+import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 
 export const AddressesPopover = (props) => {
   const { open } = props
