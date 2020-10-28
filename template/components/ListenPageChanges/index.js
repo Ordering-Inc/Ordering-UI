@@ -19,17 +19,20 @@ export const ListenPageChanges = ({ children }) => {
     order_detail: '/orders/:orderId',
     checkout: '/checkout/:cartUuid',
     business: '/store/:store',
+    business_slug: '/:store',
     forgot_password: '/password/forgot'
   }
 
-  const handleGoToPage = ({ page, params = {}, replace = false }) => {
-    console.log(page, params, replace)
+  const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
     let path = routes[page]
     if (path) {
       Object.entries(params).forEach(([key, value]) => {
         path = path.replace(`:${key}`, value)
       })
-      history[replace ? 'reaplce' : 'push'](path)
+      if (search) {
+        path = `${path}${search}`
+      }
+      history[replace ? 'replace' : 'push'](path)
     }
   }
 
@@ -75,7 +78,6 @@ export const ListenPageChanges = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    console.log(theme.rtl, languageState?.language?.rtl)
     if (theme.rtl !== languageState?.language?.rtl) {
       merge({
         rtl: languageState?.language?.rtl
