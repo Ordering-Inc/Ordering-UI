@@ -1,8 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const MyOrdersContainer = styled.div`
-  background-color: #f8f8f8;
- 
+  @media(max-width: 768px){
+    padding: 0 10px
+  }
 `
 
 export const ImageContainer = styled.div`
@@ -16,12 +17,16 @@ export const ImageContainer = styled.div`
 export const MyOrdersTitle = styled.div`
   margin: 0 auto;
   width: 80%;
+  @media(max-width: 768px){
+    width: 100%;
+  }
 `
 
 export const ActiveOrders = styled.div`
   text-align: center;
   display: flex;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   width: auto;
   > :first-child {
     margin-left: 30px;
@@ -30,6 +35,11 @@ export const ActiveOrders = styled.div`
     width: 6px;
     height: 6px;
 }
+  @media(max-width: 768px){
+    > :first-child{
+      margin-left: 0;
+    }
+  }
 `
 
 export const Card = styled.div`
@@ -41,6 +51,10 @@ export const Card = styled.div`
   height: 250px;
   border-radius: 16px;
   text-align: left;
+  @media(max-width: 480px){
+    min-width: 300px;
+    width: 300px;
+  }
 `
 
 export const Map = styled.div`
@@ -70,6 +84,10 @@ export const Logo = styled.div`
     height: 100%;
     border-radius: 16px;
   }
+  @media (max-width: 480px){
+    width: 55px;
+    height: 55px;
+  }
 `
 
 export const PastLogo = styled.div`
@@ -81,13 +99,16 @@ export const PastLogo = styled.div`
     border-radius: 17px;
     object-fit: contain;
   }
+  @media (max-width: 480px){
+    width: 55px;
+  }
 `
 
 export const BusinessInformation = styled.div`
   display: inline-flex;
   flex-direction: column;
   flex: 1;
-  padding: 0 10px;
+  padding-left: 10px;
   h5 {
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
@@ -96,13 +117,25 @@ export const BusinessInformation = styled.div`
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
     color : #9A9A9A;
+    white-space: nowrap;
   }
   p[name='view_order'] {
     color: #D81313;
     cursor: pointer;
     text-decoration: none;
   }
-  
+  @media(max-width: 768px){
+    font-size: 0.9em;
+  } 
+  @media(max-width: 480px){
+    h5 {
+    margin-block-end: 0;
+    margin-block-start: 0;
+    }
+    p{
+      font-size: 0.9em;
+    }
+  }
 `
 
 export const OpenOrder = styled.div`
@@ -112,6 +145,11 @@ export const OpenOrder = styled.div`
   button {
     width: 100%;
     height: 100%;
+  }
+  @media(max-width: 480px){
+    button{
+      font-size: 0.8em;
+    }
   }
 `
 export const Price = styled.div`
@@ -127,6 +165,11 @@ export const Price = styled.div`
     margin-block-start: 1em;
     color: #ff9300;
   }
+  @media (max-width: 640px){
+    p{
+      font-size: 0.8em;
+    }
+  }
 `
 export const OrdersPast = styled.div`
   width: 80%;
@@ -134,20 +177,30 @@ export const OrdersPast = styled.div`
   flex-direction: column-reverse;
   margin: 0 auto;
   div:last-child{
-    border-bottom: none;
+    border-top: none;
   }
   p{
     margin-block-end: 0;
     margin-block-start: 0;
     color: #9A9A9A
   }
+  @media(max-width: 768px){
+    width: 100%;
+  }
+  @media(max-width: 480px){
+    div{
+      border: none;
+    }
+  }
 `
 export const IndividualOrderPast = styled.div`
   width: 100%;
   display: flex;
   height: 140px;
-  border-bottom: 1px solid #ccc;
-  
+  border-top: 1px solid #ccc;
+  @media(max-width: 768px){
+    height: 100px;
+  }
 `
 export const OrderPastContent = styled.div`
   display: flex;
@@ -172,8 +225,28 @@ export const Reorder = styled.div`
     margin: 5px 0;
     width: 60%
   }
-  @media (max-width: 640px){
-    flex: 1;
+  @media (max-width: 1024px){
+    button{
+      width: 80%;
+    }
+  }
+  @media (max-width: 768px){
+    button{
+      width: 90%;
+    }
+  }
+  @media (max-width: 578px){
+    button{
+      width: 100%;
+    }
+  }
+  @media (max-width: 480px){
+    width: 90px;
+    font-size: 0.8em;
+    button{
+      width: 90%;
+      font-size: 0.9em;
+    }
   }
 `
 
@@ -190,22 +263,33 @@ export const SkeletonCard = styled.div`
 
 export const SkeletonMap = styled.div`
   border-radius: 16px;
+  span{
+    width: 400px;
+    height: 100px;
+  }
+  @media(max-width: 480px){
+    span{
+      width: 300px;
+    }
+  }
 `
 
 export const SkeletonContent = styled.div`
-    display: inline-flex;
-    width: 100%;
-    > *{
+  display: flex;
+  width: 100%;
+  > *{
       margin: 5px;
-    }
+  }
+`
+export const SkeletonPastContent = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 `
 export const SkeletonText = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left
-  ${props => props.theme?.rtl && css`
-    text-align: right;
-  `}
 `
 
 export const SkeletonOrdersPast = styled.div`
@@ -218,14 +302,32 @@ export const SkeletonOrdersPast = styled.div`
   }
 `
 
+export const SkeletonInformation = styled.div`
+  display: flex;
+  > *{
+      margin: 5px;
+    }
+`
+
 export const SkeletonReorder = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
   text-align: center;
-  left: 60%;
-  ${props => props.theme?.rtl && css`
-    left: initial;
-    right: 60%;
-  `}
+  align-items: center;
+  span:first-child span{
+    width: 80px;
+  }
+  span:last-child{
+    width: 150px;
+    height: 30px;
+  }
+  @media(max-width: 480px){
+    span:first-child span{
+      width: 40px;
+    }
+    span:last-child{
+      width: 75px;
+    }    
+  }
 `

@@ -27,6 +27,8 @@ import {
   SkeletonOrder,
   SkeletonCard,
   SkeletonMap,
+  SkeletonInformation,
+  SkeletonPastContent,
   SkeletonContent,
   SkeletonText,
   SkeletonOrdersPast,
@@ -118,7 +120,7 @@ export const MyOrdersUI = (props) => {
                     {[...Array(3)].map((item, i) => (
                       <SkeletonCard key={i}>
                         <SkeletonMap>
-                          <Skeleton width={400} height={100} />
+                          <Skeleton />
                         </SkeletonMap>
                         <SkeletonContent>
                           <div>
@@ -151,7 +153,7 @@ export const MyOrdersUI = (props) => {
               )
             ) : (
               <OrdersPast>
-                {!previousOrders.loading ? previousOrders.orders.map((order) => (
+                {!previousOrders.loading ? previousOrders.orders.map(order => (
                   <IndividualOrderPast key={order.id}>
                     <OrderPastContent>
                       <PastLogo>
@@ -172,20 +174,22 @@ export const MyOrdersUI = (props) => {
                   </IndividualOrderPast>
                 )) : ([...Array(3)].map((item, i) => (
                   <SkeletonOrdersPast key={i}>
-                    <SkeletonContent>
-                      <div>
-                        <Skeleton width={70} height={70} />
-                      </div>
-                      <SkeletonText>
-                        <Skeleton width={100} />
-                        <Skeleton width={120} />
-                        <Skeleton width={80} />
-                      </SkeletonText>
+                    <SkeletonPastContent>
+                      <SkeletonInformation>
+                        <div>
+                          <Skeleton width={70} height={70} />
+                        </div>
+                        <SkeletonText>
+                          <Skeleton width={100} />
+                          <Skeleton width={120} />
+                          <Skeleton width={80} />
+                        </SkeletonText>
+                      </SkeletonInformation>
                       <SkeletonReorder>
-                        <Skeleton width={80} />
-                        <Skeleton width={150} height={40} />
+                        <Skeleton />
+                        <Skeleton />
                       </SkeletonReorder>
-                    </SkeletonContent>
+                    </SkeletonPastContent>
                   </SkeletonOrdersPast>
                 )))}
               </OrdersPast>
