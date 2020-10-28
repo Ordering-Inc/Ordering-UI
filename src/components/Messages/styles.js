@@ -223,11 +223,12 @@ export const SkeletonBubbleBusiness = styled.div`
 
 export const ChatImage = styled.div`
   width: 100%;
-  height: 300px;
+  height: auto;
   img{
     width: 100%;
-    height: 100%;
+    height: auto;
     vertical-align: middle;
+    object-fit: contain;
   }
 `
 
