@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 // export const PopupBackDrop = styled.div`
 //   background-color: rgba(0, 0, 0, 0.4);
@@ -41,9 +41,17 @@ export const PopupActions = styled.div`
     height: 45px;
     &:nth-child(1) {
       margin-right: 25px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 25px;
+        margin-right: 0; 
+      `}  
     }
     &:last-child {
-      margin-right: 0;
+      ${props => props.theme?.rtl ? css`
+        margin-left: 0;
+      ` : css`
+        margin-right: 0;
+      `}  
     }
   }
 `
@@ -54,6 +62,9 @@ export const PopupTitle = styled.h2`
   color: #010300;
   opacity: 1;
   margin-top: 0px;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}  
 `
 
 export const PopupContent = styled.div`
@@ -61,8 +72,15 @@ export const PopupContent = styled.div`
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}  
   ul {
     padding-left: 30px;
+    ${props => props.theme?.rtl && css`
+      padding-right: 30px;
+      padding-left: 0;
+    `}
     li {
       margin-top: 7px;
       margin-bottom: 7px;
@@ -74,4 +92,7 @@ export const PopupIcon = styled.span`
   float: right;
   font-size: 30px;
   cursor: pointer;
+  ${props => props.theme?.rtl && css`
+    float: left;
+  `}
 `

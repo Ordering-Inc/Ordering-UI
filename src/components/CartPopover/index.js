@@ -17,7 +17,7 @@ export const CartPopover = (props) => {
   const popperElement = useRef()
   const arrowElement = useRef()
   const popper = usePopper(referenceElement.current, popperElement.current, {
-    placement: 'auto',
+    placement: theme?.rtl ? 'bottom' : 'auto',
     modifiers: [
       { name: 'arrow', options: { element: arrowElement.current } },
       {

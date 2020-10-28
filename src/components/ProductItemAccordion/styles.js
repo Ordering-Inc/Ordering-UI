@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const AccordionSection = styled.div`
   display: flex;
@@ -25,6 +25,10 @@ const AccordionStyled = styled.div`
   .accordion__icon {
     margin-left: auto;
     transition: transform 0.6s ease;
+    ${props => props.theme?.rtl && css`
+      margin-right: auto;
+      margin-left: initial;
+    `}
   }
 `
 
@@ -93,6 +97,11 @@ export const ContentInfo = styled.div`
     width: 60%;
   }
 
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0px;
+  `}
+
   h3 {
     font-size: 18px;
     margin: 0px;
@@ -119,6 +128,10 @@ export const ContentInfo = styled.div`
           font-size: 20px;
           &:nth-child(1) {
             margin-right: 3px;
+            ${props => props.theme?.rtl && css`
+              margin-left: 3px;
+              margin-right: 0px;
+            `}
           }
         }
       }
@@ -145,7 +158,10 @@ export const AccordionText = styled.div`
 
 export const ProductComment = styled.div`
   padding-left: 40px;
-
+  ${props => props.theme?.rtl && css`
+    padding-right: 40px;
+    padding-left: 0px;
+  `}
   p {
     font-weight: bold;
     margin: 0px;
@@ -158,6 +174,9 @@ export const ProductComment = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    ${props => props.theme?.rtl && css`
+      margin: 0px 40px 0px 20px
+    `}
   }
 `
 
@@ -208,6 +227,10 @@ export const ProductActionsEdit = styled.span`
     font-size: 20px;
     margin-right: 5px;
     cursor: pointer;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
   }
 `
 
@@ -266,6 +289,10 @@ export const ProductSelect = styled.select`
   font-size: 20px;
   outline: none;
   margin-right: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 5px;
+    margin-right: 0px;
+  `}
 `
 
 export const ProductNotAvailable = styled.span`
@@ -277,6 +304,10 @@ export const ProductOptionsList = styled.ul`
 
   .suboption {
     margin-left: -25px;
+    ${props => props.theme?.rtl && css`
+      margin-right: -25px;
+      margin-left: 0px;
+  `}
   }
 
   p:nth-child(1) {
@@ -294,9 +325,17 @@ export const ProductOptionsList = styled.ul`
 
   li.ingredient {
     padding-left: 15px;
+    ${props => props.theme?.rtl && css`
+      padding-right: 15px;
+      padding-left: 0px;
+    `}
   }
 `
 
 export const ProductQuantity = styled.span`
   margin-right: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 5px;
+    margin-right: 0px;
+  `}
 `

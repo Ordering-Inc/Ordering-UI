@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const PaymentCashContainer = styled.div`
   margin: 20px 0px 0px;
@@ -11,6 +11,10 @@ export const FormCash = styled.form`
   label {
     font-size: 18px;
     margin-right: 20px;
+    ${props => props.theme?.rtl && css`
+        margin-left: 20px;
+        margin-right: 0;
+    `}
   }
 
   @media (max-width: 380px) {

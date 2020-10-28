@@ -61,11 +61,20 @@ export const Menu = styled.div`
   }
 
   > :first-child {
-    margin-left: 10px;
+      margin-left: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 10px;
+      margin-left: 0px;
+    `}
   }
 
   > :last-child {
+    
     margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+    `}
   }
 
   @media (max-width: 820px) {

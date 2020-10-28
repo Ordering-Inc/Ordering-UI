@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const FooterContainer = styled.div`
   display: flex;
@@ -9,6 +9,10 @@ export const FooterContainer = styled.div`
   text-align: left;
   padding: 30px 0 45px 0;
   flex-wrap: wrap;
+
+  ${props => props.theme?.rtl && css`
+      text-align: right;
+    `} 
 
   > * {
     margin: 0 auto;
@@ -23,6 +27,10 @@ export const FooterContainer = styled.div`
 
   > :first-child{
     margin-left: 10%
+    ${props => props.theme?.rtl && css`
+      margin-right: 10%;
+      margin-left: 0;
+    `} 
   }
   
   @media (max-width: 980px){
@@ -35,6 +43,10 @@ export const FooterContainer = styled.div`
     }
     > :first-child{
     margin-left: auto
+    ${props => props.theme?.rtl && css`
+      margin-right: auto;
+      margin-left: initial;
+    `} 
   }
   }
 `

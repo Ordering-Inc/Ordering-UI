@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
@@ -18,6 +18,10 @@ export const HeaderItem = styled.div`
       justify-content: center;
       align-items: center;
       font-size: 10px;
+      ${props => props.theme?.rtl && css`
+        left: 0;
+        right: initial;
+    `} 
     }
     svg {
       color: ${props => props.theme.colors.primary};

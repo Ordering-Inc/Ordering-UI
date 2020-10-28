@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
   background: '#F8F8F8'
@@ -21,5 +21,9 @@ export const ProductsListing = styled.div`
 export const WrapAllCategories = styled.div`
   h3 {
     margin-left: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 10px;
+      margin-left: 0;
+    `}
   }
 `

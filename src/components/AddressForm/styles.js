@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const FormActions = styled.div`
   padding: 10px 0px;
@@ -85,7 +85,10 @@ export const FormControl = styled.form`
       border-width: 1px;
       border-color: ${props => props.theme.colors.primary};
       outline: none;
-
+      ${props => props.theme?.rtl && css`
+        left: 0;
+        right: initial; 
+      `}
       svg {
         color: ${props => props.theme.colors.primary};
         font-size: 20px;
@@ -120,6 +123,10 @@ export const WrapAddressInput = styled.div`
     top: 21px;
     left: 10px;
     font-size: 20px;
+    ${props => props.theme?.rtl && css`
+      right: 10px;
+      left: initial;
+    `}
   }
 
   input {
@@ -127,6 +134,9 @@ export const WrapAddressInput = styled.div`
     background-repeat: no-repeat !important;
     background-size: 13px !important;
     padding: 7px 15px 7px 30px !important;
+    ${props => props.theme?.rtl && css`
+      padding: 7px 30px 7px 15px !important;
+    `}
   }
 `
 

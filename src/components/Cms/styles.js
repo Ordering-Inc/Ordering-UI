@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const CmsError = styled.div`
   display: flex;
@@ -39,11 +39,19 @@ export const SkeletonInformation = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 10px
+  margin-right: 10px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 10px;
+    margin-right: 0;
+  `}  
 `
 
 export const SkeletonSide = styled.div`
   width: 30%;
   height: 100%;
-  margin-left: 10px
+  margin-left: 10px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0;    
+  `}  
 `
