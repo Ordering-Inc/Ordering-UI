@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const MyOrdersContainer = styled.div`
   @media(max-width: 768px){
@@ -30,6 +30,10 @@ export const ActiveOrders = styled.div`
   width: auto;
   > :first-child {
     margin-left: 30px;
+    ${props => props.theme?.rtl && css`
+    margin-left: 0;
+    margin-right: 30px;
+  `}
   };
   ::-webkit-scrollbar {
     width: 6px;
@@ -37,7 +41,11 @@ export const ActiveOrders = styled.div`
 }
   @media(max-width: 768px){
     > :first-child{
-      margin-left: 0;
+      ${props => props.theme?.rtl ? css`
+        margin-right: 0;
+      ` : css`
+        margin-left: 0;
+      `}
     }
   }
 `
@@ -51,6 +59,9 @@ export const Card = styled.div`
   height: 250px;
   border-radius: 16px;
   text-align: left;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
   @media(max-width: 480px){
     min-width: 300px;
     width: 300px;
@@ -109,6 +120,10 @@ export const BusinessInformation = styled.div`
   flex-direction: column;
   flex: 1;
   padding-left: 10px;
+  ${props => props.theme?.rtl && css`
+    padding-right: 10px;
+    padding-left: 0;
+  `}
   h5 {
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
@@ -290,6 +305,9 @@ export const SkeletonText = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
 `
 
 export const SkeletonOrdersPast = styled.div`
