@@ -170,17 +170,17 @@ export const App = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
+                  <Route path='/checkout/:cartUuid?'>
+                    {auth
+                      ? <CheckoutPage />
+                      : <Redirect to='/login' />}
+                  </Route>
                   <Route exact path='/:store'>
                     <BusinessProductsList />
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     {auth
                       ? <OrderDetailsPage />
-                      : <Redirect to='/login' />}
-                  </Route>
-                  <Route path='/checkout/:cartUuid?'>
-                    {auth
-                      ? <CheckoutPage />
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/pages/:pageSlug'>

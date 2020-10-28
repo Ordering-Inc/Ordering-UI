@@ -69,7 +69,7 @@ export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0px 0px;
+  margin: 20px 0px 10px;
 
   button {
     width: 70%;
