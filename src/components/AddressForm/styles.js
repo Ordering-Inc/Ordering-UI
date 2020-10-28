@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import locationIcon from '../../../template/assets/location-marker.svg'
 
 export const FormActions = styled.div`
   padding: 10px 0px;
@@ -77,14 +76,15 @@ export const FormControl = styled.form`
       align-items: center;
       background: #FFF;
       padding: 0;
-      width: 40px;
-      height: 40px;
+      width: 43px;
+      height: 43px;
       line-height: 34px;
       text-align: center;
       border-radius: 50%;
       border-style: solid;
       border-width: 1px;
       border-color: ${props => props.theme.colors.primary};
+      outline: none;
 
       svg {
         color: ${props => props.theme.colors.primary};
@@ -110,8 +110,15 @@ export const WrapAddressInput = styled.div`
     padding: 0px 10px;
   }
 
+  svg {
+    position: absolute;
+    color: #9A9A9A;
+    top: 21px;
+    left: 10px;
+    font-size: 20px;
+  }
+
   input {
-    background-image: url(${locationIcon}) !important;
     background-position: left 10px center !important;
     background-repeat: no-repeat !important;
     background-size: 13px !important;
@@ -133,15 +140,15 @@ export const AddressTagSection = styled.div`
     height: 46px;
 
     img {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
     }
 
     span {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 32px;
+      font-size: 22px;
     }
   }
 

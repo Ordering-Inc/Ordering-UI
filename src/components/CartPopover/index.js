@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { IoIosBasket } from 'react-icons/io'
+import IosBasket from '@meronex/icons/ios/IosBasket'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -9,14 +9,15 @@ import {
   WrappNotCarts
 } from './styles'
 import { useOrder, useLanguage } from 'ordering-components'
-import notFound from '../../../template/assets/not-found.svg'
 
 import { Cart } from '../Cart'
+import { useTheme } from 'styled-components'
 
 export const CartPopover = (props) => {
   const { open, auth } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const theme = useTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -69,7 +70,7 @@ export const CartPopover = (props) => {
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
         <span>
-          <IoIosBasket />
+          <IosBasket />
           {cartsWithProducts.length > 0 && <p>{cartsWithProducts.length}</p>}
         </span>
       </HeaderItem>
@@ -89,7 +90,7 @@ export const CartPopover = (props) => {
             ))}
           {cartsWithProducts.length === 0 && (
             <WrappNotCarts>
-              <img src={notFound} alt='notFound' />
+              <img src={theme.images?.general?.notFound} alt='Not Found' />
               <h1>{t('CART_ERROR', 'You don\'t have carts available')}</h1>
             </WrappNotCarts>
           )}

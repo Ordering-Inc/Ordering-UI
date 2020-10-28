@@ -1,7 +1,7 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { optimizeImage, formatPrice } from '../../utils'
-import { useLanguage, useConfig, useOrder } from 'ordering-components'
+import { optimizeImage } from '../../utils'
+import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
 
 import {
   CardContainer,
@@ -10,6 +10,7 @@ import {
   CardLogo,
   SoldOut
 } from './styles'
+import { useTheme } from 'styled-components'
 
 export const SingleProductCard = (props) => {
   const {
@@ -22,7 +23,9 @@ export const SingleProductCard = (props) => {
 
   const [, t] = useLanguage()
   const [stateConfig] = useConfig()
+  const [{ parsePrice }] = useUtils()
   const [orderState] = useOrder()
+  const theme = useTheme()
 
   const editMode = typeof product?.code !== 'undefined'
 
@@ -45,14 +48,17 @@ export const SingleProductCard = (props) => {
         {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
         {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
         {!isSkeleton ? (
-          <span>{formatPrice(product?.price)}</span>
+          <span>{parsePrice(product?.price)}</span>
         ) : (
           <Skeleton width={100} />
         )}
       </CardInfo>
       {!isSkeleton ? (
         <WrapLogo>
-          <CardLogo soldOut={isSoldOut || maxProductQuantity === 0} bgimage={optimizeImage(product?.images, 'h_200,c_limit')} />
+          <CardLogo
+            soldOut={isSoldOut || maxProductQuantity === 0}
+            bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
+          />
         </WrapLogo>
       ) : (
         <Skeleton height={75} width={75} />

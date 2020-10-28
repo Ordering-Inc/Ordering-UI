@@ -1,14 +1,8 @@
 import React from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage, useUtils } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 
-import deliver from '../../../template/assets/delivery-icon.svg'
-import crown from '../../../template/assets/crown.svg'
-import star from '../../../template/assets/star.svg'
-import locationMarker from '../../../template/assets/location-marker.svg'
-import clock from '../../../template/assets/clock.svg'
-
-import { convertHoursToMinutes } from '../../utils'
+import { convertHoursToMinutes, optimizeImage } from '../../utils'
 
 import {
   ContainerCard,
@@ -21,41 +15,39 @@ import {
   BusinessLogo,
   BusinessInfo,
   BusinessInfoItem,
-  BusinessName
+  BusinessName,
+  Categories,
+  Medadata
 } from './styles'
+import GrClock from '@meronex/icons/gr/GrClock'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import GrLocation from '@meronex/icons/gr/GrLocation'
+import GrStar from '@meronex/icons/gr/GrStar'
+import FaCrown from '@meronex/icons/fa/FaCrown'
 
 const BusinessControllerUI = (props) => {
   const {
     isSkeleton,
     business,
     getBusinessOffer,
-    formatNumber,
     orderState,
     handleClick
   } = props
 
   const [, t] = useLanguage()
+  const [{ parsePrice, parseDistance, parseNumber }] = useUtils()
 
   const types = ['food', 'laundry', 'alcohol', 'groceries']
-  const formatAmount = (amount = 0) => `$ ${amount.toFixed(2)}`
 
   const getBusinessType = () => {
-    if (Object.keys(business).length <= 0) return 'none'
-    const typeObj = types.map(t => {
-      return { [t]: business[t] }
-    }).reduce((r, c) => ({ ...r, ...c }), {})
-    const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])[0]
-    return businessType[0]
-  }
-
-  const optimizeImage = (url, params, fallback) => {
-    if (!url && fallback) return fallback
-    params = params && params.length > 0 ? `,${params}` : ''
-    if (url != null && url.indexOf('res.cloudinary.com') !== -1) {
-      var parts = url.split('upload')
-      url = `${parts[0]}upload/f_auto,q_auto${params}${parts[1]}`
-    }
-    return url
+    if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
+    const _types = []
+    types.forEach(type => {
+      if (business[type]) {
+        _types.push(t(type.toUpperCase(), type))
+      }
+    })
+    return _types.join(', ')
   }
 
   return (
@@ -68,10 +60,10 @@ const BusinessControllerUI = (props) => {
                 <BusinessTags>
                   {business?.featured &&
                     <span className='crown'>
-                      <img src={crown} alt='crown-icon' />
+                      <FaCrown />
                     </span>}
                   <div>
-                    {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || '$0.00'}</span>}
+                    {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
                     {!business?.open && <span>{t('PREORDER')}</span>}
                   </div>
                 </BusinessTags>
@@ -94,61 +86,53 @@ const BusinessControllerUI = (props) => {
                 <div>
                   {business?.name ? (
                     <BusinessName>{business?.name}</BusinessName>
-                    // <p className='bold'>{business?.name}</p>
                   ) : (
                     <Skeleton width={100} />
                   )}
                   {business?.reviews?.total > 0 ? (
-                    <p className='reviews'>
-                      <img src={star} alt='star-icon' />
-                      {business?.reviews?.total}
-                    </p>
+                    <div className='reviews'>
+                      <GrStar />
+                      <span>{parseNumber(business?.reviews?.total)}</span>
+                    </div>
                   ) : (
                     business?.reviews?.total !== 0 && <Skeleton width={50} />
                   )}
                 </div>
-                <div>
+                <Categories>
+                  {
+                    Object.keys(business).length > 0 ? (
+                      getBusinessType()
+                    ) : (
+                      <Skeleton width={100} />
+                    )
+                  }
+                </Categories>
+                <Medadata>
                   {Object.keys(business).length > 0 ? (
-                    <p>{getBusinessType()}</p>
-                  ) : (
-                    <Skeleton width={100} />
-                  )}
-                </div>
-                <div>
-                  {Object.keys(business).length > 0 ? (
-                    <>
-                      {orderState?.options?.type === 1 ? (
-                        <p className='bullet'>
-                          <img src={clock} alt='clock-icon' />
-                          {convertHoursToMinutes(business?.delivery_time) || <Skeleton width={100} />}
-                        </p>
-                      ) : (
-                        <p className='bullet'>
-                          <img src={clock} alt='clock-icon' />
-                          {convertHoursToMinutes(business?.pickup_time) || <Skeleton width={100} />}
-                        </p>
-                      )}
-                    </>
+                    <p className='bullet'>
+                      <GrClock />
+                      {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
+                    </p>
                   ) : (
                     <Skeleton width={70} />
                   )}
                   {business?.distance >= 0 ? (
                     <p className='bullet'>
-                      <img src={locationMarker} alt='location-icon' />
-                      {formatNumber(business?.distance)} KM
+                      <GrLocation />
+                      {parseDistance(business?.distance)}
                     </p>
                   ) : (
                     <Skeleton width={70} />
                   )}
                   {business?.delivery_price >= 0 ? (
                     <p>
-                      <img src={deliver} alt='deliver-icon' />
-                      {business && formatAmount(business?.delivery_price)}
+                      <GrDeliver />
+                      {business && parsePrice(business?.delivery_price)}
                     </p>
                   ) : (
                     <Skeleton width={70} />
                   )}
-                </div>
+                </Medadata>
               </BusinessInfoItem>
             </BusinessInfo>
           </BusinessContent>

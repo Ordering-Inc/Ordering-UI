@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useLanguage } from 'ordering-components'
-
-import { formatPrice } from '../../utils'
+import { useUtils, useLanguage } from 'ordering-components'
 
 import {
   PaymentCashContainer,
@@ -22,6 +20,7 @@ export const PaymentOptionCash = (props) => {
   const [, t] = useLanguage()
 
   const { handleSubmit, register, errors } = useForm()
+  const [{ parsePrice }] = useUtils()
 
   const handleChangeCash = (e) => {
     let cash = parseFloat(e?.target?.value)
@@ -60,7 +59,7 @@ export const PaymentOptionCash = (props) => {
           <Input
             name='cash'
             type='number'
-            placeholder='$0.00'
+            placeholder='0'
             onChange={handleChangeCash}
             ref={
               register({
@@ -75,7 +74,7 @@ export const PaymentOptionCash = (props) => {
           <ErrorText>{t('FIELD_REQUIRED', 'This field is required')}</ErrorText>
         )}
         {errors.cash && errors.cash.type === 'validate' && (
-          <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: {formatPrice(orderTotal)}</ErrorText>
+          <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: {parsePrice(orderTotal)}</ErrorText>
         )}
       </FormCash>
     </PaymentCashContainer>

@@ -1,6 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
-import orderBackground from '../../../template/assets/order-background.png'
+import styled, { css, useTheme } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -32,8 +31,9 @@ const HeaderStyled = styled.div`
 `
 
 export const Header = (props) => {
+  const theme = useTheme()
   const style = {}
-  style.backgroundImage = `url(${orderBackground})`
+  style.backgroundImage = `url(${theme.images?.general?.orderDetailsHeader})`
 
   return (
     <HeaderStyled style={style}>
@@ -343,6 +343,19 @@ export const OrderCustomer = styled.div`
   display: flex;
   margin: 10px 0px 20px;
   width: 100%;
+
+  div.photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+    }
+  }
+
 `
 
 export const PhotoBlock = styled.img`
@@ -383,6 +396,19 @@ export const OrderDriver = styled(OrderCustomer)`
 export const WrapperDriver = styled.div`
   display: flex;
   width: 100%;
+
+  div.photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+    }
+  }
+
 `
 
 export const OrderProducts = styled(OrderCustomer)`

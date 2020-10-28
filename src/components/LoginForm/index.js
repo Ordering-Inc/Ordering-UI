@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import {
   LoginForm as LoginFormController,
   useLanguage,
-  useConfig,
+  useUtils,
   useSession
 } from 'ordering-components'
 import { Alert } from '../Confirm'
@@ -39,7 +39,7 @@ const LoginFormUI = (props) => {
     isPopup
   } = props
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
+  const [{ configs }] = useUtils()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, sessionDispatch] = useSession()

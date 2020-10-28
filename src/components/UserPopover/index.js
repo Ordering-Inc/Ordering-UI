@@ -3,10 +3,16 @@ import { useLanguage, useSession, LogoutAction as LogoutActionController, useEve
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow, PopoverList, PopoverListItem, PopoverListLink } from './styles'
 import { DropDownCircleImage } from '../Dropdown/style'
-import { FaUserAlt, FaRegAddressCard, FaRegListAlt, FaSignOutAlt } from 'react-icons/fa'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
+import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
+import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
 
 export const UserPopover = (props) => {
-  const { open } = props
+  const {
+    open,
+    isHome
+  } = props
   const [sessionState] = useSession()
   const [, t] = useLanguage()
   const [events] = useEvent()
@@ -57,8 +63,16 @@ export const UserPopover = (props) => {
   }
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>
-        <DropDownCircleImage src={sessionState.user.photo} fallback={<FaUserAlt />} />
+      <HeaderItem
+        isPhoto={sessionState?.user?.photo}
+        isHome={isHome}
+        ref={referenceElement}
+        onClick={props.onClick}
+      >
+        <DropDownCircleImage
+          src={sessionState?.user?.photo}
+          fallback={<FaUserAlt />}
+        />
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
