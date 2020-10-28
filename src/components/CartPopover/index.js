@@ -8,11 +8,14 @@ import {
 } from './styles'
 
 import { useOrder } from 'ordering-components'
+import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
 
 export const CartPopover = (props) => {
   const { open, auth } = props
   const [orderState] = useOrder()
+  const theme = useTheme()
+
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
