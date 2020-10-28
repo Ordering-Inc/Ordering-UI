@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const UserProfileContainer = styled.div`
   background-color: #F8F8F8;
@@ -45,6 +45,10 @@ export const Image = styled.div`
   border-radius: 100%;
   overflow: hidden;
   padding: 20px;
+  background: ${({ isImage }) => isImage ? '#FFF' : 'rgba(204, 204, 204, 0.2)'};
+  cursor: -webkit-grab;
+  cursor: grab;
+
   > img {
     width: 100%;
     border-radius: 50%;
@@ -59,9 +63,7 @@ export const Image = styled.div`
     border: none;
     overflow: hidden;
   };
-  span {
-    height: 100%;
-  }
+
   @media (min-width: 480px) {
     > img {
     width: 100%;
@@ -87,6 +89,10 @@ export const SideForm = styled.div`
   > *{
     margin: 30px 0;
     margin-left: 50px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 50px;
+      margin-left: 0;
+  `}
   }
   @media (max-width: 720px){
     width: 60%
@@ -95,8 +101,12 @@ export const SideForm = styled.div`
     width: 100%;
     > *{
     margin: 0;
-    margin-left: 0;
     margin-top: 20px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 0;
+  ` : css`
+      margin-left: 0;
+  `}
   }
   };
 `
@@ -107,6 +117,9 @@ export const UserData = styled.div`
   align-items: flex-start;
   text-align: left;
   height: 200px;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
   > * {
     margin: 5px 0;
     width: 75%;
@@ -124,6 +137,10 @@ export const UserData = styled.div`
 
 export const SavedPlaces = styled.div`
   width: 70%;
+  text-align: left;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
   h5{
     font-size: 1.2em
   }
@@ -135,7 +152,6 @@ export const SavedPlaces = styled.div`
   display: flex;
   flex-direction: column-reverse;
   }
-  text-align: left;
 
   @media (max-width: 480px){
     align-items: center;
@@ -166,11 +182,18 @@ export const SavedPlaces = styled.div`
 export const FormInput = styled.form`
   text-align: left;
   height: 200px;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
   > *{
     margin-top: 10px;
     margin-right: 10px;
     padding: 10px 15px;
     width: 33%;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+  `}
   }
 
   > button {
@@ -191,8 +214,12 @@ export const FormInput = styled.form`
     align-items: center;
     margin: 0 auto;
     > *{
-      margin-right: 0;
       margin-top: 20px;
+      ${props => props.theme?.rtl ? css`
+        margin-left: 0;
+      ` : css`
+        margin-right: 0;
+      `}
     }
     > input{
     padding: 10px 15px;
@@ -230,5 +257,21 @@ export const SkeletonForm = styled.div`
     > *{
       width: 80%
     }
+  }
+`
+
+export const UploadImageIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  span {
+    margin: 0;
+  }
+
+  svg {
+    width: 45px;
+    height: 45px;
   }
 `

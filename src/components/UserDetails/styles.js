@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   form {
@@ -35,6 +35,9 @@ export const Header = styled.div`
 
   h1 {
     margin: 0px 10px 0px 0px;
+    ${props => props.theme?.rtl && css`
+      margin: 0px 0px 0px 10px;
+  `}
   }
 
   h1,

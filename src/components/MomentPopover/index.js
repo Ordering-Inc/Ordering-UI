@@ -1,15 +1,15 @@
 import React, { useRef, useEffect } from 'react'
-import { useOrder, useLanguage } from 'ordering-components'
+import { useOrder, useLanguage, useUtils } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
-import { MomentControl } from '../MomentControl'
-import { isADateValid } from '../../utils'
-import { FaRegClock } from 'react-icons/fa'
+import { MomentContent } from '../MomentContent'
+import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
 export const MomentPopover = (props) => {
   const { open } = props
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
+  const [{ parseDate }] = useUtils()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -53,21 +53,13 @@ export const MomentPopover = (props) => {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
 
-  const currentDate = new Date()
-  currentDate.setTime(currentDate.getTime() + (6 * 24 * 60 * 60 * 1000))
-  currentDate.setHours(23)
-  currentDate.setMinutes(59)
-  const momentProps = {
-    maxDate: currentDate
-  }
-
   return (
     <div className='moment-popover' style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
-        <FaRegClock /> {orderStatus.options?.moment && isADateValid(orderStatus.options?.moment) ? orderStatus.options?.moment : t('ASAP_ABBREVIATION', 'ASAP')}
+        <FaRegClock /> {orderStatus.options?.moment ? parseDate(orderStatus.options?.moment, { outputFormat: 'MM/DD hh:mma' }) : t('ASAP_ABBREVIATION', 'ASAP')}
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <MomentControl {...momentProps} />
+        <MomentContent />
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
     </div>

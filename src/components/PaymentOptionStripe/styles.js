@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const OptionStripeContainer = styled.div`
   display: flex;
@@ -11,6 +11,10 @@ export const WarningMessage = styled.p`
   padding-left: 10px;
   font-weight: bold;
   opacity: 0.8;
+  ${props => props.theme?.rtl && css`
+    padding-right: 10px;
+    padding-left: 0;
+  `}
 `
 
 export const WrapperItems = styled.div`
@@ -54,7 +58,11 @@ export const CardItemContent = styled.div`
   }
 
   > * {
-    margin-right: 10px
+    margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
   }
 `
 

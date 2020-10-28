@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const FormStripe = styled.form`
   max-width: 800px;
@@ -62,7 +62,10 @@ export const ErrorMessage = styled.div`
   margin-top: 10px;
   margin-bottom: 20px;
   color: #D81212;
-  margin: 10px 0px 0px 10px
+  margin: 10px 0px 0px 10px;
+  ${props => props.theme?.rtl && css`
+    margin: 10px 10px 0px 0px    
+  `}  
 `
 
 export const FormActions = styled.div`

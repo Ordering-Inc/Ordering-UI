@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
-import { Select } from '../../../src/styles/Selects'
+import { Select } from '../../styles/Selects'
 
 export const Header = styled.div`
   display: flex;
@@ -21,6 +20,8 @@ export const InnerHeader = styled.div`
 `
 
 export const LogoHeader = styled.div`
+  cursor: pointer;
+
   img {
     height: 45px;
     margin: 0;
@@ -60,11 +61,20 @@ export const Menu = styled.div`
   }
 
   > :first-child {
-    margin-left: 10px;
+      margin-left: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 10px;
+      margin-left: 0px;
+    `}
   }
 
   > :last-child {
+    
     margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+    `}
   }
 
   @media (max-width: 820px) {
@@ -88,11 +98,12 @@ export const MenuItem = styled.div`
   display: flex;
 `
 
-export const MenuLink = styled(Link)`
+export const MenuLink = styled.a`
   text-decoration: none;
   font-size: 16px;
   padding: 10px;
   color: #333;
+  cursor: pointer;
 
   ${({ highlight }) => highlight && css`
     background-color: ${props => props.theme.colors.primary};
@@ -125,7 +136,7 @@ export const SubMenu = styled(InnerHeader)`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 7px;
+    padding: 7px 20px 0px;
     box-sizing: border-box;
     margin: 0px;
   }

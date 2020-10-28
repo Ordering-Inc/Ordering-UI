@@ -1,24 +1,31 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { FlexTabs } from './styles'
 import { Tabs, Tab } from '../../../styles/Tabs'
-import { BsPerson, AiOutlineUnorderedList } from 'react-icons/all'
+import BsPerson from '@meronex/icons/bs/BsPerson'
+import AiOutlineUnorderedList from '@meronex/icons/ai/AiOutlineUnorderedList'
+import { useEvent, useLanguage } from 'ordering-components'
 
 export const ProfileOptions = ({ value }) => {
   const [tabValue] = useState(value)
+  const [, t] = useLanguage()
+  const [events] = useEvent()
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
+  }
 
   return (
     <FlexTabs>
       <Tabs variant='primary'>
         <Tab active={tabValue === 'My Account'}>
-          <Link to='/profile'>
-            <BsPerson /> My Account
-          </Link>
+          <a onClick={() => handleGoToPage({ page: 'profile' })}>
+            <BsPerson /> {t('MY_ACCOUNT', 'My account')}
+          </a>
         </Tab>
         <Tab active={tabValue === 'My Orders'}>
-          <Link to='/profile/orders'>
-            <AiOutlineUnorderedList /> My Orders
-          </Link>
+          <a onClick={() => handleGoToPage({ page: 'orders' })}>
+            <AiOutlineUnorderedList /> {t('MY_ORDERS', 'My orders')}
+          </a>
         </Tab>
       </Tabs>
     </FlexTabs>

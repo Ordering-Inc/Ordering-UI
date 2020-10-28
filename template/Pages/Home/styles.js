@@ -216,6 +216,9 @@ export const TextContent = styled.div`
     div {
       text-align: left;
       margin-top: 25px;
+      ${props => props.theme?.rtl && css`
+        text-align: right;
+    `}
     }
     &.center {
       h2 {

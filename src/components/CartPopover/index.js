@@ -1,29 +1,26 @@
 import React, { useEffect, useRef } from 'react'
-import { IoIosBasket } from 'react-icons/io'
+import IosBasket from '@meronex/icons/ios/IosBasket'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
   PopoverBody,
-  PopoverArrow,
-  WrapperCarts,
-  WrappNotCarts
+  PopoverArrow
 } from './styles'
-import { useOrder, useLanguage } from 'ordering-components'
-import { useLocation } from 'react-router-dom'
-import notFound from '../../../template/assets/not-found.svg'
 
-import { Cart } from '../Cart'
+import { useOrder } from 'ordering-components'
+import { useTheme } from 'styled-components'
+import { CartContent } from '../CartContent'
 
 export const CartPopover = (props) => {
-  const location = useLocation()
   const { open, auth } = props
   const [orderState] = useOrder()
-  const [, t] = useLanguage()
+  const theme = useTheme()
+
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
   const popper = usePopper(referenceElement.current, popperElement.current, {
-    placement: 'auto',
+    placement: theme?.rtl ? 'bottom' : 'auto',
     modifiers: [
       { name: 'arrow', options: { element: arrowElement.current } },
       {
@@ -36,8 +33,6 @@ export const CartPopover = (props) => {
   })
 
   const { styles, attributes, forceUpdate } = popper
-
-  const cartsWithProducts = Object.values(orderState?.carts).filter(cart => cart.products.length > 0)
 
   useEffect(() => {
     forceUpdate && forceUpdate()
@@ -71,31 +66,16 @@ export const CartPopover = (props) => {
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
         <span>
-          <IoIosBasket />
-          {cartsWithProducts.length > 0 && <p>{cartsWithProducts.length}</p>}
+          <IosBasket />
+          {props.carts?.length > 0 && <p>{props.carts?.length}</p>}
         </span>
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <WrapperCarts>
-          {orderState.carts && cartsWithProducts.length > 0 &&
-            cartsWithProducts.map(cart => (
-              <React.Fragment key={cart.uuid}>
-                {cart.products.length > 0 && (
-                  <Cart
-                    cart={cart}
-                    isProducts={cart.products.length}
-                    onClickCheckout={props.onClose}
-                  />
-                )}
-              </React.Fragment>
-            ))}
-          {cartsWithProducts.length === 0 && (
-            <WrappNotCarts>
-              <img src={notFound} alt='notFound' />
-              <h1>{t('CART_ERROR', 'You don\'t have carts available')}</h1>
-            </WrappNotCarts>
-          )}
-        </WrapperCarts>
+        <CartContent
+          carts={props.carts}
+          isOrderStateCarts={!!orderState.carts}
+          onClose={props.onClose}
+        />
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
     </div>

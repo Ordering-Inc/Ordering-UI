@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
-import { MdClose } from 'react-icons/md'
+import MdClose from '@meronex/icons/md/MdClose'
 import {
   BusinessInformation as BusinessInformationController,
-  GoogleMaps,
-  WrapperGoogleMaps,
+  GoogleMapsMap,
   useOrder,
-  useLanguage
+  useLanguage,
+  useUtils
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import {
@@ -29,15 +29,15 @@ import {
   ModalIcon
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
-
-import { GrDeliver, FaStar, FiClock, VscLocation } from 'react-icons/all'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import FaStar from '@meronex/icons/fa/FaStar'
+import FiClock from '@meronex/icons/fi/FiClock'
+import VscLocation from '@meronex/icons/vsc/VscLocation'
 
 export const BusinessInformationUI = (props) => {
   const {
     business,
     getBusinessType,
-    formatNumber,
-    formatPrice,
     optimizeImage,
     businessLocation,
     businessSchedule,
@@ -48,8 +48,8 @@ export const BusinessInformationUI = (props) => {
   const [orderState] = useOrder()
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
-  const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
   const [, t] = useLanguage()
+  const [{ parsePrice, parseDistance }] = useUtils()
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
@@ -75,34 +75,32 @@ export const BusinessInformationUI = (props) => {
                   <FaStar className='start' />
                   {business?.reviews?.total}
                 </p>
-
               </div>
               <div>
                 <p>{getBusinessType()}</p>
-
               </div>
               <div>
                 <>
                   {orderState?.options?.type === 1 ? (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.delivery_time)}
-                    </p>
+                    </h5>
                   ) : (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.pickup_time)}
-                    </p>
+                    </h5>
                   )}
                 </>
-                <p>
+                <h5>
                   <VscLocation />
-                  {formatNumber(business?.distance) || 0} KM
-                </p>
-                <p>
+                  {parseDistance(business?.distance || 0)}
+                </h5>
+                <h5>
                   <GrDeliver />
-                  {business && formatPrice(business?.delivery_price || 0)}
-                </p>
+                  {business && parsePrice(business?.delivery_price || 0)}
+                </h5>
               </div>
             </BusinessInfoItem>
           </BusinessInfo>
@@ -155,9 +153,9 @@ export const BusinessInformationUI = (props) => {
                 </ScheduleSection>
                 <DeliveryInfo>
                   <div>
-                    <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {formatPrice(business.service_fee)}</h5>
-                    <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {formatPrice(business.minimum)}</h5>
-                    <h5>{t('DISTANCE', 'Distance:')} {formatNumber(business?.distance) || 0} {t('KM', 'KM')}</h5>
+                    <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {parsePrice(business.service_fee)}</h5>
+                    <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {parsePrice(business.minimum)}</h5>
+                    <h5>{t('DISTANCE', 'Distance:')} {parseDistance(business?.distance || 0)}</h5>
                   </div>
                   <div>
                     <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {convertHoursToMinutes(business?.delivery_time)}</h5>

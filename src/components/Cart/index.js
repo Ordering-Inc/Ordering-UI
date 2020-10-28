@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import moment from 'moment'
-import { Cart as CartController, useOrder, useLanguage } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-import { formatPrice } from '../../utils'
 
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 import {
   CartContainer,
@@ -25,25 +23,25 @@ const CartUI = (props) => {
     cart,
     clearCart,
     isProducts,
-    isCartCheckout,
     changeQuantity,
     getProductMax,
     offsetDisabled,
     removeProduct,
     onClickCheckout
   } = props
-  const history = useHistory()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const location = useLocation()
-  const momentFormatted = !orderState?.option?.moment ? t('ASAP', 'ASAP') : moment.utc(orderState?.option?.moment).local().format('YYYY-MM-DD HH:mm')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [events] = useEvent()
+  const [isCheckout, setIsCheckout] = useState(false)
+  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const windowSize = useWindowSize()
 
-  const isCheckoutPage = location.pathname === `/checkout/${cart?.uuid}`
+  const momentFormatted = !orderState?.option?.moment ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -62,29 +60,27 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    history.push(`/checkout/${cart.uuid}`)
+    events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
     onClickCheckout()
   }
 
-  const handleOpenUpsellingPage = () => {
-    if (!canOpenUpselling) {
-      handleClickCheckout()
-    } else {
-      setOpenUpselling(true)
+  const handleStoreRedirect = (slug) => {
+    events.emit('go_to_page', { page: 'business', params: { store: slug } })
+    if (windowSize.width <= 768) {
+      onClickCheckout()
     }
   }
 
-  const handleUpsellingPage = () => {
-    handleClickCheckout()
-    setOpenUpselling(false)
-  }
-  const handleStoreRedirect = (slug) => {
-    history.push(`/store/${slug}`)
+  const handleChangeView = ({ page, params }) => {
+    setIsCheckout(page === 'checkout' && params?.cartUuid === cart?.uuid)
   }
 
   useEffect(() => {
+    events.on('change_view', handleChangeView)
+    events.emit('get_current_view')
     return () => {
       setConfirm({ ...confirm, open: false })
+      events.off('change_view', handleChangeView)
     }
   }, [])
 
@@ -105,16 +101,22 @@ const CartUI = (props) => {
     })
   }
 
+  const handleUpsellingPage = () => {
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+    handleClickCheckout()
+  }
+
   return (
     <CartContainer>
       <BusinessItemAccordion
         uuid={cart?.uuid}
+        isCheckout={isCheckout}
         orderTotal={cart?.total}
         business={cart?.business}
         isClosed={!cart?.valid_schedule}
         moment={momentFormatted}
         isProducts={isProducts}
-        isCartCheckout={isCartCheckout}
         isValidProducts={cart?.valid_products}
         handleClearProducts={handleClearProducts}
         handleStoreRedirect={handleStoreRedirect}
@@ -137,28 +139,28 @@ const CartUI = (props) => {
               <tbody>
                 <tr>
                   <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                  <td>{formatPrice(cart?.subtotal || 0)}</td>
+                  <td>{parsePrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('TAX', 'Tax')} ({cart?.business?.tax}%)</td>
-                  <td>{formatPrice(cart?.tax || 0)}</td>
+                  <td>{t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
+                  <td>{parsePrice(cart?.tax || 0)}</td>
                 </tr>
                 <tr>
                   <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                  <td>{formatPrice(cart?.delivery_price || 0)}</td>
+                  <td>{parsePrice(cart?.delivery_price || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('DRIVER_TIP', 'Driver tip')} ({cart?.driver_tip_rate}%)</td>
-                  <td>{formatPrice(cart?.driver_tip || 0)}</td>
+                  <td>{t('DRIVER_TIP', 'Driver tip')} ({parseNumber(cart?.driver_tip_rate)}%)</td>
+                  <td>{parsePrice(cart?.driver_tip || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('SERVICE_FEE', 'Service Fee')} ({cart?.business?.service_fee}%)</td>
-                  <td>{formatPrice(cart?.service_fee || 0)}</td>
+                  <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(cart?.business?.service_fee)}%)</td>
+                  <td>{parsePrice(cart?.service_fee || 0)}</td>
                 </tr>
                 {cart?.discount > 0 && (
                   <tr>
                     <td>{t('DISCOUNT', 'Discount')}</td>
-                    <td>{formatPrice(cart?.discount || 0)}</td>
+                    <td>{parsePrice(cart?.discount || 0)}</td>
                   </tr>
                 )}
               </tbody>
@@ -172,19 +174,20 @@ const CartUI = (props) => {
               <tbody>
                 <tr>
                   <td>{t('TOTAL', 'Total')}</td>
-                  <td>{formatPrice(cart?.total)}</td>
+                  <td>{parsePrice(cart?.total)}</td>
                 </tr>
               </tbody>
             </table>
           </OrderBill>
         )}
-        {onClickCheckout && !isCheckoutPage && (
+        {onClickCheckout && !isCheckout && (
           <CheckoutAction>
             <Button
               color='primary'
-              onClick={() => handleOpenUpsellingPage()}
+              onClick={() => setOpenUpselling(true)}
+              disabled={openUpselling && !canOpenUpselling}
             >
-              {t('CHECKOUT', 'Checkout')}
+              {!openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
             </Button>
           </CheckoutAction>
         )}
@@ -214,14 +217,16 @@ const CartUI = (props) => {
           onSave={handlerProductAction}
         />
       </Modal>
-      <UpsellingPage
-        businessId={cart.business_id}
-        cartProducts={cart.products}
-        handleUpsellingPage={handleUpsellingPage}
-        openUpselling={openUpselling}
-        canOpenUpselling={canOpenUpselling}
-        setCanOpenUpselling={setCanOpenUpselling}
-      />
+      {openUpselling && (
+        <UpsellingPage
+          businessId={cart.business_id}
+          cartProducts={cart.products}
+          handleUpsellingPage={handleUpsellingPage}
+          openUpselling={openUpselling}
+          canOpenUpselling={canOpenUpselling}
+          setCanOpenUpselling={setCanOpenUpselling}
+        />
+      )}
     </CartContainer>
   )
 }
