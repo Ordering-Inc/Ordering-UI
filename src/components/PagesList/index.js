@@ -15,7 +15,6 @@ export const PagesList = ({ routes }) => {
     try {
       const { response } = await ordering.pages().get()
       setRoots([...roots, ...response.data.result])
-      console.log(response.data.result)
     } catch (err) {
       console.log(err)
     }
