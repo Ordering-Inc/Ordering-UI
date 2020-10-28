@@ -43,7 +43,7 @@ export const BusinessContent = styled.div`
   width: 340px;
 
   @media (max-width: 380px) {
-    margin: 3px;
+    margin: 0px 1px 1px;
   }
 `
 
