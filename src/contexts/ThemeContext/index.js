@@ -15,28 +15,31 @@ export const ThemeProvider = ({ children, ...props }) => {
   const [theme, setTheme] = useState(props.theme)
 
   const GlobalStyle = createGlobalStyle`
-    /** Mozilla scrollbar*/
-    * {
-      scrollbar-color: #CCC !important;
-      scrollbar-width: thin !important;
-    }
 
-    /** Scrollbar for browser based on webkit */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 0px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #CCCCCC;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #AFAFAF;
-    }
-    ::-webkit-scrollbar-thumb:active {
-      background: #6b6b6b;
-    }
-    ::-webkit-scrollbar-track {
-      background: rgba(204, 204, 204, 0.3);
+    @media (min-width: 578px) {
+      /** Mozilla scrollbar*/
+      * {
+        scrollbar-color: #CCC !important;
+        scrollbar-width: thin !important;
+      }
+
+      /** Scrollbar for browser based on webkit */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 0px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #CCCCCC;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #AFAFAF;
+      }
+      ::-webkit-scrollbar-thumb:active {
+        background: #6b6b6b;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(204, 204, 204, 0.3);
+      }
     }
 
     body {
