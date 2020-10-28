@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { FlexTabs } from './styles'
 import { Tabs, Tab } from '../../../styles/Tabs'
-import { BsPerson, AiOutlineUnorderedList } from 'react-icons/all'
+import BsPerson from '@meronex/icons/bs/BsPerson'
+import AiOutlineUnorderedList from '@meronex/icons/ai/AiOutlineUnorderedList'
 import { useEvent, useLanguage } from 'ordering-components'
 
 export const ProfileOptions = ({ value }) => {

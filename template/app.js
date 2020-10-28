@@ -26,6 +26,7 @@ import { Profile } from './Pages/Profile'
 import { MyOrders } from './Pages/MyOrders'
 import { PageNotFound } from './Pages/PageNotFound'
 import { HomePage } from './Pages/Home'
+import { PagesList } from './Pages/PagesList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -169,6 +170,9 @@ export const App = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
+                  <Route exact path='/:store'>
+                    <BusinessProductsList />
+                  </Route>
                   <Route exact path='/orders/:orderId'>
                     {auth
                       ? <OrderDetailsPage />
@@ -181,6 +185,9 @@ export const App = () => {
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />
+                  </Route>
+                  <Route exact path='/pages'>
+                    <PagesList />
                   </Route>
                   <Route path='*'>
                     <PageNotFound />

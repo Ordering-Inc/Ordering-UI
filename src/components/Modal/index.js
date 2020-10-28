@@ -1,13 +1,12 @@
 import React from 'react'
-import { MdClose } from 'react-icons/md'
+import MdClose from '@meronex/icons/md/MdClose'
 import { Popup, useLanguage } from 'ordering-components'
 import {
   ModalDialog,
   ModalActions,
   ModalTitle,
   ModalIcon,
-  ModalHeader,
-  ModalOrderTypes
+  ModalHeader
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -22,8 +21,7 @@ const ModalUI = (props) => {
     acceptText,
     cancelText,
     isTransparent,
-    hideCloseDefault,
-    OrderTypeSelectorHeader
+    hideCloseDefault
   } = props
   const [, t] = useLanguage()
   return (
@@ -43,13 +41,6 @@ const ModalUI = (props) => {
           <ModalTitle>
             {title}
           </ModalTitle>
-        )}
-        {OrderTypeSelectorHeader && (
-          <ModalOrderTypes>
-            {
-              <OrderTypeSelectorHeader />
-            }
-          </ModalOrderTypes>
         )}
       </ModalHeader>
       {children}

@@ -4,12 +4,8 @@ import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { TypeContainer, ImageContainer } from './styles'
-import food from '../../../template/assets/category-food.png'
-import groceries from '../../../template/assets/category-groceries.png'
-import alcohol from '../../../template/assets/category-alcohol.png'
-import laundry from '../../../template/assets/category-laundry.png'
-import all from '../../../template/assets/category-all.png'
 import { AutoScroll } from '../AutoScroll'
+import { useTheme } from 'styled-components'
 
 const BusinessTypeFilterUI = (props) => {
   const {
@@ -18,7 +14,14 @@ const BusinessTypeFilterUI = (props) => {
     handleChangeBusinessType
   } = props
   const [, t] = useLanguage()
-  const images = [{ image: all, value: 'all' }, { image: food, value: 'food' }, { image: groceries, value: 'groceries' }, { image: alcohol, value: 'alcohol' }, { image: laundry, value: 'laundry' }]
+  const theme = useTheme()
+  const images = [
+    { image: theme.images?.categories?.all, value: 'all' },
+    { image: theme.images?.categories?.food, value: 'food' },
+    { image: theme.images?.categories?.groceries, value: 'groceries' },
+    { image: theme.images?.categories?.alcohol, value: 'alcohol' },
+    { image: theme.images?.categories?.laundry, value: 'laundry' }
+  ]
   const [load, setLoad] = useState(false)
 
   return (

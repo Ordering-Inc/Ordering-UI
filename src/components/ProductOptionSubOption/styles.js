@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -19,7 +19,10 @@ export const IconControl = styled.div`
   display: flex;
   color: ${props => props.theme.colors.primary};
   margin-right: 5px;
-
+  ${props => props.theme?.rtl && css`
+    margin-left: 5px;
+    margin-right: 0px;
+  `}
   svg {
     font-size: 25px;
   }
@@ -51,6 +54,10 @@ export const QuantityControl = styled.div`
     color: ${props => props.theme.colors.primary};
     font-size: 20px;
     margin-right: 3px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 3px;
+      margin-right: 0px;
+    `}
   }
 
   svg[disabled] {
@@ -60,6 +67,10 @@ export const QuantityControl = styled.div`
   svg:last-child {
     margin-left: 3px;
     margin-right: 0;
+    ${props => props.theme?.rtl && css`
+      margin-right: 3px;
+      margin-left: 0px;
+  `}
   }
 `
 
@@ -74,7 +85,10 @@ export const PositionControl = styled.div`
   svg {
     font-size: 20px;
     margin-right: 3px;
-
+    ${props => props.theme?.rtl && css`
+      margin-left: 3px;
+      margin-right: 0px;
+    `}
     &.reverse {
       transform: rotate(180deg);
     }
@@ -85,6 +99,9 @@ export const PositionControl = styled.div`
 
     &:last-child {
       margin-right: 0;
+      ${props => props.theme?.rtl && css`
+        margin-left: 0;
+      `}
     }
   }
 `
@@ -96,4 +113,8 @@ export const SuboptionPrice = styled.div`
   font-size: 14px;
   color: #555;
   margin-left: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
 `

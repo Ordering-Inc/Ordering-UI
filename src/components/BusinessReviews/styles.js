@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ReviewOf = styled.div`
   display: flex;
@@ -38,6 +38,10 @@ export const Comments = styled.div`
     align-items: center;
     svg {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0;
+    `}
     }
   }
 `
@@ -70,6 +74,10 @@ export const ScoreDiv = styled.div`
     align-items: center;
     svg {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+       margin-left: 5px;
+       margin-right: 0;
+    `}
     }
   }
 `

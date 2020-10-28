@@ -1,6 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
-import orderBackground from '../../../template/assets/order-background.png'
+import styled, { css, useTheme } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -32,8 +31,9 @@ const HeaderStyled = styled.div`
 `
 
 export const Header = (props) => {
+  const theme = useTheme()
   const style = {}
-  style.backgroundImage = `url(${orderBackground})`
+  style.backgroundImage = `url(${theme.images?.general?.orderDetailsHeader})`
 
   return (
     <HeaderStyled style={style}>
@@ -50,6 +50,12 @@ export const HeaderInfo = styled.div`
   padding: 20px 20px 30px;
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
+  ${props => props.theme?.rtl && css`
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  `}
 
   @media (max-width: 660px) {
     width: 55%;
@@ -202,6 +208,10 @@ export const ActionsBlock = styled.div`
   justify-content: flex-end;
   > * {
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+  `}
   }
   svg {
     font-size: 24px;
@@ -343,12 +353,33 @@ export const OrderCustomer = styled.div`
   display: flex;
   margin: 10px 0px 20px;
   width: 100%;
+
+  div.photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
+    }
+  }
+
 `
 
 export const PhotoBlock = styled.img`
   border-radius: 50%;
   width: 75px;
   margin-right: 10px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 10px;
+    margin-right: 0;
+  `}
 `
 
 export const InfoBlock = styled.div`
@@ -383,6 +414,23 @@ export const OrderDriver = styled(OrderCustomer)`
 export const WrapperDriver = styled.div`
   display: flex;
   width: 100%;
+
+  div.photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
+    }
+  }
+
 `
 
 export const OrderProducts = styled(OrderCustomer)`
@@ -398,6 +446,9 @@ export const OrderBill = styled.div`
     font-size: 18px;
     tr td:nth-child(2) {
       text-align: right;
+      ${props => props.theme?.rtl && css`
+        text-align: left;
+      `}
     }
   }
 
@@ -455,6 +506,11 @@ export const FootActions = styled.div`
   svg {
     margin-left: 5px;
     transform: rotate(90deg)
+    ${props => props.theme?.rtl && css`
+      margin-right: 5px;
+      margin-left: 0px;
+      transform: rotate(-90deg)
+    `}
   }
 `
 export const SkeletonBlock = styled.div`

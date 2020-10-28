@@ -6,17 +6,19 @@ import {
   useSession,
   useLanguage,
   useOrder,
-  useEvent
+  useUtils
 } from 'ordering-components'
 
-import { formatPrice, scrollTo } from '../../utils'
+import { scrollTo } from '../../utils'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
-import { LoginForm } from '../LoginForm'
 import { ProductShare } from '../ProductShare'
+import { LoginForm } from '../LoginForm'
+import { SignUpForm } from '../SignUpForm'
+import { ForgotPasswordForm } from '../ForgotPasswordForm'
 
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
@@ -32,6 +34,7 @@ import {
   ProductComment,
   SkeletonBlock
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const ProductOptionsUI = (props) => {
   const {
@@ -54,11 +57,13 @@ const ProductOptionsUI = (props) => {
   const { product, loading, error } = productObject
 
   const windowSize = useWindowSize()
-  const [{ auth }] = useSession()
+  const [{ auth }, sessionDispatch] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [events] = useEvent()
+  const [{ parsePrice }] = useUtils()
+  const theme = useTheme()
+  const [modalPageToShow, setModalPageToShow] = useState('login')
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -82,9 +87,17 @@ const ProductOptionsUI = (props) => {
     scrollTo(container, topPos, 1250)
   }
 
-  const handleGoToPage = (e, data) => {
+  const handleCustomModalClick = (e, { page }) => {
     e.preventDefault()
-    events.emit('go_to_page', data)
+    setModalPageToShow(page)
+  }
+
+  const handleSuccessSignup = (user) => {
+    sessionDispatch({
+      type: 'login',
+      user,
+      token: user.session.access_token
+    })
   }
 
   return (
@@ -108,11 +121,9 @@ const ProductOptionsUI = (props) => {
       {!loading && !error && product && (
         <>
           <WrapperImage>
-            {product?.images && (
-              <ProductImage>
-                <img src={product?.images} alt='product' />
-              </ProductImage>
-            )}
+            <ProductImage>
+              <img src={product?.images || theme.images?.dummies?.product} alt='product' />
+            </ProductImage>
           </WrapperImage>
           <ProductInfo>
             <div>
@@ -184,7 +195,8 @@ const ProductOptionsUI = (props) => {
                     outline
                     onClick={decrement}
                     disabled={productCart.quantity === 1 || isSoldOut}
-                  >-
+                  >
+                    <span className='sign'>-</span>
                   </Button>
                   <span>{productCart.quantity}</span>
                   <Button
@@ -193,7 +205,8 @@ const ProductOptionsUI = (props) => {
                     outline
                     onClick={increment}
                     disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
-                  >+
+                  >
+                    <span className='sign'>+</span>
                   </Button>
                 </div>)}
 
@@ -210,7 +223,7 @@ const ProductOptionsUI = (props) => {
                       {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
                     </span>
                   )}
-                  <span>{productCart.total && formatPrice(productCart.total)}</span>
+                  <span>{productCart.total && parsePrice(productCart.total)}</span>
                 </Button>
               ) : (
                 <Button
@@ -235,13 +248,58 @@ const ProductOptionsUI = (props) => {
           width='70%'
           padding='0'
         >
-          <LoginForm
-            handleSuccessLogin={handleSuccessLogin}
-            elementLinkToSignup={<a onClick={(e) => handleGoToPage(e, { page: 'signup' })} href='#'>{t('CREATE_ACCOUNT', 'Create account')}</a>}
-            elementLinkToForgotPassword={<a onClick={(e) => handleGoToPage(e, { page: 'forgot_password' })} href='#'>{t('RESET_PASSWORD', 'Reset password')}</a>}
-            useLoginByCellphone
-            isPopup
-          />
+          {modalPageToShow === 'login' && (
+            <LoginForm
+              handleSuccessLogin={handleSuccessLogin}
+              elementLinkToSignup={
+                <a
+                  onClick={
+                    (e) => handleCustomModalClick(e, { page: 'signup' })
+                  } href='#'
+                >{t('CREATE_ACCOUNT', 'Create account')}
+                </a>
+              }
+              elementLinkToForgotPassword={
+                <a
+                  onClick={
+                    (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                  } href='#'
+                >{t('RESET_PASSWORD', 'Reset password')}
+                </a>
+              }
+              useLoginByCellphone
+              isPopup
+            />
+          )}
+          {modalPageToShow === 'signup' && (
+            <SignUpForm
+              elementLinkToLogin={
+                <a
+                  onClick={
+                    (e) => handleCustomModalClick(e, { page: 'login' })
+                  } href='#'
+                >{t('LOGIN', 'Login')}
+                </a>
+              }
+              useLoginByCellphone
+              useChekoutFileds
+              handleSuccessSignup={handleSuccessSignup}
+              isPopup
+            />
+          )}
+          {modalPageToShow === 'forgotpassword' && (
+            <ForgotPasswordForm
+              elementLinkToLogin={
+                <a
+                  onClick={
+                    (e) => handleCustomModalClick(e, { page: 'login' })
+                  } href='#'
+                >{t('LOGIN', 'Login')}
+                </a>
+              }
+              isPopup
+            />
+          )}
         </Modal>
       )}
       {error && error.length > 0 && error.map((e, i) => (

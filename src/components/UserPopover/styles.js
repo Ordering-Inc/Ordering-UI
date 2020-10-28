@@ -2,6 +2,13 @@ import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
+  height: ${({ isPhoto }) => isPhoto ? 'auto' : '25px'};
+
+  svg {
+    color: ${({ isHome }) => isHome ? '#FFF' : '#000'};
+    height: 25px;
+    width: 25px;
+  }
 `
 
 export const PopoverBody = styled.div`
@@ -15,8 +22,8 @@ export const PopoverBody = styled.div`
 `
 
 export const PopoverArrow = styled.div`
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-bottom: 8px solid #FFF;
@@ -38,6 +45,10 @@ const PopoverListItemStyles = css`
 
   svg {
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `} 
   }
 
   :hover {

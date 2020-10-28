@@ -54,7 +54,7 @@ const MomentControlUI = (props) => {
       </Days>
       <Title>{t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')}</Title>
       <Hours>
-        <Hour selected={isAsap} onClick={() => handleAsap()}>{t('ASAP', 'As soon as posible')}</Hour>
+        <Hour selected={isAsap} onClick={() => handleAsap()}>{t('ASAP', 'As soon as possible')}</Hour>
         {/* <Hour>{t('SCHEDULE_FOR_LATER', 'Schedule for later')}</Hour> */}
         {
           hoursList.map((hour, i) => (

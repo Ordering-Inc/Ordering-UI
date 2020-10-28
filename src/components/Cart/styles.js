@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const CartContainer = styled.div`
   border-bottom: 1px solid #F0F0F0;
@@ -17,6 +17,9 @@ export const OrderBill = styled.div`
     tr td:nth-child(2) {
       font-weight: 500;
       text-align: right;
+      ${props => props.theme?.rtl && css`
+        text-align: left;
+    `}
     }
   }
   table.total {
@@ -55,5 +58,9 @@ export const CheckoutAction = styled.div`
     padding: 10px 30px;
     color: #FFF;
     width: 80%;
+    &:disabled{
+      opacity: 0.5;
+      cursor: not-allowed
+    }
   }
 `

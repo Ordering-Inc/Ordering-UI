@@ -56,11 +56,15 @@ export const BusinessProductsList = (props) => {
     onProductRedirect: ({ slug, category, product }) => {
       if (!category && !product) {
         if (history.length <= 2) {
-          return history.push(`/store/${slug}`)
+          return window.location.pathname.includes('/store/')
+            ? history.push(`/store/${slug}`)
+            : history.push(`/${slug}`)
         }
         return history.go(-1)
       }
-      return history.push(`/store/${slug}?category=${category}&product=${product}`)
+      return window.location.pathname.includes('/store/')
+        ? history.push(`/store/${slug}?category=${category}&product=${product}`)
+        : history.push(`/${slug}?category=${category}&product=${product}`)
     },
     onCheckoutRedirect: (cartUuid) => {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid } })

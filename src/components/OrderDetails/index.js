@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController, useEvent } from 'ordering-components'
-import { FiPhone } from 'react-icons/fi'
-import { HiOutlineChat } from 'react-icons/hi'
-import { BiCaretUp } from 'react-icons/bi'
+import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils } from 'ordering-components'
+import FiPhone from '@meronex/icons/fi/FiPhone'
+import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
+import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
+import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
+import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -49,7 +51,6 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
-    formatPrice,
     handleOrderRedirect
   } = props
   const [, t] = useLanguage()
@@ -57,6 +58,7 @@ const OrderDetailsUI = (props) => {
   const [openReview, setOpenReview] = useState(false)
   const theme = useTheme()
   const [events] = useEvent()
+  const [{ parsePrice, parseNumber }] = useUtils()
 
   const { order, loading, error } = props.order
 
@@ -82,9 +84,9 @@ const OrderDetailsUI = (props) => {
     return objectStatus && objectStatus
   }
 
-  const getImage = (slug) => {
+  const getImage = (status) => {
     try {
-      return slug && require(`../../../template/assets/order/${slug}.svg`)
+      return theme.images?.order?.[`status${status}`]
     } catch (error) {
       return 'https://picsum.photos/75'
     }
@@ -107,7 +109,7 @@ const OrderDetailsUI = (props) => {
               </HeaderText>
               <HeaderText>
                 <h1>{t('ORDER_TOTAL', 'Total')}</h1>
-                <h1>{formatPrice(order?.total || 0)}</h1>
+                <h1>{parsePrice(order?.total || 0)}</h1>
               </HeaderText>
             </HeaderInfo>
           </Header>
@@ -146,7 +148,7 @@ const OrderDetailsUI = (props) => {
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  <img src={getImage(getOrderStatus(order?.status)?.slug)} alt='' />
+                  <img src={getImage(order?.status || 0)} alt='' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>
@@ -155,11 +157,13 @@ const OrderDetailsUI = (props) => {
               {t('CUSTOMER', 'Customer')}
             </SectionTitle>
             <OrderCustomer>
-              {order?.customer?.photo && (
-                <div>
+              <div className='photo'>
+                {order?.customer?.photo ? (
                   <PhotoBlock src={order?.customer?.photo} />
-                </div>
-              )}
+                ) : (
+                  <FaUserCircle />
+                )}
+              </div>
               <InfoBlock>
                 <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                 <span>{order?.customer?.address}</span>
@@ -173,11 +177,13 @@ const OrderDetailsUI = (props) => {
                 </SectionTitle>
                 <OrderDriver>
                   <WrapperDriver>
-                    {!order?.customer?.photo && (
-                      <div>
+                    <div className='photo'>
+                      {order?.driver?.photo ? (
                         <PhotoBlock src={order?.driver?.photo} />
-                      </div>
-                    )}
+                      ) : (
+                        <RiUser2Fill />
+                      )}
+                    </div>
                     <InfoBlock>
                       <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
                       <span>{t('DRIVER', 'Driver')}</span>
@@ -203,7 +209,6 @@ const OrderDetailsUI = (props) => {
                 <ProductItemAccordion
                   key={product.id}
                   product={product}
-                  formatPrice={formatPrice}
                 />
               ))}
             </OrderProducts>
@@ -213,28 +218,28 @@ const OrderDetailsUI = (props) => {
                 <tbody>
                   <tr>
                     <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                    <td>{formatPrice(order?.subtotal)}</td>
+                    <td>{parsePrice(order?.subtotal)}</td>
                   </tr>
                   <tr>
-                    <td>{t('TAX', 'Tax')} (10%)</td>
-                    <td>{formatPrice(order?.totalTax)}</td>
+                    <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
+                    <td>{parsePrice(order?.totalTax)}</td>
                   </tr>
                   <tr>
                     <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                    <td>{formatPrice(order?.deliveryFee)}</td>
+                    <td>{parsePrice(order?.deliveryFee)}</td>
                   </tr>
                   <tr>
-                    <td>{t('DRIVER_TIP', 'Driver tip')} (0%)</td>
-                    <td>{formatPrice(order?.driver_tip)}</td>
+                    <td>{t('DRIVER_TIP', 'Driver tip')}</td>
+                    <td>{parsePrice(order?.driver_tip)}</td>
                   </tr>
                   <tr>
-                    <td>{t('SERVICE FEE', 'Service Fee')} (9%)</td>
-                    <td>{formatPrice(order?.serviceFee || 0)}</td>
+                    <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
+                    <td>{parsePrice(order?.serviceFee || 0)}</td>
                   </tr>
                   {order?.discount > 0 && (
                     <tr>
                       <td>{t('DISCOUNT', 'Discount')}</td>
-                      <td>{formatPrice(order?.discount)}</td>
+                      <td>{parsePrice(order?.discount)}</td>
                     </tr>
                   )}
                 </tbody>
@@ -243,7 +248,7 @@ const OrderDetailsUI = (props) => {
                 <tbody>
                   <tr>
                     <td>{t('TOTAL', 'Total')}</td>
-                    <td>{formatPrice(order?.total)}</td>
+                    <td>{parsePrice(order?.total)}</td>
                   </tr>
                 </tbody>
               </table>
@@ -303,7 +308,7 @@ const OrderDetailsUI = (props) => {
           onClickButton={handleOrderRedirect}
         />
       )}
-      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })}>
+      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })} padding='0' width='70%'>
         <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
       </Modal>
       <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>

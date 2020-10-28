@@ -1,10 +1,11 @@
 import React from 'react'
 import { OrderTypeControl, useLanguage } from 'ordering-components'
 import { Select } from '../../styles/Select'
-import { FaCarSide, FaTruckPickup } from 'react-icons/fa'
-import { GrDeliver } from 'react-icons/gr'
-import { AiFillShop } from 'react-icons/ai'
-import { GiFoodTruck } from 'react-icons/gi'
+import FaCarSide from '@meronex/icons/fa/FaCarSide'
+import FaTruckPickup from '@meronex/icons/fa/FaTruckPickup'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import AiFillShop from '@meronex/icons/ai/AiFillShop'
+import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
 import { Option } from './styles'
 
 const OrderTypeSelectorHeaderUI = (props) => {
