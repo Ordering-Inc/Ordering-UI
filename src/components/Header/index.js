@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useSession, useLanguage, useOrder, useEvent, useUtils } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import IosBasket from '@meronex/icons/ios/IosBasket'
-import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
-import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
 import {
   Header as HeaderContainer,
@@ -14,8 +11,7 @@ import {
   RightHeader,
   Menu,
   MenuLink,
-  SubMenu,
-  HeaderIcon
+  SubMenu
 } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
@@ -30,6 +26,7 @@ import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
 import { MomentContent } from '../MomentContent'
 import { AddressContent } from '../AddressContent'
+import { HeaderOption } from '../HeaderOption'
 
 export const Header = (props) => {
   const { isHome } = props
@@ -40,7 +37,6 @@ export const Header = (props) => {
   const [orderState] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
-  const [{ parseDate }] = useUtils()
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
@@ -139,12 +135,11 @@ export const Header = (props) => {
                         auth={auth}
                       />
                     ) : (
-                      <HeaderIcon variant='cart' onClick={() => openModal('cart')}>
-                        <span>
-                          <IosBasket />
-                          {cartsWithProducts.length > 0 && <p>{cartsWithProducts.length}</p>}
-                        </span>
-                      </HeaderIcon>
+                      <HeaderOption
+                        variant='cart'
+                        totalCarts={cartsWithProducts.length}
+                        onClick={(variant) => openModal(variant)}
+                      />
                     )}
                   </>
                 )
@@ -172,16 +167,16 @@ export const Header = (props) => {
           </SubMenu>
         ) : (
           <SubMenu>
-            <HeaderIcon variant='address' onClick={() => openModal('address')}>
-              <FaMapMarkerAlt />
-              {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
-            </HeaderIcon>
-            <HeaderIcon variant='moment' onClick={() => openModal('moment')}>
-              <FaRegClock />
-              {orderState.options?.moment
-                ? parseDate(orderState.options?.moment, { outputFormat: 'MM/DD hh:mma' })
-                : t('ASAP_ABBREVIATION', 'ASAP')}
-            </HeaderIcon>
+            <HeaderOption
+              variant='address'
+              addressState={orderState.options?.address?.address?.split(',')?.[0]}
+              onClick={(variant) => openModal(variant)}
+            />
+            <HeaderOption
+              variant='moment'
+              momentState={orderState.options?.moment}
+              onClick={(variant) => openModal(variant)}
+            />
           </SubMenu>
         )}
       <Modal
