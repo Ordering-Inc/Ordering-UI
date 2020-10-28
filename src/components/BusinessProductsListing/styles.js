@@ -8,6 +8,10 @@ export const ProductsContainer = styled.div`
 export const WrapContent = styled.div`
   padding: 15px;
   background: #F8F8F8;
+
+  @media (max-width: 380px) {
+    padding: 5px;
+  }
 `
 
 export const WrapperSearch = styled.div`

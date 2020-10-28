@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const MessagesContainer = styled.div`
   width: 100%;
@@ -13,6 +13,10 @@ export const HeaderProfile = styled.div`
   div {
      p {
        margin-left: 10px;
+       ${props => props.theme?.rtl && css`
+         margin-right: 10px;
+         margin-left: 0px;
+      `}
       }
      strong {
       p{
@@ -82,6 +86,11 @@ export const HeaderOnline = styled.div`
   text-align: left;
   margin-left: 10px;
 
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0px;
+    text-align: right;
+  `}
   h1,
   span {
     margin: 0px;
@@ -153,6 +162,12 @@ export const BubbleBusines = styled.div`
     border-radius: 60px 60px 60px 0px;
     padding: 10px 30px 15px 30px;
   }
+  ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 0px 97px;
+      &[name=image]{
+      border-radius: 60px 60px 0px 60px;
+     }
+  `}
 `
 
 export const BubbleCustomer = styled.div`
@@ -170,17 +185,31 @@ export const BubbleCustomer = styled.div`
     border-radius: 60px 60px 0px 60px;
     padding: 10px 30px 15px 30px;
   }
+
+  ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 97px 0px;
+      &[name=image]{
+      border-radius: 60px 60px 60px 0px;
+     }
+  `}
+
 `
 
 export const SkeletonBubbleCustomer = styled.div`
   span{
     border-radius: 97px 97px 0px 97px;
+    ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 97px 0px;
+    `}
   }
 `
 
 export const SkeletonBubbleBusiness = styled.div`
   span{
     border-radius: 97px 97px 97px 0px;
+    ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 0px 97px;
+    `}
   }
 `
 
@@ -202,6 +231,9 @@ export const MyName = styled.p`
     margin-block-end: 0.2em;
     font-size: 1.1em;
     text-align: right;
+    ${props => props.theme?.rtl && css`
+      text-align: left;
+  `}
 `
 
 export const TimeofSent = styled.p`
@@ -209,6 +241,9 @@ export const TimeofSent = styled.p`
   font-size: 0.8em;
   margin-block-start: initial;
   margin-block-end: initial;
+  ${props => props.theme?.rtl && css`
+    text-align: left;
+  `}
 `
 
 export const SendForm = styled.div`
@@ -236,6 +271,10 @@ export const SendImage = styled.label`
   height: 25px;
   padding-left: 20px;
   padding-right: 5px;
+  ${props => props.theme?.rtl && css`
+    padding-right: 20px;
+    padding-left: 5px;
+  `}
   input {
     display: none;
   }
@@ -266,7 +305,12 @@ export const WrapperSendMessageButton = styled.div`
        width: 1.5em;
        height: 1.5em; 
        vertical-align: middle;
-       color: white
+       color: white;
+       ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0px;
+        transform: rotate(270deg)
+      `}
     }
     &:disabled {
       opacity: 0.5;

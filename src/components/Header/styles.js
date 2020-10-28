@@ -61,11 +61,20 @@ export const Menu = styled.div`
   }
 
   > :first-child {
-    margin-left: 10px;
+      margin-left: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 10px;
+      margin-left: 0px;
+    `}
   }
 
   > :last-child {
+    
     margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+    `}
   }
 
   @media (max-width: 820px) {
@@ -127,7 +136,7 @@ export const SubMenu = styled(InnerHeader)`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 7px;
+    padding: 7px 20px 0px;
     box-sizing: border-box;
     margin: 0px;
   }

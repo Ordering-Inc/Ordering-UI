@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
@@ -18,6 +18,10 @@ export const HeaderItem = styled.div`
       justify-content: center;
       align-items: center;
       font-size: 10px;
+      ${props => props.theme?.rtl && css`
+        left: 0;
+        right: initial;
+    `} 
     }
     svg {
       color: ${props => props.theme.colors.primary};
@@ -47,29 +51,4 @@ export const PopoverArrow = styled.div`
   border-right: 7px solid transparent;
   border-bottom: 8px solid #FFF;
   top: -8px;
-`
-
-export const WrappNotCarts = styled.div`
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  margin: auto;
-
-  img {
-    width: 200px;
-  }
-  h1 {
-    margin: 5px 0px 0px;
-    opacity: 0.5;
-    text-align: center;
-    font-size: 24px;
-  }
-`
-
-export const WrapperCarts = styled.div`
-  /* max-height: 500px; */
-  margin-bottom: 10px;
 `

@@ -3,7 +3,15 @@ import { useSession, useLanguage, useOrder, useEvent } from 'ordering-components
 import { useTheme } from 'styled-components'
 
 import {
-  Header as HeaderContainer, HeaderInvert, InnerHeader, LogoHeader, LeftHeader, RightHeader, Menu, MenuLink, SubMenu
+  Header as HeaderContainer,
+  HeaderInvert,
+  InnerHeader,
+  LogoHeader,
+  LeftHeader,
+  RightHeader,
+  Menu,
+  MenuLink,
+  SubMenu
 } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
@@ -14,8 +22,15 @@ import { UserPopover } from '../UserPopover'
 import { MomentPopover } from '../MomentPopover'
 import { CartPopover } from '../CartPopover'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
+import { CartContent } from '../CartContent'
+import { Modal } from '../Modal'
+import { MomentContent } from '../MomentContent'
+import { AddressContent } from '../AddressContent'
+import { HeaderOption } from '../HeaderOption'
 
 export const Header = (props) => {
+  const { isHome } = props
+
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
@@ -23,7 +38,20 @@ export const Header = (props) => {
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
 
-  const { isHome } = props
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalSelected, setModalSelected] = useState(null)
+  const cartsWithProducts = Object.values(orderState?.carts).filter(cart => cart.products.length > 0)
+
+  const windowSize = useWindowSize()
+  const onlineStatus = useOnlineStatus()
+
+  const HeaderType = isHome ? HeaderInvert : HeaderContainer
+
+  const openModal = (opt) => {
+    setModalSelected(opt)
+    setModalIsOpen(true)
+  }
+  const closeModal = () => setModalIsOpen(false)
 
   const handleTogglePopover = (type) => {
     setOpenPopover({
@@ -38,11 +66,6 @@ export const Header = (props) => {
       [type]: false
     })
   }
-
-  const windowSize = useWindowSize()
-  const onlineStatus = useOnlineStatus()
-
-  const HeaderType = isHome ? HeaderInvert : HeaderContainer
 
   const handleAddProduct = () => {
     handleTogglePopover('cart')
@@ -62,8 +85,8 @@ export const Header = (props) => {
       <InnerHeader>
         <LeftHeader>
           <LogoHeader onClick={() => handleGoToPage({ page: orderState.options?.address?.location ? 'search' : 'home' })}>
-            <img src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
-            <img src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
+            <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
+            <img alt='Isotype' width='45px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
           {onlineStatus && (
             <Menu>
@@ -74,6 +97,8 @@ export const Header = (props) => {
                 onClose={() => handleClosePopover('moment')}
               />
               <AddressesPopover
+                auth={auth}
+                addressState={orderState?.options?.address}
                 open={openPopover.addresses}
                 onClick={() => handleTogglePopover('addresses')}
                 onClose={() => handleClosePopover('addresses')}
@@ -101,12 +126,21 @@ export const Header = (props) => {
                       onClick={() => handleTogglePopover('user')}
                       onClose={() => handleClosePopover('user')}
                     />
-                    <CartPopover
-                      open={openPopover.cart}
-                      onClick={() => handleTogglePopover('cart')}
-                      onClose={() => handleClosePopover('cart')}
-                      auth={auth}
-                    />
+                    {windowSize.width > 768 ? (
+                      <CartPopover
+                        open={openPopover.cart}
+                        carts={cartsWithProducts}
+                        onClick={() => handleTogglePopover('cart')}
+                        onClose={() => handleClosePopover('cart')}
+                        auth={auth}
+                      />
+                    ) : (
+                      <HeaderOption
+                        variant='cart'
+                        totalCarts={cartsWithProducts.length}
+                        onClick={(variant) => openModal(variant)}
+                      />
+                    )}
                   </>
                 )
               }
@@ -115,20 +149,60 @@ export const Header = (props) => {
           </RightHeader>
         )}
       </InnerHeader>
-      {windowSize.width <= 820 && onlineStatus && (
-        <SubMenu>
-          <AddressesPopover
-            open={openPopover.addresses}
-            onClick={() => handleTogglePopover('addresses')}
-            onClose={() => handleClosePopover('addresses')}
+      {windowSize.width <= 820 && onlineStatus &&
+        windowSize.width > 768 ? (
+          <SubMenu>
+            <AddressesPopover
+              auth={auth}
+              addressState={orderState?.options?.address}
+              open={openPopover.addresses}
+              onClick={() => handleTogglePopover('addresses')}
+              onClose={() => handleClosePopover('addresses')}
+            />
+            <MomentPopover
+              open={openPopover.moment}
+              onClick={() => handleTogglePopover('moment')}
+              onClose={() => handleClosePopover('moment')}
+            />
+          </SubMenu>
+        ) : (
+          <SubMenu>
+            <HeaderOption
+              variant='address'
+              addressState={orderState.options?.address?.address?.split(',')?.[0]}
+              onClick={(variant) => openModal(variant)}
+            />
+            <HeaderOption
+              variant='moment'
+              momentState={orderState.options?.moment}
+              onClick={(variant) => openModal(variant)}
+            />
+          </SubMenu>
+        )}
+      <Modal
+        open={modalIsOpen}
+        onClose={() => closeModal()}
+        width='70%'
+        padding='0'
+      >
+        {modalSelected === 'cart' && (
+          <CartContent
+            carts={cartsWithProducts}
+            isOrderStateCarts={!!orderState.carts}
+            onClose={closeModal}
           />
-          <MomentPopover
-            open={openPopover.moment}
-            onClick={() => handleTogglePopover('moment')}
-            onClose={() => handleClosePopover('moment')}
+        )}
+        {modalSelected === 'address' && (
+          <AddressContent
+            auth={auth}
+            addressState={orderState?.options?.address}
+            onClose={closeModal}
           />
-        </SubMenu>
-      )}
+        )}
+        {modalSelected === 'moment' && (
+          <MomentContent />
+        )}
+      </Modal>
     </HeaderType>
   )
 }

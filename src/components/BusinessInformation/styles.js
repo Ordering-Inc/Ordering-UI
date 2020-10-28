@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const BusinessInformationContainer = styled.div`
   width: 100%;
@@ -41,7 +41,12 @@ export const BussinessTitle = styled.div`
   margin-bottom: 10px;
   border-radius: 16px;
   padding: 10px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0px;
+  `}
 `
+
 export const HeaderImage = styled.div`
   width: 20%;
   margin-top: auto;
@@ -104,22 +109,34 @@ export const BusinessInfoItem = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 0px 5px 0px 16px;
+  ${props => props.theme?.rtl && css`
+    padding: 0px 16px 0px 5px;
+  `}
   div {
     display: flex;
     justify-content: space-between;
+    h5, 
     p {
       display: flex;
       align-items: center;
       margin: 0px;
       text-transform: capitalize;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       svg {
         margin-right: 4px;
+        ${props => props.theme?.rtl && css`
+          margin-left: 4px;
+          margin-right: 0px;
+        `}
         &.start {
           color: #FFC917;
         }
         &.popup {
-          color: #D81313;
+          color: ${props => props.theme.colors.primary};
           cursor: pointer;
+          transform: rotate(180deg);
         }
       }
     }
@@ -200,7 +217,10 @@ export const ScheduleBlock = styled.div`
   padding: 0px 15px;
   border-right: 1px solid #CCC;
   width: 15%;
-
+  ${props => props.theme?.rtl && css`
+    border-left: 1px solid #CCC;
+    border-right: none;
+  `}
   h4 {
     margin: 0px 0px 3px;
     font-weight: bold;
@@ -281,4 +301,8 @@ export const ModalIcon = styled.span`
   top: 5px;
   z-index: 1;
   background: rgba(0,0,0,0.1);
+  ${props => props.theme?.rtl && css`
+    left: 5px;
+    right: initial;
+  `}
 `
