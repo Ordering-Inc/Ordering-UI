@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
-import { useApi } from 'ordering-components'
+import { useApi, useEvent } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
 
 export const BusinessProductsList = (props) => {
@@ -12,6 +12,7 @@ export const BusinessProductsList = (props) => {
   const [category, product] = search && search.substring(1).split('&')
   const categoryId = category && category.split('=')[1]
   const productId = product && product.split('=')[1]
+  const [events] = useEvent()
 
   const businessProductsProps = {
     ...props,
@@ -64,6 +65,9 @@ export const BusinessProductsList = (props) => {
       return window.location.pathname.includes('/store/')
         ? history.push(`/store/${slug}?category=${category}&product=${product}`)
         : history.push(`/${slug}?category=${category}&product=${product}`)
+    },
+    onCheckoutRedirect: (cartUuid) => {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid } })
     }
   }
 
