@@ -1,12 +1,13 @@
 import React from 'react'
 import { loadStripe } from '@stripe/stripe-js/pure'
-import { useHistory, useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 
 import { Checkout } from '../../../src/components/Checkout'
+import { useEvent } from 'ordering-components'
 
 export const CheckoutPage = (props) => {
-  const history = useHistory()
   const { cartUuid } = useParams()
+  const [events] = useEvent()
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search)
@@ -48,23 +49,23 @@ export const CheckoutPage = (props) => {
     query: useQuery(),
     onPlaceOrderClick: (data, paymethod, cart) => {
       if (cart.order?.uuid) {
-        history.push(`/orders/${cart.order?.uuid}`)
+        events.emit('go_to_page', { page: 'order_detail', params: { orderId: cart.order?.uuid } })
       }
     },
     handleOrderRedirect: (uuid) => {
-      history.push(`/orders/${uuid}`)
+      events.emit('go_to_page', { page: 'order_detail', params: { orderId: uuid } })
     },
     handleCheckoutRedirect: (uuid) => {
-      history.push(`/checkout/${uuid}`)
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: uuid } })
     },
     handleSearchRedirect: () => {
-      history.push('/search')
+      events.emit('go_to_page', { page: 'search' })
     },
     handleCheckoutListRedirect: () => {
-      history.push('/checkout')
+      events.emit('go_to_page', { page: 'checkout' })
     },
-    handleStoreRedirect: (slug) => {
-      history.push(`/store/${slug}`)
+    handleStoreRedirect: (store) => {
+      events.emit('go_to_page', { page: 'business', params: { store } })
     }
   }
   return (

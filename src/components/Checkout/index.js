@@ -190,7 +190,7 @@ const CheckoutUI = (props) => {
           </WrapperPlaceOrderButton>
         )}
 
-        {!cart.valid_address && (
+        {!cart?.valid_address && (
           <InvalidAddress>
             {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
           </InvalidAddress>

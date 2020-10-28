@@ -1,16 +1,16 @@
 import React from 'react'
 import { BusinessesListing } from '../../../src/components/BusinessesListing'
-import { useHistory } from 'react-router-dom'
+import { useEvent } from 'ordering-components'
 
 export const BusinessesList = (props) => {
-  const history = useHistory()
+  const [events] = useEvent()
 
   const businessListingProps = {
     ...props,
     isSearchByName: true,
     isSearchByDescription: true,
     onBusinessClick: (business) => {
-      history.push(`/store/${business.slug}`)
+      events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     },
     propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
   }
