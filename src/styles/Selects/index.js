@@ -4,6 +4,7 @@ import { darken } from 'polished'
 export const Option = styled.div`
   padding-left: 15px;
   padding-right: 15px;
+  min-width: 100px;
   color: #333;
   cursor: pointer;
 
