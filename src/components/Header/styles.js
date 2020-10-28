@@ -136,7 +136,7 @@ export const SubMenu = styled(InnerHeader)`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 7px;
+    padding: 7px 20px 0px;
     box-sizing: border-box;
     margin: 0px;
   }

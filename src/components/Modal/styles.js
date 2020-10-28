@@ -22,7 +22,7 @@ export const ModalDialog = styled.div`
   @media (max-width: 860px) {
     width: 80%;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     width: 100vw;
     height: 100vh;
     max-height: 100vh;
@@ -78,7 +78,6 @@ export const ModalOrderTypes = styled.div`
     padding-right: 0px;
   `}
 `
-
 export const ModalIcon = styled.span`
   position: absolute;
   right: 5px;

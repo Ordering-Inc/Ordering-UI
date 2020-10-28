@@ -95,6 +95,10 @@ export const FormControl = styled.form`
       }
     }
   }
+
+  @media (max-width: 480px) {
+    padding: 0px;
+  }
 `
 
 export const AddressWrap = styled.div`

@@ -16,4 +16,8 @@ export const CategoriesContainer = styled.div`
     white-space: nowrap;
     overflow: hidden;
   }
+
+  @media (max-width: 380px) {
+    padding: 5px;
+  }
 `

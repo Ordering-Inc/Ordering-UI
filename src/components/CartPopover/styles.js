@@ -52,28 +52,3 @@ export const PopoverArrow = styled.div`
   border-bottom: 8px solid #FFF;
   top: -8px;
 `
-
-export const WrappNotCarts = styled.div`
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  margin: auto;
-
-  img {
-    width: 200px;
-  }
-  h1 {
-    margin: 5px 0px 0px;
-    opacity: 0.5;
-    text-align: center;
-    font-size: 24px;
-  }
-`
-
-export const WrapperCarts = styled.div`
-  /* max-height: 500px; */
-  margin-bottom: 10px;
-`

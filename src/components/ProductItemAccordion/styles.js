@@ -92,10 +92,16 @@ export const ContentInfo = styled.div`
   text-transform: capitalize;
   margin-left: 10px;
   width: calc(65% - 60px);
+
+  @media (max-width: 410px) {
+    width: 60%;
+  }
+
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
     margin-left: 0px;
   `}
+
   h3 {
     font-size: 18px;
     margin: 0px;
@@ -112,16 +118,21 @@ export const ContentInfo = styled.div`
       font-size: 14px;
     }
 
-    div span {
-      height: 20px;
-      svg {
-        font-size: 20px;
-        &:nth-child(1) {
-          margin-right: 3px;
-          ${props => props.theme?.rtl && css`
-            margin-left: 3px;
-            margin-right: 0px;
-          `}
+    div {
+      @media (max-width: 410px) {
+        display: flex;
+      }
+      span {
+        height: 20px;
+        svg {
+          font-size: 20px;
+          &:nth-child(1) {
+            margin-right: 3px;
+            ${props => props.theme?.rtl && css`
+              margin-left: 3px;
+              margin-right: 0px;
+            `}
+          }
         }
       }
     }
@@ -223,7 +234,11 @@ export const ProductActionsEdit = styled.span`
   }
 `
 
-export const ProductActionsDelete = styled(ProductActionsEdit)``
+export const ProductActionsDelete = styled(ProductActionsEdit)`
+  svg {
+    margin-right: 0px;
+  }
+`
 
 export const ProductPriceSection = styled.div`
   width: 30%;

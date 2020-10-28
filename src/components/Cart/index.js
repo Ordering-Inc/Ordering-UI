@@ -9,6 +9,7 @@ import { Modal } from '../Modal'
 import { CouponControl } from '../CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 import {
   CartContainer,
@@ -38,6 +39,7 @@ const CartUI = (props) => {
   const [events] = useEvent()
   const [isCheckout, setIsCheckout] = useState(false)
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const windowSize = useWindowSize()
 
   const momentFormatted = !orderState?.option?.moment ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
@@ -64,6 +66,9 @@ const CartUI = (props) => {
 
   const handleStoreRedirect = (slug) => {
     events.emit('go_to_page', { page: 'business', params: { store: slug } })
+    if (windowSize.width <= 768) {
+      onClickCheckout()
+    }
   }
 
   const handleChangeView = ({ page, params }) => {
