@@ -4,7 +4,7 @@ export const SignUpContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  min-height: 100vh;
+  min-height: ${({ isPopup }) => isPopup ? '90vh' : '100vh'};
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -83,14 +83,16 @@ export const SignUpWith = styled.div`
 `
 
 export const FormInput = styled.form`
-  width: 70%;
+  width: ${({ isPopup }) => isPopup ? '90%' : '70%'};
   display: flex;
   flex-direction: column;
 
-  * {
-    padding: 8px 20px;
-    margin: 10px;
-  }
+  ${({ isSkeleton }) => !isSkeleton && css`
+    * {
+      padding: 8px 20px;
+      margin: 10px;
+    }
+  `}
 
   input:not(:last-child) {
     margin-top: 10px;
@@ -132,7 +134,7 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: calc(70% - 20px);
+    width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(70% - 20px)'};
 
     @media (max-width: 480px) {
       width: calc(90% - 20px);
@@ -157,7 +159,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-   width: calc(70% - 20px);
+   width:  ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(70% - 20px)'};
    margin-top: 5px;
 
   button {

@@ -4,7 +4,7 @@ export const ForgotPasswordContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  min-height: 100vh;
+  min-height: ${({ isPopup }) => isPopup ? '90vh' : '100vh'};
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -77,7 +77,7 @@ export const FormSide = styled(Side)`
 `
 
 export const FormInput = styled.form`
-  width: 70%;
+  width: ${({ isPopup }) => isPopup ? '90%' : '70%'};
   display: flex;
   flex-direction: column;
 
@@ -126,7 +126,7 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: calc(70% - 20px);
+    width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(70% - 20px)'};
 
     @media (max-width: 480px) {
       width: calc(90% - 20px);
