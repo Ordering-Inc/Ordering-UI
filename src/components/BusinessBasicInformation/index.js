@@ -84,15 +84,15 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <>
                   {orderState?.options?.type === 1 ? (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.delivery_time)}
-                    </p>
+                    </h5>
                   ) : (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.pickup_time)}
-                    </p>
+                    </h5>
                   )}
                 </>
               ) : (
@@ -100,30 +100,30 @@ export const BusinessBasicInformation = (props) => {
               )}
 
               {!loading ? (
-                <p>
+                <h5>
                   <VscLocation />
                   {parseDistance(business?.distance || 0)}
-                </p>
+                </h5>
               ) : (
                 <Skeleton width={70} />
               )}
 
               {!loading ? (
-                <p>
+                <h5>
                   <GrDeliver />
                   {business && parsePrice(business?.delivery_price || 0)}
-                </p>
+                </h5>
               ) : (
                 <Skeleton width={70} />
               )}
 
               {!loading && (
-                <p>
+                <h5>
                   <BsExclamationCircle
                     className='popup'
                     onClick={() => setOpenBusinessInformation(true)}
                   />
-                </p>
+                </h5>
               )}
             </div>
           </BusinessInfoItem>

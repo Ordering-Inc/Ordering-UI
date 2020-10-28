@@ -115,11 +115,15 @@ export const BusinessInfoItem = styled.div`
   div {
     display: flex;
     justify-content: space-between;
+    h5, 
     p {
       display: flex;
       align-items: center;
       margin: 0px;
       text-transform: capitalize;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       svg {
         margin-right: 4px;
         ${props => props.theme?.rtl && css`
@@ -130,8 +134,9 @@ export const BusinessInfoItem = styled.div`
           color: #FFC917;
         }
         &.popup {
-          color: #D81313;
+          color: ${props => props.theme.colors.primary};
           cursor: pointer;
+          transform: rotate(180deg);
         }
       }
     }
