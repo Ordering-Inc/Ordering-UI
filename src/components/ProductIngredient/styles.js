@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -14,6 +14,10 @@ export const Container = styled.div`
 
   span:nth-child(1) {
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
     svg {
       color: ${props => props.theme.colors.primary};
       font-size: 25px;

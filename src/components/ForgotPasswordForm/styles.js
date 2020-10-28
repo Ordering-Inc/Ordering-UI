@@ -109,6 +109,10 @@ export const RedirectLink = styled.div`
 
   span {
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
   }
 
   a {

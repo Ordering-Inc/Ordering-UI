@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ContainerCard = styled.div`
   max-height: 300px;
@@ -97,8 +97,17 @@ export const BusinessTags = styled.div`
     padding: 8px;
     border-radius: 10px;
     margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
     &:last-child {
-      margin-right: 0px;
+      ${props => props.theme?.rtl ? css`
+        margin-left: 0px;
+    ` : css`
+        margin-right: 0px;
+    `
+    }
     }
   }
 
@@ -158,7 +167,9 @@ export const BusinessInfoItem = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 0px 5px 0px 16px;
-
+  ${props => props.theme?.rtl && css`
+    padding: 0px 16px 0px 5px;    
+  `}
   .reviews {
     display: flex;
     align-items: center;
@@ -166,6 +177,10 @@ export const BusinessInfoItem = styled.div`
       margin-right: 3px;
       font-size: 22px;
       color: #FDC918;
+      ${props => props.theme?.rtl && css`
+        margin-left: 3px;
+        margin-right: 0;    
+    `}
     }
   }
 
@@ -179,6 +194,10 @@ export const BusinessInfoItem = styled.div`
       margin: 0px;
       img {
         margin-right: 4px;
+        ${props => props.theme?.rtl && css`
+          margin-left: 4px;
+          margin-right: 0px;
+       `}
       }
     }
     p.bold {
@@ -212,6 +231,10 @@ export const Medadata = styled.div`
   p {
     svg {
       margin-right: 3px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 3px;
+        margin-right: 0;
+    `}
     }
   }
 `

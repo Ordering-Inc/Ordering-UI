@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const PaymentMethodsContainer = styled.div`
   width: 100%;
@@ -30,6 +30,10 @@ export const PayCard = styled.div`
   margin-top: 10px;
   text-align: center;
 
+  ${props => props.theme?.rtl && css`
+    margin-left: 10px;
+    margin-right: 0;
+  `}
   @media (max-width: 840px) {
     width: calc(20% - 12px);
   }
@@ -86,5 +90,9 @@ export const CardItemContent = styled.div`
 
   > * {
     margin-right: 10px
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
   }
 `

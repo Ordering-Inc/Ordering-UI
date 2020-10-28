@@ -115,6 +115,10 @@ export const RedirectLink = styled.div`
 
   span {
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
   }
 
   a {
@@ -175,6 +179,10 @@ export const SocialButtons = styled.div`
       width: 79%;
       span{
         padding-left: 10%;
+        ${props => props.theme?.rtl && css`
+          margin-right: 10%;
+          margin-left: 0;
+        `}
       }
     }
   }

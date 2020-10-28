@@ -29,6 +29,10 @@ export const Option = styled.div`
       justify-content: flex-start;
       svg {
         margin-right: 3px;
+        ${props => props.theme?.rtl && css`
+          margin-left: 3px;
+          margin-right: 0px;
+       `}
       }
   `}
 `
@@ -46,10 +50,22 @@ export const Options = styled.div`
   ${({ position }) => position?.toLowerCase() === 'left' && css`
     left: 0;
     margin-left: -1px;
+    ${props => props.theme?.rtl && css`
+        margin-right: -1px;
+        margin-left: 0px;
+        right: 0;
+        left: initial
+    `}
   `}
   ${({ position }) => position?.toLowerCase() === 'right' && css`
     right: 0;
     margin-right: -1px;
+    ${props => props.theme?.rtl && css`
+        margin-left: -1px;
+        margin-right: 0px;
+        left: 0;
+        right: initial;
+    `}
   `}
 `
 
@@ -99,6 +115,10 @@ export const Chevron = styled.div`
   display: flex;
   align-items: center;
   margin-left: 5px;
+  ${props => props.theme?.rtl && css`
+        margin-right: 5px;
+        margin-left: 0;
+    `}
 `
 
 export const Header = styled.div`
@@ -109,9 +129,13 @@ export const SelectImage = styled.div`
   width: 28px;
   height: 28px;
   border-radius: 1000px;
-  margin-right: 5px;
+  margin-left: 5px;
   overflow: hidden;
 
+  ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0;
+  `}
 
   img {
     width: 100%;

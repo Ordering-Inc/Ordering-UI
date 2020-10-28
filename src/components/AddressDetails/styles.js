@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const AddressContainer = styled.div`
   display: flex;
@@ -33,11 +33,19 @@ export const Text = styled.h1`
     color: #F2BB40;
     margin-left: 5px;
     font-size: 24px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 5px;
+      margin-left: initial;
+    `}
   }
   span {
     font-size: 18px;
     color: ${props => props.theme.colors.primary};
     margin-left: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 5px;
+      margin-left: initial;
+    `}
   }
 
   @media (max-width: 580px) {

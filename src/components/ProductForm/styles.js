@@ -1,5 +1,5 @@
 import { lighten } from 'polished'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ProductContainer = styled.div`
   display: flex;
@@ -71,6 +71,9 @@ export const ProductInfo = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-top: 0px;
+    ${props => props.theme?.rtl && css`
+      text-align: right;
+    `}
   }
 
   p {
@@ -84,6 +87,9 @@ export const ProductInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
+    ${props => props.theme?.rtl && css`
+      text-align: right;
+    `}
 }
 
   @media (max-width: 1200px) {
@@ -184,6 +190,11 @@ export const ProductActions = styled.div`
     span:last-child {
       float: right;
       margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        float: left;
+        margin-left: 10px;
+        margin-right: 0px;
+      `}
     }
     &.soldout {
       width: 100%;
