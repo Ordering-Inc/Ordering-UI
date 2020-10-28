@@ -39,7 +39,7 @@ const CartUI = (props) => {
   const [isCheckout, setIsCheckout] = useState(false)
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
-  const momentFormatted = !orderState?.option?.moment ? t('ASAP_ABBREVIATION', 'ASAP') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
+  const momentFormatted = !orderState?.option?.moment ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
   const handleDeleteClick = (product) => {
     setConfirm({
