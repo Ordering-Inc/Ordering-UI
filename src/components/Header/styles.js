@@ -110,7 +110,18 @@ export const MenuLink = styled.a`
     color: ${props => props.theme.colors.primaryContrast};
     border-radius: 100px;
     padding: 10px 15px;
+
+    @media (max-width: 512px) {
+      padding: 5px 10px;
+    }
   `}
+
+  ${({ highlight }) => !highlight && css`
+    @media (max-width: 480px) {
+      display: none;
+    }
+  `}
+
 `
 
 export const HeaderInvert = styled(Header)`

@@ -20,7 +20,7 @@ const MomentControlUI = (props) => {
   const windowSize = useWindowSize()
 
   return (
-    <>
+    <div id='moment_control'>
       <Title>{t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')}</Title>
       <Days>
         {
@@ -65,7 +65,7 @@ const MomentControlUI = (props) => {
           ))
         }
       </Hours>
-    </>
+    </div>
   )
 }
 
