@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -31,6 +31,10 @@ export const UserDetailsContainer = styled.div`
     h1 {
       margin: 0px;
       font-size: 24px;
+    }
+
+    @media (min-width: 993px) {
+      text-align: center;
     }
   }
 
@@ -65,7 +69,7 @@ export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 20px 0px 0px;
 
   button {
     width: 70%;
@@ -103,6 +107,10 @@ export const WarningMessage = styled.div`
     top: 0;
     left: 0;
     margin: 11px;
+    ${props => props.theme?.rtl && css`
+        right: 0;
+        left: initial
+    `}  
   }
 
   h1 {
@@ -141,7 +149,6 @@ export const NotFound = styled.div`
 `
 
 export const NotFoundImage = styled.div`
-  max-width: 300px;
   max-width: 300px;
 
   img {
@@ -254,4 +261,10 @@ export const CartItemActions = styled.div`
   @media (max-width: 576px) {
     font-size: 14px;
   }
+`
+
+export const InvalidAddress = styled.p`
+  margin: 10px auto 15px;
+  text-align: center;
+  color: ${props => props.theme.colors.primary};
 `

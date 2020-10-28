@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const AddressListContainer = styled.div`
   display: flex;
@@ -28,6 +28,10 @@ export const AddressItem = styled.li`
     font-size: 15px;
     margin-left: 5px;
     font-weight: bold;
+    ${props => props.theme?.rtl && css`
+      margin-right: 5px;
+      margin-left: 0;    
+  `}
   }
 
   .wrapAddress {
@@ -38,6 +42,10 @@ export const AddressItem = styled.li`
       display: flex;
       cursor: pointer;
       margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0px;
+      `}
       &.radio {
         color: ${props => props.theme.colors.primary};
         font-size: 24px;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const MyOrdersContainer = styled.div`
   background-color: #f8f8f8;
@@ -183,6 +183,9 @@ export const SkeletonText = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
 `
 
 export const SkeletonOrdersPast = styled.div`
@@ -201,4 +204,8 @@ export const SkeletonReorder = styled.div`
   position: relative;
   text-align: center;
   left: 60%;
+  ${props => props.theme?.rtl && css`
+    left: initial;
+    right: 60%;
+  `}
 `

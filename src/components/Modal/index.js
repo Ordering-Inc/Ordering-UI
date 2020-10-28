@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdClose } from 'react-icons/md'
+import MdClose from '@meronex/icons/md/MdClose'
 import { Popup, useLanguage } from 'ordering-components'
 import {
   ModalDialog,

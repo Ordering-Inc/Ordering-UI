@@ -23,6 +23,10 @@ export const ContentDay = styled.div`
   flex-direction: column;
   align-items: center;
   border-right: 1px solid #d9d9d9;
+  ${props => props.theme?.rtl && css`
+    border-right: 0;
+    border-left: 1px solid #d9d9d9;
+  `}
 `
 
 export const Day = styled.div`
@@ -41,7 +45,11 @@ export const Day = styled.div`
 
   :last-child {
     ${ContentDay} {
-      border-right: 0;
+      ${props => props.theme?.rtl ? css`
+        border-left: 0;
+      ` : css`
+        border-right: 0;
+      `}
     }
   }
 

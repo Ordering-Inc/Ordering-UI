@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { FcCancel } from 'react-icons/fc'
-import { TiPencil } from 'react-icons/ti'
+import FcCancel from '@meronex/icons/fc/FcCancel'
+import TiPencil from '@meronex/icons/ti/TiPencil'
 import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController, useLanguage } from 'ordering-components'
 

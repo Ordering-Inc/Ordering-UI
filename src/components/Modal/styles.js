@@ -41,6 +41,10 @@ export const ModalActions = styled.div`
     height: 45px;
     &:nth-child(1) {
       margin-right: 25px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 25px;
+        margin-right: 0px;
+      `}
     }
   }
 `
@@ -60,8 +64,20 @@ export const ModalTitle = styled.h2`
   padding-left: 10px;
   text-transform: capitalize;
   flex: 1;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 0px;
+  `}
 `
 
+export const ModalOrderTypes = styled.div`
+  margin-right: 15px;
+  ${props => props.theme?.rtl && css`
+    padding-left: 15px;
+    padding-right: 0px;
+  `}
+`
 export const ModalIcon = styled.span`
   position: absolute;
   right: 5px;
@@ -69,4 +85,8 @@ export const ModalIcon = styled.span`
   font-size: 30px;
   cursor: pointer;
   z-index: 1;
+  ${props => props.theme?.rtl && css`
+    left: 5px;
+    right: initial;
+  `}
 `

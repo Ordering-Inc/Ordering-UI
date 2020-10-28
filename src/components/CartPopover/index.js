@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { IoIosBasket } from 'react-icons/io'
+import IosBasket from '@meronex/icons/ios/IosBasket'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -22,7 +22,7 @@ export const CartPopover = (props) => {
   const popperElement = useRef()
   const arrowElement = useRef()
   const popper = usePopper(referenceElement.current, popperElement.current, {
-    placement: 'auto',
+    placement: theme?.rtl ? 'bottom' : 'auto',
     modifiers: [
       { name: 'arrow', options: { element: arrowElement.current } },
       {
@@ -70,7 +70,7 @@ export const CartPopover = (props) => {
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick}>
         <span>
-          <IoIosBasket />
+          <IosBasket />
           {cartsWithProducts.length > 0 && <p>{cartsWithProducts.length}</p>}
         </span>
       </HeaderItem>

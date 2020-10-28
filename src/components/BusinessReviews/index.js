@@ -5,7 +5,7 @@ import { BusinessReviews as BusinessReviewController, useLanguage } from 'orderi
 import { ReviewOf, Content, ReviewContainer, Comments, Comment, Scores, ScoreDiv, SkeletonContainer } from './styles'
 import { Select } from '../../styles/Select'
 
-import { AiOutlineStar } from 'react-icons/ai'
+import AiOutlineStar from '@meronex/icons/ai/AiOutlineStar'
 
 const Score = ({ star, text }) => (
   <ScoreDiv>
