@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { FiClock } from 'react-icons/fi'
-import { VscLocation } from 'react-icons/vsc'
-import { GrDeliver } from 'react-icons/gr'
-import { FaStar } from 'react-icons/fa'
-import { BsExclamationCircle } from 'react-icons/bs'
+import FiClock from '@meronex/icons/fi/FiClock'
+import VscLocation from '@meronex/icons/vsc/VscLocation'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import FaStar from '@meronex/icons/fa/FaStar'
+import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
+
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 
-import { useConfig, useOrder } from 'ordering-components'
+import { useUtils, useOrder } from 'ordering-components'
 
 import { optimizeImage, convertHoursToMinutes } from '../../utils'
 
@@ -34,7 +35,7 @@ export const BusinessBasicInformation = (props) => {
 
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
 
-  const [, { parsePrice, parseDistance }] = useConfig()
+  const [{ parsePrice, parseDistance }] = useUtils()
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return 'none'
@@ -83,15 +84,15 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <>
                   {orderState?.options?.type === 1 ? (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.delivery_time)}
-                    </p>
+                    </h5>
                   ) : (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.pickup_time)}
-                    </p>
+                    </h5>
                   )}
                 </>
               ) : (
@@ -99,30 +100,30 @@ export const BusinessBasicInformation = (props) => {
               )}
 
               {!loading ? (
-                <p>
+                <h5>
                   <VscLocation />
                   {parseDistance(business?.distance || 0)}
-                </p>
+                </h5>
               ) : (
                 <Skeleton width={70} />
               )}
 
               {!loading ? (
-                <p>
+                <h5>
                   <GrDeliver />
                   {business && parsePrice(business?.delivery_price || 0)}
-                </p>
+                </h5>
               ) : (
                 <Skeleton width={70} />
               )}
 
               {!loading && (
-                <p>
+                <h5>
                   <BsExclamationCircle
                     className='popup'
                     onClick={() => setOpenBusinessInformation(true)}
                   />
-                </p>
+                </h5>
               )}
             </div>
           </BusinessInfoItem>

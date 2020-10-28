@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const BusinessContainerStyled = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ export const BusinessContent = styled.div`
   width: 340px;
 
   @media (max-width: 380px) {
-    margin: 3px;
+    margin: 0px 1px 1px;
   }
 `
 
@@ -90,16 +90,27 @@ export const BusinessInfoItem = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 0px 5px 0px 16px;
+  ${props => props.theme?.rtl && css`
+    padding: 0px 16px 0px 5px;
+  `}
   div {
     display: flex;
     justify-content: space-between;
+    h5,
     p {
       display: flex;
       align-items: center;
       margin: 0px;
       text-transform: capitalize;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       svg {
         margin-right: 4px;
+        ${props => props.theme?.rtl && css`
+          margin-left: 4px;
+          margin-right: 0px;
+        `}
         &.start {
           color: #FFC917;
         }

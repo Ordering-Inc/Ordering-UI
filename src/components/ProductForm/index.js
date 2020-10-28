@@ -6,7 +6,7 @@ import {
   useSession,
   useLanguage,
   useOrder,
-  useConfig
+  useUtils
 } from 'ordering-components'
 
 import { scrollTo } from '../../utils'
@@ -61,7 +61,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [, { parsePrice }] = useConfig()
+  const [{ parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
 
@@ -122,7 +122,7 @@ const ProductOptionsUI = (props) => {
         <>
           <WrapperImage>
             <ProductImage>
-              <img src={product?.images || theme.images?.dommies?.product} alt='product' />
+              <img src={product?.images || theme.images?.dummies?.product} alt='product' />
             </ProductImage>
           </WrapperImage>
           <ProductInfo>
@@ -195,7 +195,8 @@ const ProductOptionsUI = (props) => {
                     outline
                     onClick={decrement}
                     disabled={productCart.quantity === 1 || isSoldOut}
-                  >-
+                  >
+                    <span className='sign'>-</span>
                   </Button>
                   <span>{productCart.quantity}</span>
                   <Button
@@ -204,7 +205,8 @@ const ProductOptionsUI = (props) => {
                     outline
                     onClick={increment}
                     disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
-                  >+
+                  >
+                    <span className='sign'>+</span>
                   </Button>
                 </div>)}
 

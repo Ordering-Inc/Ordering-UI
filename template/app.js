@@ -170,6 +170,9 @@ export const App = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
+                  <Route exact path='/:store'>
+                    <BusinessProductsList />
+                  </Route>
                   <Route exact path='/orders/:orderId'>
                     {auth
                       ? <OrderDetailsPage />

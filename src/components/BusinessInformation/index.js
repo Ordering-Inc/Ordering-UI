@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
-import { MdClose } from 'react-icons/md'
+import MdClose from '@meronex/icons/md/MdClose'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
   useOrder,
   useLanguage,
-  useConfig
+  useUtils
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import {
@@ -29,8 +29,10 @@ import {
   ModalIcon
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
-
-import { GrDeliver, FaStar, FiClock, VscLocation } from 'react-icons/all'
+import GrDeliver from '@meronex/icons/gr/GrDeliver'
+import FaStar from '@meronex/icons/fa/FaStar'
+import FiClock from '@meronex/icons/fi/FiClock'
+import VscLocation from '@meronex/icons/vsc/VscLocation'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -47,7 +49,7 @@ export const BusinessInformationUI = (props) => {
   const [tabValue, setTabValue] = useState('General Info')
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const [, t] = useLanguage()
-  const [, { parsePrice, parseDistance }] = useConfig()
+  const [{ parsePrice, parseDistance }] = useUtils()
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
@@ -73,34 +75,32 @@ export const BusinessInformationUI = (props) => {
                   <FaStar className='start' />
                   {business?.reviews?.total}
                 </p>
-
               </div>
               <div>
                 <p>{getBusinessType()}</p>
-
               </div>
               <div>
                 <>
                   {orderState?.options?.type === 1 ? (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.delivery_time)}
-                    </p>
+                    </h5>
                   ) : (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.pickup_time)}
-                    </p>
+                    </h5>
                   )}
                 </>
-                <p>
+                <h5>
                   <VscLocation />
                   {parseDistance(business?.distance || 0)}
-                </p>
-                <p>
+                </h5>
+                <h5>
                   <GrDeliver />
                   {business && parsePrice(business?.delivery_price || 0)}
-                </p>
+                </h5>
               </div>
             </BusinessInfoItem>
           </BusinessInfo>
