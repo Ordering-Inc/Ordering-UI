@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const MessagesContainer = styled.div`
   width: 100%;
   height: 100%;
+  overflow: hidden;
 `
 
 export const HeaderProfile = styled.div`
@@ -108,7 +109,8 @@ export const HeaderOnline = styled.div`
 
 export const Chat = styled.div`
   display: flex;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 55vh;
   flex-direction: column;
   padding: 20px;

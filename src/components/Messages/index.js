@@ -57,6 +57,7 @@ export const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [load, setLoad] = useState(false)
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
@@ -83,11 +84,9 @@ export const MessagesUI = (props) => {
   }, [sendMessage])
 
   useEffect(() => {
-    if (!messages.loading) {
-      const chat = document.getElementById('chat')
-      chat.scrollTop = chat.scrollHeight
-    }
-  }, [messages.messages.length])
+    const chat = document.getElementById('chat')
+    chat.scrollTop = chat.scrollHeight
+  }, [messages.messages.length, load])
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
@@ -287,7 +286,7 @@ export const MessagesUI = (props) => {
                     <MessageCustomer>
                       <BubbleCustomer name='image'>
                         <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                        <ChatImage><img src={message.source} /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(!load)} /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -310,7 +309,7 @@ export const MessagesUI = (props) => {
                     <MessageBusiness>
                       <BubbleBusines name='image'>
                         <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                        <ChatImage><img src={message.source} /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(!load)} /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
