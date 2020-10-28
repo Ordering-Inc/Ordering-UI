@@ -32,6 +32,10 @@ export const UserDetailsContainer = styled.div`
       margin: 0px;
       font-size: 24px;
     }
+
+    @media (min-width: 993px) {
+      text-align: center;
+    }
   }
 
   @media (max-width: 760px) {
@@ -65,7 +69,7 @@ export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 20px 0px 0px;
 
   button {
     width: 70%;
@@ -257,4 +261,10 @@ export const CartItemActions = styled.div`
   @media (max-width: 576px) {
     font-size: 14px;
   }
+`
+
+export const InvalidAddress = styled.p`
+  margin: 10px auto 15px;
+  text-align: center;
+  color: ${props => props.theme.colors.primary};
 `

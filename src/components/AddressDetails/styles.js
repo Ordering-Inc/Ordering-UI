@@ -11,12 +11,23 @@ export const Header = styled.div`
   justify-content: flex-start;
 `
 
+export const WrappMap = styled.div`
+  width: 85%;
+  margin: auto;
+
+  @media (max-width: 992px) {
+    width: 100%;
+  }
+`
+
 export const Map = styled.div`
+  font-size: 100%;
+
   img {
     width: 100%;
-    height: 220px;
-    object-fit: cover;
+    display: block;
     border-radius: 15px;
+    -webkit-user-drag: none;
   }
 `
 
