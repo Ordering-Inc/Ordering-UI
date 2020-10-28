@@ -175,7 +175,16 @@ export const ProductActions = styled.div`
       align-items: center;
       border: 1px solid #000;
       color: #000;
-      line-height: 0px;
+
+      span.sign {
+        margin: 0px;
+        padding: 0px;
+
+      }
+
+      span:nth-child(1) {
+        margin-left: 2px;
+      }
     }
   }
 
@@ -214,9 +223,8 @@ export const ProductActions = styled.div`
         width: 50px;
         height: 50px;
         font-size: 2em;
-        padding-bottom: 2px
       }
-      span{
+      span:not(.sign) {
         font-size: 2em;
       }
     }
@@ -228,7 +236,7 @@ export const ProductActions = styled.div`
         width: 35px;
         height: 35px;
       }
-      span{
+      span:not(.sign) {
         font-size: 1.5em;
       }
     }
