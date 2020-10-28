@@ -39,7 +39,7 @@ const CartUI = (props) => {
   const [isCheckout, setIsCheckout] = useState(false)
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
-  const momentFormatted = !orderState?.option?.moment ? t('ASAP_ABBREVIATION', 'ASAP') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
+  const momentFormatted = !orderState?.option?.moment ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -62,18 +62,6 @@ const CartUI = (props) => {
     onClickCheckout()
   }
 
-  const handleOpenUpsellingPage = () => {
-    if (!canOpenUpselling) {
-      handleClickCheckout()
-    } else {
-      setOpenUpselling(true)
-    }
-  }
-
-  const handleUpsellingPage = () => {
-    handleClickCheckout()
-    setOpenUpselling(false)
-  }
   const handleStoreRedirect = (slug) => {
     events.emit('go_to_page', { page: 'business', params: { store: slug } })
   }
@@ -106,6 +94,12 @@ const CartUI = (props) => {
         setConfirm({ ...confirm, open: false })
       }
     })
+  }
+
+  const handleUpsellingPage = () => {
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+    handleClickCheckout()
   }
 
   return (
@@ -185,9 +179,10 @@ const CartUI = (props) => {
           <CheckoutAction>
             <Button
               color='primary'
-              onClick={() => handleOpenUpsellingPage()}
+              onClick={() => setOpenUpselling(true)}
+              disabled={openUpselling && !canOpenUpselling}
             >
-              {t('CHECKOUT', 'Checkout')}
+              {!openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
             </Button>
           </CheckoutAction>
         )}
@@ -217,14 +212,16 @@ const CartUI = (props) => {
           onSave={handlerProductAction}
         />
       </Modal>
-      <UpsellingPage
-        businessId={cart.business_id}
-        cartProducts={cart.products}
-        handleUpsellingPage={handleUpsellingPage}
-        openUpselling={openUpselling}
-        canOpenUpselling={canOpenUpselling}
-        setCanOpenUpselling={setCanOpenUpselling}
-      />
+      {openUpselling && (
+        <UpsellingPage
+          businessId={cart.business_id}
+          cartProducts={cart.products}
+          handleUpsellingPage={handleUpsellingPage}
+          openUpselling={openUpselling}
+          canOpenUpselling={canOpenUpselling}
+          setCanOpenUpselling={setCanOpenUpselling}
+        />
+      )}
     </CartContainer>
   )
 }

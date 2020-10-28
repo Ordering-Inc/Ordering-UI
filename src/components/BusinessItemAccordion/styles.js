@@ -96,6 +96,10 @@ export const ContentInfo = styled.div`
   text-transform: capitalize;
   margin-left: 10px;
   width: 65%;
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0;
+  `}
   h1, span {
     margin: 0px;
   }
@@ -113,6 +117,10 @@ export const ContentInfo = styled.div`
     font-weight: 300;
     svg {
       margin-right: 3px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 3px;
+        margin-right: 0;
+    `}
     }
   }
 
@@ -194,6 +202,10 @@ export const BusinessActions = styled.div`
 
     &:not(:last-child) {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0;
+    `}
     }
   }
 `

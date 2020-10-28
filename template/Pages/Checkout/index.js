@@ -1,5 +1,5 @@
 import React from 'react'
-import { loadStripe } from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js/pure'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 
 import { Checkout } from '../../../src/components/Checkout'

@@ -75,34 +75,32 @@ export const BusinessInformationUI = (props) => {
                   <FaStar className='start' />
                   {business?.reviews?.total}
                 </p>
-
               </div>
               <div>
                 <p>{getBusinessType()}</p>
-
               </div>
               <div>
                 <>
                   {orderState?.options?.type === 1 ? (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.delivery_time)}
-                    </p>
+                    </h5>
                   ) : (
-                    <p>
+                    <h5>
                       <FiClock />
                       {convertHoursToMinutes(business?.pickup_time)}
-                    </p>
+                    </h5>
                   )}
                 </>
-                <p>
+                <h5>
                   <VscLocation />
                   {parseDistance(business?.distance || 0)}
-                </p>
-                <p>
+                </h5>
+                <h5>
                   <GrDeliver />
                   {business && parsePrice(business?.delivery_price || 0)}
-                </p>
+                </h5>
               </div>
             </BusinessInfoItem>
           </BusinessInfo>
