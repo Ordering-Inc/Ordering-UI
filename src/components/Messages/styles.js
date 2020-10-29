@@ -300,6 +300,10 @@ export const SendForm = styled.div`
   padding: 10px 20px;
   background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
+
+  @media (max-width: 768px) {
+    padding: 0px 20px;
+  }
 `
 
 export const Send = styled.form`
@@ -312,7 +316,7 @@ export const Send = styled.form`
     flex: 1;
     padding-top: 10px;
     padding-bottom: 10px;
-  }      
+  }
 
   @media (max-width: 640px){
     input{
