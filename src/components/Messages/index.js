@@ -57,7 +57,7 @@ export const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [load, setLoad] = useState(false)
+  const [load, setLoad] = useState(0)
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
@@ -84,9 +84,16 @@ export const MessagesUI = (props) => {
   }, [sendMessage])
 
   useEffect(() => {
+    if (load < 3) {
+      const chat = document.getElementById('chat')
+      chat.scrollTop = chat.scrollHeight
+    }
+  }, [load])
+
+  useEffect(() => {
     const chat = document.getElementById('chat')
     chat.scrollTop = chat.scrollHeight
-  }, [messages.messages.length, load])
+  }, [messages.messages.length])
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
@@ -286,7 +293,7 @@ export const MessagesUI = (props) => {
                     <MessageCustomer>
                       <BubbleCustomer name='image'>
                         <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(!load)} /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -309,7 +316,7 @@ export const MessagesUI = (props) => {
                     <MessageBusiness>
                       <BubbleBusines name='image'>
                         <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(!load)} /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -368,14 +375,14 @@ export const MessagesUI = (props) => {
             >
               <IosSend />
               {sendMessage.loading ? (
-                <>
+                <span>
                   {t('SENDING_MESSAGE', 'Sending...')}
-                </>
+                </span>
               )
                 : (
-                  <>
+                  <span>
                     {t('SEND', 'send')}
-                  </>)}
+                  </span>)}
             </Button>
           </WrapperSendMessageButton>
         </Send>

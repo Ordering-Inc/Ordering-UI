@@ -113,7 +113,13 @@ export const Chat = styled.div`
   overflow-x: hidden;
   height: 55vh;
   flex-direction: column;
-  padding: 20px;
+  padding: 0 20px;
+  > :first-child{
+    margin-top: 10px;
+  }
+  @media (max-width: 768px){
+    height: 70vh;
+  }
 `
 
 export const MessageConsole = styled.div`
@@ -165,15 +171,24 @@ export const BubbleBusines = styled.div`
     border-radius: 40px 40px 40px 0px;
     width: 100%;
   }
-  @media (max-width: 1024px){
-    max-width: 60%
-  }
+
   ${props => props.theme?.rtl && css`
     border-radius: 97px 97px 0px 97px;
       &[name=image]{
-      border-radius: 60px 60px 0px 60px;
+      border-radius: 40px 40px 0px 40px;
      }
   `}
+
+  @media (max-width: 1024px){
+    max-width: 60%;
+  }
+  @media (max-width: 480px){
+    border-radius: 40px 40px 40px 0px;
+
+    ${props => props.theme?.rtl && css`
+      border-radius: 40px 40px 0px 40px;
+    `}
+  }
 `
 
 export const BubbleCustomer = styled.div`
@@ -187,22 +202,40 @@ export const BubbleCustomer = styled.div`
   color: white;
   overflow-wrap: break-word;
   overflow: hidden;
-  
+
+  p:last-child {
+    left: 10px;
+  }
+
   &[name=image]{
     border-radius: 40px 40px 0px 40px;
     width: 100%;
   }
+
+  ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 97px 0px;
+
+    p:last-child {
+      left: initial;
+      right: 10px;
+    }
+
+    &[name=image]{
+      border-radius: 40px 40px 40px 0px;
+     }
+  `}
+
   @media (max-width: 1024px){
     max-width: 60%
   }
 
-  ${props => props.theme?.rtl && css`
-    border-radius: 97px 97px 97px 0px;
-      &[name=image]{
-      border-radius: 60px 60px 60px 0px;
-     }
-  `}
+  @media (max-width: 480px){
+    border-radius: 40px 40px 0px 40px;
 
+    ${props => props.theme?.rtl && css`
+      border-radius: 40px 40px 40px 0px;
+    `}
+  }
 `
 
 export const SkeletonBubbleCustomer = styled.div`
@@ -245,6 +278,7 @@ export const MyName = styled.p`
     margin-block-end: 0.6em;
     font-size: 1.1em;
     text-align: right;
+
     ${props => props.theme?.rtl && css`
       text-align: left;
   `}
@@ -256,11 +290,9 @@ export const TimeofSent = styled.p`
   font-size: 0.8em;
   margin-block-start: 0.2em;
   margin-block-end: initial;
-  left: 10px;
+
   ${props => props.theme?.rtl && css`
     text-align: left;
-    left: initial;
-    right: 10px;
   `}
 `
 
@@ -275,11 +307,13 @@ export const Send = styled.form`
   display: flex;
   margin-top: 3px;
   height: auto;
+
   input {
     flex: 1;
     padding-top: 10px;
     padding-bottom: 10px;
   }      
+
   @media (max-width: 640px){
     input{
       flex: initial;
@@ -292,9 +326,11 @@ export const SendImage = styled.label`
   width: 25px;
   height: 25px;
   margin: 0px 20px;
+
   input {
     display: none;
   }
+
   svg {
     color: #CFD0D0;
     width: 25px;
@@ -305,6 +341,7 @@ export const SendImage = styled.label`
 
 export const WrapperDeleteImage = styled.div`
   margin: 0px 17px;
+
   button{
     &:disabled {
     cursor: not-allowed;
@@ -314,6 +351,7 @@ export const WrapperDeleteImage = styled.div`
 
 export const WrapperSendMessageButton = styled.div`
   white-space: nowrap;
+
   button{
     padding-top: 7px;
     padding-bottom: 7px;
@@ -332,6 +370,17 @@ export const WrapperSendMessageButton = styled.div`
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+  }
+
+  @media (max-width: 480px){
+    button{
+      svg {
+        margin: 0;
+      }
+      span {
+        display: none;
+      }
     }
   }
 `
