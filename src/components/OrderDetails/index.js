@@ -25,6 +25,7 @@ import {
   OrderBusiness,
   BusinessWrapper,
   LogoWrapper,
+  HeaderLogo,
   BusinessLogo,
   BusinessInfo,
   ActionsBlock,
