@@ -56,8 +56,9 @@ export const HeaderInfo = styled.div`
     width: 55%;
   }
 
-  @media (max-width: 380px) {
-    width: 60%;
+  @media (max-width: 480px) {
+    width: 100%;
+    border-radius: 16px;
   }
 
   @media (min-width: 768px) {
