@@ -16,7 +16,7 @@ const FacebookLoginButtonUI = (props) => {
       onClick={() => handleFacebookLogin()}
     >
       <FaFacebook />
-      {t('LOGIN_WITH_FACEBOOK', 'Login with Facebook')}
+      <div>{t('LOGIN_WITH_FACEBOOK', 'Login with Facebook')}</div>
     </FacebookButton>
   )
 }
