@@ -96,6 +96,14 @@ export const BusinessInfoItem = styled.div`
   div {
     display: flex;
     justify-content: space-between;
+
+    h5 {
+      font-weight: 300;
+      svg {
+        color: #CCC;
+      }
+    }
+
     h5,
     p {
       display: flex;
@@ -105,25 +113,35 @@ export const BusinessInfoItem = styled.div`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+
       svg {
         margin-right: 4px;
+
         ${props => props.theme?.rtl && css`
           margin-left: 4px;
           margin-right: 0px;
         `}
+
         &.start {
           color: #FFC917;
         }
+
         &.popup {
           color: ${props => props.theme.colors.primary};
           cursor: pointer;
           transform: rotate(180deg);
         }
       }
+
+      &.bold {
+        font-weight: 600;
+      }
+
+      &.type {
+        font-weight: 300;
+      }
     }
-    p.bold {
-      font-weight: bold;
-    }
+
     @media (max-width: 480px) {
       font-size: 14px;
     }

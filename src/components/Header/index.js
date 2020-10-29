@@ -179,30 +179,32 @@ export const Header = (props) => {
             />
           </SubMenu>
         )}
-      <Modal
-        open={modalIsOpen}
-        onClose={() => closeModal()}
-        width='70%'
-        padding='0'
-      >
-        {modalSelected === 'cart' && (
-          <CartContent
-            carts={cartsWithProducts}
-            isOrderStateCarts={!!orderState.carts}
-            onClose={closeModal}
-          />
-        )}
-        {modalSelected === 'address' && (
-          <AddressContent
-            auth={auth}
-            addressState={orderState?.options?.address}
-            onClose={closeModal}
-          />
-        )}
-        {modalSelected === 'moment' && (
-          <MomentContent />
-        )}
-      </Modal>
+      {modalIsOpen && (
+        <Modal
+          open={modalIsOpen}
+          onClose={() => closeModal()}
+          width='70%'
+          padding='0'
+        >
+          {modalSelected === 'cart' && (
+            <CartContent
+              carts={cartsWithProducts}
+              isOrderStateCarts={!!orderState.carts}
+              onClose={closeModal}
+            />
+          )}
+          {modalSelected === 'address' && (
+            <AddressContent
+              auth={auth}
+              addressState={orderState?.options?.address}
+              onClose={closeModal}
+            />
+          )}
+          {modalSelected === 'moment' && (
+            <MomentContent />
+          )}
+        </Modal>
+      )}
     </HeaderType>
   )
 }

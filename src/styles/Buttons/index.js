@@ -19,10 +19,8 @@ export const Button = styled.button`
   }
 
   ${({ initialIcon }) => initialIcon && css`
-    padding-left: 30px !important;
     text-align: left;
     ${props => props.theme?.rtl && css`
-      padding-right: 30px !important;
       text-align: right;
     `}
     img{

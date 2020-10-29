@@ -62,11 +62,13 @@ export const AddressesPopover = (props) => {
         <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <AddressContent
-          auth={auth}
-          addressState={addressState}
-          onClose={props.onClose}
-        />
+        {open && (
+          <AddressContent
+            auth={auth}
+            addressState={addressState}
+            onClose={props.onClose}
+          />
+        )}
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
     </div>

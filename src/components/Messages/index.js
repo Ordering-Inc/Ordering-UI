@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Messages as MessagesController,
   useUtils,
@@ -57,8 +57,10 @@ export const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [load, setLoad] = useState(0)
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
+  const buttonRef = useRef(null)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -82,10 +84,15 @@ export const MessagesUI = (props) => {
   }, [sendMessage])
 
   useEffect(() => {
-    if (!messages.loading) {
+    if (load < 3) {
       const chat = document.getElementById('chat')
       chat.scrollTop = chat.scrollHeight
     }
+  }, [load])
+
+  useEffect(() => {
+    const chat = document.getElementById('chat')
+    chat.scrollTop = chat.scrollHeight
   }, [messages.messages.length])
 
   const onChangeMessage = (e) => {
@@ -102,6 +109,7 @@ export const MessagesUI = (props) => {
     reader.readAsDataURL(files)
     reader.onload = () => {
       setImage(reader.result)
+      buttonRef.current.focus()
     }
     reader.onerror = error => {
       console.log(error)
@@ -246,34 +254,32 @@ export const MessagesUI = (props) => {
                 </BubbleConsole>
               </MessageConsole>
               {messages?.messages.map((message) => (
-                <MessageConsole key={message.id}>
-                  {message.type === 1 && (
-                    message.change?.attribute !== 'driver_id' ? (
-                      <BubbleConsole>
-                        {t('ORDER', 'Order')}
-                        <strong>{message.change.attribute} </strong>
-                        {t('CHANGED_FROM', 'Changed from')} {' '}
-                        {message.change.old !== null && (
-                          <>
-                            <strong>{t(getStatus(parseInt(message.change.old, 10)))} </strong>
-                          </>
-                        )}
-                        <> {t('TO', 'to')} {t(getStatus(parseInt(message.change.new, 10)))} </>
-                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                      </BubbleConsole>
-                    ) : (
-                      <BubbleConsole>
-                        <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                        {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                        {message.comment && (<><br /> {message.comment.length}</>)}
-                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                      </BubbleConsole>
-                    )
-                  )}
-                </MessageConsole>
-              ))}
-              {messages?.messages.map((message) => (
                 <React.Fragment key={message.id}>
+                  {message.type === 1 && (
+                    <MessageConsole key={message.id}>
+                      {message.change?.attribute !== 'driver_id' ? (
+                        <BubbleConsole>
+                          {t('ORDER', 'Order')} {' '}
+                          <strong>{message.change.attribute}</strong> {}
+                          {t('CHANGED_FROM', 'Changed from')} {' '}
+                          {message.change.old !== null && (
+                            <>
+                              <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                            </>
+                          )}
+                          <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                          <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                        </BubbleConsole>
+                      ) : (
+                        <BubbleConsole>
+                          <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                          {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                          {message.comment && (<><br /> {message.comment.length}</>)}
+                          <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                        </BubbleConsole>
+                      )}
+                    </MessageConsole>
+                  )}
                   {message.type === 2 && user.id === message.author_id && (
                     <MessageCustomer>
                       <BubbleCustomer>
@@ -287,7 +293,7 @@ export const MessagesUI = (props) => {
                     <MessageCustomer>
                       <BubbleCustomer name='image'>
                         <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                        <ChatImage><img src={message.source} /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -310,7 +316,7 @@ export const MessagesUI = (props) => {
                     <MessageBusiness>
                       <BubbleBusines name='image'>
                         <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                        <ChatImage><img src={message.source} /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -349,32 +355,34 @@ export const MessagesUI = (props) => {
               <BsCardImage />
             </SendImage>
           )}
-          <WrapperDeleteImage>
-            {image && (
+          {image && (
+            <WrapperDeleteImage>
               <Button
                 circle
                 onClick={removeImage}
+                type='reset'
               >
                 {t('X', 'X')}
               </Button>
-            )}
-          </WrapperDeleteImage>
+            </WrapperDeleteImage>
+          )}
           <WrapperSendMessageButton>
             <Button
               color='primary'
               type='submit'
               disabled={sendMessage.loading || (message === '' && !image)}
+              ref={buttonRef}
             >
               <IosSend />
               {sendMessage.loading ? (
-                <>
+                <span>
                   {t('SENDING_MESSAGE', 'Sending...')}
-                </>
+                </span>
               )
                 : (
-                  <>
+                  <span>
                     {t('SEND', 'send')}
-                  </>)}
+                  </span>)}
             </Button>
           </WrapperSendMessageButton>
         </Send>

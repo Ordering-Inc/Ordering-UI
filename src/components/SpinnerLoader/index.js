@@ -9,10 +9,11 @@ import {
 export const SpinnerLoader = (props) => {
   const {
     logotype,
-    content
+    content,
+    style
   } = props
   return (
-    <Container>
+    <Container style={style}>
       {logotype && (
         <Logo>
           <img src={logotype} alt='logo' />

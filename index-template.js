@@ -59,7 +59,8 @@ const configFile = {
 }
 
 Sentry.init({
-  dsn: 'https://cc9905fc4bc84b098ac94811a89aa17f@o460529.ingest.sentry.io/5460911',
+  environment: process.env.NODE_ENV,
+  dsn: 'https://ab508d2c6990411c8da375c997f9f3d6@o460529.ingest.sentry.io/5496646',
   integrations: [
     new Integrations.BrowserTracing()
   ],
