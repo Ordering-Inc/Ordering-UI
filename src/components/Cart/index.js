@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -37,9 +38,11 @@ const CartUI = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [events] = useEvent()
-  const [isCheckout, setIsCheckout] = useState(false)
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const windowSize = useWindowSize()
+  const location = useLocation()
+
+  const isCheckout = location.pathname === `/checkout/${cart?.uuid}`
 
   const momentFormatted = !orderState?.option?.moment ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
@@ -71,16 +74,10 @@ const CartUI = (props) => {
     }
   }
 
-  const handleChangeView = ({ page, params }) => {
-    setIsCheckout(page === 'checkout' && params?.cartUuid === cart?.uuid)
-  }
-
   useEffect(() => {
-    events.on('change_view', handleChangeView)
     events.emit('get_current_view')
     return () => {
       setConfirm({ ...confirm, open: false })
-      events.off('change_view', handleChangeView)
     }
   }, [])
 
