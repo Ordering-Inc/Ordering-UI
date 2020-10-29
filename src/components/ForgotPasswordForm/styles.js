@@ -56,7 +56,17 @@ export const TitleHeroSide = styled.div`
 
   @media (max-width: 576px) {
     h1 {
-      font-size: 32px;
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 410px) {
+    h1 {
+      font-size: 22px;
+    }
+    P {
+      margin-top: 5px;
+      font-size: 13px;
     }
   }
 `
