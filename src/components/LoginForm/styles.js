@@ -87,7 +87,7 @@ export const FormSide = styled(Side)`
 
 export const LoginWith = styled.div`
   @media (max-width: 360px) {
-    font-size: 14px;
+    font-size: 12px;
   }
 `
 
@@ -167,11 +167,9 @@ export const RedirectLink = styled.div`
   }
 
   @media (max-width: 410px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 360px) {
-    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
   }
 `
 

@@ -167,17 +167,15 @@ export const RedirectLink = styled.div`
       width: calc(90% - 20px);
     }
   `}
- 
+
   @media (max-width: 768px) {
     font-size: 17px;
   }
 
   @media (max-width: 410px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 360px) {
-    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
   }
 `
 
