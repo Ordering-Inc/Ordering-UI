@@ -66,6 +66,10 @@ export const Card = styled.div`
     min-width: 300px;
     width: 300px;
   }
+  @media(max-width: 360px){
+    min-width: 290px;
+    width: 290px;
+  }
 `
 
 export const Map = styled.div`
