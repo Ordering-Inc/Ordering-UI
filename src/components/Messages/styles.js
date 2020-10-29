@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const MessagesContainer = styled.div`
   width: 100%;
   height: 100%;
+  overflow: hidden;
 `
 
 export const HeaderProfile = styled.div`
@@ -70,7 +71,6 @@ export const Image = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid #CCC;
     padding: 6px;
   }
 `
@@ -109,10 +109,17 @@ export const HeaderOnline = styled.div`
 
 export const Chat = styled.div`
   display: flex;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 55vh;
   flex-direction: column;
-  padding: 20px;
+  padding: 0 20px;
+  > :first-child{
+    margin-top: 10px;
+  }
+  @media (max-width: 768px){
+    height: 70vh;
+  }
 `
 
 export const MessageConsole = styled.div`
@@ -137,62 +144,98 @@ export const MessageCustomer = styled.div`
 `
 
 export const BubbleConsole = styled.div`
-  border-radius: 97px;
-  padding: 15px;
+  border-radius: 5px;
+  padding: 5px 15px;
   max-width: 30%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   background: #EFEFEF;
   text-align: center;
   height: auto;
   overflow: hidden;
   overflow-wrap: break-word;
+  @media (max-width: 1024px){
+    max-width: 40%
+  }
 `
 
 export const BubbleBusines = styled.div`
   border-radius: 97px 97px 97px 0px;
-  padding: 10px 25px 15px 25px;
+  padding: 10px 25px 10px 25px;
   max-width: 40%;
   min-width: 80px;
   margin-bottom: 10px;
   background: #EFEFEF;
-  height: auto;
   overflow: hidden;
   overflow-wrap: break-word;
   &[name=image]{
-    border-radius: 60px 60px 60px 0px;
-    padding: 10px 30px 15px 30px;
+    border-radius: 40px 40px 40px 0px;
+    width: 100%;
   }
+
   ${props => props.theme?.rtl && css`
     border-radius: 97px 97px 0px 97px;
       &[name=image]{
-      border-radius: 60px 60px 0px 60px;
+      border-radius: 40px 40px 0px 40px;
      }
   `}
+
+  @media (max-width: 1024px){
+    max-width: 60%;
+  }
+  @media (max-width: 480px){
+    border-radius: 40px 40px 40px 0px;
+
+    ${props => props.theme?.rtl && css`
+      border-radius: 40px 40px 0px 40px;
+    `}
+  }
 `
 
 export const BubbleCustomer = styled.div`
   border-radius: 97px 97px 0px 97px;
-  padding: 10px 25px 15px 25px;
+  padding: 10px 25px 10px 25px;
   max-width: 40%;
   min-width: 80px;
+  height: auto;
   margin-bottom: 10px;
   background: #D81212;
   color: white;
   overflow-wrap: break-word;
   overflow: hidden;
 
+  p:last-child {
+    left: 10px;
+  }
+
   &[name=image]{
-    border-radius: 60px 60px 0px 60px;
-    padding: 10px 30px 15px 30px;
+    border-radius: 40px 40px 0px 40px;
+    width: 100%;
   }
 
   ${props => props.theme?.rtl && css`
     border-radius: 97px 97px 97px 0px;
-      &[name=image]{
-      border-radius: 60px 60px 60px 0px;
+
+    p:last-child {
+      left: initial;
+      right: 10px;
+    }
+
+    &[name=image]{
+      border-radius: 40px 40px 40px 0px;
      }
   `}
 
+  @media (max-width: 1024px){
+    max-width: 60%
+  }
+
+  @media (max-width: 480px){
+    border-radius: 40px 40px 0px 40px;
+
+    ${props => props.theme?.rtl && css`
+      border-radius: 40px 40px 40px 0px;
+    `}
+  }
 `
 
 export const SkeletonBubbleCustomer = styled.div`
@@ -215,43 +258,52 @@ export const SkeletonBubbleBusiness = styled.div`
 
 export const ChatImage = styled.div`
   width: 100%;
+  height: auto;
   img{
     width: 100%;
+    height: auto;
+    vertical-align: middle;
+    object-fit: contain;
   }
 `
 
 export const PartnerName = styled.p`
   margin-block-start: 0;
-  margin-block-end: 0.2em;
+  margin-block-end: 0.6em;
   font-size: 1.1em;
 `
 
 export const MyName = styled.p`
     margin-block-start: 0;
-    margin-block-end: 0.2em;
+    margin-block-end: 0.6em;
     font-size: 1.1em;
     text-align: right;
+
     ${props => props.theme?.rtl && css`
       text-align: left;
   `}
 `
 
 export const TimeofSent = styled.p`
+  position: relative;
   text-align: right;
   font-size: 0.8em;
-  margin-block-start: initial;
+  margin-block-start: 0.2em;
   margin-block-end: initial;
+
   ${props => props.theme?.rtl && css`
     text-align: left;
   `}
 `
 
 export const SendForm = styled.div`
-  display: flex;
-  flex-direction: column;
   padding: 10px 20px;
   background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
+
+  @media (max-width: 768px) {
+    padding: 0px 20px;
+  }
 `
 
 export const Send = styled.form`
@@ -259,36 +311,41 @@ export const Send = styled.form`
   display: flex;
   margin-top: 3px;
   height: auto;
-  > input {
+
+  input {
     flex: 1;
     padding-top: 10px;
     padding-bottom: 10px;
-  }      
+  }
+
+  @media (max-width: 640px){
+    input{
+      flex: initial;
+      width: 60%;
+    }
+  }
 `
 
 export const SendImage = styled.label`
   width: 25px;
   height: 25px;
-  padding-left: 20px;
-  padding-right: 5px;
-  ${props => props.theme?.rtl && css`
-    padding-right: 20px;
-    padding-left: 5px;
-  `}
+  margin: 0px 20px;
+
   input {
     display: none;
   }
+
   svg {
     color: #CFD0D0;
-    width: 100%;
-    height: 100%;
+    width: 25px;
+    height: 25px;
     cursor: pointer
   }
 `
 
 export const WrapperDeleteImage = styled.div`
-  margin-right: 10px;
-  margin-left: 10px;
+  margin: 0px 17px;
+
   button{
     &:disabled {
     cursor: not-allowed;
@@ -297,9 +354,11 @@ export const WrapperDeleteImage = styled.div`
 `
 
 export const WrapperSendMessageButton = styled.div`
+  white-space: nowrap;
+
   button{
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     svg {
        margin-right: 10px;
        width: 1.5em;
@@ -315,6 +374,17 @@ export const WrapperSendMessageButton = styled.div`
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+  }
+
+  @media (max-width: 480px){
+    button{
+      svg {
+        margin: 0;
+      }
+      span {
+        display: none;
+      }
     }
   }
 `
