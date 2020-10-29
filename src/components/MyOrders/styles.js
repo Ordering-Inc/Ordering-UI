@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components'
 
 export const MyOrdersContainer = styled.div`
-  @media(max-width: 768px){
-    padding: 0 10px
-  }
+  width: 100%;
+  overflow: hidden;
 `
 
 export const ImageContainer = styled.div`
@@ -18,6 +17,7 @@ export const MyOrdersTitle = styled.div`
   margin: 0 auto;
   width: 80%;
   @media(max-width: 768px){
+    padding: 0 15px;
     width: 100%;
   }
 `
@@ -29,10 +29,10 @@ export const ActiveOrders = styled.div`
   overflow-y: hidden;
   width: auto;
   > :first-child {
-    margin-left: 30px;
+    margin-left: 20px;
     ${props => props.theme?.rtl && css`
     margin-left: 0;
-    margin-right: 30px;
+    margin-right: 20px;
   `}
   };
   ::-webkit-scrollbar {
@@ -42,9 +42,9 @@ export const ActiveOrders = styled.div`
   @media(max-width: 768px){
     > :first-child{
       ${props => props.theme?.rtl ? css`
-        margin-right: 0;
+        margin-right: 15px;
       ` : css`
-        margin-left: 0;
+        margin-left: 15px;
       `}
     }
   }
@@ -201,6 +201,7 @@ export const OrdersPast = styled.div`
   }
   @media(max-width: 768px){
     width: 100%;
+    padding: 0 10px;
   }
   @media(max-width: 480px){
     div{
@@ -222,7 +223,6 @@ export const OrderPastContent = styled.div`
   flex: 1;
   align-items: center;
   padding: 10px 0;
-  white-space: nowrap;
 `
 export const Reorder = styled.div`
   display: flex;
@@ -246,6 +246,7 @@ export const Reorder = styled.div`
     }
   }
   @media (max-width: 768px){
+    margin-right: 25px;
     button{
       width: 90%;
     }
@@ -273,7 +274,7 @@ export const SkeletonOrder = styled.div`
 `
 
 export const SkeletonCard = styled.div`
-  margin: 20px 10px 20px 10px;
+  margin: 20px 5px 20px 5px;
 `
 
 export const SkeletonMap = styled.div`
