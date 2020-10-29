@@ -344,6 +344,7 @@ export const Checkout = (props) => {
         <UpsellingPage
           businessId={currentCart?.business_id}
           cartProducts={currentCart?.products}
+          business={currentCart?.business}
           handleUpsellingPage={handleUpsellingPage}
           openUpselling={openUpselling}
           canOpenUpselling={canOpenUpselling}
