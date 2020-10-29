@@ -24,6 +24,7 @@ const Side = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
+  
 `
 export const HeroSide = styled(Side)`
   width: 55%;
@@ -33,7 +34,7 @@ export const HeroSide = styled(Side)`
   background-color:  ${props => props.theme.colors.primary};
 
   @media (max-width: 768px) {
-    height: calc(50vh - 65px);
+    display: none;
   }
 `
 
@@ -59,10 +60,6 @@ export const TitleHeroSide = styled.div`
       font-size: 32px;
     }
   }
-
-  @media (max-width: 480px) {
-    margin: 40px 0px;
-  }
 `
 
 export const FormSide = styled(Side)`
@@ -73,6 +70,14 @@ export const FormSide = styled(Side)`
 
   img {
     width: 200px;
+  }
+  
+  @media (min-width: 769px){
+    font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
+  }
+
+  @media (min-width: 1200px){
+    font-size: ${({ isPopup }) => isPopup ? '0.9em' : '1em'};
   }
 
   @media (max-width: 768px) {
@@ -87,7 +92,7 @@ export const LoginWith = styled.div`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '90%' : '70%'};
+  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   display: flex;
   flex-direction: column;
 
@@ -109,6 +114,20 @@ export const FormInput = styled.form`
   @media (max-width: 992px) {
     width: 90%;
   }
+
+  @media (max-width: 768px) {
+    input:not(:last-child) {
+      margin-bottom: 10px;
+    }
+    * {
+      margin: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+
 `
 
 export const RedirectLink = styled.div`
@@ -136,16 +155,12 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(70% - 20px)'};
+    width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
 
     @media (max-width: 480px) {
       width: calc(90% - 20px);
     }
   `}
-
-  @media (max-width: 810px) {
-    font-size: 14px;
-  }
 
   @media (max-width: 768px) {
     font-size: 17px;
@@ -156,29 +171,36 @@ export const RedirectLink = styled.div`
   }
 
   @media (max-width: 360px) {
-    flex-direction: column;
+    font-size: 12px;
   }
 `
 
 export const SocialButtons = styled.div`
-   width:  ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(70% - 20px)'};
+   width:  ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
    margin-top: 5px;
 
   button {
+    display: flex;
+    justify-content: start;
     width: 100%;
-    padding: 3px;
+    padding: 5px 30px;
     color: #000000;
 
     img {
       width: 30px;
     }
 
-    span{
+    div {
       font-size: 0.8em;
     }
   }
-
   @media (max-width: 992px) {
     width: calc(90% - 20px);
+  }
+  @media (max-width: 768px) {
+    width: calc(90% - 40px);
+  }
+  @media (max-width: 480px) {
+    width: calc(100% - 40px);
   }
 `

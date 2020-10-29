@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import {
   LoginForm as LoginFormController,
   useLanguage,
-  useUtils,
+  useConfig,
   useSession
 } from 'ordering-components'
 import { Alert } from '../Confirm'
@@ -39,7 +39,7 @@ const LoginFormUI = (props) => {
     isPopup
   } = props
   const [, t] = useLanguage()
-  const [{ configs }] = useUtils()
+  const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, sessionDispatch] = useSession()
@@ -163,7 +163,7 @@ const LoginFormUI = (props) => {
               })}
               onChange={(e) => hanldeChangeInput(e)}
             />
-            <RedirectLink>
+            <RedirectLink isPopup={isPopup}>
               <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
               {elementLinkToForgotPassword}
             </RedirectLink>

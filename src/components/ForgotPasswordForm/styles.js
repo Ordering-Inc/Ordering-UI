@@ -31,7 +31,7 @@ export const HeroSide = styled(Side)`
   align-items: center;
   color: ${props => props.theme.colors.primaryContrast};
   background-color:  ${props => props.theme.colors.primary};
-
+  padding-bottom: 5px;
   @media (max-width: 768px) {
     height: calc(50vh - 65px);
   }
@@ -146,6 +146,6 @@ export const RedirectLink = styled.div`
   }
 
   @media (max-width: 360px) {
-    flex-direction: column;
+    font-size: 12px;
   }
 `
