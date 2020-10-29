@@ -150,12 +150,4 @@ export const RedirectLink = styled.div`
   @media (max-width: 768px) {
     font-size: 17px;
   }
-
-  @media (max-width: 410px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 360px) {
-    font-size: 12px;
-  }
 `
