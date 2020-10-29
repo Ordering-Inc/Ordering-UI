@@ -27,6 +27,7 @@ import { Modal } from '../Modal'
 import { MomentContent } from '../MomentContent'
 import { AddressContent } from '../AddressContent'
 import { HeaderOption } from '../HeaderOption'
+import { SidebarMenu } from '../SidebarMenu'
 
 export const Header = (props) => {
   const { isHome } = props
@@ -84,6 +85,7 @@ export const Header = (props) => {
     <HeaderType>
       <InnerHeader>
         <LeftHeader>
+          <SidebarMenu auth={auth} />
           <LogoHeader onClick={() => handleGoToPage({ page: orderState.options?.address?.location ? 'search' : 'home' })}>
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
             <img alt='Isotype' width='45px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
@@ -110,7 +112,7 @@ export const Header = (props) => {
           <RightHeader>
             <Menu>
               {
-                !auth && (
+                !auth && windowSize.width > 768 && (
                   <>
                     <MenuLink onClick={() => handleGoToPage({ page: 'signin' })}>{t('SIGNIN', 'Sign in')}</MenuLink>
                     <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
@@ -120,12 +122,14 @@ export const Header = (props) => {
               {
                 auth && (
                   <>
-                    <UserPopover
-                      open={openPopover.user}
-                      isHome={isHome}
-                      onClick={() => handleTogglePopover('user')}
-                      onClose={() => handleClosePopover('user')}
-                    />
+                    {windowSize.width > 768 && (
+                      <UserPopover
+                        open={openPopover.user}
+                        isHome={isHome}
+                        onClick={() => handleTogglePopover('user')}
+                        onClose={() => handleClosePopover('user')}
+                      />
+                    )}
                     {windowSize.width > 768 ? (
                       <CartPopover
                         open={openPopover.cart}
