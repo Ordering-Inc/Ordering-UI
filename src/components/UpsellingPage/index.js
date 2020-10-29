@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { UpsellingPage as UpsellingPageController, useLanguage, useOrder } from 'ordering-components'
+import { UpsellingPage as UpsellingPageController, useLanguage } from 'ordering-components'
 import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling, SkeletonContainer } from './styles'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
