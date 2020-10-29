@@ -26,6 +26,14 @@ export const LogoHeader = styled.div`
     height: 45px;
     margin: 0;
     vertical-align: middle;
+
+    @media (max-width: 768px) {
+      width: 150px;
+    }
+
+    @media (max-width: 576px) {
+      width: 45px;
+    }
   }
 
   img:nth-child(2) {
