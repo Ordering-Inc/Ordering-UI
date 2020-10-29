@@ -17,19 +17,18 @@ const UpsellingPageUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [actualProduct, setActualProduct] = useState(null)
-  const [orderState] = useOrder()
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   useEffect(() => {
     if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
       setCanOpenUpselling(true)
-      if (upsellingProducts?.products.length === 0) {
-        handleUpsellingPage()
-      }
     } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
       handleUpsellingPage()
     }
-  }, [upsellingProducts.loading, actualProduct])
+    if (upsellingProducts?.products?.length === 0 && !upsellingProducts.loading) {
+      handleUpsellingPage()
+    }
+  }, [upsellingProducts.loading, upsellingProducts?.products.length])
 
   const handleFormProduct = (product) => {
     setActualProduct(product)
@@ -38,7 +37,7 @@ const UpsellingPageUI = (props) => {
 
   return (
     <>
-      {!canOpenUpselling ? '' : (
+      {!canOpenUpselling || upsellingProducts?.products?.length === 0 ? '' : (
         <Modal
           title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
           open={openUpselling}
