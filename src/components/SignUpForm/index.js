@@ -19,13 +19,13 @@ import {
   RedirectLink
 } from './styles'
 
-import logoHeader from '../../../template/assets/images/logo-header.svg'
 import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
+import { useTheme } from 'styled-components'
 
 const SignUpFormUI = (props) => {
   const {
@@ -39,13 +39,15 @@ const SignUpFormUI = (props) => {
     formState,
     handleSuccessSignup,
     useLoginByCellphone,
-    useLoginByEmail
+    useLoginByEmail,
+    isPopup
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, sessionDispatch] = useSession()
+  const theme = useTheme()
 
   const handleSuccessFacebook = (user) => {
     sessionDispatch({
@@ -88,15 +90,15 @@ const SignUpFormUI = (props) => {
   }
 
   return (
-    <SignUpContainer>
+    <SignUpContainer isPopup={isPopup}>
       <HeroSide>
         <TitleHeroSide>
           <h1>{t('TITLE_LOGIN', 'Welcome!')}</h1>
           <p>{t('SUBTITLE_LOGIN', 'Enter your personal details and start journey with us.')}</p>
         </TitleHeroSide>
       </HeroSide>
-      <FormSide>
-        <img src={logoHeader} alt='Logo login' />
+      <FormSide isPopup={isPopup}>
+        <img src={theme?.images?.logos?.logotype} alt='Logo login' />
 
         {useLoginByCellphone && useLoginByEmail && (
           <SignUpWith>
@@ -108,7 +110,9 @@ const SignUpFormUI = (props) => {
         )}
         <FormInput
           noValidate
+          isPopup={isPopup}
           onSubmit={handleSubmit(onSubmit)}
+          isSkeleton={useChekoutFileds && validationFields.loading}
         >
           {
             !(useChekoutFileds && validationFields.loading) ? (
@@ -166,12 +170,12 @@ const SignUpFormUI = (props) => {
           </Button>
         </FormInput>
         {elementLinkToLogin && (
-          <RedirectLink register>
+          <RedirectLink register isPopup={isPopup}>
             <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')}</span>
             {elementLinkToLogin}
           </RedirectLink>
         )}
-        <SocialButtons>
+        <SocialButtons isPopup={isPopup}>
           {configs?.facebook_id && (
             <FacebookLoginButton
               appId={configs?.facebook_id?.value}

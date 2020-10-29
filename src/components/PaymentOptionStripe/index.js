@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { PaymentOptionStripe as PaymentOptionStripeController, useSession, useLanguage } from 'ordering-components'
 
-import { IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/io'
-import { VscTrash } from 'react-icons/vsc'
+import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
+import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
+import VscTrash from '@meronex/icons/vsc/VscTrash'
 
 import { getIconCard } from '../../utils'
 
@@ -79,9 +80,9 @@ const PaymentOptionStripeUI = (props) => {
               <CardItemContent onClick={() => handleCardClick(card)}>
                 <span className='checks'>
                   {card.id === cardSelected?.id ? (
-                    <IoIosRadioButtonOn />
+                    <IosRadioButtonOn />
                   ) : (
-                    <IoIosRadioButtonOff />
+                    <IosRadioButtonOff />
                   )}
                 </span>
                 <span className='brand'>

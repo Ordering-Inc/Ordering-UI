@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { FiPlus, ImCompass } from 'react-icons/all'
+import FaHome from '@meronex/icons/fa/FaHome'
+import FaPlus from '@meronex/icons/fa/FaPlus'
+import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
+import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
+import ImCompass from '@meronex/icons/im/ImCompass'
+import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
   GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
-  GoogleMaps,
-  WrapperGoogleMaps
+  GoogleMapsMap
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 
@@ -19,10 +23,6 @@ import {
   AddressTagSection,
   WrapperMap
 } from './styles'
-
-import company from '../../../template/assets/company.svg'
-import heart from '../../../template/assets/heart.svg'
-import home from '../../../template/assets/home.svg'
 
 import { Button } from '../../styles/Buttons'
 import { Input } from '../../styles/Inputs'
@@ -43,7 +43,6 @@ const AddressFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
-  const GoogleMapsMap = WrapperGoogleMaps(GoogleMaps)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -105,7 +104,7 @@ const AddressFormUI = (props) => {
 
   return (
     <>
-      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='new-off'>
         {addressState?.address?.location && (
           <WrapperMap>
             <GoogleMapsMap
@@ -117,6 +116,7 @@ const AddressFormUI = (props) => {
         )}
         <AddressWrap className='google-control'>
           <WrapAddressInput>
+            <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
@@ -128,6 +128,7 @@ const AddressFormUI = (props) => {
               childRef={register({
                 required: isRequiredField('address') ? 'Address is required' : null
               })}
+              autoComplete='new-off'
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
@@ -145,6 +146,7 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
+          autoComplete='new-off'
         />
         <Input
           className='zipcode'
@@ -153,6 +155,7 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
+          autoComplete='new-off'
         />
         <textarea
           name='address_notes'
@@ -161,20 +164,21 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
           onChange={hanldeChangeInput}
+          autoComplete='new-off'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>
           <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
-            <img src={home} alt='Home' />
+            <span><FaHome /></span>
           </Button>
           <Button className={addressTag === 'office' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('office')}>
-            <img src={company} alt='Office' />
+            <span><FaRegBuilding /></span>
           </Button>
           <Button className={addressTag === 'favorite' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('favorite')}>
-            <img src={heart} alt='Favorite' />
+            <span><FaRegHeart /></span>
           </Button>
           <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
-            <span><FiPlus /></span>
+            <span><FaPlus /></span>
           </Button>
         </AddressTagSection>
         <FormActions>

@@ -1,33 +1,109 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const MessagesContainer = styled.div`
   width: 100%;
+  height: 100%;
 `
 
 export const HeaderProfile = styled.div`
   display: flex;
-  > div {
+  padding: 15px 20px;
+  border-bottom: 1px solid #EEEEEE;
+
+  div {
      p {
-      margin-left: 10px;
-      margin-block-end: 0.1em;
-      margin-block-start: 0.5em
+       margin-left: 10px;
+       ${props => props.theme?.rtl && css`
+         margin-right: 10px;
+         margin-left: 0px;
+      `}
+      }
+     strong {
+      p{
+        margin-block-end: 0.1em;
+      }
     }
-    p:last-child{
-      margin-block-start: 0.1em
+    p {
+      margin-block-start: 0.1em;
+      font-size: 0.7em
     }
   }
 `
+export const HeaderName = styled.p`
+  font-size: 1.1em;
+  margin-block-end: 0.1em;
+  margin-block-start: 0.1em;
+
+`
+
+export const Status = styled.p`
+  margin-block-start: 0.1em;
+  margin-block-end: 0.1em;
+  font-size: 0.7em;
+`
+
 export const Image = styled.div`
-  width: 10%;
+  width: 60px;
   height: 60px;
-   img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${props => props.theme?.colors?.primary};
+  border-radius: 1000px;
+  padding: 5px;
+  box-sizing: border-box;
+
+  img {
     width: 100%;
-    border-radius: 16px;
+    height: auto;
+    border-radius: 1000px;
+    object-fit: cover;
+    border: 1px solid #F5F5F5;
   }
+
   img[name]{
     border: 1px solid #D81212;
     border-radius: 50%;
-    height: 100%
+  }
+
+  svg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #CCC;
+    padding: 6px;
+  }
+`
+
+export const HeaderOnline = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  margin-left: 10px;
+
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0px;
+    text-align: right;
+  `}
+  h1,
+  span {
+    margin: 0px;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 300;
   }
 `
 
@@ -36,6 +112,7 @@ export const Chat = styled.div`
   overflow: auto;
   height: 55vh;
   flex-direction: column;
+  padding: 20px;
 `
 
 export const MessageConsole = styled.div`
@@ -43,11 +120,11 @@ export const MessageConsole = styled.div`
   justify-content: center;
   font-size: 0.8em;
   border-radius: 97px;
-
 `
 
 export const MessageBusiness = styled.div`
   display: flex;
+  flex-wrap: wrap;
   font-size: 0.8em;
 `
 
@@ -69,92 +146,175 @@ export const BubbleConsole = styled.div`
   height: auto;
   overflow: hidden;
   overflow-wrap: break-word;
-  > p{
-    text-align: right;
-    font-size: 0.8em;
-    margin-block-start: initial;
-    margin-block-end: initial;
-  }
 `
 
 export const BubbleBusines = styled.div`
   border-radius: 97px 97px 97px 0px;
-  padding: 15px;
-  max-width: 60%;
+  padding: 10px 25px 15px 25px;
+  max-width: 40%;
+  min-width: 80px;
   margin-bottom: 10px;
   background: #EFEFEF;
   height: auto;
   overflow: hidden;
-  > p{
-    text-align: right;
-    font-size: 0.8em;
-    margin-block-start: initial;
-    margin-block-end: initial;
+  overflow-wrap: break-word;
+  &[name=image]{
+    border-radius: 60px 60px 60px 0px;
+    padding: 10px 30px 15px 30px;
   }
+  ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 0px 97px;
+      &[name=image]{
+      border-radius: 60px 60px 0px 60px;
+     }
+  `}
 `
 
 export const BubbleCustomer = styled.div`
   border-radius: 97px 97px 0px 97px;
-  padding: 15px;
-  max-width: 60%;
+  padding: 10px 25px 15px 25px;
+  max-width: 40%;
+  min-width: 80px;
   margin-bottom: 10px;
   background: #D81212;
   color: white;
   overflow-wrap: break-word;
   overflow: hidden;
-  > img{
-    border-radius: 97px;
+
+  &[name=image]{
+    border-radius: 60px 60px 0px 60px;
+    padding: 10px 30px 15px 30px;
   }
-  > p{
-    text-align: right;
-    font-size: 0.8em;
-    margin-block-start: initial;
-    margin-block-end: initial;
+
+  ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 97px 0px;
+      &[name=image]{
+      border-radius: 60px 60px 60px 0px;
+     }
+  `}
+
+`
+
+export const SkeletonBubbleCustomer = styled.div`
+  span{
+    border-radius: 97px 97px 0px 97px;
+    ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 97px 0px;
+    `}
   }
 `
-export const SendForm = styled.form`
+
+export const SkeletonBubbleBusiness = styled.div`
+  span{
+    border-radius: 97px 97px 97px 0px;
+    ${props => props.theme?.rtl && css`
+    border-radius: 97px 97px 0px 97px;
+    `}
+  }
+`
+
+export const ChatImage = styled.div`
+  width: 100%;
+  img{
+    width: 100%;
+  }
+`
+
+export const PartnerName = styled.p`
+  margin-block-start: 0;
+  margin-block-end: 0.2em;
+  font-size: 1.1em;
+`
+
+export const MyName = styled.p`
+    margin-block-start: 0;
+    margin-block-end: 0.2em;
+    font-size: 1.1em;
+    text-align: right;
+    ${props => props.theme?.rtl && css`
+      text-align: left;
+  `}
+`
+
+export const TimeofSent = styled.p`
+  text-align: right;
+  font-size: 0.8em;
+  margin-block-start: initial;
+  margin-block-end: initial;
+  ${props => props.theme?.rtl && css`
+    text-align: left;
+  `}
+`
+
+export const SendForm = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 30px;
-
+  padding: 10px 20px;
+  background: #FAFAFA;
+  border-top: 1px solid #EEEEEE;
 `
 
 export const Send = styled.form`
-  background: #FAFAFA;
   align-items: center;
   display: flex;
   margin-top: 3px;
   height: auto;
   > input {
     flex: 1;
-    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }      
+`
+
+export const SendImage = styled.label`
+  width: 25px;
+  height: 25px;
+  padding-left: 20px;
+  padding-right: 5px;
+  ${props => props.theme?.rtl && css`
+    padding-right: 20px;
+    padding-left: 5px;
+  `}
+  input {
+    display: none;
   }
-    > label {
-      width: 20px;
-      height: 20px;
-      padding: 0px 10px;
-        > input {
-          display: none;
-        }
-        > svg{
-          width: 100%;
-          height: 100%;
-        }
-      
+  svg {
+    color: #CFD0D0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer
+  }
+`
+
+export const WrapperDeleteImage = styled.div`
+  margin-right: 10px;
+  margin-left: 10px;
+  button{
+    &:disabled {
+    cursor: not-allowed;
     }
-  
-  > button{
-
-     > svg {
-       margin-right: 10px;
-       width: 1em;
-       height: 1em; 
-       vertical-align: middle
-     }
-    
   }
+`
 
-  > button[name]{
-    margin-right: 5px;
+export const WrapperSendMessageButton = styled.div`
+  button{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    svg {
+       margin-right: 10px;
+       width: 1.5em;
+       height: 1.5em; 
+       vertical-align: middle;
+       color: white;
+       ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0px;
+        transform: rotate(270deg)
+      `}
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 `

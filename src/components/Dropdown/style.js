@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
 import { Image } from '../Image'
 
 export const DropdownStyled = styled.div`
@@ -58,6 +57,10 @@ const DropdownItemShared = css`
 
   svg {
     margin-right: 7px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 7px;
+      margin-right: 0px;
+    `}
   }
 
   :hover {
@@ -81,7 +84,7 @@ export const DropdownItemStyled = styled.div`
   ${DropdownItemShared}
 `
 
-export const DropdownItemLink = styled(Link)`
+export const DropdownItemLink = styled.a`
   ${DropdownItemShared}
   text-decoration: none;
 `
@@ -95,12 +98,20 @@ export const DropDownCircleImage = styled(Image)`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${props => props.theme?.rtl && css`
+    margin-left: 5px;
+    margin-right: 0;
+  `}
 
   /* svg {
     display: flex;
   } */
 
   :last-child {
-    margin-right: 0;
+    ${props => props.theme?.rtl ? css`
+        margin-left: 0;
+    ` : css`
+        margin-right: 0;
+    `}
   }
 `

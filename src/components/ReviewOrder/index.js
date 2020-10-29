@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { OrderReview as ReviewOrderController, useLanguage } from 'ordering-components'
 import { ReviewOrderContainer, Reviews, Categories, Category, Stars, Comments, Send } from './styles'
 import { Alert } from '../Confirm'
-import { AiFillStar } from 'react-icons/ai'
+import AiFillStar from '@meronex/icons/ai/AiFillStar'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'

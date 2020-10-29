@@ -38,6 +38,9 @@ export const ContentWrapper = styled.div`
     justify-content: center;
     height: 100%;
     padding: 0px 0px 0px 40px;
+    ${props => props.theme?.rtl && css`
+      padding: 0px 40px 0px 0px;
+    `} 
     button {
       width: 180px;
     }
@@ -58,6 +61,9 @@ export const Title = styled.h1`
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #00000029;
   opacity: 1;
+  ${props => props.theme?.rtl && css`
+      text-align: right;
+  `} 
   @media (max-width: 480px) {
     font-size: 40px;
   }
@@ -71,18 +77,53 @@ export const Slogan = styled.p`
   color: #FFFFFF;
   opacity: 1;
   margin-bottom: 15px;
+  ${props => props.theme?.rtl && css`
+       text-align: right;
+    `} 
   @media (max-width: 480px) {
     font-size: 18px;
   }
 `
 
 export const WrapInput = styled.label`
+  position: relative;
+  
   input {
+    color: #FFF;
+    border-color: #FFF;
     cursor: pointer;
-    background: rgba(0,0,0,0.1)
+    background: rgba(0,0,0,0.1);
+
+    ::placeholder {
+      color: #FFF;
+      opacity: 1;
+    }
+
+    :-ms-input-placeholder {
+      color: #FFF;
+    }
   }
+
+  svg {
+    color: #FFF;
+    position: absolute;
+    right: 0px;
+    font-size: 22px;
+    top: 8px;
+    ${props => props.theme?.rtl && css`
+      left: 0px;
+      right: initial
+  `}
+  }
+
+  @media (max-width: 480px) {
+      svg{
+        top: 24px;
+      }
+    }
+  
+
   ${({ withIcon }) => withIcon && css`
-    position: relative;
     width: calc(50% + 70px);
     &::before {
       content: "";
@@ -91,12 +132,20 @@ export const WrapInput = styled.label`
       top: 0;
       bottom: 18px;
       width: 15px;
-      background: url(${withIcon}) center / contain no-repeat;
+      /* background: url(${withIcon}) center / contain no-repeat; */
+      ${props => props.theme?.rtl && css`
+        left: 5px;
+        right: initial;
+     `}
     }
     @media (max-width: 480px) {
       &::before {
         right: 0px;
         bottom: 0px;
+         ${props => props.theme?.rtl && css`
+          left: 0px;
+          bottom: 0px
+       `}
       }
     }
   `}

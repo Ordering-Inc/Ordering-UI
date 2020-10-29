@@ -44,6 +44,7 @@ export const InputGroup = styled.div`
     border-right: 0;
     padding-right: 0;
   }
+
 `
 
 export const InputGroupLeft = styled.div`
@@ -56,9 +57,17 @@ export const InputGroupLeft = styled.div`
   height: 34px;
   border-style: solid;
   border-right-width: 0;
+  ${props => props.theme?.rtl && css`
+        border-left-width: 0;
+        border-right-width: initial;
+    `}
 
   & ${Button} {
     margin-left: -7px;
+    ${props => props.theme?.rtl && css`
+        margin-right: -7px;
+        margin-left: 0
+    `}
   }
 `
 
@@ -68,10 +77,21 @@ export const InputGroupRight = styled(InputGroupLeft)`
   border-right-width: 1px;
   border-left-width: 0;
 
+  ${props => props.theme?.rtl && css`
+        border-left-width: 1px;
+        border-right-width: 0;
+    `}
+
   & ${Button} {
     margin-left: 0;
     margin-right: -7px;
+    ${props => props.theme?.rtl && css`
+        margin-left: -7px;
+        margin-right: 0
+    `}
   }
+
+  
 `
 
 export const InputPrimary = styled(Input)`

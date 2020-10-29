@@ -14,10 +14,9 @@ import {
   RedirectLink
 } from './styles'
 
-import logoHeader from '../../../template/assets/images/logo-header.svg'
-
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { useTheme } from 'styled-components'
 
 const ForgotPasswordUI = (props) => {
   const {
@@ -25,12 +24,14 @@ const ForgotPasswordUI = (props) => {
     handleButtonForgotPasswordClick,
     formState,
     formData,
-    elementLinkToLogin
+    elementLinkToLogin,
+    isPopup
   } = props
 
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, title: '', content: [], success: false })
   const [, t] = useLanguage()
+  const theme = useTheme()
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -77,16 +78,20 @@ const ForgotPasswordUI = (props) => {
     })
   }
   return (
-    <ForgotPasswordContainer>
+    <ForgotPasswordContainer isPopup={isPopup}>
       <HeroSide>
         <TitleHeroSide>
           <h1>{t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')}</h1>
           <p>{t('SUBTITLE_FORGOT_PASSWORD', "Enter your email addres and we'll send you a link to reset your password.")}</p>
         </TitleHeroSide>
       </HeroSide>
-      <FormSide>
-        <img src={logoHeader} alt='Logo' />
-        <FormInput onSubmit={handleSubmit(onSubmit)} noValidate>
+      <FormSide isPopup={isPopup}>
+        <img src={theme?.images?.logos?.logotype} alt='Logo' />
+        <FormInput
+          noValidate
+          isPopup={isPopup}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Input
             type='text'
             name='email'
@@ -106,7 +111,7 @@ const ForgotPasswordUI = (props) => {
           </Button>
         </FormInput>
         {elementLinkToLogin && (
-          <RedirectLink register>
+          <RedirectLink register isPopup={isPopup}>
             <span>{t('SIGN_IN_MESSAGE', 'Do you want to sign in?')}</span>
             {elementLinkToLogin}
           </RedirectLink>

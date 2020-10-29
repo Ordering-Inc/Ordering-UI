@@ -1,6 +1,6 @@
 import { lighten } from 'polished'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
   display: flex;
@@ -29,11 +29,14 @@ export const SoldOut = styled.span`
   background: #D6D6D6 0% 0% no-repeat padding-box;
   border-radius: 23px;
   padding: 5px 10px;
-  top: 15px;
-  right: -15px;
+  top: 8px;
+  right: 6px;
   text-transform: uppercase;
   font-size: 14px;
-  transform: rotate(45deg);
+  ${props => props.theme?.rtl && css`
+    left: 6px;
+    right: initial;
+  `}
 `
 
 export const CardInfo = styled.div`
@@ -58,6 +61,9 @@ export const CardInfo = styled.div`
     font-size: 16px;
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};
     text-align: left;
+    ${props => props.theme?.rtl && css`
+      text-align: right;
+    `}
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -92,6 +98,10 @@ export const WrapLogo = styled.div`
   height: 75px;
   width: 75px;
   margin-right: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 5px;
+    margin-right: 0px;
+  `}
 `
 
 const CardLogoStyled = styled.div`
@@ -99,6 +109,7 @@ const CardLogoStyled = styled.div`
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: cover;
+  background-position: center;
   object-fit: cover;
   min-height: 75px;
   border-radius: 10px;
