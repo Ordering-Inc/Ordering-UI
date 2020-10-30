@@ -47,7 +47,7 @@ export const SidebarContent = styled.div`
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1000;
+  z-index: 1005;
   top: 0;
   left: 0;
   background-color: ${({ isHome }) => isHome ? '#333' : '#F8F8F8'};
