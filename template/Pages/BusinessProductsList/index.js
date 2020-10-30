@@ -3,7 +3,7 @@ import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useApi, useEvent } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
 
-export const BusinessProductsList = (props) => {
+const BusinessProductsList = (props) => {
   const { store } = useParams()
   const history = useHistory()
   const [ordering] = useApi()
@@ -83,3 +83,5 @@ export const BusinessProductsList = (props) => {
     <BusinessProductsListing {...businessProductsProps} />
   )
 }
+
+export default BusinessProductsList

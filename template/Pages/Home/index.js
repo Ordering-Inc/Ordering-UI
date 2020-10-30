@@ -28,7 +28,7 @@ import burgerImage from '../../../template/assets/burger-image.png'
 import socialMedia from '../../../template/assets/social-media.png'
 import foodBg from '../../../template/assets/food-bg.png'
 
-export const HomePage = (props) => {
+const Home = (props) => {
   const [, t] = useLanguage()
   const history = useHistory()
 
@@ -124,3 +124,5 @@ export const HomePage = (props) => {
     </HomeContainer>
   )
 }
+
+export default Home

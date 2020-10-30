@@ -1,8 +1,10 @@
 import React from 'react'
 import { UserProfileForm } from '../../../src/components/UserProfileForm'
 
-export const Profile = (props) => {
+const Profile = (props) => {
   return (
     <UserProfileForm {...props} />
   )
 }
+
+export default Profile

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
-import { OrderDetails } from '../../../src/components/OrderDetails'
+import { OrderDetails as OrderDetailsPage } from '../../../src/components/OrderDetails'
 
-export const OrderDetailsPage = (props) => {
+const OrderDetails = (props) => {
   const history = useHistory()
   const { orderId } = useParams()
 
@@ -15,6 +15,8 @@ export const OrderDetailsPage = (props) => {
     }
   }
   return (
-    <OrderDetails {...orderDetailsProps} />
+    <OrderDetailsPage {...orderDetailsProps} />
   )
 }
+
+export default OrderDetails

@@ -1,7 +1,7 @@
 import React from 'react'
 import { PagesList as PagesListController } from '../../../src/components/PagesList'
 
-export const PagesList = (props) => {
+const PagesList = (props) => {
   const routes = [
     { name: 'Home', slug: '/home' },
     { name: 'Sign Up', slug: '/signup' },
@@ -17,3 +17,5 @@ export const PagesList = (props) => {
   ]
   return <PagesListController {...props} routes={routes} />
 }
+
+export default PagesList

@@ -2,10 +2,10 @@ import React from 'react'
 import { loadStripe } from '@stripe/stripe-js/pure'
 import { useParams, useLocation } from 'react-router-dom'
 
-import { Checkout } from '../../../src/components/Checkout'
+import { Checkout as CheckoutPage } from '../../../src/components/Checkout'
 import { useEvent } from 'ordering-components'
 
-export const CheckoutPage = (props) => {
+const Checkout = (props) => {
   const { cartUuid } = useParams()
   const [events] = useEvent()
 
@@ -69,6 +69,8 @@ export const CheckoutPage = (props) => {
     }
   }
   return (
-    <Checkout {...checkoutProps} />
+    <CheckoutPage {...checkoutProps} />
   )
 }
+
+export default Checkout

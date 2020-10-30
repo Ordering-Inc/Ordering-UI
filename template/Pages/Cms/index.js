@@ -2,7 +2,7 @@ import React from 'react'
 import { Cms as CmsController } from '../../../src/components/Cms'
 import { useParams, useHistory } from 'react-router-dom'
 
-export const Cms = (props) => {
+const Cms = (props) => {
   const { pageSlug } = useParams()
   const history = useHistory()
 
@@ -18,3 +18,5 @@ export const Cms = (props) => {
     <CmsController {...cmsProps} />
   )
 }
+
+export default Cms

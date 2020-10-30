@@ -2,7 +2,7 @@ import React from 'react'
 import { BusinessesListing } from '../../../src/components/BusinessesListing'
 import { useEvent } from 'ordering-components'
 
-export const BusinessesList = (props) => {
+const BusinessesList = (props) => {
   const [events] = useEvent()
 
   const businessListingProps = {
@@ -19,3 +19,5 @@ export const BusinessesList = (props) => {
     <BusinessesListing {...businessListingProps} />
   )
 }
+
+export default BusinessesList

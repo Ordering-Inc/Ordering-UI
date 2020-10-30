@@ -1,8 +1,10 @@
 import React from 'react'
 import { LoginForm } from '../../../src/components/LoginForm'
 
-export const Login = (props) => {
+const Login = (props) => {
   return (
     <LoginForm {...props} />
   )
 }
+
+export default Login
