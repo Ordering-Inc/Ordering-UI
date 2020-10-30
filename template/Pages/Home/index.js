@@ -50,22 +50,22 @@ const Home = (props) => {
         </HomeTitle>
         <StepsBlock>
           <div>
-            <img src={locationSvg} />
+            <img src={locationSvg} alt='location' width='88' height='88' />
             <h3>{t('STEPS_ADDRESS', 'Add Address')}</h3>
           </div>
           <Line />
           <div>
-            <img src={businessSvg} />
+            <img src={businessSvg} alt='business' width='88' height='88' />
             <h3>{t('STEPS_BUSINESS', 'Select your Business')}</h3>
           </div>
           <Line />
           <div>
-            <img src={productSvg} />
+            <img src={productSvg} alt='product' width='88' height='88' />
             <h3>{t('STEPS_PRODUCT', 'Choose your Product')}</h3>
           </div>
           <Line />
           <div>
-            <img src={deliverySvg} width='88' height='88' />
+            <img src={deliverySvg} alt='delivery' width='88' height='88' />
             <h3>{t('STEPS_ARRIVE', 'Your package arrives')}</h3>
           </div>
         </StepsBlock>
@@ -73,7 +73,7 @@ const Home = (props) => {
       <HomeSection>
         <ImageContent>
           <div>
-            <img src={burgerImage} alt='img' />
+            <img src={burgerImage} alt='img' width='391' height='400' />
           </div>
         </ImageContent>
         <TextContent>
@@ -105,7 +105,7 @@ const Home = (props) => {
         </TextContent>
         <ImageContent>
           <div>
-            <img src={socialMedia} alt='img' />
+            <img src={socialMedia} alt='img' width='295' height='400' />
           </div>
         </ImageContent>
       </HomeSection>
