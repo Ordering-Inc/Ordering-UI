@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useLocation } from 'react-router-dom'
 import {
   BusinessAndProductList,
   useEvent,
   useLanguage,
-  useOrder
+  useOrder,
+  useSession
 } from 'ordering-components'
 
 import {
@@ -21,6 +23,7 @@ import { NotFoundSource } from '../NotFoundSource'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
+import { PageNotFound } from '../PageNotFound'
 import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
@@ -55,6 +58,8 @@ const BusinessProductsListingUI = (props) => {
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [events] = useEvent()
+  const [{ auth }] = useSession()
+  const location = useLocation()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -238,12 +243,18 @@ const BusinessProductsListingUI = (props) => {
         }
 
         {
-          !loading && !business && (
+          !loading && !business && location.pathname.includes('/store/') && (
             <NotFoundSource
               content={t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.')}
               btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
               onClickButton={props.handleSearchRedirect}
             />
+          )
+        }
+
+        {
+          !loading && !business && !location.pathname.includes('/store/') && (
+            <PageNotFound />
           )
         }
 
@@ -255,7 +266,7 @@ const BusinessProductsListingUI = (props) => {
           </ProductsNotFound>
         )}
       </ProductsContainer>
-      {currentCart?.products?.length > 0 && (
+      {currentCart?.products?.length > 0 && auth && (
         <FloatingButton
           btnText={t('VIEW_ORDER', 'View Order')}
           btnValue={currentCart?.products?.length}
