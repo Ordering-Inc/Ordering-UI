@@ -211,8 +211,7 @@ const CartItemLogoStyled = styled.div`
   @media (max-width: 480px){
     width: 50px;
     height: 50px;
-    min-height: 50px;
-    
+    min-height: 50px;    
   }
 `
 
