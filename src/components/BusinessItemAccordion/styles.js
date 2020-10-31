@@ -62,12 +62,25 @@ export const WrapperBusinessLogo = styled.div`
   max-height: 75px;
   height: 75px;
   width: 75px;
+  @media (max-width: 768px){
+    width: 55px;
+    height: 55px;
+    max-width: 55px;
+    max-height: 55px;
+    padding-bottom: 0 !important;
+  }
+  @media (max-width: 480px){
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+  }
 `
 
 const BusinessLogoStyled = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 75px;
+  height: 75px;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
@@ -76,6 +89,16 @@ const BusinessLogoStyled = styled.div`
   background-position: center;
   min-height: 75px;
   border-radius: 10px;
+  @media (max-width: 768px){
+    min-height: 55px;
+    width: 55px;
+    height: 55px;
+  }
+  @media (max-width: 480px){
+    min-height: 50px;
+    width: 50px;
+    height: 50px;
+  }
 `
 
 export const BusinessLogo = (props) => {
@@ -154,7 +177,7 @@ export const BusinessInfo = styled.div`
   }
 
   @media (max-width: 480px) {
-    width: 70%;
+    width: 60%;
   }
 `
 
