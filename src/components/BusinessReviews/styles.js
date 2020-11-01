@@ -54,6 +54,9 @@ export const Scores = styled.div`
   justify-content: space-between;
   flex: 1;
   text-align: center;
+  @media (max-width: 480px){
+    flex-wrap: wrap;
+  }
 `
 
 export const ScoreDiv = styled.div`
@@ -79,6 +82,15 @@ export const ScoreDiv = styled.div`
        margin-right: 0;
     `}
     }
+  }
+
+  @media(max-width: 768px){
+    font-size: 14px;
+  }
+
+  @media(max-width: 480px){
+    width: 44%;
+    margin-bottom: 10px;
   }
 `
 
