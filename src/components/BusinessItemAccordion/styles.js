@@ -130,6 +130,8 @@ export const ContentInfo = styled.div`
   h1 {
     font-size: 20px;
     font-weight: 500;
+    margin-top: 0em !important;
+    margin-bottom: 0.7em !important;
   }
 
   span {
@@ -144,6 +146,12 @@ export const ContentInfo = styled.div`
         margin-left: 3px;
         margin-right: 0;
     `}
+    }
+  }
+
+  @media (max-width: 768px){
+    h1{
+      margin-bottom: 0 !important
     }
   }
 
