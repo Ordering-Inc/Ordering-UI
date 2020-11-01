@@ -30,6 +30,11 @@ const AccordionStyled = styled.div`
       margin-left: initial;
     `}
   }
+
+  @media (max-width: 410px){
+    flex-direction: column;
+  }
+
 `
 
 export const Accordion = (props) => {
@@ -215,6 +220,15 @@ export const ProductError = styled.div`
     font-size: 18px;
     text-align: right;
   }
+
+  @media(max-width: 410px){
+    justify-content: center;
+    width: 100%;
+    
+    span{
+      text-align: center
+    }
+  }
 `
 
 export const ProductActions = styled.div`
@@ -237,6 +251,10 @@ export const ProductActionsEdit = styled.span`
 export const ProductActionsDelete = styled(ProductActionsEdit)`
   svg {
     margin-right: 0px;
+  }
+
+  @media(max-width: 410px){
+    display: none;
   }
 `
 
