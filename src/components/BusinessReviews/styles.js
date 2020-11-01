@@ -13,6 +13,11 @@ export const Content = styled.div`
   > h3 {
     color: "#D81212";
   }
+  min-height: 180px;
+`
+
+export const ReviewsNotFound = styled.h2`
+  margin-top: 50px;
 `
 
 export const ReviewContainer = styled.div`
