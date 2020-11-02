@@ -6,14 +6,22 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   padding-bottom: 20px;
-  > button {
+  button {
     width: 45%;
     margin-top: 20px;
+  }
+  @media (max-width: 768px){
+    height: calc(100vh - 130px);
+    justify-content: space-between;
+  }
+  @media (max-width: 580px){
+    height: 100vh;
+    justify-content: space-around;
   }
 `
 export const UpsellingContainer = styled.div`
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   justify-content: center;
   overflow: auto;
 `
@@ -28,7 +36,12 @@ export const Item = styled.div`
   justify-content: flex-start;
   text-align: center;
   border-radius: 9px;
-  @media (max-width: 720px){
+
+  @media (max-width: 768px){
+    width: 20%;
+  }
+
+  @media (max-width: 580px){
     width: 25%;
   }
 `
@@ -45,8 +58,8 @@ export const Details = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 0.9em;
-  > div {
+  font-size: 16px;
+  div {
     width: 100%;
      h3 {
       margin-block-start: 0.1em;
@@ -55,22 +68,39 @@ export const Details = styled.div`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      font-size: 14px;
     }
   }
-  > p{
+  p{
     color: #D81313;
     margin: 10px auto;
   }
-  > button {
+  button {
     width: 50%;
     margin: 5px auto;
     font-size: 0.9em;
   }
   @media (max-width: 980px){
     button{
-      width: 65%
+      width: 70%
     }
   }
+
+  @media (max-width: 768px){
+    font-size: 12px;
+  }
+
+  @media (max-width: 480px){
+    div{
+      h3{
+        font-size: 12px;  
+      }
+    }
+    button {
+      width: 100%
+    }
+  }
+
 `
 
 export const CloseUpselling = styled.div`
