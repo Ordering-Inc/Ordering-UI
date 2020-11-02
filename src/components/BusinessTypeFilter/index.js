@@ -25,15 +25,23 @@ const BusinessTypeFilterUI = (props) => {
   const [load, setLoad] = useState(false)
 
   return (
-    <TypeContainer id='container'>
+    <TypeContainer id='container' tabIndex='0'>
       <Tabs variant='primary' id='categories'>
         <AutoScroll categories='categories' container='container'>
           {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
             <Tab className='category' active={type.value === currentTypeSelected} key={type.value}>
-              {!type.value || i > (images.length - 1) ? <ImageContainer active={type.value === currentTypeSelected} load={load}><img src={images[0].image} onLoad={() => setLoad(true)} onClick={() => handleChangeBusinessType(type.value)} /></ImageContainer> : ''}
+              {!type.value || i > (images.length - 1) ? (
+                <ImageContainer active={type.value === currentTypeSelected} load={load}>
+                  <img src={images[0].image} alt='all' onLoad={() => setLoad(true)} onClick={() => handleChangeBusinessType(type.value)} />
+                </ImageContainer>)
+                : ''}
               {images.map(image => (
                 <React.Fragment key={image.value}>
-                  {image.value === type.value ? <ImageContainer active={type.value === currentTypeSelected} load={load}><img src={image.image} onClick={() => handleChangeBusinessType(type.value)} /></ImageContainer> : ''}
+                  {image.value === type.value ? (
+                    <ImageContainer active={type.value === currentTypeSelected} load={load}>
+                      <img src={image.image} alt={type.value} onClick={() => handleChangeBusinessType(type.value)} />
+                    </ImageContainer>)
+                    : ''}
                 </React.Fragment>
               )
               )}
