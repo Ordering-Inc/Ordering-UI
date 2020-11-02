@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useApi, useEvent } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
+import { HelmetTags } from '../../components/HelmetTags'
 
 export const BusinessProductsList = (props) => {
   const { store } = useParams()
@@ -80,6 +81,9 @@ export const BusinessProductsList = (props) => {
   }
 
   return (
-    <BusinessProductsListing {...businessProductsProps} />
+    <>
+      <HelmetTags page='business' />
+      <BusinessProductsListing {...businessProductsProps} />
+    </>
   )
 }

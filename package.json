@@ -55,6 +55,7 @@
     "ordering-components": "github:sergioaok/ordering-components#development",
     "polished": "^3.6.6",
     "prop-types": "^15.7.2",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^6.8.1",
     "react-loading-skeleton": "^2.1.1",
     "react-popper": "^2.2.3",
