@@ -60,7 +60,7 @@ const OrderDetailsUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
 
-  const { order, loading, error } = props.order
+  const { order, loading, error, header } = props.order
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -100,7 +100,7 @@ const OrderDetailsUI = (props) => {
     <Container>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
-          <Header>
+          <Header businessHeader={header && header.result.header}>
             <HeaderInfo>
               <HeaderLogo bgimage={theme?.images?.logos?.logotype} />
               <HeaderText column>
