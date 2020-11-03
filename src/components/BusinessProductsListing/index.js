@@ -211,7 +211,6 @@ const BusinessProductsListingUI = (props) => {
               content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
             />
           )}
-
           {(productModal.product || curProduct) && (
             <ProductForm
               businessSlug={business?.slug}
