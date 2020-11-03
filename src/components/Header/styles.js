@@ -3,11 +3,8 @@ import { Select } from '../../styles/Selects'
 
 export const Header = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-
-  @media (max-width: 820px) {
-    flex-direction: column;
-  }
 `
 
 export const InnerHeader = styled.div`
@@ -23,29 +20,27 @@ export const LogoHeader = styled.div`
   cursor: pointer;
 
   img {
+    width: 35px;
     height: 45px;
     margin: 0;
     vertical-align: middle;
+    margin-left: 10px;
 
-    @media (max-width: 768px) {
+    @media (min-width: 768px) {
       width: 150px;
-    }
-
-    @media (max-width: 576px) {
-      width: 45px;
     }
   }
 
-  img:nth-child(2) {
+  img:nth-child(1) {
     display: none;
   }
 
-  @media (max-width: 576px) {
+  @media (min-width: 768px) {
     img:nth-child(1) {
-      display: none;
+      display: block;
     }
     img:nth-child(2) {
-      display: block;
+      display: none;
     }
   }
 `
@@ -77,27 +72,23 @@ export const Menu = styled.div`
   }
 
   > :last-child {
-    
     margin-right: 10px;
+
     ${props => props.theme?.rtl && css`
       margin-left: 10px;
       margin-right: 0px;
     `}
   }
 
-  @media (max-width: 820px) {
-    .moment-popover,
-    .address-popover {
-      display: none;
-    }
+  .moment-popover,
+  .address-popover {
+    display: none;
   }
 
-  @media (max-width: 380px) {
-    > * {
-      margin: 0px 1px;
-    }
-    > :last-child {
-      margin-right: 2px;
+  @media (min-width: 821px) {
+    .moment-popover,
+    .address-popover {
+      display: flex;
     }
   }
 `
@@ -118,18 +109,7 @@ export const MenuLink = styled.a`
     color: ${props => props.theme.colors.primaryContrast};
     border-radius: 100px;
     padding: 10px 15px;
-
-    @media (max-width: 512px) {
-      padding: 5px 10px;
-    }
   `}
-
-  ${({ highlight }) => !highlight && css`
-    @media (max-width: 480px) {
-      display: none;
-    }
-  `}
-
 `
 
 export const HeaderInvert = styled(Header)`
@@ -149,14 +129,14 @@ export const HeaderInvert = styled(Header)`
 `
 
 export const SubMenu = styled(InnerHeader)`
-  display: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0px 20px 7px;
+  box-sizing: border-box;
+  margin: 0px;
 
-  @media (max-width: 820px) {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding: 7px 20px 0px;
-    box-sizing: border-box;
-    margin: 0px;
+  @media (min-width: 821px) {
+    display: none;
   }
 `

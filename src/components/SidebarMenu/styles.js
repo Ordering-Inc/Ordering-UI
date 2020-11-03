@@ -1,13 +1,21 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  @media (max-width: 768px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  ${({ auth }) => auth && css`
+    @media (min-width: 769px) {
+      display: none;
+    }
+  `}
+
+  ${({ auth }) => !auth && css`
+    @media (min-width: 871px) {
+      display: none;
+    }
+  `}
 `
 
 export const IconContent = styled.button`

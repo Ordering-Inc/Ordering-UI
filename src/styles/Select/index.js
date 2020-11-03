@@ -19,6 +19,7 @@ export const Select = (props) => {
     notAsync
   } = props
 
+  const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(option => option.value === defaultValue)
   const [selectedOption, setSelectedOption] = useState(defaultOption)
@@ -58,7 +59,7 @@ export const Select = (props) => {
   }
 
   return (
-    <SelectInput onClick={handleSelectClick}>
+    <SelectInput isHome={isHome} onClick={handleSelectClick}>
       {
         !selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>
       }
