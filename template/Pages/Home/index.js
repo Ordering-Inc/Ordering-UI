@@ -113,11 +113,6 @@ export const HomePage = (props) => {
         <TextContent className='center'>
           <HomeFooter>
             <h2>{t('HOME_CONTENT_HERO', 'Something for Everyone')}</h2>
-            <div>
-              <Button color='primary'>
-                {t('HOME_CONTENT_HERO_BUTTON', 'View Menu')}
-              </Button>
-            </div>
           </HomeFooter>
         </TextContent>
       </HomeSection>

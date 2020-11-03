@@ -15,7 +15,7 @@ const CmsUI = (props) => {
   return (
     <CmsContainer>
       {
-        !loading && (
+        loading && (
           <SkeletonContainer>
             <SkeletonHeader>
               <Skeleton width='100%' height='100%' />

@@ -52,9 +52,11 @@ export const MyOrdersUI = (props) => {
   }
 
   const [reorderLoading, setReorderLoading] = useState(false)
+  const [orderID, setOrderID] = useState(null)
 
   const handleReorder = async (orderId) => {
     setReorderLoading(true)
+    setOrderID(orderId)
     try {
       const { error, result } = await reorder(orderId)
       if (!error) {
@@ -169,7 +171,7 @@ export const MyOrdersUI = (props) => {
                       {(order.status === 1 || order.status === 11) && (
                         <p>{t('ORDER_COMPLETED', 'Complete')}</p>
                       )}
-                      <Button color='primary' onClick={() => handleReorder(order.id)} disabled={reorderLoading}>{reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}</Button>
+                      <Button color='primary' onClick={() => handleReorder(order.id)} disabled={reorderLoading}>{orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}</Button>
                     </Reorder>
                   </IndividualOrderPast>
                 )) : ([...Array(3)].map((item, i) => (
