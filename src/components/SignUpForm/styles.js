@@ -5,34 +5,26 @@ export const SignUpContainer = styled.div`
   height: 100%;
   display: flex;
   min-height: ${({ isPopup }) => isPopup ? '90vh' : '100vh'};
+  flex-direction: column;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
 `
 const Side = styled.div`
   display: flex;
-
-  @media (min-width: 1400px) {
-    height: calc(100vh - 65px);
-  }
-
-  @media (max-width: 992px) {
-    width: 50%;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+  width: 100%;
 `
 export const HeroSide = styled(Side)`
-  width: 55%;
-  justify-content: center;
-  align-items: center;
-  color: ${props => props.theme.colors.primaryContrast};
-  background-color:  ${props => props.theme.colors.primary};
-  @media (max-width: 768px) {
-    display: none;
+  display: none;
+
+  @media (min-width: 768px) {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${props => props.theme.colors.primaryContrast};
+    background-color:  ${props => props.theme.colors.primary};
   }
 `
 
@@ -44,7 +36,7 @@ export const TitleHeroSide = styled.div`
   text-align: center;
 
   h1 {
-    font-size: 52px;
+    font-size: 50px;
   }
 
   h1,
@@ -52,40 +44,32 @@ export const TitleHeroSide = styled.div`
     margin: 0px;
     color: #FFF;
   }
-
-  @media (max-width: 576px) {
-    h1 {
-      font-size: 32px;
-    }
-  }
 `
 
 export const FormSide = styled(Side)`
-  width: 45%;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  margin: ${({ isPopup }) => isPopup ? 'auto' : '20px 0px'};
 
   img {
     width: 200px;
-  }
-
-  @media (min-width: 769px){
-    font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }
 
   @media (min-width: 1200px){
     font-size: ${({ isPopup }) => isPopup ? '0.9em' : '1em'};
   }
 
-  @media (max-width: 768px) {
-    margin: 20px 0px;
+  @media (min-width: 768px) {
+    width: 45%;
+    font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }
 `
 
 export const SignUpWith = styled.div`
-  @media (max-width: 360px) {
-    font-size: 14px;
+  font-size: 14px;
+
+  @media (min-width: 992px) {
+    font-size: 18px;
   }
 `
 
@@ -103,37 +87,13 @@ export const FormInput = styled.form`
 
   input:not(:last-child) {
     margin-top: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
   }
 
   button {
     margin-top: 10px;
     padding: 5px;
   }
-
-  @media (max-width: 992px) {
-    width: 90%;
-  }
-
-  @media (max-width: 768px) {
-    input:not(:last-child) {
-      margin-bottom: 10px;
-    }
-    * {
-      margin: 20px;
-    }
-    ${({ isSkeleton }) => isSkeleton && css`
-    * {
-      margin: 5px;
-      padding: 0;
-    }
-  `}
-  }
-  
-  @media (max-width: 480px) {
-    width: 100%;
-  }
-
 `
 
 export const RedirectLink = styled.div`
@@ -141,9 +101,13 @@ export const RedirectLink = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin: 0px;
+  font-size: 17px;
 
   span {
     margin-right: 5px;
+
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
       margin-right: 0px;
@@ -161,26 +125,27 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
+    width: calc(90% - 20px);
 
-    @media (max-width: 480px) {
-      width: calc(90% - 20px);
+    @media (min-width: 481px) {
+      width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
     }
   `}
 
-  @media (max-width: 768px) {
-    font-size: 17px;
+  @media (min-width: 768px) {
+    ${({ isPopup }) => isPopup && css`
+      flex-direction: row;
+      font-size: 13px;
+    `};
   }
 
-  @media (max-width: 410px) {
-    display: flex;
-    flex-direction: column;
-    margin: 0px;
+  @media (min-width: 992px) {
+    flex-direction: row;
   }
 `
 
 export const SocialButtons = styled.div`
-   width:  ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
+   width: calc(100% - 40px);
    margin-top: 5px;
 
   button {
@@ -197,27 +162,5 @@ export const SocialButtons = styled.div`
     div {
       font-size: 0.8em;
     }
-  }
-
-  &.popup{
-    button {
-      width: 79%;
-      span {
-        padding-left: 10%;
-        ${props => props.theme?.rtl && css`
-          margin-right: 10%;
-          margin-left: 0;
-        `}
-      }
-    }
-  }
-  @media (max-width: 992px) {
-    width: calc(90% - 20px);
-  }
-  @media (max-width: 768px) {
-    width: calc(90% - 40px);
-  }
-  @media (max-width: 480px) {
-    width: calc(100% - 40px);
   }
 `
