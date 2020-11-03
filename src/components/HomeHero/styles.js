@@ -3,18 +3,23 @@ import styled, { css } from 'styled-components'
 
 export const HeroContainerStyled = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 97px);
+
   button{
     padding-top: 5px;
     padding-bottom: 5px;
   }
+
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
     background-size: cover;
     object-fit: cover;
     background-position: center;
-    min-height: 500px;
   `}
+
+  @media (min-width: 821px) {
+    height: calc(100vh - 65px);
+  }
 `
 
 export const HeroContainer = (props) => {
@@ -37,20 +42,33 @@ export const ContentWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    padding: 0px 0px 0px 40px;
+    padding: 0px 20px 0px;
+
     ${props => props.theme?.rtl && css`
-      padding: 0px 40px 0px 0px;
-    `} 
+      padding: 0px 20px 0px;
+    `}
+
     button {
       width: 180px;
     }
+
     input {
-      width: 97%;
+      width: 90%;
       margin-bottom: 15px;
     }
-    @media (max-width: 480px) {
-      font-size: 40px;
-      width: 100%;
+
+    @media (min-width: 425px) {
+      input {
+        width: 97%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      padding: 0px 40px 0px;
+
+      ${props => props.theme?.rtl && css`
+        padding: 0px 40px 0px;
+      `}
     }
 `
 
@@ -62,33 +80,57 @@ export const Title = styled.h1`
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #00000029;
   opacity: 1;
+  font-size: 35px;
+
   ${props => props.theme?.rtl && css`
       text-align: right;
-  `} 
-  @media (max-width: 480px) {
-    font-size: 40px;
-  }
+  `}
 `
 
 export const Slogan = styled.p`
   margin: 0px;
   text-align: left;
-  font-size: 1.5em;
+  font-size: 18px;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
   margin-bottom: 15px;
+
   ${props => props.theme?.rtl && css`
-       text-align: right;
-    `} 
-  @media (max-width: 480px) {
-    font-size: 18px;
+      text-align: right;
+  `}
+
+  @media (min-width: 480px) {
+    font-size: 24px;
   }
 `
 
 export const WrapInput = styled.label`
   position: relative;
-  
+
+  ${({ withIcon }) => withIcon && css`
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+
+    &::before {
+      content: "";
+      position: absolute;
+      right: 5px;
+      top: 0;
+      bottom: 18px;
+      width: 15px;
+
+      ${props => props.theme?.rtl && css`
+        left: 5px;
+        right: initial;
+     `}
+    }
+
+    @media (min-width: 1024px) {
+      width: calc(50% - 20px);
+    }
+  `}
+
   input {
     color: #FFF;
     border-color: #FFF;
@@ -108,47 +150,19 @@ export const WrapInput = styled.label`
   svg {
     color: #FFF;
     position: absolute;
-    right: 0px;
     font-size: 22px;
     top: 8px;
+
     ${props => props.theme?.rtl && css`
       left: 0px;
-      right: initial
-  `}
+    `}
+
+    ${props => !props.theme?.rtl && css`
+      right: 0px;
+    `}
+
+    @media (min-width: 768px) {
+      margin-right: 5px;
+    }
   }
-
-  @media (max-width: 480px) {
-      svg{
-        top: 26px;
-        right: -18px;
-      }
-    }
-  
-
-  ${({ withIcon }) => withIcon && css`
-    width: calc(50% + 70px);
-    &::before {
-      content: "";
-      position: absolute;
-      right: 5px;
-      top: 0;
-      bottom: 18px;
-      width: 15px;
-      /* background: url(${withIcon}) center / contain no-repeat; */
-      ${props => props.theme?.rtl && css`
-        left: 5px;
-        right: initial;
-     `}
-    }
-    @media (max-width: 480px) {
-      &::before {
-        right: 0px;
-        bottom: 0px;
-         ${props => props.theme?.rtl && css`
-          left: 0px;
-          bottom: 0px
-       `}
-      }
-    }
-  `}
 `
