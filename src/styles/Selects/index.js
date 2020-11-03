@@ -109,6 +109,10 @@ export const Select = styled.div`
   color: ${({ isHome }) => isHome ? '#FFF' : '#333'} !important;
   position: relative;
 
+  &:disabled {
+    pointer-events: none;
+  }
+
   ${props => props.open && css`
     background-color: ${darken(0.07, '#CCC')};
   `}

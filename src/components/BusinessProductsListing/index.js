@@ -282,9 +282,10 @@ const BusinessProductsListingUI = (props) => {
           handleClick={() => setOpenUpselling(true)}
         />
       )}
-      {currentCart?.products && (
+      {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}
+          business={currentCart?.business}
           cartProducts={currentCart?.products}
           handleUpsellingPage={handleUpsellingPage}
           openUpselling={openUpselling}
