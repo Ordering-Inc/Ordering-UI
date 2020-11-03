@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: none;
@@ -49,12 +49,17 @@ export const SidebarContent = styled.div`
   position: fixed;
   z-index: 1005;
   top: 0;
-  left: 0;
   background-color: ${({ isHome }) => isHome ? '#333' : '#F8F8F8'};
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
   box-shadow: ${({ isHome }) => isHome ? 'rgba(0, 0, 0, 0.7) 0px 8px 24px;' : 'rgba(0, 0, 0, 0.2) 0px 8px 24px;'};
+
+  ${props => props.theme?.rtl ? css`
+      right: 0;
+  ` : css`
+      left: 0;
+  `}
 
   @media (max-height: 450px) {
     padding-top: 15px;
@@ -170,6 +175,12 @@ export const TextInfo = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   color: ${({ active, theme, isHome }) => active ? theme.colors.primary : isHome ? '#FFF' : '#000'}
+
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+    display: inline-block;
+    color: #000;
+  `}
 `
 
 export const MenuLinkSeparator = styled.div`
@@ -181,6 +192,14 @@ export const MenuLinkSeparator = styled.div`
     padding-left: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
+
+    ${props => props.theme?.rtl ? css`
+      padding-right: 0px;
+      margin: 15px 0px -16px -16px;
+    ` : css`
+      padding-left: 0px;
+      margin: 15px -16px -16px 0px;
+    `}
 
     hr {
       display: block;
