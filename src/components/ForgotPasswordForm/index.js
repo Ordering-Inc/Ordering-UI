@@ -79,7 +79,7 @@ const ForgotPasswordUI = (props) => {
   }
   return (
     <ForgotPasswordContainer isPopup={isPopup}>
-      <HeroSide>
+      <HeroSide isPopup={isPopup}>
         <TitleHeroSide>
           <h1>{t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')}</h1>
           <p>{t('SUBTITLE_FORGOT_PASSWORD', "Enter your email addres and we'll send you a link to reset your password.")}</p>
