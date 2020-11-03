@@ -106,6 +106,10 @@ export const Select = styled.div`
   color: #333;
   position: relative;
 
+  &:disabled {
+    pointer-events: none;
+  }
+
   ${props => props.open && css`
     background-color: ${darken(0.07, '#CCC')};
   `}
