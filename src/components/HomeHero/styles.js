@@ -50,6 +50,7 @@ export const ContentWrapper = styled.div`
     }
     @media (max-width: 480px) {
       font-size: 40px;
+      width: 100%;
     }
 `
 
@@ -118,7 +119,8 @@ export const WrapInput = styled.label`
 
   @media (max-width: 480px) {
       svg{
-        top: 24px;
+        top: 26px;
+        right: -18px;
       }
     }
   

@@ -164,7 +164,7 @@ const SignUpFormUI = (props) => {
           <Button
             color='primary'
             type='submit'
-            disabled={formState.loading}
+            disabled={formState.loading || validationFields.loading}
           >
             {formState.loading ? t('LOADING') + '...' : t('SIGNUP', 'Sign up')}
           </Button>

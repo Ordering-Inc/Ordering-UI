@@ -31,7 +31,7 @@ export const Map = styled.div`
   }
 `
 
-export const Text = styled.h1`
+export const Text = styled.div`
   display: flex;
   align-items: center;
   font-size: 24px;
@@ -40,6 +40,14 @@ export const Text = styled.h1`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  h4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+
   svg {
     color: #F2BB40;
     margin-left: 5px;

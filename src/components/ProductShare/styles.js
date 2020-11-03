@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components'
 
 export const IconShare = styled.div`
   position: absolute;
-  font-size: 25px;
-  right: 14px;
-  top: -11px;
+  font-size: 22px;
+  right: 16px;
+  top: 0;
   z-index: 9999995;
   margin: 0 10px;
   ${props => props.theme?.rtl && css`
@@ -17,7 +17,8 @@ export const IconShare = styled.div`
   }
 
   @media (max-width: 1200px) {
-    position: sticky;
+    position: relative;
+    margin: 0px;
     top: 0px;
     ${props => props.theme?.rtl ? css`
       right: 0px;

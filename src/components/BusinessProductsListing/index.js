@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useLocation } from 'react-router-dom'
 import {
   BusinessAndProductList,
   useEvent,
   useLanguage,
-  useOrder
+  useOrder,
+  useSession
 } from 'ordering-components'
 
 import {
@@ -21,10 +23,12 @@ import { NotFoundSource } from '../NotFoundSource'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
+import { PageNotFound } from '../PageNotFound'
 import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
+import { UpsellingPage } from '../UpsellingPage'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -54,7 +58,11 @@ const BusinessProductsListingUI = (props) => {
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [events] = useEvent()
+  const [{ auth }] = useSession()
+  const location = useLocation()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -129,6 +137,12 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [openProduct])
 
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
+
   return (
     <>
       <ProductsContainer>
@@ -169,6 +183,7 @@ const BusinessProductsListingUI = (props) => {
           open={openProduct}
           closeOnBackdrop
           onClose={() => closeModalProductForm()}
+          padding='10px'
         >
 
           {productModal.loading && (
@@ -238,12 +253,18 @@ const BusinessProductsListingUI = (props) => {
         }
 
         {
-          !loading && !business && (
+          !loading && !business && location.pathname.includes('/store/') && (
             <NotFoundSource
               content={t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.')}
               btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
               onClickButton={props.handleSearchRedirect}
             />
+          )
+        }
+
+        {
+          !loading && !business && !location.pathname.includes('/store/') && (
+            <PageNotFound />
           )
         }
 
@@ -255,11 +276,21 @@ const BusinessProductsListingUI = (props) => {
           </ProductsNotFound>
         )}
       </ProductsContainer>
-      {currentCart?.products?.length > 0 && (
+      {currentCart?.products?.length > 0 && auth && (
         <FloatingButton
           btnText={t('VIEW_ORDER', 'View Order')}
           btnValue={currentCart?.products?.length}
-          handleClick={() => onCheckoutRedirect(currentCart?.uuid)}
+          handleClick={() => setOpenUpselling(true)}
+        />
+      )}
+      {currentCart?.products && (
+        <UpsellingPage
+          businessId={currentCart?.business_id}
+          cartProducts={currentCart?.products}
+          handleUpsellingPage={handleUpsellingPage}
+          openUpselling={openUpselling}
+          canOpenUpselling={canOpenUpselling}
+          setCanOpenUpselling={setCanOpenUpselling}
         />
       )}
     </>

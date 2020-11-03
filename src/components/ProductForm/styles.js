@@ -11,7 +11,8 @@ export const ProductContainer = styled.div`
     overflow: auto;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
+    overflow: initial;
     height: 90vh;
     max-height: 100vh;
   }
