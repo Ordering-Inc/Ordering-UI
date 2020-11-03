@@ -27,8 +27,6 @@ export const Select = (props) => {
   const dropdownReference = useRef()
   const [orderState] = useOrder()
 
-
-
   const handleSelectClick = (e) => {
     setOpen(!open)
   }
