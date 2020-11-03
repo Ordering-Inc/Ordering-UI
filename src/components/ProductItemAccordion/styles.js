@@ -64,6 +64,13 @@ export const WrapperProductImage = styled.div`
     height: 65px;
     width: 65px;
   }
+
+  @media (max-width: 360px) {
+    max-width: 55px;
+    max-height: 55px;
+    height: 55px;
+    width: 55px;
+  }
 `
 
 const ProductImageStyled = styled.div`
@@ -100,6 +107,10 @@ export const ContentInfo = styled.div`
 
   @media (max-width: 410px) {
     width: 60%;
+  }
+
+  @media (max-width: 380px) {
+    width: 50%;
   }
 
   ${props => props.theme?.rtl && css`
