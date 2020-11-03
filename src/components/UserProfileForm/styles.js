@@ -49,14 +49,15 @@ export const Image = styled.div`
   cursor: -webkit-grab;
   cursor: grab;
 
-  > img {
+  img {
     width: 100%;
     border-radius: 50%;
     height: 100%;
     border: none;
     overflow: hidden;
   };
-  > div {
+
+  div {
     width: 100%;
     border-radius: 50%;
     height: 100%;
@@ -65,13 +66,21 @@ export const Image = styled.div`
   };
 
   @media (min-width: 480px) {
-    > img {
+    img {
     width: 100%;
     border-radius: 50%;
     height: 100%;
     border: none;
     overflow: hidden;
   };
+  }
+`
+
+export const SkeletonWrapper = styled.div`
+  span{
+    height: 100%;
+    position: relative;
+    top: -2.5px;
   }
 `
 

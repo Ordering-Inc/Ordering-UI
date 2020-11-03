@@ -16,7 +16,8 @@ import {
   UserData,
   SavedPlaces,
   SkeletonForm,
-  UploadImageIcon
+  UploadImageIcon,
+  SkeletonWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -27,7 +28,16 @@ import GiPhotoCamera from '@meronex/icons/gi/GiPhotoCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
 
 const UserProfileFormUI = (props) => {
-  const { hanldeChangeInput, handleButtonUpdateClick, handlechangeImage, formState, showField, validationFields, isRequiredField, useChekoutFileds } = props
+  const {
+    hanldeChangeInput,
+    handleButtonUpdateClick,
+    handlechangeImage,
+    formState,
+    showField,
+    validationFields,
+    isRequiredField,
+    useChekoutFileds
+  } = props
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const { handleSubmit, register, errors } = useForm()
@@ -87,7 +97,7 @@ const UserProfileFormUI = (props) => {
             <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
               <Image isImage={user?.photo || formState?.changes?.photo}>
                 {formState.changes.photo && formState.loading
-                  ? (<div><Skeleton /></div>)
+                  ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                   : ((!formState.changes.photo || formState.result?.result === 'Network Error')
                     ? user?.photo
                       ? (<img src={user?.photo} alt='user image' />)
@@ -180,7 +190,6 @@ const UserProfileFormUI = (props) => {
               </FormInput>
             )
             : (
-
               <UserData>
                 {formState.loading && !formState.changes.photo ? <Skeleton width={100} height={20} /> : <h4>{user.name} {user.lastname}</h4>}
                 {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.email}</p>}
