@@ -217,7 +217,7 @@ export const Checkout = (props) => {
     handleCheckoutListRedirect
   } = props
 
-  const [{ carts }, { confirmCart }] = useOrder()
+  const [orderState] = useOrder()
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
@@ -229,7 +229,7 @@ export const Checkout = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
 
-  const cartsWithProducts = Object.values(carts).filter(cart => cart.products.length)
+  const cartsWithProducts = Object.values(orderState.carts).filter(cart => cart.products.length)
 
   const handleOpenUpsellingPage = (cart) => {
     setCurrentCart(cart)
@@ -241,6 +241,12 @@ export const Checkout = (props) => {
     setCanOpenUpselling(false)
     handleCheckoutRedirect(currentCart.uuid)
   }
+
+  useEffect(() => {
+    if (!orderState.loading && currentCart?.business_id) {
+      setCurrentCart(...Object.values(orderState.carts).filter(cart => cart.business_id === currentCart?.business_id))
+    }
+  }, [orderState.loading])
 
   useEffect(() => {
     if (currentCart?.products) {
@@ -259,7 +265,7 @@ export const Checkout = (props) => {
         setCartState({ ...cartState, loading: false })
       } else if (result.status === 2 && result.paymethod_data.gateway === 'stripe_redirect' && query.get('payment_intent')) {
         try {
-          await confirmCart(cartUuid)
+          await orderState.confirmCart(cartUuid)
           handleOrderRedirect(result.order.uuid)
         } catch (error) {
           console.log(error)
@@ -297,14 +303,14 @@ export const Checkout = (props) => {
 
   return (
     <>
-      {!cartUuid && carts && cartsWithProducts.length === 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts.length === 0 && (
         <NotFoundSource
           content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
           btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
           onClickButton={handleSearchRedirect}
         />
       )}
-      {!cartUuid && carts && cartsWithProducts.length > 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts.length > 0 && (
         <CartsList>
           {cartsWithProducts.map(cart => (
             <CartItem
