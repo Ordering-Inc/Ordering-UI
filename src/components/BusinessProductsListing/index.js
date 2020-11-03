@@ -28,6 +28,7 @@ import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
+import { UpsellingPage } from '../UpsellingPage'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -57,6 +58,8 @@ const BusinessProductsListingUI = (props) => {
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [events] = useEvent()
   const [{ auth }] = useSession()
   const location = useLocation()
@@ -133,6 +136,12 @@ const BusinessProductsListingUI = (props) => {
       events.off('change_view', handleChangePage)
     }
   }, [openProduct])
+
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
 
   return (
     <>
@@ -271,7 +280,17 @@ const BusinessProductsListingUI = (props) => {
         <FloatingButton
           btnText={t('VIEW_ORDER', 'View Order')}
           btnValue={currentCart?.products?.length}
-          handleClick={() => onCheckoutRedirect(currentCart?.uuid)}
+          handleClick={() => setOpenUpselling(true)}
+        />
+      )}
+      {currentCart?.products && (
+        <UpsellingPage
+          businessId={currentCart?.business_id}
+          cartProducts={currentCart?.products}
+          handleUpsellingPage={handleUpsellingPage}
+          openUpselling={openUpselling}
+          canOpenUpselling={canOpenUpselling}
+          setCanOpenUpselling={setCanOpenUpselling}
         />
       )}
     </>
