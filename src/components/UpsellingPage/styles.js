@@ -11,12 +11,8 @@ export const Container = styled.div`
     margin-top: 20px;
   }
   @media (max-width: 768px){
-    height: calc(100vh - 130px);
     justify-content: space-between;
-  }
-  @media (max-width: 580px){
-    height: 100vh;
-    justify-content: space-around;
+    min-height: calc(100vh - 160px)
   }
 `
 export const UpsellingContainer = styled.div`
