@@ -31,7 +31,7 @@ export const HeroSide = styled(Side)`
   align-items: center;
   color: ${props => props.theme.colors.primaryContrast};
   background-color:  ${props => props.theme.colors.primary};
-
+  padding-bottom: 5px;
   @media (max-width: 768px) {
     height: calc(50vh - 65px);
   }
@@ -56,7 +56,17 @@ export const TitleHeroSide = styled.div`
 
   @media (max-width: 576px) {
     h1 {
-      font-size: 32px;
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 410px) {
+    h1 {
+      font-size: 22px;
+    }
+    P {
+      margin-top: 5px;
+      font-size: 13px;
     }
   }
 `
@@ -139,13 +149,5 @@ export const RedirectLink = styled.div`
 
   @media (max-width: 768px) {
     font-size: 17px;
-  }
-
-  @media (max-width: 410px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 360px) {
-    flex-direction: column;
   }
 `

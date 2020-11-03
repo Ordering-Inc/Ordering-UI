@@ -31,9 +31,8 @@ const HeaderStyled = styled.div`
 `
 
 export const Header = (props) => {
-  const theme = useTheme()
   const style = {}
-  style.backgroundImage = `url(${theme.images?.general?.orderDetailsHeader})`
+  style.backgroundImage = `url(${props.businessHeader})`
 
   return (
     <HeaderStyled style={style}>
@@ -46,6 +45,7 @@ export const HeaderInfo = styled.div`
   background-color: ${props => props.theme.colors.primary};
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 50%;
   padding: 20px 20px 30px;
   border-top-left-radius: 16px;
@@ -61,8 +61,13 @@ export const HeaderInfo = styled.div`
     width: 55%;
   }
 
-  @media (max-width: 380px) {
-    width: 60%;
+  @media (max-width: 480px) {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  @media (min-width: 768px) {
+    min-height: 300px;
   }
 `
 

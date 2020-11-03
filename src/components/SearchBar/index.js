@@ -34,6 +34,7 @@ export const SearchBar = ({ onSearch, search, placeholder }) => {
       <Input
         ref={el}
         name='search'
+        aria-label='search'
         placeholder={placeholder}
       />
     </BusinessSearch>

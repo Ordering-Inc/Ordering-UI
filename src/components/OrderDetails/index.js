@@ -20,12 +20,12 @@ import {
   WrapperContainer,
   Header,
   HeaderInfo,
-  HeaderLogo,
   HeaderText,
   Content,
   OrderBusiness,
   BusinessWrapper,
   LogoWrapper,
+  HeaderLogo,
   BusinessLogo,
   BusinessInfo,
   ActionsBlock,
@@ -60,7 +60,7 @@ const OrderDetailsUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
 
-  const { order, loading, error } = props.order
+  const { order, loading, error, header } = props.order
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -100,7 +100,7 @@ const OrderDetailsUI = (props) => {
     <Container>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
-          <Header>
+          <Header businessHeader={header && header.result.header}>
             <HeaderInfo>
               <HeaderLogo bgimage={theme?.images?.logos?.logotype} />
               <HeaderText column>
@@ -125,9 +125,10 @@ const OrderDetailsUI = (props) => {
                 </BusinessInfo>
               </BusinessWrapper>
               <ActionsBlock>
-                <span>
-                  <FiPhone />
-                </span>
+                {order.driver && order.driver.phone &&
+                  <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                    <FiPhone />
+                  </span>}
                 <span>
                   <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
                 </span>
@@ -190,9 +191,10 @@ const OrderDetailsUI = (props) => {
                     </InfoBlock>
                   </WrapperDriver>
                   <ActionsBlock>
-                    <span>
-                      <FiPhone />
-                    </span>
+                    {order.driver && order.driver.phone &&
+                      <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                        <FiPhone />
+                      </span>}
                     <span>
                       <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
                     </span>
@@ -308,12 +310,16 @@ const OrderDetailsUI = (props) => {
           onClickButton={handleOrderRedirect}
         />
       )}
-      <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })} padding='0' width='70%'>
-        <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
-      </Modal>
-      <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
-        <ReviewOrder order={order} />
-      </Modal>
+      {(openMessages.driver || openMessages.business) && (
+        <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })} padding='0' width='70%'>
+          <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
+        </Modal>
+      )}
+      {openReview && (
+        <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
+          <ReviewOrder order={order} />
+        </Modal>
+      )}
     </Container>
   )
 }

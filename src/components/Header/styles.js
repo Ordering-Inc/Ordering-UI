@@ -26,6 +26,14 @@ export const LogoHeader = styled.div`
     height: 45px;
     margin: 0;
     vertical-align: middle;
+
+    @media (max-width: 768px) {
+      width: 150px;
+    }
+
+    @media (max-width: 576px) {
+      width: 45px;
+    }
   }
 
   img:nth-child(2) {
@@ -110,7 +118,18 @@ export const MenuLink = styled.a`
     color: ${props => props.theme.colors.primaryContrast};
     border-radius: 100px;
     padding: 10px 15px;
+
+    @media (max-width: 512px) {
+      padding: 5px 10px;
+    }
   `}
+
+  ${({ highlight }) => !highlight && css`
+    @media (max-width: 480px) {
+      display: none;
+    }
+  `}
+
 `
 
 export const HeaderInvert = styled(Header)`

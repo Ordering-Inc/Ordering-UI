@@ -75,7 +75,7 @@ export const BusinessBasicInformation = (props) => {
             </div>
             <div>
               {!loading ? (
-                <p>{getBusinessType()}</p>
+                <p className='type'>{getBusinessType()}</p>
               ) : (
                 <Skeleton width={100} />
               )}
