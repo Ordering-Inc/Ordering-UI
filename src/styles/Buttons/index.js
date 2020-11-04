@@ -18,6 +18,10 @@ export const Button = styled.button`
     background: ${() => darken(0.07, '#CCC')};
   }
 
+  &:disabled {
+    opacity: 0.5
+  }
+
   ${({ initialIcon }) => initialIcon && css`
     text-align: left;
     ${props => props.theme?.rtl && css`

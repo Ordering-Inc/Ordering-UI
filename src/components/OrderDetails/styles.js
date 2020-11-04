@@ -31,9 +31,8 @@ const HeaderStyled = styled.div`
 `
 
 export const Header = (props) => {
-  const theme = useTheme()
   const style = {}
-  style.backgroundImage = `url(${theme.images?.general?.orderDetailsHeader})`
+  style.backgroundImage = `url(${props.businessHeader})`
 
   return (
     <HeaderStyled style={style}>

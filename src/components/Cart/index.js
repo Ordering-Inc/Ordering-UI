@@ -218,6 +218,7 @@ const CartUI = (props) => {
         <UpsellingPage
           businessId={cart.business_id}
           cartProducts={cart.products}
+          business={cart.business}
           handleUpsellingPage={handleUpsellingPage}
           openUpselling={openUpselling}
           canOpenUpselling={canOpenUpselling}

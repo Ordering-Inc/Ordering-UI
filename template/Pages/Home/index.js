@@ -4,8 +4,6 @@ import AiOutlineAndroid from '@meronex/icons/ai/AiOutlineAndroid'
 import AiOutlineApple from '@meronex/icons/ai/AiOutlineApple'
 import { HomeHero } from '../../../src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
-
-import { Button } from '../../../src/styles/Buttons'
 import { HelmetTags } from '../../components/HelmetTags'
 
 import {
@@ -116,11 +114,6 @@ export const HomePage = (props) => {
           <TextContent className='center'>
             <HomeFooter>
               <h2>{t('HOME_CONTENT_HERO', 'Something for Everyone')}</h2>
-              <div>
-                <Button color='primary'>
-                  {t('HOME_CONTENT_HERO_BUTTON', 'View Menu')}
-                </Button>
-              </div>
             </HomeFooter>
           </TextContent>
         </HomeSection>

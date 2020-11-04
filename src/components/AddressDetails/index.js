@@ -54,7 +54,7 @@ const AddressDetailsUI = (props) => {
     <AddressContainer>
       <Header>
         <Text>
-          {userAddress}
+          <h4>{userAddress}</h4>
           {orderType === 1 &&
             <TiPencil
               onClick={() => handleClickAddress()}

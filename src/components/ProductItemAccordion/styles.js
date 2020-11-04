@@ -30,6 +30,11 @@ const AccordionStyled = styled.div`
       margin-left: initial;
     `}
   }
+
+  @media (max-width: 410px){
+    flex-direction: column;
+  }
+
 `
 
 export const Accordion = (props) => {
@@ -58,6 +63,13 @@ export const WrapperProductImage = styled.div`
     max-height: 65px;
     height: 65px;
     width: 65px;
+  }
+
+  @media (max-width: 360px) {
+    max-width: 55px;
+    max-height: 55px;
+    height: 55px;
+    width: 55px;
   }
 `
 
@@ -95,6 +107,10 @@ export const ContentInfo = styled.div`
 
   @media (max-width: 410px) {
     width: 60%;
+  }
+
+  @media (max-width: 380px) {
+    width: 50%;
   }
 
   ${props => props.theme?.rtl && css`
@@ -215,6 +231,15 @@ export const ProductError = styled.div`
     font-size: 18px;
     text-align: right;
   }
+
+  @media(max-width: 410px){
+    justify-content: center;
+    width: 100%;
+    
+    span{
+      text-align: center
+    }
+  }
 `
 
 export const ProductActions = styled.div`
@@ -237,6 +262,10 @@ export const ProductActionsEdit = styled.span`
 export const ProductActionsDelete = styled(ProductActionsEdit)`
   svg {
     margin-right: 0px;
+  }
+
+  @media(max-width: 410px){
+    display: none;
   }
 `
 

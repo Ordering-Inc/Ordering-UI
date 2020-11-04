@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   position: fixed;
@@ -43,4 +43,8 @@ export const BtnValue = styled.span`
   height: 20px;
   width: auto;
   min-width: 20px;
+  ${props => props.theme?.rtl && css`
+    left: 7px;
+    right: initial;
+  `}
 `

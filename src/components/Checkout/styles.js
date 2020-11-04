@@ -187,6 +187,13 @@ export const LogoWrapper = styled.div`
   max-height: 75px;
   height: 75px;
   width: 75px;
+  @media (max-width: 480px){
+    align-self: center;
+    width: 50px;
+    height: 50px;
+    min-height: 50px;
+    max-width: 50px;
+  }
 `
 
 const CartItemLogoStyled = styled.div`
@@ -201,6 +208,11 @@ const CartItemLogoStyled = styled.div`
   background-position: center;
   min-height: 75px;
   border-radius: 10px;
+  @media (max-width: 480px){
+    width: 50px;
+    height: 50px;
+    min-height: 50px;    
+  }
 `
 
 export const CartItemLogo = (props) => {
@@ -235,6 +247,20 @@ export const CartItemInfo = styled.div`
     opacity: 0.8;
     color: ${props => props.theme.colors.primary};
     font-weight: bold;
+  }
+
+  @media(max-width: 480px){
+    width: 70%;
+    h1,
+    p {
+      margin: 3px 10px;
+    }
+    h1{
+      font-size: 16px;
+    }
+    p{
+      font-size: 12px;
+    }
   }
 `
 

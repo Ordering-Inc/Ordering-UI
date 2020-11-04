@@ -48,6 +48,7 @@ export const Options = styled.div`
   border-color: #CCC;
   border-radius: 15px;
   overflow: hidden;
+  
   ${({ position }) => position?.toLowerCase() === 'left' && css`
     left: 0;
     margin-left: -1px;
@@ -78,6 +79,8 @@ export const Selected = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -105,6 +108,10 @@ export const Select = styled.div`
   background-color: #CCC;
   color: #333;
   position: relative;
+
+  &:disabled {
+    pointer-events: none;
+  }
 
   ${props => props.open && css`
     background-color: ${darken(0.07, '#CCC')};
