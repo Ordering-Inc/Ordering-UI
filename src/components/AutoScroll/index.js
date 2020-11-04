@@ -15,7 +15,7 @@ export const AutoScroll = ({ children, categories, container }) => {
       .addEventListener('scroll', handleScroll)
 
     return () => {
-      removeEventListener(containerElement)
+      document.removeEventListener(containerElement)
     }
   })
 
@@ -77,7 +77,7 @@ export const AutoScroll = ({ children, categories, container }) => {
   return (
     <DivContainer>
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack className='left' onClick={() => scrolling('left')} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack className='left' onClick={() => scrolling(true)} /> : ''
       }
       {children}
       {

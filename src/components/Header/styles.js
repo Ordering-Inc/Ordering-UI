@@ -59,7 +59,7 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
 
-  &.left {
+  &.left-header {
     > :first-child {
       margin-left: 15px;
     }
