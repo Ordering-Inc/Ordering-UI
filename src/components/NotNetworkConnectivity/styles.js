@@ -5,27 +5,9 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  height: 100vh;
+  width: 80%;
+  height: calc(100vh - 65px);
   margin: 0 auto;
-
-  h1 {
-    opacity: 0.5;
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    width: 80%;
-    h1 {
-      font-size: 24px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    h1 {
-      font-size: 20px;
-    }
-  }
 `
 
 export const Image = styled.div`

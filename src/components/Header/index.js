@@ -153,8 +153,8 @@ export const Header = (props) => {
           </RightHeader>
         )}
       </InnerHeader>
-      {windowSize.width <= 820 && onlineStatus &&
-        windowSize.width > 768 ? (
+      {onlineStatus && (
+        windowSize.width <= 820 && windowSize.width > 768 ? (
           <SubMenu>
             <AddressesPopover
               auth={auth}
@@ -182,7 +182,8 @@ export const Header = (props) => {
               onClick={(variant) => openModal(variant)}
             />
           </SubMenu>
-        )}
+        )
+      )}
       {modalIsOpen && (
         <Modal
           open={modalIsOpen}
