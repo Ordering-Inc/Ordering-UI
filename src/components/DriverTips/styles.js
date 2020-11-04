@@ -8,30 +8,25 @@ export const DriverTipContainer = styled.div`
 `
 
 export const TipCard = styled.div`
-  border-radius: 16px;
-  padding: 5px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  padding: 10px;
   border: 1px solid ${props => props.theme.colors.primary};
   cursor: pointer;
   text-transform: capitalize;
+  height: 30px;
+  width: 30px;
+  font-size: 14px;
 
   &.active {
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
   }
 
-  @media (max-width: 650px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    padding: 10px;
-  }
-
-  @media (max-width: 360px) {
-    height: 25px;
-    width: 25px;
-    font-size: 14px;
+  @media (min-width: 768px) {
+    border-radius: 16px;
+    padding: 5px 30px;
   }
 `
