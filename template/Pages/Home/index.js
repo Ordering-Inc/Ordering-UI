@@ -5,8 +5,6 @@ import AiOutlineApple from '@meronex/icons/ai/AiOutlineApple'
 import { HomeHero } from '../../../src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
 
-import { Button } from '../../../src/styles/Buttons'
-
 import {
   HomeContainer,
   HomeSection,
