@@ -5,25 +5,19 @@ export const NotFound = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 80%;
   height: 100vh;
   margin: 0 auto;
 
   h1 {
+    font-size: 20px;
     opacity: 0.5;
     text-align: center;
   }
 
-  @media (max-width: 576px) {
-    width: 80%;
+  @media (min-width: 840px) {
     h1 {
       font-size: 24px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    h1 {
-      font-size: 20px;
     }
   }
 `
