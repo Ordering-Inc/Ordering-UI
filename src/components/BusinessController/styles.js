@@ -168,10 +168,10 @@ export const BusinessLogo = (props) => {
 
 export const BusinessInfo = styled.div`
   display: flex;
-  width: calc(100% - 75px);
+  width: calc(100% - 65px);
 
-  @media(max-width: 480px){
-    width: calc(100% - 65px);
+  @media (min-width: 481px){
+    width: calc(100% - 75px);
   }
 `
 

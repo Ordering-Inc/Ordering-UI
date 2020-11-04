@@ -204,36 +204,32 @@ export const CartItemInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 75%;
+  width: 70%;
   h1,
   p {
-    margin: 3px 15px;
+    margin: 3px 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   h1 {
-    font-size: 18px;
+    font-size: 16px;
   }
   p {
-    font-size: 15px;
+    font-size: 12px;
     opacity: 0.8;
     color: ${props => props.theme.colors.primary};
     font-weight: bold;
   }
 
-  @media(max-width: 480px){
-    width: 70%;
-    h1,
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 18px;
+    }
+
     p {
-      margin: 3px 10px;
-    }
-    h1{
-      font-size: 16px;
-    }
-    p{
-      font-size: 12px;
+      font-size: 15px;
     }
   }
 `
