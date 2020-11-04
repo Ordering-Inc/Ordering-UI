@@ -80,9 +80,11 @@ export const BusinessProductsList = (props) => {
     }
   }
 
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+
   return (
     <>
-      <HelmetTags page='business' />
+      <HelmetTags page='business' helmetTitle={capitalize(store)} />
       <BusinessProductsListing {...businessProductsProps} />
     </>
   )
