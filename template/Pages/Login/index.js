@@ -1,8 +1,12 @@
 import React from 'react'
 import { LoginForm } from '../../../src/components/LoginForm'
+import { HelmetTags } from '../../components/HelmetTags'
 
 export const Login = (props) => {
   return (
-    <LoginForm {...props} />
+    <>
+      <HelmetTags page='login' />
+      <LoginForm {...props} />
+    </>
   )
 }

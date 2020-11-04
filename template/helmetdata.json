@@ -1,0 +1,86 @@
+{
+  "app": {
+    "title": "Ordering",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": "http://localhost:8300/"
+  },
+  "home": {
+    "title": "Home",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "login": {
+    "title": "Login",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "signup": {
+    "title": "Signup",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "forgotpassword": {
+    "title": "Forgot Password",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "profile": {
+    "title": "Profile",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "orders": {
+    "title": "Orders",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "search": {
+    "title": "Search",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "business": {
+    "title": "Business",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "checkout": {
+    "title": "Checkout",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "order_details": {
+    "title": "Order_details",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "pages": {
+    "title": "Pages",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  }
+}
