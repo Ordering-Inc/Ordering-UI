@@ -12,9 +12,4 @@ export const Container = styled.div`
 
 export const Image = styled.div`
   max-width: 300px;
-  max-width: 300px;
-
-  img {
-    width: 300px;
-  }
 `

@@ -24,9 +24,4 @@ export const NotFound = styled.div`
 
 export const NotFoundImage = styled.div`
   max-width: 300px;
-  max-width: 300px;
-
-  img {
-    width: 300px;
-  }
 `

@@ -59,12 +59,11 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
 
-  > * {
+  > *:not(:last-child) {
     margin: 0 5px;
   }
 
   > :first-child {
-      margin-left: 10px;
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0px;
@@ -72,8 +71,6 @@ export const Menu = styled.div`
   }
 
   > :last-child {
-    margin-right: 10px;
-
     ${props => props.theme?.rtl && css`
       margin-left: 10px;
       margin-right: 0px;
