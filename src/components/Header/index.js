@@ -91,7 +91,7 @@ export const Header = (props) => {
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
           {onlineStatus && (
-            <Menu>
+            <Menu className='left'>
               <OrderTypeSelectorHeader />
               <MomentPopover
                 open={openPopover.moment}
