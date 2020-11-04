@@ -22,6 +22,7 @@ import {
   OrdersPast,
   IndividualOrderPast,
   OrderPastContent,
+  WrapperBusinessTitle,
   Reorder,
   ImageContainer,
   SkeletonOrder,
@@ -80,7 +81,7 @@ export const MyOrdersUI = (props) => {
         {
           <>
             <MyOrdersTitle>
-              <h3>{t('ACTIVE_ORDERS', 'Active Orders')}</h3>
+              <h1>{t('ACTIVE_ORDERS', 'Active Orders')}</h1>
             </MyOrdersTitle>
             {!activeOrders.loading && activeOrders.orders.length === 0 ? (
               <ImageContainer>
@@ -98,14 +99,14 @@ export const MyOrdersUI = (props) => {
                         <img src={order.business?.logo} />
                       </Logo>
                       <BusinessInformation>
-                        <h5>{order.business.name}</h5>
+                        <h2>{order.business.name}</h2>
                         <p>Order No. {order.id}</p>
                         <p>{order.created_at}</p>
                       </BusinessInformation>
                       <Price>
-                        <h5>
+                        <h2>
                           {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
-                        </h5>
+                        </h2>
                         {order.status === 0 && (
                           <p>{t('ORDER_PENDING', 'pending')}</p>
                         )}
@@ -145,7 +146,7 @@ export const MyOrdersUI = (props) => {
         {
           <>
             <MyOrdersTitle>
-              <h3>{t('ORDERS_PAST', 'My Orders Past')}</h3>
+              <h1>{t('ORDERS_PAST', 'My Orders Past')}</h1>
             </MyOrdersTitle>
             {!previousOrders.loading && previousOrders.orders.length === 0 ? (
               (
@@ -162,7 +163,9 @@ export const MyOrdersUI = (props) => {
                         <img src={order.business?.logo} />
                       </PastLogo>
                       <BusinessInformation>
-                        <h5>{order.business.name}</h5>
+                        <WrapperBusinessTitle>
+                          <h2>{order.business.name}</h2>
+                        </WrapperBusinessTitle>
                         <p>{order.created_at}</p>
                         <p name='view_order' onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })}>{t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}</p>
                       </BusinessInformation>
