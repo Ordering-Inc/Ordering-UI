@@ -2,17 +2,20 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - 160px);
   width: 100%;
   padding-bottom: 20px;
   button {
     width: 45%;
     margin-top: 20px;
   }
-  @media (max-width: 768px){
-    justify-content: space-between;
-    min-height: calc(100vh - 160px)
+  
+  @media (min-width: 768px){
+    justify-content: flex-start;
+    height: auto;
   }
 `
 export const UpsellingContainer = styled.div`
@@ -25,7 +28,7 @@ export const UpsellingContainer = styled.div`
 export const Item = styled.div`
   display: flex;
   border: 1px solid #ccc;
-  width: 15%;
+  width: 25%;
   margin: 20px;
   padding: 10px;
   flex-direction: column;
@@ -33,12 +36,12 @@ export const Item = styled.div`
   text-align: center;
   border-radius: 9px;
 
-  @media (max-width: 768px){
+  @media (min-width: 580px){
     width: 20%;
   }
 
-  @media (max-width: 580px){
-    width: 25%;
+  @media (min-width: 768px){
+    width: 15%;
   }
 `
 
@@ -64,7 +67,7 @@ export const Details = styled.div`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      font-size: 14px;
+      font-size: 12px;
     }
   }
   p{
@@ -72,28 +75,25 @@ export const Details = styled.div`
     margin: 10px auto;
   }
   button {
-    width: 50%;
+    width: 100%;
     margin: 5px auto;
     font-size: 0.9em;
   }
-  @media (max-width: 980px){
-    button{
+
+  @media (min-width: 480px){
+    div{
+      h3{
+        font-size: 14px;  
+      }
+    }
+    button {
       width: 70%
     }
   }
 
-  @media (max-width: 768px){
-    font-size: 12px;
-  }
-
-  @media (max-width: 480px){
-    div{
-      h3{
-        font-size: 12px;  
-      }
-    }
-    button {
-      width: 100%
+  @media (min-width: 980px){
+    button{
+      width: 50%
     }
   }
 
@@ -102,12 +102,14 @@ export const Details = styled.div`
 export const CloseUpselling = styled.div`
   width: 100%;
   text-align: center;
+
   button{
-    width: 40%;
+    width: 60%;
   }
-  @media (max-width: 720px){
+
+  @media (min-width: 720px){
     button{
-      width: 60%;
+      width: 40%;
     }
   }
 `
