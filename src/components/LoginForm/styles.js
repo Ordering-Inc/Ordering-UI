@@ -82,7 +82,7 @@ export const LoginWith = styled.div`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '90%' : '100%'};
   display: flex;
   flex-direction: column;
 
