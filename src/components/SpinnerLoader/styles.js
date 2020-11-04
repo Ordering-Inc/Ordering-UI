@@ -20,9 +20,10 @@ export const Content = styled.h1`
   text-transform: capitalize;
   margin-top: 0px;
   padding-bottom: 50px;
+  font-size: 25px;
 
-  @media (max-width: 380px) {
-    font-size: 25px;
+  @media (min-width: 768px) {
+    font-size: 32px;
   }
 `
 
