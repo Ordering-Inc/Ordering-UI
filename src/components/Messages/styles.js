@@ -111,14 +111,14 @@ export const Chat = styled.div`
   display: flex;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 55vh;
+  height: 70vh;
   flex-direction: column;
   padding: 0 20px;
   > :first-child{
     margin-top: 10px;
   }
-  @media (max-width: 768px){
-    height: 70vh;
+  @media (min-width: 768px){
+    height: 60vh;
   }
 `
 
@@ -146,22 +146,22 @@ export const MessageCustomer = styled.div`
 export const BubbleConsole = styled.div`
   border-radius: 5px;
   padding: 5px 15px;
-  max-width: 30%;
+  max-width: 40%;
   margin-bottom: 15px;
   background: #EFEFEF;
   text-align: center;
   height: auto;
   overflow: hidden;
   overflow-wrap: break-word;
-  @media (max-width: 1024px){
-    max-width: 40%
+  @media (min-width: 1024px){
+    max-width: 30%
   }
 `
 
 export const BubbleBusines = styled.div`
-  border-radius: 97px 97px 97px 0px;
+  border-radius: 40px 40px 40px 0px;
   padding: 10px 25px 10px 25px;
-  max-width: 40%;
+  max-width: 60%;
   min-width: 80px;
   margin-bottom: 10px;
   background: #EFEFEF;
@@ -173,28 +173,29 @@ export const BubbleBusines = styled.div`
   }
 
   ${props => props.theme?.rtl && css`
-    border-radius: 97px 97px 0px 97px;
-      &[name=image]{
       border-radius: 40px 40px 0px 40px;
-     }
   `}
 
-  @media (max-width: 1024px){
-    max-width: 60%;
-  }
-  @media (max-width: 480px){
-    border-radius: 40px 40px 40px 0px;
+  @media (min-width: 480px) {
+    border-radius: 97px 97px 97px 0px;
 
     ${props => props.theme?.rtl && css`
-      border-radius: 40px 40px 0px 40px;
+      border-radius: 97px 97px 0px 97px;
+      &[name=image]{
+        border-radius: 40px 40px 0px 40px;
+       }
     `}
+  }
+
+  @media (min-width: 1024px){
+    max-width: 40%;
   }
 `
 
 export const BubbleCustomer = styled.div`
-  border-radius: 97px 97px 0px 97px;
+  border-radius: 40px 40px 0px 40px;
   padding: 10px 25px 10px 25px;
-  max-width: 40%;
+  max-width: 60%;
   min-width: 80px;
   height: auto;
   margin-bottom: 10px;
@@ -213,7 +214,7 @@ export const BubbleCustomer = styled.div`
   }
 
   ${props => props.theme?.rtl && css`
-    border-radius: 97px 97px 97px 0px;
+    border-radius: 40px 40px 40px 0px;
 
     p:last-child {
       left: initial;
@@ -224,18 +225,19 @@ export const BubbleCustomer = styled.div`
       border-radius: 40px 40px 40px 0px;
      }
   `}
-
-  @media (max-width: 1024px){
-    max-width: 60%
-  }
-
-  @media (max-width: 480px){
-    border-radius: 40px 40px 0px 40px;
+  
+  @media (min-width: 480px){
+    border-radius: 97px 97px 0px 97px;
 
     ${props => props.theme?.rtl && css`
-      border-radius: 40px 40px 40px 0px;
+      border-radius: 97px 97px 97px 0px;
     `}
   }
+
+  @media (min-width: 1024px){
+    max-width: 40%
+  }
+
 `
 
 export const SkeletonBubbleCustomer = styled.div`
@@ -297,12 +299,18 @@ export const TimeofSent = styled.p`
 `
 
 export const SendForm = styled.div`
-  padding: 10px 20px;
+  display: flex;
+  padding: 0px 5px;
   background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
-
-  @media (max-width: 768px) {
+  height: 70px;
+  @media (min-width: 480px){
     padding: 0px 20px;
+  }
+
+  @media (min-width: 768px) {
+    height: 60px;
+    padding: 10px 20px;
   }
 `
 
@@ -311,18 +319,12 @@ export const Send = styled.form`
   display: flex;
   margin-top: 3px;
   height: auto;
-
+  width: 100%;
   input {
-    flex: 1;
     padding-top: 10px;
     padding-bottom: 10px;
-  }
-
-  @media (max-width: 640px){
-    input{
-      flex: initial;
-      width: 60%;
-    }
+    width: 60%;
+    flex: 1;
   }
 `
 
@@ -360,7 +362,6 @@ export const WrapperSendMessageButton = styled.div`
     padding-top: 7px;
     padding-bottom: 7px;
     svg {
-       margin-right: 10px;
        width: 1.5em;
        height: 1.5em; 
        vertical-align: middle;
@@ -371,19 +372,24 @@ export const WrapperSendMessageButton = styled.div`
         transform: rotate(270deg)
       `}
     }
+
+    span {
+      display: none;
+    }
+
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
   }
 
-  @media (max-width: 480px){
+  @media (min-width: 480px){
     button{
       svg {
-        margin: 0;
+        margin-right: 10px;
       }
       span {
-        display: none;
+        display: inline;
       }
     }
   }
