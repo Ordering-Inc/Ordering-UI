@@ -39,28 +39,31 @@ export const Day = styled.div`
   align-items: center;
   font-weight: 300;
   color: #9A9A9A;
-  width: calc(100% / 6);
-
+  width: calc(100% / 3);
   /**
     ** Modify this validation in case the dates to display change
    */
-  @media (max-width: 425px) {
-    width: calc(100% / 3);
-    &:nth-child(1) div,
-    &:nth-child(2) div,
-    &:nth-child(3) div {
-      margin-bottom: 5px;
-    }
+  &:nth-child(1) div,
+  &:nth-child(2) div,
+  &:nth-child(3) div {
+    margin-bottom: 5px;
+  }
 
-    &:nth-child(3) div,
-    &:nth-child(6) div {
-      border-right: 0;
-    }
+  &:nth-child(3) div,
+  &:nth-child(6) div {
+    border-right: 0;
+  }
 
-    &:nth-child(4) div,
-    &:nth-child(5) div,
-    &:nth-child(6) div {
-      margin-top: 5px;
+  &:nth-child(4) div,
+  &:nth-child(5) div,
+  &:nth-child(6) div {
+    margin-top: 5px;
+  }
+
+  @media (min-width: 426px) {
+    width: calc(100% / 6);
+    &:nth-child(3) div.content-day {
+      border-right: 1px solid #d9d9d9;
     }
   }
 
@@ -123,7 +126,7 @@ export const Hour = styled.div`
 `
 
 export const MiddleLine = styled.span`
-  display: none;
+  display: block;
   width: 80%;
   height: 1px;
   position: absolute;
@@ -132,7 +135,7 @@ export const MiddleLine = styled.span`
   transform: translateX(-50%);
   background-color: ${props => props.theme.colors.disabled};
 
-  @media (max-width: 425px) {
-    display: block;
+  @media (min-width: 426px) {
+    display: none;
   }
 `

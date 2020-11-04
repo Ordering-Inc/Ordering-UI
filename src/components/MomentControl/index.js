@@ -31,7 +31,7 @@ const MomentControlUI = (props) => {
             const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
             return (
               <Day key={dayNumber} selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
-                <ContentDay>
+                <ContentDay className='content-day'>
                   <DayName>{dayName}</DayName>
                   <DayNumber>{dayNumber}</DayNumber>
                 </ContentDay>

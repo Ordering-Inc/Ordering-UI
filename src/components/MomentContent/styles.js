@@ -2,17 +2,14 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   position: relative;
+  padding: 20px 10px;
 
   ${({ isLoading }) => isLoading && css`
       pointer-events: none;
   `}
 
-  @media (max-width: 768px) {
+  @media (min-width: 425px) {
     padding: 20px;
-  }
-
-  @media (max-width: 360px) {
-    padding: 20px 10px;
   }
 `
 
