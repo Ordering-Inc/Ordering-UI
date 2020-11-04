@@ -124,6 +124,7 @@ const SignUpFormUI = (props) => {
                         key={field.id}
                         type={field.enabled && field.required ? field.type : 'hidden'}
                         name={field.code}
+                        aria-label={field.code}
                         placeholder={t(field.name)}
                         onChange={hanldeChangeInput}
                         ref={register({
@@ -141,6 +142,7 @@ const SignUpFormUI = (props) => {
                 <Input
                   type='password'
                   name='password'
+                  aria-label='password'
                   placeholder={t('PASSWORD', 'Password')}
                   onChange={hanldeChangeInput}
                   required
