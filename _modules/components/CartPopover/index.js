@@ -17,9 +17,9 @@ var _styles = require("./styles");
 
 var _orderingComponents = require("ordering-components");
 
-var _Cart = require("../Cart");
-
 var _styledComponents = require("styled-components");
+
+var _CartContent = require("../CartContent");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartPopover = function CartPopover(props) {
-  var _theme$images, _theme$images$general;
+  var _props$carts, _props$carts2;
 
   var open = props.open,
       auth = props.auth;
@@ -57,16 +57,12 @@ var CartPopover = function CartPopover(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
-  var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
   var theme = (0, _styledComponents.useTheme)();
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
-    placement: 'auto',
+    placement: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'bottom' : 'auto',
     modifiers: [{
       name: 'arrow',
       options: {
@@ -82,9 +78,6 @@ var CartPopover = function CartPopover(props) {
   var styles = popper.styles,
       attributes = popper.attributes,
       forceUpdate = popper.forceUpdate;
-  var cartsWithProducts = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
-    return cart.products.length > 0;
-  });
   (0, _react.useEffect)(function () {
     forceUpdate && forceUpdate();
   }, [open, orderState]);
@@ -130,21 +123,14 @@ var CartPopover = function CartPopover(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
     onClick: props.onClick
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosBasket.default, null), cartsWithProducts.length > 0 && /*#__PURE__*/_react.default.createElement("p", null, cartsWithProducts.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosBasket.default, null), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 && /*#__PURE__*/_react.default.createElement("p", null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.WrapperCarts, null, orderState.carts && cartsWithProducts.length > 0 && cartsWithProducts.map(function (cart) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: cart.uuid
-    }, cart.products.length > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
-      cart: cart,
-      isProducts: cart.products.length,
-      onClickCheckout: props.onClose
-    }));
-  }), cartsWithProducts.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.WrappNotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
-    alt: "Not Found"
-  }), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_ERROR', 'You don\'t have carts available')))), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
+  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    carts: props.carts,
+    isOrderStateCarts: !!orderState.carts,
+    onClose: props.onClose
+  }), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow

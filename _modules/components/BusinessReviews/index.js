@@ -140,7 +140,7 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
       width: 150,
       height: 50
     })));
-  })))));
+  })), !reviewsList.loading && (reviewsList === null || reviewsList === void 0 ? void 0 : reviewsList.reviews.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.ReviewsNotFound, null, t('REVIEWS_NOT_FOUND', 'Reviews Not Found')))));
 };
 
 exports.BusinessReviewsUI = BusinessReviewsUI;

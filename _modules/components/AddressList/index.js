@@ -29,11 +29,11 @@ var _Modal = require("../Modal");
 
 var _AddressForm = require("../AddressForm");
 
-var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
-
 var _Confirm = require("../Confirm");
 
 var _styledComponents = require("styled-components");
+
+var _utils = require("../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -102,6 +102,8 @@ var AddressListUI = function AddressListUI(props) {
   var openAddress = function openAddress(address) {
     setCurAddress(address);
     setAddessOpen(true);
+    var container = window.document.getElementsByClassName('form_edit')[0];
+    (0, _utils.scrollTo)(container, 100, 500);
   };
 
   var handleSaveAddress = function handleSaveAddress(address) {
@@ -184,7 +186,9 @@ var AddressListUI = function AddressListUI(props) {
       className: "radio"
     }, address.address === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.address) ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
-    }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, null, /*#__PURE__*/_react.default.createElement("a", {
+    }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
+      className: "form"
+    }, /*#__PURE__*/_react.default.createElement("a", {
       className: actionStatus.loading ? 'disabled' : '',
       onClick: function onClick() {
         return openAddress(address);
@@ -217,8 +221,7 @@ var AddressListUI = function AddressListUI(props) {
     open: !popover && addressOpen,
     onClose: function onClose() {
       return setAddessOpen(false);
-    },
-    OrderTypeSelectorHeader: _OrderTypeSelectorHeader.OrderTypeSelectorHeader
+    }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
     address: curAddress,

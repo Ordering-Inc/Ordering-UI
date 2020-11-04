@@ -23,9 +23,13 @@ var _ProductOption = require("../ProductOption");
 
 var _ProductOptionSubOption = require("../ProductOptionSubOption");
 
+var _ProductShare = require("../ProductShare");
+
 var _LoginForm = require("../LoginForm");
 
-var _ProductShare = require("../ProductShare");
+var _SignUpForm = require("../SignUpForm");
+
+var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
 var _Modal = require("../Modal");
 
@@ -60,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductOptionsUI = function ProductOptionsUI(props) {
-  var _theme$images, _theme$images$dommies;
+  var _theme$images, _theme$images$dummies;
 
   var businessSlug = props.businessSlug,
       editMode = props.editMode,
@@ -82,8 +86,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var windowSize = (0, _useWindowSize.useWindowSize)();
 
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
+      _useSession2 = _slicedToArray(_useSession, 2),
+      auth = _useSession2[0].auth,
+      sessionDispatch = _useSession2[1];
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -98,15 +103,16 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
-  var _useEvent = (0, _orderingComponents.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
-
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useState3 = (0, _react.useState)('login'),
+      _useState4 = _slicedToArray(_useState3, 2),
+      modalPageToShow = _useState4[0],
+      setModalPageToShow = _useState4[1];
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -132,9 +138,18 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     (0, _utils.scrollTo)(container, topPos, 1250);
   };
 
-  var handleGoToPage = function handleGoToPage(e, data) {
+  var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
+    var page = _ref.page;
     e.preventDefault();
-    events.emit('go_to_page', data);
+    setModalPageToShow(page);
+  };
+
+  var handleSuccessSignup = function handleSuccessSignup(user) {
+    sessionDispatch({
+      type: 'login',
+      user: user,
+      token: user.session.access_token
+    });
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
@@ -155,7 +170,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
     productId: product === null || product === void 0 ? void 0 : product.id
   }), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dommies = _theme$images.dommies) === null || _theme$images$dommies === void 0 ? void 0 : _theme$images$dommies.product),
+    src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
     alt: "product"
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, {
     id: "".concat(windowSize.width > 1200 && 'product_edition')
@@ -203,13 +218,17 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     outline: true,
     onClick: decrement,
     disabled: productCart.quantity === 1 || isSoldOut
-  }, "-"), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: "sign"
+  }, "-")), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "incdec",
     circle: true,
     outline: true,
     onClick: increment,
     disabled: maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut
-  }, "+")), productCart && !isSoldOut && maxProductQuantity && auth ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: "sign"
+  }, "+"))), productCart && !isSoldOut && maxProductQuantity && auth ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(maxProductQuantity === 0 || Object.keys(errors).length > 0 ? 'disabled' : ''),
     color: "primary",
     onClick: function onClick() {
@@ -230,11 +249,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     },
     width: "70%",
     padding: "0"
-  }, /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+  }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
-        return handleGoToPage(e, {
+        return handleCustomModalClick(e, {
           page: 'signup'
         });
       },
@@ -242,13 +261,36 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }, t('CREATE_ACCOUNT', 'Create account')),
     elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
-        return handleGoToPage(e, {
-          page: 'forgot_password'
+        return handleCustomModalClick(e, {
+          page: 'forgotpassword'
         });
       },
       href: "#"
     }, t('RESET_PASSWORD', 'Reset password')),
     useLoginByCellphone: true,
+    isPopup: true
+  }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', 'Login')),
+    useLoginByCellphone: true,
+    useChekoutFileds: true,
+    handleSuccessSignup: handleSuccessSignup,
+    isPopup: true
+  }), modalPageToShow === 'forgotpassword' && /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', 'Login')),
     isPopup: true
   })), error && error.length > 0 && error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement("p", {

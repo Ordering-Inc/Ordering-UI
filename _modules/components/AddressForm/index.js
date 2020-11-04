@@ -160,7 +160,7 @@ var AddressFormUI = function AddressFormUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     onSubmit: handleSubmit(onSubmit),
-    autoComplete: "off"
+    autoComplete: "new-off"
   }, (addressState === null || addressState === void 0 ? void 0 : (_addressState$address2 = addressState.address) === null || _addressState$address2 === void 0 ? void 0 : _addressState$address2.location) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
     location: _objectSpread(_objectSpread({}, addressState === null || addressState === void 0 ? void 0 : (_addressState$address3 = addressState.address) === null || _addressState$address3 === void 0 ? void 0 : _addressState$address3.location), {}, {
@@ -179,7 +179,8 @@ var AddressFormUI = function AddressFormUI(props) {
     defaultValue: ((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address) || ((_addressState$address4 = addressState.address) === null || _addressState$address4 === void 0 ? void 0 : _addressState$address4.address),
     childRef: register({
       required: isRequiredField('address') ? 'Address is required' : null
-    })
+    }),
+    autoComplete: "new-off"
   })), (!validationFields.loading || !addressState.loading) && /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleGpsButton, {
     className: "gps-button",
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
@@ -191,21 +192,24 @@ var AddressFormUI = function AddressFormUI(props) {
     placeholder: "Internal number",
     ref: register,
     defaultValue: ((_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.internal_number) || addressState.address.internal_number,
-    onChange: hanldeChangeInput
+    onChange: hanldeChangeInput,
+    autoComplete: "new-off"
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "zipcode",
     name: "zipcode",
     placeholder: "Zip code",
     ref: register,
     defaultValue: ((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.zipcode) || addressState.address.zipcode,
-    onChange: hanldeChangeInput
+    onChange: hanldeChangeInput,
+    autoComplete: "new-off"
   }), /*#__PURE__*/_react.default.createElement("textarea", {
     name: "address_notes",
     rows: 4,
     placeholder: t('ADDRESS_NOTES', 'Address Notes'),
     ref: register,
     defaultValue: ((_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.address_notes) || addressState.address.address_notes,
-    onChange: hanldeChangeInput
+    onChange: hanldeChangeInput,
+    autoComplete: "new-off"
   }), !formState.loading && formState.error && /*#__PURE__*/_react.default.createElement("p", {
     style: {
       color: '#c10000'

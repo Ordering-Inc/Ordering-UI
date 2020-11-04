@@ -81,21 +81,20 @@ var PagesList = function PagesList(_ref) {
               _yield$ordering$pages = _context.sent;
               response = _yield$ordering$pages.response;
               setRoots([].concat(_toConsumableArray(roots), _toConsumableArray(response.data.result)));
-              console.log(response.data.result);
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function getPages() {

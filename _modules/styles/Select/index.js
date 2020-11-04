@@ -9,6 +9,8 @@ exports.Select = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _orderingComponents = require("ordering-components");
+
 var _BsChevronDown = _interopRequireDefault(require("@meronex/icons/bs/BsChevronDown"));
 
 var _Selects = require("../Selects");
@@ -59,6 +61,10 @@ var Select = function Select(props) {
 
   var dropdownReference = (0, _react.useRef)();
 
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
+
   var handleSelectClick = function handleSelectClick(e) {
     setOpen(!open);
   };
@@ -99,8 +105,9 @@ var Select = function Select(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
-    onClick: handleSelectClick
-  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+    onClick: handleSelectClick,
+    disabled: orderState.loading
+  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, !orderState.loading ? selectedOption.showOnSelected || selectedOption.content : '...'), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     position: "right",
     ref: dropdownReference
   }, options.map(function (option) {

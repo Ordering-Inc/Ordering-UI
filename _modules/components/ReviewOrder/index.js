@@ -23,6 +23,8 @@ var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -84,6 +86,9 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       alertState = _useState4[0],
       setAlertState = _useState4[1];
+
+  var _useContext = (0, _react.useContext)(_styledComponents.ThemeContext),
+      colors = _useContext.colors;
 
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result3;
@@ -148,7 +153,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
           return handleChangeRating(e);
         }
       }), /*#__PURE__*/_react.default.createElement(_AiFillStar.default, {
-        color: i + 1 <= (hover[name] || stars[name]) ? 'yellow' : 'gray',
+        color: i + 1 <= (hover[name] || stars[name]) ? colors.primary : 'gray',
         size: 25,
         onMouseEnter: function onMouseEnter() {
           return setHover(_defineProperty({}, name, i + 1));

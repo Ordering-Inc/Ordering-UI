@@ -53,6 +53,14 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -89,6 +97,13 @@ var CheckoutUI = function CheckoutUI(props) {
       errorCash = _useState2[0],
       setErrorCash = _useState2[1];
 
+  var mapConfigs = {
+    mapZoom: 17,
+    mapSize: {
+      width: 640,
+      height: 190
+    }
+  };
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContainer, null, (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: '100%',
@@ -104,7 +119,7 @@ var CheckoutUI = function CheckoutUI(props) {
   })) : /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
-    mapZoom: 15
+    mapConfigs: mapConfigs
   }), /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "user"
   }, cartState.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -191,7 +206,7 @@ var CheckoutUI = function CheckoutUI(props) {
     onClick: function onClick() {
       return handlerClickPlaceOrder();
     }
-  }, placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')))));
+  }, placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order'))), !(cart === null || cart === void 0 ? void 0 : cart.valid_address) && /*#__PURE__*/_react.default.createElement(_styles.InvalidAddress, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.'))));
 };
 
 var Checkout = function Checkout(props) {
@@ -205,9 +220,8 @@ var Checkout = function Checkout(props) {
       handleCheckoutListRedirect = props.handleCheckoutListRedirect;
 
   var _useOrder3 = (0, _orderingComponents.useOrder)(),
-      _useOrder4 = _slicedToArray(_useOrder3, 2),
-      carts = _useOrder4[0].carts,
-      confirmCart = _useOrder4[1].confirmCart;
+      _useOrder4 = _slicedToArray(_useOrder3, 1),
+      orderState = _useOrder4[0];
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -249,7 +263,7 @@ var Checkout = function Checkout(props) {
       currentCart = _useState10[0],
       setCurrentCart = _useState10[1];
 
-  var cartsWithProducts = Object.values(carts).filter(function (cart) {
+  var cartsWithProducts = Object.values(orderState.carts).filter(function (cart) {
     return cart.products.length;
   });
 
@@ -259,12 +273,18 @@ var Checkout = function Checkout(props) {
 
   var handleUpsellingPage = function handleUpsellingPage() {
     setOpenUpselling(false);
-    setCurrentCart('');
+    setCurrentCart(null);
     setCanOpenUpselling(false);
-    setOpenUpselling(false);
     handleCheckoutRedirect(currentCart.uuid);
   };
 
+  (0, _react.useEffect)(function () {
+    if (!orderState.loading && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id)) {
+      setCurrentCart.apply(void 0, _toConsumableArray(Object.values(orderState.carts).filter(function (cart) {
+        return cart.business_id === (currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id);
+      })));
+    }
+  }, [orderState.loading]);
   (0, _react.useEffect)(function () {
     if (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) {
       setOpenUpselling(true);
@@ -321,7 +341,7 @@ var Checkout = function Checkout(props) {
 
               _context.prev = 15;
               _context.next = 18;
-              return confirmCart(cartUuid);
+              return orderState.confirmCart(cartUuid);
 
             case 18:
               handleOrderRedirect(result.order.uuid);
@@ -382,11 +402,11 @@ var Checkout = function Checkout(props) {
     businessId: (_cartState$cart = cartState.cart) === null || _cartState$cart === void 0 ? void 0 : _cartState$cart.business_id
   });
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartUuid && carts && cartsWithProducts.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartUuid && orderState.carts && cartsWithProducts.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  }), !cartUuid && carts && cartsWithProducts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.CartsList, null, cartsWithProducts.map(function (cart) {
+  }), !cartUuid && orderState.carts && cartsWithProducts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.CartsList, null, cartsWithProducts.map(function (cart) {
     var _cart$business, _cart$business2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.CartItem, {
@@ -404,14 +424,15 @@ var Checkout = function Checkout(props) {
     content: t('ERROR_CART', 'Sorry, the selected cart was not found.'),
     btnTitle: t('CHECKOUT_REDIRECT', 'Go to Checkout list'),
     onClickButton: handleCheckoutListRedirect
-  }), cartUuid && cartState.cart && ((_cartState$cart2 = cartState.cart) === null || _cartState$cart2 === void 0 ? void 0 : _cartState$cart2.status) !== 1 && /*#__PURE__*/_react.default.createElement(_orderingComponents.Checkout, checkoutProps), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) ? /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+  }), cartUuid && cartState.cart && ((_cartState$cart2 = cartState.cart) === null || _cartState$cart2 === void 0 ? void 0 : _cartState$cart2.status) !== 1 && /*#__PURE__*/_react.default.createElement(_orderingComponents.Checkout, checkoutProps), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
     cartProducts: currentCart === null || currentCart === void 0 ? void 0 : currentCart.products,
+    business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,
     handleUpsellingPage: handleUpsellingPage,
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
-  }) : '');
+  }));
 };
 
 exports.Checkout = Checkout;

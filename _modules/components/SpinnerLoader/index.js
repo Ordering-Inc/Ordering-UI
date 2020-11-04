@@ -13,8 +13,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SpinnerLoader = function SpinnerLoader(props) {
   var logotype = props.logotype,
-      content = props.content;
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, logotype && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
+      content = props.content,
+      style = props.style;
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    style: style
+  }, logotype && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
     src: logotype,
     alt: "logo"
   })), content && /*#__PURE__*/_react.default.createElement(_styles.Content, null, content), /*#__PURE__*/_react.default.createElement(_styles.Spinner, {

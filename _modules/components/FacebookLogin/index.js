@@ -45,7 +45,7 @@ var FacebookLoginButtonUI = function FacebookLoginButtonUI(props) {
     onClick: function onClick() {
       return handleFacebookLogin();
     }
-  }, /*#__PURE__*/_react.default.createElement(_FaFacebook.default, null), t('LOGIN_WITH_FACEBOOK', 'Login with Facebook'));
+  }, /*#__PURE__*/_react.default.createElement(_FaFacebook.default, null), /*#__PURE__*/_react.default.createElement("div", null, t('LOGIN_WITH_FACEBOOK', 'Login with Facebook')));
 };
 
 var FacebookLoginButton = function FacebookLoginButton(props) {

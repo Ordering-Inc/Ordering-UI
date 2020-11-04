@@ -74,7 +74,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       formState = props.formState,
       handleSuccessSignup = props.handleSuccessSignup,
       useLoginByCellphone = props.useLoginByCellphone,
-      useLoginByEmail = props.useLoginByEmail;
+      useLoginByEmail = props.useLoginByEmail,
+      isPopup = props.isPopup;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -149,14 +150,20 @@ var SignUpFormUI = function SignUpFormUI(props) {
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_LOGIN', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_LOGIN', 'Enter your personal details and start journey with us.')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, {
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_LOGIN', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_LOGIN', 'Enter your personal details and start journey with us.')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
     alt: "Logo login"
   }), useLoginByCellphone && useLoginByEmail && /*#__PURE__*/_react.default.createElement(_styles.SignUpWith, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, null, t('SIGNUP_WITH_EMAIL', 'Signup by Email')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, null, t('SIGNUP_WITH_CELLPHONE', 'Signup by Cellphone')))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
-    onSubmit: handleSubmit(onSubmit)
+    isPopup: isPopup,
+    onSubmit: handleSubmit(onSubmit),
+    isSkeleton: useChekoutFileds && validationFields.loading
   }, !(useChekoutFileds && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.values(validationFields.fields).map(function (field) {
     return showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
@@ -194,10 +201,13 @@ var SignUpFormUI = function SignUpFormUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
-    disabled: formState.loading
+    disabled: formState.loading || validationFields.loading
   }, formState.loading ? t('LOADING') + '...' : t('SIGNUP', 'Sign up'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
-    register: true
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, null, (configs === null || configs === void 0 ? void 0 : configs.facebook_id) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
+    register: true,
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
+    isPopup: isPopup
+  }, (configs === null || configs === void 0 ? void 0 : configs.facebook_id) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {

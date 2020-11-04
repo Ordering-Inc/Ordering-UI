@@ -55,12 +55,14 @@ var Image = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     className: props.className,
     style: props.style,
     src: props.src,
-    ref: imageRef
+    ref: imageRef,
+    alt: "profile-image"
   }), !error && !props.src && props.fallback && props.fallback, error && !remove && typeof props.fallback === 'string' && /*#__PURE__*/_react.default.createElement("img", {
     className: props.className,
     style: props.style,
     src: props.fallback,
-    ref: imageRef
+    ref: imageRef,
+    alt: "profile-image"
   }), error && remove && typeof props.fallback === 'string' && /*#__PURE__*/_react.default.createElement("div", {
     className: props.className,
     style: props.style,

@@ -21,6 +21,10 @@ var _ProfileOptions = require("../UserProfileForm/ProfileOptions");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _emptyPastOrders = _interopRequireDefault(require("../../../template/assets/empty-past-orders.svg"));
+
+var _emptyActiveOrders = _interopRequireDefault(require("../../../template/assets/empty-active-orders.svg"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -73,6 +77,10 @@ var MyOrdersUI = function MyOrdersUI(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
+
   var googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk';
 
   var getGoogleMapImage = function getGoogleMapImage(_ref) {
@@ -86,6 +94,11 @@ var MyOrdersUI = function MyOrdersUI(props) {
       reorderLoading = _useState2[0],
       setReorderLoading = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      orderID = _useState4[0],
+      setOrderID = _useState4[1];
+
   var handleReorder = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(orderId) {
       var _yield$reorder, error, result;
@@ -95,11 +108,12 @@ var MyOrdersUI = function MyOrdersUI(props) {
           switch (_context.prev = _context.next) {
             case 0:
               setReorderLoading(true);
-              _context.prev = 1;
-              _context.next = 4;
+              setOrderID(orderId);
+              _context.prev = 2;
+              _context.next = 5;
               return reorder(orderId);
 
-            case 4:
+            case 5:
               _yield$reorder = _context.sent;
               error = _yield$reorder.error;
               result = _yield$reorder.result;
@@ -114,21 +128,21 @@ var MyOrdersUI = function MyOrdersUI(props) {
               }
 
               setReorderLoading(false);
-              _context.next = 15;
+              _context.next = 16;
               break;
 
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](1);
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](2);
               console.log(_context.t0);
               setReorderLoading(false);
 
-            case 15:
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 11]]);
+      }, _callee, null, [[2, 12]]);
     }));
 
     return function handleReorder(_x) {
@@ -142,10 +156,9 @@ var MyOrdersUI = function MyOrdersUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "My Orders"
-  }), !activeOrders.loading && !previousOrders.loading && activeOrders.orders.length === 0 && previousOrders.orders.length === 0 || previousOrders.error || activeOrders.error ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, previousOrders.error || activeOrders.error ? /*#__PURE__*/_react.default.createElement("h2", null, t('ERROR_UNKNOWN', 'An error has ocurred')) : /*#__PURE__*/_react.default.createElement("h2", null, t('ORDERS_NOT_FOUND', 'Not Found Orders'))) : /*#__PURE__*/_react.default.createElement(_styles.MyOrdersContainer, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersTitle, null, !activeOrders.loading ? /*#__PURE__*/_react.default.createElement("h3", null, t('ACTIVE_ORDERS', 'Active Orders')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 200,
-    height: 20
-  })), /*#__PURE__*/_react.default.createElement(_styles.ActiveOrders, null, !activeOrders.loading ? activeOrders.orders.map(function (order) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.MyOrdersContainer, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersTitle, null, /*#__PURE__*/_react.default.createElement("h3", null, t('ACTIVE_ORDERS', 'Active Orders'))), !activeOrders.loading && activeOrders.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: _emptyActiveOrders.default
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ActiveOrders, null, !activeOrders.loading ? activeOrders.orders.map(function (order) {
     var _order$business, _order$business2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.Card, {
@@ -155,9 +168,9 @@ var MyOrdersUI = function MyOrdersUI(props) {
       alt: "google-maps-img"
     })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
       src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo
-    })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement("h5", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", null, "Order No. ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order.created_at)), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h5", null, "$", order.products.reduce(function (acc, cur) {
+    })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement("h5", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", null, "Order No. ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order.created_at)), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h5", null, parsePrice(order.products.reduce(function (acc, cur) {
       return acc + cur.price;
-    }, 0)), /*#__PURE__*/_react.default.createElement("p", null, order.status === 0 ? t('ORDER_PENDING', 'pending') : ''))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, 0))), order.status === 0 && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_PENDING', 'pending')))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleGoToPage({
@@ -171,10 +184,7 @@ var MyOrdersUI = function MyOrdersUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, null, _toConsumableArray(Array(3)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonCard, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonMap, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 400,
-      height: 100
-    })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonMap, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 70,
       height: 70
     })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonText, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -184,19 +194,17 @@ var MyOrdersUI = function MyOrdersUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
     }))));
-  })))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersTitle, null, !previousOrders.loading ? /*#__PURE__*/_react.default.createElement("h3", null, t('ORDERS_PAST', 'My Orders Past')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 200,
-    height: 20
-  })), /*#__PURE__*/_react.default.createElement(_styles.OrdersPast, null, !previousOrders.loading ? previousOrders.orders.map(function (order) {
+  })))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersTitle, null, /*#__PURE__*/_react.default.createElement("h3", null, t('ORDERS_PAST', 'My Orders Past'))), !previousOrders.loading && previousOrders.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: _emptyPastOrders.default
+  })) : /*#__PURE__*/_react.default.createElement(_styles.OrdersPast, null, !previousOrders.loading ? previousOrders.orders.map(function (order) {
     var _order$business3;
 
     return /*#__PURE__*/_react.default.createElement(_styles.IndividualOrderPast, {
       key: order.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderPastContent, null, /*#__PURE__*/_react.default.createElement(_styles.Logo, {
-      name: "order_past"
-    }, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.OrderPastContent, null, /*#__PURE__*/_react.default.createElement(_styles.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
       src: (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo
     })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement("h5", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", null, order.created_at), /*#__PURE__*/_react.default.createElement("p", {
+      name: "view_order",
       onClick: function onClick() {
         return handleGoToPage({
           page: 'order_detail',
@@ -204,19 +212,18 @@ var MyOrdersUI = function MyOrdersUI(props) {
             orderId: order.id
           }
         });
-      },
-      name: "view"
-    }, t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')))), /*#__PURE__*/_react.default.createElement(_styles.Reorder, null, /*#__PURE__*/_react.default.createElement("p", null, order.status === 1 || order.status === 11 ? t('ORDER_COMPLETED', 'Complete') : ''), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      }
+    }, t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')))), /*#__PURE__*/_react.default.createElement(_styles.Reorder, null, (order.status === 1 || order.status === 11) && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_COMPLETED', 'Complete')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleReorder(order.id);
       },
       disabled: reorderLoading
-    }, reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder'))));
+    }, orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder'))));
   }) : _toConsumableArray(Array(3)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrdersPast, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonPastContent, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonInformation, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 70,
       height: 70
     })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonText, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -225,12 +232,7 @@ var MyOrdersUI = function MyOrdersUI(props) {
       width: 120
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 80
-    })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 80
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 150,
-      height: 40
-    }))));
+    }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   })))));
 };
 

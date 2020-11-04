@@ -50,7 +50,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  padding: 15px;\n  background: #F8F8F8;\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 15px;\n  background: #F8F8F8;\n\n  @media (max-width: 380px) {\n    padding: 5px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

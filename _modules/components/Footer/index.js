@@ -40,28 +40,61 @@ var Footer = function Footer() {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FooterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("strong", null, t('FOOTER_QL1_TITLE'))), /*#__PURE__*/_react.default.createElement("a", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FooterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h1", null, t('FOOTER_QL1_TITLE')), /*#__PURE__*/_react.default.createElement("a", {
+    rel: "noopener noreferrer",
+    target: "_blank",
+    "aria-label": "link1",
     href: t('FOOTER_QL1_1_HREF')
-  }, " ", t('FOOTER_QL1_1'), " "), /*#__PURE__*/_react.default.createElement("a", {
+  }, t('FOOTER_QL1_1')), /*#__PURE__*/_react.default.createElement("a", {
+    rel: "noopener noreferrer",
+    target: "_blank",
+    "aria-label": "link2",
     href: t('FOOTER_QL1_2_HREF')
   }, t('FOOTER_QL1_2')), /*#__PURE__*/_react.default.createElement("a", {
+    rel: "noopener noreferrer",
+    target: "_blank",
+    "aria-label": "link3",
     href: t('FOOTER_QL1_3_HREF')
-  }, t('FOOTER_QL1_3'))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("strong", null, t('FOOTER_QL2_TITLE'))), /*#__PURE__*/_react.default.createElement("a", {
+  }, t('FOOTER_QL1_3'))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h1", null, t('FOOTER_QL2_TITLE')), /*#__PURE__*/_react.default.createElement("a", {
+    rel: "noopener noreferrer",
+    target: "_blank",
+    "aria-label": "link4",
     href: t('FOOTER_QL2_1_HREF')
   }, t('FOOTER_QL2_1')), /*#__PURE__*/_react.default.createElement("a", {
+    rel: "noopener noreferrer",
+    target: "_blank",
+    "aria-label": "link5",
     href: t('FOOTER_QL2_2_HREF')
   }, t('FOOTER_QL2_2')), /*#__PURE__*/_react.default.createElement("a", {
+    rel: "noopener noreferrer",
+    target: "_blank",
+    "aria-label": "link6",
     href: t('FOOTER_QL2_3_HREF')
-  }, t('FOOTER_QL2_3'))), /*#__PURE__*/_react.default.createElement(_styles.SocialMedia, null, /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("strong", null, t('FOOTER_QL3_TITLE'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
-    href: t('FOOTER_QL3_1_HREF')
+  }, t('FOOTER_QL2_3'))), /*#__PURE__*/_react.default.createElement(_styles.SocialMedia, null, /*#__PURE__*/_react.default.createElement("h1", null, t('FOOTER_QL3_TITLE')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
+    target: "_blank",
+    rel: "noreferrer",
+    href: t('FOOTER_QL3_1_HREF'),
+    "aria-label": "facebook"
   }, /*#__PURE__*/_react.default.createElement(_FaFacebook.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
-    href: t('FOOTER_QL3_2_HREF')
+    target: "_blank",
+    rel: "noreferrer",
+    href: t('FOOTER_QL3_2_HREF'),
+    "aria-label": "instagram"
   }, /*#__PURE__*/_react.default.createElement(_FaInstagram.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
-    href: t('FOOTER_QL3_3_HREF')
+    target: "_blank",
+    rel: "noreferrer",
+    href: t('FOOTER_QL3_3_HREF'),
+    "aria-label": "twitter"
   }, /*#__PURE__*/_react.default.createElement(_FaTwitter.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
-    href: t('FOOTER_QL3_4_HREF')
+    target: "_blank",
+    rel: "noreferrer",
+    href: t('FOOTER_QL3_4_HREF'),
+    "aria-label": "youtube"
   }, /*#__PURE__*/_react.default.createElement(_FaYoutube.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
-    href: t('FOOTER_QL3_5_HREF')
+    target: "_blank",
+    rel: "noreferrer",
+    href: t('FOOTER_QL3_5_HREF'),
+    "aria-label": "whatsapp"
   }, /*#__PURE__*/_react.default.createElement(_FaWhatsapp.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.Copy, null, t('FOOTER_COPY', '© 2016 - 2020 Ordering - Create e-commerce Apps and Websites with your brand. All rights reserved. Ordering, Inc.'))));
 };
 

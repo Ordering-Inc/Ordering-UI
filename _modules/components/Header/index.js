@@ -31,6 +31,18 @@ var _CartPopover = require("../CartPopover");
 
 var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
 
+var _CartContent = require("../CartContent");
+
+var _Modal = require("../Modal");
+
+var _MomentContent = require("../MomentContent");
+
+var _AddressContent = require("../AddressContent");
+
+var _HeaderOption = require("../HeaderOption");
+
+var _SidebarMenu = require("../SidebarMenu");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -54,7 +66,9 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos;
+  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _orderState$options2, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _orderState$options6;
+
+  var isHome = props.isHome;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -78,7 +92,32 @@ var Header = function Header(props) {
       setOpenPopover = _useState2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-  var isHome = props.isHome;
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      modalIsOpen = _useState4[0],
+      setModalIsOpen = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      modalSelected = _useState6[0],
+      setModalSelected = _useState6[1];
+
+  var cartsWithProducts = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
+    return cart.products.length > 0;
+  });
+  var windowSize = (0, _useWindowSize.useWindowSize)();
+  var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
+  var HeaderType = isHome ? _styles.HeaderInvert : _styles.Header;
+
+  var openModal = function openModal(opt) {
+    setModalSelected(opt);
+    setModalIsOpen(true);
+  };
+
+  var closeModal = function closeModal() {
+    return setModalIsOpen(false);
+  };
 
   var handleTogglePopover = function handleTogglePopover(type) {
     setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, !openPopover[type])));
@@ -87,10 +126,6 @@ var Header = function Header(props) {
   var handleClosePopover = function handleClosePopover(type) {
     setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
   };
-
-  var windowSize = (0, _useWindowSize.useWindowSize)();
-  var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
-  var HeaderType = isHome ? _styles.HeaderInvert : _styles.Header;
 
   var handleAddProduct = function handleAddProduct() {
     handleTogglePopover('cart');
@@ -106,7 +141,9 @@ var Header = function Header(props) {
       return events.off('cart_product_added', handleAddProduct);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(HeaderType, null, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
+  return /*#__PURE__*/_react.default.createElement(HeaderType, null, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
+    auth: auth
+  }), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       var _orderState$options, _orderState$options$a;
 
@@ -133,6 +170,8 @@ var Header = function Header(props) {
       return handleClosePopover('moment');
     }
   }), /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
+    auth: auth,
+    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address,
     open: openPopover.addresses,
     onClick: function onClick() {
       return handleTogglePopover('addresses');
@@ -140,7 +179,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('addresses');
     }
-  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signin'
@@ -153,7 +192,7 @@ var Header = function Header(props) {
       });
     },
     highlight: 1
-  }, t('SIGNUP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  }, t('SIGNUP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     open: openPopover.user,
     isHome: isHome,
     onClick: function onClick() {
@@ -162,8 +201,9 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  }), /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
+  }), windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
+    carts: cartsWithProducts,
     onClick: function onClick() {
       return handleTogglePopover('cart');
     },
@@ -171,7 +211,15 @@ var Header = function Header(props) {
       return handleClosePopover('cart');
     },
     auth: auth
-  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), windowSize.width <= 820 && onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
+  }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+    variant: "cart",
+    totalCarts: cartsWithProducts.length,
+    onClick: function onClick(variant) {
+      return openModal(variant);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), windowSize.width <= 820 && onlineStatus && windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
+    auth: auth,
+    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address,
     open: openPopover.addresses,
     onClick: function onClick() {
       return handleTogglePopover('addresses');
@@ -187,7 +235,34 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('moment');
     }
-  })));
+  })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+    variant: "address",
+    addressState: (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : (_orderState$options4$2 = _orderState$options4$.address) === null || _orderState$options4$2 === void 0 ? void 0 : (_orderState$options4$3 = _orderState$options4$2.split(',')) === null || _orderState$options4$3 === void 0 ? void 0 : _orderState$options4$3[0],
+    onClick: function onClick(variant) {
+      return openModal(variant);
+    }
+  }), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+    variant: "moment",
+    momentState: (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.moment,
+    onClick: function onClick(variant) {
+      return openModal(variant);
+    }
+  })), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: modalIsOpen,
+    onClose: function onClose() {
+      return closeModal();
+    },
+    width: "70%",
+    padding: "0"
+  }, modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    carts: cartsWithProducts,
+    isOrderStateCarts: !!orderState.carts,
+    onClose: closeModal
+  }), modalSelected === 'address' && /*#__PURE__*/_react.default.createElement(_AddressContent.AddressContent, {
+    auth: auth,
+    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address,
+    onClose: closeModal
+  }), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null)));
 };
 
 exports.Header = Header;

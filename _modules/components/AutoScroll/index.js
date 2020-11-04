@@ -17,6 +17,8 @@ var _IosArrowBack = _interopRequireDefault(require("@meronex/icons/ios/IosArrowB
 
 var _styles = require("./styles");
 
+var _ThemeContext = require("../../contexts/ThemeContext");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -48,6 +50,10 @@ var AutoScroll = function AutoScroll(_ref) {
       categoriesElement = _useState2[0],
       setCategoriesElement = _useState2[1];
 
+  var _useTheme = (0, _ThemeContext.useTheme)(),
+      _useTheme2 = _slicedToArray(_useTheme, 1),
+      theme = _useTheme2[0];
+
   (0, _react.useEffect)(function () {
     var containerElement = document.getElementById(container).addEventListener('scroll', handleScroll);
     return function () {
@@ -58,7 +64,7 @@ var AutoScroll = function AutoScroll(_ref) {
     var element = document.getElementById(categories);
     setCategoriesElement(element);
     handleScroll();
-  }, [categoriesElement, width]);
+  }, [categoriesElement, width, theme === null || theme === void 0 ? void 0 : theme.rtl]);
 
   var handleScroll = function handleScroll() {
     var containerElement = document.getElementById(container);
@@ -67,16 +73,30 @@ var AutoScroll = function AutoScroll(_ref) {
     var botonLeft = document.getElementsByClassName('left')[0];
 
     if (botonLeft || botonRight) {
-      if (containerElement.scrollLeft < 40) {
-        botonLeft.classList.add('hidden');
-      } else {
-        botonLeft.classList.remove('hidden');
-      }
+      if (theme === null || theme === void 0 ? void 0 : theme.rtl) {
+        if (containerElement.scrollLeft * -1 < 40) {
+          botonRight.classList.add('hidden');
+        } else {
+          botonRight.classList.remove('hidden');
+        }
 
-      if (containerElement.scrollLeft > (categoriesElement === null || categoriesElement === void 0 ? void 0 : categoriesElement.scrollWidth) - containerElement.offsetWidth - 10) {
-        botonRight.classList.add('hidden');
+        if (containerElement.scrollLeft * -1 > (categoriesElement === null || categoriesElement === void 0 ? void 0 : categoriesElement.scrollWidth) - containerElement.offsetWidth - 10) {
+          botonLeft.classList.add('hidden');
+        } else {
+          botonLeft.classList.remove('hidden');
+        }
       } else {
-        botonRight.classList.remove('hidden');
+        if (containerElement.scrollLeft < 40) {
+          botonLeft.classList.add('hidden');
+        } else {
+          botonLeft.classList.remove('hidden');
+        }
+
+        if (containerElement.scrollLeft > (categoriesElement === null || categoriesElement === void 0 ? void 0 : categoriesElement.scrollWidth) - containerElement.offsetWidth - 10) {
+          botonRight.classList.add('hidden');
+        } else {
+          botonRight.classList.remove('hidden');
+        }
       }
     }
   };

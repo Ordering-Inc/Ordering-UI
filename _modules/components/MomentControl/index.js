@@ -11,6 +11,8 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
+var _useWindowSize = require("../../hooks/useWindowSize");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -18,8 +20,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -41,25 +41,16 @@ var MomentControlUI = function MomentControlUI(props) {
       timeSelected = props.timeSelected,
       handleAsap = props.handleAsap,
       handleChangeDate = props.handleChangeDate,
-      handleChangeTime = props.handleChangeTime,
-      beforeComponents = props.beforeComponents,
-      afterComponents = props.afterComponents,
-      beforeElements = props.beforeElements,
-      afterElements = props.afterElements;
+      handleChangeTime = props.handleChangeTime;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), beforeComponents.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')), /*#__PURE__*/_react.default.createElement(_styles.Days, null, datesList.slice(0, 6).map(function (date) {
+  var windowSize = (0, _useWindowSize.useWindowSize)();
+  return /*#__PURE__*/_react.default.createElement("div", {
+    id: "moment_control"
+  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')), /*#__PURE__*/_react.default.createElement(_styles.Days, null, datesList.slice(0, 6).map(function (date) {
     var dateParts = date.split('-');
 
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
@@ -75,12 +66,12 @@ var MomentControlUI = function MomentControlUI(props) {
         return handleChangeDate(date);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.ContentDay, null, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
-  })), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')), /*#__PURE__*/_react.default.createElement(_styles.Hours, null, /*#__PURE__*/_react.default.createElement(_styles.Hour, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.MiddleLine, null)), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')), /*#__PURE__*/_react.default.createElement(_styles.Hours, null, /*#__PURE__*/_react.default.createElement(_styles.Hour, {
     selected: isAsap,
     onClick: function onClick() {
       return handleAsap();
     }
-  }, t('ASAP', 'As soon as possible')), hoursList.map(function (hour, i) {
+  }, windowSize.width > 410 ? t('ASAP', 'As soon as possible') : t('ASAP_ABBREVIATION', 'ASAP')), hoursList.map(function (hour, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.Hour, {
       key: i,
       selected: timeSelected === hour.startTime,
@@ -88,15 +79,7 @@ var MomentControlUI = function MomentControlUI(props) {
         return handleChangeTime(hour.startTime);
       }
     }, hour.startTime);
-  })), afterComponents.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  })));
 };
 
 var MomentControl = function MomentControl(props) {

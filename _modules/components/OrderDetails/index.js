@@ -100,7 +100,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var _props$order = props.order,
       order = _props$order.order,
       loading = _props$order.loading,
-      error = _props$order.error;
+      error = _props$order.error,
+      header = _props$order.header;
 
   var getOrderStatus = function getOrderStatus(status) {
     var orderStatus = [{
@@ -189,13 +190,19 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     events.emit('go_to_page', data);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderLogo, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
+    businessHeader: header && header.result.header
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderLogo, {
     bgimage: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype
   }), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, {
     column: true
   }, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_MESSAGE', 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("h1", null, parsePrice((order === null || order === void 0 ? void 0 : order.total) || 0))))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, order.driver && order.driver.phone && /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return window.open("tel:".concat(order.driver.phone));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
     onClick: function onClick() {
       return setOpenMessages({
         driver: false,
@@ -217,7 +224,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     className: "photo"
   }, (order === null || order === void 0 ? void 0 : (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
     src: order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo
-  }) : /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.lastname), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER', 'Driver')))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
+  }) : /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.lastname), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER', 'Driver')))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, order.driver && order.driver.phone && /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return window.open("tel:".concat(order.driver.phone));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
     onClick: function onClick() {
       return setOpenMessages({
         driver: true,
@@ -268,7 +279,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     content: t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('PROFILE_ORDERS_REDIRECT', 'Go to Orders'),
     onClickButton: handleOrderRedirect
-  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }), (openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openMessages.driver || openMessages.business,
     onClose: function onClose() {
       return setOpenMessages({
@@ -283,7 +294,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     order: order,
     business: openMessages.business,
     driver: openMessages.driver
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), openReview && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openReview,
     onClose: function onClose() {
       return setOpenReview(false);

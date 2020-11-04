@@ -19,6 +19,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _Modal = require("../Modal");
 
+var _ProductForm = require("../ProductForm");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -52,27 +54,49 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UpsellingPageUI = function UpsellingPageUI(props) {
+  var _upsellingProducts$pr4;
+
   var upsellingProducts = props.upsellingProducts,
-      handleAddProductUpselling = props.handleAddProductUpselling,
       handleUpsellingPage = props.handleUpsellingPage,
       openUpselling = props.openUpselling,
       canOpenUpselling = props.canOpenUpselling,
-      setCanOpenUpselling = props.setCanOpenUpselling;
+      setCanOpenUpselling = props.setCanOpenUpselling,
+      business = props.business;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useState = (0, _react.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      actualProduct = _useState2[0],
+      setActualProduct = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      modalIsOpen = _useState4[0],
+      setModalIsOpen = _useState4[1];
+
   (0, _react.useEffect)(function () {
-    var _upsellingProducts$pr, _upsellingProducts$pr2;
+    var _upsellingProducts$pr, _upsellingProducts$pr2, _upsellingProducts$pr3;
 
     if ((upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr = upsellingProducts.products) === null || _upsellingProducts$pr === void 0 ? void 0 : _upsellingProducts$pr.length) && !upsellingProducts.loading) {
       setCanOpenUpselling(true);
     } else if (!(upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr2 = upsellingProducts.products) === null || _upsellingProducts$pr2 === void 0 ? void 0 : _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
       handleUpsellingPage();
     }
-  }, [upsellingProducts.loading]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+
+    if ((upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr3 = upsellingProducts.products) === null || _upsellingProducts$pr3 === void 0 ? void 0 : _upsellingProducts$pr3.length) === 0 && !upsellingProducts.loading) {
+      handleUpsellingPage();
+    }
+  }, [upsellingProducts.loading, upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length]);
+
+  var handleFormProduct = function handleFormProduct(product) {
+    setActualProduct(product);
+    setModalIsOpen(true);
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr4 = upsellingProducts.products) === null || _upsellingProducts$pr4 === void 0 ? void 0 : _upsellingProducts$pr4.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WANT_SOMETHING_ELSE', 'Do you want something else?'),
     open: openUpselling,
     onClose: function onClose() {
@@ -88,7 +112,9 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       title: product.name
     }, product.name)), /*#__PURE__*/_react.default.createElement("p", null, "$", product.price), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
-      onClick: handleAddProductUpselling
+      onClick: function onClick() {
+        return handleFormProduct(product);
+      }
     }, t('ADD', 'Add'))));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, upsellingProducts.message)) : _toConsumableArray(Array(8)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, {
@@ -103,7 +129,21 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     onClick: function onClick() {
       return handleUpsellingPage(false);
     }
-  }, t('NO_THANKS', 'No, Thanks'))))));
+  }, t('NO_THANKS', 'No, Thanks')))), actualProduct && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: modalIsOpen,
+    onClose: function onClose() {
+      return setActualProduct(null);
+    },
+    width: "70%",
+    padding: "10px"
+  }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+    product: actualProduct,
+    businessId: actualProduct.api.businessId,
+    businessSlug: business.slug,
+    onSave: function onSave() {
+      return setModalIsOpen(false);
+    }
+  }))));
 };
 
 var UpsellingPage = function UpsellingPage(props) {

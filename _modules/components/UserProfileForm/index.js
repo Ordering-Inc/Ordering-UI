@@ -164,7 +164,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     disabled: !formState.loading
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
     isImage: (user === null || user === void 0 ? void 0 : user.photo) || (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.photo)
-  }, formState.changes.photo && formState.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !formState.changes.photo || ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' ? (user === null || user === void 0 ? void 0 : user.photo) ? /*#__PURE__*/_react.default.createElement("img", {
+  }, formState.changes.photo && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !formState.changes.photo || ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' ? (user === null || user === void 0 ? void 0 : user.photo) ? /*#__PURE__*/_react.default.createElement("img", {
     src: user === null || user === void 0 ? void 0 : user.photo,
     alt: "user image"
   }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE', 'Put your image here'))) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo) ? /*#__PURE__*/_react.default.createElement("img", {
@@ -215,9 +215,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       }
     })
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
+    color: Object.keys(formState.changes).length ? 'primary' : 'secondary',
     type: "submit"
-  }, t('UPDATE', 'Update'))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
+  }, Object.keys(formState.changes).length ? t('UPDATE', 'Update') : t('CANCEL', 'Cancel'))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i
     });

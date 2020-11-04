@@ -1,16 +1,40 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SkeletonSide = exports.SkeletonInformation = exports.SkeletonContent = exports.SkeletonHeader = exports.SkeletonContainer = exports.CmsContainer = exports.CmsError = void 0;
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0;    \n  "]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n  width: 30%;\n  height: 100%;\n  margin-left: 10px;\n  ", "  \n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  width: 30%;\n  height: 100%;\n  margin-left: 10px\n"]);
+  var data = _taggedTemplateLiteral(["\n    margin-left: 10px;\n    margin-right: 0;\n  "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -20,7 +44,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  width: 70%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  margin-right: 10px\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 70%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  margin-right: 10px;\n  ", "  \n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -101,10 +125,18 @@ var SkeletonContent = _styledComponents.default.div(_templateObject5());
 
 exports.SkeletonContent = SkeletonContent;
 
-var SkeletonInformation = _styledComponents.default.div(_templateObject6());
+var SkeletonInformation = _styledComponents.default.div(_templateObject6(), function (props) {
+  var _props$theme;
+
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject7());
+});
 
 exports.SkeletonInformation = SkeletonInformation;
 
-var SkeletonSide = _styledComponents.default.div(_templateObject7());
+var SkeletonSide = _styledComponents.default.div(_templateObject8(), function (props) {
+  var _props$theme2;
+
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject9());
+});
 
 exports.SkeletonSide = SkeletonSide;

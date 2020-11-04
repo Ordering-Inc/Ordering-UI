@@ -124,7 +124,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       });
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, userAddress, orderType === 1 && /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h4", null, userAddress), orderType === 1 && /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     onClick: function onClick() {
       return handleClickAddress();
     }
@@ -132,10 +132,10 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     onClick: function onClick() {
       return setShowMap(!showMap);
     }
-  }, showMap ? 'Hide map' : 'View map'))), showMap && /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+  }, showMap ? 'Hide map' : 'View map'))), showMap && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
     alt: "google-maps-location"
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS'),
     open: modals.formOpen,
     onClose: function onClose() {

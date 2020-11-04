@@ -76,7 +76,8 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       setLoad = _useState2[1];
 
   return /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
-    id: "container"
+    id: "container",
+    tabIndex: "0"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary",
     id: "categories"
@@ -93,6 +94,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       load: load
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: images[0].image,
+      alt: "all",
       onLoad: function onLoad() {
         return setLoad(true);
       },
@@ -107,6 +109,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         load: load
       }, /*#__PURE__*/_react.default.createElement("img", {
         src: image.image,
+        alt: type.value,
         onClick: function onClick() {
           return handleChangeBusinessType(type.value);
         }

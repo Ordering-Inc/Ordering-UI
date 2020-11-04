@@ -9,6 +9,8 @@ exports.Cart = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _orderingComponents = require("ordering-components");
 
 var _Buttons = require("../../styles/Buttons");
@@ -26,6 +28,8 @@ var _CouponControl = require("../CouponControl");
 var _ProductForm = require("../ProductForm");
 
 var _UpsellingPage = require("../UpsellingPage");
+
+var _useWindowSize = require("../../hooks/useWindowSize");
 
 var _styles = require("./styles");
 
@@ -104,11 +108,6 @@ var CartUI = function CartUI(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isCheckout = _useState12[0],
-      setIsCheckout = _useState12[1];
-
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
@@ -116,7 +115,10 @@ var CartUI = function CartUI(props) {
       parseNumber = _useUtils2$.parseNumber,
       parseDate = _useUtils2$.parseDate;
 
-  var momentFormatted = !(orderState === null || orderState === void 0 ? void 0 : (_orderState$option = orderState.option) === null || _orderState$option === void 0 ? void 0 : _orderState$option.moment) ? t('ASAP_ABBREVIATION', 'ASAP') : parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$option2 = orderState.option) === null || _orderState$option2 === void 0 ? void 0 : _orderState$option2.moment, {
+  var windowSize = (0, _useWindowSize.useWindowSize)();
+  var location = (0, _reactRouterDom.useLocation)();
+  var isCheckout = location.pathname === "/checkout/".concat(cart === null || cart === void 0 ? void 0 : cart.uuid);
+  var momentFormatted = !(orderState === null || orderState === void 0 ? void 0 : (_orderState$option = orderState.option) === null || _orderState$option === void 0 ? void 0 : _orderState$option.moment) ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$option2 = orderState.option) === null || _orderState$option2 === void 0 ? void 0 : _orderState$option2.moment, {
     outputFormat: 'YYYY-MM-DD HH:mm'
   });
 
@@ -148,19 +150,6 @@ var CartUI = function CartUI(props) {
     onClickCheckout();
   };
 
-  var handleOpenUpsellingPage = function handleOpenUpsellingPage() {
-    if (!canOpenUpselling) {
-      handleClickCheckout();
-    } else {
-      setOpenUpselling(true);
-    }
-  };
-
-  var handleUpsellingPage = function handleUpsellingPage() {
-    handleClickCheckout();
-    setOpenUpselling(false);
-  };
-
   var handleStoreRedirect = function handleStoreRedirect(slug) {
     events.emit('go_to_page', {
       page: 'business',
@@ -168,22 +157,18 @@ var CartUI = function CartUI(props) {
         store: slug
       }
     });
-  };
 
-  var handleChangeView = function handleChangeView(_ref) {
-    var page = _ref.page,
-        params = _ref.params;
-    setIsCheckout(page === 'checkout' && (params === null || params === void 0 ? void 0 : params.cartUuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid));
+    if (windowSize.width <= 768) {
+      onClickCheckout();
+    }
   };
 
   (0, _react.useEffect)(function () {
-    events.on('change_view', handleChangeView);
     events.emit('get_current_view');
     return function () {
       setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
         open: false
       }));
-      events.off('change_view', handleChangeView);
     };
   }, []);
 
@@ -204,6 +189,12 @@ var CartUI = function CartUI(props) {
         }));
       }
     });
+  };
+
+  var handleUpsellingPage = function handleUpsellingPage() {
+    setOpenUpselling(false);
+    setCanOpenUpselling(false);
+    handleClickCheckout();
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessItemAccordion.BusinessItemAccordion, {
@@ -235,9 +226,10 @@ var CartUI = function CartUI(props) {
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)))))), onClickCheckout && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
-      return handleOpenUpsellingPage();
-    }
-  }, t('CHECKOUT', 'Checkout')))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+      return setOpenUpselling(true);
+    },
+    disabled: openUpselling && !canOpenUpselling
+  }, !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('PRODUCT', 'Product'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -268,9 +260,10 @@ var CartUI = function CartUI(props) {
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
     onSave: handlerProductAction
-  })), /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+  })), openUpselling && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: cart.business_id,
     cartProducts: cart.products,
+    business: cart.business,
     handleUpsellingPage: handleUpsellingPage,
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,

@@ -15,7 +15,7 @@ var _reactPopper = require("react-popper");
 
 var _styles = require("./styles");
 
-var _MomentControl = require("../MomentControl");
+var _MomentContent = require("../MomentContent");
 
 var _FaRegClock = _interopRequireDefault(require("@meronex/icons/fa/FaRegClock"));
 
@@ -118,13 +118,6 @@ var MomentPopover = function MomentPopover(props) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)';
   }
 
-  var currentDate = new Date();
-  currentDate.setTime(currentDate.getTime() + 6 * 24 * 60 * 60 * 1000);
-  currentDate.setHours(23);
-  currentDate.setMinutes(59);
-  var momentProps = {
-    maxDate: currentDate
-  };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "moment-popover",
     style: {
@@ -138,7 +131,7 @@ var MomentPopover = function MomentPopover(props) {
   }) : t('ASAP_ABBREVIATION', 'ASAP')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, momentProps), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
+  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow

@@ -17,8 +17,38 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject14() {
+  var data = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0;\n    "]);
+
+  _templateObject14 = function _templateObject14() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject13() {
+  var data = _taggedTemplateLiteral(["\n  max-width: 30%;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  span {\n    height: 28px;\n    svg {\n      font-size: 28px;\n    }\n\n    &:not(:last-child) {\n      margin-right: 5px;\n      ", "\n    }\n  }\n"]);
+
+  _templateObject13 = function _templateObject13() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject12() {
+  var data = _taggedTemplateLiteral(["\n  width: 25%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  p {\n    font-size: 20px;\n    margin: 0px 5px;\n    font-weight: 300;\n\n    &:nth-child(1) {\n      font-weight: 500;\n    }\n  }\n\n  &.closed {\n    flex: 1;\n    p {\n      text-align: center;\n      margin: 0px 20px;\n      font-size: 18px;\n    }\n  }\n\n  @media (max-width: 480px) {\n    display: none;\n  }\n"]);
+
+  _templateObject12 = function _templateObject12() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  max-width: 30%;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  span {\n    height: 28px;\n    svg {\n      font-size: 28px;\n    }\n\n    &:not(:last-child) {\n      margin-right: 5px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 45%;\n\n  h1 {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  @media (max-width: 480px) {\n    width: 60%;\n  }\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -28,7 +58,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  width: 25%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  p {\n    font-size: 20px;\n    margin: 0px 5px;\n    font-weight: 300;\n\n    &:nth-child(1) {\n      font-weight: 500;\n    }\n  }\n\n  &.closed {\n    flex: 1;\n    p {\n      text-align: center;\n      margin: 0px 20px;\n      font-size: 18px;\n    }\n  }\n\n  @media (max-width: 480px) {\n    display: none;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-weight: 400;\n  font-size: 14px;\n  padding: 18px;\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -38,7 +68,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 45%;\n\n  h1 {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  @media (max-width: 480px) {\n    width: 70%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  overflow: hidden;\n  transition: min-height 0.6s ease;\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -48,7 +78,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  font-weight: 400;\n  font-size: 14px;\n  padding: 18px;\n"]);
+  var data = _taggedTemplateLiteral(["\n        margin-left: 3px;\n        margin-right: 0;\n    "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -58,7 +88,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  overflow: hidden;\n  transition: min-height 0.6s ease;\n"]);
+  var data = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0;\n  "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -68,7 +98,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-transform: capitalize;\n  margin-left: 10px;\n  width: 65%;\n  h1, span {\n    margin: 0px;\n  }\n\n  h1 {\n    font-size: 20px;\n    font-weight: 500;\n  }\n\n  span {\n    font-size: 18px;\n    opacity: 0.8;\n    display: flex;\n    align-items: center;\n    font-weight: 300;\n    svg {\n      margin-right: 3px;\n    }\n  }\n\n  @media (max-width: 410px) {\n    h1 {\n      font-size: 18px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-transform: capitalize;\n  margin-left: 10px;\n  width: 65%;\n  ", "\n  h1, span {\n    margin: 0px;\n  }\n\n  h1 {\n    font-size: 20px;\n    font-weight: 500;\n    margin-top: 0em !important;\n    margin-bottom: 0.7em !important;\n  }\n\n  span {\n    font-size: 18px;\n    opacity: 0.8;\n    display: flex;\n    align-items: center;\n    font-weight: 300;\n    svg {\n      margin-right: 3px;\n      ", "\n    }\n  }\n\n  @media (max-width: 768px){\n    h1{\n      margin-bottom: 0 !important\n    }\n  }\n\n  @media (max-width: 410px) {\n    h1 {\n      font-size: 18px;\n    }\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -80,7 +110,7 @@ function _templateObject6() {
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: contain;\n  object-fit: contain;\n  background-position: center;\n  min-height: 75px;\n  border-radius: 10px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 75px;\n  height: 75px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: contain;\n  object-fit: contain;\n  background-position: center;\n  min-height: 75px;\n  border-radius: 10px;\n  @media (max-width: 768px){\n    min-height: 55px;\n    width: 55px;\n    height: 55px;\n  }\n  @media (max-width: 480px){\n    min-height: 50px;\n    width: 50px;\n    height: 50px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -90,7 +120,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  max-width: 75px;\n  max-height: 75px;\n  height: 75px;\n  width: 75px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  max-width: 75px;\n  max-height: 75px;\n  height: 75px;\n  width: 75px;\n  @media (max-width: 768px){\n    width: 55px;\n    height: 55px;\n    max-width: 55px;\n    max-height: 55px;\n    padding-bottom: 0 !important;\n  }\n  @media (max-width: 480px){\n    width: 50px;\n    height: 50px;\n    max-width: 50px;\n    max-height: 50px;\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -177,26 +207,38 @@ var BusinessLogo = function BusinessLogo(props) {
 
 exports.BusinessLogo = BusinessLogo;
 
-var ContentInfo = _styledComponents.default.div(_templateObject6());
+var ContentInfo = _styledComponents.default.div(_templateObject6(), function (props) {
+  var _props$theme;
+
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject7());
+}, function (props) {
+  var _props$theme2;
+
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject8());
+});
 
 exports.ContentInfo = ContentInfo;
 
-var AccordionContent = _styledComponents.default.div(_templateObject7());
+var AccordionContent = _styledComponents.default.div(_templateObject9());
 
 exports.AccordionContent = AccordionContent;
 
-var AccordionText = _styledComponents.default.div(_templateObject8());
+var AccordionText = _styledComponents.default.div(_templateObject10());
 
 exports.AccordionText = AccordionText;
 
-var BusinessInfo = _styledComponents.default.div(_templateObject9());
+var BusinessInfo = _styledComponents.default.div(_templateObject11());
 
 exports.BusinessInfo = BusinessInfo;
 
-var BusinessTotal = _styledComponents.default.div(_templateObject10());
+var BusinessTotal = _styledComponents.default.div(_templateObject12());
 
 exports.BusinessTotal = BusinessTotal;
 
-var BusinessActions = _styledComponents.default.div(_templateObject11());
+var BusinessActions = _styledComponents.default.div(_templateObject13(), function (props) {
+  var _props$theme3;
+
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject14());
+});
 
 exports.BusinessActions = BusinessActions;

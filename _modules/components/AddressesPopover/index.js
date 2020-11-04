@@ -11,15 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _AddressList = require("../AddressList");
-
 var _reactPopper = require("react-popper");
 
 var _styles = require("./styles");
 
-var _AddressForm = require("../AddressForm");
-
 var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
+
+var _AddressContent = require("../AddressContent");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,17 +46,15 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressesPopover = function AddressesPopover(props) {
-  var _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options$a3, _orderState$options2;
+  var _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options$a3;
 
-  var open = props.open;
+  var open = props.open,
+      auth = props.auth,
+      addressState = props.addressState;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
-
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      userState = _useSession2[0];
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -128,35 +124,14 @@ var AddressesPopover = function AddressesPopover(props) {
     ref: referenceElement,
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.address) === null || _orderState$options$a2 === void 0 ? void 0 : (_orderState$options$a3 = _orderState$options$a2.split(',')) === null || _orderState$options$a3 === void 0 ? void 0 : _orderState$options$a3[0]) || t('SELECT_AN_ADDRESS', 'Select an address')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+    className: "form_edit",
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), userState.auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      fontSize: '30px',
-      fontWeight: 'bold'
-    }
-  }, t('ADDRESSES', 'Addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
-    popover: true,
-    changeOrderAddressWithDefault: true,
-    onClosePopover: props.onClose
-  })), !userState.auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      fontSize: '30px',
-      fontWeight: 'bold'
-    }
-  }, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) || {},
-    onClose: function onClose() {
-      return props.onClose && props.onClose();
-    },
-    onCancel: function onCancel() {
-      return props.onClose && props.onClose();
-    },
-    onSaveAddress: function onSaveAddress() {
-      return props.onClose && props.onClose();
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
+  }, attributes.popper), open && /*#__PURE__*/_react.default.createElement(_AddressContent.AddressContent, {
+    auth: auth,
+    addressState: addressState,
+    onClose: props.onClose
+  }), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow

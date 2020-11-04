@@ -42,6 +42,7 @@ var SearchBar = function SearchBar(_ref) {
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: el,
     name: "search",
+    "aria-label": "search",
     placeholder: placeholder
   }));
 };
