@@ -17,24 +17,20 @@ export const WrapHeader = styled.div`
 export const Title = styled.h3`
   font-size: 18px;
   margin: 0px;
-
-  @media (max-width: 380px) {
-    font-size: 18px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 70%;
-  }
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 70%;
 `
 
 export const Flag = styled.span`
-  font-size: 14px;
+  font-size: 13px;
   margin: 0px;
   text-transform: capitalize;
   color: #A52121;
   font-weight: 500;
 
-  @media (max-width: 380px) {
-    font-size: 13px;
+  @media (min-width: 381px) {
+    font-size: 14px;
   }
 `

@@ -6,11 +6,11 @@ export const ProductsContainer = styled.div`
 `
 
 export const WrapContent = styled.div`
-  padding: 15px;
+  padding: 5px;
   background: #F8F8F8;
 
-  @media (max-width: 380px) {
-    padding: 5px;
+  @media (min-width: 381px) {
+    padding: 15px;
   }
 `
 
@@ -28,19 +28,14 @@ export const ProductsNotFound = styled.div`
   margin: auto;
 
   h1 {
+    font-size: 20px;
     opacity: 0.5;
     text-align: center;
   }
 
-  @media (max-width: 410px) {
+  @media (min-width: 411px) {
     h1 {
       font-size: 24px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    h1 {
-      font-size: 20px;
     }
   }
 `
