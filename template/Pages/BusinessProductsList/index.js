@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useApi, useEvent } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
+import { HelmetTags } from '../../components/HelmetTags'
 
 export const BusinessProductsList = (props) => {
   const { store } = useParams()
@@ -79,7 +80,12 @@ export const BusinessProductsList = (props) => {
     }
   }
 
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+
   return (
-    <BusinessProductsListing {...businessProductsProps} />
+    <>
+      <HelmetTags page='business' helmetTitle={capitalize(store)} />
+      <BusinessProductsListing {...businessProductsProps} />
+    </>
   )
 }

@@ -30,6 +30,7 @@ import { PagesList } from './Pages/PagesList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
+import { HelmetTags } from './components/HelmetTags'
 
 export const App = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
@@ -70,6 +71,7 @@ export const App = () => {
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
+                <HelmetTags />
                 <Switch>
                   <Route exact path='/home'>
                     {
@@ -179,9 +181,6 @@ export const App = () => {
                       ? <CheckoutPage />
                       : <Redirect to='/login' />}
                   </Route>
-                  <Route exact path='/:store'>
-                    <BusinessProductsList />
-                  </Route>
                   <Route exact path='/orders/:orderId'>
                     {auth
                       ? <OrderDetailsPage />
@@ -192,6 +191,9 @@ export const App = () => {
                   </Route>
                   <Route exact path='/pages'>
                     <PagesList />
+                  </Route>
+                  <Route exact path='/:store'>
+                    <BusinessProductsList />
                   </Route>
                   <Route path='*'>
                     <PageNotFound />

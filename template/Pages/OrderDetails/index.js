@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import { HelmetTags } from '../../components/HelmetTags'
 
 import { OrderDetails } from '../../../src/components/OrderDetails'
 
@@ -15,6 +16,9 @@ export const OrderDetailsPage = (props) => {
     }
   }
   return (
-    <OrderDetails {...orderDetailsProps} />
+    <>
+      <HelmetTags page='order_details' />
+      <OrderDetails {...orderDetailsProps} />
+    </>
   )
 }
