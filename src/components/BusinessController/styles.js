@@ -7,14 +7,14 @@ export const ContainerCard = styled.div`
   border-radius: 10px;
   margin: 30px 20px;
 
-  width: calc(33% - 40px);
+  width: calc(100% - 40px);
 
-  @media (max-width: 992px) {
+  @media (min-width: 681px) {
     width: calc(50% - 40px);
   }
 
-  @media (max-width: 680px) {
-    width: calc(100% - 40px);
+  @media (min-width: 993px) {
+    width: calc(33% - 40px);
   }
 `
 
@@ -37,7 +37,7 @@ const BusinessHeaderStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  min-height: 200px;
+  min-height: 175px;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -47,8 +47,8 @@ const BusinessHeaderStyled = styled.div`
     opacity: 0.5;
   }
 
-  @media (max-width: 480px) {
-    min-height: 175px;
+  @media (min-width: 481px) {
+    min-height: 200px;
   }
 `
 
@@ -110,10 +110,6 @@ export const BusinessTags = styled.div`
     }
     }
   }
-
-  @media (max-width: 480px) {
-    font-size: 13px;
-  }
 `
 
 export const BusinessContent = styled.div`
@@ -123,37 +119,37 @@ export const BusinessContent = styled.div`
 `
 
 export const WrapperBusinessLogo = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
+  align-self: center;
+  width: 65px;
+  height: 65px;
+  min-height: 65px;
+  max-width: 65px;
 
-  @media (max-width: 480px){
-    align-self: center;
-    width: 65px;
-    height: 65px;
-    min-height: 65px;
-    max-width: 65px;
+  @media (min-width: 481px){
+    max-width: 75px;
+    max-height: 75px;
+    height: 75px;
+    width: 75px;
   }
 `
 
 const BusinessLogoStyled = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 65px;
+    height: 65px;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  min-height: 75px;
+  min-height: 65px;
   border-radius: 10px;
 
-  @media (max-width: 480px){
-    width: 65px;
-    height: 65px;
-    min-height: 65px;
+  @media (min-width: 481px){
+    width: 100%;
+    height: 100%;
+    min-height: 75px;
   }
 `
 
@@ -180,13 +176,14 @@ export const BusinessInfo = styled.div`
 `
 
 export const BusinessInfoItem = styled.div`
-  width: 95%;
+  width: 92%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0px 5px 0px 16px;
+  padding: 0px 5px 0px 10px;
+  font-size: 12px;
   ${props => props.theme?.rtl && css`
-    padding: 0px 16px 0px 5px;    
+    padding: 0px 16px 0px 5px;
   `}
   .reviews {
     display: flex;
@@ -197,7 +194,7 @@ export const BusinessInfoItem = styled.div`
       color: #FDC918;
       ${props => props.theme?.rtl && css`
         margin-left: 3px;
-        margin-right: 0;    
+        margin-right: 0;
     `}
     }
   }
@@ -226,16 +223,16 @@ export const BusinessInfoItem = styled.div`
     }
   }
 
-  @media (max-width: 1200px) {
-    width: 92%;
+  @media (min-width: 1201px) {
+    width: 95%;
   }
 
-  @media (max-width: 480px){
-    padding: 0px 5px 0px 10px;
-    font-size: 12px;
-    
+  @media (min-width: 481px){
+    padding: 0px 5px 0px 16px;
+    font-size: 16px;
+
     ${props => props.theme?.rtl && css`
-        padding: 0px 10px 0px 5px;    
+        padding: 0px 10px 0px 5px;
     `}
   }
 `
@@ -251,19 +248,19 @@ export const BusinessName = styled.h6`
 `
 
 export const Categories = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 300;
   color: #6C6C6C;
 
-  @media (max-width: 480px) {
-    font-size: 14px;
+  @media (min-width: 481px) {
+    font-size: 16px;
   }
 `
 
 export const Medadata = styled.div`
   display: flex;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 12px;
 
   p {
     svg {
@@ -275,7 +272,7 @@ export const Medadata = styled.div`
     }
   }
 
-  @media (max-width: 480px) {
-    font-size: 12px;
+  @media (min-width: 481px) {
+    font-size: 14px;
   }
 `
