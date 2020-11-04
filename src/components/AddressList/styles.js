@@ -30,7 +30,7 @@ export const AddressItem = styled.li`
     font-weight: bold;
     ${props => props.theme?.rtl && css`
       margin-right: 5px;
-      margin-left: 0;    
+      margin-left: 0;
   `}
   }
 
@@ -39,6 +39,7 @@ export const AddressItem = styled.li`
     align-items: center;
 
     span {
+      font-size: 14px;
       display: flex;
       cursor: pointer;
       margin-right: 10px;
@@ -51,8 +52,8 @@ export const AddressItem = styled.li`
         font-size: 24px;
       }
 
-      @media (max-width: 380px) {
-        font-size: 14px;
+      @media (min-width: 768px) {
+        font-size: 16px;
       }
     }
   }
