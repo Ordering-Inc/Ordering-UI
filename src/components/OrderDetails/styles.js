@@ -31,9 +31,8 @@ const HeaderStyled = styled.div`
 `
 
 export const Header = (props) => {
-  const theme = useTheme()
   const style = {}
-  style.backgroundImage = `url(${theme.images?.general?.orderDetailsHeader})`
+  style.backgroundImage = `url(${props.businessHeader})`
 
   return (
     <HeaderStyled style={style}>
@@ -46,17 +45,29 @@ export const HeaderInfo = styled.div`
   background-color: ${props => props.theme.colors.primary};
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 50%;
   padding: 20px 20px 30px;
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
+  ${props => props.theme?.rtl && css`
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  `}
 
   @media (max-width: 660px) {
     width: 55%;
   }
 
-  @media (max-width: 380px) {
-    width: 60%;
+  @media (max-width: 480px) {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  @media (min-width: 768px) {
+    min-height: 300px;
   }
 `
 
@@ -202,6 +213,10 @@ export const ActionsBlock = styled.div`
   justify-content: flex-end;
   > * {
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+  `}
   }
   svg {
     font-size: 24px;
@@ -353,6 +368,10 @@ export const OrderCustomer = styled.div`
       width: 70px;
       height: 70px;
       margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
     }
   }
 
@@ -362,6 +381,10 @@ export const PhotoBlock = styled.img`
   border-radius: 50%;
   width: 75px;
   margin-right: 10px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 10px;
+    margin-right: 0;
+  `}
 `
 
 export const InfoBlock = styled.div`
@@ -406,6 +429,10 @@ export const WrapperDriver = styled.div`
       width: 70px;
       height: 70px;
       margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
     }
   }
 
@@ -424,6 +451,9 @@ export const OrderBill = styled.div`
     font-size: 18px;
     tr td:nth-child(2) {
       text-align: right;
+      ${props => props.theme?.rtl && css`
+        text-align: left;
+      `}
     }
   }
 
@@ -481,6 +511,11 @@ export const FootActions = styled.div`
   svg {
     margin-left: 5px;
     transform: rotate(90deg)
+    ${props => props.theme?.rtl && css`
+      margin-right: 5px;
+      margin-left: 0px;
+      transform: rotate(-90deg)
+    `}
   }
 `
 export const SkeletonBlock = styled.div`

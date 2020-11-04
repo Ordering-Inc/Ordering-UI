@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -31,6 +31,10 @@ export const UserDetailsContainer = styled.div`
     h1 {
       margin: 0px;
       font-size: 24px;
+    }
+
+    @media (min-width: 993px) {
+      text-align: center;
     }
   }
 
@@ -65,7 +69,7 @@ export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 20px 0px 10px;
 
   button {
     width: 70%;
@@ -103,6 +107,10 @@ export const WarningMessage = styled.div`
     top: 0;
     left: 0;
     margin: 11px;
+    ${props => props.theme?.rtl && css`
+        right: 0;
+        left: initial
+    `}  
   }
 
   h1 {
@@ -142,7 +150,6 @@ export const NotFound = styled.div`
 
 export const NotFoundImage = styled.div`
   max-width: 300px;
-  max-width: 300px;
 
   img {
     width: 300px;
@@ -180,6 +187,13 @@ export const LogoWrapper = styled.div`
   max-height: 75px;
   height: 75px;
   width: 75px;
+  @media (max-width: 480px){
+    align-self: center;
+    width: 50px;
+    height: 50px;
+    min-height: 50px;
+    max-width: 50px;
+  }
 `
 
 const CartItemLogoStyled = styled.div`
@@ -194,6 +208,11 @@ const CartItemLogoStyled = styled.div`
   background-position: center;
   min-height: 75px;
   border-radius: 10px;
+  @media (max-width: 480px){
+    width: 50px;
+    height: 50px;
+    min-height: 50px;    
+  }
 `
 
 export const CartItemLogo = (props) => {
@@ -229,6 +248,20 @@ export const CartItemInfo = styled.div`
     color: ${props => props.theme.colors.primary};
     font-weight: bold;
   }
+
+  @media(max-width: 480px){
+    width: 70%;
+    h1,
+    p {
+      margin: 3px 10px;
+    }
+    h1{
+      font-size: 16px;
+    }
+    p{
+      font-size: 12px;
+    }
+  }
 `
 
 export const CartItemActions = styled.div`
@@ -254,4 +287,10 @@ export const CartItemActions = styled.div`
   @media (max-width: 576px) {
     font-size: 14px;
   }
+`
+
+export const InvalidAddress = styled.p`
+  margin: 10px auto 15px;
+  text-align: center;
+  color: ${props => props.theme.colors.primary};
 `

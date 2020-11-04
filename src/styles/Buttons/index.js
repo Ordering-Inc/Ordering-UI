@@ -18,14 +18,24 @@ export const Button = styled.button`
     background: ${() => darken(0.07, '#CCC')};
   }
 
+  &:disabled {
+    opacity: 0.5
+  }
+
   ${({ initialIcon }) => initialIcon && css`
-    padding-left: 30px !important;
     text-align: left;
+    ${props => props.theme?.rtl && css`
+      text-align: right;
+    `}
     img{
       vertical-align: middle;
     }
     span {
       padding-left: 15%
+      ${props => props.theme?.rtl && css`
+        padding-right: 15%;
+        padding-left: 0
+    `}
     }
   `}
 

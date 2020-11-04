@@ -104,7 +104,7 @@ const AddressFormUI = (props) => {
 
   return (
     <>
-      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='new-off'>
         {addressState?.address?.location && (
           <WrapperMap>
             <GoogleMapsMap
@@ -128,6 +128,7 @@ const AddressFormUI = (props) => {
               childRef={register({
                 required: isRequiredField('address') ? 'Address is required' : null
               })}
+              autoComplete='new-off'
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
@@ -145,6 +146,7 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
+          autoComplete='new-off'
         />
         <Input
           className='zipcode'
@@ -153,6 +155,7 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
+          autoComplete='new-off'
         />
         <textarea
           name='address_notes'
@@ -161,6 +164,7 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
           onChange={hanldeChangeInput}
+          autoComplete='new-off'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ContainerCard = styled.div`
   max-height: 300px;
@@ -97,8 +97,17 @@ export const BusinessTags = styled.div`
     padding: 8px;
     border-radius: 10px;
     margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
     &:last-child {
-      margin-right: 0px;
+      ${props => props.theme?.rtl ? css`
+        margin-left: 0px;
+    ` : css`
+        margin-right: 0px;
+    `
+    }
     }
   }
 
@@ -118,6 +127,14 @@ export const WrapperBusinessLogo = styled.div`
   max-height: 75px;
   height: 75px;
   width: 75px;
+
+  @media (max-width: 480px){
+    align-self: center;
+    width: 65px;
+    height: 65px;
+    min-height: 65px;
+    max-width: 65px;
+  }
 `
 
 const BusinessLogoStyled = styled.div`
@@ -132,6 +149,12 @@ const BusinessLogoStyled = styled.div`
   background-position: center;
   min-height: 75px;
   border-radius: 10px;
+
+  @media (max-width: 480px){
+    width: 65px;
+    height: 65px;
+    min-height: 65px;
+  }
 `
 
 export const BusinessLogo = (props) => {
@@ -150,15 +173,21 @@ export const BusinessLogo = (props) => {
 export const BusinessInfo = styled.div`
   display: flex;
   width: calc(100% - 75px);
+
+  @media(max-width: 480px){
+    width: calc(100% - 65px);
+  }
 `
 
 export const BusinessInfoItem = styled.div`
-  width: 100%;
+  width: 95%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0px 5px 0px 16px;
-
+  ${props => props.theme?.rtl && css`
+    padding: 0px 16px 0px 5px;    
+  `}
   .reviews {
     display: flex;
     align-items: center;
@@ -166,6 +195,10 @@ export const BusinessInfoItem = styled.div`
       margin-right: 3px;
       font-size: 22px;
       color: #FDC918;
+      ${props => props.theme?.rtl && css`
+        margin-left: 3px;
+        margin-right: 0;    
+    `}
     }
   }
 
@@ -177,31 +210,54 @@ export const BusinessInfoItem = styled.div`
       display: flex;
       align-items: center;
       margin: 0px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       img {
         margin-right: 4px;
+        ${props => props.theme?.rtl && css`
+          margin-left: 4px;
+          margin-right: 0px;
+       `}
       }
     }
     p.bold {
       font-weight: bold;
     }
-    @media (max-width: 480px) {
-      font-size: 14px;
-    }
+  }
+
+  @media (max-width: 1200px) {
+    width: 92%;
+  }
+
+  @media (max-width: 480px){
+    padding: 0px 5px 0px 10px;
+    font-size: 12px;
+    
+    ${props => props.theme?.rtl && css`
+        padding: 0px 10px 0px 5px;    
+    `}
   }
 `
 
-export const BusinessName = styled.p`
+export const BusinessName = styled.h6`
   font-size: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 500;
+  margin-block-start: 0;
+  margin-block-end: 0;
 `
 
 export const Categories = styled.div`
   font-size: 16px;
   font-weight: 300;
   color: #6C6C6C;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `
 
 export const Medadata = styled.div`
@@ -212,6 +268,14 @@ export const Medadata = styled.div`
   p {
     svg {
       margin-right: 3px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 3px;
+        margin-right: 0;
+    `}
     }
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
   }
 `

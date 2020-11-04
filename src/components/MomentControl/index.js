@@ -1,7 +1,8 @@
 import React from 'react'
-
 import { MomentOption, useLanguage } from 'ordering-components'
-import { Days, Day, DayName, DayNumber, ContentDay, Hours, Hour, Title } from './styles'
+
+import { Days, Day, DayName, DayNumber, ContentDay, Hours, Hour, Title, MiddleLine } from './styles'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 const MomentControlUI = (props) => {
   const {
@@ -12,27 +13,14 @@ const MomentControlUI = (props) => {
     timeSelected,
     handleAsap,
     handleChangeDate,
-    handleChangeTime,
-    beforeComponents,
-    afterComponents,
-    beforeElements,
-    afterElements
+    handleChangeTime
   } = props
 
   const [, t] = useLanguage()
+  const windowSize = useWindowSize()
 
   return (
-    <>
-      {beforeElements.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>
-      ))}
-
-      {beforeComponents.map(
-        (BeforeComponent, i) => <BeforeComponent key={i} {...props} />
-      )}
-
+    <div id='moment_control'>
       <Title>{t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')}</Title>
       <Days>
         {
@@ -51,11 +39,20 @@ const MomentControlUI = (props) => {
             )
           })
         }
+        <MiddleLine />
       </Days>
       <Title>{t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')}</Title>
       <Hours>
-        <Hour selected={isAsap} onClick={() => handleAsap()}>{t('ASAP', 'As soon as possible')}</Hour>
-        {/* <Hour>{t('SCHEDULE_FOR_LATER', 'Schedule for later')}</Hour> */}
+        <Hour
+          selected={isAsap}
+          onClick={() => handleAsap()}
+        >
+          {windowSize.width > 410 ? (
+            t('ASAP', 'As soon as possible')
+          ) : (
+            t('ASAP_ABBREVIATION', 'ASAP')
+          )}
+        </Hour>
         {
           hoursList.map((hour, i) => (
             <Hour
@@ -68,17 +65,7 @@ const MomentControlUI = (props) => {
           ))
         }
       </Hours>
-
-      {afterComponents.map(
-        (AfterComponent, i) => <AfterComponent key={i} {...props} />
-      )}
-
-      {afterElements.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>
-      ))}
-    </>
+    </div>
   )
 }
 

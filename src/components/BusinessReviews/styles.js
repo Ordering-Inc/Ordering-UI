@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ReviewOf = styled.div`
   display: flex;
@@ -13,6 +13,11 @@ export const Content = styled.div`
   > h3 {
     color: "#D81212";
   }
+  min-height: 180px;
+`
+
+export const ReviewsNotFound = styled.h2`
+  margin-top: 50px;
 `
 
 export const ReviewContainer = styled.div`
@@ -38,6 +43,10 @@ export const Comments = styled.div`
     align-items: center;
     svg {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0;
+    `}
     }
   }
 `
@@ -50,6 +59,9 @@ export const Scores = styled.div`
   justify-content: space-between;
   flex: 1;
   text-align: center;
+  @media (max-width: 480px){
+    flex-wrap: wrap;
+  }
 `
 
 export const ScoreDiv = styled.div`
@@ -70,7 +82,20 @@ export const ScoreDiv = styled.div`
     align-items: center;
     svg {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+       margin-left: 5px;
+       margin-right: 0;
+    `}
     }
+  }
+
+  @media(max-width: 768px){
+    font-size: 14px;
+  }
+
+  @media(max-width: 480px){
+    width: 44%;
+    margin-bottom: 10px;
   }
 `
 

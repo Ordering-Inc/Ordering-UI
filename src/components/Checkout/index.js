@@ -19,7 +19,8 @@ import {
   LogoWrapper,
   CartItemLogo,
   CartItemInfo,
-  CartItemActions
+  CartItemActions,
+  InvalidAddress
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -48,6 +49,14 @@ const CheckoutUI = (props) => {
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
   const [errorCash, setErrorCash] = useState(true)
+
+  const mapConfigs = {
+    mapZoom: 17,
+    mapSize: {
+      width: 640,
+      height: 190
+    }
+  }
 
   return (
     <Container>
@@ -78,7 +87,7 @@ const CheckoutUI = (props) => {
           <AddressDetails
             businessId={cart?.business_id}
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-            mapZoom={15}
+            mapConfigs={mapConfigs}
           />
         )}
 
@@ -181,6 +190,12 @@ const CheckoutUI = (props) => {
           </WrapperPlaceOrderButton>
         )}
 
+        {!cart?.valid_address && (
+          <InvalidAddress>
+            {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
+          </InvalidAddress>
+        )}
+
         {/* {error && error?.length > 0 && (
           error.map((e, i) => (
             <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
@@ -202,7 +217,7 @@ export const Checkout = (props) => {
     handleCheckoutListRedirect
   } = props
 
-  const [{ carts }, { confirmCart }] = useOrder()
+  const [orderState] = useOrder()
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
@@ -214,7 +229,7 @@ export const Checkout = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
 
-  const cartsWithProducts = Object.values(carts).filter(cart => cart.products.length)
+  const cartsWithProducts = Object.values(orderState.carts).filter(cart => cart.products.length)
 
   const handleOpenUpsellingPage = (cart) => {
     setCurrentCart(cart)
@@ -222,11 +237,16 @@ export const Checkout = (props) => {
 
   const handleUpsellingPage = () => {
     setOpenUpselling(false)
-    setCurrentCart('')
+    setCurrentCart(null)
     setCanOpenUpselling(false)
-    setOpenUpselling(false)
     handleCheckoutRedirect(currentCart.uuid)
   }
+
+  useEffect(() => {
+    if (!orderState.loading && currentCart?.business_id) {
+      setCurrentCart(...Object.values(orderState.carts).filter(cart => cart.business_id === currentCart?.business_id))
+    }
+  }, [orderState.loading])
 
   useEffect(() => {
     if (currentCart?.products) {
@@ -245,7 +265,7 @@ export const Checkout = (props) => {
         setCartState({ ...cartState, loading: false })
       } else if (result.status === 2 && result.paymethod_data.gateway === 'stripe_redirect' && query.get('payment_intent')) {
         try {
-          await confirmCart(cartUuid)
+          await orderState.confirmCart(cartUuid)
           handleOrderRedirect(result.order.uuid)
         } catch (error) {
           console.log(error)
@@ -283,14 +303,14 @@ export const Checkout = (props) => {
 
   return (
     <>
-      {!cartUuid && carts && cartsWithProducts.length === 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts.length === 0 && (
         <NotFoundSource
           content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
           btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
           onClickButton={handleSearchRedirect}
         />
       )}
-      {!cartUuid && carts && cartsWithProducts.length > 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts.length > 0 && (
         <CartsList>
           {cartsWithProducts.map(cart => (
             <CartItem
@@ -326,16 +346,17 @@ export const Checkout = (props) => {
         />
       )}
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
-      {currentCart?.products ? (
+      {currentCart?.products && (
         <UpsellingPage
           businessId={currentCart?.business_id}
           cartProducts={currentCart?.products}
+          business={currentCart?.business}
           handleUpsellingPage={handleUpsellingPage}
           openUpselling={openUpselling}
           canOpenUpselling={canOpenUpselling}
           setCanOpenUpselling={setCanOpenUpselling}
         />
-      ) : ''}
+      )}
     </>
   )
 }

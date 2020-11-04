@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const AccordionSection = styled.div`
   display: flex;
@@ -25,7 +25,16 @@ const AccordionStyled = styled.div`
   .accordion__icon {
     margin-left: auto;
     transition: transform 0.6s ease;
+    ${props => props.theme?.rtl && css`
+      margin-right: auto;
+      margin-left: initial;
+    `}
   }
+
+  @media (max-width: 410px){
+    flex-direction: column;
+  }
+
 `
 
 export const Accordion = (props) => {
@@ -54,6 +63,13 @@ export const WrapperProductImage = styled.div`
     max-height: 65px;
     height: 65px;
     width: 65px;
+  }
+
+  @media (max-width: 360px) {
+    max-width: 55px;
+    max-height: 55px;
+    height: 55px;
+    width: 55px;
   }
 `
 
@@ -89,6 +105,19 @@ export const ContentInfo = styled.div`
   margin-left: 10px;
   width: calc(65% - 60px);
 
+  @media (max-width: 410px) {
+    width: 60%;
+  }
+
+  @media (max-width: 380px) {
+    width: 50%;
+  }
+
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0px;
+  `}
+
   h3 {
     font-size: 18px;
     margin: 0px;
@@ -105,12 +134,21 @@ export const ContentInfo = styled.div`
       font-size: 14px;
     }
 
-    div span {
-      height: 20px;
-      svg {
-        font-size: 20px;
-        &:nth-child(1) {
-          margin-right: 3px;
+    div {
+      @media (max-width: 410px) {
+        display: flex;
+      }
+      span {
+        height: 20px;
+        svg {
+          font-size: 20px;
+          &:nth-child(1) {
+            margin-right: 3px;
+            ${props => props.theme?.rtl && css`
+              margin-left: 3px;
+              margin-right: 0px;
+            `}
+          }
         }
       }
     }
@@ -136,7 +174,10 @@ export const AccordionText = styled.div`
 
 export const ProductComment = styled.div`
   padding-left: 40px;
-
+  ${props => props.theme?.rtl && css`
+    padding-right: 40px;
+    padding-left: 0px;
+  `}
   p {
     font-weight: bold;
     margin: 0px;
@@ -149,6 +190,9 @@ export const ProductComment = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    ${props => props.theme?.rtl && css`
+      margin: 0px 40px 0px 20px
+    `}
   }
 `
 
@@ -187,6 +231,15 @@ export const ProductError = styled.div`
     font-size: 18px;
     text-align: right;
   }
+
+  @media(max-width: 410px){
+    justify-content: center;
+    width: 100%;
+    
+    span{
+      text-align: center
+    }
+  }
 `
 
 export const ProductActions = styled.div`
@@ -199,10 +252,22 @@ export const ProductActionsEdit = styled.span`
     font-size: 20px;
     margin-right: 5px;
     cursor: pointer;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
   }
 `
 
-export const ProductActionsDelete = styled(ProductActionsEdit)``
+export const ProductActionsDelete = styled(ProductActionsEdit)`
+  svg {
+    margin-right: 0px;
+  }
+
+  @media(max-width: 410px){
+    display: none;
+  }
+`
 
 export const ProductPriceSection = styled.div`
   width: 30%;
@@ -253,6 +318,10 @@ export const ProductSelect = styled.select`
   font-size: 20px;
   outline: none;
   margin-right: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 5px;
+    margin-right: 0px;
+  `}
 `
 
 export const ProductNotAvailable = styled.span`
@@ -264,6 +333,10 @@ export const ProductOptionsList = styled.ul`
 
   .suboption {
     margin-left: -25px;
+    ${props => props.theme?.rtl && css`
+      margin-right: -25px;
+      margin-left: 0px;
+  `}
   }
 
   p:nth-child(1) {
@@ -281,9 +354,17 @@ export const ProductOptionsList = styled.ul`
 
   li.ingredient {
     padding-left: 15px;
+    ${props => props.theme?.rtl && css`
+      padding-right: 15px;
+      padding-left: 0px;
+    `}
   }
 `
 
 export const ProductQuantity = styled.span`
   margin-right: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 5px;
+    margin-right: 0px;
+  `}
 `

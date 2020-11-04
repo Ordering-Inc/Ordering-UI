@@ -12,8 +12,11 @@ export const FacebookButton = styled(Button)`
   justify-content: center;
 
   svg {
-    margin-right: 5px;
     font-size: 28px;
     color: #1977F2;
+  }
+
+  div {
+    margin: 0 auto;
   }
 `

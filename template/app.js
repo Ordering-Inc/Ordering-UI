@@ -30,6 +30,7 @@ import { PagesList } from './Pages/PagesList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
+import { HelmetTags } from './components/HelmetTags'
 
 export const App = () => {
   const [{ auth, user }, sessionDispatch] = useSession()
@@ -70,15 +71,20 @@ export const App = () => {
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
+                <HelmetTags />
                 <Switch>
                   <Route exact path='/home'>
-                    <HomePage />
+                    {
+                      orderStatus.options?.address?.location
+                        ? <Redirect to='/search' />
+                        : <HomePage />
+                    }
                   </Route>
                   <Route exact path='/'>
                     {
-                    orderStatus.options?.address?.location
-                      ? <Redirect to='/search' />
-                      : <HomePage />
+                      orderStatus.options?.address?.location
+                        ? <Redirect to='/search' />
+                        : <HomePage />
                     }
                   </Route>
                   <Route exact path='/signup'>
@@ -170,14 +176,14 @@ export const App = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
-                  <Route exact path='/orders/:orderId'>
-                    {auth
-                      ? <OrderDetailsPage />
-                      : <Redirect to='/login' />}
-                  </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
                       ? <CheckoutPage />
+                      : <Redirect to='/login' />}
+                  </Route>
+                  <Route exact path='/orders/:orderId'>
+                    {auth
+                      ? <OrderDetailsPage />
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
@@ -185,6 +191,9 @@ export const App = () => {
                   </Route>
                   <Route exact path='/pages'>
                     <PagesList />
+                  </Route>
+                  <Route exact path='/:store'>
+                    <BusinessProductsList />
                   </Route>
                   <Route path='*'>
                     <PageNotFound />

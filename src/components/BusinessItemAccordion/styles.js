@@ -62,12 +62,25 @@ export const WrapperBusinessLogo = styled.div`
   max-height: 75px;
   height: 75px;
   width: 75px;
+  @media (max-width: 768px){
+    width: 55px;
+    height: 55px;
+    max-width: 55px;
+    max-height: 55px;
+    padding-bottom: 0 !important;
+  }
+  @media (max-width: 480px){
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+  }
 `
 
 const BusinessLogoStyled = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 75px;
+  height: 75px;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
@@ -76,6 +89,16 @@ const BusinessLogoStyled = styled.div`
   background-position: center;
   min-height: 75px;
   border-radius: 10px;
+  @media (max-width: 768px){
+    min-height: 55px;
+    width: 55px;
+    height: 55px;
+  }
+  @media (max-width: 480px){
+    min-height: 50px;
+    width: 50px;
+    height: 50px;
+  }
 `
 
 export const BusinessLogo = (props) => {
@@ -96,6 +119,10 @@ export const ContentInfo = styled.div`
   text-transform: capitalize;
   margin-left: 10px;
   width: 65%;
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0;
+  `}
   h1, span {
     margin: 0px;
   }
@@ -103,6 +130,8 @@ export const ContentInfo = styled.div`
   h1 {
     font-size: 20px;
     font-weight: 500;
+    margin-top: 0em !important;
+    margin-bottom: 0.7em !important;
   }
 
   span {
@@ -113,6 +142,16 @@ export const ContentInfo = styled.div`
     font-weight: 300;
     svg {
       margin-right: 3px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 3px;
+        margin-right: 0;
+    `}
+    }
+  }
+
+  @media (max-width: 768px){
+    h1{
+      margin-bottom: 0 !important
     }
   }
 
@@ -146,7 +185,7 @@ export const BusinessInfo = styled.div`
   }
 
   @media (max-width: 480px) {
-    width: 70%;
+    width: 60%;
   }
 `
 
@@ -194,6 +233,10 @@ export const BusinessActions = styled.div`
 
     &:not(:last-child) {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0;
+    `}
     }
   }
 `

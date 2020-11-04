@@ -1,11 +1,14 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const FormRedirect = styled.form`
   max-width: 800px;
   display: flex;
   flex-direction: column;
   padding-left: 10px;
-
+  ${props => props.theme?.rtl && css`
+    padding-right: 10px;
+    padding-left: 0px;
+  `}
   button {
     width: 100%;
     padding-top: 8px;

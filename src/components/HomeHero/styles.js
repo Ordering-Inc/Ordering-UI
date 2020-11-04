@@ -38,6 +38,9 @@ export const ContentWrapper = styled.div`
     justify-content: center;
     height: 100%;
     padding: 0px 0px 0px 40px;
+    ${props => props.theme?.rtl && css`
+      padding: 0px 40px 0px 0px;
+    `} 
     button {
       width: 180px;
     }
@@ -47,6 +50,7 @@ export const ContentWrapper = styled.div`
     }
     @media (max-width: 480px) {
       font-size: 40px;
+      width: 100%;
     }
 `
 
@@ -58,6 +62,9 @@ export const Title = styled.h1`
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #00000029;
   opacity: 1;
+  ${props => props.theme?.rtl && css`
+      text-align: right;
+  `} 
   @media (max-width: 480px) {
     font-size: 40px;
   }
@@ -71,6 +78,9 @@ export const Slogan = styled.p`
   color: #FFFFFF;
   opacity: 1;
   margin-bottom: 15px;
+  ${props => props.theme?.rtl && css`
+       text-align: right;
+    `} 
   @media (max-width: 480px) {
     font-size: 18px;
   }
@@ -101,7 +111,19 @@ export const WrapInput = styled.label`
     right: 0px;
     font-size: 22px;
     top: 8px;
+    ${props => props.theme?.rtl && css`
+      left: 0px;
+      right: initial
+  `}
   }
+
+  @media (max-width: 480px) {
+      svg{
+        top: 26px;
+        right: -18px;
+      }
+    }
+  
 
   ${({ withIcon }) => withIcon && css`
     width: calc(50% + 70px);
@@ -113,11 +135,19 @@ export const WrapInput = styled.label`
       bottom: 18px;
       width: 15px;
       /* background: url(${withIcon}) center / contain no-repeat; */
+      ${props => props.theme?.rtl && css`
+        left: 5px;
+        right: initial;
+     `}
     }
     @media (max-width: 480px) {
       &::before {
         right: 0px;
         bottom: 0px;
+         ${props => props.theme?.rtl && css`
+          left: 0px;
+          bottom: 0px
+       `}
       }
     }
   `}

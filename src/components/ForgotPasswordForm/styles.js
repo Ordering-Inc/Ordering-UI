@@ -4,7 +4,7 @@ export const ForgotPasswordContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  min-height: 100vh;
+  min-height: ${({ isPopup }) => isPopup ? '90vh' : '100vh'};
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -31,7 +31,7 @@ export const HeroSide = styled(Side)`
   align-items: center;
   color: ${props => props.theme.colors.primaryContrast};
   background-color:  ${props => props.theme.colors.primary};
-
+  padding-bottom: 5px;
   @media (max-width: 768px) {
     height: calc(50vh - 65px);
   }
@@ -56,7 +56,17 @@ export const TitleHeroSide = styled.div`
 
   @media (max-width: 576px) {
     h1 {
-      font-size: 32px;
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 410px) {
+    h1 {
+      font-size: 22px;
+    }
+    P {
+      margin-top: 5px;
+      font-size: 13px;
     }
   }
 `
@@ -77,7 +87,7 @@ export const FormSide = styled(Side)`
 `
 
 export const FormInput = styled.form`
-  width: 70%;
+  width: ${({ isPopup }) => isPopup ? '90%' : '70%'};
   display: flex;
   flex-direction: column;
 
@@ -109,6 +119,10 @@ export const RedirectLink = styled.div`
 
   span {
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
   }
 
   a {
@@ -122,7 +136,7 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: calc(70% - 20px);
+    width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(70% - 20px)'};
 
     @media (max-width: 480px) {
       width: calc(90% - 20px);
@@ -135,13 +149,5 @@ export const RedirectLink = styled.div`
 
   @media (max-width: 768px) {
     font-size: 17px;
-  }
-
-  @media (max-width: 410px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 360px) {
-    flex-direction: column;
   }
 `

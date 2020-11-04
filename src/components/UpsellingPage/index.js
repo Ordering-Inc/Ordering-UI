@@ -1,13 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { UpsellingPage as UpsellingPageController, useLanguage } from 'ordering-components'
 import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling, SkeletonContainer } from './styles'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../Modal'
+import { ProductForm } from '../ProductForm'
 
 const UpsellingPageUI = (props) => {
-  const { upsellingProducts, handleAddProductUpselling, handleUpsellingPage, openUpselling, canOpenUpselling, setCanOpenUpselling } = props
+  const {
+    upsellingProducts,
+    handleUpsellingPage,
+    openUpselling,
+    canOpenUpselling,
+    setCanOpenUpselling,
+    business
+  } = props
   const [, t] = useLanguage()
+  const [actualProduct, setActualProduct] = useState(null)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   useEffect(() => {
     if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
@@ -15,11 +25,19 @@ const UpsellingPageUI = (props) => {
     } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
       handleUpsellingPage()
     }
-  }, [upsellingProducts.loading])
+    if (upsellingProducts?.products?.length === 0 && !upsellingProducts.loading) {
+      handleUpsellingPage()
+    }
+  }, [upsellingProducts.loading, upsellingProducts?.products.length])
+
+  const handleFormProduct = (product) => {
+    setActualProduct(product)
+    setModalIsOpen(true)
+  }
 
   return (
     <>
-      {!canOpenUpselling ? '' : (
+      {!canOpenUpselling || upsellingProducts?.products?.length === 0 ? '' : (
         <Modal
           title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
           open={openUpselling}
@@ -42,7 +60,7 @@ const UpsellingPageUI = (props) => {
                               <h3 title={product.name}>{product.name}</h3>
                             </div>
                             <p>${product.price}</p>
-                            <Button color='primary' onClick={handleAddProductUpselling}>{t('ADD', 'Add')}</Button>
+                            <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
                           </Details>
                         </Item>
                       )) : (
@@ -70,6 +88,11 @@ const UpsellingPageUI = (props) => {
             </CloseUpselling>
 
           </Container>
+          {actualProduct && (
+            <Modal open={modalIsOpen} onClose={() => setActualProduct(null)} width='70%' padding='10px'>
+              <ProductForm product={actualProduct} businessId={actualProduct.api.businessId} businessSlug={business.slug} onSave={() => setModalIsOpen(false)} />
+            </Modal>
+          )}
         </Modal>
       )}
     </>

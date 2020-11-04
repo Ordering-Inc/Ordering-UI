@@ -26,6 +26,14 @@ export const LogoHeader = styled.div`
     height: 45px;
     margin: 0;
     vertical-align: middle;
+
+    @media (max-width: 768px) {
+      width: 150px;
+    }
+
+    @media (max-width: 576px) {
+      width: 45px;
+    }
   }
 
   img:nth-child(2) {
@@ -61,11 +69,20 @@ export const Menu = styled.div`
   }
 
   > :first-child {
-    margin-left: 10px;
+      margin-left: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 10px;
+      margin-left: 0px;
+    `}
   }
 
   > :last-child {
+    
     margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+    `}
   }
 
   @media (max-width: 820px) {
@@ -101,7 +118,18 @@ export const MenuLink = styled.a`
     color: ${props => props.theme.colors.primaryContrast};
     border-radius: 100px;
     padding: 10px 15px;
+
+    @media (max-width: 512px) {
+      padding: 5px 10px;
+    }
   `}
+
+  ${({ highlight }) => !highlight && css`
+    @media (max-width: 480px) {
+      display: none;
+    }
+  `}
+
 `
 
 export const HeaderInvert = styled(Header)`
@@ -127,7 +155,7 @@ export const SubMenu = styled(InnerHeader)`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 7px;
+    padding: 7px 20px 0px;
     box-sizing: border-box;
     margin: 0px;
   }

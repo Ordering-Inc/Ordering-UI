@@ -39,7 +39,8 @@ const SignUpFormUI = (props) => {
     formState,
     handleSuccessSignup,
     useLoginByCellphone,
-    useLoginByEmail
+    useLoginByEmail,
+    isPopup
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -89,14 +90,14 @@ const SignUpFormUI = (props) => {
   }
 
   return (
-    <SignUpContainer>
+    <SignUpContainer isPopup={isPopup}>
       <HeroSide>
         <TitleHeroSide>
           <h1>{t('TITLE_LOGIN', 'Welcome!')}</h1>
           <p>{t('SUBTITLE_LOGIN', 'Enter your personal details and start journey with us.')}</p>
         </TitleHeroSide>
       </HeroSide>
-      <FormSide>
+      <FormSide isPopup={isPopup}>
         <img src={theme?.images?.logos?.logotype} alt='Logo login' />
 
         {useLoginByCellphone && useLoginByEmail && (
@@ -109,7 +110,9 @@ const SignUpFormUI = (props) => {
         )}
         <FormInput
           noValidate
+          isPopup={isPopup}
           onSubmit={handleSubmit(onSubmit)}
+          isSkeleton={useChekoutFileds && validationFields.loading}
         >
           {
             !(useChekoutFileds && validationFields.loading) ? (
@@ -161,18 +164,18 @@ const SignUpFormUI = (props) => {
           <Button
             color='primary'
             type='submit'
-            disabled={formState.loading}
+            disabled={formState.loading || validationFields.loading}
           >
             {formState.loading ? t('LOADING') + '...' : t('SIGNUP', 'Sign up')}
           </Button>
         </FormInput>
         {elementLinkToLogin && (
-          <RedirectLink register>
+          <RedirectLink register isPopup={isPopup}>
             <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')}</span>
             {elementLinkToLogin}
           </RedirectLink>
         )}
-        <SocialButtons>
+        <SocialButtons isPopup={isPopup}>
           {configs?.facebook_id && (
             <FacebookLoginButton
               appId={configs?.facebook_id?.value}

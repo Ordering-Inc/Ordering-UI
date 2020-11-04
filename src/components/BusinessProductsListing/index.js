@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useLocation } from 'react-router-dom'
 import {
   BusinessAndProductList,
   useEvent,
-  useLanguage
+  useLanguage,
+  useOrder,
+  useSession
 } from 'ordering-components'
 
 import {
@@ -20,9 +23,12 @@ import { NotFoundSource } from '../NotFoundSource'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
+import { PageNotFound } from '../PageNotFound'
 import { ProductForm } from '../ProductForm'
+import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
+import { UpsellingPage } from '../UpsellingPage'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -42,15 +48,23 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateInitialRender,
     updateProductModal,
     onProductRedirect,
+    onCheckoutRedirect,
     handleChangeSearch
   } = props
 
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
+  const [{ carts }] = useOrder()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [events] = useEvent()
+  const [{ auth }] = useSession()
+  const location = useLocation()
+
+  const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -123,131 +137,163 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [openProduct])
 
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
+
   return (
-    <ProductsContainer>
-      {
-        !loading && business?.id && (
+    <>
+      <ProductsContainer>
+        {
+          !loading && business?.id && (
+            <>
+              <BusinessBasicInformation
+                businessState={businessState}
+              />
+              <WrapperSearch>
+                <SearchBar
+                  onSearch={handleChangeSearch}
+                  search={searchValue}
+                  placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                />
+              </WrapperSearch>
+              <BusinessProductsCategories
+                categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                categorySelected={categorySelected}
+                onClickCategory={handleChangeCategory}
+              />
+              <WrapContent>
+                <BusinessProductsList
+                  categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  category={categorySelected}
+                  categoryState={categoryState}
+                  businessId={business.id}
+                  errors={errors}
+                  onProductClick={onProductClick}
+                />
+              </WrapContent>
+            </>
+          )
+        }
+
+        <Modal
+          width='70%'
+          open={openProduct}
+          closeOnBackdrop
+          onClose={() => closeModalProductForm()}
+          padding='10px'
+        >
+
+          {productModal.loading && (
+            <ProductLoading>
+              <SkeletonItem>
+                <Skeleton height={45} />
+              </SkeletonItem>
+              <SkeletonItem>
+                <Skeleton height={45} />
+              </SkeletonItem>
+              <SkeletonItem>
+                <Skeleton height={45} />
+              </SkeletonItem>
+            </ProductLoading>
+          )}
+
+          {productModal.error && productModal.error.length > 0 && (
+            productModal.error.map((e, i) => (
+              <p key={i}>{t('ERROR', 'Error')}: [{e.message}]</p>
+            ))
+          )}
+
+          {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
+            <NotFoundSource
+              content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
+            />
+          )}
+          {(productModal.product || curProduct) && (
+            <ProductForm
+              businessSlug={business?.slug}
+              product={productModal.product || curProduct}
+              businessId={business?.id}
+              onSave={handlerProductAction}
+            />
+          )}
+        </Modal>
+        {loading && (
           <>
             <BusinessBasicInformation
-              businessState={businessState}
+              businessState={{ business: {}, loading: true }}
+              isSkeleton
             />
-            <WrapperSearch>
-              <SearchBar
-                onSearch={handleChangeSearch}
-                search={searchValue}
-                placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
-              />
-            </WrapperSearch>
             <BusinessProductsCategories
-              categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
-              categorySelected={categorySelected}
-              onClickCategory={handleChangeCategory}
+              categories={[]}
+              isSkeleton
             />
             <WrapContent>
               <BusinessProductsList
-                categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                categories={[]}
                 category={categorySelected}
                 categoryState={categoryState}
-                businessId={business.id}
-                errors={errors}
-                onProductClick={onProductClick}
+                isBusinessLoading={loading}
               />
             </WrapContent>
           </>
-        )
-      }
-
-      <Modal
-        width='70%'
-        open={openProduct}
-        closeOnBackdrop
-        onClose={() => closeModalProductForm()}
-      >
-
-        {productModal.loading && (
-          <ProductLoading>
-            <SkeletonItem>
-              <Skeleton height={45} />
-            </SkeletonItem>
-            <SkeletonItem>
-              <Skeleton height={45} />
-            </SkeletonItem>
-            <SkeletonItem>
-              <Skeleton height={45} />
-            </SkeletonItem>
-          </ProductLoading>
         )}
 
-        {productModal.error && productModal.error.length > 0 && (
-          productModal.error.map((e, i) => (
-            <p key={i}>{t('ERROR', 'Error')}: [{e.message}]</p>
-          ))
-        )}
-
-        {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
-          <NotFoundSource
-            content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
-          />
-        )}
-
-        {(productModal.product || curProduct) && (
-          <ProductForm
-            businessSlug={business?.slug}
-            product={productModal.product || curProduct}
-            businessId={business?.id}
-            onSave={handlerProductAction}
-          />
-        )}
-      </Modal>
-      {loading && (
-        <>
-          <BusinessBasicInformation
-            businessState={{ business: {}, loading: true }}
-            isSkeleton
-          />
-          <BusinessProductsCategories
-            categories={[]}
-            isSkeleton
-          />
-          <WrapContent>
-            <BusinessProductsList
-              categories={[]}
-              category={categorySelected}
-              categoryState={categoryState}
-              isBusinessLoading={loading}
+        {
+          !loading && business && !Object.keys(business).length && (
+            <NotFoundSource
+              content={t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}
+              btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+              onClickButton={props.handleSearchRedirect}
             />
-          </WrapContent>
-        </>
+          )
+        }
+
+        {
+          !loading && !business && location.pathname.includes('/store/') && (
+            <NotFoundSource
+              content={t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.')}
+              btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+              onClickButton={props.handleSearchRedirect}
+            />
+          )
+        }
+
+        {
+          !loading && !business && !location.pathname.includes('/store/') && (
+            <PageNotFound />
+          )
+        }
+
+        {error && error.length > 0 && (
+          <ProductsNotFound>
+            {error.map((e, i) => (
+              <p key={i}>{t('ERROR', 'Error')}: [{e?.message || e}]</p>
+            ))}
+          </ProductsNotFound>
+        )}
+      </ProductsContainer>
+      {currentCart?.products?.length > 0 && auth && (
+        <FloatingButton
+          btnText={t('VIEW_ORDER', 'View Order')}
+          btnValue={currentCart?.products?.length}
+          handleClick={() => setOpenUpselling(true)}
+        />
       )}
-
-      {
-        !loading && business && !Object.keys(business).length && (
-          <NotFoundSource
-            content={t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}
-            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-            onClickButton={props.handleSearchRedirect}
-          />
-        )
-      }
-
-      {
-        !loading && !business && (
-          <NotFoundSource
-            content={t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.')}
-            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-            onClickButton={props.handleSearchRedirect}
-          />
-        )
-      }
-
-      {error && error.length > 0 && (
-        <ProductsNotFound>
-          {error.map((e, i) => (
-            <p key={i}>{t('ERROR', 'Error')}: [{e?.message || e}]</p>
-          ))}
-        </ProductsNotFound>
+      {currentCart?.products && openUpselling && (
+        <UpsellingPage
+          businessId={currentCart?.business_id}
+          business={currentCart?.business}
+          cartProducts={currentCart?.products}
+          handleUpsellingPage={handleUpsellingPage}
+          openUpselling={openUpselling}
+          canOpenUpselling={canOpenUpselling}
+          setCanOpenUpselling={setCanOpenUpselling}
+        />
       )}
-    </ProductsContainer>
+    </>
   )
 }
 

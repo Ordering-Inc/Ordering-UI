@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { HeaderInvert } from '../Header/styles'
 
 export const HeaderItem = styled.div`
@@ -9,6 +9,10 @@ export const HeaderItem = styled.div`
 
   svg {
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `} 
   }
 
   ${HeaderInvert} & {

@@ -22,9 +22,9 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
-import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
+import { scrollTo } from '../../utils'
 
 const AddressListUI = (props) => {
   const {
@@ -48,6 +48,8 @@ const AddressListUI = (props) => {
   const openAddress = (address) => {
     setCurAddress(address)
     setAddessOpen(true)
+    const container = window.document.getElementsByClassName('form_edit')[0]
+    scrollTo(container, 100, 500)
   }
 
   const handleSaveAddress = (address) => {
@@ -135,7 +137,7 @@ const AddressListUI = (props) => {
                       <span>{address.internal_number} {address.zipcode}</span>
                     </div>
                   </div>
-                  <AddressItemActions>
+                  <AddressItemActions className='form'>
                     <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
                       <TiPencil />
                     </a>
@@ -173,7 +175,6 @@ const AddressListUI = (props) => {
             title={t('ADDRESS', 'Address')}
             open={!popover && addressOpen}
             onClose={() => setAddessOpen(false)}
-            OrderTypeSelectorHeader={OrderTypeSelectorHeader}
           >
             <AddressForm
               useValidationFileds

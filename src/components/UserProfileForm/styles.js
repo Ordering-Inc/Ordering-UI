@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const UserProfileContainer = styled.div`
   background-color: #F8F8F8;
@@ -49,14 +49,15 @@ export const Image = styled.div`
   cursor: -webkit-grab;
   cursor: grab;
 
-  > img {
+  img {
     width: 100%;
     border-radius: 50%;
     height: 100%;
     border: none;
     overflow: hidden;
   };
-  > div {
+
+  div {
     width: 100%;
     border-radius: 50%;
     height: 100%;
@@ -65,13 +66,21 @@ export const Image = styled.div`
   };
 
   @media (min-width: 480px) {
-    > img {
+    img {
     width: 100%;
     border-radius: 50%;
     height: 100%;
     border: none;
     overflow: hidden;
   };
+  }
+`
+
+export const SkeletonWrapper = styled.div`
+  span{
+    height: 100%;
+    position: relative;
+    top: -2.5px;
   }
 `
 
@@ -89,6 +98,10 @@ export const SideForm = styled.div`
   > *{
     margin: 30px 0;
     margin-left: 50px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 50px;
+      margin-left: 0;
+  `}
   }
   @media (max-width: 720px){
     width: 60%
@@ -97,8 +110,12 @@ export const SideForm = styled.div`
     width: 100%;
     > *{
     margin: 0;
-    margin-left: 0;
     margin-top: 20px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 0;
+  ` : css`
+      margin-left: 0;
+  `}
   }
   };
 `
@@ -109,6 +126,9 @@ export const UserData = styled.div`
   align-items: flex-start;
   text-align: left;
   height: 200px;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
   > * {
     margin: 5px 0;
     width: 75%;
@@ -126,6 +146,10 @@ export const UserData = styled.div`
 
 export const SavedPlaces = styled.div`
   width: 70%;
+  text-align: left;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
   h5{
     font-size: 1.2em
   }
@@ -137,7 +161,6 @@ export const SavedPlaces = styled.div`
   display: flex;
   flex-direction: column-reverse;
   }
-  text-align: left;
 
   @media (max-width: 480px){
     align-items: center;
@@ -145,6 +168,7 @@ export const SavedPlaces = styled.div`
     text-align: center;
     width: 100%;
     margin-top: 40px;
+    margin-bottom: 20px;
       > div{
       display: flex;
       flex-direction: column-reverse;
@@ -168,16 +192,23 @@ export const SavedPlaces = styled.div`
 export const FormInput = styled.form`
   text-align: left;
   height: 200px;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
   > *{
     margin-top: 10px;
     margin-right: 10px;
     padding: 10px 15px;
     width: 33%;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+  `}
   }
 
   > button {
     box-sizing: initial;
-    padding: 3px 15px;
+    padding: 5px 15px;
   }
 
   @media (max-width: 720px){
@@ -193,8 +224,12 @@ export const FormInput = styled.form`
     align-items: center;
     margin: 0 auto;
     > *{
-      margin-right: 0;
       margin-top: 20px;
+      ${props => props.theme?.rtl ? css`
+        margin-left: 0;
+      ` : css`
+        margin-right: 0;
+      `}
     }
     > input{
     padding: 10px 15px;
