@@ -1,6 +1,7 @@
 import React from 'react'
 import { BusinessesListing } from '../../../src/components/BusinessesListing'
 import { useEvent } from 'ordering-components'
+import { HelmetTags } from '../../components/HelmetTags'
 
 export const BusinessesList = (props) => {
   const [events] = useEvent()
@@ -16,6 +17,9 @@ export const BusinessesList = (props) => {
   }
 
   return (
-    <BusinessesListing {...businessListingProps} />
+    <>
+      <HelmetTags page='search' />
+      <BusinessesListing {...businessListingProps} />
+    </>
   )
 }

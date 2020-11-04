@@ -1,6 +1,7 @@
 import React from 'react'
 import { Cms as CmsController } from '../../../src/components/Cms'
 import { useParams, useHistory } from 'react-router-dom'
+import { HelmetTags } from '../../components/HelmetTags'
 
 export const Cms = (props) => {
   const { pageSlug } = useParams()
@@ -15,6 +16,9 @@ export const Cms = (props) => {
   }
 
   return (
-    <CmsController {...cmsProps} />
+    <>
+      <HelmetTags page='pages' />
+      <CmsController {...cmsProps} />
+    </>
   )
 }
