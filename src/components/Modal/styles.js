@@ -22,7 +22,7 @@ export const ModalDialog = styled.div`
   overflow: auto;
 
   @media (min-width: 769px) {
-    width: ${({ width }) => width || '80%'};
+    width: ${({ width }) => width || '50%'};
     max-height: 90vh;
     border-radius: 10px;
   }
