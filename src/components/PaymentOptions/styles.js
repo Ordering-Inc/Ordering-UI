@@ -35,6 +35,10 @@ export const PayCard = styled.div`
     margin-right: 0;
   `}
 
+  svg path {
+    fill: #000;
+  }
+
   @media (min-width: 351px) {
     width: calc(33% - 12px);
   }
@@ -48,7 +52,7 @@ export const PayCard = styled.div`
   }
 
   @media (min-width: 841px) {
-    width: calc(15% - 12px);
+    width: calc(18% - 12px);
   }
 
   svg {
