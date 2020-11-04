@@ -6,7 +6,7 @@ export const BusinessSearch = styled.div`
   justify-content: flex-end;
 
   input {
-    width: 200px;
+    width: 100%;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
     background-image: url(${props => props.theme?.images?.general?.searchIcon});
@@ -18,13 +18,10 @@ export const BusinessSearch = styled.div`
     `}
 
     @media (min-width: 681px) {
+      width: 200px;
       &:focus {
         width: 50%;
       }
-    }
-
-    @media (max-width: 680px) {
-      width: 100%;
     }
   }
 `

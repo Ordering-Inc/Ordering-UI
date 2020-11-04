@@ -6,18 +6,13 @@ export const FormActions = styled.div`
   justify-content: space-between;
   width: 100%;
   button {
-    width: 45%;
+    width: 47%;
     height: 45px;
-  }
-  @media (max-width: 480px) {
-    button {
-      width: 49%;
-    }
   }
 `
 
 export const FormControl = styled.form`
-  padding: 10px;
+  padding: 0px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -29,13 +24,13 @@ export const FormControl = styled.form`
     width: 100%;
     &.internal_number,
     &.zipcode {
-      width: 48%;
+      width: 100%;
     }
 
-    @media (max-width: 620px) {
+    @media (min-width: 621px) {
       &.internal_number,
       &.zipcode  {
-        width: 100%;
+        width: 48%;
       }
     }
   }
@@ -96,8 +91,8 @@ export const FormControl = styled.form`
     }
   }
 
-  @media (max-width: 480px) {
-    padding: 0px;
+  @media (min-width: 481px) {
+    padding: 10px;
   }
 `
 

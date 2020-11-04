@@ -8,11 +8,11 @@ export const Container = styled.div`
 `
 
 export const WrappContainer = styled.div`
-  width: 80%;
+  width: 90%;
   margin: auto;
 
-  @media (max-width: 512px) {
-    width: 90%;
+  @media (min-width: 513px) {
+    width: 80%;
   }
 `
 
@@ -22,12 +22,12 @@ export const UserDetailsContainer = styled.div`
   margin: 20px 0px;
   flex-wrap: wrap;
 
-  div.user {
-    width: 50%;
+  div.user,
+  div.business {
+    width: 100%;
   }
 
   div.business {
-    width: 50%;
     h1 {
       margin: 0px;
       font-size: 24px;
@@ -38,10 +38,10 @@ export const UserDetailsContainer = styled.div`
     }
   }
 
-  @media (max-width: 760px) {
+  @media (min-width: 761px) {
     div.user,
     div.business {
-      width: 100%;
+      width: 40%;
     }
   }
 `
@@ -72,7 +72,7 @@ export const WrapperPlaceOrderButton = styled.div`
   margin: 20px 0px 10px;
 
   button {
-    width: 70%;
+    width: 100%;
     padding: 5px 20px;
     cursor: pointer;
 
@@ -82,9 +82,9 @@ export const WrapperPlaceOrderButton = styled.div`
     }
   }
 
-  @media (max-width: 512px) {
+  @media (min-width: 513px) {
     button {
-      width: 100%;
+      width: 70%;
     }
   }
 `
@@ -110,41 +110,13 @@ export const WarningMessage = styled.div`
     ${props => props.theme?.rtl && css`
         right: 0;
         left: initial
-    `}  
+    `}
   }
 
   h1 {
     font-size: 20px;
     margin: 0px 60px;
     text-align: center;
-  }
-`
-
-export const NotFound = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 100vh;
-  margin: 10px auto;
-
-  h1 {
-    opacity: 0.5;
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    width: 80%;
-    h1 {
-      font-size: 24px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    h1 {
-      font-size: 20px;
-    }
   }
 `
 
@@ -159,11 +131,11 @@ export const NotFoundImage = styled.div`
 export const CartsList = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
   margin: auto;
 
-  @media (max-width: 380px) {
-    width: 90%;
+  @media (min-width: 381px) {
+    width: 80%;
   }
 `
 
@@ -183,35 +155,37 @@ export const CartItemWrapper = styled.div`
 `
 
 export const LogoWrapper = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
-  @media (max-width: 480px){
-    align-self: center;
-    width: 50px;
-    height: 50px;
-    min-height: 50px;
-    max-width: 50px;
+  align-self: center;
+  width: 50px;
+  height: 50px;
+  min-height: 50px;
+  max-width: 50px;
+
+  @media (min-width: 481px){
+    max-width: 75px;
+    max-height: 75px;
+    height: 75px;
+    width: 75px;
   }
 `
 
 const CartItemLogoStyled = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: contain;
   object-fit: cover;
   background-position: center;
-  min-height: 75px;
+  min-height: 50px;
   border-radius: 10px;
-  @media (max-width: 480px){
-    width: 50px;
-    height: 50px;
-    min-height: 50px;    
+
+  @media (min-width: 481px){
+    width: 100%;
+    height: 100%;
+    min-height: 75px;
   }
 `
 
@@ -268,15 +242,17 @@ export const CartItemActions = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  font-size: 14px;
 
   button {
     cursor: pointer;
+    font-size: 14px;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed;
     }
-    @media (max-width: 360px) {
-      font-size: 14px;
+    @media (min-width: 361px) {
+      font-size: 16px;
     }
   }
 
@@ -284,8 +260,8 @@ export const CartItemActions = styled.div`
     font-weight: bold;
   }
 
-  @media (max-width: 576px) {
-    font-size: 14px;
+  @media (min-width: 577px) {
+    font-size: 16px;
   }
 `
 

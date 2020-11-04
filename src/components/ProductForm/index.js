@@ -67,6 +67,7 @@ const ProductOptionsUI = (props) => {
 
   const closeModal = () => {
     setModalIsOpen(false)
+    setModalPageToShow('login')
   }
 
   const handleSuccessLogin = (user) => {

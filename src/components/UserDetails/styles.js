@@ -1,28 +1,28 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
+  margin-bottom: 25px;
   form {
     input {
-      width: 70%;
+      width: 100%;
       &:disabled {
         background-color: rgba(239, 239, 239, 0.3);
         cursor: not-allowed;
       }
     }
     button {
-      width: 70%;
+      width: 100%;
       &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
       }
     }
   }
-  @media (max-width: 760px) {
-    margin-bottom: 25px;
+  @media (min-width: 761px) {
     form {
       input,
       button {
-        width: 100%;
+        width: 85%;
       }
     }
   }

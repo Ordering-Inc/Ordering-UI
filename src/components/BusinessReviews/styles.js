@@ -59,8 +59,10 @@ export const Scores = styled.div`
   justify-content: space-between;
   flex: 1;
   text-align: center;
-  @media (max-width: 480px){
-    flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  @media (min-width: 481px){
+    flex-wrap: nowrap;
   }
 `
 
