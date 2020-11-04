@@ -12,7 +12,7 @@ export const OrderBill = styled.div`
   background-color: #FFF;
   table {
     width: 100%;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 300;
     tr td:nth-child(2) {
       font-weight: 500;
@@ -36,9 +36,9 @@ export const OrderBill = styled.div`
     }
   }
 
-  @media (max-width: 410px) {
+  @media (min-width: 411px) {
     table {
-      font-size: 16px;
+      font-size: 18px;
     }
   }
 `

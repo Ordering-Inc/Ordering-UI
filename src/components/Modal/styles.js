@@ -12,21 +12,19 @@ export const ModalDialog = styled.div`
   position: relative;
   background-color: ${({ isTransparent }) => isTransparent ? 'transparent' : '#FFF'};
   padding: ${({ padding }) => padding || '20px'};
-  width: ${({ width }) => width || '50%'};
-  border-radius: 10px;
+  width: 100vw;
+  border-radius: 0px;
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
-  max-height: 90vh;
+  height: 100vh;
+  max-height: 100vh;
   overflow: auto;
-  @media (max-width: 860px) {
-    width: 80%;
-  }
-  @media (max-width: 768px) {
-    width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0px;
+
+  @media (min-width: 769px) {
+    width: ${({ width }) => width || '80%'};
+    max-height: 90vh;
+    border-radius: 10px;
   }
 `
 
