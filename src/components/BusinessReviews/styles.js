@@ -4,14 +4,21 @@ export const ReviewOf = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  h3 {
+    margin: 0px;
+    font-size: 16px;
+  }
+
   > div {
     width: 30%;
   }
 `
 
 export const Content = styled.div`
-  > h3 {
-    color: "#D81212";
+  h3 {
+    color: ${props => props.theme.colors.primary};
+    margin: 0px;
   }
   min-height: 180px;
 `
@@ -26,7 +33,6 @@ export const ReviewContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   flex: 1;
-  padding: 30px 0;
 `
 
 export const Comments = styled.div`
@@ -68,11 +74,13 @@ export const Scores = styled.div`
 
 export const ScoreDiv = styled.div`
   border: 1px solid #ccc;
-  width: 22%;
+  width: 44%;
   height: auto;
   border: 1px solid #ccc;
   border-radius: 16px;
   padding: 10px 0px;
+  margin-bottom: 10px;
+  font-size: 14px;
 
   p {
     margin: 0px;
@@ -90,15 +98,6 @@ export const ScoreDiv = styled.div`
     `}
     }
   }
-
-  @media(max-width: 768px){
-    font-size: 14px;
-  }
-
-  @media(max-width: 480px){
-    width: 44%;
-    margin-bottom: 10px;
-  }
 `
 
 export const SkeletonContainer = styled.div`
@@ -107,7 +106,7 @@ export const SkeletonContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     flex: 1;
-    padding: 30px 0;
+
     > div{
       display: flex;
       width: 100%;

@@ -12,6 +12,7 @@ export const AccordionSection = styled.div`
 
 const AccordionStyled = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
@@ -31,8 +32,8 @@ const AccordionStyled = styled.div`
     `}
   }
 
-  @media (max-width: 410px){
-    flex-direction: column;
+  @media (min-width: 411px){
+    flex-direction: row;
   }
 
 `
@@ -53,23 +54,23 @@ export const Accordion = (props) => {
 }
 
 export const WrapperProductImage = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
+  max-width: 55px;
+  max-height: 55px;
+  height: 55px;
+  width: 55px;
 
-  @media (max-width: 410px) {
+  @media (min-width: 361px) {
     max-width: 65px;
     max-height: 65px;
     height: 65px;
     width: 65px;
   }
 
-  @media (max-width: 360px) {
-    max-width: 55px;
-    max-height: 55px;
-    height: 55px;
-    width: 55px;
+  @media (min-width: 411px) {
+    max-width: 75px;
+    max-height: 75px;
+    height: 75px;
+    width: 75px;
   }
 `
 
@@ -103,14 +104,10 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: calc(65% - 60px);
+  width: 55%;
 
-  @media (max-width: 410px) {
-    width: 60%;
-  }
-
-  @media (max-width: 380px) {
-    width: 50%;
+  @media (min-width: 411px) {
+    width: calc(65% - 60px);
   }
 
   ${props => props.theme?.rtl && css`
@@ -135,9 +132,8 @@ export const ContentInfo = styled.div`
     }
 
     div {
-      @media (max-width: 410px) {
-        display: flex;
-      }
+      display: flex;
+
       span {
         height: 20px;
         svg {
@@ -158,11 +154,11 @@ export const ContentInfo = styled.div`
 export const AccordionContent = styled.div`
   overflow: hidden;
   transition: max-height 0.6s ease;
-  width: 80%;
+  width: 100%;
   margin: auto;
 
-  @media (max-width: 480px) {
-    width: 100%;
+  @media (min-width: 481px) {
+    width: 80%;
   }
 `
 
@@ -199,7 +195,7 @@ export const ProductComment = styled.div`
 export const ProductInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 70%;
+  width: 100%;
 
   h1,
   h3 {
@@ -213,31 +209,31 @@ export const ProductInfo = styled.div`
     margin: 0px 5px;
   }
 
-  @media (max-width: 480px) {
+  @media (min-width: 411px) {
     width: 80%;
   }
 
-  @media (max-width: 410px) {
-    width: 100%;
+  @media (min-width: 481px) {
+    width: 70%;
   }
 `
 
 export const ProductError = styled.div`
-  width: 35%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   span {
     font-size: 18px;
-    text-align: right;
+    text-align: center;
   }
 
-  @media(max-width: 410px){
-    justify-content: center;
-    width: 100%;
-    
+  @media (min-width: 411px){
+    width: 35%;
+
     span{
-      text-align: center
+      text-align: right;
     }
   }
 `
@@ -260,24 +256,21 @@ export const ProductActionsEdit = styled.span`
 `
 
 export const ProductActionsDelete = styled(ProductActionsEdit)`
+  display: none;
   svg {
     margin-right: 0px;
   }
 
-  @media(max-width: 410px){
-    display: none;
+  @media (min-width: 411px){
+    display: block;
   }
 `
 
 export const ProductPriceSection = styled.div`
-  width: 30%;
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
-  @media (max-width: 480px) {
-    width: 20%;
-  }
 `
 
 export const ProductPrice = styled.div`
@@ -287,7 +280,7 @@ export const ProductPrice = styled.div`
 
   p,
   span {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   span {
@@ -302,22 +295,23 @@ export const ProductPrice = styled.div`
     cursor: pointer;
   }
 
-  @media (max-width: 512px) {
+  @media (min-width: 512px) {
     span,
     p {
-      font-size: 14px;
+      font-size: 18px;
     }
   }
 `
 
 export const ProductSelect = styled.select`
-  max-width: 60px;
+  max-width: 55px;
   height: 50px;
   border: 0;
   background-color: transparent;
-  font-size: 20px;
+  font-size: 17px;
   outline: none;
   margin-right: 5px;
+
   ${props => props.theme?.rtl && css`
     margin-left: 5px;
     margin-right: 0px;
