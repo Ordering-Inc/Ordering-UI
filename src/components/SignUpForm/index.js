@@ -46,12 +46,11 @@ const SignUpFormUI = (props) => {
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [, sessionDispatch] = useSession()
+  const [, { login }] = useSession()
   const theme = useTheme()
 
   const handleSuccessFacebook = (user) => {
-    sessionDispatch({
-      type: 'login',
+    login({
       user,
       token: user.session.access_token
     })
