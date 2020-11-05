@@ -25,7 +25,6 @@ import {
   OrderBusiness,
   BusinessWrapper,
   LogoWrapper,
-  HeaderLogo,
   BusinessLogo,
   BusinessInfo,
   ActionsBlock,
@@ -60,7 +59,7 @@ const OrderDetailsUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
 
-  const { order, loading, error, header } = props.order
+  const { order, loading, error } = props.order
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -100,9 +99,9 @@ const OrderDetailsUI = (props) => {
     <Container>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
-          <Header businessHeader={header && header.result.header}>
+          <Header businessHeader={order?.business?.header}>
             <HeaderInfo>
-              <HeaderLogo bgimage={theme?.images?.logos?.logotype} />
+              <img alt='Logotype' width='200px' height='90px' src={theme?.images?.logos?.logotype} />
               <HeaderText column>
                 <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
                 <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
@@ -141,7 +140,7 @@ const OrderDetailsUI = (props) => {
             <OrderInfo>
               <OrderData>
                 <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
-                <p>{order?.uuid}</p>
+                <p className='uuid'>{order?.uuid}</p>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>{order?.delivery_datetime}</p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
