@@ -27,7 +27,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
   return (
     <Select
       options={orderTypes}
-      defaultValue={orderState.options?.type || 1}
+      defaultValue={orderState?.options?.type || 1}
       onChange={(orderType) => handleChangeOrderType(orderType)}
     />
   )
