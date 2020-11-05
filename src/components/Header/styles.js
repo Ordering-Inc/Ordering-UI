@@ -59,6 +59,12 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
 
+  &.left-header {
+    > :first-child {
+      margin-left: 15px;
+    }
+  }
+
   > *:not(:last-child) {
     margin: 0 5px;
   }
@@ -105,7 +111,7 @@ export const MenuLink = styled.a`
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
     border-radius: 100px;
-    padding: 10px 15px;
+    padding: 5px 15px;
   `}
 `
 

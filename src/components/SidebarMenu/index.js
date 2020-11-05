@@ -63,6 +63,7 @@ export const SidebarMenu = (props) => {
     <Container auth={auth}>
       <IconContent
         isHome={isHome}
+        aria-label='menu'
         onClick={() => actionSidebar(true)}
       >
         <IosMenu />
@@ -73,6 +74,7 @@ export const SidebarMenu = (props) => {
       >
         <MenuClose
           isHome={isHome}
+          aria-label='close'
           onClick={() => actionSidebar(false)}
         >
           <MdClose />

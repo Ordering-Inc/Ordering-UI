@@ -95,6 +95,7 @@ const ForgotPasswordUI = (props) => {
           <Input
             type='text'
             name='email'
+            aria-label='email'
             spellcheck='false'
             placeholder={t('EMAIL')}
             onChange={(e) => hanldeChangeInput(e)}
