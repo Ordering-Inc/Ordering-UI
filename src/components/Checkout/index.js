@@ -20,7 +20,7 @@ import {
   CartItemLogo,
   CartItemInfo,
   CartItemActions,
-  InvalidAddress
+  WarningText
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -191,9 +191,15 @@ const CheckoutUI = (props) => {
         )}
 
         {!cart?.valid_address && (
-          <InvalidAddress>
+          <WarningText>
             {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
-          </InvalidAddress>
+          </WarningText>
+        )}
+
+        {!paymethodSelected && (
+          <WarningText>
+            {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
+          </WarningText>
         )}
 
         {/* {error && error?.length > 0 && (
