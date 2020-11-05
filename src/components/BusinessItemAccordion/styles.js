@@ -178,7 +178,7 @@ export const BusinessTotal = styled.div`
   align-items: center;
 
   p {
-    font-size: 20px;
+    font-size: 18px;
     margin: 0px 5px;
     font-weight: 300;
 
