@@ -116,7 +116,7 @@ export const ContentInfo = styled.div`
   `}
 
   h3 {
-    font-size: 18px;
+    font-size: 14px;
     margin: 0px;
     font-weight: 600;
   }
@@ -147,6 +147,12 @@ export const ContentInfo = styled.div`
           }
         }
       }
+    }
+  }
+
+  @media (min-width: 577px) {
+    h3 {
+      font-size: 18px;
     }
   }
 `
