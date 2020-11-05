@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components'
 
+export const BusinessReviewsContainer = styled.div`
+  width: 100%;
+  overflow-x: hidden;
+`
+
 export const ReviewOf = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
+  justify-content: space-between;
+  margin: 10px 0px; 
   h3 {
     margin: 0px;
     font-size: 16px;
@@ -13,18 +18,78 @@ export const ReviewOf = styled.div`
   > div {
     width: 30%;
   }
+
+  span {
+    display: none;
+    width: 30%;
+    margin-right: 5px;
+    > div {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 480px){
+    span{
+      display: block;
+    } 
+  }
+`
+
+export const WrapperStars = styled.div`
+  width: 40%;
+  text-align: right;
+  color: ${props => props.theme.colors.primary};
+  svg{
+    font-size: 28px;
+    vertical-align: bottom;
+  }
+  @media (min-width: 480px){
+    display: none;
+  }
+`
+
+export const WrapperSelect = styled.div`
+  width: 95%;
+  margin: 10px 0px;
+  > div {
+    width: 100%;
+  }
+  @media (min-width: 480px){
+    width: 45%;
+    display: none;
+  }
 `
 
 export const Content = styled.div`
-  h3 {
-    color: ${props => props.theme.colors.primary};
-    margin: 0px;
-  }
+
   min-height: 180px;
+  
+  h3{
+    display: none;
+  }
+
+  @media (min-width: 480px){
+    h3 {
+      display: block;
+      color: ${props => props.theme.colors.primary};
+      margin: 0px;
+      svg{
+        font-size: 26px;
+        vertical-align: text-top;
+      }
+    }
+  }
+`
+
+export const Review = styled.div`
+  margin: 20px 0;
+  @media (min-width: 480px){
+    margin: 40px 0;
+  }
 `
 
 export const ReviewsNotFound = styled.h2`
-  margin-top: 50px;
+  margin: auto;
 `
 
 export const ReviewContainer = styled.div`
@@ -32,7 +97,6 @@ export const ReviewContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  flex: 1;
 `
 
 export const Comments = styled.div`
@@ -43,12 +107,18 @@ export const Comments = styled.div`
   width: 100%;
   overflow: hidden;
 
+  h4 {
+    margin: 10px 0 5px 0;
+  }
+
   div p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0;
     svg {
       margin-right: 5px;
+      font-size: 24px;
       ${props => props.theme?.rtl && css`
         margin-left: 5px;
         margin-right: 0;
@@ -57,30 +127,40 @@ export const Comments = styled.div`
   }
 `
 export const Comment = styled.div`
-  width: 60%;
+  width: 100%;
+  @media (min-width: 480px){
+    width: 60%;
+  }
 `
+
+export const ScoresContainer = styled.div`
+  overflow-x: auto;
+`
+
 export const Scores = styled.div`
   display: flex;
-  width: 100%;
   justify-content: space-between;
-  flex: 1;
   text-align: center;
-  flex-wrap: wrap;
+  width: 600px;
+  margin: 10px auto;
 
-  @media (min-width: 481px){
-    flex-wrap: nowrap;
+  @media (min-width: 768px){
+    width: 100%;
   }
 `
 
 export const ScoreDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: 1px solid #ccc;
-  width: 44%;
+  width: 20%;
   height: auto;
   border: 1px solid #ccc;
   border-radius: 16px;
   padding: 10px 0px;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 16px;
 
   p {
     margin: 0px;
@@ -92,6 +172,7 @@ export const ScoreDiv = styled.div`
     align-items: center;
     svg {
       margin-right: 5px;
+      font-size: 18px;
       ${props => props.theme?.rtl && css`
        margin-left: 5px;
        margin-right: 0;
