@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css, useTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -24,9 +24,11 @@ const HeaderStyled = styled.div`
   object-fit: cover;
   border-radius: 16px;
   max-height: 350px;
+  background-position: bottom;
 
-  @media (max-width: 768px) {
-    background-position: bottom;
+
+  @media (min-width: 768px) {
+    background-position: initial;
   }
 `
 
@@ -46,28 +48,21 @@ export const HeaderInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
+  width: 100%;
   padding: 20px 20px 30px;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
-  ${props => props.theme?.rtl && css`
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  `}
+  border-radius: 16px;
+  min-height: 300px;
 
-  @media (max-width: 660px) {
+  @media (min-width: 480px) {
     width: 55%;
   }
 
-  @media (max-width: 480px) {
-    width: 100%;
-    border-radius: 16px;
+  @media (min-width: 678px) {
+    width: 50%;
   }
 
   @media (min-width: 768px) {
-    min-height: 300px;
+    min-height: 100%;
   }
 `
 
@@ -84,11 +79,11 @@ export const HeaderLogo = styled.div`
   background-repeat: no-repeat, repeat;
   background-size: contain;
   object-fit: cover;
-  min-height: 75px;
+  min-height: 60px;
   border-radius: 10px;
 
-  @media (max-width: 660px) {
-    min-height: 60px;
+  @media (min-width: 480px) {
+    min-height: 75px;
   }
 `
 
@@ -96,7 +91,7 @@ export const HeaderText = styled.div`
   display: flex;
   color: ${props => props.theme.colors.primaryContrast};
   text-align: center;
-  margin: 0px 20px;
+  
 
   ${({ column }) => column && css`
     flex-direction: column;
@@ -108,17 +103,22 @@ export const HeaderText = styled.div`
 
   h1 {
     margin: 0px;
-    font-size: 24px;
+    font-size: 20px;
   }
 
-  @media (max-width: 576px) {
-    margin: 0px;
+  p {
+      font-size: 14px;
+  }
+
+  @media (min-width: 480px) {
+    margin: 0px 20px;
 
     h1 {
-      font-size: 20px;
+      font-size: 24px;
     }
+
     p {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 `
@@ -126,10 +126,10 @@ export const HeaderText = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 80px;
+  margin: 10px 0px;
 
-  @media (max-width: 768px) {
-    margin: 10px 0px;
+  @media (min-width: 768px) {
+    margin: 10px 80px;
   }
 `
 
@@ -184,7 +184,7 @@ export const BusinessInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 75%;
+  width: 65%;
   h1,
   p {
     margin: 3px 15px;
@@ -201,8 +201,8 @@ export const BusinessInfo = styled.div`
     opacity: 0.8;
   }
 
-  @media (max-width: 380px) {
-    width: 65%;
+  @media (min-width: 380px) {
+    width: 75%;
   }
 `
 
@@ -211,6 +211,7 @@ export const ActionsBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-direction: column;
   > * {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
@@ -219,15 +220,15 @@ export const ActionsBlock = styled.div`
   `}
   }
   svg {
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
   }
 
-  @media (max-width: 390px) {
-    flex-direction: column;
+  @media (min-width: 380px) {
+    flex-direction: row;
 
     svg {
-      font-size: 20px;
+      font-size: 24px;
     }
   }
 `
@@ -240,7 +241,7 @@ export const OrderInfo = styled.div`
 `
 
 export const OrderData = styled.div`
-  width: 90%;
+  width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -249,6 +250,10 @@ export const OrderData = styled.div`
   }
   h1 {
     margin-bottom: 5px;
+    font-size: 24px;
+  }
+  p {
+    font-size: 16px;
   }
   p:nth-child(1) {
     opacity: 0.8;
@@ -257,21 +262,21 @@ export const OrderData = styled.div`
     font-weight: bold;
   }
 
-  @media (max-width: 576px) {
+  @media (min-width: 410px) {
+    h1 {
+      font-size: initial;
+    }
+    p {
+      font-size: initial;
+    }
+  }
+
+  @media (min-width: 480px) {
     width: 80%;
   }
 
-  @media (max-width: 480px) {
-    width: 75%;
-  }
-
-  @media (max-width: 410px) {
-    h1 {
-      font-size: 24px;
-    }
-    p {
-      font-size: 16px;
-    }
+  @media (min-width: 578px) {
+    width: 90%;
   }
 `
 
@@ -293,7 +298,8 @@ export const StatusBar = (props) => {
 }
 
 export const OrderStatus = styled.div`
-  max-width: 15%;
+  width: 25%;
+  max-width: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -306,28 +312,28 @@ export const OrderStatus = styled.div`
     border-radius: 10px;
     font-weight: bold;
     text-transform: uppercase;
+    font-size: 13px;
   }
 
-  @media (max-width: 576px) {
+  @media (min-width: 410px) {
     width: 20%;
     max-width: 20%;
-  }
-
-  @media (max-width: 410px) {
-    width: 25%;
-    max-width: 25%;
 
     span {
-      font-size: 13px;
+      font-size: initial;
     }
+  }
+
+  @media (min-width: 578px) {
+    width: 100%;
   }
 `
 
 export const StatusImage = styled.div`
   img {
     display: flex;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     box-sizing: border-box;
     position: relative;
     background-repeat: no-repeat, repeat;
@@ -337,10 +343,10 @@ export const StatusImage = styled.div`
     margin-top: 15px;
   }
 
-  @media (max-width: 410px) {
+  @media (min-width: 410px) {
     img {
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
     }
   }
 `
@@ -447,7 +453,7 @@ export const OrderBill = styled.div`
   align-items: center;
   flex-direction: column;
   table {
-    width: 80%;
+    width: 90%;
     font-size: 18px;
     tr td:nth-child(2) {
       text-align: right;
@@ -482,15 +488,15 @@ export const ReviewsAction = styled.div`
   margin: 20px 0px;
 
   button {
-    width: 70%;
+    width: 100%;
     padding: 5px 20px;
     color: #FFF;
     cursor: pointer;
   }
 
-  @media (max-width: 512px) {
+  @media (min-width: 480px) {
     button {
-      width: 100%;
+      width: 70%;
     }
   }
 `

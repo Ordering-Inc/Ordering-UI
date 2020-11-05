@@ -24,13 +24,13 @@ export const WrapperItems = styled.div`
   width: 100%;
 
   button.addcard {
-    width: 60%;
+    width: 100%;
     margin-top: 20px;
     padding-top: 8px;
     padding-bottom: 8px;
 
-    @media (max-width: 380px) {
-      width: 100%;
+    @media (min-width: 381px) {
+      width: 60%;
     }
   }
 `

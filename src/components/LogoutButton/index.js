@@ -13,10 +13,16 @@ import {
 } from '../SidebarMenu/styles'
 
 const LogoutButtonUI = (props) => {
+  const { onCustomClick } = props
   const [, t] = useLanguage()
 
+  const handleLogOutClick = () => {
+    props.handleLogoutClick()
+    onCustomClick && onCustomClick()
+  }
+
   return (
-    <MenuLink onClick={props.handleLogoutClick}>
+    <MenuLink onClick={handleLogOutClick}>
       <WrappContent>
         <MenuLinkIcon>
           <FaSignOutAlt />

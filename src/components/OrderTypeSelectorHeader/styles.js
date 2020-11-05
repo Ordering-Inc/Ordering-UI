@@ -9,6 +9,6 @@ export const Option = styled.div`
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
       margin-right: 0px;
-    `} 
+    `}
   }
 `

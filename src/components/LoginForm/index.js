@@ -126,6 +126,7 @@ const LoginFormUI = (props) => {
               <Input
                 type='email'
                 name='email'
+                aria-label='email'
                 placeholder={t('EMAIL')}
                 ref={register({
                   required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
@@ -141,6 +142,7 @@ const LoginFormUI = (props) => {
               <Input
                 type='tel'
                 name='cellphone'
+                aria-label='cellphone'
                 placeholder='Cellphone'
                 ref={register({
                   required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
@@ -151,6 +153,7 @@ const LoginFormUI = (props) => {
             <Input
               type='password'
               name='password'
+              aria-label='password'
               placeholder={t('PASSWORD')}
               ref={register({
                 required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),

@@ -14,7 +14,7 @@ export const Option = styled.div`
 
   ${props => props.selected && css`
     background-color: ${darken(0.07, '#CCC')};
-  
+
     &:hover {
       background-color: ${darken(0.07, '#CCC')};
     }
@@ -72,8 +72,9 @@ export const Options = styled.div`
 `
 
 export const Selected = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 9px;
+  padding-right: 9px;
+  font-size: 13px;
   cursor: pointer;
   position: relative;
   display: flex;
@@ -90,10 +91,9 @@ export const Selected = styled.div`
   user-select: none;
   z-index: 11;
 
-  @media (max-width: 380px) {
-    padding-left: 9px;
-    padding-right: 9px;
-    font-size: 13px;
+  @media (min-width: 381px) {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 `
 
@@ -105,8 +105,8 @@ export const Select = styled.div`
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;
-  background-color: #CCC;
-  color: #333;
+  background-color: ${({ isHome }) => isHome ? 'rgba(247,247,247,0.3)' : '#CCC'} !important;
+  color: ${({ isHome }) => isHome ? '#FFF' : '#333'} !important;
   position: relative;
 
   &:disabled {
@@ -131,6 +131,10 @@ export const Chevron = styled.div`
 
 export const Header = styled.div`
   flex: 1;
+
+  svg {
+    font-size: 18px;
+  }
 `
 
 export const SelectImage = styled.div`

@@ -38,12 +38,12 @@ export const BusinessContent = styled.div`
   background-color: #FFF;
   padding: 10px;
   border-radius: 10px;
-  margin: 20px;
+  margin: 0px 1px 1px;
   max-height: 75px;
   width: 340px;
 
-  @media (max-width: 380px) {
-    margin: 0px 1px 1px;
+  @media (min-width: 381px) {
+    margin: 20px;
   }
 `
 
@@ -94,6 +94,7 @@ export const BusinessInfoItem = styled.div`
     padding: 0px 16px 0px 5px;
   `}
   div {
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
 
@@ -142,8 +143,8 @@ export const BusinessInfoItem = styled.div`
       }
     }
 
-    @media (max-width: 480px) {
-      font-size: 14px;
+    @media (min-width: 481px) {
+      font-size: 16px;
     }
   }
 `

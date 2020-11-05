@@ -11,7 +11,6 @@ export const Container = styled.div`
       position: relative;
       p {
         position: absolute;
-        right: 0;
         height: 15px;
         width: 15px;
         margin: 0;
@@ -21,6 +20,11 @@ export const Container = styled.div`
         justify-content: center;
         align-items: center;
         font-size: 10px;
+        ${props => props.theme?.rtl ? css`
+          left: 0;
+        ` : css`
+          right: 0;
+        `}
       }
       svg {
         color: ${props => props.theme.colors.primary};
@@ -36,6 +40,10 @@ export const Container = styled.div`
 
     svg {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0px;
+      `}
     }
 
     ${HeaderInvert} & {
@@ -50,6 +58,10 @@ export const Container = styled.div`
 
     svg {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0;
+      `}
     }
 
     ${HeaderInvert} & {

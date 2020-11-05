@@ -1,16 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  padding: 40px 20px 0px;
+
   div:not(:last-child) {
     padding-bottom: 5px;
   }
 
   @media (min-width: 769px) {
     margin-bottom: 10px;
-  }
-
-  @media (max-width: 768px) {
-    padding: 50px 20px 0px;
   }
 `
 

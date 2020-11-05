@@ -64,13 +64,13 @@ const CartUI = (props) => {
 
   const handleClickCheckout = () => {
     events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
-    onClickCheckout()
+    onClickCheckout && onClickCheckout()
   }
 
   const handleStoreRedirect = (slug) => {
     events.emit('go_to_page', { page: 'business', params: { store: slug } })
     if (windowSize.width <= 768) {
-      onClickCheckout()
+      onClickCheckout && onClickCheckout()
     }
   }
 

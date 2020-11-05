@@ -2,50 +2,47 @@ import styled, { css } from 'styled-components'
 
 export const ForgotPasswordContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: ${({ isPopup }) => isPopup ? '100vh' : 'calc(100vh - 97px)'};
   display: flex;
-  min-height: ${({ isPopup }) => isPopup ? '90vh' : '100vh'};
+  flex-direction: column;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    height: 100%;
+    min-height: ${({ isPopup }) => isPopup ? '90vh' : 'calc(100vh - 65px);'};
   }
 `
 const Side = styled.div`
   display: flex;
-
-  @media (min-width: 1400px) {
-    height: calc(100vh - 65px);
-  }
-
-  @media (max-width: 992px) {
-    width: 50%;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+  width: 100%;
 `
 export const HeroSide = styled(Side)`
-  width: 55%;
+  height: ${({ isPopup }) => isPopup ? '50vh' : 'calc(40vh - 65px)'};
   justify-content: center;
   align-items: center;
   color: ${props => props.theme.colors.primaryContrast};
   background-color:  ${props => props.theme.colors.primary};
   padding-bottom: 5px;
-  @media (max-width: 768px) {
-    height: calc(50vh - 65px);
+
+  @media (min-width: 768px) {
+    width: 55%;
+    height: ${({ isPopup }) => isPopup ? 'auto' : 'calc(100vh - 65px)'};
   }
 `
 
 export const TitleHeroSide = styled.div`
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 
   h1 {
-    font-size: 52px;
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 13px;
   }
 
   h1,
@@ -54,35 +51,30 @@ export const TitleHeroSide = styled.div`
     color: #FFF;
   }
 
-  @media (max-width: 576px) {
+  @media (min-width: 768px) {
     h1 {
-      font-size: 30px;
+      font-size: 50px;
     }
-  }
 
-  @media (max-width: 410px) {
-    h1 {
-      font-size: 22px;
-    }
-    P {
-      margin-top: 5px;
-      font-size: 13px;
+    p {
+      font-size: 18px;
     }
   }
 `
 
 export const FormSide = styled(Side)`
-  width: 45%;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  margin: 15px 0;
 
   img {
     width: 200px;
   }
 
-  @media (max-width: 768px) {
-    margin: 20px 0px;
+  @media (min-width: 768px) {
+    width: 45%;
+    margin: auto;
+    font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }
 `
 
@@ -105,10 +97,6 @@ export const FormInput = styled.form`
     margin-top: 10px;
     padding: 5px;
   }
-
-  @media (max-width: 992px) {
-    width: 90%;
-  }
 `
 
 export const RedirectLink = styled.div`
@@ -116,9 +104,13 @@ export const RedirectLink = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin: 0px;
+  font-size: 17px;
 
   span {
     margin-right: 5px;
+
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
       margin-right: 0px;
@@ -136,18 +128,21 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(70% - 20px)'};
+    width: calc(90% - 20px);
 
-    @media (max-width: 480px) {
-      width: calc(90% - 20px);
+    @media (min-width: 481px) {
+      width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
     }
   `}
 
-  @media (max-width: 810px) {
-    font-size: 14px;
+  @media (min-width: 768px) {
+    ${({ isPopup }) => isPopup && css`
+      flex-direction: row;
+      font-size: 13px;
+    `};
   }
 
-  @media (max-width: 768px) {
-    font-size: 17px;
+  @media (min-width: 992px) {
+    flex-direction: row;
   }
 `

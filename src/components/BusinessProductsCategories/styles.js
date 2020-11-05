@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const CategoriesContainer = styled.div`
   display: flex;
   overflow-x: auto;
-  padding: 15px;
+  padding: 5px;
   background: #F8F8F8;
   z-index: 1000;
   position: sticky;
@@ -17,7 +17,7 @@ export const CategoriesContainer = styled.div`
     overflow: hidden;
   }
 
-  @media (max-width: 380px) {
-    padding: 5px;
+  @media (min-width: 381px) {
+    padding: 15px;
   }
 `

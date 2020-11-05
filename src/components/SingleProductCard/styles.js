@@ -6,7 +6,7 @@ export const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(33% - 40px);
+  width: calc(100% - 40px);
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
@@ -15,11 +15,12 @@ export const CardContainer = styled.div`
 
   background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
 
-  @media (max-width: 992px) {
+  @media (min-width: 681px) {
     width: calc(50% - 40px);
   }
-  @media (max-width: 680px) {
-    width: calc(100% - 40px);
+
+  @media (min-width: 993px) {
+    width: calc(33% - 40px);
   }
 `
 
@@ -42,13 +43,13 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 250px;
+  max-width: calc(100% - 90px);
   > * {
     margin: 5px;
   }
 
   h1 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '500'};
     text-align: left;
     color: #263238;
@@ -58,7 +59,6 @@ export const CardInfo = styled.div`
   }
 
   p {
-    font-size: 16px;
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};
     text-align: left;
     ${props => props.theme?.rtl && css`
@@ -74,20 +74,23 @@ export const CardInfo = styled.div`
   span {
     color: ${({ soldOut, theme }) => soldOut ? lighten(0.05, theme.colors.primary) : theme.colors.primary};
     font-weight: bold;
-    font-size: 15px;
   }
 
-  @media (max-width: 1200px) {
-    max-width: 210px;
+  p, span {
+    font-size: 13px;
   }
 
-  @media (max-width: 360px) {
-    max-width: 170px;
+  @media (min-width: 1024px) {
     h1 {
+      font-size: 18px;
+    }
+
+    p {
       font-size: 16px;
     }
-    p, span {
-      font-size: 13px;
+
+    span {
+      font-size: 15px;
     }
   }
 `

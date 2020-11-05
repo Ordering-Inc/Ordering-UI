@@ -132,14 +132,20 @@ export const ProductItemAccordion = (props) => {
             {windowSize.width <= 410 && (
               <span>
                 <p>{parsePrice(product.total || product.price)}</p>
-                <div>
-                  <span ref={productActionsEdit}>
-                    <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
-                  </span>
-                  <span ref={productActionsDelete}>
-                    <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
-                  </span>
-                </div>
+                {isCartProduct && (
+                  <div>
+                    {onEditProduct && (
+                      <span ref={productActionsEdit}>
+                        <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
+                      </span>
+                    )}
+                    {onDeleteProduct && (
+                      <span ref={productActionsDelete}>
+                        <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
+                      </span>
+                    )}
+                  </div>
+                )}
               </span>
             )}
           </ContentInfo>

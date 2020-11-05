@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {useOrder} from 'ordering-components'
+import { useOrder } from 'ordering-components'
 import BsChevronDown from '@meronex/icons/bs/BsChevronDown'
 
 import {
@@ -20,6 +20,7 @@ export const Select = (props) => {
     notAsync
   } = props
 
+  const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(option => option.value === defaultValue)
   const [selectedOption, setSelectedOption] = useState(defaultOption)
@@ -60,7 +61,11 @@ export const Select = (props) => {
   }
 
   return (
-    <SelectInput onClick={handleSelectClick} disabled={orderState.loading}>
+    <SelectInput
+      isHome={isHome}
+      disabled={orderState.loading}
+      onClick={handleSelectClick}
+    >
       {
         !selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>
       }
