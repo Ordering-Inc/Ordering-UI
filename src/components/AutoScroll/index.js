@@ -6,10 +6,11 @@ import { DivContainer } from './styles'
 
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, categories, container }) => {
+export const AutoScroll = ({ children, categories, container, modal }) => {
   const { width } = useWindowSize()
   const [categoriesElement, setCategoriesElement] = useState([])
   const [theme] = useTheme()
+
   useEffect(() => {
     const containerElement = document.getElementById(container)
       .addEventListener('scroll', handleScroll)
@@ -28,8 +29,8 @@ export const AutoScroll = ({ children, categories, container }) => {
   const handleScroll = () => {
     const containerElement = document.getElementById(container)
     const categoriesElement = document.getElementById(categories)
-    const botonRight = document.getElementsByClassName('right')[0]
-    const botonLeft = document.getElementsByClassName('left')[0]
+    const botonRight = document.getElementById('right-autoscroll')
+    const botonLeft = document.getElementById('left-autoscroll')
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
         if ((containerElement.scrollLeft * -1) < 40) {
@@ -75,13 +76,13 @@ export const AutoScroll = ({ children, categories, container }) => {
   }
 
   return (
-    <DivContainer>
+    <DivContainer modal={modal}>
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack className='left' onClick={() => scrolling(true)} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack id='left-autoscroll' onClick={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowForward className='right' onClick={() => scrolling()} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowForward id='right-autoscroll' onClick={() => scrolling()} /> : ''
       }
     </DivContainer>
   )

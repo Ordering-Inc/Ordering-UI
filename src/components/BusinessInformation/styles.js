@@ -204,12 +204,11 @@ export const ScheduleContainer = styled.div`
   width: 100%;
   margin: auto;
   display: flex;
-  overflow: auto;
-  justify-content: space-between;
-
-  @media (min-width: 769px) {
-    width: 90%;
+  overflow-x: auto;
+  > div {
+    width: 100%;
   }
+
 `
 
 export const ScheduleBlock = styled.div`
