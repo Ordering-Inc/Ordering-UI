@@ -33,18 +33,17 @@ import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
 
 export const App = () => {
-  const [{ auth, user }, sessionDispatch] = useSession()
+  const [{ auth, user, loading }, { login }] = useSession()
   const [orderStatus] = useOrder()
   const [, t] = useLanguage()
-  const [loaded, setLoaded] = useState(!auth)
+  const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
 
   const handleSuccessSignup = (user) => {
-    sessionDispatch({
-      type: 'login',
+    login({
       user,
       token: user.session.access_token
     })
@@ -55,6 +54,12 @@ export const App = () => {
       setLoaded(true)
     }
   }, [orderStatus])
+
+  useEffect(() => {
+    if (!loading) {
+      setLoaded(!auth)
+    }
+  }, [loading])
 
   return (
     <>

@@ -57,7 +57,7 @@ const ProductOptionsUI = (props) => {
   const { product, loading, error } = productObject
 
   const windowSize = useWindowSize()
-  const [{ auth }, sessionDispatch] = useSession()
+  const [{ auth }, { login }] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
@@ -94,8 +94,7 @@ const ProductOptionsUI = (props) => {
   }
 
   const handleSuccessSignup = (user) => {
-    sessionDispatch({
-      type: 'login',
+    login({
       user,
       token: user.session.access_token
     })
