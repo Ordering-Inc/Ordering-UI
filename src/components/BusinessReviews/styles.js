@@ -23,6 +23,10 @@ export const ReviewOf = styled.div`
     display: none;
     width: 30%;
     margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0;
+    `}
     > div {
       width: 100%;
     }
@@ -62,7 +66,8 @@ export const WrapperSelect = styled.div`
 
 export const Content = styled.div`
 
-  min-height: 180px;
+  display: flex;
+  flex-direction: column;
   
   h3{
     display: none;
@@ -89,7 +94,7 @@ export const Review = styled.div`
 `
 
 export const ReviewsNotFound = styled.h2`
-  margin: auto;
+  margin: 75px 0;
 `
 
 export const ReviewContainer = styled.div`

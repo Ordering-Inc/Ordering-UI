@@ -26,6 +26,11 @@ export const LogoHeader = styled.div`
     vertical-align: middle;
     margin-left: 10px;
 
+    ${props => props.theme?.rtl && css`
+      margin-right: 10px;
+      margin-left: 0;
+    `}
+
     @media (min-width: 768px) {
       width: 150px;
     }
@@ -62,25 +67,15 @@ export const Menu = styled.div`
   &.left-header {
     > :first-child {
       margin-left: 15px;
+      ${props => props.theme?.rtl && css`
+        margin-right: 15px;
+        margin-left: 0;
+      `}
     }
   }
 
   > *:not(:last-child) {
     margin: 0 5px;
-  }
-
-  > :first-child {
-    ${props => props.theme?.rtl && css`
-      margin-right: 10px;
-      margin-left: 0px;
-    `}
-  }
-
-  > :last-child {
-    ${props => props.theme?.rtl && css`
-      margin-left: 10px;
-      margin-right: 0px;
-    `}
   }
 
   .moment-popover,

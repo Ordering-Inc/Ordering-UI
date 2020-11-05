@@ -298,7 +298,6 @@ export const StatusBar = (props) => {
 }
 
 export const OrderStatus = styled.div`
-  max-width: 15%;
   width: 25%;
   max-width: 25%;
   display: flex;

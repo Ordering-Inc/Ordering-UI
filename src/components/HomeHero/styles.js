@@ -153,16 +153,18 @@ export const WrapInput = styled.label`
     font-size: 22px;
     top: 8px;
 
-    ${props => props.theme?.rtl && css`
+    ${props => props.theme?.rtl ? css`
       left: 0px;
-    `}
-
-    ${props => !props.theme?.rtl && css`
+    ` : css`
       right: 0px;
     `}
 
     @media (min-width: 768px) {
       margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0;
+      `}
     }
   }
 `

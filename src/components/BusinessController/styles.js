@@ -136,7 +136,7 @@ export const WrapperBusinessLogo = styled.div`
 const BusinessLogoStyled = styled.div`
   display: flex;
   width: 65px;
-    height: 65px;
+  height: 65px;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
@@ -183,7 +183,7 @@ export const BusinessInfoItem = styled.div`
   padding: 0px 5px 0px 10px;
   font-size: 12px;
   ${props => props.theme?.rtl && css`
-    padding: 0px 16px 0px 5px;
+    padding: 0px 10px 0px 5px;
   `}
   .reviews {
     display: flex;
@@ -232,7 +232,7 @@ export const BusinessInfoItem = styled.div`
     font-size: 16px;
 
     ${props => props.theme?.rtl && css`
-        padding: 0px 10px 0px 5px;
+        padding: 0px 16px 0px 5px;
     `}
   }
 `

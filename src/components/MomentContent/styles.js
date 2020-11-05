@@ -17,7 +17,11 @@ export const Layer = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   height: ${({ height }) => height || '100vh'};
+  ${props => props.theme?.rtl ? css`
+    right: 0;
+  ` : css`
+    left: 0;
+  `}
 `

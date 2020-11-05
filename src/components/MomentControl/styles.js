@@ -51,7 +51,11 @@ export const Day = styled.div`
 
   &:nth-child(3) div,
   &:nth-child(6) div {
-    border-right: 0;
+    ${props => props.theme?.rtl ? css`
+        border-left: 0      
+    ` : css`
+       border-right: 0;
+    `}
   }
 
   &:nth-child(4) div,
@@ -64,6 +68,10 @@ export const Day = styled.div`
     width: calc(100% / 6);
     &:nth-child(3) div.content-day {
       border-right: 1px solid #d9d9d9;
+      ${props => props.theme?.rtl && css`
+        border-right: 0;
+        border-left: 1px solid #d9d9d9;
+      `}
     }
   }
 
@@ -134,6 +142,12 @@ export const MiddleLine = styled.span`
   left: 50%;
   transform: translateX(-50%);
   background-color: ${props => props.theme.colors.disabled};
+
+  ${props => props.theme?.rtl && css`
+    left: initial;
+    right: 50%;
+    transform: translateX(50%);
+  `}
 
   @media (min-width: 426px) {
     display: none;
