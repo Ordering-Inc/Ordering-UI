@@ -454,7 +454,7 @@ export const OrderBill = styled.div`
   align-items: center;
   flex-direction: column;
   table {
-    width: 80%;
+    width: 90%;
     font-size: 18px;
     tr td:nth-child(2) {
       text-align: right;
