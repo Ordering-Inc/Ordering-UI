@@ -187,7 +187,7 @@ export const SidebarMenu = (props) => {
               </WrappContent>
             </MenuLink>
 
-            <LogoutButton />
+            <LogoutButton onCustomClick={() => actionSidebar(false)} />
           </>
         )}
         {!auth && (
