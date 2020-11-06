@@ -56,7 +56,6 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
         } else {
           botonRight.classList.remove('hidden')
         }
-        console.log((containerElement?.scrollLeft) + ' > ' + (categoriesElement?.scrollWidth - containerElement?.offsetWidth - 20))
       }
     }
   }
