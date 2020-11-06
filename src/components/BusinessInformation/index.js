@@ -33,6 +33,7 @@ import FaStar from '@meronex/icons/fa/FaStar'
 import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import MdClose from '@meronex/icons/md/MdClose'
+import { AutoScroll } from '../AutoScroll'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -141,14 +142,18 @@ export const BusinessInformationUI = (props) => {
               <>
                 <SectionTitle>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</SectionTitle>
                 <ScheduleSection>
-                  <ScheduleContainer>
-                    {businessSchedule.map((schedule, i) => (
-                      <ScheduleBlock key={i}>
-                        <h4>{daysOfWeek[i]}</h4>
-                        <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
-                        <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
-                      </ScheduleBlock>
-                    ))}
+                  <ScheduleContainer id='modal-container'>
+                    <Tabs id='schedules'>
+                      <AutoScroll container='modal-container' categories='schedules' modal>
+                        {businessSchedule.map((schedule, i) => (
+                          <ScheduleBlock key={i}>
+                            <h4>{daysOfWeek[i]}</h4>
+                            <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
+                            <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
+                          </ScheduleBlock>
+                        ))}
+                      </AutoScroll>
+                    </Tabs>
                   </ScheduleContainer>
                 </ScheduleSection>
                 <DeliveryInfo>

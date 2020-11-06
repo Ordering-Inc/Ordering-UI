@@ -277,9 +277,10 @@ const BusinessProductsListingUI = (props) => {
       </ProductsContainer>
       {currentCart?.products?.length > 0 && auth && (
         <FloatingButton
-          btnText={t('VIEW_ORDER', 'View Order')}
+          btnText={!openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')}
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
+          disabled={openUpselling}
         />
       )}
       {currentCart?.products && openUpselling && (

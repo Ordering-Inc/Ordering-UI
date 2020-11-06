@@ -204,14 +204,12 @@ export const ScheduleSection = styled.div`
 
 export const ScheduleContainer = styled.div`
   width: 100%;
-  margin: auto;
   display: flex;
-  overflow: auto;
-  justify-content: space-between;
-
-  @media (min-width: 769px) {
-    width: 90%;
+  overflow-x: auto;
+  > div {
+    width: 100%;
   }
+
 `
 
 export const ScheduleBlock = styled.div`
@@ -220,7 +218,7 @@ export const ScheduleBlock = styled.div`
   text-align: center;
   padding: 0px 15px;
   border-right: 1px solid #CCC;
-  width: 15%;
+  width: 10%;
   ${props => props.theme?.rtl && css`
     border-left: 1px solid #CCC;
     border-right: none;
@@ -238,6 +236,10 @@ export const ScheduleBlock = styled.div`
 
   &:last-child {
     border: 0;
+  }
+
+  @media(min-width: 480px){
+    width: 15%;
   }
 `
 
