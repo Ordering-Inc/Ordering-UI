@@ -100,8 +100,8 @@ export const BusinessInfoItem = styled.div`
 
     h5 {
       font-weight: 300;
-      svg {
-        color: #CCC;
+      svg{
+        margin-bottom: 1px;
       }
     }
 

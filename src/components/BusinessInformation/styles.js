@@ -126,8 +126,10 @@ export const BusinessInfoItem = styled.div`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      font-weight: 300;
       svg {
         margin-right: 4px;
+        margin-bottom: 1px;
         ${props => props.theme?.rtl && css`
           margin-left: 4px;
           margin-right: 0px;
@@ -143,7 +145,7 @@ export const BusinessInfoItem = styled.div`
       }
     }
     p.bold {
-      font-weight: bold;
+      font-weight: 600;
     }
     @media (min-width: 481px) {
       font-size: 16px;

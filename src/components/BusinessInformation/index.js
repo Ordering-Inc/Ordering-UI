@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
-import MdClose from '@meronex/icons/md/MdClose'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
@@ -32,7 +31,8 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import FaStar from '@meronex/icons/fa/FaStar'
 import FiClock from '@meronex/icons/fi/FiClock'
-import VscLocation from '@meronex/icons/vsc/VscLocation'
+import GrLocation from '@meronex/icons/gr/GrLocation'
+import MdClose from '@meronex/icons/md/MdClose'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -94,7 +94,7 @@ export const BusinessInformationUI = (props) => {
                   )}
                 </>
                 <h5>
-                  <VscLocation />
+                  <GrLocation />
                   {parseDistance(business?.distance || 0)}
                 </h5>
                 <h5>
