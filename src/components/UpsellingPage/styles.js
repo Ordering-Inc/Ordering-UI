@@ -7,7 +7,6 @@ export const Container = styled.div`
   flex-direction: column;
   min-height: calc(100vh - 160px);
   width: 100%;
-  padding-bottom: 20px;
   button {
     width: 45%;
     margin-top: 20px;
@@ -88,12 +87,6 @@ export const Details = styled.div`
     }
     button {
       width: 70%
-    }
-  }
-
-  @media (min-width: 980px){
-    button{
-      width: 50%
     }
   }
 
