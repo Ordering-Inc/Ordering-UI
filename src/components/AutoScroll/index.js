@@ -29,8 +29,6 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
   }, [containerElement, categoriesElement, width, theme?.rtl])
 
   const handleScroll = () => {
-    const containerElement = document.getElementById(container)
-    const categoriesElement = document.getElementById(categories)
     const botonRight = document.getElementById('right-autoscroll')
     const botonLeft = document.getElementById('left-autoscroll')
     if (botonLeft || botonRight) {
@@ -61,17 +59,16 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
   }
 
   const scrolling = (left) => {
-    const elementContainer = document.getElementById(container)
     if (left) {
-      elementContainer.scrollBy({
+      containerElement.scrollBy({
         top: 0,
-        left: -200,
+        left: (((-categoriesElement.offsetWidth / 12) > -200) ? -200 : -categoriesElement.offsetWidth / 12),
         behavior: 'smooth'
       })
     } else {
-      elementContainer.scrollBy({
+      containerElement.scrollBy({
         top: 0,
-        left: +200,
+        left: (((+categoriesElement.offsetWidth / 12) < 200) ? 200 : +categoriesElement.offsetWidth / 12),
         behavior: 'smooth'
       })
     }
@@ -80,11 +77,11 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
   return (
     <DivContainer modal={modal}>
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack id='left-autoscroll' onClick={() => scrolling(true)} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowForward id='right-autoscroll' onClick={() => scrolling()} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </DivContainer>
   )

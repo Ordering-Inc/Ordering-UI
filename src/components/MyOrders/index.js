@@ -37,7 +37,9 @@ import {
 } from './styles'
 
 import { ProfileOptions } from '../UserProfileForm/ProfileOptions'
+import { AutoScroll } from '../AutoScroll'
 import { Button } from '../../styles/Buttons'
+import { Tabs } from '../../styles/Tabs'
 import emptyPastOrders from '../../../template/assets/empty-past-orders.svg'
 import emptyActiveOrders from '../../../template/assets/empty-active-orders.svg'
 
@@ -88,57 +90,61 @@ export const MyOrdersUI = (props) => {
                 <img src={emptyActiveOrders} />
               </ImageContainer>
             ) : (
-              <ActiveOrders>
-                {!activeOrders.loading ? activeOrders.orders.map(order => (
-                  <Card key={order.id}>
-                    <Map>
-                      <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' />
-                    </Map>
-                    <Content>
-                      <Logo>
-                        <img src={order.business?.logo} />
-                      </Logo>
-                      <BusinessInformation>
-                        <h2>{order.business.name}</h2>
-                        <p>Order No. {order.id}</p>
-                        <p>{order.created_at}</p>
-                      </BusinessInformation>
-                      <Price>
-                        <h2>
-                          {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
-                        </h2>
-                        {order.status === 0 && (
-                          <p>{t('ORDER_PENDING', 'pending')}</p>
-                        )}
-                      </Price>
-                    </Content>
-                    <OpenOrder>
-                      <Button color='primary' onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })}>
-                        {t('OPEN_ORDER', 'Open order')}
-                      </Button>
-                    </OpenOrder>
-                  </Card>
-                )) : (
-                  <SkeletonOrder>
-                    {[...Array(3)].map((item, i) => (
-                      <SkeletonCard key={i}>
-                        <SkeletonMap>
-                          <Skeleton />
-                        </SkeletonMap>
-                        <SkeletonContent>
-                          <div>
-                            <Skeleton width={70} height={70} />
-                          </div>
-                          <SkeletonText>
-                            <Skeleton width={100} />
-                            <Skeleton width={80} />
-                            <Skeleton width={120} />
-                          </SkeletonText>
-                        </SkeletonContent>
-                      </SkeletonCard>
-                    ))}
-                  </SkeletonOrder>
-                )}
+              <ActiveOrders id='container'>
+                <Tabs id='orders'>
+                  <AutoScroll container='container' categories='orders'>
+                    {!activeOrders.loading ? activeOrders.orders.map(order => (
+                      <Card key={order.id}>
+                        <Map>
+                          <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' />
+                        </Map>
+                        <Content>
+                          <Logo>
+                            <img src={order.business?.logo} />
+                          </Logo>
+                          <BusinessInformation>
+                            <h2>{order.business.name}</h2>
+                            <p>Order No. {order.id}</p>
+                            <p>{order.created_at}</p>
+                          </BusinessInformation>
+                          <Price>
+                            <h2>
+                              {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
+                            </h2>
+                            {order.status === 0 && (
+                              <p>{t('ORDER_PENDING', 'pending')}</p>
+                            )}
+                          </Price>
+                        </Content>
+                        <OpenOrder>
+                          <Button color='primary' onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.id } })}>
+                            {t('OPEN_ORDER', 'Open order')}
+                          </Button>
+                        </OpenOrder>
+                      </Card>
+                    )) : (
+                      <SkeletonOrder>
+                        {[...Array(3)].map((item, i) => (
+                          <SkeletonCard key={i}>
+                            <SkeletonMap>
+                              <Skeleton />
+                            </SkeletonMap>
+                            <SkeletonContent>
+                              <div>
+                                <Skeleton width={70} height={70} />
+                              </div>
+                              <SkeletonText>
+                                <Skeleton width={100} />
+                                <Skeleton width={80} />
+                                <Skeleton width={120} />
+                              </SkeletonText>
+                            </SkeletonContent>
+                          </SkeletonCard>
+                        ))}
+                      </SkeletonOrder>
+                    )}
+                  </AutoScroll>
+                </Tabs>
               </ActiveOrders>
             )}
           </>
