@@ -12,6 +12,9 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
   const [theme] = useTheme()
 
   useEffect(() => {
+    if (container) {
+      return
+    }
     const containerElement = document.getElementById(container)
       .addEventListener('scroll', handleScroll)
 
@@ -21,7 +24,7 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
   })
 
   useEffect(() => {
-    const element = document.getElementById(categories)
+    const element = document?.getElementById(categories)
     setCategoriesElement(element)
     handleScroll()
   }, [categoriesElement, width, theme?.rtl])
@@ -33,23 +36,23 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
     const botonLeft = document.getElementById('left-autoscroll')
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
-        if ((containerElement.scrollLeft * -1) < 40) {
+        if ((containerElement?.scrollLeft * -1) < 40) {
           botonRight.classList.add('hidden')
         } else {
           botonRight.classList.remove('hidden')
         }
-        if ((containerElement.scrollLeft * -1) > categoriesElement?.scrollWidth - containerElement.offsetWidth - 10) {
+        if ((containerElement?.scrollLeft * -1) > categoriesElement?.scrollWidth - containerElement?.offsetWidth - 10) {
           botonLeft.classList.add('hidden')
         } else {
           botonLeft.classList.remove('hidden')
         }
       } else {
-        if (containerElement.scrollLeft < 40) {
+        if (containerElement?.scrollLeft < 40) {
           botonLeft.classList.add('hidden')
         } else {
           botonLeft.classList.remove('hidden')
         }
-        if (containerElement.scrollLeft > categoriesElement?.scrollWidth - containerElement.offsetWidth - 10) {
+        if (containerElement?.scrollLeft > categoriesElement?.scrollWidth - containerElement?.offsetWidth - 10) {
           botonRight.classList.add('hidden')
         } else {
           botonRight.classList.remove('hidden')
