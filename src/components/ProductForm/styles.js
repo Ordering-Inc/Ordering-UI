@@ -7,7 +7,6 @@ export const ProductContainer = styled.div`
   height: 90vh;
   max-height: 100vh;
   position: relative;
-  overflow: initial;
 
   @media (min-width: 1201px) {
     flex-wrap: nowrap;
@@ -18,7 +17,6 @@ export const ProductContainer = styled.div`
 export const WrapperImage = styled.div`
   width: 100%;
   position: relative;
-  top: -38px;
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -58,7 +56,6 @@ export const ProductInfo = styled.div`
   width: 100%;
   padding: 0px;
   position: relative;
-  top: -38px;
   margin-top: 10px;
 
   h1 {
@@ -106,9 +103,10 @@ export const ProductInfo = styled.div`
 
   @media (min-width: 1201px) {
     width: calc(50% - 20px);
-    padding: 10px;
+    padding: 0px 10px;
     top: 0;
     margin-top: 0px;
+
     h1 {
       text-align: left;
     }
@@ -142,7 +140,6 @@ export const ProductComment = styled.div`
     font-size: 16px;
     font-weight: 300;
     padding: 10px;
-    /* margin: 1px; */
     border: 1px solid #CCC;
     outline: none;
     color: #555;
@@ -167,23 +164,21 @@ export const ProductActions = styled.div`
     justify-content: space-around;
     align-items: center;
 
-    button.incdec {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid #000;
-      color: #000;
-
-      span.sign {
-        margin: 0px;
-        padding: 0px;
-      }
+    svg {
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
     }
   }
 
   button:disabled,
-  button.disabled {
+  button.disabled,
+  svg.disabled {
     opacity: 0.5;
+  }
+
+  svg.disabled {
+    pointer-events: none;
   }
 
   button.add {
@@ -220,6 +215,8 @@ export const ProductActions = styled.div`
   }
 
   @media (min-width: 1201px) {
+    padding: 10px 0px 0px;
+
     div {
       width: 30%;
     }
