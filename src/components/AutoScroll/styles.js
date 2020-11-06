@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const DivContainer = styled.span`
   display: ${props => props.modal ? '-webkit-box' : 'inherit'};
+  
   svg{
     background: #D9D9D9;
     display: inline-block;
@@ -11,8 +12,9 @@ export const DivContainer = styled.span`
     align-self: center;
     top: ${props => props.modal ? '35%' : '0'};
     position: sticky;
-    color: #000000
+    color: #000000;
   }
+
   #right-autoscroll{
     ${props => props.theme?.rtl ? css`
       left: 95%;
@@ -34,7 +36,6 @@ export const DivContainer = styled.span`
   @media (min-width: 768px){
     width: ${props => props.modal && '100%'};
     display: inherit;
-    
     ${props => props.modal && css`
       #left-autoscroll{
         display: none;
