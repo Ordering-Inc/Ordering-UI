@@ -17,20 +17,20 @@ export const DivContainer = styled.span`
 
   #right-autoscroll{
     ${props => props.theme?.rtl ? css`
-      left: 95%;
+      left: 92%;
     ` : css`
       right: 1%;
     `}
   }
   #left-autoscroll{
     ${props => props.theme?.rtl ? css`
-      right: 95%;
+      right: 92%;
     ` : css`
       left: 1%;
     `}    
   }
   svg.hidden{
-    display: none;
+    opacity: 0;
   }
 
   @media (min-width: 768px){
@@ -38,10 +38,10 @@ export const DivContainer = styled.span`
     display: inherit;
     ${props => props.modal && css`
       #left-autoscroll{
-        display: none;
+        opacity: 0;
       }
       #right-autoscroll{
-        display: none;
+        opacity: 0;
       }
     `}
     

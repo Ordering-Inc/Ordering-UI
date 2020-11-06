@@ -9,22 +9,24 @@ import { useTheme } from '../../contexts/ThemeContext'
 export const AutoScroll = ({ children, categories, container, modal }) => {
   const { width } = useWindowSize()
   const [categoriesElement, setCategoriesElement] = useState([])
+  const [containerElement, setContainerElement] = useState([])
   const [theme] = useTheme()
 
   useEffect(() => {
-    const containerElement = document?.getElementById(container)
+    const containerElementListener = document?.getElementById(container)
       ?.addEventListener('scroll', handleScroll)
-
+    const containerElement = document?.getElementById(container)
+    const element = document?.getElementById(categories)
+    setCategoriesElement(element)
+    setContainerElement(containerElement)
     return () => {
-      document.removeEventListener(containerElement)
+      document.removeEventListener(containerElementListener)
     }
   })
 
   useEffect(() => {
-    const element = document?.getElementById(categories)
-    setCategoriesElement(element)
     handleScroll()
-  }, [categoriesElement, width, theme?.rtl])
+  }, [containerElement, categoriesElement, width, theme?.rtl])
 
   const handleScroll = () => {
     const containerElement = document.getElementById(container)
