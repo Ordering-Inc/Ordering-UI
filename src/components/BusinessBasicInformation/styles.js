@@ -16,7 +16,11 @@ const BusinessContainerStyled = styled.div`
   min-height: 200px;
   justify-content: flex-start;
   align-items: flex-end;
-  border-radius: 10px;
+  border-radius: 20px;
+
+  @media (max-width: 425px) {
+    justify-content: center;
+  }
 `
 export const BusinessContainer = (props) => {
   const style = {}
@@ -38,12 +42,12 @@ export const BusinessContent = styled.div`
   background-color: #FFF;
   padding: 10px;
   border-radius: 10px;
-  margin: 0px 1px 1px;
+  margin: 10px;
   max-height: 75px;
   width: 340px;
 
-  @media (min-width: 381px) {
-    margin: 20px;
+  @media (min-width: 426px) {
+    margin: 15px;
   }
 `
 
