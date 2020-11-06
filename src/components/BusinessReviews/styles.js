@@ -146,7 +146,7 @@ export const Scores = styled.div`
   display: flex;
   justify-content: space-between;
   text-align: center;
-  width: 600px;
+  width: 800px;
   margin: 10px auto;
 
   @media (min-width: 768px){
@@ -157,13 +157,13 @@ export const Scores = styled.div`
 export const ScoreDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   border: 1px solid #ccc;
   width: 20%;
   height: auto;
   border: 1px solid #ccc;
   border-radius: 16px;
-  padding: 10px 0px;
+  padding: 10px;
   margin-bottom: 10px;
   font-size: 16px;
 
