@@ -4,13 +4,13 @@ export const Container = styled.div`
   position: relative;
   padding: 20px 10px;
 
+  @media (min-width: 769px) {
+    padding: 0px;
+  }
+
   ${({ isLoading }) => isLoading && css`
       pointer-events: none;
   `}
-
-  @media (min-width: 425px) {
-    padding: 20px;
-  }
 `
 
 export const Layer = styled.div`

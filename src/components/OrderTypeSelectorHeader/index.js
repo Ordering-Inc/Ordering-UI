@@ -10,8 +10,8 @@ import { Option } from './styles'
 
 const OrderTypeSelectorHeaderUI = (props) => {
   const {
-    orderState,
-    handleChangeOrderType
+    handleChangeOrderType,
+    typeSelected
   } = props
 
   const [, t] = useLanguage()
@@ -27,7 +27,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
   return (
     <Select
       options={orderTypes}
-      defaultValue={orderState?.options?.type || 1}
+      defaultValue={typeSelected}
       onChange={(orderType) => handleChangeOrderType(orderType)}
     />
   )

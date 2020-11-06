@@ -42,7 +42,7 @@ const LoginFormUI = (props) => {
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [, sessionDispatch] = useSession()
+  const [, { login }] = useSession()
   const theme = useTheme()
 
   const onSubmit = async () => {
@@ -50,8 +50,7 @@ const LoginFormUI = (props) => {
   }
 
   const handleSuccessFacebook = (user) => {
-    sessionDispatch({
-      type: 'login',
+    login({
       user,
       token: user.session.access_token
     })

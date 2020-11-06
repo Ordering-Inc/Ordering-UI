@@ -39,7 +39,7 @@ const AddressDetailsUI = (props) => {
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
-      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select an address to search')] })
+      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')] })
       return
     }
     setModals({ listOpen: false, formOpen: false })

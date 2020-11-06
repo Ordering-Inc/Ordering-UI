@@ -261,7 +261,7 @@ export const CartItemActions = styled.div`
   }
 `
 
-export const InvalidAddress = styled.p`
+export const WarningText = styled.p`
   margin: 10px auto 15px;
   text-align: center;
   color: ${props => props.theme.colors.primary};

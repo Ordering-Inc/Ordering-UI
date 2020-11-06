@@ -53,8 +53,8 @@ export const HeaderInfo = styled.div`
   border-radius: 16px;
   min-height: 300px;
 
-  @media (min-width: 480px) {
-    width: 55%;
+  img {
+    margin: 0px auto;
   }
 
   @media (min-width: 678px) {
@@ -66,32 +66,10 @@ export const HeaderInfo = styled.div`
   }
 `
 
-export const HeaderLogo = styled.div`
-  ${({ bgimage }) => bgimage && css`
-    background-image: url(${bgimage});
-  `}
-
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: contain;
-  object-fit: cover;
-  min-height: 60px;
-  border-radius: 10px;
-
-  @media (min-width: 480px) {
-    min-height: 75px;
-  }
-`
-
 export const HeaderText = styled.div`
   display: flex;
   color: ${props => props.theme.colors.primaryContrast};
   text-align: center;
-  
 
   ${({ column }) => column && css`
     flex-direction: column;
@@ -128,7 +106,7 @@ export const Content = styled.div`
   flex-direction: column;
   margin: 10px 0px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 840px) {
     margin: 10px 80px;
   }
 `
@@ -144,7 +122,7 @@ export const OrderBusiness = styled.div`
 `
 
 export const BusinessWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   display: flex;
 `
 
@@ -207,10 +185,10 @@ export const BusinessInfo = styled.div`
 `
 
 export const ActionsBlock = styled.div`
-  width: 20%;
+  width: 10%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   flex-direction: column;
   > * {
     margin-right: 5px;
@@ -253,7 +231,10 @@ export const OrderData = styled.div`
     font-size: 24px;
   }
   p {
-    font-size: 16px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   p:nth-child(1) {
     opacity: 0.8;
@@ -261,22 +242,20 @@ export const OrderData = styled.div`
   p.date {
     font-weight: bold;
   }
+  p.uuid {
+    display: none;
+  }
 
-  @media (min-width: 410px) {
-    h1 {
-      font-size: initial;
+  @media (min-width: 512px) {
+    p.uuid {
+      display: block;
     }
+  }
+
+  @media (min-width: 425px) {
     p {
-      font-size: initial;
+      font-size: 18px;
     }
-  }
-
-  @media (min-width: 480px) {
-    width: 80%;
-  }
-
-  @media (min-width: 578px) {
-    width: 90%;
   }
 `
 
