@@ -35,26 +35,14 @@ export const ActiveOrders = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   width: auto;
-  > :first-child {
-    ${props => props.theme?.rtl ? css`
-      margin-right: 15px;
-    ` : css`
-      margin-left: 15px;
-    `}
-    }
+  > div{
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
-  }
-
-  @media (min-width: 768px){
-    > :first-child {
-      margin-left: 20px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 0;
-        margin-right: 20px;
-    `}
-    }
   }
 
 `
