@@ -14,12 +14,12 @@ const BusinessContainerStyled = styled.div`
   object-fit: cover;
   background-position: center;
   min-height: 200px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-end;
   border-radius: 20px;
 
-  @media (max-width: 425px) {
-    justify-content: center;
+  @media (min-width: 490px) {
+    justify-content: flex-start;
   }
 `
 export const BusinessContainer = (props) => {
