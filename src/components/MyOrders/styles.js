@@ -317,6 +317,11 @@ export const SkeletonOrder = styled.div`
   display: flex;
   width: auto;
   margin: 0 auto;
+  margin-left: 30px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 30px;
+    margin-left: 0;
+  `}
 `
 
 export const SkeletonCard = styled.div`

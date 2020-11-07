@@ -92,7 +92,7 @@ export const MyOrdersUI = (props) => {
             ) : (
               <ActiveOrders id='container'>
                 <Tabs id='orders'>
-                  <AutoScroll container='container' categories='orders'>
+                  <AutoScroll container='container' categories='orders' loading={activeOrders.loading}>
                     {!activeOrders.loading ? activeOrders.orders.map(order => (
                       <Card key={order.id}>
                         <Map>
