@@ -8,7 +8,7 @@ export const Container = styled.div`
   min-height: calc(100vh - 160px);
   width: 100%;
   button {
-    width: 45%;
+    width: 46%;
     margin-top: 20px;
   }
   
@@ -20,27 +20,34 @@ export const Container = styled.div`
 export const UpsellingContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   overflow: auto;
 `
 
 export const Item = styled.div`
   display: flex;
-  border: 1px solid #ccc;
-  width: 25%;
-  margin: 20px;
-  padding: 10px;
+  border: 1px solid #eee;
+  width: 70%;
+  padding: 20px;
+  margin: 15px 0;
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;
   border-radius: 9px;
+  box-sizing: border-box;
 
-  @media (min-width: 580px){
-    width: 20%;
+  @media (min-width: 490px) {
+    width: 43%;
   }
 
-  @media (min-width: 768px){
-    width: 15%;
+  @media (min-width: 769px) {
+    width: 27%;
+    padding: 11px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 20%;
+    margin: 10px 15px;
   }
 `
 
@@ -71,12 +78,15 @@ export const Details = styled.div`
   }
   p{
     color: #D81313;
-    margin: 10px auto;
+    margin: 2px auto;
   }
   button {
-    width: 100%;
-    margin: 5px auto;
-    font-size: 0.9em;
+    width: auto;
+    margin: 8px auto 0;
+    padding: 0 20px;
+    font-size: 1em;
+    line-height: 22px;
+
   }
 
   @media (min-width: 480px){
@@ -84,9 +94,6 @@ export const Details = styled.div`
       h3{
         font-size: 14px;  
       }
-    }
-    button {
-      width: 70%
     }
   }
 
