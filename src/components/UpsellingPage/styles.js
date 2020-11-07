@@ -15,6 +15,10 @@ export const Container = styled.div`
   @media (min-width: 768px){
     justify-content: flex-start;
     height: auto;
+    button {
+      width: 46%;
+      margin-top: 20px;
+    }
   }
 `
 export const UpsellingContainer = styled.div`
@@ -104,12 +108,16 @@ export const CloseUpselling = styled.div`
   text-align: center;
 
   button{
-    width: 60%;
+    width: 90%;
+    font-size: 1.4em;
+    padding: 10px 0;
   }
 
   @media (min-width: 720px){
     button{
       width: 40%;
+      padding: 2px;
+      font-size: 1em;
     }
   }
 `
