@@ -73,7 +73,7 @@ export const HomeTitle = styled.div`
 export const StepsBlock = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-template-columns: auto;
   grid-template-rows: auto;
   justify-items: center;
   align-items: center;
@@ -93,8 +93,8 @@ export const StepsBlock = styled.div`
       text-align: center;
     }
   }
-  @media (max-width: 790px) {
-    grid-template-columns: auto;
+  @media (min-width: 790px) {
+    grid-template-columns: auto auto auto auto auto auto auto;
   }
 `
 
@@ -221,6 +221,9 @@ export const Line = styled.div`
     border: 1px solid red;
     align-self: center;
     margin-bottom: 75px !important;
+    transform: rotate(90deg);
+    padding: 0 !important;
+    width: 30px !important;
     &::after{
       content: '';
       position: absolute;
@@ -237,10 +240,7 @@ export const Line = styled.div`
       transform: translateY(-50%);
       border-radius: 50%;
     }
-    @media (max-width: 790px) {
-      transform: rotate(90deg);
-      padding: 0 !important;
-      width: 30px !important;
-      margin-bottom: 30px !important;
+    @media (min-width: 790px) {
+      transform: rotate(0deg);
     }
 `
