@@ -148,7 +148,7 @@ const OrderDetailsUI = (props) => {
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  <img src={getImage(order?.status || 0)} alt='' />
+                  <img src={getImage(order?.status || 0)} alt='status' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>

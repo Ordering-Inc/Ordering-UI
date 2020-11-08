@@ -87,7 +87,7 @@ export const MyOrdersUI = (props) => {
             </MyOrdersTitle>
             {!activeOrders.loading && activeOrders.orders.length === 0 ? (
               <ImageContainer>
-                <img src={emptyActiveOrders} />
+                <img src={emptyActiveOrders} alt='empty-active-orders' />
               </ImageContainer>
             ) : (
               <ActiveOrders id='container'>
@@ -100,7 +100,7 @@ export const MyOrdersUI = (props) => {
                         </Map>
                         <Content>
                           <Logo>
-                            <img src={order.business?.logo} />
+                            <img src={order.business?.logo} alt='business-logo' />
                           </Logo>
                           <BusinessInformation>
                             <h2>{order.business.name}</h2>
@@ -157,7 +157,7 @@ export const MyOrdersUI = (props) => {
             {!previousOrders.loading && previousOrders.orders.length === 0 ? (
               (
                 <ImageContainer>
-                  <img src={emptyPastOrders} />
+                  <img src={emptyPastOrders} alt='empty-past-orders' />
                 </ImageContainer>
               )
             ) : (
@@ -166,7 +166,7 @@ export const MyOrdersUI = (props) => {
                   <IndividualOrderPast key={order.id}>
                     <OrderPastContent>
                       <PastLogo>
-                        <img src={order.business?.logo} />
+                        <img src={order.business?.logo} alt='business-logo' />
                       </PastLogo>
                       <BusinessInformation>
                         <WrapperBusinessTitle>
