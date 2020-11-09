@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiClock from '@meronex/icons/fi/FiClock'
-import VscLocation from '@meronex/icons/vsc/VscLocation'
+import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import FaStar from '@meronex/icons/fa/FaStar'
 import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
@@ -101,7 +101,7 @@ export const BusinessBasicInformation = (props) => {
 
               {!loading ? (
                 <h5>
-                  <VscLocation />
+                  <GrLocation />
                   {parseDistance(business?.distance || 0)}
                 </h5>
               ) : (
