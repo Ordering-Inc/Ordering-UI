@@ -100,7 +100,7 @@ const OrderDetailsUI = (props) => {
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
           <Header businessHeader={order?.business?.header}>
-            <HeaderInfo>
+            <HeaderInfo className='order-header'>
               <img alt='Logotype' width='200px' height='90px' src={theme?.images?.logos?.logotype} />
               <HeaderText column>
                 <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
@@ -112,7 +112,7 @@ const OrderDetailsUI = (props) => {
               </HeaderText>
             </HeaderInfo>
           </Header>
-          <Content>
+          <Content className='order-content'>
             <OrderBusiness>
               <BusinessWrapper>
                 <LogoWrapper>
@@ -279,7 +279,7 @@ const OrderDetailsUI = (props) => {
       )}
 
       {loading && (
-        <WrapperContainer>
+        <WrapperContainer className='skeleton-loading'>
           <SkeletonBlock width={100}>
             <Skeleton height={250} />
           </SkeletonBlock>
@@ -295,12 +295,12 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {error && error.length > 0 &&
+      {/* {error && error.length > 0 &&
         error.map((e, i) => {
           if (e) {
             return <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
           }
-        })}
+        })} */}
 
       {!loading && !order && (
         <NotFoundSource
