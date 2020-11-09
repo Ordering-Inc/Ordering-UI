@@ -1,4 +1,4 @@
-context('Home Page', () => {
+context('Page not found', () => {
   beforeEach(() => {
     cy.visit('/test/dummy/false')
   })

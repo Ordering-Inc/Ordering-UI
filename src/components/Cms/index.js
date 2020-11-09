@@ -13,7 +13,7 @@ const CmsUI = (props) => {
   const [, t] = useLanguage()
 
   return (
-    <CmsContainer>
+    <CmsContainer id='cms'>
       {
         loading && (
           <SkeletonContainer>
