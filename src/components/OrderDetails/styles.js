@@ -22,7 +22,7 @@ const HeaderStyled = styled.div`
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 7px;
   max-height: 350px;
   background-position: bottom;
 
@@ -53,12 +53,9 @@ export const HeaderInfo = styled.div`
   border-radius: 16px;
   min-height: 300px;
 
-  img {
-    margin: 0px auto;
-  }
-
   @media (min-width: 678px) {
     width: 50%;
+    border-radius: 7px 0 0 7px;
   }
 
   @media (min-width: 768px) {

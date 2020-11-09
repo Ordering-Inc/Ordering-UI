@@ -59,7 +59,7 @@ const OrderDetailsUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
 
-  const { order, loading, error } = props.order
+  const { order, loading, error, header } = props.order
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -99,7 +99,7 @@ const OrderDetailsUI = (props) => {
     <Container>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
-          <Header businessHeader={order?.business?.header}>
+          <Header businessHeader={header?.result?.header}>
             <HeaderInfo>
               <img alt='Logotype' width='200px' height='90px' src={theme?.images?.logos?.logotype} />
               <HeaderText column>
