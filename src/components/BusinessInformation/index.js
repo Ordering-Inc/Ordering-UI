@@ -63,7 +63,7 @@ export const BusinessInformationUI = (props) => {
         <MdClose onClick={() => onClose()} />
       </ModalIcon>
       <BusinessHeader>
-        <img src={business.header} />
+        <img src={business.header} alt='business-image' />
         <BusinessBasicContent>
           <WrapperBusinessLogo>
             <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />

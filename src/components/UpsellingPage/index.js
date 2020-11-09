@@ -50,10 +50,10 @@ const UpsellingPageUI = (props) => {
                 !upsellingProducts.loading ? (
                   <>
                     {
-                      !upsellingProducts.error ? upsellingProducts.products.map(product => (
+                      !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
                         <Item key={product.id}>
                           <Image>
-                            <img src={product.images} />
+                            <img src={product.images} alt={`product-${i}`} />
                           </Image>
                           <Details>
                             <div>
