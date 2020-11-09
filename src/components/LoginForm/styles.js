@@ -4,19 +4,12 @@ export const LoginContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  min-height: ${({ isPopup }) => isPopup ? '90vh' : '100vh'};
-  flex-direction: column;
+  min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
 
-  ${({ isPopup }) => isPopup && css`
-    margin: 20px 0px;
-  `};
+  flex-direction: column;
 
   @media (min-width: 768px) {
     flex-direction: row;
-
-    ${({ isPopup }) => isPopup && css`
-      margin: 0px;
-    `};
   }
 `
 const Side = styled.div`
@@ -26,7 +19,7 @@ const Side = styled.div`
 export const HeroSide = styled(Side)`
   display: none;
 
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     width: 55%;
     display: flex;
     justify-content: center;
@@ -57,27 +50,47 @@ export const TitleHeroSide = styled.div`
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
-  margin: ${({ isPopup }) => isPopup ? 'auto' : '20px 0px'};
+  margin: auto;
 
   img {
     width: 200px;
   }
 
-  @media (min-width: 1200px){
-    font-size: ${({ isPopup }) => isPopup ? '0.9em' : '1em'};
+  @media (min-width: 769px) {
+    ${({ isPopup }) => isPopup && css`
+      margin: 20px 0px;
+    `}
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     width: 45%;
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
+  }
+
+  @media (min-width: 1200px){
+    font-size: ${({ isPopup }) => isPopup ? '0.9em' : '1em'};
   }
 `
 
 export const LoginWith = styled.div`
   font-size: 14px;
 
-  @media (min-width: 992px) {
+  @media (min-width: 425px) {
     font-size: 18px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media (min-width: 992px) {
+    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
+  }
+
+  @media (min-width: 1200px) {
+    ${({ isPopup }) => isPopup && css`
+      font-size: 17px;
+    `};
   }
 `
 
@@ -138,15 +151,23 @@ export const RedirectLink = styled.div`
     }
   `}
 
+  @media (min-width: 425px) {
+    flex-direction: row;
+  }
+
   @media (min-width: 768px) {
-    ${({ isPopup }) => isPopup && css`
-      flex-direction: row;
-      font-size: 13px;
-    `};
+    font-size: 14px;
   }
 
   @media (min-width: 992px) {
+    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
     flex-direction: row;
+  }
+
+  @media (min-width: 1200px) {
+    ${({ isPopup }) => isPopup && css`
+      font-size: 16px;
+    `};
   }
 `
 
