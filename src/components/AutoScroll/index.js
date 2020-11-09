@@ -6,7 +6,7 @@ import { DivContainer } from './styles'
 
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, categories, container, modal }) => {
+export const AutoScroll = ({ children, categories, container, modal, loading }) => {
   const { width } = useWindowSize()
   const [categoriesElement, setCategoriesElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
@@ -17,8 +17,10 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
       ?.addEventListener('scroll', handleScroll)
     const containerElement = document?.getElementById(container)
     const element = document?.getElementById(categories)
-    setCategoriesElement(element)
-    setContainerElement(containerElement)
+    if (!loading) {
+      setCategoriesElement(element)
+      setContainerElement(containerElement)
+    }
     return () => {
       document.removeEventListener(containerElementListener)
     }
@@ -26,7 +28,7 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
 
   useEffect(() => {
     handleScroll()
-  }, [containerElement, categoriesElement, width, theme?.rtl])
+  }, [containerElement?.scrollLeft, categoriesElement?.scrollLeft, width, theme?.rtl])
 
   const handleScroll = () => {
     const botonRight = document.getElementById('right-autoscroll')

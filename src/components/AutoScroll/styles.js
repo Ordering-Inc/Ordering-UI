@@ -33,6 +33,20 @@ export const DivContainer = styled.span`
     opacity: 0;
   }
 
+  @media (min-width: 480px){
+    #right-autoscroll{
+    ${props => props.theme?.rtl && css`
+      left: 95%;
+    `}
+   }
+    #left-autoscroll{
+      ${props => props.theme?.rtl && css`
+        right: 95%;
+      `
+    }
+  }
+  }
+
   @media (min-width: 768px){
     width: ${props => props.modal && '100%'};
     display: inherit;
@@ -44,6 +58,19 @@ export const DivContainer = styled.span`
         opacity: 0;
       }
     `}
-    
+  }
+
+  @media (min-width: 1024px){
+    #right-autoscroll{
+    ${props => props.theme?.rtl && css`
+      left: 97%;
+    `}
+   }
+    #left-autoscroll{
+      ${props => props.theme?.rtl && css`
+        right: 97%;
+      `
+    }
+  }
   }
 `
