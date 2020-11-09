@@ -4,13 +4,15 @@ import styled, { css } from 'styled-components'
 export const ProductContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  height: 90vh;
   max-height: 100vh;
   position: relative;
 
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+
   @media (min-width: 1201px) {
     flex-wrap: nowrap;
-    height: 100%;
   }
 `
 

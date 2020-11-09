@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components'
 
 export const ForgotPasswordContainer = styled.div`
   width: 100%;
-  height: ${({ isPopup }) => isPopup ? '100vh' : 'calc(100vh - 97px)'};
+  height: ${({ isPopup }) => isPopup ? '100vh' : 'auto'};
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     flex-direction: row;
     height: 100%;
-    min-height: ${({ isPopup }) => isPopup ? '90vh' : 'calc(100vh - 65px);'};
+    min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
   }
 `
 const Side = styled.div`
@@ -24,7 +24,7 @@ export const HeroSide = styled(Side)`
   background-color:  ${props => props.theme.colors.primary};
   padding-bottom: 5px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     width: 55%;
     height: ${({ isPopup }) => isPopup ? 'auto' : 'calc(100vh - 65px)'};
   }
@@ -65,21 +65,20 @@ export const TitleHeroSide = styled.div`
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
-  margin: 15px 0;
+  margin: auto;
 
   img {
     width: 200px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     width: 45%;
-    margin: auto;
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '90%' : '70%'};
+  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   display: flex;
   flex-direction: column;
 
@@ -135,14 +134,22 @@ export const RedirectLink = styled.div`
     }
   `}
 
+  @media (min-width: 425px) {
+    flex-direction: row;
+  }
+
   @media (min-width: 768px) {
-    ${({ isPopup }) => isPopup && css`
-      flex-direction: row;
-      font-size: 13px;
-    `};
+    font-size: 14px;
   }
 
   @media (min-width: 992px) {
+    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
     flex-direction: row;
+  }
+
+  @media (min-width: 1200px) {
+    ${({ isPopup }) => isPopup && css`
+      font-size: 16px;
+    `};
   }
 `

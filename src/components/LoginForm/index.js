@@ -93,7 +93,7 @@ const LoginFormUI = (props) => {
         <img src={theme?.images?.logos?.logotype} alt='Logo login' />
 
         {useLoginByEmail && useLoginByCellphone && (
-          <LoginWith>
+          <LoginWith isPopup={isPopup}>
             <Tabs variant='primary'>
               {useLoginByEmail && (
                 <Tab

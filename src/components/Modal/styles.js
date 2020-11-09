@@ -17,7 +17,7 @@ export const ModalDialog = styled.div`
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
-  height: 100vh;
+  height: 100%;
   max-height: 100vh;
   overflow: auto;
 
@@ -25,6 +25,7 @@ export const ModalDialog = styled.div`
     width: ${({ width }) => width || '50%'};
     max-height: 90vh;
     border-radius: 10px;
+    height: auto;
   }
 `
 
