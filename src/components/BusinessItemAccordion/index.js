@@ -3,7 +3,7 @@ import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import FiClock from '@meronex/icons/fi/FiClock'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
-import { useOrder, useLanguage, useUtils, useEvent } from 'ordering-components'
+import { useOrder, useLanguage, useUtils } from 'ordering-components'
 
 import { convertHoursToMinutes } from '../../utils'
 
@@ -21,6 +21,8 @@ import {
 
 export const BusinessItemAccordion = (props) => {
   const {
+    uuid,
+    currentCartUuid,
     isCheckout,
     isClosed,
     moment,
@@ -35,7 +37,6 @@ export const BusinessItemAccordion = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [events] = useEvent()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -44,8 +45,6 @@ export const BusinessItemAccordion = (props) => {
   const content = useRef(null)
   const businessStore = useRef(null)
   const businessDelete = useRef(null)
-
-  const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
 
   const toggleAccordion = (e) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
@@ -66,23 +65,13 @@ export const BusinessItemAccordion = (props) => {
   }
 
   useEffect(() => {
-    if (cartsLength === 1 || isCheckout) {
+    const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
+    if (cartsLength === 1 || currentCartUuid === uuid || isCheckout) {
       activeAccordion(true)
     } else {
       activeAccordion(false)
     }
-  }, [isCheckout])
-
-  const handleAddedProduct = (product, cart) => {
-    if (cart?.business?.slug === business?.slug) {
-      activeAccordion(true)
-    }
-  }
-
-  useEffect(() => {
-    events.on('cart_product_added', handleAddedProduct)
-    return () => events.off('cart_product_added', handleAddedProduct)
-  }, [])
+  }, [orderState?.carts, currentCartUuid])
 
   return (
     <AccordionSection isClosed={isClosed}>
