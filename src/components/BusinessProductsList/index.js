@@ -19,7 +19,8 @@ const BusinessProductsListUI = (props) => {
     categories,
     categoryState,
     isBusinessLoading,
-    onProductClick
+    onProductClick,
+    handleSearchRedirect
   } = props
 
   const [, t] = useLanguage()
@@ -97,6 +98,8 @@ const BusinessProductsListUI = (props) => {
         !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && (
           <NotFoundSource
             content={t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
+            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+            onClickButton={handleSearchRedirect}
           />
         )
       }
