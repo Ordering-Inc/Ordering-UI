@@ -140,7 +140,6 @@ const OrderDetailsUI = (props) => {
             <OrderInfo>
               <OrderData>
                 <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
-                <p className='uuid'>{order?.uuid}</p>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>{order?.delivery_datetime}</p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
