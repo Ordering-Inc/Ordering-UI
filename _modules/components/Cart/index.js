@@ -197,7 +197,9 @@ var CartUI = function CartUI(props) {
     handleClickCheckout();
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessItemAccordion.BusinessItemAccordion, {
+  return /*#__PURE__*/_react.default.createElement(_styles.CartContainer, {
+    className: "cart"
+  }, /*#__PURE__*/_react.default.createElement(_BusinessItemAccordion.BusinessItemAccordion, {
     uuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
     isCheckout: isCheckout,
     orderTotal: cart === null || cart === void 0 ? void 0 : cart.total,

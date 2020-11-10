@@ -124,6 +124,7 @@ var CartPopover = function CartPopover(props) {
     ref: referenceElement,
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosBasket.default, null), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 && /*#__PURE__*/_react.default.createElement("p", null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+    className: "cart-popover",
     ref: popperElement,
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {

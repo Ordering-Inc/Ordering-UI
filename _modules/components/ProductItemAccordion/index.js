@@ -148,7 +148,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles.Accordion, {
     isValid: (_product$valid = product === null || product === void 0 ? void 0 : product.valid) !== null && _product$valid !== void 0 ? _product$valid : true,
-    className: "accordion ".concat(setActive),
+    className: "product accordion ".concat(setActive),
     onClick: function onClick(e) {
       return toggleAccordion(e);
     }
