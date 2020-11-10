@@ -57,7 +57,7 @@ const PaymentOptionsUI = (props) => {
 
   return (
     <PaymentMethodsContainer>
-      <PaymentMethodsList>
+      <PaymentMethodsList className='payments-list'>
         {paymethodsList.paymethods.length > 0 && (
           paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
             <PayCard
