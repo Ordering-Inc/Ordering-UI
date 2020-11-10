@@ -54,6 +54,8 @@ export const MyOrdersUI = (props) => {
     return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${googleMapKey}`
   }
 
+  const activeOrdersSorted = activeOrders?.orders?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) ?? []
+
   const [reorderLoading, setReorderLoading] = useState(false)
   const [orderID, setOrderID] = useState(null)
 
@@ -93,7 +95,7 @@ export const MyOrdersUI = (props) => {
               <ActiveOrders id='container'>
                 <Tabs id='orders'>
                   <AutoScroll container='container' categories='orders' loading={activeOrders.loading}>
-                    {!activeOrders.loading ? activeOrders.orders.map(order => (
+                    {!activeOrders.loading ? activeOrdersSorted.map(order => (
                       <Card key={order.id}>
                         <Map>
                           <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' />
