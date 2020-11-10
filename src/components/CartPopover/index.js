@@ -70,7 +70,7 @@ export const CartPopover = (props) => {
           {props.carts?.length > 0 && <p>{props.carts?.length}</p>}
         </span>
       </HeaderItem>
-      <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
+      <PopoverBody className='cart-popover' ref={popperElement} style={popStyle} {...attributes.popper}>
         <CartContent
           carts={props.carts}
           isOrderStateCarts={!!orderState.carts}
