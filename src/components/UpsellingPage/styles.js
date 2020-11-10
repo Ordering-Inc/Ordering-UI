@@ -5,7 +5,6 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  min-height: calc(100vh - 160px);
   width: 100%;
   button {
     width: 46%;
@@ -32,6 +31,7 @@ export const Item = styled.div`
   display: flex;
   border: 1px solid #eee;
   width: 70%;
+  min-width: 150px;
   padding: 20px;
   margin: 15px 0;
   flex-direction: column;
