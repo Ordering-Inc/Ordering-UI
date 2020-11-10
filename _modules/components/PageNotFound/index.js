@@ -13,6 +13,8 @@ var _orderingComponents = require("ordering-components");
 
 var _styledComponents = require("styled-components");
 
+var _useWindowSize2 = require("../../hooks/useWindowSize");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -35,12 +37,22 @@ var PageNotFound = function PageNotFound() {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-  return /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundText, null, /*#__PURE__*/_react.default.createElement("span", null, t('PAGE_NOT_FOUND', 'PAGE NOT FOUND')), /*#__PURE__*/_react.default.createElement("img", {
+
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
+
+  return /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundContainer, {
+    width: width
+  }, /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundText, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAGE_NOT_FOUND', 'PAGE NOT FOUND')), /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFoundLighting,
-    alt: "lighting"
-  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "lighting",
+    height: "40",
+    width: "40"
+  })), /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundImage, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.notFound404,
-    alt: "error404"
+    alt: "error404",
+    width: "300",
+    height: "300"
   })));
 };
 

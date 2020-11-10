@@ -105,7 +105,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     if (!(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) {
       setAlertState({
         open: true,
-        content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select an address to search')]
+        content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
       });
       return;
     }

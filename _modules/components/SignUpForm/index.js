@@ -100,13 +100,12 @@ var SignUpFormUI = function SignUpFormUI(props) {
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 2),
-      sessionDispatch = _useSession2[1];
+      login = _useSession2[1].login;
 
   var theme = (0, _styledComponents.useTheme)();
 
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
-    sessionDispatch({
-      type: 'login',
+    login({
       user: user,
       token: user.session.access_token
     });
@@ -169,6 +168,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       key: field.id,
       type: field.enabled && field.required ? field.type : 'hidden',
       name: field.code,
+      "aria-label": field.code,
       placeholder: t(field.name),
       onChange: hanldeChangeInput,
       ref: register({
@@ -183,6 +183,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
+    "aria-label": "password",
     placeholder: t('PASSWORD', 'Password'),
     onChange: hanldeChangeInput,
     required: true,

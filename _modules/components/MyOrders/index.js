@@ -19,7 +19,11 @@ var _styles = require("./styles");
 
 var _ProfileOptions = require("../UserProfileForm/ProfileOptions");
 
+var _AutoScroll = require("../AutoScroll");
+
 var _Buttons = require("../../styles/Buttons");
+
+var _Tabs = require("../../styles/Tabs");
 
 var _emptyPastOrders = _interopRequireDefault(require("../../../template/assets/empty-past-orders.svg"));
 
@@ -156,9 +160,18 @@ var MyOrdersUI = function MyOrdersUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "My Orders"
-  }), /*#__PURE__*/_react.default.createElement(_styles.MyOrdersContainer, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersTitle, null, /*#__PURE__*/_react.default.createElement("h3", null, t('ACTIVE_ORDERS', 'Active Orders'))), !activeOrders.loading && activeOrders.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: _emptyActiveOrders.default
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ActiveOrders, null, !activeOrders.loading ? activeOrders.orders.map(function (order) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.MyOrdersContainer, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ACTIVE_ORDERS', 'Active Orders'))), !activeOrders.loading && activeOrders.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: _emptyActiveOrders.default,
+    alt: "empty-active-orders"
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ActiveOrders, {
+    id: "container"
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+    id: "orders"
+  }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+    container: "container",
+    categories: "orders",
+    loading: activeOrders.loading
+  }, !activeOrders.loading ? activeOrders.orders.map(function (order) {
     var _order$business, _order$business2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.Card, {
@@ -167,8 +180,9 @@ var MyOrdersUI = function MyOrdersUI(props) {
       src: getGoogleMapImage(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location),
       alt: "google-maps-img"
     })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo
-    })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement("h5", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", null, "Order No. ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order.created_at)), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h5", null, parsePrice(order.products.reduce(function (acc, cur) {
+      src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo,
+      alt: "business-logo"
+    })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", null, "Order No. ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order.created_at)), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(order.products.reduce(function (acc, cur) {
       return acc + cur.price;
     }, 0))), order.status === 0 && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_PENDING', 'pending')))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
@@ -194,16 +208,18 @@ var MyOrdersUI = function MyOrdersUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
     }))));
-  })))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersTitle, null, /*#__PURE__*/_react.default.createElement("h3", null, t('ORDERS_PAST', 'My Orders Past'))), !previousOrders.loading && previousOrders.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: _emptyPastOrders.default
+  })))))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDERS_PAST', 'My Orders Past'))), !previousOrders.loading && previousOrders.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: _emptyPastOrders.default,
+    alt: "empty-past-orders"
   })) : /*#__PURE__*/_react.default.createElement(_styles.OrdersPast, null, !previousOrders.loading ? previousOrders.orders.map(function (order) {
     var _order$business3;
 
     return /*#__PURE__*/_react.default.createElement(_styles.IndividualOrderPast, {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderPastContent, null, /*#__PURE__*/_react.default.createElement(_styles.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo
-    })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement("h5", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", null, order.created_at), /*#__PURE__*/_react.default.createElement("p", {
+      src: (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo,
+      alt: "business-logo"
+    })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name)), /*#__PURE__*/_react.default.createElement("p", null, order.created_at), /*#__PURE__*/_react.default.createElement("p", {
       name: "view_order",
       onClick: function onClick() {
         return handleGoToPage({

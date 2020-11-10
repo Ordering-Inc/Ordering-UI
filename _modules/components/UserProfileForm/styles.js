@@ -24,7 +24,7 @@ function _templateObject21() {
 }
 
 function _templateObject20() {
-  var data = _taggedTemplateLiteral(["\n  width: 70%;\n  height: auto;\n  display: inline-flex;\n  flex-wrap: wrap;\n  padding: 0;\n  > * {\n    width: 45%;\n    margin: 10px;\n    display: inline;\n    height: 25px;\n    span{\n      border-radius: 16px;\n      width: 100%;\n      height: 100%;\n    }\n  }\n  @media (max-width: 480px){\n    width: 100%;\n    justify-content: center;\n    > *{\n      width: 80%\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  justify-content: center;\n  height: auto;\n  display: inline-flex;\n  flex-wrap: wrap;\n  padding: 0;\n  margin-top: 0px;\n  > * {\n    width: 80%;\n    margin: 10px 0;\n    display: inline;\n    height: 50px;\n    span{\n      border-radius: 16px;\n      width: 100%;\n      height: 100%;\n    }\n  }\n  @media (min-width: 768px){\n    justify-content: flex-start;\n    > * {\n      height: 20px;\n      width: 35%;\n      margin: 5px\n    }\n  }\n"]);
 
   _templateObject20 = function _templateObject20() {
     return data;
@@ -34,7 +34,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n        margin-right: 0;\n      "]);
+  var data = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0px;\n      "]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -44,7 +44,7 @@ function _templateObject19() {
 }
 
 function _templateObject18() {
-  var data = _taggedTemplateLiteral(["\n        margin-left: 0;\n      "]);
+  var data = _taggedTemplateLiteral(["\n      text-align: right;\n      margin-left: 0px;\n      margin-right: 50px;\n    "]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -54,7 +54,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0px;\n  "]);
+  var data = _taggedTemplateLiteral(["\n      margin-right: 0;\n    "]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -64,7 +64,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n    text-align: right;\n  "]);
+  var data = _taggedTemplateLiteral(["\n      margin-left: 0;\n    "]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -74,7 +74,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  text-align: left;\n  height: 200px;\n  ", "\n  > *{\n    margin-top: 10px;\n    margin-right: 10px;\n    padding: 10px 15px;\n    width: 33%;\n    ", "\n  }\n\n  > button {\n    box-sizing: initial;\n    padding: 5px 15px;\n  }\n\n  @media (max-width: 720px){\n    height: auto;\n    > * {\n      width: 75%;\n    } \n  }\n  \n  @media (max-width: 480px){\n    flex-direction: column;\n    display: flex;\n    align-items: center;\n    margin: 0 auto;\n    > *{\n      margin-top: 20px;\n      ", "\n    }\n    > input{\n    padding: 10px 15px;\n    width: 80%;\n    }\n    > button {\n    margin-top: 30px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n    width: 80%;\n  }\n  }\n\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 0 auto;\n  *{\n    margin-top: 20px;\n    ", "\n  }\n  input{\n    padding: 10px 15px;\n    width: 80%;\n  }\n  button {\n    box-sizing: initial;\n    margin-top: 30px;\n    padding-top: 7px;\n    padding-bottom: 7px;\n    width: 80%;\n  }\n\n  @media (min-width: 480px){\n    height: auto;\n    * {\n      width: 75%;\n    } \n  }\n\n  @media (min-width: 768px){\n    display: block;\n    height: 200px;\n    margin-top: 20px;\n    margin-left: 50px;\n    text-align: left;\n    ", "\n\n    * {\n        margin-top: 10px;\n        margin-right: 10px;\n        padding: 10px 15px;\n      ", "\n    }\n\n    input {\n      width: 38%;\n    }\n\n    button {\n      width: 38%;\n      padding: 7px 15px;\n      margin-top: 10px;\n    }\n  }\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -84,7 +84,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n    text-align: right;\n  "]);
+  var data = _taggedTemplateLiteral(["\n    text-align: right;\n    "]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -94,7 +94,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  width: 70%;\n  text-align: left;\n  ", "\n  h5{\n    font-size: 1.2em\n  }\n  button{\n    width: 50%;\n    align-self: flex-end;\n  }\n  > div{\n  display: flex;\n  flex-direction: column-reverse;\n  }\n\n  @media (max-width: 480px){\n    align-items: center;\n    height: 100%;\n    text-align: center;\n    width: 100%;\n    margin-top: 40px;\n    margin-bottom: 20px;\n      > div{\n      display: flex;\n      flex-direction: column-reverse;\n      align-items: center;\n      margin: 0 auto;\n      width: 80%;\n    }\n    button{\n    width: inherit;\n    align-self: center;\n  }\n\n  }\n  @media (max-width: 980px){\n    button{\n      width: 75%\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  text-align: center;\n  margin-top: 40px;\n  margin-bottom: 20px;\n\n  h1{\n    font-size: 18px\n  }\n\n  > div{\n    display: flex;\n    flex-direction: column-reverse;\n    align-items: center;\n    margin: 0 auto;\n    width: 80%;\n  }\n\n  button{\n    width: 100%;\n    align-self: center;\n  }\n\n  @media (min-width: 480px){\n    width: 70%;\n    text-align: left;\n    ", "\n\n    button {\n      align-self: flex-end;\n    }\n  }\n\n  @media (min-width: 768px){\n    button {\n      width: 65%;\n    }\n  }\n\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -104,7 +104,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n    text-align: right;\n  "]);
+  var data = _taggedTemplateLiteral(["\n     text-align: right;\n    "]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -114,7 +114,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  text-align: left;\n  height: 200px;\n  ", "\n  > * {\n    margin: 5px 0;\n    width: 75%;\n  }\n  > button {\n    width: 80px;\n    background: #F8F8F8;\n  }\n  @media (max-width: 480px){\n    align-items: center;\n    text-align: center;\n  }\n\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  height: 200px;\n\n  h1 {\n    font-size: 20px\n  }\n\n  > * {\n    margin: 5px 0;\n    width: 75%;\n  }\n\n  > button {\n    width: 80px;\n    background: #F8F8F8;\n  }\n\n  @media (min-width: 480px){\n    align-items: flex-start;\n    text-align: left;\n    ", "\n  }\n\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -124,7 +124,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n      margin-left: 0;\n  "]);
+  var data = _taggedTemplateLiteral(["\n      margin-right: 50px;\n      margin-left: 0;\n  "]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -134,7 +134,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n      margin-right: 0;\n  "]);
+  var data = _taggedTemplateLiteral(["\n      margin-left: 0;\n  "]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -144,7 +144,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n      margin-right: 50px;\n      margin-left: 0;\n  "]);
+  var data = _taggedTemplateLiteral(["\n      margin-right: 0;\n  "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -154,7 +154,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  width: 70%;\n  > *{\n    margin: 30px 0;\n    margin-left: 50px;\n    ", "\n  }\n  @media (max-width: 720px){\n    width: 60%\n  }\n  @media (max-width: 480px) {\n    width: 100%;\n    > *{\n    margin: 0;\n    margin-top: 20px;\n    ", "\n  }\n  };\n"]);
+  var data = _taggedTemplateLiteral(["\n  /*width: 70%;*/\n  width: 100%;\n    > *{\n    margin: 0;\n    margin-top: 20px;\n    ", "\n  }\n  @media (min-width: 480px) {\n    width: 60%;\n    > *{\n    margin: 30px 0;\n    margin-left: 50px;\n    ", "\n  }\n  };\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -184,7 +184,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  width: 170px;\n  height: 170px;\n  border: 2px solid ", ";\n  border-radius: 100%;\n  overflow: hidden;\n  padding: 20px;\n  background: ", ";\n  cursor: -webkit-grab;\n  cursor: grab;\n\n  img {\n    width: 100%;\n    border-radius: 50%;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n  };\n\n  div {\n    width: 100%;\n    border-radius: 50%;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n  };\n\n  @media (min-width: 480px) {\n    img {\n    width: 100%;\n    border-radius: 50%;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n  };\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 170px;\n  height: 170px;\n  border: 2px solid ", ";\n  border-radius: 100%;\n  overflow: hidden;\n  padding: 20px;\n  background: ", ";\n  cursor: -webkit-grab;\n  cursor: grab;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 50%;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n  };\n\n  @media (min-width: 480px){\n    width: 150px;\n    height: 150px;\n  }\n\n  @media (min-width: 578px){\n    width: 170px;\n    height: 170px;\n  }\n\n\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -194,7 +194,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  width: 30%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: flex-end;\n  @media (max-width: 480px) {\n    align-items: center;\n    width: 100%;\n  }\n  @media (max-width: 720px){\n    width: 40%\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  \n  @media (min-width: 480px) {\n    width: 40%;\n  }\n\n  @media (min-width: 768px){\n    align-items: flex-end;\n  }\n\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -204,7 +204,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\nwidth: 50%;\nmargin: 0 auto;\n  > div{\n    justify-content: space-evenly\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 70%;\n  margin: 0 auto;\n  \n  div{\n      justify-content: space-evenly\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -214,7 +214,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  background-color: #F8F8F8;\n  display: flex;\n  justify-content: center;\n  align-items: flex-start;\n  text-align: center;\n  flex: 1;\n  width: 100%;\n  overflow-x: hidden;\n  @media (max-width: 480px) {\n    flex-direction: column;\n    align-items: center;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  width: 100%;\n  overflow-x: hidden;\n\n  @media (min-width: 480px) {\n    align-items: flex-start;\n    flex-direction: row;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -257,11 +257,11 @@ exports.Camera = Camera;
 var SideForm = _styledComponents.default.div(_templateObject7(), function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject8());
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) ? (0, _styledComponents.css)(_templateObject8()) : (0, _styledComponents.css)(_templateObject9());
 }, function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) ? (0, _styledComponents.css)(_templateObject9()) : (0, _styledComponents.css)(_templateObject10());
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject10());
 });
 
 exports.SideForm = SideForm;
@@ -285,15 +285,15 @@ exports.SavedPlaces = SavedPlaces;
 var FormInput = _styledComponents.default.form(_templateObject15(), function (props) {
   var _props$theme5;
 
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject16());
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) ? (0, _styledComponents.css)(_templateObject16()) : (0, _styledComponents.css)(_templateObject17());
 }, function (props) {
   var _props$theme6;
 
-  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject17());
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject18());
 }, function (props) {
   var _props$theme7;
 
-  return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) ? (0, _styledComponents.css)(_templateObject18()) : (0, _styledComponents.css)(_templateObject19());
+  return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) && (0, _styledComponents.css)(_templateObject19());
 });
 
 exports.FormInput = FormInput;

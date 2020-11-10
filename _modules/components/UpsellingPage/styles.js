@@ -20,7 +20,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  text-align: center;\n  button{\n    width: 40%;\n  }\n  @media (max-width: 720px){\n    button{\n      width: 60%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  text-align: center;\n\n  button{\n    width: 90%;\n    font-size: 1.4em;\n    padding: 10px 0;\n  }\n\n  @media (min-width: 720px){\n    button{\n      width: 40%;\n      padding: 2px;\n      font-size: 1em;\n    }\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -30,7 +30,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  font-size: 16px;\n  div {\n    width: 100%;\n     h3 {\n      margin-block-start: 0.1em;\n      margin-block-end: 0.1em;\n      text-align: center;\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      font-size: 14px;\n    }\n  }\n  p{\n    color: #D81313;\n    margin: 10px auto;\n  }\n  button {\n    width: 50%;\n    margin: 5px auto;\n    font-size: 0.9em;\n  }\n  @media (max-width: 980px){\n    button{\n      width: 70%\n    }\n  }\n\n  @media (max-width: 768px){\n    font-size: 12px;\n  }\n\n  @media (max-width: 480px){\n    div{\n      h3{\n        font-size: 12px;  \n      }\n    }\n    button {\n      width: 100%\n    }\n  }\n\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  font-size: 16px;\n  div {\n    width: 100%;\n     h3 {\n      margin-block-start: 0.1em;\n      margin-block-end: 0.1em;\n      text-align: center;\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      font-size: 12px;\n    }\n  }\n  p{\n    color: #D81313;\n    margin: 2px auto;\n  }\n  button {\n    width: auto;\n    margin: 8px auto 0;\n    padding: 0 20px;\n    font-size: 1em;\n    line-height: 22px;\n\n  }\n\n  @media (min-width: 480px){\n    div{\n      h3{\n        font-size: 14px;  \n      }\n    }\n  }\n\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -50,7 +50,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  border: 1px solid #ccc;\n  width: 15%;\n  margin: 20px;\n  padding: 10px;\n  flex-direction: column;\n  justify-content: flex-start;\n  text-align: center;\n  border-radius: 9px;\n\n  @media (max-width: 768px){\n    width: 20%;\n  }\n\n  @media (max-width: 580px){\n    width: 25%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  border: 1px solid #eee;\n  width: 70%;\n  padding: 20px;\n  margin: 15px 0;\n  flex-direction: column;\n  justify-content: flex-start;\n  text-align: center;\n  border-radius: 9px;\n  box-sizing: border-box;\n\n  @media (min-width: 490px) {\n    width: 43%;\n  }\n\n  @media (min-width: 769px) {\n    width: 27%;\n    padding: 11px;\n  }\n\n  @media (min-width: 1024px) {\n    width: 20%;\n    margin: 10px 15px;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -60,7 +60,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  overflow: auto;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  overflow: auto;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -70,7 +70,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  padding-bottom: 20px;\n  button {\n    width: 45%;\n    margin-top: 20px;\n  }\n  @media (max-width: 768px){\n    justify-content: space-between;\n    min-height: calc(100vh - 160px)\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-direction: column;\n  min-height: calc(100vh - 160px);\n  width: 100%;\n  button {\n    width: 46%;\n    margin-top: 20px;\n  }\n  \n  @media (min-width: 768px){\n    justify-content: flex-start;\n    height: auto;\n    button {\n      width: 46%;\n      margin-top: 20px;\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

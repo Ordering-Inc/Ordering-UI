@@ -22,9 +22,13 @@ var NotFoundSource = function NotFoundSource(props) {
       btnTitle = props.btnTitle,
       onClickButton = props.onClickButton;
   var theme = (0, _styledComponents.useTheme)();
-  return /*#__PURE__*/_react.default.createElement(_styles.NotFound, null, /*#__PURE__*/_react.default.createElement(_styles.NotFoundImage, null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_styles.NotFound, {
+    id: "not-found-source"
+  }, /*#__PURE__*/_react.default.createElement(_styles.NotFoundImage, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
-    alt: "Not Found"
+    alt: "Not Found",
+    width: "300",
+    height: "260"
   })), /*#__PURE__*/_react.default.createElement("h1", null, content), !onClickButton && props.children && props.children, onClickButton && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",

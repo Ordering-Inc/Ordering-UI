@@ -39,6 +39,7 @@ var Select = function Select(props) {
       defaultValue = props.defaultValue,
       onChange = props.onChange,
       notAsync = props.notAsync;
+  var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -105,8 +106,9 @@ var Select = function Select(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
-    onClick: handleSelectClick,
-    disabled: orderState.loading
+    isHome: isHome,
+    disabled: orderState.loading,
+    onClick: handleSelectClick
   }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, !orderState.loading ? selectedOption.showOnSelected || selectedOption.content : '...'), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     position: "right",
     ref: dropdownReference

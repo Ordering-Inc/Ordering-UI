@@ -3,14 +3,24 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PageNotFoundText = exports.PageNotFoundContainer = void 0;
+exports.PageNotFoundImage = exports.PageNotFoundText = exports.PageNotFoundContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  @media (min-width: 1024px) {\n    img {\n      width: 450px;\n      height: 450px;\n    }\n  }\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 14px;\n  span{\n    padding: 12px 20px;\n    background-color: white;\n    font-size: 2.5rem;\n    border-radius: 12px;\n    border: 2px solid black;\n  }\n  img{\n    position: relative;\n    width: 8%;\n    bottom: 17px;\n  }\n  @media (max-width: 1024px){\n    span{\n      padding: 10px 20px;\n      font-size: 1.7rem;\n      border: 1.8px solid black;\n    }\n    img{\n      bottom: 14px;\n    }\n  }\n  @media (max-width: 980px){\n    span{\n      border: 2px solid black;\n    }\n    img{\n      width: 7%;\n    }\n  }\n  @media (max-width: 425px){\n    span{\n      font-size: 1.2rem;\n      border-width: 1px;\n      padding: 10px 15px\n    }\n  }\n  @media (max-width: 320px){\n    img{\n      width: 10%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 12px;\n  border: 2px solid black;\n  padding: 10px;\n  position: relative;\n\n  h1{\n    font-size: 23px;\n    margin: 0px;\n    padding: 0px;\n    font-weight: 600;\n  }\n\n  img{\n    position: absolute;\n    top: 42px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -20,7 +30,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  padding: 55px;\n  margin-top: 60px;\n  div{\n    width: 50%;\n  }\n  img {\n    width: 100%;\n  }\n  @media (max-width: 980px){\n    div{\n      width: 80%;\n    }\n  }\n  @media (max-width: 550px){\n    div{\n      width: 100%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 85%;\n  margin: auto;\n  height: ", ";\n\n  @media (min-width: 1024px) {\n    height: auto;\n    margin: 40px auto;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -31,10 +41,17 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var PageNotFoundContainer = _styledComponents.default.div(_templateObject());
+var PageNotFoundContainer = _styledComponents.default.div(_templateObject(), function (_ref) {
+  var width = _ref.width;
+  return width > 820 ? 'calc(100vh - 65px)' : 'calc(100vh - 97px)';
+});
 
 exports.PageNotFoundContainer = PageNotFoundContainer;
 
 var PageNotFoundText = _styledComponents.default.div(_templateObject2());
 
 exports.PageNotFoundText = PageNotFoundText;
+
+var PageNotFoundImage = _styledComponents.default.div(_templateObject3());
+
+exports.PageNotFoundImage = PageNotFoundImage;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
+exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -134,5 +134,16 @@ var convertHoursToMinutes = function convertHoursToMinutes(time) {
   var result = parseInt(hour, 10) * 60 + parseInt(minute, 10);
   return "".concat(result, "min");
 };
+/**
+ * Function to convert a string in string capitalized
+ * @param {string} str string to capitalize
+ */
+
 
 exports.convertHoursToMinutes = convertHoursToMinutes;
+
+var capitalize = function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+exports.capitalize = capitalize;

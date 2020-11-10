@@ -158,7 +158,9 @@ var AddressFormUI = function AddressFormUI(props) {
     });
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "address-form"
+  }, /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     onSubmit: handleSubmit(onSubmit),
     autoComplete: "new-off"
   }, (addressState === null || addressState === void 0 ? void 0 : (_addressState$address2 = addressState.address) === null || _addressState$address2 === void 0 ? void 0 : _addressState$address2.location) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {

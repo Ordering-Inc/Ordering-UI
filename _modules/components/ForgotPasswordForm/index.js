@@ -126,7 +126,9 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.ForgotPasswordContainer, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_FORGOT_PASSWORD', "Enter your email addres and we'll send you a link to reset your password.")))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, {
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_FORGOT_PASSWORD', "Enter your email addres and we'll send you a link to reset your password.")))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
@@ -138,6 +140,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     name: "email",
+    "aria-label": "email",
     spellcheck: "false",
     placeholder: t('EMAIL'),
     onChange: function onChange(e) {

@@ -206,7 +206,7 @@ var CheckoutUI = function CheckoutUI(props) {
     onClick: function onClick() {
       return handlerClickPlaceOrder();
     }
-  }, placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order'))), !(cart === null || cart === void 0 ? void 0 : cart.valid_address) && /*#__PURE__*/_react.default.createElement(_styles.InvalidAddress, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.'))));
+  }, placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order'))), !(cart === null || cart === void 0 ? void 0 : cart.valid_address) && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.'))));
 };
 
 var Checkout = function Checkout(props) {
@@ -240,7 +240,7 @@ var Checkout = function Checkout(props) {
       parsePrice = _useUtils2[0].parsePrice;
 
   var _useState3 = (0, _react.useState)({
-    loading: false,
+    loading: true,
     error: null,
     cart: null
   }),
@@ -424,7 +424,28 @@ var Checkout = function Checkout(props) {
     content: t('ERROR_CART', 'Sorry, the selected cart was not found.'),
     btnTitle: t('CHECKOUT_REDIRECT', 'Go to Checkout list'),
     onClickButton: handleCheckoutListRedirect
-  }), cartUuid && cartState.cart && ((_cartState$cart2 = cartState.cart) === null || _cartState$cart2 === void 0 ? void 0 : _cartState$cart2.status) !== 1 && /*#__PURE__*/_react.default.createElement(_orderingComponents.Checkout, checkoutProps), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+  }), cartState.loading && /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: '80%',
+      margin: 'auto auto 20px'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 35,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 150,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 35,
+    count: 6,
+    style: {
+      marginBottom: '10px'
+    }
+  })), cartUuid && cartState.cart && ((_cartState$cart2 = cartState.cart) === null || _cartState$cart2 === void 0 ? void 0 : _cartState$cart2.status) !== 1 && /*#__PURE__*/_react.default.createElement(_orderingComponents.Checkout, checkoutProps), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
     cartProducts: currentCart === null || currentCart === void 0 ? void 0 : currentCart.products,
     business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,

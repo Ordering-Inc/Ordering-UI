@@ -24,10 +24,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var FloatingButtonUI = function FloatingButtonUI(props) {
   var btnText = props.btnText,
       btnValue = props.btnValue,
-      handleButtonClick = props.handleButtonClick;
+      handleButtonClick = props.handleButtonClick,
+      disabled = props.disabled;
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    onClick: handleButtonClick
+    onClick: handleButtonClick,
+    disabled: disabled
   }, btnText, /*#__PURE__*/_react.default.createElement(_styles.BtnValue, null, btnValue)));
 };
 

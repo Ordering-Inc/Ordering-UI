@@ -199,7 +199,7 @@ var AddressListUI = function AddressListUI(props) {
         return handleDeleteClick(address);
       }
     }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, null))));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
+  })) : !addressOpen && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found"
   }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, addressList.error && addressList.error.length > 0 ? addressList.error.map(function (e, i) {

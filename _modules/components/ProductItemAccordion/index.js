@@ -166,14 +166,14 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     }, i === 0 ? t('REMOVE', 'Remove') : i);
   })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     bgimage: product === null || product === void 0 ? void 0 : product.images
-  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), windowSize.width <= 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), windowSize.width <= 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), isCartProduct && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsEdit
   }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     color: "#F2BB40",
     onClick: function onClick() {
       return onEditProduct(product);
     }
-  })), /*#__PURE__*/_react.default.createElement("span", {
+  })), onDeleteProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsDelete
   }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
     color: "#D81212",

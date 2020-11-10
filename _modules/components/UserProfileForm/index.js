@@ -152,7 +152,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: t('MY_ACCOUNT', 'My Account')
-  }), /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UserImage, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ExamineClick, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
+    className: "user-image"
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponents.ExamineClick, {
     onFiles: handleFiles,
     accept: "image/png, image/jpeg, image/jpg",
     disabled: !formState.loading
@@ -170,7 +172,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE', 'Put your image here'))) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo) ? /*#__PURE__*/_react.default.createElement("img", {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo,
     alt: "user image"
-  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE', 'Put your image here')))))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_GiPhotoCamera.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, edit ? /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE', 'Put your image here')))))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_GiPhotoCamera.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, {
+    className: "user-form"
+  }, edit ? /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: handleSubmit(onSubmit)
   }, !(useChekoutFileds && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.values(validationFields.fields).map(function (field) {
     return showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -224,7 +228,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   }))) : /*#__PURE__*/_react.default.createElement(_styles.UserData, null, formState.loading && !formState.changes.photo ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 20
-  }) : /*#__PURE__*/_react.default.createElement("h4", null, user.name, " ", user.lastname), formState.loading && !formState.changes.photo ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }) : /*#__PURE__*/_react.default.createElement("h1", null, user.name, " ", user.lastname), formState.loading && !formState.changes.photo ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200
   }) : /*#__PURE__*/_react.default.createElement("p", null, user.email), formState.loading && !formState.changes.photo ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200
@@ -237,7 +241,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onClick: function onClick() {
       return setEdit(true);
     }
-  }, t('EDIT', 'Edit'))), /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h5", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+  }, t('EDIT', 'Edit'))), /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     addressList: user.addresses
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PROFILE', 'profile'),

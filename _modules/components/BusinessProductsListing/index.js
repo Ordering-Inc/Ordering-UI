@@ -296,11 +296,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       key: i
     }, t('ERROR', 'Error'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   }))), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && auth && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
-    btnText: t('VIEW_ORDER', 'View Order'),
+    btnText: !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading'),
     btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length,
     handleClick: function handleClick() {
       return setOpenUpselling(true);
-    }
+    },
+    disabled: openUpselling
   }), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && openUpselling && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
     business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,

@@ -51,10 +51,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     categories: "categories",
     container: "container"
   }, categories && categories.length && categories.map(function (category) {
-    return category.id !== 0 &&
-    /*#__PURE__*/
-    // delete this validation when PR#59 is merged
-    _react.default.createElement(_Tabs.Tab, {
+    return category.id !== 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       className: "category",
       active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
       key: category.name,

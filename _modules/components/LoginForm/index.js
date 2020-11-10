@@ -94,7 +94,7 @@ var LoginFormUI = function LoginFormUI(props) {
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 2),
-      sessionDispatch = _useSession2[1];
+      login = _useSession2[1].login;
 
   var theme = (0, _styledComponents.useTheme)();
 
@@ -120,8 +120,7 @@ var LoginFormUI = function LoginFormUI(props) {
   }();
 
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
-    sessionDispatch({
-      type: 'login',
+    login({
       user: user,
       token: user.session.access_token
     });
@@ -164,7 +163,9 @@ var LoginFormUI = function LoginFormUI(props) {
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
     alt: "Logo login"
-  }), useLoginByEmail && useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+  }), useLoginByEmail && useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, useLoginByEmail && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
@@ -183,6 +184,7 @@ var LoginFormUI = function LoginFormUI(props) {
   }, useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "email",
     name: "email",
+    "aria-label": "email",
     placeholder: t('EMAIL'),
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
@@ -197,6 +199,7 @@ var LoginFormUI = function LoginFormUI(props) {
   }), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "tel",
     name: "cellphone",
+    "aria-label": "cellphone",
     placeholder: "Cellphone",
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
@@ -207,6 +210,7 @@ var LoginFormUI = function LoginFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
+    "aria-label": "password",
     placeholder: t('PASSWORD'),
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),

@@ -36,7 +36,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  flex: 1;\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex: 1;\n\n  svg {\n    font-size: 18px;\n  }\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -76,7 +76,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  display: inline-block;\n  height: 34px;\n  border-radius: 34px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  background-color: #CCC;\n  color: #333;\n  position: relative;\n\n  &:disabled {\n    pointer-events: none;\n  }\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: inline-block;\n  height: 34px;\n  border-radius: 34px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  background-color: ", " !important;\n  color: ", " !important;\n  position: relative;\n\n  &:disabled {\n    pointer-events: none;\n  }\n\n  ", "\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -86,7 +86,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  padding-left: 15px;\n  padding-right: 15px;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex: 1;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  z-index: 11;\n\n  @media (max-width: 380px) {\n    padding-left: 9px;\n    padding-right: 9px;\n    font-size: 13px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding-left: 9px;\n  padding-right: 9px;\n  font-size: 13px;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex: 1;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  z-index: 11;\n\n  @media (min-width: 381px) {\n    padding-left: 15px;\n    padding-right: 15px;\n  }\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -166,7 +166,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n    background-color: ", ";\n  \n    &:hover {\n      background-color: ", ";\n    }\n  "]);
+  var data = _taggedTemplateLiteral(["\n    background-color: ", ";\n\n    &:hover {\n      background-color: ", ";\n    }\n  "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -222,7 +222,13 @@ var Selected = _styledComponents.default.div(_templateObject10());
 
 exports.Selected = Selected;
 
-var Select = _styledComponents.default.div(_templateObject11(), function (props) {
+var Select = _styledComponents.default.div(_templateObject11(), function (_ref4) {
+  var isHome = _ref4.isHome;
+  return isHome ? 'rgba(247,247,247,0.3)' : '#CCC';
+}, function (_ref5) {
+  var isHome = _ref5.isHome;
+  return isHome ? '#FFF' : '#333';
+}, function (props) {
   return props.open && (0, _styledComponents.css)(_templateObject12(), (0, _polished.darken)(0.07, '#CCC'));
 });
 

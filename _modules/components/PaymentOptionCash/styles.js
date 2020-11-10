@@ -14,7 +14,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  margin: 10px 0px 0px;\n  color: #D81212;\n  font-size: 20px;\n  font-weight: bold;\n\n  @media (max-width: 380px) {\n    font-size: 14px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 10px 0px 0px;\n  color: #D81212;\n  font-size: 14px;\n  font-weight: bold;\n\n  @media (min-width: 381px) {\n    font-size: 20px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -24,7 +24,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  @media (max-width: 650px) {\n    flex-direction: column;\n    input {\n      margin-top: 10px;\n      width: 100%;\n      box-sizing: border-box;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n\n  input {\n    margin-top: 10px;\n    width: 100%;\n    box-sizing: border-box;\n  }\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -44,7 +44,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  label {\n    font-size: 18px;\n    margin-right: 20px;\n    ", "\n  }\n\n  @media (max-width: 380px) {\n    label {\n      font-size: 16px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  label {\n    font-size: 16px;\n    margin-right: 20px;\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    label {\n      font-size: 18px;\n    }\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

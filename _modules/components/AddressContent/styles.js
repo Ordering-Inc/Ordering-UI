@@ -20,7 +20,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  @media (max-width: 768px) {\n    padding: 20px;\n  }\n\n  @media (max-width: 360px) {\n    padding: 20px 10px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 20px 10px;\n\n  @media (min-width: 769px) {\n    padding: 0px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

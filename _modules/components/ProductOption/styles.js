@@ -10,7 +10,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  font-size: 14px;\n  margin: 0px;\n  text-transform: capitalize;\n  color: #A52121;\n  font-weight: 500;\n\n  @media (max-width: 380px) {\n    font-size: 13px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 13px;\n  margin: 0px;\n  text-transform: capitalize;\n  color: #A52121;\n  font-weight: 500;\n\n  @media (min-width: 381px) {\n    font-size: 14px;\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -20,7 +20,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  font-size: 18px;\n  margin: 0px;\n\n  @media (max-width: 380px) {\n    font-size: 18px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n    width: 70%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 18px;\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  width: 70%;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;

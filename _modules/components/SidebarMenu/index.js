@@ -92,16 +92,17 @@ var SidebarMenu = function SidebarMenu(props) {
   (0, _react.useEffect)(function () {
     if (isMenuOpen) {
       if (width <= 489) {
-        console.log('in');
         document.getElementById('sidebar_menu').style.width = '100vh';
       } else {
-        console.log('in2');
         document.getElementById('sidebar_menu').style.width = '340px';
       }
     }
   }, [width]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    auth: auth
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
     isHome: isHome,
+    "aria-label": "menu",
     onClick: function onClick() {
       return actionSidebar(true);
     }
@@ -110,6 +111,7 @@ var SidebarMenu = function SidebarMenu(props) {
     isHome: isHome
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuClose, {
     isHome: isHome,
+    "aria-label": "close",
     onClick: function onClick() {
       return actionSidebar(false);
     }
@@ -154,7 +156,11 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
     active: window.location.pathname === '/profile/orders'
-  }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null)), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
+    onCustomClick: function onCustomClick() {
+      return actionSidebar(false);
+    }
+  })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({

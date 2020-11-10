@@ -74,7 +74,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n\n  button.addcard {\n    width: 60%;\n    margin-top: 20px;\n    padding-top: 8px;\n    padding-bottom: 8px;\n\n    @media (max-width: 380px) {\n      width: 100%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n\n  button.addcard {\n    width: 100%;\n    margin-top: 20px;\n    padding-top: 8px;\n    padding-bottom: 8px;\n\n    @media (min-width: 381px) {\n      width: 60%;\n    }\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;

@@ -34,7 +34,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: 0px;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #FFF;\n  z-index: 1000;\n\n  button {\n    position: relative;\n    width: 50%;\n    padding: 10px;\n    text-align: center;\n    font-size: 20px;\n    margin: 10px 0px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    @media (max-width: 578px) {\n      width: 80%;\n    }\n\n    @media (max-width: 380px) {\n      width: 90%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: 0px;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #FFF;\n  z-index: 1000;\n\n  button {\n    position: relative;\n    width: 90%;\n    padding: 10px;\n    text-align: center;\n    font-size: 20px;\n    margin: 10px 0px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    @media (min-width: 850px) {\n      width: 80%;\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

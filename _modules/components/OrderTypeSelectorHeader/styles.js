@@ -24,7 +24,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  svg {\n    margin-right: 5px;\n    ", "\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

@@ -24,7 +24,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: flex-end;\n\n  input {\n    width: 200px;\n    -webkit-transition: width 0.4s ease-in-out;\n    transition: width 0.4s ease-in-out;\n    background-image: url(", ");\n    background-position: right 10px center;\n    background-repeat: no-repeat;\n    background-size: 15px;\n    ", "\n\n    @media (min-width: 681px) {\n      &:focus {\n        width: 50%;\n      }\n    }\n\n    @media (max-width: 680px) {\n      width: 100%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: flex-end;\n  margin: 28px 0 5px;\n\n  input {\n    width: 100%;\n    -webkit-transition: width 0.4s ease-in-out;\n    transition: width 0.4s ease-in-out;\n    background-image: url(", ");\n    background-position: right 10px center;\n    background-repeat: no-repeat;\n    background-size: 15px;\n    background-color: #F8F8F8;\n    ", "\n\n    @media (min-width: 681px) {\n      width: 200px;\n      &:focus {\n        width: 50%;\n      }\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.InvalidAddress = exports.CartItemActions = exports.CartItemInfo = exports.CartItemLogo = exports.LogoWrapper = exports.CartItemWrapper = exports.CartItem = exports.CartsList = exports.NotFoundImage = exports.NotFound = exports.WarningMessage = exports.WrapperPlaceOrderButton = exports.CartContainer = exports.DriverTipContainer = exports.PaymentMethodContainer = exports.UserDetailsContainer = exports.WrappContainer = exports.Container = void 0;
+exports.WarningText = exports.CartItemActions = exports.CartItemInfo = exports.CartItemLogo = exports.LogoWrapper = exports.CartItemWrapper = exports.CartItem = exports.CartsList = exports.NotFoundImage = exports.WarningMessage = exports.WrapperPlaceOrderButton = exports.CartContainer = exports.DriverTipContainer = exports.PaymentMethodContainer = exports.UserDetailsContainer = exports.WrappContainer = exports.Container = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,18 +17,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n  margin: 10px auto 15px;\n  text-align: center;\n  color: ", ";\n"]);
-
-  _templateObject19 = function _templateObject19() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject18() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  button {\n    cursor: pointer;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n    @media (max-width: 360px) {\n      font-size: 14px;\n    }\n  }\n\n  span {\n    font-weight: bold;\n  }\n\n  @media (max-width: 576px) {\n    font-size: 14px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 10px auto 15px;\n  text-align: center;\n  color: ", ";\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -38,7 +28,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  width: 75%;\n  h1,\n  p {\n    margin: 3px 15px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  h1 {\n    font-size: 18px;\n  }\n  p {\n    font-size: 15px;\n    opacity: 0.8;\n    color: ", ";\n    font-weight: bold;\n  }\n\n  @media(max-width: 480px){\n    width: 70%;\n    h1,\n    p {\n      margin: 3px 10px;\n    }\n    h1{\n      font-size: 16px;\n    }\n    p{\n      font-size: 12px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  font-size: 14px;\n\n  button {\n    cursor: pointer;\n    font-size: 14px;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n    @media (min-width: 361px) {\n      font-size: 16px;\n    }\n  }\n\n  span {\n    font-weight: bold;\n  }\n\n  @media (min-width: 577px) {\n    font-size: 16px;\n  }\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -47,10 +37,8 @@ function _templateObject17() {
   return data;
 }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: contain;\n  object-fit: cover;\n  background-position: center;\n  min-height: 75px;\n  border-radius: 10px;\n  @media (max-width: 480px){\n    width: 50px;\n    height: 50px;\n    min-height: 50px;    \n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  width: 70%;\n  h1,\n  p {\n    margin: 3px 10px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  h1 {\n    font-size: 16px;\n  }\n  p {\n    font-size: 12px;\n    opacity: 0.8;\n    color: ", ";\n    font-weight: bold;\n  }\n\n  @media (min-width: 768px) {\n    h1 {\n      font-size: 18px;\n    }\n\n    p {\n      font-size: 15px;\n    }\n  }\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -59,8 +47,10 @@ function _templateObject16() {
   return data;
 }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  max-width: 75px;\n  max-height: 75px;\n  height: 75px;\n  width: 75px;\n  @media (max-width: 480px){\n    align-self: center;\n    width: 50px;\n    height: 50px;\n    min-height: 50px;\n    max-width: 50px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 50px;\n  height: 50px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: contain;\n  object-fit: cover;\n  background-position: center;\n  min-height: 50px;\n  border-radius: 10px;\n\n  @media (min-width: 481px){\n    width: 100%;\n    height: 100%;\n    min-height: 75px;\n  }\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -70,7 +60,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n"]);
+  var data = _taggedTemplateLiteral(["\n  align-self: center;\n  width: 50px;\n  height: 50px;\n  min-height: 50px;\n  max-width: 50px;\n\n  @media (min-width: 481px){\n    max-width: 75px;\n    max-height: 75px;\n    height: 75px;\n    width: 75px;\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -80,7 +70,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  background: #F8F8F8 0% 0% no-repeat padding-box;\n  box-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  margin: 20px 0px;\n  padding: 10px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -90,7 +80,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 80%;\n  margin: auto;\n\n  @media (max-width: 380px) {\n    width: 90%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  background: #F8F8F8 0% 0% no-repeat padding-box;\n  box-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  margin: 20px 0px;\n  padding: 10px;\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -100,7 +90,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  max-width: 300px;\n\n  img {\n    width: 300px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 90%;\n  margin: auto;\n\n  @media (min-width: 381px) {\n    width: 80%;\n  }\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -110,7 +100,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 50%;\n  height: 100vh;\n  margin: 10px auto;\n\n  h1 {\n    opacity: 0.5;\n    text-align: center;\n  }\n\n  @media (max-width: 576px) {\n    width: 80%;\n    h1 {\n      font-size: 24px;\n    }\n  }\n\n  @media (max-width: 360px) {\n    h1 {\n      font-size: 20px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  max-width: 300px;\n\n  img {\n    width: 300px;\n  }\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -130,7 +120,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 150px;\n  max-height: 300px;\n  background-color: #F2BB40;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0.8;\n  border-radius: 10px;\n  position: relative;\n\n  svg {\n    position: absolute;\n    font-size: 30px;\n    top: 0;\n    left: 0;\n    margin: 11px;\n    ", "  \n  }\n\n  h1 {\n    font-size: 20px;\n    margin: 0px 60px;\n    text-align: center;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 150px;\n  max-height: 300px;\n  background-color: #F2BB40;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0.8;\n  border-radius: 10px;\n  position: relative;\n\n  svg {\n    position: absolute;\n    font-size: 30px;\n    top: 0;\n    left: 0;\n    margin: 11px;\n    ", "\n  }\n\n  h1 {\n    font-size: 20px;\n    margin: 0px 60px;\n    text-align: center;\n  }\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -140,7 +130,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  margin: 20px 0px 10px;\n\n  button {\n    width: 70%;\n    padding: 5px 20px;\n    cursor: pointer;\n\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n\n  @media (max-width: 512px) {\n    button {\n      width: 100%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  margin: 20px 0px 10px;\n\n  button {\n    width: 100%;\n    padding: 5px 20px;\n    cursor: pointer;\n\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n\n  @media (min-width: 513px) {\n    button {\n      width: 70%;\n    }\n  }\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -180,7 +170,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin: 20px 0px;\n  flex-wrap: wrap;\n\n  div.user {\n    width: 50%;\n  }\n\n  div.business {\n    width: 50%;\n    h1 {\n      margin: 0px;\n      font-size: 24px;\n    }\n\n    @media (min-width: 993px) {\n      text-align: center;\n    }\n  }\n\n  @media (max-width: 760px) {\n    div.user,\n    div.business {\n      width: 100%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin: 20px 0px;\n  flex-wrap: wrap;\n\n  div.user,\n  div.business {\n    width: 100%;\n  }\n\n  div.business {\n    h1 {\n      margin: 0px;\n      font-size: 24px;\n    }\n\n    @media (min-width: 993px) {\n      text-align: center;\n    }\n  }\n\n  @media (min-width: 761px) {\n    div.user,\n    div.business {\n      width: 40%;\n    }\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -190,7 +180,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  margin: auto;\n\n  @media (max-width: 512px) {\n    width: 90%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 90%;\n  margin: auto;\n\n  @media (min-width: 513px) {\n    width: 80%;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -243,31 +233,27 @@ var WarningMessage = _styledComponents.default.div(_templateObject8(), function 
 
 exports.WarningMessage = WarningMessage;
 
-var NotFound = _styledComponents.default.div(_templateObject10());
-
-exports.NotFound = NotFound;
-
-var NotFoundImage = _styledComponents.default.div(_templateObject11());
+var NotFoundImage = _styledComponents.default.div(_templateObject10());
 
 exports.NotFoundImage = NotFoundImage;
 
-var CartsList = _styledComponents.default.div(_templateObject12());
+var CartsList = _styledComponents.default.div(_templateObject11());
 
 exports.CartsList = CartsList;
 
-var CartItem = _styledComponents.default.div(_templateObject13());
+var CartItem = _styledComponents.default.div(_templateObject12());
 
 exports.CartItem = CartItem;
 
-var CartItemWrapper = _styledComponents.default.div(_templateObject14());
+var CartItemWrapper = _styledComponents.default.div(_templateObject13());
 
 exports.CartItemWrapper = CartItemWrapper;
 
-var LogoWrapper = _styledComponents.default.div(_templateObject15());
+var LogoWrapper = _styledComponents.default.div(_templateObject14());
 
 exports.LogoWrapper = LogoWrapper;
 
-var CartItemLogoStyled = _styledComponents.default.div(_templateObject16());
+var CartItemLogoStyled = _styledComponents.default.div(_templateObject15());
 
 var CartItemLogo = function CartItemLogo(props) {
   return /*#__PURE__*/_react.default.createElement(CartItemLogoStyled, _extends({}, props, {
@@ -279,18 +265,18 @@ var CartItemLogo = function CartItemLogo(props) {
 
 exports.CartItemLogo = CartItemLogo;
 
-var CartItemInfo = _styledComponents.default.div(_templateObject17(), function (props) {
+var CartItemInfo = _styledComponents.default.div(_templateObject16(), function (props) {
   return props.theme.colors.primary;
 });
 
 exports.CartItemInfo = CartItemInfo;
 
-var CartItemActions = _styledComponents.default.div(_templateObject18());
+var CartItemActions = _styledComponents.default.div(_templateObject17());
 
 exports.CartItemActions = CartItemActions;
 
-var InvalidAddress = _styledComponents.default.p(_templateObject19(), function (props) {
+var WarningText = _styledComponents.default.p(_templateObject18(), function (props) {
   return props.theme.colors.primary;
 });
 
-exports.InvalidAddress = InvalidAddress;
+exports.WarningText = WarningText;

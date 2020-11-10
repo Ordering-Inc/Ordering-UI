@@ -30,7 +30,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n  height: calc(100vh - 45px);\n  margin: auto;\n\n  h1 {\n    opacity: 0.5;\n    text-align: center;\n  }\n\n  @media (max-width: 410px) {\n    h1 {\n      font-size: 24px;\n    }\n  }\n\n  @media (max-width: 360px) {\n    h1 {\n      font-size: 20px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n  height: calc(100vh - 45px);\n  margin: auto;\n\n  h1 {\n    font-size: 20px;\n    opacity: 0.5;\n    text-align: center;\n  }\n\n  @media (min-width: 411px) {\n    h1 {\n      font-size: 24px;\n    }\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -50,7 +50,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  padding: 15px;\n  background: #F8F8F8;\n\n  @media (max-width: 380px) {\n    padding: 5px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: #F8F8F8;\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

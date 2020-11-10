@@ -104,7 +104,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: ", ";\n  border-radius: 10px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  max-height: 90vh;\n  overflow: auto;\n  @media (max-width: 860px) {\n    width: 80%;\n  }\n  @media (max-width: 768px) {\n    width: 100vw;\n    height: 100vh;\n    max-height: 100vh;\n    border-radius: 0px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: 100%;\n  max-height: 100vh;\n  overflow: auto;\n\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: 10px;\n    height: auto;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;

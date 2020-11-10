@@ -15,7 +15,7 @@ var _FaCarSide = _interopRequireDefault(require("@meronex/icons/fa/FaCarSide"));
 
 var _FaTruckPickup = _interopRequireDefault(require("@meronex/icons/fa/FaTruckPickup"));
 
-var _GrDeliver = _interopRequireDefault(require("@meronex/icons/gr/GrDeliver"));
+var _MdcTruckDeliveryOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcTruckDeliveryOutline"));
 
 var _AiFillShop = _interopRequireDefault(require("@meronex/icons/ai/AiFillShop"));
 
@@ -40,10 +40,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
-  var _orderState$options;
-
-  var orderState = props.orderState,
-      handleChangeOrderType = props.handleChangeOrderType;
+  var handleChangeOrderType = props.handleChangeOrderType,
+      typeSelected = props.typeSelected;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -51,7 +49,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
 
   var orderTypes = [{
     value: 1,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), t('DELIVERY', 'Delivery'))
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_MdcTruckDeliveryOutline.default, null), t('DELIVERY', 'Delivery'))
   }, {
     value: 2,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_FaTruckPickup.default, null), t('PICKUP', 'Pickup'))
@@ -67,7 +65,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
   }];
   return /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: orderTypes,
-    defaultValue: ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) || 1,
+    defaultValue: typeSelected,
     onChange: function onChange(orderType) {
       return handleChangeOrderType(orderType);
     }

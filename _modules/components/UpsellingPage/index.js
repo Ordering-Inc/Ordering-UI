@@ -77,6 +77,10 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       modalIsOpen = _useState4[0],
       setModalIsOpen = _useState4[1];
 
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
+
   (0, _react.useEffect)(function () {
     var _upsellingProducts$pr, _upsellingProducts$pr2, _upsellingProducts$pr3;
 
@@ -103,14 +107,15 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       return handleUpsellingPage();
     },
     width: "70%"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !upsellingProducts.error ? upsellingProducts.products.map(function (product) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !upsellingProducts.error ? upsellingProducts.products.map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.Item, {
       key: product.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: product.images
+      src: product.images,
+      alt: "product-".concat(i)
     })), /*#__PURE__*/_react.default.createElement(_styles.Details, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
       title: product.name
-    }, product.name)), /*#__PURE__*/_react.default.createElement("p", null, "$", product.price), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, product.name)), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.price)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleFormProduct(product);

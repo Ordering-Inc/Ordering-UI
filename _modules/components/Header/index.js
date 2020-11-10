@@ -158,10 +158,12 @@ var Header = function Header(props) {
     src: isHome ? theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotypeInvert : theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype
   }), /*#__PURE__*/_react.default.createElement("img", {
     alt: "Isotype",
-    width: "45px",
+    width: "35px",
     height: "45px",
     src: isHome ? theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.isotypeInvert : theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$logos = _theme$images4.logos) === null || _theme$images4$logos === void 0 ? void 0 : _theme$images4$logos.isotype
-  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.Menu, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, null), /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
+  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
+    className: "left-header"
+  }, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, null), /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
       return handleTogglePopover('moment');
@@ -179,7 +181,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('addresses');
     }
-  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 870 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signin'
@@ -217,7 +219,7 @@ var Header = function Header(props) {
     onClick: function onClick(variant) {
       return openModal(variant);
     }
-  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), windowSize.width <= 820 && onlineStatus && windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
+  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), onlineStatus && (windowSize.width <= 820 && windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
     auth: auth,
     addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address,
     open: openPopover.addresses,
@@ -247,7 +249,7 @@ var Header = function Header(props) {
     onClick: function onClick(variant) {
       return openModal(variant);
     }
-  })), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();

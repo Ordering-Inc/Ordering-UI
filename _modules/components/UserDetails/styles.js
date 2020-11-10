@@ -34,7 +34,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  form {\n    input {\n      width: 70%;\n      &:disabled {\n        background-color: rgba(239, 239, 239, 0.3);\n        cursor: not-allowed;\n      }\n    }\n    button {\n      width: 70%;\n      &:disabled {\n        opacity: 0.5;\n        cursor: not-allowed;\n      }\n    }\n  }\n  @media (max-width: 760px) {\n    margin-bottom: 25px;\n    form {\n      input,\n      button {\n        width: 100%;\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin-bottom: 25px;\n  form {\n    input {\n      width: 100%;\n      &:disabled {\n        background-color: rgba(239, 239, 239, 0.3);\n        cursor: not-allowed;\n      }\n    }\n    button {\n      width: 100%;\n      &:disabled {\n        opacity: 0.5;\n        cursor: not-allowed;\n      }\n    }\n  }\n  @media (min-width: 761px) {\n    form {\n      input,\n      button {\n        width: 85%;\n      }\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

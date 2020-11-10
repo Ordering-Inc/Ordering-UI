@@ -34,12 +34,19 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LogoutButtonUI = function LogoutButtonUI(props) {
+  var onCustomClick = props.onCustomClick;
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var handleLogOutClick = function handleLogOutClick() {
+    props.handleLogoutClick();
+    onCustomClick && onCustomClick();
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    onClick: props.handleLogoutClick
+    onClick: handleLogOutClick
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, null, /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, null, t('LOGOUT', 'Logout'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
 };
 

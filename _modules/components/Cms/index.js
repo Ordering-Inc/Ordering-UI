@@ -45,7 +45,9 @@ var CmsUI = function CmsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.CmsContainer, null, loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonHeader, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.CmsContainer, {
+    id: "cms"
+  }, loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonHeader, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: "100%",
     height: "100%"
   })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonInformation, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

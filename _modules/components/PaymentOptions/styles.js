@@ -54,7 +54,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  width: calc(15% - 12px);\n  height: 60px;\n  cursor: pointer;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  border-radius: 10px;\n  margin-right: 10px;\n  margin-top: 10px;\n  text-align: center;\n\n  ", "\n  @media (max-width: 840px) {\n    width: calc(20% - 12px);\n  }\n\n  @media (max-width: 640px) {\n    width: calc(25% - 12px);\n  }\n\n  @media (max-width: 512px) {\n    width: calc(33% - 12px);\n  }\n\n  @media (max-width: 350px) {\n    width: calc(50% - 12px);\n  }\n\n  svg {\n    font-size: 30px;\n  }\n\n  p {\n    margin: 0px;\n    font-size: 12px;\n  }\n\n  &.active {\n    border: 1px solid ", ";\n  }\n\n  &:not(.active) {\n    border: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: calc(50% - 12px);\n  height: 60px;\n  cursor: pointer;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  border-radius: 10px;\n  margin-right: 10px;\n  margin-top: 10px;\n  text-align: center;\n\n  ", "\n\n  svg path {\n    fill: #000;\n  }\n\n  @media (min-width: 351px) {\n    width: calc(33% - 12px);\n  }\n\n  @media (min-width: 513px) {\n    width: calc(25% - 12px);\n  }\n\n  @media (min-width: 641px) {\n    width: calc(20% - 12px);\n  }\n\n  @media (min-width: 841px) {\n    width: calc(18% - 12px);\n  }\n\n  svg {\n    font-size: 30px;\n  }\n\n  p {\n    margin: 0px;\n    font-size: 12px;\n  }\n\n  &.active {\n    border: 1px solid ", ";\n  }\n\n  &:not(.active) {\n    border: ", ";\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -64,7 +64,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-around;\n  flex-wrap: wrap;\n\n  @media (max-width: 840px) {\n    justify-content: flex-start;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  flex-wrap: wrap;\n\n  @media (min-width: 841px) {\n    justify-content: space-around;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

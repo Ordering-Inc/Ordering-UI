@@ -11,6 +11,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _FiMinusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiMinusCircle"));
+
+var _FiPlusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiPlusCircle"));
+
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../utils");
@@ -88,7 +92,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 2),
       auth = _useSession2[0].auth,
-      sessionDispatch = _useSession2[1];
+      login = _useSession2[1].login;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -116,6 +120,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
+    setModalPageToShow('login');
   };
 
   var handleSuccessLogin = function handleSuccessLogin(user) {
@@ -145,11 +150,14 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   };
 
   var handleSuccessSignup = function handleSuccessSignup(user) {
-    sessionDispatch({
-      type: 'login',
+    login({
       user: user,
       token: user.session.access_token
     });
+  };
+
+  var isError = function isError(id) {
+    return errors["id:".concat(id)] && 'error';
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
@@ -186,7 +194,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       var currentState = productCart.options["id:".concat(option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
         key: option.id,
-        className: "".concat(errors["id:".concat(option.id)] && 'error')
+        className: isError(option.id)
       }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
         option: option,
         currentState: currentState,
@@ -212,23 +220,13 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     defaultValue: productCart.comment,
     onChange: handleChangeCommentState,
     disabled: !(productCart && !isSoldOut && maxProductQuantity)
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    className: "incdec",
-    circle: true,
-    outline: true,
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: decrement,
-    disabled: productCart.quantity === 1 || isSoldOut
-  }, /*#__PURE__*/_react.default.createElement("span", {
-    className: "sign"
-  }, "-")), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    className: "incdec",
-    circle: true,
-    outline: true,
+    className: "".concat(productCart.quantity === 1 || isSoldOut ? 'disabled' : '')
+  }), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
-    disabled: maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut
-  }, /*#__PURE__*/_react.default.createElement("span", {
-    className: "sign"
-  }, "+"))), productCart && !isSoldOut && maxProductQuantity && auth ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
+  })), productCart && !isSoldOut && maxProductQuantity && auth ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(maxProductQuantity === 0 || Object.keys(errors).length > 0 ? 'disabled' : ''),
     color: "primary",
     onClick: function onClick() {

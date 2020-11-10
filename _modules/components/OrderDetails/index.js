@@ -64,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _theme$images2, _theme$images2$logos, _order$business, _order$business2, _order$business3, _getOrderStatus, _getOrderStatus2, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$products;
+  var _order$business, _theme$images2, _theme$images2$logos, _order$business2, _order$business3, _order$business4, _getOrderStatus, _getOrderStatus2, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$products;
 
   var handleOrderRedirect = props.handleOrderRedirect;
 
@@ -100,8 +100,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var _props$order = props.order,
       order = _props$order.order,
       loading = _props$order.loading,
-      error = _props$order.error,
-      header = _props$order.header;
+      error = _props$order.error;
 
   var getOrderStatus = function getOrderStatus(status) {
     var orderStatus = [{
@@ -191,14 +190,21 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
-    businessHeader: header && header.result.header
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderLogo, {
-    bgimage: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype
+    businessHeader: order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.header
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, {
+    className: "order-header"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "Logotype",
+    width: "200px",
+    height: "90px",
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype
   }), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, {
     column: true
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_MESSAGE', 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("h1", null, parsePrice((order === null || order === void 0 ? void 0 : order.total) || 0))))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, order.driver && order.driver.phone && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_MESSAGE', 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("h1", null, parsePrice((order === null || order === void 0 ? void 0 : order.total) || 0))))), /*#__PURE__*/_react.default.createElement(_styles.Content, {
+    className: "order-content"
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    bgimage: order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, order.driver && order.driver.phone && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return window.open("tel:".concat(order.driver.phone));
     }
@@ -209,13 +215,15 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         business: true
       });
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.OrderData, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.uuid), /*#__PURE__*/_react.default.createElement("p", null, t('DATE_TIME_FOR_ORDER', 'Date and time for your order')), /*#__PURE__*/_react.default.createElement("p", {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.OrderData, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", {
+    className: "uuid"
+  }, order === null || order === void 0 ? void 0 : order.uuid), /*#__PURE__*/_react.default.createElement("p", null, t('DATE_TIME_FOR_ORDER', 'Date and time for your order')), /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
   }, order === null || order === void 0 ? void 0 : order.delivery_datetime), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   })), /*#__PURE__*/_react.default.createElement(_styles.OrderStatus, null, /*#__PURE__*/_react.default.createElement("span", null, (_getOrderStatus2 = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.StatusImage, null, /*#__PURE__*/_react.default.createElement("img", {
     src: getImage((order === null || order === void 0 ? void 0 : order.status) || 0),
-    alt: ""
+    alt: "status"
   })))), /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('CUSTOMER', 'Customer')), /*#__PURE__*/_react.default.createElement(_styles.OrderCustomer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "photo"
   }, (order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
@@ -253,7 +261,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         page: 'orders'
       });
     }
-  }, t('MY_ORDERS', 'My Orders'), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, null))))), loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  }, t('MY_ORDERS', 'My Orders'), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, null))))), loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
+    className: "skeleton-loading"
+  }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 100
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 250
@@ -269,13 +279,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     height: 100
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 200
-  })))), error && error.length > 0 && error.map(function (e, i) {
-    if (e) {
-      return /*#__PURE__*/_react.default.createElement("p", {
-        key: i
-      }, t('ERROR', 'ERROR'), ": [", e, "]");
-    }
-  }), !loading && !order && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })))), !loading && !order && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('PROFILE_ORDERS_REDIRECT', 'Go to Orders'),
     onClickButton: handleOrderRedirect

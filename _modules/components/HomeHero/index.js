@@ -94,7 +94,7 @@ var HomeHero = function HomeHero(props) {
     if (!(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) {
       setAlertState({
         open: true,
-        content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select an address to search')]
+        content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
       });
       return;
     }
@@ -132,12 +132,14 @@ var HomeHero = function HomeHero(props) {
     onClick: handleAddressInput,
     withIcon: true
   }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    name: "address-selection",
     "aria-label": "address selection",
     type: "text",
     disabled: true,
     placeholder: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_ADDRESS', 'Type address')
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
+    name: "find-business",
     onClick: handleFindBusinesses
   }, t('FIND_BUSINESSES', 'Find businesses'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS', 'Address'),

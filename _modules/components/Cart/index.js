@@ -147,7 +147,7 @@ var CartUI = function CartUI(props) {
         cartUuid: cart.uuid
       }
     });
-    onClickCheckout();
+    onClickCheckout && onClickCheckout();
   };
 
   var handleStoreRedirect = function handleStoreRedirect(slug) {
@@ -159,7 +159,7 @@ var CartUI = function CartUI(props) {
     });
 
     if (windowSize.width <= 768) {
-      onClickCheckout();
+      onClickCheckout && onClickCheckout();
     }
   };
 

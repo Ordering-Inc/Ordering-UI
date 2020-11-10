@@ -34,7 +34,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  font-size: 24px;\n  font-weight: bold;\n  cursor: pointer;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n\n  h4{\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    width: 100%;\n  }\n\n  svg {\n    color: #F2BB40;\n    margin-left: 5px;\n    font-size: 24px;\n    ", "\n  }\n  span {\n    font-size: 18px;\n    color: ", ";\n    margin-left: 5px;\n    ", "\n  }\n\n  @media (max-width: 580px) {\n    font-size: 18px;\n  }\n\n  @media (max-width: 410px) {\n    font-size: 16px;\n    span {\n      font-size: 16px;\n    }\n  }\n  @media (max-width: 370px) {\n    font-size: 14px;\n    span {\n      font-size: 14px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  font-weight: bold;\n  cursor: pointer;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n\n  h4{\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    width: 100%;\n  }\n\n  svg {\n    color: #F2BB40;\n    margin-left: 5px;\n    font-size: 24px;\n    ", "\n  }\n  span {\n    font-size: 14px;\n    color: ", ";\n    margin-left: 5px;\n    ", "\n  }\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n    span {\n      font-size: 18px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    font-size: 24px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -54,7 +54,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  width: 85%;\n  margin: auto;\n\n  @media (max-width: 992px) {\n    width: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: auto;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;

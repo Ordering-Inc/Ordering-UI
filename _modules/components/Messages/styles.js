@@ -24,7 +24,7 @@ function _templateObject35() {
 }
 
 function _templateObject34() {
-  var data = _taggedTemplateLiteral(["\n  white-space: nowrap;\n\n  button{\n    padding-top: 7px;\n    padding-bottom: 7px;\n    svg {\n       margin-right: 10px;\n       width: 1.5em;\n       height: 1.5em; \n       vertical-align: middle;\n       color: white;\n       ", "\n    }\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n\n  @media (max-width: 480px){\n    button{\n      svg {\n        margin: 0;\n      }\n      span {\n        display: none;\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  white-space: nowrap;\n\n  button{\n    padding-top: 7px;\n    padding-bottom: 7px;\n    svg {\n       width: 1.5em;\n       height: 1.5em; \n       vertical-align: middle;\n       color: white;\n       ", "\n    }\n\n    span {\n      display: none;\n    }\n\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n\n  @media (min-width: 480px){\n    button{\n      svg {\n        margin-right: 10px;\n      }\n      span {\n        display: inline;\n      }\n    }\n  }\n"]);
 
   _templateObject34 = function _templateObject34() {
     return data;
@@ -54,7 +54,7 @@ function _templateObject32() {
 }
 
 function _templateObject31() {
-  var data = _taggedTemplateLiteral(["\n  align-items: center;\n  display: flex;\n  margin-top: 3px;\n  height: auto;\n\n  input {\n    flex: 1;\n    padding-top: 10px;\n    padding-bottom: 10px;\n  }\n\n  @media (max-width: 640px){\n    input{\n      flex: initial;\n      width: 60%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  align-items: center;\n  display: flex;\n  margin-top: 3px;\n  height: auto;\n  width: 100%;\n  input {\n    padding-top: 10px;\n    padding-bottom: 10px;\n    width: 60%;\n    flex: 1;\n  }\n"]);
 
   _templateObject31 = function _templateObject31() {
     return data;
@@ -64,7 +64,7 @@ function _templateObject31() {
 }
 
 function _templateObject30() {
-  var data = _taggedTemplateLiteral(["\n  padding: 10px 20px;\n  background: #FAFAFA;\n  border-top: 1px solid #EEEEEE;\n\n  @media (max-width: 768px) {\n    padding: 0px 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0px 5px;\n  background: #FAFAFA;\n  border-top: 1px solid #EEEEEE;\n  height: 70px;\n  @media (min-width: 480px){\n    padding: 0px 20px;\n  }\n\n  @media (min-width: 768px) {\n    height: 60px;\n    padding: 10px 20px;\n  }\n"]);
 
   _templateObject30 = function _templateObject30() {
     return data;
@@ -174,7 +174,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n      border-radius: 40px 40px 40px 0px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      border-radius: 97px 97px 97px 0px;\n    "]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -184,7 +184,7 @@ function _templateObject19() {
 }
 
 function _templateObject18() {
-  var data = _taggedTemplateLiteral(["\n    border-radius: 97px 97px 97px 0px;\n\n    p:last-child {\n      left: initial;\n      right: 10px;\n    }\n\n    &[name=image]{\n      border-radius: 40px 40px 40px 0px;\n     }\n  "]);
+  var data = _taggedTemplateLiteral(["\n    border-radius: 40px 40px 40px 0px;\n\n    p:last-child {\n      left: initial;\n      right: 10px;\n    }\n\n    &[name=image]{\n      border-radius: 40px 40px 40px 0px;\n     }\n  "]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -194,7 +194,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  border-radius: 97px 97px 0px 97px;\n  padding: 10px 25px 10px 25px;\n  max-width: 40%;\n  min-width: 80px;\n  height: auto;\n  margin-bottom: 10px;\n  background: #D81212;\n  color: white;\n  overflow-wrap: break-word;\n  overflow: hidden;\n\n  p:last-child {\n    left: 10px;\n  }\n\n  &[name=image]{\n    border-radius: 40px 40px 0px 40px;\n    width: 100%;\n  }\n\n  ", "\n\n  @media (max-width: 1024px){\n    max-width: 60%\n  }\n\n  @media (max-width: 480px){\n    border-radius: 40px 40px 0px 40px;\n\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-radius: 40px 40px 0px 40px;\n  padding: 10px 25px 10px 25px;\n  max-width: 60%;\n  min-width: 80px;\n  height: auto;\n  margin-bottom: 10px;\n  background: #D81212;\n  color: white;\n  overflow-wrap: break-word;\n  overflow: hidden;\n\n  p:last-child {\n    left: 10px;\n  }\n\n  &[name=image]{\n    border-radius: 40px 40px 0px 40px;\n    width: 100%;\n  }\n\n  ", "\n  \n  @media (min-width: 480px){\n    border-radius: 97px 97px 0px 97px;\n\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    max-width: 40%\n  }\n\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -204,7 +204,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n      border-radius: 40px 40px 0px 40px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      border-radius: 97px 97px 0px 97px;\n      &[name=image]{\n        border-radius: 40px 40px 0px 40px;\n       }\n    "]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -214,7 +214,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n    border-radius: 97px 97px 0px 97px;\n      &[name=image]{\n      border-radius: 40px 40px 0px 40px;\n     }\n  "]);
+  var data = _taggedTemplateLiteral(["\n      border-radius: 40px 40px 0px 40px;\n  "]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -224,7 +224,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  border-radius: 97px 97px 97px 0px;\n  padding: 10px 25px 10px 25px;\n  max-width: 40%;\n  min-width: 80px;\n  margin-bottom: 10px;\n  background: #EFEFEF;\n  overflow: hidden;\n  overflow-wrap: break-word;\n  &[name=image]{\n    border-radius: 40px 40px 40px 0px;\n    width: 100%;\n  }\n\n  ", "\n\n  @media (max-width: 1024px){\n    max-width: 60%;\n  }\n  @media (max-width: 480px){\n    border-radius: 40px 40px 40px 0px;\n\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-radius: 40px 40px 40px 0px;\n  padding: 10px 25px 10px 25px;\n  max-width: 60%;\n  min-width: 80px;\n  margin-bottom: 10px;\n  background: #EFEFEF;\n  overflow: hidden;\n  overflow-wrap: break-word;\n  &[name=image]{\n    border-radius: 40px 40px 40px 0px;\n    width: 100%;\n  }\n\n  ", "\n\n  @media (min-width: 480px) {\n    border-radius: 97px 97px 97px 0px;\n\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    max-width: 40%;\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -234,7 +234,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  border-radius: 5px;\n  padding: 5px 15px;\n  max-width: 30%;\n  margin-bottom: 15px;\n  background: #EFEFEF;\n  text-align: center;\n  height: auto;\n  overflow: hidden;\n  overflow-wrap: break-word;\n  @media (max-width: 1024px){\n    max-width: 40%\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-radius: 5px;\n  padding: 5px 15px;\n  max-width: 40%;\n  margin-bottom: 15px;\n  background: #EFEFEF;\n  text-align: center;\n  height: auto;\n  overflow: hidden;\n  overflow-wrap: break-word;\n  @media (min-width: 1024px){\n    max-width: 30%\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -274,7 +274,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-y: auto;\n  overflow-x: hidden;\n  height: 55vh;\n  flex-direction: column;\n  padding: 0 20px;\n  > :first-child{\n    margin-top: 10px;\n  }\n  @media (max-width: 768px){\n    height: 70vh;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-y: auto;\n  overflow-x: hidden;\n  height: 70vh;\n  flex-direction: column;\n  padding: 0 20px;\n  > :first-child{\n    margin-top: 10px;\n  }\n  @media (min-width: 768px){\n    height: 60vh;\n  }\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;

@@ -79,9 +79,26 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
       };
     }
   });
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, reviewsList.error ? /*#__PURE__*/_react.default.createElement("h2", null, t('ERROR_UNKNOWN', 'An error has ocurred')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewOf, null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement("h3", null, t('REVIEWS_OF', 'Reviews of'), " ", businessName) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessReviewsContainer, null, reviewsList.error ? /*#__PURE__*/_react.default.createElement("h2", null, t('ERROR_UNKNOWN', 'An error has ocurred')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewOf, null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement("h3", null, t('REVIEWS_OF', 'Reviews of'), " ", businessName) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200
-  }), !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }), !reviewsList.loading ? /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    name: "desktop",
+    options: options,
+    defaultValue: options[0].value,
+    onChange: function onChange(val) {
+      return handleClickOption(val);
+    },
+    notAsync: true,
+    InitialIcon: _AiOutlineStar.default
+  })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 200,
+    height: 30
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperStars, null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_AiOutlineStar.default, {
+    color: "#D81212"
+  }), stars) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 100,
+    height: 30
+  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperSelect, null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: options,
     defaultValue: options[0].value,
     onChange: function onChange(val) {
@@ -98,13 +115,13 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
     width: 100,
     height: 30
   })), !reviewsList.loading ? reviewsList === null || reviewsList === void 0 ? void 0 : reviewsList.reviews.map(function (review) {
-    return /*#__PURE__*/_react.default.createElement(_styles.ReviewContainer, {
+    return /*#__PURE__*/_react.default.createElement(_styles.Review, {
       key: review.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.Comments, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('REVIEW_COMMENT', 'Name of user'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_AiOutlineStar.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.ReviewContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Comments, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('REVIEW_COMMENT', 'Name of user'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_AiOutlineStar.default, {
       color: "#D81212"
     }), " ", review.total)), /*#__PURE__*/_react.default.createElement(_styles.Comment, null, /*#__PURE__*/_react.default.createElement("p", {
       title: review.comment
-    }, review.comment))), /*#__PURE__*/_react.default.createElement(_styles.Scores, null, /*#__PURE__*/_react.default.createElement(Score, {
+    }, review.comment)))), /*#__PURE__*/_react.default.createElement(_styles.ScoresContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Scores, null, /*#__PURE__*/_react.default.createElement(Score, {
       star: review.quality,
       text: t('REVIEW_QUALITY', 'Quality of products')
     }), /*#__PURE__*/_react.default.createElement(Score, {
@@ -116,7 +133,7 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
     }), /*#__PURE__*/_react.default.createElement(Score, {
       star: review.package,
       text: t('REVIEW_PRODUCT_PACKAGING', 'Product Packaging')
-    })));
+    }))));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(2)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, {
       key: i
