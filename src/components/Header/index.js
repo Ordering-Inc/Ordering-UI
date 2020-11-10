@@ -88,10 +88,10 @@ export const Header = (props) => {
           <SidebarMenu auth={auth} />
           <LogoHeader onClick={() => handleGoToPage({ page: orderState.options?.address?.location ? 'search' : 'home' })}>
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
-            <img alt='Isotype' width='45px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
+            <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
           {onlineStatus && (
-            <Menu>
+            <Menu className='left-header'>
               <OrderTypeSelectorHeader />
               <MomentPopover
                 open={openPopover.moment}
@@ -112,7 +112,7 @@ export const Header = (props) => {
           <RightHeader>
             <Menu>
               {
-                !auth && windowSize.width > 768 && (
+                !auth && windowSize.width > 870 && (
                   <>
                     <MenuLink onClick={() => handleGoToPage({ page: 'signin' })}>{t('SIGNIN', 'Sign in')}</MenuLink>
                     <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
@@ -153,8 +153,8 @@ export const Header = (props) => {
           </RightHeader>
         )}
       </InnerHeader>
-      {windowSize.width <= 820 && onlineStatus &&
-        windowSize.width > 768 ? (
+      {onlineStatus && (
+        windowSize.width <= 820 && windowSize.width > 768 ? (
           <SubMenu>
             <AddressesPopover
               auth={auth}
@@ -182,7 +182,8 @@ export const Header = (props) => {
               onClick={(variant) => openModal(variant)}
             />
           </SubMenu>
-        )}
+        )
+      )}
       {modalIsOpen && (
         <Modal
           open={modalIsOpen}

@@ -14,11 +14,18 @@ export const ImageContainer = styled.div`
 `
 
 export const MyOrdersTitle = styled.div`
+  width: 100%;
   margin: 0 auto;
-  width: 80%;
-  @media(max-width: 768px){
-    padding: 0 15px;
-    width: 100%;
+  padding: 0 15px;
+
+  h1{
+    font-size: 18px;
+    margin: 18px 0;
+  }
+
+  @media (min-width: 768px){
+    padding: 0;
+    width: 80%
   }
 `
 
@@ -28,31 +35,21 @@ export const ActiveOrders = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   width: auto;
-  > :first-child {
-    margin-left: 20px;
-    ${props => props.theme?.rtl && css`
-    margin-left: 0;
-    margin-right: 20px;
-  `}
-  };
+  > div{
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
-}
-  @media(max-width: 768px){
-    > :first-child{
-      ${props => props.theme?.rtl ? css`
-        margin-right: 15px;
-      ` : css`
-        margin-left: 15px;
-      `}
-    }
   }
+
 `
 
 export const Card = styled.div`
-  min-width: 400px;
-  width: 400px;
+  min-width: 290px;
+  width: 290px;
   margin: 10px;
   display: inline-block;
   background: white;
@@ -62,14 +59,17 @@ export const Card = styled.div`
   ${props => props.theme?.rtl && css`
     text-align: right;
   `}
-  @media(max-width: 480px){
+
+  @media (min-width: 360px){
     min-width: 300px;
     width: 300px;
   }
-  @media(max-width: 360px){
-    min-width: 290px;
-    width: 290px;
+
+  @media (min-width: 480px){
+    min-width: 400px;
+    width: 400px;
   }
+
 `
 
 export const Map = styled.div`
@@ -92,21 +92,22 @@ export const Content = styled.div`
   padding: 10px;
 `
 export const Logo = styled.div`
-  width: 75px;
-  height: 75px;
+  width: 55px;
+  height: 55px;
   img {
     width: 100%;
     height: 100%;
     border-radius: 16px;
   }
-  @media (max-width: 480px){
-    width: 55px;
-    height: 55px;
+
+  @media (min-width: 480px){
+    width: 75px;
+   height: 75px;
   }
 `
 
 export const PastLogo = styled.div`
-  width: 75px;
+  width: 55px;
   height: 80%;
   img {
     width: 100%;
@@ -114,8 +115,8 @@ export const PastLogo = styled.div`
     border-radius: 17px;
     object-fit: contain;
   }
-  @media (max-width: 480px){
-    width: 55px;
+  @media (min-width: 480px){
+    width: 75px;
   }
 `
 
@@ -124,50 +125,63 @@ export const BusinessInformation = styled.div`
   flex-direction: column;
   flex: 1;
   padding-left: 10px;
+  font-size: 0.9em;
   ${props => props.theme?.rtl && css`
     padding-right: 10px;
     padding-left: 0;
   `}
-  h5 {
-    margin-block-end: 0.1em;
-    margin-block-start: 0.1em;
+  h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    margin-block-end: 0;
+    margin-block-start: 0;
   }
   p {
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
     color : #9A9A9A;
     white-space: nowrap;
+    font-size: 0.9em;
   }
   p[name='view_order'] {
     color: #D81313;
     cursor: pointer;
     text-decoration: none;
   }
-  @media(max-width: 768px){
-    font-size: 0.9em;
-  } 
-  @media(max-width: 480px){
-    h5 {
-    margin-block-end: 0;
-    margin-block-start: 0;
-    }
-    p{
-      font-size: 0.9em;
+
+  
+  @media (min-width: 480px){
+    h2 {
+    font-size: 14px;
+    margin-block-end: 0.1em;
+    margin-block-start: 0.1em;
     }
   }
+
+  @media (min-width: 768px){
+    font-size: 0.9em;
+    p {
+      font-size: 1em;
+    }
+  } 
+
 `
 
 export const OpenOrder = styled.div`
   height: 15%;
-  width: 95%;
+  width: 90%;
   margin: auto;
   button {
     width: 100%;
     height: 100%;
+    font-size: 0.8em;
   }
-  @media(max-width: 480px){
+
+  @media (min-width: 480px){
     button{
-      font-size: 0.8em;
+      font-size: 1em
     }
   }
 `
@@ -175,7 +189,8 @@ export const Price = styled.div`
   text-align: end;
   white-space: nowrap;
   text-overflow: ellipsis;
-  h5 {
+  h2 {
+    font-size: 14px;
     margin-block-end: 1em;
     margin-block-start: 0;
   }
@@ -183,43 +198,44 @@ export const Price = styled.div`
     margin-block-end: 0;
     margin-block-start: 1em;
     color: #ff9300;
+    font-size: 0.8em;
   }
-  @media (max-width: 640px){
+
+  @media (min-width: 768px){
     p{
-      font-size: 0.8em;
+      font-size: 1em;
     }
   }
 `
 export const OrdersPast = styled.div`
-  width: 80%;
+  width: 100%;
+  padding: 0 10px;
   display: flex;
   flex-direction: column-reverse;
   margin: 0 auto;
-  div:last-child{
-    border-top: none;
-  }
+
   p{
     margin-block-end: 0;
     margin-block-start: 0;
     color: #9A9A9A
   }
-  @media(max-width: 768px){
-    width: 100%;
-    padding: 0 10px;
-  }
-  @media(max-width: 480px){
-    div{
-      border: none;
+  
+  @media(min-width: 480px){
+    width: 80%;
+    padding: 0;
+      div:last-child{
+      border-top: none;
     }
   }
 `
 export const IndividualOrderPast = styled.div`
   width: 100%;
   display: flex;
-  height: 140px;
-  border-top: 1px solid #ccc;
-  @media(max-width: 768px){
-    height: 100px;
+  height: 100px;
+  border: none;
+  @media(min-width: 480px){
+    height: 140px;
+    border-top: 1px solid #ccc;
   }
 `
 export const OrderPastContent = styled.div`
@@ -227,14 +243,33 @@ export const OrderPastContent = styled.div`
   flex: 1;
   align-items: center;
   padding: 10px 0;
+  padding-right: 5px;
+  min-width: 220px;
+  ${props => props.theme?.rtl && css`
+    padding-left: 5px;
+    padding-right: 0px;
+  `}
 `
+
+export const WrapperBusinessTitle = styled.div`
+  width: 95%
+`
+
 export const Reorder = styled.div`
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 25%;
   text-align: center;
   align-items: center;
   justify-content: center;
+  font-size: 0.8em;
+  margin-right: 25px;
+
+  ${props => props.theme?.rtl && css`
+      margin-left: 25px;
+      margin-right: 0;
+  `}
+
   p {
     color: #53ad26;
     margin-block-start: 0;
@@ -242,32 +277,39 @@ export const Reorder = styled.div`
   }
   button {
     margin: 5px 0;
-    width: 60%
+    width: 100%;
+    font-size: 0.9em;
+    white-space: nowrap;
   }
-  @media (max-width: 1024px){
-    button{
-      width: 80%;
-    }
-  }
-  @media (max-width: 768px){
-    margin-right: 25px;
-    button{
-      width: 90%;
-    }
-  }
-  @media (max-width: 578px){
-    button{
-      width: 100%;
-    }
-  }
-  @media (max-width: 480px){
-    width: 90px;
-    font-size: 0.8em;
+
+
+
+  @media (min-width: 480px){
+    font-size: 1em;
     button{
       width: 90%;
       font-size: 0.9em;
     }
   }
+
+  @media (min-width: 768px){
+    ${props => props.theme?.rtl ? css`
+      margin-left: 0;
+    ` : css`
+      margin-right: 0;
+    `}
+    button{
+      width: 80%;
+    }
+  }
+
+  @media (min-width: 1024px){
+    button{
+      width: 50%;
+    }
+  }
+
+  
 `
 
 export const SkeletonOrder = styled.div`
@@ -275,6 +317,11 @@ export const SkeletonOrder = styled.div`
   display: flex;
   width: auto;
   margin: 0 auto;
+  margin-left: 30px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 30px;
+    margin-left: 0;
+  `}
 `
 
 export const SkeletonCard = styled.div`
@@ -284,12 +331,12 @@ export const SkeletonCard = styled.div`
 export const SkeletonMap = styled.div`
   border-radius: 16px;
   span{
-    width: 400px;
+    width: 300px;
     height: 100px;
   }
-  @media(max-width: 480px){
+  @media(min-width: 480px){
     span{
-      width: 300px;
+      width: 400px;
     }
   }
 `
@@ -338,19 +385,29 @@ export const SkeletonReorder = styled.div`
   position: relative;
   text-align: center;
   align-items: center;
+  margin-right: 25px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 25px;
+    margin-right: 0;
+  `}
   span:first-child span{
-    width: 80px;
+    width: 40px;
   }
   span:last-child{
-    width: 150px;
+    width: 75px;
     height: 30px;
   }
-  @media(max-width: 480px){
+  @media(min-width: 480px){
+    ${props => props.theme?.rtl ? css`
+      margin-left: 0;
+    ` : css`
+      margin-right: 0;
+    `}
     span:first-child span{
-      width: 40px;
+      width: 80px;
     }
     span:last-child{
-      width: 75px;
+      width: 150px;
     }    
   }
 `

@@ -1,28 +1,18 @@
 import styled from 'styled-components'
 
 export const PageNotFoundContainer = styled.div`
-  display: flex;
   position: relative;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 55px;
-  margin-top: 60px;
-  div{
-    width: 50%;
-  }
-  img {
-    width: 100%;
-  }
-  @media (max-width: 980px){
-    div{
-      width: 80%;
-    }
-  }
-  @media (max-width: 550px){
-    div{
-      width: 100%;
-    }
+  width: 85%;
+  margin: auto;
+  height: ${({ width }) => width > 820 ? 'calc(100vh - 65px)' : 'calc(100vh - 97px)'};
+
+  @media (min-width: 1024px) {
+    height: auto;
+    margin: 40px auto;
   }
 `
 
@@ -31,48 +21,30 @@ export const PageNotFoundText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 14px;
-  span{
-    padding: 12px 20px;
-    background-color: white;
-    font-size: 2.5rem;
-    border-radius: 12px;
-    border: 2px solid black;
+  background-color: white;
+  border-radius: 12px;
+  border: 2px solid black;
+  padding: 10px;
+  position: relative;
+
+  h1{
+    font-size: 23px;
+    margin: 0px;
+    padding: 0px;
+    font-weight: 600;
   }
+
   img{
-    position: relative;
-    width: 8%;
-    bottom: 17px;
+    position: absolute;
+    top: 42px;
   }
-  @media (max-width: 1024px){
-    span{
-      padding: 10px 20px;
-      font-size: 1.7rem;
-      border: 1.8px solid black;
-    }
-    img{
-      bottom: 14px;
-    }
-  }
-  @media (max-width: 980px){
-    span{
-      border: 2px solid black;
-    }
-    img{
-      width: 7%;
-    }
-  }
-  @media (max-width: 425px){
-    span{
-      font-size: 1.2rem;
-      border-width: 1px;
-      padding: 10px 15px
-    }
-  }
-  @media (max-width: 320px){
-    img{
-      width: 10%;
+`
+
+export const PageNotFoundImage = styled.div`
+  @media (min-width: 1024px) {
+    img {
+      width: 450px;
+      height: 450px;
     }
   }
 `

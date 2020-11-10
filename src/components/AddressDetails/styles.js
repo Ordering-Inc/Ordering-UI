@@ -12,12 +12,8 @@ export const Header = styled.div`
 `
 
 export const WrappMap = styled.div`
-  width: 85%;
+  width: 100%;
   margin: auto;
-
-  @media (max-width: 992px) {
-    width: 100%;
-  }
 `
 
 export const Map = styled.div`
@@ -34,7 +30,7 @@ export const Map = styled.div`
 export const Text = styled.div`
   display: flex;
   align-items: center;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   overflow: hidden;
@@ -58,7 +54,7 @@ export const Text = styled.div`
     `}
   }
   span {
-    font-size: 18px;
+    font-size: 14px;
     color: ${props => props.theme.colors.primary};
     margin-left: 5px;
     ${props => props.theme?.rtl && css`
@@ -67,20 +63,14 @@ export const Text = styled.div`
     `}
   }
 
-  @media (max-width: 580px) {
+  @media (min-width: 425px) {
     font-size: 18px;
+    span {
+      font-size: 18px;
+    }
   }
 
-  @media (max-width: 410px) {
-    font-size: 16px;
-    span {
-      font-size: 16px;
-    }
-  }
-  @media (max-width: 370px) {
-    font-size: 14px;
-    span {
-      font-size: 14px;
-    }
+  @media (min-width: 768px) {
+    font-size: 24px;
   }
 `

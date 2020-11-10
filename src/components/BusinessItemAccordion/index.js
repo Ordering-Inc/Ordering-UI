@@ -98,7 +98,7 @@ export const BusinessItemAccordion = (props) => {
             </WrapperBusinessLogo>
           )}
           <ContentInfo>
-            <h1>{business?.name}</h1>
+            <h2>{business?.name}</h2>
             {orderState?.options?.type === 1 ? (
               <span>
                 <FiClock />

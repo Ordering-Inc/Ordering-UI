@@ -12,7 +12,7 @@ export const Container = styled.div`
 
   button {
     position: relative;
-    width: 50%;
+    width: 90%;
     padding: 10px;
     text-align: center;
     font-size: 20px;
@@ -21,12 +21,8 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media (max-width: 578px) {
+    @media (min-width: 850px) {
       width: 80%;
-    }
-
-    @media (max-width: 380px) {
-      width: 90%;
     }
   }
 `

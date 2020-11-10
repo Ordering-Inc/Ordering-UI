@@ -6,49 +6,52 @@ import { DivContainer } from './styles'
 
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, categories, container }) => {
+export const AutoScroll = ({ children, categories, container, modal, loading }) => {
   const { width } = useWindowSize()
   const [categoriesElement, setCategoriesElement] = useState([])
+  const [containerElement, setContainerElement] = useState([])
   const [theme] = useTheme()
-  useEffect(() => {
-    const containerElement = document.getElementById(container)
-      .addEventListener('scroll', handleScroll)
 
+  useEffect(() => {
+    const containerElementListener = document?.getElementById(container)
+      ?.addEventListener('scroll', handleScroll)
+    const containerElement = document?.getElementById(container)
+    const element = document?.getElementById(categories)
+    if (!loading) {
+      setCategoriesElement(element)
+      setContainerElement(containerElement)
+    }
     return () => {
-      removeEventListener(containerElement)
+      document.removeEventListener(containerElementListener)
     }
   })
 
   useEffect(() => {
-    const element = document.getElementById(categories)
-    setCategoriesElement(element)
     handleScroll()
-  }, [categoriesElement, width, theme?.rtl])
+  }, [containerElement?.scrollLeft, categoriesElement?.scrollLeft, width, theme?.rtl])
 
   const handleScroll = () => {
-    const containerElement = document.getElementById(container)
-    const categoriesElement = document.getElementById(categories)
-    const botonRight = document.getElementsByClassName('right')[0]
-    const botonLeft = document.getElementsByClassName('left')[0]
+    const botonRight = document.getElementById('right-autoscroll')
+    const botonLeft = document.getElementById('left-autoscroll')
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
-        if ((containerElement.scrollLeft * -1) < 40) {
+        if ((containerElement?.scrollLeft * -1) < 40) {
           botonRight.classList.add('hidden')
         } else {
           botonRight.classList.remove('hidden')
         }
-        if ((containerElement.scrollLeft * -1) > categoriesElement?.scrollWidth - containerElement.offsetWidth - 10) {
+        if ((containerElement?.scrollLeft * -1) > categoriesElement?.scrollWidth - containerElement?.offsetWidth - 20) {
           botonLeft.classList.add('hidden')
         } else {
           botonLeft.classList.remove('hidden')
         }
       } else {
-        if (containerElement.scrollLeft < 40) {
+        if (containerElement?.scrollLeft < 40) {
           botonLeft.classList.add('hidden')
         } else {
           botonLeft.classList.remove('hidden')
         }
-        if (containerElement.scrollLeft > categoriesElement?.scrollWidth - containerElement.offsetWidth - 10) {
+        if (containerElement?.scrollLeft > categoriesElement?.scrollWidth - containerElement?.offsetWidth - 20) {
           botonRight.classList.add('hidden')
         } else {
           botonRight.classList.remove('hidden')
@@ -58,30 +61,29 @@ export const AutoScroll = ({ children, categories, container }) => {
   }
 
   const scrolling = (left) => {
-    const elementContainer = document.getElementById(container)
     if (left) {
-      elementContainer.scrollBy({
+      containerElement.scrollBy({
         top: 0,
-        left: -200,
+        left: (((-categoriesElement.offsetWidth / 12) > -200) ? -200 : -categoriesElement.offsetWidth / 12),
         behavior: 'smooth'
       })
     } else {
-      elementContainer.scrollBy({
+      containerElement.scrollBy({
         top: 0,
-        left: +200,
+        left: (((+categoriesElement.offsetWidth / 12) < 200) ? 200 : +categoriesElement.offsetWidth / 12),
         behavior: 'smooth'
       })
     }
   }
 
   return (
-    <DivContainer>
+    <DivContainer modal={modal}>
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack className='left' onClick={() => scrolling('left')} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowForward className='right' onClick={() => scrolling()} /> : ''
+        width < categoriesElement.offsetWidth + 50 ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </DivContainer>
   )

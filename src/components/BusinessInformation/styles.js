@@ -113,9 +113,11 @@ export const BusinessInfoItem = styled.div`
     padding: 0px 16px 0px 5px;
   `}
   div {
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
-    h5, 
+
+    h5,
     p {
       display: flex;
       align-items: center;
@@ -124,8 +126,10 @@ export const BusinessInfoItem = styled.div`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      font-weight: 300;
       svg {
         margin-right: 4px;
+        margin-bottom: 1px;
         ${props => props.theme?.rtl && css`
           margin-left: 4px;
           margin-right: 0px;
@@ -141,10 +145,10 @@ export const BusinessInfoItem = styled.div`
       }
     }
     p.bold {
-      font-weight: bold;
+      font-weight: 600;
     }
-    @media (max-width: 480px) {
-      font-size: 14px;
+    @media (min-width: 481px) {
+      font-size: 16px;
     }
   }
 `
@@ -199,15 +203,13 @@ export const ScheduleSection = styled.div`
 `
 
 export const ScheduleContainer = styled.div`
-  width: 90%;
-  margin: auto;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-    overflow: auto;
+  overflow-x: auto;
+  > div {
     width: 100%;
   }
+
 `
 
 export const ScheduleBlock = styled.div`
@@ -216,7 +218,7 @@ export const ScheduleBlock = styled.div`
   text-align: center;
   padding: 0px 15px;
   border-right: 1px solid #CCC;
-  width: 15%;
+  width: 10%;
   ${props => props.theme?.rtl && css`
     border-left: 1px solid #CCC;
     border-right: none;
@@ -235,27 +237,36 @@ export const ScheduleBlock = styled.div`
   &:last-child {
     border: 0;
   }
+
+  @media(min-width: 480px){
+    width: 15%;
+  }
 `
 
 export const DeliveryInfo = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   margin-top: 10px;
   border-top: 1px solid #CCC;
   border-bottom: 1px solid #CCC;
 
   div {
-    width: 50%;
+    width: 100%;
+    &:last-child {
+      h5:not(:last-child) {
+        margin-top: 0px;
+      }
+    }
   }
 
-  @media (max-width: 768px) {
-    flex-wrap: wrap;
+  @media (min-width: 769px) {
+    flex-wrap: nowrap;
     div {
-      width: 100%;
-
+      width: 50%;
       &:last-child {
         h5:not(:last-child) {
-          margin-top: 0px;
+          margin-top: 22.1776px;
         }
       }
     }
@@ -266,23 +277,24 @@ export const BusinessMediaContent = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+
     > img,
     > iframe {
       object-fit: cover;
       border-radius: 10px;
       margin: 10px 10px;
-      width: calc(25% - 20px);
+      width: calc(100% - 12px);
 
-      @media (max-width: 992px) {
-        width: calc(33% - 20px);
-      }
-
-      @media (max-width: 680px) {
+      @media (min-width: 481px) {
         width: calc(50% - 20px);
       }
 
-      @media (max-width: 480px) {
-        width: calc(100% - 12px);
+      @media (min-width: 681px) {
+        width: calc(33% - 20px);
+      }
+
+      @media (min-width: 993px) {
+        width: calc(25% - 20px);
       }
     }
   }

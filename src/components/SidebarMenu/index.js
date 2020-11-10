@@ -52,19 +52,18 @@ export const SidebarMenu = (props) => {
   useEffect(() => {
     if (isMenuOpen) {
       if (width <= 489) {
-        console.log('in')
         document.getElementById('sidebar_menu').style.width = '100vh'
       } else {
-        console.log('in2')
         document.getElementById('sidebar_menu').style.width = '340px'
       }
     }
   }, [width])
 
   return (
-    <Container>
+    <Container auth={auth}>
       <IconContent
         isHome={isHome}
+        aria-label='menu'
         onClick={() => actionSidebar(true)}
       >
         <IosMenu />
@@ -75,6 +74,7 @@ export const SidebarMenu = (props) => {
       >
         <MenuClose
           isHome={isHome}
+          aria-label='close'
           onClick={() => actionSidebar(false)}
         >
           <MdClose />
@@ -187,7 +187,7 @@ export const SidebarMenu = (props) => {
               </WrappContent>
             </MenuLink>
 
-            <LogoutButton />
+            <LogoutButton onCustomClick={() => actionSidebar(false)} />
           </>
         )}
         {!auth && (

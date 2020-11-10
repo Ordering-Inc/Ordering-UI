@@ -2,43 +2,56 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - 160px);
   width: 100%;
-  padding-bottom: 20px;
   button {
-    width: 45%;
+    width: 46%;
     margin-top: 20px;
   }
-  @media (max-width: 768px){
-    justify-content: space-between;
-    min-height: calc(100vh - 160px)
+  
+  @media (min-width: 768px){
+    justify-content: flex-start;
+    height: auto;
+    button {
+      width: 46%;
+      margin-top: 20px;
+    }
   }
 `
 export const UpsellingContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   overflow: auto;
 `
 
 export const Item = styled.div`
   display: flex;
-  border: 1px solid #ccc;
-  width: 15%;
-  margin: 20px;
-  padding: 10px;
+  border: 1px solid #eee;
+  width: 70%;
+  padding: 20px;
+  margin: 15px 0;
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;
   border-radius: 9px;
+  box-sizing: border-box;
 
-  @media (max-width: 768px){
-    width: 20%;
+  @media (min-width: 490px) {
+    width: 43%;
   }
 
-  @media (max-width: 580px){
-    width: 25%;
+  @media (min-width: 769px) {
+    width: 27%;
+    padding: 11px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 20%;
+    margin: 10px 15px;
   }
 `
 
@@ -64,36 +77,27 @@ export const Details = styled.div`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      font-size: 14px;
+      font-size: 12px;
     }
   }
   p{
     color: #D81313;
-    margin: 10px auto;
+    margin: 2px auto;
   }
   button {
-    width: 50%;
-    margin: 5px auto;
-    font-size: 0.9em;
-  }
-  @media (max-width: 980px){
-    button{
-      width: 70%
-    }
+    width: auto;
+    margin: 8px auto 0;
+    padding: 0 20px;
+    font-size: 1em;
+    line-height: 22px;
+
   }
 
-  @media (max-width: 768px){
-    font-size: 12px;
-  }
-
-  @media (max-width: 480px){
+  @media (min-width: 480px){
     div{
       h3{
-        font-size: 12px;  
+        font-size: 14px;  
       }
-    }
-    button {
-      width: 100%
     }
   }
 
@@ -102,12 +106,18 @@ export const Details = styled.div`
 export const CloseUpselling = styled.div`
   width: 100%;
   text-align: center;
+
   button{
-    width: 40%;
+    width: 90%;
+    font-size: 1.4em;
+    padding: 10px 0;
   }
-  @media (max-width: 720px){
+
+  @media (min-width: 720px){
     button{
-      width: 60%;
+      width: 40%;
+      padding: 2px;
+      font-size: 1em;
     }
   }
 `

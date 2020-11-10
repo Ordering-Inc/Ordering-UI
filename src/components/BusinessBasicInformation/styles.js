@@ -14,9 +14,13 @@ const BusinessContainerStyled = styled.div`
   object-fit: cover;
   background-position: center;
   min-height: 200px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-end;
-  border-radius: 10px;
+  border-radius: 20px;
+
+  @media (min-width: 490px) {
+    justify-content: flex-start;
+  }
 `
 export const BusinessContainer = (props) => {
   const style = {}
@@ -38,12 +42,12 @@ export const BusinessContent = styled.div`
   background-color: #FFF;
   padding: 10px;
   border-radius: 10px;
-  margin: 20px;
+  margin: 10px;
   max-height: 75px;
   width: 340px;
 
-  @media (max-width: 380px) {
-    margin: 0px 1px 1px;
+  @media (min-width: 426px) {
+    margin: 15px;
   }
 `
 
@@ -94,13 +98,14 @@ export const BusinessInfoItem = styled.div`
     padding: 0px 16px 0px 5px;
   `}
   div {
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
 
     h5 {
       font-weight: 300;
-      svg {
-        color: #CCC;
+      svg{
+        margin-bottom: 1px;
       }
     }
 
@@ -142,8 +147,8 @@ export const BusinessInfoItem = styled.div`
       }
     }
 
-    @media (max-width: 480px) {
-      font-size: 14px;
+    @media (min-width: 481px) {
+      font-size: 16px;
     }
   }
 `

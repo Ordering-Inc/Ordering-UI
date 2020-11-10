@@ -17,7 +17,7 @@ export const OrderDetailsPage = (props) => {
   }
   return (
     <>
-      <HelmetTags page='order_details' />
+      <HelmetTags page='order_details' helmetTitle={`Order #${orderId}`} />
       <OrderDetails {...orderDetailsProps} />
     </>
   )

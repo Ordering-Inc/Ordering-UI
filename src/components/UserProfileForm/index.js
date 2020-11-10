@@ -92,7 +92,7 @@ const UserProfileFormUI = (props) => {
     <>
       <ProfileOptions value={t('MY_ACCOUNT', 'My Account')} />
       <UserProfileContainer>
-        <UserImage>
+        <UserImage className='user-image'>
           <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
             <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
               <Image isImage={user?.photo || formState?.changes?.photo}>
@@ -121,7 +121,7 @@ const UserProfileFormUI = (props) => {
           </ExamineClick>
           <Camera><GiPhotoCamera /></Camera>
         </UserImage>
-        <SideForm>
+        <SideForm className='user-form'>
           {edit
             ? (
               <FormInput onSubmit={handleSubmit(onSubmit)}>
@@ -191,7 +191,7 @@ const UserProfileFormUI = (props) => {
             )
             : (
               <UserData>
-                {formState.loading && !formState.changes.photo ? <Skeleton width={100} height={20} /> : <h4>{user.name} {user.lastname}</h4>}
+                {formState.loading && !formState.changes.photo ? <Skeleton width={100} height={20} /> : <h1>{user.name} {user.lastname}</h1>}
                 {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.email}</p>}
                 {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.country_phone_code} {user.cellphone}</p>}
                 {formState.loading && !formState.changes.photo ? <Skeleton width={80} height={40} /> : <Button color='primary' outline onClick={() => setEdit(true)}>{t('EDIT', 'Edit')}</Button>}
@@ -199,7 +199,7 @@ const UserProfileFormUI = (props) => {
             )}
 
           <SavedPlaces>
-            <h5>Saved Places</h5>
+            <h1>Saved Places</h1>
             <AddressList addressList={user.addresses} />
           </SavedPlaces>
         </SideForm>

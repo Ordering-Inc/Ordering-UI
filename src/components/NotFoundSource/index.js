@@ -17,9 +17,9 @@ export const NotFoundSource = (props) => {
   const theme = useTheme()
 
   return (
-    <NotFound>
+    <NotFound id='not-found-source'>
       <NotFoundImage>
-        <img src={theme.images?.general?.notFound} alt='Not Found' />
+        <img src={theme.images?.general?.notFound} alt='Not Found' width='300' height='260' />
       </NotFoundImage>
       <h1>{content}</h1>
       {!onClickButton && props.children && (

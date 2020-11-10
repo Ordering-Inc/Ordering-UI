@@ -20,7 +20,7 @@ import {
   CartItemLogo,
   CartItemInfo,
   CartItemActions,
-  InvalidAddress
+  WarningText
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -191,9 +191,15 @@ const CheckoutUI = (props) => {
         )}
 
         {!cart?.valid_address && (
-          <InvalidAddress>
+          <WarningText>
             {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
-          </InvalidAddress>
+          </WarningText>
+        )}
+
+        {!paymethodSelected && (
+          <WarningText>
+            {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
+          </WarningText>
         )}
 
         {/* {error && error?.length > 0 && (
@@ -223,7 +229,7 @@ export const Checkout = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
 
-  const [cartState, setCartState] = useState({ loading: false, error: null, cart: null })
+  const [cartState, setCartState] = useState({ loading: true, error: null, cart: null })
 
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
@@ -338,6 +344,7 @@ export const Checkout = (props) => {
           ))}
         </CartsList>
       )}
+
       {cartUuid && cartState.error && cartState.error?.length > 0 && (
         <NotFoundSource
           content={t('ERROR_CART', 'Sorry, the selected cart was not found.')}
@@ -345,7 +352,17 @@ export const Checkout = (props) => {
           onClickButton={handleCheckoutListRedirect}
         />
       )}
+
+      {cartState.loading && (
+        <div style={{ width: '80%', margin: 'auto auto 20px' }}>
+          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+          <Skeleton height={150} style={{ marginBottom: '10px' }} />
+          <Skeleton height={35} count={6} style={{ marginBottom: '10px' }} />
+        </div>
+      )}
+
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
+
       {currentCart?.products && (
         <UpsellingPage
           businessId={currentCart?.business_id}

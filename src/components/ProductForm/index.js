@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
+import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 
 import {
   ProductForm as ProductOptions,
@@ -57,7 +59,7 @@ const ProductOptionsUI = (props) => {
   const { product, loading, error } = productObject
 
   const windowSize = useWindowSize()
-  const [{ auth }, sessionDispatch] = useSession()
+  const [{ auth }, { login }] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
@@ -67,6 +69,7 @@ const ProductOptionsUI = (props) => {
 
   const closeModal = () => {
     setModalIsOpen(false)
+    setModalPageToShow('login')
   }
 
   const handleSuccessLogin = (user) => {
@@ -93,11 +96,14 @@ const ProductOptionsUI = (props) => {
   }
 
   const handleSuccessSignup = (user) => {
-    sessionDispatch({
-      type: 'login',
+    login({
       user,
       token: user.session.access_token
     })
+  }
+
+  const isError = (id) => {
+    return errors[`id:${id}`] && 'error'
   }
 
   return (
@@ -144,7 +150,10 @@ const ProductOptionsUI = (props) => {
                 product?.extras.map(extra => extra.options.map(option => {
                   const currentState = productCart.options[`id:${option.id}`] || {}
                   return (
-                    <div key={option.id} className={`${errors[`id:${option.id}`] && 'error'}`}>
+                    <div
+                      key={option.id}
+                      className={isError(option.id)}
+                    >
                       {
                         showOption(option) && (
                           <ProductOption
@@ -187,28 +196,21 @@ const ProductOptionsUI = (props) => {
               </ProductComment>
             </ProductEdition>
             <ProductActions>
-              {productCart && !isSoldOut && maxProductQuantity > 0 && (
-                <div>
-                  <Button
-                    className='incdec'
-                    circle
-                    outline
-                    onClick={decrement}
-                    disabled={productCart.quantity === 1 || isSoldOut}
-                  >
-                    <span className='sign'>-</span>
-                  </Button>
-                  <span>{productCart.quantity}</span>
-                  <Button
-                    className='incdec'
-                    circle
-                    outline
-                    onClick={increment}
-                    disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
-                  >
-                    <span className='sign'>+</span>
-                  </Button>
-                </div>)}
+              {
+                productCart && !isSoldOut && maxProductQuantity > 0 && (
+                  <div>
+                    <FiMinusCircle
+                      onClick={decrement}
+                      className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
+                    />
+                    <span>{productCart.quantity}</span>
+                    <FiPlusCircle
+                      onClick={increment}
+                      className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                    />
+                  </div>
+                )
+              }
 
               {productCart && !isSoldOut && maxProductQuantity && auth ? (
                 <Button

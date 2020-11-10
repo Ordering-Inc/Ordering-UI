@@ -9,16 +9,16 @@ export const PaymentMethodsContainer = styled.div`
 
 export const PaymentMethodsList = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
 
-  @media (max-width: 840px) {
-    justify-content: flex-start;
+  @media (min-width: 841px) {
+    justify-content: space-around;
   }
 `
 
 export const PayCard = styled.div`
-  width: calc(15% - 12px);
+  width: calc(50% - 12px);
   height: 60px;
   cursor: pointer;
   display: flex;
@@ -34,20 +34,25 @@ export const PayCard = styled.div`
     margin-left: 10px;
     margin-right: 0;
   `}
-  @media (max-width: 840px) {
-    width: calc(20% - 12px);
+
+  svg path {
+    fill: #000;
   }
 
-  @media (max-width: 640px) {
-    width: calc(25% - 12px);
-  }
-
-  @media (max-width: 512px) {
+  @media (min-width: 351px) {
     width: calc(33% - 12px);
   }
 
-  @media (max-width: 350px) {
-    width: calc(50% - 12px);
+  @media (min-width: 513px) {
+    width: calc(25% - 12px);
+  }
+
+  @media (min-width: 641px) {
+    width: calc(20% - 12px);
+  }
+
+  @media (min-width: 841px) {
+    width: calc(18% - 12px);
   }
 
   svg {

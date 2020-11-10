@@ -11,7 +11,8 @@ const FloatingButtonUI = (props) => {
   const {
     btnText,
     btnValue,
-    handleButtonClick
+    handleButtonClick,
+    disabled
   } = props
 
   return (
@@ -19,6 +20,7 @@ const FloatingButtonUI = (props) => {
       <Button
         color='primary'
         onClick={handleButtonClick}
+        disabled={disabled}
       >
         {btnText}
         <BtnValue>

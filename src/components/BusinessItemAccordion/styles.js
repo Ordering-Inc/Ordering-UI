@@ -6,7 +6,6 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   border-bottom: 1px solid #BFBFBF;
-  /* padding: 10px 0px; */
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
 
@@ -15,24 +14,6 @@ export const AccordionSection = styled.div`
   }
 `
 
-// export const AccordionSection = (props) => {
-//   const style = {}
-//   // if (props.isClosed) {
-//   //   style.filter = 'brightness(0.4)'
-//   //   style.background = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'
-//   // } else {
-//   //   style.background = '#F8F8F8'
-//   // }
-//   return (
-//     <AccordionSectionStyled
-//       {...props}
-//       style={style}
-//     >
-//       {props.children}
-//     </AccordionSectionStyled>
-//   )
-// }
-
 export const Accordion = styled.div`
   display: flex;
   align-items: center;
@@ -40,7 +21,6 @@ export const Accordion = styled.div`
   cursor: ${({ isClosed }) => isClosed ? 'not-allowed' : 'pointer'};
   transition: background-color 0.6s ease;
   position: relative;
-  /* margin: 0px 20px 10px; */
   padding: 10px;
   background: #F8F8F8;
 
@@ -58,46 +38,50 @@ export const Accordion = styled.div`
 `
 
 export const WrapperBusinessLogo = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
-  @media (max-width: 768px){
+  width: 50px;
+  height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+
+  @media (min-width: 481px){
     width: 55px;
     height: 55px;
     max-width: 55px;
     max-height: 55px;
     padding-bottom: 0 !important;
   }
-  @media (max-width: 480px){
-    width: 50px;
-    height: 50px;
-    max-width: 50px;
-    max-height: 50px;
+
+  @media (min-width: 769px){
+    max-width: 75px;
+    max-height: 75px;
+    height: 75px;
+    width: 75px;
   }
 `
 
 const BusinessLogoStyled = styled.div`
   display: flex;
-  width: 75px;
-  height: 75px;
+  min-height: 50px;
+  width: 50px;
+  height: 50px;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: contain;
   object-fit: contain;
   background-position: center;
-  min-height: 75px;
   border-radius: 10px;
-  @media (max-width: 768px){
+
+  @media (min-width: 481px){
     min-height: 55px;
     width: 55px;
     height: 55px;
   }
-  @media (max-width: 480px){
-    min-height: 50px;
-    width: 50px;
-    height: 50px;
+
+  @media (min-width: 769px){
+    width: 75px;
+    height: 75px;
+    min-height: 75px;
   }
 `
 
@@ -119,27 +103,28 @@ export const ContentInfo = styled.div`
   text-transform: capitalize;
   margin-left: 10px;
   width: 65%;
+
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
     margin-left: 0;
   `}
-  h1, span {
+
+  h2, span {
     margin: 0px;
   }
 
-  h1 {
-    font-size: 20px;
+  h2 {
+    font-size: 16px;
     font-weight: 500;
-    margin-top: 0em !important;
-    margin-bottom: 0.7em !important;
   }
 
   span {
-    font-size: 18px;
+    font-size: 16px;
     opacity: 0.8;
     display: flex;
     align-items: center;
     font-weight: 300;
+
     svg {
       margin-right: 3px;
       ${props => props.theme?.rtl && css`
@@ -149,14 +134,11 @@ export const ContentInfo = styled.div`
     }
   }
 
-  @media (max-width: 768px){
-    h1{
-      margin-bottom: 0 !important
+  @media (min-width: 576px) {
+    h2 {
+      font-size: 20px;
     }
-  }
-
-  @media (max-width: 410px) {
-    h1 {
+    span {
       font-size: 18px;
     }
   }
@@ -176,27 +158,27 @@ export const AccordionText = styled.div`
 export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 45%;
+  width: 60%;
 
-  h1 {
+  h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  @media (max-width: 480px) {
-    width: 60%;
+  @media (min-width: 481px) {
+    width: 45%;
   }
 `
 
 export const BusinessTotal = styled.div`
   width: 25%;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 
   p {
-    font-size: 20px;
+    font-size: 18px;
     margin: 0px 5px;
     font-weight: 300;
 
@@ -214,8 +196,8 @@ export const BusinessTotal = styled.div`
     }
   }
 
-  @media (max-width: 480px) {
-    display: none;
+  @media (min-width: 481px) {
+    display: flex;
   }
 `
 
@@ -226,9 +208,9 @@ export const BusinessActions = styled.div`
   justify-content: flex-end;
 
   span {
-    height: 28px;
+    height: 22px;
     svg {
-      font-size: 28px;
+      font-size: 22px;
     }
 
     &:not(:last-child) {
@@ -237,6 +219,15 @@ export const BusinessActions = styled.div`
         margin-left: 5px;
         margin-right: 0;
     `}
+    }
+  }
+
+  @media (min-width: 768px) {
+    span {
+      height: 27px;
+      svg {
+        font-size: 27px;
+      }
     }
   }
 `

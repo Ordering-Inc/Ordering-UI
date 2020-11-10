@@ -3,56 +3,51 @@ import styled, { css } from 'styled-components'
 
 export const ProductContainer = styled.div`
   display: flex;
-  max-height: 80vh;
+  flex-wrap: wrap;
+  max-height: 100vh;
   position: relative;
 
-  @media (max-width: 1200px) {
-    flex-wrap: wrap;
-    overflow: auto;
+  @media (min-width: 768px) {
+    height: 100%;
   }
 
-  @media (max-width: 768px) {
-    overflow: initial;
-    height: 90vh;
-    max-height: 100vh;
+  @media (min-width: 1201px) {
+    flex-wrap: nowrap;
   }
 `
 
 export const WrapperImage = styled.div`
-  width: calc(50% - 10px);
+  width: 100%;
+  position: relative;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 1200px) {
-    width: 100%;
-    position: relative;
-    top: -38px;
+  @media (min-width: 1201px) {
+    width: calc(50% - 10px);
+    top: 0;
   }
 `
 
 export const ProductImage = styled.div`
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 300px;
 
   img {
     border-radius: 16px;
-    object-fit: cover;
+    object-fit: contain;
     height: 100%;
     box-sizing: border-box;
   }
 
   @media (min-width: 1201px) {
+    height: auto;
     img {
       width: 100%;
-    }
-  }
-
-  @media (max-width: 1200px) {
-    height: 300px;
-
-    img {
-      object-fit: contain;
+      object-fit: cover;
     }
   }
 `
@@ -60,13 +55,15 @@ export const ProductImage = styled.div`
 export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(50% - 20px);
-  padding: 10px;
+  width: 100%;
+  padding: 0px;
+  position: relative;
+  margin-top: 10px;
 
   h1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
-    text-align: left;
+    text-align: center;
     color: #263238;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -78,7 +75,7 @@ export const ProductInfo = styled.div`
   }
 
   p {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 200;
     text-align: left;
     margin-top: 0px;
@@ -91,29 +88,29 @@ export const ProductInfo = styled.div`
     ${props => props.theme?.rtl && css`
       text-align: right;
     `}
-}
+  }
 
-  @media (max-width: 1200px) {
-    width: 100%;
-    padding: 0px;
-    position: relative;
-    top: -38px;
-    margin-top: 10px;
+  @media (min-width: 381px) {
     h1 {
-      text-align: center;
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
     }
   }
 
-  @media (max-width: 410px) {
+  @media (min-width: 411px) {
     padding: 10px 0px;
   }
 
-  @media (max-width: 380px) {
+  @media (min-width: 1201px) {
+    width: calc(50% - 20px);
+    padding: 0px 10px;
+    top: 0;
+    margin-top: 0px;
+
     h1 {
-      font-size: 20px;
-    }
-    p {
-      font-size: 14px;
+      text-align: left;
     }
   }
 `
@@ -145,7 +142,6 @@ export const ProductComment = styled.div`
     font-size: 16px;
     font-weight: 300;
     padding: 10px;
-    /* margin: 1px; */
     border: 1px solid #CCC;
     outline: none;
     color: #555;
@@ -159,44 +155,39 @@ export const ProductComment = styled.div`
 
 export const ProductActions = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   padding: 10px 0px;
   width: 100%;
 
   div {
-    width: 30%;
+    width: 50%;
     display: flex;
     justify-content: space-around;
     align-items: center;
 
-    button.incdec {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid #000;
-      color: #000;
-
-      span.sign {
-        margin: 0px;
-        padding: 0px;
-
-      }
-
-      span:nth-child(1) {
-        margin-left: 2px;
-      }
+    svg {
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
     }
   }
 
   button:disabled,
-  button.disabled {
+  button.disabled,
+  svg.disabled {
     opacity: 0.5;
   }
 
+  svg.disabled {
+    pointer-events: none;
+  }
+
   button.add {
-    width: 65%;
+    width: 100%;
     padding: 5px 10px;
+    margin: 10px 0px 0px;
+
     span:last-child {
       float: right;
       margin-right: 10px;
@@ -212,43 +203,27 @@ export const ProductActions = styled.div`
     }
   }
 
-  @media (max-width: 720px) {
-    flex-direction: column;
-    > * {
-      margin: 10px 0;
-    }
-    div {
-      width: 60%;
-      margin: 10px 0;
-      button.incdec {
-        width: 50px;
-        height: 50px;
-        font-size: 2em;
-      }
-      span:not(.sign) {
-        font-size: 2em;
-      }
-    }
-  }
+  @media (min-width: 577px) {
+    justify-content: space-between;
+    flex-direction: row;
 
-  @media (max-width: 576px) {
     div {
-      button.incdec {
-        width: 35px;
-        height: 35px;
-      }
-      span:not(.sign) {
-        font-size: 1.5em;
-      }
+      width: 25%;
     }
     button.add {
-      width: 100%;
+      width: 75%;
+      margin: 0;
     }
   }
 
-  @media (max-width: 480) {
+  @media (min-width: 1201px) {
+    padding: 10px 0px 0px;
+
     div {
-      width: 80%;
+      width: 30%;
+    }
+    button.add {
+      width: 68%;
     }
   }
 `

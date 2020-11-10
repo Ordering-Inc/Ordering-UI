@@ -19,7 +19,7 @@ const BusinessProductsCategoriesUI = (props) => {
       {!isSkeleton ? (
         <Tabs variant='primary' id='categories'>
           <AutoScroll categories='categories' container='container'>
-            {categories && categories.length && categories.map(category => category.id !== 0 && ( // delete this validation when PR#59 is merged
+            {categories && categories.length && categories.map(category => category.id !== 0 && (
               <Tab className='category' active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
                 {category.name}
               </Tab>

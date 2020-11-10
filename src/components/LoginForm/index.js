@@ -42,7 +42,7 @@ const LoginFormUI = (props) => {
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [, sessionDispatch] = useSession()
+  const [, { login }] = useSession()
   const theme = useTheme()
 
   const onSubmit = async () => {
@@ -50,8 +50,7 @@ const LoginFormUI = (props) => {
   }
 
   const handleSuccessFacebook = (user) => {
-    sessionDispatch({
-      type: 'login',
+    login({
       user,
       token: user.session.access_token
     })
@@ -94,7 +93,7 @@ const LoginFormUI = (props) => {
         <img src={theme?.images?.logos?.logotype} alt='Logo login' />
 
         {useLoginByEmail && useLoginByCellphone && (
-          <LoginWith>
+          <LoginWith isPopup={isPopup}>
             <Tabs variant='primary'>
               {useLoginByEmail && (
                 <Tab
@@ -126,6 +125,7 @@ const LoginFormUI = (props) => {
               <Input
                 type='email'
                 name='email'
+                aria-label='email'
                 placeholder={t('EMAIL')}
                 ref={register({
                   required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
@@ -141,6 +141,7 @@ const LoginFormUI = (props) => {
               <Input
                 type='tel'
                 name='cellphone'
+                aria-label='cellphone'
                 placeholder='Cellphone'
                 ref={register({
                   required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
@@ -151,6 +152,7 @@ const LoginFormUI = (props) => {
             <Input
               type='password'
               name='password'
+              aria-label='password'
               placeholder={t('PASSWORD')}
               ref={register({
                 required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),

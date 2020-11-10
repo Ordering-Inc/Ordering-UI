@@ -46,12 +46,11 @@ const SignUpFormUI = (props) => {
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [, sessionDispatch] = useSession()
+  const [, { login }] = useSession()
   const theme = useTheme()
 
   const handleSuccessFacebook = (user) => {
-    sessionDispatch({
-      type: 'login',
+    login({
       user,
       token: user.session.access_token
     })
@@ -124,6 +123,7 @@ const SignUpFormUI = (props) => {
                         key={field.id}
                         type={field.enabled && field.required ? field.type : 'hidden'}
                         name={field.code}
+                        aria-label={field.code}
                         placeholder={t(field.name)}
                         onChange={hanldeChangeInput}
                         ref={register({
@@ -141,6 +141,7 @@ const SignUpFormUI = (props) => {
                 <Input
                   type='password'
                   name='password'
+                  aria-label='password'
                   placeholder={t('PASSWORD', 'Password')}
                   onChange={hanldeChangeInput}
                   required

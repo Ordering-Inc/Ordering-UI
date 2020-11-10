@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { UpsellingPage as UpsellingPageController, useLanguage } from 'ordering-components'
+import { UpsellingPage as UpsellingPageController, useLanguage, useUtils } from 'ordering-components'
 import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling, SkeletonContainer } from './styles'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
@@ -18,6 +18,7 @@ const UpsellingPageUI = (props) => {
   const [, t] = useLanguage()
   const [actualProduct, setActualProduct] = useState(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [{ parsePrice }] = useUtils()
 
   useEffect(() => {
     if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
@@ -50,16 +51,16 @@ const UpsellingPageUI = (props) => {
                 !upsellingProducts.loading ? (
                   <>
                     {
-                      !upsellingProducts.error ? upsellingProducts.products.map(product => (
+                      !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
                         <Item key={product.id}>
                           <Image>
-                            <img src={product.images} />
+                            <img src={product.images} alt={`product-${i}`} />
                           </Image>
                           <Details>
                             <div>
                               <h3 title={product.name}>{product.name}</h3>
                             </div>
-                            <p>${product.price}</p>
+                            <p>{parsePrice(product.price)}</p>
                             <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
                           </Details>
                         </Item>

@@ -9,8 +9,13 @@ export const HomeSection = styled.div`
   display: flex;
   width: 100%;
   box-sizing: border-box;
-  padding: 0px 50px 20px;
   background: #FFF;
+
+  flex-direction: column;
+  padding: 0px 10px 20px;
+  &.reverse {
+    flex-direction: column-reverse;
+  }
 
   ${({ column }) => column && css`
     flex-direction: column;
@@ -34,14 +39,13 @@ export const HomeSection = styled.div`
     justify-content: center;
     align-items: center;
   `}
-  @media (max-width: 942px) {
-    flex-direction: column;
+
+  @media (min-width: 943px) {
+    padding: 0px 50px 20px;
+    flex-direction: ${({ column }) => column ? 'column' : 'row'};
     &.reverse {
-      flex-direction: column-reverse;
+      flex-direction: row-reverse;
     }
-  }
-  @media (max-width: 942px) {
-    padding: 0px 10px 20px;
   }
 `
 
@@ -50,28 +54,33 @@ export const HomeTitle = styled.div`
   h2 {
     text-align: center;
     font: normal normal normal 45px/79px Lobster;
+    font-size: 30px;
     letter-spacing: 0px;
     color: #263238;
     font-weight: bold;
+    margin: 0px;
   }
   span {
     color: ${props => props.theme.colors.primary};
   }
-  @media (max-width: 480px) {
+  @media (min-width: 481px) {
     h2 {
-      font-size: 30px;
-      margin: 0px;
+      font: normal normal normal 45px/79px Lobster;
     }
   }
 `
 
 export const StepsBlock = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-end;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  justify-items: center;
+  align-items: center;
   margin-top: 15px;
   div {
+    width: auto;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,54 +93,16 @@ export const StepsBlock = styled.div`
       text-align: center;
     }
   }
-  
-  @media (max-width: 1042px) {
-    div {
-      width: 100%;
-      margin-bottom: 20px;
-    }
+  @media (min-width: 790px) {
+    grid-template-columns: auto auto auto auto auto auto auto;
   }
 `
-
-// export const TriangleShape = styled.div`
-//   transform: rotate(-90deg);
-//   width: 262px;
-//   height: 229px;
-//   margin: 0 auto;
-//   padding-top: 15px;
-//   position: relative;
-//   background: ${props => props.theme.colors.primary};
-//   color: white;
-//   font-size: 11px;
-//   letter-spacing: 0.2em;
-//   text-align: center;
-//   text-transform: uppercase;
-//   &::after {
-//     content: ' ';
-//     position: absolute;
-//     left: 0;
-//     bottom: 0;
-//     width: 0;
-//     height: 0;
-//     border-bottom: 122px solid white;
-//     border-left: 131px solid transparent;
-//     border-right: 131px solid transparent;
-//   }
-// `
-
-// export const TriangleShape = styled.div`
-//   width: 50%;
-//   height: 0px;
-//   border-top: 100px solid #32557f;
-//   border-right: 100px solid transparent;
-//   border-bottom: 100px solid #32557f;
-// `
 
 export const ImageContent = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 40px;
-  width: 50%;
+  width: 100%;
   div {
     display: flex;
     justify-content: center;
@@ -144,9 +115,8 @@ export const ImageContent = styled.div`
       max-width: 100%;
     }
   }
-  @media (max-width: 942px) {
-    margin-top: 40px;
-    width: 100%;
+  @media (min-width: 943px) {
+    width: 50%;
   }
 `
 
@@ -156,11 +126,11 @@ export const WrapTextContent = styled.div`
     font: normal normal normal 64px/80px ${props => props.theme.fonts.special || 'Georgia'};
   }
   div {
-    padding: 0px 70px;
+    padding: 0px;
   }
-  @media (max-width: 942px) {
+  @media (min-width: 943px) {
     div {
-      padding: 0px 0px;
+      padding: 0px 70px;
     }
   }
 `
@@ -169,12 +139,21 @@ export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
+  width: 100%;
+  text-align: center;
+
   div {
+    text-align: left;
+    margin-top: 25px;
     h2 > span {
       color: ${props => props.theme.colors.primary};
     }
   }
+
+  h2 {
+    font-size: 24px;
+  }
+
   &.center {
     display: flex;
     flex-direction: column;
@@ -184,8 +163,9 @@ export const TextContent = styled.div`
     width: 100%;
 
     h2 {
-      font-size: 70px;
+      font-size: 24px;
       color: #FFF;
+      text-align: center;
     }
 
     div {
@@ -200,31 +180,17 @@ export const TextContent = styled.div`
       width: 122px;
     }
   }
-  @media (max-width: 942px) {
-    width: 100%;
-    text-align: center;
-    &.center {
-      h2 {
-        font-size: 45px;
-      }
-    }
+
+  @media (min-width: 943px) {
+    width: 50%;
+    text-align: left;
   }
-  @media (max-width: 480px) {
-    h2 {
-      font-size: 20px;
-    }
+
+  @media (min-width: 481px) {
     div {
-      text-align: left;
-      margin-top: 25px;
       ${props => props.theme?.rtl && css`
         text-align: right;
     `}
-    }
-    &.center {
-      h2 {
-        font-size: 24px;
-        text-align: center;
-      }
     }
   }
 `
@@ -242,16 +208,26 @@ export const Icons = styled.div`
 `
 export const HomeFooter = styled.div`
   font: normal normal normal 128px/160px ${props => props.theme.fonts.special || 'Georgia'};
+
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 50px !important;
+    }
+  }
 `
 
 export const Line = styled.div`
     position: relative;
     border: 1px solid red;
     align-self: center;
+    margin-bottom: 75px !important;
+    transform: rotate(90deg);
+    padding: 0 !important;
+    width: 30px !important;
     &::after{
       content: '';
       position: absolute;
-      border: 2px solid red;
+      border: 3px solid red;
       transform: translateY(-50%);
       right: 100%;
       border-radius: 50%
@@ -259,9 +235,12 @@ export const Line = styled.div`
     &::before{
       content: '';
       position: absolute;
-      border: 2px solid red;
+      border: 3px solid red;
       left: 100%;
       transform: translateY(-50%);
       border-radius: 50%;
+    }
+    @media (min-width: 790px) {
+      transform: rotate(0deg);
     }
 `

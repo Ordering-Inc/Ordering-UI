@@ -35,7 +35,7 @@ export const HomeHero = (props) => {
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
-      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select an address to search')] })
+      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')] })
       return
     }
     setModals({ listOpen: false, formOpen: false })
@@ -62,6 +62,7 @@ export const HomeHero = (props) => {
         <WrapInput onClick={handleAddressInput} withIcon>
           <HiOutlineLocationMarker />
           <Input
+            name='address-selection'
             aria-label='address selection'
             type='text'
             disabled
@@ -70,6 +71,7 @@ export const HomeHero = (props) => {
         </WrapInput>
         <Button
           color='primary'
+          name='find-business'
           onClick={handleFindBusinesses}
         >
           {t('FIND_BUSINESSES', 'Find businesses')}
