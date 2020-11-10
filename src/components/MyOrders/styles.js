@@ -34,7 +34,9 @@ export const ActiveOrders = styled.div`
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
-  width: auto;
+  width: 99%;
+  margin: auto 0px auto auto;
+
   > div{
     margin-right: -15px;
     margin-left: -15px;
@@ -43,6 +45,10 @@ export const ActiveOrders = styled.div`
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
+  }
+
+  @media (min-width: 768px) {
+    width: 92%;
   }
 
 `
