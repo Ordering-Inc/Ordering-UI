@@ -103,7 +103,7 @@ const AddressFormUI = (props) => {
   }
 
   return (
-    <>
+    <div className='address-form'>
       <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='new-off'>
         {addressState?.address?.location && (
           <WrapperMap>
@@ -197,7 +197,7 @@ const AddressFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-    </>
+    </div>
   )
 }
 
