@@ -1,4 +1,4 @@
-context('ORder', () => {
+context('Order details', () => {
   it('Check valid order', () => {
     cy.visit('/signin')
     cy.server({ method: 'POST' })
