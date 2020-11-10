@@ -105,7 +105,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, null, paymethodsList.paymethods.length > 0 && paymethodsList.paymethods.sort(function (a, b) {
+  return /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
+    className: "payments-list"
+  }, paymethodsList.paymethods.length > 0 && paymethodsList.paymethods.sort(function (a, b) {
     return a.id - b.id;
   }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
