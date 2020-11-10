@@ -105,7 +105,7 @@ const CartUI = (props) => {
   }
 
   return (
-    <CartContainer>
+    <CartContainer className='cart'>
       <BusinessItemAccordion
         uuid={cart?.uuid}
         isCheckout={isCheckout}
