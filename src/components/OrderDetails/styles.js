@@ -23,7 +23,6 @@ const HeaderStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   border-radius: 7px;
-  max-height: 350px;
   background-position: bottom;
 
 
@@ -56,10 +55,6 @@ export const HeaderInfo = styled.div`
   @media (min-width: 678px) {
     width: 50%;
     border-radius: 7px 0 0 7px;
-  }
-
-  @media (min-width: 768px) {
-    min-height: 100%;
   }
 `
 
