@@ -49,7 +49,7 @@ export const HeaderInfo = styled.div`
   justify-content: center;
   width: 100%;
   padding: 20px 20px 30px;
-  border-radius: 16px;
+  border-radius: 7px;
   min-height: 300px;
 
   @media (min-width: 678px) {
