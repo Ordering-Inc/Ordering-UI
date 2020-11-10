@@ -144,8 +144,6 @@ const BusinessProductsListingUI = (props) => {
     setCanOpenUpselling(false)
   }
 
-  console.log(props)
-
   return (
     <>
       <ProductsContainer>

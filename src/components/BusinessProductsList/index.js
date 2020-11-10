@@ -8,7 +8,8 @@ import {
   ProductsContainer,
   ProductsListing,
   WrapAllCategories,
-  ErrorMessage
+  ErrorMessage,
+  WrapperNotFound
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
@@ -96,11 +97,13 @@ const BusinessProductsListUI = (props) => {
 
       {
         !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && (
-          <NotFoundSource
-            content={t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
-            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-            onClickButton={handleSearchRedirect}
-          />
+          <WrapperNotFound>
+            <NotFoundSource
+              content={t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
+              btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+              onClickButton={handleSearchRedirect}
+            />
+          </WrapperNotFound>
         )
       }
 
