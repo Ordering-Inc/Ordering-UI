@@ -59,7 +59,7 @@ const OrderDetailsUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
 
-  const { order, loading, error } = props.order
+  const { order, loading } = props.order
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -99,20 +99,15 @@ const OrderDetailsUI = (props) => {
     <Container>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
-          <Header businessHeader={order?.business?.header}>
-            <HeaderInfo className='order-header'>
-              <img alt='Logotype' width='200px' height='90px' src={theme?.images?.logos?.logotype} />
-              <HeaderText column>
-                <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
-                <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
-              </HeaderText>
-              <HeaderText>
-                <h1>{t('ORDER_TOTAL', 'Total')}</h1>
-                <h1>{parsePrice(order?.total || 0)}</h1>
-              </HeaderText>
-            </HeaderInfo>
-          </Header>
           <Content className='order-content'>
+            <Header businessHeader={order?.business?.header}>
+              <HeaderInfo className='order-header'>
+                <HeaderText column>
+                  <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
+                  <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
+                </HeaderText>
+              </HeaderInfo>
+            </Header>
             <OrderBusiness>
               <BusinessWrapper>
                 <LogoWrapper>
@@ -280,11 +275,9 @@ const OrderDetailsUI = (props) => {
 
       {loading && (
         <WrapperContainer className='skeleton-loading'>
-          <SkeletonBlock width={100}>
-            <Skeleton height={250} />
-          </SkeletonBlock>
           <SkeletonBlockWrapp>
             <SkeletonBlock width={80}>
+              <Skeleton height={200} />
               <Skeleton height={100} />
               <Skeleton height={100} />
               <Skeleton height={100} />

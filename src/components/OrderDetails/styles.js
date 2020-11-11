@@ -51,18 +51,10 @@ export const HeaderInfo = styled.div`
   width: 100%;
   padding: 20px 20px 30px;
   border-radius: 16px;
-  min-height: 300px;
+  min-height: 100%;
 
   img {
     margin: 0px auto;
-  }
-
-  @media (min-width: 678px) {
-    width: 50%;
-  }
-
-  @media (min-width: 768px) {
-    min-height: 100%;
   }
 `
 
@@ -80,24 +72,16 @@ export const HeaderText = styled.div`
   `};
 
   h1 {
-    margin: 0px;
-    font-size: 20px;
+    margin: 1em 0;
+    font-size: 26px;
   }
 
   p {
-      font-size: 14px;
+    font-size: 18px;
   }
 
   @media (min-width: 480px) {
     margin: 0px 20px;
-
-    h1 {
-      font-size: 24px;
-    }
-
-    p {
-      font-size: 16px;
-    }
   }
 `
 
