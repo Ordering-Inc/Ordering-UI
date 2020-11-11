@@ -61,7 +61,8 @@ const OrderDetailsUI = (props) => {
 
   const { order, loading } = props.order
 
-  const getOrderStatus = (status) => {
+  const getOrderStatus = (s) => {
+    const status = parseInt(s)
     const orderStatus = [
       { key: 0, value: 'Pending', slug: 'PENDING', percentage: 25 },
       { key: 1, value: 'Completed', slug: 'COMPLETED', percentage: 100 },
