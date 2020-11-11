@@ -9,7 +9,7 @@ export const UserProfileContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
 
-  @media (min-width: 480px) {
+  @media (min-width: 768px) {
     align-items: flex-start;
     flex-direction: row;
   }
@@ -30,12 +30,9 @@ export const UserImage = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  
-  @media (min-width: 480px) {
-    width: 40%;
-  }
 
-  @media (min-width: 768px){
+  @media (min-width: 769px){
+    width: 40%;
     align-items: flex-end;
   }
 
@@ -62,16 +59,14 @@ export const Image = styled.div`
   };
 
   @media (min-width: 480px){
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
   }
 
-  @media (min-width: 578px){
+  @media (min-width: 768px){
     width: 170px;
     height: 170px;
   }
-
-
 `
 
 export const SkeletonWrapper = styled.div`
@@ -89,6 +84,14 @@ export const Camera = styled.div`
     width: 30px;
     height: 30px;
   }
+
+  @media (min-width: 480px){
+    width:242px; /**200px + 42px */
+  }
+
+  @media (min-width: 768px){
+    width:212px; /**200px + 42px */
+  }
 `
 
 export const SideForm = styled.div`
@@ -103,7 +106,7 @@ export const SideForm = styled.div`
       margin-left: 0;
   `}
   }
-  @media (min-width: 480px) {
+  @media (min-width: 768px) {
     width: 60%;
     > *{
     margin: 30px 0;
@@ -137,7 +140,7 @@ export const UserData = styled.div`
     background: #F8F8F8;
   }
 
-  @media (min-width: 480px){
+  @media (min-width: 768px){
     align-items: flex-start;
     text-align: left;
     ${props => props.theme?.rtl && css`
@@ -148,21 +151,25 @@ export const UserData = styled.div`
 `
 
 export const SavedPlaces = styled.div`
-  width: 100%;
+  width: 90%;
   text-align: center;
+  margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 20px;
 
+
   h1{
-    font-size: 18px
+    font-size: 24px;
+    text-align: left;
+    ${props => props.theme?.rtl && css`
+    text-align: right;
+    `}
   }
 
   > div{
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    margin: 0 auto;
-    width: 80%;
   }
 
   button{
@@ -170,21 +177,12 @@ export const SavedPlaces = styled.div`
     align-self: center;
   }
 
-  @media (min-width: 480px){
-    width: 70%;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-    text-align: right;
-    `}
-
-    button {
-      align-self: flex-end;
-    }
-  }
-
   @media (min-width: 768px){
+    width: 70%;
+    margin: 40px 0 20px 50px;
     button {
       width: 65%;
+      align-self: flex-end;
     }
   }
 
