@@ -22,6 +22,10 @@ export const Button = styled.button`
     opacity: 0.5
   }
 
+  ${({ bgtransparent }) => bgtransparent && css`
+      background: transparent !important;
+  `}
+
   ${({ initialIcon }) => initialIcon && css`
     text-align: left;
     ${props => props.theme?.rtl && css`

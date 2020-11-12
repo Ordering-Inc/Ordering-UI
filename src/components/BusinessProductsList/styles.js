@@ -27,3 +27,10 @@ export const WrapAllCategories = styled.div`
     `}
   }
 `
+
+export const WrapperNotFound = styled.div`
+  height: 500px;
+  > div{
+    height: 100%;
+  }
+`
