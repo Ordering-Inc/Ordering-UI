@@ -10,6 +10,7 @@ export const UserProfileContainer = styled.div`
   text-align: center;
   width: 100%;
   overflow-x: hidden;
+  margin-top: 25px;
 
   @media (min-width: 768px) {
     align-items: flex-start;
