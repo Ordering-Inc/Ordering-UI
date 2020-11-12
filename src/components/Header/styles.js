@@ -4,9 +4,7 @@ import { Select } from '../../styles/Selects'
 export const Header = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-
-  
+  width: 100%;  
 
   ${props => props.home ? css`
     background-color: #333;
@@ -17,16 +15,17 @@ export const Header = styled.div`
     color: ${props => props.theme.colors.primaryContrast}
   }
 
-    & ${MenuLink} {
-      color: #FFF;
-    }
+  & ${MenuLink} {
+    color: #FFF;
+  }
+
   ` : css`
     & ${LeftHeader} {
       > div{
         color: #333;
       }
       .left-header{
-        div{
+        > div{
           color: #333;
         }
       }

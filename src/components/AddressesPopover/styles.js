@@ -6,6 +6,10 @@ export const HeaderItem = styled.div`
   display: flex;
   align-items: center;
 
+  ${props => props.isHome && css`
+    color: #FFF;
+  `}
+
   svg {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`

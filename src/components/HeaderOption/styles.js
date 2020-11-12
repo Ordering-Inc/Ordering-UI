@@ -60,4 +60,8 @@ export const Container = styled.div`
       `}
     }
   `}
+
+  ${({ isHome }) => isHome && css`
+    color: #FFF;
+  `}
 `

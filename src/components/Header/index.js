@@ -94,6 +94,7 @@ export const Header = (props) => {
                 open={openPopover.moment}
                 onClick={() => handleTogglePopover('moment')}
                 onClose={() => handleClosePopover('moment')}
+                isHome={isHome}
               />
               <AddressesPopover
                 auth={auth}
@@ -101,6 +102,7 @@ export const Header = (props) => {
                 open={openPopover.addresses}
                 onClick={() => handleTogglePopover('addresses')}
                 onClose={() => handleClosePopover('addresses')}
+                isHome={isHome}
               />
             </Menu>
           )}
@@ -159,11 +161,13 @@ export const Header = (props) => {
               open={openPopover.addresses}
               onClick={() => handleTogglePopover('addresses')}
               onClose={() => handleClosePopover('addresses')}
+              isHome={isHome}
             />
             <MomentPopover
               open={openPopover.moment}
               onClick={() => handleTogglePopover('moment')}
               onClose={() => handleClosePopover('moment')}
+              isHome={isHome}
             />
           </SubMenu>
         ) : (
@@ -172,11 +176,13 @@ export const Header = (props) => {
               variant='address'
               addressState={orderState.options?.address?.address?.split(',')?.[0]}
               onClick={(variant) => openModal(variant)}
+              isHome={isHome}
             />
             <HeaderOption
               variant='moment'
               momentState={orderState.options?.moment}
               onClick={(variant) => openModal(variant)}
+              isHome={isHome}
             />
           </SubMenu>
         )
