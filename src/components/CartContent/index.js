@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, useEvent } from 'ordering-components'
 import { Container, NotCarts } from './styles'
 
 import { Cart } from '../Cart'
@@ -13,6 +13,18 @@ export const CartContent = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [events] = useEvent()
+
+  const [currentCartUuid, setCurrentCartUuid] = useState(null)
+
+  const handleAddProduct = (product, cart) => {
+    setCurrentCartUuid(cart?.uuid)
+  }
+
+  useEffect(() => {
+    events.on('cart_product_added', handleAddProduct)
+    return () => events.off('cart_product_added', handleAddProduct)
+  }, [])
 
   return (
     <Container>
@@ -22,6 +34,7 @@ export const CartContent = (props) => {
             {cart.products.length > 0 && (
               <Cart
                 cart={cart}
+                currentCartUuid={currentCartUuid}
                 isProducts={cart.products.length}
                 onClickCheckout={props.onClose}
               />

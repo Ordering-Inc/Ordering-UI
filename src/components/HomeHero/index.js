@@ -62,6 +62,7 @@ export const HomeHero = (props) => {
         <WrapInput onClick={handleAddressInput} withIcon>
           <HiOutlineLocationMarker />
           <Input
+            name='address-selection'
             aria-label='address selection'
             type='text'
             disabled
@@ -70,6 +71,7 @@ export const HomeHero = (props) => {
         </WrapInput>
         <Button
           color='primary'
+          name='find-business'
           onClick={handleFindBusinesses}
         >
           {t('FIND_BUSINESSES', 'Find businesses')}

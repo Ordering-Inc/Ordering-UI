@@ -85,3 +85,9 @@ export const convertHoursToMinutes = (time) => {
   const result = (parseInt(hour, 10) * 60) + parseInt(minute, 10)
   return `${result}min`
 }
+
+/**
+ * Function to convert a string in string capitalized
+ * @param {string} str string to capitalize
+ */
+export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)

@@ -92,7 +92,7 @@ const UserProfileFormUI = (props) => {
     <>
       <ProfileOptions value={t('MY_ACCOUNT', 'My Account')} />
       <UserProfileContainer>
-        <UserImage>
+        <UserImage className='user-image'>
           <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
             <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
               <Image isImage={user?.photo || formState?.changes?.photo}>
@@ -121,7 +121,7 @@ const UserProfileFormUI = (props) => {
           </ExamineClick>
           <Camera><GiPhotoCamera /></Camera>
         </UserImage>
-        <SideForm>
+        <SideForm className='user-form'>
           {edit
             ? (
               <FormInput onSubmit={handleSubmit(onSubmit)}>

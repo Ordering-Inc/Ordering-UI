@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import IosCash from '@meronex/icons/ios/IosCash'
 import IosCard from '@meronex/icons/ios/IosCard'
@@ -55,9 +55,15 @@ const PaymentOptionsUI = (props) => {
   } = props
   const [, t] = useLanguage()
 
+  useEffect(() => {
+    if (paymethodsList.paymethods.length === 1) {
+      handlePaymethodClick && handlePaymethodClick(paymethodsList.paymethods[0])
+    }
+  }, [paymethodsList.paymethods])
+
   return (
     <PaymentMethodsContainer>
-      <PaymentMethodsList>
+      <PaymentMethodsList className='payments-list'>
         {paymethodsList.paymethods.length > 0 && (
           paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
             <PayCard

@@ -1,6 +1,6 @@
 context('LoginForm', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8300/login')
+    cy.visit('/login')
   })
 
   it('Check UI', () => {
@@ -24,7 +24,7 @@ context('LoginForm', () => {
   it('Login by email', () => {
     cy.server({ method: 'POST' })
     cy.route('/*/*/*/auth**').as('postLogin')
-    cy.get('div').contains('EMAIL').click()
+    cy.get('div').contains('Login with Email').click()
     cy.get('input[name=email]').type('superadmin@ordering.co')
     cy.get('input[name=password]').type('super')
     cy.get('button').contains('Login').click()

@@ -21,6 +21,7 @@ import {
 
 const CartUI = (props) => {
   const {
+    currentCartUuid,
     cart,
     clearCart,
     isProducts,
@@ -105,8 +106,9 @@ const CartUI = (props) => {
   }
 
   return (
-    <CartContainer>
+    <CartContainer className='cart'>
       <BusinessItemAccordion
+        currentCartUuid={currentCartUuid}
         uuid={cart?.uuid}
         isCheckout={isCheckout}
         orderTotal={cart?.total}

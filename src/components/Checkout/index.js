@@ -353,7 +353,7 @@ export const Checkout = (props) => {
         />
       )}
 
-      {cartState.loading && (
+      {cartState.loading && !(window.location.pathname === '/checkout') && (
         <div style={{ width: '80%', margin: 'auto auto 20px' }}>
           <Skeleton height={35} style={{ marginBottom: '10px' }} />
           <Skeleton height={150} style={{ marginBottom: '10px' }} />
