@@ -27,7 +27,6 @@ const AddressDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [showMap, setShowMap] = useState(true)
 
   const handleClickAddress = (e) => {
     if (auth) {
@@ -43,7 +42,6 @@ const AddressDetailsUI = (props) => {
       return
     }
     setModals({ listOpen: false, formOpen: false })
-    // onFindBusiness && onFindBusiness()
   }
 
   useEffect(() => {
@@ -59,16 +57,13 @@ const AddressDetailsUI = (props) => {
             <TiPencil
               onClick={() => handleClickAddress()}
             />}
-          <span onClick={() => setShowMap(!showMap)}>{showMap ? 'Hide map' : 'View map'}</span>
         </Text>
       </Header>
-      {showMap && (
-        <WrappMap>
-          <Map>
-            <img src={googleMapsUrl} alt='google-maps-location' />
-          </Map>
-        </WrappMap>
-      )}
+      <WrappMap>
+        <Map>
+          <img src={googleMapsUrl} alt='google-maps-location' />
+        </Map>
+      </WrappMap>
 
       <Modal
         title={t('ADDRESS')}

@@ -49,7 +49,8 @@ const BusinessProductsListingUI = (props) => {
     updateProductModal,
     onProductRedirect,
     onCheckoutRedirect,
-    handleChangeSearch
+    handleChangeSearch,
+    handleSearchRedirect
   } = props
 
   const { business, loading, error } = businessState
@@ -152,18 +153,22 @@ const BusinessProductsListingUI = (props) => {
               <BusinessBasicInformation
                 businessState={businessState}
               />
-              <WrapperSearch>
-                <SearchBar
-                  onSearch={handleChangeSearch}
-                  search={searchValue}
-                  placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+              {categoryState.products.length !== 0 && (
+                <WrapperSearch>
+                  <SearchBar
+                    onSearch={handleChangeSearch}
+                    search={searchValue}
+                    placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                  />
+                </WrapperSearch>
+              )}
+              {categoryState.products.length !== 0 && (
+                <BusinessProductsCategories
+                  categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categorySelected={categorySelected}
+                  onClickCategory={handleChangeCategory}
                 />
-              </WrapperSearch>
-              <BusinessProductsCategories
-                categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
-                categorySelected={categorySelected}
-                onClickCategory={handleChangeCategory}
-              />
+              )}
               <WrapContent>
                 <BusinessProductsList
                   categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
@@ -172,6 +177,7 @@ const BusinessProductsListingUI = (props) => {
                   businessId={business.id}
                   errors={errors}
                   onProductClick={onProductClick}
+                  handleSearchRedirect={handleSearchRedirect}
                 />
               </WrapContent>
             </>
@@ -240,7 +246,7 @@ const BusinessProductsListingUI = (props) => {
             <NotFoundSource
               content={t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}
               btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-              onClickButton={props.handleSearchRedirect}
+              onClickButton={() => handleSearchRedirect()}
             />
           )
         }
@@ -250,7 +256,7 @@ const BusinessProductsListingUI = (props) => {
             <NotFoundSource
               content={t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.')}
               btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-              onClickButton={props.handleSearchRedirect}
+              onClickButton={handleSearchRedirect}
             />
           )
         }
