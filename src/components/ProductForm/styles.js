@@ -111,6 +111,12 @@ export const ProductInfo = styled.div`
 
     h1 {
       text-align: left;
+
+      ${props => props.theme?.rtl && css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      `}
     }
   }
 `
