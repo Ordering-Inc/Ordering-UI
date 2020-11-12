@@ -64,6 +64,8 @@ const BusinessesListingUI = (props) => {
     }
   }
 
+  console.log(orderState)
+
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
       setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')] })
@@ -107,6 +109,7 @@ const BusinessesListingUI = (props) => {
               className='card'
               business={business}
               handleCustomClick={handleBusinessClick}
+              orderType={orderState?.options?.type}
             />
           ))
         }
@@ -117,6 +120,7 @@ const BusinessesListingUI = (props) => {
               className='card'
               business={{}}
               isSkeleton
+              orderType={orderState?.type}
             />
           ))
         )}
