@@ -72,24 +72,16 @@ export const HeaderText = styled.div`
   `};
 
   h1 {
-    margin: 0px;
-    font-size: 20px;
+    margin: 1em 0;
+    font-size: 26px;
   }
 
   p {
-      font-size: 14px;
+    font-size: 18px;
   }
 
   @media (min-width: 480px) {
     margin: 0px 20px;
-
-    h1 {
-      font-size: 24px;
-    }
-
-    p {
-      font-size: 16px;
-    }
   }
 `
 

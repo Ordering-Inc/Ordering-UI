@@ -59,9 +59,10 @@ const OrderDetailsUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
 
-  const { order, loading, error, header } = props.order
+  const { order, loading, header } = props.order
 
-  const getOrderStatus = (status) => {
+  const getOrderStatus = (s) => {
+    const status = parseInt(s)
     const orderStatus = [
       { key: 0, value: 'Pending', slug: 'PENDING', percentage: 25 },
       { key: 1, value: 'Completed', slug: 'COMPLETED', percentage: 100 },
@@ -99,20 +100,15 @@ const OrderDetailsUI = (props) => {
     <Container>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
-          <Header businessHeader={header?.result?.header}>
-            <HeaderInfo className='order-header'>
-              <img alt='Logotype' width='200px' height='90px' src={theme?.images?.logos?.logotype} />
-              <HeaderText column>
-                <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
-                <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
-              </HeaderText>
-              <HeaderText>
-                <h1>{t('ORDER_TOTAL', 'Total')}</h1>
-                <h1>{parsePrice(order?.total || 0)}</h1>
-              </HeaderText>
-            </HeaderInfo>
-          </Header>
           <Content className='order-content'>
+            <Header businessHeader={header?.result?.header}>
+              <HeaderInfo className='order-header'>
+                <HeaderText column>
+                  <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
+                  <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
+                </HeaderText>
+              </HeaderInfo>
+            </Header>
             <OrderBusiness>
               <BusinessWrapper>
                 <LogoWrapper>
@@ -254,7 +250,7 @@ const OrderDetailsUI = (props) => {
               </table>
             </OrderBill>
 
-            {(order?.status === 1 || order?.status === 11) && !order.review && (
+            {(parseInt(order?.status) === 1 || parseInt(order?.status) === 11) && !order.review && (
               <ReviewsAction>
                 <Button color='primary' onClick={() => setOpenReview(true)}>
                   {t('REVIEW_ORDER', 'Review your Order')}
@@ -279,11 +275,9 @@ const OrderDetailsUI = (props) => {
 
       {loading && (
         <WrapperContainer className='skeleton-loading'>
-          <SkeletonBlock width={100}>
-            <Skeleton height={250} />
-          </SkeletonBlock>
           <SkeletonBlockWrapp>
             <SkeletonBlock width={80}>
+              <Skeleton height={200} />
               <Skeleton height={100} />
               <Skeleton height={100} />
               <Skeleton height={100} />

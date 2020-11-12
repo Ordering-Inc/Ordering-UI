@@ -15,7 +15,7 @@ const AccordionStyled = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
+  cursor: initial;
   transition: background-color 0.6s ease;
   margin: 0px 10px;
 
@@ -317,6 +317,7 @@ export const ProductSelect = styled.select`
   font-size: 17px;
   outline: none;
   margin-right: 5px;
+  cursor: pointer;
 
   ${props => props.theme?.rtl && css`
     margin-left: 5px;
