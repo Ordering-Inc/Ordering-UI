@@ -116,7 +116,8 @@ export const MessagesUI = (props) => {
     }
   }
 
-  const getStatus = (status) => {
+  const getStatus = (s) => {
+    const status = parseInt(s)
     switch (status) {
       case 0:
         return 'ORDER_STATUS_PENDING'
