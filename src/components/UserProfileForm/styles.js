@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 
+export const Container = styled.div``
+
 export const UserProfileContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -31,8 +33,8 @@ export const UserImage = styled.div`
   align-items: center;
   width: 100%;
 
-  @media (min-width: 769px){
-    width: 40%;
+  @media (min-width: 768px){
+    width: 45%;
     align-items: flex-end;
   }
 
@@ -107,7 +109,7 @@ export const SideForm = styled.div`
   `}
   }
   @media (min-width: 768px) {
-    width: 60%;
+    width: 55%;
     > *{
     margin: 30px 0;
     margin-left: 50px;
@@ -178,11 +180,16 @@ export const SavedPlaces = styled.div`
   }
 
   @media (min-width: 768px){
-    width: 70%;
-    margin: 40px 0 20px 50px;
+    width: 90%;
+    margin-top: 40px;
+    h1 {
+      text-align: center;
+    }
+    ul{
+      width: 100%;
+    }
     button {
       width: 65%;
-      align-self: flex-end;
     }
   }
 
