@@ -117,7 +117,6 @@ const BusinessProductsListingUI = (props) => {
   }, [productModal])
 
   const handleChangePage = (data) => {
-    // console.log(Object.entries(data.query || {}).length, openProduct)
     if (Object.entries(data.query).length === 0 && openProduct) {
       setModalIsOpen(false)
     }
@@ -131,6 +130,7 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    document.body.style.overflow = openProduct ? 'hidden' : 'auto'
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
