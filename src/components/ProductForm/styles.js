@@ -134,6 +134,8 @@ export const SectionTitle = styled.h3`
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 107px;
+
   p {
     font-weight: 300;
     margin-bottom: 5px;
@@ -152,6 +154,14 @@ export const ProductComment = styled.div`
       border-color: #555;
     }
   }
+
+  @media (min-width: 577px) {
+    margin-bottom: 62px;
+  }
+
+  @media (min-width: 769px) {
+    margin-bottom: 0px;
+  }
 `
 
 export const ProductActions = styled.div`
@@ -160,6 +170,12 @@ export const ProductActions = styled.div`
   align-items: center;
   padding: 10px 0px;
   width: 100%;
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background-color: #FFF;
 
   div {
     width: 50%;
@@ -185,7 +201,7 @@ export const ProductActions = styled.div`
   }
 
   button.add {
-    width: 100%;
+    width: 90%;
     padding: 5px 10px;
     margin: 10px 0px 0px;
     position: relative;
@@ -218,7 +234,18 @@ export const ProductActions = styled.div`
     }
     button.add {
       width: 75%;
-      margin: 0;
+      margin: 0 10px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    position: relative;
+    bottom: initial;
+    right: initial;
+
+    button.add {
+      width: 100%;
+      margin: 0px;
     }
   }
 

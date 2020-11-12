@@ -86,9 +86,14 @@ const ProductOptionsUI = (props) => {
       return
     }
     const myElement = document.getElementsByClassName('error')[0]
-    const container = document.getElementById('product_edition')
-    const topPos = myElement.offsetTop - container.offsetTop
-    scrollTo(container, topPos, 1250)
+    const modal = document.getElementsByClassName('popup-dialog')[0]
+
+    let topPos = myElement.offsetTop - modal.offsetTop
+    if (windowSize.width <= 768) {
+      const productImage = document.getElementById('product_image')
+      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
+    }
+    scrollTo(modal, topPos, 1250)
   }
 
   const handleCustomModalClick = (e, { page }) => {
@@ -108,7 +113,7 @@ const ProductOptionsUI = (props) => {
   }
 
   return (
-    <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
+    <ProductContainer>
       {loading && (
         <SkeletonBlock width={90}>
           <Skeleton variant='rect' height={50} />
@@ -128,7 +133,7 @@ const ProductOptionsUI = (props) => {
       {!loading && !error && product && (
         <>
           <WrapperImage>
-            <ProductImage>
+            <ProductImage id='product_image'>
               <img src={product?.images || theme.images?.dummies?.product} alt='product' />
             </ProductImage>
           </WrapperImage>
@@ -137,7 +142,7 @@ const ProductOptionsUI = (props) => {
               <h1>{product?.name}</h1>
               {product?.description && <p>{product?.description}</p>}
             </div>
-            <ProductEdition id={`${windowSize.width > 1200 && 'product_edition'}`}>
+            <ProductEdition>
               {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
               {product?.ingredients.map(ingredient => (
                 <ProductIngredient
