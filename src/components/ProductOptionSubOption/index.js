@@ -52,7 +52,7 @@ const ProductOptionSubOptionUI = (props) => {
   return (
     <Container onClick={() => toggleSelect()}>
       <IconControl>
-        {option.max > 1 ? (
+        {((option.min === 0 && option.max === 1) || option.max > 1) ? (
           state?.selected ? (
             <MdCheckBox />
           ) : (
