@@ -116,7 +116,6 @@ export const ProductInfo = styled.div`
 `
 
 export const ProductEdition = styled.div`
-  overflow: auto;
   .error {
     background-color: ${lighten(0.58, '#A52121')};
   }
@@ -217,7 +216,7 @@ export const ProductActions = styled.div`
   }
 
   @media (min-width: 1201px) {
-    padding: 10px 0px 0px;
+    padding: 10px 0px;
 
     div {
       width: 30%;
