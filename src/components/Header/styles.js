@@ -19,18 +19,8 @@ export const Header = styled.div`
     color: #FFF;
   }
 
-  ` : css`
-    & ${LeftHeader} {
-      > div{
-        color: #333;
-      }
-      .left-header{
-        > div{
-          color: #333;
-        }
-      }
-    }
-
+  `
+  : css`
     & ${SubMenu}{
       div{
         color: #333;
