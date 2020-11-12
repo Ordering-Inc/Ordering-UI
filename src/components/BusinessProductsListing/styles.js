@@ -48,5 +48,8 @@ export const ProductLoading = styled.div`
 
 export const SkeletonItem = styled.div`
   width: 80%;
+  span {
+    margin-bottom: 10px;
+  }
   margin: 0px auto 10px;
 `

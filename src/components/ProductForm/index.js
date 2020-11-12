@@ -34,7 +34,8 @@ import {
   SectionTitle,
   ProductActions,
   ProductComment,
-  SkeletonBlock
+  SkeletonBlock,
+  WrapperSubOption
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -150,10 +151,7 @@ const ProductOptionsUI = (props) => {
                 product?.extras.map(extra => extra.options.map(option => {
                   const currentState = productCart.options[`id:${option.id}`] || {}
                   return (
-                    <div
-                      key={option.id}
-                      className={isError(option.id)}
-                    >
+                    <div key={option.id}>
                       {
                         showOption(option) && (
                           <ProductOption
@@ -161,22 +159,24 @@ const ProductOptionsUI = (props) => {
                             currentState={currentState}
                             error={errors[`id:${option.id}`]}
                           >
-                            {
-                              option.suboptions.map(suboption => {
-                                const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
-                                const balance = productCart.options[`id:${option.id}`]?.balance || 0
-                                return (
-                                  <ProductOptionSubOption
-                                    key={suboption.id}
-                                    onChange={handleChangeSuboptionState}
-                                    balance={balance}
-                                    option={option}
-                                    suboption={suboption}
-                                    state={currentState}
-                                  />
-                                )
-                              })
-                            }
+                            <WrapperSubOption className={isError(option.id)}>
+                              {
+                                option.suboptions.map(suboption => {
+                                  const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
+                                  const balance = productCart.options[`id:${option.id}`]?.balance || 0
+                                  return (
+                                    <ProductOptionSubOption
+                                      key={suboption.id}
+                                      onChange={handleChangeSuboptionState}
+                                      balance={balance}
+                                      option={option}
+                                      suboption={suboption}
+                                      state={currentState}
+                                    />
+                                  )
+                                })
+                              }
+                            </WrapperSubOption>
                           </ProductOption>
                         )
                       }

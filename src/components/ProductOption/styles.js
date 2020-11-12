@@ -7,11 +7,11 @@ export const Container = styled.div`
 `
 
 export const WrapHeader = styled.div`
-  padding: 15px;
+  padding: 15px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #F7F7F7;
+  background-color: #FFF;
 `
 
 export const Title = styled.h3`

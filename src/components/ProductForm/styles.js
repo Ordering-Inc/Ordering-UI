@@ -115,19 +115,14 @@ export const ProductInfo = styled.div`
   }
 `
 
-export const ProductEdition = styled.div`
-  .error {
-    background-color: ${lighten(0.58, '#A52121')};
-  }
-`
+export const ProductEdition = styled.div``
 
 export const SectionTitle = styled.h3`
   font-size: 18px;
-  padding: 15px;
+  padding: 15px 0px;
   margin: 0px;
   font-weight: 600;
   color: #333333;
-  background-color: #F7F7F7;
 `
 
 export const ProductComment = styled.div`
@@ -145,6 +140,7 @@ export const ProductComment = styled.div`
     outline: none;
     color: #555;
     resize: none;
+    border-radius: 10px;
 
     &:focus {
       border-color: #555;
@@ -186,12 +182,17 @@ export const ProductActions = styled.div`
     width: 100%;
     padding: 5px 10px;
     margin: 10px 0px 0px;
+    position: relative;
 
     span:last-child {
-      float: right;
+      position: absolute;
+      right: 0;
       margin-right: 10px;
+
       ${props => props.theme?.rtl && css`
-        float: left;
+        position: absolute;
+        left: 0;
+        right: initial;
         margin-left: 10px;
         margin-right: 0px;
       `}
@@ -233,5 +234,12 @@ export const SkeletonBlock = styled.div`
 
   span {
     margin-bottom: 10px;
+  }
+`
+
+export const WrapperSubOption = styled.div`
+  border-radius: 10px;
+  &.error {
+    background-color: ${lighten(0.58, '#A52121')};
   }
 `

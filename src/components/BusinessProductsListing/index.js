@@ -189,13 +189,7 @@ const BusinessProductsListingUI = (props) => {
           {productModal.loading && (
             <ProductLoading>
               <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
+                <Skeleton height={45} count={8} />
               </SkeletonItem>
             </ProductLoading>
           )}
