@@ -4,7 +4,6 @@ import { useTheme } from 'styled-components'
 
 import {
   Header as HeaderContainer,
-  HeaderInvert,
   InnerHeader,
   LogoHeader,
   LeftHeader,
@@ -46,8 +45,6 @@ export const Header = (props) => {
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
-  const HeaderType = isHome ? HeaderInvert : HeaderContainer
-
   const openModal = (opt) => {
     setModalSelected(opt)
     setModalIsOpen(true)
@@ -82,7 +79,7 @@ export const Header = (props) => {
   }, [])
 
   return (
-    <HeaderType>
+    <HeaderContainer home={isHome}>
       <InnerHeader>
         <LeftHeader>
           <SidebarMenu auth={auth} />
@@ -210,6 +207,6 @@ export const Header = (props) => {
           )}
         </Modal>
       )}
-    </HeaderType>
+    </HeaderContainer>
   )
 }

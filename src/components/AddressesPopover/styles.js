@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { HeaderInvert } from '../Header/styles'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
@@ -13,10 +12,6 @@ export const HeaderItem = styled.div`
       margin-left: 5px;
       margin-right: 0px;
     `} 
-  }
-
-  ${HeaderInvert} & {
-    color: #FFF;
   }
 `
 

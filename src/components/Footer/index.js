@@ -6,12 +6,14 @@ import FaTwitter from '@meronex/icons/fa/FaTwitter'
 import FaInstagram from '@meronex/icons/fa/FaInstagram'
 import FaFacebook from '@meronex/icons/fa/FaFacebook'
 import { useLanguage } from 'ordering-components'
+import { LanguageSelector } from '../LanguageSelector'
 
 export const Footer = () => {
   const [, t] = useLanguage()
 
   return (
     <FooterContainer>
+      <LanguageSelector />
       <Content>
         <h1>{t('FOOTER_QL1_TITLE')}</h1>
         <a
