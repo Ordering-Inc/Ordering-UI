@@ -50,14 +50,15 @@ export const Image = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid ${props => props.theme?.colors?.primary};
-  border-radius: 1000px;
+  border-radius: 50%;
   padding: 5px;
   box-sizing: border-box;
+  overflow: hidden;
 
   img {
     width: 100%;
     height: auto;
-    border-radius: 1000px;
+    border-radius: 50%;
     object-fit: cover;
     border: 1px solid #F5F5F5;
   }
