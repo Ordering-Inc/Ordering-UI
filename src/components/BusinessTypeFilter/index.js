@@ -25,7 +25,7 @@ const BusinessTypeFilterUI = (props) => {
   const [load, setLoad] = useState(false)
 
   return (
-    <TypeContainer id='container' tabIndex='0'>
+    <TypeContainer id='container'>
       <Tabs variant='primary' id='categories'>
         <AutoScroll categories='categories' container='container'>
           {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
