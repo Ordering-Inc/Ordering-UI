@@ -6,6 +6,11 @@ export const TypeContainer = styled.div`
   overflow-x: auto;
   justify-content: flex-start;
   text-align: center;
+
+  ::-webkit-scrollbar {
+      opacity: 0
+  }
+  
   > div{
     margin: 0 auto;
     > div {

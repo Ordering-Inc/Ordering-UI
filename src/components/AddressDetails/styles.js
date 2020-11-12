@@ -14,6 +14,10 @@ export const Header = styled.div`
 export const WrappMap = styled.div`
   width: 100%;
   margin: auto;
+
+  @media (min-width: 992px) {
+    width: 80%;
+  }
 `
 
 export const Map = styled.div`

@@ -5,11 +5,18 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  height: calc(100vh - 65px);
-  margin: 0 auto;
+  width: 100%;
+  margin: 150px auto 100px;
+  box-sizing: border-box;
+
+  @media (min-width: 768px) {
+    margin: 70px auto;
+  }
 `
 
 export const Image = styled.div`
-  max-width: 300px;
+  padding-left: 20px;
+  img {
+    width: 100%;
+  }
 `

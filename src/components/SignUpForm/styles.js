@@ -174,13 +174,13 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-   width: calc(100% - 40px);
-   margin-top: 5px;
+  width: 80%;
 
   button {
     display: flex;
     justify-content: start;
-    width: 100%;
+    width: calc(100% - 20px);
+    margin: 0 10px !important;
     padding: 5px 30px;
     color: #000000;
 
