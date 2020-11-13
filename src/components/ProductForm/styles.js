@@ -65,9 +65,6 @@ export const ProductInfo = styled.div`
     font-weight: 500;
     text-align: center;
     color: #263238;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     margin-top: 0px;
     ${props => props.theme?.rtl && css`
       text-align: right;
