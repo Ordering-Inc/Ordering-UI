@@ -246,7 +246,7 @@ const ProductOptionsUI = (props) => {
                 <AddressList addressList={user.addresses} showImage />
               )}
 
-              {!auth && (
+              {(!auth || isSoldOut || maxProductQuantity === 0) && (
                 <Button
                   className={`add ${!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''}`}
                   color='primary'
