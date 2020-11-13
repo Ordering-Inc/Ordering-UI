@@ -50,7 +50,7 @@ const AddressListUI = (props) => {
     setCurAddress(address)
     setAddessOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
-    scrollTo(container, 100, 500)
+    scrollTo(container, 0, 500)
   }
 
   const handleSaveAddress = (address) => {
@@ -123,55 +123,53 @@ const AddressListUI = (props) => {
           />
         )
       }
-      {!addressList.loading && !addressList.error ? (
-        <>
-          {addressList.addresses && addressList.addresses.length > 0 ? (
-            <AddressListUl>
-              {addressList.addresses.map(address => (
-                <AddressItem key={address.id}>
-                  <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
-                    <span className='radio'>
-                      {address.address === orderState?.options?.address?.address ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
-                    </span>
-                    <div className='address'>
-                      <span>{address.address}</span>
-                      <span>{address.internal_number} {address.zipcode}</span>
-                    </div>
-                  </div>
-                  <AddressItemActions className='form'>
-                    <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                      <TiPencil />
-                    </a>
-                    <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
-                      <VscTrash />
-                    </a>
-                  </AddressItemActions>
-                </AddressItem>
-              ))}
-            </AddressListUl>
-          ) : (
-            !addressOpen && !showImage && (
-              <WrappNotAddresses>
-                <img src={theme.images?.general?.notFound} alt='Not Found' />
-                <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
-              </WrappNotAddresses>
-            )
-          )}
-        </>
-      ) : (
-        <>
-          {addressList.error && addressList.error.length > 0 ? (
-            addressList.error.map((e, i) => (
-              <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
-            ))
-          ) : (
-            <AddressListUl>
-              <Skeleton height={50} style={{ marginBottom: '10px' }} />
-              <Skeleton height={50} style={{ marginBottom: '10px' }} />
-            </AddressListUl>
-          )}
-        </>
+
+      {!addressList.loading && !addressList.error && addressList?.addresses?.length > 0 && (
+        <AddressListUl>
+          {addressList.addresses.map(address => (
+            <AddressItem key={address.id}>
+              <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
+                <span className='radio'>
+                  {address.address === orderState?.options?.address?.address ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
+                </span>
+                <div className='address'>
+                  <span>{address.address}</span>
+                  <span>{address.internal_number} {address.zipcode}</span>
+                </div>
+              </div>
+              <AddressItemActions className='form'>
+                <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
+                  <TiPencil />
+                </a>
+                <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
+                  <VscTrash />
+                </a>
+              </AddressItemActions>
+            </AddressItem>
+          ))}
+        </AddressListUl>
       )}
+
+      {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !showImage && (
+        <WrappNotAddresses>
+          <img src={theme.images?.general?.notFound} alt='Not Found' />
+          <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
+        </WrappNotAddresses>
+      )}
+
+      {!addressList.loading && addressList.error && (
+        addressList.error.length > 0 && (
+          addressList.error.map((e, i) => (
+            <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
+          )))
+      )}
+
+      {addressList.loading && (
+        <AddressListUl>
+          <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
+        </AddressListUl>
+      )}
+
       {
         !popover && (
           <Modal
