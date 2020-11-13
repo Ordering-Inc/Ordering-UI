@@ -128,7 +128,7 @@ export const SectionTitle = styled.h3`
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 107px;
+  margin-bottom: 115px;
 
   p {
     font-weight: 300;
@@ -171,7 +171,7 @@ export const ProductActions = styled.div`
   width: 100%;
   background-color: #FFF;
 
-  div {
+  div.incdec-control {
     width: 50%;
     display: flex;
     justify-content: space-around;
@@ -182,6 +182,11 @@ export const ProductActions = styled.div`
       height: 35px;
       cursor: pointer;
     }
+  }
+  div:last-child {
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
 
   button:disabled,
@@ -223,8 +228,11 @@ export const ProductActions = styled.div`
     justify-content: space-between;
     flex-direction: row;
 
-    div {
+    div.incdec-control {
       width: 25%;
+    }
+    div:last-child {
+      width: 75%;
     }
     button.add {
       width: 75%;
@@ -246,8 +254,11 @@ export const ProductActions = styled.div`
   @media (min-width: 1201px) {
     padding: 10px 0px;
 
-    div {
+    div.incdec-control {
       width: 30%;
+    }
+    div:last-child {
+      width: 70%;
     }
     button.add {
       width: 68%;

@@ -21,6 +21,7 @@ import { ProductShare } from '../ProductShare'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
+import { AddressList } from '../AddressList'
 
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
@@ -61,7 +62,7 @@ const ProductOptionsUI = (props) => {
   const { product, loading, error } = productObject
 
   const windowSize = useWindowSize()
-  const [{ auth }, { login }] = useSession()
+  const [{ auth, user }, { login }] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
@@ -210,7 +211,7 @@ const ProductOptionsUI = (props) => {
             <ProductActions>
               {
                 productCart && !isSoldOut && maxProductQuantity > 0 && (
-                  <div>
+                  <div className='incdec-control'>
                     <FiMinusCircle
                       onClick={decrement}
                       className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
@@ -224,7 +225,7 @@ const ProductOptionsUI = (props) => {
                 )
               }
 
-              {productCart && !isSoldOut && maxProductQuantity && auth ? (
+              {productCart && !isSoldOut && maxProductQuantity && auth && orderState.options?.address_id && (
                 <Button
                   className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                   color='primary'
@@ -239,7 +240,13 @@ const ProductOptionsUI = (props) => {
                   )}
                   <span>{productCart.total && parsePrice(productCart.total)}</span>
                 </Button>
-              ) : (
+              )}
+
+              {auth && !orderState.options?.address_id && (
+                <AddressList addressList={user.addresses} showImage />
+              )}
+
+              {!auth && (
                 <Button
                   className={`add ${!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''}`}
                   color='primary'
