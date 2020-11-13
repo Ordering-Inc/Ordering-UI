@@ -118,7 +118,7 @@ const BusinessesListingUI = (props) => {
               className='card'
               business={{}}
               isSkeleton
-              orderType={orderState?.type}
+              orderType={orderState?.options?.type}
             />
           ))
         )}
