@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { HeaderInvert } from '../Header/styles'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
@@ -7,16 +6,16 @@ export const HeaderItem = styled.div`
   display: flex;
   align-items: center;
 
+  ${props => props.isHome && css`
+    color: #FFF;
+  `}
+
   svg {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
       margin-right: 0px;
     `} 
-  }
-
-  ${HeaderInvert} & {
-    color: #FFF;
   }
 `
 
