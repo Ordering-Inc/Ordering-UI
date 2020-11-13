@@ -244,7 +244,17 @@ const ProductOptionsUI = (props) => {
               )}
 
               {auth && !orderState.options?.address_id && (
-                <AddressList addressList={user.addresses} showImage />
+                orderState.loading ? (
+                  <Button
+                    className='add'
+                    color='primary'
+                    disabled
+                  >
+                    {t('LOADING', 'Loading...')}
+                  </Button>
+                ) : (
+                  <AddressList addressList={user.addresses} showImage />
+                )
               )}
 
               {(!auth || isSoldOut || maxProductQuantity === 0) && (
