@@ -81,9 +81,6 @@ export const ProductInfo = styled.div`
     margin-top: 0px;
 
     line-height: 1.5em;
-    height: 3em;
-    overflow: hidden;
-    text-overflow: ellipsis;
     width: 100%;
     ${props => props.theme?.rtl && css`
       text-align: right;
