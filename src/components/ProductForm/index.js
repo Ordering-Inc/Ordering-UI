@@ -35,7 +35,8 @@ import {
   ProductActions,
   ProductComment,
   SkeletonBlock,
-  WrapperSubOption
+  WrapperSubOption,
+  SkuContent
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -141,6 +142,12 @@ const ProductOptionsUI = (props) => {
             <div>
               <h1>{product?.name}</h1>
               {product?.description && <p>{product?.description}</p>}
+              {product?.sku && (
+                <SkuContent>
+                  <h2>{t('SKU', 'Sku')}</h2>
+                  <p>{product?.sku}</p>
+                </SkuContent>
+              )}
             </div>
             <ProductEdition>
               {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}

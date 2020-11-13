@@ -273,3 +273,18 @@ export const WrapperSubOption = styled.div`
     background-color: ${lighten(0.58, '#A52121')};
   }
 `
+
+export const SkuContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+`
