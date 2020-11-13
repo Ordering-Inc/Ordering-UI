@@ -158,13 +158,8 @@ export const BusinessInformationUI = (props) => {
                 </ScheduleSection>
                 <DeliveryInfo>
                   <div>
-                    <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {parsePrice(business.service_fee)}</h5>
-                    <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {parsePrice(business.minimum)}</h5>
-                    <h5>{t('DISTANCE', 'Distance:')} {parseDistance(business?.distance || 0)}</h5>
-                  </div>
-                  <div>
-                    <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {convertHoursToMinutes(business?.delivery_time)}</h5>
-                    <h5>{t('PICKUP_TIME', 'Pickup Time:')} {convertHoursToMinutes(business?.pickup_time)}</h5>
+                    <h5>{t('DELIVERY_TIME', 'Delivery Time')}: {convertHoursToMinutes(business?.delivery_time)}</h5>
+                    <h5>{t('PICKUP_TIME', 'Pickup Time')}: {convertHoursToMinutes(business?.pickup_time)}</h5>
                   </div>
                 </DeliveryInfo>
               </>
