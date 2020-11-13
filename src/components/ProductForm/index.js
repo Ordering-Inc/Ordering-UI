@@ -108,6 +108,7 @@ const ProductOptionsUI = (props) => {
       user,
       token: user.session.access_token
     })
+    closeModal()
   }
 
   const isError = (id) => {

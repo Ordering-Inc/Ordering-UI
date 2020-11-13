@@ -259,6 +259,9 @@ export const ProductActions = styled.div`
     }
     div:last-child {
       width: 70%;
+      button {
+        width: 100%;
+      }
     }
     button.add {
       width: 68%;
