@@ -90,6 +90,7 @@ const BusinessProductsListingUI = (props) => {
     setModalIsOpen(false)
     handleUpdateInitialRender(false)
     updateProductModal(null)
+    setCurProduct(null)
     onProductRedirect({
       slug: business?.slug
     })
@@ -103,10 +104,17 @@ const BusinessProductsListingUI = (props) => {
     getNextProducts()
   }, [categoryState])
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [handleScroll])
+  const handleChangePage = (data) => {
+    if (Object.entries(data.query).length === 0 && openProduct) {
+      setModalIsOpen(false)
+    }
+  }
+
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
 
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
@@ -117,18 +125,19 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [productModal])
 
-  const handleChangePage = (data) => {
-    if (Object.entries(data.query).length === 0 && openProduct) {
-      setModalIsOpen(false)
-    }
-  }
-
   useEffect(() => {
-    if (categoryId && productId) {
+    if (categoryId && productId && !curProduct?.id) {
       handleUpdateInitialRender(true)
     }
     events.emit('get_current_view')
-  }, [])
+  }, [categoryId, productId, location])
+
+  useEffect(() => {
+    if (!location.search) {
+      setCurProduct(null)
+      handleUpdateInitialRender(false)
+    }
+  }, [location])
 
   useEffect(() => {
     document.body.style.overflow = openProduct ? 'hidden' : 'auto'
@@ -138,11 +147,10 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [openProduct])
 
-  const handleUpsellingPage = () => {
-    onCheckoutRedirect(currentCart?.uuid)
-    setOpenUpselling(false)
-    setCanOpenUpselling(false)
-  }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, useHistory, useLocation } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { useApi, useEvent } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
@@ -7,7 +7,6 @@ import { capitalize } from '../../../src/utils'
 
 export const BusinessProductsList = (props) => {
   const { store } = useParams()
-  const history = useHistory()
   const [ordering] = useApi()
   const { search } = useLocation()
 
@@ -57,22 +56,19 @@ export const BusinessProductsList = (props) => {
     },
     onProductRedirect: ({ slug, category, product }) => {
       if (!category && !product) {
-        if (history.length <= 2) {
-          return window.location.pathname.includes('/store/')
-            ? events.emit('go_to_page', { page: 'business', params: { store } })
-            : events.emit('go_to_page', { page: 'business_slug', params: { store } })
-        }
-        return history.go(-1)
+        return window.location.pathname.includes('/store/')
+          ? events.emit('go_to_page', { page: 'business', params: { store: slug } })
+          : events.emit('go_to_page', { page: 'business_slug', params: { store: slug } })
       }
       return window.location.pathname.includes('/store/')
         ? events.emit('go_to_page', {
           page: 'business',
-          params: { store },
+          params: { store: slug },
           search: `?category=${category}&product=${product}`
         })
         : events.emit('go_to_page', {
           page: 'business_slug',
-          params: { store },
+          params: { store: slug },
           search: `?category=${category}&product=${product}`
         })
     },
