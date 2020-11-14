@@ -8,6 +8,7 @@ import {
   useUtils
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
+import { Modal } from '../Modal'
 import {
   BusinessInformationContainer,
   BusinessHeader,
@@ -25,7 +26,9 @@ import {
   BusinessInfoItem,
   WrapperBusinessLogo,
   BusinessLogo,
-  ModalIcon
+  ModalIcon,
+  Description,
+  ImageContainer
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
@@ -51,10 +54,17 @@ export const BusinessInformationUI = (props) => {
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance }] = useUtils()
+  const [modalImage, setModalImage] = useState(false)
+  const [image, setImage] = useState('')
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
     return `${checkTime(hour)}:${checkTime(minute)}`
+  }
+
+  const handleModalImage = (src) => {
+    setImage(src)
+    setModalImage(true)
   }
 
   return (
@@ -128,7 +138,7 @@ export const BusinessInformationUI = (props) => {
             {business.description && (
               <>
                 <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business description')}</SectionTitle>
-                <p>{business.description}</p>
+                <Description>{business.description}</Description>
               </>
             )}
             {businessLocation.location && (
@@ -177,7 +187,7 @@ export const BusinessInformationUI = (props) => {
                 <div>
                   {
                     businessPhotos.map((photo, i) => (
-                      <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' />
+                      <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' onClick={() => handleModalImage(photo.file)} />
                     ))
                   }
                 </div>
@@ -207,6 +217,20 @@ export const BusinessInformationUI = (props) => {
           </>
         )}
       </BusinessContent>
+      <Modal
+        onClose={() => setModalImage(false)}
+        open={modalImage}
+        padding='0'
+        hideCloseDefault
+        isTransparent
+      >
+        <ImageContainer>
+          <ModalIcon>
+            <MdClose onClick={() => setModalImage(false)} />
+          </ModalIcon>
+          <img src={image} />
+        </ImageContainer>
+      </Modal>
     </BusinessInformationContainer>
   )
 }
