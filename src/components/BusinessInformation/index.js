@@ -122,8 +122,15 @@ export const BusinessInformationUI = (props) => {
             </Tabs>
           </FlexTabs>
         )}
+
         {tabValue === 'General Info' ? (
           <>
+            {business.description && (
+              <>
+                <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business description')}</SectionTitle>
+                <p>{business.description}</p>
+              </>
+            )}
             {businessLocation.location && (
               <>
                 <SectionTitle>{t('BUSINESS_LOCATION', 'Business location')}</SectionTitle>
