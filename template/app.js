@@ -160,12 +160,16 @@ export const App = () => {
                     }
                   </Route>
                   <Route exact path='/password/reset'>
+<<<<<<< HEAD
                     {
                       !auth ? (
                         <ResetPassword />
                       )
                         : <Redirect to='/' />
                     }
+=======
+                    <ResetPassword elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>} />
+>>>>>>> 030b6083a2db223989efba8069965e75d2c5417d
                   </Route>
                   <Route exact path='/profile'>
                     {auth
