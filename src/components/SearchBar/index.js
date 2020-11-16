@@ -12,6 +12,8 @@ export const SearchBar = ({ onSearch, search, placeholder }) => {
   const el = useRef()
 
   const onChangeSearch = e => {
+    if (e.keyCode === 13) return
+
     clearTimeout(timeout)
 
     timeout = setTimeout(function () {
