@@ -250,7 +250,15 @@ const OrderDetailsUI = (props) => {
               </table>
             </OrderBill>
 
-            {(parseInt(order?.status) === 1 || parseInt(order?.status) === 11) && !order.review && (
+            {(
+              parseInt(order?.status) === 1 ||
+              parseInt(order?.status) === 2 ||
+              parseInt(order?.status) === 5 ||
+              parseInt(order?.status) === 6 ||
+              parseInt(order?.status) === 10 ||
+              parseInt(order?.status) === 11 ||
+              parseInt(order?.status) === 12
+            ) && !order.review && (
               <ReviewsAction>
                 <Button color='primary' onClick={() => setOpenReview(true)}>
                   {t('REVIEW_ORDER', 'Review your Order')}
