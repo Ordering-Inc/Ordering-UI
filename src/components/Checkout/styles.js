@@ -19,7 +19,7 @@ export const WrappContainer = styled.div`
 export const UserDetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 20px 0px;
+  margin: 30px 0px 20px;
   flex-wrap: wrap;
 
   div {
