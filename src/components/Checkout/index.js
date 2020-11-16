@@ -84,8 +84,10 @@ const CheckoutUI = (props) => {
 
   const checkValidationFields = () => {
     const errors = []
+    const notFields = ['coupon', 'driver_tip']
+
     Object.values(validationFields?.fields).map(field => {
-      if (field?.required) {
+      if (field?.required && !notFields.includes(field.code)) {
         if (!user[field?.code]) {
           errors.push(t('ERROR_FIELD', `The field ${field?.code} is required`))
         }
