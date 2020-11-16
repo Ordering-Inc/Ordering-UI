@@ -43,6 +43,7 @@ const CheckoutUI = (props) => {
     placing,
     businessDetails,
     paymethodSelected,
+    validationFields,
     handlePaymethodChange,
     handlerClickPlaceOrder
   } = props
@@ -161,7 +162,7 @@ const CheckoutUI = (props) => {
           </PaymentMethodContainer>
         )}
 
-        {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && (
+        {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.driver_tip?.enabled && (
           <DriverTipContainer>
             <h1>{t('DRIVER_TIP', 'Driver Tip')}</h1>
             <DriverTips
@@ -178,6 +179,7 @@ const CheckoutUI = (props) => {
             <Cart
               cart={cart}
               isProducts={cart?.products?.length || 0}
+              showCoupon={validationFields?.fields?.coupon?.enabled}
             />
           </CartContainer>
         )}
