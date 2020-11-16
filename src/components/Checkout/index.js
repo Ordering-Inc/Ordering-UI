@@ -83,6 +83,7 @@ const CheckoutUI = (props) => {
   }
 
   const checkValidationFields = () => {
+    setUserErrors([])
     const errors = []
     const notFields = ['coupon', 'driver_tip']
 
@@ -100,7 +101,7 @@ const CheckoutUI = (props) => {
     if (validationFields && validationFields?.fields) {
       checkValidationFields()
     }
-  }, [validationFields])
+  }, [validationFields, user])
 
   return (
     <Container>
