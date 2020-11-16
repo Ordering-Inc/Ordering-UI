@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { HeaderInvert } from '../Header/styles'
 
 export const Container = styled.div`
   cursor: pointer;
@@ -46,9 +45,6 @@ export const Container = styled.div`
       `}
     }
 
-    ${HeaderInvert} & {
-      color: #FFF;
-    }
   `}
 
   ${({ variant }) => variant === 'moment' && css`
@@ -63,9 +59,9 @@ export const Container = styled.div`
         margin-right: 0;
       `}
     }
+  `}
 
-    ${HeaderInvert} & {
-      color: #FFF;
-    }
+  ${({ isHome }) => isHome && css`
+    color: #FFF;
   `}
 `

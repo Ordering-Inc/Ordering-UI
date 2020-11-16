@@ -31,7 +31,8 @@ const BusinessControllerUI = (props) => {
     business,
     getBusinessOffer,
     orderState,
-    handleClick
+    handleClick,
+    orderType
   } = props
 
   const [, t] = useLanguage()
@@ -124,13 +125,17 @@ const BusinessControllerUI = (props) => {
                   ) : (
                     <Skeleton width={70} />
                   )}
-                  {business?.delivery_price >= 0 ? (
-                    <p>
-                      <GrDeliver />
-                      {business && parsePrice(business?.delivery_price)}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
+                  {orderType === 1 && (
+                    <>
+                      {business?.delivery_price >= 0 ? (
+                        <p>
+                          <GrDeliver />
+                          {business && parsePrice(business?.delivery_price)}
+                        </p>
+                      ) : (
+                        <Skeleton width={70} />
+                      )}
+                    </>
                   )}
                 </Medadata>
               </BusinessInfoItem>
