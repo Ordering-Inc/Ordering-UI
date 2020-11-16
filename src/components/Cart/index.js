@@ -29,7 +29,8 @@ const CartUI = (props) => {
     getProductMax,
     offsetDisabled,
     removeProduct,
-    onClickCheckout
+    onClickCheckout,
+    showCoupon
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -164,11 +165,13 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
-            <CouponContainer>
-              <CouponControl
-                businessId={cart.business_id}
-              />
-            </CouponContainer>
+            {showCoupon && (
+              <CouponContainer>
+                <CouponControl
+                  businessId={cart.business_id}
+                />
+              </CouponContainer>
+            )}
             <table className='total'>
               <tbody>
                 <tr>
