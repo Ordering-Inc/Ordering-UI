@@ -33,8 +33,17 @@ import { UserDetails } from '../UserDetails'
 import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
+import { Alert } from '../Confirm'
 
 import { DriverTipsOptions } from '../../utils'
+
+const mapConfigs = {
+  mapZoom: 17,
+  mapSize: {
+    width: 640,
+    height: 190
+  }
+}
 
 const CheckoutUI = (props) => {
   const {
@@ -50,15 +59,46 @@ const CheckoutUI = (props) => {
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
   const [errorCash, setErrorCash] = useState(true)
+  const [userErrors, setUserErrors] = useState([])
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const mapConfigs = {
-    mapZoom: 17,
-    mapSize: {
-      width: 640,
-      height: 190
+  const handlePlaceOrder = () => {
+    if (!userErrors.length) {
+      handlerClickPlaceOrder && handlerClickPlaceOrder()
+      return
     }
+    setAlertState({
+      open: true,
+      content: Object.values(userErrors).map(error => error)
+    })
   }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  const checkValidationFields = () => {
+    const errors = []
+    Object.values(validationFields?.fields).map(field => {
+      if (field?.required) {
+        if (!user[field?.code]) {
+          errors.push(t('ERROR_FIELD', `The field ${field?.code} is required`))
+        }
+      }
+    })
+    setUserErrors(errors)
+  }
+
+  useEffect(() => {
+    if (validationFields && validationFields?.fields) {
+      checkValidationFields()
+    }
+  }, [validationFields])
 
   return (
     <Container>
@@ -189,7 +229,7 @@ const CheckoutUI = (props) => {
             <Button
               color='primary'
               disabled={!cart?.valid || !paymethodSelected || placing || errorCash}
-              onClick={() => handlerClickPlaceOrder()}
+              onClick={() => handlePlaceOrder()}
             >
               {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}
             </Button>
@@ -214,7 +254,15 @@ const CheckoutUI = (props) => {
           ))
         )} */}
       </WrappContainer>
-
+      <Alert
+        title={t('CUSTOMER_DETAILS', 'Customer Details')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }
