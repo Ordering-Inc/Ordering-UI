@@ -174,10 +174,10 @@ const CheckoutUI = (props) => {
             <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               <div>
-                <p>{businessDetails?.business?.name}</p>
-                <p>{businessDetails?.business?.email}</p>
-                <p>{businessDetails?.business?.cellphone}</p>
-                <p>{businessDetails?.business?.address}</p>
+                <p><strong>{t('BUSINESS_NAME', 'Name')}:</strong> {businessDetails?.business?.name}</p>
+                <p><strong>{t('BUSINESS_EMAIL', 'Email')}:</strong> {businessDetails?.business?.email}</p>
+                <p><strong>{t('BUSINESS_CELLPHONE', 'Cellphone')}:</strong> {businessDetails?.business?.cellphone}</p>
+                <p><strong>{t('BUSINESS_ADDRESS_DETAILS', 'Address')}:</strong> {businessDetails?.business?.address}</p>
               </div>
             </div>
           )}
