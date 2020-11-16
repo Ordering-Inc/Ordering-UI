@@ -1,11 +1,14 @@
 import styled, { css } from 'styled-components'
-import { HeaderInvert } from '../Header/styles'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
   color: #333;
   display: flex;
   align-items: center;
+
+  ${props => props.isHome && css`
+    color: #FFF;
+  `}
 
   svg {
     margin-right: 5px;
@@ -15,9 +18,6 @@ export const HeaderItem = styled.div`
     `} 
   }
 
-  ${HeaderInvert} & {
-    color: #FFF;
-  }
 `
 
 export const PopoverBody = styled.div`

@@ -4,8 +4,8 @@ import { Button } from '../Buttons'
 
 export const Input = styled.input`
   background: #FFF;
-  color: #BBB;
-  border: 1px solid #BBB;
+  color: #010300;
+  border: 1px solid #DBDCDB;
   border-radius: 30px;
   font-size: 16px;
   padding: 7px 15px;

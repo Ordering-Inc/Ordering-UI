@@ -48,8 +48,6 @@ const AddressFormUI = (props) => {
 
   const onSubmit = (values) => {
     saveAddress()
-    if (!formState.loading) {
-    }
   }
 
   const handleAddressTag = (tag) => {
@@ -216,7 +214,8 @@ export const AddressForm = (props) => {
   const addressFormProps = {
     ...props,
     UIComponent: AddressFormUI,
-    googleMapsControls
+    googleMapsControls,
+    isSelectedAfterAdd: true
   }
 
   return <AddressFormController {...addressFormProps} />
