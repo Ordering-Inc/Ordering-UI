@@ -22,26 +22,16 @@ export const UserDetailsContainer = styled.div`
   margin: 20px 0px;
   flex-wrap: wrap;
 
-  div.user,
-  div.business {
+  div {
     width: 100%;
   }
+`
 
-  div.business {
+export const BusinessDetailsContainer = styled(UserDetailsContainer)`
+  div {
     h1 {
       margin: 0px;
       font-size: 24px;
-    }
-
-    @media (min-width: 993px) {
-      text-align: center;
-    }
-  }
-
-  @media (min-width: 761px) {
-    div.user,
-    div.business {
-      width: 40%;
     }
   }
 `

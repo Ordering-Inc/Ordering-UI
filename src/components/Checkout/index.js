@@ -8,6 +8,7 @@ import {
   Container,
   WrappContainer,
   UserDetailsContainer,
+  BusinessDetailsContainer,
   PaymentMethodContainer,
   DriverTipContainer,
   CartContainer,
@@ -92,7 +93,7 @@ const CheckoutUI = (props) => {
         )}
 
         <UserDetailsContainer>
-          <div className='user'>
+          <div>
             {cartState.loading ? (
               <div>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -111,8 +112,11 @@ const CheckoutUI = (props) => {
               />
             )}
           </div>
+        </UserDetailsContainer>
+
+        <BusinessDetailsContainer>
           {(businessDetails?.loading || cartState.loading) && (
-            <div className='business'>
+            <div>
               <div>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -123,7 +127,7 @@ const CheckoutUI = (props) => {
             </div>
           )}
           {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
-            <div className='business'>
+            <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               <div>
                 <p>{businessDetails?.business?.name}</p>
@@ -134,14 +138,14 @@ const CheckoutUI = (props) => {
             </div>
           )}
           {businessDetails?.error && businessDetails?.error?.length > 0 && (
-            <div className='business'>
+            <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               {businessDetails?.error.map((e, i) => (
                 <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
               ))}
             </div>
           )}
-        </UserDetailsContainer>
+        </BusinessDetailsContainer>
 
         {!cartState.loading && cart && cart?.status !== 2 && (
           <PaymentMethodContainer>
