@@ -153,12 +153,16 @@ const CartUI = (props) => {
                   <td>{parsePrice(cart?.driver_tip || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(cart?.business?.service_fee)}%)</td>
+                  <td>{t('SERVICE_FEE', 'Service Fee')} </td>
                   <td>{parsePrice(cart?.service_fee || 0)}</td>
                 </tr>
                 {cart?.discount > 0 && (
                   <tr>
-                    <td>{t('DISCOUNT', 'Discount')}</td>
+                    {cart?.discount_type === 1 ? (
+                      <td>{t('DISCOUNT', 'Discount')} ({parseNumber(cart?.discount_rate)}%)</td>
+                    ) : (
+                      <td>{t('DISCOUNT', 'Discount')}</td>
+                    )}
                     <td>{parsePrice(cart?.discount || 0)}</td>
                   </tr>
                 )}
