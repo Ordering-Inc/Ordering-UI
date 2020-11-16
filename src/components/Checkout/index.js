@@ -60,7 +60,7 @@ const CheckoutUI = (props) => {
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const [errorCash, setErrorCash] = useState(true)
+  const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
