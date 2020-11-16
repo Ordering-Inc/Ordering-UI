@@ -119,7 +119,7 @@ const UserDetailsUI = (props) => {
                         />}
                       <Input
                         key={field.id}
-                        type={field.id < 6 && field.id >= 1 ? field.type : 'hidden'}
+                        type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
                         name={field.code === 'mobile_phone' ? 'cellphone' : field.code}
                         placeholder={t(field.name)}
                         disabled={!isEdit}
