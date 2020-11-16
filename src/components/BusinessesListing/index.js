@@ -107,6 +107,7 @@ const BusinessesListingUI = (props) => {
               className='card'
               business={business}
               handleCustomClick={handleBusinessClick}
+              orderType={orderState?.options?.type}
             />
           ))
         }
@@ -117,6 +118,7 @@ const BusinessesListingUI = (props) => {
               className='card'
               business={{}}
               isSkeleton
+              orderType={orderState?.options?.type}
             />
           ))
         )}
