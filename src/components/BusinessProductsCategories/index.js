@@ -19,7 +19,7 @@ const BusinessProductsCategoriesUI = (props) => {
       {!isSkeleton ? (
         <Tabs variant='primary' id='categories'>
           <AutoScroll categories='categories' container='container'>
-            {categories && categories.length && categories.map(category => category.id !== 0 && (
+            {categories && categories.length && categories.map(category => (
               <Tab className='category' active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
                 {category.name}
               </Tab>
