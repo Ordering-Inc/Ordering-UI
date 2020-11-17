@@ -11,11 +11,6 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input } from '../../styles/Inputs'
 
-const inputStyle = {
-  padding: '8px 10px',
-  marginTop: '8px'
-}
-
 const StripeRedirectFormUI = (props) => {
   const {
     paymethods,
@@ -31,7 +26,6 @@ const StripeRedirectFormUI = (props) => {
       <FormGroup>
         <label>{t('SELECT_PAYMETHOD', 'Select a payment method')}</label>
         <select
-          style={inputStyle}
           name='type'
           ref={
             register({
