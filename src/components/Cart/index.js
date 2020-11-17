@@ -106,8 +106,6 @@ const CartUI = (props) => {
     handleClickCheckout()
   }
 
-  console.log(cart)
-
   return (
     <CartContainer className='cart'>
       <BusinessItemAccordion
