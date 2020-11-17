@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
   width: 95%;
@@ -44,6 +44,14 @@ export const ProductLoading = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+`
+
+export const WrapSelect = styled.div`
+  margin: 10px;
+  text-align: right;
+  ${props => props.theme?.rtl && css`
+    text-align: left;
+  `}
 `
 
 export const SkeletonItem = styled.div`
