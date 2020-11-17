@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import { AddressList } from '../AddressList'
+import { InputPhoneNumber } from '../InputPhoneNumber'
 
 import {
   Container,
@@ -44,6 +45,7 @@ const UserProfileFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [edit, setEdit] = useState(false)
+  const [userPhoneNumber, setUserPhoneNumber] = useState(null)
 
   useEffect(() => {
     if ((!formState.loading && formState.result?.error)) {
@@ -89,6 +91,17 @@ const UserProfileFormUI = (props) => {
     setEdit(false)
   }
 
+  const isPhoneNumberValid = (val) => {
+    console.log('PHONE NUMBER', val)
+  }
+
+  useEffect(() => {
+    if (user) {
+      const phone = `${user?.country_phone_code} ${user?.cellphone}`
+      setUserPhoneNumber(user?.country_phone_code ? phone : phone.trim())
+    }
+  }, [user])
+
   return (
     <>
       <ProfileOptions value={t('MY_ACCOUNT', 'My Account')} />
@@ -124,81 +137,90 @@ const UserProfileFormUI = (props) => {
             <Camera><GiPhotoCamera /></Camera>
           </UserImage>
           <SideForm className='user-form'>
-            {edit
-              ? (
-                <FormInput onSubmit={handleSubmit(onSubmit)}>
-                  {
-                    !(useChekoutFileds && validationFields.loading) ? (
-                      <>
-                        {
-                          Object.values(validationFields.fields).map(field => (
-                            showField(field.code) && (
-                              <React.Fragment key={field.id}>
-                                {
-                                  field.code === 'mobile_phone' &&
-                                    <Input
-                                      placeholder={t('country_phone_code', 'Mobile Phone Country Code')} name='country_phone_code' defaultValue={user.country_phone_code} onChange={hanldeChangeInput} ref={register({
-                                        required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
-                                        pattern: {
-                                          value: /^(\+?\d{1,3}|\d{1,4})$/,
-                                          message: t('BAD_COUNTRY_CODE', 'Bad country Code')
-                                        }
-                                      })}
-                                    />
-                                }
-                                <Input
-                                  key={field.id}
-                                  type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
-                                  name={field.code === 'mobile_phone' ? 'cellphone' : field.code}
-                                  placeholder={t(field.name)}
-                                  defaultValue={field.code === 'mobile_phone' ? user.cellphone : user[field.code]}
-                                  onChange={hanldeChangeInput}
-                                  ref={register({
-                                    required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
-                                    pattern: {
-                                      value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                                      message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-                                    }
-                                  })}
-                                />
-                              </React.Fragment>
-                            )
-                          ))
+            {!edit ? (
+              <UserData>
+                {formState.loading && !formState.changes.photo ? <Skeleton width={100} height={20} /> : <h1>{user.name} {user.lastname}</h1>}
+                {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.email}</p>}
+                {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.country_phone_code} {user.cellphone}</p>}
+                {formState.loading && !formState.changes.photo ? <Skeleton width={80} height={40} /> : <Button color='primary' outline onClick={() => setEdit(true)}>{t('EDIT', 'Edit')}</Button>}
+              </UserData>
+            ) : (
+              <FormInput onSubmit={handleSubmit(onSubmit)}>
+                {!(useChekoutFileds && validationFields.loading) ? (
+                  <>
+                    {Object.values(validationFields.fields).map(field => field.code !== 'mobile_phone' && (
+                      showField(field.code) && (
+                        <React.Fragment key={field.id}>
+                          {/* {
+                            field.code === 'mobile_phone' &&
+                              <Input
+                                placeholder={t('country_phone_code', 'Mobile Phone Country Code')} name='country_phone_code' defaultValue={user.country_phone_code} onChange={hanldeChangeInput} ref={register({
+                                  required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
+                                  pattern: {
+                                    value: /^(\+?\d{1,3}|\d{1,4})$/,
+                                    message: t('BAD_COUNTRY_CODE', 'Bad country Code')
+                                  }
+                                })}
+                              />
+                          } */}
+                          <Input
+                            key={field.id}
+                            type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
+                            name={field.code}
+                            className='form'
+                            // name={field.code === 'mobile_phone' ? 'cellphone' : field.code}
+                            placeholder={t(field.name)}
+                            defaultValue={user[field.code]}
+                            // defaultValue={field.code === 'mobile_phone' ? user.cellphone : user[field.code]}
+                            onChange={hanldeChangeInput}
+                            ref={register({
+                              required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
+                              pattern: {
+                                value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
+                                message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+                              }
+                            })}
+                          />
+                        </React.Fragment>
+                      )
+                    ))}
+
+                    <Input
+                      type='password'
+                      name='password'
+                      className='form'
+                      placeholder={t('FRONT_VISUALS_PASSWORD')}
+                      onChange={hanldeChangeInput}
+                      ref={register({
+                        required: isRequiredField('password') ? t('VALIDATION_ERROR_REQUIRED', 'password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                        minLength: {
+                          value: 5,
+                          message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
                         }
-                        <Input
-                          type='password'
-                          name='password'
-                          placeholder={t('FRONT_VISUALS_PASSWORD')}
-                          onChange={hanldeChangeInput}
-                          ref={register({
-                            required: isRequiredField('password') ? t('VALIDATION_ERROR_REQUIRED', 'password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
-                            minLength: {
-                              value: 5,
-                              message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                            }
-                          })}
-                        />
+                      })}
+                    />
 
-                        <Button color={Object.keys(formState.changes).length ? 'primary' : 'secondary'} type='submit'>{Object.keys(formState.changes).length ? t('UPDATE', 'Update') : t('CANCEL', 'Cancel')}</Button>
+                    <InputPhoneNumber
+                      value={userPhoneNumber}
+                      setValue={setUserPhoneNumber}
+                      handleIsValid={isPhoneNumberValid}
+                    />
 
-                      </>
-                    ) : (
-                      <SkeletonForm>{[...Array(6)].map((item, i) => (
-                        <Skeleton key={i} />
-                      ))}
-                      </SkeletonForm>
-                    )
-                  }
-                </FormInput>
-              )
-              : (
-                <UserData>
-                  {formState.loading && !formState.changes.photo ? <Skeleton width={100} height={20} /> : <h1>{user.name} {user.lastname}</h1>}
-                  {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.email}</p>}
-                  {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.country_phone_code} {user.cellphone}</p>}
-                  {formState.loading && !formState.changes.photo ? <Skeleton width={80} height={40} /> : <Button color='primary' outline onClick={() => setEdit(true)}>{t('EDIT', 'Edit')}</Button>}
-                </UserData>
-              )}
+                    <Button
+                      color={Object.keys(formState.changes).length ? 'primary' : 'secondary'}
+                      type='submit'
+                    >
+                      {Object.keys(formState.changes).length ? t('UPDATE', 'Update') : t('CANCEL', 'Cancel')}
+                    </Button>
+                  </>
+                ) : (
+                  <SkeletonForm>{[...Array(6)].map((item, i) => (
+                    <Skeleton key={i} />
+                  ))}
+                  </SkeletonForm>
+                )}
+              </FormInput>
+            )}
 
           </SideForm>
         </UserProfileContainer>

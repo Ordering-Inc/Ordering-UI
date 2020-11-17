@@ -21,7 +21,7 @@ export const UserProfileContainer = styled.div`
 export const FlexTabs = styled.div`
   width: 70%;
   margin: 0 auto;
-  
+
   div{
       justify-content: space-evenly
   }
@@ -72,16 +72,8 @@ export const Image = styled.div`
   }
 `
 
-export const SkeletonWrapper = styled.div`
-  span{
-    height: 100%;
-    position: relative;
-    top: -2.5px;
-  }
-`
-
 export const Camera = styled.div`
-  width:212px; /**170px + 42px */
+  width:212px;
   > * {
     margin-top: 10px;
     width: 30px;
@@ -89,37 +81,12 @@ export const Camera = styled.div`
   }
 
   @media (min-width: 480px){
-    width:242px; /**200px + 42px */
+    width:242px;
   }
 
   @media (min-width: 768px){
-    width:212px; /**200px + 42px */
+    width:212px;
   }
-`
-
-export const SideForm = styled.div`
-  /*width: 70%;*/
-  width: 100%;
-    > *{
-    margin: 0;
-    margin-top: 20px;
-    ${props => props.theme?.rtl ? css`
-      margin-right: 0;
-  ` : css`
-      margin-left: 0;
-  `}
-  }
-  @media (min-width: 768px) {
-    width: 55%;
-    > *{
-    margin: 30px 0;
-    margin-left: 50px;
-    ${props => props.theme?.rtl && css`
-      margin-right: 50px;
-      margin-left: 0;
-  `}
-  }
-  };
 `
 
 export const UserData = styled.div`
@@ -127,7 +94,6 @@ export const UserData = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  height: 200px;
 
   h1 {
     font-size: 20px
@@ -196,71 +162,62 @@ export const SavedPlaces = styled.div`
 
 `
 
+export const SideForm = styled.div`
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 55%;
+    display: flex;
+    align-items: center;
+    margin: auto 0px auto 30px;
+  }
+`
+
 export const FormInput = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 90%;
   margin: 0 auto;
-  *{
-    margin-top: 20px;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 0;
-    ` : css`
-      margin-right: 0;
-    `}
+
+  div.phone_number {
+    margin-bottom: 20px;
+    width: 100%;
   }
-  input{
+
+  input.form {
     padding: 10px 15px;
-    width: 80%;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
   }
+
   button {
-    box-sizing: initial;
-    margin-top: 30px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    width: 80%;
+    margin-top: 10px;
+    padding: 7px 0px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  @media (min-width: 480px){
-    height: auto;
-    * {
-      width: 75%;
-    } 
-  }
+  @media (min-width: 769px) {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
 
-  @media (min-width: 768px){
-    display: block;
-    height: 200px;
-    margin-top: 20px;
-    margin-left: 50px;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-      text-align: right;
-      margin-left: 0px;
-      margin-right: 50px;
-    `}
-
-    * {
-        margin-top: 10px;
-        margin-right: 10px;
-        padding: 10px 15px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 10px;
-        margin-right: 0px;
-      `}
-    }
-
-    input {
-      width: 38%;
-    }
-
-    button {
-      width: 38%;
-      padding: 7px 15px;
-      margin-top: 10px;
+    input.form {
+      width: 49%;
     }
   }
 `
+
+export const SkeletonWrapper = styled.div`
+  span{
+    height: 100%;
+    position: relative;
+    top: -2.5px;
+  }
+`
+
 export const SkeletonForm = styled.div`
   width: 100%;
   justify-content: center;
