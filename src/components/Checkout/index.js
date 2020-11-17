@@ -392,9 +392,15 @@ export const Checkout = (props) => {
                 <Button
                   color='primary'
                   onClick={() => handleOpenUpsellingPage(cart)}
-                  disabled={currentCart?.uuid === cart?.uuid || openUpselling}
+                  disabled={currentCart?.uuid === cart?.uuid || openUpselling || cart?.subtotal < cart?.minimum}
                 >
-                  {(currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid ? t('LOADING', 'Loading...') : t('PAY_CART', 'Pay order')}
+                  {cart?.subtotal >= cart?.minimum ? (
+                    (currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid
+                      ? t('LOADING', 'Loading...')
+                      : t('PAY_CART', 'Pay order')
+                  ) : (
+                    t('MINIMUN_PURCHASE', `Minimum ${parsePrice(cart?.minimum)}`)
+                  )}
                 </Button>
               </CartItemActions>
             </CartItem>

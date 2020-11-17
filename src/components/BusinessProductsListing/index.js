@@ -6,7 +6,8 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession
+  useSession,
+  useUtils
 } from 'ordering-components'
 
 import {
@@ -56,6 +57,7 @@ const BusinessProductsListingUI = (props) => {
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
+  const [{ parsePrice }] = useUtils()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -283,10 +285,14 @@ const BusinessProductsListingUI = (props) => {
       </ProductsContainer>
       {currentCart?.products?.length > 0 && auth && (
         <FloatingButton
-          btnText={!openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')}
+          btnText={
+            currentCart?.subtotal >= currentCart?.minimum
+              ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')
+              : t('MINIMUN_PURCHASE', `Minimum ${parsePrice(currentCart?.minimum)}`)
+          }
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
-          disabled={openUpselling}
+          disabled={openUpselling || currentCart?.subtotal < currentCart?.minimum}
         />
       )}
       {currentCart?.products && openUpselling && (

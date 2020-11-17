@@ -191,9 +191,13 @@ const CartUI = (props) => {
             <Button
               color='primary'
               onClick={() => setOpenUpselling(true)}
-              disabled={openUpselling && !canOpenUpselling}
+              disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum}
             >
-              {!openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
+              {cart?.subtotal >= cart?.minimum ? (
+                !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
+              ) : (
+                t('MINIMUN_PURCHASE', `Minimum ${parsePrice(cart?.minimum)}`)
+              )}
             </Button>
           </CheckoutAction>
         )}
