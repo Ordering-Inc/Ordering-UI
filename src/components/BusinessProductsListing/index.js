@@ -30,7 +30,6 @@ import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
 import { UpsellingPage } from '../UpsellingPage'
-import { Select } from '../../styles/Select'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -53,7 +52,7 @@ const BusinessProductsListingUI = (props) => {
     onCheckoutRedirect,
     handleChangeSearch,
     handleSearchRedirect,
-    handleChangeSortBy
+    featuredProducts
   } = props
 
   const { business, loading, error } = businessState
@@ -69,16 +68,6 @@ const BusinessProductsListingUI = (props) => {
   const location = useLocation()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
-
-  const values = ['Sort by', 'a-z', 'Rank']
-
-  const options = values.map(value => {
-    return {
-      value,
-      content: !value ? 'Sort by' : value,
-      showOnSelected: !value ? 'Sort by' : value
-    }
-  })
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -175,26 +164,25 @@ const BusinessProductsListingUI = (props) => {
                   />
                 </WrapperSearch>
               )}
-              <WrapSelect>
-                <Select options={options} defaultValue={options[0].value} onChange={(val) => handleChangeSortBy(val)} notAsync />
-              </WrapSelect>
               {!(business.categories.length === 0 && !categoryId) && (
                 <BusinessProductsCategories
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 0, name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
                   categorySelected={categorySelected}
                   onClickCategory={handleChangeCategory}
+                  featured={featuredProducts}
                 />
               )}
 
               <WrapContent>
                 <BusinessProductsList
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 0, name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
                   category={categorySelected}
                   categoryState={categoryState}
                   businessId={business.id}
                   errors={errors}
                   onProductClick={onProductClick}
                   handleSearchRedirect={handleSearchRedirect}
+                  featured={featuredProducts}
                 />
               </WrapContent>
             </>
