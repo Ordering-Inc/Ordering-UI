@@ -57,6 +57,14 @@ export const FormGroup = styled.div`
   label {
     margin-bottom: 5px;
   }
+
+  select {
+    padding: 7px 5px;
+    margin-top: 8px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: 1px solid #DBDCDB;
+  }
 `
 
 export const ErrorMessage = styled.p`

@@ -8,7 +8,6 @@ const LanguageSelectorUI = (props) => {
     currentLanguage,
     handleChangeLanguage
   } = props
-
   const _languages = languages.languages?.map(language => {
     return {
       value: language.code, content: language.name, showOnSelected: language.code.toUpperCase()
