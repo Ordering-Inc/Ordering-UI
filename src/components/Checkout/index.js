@@ -3,6 +3,7 @@ import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useUtils } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
+import parsePhoneNumber from 'libphonenumber-js'
 
 import {
   Container,
@@ -21,7 +22,8 @@ import {
   CartItemLogo,
   CartItemInfo,
   CartItemActions,
-  WarningText
+  WarningText,
+  WrapperUserDetails
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -85,7 +87,7 @@ const CheckoutUI = (props) => {
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
-    const notFields = ['coupon', 'driver_tip']
+    const notFields = ['coupon', 'driver_tip', 'mobile_phone']
 
     Object.values(validationFields?.fields).map(field => {
       if (field?.required && !notFields.includes(field.code)) {
@@ -94,6 +96,24 @@ const CheckoutUI = (props) => {
         }
       }
     })
+
+    if (!user?.cellphone && validationFields?.fields?.cellphone?.required) {
+      errors.push(t('ERROR_FIELD', 'The field Phone number is required'))
+    }
+
+    if (user?.cellphone) {
+      if (user?.country_phone_code) {
+        let phone = null
+        phone = `+${user?.country_phone_code}${user?.cellphone}`
+        const phoneNumber = parsePhoneNumber(phone)
+        if (!phoneNumber.isValid()) {
+          errors.push(t('ERROR_FIELD_INVALID', 'The field Phone number is invalid.'))
+        }
+      } else {
+        errors.push(t('ERROR_FIELD_INVALID', 'The field Phone number is invalid.'))
+      }
+    }
+
     setUserErrors(errors)
   }
 
@@ -137,7 +157,7 @@ const CheckoutUI = (props) => {
         )}
 
         <UserDetailsContainer>
-          <div>
+          <WrapperUserDetails>
             {cartState.loading ? (
               <div>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -155,7 +175,7 @@ const CheckoutUI = (props) => {
                 useSessionUser
               />
             )}
-          </div>
+          </WrapperUserDetails>
         </UserDetailsContainer>
 
         <BusinessDetailsContainer>
