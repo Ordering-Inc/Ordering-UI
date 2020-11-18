@@ -35,7 +35,7 @@ export const UserImage = styled.div`
   width: 100%;
 
   @media (min-width: 768px){
-    width: 45%;
+    width: 20%;
     align-items: flex-end;
   }
 
@@ -192,13 +192,6 @@ export const FormInput = styled.form`
     box-sizing: border-box;
   }
 
-  button {
-    margin-top: 10px;
-    padding: 7px 0px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
   @media (min-width: 769px) {
     flex-wrap: wrap;
     flex-direction: row;
@@ -208,6 +201,39 @@ export const FormInput = styled.form`
       width: 49%;
     }
   }
+`
+
+export const ActionsForm = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  button {
+    margin-top: 10px;
+    padding: 7px 0px;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:nth-child(1) {
+      margin-right: 5px;
+    }
+  }
+
+  ${props => props.theme?.rtl && css`
+    button {
+      &:nth-child(1) {
+        margin-right: 0px;
+      }
+      &:last-child {
+        margin-right: 5px;
+      }
+    }
+  `}
 `
 
 export const SkeletonWrapper = styled.div`
