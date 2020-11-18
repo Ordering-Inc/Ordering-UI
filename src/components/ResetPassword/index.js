@@ -36,7 +36,7 @@ export const ResetPassword = (props) => {
       <HeroSide isPopup={isPopup}>
         <TitleHeroSide>
           <h1>{t('TITLE_RESET_PASSWORD', 'Reset password')}</h1>
-          <p>{t('SUBTITLE_RESET_PASSWORD', '')}</p>
+          <p>{t('SUBTITLE_RESET_PASSWORD', 'Reset your password')}</p>
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
