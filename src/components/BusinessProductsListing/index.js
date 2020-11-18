@@ -6,7 +6,8 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession
+  useSession,
+  useUtils
 } from 'ordering-components'
 
 import {
@@ -59,6 +60,7 @@ const BusinessProductsListingUI = (props) => {
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
+  const [{ parsePrice }] = useUtils()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -103,6 +105,7 @@ const BusinessProductsListingUI = (props) => {
     setModalIsOpen(false)
     handleUpdateInitialRender(false)
     updateProductModal(null)
+    setCurProduct(null)
     onProductRedirect({
       slug: business?.slug
     })
@@ -116,10 +119,17 @@ const BusinessProductsListingUI = (props) => {
     getNextProducts()
   }, [categoryState])
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [handleScroll])
+  const handleChangePage = (data) => {
+    if (Object.entries(data.query).length === 0 && openProduct) {
+      setModalIsOpen(false)
+    }
+  }
+
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
 
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
@@ -130,13 +140,6 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [productModal])
 
-  const handleChangePage = (data) => {
-    // console.log(Object.entries(data.query || {}).length, openProduct)
-    if (Object.entries(data.query).length === 0 && openProduct) {
-      setModalIsOpen(false)
-    }
-  }
-
   useEffect(() => {
     if (categoryId && productId) {
       handleUpdateInitialRender(true)
@@ -145,17 +148,17 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    document.body.style.overflow = openProduct ? 'hidden' : 'auto'
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
     }
   }, [openProduct])
 
-  const handleUpsellingPage = () => {
-    onCheckoutRedirect(currentCart?.uuid)
-    setOpenUpselling(false)
-    setCanOpenUpselling(false)
-  }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <>
@@ -212,13 +215,7 @@ const BusinessProductsListingUI = (props) => {
           {productModal.loading && (
             <ProductLoading>
               <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
+                <Skeleton height={45} count={8} />
               </SkeletonItem>
             </ProductLoading>
           )}
@@ -300,10 +297,14 @@ const BusinessProductsListingUI = (props) => {
       </ProductsContainer>
       {currentCart?.products?.length > 0 && auth && (
         <FloatingButton
-          btnText={!openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')}
+          btnText={
+            currentCart?.subtotal >= currentCart?.minimum
+              ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')
+              : t('MINIMUN_PURCHASE', `Minimum ${parsePrice(currentCart?.minimum)}`)
+          }
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
-          disabled={openUpselling}
+          disabled={openUpselling || currentCart?.subtotal < currentCart?.minimum}
         />
       )}
       {currentCart?.products && openUpselling && (

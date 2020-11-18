@@ -40,6 +40,12 @@ export const Text = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0 5px;
+
+  span {
+    margin-left: 10px;
+    font-weight: 500;
+    color: ${props => props.theme.colors.primary};
+  }
 `
 
 export const QuantityControl = styled.div`

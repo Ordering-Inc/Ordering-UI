@@ -34,7 +34,8 @@ const AddressListUI = (props) => {
     setAddressList,
     handleSetDefault,
     onClosePopover,
-    popover
+    popover,
+    showImage
   } = props
 
   const [, t] = useLanguage()
@@ -149,7 +150,7 @@ const AddressListUI = (props) => {
         </AddressListUl>
       )}
 
-      {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && (
+      {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !showImage && (
         <WrappNotAddresses>
           <img src={theme.images?.general?.notFound} alt='Not Found' />
           <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
