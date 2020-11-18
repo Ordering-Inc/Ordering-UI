@@ -30,8 +30,8 @@ const ReviewOrderUI = (props) => {
       setAlertState({
         ...alertState,
         open: true,
-        title: t('REVIEW_SUCCESS'),
-        content: t('REVIEW_SUCCESS')
+        title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
+        content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
       })
     }
   }, [formState])

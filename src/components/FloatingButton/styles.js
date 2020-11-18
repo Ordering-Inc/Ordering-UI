@@ -24,6 +24,11 @@ export const Container = styled.div`
     @media (min-width: 850px) {
       width: 80%;
     }
+
+    &:disabled{
+      opacity: 0.5;
+      cursor: not-allowed
+    }
   }
 `
 

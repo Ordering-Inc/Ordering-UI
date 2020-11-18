@@ -138,28 +138,58 @@ const CartUI = (props) => {
             <table>
               <tbody>
                 <tr>
-                  <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                  <td>{parsePrice(cart?.subtotal || 0)}</td>
+                  {cart.business.tax_type === 1 ? (
+                    <>
+                      <td>{t('TAX_INCLUDED', 'Tax (included)')} ({parseNumber(cart?.business?.tax)}%)</td>
+                      <td>{parsePrice(cart?.tax || 0)}</td>
+                    </>
+                  ) : (
+                    <>
+                      <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                      <td>{parsePrice((cart?.subtotal - cart.tax) || 0)}</td>
+                    </>
+                  )}
+
                 </tr>
                 <tr>
-                  <td>{t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
-                  <td>{parsePrice(cart?.tax || 0)}</td>
+                  {cart.business.tax_type === 2 ? (
+                    <>
+                      <td>{t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
+                      <td>{parsePrice(cart?.tax || 0)}</td>
+                    </>
+                  ) : (
+                    <>
+                      <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                      <td>{parsePrice((cart?.subtotal * cart.tax) || 0)}</td>
+                    </>
+                  )}
+
                 </tr>
-                <tr>
-                  <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                  <td>{parsePrice(cart?.delivery_price || 0)}</td>
-                </tr>
-                <tr>
-                  <td>{t('DRIVER_TIP', 'Driver tip')} ({parseNumber(cart?.driver_tip_rate)}%)</td>
-                  <td>{parsePrice(cart?.driver_tip || 0)}</td>
-                </tr>
-                <tr>
-                  <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(cart?.business?.service_fee)}%)</td>
-                  <td>{parsePrice(cart?.service_fee || 0)}</td>
-                </tr>
+                {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
+                  <tr>
+                    <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                    <td>{parsePrice(cart?.delivery_price)}</td>
+                  </tr>
+                )}
+                {cart?.driver_tip > 0 && (
+                  <tr>
+                    <td>{t('DRIVER_TIP', 'Driver tip')} ({parseNumber(cart?.driver_tip_rate)}%)</td>
+                    <td>{parsePrice(cart?.driver_tip)}</td>
+                  </tr>
+                )}
+                {cart?.service_fee > 0 && (
+                  <tr>
+                    <td>{t('SERVICE_FEE', 'Service Fee')} </td>
+                    <td>{parsePrice(cart?.service_fee)}</td>
+                  </tr>
+                )}
                 {cart?.discount > 0 && (
                   <tr>
-                    <td>{t('DISCOUNT', 'Discount')}</td>
+                    {cart?.discount_type === 1 ? (
+                      <td>{t('DISCOUNT', 'Discount')} ({parseNumber(cart?.discount_rate)}%)</td>
+                    ) : (
+                      <td>{t('DISCOUNT', 'Discount')}</td>
+                    )}
                     <td>{parsePrice(cart?.discount || 0)}</td>
                   </tr>
                 )}
@@ -187,9 +217,13 @@ const CartUI = (props) => {
             <Button
               color='primary'
               onClick={() => setOpenUpselling(true)}
-              disabled={openUpselling && !canOpenUpselling}
+              disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum}
             >
-              {!openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
+              {cart?.subtotal >= cart?.minimum ? (
+                !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
+              ) : (
+                t('MINIMUN_PURCHASE', `Minimum ${parsePrice(cart?.minimum)}`)
+              )}
             </Button>
           </CheckoutAction>
         )}

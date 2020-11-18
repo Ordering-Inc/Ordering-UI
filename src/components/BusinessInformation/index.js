@@ -8,6 +8,7 @@ import {
   useUtils
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
+import { Modal } from '../Modal'
 import {
   BusinessInformationContainer,
   BusinessHeader,
@@ -25,7 +26,9 @@ import {
   BusinessInfoItem,
   WrapperBusinessLogo,
   BusinessLogo,
-  ModalIcon
+  ModalIcon,
+  Description,
+  ImageContainer
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
@@ -51,10 +54,17 @@ export const BusinessInformationUI = (props) => {
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance }] = useUtils()
+  const [modalImage, setModalImage] = useState(false)
+  const [image, setImage] = useState('')
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
     return `${checkTime(hour)}:${checkTime(minute)}`
+  }
+
+  const handleModalImage = (src) => {
+    setImage(src)
+    setModalImage(true)
   }
 
   return (
@@ -122,8 +132,15 @@ export const BusinessInformationUI = (props) => {
             </Tabs>
           </FlexTabs>
         )}
+
         {tabValue === 'General Info' ? (
           <>
+            {business.description && (
+              <>
+                <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business description')}</SectionTitle>
+                <Description>{business.description}</Description>
+              </>
+            )}
             {businessLocation.location && (
               <>
                 <SectionTitle>{t('BUSINESS_LOCATION', 'Business location')}</SectionTitle>
@@ -158,13 +175,8 @@ export const BusinessInformationUI = (props) => {
                 </ScheduleSection>
                 <DeliveryInfo>
                   <div>
-                    <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {parsePrice(business.service_fee)}</h5>
-                    <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {parsePrice(business.minimum)}</h5>
-                    <h5>{t('DISTANCE', 'Distance:')} {parseDistance(business?.distance || 0)}</h5>
-                  </div>
-                  <div>
-                    <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {convertHoursToMinutes(business?.delivery_time)}</h5>
-                    <h5>{t('PICKUP_TIME', 'Pickup Time:')} {convertHoursToMinutes(business?.pickup_time)}</h5>
+                    <h5>{t('DELIVERY_TIME', 'Delivery Time')}: {convertHoursToMinutes(business?.delivery_time)}</h5>
+                    <h5>{t('PICKUP_TIME', 'Pickup Time')}: {convertHoursToMinutes(business?.pickup_time)}</h5>
                   </div>
                 </DeliveryInfo>
               </>
@@ -175,7 +187,7 @@ export const BusinessInformationUI = (props) => {
                 <div>
                   {
                     businessPhotos.map((photo, i) => (
-                      <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' />
+                      <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' onClick={() => handleModalImage(photo.file)} />
                     ))
                   }
                 </div>
@@ -205,6 +217,20 @@ export const BusinessInformationUI = (props) => {
           </>
         )}
       </BusinessContent>
+      <Modal
+        onClose={() => setModalImage(false)}
+        open={modalImage}
+        padding='0'
+        hideCloseDefault
+        isTransparent
+      >
+        <ImageContainer>
+          <ModalIcon>
+            <MdClose onClick={() => setModalImage(false)} />
+          </ModalIcon>
+          <img src={image} />
+        </ImageContainer>
+      </Modal>
     </BusinessInformationContainer>
   )
 }
