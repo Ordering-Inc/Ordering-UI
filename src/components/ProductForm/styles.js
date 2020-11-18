@@ -66,9 +66,7 @@ export const ProductInfo = styled.div`
     text-align: center;
     color: #263238;
     margin-top: 0px;
-    ${props => props.theme?.rtl && css`
-      text-align: right;
-    `}
+    margin-right: 10px;
   }
 
   p {
@@ -107,9 +105,7 @@ export const ProductInfo = styled.div`
       text-align: left;
 
       ${props => props.theme?.rtl && css`
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: right;
       `}
     }
   }
