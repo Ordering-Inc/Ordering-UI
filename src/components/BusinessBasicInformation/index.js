@@ -107,14 +107,17 @@ export const BusinessBasicInformation = (props) => {
               ) : (
                 <Skeleton width={70} />
               )}
-
-              {!loading ? (
-                <h5>
-                  <GrDeliver />
-                  {business && parsePrice(business?.delivery_price || 0)}
-                </h5>
-              ) : (
-                <Skeleton width={70} />
+              {orderState?.options.type === 1 && (
+                <>
+                  {!loading ? (
+                    <h5>
+                      <GrDeliver />
+                      {business && parsePrice(business?.delivery_price || 0)}
+                    </h5>
+                  ) : (
+                    <Skeleton width={70} />
+                  )}
+                </>
               )}
 
               {!loading && (

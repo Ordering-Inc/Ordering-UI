@@ -69,9 +69,6 @@ export const BusinessReviewsUI = (props) => {
                 <ReviewContainer>
                   <Comments>
                     <div>
-                      <h4>{t('REVIEW_COMMENT', 'Name of user')}</h4>
-                    </div>
-                    <div>
                       <p><AiOutlineStar color='#D81212' /> {review.total}</p>
                     </div>
                     <Comment>

@@ -155,7 +155,7 @@ const BusinessProductsListingUI = (props) => {
               <BusinessBasicInformation
                 businessState={businessState}
               />
-              {categoryState.products.length !== 0 && (
+              {(categoryState.products.length !== 0 || searchValue) && (
                 <WrapperSearch>
                   <SearchBar
                     onSearch={handleChangeSearch}
@@ -164,13 +164,14 @@ const BusinessProductsListingUI = (props) => {
                   />
                 </WrapperSearch>
               )}
-              {categoryState.products.length !== 0 && (
+              {!(business.categories.length === 0 && !categoryId) && (
                 <BusinessProductsCategories
                   categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
                   categorySelected={categorySelected}
                   onClickCategory={handleChangeCategory}
                 />
               )}
+
               <WrapContent>
                 <BusinessProductsList
                   categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
