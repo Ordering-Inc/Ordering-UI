@@ -92,6 +92,7 @@ const BusinessProductsListingUI = (props) => {
     setModalIsOpen(false)
     handleUpdateInitialRender(false)
     updateProductModal(null)
+    setCurProduct(null)
     onProductRedirect({
       slug: business?.slug
     })
@@ -105,10 +106,17 @@ const BusinessProductsListingUI = (props) => {
     getNextProducts()
   }, [categoryState])
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [handleScroll])
+  const handleChangePage = (data) => {
+    if (Object.entries(data.query).length === 0 && openProduct) {
+      setModalIsOpen(false)
+    }
+  }
+
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
 
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
@@ -119,32 +127,32 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [productModal])
 
-  const handleChangePage = (data) => {
-    // console.log(Object.entries(data.query || {}).length, openProduct)
-    if (Object.entries(data.query).length === 0 && openProduct) {
-      setModalIsOpen(false)
-    }
-  }
-
   useEffect(() => {
-    if (categoryId && productId) {
+    if (categoryId && productId && !curProduct?.id) {
       handleUpdateInitialRender(true)
     }
     events.emit('get_current_view')
-  }, [])
+  }, [categoryId, productId, location])
 
   useEffect(() => {
+    if (!location.search) {
+      setCurProduct(null)
+      handleUpdateInitialRender(false)
+    }
+  }, [location])
+
+  useEffect(() => {
+    document.body.style.overflow = openProduct ? 'hidden' : 'auto'
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
     }
   }, [openProduct])
 
-  const handleUpsellingPage = () => {
-    onCheckoutRedirect(currentCart?.uuid)
-    setOpenUpselling(false)
-    setCanOpenUpselling(false)
-  }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <>
@@ -198,13 +206,7 @@ const BusinessProductsListingUI = (props) => {
           {productModal.loading && (
             <ProductLoading>
               <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
+                <Skeleton height={45} count={8} />
               </SkeletonItem>
             </ProductLoading>
           )}
