@@ -27,6 +27,7 @@ import { MyOrders } from './Pages/MyOrders'
 import { PageNotFound } from './Pages/PageNotFound'
 import { HomePage } from './Pages/Home'
 import { PagesList } from './Pages/PagesList'
+import { ResetPassword } from './pages/ResetPassword'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -159,7 +160,12 @@ export const App = () => {
                     }
                   </Route>
                   <Route exact path='/password/reset'>
-                  Password reset
+                    {
+                      !auth ? (
+                        <ResetPassword />
+                      )
+                        : <Redirect to='/' />
+                    }
                   </Route>
                   <Route exact path='/profile'>
                     {auth
