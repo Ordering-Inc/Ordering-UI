@@ -146,7 +146,7 @@ const CartUI = (props) => {
                   ) : (
                     <>
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                      <td>{parsePrice((cart?.subtotal - cart.tax) || 0)}</td>
+                      <td>{parsePrice(cart?.subtotal || 0)}</td>
                     </>
                   )}
 
@@ -160,7 +160,7 @@ const CartUI = (props) => {
                   ) : (
                     <>
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                      <td>{parsePrice((cart?.subtotal * cart.tax) || 0)}</td>
+                      <td>{parsePrice(cart?.subtotal - cart?.tax || 0)}</td>
                     </>
                   )}
 
