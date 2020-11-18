@@ -33,47 +33,28 @@ export const FormInput = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 90%;
   margin: 0 auto;
 
-  * {
-    margin-top: 20px;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 0;
-    ` : css`
-      margin-right: 0;
-    `}
-  }
-
-  input {
-    padding: 10px 15px;
-    width: 90%;
-    color: #333;
-
-    &:disabled {
-      background-color: rgba(239, 239, 239, 0.3);
-      cursor: not-allowed;
-    }
-  }
-
-  button {
-    margin-top: 30px;
-    padding: 7px 0px;
+  div.phone_number {
+    margin-bottom: 20px;
     width: 100%;
   }
 
-  @media (min-width: 579px) {
-    input {
-      width: 95%;
-    }
+  input.form {
+    padding: 10px 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
   }
 
   @media (min-width: 769px) {
-    display: block;
-    min-height: 200px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
 
-    input {
-      width: 43%;
-      margin: 5px;
+    input.form {
+      width: 49%;
     }
   }
 `
