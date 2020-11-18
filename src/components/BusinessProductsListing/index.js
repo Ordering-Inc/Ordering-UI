@@ -15,8 +15,7 @@ import {
   ProductsNotFound,
   ProductLoading,
   SkeletonItem,
-  WrapperSearch,
-  WrapSelect
+  WrapperSearch
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -30,7 +29,6 @@ import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
 import { UpsellingPage } from '../UpsellingPage'
-import { Select } from '../../styles/Select'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -52,8 +50,7 @@ const BusinessProductsListingUI = (props) => {
     onProductRedirect,
     onCheckoutRedirect,
     handleChangeSearch,
-    handleSearchRedirect,
-    handleChangeSortBy
+    handleSearchRedirect
   } = props
 
   const { business, loading, error } = businessState
@@ -69,16 +66,6 @@ const BusinessProductsListingUI = (props) => {
   const location = useLocation()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
-
-  const values = ['Sort by', 'a-z', 'Rank']
-
-  const options = values.map(value => {
-    return {
-      value,
-      content: !value ? 'Sort by' : value,
-      showOnSelected: !value ? 'Sort by' : value
-    }
-  })
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -175,9 +162,6 @@ const BusinessProductsListingUI = (props) => {
                   />
                 </WrapperSearch>
               )}
-              <WrapSelect>
-                <Select options={options} defaultValue={options[0].value} onChange={(val) => handleChangeSortBy(val)} notAsync />
-              </WrapSelect>
               {!(business.categories.length === 0 && !categoryId) && (
                 <BusinessProductsCategories
                   categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
