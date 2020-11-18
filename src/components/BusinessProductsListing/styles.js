@@ -16,6 +16,21 @@ export const WrapContent = styled.div`
 
 export const WrapperSearch = styled.div`
   margin: 15px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .search-bar {
+    margin-right: 10px;
+  }
+
+  div:last-child {
+    text-align: right;
+
+    ${props => props.theme?.rtl && css`
+      text-align: left;
+    `}
+  }
 `
 
 export const ProductsNotFound = styled.div`
@@ -44,14 +59,6 @@ export const ProductLoading = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-`
-
-export const WrapSelect = styled.div`
-  margin: 10px;
-  text-align: right;
-  ${props => props.theme?.rtl && css`
-    text-align: left;
-  `}
 `
 
 export const SkeletonItem = styled.div`

@@ -16,8 +16,7 @@ import {
   ProductsNotFound,
   ProductLoading,
   SkeletonItem,
-  WrapperSearch,
-  WrapSelect
+  WrapperSearch
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -42,6 +41,7 @@ const BusinessProductsListingUI = (props) => {
     businessState,
     categorySelected,
     searchValue,
+    sortByValue,
     categoryState,
     categoryId,
     productId,
@@ -72,15 +72,11 @@ const BusinessProductsListingUI = (props) => {
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
-  const values = ['Sort by', 'a-z', 'Rank']
-
-  const options = values.map(value => {
-    return {
-      value,
-      content: !value ? 'Sort by' : value,
-      showOnSelected: !value ? 'Sort by' : value
-    }
-  })
+  const sortByOptions = [
+    { value: null, content: t('SORT_BY', 'Sort By'), showOnSelected: t('SORT_BY', 'Sort By') },
+    { value: 'rank', content: t('RANK', 'Rank'), showOnSelected: t('RANK', 'Rank') },
+    { value: 'a-z', content: t('A_to_Z', 'A-Z'), showOnSelected: t('A_to_Z', 'A-Z') }
+  ]
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -176,11 +172,14 @@ const BusinessProductsListingUI = (props) => {
                     search={searchValue}
                     placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
                   />
+                  <Select
+                    notAsync
+                    options={sortByOptions}
+                    defaultValue={sortByValue}
+                    onChange={(val) => handleChangeSortBy(val)}
+                  />
                 </WrapperSearch>
               )}
-              <WrapSelect>
-                <Select options={options} defaultValue={options[0].value} onChange={(val) => handleChangeSortBy(val)} notAsync />
-              </WrapSelect>
               {!(business.categories.length === 0 && !categoryId) && (
                 <BusinessProductsCategories
                   categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}

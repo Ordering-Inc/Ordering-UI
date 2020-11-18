@@ -4,7 +4,6 @@ export const BusinessSearch = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin: 28px 0 5px;
 
   input {
     width: 100%;
