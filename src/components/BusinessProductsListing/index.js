@@ -30,6 +30,7 @@ import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
 import { UpsellingPage } from '../UpsellingPage'
+import { Select } from '../../styles/Select'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -40,6 +41,7 @@ const BusinessProductsListingUI = (props) => {
     businessState,
     categorySelected,
     searchValue,
+    sortByValue,
     categoryState,
     categoryId,
     productId,
@@ -51,7 +53,8 @@ const BusinessProductsListingUI = (props) => {
     onProductRedirect,
     onCheckoutRedirect,
     handleChangeSearch,
-    handleSearchRedirect
+    handleSearchRedirect,
+    handleChangeSortBy
   } = props
 
   const { business, loading, error } = businessState
@@ -68,6 +71,12 @@ const BusinessProductsListingUI = (props) => {
   const location = useLocation()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
+
+  const sortByOptions = [
+    { value: null, content: t('SORT_BY', 'Sort By'), showOnSelected: t('SORT_BY', 'Sort By') },
+    { value: 'rank', content: t('RANK', 'Rank'), showOnSelected: t('RANK', 'Rank') },
+    { value: 'a-z', content: t('A_to_Z', 'A-Z'), showOnSelected: t('A_to_Z', 'A-Z') }
+  ]
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -162,6 +171,12 @@ const BusinessProductsListingUI = (props) => {
                     onSearch={handleChangeSearch}
                     search={searchValue}
                     placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                  />
+                  <Select
+                    notAsync
+                    options={sortByOptions}
+                    defaultValue={sortByValue}
+                    onChange={(val) => handleChangeSortBy(val)}
                   />
                 </WrapperSearch>
               )}
