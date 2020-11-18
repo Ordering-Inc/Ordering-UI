@@ -1,6 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
+  text-align: center;
+
   select:focus {
     outline: none;
   }
@@ -37,6 +39,10 @@ export const Container = styled.div`
     &::-ms-input-placeholder {
       color: #DBDCDB;
     }
+
+    ${({ disabled }) => disabled && css`
+      cursor: not-allowed;
+    `}
   }
 `
 

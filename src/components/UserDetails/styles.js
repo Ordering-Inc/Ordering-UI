@@ -29,11 +29,21 @@ export const Header = styled.div`
   }
 `
 
+export const SideForm = styled.div`
+  width: 100%;
+  margin-top: 25px;
+
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
+`
+
 export const FormInput = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
 
   div.phone_number {
@@ -46,6 +56,16 @@ export const FormInput = styled.form`
     width: 100%;
     margin-bottom: 20px;
     box-sizing: border-box;
+
+    &:disabled {
+      background-color: rgba(239, 239, 239, 0.3);
+      cursor: not-allowed;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 7px 0;
   }
 
   @media (min-width: 769px) {
