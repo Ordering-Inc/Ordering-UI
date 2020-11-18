@@ -128,18 +128,11 @@ const BusinessProductsListingUI = (props) => {
   }, [productModal])
 
   useEffect(() => {
-    if (categoryId && productId && !curProduct?.id) {
+    if (categoryId && productId) {
       handleUpdateInitialRender(true)
     }
     events.emit('get_current_view')
-  }, [categoryId, productId, location])
-
-  useEffect(() => {
-    if (!location.search) {
-      setCurProduct(null)
-      handleUpdateInitialRender(false)
-    }
-  }, [location])
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = openProduct ? 'hidden' : 'auto'
