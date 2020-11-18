@@ -13,12 +13,25 @@ const LanguageSelectorUI = (props) => {
       value: language.code, content: language.name, showOnSelected: language.code.toUpperCase()
     }
   })
+  _languages && _languages.sort((a, b) =>
+    (a.content > b.content) ? 1 : ((b.content > a.content) ? -1 : 0)
+  )
   return (
-    <Select options={_languages} defaultValue={currentLanguage} onChange={(languageId) => handleChangeLanguage(languageId)} />
+    <Select
+      options={_languages}
+      defaultValue={currentLanguage}
+      onChange={(languageId) => handleChangeLanguage(languageId)}
+    />
   )
 }
 
 export const LanguageSelector = (props) => {
   const DefaultChangeLanguage = () => {}
-  return <LanguageSelectorController {...props} UIComponent={LanguageSelectorUI} onChangeLanguage={props.onChangeLanguage || DefaultChangeLanguage} />
+  return (
+    <LanguageSelectorController
+      {...props}
+      UIComponent={LanguageSelectorUI}
+      onChangeLanguage={props.onChangeLanguage || DefaultChangeLanguage}
+    />
+  )
 }
