@@ -234,7 +234,11 @@ const OrderDetailsUI = (props) => {
                   </tr>
                   {order?.discount > 0 && (
                     <tr>
-                      <td>{t('DISCOUNT', 'Discount')}</td>
+                      {order?.discount_type === 1 ? (
+                        <td>{t('DISCOUNT', 'Discount')} ({parseNumber(order?.discount_rate)}%)</td>
+                      ) : (
+                        <td>{t('DISCOUNT', 'Discount')}</td>
+                      )}
                       <td>{parsePrice(order?.discount)}</td>
                     </tr>
                   )}
@@ -250,7 +254,15 @@ const OrderDetailsUI = (props) => {
               </table>
             </OrderBill>
 
-            {(parseInt(order?.status) === 1 || parseInt(order?.status) === 11) && !order.review && (
+            {(
+              parseInt(order?.status) === 1 ||
+              parseInt(order?.status) === 2 ||
+              parseInt(order?.status) === 5 ||
+              parseInt(order?.status) === 6 ||
+              parseInt(order?.status) === 10 ||
+              parseInt(order?.status) === 11 ||
+              parseInt(order?.status) === 12
+            ) && !order.review && (
               <ReviewsAction>
                 <Button color='primary' onClick={() => setOpenReview(true)}>
                   {t('REVIEW_ORDER', 'Review your Order')}

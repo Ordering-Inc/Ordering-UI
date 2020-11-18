@@ -22,6 +22,7 @@ export const HeaderOption = (props) => {
     <Container
       variant={variant}
       onClick={() => props.onClick(variant)}
+      isHome={props.isHome}
     >
       {variant === 'cart' && (
         <span>

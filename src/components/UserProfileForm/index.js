@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { UserProfileForm as UserProfileController, useLanguage, useSession, ExamineClick, DragAndDrop } from 'ordering-components'
+import {
+  UserProfileForm as UserProfileController,
+  useLanguage,
+  useSession,
+  ExamineClick,
+  DragAndDrop
+} from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
+import parsePhoneNumber from 'libphonenumber-js'
 
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import { AddressList } from '../AddressList'
+import { InputPhoneNumber } from '../InputPhoneNumber'
 
 import {
   Container,
@@ -18,7 +26,8 @@ import {
   SavedPlaces,
   SkeletonForm,
   UploadImageIcon,
-  SkeletonWrapper
+  SkeletonWrapper,
+  ActionsForm
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -30,44 +39,23 @@ import BiImage from '@meronex/icons/bi/BiImage'
 
 const UserProfileFormUI = (props) => {
   const {
-    hanldeChangeInput,
+    handleChangeInput,
     handleButtonUpdateClick,
     handlechangeImage,
     formState,
     showField,
     validationFields,
     isRequiredField,
-    useChekoutFileds
+    useChekoutFileds,
+    cleanFormState
   } = props
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [edit, setEdit] = useState(false)
-
-  useEffect(() => {
-    if ((!formState.loading && formState.result?.error)) {
-      setAlertState({
-        open: true,
-        content: formState.result?.result || [t('ERROR')]
-      })
-    }
-  }, [formState.loading])
-
-  useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      setAlertState({
-        open: true,
-        content: Object.values(errors).map(error => error.message)
-      })
-    }
-  }, [errors])
-
-  useEffect(() => {
-    if (formState.changes.photo) {
-      handleButtonUpdateClick()
-    }
-  }, [formState.changes.photo])
+  const [userPhoneNumber, setUserPhoneNumber] = useState(null)
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
 
   const closeAlert = () => {
     setAlertState({
@@ -83,11 +71,100 @@ const UserProfileFormUI = (props) => {
   }
 
   const onSubmit = () => {
-    if (Object.keys(formState.changes).length !== 0) {
+    const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
+    if (!userPhoneNumber && validationFields?.fields?.cellphone?.required) {
+      setAlertState({
+        open: true,
+        content: [t('ERROR_PHONE_NUMBER', 'The Phone Number field is required.')]
+      })
+      return
+    }
+    if (!isPhoneNumberValid) {
+      setAlertState({
+        open: true,
+        content: [t('INVALID_PHONE_NUMBER', 'Invalid phone number')]
+      })
+      return
+    }
+    if (Object.keys(formState.changes).length > 0 && isPhoneNumberValid) {
+      let changes = null
+      if (user?.cellphone && !userPhoneNumber) {
+        changes = {
+          country_phone_code: '',
+          cellphone: ''
+        }
+      }
+      handleButtonUpdateClick(changes)
+      setEdit(false)
+    }
+  }
+
+  const handleChangePhoneNumber = (number, isValid) => {
+    setUserPhoneNumber(number)
+    if (isValid) {
+      const phoneNumberParser = parsePhoneNumber(number)
+      const phoneNumber = {
+        country_phone_code: {
+          name: 'country_phone_code',
+          value: phoneNumberParser.countryCallingCode
+        },
+        cellphone: {
+          name: 'cellphone',
+          value: phoneNumberParser.nationalNumber
+        }
+      }
+      handleChangeInput(phoneNumber, true)
+    }
+  }
+
+  const setUserCellPhone = () => {
+    if (user && user?.cellphone) {
+      let phone = null
+      if (user?.country_phone_code) {
+        phone = `+${user?.country_phone_code} `
+      }
+      phone = `${phone}${user?.cellphone}`
+      setUserPhoneNumber(phone)
+    }
+  }
+
+  const handleCloseForm = () => {
+    setEdit(false)
+    cleanFormState()
+    setUserCellPhone()
+  }
+
+  useEffect(() => {
+    setUserCellPhone()
+  }, [user])
+
+  useEffect(() => {
+    if ((!formState.loading && formState.result?.error)) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result || [t('ERROR')]
+      })
+    }
+  }, [formState.loading])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      const content = Object.values(errors).map(error => error.message)
+      if (!isValidPhoneNumber) {
+        content.push(t('INVALID_PHONE_NUMBER', 'The Phone Number field is invalid.'))
+      }
+      setAlertState({
+        open: true,
+        content
+      })
+    }
+  }, [errors])
+
+  useEffect(() => {
+    if (formState.changes.photo) {
       handleButtonUpdateClick()
     }
-    setEdit(false)
-  }
+  }, [formState.changes.photo])
 
   return (
     <>
@@ -124,81 +201,91 @@ const UserProfileFormUI = (props) => {
             <Camera><GiPhotoCamera /></Camera>
           </UserImage>
           <SideForm className='user-form'>
-            {edit
-              ? (
-                <FormInput onSubmit={handleSubmit(onSubmit)}>
-                  {
-                    !(useChekoutFileds && validationFields.loading) ? (
-                      <>
-                        {
-                          Object.values(validationFields.fields).map(field => (
-                            showField(field.code) && (
-                              <React.Fragment key={field.id}>
-                                {
-                                  field.code === 'mobile_phone' &&
-                                    <Input
-                                      placeholder={t('country_phone_code', 'Mobile Phone Country Code')} name='country_phone_code' defaultValue={user.country_phone_code} onChange={hanldeChangeInput} ref={register({
-                                        required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
-                                        pattern: {
-                                          value: /^(\+?\d{1,3}|\d{1,4})$/,
-                                          message: t('BAD_COUNTRY_CODE', 'Bad country Code')
-                                        }
-                                      })}
-                                    />
-                                }
-                                <Input
-                                  key={field.id}
-                                  type={field.id < 6 && field.id >= 1 ? field.type : 'hidden'}
-                                  name={field.code === 'mobile_phone' ? 'cellphone' : field.code}
-                                  placeholder={t(field.name)}
-                                  defaultValue={field.code === 'mobile_phone' ? user.cellphone : user[field.code]}
-                                  onChange={hanldeChangeInput}
-                                  ref={register({
-                                    required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
-                                    pattern: {
-                                      value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                                      message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-                                    }
-                                  })}
-                                />
-                              </React.Fragment>
-                            )
-                          ))
-                        }
-                        <Input
-                          type='password'
-                          name='password'
-                          placeholder={t('FRONT_VISUALS_PASSWORD')}
-                          onChange={hanldeChangeInput}
-                          ref={register({
-                            required: isRequiredField('password') ? t('VALIDATION_ERROR_REQUIRED', 'password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
-                            minLength: {
-                              value: 5,
-                              message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                            }
-                          })}
-                        />
-
-                        <Button color={Object.keys(formState.changes).length ? 'primary' : 'secondary'} type='submit'>{Object.keys(formState.changes).length ? t('UPDATE', 'Update') : t('CANCEL', 'Cancel')}</Button>
-
-                      </>
-                    ) : (
-                      <SkeletonForm>{[...Array(6)].map((item, i) => (
-                        <Skeleton key={i} />
-                      ))}
-                      </SkeletonForm>
-                    )
-                  }
-                </FormInput>
-              )
-              : (
+            {!edit ? (
+              formState.loading ? (
                 <UserData>
-                  {formState.loading && !formState.changes.photo ? <Skeleton width={100} height={20} /> : <h1>{user.name} {user.lastname}</h1>}
-                  {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.email}</p>}
-                  {formState.loading && !formState.changes.photo ? <Skeleton width={200} /> : <p>{user.country_phone_code} {user.cellphone}</p>}
-                  {formState.loading && !formState.changes.photo ? <Skeleton width={80} height={40} /> : <Button color='primary' outline onClick={() => setEdit(true)}>{t('EDIT', 'Edit')}</Button>}
+                  <Skeleton width={250} height={25} />
+                  <Skeleton width={180} height={25} />
+                  <Skeleton width={210} height={25} />
+                  <Skeleton width={100} height={40} />
                 </UserData>
-              )}
+              ) : (
+                <UserData>
+                  <h1>{user.name} {user.lastname}</h1>
+                  <p>{user.email}</p>
+                  {user.cellphone && (
+                    <p>{user.country_phone_code && `+${user.country_phone_code} `}{user.cellphone}</p>
+                  )}
+                  <Button color='primary' outline onClick={() => setEdit(true)}>
+                    {t('EDIT', 'Edit')}
+                  </Button>
+                </UserData>
+              )
+            ) : (
+              <FormInput onSubmit={handleSubmit(onSubmit)}>
+                {!(useChekoutFileds && validationFields.loading) ? (
+                  <>
+                    {Object.values(validationFields.fields).map(field => field.code !== 'mobile_phone' && (
+                      showField(field.code) && (
+                        <React.Fragment key={field.id}>
+                          <Input
+                            key={field.id}
+                            type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
+                            name={field.code}
+                            className='form'
+                            placeholder={t(field.name)}
+                            defaultValue={user[field.code]}
+                            onChange={handleChangeInput}
+                            ref={register({
+                              required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
+                              pattern: {
+                                value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
+                                message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+                              }
+                            })}
+                          />
+                        </React.Fragment>
+                      )
+                    ))}
+
+                    <Input
+                      type='password'
+                      name='password'
+                      className='form'
+                      placeholder={t('FRONT_VISUALS_PASSWORD')}
+                      onChange={handleChangeInput}
+                      ref={register({
+                        required: isRequiredField('password') ? t('VALIDATION_ERROR_REQUIRED', 'password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                        minLength: {
+                          value: 5,
+                          message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                        }
+                      })}
+                    />
+
+                    <InputPhoneNumber
+                      value={userPhoneNumber}
+                      setValue={handleChangePhoneNumber}
+                      handleIsValid={setIsValidPhoneNumber}
+                    />
+
+                    <ActionsForm>
+                      <Button color='secondary' type='button' onClick={() => handleCloseForm()}>
+                        {t('CANCEL', 'Cancel')}
+                      </Button>
+                      <Button color='primary' type='submit' disabled={Object.keys(formState.changes).length === 0}>
+                        {t('UPDATE', 'Update')}
+                      </Button>
+                    </ActionsForm>
+                  </>
+                ) : (
+                  <SkeletonForm>{[...Array(6)].map((item, i) => (
+                    <Skeleton key={i} />
+                  ))}
+                  </SkeletonForm>
+                )}
+              </FormInput>
+            )}
 
           </SideForm>
         </UserProfileContainer>

@@ -8,6 +8,7 @@ import {
   Container,
   WrappContainer,
   UserDetailsContainer,
+  BusinessDetailsContainer,
   PaymentMethodContainer,
   DriverTipContainer,
   CartContainer,
@@ -32,8 +33,17 @@ import { UserDetails } from '../UserDetails'
 import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
+import { Alert } from '../Confirm'
 
 import { DriverTipsOptions } from '../../utils'
+
+const mapConfigs = {
+  mapZoom: 17,
+  mapSize: {
+    width: 640,
+    height: 190
+  }
+}
 
 const CheckoutUI = (props) => {
   const {
@@ -42,21 +52,56 @@ const CheckoutUI = (props) => {
     placing,
     businessDetails,
     paymethodSelected,
+    validationFields,
     handlePaymethodChange,
     handlerClickPlaceOrder
   } = props
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
-  const [errorCash, setErrorCash] = useState(true)
+  const [{ user }] = useSession()
+  const [errorCash, setErrorCash] = useState(false)
+  const [userErrors, setUserErrors] = useState([])
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const mapConfigs = {
-    mapZoom: 17,
-    mapSize: {
-      width: 640,
-      height: 190
+  const handlePlaceOrder = () => {
+    if (!userErrors.length) {
+      handlerClickPlaceOrder && handlerClickPlaceOrder()
+      return
     }
+    setAlertState({
+      open: true,
+      content: Object.values(userErrors).map(error => error)
+    })
   }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  const checkValidationFields = () => {
+    setUserErrors([])
+    const errors = []
+    const notFields = ['coupon', 'driver_tip']
+
+    Object.values(validationFields?.fields).map(field => {
+      if (field?.required && !notFields.includes(field.code)) {
+        if (!user[field?.code]) {
+          errors.push(t('ERROR_FIELD', `The field ${field?.code} is required`))
+        }
+      }
+    })
+    setUserErrors(errors)
+  }
+
+  useEffect(() => {
+    if (validationFields && validationFields?.fields) {
+      checkValidationFields()
+    }
+  }, [validationFields, user])
 
   return (
     <Container>
@@ -92,7 +137,7 @@ const CheckoutUI = (props) => {
         )}
 
         <UserDetailsContainer>
-          <div className='user'>
+          <div>
             {cartState.loading ? (
               <div>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -111,8 +156,11 @@ const CheckoutUI = (props) => {
               />
             )}
           </div>
+        </UserDetailsContainer>
+
+        <BusinessDetailsContainer>
           {(businessDetails?.loading || cartState.loading) && (
-            <div className='business'>
+            <div>
               <div>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -123,25 +171,25 @@ const CheckoutUI = (props) => {
             </div>
           )}
           {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
-            <div className='business'>
+            <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               <div>
-                <p>{businessDetails?.business?.name}</p>
-                <p>{businessDetails?.business?.email}</p>
-                <p>{businessDetails?.business?.cellphone}</p>
-                <p>{businessDetails?.business?.address}</p>
+                <p><strong>{t('BUSINESS_NAME', 'Name')}:</strong> {businessDetails?.business?.name}</p>
+                <p><strong>{t('BUSINESS_EMAIL', 'Email')}:</strong> {businessDetails?.business?.email}</p>
+                <p><strong>{t('BUSINESS_CELLPHONE', 'Cellphone')}:</strong> {businessDetails?.business?.cellphone}</p>
+                <p><strong>{t('BUSINESS_ADDRESS_DETAILS', 'Address')}:</strong> {businessDetails?.business?.address}</p>
               </div>
             </div>
           )}
           {businessDetails?.error && businessDetails?.error?.length > 0 && (
-            <div className='business'>
+            <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               {businessDetails?.error.map((e, i) => (
                 <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
               ))}
             </div>
           )}
-        </UserDetailsContainer>
+        </BusinessDetailsContainer>
 
         {!cartState.loading && cart && cart?.status !== 2 && (
           <PaymentMethodContainer>
@@ -157,7 +205,7 @@ const CheckoutUI = (props) => {
           </PaymentMethodContainer>
         )}
 
-        {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && (
+        {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.driver_tip?.enabled && (
           <DriverTipContainer>
             <h1>{t('DRIVER_TIP', 'Driver Tip')}</h1>
             <DriverTips
@@ -174,6 +222,7 @@ const CheckoutUI = (props) => {
             <Cart
               cart={cart}
               isProducts={cart?.products?.length || 0}
+              showCoupon={validationFields?.fields?.coupon?.enabled}
             />
           </CartContainer>
         )}
@@ -183,7 +232,7 @@ const CheckoutUI = (props) => {
             <Button
               color='primary'
               disabled={!cart?.valid || !paymethodSelected || placing || errorCash}
-              onClick={() => handlerClickPlaceOrder()}
+              onClick={() => handlePlaceOrder()}
             >
               {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}
             </Button>
@@ -208,7 +257,15 @@ const CheckoutUI = (props) => {
           ))
         )} */}
       </WrappContainer>
-
+      <Alert
+        title={t('CUSTOMER_DETAILS', 'Customer Details')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }
@@ -335,9 +392,15 @@ export const Checkout = (props) => {
                 <Button
                   color='primary'
                   onClick={() => handleOpenUpsellingPage(cart)}
-                  disabled={currentCart?.uuid === cart?.uuid || openUpselling}
+                  disabled={currentCart?.uuid === cart?.uuid || openUpselling || cart?.subtotal < cart?.minimum}
                 >
-                  {(currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid ? t('LOADING', 'Loading...') : t('PAY_CART', 'Pay order')}
+                  {cart?.subtotal >= cart?.minimum ? (
+                    (currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid
+                      ? t('LOADING', 'Loading...')
+                      : t('PAY_CART', 'Pay order')
+                  ) : (
+                    t('MINIMUN_PURCHASE', `Minimum ${parsePrice(cart?.minimum)}`)
+                  )}
                 </Button>
               </CartItemActions>
             </CartItem>
