@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const FormActions = styled.div`
   padding: 10px 0px;
@@ -42,24 +43,38 @@ export const FormControl = styled.form`
     padding: 10px;
     border: 1px solid #CCC;
     outline: none;
-    color: #555;
+    color: #010300;
     resize: none;
     border-radius: 16px;
 
     &:focus {
-      border-color: #555;
+      border-color: ${() => darken(0.07, '#CCC')};
     }
   }
 
   .input-autocomplete {
     width: 100%;
     background: #FFF;
-    color: #BBB;
-    border: 1px solid #BBB;
+    color: #010300;
+    border: 1px solid #DBDCDB;
     border-radius: 30px;
     font-size: 16px;
     padding: 7px 15px;
     outline: none;
+    ::placeholder {
+      color: #DBDCDB;
+    }
+    
+    &:-ms-input-placeholder {
+      color: #DBDCDB;
+    }
+    
+    &::-ms-input-placeholder { /* Microsoft Edge */
+      color: #DBDCDB;
+    }
+    &:focus {
+      border-color: ${() => darken(0.07, '#CCC')};
+    }
   }
 
   .google-control {
