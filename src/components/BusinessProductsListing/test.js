@@ -120,7 +120,8 @@ export const BusinessAndProductList = (props) => {
       return
     }
 
-    const categoryKey = searchValue ? 'search' : categorySelected.id ? `categoryId:${categorySelected.id}` : categorySelected.id === 'featured' ? 'featured' : 'all'
+    const categoryKey = categorySelected.id === 'featured' ? 'featured' : searchValue ? 'search' : categorySelected.id ? `categoryId:${categorySelected.id}` : 'all'
+
     const categoryState = categoriesState[categoryKey] || categoryStateDefault
     categoryState.products = sortProductsArray(sortByValue, categoryState.products)
     const pagination = categoryState.pagination
