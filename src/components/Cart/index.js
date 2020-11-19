@@ -141,7 +141,7 @@ const CartUI = (props) => {
                   {cart.business.tax_type === 1 ? (
                     <>
                       <td>{t('TAX_INCLUDED', 'Tax (included)')} ({parseNumber(cart?.business?.tax)}%)</td>
-                      <td>{parsePrice(cart?.tax || 0)}</td>
+                      <td>{parsePrice((cart?.subtotal - cart?.tax) * (cart?.business?.tax / 100)) || 0}</td>
                     </>
                   ) : (
                     <>
@@ -149,7 +149,6 @@ const CartUI = (props) => {
                       <td>{parsePrice(cart?.subtotal || 0)}</td>
                     </>
                   )}
-
                 </tr>
                 <tr>
                   {cart.business.tax_type === 2 ? (
@@ -160,7 +159,7 @@ const CartUI = (props) => {
                   ) : (
                     <>
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                      <td>{parsePrice(cart?.subtotal - cart?.tax || 0)}</td>
+                      <td>{parsePrice((cart?.subtotal) - (cart?.subtotal - cart?.tax) * (cart?.business?.tax / 100)) || 0}</td>
                     </>
                   )}
 
