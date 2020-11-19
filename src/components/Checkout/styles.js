@@ -16,15 +16,15 @@ export const WrappContainer = styled.div`
   }
 `
 
+export const WrapperUserDetails = styled.div`
+  width: 100%;
+`
+
 export const UserDetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 30px 0px 20px;
   flex-wrap: wrap;
-
-  div {
-    width: 100%;
-  }
 `
 
 export const BusinessDetailsContainer = styled(UserDetailsContainer)`

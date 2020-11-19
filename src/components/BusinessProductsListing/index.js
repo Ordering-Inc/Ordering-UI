@@ -6,7 +6,8 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession
+  useSession,
+  useUtils
 } from 'ordering-components'
 
 import {
@@ -29,6 +30,7 @@ import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
 import { UpsellingPage } from '../UpsellingPage'
+import { Select } from '../../styles/Select'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -39,6 +41,7 @@ const BusinessProductsListingUI = (props) => {
     businessState,
     categorySelected,
     searchValue,
+    sortByValue,
     categoryState,
     categoryId,
     productId,
@@ -51,12 +54,14 @@ const BusinessProductsListingUI = (props) => {
     onCheckoutRedirect,
     handleChangeSearch,
     handleSearchRedirect,
-    featuredProducts
+    featuredProducts,
+    handleChangeSortBy
   } = props
 
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
+  const [{ parsePrice }] = useUtils()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -67,6 +72,12 @@ const BusinessProductsListingUI = (props) => {
   const location = useLocation()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
+
+  const sortByOptions = [
+    { value: null, content: t('SORT_BY', 'Sort By'), showOnSelected: t('SORT_BY', 'Sort By') },
+    { value: 'rank', content: t('RANK', 'Rank'), showOnSelected: t('RANK', 'Rank') },
+    { value: 'a-z', content: t('A_to_Z', 'A-Z'), showOnSelected: t('A_to_Z', 'A-Z') }
+  ]
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -91,6 +102,7 @@ const BusinessProductsListingUI = (props) => {
     setModalIsOpen(false)
     handleUpdateInitialRender(false)
     updateProductModal(null)
+    setCurProduct(null)
     onProductRedirect({
       slug: business?.slug
     })
@@ -104,10 +116,17 @@ const BusinessProductsListingUI = (props) => {
     getNextProducts()
   }, [categoryState])
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [handleScroll])
+  const handleChangePage = (data) => {
+    if (Object.entries(data.query).length === 0 && openProduct) {
+      setModalIsOpen(false)
+    }
+  }
+
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
 
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
@@ -118,13 +137,6 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [productModal])
 
-  const handleChangePage = (data) => {
-    // console.log(Object.entries(data.query || {}).length, openProduct)
-    if (Object.entries(data.query).length === 0 && openProduct) {
-      setModalIsOpen(false)
-    }
-  }
-
   useEffect(() => {
     if (categoryId && productId) {
       handleUpdateInitialRender(true)
@@ -133,17 +145,17 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    document.body.style.overflow = openProduct ? 'hidden' : 'auto'
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
     }
   }, [openProduct])
 
-  const handleUpsellingPage = () => {
-    onCheckoutRedirect(currentCart?.uuid)
-    setOpenUpselling(false)
-    setCanOpenUpselling(false)
-  }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <>
@@ -160,6 +172,12 @@ const BusinessProductsListingUI = (props) => {
                     onSearch={handleChangeSearch}
                     search={searchValue}
                     placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                  />
+                  <Select
+                    notAsync
+                    options={sortByOptions}
+                    defaultValue={sortByValue}
+                    onChange={(val) => handleChangeSortBy(val)}
                   />
                 </WrapperSearch>
               )}
@@ -199,13 +217,7 @@ const BusinessProductsListingUI = (props) => {
           {productModal.loading && (
             <ProductLoading>
               <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
+                <Skeleton height={45} count={8} />
               </SkeletonItem>
             </ProductLoading>
           )}
@@ -287,10 +299,14 @@ const BusinessProductsListingUI = (props) => {
       </ProductsContainer>
       {currentCart?.products?.length > 0 && auth && (
         <FloatingButton
-          btnText={!openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')}
+          btnText={
+            currentCart?.subtotal >= currentCart?.minimum
+              ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')
+              : t('MINIMUN_PURCHASE', `Minimum ${parsePrice(currentCart?.minimum)}`)
+          }
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
-          disabled={openUpselling}
+          disabled={openUpselling || currentCart?.subtotal < currentCart?.minimum}
         />
       )}
       {currentCart?.products && openUpselling && (

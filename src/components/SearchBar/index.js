@@ -32,7 +32,7 @@ export const SearchBar = ({ onSearch, search, placeholder }) => {
   }, [search])
 
   return (
-    <BusinessSearch>
+    <BusinessSearch className='search-bar'>
       <Input
         ref={el}
         name='search'
