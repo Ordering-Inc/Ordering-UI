@@ -15,8 +15,7 @@ import {
   ProductsNotFound,
   ProductLoading,
   SkeletonItem,
-  WrapperSearch,
-  WrapSelect
+  WrapperSearch
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
