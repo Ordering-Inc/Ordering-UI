@@ -26,9 +26,6 @@ export const InputPhoneNumber = (props) => {
   return (
     <Container className='phone_number' disabled={disabled}>
       <PhoneInput
-        international
-        defaultCountry='US'
-        countryCallingCodeEditable={false}
         placeholder={t('PHONE_NUMBER', 'Phone number')}
         value={value}
         disabled={disabled}
