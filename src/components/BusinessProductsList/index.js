@@ -71,7 +71,7 @@ const BusinessProductsListUI = (props) => {
       }
 
       {
-        !category.id && categories.filter(category => category.id !== null || category.id !== 'featured').map((category, i, _categories) => {
+        !category.id && categories.filter(category => category.id !== null).map((category, i, _categories) => {
           const products = categoryState.products?.filter(product => product.category_id === category.id) || []
           return (
             <React.Fragment key={category.id}>
