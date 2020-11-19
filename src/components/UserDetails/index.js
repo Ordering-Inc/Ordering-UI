@@ -5,6 +5,7 @@ import TiPencil from '@meronex/icons/ti/TiPencil'
 import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController, useLanguage, useSession } from 'ordering-components'
 import parsePhoneNumber from 'libphonenumber-js'
+import { flatArray } from '../../utils'
 
 import {
   Container,
@@ -39,6 +40,7 @@ const UserDetailsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
+  const [validationFieldsSorted, setValidationFieldsSorted] = useState([])
 
   const { handleSubmit, register, errors } = useForm()
 
@@ -107,6 +109,29 @@ const UserDetailsUI = (props) => {
     }
   }
 
+  const sortValidationFields = () => {
+    const fields = ['name', 'middle_name', 'lastname', 'second_lastname', 'email']
+    const fieldsSorted = []
+    const validationsFieldsArray = Object.values(validationFields.fields)
+
+    fields.forEach(f => {
+      validationsFieldsArray.forEach(field => {
+        if (f === field.code) {
+          fieldsSorted.push(field)
+        }
+      })
+    })
+
+    fieldsSorted.push(validationsFieldsArray.filter(field => !fields.includes(field.code)))
+    setValidationFieldsSorted(flatArray(fieldsSorted))
+  }
+
+  useEffect(() => {
+    if (validationFields.fields) {
+      sortValidationFields()
+    }
+  }, [validationFields.fields])
+
   useEffect(() => {
     if ((user || !isEdit) && !formState.loading) {
       setUserCellPhone()
@@ -167,7 +192,7 @@ const UserDetailsUI = (props) => {
             <FormInput onSubmit={handleSubmit(onSubmit)}>
               {!validationFields.loading ? (
                 <>
-                  {Object.values(validationFields.fields).map(field => field.code !== 'mobile_phone' && (
+                  {validationFieldsSorted.map(field => field.code !== 'mobile_phone' && (
                     showField(field.code) && (
                       <React.Fragment key={field.id}>
                         <Input
