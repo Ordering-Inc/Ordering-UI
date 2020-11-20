@@ -197,6 +197,8 @@ const BusinessProductsListingUI = (props) => {
                   errors={errors}
                   onProductClick={onProductClick}
                   handleSearchRedirect={handleSearchRedirect}
+                  searchValue={searchValue}
+                  handleClearSearch={handleChangeSearch}
                 />
               </WrapContent>
             </>
