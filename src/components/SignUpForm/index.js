@@ -134,6 +134,7 @@ const SignUpFormUI = (props) => {
                           }
                         })}
                         required={field.required}
+                        autoComplete='off'
                       />
                     )
                   ))
