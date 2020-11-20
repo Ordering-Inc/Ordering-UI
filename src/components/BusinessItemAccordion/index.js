@@ -87,7 +87,7 @@ export const BusinessItemAccordion = (props) => {
 
   useEffect(() => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
-    if (cartsLength === 1 || isCheckout) {
+    if ((cartsLength === 1 || isCheckout) && !isClosed) {
       activeAccordion(true)
     }
   }, [orderState?.carts])
