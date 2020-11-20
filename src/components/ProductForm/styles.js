@@ -132,7 +132,6 @@ export const ProductComment = styled.div`
   }
   textarea {
     font-size: 16px;
-    font-weight: 300;
     padding: 10px;
     border: 1px solid #CCC;
     outline: none;
