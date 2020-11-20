@@ -54,6 +54,7 @@ const StripeRedirectFormUI = (props) => {
               required: true
             })
           }
+          autoComplete='off'
         />
         {errors.name && errors.name.type === 'required' && (
           <ErrorMessage>{t('FIELD_REQUIRED', 'This field is required')}</ErrorMessage>
@@ -72,6 +73,7 @@ const StripeRedirectFormUI = (props) => {
               required: true
             })
           }
+          autoComplete='off'
         />
         {errors.email && errors.email.type === 'required' && (
           <ErrorMessage>{t('FIELD_REQUIRED', 'This field is required')}</ErrorMessage>

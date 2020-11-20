@@ -36,10 +36,6 @@ export const OrdersContainer = styled.div`
 
     @media (min-width: 768px) {
       width: 90%;
-
-      > div{
-        margin-left: -30px;
-      }
     }
   `}
 

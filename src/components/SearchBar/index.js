@@ -38,6 +38,7 @@ export const SearchBar = ({ onSearch, search, placeholder }) => {
         name='search'
         aria-label='search'
         placeholder={placeholder}
+        autoComplete='off'
       />
     </BusinessSearch>
   )

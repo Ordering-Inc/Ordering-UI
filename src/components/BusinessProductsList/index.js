@@ -22,7 +22,9 @@ const BusinessProductsListUI = (props) => {
     isBusinessLoading,
     onProductClick,
     handleSearchRedirect,
-    featured
+    featured,
+    searchValue,
+    handleClearSearch
   } = props
 
   const [, t] = useLanguage()
@@ -125,9 +127,9 @@ const BusinessProductsListUI = (props) => {
         !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && (
           <WrapperNotFound>
             <NotFoundSource
-              content={t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
-              btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-              onClickButton={handleSearchRedirect}
+              content={!searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
+              btnTitle={!searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters')}
+              onClickButton={() => !searchValue ? handleSearchRedirect() : handleClearSearch('')}
             />
           </WrapperNotFound>
         )

@@ -135,6 +135,7 @@ const LoginFormUI = (props) => {
                   }
                 })}
                 onChange={(e) => hanldeChangeInput(e)}
+                autoComplete='off'
               />
             )}
             {useLoginByCellphone && loginTab === 'cellphone' && (
@@ -147,6 +148,7 @@ const LoginFormUI = (props) => {
                   required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
                 })}
                 onChange={(e) => hanldeChangeInput(e)}
+                autoComplete='off'
               />
             )}
             <Input

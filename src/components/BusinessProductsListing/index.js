@@ -200,6 +200,8 @@ const BusinessProductsListingUI = (props) => {
                   onProductClick={onProductClick}
                   handleSearchRedirect={handleSearchRedirect}
                   featured={featuredProducts}
+                  searchValue={searchValue}
+                  handleClearSearch={handleChangeSearch}
                 />
               </WrapContent>
             </>

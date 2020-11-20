@@ -13,6 +13,7 @@ import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import { AddressList } from '../AddressList'
 import { InputPhoneNumber } from '../InputPhoneNumber'
+import { flatArray } from '../../utils'
 
 import {
   Container,
@@ -56,6 +57,7 @@ const UserProfileFormUI = (props) => {
   const [edit, setEdit] = useState(false)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
+  const [validationFieldsSorted, setValidationFieldsSorted] = useState([])
 
   const closeAlert = () => {
     setAlertState({
@@ -133,6 +135,29 @@ const UserProfileFormUI = (props) => {
     cleanFormState()
     setUserCellPhone()
   }
+
+  const sortValidationFields = () => {
+    const fields = ['name', 'middle_name', 'lastname', 'second_lastname', 'email']
+    const fieldsSorted = []
+    const validationsFieldsArray = Object.values(validationFields.fields)
+
+    fields.forEach(f => {
+      validationsFieldsArray.forEach(field => {
+        if (f === field.code) {
+          fieldsSorted.push(field)
+        }
+      })
+    })
+
+    fieldsSorted.push(validationsFieldsArray.filter(field => !fields.includes(field.code)))
+    setValidationFieldsSorted(flatArray(fieldsSorted))
+  }
+
+  useEffect(() => {
+    if (validationFields.fields) {
+      sortValidationFields()
+    }
+  }, [validationFields.fields])
 
   useEffect(() => {
     setUserCellPhone()
@@ -225,7 +250,7 @@ const UserProfileFormUI = (props) => {
               <FormInput onSubmit={handleSubmit(onSubmit)}>
                 {!(useChekoutFileds && validationFields.loading) ? (
                   <>
-                    {Object.values(validationFields.fields).map(field => field.code !== 'mobile_phone' && (
+                    {validationFieldsSorted.map(field => field.code !== 'mobile_phone' && (
                       showField(field.code) && (
                         <React.Fragment key={field.id}>
                           <Input
@@ -243,6 +268,7 @@ const UserProfileFormUI = (props) => {
                                 message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
                               }
                             })}
+                            autoComplete='off'
                           />
                         </React.Fragment>
                       )

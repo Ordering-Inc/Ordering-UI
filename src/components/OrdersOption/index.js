@@ -36,10 +36,13 @@ const OrdersOptionUI = (props) => {
   const [ordersSorted, setOrdersSorted] = useState([])
 
   useEffect(() => {
-    if (activeOrders) {
-      const ordersSorted = orders.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-      setOrdersSorted(ordersSorted)
-    }
+    const ordersSorted = orders.sort((a, b) => {
+      if (activeOrders) {
+        return new Date(b.created_at) - new Date(a.created_at)
+      }
+      return new Date(a.created_at) - new Date(b.created_at)
+    })
+    setOrdersSorted(ordersSorted)
   }, [orders])
 
   return (
@@ -52,7 +55,7 @@ const OrdersOptionUI = (props) => {
         </h1>
       </OptionTitle>
 
-      {!loading && (activeOrders ? ordersSorted : orders).length === 0 && (
+      {!loading && ordersSorted.length === 0 && (
         <ImageNotFound>
           <img
             src={activeOrders ? emptyActiveOrders : emptyPastOrders}
@@ -118,7 +121,7 @@ const OrdersOptionUI = (props) => {
           />
         ) : (
           <PreviousOrders
-            orders={orders}
+            orders={ordersSorted}
             pagination={pagination}
             onOrderClick={onOrderClick}
             loadMoreOrders={loadMoreOrders}
