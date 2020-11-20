@@ -25,7 +25,7 @@ import {
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
+import { Input, TextArea } from '../../styles/Inputs'
 
 const AddressFormUI = (props) => {
   const {
@@ -119,7 +119,7 @@ const AddressFormUI = (props) => {
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               name='address'
-              placeholder='Address'
+              placeholder={t('ADDRESS', 'Addres')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
               defaultValue={formState.changes?.address || addressState.address?.address}
@@ -140,7 +140,7 @@ const AddressFormUI = (props) => {
         <Input
           className='internal_number'
           name='internal_number'
-          placeholder='Internal number'
+          placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           ref={register}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
@@ -149,13 +149,13 @@ const AddressFormUI = (props) => {
         <Input
           className='zipcode'
           name='zipcode'
-          placeholder='Zip code'
+          placeholder={t('ZIP_CODE', 'Zip code')}
           ref={register}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
           autoComplete='new-off'
         />
-        <textarea
+        <TextArea
           name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}

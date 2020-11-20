@@ -21,10 +21,10 @@ export const Input = styled.input`
 
   &::placeholder,
   &::-webkit-input-placeholder {
-    color: #CBCBCB;
+    color: #DBDCDB;
   }
   &:-ms-input-placeholder {
-    color: #CBCBCB;
+    color: #DBDCDB;
   }
 `
 
@@ -68,6 +68,32 @@ export const InputGroupLeft = styled.div`
         margin-right: -7px;
         margin-left: 0
     `}
+  }
+`
+
+export const TextArea = styled.textarea`
+  background: #FFF;
+  color: #010300;
+  border: 1px solid #DBDCDB;
+  border-radius: 30px;
+  font-size: 16px;
+  padding: 7px 15px;
+  outline: none;
+
+  &:focus {
+    border-color: ${() => darken(0.07, '#CCC')};
+  }
+
+  ${({ w }) => w && css`
+    width: 20%;
+  `}
+
+  &::placeholder,
+  &::-webkit-input-placeholder {
+    color: #DBDCDB;
+  }
+  &:-ms-input-placeholder {
+    color: #DBDCDB;
   }
 `
 
