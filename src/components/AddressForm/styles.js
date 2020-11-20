@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const FormActions = styled.div`
   padding: 10px 0px;
@@ -26,6 +27,9 @@ export const FormControl = styled.form`
     &.zipcode {
       width: 100%;
     }
+    &::placeholder{
+      color: #CBCBCB
+    }
 
     @media (min-width: 621px) {
       &.internal_number,
@@ -38,23 +42,29 @@ export const FormControl = styled.form`
   textarea {
     width: 100%;
     font-size: 16px;
-    font-weight: 300;
     padding: 10px;
-    border: 1px solid #CCC;
+    border: 1px solid #DBDCDB;
     outline: none;
-    color: #555;
+    color: #010300;
     resize: none;
     border-radius: 16px;
 
     &:focus {
-      border-color: #555;
+      border-color: ${() => darken(0.07, '#CCC')};
+    }
+    
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: #CBCBCB;
+    }
+    &:-ms-input-placeholder {
+      color: #CBCBCB;
     }
   }
 
   .input-autocomplete {
     width: 100%;
     background: #FFF;
-    color: #BBB;
     border: 1px solid #BBB;
     border-radius: 30px;
     font-size: 16px;

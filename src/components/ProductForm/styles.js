@@ -143,6 +143,14 @@ export const ProductComment = styled.div`
     &:focus {
       border-color: #555;
     }
+
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: #CBCBCB;
+    }
+    &:-ms-input-placeholder {
+      color: #CBCBCB;
+    }
   }
 
   @media (min-width: 577px) {
