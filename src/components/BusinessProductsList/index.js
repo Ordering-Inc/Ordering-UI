@@ -68,58 +68,58 @@ const BusinessProductsListUI = (props) => {
                 </WrapAllCategories>
               )
             }
-
-            {
-              categories.filter(category => category.id !== null).map((category, i, _categories) => {
-                const products = categoryState.products?.filter(product => product.category_id === category.id) || []
-                return (
-                  <React.Fragment key={category.id}>
-                    {
-                      products.length > 0 && (
-                        <WrapAllCategories>
-                          <h3>{category.name}</h3>
-                          <ProductsListing>
-                            {
-                              products.map(product => (
-                                <SingleProductCard
-                                  key={product.id}
-                                  isSoldOut={product.inventoried && !product.quantity}
-                                  businessId={businessId}
-                                  product={product}
-                                  onProductClick={onProductClick}
-                                />
-                              ))
-                            }
-                            {
-                              categoryState.loading && (i + 1) === _categories.length && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
-                                <SingleProductCard
-                                  key={`skeleton:${i}`}
-                                  isSkeleton
-                                />
-                              ))
-                            }
-                          </ProductsListing>
-                        </WrapAllCategories>
-                      )
-                    }
-                  </React.Fragment>
-                )
-              })
-            }
-
-            {
-              (categoryState.loading || isBusinessLoading) && (
-                <ProductsListing>
-                  {[...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
-                    <SingleProductCard
-                      key={`skeleton:${i}`}
-                      isSkeleton
-                    />
-                  ))}
-                </ProductsListing>
-              )
-            }
           </>
+        )
+      }
+
+      {
+        !category.id && categories.filter(category => category.id !== null).map((category, i, _categories) => {
+          const products = categoryState.products?.filter(product => product.category_id === category.id) || []
+          return (
+            <React.Fragment key={category.id}>
+              {
+                products.length > 0 && (
+                  <WrapAllCategories>
+                    <h3>{category.name}</h3>
+                    <ProductsListing>
+                      {
+                        products.map(product => (
+                          <SingleProductCard
+                            key={product.id}
+                            isSoldOut={product.inventoried && !product.quantity}
+                            businessId={businessId}
+                            product={product}
+                            onProductClick={onProductClick}
+                          />
+                        ))
+                      }
+                      {
+                        categoryState.loading && (i + 1) === _categories.length && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+                          <SingleProductCard
+                            key={`skeleton:${i}`}
+                            isSkeleton
+                          />
+                        ))
+                      }
+                    </ProductsListing>
+                  </WrapAllCategories>
+                )
+              }
+            </React.Fragment>
+          )
+        })
+      }
+
+      {
+        (categoryState.loading || isBusinessLoading) && (
+          <ProductsListing>
+            {[...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+              <SingleProductCard
+                key={`skeleton:${i}`}
+                isSkeleton
+              />
+            ))}
+          </ProductsListing>
         )
       }
 
