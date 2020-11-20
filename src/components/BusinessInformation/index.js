@@ -135,6 +135,12 @@ export const BusinessInformationUI = (props) => {
 
         {tabValue === 'General Info' ? (
           <>
+            {business.about && (
+              <>
+                <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business short description')}</SectionTitle>
+                <Description>{business.about}</Description>
+              </>
+            )}
             {business.description && (
               <>
                 <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business description')}</SectionTitle>
