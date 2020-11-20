@@ -21,9 +21,17 @@ export const CartContent = (props) => {
     setCurrentCartUuid(cart?.uuid)
   }
 
+  const handleSetCurrentCartUuid = () => {
+    setCurrentCartUuid(null)
+  }
+
   useEffect(() => {
+    events.on('cart_popover_closed', handleSetCurrentCartUuid)
     events.on('cart_product_added', handleAddProduct)
-    return () => events.off('cart_product_added', handleAddProduct)
+    return () => {
+      events.off('cart_popover_closed', handleSetCurrentCartUuid)
+      events.off('cart_product_added', handleAddProduct)
+    }
   }, [])
 
   return (

@@ -3,7 +3,7 @@ import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import FiClock from '@meronex/icons/fi/FiClock'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
-import { useOrder, useLanguage, useUtils } from 'ordering-components'
+import { useOrder, useLanguage, useUtils, useEvent } from 'ordering-components'
 
 import { convertHoursToMinutes } from '../../utils'
 
@@ -37,10 +37,12 @@ export const BusinessItemAccordion = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [events] = useEvent()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
+  const [cartProductUpdated, setCartProductUpdated] = useState(null)
 
   const content = useRef(null)
   const businessStore = useRef(null)
@@ -50,9 +52,9 @@ export const BusinessItemAccordion = (props) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
     if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
-    setHeightState(
-      setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
-    )
+    // setHeightState(
+    //   setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
+    // )
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
@@ -60,18 +62,44 @@ export const BusinessItemAccordion = (props) => {
 
   const activeAccordion = (value) => {
     setActiveState(value ? 'active' : '')
-    setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
+    // setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
     setRotateState(value ? 'accordion__icon rotate' : 'accordion__icon')
   }
 
-  useEffect(() => {
+  const handleCloseCartPopover = () => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
-    if (cartsLength === 1 || currentCartUuid === uuid || isCheckout) {
+    if (cartsLength > 1) {
+      activeAccordion(false)
+    }
+  }
+
+  const handlecartProductUpdated = (product, cart) => {
+    setCartProductUpdated(cart?.uuid)
+  }
+
+  useEffect(() => {
+    if (cartProductUpdated === uuid || (currentCartUuid === uuid && (!cartProductUpdated || cartProductUpdated === uuid))) {
       activeAccordion(true)
     } else {
       activeAccordion(false)
     }
-  }, [orderState?.carts, currentCartUuid])
+  }, [cartProductUpdated, currentCartUuid])
+
+  useEffect(() => {
+    const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
+    if ((cartsLength === 1 || isCheckout) && !isClosed) {
+      activeAccordion(true)
+    }
+  }, [orderState?.carts])
+
+  useEffect(() => {
+    events.on('cart_popover_closed', handleCloseCartPopover)
+    events.on('cart_product_updated', handlecartProductUpdated)
+    return () => {
+      events.off('cart_popover_closed', handleCloseCartPopover)
+      events.off('cart_product_updated', handlecartProductUpdated)
+    }
+  }, [])
 
   return (
     <AccordionSection isClosed={isClosed}>
