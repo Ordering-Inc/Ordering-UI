@@ -14,7 +14,9 @@ export const Container = styled.div`
 `
 
 export const Layer = styled.div`
-  background-color: rgba(255, 255, 255, 0.7);
+  ${({ nobg }) => !nobg && css`
+    background-color: rgba(255, 255, 255, 0.7);
+  `}
   position: fixed;
   top: 0;
   width: 100%;
