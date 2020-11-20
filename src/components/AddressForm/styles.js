@@ -70,6 +70,20 @@ export const FormControl = styled.form`
     font-size: 16px;
     padding: 7px 15px;
     outline: none;
+    ::placeholder {
+      color: #DBDCDB;
+    }
+    
+    &:-ms-input-placeholder {
+      color: #DBDCDB;
+    }
+    
+    &::-ms-input-placeholder { /* Microsoft Edge */
+      color: #DBDCDB;
+    }
+    &:focus {
+      border-color: ${() => darken(0.07, '#CCC')};
+    }
   }
 
   .google-control {
@@ -172,7 +186,8 @@ export const AddressTagSection = styled.div`
   }
 
   button.active {
-    border: 1px solid #D81212;
+    border: 1px solid ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
   }
 `
 

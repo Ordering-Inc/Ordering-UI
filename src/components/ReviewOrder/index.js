@@ -61,7 +61,12 @@ const ReviewOrderUI = (props) => {
   const StarsComponent = ({ name }) => (
     [...Array(5)].map((star, i) => (
       <label key={i} onMouseLeave={() => setHover(stars)}>
-        <input type='radio' name={name} value={i + 1} onClick={(e) => handleChangeRating(e)} />
+        <input
+          type='radio'
+          name={name}
+          value={i + 1}
+          onClick={(e) => handleChangeRating(e)}
+        />
         <AiFillStar color={(i + 1) <= (hover[name] || stars[name]) ? colors.primary : 'gray'} size={25} onMouseEnter={() => setHover({ [name]: (i + 1) })} />
       </label>
     ))
@@ -100,9 +105,13 @@ const ReviewOrderUI = (props) => {
       <Comments>
         <h2>{t('COMMENTS', 'Comments')}:</h2>
         <Input
-          placeholder={t('COMMENTS', 'Comments')} name='comments' onChange={(e) => handleChangeInput(e)} ref={register({
+          placeholder={t('COMMENTS', 'Comments')}
+          name='comments'
+          onChange={(e) => handleChangeInput(e)}
+          ref={register({
             required: t('FIELD_COMMENT_REQUIRED', 'The field comments is required')
           })}
+          autoComplete='off'
         />
       </Comments>
       <Send>

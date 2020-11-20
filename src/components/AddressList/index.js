@@ -26,6 +26,10 @@ import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../utils'
 
+import { SpinnerLoader } from '../SpinnerLoader'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import { Layer } from '../MomentContent/styles'
+
 const AddressListUI = (props) => {
   const {
     actionStatus,
@@ -40,11 +44,14 @@ const AddressListUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
+  const { width } = useWindowSize()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddessOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
+
+  const AddressControl = document?.getElementById('address_control')?.getBoundingClientRect()
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -101,7 +108,7 @@ const AddressListUI = (props) => {
   }, [])
 
   return (
-    <AddressListContainer>
+    <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
       {
         (!popover || !addressOpen) && (
           <Button
@@ -109,7 +116,7 @@ const AddressListUI = (props) => {
             color='primary'
             onClick={() => openAddress({})}
           >
-            {orderState?.loading ? t('LOADING', 'Loading...') : t('ADD_ADDRESS', 'Add Address')}
+            {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading...') : t('ADD_ADDRESS', 'Add Address')}
           </Button>
         )
       }
@@ -168,6 +175,18 @@ const AddressListUI = (props) => {
         <AddressListUl>
           <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
         </AddressListUl>
+      )}
+
+      {(actionStatus?.loading || orderState.loading) && (
+        <Layer height={AddressControl?.height && `${AddressControl?.height}px`} nobg>
+          <SpinnerLoader
+            style={{
+              top: width <= 768 ? '50%' : '40%',
+              position: width <= 768 ? 'absolute' : 'sticky',
+              height: 'auto'
+            }}
+          />
+        </Layer>
       )}
 
       {
