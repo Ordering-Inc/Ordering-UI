@@ -45,10 +45,20 @@ export const AddressesPopover = (props) => {
       props.onClose && props.onClose()
     }
   }
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      props.onClose && props.onClose()
+    }
+  }
 
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
-    return () => window.removeEventListener('mouseup', handleClickOutside)
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [open])
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }

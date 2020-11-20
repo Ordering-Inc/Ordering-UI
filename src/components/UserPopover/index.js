@@ -47,6 +47,12 @@ export const UserPopover = (props) => {
     }
   }
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      props.onClose && props.onClose()
+    }
+  }
+
   const handleGoToPage = (page) => {
     events.emit('go_to_page', { page })
     props.onClick && props.onClick()
@@ -54,7 +60,11 @@ export const UserPopover = (props) => {
 
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
-    return () => window.removeEventListener('mouseup', handleClickOutside)
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [open])
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', minWidth: '150px' }
