@@ -268,6 +268,7 @@ const UserProfileFormUI = (props) => {
                                 message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
                               }
                             })}
+                            autoComplete='off'
                           />
                         </React.Fragment>
                       )
