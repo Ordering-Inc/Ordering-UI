@@ -177,7 +177,8 @@ export const AddressTagSection = styled.div`
   }
 
   button.active {
-    border: 1px solid #D81212;
+    border: 1px solid ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
   }
 `
 
