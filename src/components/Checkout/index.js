@@ -40,7 +40,7 @@ import { Alert } from '../Confirm'
 import { DriverTipsOptions } from '../../utils'
 
 const mapConfigs = {
-  mapZoom: 17,
+  mapZoom: 16,
   mapSize: {
     width: 640,
     height: 190
