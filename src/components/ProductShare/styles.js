@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const IconShare = styled.div`
-  position: relative;
+  position: sticky;
   margin: 0px;
   top: 0px;
   font-size: 22px;
@@ -17,6 +17,11 @@ export const IconShare = styled.div`
   svg {
     cursor: pointer;
     color: #333;
+  }
+
+
+  @media(min-width: 769px){
+    position: relative;
   }
 
   @media (min-width: 1201px) {
