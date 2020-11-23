@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const CategoriesContainer = styled.div`
   display: flex;
@@ -15,6 +15,12 @@ export const CategoriesContainer = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  div.special{
+    ${props => !props.featured && css`
+      display: none 
+    `}
   }
 
   @media (min-width: 381px) {

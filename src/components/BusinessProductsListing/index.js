@@ -54,6 +54,7 @@ const BusinessProductsListingUI = (props) => {
     onCheckoutRedirect,
     handleChangeSearch,
     handleSearchRedirect,
+    featuredProducts,
     handleChangeSortBy
   } = props
 
@@ -182,21 +183,23 @@ const BusinessProductsListingUI = (props) => {
               )}
               {!(business.categories.length === 0 && !categoryId) && (
                 <BusinessProductsCategories
-                  categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
                   categorySelected={categorySelected}
                   onClickCategory={handleChangeCategory}
+                  featured={featuredProducts}
                 />
               )}
 
               <WrapContent>
                 <BusinessProductsList
-                  categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
                   category={categorySelected}
                   categoryState={categoryState}
                   businessId={business.id}
                   errors={errors}
                   onProductClick={onProductClick}
                   handleSearchRedirect={handleSearchRedirect}
+                  featured={featuredProducts}
                   searchValue={searchValue}
                   handleClearSearch={handleChangeSearch}
                 />

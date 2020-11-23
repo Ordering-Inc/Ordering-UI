@@ -22,6 +22,7 @@ const BusinessProductsListUI = (props) => {
     isBusinessLoading,
     onProductClick,
     handleSearchRedirect,
+    featured,
     searchValue,
     handleClearSearch
   } = props
@@ -45,6 +46,31 @@ const BusinessProductsListUI = (props) => {
           }
         </ProductsListing>
       )}
+
+      {
+        !category.id && (
+          <>
+            {
+              featured && (
+                <WrapAllCategories>
+                  <h3>{t('FEATURED', 'Featured')}</h3>
+                  <ProductsListing>
+                    {categoryState.products?.map(product => product.featured && (
+                      <SingleProductCard
+                        key={product.id}
+                        isSoldOut={(product.inventoried && !product.quantity)}
+                        product={product}
+                        businessId={businessId}
+                        onProductClick={onProductClick}
+                      />
+                    ))}
+                  </ProductsListing>
+                </WrapAllCategories>
+              )
+            }
+          </>
+        )
+      }
 
       {
         !category.id && categories.filter(category => category.id !== null).map((category, i, _categories) => {

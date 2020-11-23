@@ -11,16 +11,17 @@ const BusinessProductsCategoriesUI = (props) => {
     isSkeleton,
     categories,
     handlerClickCategory,
-    categorySelected
+    categorySelected,
+    featured
   } = props
 
   return (
-    <CategoriesContainer id='container'>
+    <CategoriesContainer id='container' featured={featured}>
       {!isSkeleton ? (
         <Tabs variant='primary' id='categories'>
           <AutoScroll categories='categories' container='container'>
-            {categories && categories.length && categories.map(category => category.id !== 0 && (
-              <Tab className='category' active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
+            {categories && categories.length && categories.map(category => (
+              <Tab className={`category ${category.id === 'featured' ? 'special' : ''}`} active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
                 {category.name}
               </Tab>
             ))}

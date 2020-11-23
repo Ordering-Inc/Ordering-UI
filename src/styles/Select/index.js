@@ -41,9 +41,19 @@ export const Select = (props) => {
     }
   }
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      setOpen(false)
+    }
+  }
+
   useEffect(() => {
     document.addEventListener('mouseup', closeSelect)
-    return () => document.removeEventListener('mouseup', closeSelect)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('mouseup', closeSelect)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [open])
 
   useEffect(() => {
