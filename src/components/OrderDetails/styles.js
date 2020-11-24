@@ -348,7 +348,7 @@ export const OrderCustomer = styled.div`
 
 export const PhotoBlock = styled.img`
   border-radius: 50%;
-  width: 75px;
+  object-fit: cover;
   margin-right: 10px;
   ${props => props.theme?.rtl && css`
     margin-left: 10px;

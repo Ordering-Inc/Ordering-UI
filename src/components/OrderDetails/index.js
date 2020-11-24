@@ -174,7 +174,7 @@ const OrderDetailsUI = (props) => {
                   <WrapperDriver>
                     <div className='photo'>
                       {order?.driver?.photo ? (
-                        <PhotoBlock src={order?.driver?.photo} />
+                        <PhotoBlock src={order?.driver?.photo} width='70' height='70' />
                       ) : (
                         <RiUser2Fill />
                       )}
