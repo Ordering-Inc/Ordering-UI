@@ -26,14 +26,16 @@ export const OrdersContainer = styled.div`
     margin: auto 0px auto auto;
 
     > div {
-      margin-left: -18px;
+      margin-left: -10px;
     }
 
-    ::-webkit-scrollbar {
+    ${({ isSkeleton }) => !isSkeleton && css`
+      ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
-    }
-
+      }
+    `}
+    
     @media (min-width: 768px) {
       width: 90%;
     }

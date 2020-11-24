@@ -65,7 +65,7 @@ const OrdersOptionUI = (props) => {
       )}
 
       {loading && (
-        <OrdersContainer activeOrders={activeOrders}>
+        <OrdersContainer activeOrders={activeOrders} isSkeleton>
           {activeOrders ? (
             <SkeletonOrder activeOrders={activeOrders}>
               {[...Array(3)].map((item, i) => (
