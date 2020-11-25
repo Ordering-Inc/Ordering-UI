@@ -30,7 +30,8 @@ const CartUI = (props) => {
     offsetDisabled,
     removeProduct,
     onClickCheckout,
-    showCoupon
+    showCoupon,
+    validationFields
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -175,7 +176,7 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
-            {showCoupon && (
+            {(showCoupon || validationFields?.fields?.coupon?.enabled) && (
               <CouponContainer>
                 <CouponControl
                   businessId={cart.business_id}
