@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
+import { InputPhoneNumber } from '../InputPhoneNumber'
+import parsePhoneNumber from 'libphonenumber-js'
+
 import {
   SignupForm as SignUpController,
   useLanguage,
@@ -29,7 +32,7 @@ import { useTheme } from 'styled-components'
 
 const SignUpFormUI = (props) => {
   const {
-    hanldeChangeInput,
+    handleChangeInput,
     handleButtonSignupClick,
     elementLinkToLogin,
     useChekoutFileds,
@@ -48,6 +51,9 @@ const SignUpFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const theme = useTheme()
+
+  const [userPhoneNumber, setUserPhoneNumber] = useState(null)
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
 
   const handleSuccessFacebook = (user) => {
     login({
@@ -82,10 +88,57 @@ const SignUpFormUI = (props) => {
   }
 
   const onSubmit = () => {
+    const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
+    if (!userPhoneNumber && validationFields?.fields?.cellphone?.required) {
+      setAlertState({
+        open: true,
+        content: [t('ERROR_PHONE_NUMBER', 'The Phone Number field is required.')]
+      })
+      return
+    }
+    if (!isPhoneNumberValid) {
+      setAlertState({
+        open: true,
+        content: [t('INVALID_PHONE_NUMBER', 'Invalid phone number')]
+      })
+      return
+    }
     handleButtonSignupClick()
     if (!formState.loading && formState.result.result && !formState.result.error) {
       handleSuccessSignup(formState.result.result)
     }
+  }
+
+  const handleChangePhoneNumber = (number, isValid) => {
+    setUserPhoneNumber(number)
+
+    let phoneNumberParser = null
+    let phoneNumber = {
+      country_phone_code: {
+        name: 'country_phone_code',
+        value: ''
+      },
+      cellphone: {
+        name: 'cellphone',
+        value: ''
+      }
+    }
+    if (isValid) {
+      phoneNumberParser = parsePhoneNumber(number)
+    }
+    if (phoneNumberParser) {
+      phoneNumber = {
+        country_phone_code: {
+          name: 'country_phone_code',
+          value: phoneNumberParser.countryCallingCode
+        },
+        cellphone: {
+          name: 'cellphone',
+          value: phoneNumberParser.nationalNumber
+        }
+      }
+    }
+    handleChangeInput(phoneNumber, true)
   }
 
   return (
@@ -97,7 +150,7 @@ const SignUpFormUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img src={theme?.images?.logos?.logotype} alt='Logo login' />
+        <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo login' />
 
         {useLoginByCellphone && useLoginByEmail && (
           <SignUpWith>
@@ -117,15 +170,16 @@ const SignUpFormUI = (props) => {
             !(useChekoutFileds && validationFields.loading) ? (
               <>
                 {
-                  Object.values(validationFields.fields).map(field => (
+                  Object.values(validationFields.fields).map(field => field.code !== 'mobile_phone' && (
                     showField(field.code) && (
                       <Input
                         key={field.id}
                         type={field.enabled && field.required ? field.type : 'hidden'}
                         name={field.code}
                         aria-label={field.code}
+                        className='form'
                         placeholder={t(field.name)}
-                        onChange={hanldeChangeInput}
+                        onChange={handleChangeInput}
                         ref={register({
                           required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
                           pattern: {
@@ -139,12 +193,20 @@ const SignUpFormUI = (props) => {
                     )
                   ))
                 }
+
+                <InputPhoneNumber
+                  value={userPhoneNumber}
+                  setValue={handleChangePhoneNumber}
+                  handleIsValid={setIsValidPhoneNumber}
+                />
+
                 <Input
                   type='password'
                   name='password'
                   aria-label='password'
+                  className='form'
                   placeholder={t('PASSWORD', 'Password')}
-                  onChange={hanldeChangeInput}
+                  onChange={handleChangeInput}
                   required
                   ref={register({
                     required: isRequiredField('password') ? t('VALIDATION_ERROR_REQUIRED', 'password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
