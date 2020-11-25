@@ -30,6 +30,8 @@ import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { useTheme } from 'styled-components'
 
+const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
+
 const SignUpFormUI = (props) => {
   const {
     handleChangeInput,
@@ -170,7 +172,7 @@ const SignUpFormUI = (props) => {
             !(useChekoutFileds && validationFields.loading) ? (
               <>
                 {
-                  Object.values(validationFields.fields).map(field => field.code !== 'mobile_phone' && (
+                  Object.values(validationFields.fields).map(field => !notValidationFields.includes(field.code) && (
                     showField(field.code) && (
                       <Input
                         key={field.id}

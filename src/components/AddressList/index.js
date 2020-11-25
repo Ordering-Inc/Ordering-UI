@@ -39,7 +39,7 @@ const AddressListUI = (props) => {
     handleSetDefault,
     onClosePopover,
     popover,
-    showImage
+    isProductForm
   } = props
 
   const [, t] = useLanguage()
@@ -116,7 +116,7 @@ const AddressListUI = (props) => {
             color='primary'
             onClick={() => openAddress({})}
           >
-            {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading...') : t('ADD_ADDRESS', 'Add Address')}
+            {(orderState?.loading || actionStatus.loading) ? `${t('LOADING', 'Loading')}...` : t('ADD_ADDRESS', 'Add Address')}
           </Button>
         )
       }
@@ -157,7 +157,7 @@ const AddressListUI = (props) => {
         </AddressListUl>
       )}
 
-      {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !showImage && (
+      {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
         <WrappNotAddresses>
           <img src={theme.images?.general?.notFound} alt='Not Found' />
           <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
@@ -171,7 +171,7 @@ const AddressListUI = (props) => {
           )))
       )}
 
-      {addressList.loading && (
+      {addressList.loading && !isProductForm && (
         <AddressListUl>
           <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
         </AddressListUl>
