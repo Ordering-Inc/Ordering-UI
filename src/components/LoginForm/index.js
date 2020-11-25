@@ -176,7 +176,7 @@ const LoginFormUI = (props) => {
               type='submit'
               disabled={formState.loading}
             >
-              {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
+              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('LOGIN', 'Login')}
             </Button>
           </FormInput>
         )}

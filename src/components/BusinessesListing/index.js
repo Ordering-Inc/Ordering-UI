@@ -124,13 +124,13 @@ const BusinessesListingUI = (props) => {
         )}
         {businessesList.error && businessesList.error.length > 0 && (
           businessesList.error.map((e, i) => (
-            <ErrorMessage key={i}>ERROR: [{e?.message || e}]</ErrorMessage>
+            <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
           ))
         )}
       </BusinessList>
 
       <Modal
-        title={t('ADDRESS')}
+        title={t('ADDRESS_FORM', 'Address Form')}
         open={modals.formOpen}
         onClose={() => setModals({ ...modals, formOpen: false })}
       >
@@ -144,7 +144,7 @@ const BusinessesListingUI = (props) => {
       </Modal>
 
       <Modal
-        title={t('ADDRESSES')}
+        title={t('ADDRESSES_LIST', 'Address List')}
         open={modals.listOpen}
         onClose={() => setModals({ ...modals, listOpen: false })}
         onCancel={() => setModals({ ...modals, listOpen: false })}
@@ -156,7 +156,7 @@ const BusinessesListingUI = (props) => {
       </Modal>
 
       <Alert
-        title={t('SEARCH')}
+        title={t('SEARCH', 'Search')}
         content={alertState.content}
         acceptText={t('ACCEPT')}
         open={alertState.open}

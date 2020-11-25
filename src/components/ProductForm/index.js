@@ -336,7 +336,7 @@ const ProductOptionsUI = (props) => {
         </Modal>
       )}
       {error && error.length > 0 && error.map((e, i) => (
-        <p key={i}>Error: [{e}]</p>
+        <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
       ))}
     </ProductContainer>
   )

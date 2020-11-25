@@ -153,13 +153,13 @@ export const MessagesUI = (props) => {
   const getLevel = (level) => {
     switch (level) {
       case 0:
-        return 'Admin'
+        return t('ADMIN', 'Admin')
       case 1:
-        return 'Business'
+        return t('BUSINESS', 'Business')
       case 2:
-        return 'Driver'
+        return t('DRIVER', 'Driver')
       case 3:
-        return 'Customer'
+        return t('CUSTOMER', 'Customer')
     }
   }
 

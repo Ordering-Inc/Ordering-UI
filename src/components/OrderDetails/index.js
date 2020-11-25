@@ -64,19 +64,19 @@ const OrderDetailsUI = (props) => {
   const getOrderStatus = (s) => {
     const status = parseInt(s)
     const orderStatus = [
-      { key: 0, value: 'Pending', slug: 'PENDING', percentage: 25 },
-      { key: 1, value: 'Completed', slug: 'COMPLETED', percentage: 100 },
-      { key: 2, value: 'Rejected', slug: 'REJECTED', percentage: 0 },
-      { key: 3, value: 'Driver in business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
-      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 70 },
-      { key: 5, value: 'Rejected by business', slug: 'REJECTED_BY_BUSINESS', percentage: 0 },
-      { key: 6, value: 'Canceled by Driver', slug: 'CANCELED_BY_DRIVER', percentage: 0 },
-      { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
-      { key: 8, value: 'Accepted by driver', slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
-      { key: 9, value: 'Pick up completed by driver', slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
-      { key: 10, value: 'Pick up Failed by driver', slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 11, value: 'Delivery completed by driver', slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
-      { key: 12, value: 'Delivery Failed by driver', slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 }
+      { key: 0, value: t('PENDING', 'Pending'), slug: 'PENDING', percentage: 25 },
+      { key: 1, value: t('COMPLETED', 'Completed'), slug: 'COMPLETED', percentage: 100 },
+      { key: 2, value: t('REJECTED', 'Rejected'), slug: 'REJECTED', percentage: 0 },
+      { key: 3, value: t('DRIVER_IN_BUSINESS', 'Driver in business'), slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
+      { key: 4, value: t('PREPARATION_COMPLETED', 'Preparation Completed'), slug: 'PREPARATION_COMPLETED', percentage: 70 },
+      { key: 5, value: t('REJECTED_BY_BUSINESS', 'Rejected by business'), slug: 'REJECTED_BY_BUSINESS', percentage: 0 },
+      { key: 6, value: t('CANCELED_BY_DRIVER', 'Canceled by Driver'), slug: 'CANCELED_BY_DRIVER', percentage: 0 },
+      { key: 7, value: t('ACCEPTED_BY_BUSINESS', 'Accepted by business'), slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
+      { key: 8, value: t('ACCEPTED_BY_DRIVER', 'Accepted by driver'), slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
+      { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'), slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
+      { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', 'Pick up Failed by driver'), slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
+      { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver'), slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
+      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver'), slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 }
     ]
 
     const objectStatus = orderStatus.find((o) => o.key === status)
@@ -315,12 +315,21 @@ const OrderDetailsUI = (props) => {
         />
       )}
       {(openMessages.driver || openMessages.business) && (
-        <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })} padding='0' width='70%'>
+        <Modal
+          open={openMessages.driver || openMessages.business}
+          onClose={() => setOpenMessages({ driver: false, business: false })}
+          padding='0'
+          width='70%'
+        >
           <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
         </Modal>
       )}
       {openReview && (
-        <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
+        <Modal
+          open={openReview}
+          onClose={() => setOpenReview(false)}
+          title={order ? `${t('WRITE_A_REVIEW', 'Write a Review')} #${order?.id}` : t('LOADING', 'Loading...')}
+        >
           <ReviewOrder order={order} />
         </Modal>
       )}
