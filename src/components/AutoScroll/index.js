@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import IosArrowForward from '@meronex/icons/ios/IosArrowForward'
 import IosArrowBack from '@meronex/icons/ios/IosArrowBack'
@@ -6,21 +6,20 @@ import { DivContainer } from './styles'
 
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, categories, container, modal, loading }) => {
+export const AutoScroll = ({ children, categories, container, modal }) => {
   const { width } = useWindowSize()
   const [categoriesElement, setCategoriesElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
   const [theme] = useTheme()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const containerElementListener = document?.getElementById(container)
       ?.addEventListener('scroll', handleScroll)
     const containerElement = document?.getElementById(container)
     const element = document?.getElementById(categories)
-    if (!loading) {
-      setCategoriesElement(element)
-      setContainerElement(containerElement)
-    }
+    setCategoriesElement(element)
+    setContainerElement(containerElement)
+
     return () => {
       document.removeEventListener(containerElementListener)
     }
@@ -28,7 +27,7 @@ export const AutoScroll = ({ children, categories, container, modal, loading }) 
 
   useEffect(() => {
     handleScroll()
-  }, [containerElement?.scrollLeft, categoriesElement?.scrollLeft, width, theme?.rtl])
+  })
 
   const handleScroll = () => {
     const botonRight = document.getElementById('right-autoscroll')

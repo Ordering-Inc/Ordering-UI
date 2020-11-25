@@ -102,7 +102,7 @@ const AddressFormUI = (props) => {
 
   return (
     <div className='address-form'>
-      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='new-off'>
+      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         {addressState?.address?.location && (
           <WrapperMap>
             <GoogleMapsMap
@@ -126,7 +126,7 @@ const AddressFormUI = (props) => {
               childRef={register({
                 required: isRequiredField('address') ? 'Address is required' : null
               })}
-              autoComplete='new-off'
+              autoComplete='off'
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
@@ -144,7 +144,7 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
-          autoComplete='new-off'
+          autoComplete='off'
         />
         <Input
           className='zipcode'
@@ -153,7 +153,7 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
-          autoComplete='new-off'
+          autoComplete='off'
         />
         <TextArea
           name='address_notes'
@@ -162,7 +162,7 @@ const AddressFormUI = (props) => {
           ref={register}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
           onChange={hanldeChangeInput}
-          autoComplete='new-off'
+          autoComplete='off'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>

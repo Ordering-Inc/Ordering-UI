@@ -103,9 +103,23 @@ const UserProfileFormUI = (props) => {
 
   const handleChangePhoneNumber = (number, isValid) => {
     setUserPhoneNumber(number)
+
+    let phoneNumberParser = null
+    let phoneNumber = {
+      country_phone_code: {
+        name: 'country_phone_code',
+        value: ''
+      },
+      cellphone: {
+        name: 'cellphone',
+        value: ''
+      }
+    }
     if (isValid) {
-      const phoneNumberParser = parsePhoneNumber(number)
-      const phoneNumber = {
+      phoneNumberParser = parsePhoneNumber(number)
+    }
+    if (phoneNumberParser) {
+      phoneNumber = {
         country_phone_code: {
           name: 'country_phone_code',
           value: phoneNumberParser.countryCallingCode
@@ -115,8 +129,8 @@ const UserProfileFormUI = (props) => {
           value: phoneNumberParser.nationalNumber
         }
       }
-      handleChangeInput(phoneNumber, true)
     }
+    handleChangeInput(phoneNumber, true)
   }
 
   const setUserCellPhone = () => {

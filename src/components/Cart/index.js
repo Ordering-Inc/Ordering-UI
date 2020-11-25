@@ -139,10 +139,10 @@ const CartUI = (props) => {
               <tbody>
                 <tr>
                   <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                  <td>{parsePrice((cart?.subtotal) || 0)}</td>
+                  <td>{parsePrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{cart.business.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'tax')} ({parseNumber(cart?.business?.tax)}%)</td>
+                  <td>{cart.business.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
                   <td>{parsePrice(cart?.tax || 0)}</td>
                 </tr>
                 {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
