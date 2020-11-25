@@ -172,6 +172,7 @@ const BusinessProductsListingUI = (props) => {
                     onSearch={handleChangeSearch}
                     search={searchValue}
                     placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                    lazyLoad={businessState?.business?.lazy_load_products_recommended}
                   />
                   <Select
                     notAsync

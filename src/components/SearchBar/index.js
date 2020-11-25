@@ -6,19 +6,21 @@ import {
   BusinessSearch
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder }) => {
+export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
   let timeout = null
 
   const el = useRef()
-
   const onChangeSearch = e => {
     if (e.keyCode === 13) return
 
-    clearTimeout(timeout)
-
-    timeout = setTimeout(function () {
+    if (!lazyLoad) {
       onSearch(e.target.value)
-    }, 1000)
+    } else {
+      clearTimeout(timeout)
+      timeout = setTimeout(function () {
+        onSearch(e.target.value)
+      }, 750)
+    }
   }
 
   useEffect(() => {
