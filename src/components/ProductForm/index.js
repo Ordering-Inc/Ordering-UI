@@ -226,7 +226,7 @@ const ProductOptionsUI = (props) => {
                 )
               }
 
-              {productCart && !isSoldOut && maxProductQuantity && auth && orderState.options?.address_id && (
+              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                 <Button
                   className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                   color='primary'
@@ -234,7 +234,7 @@ const ProductOptionsUI = (props) => {
                   disabled={orderState.loading}
                 >
                   {orderState.loading ? (
-                    <span>{t('LOADING', 'Loading...')}</span>
+                    <span>{t('LOADING', 'Loading')}</span>
                   ) : (
                     <span>
                       {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
@@ -251,22 +251,22 @@ const ProductOptionsUI = (props) => {
                     color='primary'
                     disabled
                   >
-                    {t('LOADING', 'Loading...')}
+                    {t('LOADING', 'Loading')}
                   </Button>
                 ) : (
-                  <AddressList addressList={user.addresses} showImage />
+                  <AddressList addressList={user.addresses} isProductForm />
                 )
               )}
 
-              {(!auth || isSoldOut || maxProductQuantity === 0) && (
+              {(!auth || isSoldOut || maxProductQuantity <= 0) && (
                 <Button
-                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''}`}
+                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
                   color='primary'
                   outline
-                  disabled={isSoldOut || maxProductQuantity === 0}
+                  disabled={isSoldOut || maxProductQuantity <= 0}
                   onClick={() => setModalIsOpen(true)}
                 >
-                  {isSoldOut || maxProductQuantity === 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
+                  {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
                 </Button>
               )}
             </ProductActions>

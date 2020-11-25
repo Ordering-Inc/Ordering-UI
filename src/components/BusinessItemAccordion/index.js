@@ -68,12 +68,12 @@ export const BusinessItemAccordion = (props) => {
 
   const handleCloseCartPopover = () => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
-    if (cartsLength > 1) {
+    if (cartsLength > 1 && !isCheckout) {
       activeAccordion(false)
     }
   }
 
-  const handlecartProductUpdated = (product, cart) => {
+  const handleCartProductUpdated = (product, cart) => {
     setCartProductUpdated(cart?.uuid)
   }
 
@@ -94,10 +94,10 @@ export const BusinessItemAccordion = (props) => {
 
   useEffect(() => {
     events.on('cart_popover_closed', handleCloseCartPopover)
-    events.on('cart_product_updated', handlecartProductUpdated)
+    events.on('cart_product_updated', handleCartProductUpdated)
     return () => {
       events.off('cart_popover_closed', handleCloseCartPopover)
-      events.off('cart_product_updated', handlecartProductUpdated)
+      events.off('cart_product_updated', handleCartProductUpdated)
     }
   }, [])
 

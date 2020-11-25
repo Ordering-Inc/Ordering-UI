@@ -102,8 +102,6 @@ export const ProductInfo = styled.div`
     margin-top: 0px;
 
     h1 {
-      text-align: left;
-
       ${props => props.theme?.rtl && css`
         text-align: right;
       `}
