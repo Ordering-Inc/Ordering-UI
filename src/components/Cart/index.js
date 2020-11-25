@@ -137,7 +137,6 @@ const CartUI = (props) => {
           <OrderBill>
             <table>
               <tbody>
-
                 <tr>
                   <td>{t('SUBTOTAL', 'Subtotal')}</td>
                   <td>{parsePrice((cart?.subtotal) || 0)}</td>
@@ -146,7 +145,6 @@ const CartUI = (props) => {
                   <td>{cart.business.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'tax')} ({parseNumber(cart?.business?.tax)}%)</td>
                   <td>{parsePrice(cart?.tax || 0)}</td>
                 </tr>
-
                 {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                   <tr>
                     <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
