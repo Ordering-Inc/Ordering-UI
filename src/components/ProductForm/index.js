@@ -234,7 +234,7 @@ const ProductOptionsUI = (props) => {
                   disabled={orderState.loading}
                 >
                   {orderState.loading ? (
-                    <span>{`${t('LOADING', 'Loading')}...`}</span>
+                    <span>{t('LOADING', 'Loading')}</span>
                   ) : (
                     <span>
                       {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
@@ -251,7 +251,7 @@ const ProductOptionsUI = (props) => {
                     color='primary'
                     disabled
                   >
-                    {`${t('LOADING', 'Loading')}...`}
+                    {t('LOADING', 'Loading')}
                   </Button>
                 ) : (
                   <AddressList addressList={user.addresses} isProductForm />

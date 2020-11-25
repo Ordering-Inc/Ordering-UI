@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -31,7 +30,8 @@ const CartUI = (props) => {
     removeProduct,
     onClickCheckout,
     showCoupon,
-    validationFields
+    validationFields,
+    isCheckout
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -43,9 +43,6 @@ const CartUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const windowSize = useWindowSize()
-  const location = useLocation()
-
-  const isCheckout = location.pathname === `/checkout/${cart?.uuid}`
 
   const momentFormatted = !orderState?.option?.moment ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
@@ -67,6 +64,7 @@ const CartUI = (props) => {
 
   const handleClickCheckout = () => {
     events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+    events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
   }
 

@@ -242,6 +242,7 @@ const CheckoutUI = (props) => {
             <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
             <Cart
               cart={cart}
+              isCheckout
               isProducts={cart?.products?.length || 0}
               showCoupon={validationFields?.fields?.coupon?.enabled}
             />
