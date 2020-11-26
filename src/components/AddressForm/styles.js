@@ -201,3 +201,11 @@ export const WrapperMap = styled.div`
     border-radius: 15px;
   }
 `
+
+export const ShowMap = styled.p`
+  text-align: center;
+  color: ${props => props.theme.colors.primary};
+  width: 100%;
+  font-weight: 600;
+  cursor: pointer
+`
