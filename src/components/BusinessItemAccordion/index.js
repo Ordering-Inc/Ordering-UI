@@ -139,7 +139,7 @@ export const BusinessItemAccordion = (props) => {
 
         {isClosed && (
           <BusinessTotal className='closed'>
-            <p>{t('CLOSED', 'Cloed')} {moment}</p>
+            <p>{t('CLOSED', 'Closed')} {moment}</p>
           </BusinessTotal>
         )}
 

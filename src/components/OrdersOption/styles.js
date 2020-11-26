@@ -6,6 +6,7 @@ export const OptionTitle = styled.div`
   padding: 0 15px;
 
   h1{
+    text-transform: capitalize;
     font-size: 18px;
     margin: 18px 0;
   }

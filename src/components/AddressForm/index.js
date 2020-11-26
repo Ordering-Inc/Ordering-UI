@@ -79,7 +79,7 @@ const AddressFormUI = (props) => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR')]
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
   }, [formState])
@@ -119,12 +119,12 @@ const AddressFormUI = (props) => {
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               name='address'
-              placeholder={t('ADDRESS', 'Addres')}
+              placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
               defaultValue={formState.changes?.address || addressState.address?.address}
               childRef={register({
-                required: isRequiredField('address') ? 'Address is required' : null
+                required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
               })}
               autoComplete='off'
             />
@@ -180,16 +180,16 @@ const AddressFormUI = (props) => {
           </Button>
         </AddressTagSection>
         <FormActions>
-          <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>Cancel</Button>
+          <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
           <Button type='submit' disabled={formState.loading} color='primary'>
-            {addressState.address?.id ? 'Update' : 'Add'}
+            {addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
           </Button>
         </FormActions>
       </FormControl>
       <Alert
-        title={t('ADDRESS')}
+        title={t('ADDRESS', 'Address')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}

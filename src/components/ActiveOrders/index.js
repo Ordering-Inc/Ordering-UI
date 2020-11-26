@@ -42,7 +42,7 @@ export const ActiveOrders = (props) => {
                 </Logo>
                 <BusinessInformation>
                   <h2>{order.business.name}</h2>
-                  <p>Order No. {order.id}</p>
+                  <p>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
                   <p>{order.created_at}</p>
                 </BusinessInformation>
                 <Price>
@@ -50,7 +50,7 @@ export const ActiveOrders = (props) => {
                     {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
                   </h2>
                   {order.status === 0 && (
-                    <p>{t('ORDER_PENDING', 'pending')}</p>
+                    <p>{t('PENDING_ORDER', 'Pending order')}</p>
                   )}
                 </Price>
               </Content>
@@ -70,7 +70,7 @@ export const ActiveOrders = (props) => {
                 outline
                 onClick={loadMoreOrders}
               >
-                Load more orders
+                {t('LOAD_MORE_ORDERS', 'Load more orders')}
               </Button>
             </Card>
           )}

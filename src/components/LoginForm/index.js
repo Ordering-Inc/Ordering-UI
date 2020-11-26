@@ -60,7 +60,7 @@ const LoginFormUI = (props) => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR')]
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
   }, [formState])
@@ -126,12 +126,12 @@ const LoginFormUI = (props) => {
                 type='email'
                 name='email'
                 aria-label='email'
-                placeholder={t('EMAIL')}
+                placeholder={t('EMAIL', 'Email')}
                 ref={register({
-                  required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+                  required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+                    message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
                   }
                 })}
                 onChange={(e) => hanldeChangeInput(e)}
@@ -145,7 +145,7 @@ const LoginFormUI = (props) => {
                 aria-label='cellphone'
                 placeholder='Cellphone'
                 ref={register({
-                  required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+                  required: t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
                 })}
                 onChange={(e) => hanldeChangeInput(e)}
                 autoComplete='off'
@@ -155,12 +155,12 @@ const LoginFormUI = (props) => {
               type='password'
               name='password'
               aria-label='password'
-              placeholder={t('PASSWORD')}
+              placeholder={t('PASSWORD', 'Password')}
               ref={register({
-                required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
+                required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
                 minLength: {
                   value: 5,
-                  message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.')
+                  message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.')
                     .replace('_attribute_', t('PASSWORD', 'Password'))
                     .replace('_min_', 8)
                 }
@@ -176,7 +176,7 @@ const LoginFormUI = (props) => {
               type='submit'
               disabled={formState.loading}
             >
-              {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
+              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('LOGIN', 'Login')}
             </Button>
           </FormInput>
         )}
@@ -198,9 +198,9 @@ const LoginFormUI = (props) => {
         </SocialButtons>
       </FormSide>
       <Alert
-        title={t('LOGIN')}
+        title={t('LOGIN', 'Login')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}

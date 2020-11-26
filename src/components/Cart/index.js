@@ -201,7 +201,7 @@ const CartUI = (props) => {
               {cart?.subtotal >= cart?.minimum ? (
                 !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
               ) : (
-                t('MINIMUN_PURCHASE', `Minimum ${parsePrice(cart?.minimum)}`)
+                `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
               )}
             </Button>
           </CheckoutAction>

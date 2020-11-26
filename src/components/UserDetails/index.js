@@ -55,14 +55,14 @@ const UserDetailsUI = (props) => {
     ) {
       setAlertState({
         open: true,
-        content: [t('ERROR_PHONE_NUMBER', 'The Phone Number field is required.')]
+        content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.')]
       })
       return
     }
     if (!isPhoneNumberValid) {
       setAlertState({
         open: true,
-        content: [t('INVALID_PHONE_NUMBER', 'Invalid phone number')]
+        content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
       })
       return
     }
@@ -170,7 +170,7 @@ const UserDetailsUI = (props) => {
     if (Object.keys(errors).length > 0) {
       const content = Object.values(errors).map(error => error.message)
       if (!isValidPhoneNumber) {
-        content.push(t('INVALID_PHONE_NUMBER', 'The Phone Number field is invalid.'))
+        content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid.'))
       }
       setAlertState({
         open: true,
@@ -183,7 +183,7 @@ const UserDetailsUI = (props) => {
     if ((!formState.loading && formState.result?.error)) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR')]
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
   }, [formState.loading])
@@ -229,14 +229,14 @@ const UserDetailsUI = (props) => {
                           name={field.code}
                           className='form'
                           disabled={!isEdit}
-                          placeholder={t(field.name)}
+                          placeholder={t(field.code.toUpperCase(), field.name)}
                           defaultValue={user[field.code]}
                           onChange={handleChangeInput}
                           ref={register({
-                            required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
+                            required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
                             pattern: {
                               value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                              message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+                              message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
                             }
                           })}
                           autoComplete='off'
@@ -253,10 +253,10 @@ const UserDetailsUI = (props) => {
                     placeholder={t('FRONT_VISUALS_PASSWORD')}
                     onChange={handleChangeInput}
                     ref={register({
-                      required: isRequiredField('password') ? t('VALIDATION_ERROR_REQUIRED', 'password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                      required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')) : null,
                       minLength: {
                         value: 5,
-                        message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                        message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
                       }
                     })}
                   />
@@ -297,9 +297,9 @@ const UserDetailsUI = (props) => {
         </Container>
       )}
       <Alert
-        title={t('PROFILE', 'profile')}
+        title={t('PROFILE', 'Profile')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}

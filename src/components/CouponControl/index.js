@@ -36,7 +36,7 @@ const CouponControlUI = (props) => {
     <CouponContainer>
       {couponDefault ? (
         <Button onClick={() => onRemoveCoupon()}>
-          {t('REMOVE', 'Remove')} {couponDefault} {t('COUPON', 'coupon')}
+          {t('REMOVE_COUPON', 'Remove Coupon')} {couponDefault}
         </Button>
       ) : (
         <>

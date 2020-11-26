@@ -23,7 +23,7 @@ const ReviewOrderUI = (props) => {
       setAlertState({
         open: true,
         success: false,
-        content: formState.result?.result || [t('ERROR')]
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {
@@ -118,9 +118,9 @@ const ReviewOrderUI = (props) => {
         <Button color='primary' type='submit'>{t('SEND_REVIEW', 'Send a Review')}</Button>
       </Send>
       <Alert
-        title={t('ORDER REVIEW')}
+        title={t('ORDER_REVIEW', 'Order Review')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
