@@ -237,7 +237,7 @@ const ProductOptionsUI = (props) => {
                     <span>{t('LOADING', 'Loading')}</span>
                   ) : (
                     <span>
-                      {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
+                      {editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')}
                     </span>
                   )}
                   <span>{productCart.total && parsePrice(productCart.total)}</span>

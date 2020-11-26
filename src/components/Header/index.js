@@ -113,7 +113,7 @@ export const Header = (props) => {
               {
                 !auth && windowSize.width > 870 && (
                   <>
-                    <MenuLink onClick={() => handleGoToPage({ page: 'signin' })}>{t('LOGIN', 'Login')}</MenuLink>
+                    <MenuLink onClick={() => handleGoToPage({ page: 'signin' })}>{t('SIGN_IN', 'Sign in')}</MenuLink>
                     <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1}>{t('SIGN_UP', 'Sign up')}</MenuLink>
                   </>
                 )

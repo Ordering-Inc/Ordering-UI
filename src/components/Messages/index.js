@@ -250,7 +250,7 @@ export const MessagesUI = (props) => {
                 <BubbleConsole>
                   {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
                   <strong>{parseDate(order.created_at)}</strong> {' '}
-                  {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
+                  {t('VIA', 'Via')} <strong>{order.app_id}</strong>{' '}
                   <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
                 </BubbleConsole>
               </MessageConsole>
@@ -274,7 +274,7 @@ export const MessagesUI = (props) => {
                       ) : (
                         <BubbleConsole>
                           <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                          {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                          {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
                           {message.comment && (<><br /> {message.comment.length}</>)}
                           <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                         </BubbleConsole>
@@ -383,16 +383,16 @@ export const MessagesUI = (props) => {
               )
                 : (
                   <span>
-                    {t('SEND', 'send')}
+                    {t('SEND', 'Send')}
                   </span>)}
             </Button>
           </WrapperSendMessageButton>
         </Send>
       </SendForm>
       <Alert
-        title={t('ERROR', 'error')}
+        title={t('ERROR', 'Error')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}

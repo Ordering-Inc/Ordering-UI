@@ -70,7 +70,7 @@ const OrderDetailsUI = (props) => {
       { key: 3, value: t('DRIVER_IN_BUSINESS', 'Driver in business'), slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
       { key: 4, value: t('PREPARATION_COMPLETED', 'Preparation Completed'), slug: 'PREPARATION_COMPLETED', percentage: 70 },
       { key: 5, value: t('REJECTED_BY_BUSINESS', 'Rejected by business'), slug: 'REJECTED_BY_BUSINESS', percentage: 0 },
-      { key: 6, value: t('CANCELED_BY_DRIVER', 'Canceled by Driver'), slug: 'CANCELED_BY_DRIVER', percentage: 0 },
+      { key: 6, value: t('REJECTED_BY_DRIVER', 'Rejected by Driver'), slug: 'REJECTED_BY_DRIVER', percentage: 0 },
       { key: 7, value: t('ACCEPTED_BY_BUSINESS', 'Accepted by business'), slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
       { key: 8, value: t('ACCEPTED_BY_DRIVER', 'Accepted by driver'), slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
       { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'), slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
@@ -104,7 +104,7 @@ const OrderDetailsUI = (props) => {
             <Header businessHeader={header?.result?.header}>
               <HeaderInfo className='order-header'>
                 <HeaderText column>
-                  <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
+                  <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
                   <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
                 </HeaderText>
               </HeaderInfo>
@@ -229,7 +229,7 @@ const OrderDetailsUI = (props) => {
                     <td>{parsePrice(order?.driver_tip)}</td>
                   </tr>
                   <tr>
-                    <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
+                    <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
                     <td>{parsePrice(order?.serviceFee || 0)}</td>
                   </tr>
                   {order?.discount > 0 && (
@@ -310,7 +310,7 @@ const OrderDetailsUI = (props) => {
       {!loading && !order && (
         <NotFoundSource
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
-          btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
+          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
           onClickButton={handleOrderRedirect}
         />
       )}

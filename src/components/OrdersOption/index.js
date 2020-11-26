@@ -51,7 +51,7 @@ const OrdersOptionUI = (props) => {
         <h1>
           {activeOrders
             ? t('ACTIVE_ORDERS', 'Active Orders')
-            : t('ORDERS_PAST', 'Previous Orders')}
+            : t('PREVIOUS_ORDERS', 'Previous Orders')}
         </h1>
       </OptionTitle>
 
