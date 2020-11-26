@@ -30,6 +30,7 @@ export const UserDetailsContainer = styled.div`
 export const BusinessDetailsContainer = styled(UserDetailsContainer)`
   div {
     h1 {
+      text-transform: capitalize;
       margin: 0px;
       font-size: 24px;
     }

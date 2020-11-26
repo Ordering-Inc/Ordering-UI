@@ -66,7 +66,7 @@ const AddressDetailsUI = (props) => {
       </WrappMap>
 
       <Modal
-        title={t('ADDRESS')}
+        title={t('ADDRESS', 'Address')}
         open={modals.formOpen}
         onClose={() => setModals({ ...modals, formOpen: false })}
       >
@@ -79,7 +79,7 @@ const AddressDetailsUI = (props) => {
       </Modal>
 
       <Modal
-        title={t('ADDRESSES')}
+        title={t('ADDRESSES', 'Addresses')}
         open={modals.listOpen}
         onClose={() => setModals({ ...modals, listOpen: false })}
         onCancel={() => setModals({ ...modals, listOpen: false })}
@@ -91,9 +91,9 @@ const AddressDetailsUI = (props) => {
       </Modal>
 
       <Alert
-        title={t('SEARCH')}
+        title={t('SEARCH', 'Search')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}

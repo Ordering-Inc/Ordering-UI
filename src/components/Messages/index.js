@@ -75,7 +75,7 @@ export const MessagesUI = (props) => {
     if (!sendMessage.loading && sendMessage?.error) {
       setAlertState({
         open: true,
-        content: sendMessage.error || [t('ERROR')]
+        content: sendMessage.error || [t('ERROR', 'Error')]
       })
     }
     if (sendMessage.loading) {

@@ -50,7 +50,7 @@ export const ActiveOrders = (props) => {
                     {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
                   </h2>
                   {order.status === 0 && (
-                    <p>{t('ORDER_PENDING', 'Pending')}</p>
+                    <p>{t('PENDING_ORDER', 'Pending order')}</p>
                   )}
                 </Price>
               </Content>

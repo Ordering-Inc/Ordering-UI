@@ -79,7 +79,7 @@ const AddressFormUI = (props) => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR')]
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
   }, [formState])
@@ -119,12 +119,12 @@ const AddressFormUI = (props) => {
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               name='address'
-              placeholder={t('ADDRESS', 'Addres')}
+              placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
               defaultValue={formState.changes?.address || addressState.address?.address}
               childRef={register({
-                required: isRequiredField('address') ? t('VALIDATION_ADDRESS_ERROR_REQUIRED', 'Address is required') : null
+                required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
               })}
               autoComplete='off'
             />

@@ -81,7 +81,7 @@ const BusinessesListingUI = (props) => {
         <SearchBar
           onSearch={handleChangeSearch}
           search={searchValue}
-          placeholder={t('SEARCH_BUSINESS', 'Search Businesses')}
+          placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
         />
       </WrapperSearch>
       <BusinessList>
@@ -144,7 +144,7 @@ const BusinessesListingUI = (props) => {
       </Modal>
 
       <Modal
-        title={t('ADDRESSES_LIST', 'Address List')}
+        title={t('ADDRESSES', 'Address List')}
         open={modals.listOpen}
         onClose={() => setModals({ ...modals, listOpen: false })}
         onCancel={() => setModals({ ...modals, listOpen: false })}
@@ -158,7 +158,7 @@ const BusinessesListingUI = (props) => {
       <Alert
         title={t('SEARCH', 'Search')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}

@@ -215,11 +215,11 @@ const UserDetailsUI = (props) => {
                           name={field.code}
                           className='form'
                           disabled={!isEdit}
-                          placeholder={t(field.name)}
+                          placeholder={t(field.code.toUpperCase(), field.name)}
                           defaultValue={user[field.code]}
                           onChange={handleChangeInput}
                           ref={register({
-                            required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
+                            required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
                             pattern: {
                               value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
                               message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
@@ -283,7 +283,7 @@ const UserDetailsUI = (props) => {
         </Container>
       )}
       <Alert
-        title={t('PROFILE', 'profile')}
+        title={t('PROFILE', 'Profile')}
         content={alertState.content}
         acceptText={t('ACCEPT')}
         open={alertState.open}

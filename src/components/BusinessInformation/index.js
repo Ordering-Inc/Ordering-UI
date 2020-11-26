@@ -146,7 +146,7 @@ export const BusinessInformationUI = (props) => {
           <>
             {business.about && (
               <>
-                <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business short description')}</SectionTitle>
+                <SectionTitle>{t('BUSINESS_ABOUT', 'Business short description')}</SectionTitle>
                 <Description>{business.about}</Description>
               </>
             )}
