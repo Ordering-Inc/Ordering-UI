@@ -66,6 +66,7 @@ const CheckoutUI = (props) => {
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -76,6 +77,7 @@ const CheckoutUI = (props) => {
       open: true,
       content: Object.values(userErrors).map(error => error)
     })
+    setIsUserDetailsEdit(true)
   }
 
   const closeAlert = () => {
@@ -169,6 +171,7 @@ const CheckoutUI = (props) => {
               </div>
             ) : (
               <UserDetails
+                isUserDetailsEdit={isUserDetailsEdit}
                 cartStatus={cart?.status}
                 businessId={cart?.business_id}
                 useValidationFields
