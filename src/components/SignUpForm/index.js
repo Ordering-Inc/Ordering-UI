@@ -143,6 +143,8 @@ const SignUpFormUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
+  const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
+
   return (
     <SignUpContainer isPopup={isPopup}>
       <HeroSide>
@@ -195,12 +197,13 @@ const SignUpFormUI = (props) => {
                     )
                   ))
                 }
-
-                <InputPhoneNumber
-                  value={userPhoneNumber}
-                  setValue={handleChangePhoneNumber}
-                  handleIsValid={setIsValidPhoneNumber}
-                />
+                {!!showInputPhoneNumber() && (
+                  <InputPhoneNumber
+                    value={userPhoneNumber}
+                    setValue={handleChangePhoneNumber}
+                    handleIsValid={setIsValidPhoneNumber}
+                  />
+                )}
 
                 <Input
                   type='password'

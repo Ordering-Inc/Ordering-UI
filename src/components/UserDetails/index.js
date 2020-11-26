@@ -20,6 +20,8 @@ import { Button } from '../../styles/Buttons'
 import { Alert } from '../Confirm'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 
+const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
+
 const UserDetailsUI = (props) => {
   const {
     isEdit,
@@ -32,7 +34,8 @@ const UserDetailsUI = (props) => {
     handleButtonUpdateClick,
     isRequiredField,
     handleChangeInput,
-    onEditUserClick
+    onEditUserClick,
+    isUserDetailsEdit
   } = props
 
   const [, t] = useLanguage()
@@ -46,7 +49,10 @@ const UserDetailsUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber && validationFields?.fields?.cellphone?.required) {
+    if (!userPhoneNumber &&
+      validationFields?.fields?.cellphone?.required &&
+      validationFields?.fields?.cellphone?.enabled
+    ) {
       setAlertState({
         open: true,
         content: [t('ERROR_PHONE_NUMBER', 'The Phone Number field is required.')]
@@ -140,6 +146,14 @@ const UserDetailsUI = (props) => {
     setValidationFieldsSorted(flatArray(fieldsSorted))
   }
 
+  const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
+
+  useEffect(() => {
+    if (isUserDetailsEdit) {
+      onEditUserClick()
+    }
+  }, [isUserDetailsEdit])
+
   useEffect(() => {
     if (validationFields.fields) {
       sortValidationFields()
@@ -206,7 +220,7 @@ const UserDetailsUI = (props) => {
             <FormInput onSubmit={handleSubmit(onSubmit)}>
               {!validationFields.loading ? (
                 <>
-                  {validationFieldsSorted.map(field => field.code !== 'mobile_phone' && (
+                  {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
                     showField(field.code) && (
                       <React.Fragment key={field.id}>
                         <Input
@@ -246,14 +260,14 @@ const UserDetailsUI = (props) => {
                       }
                     })}
                   />
-
-                  <InputPhoneNumber
-                    value={userPhoneNumber}
-                    setValue={handleChangePhoneNumber}
-                    handleIsValid={setIsValidPhoneNumber}
-                    disabled={!isEdit}
-                  />
-
+                  {!!showInputPhoneNumber() && (
+                    <InputPhoneNumber
+                      value={userPhoneNumber}
+                      setValue={handleChangePhoneNumber}
+                      handleIsValid={setIsValidPhoneNumber}
+                      disabled={!isEdit}
+                    />
+                  )}
                   {Object.keys(formState.changes).length > 0 && isEdit && (
                     <Button
                       color='primary'

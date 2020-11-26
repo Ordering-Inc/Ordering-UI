@@ -38,6 +38,8 @@ import { ProfileOptions } from './ProfileOptions'
 import GiPhotoCamera from '@meronex/icons/gi/GiPhotoCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
 
+const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
+
 const UserProfileFormUI = (props) => {
   const {
     handleChangeInput,
@@ -167,6 +169,8 @@ const UserProfileFormUI = (props) => {
     setValidationFieldsSorted(flatArray(fieldsSorted))
   }
 
+  const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
+
   useEffect(() => {
     if (validationFields.fields) {
       sortValidationFields()
@@ -264,7 +268,7 @@ const UserProfileFormUI = (props) => {
               <FormInput onSubmit={handleSubmit(onSubmit)}>
                 {!(useChekoutFileds && validationFields.loading) ? (
                   <>
-                    {validationFieldsSorted.map(field => field.code !== 'mobile_phone' && (
+                    {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
                       showField(field.code) && (
                         <React.Fragment key={field.id}>
                           <Input
@@ -302,13 +306,13 @@ const UserProfileFormUI = (props) => {
                         }
                       })}
                     />
-
-                    <InputPhoneNumber
-                      value={userPhoneNumber}
-                      setValue={handleChangePhoneNumber}
-                      handleIsValid={setIsValidPhoneNumber}
-                    />
-
+                    {!!showInputPhoneNumber() && (
+                      <InputPhoneNumber
+                        value={userPhoneNumber}
+                        setValue={handleChangePhoneNumber}
+                        handleIsValid={setIsValidPhoneNumber}
+                      />
+                    )}
                     <ActionsForm>
                       <Button color='secondary' type='button' onClick={() => handleCloseForm()}>
                         {t('CANCEL', 'Cancel')}
