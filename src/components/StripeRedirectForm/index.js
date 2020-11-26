@@ -24,7 +24,7 @@ const StripeRedirectFormUI = (props) => {
   return (
     <FormRedirect onSubmit={handleSubmit(handleSubmitPaymentMethod)}>
       <FormGroup>
-        <label>{t('SELECT_PAYMETHOD', 'Select a payment method')}</label>
+        <label>{t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')}</label>
         <select
           name='type'
           ref={
@@ -33,7 +33,7 @@ const StripeRedirectFormUI = (props) => {
             })
           }
         >
-          <option value=''>{t('SELECT_PAYMETHOD', 'Select a payment method')}</option>
+          <option value=''>{t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')}</option>
           {paymethods?.length > 0 && paymethods.map((paymethod, i) => (
             <option key={i} value={paymethod.value}>{paymethod.name}</option>
           ))}
@@ -67,7 +67,7 @@ const StripeRedirectFormUI = (props) => {
           name='email'
           type='email'
           defaultValue={user.email}
-          placeholder={t('TYPE_EMAIL', 'Type an email')}
+          placeholder={t('TYPE_AN_EMAIL', 'Type an email')}
           ref={
             register({
               required: true

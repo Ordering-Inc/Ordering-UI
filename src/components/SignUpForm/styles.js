@@ -72,28 +72,6 @@ export const FormSide = styled(Side)`
   }
 `
 
-export const SignUpWith = styled.div`
-  font-size: 14px;
-
-  @media (min-width: 425px) {
-    font-size: 18px;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 14px;
-  }
-
-  @media (min-width: 992px) {
-    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
-  }
-
-  @media (min-width: 1200px) {
-    ${({ isPopup }) => isPopup && css`
-      font-size: 17px;
-    `};
-  }
-`
-
 export const FormInput = styled.form`
   width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   display: flex;

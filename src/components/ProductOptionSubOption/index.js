@@ -87,7 +87,7 @@ const ProductOptionSubOptionUI = (props) => {
       </IconControl>
       <Text>
         {suboption.name}
-        {showMessage && <span>{t('SUBOPTION_LIMIT_MAX', `Only choose max ${option.max} options`)}</span>}
+        {showMessage && <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option.max}`}</span>}
       </Text>
       {option.allow_suboption_quantity && (
         <QuantityControl>

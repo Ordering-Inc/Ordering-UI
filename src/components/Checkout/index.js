@@ -277,6 +277,12 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
+        {!cart?.valid_products && (
+          <WarningText>
+            {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+          </WarningText>
+        )}
+
         {/* {error && error?.length > 0 && (
           error.map((e, i) => (
             <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>

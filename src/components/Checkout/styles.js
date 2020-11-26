@@ -253,7 +253,7 @@ export const CartItemActions = styled.div`
 `
 
 export const WarningText = styled.p`
-  margin: 10px auto 15px;
+  margin: 10px auto;
   text-align: center;
   color: ${props => props.theme.colors.primary};
 `
