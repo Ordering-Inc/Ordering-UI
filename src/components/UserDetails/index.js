@@ -46,7 +46,10 @@ const UserDetailsUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber && validationFields?.fields?.cellphone?.required) {
+    if (!userPhoneNumber &&
+      validationFields?.fields?.cellphone?.required &&
+      validationFields?.fields?.cellphone?.enabled
+    ) {
       setAlertState({
         open: true,
         content: [t('ERROR_PHONE_NUMBER', 'The Phone Number field is required.')]
@@ -139,6 +142,8 @@ const UserDetailsUI = (props) => {
     fieldsSorted.push(validationsFieldsArray.filter(field => !fields.includes(field.code)))
     setValidationFieldsSorted(flatArray(fieldsSorted))
   }
+
+  const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
 
   useEffect(() => {
     if (validationFields.fields) {
@@ -246,14 +251,14 @@ const UserDetailsUI = (props) => {
                       }
                     })}
                   />
-
-                  <InputPhoneNumber
-                    value={userPhoneNumber}
-                    setValue={handleChangePhoneNumber}
-                    handleIsValid={setIsValidPhoneNumber}
-                    disabled={!isEdit}
-                  />
-
+                  {!!showInputPhoneNumber() && (
+                    <InputPhoneNumber
+                      value={userPhoneNumber}
+                      setValue={handleChangePhoneNumber}
+                      handleIsValid={setIsValidPhoneNumber}
+                      disabled={!isEdit}
+                    />
+                  )}
                   {Object.keys(formState.changes).length > 0 && isEdit && (
                     <Button
                       color='primary'

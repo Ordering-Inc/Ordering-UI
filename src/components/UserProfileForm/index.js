@@ -167,6 +167,8 @@ const UserProfileFormUI = (props) => {
     setValidationFieldsSorted(flatArray(fieldsSorted))
   }
 
+  const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
+
   useEffect(() => {
     if (validationFields.fields) {
       sortValidationFields()
@@ -302,13 +304,13 @@ const UserProfileFormUI = (props) => {
                         }
                       })}
                     />
-
-                    <InputPhoneNumber
-                      value={userPhoneNumber}
-                      setValue={handleChangePhoneNumber}
-                      handleIsValid={setIsValidPhoneNumber}
-                    />
-
+                    {!!showInputPhoneNumber() && (
+                      <InputPhoneNumber
+                        value={userPhoneNumber}
+                        setValue={handleChangePhoneNumber}
+                        handleIsValid={setIsValidPhoneNumber}
+                      />
+                    )}
                     <ActionsForm>
                       <Button color='secondary' type='button' onClick={() => handleCloseForm()}>
                         {t('CANCEL', 'Cancel')}
