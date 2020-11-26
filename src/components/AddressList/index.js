@@ -26,10 +26,6 @@ import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../utils'
 
-import { SpinnerLoader } from '../SpinnerLoader'
-import { useWindowSize } from '../../hooks/useWindowSize'
-import { Layer } from '../MomentContent/styles'
-
 const AddressListUI = (props) => {
   const {
     actionStatus,
@@ -44,14 +40,11 @@ const AddressListUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const { width } = useWindowSize()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddessOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
-
-  const AddressControl = document?.getElementById('address_control')?.getBoundingClientRect()
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -123,11 +116,29 @@ const AddressListUI = (props) => {
       {
         popover && addressOpen && (
           <AddressForm
+            addressesList={addressList?.addresses}
             useValidationFileds
             address={curAddress}
             onCancel={() => setAddessOpen(false)}
             onSaveAddress={handleSaveAddress}
           />
+        )
+      }
+      {
+        !popover && (
+          <Modal
+            title={t('ADDRESS', 'Address')}
+            open={!popover && addressOpen}
+            onClose={() => setAddessOpen(false)}
+          >
+            <AddressForm
+              addressesList={addressList?.addresses}
+              useValidationFileds
+              address={curAddress}
+              onCancel={() => setAddessOpen(false)}
+              onSaveAddress={handleSaveAddress}
+            />
+          </Modal>
         )
       }
 
@@ -176,35 +187,6 @@ const AddressListUI = (props) => {
           <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
         </AddressListUl>
       )}
-
-      {(actionStatus?.loading || orderState.loading) && (
-        <Layer height={AddressControl?.height && `${AddressControl?.height}px`} nobg>
-          <SpinnerLoader
-            style={{
-              top: width <= 768 ? '50%' : '40%',
-              position: width <= 768 ? 'absolute' : 'sticky',
-              height: 'auto'
-            }}
-          />
-        </Layer>
-      )}
-
-      {
-        !popover && (
-          <Modal
-            title={t('ADDRESS', 'Address')}
-            open={!popover && addressOpen}
-            onClose={() => setAddessOpen(false)}
-          >
-            <AddressForm
-              useValidationFileds
-              address={curAddress}
-              onCancel={() => setAddessOpen(false)}
-              onSaveAddress={handleSaveAddress}
-            />
-          </Modal>
-        )
-      }
 
       <Confirm
         title={t('SEARCH', 'Search')}

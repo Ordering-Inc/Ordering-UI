@@ -29,6 +29,7 @@ import { Input, TextArea } from '../../styles/Inputs'
 
 const AddressFormUI = (props) => {
   const {
+    addressesList,
     googleMapsControls,
     formState,
     addressState,
@@ -39,15 +40,25 @@ const AddressFormUI = (props) => {
     hanldeChangeInput,
     saveAddress
   } = props
+
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
-
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const onSubmit = (values) => {
-    saveAddress()
+  const onSubmit = () => {
+    const isAddressAlreadyExist = (addressesList || []).some(address => (
+      address.location.lat === formState.changes.location.lat && address.location.lng === formState.changes.location.lng
+    ))
+    if (!isAddressAlreadyExist) {
+      saveAddress()
+      return
+    }
+    setAlertState({
+      open: true,
+      content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
+    })
   }
 
   const handleAddressTag = (tag) => {
