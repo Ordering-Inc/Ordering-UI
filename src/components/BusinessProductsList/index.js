@@ -51,7 +51,7 @@ const BusinessProductsListUI = (props) => {
         !category.id && (
           <>
             {
-              featured && (
+              featured && categoryState?.products?.find(product => product.featured) && (
                 <WrapAllCategories>
                   <h3>{t('FEATURED', 'Featured')}</h3>
                   <ProductsListing>

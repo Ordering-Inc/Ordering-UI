@@ -61,6 +61,7 @@ const CheckoutUI = (props) => {
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
+  const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
@@ -241,6 +242,7 @@ const CheckoutUI = (props) => {
             <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
             <Cart
               cart={cart}
+              isCheckout
               isProducts={cart?.products?.length || 0}
               showCoupon={validationFields?.fields?.coupon?.enabled}
             />
@@ -251,10 +253,14 @@ const CheckoutUI = (props) => {
           <WrapperPlaceOrderButton>
             <Button
               color='primary'
-              disabled={!cart?.valid || !paymethodSelected || placing || errorCash}
+              disabled={!cart?.valid || !paymethodSelected || placing || errorCash || cart?.subtotal < cart?.minimum}
               onClick={() => handlePlaceOrder()}
             >
-              {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}
+              {cart?.subtotal >= cart?.minimum ? (
+                placing ? `${t('PLACING', 'Placing')}...` : t('PLACE_ORDER', 'Place Order')
+              ) : (
+                t('MINIMUN_PURCHASE', `Minimum ${parsePrice(cart?.minimum)}`)
+              )}
             </Button>
           </WrapperPlaceOrderButton>
         )}
