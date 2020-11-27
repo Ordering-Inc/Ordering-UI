@@ -336,7 +336,7 @@ export const OrderCustomer = styled.div`
     svg {
       width: 70px;
       height: 70px;
-      margin-right: 10px;
+      margin: 0 10px;
       ${props => props.theme?.rtl && css`
         margin-left: 10px;
         margin-right: 0;
@@ -348,8 +348,8 @@ export const OrderCustomer = styled.div`
 
 export const PhotoBlock = styled.img`
   border-radius: 50%;
-  width: 75px;
-  margin-right: 10px;
+  object-fit: cover;
+  margin: 0 10px;
   ${props => props.theme?.rtl && css`
     margin-left: 10px;
     margin-right: 0;
@@ -380,6 +380,19 @@ export const InfoBlock = styled.div`
   }
 `
 
+export const Map = styled.div`
+  width: 100%;
+  height: 40vh;
+  margin-bottom: 10px;
+
+  > div {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 15px;
+  }
+`
+
 export const OrderDriver = styled(OrderCustomer)`
   justify-content: space-between;
   align-items: center;
@@ -397,7 +410,7 @@ export const WrapperDriver = styled.div`
     svg {
       width: 70px;
       height: 70px;
-      margin-right: 10px;
+      margin: 0px 10px;
       ${props => props.theme?.rtl && css`
         margin-left: 10px;
         margin-right: 0;

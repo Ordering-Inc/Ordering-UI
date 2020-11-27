@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils } from 'ordering-components'
+import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils, GoogleMapsMap } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
@@ -37,6 +37,7 @@ import {
   OrderCustomer,
   PhotoBlock,
   InfoBlock,
+  Map,
   OrderDriver,
   WrapperDriver,
   OrderProducts,
@@ -50,7 +51,9 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
-    handleOrderRedirect
+    handleOrderRedirect,
+    googleMapsControls,
+    driverLocation
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
@@ -95,6 +98,18 @@ const OrderDetailsUI = (props) => {
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
   }
+
+  const locations = [
+    { ...order?.driver?.location },
+    { ...order?.business?.location },
+    { ...order?.customer?.location }
+  ]
+
+  useEffect(() => {
+    if (driverLocation) {
+      locations[0] = driverLocation
+    }
+  }, [driverLocation])
 
   return (
     <Container>
@@ -167,33 +182,45 @@ const OrderDetailsUI = (props) => {
 
             {order?.driver && (
               <>
-                <SectionTitle>
-                  {t('YOUR_DRIVER', 'Your Driver')}
-                </SectionTitle>
-                <OrderDriver>
-                  <WrapperDriver>
-                    <div className='photo'>
-                      {order?.driver?.photo ? (
-                        <PhotoBlock src={order?.driver?.photo} />
-                      ) : (
-                        <RiUser2Fill />
-                      )}
-                    </div>
-                    <InfoBlock>
-                      <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                      <span>{t('DRIVER', 'Driver')}</span>
-                    </InfoBlock>
-                  </WrapperDriver>
-                  <ActionsBlock>
-                    {order.driver && order.driver.phone &&
-                      <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                        <FiPhone />
-                      </span>}
-                    <span>
-                      <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
-                    </span>
-                  </ActionsBlock>
-                </OrderDriver>
+                {order?.driver?.location && parseInt(order?.status) === 9 && (
+                  <Map>
+                    <GoogleMapsMap
+                      apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+                      location={order?.driver?.location}
+                      locations={locations}
+                      mapControls={googleMapsControls}
+                    />
+                  </Map>
+                )}
+                <>
+                  <SectionTitle>
+                    {t('YOUR_DRIVER', 'Your Driver')}
+                  </SectionTitle>
+                  <OrderDriver>
+                    <WrapperDriver>
+                      <div className='photo'>
+                        {order?.driver?.photo ? (
+                          <PhotoBlock src={order?.driver?.photo} width='70' height='70' />
+                        ) : (
+                          <RiUser2Fill />
+                        )}
+                      </div>
+                      <InfoBlock>
+                        <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                        <span>{t('DRIVER', 'Driver')}</span>
+                      </InfoBlock>
+                    </WrapperDriver>
+                    <ActionsBlock>
+                      {order.driver && order.driver.phone &&
+                        <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                          <FiPhone />
+                        </span>}
+                      <span>
+                        <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
+                      </span>
+                    </ActionsBlock>
+                  </OrderDriver>
+                </>
               </>
             )}
 
@@ -340,6 +367,17 @@ const OrderDetailsUI = (props) => {
 export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
+    googleMapsControls: {
+      defaultZoom: 15,
+      zoomControl: true,
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        mapTypeIds: ['roadmap', 'satellite']
+      }
+    },
     UIComponent: OrderDetailsUI
   }
 
