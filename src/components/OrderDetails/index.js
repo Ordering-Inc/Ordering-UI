@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils, GoogleMapsMap } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
@@ -52,7 +52,8 @@ import { useTheme } from 'styled-components'
 const OrderDetailsUI = (props) => {
   const {
     handleOrderRedirect,
-    googleMapsControls
+    googleMapsControls,
+    driverLocation
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
@@ -103,6 +104,12 @@ const OrderDetailsUI = (props) => {
     { ...order?.business?.location },
     { ...order?.customer?.location }
   ]
+
+  useEffect(() => {
+    if (driverLocation) {
+      locations[0] = driverLocation
+    }
+  }, [driverLocation])
 
   return (
     <Container>
