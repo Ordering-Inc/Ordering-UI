@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useOrder } from 'ordering-components'
 import BsChevronDown from '@meronex/icons/bs/BsChevronDown'
+import Skeleton from 'react-loading-skeleton'
 
 import {
   Select as SelectInput,
@@ -13,11 +14,13 @@ import {
 
 export const Select = (props) => {
   const {
+    isSmall,
     placeholder,
     options,
     defaultValue,
     onChange,
-    notAsync
+    notAsync,
+    notReload
   } = props
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
@@ -71,28 +74,26 @@ export const Select = (props) => {
   }
 
   return (
-    <SelectInput
-      isHome={isHome}
-      disabled={orderState.loading}
-      onClick={handleSelectClick}
-    >
-      {
-        !selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>
-      }
-      {
-        selectedOption && (
+    orderState.loading && !notReload ? (
+      <Skeleton width={isSmall ? 68 : 134} height={34} />
+    ) : (
+      <SelectInput
+        isHome={isHome}
+        disabled={orderState.loading}
+        onClick={handleSelectClick}
+      >
+        {!selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>}
+        {selectedOption && (
           <Selected>
             <Header>
-              {!orderState.loading ? selectedOption.showOnSelected || selectedOption.content : '...'}
+              {selectedOption.showOnSelected || selectedOption.content}
             </Header>
             <Chevron>
               <BsChevronDown />
             </Chevron>
           </Selected>
-        )
-      }
-      {
-        open && options && (
+        )}
+        {open && options && (
           <Options position='right' ref={dropdownReference}>
             {
               options.map(option => (
@@ -106,8 +107,8 @@ export const Select = (props) => {
               ))
             }
           </Options>
-        )
-      }
-    </SelectInput>
+        )}
+      </SelectInput>
+    )
   )
 }

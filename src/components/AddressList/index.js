@@ -108,6 +108,7 @@ const AddressListUI = (props) => {
             className='add'
             color='primary'
             onClick={() => openAddress({})}
+            disabled={orderState?.loading || actionStatus.loading}
           >
             {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')}
           </Button>

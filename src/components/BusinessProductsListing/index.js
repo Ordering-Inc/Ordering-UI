@@ -176,6 +176,7 @@ const BusinessProductsListingUI = (props) => {
                   />
                   <Select
                     notAsync
+                    notReload
                     options={sortByOptions}
                     defaultValue={sortByValue}
                     onChange={(val) => handleChangeSortBy(val)}
