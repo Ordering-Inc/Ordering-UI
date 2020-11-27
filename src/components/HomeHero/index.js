@@ -66,7 +66,7 @@ export const HomeHero = (props) => {
             aria-label='address selection'
             type='text'
             disabled
-            placeholder={orderState?.options?.address?.address || t('TYPE_ADDRESS', 'Type address')}
+            placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
           />
         </WrapInput>
         <Button

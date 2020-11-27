@@ -172,7 +172,7 @@ export const TextInfo = styled.span`
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.04ch;
-  text-transform: none;
+  text-transform: capitalize;
   text-align: left;
   margin: 0px;
   padding: 0px;

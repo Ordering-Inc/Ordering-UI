@@ -85,7 +85,7 @@ export const PreviousOrders = (props) => {
             bgtransparent
             onClick={loadMoreOrders}
           >
-            Load more orders
+            {t('LOAD_MORE_ORDERS', 'Load more orders')}
           </Button>
         </WrappButton>
       )}

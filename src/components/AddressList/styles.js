@@ -6,7 +6,7 @@ export const AddressListContainer = styled.div`
   padding: 0px 10px;
 
   ${({ isLoading }) => isLoading && css`
-      pointer-events: none;
+    pointer-events: none;
   `}
 
   button.add {

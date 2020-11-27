@@ -203,7 +203,7 @@ export const ProductItemAccordion = (props) => {
               </ProductActionsDelete>
             </ProductActions>
             <ProductNotAvailable>
-              {t('PRODUCT_QUANTITY_ERROR', 'Not available')}
+              {t('NOT_AVAILABLE', 'Not available')}
             </ProductNotAvailable>
           </ProductError>
         )}
@@ -220,7 +220,7 @@ export const ProductItemAccordion = (props) => {
               </ProductActionsDelete>
             </ProductActions>
             <ProductNotAvailable>
-              {t('PRODUCT_QUANTITY_ERROR', 'Not available')}
+              {t('NOT_AVAILABLE', 'Not available')}
             </ProductNotAvailable>
           </ProductError>
         )}

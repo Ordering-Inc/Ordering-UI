@@ -26,10 +26,6 @@ import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../utils'
 
-import { SpinnerLoader } from '../SpinnerLoader'
-import { useWindowSize } from '../../hooks/useWindowSize'
-import { Layer } from '../MomentContent/styles'
-
 const AddressListUI = (props) => {
   const {
     actionStatus,
@@ -39,19 +35,16 @@ const AddressListUI = (props) => {
     handleSetDefault,
     onClosePopover,
     popover,
-    showImage
+    isProductForm
   } = props
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const { width } = useWindowSize()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddessOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
-
-  const AddressControl = document?.getElementById('address_control')?.getBoundingClientRect()
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -115,19 +108,38 @@ const AddressListUI = (props) => {
             className='add'
             color='primary'
             onClick={() => openAddress({})}
+            disabled={orderState?.loading || actionStatus.loading}
           >
-            {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading...') : t('ADD_ADDRESS', 'Add Address')}
+            {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')}
           </Button>
         )
       }
       {
         popover && addressOpen && (
           <AddressForm
+            addressesList={addressList?.addresses}
             useValidationFileds
             address={curAddress}
             onCancel={() => setAddessOpen(false)}
             onSaveAddress={handleSaveAddress}
           />
+        )
+      }
+      {
+        !popover && (
+          <Modal
+            title={t('ADDRESS', 'Address')}
+            open={!popover && addressOpen}
+            onClose={() => setAddessOpen(false)}
+          >
+            <AddressForm
+              addressesList={addressList?.addresses}
+              useValidationFileds
+              address={curAddress}
+              onCancel={() => setAddessOpen(false)}
+              onSaveAddress={handleSaveAddress}
+            />
+          </Modal>
         )
       }
 
@@ -157,7 +169,7 @@ const AddressListUI = (props) => {
         </AddressListUl>
       )}
 
-      {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !showImage && (
+      {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
         <WrappNotAddresses>
           <img src={theme.images?.general?.notFound} alt='Not Found' />
           <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
@@ -171,40 +183,11 @@ const AddressListUI = (props) => {
           )))
       )}
 
-      {addressList.loading && (
+      {addressList.loading && !isProductForm && (
         <AddressListUl>
           <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
         </AddressListUl>
       )}
-
-      {(actionStatus?.loading || orderState.loading) && (
-        <Layer height={AddressControl?.height && `${AddressControl?.height}px`} nobg>
-          <SpinnerLoader
-            style={{
-              top: width <= 768 ? '50%' : '40%',
-              position: width <= 768 ? 'absolute' : 'sticky',
-              height: 'auto'
-            }}
-          />
-        </Layer>
-      )}
-
-      {
-        !popover && (
-          <Modal
-            title={t('ADDRESS', 'Address')}
-            open={!popover && addressOpen}
-            onClose={() => setAddessOpen(false)}
-          >
-            <AddressForm
-              useValidationFileds
-              address={curAddress}
-              onCancel={() => setAddessOpen(false)}
-              onSaveAddress={handleSaveAddress}
-            />
-          </Modal>
-        )
-      }
 
       <Confirm
         title={t('SEARCH', 'Search')}

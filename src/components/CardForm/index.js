@@ -49,8 +49,13 @@ const CardFormUI = (props) => {
         <ErrorMessage>{error}</ErrorMessage>
       </FormRow>
       <FormActions>
-        <Button type='button' onClick={() => handleCancel()}>{t('CANCEL', 'cancel')}</Button>
-        <Button color='primary' type='submit'>{loading ? 'Loading...' : 'Add'}</Button>
+        <Button type='button' onClick={() => handleCancel()}>{t('CANCEL', 'Cancel')}</Button>
+        <Button
+          color='primary'
+          type='submit'
+        >
+          {loading ? t('LOADING', 'Loading...') : t('ADD', 'Add')}
+        </Button>
       </FormActions>
     </FormStripe>
   )

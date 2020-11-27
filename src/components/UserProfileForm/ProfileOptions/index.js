@@ -19,7 +19,7 @@ export const ProfileOptions = ({ value }) => {
       <Tabs variant='primary'>
         <Tab active={tabValue === 'My Account'}>
           <a onClick={() => handleGoToPage({ page: 'profile' })}>
-            <BsPerson /> {t('MY_ACCOUNT', 'My account')}
+            <BsPerson /> {t('MY_ACCOUNT', 'My Account')}
           </a>
         </Tab>
         <Tab active={tabValue === 'My Orders'}>

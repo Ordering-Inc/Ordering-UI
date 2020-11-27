@@ -55,7 +55,7 @@ export const PaymentOptionCash = (props) => {
     <PaymentCashContainer>
       <FormCash onSubmit={handleSubmit(() => {})}>
         <WrapperInput>
-          <label>{t('EXACT_AMMOUNT', 'Don’t have exact amount? Let us know with how much will you pay')}</label>
+          <label>{t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')}</label>
           <Input
             name='cash'
             type='number'

@@ -45,7 +45,7 @@ const CmsUI = (props) => {
       {
         (!loading && error) &&
           <NotFoundSource
-            content={t('ERROR_PAGE', 'Sorry, the selected page was not found.')}
+            content={t('ERROR_PAGE_SELECTED', 'Sorry, the selected page was not found.')}
             btnTitle={t('PAGE_REDIRECT', 'Go to pages list')}
             onClickButton={() => handleCmsRedirect()}
           />
