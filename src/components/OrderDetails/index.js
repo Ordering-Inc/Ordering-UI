@@ -98,6 +98,12 @@ const OrderDetailsUI = (props) => {
     events.emit('go_to_page', data)
   }
 
+  const locations = [
+    { ...order?.driver?.location },
+    { ...order?.business?.location },
+    { ...order?.customer?.location }
+  ]
+
   return (
     <Container>
       {order && Object.keys(order).length > 0 && (
@@ -174,6 +180,7 @@ const OrderDetailsUI = (props) => {
                     <GoogleMapsMap
                       apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
                       location={order?.driver?.location}
+                      locations={locations}
                       mapControls={googleMapsControls}
                     />
                   </Map>
