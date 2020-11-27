@@ -18,6 +18,7 @@ const LanguageSelectorUI = (props) => {
   )
   return (
     <Select
+      isSmall
       options={_languages}
       defaultValue={currentLanguage}
       onChange={(languageId) => handleChangeLanguage(languageId)}
