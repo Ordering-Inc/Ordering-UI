@@ -46,28 +46,28 @@ export const HomePage = (props) => {
         <HomeSection bgColor='#F8F8F8' column>
           <HomeTitle>
             <h2>
-              {t('STEPS_TITLE', 'Steps to place')} <span>{t('STEPS_TITLE_HIGHLIGHT', 'an order')}</span>
+              {t('STEPS_TO_PLACE', 'Steps to place')} <span>{t('STEPS_TITLE_HIGHLIGHT', 'an order')}</span>
             </h2>
           </HomeTitle>
           <StepsBlock>
             <div>
               <img src={locationSvg} alt='location' width='88' height='88' />
-              <h3>{t('STEPS_ADDRESS', 'Add Address')}</h3>
+              <h3>{t('ADD_ADDRESS', 'Add Address')}</h3>
             </div>
             <Line />
             <div>
               <img src={businessSvg} alt='business' width='88' height='88' />
-              <h3>{t('STEPS_BUSINESS', 'Select your Business')}</h3>
+              <h3>{t('SELECT_AN_BUSINESS', 'Select your Business')}</h3>
             </div>
             <Line />
             <div>
               <img src={productSvg} alt='product' width='88' height='88' />
-              <h3>{t('STEPS_PRODUCT', 'Choose your Product')}</h3>
+              <h3>{t('SELECT_PRODUCTS', 'Choose your Products')}</h3>
             </div>
             <Line />
             <div>
               <img src={deliverySvg} alt='delivery' width='88' height='88' />
-              <h3>{t('STEPS_ARRIVE', 'Your package arrives')}</h3>
+              <h3>{t('PACKAGE_ARRIVES', 'Your package arrives')}</h3>
             </div>
           </StepsBlock>
         </HomeSection>

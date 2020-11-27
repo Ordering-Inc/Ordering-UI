@@ -50,9 +50,18 @@ export const BusinessInformationUI = (props) => {
     onClose
   } = props
   const [orderState] = useOrder()
-  const [tabValue, setTabValue] = useState('General Info')
-  const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const [, t] = useLanguage()
+  const [tabValue, setTabValue] = useState('General Info')
+
+  const daysOfWeek = [
+    t('SUNDAY_ABBREVIATION', 'Sun'),
+    t('MONDAY_ABBREVIATION', 'Mon'),
+    t('TUESDAY_ABBREVIATION', 'Tues'),
+    t('WEDNESDAY_ABBREVIATION', 'Wed'),
+    t('THURSDAY_ABBREVIATION', 'Thur'),
+    t('FRIDAY_ABBREVIATION', 'Fri'),
+    t('SATURDAY_ABBREVIATION', 'Sat')
+  ]
   const [{ parsePrice, parseDistance }] = useUtils()
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
@@ -137,7 +146,7 @@ export const BusinessInformationUI = (props) => {
           <>
             {business.about && (
               <>
-                <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business short description')}</SectionTitle>
+                <SectionTitle>{t('BUSINESS_ABOUT', 'Business short description')}</SectionTitle>
                 <Description>{business.about}</Description>
               </>
             )}

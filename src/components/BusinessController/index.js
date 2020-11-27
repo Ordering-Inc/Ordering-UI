@@ -65,10 +65,10 @@ const BusinessControllerUI = (props) => {
                     </span>}
                   <div>
                     {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
-                    {!business?.open && <span>{t('PREORDER')}</span>}
+                    {!business?.open && <span>{t('PREORDER', 'PreOrder')}</span>}
                   </div>
                 </BusinessTags>
-                {!business?.open && <h1>{t('CLOSED')}</h1>}
+                {!business?.open && <h1>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>
             ) : (
               <Skeleton height={100} />

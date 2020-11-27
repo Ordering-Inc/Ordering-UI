@@ -61,10 +61,12 @@ const CheckoutUI = (props) => {
 
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
+  const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -75,6 +77,7 @@ const CheckoutUI = (props) => {
       open: true,
       content: Object.values(userErrors).map(error => error)
     })
+    setIsUserDetailsEdit(true)
   }
 
   const closeAlert = () => {
@@ -92,13 +95,13 @@ const CheckoutUI = (props) => {
     Object.values(validationFields?.fields).map(field => {
       if (field?.required && !notFields.includes(field.code)) {
         if (!user[field?.code]) {
-          errors.push(t('ERROR_FIELD', `The field ${field?.code} is required`))
+          errors.push(t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `The field ${field?.name} is required`))
         }
       }
     })
 
     if (!user?.cellphone && validationFields?.fields?.cellphone?.required) {
-      errors.push(t('ERROR_FIELD', 'The field Phone number is required'))
+      errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'))
     }
 
     if (user?.cellphone) {
@@ -107,10 +110,10 @@ const CheckoutUI = (props) => {
         phone = `+${user?.country_phone_code}${user?.cellphone}`
         const phoneNumber = parsePhoneNumber(phone)
         if (!phoneNumber.isValid()) {
-          errors.push(t('ERROR_FIELD_INVALID', 'The field Phone number is invalid.'))
+          errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'))
         }
       } else {
-        errors.push(t('ERROR_FIELD_INVALID', 'The field Phone number is invalid.'))
+        errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'))
       }
     }
 
@@ -168,6 +171,7 @@ const CheckoutUI = (props) => {
               </div>
             ) : (
               <UserDetails
+                isUserDetailsEdit={isUserDetailsEdit}
                 cartStatus={cart?.status}
                 businessId={cart?.business_id}
                 useValidationFields
@@ -194,10 +198,10 @@ const CheckoutUI = (props) => {
             <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               <div>
-                <p><strong>{t('BUSINESS_NAME', 'Name')}:</strong> {businessDetails?.business?.name}</p>
-                <p><strong>{t('BUSINESS_EMAIL', 'Email')}:</strong> {businessDetails?.business?.email}</p>
-                <p><strong>{t('BUSINESS_CELLPHONE', 'Cellphone')}:</strong> {businessDetails?.business?.cellphone}</p>
-                <p><strong>{t('BUSINESS_ADDRESS_DETAILS', 'Address')}:</strong> {businessDetails?.business?.address}</p>
+                <p><strong>{t('NAME', 'Name')}:</strong> {businessDetails?.business?.name}</p>
+                <p><strong>{t('EMAIL', 'Email')}:</strong> {businessDetails?.business?.email}</p>
+                <p><strong>{t('CELLPHONE', 'Cellphone')}:</strong> {businessDetails?.business?.cellphone}</p>
+                <p><strong>{t('ADDRESS', 'Address')}:</strong> {businessDetails?.business?.address}</p>
               </div>
             </div>
           )}
@@ -213,7 +217,7 @@ const CheckoutUI = (props) => {
 
         {!cartState.loading && cart && cart?.status !== 2 && (
           <PaymentMethodContainer>
-            <h1>{t('PAYMENT_METHOD', 'Payment Method')}</h1>
+            <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
             {businessDetails.business && (
               <PaymentOptions
                 businessId={cart?.business_id}
@@ -227,7 +231,7 @@ const CheckoutUI = (props) => {
 
         {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.driver_tip?.enabled && (
           <DriverTipContainer>
-            <h1>{t('DRIVER_TIP', 'Driver Tip')}</h1>
+            <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
             <DriverTips
               businessId={cart?.business_id}
               driverTipsOptions={DriverTipsOptions}
@@ -241,6 +245,7 @@ const CheckoutUI = (props) => {
             <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
             <Cart
               cart={cart}
+              isCheckout
               isProducts={cart?.products?.length || 0}
               showCoupon={validationFields?.fields?.coupon?.enabled}
             />
@@ -251,10 +256,14 @@ const CheckoutUI = (props) => {
           <WrapperPlaceOrderButton>
             <Button
               color='primary'
-              disabled={!cart?.valid || !paymethodSelected || placing || errorCash}
+              disabled={!cart?.valid || !paymethodSelected || placing || errorCash || cart?.subtotal < cart?.minimum}
               onClick={() => handlePlaceOrder()}
             >
-              {placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order')}
+              {cart?.subtotal >= cart?.minimum ? (
+                placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')
+              ) : (
+                `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
+              )}
             </Button>
           </WrapperPlaceOrderButton>
         )}
@@ -271,6 +280,12 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
+        {!cart?.valid_products && (
+          <WarningText>
+            {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+          </WarningText>
+        )}
+
         {/* {error && error?.length > 0 && (
           error.map((e, i) => (
             <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
@@ -280,7 +295,7 @@ const CheckoutUI = (props) => {
       <Alert
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
@@ -417,9 +432,9 @@ export const Checkout = (props) => {
                   {cart?.subtotal >= cart?.minimum ? (
                     (currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid
                       ? t('LOADING', 'Loading...')
-                      : t('PAY_CART', 'Pay order')
+                      : t('VIEW_ORDER', 'View order')
                   ) : (
-                    t('MINIMUN_PURCHASE', `Minimum ${parsePrice(cart?.minimum)}`)
+                    `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
                   )}
                 </Button>
               </CartItemActions>
@@ -430,7 +445,7 @@ export const Checkout = (props) => {
 
       {cartUuid && cartState.error && cartState.error?.length > 0 && (
         <NotFoundSource
-          content={t('ERROR_CART', 'Sorry, the selected cart was not found.')}
+          content={t('ERROR_CART_SELECTED', 'Sorry, the selected cart was not found.')}
           btnTitle={t('CHECKOUT_REDIRECT', 'Go to Checkout list')}
           onClickButton={handleCheckoutListRedirect}
         />

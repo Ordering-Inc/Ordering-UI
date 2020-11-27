@@ -172,9 +172,11 @@ const BusinessProductsListingUI = (props) => {
                     onSearch={handleChangeSearch}
                     search={searchValue}
                     placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                    lazyLoad={businessState?.business?.lazy_load_products_recommended}
                   />
                   <Select
                     notAsync
+                    notReload
                     options={sortByOptions}
                     defaultValue={sortByValue}
                     onChange={(val) => handleChangeSortBy(val)}
@@ -304,7 +306,7 @@ const BusinessProductsListingUI = (props) => {
           btnText={
             currentCart?.subtotal >= currentCart?.minimum
               ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')
-              : t('MINIMUN_PURCHASE', `Minimum ${parsePrice(currentCart?.minimum)}`)
+              : `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(currentCart?.minimum)}`
           }
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}

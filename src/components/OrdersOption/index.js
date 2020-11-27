@@ -51,7 +51,7 @@ const OrdersOptionUI = (props) => {
         <h1>
           {activeOrders
             ? t('ACTIVE_ORDERS', 'Active Orders')
-            : t('ORDERS_PAST', 'Previous Orders')}
+            : t('PREVIOUS_ORDERS', 'Previous Orders')}
         </h1>
       </OptionTitle>
 
@@ -65,7 +65,7 @@ const OrdersOptionUI = (props) => {
       )}
 
       {loading && (
-        <OrdersContainer activeOrders={activeOrders}>
+        <OrdersContainer activeOrders={activeOrders} isSkeleton>
           {activeOrders ? (
             <SkeletonOrder activeOrders={activeOrders}>
               {[...Array(3)].map((item, i) => (

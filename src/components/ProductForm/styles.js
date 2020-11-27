@@ -102,8 +102,6 @@ export const ProductInfo = styled.div`
     margin-top: 0px;
 
     h1 {
-      text-align: left;
-
       ${props => props.theme?.rtl && css`
         text-align: right;
       `}
@@ -114,6 +112,7 @@ export const ProductInfo = styled.div`
 export const ProductEdition = styled.div``
 
 export const SectionTitle = styled.h3`
+  text-transform: capitalize;
   font-size: 18px;
   padding: 15px 0px;
   margin: 0px;

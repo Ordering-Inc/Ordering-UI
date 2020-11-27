@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -30,7 +29,9 @@ const CartUI = (props) => {
     offsetDisabled,
     removeProduct,
     onClickCheckout,
-    showCoupon
+    showCoupon,
+    validationFields,
+    isCheckout
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -42,9 +43,6 @@ const CartUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const windowSize = useWindowSize()
-  const location = useLocation()
-
-  const isCheckout = location.pathname === `/checkout/${cart?.uuid}`
 
   const momentFormatted = !orderState?.option?.moment ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
@@ -66,6 +64,7 @@ const CartUI = (props) => {
 
   const handleClickCheckout = () => {
     events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+    events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
   }
 
@@ -138,32 +137,12 @@ const CartUI = (props) => {
             <table>
               <tbody>
                 <tr>
-                  {cart.business.tax_type === 1 ? (
-                    <>
-                      <td>{t('TAX_INCLUDED', 'Tax (included)')} ({parseNumber(cart?.business?.tax)}%)</td>
-                      <td>{parsePrice(cart?.tax || 0)}</td>
-                    </>
-                  ) : (
-                    <>
-                      <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                      <td>{parsePrice((cart?.subtotal - cart.tax) || 0)}</td>
-                    </>
-                  )}
-
+                  <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                  <td>{parsePrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  {cart.business.tax_type === 2 ? (
-                    <>
-                      <td>{t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
-                      <td>{parsePrice(cart?.tax || 0)}</td>
-                    </>
-                  ) : (
-                    <>
-                      <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                      <td>{parsePrice((cart?.subtotal * cart.tax) || 0)}</td>
-                    </>
-                  )}
-
+                  <td>{cart.business.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
+                  <td>{parsePrice(cart?.tax || 0)}</td>
                 </tr>
                 {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                   <tr>
@@ -195,7 +174,7 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
-            {showCoupon && (
+            {(showCoupon || validationFields?.fields?.coupon?.enabled) && (
               <CouponContainer>
                 <CouponControl
                   businessId={cart.business_id}
@@ -222,7 +201,7 @@ const CartUI = (props) => {
               {cart?.subtotal >= cart?.minimum ? (
                 !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
               ) : (
-                t('MINIMUN_PURCHASE', `Minimum ${parsePrice(cart?.minimum)}`)
+                `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
               )}
             </Button>
           </CheckoutAction>

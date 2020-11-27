@@ -43,7 +43,7 @@ const InputPhoneNumberUI = (props) => {
             disabled={disabled}
             onChange={(val) => setValue(val, isPossiblePhoneNumber(val))}
           />
-          {value && !isPossiblePhoneNumber(value) && !disabled && <ErrorMsg>{t('INVALID_PHONE_NUMBER', 'Invalid phone number')}</ErrorMsg>}
+          {value && !isPossiblePhoneNumber(value) && !disabled && <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number')}</ErrorMsg>}
         </>
       )}
     </Container>
