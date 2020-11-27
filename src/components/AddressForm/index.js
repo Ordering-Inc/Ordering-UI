@@ -21,7 +21,8 @@ import {
   AddressWrap,
   WrapAddressInput,
   AddressTagSection,
-  WrapperMap
+  WrapperMap,
+  ShowMap
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -38,13 +39,15 @@ const AddressFormUI = (props) => {
     updateChanges,
     onCancel,
     hanldeChangeInput,
-    saveAddress
+    saveAddress,
+    handleChangePosition
   } = props
 
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
+  const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const onSubmit = () => {
@@ -114,12 +117,13 @@ const AddressFormUI = (props) => {
   return (
     <div className='address-form'>
       <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-        {addressState?.address?.location && (
+        {(addressState?.address?.location || formState?.changes?.location) && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              location={{ ...addressState?.address?.location, zoom: googleMapsControls.defaultZoom }}
+              location={{ ...(addressState?.address?.location || formState?.changes?.location), zoom: googleMapsControls.defaultZoom }}
               mapControls={googleMapsControls}
+              handleChangePosition={handleChangePosition}
             />
           </WrapperMap>
         )}
@@ -148,6 +152,9 @@ const AddressFormUI = (props) => {
               IconButton={ImCompass}
             />}
         </AddressWrap>
+        {(addressState?.address?.location || formState?.changes?.location) && (
+          <ShowMap onClick={() => setToggleMap(!toggleMap)}>View map to modify the exact location</ShowMap>
+        )}
         <Input
           className='internal_number'
           name='internal_number'
