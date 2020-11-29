@@ -153,7 +153,7 @@ const AddressFormUI = (props) => {
             />}
         </AddressWrap>
         {(addressState?.address?.location || formState?.changes?.location) && (
-          <ShowMap onClick={() => setToggleMap(!toggleMap)}>View map to modify the exact location</ShowMap>
+          <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
           className='internal_number'
