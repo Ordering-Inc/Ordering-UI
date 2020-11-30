@@ -34,7 +34,7 @@ export const HomePage = (props) => {
       const { content: { error, result } } = await ordering.pages('orderingHome').get({ cancelToken: source })
       setHomeState({ ...homeState, loading: false })
       if (!error) {
-        setHomeState({ ...homeState, body: result.body, error: null })
+        setHomeState({ ...homeState, body: result.body })
       } else {
         setHomeState({ ...homeState, error: result })
       }
