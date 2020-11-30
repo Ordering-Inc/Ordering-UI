@@ -5,9 +5,7 @@ import { NotFoundSource } from '../NotFoundSource'
 import Skeleton from 'react-loading-skeleton'
 const CmsUI = (props) => {
   const {
-    loading,
-    error,
-    body,
+    cmsState,
     handleCmsRedirect
   } = props
   const [, t] = useLanguage()
@@ -15,7 +13,7 @@ const CmsUI = (props) => {
   return (
     <CmsContainer id='cms'>
       {
-        loading && (
+        cmsState.loading && (
           <SkeletonContainer>
             <SkeletonHeader>
               <Skeleton width='100%' height='100%' />
@@ -35,15 +33,15 @@ const CmsUI = (props) => {
         )
       }
       {
-        body && (
+        cmsState.body && (
           <div dangerouslySetInnerHTML={{
-            __html: body
+            __html: cmsState.body
           }}
           />
         )
       }
       {
-        (!loading && error) &&
+        (!cmsState.loading && cmsState.error) &&
           <NotFoundSource
             content={t('ERROR_PAGE_SELECTED', 'Sorry, the selected page was not found.')}
             btnTitle={t('PAGE_REDIRECT', 'Go to pages list')}
