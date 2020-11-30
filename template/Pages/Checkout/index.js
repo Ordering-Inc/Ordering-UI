@@ -65,7 +65,7 @@ export const CheckoutPage = (props) => {
       events.emit('go_to_page', { page: 'search' })
     },
     handleCheckoutListRedirect: () => {
-      events.emit('go_to_page', { page: 'checkout' })
+      events.emit('go_to_page', { page: 'checkout_list' })
     },
     handleStoreRedirect: (store) => {
       events.emit('go_to_page', { page: 'business', params: { store } })

@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { PaymentOptionStripe as PaymentOptionStripeController, useSession, useLanguage } from 'ordering-components'
+import {
+  PaymentOptionStripe as PaymentOptionStripeController,
+  useSession,
+  useLanguage
+} from 'ordering-components'
 
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
@@ -117,16 +121,16 @@ const PaymentOptionStripeUI = (props) => {
       )}
 
       <Modal
+        title='Add credit or debit card'
         className='modal-info'
         open={addCartOpen}
         onClose={() => setAddCardOpen(false)}
-        title='Add credit or debit card'
       >
         <StripeElementsForm
           businessId={props.businessId}
           publicKey={props.publicKey}
           toSave
-          // clientSecret={props.clientSecret}
+          requirements={props.clientSecret}
           onCancel={() => setAddCardOpen(false)}
           onNewCard={_handleNewCard}
         />

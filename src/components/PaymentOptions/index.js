@@ -124,15 +124,35 @@ const PaymentOptionsUI = (props) => {
       {/* Stripe */}
       <Modal
         className='modal-info'
-        open={['stripe', 'stripe_connect'].includes(paymethodSelected?.gateway) && !paymethodData.id}
+        open={paymethodSelected?.gateway === 'stripe' && !paymethodData.id}
         onClose={() => handlePaymethodClick(null)}
         title='Select a card'
       >
-        {['stripe', 'stripe_connect'].includes(paymethodSelected?.gateway) && (
+        {paymethodSelected?.gateway === 'stripe' && (
           <PaymentOptionStripe
             paymethod={paymethodSelected}
             businessId={props.businessId}
             publicKey={paymethodSelected.credentials.publishable}
+            payType={paymethodsList?.name}
+            onSelectCard={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+          />
+        )}
+      </Modal>
+
+      {/* Stripe Connect */}
+      <Modal
+        className='modal-info'
+        open={paymethodSelected?.gateway === 'stripe_connect' && !paymethodData.id}
+        onClose={() => handlePaymethodClick(null)}
+        title='Select a card'
+      >
+        {paymethodSelected?.gateway === 'stripe_connect' && (
+          <PaymentOptionStripe
+            paymethod={paymethodSelected}
+            businessId={props.businessId}
+            publicKey={paymethodSelected.credentials.stripe.publishable}
+            clientSecret={paymethodSelected.credentials.publishable}
             payType={paymethodsList?.name}
             onSelectCard={handlePaymethodDataChange}
             onCancel={() => handlePaymethodClick(null)}

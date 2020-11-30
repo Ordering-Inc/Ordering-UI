@@ -268,19 +268,19 @@ const CheckoutUI = (props) => {
           </WrapperPlaceOrderButton>
         )}
 
-        {!cart?.valid_address && (
+        {!cart?.valid_address && cart?.status !== 2 && (
           <WarningText>
             {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
           </WarningText>
         )}
 
-        {!paymethodSelected && (
+        {!paymethodSelected && cart?.status !== 2 && (
           <WarningText>
             {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
           </WarningText>
         )}
 
-        {!cart?.valid_products && (
+        {!cart?.valid_products && cart?.status !== 2 && (
           <WarningText>
             {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
           </WarningText>
@@ -361,7 +361,7 @@ export const Checkout = (props) => {
       if (result.status === 1 && result.order?.uuid) {
         handleOrderRedirect(result.order.uuid)
         setCartState({ ...cartState, loading: false })
-      } else if (result.status === 2 && result.paymethod_data.gateway === 'stripe_redirect' && query.get('payment_intent')) {
+      } else if (result.status === 2 && result.paymethod_data?.gateway === 'stripe_redirect' && query.get('payment_intent')) {
         try {
           await orderState.confirmCart(cartUuid)
           handleOrderRedirect(result.order.uuid)

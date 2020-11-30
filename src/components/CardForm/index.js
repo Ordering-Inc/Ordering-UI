@@ -53,6 +53,7 @@ const CardFormUI = (props) => {
         <Button
           color='primary'
           type='submit'
+          disabled={loading}
         >
           {loading ? t('LOADING', 'Loading...') : t('ADD', 'Add')}
         </Button>

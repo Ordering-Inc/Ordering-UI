@@ -18,6 +18,7 @@ export const ListenPageChanges = ({ children }) => {
     orders: '/profile/orders',
     order_detail: '/orders/:orderId',
     checkout: '/checkout/:cartUuid',
+    checkout_list: '/checkout',
     business: '/store/:store',
     business_slug: '/:store',
     forgot_password: '/password/forgot'
