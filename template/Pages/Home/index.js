@@ -18,9 +18,7 @@ import {
 export const HomePage = (props) => {
   const [, t] = useLanguage()
   const history = useHistory()
-  const [body, setBody] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [homeState, setHomeState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
   const requestsState = {}
 
@@ -29,22 +27,20 @@ export const HomePage = (props) => {
   }
 
   const getPage = async () => {
-    setLoading(true)
+    setHomeState({ ...homeState, loading: true })
     try {
       const source = {}
       requestsState.page = source
       const { content: { error, result } } = await ordering.pages('orderingHome').get({ cancelToken: source })
-      setLoading(false)
+      setHomeState({ ...homeState, loading: false })
       if (!error) {
-        setBody(result.body)
-        setError(null)
+        setHomeState({ ...homeState, body: result.body, error: null })
       } else {
-        setError(result)
+        setHomeState({ ...homeState, error: result })
       }
     } catch (err) {
       if (err.constructor.name !== 'Cancel') {
-        setLoading(false)
-        setError([error.message])
+        setHomeState({ ...homeState, loading: false, error: [err.message] })
       }
     }
   }
@@ -67,7 +63,7 @@ export const HomePage = (props) => {
           onFindBusiness={handlerFindBusiness}
         />
         {
-          loading && (
+          homeState.loading && (
             <SkeletonContainer>
               <SkeletonHeader>
                 <Skeleton width='100%' height='100%' />
@@ -87,15 +83,15 @@ export const HomePage = (props) => {
           )
         }
         {
-          body && (
+          homeState.body && (
             <div dangerouslySetInnerHTML={{
-              __html: body
+              __html: homeState.body
             }}
             />
           )
         }
         {
-          (!loading && error) &&
+          (!homeState.loading && homeState.error) &&
             <NotFoundSource
               content={t('ERROR_HOME', 'Ups... an error has occured')}
             />
