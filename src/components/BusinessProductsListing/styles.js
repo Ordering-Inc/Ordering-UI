@@ -22,6 +22,10 @@ export const WrapperSearch = styled.div`
 
   .search-bar {
     margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
   }
 
   div:last-child {

@@ -67,16 +67,19 @@ export const ProductInfo = styled.div`
     color: #263238;
     margin-top: 0px;
     margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 0px;
+      margin-left: 10px
+    `}
   }
 
   p {
     font-size: 14px;
     font-weight: 200;
-    text-align: left;
     margin-top: 0px;
-
     line-height: 1.5em;
     width: 100%;
+    text-align: left;
     ${props => props.theme?.rtl && css`
       text-align: right;
     `}
@@ -100,12 +103,6 @@ export const ProductInfo = styled.div`
     padding: 0px 10px;
     top: 0;
     margin-top: 0px;
-
-    h1 {
-      ${props => props.theme?.rtl && css`
-        text-align: right;
-      `}
-    }
   }
 `
 
