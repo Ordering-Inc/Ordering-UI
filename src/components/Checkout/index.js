@@ -286,11 +286,6 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
-        {/* {error && error?.length > 0 && (
-          error.map((e, i) => (
-            <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-          ))
-        )} */}
       </WrappContainer>
       <Alert
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
@@ -307,6 +302,7 @@ const CheckoutUI = (props) => {
 
 export const Checkout = (props) => {
   const {
+    errors,
     query,
     cartUuid,
     handleOrderRedirect,
@@ -326,8 +322,16 @@ export const Checkout = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const cartsWithProducts = Object.values(orderState.carts).filter(cart => cart.products.length)
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
   const handleOpenUpsellingPage = (cart) => {
     setCurrentCart(cart)
@@ -352,6 +356,15 @@ export const Checkout = (props) => {
     }
   }, [currentCart])
 
+  useEffect(() => {
+    if (errors?.length) {
+      setAlertState({
+        open: true,
+        content: errors
+      })
+    }
+  }, [errors])
+
   const getOrder = async (cartId) => {
     try {
       setCartState({ ...cartState, loading: true })
@@ -363,10 +376,19 @@ export const Checkout = (props) => {
         setCartState({ ...cartState, loading: false })
       } else if (result.status === 2 && result.paymethod_data?.gateway === 'stripe_redirect' && query.get('payment_intent')) {
         try {
-          await orderState.confirmCart(cartUuid)
+          const { error } = await orderState.confirmCart(cartUuid)
+          if (error) {
+            setAlertState({
+              open: true,
+              content: [error.message]
+            })
+          }
           handleOrderRedirect(result.order.uuid)
         } catch (error) {
-          console.log(error)
+          setAlertState({
+            open: true,
+            content: [error.message]
+          })
         }
       } else {
         const cart = Array.isArray(result) ? null : result
@@ -472,6 +494,16 @@ export const Checkout = (props) => {
           setCanOpenUpselling={setCanOpenUpselling}
         />
       )}
+
+      <Alert
+        title={t('CHECKOUT ', 'Checkout')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

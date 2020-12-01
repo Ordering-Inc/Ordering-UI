@@ -26,6 +26,12 @@ import {
 } from './styles'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
+const stripeRedirectOptions = [
+  { name: 'Bancontact', value: 'bancontact' },
+  { name: 'Alipay', value: 'alipay' },
+  { name: 'Giropay', value: 'giropay' },
+  { name: 'iDEAL', value: 'ideal' }
+]
 
 const getPayIcon = (method) => {
   switch (method) {
@@ -179,15 +185,15 @@ const PaymentOptionsUI = (props) => {
 
       {/* Stripe Redirect */}
       <Modal
+        title='Stripe Redirect'
         className='modal-info'
         open={['stripe_redirect'].includes(paymethodSelected?.gateway) && !paymethodData.type}
         onClose={() => handlePaymethodClick(null)}
-        title='Stripe Redirect'
       >
         <StripeRedirectForm
           businessId={props.businessId}
           currency={props.currency}
-          paymethods={[{ name: 'Bancontact', value: 'bancontact' }]}
+          paymethods={stripeRedirectOptions}
           handleStripeRedirect={handlePaymethodDataChange}
         />
       </Modal>
