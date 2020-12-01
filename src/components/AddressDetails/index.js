@@ -16,6 +16,7 @@ import { AddressList } from '../AddressList'
 
 const AddressDetailsUI = (props) => {
   const {
+    isCartPending,
     userAddress,
     orderType,
     googleMapsUrl
@@ -43,7 +44,7 @@ const AddressDetailsUI = (props) => {
       <Header>
         <Text>
           <h4>{userAddress}</h4>
-          {orderType === 1 &&
+          {orderType === 1 && !isCartPending &&
             <TiPencil
               onClick={() => setOpenModal(true)}
             />}

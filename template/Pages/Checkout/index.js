@@ -52,6 +52,7 @@ export const CheckoutPage = (props) => {
     actionsBeforePlace,
     query: useQuery(),
     errors,
+    clearErrors: () => setErrors([]),
     useValidationFields: true,
     validationFieldsType: 'checkout',
     onPlaceOrderClick: (data, paymethod, cart) => {

@@ -31,7 +31,8 @@ const CartUI = (props) => {
     onClickCheckout,
     showCoupon,
     validationFields,
-    isCheckout
+    isCheckout,
+    isCartPending
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -108,6 +109,7 @@ const CartUI = (props) => {
   return (
     <CartContainer className='cart'>
       <BusinessItemAccordion
+        isCartPending={isCartPending}
         currentCartUuid={currentCartUuid}
         uuid={cart?.uuid}
         isCheckout={isCheckout}
@@ -123,6 +125,7 @@ const CartUI = (props) => {
         {cart?.products?.length > 0 && cart?.products.map(product => (
           <ProductItemAccordion
             key={product.code}
+            isCartPending={isCartPending}
             isCartProduct
             product={product}
             changeQuantity={changeQuantity}
@@ -174,7 +177,7 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
-            {(showCoupon || validationFields?.fields?.coupon?.enabled) && (
+            {(showCoupon || validationFields?.fields?.coupon?.enabled) && !isCartPending && (
               <CouponContainer>
                 <CouponControl
                   businessId={cart.business_id}

@@ -129,7 +129,7 @@ const CheckoutUI = (props) => {
   return (
     <Container>
       <WrappContainer>
-        {cart?.status === 2 && (
+        {!cartState.loading && cart?.status === 2 && (
           <WarningMessage>
             <VscWarning />
             <h1>
@@ -137,7 +137,7 @@ const CheckoutUI = (props) => {
             </h1>
           </WarningMessage>
         )}
-        {cart?.status === 4 && (
+        {!cartState.loading && cart?.status === 4 && (
           <WarningMessage>
             <VscWarning />
             <h1>
@@ -153,6 +153,7 @@ const CheckoutUI = (props) => {
           </div>
         ) : (
           <AddressDetails
+            isCartPending={cart?.status === 2}
             businessId={cart?.business_id}
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
             mapConfigs={mapConfigs}
@@ -244,6 +245,7 @@ const CheckoutUI = (props) => {
           <CartContainer>
             <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
             <Cart
+              isCartPending={cart?.status === 2}
               cart={cart}
               isCheckout
               isProducts={cart?.products?.length || 0}
@@ -303,6 +305,7 @@ const CheckoutUI = (props) => {
 export const Checkout = (props) => {
   const {
     errors,
+    clearErrors,
     query,
     cartUuid,
     handleOrderRedirect,
@@ -331,6 +334,7 @@ export const Checkout = (props) => {
       open: false,
       content: []
     })
+    clearErrors()
   }
 
   const handleOpenUpsellingPage = (cart) => {
