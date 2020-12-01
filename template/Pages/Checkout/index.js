@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js/pure'
 import { useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
@@ -9,6 +9,7 @@ import { useEvent } from 'ordering-components'
 export const CheckoutPage = (props) => {
   const { cartUuid } = useParams()
   const [events] = useEvent()
+  const [errors, setErrors] = useState([])
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search)
@@ -34,7 +35,9 @@ export const CheckoutPage = (props) => {
             return_url: `${window.location.origin}/checkout/${cartUuid}`
           }
         ).then((result) => {
-          console.log(result)
+          if (result?.error) {
+            setErrors([...errors, result?.error?.message])
+          }
         })
         return true
       }
@@ -48,6 +51,8 @@ export const CheckoutPage = (props) => {
     cartUuid,
     actionsBeforePlace,
     query: useQuery(),
+    errors,
+    clearErrors: () => setErrors([]),
     useValidationFields: true,
     validationFieldsType: 'checkout',
     onPlaceOrderClick: (data, paymethod, cart) => {
@@ -65,7 +70,7 @@ export const CheckoutPage = (props) => {
       events.emit('go_to_page', { page: 'search' })
     },
     handleCheckoutListRedirect: () => {
-      events.emit('go_to_page', { page: 'checkout' })
+      events.emit('go_to_page', { page: 'checkout_list' })
     },
     handleStoreRedirect: (store) => {
       events.emit('go_to_page', { page: 'business', params: { store } })

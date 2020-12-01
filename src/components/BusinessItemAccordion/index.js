@@ -22,6 +22,7 @@ import {
 export const BusinessItemAccordion = (props) => {
   const {
     uuid,
+    isCartPending,
     currentCartUuid,
     isCheckout,
     isClosed,
@@ -158,12 +159,14 @@ export const BusinessItemAccordion = (props) => {
           </span>
           {!isClosed && !!isProducts && (
             <>
-              <span
-                ref={businessDelete}
-                onClick={() => handleClearProducts()}
-              >
-                <VscTrash color='#D81212' />
-              </span>
+              {!isCartPending && (
+                <span
+                  ref={businessDelete}
+                  onClick={() => handleClearProducts()}
+                >
+                  <VscTrash color='#D81212' />
+                </span>
+              )}
               <span>
                 <IosArrowDown className={`${setRotate}`} />
               </span>

@@ -129,7 +129,7 @@ const CheckoutUI = (props) => {
   return (
     <Container>
       <WrappContainer>
-        {cart?.status === 2 && (
+        {!cartState.loading && cart?.status === 2 && (
           <WarningMessage>
             <VscWarning />
             <h1>
@@ -137,7 +137,7 @@ const CheckoutUI = (props) => {
             </h1>
           </WarningMessage>
         )}
-        {cart?.status === 4 && (
+        {!cartState.loading && cart?.status === 4 && (
           <WarningMessage>
             <VscWarning />
             <h1>
@@ -153,6 +153,7 @@ const CheckoutUI = (props) => {
           </div>
         ) : (
           <AddressDetails
+            isCartPending={cart?.status === 2}
             businessId={cart?.business_id}
             apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
             mapConfigs={mapConfigs}
@@ -244,6 +245,7 @@ const CheckoutUI = (props) => {
           <CartContainer>
             <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
             <Cart
+              isCartPending={cart?.status === 2}
               cart={cart}
               isCheckout
               isProducts={cart?.products?.length || 0}
@@ -268,29 +270,24 @@ const CheckoutUI = (props) => {
           </WrapperPlaceOrderButton>
         )}
 
-        {!cart?.valid_address && (
+        {!cart?.valid_address && cart?.status !== 2 && (
           <WarningText>
             {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
           </WarningText>
         )}
 
-        {!paymethodSelected && (
+        {!paymethodSelected && cart?.status !== 2 && (
           <WarningText>
             {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
           </WarningText>
         )}
 
-        {!cart?.valid_products && (
+        {!cart?.valid_products && cart?.status !== 2 && (
           <WarningText>
             {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
           </WarningText>
         )}
 
-        {/* {error && error?.length > 0 && (
-          error.map((e, i) => (
-            <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-          ))
-        )} */}
       </WrappContainer>
       <Alert
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
@@ -307,6 +304,8 @@ const CheckoutUI = (props) => {
 
 export const Checkout = (props) => {
   const {
+    errors,
+    clearErrors,
     query,
     cartUuid,
     handleOrderRedirect,
@@ -326,8 +325,17 @@ export const Checkout = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const cartsWithProducts = Object.values(orderState.carts).filter(cart => cart.products.length)
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+    clearErrors()
+  }
 
   const handleOpenUpsellingPage = (cart) => {
     setCurrentCart(cart)
@@ -352,6 +360,15 @@ export const Checkout = (props) => {
     }
   }, [currentCart])
 
+  useEffect(() => {
+    if (errors?.length) {
+      setAlertState({
+        open: true,
+        content: errors
+      })
+    }
+  }, [errors])
+
   const getOrder = async (cartId) => {
     try {
       setCartState({ ...cartState, loading: true })
@@ -361,12 +378,21 @@ export const Checkout = (props) => {
       if (result.status === 1 && result.order?.uuid) {
         handleOrderRedirect(result.order.uuid)
         setCartState({ ...cartState, loading: false })
-      } else if (result.status === 2 && result.paymethod_data.gateway === 'stripe_redirect' && query.get('payment_intent')) {
+      } else if (result.status === 2 && result.paymethod_data?.gateway === 'stripe_redirect' && query.get('payment_intent')) {
         try {
-          await orderState.confirmCart(cartUuid)
+          const { error } = await orderState.confirmCart(cartUuid)
+          if (error) {
+            setAlertState({
+              open: true,
+              content: [error.message]
+            })
+          }
           handleOrderRedirect(result.order.uuid)
         } catch (error) {
-          console.log(error)
+          setAlertState({
+            open: true,
+            content: [error.message]
+          })
         }
       } else {
         const cart = Array.isArray(result) ? null : result
@@ -472,6 +498,16 @@ export const Checkout = (props) => {
           setCanOpenUpselling={setCanOpenUpselling}
         />
       )}
+
+      <Alert
+        title={t('CHECKOUT ', 'Checkout')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

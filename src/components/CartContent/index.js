@@ -41,7 +41,9 @@ export const CartContent = (props) => {
           <React.Fragment key={cart.uuid}>
             {cart.products.length > 0 && (
               <Cart
+                isCartPending={cart?.status === 2}
                 cart={cart}
+                isCheckout={window.location.pathname === `/checkout/${cart?.uuid}`}
                 currentCartUuid={currentCartUuid}
                 isProducts={cart.products.length}
                 onClickCheckout={props.onClose}

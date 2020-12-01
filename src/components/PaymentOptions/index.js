@@ -26,6 +26,12 @@ import {
 } from './styles'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
+const stripeRedirectOptions = [
+  { name: 'Bancontact', value: 'bancontact' },
+  { name: 'Alipay', value: 'alipay' },
+  { name: 'Giropay', value: 'giropay' },
+  { name: 'iDEAL', value: 'ideal' }
+]
 
 const getPayIcon = (method) => {
   switch (method) {
@@ -124,15 +130,35 @@ const PaymentOptionsUI = (props) => {
       {/* Stripe */}
       <Modal
         className='modal-info'
-        open={['stripe', 'stripe_connect'].includes(paymethodSelected?.gateway) && !paymethodData.id}
+        open={paymethodSelected?.gateway === 'stripe' && !paymethodData.id}
         onClose={() => handlePaymethodClick(null)}
         title='Select a card'
       >
-        {['stripe', 'stripe_connect'].includes(paymethodSelected?.gateway) && (
+        {paymethodSelected?.gateway === 'stripe' && (
           <PaymentOptionStripe
             paymethod={paymethodSelected}
             businessId={props.businessId}
             publicKey={paymethodSelected.credentials.publishable}
+            payType={paymethodsList?.name}
+            onSelectCard={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+          />
+        )}
+      </Modal>
+
+      {/* Stripe Connect */}
+      <Modal
+        className='modal-info'
+        open={paymethodSelected?.gateway === 'stripe_connect' && !paymethodData.id}
+        onClose={() => handlePaymethodClick(null)}
+        title='Select a card'
+      >
+        {paymethodSelected?.gateway === 'stripe_connect' && (
+          <PaymentOptionStripe
+            paymethod={paymethodSelected}
+            businessId={props.businessId}
+            publicKey={paymethodSelected.credentials.stripe.publishable}
+            clientSecret={paymethodSelected.credentials.publishable}
             payType={paymethodsList?.name}
             onSelectCard={handlePaymethodDataChange}
             onCancel={() => handlePaymethodClick(null)}
@@ -159,15 +185,15 @@ const PaymentOptionsUI = (props) => {
 
       {/* Stripe Redirect */}
       <Modal
+        title='Stripe Redirect'
         className='modal-info'
         open={['stripe_redirect'].includes(paymethodSelected?.gateway) && !paymethodData.type}
         onClose={() => handlePaymethodClick(null)}
-        title='Stripe Redirect'
       >
         <StripeRedirectForm
           businessId={props.businessId}
           currency={props.currency}
-          paymethods={[{ name: 'Bancontact', value: 'bancontact' }]}
+          paymethods={stripeRedirectOptions}
           handleStripeRedirect={handlePaymethodDataChange}
         />
       </Modal>
