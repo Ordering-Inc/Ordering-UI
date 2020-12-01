@@ -22,6 +22,12 @@ export const Container = styled.div`
     }
   }
 
+  ${props => props.theme?.rtl && css`
+      .PhoneInputCountrySelectArrow{
+          margin-right: 0.35em;
+      }
+    `}
+
   input.PhoneInputInput {
     border-radius: 30px;
     border: 1px solid #DBDCDB;

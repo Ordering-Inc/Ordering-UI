@@ -170,6 +170,9 @@ export const SideForm = styled.div`
     display: flex;
     align-items: center;
     margin: auto 0px auto 30px;
+    ${props => props.theme?.rtl && css`
+      margin: auto 30px auto 0px;
+    `}
   }
 `
 
