@@ -79,7 +79,7 @@ export const BusinessInformationUI = (props) => {
   return (
     <BusinessInformationContainer>
       <ModalIcon>
-        <MdClose onClick={() => onClose()} />
+        <MdClose onClick={() => onClose(false)} />
       </ModalIcon>
       <BusinessHeader>
         <img src={business.header} alt='business-image' />
@@ -174,9 +174,9 @@ export const BusinessInformationUI = (props) => {
               <>
                 <SectionTitle>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</SectionTitle>
                 <ScheduleSection>
-                  <ScheduleContainer id='modal-container'>
-                    <Tabs id='schedules'>
-                      <AutoScroll container='modal-container' categories='schedules' modal>
+                  <ScheduleContainer>
+                    <Tabs>
+                      <AutoScroll modal>
                         {businessSchedule.map((schedule, i) => (
                           <ScheduleBlock key={i}>
                             <h4>{daysOfWeek[i]}</h4>

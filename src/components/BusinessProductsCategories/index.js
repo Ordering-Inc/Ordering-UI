@@ -12,20 +12,35 @@ const BusinessProductsCategoriesUI = (props) => {
     categories,
     handlerClickCategory,
     categorySelected,
-    featured
+    featured,
+    openBusinessInformation
   } = props
 
+  const ProductCategories = () => {
+    return (
+      <>
+        {categories && categories.length && categories.map(category => (
+          <Tab className={`category ${category.id === 'featured' ? 'special' : ''}`} active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
+            {category.name}
+          </Tab>
+        ))}
+      </>
+    )
+  }
+
   return (
-    <CategoriesContainer id='container' featured={featured}>
+    <CategoriesContainer featured={featured}>
       {!isSkeleton ? (
-        <Tabs variant='primary' id='categories'>
-          <AutoScroll categories='categories' container='container'>
-            {categories && categories.length && categories.map(category => (
-              <Tab className={`category ${category.id === 'featured' ? 'special' : ''}`} active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
-                {category.name}
-              </Tab>
-            ))}
-          </AutoScroll>
+        <Tabs variant='primary'>
+          {openBusinessInformation ? (
+            <>
+              <ProductCategories />
+            </>
+          ) : (
+            <AutoScroll>
+              <ProductCategories />
+            </AutoScroll>
+          )}
         </Tabs>
       ) : (
         <Tabs variant='primary'>
