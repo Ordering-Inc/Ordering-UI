@@ -126,27 +126,6 @@ export const ProductComment = styled.div`
     font-weight: 300;
     margin-bottom: 5px;
   }
-  textarea {
-    font-size: 16px;
-    padding: 10px;
-    border: 1px solid #CCC;
-    outline: none;
-    color: #555;
-    resize: none;
-    border-radius: 10px;
-
-    &:focus {
-      border-color: #555;
-    }
-
-    &::placeholder,
-    &::-webkit-input-placeholder {
-      color: #CBCBCB;
-    }
-    &:-ms-input-placeholder {
-      color: #CBCBCB;
-    }
-  }
 
   @media (min-width: 577px) {
     margin-bottom: 62px;

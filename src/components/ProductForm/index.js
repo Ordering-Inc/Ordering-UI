@@ -40,6 +40,7 @@ import {
   SkuContent
 } from './styles'
 import { useTheme } from 'styled-components'
+import { TextArea } from '../../styles/Inputs'
 
 const ProductOptionsUI = (props) => {
   const {
@@ -200,7 +201,7 @@ const ProductOptionsUI = (props) => {
               }
               <ProductComment>
                 <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
-                <textarea
+                <TextArea
                   rows={4}
                   placeholder={t('SPECIAL_COMMENT', 'Special comment')}
                   defaultValue={productCart.comment}
