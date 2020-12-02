@@ -67,10 +67,6 @@ export const FormSide = styled(Side)`
   align-items: center;
   margin: auto;
 
-  img {
-    width: 200px;
-  }
-
   @media (min-width: 992px) {
     width: 45%;
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};

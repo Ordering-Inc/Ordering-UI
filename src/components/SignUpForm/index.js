@@ -18,7 +18,9 @@ import {
   FormInput,
   SocialButtons,
   TitleHeroSide,
-  RedirectLink
+  RedirectLink,
+  SkeletonWrapper,
+  SkeletonSocialWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -58,6 +60,8 @@ const SignUpFormUI = (props) => {
       token: user.session.access_token
     })
   }
+
+  console.log({ configs })
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
@@ -139,7 +143,7 @@ const SignUpFormUI = (props) => {
   }
 
   const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
-
+  console.log(Object.keys(configs).length)
   return (
     <SignUpContainer isPopup={isPopup}>
       <HeroSide>
@@ -149,7 +153,7 @@ const SignUpFormUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo sign up' />
+        <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo sign up' width='200' height='66' />
         <FormInput
           noValidate
           isPopup={isPopup}
@@ -210,8 +214,10 @@ const SignUpFormUI = (props) => {
               </>
             ) : (
               <>
-                {[...Array(3)].map((item, i) => (
-                  <Skeleton key={i} height={50} />
+                {[...Array(5)].map((item, i) => (
+                  <SkeletonWrapper key={i}>
+                    <Skeleton height={43} />
+                  </SkeletonWrapper>
                 ))}
               </>
             )
@@ -230,14 +236,20 @@ const SignUpFormUI = (props) => {
             {elementLinkToLogin}
           </RedirectLink>
         )}
-        <SocialButtons isPopup={isPopup}>
-          {configs?.facebook_id && (
-            <FacebookLoginButton
-              appId={configs?.facebook_id?.value}
-              handleSuccessFacebookLogin={handleSuccessFacebook}
-            />
-          )}
-        </SocialButtons>
+        {Object.keys(configs).length > 0 ? (
+          <SocialButtons isPopup={isPopup}>
+            {configs?.facebook_id && (
+              <FacebookLoginButton
+                appId={configs?.facebook_id?.value}
+                handleSuccessFacebookLogin={handleSuccessFacebook}
+              />
+            )}
+          </SocialButtons>
+        ) : (
+          <SkeletonSocialWrapper>
+            <Skeleton height={43} />
+          </SkeletonSocialWrapper>
+        )}
       </FormSide>
       <Alert
         title={t('SIGN_UP', 'Sign up')}
