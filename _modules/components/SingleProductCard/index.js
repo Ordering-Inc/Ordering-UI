@@ -72,12 +72,12 @@ var SingleProductCard = function SingleProductCard(props) {
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig;
   var maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory);
   return /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
-    soldOut: isSoldOut || maxProductQuantity === 0,
+    soldOut: isSoldOut || maxProductQuantity <= 0,
     onClick: function onClick() {
       return onProductClick(product);
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
-    soldOut: isSoldOut || maxProductQuantity === 0
+    soldOut: isSoldOut || maxProductQuantity <= 0
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -85,12 +85,12 @@ var SingleProductCard = function SingleProductCard(props) {
   }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, null, /*#__PURE__*/_react.default.createElement(_styles.CardLogo, {
-    soldOut: isSoldOut || maxProductQuantity === 0,
+    soldOut: isSoldOut || maxProductQuantity <= 0,
     bgimage: (0, _utils.optimizeImage)((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_200,c_limit')
   })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 75,
     width: 75
-  }), (isSoldOut || maxProductQuantity === 0) && /*#__PURE__*/_react.default.createElement(_styles.SoldOut, null, t('SOLD_OUT', 'SOLD OUT')));
+  }), (isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_styles.SoldOut, null, t('SOLD_OUT', 'SOLD OUT')));
 };
 
 exports.SingleProductCard = SingleProductCard;

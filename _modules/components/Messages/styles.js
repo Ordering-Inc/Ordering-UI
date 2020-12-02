@@ -304,7 +304,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  width: 60px;\n  height: 60px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border: 1px solid ", ";\n  border-radius: 1000px;\n  padding: 5px;\n  box-sizing: border-box;\n\n  img {\n    width: 100%;\n    height: auto;\n    border-radius: 1000px;\n    object-fit: cover;\n    border: 1px solid #F5F5F5;\n  }\n\n  img[name]{\n    border: 1px solid #D81212;\n    border-radius: 50%;\n  }\n\n  svg {\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    padding: 6px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 60px;\n  height: 60px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border: 1px solid ", ";\n  border-radius: 50%;\n  padding: 5px;\n  box-sizing: border-box;\n  overflow: hidden;\n\n  img {\n    width: 100%;\n    height: auto;\n    border-radius: 50%;\n    object-fit: cover;\n    border: 1px solid #F5F5F5;\n  }\n\n  img[name]{\n    border: 1px solid #D81212;\n    border-radius: 50%;\n  }\n\n  svg {\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    padding: 6px;\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;

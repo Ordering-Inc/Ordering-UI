@@ -5,13 +5,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapAllCategories = exports.ProductsListing = exports.ErrorMessage = exports.ProductsContainer = void 0;
+exports.WrapperNotFound = exports.WrapAllCategories = exports.ProductsListing = exports.ErrorMessage = exports.ProductsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n  height: 500px;\n  > div{\n    height: 100%;\n  }\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "]);
@@ -84,3 +94,7 @@ var WrapAllCategories = _styledComponents.default.div(_templateObject4(), functi
 });
 
 exports.WrapAllCategories = WrapAllCategories;
+
+var WrapperNotFound = _styledComponents.default.div(_templateObject6());
+
+exports.WrapperNotFound = WrapperNotFound;

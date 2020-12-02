@@ -9,8 +9,6 @@ exports.Cart = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
-
 var _orderingComponents = require("ordering-components");
 
 var _Buttons = require("../../styles/Buttons");
@@ -56,16 +54,21 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartUI = function CartUI(props) {
-  var _orderState$option, _orderState$option2, _cart$products, _cart$business, _cart$business2, _cart$business3;
+  var _orderState$option, _orderState$option2, _cart$products, _cart$business, _orderState$options, _validationFields$fie, _validationFields$fie2, _cart$business2;
 
-  var cart = props.cart,
+  var currentCartUuid = props.currentCartUuid,
+      cart = props.cart,
       clearCart = props.clearCart,
       isProducts = props.isProducts,
       changeQuantity = props.changeQuantity,
       getProductMax = props.getProductMax,
       offsetDisabled = props.offsetDisabled,
       removeProduct = props.removeProduct,
-      onClickCheckout = props.onClickCheckout;
+      onClickCheckout = props.onClickCheckout,
+      showCoupon = props.showCoupon,
+      validationFields = props.validationFields,
+      isCheckout = props.isCheckout,
+      isCartPending = props.isCartPending;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -116,8 +119,6 @@ var CartUI = function CartUI(props) {
       parseDate = _useUtils2$.parseDate;
 
   var windowSize = (0, _useWindowSize.useWindowSize)();
-  var location = (0, _reactRouterDom.useLocation)();
-  var isCheckout = location.pathname === "/checkout/".concat(cart === null || cart === void 0 ? void 0 : cart.uuid);
   var momentFormatted = !(orderState === null || orderState === void 0 ? void 0 : (_orderState$option = orderState.option) === null || _orderState$option === void 0 ? void 0 : _orderState$option.moment) ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$option2 = orderState.option) === null || _orderState$option2 === void 0 ? void 0 : _orderState$option2.moment, {
     outputFormat: 'YYYY-MM-DD HH:mm'
   });
@@ -147,6 +148,7 @@ var CartUI = function CartUI(props) {
         cartUuid: cart.uuid
       }
     });
+    events.emit('cart_popover_closed');
     onClickCheckout && onClickCheckout();
   };
 
@@ -200,6 +202,8 @@ var CartUI = function CartUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.CartContainer, {
     className: "cart"
   }, /*#__PURE__*/_react.default.createElement(_BusinessItemAccordion.BusinessItemAccordion, {
+    isCartPending: isCartPending,
+    currentCartUuid: currentCartUuid,
     uuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
     isCheckout: isCheckout,
     orderTotal: cart === null || cart === void 0 ? void 0 : cart.total,
@@ -213,6 +217,7 @@ var CartUI = function CartUI(props) {
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,
+      isCartPending: isCartPending,
       isCartProduct: true,
       product: product,
       changeQuantity: changeQuantity,
@@ -221,7 +226,7 @@ var CartUI = function CartUI(props) {
       onDeleteProduct: handleDeleteClick,
       onEditProduct: handleEditProduct
     });
-  })), (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.OrderBill, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.subtotal) || 0))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TAX', 'Tax'), " (", parseNumber(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.tax), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.tax) || 0))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.delivery_price) || 0))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip'), " (", parseNumber(cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.driver_tip) || 0))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SERVICE_FEE', 'Service Fee'), " (", parseNumber(cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.service_fee), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.service_fee) || 0))), (cart === null || cart === void 0 ? void 0 : cart.discount) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.discount) || 0))))), /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
+  })), (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.OrderBill, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.subtotal) || 0))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, cart.business.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax'), " (", parseNumber(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.tax), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.tax) || 0))), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.delivery_price))), (cart === null || cart === void 0 ? void 0 : cart.driver_tip) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip'), " (", parseNumber(cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.driver_tip))), (cart === null || cart === void 0 ? void 0 : cart.service_fee) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SERVICE_FEE', 'Service Fee'), " "), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.service_fee))), (cart === null || cart === void 0 ? void 0 : cart.discount) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, (cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 ? /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount'), " (", parseNumber(cart === null || cart === void 0 ? void 0 : cart.discount_rate), "%)") : /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.discount) || 0))))), (showCoupon || (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.coupon) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.enabled)) && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
     businessId: cart.business_id
   })), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
@@ -230,8 +235,8 @@ var CartUI = function CartUI(props) {
     onClick: function onClick() {
       return setOpenUpselling(true);
     },
-    disabled: openUpselling && !canOpenUpselling
-  }, !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    disabled: openUpselling && !canOpenUpselling || (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum)
+  }, (cart === null || cart === void 0 ? void 0 : cart.subtotal) >= (cart === null || cart === void 0 ? void 0 : cart.minimum) ? !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading') : "".concat(t('MINIMUN_PURCHASE', 'Minimum'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum))))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('PRODUCT', 'Product'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -257,7 +262,7 @@ var CartUI = function CartUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     isCartProduct: true,
     productCart: curProduct,
-    businessSlug: cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.slug,
+    businessSlug: cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug,
     businessId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.business_id,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,

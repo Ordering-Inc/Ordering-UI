@@ -24,7 +24,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 10px;\n\n  label {\n    margin-bottom: 5px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 10px;\n\n  label {\n    margin-bottom: 5px;\n  }\n\n  select {\n    padding: 7px 5px;\n    margin-top: 8px;\n    font-size: 16px;\n    border-radius: 30px;\n    border: 1px solid #DBDCDB;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;

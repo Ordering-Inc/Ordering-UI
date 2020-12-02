@@ -97,10 +97,18 @@ var AddressesPopover = function AddressesPopover(props) {
     }
   };
 
+  var handleKeyDown = function handleKeyDown(e) {
+    if (e.keyCode === 27) {
+      props.onClose && props.onClose();
+    }
+  };
+
   (0, _react.useEffect)(function () {
     window.addEventListener('mouseup', handleClickOutside);
+    window.addEventListener('keydown', handleKeyDown);
     return function () {
-      return window.removeEventListener('mouseup', handleClickOutside);
+      window.removeEventListener('mouseup', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
 
@@ -122,7 +130,8 @@ var AddressesPopover = function AddressesPopover(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
-    onClick: props.onClick
+    onClick: props.onClick,
+    isHome: props.isHome
   }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.address) === null || _orderState$options$a2 === void 0 ? void 0 : (_orderState$options$a3 = _orderState$options$a2.split(',')) === null || _orderState$options$a3 === void 0 ? void 0 : _orderState$options$a3[0]) || t('SELECT_AN_ADDRESS', 'Select an address')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "form_edit",
     ref: popperElement,

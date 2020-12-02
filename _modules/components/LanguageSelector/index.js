@@ -22,7 +22,7 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
       currentLanguage = props.currentLanguage,
       handleChangeLanguage = props.handleChangeLanguage;
 
-  var _languages = languages.loading ? [] : (_languages$languages = languages.languages) === null || _languages$languages === void 0 ? void 0 : _languages$languages.map(function (language) {
+  var _languages = (_languages$languages = languages.languages) === null || _languages$languages === void 0 ? void 0 : _languages$languages.map(function (language) {
     return {
       value: language.code,
       content: language.name,
@@ -30,7 +30,11 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     };
   });
 
+  _languages && _languages.sort(function (a, b) {
+    return a.content > b.content ? 1 : b.content > a.content ? -1 : 0;
+  });
   return /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    isSmall: true,
     options: _languages,
     defaultValue: currentLanguage,
     onChange: function onChange(languageId) {

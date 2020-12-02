@@ -21,6 +21,8 @@ var _styledComponents = require("styled-components");
 
 var _CartContent = require("../CartContent");
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -58,6 +60,12 @@ var CartPopover = function CartPopover(props) {
       orderState = _useOrder2[0];
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
+  var location = (0, _reactRouterDom.useLocation)();
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
@@ -91,6 +99,7 @@ var CartPopover = function CartPopover(props) {
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
     if (outsidePopover && outsidePopoverMenu && outsideModal) {
+      events.emit('cart_popover_closed');
       props.onClose && props.onClose();
     }
   };
@@ -104,6 +113,11 @@ var CartPopover = function CartPopover(props) {
   (0, _react.useEffect)(function () {
     props.onClose();
   }, [auth]);
+  (0, _react.useEffect)(function () {
+    if (location.pathname.includes('/checkout/')) {
+      props.onClose && props.onClose();
+    }
+  }, [location]);
 
   var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
     visibility: open ? 'visible' : 'hidden',

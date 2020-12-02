@@ -64,9 +64,11 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _order$business, _theme$images2, _theme$images2$logos, _order$business2, _order$business3, _order$business4, _getOrderStatus, _getOrderStatus2, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$products;
+  var _order$driver, _order$business, _order$customer, _header$result, _order$business2, _order$business3, _order$business4, _getOrderStatus, _getOrderStatus2, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$driver2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$products;
 
-  var handleOrderRedirect = props.handleOrderRedirect;
+  var handleOrderRedirect = props.handleOrderRedirect,
+      googleMapsControls = props.googleMapsControls,
+      driverLocation = props.driverLocation;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -100,72 +102,73 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var _props$order = props.order,
       order = _props$order.order,
       loading = _props$order.loading,
-      error = _props$order.error;
+      header = _props$order.header;
 
-  var getOrderStatus = function getOrderStatus(status) {
+  var getOrderStatus = function getOrderStatus(s) {
+    var status = parseInt(s);
     var orderStatus = [{
       key: 0,
-      value: 'Pending',
+      value: t('PENDING', 'Pending'),
       slug: 'PENDING',
       percentage: 25
     }, {
       key: 1,
-      value: 'Completed',
+      value: t('COMPLETED', 'Completed'),
       slug: 'COMPLETED',
       percentage: 100
     }, {
       key: 2,
-      value: 'Rejected',
+      value: t('REJECTED', 'Rejected'),
       slug: 'REJECTED',
       percentage: 0
     }, {
       key: 3,
-      value: 'Driver in business',
+      value: t('DRIVER_IN_BUSINESS', 'Driver in business'),
       slug: 'DRIVER_IN_BUSINESS',
       percentage: 60
     }, {
       key: 4,
-      value: 'Preparation Completed',
+      value: t('PREPARATION_COMPLETED', 'Preparation Completed'),
       slug: 'PREPARATION_COMPLETED',
       percentage: 70
     }, {
       key: 5,
-      value: 'Rejected by business',
+      value: t('REJECTED_BY_BUSINESS', 'Rejected by business'),
       slug: 'REJECTED_BY_BUSINESS',
       percentage: 0
     }, {
       key: 6,
-      value: 'Canceled by Driver',
-      slug: 'CANCELED_BY_DRIVER',
+      value: t('REJECTED_BY_DRIVER', 'Rejected by Driver'),
+      slug: 'REJECTED_BY_DRIVER',
       percentage: 0
     }, {
       key: 7,
-      value: 'Accepted by business',
+      value: t('ACCEPTED_BY_BUSINESS', 'Accepted by business'),
       slug: 'ACCEPTED_BY_BUSINESS',
       percentage: 35
     }, {
       key: 8,
-      value: 'Accepted by driver',
+      value: t('ACCEPTED_BY_DRIVER', 'Accepted by driver'),
       slug: 'ACCEPTED_BY_DRIVER',
       percentage: 45
     }, {
       key: 9,
-      value: 'Pick up completed by driver',
+      value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'),
       slug: 'PICK_UP_COMPLETED_BY_DRIVER',
       percentage: 80
     }, {
       key: 10,
-      value: 'Pick up Failed by driver',
+      value: t('PICK_UP_FAILED_BY_DRIVER', 'Pick up Failed by driver'),
       slug: 'PICK_UP_FAILED_BY_DRIVER',
       percentage: 0
     }, {
       key: 11,
-      value: 'Delivery completed by driver',
+      value: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver'),
       slug: 'DELIVERY_COMPLETED_BY_DRIVER',
       percentage: 100
     }, {
       key: 12,
-      value: 'Delivery Failed by driver',
+      value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver'),
       slug: 'DELIVERY_FAILED_BY_DRIVER',
       percentage: 0
     }];
@@ -189,20 +192,21 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     events.emit('go_to_page', data);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
-    businessHeader: order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.header
+  var locations = [_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.location), _objectSpread({}, order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location), _objectSpread({}, order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.location)];
+  (0, _react.useEffect)(function () {
+    if (driverLocation) {
+      locations[0] = driverLocation;
+    }
+  }, [driverLocation]);
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, {
+    className: "order-content"
+  }, /*#__PURE__*/_react.default.createElement(_styles.Header, {
+    businessHeader: header === null || header === void 0 ? void 0 : (_header$result = header.result) === null || _header$result === void 0 ? void 0 : _header$result.header
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, {
     className: "order-header"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    alt: "Logotype",
-    width: "200px",
-    height: "90px",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype
-  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderText, {
     column: true
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_MESSAGE', 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("h1", null, parsePrice((order === null || order === void 0 ? void 0 : order.total) || 0))))), /*#__PURE__*/_react.default.createElement(_styles.Content, {
-    className: "order-content"
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!'))))), /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, order.driver && order.driver.phone && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
@@ -215,9 +219,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         business: true
       });
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.OrderData, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", {
-    className: "uuid"
-  }, order === null || order === void 0 ? void 0 : order.uuid), /*#__PURE__*/_react.default.createElement("p", null, t('DATE_TIME_FOR_ORDER', 'Date and time for your order')), /*#__PURE__*/_react.default.createElement("p", {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.OrderData, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, t('DATE_TIME_FOR_ORDER', 'Date and time for your order')), /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
   }, order === null || order === void 0 ? void 0 : order.delivery_datetime), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
@@ -226,13 +228,20 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     alt: "status"
   })))), /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('CUSTOMER', 'Customer')), /*#__PURE__*/_react.default.createElement(_styles.OrderCustomer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "photo"
-  }, (order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
-    src: order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo
-  }) : /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name, " ", order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.lastname), /*#__PURE__*/_react.default.createElement("span", null, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.address))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('YOUR_DRIVER', 'Your Driver')), /*#__PURE__*/_react.default.createElement(_styles.OrderDriver, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriver, null, /*#__PURE__*/_react.default.createElement("div", {
+  }, (order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
+    src: order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.photo
+  }) : /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.name, " ", order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.lastname), /*#__PURE__*/_react.default.createElement("span", null, order === null || order === void 0 ? void 0 : (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.address))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.location) && parseInt(order === null || order === void 0 ? void 0 : order.status) === 9 && /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+    apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
+    location: order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.location,
+    locations: locations,
+    mapControls: googleMapsControls
+  })), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('YOUR_DRIVER', 'Your Driver')), /*#__PURE__*/_react.default.createElement(_styles.OrderDriver, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriver, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "photo"
-  }, (order === null || order === void 0 ? void 0 : (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
-    src: order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo
-  }) : /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.lastname), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER', 'Driver')))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, order.driver && order.driver.phone && /*#__PURE__*/_react.default.createElement("span", {
+  }, (order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
+    src: order === null || order === void 0 ? void 0 : (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.photo,
+    width: "70",
+    height: "70"
+  }) : /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.name, " ", order === null || order === void 0 ? void 0 : (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.lastname), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER', 'Driver')))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, order.driver && order.driver.phone && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return window.open("tel:".concat(order.driver.phone));
     }
@@ -243,14 +252,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         business: false
       });
     }
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('YOUR_ORDER', 'Your Order')), /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
+  })))))), /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('YOUR_ORDER', 'Your Order')), /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
       product: product
     });
-  }))), /*#__PURE__*/_react.default.createElement(_styles.OrderBill, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TAX', 'Tax'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.tax), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.totalTax))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.deliveryFee))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.driver_tip))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SERVICE FEE', 'Service Fee'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.service_fee), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : order.serviceFee) || 0))), (order === null || order === void 0 ? void 0 : order.discount) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.discount))))), /*#__PURE__*/_react.default.createElement("table", {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.OrderBill, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TAX', 'Tax'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.tax), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.totalTax))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.deliveryFee))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.driver_tip))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SERVICE_FEE', 'Service Fee'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.service_fee), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : order.serviceFee) || 0))), (order === null || order === void 0 ? void 0 : order.discount) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, (order === null || order === void 0 ? void 0 : order.discount_type) === 1 ? /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.discount_rate), "%)") : /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.discount))))), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.total)))))), ((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11) && !order.review && /*#__PURE__*/_react.default.createElement(_styles.ReviewsAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.total)))))), (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && !order.review && /*#__PURE__*/_react.default.createElement(_styles.ReviewsAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return setOpenReview(true);
@@ -263,13 +272,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   }, t('MY_ORDERS', 'My Orders'), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, null))))), loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
     className: "skeleton-loading"
-  }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
-    width: 100
-  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 250
-  })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 80
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 200
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100
@@ -281,7 +288,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     height: 200
   })))), !loading && !order && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.'),
-    btnTitle: t('PROFILE_ORDERS_REDIRECT', 'Go to Orders'),
+    btnTitle: t('ORDERS_REDIRECT', 'Go to Orders'),
     onClickButton: handleOrderRedirect
   }), (openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openMessages.driver || openMessages.business,
@@ -303,7 +310,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClose: function onClose() {
       return setOpenReview(false);
     },
-    title: order ? 'Write a Review #' + (order === null || order === void 0 ? void 0 : order.id) : 'LOADING...'
+    title: order ? "".concat(t('WRITE_A_REVIEW', 'Write a Review'), " #").concat(order === null || order === void 0 ? void 0 : order.id) : t('LOADING', 'Loading...')
   }, /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order
   })));
@@ -311,6 +318,18 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 
 var OrderDetails = function OrderDetails(props) {
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
+    googleMapsControls: {
+      defaultZoom: 15,
+      zoomControl: true,
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeId: 'roadmap',
+      // 'roadmap', 'satellite', 'hybrid', 'terrain'
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        mapTypeIds: ['roadmap', 'satellite']
+      }
+    },
     UIComponent: OrderDetailsUI
   });
 

@@ -52,7 +52,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       business = props.business,
       getBusinessOffer = props.getBusinessOffer,
       orderState = props.orderState,
-      handleClick = props.handleClick;
+      handleClick = props.handleClick,
+      orderType = props.orderType;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -90,7 +91,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     isClosed: !(business === null || business === void 0 ? void 0 : business.open)
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessTags, null, (business === null || business === void 0 ? void 0 : business.featured) && /*#__PURE__*/_react.default.createElement("span", {
     className: "crown"
-  }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), /*#__PURE__*/_react.default.createElement("div", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), !(business === null || business === void 0 ? void 0 : business.open) && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER')))), !(business === null || business === void 0 ? void 0 : business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), /*#__PURE__*/_react.default.createElement("div", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), !(business === null || business === void 0 ? void 0 : business.open) && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'PreOrder')))), !(business === null || business === void 0 ? void 0 : business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, (business === null || business === void 0 ? void 0 : business.logo) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: (0, _utils.optimizeImage)(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
@@ -117,9 +118,9 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "bullet"
   }, /*#__PURE__*/_react.default.createElement(_GrLocation.default, null), parseDistance(business === null || business === void 0 ? void 0 : business.distance)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  }), (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), orderType === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  }))))))));
+  })))))))));
 };
 
 var BusinessController = function BusinessController(props) {

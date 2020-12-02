@@ -78,11 +78,12 @@ var CouponControlUI = function CouponControlUI(props) {
     onClick: function onClick() {
       return onRemoveCoupon();
     }
-  }, t('REMOVE', 'Remove'), " ", couponDefault, " ", t('COUPON', 'coupon')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, t('REMOVE_COUPON', 'Remove Coupon'), " ", couponDefault) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: t('DISCOUNT_COUPON', 'Discount coupon'),
     onChange: function onChange(e) {
       return onChangeInputCoupon(e.target.value);
-    }
+    },
+    autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     disabled: !couponInput,

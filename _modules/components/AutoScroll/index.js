@@ -39,18 +39,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AutoScroll = function AutoScroll(_ref) {
   var children = _ref.children,
-      categories = _ref.categories,
-      container = _ref.container,
-      modal = _ref.modal,
-      loading = _ref.loading;
+      modal = _ref.modal;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      categoriesElement = _useState2[0],
-      setCategoriesElement = _useState2[1];
+      parentElement = _useState2[0],
+      setParentElement = _useState2[1];
 
   var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -61,25 +58,21 @@ var AutoScroll = function AutoScroll(_ref) {
       _useTheme2 = _slicedToArray(_useTheme, 1),
       theme = _useTheme2[0];
 
-  (0, _react.useEffect)(function () {
-    var _document, _document$getElementB, _document2, _document3;
+  (0, _react.useLayoutEffect)(function () {
+    var _document, _document$getElementB, _element$parentNode;
 
-    var containerElementListener = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById(container)) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.addEventListener('scroll', handleScroll);
-    var containerElement = (_document2 = document) === null || _document2 === void 0 ? void 0 : _document2.getElementById(container);
-    var element = (_document3 = document) === null || _document3 === void 0 ? void 0 : _document3.getElementById(categories);
-
-    if (!loading) {
-      setCategoriesElement(element);
-      setContainerElement(containerElement);
-    }
-
+    var element = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById('autoscroll')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.parentNode;
+    var containerElementListener = element === null || element === void 0 ? void 0 : (_element$parentNode = element.parentNode) === null || _element$parentNode === void 0 ? void 0 : _element$parentNode.addEventListener('scroll', handleScroll);
+    var containerElement = element === null || element === void 0 ? void 0 : element.parentNode;
+    setParentElement(element);
+    setContainerElement(containerElement);
     return function () {
       document.removeEventListener(containerElementListener);
     };
   });
   (0, _react.useEffect)(function () {
     handleScroll();
-  }, [containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft, categoriesElement === null || categoriesElement === void 0 ? void 0 : categoriesElement.scrollLeft, width, theme === null || theme === void 0 ? void 0 : theme.rtl]);
+  });
 
   var handleScroll = function handleScroll() {
     var botonRight = document.getElementById('right-autoscroll');
@@ -93,7 +86,7 @@ var AutoScroll = function AutoScroll(_ref) {
           botonRight.classList.remove('hidden');
         }
 
-        if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) * -1 > (categoriesElement === null || categoriesElement === void 0 ? void 0 : categoriesElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 20) {
+        if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) * -1 > (parentElement === null || parentElement === void 0 ? void 0 : parentElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 20) {
           botonLeft.classList.add('hidden');
         } else {
           botonLeft.classList.remove('hidden');
@@ -105,7 +98,7 @@ var AutoScroll = function AutoScroll(_ref) {
           botonLeft.classList.remove('hidden');
         }
 
-        if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) > (categoriesElement === null || categoriesElement === void 0 ? void 0 : categoriesElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 20) {
+        if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) > (parentElement === null || parentElement === void 0 ? void 0 : parentElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 20) {
           botonRight.classList.add('hidden');
         } else {
           botonRight.classList.remove('hidden');
@@ -118,26 +111,27 @@ var AutoScroll = function AutoScroll(_ref) {
     if (left) {
       containerElement.scrollBy({
         top: 0,
-        left: -categoriesElement.offsetWidth / 12 > -200 ? -200 : -categoriesElement.offsetWidth / 12,
+        left: -parentElement.offsetWidth / 10 > -200 ? -200 : -parentElement.offsetWidth / 10,
         behavior: 'smooth'
       });
     } else {
       containerElement.scrollBy({
         top: 0,
-        left: +categoriesElement.offsetWidth / 12 < 200 ? 200 : +categoriesElement.offsetWidth / 12,
+        left: +parentElement.offsetWidth / 10 < 200 ? 200 : +parentElement.offsetWidth / 10,
         behavior: 'smooth'
       });
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.DivContainer, {
-    modal: modal
-  }, width < categoriesElement.offsetWidth + 50 ? /*#__PURE__*/_react.default.createElement(_IosArrowBack.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.AutoscrollContainer, {
+    modal: modal,
+    id: "autoscroll"
+  }, width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 ? /*#__PURE__*/_react.default.createElement(_IosArrowBack.default, {
     id: "left-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling(true);
     }
-  }) : '', children, width < categoriesElement.offsetWidth + 50 ? /*#__PURE__*/_react.default.createElement(_IosArrowForward.default, {
+  }) : '', children, width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 ? /*#__PURE__*/_react.default.createElement(_IosArrowForward.default, {
     id: "right-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling();

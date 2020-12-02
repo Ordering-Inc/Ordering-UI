@@ -138,7 +138,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     onClick: function onClick() {
       return setAddCardOpen(true);
     }
-  }, t('ADD_CARD', 'Add New Payment Card')), /*#__PURE__*/_react.default.createElement(_styles.ActionsModal, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('ADD_PAYMENT_CARD', 'Add New Payment Card')), /*#__PURE__*/_react.default.createElement(_styles.ActionsModal, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return onCancel();
     }
@@ -149,17 +149,17 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     },
     disabled: !cardSelected
   }, t('ACCEPT', 'Accept')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: "Add credit or debit card",
     className: "modal-info",
     open: addCartOpen,
     onClose: function onClose() {
       return setAddCardOpen(false);
-    },
-    title: "Add credit or debit card"
+    }
   }, /*#__PURE__*/_react.default.createElement(_StripeElementsForm.StripeElementsForm, {
     businessId: props.businessId,
     publicKey: props.publicKey,
-    toSave: true // clientSecret={props.clientSecret}
-    ,
+    toSave: true,
+    requirements: props.clientSecret,
     onCancel: function onCancel() {
       return setAddCardOpen(false);
     },

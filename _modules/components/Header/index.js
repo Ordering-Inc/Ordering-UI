@@ -108,7 +108,6 @@ var Header = function Header(props) {
   });
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
-  var HeaderType = isHome ? _styles.HeaderInvert : _styles.Header;
 
   var openModal = function openModal(opt) {
     setModalSelected(opt);
@@ -141,7 +140,9 @@ var Header = function Header(props) {
       return events.off('cart_product_added', handleAddProduct);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(HeaderType, null, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Header, {
+    home: isHome
+  }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
     auth: auth
   }), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
@@ -170,7 +171,8 @@ var Header = function Header(props) {
     },
     onClose: function onClose() {
       return handleClosePopover('moment');
-    }
+    },
+    isHome: isHome
   }), /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
     auth: auth,
     addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address,
@@ -180,21 +182,22 @@ var Header = function Header(props) {
     },
     onClose: function onClose() {
       return handleClosePopover('addresses');
-    }
+    },
+    isHome: isHome
   }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 870 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signin'
       });
     }
-  }, t('SIGNIN', 'Sign in')), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('SIGN_IN', 'Sign in')), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signup'
       });
     },
     highlight: 1
-  }, t('SIGNUP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  }, t('SIGN_UP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     open: openPopover.user,
     isHome: isHome,
     onClick: function onClick() {
@@ -228,7 +231,8 @@ var Header = function Header(props) {
     },
     onClose: function onClose() {
       return handleClosePopover('addresses');
-    }
+    },
+    isHome: isHome
   }), /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
@@ -236,19 +240,22 @@ var Header = function Header(props) {
     },
     onClose: function onClose() {
       return handleClosePopover('moment');
-    }
+    },
+    isHome: isHome
   })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
     addressState: (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : (_orderState$options4$2 = _orderState$options4$.address) === null || _orderState$options4$2 === void 0 ? void 0 : (_orderState$options4$3 = _orderState$options4$2.split(',')) === null || _orderState$options4$3 === void 0 ? void 0 : _orderState$options4$3[0],
     onClick: function onClick(variant) {
       return openModal(variant);
-    }
+    },
+    isHome: isHome
   }), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
     momentState: (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.moment,
     onClick: function onClick(variant) {
       return openModal(variant);
-    }
+    },
+    isHome: isHome
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {

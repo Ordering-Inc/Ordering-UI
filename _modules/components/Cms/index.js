@@ -36,9 +36,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CmsUI = function CmsUI(props) {
-  var loading = props.loading,
-      error = props.error,
-      body = props.body,
+  var cmsState = props.cmsState,
       handleCmsRedirect = props.handleCmsRedirect;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -47,7 +45,7 @@ var CmsUI = function CmsUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.CmsContainer, {
     id: "cms"
-  }, loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonHeader, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, cmsState.loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonHeader, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: "100%",
     height: "100%"
   })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonInformation, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -65,12 +63,12 @@ var CmsUI = function CmsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonSide, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: "100%",
     height: "100%"
-  })))), body && /*#__PURE__*/_react.default.createElement("div", {
+  })))), cmsState.body && /*#__PURE__*/_react.default.createElement("div", {
     dangerouslySetInnerHTML: {
-      __html: body
+      __html: cmsState.body
     }
-  }), !loading && error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_PAGE', 'Sorry, the selected page was not found.'),
+  }), !cmsState.loading && cmsState.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: t('ERROR_PAGE_SELECTED', 'Sorry, the selected page was not found.'),
     btnTitle: t('PAGE_REDIRECT', 'Go to pages list'),
     onClickButton: function onClickButton() {
       return handleCmsRedirect();

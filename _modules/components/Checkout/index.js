@@ -19,6 +19,8 @@ var _orderingComponents = require("ordering-components");
 
 var _UpsellingPage = require("../UpsellingPage");
 
+var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
@@ -34,6 +36,8 @@ var _PaymentOptions = require("../PaymentOptions");
 var _DriverTips = require("../DriverTips");
 
 var _Cart = require("../Cart");
+
+var _Confirm = require("../Confirm");
 
 var _utils = require("../../utils");
 
@@ -73,14 +77,23 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var mapConfigs = {
+  mapZoom: 16,
+  mapSize: {
+    width: 640,
+    height: 190
+  }
+};
+
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$erro, _businessDetails$busi5, _cart$products;
+  var _businessDetails$busi, _businessDetails$busi2, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$erro, _businessDetails$busi5, _validationFields$fie3, _validationFields$fie4, _cart$products, _validationFields$fie5, _validationFields$fie6;
 
   var cartState = props.cartState,
       cart = props.cart,
       placing = props.placing,
       businessDetails = props.businessDetails,
       paymethodSelected = props.paymethodSelected,
+      validationFields = props.validationFields,
       handlePaymethodChange = props.handlePaymethodChange,
       handlerClickPlaceOrder = props.handlerClickPlaceOrder;
 
@@ -92,19 +105,100 @@ var CheckoutUI = function CheckoutUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(true),
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
+
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       errorCash = _useState2[0],
       setErrorCash = _useState2[1];
 
-  var mapConfigs = {
-    mapZoom: 17,
-    mapSize: {
-      width: 640,
-      height: 190
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      userErrors = _useState4[0],
+      setUserErrors = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      alertState = _useState6[0],
+      setAlertState = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isUserDetailsEdit = _useState8[0],
+      setIsUserDetailsEdit = _useState8[1];
+
+  var handlePlaceOrder = function handlePlaceOrder() {
+    if (!userErrors.length) {
+      handlerClickPlaceOrder && handlerClickPlaceOrder();
+      return;
     }
+
+    setAlertState({
+      open: true,
+      content: Object.values(userErrors).map(function (error) {
+        return error;
+      })
+    });
+    setIsUserDetailsEdit(true);
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContainer, null, (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
+  var checkValidationFields = function checkValidationFields() {
+    var _validationFields$fie, _validationFields$fie2;
+
+    setUserErrors([]);
+    var errors = [];
+    var notFields = ['coupon', 'driver_tip', 'mobile_phone'];
+    Object.values(validationFields === null || validationFields === void 0 ? void 0 : validationFields.fields).map(function (field) {
+      if ((field === null || field === void 0 ? void 0 : field.required) && !notFields.includes(field.code)) {
+        if (!user[field === null || field === void 0 ? void 0 : field.code]) {
+          errors.push(t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "The field ".concat(field === null || field === void 0 ? void 0 : field.name, " is required")));
+        }
+      }
+    });
+
+    if (!(user === null || user === void 0 ? void 0 : user.cellphone) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.cellphone) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.required)) {
+      errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'));
+    }
+
+    if (user === null || user === void 0 ? void 0 : user.cellphone) {
+      if (user === null || user === void 0 ? void 0 : user.country_phone_code) {
+        var phone = null;
+        phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code).concat(user === null || user === void 0 ? void 0 : user.cellphone);
+        var phoneNumber = (0, _libphonenumberJs.default)(phone);
+
+        if (!phoneNumber.isValid()) {
+          errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'));
+        }
+      } else {
+        errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'));
+      }
+    }
+
+    setUserErrors(errors);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (validationFields && (validationFields === null || validationFields === void 0 ? void 0 : validationFields.fields)) {
+      checkValidationFields();
+    }
+  }, [validationFields, user]);
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContainer, null, !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: '100%',
       marginBottom: '20px'
@@ -117,12 +211,11 @@ var CheckoutUI = function CheckoutUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
   })) : /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
+    isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
     mapConfigs: mapConfigs
-  }), /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user"
-  }, cartState.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserDetails, null, cartState.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 35,
     style: {
       marginBottom: '10px'
@@ -148,14 +241,13 @@ var CheckoutUI = function CheckoutUI(props) {
       marginBottom: '10px'
     }
   })) : /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+    isUserDetailsEdit: isUserDetailsEdit,
     cartStatus: cart === null || cart === void 0 ? void 0 : cart.status,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     useValidationFields: true,
     useDefualtSessionManager: true,
     useSessionUser: true
-  })), ((businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.loading) || cartState.loading) && /*#__PURE__*/_react.default.createElement("div", {
-    className: "business"
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContainer, null, ((businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.loading) || cartState.loading) && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 35,
     style: {
       marginBottom: '10px'
@@ -180,39 +272,52 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginBottom: '10px'
     }
-  }))), !cartState.loading && (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.business) && Object.values(businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.business).length > 0 && /*#__PURE__*/_react.default.createElement("div", {
-    className: "business"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi = businessDetails.business) === null || _businessDetails$busi === void 0 ? void 0 : _businessDetails$busi.name), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.email), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi3 = businessDetails.business) === null || _businessDetails$busi3 === void 0 ? void 0 : _businessDetails$busi3.cellphone), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi4 = businessDetails.business) === null || _businessDetails$busi4 === void 0 ? void 0 : _businessDetails$busi4.address))), (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error) && (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro = businessDetails.error) === null || _businessDetails$erro === void 0 ? void 0 : _businessDetails$erro.length) > 0 && /*#__PURE__*/_react.default.createElement("div", {
-    className: "business"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error.map(function (e, i) {
+  }))), !cartState.loading && (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.business) && Object.values(businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.business).length > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('NAME', 'Name'), ":"), " ", businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi = businessDetails.business) === null || _businessDetails$busi === void 0 ? void 0 : _businessDetails$busi.name), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('EMAIL', 'Email'), ":"), " ", businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.email), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CELLPHONE', 'Cellphone'), ":"), " ", businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi3 = businessDetails.business) === null || _businessDetails$busi3 === void 0 ? void 0 : _businessDetails$busi3.cellphone), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('ADDRESS', 'Address'), ":"), " ", businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi4 = businessDetails.business) === null || _businessDetails$busi4 === void 0 ? void 0 : _businessDetails$busi4.address))), (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error) && (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro = businessDetails.error) === null || _businessDetails$erro === void 0 ? void 0 : _businessDetails$erro.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: i
     }, t('ERROR', 'ERROR'), ": [", e, "]");
-  }))), !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHOD', 'Payment Method')), businessDetails.business && /*#__PURE__*/_react.default.createElement(_PaymentOptions.PaymentOptions, {
+  }))), !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHODS', 'Payment Methods')), businessDetails.business && /*#__PURE__*/_react.default.createElement(_PaymentOptions.PaymentOptions, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     paymethods: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi5 = businessDetails.business) === null || _businessDetails$busi5 === void 0 ? void 0 : _businessDetails$busi5.paymethods,
     onPaymentChange: handlePaymethodChange,
     setErrorCash: setErrorCash
-  })), !cartState.loading && cart && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIP', 'Driver Tip')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+  })), !cartState.loading && cart && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie3 = validationFields.fields) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.driver_tip) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: _utils.DriverTipsOptions,
     useOrderContext: true
   })), !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_ORDER', 'Your Order')), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+    isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     cart: cart,
-    isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0
+    isCheckout: true,
+    isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0,
+    showCoupon: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.coupon) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.enabled
   })), !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    disabled: !(cart === null || cart === void 0 ? void 0 : cart.valid) || !paymethodSelected || placing || errorCash,
+    disabled: !(cart === null || cart === void 0 ? void 0 : cart.valid) || !paymethodSelected || placing || errorCash || (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum),
     onClick: function onClick() {
-      return handlerClickPlaceOrder();
+      return handlePlaceOrder();
     }
-  }, placing ? t('PLACING', 'Placing...') : t('PLACE_ORDER', 'Place Order'))), !(cart === null || cart === void 0 ? void 0 : cart.valid_address) && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.'))));
+  }, (cart === null || cart === void 0 ? void 0 : cart.subtotal) >= (cart === null || cart === void 0 ? void 0 : cart.minimum) ? placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order') : "".concat(t('MINIMUN_PURCHASE', 'Minimum'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)))), !(cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('CUSTOMER_DETAILS', 'Customer Details'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 var Checkout = function Checkout(props) {
   var _cartState$cart, _cartState$error, _cartState$cart2;
 
-  var query = props.query,
+  var errors = props.errors,
+      clearErrors = props.clearErrors,
+      query = props.query,
       cartUuid = props.cartUuid,
       handleOrderRedirect = props.handleOrderRedirect,
       handleCheckoutRedirect = props.handleCheckoutRedirect,
@@ -223,9 +328,9 @@ var Checkout = function Checkout(props) {
       _useOrder4 = _slicedToArray(_useOrder3, 1),
       orderState = _useOrder4[0];
 
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      token = _useSession2[0].token;
+  var _useSession3 = (0, _orderingComponents.useSession)(),
+      _useSession4 = _slicedToArray(_useSession3, 1),
+      token = _useSession4[0].token;
 
   var _useApi = (0, _orderingComponents.useApi)(),
       _useApi2 = _slicedToArray(_useApi, 1),
@@ -235,37 +340,53 @@ var Checkout = function Checkout(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+  var _useUtils3 = (0, _orderingComponents.useUtils)(),
+      _useUtils4 = _slicedToArray(_useUtils3, 1),
+      parsePrice = _useUtils4[0].parsePrice;
 
-  var _useState3 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)({
     loading: true,
     error: null,
     cart: null
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      cartState = _useState4[0],
-      setCartState = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      openUpselling = _useState6[0],
-      setOpenUpselling = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      canOpenUpselling = _useState8[0],
-      setCanOpenUpselling = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      currentCart = _useState10[0],
-      setCurrentCart = _useState10[1];
+      cartState = _useState10[0],
+      setCartState = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      openUpselling = _useState12[0],
+      setOpenUpselling = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      canOpenUpselling = _useState14[0],
+      setCanOpenUpselling = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(null),
+      _useState16 = _slicedToArray(_useState15, 2),
+      currentCart = _useState16[0],
+      setCurrentCart = _useState16[1];
+
+  var _useState17 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState18 = _slicedToArray(_useState17, 2),
+      alertState = _useState18[0],
+      setAlertState = _useState18[1];
 
   var cartsWithProducts = Object.values(orderState.carts).filter(function (cart) {
     return cart.products.length;
   });
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+    clearErrors();
+  };
 
   var handleOpenUpsellingPage = function handleOpenUpsellingPage(cart) {
     setCurrentCart(cart);
@@ -290,10 +411,18 @@ var Checkout = function Checkout(props) {
       setOpenUpselling(true);
     }
   }, [currentCart]);
+  (0, _react.useEffect)(function () {
+    if (errors === null || errors === void 0 ? void 0 : errors.length) {
+      setAlertState({
+        open: true,
+        content: errors
+      });
+    }
+  }, [errors]);
 
   var getOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(cartId) {
-      var _result$order, response, _yield$response$json, result, cart;
+      var _result$order, _result$paymethod_dat, response, _yield$response$json, result, _yield$orderState$con, error, cart;
 
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -330,12 +459,12 @@ var Checkout = function Checkout(props) {
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false
               }));
-              _context.next = 28;
+              _context.next = 31;
               break;
 
             case 14:
-              if (!(result.status === 2 && result.paymethod_data.gateway === 'stripe_redirect' && query.get('payment_intent'))) {
-                _context.next = 26;
+              if (!(result.status === 2 && ((_result$paymethod_dat = result.paymethod_data) === null || _result$paymethod_dat === void 0 ? void 0 : _result$paymethod_dat.gateway) === 'stripe_redirect' && query.get('payment_intent'))) {
+                _context.next = 29;
                 break;
               }
 
@@ -344,20 +473,33 @@ var Checkout = function Checkout(props) {
               return orderState.confirmCart(cartUuid);
 
             case 18:
-              handleOrderRedirect(result.order.uuid);
-              _context.next = 24;
-              break;
+              _yield$orderState$con = _context.sent;
+              error = _yield$orderState$con.error;
 
-            case 21:
-              _context.prev = 21;
-              _context.t0 = _context["catch"](15);
-              console.log(_context.t0);
+              if (error) {
+                setAlertState({
+                  open: true,
+                  content: [error.message]
+                });
+              }
+
+              handleOrderRedirect(result.order.uuid);
+              _context.next = 27;
+              break;
 
             case 24:
-              _context.next = 28;
+              _context.prev = 24;
+              _context.t0 = _context["catch"](15);
+              setAlertState({
+                open: true,
+                content: [_context.t0.message]
+              });
+
+            case 27:
+              _context.next = 31;
               break;
 
-            case 26:
+            case 29:
               cart = Array.isArray(result) ? null : result;
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
@@ -365,24 +507,24 @@ var Checkout = function Checkout(props) {
                 error: cart ? null : result
               }));
 
-            case 28:
-              _context.next = 33;
+            case 31:
+              _context.next = 36;
               break;
 
-            case 30:
-              _context.prev = 30;
+            case 33:
+              _context.prev = 33;
               _context.t1 = _context["catch"](0);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
                 error: [_context.t1.toString()]
               }));
 
-            case 33:
+            case 36:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 30], [15, 21]]);
+      }, _callee, null, [[0, 33], [15, 24]]);
     }));
 
     return function getOrder(_x) {
@@ -418,13 +560,13 @@ var Checkout = function Checkout(props) {
       onClick: function onClick() {
         return handleOpenUpsellingPage(cart);
       },
-      disabled: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) || openUpselling
-    }, ((currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) && canOpenUpselling) ^ (currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) ? t('LOADING', 'Loading...') : t('PAY_CART', 'Pay order'))));
+      disabled: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) || openUpselling || (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum)
+    }, (cart === null || cart === void 0 ? void 0 : cart.subtotal) >= (cart === null || cart === void 0 ? void 0 : cart.minimum) ? ((currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) && canOpenUpselling) ^ (currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) ? t('LOADING', 'Loading...') : t('VIEW_ORDER', 'View order') : "".concat(t('MINIMUN_PURCHASE', 'Minimum'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)))));
   })), cartUuid && cartState.error && ((_cartState$error = cartState.error) === null || _cartState$error === void 0 ? void 0 : _cartState$error.length) > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_CART', 'Sorry, the selected cart was not found.'),
+    content: t('ERROR_CART_SELECTED', 'Sorry, the selected cart was not found.'),
     btnTitle: t('CHECKOUT_REDIRECT', 'Go to Checkout list'),
     onClickButton: handleCheckoutListRedirect
-  }), cartState.loading && /*#__PURE__*/_react.default.createElement("div", {
+  }), cartState.loading && !(window.location.pathname === '/checkout') && /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: '80%',
       margin: 'auto auto 20px'
@@ -453,6 +595,18 @@ var Checkout = function Checkout(props) {
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('CHECKOUT ', 'Checkout'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
   }));
 };
 

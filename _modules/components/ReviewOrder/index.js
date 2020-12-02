@@ -99,15 +99,15 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       setAlertState({
         open: true,
         success: false,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR')]
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
     }
 
     if (!formState.loading && !((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.error) && alertState.success) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         open: true,
-        title: t('REVIEW_SUCCESS'),
-        content: t('REVIEW_SUCCESS')
+        title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
+        content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
       }));
     }
   }, [formState]);
@@ -196,14 +196,15 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     },
     ref: register({
       required: t('FIELD_COMMENT_REQUIRED', 'The field comments is required')
-    })
+    }),
+    autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles.Send, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit"
   }, t('SEND_REVIEW', 'Send a Review'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDER REVIEW'),
+    title: t('ORDER_REVIEW', 'Order Review'),
     content: alertState.content,
-    acceptText: t('ACCEPT'),
+    acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return closeAlert();

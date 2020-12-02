@@ -9,11 +9,19 @@ exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _styles = require("../Header/styles");
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n    color: #FFF;\n  "]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject8() {
   var data = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0;\n      "]);
@@ -26,7 +34,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n    color: #333;\n    display: flex;\n    align-items: center;\n\n    svg {\n      margin-right: 5px;\n      ", "\n    }\n\n    ", " & {\n      color: #FFF;\n    }\n  "]);
+  var data = _taggedTemplateLiteral(["\n    color: #333;\n    display: flex;\n    align-items: center;\n\n    svg {\n      margin-right: 5px;\n      ", "\n    }\n  "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -46,7 +54,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n    color: #333;\n    display: flex;\n    align-items: center;\n\n    svg {\n      margin-right: 5px;\n      ", "\n    }\n\n    ", " & {\n      color: #FFF;\n    }\n  "]);
+  var data = _taggedTemplateLiteral(["\n    color: #333;\n    display: flex;\n    align-items: center;\n\n    svg {\n      margin-right: 5px;\n      ", "\n    }\n\n  "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -86,7 +94,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -114,14 +122,17 @@ var Container = _styledComponents.default.div(_templateObject(), function (_ref)
     var _props$theme2;
 
     return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6());
-  }, _styles.HeaderInvert);
+  });
 }, function (_ref3) {
   var variant = _ref3.variant;
   return variant === 'moment' && (0, _styledComponents.css)(_templateObject7(), function (props) {
     var _props$theme3;
 
     return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject8());
-  }, _styles.HeaderInvert);
+  });
+}, function (_ref4) {
+  var isHome = _ref4.isHome;
+  return isHome && (0, _styledComponents.css)(_templateObject9());
 });
 
 exports.Container = Container;

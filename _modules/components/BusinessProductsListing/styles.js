@@ -1,16 +1,40 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapperSearch = exports.WrapContent = exports.ProductsContainer = void 0;
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  margin: 30px auto;\n\n  span {\n    margin-bottom: 10px;\n  }\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  margin: 0px auto 10px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n  height: calc(100vh - 45px);\n  margin: auto;\n\n  h1 {\n    font-size: 20px;\n    opacity: 0.5;\n    text-align: center;\n  }\n\n  @media (min-width: 411px) {\n    h1 {\n      font-size: 24px;\n    }\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -20,7 +44,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n"]);
+  var data = _taggedTemplateLiteral(["\n      text-align: left;\n    "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -30,7 +54,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n  height: calc(100vh - 45px);\n  margin: auto;\n\n  h1 {\n    font-size: 20px;\n    opacity: 0.5;\n    text-align: center;\n  }\n\n  @media (min-width: 411px) {\n    h1 {\n      font-size: 24px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -40,7 +64,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  .search-bar {\n    margin-right: 10px;\n    ", "\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -79,18 +103,26 @@ var WrapContent = _styledComponents.default.div(_templateObject2());
 
 exports.WrapContent = WrapContent;
 
-var WrapperSearch = _styledComponents.default.div(_templateObject3());
+var WrapperSearch = _styledComponents.default.div(_templateObject3(), function (props) {
+  var _props$theme;
+
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4());
+}, function (props) {
+  var _props$theme2;
+
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5());
+});
 
 exports.WrapperSearch = WrapperSearch;
 
-var ProductsNotFound = _styledComponents.default.div(_templateObject4());
+var ProductsNotFound = _styledComponents.default.div(_templateObject6());
 
 exports.ProductsNotFound = ProductsNotFound;
 
-var ProductLoading = _styledComponents.default.div(_templateObject5());
+var ProductLoading = _styledComponents.default.div(_templateObject7());
 
 exports.ProductLoading = ProductLoading;
 
-var SkeletonItem = _styledComponents.default.div(_templateObject6());
+var SkeletonItem = _styledComponents.default.div(_templateObject8());
 
 exports.SkeletonItem = SkeletonItem;

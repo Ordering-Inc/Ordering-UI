@@ -80,7 +80,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         success: false,
         open: true,
-        title: t('ERROR_FORGOT_ERROR'),
+        title: t('ERROR_UNKNOWN', 'An error has ocurred'),
         content: Object.values(errors).map(function (error) {
           return error.message;
         })
@@ -96,16 +96,16 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         success: false,
         open: true,
-        title: t('ERROR_FORGOT_ERROR'),
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR')]
+        title: t('ERROR_UNKNOWN', 'An error has ocurred'),
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       }));
     }
 
     if (!formState.loading && !((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.error) && alertState.success) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         open: true,
-        title: t('LINK_SEND_SUCCESSFULLY'),
-        content: t('SUCCESS_SEND_FORGOT_PASSWORD').replace('_email_', formData.email)
+        title: t('LINK_SEND_SUCCESSFULLY', 'Link Sent Successfully'),
+        content: "".concat(t('SUCCESS_SEND_FORGOT_PASSWORD', 'Your link has been sent to the email'), ": ").concat(formData.email)
       }));
     }
   }, [formState.loading]);
@@ -128,7 +128,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_FORGOT_PASSWORD', "Enter your email addres and we'll send you a link to reset your password.")))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_FORGOT_PASSWORD', 'Enter your email addres and we\'ll send you a link to reset your password.')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
@@ -142,28 +142,29 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     name: "email",
     "aria-label": "email",
     spellcheck: "false",
-    placeholder: t('EMAIL'),
+    placeholder: t('EMAIL', 'Email'),
     onChange: function onChange(e) {
       return hanldeChangeInput(e);
     },
     ref: register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
       pattern: {
         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
       }
-    })
+    }),
+    autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: formState.loading || alertState.success ? 'secondary' : 'primary',
     type: "submit",
     disabled: formState.loading || alertState.success
-  }, alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD') : t('FRONT_RECOVER_PASSWORD'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, formState.loading ? t('LOADING', 'Loading...') : alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD', 'Link Sent') : t('FRONT_RECOVER_PASSWORD', 'Recover Password'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('SIGN_IN_MESSAGE', 'Do you want to sign in?')), elementLinkToLogin)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: alertState.title,
     content: alertState.content,
-    acceptText: t('ACCEPT'),
+    acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return closeAlert();

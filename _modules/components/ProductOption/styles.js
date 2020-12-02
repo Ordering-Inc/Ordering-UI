@@ -30,7 +30,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  padding: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background-color: #F7F7F7;\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 15px 0px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background-color: #FFF;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

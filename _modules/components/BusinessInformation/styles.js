@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ModalIcon = exports.BusinessMediaContent = exports.DeliveryInfo = exports.ScheduleBlock = exports.ScheduleContainer = exports.ScheduleSection = exports.Map = exports.SectionTitle = exports.FlexTabs = exports.BusinessContent = exports.Information = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessLogo = exports.WrapperBusinessLogo = exports.BusinessBasicContent = exports.HeaderImage = exports.BussinessTitle = exports.BusinessHeader = exports.BusinessInformationContainer = void 0;
+exports.ImageContainer = exports.Description = exports.ModalIcon = exports.BusinessMediaContent = exports.DeliveryInfo = exports.ScheduleBlock = exports.ScheduleContainer = exports.ScheduleSection = exports.Map = exports.SectionTitle = exports.FlexTabs = exports.BusinessContent = exports.Information = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessLogo = exports.WrapperBusinessLogo = exports.BusinessBasicContent = exports.HeaderImage = exports.BussinessTitle = exports.BusinessHeader = exports.BusinessInformationContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -16,6 +16,26 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject27() {
+  var data = _taggedTemplateLiteral([" \n  max-height: 500px;\n  img{\n    width: 100%;\n    border-bottom-left-radius: 10px;\n    border-bottom-right-radius: 10px;\n  }\n"]);
+
+  _templateObject27 = function _templateObject27() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject26() {
+  var data = _taggedTemplateLiteral(["\n  margin: 0 10px;\n"]);
+
+  _templateObject26 = function _templateObject26() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject25() {
   var data = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "]);
@@ -220,7 +240,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  width: 20%;\n  margin-top: auto;\n  > img {\n    width: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 20%;\n  margin-top: auto;\n  > img {\n    width: 100%;\n    height: 100%;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -384,3 +404,11 @@ var ModalIcon = _styledComponents.default.span(_templateObject24(), function (pr
 });
 
 exports.ModalIcon = ModalIcon;
+
+var Description = _styledComponents.default.p(_templateObject26());
+
+exports.Description = Description;
+
+var ImageContainer = _styledComponents.default.div(_templateObject27());
+
+exports.ImageContainer = ImageContainer;

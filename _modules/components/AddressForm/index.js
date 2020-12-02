@@ -58,9 +58,10 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _addressState$address2, _addressState$address3, _formState$changes, _addressState$address4, _formState$changes2, _formState$changes3, _formState$changes4, _addressState$address5;
+  var _addressState$address, _addressState$address2, _formState$changes, _addressState$address3, _formState$changes2, _formState$changes3, _addressState$address4, _addressState$address5, _formState$changes4, _formState$changes5, _formState$changes6, _formState$changes7, _addressState$address6;
 
-  var googleMapsControls = props.googleMapsControls,
+  var addressesList = props.addressesList,
+      googleMapsControls = props.googleMapsControls,
       formState = props.formState,
       addressState = props.addressState,
       validationFields = props.validationFields,
@@ -68,7 +69,8 @@ var AddressFormUI = function AddressFormUI(props) {
       updateChanges = props.updateChanges,
       onCancel = props.onCancel,
       hanldeChangeInput = props.hanldeChangeInput,
-      saveAddress = props.saveAddress;
+      saveAddress = props.saveAddress,
+      handleChangePosition = props.handleChangePosition;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -91,18 +93,33 @@ var AddressFormUI = function AddressFormUI(props) {
       addressTag = _useState4[0],
       setAddressTag = _useState4[1];
 
-  var _useState5 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      toggleMap = _useState6[0],
+      setToggleMap = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      alertState = _useState6[0],
-      setAlertState = _useState6[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
 
-  var onSubmit = function onSubmit(values) {
-    saveAddress();
+  var onSubmit = function onSubmit() {
+    var isAddressAlreadyExist = (addressesList || []).some(function (address) {
+      return address.location.lat === formState.changes.location.lat && address.location.lng === formState.changes.location.lng;
+    });
 
-    if (!formState.loading) {}
+    if (!isAddressAlreadyExist) {
+      saveAddress();
+      return;
+    }
+
+    setAlertState({
+      open: true,
+      content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
+    });
   };
 
   var handleAddressTag = function handleAddressTag(tag) {
@@ -136,7 +153,7 @@ var AddressFormUI = function AddressFormUI(props) {
 
       setAlertState({
         open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR')]
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
     }
   }, [formState]);
@@ -162,56 +179,61 @@ var AddressFormUI = function AddressFormUI(props) {
     className: "address-form"
   }, /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     onSubmit: handleSubmit(onSubmit),
-    autoComplete: "new-off"
-  }, (addressState === null || addressState === void 0 ? void 0 : (_addressState$address2 = addressState.address) === null || _addressState$address2 === void 0 ? void 0 : _addressState$address2.location) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+    autoComplete: "off"
+  }, ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address2 = addressState.address) === null || _addressState$address2 === void 0 ? void 0 : _addressState$address2.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.location)) && toggleMap && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
-    location: _objectSpread(_objectSpread({}, addressState === null || addressState === void 0 ? void 0 : (_addressState$address3 = addressState.address) === null || _addressState$address3 === void 0 ? void 0 : _addressState$address3.location), {}, {
+    location: _objectSpread(_objectSpread({}, (addressState === null || addressState === void 0 ? void 0 : (_addressState$address3 = addressState.address) === null || _addressState$address3 === void 0 ? void 0 : _addressState$address3.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.location)), {}, {
       zoom: googleMapsControls.defaultZoom
     }),
-    mapControls: googleMapsControls
+    mapControls: googleMapsControls,
+    handleChangePosition: handleChangePosition
   })), /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
     className: "google-control"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
     className: "input-autocomplete",
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
     name: "address",
-    placeholder: "Address",
+    placeholder: t('ADDRESS', 'Address'),
     onChangeAddress: handleChangeAddress,
     onKeyDown: handleAddressKeyDown,
-    defaultValue: ((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address) || ((_addressState$address4 = addressState.address) === null || _addressState$address4 === void 0 ? void 0 : _addressState$address4.address),
+    defaultValue: ((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.address) || ((_addressState$address4 = addressState.address) === null || _addressState$address4 === void 0 ? void 0 : _addressState$address4.address),
     childRef: register({
-      required: isRequiredField('address') ? 'Address is required' : null
+      required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
     }),
-    autoComplete: "new-off"
+    autoComplete: "off"
   })), (!validationFields.loading || !addressState.loading) && /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleGpsButton, {
     className: "gps-button",
     apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
     onAddress: handleChangeAddress,
     IconButton: _ImCompass.default
-  })), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  })), ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address5 = addressState.address) === null || _addressState$address5 === void 0 ? void 0 : _addressState$address5.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.location)) && /*#__PURE__*/_react.default.createElement(_styles.ShowMap, {
+    onClick: function onClick() {
+      return setToggleMap(!toggleMap);
+    }
+  }, t('VIEW_MAP', 'View map to modify the exact location')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "internal_number",
     name: "internal_number",
-    placeholder: "Internal number",
+    placeholder: t('INTERNAL_NUMBER', 'Internal number'),
     ref: register,
-    defaultValue: ((_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.internal_number) || addressState.address.internal_number,
+    defaultValue: ((_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.internal_number) || addressState.address.internal_number,
     onChange: hanldeChangeInput,
-    autoComplete: "new-off"
+    autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "zipcode",
     name: "zipcode",
-    placeholder: "Zip code",
+    placeholder: t('ZIP_CODE', 'Zip code'),
     ref: register,
-    defaultValue: ((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.zipcode) || addressState.address.zipcode,
+    defaultValue: ((_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.zipcode) || addressState.address.zipcode,
     onChange: hanldeChangeInput,
-    autoComplete: "new-off"
-  }), /*#__PURE__*/_react.default.createElement("textarea", {
+    autoComplete: "off"
+  }), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     name: "address_notes",
     rows: 4,
     placeholder: t('ADDRESS_NOTES', 'Address Notes'),
     ref: register,
-    defaultValue: ((_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.address_notes) || addressState.address.address_notes,
+    defaultValue: ((_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.address_notes) || addressState.address.address_notes,
     onChange: hanldeChangeInput,
-    autoComplete: "new-off"
+    autoComplete: "off"
   }), !formState.loading && formState.error && /*#__PURE__*/_react.default.createElement("p", {
     style: {
       color: '#c10000'
@@ -255,14 +277,14 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return onCancel();
     }
-  }, "Cancel"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, ((_addressState$address5 = addressState.address) === null || _addressState$address5 === void 0 ? void 0 : _addressState$address5.id) ? 'Update' : 'Add'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ADDRESS'),
+  }, ((_addressState$address6 = addressState.address) === null || _addressState$address6 === void 0 ? void 0 : _addressState$address6.id) ? t('UPDATE', 'Update') : t('ADD', 'Add')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('ADDRESS', 'Address'),
     content: alertState.content,
-    acceptText: t('ACCEPT'),
+    acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return closeAlert();
@@ -290,7 +312,8 @@ var AddressForm = function AddressForm(props) {
 
   var addressFormProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: AddressFormUI,
-    googleMapsControls: googleMapsControls
+    googleMapsControls: googleMapsControls,
+    isSelectedAfterAdd: true
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.AddressForm, addressFormProps);

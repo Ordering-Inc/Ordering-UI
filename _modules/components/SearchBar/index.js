@@ -20,15 +20,22 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var SearchBar = function SearchBar(_ref) {
   var onSearch = _ref.onSearch,
       search = _ref.search,
-      placeholder = _ref.placeholder;
+      placeholder = _ref.placeholder,
+      lazyLoad = _ref.lazyLoad;
   var timeout = null;
   var el = (0, _react.useRef)();
 
   var onChangeSearch = function onChangeSearch(e) {
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
+    if (e.keyCode === 13) return;
+
+    if (!lazyLoad) {
       onSearch(e.target.value);
-    }, 1000);
+    } else {
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
+        onSearch(e.target.value);
+      }, 750);
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -39,11 +46,14 @@ var SearchBar = function SearchBar(_ref) {
       el.current.value = '';
     }
   }, [search]);
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, {
+    className: "search-bar"
+  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: el,
     name: "search",
     "aria-label": "search",
-    placeholder: placeholder
+    placeholder: placeholder,
+    autoComplete: "off"
   }));
 };
 

@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PaymentOptions = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
@@ -41,6 +43,10 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -68,6 +74,19 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect'];
+var stripeRedirectOptions = [{
+  name: 'Bancontact',
+  value: 'bancontact'
+}, {
+  name: 'Alipay',
+  value: 'alipay'
+}, {
+  name: 'Giropay',
+  value: 'giropay'
+}, {
+  name: 'iDEAL',
+  value: 'ideal'
+}];
 
 var getPayIcon = function getPayIcon(method) {
   switch (method) {
@@ -105,6 +124,11 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  (0, _react.useEffect)(function () {
+    if (paymethodsList.paymethods.length === 1) {
+      handlePaymethodClick && handlePaymethodClick(paymethodsList.paymethods[0]);
+    }
+  }, [paymethodsList.paymethods]);
   return /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
     className: "payments-list"
   }, paymethodsList.paymethods.length > 0 && paymethodsList.paymethods.sort(function (a, b) {
@@ -143,15 +167,32 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     className: "brand"
   }, (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand)), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.last4))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     className: "modal-info",
-    open: ['stripe', 'stripe_connect'].includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && !paymethodData.id,
+    open: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && !paymethodData.id,
     onClose: function onClose() {
       return handlePaymethodClick(null);
     },
     title: "Select a card"
-  }, ['stripe', 'stripe_connect'].includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
+  }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     paymethod: paymethodSelected,
     businessId: props.businessId,
     publicKey: paymethodSelected.credentials.publishable,
+    payType: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.name,
+    onSelectCard: handlePaymethodDataChange,
+    onCancel: function onCancel() {
+      return handlePaymethodClick(null);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    className: "modal-info",
+    open: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_connect' && !paymethodData.id,
+    onClose: function onClose() {
+      return handlePaymethodClick(null);
+    },
+    title: "Select a card"
+  }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_connect' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
+    paymethod: paymethodSelected,
+    businessId: props.businessId,
+    publicKey: paymethodSelected.credentials.stripe.publishable,
+    clientSecret: paymethodSelected.credentials.publishable,
     payType: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.name,
     onSelectCard: handlePaymethodDataChange,
     onCancel: function onCancel() {
@@ -172,19 +213,16 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       return handlePaymethodClick(null);
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: "Stripe Redirect",
     className: "modal-info",
     open: ['stripe_redirect'].includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && !paymethodData.type,
     onClose: function onClose() {
       return handlePaymethodClick(null);
-    },
-    title: "Stripe Redirect"
+    }
   }, /*#__PURE__*/_react.default.createElement(_StripeRedirectForm.StripeRedirectForm, {
     businessId: props.businessId,
     currency: props.currency,
-    paymethods: [{
-      name: 'Bancontact',
-      value: 'bancontact'
-    }],
+    paymethods: stripeRedirectOptions,
     handleStripeRedirect: handlePaymethodDataChange
   })));
 };

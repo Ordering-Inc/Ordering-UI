@@ -37,11 +37,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var inputStyle = {
-  padding: '8px 10px',
-  marginTop: '8px'
-};
-
 var StripeRedirectFormUI = function StripeRedirectFormUI(props) {
   var paymethods = props.paymethods,
       handleSubmitPaymentMethod = props.handleSubmitPaymentMethod;
@@ -62,15 +57,14 @@ var StripeRedirectFormUI = function StripeRedirectFormUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.FormRedirect, {
     onSubmit: handleSubmit(handleSubmitPaymentMethod)
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('SELECT_PAYMETHOD', 'Select a payment method')), /*#__PURE__*/_react.default.createElement("select", {
-    style: inputStyle,
+  }, /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')), /*#__PURE__*/_react.default.createElement("select", {
     name: "type",
     ref: register({
       required: true
     })
   }, /*#__PURE__*/_react.default.createElement("option", {
     value: ""
-  }, t('SELECT_PAYMETHOD', 'Select a payment method')), (paymethods === null || paymethods === void 0 ? void 0 : paymethods.length) > 0 && paymethods.map(function (paymethod, i) {
+  }, t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')), (paymethods === null || paymethods === void 0 ? void 0 : paymethods.length) > 0 && paymethods.map(function (paymethod, i) {
     return /*#__PURE__*/_react.default.createElement("option", {
       key: i,
       value: paymethod.value
@@ -81,15 +75,17 @@ var StripeRedirectFormUI = function StripeRedirectFormUI(props) {
     placeholder: t('TYPE_ACCOUNT_HOLDER', 'Type an Account holder'),
     ref: register({
       required: true
-    })
+    }),
+    autoComplete: "off"
   }), errors.name && errors.name.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('FIELD_REQUIRED', 'This field is required'))), /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "email",
     type: "email",
     defaultValue: user.email,
-    placeholder: t('TYPE_EMAIL', 'Type an email'),
+    placeholder: t('TYPE_AN_EMAIL', 'Type an email'),
     ref: register({
       required: true
-    })
+    }),
+    autoComplete: "off"
   }), errors.email && errors.email.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('FIELD_REQUIRED', 'This field is required'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",

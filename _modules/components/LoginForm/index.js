@@ -134,7 +134,7 @@ var LoginFormUI = function LoginFormUI(props) {
 
       setAlertState({
         open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR')]
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
     }
   }, [formState]);
@@ -185,38 +185,40 @@ var LoginFormUI = function LoginFormUI(props) {
     type: "email",
     name: "email",
     "aria-label": "email",
-    placeholder: t('EMAIL'),
+    placeholder: t('EMAIL', 'Email'),
     ref: register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
       pattern: {
         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
       }
     }),
     onChange: function onChange(e) {
       return hanldeChangeInput(e);
-    }
+    },
+    autoComplete: "off"
   }), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "tel",
     name: "cellphone",
     "aria-label": "cellphone",
     placeholder: "Cellphone",
     ref: register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'Cellphone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+      required: t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
     }),
     onChange: function onChange(e) {
       return hanldeChangeInput(e);
-    }
+    },
+    autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     "aria-label": "password",
-    placeholder: t('PASSWORD'),
+    placeholder: t('PASSWORD', 'Password'),
     ref: register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
+      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
       minLength: {
         value: 5,
-        message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+        message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     }),
     onChange: function onChange(e) {
@@ -228,7 +230,7 @@ var LoginFormUI = function LoginFormUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading
-  }, formState.loading ? t('LOADING') + '...' : t('LOGIN'))), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('LOGIN', 'Login'))), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', 'New on Ordering?')), elementLinkToSignup), /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
@@ -237,9 +239,9 @@ var LoginFormUI = function LoginFormUI(props) {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('LOGIN'),
+    title: t('LOGIN', 'Login'),
     content: alertState.content,
-    acceptText: t('ACCEPT'),
+    acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return closeAlert();

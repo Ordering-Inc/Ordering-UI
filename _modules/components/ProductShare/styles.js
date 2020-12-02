@@ -94,7 +94,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  margin: 0px;\n  top: 0px;\n  font-size: 22px;\n  right: 16px;\n  z-index: 9999995;\n\n  ", "\n\n  svg {\n    cursor: pointer;\n    color: #333;\n  }\n\n  @media (min-width: 1201px) {\n    position: absolute;\n    margin: 0 10px;\n    left: initial;\n\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: sticky;\n  margin: 0px;\n  top: 0px;\n  font-size: 22px;\n  right: 16px;\n  z-index: 9999995;\n\n  ", "\n\n  svg {\n    cursor: pointer;\n    color: #333;\n  }\n\n\n  @media(min-width: 769px){\n    position: relative;\n  }\n\n  @media (min-width: 1201px) {\n    position: absolute;\n    margin: 0 10px;\n    left: initial;\n\n    ", "\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

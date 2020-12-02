@@ -41,25 +41,28 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   var isSkeleton = props.isSkeleton,
       categories = props.categories,
       handlerClickCategory = props.handlerClickCategory,
-      categorySelected = props.categorySelected;
+      categorySelected = props.categorySelected,
+      featured = props.featured,
+      openBusinessInformation = props.openBusinessInformation;
+
+  var ProductCategories = function ProductCategories() {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categories && categories.length && categories.map(function (category) {
+      return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+        className: "category ".concat(category.id === 'featured' ? 'special' : ''),
+        active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
+        key: category.name,
+        onClick: function onClick() {
+          return handlerClickCategory(category);
+        }
+      }, category.name);
+    }));
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
-    id: "container"
+    featured: featured
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
-    variant: "primary",
-    id: "categories"
-  }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    categories: "categories",
-    container: "container"
-  }, categories && categories.length && categories.map(function (category) {
-    return category.id !== 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
-      className: "category",
-      active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
-      key: category.name,
-      onClick: function onClick() {
-        return handlerClickCategory(category);
-      }
-    }, category.name);
-  }))) : /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+    variant: "primary"
+  }, openBusinessInformation ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(ProductCategories, null)) : /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, /*#__PURE__*/_react.default.createElement(ProductCategories, null))) : /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, _toConsumableArray(Array(4).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {

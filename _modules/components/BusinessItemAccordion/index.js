@@ -42,9 +42,12 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessItemAccordion = function BusinessItemAccordion(props) {
-  var _Object$values$filter, _orderState$options;
+  var _orderState$options;
 
-  var isCheckout = props.isCheckout,
+  var uuid = props.uuid,
+      isCartPending = props.isCartPending,
+      currentCartUuid = props.currentCartUuid,
+      isCheckout = props.isCheckout,
       isClosed = props.isClosed,
       moment = props.moment,
       business = props.business,
@@ -85,49 +88,73 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       setRotate = _useState6[0],
       setRotateState = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      cartProductUpdated = _useState8[0],
+      setCartProductUpdated = _useState8[1];
+
   var content = (0, _react.useRef)(null);
   var businessStore = (0, _react.useRef)(null);
   var businessDelete = (0, _react.useRef)(null);
-  var cartsLength = (_Object$values$filter = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
-    return cart.products.length > 0;
-  }).length) !== null && _Object$values$filter !== void 0 ? _Object$values$filter : 0;
 
   var toggleAccordion = function toggleAccordion(e) {
     var _businessStore$curren, _businessDelete$curre;
 
     var isActionsClick = ((_businessStore$curren = businessStore.current) === null || _businessStore$curren === void 0 ? void 0 : _businessStore$curren.contains(e === null || e === void 0 ? void 0 : e.target)) || ((_businessDelete$curre = businessDelete.current) === null || _businessDelete$curre === void 0 ? void 0 : _businessDelete$curre.contains(e === null || e === void 0 ? void 0 : e.target));
     if (isClosed || !isProducts || isActionsClick) return;
-    setActiveState(setActive === '' ? 'active' : '');
-    setHeightState(setActive === 'active' ? '0px' : "".concat(content.current.scrollHeight, "px"));
+    setActiveState(setActive === '' ? 'active' : ''); // setHeightState(
+    //   setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
+    // )
+
     setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
   };
 
   var activeAccordion = function activeAccordion(value) {
-    setActiveState(value ? 'active' : '');
-    setHeightState(value ? "".concat(content.current.scrollHeight, "px") : '0px');
+    setActiveState(value ? 'active' : ''); // setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
+
     setRotateState(value ? 'accordion__icon rotate' : 'accordion__icon');
   };
 
+  var handleCloseCartPopover = function handleCloseCartPopover() {
+    var _Object$values$filter;
+
+    var cartsLength = (_Object$values$filter = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
+      return cart.products.length > 0;
+    }).length) !== null && _Object$values$filter !== void 0 ? _Object$values$filter : 0;
+
+    if (cartsLength > 1 && !isCheckout) {
+      activeAccordion(false);
+    }
+  };
+
+  var handleCartProductUpdated = function handleCartProductUpdated(product, cart) {
+    setCartProductUpdated(cart === null || cart === void 0 ? void 0 : cart.uuid);
+  };
+
   (0, _react.useEffect)(function () {
-    if (cartsLength === 1 || isCheckout) {
+    if (cartProductUpdated === uuid || currentCartUuid === uuid && (!cartProductUpdated || cartProductUpdated === uuid)) {
       activeAccordion(true);
     } else {
       activeAccordion(false);
     }
-  }, [isCheckout]);
+  }, [cartProductUpdated, currentCartUuid]);
+  (0, _react.useEffect)(function () {
+    var _Object$values$filter2;
 
-  var handleAddedProduct = function handleAddedProduct(product, cart) {
-    var _cart$business;
+    var cartsLength = (_Object$values$filter2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
+      return cart.products.length > 0;
+    }).length) !== null && _Object$values$filter2 !== void 0 ? _Object$values$filter2 : 0;
 
-    if ((cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (business === null || business === void 0 ? void 0 : business.slug)) {
+    if ((cartsLength === 1 || isCheckout) && !isClosed) {
       activeAccordion(true);
     }
-  };
-
+  }, [orderState === null || orderState === void 0 ? void 0 : orderState.carts]);
   (0, _react.useEffect)(function () {
-    events.on('cart_product_added', handleAddedProduct);
+    events.on('cart_popover_closed', handleCloseCartPopover);
+    events.on('cart_product_updated', handleCartProductUpdated);
     return function () {
-      return events.off('cart_product_added', handleAddedProduct);
+      events.off('cart_popover_closed', handleCloseCartPopover);
+      events.off('cart_product_updated', handleCartProductUpdated);
     };
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, {
@@ -142,14 +169,14 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     bgimage: business === null || business === void 0 ? void 0 : business.logo
   })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time)))), !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, isValidProducts && orderTotal > 0 && /*#__PURE__*/_react.default.createElement("p", null, parsePrice(orderTotal)), /*#__PURE__*/_react.default.createElement("p", null, t('CART_TOTAL', 'Total'))), isClosed && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
     className: "closed"
-  }, /*#__PURE__*/_react.default.createElement("p", null, t('CLOSED', 'Cloed'), " ", moment)), !isClosed && !isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, /*#__PURE__*/_react.default.createElement("p", null, t('NO_PRODUCTS', 'No products'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessActions, null, /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("p", null, t('CLOSED', 'Closed'), " ", moment)), !isClosed && !isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, /*#__PURE__*/_react.default.createElement("p", null, t('NO_PRODUCTS', 'No products'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessActions, null, /*#__PURE__*/_react.default.createElement("span", {
     ref: businessStore,
     onClick: function onClick() {
       return handleStoreRedirect(business === null || business === void 0 ? void 0 : business.slug);
     }
   }, /*#__PURE__*/_react.default.createElement(_BiStoreAlt.default, {
     color: "#CCC"
-  })), !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+  })), !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCartPending && /*#__PURE__*/_react.default.createElement("span", {
     ref: businessDelete,
     onClick: function onClick() {
       return handleClearProducts();

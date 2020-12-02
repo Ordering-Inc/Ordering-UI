@@ -66,7 +66,7 @@ var ProfileOptions = function ProfileOptions(_ref) {
         page: 'profile'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsPerson.default, null), " ", t('MY_ACCOUNT', 'My account'))), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPerson.default, null), " ", t('MY_ACCOUNT', 'My Account'))), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     active: tabValue === 'My Orders'
   }, /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {

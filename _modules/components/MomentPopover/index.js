@@ -100,10 +100,18 @@ var MomentPopover = function MomentPopover(props) {
     }
   };
 
+  var handleKeyDown = function handleKeyDown(e) {
+    if (e.keyCode === 27) {
+      props.onClose && props.onClose();
+    }
+  };
+
   (0, _react.useEffect)(function () {
     window.addEventListener('mouseup', handleClickOutside);
+    window.addEventListener('keydown', handleKeyDown);
     return function () {
-      return window.removeEventListener('mouseup', handleClickOutside);
+      window.removeEventListener('mouseup', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
 
@@ -125,7 +133,8 @@ var MomentPopover = function MomentPopover(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
-    onClick: props.onClick
+    onClick: props.onClick,
+    isHome: props.isHome
   }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, null), " ", ((_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.moment) ? parseDate((_orderStatus$options2 = orderStatus.options) === null || _orderStatus$options2 === void 0 ? void 0 : _orderStatus$options2.moment, {
     outputFormat: 'MM/DD hh:mma'
   }) : t('ASAP_ABBREVIATION', 'ASAP')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({

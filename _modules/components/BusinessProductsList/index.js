@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _categoryState$produc;
+  var _categoryState$produc, _categoryState$produc2, _categoryState$produc3;
 
   var errors = props.errors,
       businessId = props.businessId,
@@ -52,7 +52,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       categories = props.categories,
       categoryState = props.categoryState,
       isBusinessLoading = props.isBusinessLoading,
-      onProductClick = props.onProductClick;
+      onProductClick = props.onProductClick,
+      handleSearchRedirect = props.handleSearchRedirect,
+      featured = props.featured,
+      searchValue = props.searchValue,
+      handleClearSearch = props.handleClearSearch;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -66,12 +70,22 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       businessId: businessId,
       onProductClick: onProductClick
     });
-  })), !category.id && categories.filter(function (category) {
+  })), !category.id && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
+    return product.featured;
+  })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.map(function (product) {
+    return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+      key: product.id,
+      isSoldOut: product.inventoried && !product.quantity,
+      product: product,
+      businessId: businessId,
+      onProductClick: onProductClick
+    });
+  })))), !category.id && categories.filter(function (category) {
     return category.id !== null;
   }).map(function (category, i, _categories) {
-    var _categoryState$produc2;
+    var _categoryState$produc4;
 
-    var products = ((_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.filter(function (product) {
+    var products = ((_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.filter(function (product) {
       return product.category_id === category.id;
     })) || [];
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -95,9 +109,13 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       key: "skeleton:".concat(i),
       isSkeleton: true
     });
-  })), !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')
-  }), errors && errors.length > 0 && errors.map(function (e, i) {
+  })), !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
+    btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
+    onClickButton: function onClickButton() {
+      return !searchValue ? handleSearchRedirect() : handleClearSearch('');
+    }
+  })), errors && errors.length > 0 && errors.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, "ERROR: [", e, "]");

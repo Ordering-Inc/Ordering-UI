@@ -136,7 +136,7 @@ var HomeHero = function HomeHero(props) {
     "aria-label": "address selection",
     type: "text",
     disabled: true,
-    placeholder: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_ADDRESS', 'Type address')
+    placeholder: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_AN_ADDRESS', 'Type an address')
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     name: "find-business",

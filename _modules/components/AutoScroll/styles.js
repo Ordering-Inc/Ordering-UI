@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DivContainer = void 0;
+exports.AutoscrollContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -104,7 +104,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: ", ";\n  \n  svg{\n    background: #D9D9D9;\n    display: inline-block;\n    border-radius: 50%;\n    width: 20px;\n    height: 20px;\n    align-self: center;\n    top: ", ";\n    position: sticky;\n    color: #000000;\n  }\n\n  #right-autoscroll{\n    ", "\n  }\n  #left-autoscroll{\n    ", "    \n  }\n  svg.hidden{\n    opacity: 0;\n  }\n\n  @media (min-width: 480px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n  }\n  }\n\n  @media (min-width: 768px){\n    width: ", ";\n    display: inherit;\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n  }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: ", ";\n  \n  svg{\n    background: #D9D9D9;\n    display: inline-block;\n    border-radius: 50%;\n    width: 20px;\n    height: 20px;\n    align-self: center;\n    top: ", ";\n    position: sticky;\n    color: #000000;\n    border: 1px solid #333;\n    opacity: 0.9;\n  }\n\n  #right-autoscroll{\n    ", "\n  }\n  #left-autoscroll{\n    ", "    \n  }\n  svg:active{\n    border: 0\n  }\n  svg.hidden{\n    opacity: 0;\n  }\n\n  @media (min-width: 480px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n    }\n  }\n\n  @media (min-width: 768px){\n    width: ", ";\n    display: inherit;\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n  }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -115,7 +115,7 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var DivContainer = _styledComponents.default.span(_templateObject(), function (props) {
+var AutoscrollContainer = _styledComponents.default.span(_templateObject(), function (props) {
   return props.modal ? '-webkit-box' : 'inherit';
 }, function (props) {
   return props.modal ? '35%' : '0';
@@ -149,4 +149,4 @@ var DivContainer = _styledComponents.default.span(_templateObject(), function (p
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject10());
 });
 
-exports.DivContainer = DivContainer;
+exports.AutoscrollContainer = AutoscrollContainer;

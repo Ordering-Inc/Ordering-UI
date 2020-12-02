@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
+exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -14,6 +14,14 @@ var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
 var _FaCreditCard = _interopRequireDefault(require("@meronex/icons/fa/FaCreditCard"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -145,5 +153,32 @@ exports.convertHoursToMinutes = convertHoursToMinutes;
 var capitalize = function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
+/**
+ * Function to return a static google maps image based in location
+ * @param {object} param object with latitude and logitude
+ */
+
 
 exports.capitalize = capitalize;
+
+var getGoogleMapImage = function getGoogleMapImage(_ref) {
+  var lat = _ref.lat,
+      lng = _ref.lng;
+  var googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk';
+  return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(lat, ",").concat(lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(lat, ",").concat(lng, "&key=").concat(googleMapKey);
+};
+/**
+ * _Function to flat array of one level
+ * @param {Array} arr to flat
+ */
+
+
+exports.getGoogleMapImage = getGoogleMapImage;
+
+var flatArray = function flatArray(arr) {
+  var _ref2;
+
+  return (_ref2 = []).concat.apply(_ref2, _toConsumableArray(arr));
+};
+
+exports.flatArray = flatArray;

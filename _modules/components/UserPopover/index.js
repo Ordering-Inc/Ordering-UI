@@ -105,6 +105,12 @@ var UserPopover = function UserPopover(props) {
     }
   };
 
+  var handleKeyDown = function handleKeyDown(e) {
+    if (e.keyCode === 27) {
+      props.onClose && props.onClose();
+    }
+  };
+
   var handleGoToPage = function handleGoToPage(page) {
     events.emit('go_to_page', {
       page: page
@@ -114,8 +120,10 @@ var UserPopover = function UserPopover(props) {
 
   (0, _react.useEffect)(function () {
     window.addEventListener('mouseup', handleClickOutside);
+    window.addEventListener('keydown', handleKeyDown);
     return function () {
-      return window.removeEventListener('mouseup', handleClickOutside);
+      window.removeEventListener('mouseup', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
 

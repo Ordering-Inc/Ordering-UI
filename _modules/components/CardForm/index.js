@@ -73,10 +73,11 @@ var CardFormUI = function CardFormUI(props) {
     onClick: function onClick() {
       return handleCancel();
     }
-  }, t('CANCEL', 'cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    type: "submit"
-  }, loading ? 'Loading...' : 'Add')));
+    type: "submit",
+    disabled: loading
+  }, loading ? t('LOADING', 'Loading...') : t('ADD', 'Add'))));
 };
 
 var CardForm = function CardForm(props) {

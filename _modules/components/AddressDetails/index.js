@@ -19,8 +19,6 @@ var _Modal = require("../Modal");
 
 var _Confirm = require("../Confirm");
 
-var _AddressForm = require("../AddressForm");
-
 var _AddressList = require("../AddressList");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -48,15 +46,10 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _orderState$options2;
-
-  var userAddress = props.userAddress,
+  var isCartPending = props.isCartPending,
+      userAddress = props.userAddress,
       orderType = props.orderType,
       googleMapsUrl = props.googleMapsUrl;
-
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -66,13 +59,10 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({
-    listOpen: false,
-    formOpen: false
-  }),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      modals = _useState2[0],
-      setModals = _useState2[1];
+      openModal = _useState2[0],
+      setOpenModal = _useState2[1];
 
   var _useState3 = (0, _react.useState)({
     open: false,
@@ -81,23 +71,6 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       alertState = _useState4[0],
       setAlertState = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(true),
-      _useState6 = _slicedToArray(_useState5, 2),
-      showMap = _useState6[0],
-      setShowMap = _useState6[1];
-
-  var handleClickAddress = function handleClickAddress(e) {
-    if (auth) {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: true
-      }));
-    } else {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: true
-      }));
-    }
-  };
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -110,64 +83,29 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       return;
     }
 
-    setModals({
-      listOpen: false,
-      formOpen: false
-    }); // onFindBusiness && onFindBusiness()
+    setOpenModal(false);
   };
 
   (0, _react.useEffect)(function () {
     return function () {
-      return setModals({
-        listOpen: false,
-        formOpen: false
-      });
+      return setOpenModal(false);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h4", null, userAddress), orderType === 1 && /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h4", null, userAddress), orderType === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     onClick: function onClick() {
-      return handleClickAddress();
+      return setOpenModal(true);
     }
-  }), /*#__PURE__*/_react.default.createElement("span", {
-    onClick: function onClick() {
-      return setShowMap(!showMap);
-    }
-  }, showMap ? 'Hide map' : 'View map'))), showMap && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
     alt: "google-maps-location"
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS'),
-    open: modals.formOpen,
+    title: t('ADDRESSES', 'Addresses'),
+    open: openModal,
     onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) || {},
-    onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    },
-    onSaveAddress: function onSaveAddress() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    }
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES'),
-    open: modals.listOpen,
-    onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: false
-      }));
+      return setOpenModal(false);
     },
     onCancel: function onCancel() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: false
-      }));
+      return setOpenModal(false);
     },
     onAccept: function onAccept() {
       return handleFindBusinesses();
@@ -175,9 +113,9 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     changeOrderAddressWithDefault: true
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('SEARCH'),
+    title: t('SEARCH', 'Search'),
     content: alertState.content,
-    acceptText: t('ACCEPT'),
+    acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return setAlertState({

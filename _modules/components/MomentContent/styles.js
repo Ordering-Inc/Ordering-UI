@@ -13,8 +13,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _templateObject5() {
+function _templateObject6() {
   var data = _taggedTemplateLiteral(["\n    left: 0;\n  "]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n    right: 0;\n  "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -24,7 +34,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n    right: 0;\n  "]);
+  var data = _taggedTemplateLiteral(["\n    background-color: rgba(255, 255, 255, 0.7);\n  "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -34,7 +44,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  background-color: rgba(255, 255, 255, 0.7);\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: ", ";\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  ", "\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: ", ";\n  ", "\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -73,12 +83,15 @@ var Container = _styledComponents.default.div(_templateObject(), function (_ref)
 exports.Container = Container;
 
 var Layer = _styledComponents.default.div(_templateObject3(), function (_ref2) {
-  var height = _ref2.height;
+  var nobg = _ref2.nobg;
+  return !nobg && (0, _styledComponents.css)(_templateObject4());
+}, function (_ref3) {
+  var height = _ref3.height;
   return height || '100vh';
 }, function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) ? (0, _styledComponents.css)(_templateObject4()) : (0, _styledComponents.css)(_templateObject5());
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) ? (0, _styledComponents.css)(_templateObject5()) : (0, _styledComponents.css)(_templateObject6());
 });
 
 exports.Layer = Layer;

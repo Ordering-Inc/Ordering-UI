@@ -20,7 +20,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 80%;\n  flex-direction: column;\n  > input {\n  width: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 80%;\n  flex-direction: column;\n  > input {\n  width: 100%;\n  }\n\n  h2 {\n    text-transform: capitalize;\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;

@@ -25,8 +25,6 @@ var NotNetworkConnectivity = function NotNetworkConnectivity() {
       display: onlineStatus ? 'none' : 'flex'
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
-    width: "300px",
-    height: "300px",
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notNetwork,
     alt: "Not network"
   })));

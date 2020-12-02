@@ -64,7 +64,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _orderState$options2;
+  var _businessesList$busin, _orderState$options4;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -150,7 +150,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
-    placeholder: t('SEARCH_BUSINESS', 'Search Businesses')
+    placeholder: t('SEARCH_BUSINESSES', 'Search Businesses')
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -160,25 +160,31 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleClickAddress();
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
+    var _orderState$options2;
+
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
       className: "card",
       business: business,
-      handleCustomClick: handleBusinessClick
+      handleCustomClick: handleBusinessClick,
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
     });
   }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
+    var _orderState$options3;
+
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
-      isSkeleton: true
+      isSkeleton: true,
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
     });
   }), businessesList.error && businessesList.error.length > 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
-    }, "ERROR: [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
+    }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS'),
+    title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -187,7 +193,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
@@ -204,7 +210,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES'),
+    title: t('ADDRESSES', 'Address List'),
     open: modals.listOpen,
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -222,9 +228,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     changeOrderAddressWithDefault: true
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('SEARCH'),
+    title: t('SEARCH', 'Search'),
     content: alertState.content,
-    acceptText: t('ACCEPT'),
+    acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return setAlertState({

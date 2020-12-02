@@ -13,6 +13,8 @@ var _orderingComponents = require("ordering-components");
 
 var _BsChevronDown = _interopRequireDefault(require("@meronex/icons/bs/BsChevronDown"));
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _Selects = require("../Selects");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -34,11 +36,13 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Select = function Select(props) {
-  var placeholder = props.placeholder,
+  var isSmall = props.isSmall,
+      placeholder = props.placeholder,
       options = props.options,
       defaultValue = props.defaultValue,
       onChange = props.onChange,
-      notAsync = props.notAsync;
+      notAsync = props.notAsync,
+      notReload = props.notReload;
   var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
 
   var _useState = (0, _react.useState)(false),
@@ -82,10 +86,18 @@ var Select = function Select(props) {
     }
   };
 
+  var handleKeyDown = function handleKeyDown(e) {
+    if (e.keyCode === 27) {
+      setOpen(false);
+    }
+  };
+
   (0, _react.useEffect)(function () {
     document.addEventListener('mouseup', closeSelect);
+    document.addEventListener('keydown', handleKeyDown);
     return function () {
-      return document.removeEventListener('mouseup', closeSelect);
+      document.removeEventListener('mouseup', closeSelect);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
   (0, _react.useEffect)(function () {
@@ -105,11 +117,14 @@ var Select = function Select(props) {
     onChange && onChange(option.value);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+  return orderState.loading && !notReload ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: isSmall ? 68 : 134,
+    height: 34
+  }) : /*#__PURE__*/_react.default.createElement(_Selects.Select, {
     isHome: isHome,
     disabled: orderState.loading,
     onClick: handleSelectClick
-  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, !orderState.loading ? selectedOption.showOnSelected || selectedOption.content : '...'), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     position: "right",
     ref: dropdownReference
   }, options.map(function (option) {

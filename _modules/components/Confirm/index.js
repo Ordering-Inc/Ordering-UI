@@ -68,12 +68,12 @@ var ConfirmUI = function ConfirmUI(props) {
     onClick: function onClick() {
       return onCancel();
     }
-  }, cancelText || t('CANCEL')), onAccept && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, cancelText || t('CANCEL', 'Cancel')), onAccept && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return onAccept();
     }
-  }, acceptText || t('ACCEPT'))));
+  }, acceptText || t('ACCEPT', 'Accept'))));
 };
 
 var Confirm = function Confirm(props) {

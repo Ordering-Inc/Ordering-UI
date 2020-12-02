@@ -15,11 +15,13 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _Confirm = require("../Confirm");
 
+var _InputPhoneNumber = require("../InputPhoneNumber");
+
+var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
-
-var _Tabs = require("../../styles/Tabs");
 
 var _Inputs = require("../../styles/Inputs");
 
@@ -61,10 +63,12 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone'];
+
 var SignUpFormUI = function SignUpFormUI(props) {
   var _theme$images, _theme$images$logos, _configs$facebook_id;
 
-  var hanldeChangeInput = props.hanldeChangeInput,
+  var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
       elementLinkToLogin = props.elementLinkToLogin,
       useChekoutFileds = props.useChekoutFileds,
@@ -73,8 +77,6 @@ var SignUpFormUI = function SignUpFormUI(props) {
       isRequiredField = props.isRequiredField,
       formState = props.formState,
       handleSuccessSignup = props.handleSuccessSignup,
-      useLoginByCellphone = props.useLoginByCellphone,
-      useLoginByEmail = props.useLoginByEmail,
       isPopup = props.isPopup;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -103,6 +105,16 @@ var SignUpFormUI = function SignUpFormUI(props) {
       login = _useSession2[1].login;
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      userPhoneNumber = _useState4[0],
+      setUserPhoneNumber = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isValidPhoneNumber = _useState6[0],
+      setIsValidPhoneNumber = _useState6[1];
 
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
     login({
@@ -142,6 +154,26 @@ var SignUpFormUI = function SignUpFormUI(props) {
   };
 
   var onSubmit = function onSubmit() {
+    var _validationFields$fie, _validationFields$fie2;
+
+    var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
+
+    if (!userPhoneNumber && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.cellphone) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.required)) {
+      setAlertState({
+        open: true,
+        content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
+      });
+      return;
+    }
+
+    if (!isPhoneNumberValid) {
+      setAlertState({
+        open: true,
+        content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
+      });
+      return;
+    }
+
     handleButtonSignupClick();
 
     if (!formState.loading && formState.result.result && !formState.result.error) {
@@ -149,49 +181,95 @@ var SignUpFormUI = function SignUpFormUI(props) {
     }
   };
 
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+    setUserPhoneNumber(number);
+    var phoneNumberParser = null;
+    var phoneNumber = {
+      country_phone_code: {
+        name: 'country_phone_code',
+        value: ''
+      },
+      cellphone: {
+        name: 'cellphone',
+        value: ''
+      }
+    };
+
+    if (isValid) {
+      phoneNumberParser = (0, _libphonenumberJs.default)(number);
+    }
+
+    if (phoneNumberParser) {
+      phoneNumber = {
+        country_phone_code: {
+          name: 'country_phone_code',
+          value: phoneNumberParser.countryCallingCode
+        },
+        cellphone: {
+          name: 'cellphone',
+          value: phoneNumberParser.nationalNumber
+        }
+      };
+    }
+
+    handleChangeInput(phoneNumber, true);
+  };
+
+  var showInputPhoneNumber = function showInputPhoneNumber() {
+    var _validationFields$fie3, _validationFields$fie4, _validationFields$fie5;
+
+    return (_validationFields$fie3 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.cellphone) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.enabled) !== null && _validationFields$fie3 !== void 0 ? _validationFields$fie3 : false;
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_LOGIN', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_LOGIN', 'Enter your personal details and start journey with us.')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_SIGN_UP', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("img", {
+    id: "logo",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
-    alt: "Logo login"
-  }), useLoginByCellphone && useLoginByEmail && /*#__PURE__*/_react.default.createElement(_styles.SignUpWith, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
-    variant: "primary"
-  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, null, t('SIGNUP_WITH_EMAIL', 'Signup by Email')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, null, t('SIGNUP_WITH_CELLPHONE', 'Signup by Cellphone')))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+    alt: "Logo sign up"
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit),
     isSkeleton: useChekoutFileds && validationFields.loading
   }, !(useChekoutFileds && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.values(validationFields.fields).map(function (field) {
-    return showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.enabled && field.required ? field.type : 'hidden',
       name: field.code,
       "aria-label": field.code,
+      className: "form",
       placeholder: t(field.name),
-      onChange: hanldeChangeInput,
+      onChange: handleChangeInput,
       ref: register({
-        required: isRequiredField(field.code) ? t('VALIDATION_ERROR_REQUIRED', "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null,
+        required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null,
         pattern: {
           value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-          message: field.code === 'email' ? t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+          message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
         }
       }),
-      required: field.required
+      required: field.required,
+      autoComplete: "off"
     });
+  }), !!showInputPhoneNumber() && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    value: userPhoneNumber,
+    setValue: handleChangePhoneNumber,
+    handleIsValid: setIsValidPhoneNumber
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     "aria-label": "password",
+    className: "form",
     placeholder: t('PASSWORD', 'Password'),
-    onChange: hanldeChangeInput,
+    onChange: handleChangeInput,
     required: true,
     ref: register({
-      required: isRequiredField('password') ? t('VALIDATION_ERROR_REQUIRED', 'password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+      required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
       minLength: {
         value: 5,
-        message: t('VALIDATION_ERROR_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+        message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(3)).map(function (item, i) {
@@ -203,16 +281,16 @@ var SignUpFormUI = function SignUpFormUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading || validationFields.loading
-  }, formState.loading ? t('LOADING') + '...' : t('SIGNUP', 'Sign up'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_UP', 'Sign up'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
   }, (configs === null || configs === void 0 ? void 0 : configs.facebook_id) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('SIGNUP', 'Sign up'),
+    title: t('SIGN_UP', 'Sign up'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

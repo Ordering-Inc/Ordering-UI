@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ProductOptionSubOption = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -28,6 +30,10 @@ var _MdRadioButtonChecked = _interopRequireDefault(require("@meronex/icons/md/Md
 var _MdRadioButtonUnchecked = _interopRequireDefault(require("@meronex/icons/md/MdRadioButtonUnchecked"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -57,9 +63,18 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
       toggleSelect = props.toggleSelect,
       changePosition = props.changePosition;
 
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      showMessage = _useState2[0],
+      setShowMessage = _useState2[1];
 
   var handleIncrement = function handleIncrement(e) {
     e.stopPropagation();
@@ -76,17 +91,34 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     changePosition(position);
   };
 
+  var handleSuboptionClick = function handleSuboptionClick() {
+    var _option$suboptions;
+
+    toggleSelect();
+
+    if (balance === option.max && (option === null || option === void 0 ? void 0 : (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length) > balance && !(option.min === 1 && option.max === 1)) {
+      setShowMessage(true);
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    var _option$suboptions2;
+
+    if (!(balance === option.max && (option === null || option === void 0 ? void 0 : (_option$suboptions2 = option.suboptions) === null || _option$suboptions2 === void 0 ? void 0 : _option$suboptions2.length) > balance && !(option.min === 1 && option.max === 1))) {
+      setShowMessage(false);
+    }
+  }, [balance]);
   var disableIncrement = option.limit_suboptions_by_max ? balance === option.max : state.quantity === suboption.max || !state.selected && balance === option.max;
   var price = option.with_half_option && suboption.half_price && state.position !== 'whole' ? suboption.half_price : suboption.price;
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     onClick: function onClick() {
-      return toggleSelect();
+      return handleSuboptionClick();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, option.max > 1 ? (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, option.min === 0 && option.max === 1 || option.max > 1 ? (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
   }) : (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
     disabled: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.Text, null, suboption.name), option.allow_suboption_quantity && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Text, null, suboption.name, showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option.max))), option.allow_suboption_quantity && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
     disabled: state.quantity === 0,
     onClick: handleDecrement
   }), state.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {

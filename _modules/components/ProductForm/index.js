@@ -35,6 +35,8 @@ var _SignUpForm = require("../SignUpForm");
 
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
+var _AddressList = require("../AddressList");
+
 var _Modal = require("../Modal");
 
 var _Buttons = require("../../styles/Buttons");
@@ -68,7 +70,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductOptionsUI = function ProductOptionsUI(props) {
-  var _theme$images, _theme$images$dummies;
+  var _theme$images, _theme$images$dummies, _orderState$options, _orderState$options2;
 
   var businessSlug = props.businessSlug,
       editMode = props.editMode,
@@ -91,7 +93,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 2),
-      auth = _useSession2[0].auth,
+      _useSession2$ = _useSession2[0],
+      auth = _useSession2$.auth,
+      user = _useSession2$.user,
       login = _useSession2[1].login;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -138,9 +142,15 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
 
     var myElement = document.getElementsByClassName('error')[0];
-    var container = document.getElementById('product_edition');
-    var topPos = myElement.offsetTop - container.offsetTop;
-    (0, _utils.scrollTo)(container, topPos, 1250);
+    var modal = document.getElementsByClassName('popup-dialog')[0];
+    var topPos = myElement.offsetTop - modal.offsetTop;
+
+    if (windowSize.width <= 768) {
+      var productImage = document.getElementById('product_image');
+      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0);
+    }
+
+    (0, _utils.scrollTo)(modal, topPos, 1250);
   };
 
   var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
@@ -154,15 +164,14 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       user: user,
       token: user.session.access_token
     });
+    closeModal();
   };
 
   var isError = function isError(id) {
     return errors["id:".concat(id)] && 'error';
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
-    id: "".concat(windowSize.width <= 1200 && 'product_edition')
-  }, loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, null, loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
@@ -177,12 +186,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     slug: businessSlug,
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
     productId: product === null || product === void 0 ? void 0 : product.id
-  }), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, null, /*#__PURE__*/_react.default.createElement("img", {
+  }), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
+    id: "product_image"
+  }, /*#__PURE__*/_react.default.createElement("img", {
     src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
     alt: "product"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, {
-    id: "".concat(windowSize.width > 1200 && 'product_edition')
-  }, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
       key: ingredient.id,
       onChange: handleChangeIngredientState,
@@ -193,12 +202,13 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return extra.options.map(function (option) {
       var currentState = productCart.options["id:".concat(option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
-        key: option.id,
-        className: isError(option.id)
+        key: option.id
       }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
         option: option,
         currentState: currentState,
         error: errors["id:".concat(option.id)]
+      }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
+        className: isError(option.id)
       }, option.suboptions.map(function (suboption) {
         var _productCart$options$, _productCart$options$2;
 
@@ -212,7 +222,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           suboption: suboption,
           state: currentState
         });
-      })));
+      }))));
     });
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('SPECIAL_COMMENT', 'Special comment')), /*#__PURE__*/_react.default.createElement("textarea", {
     rows: 4,
@@ -220,27 +230,37 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     defaultValue: productCart.comment,
     onChange: handleChangeCommentState,
     disabled: !(productCart && !isSoldOut && maxProductQuantity)
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
+    className: "incdec-control"
+  }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: decrement,
     className: "".concat(productCart.quantity === 1 || isSoldOut ? 'disabled' : '')
   }), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
-  })), productCart && !isSoldOut && maxProductQuantity && auth ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(maxProductQuantity === 0 || Object.keys(errors).length > 0 ? 'disabled' : ''),
     color: "primary",
     onClick: function onClick() {
       return handleSaveProduct();
-    }
-  }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading...')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')), /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))) : /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    className: "add ".concat(!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''),
+    },
+    disabled: orderState.loading
+  }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')), /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))), auth && !((_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    className: "add",
+    color: "primary",
+    disabled: true
+  }, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    addressList: user.addresses,
+    isProductForm: true
+  })), (!auth || isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    className: "add ".concat(!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''),
     color: "primary",
     outline: true,
-    disabled: isSoldOut || maxProductQuantity === 0,
+    disabled: isSoldOut || maxProductQuantity <= 0,
     onClick: function onClick() {
       return setModalIsOpen(true);
     }
-  }, isSoldOut || maxProductQuantity === 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up'))))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up'))))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();
@@ -293,7 +313,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   })), error && error.length > 0 && error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: i
-    }, "Error: [", e, "]");
+    }, t('ERROR', 'Error'), ": [", e, "]");
   }));
 };
 

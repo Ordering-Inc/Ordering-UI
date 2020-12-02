@@ -60,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressListUI = function AddressListUI(props) {
-  var _theme$images, _theme$images$general;
+  var _addressList$addresse, _addressList$addresse2, _theme$images, _theme$images$general;
 
   var actionStatus = props.actionStatus,
       addressList = props.addressList,
@@ -68,7 +68,8 @@ var AddressListUI = function AddressListUI(props) {
       setAddressList = props.setAddressList,
       handleSetDefault = props.handleSetDefault,
       onClosePopover = props.onClosePopover,
-      popover = props.popover;
+      popover = props.popover,
+      isProductForm = props.isProductForm;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -103,7 +104,7 @@ var AddressListUI = function AddressListUI(props) {
     setCurAddress(address);
     setAddessOpen(true);
     var container = window.document.getElementsByClassName('form_edit')[0];
-    (0, _utils.scrollTo)(container, 100, 500);
+    (0, _utils.scrollTo)(container, 0, 500);
   };
 
   var handleSaveAddress = function handleSaveAddress(address) {
@@ -159,20 +160,39 @@ var AddressListUI = function AddressListUI(props) {
       setAddessOpen(false);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, null, (!popover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  return /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
+    id: "address_control",
+    isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
+  }, (!popover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     color: "primary",
     onClick: function onClick() {
       return openAddress({});
-    }
-  }, (orderState === null || orderState === void 0 ? void 0 : orderState.loading) ? t('LOADING', 'Loading...') : t('ADD_ADDRESS', 'Add Address')), popover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    },
+    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading
+  }, (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')), popover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
       return setAddessOpen(false);
     },
     onSaveAddress: handleSaveAddress
-  }), !addressList.loading && !addressList.error ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, addressList.addresses && addressList.addresses.length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, addressList.addresses.map(function (address) {
+  }), !popover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESS', 'Address'),
+    open: !popover && addressOpen,
+    onClose: function onClose() {
+      return setAddessOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
+    useValidationFileds: true,
+    address: curAddress,
+    onCancel: function onCancel() {
+      return setAddessOpen(false);
+    },
+    onSaveAddress: handleSaveAddress
+  })), !addressList.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, addressList.addresses.map(function (address) {
     var _orderState$options, _orderState$options$a;
 
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
@@ -199,36 +219,19 @@ var AddressListUI = function AddressListUI(props) {
         return handleDeleteClick(address);
       }
     }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, null))));
-  })) : !addressOpen && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
+  })), !addressList.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found"
-  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, addressList.error && addressList.error.length > 0 ? addressList.error.map(function (e, i) {
+  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.'))), !addressList.loading && addressList.error && addressList.error.length > 0 && addressList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: i
     }, t('ERROR', 'Error'), ": [", e, "]");
-  }) : /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), addressList.loading && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50,
+    count: 3,
     style: {
       marginBottom: '10px'
     }
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 50,
-    style: {
-      marginBottom: '10px'
-    }
-  }))), !popover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS', 'Address'),
-    open: !popover && addressOpen,
-    onClose: function onClose() {
-      return setAddessOpen(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    useValidationFileds: true,
-    address: curAddress,
-    onCancel: function onCancel() {
-      return setAddessOpen(false);
-    },
-    onSaveAddress: handleSaveAddress
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('SEARCH', 'Search'),
     content: confirm.content,

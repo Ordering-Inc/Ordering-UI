@@ -75,16 +75,9 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       load = _useState2[0],
       setLoad = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
-    id: "container",
-    tabIndex: "0"
-  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
-    variant: "primary",
-    id: "categories"
-  }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    categories: "categories",
-    container: "container"
-  }, businessTypes && businessTypes.length > 0 && businessTypes.map(function (type, i) {
+  return /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+    variant: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, businessTypes && businessTypes.length > 0 && businessTypes.map(function (type, i) {
     return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       className: "category",
       active: type.value === currentTypeSelected,
