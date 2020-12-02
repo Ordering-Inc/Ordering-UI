@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
@@ -27,13 +27,13 @@ const types = ['food', 'laundry', 'alcohol', 'groceries']
 export const BusinessBasicInformation = (props) => {
   const {
     isSkeleton,
-    businessState
+    businessState,
+    setOpenBusinessInformation,
+    openBusinessInformation
   } = props
   const { business, loading } = businessState
 
   const [orderState] = useOrder()
-
-  const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
 
   const [{ parsePrice, parseDistance }] = useUtils()
 
@@ -136,7 +136,7 @@ export const BusinessBasicInformation = (props) => {
       <Modal
         width='70%'
         open={openBusinessInformation}
-        onClose={() => setOpenBusinessInformation(false)}
+        onClose={setOpenBusinessInformation}
         padding='0'
         hideCloseDefault
         isTransparent

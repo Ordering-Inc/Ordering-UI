@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const DivContainer = styled.span`
+export const AutoscrollContainer = styled.span`
   display: ${props => props.modal ? '-webkit-box' : 'inherit'};
   
   svg{
@@ -13,6 +13,8 @@ export const DivContainer = styled.span`
     top: ${props => props.modal ? '35%' : '0'};
     position: sticky;
     color: #000000;
+    border: 1px solid #333;
+    opacity: 0.9;
   }
 
   #right-autoscroll{
@@ -29,6 +31,9 @@ export const DivContainer = styled.span`
       left: 1%;
     `}    
   }
+  svg:active{
+    border: 0
+  }
   svg.hidden{
     opacity: 0;
   }
@@ -43,8 +48,8 @@ export const DivContainer = styled.span`
       ${props => props.theme?.rtl && css`
         right: 95%;
       `
+      }
     }
-  }
   }
 
   @media (min-width: 768px){
