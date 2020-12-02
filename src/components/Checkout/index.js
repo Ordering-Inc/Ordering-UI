@@ -314,7 +314,7 @@ export const Checkout = (props) => {
     handleCheckoutListRedirect
   } = props
 
-  const [orderState] = useOrder()
+  const [orderState, { confirmCart }] = useOrder()
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
@@ -334,7 +334,7 @@ export const Checkout = (props) => {
       open: false,
       content: []
     })
-    clearErrors()
+    clearErrors && clearErrors()
   }
 
   const handleOpenUpsellingPage = (cart) => {
@@ -380,7 +380,7 @@ export const Checkout = (props) => {
         setCartState({ ...cartState, loading: false })
       } else if (result.status === 2 && result.paymethod_data?.gateway === 'stripe_redirect' && query.get('payment_intent')) {
         try {
-          const { error } = await orderState.confirmCart(cartUuid)
+          const { error } = await confirmCart(cartUuid)
           if (error) {
             setAlertState({
               open: true,
