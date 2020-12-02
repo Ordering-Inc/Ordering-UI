@@ -11,11 +11,6 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input } from '../../styles/Inputs'
 
-const inputStyle = {
-  padding: '8px 10px',
-  marginTop: '8px'
-}
-
 const StripeRedirectFormUI = (props) => {
   const {
     paymethods,
@@ -29,9 +24,8 @@ const StripeRedirectFormUI = (props) => {
   return (
     <FormRedirect onSubmit={handleSubmit(handleSubmitPaymentMethod)}>
       <FormGroup>
-        <label>{t('SELECT_PAYMETHOD', 'Select a payment method')}</label>
+        <label>{t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')}</label>
         <select
-          style={inputStyle}
           name='type'
           ref={
             register({
@@ -39,7 +33,7 @@ const StripeRedirectFormUI = (props) => {
             })
           }
         >
-          <option value=''>{t('SELECT_PAYMETHOD', 'Select a payment method')}</option>
+          <option value=''>{t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')}</option>
           {paymethods?.length > 0 && paymethods.map((paymethod, i) => (
             <option key={i} value={paymethod.value}>{paymethod.name}</option>
           ))}
@@ -60,6 +54,7 @@ const StripeRedirectFormUI = (props) => {
               required: true
             })
           }
+          autoComplete='off'
         />
         {errors.name && errors.name.type === 'required' && (
           <ErrorMessage>{t('FIELD_REQUIRED', 'This field is required')}</ErrorMessage>
@@ -72,12 +67,13 @@ const StripeRedirectFormUI = (props) => {
           name='email'
           type='email'
           defaultValue={user.email}
-          placeholder={t('TYPE_EMAIL', 'Type an email')}
+          placeholder={t('TYPE_AN_EMAIL', 'Type an email')}
           ref={
             register({
               required: true
             })
           }
+          autoComplete='off'
         />
         {errors.email && errors.email.type === 'required' && (
           <ErrorMessage>{t('FIELD_REQUIRED', 'This field is required')}</ErrorMessage>

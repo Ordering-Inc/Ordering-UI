@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const FormActions = styled.div`
   padding: 10px 0px;
@@ -26,6 +27,9 @@ export const FormControl = styled.form`
     &.zipcode {
       width: 100%;
     }
+    &::placeholder{
+      color: #CBCBCB
+    }
 
     @media (min-width: 621px) {
       &.internal_number,
@@ -38,28 +42,48 @@ export const FormControl = styled.form`
   textarea {
     width: 100%;
     font-size: 16px;
-    font-weight: 300;
     padding: 10px;
-    border: 1px solid #CCC;
+    border: 1px solid #DBDCDB;
     outline: none;
-    color: #555;
+    color: #010300;
     resize: none;
     border-radius: 16px;
 
     &:focus {
-      border-color: #555;
+      border-color: ${() => darken(0.07, '#CCC')};
+    }
+    
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: #CBCBCB;
+    }
+    &:-ms-input-placeholder {
+      color: #CBCBCB;
     }
   }
 
   .input-autocomplete {
     width: 100%;
     background: #FFF;
-    color: #BBB;
     border: 1px solid #BBB;
     border-radius: 30px;
     font-size: 16px;
     padding: 7px 15px;
     outline: none;
+    ::placeholder {
+      color: #DBDCDB;
+    }
+    
+    &:-ms-input-placeholder {
+      color: #DBDCDB;
+    }
+    
+    &::-ms-input-placeholder { /* Microsoft Edge */
+      color: #DBDCDB;
+    }
+    &:focus {
+      border-color: ${() => darken(0.07, '#CCC')};
+    }
   }
 
   .google-control {
@@ -162,7 +186,8 @@ export const AddressTagSection = styled.div`
   }
 
   button.active {
-    border: 1px solid #D81212;
+    border: 1px solid ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
   }
 `
 
@@ -175,4 +200,12 @@ export const WrapperMap = styled.div`
     height: 100% !important;
     border-radius: 15px;
   }
+`
+
+export const ShowMap = styled.p`
+  text-align: center;
+  color: ${props => props.theme.colors.primary};
+  width: 100%;
+  font-weight: 600;
+  cursor: pointer
 `

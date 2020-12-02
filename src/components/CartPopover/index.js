@@ -7,14 +7,17 @@ import {
   PopoverArrow
 } from './styles'
 
-import { useOrder } from 'ordering-components'
+import { useOrder, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
+import { useLocation } from 'react-router-dom'
 
 export const CartPopover = (props) => {
   const { open, auth } = props
   const [orderState] = useOrder()
   const theme = useTheme()
+  const [events] = useEvent()
+  const location = useLocation()
 
   const referenceElement = useRef()
   const popperElement = useRef()
@@ -44,6 +47,7 @@ export const CartPopover = (props) => {
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
     const outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target)
     if (outsidePopover && outsidePopoverMenu && outsideModal) {
+      events.emit('cart_popover_closed')
       props.onClose && props.onClose()
     }
   }
@@ -56,6 +60,12 @@ export const CartPopover = (props) => {
   useEffect(() => {
     props.onClose()
   }, [auth])
+
+  useEffect(() => {
+    if (location.pathname.includes('/checkout/')) {
+      props.onClose && props.onClose()
+    }
+  }, [location])
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {

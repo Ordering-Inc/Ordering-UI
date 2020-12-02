@@ -4,7 +4,6 @@ import { useTheme } from 'styled-components'
 
 import {
   Header as HeaderContainer,
-  HeaderInvert,
   InnerHeader,
   LogoHeader,
   LeftHeader,
@@ -46,8 +45,6 @@ export const Header = (props) => {
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
-  const HeaderType = isHome ? HeaderInvert : HeaderContainer
-
   const openModal = (opt) => {
     setModalSelected(opt)
     setModalIsOpen(true)
@@ -82,7 +79,7 @@ export const Header = (props) => {
   }, [])
 
   return (
-    <HeaderType>
+    <HeaderContainer home={isHome}>
       <InnerHeader>
         <LeftHeader>
           <SidebarMenu auth={auth} />
@@ -97,6 +94,7 @@ export const Header = (props) => {
                 open={openPopover.moment}
                 onClick={() => handleTogglePopover('moment')}
                 onClose={() => handleClosePopover('moment')}
+                isHome={isHome}
               />
               <AddressesPopover
                 auth={auth}
@@ -104,6 +102,7 @@ export const Header = (props) => {
                 open={openPopover.addresses}
                 onClick={() => handleTogglePopover('addresses')}
                 onClose={() => handleClosePopover('addresses')}
+                isHome={isHome}
               />
             </Menu>
           )}
@@ -114,8 +113,8 @@ export const Header = (props) => {
               {
                 !auth && windowSize.width > 870 && (
                   <>
-                    <MenuLink onClick={() => handleGoToPage({ page: 'signin' })}>{t('SIGNIN', 'Sign in')}</MenuLink>
-                    <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1}>{t('SIGNUP', 'Sign up')}</MenuLink>
+                    <MenuLink onClick={() => handleGoToPage({ page: 'signin' })}>{t('SIGN_IN', 'Sign in')}</MenuLink>
+                    <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1}>{t('SIGN_UP', 'Sign up')}</MenuLink>
                   </>
                 )
               }
@@ -162,11 +161,13 @@ export const Header = (props) => {
               open={openPopover.addresses}
               onClick={() => handleTogglePopover('addresses')}
               onClose={() => handleClosePopover('addresses')}
+              isHome={isHome}
             />
             <MomentPopover
               open={openPopover.moment}
               onClick={() => handleTogglePopover('moment')}
               onClose={() => handleClosePopover('moment')}
+              isHome={isHome}
             />
           </SubMenu>
         ) : (
@@ -175,11 +176,13 @@ export const Header = (props) => {
               variant='address'
               addressState={orderState.options?.address?.address?.split(',')?.[0]}
               onClick={(variant) => openModal(variant)}
+              isHome={isHome}
             />
             <HeaderOption
               variant='moment'
               momentState={orderState.options?.moment}
               onClick={(variant) => openModal(variant)}
+              isHome={isHome}
             />
           </SubMenu>
         )
@@ -210,6 +213,6 @@ export const Header = (props) => {
           )}
         </Modal>
       )}
-    </HeaderType>
+    </HeaderContainer>
   )
 }

@@ -4,7 +4,29 @@ import { Select } from '../../styles/Selects'
 export const Header = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100%;  
+
+  ${props => props.home ? css`
+    background-color: #333;
+
+  & ${Select} {
+    background-color: transparent;
+    border-color: transparent;
+    color: ${props => props.theme.colors.primaryContrast}
+  }
+
+  & ${MenuLink} {
+    color: #FFF;
+  }
+
+  `
+  : css`
+    & ${SubMenu}{
+      div{
+        color: #333;
+      }
+    }
+  `}
 `
 
 export const InnerHeader = styled.div`
@@ -108,22 +130,6 @@ export const MenuLink = styled.a`
     border-radius: 100px;
     padding: 5px 15px;
   `}
-`
-
-export const HeaderInvert = styled(Header)`
-  width: 100%;
-  display: flex;
-  background-color: #333;
-
-  & ${Select} {
-    background-color: transparent;
-    border-color: transparent;
-    color: ${props => props.theme.colors.primaryContrast}
-  }
-
-  & ${MenuLink} {
-    color: #FFF;
-  }
 `
 
 export const SubMenu = styled(InnerHeader)`

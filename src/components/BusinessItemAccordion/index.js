@@ -21,6 +21,9 @@ import {
 
 export const BusinessItemAccordion = (props) => {
   const {
+    uuid,
+    isCartPending,
+    currentCartUuid,
     isCheckout,
     isClosed,
     moment,
@@ -40,20 +43,19 @@ export const BusinessItemAccordion = (props) => {
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
+  const [cartProductUpdated, setCartProductUpdated] = useState(null)
 
   const content = useRef(null)
   const businessStore = useRef(null)
   const businessDelete = useRef(null)
 
-  const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
-
   const toggleAccordion = (e) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
     if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
-    setHeightState(
-      setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
-    )
+    // setHeightState(
+    //   setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
+    // )
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
@@ -61,27 +63,43 @@ export const BusinessItemAccordion = (props) => {
 
   const activeAccordion = (value) => {
     setActiveState(value ? 'active' : '')
-    setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
+    // setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
     setRotateState(value ? 'accordion__icon rotate' : 'accordion__icon')
   }
 
+  const handleCloseCartPopover = () => {
+    const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
+    if (cartsLength > 1 && !isCheckout) {
+      activeAccordion(false)
+    }
+  }
+
+  const handleCartProductUpdated = (product, cart) => {
+    setCartProductUpdated(cart?.uuid)
+  }
+
   useEffect(() => {
-    if (cartsLength === 1 || isCheckout) {
+    if (cartProductUpdated === uuid || (currentCartUuid === uuid && (!cartProductUpdated || cartProductUpdated === uuid))) {
       activeAccordion(true)
     } else {
       activeAccordion(false)
     }
-  }, [isCheckout])
-
-  const handleAddedProduct = (product, cart) => {
-    if (cart?.business?.slug === business?.slug) {
-      activeAccordion(true)
-    }
-  }
+  }, [cartProductUpdated, currentCartUuid])
 
   useEffect(() => {
-    events.on('cart_product_added', handleAddedProduct)
-    return () => events.off('cart_product_added', handleAddedProduct)
+    const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
+    if ((cartsLength === 1 || isCheckout) && !isClosed) {
+      activeAccordion(true)
+    }
+  }, [orderState?.carts])
+
+  useEffect(() => {
+    events.on('cart_popover_closed', handleCloseCartPopover)
+    events.on('cart_product_updated', handleCartProductUpdated)
+    return () => {
+      events.off('cart_popover_closed', handleCloseCartPopover)
+      events.off('cart_product_updated', handleCartProductUpdated)
+    }
   }, [])
 
   return (
@@ -122,7 +140,7 @@ export const BusinessItemAccordion = (props) => {
 
         {isClosed && (
           <BusinessTotal className='closed'>
-            <p>{t('CLOSED', 'Cloed')} {moment}</p>
+            <p>{t('CLOSED', 'Closed')} {moment}</p>
           </BusinessTotal>
         )}
 
@@ -141,12 +159,14 @@ export const BusinessItemAccordion = (props) => {
           </span>
           {!isClosed && !!isProducts && (
             <>
-              <span
-                ref={businessDelete}
-                onClick={() => handleClearProducts()}
-              >
-                <VscTrash color='#D81212' />
-              </span>
+              {!isCartPending && (
+                <span
+                  ref={businessDelete}
+                  onClick={() => handleClearProducts()}
+                >
+                  <VscTrash color='#D81212' />
+                </span>
+              )}
               <span>
                 <IosArrowDown className={`${setRotate}`} />
               </span>

@@ -44,10 +44,10 @@ export const SingleProductCard = (props) => {
 
   return (
     <CardContainer
-      soldOut={isSoldOut || maxProductQuantity === 0}
+      soldOut={isSoldOut || maxProductQuantity <= 0}
       onClick={() => onProductClick(product)}
     >
-      <CardInfo soldOut={isSoldOut || maxProductQuantity === 0}>
+      <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
         {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
         {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
         {!isSkeleton ? (
@@ -59,14 +59,14 @@ export const SingleProductCard = (props) => {
       {!isSkeleton ? (
         <WrapLogo>
           <CardLogo
-            soldOut={isSoldOut || maxProductQuantity === 0}
+            soldOut={isSoldOut || maxProductQuantity <= 0}
             bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
           />
         </WrapLogo>
       ) : (
         <Skeleton height={75} width={75} />
       )}
-      {(isSoldOut || maxProductQuantity === 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
+      {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
     </CardContainer>
   )
 }

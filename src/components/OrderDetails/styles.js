@@ -22,8 +22,7 @@ const HeaderStyled = styled.div`
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
-  border-radius: 16px;
-  max-height: 350px;
+  border-radius: 7px;
   background-position: bottom;
 
 
@@ -50,19 +49,12 @@ export const HeaderInfo = styled.div`
   justify-content: center;
   width: 100%;
   padding: 20px 20px 30px;
-  border-radius: 16px;
+  border-radius: 7px;
   min-height: 300px;
-
-  img {
-    margin: 0px auto;
-  }
 
   @media (min-width: 678px) {
     width: 50%;
-  }
-
-  @media (min-width: 768px) {
-    min-height: 100%;
+    border-radius: 7px 0 0 7px;
   }
 `
 
@@ -80,24 +72,16 @@ export const HeaderText = styled.div`
   `};
 
   h1 {
-    margin: 0px;
-    font-size: 20px;
+    margin: 1em 0;
+    font-size: 26px;
   }
 
   p {
-      font-size: 14px;
+    font-size: 18px;
   }
 
   @media (min-width: 480px) {
     margin: 0px 20px;
-
-    h1 {
-      font-size: 24px;
-    }
-
-    p {
-      font-size: 16px;
-    }
   }
 `
 
@@ -352,7 +336,7 @@ export const OrderCustomer = styled.div`
     svg {
       width: 70px;
       height: 70px;
-      margin-right: 10px;
+      margin: 0 10px;
       ${props => props.theme?.rtl && css`
         margin-left: 10px;
         margin-right: 0;
@@ -364,8 +348,8 @@ export const OrderCustomer = styled.div`
 
 export const PhotoBlock = styled.img`
   border-radius: 50%;
-  width: 75px;
-  margin-right: 10px;
+  object-fit: cover;
+  margin: 0 10px;
   ${props => props.theme?.rtl && css`
     margin-left: 10px;
     margin-right: 0;
@@ -396,6 +380,19 @@ export const InfoBlock = styled.div`
   }
 `
 
+export const Map = styled.div`
+  width: 100%;
+  height: 40vh;
+  margin-bottom: 10px;
+
+  > div {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 15px;
+  }
+`
+
 export const OrderDriver = styled(OrderCustomer)`
   justify-content: space-between;
   align-items: center;
@@ -413,7 +410,7 @@ export const WrapperDriver = styled.div`
     svg {
       width: 70px;
       height: 70px;
-      margin-right: 10px;
+      margin: 0px 10px;
       ${props => props.theme?.rtl && css`
         margin-left: 10px;
         margin-right: 0;

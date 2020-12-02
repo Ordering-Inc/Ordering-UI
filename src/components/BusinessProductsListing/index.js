@@ -6,7 +6,8 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession
+  useSession,
+  useUtils
 } from 'ordering-components'
 
 import {
@@ -29,6 +30,7 @@ import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
 import { UpsellingPage } from '../UpsellingPage'
+import { Select } from '../../styles/Select'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -39,6 +41,7 @@ const BusinessProductsListingUI = (props) => {
     businessState,
     categorySelected,
     searchValue,
+    sortByValue,
     categoryState,
     categoryId,
     productId,
@@ -49,22 +52,37 @@ const BusinessProductsListingUI = (props) => {
     updateProductModal,
     onProductRedirect,
     onCheckoutRedirect,
-    handleChangeSearch
+    handleChangeSearch,
+    handleSearchRedirect,
+    featuredProducts,
+    handleChangeSortBy
   } = props
 
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
+  const [{ parsePrice }] = useUtils()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [events] = useEvent()
   const [{ auth }] = useSession()
   const location = useLocation()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
+
+  const sortByOptions = [
+    { value: null, content: t('SORT_BY', 'Sort By'), showOnSelected: t('SORT_BY', 'Sort By') },
+    { value: 'rank', content: t('RANK', 'Rank'), showOnSelected: t('RANK', 'Rank') },
+    { value: 'a-z', content: t('A_to_Z', 'A-Z'), showOnSelected: t('A_to_Z', 'A-Z') }
+  ]
+
+  const handler = () => {
+    setOpenBusinessInformation(true)
+  }
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -89,6 +107,7 @@ const BusinessProductsListingUI = (props) => {
     setModalIsOpen(false)
     handleUpdateInitialRender(false)
     updateProductModal(null)
+    setCurProduct(null)
     onProductRedirect({
       slug: business?.slug
     })
@@ -102,10 +121,17 @@ const BusinessProductsListingUI = (props) => {
     getNextProducts()
   }, [categoryState])
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [handleScroll])
+  const handleChangePage = (data) => {
+    if (Object.entries(data.query).length === 0 && openProduct) {
+      setModalIsOpen(false)
+    }
+  }
+
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
 
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
@@ -116,13 +142,6 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [productModal])
 
-  const handleChangePage = (data) => {
-    // console.log(Object.entries(data.query || {}).length, openProduct)
-    if (Object.entries(data.query).length === 0 && openProduct) {
-      setModalIsOpen(false)
-    }
-  }
-
   useEffect(() => {
     if (categoryId && productId) {
       handleUpdateInitialRender(true)
@@ -131,17 +150,17 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    document.body.style.overflow = openProduct ? 'hidden' : 'auto'
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
     }
   }, [openProduct])
 
-  const handleUpsellingPage = () => {
-    onCheckoutRedirect(currentCart?.uuid)
-    setOpenUpselling(false)
-    setCanOpenUpselling(false)
-  }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <>
@@ -151,27 +170,48 @@ const BusinessProductsListingUI = (props) => {
             <>
               <BusinessBasicInformation
                 businessState={businessState}
+                setOpenBusinessInformation={setOpenBusinessInformation}
+                openBusinessInformation={openBusinessInformation}
               />
-              <WrapperSearch>
-                <SearchBar
-                  onSearch={handleChangeSearch}
-                  search={searchValue}
-                  placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+              {(categoryState.products.length !== 0 || searchValue) && (
+                <WrapperSearch>
+                  <SearchBar
+                    onSearch={handleChangeSearch}
+                    search={searchValue}
+                    placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                    lazyLoad={businessState?.business?.lazy_load_products_recommended}
+                  />
+                  <Select
+                    notAsync
+                    notReload
+                    options={sortByOptions}
+                    defaultValue={sortByValue}
+                    onChange={(val) => handleChangeSortBy(val)}
+                  />
+                </WrapperSearch>
+              )}
+              {!(business.categories.length === 0 && !categoryId) && (
+                <BusinessProductsCategories
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categorySelected={categorySelected}
+                  onClickCategory={handleChangeCategory}
+                  featured={featuredProducts}
+                  openBusinessInformation={openBusinessInformation}
                 />
-              </WrapperSearch>
-              <BusinessProductsCategories
-                categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
-                categorySelected={categorySelected}
-                onClickCategory={handleChangeCategory}
-              />
+              )}
+
               <WrapContent>
                 <BusinessProductsList
-                  categories={[{ id: null, name: t('ALL', 'All') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
                   category={categorySelected}
                   categoryState={categoryState}
                   businessId={business.id}
                   errors={errors}
                   onProductClick={onProductClick}
+                  handleSearchRedirect={handleSearchRedirect}
+                  featured={featuredProducts}
+                  searchValue={searchValue}
+                  handleClearSearch={handleChangeSearch}
                 />
               </WrapContent>
             </>
@@ -189,13 +229,7 @@ const BusinessProductsListingUI = (props) => {
           {productModal.loading && (
             <ProductLoading>
               <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
-              </SkeletonItem>
-              <SkeletonItem>
-                <Skeleton height={45} />
+                <Skeleton height={45} count={8} />
               </SkeletonItem>
             </ProductLoading>
           )}
@@ -225,10 +259,13 @@ const BusinessProductsListingUI = (props) => {
             <BusinessBasicInformation
               businessState={{ business: {}, loading: true }}
               isSkeleton
+              handler={handler}
+              openBusinessInformation={openBusinessInformation}
             />
             <BusinessProductsCategories
               categories={[]}
               isSkeleton
+              openBusinessInformation={openBusinessInformation}
             />
             <WrapContent>
               <BusinessProductsList
@@ -246,7 +283,7 @@ const BusinessProductsListingUI = (props) => {
             <NotFoundSource
               content={t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}
               btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-              onClickButton={props.handleSearchRedirect}
+              onClickButton={() => handleSearchRedirect()}
             />
           )
         }
@@ -256,7 +293,7 @@ const BusinessProductsListingUI = (props) => {
             <NotFoundSource
               content={t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.')}
               btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
-              onClickButton={props.handleSearchRedirect}
+              onClickButton={handleSearchRedirect}
             />
           )
         }
@@ -277,10 +314,14 @@ const BusinessProductsListingUI = (props) => {
       </ProductsContainer>
       {currentCart?.products?.length > 0 && auth && (
         <FloatingButton
-          btnText={!openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')}
+          btnText={
+            currentCart?.subtotal >= currentCart?.minimum
+              ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')
+              : `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(currentCart?.minimum)}`
+          }
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
-          disabled={openUpselling}
+          disabled={openUpselling || currentCart?.subtotal < currentCart?.minimum}
         />
       )}
       {currentCart?.products && openUpselling && (

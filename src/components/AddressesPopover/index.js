@@ -45,10 +45,20 @@ export const AddressesPopover = (props) => {
       props.onClose && props.onClose()
     }
   }
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      props.onClose && props.onClose()
+    }
+  }
 
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
-    return () => window.removeEventListener('mouseup', handleClickOutside)
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [open])
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
@@ -58,7 +68,7 @@ export const AddressesPopover = (props) => {
 
   return (
     <div className='address-popover' style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+      <HeaderItem ref={referenceElement} onClick={props.onClick} isHome={props.isHome}>
         <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
       </HeaderItem>
       <PopoverBody className='form_edit' ref={popperElement} style={popStyle} {...attributes.popper}>

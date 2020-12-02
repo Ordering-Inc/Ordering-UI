@@ -32,7 +32,6 @@ export const Text = styled.div`
   align-items: center;
   font-size: 14px;
   font-weight: bold;
-  cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -48,6 +47,7 @@ export const Text = styled.div`
     color: #F2BB40;
     margin-left: 5px;
     font-size: 24px;
+    cursor: pointer;
     ${props => props.theme?.rtl && css`
       margin-right: 5px;
       margin-left: initial;

@@ -21,14 +21,16 @@ import {
   AddressWrap,
   WrapAddressInput,
   AddressTagSection,
-  WrapperMap
+  WrapperMap,
+  ShowMap
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
+import { Input, TextArea } from '../../styles/Inputs'
 
 const AddressFormUI = (props) => {
   const {
+    addressesList,
     googleMapsControls,
     formState,
     addressState,
@@ -37,19 +39,29 @@ const AddressFormUI = (props) => {
     updateChanges,
     onCancel,
     hanldeChangeInput,
-    saveAddress
+    saveAddress,
+    handleChangePosition
   } = props
+
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
-
+  const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const onSubmit = (values) => {
-    saveAddress()
-    if (!formState.loading) {
+  const onSubmit = () => {
+    const isAddressAlreadyExist = (addressesList || []).some(address => (
+      address.location.lat === formState.changes.location.lat && address.location.lng === formState.changes.location.lng
+    ))
+    if (!isAddressAlreadyExist) {
+      saveAddress()
+      return
     }
+    setAlertState({
+      open: true,
+      content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
+    })
   }
 
   const handleAddressTag = (tag) => {
@@ -81,7 +93,7 @@ const AddressFormUI = (props) => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR')]
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
   }, [formState])
@@ -104,13 +116,14 @@ const AddressFormUI = (props) => {
 
   return (
     <div className='address-form'>
-      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='new-off'>
-        {addressState?.address?.location && (
+      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+        {(addressState?.address?.location || formState?.changes?.location) && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              location={{ ...addressState?.address?.location, zoom: googleMapsControls.defaultZoom }}
+              location={{ ...(addressState?.address?.location || formState?.changes?.location), zoom: googleMapsControls.defaultZoom }}
               mapControls={googleMapsControls}
+              handleChangePosition={handleChangePosition}
             />
           </WrapperMap>
         )}
@@ -121,14 +134,14 @@ const AddressFormUI = (props) => {
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               name='address'
-              placeholder='Address'
+              placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
               defaultValue={formState.changes?.address || addressState.address?.address}
               childRef={register({
-                required: isRequiredField('address') ? 'Address is required' : null
+                required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
               })}
-              autoComplete='new-off'
+              autoComplete='off'
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
@@ -139,32 +152,35 @@ const AddressFormUI = (props) => {
               IconButton={ImCompass}
             />}
         </AddressWrap>
+        {(addressState?.address?.location || formState?.changes?.location) && (
+          <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
+        )}
         <Input
           className='internal_number'
           name='internal_number'
-          placeholder='Internal number'
+          placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           ref={register}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
-          autoComplete='new-off'
+          autoComplete='off'
         />
         <Input
           className='zipcode'
           name='zipcode'
-          placeholder='Zip code'
+          placeholder={t('ZIP_CODE', 'Zip code')}
           ref={register}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
-          autoComplete='new-off'
+          autoComplete='off'
         />
-        <textarea
+        <TextArea
           name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           ref={register}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
           onChange={hanldeChangeInput}
-          autoComplete='new-off'
+          autoComplete='off'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>
@@ -182,16 +198,16 @@ const AddressFormUI = (props) => {
           </Button>
         </AddressTagSection>
         <FormActions>
-          <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>Cancel</Button>
+          <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
           <Button type='submit' disabled={formState.loading} color='primary'>
-            {addressState.address?.id ? 'Update' : 'Add'}
+            {addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
           </Button>
         </FormActions>
       </FormControl>
       <Alert
-        title={t('ADDRESS')}
+        title={t('ADDRESS', 'Address')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
@@ -216,7 +232,8 @@ export const AddressForm = (props) => {
   const addressFormProps = {
     ...props,
     UIComponent: AddressFormUI,
-    googleMapsControls
+    googleMapsControls,
+    isSelectedAfterAdd: true
   }
 
   return <AddressFormController {...addressFormProps} />

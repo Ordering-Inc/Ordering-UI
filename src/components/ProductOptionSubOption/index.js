@@ -1,5 +1,9 @@
-import React from 'react'
-import { ProductOptionSuboption as ProductSubOptionController, useUtils } from 'ordering-components'
+import React, { useState, useEffect } from 'react'
+import {
+  ProductOptionSuboption as ProductSubOptionController,
+  useUtils,
+  useLanguage
+} from 'ordering-components'
 import BsCircleFill from '@meronex/icons/bs/BsCircleFill'
 import BsCircleHalf from '@meronex/icons/bs/BsCircleHalf'
 import BsDashCircle from '@meronex/icons/bs/BsDashCircle'
@@ -30,7 +34,9 @@ const ProductOptionSubOptionUI = (props) => {
     changePosition
   } = props
 
+  const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [showMessage, setShowMessage] = useState(false)
 
   const handleIncrement = (e) => {
     e.stopPropagation()
@@ -47,12 +53,25 @@ const ProductOptionSubOptionUI = (props) => {
     changePosition(position)
   }
 
+  const handleSuboptionClick = () => {
+    toggleSelect()
+    if (balance === option.max && option?.suboptions?.length > balance && !(option.min === 1 && option.max === 1)) {
+      setShowMessage(true)
+    }
+  }
+
+  useEffect(() => {
+    if (!(balance === option.max && option?.suboptions?.length > balance && !(option.min === 1 && option.max === 1))) {
+      setShowMessage(false)
+    }
+  }, [balance])
+
   const disableIncrement = option.limit_suboptions_by_max ? balance === option.max : state.quantity === suboption.max || (!state.selected && balance === option.max)
   const price = option.with_half_option && suboption.half_price && state.position !== 'whole' ? suboption.half_price : suboption.price
   return (
-    <Container onClick={() => toggleSelect()}>
+    <Container onClick={() => handleSuboptionClick()}>
       <IconControl>
-        {option.max > 1 ? (
+        {((option.min === 0 && option.max === 1) || option.max > 1) ? (
           state?.selected ? (
             <MdCheckBox />
           ) : (
@@ -66,7 +85,10 @@ const ProductOptionSubOptionUI = (props) => {
           )
         )}
       </IconControl>
-      <Text>{suboption.name}</Text>
+      <Text>
+        {suboption.name}
+        {showMessage && <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option.max}`}</span>}
+      </Text>
       {option.allow_suboption_quantity && (
         <QuantityControl>
           <BsDashCircle

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MdClose from '@meronex/icons/md/MdClose'
 import { Popup, useLanguage } from 'ordering-components'
 import {
@@ -24,6 +24,20 @@ const ModalUI = (props) => {
     hideCloseDefault
   } = props
   const [, t] = useLanguage()
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      onClose && onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (props.open) {
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [props.open])
+
   return (
     <ModalDialog
       className='popup-dialog'
@@ -46,8 +60,8 @@ const ModalUI = (props) => {
       {children}
       {(onCancel || onAccept) && (
         <ModalActions>
-          {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
-          {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+          {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL', 'Cancel')}</Button>}
+          {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT', 'Accept')}</Button>}
         </ModalActions>)}
     </ModalDialog>
   )

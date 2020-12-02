@@ -23,15 +23,15 @@ const ReviewOrderUI = (props) => {
       setAlertState({
         open: true,
         success: false,
-        content: formState.result?.result || [t('ERROR')]
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {
       setAlertState({
         ...alertState,
         open: true,
-        title: t('REVIEW_SUCCESS'),
-        content: t('REVIEW_SUCCESS')
+        title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
+        content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
       })
     }
   }, [formState])
@@ -61,7 +61,12 @@ const ReviewOrderUI = (props) => {
   const StarsComponent = ({ name }) => (
     [...Array(5)].map((star, i) => (
       <label key={i} onMouseLeave={() => setHover(stars)}>
-        <input type='radio' name={name} value={i + 1} onClick={(e) => handleChangeRating(e)} />
+        <input
+          type='radio'
+          name={name}
+          value={i + 1}
+          onClick={(e) => handleChangeRating(e)}
+        />
         <AiFillStar color={(i + 1) <= (hover[name] || stars[name]) ? colors.primary : 'gray'} size={25} onMouseEnter={() => setHover({ [name]: (i + 1) })} />
       </label>
     ))
@@ -100,18 +105,22 @@ const ReviewOrderUI = (props) => {
       <Comments>
         <h2>{t('COMMENTS', 'Comments')}:</h2>
         <Input
-          placeholder={t('COMMENTS', 'Comments')} name='comments' onChange={(e) => handleChangeInput(e)} ref={register({
+          placeholder={t('COMMENTS', 'Comments')}
+          name='comments'
+          onChange={(e) => handleChangeInput(e)}
+          ref={register({
             required: t('FIELD_COMMENT_REQUIRED', 'The field comments is required')
           })}
+          autoComplete='off'
         />
       </Comments>
       <Send>
         <Button color='primary' type='submit'>{t('SEND_REVIEW', 'Send a Review')}</Button>
       </Send>
       <Alert
-        title={t('ORDER REVIEW')}
+        title={t('ORDER_REVIEW', 'Order Review')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}

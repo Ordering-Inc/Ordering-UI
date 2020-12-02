@@ -6,17 +6,21 @@ import {
   BusinessSearch
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder }) => {
+export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
   let timeout = null
 
   const el = useRef()
-
   const onChangeSearch = e => {
-    clearTimeout(timeout)
+    if (e.keyCode === 13) return
 
-    timeout = setTimeout(function () {
+    if (!lazyLoad) {
       onSearch(e.target.value)
-    }, 1000)
+    } else {
+      clearTimeout(timeout)
+      timeout = setTimeout(function () {
+        onSearch(e.target.value)
+      }, 750)
+    }
   }
 
   useEffect(() => {
@@ -30,12 +34,13 @@ export const SearchBar = ({ onSearch, search, placeholder }) => {
   }, [search])
 
   return (
-    <BusinessSearch>
+    <BusinessSearch className='search-bar'>
       <Input
         ref={el}
         name='search'
         aria-label='search'
         placeholder={placeholder}
+        autoComplete='off'
       />
     </BusinessSearch>
   )

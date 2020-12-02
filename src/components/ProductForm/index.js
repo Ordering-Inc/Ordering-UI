@@ -21,6 +21,7 @@ import { ProductShare } from '../ProductShare'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
+import { AddressList } from '../AddressList'
 
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
@@ -34,7 +35,9 @@ import {
   SectionTitle,
   ProductActions,
   ProductComment,
-  SkeletonBlock
+  SkeletonBlock,
+  WrapperSubOption,
+  SkuContent
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -59,7 +62,7 @@ const ProductOptionsUI = (props) => {
   const { product, loading, error } = productObject
 
   const windowSize = useWindowSize()
-  const [{ auth }, { login }] = useSession()
+  const [{ auth, user }, { login }] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
@@ -85,9 +88,14 @@ const ProductOptionsUI = (props) => {
       return
     }
     const myElement = document.getElementsByClassName('error')[0]
-    const container = document.getElementById('product_edition')
-    const topPos = myElement.offsetTop - container.offsetTop
-    scrollTo(container, topPos, 1250)
+    const modal = document.getElementsByClassName('popup-dialog')[0]
+
+    let topPos = myElement.offsetTop - modal.offsetTop
+    if (windowSize.width <= 768) {
+      const productImage = document.getElementById('product_image')
+      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
+    }
+    scrollTo(modal, topPos, 1250)
   }
 
   const handleCustomModalClick = (e, { page }) => {
@@ -100,6 +108,7 @@ const ProductOptionsUI = (props) => {
       user,
       token: user.session.access_token
     })
+    closeModal()
   }
 
   const isError = (id) => {
@@ -107,7 +116,7 @@ const ProductOptionsUI = (props) => {
   }
 
   return (
-    <ProductContainer id={`${windowSize.width <= 1200 && 'product_edition'}`}>
+    <ProductContainer>
       {loading && (
         <SkeletonBlock width={90}>
           <Skeleton variant='rect' height={50} />
@@ -127,7 +136,7 @@ const ProductOptionsUI = (props) => {
       {!loading && !error && product && (
         <>
           <WrapperImage>
-            <ProductImage>
+            <ProductImage id='product_image'>
               <img src={product?.images || theme.images?.dummies?.product} alt='product' />
             </ProductImage>
           </WrapperImage>
@@ -135,8 +144,14 @@ const ProductOptionsUI = (props) => {
             <div>
               <h1>{product?.name}</h1>
               {product?.description && <p>{product?.description}</p>}
+              {product?.sku && (
+                <SkuContent>
+                  <h2>{t('SKU', 'Sku')}</h2>
+                  <p>{product?.sku}</p>
+                </SkuContent>
+              )}
             </div>
-            <ProductEdition id={`${windowSize.width > 1200 && 'product_edition'}`}>
+            <ProductEdition>
               {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
               {product?.ingredients.map(ingredient => (
                 <ProductIngredient
@@ -150,10 +165,7 @@ const ProductOptionsUI = (props) => {
                 product?.extras.map(extra => extra.options.map(option => {
                   const currentState = productCart.options[`id:${option.id}`] || {}
                   return (
-                    <div
-                      key={option.id}
-                      className={isError(option.id)}
-                    >
+                    <div key={option.id}>
                       {
                         showOption(option) && (
                           <ProductOption
@@ -161,22 +173,24 @@ const ProductOptionsUI = (props) => {
                             currentState={currentState}
                             error={errors[`id:${option.id}`]}
                           >
-                            {
-                              option.suboptions.map(suboption => {
-                                const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
-                                const balance = productCart.options[`id:${option.id}`]?.balance || 0
-                                return (
-                                  <ProductOptionSubOption
-                                    key={suboption.id}
-                                    onChange={handleChangeSuboptionState}
-                                    balance={balance}
-                                    option={option}
-                                    suboption={suboption}
-                                    state={currentState}
-                                  />
-                                )
-                              })
-                            }
+                            <WrapperSubOption className={isError(option.id)}>
+                              {
+                                option.suboptions.map(suboption => {
+                                  const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
+                                  const balance = productCart.options[`id:${option.id}`]?.balance || 0
+                                  return (
+                                    <ProductOptionSubOption
+                                      key={suboption.id}
+                                      onChange={handleChangeSuboptionState}
+                                      balance={balance}
+                                      option={option}
+                                      suboption={suboption}
+                                      state={currentState}
+                                    />
+                                  )
+                                })
+                              }
+                            </WrapperSubOption>
                           </ProductOption>
                         )
                       }
@@ -198,7 +212,7 @@ const ProductOptionsUI = (props) => {
             <ProductActions>
               {
                 productCart && !isSoldOut && maxProductQuantity > 0 && (
-                  <div>
+                  <div className='incdec-control'>
                     <FiMinusCircle
                       onClick={decrement}
                       className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
@@ -212,30 +226,47 @@ const ProductOptionsUI = (props) => {
                 )
               }
 
-              {productCart && !isSoldOut && maxProductQuantity && auth ? (
+              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                 <Button
                   className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                   color='primary'
                   onClick={() => handleSaveProduct()}
+                  disabled={orderState.loading}
                 >
                   {orderState.loading ? (
-                    <span>{t('LOADING', 'Loading...')}</span>
+                    <span>{t('LOADING', 'Loading')}</span>
                   ) : (
                     <span>
-                      {editMode ? t('SAVE', 'Save') : t('ADD_TO_CART', 'Add to Cart')}
+                      {editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')}
                     </span>
                   )}
                   <span>{productCart.total && parsePrice(productCart.total)}</span>
                 </Button>
-              ) : (
+              )}
+
+              {auth && !orderState.options?.address_id && (
+                orderState.loading ? (
+                  <Button
+                    className='add'
+                    color='primary'
+                    disabled
+                  >
+                    {t('LOADING', 'Loading')}
+                  </Button>
+                ) : (
+                  <AddressList addressList={user.addresses} isProductForm />
+                )
+              )}
+
+              {(!auth || isSoldOut || maxProductQuantity <= 0) && (
                 <Button
-                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity) ? 'soldout' : ''}`}
+                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
                   color='primary'
                   outline
-                  disabled={isSoldOut || maxProductQuantity === 0}
+                  disabled={isSoldOut || maxProductQuantity <= 0}
                   onClick={() => setModalIsOpen(true)}
                 >
-                  {isSoldOut || maxProductQuantity === 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
+                  {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
                 </Button>
               )}
             </ProductActions>
@@ -305,7 +336,7 @@ const ProductOptionsUI = (props) => {
         </Modal>
       )}
       {error && error.length > 0 && error.map((e, i) => (
-        <p key={i}>Error: [{e}]</p>
+        <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
       ))}
     </ProductContainer>
   )

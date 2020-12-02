@@ -28,6 +28,7 @@ import {
 
 export const ProductItemAccordion = (props) => {
   const {
+    isCartPending,
     isCartProduct,
     product,
     changeQuantity,
@@ -101,7 +102,7 @@ export const ProductItemAccordion = (props) => {
         onClick={(e) => toggleAccordion(e)}
       >
         <ProductInfo>
-          {isCartProduct ? (
+          {isCartProduct && !isCartPending ? (
             <ProductSelect
               ref={productSelect}
               value={product.quantity}
@@ -132,7 +133,7 @@ export const ProductItemAccordion = (props) => {
             {windowSize.width <= 410 && (
               <span>
                 <p>{parsePrice(product.total || product.price)}</p>
-                {isCartProduct && (
+                {isCartProduct && !isCartPending && (
                   <div>
                     {onEditProduct && (
                       <span ref={productActionsEdit}>
@@ -163,7 +164,7 @@ export const ProductItemAccordion = (props) => {
                 </p>
               )}
             </ProductPrice>
-            {isCartProduct && (
+            {isCartProduct && !isCartPending && (
               <ProductActions>
                 <ProductActionsEdit
                   ref={productActionsEdit}
@@ -184,7 +185,7 @@ export const ProductItemAccordion = (props) => {
           </ProductPriceSection>
         )}
 
-        {isCartProduct && product?.valid_menu && !product?.valid_quantity && (
+        {isCartProduct && !isCartPending && product?.valid_menu && !product?.valid_quantity && (
           <ProductError>
             <ProductActions>
               <ProductActionsEdit
@@ -203,12 +204,12 @@ export const ProductItemAccordion = (props) => {
               </ProductActionsDelete>
             </ProductActions>
             <ProductNotAvailable>
-              {t('PRODUCT_QUANTITY_ERROR', 'Not available')}
+              {t('NOT_AVAILABLE', 'Not available')}
             </ProductNotAvailable>
           </ProductError>
         )}
 
-        {!product?.valid_menu && isCartProduct && (
+        {!product?.valid_menu && isCartProduct && !isCartPending && (
           <ProductError>
             <ProductActions>
               <ProductActionsDelete
@@ -220,7 +221,7 @@ export const ProductItemAccordion = (props) => {
               </ProductActionsDelete>
             </ProductActions>
             <ProductNotAvailable>
-              {t('PRODUCT_QUANTITY_ERROR', 'Not available')}
+              {t('NOT_AVAILABLE', 'Not available')}
             </ProductNotAvailable>
           </ProductError>
         )}

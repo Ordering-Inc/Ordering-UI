@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -21,6 +20,7 @@ import {
 
 const CartUI = (props) => {
   const {
+    currentCartUuid,
     cart,
     clearCart,
     isProducts,
@@ -28,7 +28,11 @@ const CartUI = (props) => {
     getProductMax,
     offsetDisabled,
     removeProduct,
-    onClickCheckout
+    onClickCheckout,
+    showCoupon,
+    validationFields,
+    isCheckout,
+    isCartPending
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -40,9 +44,6 @@ const CartUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const windowSize = useWindowSize()
-  const location = useLocation()
-
-  const isCheckout = location.pathname === `/checkout/${cart?.uuid}`
 
   const momentFormatted = !orderState?.option?.moment ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
@@ -64,6 +65,7 @@ const CartUI = (props) => {
 
   const handleClickCheckout = () => {
     events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+    events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
   }
 
@@ -107,6 +109,8 @@ const CartUI = (props) => {
   return (
     <CartContainer className='cart'>
       <BusinessItemAccordion
+        isCartPending={isCartPending}
+        currentCartUuid={currentCartUuid}
         uuid={cart?.uuid}
         isCheckout={isCheckout}
         orderTotal={cart?.total}
@@ -121,6 +125,7 @@ const CartUI = (props) => {
         {cart?.products?.length > 0 && cart?.products.map(product => (
           <ProductItemAccordion
             key={product.code}
+            isCartPending={isCartPending}
             isCartProduct
             product={product}
             changeQuantity={changeQuantity}
@@ -139,34 +144,46 @@ const CartUI = (props) => {
                   <td>{parsePrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
+                  <td>{cart.business.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
                   <td>{parsePrice(cart?.tax || 0)}</td>
                 </tr>
-                <tr>
-                  <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                  <td>{parsePrice(cart?.delivery_price || 0)}</td>
-                </tr>
-                <tr>
-                  <td>{t('DRIVER_TIP', 'Driver tip')} ({parseNumber(cart?.driver_tip_rate)}%)</td>
-                  <td>{parsePrice(cart?.driver_tip || 0)}</td>
-                </tr>
-                <tr>
-                  <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(cart?.business?.service_fee)}%)</td>
-                  <td>{parsePrice(cart?.service_fee || 0)}</td>
-                </tr>
+                {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
+                  <tr>
+                    <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                    <td>{parsePrice(cart?.delivery_price)}</td>
+                  </tr>
+                )}
+                {cart?.driver_tip > 0 && (
+                  <tr>
+                    <td>{t('DRIVER_TIP', 'Driver tip')} ({parseNumber(cart?.driver_tip_rate)}%)</td>
+                    <td>{parsePrice(cart?.driver_tip)}</td>
+                  </tr>
+                )}
+                {cart?.service_fee > 0 && (
+                  <tr>
+                    <td>{t('SERVICE_FEE', 'Service Fee')} </td>
+                    <td>{parsePrice(cart?.service_fee)}</td>
+                  </tr>
+                )}
                 {cart?.discount > 0 && (
                   <tr>
-                    <td>{t('DISCOUNT', 'Discount')}</td>
+                    {cart?.discount_type === 1 ? (
+                      <td>{t('DISCOUNT', 'Discount')} ({parseNumber(cart?.discount_rate)}%)</td>
+                    ) : (
+                      <td>{t('DISCOUNT', 'Discount')}</td>
+                    )}
                     <td>{parsePrice(cart?.discount || 0)}</td>
                   </tr>
                 )}
               </tbody>
             </table>
-            <CouponContainer>
-              <CouponControl
-                businessId={cart.business_id}
-              />
-            </CouponContainer>
+            {(showCoupon || validationFields?.fields?.coupon?.enabled) && !isCartPending && (
+              <CouponContainer>
+                <CouponControl
+                  businessId={cart.business_id}
+                />
+              </CouponContainer>
+            )}
             <table className='total'>
               <tbody>
                 <tr>
@@ -182,9 +199,13 @@ const CartUI = (props) => {
             <Button
               color='primary'
               onClick={() => setOpenUpselling(true)}
-              disabled={openUpselling && !canOpenUpselling}
+              disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum}
             >
-              {!openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
+              {cart?.subtotal >= cart?.minimum ? (
+                !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
+              ) : (
+                `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
+              )}
             </Button>
           </CheckoutAction>
         )}

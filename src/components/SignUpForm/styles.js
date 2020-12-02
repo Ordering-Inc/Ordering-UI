@@ -52,7 +52,7 @@ export const FormSide = styled(Side)`
   align-items: center;
   margin: auto;
 
-  img {
+  img#logo {
     width: 200px;
   }
 
@@ -72,43 +72,19 @@ export const FormSide = styled(Side)`
   }
 `
 
-export const SignUpWith = styled.div`
-  font-size: 14px;
-
-  @media (min-width: 425px) {
-    font-size: 18px;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 14px;
-  }
-
-  @media (min-width: 992px) {
-    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
-  }
-
-  @media (min-width: 1200px) {
-    ${({ isPopup }) => isPopup && css`
-      font-size: 17px;
-    `};
-  }
-`
-
 export const FormInput = styled.form`
   width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   display: flex;
   flex-direction: column;
 
-  ${({ isSkeleton }) => !isSkeleton && css`
-    * {
-      padding: 8px 20px;
-      margin: 10px;
-    }
-  `}
+  div.phone_number {
+    margin: 10px 0px;
+    width: 100%;
+  }
 
-  input:not(:last-child) {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  input.form:not(:last-child) {
+    margin: 10px 0px;
+    padding: 8px 20px;
   }
 
   button {
@@ -174,13 +150,13 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-   width: calc(100% - 40px);
-   margin-top: 5px;
+  width: 80%;
 
   button {
     display: flex;
     justify-content: start;
-    width: 100%;
+    width: calc(100% - 20px);
+    margin: 0 10px !important;
     padding: 5px 30px;
     color: #000000;
 

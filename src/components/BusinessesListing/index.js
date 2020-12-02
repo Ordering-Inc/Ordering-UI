@@ -81,7 +81,7 @@ const BusinessesListingUI = (props) => {
         <SearchBar
           onSearch={handleChangeSearch}
           search={searchValue}
-          placeholder={t('SEARCH_BUSINESS', 'Search Businesses')}
+          placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
         />
       </WrapperSearch>
       <BusinessList>
@@ -107,6 +107,7 @@ const BusinessesListingUI = (props) => {
               className='card'
               business={business}
               handleCustomClick={handleBusinessClick}
+              orderType={orderState?.options?.type}
             />
           ))
         }
@@ -117,18 +118,19 @@ const BusinessesListingUI = (props) => {
               className='card'
               business={{}}
               isSkeleton
+              orderType={orderState?.options?.type}
             />
           ))
         )}
         {businessesList.error && businessesList.error.length > 0 && (
           businessesList.error.map((e, i) => (
-            <ErrorMessage key={i}>ERROR: [{e?.message || e}]</ErrorMessage>
+            <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
           ))
         )}
       </BusinessList>
 
       <Modal
-        title={t('ADDRESS')}
+        title={t('ADDRESS_FORM', 'Address Form')}
         open={modals.formOpen}
         onClose={() => setModals({ ...modals, formOpen: false })}
       >
@@ -142,7 +144,7 @@ const BusinessesListingUI = (props) => {
       </Modal>
 
       <Modal
-        title={t('ADDRESSES')}
+        title={t('ADDRESSES', 'Address List')}
         open={modals.listOpen}
         onClose={() => setModals({ ...modals, listOpen: false })}
         onCancel={() => setModals({ ...modals, listOpen: false })}
@@ -154,9 +156,9 @@ const BusinessesListingUI = (props) => {
       </Modal>
 
       <Alert
-        title={t('SEARCH')}
+        title={t('SEARCH', 'Search')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}

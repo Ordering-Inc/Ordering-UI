@@ -78,7 +78,7 @@ export const ModalOrderTypes = styled.div`
   `}
 `
 export const ModalIcon = styled.span`
-  position: absolute;
+  position: fixed;
   right: 5px;
   top: 6px;
   font-size: 30px;
@@ -88,4 +88,8 @@ export const ModalIcon = styled.span`
     left: 5px;
     right: initial;
   `}
+
+  @media(min-width: 769px){
+    position: absolute;
+  }
 `

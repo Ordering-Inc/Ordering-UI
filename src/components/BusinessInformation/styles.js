@@ -52,6 +52,7 @@ export const HeaderImage = styled.div`
   margin-top: auto;
   > img {
     width: 100%;
+    height: 100%;
   }
 `
 
@@ -317,4 +318,17 @@ export const ModalIcon = styled.span`
     left: 5px;
     right: initial;
   `}
+`
+
+export const Description = styled.p`
+  margin: 0 10px;
+`
+
+export const ImageContainer = styled.div` 
+  max-height: 500px;
+  img{
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
 `

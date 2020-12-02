@@ -8,6 +8,7 @@ import {
   useUtils
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
+import { Modal } from '../Modal'
 import {
   BusinessInformationContainer,
   BusinessHeader,
@@ -25,7 +26,9 @@ import {
   BusinessInfoItem,
   WrapperBusinessLogo,
   BusinessLogo,
-  ModalIcon
+  ModalIcon,
+  Description,
+  ImageContainer
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
@@ -47,20 +50,36 @@ export const BusinessInformationUI = (props) => {
     onClose
   } = props
   const [orderState] = useOrder()
-  const [tabValue, setTabValue] = useState('General Info')
-  const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
   const [, t] = useLanguage()
+  const [tabValue, setTabValue] = useState('General Info')
+
+  const daysOfWeek = [
+    t('SUNDAY_ABBREVIATION', 'Sun'),
+    t('MONDAY_ABBREVIATION', 'Mon'),
+    t('TUESDAY_ABBREVIATION', 'Tues'),
+    t('WEDNESDAY_ABBREVIATION', 'Wed'),
+    t('THURSDAY_ABBREVIATION', 'Thur'),
+    t('FRIDAY_ABBREVIATION', 'Fri'),
+    t('SATURDAY_ABBREVIATION', 'Sat')
+  ]
   const [{ parsePrice, parseDistance }] = useUtils()
+  const [modalImage, setModalImage] = useState(false)
+  const [image, setImage] = useState('')
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
     return `${checkTime(hour)}:${checkTime(minute)}`
   }
 
+  const handleModalImage = (src) => {
+    setImage(src)
+    setModalImage(true)
+  }
+
   return (
     <BusinessInformationContainer>
       <ModalIcon>
-        <MdClose onClick={() => onClose()} />
+        <MdClose onClick={() => onClose(false)} />
       </ModalIcon>
       <BusinessHeader>
         <img src={business.header} alt='business-image' />
@@ -122,8 +141,21 @@ export const BusinessInformationUI = (props) => {
             </Tabs>
           </FlexTabs>
         )}
+
         {tabValue === 'General Info' ? (
           <>
+            {business.about && (
+              <>
+                <SectionTitle>{t('BUSINESS_ABOUT', 'Business short description')}</SectionTitle>
+                <Description>{business.about}</Description>
+              </>
+            )}
+            {business.description && (
+              <>
+                <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business description')}</SectionTitle>
+                <Description>{business.description}</Description>
+              </>
+            )}
             {businessLocation.location && (
               <>
                 <SectionTitle>{t('BUSINESS_LOCATION', 'Business location')}</SectionTitle>
@@ -142,9 +174,9 @@ export const BusinessInformationUI = (props) => {
               <>
                 <SectionTitle>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</SectionTitle>
                 <ScheduleSection>
-                  <ScheduleContainer id='modal-container'>
-                    <Tabs id='schedules'>
-                      <AutoScroll container='modal-container' categories='schedules' modal>
+                  <ScheduleContainer>
+                    <Tabs>
+                      <AutoScroll modal>
                         {businessSchedule.map((schedule, i) => (
                           <ScheduleBlock key={i}>
                             <h4>{daysOfWeek[i]}</h4>
@@ -158,13 +190,8 @@ export const BusinessInformationUI = (props) => {
                 </ScheduleSection>
                 <DeliveryInfo>
                   <div>
-                    <h5>{t('DELIVERY_FEE', 'Delivery Fee:')} {parsePrice(business.service_fee)}</h5>
-                    <h5>{t('MINIMUM_ORDER', 'Minimum Order:')} {parsePrice(business.minimum)}</h5>
-                    <h5>{t('DISTANCE', 'Distance:')} {parseDistance(business?.distance || 0)}</h5>
-                  </div>
-                  <div>
-                    <h5>{t('DELIVERY_TIME', 'Delivery Time:')} {convertHoursToMinutes(business?.delivery_time)}</h5>
-                    <h5>{t('PICKUP_TIME', 'Pickup Time:')} {convertHoursToMinutes(business?.pickup_time)}</h5>
+                    <h5>{t('DELIVERY_TIME', 'Delivery Time')}: {convertHoursToMinutes(business?.delivery_time)}</h5>
+                    <h5>{t('PICKUP_TIME', 'Pickup Time')}: {convertHoursToMinutes(business?.pickup_time)}</h5>
                   </div>
                 </DeliveryInfo>
               </>
@@ -175,7 +202,7 @@ export const BusinessInformationUI = (props) => {
                 <div>
                   {
                     businessPhotos.map((photo, i) => (
-                      <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' />
+                      <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' onClick={() => handleModalImage(photo.file)} />
                     ))
                   }
                 </div>
@@ -205,6 +232,20 @@ export const BusinessInformationUI = (props) => {
           </>
         )}
       </BusinessContent>
+      <Modal
+        onClose={() => setModalImage(false)}
+        open={modalImage}
+        padding='0'
+        hideCloseDefault
+        isTransparent
+      >
+        <ImageContainer>
+          <ModalIcon>
+            <MdClose onClick={() => setModalImage(false)} />
+          </ModalIcon>
+          <img src={image} />
+        </ImageContainer>
+      </Modal>
     </BusinessInformationContainer>
   )
 }

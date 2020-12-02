@@ -16,32 +16,23 @@ export const WrappContainer = styled.div`
   }
 `
 
+export const WrapperUserDetails = styled.div`
+  width: 100%;
+`
+
 export const UserDetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 20px 0px;
+  margin: 30px 0px 20px;
   flex-wrap: wrap;
+`
 
-  div.user,
-  div.business {
-    width: 100%;
-  }
-
-  div.business {
+export const BusinessDetailsContainer = styled(UserDetailsContainer)`
+  div {
     h1 {
+      text-transform: capitalize;
       margin: 0px;
       font-size: 24px;
-    }
-
-    @media (min-width: 993px) {
-      text-align: center;
-    }
-  }
-
-  @media (min-width: 761px) {
-    div.user,
-    div.business {
-      width: 40%;
     }
   }
 `
@@ -262,7 +253,7 @@ export const CartItemActions = styled.div`
 `
 
 export const WarningText = styled.p`
-  margin: 10px auto 15px;
+  margin: 10px auto;
   text-align: center;
   color: ${props => props.theme.colors.primary};
 `

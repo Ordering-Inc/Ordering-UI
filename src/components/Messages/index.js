@@ -75,7 +75,7 @@ export const MessagesUI = (props) => {
     if (!sendMessage.loading && sendMessage?.error) {
       setAlertState({
         open: true,
-        content: sendMessage.error || [t('ERROR')]
+        content: sendMessage.error || [t('ERROR', 'Error')]
       })
     }
     if (sendMessage.loading) {
@@ -116,7 +116,8 @@ export const MessagesUI = (props) => {
     }
   }
 
-  const getStatus = (status) => {
+  const getStatus = (s) => {
+    const status = parseInt(s)
     switch (status) {
       case 0:
         return 'ORDER_STATUS_PENDING'
@@ -152,13 +153,13 @@ export const MessagesUI = (props) => {
   const getLevel = (level) => {
     switch (level) {
       case 0:
-        return 'Admin'
+        return t('ADMIN', 'Admin')
       case 1:
-        return 'Business'
+        return t('BUSINESS', 'Business')
       case 2:
-        return 'Driver'
+        return t('DRIVER', 'Driver')
       case 3:
-        return 'Customer'
+        return t('CUSTOMER', 'Customer')
     }
   }
 
@@ -249,7 +250,7 @@ export const MessagesUI = (props) => {
                 <BubbleConsole>
                   {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
                   <strong>{parseDate(order.created_at)}</strong> {' '}
-                  {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
+                  {t('VIA', 'Via')} <strong>{order.app_id}</strong>{' '}
                   <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
                 </BubbleConsole>
               </MessageConsole>
@@ -273,7 +274,7 @@ export const MessagesUI = (props) => {
                       ) : (
                         <BubbleConsole>
                           <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                          {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                          {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
                           {message.comment && (<><br /> {message.comment.length}</>)}
                           <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                         </BubbleConsole>
@@ -342,6 +343,7 @@ export const MessagesUI = (props) => {
             ref={register({
               required: !image
             })}
+            autoComplete='off'
           />
           {!image && (
             <SendImage htmlFor='chat_image'>
@@ -381,16 +383,16 @@ export const MessagesUI = (props) => {
               )
                 : (
                   <span>
-                    {t('SEND', 'send')}
+                    {t('SEND', 'Send')}
                   </span>)}
             </Button>
           </WrapperSendMessageButton>
         </Send>
       </SendForm>
       <Alert
-        title={t('ERROR', 'error')}
+        title={t('ERROR', 'Error')}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}

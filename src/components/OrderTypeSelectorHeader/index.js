@@ -34,5 +34,10 @@ const OrderTypeSelectorHeaderUI = (props) => {
 }
 
 export const OrderTypeSelectorHeader = (props) => {
-  return <OrderTypeControl {...props} UIComponent={OrderTypeSelectorHeaderUI} />
+  const orderTypeProps = {
+    ...props,
+    UIComponent: OrderTypeSelectorHeaderUI
+  }
+
+  return <OrderTypeControl {...orderTypeProps} />
 }

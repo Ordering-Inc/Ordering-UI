@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils } from 'ordering-components'
+import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils, GoogleMapsMap } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
@@ -37,6 +37,7 @@ import {
   OrderCustomer,
   PhotoBlock,
   InfoBlock,
+  Map,
   OrderDriver,
   WrapperDriver,
   OrderProducts,
@@ -50,7 +51,9 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
-    handleOrderRedirect
+    handleOrderRedirect,
+    googleMapsControls,
+    driverLocation
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
@@ -59,23 +62,24 @@ const OrderDetailsUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
 
-  const { order, loading, error } = props.order
+  const { order, loading, header } = props.order
 
-  const getOrderStatus = (status) => {
+  const getOrderStatus = (s) => {
+    const status = parseInt(s)
     const orderStatus = [
-      { key: 0, value: 'Pending', slug: 'PENDING', percentage: 25 },
-      { key: 1, value: 'Completed', slug: 'COMPLETED', percentage: 100 },
-      { key: 2, value: 'Rejected', slug: 'REJECTED', percentage: 0 },
-      { key: 3, value: 'Driver in business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
-      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 70 },
-      { key: 5, value: 'Rejected by business', slug: 'REJECTED_BY_BUSINESS', percentage: 0 },
-      { key: 6, value: 'Canceled by Driver', slug: 'CANCELED_BY_DRIVER', percentage: 0 },
-      { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
-      { key: 8, value: 'Accepted by driver', slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
-      { key: 9, value: 'Pick up completed by driver', slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
-      { key: 10, value: 'Pick up Failed by driver', slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 11, value: 'Delivery completed by driver', slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
-      { key: 12, value: 'Delivery Failed by driver', slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 }
+      { key: 0, value: t('PENDING', 'Pending'), slug: 'PENDING', percentage: 25 },
+      { key: 1, value: t('COMPLETED', 'Completed'), slug: 'COMPLETED', percentage: 100 },
+      { key: 2, value: t('REJECTED', 'Rejected'), slug: 'REJECTED', percentage: 0 },
+      { key: 3, value: t('DRIVER_IN_BUSINESS', 'Driver in business'), slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
+      { key: 4, value: t('PREPARATION_COMPLETED', 'Preparation Completed'), slug: 'PREPARATION_COMPLETED', percentage: 70 },
+      { key: 5, value: t('REJECTED_BY_BUSINESS', 'Rejected by business'), slug: 'REJECTED_BY_BUSINESS', percentage: 0 },
+      { key: 6, value: t('REJECTED_BY_DRIVER', 'Rejected by Driver'), slug: 'REJECTED_BY_DRIVER', percentage: 0 },
+      { key: 7, value: t('ACCEPTED_BY_BUSINESS', 'Accepted by business'), slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
+      { key: 8, value: t('ACCEPTED_BY_DRIVER', 'Accepted by driver'), slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
+      { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'), slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
+      { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', 'Pick up Failed by driver'), slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
+      { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver'), slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
+      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver'), slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 }
     ]
 
     const objectStatus = orderStatus.find((o) => o.key === status)
@@ -95,24 +99,31 @@ const OrderDetailsUI = (props) => {
     events.emit('go_to_page', data)
   }
 
+  const locations = [
+    { ...order?.driver?.location },
+    { ...order?.business?.location },
+    { ...order?.customer?.location }
+  ]
+
+  useEffect(() => {
+    if (driverLocation) {
+      locations[0] = driverLocation
+    }
+  }, [driverLocation])
+
   return (
     <Container>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
-          <Header businessHeader={order?.business?.header}>
-            <HeaderInfo className='order-header'>
-              <img alt='Logotype' width='200px' height='90px' src={theme?.images?.logos?.logotype} />
-              <HeaderText column>
-                <h1>{t('ORDER_MESSAGE', 'Your order has been received')}</h1>
-                <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
-              </HeaderText>
-              <HeaderText>
-                <h1>{t('ORDER_TOTAL', 'Total')}</h1>
-                <h1>{parsePrice(order?.total || 0)}</h1>
-              </HeaderText>
-            </HeaderInfo>
-          </Header>
           <Content className='order-content'>
+            <Header businessHeader={header?.result?.header}>
+              <HeaderInfo className='order-header'>
+                <HeaderText column>
+                  <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
+                  <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
+                </HeaderText>
+              </HeaderInfo>
+            </Header>
             <OrderBusiness>
               <BusinessWrapper>
                 <LogoWrapper>
@@ -140,7 +151,6 @@ const OrderDetailsUI = (props) => {
             <OrderInfo>
               <OrderData>
                 <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
-                <p className='uuid'>{order?.uuid}</p>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>{order?.delivery_datetime}</p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
@@ -172,33 +182,45 @@ const OrderDetailsUI = (props) => {
 
             {order?.driver && (
               <>
-                <SectionTitle>
-                  {t('YOUR_DRIVER', 'Your Driver')}
-                </SectionTitle>
-                <OrderDriver>
-                  <WrapperDriver>
-                    <div className='photo'>
-                      {order?.driver?.photo ? (
-                        <PhotoBlock src={order?.driver?.photo} />
-                      ) : (
-                        <RiUser2Fill />
-                      )}
-                    </div>
-                    <InfoBlock>
-                      <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                      <span>{t('DRIVER', 'Driver')}</span>
-                    </InfoBlock>
-                  </WrapperDriver>
-                  <ActionsBlock>
-                    {order.driver && order.driver.phone &&
-                      <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                        <FiPhone />
-                      </span>}
-                    <span>
-                      <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
-                    </span>
-                  </ActionsBlock>
-                </OrderDriver>
+                {order?.driver?.location && parseInt(order?.status) === 9 && (
+                  <Map>
+                    <GoogleMapsMap
+                      apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+                      location={order?.driver?.location}
+                      locations={locations}
+                      mapControls={googleMapsControls}
+                    />
+                  </Map>
+                )}
+                <>
+                  <SectionTitle>
+                    {t('YOUR_DRIVER', 'Your Driver')}
+                  </SectionTitle>
+                  <OrderDriver>
+                    <WrapperDriver>
+                      <div className='photo'>
+                        {order?.driver?.photo ? (
+                          <PhotoBlock src={order?.driver?.photo} width='70' height='70' />
+                        ) : (
+                          <RiUser2Fill />
+                        )}
+                      </div>
+                      <InfoBlock>
+                        <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                        <span>{t('DRIVER', 'Driver')}</span>
+                      </InfoBlock>
+                    </WrapperDriver>
+                    <ActionsBlock>
+                      {order.driver && order.driver.phone &&
+                        <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                          <FiPhone />
+                        </span>}
+                      <span>
+                        <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
+                      </span>
+                    </ActionsBlock>
+                  </OrderDriver>
+                </>
               </>
             )}
 
@@ -234,12 +256,16 @@ const OrderDetailsUI = (props) => {
                     <td>{parsePrice(order?.driver_tip)}</td>
                   </tr>
                   <tr>
-                    <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
+                    <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
                     <td>{parsePrice(order?.serviceFee || 0)}</td>
                   </tr>
                   {order?.discount > 0 && (
                     <tr>
-                      <td>{t('DISCOUNT', 'Discount')}</td>
+                      {order?.discount_type === 1 ? (
+                        <td>{t('DISCOUNT', 'Discount')} ({parseNumber(order?.discount_rate)}%)</td>
+                      ) : (
+                        <td>{t('DISCOUNT', 'Discount')}</td>
+                      )}
                       <td>{parsePrice(order?.discount)}</td>
                     </tr>
                   )}
@@ -255,7 +281,15 @@ const OrderDetailsUI = (props) => {
               </table>
             </OrderBill>
 
-            {(order?.status === 1 || order?.status === 11) && !order.review && (
+            {(
+              parseInt(order?.status) === 1 ||
+              parseInt(order?.status) === 2 ||
+              parseInt(order?.status) === 5 ||
+              parseInt(order?.status) === 6 ||
+              parseInt(order?.status) === 10 ||
+              parseInt(order?.status) === 11 ||
+              parseInt(order?.status) === 12
+            ) && !order.review && (
               <ReviewsAction>
                 <Button color='primary' onClick={() => setOpenReview(true)}>
                   {t('REVIEW_ORDER', 'Review your Order')}
@@ -280,11 +314,9 @@ const OrderDetailsUI = (props) => {
 
       {loading && (
         <WrapperContainer className='skeleton-loading'>
-          <SkeletonBlock width={100}>
-            <Skeleton height={250} />
-          </SkeletonBlock>
           <SkeletonBlockWrapp>
             <SkeletonBlock width={80}>
+              <Skeleton height={200} />
               <Skeleton height={100} />
               <Skeleton height={100} />
               <Skeleton height={100} />
@@ -305,17 +337,26 @@ const OrderDetailsUI = (props) => {
       {!loading && !order && (
         <NotFoundSource
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
-          btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
+          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
           onClickButton={handleOrderRedirect}
         />
       )}
       {(openMessages.driver || openMessages.business) && (
-        <Modal open={openMessages.driver || openMessages.business} onClose={() => setOpenMessages({ driver: false, business: false })} padding='0' width='70%'>
+        <Modal
+          open={openMessages.driver || openMessages.business}
+          onClose={() => setOpenMessages({ driver: false, business: false })}
+          padding='0'
+          width='70%'
+        >
           <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
         </Modal>
       )}
       {openReview && (
-        <Modal open={openReview} onClose={() => setOpenReview(false)} title={order ? 'Write a Review #' + order?.id : 'LOADING...'}>
+        <Modal
+          open={openReview}
+          onClose={() => setOpenReview(false)}
+          title={order ? `${t('WRITE_A_REVIEW', 'Write a Review')} #${order?.id}` : t('LOADING', 'Loading...')}
+        >
           <ReviewOrder order={order} />
         </Modal>
       )}
@@ -326,6 +367,17 @@ const OrderDetailsUI = (props) => {
 export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
+    googleMapsControls: {
+      defaultZoom: 15,
+      zoomControl: true,
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        mapTypeIds: ['roadmap', 'satellite']
+      }
+    },
     UIComponent: OrderDetailsUI
   }
 

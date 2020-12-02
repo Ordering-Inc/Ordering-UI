@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 
+export const Container = styled.div``
+
 export const UserProfileContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -8,8 +10,9 @@ export const UserProfileContainer = styled.div`
   text-align: center;
   width: 100%;
   overflow-x: hidden;
+  margin-top: 25px;
 
-  @media (min-width: 480px) {
+  @media (min-width: 768px) {
     align-items: flex-start;
     flex-direction: row;
   }
@@ -18,7 +21,7 @@ export const UserProfileContainer = styled.div`
 export const FlexTabs = styled.div`
   width: 70%;
   margin: 0 auto;
-  
+
   div{
       justify-content: space-evenly
   }
@@ -30,12 +33,9 @@ export const UserImage = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  
-  @media (min-width: 480px) {
-    width: 40%;
-  }
 
   @media (min-width: 768px){
+    width: 20%;
     align-items: flex-end;
   }
 
@@ -62,58 +62,31 @@ export const Image = styled.div`
   };
 
   @media (min-width: 480px){
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
   }
 
-  @media (min-width: 578px){
+  @media (min-width: 768px){
     width: 170px;
     height: 170px;
-  }
-
-
-`
-
-export const SkeletonWrapper = styled.div`
-  span{
-    height: 100%;
-    position: relative;
-    top: -2.5px;
   }
 `
 
 export const Camera = styled.div`
-  width:212px; /**170px + 42px */
+  width:212px;
   > * {
     margin-top: 10px;
     width: 30px;
     height: 30px;
   }
-`
 
-export const SideForm = styled.div`
-  /*width: 70%;*/
-  width: 100%;
-    > *{
-    margin: 0;
-    margin-top: 20px;
-    ${props => props.theme?.rtl ? css`
-      margin-right: 0;
-  ` : css`
-      margin-left: 0;
-  `}
+  @media (min-width: 480px){
+    width:242px;
   }
-  @media (min-width: 480px) {
-    width: 60%;
-    > *{
-    margin: 30px 0;
-    margin-left: 50px;
-    ${props => props.theme?.rtl && css`
-      margin-right: 50px;
-      margin-left: 0;
-  `}
+
+  @media (min-width: 768px){
+    width:212px;
   }
-  };
 `
 
 export const UserData = styled.div`
@@ -121,7 +94,6 @@ export const UserData = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  height: 200px;
 
   h1 {
     font-size: 20px
@@ -137,7 +109,7 @@ export const UserData = styled.div`
     background: #F8F8F8;
   }
 
-  @media (min-width: 480px){
+  @media (min-width: 768px){
     align-items: flex-start;
     text-align: left;
     ${props => props.theme?.rtl && css`
@@ -148,21 +120,25 @@ export const UserData = styled.div`
 `
 
 export const SavedPlaces = styled.div`
-  width: 100%;
+  width: 90%;
   text-align: center;
+  margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 20px;
 
+
   h1{
-    font-size: 18px
+    font-size: 24px;
+    text-align: left;
+    ${props => props.theme?.rtl && css`
+    text-align: right;
+    `}
   }
 
   > div{
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    margin: 0 auto;
-    width: 80%;
   }
 
   button{
@@ -170,19 +146,15 @@ export const SavedPlaces = styled.div`
     align-self: center;
   }
 
-  @media (min-width: 480px){
-    width: 70%;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-    text-align: right;
-    `}
-
-    button {
-      align-self: flex-end;
-    }
-  }
-
   @media (min-width: 768px){
+    width: 90%;
+    margin-top: 40px;
+    h1 {
+      text-align: center;
+    }
+    ul{
+      width: 100%;
+    }
     button {
       width: 65%;
     }
@@ -190,71 +162,91 @@ export const SavedPlaces = styled.div`
 
 `
 
+export const SideForm = styled.div`
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 55%;
+    display: flex;
+    align-items: center;
+    margin: auto 0px auto 30px;
+    ${props => props.theme?.rtl && css`
+      margin: auto 30px auto 0px;
+    `}
+  }
+`
+
 export const FormInput = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 90%;
   margin: 0 auto;
-  *{
-    margin-top: 20px;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 0;
-    ` : css`
-      margin-right: 0;
-    `}
+
+  div.phone_number {
+    margin-bottom: 20px;
+    width: 100%;
   }
-  input{
+
+  input.form {
     padding: 10px 15px;
-    width: 80%;
-  }
-  button {
-    box-sizing: initial;
-    margin-top: 30px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    width: 80%;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
   }
 
-  @media (min-width: 480px){
-    height: auto;
-    * {
-      width: 75%;
-    } 
-  }
+  @media (min-width: 769px) {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
 
-  @media (min-width: 768px){
-    display: block;
-    height: 200px;
-    margin-top: 20px;
-    margin-left: 50px;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-      text-align: right;
-      margin-left: 0px;
-      margin-right: 50px;
-    `}
-
-    * {
-        margin-top: 10px;
-        margin-right: 10px;
-        padding: 10px 15px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 10px;
-        margin-right: 0px;
-      `}
-    }
-
-    input {
-      width: 38%;
-    }
-
-    button {
-      width: 38%;
-      padding: 7px 15px;
-      margin-top: 10px;
+    input.form {
+      width: 49%;
     }
   }
 `
+
+export const ActionsForm = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  button {
+    margin-top: 10px;
+    padding: 7px 0px;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:nth-child(1) {
+      margin-right: 5px;
+    }
+  }
+
+  ${props => props.theme?.rtl && css`
+    button {
+      &:nth-child(1) {
+        margin-right: 0px;
+      }
+      &:last-child {
+        margin-right: 5px;
+      }
+    }
+  `}
+`
+
+export const SkeletonWrapper = styled.div`
+  span{
+    height: 100%;
+    position: relative;
+    top: -2.5px;
+  }
+`
+
 export const SkeletonForm = styled.div`
   width: 100%;
   justify-content: center;

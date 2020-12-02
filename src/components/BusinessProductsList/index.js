@@ -8,7 +8,8 @@ import {
   ProductsContainer,
   ProductsListing,
   WrapAllCategories,
-  ErrorMessage
+  ErrorMessage,
+  WrapperNotFound
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
@@ -19,7 +20,11 @@ const BusinessProductsListUI = (props) => {
     categories,
     categoryState,
     isBusinessLoading,
-    onProductClick
+    onProductClick,
+    handleSearchRedirect,
+    featured,
+    searchValue,
+    handleClearSearch
   } = props
 
   const [, t] = useLanguage()
@@ -41,6 +46,31 @@ const BusinessProductsListUI = (props) => {
           }
         </ProductsListing>
       )}
+
+      {
+        !category.id && (
+          <>
+            {
+              featured && categoryState?.products?.find(product => product.featured) && (
+                <WrapAllCategories>
+                  <h3>{t('FEATURED', 'Featured')}</h3>
+                  <ProductsListing>
+                    {categoryState.products?.map(product => product.featured && (
+                      <SingleProductCard
+                        key={product.id}
+                        isSoldOut={(product.inventoried && !product.quantity)}
+                        product={product}
+                        businessId={businessId}
+                        onProductClick={onProductClick}
+                      />
+                    ))}
+                  </ProductsListing>
+                </WrapAllCategories>
+              )
+            }
+          </>
+        )
+      }
 
       {
         !category.id && categories.filter(category => category.id !== null).map((category, i, _categories) => {
@@ -95,9 +125,13 @@ const BusinessProductsListUI = (props) => {
 
       {
         !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && (
-          <NotFoundSource
-            content={t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
-          />
+          <WrapperNotFound>
+            <NotFoundSource
+              content={!searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
+              btnTitle={!searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters')}
+              onClickButton={() => !searchValue ? handleSearchRedirect() : handleClearSearch('')}
+            />
+          </WrapperNotFound>
         )
       }
 

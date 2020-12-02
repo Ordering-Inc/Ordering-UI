@@ -39,7 +39,7 @@ const ForgotPasswordUI = (props) => {
         ...alertState,
         success: false,
         open: true,
-        title: t('ERROR_FORGOT_ERROR'),
+        title: t('ERROR_UNKNOWN', 'An error has ocurred'),
         content: Object.values(errors).map(error => error.message)
       })
     }
@@ -51,16 +51,16 @@ const ForgotPasswordUI = (props) => {
         ...alertState,
         success: false,
         open: true,
-        title: t('ERROR_FORGOT_ERROR'),
-        content: formState.result?.result || [t('ERROR')]
+        title: t('ERROR_UNKNOWN', 'An error has ocurred'),
+        content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {
       setAlertState({
         ...alertState,
         open: true,
-        title: t('LINK_SEND_SUCCESSFULLY'),
-        content: t('SUCCESS_SEND_FORGOT_PASSWORD').replace('_email_', formData.email)
+        title: t('LINK_SEND_SUCCESSFULLY', 'Link Sent Successfully'),
+        content: `${t('SUCCESS_SEND_FORGOT_PASSWORD', 'Your link has been sent to the email')}: ${formData.email}`
       })
     }
   }, [formState.loading])
@@ -82,7 +82,7 @@ const ForgotPasswordUI = (props) => {
       <HeroSide isPopup={isPopup}>
         <TitleHeroSide>
           <h1>{t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')}</h1>
-          <p>{t('SUBTITLE_FORGOT_PASSWORD', "Enter your email addres and we'll send you a link to reset your password.")}</p>
+          <p>{t('SUBTITLE_FORGOT_PASSWORD', 'Enter your email addres and we\'ll send you a link to reset your password.')}</p>
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
@@ -97,18 +97,23 @@ const ForgotPasswordUI = (props) => {
             name='email'
             aria-label='email'
             spellcheck='false'
-            placeholder={t('EMAIL')}
+            placeholder={t('EMAIL', 'Email')}
             onChange={(e) => hanldeChangeInput(e)}
             ref={register({
-              required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+              required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: t('VALIDATION_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+                message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
               }
             })}
+            autoComplete='off'
           />
           <Button color={formState.loading || alertState.success ? 'secondary' : 'primary'} type='submit' disabled={formState.loading || alertState.success}>
-            {alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD') : t('FRONT_RECOVER_PASSWORD')}
+            {formState.loading
+              ? t('LOADING', 'Loading...')
+              : alertState.success && formState.result.result
+                ? t('LINK_SEND_FORGOT_PASSWORD', 'Link Sent')
+                : t('FRONT_RECOVER_PASSWORD', 'Recover Password')}
           </Button>
         </FormInput>
         {elementLinkToLogin && (
@@ -121,7 +126,7 @@ const ForgotPasswordUI = (props) => {
       <Alert
         title={alertState.title}
         content={alertState.content}
-        acceptText={t('ACCEPT')}
+        acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}

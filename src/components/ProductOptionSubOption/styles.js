@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ export const Container = styled.div`
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
-`
+`;
 
 export const IconControl = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ export const IconControl = styled.div`
   svg[disabled] {
     color: #CBCBCB;
   }
-`
+`;
 export const Text = styled.div`
   /* display: flex; */
   flex: 1 1 auto;
@@ -40,7 +40,13 @@ export const Text = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0 5px;
-`
+
+  span {
+    margin-left: 10px;
+    font-weight: 500;
+    color: ${props => props.theme.colors.primary};
+  }
+`;
 
 export const QuantityControl = styled.div`
   display: flex;
@@ -72,7 +78,7 @@ export const QuantityControl = styled.div`
       margin-left: 0px;
   `}
   }
-`
+`;
 
 export const PositionControl = styled.div`
   display: flex;
@@ -104,7 +110,7 @@ export const PositionControl = styled.div`
       `}
     }
   }
-`
+`;
 
 export const SuboptionPrice = styled.div`
   display: flex;
@@ -117,4 +123,4 @@ export const SuboptionPrice = styled.div`
     margin-right: 5px;
     margin-left: 0px;
   `}
-`
+`;

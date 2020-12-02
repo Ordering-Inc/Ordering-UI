@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  padding: 40px 20px 0px;
+  padding: 60px 20px 0px;
 
   div:not(:last-child) {
     padding-bottom: 5px;

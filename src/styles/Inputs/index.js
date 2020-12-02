@@ -4,8 +4,8 @@ import { Button } from '../Buttons'
 
 export const Input = styled.input`
   background: #FFF;
-  color: #BBB;
-  border: 1px solid #BBB;
+  color: #010300;
+  border: 1px solid #DBDCDB;
   border-radius: 30px;
   font-size: 16px;
   padding: 7px 15px;
@@ -21,10 +21,10 @@ export const Input = styled.input`
 
   &::placeholder,
   &::-webkit-input-placeholder {
-    color: #CBCBCB;
+    color: #DBDCDB;
   }
   &:-ms-input-placeholder {
-    color: #CBCBCB;
+    color: #DBDCDB;
   }
 `
 
@@ -48,7 +48,6 @@ export const InputGroup = styled.div`
 `
 
 export const InputGroupLeft = styled.div`
-  border-radius: 34px 0 0 34px;
   line-height: 34px;
   padding-left: 7px;
   padding-right: 7px;
@@ -56,11 +55,13 @@ export const InputGroupLeft = styled.div`
   border-width: 1px;
   height: 34px;
   border-style: solid;
-  border-right-width: 0;
-  ${props => props.theme?.rtl && css`
-        border-left-width: 0;
-        border-right-width: initial;
-    `}
+  ${props => props.theme?.rtl ? css`
+      border-left-width: 0;
+      border-radius: 34px 34px 0 0;
+  ` : css`
+      border-radius: 34px 0 0 34px;
+      border-right-width: 0;
+  `}
 
   & ${Button} {
     margin-left: -7px;
@@ -68,6 +69,32 @@ export const InputGroupLeft = styled.div`
         margin-right: -7px;
         margin-left: 0
     `}
+  }
+`
+
+export const TextArea = styled.textarea`
+  background: #FFF;
+  color: #010300;
+  border: 1px solid #DBDCDB;
+  border-radius: 30px;
+  font-size: 16px;
+  padding: 7px 15px;
+  outline: none;
+
+  &:focus {
+    border-color: ${() => darken(0.07, '#CCC')};
+  }
+
+  ${({ w }) => w && css`
+    width: 20%;
+  `}
+
+  &::placeholder,
+  &::-webkit-input-placeholder {
+    color: #DBDCDB;
+  }
+  &:-ms-input-placeholder {
+    color: #DBDCDB;
   }
 `
 
@@ -80,6 +107,7 @@ export const InputGroupRight = styled(InputGroupLeft)`
   ${props => props.theme?.rtl && css`
         border-left-width: 1px;
         border-right-width: 0;
+        border-radius: 0 0 34px 34px;
     `}
 
   & ${Button} {

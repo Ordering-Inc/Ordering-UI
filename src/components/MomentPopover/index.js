@@ -43,9 +43,20 @@ export const MomentPopover = (props) => {
     }
   }
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      props.onClose && props.onClose()
+    }
+  }
+
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
-    return () => window.removeEventListener('mouseup', handleClickOutside)
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [open])
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
@@ -55,7 +66,7 @@ export const MomentPopover = (props) => {
 
   return (
     <div className='moment-popover' style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+      <HeaderItem ref={referenceElement} onClick={props.onClick} isHome={props.isHome}>
         <FaRegClock /> {orderStatus.options?.moment ? parseDate(orderStatus.options?.moment, { outputFormat: 'MM/DD hh:mma' }) : t('ASAP_ABBREVIATION', 'ASAP')}
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>

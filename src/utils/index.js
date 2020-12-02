@@ -91,3 +91,18 @@ export const convertHoursToMinutes = (time) => {
  * @param {string} str string to capitalize
  */
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+
+/**
+ * Function to return a static google maps image based in location
+ * @param {object} param object with latitude and logitude
+ */
+export const getGoogleMapImage = ({ lat, lng }) => {
+  const googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+  return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${googleMapKey}`
+}
+
+/**
+ * _Function to flat array of one level
+ * @param {Array} arr to flat
+ */
+export const flatArray = arr => [].concat(...arr)
