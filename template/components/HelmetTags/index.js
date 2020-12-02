@@ -18,7 +18,11 @@ export const HelmetTags = (props) => {
       ) : (
         metaTag.robots && <meta name='robots' content={metaTag.robots} />
       )}
-      <link rel='canonical' href={props.canonicalUrl || metaTag.canonicalUrl} />
+      {props.canonicalUrl ? (
+        <link rel='canonical' href={props.canonicalUrl} />
+      ) : (
+        metaTag.canonicalUrl && <link rel='canonical' href={metaTag.canonicalUrl} />
+      )}
     </Helmet>
   )
 }
