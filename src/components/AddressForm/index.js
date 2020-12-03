@@ -52,7 +52,11 @@ const AddressFormUI = (props) => {
 
   const onSubmit = () => {
     const isAddressAlreadyExist = (addressesList || []).some(address => (
-      address.location.lat === formState.changes.location.lat && address.location.lng === formState.changes.location.lng
+      address.location.lat === formState.changes.location.lat &&
+      address.location.lng === formState.changes.location.lng &&
+      address.internal_number === formState.changes.internal_number &&
+      address.zipcode === formState.changes.zipcode &&
+      address.address_notes === formState.changes.address_notes
     ))
     if (!isAddressAlreadyExist) {
       saveAddress()
@@ -152,7 +156,7 @@ const AddressFormUI = (props) => {
               IconButton={ImCompass}
             />}
         </AddressWrap>
-        {(addressState?.address?.location || formState?.changes?.location) && (
+        {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
