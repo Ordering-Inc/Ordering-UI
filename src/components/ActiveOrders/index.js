@@ -28,9 +28,9 @@ export const ActiveOrders = (props) => {
   const [{ parsePrice }] = useUtils()
 
   return (
-    <OrdersContainer id='container' activeOrders>
-      <Tabs id='orders'>
-        <AutoScroll container='container' categories='orders'>
+    <OrdersContainer activeOrders>
+      <Tabs>
+        <AutoScroll>
           {orders.map(order => (
             <Card key={order.id}>
               <Map>
