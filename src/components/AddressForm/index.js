@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
 import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
@@ -14,6 +14,8 @@ import {
   GoogleMapsMap
 } from 'ordering-components'
 import { Alert } from '../Confirm'
+// import { CustomInput } from '../UI/CustomInput'
+// import { CustomTextArea } from '../UI/CustomTextArea'
 
 import {
   FormControl,
@@ -42,6 +44,11 @@ const AddressFormUI = (props) => {
     saveAddress,
     handleChangePosition
   } = props
+
+  const inputRef = useRef()
+  const iNRef = useRef()
+  const zipRef = useRef()
+  const textArRef = useRef()
 
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
@@ -114,9 +121,34 @@ const AddressFormUI = (props) => {
     })
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (inputRef.current.attributes.autocomplete &&
+        inputRef.current.attributes.autocomplete.value === 'new-field'
+      ) clearInterval(interval)
+      inputRef.current.setAttribute('autocomplete', 'new-field')
+
+      if (iNRef.current.attributes.autocomplete &&
+        iNRef.current.attributes.autocomplete.value === 'new-field'
+      ) clearInterval(interval)
+      iNRef.current.setAttribute('autocomplete', 'new-field')
+
+      if (zipRef.current.attributes.autocomplete &&
+        zipRef.current.attributes.autocomplete.value === 'new-field'
+      ) clearInterval(interval)
+      zipRef.current.setAttribute('autocomplete', 'new-field')
+
+      if (textArRef.current.attributes.autocomplete &&
+        textArRef.current.attributes.autocomplete.value === 'new-field'
+      ) clearInterval(interval)
+      textArRef.current.setAttribute('autocomplete', 'new-field')
+    }, 500)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <div className='address-form'>
-      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+      <FormControl onSubmit={handleSubmit(onSubmit)}>
         {(addressState?.address?.location || formState?.changes?.location) && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
@@ -141,6 +173,9 @@ const AddressFormUI = (props) => {
               childRef={register({
                 required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
               })}
+              ref={(e) => {
+                inputRef.current = e
+              }}
               autoComplete='off'
             />
           </WrapAddressInput>
@@ -159,25 +194,34 @@ const AddressFormUI = (props) => {
           className='internal_number'
           name='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
-          ref={register}
+          ref={(e) => {
+            register(e)
+            iNRef.current = e
+          }}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
-          autoComplete='off'
+          autoComplete='new-field'
         />
         <Input
           className='zipcode'
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
-          ref={register}
+          ref={(e) => {
+            register(e)
+            zipRef.current = e
+          }}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
-          autoComplete='off'
+          autoComplete='new-field'
         />
         <TextArea
           name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-          ref={register}
+          ref={(e) => {
+            register(e)
+            textArRef.current = e
+          }}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
           onChange={hanldeChangeInput}
           autoComplete='off'
