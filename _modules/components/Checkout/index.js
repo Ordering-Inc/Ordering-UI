@@ -325,8 +325,9 @@ var Checkout = function Checkout(props) {
       handleCheckoutListRedirect = props.handleCheckoutListRedirect;
 
   var _useOrder3 = (0, _orderingComponents.useOrder)(),
-      _useOrder4 = _slicedToArray(_useOrder3, 1),
-      orderState = _useOrder4[0];
+      _useOrder4 = _slicedToArray(_useOrder3, 2),
+      orderState = _useOrder4[0],
+      confirmCart = _useOrder4[1].confirmCart;
 
   var _useSession3 = (0, _orderingComponents.useSession)(),
       _useSession4 = _slicedToArray(_useSession3, 1),
@@ -385,7 +386,7 @@ var Checkout = function Checkout(props) {
       open: false,
       content: []
     });
-    clearErrors();
+    clearErrors && clearErrors();
   };
 
   var handleOpenUpsellingPage = function handleOpenUpsellingPage(cart) {
@@ -422,7 +423,7 @@ var Checkout = function Checkout(props) {
 
   var getOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(cartId) {
-      var _result$order, _result$paymethod_dat, response, _yield$response$json, result, _yield$orderState$con, error, cart;
+      var _result$order, _result$paymethod_dat, response, _yield$response$json, result, _yield$confirmCart, error, cart;
 
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -470,11 +471,11 @@ var Checkout = function Checkout(props) {
 
               _context.prev = 15;
               _context.next = 18;
-              return orderState.confirmCart(cartUuid);
+              return confirmCart(cartUuid);
 
             case 18:
-              _yield$orderState$con = _context.sent;
-              error = _yield$orderState$con.error;
+              _yield$confirmCart = _context.sent;
+              error = _yield$confirmCart.error;
 
               if (error) {
                 setAlertState({
