@@ -89,14 +89,14 @@ const ProductOptionsUI = (props) => {
       return
     }
     const myElement = document.getElementsByClassName('error')[0]
-    const modal = document.getElementsByClassName('popup-dialog')[0]
+    const productContainer = document.getElementsByClassName('product-container')[0]
 
-    let topPos = myElement.offsetTop - modal.offsetTop
+    let topPos = myElement.offsetTop - productContainer.offsetTop
     if (windowSize.width <= 768) {
       const productImage = document.getElementById('product_image')
       topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
     }
-    scrollTo(modal, topPos, 1250)
+    scrollTo(productContainer, topPos, 1250)
   }
 
   const handleCustomModalClick = (e, { page }) => {
@@ -117,7 +117,7 @@ const ProductOptionsUI = (props) => {
   }
 
   return (
-    <ProductContainer>
+    <ProductContainer className='product-container'>
       {loading && (
         <SkeletonBlock width={90}>
           <Skeleton variant='rect' height={50} />

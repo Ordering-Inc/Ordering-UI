@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const IconShare = styled.div`
   position: sticky;
   margin: 0px;
-  top: 0px;
+  top: 10px;
   font-size: 22px;
   right: 16px;
   z-index: 9999995;
@@ -22,12 +22,14 @@ export const IconShare = styled.div`
 
   @media(min-width: 769px){
     position: relative;
+    top: 0;
   }
 
   @media (min-width: 1201px) {
     position: absolute;
-    margin: 0 10px;
+    margin: 0 20px;
     left: initial;
+    top: 10px
 
     ${props => props.theme?.rtl && css`
       left: 14px;

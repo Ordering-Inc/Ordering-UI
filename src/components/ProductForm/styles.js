@@ -6,6 +6,7 @@ export const ProductContainer = styled.div`
   flex-wrap: wrap;
   max-height: 100vh;
   position: relative;
+  padding: 10px;
 
   @media (min-width: 768px) {
     height: 100%;
@@ -13,6 +14,8 @@ export const ProductContainer = styled.div`
 
   @media (min-width: 1201px) {
     flex-wrap: nowrap;
+    height: 80vh;
+    overflow: auto;
   }
 `
 
@@ -26,6 +29,7 @@ export const WrapperImage = styled.div`
 
   @media (min-width: 1201px) {
     width: calc(50% - 10px);
+    position: sticky;
     top: 0;
   }
 `
@@ -44,7 +48,7 @@ export const ProductImage = styled.div`
   }
 
   @media (min-width: 1201px) {
-    height: auto;
+    height: 100%;
     img {
       width: 100%;
       object-fit: cover;
@@ -230,6 +234,8 @@ export const ProductActions = styled.div`
   }
 
   @media (min-width: 1201px) {
+    position: sticky;
+    top: 100%;
     padding: 10px 0px;
 
     div.incdec-control {
