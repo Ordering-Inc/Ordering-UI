@@ -67,6 +67,7 @@ const BusinessProductsListingUI = (props) => {
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [events] = useEvent()
   const [{ auth }] = useSession()
   const location = useLocation()
@@ -78,6 +79,10 @@ const BusinessProductsListingUI = (props) => {
     { value: 'rank', content: t('RANK', 'Rank'), showOnSelected: t('RANK', 'Rank') },
     { value: 'a-z', content: t('A_to_Z', 'A-Z'), showOnSelected: t('A_to_Z', 'A-Z') }
   ]
+
+  const handler = () => {
+    setOpenBusinessInformation(true)
+  }
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -165,6 +170,8 @@ const BusinessProductsListingUI = (props) => {
             <>
               <BusinessBasicInformation
                 businessState={businessState}
+                setOpenBusinessInformation={setOpenBusinessInformation}
+                openBusinessInformation={openBusinessInformation}
               />
               {(categoryState.products.length !== 0 || searchValue) && (
                 <WrapperSearch>
@@ -189,6 +196,7 @@ const BusinessProductsListingUI = (props) => {
                   categorySelected={categorySelected}
                   onClickCategory={handleChangeCategory}
                   featured={featuredProducts}
+                  openBusinessInformation={openBusinessInformation}
                 />
               )}
 
@@ -251,10 +259,13 @@ const BusinessProductsListingUI = (props) => {
             <BusinessBasicInformation
               businessState={{ business: {}, loading: true }}
               isSkeleton
+              handler={handler}
+              openBusinessInformation={openBusinessInformation}
             />
             <BusinessProductsCategories
               categories={[]}
               isSkeleton
+              openBusinessInformation={openBusinessInformation}
             />
             <WrapContent>
               <BusinessProductsList
