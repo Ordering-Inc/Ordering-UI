@@ -26,14 +26,13 @@ export const IconShare = styled.div`
   }
 
   @media (min-width: 1201px) {
-    position: absolute;
-    margin: 0 20px;
-    left: initial;
-    top: 10px
+    position: sticky;
+    left: 94%;
+    width: 0;
 
     ${props => props.theme?.rtl && css`
-      left: 14px;
-      right: initial;
+      right: 94%;
+      left: initial;
     `}
   }
 `
