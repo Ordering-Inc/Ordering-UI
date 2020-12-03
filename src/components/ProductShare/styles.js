@@ -27,11 +27,11 @@ export const IconShare = styled.div`
 
   @media (min-width: 1201px) {
     position: sticky;
-    left: 94%;
+    left: calc(100% - 45px);
     width: 0;
 
     ${props => props.theme?.rtl && css`
-      right: 94%;
+      right: calc(100% - 45px);
       left: initial;
     `}
   }

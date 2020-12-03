@@ -70,11 +70,6 @@ export const ProductInfo = styled.div`
     text-align: center;
     color: #263238;
     margin-top: 0px;
-    margin-right: 10px;
-    ${props => props.theme?.rtl && css`
-      margin-right: 0px;
-      margin-left: 10px
-    `}
   }
 
   p {
@@ -108,6 +103,11 @@ export const ProductInfo = styled.div`
     top: 0;
     margin-top: 0px;
   }
+`
+
+export const ProductFormTitle = styled.div`
+  width: calc(100% - 25px);
+  overflow-wrap: break-word;
 `
 
 export const ProductEdition = styled.div``

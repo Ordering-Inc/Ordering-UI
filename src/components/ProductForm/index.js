@@ -37,7 +37,8 @@ import {
   ProductComment,
   SkeletonBlock,
   WrapperSubOption,
-  SkuContent
+  SkuContent,
+  ProductFormTitle
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -142,7 +143,7 @@ const ProductOptionsUI = (props) => {
             </ProductImage>
           </WrapperImage>
           <ProductInfo>
-            <div>
+            <ProductFormTitle>
               <h1>{product?.name}</h1>
               {product?.description && <p>{product?.description}</p>}
               {product?.sku && (
@@ -151,7 +152,7 @@ const ProductOptionsUI = (props) => {
                   <p>{product?.sku}</p>
                 </SkuContent>
               )}
-            </div>
+            </ProductFormTitle>
             <ProductEdition>
               {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
               {product?.ingredients.map(ingredient => (
