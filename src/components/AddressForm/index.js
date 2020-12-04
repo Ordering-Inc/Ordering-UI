@@ -8,7 +8,7 @@ import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
-  GoogleAutocompleteInput,
+  // GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
   GoogleMapsMap
@@ -16,6 +16,7 @@ import {
 import { Alert } from '../Confirm'
 // import { CustomInput } from '../UI/CustomInput'
 // import { CustomTextArea } from '../UI/CustomTextArea'
+import { GoogleAutocompleteInput } from './test'
 
 import {
   FormControl,
@@ -159,6 +160,7 @@ const AddressFormUI = (props) => {
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
               defaultValue={formState.changes?.address || addressState.address?.address}
+              ref={inputRef}
               childRef={register({
                 required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
               })}
@@ -180,21 +182,22 @@ const AddressFormUI = (props) => {
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={(e) => hanldeChangeInput({ target: { name: 'test2', value: e.target.value } })}
-          autoComplete='off'
+          autoComplete='new-field'
         />
         <Input
           className='zipcode inputs-test'
           placeholder={t('ZIP_CODE', 'Zip code')}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={(e) => hanldeChangeInput({ target: { name: 'test3', value: e.target.value } })}
-          autoComplete='off'
+          autoComplete='new-field'
         />
         <TextArea
           className='inputs-test'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
-          onChange={(e) => hanldeChangeInput({ target: { name: 'test4', value: e.target.value } })} autoComplete='off'
+          onChange={(e) => hanldeChangeInput({ target: { name: 'test4', value: e.target.value } })}
+          autoComplete='new-field'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>
