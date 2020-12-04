@@ -127,13 +127,9 @@ const AddressFormUI = (props) => {
 
   useEffect(() => {
     const inputs = document.getElementsByClassName('address-input')
-    if (Array.prototype.findIndex.call(inputs, input => {
-      if (input.attributes.autocomplete.value !== 'new-field') return true
-    }) !== -1) {
-      Array.prototype.forEach.call(inputs, input => {
-        input.setAttribute('autoComplete', 'new-field')
-      })
-    }
+    Array.prototype.forEach.call(inputs, input => {
+      input.setAttribute('autoComplete', 'new-field')
+    })
   })
 
   return (
