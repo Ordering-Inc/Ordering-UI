@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
 import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
 import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import ImCompass from '@meronex/icons/im/ImCompass'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
-import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
-  // GoogleAutocompleteInput,
+  GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
   GoogleMapsMap
@@ -16,7 +15,6 @@ import {
 import { Alert } from '../Confirm'
 // import { CustomInput } from '../UI/CustomInput'
 // import { CustomTextArea } from '../UI/CustomTextArea'
-import { GoogleAutocompleteInput } from './test'
 
 import {
   FormControl,
@@ -46,19 +44,24 @@ const AddressFormUI = (props) => {
     handleChangePosition
   } = props
 
-  const inputRef = useRef()
-  const iNRef = useRef()
-  const zipRef = useRef()
-  const textArRef = useRef()
-
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
+    if (isRequiredField('address')) {
+      const inputTest = document.getElementsByClassName('input-autocomplete')[0]
+      if (!inputTest.value) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required')]
+        })
+        return
+      }
+    }
     const isAddressAlreadyExist = (addressesList || []).some(address => (
       address.location.lat === formState.changes.location.lat && address.location.lng === formState.changes.location.lng
     ))
@@ -87,11 +90,7 @@ const AddressFormUI = (props) => {
       ...state,
       selectedFromAutocomplete: true
     })
-    if (address) {
-      updateChanges(address)
-    } else {
-      console.log('error')
-    }
+    updateChanges(address)
   }
 
   const handleAddressKeyDown = () => {
@@ -110,14 +109,14 @@ const AddressFormUI = (props) => {
     }
   }, [formState])
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setAlertState({
         open: true,
         content: Object.values(errors).map(error => error.message)
       })
     }
-  }, [errors])
+  }, [errors]) */
 
   const closeAlert = () => {
     setAlertState({
@@ -127,7 +126,7 @@ const AddressFormUI = (props) => {
   }
 
   useEffect(() => {
-    const inputs = document.getElementsByClassName('inputs-test')
+    const inputs = document.getElementsByClassName('address-input')
     if (Array.prototype.findIndex.call(inputs, input => {
       if (input.attributes.autocomplete.value !== 'new-field') return true
     }) !== -1) {
@@ -154,16 +153,12 @@ const AddressFormUI = (props) => {
           <WrapAddressInput>
             <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
-              className='input-autocomplete'
+              className='input-autocomplete address-input'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
               defaultValue={formState.changes?.address || addressState.address?.address}
-              ref={inputRef}
-              childRef={register({
-                required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
-              })}
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
@@ -178,21 +173,21 @@ const AddressFormUI = (props) => {
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
-          className='internal_number inputs-test'
+          className='internal_number address-input'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={(e) => hanldeChangeInput({ target: { name: 'test2', value: e.target.value } })}
           autoComplete='new-field'
         />
         <Input
-          className='zipcode inputs-test'
+          className='zipcode address-input'
           placeholder={t('ZIP_CODE', 'Zip code')}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={(e) => hanldeChangeInput({ target: { name: 'test3', value: e.target.value } })}
           autoComplete='new-field'
         />
         <TextArea
-          className='inputs-test'
+          className='address-input'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
