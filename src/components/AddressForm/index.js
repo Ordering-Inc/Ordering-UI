@@ -122,33 +122,19 @@ const AddressFormUI = (props) => {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (inputRef.current.attributes.autocomplete &&
-        inputRef.current.attributes.autocomplete.value === 'new-field'
-      ) clearInterval(interval)
-      inputRef.current.setAttribute('autocomplete', 'new-field')
-
-      if (iNRef.current.attributes.autocomplete &&
-        iNRef.current.attributes.autocomplete.value === 'new-field'
-      ) clearInterval(interval)
-      iNRef.current.setAttribute('autocomplete', 'new-field')
-
-      if (zipRef.current.attributes.autocomplete &&
-        zipRef.current.attributes.autocomplete.value === 'new-field'
-      ) clearInterval(interval)
-      zipRef.current.setAttribute('autocomplete', 'new-field')
-
-      if (textArRef.current.attributes.autocomplete &&
-        textArRef.current.attributes.autocomplete.value === 'new-field'
-      ) clearInterval(interval)
-      textArRef.current.setAttribute('autocomplete', 'new-field')
-    }, 500)
-    return () => clearInterval(interval)
-  }, [])
+    const inputs = document.getElementsByClassName('inputs-test')
+    if (Array.prototype.findIndex.call(inputs, input => {
+      if (input.attributes.autocomplete.value !== 'new-field') return true
+    }) !== -1) {
+      Array.prototype.forEach.call(inputs, input => {
+        input.setAttribute('autoComplete', 'new-field')
+      })
+    }
+  })
 
   return (
     <div className='address-form'>
-      <FormControl onSubmit={handleSubmit(onSubmit)}>
+      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         {(addressState?.address?.location || formState?.changes?.location) && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
@@ -176,7 +162,6 @@ const AddressFormUI = (props) => {
               ref={(e) => {
                 inputRef.current = e
               }}
-              autoComplete='off'
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
@@ -191,8 +176,8 @@ const AddressFormUI = (props) => {
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
-          className='internal_number'
           name='internal_number'
+          className='internal_number inputs-test'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           ref={(e) => {
             register(e)
@@ -200,10 +185,10 @@ const AddressFormUI = (props) => {
           }}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
-          autoComplete='new-field'
+          autoComplete='off'
         />
         <Input
-          className='zipcode'
+          className='zipcode inputs-test'
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           ref={(e) => {
@@ -212,10 +197,11 @@ const AddressFormUI = (props) => {
           }}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
-          autoComplete='new-field'
+          autoComplete='off'
         />
         <TextArea
           name='address_notes'
+          className='inputs-test'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           ref={(e) => {
