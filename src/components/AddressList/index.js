@@ -76,7 +76,7 @@ const AddressListUI = (props) => {
 
   const handleSetAddress = (address) => {
     handleSetDefault(address)
-    onClosePopover()
+    onClosePopover && onClosePopover()
   }
 
   const handleDeleteClick = (address) => {
