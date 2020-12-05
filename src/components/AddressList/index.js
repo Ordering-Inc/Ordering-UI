@@ -56,7 +56,7 @@ const AddressListUI = (props) => {
   const handleSaveAddress = (address) => {
     let found = false
     const addresses = addressList.addresses.map(_address => {
-      if (_address.id === address.id) {
+      if (_address?.id === address?.id) {
         Object.assign(_address, address)
         found = true
       } else if (address.default) {
@@ -76,7 +76,7 @@ const AddressListUI = (props) => {
 
   const handleSetAddress = (address) => {
     handleSetDefault(address)
-    onClosePopover && onClosePopover()
+    onClosePopover()
   }
 
   const handleDeleteClick = (address) => {
@@ -146,7 +146,7 @@ const AddressListUI = (props) => {
       {!addressList.loading && !addressList.error && addressList?.addresses?.length > 0 && (
         <AddressListUl>
           {addressList.addresses.map(address => (
-            <AddressItem key={address.id}>
+            <AddressItem key={address?.id}>
               <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                 <span className='radio'>
                   {address.address === orderState?.options?.address?.address ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
