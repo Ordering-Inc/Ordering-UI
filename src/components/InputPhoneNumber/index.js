@@ -36,7 +36,7 @@ const InputPhoneNumberUI = (props) => {
         <>
           <PhoneInput
             international
-            defaultCountry={countryData.value}
+            defaultCountry={countryData.value || 'US'}
             countryCallingCodeEditable={false}
             placeholder={t('PHONE_NUMBER', 'Phone number')}
             value={value}
