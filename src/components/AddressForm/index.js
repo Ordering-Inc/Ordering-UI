@@ -13,8 +13,6 @@ import {
   GoogleMapsMap
 } from 'ordering-components'
 import { Alert } from '../Confirm'
-// import { CustomInput } from '../UI/CustomInput'
-// import { CustomTextArea } from '../UI/CustomTextArea'
 
 import {
   FormControl,
@@ -125,21 +123,6 @@ const AddressFormUI = (props) => {
     })
   }
 
-  useEffect(() => {
-    const inputs = document.getElementsByClassName('address-input')
-    let interval
-    if (inputs[0]) {
-      interval = setInterval(() => {
-        inputs[0].setAttribute('autoComplete', 'new-field')
-      }, 100)
-      if (inputs[0].attributes.autoComplete.value === 'new-field') clearInterval(interval)
-    }
-
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
-
   return (
     <div className='address-form'>
       <FormControl onSubmit={onSubmit} autoComplete='off'>
@@ -157,7 +140,7 @@ const AddressFormUI = (props) => {
           <WrapAddressInput>
             <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
-              className='input-autocomplete address-input'
+              className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
@@ -177,21 +160,20 @@ const AddressFormUI = (props) => {
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
-          className='internal_number address-input'
+          className='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={(e) => hanldeChangeInput({ target: { name: 'test2', value: e.target.value } })}
           autoComplete='new-field'
         />
         <Input
-          className='zipcode address-input'
+          className='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={(e) => hanldeChangeInput({ target: { name: 'test3', value: e.target.value } })}
           autoComplete='new-field'
         />
         <TextArea
-          className='address-input'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
