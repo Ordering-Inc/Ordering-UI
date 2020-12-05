@@ -52,7 +52,7 @@ const AddressFormUI = (props) => {
 
   const onSubmit = () => {
     const isAddressAlreadyExist = (addressesList || []).some(address => (
-      address.location.lat === formState.changes.location.lat && address.location.lng === formState.changes.location.lng
+      address?.location?.lat === formState.changes?.location?.lat && address?.location?.lng === formState.changes?.location?.lng
     ))
     if (!isAddressAlreadyExist) {
       saveAddress()
@@ -137,7 +137,7 @@ const AddressFormUI = (props) => {
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
-              defaultValue={formState.changes?.address || addressState.address?.address}
+              defaultValue={formState.changes?.address || addressState?.address?.address}
               childRef={register({
                 required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
               })}
@@ -160,7 +160,7 @@ const AddressFormUI = (props) => {
           name='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           ref={register}
-          defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
+          defaultValue={formState.changes?.internal_number || addressState?.address?.internal_number}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
@@ -169,7 +169,7 @@ const AddressFormUI = (props) => {
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           ref={register}
-          defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
+          defaultValue={formState.changes?.zipcode || addressState?.address?.zipcode}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
@@ -178,7 +178,7 @@ const AddressFormUI = (props) => {
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           ref={register}
-          defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
+          defaultValue={formState.changes?.address_notes || addressState?.address?.address_notes}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
@@ -200,7 +200,7 @@ const AddressFormUI = (props) => {
         <FormActions>
           <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
           <Button type='submit' disabled={formState.loading} color='primary'>
-            {addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
+            {addressState?.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
           </Button>
         </FormActions>
       </FormControl>
