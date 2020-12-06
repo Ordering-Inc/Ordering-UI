@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import parsePhoneNumber from 'libphonenumber-js'
 import 'react-phone-number-input/style.css'
-import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input'
+import PhoneInput from 'react-phone-number-input'
 import { InputPhoneNumber as InputController, useLanguage } from 'ordering-components'
 
 import { Container, ErrorMsg } from './styles'
@@ -17,16 +18,22 @@ const InputPhoneNumberUI = (props) => {
 
   const [, t] = useLanguage()
 
+  const isValidPhoneNumber = (number) => {
+    if (!number) return
+    const numberParser = parsePhoneNumber(number)
+    return numberParser?.isValid()
+  }
+
   useEffect(() => {
     if (value) {
-      handleIsValid && handleIsValid(isPossiblePhoneNumber(value))
+      handleIsValid && handleIsValid(isValidPhoneNumber(value))
     }
   }, [value])
 
   useEffect(() => {
     if (countryData.number) {
       const number = `${countryData.number}${value?.replace('null', '')}`
-      setValue(number, isPossiblePhoneNumber(number))
+      setValue(number, isValidPhoneNumber(number))
     }
   }, [countryData.number])
 
@@ -43,9 +50,9 @@ const InputPhoneNumberUI = (props) => {
             placeholder={t('PHONE_NUMBER', 'Phone number')}
             value={value}
             disabled={disabled}
-            onChange={(val) => setValue(val, isPossiblePhoneNumber(val))}
+            onChange={(val) => setValue(val, isValidPhoneNumber(val))}
           />
-          {value && !isPossiblePhoneNumber(value) && !disabled && <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number')}</ErrorMsg>}
+          {value && !isValidPhoneNumber(value) && !disabled && <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number')}</ErrorMsg>}
         </>
       )}
     </Container>
