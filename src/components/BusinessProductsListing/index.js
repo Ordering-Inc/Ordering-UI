@@ -223,7 +223,7 @@ const BusinessProductsListingUI = (props) => {
           open={openProduct}
           closeOnBackdrop
           onClose={() => closeModalProductForm()}
-          padding='10px'
+          padding='0'
         >
 
           {productModal.loading && (
