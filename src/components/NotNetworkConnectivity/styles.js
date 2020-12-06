@@ -18,5 +18,7 @@ export const Image = styled.div`
   padding-left: 20px;
   img {
     width: 100%;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height)
   }
 `

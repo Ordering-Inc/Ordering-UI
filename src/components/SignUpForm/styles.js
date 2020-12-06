@@ -52,10 +52,6 @@ export const FormSide = styled(Side)`
   align-items: center;
   margin: auto;
 
-  img#logo {
-    width: 200px;
-  }
-
   @media (min-width: 769px) {
     ${({ isPopup }) => isPopup && css`
       margin: 20px 0px;
@@ -150,15 +146,15 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-  width: 80%;
+  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
 
   button {
     display: flex;
     justify-content: start;
-    width: calc(100% - 20px);
-    margin: 0 10px !important;
+    width: 100%;
     padding: 5px 30px;
     color: #000000;
+    margin-bottom: 15px;
 
     img {
       width: 30px;
@@ -167,5 +163,19 @@ export const SocialButtons = styled.div`
     div {
       font-size: 0.8em;
     }
+  }
+`
+
+export const SkeletonWrapper = styled.div`
+  span{
+    margin: 10px 0;
+    border-radius: 30px;
+  }
+`
+
+export const SkeletonSocialWrapper = styled(SkeletonWrapper)`
+  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
+  span{
+    margin-top: 0;
   }
 `

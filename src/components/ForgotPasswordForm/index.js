@@ -86,7 +86,7 @@ const ForgotPasswordUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img src={theme?.images?.logos?.logotype} alt='Logo' />
+        <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' />
         <FormInput
           noValidate
           isPopup={isPopup}
