@@ -1,13 +1,8 @@
 import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-phone-number-input/style.css'
-import PhoneInput, {
-  isPossiblePhoneNumber
-} from 'react-phone-number-input'
-import {
-  InputPhoneNumber as InputController,
-  useLanguage
-} from 'ordering-components'
+import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input'
+import { InputPhoneNumber as InputController, useLanguage } from 'ordering-components'
 
 import { Container, ErrorMsg } from './styles'
 
@@ -27,6 +22,13 @@ const InputPhoneNumberUI = (props) => {
       handleIsValid && handleIsValid(isPossiblePhoneNumber(value))
     }
   }, [value])
+
+  useEffect(() => {
+    if (countryData.number) {
+      const number = `${countryData.number}${value?.replace('null', '')}`
+      setValue(number, isPossiblePhoneNumber(number))
+    }
+  }, [countryData.number])
 
   return (
     <Container className='phone_number' disabled={disabled}>

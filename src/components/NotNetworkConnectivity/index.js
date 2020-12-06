@@ -14,7 +14,7 @@ export const NotNetworkConnectivity = () => {
   return (
     <Container style={{ display: onlineStatus ? 'none' : 'flex' }}>
       <Image>
-        <img src={theme.images?.general?.notNetwork} alt='Not network' />
+        <img src={theme.images?.general?.notNetwork} alt='Not network' width='640' height='320' />
       </Image>
     </Container>
   )

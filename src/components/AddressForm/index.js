@@ -61,7 +61,7 @@ const AddressFormUI = (props) => {
       }
     }
     const isAddressAlreadyExist = (addressesList || []).some(address => (
-      address.location.lat === formState.changes.location.lat && address.location.lng === formState.changes.location.lng
+      address?.location?.lat === formState.changes?.location?.lat && address?.location?.lng === formState.changes?.location?.lng
     ))
     if (!isAddressAlreadyExist) {
       saveAddress()
@@ -107,15 +107,6 @@ const AddressFormUI = (props) => {
     }
   }, [formState])
 
-  /* useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      setAlertState({
-        open: true,
-        content: Object.values(errors).map(error => error.message)
-      })
-    }
-  }, [errors]) */
-
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -145,7 +136,7 @@ const AddressFormUI = (props) => {
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
-              defaultValue={formState.changes?.address || addressState.address?.address}
+              defaultValue={formState.changes?.address || addressState?.address?.address}
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
@@ -163,21 +154,21 @@ const AddressFormUI = (props) => {
           className='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
-          onChange={(e) => hanldeChangeInput({ target: { name: 'test2', value: e.target.value } })}
+          onChange={(e) => hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } })}
           autoComplete='new-field'
         />
         <Input
           className='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
-          onChange={(e) => hanldeChangeInput({ target: { name: 'test3', value: e.target.value } })}
+          onChange={(e) => hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } })}
           autoComplete='new-field'
         />
         <TextArea
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
-          onChange={(e) => hanldeChangeInput({ target: { name: 'test4', value: e.target.value } })}
+          onChange={(e) => hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } })}
           autoComplete='new-field'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
@@ -198,7 +189,7 @@ const AddressFormUI = (props) => {
         <FormActions>
           <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
           <Button type='submit' disabled={formState.loading} color='primary'>
-            {addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
+            {addressState?.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
           </Button>
         </FormActions>
       </FormControl>

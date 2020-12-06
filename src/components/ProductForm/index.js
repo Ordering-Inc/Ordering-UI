@@ -37,9 +37,11 @@ import {
   ProductComment,
   SkeletonBlock,
   WrapperSubOption,
-  SkuContent
+  SkuContent,
+  ProductFormTitle
 } from './styles'
 import { useTheme } from 'styled-components'
+import { TextArea } from '../../styles/Inputs'
 
 const ProductOptionsUI = (props) => {
   const {
@@ -88,14 +90,14 @@ const ProductOptionsUI = (props) => {
       return
     }
     const myElement = document.getElementsByClassName('error')[0]
-    const modal = document.getElementsByClassName('popup-dialog')[0]
+    const productContainer = document.getElementsByClassName('product-container')[0]
 
-    let topPos = myElement.offsetTop - modal.offsetTop
+    let topPos = myElement.offsetTop - productContainer.offsetTop
     if (windowSize.width <= 768) {
       const productImage = document.getElementById('product_image')
       topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
     }
-    scrollTo(modal, topPos, 1250)
+    scrollTo(productContainer, topPos, 1250)
   }
 
   const handleCustomModalClick = (e, { page }) => {
@@ -116,7 +118,7 @@ const ProductOptionsUI = (props) => {
   }
 
   return (
-    <ProductContainer>
+    <ProductContainer className='product-container'>
       {loading && (
         <SkeletonBlock width={90}>
           <Skeleton variant='rect' height={50} />
@@ -141,7 +143,7 @@ const ProductOptionsUI = (props) => {
             </ProductImage>
           </WrapperImage>
           <ProductInfo>
-            <div>
+            <ProductFormTitle>
               <h1>{product?.name}</h1>
               {product?.description && <p>{product?.description}</p>}
               {product?.sku && (
@@ -150,7 +152,7 @@ const ProductOptionsUI = (props) => {
                   <p>{product?.sku}</p>
                 </SkuContent>
               )}
-            </div>
+            </ProductFormTitle>
             <ProductEdition>
               {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
               {product?.ingredients.map(ingredient => (
@@ -200,7 +202,7 @@ const ProductOptionsUI = (props) => {
               }
               <ProductComment>
                 <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
-                <textarea
+                <TextArea
                   rows={4}
                   placeholder={t('SPECIAL_COMMENT', 'Special comment')}
                   defaultValue={productCart.comment}

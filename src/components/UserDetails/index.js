@@ -119,6 +119,10 @@ const UserDetailsUI = (props) => {
   }
 
   const setUserCellPhone = () => {
+    if (userPhoneNumber && !userPhoneNumber.includes('null')) {
+      setUserPhoneNumber(userPhoneNumber)
+      return
+    }
     if (user?.cellphone) {
       let phone = null
       if (user?.country_phone_code) {

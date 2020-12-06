@@ -83,7 +83,7 @@ export const Header = (props) => {
       <InnerHeader>
         <LeftHeader>
           <SidebarMenu auth={auth} />
-          <LogoHeader onClick={() => handleGoToPage({ page: orderState.options?.address?.location ? 'search' : 'home' })}>
+          <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location ? 'search' : 'home' })}>
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
@@ -174,13 +174,13 @@ export const Header = (props) => {
           <SubMenu>
             <HeaderOption
               variant='address'
-              addressState={orderState.options?.address?.address?.split(',')?.[0]}
+              addressState={orderState?.options?.address?.address?.split(',')?.[0]}
               onClick={(variant) => openModal(variant)}
               isHome={isHome}
             />
             <HeaderOption
               variant='moment'
-              momentState={orderState.options?.moment}
+              momentState={orderState?.options?.moment}
               onClick={(variant) => openModal(variant)}
               isHome={isHome}
             />
