@@ -107,6 +107,7 @@ export const Slogan = styled.p`
 
 export const WrapInput = styled.label`
   position: relative;
+  cursor: pointer;
 
   ${({ withIcon }) => withIcon && css`
     width: calc(100% - 20px);
@@ -165,9 +166,9 @@ export const WrapInput = styled.label`
     position: absolute;
     font-size: 22px;
 
-    margin-right: 5px;
+    margin-right: 10px;
       ${props => props.theme?.rtl && css`
-        margin-left: 5px;
+        margin-left: 10px;
         margin-right: 0;
       `}
 
