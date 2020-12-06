@@ -61,13 +61,15 @@ export const HomeHero = (props) => {
         <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
         <WrapInput onClick={handleAddressInput} withIcon>
           <HiOutlineLocationMarker />
-          <Input
+          <span
             name='address-selection'
             aria-label='address selection'
             type='text'
-            disabled
             placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
           />
+          <div>
+            {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
+          </div>
         </WrapInput>
         <Button
           color='primary'

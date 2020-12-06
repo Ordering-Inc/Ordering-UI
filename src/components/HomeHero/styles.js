@@ -131,27 +131,45 @@ export const WrapInput = styled.label`
     }
   `}
 
-  input {
+  span {
+    background: #FFF;
+    color: #010300;
+    border: 1px solid #DBDCDB;
+    border-radius: 30px;
+    font-size: 16px;
+    padding: 7px 50%;
+    outline: none;
     color: #FFF;
     border-color: #FFF;
     cursor: pointer;
     background: rgba(0,0,0,0.1);
-
-    ::placeholder {
+  /*  ::placeholder {
       color: #FFF;
       opacity: 1;
     }
 
     :-ms-input-placeholder {
       color: #FFF;
-    }
+    }*/
+  }
+
+  div{
+    color: #FFF;
+    position: relative;
+    bottom: 25px;
+    left: 15px;
   }
 
   svg {
     color: #FFF;
     position: absolute;
     font-size: 22px;
-    top: 8px;
+
+    margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0;
+      `}
 
     ${props => props.theme?.rtl ? css`
       left: 0px;
@@ -159,12 +177,5 @@ export const WrapInput = styled.label`
       right: 0px;
     `}
 
-    @media (min-width: 768px) {
-      margin-right: 5px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 5px;
-        margin-right: 0;
-      `}
-    }
   }
 `
