@@ -40,7 +40,7 @@ const AddressFormUI = (props) => {
     onCancel,
     hanldeChangeInput,
     saveAddress,
-    handleChangePosition
+    setIsEdit
   } = props
 
   const [, t] = useLanguage()
@@ -50,18 +50,43 @@ const AddressFormUI = (props) => {
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const onSubmit = () => {
-    const isAddressAlreadyExist = (addressesList || []).some(address => (
-      address.location.lat === formState.changes.location.lat &&
-      address.location.lng === formState.changes.location.lng &&
-      address.internal_number === formState.changes.internal_number &&
-      address.zipcode === formState.changes.zipcode &&
-      address.address_notes === formState.changes.address_notes
-    ))
-    if (!isAddressAlreadyExist) {
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  /**
+   * Returns true when the user made no changes
+   * @param {object} address
+   */
+  const checkAddress = (address) => {
+    const props = ['address', 'address_notes', 'zipcode', 'location', 'internal_number']
+    const values = []
+    props.forEach(prop => {
+      if (formState?.changes[prop]) {
+        if (prop === 'location') {
+          values.push(address[prop].lat === formState?.changes[prop].lat &&
+            address[prop].lng === formState?.changes[prop].lng)
+        } else {
+          values.push(address[prop] === formState?.changes[prop])
+        }
+      } else {
+        values.push(!address[prop])
+      }
+    })
+    return values.every(value => value)
+  }
+
+  const onSubmit = async () => {
+    const isAddressAlreadyExist = (addressesList || []).map(address => checkAddress(address)).some(value => value) ?? false
+
+    if (addressState.address?.id || !isAddressAlreadyExist) {
       saveAddress()
       return
     }
+
     setAlertState({
       open: true,
       content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
@@ -93,6 +118,10 @@ const AddressFormUI = (props) => {
     })
   }
 
+  const setErrors = (errKey) => {
+    console.log('errKey', errKey)
+  }
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
@@ -111,12 +140,13 @@ const AddressFormUI = (props) => {
     }
   }, [errors])
 
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
+  useEffect(() => {
+    if (addressState.address?.id) {
+      setIsEdit(true)
+    } else {
+      setIsEdit(false)
+    }
+  }, [addressState])
 
   return (
     <div className='address-form'>
@@ -127,7 +157,8 @@ const AddressFormUI = (props) => {
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               location={{ ...(addressState?.address?.location || formState?.changes?.location), zoom: googleMapsControls.defaultZoom }}
               mapControls={googleMapsControls}
-              handleChangePosition={handleChangePosition}
+              handleChangeAddressMap={handleChangeAddress}
+              setErrors={setErrors}
             />
           </WrapperMap>
         )}
@@ -204,7 +235,11 @@ const AddressFormUI = (props) => {
         <FormActions>
           <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
           <Button type='submit' disabled={formState.loading} color='primary'>
-            {addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
+            {!formState.loading ? (
+              addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')
+            ) : (
+              t('LOADING', 'Loading')
+            )}
           </Button>
         </FormActions>
       </FormControl>
