@@ -7,13 +7,16 @@ import ImCompass from '@meronex/icons/im/ImCompass'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import { useForm } from 'react-hook-form'
 import {
-  AddressForm as AddressFormController,
-  GoogleAutocompleteInput,
+  // AddressForm as AddressFormController,
+  // GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
   GoogleMapsMap
 } from 'ordering-components'
 import { Alert } from '../Confirm'
+
+import { GoogleAutocompleteInput } from './test'
+import { AddressForm as AddressFormController } from './address'
 
 import {
   FormControl,
@@ -44,11 +47,12 @@ const AddressFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors } = useForm()
+  const formMethods = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
 
   const onSubmit = () => {
     const isAddressAlreadyExist = (addressesList || []).some(address => (
@@ -58,6 +62,7 @@ const AddressFormUI = (props) => {
       saveAddress()
       return
     }
+
     setAlertState({
       open: true,
       content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
@@ -99,13 +104,20 @@ const AddressFormUI = (props) => {
   }, [formState])
 
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map(error => error.message)
+        content: Object.values(formMethods.errors).map(error => error.message)
       })
     }
-  }, [errors])
+  }, [formMethods.errors])
+
+  useEffect(() => {
+    inputNames.forEach(name => {
+      formMethods.setValue(name, addressState?.address[name])
+      console.log(addressState?.address[name])
+    })
+  }, [])
 
   const closeAlert = () => {
     setAlertState({
@@ -114,9 +126,15 @@ const AddressFormUI = (props) => {
     })
   }
 
+  useEffect(() => {
+    inputNames.forEach(name => {
+      formMethods.register(name, { required: isRequiredField(name) && !addressState?.address[name] ? t(`VALIDATION_ERROR_${name}_REQUIRED`, `${name} is required`) : null })
+    })
+  }, [formMethods])
+
   return (
     <div className='address-form'>
-      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+      <FormControl onSubmit={formMethods.handleSubmit(onSubmit)} autoComplete='off'>
         {(addressState?.address?.location || formState?.changes?.location) && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
@@ -131,16 +149,13 @@ const AddressFormUI = (props) => {
           <WrapAddressInput>
             <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
-              className='input-autocomplete'
+              className='input-autocomplete controlled-input'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              name='address'
               placeholder={t('ADDRESS', 'Address')}
-              onChangeAddress={handleChangeAddress}
+              onChangeAddress={(e) => { formMethods.setValue('address', e.address); handleChangeAddress(e) }}
+              setValue={formMethods.setValue}
               onKeyDown={handleAddressKeyDown}
               defaultValue={formState.changes?.address || addressState?.address?.address}
-              childRef={register({
-                required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
-              })}
               autoComplete='off'
             />
           </WrapAddressInput>
@@ -148,7 +163,7 @@ const AddressFormUI = (props) => {
             <GoogleGpsButton
               className='gps-button'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              onAddress={handleChangeAddress}
+              onAddress={(e) => { formMethods.setValue('address', e.address); handleChangeAddress(e) }}
               IconButton={ImCompass}
             />}
         </AddressWrap>
@@ -156,30 +171,27 @@ const AddressFormUI = (props) => {
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
-          className='internal_number'
-          name='internal_number'
+          className='internal_number controlled-input'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
-          ref={register}
           defaultValue={formState.changes?.internal_number || addressState?.address?.internal_number}
-          onChange={hanldeChangeInput}
+          onChange={(e) => { formMethods.setValue('internal_number', e.target.value); hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } }) }}
           autoComplete='off'
         />
         <Input
-          className='zipcode'
+          className='zipcode controlled-input'
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
-          ref={register}
           defaultValue={formState.changes?.zipcode || addressState?.address?.zipcode}
-          onChange={hanldeChangeInput}
+          onChange={(e) => { formMethods.setValue('zipcode', e.target.value); hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } }) }}
           autoComplete='off'
         />
         <TextArea
+          className='controlled-input'
           name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-          ref={register}
           defaultValue={formState.changes?.address_notes || addressState?.address?.address_notes}
-          onChange={hanldeChangeInput}
+          onChange={(e) => { formMethods.setValue('address_notes', e.target.value); hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } }) }}
           autoComplete='off'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
