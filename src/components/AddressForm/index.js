@@ -7,12 +7,14 @@ import ImCompass from '@meronex/icons/im/ImCompass'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import {
   AddressForm as AddressFormController,
-  GoogleAutocompleteInput,
+  // GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
   GoogleMapsMap
 } from 'ordering-components'
 import { Alert } from '../Confirm'
+
+import { GoogleAutocompleteInput } from './test'
 
 import {
   FormControl,
@@ -47,9 +49,27 @@ const AddressFormUI = (props) => {
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [errors, setErrors] = useState({})
+  const [inputs, setInputs] = useState([])
+
+  console.log(errors)
 
   const onSubmit = (e) => {
     e.preventDefault()
+    /* Array.prototype.forEach.call(inputs, input => {
+      if (isRequiredField(input.id)) {
+        console.log('value', input.value)
+        if (!input.value) {
+          setErrors({ ...errors, [input.id]: `${input.id} is required` })
+          setAlertState({
+            open: true,
+            content: [t(`VALIDATION_ERROR_${input.id}_REQUIRED`, `${input.id} is required`)]
+          })
+        }
+      }
+    }) */
+
+    /* const input1 = document.getElementsByClassName('input-autocomplete')[0]
     if (isRequiredField('address')) {
       const inputTest = document.getElementsByClassName('input-autocomplete')[0]
       if (!inputTest.value) {
@@ -57,20 +77,46 @@ const AddressFormUI = (props) => {
           open: true,
           content: [t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required')]
         })
+        setErrors({ ...errors, [input1.id]: `${input1.id} is required` })
         return
       }
-    }
-    const isAddressAlreadyExist = (addressesList || []).some(address => (
-      address?.location?.lat === formState.changes?.location?.lat && address?.location?.lng === formState.changes?.location?.lng
-    ))
-    if (!isAddressAlreadyExist) {
-      saveAddress()
+    } */
+
+    if (isRequiredField('address')) {
+      if (!formState.changes.address && isRequiredField('address')) {
+        setErrors(() => { return { ...errors, address: { message: 'Address is required' } } })
+      }
+      if (!formState.changes.internal_number && isRequiredField('internal_number')) {
+        setErrors(() => { return { ...errors, internal_number: { message: 'Address is required' } } })
+      }
+      if (!formState.changes.zipcode && isRequiredField('zipcode')) {
+        setErrors(() => { return { ...errors, zipcode: { message: 'Zipcode is required' } } })
+      }
+      if (!formState.changes.address_notes && isRequiredField('address_notes')) {
+        setErrors(() => { return { ...errors, address_notes: { message: 'Address is required' } } })
+      }
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
       return
     }
-    setAlertState({
-      open: true,
-      content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
-    })
+
+    if (Object.keys(formState.changes).length > 0) {
+      const isAddressAlreadyExist = (addressesList || []).some(address => (
+        address?.location?.lat === formState.changes?.location?.lat && address?.location?.lng === formState.changes?.location?.lng
+      ))
+      if (!isAddressAlreadyExist) {
+        saveAddress()
+        return
+      }
+      if (isAddressAlreadyExist) {
+        setAlertState({
+          open: true,
+          content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
+        })
+      }
+    }
   }
 
   const handleAddressTag = (tag) => {
@@ -98,6 +144,16 @@ const AddressFormUI = (props) => {
     })
   }
 
+  /* useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+  */
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
@@ -106,6 +162,21 @@ const AddressFormUI = (props) => {
       })
     }
   }, [formState])
+
+  useEffect(() => {
+    const inputs = document.getElementsByClassName('test')
+    setInputs(Array.prototype.map.call(inputs, input => input))
+  }, [])
+
+  useEffect(() => {
+    if (inputs.length > 0) {
+      inputs.forEach(input => {
+        if (isRequiredField(input.id) && !input.value) {
+          setErrors({ ...errors, [input.id]: `${input.id} is required` })
+        }
+      })
+    }
+  }, [inputs])
 
   const closeAlert = () => {
     setAlertState({
@@ -131,7 +202,7 @@ const AddressFormUI = (props) => {
           <WrapAddressInput>
             <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
-              className='input-autocomplete'
+              className='input-autocomplete test'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
@@ -151,20 +222,21 @@ const AddressFormUI = (props) => {
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
-          className='internal_number'
+          className='internal_number test'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={(e) => hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } })}
           autoComplete='new-field'
         />
         <Input
-          className='zipcode'
+          className='zipcode test'
           placeholder={t('ZIP_CODE', 'Zip code')}
           defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={(e) => hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } })}
           autoComplete='new-field'
         />
         <TextArea
+          className='test'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
