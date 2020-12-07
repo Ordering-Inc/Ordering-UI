@@ -131,29 +131,7 @@ export const WrapInput = styled.label`
       width: calc(50% - 20px);
     }
   `}
-
-  span {
-    background: #FFF;
-    color: #010300;
-    border: 1px solid #DBDCDB;
-    border-radius: 30px;
-    font-size: 16px;
-    padding: 7px 50%;
-    outline: none;
-    color: #FFF;
-    border-color: #FFF;
-    cursor: pointer;
-    background: rgba(0,0,0,0.1);
-  /*  ::placeholder {
-      color: #FFF;
-      opacity: 1;
-    }
-
-    :-ms-input-placeholder {
-      color: #FFF;
-    }*/
-  }
-
+  
   div{
     color: #FFF;
     position: relative;
@@ -179,4 +157,18 @@ export const WrapInput = styled.label`
     `}
 
   }
+`
+
+export const InputSpan = styled.span`
+  background: #FFF;
+  color: #010300;
+  border: 1px solid #DBDCDB;
+  border-radius: 30px;
+  font-size: 16px;
+  padding: 7px 50%;
+  outline: none;
+  color: #FFF;
+  border-color: #FFF;
+  cursor: pointer;
+  background: rgba(0,0,0,0.1);
 `

@@ -5,11 +5,11 @@ import {
   ContentWrapper,
   Title,
   Slogan,
-  WrapInput
+  WrapInput,
+  InputSpan
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
 
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
@@ -61,7 +61,7 @@ export const HomeHero = (props) => {
         <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
         <WrapInput onClick={handleAddressInput} withIcon>
           <HiOutlineLocationMarker />
-          <span
+          <InputSpan
             name='address-selection'
             aria-label='address selection'
             type='text'
