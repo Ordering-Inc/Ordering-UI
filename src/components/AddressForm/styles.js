@@ -7,8 +7,20 @@ export const FormActions = styled.div`
   justify-content: space-between;
   width: 100%;
   button {
-    width: 47%;
     height: 45px;
+    flex: 1;
+
+    &:last-child {
+      margin-left: 10px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    button {
+      &:last-child {
+        margin-left: 25px;
+      }
+    }
   }
 `
 

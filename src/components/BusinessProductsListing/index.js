@@ -150,7 +150,6 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = openProduct ? 'hidden' : 'auto'
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)

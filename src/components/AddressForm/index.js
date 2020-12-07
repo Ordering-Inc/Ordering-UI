@@ -61,16 +61,16 @@ const AddressFormUI = (props) => {
    * Returns true when the user made no changes
    * @param {object} address
    */
-  const checkAddress = (address) => {
+  const checkAddress = (address, addressToCompare) => {
     const props = ['address', 'address_notes', 'zipcode', 'location', 'internal_number']
     const values = []
     props.forEach(prop => {
-      if (formState?.changes[prop]) {
+      if (addressToCompare[prop]) {
         if (prop === 'location') {
-          values.push(address[prop].lat === formState?.changes[prop].lat &&
-            address[prop].lng === formState?.changes[prop].lng)
+          values.push(address[prop].lat === addressToCompare[prop].lat &&
+            address[prop].lng === addressToCompare[prop].lng)
         } else {
-          values.push(address[prop] === formState?.changes[prop])
+          values.push(address[prop] === addressToCompare[prop])
         }
       } else {
         values.push(!address[prop])
@@ -80,9 +80,16 @@ const AddressFormUI = (props) => {
   }
 
   const onSubmit = async () => {
-    const isAddressAlreadyExist = (addressesList || []).map(address => checkAddress(address)).some(value => value) ?? false
+    const arrayList = addressState.address?.id
+      ? addressesList.filter(address => address.id !== addressState.address?.id) || []
+      : addressesList || []
+    const addressToCompare = addressState.address?.id
+      ? { ...addressState.address, ...formState.changes }
+      : formState?.changes
 
-    if (addressState.address?.id || !isAddressAlreadyExist) {
+    const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
+
+    if (!isAddressAlreadyExist) {
       saveAddress()
       return
     }
@@ -234,13 +241,15 @@ const AddressFormUI = (props) => {
         </AddressTagSection>
         <FormActions>
           <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
-          <Button type='submit' disabled={formState.loading} color='primary'>
-            {!formState.loading ? (
-              addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')
-            ) : (
-              t('LOADING', 'Loading')
-            )}
-          </Button>
+          {Object.keys(formState?.changes).length > 0 && (
+            <Button type='submit' disabled={formState.loading} color='primary'>
+              {!formState.loading ? (
+                addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')
+              ) : (
+                t('LOADING', 'Loading')
+              )}
+            </Button>
+          )}
         </FormActions>
       </FormControl>
       <Alert
