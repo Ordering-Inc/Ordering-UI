@@ -55,7 +55,7 @@ const AddressListUI = (props) => {
   const handleSaveAddress = (address) => {
     let found = false
     const addresses = addressList.addresses.map(_address => {
-      if (_address.id === address.id) {
+      if (_address?.id === address?.id) {
         Object.assign(_address, address)
         found = true
       } else if (address.default) {
@@ -163,7 +163,7 @@ const AddressListUI = (props) => {
       {!addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && addressList?.addresses?.length > 0 && (
         <AddressListUl>
           {addressList.addresses.map(address => (
-            <AddressItem key={address.id}>
+            <AddressItem key={address?.id}>
               <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                 <span className='radio'>
                   {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}

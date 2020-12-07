@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import Skeleton from 'react-loading-skeleton'
 import {
   LoginForm as LoginFormController,
   useLanguage,
@@ -15,7 +16,8 @@ import {
   RedirectLink,
   TitleHeroSide,
   SocialButtons,
-  LoginWith
+  LoginWith,
+  SkeletonSocialWrapper
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -90,7 +92,7 @@ const LoginFormUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img src={theme?.images?.logos?.logotype} alt='Logo login' />
+        <img src={theme?.images?.logos?.logotype} alt='Logo login' width='200' height='66' />
 
         {useLoginByEmail && useLoginByCellphone && (
           <LoginWith isPopup={isPopup}>
@@ -187,15 +189,20 @@ const LoginFormUI = (props) => {
             {elementLinkToSignup}
           </RedirectLink>
         )}
-
-        <SocialButtons isPopup={isPopup}>
-          {configs?.facebook_id && (
-            <FacebookLoginButton
-              appId={configs?.facebook_id?.value}
-              handleSuccessFacebookLogin={handleSuccessFacebook}
-            />
-          )}
-        </SocialButtons>
+        {Object.keys(configs).length > 0 ? (
+          <SocialButtons isPopup={isPopup}>
+            {configs?.facebook_id && (
+              <FacebookLoginButton
+                appId={configs?.facebook_id?.value}
+                handleSuccessFacebookLogin={handleSuccessFacebook}
+              />
+            )}
+          </SocialButtons>
+        ) : (
+          <SkeletonSocialWrapper>
+            <Skeleton height={43} />
+          </SkeletonSocialWrapper>
+        )}
       </FormSide>
       <Alert
         title={t('LOGIN', 'Login')}

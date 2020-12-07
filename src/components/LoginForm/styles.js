@@ -52,10 +52,6 @@ export const FormSide = styled(Side)`
   align-items: center;
   margin: auto;
 
-  img {
-    width: 200px;
-  }
-
   @media (min-width: 769px) {
     ${({ isPopup }) => isPopup && css`
       margin: 20px 0px;
@@ -95,18 +91,13 @@ export const LoginWith = styled.div`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '90%' : '100%'};
+  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   display: flex;
   flex-direction: column;
 
-  * {
-    padding: 8px 20px;
-    margin: 20px;
-  }
-
   input:not(:last-child) {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0px;
+    padding: 8px 20px;
   }
 
   button {
@@ -172,7 +163,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-   width: calc(100% - 40px);
+   width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
    margin-top: 5px;
 
   button {
@@ -189,5 +180,12 @@ export const SocialButtons = styled.div`
     div {
       font-size: 0.8em;
     }
+  }
+`
+
+export const SkeletonSocialWrapper = styled.div`
+  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
+  span{
+    border-radius: 30px;
   }
 `

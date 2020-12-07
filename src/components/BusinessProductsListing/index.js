@@ -189,9 +189,9 @@ const BusinessProductsListingUI = (props) => {
                   />
                 </WrapperSearch>
               )}
-              {!(business.categories.length === 0 && !categoryId) && (
+              {!(business?.categories?.length === 0 && !categoryId) && (
                 <BusinessProductsCategories
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                   categorySelected={categorySelected}
                   onClickCategory={handleChangeCategory}
                   featured={featuredProducts}
@@ -201,7 +201,7 @@ const BusinessProductsListingUI = (props) => {
 
               <WrapContent>
                 <BusinessProductsList
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                   category={categorySelected}
                   categoryState={categoryState}
                   businessId={business.id}
@@ -222,7 +222,7 @@ const BusinessProductsListingUI = (props) => {
           open={openProduct}
           closeOnBackdrop
           onClose={() => closeModalProductForm()}
-          padding='10px'
+          padding='0'
         >
 
           {productModal.loading && (

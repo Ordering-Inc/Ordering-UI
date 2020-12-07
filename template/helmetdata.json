@@ -3,84 +3,84 @@
     "title": "Ordering",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": "http://localhost:8300/"
   },
   "home": {
     "title": "Home",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "login": {
     "title": "Login",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "signup": {
     "title": "Signup",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "forgotpassword": {
     "title": "Forgot Password",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "profile": {
     "title": "Profile",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "orders": {
     "title": "Orders",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "search": {
     "title": "Search",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "business": {
     "title": "Business",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "checkout": {
     "title": "Checkout",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "order_details": {
     "title": "Order details",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   },
   "pages": {
     "title": "Pages",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
-    "robots": "",
+    "robots": "index, follow",
     "canonicalUrl": ""
   }
 }
