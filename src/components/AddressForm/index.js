@@ -28,6 +28,13 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
+const maxLimitLocation = 500
+
+const mapErrors = {
+  ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
+  ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
+}
+
 const AddressFormUI = (props) => {
   const {
     addressesList,
@@ -125,8 +132,11 @@ const AddressFormUI = (props) => {
     })
   }
 
-  const setErrors = (errKey) => {
-    console.log('errKey', errKey)
+  const setMapErrors = (errKey) => {
+    setAlertState({
+      open: true,
+      content: [t(errKey, mapErrors[errKey])]
+    })
   }
 
   useEffect(() => {
@@ -165,7 +175,8 @@ const AddressFormUI = (props) => {
               location={{ ...(addressState?.address?.location || formState?.changes?.location), zoom: googleMapsControls.defaultZoom }}
               mapControls={googleMapsControls}
               handleChangeAddressMap={handleChangeAddress}
-              setErrors={setErrors}
+              setErrors={setMapErrors}
+              maxLimitLocation={maxLimitLocation}
             />
           </WrapperMap>
         )}
@@ -179,7 +190,7 @@ const AddressFormUI = (props) => {
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
-              defaultValue={formState.changes?.address || addressState.address?.address}
+              value={formState.changes?.address || addressState.address?.address}
               childRef={register({
                 required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
               })}
@@ -202,7 +213,7 @@ const AddressFormUI = (props) => {
           name='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           ref={register}
-          defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
+          value={formState.changes?.internal_number || addressState.address.internal_number}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
@@ -211,7 +222,7 @@ const AddressFormUI = (props) => {
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           ref={register}
-          defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
+          value={formState.changes?.zipcode || addressState.address.zipcode}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
@@ -220,7 +231,7 @@ const AddressFormUI = (props) => {
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           ref={register}
-          defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
+          value={formState.changes?.address_notes || addressState.address.address_notes}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
