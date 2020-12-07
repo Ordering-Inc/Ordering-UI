@@ -107,6 +107,7 @@ export const Slogan = styled.p`
 
 export const WrapInput = styled.label`
   position: relative;
+  cursor: pointer;
 
   ${({ withIcon }) => withIcon && css`
     width: calc(100% - 20px);
@@ -130,28 +131,24 @@ export const WrapInput = styled.label`
       width: calc(50% - 20px);
     }
   `}
-
-  input {
+  
+  div{
     color: #FFF;
-    border-color: #FFF;
-    cursor: pointer;
-    background: rgba(0,0,0,0.1);
-
-    ::placeholder {
-      color: #FFF;
-      opacity: 1;
-    }
-
-    :-ms-input-placeholder {
-      color: #FFF;
-    }
+    position: relative;
+    bottom: 25px;
+    left: 15px;
   }
 
   svg {
     color: #FFF;
     position: absolute;
     font-size: 22px;
-    top: 8px;
+
+    margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
 
     ${props => props.theme?.rtl ? css`
       left: 0px;
@@ -159,12 +156,19 @@ export const WrapInput = styled.label`
       right: 0px;
     `}
 
-    @media (min-width: 768px) {
-      margin-right: 5px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 5px;
-        margin-right: 0;
-      `}
-    }
   }
+`
+
+export const InputSpan = styled.span`
+  background: #FFF;
+  color: #010300;
+  border: 1px solid #DBDCDB;
+  border-radius: 30px;
+  font-size: 16px;
+  padding: 7px 50%;
+  outline: none;
+  color: #FFF;
+  border-color: #FFF;
+  cursor: pointer;
+  background: rgba(0,0,0,0.1);
 `
