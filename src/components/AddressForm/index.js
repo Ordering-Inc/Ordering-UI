@@ -11,7 +11,8 @@ import {
   GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
-  GoogleMapsMap
+  GoogleMapsMap,
+  useSession
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 
@@ -51,6 +52,7 @@ const AddressFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ auth }] = useSession()
   const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
@@ -279,7 +281,7 @@ const AddressFormUI = (props) => {
               color='primary'
             >
               {!formState.loading ? (
-                addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')
+                addressState.address?.id || !auth ? t('UPDATE', 'Update') : t('ADD', 'Add')
               ) : (
                 t('LOADING', 'Loading')
               )}
