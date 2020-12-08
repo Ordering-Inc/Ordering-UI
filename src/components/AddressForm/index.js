@@ -7,16 +7,13 @@ import ImCompass from '@meronex/icons/im/ImCompass'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import { useForm } from 'react-hook-form'
 import {
-  // AddressForm as AddressFormController,
-  // GoogleAutocompleteInput,
+  AddressForm as AddressFormController,
+  GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
   GoogleMapsMap
 } from 'ordering-components'
 import { Alert } from '../Confirm'
-
-import { GoogleAutocompleteInput } from './test'
-import { AddressForm as AddressFormController } from './address'
 
 import {
   FormControl,
