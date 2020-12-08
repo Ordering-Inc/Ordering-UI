@@ -211,8 +211,10 @@ const AddressFormUI = (props) => {
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               placeholder={t('ADDRESS', 'Address')}
-              onChangeAddress={(e) => { formMethods.setValue('address', e.address); handleChangeAddress(e) }}
-              setValue={formMethods.setValue}
+              onChangeAddress={(e) => {
+                formMethods.setValue('address', e.address)
+                handleChangeAddress(e)
+              }}
               onKeyDown={handleAddressKeyDown}
               onChange={handleGoogleInputChange}
               value={addressValue}
@@ -223,7 +225,10 @@ const AddressFormUI = (props) => {
             <GoogleGpsButton
               className='gps-button'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              onAddress={(e) => { formMethods.setValue('address', e.address); handleChangeAddress(e) }}
+              onAddress={(e) => {
+                formMethods.setValue('address', e.address)
+                handleChangeAddress(e)
+              }}
               IconButton={ImCompass}
             />}
         </AddressWrap>
@@ -234,7 +239,10 @@ const AddressFormUI = (props) => {
           className='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           value={formState.changes?.internal_number ?? addressState.address.internal_number ?? ''}
-          onChange={(e) => { formMethods.setValue('internal_number', e.target.value); hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } }) }}
+          onChange={(e) => {
+            formMethods.setValue('internal_number', e.target.value)
+            hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } })
+          }}
           autoComplete='new-field'
         />
         <Input
@@ -242,7 +250,10 @@ const AddressFormUI = (props) => {
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
-          onChange={(e) => { formMethods.setValue('zipcode', e.target.value); hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } }) }}
+          onChange={(e) => {
+            formMethods.setValue('zipcode', e.target.value)
+            hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } })
+          }}
           autoComplete='new-field'
         />
         <TextArea
@@ -250,7 +261,10 @@ const AddressFormUI = (props) => {
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
-          onChange={(e) => { formMethods.setValue('address_notes', e.target.value); hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } }) }}
+          onChange={(e) => {
+            formMethods.setValue('address_notes', e.target.value)
+            hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+          }}
           autoComplete='new-field'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
