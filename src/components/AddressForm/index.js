@@ -11,7 +11,8 @@ import {
   GoogleAutocompleteInput,
   GoogleGpsButton,
   useLanguage,
-  GoogleMapsMap
+  GoogleMapsMap,
+  useSession
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 
@@ -28,6 +29,13 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
+const maxLimitLocation = 500
+
+const mapErrors = {
+  ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
+  ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
+}
+
 const AddressFormUI = (props) => {
   const {
     addressesList,
@@ -40,21 +48,59 @@ const AddressFormUI = (props) => {
     onCancel,
     hanldeChangeInput,
     saveAddress,
-    handleChangePosition
+    setIsEdit
   } = props
 
   const [, t] = useLanguage()
   const formMethods = useForm()
+  const [{ auth }] = useSession()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
 
-  const onSubmit = (e) => {
-    const isAddressAlreadyExist = (addressesList || []).some(address => (
-      address?.location?.lat === formState.changes?.location?.lat && address?.location?.lng === formState.changes?.location?.lng
-    ))
+  const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  /**
+   * Returns true when the user made no changes
+   * @param {object} address
+   */
+  const checkAddress = (address, addressToCompare) => {
+    const props = ['address', 'address_notes', 'zipcode', 'location', 'internal_number']
+    const values = []
+    props.forEach(prop => {
+      if (addressToCompare[prop]) {
+        if (prop === 'location') {
+          values.push(address[prop].lat === addressToCompare[prop].lat &&
+            address[prop].lng === addressToCompare[prop].lng)
+        } else {
+          values.push(address[prop] === addressToCompare[prop])
+        }
+      } else {
+        values.push(!address[prop])
+      }
+    })
+    return values.every(value => value)
+  }
+
+  const onSubmit = async () => {
+    const arrayList = addressState.address?.id
+      ? addressesList.filter(address => address.id !== addressState.address?.id) || []
+      : addressesList || []
+    const addressToCompare = addressState.address?.id
+      ? { ...addressState.address, ...formState.changes }
+      : formState?.changes
+
+    const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
+
     if (!isAddressAlreadyExist) {
       saveAddress()
       return
@@ -91,12 +137,23 @@ const AddressFormUI = (props) => {
     })
   }
 
+  const setMapErrors = (errKey) => {
+    setAlertState({
+      open: true,
+      content: [t(errKey, mapErrors[errKey])]
+    })
+  }
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
+    }
+
+    if (formState?.changes?.address) {
+      setAddressValue(formState?.changes?.address)
     }
   }, [formState])
 
@@ -109,11 +166,17 @@ const AddressFormUI = (props) => {
     }
   }, [formMethods.errors])
 
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
+  useEffect(() => {
+    if (addressState.address?.id) {
+      setIsEdit(true)
+    } else {
+      setIsEdit(false)
+    }
+  }, [addressState])
+
+  const handleGoogleInputChange = (e) => {
+    hanldeChangeInput && hanldeChangeInput(e)
+    setAddressValue(e.target.value)
   }
 
   useEffect(() => {
@@ -135,7 +198,9 @@ const AddressFormUI = (props) => {
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               location={{ ...(addressState?.address?.location || formState?.changes?.location), zoom: googleMapsControls.defaultZoom }}
               mapControls={googleMapsControls}
-              handleChangePosition={handleChangePosition}
+              handleChangeAddressMap={handleChangeAddress}
+              setErrors={setMapErrors}
+              maxLimitLocation={maxLimitLocation}
             />
           </WrapperMap>
         )}
@@ -149,7 +214,8 @@ const AddressFormUI = (props) => {
               onChangeAddress={(e) => { formMethods.setValue('address', e.address); handleChangeAddress(e) }}
               setValue={formMethods.setValue}
               onKeyDown={handleAddressKeyDown}
-              defaultValue={formState.changes?.address || addressState?.address?.address}
+              onChange={handleGoogleInputChange}
+              value={addressValue}
               autoComplete='new-field'
             />
           </WrapAddressInput>
@@ -161,13 +227,13 @@ const AddressFormUI = (props) => {
               IconButton={ImCompass}
             />}
         </AddressWrap>
-        {(addressState?.address?.location || formState?.changes?.location) && (
+        {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
           className='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
-          defaultValue={formState.changes?.internal_number || addressState?.address?.internal_number}
+          value={formState.changes?.internal_number ?? addressState.address.internal_number ?? ''}
           onChange={(e) => { formMethods.setValue('internal_number', e.target.value); hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } }) }}
           autoComplete='new-field'
         />
@@ -175,7 +241,7 @@ const AddressFormUI = (props) => {
           className='zipcode'
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
-          defaultValue={formState.changes?.zipcode || addressState?.address?.zipcode}
+          value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
           onChange={(e) => { formMethods.setValue('zipcode', e.target.value); hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } }) }}
           autoComplete='new-field'
         />
@@ -183,7 +249,7 @@ const AddressFormUI = (props) => {
           name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-          defaultValue={formState.changes?.address_notes || addressState?.address?.address_notes}
+          value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
           onChange={(e) => { formMethods.setValue('address_notes', e.target.value); hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } }) }}
           autoComplete='new-field'
         />
@@ -203,10 +269,28 @@ const AddressFormUI = (props) => {
           </Button>
         </AddressTagSection>
         <FormActions>
-          <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
-          <Button type='submit' disabled={formState.loading} color='primary'>
-            {addressState?.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
+          <Button
+            outline
+            type='button'
+            disabled={formState.loading}
+            onClick={() => onCancel()}
+          >
+            {t('CANCEL', 'Cancel')}
           </Button>
+          {Object.keys(formState?.changes).length > 0 && (
+            <Button
+              id='submit-btn'
+              type='submit'
+              disabled={formState.loading}
+              color='primary'
+            >
+              {!formState.loading ? (
+                addressState.address?.id || !auth ? t('UPDATE', 'Update') : t('ADD', 'Add')
+              ) : (
+                t('LOADING', 'Loading')
+              )}
+            </Button>
+          )}
         </FormActions>
       </FormControl>
       <Alert
