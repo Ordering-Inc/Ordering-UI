@@ -152,9 +152,8 @@ const AddressFormUI = (props) => {
       })
     }
 
-    if (formState?.changes?.address) {
-      setAddressValue(formState?.changes?.address)
-    }
+    setAddressValue(formState?.changes?.address ?? '')
+    inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || ''))
   }, [formState])
 
   useEffect(() => {
@@ -169,23 +168,19 @@ const AddressFormUI = (props) => {
   useEffect(() => {
     if (addressState.address?.id) {
       setIsEdit(true)
+      setAddressValue(addressState.address?.address)
     } else {
       setIsEdit(false)
     }
   }, [addressState])
 
-  const handleGoogleInputChange = (e) => {
-    hanldeChangeInput && hanldeChangeInput(e)
-    setAddressValue(e.target.value)
-  }
-
   useEffect(() => {
     inputNames.forEach(name => {
-      formMethods.register(name, { required: isRequiredField(name) ? t(`VALIDATION_ERROR_${name}_REQUIRED`, `${name} is required`) : null })
-      if (isRequiredField(name) && !formState.changes[name] && addressState.address[name]) {
-        // setting a defaultValue for required inputs
-        formMethods.setValue(name, addressState.address[name])
-      }
+      formMethods.register(name, {
+        required: isRequiredField(name)
+          ? t(`VALIDATION_ERROR_${name}_REQUIRED`, `The field ${name} is required`)
+          : null
+      })
     })
   }, [formMethods])
 
@@ -216,7 +211,10 @@ const AddressFormUI = (props) => {
                 handleChangeAddress(e)
               }}
               onKeyDown={handleAddressKeyDown}
-              onChange={handleGoogleInputChange}
+              onChange={(e) => {
+                hanldeChangeInput({ target: { name: 'address', value: e.target.value } })
+                setAddressValue(e.target.value)
+              }}
               value={addressValue}
               autoComplete='new-field'
             />
