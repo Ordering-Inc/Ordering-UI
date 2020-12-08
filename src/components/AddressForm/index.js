@@ -247,7 +247,6 @@ const AddressFormUI = (props) => {
         />
         <Input
           className='zipcode'
-          name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
           onChange={(e) => {
@@ -257,7 +256,6 @@ const AddressFormUI = (props) => {
           autoComplete='new-field'
         />
         <TextArea
-          name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
