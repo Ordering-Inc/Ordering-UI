@@ -90,6 +90,8 @@ const AddressListUI = (props) => {
   }
 
   const checkAddress = (address) => {
+    if (!orderState?.options?.address) return true
+
     const props = ['address', 'address_notes', 'zipcode', 'location', 'internal_number']
     const values = []
     props.forEach(prop => {

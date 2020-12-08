@@ -10,14 +10,14 @@ export const FormActions = styled.div`
     height: 45px;
     flex: 1;
 
-    &:last-child {
+    &:last-child#submit-btn {
       margin-left: 10px;
     }
   }
 
   @media (min-width: 769px) {
     button {
-      &:last-child {
+      &:last-child#submit-btn {
         margin-left: 25px;
       }
     }

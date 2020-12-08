@@ -57,6 +57,8 @@ const AddressFormUI = (props) => {
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
+  const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -146,6 +148,10 @@ const AddressFormUI = (props) => {
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
+
+    if (formState?.changes?.address) {
+      setAddressValue(formState?.changes?.address)
+    }
   }, [formState])
 
   useEffect(() => {
@@ -164,6 +170,11 @@ const AddressFormUI = (props) => {
       setIsEdit(false)
     }
   }, [addressState])
+
+  const handleGoogleInputChange = (e) => {
+    hanldeChangeInput && hanldeChangeInput(e)
+    setAddressValue(e.target.value)
+  }
 
   return (
     <div className='address-form'>
@@ -190,7 +201,8 @@ const AddressFormUI = (props) => {
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={handleChangeAddress}
               onKeyDown={handleAddressKeyDown}
-              value={formState.changes?.address || addressState.address?.address}
+              onChange={handleGoogleInputChange}
+              value={addressValue}
               childRef={register({
                 required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
               })}
@@ -213,7 +225,7 @@ const AddressFormUI = (props) => {
           name='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           ref={register}
-          value={formState.changes?.internal_number || addressState.address.internal_number}
+          value={formState.changes?.internal_number ?? addressState.address.internal_number ?? ''}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
@@ -222,7 +234,7 @@ const AddressFormUI = (props) => {
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           ref={register}
-          value={formState.changes?.zipcode || addressState.address.zipcode}
+          value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
@@ -231,7 +243,7 @@ const AddressFormUI = (props) => {
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           ref={register}
-          value={formState.changes?.address_notes || addressState.address.address_notes}
+          value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
           onChange={hanldeChangeInput}
           autoComplete='off'
         />
@@ -251,9 +263,21 @@ const AddressFormUI = (props) => {
           </Button>
         </AddressTagSection>
         <FormActions>
-          <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
+          <Button
+            outline
+            type='button'
+            disabled={formState.loading}
+            onClick={() => onCancel()}
+          >
+            {t('CANCEL', 'Cancel')}
+          </Button>
           {Object.keys(formState?.changes).length > 0 && (
-            <Button type='submit' disabled={formState.loading} color='primary'>
+            <Button
+              id='submit-btn'
+              type='submit'
+              disabled={formState.loading}
+              color='primary'
+            >
               {!formState.loading ? (
                 addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')
               ) : (
