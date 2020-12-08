@@ -54,7 +54,7 @@ const AddressFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
     const isAddressAlreadyExist = (addressesList || []).some(address => (
       address?.location?.lat === formState.changes?.location?.lat && address?.location?.lng === formState.changes?.location?.lng
     ))
@@ -112,13 +112,6 @@ const AddressFormUI = (props) => {
     }
   }, [formMethods.errors])
 
-  useEffect(() => {
-    inputNames.forEach(name => {
-      formMethods.setValue(name, addressState?.address[name])
-      console.log(addressState?.address[name])
-    })
-  }, [])
-
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -128,7 +121,11 @@ const AddressFormUI = (props) => {
 
   useEffect(() => {
     inputNames.forEach(name => {
-      formMethods.register(name, { required: isRequiredField(name) && !addressState?.address[name] ? t(`VALIDATION_ERROR_${name}_REQUIRED`, `${name} is required`) : null })
+      formMethods.register(name, { required: isRequiredField(name) ? t(`VALIDATION_ERROR_${name}_REQUIRED`, `${name} is required`) : null })
+      if (isRequiredField(name) && !formState.changes[name] && addressState.address[name]) {
+        // setting a defaultValue for required inputs
+        formMethods.setValue(name, addressState.address[name])
+      }
     })
   }, [formMethods])
 
@@ -149,14 +146,14 @@ const AddressFormUI = (props) => {
           <WrapAddressInput>
             <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
-              className='input-autocomplete controlled-input'
+              className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={(e) => { formMethods.setValue('address', e.address); handleChangeAddress(e) }}
               setValue={formMethods.setValue}
               onKeyDown={handleAddressKeyDown}
               defaultValue={formState.changes?.address || addressState?.address?.address}
-              autoComplete='off'
+              autoComplete='new-field'
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
@@ -171,28 +168,27 @@ const AddressFormUI = (props) => {
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
-          className='internal_number controlled-input'
+          className='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
           defaultValue={formState.changes?.internal_number || addressState?.address?.internal_number}
           onChange={(e) => { formMethods.setValue('internal_number', e.target.value); hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } }) }}
-          autoComplete='off'
+          autoComplete='new-field'
         />
         <Input
-          className='zipcode controlled-input'
+          className='zipcode'
           name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
           defaultValue={formState.changes?.zipcode || addressState?.address?.zipcode}
           onChange={(e) => { formMethods.setValue('zipcode', e.target.value); hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } }) }}
-          autoComplete='off'
+          autoComplete='new-field'
         />
         <TextArea
-          className='controlled-input'
           name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
           defaultValue={formState.changes?.address_notes || addressState?.address?.address_notes}
           onChange={(e) => { formMethods.setValue('address_notes', e.target.value); hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } }) }}
-          autoComplete='off'
+          autoComplete='new-field'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>
