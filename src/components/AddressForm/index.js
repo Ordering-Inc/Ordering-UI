@@ -52,12 +52,13 @@ const AddressFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const formMethods = useForm()
   const [{ auth }] = useSession()
-  const { handleSubmit, register, errors } = useForm()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
 
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
 
@@ -157,13 +158,13 @@ const AddressFormUI = (props) => {
   }, [formState])
 
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map(error => error.message)
+        content: Object.values(formMethods.errors).map(error => error.message)
       })
     }
-  }, [errors])
+  }, [formMethods.errors])
 
   useEffect(() => {
     if (addressState.address?.id) {
@@ -178,9 +179,19 @@ const AddressFormUI = (props) => {
     setAddressValue(e.target.value)
   }
 
+  useEffect(() => {
+    inputNames.forEach(name => {
+      formMethods.register(name, { required: isRequiredField(name) ? t(`VALIDATION_ERROR_${name}_REQUIRED`, `${name} is required`) : null })
+      if (isRequiredField(name) && !formState.changes[name] && addressState.address[name]) {
+        // setting a defaultValue for required inputs
+        formMethods.setValue(name, addressState.address[name])
+      }
+    })
+  }, [formMethods])
+
   return (
     <div className='address-form'>
-      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+      <FormControl onSubmit={formMethods.handleSubmit(onSubmit)} autoComplete='off'>
         {(addressState?.address?.location || formState?.changes?.location) && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
@@ -199,23 +210,25 @@ const AddressFormUI = (props) => {
             <GoogleAutocompleteInput
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              name='address'
               placeholder={t('ADDRESS', 'Address')}
-              onChangeAddress={handleChangeAddress}
+              onChangeAddress={(e) => {
+                formMethods.setValue('address', e.address)
+                handleChangeAddress(e)
+              }}
               onKeyDown={handleAddressKeyDown}
               onChange={handleGoogleInputChange}
               value={addressValue}
-              childRef={register({
-                required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
-              })}
-              autoComplete='off'
+              autoComplete='new-field'
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
             <GoogleGpsButton
               className='gps-button'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              onAddress={handleChangeAddress}
+              onAddress={(e) => {
+                formMethods.setValue('address', e.address)
+                handleChangeAddress(e)
+              }}
               IconButton={ImCompass}
             />}
         </AddressWrap>
@@ -224,30 +237,33 @@ const AddressFormUI = (props) => {
         )}
         <Input
           className='internal_number'
-          name='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
-          ref={register}
           value={formState.changes?.internal_number ?? addressState.address.internal_number ?? ''}
-          onChange={hanldeChangeInput}
-          autoComplete='off'
+          onChange={(e) => {
+            formMethods.setValue('internal_number', e.target.value)
+            hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } })
+          }}
+          autoComplete='new-field'
         />
         <Input
           className='zipcode'
-          name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
-          ref={register}
           value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
-          onChange={hanldeChangeInput}
-          autoComplete='off'
+          onChange={(e) => {
+            formMethods.setValue('zipcode', e.target.value)
+            hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } })
+          }}
+          autoComplete='new-field'
         />
         <TextArea
-          name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-          ref={register}
           value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
-          onChange={hanldeChangeInput}
-          autoComplete='off'
+          onChange={(e) => {
+            formMethods.setValue('address_notes', e.target.value)
+            hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+          }}
+          autoComplete='new-field'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>
