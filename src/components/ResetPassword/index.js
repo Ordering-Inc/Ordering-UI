@@ -42,8 +42,10 @@ const ResetPasswordUI = (props) => {
     })
   }
 
-  const handleGoToPage = (page) => {
-    events.emit('go_to_page', { page })
+  const handleCloseAlert = () => {
+    if (!formState.loading && formState.result?.result?.length && !formState.result.error) {
+      events.emit('go_to_page', { page: 'signin' })
+    }
     closeAlert()
   }
 
@@ -116,10 +118,10 @@ const ResetPasswordUI = (props) => {
           />
           <Button
             type='submit'
-            color={formState.loading || formState.result?.result?.length ? 'secondary' : 'primary'}
-            disabled={formState.loading || formState.result?.result?.length}
+            color={(formState.loading || formState.result?.result?.length) && !formState.result.error ? 'secondary' : 'primary'}
+            disabled={(formState.loading || formState.result?.result?.length) && !formState.result.error}
           >
-            {!formState.loading ? t('CHANGE_PASSWORD', 'Change Password') : t('LOADING', 'Loading')}
+            {!formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading')}
           </Button>
         </FormInput>
       </FormSide>
@@ -128,8 +130,8 @@ const ResetPasswordUI = (props) => {
         content={alertState?.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
-        onClose={() => !formState.loading && formState.result?.result?.length ? handleGoToPage('signin') : closeAlert()}
-        onAccept={() => !formState.loading && formState.result?.result?.length ? handleGoToPage('signin') : closeAlert()}
+        onClose={() => handleCloseAlert()}
+        onAccept={() => handleCloseAlert()}
         closeOnBackdrop={false}
       />
     </ResetPasswordContainer>
