@@ -72,6 +72,10 @@ const ResetPasswordUI = (props) => {
     }
   }, [errors])
 
+  useEffect(() => {
+    return () => closeAlert()
+  }, [])
+
   return (
     <ResetPasswordContainer>
       <HeroSide>
