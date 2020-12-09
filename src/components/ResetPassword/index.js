@@ -89,7 +89,13 @@ const ResetPasswordUI = (props) => {
             name='password'
             aria-label='password'
             spellcheck='false'
-            ref={register({ required: 'The password is required', minLength: { value: 8, message: 'The Password must be at least 8 characters.' } })}
+            ref={register({
+              required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field password is required'),
+              minLength: {
+                value: 8,
+                message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+              }
+            })}
             placeholder={t('NEW_PASSWORD', 'New passowrd')}
             onChange={handleChangeInput}
             autoComplete='off'
@@ -100,15 +106,19 @@ const ResetPasswordUI = (props) => {
             aria-label='confirm-password'
             spellcheck='false'
             ref={register({
-              required: 'The password confirm is required',
+              required: t('VALIDATION_ERROR_PASSWORD_CONFIRM_REQUIRED', 'The field password confirm is required'),
               validate: value =>
-                value === password.current || 'The passwords do not match'
+                value === password.current || t('VALIDATION_ERROR_PASSWORDS_MATCH', 'The passwords do not match')
             })}
             placeholder={t('CONFIRM_PASSWORD', 'Confirm Password')}
             onChange={handleChangeInput}
             autoComplete='off'
           />
-          <Button type='submit' color={formState.loading || formState.result?.result?.length ? 'secondary' : 'primary'} disabled={formState.loading || formState.result?.result?.length}>
+          <Button
+            type='submit'
+            color={formState.loading || formState.result?.result?.length ? 'secondary' : 'primary'}
+            disabled={formState.loading || formState.result?.result?.length}
+          >
             {!formState.loading ? t('CHANGE_PASSWORD', 'Change Password') : t('LOADING', 'Loading')}
           </Button>
         </FormInput>
@@ -118,8 +128,8 @@ const ResetPasswordUI = (props) => {
         content={alertState?.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
-        onClose={() => !formState.loading && formState.result?.result?.length ? handleGoToPage('login') : closeAlert()}
-        onAccept={() => !formState.loading && formState.result?.result?.length ? handleGoToPage('login') : closeAlert()}
+        onClose={() => !formState.loading && formState.result?.result?.length ? handleGoToPage('signin') : closeAlert()}
+        onAccept={() => !formState.loading && formState.result?.result?.length ? handleGoToPage('signin') : closeAlert()}
         closeOnBackdrop={false}
       />
     </ResetPasswordContainer>

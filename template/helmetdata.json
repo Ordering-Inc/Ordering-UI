@@ -35,7 +35,7 @@
     "canonicalUrl": ""
   },
   "resetpassword": {
-    "title": "Forgot Password",
+    "title": "Reset Password",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",
