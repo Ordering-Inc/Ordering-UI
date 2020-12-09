@@ -45,6 +45,15 @@ const AddressListUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
 
+  const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
+    (address, i, self) =>
+      i === self.findIndex(obj => (
+        address.address === obj.address &&
+        address.address_notes === obj.address_notes &&
+        address.zipcode === obj.zipcode &&
+        address.internal_number === obj.internal_number
+      )))) || []
+
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
@@ -164,7 +173,7 @@ const AddressListUI = (props) => {
 
       {!addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && addressList?.addresses?.length > 0 && (
         <AddressListUl>
-          {addressList.addresses.map(address => (
+          {uniqueAddressesList.map(address => (
             <AddressItem key={address?.id}>
               <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                 <span className='radio'>

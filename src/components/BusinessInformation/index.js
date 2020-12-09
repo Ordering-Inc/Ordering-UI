@@ -251,9 +251,22 @@ export const BusinessInformationUI = (props) => {
 }
 
 export const BusinessInformation = (props) => {
+  const googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: true,
+    fullscreenControl: true,
+    mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  }
+
   const BusinessInformationProps = {
     ...props,
-    UIComponent: BusinessInformationUI
+    UIComponent: BusinessInformationUI,
+    googleMapsControls
   }
   return <BusinessInformationController {...BusinessInformationProps} />
 }

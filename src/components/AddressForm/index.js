@@ -12,7 +12,8 @@ import {
   GoogleGpsButton,
   useLanguage,
   GoogleMapsMap,
-  useSession
+  useSession,
+  useOrder
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 
@@ -51,6 +52,7 @@ const AddressFormUI = (props) => {
     setIsEdit
   } = props
 
+  const [orderState] = useOrder()
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
@@ -60,7 +62,15 @@ const AddressFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
 
+  const isEditing = !!addressState.address?.id
+
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
+
+  const [locationChange, setLocationChange] = useState(
+    addressState?.address?.id
+      ? addressState?.address?.location
+      : formState.changes?.location ?? null
+  )
 
   const closeAlert = () => {
     setAlertState({
@@ -92,10 +102,11 @@ const AddressFormUI = (props) => {
   }
 
   const onSubmit = async () => {
-    const arrayList = addressState.address?.id
+    setToggleMap(false)
+    const arrayList = isEditing
       ? addressesList.filter(address => address.id !== addressState.address?.id) || []
       : addressesList || []
-    const addressToCompare = addressState.address?.id
+    const addressToCompare = isEditing
       ? { ...addressState.address, ...formState.changes }
       : formState?.changes
 
@@ -145,16 +156,56 @@ const AddressFormUI = (props) => {
   }
 
   useEffect(() => {
+    if (!auth) {
+      setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
+      setAddressValue(formState?.changes?.address || orderState?.options?.address?.address || '')
+      inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || orderState?.options?.address[field] || ''))
+      return
+    }
+
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
+    setAddressValue(formState?.changes?.address ?? addressState.address?.address ?? '')
+    formMethods.setValue('address', formState?.changes?.address ?? addressState.address?.address ?? '')
+    if (!isEditing) {
+      inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || ''))
+      setLocationChange(formState?.changes?.location)
+    }
 
-    setAddressValue(formState?.changes?.address ?? '')
-    inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || ''))
+    // Validation when user change location in edit mode
+    if (isEditing) {
+      if (formState?.changes?.location) {
+        const prevLocation = { lat: Math.trunc(locationChange.lat), lng: Math.trunc(locationChange.lng) }
+        const newLocation = { lat: Math.trunc(formState?.changes?.location?.lat), lng: Math.trunc(formState?.changes?.location?.lng) }
+        if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
+          setLocationChange(formState?.changes?.location)
+        }
+      }
+    }
   }, [formState])
+
+  useEffect(() => {
+    if (isEditing) {
+      setIsEdit(true)
+      setAddressValue(addressState.address?.address)
+    } else {
+      setIsEdit(false)
+    }
+  }, [addressState])
+
+  useEffect(() => {
+    if (!auth) {
+      setLocationChange(orderState?.options?.address?.location ?? formState?.changes?.location ?? '')
+    }
+  }, [])
+
+  /**
+   * Form events control
+   */
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
@@ -164,15 +215,6 @@ const AddressFormUI = (props) => {
       })
     }
   }, [formMethods.errors])
-
-  useEffect(() => {
-    if (addressState.address?.id) {
-      setIsEdit(true)
-      setAddressValue(addressState.address?.address)
-    } else {
-      setIsEdit(false)
-    }
-  }, [addressState])
 
   useEffect(() => {
     inputNames.forEach(name => {
@@ -187,11 +229,11 @@ const AddressFormUI = (props) => {
   return (
     <div className='address-form'>
       <FormControl onSubmit={formMethods.handleSubmit(onSubmit)} autoComplete='off'>
-        {(addressState?.address?.location || formState?.changes?.location) && toggleMap && (
+        {locationChange && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              location={{ ...(addressState?.address?.location || formState?.changes?.location), zoom: googleMapsControls.defaultZoom }}
+              location={locationChange}
               mapControls={googleMapsControls}
               handleChangeAddressMap={handleChangeAddress}
               setErrors={setMapErrors}
@@ -295,7 +337,7 @@ const AddressFormUI = (props) => {
               color='primary'
             >
               {!formState.loading ? (
-                addressState.address?.id || !auth ? t('UPDATE', 'Update') : t('ADD', 'Add')
+                isEditing || !auth ? t('UPDATE', 'Update') : t('ADD', 'Add')
               ) : (
                 t('LOADING', 'Loading')
               )}
@@ -318,7 +360,7 @@ const AddressFormUI = (props) => {
 
 export const AddressForm = (props) => {
   const googleMapsControls = {
-    defaultZoom: 15,
+    defaultZoom: 17,
     zoomControl: true,
     streetViewControl: false,
     fullscreenControl: false,
@@ -326,7 +368,8 @@ export const AddressForm = (props) => {
     mapTypeControl: true,
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
-    }
+    },
+    isMarkerDraggable: true
   }
   const addressFormProps = {
     ...props,
