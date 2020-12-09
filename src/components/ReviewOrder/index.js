@@ -11,7 +11,7 @@ import { Button } from '../../styles/Buttons'
 import { ThemeContext } from 'styled-components'
 
 const ReviewOrderUI = (props) => {
-  const { stars, handleChangeInput, handleChangeRating, handleSendReview, formState } = props
+  const { stars, handleChangeInput, handleChangeRating, handleSendReview, formState, closeReviewOrder, setIsReviewed } = props
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [hover, setHover] = useState(stars)
@@ -33,6 +33,7 @@ const ReviewOrderUI = (props) => {
         title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
         content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
       })
+      setIsReviewed(true)
     }
   }, [formState])
 
@@ -56,6 +57,9 @@ const ReviewOrderUI = (props) => {
       open: false,
       content: []
     })
+    if (!formState.loading && !formState.result?.error && alertState.success) {
+      closeReviewOrder()
+    }
   }
 
   const StarsComponent = ({ name }) => (
@@ -115,7 +119,13 @@ const ReviewOrderUI = (props) => {
         />
       </Comments>
       <Send>
-        <Button color='primary' type='submit'>{t('SEND_REVIEW', 'Send a Review')}</Button>
+        <Button
+          color={!formState.loading ? 'primary' : 'secondary'}
+          type='submit'
+          disabled={formState.loading}
+        >
+          {!formState.loading ? t('SEND_REVIEW', 'Send a Review') : t('LOADING', 'Loading')}
+        </Button>
       </Send>
       <Alert
         title={t('ORDER_REVIEW', 'Order Review')}
