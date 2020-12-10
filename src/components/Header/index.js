@@ -87,7 +87,7 @@ export const Header = (props) => {
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
-          {onlineStatus && (
+          {onlineStatus && windowSize.width > 820 && (
             <Menu className='left-header'>
               <OrderTypeSelectorHeader />
               <MomentPopover

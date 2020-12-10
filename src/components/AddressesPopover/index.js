@@ -52,11 +52,11 @@ export const AddressesPopover = (props) => {
   }
 
   useEffect(() => {
-    window.addEventListener('mouseup', handleClickOutside)
+    window.addEventListener('mousedown', handleClickOutside)
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      window.removeEventListener('mouseup', handleClickOutside)
+      window.removeEventListener('mousedown', handleClickOutside)
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [open])
