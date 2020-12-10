@@ -45,7 +45,7 @@ export const SingleProductCard = (props) => {
   return (
     <CardContainer
       soldOut={isSoldOut || maxProductQuantity <= 0}
-      onClick={() => onProductClick(product)}
+      onClick={() => !isSkeleton && onProductClick(product)}
     >
       <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
         {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
