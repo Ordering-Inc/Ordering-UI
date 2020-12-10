@@ -217,10 +217,10 @@ const UserProfileFormUI = (props) => {
           <UserImage className='user-image'>
             <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
               <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
-                <Image isImage={user?.photo || formState?.changes?.photo}>
+                <Image isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
                   {formState.changes.photo && formState.loading
                     ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                    : ((!formState.changes.photo || formState.result?.result === 'Network Error')
+                    : ((!formState.changes.photo || formState.result?.result === 'Network Error' || formState.result.error)
                       ? user?.photo
                         ? (<img src={user?.photo} alt='user image' />)
                         : (
@@ -229,7 +229,7 @@ const UserProfileFormUI = (props) => {
                             <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
                           </UploadImageIcon>
                         )
-                      : formState?.changes?.photo
+                      : formState?.changes?.photo && formState.result.error
                         ? (<img src={formState?.changes?.photo} alt='user image' />)
                         : (
                           <UploadImageIcon>
