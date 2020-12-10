@@ -279,7 +279,7 @@ export const MessagesUI = (props) => {
                               {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
                               {message.comment && (<><br /> {message.comment.length}</>)}
                             </>
-                          ) : <>{t('DRIVER_DEALLOCATED', 'The driver has been deallocated')}</>}
+                          ) : <>{t('DRIVER_UNASSIGNED', 'Driver unassigned')}</>}
                           <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                         </BubbleConsole>
                       )}
