@@ -23,6 +23,7 @@ export const OrdersContainer = styled.div`
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
+    justify-content: center;
     width: 99%;
     margin: auto 0px auto auto;
 
@@ -39,6 +40,7 @@ export const OrdersContainer = styled.div`
     
     @media (min-width: 768px) {
       width: 90%;
+      justify-content: flex-start;
     }
   `}
 
@@ -209,6 +211,9 @@ export const BusinessInformation = styled.div`
     color : #9A9A9A;
     white-space: nowrap;
     font-size: 0.9em;
+    ${({ activeOrders }) => activeOrders && css`
+    font-size: 0.8em;
+  `}
   }
   p[name='view_order'] {
     color: #D81313;
@@ -221,6 +226,11 @@ export const BusinessInformation = styled.div`
     font-size: 14px;
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
+    }
+    p{
+      ${({ activeOrders }) => activeOrders && css`
+        font-size: 0.9em;
+      `}
     }
   }
 

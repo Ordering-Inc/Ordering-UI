@@ -30,7 +30,7 @@ export const ActiveOrders = (props) => {
   return (
     <OrdersContainer activeOrders>
       <Tabs>
-        <AutoScroll>
+        <AutoScroll special>
           {orders.map(order => (
             <Card key={order.id}>
               <Map>
@@ -40,7 +40,7 @@ export const ActiveOrders = (props) => {
                 <Logo>
                   <img src={order.business?.logo} alt='business-logo' />
                 </Logo>
-                <BusinessInformation>
+                <BusinessInformation activeOrders>
                   <h2>{order.business.name}</h2>
                   <p>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
                   <p>{order.created_at}</p>
