@@ -28,7 +28,7 @@ export const ActiveOrders = (props) => {
   const [{ parsePrice }] = useUtils()
 
   return (
-    <OrdersContainer activeOrders>
+    <OrdersContainer activeOrders ordersLength={orders?.length <= 1}>
       <Tabs>
         <AutoScroll special>
           {orders.map(order => (

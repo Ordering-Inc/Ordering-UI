@@ -23,7 +23,7 @@ export const OrdersContainer = styled.div`
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
-    justify-content: center;
+    justify-content: ${({ ordersLength }) => !ordersLength ? 'flex-start' : 'center'};
     width: 99%;
     margin: auto 0px auto auto;
 
@@ -229,7 +229,7 @@ export const BusinessInformation = styled.div`
     }
     p{
       ${({ activeOrders }) => activeOrders && css`
-        font-size: 0.9em;
+        font-size: 0.9 em;
       `}
     }
   }
