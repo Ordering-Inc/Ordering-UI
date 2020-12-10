@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Alert } from '../Confirm'
 import {
-  useLanguage
+  useLanguage,
+  ResetPassword as ResetPasswordController,
+  useEvent
 } from 'ordering-components'
 import {
   ResetPasswordContainer,
@@ -15,58 +18,135 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
 
-export const ResetPassword = (props) => {
+const ResetPasswordUI = (props) => {
   const {
-    isPopup
+    handleResetPassword,
+    handleChangeInput,
+    formState
   } = props
 
-  const { handleSubmit } = useForm()
+  const { handleSubmit, register, errors, watch } = useForm()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [events] = useEvent()
 
-  const onSubmit = () => {
-    console.log('success')
+  const password = useRef({})
+
+  password.current = watch('password', '')
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
-  const hanldeChangeInput = (e) => {
-    console.log(e.target.value)
+  const handleCloseAlert = () => {
+    if (!formState.loading && formState.result?.result?.length && !formState.result.error) {
+      events.emit('go_to_page', { page: 'signin' })
+    }
+    closeAlert()
   }
+
+  useEffect(() => {
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result || [t('ERROR', 'Error')]
+      })
+    } else if (!formState.loading && formState.result?.result?.length) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result
+      })
+    }
+  }, [formState])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
+  useEffect(() => {
+    return () => closeAlert()
+  }, [])
+
   return (
-    <ResetPasswordContainer isPopup={isPopup}>
-      <HeroSide isPopup={isPopup}>
+    <ResetPasswordContainer>
+      <HeroSide>
         <TitleHeroSide>
           <h1>{t('TITLE_RESET_PASSWORD', 'Reset password')}</h1>
           <p>{t('SUBTITLE_RESET_PASSWORD', 'Reset your password')}</p>
         </TitleHeroSide>
       </HeroSide>
-      <FormSide isPopup={isPopup}>
-        <img src={theme?.images?.logos?.logotype} alt='Logo' />
+      <FormSide>
+        <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' />
         <FormInput
           noValidate
-          isPopup={isPopup}
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(handleResetPassword)}
         >
           <Input
             type='password'
             name='password'
             aria-label='password'
             spellcheck='false'
+            ref={register({
+              required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field password is required'),
+              minLength: {
+                value: 8,
+                message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+              }
+            })}
             placeholder={t('NEW_PASSWORD', 'New passowrd')}
-            onChange={(e) => hanldeChangeInput(e)}
+            onChange={handleChangeInput}
+            autoComplete='off'
           />
           <Input
             type='password'
             name='confirm-password'
             aria-label='confirm-password'
             spellcheck='false'
+            ref={register({
+              required: t('VALIDATION_ERROR_PASSWORD_CONFIRM_REQUIRED', 'The field password confirm is required'),
+              validate: value =>
+                value === password.current || t('VALIDATION_ERROR_PASSWORDS_MATCH', 'The passwords do not match')
+            })}
             placeholder={t('CONFIRM_PASSWORD', 'Confirm Password')}
-            onChange={(e) => hanldeChangeInput(e)}
+            onChange={handleChangeInput}
+            autoComplete='off'
           />
-          <Button type='submit' color='primary'>
-            {t('CHANGE_PASSWORD', 'Change Password')}
+          <Button
+            type='submit'
+            color={(formState.loading || formState.result?.result?.length) && !formState.result.error ? 'secondary' : 'primary'}
+            disabled={(formState.loading || formState.result?.result?.length) && !formState.result.error}
+          >
+            {!formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading')}
           </Button>
         </FormInput>
       </FormSide>
+      <Alert
+        title={t('RESET_PASSWORD', 'Reset Password')}
+        content={alertState?.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => handleCloseAlert()}
+        onAccept={() => handleCloseAlert()}
+        closeOnBackdrop={false}
+      />
     </ResetPasswordContainer>
   )
+}
+
+export const ResetPassword = (props) => {
+  const resetPasswordProps = {
+    ...props,
+    UIComponent: ResetPasswordUI
+  }
+
+  return <ResetPasswordController {...resetPasswordProps} />
 }

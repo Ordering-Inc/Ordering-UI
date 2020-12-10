@@ -50,6 +50,7 @@ import { ProductItemAccordion } from './components/ProductItemAccordion'
 import { ProductOption } from './components/ProductOption'
 import { ProductOptionSubOption } from './components/ProductOptionSubOption'
 import { ProductShare } from './components/ProductShare'
+import { ResetPassword } from './components/ResetPassword'
 import { ReviewOrder } from './components/ReviewOrder'
 import { SearchBar } from './components/SearchBar'
 import { SignUpForm } from './components/SignUpForm'
@@ -65,7 +66,7 @@ import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Button } from './styles/Buttons'
-import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary } from './styles/Inputs'
+import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
 import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
 
@@ -123,6 +124,7 @@ export {
   ProductOption,
   ProductOptionSubOption,
   ProductShare,
+  ResetPassword,
   ReviewOrder,
   SearchBar,
   SignUpForm,
