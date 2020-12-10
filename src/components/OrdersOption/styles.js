@@ -229,7 +229,7 @@ export const BusinessInformation = styled.div`
     }
     p{
       ${({ activeOrders }) => activeOrders && css`
-        font-size: 0.9 em;
+        font-size: 0.9em;
       `}
     }
   }
