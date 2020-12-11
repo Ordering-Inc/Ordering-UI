@@ -9,7 +9,7 @@ export const Container = styled.div`
 `
 
 export const WrapperContainer = styled.div`
-  width: 90%;
+  width: ${({ isLoading }) => isLoading ? '100%' : '80%'};
   margin: auto;
 `
 
@@ -48,13 +48,17 @@ export const HeaderInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding: 20px 20px 30px;
+  padding: 20px;
   border-radius: 7px;
-  min-height: 300px;
+  min-height: 140px;
 
   @media (min-width: 678px) {
     width: 50%;
     border-radius: 7px 0 0 7px;
+  }
+
+  @media (min-width: 769px) {
+    min-height: 300px;
   }
 `
 
@@ -72,16 +76,26 @@ export const HeaderText = styled.div`
   `};
 
   h1 {
-    margin: 1em 0;
-    font-size: 26px;
+    margin: 0;
+    font-size: 22px;
   }
 
   p {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   @media (min-width: 480px) {
     margin: 0px 20px;
+  }
+
+  @media (min-width: 769px) {
+    h1 {
+      font-size: 26px;
+    }
+
+    p {
+      font-size: 18px;
+    }
   }
 `
 
@@ -89,10 +103,6 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0px;
-
-  @media (min-width: 840px) {
-    margin: 10px 80px;
-  }
 `
 
 export const OrderBusiness = styled.div`

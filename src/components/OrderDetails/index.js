@@ -314,7 +314,7 @@ const OrderDetailsUI = (props) => {
       )}
 
       {loading && (
-        <WrapperContainer className='skeleton-loading'>
+        <WrapperContainer isLoading className='skeleton-loading'>
           <SkeletonBlockWrapp>
             <SkeletonBlock width={80}>
               <Skeleton height={200} />
