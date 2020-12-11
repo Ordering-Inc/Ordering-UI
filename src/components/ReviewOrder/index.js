@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { OrderReview as ReviewOrderController, useLanguage } from 'ordering-components'
-import { ReviewOrderContainer, Reviews, Categories, Category, Stars, Comments, Send } from './styles'
+import { ReviewOrderContainer, Reviews, Categories, Category, Stars, Comments, Send, InvisibleInput } from './styles'
 import { Alert } from '../Confirm'
 import AiFillStar from '@meronex/icons/ai/AiFillStar'
 
@@ -71,7 +71,11 @@ const ReviewOrderUI = (props) => {
           value={i + 1}
           onClick={(e) => handleChangeRating(e)}
         />
-        <AiFillStar color={(i + 1) <= (hover[name] || stars[name]) ? colors.primary : 'gray'} size={25} onMouseEnter={() => setHover({ [name]: (i + 1) })} />
+        <AiFillStar
+          color={(i + 1) <= (hover[name] || stars[name]) ? colors.primary : 'gray'}
+          size={25}
+          onMouseEnter={() => setHover({ [name]: (i + 1) })}
+        />
       </label>
     ))
   )
@@ -80,28 +84,44 @@ const ReviewOrderUI = (props) => {
       <Reviews>
         <h2>{t('REVIEWS', 'Reviews')}:</h2>
         <Categories>
+          {Object.keys(stars).map(key => (
+            <React.Fragment key={key}>
+              {key !== 'Comments' && (
+                <InvisibleInput
+                  type='text'
+                  name={key}
+                  defaultValue={stars[key]}
+                  value={stars[key]}
+                  ref={register({
+                    validate: value => value === '0' ? t('CATEGORY_ATLEAST_ONE', `${key} must be at least one point`).replace('CATEGORY', key.toUpperCase()) : null
+                  })}
+                  disabled
+                />
+              )}
+            </React.Fragment>
+          ))}
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('QUALITY', 'Quality of Product')}:</p>
             <Stars>
-              <StarsComponent name='quality' />
+              <StarsComponent name='Quality' />
             </Stars>
           </Category>
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('PUNCTUALITY', 'Punctuality')}:</p>
             <Stars>
-              <StarsComponent name='punctiality' />
+              <StarsComponent name='Punctiality' />
             </Stars>
           </Category>
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('SERVICE', 'Service')}:</p>
             <Stars>
-              <StarsComponent name='service' />
+              <StarsComponent name='Service' />
             </Stars>
           </Category>
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('PRODUCT_PACKAGING', 'Product Packaging')}:</p>
             <Stars>
-              <StarsComponent name='packaging' />
+              <StarsComponent name='Packaging' />
             </Stars>
           </Category>
         </Categories>
@@ -110,7 +130,7 @@ const ReviewOrderUI = (props) => {
         <h2>{t('COMMENTS', 'Comments')}:</h2>
         <Input
           placeholder={t('COMMENTS', 'Comments')}
-          name='comments'
+          name='Comments'
           onChange={(e) => handleChangeInput(e)}
           ref={register({
             required: t('FIELD_COMMENT_REQUIRED', 'The field comments is required')
