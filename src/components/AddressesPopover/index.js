@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from 'react'
 import { useOrder, useLanguage } from 'ordering-components'
 import { usePopper } from 'react-popper'
-import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
+import { HeaderItem, PopoverBody, PopoverArrow, Container, Title } from './styles'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
-import { AddressContent } from '../AddressContent'
+import { AddressList } from '../AddressList'
+import { AddressForm } from '../AddressForm'
 
 export const AddressesPopover = (props) => {
   const {
@@ -73,11 +74,28 @@ export const AddressesPopover = (props) => {
       </HeaderItem>
       <PopoverBody className='form_edit' ref={popperElement} style={popStyle} {...attributes.popper}>
         {open && (
-          <AddressContent
-            auth={auth}
-            addressState={addressState}
-            onClose={props.onClose}
-          />
+          <Container>
+            {auth && (
+              <>
+                <Title>{t('ADDRESSES', 'Addresses')}</Title>
+                <AddressList
+                  popover
+                  changeOrderAddressWithDefault
+                  onClosePopover={props.onClose}
+                />
+              </>)}
+            {!auth && (
+              <>
+                <Title>{t('ADDRESS', 'Address')}</Title>
+                <AddressForm
+                  useValidationFileds
+                  address={addressState || {}}
+                  onClose={() => props.onClose && props.onClose()}
+                  onCancel={() => props.onClose && props.onClose()}
+                  onSaveAddress={() => props.onClose && props.onClose()}
+                />
+              </>)}
+          </Container>
         )}
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
