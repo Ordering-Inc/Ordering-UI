@@ -211,7 +211,7 @@ const UserProfileFormUI = (props) => {
 
   return (
     <>
-      <ProfileOptions value={t('MY_ACCOUNT', 'My Account')} />
+      <ProfileOptions value='My Account' />
       <Container>
         <UserProfileContainer>
           <UserImage className='user-image'>
