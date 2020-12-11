@@ -58,7 +58,7 @@ const AddressListUI = (props) => {
     setCurAddress(address)
     setAddressOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
-    scrollTo(container, 0, 500)
+    container && scrollTo(container, 0, 500)
   }
 
   const handleSaveAddress = (address) => {
