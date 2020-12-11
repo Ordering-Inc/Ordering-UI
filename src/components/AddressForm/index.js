@@ -3,7 +3,7 @@ import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
 import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
 import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
-import ImCompass from '@meronex/icons/im/ImCompass'
+import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import { useForm } from 'react-hook-form'
 import {
@@ -269,7 +269,7 @@ const AddressFormUI = (props) => {
                 formMethods.setValue('address', e.address)
                 handleChangeAddress(e)
               }}
-              IconButton={ImCompass}
+              IconButton={BiCurrentLocation}
             />}
         </AddressWrap>
         {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (

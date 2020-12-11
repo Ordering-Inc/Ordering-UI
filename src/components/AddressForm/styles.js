@@ -103,7 +103,7 @@ export const FormControl = styled.form`
       `}
       svg {
         color: ${props => props.theme.colors.primary};
-        font-size: 20px;
+        font-size: 25px;
       }
     }
   }
@@ -197,7 +197,7 @@ export const WrapperMap = styled.div`
 
 export const ShowMap = styled.p`
   text-align: center;
-  color: ${props => props.theme.colors.primary};
+  color: #000;
   width: 100%;
   font-weight: 600;
   cursor: pointer
