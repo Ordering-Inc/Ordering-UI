@@ -66,45 +66,16 @@ export const FormControl = styled.form`
     ::placeholder {
       color: #DBDCDB;
     }
-    
+
     &:-ms-input-placeholder {
       color: #DBDCDB;
     }
-    
+
     &::-ms-input-placeholder { /* Microsoft Edge */
       color: #DBDCDB;
     }
     &:focus {
       border-color: ${() => darken(0.07, '#CCC')};
-    }
-  }
-
-  .google-control {
-    button:nth-child(2) {
-      position: absolute;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #FFF;
-      padding: 0;
-      width: 43px;
-      height: 43px;
-      line-height: 34px;
-      text-align: center;
-      border-radius: 50%;
-      border-style: solid;
-      border-width: 1px;
-      border-color: ${props => props.theme.colors.primary};
-      outline: none;
-      ${props => props.theme?.rtl && css`
-        left: 0;
-        right: initial; 
-      `}
-      svg {
-        color: ${props => props.theme.colors.primary};
-        font-size: 25px;
-      }
     }
   }
 

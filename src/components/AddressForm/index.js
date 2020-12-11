@@ -5,17 +5,18 @@ import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
 import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
   GoogleAutocompleteInput,
-  GoogleGpsButton,
   useLanguage,
   GoogleMapsMap,
   useSession,
   useOrder
 } from 'ordering-components'
 import { Alert } from '../Confirm'
+import { GoogleGpsButton } from '../GoogleGpsButton'
 
 import {
   FormControl,
@@ -278,6 +279,7 @@ const AddressFormUI = (props) => {
                 handleChangeAddress(e)
               }}
               IconButton={BiCurrentLocation}
+              IconLoadingButton={CgSearchLoading}
             />}
         </AddressWrap>
         {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
