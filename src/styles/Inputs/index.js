@@ -132,13 +132,13 @@ export const InputPrimary = styled(Input)`
   }
 `
 
-export const InputSecundary = styled(Input)`
+export const InputSecondary = styled(Input)`
   background: #FFF;
-  color: ${props => props.theme.colors.secundary};
-  border-color: ${props => props.theme.colors.secundary};
+  color: ${props => props.theme.colors.secondary};
+  border-color: ${props => props.theme.colors.secondary};
 
   &:focus {
-    border-color: ${props => darken(0.1, props.theme.colors.secundary)};
+    border-color: ${props => darken(0.1, props.theme.colors.secondary)};
   }
 `
 export const InputGroupPrimary = styled(InputGroup)`

@@ -101,7 +101,7 @@ export const AddressItemActions = styled.div`
   }
   a.disabled {
     svg {
-      color: #CCC;
+      color: ${props => props.theme.colors.disabled};
     }
     pointer-events: none;
   }

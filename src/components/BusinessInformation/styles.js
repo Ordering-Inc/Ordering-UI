@@ -218,11 +218,11 @@ export const ScheduleBlock = styled.div`
   flex-direction: column;
   text-align: center;
   padding: 0px 15px;
-  border-right: 1px solid #CCC;
+  border-right: 1px solid ${props => props.theme.colors.secondary};
   width: 10%;
   min-width: 80px;
   ${props => props.theme?.rtl && css`
-    border-left: 1px solid #CCC;
+    border-left: 1px solid ${props => props.theme.colors.secondary};
     border-right: none;
   `}
   h4 {

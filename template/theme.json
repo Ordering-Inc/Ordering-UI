@@ -12,8 +12,8 @@
   "colors": {
     "primary": "#D83520",
     "primaryContrast": "#FFF",
-    "secundary": "#EFEFEF",
-    "secundaryContrast": "#000",
+    "secondary": "#EFEFEF",
+    "secondaryContrast": "#000",
     "disabled": "#CBCBCB",
     "disabledContast": "#000"
   }

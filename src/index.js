@@ -66,7 +66,7 @@ import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Button } from './styles/Buttons'
-import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
+import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecondary, TextArea } from './styles/Inputs'
 import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
 
@@ -151,8 +151,9 @@ export {
   InputGroupLeft,
   InputGroupPrimary,
   InputGroupRight,
-  InputSecundary,
+  InputSecondary,
   Select,
   Tab,
-  Tabs
+  Tabs,
+  TextArea
 }
