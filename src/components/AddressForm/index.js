@@ -102,6 +102,14 @@ const AddressFormUI = (props) => {
   }
 
   const onSubmit = async () => {
+    if (formState?.changes?.address && !formState?.changes?.location) {
+      setAlertState({
+        open: true,
+        content: [t('ADDRESS_REQUIRE_LOCATION', 'The address needs a location, please select one of the suggested')]
+      })
+      return
+    }
+
     setToggleMap(false)
     const arrayList = isEditing
       ? addressesList.filter(address => address.id !== addressState.address?.id) || []
