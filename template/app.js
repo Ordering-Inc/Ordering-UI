@@ -6,7 +6,7 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useConfig } from 'ordering-components'
 
 import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
@@ -40,6 +40,7 @@ export const App = () => {
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
+  const [{ configs }] = useConfig()
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
 
@@ -61,6 +62,31 @@ export const App = () => {
       setLoaded(!auth)
     }
   }, [loading])
+
+  useEffect(() => {
+    if (configs?.facebook_id?.value) {
+      window.fbAsyncInit = () => {
+        window.FB.init({
+          appId: configs?.facebook_id?.value,
+          cookie: true,
+          xfbml: false,
+          version: 'v7.0'
+        })
+      }
+
+      if (window.document.getElementById('facebook-jssdk')) {
+        return
+      }
+
+      const js = window.document.createElement('script')
+      const fjs = window.document.getElementsByTagName('script')[0]
+      js.id = 'facebook-jssdk'
+      js.async = true
+      js.defer = true
+      js.src = 'https://connect.facebook.net/en_US/sdk.js'
+      fjs.parentNode.insertBefore(js, fjs)
+    }
+  }, [configs?.facebook_id?.value])
 
   return (
     <>
