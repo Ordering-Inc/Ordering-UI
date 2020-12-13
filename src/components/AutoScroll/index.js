@@ -6,7 +6,7 @@ import { AutoscrollContainer } from './styles'
 
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, modal }) => {
+export const AutoScroll = ({ children, modal, special }) => {
   const { width } = useWindowSize()
   const [parentElement, setParentElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
@@ -78,11 +78,11 @@ export const AutoScroll = ({ children, modal }) => {
   return (
     <AutoscrollContainer modal={modal} id='autoscroll'>
       {
-        width < parentElement?.offsetWidth + 50 ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        !special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        width < parentElement?.offsetWidth + 50 ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        !special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
 

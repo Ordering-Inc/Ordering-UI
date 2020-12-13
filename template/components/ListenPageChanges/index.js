@@ -21,7 +21,8 @@ export const ListenPageChanges = ({ children }) => {
     checkout_list: '/checkout',
     business: '/store/:store',
     business_slug: '/:store',
-    forgot_password: '/password/forgot'
+    forgot_password: '/password/forgot',
+    reset_password: '/password/reset/:code/:random'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

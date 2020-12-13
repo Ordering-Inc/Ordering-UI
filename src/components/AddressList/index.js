@@ -33,7 +33,6 @@ const AddressListUI = (props) => {
     handleDelete,
     setAddressList,
     handleSetDefault,
-    onClosePopover,
     popover,
     isProductForm
   } = props
@@ -42,21 +41,30 @@ const AddressListUI = (props) => {
   const [orderState] = useOrder()
 
   const [curAddress, setCurAddress] = useState(false)
-  const [addressOpen, setAddessOpen] = useState(false)
+  const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
 
+  const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
+    (address, i, self) =>
+      i === self.findIndex(obj => (
+        address.address === obj.address &&
+        address.address_notes === obj.address_notes &&
+        address.zipcode === obj.zipcode &&
+        address.internal_number === obj.internal_number
+      )))) || []
+
   const openAddress = (address) => {
     setCurAddress(address)
-    setAddessOpen(true)
+    setAddressOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
-    scrollTo(container, 0, 500)
+    container && scrollTo(container, 0, 500)
   }
 
   const handleSaveAddress = (address) => {
     let found = false
     const addresses = addressList.addresses.map(_address => {
-      if (_address.id === address.id) {
+      if (_address?.id === address?.id) {
         Object.assign(_address, address)
         found = true
       } else if (address.default) {
@@ -71,12 +79,12 @@ const AddressListUI = (props) => {
       ...addressList,
       addresses
     })
-    setAddessOpen(false)
+    setAddressOpen(false)
   }
 
   const handleSetAddress = (address) => {
+    if (address.id === orderState?.options?.address_id) return
     handleSetDefault(address)
-    onClosePopover && onClosePopover()
   }
 
   const handleDeleteClick = (address) => {
@@ -90,13 +98,33 @@ const AddressListUI = (props) => {
     })
   }
 
+  const checkAddress = (address) => {
+    if (!orderState?.options?.address) return true
+
+    const props = ['address', 'address_notes', 'zipcode', 'location', 'internal_number']
+    const values = []
+    props.forEach(prop => {
+      if (address[prop]) {
+        if (prop === 'location') {
+          values.push(address[prop].lat === orderState?.options?.address[prop]?.lat &&
+            address[prop].lng === orderState?.options?.address[prop]?.lng)
+        } else {
+          values.push(address[prop] === orderState?.options?.address[prop])
+        }
+      } else {
+        values.push(orderState?.options?.address[prop] === null || orderState?.options?.address[prop] === '')
+      }
+    })
+    return values.every(value => value)
+  }
+
   /**
    * Close modals and alerts
    */
   useEffect(() => {
     return () => {
       setConfirm({ ...confirm, open: false })
-      setAddessOpen(false)
+      setAddressOpen(false)
     }
   }, [])
 
@@ -120,7 +148,7 @@ const AddressListUI = (props) => {
             addressesList={addressList?.addresses}
             useValidationFileds
             address={curAddress}
-            onCancel={() => setAddessOpen(false)}
+            onCancel={() => setAddressOpen(false)}
             onSaveAddress={handleSaveAddress}
           />
         )
@@ -130,26 +158,26 @@ const AddressListUI = (props) => {
           <Modal
             title={t('ADDRESS', 'Address')}
             open={!popover && addressOpen}
-            onClose={() => setAddessOpen(false)}
+            onClose={() => setAddressOpen(false)}
           >
             <AddressForm
               addressesList={addressList?.addresses}
               useValidationFileds
               address={curAddress}
-              onCancel={() => setAddessOpen(false)}
+              onCancel={() => setAddressOpen(false)}
               onSaveAddress={handleSaveAddress}
             />
           </Modal>
         )
       }
 
-      {!addressList.loading && !addressList.error && addressList?.addresses?.length > 0 && (
+      {!addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && addressList?.addresses?.length > 0 && (
         <AddressListUl>
-          {addressList.addresses.map(address => (
-            <AddressItem key={address.id}>
+          {uniqueAddressesList.map(address => (
+            <AddressItem key={address?.id}>
               <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                 <span className='radio'>
-                  {address.address === orderState?.options?.address?.address ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
+                  {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
                 </span>
                 <div className='address'>
                   <span>{address.address}</span>
@@ -183,7 +211,7 @@ const AddressListUI = (props) => {
           )))
       )}
 
-      {addressList.loading && !isProductForm && (
+      {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && (
         <AddressListUl>
           <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
         </AddressListUl>

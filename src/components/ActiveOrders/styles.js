@@ -28,6 +28,7 @@ export const Price = styled.div`
   text-align: end;
   white-space: nowrap;
   text-overflow: ellipsis;
+  width: 35%;
   h2 {
     font-size: 14px;
     margin-block-end: 1em;
@@ -38,12 +39,8 @@ export const Price = styled.div`
     margin-block-start: 1em;
     color: #ff9300;
     font-size: 0.8em;
-  }
-
-  @media (min-width: 768px){
-    p{
-      font-size: 1em;
-    }
+    overflow:hidden;
+    text-overflow: ellipsis;
   }
 `
 

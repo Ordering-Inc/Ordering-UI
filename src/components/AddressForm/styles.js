@@ -7,8 +7,20 @@ export const FormActions = styled.div`
   justify-content: space-between;
   width: 100%;
   button {
-    width: 47%;
     height: 45px;
+    flex: 1;
+
+    &:last-child#submit-btn {
+      margin-left: 10px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    button {
+      &:last-child#submit-btn {
+        margin-left: 25px;
+      }
+    }
   }
 `
 
@@ -41,25 +53,6 @@ export const FormControl = styled.form`
 
   textarea {
     width: 100%;
-    font-size: 16px;
-    padding: 10px;
-    border: 1px solid #DBDCDB;
-    outline: none;
-    color: #010300;
-    resize: none;
-    border-radius: 16px;
-
-    &:focus {
-      border-color: ${() => darken(0.07, '#CCC')};
-    }
-    
-    &::placeholder,
-    &::-webkit-input-placeholder {
-      color: #CBCBCB;
-    }
-    &:-ms-input-placeholder {
-      color: #CBCBCB;
-    }
   }
 
   .input-autocomplete {
@@ -73,45 +66,16 @@ export const FormControl = styled.form`
     ::placeholder {
       color: #DBDCDB;
     }
-    
+
     &:-ms-input-placeholder {
       color: #DBDCDB;
     }
-    
+
     &::-ms-input-placeholder { /* Microsoft Edge */
       color: #DBDCDB;
     }
     &:focus {
       border-color: ${() => darken(0.07, '#CCC')};
-    }
-  }
-
-  .google-control {
-    button:nth-child(2) {
-      position: absolute;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #FFF;
-      padding: 0;
-      width: 43px;
-      height: 43px;
-      line-height: 34px;
-      text-align: center;
-      border-radius: 50%;
-      border-style: solid;
-      border-width: 1px;
-      border-color: ${props => props.theme.colors.primary};
-      outline: none;
-      ${props => props.theme?.rtl && css`
-        left: 0;
-        right: initial; 
-      `}
-      svg {
-        color: ${props => props.theme.colors.primary};
-        font-size: 20px;
-      }
     }
   }
 
@@ -204,7 +168,7 @@ export const WrapperMap = styled.div`
 
 export const ShowMap = styled.p`
   text-align: center;
-  color: ${props => props.theme.colors.primary};
+  color: #000;
   width: 100%;
   font-weight: 600;
   cursor: pointer

@@ -61,6 +61,7 @@ const OrderDetailsUI = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
+  const [isReviewed, setIsReviewed] = useState(false)
 
   const { order, loading, header } = props.order
 
@@ -289,7 +290,7 @@ const OrderDetailsUI = (props) => {
               parseInt(order?.status) === 10 ||
               parseInt(order?.status) === 11 ||
               parseInt(order?.status) === 12
-            ) && !order.review && (
+            ) && !order.review && !isReviewed && (
               <ReviewsAction>
                 <Button color='primary' onClick={() => setOpenReview(true)}>
                   {t('REVIEW_ORDER', 'Review your Order')}
@@ -357,7 +358,7 @@ const OrderDetailsUI = (props) => {
           onClose={() => setOpenReview(false)}
           title={order ? `${t('WRITE_A_REVIEW', 'Write a Review')} #${order?.id}` : t('LOADING', 'Loading...')}
         >
-          <ReviewOrder order={order} />
+          <ReviewOrder order={order} closeReviewOrder={() => setOpenReview(false)} setIsReviewed={setIsReviewed} />
         </Modal>
       )}
     </Container>
