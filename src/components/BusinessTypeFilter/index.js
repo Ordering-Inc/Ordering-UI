@@ -32,14 +32,27 @@ const BusinessTypeFilterUI = (props) => {
             <Tab className='category' active={type.value === currentTypeSelected} key={type.value}>
               {!type.value || i > (images.length - 1) ? (
                 <ImageContainer active={type.value === currentTypeSelected} load={load}>
-                  <img src={images[0].image} alt='all' onLoad={() => setLoad(true)} onClick={() => handleChangeBusinessType(type.value)} />
+                  <img
+                    src={images[0].image}
+                    alt='all'
+                    onLoad={() => setLoad(true)}
+                    onClick={() => handleChangeBusinessType(type.value)}
+                    width='150px'
+                    height='150px'
+                  />
                 </ImageContainer>)
                 : ''}
               {images.map(image => (
                 <React.Fragment key={image.value}>
                   {image.value === type.value ? (
                     <ImageContainer active={type.value === currentTypeSelected} load={load}>
-                      <img src={image.image} alt={type.value} onClick={() => handleChangeBusinessType(type.value)} />
+                      <img
+                        src={image.image}
+                        alt={type.value}
+                        onClick={() => handleChangeBusinessType(type.value)}
+                        width='150px'
+                        height='150px'
+                      />
                     </ImageContainer>)
                     : ''}
                 </React.Fragment>

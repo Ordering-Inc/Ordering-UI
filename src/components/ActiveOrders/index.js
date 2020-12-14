@@ -28,19 +28,19 @@ export const ActiveOrders = (props) => {
   const [{ parsePrice }] = useUtils()
 
   return (
-    <OrdersContainer activeOrders>
+    <OrdersContainer activeOrders ordersLength={orders?.length <= 1}>
       <Tabs>
-        <AutoScroll>
+        <AutoScroll special>
           {orders.map(order => (
             <Card key={order.id}>
               <Map>
-                <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' />
+                <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' width='400px' height='100px' />
               </Map>
               <Content>
                 <Logo>
-                  <img src={order.business?.logo} alt='business-logo' />
+                  <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
                 </Logo>
-                <BusinessInformation>
+                <BusinessInformation activeOrders>
                   <h2>{order.business.name}</h2>
                   <p>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
                   <p>{order.created_at}</p>
