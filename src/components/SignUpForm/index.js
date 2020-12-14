@@ -61,8 +61,6 @@ const SignUpFormUI = (props) => {
     })
   }
 
-  console.log({ configs })
-
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
@@ -143,7 +141,7 @@ const SignUpFormUI = (props) => {
   }
 
   const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
-  console.log(Object.keys(configs).length)
+
   return (
     <SignUpContainer isPopup={isPopup}>
       <HeroSide>
