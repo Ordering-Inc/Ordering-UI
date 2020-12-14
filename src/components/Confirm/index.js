@@ -49,7 +49,7 @@ const ConfirmUI = (props) => {
         {content && typeof content === 'object' && Array.isArray(content) && (
           <ul>
             {content.map((item, i) => (
-              <li key={i}>{item}</li>
+              <li key={i}>{t(item)}</li>
             ))}
           </ul>
         )}
