@@ -7,7 +7,7 @@ import { OrdersOption } from '../OrdersOption'
 export const MyOrders = () => {
   return (
     <>
-      <ProfileOptions value='My Orders' />
+      <ProfileOptions value='orders' />
       <Container>
         <OrdersOption activeOrders />
         <OrdersOption />

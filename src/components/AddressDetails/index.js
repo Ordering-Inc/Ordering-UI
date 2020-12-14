@@ -59,6 +59,7 @@ const AddressDetailsUI = (props) => {
       <Modal
         title={t('ADDRESSES', 'Addresses')}
         open={openModal}
+        width='70%'
         onClose={() => setOpenModal(false)}
         onCancel={() => setOpenModal(false)}
         onAccept={() => handleFindBusinesses()}
