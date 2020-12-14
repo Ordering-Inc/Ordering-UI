@@ -54,7 +54,7 @@ const UpsellingPageUI = (props) => {
                       !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
                         <Item key={product.id}>
                           <Image>
-                            <img src={product.images} alt={`product-${i}`} />
+                            <img src={product.images} alt={`product-${i}`} width='150px' height='84px' />
                           </Image>
                           <Details>
                             <div>

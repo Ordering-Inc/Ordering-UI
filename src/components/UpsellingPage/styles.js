@@ -57,9 +57,11 @@ export const Item = styled.div`
 
 export const Image = styled.div`
   width: 100%;
-  > img{
+  img{
     width: 100%;
+    height: auto;
     border-radius: 16px;
+    aspect-ratio: attr(width) / attr(height)
   }
 `
 

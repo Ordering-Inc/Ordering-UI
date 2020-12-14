@@ -34,11 +34,11 @@ export const ActiveOrders = (props) => {
           {orders.map(order => (
             <Card key={order.id}>
               <Map>
-                <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' />
+                <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' width='400px' height='100px' />
               </Map>
               <Content>
                 <Logo>
-                  <img src={order.business?.logo} alt='business-logo' />
+                  <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
                 </Logo>
                 <BusinessInformation activeOrders>
                   <h2>{order.business.name}</h2>
