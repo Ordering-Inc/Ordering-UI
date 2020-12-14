@@ -16,41 +16,53 @@ export const WrapperContainer = styled.div`
 export const Header = styled.div`
   width: 100%;
   position: relative;
+  min-height: 200px;
 
-  @media (min-width: 769px) {
-    height: 340px;
+  @media (min-width: 768px) {
+    min-height: 340px;
   }
 `
 
 export const HeaderImg = styled.div`
   img {
-    object-fit: cover;
-    width: 100%;
+    display: none;
 
-    @media (min-width: 769px) {
+    @media (min-width: 678px) {
+      display: block;
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+      border-radius: 10px;
+
+      ${props => props.theme?.rtl && css`
+        transform: scaleX(-1);
+      `}
+    }
+
+    @media (min-width: 768px) {
       height: 340px;
     }
   }
 `
 
 export const HeaderInfo = styled.div`
-  position: absolute;
-  top: 0;
   background-color: ${props => props.theme.colors.primary};
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
   padding: 20px;
   border-radius: 7px;
   min-height: 140px;
 
   @media (min-width: 678px) {
+    position: absolute;
+    top: 0;
     width: 50%;
-    border-radius: 7px 0 0 7px;
+    border-radius: ${props => props.theme?.rtl ? '0 7px 7px 0' : '7px 0 0 7px'};
+    min-height: 160px;
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     min-height: 300px;
   }
 `
@@ -433,7 +445,7 @@ export const OrderBill = styled.div`
   flex-direction: column;
   table {
     width: 90%;
-    font-size: 18px;
+    font-size: 15px;
     tr td:nth-child(2) {
       text-align: right;
       ${props => props.theme?.rtl && css`
@@ -456,6 +468,12 @@ export const OrderBill = styled.div`
         color: ${props => props.theme.colors.primary};
         padding-top: 10px;
       }
+    }
+  }
+
+  @media (min-width: 678px) {
+    table {
+      font-size: 18px;
     }
   }
 `
