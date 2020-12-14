@@ -87,25 +87,27 @@ export const Header = (props) => {
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
-          {onlineStatus && windowSize.width > 820 && (
-            <Menu className='left-header'>
-              <OrderTypeSelectorHeader />
-              <MomentPopover
-                open={openPopover.moment}
-                onClick={() => handleTogglePopover('moment')}
-                onClose={() => handleClosePopover('moment')}
-                isHome={isHome}
-              />
-              <AddressesPopover
-                auth={auth}
-                addressState={orderState?.options?.address}
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-                isHome={isHome}
-              />
-            </Menu>
-          )}
+          <Menu className='left-header'>
+            <OrderTypeSelectorHeader />
+            {onlineStatus && windowSize.width > 820 && (
+              <>
+                <MomentPopover
+                  open={openPopover.moment}
+                  onClick={() => handleTogglePopover('moment')}
+                  onClose={() => handleClosePopover('moment')}
+                  isHome={isHome}
+                />
+                <AddressesPopover
+                  auth={auth}
+                  addressState={orderState?.options?.address}
+                  open={openPopover.addresses}
+                  onClick={() => handleTogglePopover('addresses')}
+                  onClose={() => handleClosePopover('addresses')}
+                  isHome={isHome}
+                />
+              </>
+            )}
+          </Menu>
         </LeftHeader>
         {onlineStatus && (
           <RightHeader>
@@ -148,6 +150,7 @@ export const Header = (props) => {
                 )
               }
               <LanguageSelector />
+
             </Menu>
           </RightHeader>
         )}

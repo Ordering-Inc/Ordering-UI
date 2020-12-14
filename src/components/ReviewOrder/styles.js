@@ -48,3 +48,8 @@ export const Send = styled.div`
   width: 80%;
   margin: 20px 0;
 `
+
+export const InvisibleInput = styled.input`
+  opacity: 0;
+  position: fixed;
+`

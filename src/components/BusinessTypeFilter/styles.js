@@ -30,6 +30,7 @@ export const TypeContainer = styled.div`
 
 export const ImageContainer = styled.div`
   width: 150px;
+  height: 160px;
     img{
       border-radius: 50%;
       width: 100%;
