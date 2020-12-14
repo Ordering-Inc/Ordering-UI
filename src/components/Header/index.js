@@ -14,6 +14,7 @@ import {
 } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
+import { capitalize } from '../../utils'
 
 import { LanguageSelector } from '../LanguageSelector'
 import { AddressesPopover } from '../AddressesPopover'
@@ -24,7 +25,7 @@ import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
 import { MomentContent } from '../MomentContent'
-import { AddressContent } from '../AddressContent'
+import { AddressList } from '../AddressList'
 import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 
@@ -49,7 +50,6 @@ export const Header = (props) => {
     setModalSelected(opt)
     setModalIsOpen(true)
   }
-  const closeModal = () => setModalIsOpen(false)
 
   const handleTogglePopover = (type) => {
     setOpenPopover({
@@ -83,11 +83,11 @@ export const Header = (props) => {
       <InnerHeader>
         <LeftHeader>
           <SidebarMenu auth={auth} />
-          <LogoHeader onClick={() => handleGoToPage({ page: orderState.options?.address?.location ? 'search' : 'home' })}>
+          <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location ? 'search' : 'home' })}>
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
-          {onlineStatus && (
+          {onlineStatus && windowSize.width > 820 && (
             <Menu className='left-header'>
               <OrderTypeSelectorHeader />
               <MomentPopover
@@ -174,13 +174,13 @@ export const Header = (props) => {
           <SubMenu>
             <HeaderOption
               variant='address'
-              addressState={orderState.options?.address?.address?.split(',')?.[0]}
+              addressState={orderState?.options?.address?.address?.split(',')?.[0]}
               onClick={(variant) => openModal(variant)}
               isHome={isHome}
             />
             <HeaderOption
               variant='moment'
-              momentState={orderState.options?.moment}
+              momentState={orderState?.options?.moment}
               onClick={(variant) => openModal(variant)}
               isHome={isHome}
             />
@@ -189,23 +189,24 @@ export const Header = (props) => {
       )}
       {modalIsOpen && (
         <Modal
+          title={t(modalSelected.toUpperCase(), capitalize(modalSelected))}
           open={modalIsOpen}
-          onClose={() => closeModal()}
+          onClose={() => setModalIsOpen(false)}
           width='70%'
-          padding='0'
+          padding={modalSelected === 'address' ? '20px' : '5px'}
+          onCancel={modalSelected === 'address' ? () => setModalIsOpen(false) : null}
+          onAccept={modalSelected === 'address' ? () => setModalIsOpen(false) : null}
         >
           {modalSelected === 'cart' && (
             <CartContent
               carts={cartsWithProducts}
               isOrderStateCarts={!!orderState.carts}
-              onClose={closeModal}
+              onClose={() => setModalIsOpen(false)}
             />
           )}
           {modalSelected === 'address' && (
-            <AddressContent
-              auth={auth}
-              addressState={orderState?.options?.address}
-              onClose={closeModal}
+            <AddressList
+              changeOrderAddressWithDefault
             />
           )}
           {modalSelected === 'moment' && (

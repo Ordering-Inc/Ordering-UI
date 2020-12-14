@@ -79,7 +79,7 @@ export const BusinessInformationUI = (props) => {
   return (
     <BusinessInformationContainer>
       <ModalIcon>
-        <MdClose onClick={() => onClose()} />
+        <MdClose onClick={() => onClose(false)} />
       </ModalIcon>
       <BusinessHeader>
         <img src={business.header} alt='business-image' />
@@ -174,9 +174,9 @@ export const BusinessInformationUI = (props) => {
               <>
                 <SectionTitle>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</SectionTitle>
                 <ScheduleSection>
-                  <ScheduleContainer id='modal-container'>
-                    <Tabs id='schedules'>
-                      <AutoScroll container='modal-container' categories='schedules' modal>
+                  <ScheduleContainer>
+                    <Tabs>
+                      <AutoScroll modal>
                         {businessSchedule.map((schedule, i) => (
                           <ScheduleBlock key={i}>
                             <h4>{daysOfWeek[i]}</h4>
@@ -251,9 +251,22 @@ export const BusinessInformationUI = (props) => {
 }
 
 export const BusinessInformation = (props) => {
+  const googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: true,
+    fullscreenControl: true,
+    mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  }
+
   const BusinessInformationProps = {
     ...props,
-    UIComponent: BusinessInformationUI
+    UIComponent: BusinessInformationUI,
+    googleMapsControls
   }
   return <BusinessInformationController {...BusinessInformationProps} />
 }

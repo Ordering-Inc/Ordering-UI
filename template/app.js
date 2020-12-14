@@ -159,7 +159,7 @@ export const App = () => {
                         : <Redirect to='/' />
                     }
                   </Route>
-                  <Route exact path='/password/reset'>
+                  <Route exact path='/password/reset/:code/:random'>
                     {
                       !auth ? (
                         <ResetPassword />

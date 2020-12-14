@@ -67,6 +67,7 @@ const BusinessProductsListingUI = (props) => {
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [events] = useEvent()
   const [{ auth }] = useSession()
   const location = useLocation()
@@ -78,6 +79,10 @@ const BusinessProductsListingUI = (props) => {
     { value: 'rank', content: t('RANK', 'Rank'), showOnSelected: t('RANK', 'Rank') },
     { value: 'a-z', content: t('A_to_Z', 'A-Z'), showOnSelected: t('A_to_Z', 'A-Z') }
   ]
+
+  const handler = () => {
+    setOpenBusinessInformation(true)
+  }
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -145,7 +150,6 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = openProduct ? 'hidden' : 'auto'
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
@@ -165,6 +169,8 @@ const BusinessProductsListingUI = (props) => {
             <>
               <BusinessBasicInformation
                 businessState={businessState}
+                setOpenBusinessInformation={setOpenBusinessInformation}
+                openBusinessInformation={openBusinessInformation}
               />
               {(categoryState.products.length !== 0 || searchValue) && (
                 <WrapperSearch>
@@ -183,18 +189,19 @@ const BusinessProductsListingUI = (props) => {
                   />
                 </WrapperSearch>
               )}
-              {!(business.categories.length === 0 && !categoryId) && (
+              {!(business?.categories?.length === 0 && !categoryId) && (
                 <BusinessProductsCategories
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                   categorySelected={categorySelected}
                   onClickCategory={handleChangeCategory}
                   featured={featuredProducts}
+                  openBusinessInformation={openBusinessInformation}
                 />
               )}
 
               <WrapContent>
                 <BusinessProductsList
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                   category={categorySelected}
                   categoryState={categoryState}
                   businessId={business.id}
@@ -215,7 +222,7 @@ const BusinessProductsListingUI = (props) => {
           open={openProduct}
           closeOnBackdrop
           onClose={() => closeModalProductForm()}
-          padding='10px'
+          padding='0'
         >
 
           {productModal.loading && (
@@ -251,10 +258,13 @@ const BusinessProductsListingUI = (props) => {
             <BusinessBasicInformation
               businessState={{ business: {}, loading: true }}
               isSkeleton
+              handler={handler}
+              openBusinessInformation={openBusinessInformation}
             />
             <BusinessProductsCategories
               categories={[]}
               isSkeleton
+              openBusinessInformation={openBusinessInformation}
             />
             <WrapContent>
               <BusinessProductsList

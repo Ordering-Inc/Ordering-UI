@@ -2,22 +2,22 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import IosArrowForward from '@meronex/icons/ios/IosArrowForward'
 import IosArrowBack from '@meronex/icons/ios/IosArrowBack'
-import { DivContainer } from './styles'
+import { AutoscrollContainer } from './styles'
 
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, categories, container, modal }) => {
+export const AutoScroll = ({ children, modal, special }) => {
   const { width } = useWindowSize()
-  const [categoriesElement, setCategoriesElement] = useState([])
+  const [parentElement, setParentElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
   const [theme] = useTheme()
 
   useLayoutEffect(() => {
-    const containerElementListener = document?.getElementById(container)
+    const element = document?.getElementById('autoscroll')?.parentNode
+    const containerElementListener = element?.parentNode
       ?.addEventListener('scroll', handleScroll)
-    const containerElement = document?.getElementById(container)
-    const element = document?.getElementById(categories)
-    setCategoriesElement(element)
+    const containerElement = element?.parentNode
+    setParentElement(element)
     setContainerElement(containerElement)
 
     return () => {
@@ -39,7 +39,7 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
         } else {
           botonRight.classList.remove('hidden')
         }
-        if ((containerElement?.scrollLeft * -1) > categoriesElement?.scrollWidth - containerElement?.offsetWidth - 20) {
+        if ((containerElement?.scrollLeft * -1) > parentElement?.scrollWidth - containerElement?.offsetWidth - 20) {
           botonLeft.classList.add('hidden')
         } else {
           botonLeft.classList.remove('hidden')
@@ -50,7 +50,7 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
         } else {
           botonLeft.classList.remove('hidden')
         }
-        if (containerElement?.scrollLeft > categoriesElement?.scrollWidth - containerElement?.offsetWidth - 20) {
+        if (containerElement?.scrollLeft > parentElement?.scrollWidth - containerElement?.offsetWidth - 20) {
           botonRight.classList.add('hidden')
         } else {
           botonRight.classList.remove('hidden')
@@ -63,27 +63,28 @@ export const AutoScroll = ({ children, categories, container, modal }) => {
     if (left) {
       containerElement.scrollBy({
         top: 0,
-        left: (((-categoriesElement.offsetWidth / 12) > -200) ? -200 : -categoriesElement.offsetWidth / 12),
+        left: (((-parentElement.offsetWidth / 10) > -200) ? -200 : -parentElement.offsetWidth / 10),
         behavior: 'smooth'
       })
     } else {
       containerElement.scrollBy({
         top: 0,
-        left: (((+categoriesElement.offsetWidth / 12) < 200) ? 200 : +categoriesElement.offsetWidth / 12),
+        left: (((+parentElement.offsetWidth / 10) < 200) ? 200 : +parentElement.offsetWidth / 10),
         behavior: 'smooth'
       })
     }
   }
 
   return (
-    <DivContainer modal={modal}>
+    <AutoscrollContainer modal={modal} id='autoscroll'>
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        !special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        width < categoriesElement.offsetWidth + 50 ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        !special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
-    </DivContainer>
+    </AutoscrollContainer>
+
   )
 }

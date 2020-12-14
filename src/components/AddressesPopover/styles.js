@@ -37,3 +37,18 @@ export const PopoverArrow = styled.div`
   border-bottom: 8px solid #FFF;
   top: -8px;
 `
+
+export const Container = styled.div`
+  padding: 20px 10px;
+
+  @media (min-width: 769px) {
+    padding: 0px;
+  }
+`
+
+export const Title = styled.h1`
+  margin: 0px;
+  font-size: 30px;
+  font-weight: 600;
+  padding: 0px 10px 15px;
+`
