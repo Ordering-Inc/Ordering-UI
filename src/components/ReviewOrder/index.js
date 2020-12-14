@@ -80,6 +80,7 @@ const ReviewOrderUI = (props) => {
       </label>
     ))
   )
+
   return (
     <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
       <Reviews>
@@ -91,7 +92,6 @@ const ReviewOrderUI = (props) => {
                 <InvisibleInput
                   type='text'
                   name={key}
-                  defaultValue={stars[key]}
                   value={stars[key]}
                   ref={register({
                     validate: value => value === '0' ? t('CATEGORY_ATLEAST_ONE', `${capitalize(key)} must be at least one point`).replace('CATEGORY', key.toUpperCase()) : null
@@ -104,25 +104,25 @@ const ReviewOrderUI = (props) => {
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('QUALITY', 'Quality of Product')}:</p>
             <Stars>
-              <StarsComponent name='Quality' />
+              <StarsComponent name='quality' />
             </Stars>
           </Category>
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('PUNCTUALITY', 'Punctuality')}:</p>
             <Stars>
-              <StarsComponent name='Punctiality' />
+              <StarsComponent name='punctiality' />
             </Stars>
           </Category>
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('SERVICE', 'Service')}:</p>
             <Stars>
-              <StarsComponent name='Service' />
+              <StarsComponent name='service' />
             </Stars>
           </Category>
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('PRODUCT_PACKAGING', 'Product Packaging')}:</p>
             <Stars>
-              <StarsComponent name='Packaging' />
+              <StarsComponent name='packaging' />
             </Stars>
           </Category>
         </Categories>
@@ -131,7 +131,7 @@ const ReviewOrderUI = (props) => {
         <h2>{t('COMMENTS', 'Comments')}:</h2>
         <Input
           placeholder={t('COMMENTS', 'Comments')}
-          name='Comments'
+          name='comments'
           onChange={(e) => handleChangeInput(e)}
           ref={register({
             required: t('FIELD_COMMENT_REQUIRED', 'The field comments is required')
