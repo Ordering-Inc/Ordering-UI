@@ -9,6 +9,7 @@ import AiFillStar from '@meronex/icons/ai/AiFillStar'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { ThemeContext } from 'styled-components'
+import { capitalize } from '../../utils'
 
 const ReviewOrderUI = (props) => {
   const { stars, handleChangeInput, handleChangeRating, handleSendReview, formState, closeReviewOrder, setIsReviewed } = props
@@ -93,7 +94,7 @@ const ReviewOrderUI = (props) => {
                   defaultValue={stars[key]}
                   value={stars[key]}
                   ref={register({
-                    validate: value => value === '0' ? t('CATEGORY_ATLEAST_ONE', `${key} must be at least one point`).replace('CATEGORY', key.toUpperCase()) : null
+                    validate: value => value === '0' ? t('CATEGORY_ATLEAST_ONE', `${capitalize(key)} must be at least one point`).replace('CATEGORY', key.toUpperCase()) : null
                   })}
                   disabled
                 />
