@@ -13,36 +13,29 @@ export const WrapperContainer = styled.div`
   margin: auto;
 `
 
-const HeaderStyled = styled.div`
-  display: flex;
+export const Header = styled.div`
   width: 100%;
-  height: 100%;
-  box-sizing: border-box;
   position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  border-radius: 7px;
-  background-position: bottom;
 
-
-  @media (min-width: 768px) {
-    background-position: initial;
+  @media (min-width: 769px) {
+    height: 340px;
   }
 `
 
-export const Header = (props) => {
-  const style = {}
-  style.backgroundImage = `url(${props.businessHeader})`
+export const HeaderImg = styled.div`
+  img {
+    object-fit: cover;
+    width: 100%;
 
-  return (
-    <HeaderStyled style={style}>
-      {props.children}
-    </HeaderStyled>
-  )
-}
+    @media (min-width: 769px) {
+      height: 340px;
+    }
+  }
+`
 
 export const HeaderInfo = styled.div`
+  position: absolute;
+  top: 0;
   background-color: ${props => props.theme.colors.primary};
   display: flex;
   flex-direction: column;

@@ -45,7 +45,8 @@ import {
   ReviewsAction,
   FootActions,
   SkeletonBlockWrapp,
-  SkeletonBlock
+  SkeletonBlock,
+  HeaderImg
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -117,7 +118,10 @@ const OrderDetailsUI = (props) => {
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
           <Content className='order-content'>
-            <Header businessHeader={header?.result?.header}>
+            <Header>
+              <HeaderImg>
+                <img src={header?.result?.header} alt='business-header' />
+              </HeaderImg>
               <HeaderInfo className='order-header'>
                 <HeaderText column>
                   <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
