@@ -48,6 +48,7 @@ const easeInOutQuad = (t, b, c, d) => {
  * @param {*} duration = time to animation
  */
 export const scrollTo = (element, to, duration) => {
+  if (!element) return
   const start = element.scrollTop
   const change = to - start
   let currentTime = 0

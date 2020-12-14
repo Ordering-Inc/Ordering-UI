@@ -114,7 +114,7 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleScroll = useCallback(() => {
-    const innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL
+    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
     if (badScrollPosition || categoryState.loading || !hasMore) return
@@ -185,7 +185,7 @@ const BusinessProductsListingUI = (props) => {
                     notReload
                     options={sortByOptions}
                     defaultValue={sortByValue}
-                    onChange={(val) => handleChangeSortBy(val)}
+                    onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
                   />
                 </WrapperSearch>
               )}

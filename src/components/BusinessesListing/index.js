@@ -44,7 +44,7 @@ const BusinessesListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleScroll = useCallback(() => {
-    const innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL
+    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (badScrollPosition || businessesList.loading || !hasMore) return
