@@ -106,8 +106,10 @@ export const ProductInfo = styled.div`
 `
 
 export const ProductFormTitle = styled.div`
-  width: calc(100% - 25px);
   overflow-wrap: break-word;
+  @media (min-width: 1201px) {
+    width: calc(100% - 25px);
+  }
 `
 
 export const ProductEdition = styled.div``
