@@ -273,9 +273,13 @@ export const MessagesUI = (props) => {
                         </BubbleConsole>
                       ) : (
                         <BubbleConsole>
-                          <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                          {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
-                          {message.comment && (<><br /> {message.comment.length}</>)}
+                          {message.change.new ? (
+                            <>
+                              <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                              {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
+                              {message.comment && (<><br /> {message.comment.length}</>)}
+                            </>
+                          ) : <>{t('DRIVER_UNASSIGNED', 'Driver unassigned')}</>}
                           <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                         </BubbleConsole>
                       )}
@@ -372,7 +376,7 @@ export const MessagesUI = (props) => {
             <Button
               color='primary'
               type='submit'
-              disabled={sendMessage.loading || (message === '' && !image)}
+              disabled={sendMessage.loading || (message === '' && !image) || messages.loading}
               ref={buttonRef}
             >
               <IosSend />

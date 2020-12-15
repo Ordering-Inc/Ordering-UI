@@ -189,7 +189,7 @@ export const SectionTitle = styled.h3`
 
 export const Map = styled.div`
   width: 100%;
-  height: 20vh;
+  height: 50vh;
   > div {
     position: relative !important;
     width: 100% !important;
@@ -220,6 +220,7 @@ export const ScheduleBlock = styled.div`
   padding: 0px 15px;
   border-right: 1px solid #CCC;
   width: 10%;
+  min-width: 80px;
   ${props => props.theme?.rtl && css`
     border-left: 1px solid #CCC;
     border-right: none;
@@ -237,6 +238,9 @@ export const ScheduleBlock = styled.div`
 
   &:last-child {
     border: 0;
+  }
+  @media(min-width: 768px){
+    min-width: initial;
   }
 
   @media(min-width: 480px){

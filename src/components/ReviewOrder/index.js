@@ -2,16 +2,17 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { OrderReview as ReviewOrderController, useLanguage } from 'ordering-components'
-import { ReviewOrderContainer, Reviews, Categories, Category, Stars, Comments, Send } from './styles'
+import { ReviewOrderContainer, Reviews, Categories, Category, Stars, Comments, Send, InvisibleInput } from './styles'
 import { Alert } from '../Confirm'
 import AiFillStar from '@meronex/icons/ai/AiFillStar'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { ThemeContext } from 'styled-components'
+import { capitalize } from '../../utils'
 
 const ReviewOrderUI = (props) => {
-  const { stars, handleChangeInput, handleChangeRating, handleSendReview, formState } = props
+  const { stars, handleChangeInput, handleChangeRating, handleSendReview, formState, closeReviewOrder, setIsReviewed } = props
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [hover, setHover] = useState(stars)
@@ -33,6 +34,7 @@ const ReviewOrderUI = (props) => {
         title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
         content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
       })
+      setIsReviewed(true)
     }
   }, [formState])
 
@@ -56,6 +58,9 @@ const ReviewOrderUI = (props) => {
       open: false,
       content: []
     })
+    if (!formState.loading && !formState.result?.error && alertState.success) {
+      closeReviewOrder()
+    }
   }
 
   const StarsComponent = ({ name }) => (
@@ -67,15 +72,35 @@ const ReviewOrderUI = (props) => {
           value={i + 1}
           onClick={(e) => handleChangeRating(e)}
         />
-        <AiFillStar color={(i + 1) <= (hover[name] || stars[name]) ? colors.primary : 'gray'} size={25} onMouseEnter={() => setHover({ [name]: (i + 1) })} />
+        <AiFillStar
+          color={(i + 1) <= (hover[name] || stars[name]) ? colors.primary : 'gray'}
+          size={25}
+          onMouseEnter={() => setHover({ [name]: (i + 1) })}
+        />
       </label>
     ))
   )
+
   return (
     <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
       <Reviews>
         <h2>{t('REVIEWS', 'Reviews')}:</h2>
         <Categories>
+          {Object.keys(stars).map(key => (
+            <React.Fragment key={key}>
+              {key !== 'Comments' && (
+                <InvisibleInput
+                  type='text'
+                  name={key}
+                  value={stars[key]}
+                  ref={register({
+                    validate: value => value === '0' ? t('CATEGORY_ATLEAST_ONE', `${capitalize(key)} must be at least one point`).replace('CATEGORY', key.toUpperCase()) : null
+                  })}
+                  disabled
+                />
+              )}
+            </React.Fragment>
+          ))}
           <Category onMouseLeave={() => setHover(stars)}>
             <p>{t('QUALITY', 'Quality of Product')}:</p>
             <Stars>
@@ -115,7 +140,13 @@ const ReviewOrderUI = (props) => {
         />
       </Comments>
       <Send>
-        <Button color='primary' type='submit'>{t('SEND_REVIEW', 'Send a Review')}</Button>
+        <Button
+          color={!formState.loading ? 'primary' : 'secondary'}
+          type='submit'
+          disabled={formState.loading}
+        >
+          {!formState.loading ? t('SEND_REVIEW', 'Send a Review') : t('LOADING', 'Loading')}
+        </Button>
       </Send>
       <Alert
         title={t('ORDER_REVIEW', 'Order Review')}

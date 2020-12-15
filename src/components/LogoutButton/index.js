@@ -17,6 +17,12 @@ const LogoutButtonUI = (props) => {
   const [, t] = useLanguage()
 
   const handleLogOutClick = () => {
+    window.FB.getLoginStatus((response) => {
+      if (response.status === 'connected') {
+        window.FB.logout()
+      }
+    })
+
     props.handleLogoutClick()
     onCustomClick && onCustomClick()
   }

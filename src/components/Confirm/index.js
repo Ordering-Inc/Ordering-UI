@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MdClose from '@meronex/icons/md/MdClose'
 import { Popup, useLanguage } from 'ordering-components'
 import {
@@ -24,6 +24,20 @@ const ConfirmUI = (props) => {
     cancelText
   } = props
   const [, t] = useLanguage()
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27 || e.keyCode === 13) {
+      onClose && onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (props.open) {
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [props.open])
+
   return (
     <PopupDialog className='popup-dialog'>
       <PopupIcon>
@@ -35,7 +49,7 @@ const ConfirmUI = (props) => {
         {content && typeof content === 'object' && Array.isArray(content) && (
           <ul>
             {content.map((item, i) => (
-              <li key={i}>{item}</li>
+              <li key={i}>{t(item)}</li>
             ))}
           </ul>
         )}

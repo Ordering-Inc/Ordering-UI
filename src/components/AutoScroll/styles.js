@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components'
 
 export const AutoscrollContainer = styled.span`
-  display: ${props => props.modal ? '-webkit-box' : 'inherit'};
+  display: ${props => props.modal ? 'flex' : 'inherit'};
+  width: ${props => props.modal ? '300vw' : 'initial'};
   
   svg{
     background: #D9D9D9;
     display: inline-block;
     border-radius: 50%;
     width: 20px;
+    min-width: 20px;
     height: 20px;
     align-self: center;
     top: ${props => props.modal ? '35%' : '0'};

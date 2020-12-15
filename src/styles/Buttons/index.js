@@ -19,7 +19,8 @@ export const Button = styled.button`
   }
 
   &:disabled {
-    opacity: 0.5
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   ${({ bgtransparent }) => bgtransparent && css`
@@ -51,6 +52,11 @@ export const Button = styled.button`
     &:active {
       color: #FFF;
       background: ${darken(0.07, '#CCC')};
+    }
+
+    &:hover {
+      background: ${darken(0.07, '#CCC')};
+      color: #FFF;
     }
   `}
 
@@ -106,6 +112,11 @@ export const Button = styled.button`
         color: ${props => props.theme.colors.primaryContrast};
         background: ${props => props.theme.colors.primary};
       }
+
+      &:hover {
+        background: ${props => darken(0.07, props.theme.colors.primary)};
+        color: #FFF;
+      }
     `}
 
     ${({ circle }) => circle && css`
@@ -160,6 +171,11 @@ export const Button = styled.button`
       &:active {
         color: ${props => props.theme.colors.secundaryContrast};
         background: ${props => darken(0.05, props.theme.colors.secundary)};
+      }
+
+      &:hover {
+        background: ${props => darken(0.07, props.theme.colors.secundary)};
+        color: #FFF;
       }
     `}
 

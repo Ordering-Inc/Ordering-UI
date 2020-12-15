@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components'
 
 export const ResetPasswordContainer = styled.div`
   width: 100%;
-  height: ${({ isPopup }) => isPopup ? '100vh' : 'auto'};
+  height: auto;
   display: flex;
   flex-direction: column;
 
   @media (min-width: 992px) {
     flex-direction: row;
     height: 100%;
-    min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
+    min-height: calc(100vh - 65px)
   }
 `
 const Side = styled.div`
@@ -17,7 +17,7 @@ const Side = styled.div`
   width: 100%;
 `
 export const HeroSide = styled(Side)`
-  height: ${({ isPopup }) => isPopup ? '50vh' : 'calc(40vh - 65px)'};
+  height: calc(40vh - 65px);
   justify-content: center;
   align-items: center;
   color: ${props => props.theme.colors.primaryContrast};
@@ -26,7 +26,7 @@ export const HeroSide = styled(Side)`
 
   @media (min-width: 992px) {
     width: 55%;
-    height: ${({ isPopup }) => isPopup ? 'auto' : 'calc(100vh - 65px)'};
+    height: calc(100vh - 65px);
   }
 `
 
@@ -65,20 +65,17 @@ export const TitleHeroSide = styled.div`
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
-  margin: auto;
-
-  img {
-    width: 200px;
-  }
+  margin-top: 30px;
 
   @media (min-width: 992px) {
+    margin: auto;
     width: 45%;
-    font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
+    font-size: 1em;
   }
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
+  width: 80%;
   display: flex;
   flex-direction: column;
 
@@ -130,7 +127,7 @@ export const RedirectLink = styled.div`
     width: calc(90% - 20px);
 
     @media (min-width: 481px) {
-      width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
+      width: calc(80% - 20px)
     }
   `}
 
@@ -143,13 +140,7 @@ export const RedirectLink = styled.div`
   }
 
   @media (min-width: 992px) {
-    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
+    font-size: 18px;
     flex-direction: row;
-  }
-
-  @media (min-width: 1200px) {
-    ${({ isPopup }) => isPopup && css`
-      font-size: 16px;
-    `};
   }
 `

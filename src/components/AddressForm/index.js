@@ -3,17 +3,20 @@ import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
 import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
 import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
-import ImCompass from '@meronex/icons/im/ImCompass'
+import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
   GoogleAutocompleteInput,
-  GoogleGpsButton,
   useLanguage,
-  GoogleMapsMap
+  GoogleMapsMap,
+  useSession,
+  useOrder
 } from 'ordering-components'
 import { Alert } from '../Confirm'
+import { GoogleGpsButton } from '../GoogleGpsButton'
 
 import {
   FormControl,
@@ -28,6 +31,13 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
+const maxLimitLocation = 500
+
+const mapErrors = {
+  ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
+  ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
+}
+
 const AddressFormUI = (props) => {
   const {
     addressesList,
@@ -40,24 +50,82 @@ const AddressFormUI = (props) => {
     onCancel,
     hanldeChangeInput,
     saveAddress,
-    handleChangePosition
+    setIsEdit
   } = props
 
+  const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors } = useForm()
+  const formMethods = useForm()
+  const [{ auth }] = useSession()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
 
-  const onSubmit = () => {
-    const isAddressAlreadyExist = (addressesList || []).some(address => (
-      address.location.lat === formState.changes.location.lat && address.location.lng === formState.changes.location.lng
-    ))
+  const isEditing = !!addressState.address?.id
+
+  const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
+
+  const [locationChange, setLocationChange] = useState(
+    addressState?.address?.id
+      ? addressState?.address?.location
+      : formState.changes?.location ?? null
+  )
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  /**
+   * Returns true when the user made no changes
+   * @param {object} address
+   */
+  const checkAddress = (address, addressToCompare) => {
+    const props = ['address', 'address_notes', 'zipcode', 'location', 'internal_number']
+    const values = []
+    props.forEach(prop => {
+      if (addressToCompare[prop]) {
+        if (prop === 'location') {
+          values.push(address[prop].lat === addressToCompare[prop].lat &&
+            address[prop].lng === addressToCompare[prop].lng)
+        } else {
+          values.push(address[prop] === addressToCompare[prop])
+        }
+      } else {
+        values.push(!address[prop])
+      }
+    })
+    return values.every(value => value)
+  }
+
+  const onSubmit = async () => {
+    if (formState?.changes?.address && !formState?.changes?.location) {
+      setAlertState({
+        open: true,
+        content: [t('ADDRESS_REQUIRE_LOCATION', 'The address needs a location, please select one of the suggested')]
+      })
+      return
+    }
+
+    setToggleMap(false)
+    const arrayList = isEditing
+      ? addressesList.filter(address => address.id !== addressState.address?.id) || []
+      : addressesList || []
+    const addressToCompare = isEditing
+      ? { ...addressState.address, ...formState.changes }
+      : formState?.changes
+
+    const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
+
     if (!isAddressAlreadyExist) {
       saveAddress()
       return
     }
+
     setAlertState({
       open: true,
       content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
@@ -89,41 +157,96 @@ const AddressFormUI = (props) => {
     })
   }
 
+  const setMapErrors = (errKey) => {
+    setAlertState({
+      open: true,
+      content: [t(errKey, mapErrors[errKey])]
+    })
+  }
+
   useEffect(() => {
+    if (!auth) {
+      setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
+      setAddressValue(formState?.changes?.address || orderState?.options?.address?.address || '')
+      inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || orderState?.options?.address[field] || ''))
+      return
+    }
+
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
+    setAddressValue(formState?.changes?.address ?? addressState.address?.address ?? '')
+    formMethods.setValue('address', formState?.changes?.address ?? addressState.address?.address ?? '')
+    if (!isEditing) {
+      inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || ''))
+      setLocationChange(formState?.changes?.location)
+    }
+
+    // Validation when user change location in edit mode
+    if (isEditing) {
+      if (formState?.changes?.location) {
+        const prevLocation = { lat: Math.trunc(locationChange.lat), lng: Math.trunc(locationChange.lng) }
+        const newLocation = { lat: Math.trunc(formState?.changes?.location?.lat), lng: Math.trunc(formState?.changes?.location?.lng) }
+        if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
+          setLocationChange(formState?.changes?.location)
+        }
+      }
+    }
   }, [formState])
 
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (isEditing) {
+      setIsEdit && setIsEdit(true)
+      setAddressValue(addressState.address?.address)
+    } else {
+      setIsEdit && setIsEdit(false)
+    }
+  }, [addressState])
+
+  useEffect(() => {
+    if (!auth) {
+      setLocationChange(orderState?.options?.address?.location ?? formState?.changes?.location ?? '')
+    }
+  }, [])
+
+  /**
+   * Form events control
+   */
+
+  useEffect(() => {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map(error => error.message)
+        content: Object.values(formMethods.errors).map(error => error.message)
       })
     }
-  }, [errors])
+  }, [formMethods.errors])
 
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
+  useEffect(() => {
+    inputNames.forEach(name => {
+      formMethods.register(name, {
+        required: isRequiredField(name)
+          ? t(`VALIDATION_ERROR_${name}_REQUIRED`, `The field ${name} is required`)
+          : null
+      })
     })
-  }
+  }, [formMethods])
 
   return (
     <div className='address-form'>
-      <FormControl onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-        {(addressState?.address?.location || formState?.changes?.location) && toggleMap && (
+      <FormControl onSubmit={formMethods.handleSubmit(onSubmit)} autoComplete='off'>
+        {locationChange && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              location={{ ...(addressState?.address?.location || formState?.changes?.location), zoom: googleMapsControls.defaultZoom }}
+              location={locationChange}
               mapControls={googleMapsControls}
-              handleChangePosition={handleChangePosition}
+              handleChangeAddressMap={handleChangeAddress}
+              setErrors={setMapErrors}
+              maxLimitLocation={maxLimitLocation}
             />
           </WrapperMap>
         )}
@@ -133,54 +256,64 @@ const AddressFormUI = (props) => {
             <GoogleAutocompleteInput
               className='input-autocomplete'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              name='address'
               placeholder={t('ADDRESS', 'Address')}
-              onChangeAddress={handleChangeAddress}
+              onChangeAddress={(e) => {
+                formMethods.setValue('address', e.address)
+                handleChangeAddress(e)
+              }}
               onKeyDown={handleAddressKeyDown}
-              defaultValue={formState.changes?.address || addressState.address?.address}
-              childRef={register({
-                required: isRequiredField('address') ? t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'Address is required') : null
-              })}
-              autoComplete='off'
+              onChange={(e) => {
+                hanldeChangeInput({ target: { name: 'address', value: e.target.value } })
+                setAddressValue(e.target.value)
+              }}
+              value={addressValue}
+              autoComplete='new-field'
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
             <GoogleGpsButton
               className='gps-button'
               apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-              onAddress={handleChangeAddress}
-              IconButton={ImCompass}
+              onAddress={(e) => {
+                formMethods.setValue('address', e.address)
+                handleChangeAddress(e)
+              }}
+              IconButton={BiCurrentLocation}
+              IconLoadingButton={CgSearchLoading}
             />}
         </AddressWrap>
-        {(addressState?.address?.location || formState?.changes?.location) && (
+        {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
           <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
         )}
         <Input
           className='internal_number'
-          name='internal_number'
           placeholder={t('INTERNAL_NUMBER', 'Internal number')}
-          ref={register}
-          defaultValue={formState.changes?.internal_number || addressState.address.internal_number}
-          onChange={hanldeChangeInput}
-          autoComplete='off'
+          value={formState.changes?.internal_number ?? addressState.address.internal_number ?? ''}
+          onChange={(e) => {
+            formMethods.setValue('internal_number', e.target.value)
+            hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } })
+          }}
+          autoComplete='new-field'
         />
         <Input
           className='zipcode'
-          name='zipcode'
           placeholder={t('ZIP_CODE', 'Zip code')}
-          ref={register}
-          defaultValue={formState.changes?.zipcode || addressState.address.zipcode}
-          onChange={hanldeChangeInput}
-          autoComplete='off'
+          value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
+          onChange={(e) => {
+            formMethods.setValue('zipcode', e.target.value)
+            hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } })
+          }}
+          autoComplete='new-field'
         />
         <TextArea
-          name='address_notes'
           rows={4}
           placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-          ref={register}
-          defaultValue={formState.changes?.address_notes || addressState.address.address_notes}
-          onChange={hanldeChangeInput}
-          autoComplete='off'
+          value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
+          onChange={(e) => {
+            formMethods.setValue('address_notes', e.target.value)
+            hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+          }}
+          autoComplete='new-field'
         />
         {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
         <AddressTagSection>
@@ -198,10 +331,30 @@ const AddressFormUI = (props) => {
           </Button>
         </AddressTagSection>
         <FormActions>
-          <Button type='button' disabled={formState.loading} outline onClick={() => onCancel()}>{t('CANCEL', 'Cancel')}</Button>
-          <Button type='submit' disabled={formState.loading} color='primary'>
-            {addressState.address?.id ? t('UPDATE', 'Update') : t('ADD', 'Add')}
+          <Button
+            outline
+            type='button'
+            disabled={formState.loading}
+            onClick={() => onCancel()}
+          >
+            {t('CANCEL', 'Cancel')}
           </Button>
+          {Object.keys(formState?.changes).length > 0 && (
+            <Button
+              id='submit-btn'
+              type='submit'
+              disabled={formState.loading}
+              color='primary'
+            >
+              {!formState.loading ? (
+                isEditing || (!auth && orderState.options?.address?.address)
+                  ? t('UPDATE', 'Update')
+                  : t('ADD', 'Add')
+              ) : (
+                t('LOADING', 'Loading')
+              )}
+            </Button>
+          )}
         </FormActions>
       </FormControl>
       <Alert
@@ -219,7 +372,7 @@ const AddressFormUI = (props) => {
 
 export const AddressForm = (props) => {
   const googleMapsControls = {
-    defaultZoom: 15,
+    defaultZoom: 17,
     zoomControl: true,
     streetViewControl: false,
     fullscreenControl: false,
@@ -227,7 +380,8 @@ export const AddressForm = (props) => {
     mapTypeControl: true,
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
-    }
+    },
+    isMarkerDraggable: true
   }
   const addressFormProps = {
     ...props,

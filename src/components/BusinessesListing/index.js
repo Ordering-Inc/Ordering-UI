@@ -44,7 +44,7 @@ const BusinessesListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleScroll = useCallback(() => {
-    const innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL
+    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (badScrollPosition || businessesList.loading || !hasMore) return
@@ -146,12 +146,13 @@ const BusinessesListingUI = (props) => {
       <Modal
         title={t('ADDRESSES', 'Address List')}
         open={modals.listOpen}
+        width='70%'
         onClose={() => setModals({ ...modals, listOpen: false })}
-        onCancel={() => setModals({ ...modals, listOpen: false })}
-        onAccept={() => handleFindBusinesses()}
       >
         <AddressList
           changeOrderAddressWithDefault
+          onCancel={() => setModals({ ...modals, listOpen: false })}
+          onAccept={() => handleFindBusinesses()}
         />
       </Modal>
 

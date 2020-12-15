@@ -65,13 +65,11 @@ export const TitleHeroSide = styled.div`
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
-  margin: auto;
-
-  img {
-    width: 200px;
-  }
+  margin-top: 30px;
 
   @media (min-width: 992px) {
+
+    margin: auto;
     width: 45%;
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }

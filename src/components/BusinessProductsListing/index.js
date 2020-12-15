@@ -114,7 +114,7 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleScroll = useCallback(() => {
-    const innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL
+    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
     if (badScrollPosition || categoryState.loading || !hasMore) return
@@ -150,7 +150,6 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = openProduct ? 'hidden' : 'auto'
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
@@ -186,13 +185,13 @@ const BusinessProductsListingUI = (props) => {
                     notReload
                     options={sortByOptions}
                     defaultValue={sortByValue}
-                    onChange={(val) => handleChangeSortBy(val)}
+                    onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
                   />
                 </WrapperSearch>
               )}
-              {!(business.categories.length === 0 && !categoryId) && (
+              {!(business?.categories?.length === 0 && !categoryId) && (
                 <BusinessProductsCategories
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                   categorySelected={categorySelected}
                   onClickCategory={handleChangeCategory}
                   featured={featuredProducts}
@@ -202,7 +201,7 @@ const BusinessProductsListingUI = (props) => {
 
               <WrapContent>
                 <BusinessProductsList
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                   category={categorySelected}
                   categoryState={categoryState}
                   businessId={business.id}
@@ -223,7 +222,7 @@ const BusinessProductsListingUI = (props) => {
           open={openProduct}
           closeOnBackdrop
           onClose={() => closeModalProductForm()}
-          padding='10px'
+          padding='0'
         >
 
           {productModal.loading && (

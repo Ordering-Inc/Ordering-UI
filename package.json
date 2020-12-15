@@ -23,6 +23,7 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^3.6.0",
     "cypress": "^4.11.0",
     "eslint-plugin-cypress": "^2.11.1",

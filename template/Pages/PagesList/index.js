@@ -8,7 +8,6 @@ export const PagesList = (props) => {
     { name: 'Login', slug: '/login' },
     { name: 'Sign In', slug: '/signin' },
     { name: 'Forgot Password', slug: '/password/forgot' },
-    { name: 'Reset Password', slug: '/password/reset' },
     { name: 'Profile', slug: '/profile' },
     { name: 'My Orders', slug: '/profile/orders' },
     { name: 'Search Businesses', slug: '/search' },

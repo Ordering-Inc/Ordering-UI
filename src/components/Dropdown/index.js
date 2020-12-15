@@ -29,9 +29,9 @@ export const Dropdown = (props) => {
   useEffect(() => {
     const _children = []
     React.Children.forEach(props.children, child => {
-      if (child.type.displayName === 'DropdownToggle') {
+      if (child?.type?.displayName === 'DropdownToggle') {
         setToggle(child)
-      } else if (child.type.displayName === 'DropDownMenu') {
+      } else if (child?.type?.displayName === 'DropDownMenu') {
         setMenu(child)
       } else {
         _children.push(child)

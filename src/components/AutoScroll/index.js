@@ -6,7 +6,7 @@ import { AutoscrollContainer } from './styles'
 
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, modal }) => {
+export const AutoScroll = ({ children, modal, special }) => {
   const { width } = useWindowSize()
   const [parentElement, setParentElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
@@ -35,25 +35,25 @@ export const AutoScroll = ({ children, modal }) => {
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
         if ((containerElement?.scrollLeft * -1) < 40) {
-          botonRight.classList.add('hidden')
+          botonRight && botonRight.classList.add('hidden')
         } else {
-          botonRight.classList.remove('hidden')
+          botonRight && botonRight.classList.remove('hidden')
         }
         if ((containerElement?.scrollLeft * -1) > parentElement?.scrollWidth - containerElement?.offsetWidth - 20) {
-          botonLeft.classList.add('hidden')
+          botonLeft && botonLeft.classList.add('hidden')
         } else {
-          botonLeft.classList.remove('hidden')
+          botonLeft && botonLeft.classList.remove('hidden')
         }
       } else {
         if (containerElement?.scrollLeft < 40) {
-          botonLeft.classList.add('hidden')
+          botonLeft && botonLeft.classList.add('hidden')
         } else {
-          botonLeft.classList.remove('hidden')
+          botonLeft && botonLeft.classList.remove('hidden')
         }
         if (containerElement?.scrollLeft > parentElement?.scrollWidth - containerElement?.offsetWidth - 20) {
-          botonRight.classList.add('hidden')
+          botonRight && botonRight.classList.add('hidden')
         } else {
-          botonRight.classList.remove('hidden')
+          botonRight && botonRight.classList.remove('hidden')
         }
       }
     }
@@ -78,11 +78,11 @@ export const AutoScroll = ({ children, modal }) => {
   return (
     <AutoscrollContainer modal={modal} id='autoscroll'>
       {
-        width < parentElement?.offsetWidth + 50 ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        width < parentElement?.offsetWidth + 50 ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
 

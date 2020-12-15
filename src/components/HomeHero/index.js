@@ -5,11 +5,11 @@ import {
   ContentWrapper,
   Title,
   Slogan,
-  WrapInput
+  WrapInput,
+  InputSpan
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
 
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
@@ -61,13 +61,15 @@ export const HomeHero = (props) => {
         <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
         <WrapInput onClick={handleAddressInput} withIcon>
           <HiOutlineLocationMarker />
-          <Input
+          <InputSpan
             name='address-selection'
             aria-label='address selection'
             type='text'
-            disabled
             placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
           />
+          <div>
+            {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
+          </div>
         </WrapInput>
         <Button
           color='primary'
@@ -94,12 +96,13 @@ export const HomeHero = (props) => {
       <Modal
         title={t('ADDRESSES', 'Addresses')}
         open={modals.listOpen}
+        width='70%'
         onClose={() => setModals({ ...modals, listOpen: false })}
-        onCancel={() => setModals({ ...modals, listOpen: false })}
-        onAccept={() => handleFindBusinesses()}
       >
         <AddressList
           changeOrderAddressWithDefault
+          onCancel={() => setModals({ ...modals, listOpen: false })}
+          onAccept={() => handleFindBusinesses()}
         />
       </Modal>
 

@@ -48,7 +48,7 @@ export const Options = styled.div`
   border-color: #CCC;
   border-radius: 15px;
   overflow: hidden;
-  
+
   ${({ position }) => position?.toLowerCase() === 'left' && css`
     left: 0;
     margin-left: -1px;
@@ -109,9 +109,9 @@ export const Select = styled.div`
   color: ${({ isHome }) => isHome ? '#FFF' : '#333'} !important;
   position: relative;
 
-  &:disabled {
+  ${props => props.disabled && css`
     pointer-events: none;
-  }
+  `}
 
   ${props => props.open && css`
     background-color: ${darken(0.07, '#CCC')};

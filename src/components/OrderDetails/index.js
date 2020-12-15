@@ -45,7 +45,8 @@ import {
   ReviewsAction,
   FootActions,
   SkeletonBlockWrapp,
-  SkeletonBlock
+  SkeletonBlock,
+  HeaderImg
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -61,6 +62,7 @@ const OrderDetailsUI = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
+  const [isReviewed, setIsReviewed] = useState(false)
 
   const { order, loading, header } = props.order
 
@@ -116,7 +118,10 @@ const OrderDetailsUI = (props) => {
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer>
           <Content className='order-content'>
-            <Header businessHeader={header?.result?.header}>
+            <Header>
+              <HeaderImg>
+                <img src={header?.result?.header} alt='business-header' />
+              </HeaderImg>
               <HeaderInfo className='order-header'>
                 <HeaderText column>
                   <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
@@ -289,7 +294,7 @@ const OrderDetailsUI = (props) => {
               parseInt(order?.status) === 10 ||
               parseInt(order?.status) === 11 ||
               parseInt(order?.status) === 12
-            ) && !order.review && (
+            ) && !order.review && !isReviewed && (
               <ReviewsAction>
                 <Button color='primary' onClick={() => setOpenReview(true)}>
                   {t('REVIEW_ORDER', 'Review your Order')}
@@ -313,7 +318,7 @@ const OrderDetailsUI = (props) => {
       )}
 
       {loading && (
-        <WrapperContainer className='skeleton-loading'>
+        <WrapperContainer isLoading className='skeleton-loading'>
           <SkeletonBlockWrapp>
             <SkeletonBlock width={80}>
               <Skeleton height={200} />
@@ -357,7 +362,7 @@ const OrderDetailsUI = (props) => {
           onClose={() => setOpenReview(false)}
           title={order ? `${t('WRITE_A_REVIEW', 'Write a Review')} #${order?.id}` : t('LOADING', 'Loading...')}
         >
-          <ReviewOrder order={order} />
+          <ReviewOrder order={order} closeReviewOrder={() => setOpenReview(false)} setIsReviewed={setIsReviewed} />
         </Modal>
       )}
     </Container>

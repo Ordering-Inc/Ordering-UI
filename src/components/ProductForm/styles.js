@@ -6,6 +6,7 @@ export const ProductContainer = styled.div`
   flex-wrap: wrap;
   max-height: 100vh;
   position: relative;
+  padding: 10px;
 
   @media (min-width: 768px) {
     height: 100%;
@@ -13,6 +14,8 @@ export const ProductContainer = styled.div`
 
   @media (min-width: 1201px) {
     flex-wrap: nowrap;
+    height: 80vh;
+    overflow: auto;
   }
 `
 
@@ -26,6 +29,7 @@ export const WrapperImage = styled.div`
 
   @media (min-width: 1201px) {
     width: calc(50% - 10px);
+    position: sticky;
     top: 0;
   }
 `
@@ -44,7 +48,7 @@ export const ProductImage = styled.div`
   }
 
   @media (min-width: 1201px) {
-    height: auto;
+    height: 100%;
     img {
       width: 100%;
       object-fit: cover;
@@ -66,11 +70,6 @@ export const ProductInfo = styled.div`
     text-align: center;
     color: #263238;
     margin-top: 0px;
-    margin-right: 10px;
-    ${props => props.theme?.rtl && css`
-      margin-right: 0px;
-      margin-left: 10px
-    `}
   }
 
   p {
@@ -106,6 +105,11 @@ export const ProductInfo = styled.div`
   }
 `
 
+export const ProductFormTitle = styled.div`
+  width: calc(100% - 25px);
+  overflow-wrap: break-word;
+`
+
 export const ProductEdition = styled.div``
 
 export const SectionTitle = styled.h3`
@@ -125,27 +129,6 @@ export const ProductComment = styled.div`
   p {
     font-weight: 300;
     margin-bottom: 5px;
-  }
-  textarea {
-    font-size: 16px;
-    padding: 10px;
-    border: 1px solid #CCC;
-    outline: none;
-    color: #555;
-    resize: none;
-    border-radius: 10px;
-
-    &:focus {
-      border-color: #555;
-    }
-
-    &::placeholder,
-    &::-webkit-input-placeholder {
-      color: #CBCBCB;
-    }
-    &:-ms-input-placeholder {
-      color: #CBCBCB;
-    }
   }
 
   @media (min-width: 577px) {
@@ -251,6 +234,8 @@ export const ProductActions = styled.div`
   }
 
   @media (min-width: 1201px) {
+    position: sticky;
+    top: 100%;
     padding: 10px 0px;
 
     div.incdec-control {

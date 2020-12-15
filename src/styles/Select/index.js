@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useOrder } from 'ordering-components'
 import BsChevronDown from '@meronex/icons/bs/BsChevronDown'
-import Skeleton from 'react-loading-skeleton'
 
 import {
   Select as SelectInput,
@@ -14,7 +13,6 @@ import {
 
 export const Select = (props) => {
   const {
-    isSmall,
     placeholder,
     options,
     defaultValue,
@@ -74,41 +72,37 @@ export const Select = (props) => {
   }
 
   return (
-    orderState.loading && !notReload ? (
-      <Skeleton width={isSmall ? 68 : 134} height={34} />
-    ) : (
-      <SelectInput
-        isHome={isHome}
-        disabled={orderState.loading}
-        onClick={handleSelectClick}
-      >
-        {!selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>}
-        {selectedOption && (
-          <Selected>
-            <Header>
-              {selectedOption.showOnSelected || selectedOption.content}
-            </Header>
-            <Chevron>
-              <BsChevronDown />
-            </Chevron>
-          </Selected>
-        )}
-        {open && options && (
-          <Options position='right' ref={dropdownReference}>
-            {
-              options.map(option => (
-                <Option
-                  key={option.value}
-                  selected={value === option.value}
-                  onClick={() => handleChangeOption(option)}
-                >
-                  {option.content}
-                </Option>
-              ))
-            }
-          </Options>
-        )}
-      </SelectInput>
-    )
+    <SelectInput
+      isHome={isHome}
+      disabled={orderState.loading && !notReload}
+      onClick={handleSelectClick}
+    >
+      {!selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>}
+      {selectedOption && (
+        <Selected>
+          <Header>
+            {selectedOption.showOnSelected || selectedOption.content}
+          </Header>
+          <Chevron>
+            <BsChevronDown />
+          </Chevron>
+        </Selected>
+      )}
+      {open && options && (
+        <Options position='right' ref={dropdownReference}>
+          {
+            options.map(option => (
+              <Option
+                key={option.value}
+                selected={value === option.value}
+                onClick={() => handleChangeOption(option)}
+              >
+                {option.content}
+              </Option>
+            ))
+          }
+        </Options>
+      )}
+    </SelectInput>
   )
 }
