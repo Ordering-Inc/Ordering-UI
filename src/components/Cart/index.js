@@ -223,6 +223,8 @@ const CartUI = (props) => {
       <Modal
         width='70%'
         open={openProduct}
+        padding='0'
+        closeOnBackdrop
         onClose={() => setModalIsOpen(false)}
       >
         <ProductForm
