@@ -347,7 +347,9 @@ const AddressFormUI = (props) => {
               color='primary'
             >
               {!formState.loading ? (
-                isEditing || !auth ? t('UPDATE', 'Update') : t('ADD', 'Add')
+                isEditing || (!auth && orderState.options?.address?.address)
+                  ? t('UPDATE', 'Update')
+                  : t('ADD', 'Add')
               ) : (
                 t('LOADING', 'Loading')
               )}

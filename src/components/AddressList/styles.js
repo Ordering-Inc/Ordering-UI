@@ -126,3 +126,26 @@ export const WrappNotAddresses = styled.div`
     font-size: 24px;
   }
 `
+
+export const FormActions = styled.div`
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  button {
+    height: 45px;
+    flex: 1;
+
+    &:last-child#second-btn {
+      margin-left: 10px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    button {
+      &:last-child#second-btn {
+        margin-left: 25px;
+      }
+    }
+  }
+`
