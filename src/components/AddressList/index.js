@@ -220,24 +220,26 @@ const AddressListUI = (props) => {
         </AddressListUl>
       )}
 
-      <FormActions>
-        <Button
-          outline
-          type='button'
-          disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
-          onClick={() => onCancel()}
-        >
-          {t('CANCEL', 'Cancel')}
-        </Button>
-        <Button
-          disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
-          id='second-btn'
-          color='primary'
-          onClick={() => onAccept()}
-        >
-          {t('ACCEPT', 'Accept')}
-        </Button>
-      </FormActions>
+      {onCancel && onAccept && (
+        <FormActions>
+          <Button
+            outline
+            type='button'
+            disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
+            onClick={() => onCancel()}
+          >
+            {t('CANCEL', 'Cancel')}
+          </Button>
+          <Button
+            disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
+            id='second-btn'
+            color='primary'
+            onClick={() => onAccept()}
+          >
+            {t('ACCEPT', 'Accept')}
+          </Button>
+        </FormActions>
+      )}
 
       <Confirm
         title={t('SEARCH', 'Search')}
