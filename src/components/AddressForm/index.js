@@ -199,10 +199,10 @@ const AddressFormUI = (props) => {
 
   useEffect(() => {
     if (isEditing) {
-      setIsEdit(true)
+      setIsEdit && setIsEdit(true)
       setAddressValue(addressState.address?.address)
     } else {
-      setIsEdit(false)
+      setIsEdit && setIsEdit(false)
     }
   }, [addressState])
 
