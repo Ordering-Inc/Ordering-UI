@@ -37,7 +37,6 @@ export const PreviousOrders = (props) => {
       if (!error) {
         events.emit('go_to_page', { page: 'checkout', params: { cartUuid: result.uuid } })
       }
-      setReorderLoading(false)
     } catch (err) {
       setReorderLoading(false)
     }
