@@ -78,11 +78,11 @@ export const AutoScroll = ({ children, modal, special }) => {
   return (
     <AutoscrollContainer modal={modal} id='autoscroll'>
       {
-        !special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        !special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
 
