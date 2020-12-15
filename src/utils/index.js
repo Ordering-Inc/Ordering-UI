@@ -107,3 +107,20 @@ export const getGoogleMapImage = ({ lat, lng }) => {
  * @param {Array} arr to flat
  */
 export const flatArray = arr => [].concat(...arr)
+
+/**
+ * Function to return the traduction depending of a key 't'
+ * @param {string} key for traduction
+ */
+export const getTraduction = key => {
+  const keyList = {
+    // Add the key and traduction that you need below
+    ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart'
+  }
+
+  if (keyList[key]) {
+    return keyList[key]
+  } else {
+    return key
+  }
+}
