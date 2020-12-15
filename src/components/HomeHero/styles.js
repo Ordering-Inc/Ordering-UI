@@ -137,6 +137,10 @@ export const WrapInput = styled.label`
     position: relative;
     bottom: 25px;
     left: 15px;
+    ${props => props.theme?.rtl && css`
+      left: initial;
+      right: 15px;
+    `}
   }
 
   svg {
