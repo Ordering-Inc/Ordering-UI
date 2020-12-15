@@ -96,12 +96,13 @@ export const HomeHero = (props) => {
       <Modal
         title={t('ADDRESSES', 'Addresses')}
         open={modals.listOpen}
+        width='70%'
         onClose={() => setModals({ ...modals, listOpen: false })}
-        onCancel={() => setModals({ ...modals, listOpen: false })}
-        onAccept={() => handleFindBusinesses()}
       >
         <AddressList
           changeOrderAddressWithDefault
+          onCancel={() => setModals({ ...modals, listOpen: false })}
+          onAccept={() => handleFindBusinesses()}
         />
       </Modal>
 

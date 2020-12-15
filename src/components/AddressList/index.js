@@ -16,7 +16,8 @@ import {
   AddressListUl,
   AddressItem,
   AddressItemActions,
-  WrappNotAddresses
+  WrappNotAddresses,
+  FormActions
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -34,7 +35,9 @@ const AddressListUI = (props) => {
     setAddressList,
     handleSetDefault,
     popover,
-    isProductForm
+    isProductForm,
+    onCancel,
+    onAccept
   } = props
 
   const [, t] = useLanguage()
@@ -216,6 +219,25 @@ const AddressListUI = (props) => {
           <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
         </AddressListUl>
       )}
+
+      <FormActions>
+        <Button
+          outline
+          type='button'
+          disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
+          onClick={() => onCancel()}
+        >
+          {t('CANCEL', 'Cancel')}
+        </Button>
+        <Button
+          disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
+          id='second-btn'
+          color='primary'
+          onClick={() => onAccept()}
+        >
+          {t('ACCEPT', 'Accept')}
+        </Button>
+      </FormActions>
 
       <Confirm
         title={t('SEARCH', 'Search')}

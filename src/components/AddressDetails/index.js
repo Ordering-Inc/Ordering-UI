@@ -61,11 +61,11 @@ const AddressDetailsUI = (props) => {
         open={openModal}
         width='70%'
         onClose={() => setOpenModal(false)}
-        onCancel={() => setOpenModal(false)}
-        onAccept={() => handleFindBusinesses()}
       >
         <AddressList
           changeOrderAddressWithDefault
+          onCancel={() => setOpenModal(false)}
+          onAccept={() => handleFindBusinesses()}
         />
       </Modal>
 

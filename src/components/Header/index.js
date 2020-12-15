@@ -26,6 +26,7 @@ import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
 import { MomentContent } from '../MomentContent'
 import { AddressList } from '../AddressList'
+import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 
@@ -197,8 +198,6 @@ export const Header = (props) => {
           onClose={() => setModalIsOpen(false)}
           width='70%'
           padding={modalSelected === 'address' ? '20px' : '5px'}
-          onCancel={modalSelected === 'address' ? () => setModalIsOpen(false) : null}
-          onAccept={modalSelected === 'address' ? () => setModalIsOpen(false) : null}
         >
           {modalSelected === 'cart' && (
             <CartContent
@@ -208,9 +207,20 @@ export const Header = (props) => {
             />
           )}
           {modalSelected === 'address' && (
-            <AddressList
-              changeOrderAddressWithDefault
-            />
+            auth ? (
+              <AddressList
+                changeOrderAddressWithDefault
+                onCancel={() => setModalIsOpen(false)}
+                onAccept={() => setModalIsOpen(false)}
+              />
+            ) : (
+              <AddressForm
+                useValidationFileds
+                address={orderState?.options?.address || {}}
+                onCancel={() => setModalIsOpen(false)}
+                onSaveAddress={() => setModalIsOpen(false)}
+              />
+            )
           )}
           {modalSelected === 'moment' && (
             <MomentContent />
