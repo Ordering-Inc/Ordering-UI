@@ -104,7 +104,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: ", ";\n  \n  svg{\n    background: #D9D9D9;\n    display: inline-block;\n    border-radius: 50%;\n    width: 20px;\n    height: 20px;\n    align-self: center;\n    top: ", ";\n    position: sticky;\n    color: #000000;\n    border: 1px solid #333;\n    opacity: 0.9;\n  }\n\n  #right-autoscroll{\n    ", "\n  }\n  #left-autoscroll{\n    ", "    \n  }\n  svg:active{\n    border: 0\n  }\n  svg.hidden{\n    opacity: 0;\n  }\n\n  @media (min-width: 480px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n    }\n  }\n\n  @media (min-width: 768px){\n    width: ", ";\n    display: inherit;\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n  }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: ", ";\n  width: ", ";\n  \n  svg{\n    background: #D9D9D9;\n    display: inline-block;\n    border-radius: 50%;\n    width: 20px;\n    min-width: 20px;\n    height: 20px;\n    align-self: center;\n    top: ", ";\n    position: sticky;\n    color: #000000;\n    border: 1px solid #333;\n    opacity: 0.9;\n  }\n\n  #right-autoscroll{\n    ", "\n  }\n  #left-autoscroll{\n    ", "    \n  }\n  svg:active{\n    border: 0\n  }\n  svg.hidden{\n    opacity: 0;\n  }\n\n  @media (min-width: 480px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n    }\n  }\n\n  @media (min-width: 768px){\n    width: ", ";\n    display: inherit;\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n  }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -116,7 +116,9 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var AutoscrollContainer = _styledComponents.default.span(_templateObject(), function (props) {
-  return props.modal ? '-webkit-box' : 'inherit';
+  return props.modal ? 'flex' : 'inherit';
+}, function (props) {
+  return props.modal ? '300vw' : 'initial';
 }, function (props) {
   return props.modal ? '35%' : '0';
 }, function (props) {

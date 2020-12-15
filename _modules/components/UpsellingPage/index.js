@@ -112,7 +112,9 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       key: product.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
       src: product.images,
-      alt: "product-".concat(i)
+      alt: "product-".concat(i),
+      width: "150px",
+      height: "84px"
     })), /*#__PURE__*/_react.default.createElement(_styles.Details, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
       title: product.name
     }, product.name)), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.price)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

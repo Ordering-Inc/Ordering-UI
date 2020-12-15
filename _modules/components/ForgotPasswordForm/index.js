@@ -132,7 +132,9 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
-    alt: "Logo"
+    alt: "Logo",
+    width: "200",
+    height: "66"
   }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,

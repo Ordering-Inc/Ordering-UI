@@ -26,7 +26,9 @@ var NotNetworkConnectivity = function NotNetworkConnectivity() {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notNetwork,
-    alt: "Not network"
+    alt: "Not network",
+    width: "640",
+    height: "320"
   })));
 };
 

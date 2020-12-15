@@ -89,9 +89,11 @@ var Dropdown = function Dropdown(props) {
     var _children = [];
 
     _react.default.Children.forEach(props.children, function (child) {
-      if (child.type.displayName === 'DropdownToggle') {
+      var _child$type, _child$type2;
+
+      if ((child === null || child === void 0 ? void 0 : (_child$type = child.type) === null || _child$type === void 0 ? void 0 : _child$type.displayName) === 'DropdownToggle') {
         setToggle(child);
-      } else if (child.type.displayName === 'DropDownMenu') {
+      } else if ((child === null || child === void 0 ? void 0 : (_child$type2 = child.type) === null || _child$type2 === void 0 ? void 0 : _child$type2.displayName) === 'DropDownMenu') {
         setMenu(child);
       } else {
         _children.push(child);

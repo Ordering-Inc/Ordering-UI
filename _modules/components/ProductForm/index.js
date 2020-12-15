@@ -45,6 +45,8 @@ var _styles = require("./styles");
 
 var _styledComponents = require("styled-components");
 
+var _Inputs = require("../../styles/Inputs");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -142,15 +144,15 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
 
     var myElement = document.getElementsByClassName('error')[0];
-    var modal = document.getElementsByClassName('popup-dialog')[0];
-    var topPos = myElement.offsetTop - modal.offsetTop;
+    var productContainer = document.getElementsByClassName('product-container')[0];
+    var topPos = myElement.offsetTop - productContainer.offsetTop;
 
     if (windowSize.width <= 768) {
       var productImage = document.getElementById('product_image');
       topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0);
     }
 
-    (0, _utils.scrollTo)(modal, topPos, 1250);
+    (0, _utils.scrollTo)(productContainer, topPos, 1250);
   };
 
   var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
@@ -171,7 +173,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return errors["id:".concat(id)] && 'error';
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, null, loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
+    className: "product-container"
+  }, loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
@@ -191,7 +195,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
     alt: "product"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
       key: ingredient.id,
       onChange: handleChangeIngredientState,
@@ -224,7 +228,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         });
       }))));
     });
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('SPECIAL_COMMENT', 'Special comment')), /*#__PURE__*/_react.default.createElement("textarea", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('SPECIAL_COMMENT', 'Special comment')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     placeholder: t('SPECIAL_COMMENT', 'Special comment'),
     defaultValue: productCart.comment,

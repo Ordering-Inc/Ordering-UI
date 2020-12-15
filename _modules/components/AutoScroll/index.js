@@ -39,7 +39,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AutoScroll = function AutoScroll(_ref) {
   var children = _ref.children,
-      modal = _ref.modal;
+      modal = _ref.modal,
+      special = _ref.special;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -81,27 +82,27 @@ var AutoScroll = function AutoScroll(_ref) {
     if (botonLeft || botonRight) {
       if (theme === null || theme === void 0 ? void 0 : theme.rtl) {
         if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) * -1 < 40) {
-          botonRight.classList.add('hidden');
+          botonRight && botonRight.classList.add('hidden');
         } else {
-          botonRight.classList.remove('hidden');
+          botonRight && botonRight.classList.remove('hidden');
         }
 
         if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) * -1 > (parentElement === null || parentElement === void 0 ? void 0 : parentElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 20) {
-          botonLeft.classList.add('hidden');
+          botonLeft && botonLeft.classList.add('hidden');
         } else {
-          botonLeft.classList.remove('hidden');
+          botonLeft && botonLeft.classList.remove('hidden');
         }
       } else {
         if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) < 40) {
-          botonLeft.classList.add('hidden');
+          botonLeft && botonLeft.classList.add('hidden');
         } else {
-          botonLeft.classList.remove('hidden');
+          botonLeft && botonLeft.classList.remove('hidden');
         }
 
         if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) > (parentElement === null || parentElement === void 0 ? void 0 : parentElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 20) {
-          botonRight.classList.add('hidden');
+          botonRight && botonRight.classList.add('hidden');
         } else {
-          botonRight.classList.remove('hidden');
+          botonRight && botonRight.classList.remove('hidden');
         }
       }
     }
@@ -126,12 +127,12 @@ var AutoScroll = function AutoScroll(_ref) {
   return /*#__PURE__*/_react.default.createElement(_styles.AutoscrollContainer, {
     modal: modal,
     id: "autoscroll"
-  }, width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 ? /*#__PURE__*/_react.default.createElement(_IosArrowBack.default, {
+  }, (!special ? width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_IosArrowBack.default, {
     id: "left-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling(true);
     }
-  }) : '', children, width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 ? /*#__PURE__*/_react.default.createElement(_IosArrowForward.default, {
+  }) : '', children, (!special ? width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_IosArrowForward.default, {
     id: "right-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling();

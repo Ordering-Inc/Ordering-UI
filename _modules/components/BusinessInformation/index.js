@@ -199,8 +199,22 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
 exports.BusinessInformationUI = BusinessInformationUI;
 
 var BusinessInformation = function BusinessInformation(props) {
+  var googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: true,
+    fullscreenControl: true,
+    mapTypeId: 'roadmap',
+    // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  };
+
   var BusinessInformationProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BusinessInformationUI
+    UIComponent: BusinessInformationUI,
+    googleMapsControls: googleMapsControls
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessInformation, BusinessInformationProps);

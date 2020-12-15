@@ -40,7 +40,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  > img{\n    width: 100%;\n    border-radius: 16px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  img{\n    width: 100%;\n    height: auto;\n    border-radius: 16px;\n    aspect-ratio: attr(width) / attr(height)\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;

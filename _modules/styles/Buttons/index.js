@@ -36,7 +36,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n\n      &:active {\n        color: ", ";\n        background: ", ";\n      }\n    "]);
+  var data = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n\n      &:active {\n        color: ", ";\n        background: ", ";\n      }\n\n      &:hover {\n        background: ", ";\n        color: #FFF;\n      }\n    "]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -76,7 +76,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n\n      &:active {\n        color: ", ";\n        background: ", ";\n      }\n    "]);
+  var data = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n\n      &:active {\n        color: ", ";\n        background: ", ";\n      }\n\n      &:hover {\n        background: ", ";\n        color: #FFF;\n      }\n    "]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -116,7 +116,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n    background: #FFF;\n    color: #CCC;\n    border-color: #CCC;\n\n    &:active {\n      color: #FFF;\n      background: ", ";\n    }\n  "]);
+  var data = _taggedTemplateLiteral(["\n    background: #FFF;\n    color: #CCC;\n    border-color: #CCC;\n\n    &:active {\n      color: #FFF;\n      background: ", ";\n    }\n\n    &:hover {\n      background: ", ";\n      color: #FFF;\n    }\n  "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -166,7 +166,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  background: #CCC;\n  color: #FFF;\n\n  border: 1px solid #CCC;\n  border-radius: 30px;\n  line-height: 30px;\n  padding-left: 15px;\n  padding-right: 15px;\n  font-size: 16px;\n  cursor: pointer;\n  outline: none;\n\n  &:active {\n    background: ", ";\n  }\n\n  &:disabled {\n    opacity: 0.5\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  background: #CCC;\n  color: #FFF;\n\n  border: 1px solid #CCC;\n  border-radius: 30px;\n  line-height: 30px;\n  padding-left: 15px;\n  padding-right: 15px;\n  font-size: 16px;\n  cursor: pointer;\n  outline: none;\n\n  &:active {\n    background: ", ";\n  }\n\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -195,7 +195,7 @@ var Button = _styledComponents.default.button(_templateObject(), function () {
   });
 }, function (_ref3) {
   var outline = _ref3.outline;
-  return outline && (0, _styledComponents.css)(_templateObject6(), (0, _polished.darken)(0.07, '#CCC'));
+  return outline && (0, _styledComponents.css)(_templateObject6(), (0, _polished.darken)(0.07, '#CCC'), (0, _polished.darken)(0.07, '#CCC'));
 }, function (_ref4) {
   var circle = _ref4.circle;
   return circle && (0, _styledComponents.css)(_templateObject7(), (0, _polished.darken)(0.07, '#CCC'));
@@ -223,6 +223,8 @@ var Button = _styledComponents.default.button(_templateObject(), function () {
       return props.theme.colors.primaryContrast;
     }, function (props) {
       return props.theme.colors.primary;
+    }, function (props) {
+      return (0, _polished.darken)(0.07, props.theme.colors.primary);
     });
   }, function (_ref8) {
     var circle = _ref8.circle;
@@ -270,6 +272,8 @@ var Button = _styledComponents.default.button(_templateObject(), function () {
       return props.theme.colors.secundaryContrast;
     }, function (props) {
       return (0, _polished.darken)(0.05, props.theme.colors.secundary);
+    }, function (props) {
+      return (0, _polished.darken)(0.07, props.theme.colors.secundary);
     });
   }, function (_ref12) {
     var circle = _ref12.circle;

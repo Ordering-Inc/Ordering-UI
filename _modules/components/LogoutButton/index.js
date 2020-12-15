@@ -41,6 +41,11 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
       t = _useLanguage2[1];
 
   var handleLogOutClick = function handleLogOutClick() {
+    window.FB.getLoginStatus(function (response) {
+      if (response.status === 'connected') {
+        window.FB.logout();
+      }
+    });
     props.handleLogoutClick();
     onCustomClick && onCustomClick();
   };

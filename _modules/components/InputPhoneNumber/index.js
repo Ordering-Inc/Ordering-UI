@@ -11,9 +11,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+
 require("react-phone-number-input/style.css");
 
-var _reactPhoneNumberInput = _interopRequireWildcard(require("react-phone-number-input"));
+var _reactPhoneNumberInput = _interopRequireDefault(require("react-phone-number-input"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -54,11 +56,23 @@ var InputPhoneNumberUI = function InputPhoneNumberUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var isValidPhoneNumber = function isValidPhoneNumber(number) {
+    if (!number) return;
+    var numberParser = (0, _libphonenumberJs.default)(number);
+    return numberParser === null || numberParser === void 0 ? void 0 : numberParser.isValid();
+  };
+
   (0, _react.useEffect)(function () {
     if (value) {
-      handleIsValid && handleIsValid((0, _reactPhoneNumberInput.isPossiblePhoneNumber)(value));
+      handleIsValid && handleIsValid(isValidPhoneNumber(value));
     }
   }, [value]);
+  (0, _react.useEffect)(function () {
+    if (countryData.number) {
+      var number = "".concat(countryData.number).concat(value === null || value === void 0 ? void 0 : value.replace('null', ''));
+      setValue(number, isValidPhoneNumber(number));
+    }
+  }, [countryData.number]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     className: "phone_number",
     disabled: disabled
@@ -72,9 +86,9 @@ var InputPhoneNumberUI = function InputPhoneNumberUI(props) {
     value: value,
     disabled: disabled,
     onChange: function onChange(val) {
-      return setValue(val, (0, _reactPhoneNumberInput.isPossiblePhoneNumber)(val));
+      return setValue(val, isValidPhoneNumber(val));
     }
-  }), value && !(0, _reactPhoneNumberInput.isPossiblePhoneNumber)(value) && !disabled && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number'))));
+  }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number'))));
 };
 
 var InputPhoneNumber = function InputPhoneNumber(props) {

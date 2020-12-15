@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapInput = exports.Slogan = exports.Title = exports.ContentWrapper = exports.HeroContainer = exports.HeroContainerStyled = void 0;
+exports.InputSpan = exports.WrapInput = exports.Slogan = exports.Title = exports.ContentWrapper = exports.HeroContainer = exports.HeroContainerStyled = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,8 +17,28 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject17() {
+  var data = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 30px;\n  font-size: 16px;\n  padding: 7px 50%;\n  outline: none;\n  color: #FFF;\n  border-color: #FFF;\n  cursor: pointer;\n  background: rgba(0,0,0,0.1);\n"]);
+
+  _templateObject17 = function _templateObject17() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject16() {
+  var data = _taggedTemplateLiteral(["\n      right: 0px;\n    "]);
+
+  _templateObject16 = function _templateObject16() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0;\n      "]);
+  var data = _taggedTemplateLiteral(["\n      left: 0px;\n    "]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -28,7 +48,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n      right: 0px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -38,7 +58,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n      left: 0px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      left: initial;\n      right: 15px;\n    "]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -68,7 +88,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n\n  ", "\n\n  input {\n    color: #FFF;\n    border-color: #FFF;\n    cursor: pointer;\n    background: rgba(0,0,0,0.1);\n\n    ::placeholder {\n      color: #FFF;\n      opacity: 1;\n    }\n\n    :-ms-input-placeholder {\n      color: #FFF;\n    }\n  }\n\n  svg {\n    color: #FFF;\n    position: absolute;\n    font-size: 22px;\n    top: 8px;\n\n    ", "\n\n    @media (min-width: 768px) {\n      margin-right: 5px;\n      ", "\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n\n  ", "\n  \n  div{\n    color: #FFF;\n    position: relative;\n    bottom: 25px;\n    left: 15px;\n    ", "\n  }\n\n  svg {\n    color: #FFF;\n    position: absolute;\n    font-size: 22px;\n\n    margin-right: 10px;\n      ", "\n\n    ", "\n\n  }\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -236,11 +256,19 @@ var WrapInput = _styledComponents.default.label(_templateObject10(), function (_
 }, function (props) {
   var _props$theme6;
 
-  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) ? (0, _styledComponents.css)(_templateObject13()) : (0, _styledComponents.css)(_templateObject14());
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject13());
 }, function (props) {
   var _props$theme7;
 
-  return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) && (0, _styledComponents.css)(_templateObject15());
+  return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) && (0, _styledComponents.css)(_templateObject14());
+}, function (props) {
+  var _props$theme8;
+
+  return ((_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.rtl) ? (0, _styledComponents.css)(_templateObject15()) : (0, _styledComponents.css)(_templateObject16());
 });
 
 exports.WrapInput = WrapInput;
+
+var InputSpan = _styledComponents.default.span(_templateObject17());
+
+exports.InputSpan = InputSpan;

@@ -195,6 +195,11 @@ var UserDetailsUI = function UserDetailsUI(props) {
   };
 
   var setUserCellPhone = function setUserCellPhone() {
+    if (userPhoneNumber && !userPhoneNumber.includes('null')) {
+      setUserPhoneNumber(userPhoneNumber);
+      return;
+    }
+
     if (user === null || user === void 0 ? void 0 : user.cellphone) {
       var phone = null;
 

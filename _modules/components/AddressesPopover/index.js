@@ -17,7 +17,9 @@ var _styles = require("./styles");
 
 var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
 
-var _AddressContent = require("../AddressContent");
+var _AddressList = require("../AddressList");
+
+var _AddressForm = require("../AddressForm");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52,6 +54,10 @@ var AddressesPopover = function AddressesPopover(props) {
       auth = props.auth,
       addressState = props.addressState;
 
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
@@ -63,6 +69,7 @@ var AddressesPopover = function AddressesPopover(props) {
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
+  var testElement = (0, _react.useRef)();
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
     placement: 'auto',
     modifiers: [{
@@ -80,21 +87,37 @@ var AddressesPopover = function AddressesPopover(props) {
   var styles = popper.styles,
       attributes = popper.attributes,
       forceUpdate = popper.forceUpdate;
-  (0, _react.useEffect)(function () {
-    forceUpdate && forceUpdate();
-  }, [open, orderState]);
+
+  var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
+    visibility: open ? 'visible' : 'hidden',
+    width: '450px',
+    maxHeight: '70vh',
+    overflowY: 'auto'
+  });
+
+  if (!open) {
+    popStyle.transform = 'translate3d(0px, 0px, 0px)';
+  }
+
+  var handleMapDragging = function handleMapDragging(value) {
+    return testElement.current = {
+      isMapDragging: value
+    };
+  };
 
   var handleClickOutside = function handleClickOutside(e) {
-    var _popperElement$curren, _referenceElement$cur;
+    var _popperElement$curren, _referenceElement$cur, _testElement$current;
 
     if (!open) return;
     var outsidePopover = !((_popperElement$curren = popperElement.current) === null || _popperElement$curren === void 0 ? void 0 : _popperElement$curren.contains(e.target));
     var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) === null || _referenceElement$cur === void 0 ? void 0 : _referenceElement$cur.contains(e.target));
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
-    if (outsidePopover && outsidePopoverMenu && outsideModal) {
+    if (outsidePopover && outsidePopoverMenu && outsideModal && !((_testElement$current = testElement.current) === null || _testElement$current === void 0 ? void 0 : _testElement$current.isMapDragging)) {
       props.onClose && props.onClose();
     }
+
+    handleMapDragging(false);
   };
 
   var handleKeyDown = function handleKeyDown(e) {
@@ -111,18 +134,15 @@ var AddressesPopover = function AddressesPopover(props) {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
-
-  var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
-    visibility: open ? 'visible' : 'hidden',
-    width: '450px',
-    maxHeight: '70vh',
-    overflowY: 'auto'
-  });
-
-  if (!open) {
-    popStyle.transform = 'translate3d(0px, 0px, 0px)';
-  }
-
+  (0, _react.useEffect)(function () {
+    forceUpdate && forceUpdate();
+  }, [open, orderState]);
+  (0, _react.useEffect)(function () {
+    events.on('map_is_dragging', handleMapDragging);
+    return function () {
+      return events.off('map_is_dragging', handleMapDragging);
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "address-popover",
     style: {
@@ -136,11 +156,23 @@ var AddressesPopover = function AddressesPopover(props) {
     className: "form_edit",
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), open && /*#__PURE__*/_react.default.createElement(_AddressContent.AddressContent, {
-    auth: auth,
-    addressState: addressState,
-    onClose: props.onClose
-  }), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
+  }, attributes.popper), open && /*#__PURE__*/_react.default.createElement(_styles.Container, null, auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESSES', 'Addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    popover: true,
+    changeOrderAddressWithDefault: true,
+    onClosePopover: props.onClose
+  })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    useValidationFileds: true,
+    address: addressState || {},
+    onClose: function onClose() {
+      return props.onClose && props.onClose();
+    },
+    onCancel: function onCancel() {
+      return props.onClose && props.onClose();
+    },
+    onSaveAddress: function onSaveAddress() {
+      return props.onClose && props.onClose();
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow

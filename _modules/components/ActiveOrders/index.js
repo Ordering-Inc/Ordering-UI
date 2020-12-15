@@ -50,19 +50,28 @@ var ActiveOrders = function ActiveOrders(props) {
       parsePrice = _useUtils2[0].parsePrice;
 
   return /*#__PURE__*/_react.default.createElement(_styles2.OrdersContainer, {
-    activeOrders: true
-  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, orders.map(function (order) {
+    activeOrders: true,
+    ordersLength: (orders === null || orders === void 0 ? void 0 : orders.length) <= 1
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+    special: true
+  }, orders.map(function (order) {
     var _order$business, _order$business2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.Card, {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
       src: (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location),
-      alt: "google-maps-img"
+      alt: "google-maps-img",
+      width: "400px",
+      height: "100px"
     })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
       src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo,
-      alt: "business-logo"
-    })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order.created_at)), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(order.products.reduce(function (acc, cur) {
+      alt: "business-logo",
+      width: "75px",
+      height: "75px"
+    })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
+      activeOrders: true
+    }, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order.created_at)), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(order.products.reduce(function (acc, cur) {
       return acc + cur.price;
     }, 0))), order.status === 0 && /*#__PURE__*/_react.default.createElement("p", null, t('PENDING_ORDER', 'Pending order')))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",

@@ -3,11 +3,21 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Send = exports.Comments = exports.Stars = exports.Category = exports.Categories = exports.Reviews = exports.ReviewOrderContainer = void 0;
+exports.InvisibleInput = exports.Send = exports.Comments = exports.Stars = exports.Category = exports.Categories = exports.Reviews = exports.ReviewOrderContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n  opacity: 0;\n  position: fixed;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject7() {
   var data = _taggedTemplateLiteral(["\n  width: 80%;\n  margin: 20px 0;\n"]);
@@ -108,3 +118,7 @@ exports.Comments = Comments;
 var Send = _styledComponents.default.div(_templateObject7());
 
 exports.Send = Send;
+
+var InvisibleInput = _styledComponents.default.input(_templateObject8());
+
+exports.InvisibleInput = InvisibleInput;

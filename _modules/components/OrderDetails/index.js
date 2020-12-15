@@ -99,6 +99,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       parsePrice = _useUtils2$.parsePrice,
       parseNumber = _useUtils2$.parseNumber;
 
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isReviewed = _useState6[0],
+      setIsReviewed = _useState6[1];
+
   var _props$order = props.order,
       order = _props$order.order,
       loading = _props$order.loading,
@@ -200,9 +205,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, [driverLocation]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, {
     className: "order-content"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Header, {
-    businessHeader: header === null || header === void 0 ? void 0 : (_header$result = header.result) === null || _header$result === void 0 ? void 0 : _header$result.header
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderImg, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: header === null || header === void 0 ? void 0 : (_header$result = header.result) === null || _header$result === void 0 ? void 0 : _header$result.header,
+    alt: "business-header"
+  })), /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, {
     className: "order-header"
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderText, {
     column: true
@@ -259,7 +265,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
   }))), /*#__PURE__*/_react.default.createElement(_styles.OrderBill, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TAX', 'Tax'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.tax), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.totalTax))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.deliveryFee))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.driver_tip))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SERVICE_FEE', 'Service Fee'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.service_fee), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : order.serviceFee) || 0))), (order === null || order === void 0 ? void 0 : order.discount) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, (order === null || order === void 0 ? void 0 : order.discount_type) === 1 ? /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.discount_rate), "%)") : /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.discount))))), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.total)))))), (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && !order.review && /*#__PURE__*/_react.default.createElement(_styles.ReviewsAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 ? void 0 : order.total)))))), (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && !order.review && !isReviewed && /*#__PURE__*/_react.default.createElement(_styles.ReviewsAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return setOpenReview(true);
@@ -271,6 +277,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       });
     }
   }, t('MY_ORDERS', 'My Orders'), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, null))))), loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
+    isLoading: true,
     className: "skeleton-loading"
   }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 80
@@ -312,7 +319,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     },
     title: order ? "".concat(t('WRITE_A_REVIEW', 'Write a Review'), " #").concat(order === null || order === void 0 ? void 0 : order.id) : t('LOADING', 'Loading...')
   }, /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
-    order: order
+    order: order,
+    closeReviewOrder: function closeReviewOrder() {
+      return setOpenReview(false);
+    },
+    setIsReviewed: setIsReviewed
   })));
 };
 

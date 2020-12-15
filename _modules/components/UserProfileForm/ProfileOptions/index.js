@@ -59,7 +59,7 @@ var ProfileOptions = function ProfileOptions(_ref) {
   return /*#__PURE__*/_react.default.createElement(_styles.FlexTabs, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
-    active: tabValue === 'My Account'
+    active: tabValue === 'account'
   }, /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {
       return handleGoToPage({
@@ -67,7 +67,7 @@ var ProfileOptions = function ProfileOptions(_ref) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_BsPerson.default, null), " ", t('MY_ACCOUNT', 'My Account'))), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
-    active: tabValue === 'My Orders'
+    active: tabValue === 'orders'
   }, /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {
       return handleGoToPage({

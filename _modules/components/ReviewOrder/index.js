@@ -25,6 +25,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _styledComponents = require("styled-components");
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -62,7 +64,9 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleChangeRating = props.handleChangeRating,
       handleSendReview = props.handleSendReview,
-      formState = props.formState;
+      formState = props.formState,
+      closeReviewOrder = props.closeReviewOrder,
+      setIsReviewed = props.setIsReviewed;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -109,6 +113,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
         title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
         content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
       }));
+      setIsReviewed(true);
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
@@ -131,10 +136,16 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
   };
 
   var closeAlert = function closeAlert() {
+    var _formState$result4;
+
     setAlertState({
       open: false,
       content: []
     });
+
+    if (!formState.loading && !((_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.error) && alertState.success) {
+      closeReviewOrder();
+    }
   };
 
   var StarsComponent = function StarsComponent(_ref) {
@@ -164,7 +175,21 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderContainer, {
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_styles.Reviews, null, /*#__PURE__*/_react.default.createElement("h2", null, t('REVIEWS', 'Reviews'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Categories, null, /*#__PURE__*/_react.default.createElement(_styles.Category, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Reviews, null, /*#__PURE__*/_react.default.createElement("h2", null, t('REVIEWS', 'Reviews'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Categories, null, Object.keys(stars).map(function (key) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: key
+    }, key !== 'Comments' && /*#__PURE__*/_react.default.createElement(_styles.InvisibleInput, {
+      type: "text",
+      name: key,
+      value: stars[key],
+      ref: register({
+        validate: function validate(value) {
+          return value === '0' ? t('CATEGORY_ATLEAST_ONE', "".concat((0, _utils.capitalize)(key), " must be at least one point")).replace('CATEGORY', key.toUpperCase()) : null;
+        }
+      }),
+      disabled: true
+    }));
+  }), /*#__PURE__*/_react.default.createElement(_styles.Category, {
     onMouseLeave: function onMouseLeave() {
       return setHover(stars);
     }
@@ -199,9 +224,10 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     }),
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles.Send, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    type: "submit"
-  }, t('SEND_REVIEW', 'Send a Review'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    color: !formState.loading ? 'primary' : 'secondary',
+    type: "submit",
+    disabled: formState.loading
+  }, !formState.loading ? t('SEND_REVIEW', 'Send a Review') : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ORDER_REVIEW', 'Order Review'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

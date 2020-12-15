@@ -92,6 +92,7 @@ var easeInOutQuad = function easeInOutQuad(t, b, c, d) {
 
 
 var scrollTo = function scrollTo(element, to, duration) {
+  if (!element) return;
   var start = element.scrollTop;
   var change = to - start;
   var currentTime = 0;

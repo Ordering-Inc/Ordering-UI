@@ -13,8 +13,6 @@ var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _Inputs = require("../../styles/Inputs");
-
 var _Modal = require("../Modal");
 
 var _AddressForm = require("../AddressForm");
@@ -54,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _theme$images, _theme$images$general, _orderState$options2, _orderState$options2$, _orderState$options3;
+  var _theme$images, _theme$images$general, _orderState$options2, _orderState$options2$, _orderState$options3, _orderState$options3$, _orderState$options4;
 
   var onFindBusiness = props.onFindBusiness;
 
@@ -131,13 +129,12 @@ var HomeHero = function HomeHero(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
     onClick: handleAddressInput,
     withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_styles.InputSpan, {
     name: "address-selection",
     "aria-label": "address selection",
     type: "text",
-    disabled: true,
     placeholder: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_AN_ADDRESS', 'Type an address')
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement("div", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address) || t('TYPE_AN_ADDRESS', 'Type an address'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     name: "find-business",
     onClick: handleFindBusinesses
@@ -151,7 +148,7 @@ var HomeHero = function HomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
@@ -170,11 +167,14 @@ var HomeHero = function HomeHero(props) {
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESSES', 'Addresses'),
     open: modals.listOpen,
+    width: "70%",
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: false
       }));
-    },
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    changeOrderAddressWithDefault: true,
     onCancel: function onCancel() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: false
@@ -183,8 +183,6 @@ var HomeHero = function HomeHero(props) {
     onAccept: function onAccept() {
       return handleFindBusinesses();
     }
-  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
-    changeOrderAddressWithDefault: true
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,

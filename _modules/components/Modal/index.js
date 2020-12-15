@@ -63,6 +63,8 @@ var ModalUI = function ModalUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    document.body.style.overflow = props.open ? 'hidden' : 'auto';
+
     if (props.open) {
       window.addEventListener('keydown', handleKeyDown);
       return function () {

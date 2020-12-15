@@ -74,7 +74,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _businessState$busine, _currentCart$products, _currentCart$products2;
+  var _Object$values$find, _businessState$busine, _business$categories, _currentCart$products, _currentCart$products2;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -199,7 +199,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var handleScroll = (0, _react.useCallback)(function () {
-    var innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL;
+    var _document$documentEle;
+
+    var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight;
     var hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage);
     if (badScrollPosition || categoryState.loading || !hasMore) return;
@@ -237,7 +239,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     events.emit('get_current_view');
   }, []);
   (0, _react.useEffect)(function () {
-    document.body.style.overflow = openProduct ? 'hidden' : 'auto';
     events.on('change_view', handleChangePage);
     return function () {
       events.off('change_view', handleChangePage);
@@ -264,16 +265,16 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     options: sortByOptions,
     defaultValue: sortByValue,
     onChange: function onChange(val) {
-      return handleChangeSortBy(val);
+      return handleChangeSortBy && handleChangeSortBy(val);
     }
-  })), !(business.categories.length === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
+  })), !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [{
       id: null,
       name: t('ALL', 'All')
     }, {
       id: 'featured',
       name: t('FEATURED', 'Featured')
-    }].concat(_toConsumableArray(business.categories.sort(function (a, b) {
+    }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
     categorySelected: categorySelected,
@@ -287,7 +288,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     }, {
       id: 'featured',
       name: t('FEATURED', 'Featured')
-    }].concat(_toConsumableArray(business.categories.sort(function (a, b) {
+    }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
     category: categorySelected,
@@ -306,7 +307,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClose: function onClose() {
       return closeModalProductForm();
     },
-    padding: "10px"
+    padding: "0"
   }, productModal.loading && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: 8

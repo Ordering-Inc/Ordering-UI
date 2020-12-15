@@ -64,7 +64,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: auto;\n\n  img {\n    width: 200px;\n  }\n\n  @media (min-width: 992px) {\n    width: 45%;\n    font-size: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin-top: 30px;\n\n  @media (min-width: 992px) {\n\n    margin: auto;\n    width: 45%;\n    font-size: ", ";\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;

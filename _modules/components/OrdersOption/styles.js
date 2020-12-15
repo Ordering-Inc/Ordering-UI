@@ -13,6 +13,26 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _templateObject26() {
+  var data = _taggedTemplateLiteral(["\n        font-size: 0.9em;\n      "]);
+
+  _templateObject26 = function _templateObject26() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject25() {
+  var data = _taggedTemplateLiteral(["\n    font-size: 0.8em;\n  "]);
+
+  _templateObject25 = function _templateObject25() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject24() {
   var data = _taggedTemplateLiteral(["\n    padding-right: 10px;\n    padding-left: 0;\n  "]);
 
@@ -24,7 +44,7 @@ function _templateObject24() {
 }
 
 function _templateObject23() {
-  var data = _taggedTemplateLiteral(["\n  display: inline-flex;\n  flex-direction: column;\n  flex: 1;\n  padding-left: 10px;\n  font-size: 0.9em;\n  ", "\n  h2 {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n    margin-block-end: 0;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    color : #9A9A9A;\n    white-space: nowrap;\n    font-size: 0.9em;\n  }\n  p[name='view_order'] {\n    color: #D81313;\n    cursor: pointer;\n    text-decoration: none;\n  }\n\n  @media (min-width: 480px){\n    h2 {\n    font-size: 14px;\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    }\n  }\n\n  @media (min-width: 768px){\n    font-size: 0.9em;\n    p {\n      font-size: 1em;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: inline-flex;\n  flex-direction: column;\n  flex: 1;\n  padding-left: 10px;\n  font-size: 0.9em;\n  ", "\n  h2 {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n    margin-block-end: 0;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    color : #9A9A9A;\n    white-space: nowrap;\n    font-size: 0.9em;\n    ", "\n  }\n  p[name='view_order'] {\n    color: #D81313;\n    cursor: pointer;\n    text-decoration: none;\n  }\n\n  @media (min-width: 480px){\n    h2 {\n    font-size: 14px;\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    }\n    p{\n      ", "\n    }\n  }\n\n  @media (min-width: 768px){\n    font-size: 0.9em;\n    p {\n      font-size: 1em;\n    }\n  }\n"]);
 
   _templateObject23 = function _templateObject23() {
     return data;
@@ -224,7 +244,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    display: flex;\n    overflow-x: auto;\n    overflow-y: hidden;\n    width: 99%;\n    margin: auto 0px auto auto;\n\n    > div {\n      margin-left: -10px;\n    }\n\n    ", "\n    \n    @media (min-width: 768px) {\n      width: 90%;\n    }\n  "]);
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    display: flex;\n    overflow-x: auto;\n    overflow-y: hidden;\n    justify-content: ", ";\n    width: 99%;\n    margin: auto 0px auto auto;\n\n    > div {\n      margin-left: -10px;\n    }\n\n    ", "\n    \n    @media (min-width: 768px) {\n      width: 90%;\n      justify-content: flex-start;\n    }\n  "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -262,25 +282,28 @@ exports.OptionTitle = OptionTitle;
 var OrdersContainer = _styledComponents.default.div(_templateObject2(), function (_ref) {
   var activeOrders = _ref.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject3(), function (_ref2) {
-    var isSkeleton = _ref2.isSkeleton;
+    var ordersLength = _ref2.ordersLength;
+    return !ordersLength ? 'flex-start' : 'center';
+  }, function (_ref3) {
+    var isSkeleton = _ref3.isSkeleton;
     return !isSkeleton && (0, _styledComponents.css)(_templateObject4());
   });
-}, function (_ref3) {
-  var activeOrders = _ref3.activeOrders;
+}, function (_ref4) {
+  var activeOrders = _ref4.activeOrders;
   return !activeOrders && (0, _styledComponents.css)(_templateObject5());
 });
 
 exports.OrdersContainer = OrdersContainer;
 
-var SkeletonOrder = _styledComponents.default.div(_templateObject6(), function (_ref4) {
-  var activeOrders = _ref4.activeOrders;
+var SkeletonOrder = _styledComponents.default.div(_templateObject6(), function (_ref5) {
+  var activeOrders = _ref5.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject7(), function (props) {
     var _props$theme;
 
     return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject8());
   });
-}, function (_ref5) {
-  var activeOrders = _ref5.activeOrders;
+}, function (_ref6) {
+  var activeOrders = _ref6.activeOrders;
   return !activeOrders && (0, _styledComponents.css)(_templateObject9());
 });
 
@@ -294,11 +317,11 @@ var SkeletonMap = _styledComponents.default.div(_templateObject11());
 
 exports.SkeletonMap = SkeletonMap;
 
-var SkeletonContent = _styledComponents.default.div(_templateObject12(), function (_ref6) {
-  var activeOrders = _ref6.activeOrders;
-  return activeOrders && (0, _styledComponents.css)(_templateObject13());
-}, function (_ref7) {
+var SkeletonContent = _styledComponents.default.div(_templateObject12(), function (_ref7) {
   var activeOrders = _ref7.activeOrders;
+  return activeOrders && (0, _styledComponents.css)(_templateObject13());
+}, function (_ref8) {
+  var activeOrders = _ref8.activeOrders;
   return !activeOrders && (0, _styledComponents.css)(_templateObject14());
 });
 
@@ -336,6 +359,12 @@ var BusinessInformation = _styledComponents.default.div(_templateObject23(), fun
   var _props$theme5;
 
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject24());
+}, function (_ref9) {
+  var activeOrders = _ref9.activeOrders;
+  return activeOrders && (0, _styledComponents.css)(_templateObject25());
+}, function (_ref10) {
+  var activeOrders = _ref10.activeOrders;
+  return activeOrders && (0, _styledComponents.css)(_templateObject26());
 });
 
 exports.BusinessInformation = BusinessInformation;

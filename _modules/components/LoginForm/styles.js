@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.LoginWith = exports.FormSide = exports.TitleHeroSide = exports.HeroSide = exports.LoginContainer = void 0;
+exports.SkeletonSocialWrapper = exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.LoginWith = exports.FormSide = exports.TitleHeroSide = exports.HeroSide = exports.LoginContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -13,8 +13,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _templateObject15() {
+  var data = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    border-radius: 30px;\n  }\n"]);
+
+  _templateObject15 = function _templateObject15() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n   width: calc(100% - 40px);\n   margin-top: 5px;\n\n  button {\n    display: flex;\n    justify-content: start;\n    width: 100%;\n    padding: 5px 30px;\n    color: #000000;\n\n    img {\n      width: 30px;\n    }\n\n    div {\n      font-size: 0.8em;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n   width: ", ";\n   margin-top: 5px;\n\n  button {\n    display: flex;\n    justify-content: start;\n    width: 100%;\n    padding: 5px 30px;\n    color: #000000;\n\n    img {\n      width: 30px;\n    }\n\n    div {\n      font-size: 0.8em;\n    }\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -64,7 +74,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  * {\n    padding: 8px 20px;\n    margin: 20px;\n  }\n\n  input:not(:last-child) {\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  input:not(:last-child) {\n    margin: 10px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n  }\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -104,7 +114,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: auto;\n\n  img {\n    width: 200px;\n  }\n\n  @media (min-width: 769px) {\n    ", "\n  }\n\n  @media (min-width: 992px) {\n    width: 45%;\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px){\n    font-size: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: auto;\n\n  @media (min-width: 769px) {\n    ", "\n  }\n\n  @media (min-width: 992px) {\n    width: 45%;\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px){\n    font-size: ", ";\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -198,7 +208,7 @@ exports.LoginWith = LoginWith;
 
 var FormInput = _styledComponents.default.form(_templateObject9(), function (_ref7) {
   var isPopup = _ref7.isPopup;
-  return isPopup ? '90%' : '100%';
+  return isPopup ? '90%' : '80%';
 });
 
 exports.FormInput = FormInput;
@@ -225,6 +235,16 @@ var RedirectLink = _styledComponents.default.div(_templateObject10(), function (
 
 exports.RedirectLink = RedirectLink;
 
-var SocialButtons = _styledComponents.default.div(_templateObject14());
+var SocialButtons = _styledComponents.default.div(_templateObject14(), function (_ref12) {
+  var isPopup = _ref12.isPopup;
+  return isPopup ? '90%' : '80%';
+});
 
 exports.SocialButtons = SocialButtons;
+
+var SkeletonSocialWrapper = _styledComponents.default.div(_templateObject15(), function (_ref13) {
+  var isPopup = _ref13.isPopup;
+  return isPopup ? '90%' : '80%';
+});
+
+exports.SkeletonSocialWrapper = SkeletonSocialWrapper;

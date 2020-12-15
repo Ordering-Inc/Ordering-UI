@@ -321,6 +321,12 @@ Object.defineProperty(exports, "ProductShare", {
     return _ProductShare.ProductShare;
   }
 });
+Object.defineProperty(exports, "ResetPassword", {
+  enumerable: true,
+  get: function get() {
+    return _ResetPassword.ResetPassword;
+  }
+});
 Object.defineProperty(exports, "ReviewOrder", {
   enumerable: true,
   get: function get() {
@@ -587,6 +593,8 @@ var _ProductOption = require("./components/ProductOption");
 var _ProductOptionSubOption = require("./components/ProductOptionSubOption");
 
 var _ProductShare = require("./components/ProductShare");
+
+var _ResetPassword = require("./components/ResetPassword");
 
 var _ReviewOrder = require("./components/ReviewOrder");
 

@@ -103,7 +103,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       setAlertState = _useState4[1];
 
   var handleScroll = (0, _react.useCallback)(function () {
-    var innerHeightScrolltop = window.innerHeight + document.documentElement.scrollTop + PIXELS_TO_SCROLL;
+    var _document$documentEle;
+
+    var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight;
     var hasMore = !(paginationProps.totalPages === paginationProps.currentPage);
     if (badScrollPosition || businessesList.loading || !hasMore) return;
@@ -212,11 +214,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESSES', 'Address List'),
     open: modals.listOpen,
+    width: "70%",
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: false
       }));
-    },
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    changeOrderAddressWithDefault: true,
     onCancel: function onCancel() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: false
@@ -225,8 +230,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onAccept: function onAccept() {
       return handleFindBusinesses();
     }
-  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
-    changeOrderAddressWithDefault: true
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,

@@ -101,17 +101,18 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESSES', 'Addresses'),
     open: openModal,
+    width: "70%",
     onClose: function onClose() {
       return setOpenModal(false);
-    },
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    changeOrderAddressWithDefault: true,
     onCancel: function onCancel() {
       return setOpenModal(false);
     },
     onAccept: function onAccept() {
       return handleFindBusinesses();
     }
-  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
-    changeOrderAddressWithDefault: true
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,

@@ -74,7 +74,7 @@ var SingleProductCard = function SingleProductCard(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
     soldOut: isSoldOut || maxProductQuantity <= 0,
     onClick: function onClick() {
-      return onProductClick(product);
+      return !isSkeleton && onProductClick(product);
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0

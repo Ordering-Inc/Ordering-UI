@@ -84,7 +84,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
     isSkeleton: isSkeleton,
     onClick: function onClick() {
-      return handleClick(business);
+      return !isSkeleton && handleClick && handleClick(business);
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHero, null, (business === null || business === void 0 ? void 0 : business.header) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
     bgimage: (0, _utils.optimizeImage)(business === null || business === void 0 ? void 0 : business.header, 'h_400,c_limit'),
