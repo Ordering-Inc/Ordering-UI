@@ -60,8 +60,8 @@ export const Logo = styled.div`
 `
 
 export const Card = styled.div`
-  min-width: 290px;
-  width: 290px;
+  min-width: 300px;
+  width: 300px;
   margin: 10px;
   display: inline-block;
   background: white;
@@ -86,11 +86,6 @@ export const Card = styled.div`
     align-items: center;
     justify-content: center;
   `}
-
-  @media (min-width: 360px){
-    min-width: 300px;
-    width: 300px;
-  }
 
   @media (min-width: 480px){
     min-width: 400px;

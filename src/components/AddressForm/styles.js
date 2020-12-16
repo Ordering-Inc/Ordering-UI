@@ -12,6 +12,10 @@ export const FormActions = styled.div`
 
     &:last-child#submit-btn {
       margin-left: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 0;
+        margin-right: 10px;
+      `}
     }
   }
 
@@ -19,6 +23,10 @@ export const FormActions = styled.div`
     button {
       &:last-child#submit-btn {
         margin-left: 25px;
+        ${props => props.theme?.rtl && css`
+        margin-left: 0;
+        margin-right: 25px;
+      `}
       }
     }
   }

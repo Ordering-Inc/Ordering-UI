@@ -11,6 +11,7 @@ import {
 
 import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
+import { getTraduction } from '../../utils'
 
 const ConfirmUI = (props) => {
   const {
@@ -49,7 +50,7 @@ const ConfirmUI = (props) => {
         {content && typeof content === 'object' && Array.isArray(content) && (
           <ul>
             {content.map((item, i) => (
-              <li key={i}>{t(item)}</li>
+              <li key={i}>{getTraduction(item)}</li>
             ))}
           </ul>
         )}

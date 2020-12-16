@@ -24,23 +24,48 @@ export const OrdersContainer = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
     justify-content: ${({ ordersLength }) => !ordersLength ? 'flex-start' : 'center'};
-    width: 99%;
+    width: 100%;
     margin: auto 0px auto auto;
+    ${props => props.theme?.rtl && css`
+      margin: auto auto auto 0px;
+    `}
 
-    > div {
-      margin-left: -10px;
-    }
-
-    ${({ isSkeleton }) => !isSkeleton && css`
+    ${({ isSkeleton }) => !isSkeleton && css`   
       ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
       }
+      ${({ ordersLength }) => !ordersLength && css`
+        > div {
+          margin-left: -10px;
+          ${props => props.theme?.rtl && css`
+            margin-left: 0;
+            margin-right: -10px;
+          `}
+        }
+        > div:first-child{
+          margin-left: -15px;
+          ${props => props.theme?.rtl && css`
+            margin-left: 0;
+            margin-right: -15px;
+          `}
+        }
+      `}
+     
     `}
     
     @media (min-width: 768px) {
       width: 90%;
       justify-content: flex-start;
+      ${({ isSkeleton, ordersLength }) => !isSkeleton && !ordersLength && css`
+      > div:first-child{
+        margin-left: -10px;
+        ${props => props.theme?.rtl && css`
+          margin-left: 0;
+          margin-right: -10px;
+        `}
+      }
+      `
     }
   `}
 
@@ -74,10 +99,10 @@ export const SkeletonOrder = styled.div`
     width: auto;
     text-align: center;
     margin: 0 auto;
-    margin-left: 30px;
+    margin-left: 10px;
 
     ${props => props.theme?.rtl && css`
-      margin-right: 30px;
+      margin-right: 10px;
       margin-left: 0;
     `}
   `}
@@ -193,6 +218,9 @@ export const BusinessInformation = styled.div`
   flex: 1;
   padding-left: 10px;
   font-size: 0.9em;
+  ${({ activeOrders }) => activeOrders && css`
+      width: 30%;
+  `}
   ${props => props.theme?.rtl && css`
     padding-right: 10px;
     padding-left: 0;
@@ -214,7 +242,16 @@ export const BusinessInformation = styled.div`
     ${({ activeOrders }) => activeOrders && css`
     font-size: 0.8em;
   `}
+  
   }
+
+  p[name='order_number']{
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   p[name='view_order'] {
     color: #D81313;
     cursor: pointer;
