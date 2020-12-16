@@ -12,13 +12,14 @@ const FloatingButtonUI = (props) => {
     btnText,
     btnValue,
     handleButtonClick,
-    disabled
+    disabled,
+    isSecondaryBtn
   } = props
 
   return (
     <Container>
       <Button
-        color='primary'
+        color={isSecondaryBtn ? 'secundary' : 'primary'}
         onClick={handleButtonClick}
         disabled={disabled}
       >
