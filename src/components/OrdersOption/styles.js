@@ -193,6 +193,9 @@ export const BusinessInformation = styled.div`
   flex: 1;
   padding-left: 10px;
   font-size: 0.9em;
+  ${({ activeOrders }) => activeOrders && css`
+      width: 30%;
+  `}
   ${props => props.theme?.rtl && css`
     padding-right: 10px;
     padding-left: 0;
@@ -214,7 +217,16 @@ export const BusinessInformation = styled.div`
     ${({ activeOrders }) => activeOrders && css`
     font-size: 0.8em;
   `}
+  
   }
+
+  p[name='order_number']{
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   p[name='view_order'] {
     color: #D81313;
     cursor: pointer;
