@@ -118,9 +118,5 @@ export const getTraduction = key => {
     ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart'
   }
 
-  if (keyList[key]) {
-    return keyList[key]
-  } else {
-    return key
-  }
+  return keyList[key] || key
 }
