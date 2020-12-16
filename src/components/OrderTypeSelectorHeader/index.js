@@ -6,7 +6,7 @@ import FaTruckPickup from '@meronex/icons/fa/FaTruckPickup'
 import MdcTruckDeliveryOutline from '@meronex/icons/mdc/MdcTruckDeliveryOutline'
 import AiFillShop from '@meronex/icons/ai/AiFillShop'
 import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
-import { Option, OrderTypeWrapper } from './styles'
+import { Option, OrderTypeWrapper, SelectedOption, ContentOption } from './styles'
 
 const OrderTypeSelectorHeaderUI = (props) => {
   const {
@@ -17,11 +17,31 @@ const OrderTypeSelectorHeaderUI = (props) => {
   const [, t] = useLanguage()
 
   const orderTypes = [
-    { value: 1, content: <Option><MdcTruckDeliveryOutline />{t('DELIVERY', 'Delivery')}</Option>, showOnSelected: <Option><MdcTruckDeliveryOutline /><p>{t('DELIVERY', 'Delivery')}</p></Option> },
-    { value: 2, content: <Option><FaTruckPickup />{t('PICKUP', 'Pickup')}</Option>, showOnSelected: <Option><FaTruckPickup /><p>{t('PICKUP', 'Pickup')}</p></Option> },
-    { value: 3, content: <Option><AiFillShop />{t('EAT_IN', 'Eat in')}</Option>, showOnSelected: <Option><AiFillShop /><p>{t('EAT_IN', 'Eat in')}</p></Option> },
-    { value: 4, content: <Option><GiFoodTruck />{t('CURBSIDE', 'Curbside')}</Option>, showOnSelected: <Option><GiFoodTruck /><p>{t('CURBSIDE', 'Curbside')}</p></Option> },
-    { value: 5, content: <Option><FaCarSide />{t('DRIVE_THRU', 'Drive thru')}</Option>, showOnSelected: <Option><FaCarSide /><p>{t('DRIVE_THRU', 'Drive thru')}</p></Option> }
+    {
+      value: 1,
+      content: <Option><MdcTruckDeliveryOutline /><ContentOption>{t('DELIVERY', 'Delivery')}</ContentOption></Option>,
+      showOnSelected: <Option><MdcTruckDeliveryOutline /><SelectedOption>{t('DELIVERY', 'Delivery')}</SelectedOption></Option>
+    },
+    {
+      value: 2,
+      content: <Option><FaTruckPickup /><ContentOption>{t('PICKUP', 'Pickup')}</ContentOption></Option>,
+      showOnSelected: <Option><FaTruckPickup /><SelectedOption>{t('PICKUP', 'Pickup')}</SelectedOption></Option>
+    },
+    {
+      value: 3,
+      content: <Option><AiFillShop /><ContentOption>{t('EAT_IN', 'Eat in')}</ContentOption></Option>,
+      showOnSelected: <Option><AiFillShop /><SelectedOption>{t('EAT_IN', 'Eat in')}</SelectedOption></Option>
+    },
+    {
+      value: 4,
+      content: <Option><GiFoodTruck /><ContentOption>{t('CURBSIDE', 'Curbside')}</ContentOption></Option>,
+      showOnSelected: <Option><GiFoodTruck /><SelectedOption>{t('CURBSIDE', 'Curbside')}</SelectedOption></Option>
+    },
+    {
+      value: 5,
+      content: <Option><FaCarSide /><ContentOption>{t('DRIVE_THRU', 'Drive thru')}</ContentOption></Option>,
+      showOnSelected: <Option><FaCarSide /><SelectedOption>{t('DRIVE_THRU', 'Drive thru')}</SelectedOption></Option>
+    }
   ]
 
   return (
