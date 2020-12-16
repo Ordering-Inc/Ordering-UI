@@ -215,9 +215,9 @@ const UserProfileFormUI = (props) => {
       <Container>
         <UserProfileContainer>
           <UserImage className='user-image'>
-            <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
-              <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
-                <Image isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
+            <Image isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
+              <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
+                <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
                   {formState.changes.photo && formState.loading
                     ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                     : ((!formState.changes.photo || formState.result?.result === 'Network Error' || formState.result.error)
@@ -238,9 +238,9 @@ const UserProfileFormUI = (props) => {
                           </UploadImageIcon>
                         )
                     )}
-                </Image>
-              </DragAndDrop>
-            </ExamineClick>
+                </DragAndDrop>
+              </ExamineClick>
+            </Image>
             <Camera><GiPhotoCamera /></Camera>
           </UserImage>
           <SideForm className='user-form'>
