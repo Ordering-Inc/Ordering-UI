@@ -18,7 +18,8 @@ import {
   SkeletonContent,
   SkeletonText,
   SkeletonInformation,
-  SkeletonReorder
+  SkeletonReorder,
+  SkeletonButton
 } from './styles'
 
 const OrdersOptionUI = (props) => {
@@ -83,6 +84,9 @@ const OrdersOptionUI = (props) => {
                       <Skeleton width={120} />
                     </SkeletonText>
                   </SkeletonContent>
+                  <SkeletonButton>
+                    <Skeleton />
+                  </SkeletonButton>
                 </SkeletonCard>
               ))}
             </SkeletonOrder>
