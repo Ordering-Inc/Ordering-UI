@@ -105,7 +105,7 @@ export const UserData = styled.div`
   }
 
   > button {
-    width: 80px;
+    width: auto;
     background: #F8F8F8;
   }
 
