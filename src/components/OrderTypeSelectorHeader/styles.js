@@ -11,4 +11,28 @@ export const Option = styled.div`
       margin-right: 0px;
     `}
   }
+
+  p {
+    margin: 0;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } 
+  @media (min-width: 360px) {
+    p{
+      max-width: initial;
+    }
+  }
+  
+`
+
+export const OrderTypeWrapper = styled.span`
+  div {
+    max-width: 120px;
+  }
+  @media (min-width: 360px) {
+    div{
+      max-width: initial;
+    }
+  }
 `
