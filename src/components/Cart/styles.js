@@ -52,15 +52,29 @@ export const CheckoutAction = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
   button {
     padding: 10px 30px;
     color: #FFF;
-    width: 80%;
+    width: 90%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed
     }
+  }
+`
+
+export const MessageAlert = styled.span`
+  color: #F2BB40;
+  font-size: 14px;
+  text-align: center;
+  margin: 8px 8px 0;
+  font-weight: 600;
+
+  @media (min-width: 1200px) {
+    font-size: 16px;
   }
 `
