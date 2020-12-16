@@ -87,6 +87,7 @@ const AddressListUI = (props) => {
 
   const handleSetAddress = (address) => {
     if (address.id === orderState?.options?.address_id) return
+    setAddressOpen(false)
     handleSetDefault(address)
   }
 
