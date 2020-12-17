@@ -140,6 +140,7 @@ var AddressListUI = function AddressListUI(props) {
     var _orderState$options;
 
     if (address.id === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id)) return;
+    setAddressOpen(false);
     handleSetDefault(address);
   };
 
@@ -266,7 +267,7 @@ var AddressListUI = function AddressListUI(props) {
     style: {
       marginBottom: '10px'
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), onCancel && onAccept && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",
     disabled: addressList.loading || actionStatus.loading || orderState.loading,

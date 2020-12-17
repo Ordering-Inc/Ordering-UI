@@ -17,6 +17,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _styledComponents = require("styled-components");
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -80,7 +82,7 @@ var ConfirmUI = function ConfirmUI(props) {
   })), title && /*#__PURE__*/_react.default.createElement(_styles.PopupTitle, null, title), /*#__PURE__*/_react.default.createElement(_styles.PopupContent, null, content && typeof content === 'string' && content, content && _typeof(content) === 'object' && Array.isArray(content) && /*#__PURE__*/_react.default.createElement("ul", null, content.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: i
-    }, t(item));
+    }, (0, _utils.getTraduction)(item));
   })), children), (onCancel || onAccept || onClose) && /*#__PURE__*/_react.default.createElement(_styles.PopupActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     onClick: function onClick() {

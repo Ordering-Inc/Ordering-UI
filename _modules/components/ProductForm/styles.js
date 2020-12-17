@@ -96,7 +96,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  width: calc(100% - 25px);\n  overflow-wrap: break-word;\n"]);
+  var data = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;

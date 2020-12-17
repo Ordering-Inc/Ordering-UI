@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
+exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -181,5 +181,20 @@ var flatArray = function flatArray(arr) {
 
   return (_ref2 = []).concat.apply(_ref2, _toConsumableArray(arr));
 };
+/**
+ * Function to return the traduction depending of a key 't'
+ * @param {string} key for traduction
+ */
+
 
 exports.flatArray = flatArray;
+
+var getTraduction = function getTraduction(key) {
+  var keyList = {
+    // Add the key and traduction that you need below
+    ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart'
+  };
+  return keyList[key] || key;
+};
+
+exports.getTraduction = getTraduction;

@@ -54,7 +54,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  min-width: 290px;\n  width: 290px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  height: 250px;\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 360px){\n    min-width: 300px;\n    width: 300px;\n  }\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    width: 400px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  height: 250px;\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    width: 400px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;

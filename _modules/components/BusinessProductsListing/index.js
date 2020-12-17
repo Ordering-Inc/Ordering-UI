@@ -354,7 +354,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       key: i
     }, t('ERROR', 'Error'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   }))), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && auth && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
-    btnText: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.subtotal) >= (currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum) ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading') : "".concat(t('MINIMUN_PURCHASE', 'Minimum'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)),
+    btnText: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.subtotal) >= (currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum) ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading') : "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)),
+    isSecondaryBtn: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.subtotal) < (currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum),
     btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length,
     handleClick: function handleClick() {
       return setOpenUpselling(true);

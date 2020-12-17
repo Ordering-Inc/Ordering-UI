@@ -97,21 +97,20 @@ var PreviousOrders = function PreviousOrders(props) {
                 });
               }
 
-              setReorderLoading(false);
-              _context.next = 15;
+              _context.next = 14;
               break;
 
-            case 12:
-              _context.prev = 12;
+            case 11:
+              _context.prev = 11;
               _context.t0 = _context["catch"](2);
               setReorderLoading(false);
 
-            case 15:
+            case 14:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 12]]);
+      }, _callee, null, [[2, 11]]);
     }));
 
     return function handleReorder(_x) {

@@ -106,7 +106,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
-  var _useState3 = (0, _react.useState)(null),
+  var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
       userPhoneNumber = _useState4[0],
       setUserPhoneNumber = _useState4[1];

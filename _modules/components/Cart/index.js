@@ -231,12 +231,12 @@ var CartUI = function CartUI(props) {
   })), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)))))), onClickCheckout && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
+    color: (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum) ? 'secundary' : 'primary',
     onClick: function onClick() {
       return setOpenUpselling(true);
     },
     disabled: openUpselling && !canOpenUpselling || (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum)
-  }, (cart === null || cart === void 0 ? void 0 : cart.subtotal) >= (cart === null || cart === void 0 ? void 0 : cart.minimum) ? !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading') : "".concat(t('MINIMUN_PURCHASE', 'Minimum'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum))))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+  }, (cart === null || cart === void 0 ? void 0 : cart.subtotal) >= (cart === null || cart === void 0 ? void 0 : cart.minimum) ? !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading') : "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum))))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('PRODUCT', 'Product'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -256,6 +256,8 @@ var CartUI = function CartUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openProduct,
+    padding: "0",
+    closeOnBackdrop: true,
     onClose: function onClose() {
       return setModalIsOpen(false);
     }

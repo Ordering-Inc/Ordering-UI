@@ -46,6 +46,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var InputPhoneNumberUI = function InputPhoneNumberUI(props) {
+  var _configs$countryDefau;
+
   var value = props.value,
       setValue = props.setValue,
       handleIsValid = props.handleIsValid,
@@ -55,6 +57,10 @@ var InputPhoneNumberUI = function InputPhoneNumberUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var isValidPhoneNumber = function isValidPhoneNumber(number) {
     if (!number) return;
@@ -76,11 +82,11 @@ var InputPhoneNumberUI = function InputPhoneNumberUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     className: "phone_number",
     disabled: disabled
-  }, countryData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, countryData.loading || value === null ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 40
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     international: true,
-    defaultCountry: countryData.value,
+    defaultCountry: countryData.value || (configs === null || configs === void 0 ? void 0 : (_configs$countryDefau = configs.countryDefaultCode) === null || _configs$countryDefau === void 0 ? void 0 : _configs$countryDefau.code) || 'US',
     countryCallingCodeEditable: false,
     placeholder: t('PHONE_NUMBER', 'Phone number'),
     value: value,
