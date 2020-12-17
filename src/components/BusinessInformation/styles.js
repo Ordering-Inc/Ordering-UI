@@ -230,6 +230,9 @@ export const ScheduleBlock = styled.div`
     font-weight: bold;
     text-transform: uppercase;
     color: #D81212;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   p {
     margin: 0px;

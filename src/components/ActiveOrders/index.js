@@ -42,7 +42,7 @@ export const ActiveOrders = (props) => {
                 </Logo>
                 <BusinessInformation activeOrders>
                   <h2>{order.business.name}</h2>
-                  <p>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
+                  <p name='order_number'>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
                   <p>{order.created_at}</p>
                 </BusinessInformation>
                 <Price>

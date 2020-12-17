@@ -10,7 +10,7 @@ export const FacebookButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  margin-bottom: 10px;
   svg {
     font-size: 28px;
     color: #1977F2;

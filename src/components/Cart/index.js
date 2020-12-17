@@ -197,14 +197,14 @@ const CartUI = (props) => {
         {onClickCheckout && !isCheckout && (
           <CheckoutAction>
             <Button
-              color='primary'
+              color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
               onClick={() => setOpenUpselling(true)}
               disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum}
             >
               {cart?.subtotal >= cart?.minimum ? (
                 !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
               ) : (
-                `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
+                `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
               )}
             </Button>
           </CheckoutAction>
@@ -223,6 +223,8 @@ const CartUI = (props) => {
       <Modal
         width='70%'
         open={openProduct}
+        padding='0'
+        closeOnBackdrop
         onClose={() => setModalIsOpen(false)}
       >
         <ProductForm
