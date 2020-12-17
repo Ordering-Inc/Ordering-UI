@@ -28,6 +28,7 @@ export const BusinessHeader = styled.div`
     height: calc(100% + 50px);
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+    aspect-ratio: attr(width) / attr(height)
   }
 `
 
@@ -350,6 +351,8 @@ export const ImageContainer = styled.div`
   max-height: 500px;
   img{
     width: 100%;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
