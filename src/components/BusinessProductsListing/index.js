@@ -316,8 +316,9 @@ const BusinessProductsListingUI = (props) => {
           btnText={
             currentCart?.subtotal >= currentCart?.minimum
               ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')
-              : `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(currentCart?.minimum)}`
+              : `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
           }
+          isSecondaryBtn={currentCart?.subtotal < currentCart?.minimum}
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
           disabled={openUpselling || currentCart?.subtotal < currentCart?.minimum}
