@@ -8,9 +8,9 @@ export const UserProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 100%;
+  width: 90%;
   overflow-x: hidden;
-  margin-top: 25px;
+  margin: 25px auto auto;
 
   @media (min-width: 768px) {
     align-items: flex-start;
@@ -26,10 +26,9 @@ export const UserImage = styled.div`
   width: 100%;
 
   @media (min-width: 768px){
-    width: 20%;
+    width: auto;
     align-items: flex-end;
   }
-
 `
 
 export const Image = styled.div`
@@ -67,10 +66,10 @@ export const SideForm = styled.div`
   width: 100%;
 
   @media (min-width: 768px) {
-    width: 55%;
+    width: 70%;
     display: flex;
     align-items: center;
-    margin: auto 0px auto 30px;
+    margin: 30px 0px 0px 30px;
     ${props => props.theme?.rtl && css`
       margin: auto 30px auto 0px;
     `}
@@ -193,5 +192,7 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const WrapperForm = styled.div`
-  padding: 10px 25px 0px;
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 `

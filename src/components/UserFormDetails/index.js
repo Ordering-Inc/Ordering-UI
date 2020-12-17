@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { useSession } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 
-import { FormInput, ActionsForm } from './styles'
+import { FormInput, ActionsForm, SkeletonForm } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -187,89 +188,99 @@ export const UserFormDetails = (props) => {
   return (
     <>
       <FormInput onSubmit={handleSubmit(onSubmit)}>
-        {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
-          showField(field.code) && (
-            <React.Fragment key={field.id}>
-              <Input
-                key={field.id}
-                type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
-                name={field.code}
-                className='form'
+        {!validationFields.loading ? (
+          <>
+            {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
+              showField(field.code) && (
+                <React.Fragment key={field.id}>
+                  <Input
+                    key={field.id}
+                    type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
+                    name={field.code}
+                    className='form'
+                    disabled={!isEdit}
+                    placeholder={t(field.code.toUpperCase(), field.name)}
+                    value={formState?.changes[field.code] ?? user[field.code] ?? ''}
+                    onChange={handleChangeInput}
+                    ref={register({
+                      required: isRequiredField(field.code)
+                        ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code))
+                        : null,
+                      pattern: {
+                        value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
+                        message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+                      }
+                    })}
+                    autoComplete='off'
+                  />
+                </React.Fragment>
+              )
+            ))}
+
+            <Input
+              type='password'
+              name='password'
+              className='form'
+              disabled={!isEdit}
+              placeholder={t('FRONT_VISUALS_PASSWORD')}
+              onChange={handleChangeInput}
+              ref={register({
+                required: isRequiredField('password')
+                  ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                  : null,
+                minLength: {
+                  value: 8,
+                  message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                }
+              })}
+            />
+            {!!showInputPhoneNumber() && (
+              <InputPhoneNumber
+                value={userPhoneNumber}
+                setValue={handleChangePhoneNumber}
+                handleIsValid={setIsValidPhoneNumber}
                 disabled={!isEdit}
-                placeholder={t(field.code.toUpperCase(), field.name)}
-                value={formState?.changes[field.code] ?? user[field.code] ?? ''}
-                onChange={handleChangeInput}
-                ref={register({
-                  required: isRequiredField(field.code)
-                    ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code))
-                    : null,
-                  pattern: {
-                    value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                    message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-                  }
-                })}
-                autoComplete='off'
               />
-            </React.Fragment>
-          )
-        ))}
+            )}
+            <ActionsForm>
+              {onCancel && (
+                <Button
+                  outline
+                  type='button'
+                  onClick={() => onCancel(false)}
+                >
+                  {t('CANCEL', 'Cancel')}
+                </Button>
+              )}
 
-        <Input
-          type='password'
-          name='password'
-          className='form'
-          disabled={!isEdit}
-          placeholder={t('FRONT_VISUALS_PASSWORD')}
-          onChange={handleChangeInput}
-          ref={register({
-            required: isRequiredField('password')
-              ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-              : null,
-            minLength: {
-              value: 8,
-              message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-            }
-          })}
-        />
-        {!!showInputPhoneNumber() && (
-          <InputPhoneNumber
-            value={userPhoneNumber}
-            setValue={handleChangePhoneNumber}
-            handleIsValid={setIsValidPhoneNumber}
-            disabled={!isEdit}
-          />
+              {Object.keys(formState.changes).length > 0 && isEdit && (
+                <Button
+                  id='form-btn'
+                  color='primary'
+                  type='submit'
+                >
+                  {t('UPDATE', 'Update')}
+                </Button>
+              )}
+
+              {formState.loading && (
+                <Button
+                  id='form-btn'
+                  color='primary'
+                  type='button'
+                >
+                  {t('UPDATING', 'Updating...')}
+                </Button>
+              )}
+            </ActionsForm>
+          </>
+        ) : (
+          <SkeletonForm>
+            {[...Array(6)].map((item, i) => (
+              <Skeleton key={i} />
+            ))}
+          </SkeletonForm>
         )}
-        <ActionsForm>
-          {onCancel && (
-            <Button
-              outline
-              type='button'
-              onClick={() => onCancel(false)}
-            >
-              {t('CANCEL', 'Cancel')}
-            </Button>
-          )}
-
-          {Object.keys(formState.changes).length > 0 && isEdit && (
-            <Button
-              id='form-btn'
-              color='primary'
-              type='submit'
-            >
-              {t('UPDATE', 'Update')}
-            </Button>
-          )}
-
-          {formState.loading && (
-            <Button
-              id='form-btn'
-              color='primary'
-              type='button'
-            >
-              {t('UPDATING', 'Updating...')}
-            </Button>
-          )}
-        </ActionsForm>
       </FormInput>
 
       <Alert
