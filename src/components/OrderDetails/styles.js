@@ -33,6 +33,7 @@ export const HeaderImg = styled.div`
       object-fit: cover;
       width: 100%;
       border-radius: 10px;
+      aspect-ratio: attr(width) / attr(height)
 
       ${props => props.theme?.rtl && css`
         transform: scaleX(-1);

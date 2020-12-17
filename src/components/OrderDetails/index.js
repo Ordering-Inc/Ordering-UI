@@ -120,7 +120,7 @@ const OrderDetailsUI = (props) => {
           <Content className='order-content'>
             <Header>
               <HeaderImg>
-                <img src={header?.result?.header} alt='business-header' />
+                <img src={header?.result?.header} alt='business-header' height='200px' width='355px' />
               </HeaderImg>
               <HeaderInfo className='order-header'>
                 <HeaderText column>
@@ -163,7 +163,7 @@ const OrderDetailsUI = (props) => {
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  <img src={getImage(order?.status || 0)} alt='status' />
+                  <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>
