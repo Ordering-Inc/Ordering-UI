@@ -94,6 +94,7 @@ export const UserData = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  width: 100%;
 
   h1 {
     font-size: 20px
