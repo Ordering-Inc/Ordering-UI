@@ -51,7 +51,7 @@ const SignUpFormUI = (props) => {
   const [, { login }] = useSession()
   const theme = useTheme()
 
-  const [userPhoneNumber, setUserPhoneNumber] = useState(null)
+  const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
 
   const handleSuccessFacebook = (user) => {
