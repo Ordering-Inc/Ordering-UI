@@ -52,7 +52,7 @@ const AddressDetailsUI = (props) => {
       </Header>
       <WrappMap>
         <Map>
-          <img src={googleMapsUrl} alt='google-maps-location' />
+          <img src={googleMapsUrl} alt='google-maps-location' width='288px' height='162px' />
         </Map>
       </WrappMap>
 
