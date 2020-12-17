@@ -257,14 +257,14 @@ const CheckoutUI = (props) => {
         {!cartState.loading && cart && cart?.status !== 2 && (
           <WrapperPlaceOrderButton>
             <Button
-              color='primary'
+              color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
               disabled={!cart?.valid || !paymethodSelected || placing || errorCash || cart?.subtotal < cart?.minimum}
               onClick={() => handlePlaceOrder()}
             >
               {cart?.subtotal >= cart?.minimum ? (
                 placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')
               ) : (
-                `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
+                `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
               )}
             </Button>
           </WrapperPlaceOrderButton>
@@ -451,7 +451,7 @@ export const Checkout = (props) => {
               </CartItemWrapper>
               <CartItemActions>
                 <Button
-                  color='primary'
+                  color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
                   onClick={() => handleOpenUpsellingPage(cart)}
                   disabled={currentCart?.uuid === cart?.uuid || openUpselling || cart?.subtotal < cart?.minimum}
                 >

@@ -262,6 +262,9 @@ const StatusBarStyled = styled.div`
   height: 7px;
   margin: 10px 0px 0px;
   background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
+  ${props => props.theme?.rtl && css`
+    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)
+  `}
 `
 
 export const StatusBar = (props) => {

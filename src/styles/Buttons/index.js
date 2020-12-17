@@ -13,6 +13,8 @@ export const Button = styled.button`
   font-size: 16px;
   cursor: pointer;
   outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:active {
     background: ${() => darken(0.07, '#CCC')};

@@ -169,7 +169,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/profile'>
                     {auth
-                      ? (<Profile userId={user.id} accessToken={user.session.access_token} useChekoutFileds useValidationFileds />)
+                      ? (<Profile userId={user.id} accessToken={user.session.access_token} useValidationFields />)
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/profile/orders'>

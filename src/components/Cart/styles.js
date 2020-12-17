@@ -52,12 +52,13 @@ export const CheckoutAction = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
   button {
     padding: 10px 30px;
-    color: #FFF;
-    width: 80%;
+    width: 90%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed
