@@ -53,7 +53,7 @@ export const CartContent = (props) => {
         ))}
       {carts.length === 0 && (
         <NotCarts>
-          <img src={theme.images?.general?.notFound} alt='Not Found' />
+          <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='122px' />
           <h1>{t('CARTS_NOT_FOUND', 'You don\'t have carts available')}</h1>
         </NotCarts>
       )}
