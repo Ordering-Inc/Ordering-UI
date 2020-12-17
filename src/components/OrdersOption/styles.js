@@ -223,7 +223,7 @@ export const SkeletonReorder = styled.div`
 `
 
 export const ImageNotFound = styled.div`
-  width: 300px;
+  
   margin: 0 auto;
   img{
     width: 100%

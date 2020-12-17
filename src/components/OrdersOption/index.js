@@ -61,6 +61,8 @@ const OrdersOptionUI = (props) => {
           <img
             src={activeOrders ? emptyActiveOrders : emptyPastOrders}
             alt={`empty-${activeOrders ? 'active' : 'past'}-orders`}
+            width='300px'
+            height='300px'
           />
         </ImageNotFound>
       )}
