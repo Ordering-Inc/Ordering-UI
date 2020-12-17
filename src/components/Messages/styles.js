@@ -265,6 +265,8 @@ export const ChatImage = styled.div`
   img{
     width: 100%;
     height: auto;
+    max-height: 300px;
+    aspect-ratio: attr(width) / attr(height);
     vertical-align: middle;
     object-fit: contain;
   }
