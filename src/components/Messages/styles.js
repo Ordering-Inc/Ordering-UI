@@ -127,7 +127,7 @@ export const MessageConsole = styled.div`
   display: inline-flex;
   justify-content: center;
   font-size: 0.8em;
-  border-radius: 97px;
+  border-radius: 60px;
 `
 
 export const MessageBusiness = styled.div`
@@ -178,10 +178,10 @@ export const BubbleBusines = styled.div`
   `}
 
   @media (min-width: 480px) {
-    border-radius: 97px 97px 97px 0px;
+    border-radius: 60px 60px 60px 0px;
 
     ${props => props.theme?.rtl && css`
-      border-radius: 97px 97px 0px 97px;
+      border-radius: 60px 60px 0px 60px;
       &[name=image]{
         border-radius: 40px 40px 0px 40px;
        }
@@ -228,10 +228,10 @@ export const BubbleCustomer = styled.div`
   `}
   
   @media (min-width: 480px){
-    border-radius: 97px 97px 0px 97px;
+    border-radius: 60px 60px 0px 60px;
 
     ${props => props.theme?.rtl && css`
-      border-radius: 97px 97px 97px 0px;
+      border-radius: 60px 60px 60px 0px;
     `}
   }
 
@@ -243,18 +243,18 @@ export const BubbleCustomer = styled.div`
 
 export const SkeletonBubbleCustomer = styled.div`
   span{
-    border-radius: 97px 97px 0px 97px;
+    border-radius: 60px 60px 0px 60px;
     ${props => props.theme?.rtl && css`
-    border-radius: 97px 97px 97px 0px;
+    border-radius: 60px 60px 60px 0px;
     `}
   }
 `
 
 export const SkeletonBubbleBusiness = styled.div`
   span{
-    border-radius: 97px 97px 97px 0px;
+    border-radius: 60px 60px 60px 0px;
     ${props => props.theme?.rtl && css`
-    border-radius: 97px 97px 0px 97px;
+    border-radius: 60px 60px 0px 60px;
     `}
   }
 `
@@ -265,7 +265,6 @@ export const ChatImage = styled.div`
   img{
     width: 100%;
     height: auto;
-    max-height: 300px;
     aspect-ratio: attr(width) / attr(height);
     vertical-align: middle;
     object-fit: contain;
