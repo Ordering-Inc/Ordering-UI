@@ -1,19 +1,17 @@
 import styled, { css } from 'styled-components'
 
 export const IconShare = styled.div`
-  position: sticky;
+  position: fixed;
   margin: 0px;
   top: 10px;
   font-size: 22px;
   right: 16px;
+  left: 10px;
   z-index: 9999995;
-
-  ${props => props.theme?.rtl ? css`
-      right: 0px;
-    ` : css`
-      left: 0px;
-  `}
-
+  background: rgba(255,255,255,0.5);
+  height: 30px;
+  border-radius: 50%;
+  width: 30px;
   svg {
     cursor: pointer;
     color: #333;
