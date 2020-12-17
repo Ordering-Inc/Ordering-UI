@@ -119,7 +119,7 @@ export const Chat = styled.div`
     margin-top: 10px;
   }
   @media (min-width: 768px){
-    height: 60vh;
+    height: calc(60vh - 60px);
   }
 `
 
@@ -303,16 +303,21 @@ export const TimeofSent = styled.p`
 export const SendForm = styled.div`
   display: flex;
   padding: 0px 5px;
+  position: fixed;
+  bottom: 0;
   background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
+  width: 97%;
   height: 70px;
   @media (min-width: 480px){
     padding: 0px 20px;
+    width: 95%;
   }
 
   @media (min-width: 768px) {
-    height: 60px;
     padding: 10px 20px;
+    position: static;
+    width: auto;
   }
 `
 
