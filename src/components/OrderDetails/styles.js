@@ -528,6 +528,19 @@ export const FootActions = styled.div`
 export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
   border-radius: 16px;
+  margin-bottom: 30px;
+  span:nth-child(2),span:nth-child(5){
+      span{
+        height: 100px;
+      }
+    }
+  @media (min-width: 768px){
+    span:nth-child(2), span:nth-child(5){
+      span{
+        height: 200px;
+      }
+    }
+  }
 `
 
 export const SkeletonBlockWrapp = styled.div`
