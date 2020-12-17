@@ -13,21 +13,38 @@ export const IconShare = styled.div`
   border-radius: 50%;
   width: 30px;
   svg {
+    position: relative;
     cursor: pointer;
     color: #333;
+    left: 3px;
+    ${props => props.theme?.rtl && css`
+      left: 0;
+      right: 5px;
+    `}
   }
+  ${props => props.theme?.rtl && css`
+    left: 16px;
+    right: 10px;
+  `}
 
 
   @media(min-width: 769px){
     position: relative;
+    left: 5px;
+    ${props => props.theme?.rtl && css`
+      left: 0;
+      right: 5px;
+    `}
     top: 0;
+    svg{
+      position: static;
+    }
   }
 
   @media (min-width: 1201px) {
     position: sticky;
     left: calc(100% - 45px);
     width: 0;
-
     ${props => props.theme?.rtl && css`
       right: calc(100% - 45px);
       left: initial;
