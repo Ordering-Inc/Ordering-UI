@@ -18,15 +18,6 @@ export const UserProfileContainer = styled.div`
   }
 `
 
-export const FlexTabs = styled.div`
-  width: 70%;
-  margin: 0 auto;
-
-  div{
-      justify-content: space-evenly
-  }
-`
-
 export const UserImage = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,6 +63,20 @@ export const Image = styled.div`
   }
 `
 
+export const SideForm = styled.div`
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 55%;
+    display: flex;
+    align-items: center;
+    margin: auto 0px auto 30px;
+    ${props => props.theme?.rtl && css`
+      margin: auto 30px auto 0px;
+    `}
+  }
+`
+
 export const Camera = styled.div`
   width:212px;
   > * {
@@ -94,6 +99,7 @@ export const UserData = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  width: 100%;
 
   h1 {
     font-size: 20px
@@ -162,120 +168,6 @@ export const SavedPlaces = styled.div`
 
 `
 
-export const SideForm = styled.div`
-  width: 100%;
-
-  @media (min-width: 768px) {
-    width: 55%;
-    display: flex;
-    align-items: center;
-    margin: auto 0px auto 30px;
-    ${props => props.theme?.rtl && css`
-      margin: auto 30px auto 0px;
-    `}
-  }
-`
-
-export const FormInput = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  margin: 0 auto;
-
-  div.phone_number {
-    margin-bottom: 20px;
-    width: 100%;
-  }
-
-  input.form {
-    padding: 10px 15px;
-    width: 100%;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-  }
-
-  @media (min-width: 769px) {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-
-    input.form {
-      width: 49%;
-    }
-  }
-`
-
-export const ActionsForm = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-
-  button {
-    margin-top: 10px;
-    padding: 7px 0px;
-    width: 100%;
-    box-sizing: border-box;
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-
-    &:nth-child(1) {
-      margin-right: 5px;
-    }
-  }
-
-  ${props => props.theme?.rtl && css`
-    button {
-      &:nth-child(1) {
-        margin-right: 0px;
-      }
-      &:last-child {
-        margin-right: 5px;
-      }
-    }
-  `}
-`
-
-export const SkeletonWrapper = styled.div`
-  span{
-    height: 100%;
-    position: relative;
-    top: -2.5px;
-  }
-`
-
-export const SkeletonForm = styled.div`
-  width: 100%;
-  justify-content: center;
-  height: auto;
-  display: inline-flex;
-  flex-wrap: wrap;
-  padding: 0;
-  margin-top: 0px;
-  > * {
-    width: 80%;
-    margin: 10px 0;
-    display: inline;
-    height: 50px;
-    span{
-      border-radius: 16px;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  @media (min-width: 768px){
-    justify-content: flex-start;
-    > * {
-      height: 20px;
-      width: 35%;
-      margin: 5px
-    }
-  }
-`
-
 export const UploadImageIcon = styled.div`
   display: flex;
   justify-content: center;
@@ -290,4 +182,16 @@ export const UploadImageIcon = styled.div`
     width: 45px;
     height: 45px;
   }
+`
+
+export const SkeletonWrapper = styled.div`
+  span{
+    height: 100%;
+    position: relative;
+    top: -2.5px;
+  }
+`
+
+export const WrapperForm = styled.div`
+  padding: 10px 25px 0px;
 `

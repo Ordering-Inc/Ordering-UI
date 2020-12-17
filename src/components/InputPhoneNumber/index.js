@@ -3,7 +3,11 @@ import Skeleton from 'react-loading-skeleton'
 import parsePhoneNumber from 'libphonenumber-js'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-import { InputPhoneNumber as InputController, useLanguage } from 'ordering-components'
+import {
+  InputPhoneNumber as InputController,
+  useLanguage,
+  useConfig
+} from 'ordering-components'
 
 import { Container, ErrorMsg } from './styles'
 
@@ -17,6 +21,7 @@ const InputPhoneNumberUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
 
   const isValidPhoneNumber = (number) => {
     if (!number) return
@@ -39,13 +44,13 @@ const InputPhoneNumberUI = (props) => {
 
   return (
     <Container className='phone_number' disabled={disabled}>
-      {countryData.loading ? (
+      {countryData.loading || value === null ? (
         <Skeleton height={40} />
       ) : (
         <>
           <PhoneInput
             international
-            defaultCountry={countryData.value}
+            defaultCountry={countryData.value || configs?.countryDefaultCode?.code || 'US'}
             countryCallingCodeEditable={false}
             placeholder={t('PHONE_NUMBER', 'Phone number')}
             value={value}
