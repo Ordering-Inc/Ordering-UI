@@ -27,7 +27,7 @@ import {
 import { Button } from '../../styles/Buttons'
 import { ProfileOptions } from './ProfileOptions'
 
-import TiCameraOutline from '@meronex/icons/ti/TiCameraOutline'
+import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
 
 import { ExamineClick } from './examineTest'
@@ -102,7 +102,7 @@ const UserProfileFormUI = (props) => {
                 </DragAndDrop>
               </ExamineClick>
             </Image>
-            <Camera><TiCameraOutline /></Camera>
+            <Camera><FiCamera /></Camera>
           </UserImage>
           <SideForm className='user-form'>
             {!edit ? (
