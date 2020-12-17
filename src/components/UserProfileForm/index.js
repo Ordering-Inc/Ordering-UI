@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   UserFormDetails as UserProfileController,
   useLanguage,
   useSession,
-  ExamineClick,
   DragAndDrop
 } from 'ordering-components'
 
@@ -31,6 +30,8 @@ import { ProfileOptions } from './ProfileOptions'
 import GiPhotoCamera from '@meronex/icons/gi/GiPhotoCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
 
+import { ExamineClick } from './examineTest'
+
 const UserProfileFormUI = (props) => {
   const {
     handleButtonUpdateClick,
@@ -43,6 +44,7 @@ const UserProfileFormUI = (props) => {
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [edit, setEdit] = useState(false)
+  const inputRef = useRef(null)
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -58,6 +60,10 @@ const UserProfileFormUI = (props) => {
     }
   }
 
+  const handleClickImage = () => {
+    inputRef.current.click()
+  }
+
   useEffect(() => {
     if (formState.changes.photo) {
       handleButtonUpdateClick()
@@ -70,8 +76,8 @@ const UserProfileFormUI = (props) => {
       <Container>
         <UserProfileContainer>
           <UserImage className='user-image'>
-            <Image isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
-              <ExamineClick onFiles={handleFiles} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
+            <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
+              <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
                 <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
                   {formState.changes.photo && formState.loading
                     ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
