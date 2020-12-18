@@ -49,7 +49,7 @@ export const PreviousOrders = (props) => {
           <SingleCard key={order.id}>
             <OrderPastContent>
               <PastLogo>
-                <img src={order.business?.logo} alt='business-logo' />
+                <img src={order.business?.logo} alt='business-logo' width='55px' height='64px' />
               </PastLogo>
               <BusinessInformation>
                 <WrapperBusinessTitle>

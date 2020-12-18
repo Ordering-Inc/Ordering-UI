@@ -203,7 +203,7 @@ const AddressListUI = (props) => {
 
       {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
         <WrappNotAddresses>
-          <img src={theme.images?.general?.notFound} alt='Not Found' />
+          <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' />
           <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
         </WrappNotAddresses>
       )}

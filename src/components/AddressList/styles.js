@@ -118,6 +118,8 @@ export const WrappNotAddresses = styled.div`
 
   img {
     width: 200px;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height)
   }
   h1 {
     margin: 5px 0px 0px;
