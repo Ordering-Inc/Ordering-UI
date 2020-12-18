@@ -204,7 +204,7 @@ export const ProductActions = styled.div`
     }
     &.soldout {
       width: 100%;
-      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 
@@ -269,6 +269,10 @@ export const WrapperSubOption = styled.div`
   &.error {
     background-color: ${lighten(0.58, '#A52121')};
   }
+  &.soldout {
+    pointer-events: none;
+    background-color: hsl(0, 0%, 72%);
+  }
 `
 
 export const SkuContent = styled.div`
@@ -284,4 +288,12 @@ export const SkuContent = styled.div`
   p {
     font-size: 14px;
   }
+`
+
+export const WrapperIngredients = styled.div`
+  ${({ isProductSoldout }) => isProductSoldout && css`
+    border-radius: 10px;
+    pointer-events: none;
+    background: hsl(0, 0%, 72%);
+  `}
 `
