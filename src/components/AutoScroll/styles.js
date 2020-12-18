@@ -8,15 +8,15 @@ export const AutoscrollContainer = styled.span`
     background: #D9D9D9;
     display: inline-block;
     border-radius: 50%;
-    width: 20px;
-    min-width: 20px;
-    height: 20px;
+    width: 25px;
+    min-width: 25px;
+    height: 25px;
     align-self: center;
     top: ${props => props.modal ? '35%' : '0'};
     position: sticky;
     color: #000000;
     border: 1px solid #333;
-    opacity: 0.9;
+    opacity: 0.7;
   }
 
   #right-autoscroll{

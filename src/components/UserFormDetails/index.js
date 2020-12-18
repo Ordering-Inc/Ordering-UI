@@ -8,7 +8,6 @@ import { FormInput, ActionsForm, SkeletonForm } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { Alert } from '../Confirm'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 
 import { flatArray } from '../../utils'
@@ -28,25 +27,18 @@ export const UserFormDetails = (props) => {
     isRequiredField,
     validationFields,
     handleChangeInput,
-    handleButtonUpdateClick
+    handleButtonUpdateClick,
+    setAlertState
   } = props
 
   const { handleSubmit, register, errors } = useForm()
 
   const [{ user }] = useSession()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [validationFieldsSorted, setValidationFieldsSorted] = useState([])
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
 
   const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
-
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
 
   const setUserCellPhone = (isEdit = false) => {
     if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
@@ -248,28 +240,20 @@ export const UserFormDetails = (props) => {
                   outline
                   type='button'
                   onClick={() => onCancel(false)}
+                  disabled={formState.loading}
                 >
                   {t('CANCEL', 'Cancel')}
                 </Button>
               )}
 
-              {Object.keys(formState.changes).length > 0 && isEdit && (
+              {((Object.keys(formState.changes).length > 0 && isEdit) || formState.loading) && (
                 <Button
                   id='form-btn'
                   color='primary'
                   type='submit'
+                  disabled={formState.loading}
                 >
-                  {t('UPDATE', 'Update')}
-                </Button>
-              )}
-
-              {formState.loading && (
-                <Button
-                  id='form-btn'
-                  color='primary'
-                  type='button'
-                >
-                  {t('UPDATING', 'Updating...')}
+                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
                 </Button>
               )}
             </ActionsForm>
@@ -282,16 +266,6 @@ export const UserFormDetails = (props) => {
           </SkeletonForm>
         )}
       </FormInput>
-
-      <Alert
-        title={t('PROFILE', 'Profile')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
     </>
   )
 }

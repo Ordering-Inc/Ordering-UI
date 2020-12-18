@@ -43,6 +43,7 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
+import { NotFoundSource } from '../NotFoundSource'
 
 const ProductOptionsUI = (props) => {
   const {
@@ -127,7 +128,7 @@ const ProductOptionsUI = (props) => {
 
   return (
     <ProductContainer className='product-container'>
-      {loading && (
+      {loading && !error && (
         <SkeletonBlock width={90}>
           <Skeleton variant='rect' height={50} />
           <Skeleton variant='rect' height={50} />
@@ -147,7 +148,7 @@ const ProductOptionsUI = (props) => {
         <>
           <WrapperImage>
             <ProductImage id='product_image'>
-              <img src={product?.images || theme.images?.dummies?.product} alt='product' />
+              <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' />
             </ProductImage>
           </WrapperImage>
           <ProductInfo>
@@ -347,9 +348,12 @@ const ProductOptionsUI = (props) => {
           )}
         </Modal>
       )}
-      {error && error.length > 0 && error.map((e, i) => (
-        <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
-      ))}
+
+      {error && error.length > 0 && (
+        <NotFoundSource
+          content={error[0].message || error[0]}
+        />
+      )}
     </ProductContainer>
   )
 }

@@ -184,7 +184,7 @@ const CheckoutUI = (props) => {
         </UserDetailsContainer>
 
         <BusinessDetailsContainer>
-          {(businessDetails?.loading || cartState.loading) && (
+          {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
             <div>
               <div>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -209,9 +209,9 @@ const CheckoutUI = (props) => {
           {businessDetails?.error && businessDetails?.error?.length > 0 && (
             <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-              {businessDetails?.error.map((e, i) => (
-                <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-              ))}
+              <NotFoundSource
+                content={businessDetails?.error[0].message || businessDetails?.error[0]}
+              />
             </div>
           )}
         </BusinessDetailsContainer>

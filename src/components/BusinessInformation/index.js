@@ -82,7 +82,7 @@ export const BusinessInformationUI = (props) => {
         <MdClose onClick={() => onClose(false)} />
       </ModalIcon>
       <BusinessHeader>
-        <img src={business.header} alt='business-image' />
+        <img src={business.header} alt='business-image' width='444px' height='250px' />
         <BusinessBasicContent>
           <WrapperBusinessLogo>
             <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
@@ -243,7 +243,7 @@ export const BusinessInformationUI = (props) => {
           <ModalIcon>
             <MdClose onClick={() => setModalImage(false)} />
           </ModalIcon>
-          <img src={image} />
+          <img src={image} width='320px' height='180px' />
         </ImageContainer>
       </Modal>
     </BusinessInformationContainer>
