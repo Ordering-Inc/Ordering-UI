@@ -308,7 +308,7 @@ export const BusinessMediaContent = styled.div`
 
 export const ModalIcon = styled.span`
   display: flex;
-  position: fixed;
+  position: absolute;
   width: 30px;
   height: 30px;
   font-size: 30px;
@@ -331,7 +331,6 @@ export const ModalIcon = styled.span`
   `}
   }
   @media (min-width: 768px){
-    position: absolute;
     right: 5px;
     ${props => props.theme?.rtl && css`
     left: 5px;

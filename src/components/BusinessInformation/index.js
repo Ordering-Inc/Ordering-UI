@@ -238,6 +238,7 @@ export const BusinessInformationUI = (props) => {
         padding='0'
         hideCloseDefault
         isTransparent
+        height='auto'
       >
         <ImageContainer>
           <ModalIcon>
