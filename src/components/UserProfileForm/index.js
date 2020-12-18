@@ -103,8 +103,8 @@ const UserProfileFormUI = (props) => {
         <UserProfileContainer>
           <UserImage className='user-image'>
             <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
-              <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
-                <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={!formState.loading}>
+              <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+                <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
                   {formState.changes.photo && formState.loading
                     ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                     : ((!formState.changes.photo || formState.result?.result === 'Network Error' || formState.result.error)
