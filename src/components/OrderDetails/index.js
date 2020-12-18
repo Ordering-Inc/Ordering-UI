@@ -66,7 +66,7 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseNumber }] = useUtils()
   const [isReviewed, setIsReviewed] = useState(false)
 
-  const { order, loading, header } = props.order
+  const { order, loading, businessData } = props.order
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -122,7 +122,7 @@ const OrderDetailsUI = (props) => {
           <Content className='order-content'>
             <Header>
               <HeaderImg>
-                <img src={header?.result?.header} alt='business-header' />
+                <img src={businessData?.header} alt='business-header' />
               </HeaderImg>
               <HeaderInfo className='order-header'>
                 <HeaderText column>
@@ -147,7 +147,7 @@ const OrderDetailsUI = (props) => {
                     <FiPhone />
                   </span>}
                 <span>
-                  <BiStoreAlt onClick={() => handleBusinessRedirect('mcbonalds')} />
+                  <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
                 </span>
                 <span>
                   <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
