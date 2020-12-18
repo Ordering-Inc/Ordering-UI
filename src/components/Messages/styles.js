@@ -333,10 +333,14 @@ export const SendImage = styled.label`
   width: 25px;
   height: 25px;
   margin: 0px 20px;
+  position: ${props => props.hidden && 'fixed'};
+  opacity: ${props => props.hidden && '0'};
 
   input {
     display: none;
   }
+
+
 
   svg {
     color: #CFD0D0;
