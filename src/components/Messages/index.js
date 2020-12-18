@@ -41,6 +41,7 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
+import AiOutlineCloseCircle from '@meronex/icons/ai/AiOutlineCloseCircle'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import { Modal } from '../Modal'
@@ -116,6 +117,8 @@ export const MessagesUI = (props) => {
   const removeImage = (e) => {
     setImage(null)
   }
+
+  console.log(image)
 
   const onChangeImage = e => {
     const files = e.target.files[0]
@@ -400,8 +403,11 @@ export const MessagesUI = (props) => {
                 onClick={removeImage}
                 type='reset'
               >
-                {t('X', 'X')}
+                <AiOutlineCloseCircle />
               </Button>
+              <img
+                src={image}
+              />
             </WrapperDeleteImage>
           )}
           <WrapperSendMessageButton>

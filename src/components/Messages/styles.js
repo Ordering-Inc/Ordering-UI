@@ -359,11 +359,27 @@ export const SendImage = styled.label`
 
 export const WrapperDeleteImage = styled.div`
   margin: 0px 17px;
-
-  button{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  img{
+    width: 30px;
+    height: 30px;
     &:disabled {
     cursor: not-allowed;
     }
+  }
+
+  svg{
+    margin-bottom: 5px;
+  }
+
+  button{
+    position: absolute;
+    background: black;
+    width: 20px;
+    height: 20px;
+    transform: translate(100%, -50%);
   }
 `
 
