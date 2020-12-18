@@ -4,7 +4,8 @@ import {
   UserFormDetails as UserProfileController,
   useLanguage,
   useSession,
-  DragAndDrop
+  DragAndDrop,
+  ExamineClick
 } from 'ordering-components'
 
 import { UserFormDetails } from '../UserFormDetails'
@@ -29,8 +30,6 @@ import { ProfileOptions } from './ProfileOptions'
 
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
-
-import { ExamineClick } from './examineTest'
 
 const UserProfileFormUI = (props) => {
   const {
