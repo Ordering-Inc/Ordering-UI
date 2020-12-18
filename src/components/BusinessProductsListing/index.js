@@ -143,6 +143,7 @@ const BusinessProductsListingUI = (props) => {
   }, [productModal])
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (categoryId && productId) {
       handleUpdateInitialRender(true)
     }
