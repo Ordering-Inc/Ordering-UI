@@ -21,9 +21,11 @@ export const Map = styled.div`
 
   img {
     width: 100%;
+    height: auto;
     display: block;
     border-radius: 15px;
     -webkit-user-drag: none;
+    aspect-ratio: attr(width) / attr(height)
   }
 `
 

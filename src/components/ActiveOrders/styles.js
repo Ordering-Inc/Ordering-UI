@@ -5,6 +5,7 @@ export const OpenOrder = styled.div`
   width: 90%;
   margin: auto;
   button {
+    margin-top: 10px;
     width: 100%;
     height: 100%;
     font-size: 0.8em;
@@ -12,6 +13,7 @@ export const OpenOrder = styled.div`
 
   @media (min-width: 480px){
     button{
+      margin-top: 0;
       font-size: 1em
     }
   }
@@ -22,6 +24,11 @@ export const Content = styled.div`
   align-items: center;
   border-radius: 16px;
   padding: 10px;
+  padding-bottom: 0;
+
+  @media (min-width: 480px){
+    padding-bottom: 10px;
+  }
 `
 
 export const Price = styled.div`
@@ -65,7 +72,7 @@ export const Card = styled.div`
   margin: 10px;
   display: inline-block;
   background: white;
-  height: 250px;
+  height: 220px;
   border-radius: 16px;
   text-align: left;
 
@@ -89,6 +96,7 @@ export const Card = styled.div`
 
   @media (min-width: 480px){
     min-width: 400px;
+    height: 250px;
     width: 400px;
   }
 `

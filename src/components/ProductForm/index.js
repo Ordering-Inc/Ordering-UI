@@ -38,10 +38,12 @@ import {
   SkeletonBlock,
   WrapperSubOption,
   SkuContent,
-  ProductFormTitle
+  ProductFormTitle,
+  WrapperIngredients
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
+import { NotFoundSource } from '../NotFoundSource'
 
 const ProductOptionsUI = (props) => {
   const {
@@ -114,12 +116,19 @@ const ProductOptionsUI = (props) => {
   }
 
   const isError = (id) => {
-    return errors[`id:${id}`] && 'error'
+    let classnames = ''
+    if (errors[`id:${id}`]) {
+      classnames = 'error'
+    }
+    if (isSoldOut || maxProductQuantity <= 0) {
+      classnames += ' soldout'
+    }
+    return classnames
   }
 
   return (
     <ProductContainer className='product-container'>
-      {loading && (
+      {loading && !error && (
         <SkeletonBlock width={90}>
           <Skeleton variant='rect' height={50} />
           <Skeleton variant='rect' height={50} />
@@ -139,7 +148,7 @@ const ProductOptionsUI = (props) => {
         <>
           <WrapperImage>
             <ProductImage id='product_image'>
-              <img src={product?.images || theme.images?.dummies?.product} alt='product' />
+              <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' />
             </ProductImage>
           </WrapperImage>
           <ProductInfo>
@@ -155,14 +164,16 @@ const ProductOptionsUI = (props) => {
             </ProductFormTitle>
             <ProductEdition>
               {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
-              {product?.ingredients.map(ingredient => (
-                <ProductIngredient
-                  key={ingredient.id}
-                  onChange={handleChangeIngredientState}
-                  state={productCart.ingredients[`id:${ingredient.id}`]}
-                  ingredient={ingredient}
-                />
-              ))}
+              <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                {product?.ingredients.map(ingredient => (
+                  <ProductIngredient
+                    key={ingredient.id}
+                    onChange={handleChangeIngredientState}
+                    state={productCart.ingredients[`id:${ingredient.id}`]}
+                    ingredient={ingredient}
+                  />
+                ))}
+              </WrapperIngredients>
               {
                 product?.extras.map(extra => extra.options.map(option => {
                   const currentState = productCart.options[`id:${option.id}`] || {}
@@ -337,9 +348,12 @@ const ProductOptionsUI = (props) => {
           )}
         </Modal>
       )}
-      {error && error.length > 0 && error.map((e, i) => (
-        <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
-      ))}
+
+      {error && error.length > 0 && (
+        <NotFoundSource
+          content={error[0].message || error[0]}
+        />
+      )}
     </ProductContainer>
   )
 }

@@ -39,6 +39,7 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Alert } from '../Confirm'
+import { bytesConverter } from '../../utils'
 
 export const MessagesUI = (props) => {
   const {
@@ -95,6 +96,10 @@ export const MessagesUI = (props) => {
     chat.scrollTop = chat.scrollHeight
   }, [messages.messages.length])
 
+  useEffect(() => {
+    setImage(null)
+  }, [alertState.open])
+
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
   }
@@ -109,10 +114,30 @@ export const MessagesUI = (props) => {
     reader.readAsDataURL(files)
     reader.onload = () => {
       setImage(reader.result)
-      buttonRef.current.focus()
     }
+    const type = files.type.split('/')[0]
+    if (type !== 'image') {
+      setAlertState({
+        open: true,
+        content: t('ERROR_ONLY_IMAGES', 'Only images can be accepted')
+      })
+      return
+    }
+
+    if (bytesConverter(files[0].size) > 2048) {
+      setAlertState({
+        open: true,
+        content: t('IMAGE_MESSAGES_MAXIMUM_SIZE', 'Images larger than 2 megabytes cannot be sent')
+      })
+      return
+    }
+    buttonRef.current.focus()
     reader.onerror = error => {
       console.log(error)
+      setAlertState({
+        open: true,
+        content: t('ERROR_READ_FILE', 'Failed to read file')
+      })
     }
   }
 
@@ -298,7 +323,7 @@ export const MessagesUI = (props) => {
                     <MessageCustomer>
                       <BubbleCustomer name='image'>
                         <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' width='168px' height='94px' /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -321,7 +346,7 @@ export const MessagesUI = (props) => {
                     <MessageBusiness>
                       <BubbleBusines name='image'>
                         <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' width='168px' height='94px' /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -349,18 +374,16 @@ export const MessagesUI = (props) => {
             })}
             autoComplete='off'
           />
-          {!image && (
-            <SendImage htmlFor='chat_image'>
-              <input
-                type='file'
-                name='image'
-                id='chat_image'
-                accept='image/png,image/jpg,image/jpeg'
-                onChange={onChangeImage}
-              />
-              <BsCardImage />
-            </SendImage>
-          )}
+          <SendImage htmlFor='chat_image' hidden={image}>
+            <input
+              type='file'
+              name='image'
+              id='chat_image'
+              accept='image/png,image/jpg,image/jpeg'
+              onChange={onChangeImage}
+            />
+            <BsCardImage />
+          </SendImage>
           {image && (
             <WrapperDeleteImage>
               <Button

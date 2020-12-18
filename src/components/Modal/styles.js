@@ -88,6 +88,10 @@ export const ModalIcon = styled.span`
     left: 5px;
     right: initial;
   `}
+  svg{
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+  }
 
   @media(min-width: 769px){
     position: absolute;

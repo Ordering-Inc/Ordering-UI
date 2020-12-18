@@ -119,7 +119,7 @@ export const Chat = styled.div`
     margin-top: 10px;
   }
   @media (min-width: 768px){
-    height: 60vh;
+    height: calc(60vh - 60px);
   }
 `
 
@@ -127,7 +127,7 @@ export const MessageConsole = styled.div`
   display: inline-flex;
   justify-content: center;
   font-size: 0.8em;
-  border-radius: 97px;
+  border-radius: 60px;
 `
 
 export const MessageBusiness = styled.div`
@@ -178,10 +178,10 @@ export const BubbleBusines = styled.div`
   `}
 
   @media (min-width: 480px) {
-    border-radius: 97px 97px 97px 0px;
+    border-radius: 60px 60px 60px 0px;
 
     ${props => props.theme?.rtl && css`
-      border-radius: 97px 97px 0px 97px;
+      border-radius: 60px 60px 0px 60px;
       &[name=image]{
         border-radius: 40px 40px 0px 40px;
        }
@@ -228,10 +228,10 @@ export const BubbleCustomer = styled.div`
   `}
   
   @media (min-width: 480px){
-    border-radius: 97px 97px 0px 97px;
+    border-radius: 60px 60px 0px 60px;
 
     ${props => props.theme?.rtl && css`
-      border-radius: 97px 97px 97px 0px;
+      border-radius: 60px 60px 60px 0px;
     `}
   }
 
@@ -243,18 +243,18 @@ export const BubbleCustomer = styled.div`
 
 export const SkeletonBubbleCustomer = styled.div`
   span{
-    border-radius: 97px 97px 0px 97px;
+    border-radius: 60px 60px 0px 60px;
     ${props => props.theme?.rtl && css`
-    border-radius: 97px 97px 97px 0px;
+    border-radius: 60px 60px 60px 0px;
     `}
   }
 `
 
 export const SkeletonBubbleBusiness = styled.div`
   span{
-    border-radius: 97px 97px 97px 0px;
+    border-radius: 60px 60px 60px 0px;
     ${props => props.theme?.rtl && css`
-    border-radius: 97px 97px 0px 97px;
+    border-radius: 60px 60px 0px 60px;
     `}
   }
 `
@@ -265,6 +265,7 @@ export const ChatImage = styled.div`
   img{
     width: 100%;
     height: auto;
+    aspect-ratio: attr(width) / attr(height);
     vertical-align: middle;
     object-fit: contain;
   }
@@ -302,16 +303,21 @@ export const TimeofSent = styled.p`
 export const SendForm = styled.div`
   display: flex;
   padding: 0px 5px;
+  position: fixed;
+  bottom: 0;
   background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
+  width: 97%;
   height: 70px;
   @media (min-width: 480px){
     padding: 0px 20px;
+    width: 95%;
   }
 
   @media (min-width: 768px) {
-    height: 60px;
     padding: 10px 20px;
+    position: static;
+    width: auto;
   }
 `
 
@@ -333,10 +339,14 @@ export const SendImage = styled.label`
   width: 25px;
   height: 25px;
   margin: 0px 20px;
+  position: ${props => props.hidden && 'fixed'};
+  opacity: ${props => props.hidden && '0'};
 
   input {
     display: none;
   }
+
+
 
   svg {
     color: #CFD0D0;

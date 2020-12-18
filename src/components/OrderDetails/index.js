@@ -6,6 +6,7 @@ import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
+import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -52,6 +53,7 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
+    handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
     driverLocation
@@ -64,7 +66,7 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseNumber }] = useUtils()
   const [isReviewed, setIsReviewed] = useState(false)
 
-  const { order, loading, header } = props.order
+  const { order, loading, businessData, error } = props.order
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -120,7 +122,7 @@ const OrderDetailsUI = (props) => {
           <Content className='order-content'>
             <Header>
               <HeaderImg>
-                <img src={header?.result?.header} alt='business-header' />
+                <img src={businessData?.header} alt='business-header' height='200px' width='355px' />
               </HeaderImg>
               <HeaderInfo className='order-header'>
                 <HeaderText column>
@@ -145,11 +147,11 @@ const OrderDetailsUI = (props) => {
                     <FiPhone />
                   </span>}
                 <span>
+                  <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
+                </span>
+                <span>
                   <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
                 </span>
-                {/* <span>
-                  <BiCaretDown />
-                </span> */}
               </ActionsBlock>
             </OrderBusiness>
 
@@ -163,7 +165,7 @@ const OrderDetailsUI = (props) => {
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  <img src={getImage(order?.status || 0)} alt='status' />
+                  <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>
@@ -317,27 +319,28 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {loading && (
+      {loading && !error && (
         <WrapperContainer isLoading className='skeleton-loading'>
           <SkeletonBlockWrapp>
             <SkeletonBlock width={80}>
-              <Skeleton height={200} />
+              <Skeleton height={300} />
+              <Skeleton />
               <Skeleton height={100} />
               <Skeleton height={100} />
-              <Skeleton height={100} />
-              <Skeleton height={100} />
+              <Skeleton />
               <Skeleton height={200} />
             </SkeletonBlock>
           </SkeletonBlockWrapp>
         </WrapperContainer>
       )}
 
-      {/* {error && error.length > 0 &&
-        error.map((e, i) => {
-          if (e) {
-            return <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-          }
-        })} */}
+      {error && error.length > 0 && (
+        <NotFoundSource
+          content={error[0].message || error[0]}
+          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
+          onClickButton={handleOrderRedirect}
+        />
+      )}
 
       {!loading && !order && (
         <NotFoundSource

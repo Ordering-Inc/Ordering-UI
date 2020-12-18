@@ -20,6 +20,7 @@ import {
   FormActions
 } from './styles'
 
+import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
@@ -203,16 +204,17 @@ const AddressListUI = (props) => {
 
       {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
         <WrappNotAddresses>
-          <img src={theme.images?.general?.notFound} alt='Not Found' />
+          <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' />
           <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
         </WrappNotAddresses>
       )}
 
       {!addressList.loading && addressList.error && (
         addressList.error.length > 0 && (
-          addressList.error.map((e, i) => (
-            <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
-          )))
+          <NotFoundSource
+            content={addressList.error[0].message || addressList.error[0]}
+          />
+        )
       )}
 
       {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && (
