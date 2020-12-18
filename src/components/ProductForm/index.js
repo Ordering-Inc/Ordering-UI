@@ -38,7 +38,8 @@ import {
   SkeletonBlock,
   WrapperSubOption,
   SkuContent,
-  ProductFormTitle
+  ProductFormTitle,
+  WrapperIngredients
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -115,7 +116,14 @@ const ProductOptionsUI = (props) => {
   }
 
   const isError = (id) => {
-    return errors[`id:${id}`] && 'error'
+    let classnames = ''
+    if (errors[`id:${id}`]) {
+      classnames = 'error'
+    }
+    if (isSoldOut || maxProductQuantity <= 0) {
+      classnames += ' soldout'
+    }
+    return classnames
   }
 
   return (
@@ -156,14 +164,16 @@ const ProductOptionsUI = (props) => {
             </ProductFormTitle>
             <ProductEdition>
               {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
-              {product?.ingredients.map(ingredient => (
-                <ProductIngredient
-                  key={ingredient.id}
-                  onChange={handleChangeIngredientState}
-                  state={productCart.ingredients[`id:${ingredient.id}`]}
-                  ingredient={ingredient}
-                />
-              ))}
+              <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                {product?.ingredients.map(ingredient => (
+                  <ProductIngredient
+                    key={ingredient.id}
+                    onChange={handleChangeIngredientState}
+                    state={productCart.ingredients[`id:${ingredient.id}`]}
+                    ingredient={ingredient}
+                  />
+                ))}
+              </WrapperIngredients>
               {
                 product?.extras.map(extra => extra.options.map(option => {
                   const currentState = productCart.options[`id:${option.id}`] || {}

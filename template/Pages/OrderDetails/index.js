@@ -13,6 +13,9 @@ export const OrderDetailsPage = (props) => {
     orderId: orderId,
     handleOrderRedirect: () => {
       history.push('/profile/orders')
+    },
+    handleBusinessRedirect: (slug) => {
+      history.push(`/store/${slug}`)
     }
   }
   return (
