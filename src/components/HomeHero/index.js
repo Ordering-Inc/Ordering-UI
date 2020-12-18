@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-
+import { useTheme } from 'styled-components'
+import { useSession, useOrder, useLanguage } from 'ordering-components'
+import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import {
   HeroContainer,
   ContentWrapper,
@@ -9,17 +11,10 @@ import {
   InputSpan
 } from './styles'
 
-import { Button } from '../../styles/Buttons'
-
 import { Modal } from '../Modal'
+import { Button } from '../../styles/Buttons'
 import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
-
-import { useSession, useOrder, useLanguage } from 'ordering-components'
-
-import { Alert } from '../Confirm'
-import { useTheme } from 'styled-components'
-import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 
 export const HomeHero = (props) => {
   const {
@@ -30,12 +25,11 @@ export const HomeHero = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const theme = useTheme()
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
-      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')] })
+      setModals({ ...modals, formOpen: true })
       return
     }
     setModals({ listOpen: false, formOpen: false })
@@ -105,16 +99,6 @@ export const HomeHero = (props) => {
           onAccept={() => handleFindBusinesses()}
         />
       </Modal>
-
-      <Alert
-        title={t('SEARCH', 'Search')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => setAlertState({ open: false, content: [] })}
-        onAccept={() => setAlertState({ open: false, content: [] })}
-        closeOnBackdrop={false}
-      />
     </HeroContainer>
   )
 }
