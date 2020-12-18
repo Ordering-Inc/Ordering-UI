@@ -373,11 +373,12 @@ export const WrapperDeleteImage = styled.div`
 
   svg{
     margin-bottom: 5px;
+    color: black;
   }
 
   button{
     position: absolute;
-    background: black;
+    background: white;
     width: 20px;
     height: 20px;
     transform: translate(100%, -50%);
