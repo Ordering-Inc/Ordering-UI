@@ -334,7 +334,7 @@ const OrderDetailsUI = (props) => {
 
       {error && error.length > 0 && (
         <NotFoundSource
-          content={error[0].message || error[0]}
+          content={error[0]?.message || error[0]}
           btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
           onClickButton={handleOrderRedirect}
         />
