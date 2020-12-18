@@ -289,6 +289,7 @@ export const BusinessMediaContent = styled.div`
       border-radius: 10px;
       margin: 10px 10px;
       width: calc(100% - 12px);
+      cursor: pointer;
 
       @media (min-width: 481px) {
         width: calc(50% - 20px);

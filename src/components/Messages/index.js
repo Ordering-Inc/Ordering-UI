@@ -29,7 +29,9 @@ import {
   BubbleConsole,
   WrapperDeleteImage,
   WrapperSendMessageButton,
-  HeaderOnline
+  HeaderOnline,
+  ImageContainer,
+  ModalIcon
 } from './styles'
 import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
@@ -38,8 +40,10 @@ import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import MdClose from '@meronex/icons/md/MdClose'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
+import { Modal } from '../Modal'
 
 export const MessagesUI = (props) => {
   const {
@@ -62,6 +66,11 @@ export const MessagesUI = (props) => {
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
+  const [modalImage, setModalImage] = useState({ open: false, src: '' })
+
+  const handleModalImage = (src) => {
+    setModalImage({ open: true, src })
+  }
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -323,7 +332,7 @@ export const MessagesUI = (props) => {
                     <MessageCustomer>
                       <BubbleCustomer name='image'>
                         <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' width='168px' height='94px' /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -346,7 +355,7 @@ export const MessagesUI = (props) => {
                     <MessageBusiness>
                       <BubbleBusines name='image'>
                         <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' width='168px' height='94px' /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -425,6 +434,20 @@ export const MessagesUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        onClose={() => setModalImage({ ...modalImage, open: false })}
+        open={modalImage.open}
+        padding='0'
+        hideCloseDefault
+        isTransparent
+      >
+        <ImageContainer>
+          <ModalIcon>
+            <MdClose onClick={() => setModalImage({ ...modalImage, open: false })} />
+          </ModalIcon>
+          <img src={modalImage.src} width='320px' height='180px' />
+        </ImageContainer>
+      </Modal>
     </MessagesContainer>
   )
 }

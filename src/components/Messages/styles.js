@@ -268,6 +268,7 @@ export const ChatImage = styled.div`
     aspect-ratio: attr(width) / attr(height);
     vertical-align: middle;
     object-fit: contain;
+    cursor: pointer;
   }
 `
 
@@ -403,5 +404,49 @@ export const WrapperSendMessageButton = styled.div`
         display: inline;
       }
     }
+  }
+`
+
+export const ImageContainer = styled.div` 
+  max-height: 500px;
+  img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+`
+export const ModalIcon = styled.span`
+  display: flex;
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+  right: 5px;
+  top: 5px;
+  z-index: 1;
+  background: rgba(0,0,0,0.3);
+  ${props => props.theme?.rtl && css`
+    left: 5px;
+    right: initial;
+  `}
+  @media (min-width: 578px){
+    right: 10px;
+    ${props => props.theme?.rtl && css`
+    left: 10px;
+    right: initial;
+  `}
+  }
+  @media (min-width: 768px){
+    position: absolute;
+    right: 5px;
+    ${props => props.theme?.rtl && css`
+    left: 5px;
+    right: initial;
+  `}
   }
 `
