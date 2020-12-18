@@ -13,7 +13,7 @@ const CmsUI = (props) => {
   return (
     <CmsContainer id='cms'>
       {
-        cmsState.loading && (
+        cmsState.loading && !cmsState.error && (
           <SkeletonContainer>
             <SkeletonHeader>
               <Skeleton width='100%' height='100%' />
@@ -41,7 +41,7 @@ const CmsUI = (props) => {
         )
       }
       {
-        (!cmsState.loading && cmsState.error) &&
+        cmsState.error &&
           <NotFoundSource
             content={t('ERROR_PAGE_SELECTED', 'Sorry, the selected page was not found.')}
             btnTitle={t('PAGE_REDIRECT', 'Go to pages list')}
