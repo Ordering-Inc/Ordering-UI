@@ -117,8 +117,6 @@ export const MessagesUI = (props) => {
     setImage(null)
   }
 
-  console.log(image)
-
   const onChangeImage = e => {
     const files = e.target.files[0]
     const reader = new window.FileReader()
