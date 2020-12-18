@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
+exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -12,6 +12,8 @@ var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMast
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
 
 var _FaCreditCard = _interopRequireDefault(require("@meronex/icons/fa/FaCreditCard"));
+
+var _orderingComponents = require("ordering-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -190,11 +192,28 @@ var flatArray = function flatArray(arr) {
 exports.flatArray = flatArray;
 
 var getTraduction = function getTraduction(key) {
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var keyList = {
     // Add the key and traduction that you need below
-    ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart'
+    ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart',
+    ERROR_INVALID_COUPON: "The coupon doesn't exist"
   };
-  return keyList[key] || key;
+  return keyList[key] ? t(key, keyList[key]) : t(key);
 };
+/**
+ * Function to transform bytes to kb
+ * @param {number} bytes for transform
+ *
+ */
+
 
 exports.getTraduction = getTraduction;
+
+var bytesConverter = function bytesConverter(bytes) {
+  return Math.floor(bytes / 1024);
+};
+
+exports.bytesConverter = bytesConverter;

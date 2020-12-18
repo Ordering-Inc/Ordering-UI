@@ -37,6 +37,8 @@ var _StripeElementsForm = require("../StripeElementsForm");
 
 var _StripeRedirectForm = require("../StripeRedirectForm");
 
+var _NotFoundSource = require("../NotFoundSource");
+
 var _utils = require("../../utils");
 
 var _styles = require("./styles");
@@ -153,10 +155,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
         marginLeft: '10px'
       }
     }));
-  }), paymethodsList.error && paymethodsList.error.length > 0 && paymethodsList.error.map(function (e, i) {
-    return /*#__PURE__*/_react.default.createElement("p", {
-      key: i
-    }, t('ERROR', 'ERROR'), ": [", e, "]");
+  }), paymethodsList.error && paymethodsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0].message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])
   }), !paymethodsList.loading && !paymethodsList.error && paymethodsList.paymethods.length === 0 && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
     orderTotal: orderTotal,
     onChangeData: handlePaymethodDataChange,

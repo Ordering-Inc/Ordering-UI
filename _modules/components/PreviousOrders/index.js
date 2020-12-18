@@ -125,7 +125,9 @@ var PreviousOrders = function PreviousOrders(props) {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderPastContent, null, /*#__PURE__*/_react.default.createElement(_styles.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
       src: (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo,
-      alt: "business-logo"
+      alt: "business-logo",
+      width: "55px",
+      height: "64px"
     })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name)), /*#__PURE__*/_react.default.createElement("p", null, order.created_at), /*#__PURE__*/_react.default.createElement("p", {
       name: "view_order",
       onClick: function onClick() {

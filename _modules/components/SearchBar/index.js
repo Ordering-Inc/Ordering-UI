@@ -53,7 +53,8 @@ var SearchBar = function SearchBar(_ref) {
     name: "search",
     "aria-label": "search",
     placeholder: placeholder,
-    autoComplete: "off"
+    autoComplete: "off",
+    maxLength: "500"
   }));
 };
 

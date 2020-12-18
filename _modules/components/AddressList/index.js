@@ -23,6 +23,8 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
+var _NotFoundSource = require("../NotFoundSource");
+
 var _Buttons = require("../../styles/Buttons");
 
 var _Modal = require("../Modal");
@@ -256,11 +258,11 @@ var AddressListUI = function AddressListUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, null))));
   })), !addressList.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
-    alt: "Not Found"
-  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.'))), !addressList.loading && addressList.error && addressList.error.length > 0 && addressList.error.map(function (e, i) {
-    return /*#__PURE__*/_react.default.createElement("p", {
-      key: i
-    }, t('ERROR', 'Error'), ": [", e, "]");
+    alt: "Not Found",
+    width: "200px",
+    height: "112px"
+  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.'))), !addressList.loading && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: addressList.error[0].message || addressList.error[0]
   }), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50,
     count: 3,

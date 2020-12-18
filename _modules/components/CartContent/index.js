@@ -83,7 +83,9 @@ var CartContent = function CartContent(props) {
     }));
   }), carts.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
-    alt: "Not Found"
+    alt: "Not Found",
+    width: "200px",
+    height: "122px"
   }), /*#__PURE__*/_react.default.createElement("h1", null, t('CARTS_NOT_FOUND', 'You don\'t have carts available'))));
 };
 

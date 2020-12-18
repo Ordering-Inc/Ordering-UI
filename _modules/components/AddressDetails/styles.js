@@ -44,7 +44,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  font-size: 100%;\n\n  img {\n    width: 100%;\n    display: block;\n    border-radius: 15px;\n    -webkit-user-drag: none;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 100%;\n\n  img {\n    width: 100%;\n    height: auto;\n    display: block;\n    border-radius: 15px;\n    -webkit-user-drag: none;\n    aspect-ratio: attr(width) / attr(height)\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;

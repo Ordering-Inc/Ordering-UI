@@ -30,7 +30,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  img {\n    max-height: 150px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  img {\n    height: auto;\n    aspect-ratio: attr(width) / attr(height);\n    max-height: 150px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

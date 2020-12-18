@@ -97,7 +97,9 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
-    alt: "google-maps-location"
+    alt: "google-maps-location",
+    width: "288px",
+    height: "162px"
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESSES', 'Addresses'),
     open: openModal,

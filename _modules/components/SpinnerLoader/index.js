@@ -19,7 +19,9 @@ var SpinnerLoader = function SpinnerLoader(props) {
     style: style
   }, logotype && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
     src: logotype,
-    alt: "logo"
+    alt: "logo",
+    width: "266px",
+    height: "150px"
   })), content && /*#__PURE__*/_react.default.createElement(_styles.Content, null, content), /*#__PURE__*/_react.default.createElement(_styles.Spinner, {
     className: "spinner"
   }, /*#__PURE__*/_react.default.createElement("div", {

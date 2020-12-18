@@ -94,7 +94,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  /* display: flex; */\n  flex: 1 1 auto;\n  font-weight: 300;\n  color: #555;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 0 5px;\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex: 1 1 auto;\n  font-weight: 300;\n  color: #555;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 0 5px;\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;

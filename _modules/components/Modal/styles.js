@@ -24,7 +24,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  right: 5px;\n  top: 6px;\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 1;\n  ", "\n\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  right: 5px;\n  top: 6px;\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 1;\n  ", "\n  svg{\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;

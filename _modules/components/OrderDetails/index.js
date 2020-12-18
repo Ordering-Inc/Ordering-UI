@@ -23,6 +23,8 @@ var _BiCaretUp = _interopRequireDefault(require("@meronex/icons/bi/BiCaretUp"));
 
 var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
 
+var _BiStoreAlt = _interopRequireDefault(require("@meronex/icons/bi/BiStoreAlt"));
+
 var _Buttons = require("../../styles/Buttons");
 
 var _NotFoundSource = require("../NotFoundSource");
@@ -64,9 +66,10 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _order$driver, _order$business, _order$customer, _header$result, _order$business2, _order$business3, _order$business4, _getOrderStatus, _getOrderStatus2, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$driver2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$products;
+  var _order$driver, _order$business, _order$customer, _order$business2, _order$business3, _order$business4, _getOrderStatus, _getOrderStatus2, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$driver2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$products;
 
-  var handleOrderRedirect = props.handleOrderRedirect,
+  var handleBusinessRedirect = props.handleBusinessRedirect,
+      handleOrderRedirect = props.handleOrderRedirect,
       googleMapsControls = props.googleMapsControls,
       driverLocation = props.driverLocation;
 
@@ -107,7 +110,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var _props$order = props.order,
       order = _props$order.order,
       loading = _props$order.loading,
-      header = _props$order.header;
+      businessData = _props$order.businessData,
+      error = _props$order.error;
 
   var getOrderStatus = function getOrderStatus(s) {
     var status = parseInt(s);
@@ -206,8 +210,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderImg, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: header === null || header === void 0 ? void 0 : (_header$result = header.result) === null || _header$result === void 0 ? void 0 : _header$result.header,
-    alt: "business-header"
+    src: businessData === null || businessData === void 0 ? void 0 : businessData.header,
+    alt: "business-header",
+    height: "200px",
+    width: "355px"
   })), /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, {
     className: "order-header"
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderText, {
@@ -218,7 +224,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return window.open("tel:".concat(order.driver.phone));
     }
-  }, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
+  }, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BiStoreAlt.default, {
+    onClick: function onClick() {
+      return handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
+    }
+  })), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
     onClick: function onClick() {
       return setOpenMessages({
         driver: false,
@@ -231,7 +241,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   })), /*#__PURE__*/_react.default.createElement(_styles.OrderStatus, null, /*#__PURE__*/_react.default.createElement("span", null, (_getOrderStatus2 = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.StatusImage, null, /*#__PURE__*/_react.default.createElement("img", {
     src: getImage((order === null || order === void 0 ? void 0 : order.status) || 0),
-    alt: "status"
+    alt: "status",
+    width: "70px",
+    height: "70px"
   })))), /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('CUSTOMER', 'Customer')), /*#__PURE__*/_react.default.createElement(_styles.OrderCustomer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "photo"
   }, (order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo) ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
@@ -276,24 +288,24 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         page: 'orders'
       });
     }
-  }, t('MY_ORDERS', 'My Orders'), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, null))))), loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
+  }, t('MY_ORDERS', 'My Orders'), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, null))))), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
     isLoading: true,
     className: "skeleton-loading"
   }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 80
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 300
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 100
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 100
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 200
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 200
-  })))), !loading && !order && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })))), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: error[0].message || error[0],
+    btnTitle: t('ORDERS_REDIRECT', 'Go to Orders'),
+    onClickButton: handleOrderRedirect
+  }), !loading && !order && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('ORDERS_REDIRECT', 'Go to Orders'),
     onClickButton: handleOrderRedirect

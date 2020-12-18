@@ -17,15 +17,19 @@ var _UserFormDetails = require("../UserFormDetails");
 
 var _AddressList = require("../AddressList");
 
-var _styles = require("./styles");
+var _Confirm = require("../Confirm");
 
 var _Buttons = require("../../styles/Buttons");
 
 var _ProfileOptions = require("./ProfileOptions");
 
-var _GiPhotoCamera = _interopRequireDefault(require("@meronex/icons/gi/GiPhotoCamera"));
+var _utils = require("../../utils");
+
+var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -75,8 +79,36 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       edit = _useState2[0],
       setEdit = _useState2[1];
 
+  var _useState3 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
+
+  var inputRef = (0, _react.useRef)(null);
+
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
+      var type = files[0].type.split('/')[0];
+
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        });
+        return;
+      }
+
+      if ((0, _utils.bytesConverter)(files[0].size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        });
+        return;
+      }
+
       handlechangeImage(files[0]);
     }
   };
@@ -90,6 +122,17 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     }
   };
 
+  var handleClickImage = function handleClickImage() {
+    inputRef.current.click();
+  };
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
   (0, _react.useEffect)(function () {
     if (formState.changes.photo) {
       handleButtonUpdateClick();
@@ -99,25 +142,33 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     value: "account"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"
+  }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    onClick: function onClick() {
+      return handleClickImage();
+    },
+    isImage: (user === null || user === void 0 ? void 0 : user.photo) || (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.photo) && !formState.result.error
   }, /*#__PURE__*/_react.default.createElement(_orderingComponents.ExamineClick, {
+    onFiles: handleFiles,
+    childRef: function childRef(e) {
+      inputRef.current = e;
+    },
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: !formState.loading,
-    onFiles: handleFiles
+    disabled: formState.loading
   }, /*#__PURE__*/_react.default.createElement(_orderingComponents.DragAndDrop, {
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: !formState.loading,
     onDrop: function onDrop(dataTransfer) {
       return handleFiles(dataTransfer.files);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-    isImage: (user === null || user === void 0 ? void 0 : user.photo) || (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.photo) && !formState.result.error
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
   }, formState.changes.photo && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !formState.changes.photo || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) === 'Network Error' || formState.result.error ? (user === null || user === void 0 ? void 0 : user.photo) ? /*#__PURE__*/_react.default.createElement("img", {
     src: user === null || user === void 0 ? void 0 : user.photo,
-    alt: "user image"
-  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo) && formState.result.error ? /*#__PURE__*/_react.default.createElement("img", {
+    alt: "user image",
+    width: "200px",
+    height: "200px"
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo) && formState.result.error && /*#__PURE__*/_react.default.createElement("img", {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo,
     alt: "user image"
-  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here')))))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_GiPhotoCamera.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, {
     className: "user-form"
   }, !edit ? formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 250,
@@ -143,10 +194,23 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onCancel: toggleEditState,
     onCloseProfile: function onCloseProfile() {
       return setEdit(false);
-    }
+    },
+    setAlertState: setAlertState
   }))))), /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     addressList: user.addresses
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('PROFILE', 'Profile'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 var UserProfileForm = function UserProfileForm(props) {

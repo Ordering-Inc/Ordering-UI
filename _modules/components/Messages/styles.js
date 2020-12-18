@@ -44,7 +44,7 @@ function _templateObject33() {
 }
 
 function _templateObject32() {
-  var data = _taggedTemplateLiteral(["\n  width: 25px;\n  height: 25px;\n  margin: 0px 20px;\n\n  input {\n    display: none;\n  }\n\n  svg {\n    color: #CFD0D0;\n    width: 25px;\n    height: 25px;\n    cursor: pointer\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 25px;\n  height: 25px;\n  margin: 0px 20px;\n  position: ", ";\n  opacity: ", ";\n\n  input {\n    display: none;\n  }\n\n\n\n  svg {\n    color: #CFD0D0;\n    width: 25px;\n    height: 25px;\n    cursor: pointer\n  }\n"]);
 
   _templateObject32 = function _templateObject32() {
     return data;
@@ -64,7 +64,7 @@ function _templateObject31() {
 }
 
 function _templateObject30() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0px 5px;\n  background: #FAFAFA;\n  border-top: 1px solid #EEEEEE;\n  height: 70px;\n  @media (min-width: 480px){\n    padding: 0px 20px;\n  }\n\n  @media (min-width: 768px) {\n    height: 60px;\n    padding: 10px 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0px 5px;\n  position: fixed;\n  bottom: 0;\n  background: #FAFAFA;\n  border-top: 1px solid #EEEEEE;\n  width: 97%;\n  height: 70px;\n  @media (min-width: 480px){\n    padding: 0px 20px;\n    width: 95%;\n  }\n\n  @media (min-width: 768px) {\n    padding: 10px 20px;\n    position: static;\n    width: auto;\n  }\n"]);
 
   _templateObject30 = function _templateObject30() {
     return data;
@@ -124,7 +124,7 @@ function _templateObject25() {
 }
 
 function _templateObject24() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: auto;\n  img{\n    width: 100%;\n    height: auto;\n    vertical-align: middle;\n    object-fit: contain;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: auto;\n  img{\n    width: 100%;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height);\n    vertical-align: middle;\n    object-fit: contain;\n  }\n"]);
 
   _templateObject24 = function _templateObject24() {
     return data;
@@ -134,7 +134,7 @@ function _templateObject24() {
 }
 
 function _templateObject23() {
-  var data = _taggedTemplateLiteral(["\n    border-radius: 97px 97px 0px 97px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n    border-radius: 60px 60px 0px 60px;\n    "]);
 
   _templateObject23 = function _templateObject23() {
     return data;
@@ -144,7 +144,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = _taggedTemplateLiteral(["\n  span{\n    border-radius: 97px 97px 97px 0px;\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  span{\n    border-radius: 60px 60px 60px 0px;\n    ", "\n  }\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -154,7 +154,7 @@ function _templateObject22() {
 }
 
 function _templateObject21() {
-  var data = _taggedTemplateLiteral(["\n    border-radius: 97px 97px 97px 0px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n    border-radius: 60px 60px 60px 0px;\n    "]);
 
   _templateObject21 = function _templateObject21() {
     return data;
@@ -164,7 +164,7 @@ function _templateObject21() {
 }
 
 function _templateObject20() {
-  var data = _taggedTemplateLiteral(["\n  span{\n    border-radius: 97px 97px 0px 97px;\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  span{\n    border-radius: 60px 60px 0px 60px;\n    ", "\n  }\n"]);
 
   _templateObject20 = function _templateObject20() {
     return data;
@@ -174,7 +174,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n      border-radius: 97px 97px 97px 0px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      border-radius: 60px 60px 60px 0px;\n    "]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -194,7 +194,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  border-radius: 40px 40px 0px 40px;\n  padding: 10px 25px 10px 25px;\n  max-width: 60%;\n  min-width: 80px;\n  height: auto;\n  margin-bottom: 10px;\n  background: #D81212;\n  color: white;\n  overflow-wrap: break-word;\n  overflow: hidden;\n\n  p:last-child {\n    left: 10px;\n  }\n\n  &[name=image]{\n    border-radius: 40px 40px 0px 40px;\n    width: 100%;\n  }\n\n  ", "\n  \n  @media (min-width: 480px){\n    border-radius: 97px 97px 0px 97px;\n\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    max-width: 40%\n  }\n\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-radius: 40px 40px 0px 40px;\n  padding: 10px 25px 10px 25px;\n  max-width: 60%;\n  min-width: 80px;\n  height: auto;\n  margin-bottom: 10px;\n  background: #D81212;\n  color: white;\n  overflow-wrap: break-word;\n  overflow: hidden;\n\n  p:last-child {\n    left: 10px;\n  }\n\n  &[name=image]{\n    border-radius: 40px 40px 0px 40px;\n    width: 100%;\n  }\n\n  ", "\n  \n  @media (min-width: 480px){\n    border-radius: 60px 60px 0px 60px;\n\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    max-width: 40%\n  }\n\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -204,7 +204,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n      border-radius: 97px 97px 0px 97px;\n      &[name=image]{\n        border-radius: 40px 40px 0px 40px;\n       }\n    "]);
+  var data = _taggedTemplateLiteral(["\n      border-radius: 60px 60px 0px 60px;\n      &[name=image]{\n        border-radius: 40px 40px 0px 40px;\n       }\n    "]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -224,7 +224,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  border-radius: 40px 40px 40px 0px;\n  padding: 10px 25px 10px 25px;\n  max-width: 60%;\n  min-width: 80px;\n  margin-bottom: 10px;\n  background: #EFEFEF;\n  overflow: hidden;\n  overflow-wrap: break-word;\n  &[name=image]{\n    border-radius: 40px 40px 40px 0px;\n    width: 100%;\n  }\n\n  ", "\n\n  @media (min-width: 480px) {\n    border-radius: 97px 97px 97px 0px;\n\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    max-width: 40%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-radius: 40px 40px 40px 0px;\n  padding: 10px 25px 10px 25px;\n  max-width: 60%;\n  min-width: 80px;\n  margin-bottom: 10px;\n  background: #EFEFEF;\n  overflow: hidden;\n  overflow-wrap: break-word;\n  &[name=image]{\n    border-radius: 40px 40px 40px 0px;\n    width: 100%;\n  }\n\n  ", "\n\n  @media (min-width: 480px) {\n    border-radius: 60px 60px 60px 0px;\n\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    max-width: 40%;\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -264,7 +264,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  display: inline-flex;\n  justify-content: center;\n  font-size: 0.8em;\n  border-radius: 97px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: inline-flex;\n  justify-content: center;\n  font-size: 0.8em;\n  border-radius: 60px;\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -274,7 +274,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-y: auto;\n  overflow-x: hidden;\n  height: 70vh;\n  flex-direction: column;\n  padding: 0 20px;\n  > :first-child{\n    margin-top: 10px;\n  }\n  @media (min-width: 768px){\n    height: 60vh;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-y: auto;\n  overflow-x: hidden;\n  height: 70vh;\n  flex-direction: column;\n  padding: 0 20px;\n  > :first-child{\n    margin-top: 10px;\n  }\n  @media (min-width: 768px){\n    height: calc(60vh - 60px);\n  }\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -493,7 +493,11 @@ var Send = _styledComponents.default.form(_templateObject31());
 
 exports.Send = Send;
 
-var SendImage = _styledComponents.default.label(_templateObject32());
+var SendImage = _styledComponents.default.label(_templateObject32(), function (props) {
+  return props.hidden && 'fixed';
+}, function (props) {
+  return props.hidden && '0';
+});
 
 exports.SendImage = SendImage;
 

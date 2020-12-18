@@ -9,6 +9,8 @@ exports.UserFormDetails = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _orderingComponents = require("ordering-components");
 
 var _reactHookForm = require("react-hook-form");
@@ -21,8 +23,6 @@ var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _Confirm = require("../Confirm");
-
 var _InputPhoneNumber = require("../InputPhoneNumber");
 
 var _utils = require("../../utils");
@@ -32,6 +32,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -59,7 +67,8 @@ var UserFormDetails = function UserFormDetails(props) {
       isRequiredField = props.isRequiredField,
       validationFields = props.validationFields,
       handleChangeInput = props.handleChangeInput,
-      handleButtonUpdateClick = props.handleButtonUpdateClick;
+      handleButtonUpdateClick = props.handleButtonUpdateClick,
+      setAlertState = props.setAlertState;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -70,40 +79,25 @@ var UserFormDetails = function UserFormDetails(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
-  var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
+      isValidPhoneNumber = _useState2[0],
+      setIsValidPhoneNumber = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(null),
+  var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      isValidPhoneNumber = _useState4[0],
-      setIsValidPhoneNumber = _useState4[1];
+      validationFieldsSorted = _useState4[0],
+      setValidationFieldsSorted = _useState4[1];
 
-  var _useState5 = (0, _react.useState)([]),
+  var _useState5 = (0, _react.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      validationFieldsSorted = _useState6[0],
-      setValidationFieldsSorted = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      userPhoneNumber = _useState8[0],
-      setUserPhoneNumber = _useState8[1];
+      userPhoneNumber = _useState6[0],
+      setUserPhoneNumber = _useState6[1];
 
   var showInputPhoneNumber = function showInputPhoneNumber() {
     var _validationFields$fie, _validationFields$fie2, _validationFields$fie3;
 
     return (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.cellphone) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
-  };
-
-  var closeAlert = function closeAlert() {
-    setAlertState({
-      open: false,
-      content: []
-    });
   };
 
   var setUserCellPhone = function setUserCellPhone() {
@@ -262,7 +256,7 @@ var UserFormDetails = function UserFormDetails(props) {
   }, [user, isEdit]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: handleSubmit(onSubmit)
-  }, validationFieldsSorted.map(function (field) {
+  }, !validationFields.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, validationFieldsSorted.map(function (field) {
     var _ref, _formState$changes$fi;
 
     return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -309,28 +303,18 @@ var UserFormDetails = function UserFormDetails(props) {
     type: "button",
     onClick: function onClick() {
       return onCancel(false);
-    }
-  }, t('CANCEL', 'Cancel')), Object.keys(formState.changes).length > 0 && isEdit && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    },
+    disabled: formState.loading
+  }, t('CANCEL', 'Cancel')), (Object.keys(formState.changes).length > 0 && isEdit || formState.loading) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "form-btn",
     color: "primary",
-    type: "submit"
-  }, t('UPDATE', 'Update')), formState.loading && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    id: "form-btn",
-    color: "primary",
-    type: "button"
-  }, t('UPDATING', 'Updating...')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('PROFILE', 'Profile'),
-    content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: alertState.open,
-    onClose: function onClose() {
-      return closeAlert();
-    },
-    onAccept: function onAccept() {
-      return closeAlert();
-    },
-    closeOnBackdrop: false
-  }));
+    type: "submit",
+    disabled: formState.loading
+  }, formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      key: i
+    });
+  }))));
 };
 
 exports.UserFormDetails = UserFormDetails;

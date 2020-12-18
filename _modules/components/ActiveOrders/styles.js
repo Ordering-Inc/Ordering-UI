@@ -54,7 +54,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  height: 250px;\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    width: 400px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  height: 220px;\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    height: 250px;\n    width: 400px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -84,7 +84,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-radius: 16px;\n  padding: 10px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-radius: 16px;\n  padding: 10px;\n  padding-bottom: 0;\n\n  @media (min-width: 480px){\n    padding-bottom: 10px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -94,7 +94,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  height: 15%;\n  width: 90%;\n  margin: auto;\n  button {\n    width: 100%;\n    height: 100%;\n    font-size: 0.8em;\n  }\n\n  @media (min-width: 480px){\n    button{\n      font-size: 1em\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  height: 15%;\n  width: 90%;\n  margin: auto;\n  button {\n    margin-top: 10px;\n    width: 100%;\n    height: 100%;\n    font-size: 0.8em;\n  }\n\n  @media (min-width: 480px){\n    button{\n      margin-top: 0;\n      font-size: 1em\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

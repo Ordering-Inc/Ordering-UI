@@ -122,7 +122,9 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, null, /*#__PURE__*/_react.default.createElement("img", {
     src: business.header,
-    alt: "business-image"
+    alt: "business-image",
+    width: "444px",
+    height: "250px"
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessBasicContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
@@ -192,7 +194,9 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return setModalImage(false);
     }
   })), /*#__PURE__*/_react.default.createElement("img", {
-    src: image
+    src: image,
+    width: "320px",
+    height: "180px"
   }))));
 };
 

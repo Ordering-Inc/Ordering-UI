@@ -47,6 +47,8 @@ var _styledComponents = require("styled-components");
 
 var _Inputs = require("../../styles/Inputs");
 
+var _NotFoundSource = require("../NotFoundSource");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -170,12 +172,22 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   };
 
   var isError = function isError(id) {
-    return errors["id:".concat(id)] && 'error';
+    var classnames = '';
+
+    if (errors["id:".concat(id)]) {
+      classnames = 'error';
+    }
+
+    if (isSoldOut || maxProductQuantity <= 0) {
+      classnames += ' soldout';
+    }
+
+    return classnames;
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
     className: "product-container"
-  }, loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  }, loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
@@ -194,15 +206,19 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     id: "product_image"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
-    alt: "product"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
+    alt: "product",
+    width: "300px",
+    height: "300px"
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
+    isProductSoldout: isSoldOut || maxProductQuantity <= 0
+  }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
       key: ingredient.id,
       onChange: handleChangeIngredientState,
       state: productCart.ingredients["id:".concat(ingredient.id)],
       ingredient: ingredient
     });
-  }), product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
+  })), product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
     return extra.options.map(function (option) {
       var currentState = productCart.options["id:".concat(option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
@@ -314,10 +330,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       href: "#"
     }, t('LOGIN', 'Login')),
     isPopup: true
-  })), error && error.length > 0 && error.map(function (e, i) {
-    return /*#__PURE__*/_react.default.createElement("p", {
-      key: i
-    }, t('ERROR', 'Error'), ": [", e, "]");
+  })), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: error[0].message || error[0]
   }));
 };
 

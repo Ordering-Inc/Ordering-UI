@@ -9,23 +9,21 @@ exports.HomeHero = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _styledComponents = require("styled-components");
+
+var _orderingComponents = require("ordering-components");
+
+var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
+
 var _styles = require("./styles");
 
-var _Buttons = require("../../styles/Buttons");
-
 var _Modal = require("../Modal");
+
+var _Buttons = require("../../styles/Buttons");
 
 var _AddressForm = require("../AddressForm");
 
 var _AddressList = require("../AddressList");
-
-var _orderingComponents = require("ordering-components");
-
-var _Confirm = require("../Confirm");
-
-var _styledComponents = require("styled-components");
-
-var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76,24 +74,15 @@ var HomeHero = function HomeHero(props) {
       modals = _useState2[0],
       setModals = _useState2[1];
 
-  var _useState3 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
-
   var theme = (0, _styledComponents.useTheme)();
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
 
     if (!(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) {
-      setAlertState({
-        open: true,
-        content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
-      });
+      setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        formOpen: true
+      }));
       return;
     }
 
@@ -183,25 +172,7 @@ var HomeHero = function HomeHero(props) {
     onAccept: function onAccept() {
       return handleFindBusinesses();
     }
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('SEARCH', 'Search'),
-    content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: alertState.open,
-    onClose: function onClose() {
-      return setAlertState({
-        open: false,
-        content: []
-      });
-    },
-    onAccept: function onAccept() {
-      return setAlertState({
-        open: false,
-        content: []
-      });
-    },
-    closeOnBackdrop: false
-  }));
+  })));
 };
 
 exports.HomeHero = HomeHero;

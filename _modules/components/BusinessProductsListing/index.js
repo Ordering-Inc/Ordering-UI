@@ -232,6 +232,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     }
   }, [productModal]);
   (0, _react.useEffect)(function () {
+    window.scrollTo(0, 0);
+
     if (categoryId && productId) {
       handleUpdateInitialRender(true);
     }
@@ -311,10 +313,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }, productModal.loading && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: 8
-  }))), productModal.error && productModal.error.length > 0 && productModal.error.map(function (e, i) {
-    return /*#__PURE__*/_react.default.createElement("p", {
-      key: i
-    }, t('ERROR', 'Error'), ": [", e.message, "]");
+  }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: productModal.error[0].message || productModal.error[0]
   }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')
   }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
@@ -322,7 +322,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
     onSave: handlerProductAction
-  })), loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  })), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: {
       business: {},
       loading: true
@@ -349,11 +349,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     content: t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  }), !loading && !business && !location.pathname.includes('/store/') && /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductsNotFound, null, error.map(function (e, i) {
-    return /*#__PURE__*/_react.default.createElement("p", {
-      key: i
-    }, t('ERROR', 'Error'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
-  }))), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && auth && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
+  }), !loading && !business && !location.pathname.includes('/store/') && /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: error[0].message || error[0],
+    btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
+    onClickButton: handleSearchRedirect
+  })), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && auth && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
     btnText: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.subtotal) >= (currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum) ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading') : "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)),
     isSecondaryBtn: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.subtotal) < (currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum),
     btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length,

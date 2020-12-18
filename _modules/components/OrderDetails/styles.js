@@ -28,7 +28,7 @@ function _templateObject41() {
 }
 
 function _templateObject40() {
-  var data = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin-bottom: 30px;\n  span:nth-child(2),span:nth-child(5){\n      span{\n        height: 100px;\n      }\n    }\n  @media (min-width: 768px){\n    span:nth-child(2), span:nth-child(5){\n      span{\n        height: 200px;\n      }\n    }\n  }\n"]);
 
   _templateObject40 = function _templateObject40() {
     return data;
@@ -390,7 +390,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  img {\n    display: none;\n\n    @media (min-width: 678px) {\n      display: block;\n      height: 200px;\n      object-fit: cover;\n      width: 100%;\n      border-radius: 10px;\n\n      ", "\n    }\n\n    @media (min-width: 768px) {\n      height: 340px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  img {\n    display: none;\n\n    @media (min-width: 678px) {\n      display: block;\n      height: 200px;\n      object-fit: cover;\n      width: 100%;\n      border-radius: 10px;\n      aspect-ratio: attr(width) / attr(height)\n\n      ", "\n    }\n\n    @media (min-width: 768px) {\n      height: 340px;\n    }\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;

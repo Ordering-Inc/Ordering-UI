@@ -33,6 +33,8 @@ var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
 var _Confirm = require("../Confirm");
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -136,6 +138,9 @@ var MessagesUI = function MessagesUI(props) {
     var chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight;
   }, [messages.messages.length]);
+  (0, _react.useEffect)(function () {
+    setImage(null);
+  }, [alertState.open]);
 
   var onChangeMessage = function onChangeMessage(e) {
     setMessage(e.target.value);
@@ -152,11 +157,34 @@ var MessagesUI = function MessagesUI(props) {
 
     reader.onload = function () {
       setImage(reader.result);
-      buttonRef.current.focus();
     };
+
+    var type = files.type.split('/')[0];
+
+    if (type !== 'image') {
+      setAlertState({
+        open: true,
+        content: t('ERROR_ONLY_IMAGES', 'Only images can be accepted')
+      });
+      return;
+    }
+
+    if ((0, _utils.bytesConverter)(files[0].size) > 2048) {
+      setAlertState({
+        open: true,
+        content: t('IMAGE_MESSAGES_MAXIMUM_SIZE', 'Images larger than 2 megabytes cannot be sent')
+      });
+      return;
+    }
+
+    buttonRef.current.focus();
 
     reader.onerror = function (error) {
       console.log(error);
+      setAlertState({
+        open: true,
+        content: t('ERROR_READ_FILE', 'Failed to read file')
+      });
     };
   };
 
@@ -280,7 +308,9 @@ var MessagesUI = function MessagesUI(props) {
       onLoad: function onLoad() {
         return setLoad(load + 1);
       },
-      alt: "chat-image"
+      alt: "chat-image",
+      width: "168px",
+      height: "94px"
     })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), message.type === 2 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message.author.name, " (", getLevel(message.author.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), message.type === 3 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, {
       name: "image"
     }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message.author.name, " (", getLevel(message.author.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
@@ -288,7 +318,9 @@ var MessagesUI = function MessagesUI(props) {
       onLoad: function onLoad() {
         return setLoad(load + 1);
       },
-      alt: "chat-image"
+      alt: "chat-image",
+      width: "168px",
+      height: "94px"
     })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))));
   }))), /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.Send, {
     onSubmit: handleSubmit(onSubmit),
@@ -302,8 +334,9 @@ var MessagesUI = function MessagesUI(props) {
       required: !image
     }),
     autoComplete: "off"
-  }), !image && /*#__PURE__*/_react.default.createElement(_styles.SendImage, {
-    htmlFor: "chat_image"
+  }), /*#__PURE__*/_react.default.createElement(_styles.SendImage, {
+    htmlFor: "chat_image",
+    hidden: image
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "file",
     name: "image",

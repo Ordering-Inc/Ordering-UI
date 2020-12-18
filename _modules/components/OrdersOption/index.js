@@ -87,7 +87,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   }, [orders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.ImageNotFound, null, /*#__PURE__*/_react.default.createElement("img", {
     src: activeOrders ? _emptyActiveOrders.default : _emptyPastOrders.default,
-    alt: "empty-".concat(activeOrders ? 'active' : 'past', "-orders")
+    alt: "empty-".concat(activeOrders ? 'active' : 'past', "-orders"),
+    width: "300px",
+    height: "300px"
   })), loading && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     activeOrders: activeOrders,
     isSkeleton: true
@@ -107,7 +109,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       width: 80
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
-    }))));
+    }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonButton, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)));
   })) : _toConsumableArray(Array(3)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
       key: i
