@@ -8,9 +8,9 @@ export const AutoscrollContainer = styled.span`
     background: #D9D9D9;
     display: inline-block;
     border-radius: 50%;
-    width: 20px;
+    width: 30px;
     min-width: 20px;
-    height: 20px;
+    height: 30px;
     align-self: center;
     top: ${props => props.modal ? '35%' : '0'};
     position: sticky;
