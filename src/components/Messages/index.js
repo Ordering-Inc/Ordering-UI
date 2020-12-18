@@ -62,7 +62,6 @@ export const MessagesUI = (props) => {
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
-  const inputRef = useRef(null)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -97,6 +96,10 @@ export const MessagesUI = (props) => {
     chat.scrollTop = chat.scrollHeight
   }, [messages.messages.length])
 
+  useEffect(() => {
+    setImage(null)
+  }, [alertState.open])
+
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
   }
@@ -111,18 +114,31 @@ export const MessagesUI = (props) => {
     reader.readAsDataURL(files)
     reader.onload = () => {
       setImage(reader.result)
-      if (bytesConverter(inputRef.current?.files[0].size) > 2048) {
-        setImage(null)
-        setAlertState({
-          open: true,
-          content: t('IMAGE_MESSAGE_MAXIMUM_SIZE', 'Images larger than 2 megabytes cannot be sent')
-        })
-        return
-      }
-      buttonRef.current.focus()
     }
+    const type = files[0].type.split('/')[0]
+
+    if (type !== 'image') {
+      setAlertState({
+        open: true,
+        content: t('ERROR_ONLY_IMAGES', 'Only images can be accepted')
+      })
+      return
+    }
+
+    if (bytesConverter(files[0].size) > 2048) {
+      setAlertState({
+        open: true,
+        content: t('IMAGE_MESSAGES_MAXIMUM_SIZE', 'Images larger than 2 megabytes cannot be sent')
+      })
+      return
+    }
+    buttonRef.current.focus()
     reader.onerror = error => {
       console.log(error)
+      setAlertState({
+        open: true,
+        content: t('ERROR_READ_FILE', 'Failed to read file')
+      })
     }
   }
 
@@ -364,13 +380,11 @@ export const MessagesUI = (props) => {
               type='file'
               name='image'
               id='chat_image'
-              ref={inputRef}
               accept='image/png,image/jpg,image/jpeg'
               onChange={onChangeImage}
             />
             <BsCardImage />
           </SendImage>
-
           {image && (
             <WrapperDeleteImage>
               <Button
