@@ -246,10 +246,6 @@ export const ScheduleBlock = styled.div`
   @media(min-width: 768px){
     min-width: initial;
   }
-
-  @media(min-width: 480px){
-    width: 15%;
-  }
 `
 
 export const DeliveryInfo = styled.div`
