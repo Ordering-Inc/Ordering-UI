@@ -6,6 +6,7 @@ import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
+import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -52,6 +53,7 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
+    handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
     driverLocation
@@ -145,11 +147,11 @@ const OrderDetailsUI = (props) => {
                     <FiPhone />
                   </span>}
                 <span>
+                  <BiStoreAlt onClick={() => handleBusinessRedirect('mcbonalds')} />
+                </span>
+                <span>
                   <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
                 </span>
-                {/* <span>
-                  <BiCaretDown />
-                </span> */}
               </ActionsBlock>
             </OrderBusiness>
 
