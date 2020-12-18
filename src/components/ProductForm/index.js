@@ -139,7 +139,7 @@ const ProductOptionsUI = (props) => {
         <>
           <WrapperImage>
             <ProductImage id='product_image'>
-              <img src={product?.images || theme.images?.dummies?.product} alt='product' />
+              <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' />
             </ProductImage>
           </WrapperImage>
           <ProductInfo>

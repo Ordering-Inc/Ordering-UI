@@ -85,7 +85,7 @@ const UserProfileFormUI = (props) => {
                     ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                     : ((!formState.changes.photo || formState.result?.result === 'Network Error' || formState.result.error)
                       ? user?.photo
-                        ? (<img src={user?.photo} alt='user image' />)
+                        ? (<img src={user?.photo} alt='user image' width='200px' height='200px' />)
                         : (
                           <UploadImageIcon>
                             <BiImage />
@@ -93,7 +93,7 @@ const UserProfileFormUI = (props) => {
                           </UploadImageIcon>
                         )
                       : formState?.changes?.photo && formState.result.error
-                        ? (<img src={formState?.changes?.photo} alt='user image' />)
+                        ? (<img src={formState?.changes?.photo} alt='user image' width='200px' height='200px' />)
                         : (
                           <UploadImageIcon>
                             <BiImage />

@@ -11,6 +11,8 @@ export const Container = styled.div`
 
 export const Logo = styled.div`
   img {
+    height: auto;
+    aspect-ratio: attr(width) / attr(height);
     max-height: 150px;
   }
 `
