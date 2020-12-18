@@ -14,6 +14,7 @@ import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { getIconCard } from '../../utils'
 
@@ -94,9 +95,10 @@ const PaymentOptionsUI = (props) => {
         )}
 
         {paymethodsList.error && paymethodsList.error.length > 0 && (
-          paymethodsList.error.map((e, i) => (
-            <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-          )))}
+          <NotFoundSource
+            content={paymethodsList?.error[0].message || paymethodsList?.error[0]}
+          />
+        )}
 
         {!paymethodsList.loading && !paymethodsList.error && paymethodsList.paymethods.length === 0 && (
           <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>

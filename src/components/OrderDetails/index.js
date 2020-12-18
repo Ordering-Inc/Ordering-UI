@@ -64,7 +64,7 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseNumber }] = useUtils()
   const [isReviewed, setIsReviewed] = useState(false)
 
-  const { order, loading, header } = props.order
+  const { order, loading, header, error } = props.order
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -317,7 +317,7 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {loading && (
+      {loading && !error && (
         <WrapperContainer isLoading className='skeleton-loading'>
           <SkeletonBlockWrapp>
             <SkeletonBlock width={80}>
@@ -332,12 +332,13 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {/* {error && error.length > 0 &&
-        error.map((e, i) => {
-          if (e) {
-            return <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-          }
-        })} */}
+      {error && error.length > 0 && (
+        <NotFoundSource
+          content={error[0].message || error[0]}
+          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
+          onClickButton={handleOrderRedirect}
+        />
+      )}
 
       {!loading && !order && (
         <NotFoundSource

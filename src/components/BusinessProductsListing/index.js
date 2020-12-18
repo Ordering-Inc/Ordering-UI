@@ -13,7 +13,6 @@ import {
 import {
   ProductsContainer,
   WrapContent,
-  ProductsNotFound,
   ProductLoading,
   SkeletonItem,
   WrapperSearch
@@ -235,9 +234,9 @@ const BusinessProductsListingUI = (props) => {
           )}
 
           {productModal.error && productModal.error.length > 0 && (
-            productModal.error.map((e, i) => (
-              <p key={i}>{t('ERROR', 'Error')}: [{e.message}]</p>
-            ))
+            <NotFoundSource
+              content={productModal.error[0].message || productModal.error[0]}
+            />
           )}
 
           {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
@@ -254,7 +253,7 @@ const BusinessProductsListingUI = (props) => {
             />
           )}
         </Modal>
-        {loading && (
+        {loading && !error && (
           <>
             <BusinessBasicInformation
               businessState={{ business: {}, loading: true }}
@@ -305,11 +304,11 @@ const BusinessProductsListingUI = (props) => {
         }
 
         {error && error.length > 0 && (
-          <ProductsNotFound>
-            {error.map((e, i) => (
-              <p key={i}>{t('ERROR', 'Error')}: [{e?.message || e}]</p>
-            ))}
-          </ProductsNotFound>
+          <NotFoundSource
+            content={error[0].message || error[0]}
+            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+            onClickButton={handleSearchRedirect}
+          />
         )}
       </ProductsContainer>
       {currentCart?.products?.length > 0 && auth && (

@@ -17,6 +17,7 @@ import { Confirm } from '../Confirm'
 import { StripeElementsForm } from '../StripeElementsForm'
 
 import { Button } from '../../styles/Buttons'
+import { NotFoundSource } from '../NotFoundSource'
 
 import {
   OptionStripeContainer,
@@ -72,9 +73,9 @@ const PaymentOptionStripeUI = (props) => {
       )}
 
       {token && cardsList.error && cardsList.error.length > 0 && (
-        cardsList.error.map((e, i) => (
-          <p key={i}>{t('ERROR', 'ERROR')}: [{e}]</p>
-        ))
+        <NotFoundSource
+          content={cardsList?.error[0].message || cardsList?.error[0]}
+        />
       )}
 
       {token && cardsList.cards && cardsList.cards.length > 0 && (
