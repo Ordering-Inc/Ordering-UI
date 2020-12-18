@@ -116,14 +116,8 @@ const UserProfileFormUI = (props) => {
                             <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
                           </UploadImageIcon>
                         )
-                      : formState?.changes?.photo && formState.result.error
-                        ? (<img src={formState?.changes?.photo} alt='user image' />)
-                        : (
-                          <UploadImageIcon>
-                            <BiImage />
-                            <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
-                          </UploadImageIcon>
-                        )
+                      : formState?.changes?.photo && formState.result.error &&
+                        <img src={formState?.changes?.photo} alt='user image' />
                     )}
                 </DragAndDrop>
               </ExamineClick>

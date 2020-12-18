@@ -2,6 +2,7 @@ import React from 'react'
 import FaCcMastercard from '@meronex/icons/fa/FaCcMastercard'
 import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
+import { useLanguage } from 'ordering-components'
 
 export const optimizeImage = (url, params, fallback) => {
   if (!url && fallback) return fallback
@@ -113,12 +114,14 @@ export const flatArray = arr => [].concat(...arr)
  * @param {string} key for traduction
  */
 export const getTraduction = key => {
+  const [, t] = useLanguage()
   const keyList = {
     // Add the key and traduction that you need below
-    ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart'
+    ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart',
+    ERROR_INVALID_COUPON: "The coupon doesn't exist"
   }
 
-  return keyList[key] || key
+  return keyList[key] ? t(key, keyList[key]) : t(key)
 }
 /**
  * Function to transform bytes to kb
