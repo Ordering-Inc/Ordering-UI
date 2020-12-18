@@ -68,4 +68,7 @@ export const PopoverListItem = styled.div`
 export const PopoverListLink = styled.a`
   ${PopoverListItemStyles}
   text-decoration: none;
+  ${({ active }) => active && css`
+    background-color: #eee;
+  `}
 `

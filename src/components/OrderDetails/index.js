@@ -334,15 +334,7 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {error && error.length > 0 && (
-        <NotFoundSource
-          content={error[0]?.message || error[0]}
-          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
-          onClickButton={handleOrderRedirect}
-        />
-      )}
-
-      {!loading && !order && (
+      {!loading && (!order || error) && (
         <NotFoundSource
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
           btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}

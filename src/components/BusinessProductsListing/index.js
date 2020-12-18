@@ -225,7 +225,7 @@ const BusinessProductsListingUI = (props) => {
           padding='0'
         >
 
-          {productModal.loading && (
+          {productModal.loading && !productModal.error && (
             <ProductLoading>
               <SkeletonItem>
                 <Skeleton height={45} count={8} />
