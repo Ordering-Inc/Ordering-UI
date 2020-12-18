@@ -41,7 +41,7 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
         aria-label='search'
         placeholder={placeholder}
         autoComplete='off'
-        maxLength='250'
+        maxLength='500'
       />
     </BusinessSearch>
   )

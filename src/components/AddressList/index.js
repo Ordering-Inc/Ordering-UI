@@ -20,6 +20,7 @@ import {
   FormActions
 } from './styles'
 
+import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
@@ -210,9 +211,10 @@ const AddressListUI = (props) => {
 
       {!addressList.loading && addressList.error && (
         addressList.error.length > 0 && (
-          addressList.error.map((e, i) => (
-            <p key={i}>{t('ERROR', 'Error')}: [{e}]</p>
-          )))
+          <NotFoundSource
+            content={addressList.error[0].message || addressList.error[0]}
+          />
+        )
       )}
 
       {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && (
