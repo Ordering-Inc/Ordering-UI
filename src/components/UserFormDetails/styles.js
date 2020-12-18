@@ -67,3 +67,31 @@ export const ActionsForm = styled.div`
     }
   `}
 `
+
+export const SkeletonForm = styled.div`
+  width: 100%;
+  justify-content: center;
+  height: auto;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-top: 0px;
+  > * {
+    width: 100%;
+    margin: 10px 0;
+    display: inline;
+    height: 50px;
+    span{
+      border-radius: 16px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  @media (min-width: 768px){
+    justify-content: flex-start;
+    > * {
+      width: calc(50% - 10px);
+      margin: 5px;
+    }
+  }
+`
