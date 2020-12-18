@@ -323,7 +323,7 @@ export const MessagesUI = (props) => {
                     <MessageCustomer>
                       <BubbleCustomer name='image'>
                         <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' width='168px' height='94px' /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}
@@ -346,7 +346,7 @@ export const MessagesUI = (props) => {
                     <MessageBusiness>
                       <BubbleBusines name='image'>
                         <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' width='168px' height='94px' /></ChatImage>
                         {message.comment && (
                           <>
                             {message.comment}

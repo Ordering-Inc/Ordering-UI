@@ -29,6 +29,10 @@ export const OrdersContainer = styled.div`
     ${props => props.theme?.rtl && css`
       margin: auto auto auto 0px;
     `}
+    ::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
 
     ${({ isSkeleton }) => !isSkeleton && css`   
       ::-webkit-scrollbar {
@@ -98,7 +102,6 @@ export const SkeletonOrder = styled.div`
   ${({ activeOrders }) => activeOrders && css`
     width: auto;
     text-align: center;
-    margin: 0 auto;
     margin-left: 10px;
 
     ${props => props.theme?.rtl && css`
@@ -118,17 +121,18 @@ export const SkeletonOrder = styled.div`
 `
 
 export const SkeletonCard = styled.div`
-  margin: 20px 5px 20px 5px;
+  margin: 10px 5px 10px 5px;
 `
 
 export const SkeletonMap = styled.div`
   border-radius: 16px;
   span{
     width: 300px;
-    height: 100px;
+    height: 88px;
   }
   @media(min-width: 480px){
     span{
+      height: 100px;
       width: 400px;
     }
   }
@@ -157,6 +161,20 @@ export const SkeletonText = styled.div`
   ${props => props.theme?.rtl && css`
     text-align: right;
   `}
+`
+
+export const SkeletonButton = styled.div`
+    span{
+      border-radius: 24px;
+      width: 270px;
+      height: 33px;
+    }
+  @media(min-width: 480px){
+    span{
+      width: 360px;
+      height: 37px;
+    }
+  }
 `
 
 export const SkeletonInformation = styled.div`
@@ -205,7 +223,7 @@ export const SkeletonReorder = styled.div`
 `
 
 export const ImageNotFound = styled.div`
-  width: 300px;
+  
   margin: 0 auto;
   img{
     width: 100%
@@ -268,6 +286,9 @@ export const BusinessInformation = styled.div`
       ${({ activeOrders }) => activeOrders && css`
         font-size: 0.9em;
       `}
+    }
+    p[name='order_number']{
+      width: 230px;
     }
   }
 

@@ -18,7 +18,8 @@ import {
   SkeletonContent,
   SkeletonText,
   SkeletonInformation,
-  SkeletonReorder
+  SkeletonReorder,
+  SkeletonButton
 } from './styles'
 
 const OrdersOptionUI = (props) => {
@@ -60,6 +61,8 @@ const OrdersOptionUI = (props) => {
           <img
             src={activeOrders ? emptyActiveOrders : emptyPastOrders}
             alt={`empty-${activeOrders ? 'active' : 'past'}-orders`}
+            width='300px'
+            height='300px'
           />
         </ImageNotFound>
       )}
@@ -83,6 +86,9 @@ const OrdersOptionUI = (props) => {
                       <Skeleton width={120} />
                     </SkeletonText>
                   </SkeletonContent>
+                  <SkeletonButton>
+                    <Skeleton />
+                  </SkeletonButton>
                 </SkeletonCard>
               ))}
             </SkeletonOrder>

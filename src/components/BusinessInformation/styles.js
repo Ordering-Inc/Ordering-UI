@@ -28,6 +28,7 @@ export const BusinessHeader = styled.div`
     height: calc(100% + 50px);
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+    aspect-ratio: attr(width) / attr(height)
   }
 `
 
@@ -306,7 +307,7 @@ export const BusinessMediaContent = styled.div`
 
 export const ModalIcon = styled.span`
   display: flex;
-  position: absolute;
+  position: fixed;
   width: 30px;
   height: 30px;
   font-size: 30px;
@@ -316,11 +317,26 @@ export const ModalIcon = styled.span`
   right: 5px;
   top: 5px;
   z-index: 1;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0,0,0,0.3);
   ${props => props.theme?.rtl && css`
     left: 5px;
     right: initial;
   `}
+  @media (min-width: 578px){
+    right: 10px;
+    ${props => props.theme?.rtl && css`
+    left: 10px;
+    right: initial;
+  `}
+  }
+  @media (min-width: 768px){
+    position: absolute;
+    right: 5px;
+    ${props => props.theme?.rtl && css`
+    left: 5px;
+    right: initial;
+  `}
+  }
 `
 
 export const Description = styled.p`
@@ -331,6 +347,8 @@ export const ImageContainer = styled.div`
   max-height: 500px;
   img{
     width: 100%;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
