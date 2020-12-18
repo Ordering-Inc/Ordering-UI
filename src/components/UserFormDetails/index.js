@@ -248,28 +248,20 @@ export const UserFormDetails = (props) => {
                   outline
                   type='button'
                   onClick={() => onCancel(false)}
+                  disabled={formState.loading}
                 >
                   {t('CANCEL', 'Cancel')}
                 </Button>
               )}
 
-              {Object.keys(formState.changes).length > 0 && isEdit && (
+              {((Object.keys(formState.changes).length > 0 && isEdit) || formState.loading) && (
                 <Button
                   id='form-btn'
                   color='primary'
                   type='submit'
+                  disabled={formState.loading}
                 >
-                  {t('UPDATE', 'Update')}
-                </Button>
-              )}
-
-              {formState.loading && (
-                <Button
-                  id='form-btn'
-                  color='primary'
-                  type='button'
-                >
-                  {t('UPDATING', 'Updating...')}
+                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
                 </Button>
               )}
             </ActionsForm>
