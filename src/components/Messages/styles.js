@@ -368,6 +368,7 @@ export const WrapperDeleteImage = styled.div`
     &:disabled {
     cursor: not-allowed;
     }
+    border-radius: 8px;
   }
 
   svg{

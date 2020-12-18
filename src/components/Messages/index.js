@@ -41,7 +41,6 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
-import AiOutlineCloseCircle from '@meronex/icons/ai/AiOutlineCloseCircle'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import { Modal } from '../Modal'
@@ -403,7 +402,7 @@ export const MessagesUI = (props) => {
                 onClick={removeImage}
                 type='reset'
               >
-                <AiOutlineCloseCircle />
+                <MdClose />
               </Button>
               <img
                 src={image}
