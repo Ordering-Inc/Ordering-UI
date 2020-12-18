@@ -39,6 +39,7 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Alert } from '../Confirm'
+import { bytesConverter } from '../../utils'
 
 export const MessagesUI = (props) => {
   const {
@@ -61,6 +62,7 @@ export const MessagesUI = (props) => {
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
+  const inputRef = useRef(null)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -109,6 +111,14 @@ export const MessagesUI = (props) => {
     reader.readAsDataURL(files)
     reader.onload = () => {
       setImage(reader.result)
+      if (bytesConverter(inputRef.current?.files[0].size) > 2048) {
+        setImage(null)
+        setAlertState({
+          open: true,
+          content: t('IMAGE_MESSAGE_MAXIMUM_SIZE', 'Images larger than 2 megabytes cannot be sent')
+        })
+        return
+      }
       buttonRef.current.focus()
     }
     reader.onerror = error => {
@@ -349,18 +359,18 @@ export const MessagesUI = (props) => {
             })}
             autoComplete='off'
           />
-          {!image && (
-            <SendImage htmlFor='chat_image'>
-              <input
-                type='file'
-                name='image'
-                id='chat_image'
-                accept='image/png,image/jpg,image/jpeg'
-                onChange={onChangeImage}
-              />
-              <BsCardImage />
-            </SendImage>
-          )}
+          <SendImage htmlFor='chat_image' hidden={image}>
+            <input
+              type='file'
+              name='image'
+              id='chat_image'
+              ref={inputRef}
+              accept='image/png,image/jpg,image/jpeg'
+              onChange={onChangeImage}
+            />
+            <BsCardImage />
+          </SendImage>
+
           {image && (
             <WrapperDeleteImage>
               <Button

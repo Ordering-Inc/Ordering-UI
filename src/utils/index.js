@@ -120,3 +120,11 @@ export const getTraduction = key => {
 
   return keyList[key] || key
 }
+/**
+ * Function to transform bytes to kb
+ * @param {number} bytes for transform
+ *
+ */
+export const bytesConverter = bytes => {
+  return Math.floor(bytes / 1024)
+}

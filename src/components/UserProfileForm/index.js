@@ -10,6 +10,15 @@ import {
 
 import { UserFormDetails } from '../UserFormDetails'
 import { AddressList } from '../AddressList'
+import { Alert } from '../Confirm'
+
+import { Button } from '../../styles/Buttons'
+import { ProfileOptions } from './ProfileOptions'
+
+import { bytesConverter } from '../../utils'
+
+import FiCamera from '@meronex/icons/fi/FiCamera'
+import BiImage from '@meronex/icons/bi/BiImage'
 
 import {
   Container,
@@ -25,12 +34,6 @@ import {
   WrapperForm
 } from './styles'
 
-import { Button } from '../../styles/Buttons'
-import { ProfileOptions } from './ProfileOptions'
-
-import FiCamera from '@meronex/icons/fi/FiCamera'
-import BiImage from '@meronex/icons/bi/BiImage'
-
 const UserProfileFormUI = (props) => {
   const {
     handleButtonUpdateClick,
@@ -43,9 +46,14 @@ const UserProfileFormUI = (props) => {
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [edit, setEdit] = useState(false)
+  const [openAlert, setOpenAlert] = useState(false)
   const inputRef = useRef(null)
 
   const handleFiles = (files) => {
+    if (bytesConverter(inputRef.current?.files[0].size) > 2048) {
+      setOpenAlert(true)
+      return
+    }
     if (files.length === 1) {
       handlechangeImage(files[0])
     }
@@ -146,6 +154,15 @@ const UserProfileFormUI = (props) => {
           <AddressList addressList={user.addresses} />
         </SavedPlaces>
       </Container>
+      <Alert
+        title={t('USER_PROFILE', 'User Profile')}
+        content={t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={openAlert}
+        onClose={() => setOpenAlert(false)}
+        onAccept={() => setOpenAlert(false)}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
