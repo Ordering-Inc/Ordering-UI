@@ -115,8 +115,7 @@ export const MessagesUI = (props) => {
     reader.onload = () => {
       setImage(reader.result)
     }
-    const type = files[0].type.split('/')[0]
-
+    const type = files.type.split('/')[0]
     if (type !== 'image') {
       setAlertState({
         open: true,
