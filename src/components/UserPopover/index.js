@@ -86,10 +86,16 @@ export const UserPopover = (props) => {
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
-          <PopoverListLink onClick={() => handleGoToPage('profile')}>
+          <PopoverListLink
+            active={window.location.pathname === '/profile'}
+            onClick={() => handleGoToPage('profile')}
+          >
             <FaRegAddressCard /> {t('PROFILE', 'Profile')}
           </PopoverListLink>
-          <PopoverListLink onClick={() => handleGoToPage('orders')}>
+          <PopoverListLink
+            active={window.location.pathname === '/profile/orders'}
+            onClick={() => handleGoToPage('orders')}
+          >
             <FaRegListAlt /> {t('ORDERS', 'Orders')}
           </PopoverListLink>
           <PopoverListItemLogout onClose={props.onClose} />
