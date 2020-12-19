@@ -103,6 +103,16 @@ const AddressFormUI = (props) => {
   }
 
   const onSubmit = async () => {
+    if (
+      !auth && formState?.changes?.address === '' && addressState?.address?.address
+    ) {
+      setAlertState({
+        open: true,
+        content: [t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'The field Address is required')]
+      })
+      setLocationChange(null)
+      return
+    }
     if (formState?.changes?.address && !formState?.changes?.location) {
       setAlertState({
         open: true,
@@ -167,7 +177,7 @@ const AddressFormUI = (props) => {
   useEffect(() => {
     if (!auth) {
       setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
-      setAddressValue(formState?.changes?.address || orderState?.options?.address?.address || '')
+      setAddressValue(formState?.changes?.address ?? orderState?.options?.address?.address ?? '')
       inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || orderState?.options?.address[field] || ''))
       return
     }
@@ -208,7 +218,7 @@ const AddressFormUI = (props) => {
 
   useEffect(() => {
     if (!auth) {
-      setLocationChange(orderState?.options?.address?.location ?? formState?.changes?.location ?? '')
+      setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
     }
   }, [])
 
