@@ -21,14 +21,14 @@ export const AutoscrollContainer = styled.span`
 
   #right-autoscroll{
     ${props => props.theme?.rtl ? css`
-      left: 92%;
+      left: 91%;
     ` : css`
       right: 1%;
     `}
   }
   #left-autoscroll{
     ${props => props.theme?.rtl ? css`
-      right: 92%;
+      right: 91%;
     ` : css`
       left: 1%;
     `}    
@@ -43,12 +43,12 @@ export const AutoscrollContainer = styled.span`
   @media (min-width: 480px){
     #right-autoscroll{
     ${props => props.theme?.rtl && css`
-      left: 95%;
+      left: 94%;
     `}
    }
     #left-autoscroll{
       ${props => props.theme?.rtl && css`
-        right: 95%;
+        right: 94%;
       `
       }
     }
