@@ -125,6 +125,11 @@ export const WrapperBusinessLogo = styled.div`
   min-height: 65px;
   max-width: 65px;
 
+  ${({ isSkeleton }) => isSkeleton && css`
+    width: auto;
+    height: auto;
+  `}
+
   @media (min-width: 481px){
     max-width: 75px;
     max-height: 75px;
