@@ -235,7 +235,7 @@ const BusinessProductsListingUI = (props) => {
 
           {productModal.error && productModal.error.length > 0 && (
             <NotFoundSource
-              content={productModal.error[0].message || productModal.error[0]}
+              content={productModal.error[0]?.message || productModal.error[0]}
             />
           )}
 
@@ -305,7 +305,7 @@ const BusinessProductsListingUI = (props) => {
 
         {error && error.length > 0 && (
           <NotFoundSource
-            content={error[0].message || error[0]}
+            content={error[0]?.message || error[0]}
             btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
             onClickButton={handleSearchRedirect}
           />

@@ -96,7 +96,7 @@ const PaymentOptionsUI = (props) => {
 
         {paymethodsList.error && paymethodsList.error.length > 0 && (
           <NotFoundSource
-            content={paymethodsList?.error[0].message || paymethodsList?.error[0]}
+            content={paymethodsList?.error[0]?.message || paymethodsList?.error[0]}
           />
         )}
 
