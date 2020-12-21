@@ -104,9 +104,9 @@ const OrderDetailsUI = (props) => {
   }
 
   const locations = [
-    { ...order?.driver?.location },
-    { ...order?.business?.location },
-    { ...order?.customer?.location }
+    { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
+    { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
+    { ...order?.customer?.location, icon: order?.driver?.photo || theme.images?.dummies?.customerPhoto }
   ]
 
   useEffect(() => {
