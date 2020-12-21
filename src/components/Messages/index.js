@@ -95,7 +95,6 @@ export const MessagesUI = (props) => {
 
   useEffect(() => {
     if (load < 3) {
-      s
       const chat = document.getElementById('chat')
       chat.scrollTop = chat.scrollHeight
     }
