@@ -262,6 +262,7 @@ export const SkeletonBubbleBusiness = styled.div`
 export const ChatImage = styled.div`
   width: 100%;
   height: auto;
+  margin-bottom: 10px;
   img{
     width: 100%;
     height: auto;

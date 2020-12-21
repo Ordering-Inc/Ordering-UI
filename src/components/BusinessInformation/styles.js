@@ -173,8 +173,11 @@ export const Information = styled.div`
 `
 
 export const BusinessContent = styled.div`
-  padding: 0 20px;
+  padding: 0 10px;
   background: #FFF;
+  @media(min-width: 768px){
+    padding: 0 20px;
+  }
 `
 
 export const FlexTabs = styled.div`
