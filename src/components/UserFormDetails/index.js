@@ -54,7 +54,7 @@ export const UserFormDetails = (props) => {
       setUserPhoneNumber(phone)
       return
     }
-    setUserPhoneNumber(user?.cellphone)
+    setUserPhoneNumber(user?.cellphone || '')
   }
 
   const onSubmit = () => {
