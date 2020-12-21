@@ -9,6 +9,7 @@ import { FormInput, ActionsForm, SkeletonForm } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../InputPhoneNumber'
+import { Alert } from '../Confirm'
 
 import { flatArray } from '../../utils'
 
@@ -27,8 +28,7 @@ export const UserFormDetails = (props) => {
     isRequiredField,
     validationFields,
     handleChangeInput,
-    handleButtonUpdateClick,
-    setAlertState
+    handleButtonUpdateClick
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -37,6 +37,14 @@ export const UserFormDetails = (props) => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [validationFieldsSorted, setValidationFieldsSorted] = useState([])
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
   const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
 
@@ -69,7 +77,7 @@ export const UserFormDetails = (props) => {
       })
       return
     }
-    if (!isPhoneNumberValid) {
+    if (!isPhoneNumberValid && userPhoneNumber) {
       setAlertState({
         open: true,
         content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
@@ -142,7 +150,7 @@ export const UserFormDetails = (props) => {
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       const content = Object.values(errors).map(error => error.message)
-      if (!isValidPhoneNumber) {
+      if (!isValidPhoneNumber && userPhoneNumber) {
         content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid.'))
       }
       setAlertState({
@@ -214,7 +222,7 @@ export const UserFormDetails = (props) => {
               name='password'
               className='form'
               disabled={!isEdit}
-              placeholder={t('FRONT_VISUALS_PASSWORD')}
+              placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
               onChange={handleChangeInput}
               ref={register({
                 required: isRequiredField('password')
@@ -266,6 +274,15 @@ export const UserFormDetails = (props) => {
           </SkeletonForm>
         )}
       </FormInput>
+      <Alert
+        title={t('PROFILE', 'Profile')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
