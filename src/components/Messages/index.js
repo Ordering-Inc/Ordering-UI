@@ -95,6 +95,7 @@ export const MessagesUI = (props) => {
 
   useEffect(() => {
     if (load < 3) {
+      s
       const chat = document.getElementById('chat')
       chat.scrollTop = chat.scrollHeight
     }
@@ -133,7 +134,7 @@ export const MessagesUI = (props) => {
       return
     }
 
-    if (bytesConverter(files[0].size) > 2048) {
+    if (bytesConverter(files[0]?.size) > 2048) {
       setAlertState({
         open: true,
         content: t('IMAGE_MESSAGES_MAXIMUM_SIZE', 'Images larger than 2 megabytes cannot be sent')
