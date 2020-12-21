@@ -210,7 +210,7 @@ const CheckoutUI = (props) => {
             <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               <NotFoundSource
-                content={businessDetails?.error[0].message || businessDetails?.error[0]}
+                content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
               />
             </div>
           )}

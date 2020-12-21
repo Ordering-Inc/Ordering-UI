@@ -60,7 +60,7 @@ const UserProfileFormUI = (props) => {
         return
       }
 
-      if (bytesConverter(files[0].size) > 2048) {
+      if (bytesConverter(files[0]?.size) > 2048) {
         setAlertState({
           open: true,
           content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]

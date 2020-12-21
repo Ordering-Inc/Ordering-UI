@@ -212,7 +212,7 @@ const AddressListUI = (props) => {
       {!addressList.loading && addressList.error && (
         addressList.error.length > 0 && (
           <NotFoundSource
-            content={addressList.error[0].message || addressList.error[0]}
+            content={addressList.error[0]?.message || addressList.error[0]}
           />
         )
       )}
