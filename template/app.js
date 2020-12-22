@@ -6,7 +6,7 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder } from 'ordering-components'
+import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
 import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
@@ -36,6 +36,7 @@ import { HelmetTags } from './components/HelmetTags'
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
   const [orderStatus] = useOrder()
+  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
@@ -64,6 +65,9 @@ export const App = () => {
 
   return (
     <>
+      {configs?.track_id_google_analytics && (
+        <Analytics trackId={configs?.track_id_google_analytics} />
+      )}
       <ListenPageChanges />
       {
         !loaded && (
