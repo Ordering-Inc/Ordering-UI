@@ -74,7 +74,6 @@ const MomentControlUI = (props) => {
           ))
         }
       </Hours>
-      {console.log(parseTime(moment('00:00', 'hh:mm a')))}
     </div>
   )
 }
