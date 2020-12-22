@@ -156,7 +156,6 @@ const UserProfileFormUI = (props) => {
                   {...props}
                   onCancel={toggleEditState}
                   onCloseProfile={() => setEdit(false)}
-                  setAlertState={setAlertState}
                 />
               </WrapperForm>
             )}

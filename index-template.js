@@ -45,6 +45,7 @@ import categoryLaundry from './template/assets/images/categories/category-laundr
 import categoryAll from './template/assets/images/categories/category-all.png'
 
 import productDummy from './template/assets/images/dummies/product.png'
+import storeDummy from './template/assets/images/dummies/store.png'
 
 const configFile = {
   project: 'luisv4',
@@ -111,7 +112,10 @@ theme.images = {
     all: categoryAll
   },
   dummies: {
-    product: productDummy
+    product: productDummy,
+    driverPhoto: 'https://res.cloudinary.com/demo/image/fetch/c_thumb,g_face,r_max/https://www.freeiconspng.com/thumbs/driver-icon/driver-icon-14.png',
+    businessLogo: storeDummy,
+    customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
   }
 }
 

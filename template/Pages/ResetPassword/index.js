@@ -1,10 +1,12 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 import { ResetPassword as ResetPasswordController } from '../../../src/components/ResetPassword'
 
 export const ResetPassword = (props) => {
-  const { code, random } = useParams()
+  const params = new URLSearchParams(props.location.search)
+  const code = params.get('code')
+  const random = params.get('random')
+
   const resetPasswordProps = {
     ...props,
     code: code,

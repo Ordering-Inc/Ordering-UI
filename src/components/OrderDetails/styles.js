@@ -407,7 +407,7 @@ export const InfoBlock = styled.div`
 
 export const Map = styled.div`
   width: 100%;
-  height: 40vh;
+  height: 50vh;
   margin-bottom: 10px;
 
   > div {
