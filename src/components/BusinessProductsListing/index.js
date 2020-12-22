@@ -303,7 +303,7 @@ const BusinessProductsListingUI = (props) => {
           )
         }
 
-        {error && error.length > 0 && (
+        {error && error.length > 0 && Object.keys(business).length && (
           <NotFoundSource
             content={error[0]?.message || error[0]}
             btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
