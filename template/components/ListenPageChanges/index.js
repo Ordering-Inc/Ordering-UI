@@ -22,7 +22,7 @@ export const ListenPageChanges = ({ children }) => {
     business: '/store/:store',
     business_slug: '/:store',
     forgot_password: '/password/forgot',
-    reset_password: '/password/reset/:code/:random'
+    reset_password: '/reset_password'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
