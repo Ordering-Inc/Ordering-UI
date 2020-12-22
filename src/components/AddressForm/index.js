@@ -13,7 +13,8 @@ import {
   useLanguage,
   GoogleMapsMap,
   useSession,
-  useOrder
+  useOrder,
+  useConfig
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../GoogleGpsButton'
@@ -31,13 +32,6 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
-const maxLimitLocation = 500
-
-const mapErrors = {
-  ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
-  ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
-}
-
 const AddressFormUI = (props) => {
   const {
     addressesList,
@@ -53,6 +47,7 @@ const AddressFormUI = (props) => {
     setIsEdit
   } = props
 
+  const [{ configs }] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const formMethods = useForm()
@@ -62,6 +57,13 @@ const AddressFormUI = (props) => {
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
+
+  const maxLimitLocation = configs?.meters_to_change_address?.value || 500
+
+  const mapErrors = {
+    ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
+    ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
+  }
 
   const isEditing = !!addressState.address?.id
 
