@@ -63,7 +63,7 @@ const OrderDetailsUI = (props) => {
   const [openReview, setOpenReview] = useState(false)
   const theme = useTheme()
   const [events] = useEvent()
-  const [{ parsePrice, parseNumber }] = useUtils()
+  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const [isReviewed, setIsReviewed] = useState(false)
 
   const { order, loading, businessData, error } = props.order
@@ -159,7 +159,7 @@ const OrderDetailsUI = (props) => {
               <OrderData>
                 <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>{order?.delivery_datetime}</p>
+                <p className='date'>{parseDate(order?.delivery_datetime)}</p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>

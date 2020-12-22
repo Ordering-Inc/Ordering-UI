@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useEvent, useOrder } from 'ordering-components'
+import { useLanguage, useEvent, useOrder, useUtils } from 'ordering-components'
 
 import { Button } from '../../styles/Buttons'
 
@@ -25,6 +25,7 @@ export const PreviousOrders = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const [, { reorder }] = useOrder()
+  const [{ parseDate }] = useUtils()
 
   const [reorderLoading, setReorderLoading] = useState(false)
   const [orderID, setOrderID] = useState(null)
@@ -55,7 +56,7 @@ export const PreviousOrders = (props) => {
                 <WrapperBusinessTitle>
                   <h2>{order.business.name}</h2>
                 </WrapperBusinessTitle>
-                <p>{order.created_at}</p>
+                <p>{parseDate(order.created_at)}</p>
                 <p name='view_order' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.id } })}>
                   {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
                 </p>
