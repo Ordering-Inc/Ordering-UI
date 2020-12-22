@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSession, useLanguage, useOrder, useEvent } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
 import {
@@ -39,6 +39,7 @@ export const Header = (props) => {
   const [orderState] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
+  const [{ configs }] = useConfig()
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
@@ -185,7 +186,9 @@ export const Header = (props) => {
             <HeaderOption
               variant='moment'
               momentState={orderState?.options?.moment}
-              onClick={(variant) => openModal(variant)}
+              onClick={configs?.max_days_preorder?.value === -1 || configs?.max_days_preorder?.value === 0
+                ? null
+                : (variant) => openModal(variant)}
               isHome={isHome}
             />
           </SubMenu>

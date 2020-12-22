@@ -1,5 +1,5 @@
 import React from 'react'
-import { useOrder } from 'ordering-components'
+import { useOrder, useConfig } from 'ordering-components'
 
 import { Container, Layer } from './styles'
 
@@ -8,9 +8,16 @@ import { SpinnerLoader } from '../SpinnerLoader'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 export const MomentContent = (props) => {
+  const [{ configs }] = useConfig()
+  const limitDays = configs?.max_days_preorder?.value || 6
   const [orderState] = useOrder()
+
   const currentDate = new Date()
-  currentDate.setTime(currentDate.getTime() + (6 * 24 * 60 * 60 * 1000))
+  const time = limitDays > 1
+    ? currentDate.getTime() + ((limitDays - 1) * 24 * 60 * 60 * 1000)
+    : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + (6 * 24 * 60 * 60 * 1000)
+
+  currentDate.setTime(time)
   currentDate.setHours(23)
   currentDate.setMinutes(59)
   const momentProps = {
