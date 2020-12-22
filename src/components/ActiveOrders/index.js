@@ -25,7 +25,7 @@ export const ActiveOrders = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, parseDate }] = useUtils()
 
   return (
     <OrdersContainer activeOrders ordersLength={orders?.length <= 1}>
@@ -43,7 +43,7 @@ export const ActiveOrders = (props) => {
                 <BusinessInformation activeOrders>
                   <h2>{order.business.name}</h2>
                   <p name='order_number'>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
-                  <p>{order.created_at}</p>
+                  <p>{parseDate(order.created_at)}</p>
                 </BusinessInformation>
                 <Price>
                   <h2>
