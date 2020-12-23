@@ -9,7 +9,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 
 export const MomentContent = (props) => {
   const [{ configs }] = useConfig()
-  const limitDays = configs?.max_days_preorder?.value || 6
+  const limitDays = configs?.max_days_preorder?.value
   const [orderState] = useOrder()
 
   const currentDate = new Date()

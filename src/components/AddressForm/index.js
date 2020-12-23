@@ -58,7 +58,7 @@ const AddressFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
 
-  const maxLimitLocation = configs?.meters_to_change_address?.value || 500
+  const maxLimitLocation = configs?.meters_to_change_address?.value
 
   const mapErrors = {
     ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
@@ -253,7 +253,7 @@ const AddressFormUI = (props) => {
         {locationChange && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
-              apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+              apiKey={configs?.google_maps_api_key?.value}
               location={locationChange}
               mapControls={googleMapsControls}
               handleChangeAddressMap={handleChangeAddress}
@@ -267,7 +267,7 @@ const AddressFormUI = (props) => {
             <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
               className='input-autocomplete'
-              apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+              apiKey={configs?.google_maps_api_key?.value}
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={(e) => {
                 formMethods.setValue('address', e.address)
@@ -280,12 +280,13 @@ const AddressFormUI = (props) => {
               }}
               value={addressValue}
               autoComplete='new-field'
+              countryCode={configs?.country_autocomplete?.value || '*'}
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
             <GoogleGpsButton
               className='gps-button'
-              apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+              apiKey={configs?.google_maps_api_key?.value}
               onAddress={(e) => {
                 formMethods.setValue('address', e.address)
                 handleChangeAddress(e)

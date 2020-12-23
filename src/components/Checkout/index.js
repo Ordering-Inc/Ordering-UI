@@ -155,7 +155,7 @@ const CheckoutUI = (props) => {
           <AddressDetails
             isCartPending={cart?.status === 2}
             businessId={cart?.business_id}
-            apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+            apiKey={configs?.google_maps_api_key?.value}
             mapConfigs={mapConfigs}
           />
         )}

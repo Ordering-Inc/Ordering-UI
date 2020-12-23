@@ -16,7 +16,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-  const configTypes = (configs?.order_types_allowed?.value || '1|2|3|4|5').split('|').map(value => Number(value))
+  const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value))
 
   const orderTypes = [
     {
@@ -70,7 +70,7 @@ export const OrderTypeSelectorHeader = (props) => {
   const orderTypeProps = {
     ...props,
     UIComponent: OrderTypeSelectorHeaderUI,
-    defaultValue: orderTypes[configs?.default_order_type?.value] || 1
+    defaultValue: orderTypes[configs?.default_order_type?.value]
   }
 
   return <OrderTypeControl {...orderTypeProps} />
