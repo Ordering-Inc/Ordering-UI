@@ -48,6 +48,8 @@ export const Header = (props) => {
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
+  const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+
   const openModal = (opt) => {
     setModalSelected(opt)
     setModalIsOpen(true)
@@ -90,7 +92,9 @@ export const Header = (props) => {
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
           <Menu className='left-header'>
-            <OrderTypeSelectorHeader />
+            {configTypes.length > 0 && (
+              <OrderTypeSelectorHeader configTypes={configTypes} />
+            )}
             {onlineStatus && windowSize.width > 820 && (
               <>
                 <MomentPopover
