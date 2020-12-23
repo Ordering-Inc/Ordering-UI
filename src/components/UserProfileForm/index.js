@@ -81,6 +81,7 @@ const UserProfileFormUI = (props) => {
 
   const handleClickImage = () => {
     inputRef.current.click()
+    setEdit(false)
   }
 
   const closeAlert = () => {
