@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils, GoogleMapsMap } from 'ordering-components'
+import {
+  useLanguage,
+  OrderDetails as OrderDetailsController,
+  useEvent,
+  useUtils,
+  GoogleMapsMap,
+  useConfig
+} from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
@@ -58,6 +65,7 @@ const OrderDetailsUI = (props) => {
     googleMapsControls,
     driverLocation
   } = props
+  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
@@ -106,7 +114,7 @@ const OrderDetailsUI = (props) => {
   const locations = [
     { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
     { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
-    { ...order?.customer?.location, icon: order?.driver?.photo || theme.images?.dummies?.customerPhoto }
+    { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
 
   useEffect(() => {

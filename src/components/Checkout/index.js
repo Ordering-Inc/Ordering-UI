@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
-import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useUtils } from 'ordering-components'
+import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useUtils, useConfig } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 
@@ -59,6 +59,7 @@ const CheckoutUI = (props) => {
     handlerClickPlaceOrder
   } = props
 
+  const [{ configs }] = useConfig()
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
