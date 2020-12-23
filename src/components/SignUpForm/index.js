@@ -236,7 +236,7 @@ const SignUpFormUI = (props) => {
         )}
         {Object.keys(configs).length > 0 ? (
           <SocialButtons isPopup={isPopup}>
-            {configs?.facebook_id && (
+            {configs?.facebook_login?.value && configs?.facebook_id?.value && (
               <FacebookLoginButton
                 appId={configs?.facebook_id?.value}
                 handleSuccessFacebookLogin={handleSuccessFacebook}

@@ -162,7 +162,7 @@ export const BusinessInformationUI = (props) => {
                 {businessLocation.location && (
                   <Map>
                     <GoogleMapsMap
-                      apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+                      apiKey={configs?.google_maps_api_key?.value}
                       location={businessLocation.location}
                       mapControls={businessLocation.googleMapsControls || business.googleMapsControls}
                     />

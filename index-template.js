@@ -48,6 +48,7 @@ import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
 
 const configFile = {
+  app_id: 'ordering-react',
   project: 'luisv4',
   api: {
     url: 'https://apiv4-dev.ordering.co',

@@ -192,7 +192,7 @@ const OrderDetailsUI = (props) => {
                 {order?.driver?.location && parseInt(order?.status) === 9 && (
                   <Map>
                     <GoogleMapsMap
-                      apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+                      apiKey={configs?.google_maps_api_key?.value}
                       location={order?.driver?.location}
                       locations={locations}
                       mapControls={googleMapsControls}

@@ -67,7 +67,11 @@ export const MomentPopover = (props) => {
 
   return (
     <div className='moment-popover' style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick} isHome={props.isHome}>
+      <HeaderItem
+        ref={referenceElement}
+        onClick={configs?.max_days_preorder?.value === -1 || configs?.max_days_preorder?.value === 0 ? null : props.onClick}
+        isHome={props.isHome}
+      >
         <FaRegClock />
         {orderStatus.options?.moment
           ? parseDate(orderStatus.options?.moment, { outputFormat: configs?.format_time?.value === '12' ? 'MM/DD hh:mma' : 'MM/DD HH:mm' })
