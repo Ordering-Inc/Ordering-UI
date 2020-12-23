@@ -4,16 +4,6 @@ import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
 import { useLanguage } from 'ordering-components'
 
-export const optimizeImage = (url, params, fallback) => {
-  if (!url && fallback) return fallback
-  params = params && params.length > 0 ? `,${params}` : ''
-  if (url != null && url.indexOf('res.cloudinary.com') !== -1) {
-    var parts = url.split('upload')
-    url = `${parts[0]}upload/f_auto,q_auto${params}${parts[1]}`
-  }
-  return url
-}
-
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
   switch (value) {
