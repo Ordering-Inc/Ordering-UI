@@ -91,6 +91,7 @@ const BusinessProductsListingUI = (props) => {
     })
     setCurProduct(product)
     setModalIsOpen(true)
+    events.emit('product_clicked', product)
   }
 
   const handlerProductAction = (product) => {
