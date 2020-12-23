@@ -60,15 +60,15 @@ var AutoScroll = function AutoScroll(_ref) {
       theme = _useTheme2[0];
 
   (0, _react.useLayoutEffect)(function () {
-    var _document, _document$getElementB, _element$parentNode;
+    var _document, _document$getElementB;
 
     var element = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById('autoscroll')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.parentNode;
-    var containerElementListener = element === null || element === void 0 ? void 0 : (_element$parentNode = element.parentNode) === null || _element$parentNode === void 0 ? void 0 : _element$parentNode.addEventListener('scroll', handleScroll);
+    element && element.parentNode.addEventListener('scroll', handleScroll);
     var containerElement = element === null || element === void 0 ? void 0 : element.parentNode;
     setParentElement(element);
     setContainerElement(containerElement);
     return function () {
-      document.removeEventListener(containerElementListener);
+      containerElement.removeEventListener('scroll', handleScroll);
     };
   });
   (0, _react.useEffect)(function () {
