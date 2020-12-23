@@ -1,5 +1,5 @@
 import React from 'react'
-import { OrderTypeControl, useLanguage } from 'ordering-components'
+import { OrderTypeControl, useLanguage, useConfig } from 'ordering-components'
 import { Select } from '../../styles/Select'
 import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import FaTruckPickup from '@meronex/icons/fa/FaTruckPickup'
@@ -15,6 +15,8 @@ const OrderTypeSelectorHeaderUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const configTypes = (configs?.order_types_allowed?.value || '1|2|3|4|5').split('|').map(value => Number(value))
 
   const orderTypes = [
     {
@@ -47,7 +49,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
   return (
     <OrderTypeWrapper>
       <Select
-        options={orderTypes}
+        options={orderTypes.filter(type => configTypes.includes(type.value))}
         defaultValue={typeSelected}
         onChange={(orderType) => handleChangeOrderType(orderType)}
       />
@@ -56,9 +58,19 @@ const OrderTypeSelectorHeaderUI = (props) => {
 }
 
 export const OrderTypeSelectorHeader = (props) => {
+  const [{ configs }] = useConfig()
+  const orderTypes = {
+    delivery: 1,
+    pickup: 2,
+    eatin: 3,
+    curbside: 4,
+    drivethru: 5
+  }
+
   const orderTypeProps = {
     ...props,
-    UIComponent: OrderTypeSelectorHeaderUI
+    UIComponent: OrderTypeSelectorHeaderUI,
+    defaultValue: orderTypes[configs?.default_order_type?.value] || 1
   }
 
   return <OrderTypeControl {...orderTypeProps} />
