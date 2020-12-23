@@ -14,14 +14,13 @@ export const AutoScroll = ({ children, modal, special }) => {
 
   useLayoutEffect(() => {
     const element = document?.getElementById('autoscroll')?.parentNode
-    const containerElementListener = element?.parentNode
-      ?.addEventListener('scroll', handleScroll)
+    element && element.parentNode.addEventListener('scroll', handleScroll)
     const containerElement = element?.parentNode
     setParentElement(element)
     setContainerElement(containerElement)
 
     return () => {
-      document.removeEventListener(containerElementListener)
+      containerElement.removeEventListener('scroll', handleScroll)
     }
   })
 
