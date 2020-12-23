@@ -64,7 +64,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
       parseDistance = _useUtils2$.parseDistance,
-      parseNumber = _useUtils2$.parseNumber;
+      parseNumber = _useUtils2$.parseNumber,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var types = ['food', 'laundry', 'alcohol', 'groceries'];
 
@@ -87,14 +88,16 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       return !isSkeleton && handleClick && handleClick(business);
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHero, null, (business === null || business === void 0 ? void 0 : business.header) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
-    bgimage: (0, _utils.optimizeImage)(business === null || business === void 0 ? void 0 : business.header, 'h_400,c_limit'),
+    bgimage: optimizeImage(business === null || business === void 0 ? void 0 : business.header, 'h_400,c_limit'),
     isClosed: !(business === null || business === void 0 ? void 0 : business.open)
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessTags, null, (business === null || business === void 0 ? void 0 : business.featured) && /*#__PURE__*/_react.default.createElement("span", {
     className: "crown"
   }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), /*#__PURE__*/_react.default.createElement("div", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), !(business === null || business === void 0 ? void 0 : business.open) && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'PreOrder')))), !(business === null || business === void 0 ? void 0 : business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, (business === null || business === void 0 ? void 0 : business.logo) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: (0, _utils.optimizeImage)(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
+    isSkeleton: isSkeleton
+  }, (business === null || business === void 0 ? void 0 : business.logo) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    bgimage: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 70,
     width: 70

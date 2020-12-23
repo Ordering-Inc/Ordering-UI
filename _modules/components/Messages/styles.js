@@ -5,13 +5,63 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.SendImage = exports.Send = exports.SendForm = exports.TimeofSent = exports.MyName = exports.PartnerName = exports.ChatImage = exports.SkeletonBubbleBusiness = exports.SkeletonBubbleCustomer = exports.BubbleCustomer = exports.BubbleBusines = exports.BubbleConsole = exports.MessageCustomer = exports.MessageBusiness = exports.MessageConsole = exports.Chat = exports.HeaderOnline = exports.Image = exports.Status = exports.HeaderName = exports.HeaderProfile = exports.MessagesContainer = void 0;
+exports.ModalIcon = exports.ImageContainer = exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.SendImage = exports.Send = exports.SendForm = exports.TimeofSent = exports.MyName = exports.PartnerName = exports.ChatImage = exports.SkeletonBubbleBusiness = exports.SkeletonBubbleCustomer = exports.BubbleCustomer = exports.BubbleBusines = exports.BubbleConsole = exports.MessageCustomer = exports.MessageBusiness = exports.MessageConsole = exports.Chat = exports.HeaderOnline = exports.Image = exports.Status = exports.HeaderName = exports.HeaderProfile = exports.MessagesContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _templateObject40() {
+  var data = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "]);
+
+  _templateObject40 = function _templateObject40() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject39() {
+  var data = _taggedTemplateLiteral(["\n    left: 10px;\n    right: initial;\n  "]);
+
+  _templateObject39 = function _templateObject39() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject38() {
+  var data = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "]);
+
+  _templateObject38 = function _templateObject38() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject37() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  position: absolute;\n  width: 30px;\n  height: 30px;\n  font-size: 30px;\n  cursor: pointer;\n  color: white;\n  border-radius: 50%;\n  right: 5px;\n  top: 5px;\n  z-index: 1;\n  background: rgba(0,0,0,0.3);\n  ", "\n  @media (min-width: 578px){\n    right: 10px;\n    ", "\n  }\n  @media (min-width: 768px){\n    right: 5px;\n    ", "\n  }\n"]);
+
+  _templateObject37 = function _templateObject37() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject36() {
+  var data = _taggedTemplateLiteral([" \n  max-height: 500px;\n  img{\n    width: 100%;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height);\n    border-bottom-left-radius: 10px;\n    border-bottom-right-radius: 10px;\n  }\n"]);
+
+  _templateObject36 = function _templateObject36() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject35() {
   var data = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0px;\n        transform: rotate(270deg)\n      "]);
@@ -34,7 +84,7 @@ function _templateObject34() {
 }
 
 function _templateObject33() {
-  var data = _taggedTemplateLiteral(["\n  margin: 0px 17px;\n\n  button{\n    &:disabled {\n    cursor: not-allowed;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 0px 17px;\n  width: 30px;\n  height: 30px;\n  position: relative;\n  img{\n    width: 30px;\n    height: 30px;\n    &:disabled {\n    cursor: not-allowed;\n    }\n    border-radius: 8px;\n  }\n\n  svg{\n    margin-bottom: 5px;\n    color: black;\n  }\n\n  button{\n    position: absolute;\n    background: white;\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n  }\n"]);
 
   _templateObject33 = function _templateObject33() {
     return data;
@@ -124,7 +174,7 @@ function _templateObject25() {
 }
 
 function _templateObject24() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: auto;\n  img{\n    width: 100%;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height);\n    vertical-align: middle;\n    object-fit: contain;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: auto;\n  margin-bottom: 10px;\n  img{\n    width: 100%;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height);\n    vertical-align: middle;\n    object-fit: contain;\n    cursor: pointer;\n  }\n"]);
 
   _templateObject24 = function _templateObject24() {
     return data;
@@ -512,3 +562,23 @@ var WrapperSendMessageButton = _styledComponents.default.div(_templateObject34()
 });
 
 exports.WrapperSendMessageButton = WrapperSendMessageButton;
+
+var ImageContainer = _styledComponents.default.div(_templateObject36());
+
+exports.ImageContainer = ImageContainer;
+
+var ModalIcon = _styledComponents.default.span(_templateObject37(), function (props) {
+  var _props$theme13;
+
+  return ((_props$theme13 = props.theme) === null || _props$theme13 === void 0 ? void 0 : _props$theme13.rtl) && (0, _styledComponents.css)(_templateObject38());
+}, function (props) {
+  var _props$theme14;
+
+  return ((_props$theme14 = props.theme) === null || _props$theme14 === void 0 ? void 0 : _props$theme14.rtl) && (0, _styledComponents.css)(_templateObject39());
+}, function (props) {
+  var _props$theme15;
+
+  return ((_props$theme15 = props.theme) === null || _props$theme15 === void 0 ? void 0 : _props$theme15.rtl) && (0, _styledComponents.css)(_templateObject40());
+});
+
+exports.ModalIcon = ModalIcon;

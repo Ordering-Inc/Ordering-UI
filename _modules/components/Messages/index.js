@@ -31,9 +31,13 @@ var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill
 
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _Confirm = require("../Confirm");
 
 var _utils = require("../../utils");
+
+var _Modal = require("../Modal");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -106,6 +110,22 @@ var MessagesUI = function MessagesUI(props) {
       getTimeAgo = _useUtils2$.getTimeAgo;
 
   var buttonRef = (0, _react.useRef)(null);
+
+  var _useState5 = (0, _react.useState)({
+    open: false,
+    src: ''
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      modalImage = _useState6[0],
+      setModalImage = _useState6[1];
+
+  var handleModalImage = function handleModalImage(src) {
+    setModalImage({
+      open: true,
+      src: src
+    });
+  };
+
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -151,6 +171,8 @@ var MessagesUI = function MessagesUI(props) {
   };
 
   var onChangeImage = function onChangeImage(e) {
+    var _files$;
+
     var files = e.target.files[0];
     var reader = new window.FileReader();
     reader.readAsDataURL(files);
@@ -169,7 +191,7 @@ var MessagesUI = function MessagesUI(props) {
       return;
     }
 
-    if ((0, _utils.bytesConverter)(files[0].size) > 2048) {
+    if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
       setAlertState({
         open: true,
         content: t('IMAGE_MESSAGES_MAXIMUM_SIZE', 'Images larger than 2 megabytes cannot be sent')
@@ -308,6 +330,9 @@ var MessagesUI = function MessagesUI(props) {
       onLoad: function onLoad() {
         return setLoad(load + 1);
       },
+      onClick: function onClick() {
+        return handleModalImage(message.source);
+      },
       alt: "chat-image",
       width: "168px",
       height: "94px"
@@ -317,6 +342,9 @@ var MessagesUI = function MessagesUI(props) {
       src: message.source,
       onLoad: function onLoad() {
         return setLoad(load + 1);
+      },
+      onClick: function onClick() {
+        return handleModalImage(message.source);
       },
       alt: "chat-image",
       width: "168px",
@@ -347,7 +375,9 @@ var MessagesUI = function MessagesUI(props) {
     circle: true,
     onClick: removeImage,
     type: "reset"
-  }, t('X', 'X'))), /*#__PURE__*/_react.default.createElement(_styles.WrapperSendMessageButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), /*#__PURE__*/_react.default.createElement("img", {
+    src: image
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperSendMessageButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
     disabled: sendMessage.loading || message === '' && !image || messages.loading,
@@ -364,7 +394,28 @@ var MessagesUI = function MessagesUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    onClose: function onClose() {
+      return setModalImage(_objectSpread(_objectSpread({}, modalImage), {}, {
+        open: false
+      }));
+    },
+    open: modalImage.open,
+    padding: "0",
+    hideCloseDefault: true,
+    isTransparent: true,
+    height: "auto"
+  }, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return setModalImage(_objectSpread(_objectSpread({}, modalImage), {}, {
+        open: false
+      }));
+    }
+  })), /*#__PURE__*/_react.default.createElement("img", {
+    src: modalImage.src,
+    width: "320px",
+    height: "180px"
+  }))));
 };
 
 exports.MessagesUI = MessagesUI;

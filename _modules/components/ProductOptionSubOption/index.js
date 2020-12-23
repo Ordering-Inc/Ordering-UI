@@ -118,7 +118,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     disabled: true
   }) : (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
     disabled: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.Text, null, suboption.name, showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option.max))), option.allow_suboption_quantity && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option.max))), option.allow_suboption_quantity && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
     disabled: state.quantity === 0,
     onClick: handleDecrement
   }), state.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {

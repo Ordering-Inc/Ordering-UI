@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
+exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -36,20 +36,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var optimizeImage = function optimizeImage(url, params, fallback) {
-  if (!url && fallback) return fallback;
-  params = params && params.length > 0 ? ",".concat(params) : '';
-
-  if (url != null && url.indexOf('res.cloudinary.com') !== -1) {
-    var parts = url.split('upload');
-    url = "".concat(parts[0], "upload/f_auto,q_auto").concat(params).concat(parts[1]);
-  }
-
-  return url;
-};
-
-exports.optimizeImage = optimizeImage;
 
 var getIconCard = function getIconCard() {
   var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -165,10 +151,16 @@ var capitalize = function capitalize(str) {
 exports.capitalize = capitalize;
 
 var getGoogleMapImage = function getGoogleMapImage(_ref) {
+  var _configs$google_maps_;
+
   var lat = _ref.lat,
       lng = _ref.lng;
-  var googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk';
-  return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(lat, ",").concat(lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(lat, ",").concat(lng, "&key=").concat(googleMapKey);
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(lat, ",").concat(lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(lat, ",").concat(lng, "&key=").concat(configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value);
 };
 /**
  * _Function to flat array of one level
@@ -199,7 +191,8 @@ var getTraduction = function getTraduction(key) {
   var keyList = {
     // Add the key and traduction that you need below
     ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart',
-    ERROR_INVALID_COUPON: "The coupon doesn't exist"
+    ERROR_INVALID_COUPON: "The coupon doesn't exist",
+    ERROR_ADD_PRODUCT_VERY_FAR_FOR_PICKUP: 'The business is too far for order type pickup'
   };
   return keyList[key] ? t(key, keyList[key]) : t(key);
 };

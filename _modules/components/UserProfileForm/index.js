@@ -91,6 +91,8 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
 
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
+      var _files$;
+
       var type = files[0].type.split('/')[0];
 
       if (type !== 'image') {
@@ -101,7 +103,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
         return;
       }
 
-      if ((0, _utils.bytesConverter)(files[0].size) > 2048) {
+      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
         setAlertState({
           open: true,
           content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
@@ -194,8 +196,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onCancel: toggleEditState,
     onCloseProfile: function onCloseProfile() {
       return setEdit(false);
-    },
-    setAlertState: setAlertState
+    }
   }))))), /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     addressList: user.addresses
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {

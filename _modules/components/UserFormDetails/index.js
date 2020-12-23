@@ -25,6 +25,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _InputPhoneNumber = require("../InputPhoneNumber");
 
+var _Confirm = require("../Confirm");
+
 var _utils = require("../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -67,8 +69,7 @@ var UserFormDetails = function UserFormDetails(props) {
       isRequiredField = props.isRequiredField,
       validationFields = props.validationFields,
       handleChangeInput = props.handleChangeInput,
-      handleButtonUpdateClick = props.handleButtonUpdateClick,
-      setAlertState = props.setAlertState;
+      handleButtonUpdateClick = props.handleButtonUpdateClick;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -93,6 +94,21 @@ var UserFormDetails = function UserFormDetails(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       userPhoneNumber = _useState6[0],
       setUserPhoneNumber = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
 
   var showInputPhoneNumber = function showInputPhoneNumber() {
     var _validationFields$fie, _validationFields$fie2, _validationFields$fie3;
@@ -120,7 +136,7 @@ var UserFormDetails = function UserFormDetails(props) {
       return;
     }
 
-    setUserPhoneNumber(user === null || user === void 0 ? void 0 : user.cellphone);
+    setUserPhoneNumber((user === null || user === void 0 ? void 0 : user.cellphone) || '');
   };
 
   var onSubmit = function onSubmit() {
@@ -136,7 +152,7 @@ var UserFormDetails = function UserFormDetails(props) {
       return;
     }
 
-    if (!isPhoneNumberValid) {
+    if (!isPhoneNumberValid && userPhoneNumber) {
       setAlertState({
         open: true,
         content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
@@ -217,7 +233,7 @@ var UserFormDetails = function UserFormDetails(props) {
         return error.message;
       });
 
-      if (!isValidPhoneNumber) {
+      if (!isValidPhoneNumber && userPhoneNumber) {
         content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid.'));
       }
 
@@ -284,7 +300,7 @@ var UserFormDetails = function UserFormDetails(props) {
     name: "password",
     className: "form",
     disabled: !isEdit,
-    placeholder: t('FRONT_VISUALS_PASSWORD'),
+    placeholder: t('FRONT_VISUALS_PASSWORD', 'Password'),
     onChange: handleChangeInput,
     ref: register({
       required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')) : null,
@@ -314,7 +330,19 @@ var UserFormDetails = function UserFormDetails(props) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i
     });
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('PROFILE', 'Profile'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 exports.UserFormDetails = UserFormDetails;

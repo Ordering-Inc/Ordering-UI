@@ -152,10 +152,12 @@ var UserPopover = function UserPopover(props) {
     ref: popperElement,
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
+    active: window.location.pathname === '/profile',
     onClick: function onClick() {
       return handleGoToPage('profile');
     }
   }, /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null), " ", t('PROFILE', 'Profile')), /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
+    active: window.location.pathname === '/profile/orders',
     onClick: function onClick() {
       return handleGoToPage('orders');
     }

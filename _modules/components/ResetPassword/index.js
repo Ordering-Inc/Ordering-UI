@@ -23,6 +23,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _styledComponents = require("styled-components");
 
+var _PageNotFound = require("../PageNotFound");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -50,7 +52,13 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
 
   var handleResetPassword = props.handleResetPassword,
       handleChangeInput = props.handleChangeInput,
-      formState = props.formState;
+      formState = props.formState,
+      code = props.code,
+      random = props.random;
+
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      auth = _useSession2[0].auth;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -132,7 +140,7 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
       return closeAlert();
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.ResetPasswordContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_RESET_PASSWORD', 'Reset password')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_RESET_PASSWORD', 'Reset your password')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_styles.ResetPasswordContainer, null, !code || !random || auth ? /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_RESET_PASSWORD', 'Reset password')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_RESET_PASSWORD', 'Reset your password')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
     alt: "Logo",
     width: "200",
@@ -185,7 +193,7 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
       return handleCloseAlert();
     },
     closeOnBackdrop: false
-  }));
+  })));
 };
 
 var ResetPassword = function ResetPassword(props) {

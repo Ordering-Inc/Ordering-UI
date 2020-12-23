@@ -128,7 +128,7 @@ function _templateObject31() {
 }
 
 function _templateObject30() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 40vh;\n  margin-bottom: 10px;\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 50vh;\n  margin-bottom: 10px;\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"]);
 
   _templateObject30 = function _templateObject30() {
     return data;
@@ -208,7 +208,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = _taggedTemplateLiteral(["\n  width: 25%;\n  max-width: 25%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  span {\n    padding: 5px 10px;\n    border: 1px solid ", ";\n    color: ", ";\n    text-align: center;\n    border-radius: 10px;\n    font-weight: bold;\n    text-transform: uppercase;\n    font-size: 13px;\n  }\n\n  @media (min-width: 410px) {\n    width: 20%;\n    max-width: 20%;\n\n    span {\n      font-size: initial;\n    }\n  }\n\n  @media (min-width: 578px) {\n    width: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 45%;\n  max-width: 45%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  span {\n    padding: 5px 10px;\n    border: 1px solid ", ";\n    color: ", ";\n    text-align: center;\n    border-radius: 10px;\n    font-weight: bold;\n    text-transform: uppercase;\n    font-size: 13px;\n    width: 100%;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    box-sizing: border-box;\n  }\n\n  @media (min-width: 410px) {\n    span {\n      font-size: initial;\n    }\n  }\n\n  @media (min-width: 768px) {\n    width: 25%;\n    max-width: 25%;\n  }\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -238,7 +238,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n  width: 75%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  h1, p {\n    margin: 0px;\n  }\n  h1 {\n    margin-bottom: 5px;\n    font-size: 24px;\n  }\n  p {\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n  }\n  p:nth-child(1) {\n    opacity: 0.8;\n  }\n  p.date {\n    font-weight: bold;\n  }\n  p.uuid {\n    display: none;\n  }\n\n  @media (min-width: 512px) {\n    p.uuid {\n      display: block;\n    }\n  }\n\n  @media (min-width: 425px) {\n    p {\n      font-size: 18px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 55%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  h1, p {\n    margin: 0px;\n  }\n  h1 {\n    margin-bottom: 5px;\n    font-size: 24px;\n  }\n  p {\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n  }\n  p:nth-child(1) {\n    opacity: 0.8;\n  }\n  p.date {\n    font-weight: bold;\n  }\n  p.uuid {\n    display: none;\n  }\n\n  @media (min-width: 768px){\n    width: 75%;\n  }\n\n  @media (min-width: 512px) {\n    p.uuid {\n      display: block;\n    }\n  }\n\n  @media (min-width: 425px) {\n    p {\n      font-size: 18px;\n    }\n  }\n"]);
 
   _templateObject19 = function _templateObject19() {
     return data;

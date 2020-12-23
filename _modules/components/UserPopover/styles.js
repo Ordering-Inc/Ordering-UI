@@ -13,8 +13,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n    background-color: #eee;\n  "]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  ", "\n  text-decoration: none;\n"]);
+  var data = _taggedTemplateLiteral(["\n  ", "\n  text-decoration: none;\n  ", "\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -126,6 +136,9 @@ var PopoverListItem = _styledComponents.default.div(_templateObject7(), PopoverL
 
 exports.PopoverListItem = PopoverListItem;
 
-var PopoverListLink = _styledComponents.default.a(_templateObject8(), PopoverListItemStyles);
+var PopoverListLink = _styledComponents.default.a(_templateObject8(), PopoverListItemStyles, function (_ref3) {
+  var active = _ref3.active;
+  return active && (0, _styledComponents.css)(_templateObject9());
+});
 
 exports.PopoverListLink = PopoverListLink;

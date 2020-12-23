@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _addressList$addresse2, _theme$images, _theme$images$general;
+  var _addressList$addresse, _addressList$addresse2, _theme$images, _theme$images$general, _addressList$error$;
 
   var actionStatus = props.actionStatus,
       addressList = props.addressList,
@@ -262,7 +262,7 @@ var AddressListUI = function AddressListUI(props) {
     width: "200px",
     height: "112px"
   }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.'))), !addressList.loading && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: addressList.error[0].message || addressList.error[0]
+    content: ((_addressList$error$ = addressList.error[0]) === null || _addressList$error$ === void 0 ? void 0 : _addressList$error$.message) || addressList.error[0]
   }), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50,
     count: 3,

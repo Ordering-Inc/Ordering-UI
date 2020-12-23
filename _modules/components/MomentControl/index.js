@@ -7,6 +7,8 @@ exports.MomentControl = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _moment = _interopRequireDefault(require("moment"));
+
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
@@ -43,6 +45,14 @@ var MomentControlUI = function MomentControlUI(props) {
       handleChangeDate = props.handleChangeDate,
       handleChangeTime = props.handleChangeTime;
 
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parseTime = _useUtils2[0].parseTime;
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -74,13 +84,19 @@ var MomentControlUI = function MomentControlUI(props) {
       return handleAsap();
     }
   }, windowSize.width > 410 ? t('ASAP', 'As soon as possible') : t('ASAP_ABBREVIATION', 'ASAP')), hoursList.map(function (hour, i) {
+    var _configs$format_time;
+
     return /*#__PURE__*/_react.default.createElement(_styles.Hour, {
       key: i,
       selected: timeSelected === hour.startTime,
       onClick: function onClick() {
         return handleChangeTime(hour.startTime);
       }
-    }, hour.startTime);
+    }, (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+      outputFormat: 'hh:mma'
+    }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+      outputFormat: 'HH:mm'
+    }));
   })));
 };
 

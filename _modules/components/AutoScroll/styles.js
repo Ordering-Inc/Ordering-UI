@@ -44,7 +44,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n        right: 95%;\n      "]);
+  var data = _taggedTemplateLiteral(["\n        right: 94%;\n      "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -54,7 +54,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n      left: 95%;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      left: 94%;\n    "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -74,7 +74,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n      right: 92%;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      right: 91%;\n    "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -94,7 +94,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n      left: 92%;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      left: 91%;\n    "]);
 
   _templateObject2 = function _templateObject2() {
     return data;

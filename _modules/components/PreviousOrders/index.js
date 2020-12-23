@@ -59,6 +59,10 @@ var PreviousOrders = function PreviousOrders(props) {
       _useOrder2 = _slicedToArray(_useOrder, 2),
       reorder = _useOrder2[1].reorder;
 
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parseDate = _useUtils2[0].parseDate;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       reorderLoading = _useState2[0],
@@ -128,7 +132,7 @@ var PreviousOrders = function PreviousOrders(props) {
       alt: "business-logo",
       width: "55px",
       height: "64px"
-    })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name)), /*#__PURE__*/_react.default.createElement("p", null, order.created_at), /*#__PURE__*/_react.default.createElement("p", {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name)), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order.created_at)), /*#__PURE__*/_react.default.createElement("p", {
       name: "view_order",
       onClick: function onClick() {
         return onOrderClick({

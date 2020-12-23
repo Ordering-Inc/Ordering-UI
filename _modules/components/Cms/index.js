@@ -45,7 +45,7 @@ var CmsUI = function CmsUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.CmsContainer, {
     id: "cms"
-  }, cmsState.loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonHeader, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, cmsState.loading && !cmsState.error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonHeader, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: "100%",
     height: "100%"
   })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonInformation, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -67,7 +67,7 @@ var CmsUI = function CmsUI(props) {
     dangerouslySetInnerHTML: {
       __html: cmsState.body
     }
-  }), !cmsState.loading && cmsState.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), cmsState.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_PAGE_SELECTED', 'Sorry, the selected page was not found.'),
     btnTitle: t('PAGE_REDIRECT', 'Go to pages list'),
     onClickButton: function onClickButton() {

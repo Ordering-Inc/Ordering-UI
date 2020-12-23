@@ -77,7 +77,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
-      parseDistance = _useUtils2$.parseDistance;
+      parseDistance = _useUtils2$.parseDistance,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return 'none';
@@ -100,7 +101,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     bgimage: business === null || business === void 0 ? void 0 : business.header,
     isSkeleton: isSkeleton
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: (0, _utils.optimizeImage)(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
+    bgimage: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 70,
     width: 70
@@ -139,7 +140,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   }, /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
     business: business,
     getBusinessType: getBusinessType,
-    optimizeImage: _utils.optimizeImage,
+    optimizeImage: optimizeImage,
     onClose: setOpenBusinessInformation
   })));
 };

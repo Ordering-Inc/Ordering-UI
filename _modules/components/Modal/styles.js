@@ -104,7 +104,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: 100%;\n  max-height: 100vh;\n  overflow: auto;\n\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: 10px;\n    height: auto;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: ", ";;\n  max-height: 100vh;\n  overflow: auto;\n\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: 10px;\n    height: auto;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -149,7 +149,10 @@ var ModalDialog = _styledComponents.default.div(_templateObject3(), function (_r
   var padding = _ref3.padding;
   return padding || '20px';
 }, function (_ref4) {
-  var width = _ref4.width;
+  var height = _ref4.height;
+  return height || '100%';
+}, function (_ref5) {
+  var width = _ref5.width;
   return width || '50%';
 });
 

@@ -74,7 +74,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductOptionsUI = function ProductOptionsUI(props) {
-  var _theme$images, _theme$images$dummies, _orderState$options, _orderState$options2;
+  var _theme$images, _theme$images$dummies, _orderState$options, _orderState$options2, _error$;
 
   var businessSlug = props.businessSlug,
       editMode = props.editMode,
@@ -331,7 +331,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }, t('LOGIN', 'Login')),
     isPopup: true
   })), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: error[0].message || error[0]
+    content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0]
   }));
 };
 

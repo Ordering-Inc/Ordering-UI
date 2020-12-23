@@ -74,7 +74,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _businessState$busine, _business$categories, _currentCart$products, _currentCart$products2;
+  var _Object$values$find, _businessState$busine, _business$categories, _productModal$error$, _error$, _currentCart$products, _currentCart$products2;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -177,6 +177,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     });
     setCurProduct(product);
     setModalIsOpen(true);
+    events.emit('product_clicked', product);
   };
 
   var handlerProductAction = function handlerProductAction(product) {
@@ -310,11 +311,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return closeModalProductForm();
     },
     padding: "0"
-  }, productModal.loading && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: 8
   }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: productModal.error[0].message || productModal.error[0]
+    content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
   }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')
   }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
@@ -349,8 +350,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     content: t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  }), !loading && !business && !location.pathname.includes('/store/') && /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: error[0].message || error[0],
+  }), !loading && !business && !location.pathname.includes('/store/') && /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null), error && error.length > 0 && Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0],
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: handleSearchRedirect
   })), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && auth && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {

@@ -75,6 +75,7 @@ var ModalUI = function ModalUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.ModalDialog, {
     className: "popup-dialog",
     width: props.width,
+    height: props.height,
     padding: props.padding,
     isTransparent: isTransparent
   }, !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {

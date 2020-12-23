@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessInformationUI = function BusinessInformationUI(props) {
-  var _business$reviews, _orderState$options, _business$reviews2, _business$reviews3, _business$reviews4;
+  var _business$reviews, _orderState$options, _configs$google_maps_, _business$reviews2, _business$reviews3, _business$reviews4;
 
   var business = props.business,
       getBusinessType = props.getBusinessType,
@@ -68,6 +68,10 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       businessPhotos = props.businessPhotos,
       businessVideos = props.businessVideos,
       onClose = props.onClose;
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -146,7 +150,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     },
     active: tabValue === 'Reviews'
   }, t('REVIEWS', 'Reviews')))), tabValue === 'General Info' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, business.about && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_ABOUT', 'Business short description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.about)), business.description && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.description)), businessLocation.location && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_LOCATION', 'Business location')), businessLocation.location && /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
-    apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
+    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
     location: businessLocation.location,
     mapControls: businessLocation.googleMapsControls || business.googleMapsControls
   }))), (businessSchedule === null || businessSchedule === void 0 ? void 0 : businessSchedule.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_OPENING_TIME', 'Business Opening Time')), /*#__PURE__*/_react.default.createElement(_styles.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleContainer, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
@@ -188,7 +192,8 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     open: modalImage,
     padding: "0",
     hideCloseDefault: true,
-    isTransparent: true
+    isTransparent: true,
+    height: "auto"
   }, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return setModalImage(false);

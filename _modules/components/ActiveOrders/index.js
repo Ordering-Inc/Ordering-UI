@@ -47,7 +47,9 @@ var ActiveOrders = function ActiveOrders(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      parseDate = _useUtils2$.parseDate;
 
   return /*#__PURE__*/_react.default.createElement(_styles2.OrdersContainer, {
     activeOrders: true,
@@ -73,7 +75,7 @@ var ActiveOrders = function ActiveOrders(props) {
       activeOrders: true
     }, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", {
       name: "order_number"
-    }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order.created_at)), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(order.products.reduce(function (acc, cur) {
+    }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order.created_at))), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(order.products.reduce(function (acc, cur) {
       return acc + cur.price;
     }, 0))), order.status === 0 && /*#__PURE__*/_react.default.createElement("p", null, t('PENDING_ORDER', 'Pending order')))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
