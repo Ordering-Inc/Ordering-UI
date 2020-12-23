@@ -74,7 +74,7 @@ const PaymentOptionStripeUI = (props) => {
 
       {token && cardsList.error && cardsList.error.length > 0 && (
         <NotFoundSource
-          content={cardsList?.error[0].message || cardsList?.error[0]}
+          content={cardsList?.error[0]?.message || cardsList?.error[0]}
         />
       )}
 

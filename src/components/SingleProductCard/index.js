@@ -1,6 +1,5 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { optimizeImage } from '../../utils'
 import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
 
 import {
@@ -23,7 +22,7 @@ export const SingleProductCard = (props) => {
 
   const [, t] = useLanguage()
   const [stateConfig] = useConfig()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
   const theme = useTheme()
 

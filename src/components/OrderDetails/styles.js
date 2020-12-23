@@ -219,7 +219,7 @@ export const OrderInfo = styled.div`
 `
 
 export const OrderData = styled.div`
-  width: 75%;
+  width: 55%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -244,6 +244,10 @@ export const OrderData = styled.div`
   }
   p.uuid {
     display: none;
+  }
+
+  @media (min-width: 768px){
+    width: 75%;
   }
 
   @media (min-width: 512px) {
@@ -280,8 +284,8 @@ export const StatusBar = (props) => {
 }
 
 export const OrderStatus = styled.div`
-  width: 25%;
-  max-width: 25%;
+  width: 45%;
+  max-width: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -295,19 +299,21 @@ export const OrderStatus = styled.div`
     font-weight: bold;
     text-transform: uppercase;
     font-size: 13px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
   }
 
   @media (min-width: 410px) {
-    width: 20%;
-    max-width: 20%;
-
     span {
       font-size: initial;
     }
   }
 
-  @media (min-width: 578px) {
-    width: 100%;
+  @media (min-width: 768px) {
+    width: 25%;
+    max-width: 25%;
   }
 `
 
@@ -401,7 +407,7 @@ export const InfoBlock = styled.div`
 
 export const Map = styled.div`
   width: 100%;
-  height: 40vh;
+  height: 50vh;
   margin-bottom: 10px;
 
   > div {

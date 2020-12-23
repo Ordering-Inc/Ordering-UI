@@ -91,6 +91,7 @@ const BusinessProductsListingUI = (props) => {
     })
     setCurProduct(product)
     setModalIsOpen(true)
+    events.emit('product_clicked', product)
   }
 
   const handlerProductAction = (product) => {
@@ -225,7 +226,7 @@ const BusinessProductsListingUI = (props) => {
           padding='0'
         >
 
-          {productModal.loading && (
+          {productModal.loading && !productModal.error && (
             <ProductLoading>
               <SkeletonItem>
                 <Skeleton height={45} count={8} />
@@ -235,7 +236,7 @@ const BusinessProductsListingUI = (props) => {
 
           {productModal.error && productModal.error.length > 0 && (
             <NotFoundSource
-              content={productModal.error[0].message || productModal.error[0]}
+              content={productModal.error[0]?.message || productModal.error[0]}
             />
           )}
 
@@ -303,9 +304,9 @@ const BusinessProductsListingUI = (props) => {
           )
         }
 
-        {error && error.length > 0 && (
+        {error && error.length > 0 && Object.keys(business).length && (
           <NotFoundSource
-            content={error[0].message || error[0]}
+            content={error[0]?.message || error[0]}
             btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
             onClickButton={handleSearchRedirect}
           />

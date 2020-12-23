@@ -173,8 +173,11 @@ export const Information = styled.div`
 `
 
 export const BusinessContent = styled.div`
-  padding: 0 20px;
+  padding: 0 10px;
   background: #FFF;
+  @media(min-width: 768px){
+    padding: 0 20px;
+  }
 `
 
 export const FlexTabs = styled.div`
@@ -289,6 +292,7 @@ export const BusinessMediaContent = styled.div`
       border-radius: 10px;
       margin: 10px 10px;
       width: calc(100% - 12px);
+      cursor: pointer;
 
       @media (min-width: 481px) {
         width: calc(50% - 20px);
@@ -307,7 +311,7 @@ export const BusinessMediaContent = styled.div`
 
 export const ModalIcon = styled.span`
   display: flex;
-  position: fixed;
+  position: absolute;
   width: 30px;
   height: 30px;
   font-size: 30px;
@@ -330,7 +334,6 @@ export const ModalIcon = styled.span`
   `}
   }
   @media (min-width: 768px){
-    position: absolute;
     right: 5px;
     ${props => props.theme?.rtl && css`
     left: 5px;

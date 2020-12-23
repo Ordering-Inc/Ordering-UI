@@ -5,7 +5,8 @@ import {
   GoogleMapsMap,
   useOrder,
   useLanguage,
-  useUtils
+  useUtils,
+  useConfig
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import { Modal } from '../Modal'
@@ -49,6 +50,8 @@ export const BusinessInformationUI = (props) => {
     businessVideos,
     onClose
   } = props
+
+  const [{ configs }] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [tabValue, setTabValue] = useState('General Info')
@@ -162,7 +165,7 @@ export const BusinessInformationUI = (props) => {
                 {businessLocation.location && (
                   <Map>
                     <GoogleMapsMap
-                      apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+                      apiKey={configs?.google_maps_api_key?.value}
                       location={businessLocation.location}
                       mapControls={businessLocation.googleMapsControls || business.googleMapsControls}
                     />
@@ -238,6 +241,7 @@ export const BusinessInformationUI = (props) => {
         padding='0'
         hideCloseDefault
         isTransparent
+        height='auto'
       >
         <ImageContainer>
           <ModalIcon>

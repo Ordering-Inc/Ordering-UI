@@ -262,12 +262,14 @@ export const SkeletonBubbleBusiness = styled.div`
 export const ChatImage = styled.div`
   width: 100%;
   height: auto;
+  margin-bottom: 10px;
   img{
     width: 100%;
     height: auto;
     aspect-ratio: attr(width) / attr(height);
     vertical-align: middle;
     object-fit: contain;
+    cursor: pointer;
   }
 `
 
@@ -358,11 +360,29 @@ export const SendImage = styled.label`
 
 export const WrapperDeleteImage = styled.div`
   margin: 0px 17px;
-
-  button{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  img{
+    width: 30px;
+    height: 30px;
     &:disabled {
     cursor: not-allowed;
     }
+    border-radius: 8px;
+  }
+
+  svg{
+    margin-bottom: 5px;
+    color: black;
+  }
+
+  button{
+    position: absolute;
+    background: white;
+    width: 20px;
+    height: 20px;
+    transform: translate(100%, -50%);
   }
 `
 
@@ -403,5 +423,48 @@ export const WrapperSendMessageButton = styled.div`
         display: inline;
       }
     }
+  }
+`
+
+export const ImageContainer = styled.div` 
+  max-height: 500px;
+  img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+`
+export const ModalIcon = styled.span`
+  display: flex;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+  right: 5px;
+  top: 5px;
+  z-index: 1;
+  background: rgba(0,0,0,0.3);
+  ${props => props.theme?.rtl && css`
+    left: 5px;
+    right: initial;
+  `}
+  @media (min-width: 578px){
+    right: 10px;
+    ${props => props.theme?.rtl && css`
+    left: 10px;
+    right: initial;
+  `}
+  }
+  @media (min-width: 768px){
+    right: 5px;
+    ${props => props.theme?.rtl && css`
+    left: 5px;
+    right: initial;
+  `}
   }
 `

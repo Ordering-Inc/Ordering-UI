@@ -1,5 +1,6 @@
 import React from 'react'
-import { MomentOption, useLanguage } from 'ordering-components'
+import moment from 'moment'
+import { MomentOption, useLanguage, useUtils, useConfig } from 'ordering-components'
 
 import { Days, Day, DayName, DayNumber, ContentDay, Hours, Hour, Title, MiddleLine } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
@@ -16,6 +17,8 @@ const MomentControlUI = (props) => {
     handleChangeTime
   } = props
 
+  const [{ configs }] = useConfig()
+  const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()
   const windowSize = useWindowSize()
 
@@ -60,7 +63,13 @@ const MomentControlUI = (props) => {
               selected={timeSelected === hour.startTime}
               onClick={() => handleChangeTime(hour.startTime)}
             >
-              {hour.startTime}
+              {configs?.format_time?.value === '12' ? (
+                hour.startTime.includes('12')
+                  ? `${hour.startTime}PM`
+                  : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
+              ) : (
+                parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'HH:mm' })
+              )}
             </Hour>
           ))
         }

@@ -14,8 +14,8 @@ export const ProductContainer = styled.div`
 
   @media (min-width: 1201px) {
     flex-wrap: nowrap;
-    height: 80vh;
     overflow: auto;
+    max-height: 70vh;
   }
 `
 

@@ -13,7 +13,8 @@ import {
   useLanguage,
   GoogleMapsMap,
   useSession,
-  useOrder
+  useOrder,
+  useConfig
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../GoogleGpsButton'
@@ -31,13 +32,6 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
-const maxLimitLocation = 500
-
-const mapErrors = {
-  ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
-  ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
-}
-
 const AddressFormUI = (props) => {
   const {
     addressesList,
@@ -53,6 +47,7 @@ const AddressFormUI = (props) => {
     setIsEdit
   } = props
 
+  const [{ configs }] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const formMethods = useForm()
@@ -62,6 +57,13 @@ const AddressFormUI = (props) => {
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
+
+  const maxLimitLocation = configs?.meters_to_change_address?.value
+
+  const mapErrors = {
+    ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
+    ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
+  }
 
   const isEditing = !!addressState.address?.id
 
@@ -103,6 +105,16 @@ const AddressFormUI = (props) => {
   }
 
   const onSubmit = async () => {
+    if (
+      !auth && formState?.changes?.address === '' && addressState?.address?.address
+    ) {
+      setAlertState({
+        open: true,
+        content: [t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'The field Address is required')]
+      })
+      setLocationChange(null)
+      return
+    }
     if (formState?.changes?.address && !formState?.changes?.location) {
       setAlertState({
         open: true,
@@ -167,7 +179,7 @@ const AddressFormUI = (props) => {
   useEffect(() => {
     if (!auth) {
       setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
-      setAddressValue(formState?.changes?.address || orderState?.options?.address?.address || '')
+      setAddressValue(formState?.changes?.address ?? orderState?.options?.address?.address ?? '')
       inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || orderState?.options?.address[field] || ''))
       return
     }
@@ -208,7 +220,7 @@ const AddressFormUI = (props) => {
 
   useEffect(() => {
     if (!auth) {
-      setLocationChange(orderState?.options?.address?.location ?? formState?.changes?.location ?? '')
+      setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
     }
   }, [])
 
@@ -241,7 +253,7 @@ const AddressFormUI = (props) => {
         {locationChange && toggleMap && (
           <WrapperMap>
             <GoogleMapsMap
-              apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+              apiKey={configs?.google_maps_api_key?.value}
               location={locationChange}
               mapControls={googleMapsControls}
               handleChangeAddressMap={handleChangeAddress}
@@ -255,7 +267,7 @@ const AddressFormUI = (props) => {
             <HiOutlineLocationMarker />
             <GoogleAutocompleteInput
               className='input-autocomplete'
-              apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+              apiKey={configs?.google_maps_api_key?.value}
               placeholder={t('ADDRESS', 'Address')}
               onChangeAddress={(e) => {
                 formMethods.setValue('address', e.address)
@@ -268,12 +280,13 @@ const AddressFormUI = (props) => {
               }}
               value={addressValue}
               autoComplete='new-field'
+              countryCode={configs?.country_autocomplete?.value || '*'}
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
             <GoogleGpsButton
               className='gps-button'
-              apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+              apiKey={configs?.google_maps_api_key?.value}
               onAddress={(e) => {
                 formMethods.setValue('address', e.address)
                 handleChangeAddress(e)

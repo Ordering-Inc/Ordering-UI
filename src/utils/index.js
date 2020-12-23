@@ -2,17 +2,7 @@ import React from 'react'
 import FaCcMastercard from '@meronex/icons/fa/FaCcMastercard'
 import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
-import { useLanguage } from 'ordering-components'
-
-export const optimizeImage = (url, params, fallback) => {
-  if (!url && fallback) return fallback
-  params = params && params.length > 0 ? `,${params}` : ''
-  if (url != null && url.indexOf('res.cloudinary.com') !== -1) {
-    var parts = url.split('upload')
-    url = `${parts[0]}upload/f_auto,q_auto${params}${parts[1]}`
-  }
-  return url
-}
+import { useLanguage, useConfig } from 'ordering-components'
 
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
@@ -99,8 +89,8 @@ export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
  * @param {object} param object with latitude and logitude
  */
 export const getGoogleMapImage = ({ lat, lng }) => {
-  const googleMapKey = 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-  return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${googleMapKey}`
+  const [{ configs }] = useConfig()
+  return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${configs?.google_maps_api_key?.value}`
 }
 
 /**
@@ -118,7 +108,8 @@ export const getTraduction = key => {
   const keyList = {
     // Add the key and traduction that you need below
     ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart',
-    ERROR_INVALID_COUPON: "The coupon doesn't exist"
+    ERROR_INVALID_COUPON: "The coupon doesn't exist",
+    ERROR_ADD_PRODUCT_VERY_FAR_FOR_PICKUP: 'The business is too far for order type pickup'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)

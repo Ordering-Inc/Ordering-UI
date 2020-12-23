@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils, GoogleMapsMap } from 'ordering-components'
+import {
+  useLanguage,
+  OrderDetails as OrderDetailsController,
+  useEvent,
+  useUtils,
+  GoogleMapsMap,
+  useConfig
+} from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
@@ -58,12 +65,13 @@ const OrderDetailsUI = (props) => {
     googleMapsControls,
     driverLocation
   } = props
+  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
   const theme = useTheme()
   const [events] = useEvent()
-  const [{ parsePrice, parseNumber }] = useUtils()
+  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const [isReviewed, setIsReviewed] = useState(false)
 
   const { order, loading, businessData, error } = props.order
@@ -104,9 +112,9 @@ const OrderDetailsUI = (props) => {
   }
 
   const locations = [
-    { ...order?.driver?.location },
-    { ...order?.business?.location },
-    { ...order?.customer?.location }
+    { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
+    { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
+    { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
 
   useEffect(() => {
@@ -159,7 +167,7 @@ const OrderDetailsUI = (props) => {
               <OrderData>
                 <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>{order?.delivery_datetime}</p>
+                <p className='date'>{parseDate(order?.delivery_datetime)}</p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>
@@ -192,7 +200,7 @@ const OrderDetailsUI = (props) => {
                 {order?.driver?.location && parseInt(order?.status) === 9 && (
                   <Map>
                     <GoogleMapsMap
-                      apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+                      apiKey={configs?.google_maps_api_key?.value}
                       location={order?.driver?.location}
                       locations={locations}
                       mapControls={googleMapsControls}
@@ -334,15 +342,7 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {error && error.length > 0 && (
-        <NotFoundSource
-          content={error[0].message || error[0]}
-          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
-          onClickButton={handleOrderRedirect}
-        />
-      )}
-
-      {!loading && !order && (
+      {!loading && (!order || error) && (
         <NotFoundSource
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
           btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}

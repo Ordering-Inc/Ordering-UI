@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
-import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useUtils } from 'ordering-components'
+import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useUtils, useConfig } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 
@@ -59,6 +59,7 @@ const CheckoutUI = (props) => {
     handlerClickPlaceOrder
   } = props
 
+  const [{ configs }] = useConfig()
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -155,7 +156,7 @@ const CheckoutUI = (props) => {
           <AddressDetails
             isCartPending={cart?.status === 2}
             businessId={cart?.business_id}
-            apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+            apiKey={configs?.google_maps_api_key?.value}
             mapConfigs={mapConfigs}
           />
         )}
@@ -210,7 +211,7 @@ const CheckoutUI = (props) => {
             <div>
               <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
               <NotFoundSource
-                content={businessDetails?.error[0].message || businessDetails?.error[0]}
+                content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
               />
             </div>
           )}
