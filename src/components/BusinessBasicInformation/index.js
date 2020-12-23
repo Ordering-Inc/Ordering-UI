@@ -11,7 +11,7 @@ import { BusinessInformation } from '../BusinessInformation'
 
 import { useUtils, useOrder } from 'ordering-components'
 
-import { optimizeImage, convertHoursToMinutes } from '../../utils'
+import { convertHoursToMinutes } from '../../utils'
 
 import {
   BusinessContainer,
@@ -35,7 +35,7 @@ export const BusinessBasicInformation = (props) => {
 
   const [orderState] = useOrder()
 
-  const [{ parsePrice, parseDistance }] = useUtils()
+  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return 'none'

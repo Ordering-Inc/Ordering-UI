@@ -5,7 +5,8 @@ import {
   GoogleMapsMap,
   useOrder,
   useLanguage,
-  useUtils
+  useUtils,
+  useConfig
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import { Modal } from '../Modal'
@@ -49,6 +50,8 @@ export const BusinessInformationUI = (props) => {
     businessVideos,
     onClose
   } = props
+
+  const [{ configs }] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [tabValue, setTabValue] = useState('General Info')
