@@ -65,8 +65,8 @@ export const App = () => {
 
   return (
     <>
-      {configs?.track_id_google_analytics && (
-        <Analytics trackId={configs?.track_id_google_analytics} />
+      {configs?.track_id_google_analytics?.value && (
+        <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
       <ListenPageChanges />
       {
