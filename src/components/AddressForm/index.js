@@ -116,6 +116,34 @@ const AddressFormUI = (props) => {
       return
     }
     if (formState?.changes?.address && !formState?.changes?.location) {
+      const geocoder = window.google && new window.google.maps.Geocoder()
+
+      geocoder.geocode({ address: formState?.changes?.address }, (results, status) => {
+        console.log('results', results, status)
+        // let zipcode = null
+        // if (results && results.length > 0) {
+        //   for (const component of results[0].address_components) {
+        //     const addressType = component.types[0]
+        //     if (addressType === 'postal_code') {
+        //       zipcode = component.short_name
+        //       break
+        //     }
+        //   }
+        //   const address = {
+        //     address: results[0].formatted_address,
+        //     location: { lat: pos.lat(), lng: pos.lng() },
+        //     zipcode
+        //   }
+        //   handleChangeAddressMap && handleChangeAddressMap(address)
+
+        //   center.lat = address.location.lat
+        //   center.lng = address.location.lng
+        // } else {
+        //   googleMapMarker && googleMapMarker.setPosition(center)
+        //   setErrors && setErrors('ERROR_NOT_FOUND_ADDRESS')
+        // }
+        // googleMap && googleMap.panTo(new window.google.maps.LatLng(center.lat, center.lng))
+      })
       setAlertState({
         open: true,
         content: [t('ADDRESS_REQUIRE_LOCATION', 'The address needs a location, please select one of the suggested')]
