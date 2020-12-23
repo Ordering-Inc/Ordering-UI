@@ -11,12 +11,11 @@ import { Option, OrderTypeWrapper, SelectedOption, ContentOption } from './style
 const OrderTypeSelectorHeaderUI = (props) => {
   const {
     handleChangeOrderType,
-    typeSelected
+    typeSelected,
+    configTypes
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
-  const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value))
 
   const orderTypes = [
     {
