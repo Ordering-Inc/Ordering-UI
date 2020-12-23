@@ -44,22 +44,14 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
-  var _configs$order_types_;
-
   var handleChangeOrderType = props.handleChangeOrderType,
-      typeSelected = props.typeSelected;
+      typeSelected = props.typeSelected,
+      configTypes = props.configTypes;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var configTypes = configs === null || configs === void 0 ? void 0 : (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : _configs$order_types_.value.split('|').map(function (value) {
-    return Number(value);
-  });
   var orderTypes = [{
     value: 1,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_MdcTruckDeliveryOutline.default, null), /*#__PURE__*/_react.default.createElement(_styles.ContentOption, null, t('DELIVERY', 'Delivery'))),
@@ -95,9 +87,9 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
 var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
   var _configs$default_orde;
 
-  var _useConfig3 = (0, _orderingComponents.useConfig)(),
-      _useConfig4 = _slicedToArray(_useConfig3, 1),
-      configs = _useConfig4[0].configs;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var orderTypes = {
     delivery: 1,
