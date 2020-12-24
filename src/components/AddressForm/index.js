@@ -57,6 +57,7 @@ const AddressFormUI = (props) => {
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
+  const [isLoadingGeocoder, setIsLoadingGeocoder] = useState({ value: false })
 
   const maxLimitLocation = configs?.meters_to_change_address?.value
 
@@ -116,60 +117,73 @@ const AddressFormUI = (props) => {
       return
     }
     if (formState?.changes?.address && !formState?.changes?.location) {
+      const isLocationRequired = configs?.google_autocomplete_selection_required?.value === '1' ||
+        configs?.google_autocomplete_selection_required?.value === 'true'
+      if (isLocationRequired) {
+        setAlertState({
+          open: true,
+          content: [t('ADDRESS_REQUIRE_LOCATION', 'The address needs a location, please select one of the suggested')]
+        })
+        return
+      }
+      isLoadingGeocoder.value = true
+      setIsLoadingGeocoder({ value: true })
       const geocoder = window.google && new window.google.maps.Geocoder()
 
       geocoder.geocode({ address: formState?.changes?.address }, (results, status) => {
-        console.log('results', results, status)
-        // let zipcode = null
-        // if (results && results.length > 0) {
-        //   for (const component of results[0].address_components) {
-        //     const addressType = component.types[0]
-        //     if (addressType === 'postal_code') {
-        //       zipcode = component.short_name
-        //       break
-        //     }
-        //   }
-        //   const address = {
-        //     address: results[0].formatted_address,
-        //     location: { lat: pos.lat(), lng: pos.lng() },
-        //     zipcode
-        //   }
-        //   handleChangeAddressMap && handleChangeAddressMap(address)
-
-        //   center.lat = address.location.lat
-        //   center.lng = address.location.lng
-        // } else {
-        //   googleMapMarker && googleMapMarker.setPosition(center)
-        //   setErrors && setErrors('ERROR_NOT_FOUND_ADDRESS')
-        // }
-        // googleMap && googleMap.panTo(new window.google.maps.LatLng(center.lat, center.lng))
+        let postalCode = null
+        let address = null
+        if (results && results.length > 0) {
+          for (const component of results[0].address_components) {
+            const addressType = component.types[0]
+            if (addressType === 'postal_code') {
+              postalCode = component.short_name
+              break
+            }
+          }
+          address = {
+            address: formState?.changes?.address,
+            location: { lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() },
+            utc_offset: results[0].utc_offset_minutes ?? 0,
+            map_data: {
+              library: 'google',
+              place_id: results[0].place_id
+            }
+          }
+          if (postalCode) {
+            address.zipcode = postalCode
+          }
+        } else {
+          setAlertState({
+            open: true,
+            content: [t('ERROR_NOT_FOUND_ADDRESS', 'Error, address not found')]
+          })
+        }
+        updateChanges(address)
       })
+    }
+
+    if (!isLoadingGeocoder.value) {
+      setToggleMap(false)
+      const arrayList = isEditing
+        ? addressesList.filter(address => address.id !== addressState.address?.id) || []
+        : addressesList || []
+      const addressToCompare = isEditing
+        ? { ...addressState.address, ...formState.changes }
+        : formState?.changes
+
+      const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
+
+      if (!isAddressAlreadyExist) {
+        saveAddress()
+        return
+      }
+
       setAlertState({
         open: true,
-        content: [t('ADDRESS_REQUIRE_LOCATION', 'The address needs a location, please select one of the suggested')]
+        content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
       })
-      return
     }
-
-    setToggleMap(false)
-    const arrayList = isEditing
-      ? addressesList.filter(address => address.id !== addressState.address?.id) || []
-      : addressesList || []
-    const addressToCompare = isEditing
-      ? { ...addressState.address, ...formState.changes }
-      : formState?.changes
-
-    const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
-
-    if (!isAddressAlreadyExist) {
-      saveAddress()
-      return
-    }
-
-    setAlertState({
-      open: true,
-      content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
-    })
   }
 
   const handleAddressTag = (tag) => {
@@ -252,6 +266,10 @@ const AddressFormUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    console.log(isLoadingGeocoder)
+  }, [isLoadingGeocoder])
+
   /**
    * Form events control
    */
@@ -274,6 +292,10 @@ const AddressFormUI = (props) => {
       })
     })
   }, [formMethods])
+
+  const onChangeAddressInput = (val) => {
+    console.log('onChangeAddressInput', val)
+  }
 
   return (
     <div className='address-form'>
@@ -309,6 +331,8 @@ const AddressFormUI = (props) => {
               value={addressValue}
               autoComplete='new-field'
               countryCode={configs?.country_autocomplete?.value || '*'}
+              // onChangeAddressInput={(val) => onChangeAddressInput(val)}
+              // isLoadingGeolocation={formState?.changes?.address && !formState?.changes?.location}
             />
           </WrapAddressInput>
           {(!validationFields.loading || !addressState.loading) &&
