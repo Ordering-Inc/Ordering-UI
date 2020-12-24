@@ -13,6 +13,7 @@ import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
+import { Alert } from '../src/components/Confirm'
 
 import { ForgotPassword } from './pages/ForgotPassword'
 import { SignUp } from './pages/SignUp'
@@ -41,6 +42,19 @@ export const App = () => {
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  const acceptAlert = () => {
+    window.localStorage.setItem('front_version', configs?.front_version?.value)
+    window.location.reload()
+  }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
 
@@ -62,6 +76,18 @@ export const App = () => {
       setLoaded(!auth)
     }
   }, [loading])
+
+  useEffect(() => {
+    if (configs?.front_version?.value && loaded) {
+      const localStorageFrontVersion = window.localStorage.getItem('front_version')
+      if (localStorageFrontVersion && localStorageFrontVersion !== configs?.front_version?.value) {
+        setAlertState({
+          open: true,
+          content: [t('RELOAD_FRONT_QUESTION', 'There is a new version of Ordering! Do you want to update it?')]
+        })
+      }
+    }
+  }, [configs, loaded])
 
   return (
     <>
@@ -210,6 +236,16 @@ export const App = () => {
               </ScrollToTop>
             )}
             <Footer />
+            <Alert
+              title={t('INFORMATION', 'Information')}
+              content={alertState.content}
+              acceptText={t('ACCEPT', 'Accept')}
+              open={alertState.open}
+              onClose={() => closeAlert()}
+              onCancel={() => closeAlert()}
+              onAccept={() => acceptAlert()}
+              closeOnBackdrop={false}
+            />
           </>
         )
       }
