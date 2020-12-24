@@ -30,9 +30,9 @@ const CartUI = (props) => {
     removeProduct,
     onClickCheckout,
     showCoupon,
-    validationFields,
     isCheckout,
-    isCartPending
+    isCartPending,
+    validationFields
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
