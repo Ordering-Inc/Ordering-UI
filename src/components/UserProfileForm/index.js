@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
-  UserFormDetails as UserProfileController,
   useLanguage,
   useSession,
   DragAndDrop,
@@ -19,6 +18,8 @@ import { bytesConverter } from '../../utils'
 
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
+
+import { UserFormDetails as UserProfileController } from './test'
 
 import {
   Container,
@@ -81,7 +82,6 @@ const UserProfileFormUI = (props) => {
 
   const handleClickImage = () => {
     inputRef.current.click()
-    toggleEditState(false)
   }
 
   const closeAlert = () => {
@@ -92,10 +92,11 @@ const UserProfileFormUI = (props) => {
   }
 
   useEffect(() => {
-    if (formState.changes.photo) {
-      handleButtonUpdateClick()
+    if (formState.changes?.photo) {
+      const isImage = true
+      handleButtonUpdateClick(null, isImage)
     }
-  }, [formState.changes.photo])
+  }, [formState.changes?.photo])
 
   return (
     <>
@@ -106,9 +107,9 @@ const UserProfileFormUI = (props) => {
             <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
               <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
                 <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
-                  {formState.changes.photo && formState.loading
+                  {formState.changes?.photo && formState.loading
                     ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                    : ((!formState.changes.photo || formState.result?.result === 'Network Error' || formState.result.error)
+                    : ((!formState.changes?.photo || formState.result?.result === 'Network Error' || formState.result.error)
                       ? user?.photo
                         ? (<img src={user?.photo} alt='user image' width='200px' height='200px' />)
                         : (
