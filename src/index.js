@@ -154,5 +154,6 @@ export {
   InputSecundary,
   Select,
   Tab,
-  Tabs
+  Tabs,
+  TextArea
 }
