@@ -177,7 +177,7 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
-            {(showCoupon || validationFields?.fields?.coupon?.enabled) && !isCartPending && (
+            {(showCoupon || validationFields?.fields?.checkout?.coupon?.enabled) && !isCartPending && (
               <CouponContainer>
                 <CouponControl
                   businessId={cart.business_id}
