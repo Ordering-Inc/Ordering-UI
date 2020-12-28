@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
+// import Skeleton from 'react-loading-skeleton'
 import parsePhoneNumber from 'libphonenumber-js'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import {
-  InputPhoneNumber as InputController,
+  // InputPhoneNumber as InputController,
   useLanguage,
   useConfig
 } from 'ordering-components'
+// import { InputPhoneNumber as InputController } from './test'
 
 import { Container, ErrorMsg } from './styles'
 
-const InputPhoneNumberUI = (props) => {
+export const InputPhoneNumber = (props) => {
   const {
+    user,
     value,
     setValue,
     handleIsValid,
-    disabled,
-    countryData
+    disabled
+    // countryData
   } = props
 
   const [, t] = useLanguage()
@@ -29,47 +31,52 @@ const InputPhoneNumberUI = (props) => {
     return numberParser?.isValid()
   }
 
+  const handleChange = (val) => {
+    console.log('val', val)
+    setValue(val, isValidPhoneNumber(val))
+  }
+
   useEffect(() => {
     if (value) {
       handleIsValid && handleIsValid(isValidPhoneNumber(value))
     }
   }, [value])
 
-  useEffect(() => {
-    if (countryData.number) {
-      const number = `${countryData.number}${value?.replace('null', '')}`
-      setValue(number, isValidPhoneNumber(number))
-    }
-  }, [countryData.number])
+  // useEffect(() => {
+  //   if (countryData.number && value.includes('null')) {
+  //     const number = `${countryData.number}${value?.replace('null', '')}`
+  //     setValue(number, isValidPhoneNumber(number))
+  //   }
+  // }, [countryData.number])
 
   return (
     <Container className='phone_number' disabled={disabled}>
-      {countryData.loading || value === null ? (
-        <Skeleton height={40} />
-      ) : (
-        <>
-          <PhoneInput
-            international
-            defaultCountry={countryData.value || configs?.countryDefaultCode?.code || 'US'}
-            countryCallingCodeEditable={false}
-            placeholder={t('PHONE_NUMBER', 'Phone number')}
-            value={value}
-            disabled={disabled}
-            onChange={(val) => setValue(val, isValidPhoneNumber(val))}
-          />
-          {value && !isValidPhoneNumber(value) && !disabled && <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number')}</ErrorMsg>}
-        </>
-      )}
+      <>
+        <PhoneInput
+          disabled={disabled}
+          placeholder={t('PHONE_NUMBER', 'Phone number')}
+          defaultCountry={
+            !user?.country_phone_code && user?.cellphone
+              ? null
+              : user?.country_phone_code && user?.cellphone
+                ? null
+                : configs?.countryDefaultCode?.value || 'US'
+          }
+          value={value || null}
+          onChange={(val) => handleChange(val)}
+        />
+        {value && !isValidPhoneNumber(value) && !disabled && <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number')}</ErrorMsg>}
+      </>
     </Container>
   )
 }
 
-export const InputPhoneNumber = (props) => {
-  const inputProps = {
-    ...props,
-    UIComponent: InputPhoneNumberUI
-  }
-  return (
-    <InputController {...inputProps} />
-  )
-}
+// const InputPhoneNumber = (props) => {
+//   const inputProps = {
+//     ...props,
+//     UIComponent: InputPhoneNumberUI
+//   }
+//   return (
+//     <InputController {...inputProps} />
+//   )
+// }

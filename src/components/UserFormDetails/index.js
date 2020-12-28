@@ -88,12 +88,12 @@ export const UserFormDetails = (props) => {
       let changes = null
       if (user?.cellphone && !userPhoneNumber) {
         changes = {
-          country_phone_code: '',
-          cellphone: ''
+          country_phone_code: null,
+          cellphone: null
         }
       }
       handleButtonUpdateClick(changes)
-      toggleIsEdit()
+      // toggleIsEdit()
       onCloseProfile && onCloseProfile()
     }
   }
@@ -105,11 +105,11 @@ export const UserFormDetails = (props) => {
     let phoneNumber = {
       country_phone_code: {
         name: 'country_phone_code',
-        value: ''
+        value: null
       },
       cellphone: {
         name: 'cellphone',
-        value: ''
+        value: null
       }
     }
     if (isValid) {
@@ -236,7 +236,9 @@ export const UserFormDetails = (props) => {
             />
             {!!showInputPhoneNumber() && (
               <InputPhoneNumber
+                user={user}
                 value={userPhoneNumber}
+                state={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
                 disabled={!isEdit}
