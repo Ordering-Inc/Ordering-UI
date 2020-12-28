@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
+  UserFormDetails as UserProfileController,
   useLanguage,
   useSession,
   DragAndDrop,
@@ -18,8 +19,6 @@ import { bytesConverter } from '../../utils'
 
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
-
-import { UserFormDetails as UserProfileController } from './test'
 
 import {
   Container,
