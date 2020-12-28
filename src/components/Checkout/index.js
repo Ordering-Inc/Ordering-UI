@@ -93,7 +93,7 @@ const CheckoutUI = (props) => {
     const errors = []
     const notFields = ['coupon', 'driver_tip', 'mobile_phone']
 
-    Object.values(validationFields?.fields).map(field => {
+    Object.values(validationFields?.fields?.checkout).map(field => {
       if (field?.required && !notFields.includes(field.code)) {
         if (!user[field?.code]) {
           errors.push(t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `The field ${field?.name} is required`))
@@ -101,7 +101,7 @@ const CheckoutUI = (props) => {
       }
     })
 
-    if (!user?.cellphone && validationFields?.fields?.cellphone?.required) {
+    if (!user?.cellphone && validationFields?.fields?.checkout?.cellphone?.required) {
       errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'))
     }
 
@@ -122,7 +122,7 @@ const CheckoutUI = (props) => {
   }
 
   useEffect(() => {
-    if (validationFields && validationFields?.fields) {
+    if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
     }
   }, [validationFields, user])
@@ -231,7 +231,7 @@ const CheckoutUI = (props) => {
           </PaymentMethodContainer>
         )}
 
-        {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.driver_tip?.enabled && (
+        {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.checkout?.driver_tip?.enabled && (
           <DriverTipContainer>
             <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
             <DriverTips
@@ -250,7 +250,7 @@ const CheckoutUI = (props) => {
               cart={cart}
               isCheckout
               isProducts={cart?.products?.length || 0}
-              showCoupon={validationFields?.fields?.coupon?.enabled}
+              showCoupon={validationFields?.fields?.checkout?.coupon?.enabled}
             />
           </CartContainer>
         )}
