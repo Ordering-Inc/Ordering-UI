@@ -85,11 +85,15 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
 };
 
 var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
-  var _configs$default_orde;
+  var _orderState$options, _configs$default_orde;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
+
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
 
   var orderTypes = {
     delivery: 1,
@@ -101,7 +105,7 @@ var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
 
   var orderTypeProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrderTypeSelectorHeaderUI,
-    defaultValue: orderTypes[configs === null || configs === void 0 ? void 0 : (_configs$default_orde = configs.default_order_type) === null || _configs$default_orde === void 0 ? void 0 : _configs$default_orde.value]
+    defaultValue: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) || orderTypes[configs === null || configs === void 0 ? void 0 : (_configs$default_orde = configs.default_order_type) === null || _configs$default_orde === void 0 ? void 0 : _configs$default_orde.value]
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderTypeControl, orderTypeProps);

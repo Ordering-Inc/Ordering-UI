@@ -471,6 +471,12 @@ Object.defineProperty(exports, "InputSecundary", {
     return _Inputs.InputSecundary;
   }
 });
+Object.defineProperty(exports, "TextArea", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.TextArea;
+  }
+});
 Object.defineProperty(exports, "Select", {
   enumerable: true,
   get: function get() {
