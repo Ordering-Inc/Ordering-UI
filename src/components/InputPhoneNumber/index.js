@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import parsePhoneNumber from 'libphonenumber-js'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-import { useLanguage, useConfig } from 'ordering-components'
+import { useLanguage, useConfig, useSession } from 'ordering-components'
 
 import { Container, ErrorMsg } from './styles'
 
 export const InputPhoneNumber = (props) => {
   const {
+    user,
     value,
     setValue,
     handleIsValid,
@@ -15,19 +16,13 @@ export const InputPhoneNumber = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
-  const [countryState, setCountryState] = useState(configs?.countryDefaultCode?.value)
 
   const isValidPhoneNumber = (number) => {
     if (!number) return
     const numberParser = parsePhoneNumber(number)
     return numberParser?.isValid()
-  }
-
-  const handleCountryChange = (val) => {
-    if (val) {
-      setCountryState(val)
-    }
   }
 
   useEffect(() => {
@@ -37,17 +32,27 @@ export const InputPhoneNumber = (props) => {
   }, [value])
 
   return (
-    <Container className='phone_number' disabled={disabled}>
+    <Container className='phone_number' disabled={disabled} isValid={value ? isValidPhoneNumber(value) : true}>
       <>
         <PhoneInput
           disabled={disabled}
           placeholder={t('PHONE_NUMBER', 'Phone number')}
-          defaultCountry={countryState}
+          defaultCountry={configs?.default_country_code?.value}
           value={value}
+          displayInitialValueAsLocalNumber
           onChange={(val) => setValue(val, isValidPhoneNumber(val))}
-          onCountryChange={(val) => handleCountryChange(val)}
         />
-        {value && !isValidPhoneNumber(value) && !disabled && <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number')}</ErrorMsg>}
+        {value && !isValidPhoneNumber(value) && !disabled && (
+          <>
+            {((auth && user?.country_phone_code) || !auth) && (
+              <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')}</ErrorMsg>
+            )}
+
+            {auth && !user?.country_phone_code && (
+              <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')}</ErrorMsg>
+            )}
+          </>
+        )}
       </>
     </Container>
   )

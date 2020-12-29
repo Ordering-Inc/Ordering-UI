@@ -79,9 +79,16 @@ export const UserFormDetails = (props) => {
       return
     }
     if (!isPhoneNumberValid && userPhoneNumber) {
+      if (user?.country_phone_code) {
+        setAlertState({
+          open: true,
+          content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
+        })
+        return
+      }
       setAlertState({
         open: true,
-        content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
+        content: [t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')]
       })
       return
     }
