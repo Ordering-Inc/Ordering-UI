@@ -29,7 +29,6 @@ const CartUI = (props) => {
     offsetDisabled,
     removeProduct,
     onClickCheckout,
-    showCoupon,
     isCheckout,
     isCartPending
   } = props
@@ -182,7 +181,7 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
-            {(showCoupon || isCouponEnabled) && !isCartPending && (
+            {isCouponEnabled && !isCartPending && (
               <CouponContainer>
                 <CouponControl
                   businessId={cart.business_id}
