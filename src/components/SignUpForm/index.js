@@ -88,7 +88,7 @@ const SignUpFormUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber && validationFields?.fields?.cellphone?.required) {
+    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -140,7 +140,7 @@ const SignUpFormUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
-  const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
+  const showInputPhoneNumber = () => validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   return (
     <SignUpContainer isPopup={isPopup}>
@@ -162,7 +162,7 @@ const SignUpFormUI = (props) => {
             !(useChekoutFileds && validationFields.loading) ? (
               <>
                 {
-                  Object.values(validationFields.fields).map(field => !notValidationFields.includes(field.code) && (
+                  Object.values(validationFields.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
                     showField(field.code) && (
                       <Input
                         key={field.id}

@@ -15,7 +15,7 @@ import { flatArray } from '../../utils'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
 
-export const UserFormDetails = (props) => {
+export const UserFormDetailsUI = (props) => {
   const {
     t,
     isEdit,
@@ -46,7 +46,7 @@ export const UserFormDetails = (props) => {
     cleanFormState && cleanFormState({ result: { error: false } })
   }
 
-  const showInputPhoneNumber = () => validationFields?.fields?.cellphone?.enabled ?? false
+  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   const setUserCellPhone = (isEdit = false) => {
     if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
@@ -69,8 +69,8 @@ export const UserFormDetails = (props) => {
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
     if (!userPhoneNumber &&
-        validationFields?.fields?.cellphone?.required &&
-        validationFields?.fields?.cellphone?.enabled
+        validationFields?.fields?.checkout?.cellphone?.required &&
+        validationFields?.fields?.checkout?.cellphone?.enabled
     ) {
       setAlertState({
         open: true,
@@ -139,7 +139,7 @@ export const UserFormDetails = (props) => {
   const sortValidationFields = () => {
     const fields = ['name', 'middle_name', 'lastname', 'second_lastname', 'email']
     const fieldsSorted = []
-    const validationsFieldsArray = Object.values(validationFields.fields)
+    const validationsFieldsArray = Object.values(validationFields.fields?.checkout)
 
     fields.forEach(f => {
       validationsFieldsArray.forEach(field => {
@@ -176,10 +176,10 @@ export const UserFormDetails = (props) => {
   }, [formState.loading])
 
   useEffect(() => {
-    if (validationFields.fields) {
+    if (validationFields.fields?.checkout) {
       sortValidationFields()
     }
-  }, [validationFields.fields])
+  }, [validationFields.fields?.checkout])
 
   useEffect(() => {
     if (!isEdit && onCloseProfile) {
@@ -243,7 +243,7 @@ export const UserFormDetails = (props) => {
                 }
               })}
             />
-            {!!showInputPhoneNumber() && (
+            {!!showInputPhoneNumber && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}
