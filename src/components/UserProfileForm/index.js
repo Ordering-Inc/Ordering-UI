@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
-  // UserFormDetails as UserProfileController,
+  UserFormDetails as UserProfileController,
   useLanguage,
   useSession,
   DragAndDrop,
   ExamineClick
 } from 'ordering-components'
-
-import { UserFormDetails as UserProfileController } from './test'
 
 import { UserFormDetails } from '../UserFormDetails'
 import { AddressList } from '../AddressList'
