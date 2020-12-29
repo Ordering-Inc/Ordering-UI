@@ -253,7 +253,7 @@ const AddressFormUI = (props) => {
     <div className='address-form'>
       {(configState.loading || addressState.loading) && (
         <WrapperSkeleton>
-          <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
+          <Skeleton height={50} count={5} style={{ marginBottom: '10px' }} />
         </WrapperSkeleton>
       )}
 

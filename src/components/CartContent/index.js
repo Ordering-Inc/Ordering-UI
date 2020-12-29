@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage, useEvent, useValidationFields } from 'ordering-components'
+import { useLanguage, useEvent } from 'ordering-components'
 import { Container, NotCarts } from './styles'
 
 import { Cart } from '../Cart'
@@ -14,7 +14,6 @@ export const CartContent = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [events] = useEvent()
-  const [validationFields] = useValidationFields()
 
   const [currentCartUuid, setCurrentCartUuid] = useState(null)
 
@@ -48,7 +47,6 @@ export const CartContent = (props) => {
                 currentCartUuid={currentCartUuid}
                 isProducts={cart.products.length}
                 onClickCheckout={props.onClose}
-                validationFields={validationFields}
               />
             )}
           </React.Fragment>
