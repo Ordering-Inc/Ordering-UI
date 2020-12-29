@@ -22,7 +22,6 @@ export const UserFormDetails = (props) => {
     formState,
     onCancel,
     showField,
-    toggleIsEdit,
     cleanFormState,
     onCloseProfile,
     isRequiredField,
@@ -44,6 +43,7 @@ export const UserFormDetails = (props) => {
       open: false,
       content: []
     })
+    cleanFormState && cleanFormState({ result: { error: false } })
   }
 
   const showInputPhoneNumber = () => validationFields?.fields?.checkout?.cellphone?.enabled ?? false
@@ -56,9 +56,10 @@ export const UserFormDetails = (props) => {
     if (user?.cellphone) {
       let phone = null
       if (user?.country_phone_code) {
-        phone = `+${user?.country_phone_code} `
+        phone = `+${user?.country_phone_code} ${user?.cellphone}`
+      } else {
+        phone = user?.cellphone
       }
-      phone = `${phone}${user?.cellphone}`
       setUserPhoneNumber(phone)
       return
     }
@@ -78,9 +79,16 @@ export const UserFormDetails = (props) => {
       return
     }
     if (!isPhoneNumberValid && userPhoneNumber) {
+      if (user?.country_phone_code) {
+        setAlertState({
+          open: true,
+          content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
+        })
+        return
+      }
       setAlertState({
         open: true,
-        content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
+        content: [t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')]
       })
       return
     }
@@ -93,8 +101,6 @@ export const UserFormDetails = (props) => {
         }
       }
       handleButtonUpdateClick(changes)
-      toggleIsEdit()
-      onCloseProfile && onCloseProfile()
     }
   }
 
@@ -176,10 +182,13 @@ export const UserFormDetails = (props) => {
   }, [validationFields.fields?.checkout])
 
   useEffect(() => {
+    if (!isEdit && onCloseProfile) {
+      onCloseProfile()
+    }
     if ((user || !isEdit) && !formState.loading) {
       setUserCellPhone()
       if (!isEdit && !formState.loading) {
-        cleanFormState && cleanFormState()
+        cleanFormState && cleanFormState({ changes: {} })
         setUserCellPhone(true)
       }
     }
@@ -236,6 +245,7 @@ export const UserFormDetails = (props) => {
             />
             {!!showInputPhoneNumber() && (
               <InputPhoneNumber
+                user={user}
                 value={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
