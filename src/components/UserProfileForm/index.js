@@ -77,7 +77,7 @@ const UserProfileFormUI = (props) => {
     setEdit(val)
     toggleIsEdit()
     if (!val) {
-      cleanFormState()
+      cleanFormState({ changes: {} })
     }
   }
 
