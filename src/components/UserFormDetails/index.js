@@ -15,7 +15,7 @@ import { flatArray } from '../../utils'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
 
-export const UserFormDetails = (props) => {
+export const UserFormDetailsUI = (props) => {
   const {
     t,
     isEdit,
@@ -46,7 +46,7 @@ export const UserFormDetails = (props) => {
     cleanFormState && cleanFormState({ result: { error: false } })
   }
 
-  const showInputPhoneNumber = () => validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   const setUserCellPhone = (isEdit = false) => {
     if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
@@ -243,7 +243,7 @@ export const UserFormDetails = (props) => {
                 }
               })}
             />
-            {!!showInputPhoneNumber() && (
+            {!!showInputPhoneNumber && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}

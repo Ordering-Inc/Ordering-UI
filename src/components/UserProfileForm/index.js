@@ -8,7 +8,7 @@ import {
   ExamineClick
 } from 'ordering-components'
 
-import { UserFormDetails } from '../UserFormDetails'
+import { UserFormDetailsUI } from '../UserFormDetails'
 import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 
@@ -152,7 +152,7 @@ const UserProfileFormUI = (props) => {
               )
             ) : (
               <WrapperForm>
-                <UserFormDetails
+                <UserFormDetailsUI
                   t={t}
                   {...props}
                   onCancel={toggleEditState}
