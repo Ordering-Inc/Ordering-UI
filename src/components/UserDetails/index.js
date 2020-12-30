@@ -9,7 +9,7 @@ import {
   useLanguage
 } from 'ordering-components'
 
-import { UserFormDetails } from '../UserFormDetails'
+import { UserFormDetailsUI } from '../UserFormDetails'
 
 const UserDetailsUI = (props) => {
   const {
@@ -63,7 +63,7 @@ const UserDetailsUI = (props) => {
               )}
             </Header>
             <SideForm>
-              <UserFormDetails
+              <UserFormDetailsUI
                 t={t}
                 {...props}
               />
