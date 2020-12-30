@@ -21,7 +21,8 @@ export const ActiveOrders = (props) => {
     orders,
     pagination,
     onOrderClick,
-    loadMoreOrders
+    loadMoreOrders,
+    getOrderStatus
   } = props
 
   const [, t] = useLanguage()
@@ -57,9 +58,7 @@ export const ActiveOrders = (props) => {
                   <h2>
                     {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
                   </h2>
-                  {order.status === 0 && (
-                    <p>{t('PENDING_ORDER', 'Pending order')}</p>
-                  )}
+                  <p>{getOrderStatus(order.status).value}</p>
                 </Price>
               </Content>
               <OpenOrder>

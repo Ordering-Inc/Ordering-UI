@@ -36,6 +36,29 @@ const OrdersOptionUI = (props) => {
 
   const [ordersSorted, setOrdersSorted] = useState([])
 
+  const getOrderStatus = (s) => {
+    const status = parseInt(s)
+    const orderStatus = [
+      { key: 0, value: t('PENDING', 'Pending') },
+      { key: 1, value: t('COMPLETED', 'Completed') },
+      { key: 2, value: t('REJECTED', 'Rejected') },
+      { key: 3, value: t('DRIVER_IN_BUSINESS', 'Driver in business') },
+      { key: 4, value: t('PREPARATION_COMPLETED', 'Preparation Completed') },
+      { key: 5, value: t('REJECTED_BY_BUSINESS', 'Rejected by business') },
+      { key: 6, value: t('REJECTED_BY_DRIVER', 'Rejected by Driver') },
+      { key: 7, value: t('ACCEPTED_BY_BUSINESS', 'Accepted by business') },
+      { key: 8, value: t('ACCEPTED_BY_DRIVER', 'Accepted by driver') },
+      { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver') },
+      { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', 'Pick up Failed by driver') },
+      { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver') },
+      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver') }
+    ]
+
+    const objectStatus = orderStatus.find((o) => o.key === status)
+
+    return objectStatus && objectStatus
+  }
+
   useEffect(() => {
     const ordersSorted = orders.sort((a, b) => {
       if (activeOrders) {
@@ -124,6 +147,7 @@ const OrdersOptionUI = (props) => {
             pagination={pagination}
             onOrderClick={onOrderClick}
             loadMoreOrders={loadMoreOrders}
+            getOrderStatus={getOrderStatus}
           />
         ) : (
           <PreviousOrders
@@ -131,6 +155,7 @@ const OrdersOptionUI = (props) => {
             pagination={pagination}
             onOrderClick={onOrderClick}
             loadMoreOrders={loadMoreOrders}
+            getOrderStatus={getOrderStatus}
           />
         )
       )}

@@ -19,7 +19,8 @@ export const PreviousOrders = (props) => {
     orders,
     pagination,
     onOrderClick,
-    loadMoreOrders
+    loadMoreOrders,
+    getOrderStatus
   } = props
 
   const [, t] = useLanguage()
@@ -63,9 +64,7 @@ export const PreviousOrders = (props) => {
               </BusinessInformation>
             </OrderPastContent>
             <Reorder>
-              {(order.status === 1 || order.status === 11) && (
-                <p>{t('ORDER_COMPLETED', 'Complete')}</p>
-              )}
+              <p>{getOrderStatus(order.status).value}</p>
               <Button
                 color='primary'
                 onClick={() => handleReorder(order.id)}
