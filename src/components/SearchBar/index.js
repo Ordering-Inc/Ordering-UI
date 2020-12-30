@@ -8,19 +8,22 @@ import {
 
 export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
   let timeout = null
-
+  let previousSearch
   const el = useRef()
   const onChangeSearch = e => {
     if (e.keyCode === 13) return
 
-    if (!lazyLoad) {
-      onSearch(e.target.value)
-    } else {
-      clearTimeout(timeout)
-      timeout = setTimeout(function () {
+    if (previousSearch !== e.target.value) {
+      if (!lazyLoad) {
         onSearch(e.target.value)
-      }, 750)
+      } else {
+        clearTimeout(timeout)
+        timeout = setTimeout(function () {
+          onSearch(e.target.value)
+        }, 750)
+      }
     }
+    previousSearch = e.target.value
   }
 
   useEffect(() => {
