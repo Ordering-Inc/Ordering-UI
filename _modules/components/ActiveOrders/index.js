@@ -39,11 +39,16 @@ var ActiveOrders = function ActiveOrders(props) {
   var orders = props.orders,
       pagination = props.pagination,
       onOrderClick = props.onOrderClick,
-      loadMoreOrders = props.loadMoreOrders;
+      loadMoreOrders = props.loadMoreOrders,
+      getOrderStatus = props.getOrderStatus;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -57,15 +62,15 @@ var ActiveOrders = function ActiveOrders(props) {
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     special: true
   }, orders.map(function (order) {
-    var _order$business, _order$business2;
+    var _configs$google_maps_, _order$business, _configs$google_maps_2, _order$business2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.Card, {
       key: order.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location),
+    }, (configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) && /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location, configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value),
       alt: "google-maps-img",
-      width: "400px",
-      height: "100px"
+      height: "100px",
+      width: "400px"
     })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
       src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo,
       alt: "business-logo",
@@ -77,7 +82,7 @@ var ActiveOrders = function ActiveOrders(props) {
       name: "order_number"
     }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order.created_at))), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(order.products.reduce(function (acc, cur) {
       return acc + cur.price;
-    }, 0))), order.status === 0 && /*#__PURE__*/_react.default.createElement("p", null, t('PENDING_ORDER', 'Pending order')))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, 0))), /*#__PURE__*/_react.default.createElement("p", null, getOrderStatus(order.status).value))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return onOrderClick({

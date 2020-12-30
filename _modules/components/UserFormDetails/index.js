@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserFormDetails = void 0;
+exports.UserFormDetailsUI = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -57,13 +57,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone'];
 
-var UserFormDetails = function UserFormDetails(props) {
+var UserFormDetailsUI = function UserFormDetailsUI(props) {
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie13;
+
   var t = props.t,
       isEdit = props.isEdit,
       formState = props.formState,
       onCancel = props.onCancel,
       showField = props.showField,
-      toggleIsEdit = props.toggleIsEdit,
       cleanFormState = props.cleanFormState,
       onCloseProfile = props.onCloseProfile,
       isRequiredField = props.isRequiredField,
@@ -108,13 +109,14 @@ var UserFormDetails = function UserFormDetails(props) {
       open: false,
       content: []
     });
+    cleanFormState && cleanFormState({
+      result: {
+        error: false
+      }
+    });
   };
 
-  var showInputPhoneNumber = function showInputPhoneNumber() {
-    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3;
-
-    return (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.cellphone) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
-  };
+  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
 
   var setUserCellPhone = function setUserCellPhone() {
     var isEdit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
@@ -128,10 +130,11 @@ var UserFormDetails = function UserFormDetails(props) {
       var phone = null;
 
       if (user === null || user === void 0 ? void 0 : user.country_phone_code) {
-        phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ");
+        phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone);
+      } else {
+        phone = user === null || user === void 0 ? void 0 : user.cellphone;
       }
 
-      phone = "".concat(phone).concat(user === null || user === void 0 ? void 0 : user.cellphone);
       setUserPhoneNumber(phone);
       return;
     }
@@ -140,11 +143,11 @@ var UserFormDetails = function UserFormDetails(props) {
   };
 
   var onSubmit = function onSubmit() {
-    var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7;
+    var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _validationFields$fie10;
 
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
 
-    if (!userPhoneNumber && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.cellphone) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.required) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.enabled)) {
+    if (!userPhoneNumber && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.checkout) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.required) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : (_validationFields$fie9 = _validationFields$fie8.checkout) === null || _validationFields$fie9 === void 0 ? void 0 : (_validationFields$fie10 = _validationFields$fie9.cellphone) === null || _validationFields$fie10 === void 0 ? void 0 : _validationFields$fie10.enabled)) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.')]
@@ -153,9 +156,17 @@ var UserFormDetails = function UserFormDetails(props) {
     }
 
     if (!isPhoneNumberValid && userPhoneNumber) {
+      if (user === null || user === void 0 ? void 0 : user.country_phone_code) {
+        setAlertState({
+          open: true,
+          content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
+        });
+        return;
+      }
+
       setAlertState({
         open: true,
-        content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
+        content: [t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')]
       });
       return;
     }
@@ -171,8 +182,6 @@ var UserFormDetails = function UserFormDetails(props) {
       }
 
       handleButtonUpdateClick(changes);
-      toggleIsEdit();
-      onCloseProfile && onCloseProfile();
     }
   };
 
@@ -211,9 +220,11 @@ var UserFormDetails = function UserFormDetails(props) {
   };
 
   var sortValidationFields = function sortValidationFields() {
+    var _validationFields$fie11;
+
     var fields = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
     var fieldsSorted = [];
-    var validationsFieldsArray = Object.values(validationFields.fields);
+    var validationsFieldsArray = Object.values((_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout);
     fields.forEach(function (f) {
       validationsFieldsArray.forEach(function (field) {
         if (f === field.code) {
@@ -256,16 +267,24 @@ var UserFormDetails = function UserFormDetails(props) {
     }
   }, [formState.loading]);
   (0, _react.useEffect)(function () {
-    if (validationFields.fields) {
+    var _validationFields$fie12;
+
+    if ((_validationFields$fie12 = validationFields.fields) === null || _validationFields$fie12 === void 0 ? void 0 : _validationFields$fie12.checkout) {
       sortValidationFields();
     }
-  }, [validationFields.fields]);
+  }, [(_validationFields$fie13 = validationFields.fields) === null || _validationFields$fie13 === void 0 ? void 0 : _validationFields$fie13.checkout]);
   (0, _react.useEffect)(function () {
+    if (!isEdit && onCloseProfile) {
+      onCloseProfile();
+    }
+
     if ((user || !isEdit) && !formState.loading) {
       setUserCellPhone();
 
       if (!isEdit && !formState.loading) {
-        cleanFormState && cleanFormState();
+        cleanFormState && cleanFormState({
+          changes: {}
+        });
         setUserCellPhone(true);
       }
     }
@@ -309,7 +328,8 @@ var UserFormDetails = function UserFormDetails(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  }), !!showInputPhoneNumber() && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
@@ -345,4 +365,4 @@ var UserFormDetails = function UserFormDetails(props) {
   }));
 };
 
-exports.UserFormDetails = UserFormDetails;
+exports.UserFormDetailsUI = UserFormDetailsUI;

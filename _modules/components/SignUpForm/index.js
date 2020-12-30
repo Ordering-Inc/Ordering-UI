@@ -66,7 +66,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _theme$images, _theme$images$logos, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2;
+  var _theme$images, _theme$images$logos, _validationFields$fie8, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -154,11 +154,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
   };
 
   var onSubmit = function onSubmit() {
-    var _validationFields$fie, _validationFields$fie2;
+    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3;
 
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
 
-    if (!userPhoneNumber && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.cellphone) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.required)) {
+    if (!userPhoneNumber && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.cellphone) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.required)) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -216,9 +216,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
   };
 
   var showInputPhoneNumber = function showInputPhoneNumber() {
-    var _validationFields$fie3, _validationFields$fie4, _validationFields$fie5;
+    var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7;
 
-    return (_validationFields$fie3 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.cellphone) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.enabled) !== null && _validationFields$fie3 !== void 0 ? _validationFields$fie3 : false;
+    return (_validationFields$fie4 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.checkout) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.enabled) !== null && _validationFields$fie4 !== void 0 ? _validationFields$fie4 : false;
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, {
@@ -236,7 +236,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit),
     isSkeleton: useChekoutFileds && validationFields.loading
-  }, !(useChekoutFileds && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.values(validationFields.fields).map(function (field) {
+  }, !(useChekoutFileds && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.values((_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout).map(function (field) {
     return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.enabled && field.required ? field.type : 'hidden',

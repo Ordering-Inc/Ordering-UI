@@ -101,7 +101,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     onClick: function onClick() {
       return toggleIsEdit();
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetails, _extends({
+  }))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({
     t: t
   }, props)))));
 };

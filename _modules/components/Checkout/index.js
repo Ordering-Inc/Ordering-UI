@@ -86,16 +86,19 @@ var mapConfigs = {
 };
 
 var CheckoutUI = function CheckoutUI(props) {
-  var _configs$google_maps_, _businessDetails$busi, _businessDetails$busi2, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi5, _validationFields$fie3, _validationFields$fie4, _cart$products, _validationFields$fie5, _validationFields$fie6;
+  var _configs$google_maps_, _businessDetails$busi, _businessDetails$busi2, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _cart$products;
 
   var cartState = props.cartState,
       cart = props.cart,
       placing = props.placing,
       businessDetails = props.businessDetails,
       paymethodSelected = props.paymethodSelected,
-      validationFields = props.validationFields,
       handlePaymethodChange = props.handlePaymethodChange,
       handlerClickPlaceOrder = props.handlerClickPlaceOrder;
+
+  var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
+      _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
+      validationFields = _useValidationFields2[0];
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -163,12 +166,12 @@ var CheckoutUI = function CheckoutUI(props) {
   };
 
   var checkValidationFields = function checkValidationFields() {
-    var _validationFields$fie, _validationFields$fie2;
+    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4;
 
     setUserErrors([]);
     var errors = [];
     var notFields = ['coupon', 'driver_tip', 'mobile_phone'];
-    Object.values(validationFields === null || validationFields === void 0 ? void 0 : validationFields.fields).map(function (field) {
+    Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.checkout).map(function (field) {
       if ((field === null || field === void 0 ? void 0 : field.required) && !notFields.includes(field.code)) {
         if (!user[field === null || field === void 0 ? void 0 : field.code]) {
           errors.push(t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "The field ".concat(field === null || field === void 0 ? void 0 : field.name, " is required")));
@@ -176,7 +179,7 @@ var CheckoutUI = function CheckoutUI(props) {
       }
     });
 
-    if (!(user === null || user === void 0 ? void 0 : user.cellphone) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.cellphone) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.required)) {
+    if (!(user === null || user === void 0 ? void 0 : user.cellphone) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.required)) {
       errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'));
     }
 
@@ -190,7 +193,7 @@ var CheckoutUI = function CheckoutUI(props) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'));
         }
       } else {
-        errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'));
+        errors.push(t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'));
       }
     }
 
@@ -198,7 +201,9 @@ var CheckoutUI = function CheckoutUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (validationFields && (validationFields === null || validationFields === void 0 ? void 0 : validationFields.fields)) {
+    var _validationFields$fie5;
+
+    if (validationFields && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout)) {
       checkValidationFields();
     }
   }, [validationFields, user]);
@@ -283,7 +288,7 @@ var CheckoutUI = function CheckoutUI(props) {
     paymethods: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi5 = businessDetails.business) === null || _businessDetails$busi5 === void 0 ? void 0 : _businessDetails$busi5.paymethods,
     onPaymentChange: handlePaymethodChange,
     setErrorCash: setErrorCash
-  })), !cartState.loading && cart && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie3 = validationFields.fields) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.driver_tip) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+  })), !cartState.loading && cart && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.checkout) === null || _validationFields$fie7 === void 0 ? void 0 : (_validationFields$fie8 = _validationFields$fie7.driver_tip) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.enabled) && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: _utils.DriverTipsOptions,
     useOrderContext: true
@@ -291,8 +296,7 @@ var CheckoutUI = function CheckoutUI(props) {
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     cart: cart,
     isCheckout: true,
-    isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0,
-    showCoupon: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.coupon) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.enabled
+    isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0
   })), !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum) ? 'secundary' : 'primary',
     disabled: !(cart === null || cart === void 0 ? void 0 : cart.valid) || !paymethodSelected || placing || errorCash || (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum),

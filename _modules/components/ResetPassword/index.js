@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ResetPasswordUI = function ResetPasswordUI(props) {
-  var _theme$images, _theme$images$logos, _formState$result6, _formState$result6$re, _formState$result7, _formState$result7$re;
+  var _theme$images, _theme$images$logos, _formState$result7, _formState$result7$re, _formState$result8, _formState$result8$re;
 
   var handleResetPassword = props.handleResetPassword,
       handleChangeInput = props.handleChangeInput,
@@ -117,11 +117,11 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
         content: ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) || [t('ERROR', 'Error')]
       });
     } else if (!formState.loading && ((_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.length)) {
-      var _formState$result5;
+      var _formState$result5, _formState$result6;
 
       setAlertState({
         open: true,
-        content: (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result
+        content: ((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result) === 'OK' ? t('PASSWORD_RESET_SUCCESS', 'Password changed successfully') : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.result
       });
     }
   }, [formState]);
@@ -179,8 +179,8 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "submit",
-    color: (formState.loading || ((_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : (_formState$result6$re = _formState$result6.result) === null || _formState$result6$re === void 0 ? void 0 : _formState$result6$re.length)) && !formState.result.error ? 'secondary' : 'primary',
-    disabled: (formState.loading || ((_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : (_formState$result7$re = _formState$result7.result) === null || _formState$result7$re === void 0 ? void 0 : _formState$result7$re.length)) && !formState.result.error
+    color: formState.loading || ((_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : (_formState$result7$re = _formState$result7.result) === null || _formState$result7$re === void 0 ? void 0 : _formState$result7$re.length) ? 'secondary' : 'primary',
+    disabled: formState.loading || ((_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : (_formState$result8$re = _formState$result8.result) === null || _formState$result8$re === void 0 ? void 0 : _formState$result8$re.length)
   }, !formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('RESET_PASSWORD', 'Reset Password'),
     content: alertState === null || alertState === void 0 ? void 0 : alertState.content,

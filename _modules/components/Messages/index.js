@@ -119,6 +119,8 @@ var MessagesUI = function MessagesUI(props) {
       modalImage = _useState6[0],
       setModalImage = _useState6[1];
 
+  var imageRef = (0, _react.useRef)(null);
+
   var handleModalImage = function handleModalImage(src) {
     setModalImage({
       open: true,
@@ -168,6 +170,7 @@ var MessagesUI = function MessagesUI(props) {
 
   var removeImage = function removeImage(e) {
     setImage(null);
+    imageRef.current.value = '';
   };
 
   var onChangeImage = function onChangeImage(e) {
@@ -370,7 +373,8 @@ var MessagesUI = function MessagesUI(props) {
     name: "image",
     id: "chat_image",
     accept: "image/png,image/jpg,image/jpeg",
-    onChange: onChangeImage
+    onChange: onChangeImage,
+    ref: imageRef
   }), /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null)), image && /*#__PURE__*/_react.default.createElement(_styles.WrapperDeleteImage, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     circle: true,
     onClick: removeImage,

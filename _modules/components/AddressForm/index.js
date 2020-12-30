@@ -11,6 +11,8 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _FaHome = _interopRequireDefault(require("@meronex/icons/fa/FaHome"));
 
 var _FaPlus = _interopRequireDefault(require("@meronex/icons/fa/FaPlus"));
@@ -45,15 +47,17 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -67,14 +71,15 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var inputNames = ['address', 'internal_number', 'zipcode', 'address_notes'];
+
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _configs$meters_to_ch, _addressState$address2, _ref, _formState$changes$ad, _formState$changes, _addressState$address3, _addressState$address4, _addressState$address5, _formState$changes$lo, _formState$changes2, _configs$google_maps_, _configs$google_maps_2, _configs$country_auto, _configs$google_maps_3, _addressState$address11, _formState$changes16, _ref8, _formState$changes$in, _formState$changes17, _ref9, _formState$changes$zi, _formState$changes18, _ref10, _formState$changes$ad5, _formState$changes19, _orderState$options5, _orderState$options5$;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _addressState$address5, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _addressState$address12, _formState$changes17, _ref8, _formState$changes$in, _formState$changes18, _ref9, _formState$changes$zi, _formState$changes19, _ref10, _formState$changes$ad5, _formState$changes20, _orderState$options5, _orderState$options5$;
 
   var addressesList = props.addressesList,
       googleMapsControls = props.googleMapsControls,
       formState = props.formState,
       addressState = props.addressState,
-      validationFields = props.validationFields,
       isRequiredField = props.isRequiredField,
       updateChanges = props.updateChanges,
       onCancel = props.onCancel,
@@ -84,7 +89,7 @@ var AddressFormUI = function AddressFormUI(props) {
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
+      configState = _useConfig2[0];
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -125,23 +130,24 @@ var AddressFormUI = function AddressFormUI(props) {
       alertState = _useState8[0],
       setAlertState = _useState8[1];
 
-  var inputNames = ['address', 'internal_number', 'zipcode', 'address_notes'];
-  var maxLimitLocation = configs === null || configs === void 0 ? void 0 : (_configs$meters_to_ch = configs.meters_to_change_address) === null || _configs$meters_to_ch === void 0 ? void 0 : _configs$meters_to_ch.value;
-  var mapErrors = {
-    ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
-    ERROR_MAX_LIMIT_LOCATION: "Sorry, You can only set the position to ".concat(maxLimitLocation, "m")
-  };
-  var isEditing = !!((_addressState$address2 = addressState.address) === null || _addressState$address2 === void 0 ? void 0 : _addressState$address2.id);
-
-  var _useState9 = (0, _react.useState)((_ref = (_formState$changes$ad = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : (_addressState$address3 = addressState.address) === null || _addressState$address3 === void 0 ? void 0 : _addressState$address3.address) !== null && _ref !== void 0 ? _ref : ''),
+  var _useState9 = (0, _react.useState)((_ref = (_formState$changes$ad = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : (_addressState$address2 = addressState.address) === null || _addressState$address2 === void 0 ? void 0 : _addressState$address2.address) !== null && _ref !== void 0 ? _ref : ''),
       _useState10 = _slicedToArray(_useState9, 2),
       addressValue = _useState10[0],
       setAddressValue = _useState10[1];
 
-  var _useState11 = (0, _react.useState)((addressState === null || addressState === void 0 ? void 0 : (_addressState$address4 = addressState.address) === null || _addressState$address4 === void 0 ? void 0 : _addressState$address4.id) ? addressState === null || addressState === void 0 ? void 0 : (_addressState$address5 = addressState.address) === null || _addressState$address5 === void 0 ? void 0 : _addressState$address5.location : (_formState$changes$lo = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : null),
+  var _useState11 = (0, _react.useState)((addressState === null || addressState === void 0 ? void 0 : (_addressState$address3 = addressState.address) === null || _addressState$address3 === void 0 ? void 0 : _addressState$address3.id) ? addressState === null || addressState === void 0 ? void 0 : (_addressState$address4 = addressState.address) === null || _addressState$address4 === void 0 ? void 0 : _addressState$address4.location : (_formState$changes$lo = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : null),
       _useState12 = _slicedToArray(_useState11, 2),
       locationChange = _useState12[0],
       setLocationChange = _useState12[1];
+
+  var isEditing = !!((_addressState$address5 = addressState.address) === null || _addressState$address5 === void 0 ? void 0 : _addressState$address5.id);
+  var maxLimitLocation = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.meters_to_change_address) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+  var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
+  var isLocationRequired = ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === '1' || ((_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.google_autocomplete_selection_required) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === 'true';
+  var mapErrors = {
+    ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
+    ERROR_MAX_LIMIT_LOCATION: "Sorry, You can only set the position to ".concat(maxLimitLocation, "m")
+  };
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -174,16 +180,97 @@ var AddressFormUI = function AddressFormUI(props) {
     });
   };
 
+  var getAddressFormatted = function getAddressFormatted(addressChange) {
+    var data = {
+      address: null,
+      error: null
+    };
+    var geocoder = window.google && new window.google.maps.Geocoder();
+    geocoder.geocode({
+      address: addressChange
+    }, function (results, status) {
+      var postalCode = null;
+
+      if (status === 'OK' && results && results.length > 0) {
+        var _results$0$utc_offset, _arrayList$map$some;
+
+        var _iterator = _createForOfIteratorHelper(results[0].address_components),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var component = _step.value;
+            var addressType = component.types[0];
+
+            if (addressType === 'postal_code') {
+              postalCode = component.short_name;
+              break;
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+
+        data.address = {
+          address: addressChange,
+          location: {
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng()
+          },
+          utc_offset: (_results$0$utc_offset = results[0].utc_offset_minutes) !== null && _results$0$utc_offset !== void 0 ? _results$0$utc_offset : 0,
+          map_data: {
+            library: 'google',
+            place_id: results[0].place_id
+          }
+        };
+
+        if (postalCode) {
+          data.address.zipcode = postalCode;
+        }
+
+        var arrayList = isEditing ? addressesList.filter(function (address) {
+          var _addressState$address6;
+
+          return address.id !== ((_addressState$address6 = addressState.address) === null || _addressState$address6 === void 0 ? void 0 : _addressState$address6.id);
+        }) || [] : addressesList || [];
+        var addressToCompare = isEditing ? _objectSpread(_objectSpread(_objectSpread({}, addressState.address), data.address), formState === null || formState === void 0 ? void 0 : formState.changes) : _objectSpread(_objectSpread({}, data.address), formState === null || formState === void 0 ? void 0 : formState.changes);
+        var isAddressAlreadyExist = (_arrayList$map$some = arrayList.map(function (address) {
+          return checkAddress(address, addressToCompare);
+        }).some(function (value) {
+          return value;
+        })) !== null && _arrayList$map$some !== void 0 ? _arrayList$map$some : false;
+
+        if (!isAddressAlreadyExist) {
+          saveAddress(data.address);
+          return;
+        }
+
+        setAlertState({
+          open: true,
+          content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
+        });
+      } else {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_NOT_FOUND_ADDRESS', 'Error, address not found')]
+        });
+      }
+    });
+  };
+
   var onSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-      var _formState$changes3, _addressState$address6, _formState$changes4, _formState$changes5, _arrayList$map$some;
+      var _formState$changes3, _addressState$address7, _formState$changes4, _formState$changes5, _arrayList$map$some2;
 
-      var arrayList, addressToCompare, isAddressAlreadyExist;
+      var _formState$changes6, arrayList, addressToCompare, isAddressAlreadyExist;
+
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(!auth && (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.address) === '' && (addressState === null || addressState === void 0 ? void 0 : (_addressState$address6 = addressState.address) === null || _addressState$address6 === void 0 ? void 0 : _addressState$address6.address))) {
+              if (!(!auth && (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.address) === '' && (addressState === null || addressState === void 0 ? void 0 : (_addressState$address7 = addressState.address) === null || _addressState$address7 === void 0 ? void 0 : _addressState$address7.address))) {
                 _context.next = 4;
                 break;
               }
@@ -197,7 +284,12 @@ var AddressFormUI = function AddressFormUI(props) {
 
             case 4:
               if (!((formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.address) && !(formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.location))) {
-                _context.next = 7;
+                _context.next = 10;
+                break;
+              }
+
+              if (!isLocationRequired) {
+                _context.next = 8;
                 break;
               }
 
@@ -207,35 +299,39 @@ var AddressFormUI = function AddressFormUI(props) {
               });
               return _context.abrupt("return");
 
-            case 7:
+            case 8:
+              getAddressFormatted(formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.address);
+              return _context.abrupt("return");
+
+            case 10:
               setToggleMap(false);
               arrayList = isEditing ? addressesList.filter(function (address) {
-                var _addressState$address7;
+                var _addressState$address8;
 
-                return address.id !== ((_addressState$address7 = addressState.address) === null || _addressState$address7 === void 0 ? void 0 : _addressState$address7.id);
+                return address.id !== ((_addressState$address8 = addressState.address) === null || _addressState$address8 === void 0 ? void 0 : _addressState$address8.id);
               }) || [] : addressesList || [];
               addressToCompare = isEditing ? _objectSpread(_objectSpread({}, addressState.address), formState.changes) : formState === null || formState === void 0 ? void 0 : formState.changes;
-              isAddressAlreadyExist = (_arrayList$map$some = arrayList.map(function (address) {
+              isAddressAlreadyExist = (_arrayList$map$some2 = arrayList.map(function (address) {
                 return checkAddress(address, addressToCompare);
               }).some(function (value) {
                 return value;
-              })) !== null && _arrayList$map$some !== void 0 ? _arrayList$map$some : false;
+              })) !== null && _arrayList$map$some2 !== void 0 ? _arrayList$map$some2 : false;
 
               if (isAddressAlreadyExist) {
-                _context.next = 14;
+                _context.next = 17;
                 break;
               }
 
               saveAddress();
               return _context.abrupt("return");
 
-            case 14:
+            case 17:
               setAlertState({
                 open: true,
                 content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
               });
 
-            case 15:
+            case 18:
             case "end":
               return _context.stop();
           }
@@ -279,13 +375,13 @@ var AddressFormUI = function AddressFormUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    var _formState$result, _ref5, _formState$changes$ad3, _formState$changes8, _addressState$address8, _ref6, _formState$changes$ad4, _formState$changes9, _addressState$address9;
+    var _formState$result, _ref5, _formState$changes$ad3, _formState$changes9, _addressState$address9, _ref6, _formState$changes$ad4, _formState$changes10, _addressState$address10;
 
     if (!auth) {
-      var _ref3, _formState$changes$lo2, _formState$changes6, _orderState$options, _orderState$options$a, _ref4, _formState$changes$ad2, _formState$changes7, _orderState$options2, _orderState$options2$;
+      var _ref3, _formState$changes$lo2, _formState$changes7, _orderState$options, _orderState$options$a, _ref4, _formState$changes$ad2, _formState$changes8, _orderState$options2, _orderState$options2$;
 
-      setLocationChange((_ref3 = (_formState$changes$lo2 = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.location) !== null && _formState$changes$lo2 !== void 0 ? _formState$changes$lo2 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location) !== null && _ref3 !== void 0 ? _ref3 : '');
-      setAddressValue((_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.address) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) !== null && _ref4 !== void 0 ? _ref4 : '');
+      setLocationChange((_ref3 = (_formState$changes$lo2 = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.location) !== null && _formState$changes$lo2 !== void 0 ? _formState$changes$lo2 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location) !== null && _ref3 !== void 0 ? _ref3 : '');
+      setAddressValue((_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.address) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) !== null && _ref4 !== void 0 ? _ref4 : '');
       inputNames.forEach(function (field) {
         var _orderState$options3;
 
@@ -303,62 +399,59 @@ var AddressFormUI = function AddressFormUI(props) {
       });
     }
 
-    setAddressValue((_ref5 = (_formState$changes$ad3 = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.address) !== null && _formState$changes$ad3 !== void 0 ? _formState$changes$ad3 : (_addressState$address8 = addressState.address) === null || _addressState$address8 === void 0 ? void 0 : _addressState$address8.address) !== null && _ref5 !== void 0 ? _ref5 : '');
-    formMethods.setValue('address', (_ref6 = (_formState$changes$ad4 = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.address) !== null && _formState$changes$ad4 !== void 0 ? _formState$changes$ad4 : (_addressState$address9 = addressState.address) === null || _addressState$address9 === void 0 ? void 0 : _addressState$address9.address) !== null && _ref6 !== void 0 ? _ref6 : '');
+    setAddressValue((_ref5 = (_formState$changes$ad3 = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.address) !== null && _formState$changes$ad3 !== void 0 ? _formState$changes$ad3 : (_addressState$address9 = addressState.address) === null || _addressState$address9 === void 0 ? void 0 : _addressState$address9.address) !== null && _ref5 !== void 0 ? _ref5 : '');
+    formMethods.setValue('address', (_ref6 = (_formState$changes$ad4 = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.address) !== null && _formState$changes$ad4 !== void 0 ? _formState$changes$ad4 : (_addressState$address10 = addressState.address) === null || _addressState$address10 === void 0 ? void 0 : _addressState$address10.address) !== null && _ref6 !== void 0 ? _ref6 : '');
 
     if (!isEditing) {
-      var _formState$changes10;
+      var _formState$changes11;
 
       inputNames.forEach(function (field) {
         return formMethods.setValue(field, (formState === null || formState === void 0 ? void 0 : formState.changes[field]) || '');
       });
-      setLocationChange(formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.location);
-    } // Validation when user change location in edit mode
-
+      setLocationChange(formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.location);
+    }
 
     if (isEditing) {
-      var _formState$changes11;
+      var _formState$changes12;
 
-      if (formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.location) {
-        var _formState$changes12, _formState$changes12$, _formState$changes13, _formState$changes13$;
+      if (formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.location) {
+        var _formState$changes13, _formState$changes13$, _formState$changes14, _formState$changes14$;
 
         var prevLocation = {
           lat: Math.trunc(locationChange.lat),
           lng: Math.trunc(locationChange.lng)
         };
         var newLocation = {
-          lat: Math.trunc(formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : (_formState$changes12$ = _formState$changes12.location) === null || _formState$changes12$ === void 0 ? void 0 : _formState$changes12$.lat),
-          lng: Math.trunc(formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : (_formState$changes13$ = _formState$changes13.location) === null || _formState$changes13$ === void 0 ? void 0 : _formState$changes13$.lng)
+          lat: Math.trunc(formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : (_formState$changes13$ = _formState$changes13.location) === null || _formState$changes13$ === void 0 ? void 0 : _formState$changes13$.lat),
+          lng: Math.trunc(formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : (_formState$changes14$ = _formState$changes14.location) === null || _formState$changes14$ === void 0 ? void 0 : _formState$changes14$.lng)
         };
 
         if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
-          var _formState$changes14;
+          var _formState$changes15;
 
-          setLocationChange(formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.location);
+          setLocationChange(formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.location);
         }
       }
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
     if (isEditing) {
-      var _addressState$address10;
+      var _addressState$address11;
 
       setIsEdit && setIsEdit(true);
-      setAddressValue((_addressState$address10 = addressState.address) === null || _addressState$address10 === void 0 ? void 0 : _addressState$address10.address);
+      setAddressValue((_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11.address);
     } else {
       setIsEdit && setIsEdit(false);
     }
   }, [addressState]);
   (0, _react.useEffect)(function () {
     if (!auth) {
-      var _ref7, _formState$changes$lo3, _formState$changes15, _orderState$options4, _orderState$options4$;
+      var _ref7, _formState$changes$lo3, _formState$changes16, _orderState$options4, _orderState$options4$;
 
-      setLocationChange((_ref7 = (_formState$changes$lo3 = formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.location) !== null && _formState$changes$lo3 !== void 0 ? _formState$changes$lo3 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location) !== null && _ref7 !== void 0 ? _ref7 : '');
+      setLocationChange((_ref7 = (_formState$changes$lo3 = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.location) !== null && _formState$changes$lo3 !== void 0 ? _formState$changes$lo3 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location) !== null && _ref7 !== void 0 ? _ref7 : '');
     }
   }, []);
-  /**
-   * Form events control
-   */
+  /** Form events control */
 
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
@@ -379,11 +472,17 @@ var AddressFormUI = function AddressFormUI(props) {
   }, [formMethods]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "address-form"
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
+  }, (configState.loading || addressState.loading) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSkeleton, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 50,
+    count: 5,
+    style: {
+      marginBottom: '10px'
+    }
+  })), !configState.loading && !addressState.loading && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     autoComplete: "off"
   }, locationChange && toggleMap && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
-    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
+    apiKey: googleMapsApiKey,
     location: locationChange,
     mapControls: googleMapsControls,
     handleChangeAddressMap: handleChangeAddress,
@@ -393,7 +492,7 @@ var AddressFormUI = function AddressFormUI(props) {
     className: "google-control"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
     className: "input-autocomplete",
-    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
+    apiKey: googleMapsApiKey,
     placeholder: t('ADDRESS', 'Address'),
     onChangeAddress: function onChangeAddress(e) {
       formMethods.setValue('address', e.address);
@@ -411,24 +510,24 @@ var AddressFormUI = function AddressFormUI(props) {
     },
     value: addressValue,
     autoComplete: "new-field",
-    countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
-  })), (!validationFields.loading || !addressState.loading) && /*#__PURE__*/_react.default.createElement(_GoogleGpsButton.GoogleGpsButton, {
+    countryCode: (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.country_autocomplete) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) || '*'
+  })), /*#__PURE__*/_react.default.createElement(_GoogleGpsButton.GoogleGpsButton, {
     className: "gps-button",
-    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_3 = configs.google_maps_api_key) === null || _configs$google_maps_3 === void 0 ? void 0 : _configs$google_maps_3.value,
+    apiKey: googleMapsApiKey,
     onAddress: function onAddress(e) {
       formMethods.setValue('address', e.address);
       handleChangeAddress(e);
     },
     IconButton: _BiCurrentLocation.default,
     IconLoadingButton: _CgSearchLoading.default
-  })), ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.location)) && !toggleMap && /*#__PURE__*/_react.default.createElement(_styles.ShowMap, {
+  })), ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.location)) && !toggleMap && /*#__PURE__*/_react.default.createElement(_styles.ShowMap, {
     onClick: function onClick() {
       return setToggleMap(!toggleMap);
     }
   }, t('VIEW_MAP', 'View map to modify the exact location')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "internal_number",
     placeholder: t('INTERNAL_NUMBER', 'Internal number'),
-    value: (_ref8 = (_formState$changes$in = (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.internal_number) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : addressState.address.internal_number) !== null && _ref8 !== void 0 ? _ref8 : '',
+    value: (_ref8 = (_formState$changes$in = (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.internal_number) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : addressState.address.internal_number) !== null && _ref8 !== void 0 ? _ref8 : '',
     onChange: function onChange(e) {
       formMethods.setValue('internal_number', e.target.value);
       hanldeChangeInput({
@@ -442,7 +541,7 @@ var AddressFormUI = function AddressFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "zipcode",
     placeholder: t('ZIP_CODE', 'Zip code'),
-    value: (_ref9 = (_formState$changes$zi = (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : addressState.address.zipcode) !== null && _ref9 !== void 0 ? _ref9 : '',
+    value: (_ref9 = (_formState$changes$zi = (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : addressState.address.zipcode) !== null && _ref9 !== void 0 ? _ref9 : '',
     onChange: function onChange(e) {
       formMethods.setValue('zipcode', e.target.value);
       hanldeChangeInput({
@@ -456,7 +555,7 @@ var AddressFormUI = function AddressFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     placeholder: t('ADDRESS_NOTES', 'Address Notes'),
-    value: (_ref10 = (_formState$changes$ad5 = (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',
+    value: (_ref10 = (_formState$changes$ad5 = (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',
     onChange: function onChange(e) {
       formMethods.setValue('address_notes', e.target.value);
       hanldeChangeInput({

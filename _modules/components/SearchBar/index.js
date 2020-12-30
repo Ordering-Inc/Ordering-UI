@@ -23,19 +23,24 @@ var SearchBar = function SearchBar(_ref) {
       placeholder = _ref.placeholder,
       lazyLoad = _ref.lazyLoad;
   var timeout = null;
+  var previousSearch;
   var el = (0, _react.useRef)();
 
   var onChangeSearch = function onChangeSearch(e) {
     if (e.keyCode === 13) return;
 
-    if (!lazyLoad) {
-      onSearch(e.target.value);
-    } else {
-      clearTimeout(timeout);
-      timeout = setTimeout(function () {
+    if (previousSearch !== e.target.value) {
+      if (!lazyLoad) {
         onSearch(e.target.value);
-      }, 750);
+      } else {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          onSearch(e.target.value);
+        }, 750);
+      }
     }
+
+    previousSearch = e.target.value;
   };
 
   (0, _react.useEffect)(function () {

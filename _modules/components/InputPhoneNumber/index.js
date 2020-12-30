@@ -9,8 +9,6 @@ exports.InputPhoneNumber = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
 require("react-phone-number-input/style.css");
@@ -27,12 +25,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -45,18 +37,22 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var InputPhoneNumberUI = function InputPhoneNumberUI(props) {
-  var _configs$countryDefau;
+var InputPhoneNumber = function InputPhoneNumber(props) {
+  var _configs$default_coun;
 
-  var value = props.value,
+  var user = props.user,
+      value = props.value,
       setValue = props.setValue,
       handleIsValid = props.handleIsValid,
-      disabled = props.disabled,
-      countryData = props.countryData;
+      disabled = props.disabled;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      auth = _useSession2[0].auth;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -73,36 +69,20 @@ var InputPhoneNumberUI = function InputPhoneNumberUI(props) {
       handleIsValid && handleIsValid(isValidPhoneNumber(value));
     }
   }, [value]);
-  (0, _react.useEffect)(function () {
-    if (countryData.number) {
-      var number = "".concat(countryData.number).concat(value === null || value === void 0 ? void 0 : value.replace('null', ''));
-      setValue(number, isValidPhoneNumber(number));
-    }
-  }, [countryData.number]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     className: "phone_number",
-    disabled: disabled
-  }, countryData.loading || value === null ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
-    international: true,
-    defaultCountry: countryData.value || (configs === null || configs === void 0 ? void 0 : (_configs$countryDefau = configs.countryDefaultCode) === null || _configs$countryDefau === void 0 ? void 0 : _configs$countryDefau.code) || 'US',
-    countryCallingCodeEditable: false,
-    placeholder: t('PHONE_NUMBER', 'Phone number'),
-    value: value,
     disabled: disabled,
+    isValid: value ? isValidPhoneNumber(value) : true
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
+    disabled: disabled,
+    placeholder: t('PHONE_NUMBER', 'Phone number'),
+    defaultCountry: configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.value,
+    value: value,
+    displayInitialValueAsLocalNumber: true,
     onChange: function onChange(val) {
       return setValue(val, isValidPhoneNumber(val));
     }
-  }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'Invalid phone number'))));
-};
-
-var InputPhoneNumber = function InputPhoneNumber(props) {
-  var inputProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: InputPhoneNumberUI
-  });
-
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.InputPhoneNumber, inputProps);
+  }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (auth && (user === null || user === void 0 ? void 0 : user.country_phone_code) || !auth) && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')), auth && !(user === null || user === void 0 ? void 0 : user.country_phone_code) && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')))));
 };
 
 exports.InputPhoneNumber = InputPhoneNumber;

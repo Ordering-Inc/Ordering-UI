@@ -45,7 +45,8 @@ var PreviousOrders = function PreviousOrders(props) {
   var orders = props.orders,
       pagination = props.pagination,
       onOrderClick = props.onOrderClick,
-      loadMoreOrders = props.loadMoreOrders;
+      loadMoreOrders = props.loadMoreOrders,
+      getOrderStatus = props.getOrderStatus;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -142,7 +143,7 @@ var PreviousOrders = function PreviousOrders(props) {
           }
         });
       }
-    }, t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')))), /*#__PURE__*/_react.default.createElement(_styles.Reorder, null, (order.status === 1 || order.status === 11) && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_COMPLETED', 'Complete')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')))), /*#__PURE__*/_react.default.createElement(_styles.Reorder, null, /*#__PURE__*/_react.default.createElement("p", null, getOrderStatus(order.status).value), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleReorder(order.id);

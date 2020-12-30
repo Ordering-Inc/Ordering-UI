@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ShowMap = exports.WrapperMap = exports.AddressTagSection = exports.WrapAddressInput = exports.AddressWrap = exports.FormControl = exports.FormActions = void 0;
+exports.WrapperSkeleton = exports.ShowMap = exports.WrapperMap = exports.AddressTagSection = exports.WrapAddressInput = exports.AddressWrap = exports.FormControl = exports.FormActions = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -14,6 +14,16 @@ var _polished = require("polished");
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _templateObject12() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 10px;\n\n  span {\n    width: 100%;\n  }\n"]);
+
+  _templateObject12 = function _templateObject12() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject11() {
   var data = _taggedTemplateLiteral(["\n  text-align: center;\n  color: #000;\n  width: 100%;\n  font-weight: 600;\n  cursor: pointer\n"]);
@@ -176,3 +186,7 @@ exports.WrapperMap = WrapperMap;
 var ShowMap = _styledComponents.default.p(_templateObject11());
 
 exports.ShowMap = ShowMap;
+
+var WrapperSkeleton = _styledComponents.default.div(_templateObject12());
+
+exports.WrapperSkeleton = WrapperSkeleton;
