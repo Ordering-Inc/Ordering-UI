@@ -63,7 +63,7 @@ const ResetPasswordUI = (props) => {
     } else if (!formState.loading && formState.result?.result?.length) {
       setAlertState({
         open: true,
-        content: formState.result?.result
+        content: formState.result?.result === 'OK' ? t('PASSWORD_RESET_SUCCESS', 'Password changed successfully') : formState.result?.result
       })
     }
   }, [formState])
@@ -131,8 +131,8 @@ const ResetPasswordUI = (props) => {
               />
               <Button
                 type='submit'
-                color={(formState.loading || formState.result?.result?.length) && !formState.result.error ? 'secondary' : 'primary'}
-                disabled={(formState.loading || formState.result?.result?.length) && !formState.result.error}
+                color={(formState.loading || formState.result?.result?.length) ? 'secondary' : 'primary'}
+                disabled={(formState.loading || formState.result?.result?.length)}
               >
                 {!formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading')}
               </Button>
