@@ -49,7 +49,8 @@ export const BusinessProductsList = (props) => {
       'alcohol',
       'groceries',
       'slug',
-      'products'
+      'products',
+      'zones'
     ],
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils } from 'ordering-components'
+import { useLanguage, useUtils, useConfig } from 'ordering-components'
 
 import {
   OpenOrder,
@@ -21,10 +21,12 @@ export const ActiveOrders = (props) => {
     orders,
     pagination,
     onOrderClick,
-    loadMoreOrders
+    loadMoreOrders,
+    getOrderStatus
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
 
   return (
@@ -33,9 +35,16 @@ export const ActiveOrders = (props) => {
         <AutoScroll special>
           {orders.map(order => (
             <Card key={order.id}>
-              <Map>
-                <img src={getGoogleMapImage(order?.business?.location)} alt='google-maps-img' width='400px' height='100px' />
-              </Map>
+              {configs?.google_maps_api_key?.value && (
+                <Map>
+                  <img
+                    src={getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
+                    alt='google-maps-img'
+                    height='100px'
+                    width='400px'
+                  />
+                </Map>
+              )}
               <Content>
                 <Logo>
                   <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
@@ -49,9 +58,7 @@ export const ActiveOrders = (props) => {
                   <h2>
                     {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
                   </h2>
-                  {order.status === 0 && (
-                    <p>{t('PENDING_ORDER', 'Pending order')}</p>
-                  )}
+                  <p>{getOrderStatus(order.status).value}</p>
                 </Price>
               </Content>
               <OpenOrder>

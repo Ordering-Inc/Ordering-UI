@@ -181,3 +181,13 @@ export const ShowMap = styled.p`
   font-weight: 600;
   cursor: pointer
 `
+
+export const WrapperSkeleton = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+  span {
+    width: 100%;
+  }
+`

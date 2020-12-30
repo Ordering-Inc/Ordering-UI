@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
-import { Checkout as CheckoutController, useOrder, useSession, useApi, useLanguage, useUtils, useConfig } from 'ordering-components'
+import {
+  Checkout as CheckoutController,
+  useOrder,
+  useSession,
+  useApi,
+  useLanguage,
+  useUtils,
+  useConfig,
+  useValidationFields
+} from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 
@@ -54,11 +63,11 @@ const CheckoutUI = (props) => {
     placing,
     businessDetails,
     paymethodSelected,
-    validationFields,
     handlePaymethodChange,
     handlerClickPlaceOrder
   } = props
 
+  const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
@@ -93,7 +102,7 @@ const CheckoutUI = (props) => {
     const errors = []
     const notFields = ['coupon', 'driver_tip', 'mobile_phone']
 
-    Object.values(validationFields?.fields).map(field => {
+    Object.values(validationFields?.fields?.checkout).map(field => {
       if (field?.required && !notFields.includes(field.code)) {
         if (!user[field?.code]) {
           errors.push(t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `The field ${field?.name} is required`))
@@ -101,7 +110,7 @@ const CheckoutUI = (props) => {
       }
     })
 
-    if (!user?.cellphone && validationFields?.fields?.cellphone?.required) {
+    if (!user?.cellphone && validationFields?.fields?.checkout?.cellphone?.required) {
       errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'))
     }
 
@@ -114,7 +123,7 @@ const CheckoutUI = (props) => {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'))
         }
       } else {
-        errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'))
+        errors.push(t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'))
       }
     }
 
@@ -122,7 +131,7 @@ const CheckoutUI = (props) => {
   }
 
   useEffect(() => {
-    if (validationFields && validationFields?.fields) {
+    if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
     }
   }, [validationFields, user])
@@ -231,7 +240,12 @@ const CheckoutUI = (props) => {
           </PaymentMethodContainer>
         )}
 
-        {!cartState.loading && cart && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.driver_tip?.enabled && (
+        {!cartState.loading &&
+          cart &&
+          options.type === 1 &&
+          cart?.status !== 2 &&
+          validationFields?.fields?.checkout?.driver_tip?.enabled &&
+        (
           <DriverTipContainer>
             <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
             <DriverTips
@@ -250,7 +264,6 @@ const CheckoutUI = (props) => {
               cart={cart}
               isCheckout
               isProducts={cart?.products?.length || 0}
-              showCoupon={validationFields?.fields?.coupon?.enabled}
             />
           </CartContainer>
         )}

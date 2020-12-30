@@ -67,6 +67,7 @@ export const MessagesUI = (props) => {
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
   const [modalImage, setModalImage] = useState({ open: false, src: '' })
+  const imageRef = useRef(null)
 
   const handleModalImage = (src) => {
     setModalImage({ open: true, src })
@@ -115,6 +116,7 @@ export const MessagesUI = (props) => {
 
   const removeImage = (e) => {
     setImage(null)
+    imageRef.current.value = ''
   }
 
   const onChangeImage = e => {
@@ -390,6 +392,7 @@ export const MessagesUI = (props) => {
               id='chat_image'
               accept='image/png,image/jpg,image/jpeg'
               onChange={onChangeImage}
+              ref={imageRef}
             />
             <BsCardImage />
           </SendImage>
