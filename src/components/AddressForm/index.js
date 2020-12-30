@@ -34,6 +34,8 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
+const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
+
 const AddressFormUI = (props) => {
   const {
     addressesList,
@@ -53,29 +55,28 @@ const AddressFormUI = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
+
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
-
-  const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
-  const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
-
-  const mapErrors = {
-    ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
-    ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
-  }
-
-  const isEditing = !!addressState.address?.id
-
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
-
   const [locationChange, setLocationChange] = useState(
     addressState?.address?.id
       ? addressState?.address?.location
       : formState.changes?.location ?? null
   )
+
+  const isEditing = !!addressState.address?.id
+  const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
+  const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
+  const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
+                              configState.configs?.google_autocomplete_selection_required?.value === 'true'
+
+  const mapErrors = {
+    ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
+    ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
+  }
 
   const closeAlert = () => {
     setAlertState({
@@ -106,10 +107,60 @@ const AddressFormUI = (props) => {
     return values.every(value => value)
   }
 
+  const getAddressFormatted = (addressChange) => {
+    const data = { address: null, error: null }
+    const geocoder = window.google && new window.google.maps.Geocoder()
+
+    geocoder.geocode({ address: addressChange }, (results, status) => {
+      let postalCode = null
+      if (status === 'OK' && results && results.length > 0) {
+        for (const component of results[0].address_components) {
+          const addressType = component.types[0]
+          if (addressType === 'postal_code') {
+            postalCode = component.short_name
+            break
+          }
+        }
+        data.address = {
+          address: addressChange,
+          location: { lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() },
+          utc_offset: results[0].utc_offset_minutes ?? 0,
+          map_data: {
+            library: 'google',
+            place_id: results[0].place_id
+          }
+        }
+        if (postalCode) {
+          data.address.zipcode = postalCode
+        }
+        const arrayList = isEditing
+          ? addressesList.filter(address => address.id !== addressState.address?.id) || []
+          : addressesList || []
+        const addressToCompare = isEditing
+          ? { ...addressState.address, ...data.address, ...formState?.changes }
+          : { ...data.address, ...formState?.changes }
+
+        const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
+        if (!isAddressAlreadyExist) {
+          saveAddress(data.address)
+          return
+        }
+
+        setAlertState({
+          open: true,
+          content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
+        })
+      } else {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_NOT_FOUND_ADDRESS', 'Error, address not found')]
+        })
+      }
+    })
+  }
+
   const onSubmit = async () => {
-    if (
-      !auth && formState?.changes?.address === '' && addressState?.address?.address
-    ) {
+    if (!auth && formState?.changes?.address === '' && addressState?.address?.address) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_ADDRESS_REQUIRED', 'The field Address is required')]
@@ -117,11 +168,16 @@ const AddressFormUI = (props) => {
       setLocationChange(null)
       return
     }
+
     if (formState?.changes?.address && !formState?.changes?.location) {
-      setAlertState({
-        open: true,
-        content: [t('ADDRESS_REQUIRE_LOCATION', 'The address needs a location, please select one of the suggested')]
-      })
+      if (isLocationRequired) {
+        setAlertState({
+          open: true,
+          content: [t('ADDRESS_REQUIRE_LOCATION', 'The address needs a location, please select one of the suggested')]
+        })
+        return
+      }
+      getAddressFormatted(formState?.changes?.address)
       return
     }
 
@@ -199,7 +255,6 @@ const AddressFormUI = (props) => {
       setLocationChange(formState?.changes?.location)
     }
 
-    // Validation when user change location in edit mode
     if (isEditing) {
       if (formState?.changes?.location) {
         const prevLocation = { lat: Math.trunc(locationChange.lat), lng: Math.trunc(locationChange.lng) }
@@ -226,9 +281,7 @@ const AddressFormUI = (props) => {
     }
   }, [])
 
-  /**
-   * Form events control
-   */
+  /** Form events control */
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
