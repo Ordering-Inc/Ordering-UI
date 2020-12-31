@@ -209,7 +209,7 @@ export const UserFormDetailsUI = (props) => {
                     className='form'
                     disabled={!isEdit}
                     placeholder={t(field.code.toUpperCase(), field.name)}
-                    value={formState?.changes[field.code] ?? user[field.code] ?? ''}
+                    defaultValue={formState?.result?.result ? formState?.result?.result[field.code] : formState?.changes[field.code] ?? user[field.code] ?? ''}
                     onChange={handleChangeInput}
                     ref={register({
                       required: isRequiredField(field.code)
