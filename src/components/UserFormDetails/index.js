@@ -27,7 +27,8 @@ export const UserFormDetailsUI = (props) => {
     isRequiredField,
     validationFields,
     handleChangeInput,
-    handleButtonUpdateClick
+    handleButtonUpdateClick,
+    isCheckout
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -225,24 +226,25 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             ))}
-
-            <Input
-              type='password'
-              name='password'
-              className='form'
-              disabled={!isEdit}
-              placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
-              onChange={handleChangeInput}
-              ref={register({
-                required: isRequiredField('password')
-                  ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                  : null,
-                minLength: {
-                  value: 8,
-                  message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                }
-              })}
-            />
+            {!isCheckout && (
+              <Input
+                type='password'
+                name='password'
+                className='form'
+                disabled={!isEdit}
+                placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
+                onChange={handleChangeInput}
+                ref={register({
+                  required: isRequiredField('password')
+                    ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                    : null,
+                  minLength: {
+                    value: 8,
+                    message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                  }
+                })}
+              />
+            )}
             {!!showInputPhoneNumber && (
               <InputPhoneNumber
                 user={user}
