@@ -22,7 +22,7 @@ export const Image = React.forwardRef((props, ref) => {
   return (
     <>
       {
-        !error && props.src && <img className={props.className} style={props.style} src={props.src} ref={imageRef} alt='profile-image' />
+        !error && props.src && <img className={props.className} style={props.style} src={props.src} ref={imageRef} alt='profile-image' width='28px' height='28px' />
       }
       {
         !error && !props.src && props.fallback && props.fallback
