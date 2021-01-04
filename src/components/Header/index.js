@@ -39,7 +39,7 @@ export const Header = (props) => {
   const [orderState] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
-  const [{ configs }] = useConfig()
+  const [configState] = useConfig()
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
@@ -48,7 +48,7 @@ export const Header = (props) => {
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
-  const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const openModal = (opt) => {
     setModalSelected(opt)
@@ -92,7 +92,7 @@ export const Header = (props) => {
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
           </LogoHeader>
           <Menu className='left-header'>
-            {configTypes.length > 0 && (
+            {!configState?.loading && configTypes.length > 0 && (
               <OrderTypeSelectorHeader configTypes={configTypes} />
             )}
             {onlineStatus && windowSize.width > 820 && (
@@ -190,7 +190,7 @@ export const Header = (props) => {
             <HeaderOption
               variant='moment'
               momentState={orderState?.options?.moment}
-              onClick={configs?.max_days_preorder?.value === -1 || configs?.max_days_preorder?.value === 0
+              onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
                 ? null
                 : (variant) => openModal(variant)}
               isHome={isHome}
