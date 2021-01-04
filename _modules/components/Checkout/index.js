@@ -255,7 +255,8 @@ var CheckoutUI = function CheckoutUI(props) {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     useValidationFields: true,
     useDefualtSessionManager: true,
-    useSessionUser: true
+    useSessionUser: true,
+    isCheckout: true
   }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContainer, null, ((businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.loading) || cartState.loading) && !(businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error) && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 35,
     style: {

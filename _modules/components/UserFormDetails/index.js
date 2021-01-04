@@ -70,7 +70,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       isRequiredField = props.isRequiredField,
       validationFields = props.validationFields,
       handleChangeInput = props.handleChangeInput,
-      handleButtonUpdateClick = props.handleButtonUpdateClick;
+      handleButtonUpdateClick = props.handleButtonUpdateClick,
+      isCheckout = props.isCheckout;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -290,9 +291,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   }, [user, isEdit]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
-    onSubmit: handleSubmit(onSubmit)
+    onSubmit: handleSubmit(onSubmit),
+    isCheckout: isCheckout
   }, !validationFields.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, validationFieldsSorted.map(function (field) {
-    var _ref, _formState$changes$fi;
+    var _formState$result3, _formState$result4, _ref, _formState$changes$fi;
 
     return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
@@ -303,7 +305,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       className: "form",
       disabled: !isEdit,
       placeholder: t(field.code.toUpperCase(), field.name),
-      value: (_ref = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user[field.code]) !== null && _ref !== void 0 ? _ref : '',
+      defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result[field.code] : (_ref = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user[field.code]) !== null && _ref !== void 0 ? _ref : '',
       onChange: handleChangeInput,
       ref: register({
         required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null,
@@ -314,7 +316,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     }));
-  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), !isCheckout && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     className: "form",
