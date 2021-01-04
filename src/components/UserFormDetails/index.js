@@ -197,7 +197,7 @@ export const UserFormDetailsUI = (props) => {
 
   return (
     <>
-      <FormInput onSubmit={handleSubmit(onSubmit)}>
+      <FormInput onSubmit={handleSubmit(onSubmit)} isCheckout={isCheckout}>
         {!validationFields.loading ? (
           <>
             {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
