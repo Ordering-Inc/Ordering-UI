@@ -57,7 +57,7 @@ export const PreviousOrders = (props) => {
                 <WrapperBusinessTitle>
                   <h2>{order.business.name}</h2>
                 </WrapperBusinessTitle>
-                <p>{parseDate(order.created_at)}</p>
+                <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
                 <p name='view_order' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.id } })}>
                   {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
                 </p>
