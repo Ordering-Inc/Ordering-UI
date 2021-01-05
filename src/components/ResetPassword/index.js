@@ -26,7 +26,8 @@ const ResetPasswordUI = (props) => {
     handleChangeInput,
     formState,
     code,
-    random
+    random,
+    handleCodes
   } = props
 
   const [{ auth }] = useSession()
@@ -39,6 +40,14 @@ const ResetPasswordUI = (props) => {
   const password = useRef({})
 
   password.current = watch('password', '')
+
+  const onSubmit = () => {
+    if (code && random) {
+      handleResetPassword()
+    } else {
+      handleCodes()
+    }
+  }
 
   const closeAlert = () => {
     setAlertState({
@@ -83,61 +92,104 @@ const ResetPasswordUI = (props) => {
 
   return (
     <ResetPasswordContainer>
-      {(!code || !random || auth) ? (
+      {auth ? (
         <PageNotFound />
       ) : (
         <>
           <HeroSide>
             <TitleHeroSide>
               <h1>{t('TITLE_RESET_PASSWORD', 'Reset password')}</h1>
-              <p>{t('SUBTITLE_RESET_PASSWORD', 'Reset your password')}</p>
+              <p>{code && random ? t('SUBTITLE_RESET_PASSWORD', 'Reset your password') : t('RESET_PASSWORD_CODES_TITLE', 'Please insert the codes')}</p>
             </TitleHeroSide>
           </HeroSide>
-          <FormSide>
-            <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' />
-            <FormInput
-              noValidate
-              onSubmit={handleSubmit(handleResetPassword)}
-            >
-              <Input
-                type='password'
-                name='password'
-                aria-label='password'
-                spellcheck='false'
-                ref={register({
-                  required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field password is required'),
-                  minLength: {
-                    value: 8,
-                    message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                  }
-                })}
-                placeholder={t('NEW_PASSWORD', 'New passowrd')}
-                onChange={handleChangeInput}
-                autoComplete='off'
-              />
-              <Input
-                type='password'
-                name='confirm-password'
-                aria-label='confirm-password'
-                spellcheck='false'
-                ref={register({
-                  required: t('VALIDATION_ERROR_PASSWORD_CONFIRM_REQUIRED', 'The field password confirm is required'),
-                  validate: value =>
-                    value === password.current || t('VALIDATION_ERROR_PASSWORDS_MATCH', 'The passwords do not match')
-                })}
-                placeholder={t('CONFIRM_PASSWORD', 'Confirm Password')}
-                onChange={handleChangeInput}
-                autoComplete='off'
-              />
-              <Button
-                type='submit'
-                color={(formState.loading || formState.result?.result?.length) ? 'secondary' : 'primary'}
-                disabled={(formState.loading || formState.result?.result?.length)}
+          {code && random ? (
+            <>
+              <FormSide>
+                <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' />
+                <FormInput
+                  noValidate
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <Input
+                    type='password'
+                    name='password'
+                    aria-label='password'
+                    spellcheck='false'
+                    ref={register({
+                      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field password is required'),
+                      minLength: {
+                        value: 8,
+                        message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                      }
+                    })}
+                    placeholder={t('NEW_PASSWORD', 'New passowrd')}
+                    onChange={handleChangeInput}
+                    autoComplete='off'
+                  />
+                  <Input
+                    type='password'
+                    name='confirm-password'
+                    aria-label='confirm-password'
+                    spellcheck='false'
+                    ref={register({
+                      required: t('VALIDATION_ERROR_PASSWORD_CONFIRM_REQUIRED', 'The field password confirm is required'),
+                      validate: value =>
+                        value === password.current || t('VALIDATION_ERROR_PASSWORDS_MATCH', 'The passwords do not match')
+                    })}
+                    placeholder={t('CONFIRM_PASSWORD', 'Confirm Password')}
+                    onChange={handleChangeInput}
+                    autoComplete='off'
+                  />
+                  <Button
+                    type='submit'
+                    color={(formState.loading || formState.result?.result?.length) ? 'secondary' : 'primary'}
+                    disabled={(formState.loading || formState.result?.result?.length)}
+                  >
+                    {!formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading')}
+                  </Button>
+                </FormInput>
+              </FormSide>
+            </>
+          ) : (
+            <FormSide>
+              <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' />
+              <FormInput
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}
               >
-                {!formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading')}
-              </Button>
-            </FormInput>
-          </FormSide>
+                {!code && (
+                  <Input
+                    name='code'
+                    aria-label='code'
+                    ref={register({
+                      required: t('RESET_PASSWORD_CODE_REQUIRED', 'The field code is required')
+                    })}
+                    placeholder={t('CODE', 'Code')}
+                    onChange={handleChangeInput}
+                    autoComplete='off'
+                  />
+                )}
+                {!random && (
+                  <Input
+                    name='random'
+                    aria-label='random'
+                    ref={register({
+                      required: t('RESET_PASSWORD_RANDOM_REQUIRED', 'The field random is required')
+                    })}
+                    placeholder={t('RAMDON', 'Random')}
+                    onChange={handleChangeInput}
+                    autoComplete='off'
+                  />
+                )}
+                <Button
+                  type='submit'
+                  color='primary'
+                >
+                  {t('SUBMIT_CODES', 'Submit codes')}
+                </Button>
+              </FormInput>
+            </FormSide>
+          )}
           <Alert
             title={t('RESET_PASSWORD', 'Reset Password')}
             content={alertState?.content}
