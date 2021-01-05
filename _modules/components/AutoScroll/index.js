@@ -68,7 +68,9 @@ var AutoScroll = function AutoScroll(_ref) {
     setParentElement(element);
     setContainerElement(containerElement);
     return function () {
-      containerElement.removeEventListener('scroll', handleScroll);
+      if (containerElement === null || containerElement === void 0 ? void 0 : containerElement.length) {
+        containerElement.removeEventListener('scroll', handleScroll);
+      }
     };
   });
   (0, _react.useEffect)(function () {

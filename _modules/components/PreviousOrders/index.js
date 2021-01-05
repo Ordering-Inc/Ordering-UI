@@ -133,7 +133,9 @@ var PreviousOrders = function PreviousOrders(props) {
       alt: "business-logo",
       width: "55px",
       height: "64px"
-    })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name)), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order.created_at)), /*#__PURE__*/_react.default.createElement("p", {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name)), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+      utc: false
+    })), /*#__PURE__*/_react.default.createElement("p", {
       name: "view_order",
       onClick: function onClick() {
         return onOrderClick({

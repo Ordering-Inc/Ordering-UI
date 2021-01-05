@@ -80,7 +80,9 @@ var ActiveOrders = function ActiveOrders(props) {
       activeOrders: true
     }, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name), /*#__PURE__*/_react.default.createElement("p", {
       name: "order_number"
-    }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order.created_at))), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(order.products.reduce(function (acc, cur) {
+    }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+      utc: false
+    }))), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(order.products.reduce(function (acc, cur) {
       return acc + cur.price;
     }, 0))), /*#__PURE__*/_react.default.createElement("p", null, getOrderStatus(order.status).value))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",

@@ -48,13 +48,14 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ResetPasswordUI = function ResetPasswordUI(props) {
-  var _theme$images, _theme$images$logos, _formState$result7, _formState$result7$re, _formState$result8, _formState$result8$re;
+  var _theme$images, _theme$images$logos, _formState$result7, _formState$result7$re, _formState$result8, _formState$result8$re, _theme$images2, _theme$images2$logos;
 
   var handleResetPassword = props.handleResetPassword,
       handleChangeInput = props.handleChangeInput,
       formState = props.formState,
       code = props.code,
-      random = props.random;
+      random = props.random,
+      handleCodes = props.handleCodes;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -86,6 +87,14 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
 
   var password = (0, _react.useRef)({});
   password.current = watch('password', '');
+
+  var onSubmit = function onSubmit() {
+    if (code && random) {
+      handleResetPassword();
+    } else {
+      handleCodes();
+    }
+  };
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -140,14 +149,14 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
       return closeAlert();
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.ResetPasswordContainer, null, !code || !random || auth ? /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_RESET_PASSWORD', 'Reset password')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_RESET_PASSWORD', 'Reset your password')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_styles.ResetPasswordContainer, null, auth ? /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_RESET_PASSWORD', 'Reset password')), /*#__PURE__*/_react.default.createElement("p", null, code && random ? t('SUBTITLE_RESET_PASSWORD', 'Reset your password') : t('RESET_PASSWORD_CODES_TITLE', 'Please insert the codes')))), code && random ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
     alt: "Logo",
     width: "200",
     height: "66"
   }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
-    onSubmit: handleSubmit(handleResetPassword)
+    onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
@@ -181,7 +190,36 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     type: "submit",
     color: formState.loading || ((_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : (_formState$result7$re = _formState$result7.result) === null || _formState$result7$re === void 0 ? void 0 : _formState$result7$re.length) ? 'secondary' : 'primary',
     disabled: formState.loading || ((_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : (_formState$result8$re = _formState$result8.result) === null || _formState$result8$re === void 0 ? void 0 : _formState$result8$re.length)
-  }, !formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading'))))) : /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype,
+    alt: "Logo",
+    width: "200",
+    height: "66"
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+    noValidate: true,
+    onSubmit: handleSubmit(onSubmit)
+  }, !code && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    name: "code",
+    "aria-label": "code",
+    ref: register({
+      required: t('RESET_PASSWORD_CODE_REQUIRED', 'The field code is required')
+    }),
+    placeholder: t('CODE', 'Code'),
+    onChange: handleChangeInput,
+    autoComplete: "off"
+  }), !random && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    name: "random",
+    "aria-label": "random",
+    ref: register({
+      required: t('RESET_PASSWORD_RANDOM_REQUIRED', 'The field random is required')
+    }),
+    placeholder: t('RAMDON', 'Random'),
+    onChange: handleChangeInput,
+    autoComplete: "off"
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    type: "submit",
+    color: "primary"
+  }, t('SUBMIT_CODES', 'Submit codes')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('RESET_PASSWORD', 'Reset Password'),
     content: alertState === null || alertState === void 0 ? void 0 : alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
