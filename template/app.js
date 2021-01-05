@@ -201,11 +201,13 @@ export const App = () => {
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/search'>
-                    {
-                    orderStatus.options?.address?.location
-                      ? <BusinessesList />
-                      : <Redirect to='/' />
-                    }
+                    {orderStatus.loading ? (
+                      <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                    ) : (
+                      orderStatus.options?.address?.location
+                        ? <BusinessesList />
+                        : <Redirect to='/' />
+                    )}
                   </Route>
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
