@@ -1,5 +1,5 @@
 import React from 'react'
-import { OrderTypeControl, useLanguage, useConfig, useOrder } from 'ordering-components'
+import { OrderTypeControl, useLanguage } from 'ordering-components'
 import { Select } from '../../styles/Select'
 import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import FaTruckPickup from '@meronex/icons/fa/FaTruckPickup'
@@ -57,20 +57,9 @@ const OrderTypeSelectorHeaderUI = (props) => {
 }
 
 export const OrderTypeSelectorHeader = (props) => {
-  const [{ configs }] = useConfig()
-  const [orderState] = useOrder()
-  const orderTypes = {
-    delivery: 1,
-    pickup: 2,
-    eatin: 3,
-    curbside: 4,
-    drivethru: 5
-  }
-
   const orderTypeProps = {
     ...props,
-    UIComponent: OrderTypeSelectorHeaderUI,
-    defaultValue: orderState?.options?.type || orderTypes[configs?.default_order_type?.value]
+    UIComponent: OrderTypeSelectorHeaderUI
   }
 
   return <OrderTypeControl {...orderTypeProps} />
