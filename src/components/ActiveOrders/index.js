@@ -52,7 +52,7 @@ export const ActiveOrders = (props) => {
                 <BusinessInformation activeOrders>
                   <h2>{order.business.name}</h2>
                   <p name='order_number'>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
-                  <p>{parseDate(order.created_at)}</p>
+                  <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
                 </BusinessInformation>
                 <Price>
                   <h2>

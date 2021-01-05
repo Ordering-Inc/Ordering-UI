@@ -20,7 +20,9 @@ export const AutoScroll = ({ children, modal, special }) => {
     setContainerElement(containerElement)
 
     return () => {
-      containerElement.removeEventListener('scroll', handleScroll)
+      if (containerElement?.length) {
+        containerElement.removeEventListener('scroll', handleScroll)
+      }
     }
   })
 
