@@ -61,7 +61,7 @@ var MomentContent = function MomentContent(props) {
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, momentProps), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
     height: (momentControl === null || momentControl === void 0 ? void 0 : momentControl.height) && "".concat(momentControl === null || momentControl === void 0 ? void 0 : momentControl.height, "px")
-  }, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+  }, window.location.pathname !== '/search' && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
       top: width <= 768 ? '50%' : '40%',
       position: width <= 768 ? 'absolute' : 'sticky',
