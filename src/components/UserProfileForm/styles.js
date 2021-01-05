@@ -44,13 +44,16 @@ export const Image = styled.div`
 
   img,
   div {
-    object-fit: cover;
     width: 100%;
     border-radius: 50%;
     height: 100%;
     border: none;
     overflow: hidden;
   };
+
+  img{
+    object-fit: cover;
+  }
 
   @media (min-width: 480px){
     width: 200px;
