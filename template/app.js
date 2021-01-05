@@ -189,7 +189,7 @@ export const App = () => {
                         : <Redirect to='/' />
                     }
                   </Route>
-                  <Route exact path='/reset_password' component={ResetPassword} />
+                  <Route exact path='/password/reset' component={ResetPassword} />
                   <Route exact path='/profile'>
                     {auth
                       ? (<Profile userId={user.id} accessToken={user.session.access_token} useValidationFields />)
