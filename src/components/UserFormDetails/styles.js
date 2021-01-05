@@ -31,6 +31,11 @@ export const FormInput = styled.form`
     input.form {
       width: 49%;
     }
+    ${({ isCheckout }) => isCheckout && css`
+      div.phone_number  {
+        width: 49%;
+      }
+    `}
   }
 `
 

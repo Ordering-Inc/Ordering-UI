@@ -188,6 +188,7 @@ const CheckoutUI = (props) => {
                 useValidationFields
                 useDefualtSessionManager
                 useSessionUser
+                isCheckout
               />
             )}
           </WrapperUserDetails>
