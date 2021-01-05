@@ -51,6 +51,10 @@ export const Image = styled.div`
     overflow: hidden;
   };
 
+  img{
+    object-fit: cover;
+  }
+
   @media (min-width: 480px){
     width: 200px;
     height: 200px;
