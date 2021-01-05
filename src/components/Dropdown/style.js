@@ -98,6 +98,7 @@ export const DropDownCircleImage = styled(Image)`
   display: flex;
   align-items: center;
   justify-content: center;
+  object-fit: cover;
   ${props => props.theme?.rtl && css`
     margin-left: 5px;
     margin-right: 0;

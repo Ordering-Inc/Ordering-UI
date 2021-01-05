@@ -44,6 +44,7 @@ export const Image = styled.div`
 
   img,
   div {
+    object-fit: cover;
     width: 100%;
     border-radius: 50%;
     height: 100%;
