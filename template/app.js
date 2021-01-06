@@ -201,7 +201,7 @@ export const App = () => {
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/search'>
-                    {orderStatus.loading ? (
+                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
                       <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
                     ) : (
                       orderStatus.options?.address?.location

@@ -32,7 +32,7 @@ export const MomentContent = (props) => {
       <MomentControl {...momentProps} />
       {orderState?.loading && (
         <Layer height={momentControl?.height && `${momentControl?.height}px`}>
-          {window.location.pathname !== '/search' && (
+          {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
             <SpinnerLoader
               style={{
                 top: width <= 768 ? '50%' : '40%',
