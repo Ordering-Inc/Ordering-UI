@@ -22,12 +22,12 @@ import { PageNotFound } from '../PageNotFound'
 
 const ResetPasswordUI = (props) => {
   const {
-    handleResetPassword,
-    handleChangeInput,
-    formState,
     code,
     random,
-    handleCodes
+    formState,
+    resetPasswordData,
+    handleResetPassword,
+    handleChangeInput
   } = props
 
   const [{ auth }] = useSession()
@@ -45,7 +45,10 @@ const ResetPasswordUI = (props) => {
     if (code && random) {
       handleResetPassword()
     } else {
-      handleCodes()
+      events.emit('go_to_page', {
+        page: 'reset_password',
+        search: `?code=${resetPasswordData.code}&random=${resetPasswordData.random}`
+      })
     }
   }
 
