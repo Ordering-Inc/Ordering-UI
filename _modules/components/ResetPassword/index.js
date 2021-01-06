@@ -50,12 +50,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ResetPasswordUI = function ResetPasswordUI(props) {
   var _theme$images, _theme$images$logos, _formState$result7, _formState$result7$re, _formState$result8, _formState$result8$re, _theme$images2, _theme$images2$logos;
 
-  var handleResetPassword = props.handleResetPassword,
-      handleChangeInput = props.handleChangeInput,
-      formState = props.formState,
-      code = props.code,
+  var code = props.code,
       random = props.random,
-      handleCodes = props.handleCodes;
+      formState = props.formState,
+      resetPasswordData = props.resetPasswordData,
+      handleResetPassword = props.handleResetPassword,
+      handleChangeInput = props.handleChangeInput,
+      redirectResetPassword = props.redirectResetPassword,
+      redirectLogin = props.redirectLogin;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -80,11 +82,6 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-
-  var _useEvent = (0, _orderingComponents.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
-
   var password = (0, _react.useRef)({});
   password.current = watch('password', '');
 
@@ -92,7 +89,7 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     if (code && random) {
       handleResetPassword();
     } else {
-      handleCodes();
+      redirectResetPassword && redirectResetPassword(resetPasswordData);
     }
   };
 
@@ -107,9 +104,7 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     var _formState$result, _formState$result$res;
 
     if (!formState.loading && ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : (_formState$result$res = _formState$result.result) === null || _formState$result$res === void 0 ? void 0 : _formState$result$res.length) && !formState.result.error) {
-      events.emit('go_to_page', {
-        page: 'signin'
-      });
+      redirectLogin && redirectLogin();
     }
 
     closeAlert();
