@@ -4,7 +4,6 @@ import { Alert } from '../Confirm'
 import {
   useLanguage,
   ResetPassword as ResetPasswordController,
-  useEvent,
   useSession
 } from 'ordering-components'
 import {
@@ -27,7 +26,9 @@ const ResetPasswordUI = (props) => {
     formState,
     resetPasswordData,
     handleResetPassword,
-    handleChangeInput
+    handleChangeInput,
+    redirectResetPassword,
+    redirectLogin
   } = props
 
   const [{ auth }] = useSession()
@@ -35,7 +36,6 @@ const ResetPasswordUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [events] = useEvent()
 
   const password = useRef({})
 
@@ -45,10 +45,7 @@ const ResetPasswordUI = (props) => {
     if (code && random) {
       handleResetPassword()
     } else {
-      events.emit('go_to_page', {
-        page: 'reset_password',
-        search: `?code=${resetPasswordData.code}&random=${resetPasswordData.random}`
-      })
+      redirectResetPassword && redirectResetPassword(resetPasswordData)
     }
   }
 
@@ -61,7 +58,7 @@ const ResetPasswordUI = (props) => {
 
   const handleCloseAlert = () => {
     if (!formState.loading && formState.result?.result?.length && !formState.result.error) {
-      events.emit('go_to_page', { page: 'signin' })
+      redirectLogin && redirectLogin()
     }
     closeAlert()
   }
