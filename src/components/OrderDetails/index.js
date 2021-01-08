@@ -250,7 +250,6 @@ const OrderDetailsUI = (props) => {
                 />
               ))}
             </OrderProducts>
-
             <OrderBill>
               <table>
                 <tbody>
@@ -259,7 +258,7 @@ const OrderDetailsUI = (props) => {
                     <td>{parsePrice(order?.subtotal)}</td>
                   </tr>
                   <tr>
-                    <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
+                    <td>{order?.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
                     <td>{parsePrice(order?.totalTax)}</td>
                   </tr>
                   <tr>
