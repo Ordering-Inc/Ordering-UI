@@ -250,7 +250,6 @@ const OrderDetailsUI = (props) => {
                 />
               ))}
             </OrderProducts>
-            {console.log(order)}
             <OrderBill>
               <table>
                 <tbody>
