@@ -35,7 +35,7 @@ export const ActiveOrders = (props) => {
         <AutoScroll special>
           {orders.map(order => (
             <Card key={order.id}>
-              {configs?.google_maps_api_key?.value && (
+              {!configs?.google_maps_api_key?.value && (
                 <Map>
                   <img
                     src={getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
@@ -56,13 +56,13 @@ export const ActiveOrders = (props) => {
                 </BusinessInformation>
                 <Price>
                   <h2>
-                    {parsePrice(order.products.reduce((acc, cur) => acc + cur.price, 0))}
+                    {parsePrice(order.total)}
                   </h2>
                   <p>{getOrderStatus(order.status).value}</p>
                 </Price>
               </Content>
               <OpenOrder>
-                <Button color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.id } })}>
+                <Button className='open-order' color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.id } })}>
                   {t('OPEN_ORDER', 'Open order')}
                 </Button>
               </OpenOrder>

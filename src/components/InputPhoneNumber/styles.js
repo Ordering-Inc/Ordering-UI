@@ -49,11 +49,6 @@ export const Container = styled.div`
     ${({ disabled }) => disabled && css`
       cursor: not-allowed;
     `}
-
-    ${({ isValid }) => !isValid && css`
-      pointer-events: none;
-      background-color: rgba(239,239,239,0.3);
-    `}
   }
 `
 

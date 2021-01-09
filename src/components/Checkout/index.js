@@ -156,13 +156,15 @@ const CheckoutUI = (props) => {
           </WarningMessage>
         )}
 
-        {cartState.loading ? (
+        {(businessDetails?.loading || cartState.loading) ? (
           <div style={{ width: '100%', marginBottom: '20px' }}>
             <Skeleton height={35} style={{ marginBottom: '10px' }} />
             <Skeleton height={150} />
           </div>
         ) : (
           <AddressDetails
+            location={businessDetails?.business?.location}
+            businessLogo={businessDetails?.business?.logo}
             isCartPending={cart?.status === 2}
             businessId={cart?.business_id}
             apiKey={configs?.google_maps_api_key?.value}

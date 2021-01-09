@@ -34,7 +34,7 @@ import {
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
-const inputNames = ['address', 'internal_number', 'zipcode', 'address_notes']
+const inputNames = [{ name: 'address', code: 'Address' }, { name: 'internal_number', code: 'Internal number' }, { name: 'zipcode', code: 'Zipcode' }, { name: 'address_notes', code: 'Address notes' }]
 
 const AddressFormUI = (props) => {
   const {
@@ -238,7 +238,7 @@ const AddressFormUI = (props) => {
     if (!auth) {
       setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
       setAddressValue(formState?.changes?.address ?? orderState?.options?.address?.address ?? '')
-      inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || orderState?.options?.address[field] || ''))
+      inputNames.forEach(field => formMethods.setValue(field.name, formState?.changes[field.name] || orderState?.options?.address[field.name] || ''))
       return
     }
 
@@ -251,7 +251,7 @@ const AddressFormUI = (props) => {
     setAddressValue(formState?.changes?.address ?? addressState.address?.address ?? '')
     formMethods.setValue('address', formState?.changes?.address ?? addressState.address?.address ?? '')
     if (!isEditing) {
-      inputNames.forEach(field => formMethods.setValue(field, formState?.changes[field] || ''))
+      inputNames.forEach(field => formMethods.setValue(field.name, formState?.changes[field.name] || ''))
       setLocationChange(formState?.changes?.location)
     }
 
@@ -293,10 +293,10 @@ const AddressFormUI = (props) => {
   }, [formMethods.errors])
 
   useEffect(() => {
-    inputNames.forEach(name => {
-      formMethods.register(name, {
-        required: isRequiredField(name)
-          ? t(`VALIDATION_ERROR_${name}_REQUIRED`, `The field ${name} is required`)
+    inputNames.forEach(field => {
+      formMethods.register(field.name, {
+        required: isRequiredField(field.name)
+          ? t(`VALIDATION_ERROR_${field.name}_REQUIRED`, `The field ${field.code} is required`)
           : null
       })
     })

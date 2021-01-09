@@ -44,12 +44,12 @@ export const InputPhoneNumber = (props) => {
         />
         {value && !isValidPhoneNumber(value) && !disabled && (
           <>
-            {((auth && user?.country_phone_code) || !auth) && (
+            {((auth && user?.country_phone_code) || !auth || value.includes('+')) && (
               <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')}</ErrorMsg>
             )}
 
-            {auth && !user?.country_phone_code && (
-              <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')}</ErrorMsg>
+            {auth && !user?.country_phone_code && !value.includes('+') && (
+              <ErrorMsg>{t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')}</ErrorMsg>
             )}
           </>
         )}
