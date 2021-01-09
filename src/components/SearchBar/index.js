@@ -6,7 +6,7 @@ import {
   BusinessSearch
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
+export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isBusinessSearch }) => {
   let timeout = null
   let previousSearch
   const el = useRef()
@@ -15,7 +15,14 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
 
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
-        onSearch(e.target.value)
+        if (isBusinessSearch) {
+          clearTimeout(timeout)
+          timeout = setTimeout(function () {
+            onSearch(e.target.value)
+          }, 300)
+        } else {
+          onSearch(e.target.value)
+        }
       } else {
         clearTimeout(timeout)
         timeout = setTimeout(function () {
