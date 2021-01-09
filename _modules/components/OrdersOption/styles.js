@@ -124,7 +124,7 @@ function _templateObject24() {
 }
 
 function _templateObject23() {
-  var data = _taggedTemplateLiteral(["\n    span{\n      border-radius: 24px;\n      width: 270px;\n      height: 33px;\n    }\n  @media(min-width: 480px){\n    span{\n      width: 360px;\n      height: 37px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n    span{\n      border-radius: 24px;\n      width: 270px;\n      height: 36px;\n    }\n  @media(min-width: 480px){\n    span{\n      width: 360px;\n    }\n  }\n"]);
 
   _templateObject23 = function _templateObject23() {
     return data;

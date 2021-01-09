@@ -71,7 +71,19 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var inputNames = ['address', 'internal_number', 'zipcode', 'address_notes'];
+var inputNames = [{
+  name: 'address',
+  code: 'Address'
+}, {
+  name: 'internal_number',
+  code: 'Internal number'
+}, {
+  name: 'zipcode',
+  code: 'Zipcode'
+}, {
+  name: 'address_notes',
+  code: 'Address notes'
+}];
 
 var AddressFormUI = function AddressFormUI(props) {
   var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _addressState$address5, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _addressState$address12, _formState$changes17, _ref8, _formState$changes$in, _formState$changes18, _ref9, _formState$changes$zi, _formState$changes19, _ref10, _formState$changes$ad5, _formState$changes20, _orderState$options5, _orderState$options5$;
@@ -385,7 +397,7 @@ var AddressFormUI = function AddressFormUI(props) {
       inputNames.forEach(function (field) {
         var _orderState$options3;
 
-        return formMethods.setValue(field, (formState === null || formState === void 0 ? void 0 : formState.changes[field]) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address[field]) || '');
+        return formMethods.setValue(field.name, (formState === null || formState === void 0 ? void 0 : formState.changes[field.name]) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address[field.name]) || '');
       });
       return;
     }
@@ -406,7 +418,7 @@ var AddressFormUI = function AddressFormUI(props) {
       var _formState$changes11;
 
       inputNames.forEach(function (field) {
-        return formMethods.setValue(field, (formState === null || formState === void 0 ? void 0 : formState.changes[field]) || '');
+        return formMethods.setValue(field.name, (formState === null || formState === void 0 ? void 0 : formState.changes[field.name]) || '');
       });
       setLocationChange(formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.location);
     }
@@ -464,9 +476,9 @@ var AddressFormUI = function AddressFormUI(props) {
     }
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
-    inputNames.forEach(function (name) {
-      formMethods.register(name, {
-        required: isRequiredField(name) ? t("VALIDATION_ERROR_".concat(name, "_REQUIRED"), "The field ".concat(name, " is required")) : null
+    inputNames.forEach(function (field) {
+      formMethods.register(field.name, {
+        required: isRequiredField(field.name) ? t("VALIDATION_ERROR_".concat(field.name, "_REQUIRED"), "The field ".concat(field.code, " is required")) : null
       });
     });
   }, [formMethods]);
