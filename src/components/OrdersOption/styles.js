@@ -167,12 +167,11 @@ export const SkeletonButton = styled.div`
     span{
       border-radius: 24px;
       width: 270px;
-      height: 33px;
+      height: 36px;
     }
   @media(min-width: 480px){
     span{
       width: 360px;
-      height: 37px;
     }
   }
 `
