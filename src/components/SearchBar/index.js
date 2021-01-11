@@ -15,14 +15,7 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isBusinessS
 
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
-        if (isBusinessSearch) {
-          clearTimeout(timeout)
-          timeout = setTimeout(function () {
-            onSearch(e.target.value)
-          }, 300)
-        } else {
-          onSearch(e.target.value)
-        }
+        onSearch(e.target.value)
       } else {
         clearTimeout(timeout)
         timeout = setTimeout(function () {
