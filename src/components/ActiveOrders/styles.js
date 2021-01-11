@@ -98,7 +98,7 @@ export const Card = styled.div`
 
 export const Map = styled.div`
   width: 100%;
-  height: 40%;
+  height: 88px;
   img{
     width: 100%;
     height: 100%;
@@ -106,5 +106,8 @@ export const Map = styled.div`
     border-top-right-radius: 16px;
     image-rendering: -webkit-optimize-contrast;
     object-fit: cover;
+  }
+  @media(min-width: 480px){
+    height: 100px;
   }
 `
