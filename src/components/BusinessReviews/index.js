@@ -105,7 +105,7 @@ export const BusinessReviewsUI = (props) => {
 
               </>
             )}
-            {!reviewsList.loading && reviewsList?.reviews.length === 0 && (
+            {!reviewsList.loading && reviewsList?.asdf.length === 0 && (
               <ReviewsNotFound>{t('REVIEWS_NOT_FOUND', 'Reviews Not Found')}</ReviewsNotFound>
             )}
           </Content>
