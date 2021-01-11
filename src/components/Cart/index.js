@@ -200,7 +200,6 @@ const CartUI = (props) => {
         )}
         {onClickCheckout && !isCheckout && (
           <CheckoutAction>
-            {console.log(cart?.subtotal + '>=' + cart?.minimum)}
             <Button
               color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
               onClick={() => setOpenUpselling(true)}
