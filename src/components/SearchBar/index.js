@@ -6,7 +6,7 @@ import {
   BusinessSearch
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isBusinessSearch }) => {
+export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
   let timeout = null
   let previousSearch
   const el = useRef()
