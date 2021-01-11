@@ -200,12 +200,13 @@ const CartUI = (props) => {
         )}
         {onClickCheckout && !isCheckout && (
           <CheckoutAction>
+            {console.log(cart?.subtotal + '>=' + cart?.minimum)}
             <Button
               color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
               onClick={() => setOpenUpselling(true)}
               disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum}
             >
-              {cart?.subtotal >= cart?.minimum ? (
+              {cart?.subtotal >= cart?.minimum || cart?.minimum === undefined ? (
                 !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
               ) : (
                 `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
