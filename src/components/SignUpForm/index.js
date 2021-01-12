@@ -29,7 +29,7 @@ import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { useTheme } from 'styled-components'
 
-const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
+const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address']
 
 const SignUpFormUI = (props) => {
   const {
