@@ -63,7 +63,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone'];
+var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
   var _theme$images, _theme$images$logos, _validationFields$fie8, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2;
