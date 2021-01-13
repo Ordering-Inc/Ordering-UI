@@ -62,7 +62,7 @@ export const ActiveOrders = (props) => {
                 </Price>
               </Content>
               <OpenOrder>
-                <Button color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.id } })}>
+                <Button color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.uuid } })}>
                   {t('OPEN_ORDER', 'Open order')}
                 </Button>
               </OpenOrder>
