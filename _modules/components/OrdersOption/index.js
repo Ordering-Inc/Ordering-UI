@@ -17,9 +17,7 @@ var _ActiveOrders = require("../ActiveOrders");
 
 var _PreviousOrders = require("../PreviousOrders");
 
-var _emptyActiveOrders = _interopRequireDefault(require("../../../template/assets/empty-active-orders.svg"));
-
-var _emptyPastOrders = _interopRequireDefault(require("../../../template/assets/empty-past-orders.svg"));
+var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
 
@@ -56,6 +54,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersOptionUI = function OrdersOptionUI(props) {
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera;
+
   var orderList = props.orderList,
       pagination = props.pagination,
       activeOrders = props.activeOrders,
@@ -66,6 +66,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var theme = (0, _styledComponents.useTheme)();
   var loading = orderList.loading,
       error = orderList.error,
       orders = orderList.orders;
@@ -134,7 +135,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     setOrdersSorted(ordersSorted);
   }, [orders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.ImageNotFound, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: activeOrders ? _emptyActiveOrders.default : _emptyPastOrders.default,
+    src: activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders,
     alt: "empty-".concat(activeOrders ? 'active' : 'past', "-orders"),
     width: "300px",
     height: "300px"
@@ -187,10 +188,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
 };
 
 var OrdersOption = function OrdersOption(props) {
-  var _useEvent = (0, _orderingComponents.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
-
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOptionUI,
     orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9] : [1, 2, 5, 6, 10, 11, 12],
@@ -199,9 +196,6 @@ var OrdersOption = function OrdersOption(props) {
       initialPage: 1,
       pageSize: 10,
       controlType: 'infinity'
-    },
-    onOrderClick: function onOrderClick(data) {
-      return events.emit('go_to_page', data);
     }
   });
 

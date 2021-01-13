@@ -88,7 +88,7 @@ var ActiveOrders = function ActiveOrders(props) {
         return onOrderClick({
           page: 'order_detail',
           params: {
-            orderId: order.id
+            orderId: order.uuid
           }
         });
       }

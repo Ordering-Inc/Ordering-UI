@@ -88,7 +88,8 @@ var mapConfigs = {
 var CheckoutUI = function CheckoutUI(props) {
   var _businessDetails$busi, _businessDetails$busi2, _configs$google_maps_, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi7, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _cart$products;
 
-  var cartState = props.cartState,
+  var errors = props.errors,
+      cartState = props.cartState,
       cart = props.cart,
       placing = props.placing,
       businessDetails = props.businessDetails,
@@ -207,6 +208,14 @@ var CheckoutUI = function CheckoutUI(props) {
       checkValidationFields();
     }
   }, [validationFields, user]);
+  (0, _react.useEffect)(function () {
+    if (errors) {
+      setAlertState({
+        open: true,
+        content: errors
+      });
+    }
+  }, [errors]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContainer, null, !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.loading) || cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: '100%',
