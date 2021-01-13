@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { OrderList, useLanguage, useEvent } from 'ordering-components'
+import { OrderList, useLanguage } from 'ordering-components'
 
 import { ActiveOrders } from '../ActiveOrders'
 import { PreviousOrders } from '../PreviousOrders'
@@ -164,8 +164,6 @@ const OrdersOptionUI = (props) => {
 }
 
 export const OrdersOption = (props) => {
-  const [events] = useEvent()
-
   const orderListProps = {
     ...props,
     UIComponent: OrdersOptionUI,
@@ -175,8 +173,7 @@ export const OrdersOption = (props) => {
       initialPage: 1,
       pageSize: 10,
       controlType: 'infinity'
-    },
-    onOrderClick: (data) => events.emit('go_to_page', data)
+    }
   }
 
   return (
