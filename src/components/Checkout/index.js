@@ -58,6 +58,7 @@ const mapConfigs = {
 
 const CheckoutUI = (props) => {
   const {
+    errors,
     cartState,
     cart,
     placing,
@@ -135,6 +136,15 @@ const CheckoutUI = (props) => {
       checkValidationFields()
     }
   }, [validationFields, user])
+
+  useEffect(() => {
+    if (errors) {
+      setAlertState({
+        open: true,
+        content: errors
+      })
+    }
+  }, [errors])
 
   return (
     <Container>
