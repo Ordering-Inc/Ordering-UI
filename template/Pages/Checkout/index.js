@@ -56,7 +56,7 @@ export const CheckoutPage = (props) => {
     useValidationFields: true,
     validationFieldsType: 'checkout',
     onPlaceOrderClick: (data, paymethod, cart) => {
-      if (cart.order?.uuid) {
+      if (cart?.order?.uuid) {
         events.emit('go_to_page', { page: 'order_detail', params: { orderId: cart.order?.uuid } })
       }
     },
