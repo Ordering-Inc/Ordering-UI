@@ -4,7 +4,7 @@ import { DriverTips } from '../components/DriverTips'
 import ProviderMock from '../__mocks__/ProviderMock'
 
 const driverTipsOptions = [1, 2, 3, 4, 5]
-describe('Mounting Coupon control component', () => {
+describe('Mounting Driver Tips component', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>

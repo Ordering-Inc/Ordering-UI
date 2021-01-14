@@ -30,11 +30,11 @@ export const ActiveOrders = (props) => {
   const [{ parsePrice, parseDate }] = useUtils()
 
   return (
-    <OrdersContainer activeOrders ordersLength={orders?.length <= 1}>
+    <OrdersContainer activeOrders ordersLength={orders?.length <= 1} id='orders-container'>
       <Tabs>
         <AutoScroll special>
           {orders.map(order => (
-            <Card key={order.id}>
+            <Card key={order.id} id='order-card'>
               {configs?.google_maps_api_key?.value && (
                 <Map>
                   <img
@@ -46,23 +46,25 @@ export const ActiveOrders = (props) => {
                 </Map>
               )}
               <Content>
-                <Logo>
-                  <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
-                </Logo>
+                {order.business?.logo && (
+                  <Logo>
+                    <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
+                  </Logo>
+                )}
                 <BusinessInformation activeOrders>
-                  <h2>{order.business.name}</h2>
+                  <h2>{order.business?.name}</h2>
                   <p name='order_number'>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
                   <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
                 </BusinessInformation>
                 <Price>
                   <h2>
-                    {parsePrice(order.total)}
+                    {parsePrice(order?.total)}
                   </h2>
-                  <p>{getOrderStatus(order.status).value}</p>
+                  <p>{getOrderStatus(order.status)?.value}</p>
                 </Price>
               </Content>
               <OpenOrder>
-                <Button color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.uuid } })}>
+                <Button color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })}>
                   {t('OPEN_ORDER', 'Open order')}
                 </Button>
               </OpenOrder>
