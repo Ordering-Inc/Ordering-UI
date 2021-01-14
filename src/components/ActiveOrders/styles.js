@@ -43,6 +43,7 @@ export const Price = styled.div`
     font-size: 0.8em;
     overflow:hidden;
     text-overflow: ellipsis;
+    margin-left: 5px;
   }
 `
 
