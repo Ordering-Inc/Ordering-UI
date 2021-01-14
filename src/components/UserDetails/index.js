@@ -16,13 +16,11 @@ const UserDetailsUI = (props) => {
   const {
     isEdit,
     formState,
-    userState,
     cleanFormState,
     cartStatus,
     toggleIsEdit,
     validationFields,
-    isUserDetailsEdit,
-    useValidationFields
+    isUserDetailsEdit
   } = props
 
   const [, t] = useLanguage()
@@ -30,40 +28,31 @@ const UserDetailsUI = (props) => {
 
   useEffect(() => {
     if (isUserDetailsEdit) {
-      toggleIsEdit()
+      !isEdit && toggleIsEdit()
     }
   }, [isUserDetailsEdit])
 
   const toggleEditState = () => {
     toggleIsEdit()
-
     cleanFormState({ changes: {} })
   }
 
   return (
     <>
-      {((useValidationFields && validationFields.loading) || userState.loading || formState.loading) && (
-        <Container>
-          <Skeleton height={40} style={{ marginBottom: '10px' }} />
-          <Skeleton height={40} style={{ marginBottom: '10px' }} />
-          <Skeleton height={40} style={{ marginBottom: '10px' }} />
-          <Skeleton height={40} style={{ marginBottom: '10px' }} />
-          <Skeleton height={40} style={{ marginBottom: '10px' }} />
-        </Container>
+      {(validationFields.loading || formState.loading) && (
+        <UserData>
+          <Skeleton width={250} height={25} />
+          <Skeleton width={180} height={25} />
+          <Skeleton width={210} height={25} />
+        </UserData>
       )}
 
-      {userState.result && userState.result.error && (
-        <p>{userState.result.result}</p>
-      )}
-
-      {!((useValidationFields && validationFields.loading) || userState.loading || formState.loading) &&
-        userState.result &&
-        userState.result.result &&
+      {!(validationFields.loading || formState.loading) &&
         (
           <Container>
-            <Header>
+            <Header className='user-form'>
               <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
-              {useValidationFields && cartStatus !== 2 && (
+              {cartStatus !== 2 && (
                 !isEdit ? (
                   <TiPencil className='edit' onClick={() => toggleIsEdit()} />
                 ) : (
@@ -74,10 +63,10 @@ const UserDetailsUI = (props) => {
 
             {!isEdit ? (
               <UserData>
-                <p>{user.name} {user.lastname}</p>
-                <p>{user.email}</p>
+                <p><strong>{t('NAME', 'Name')}:</strong> {user.name} {user?.middle_name} {user.lastname} {user?.second_lastname}</p>
+                <p><strong>{t('EMAIL', 'Email')}:</strong> {user.email}</p>
                 {user.cellphone && (
-                  <p>{user.country_phone_code && `+${user.country_phone_code} `}{user.cellphone}</p>
+                  <p><strong>{t('CELLPHONE', 'Cellphone')}:</strong> {user.country_phone_code && `+${user.country_phone_code} `}{user.cellphone}</p>
                 )}
               </UserData>
             ) : (
@@ -88,7 +77,6 @@ const UserDetailsUI = (props) => {
                 />
               </SideForm>
             )}
-
           </Container>
         )}
     </>
