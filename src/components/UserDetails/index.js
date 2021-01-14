@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import FcCancel from '@meronex/icons/fc/FcCancel'
 import TiPencil from '@meronex/icons/ti/TiPencil'
 import Skeleton from 'react-loading-skeleton'
-import { Container, Header, SideForm } from './styles'
+import { Container, Header, SideForm, UserData } from './styles'
 
 import {
   UserFormDetails as UserFormController,
-  useLanguage
+  useLanguage,
+  useSession
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
@@ -16,6 +17,7 @@ const UserDetailsUI = (props) => {
     isEdit,
     formState,
     userState,
+    cleanFormState,
     cartStatus,
     toggleIsEdit,
     validationFields,
@@ -24,12 +26,19 @@ const UserDetailsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
 
   useEffect(() => {
     if (isUserDetailsEdit) {
       toggleIsEdit()
     }
   }, [isUserDetailsEdit])
+
+  const toggleEditState = () => {
+    toggleIsEdit()
+
+    cleanFormState({ changes: {} })
+  }
 
   return (
     <>
@@ -58,16 +67,28 @@ const UserDetailsUI = (props) => {
                 !isEdit ? (
                   <TiPencil className='edit' onClick={() => toggleIsEdit()} />
                 ) : (
-                  <FcCancel className='cancel' onClick={() => toggleIsEdit()} />
+                  <FcCancel className='cancel' onClick={() => toggleEditState()} />
                 )
               )}
             </Header>
-            <SideForm>
-              <UserFormDetailsUI
-                t={t}
-                {...props}
-              />
-            </SideForm>
+
+            {!isEdit ? (
+              <UserData>
+                <p>{user.name} {user.lastname}</p>
+                <p>{user.email}</p>
+                {user.cellphone && (
+                  <p>{user.country_phone_code && `+${user.country_phone_code} `}{user.cellphone}</p>
+                )}
+              </UserData>
+            ) : (
+              <SideForm>
+                <UserFormDetailsUI
+                  t={t}
+                  {...props}
+                />
+              </SideForm>
+            )}
+
           </Container>
         )}
     </>
