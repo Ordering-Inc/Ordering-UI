@@ -108,7 +108,8 @@ export const getTraduction = key => {
     // Add the key and traduction that you need below
     ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart',
     ERROR_INVALID_COUPON: "The coupon doesn't exist",
-    ERROR_ADD_PRODUCT_VERY_FAR_FOR_PICKUP: 'The business is too far for order type pickup'
+    ERROR_ADD_PRODUCT_VERY_FAR_FOR_PICKUP: 'The business is too far for order type pickup',
+    ERROR_PLACE_PAY_WITH_CARD2: 'An error occurred while trying to pay by card'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)
