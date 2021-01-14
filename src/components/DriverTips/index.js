@@ -14,7 +14,7 @@ const DriverTipsUI = (props) => {
   } = props
 
   return (
-    <DriverTipContainer>
+    <DriverTipContainer id='driver-tip-container'>
       {driverTipsOptions?.length > 0 && driverTipsOptions.map((option, i) => (
         <TipCard
           key={i}
