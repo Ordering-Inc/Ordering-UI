@@ -3,7 +3,7 @@ import { mount } from '@cypress/react'
 import { ProductShare } from '../components/ProductShare'
 import ProviderMock from '../__mocks__/ProviderMock'
 
-describe('Mounting Google Gps Button component', () => {
+describe('Mounting Product sharecomponent', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>
