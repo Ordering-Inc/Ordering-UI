@@ -74,7 +74,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  text-align: end;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  width: 35%;\n  h2 {\n    font-size: 14px;\n    margin-block-end: 1em;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0;\n    margin-block-start: 1em;\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  text-align: end;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  width: 35%;\n  h2 {\n    font-size: 14px;\n    margin-block-end: 1em;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0;\n    margin-block-start: 1em;\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n    margin-left: 5px;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;

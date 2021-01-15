@@ -42,9 +42,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
-  var _theme$images, _theme$images$categor, _theme$images2, _theme$images2$catego, _theme$images3, _theme$images3$catego, _theme$images4, _theme$images4$catego, _theme$images5, _theme$images5$catego;
-
-  var businessTypes = props.businessTypes,
+  var images = props.images,
+      businessTypes = props.businessTypes,
       currentTypeSelected = props.currentTypeSelected,
       handleChangeBusinessType = props.handleChangeBusinessType;
 
@@ -52,30 +51,14 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var theme = (0, _styledComponents.useTheme)();
-  var images = [{
-    image: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$categor = _theme$images.categories) === null || _theme$images$categor === void 0 ? void 0 : _theme$images$categor.all,
-    value: 'all'
-  }, {
-    image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$catego = _theme$images2.categories) === null || _theme$images2$catego === void 0 ? void 0 : _theme$images2$catego.food,
-    value: 'food'
-  }, {
-    image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$catego = _theme$images3.categories) === null || _theme$images3$catego === void 0 ? void 0 : _theme$images3$catego.groceries,
-    value: 'groceries'
-  }, {
-    image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$catego = _theme$images4.categories) === null || _theme$images4$catego === void 0 ? void 0 : _theme$images4$catego.alcohol,
-    value: 'alcohol'
-  }, {
-    image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$catego = _theme$images5.categories) === null || _theme$images5$catego === void 0 ? void 0 : _theme$images5$catego.laundry,
-    value: 'laundry'
-  }];
-
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       load = _useState2[0],
       setLoad = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+  return /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
+    id: "container"
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, businessTypes && businessTypes.length > 0 && businessTypes.map(function (type, i) {
     return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
@@ -116,6 +99,10 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
 };
 
 var BusinessTypeFilter = function BusinessTypeFilter(props) {
+  var _theme$images, _theme$images$categor, _theme$images2, _theme$images2$catego, _theme$images3, _theme$images3$catego, _theme$images4, _theme$images4$catego, _theme$images5, _theme$images5$catego;
+
+  var theme = (0, _styledComponents.useTheme)();
+
   var businessTypeFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessTypeFilterUI,
     businessTypes: props.businessTypes || [{
@@ -132,6 +119,22 @@ var BusinessTypeFilter = function BusinessTypeFilter(props) {
       value: 'groceries'
     }, {
       key: 'Laundry',
+      value: 'laundry'
+    }],
+    images: props.images || [{
+      image: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$categor = _theme$images.categories) === null || _theme$images$categor === void 0 ? void 0 : _theme$images$categor.all,
+      value: 'all'
+    }, {
+      image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$catego = _theme$images2.categories) === null || _theme$images2$catego === void 0 ? void 0 : _theme$images2$catego.food,
+      value: 'food'
+    }, {
+      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$catego = _theme$images3.categories) === null || _theme$images3$catego === void 0 ? void 0 : _theme$images3$catego.groceries,
+      value: 'groceries'
+    }, {
+      image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$catego = _theme$images4.categories) === null || _theme$images4$catego === void 0 ? void 0 : _theme$images4$catego.alcohol,
+      value: 'alcohol'
+    }, {
+      image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$catego = _theme$images5.categories) === null || _theme$images5$catego === void 0 ? void 0 : _theme$images5$catego.laundry,
       value: 'laundry'
     }],
     defaultBusinessType: props.defaultBusinessType || null,

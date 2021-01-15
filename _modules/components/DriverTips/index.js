@@ -23,7 +23,9 @@ var DriverTipsUI = function DriverTipsUI(props) {
   var driverTipsOptions = props.driverTipsOptions,
       optionSelected = props.optionSelected,
       handlerChangeOption = props.handlerChangeOption;
-  return /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, (driverTipsOptions === null || driverTipsOptions === void 0 ? void 0 : driverTipsOptions.length) > 0 && driverTipsOptions.map(function (option, i) {
+  return /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, {
+    id: "driver-tip-container"
+  }, (driverTipsOptions === null || driverTipsOptions === void 0 ? void 0 : driverTipsOptions.length) > 0 && driverTipsOptions.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TipCard, {
       key: i,
       className: "".concat(option === optionSelected ? 'active' : ''),

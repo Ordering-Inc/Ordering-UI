@@ -123,17 +123,20 @@ var PreviousOrders = function PreviousOrders(props) {
     };
   }();
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.OrdersContainer, null, orders.map(function (order) {
-    var _order$business;
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.OrdersContainer, {
+    id: "orders-container"
+  }, orders.map(function (order) {
+    var _order$business, _order$business2, _order$business3, _getOrderStatus;
 
     return /*#__PURE__*/_react.default.createElement(_styles.SingleCard, {
-      key: order.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderPastContent, null, /*#__PURE__*/_react.default.createElement(_styles.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo,
+      key: order.id,
+      id: "order-card"
+    }, /*#__PURE__*/_react.default.createElement(_styles.OrderPastContent, null, ((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) && /*#__PURE__*/_react.default.createElement(_styles.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo,
       alt: "business-logo",
       width: "55px",
       height: "64px"
-    })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, order.business.name)), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name)), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     })), /*#__PURE__*/_react.default.createElement("p", {
       name: "view_order",
@@ -145,7 +148,7 @@ var PreviousOrders = function PreviousOrders(props) {
           }
         });
       }
-    }, t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')))), /*#__PURE__*/_react.default.createElement(_styles.Reorder, null, /*#__PURE__*/_react.default.createElement("p", null, getOrderStatus(order.status).value), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')))), /*#__PURE__*/_react.default.createElement(_styles.Reorder, null, /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleReorder(order.id);

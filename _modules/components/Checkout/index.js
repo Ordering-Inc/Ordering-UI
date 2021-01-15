@@ -164,6 +164,7 @@ var CheckoutUI = function CheckoutUI(props) {
       open: false,
       content: []
     });
+    setIsUserDetailsEdit(false);
   };
 
   var checkValidationFields = function checkValidationFields() {

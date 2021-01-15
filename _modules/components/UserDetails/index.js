@@ -50,48 +50,45 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsUI = function UserDetailsUI(props) {
   var isEdit = props.isEdit,
       formState = props.formState,
-      userState = props.userState,
+      cleanFormState = props.cleanFormState,
       cartStatus = props.cartStatus,
       toggleIsEdit = props.toggleIsEdit,
       validationFields = props.validationFields,
-      isUserDetailsEdit = props.isUserDetailsEdit,
-      useValidationFields = props.useValidationFields;
+      isUserDetailsEdit = props.isUserDetailsEdit;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
   (0, _react.useEffect)(function () {
     if (isUserDetailsEdit) {
-      toggleIsEdit();
+      !isEdit && toggleIsEdit();
     }
   }, [isUserDetailsEdit]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (useValidationFields && validationFields.loading || userState.loading || formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    style: {
-      marginBottom: '10px'
-    }
+
+  var toggleEditState = function toggleEditState() {
+    toggleIsEdit();
+    cleanFormState({
+      changes: {}
+    });
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields.loading || formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 250,
+    height: 25
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    style: {
-      marginBottom: '10px'
-    }
+    width: 180,
+    height: 25
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    style: {
-      marginBottom: '10px'
-    }
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    style: {
-      marginBottom: '10px'
-    }
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    style: {
-      marginBottom: '10px'
-    }
-  })), userState.result && userState.result.error && /*#__PURE__*/_react.default.createElement("p", null, userState.result.result), !(useValidationFields && validationFields.loading || userState.loading || formState.loading) && userState.result && userState.result.result && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), useValidationFields && cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+    width: 210,
+    height: 25
+  })), !(validationFields.loading || formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
+    className: "user-form"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     className: "edit",
     onClick: function onClick() {
       return toggleIsEdit();
@@ -99,9 +96,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_FcCancel.default, {
     className: "cancel",
     onClick: function onClick() {
-      return toggleIsEdit();
+      return toggleEditState();
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({
+  }))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('NAME', 'Name'), ":"), " ", user.name, " ", user === null || user === void 0 ? void 0 : user.middle_name, " ", user.lastname, " ", user === null || user === void 0 ? void 0 : user.second_lastname), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('EMAIL', 'Email'), ":"), " ", user.email), user.cellphone && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CELLPHONE', 'Cellphone'), ":"), " ", user.country_phone_code && "+".concat(user.country_phone_code, " "), user.cellphone)) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({
     t: t
   }, props)))));
 };

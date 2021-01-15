@@ -99,7 +99,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
     bgimage: business === null || business === void 0 ? void 0 : business.header,
-    isSkeleton: isSkeleton
+    isSkeleton: isSkeleton,
+    id: "container"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
