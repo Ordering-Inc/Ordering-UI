@@ -140,7 +140,7 @@ const SignUpFormUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
-  const showInputPhoneNumber = () => validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   return (
     <SignUpContainer isPopup={isPopup}>
@@ -185,7 +185,7 @@ const SignUpFormUI = (props) => {
                     )
                   ))
                 }
-                {!!showInputPhoneNumber() && (
+                {!!showInputPhoneNumber && (
                   <InputPhoneNumber
                     value={userPhoneNumber}
                     setValue={handleChangePhoneNumber}
