@@ -13,11 +13,15 @@ export const PageNotFound = () => {
     <PageNotFoundContainer width={width}>
       <PageNotFoundText>
         <h1>{t('PAGE_NOT_FOUND', 'PAGE NOT FOUND')}</h1>
-        <img src={theme.images?.general?.notFoundLighting} alt='lighting' height='40' width='40' />
+        {theme.images?.general?.notFoundLighting && (
+          <img src={theme.images?.general?.notFoundLighting} alt='lighting' height='40' width='40' />
+        )}
       </PageNotFoundText>
-      <PageNotFoundImage>
-        <img src={theme.images?.general?.notFound404} alt='error404' width='300' height='300' />
-      </PageNotFoundImage>
+      {theme.images?.general?.notFound404 && (
+        <PageNotFoundImage>
+          <img src={theme.images?.general?.notFound404} alt='error404' width='300' height='300' />
+        </PageNotFoundImage>
+      )}
     </PageNotFoundContainer>
   )
 }

@@ -87,9 +87,17 @@ export const BusinessInformationUI = (props) => {
       <BusinessHeader>
         <img src={business.header} alt='business-image' width='444px' height='250px' />
         <BusinessBasicContent>
-          <WrapperBusinessLogo>
-            <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
-          </WrapperBusinessLogo>
+          {business?.logo && (
+            <WrapperBusinessLogo>
+              <BusinessLogo
+                bgimage={
+                  optimizeImage
+                    ? optimizeImage(business?.logo, 'h_200,c_limit')
+                    : business?.logo
+                }
+              />
+            </WrapperBusinessLogo>
+          )}
           <BusinessInfo className='info'>
             <BusinessInfoItem>
               <div>
@@ -99,9 +107,11 @@ export const BusinessInformationUI = (props) => {
                   {business?.reviews?.total}
                 </p>
               </div>
-              <div>
-                <p>{getBusinessType()}</p>
-              </div>
+              {getBusinessType && (
+                <div>
+                  <p>{getBusinessType()}</p>
+                </div>
+              )}
               <div>
                 <>
                   {orderState?.options?.type === 1 ? (
@@ -136,7 +146,7 @@ export const BusinessInformationUI = (props) => {
               <Tab onClick={() => setTabValue('General Info')} active={tabValue === 'General Info'}>
                 {t('GENERAL_INFO', 'General Info')}
               </Tab>
-              {business.reviews && (
+              {business.reviews?.reviews && (
                 <Tab onClick={() => setTabValue('Reviews')} active={tabValue === 'Reviews'}>
                   {t('REVIEWS', 'Reviews')}
                 </Tab>

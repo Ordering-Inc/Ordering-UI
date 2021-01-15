@@ -13,7 +13,12 @@ const GoogleGpsButtonUI = (props) => {
   } = props
 
   return (
-    <GpsButtonStyle type='button' onClick={handleGPS} disabled={(isGoogleButton && !googleReady) || isLoading}>
+    <GpsButtonStyle
+      className={props.className || ''}
+      type='button'
+      disabled={(isGoogleButton && !googleReady) || isLoading}
+      onClick={handleGPS}
+    >
       {isLoading ? (
         IconLoadingButton ? <IconLoadingButton /> : '...'
       ) : (
