@@ -34,3 +34,24 @@ export const SideForm = styled.div`
     align-items: center;
   }
 `
+
+export const UserData = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
+
+  > * {
+    margin: 8px 0;
+    width: 75%;
+  }
+
+  > button {
+    width: auto;
+    background: #F8F8F8;
+  }
+
+`
