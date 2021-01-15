@@ -18,13 +18,16 @@ const BusinessProductsCategoriesUI = (props) => {
 
   const ProductCategories = () => {
     return (
-      <>
-        {categories && categories.length && categories.map(category => (
-          <Tab className={`category ${category.id === 'featured' ? 'special' : ''}`} active={categorySelected?.id === category.id} key={category.name} onClick={() => handlerClickCategory(category)}>
-            {category.name}
-          </Tab>
-        ))}
-      </>
+      categories && categories.length && categories.map(category => (
+        <Tab
+          key={category.name}
+          className={`category ${category.id === 'featured' ? 'special' : ''}`}
+          active={categorySelected?.id === category.id}
+          onClick={() => handlerClickCategory(category)}
+        >
+          {category.name}
+        </Tab>
+      ))
     )
   }
 
