@@ -47,7 +47,7 @@ export const BusinessBasicInformation = (props) => {
   }
 
   return (
-    <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton}>
+    <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container'>
       <BusinessContent>
         <WrapperBusinessLogo>
           {!loading ? (

@@ -96,6 +96,7 @@ const CheckoutUI = (props) => {
       open: false,
       content: []
     })
+    setIsUserDetailsEdit(false)
   }
 
   const checkValidationFields = () => {

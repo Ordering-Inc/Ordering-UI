@@ -1,3 +1,10 @@
 {
-  "baseUrl": "http://localhost:8300"
+  "experimentalComponentTesting": true,
+  "componentFolder": "src/tests",
+  "excludeAfterRemap": false,
+  "specFiles": "*spec.*",
+  "baseUrl": "http://localhost:8300",
+  "env": {
+    "coverage": false
+  }
 }

@@ -46,16 +46,18 @@ export const PreviousOrders = (props) => {
 
   return (
     <>
-      <OrdersContainer>
+      <OrdersContainer id='orders-container'>
         {orders.map(order => (
-          <SingleCard key={order.id}>
+          <SingleCard key={order.id} id='order-card'>
             <OrderPastContent>
-              <PastLogo>
-                <img src={order.business?.logo} alt='business-logo' width='55px' height='64px' />
-              </PastLogo>
+              {order.business?.logo && (
+                <PastLogo>
+                  <img src={order.business?.logo} alt='business-logo' width='55px' height='64px' />
+                </PastLogo>
+              )}
               <BusinessInformation>
                 <WrapperBusinessTitle>
-                  <h2>{order.business.name}</h2>
+                  <h2>{order.business?.name}</h2>
                 </WrapperBusinessTitle>
                 <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
                 <p name='view_order' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.uuid } })}>
@@ -64,7 +66,7 @@ export const PreviousOrders = (props) => {
               </BusinessInformation>
             </OrderPastContent>
             <Reorder>
-              <p>{getOrderStatus(order.status).value}</p>
+              <p>{getOrderStatus(order.status)?.value}</p>
               <Button
                 color='primary'
                 onClick={() => handleReorder(order.id)}
