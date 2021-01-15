@@ -9,23 +9,16 @@ import { useTheme } from 'styled-components'
 
 const BusinessTypeFilterUI = (props) => {
   const {
+    images,
     businessTypes,
     currentTypeSelected,
     handleChangeBusinessType
   } = props
   const [, t] = useLanguage()
-  const theme = useTheme()
-  const images = [
-    { image: theme.images?.categories?.all, value: 'all' },
-    { image: theme.images?.categories?.food, value: 'food' },
-    { image: theme.images?.categories?.groceries, value: 'groceries' },
-    { image: theme.images?.categories?.alcohol, value: 'alcohol' },
-    { image: theme.images?.categories?.laundry, value: 'laundry' }
-  ]
   const [load, setLoad] = useState(false)
 
   return (
-    <TypeContainer>
+    <TypeContainer id='container'>
       <Tabs variant='primary'>
         <AutoScroll>
           {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
@@ -68,6 +61,7 @@ const BusinessTypeFilterUI = (props) => {
 }
 
 export const BusinessTypeFilter = (props) => {
+  const theme = useTheme()
   const businessTypeFilterProps = {
     ...props,
     UIComponent: BusinessTypeFilterUI,
@@ -77,6 +71,13 @@ export const BusinessTypeFilter = (props) => {
       { key: 'Alcohol', value: 'alcohol' },
       { key: 'Groceries', value: 'groceries' },
       { key: 'Laundry', value: 'laundry' }
+    ],
+    images: props.images || [
+      { image: theme.images?.categories?.all, value: 'all' },
+      { image: theme.images?.categories?.food, value: 'food' },
+      { image: theme.images?.categories?.groceries, value: 'groceries' },
+      { image: theme.images?.categories?.alcohol, value: 'alcohol' },
+      { image: theme.images?.categories?.laundry, value: 'laundry' }
     ],
     defaultBusinessType: props.defaultBusinessType || null,
     onChangeBusinessType: props.handleChangeBusinessType
