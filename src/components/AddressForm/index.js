@@ -235,32 +235,34 @@ const AddressFormUI = (props) => {
   }
 
   useEffect(() => {
-    if (!auth) {
-      setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
-      setAddressValue(formState?.changes?.address ?? orderState?.options?.address?.address ?? '')
-      inputNames.forEach(field => formMethods.setValue(field.name, formState?.changes[field.name] || orderState?.options?.address[field.name] || ''))
-      return
-    }
+    if (!orderState.loading) {
+      if (!auth) {
+        setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
+        setAddressValue(formState?.changes?.address ?? orderState?.options?.address?.address ?? '')
+        inputNames.forEach(field => formMethods.setValue(field.name, formState?.changes[field.name] || orderState?.options?.address[field.name] || ''))
+        return
+      }
 
-    if (!formState.loading && formState.result?.error) {
-      setAlertState({
-        open: true,
-        content: formState.result?.result || [t('ERROR', 'Error')]
-      })
-    }
-    setAddressValue(formState?.changes?.address ?? addressState.address?.address ?? '')
-    formMethods.setValue('address', formState?.changes?.address ?? addressState.address?.address ?? '')
-    if (!isEditing) {
-      inputNames.forEach(field => formMethods.setValue(field.name, formState?.changes[field.name] || ''))
-      setLocationChange(formState?.changes?.location)
-    }
+      if (!formState.loading && formState.result?.error) {
+        setAlertState({
+          open: true,
+          content: formState.result?.result || [t('ERROR', 'Error')]
+        })
+      }
+      setAddressValue(formState?.changes?.address ?? addressState.address?.address ?? '')
+      formMethods.setValue('address', formState?.changes?.address ?? addressState.address?.address ?? '')
+      if (!isEditing) {
+        inputNames.forEach(field => formMethods.setValue(field.name, formState?.changes[field.name] || ''))
+        setLocationChange(formState?.changes?.location)
+      }
 
-    if (isEditing) {
-      if (formState?.changes?.location) {
-        const prevLocation = { lat: Math.trunc(locationChange.lat), lng: Math.trunc(locationChange.lng) }
-        const newLocation = { lat: Math.trunc(formState?.changes?.location?.lat), lng: Math.trunc(formState?.changes?.location?.lng) }
-        if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
-          setLocationChange(formState?.changes?.location)
+      if (isEditing) {
+        if (formState?.changes?.location) {
+          const prevLocation = { lat: Math.trunc(locationChange.lat), lng: Math.trunc(locationChange.lng) }
+          const newLocation = { lat: Math.trunc(formState?.changes?.location?.lat), lng: Math.trunc(formState?.changes?.location?.lng) }
+          if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
+            setLocationChange(formState?.changes?.location)
+          }
         }
       }
     }
