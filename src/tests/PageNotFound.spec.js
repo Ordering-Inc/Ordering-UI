@@ -3,7 +3,7 @@ import { mount } from '@cypress/react'
 import { PageNotFound } from '../components/PageNotFound'
 import ProviderMock from '../__mocks__/ProviderMock'
 
-describe('Mounting Search Bar component', () => {
+describe('Mounting Page not found component', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>
