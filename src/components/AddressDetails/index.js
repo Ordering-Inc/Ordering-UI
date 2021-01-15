@@ -16,9 +16,8 @@ import { AddressList } from '../AddressList'
 
 const AddressDetailsUI = (props) => {
   const {
+    addressToShow,
     isCartPending,
-    userAddress,
-    orderType,
     googleMapsUrl
   } = props
 
@@ -43,8 +42,8 @@ const AddressDetailsUI = (props) => {
     <AddressContainer>
       <Header>
         <Text>
-          <h4>{userAddress}</h4>
-          {orderType === 1 && !isCartPending &&
+          <h4>{addressToShow || orderState?.options?.address?.address}</h4>
+          {orderState?.options?.type === 1 && !isCartPending &&
             <TiPencil
               onClick={() => setOpenModal(true)}
             />}
@@ -52,7 +51,7 @@ const AddressDetailsUI = (props) => {
       </Header>
       <WrappMap>
         <Map>
-          <img src={googleMapsUrl} alt='google-maps-location' width='288px' height='162px' />
+          <img src={googleMapsUrl} id='google-maps-image' alt='google-maps-location' width='288px' height='162px' />
         </Map>
       </WrappMap>
 
