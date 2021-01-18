@@ -3,7 +3,7 @@ import { mount } from '@cypress/react'
 import { ProductShare } from '../components/ProductShare'
 import ProviderMock from '../__mocks__/ProviderMock'
 
-describe('Mounting Product sharecomponent', () => {
+describe('Mounting Product share component', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>

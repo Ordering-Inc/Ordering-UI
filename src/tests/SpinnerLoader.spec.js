@@ -5,7 +5,7 @@ import ProviderMock from '../__mocks__/ProviderMock'
 
 const content = 'Loading'
 
-describe('Mounting Google Gps Button component', () => {
+describe('Mounting Spinner Loader component', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>
