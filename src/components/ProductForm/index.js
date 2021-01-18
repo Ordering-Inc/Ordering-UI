@@ -168,9 +168,9 @@ const ProductOptionsUI = (props) => {
                 {product?.ingredients.map(ingredient => (
                   <ProductIngredient
                     key={ingredient.id}
-                    onChange={handleChangeIngredientState}
-                    state={productCart.ingredients[`id:${ingredient.id}`]}
                     ingredient={ingredient}
+                    state={productCart.ingredients[`id:${ingredient.id}`]}
+                    onChange={handleChangeIngredientState}
                   />
                 ))}
               </WrapperIngredients>
