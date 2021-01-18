@@ -131,6 +131,7 @@ export const Header = (props) => {
                   <>
                     {windowSize.width > 768 && (
                       <UserPopover
+                        withLogout
                         open={openPopover.user}
                         isHome={isHome}
                         onClick={() => handleTogglePopover('user')}

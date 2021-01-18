@@ -7,11 +7,33 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
 import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
+import MdcMenuRightOutline from '@meronex/icons/mdc/MdcMenuRightOutline'
+import { capitalize } from '../../utils'
+
+const IconOption = ({ value }) => {
+  switch (value) {
+    case 'profile':
+      return <FaRegAddressCard />
+
+    case 'orders':
+      return <FaRegListAlt />
+
+    default:
+      return <MdcMenuRightOutline />
+  }
+}
+
+const optionsDefault = [
+  { name: 'profile', pathname: '/profile' },
+  { name: 'orders', pathname: '/profile/orders' }
+]
 
 export const UserPopover = (props) => {
   const {
     open,
-    isHome
+    isHome,
+    optionsList,
+    withLogout
   } = props
   const [sessionState] = useSession()
   const [, t] = useLanguage()
@@ -19,6 +41,9 @@ export const UserPopover = (props) => {
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
+
+  const options = optionsList || optionsDefault
+
   const popper = usePopper(referenceElement.current, popperElement.current, {
     placement: 'auto',
     modifiers: [
@@ -86,19 +111,20 @@ export const UserPopover = (props) => {
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
-          <PopoverListLink
-            active={window.location.pathname === '/profile'}
-            onClick={() => handleGoToPage('profile')}
-          >
-            <FaRegAddressCard /> {t('PROFILE', 'Profile')}
-          </PopoverListLink>
-          <PopoverListLink
-            active={window.location.pathname === '/profile/orders'}
-            onClick={() => handleGoToPage('orders')}
-          >
-            <FaRegListAlt /> {t('ORDERS', 'Orders')}
-          </PopoverListLink>
-          <PopoverListItemLogout onClose={props.onClose} />
+          {options && options.length > 0 && (
+            options.map(option => (
+              <PopoverListLink
+                key={option.name}
+                active={window.location.pathname === option.pathname}
+                onClick={() => handleGoToPage(option.name)}
+              >
+                <IconOption value={option.name} /> {t(option.name.toUpperCase(), capitalize(option.name))}
+              </PopoverListLink>
+            ))
+          )}
+          {withLogout && (
+            <PopoverListItemLogout onClose={props.onClose} />
+          )}
         </PopoverList>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
