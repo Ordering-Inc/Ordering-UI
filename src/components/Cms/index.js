@@ -3,6 +3,7 @@ import { CmsContent, useLanguage } from 'ordering-components'
 import { CmsContainer, SkeletonContainer, SkeletonHeader, SkeletonContent, SkeletonInformation, SkeletonSide } from './styles'
 import { NotFoundSource } from '../NotFoundSource'
 import Skeleton from 'react-loading-skeleton'
+
 const CmsUI = (props) => {
   const {
     cmsState,

@@ -73,6 +73,7 @@ export const Select = (props) => {
 
   return (
     <SelectInput
+      id='select-input'
       isHome={isHome}
       disabled={orderState.loading && !notReload}
       onClick={handleSelectClick}
@@ -89,10 +90,11 @@ export const Select = (props) => {
         </Selected>
       )}
       {open && options && (
-        <Options position='right' ref={dropdownReference}>
+        <Options id='list' position='right' ref={dropdownReference}>
           {
             options.map(option => (
               <Option
+                id='item'
                 key={option.value}
                 selected={value === option.value}
                 onClick={() => handleChangeOption(option)}

@@ -51,7 +51,7 @@ export const CartContent = (props) => {
             )}
           </React.Fragment>
         ))}
-      {carts.length === 0 && (
+      {(!carts || carts.length === 0) && (
         <NotCarts>
           <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='122px' />
           <h1>{t('CARTS_NOT_FOUND', 'You don\'t have carts available')}</h1>

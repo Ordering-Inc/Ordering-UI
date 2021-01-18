@@ -115,7 +115,7 @@ export const BusinessItemAccordion = (props) => {
               <BusinessLogo bgimage={business?.logo} />
             </WrapperBusinessLogo>
           )}
-          <ContentInfo>
+          <ContentInfo className='info'>
             <h2>{business?.name}</h2>
             {orderState?.options?.type === 1 ? (
               <span>
@@ -132,7 +132,7 @@ export const BusinessItemAccordion = (props) => {
         </BusinessInfo>
 
         {!isClosed && !!isProducts && (
-          <BusinessTotal>
+          <BusinessTotal className='total'>
             {isValidProducts && orderTotal > 0 && <p>{parsePrice(orderTotal)}</p>}
             <p>{t('CART_TOTAL', 'Total')}</p>
           </BusinessTotal>
@@ -151,12 +151,14 @@ export const BusinessItemAccordion = (props) => {
         )}
 
         <BusinessActions>
-          <span
-            ref={businessStore}
-            onClick={() => handleStoreRedirect(business?.slug)}
-          >
-            <BiStoreAlt color='#CCC' />
-          </span>
+          {handleStoreRedirect && (
+            <span
+              ref={businessStore}
+              onClick={() => handleStoreRedirect(business?.slug)}
+            >
+              <BiStoreAlt color='#CCC' />
+            </span>
+          )}
           {!isClosed && !!isProducts && (
             <>
               {!isCartPending && (

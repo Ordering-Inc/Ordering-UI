@@ -202,7 +202,11 @@ const BusinessProductsListingUI = (props) => {
 
               <WrapContent>
                 <BusinessProductsList
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                  categories={[
+                    { id: null, name: t('ALL', 'All') },
+                    { id: 'featured', name: t('FEATURED', 'Featured') },
+                    ...business?.categories.sort((a, b) => a.rank - b.rank)
+                  ]}
                   category={categorySelected}
                   categoryState={categoryState}
                   businessId={business.id}
