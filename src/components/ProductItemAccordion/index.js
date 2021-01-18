@@ -101,8 +101,8 @@ export const ProductItemAccordion = (props) => {
         className={`product accordion ${setActive}`}
         onClick={(e) => toggleAccordion(e)}
       >
-        <ProductInfo>
-          {isCartProduct && !isCartPending ? (
+        <ProductInfo className='info'>
+          {isCartProduct && !isCartPending && getProductMax ? (
             <ProductSelect
               ref={productSelect}
               value={product.quantity}
@@ -154,7 +154,7 @@ export const ProductItemAccordion = (props) => {
 
         {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
           <ProductPriceSection>
-            <ProductPrice>
+            <ProductPrice className='prod-price'>
               <span>
                 {parsePrice(product.total || product.price)}
               </span>
