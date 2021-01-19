@@ -90,7 +90,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     })) || [];
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: category.id
-    }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("h3", null, category.name), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
+    }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
+      id: "container"
+    }, /*#__PURE__*/_react.default.createElement("h3", null, category.name), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: product.id,
         isSoldOut: product.inventoried && !product.quantity,

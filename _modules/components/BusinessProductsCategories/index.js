@@ -46,16 +46,16 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       openBusinessInformation = props.openBusinessInformation;
 
   var ProductCategories = function ProductCategories() {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categories && categories.length && categories.map(function (category) {
+    return categories && categories.length && categories.map(function (category) {
       return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+        key: category.name,
         className: "category ".concat(category.id === 'featured' ? 'special' : ''),
         active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
-        key: category.name,
         onClick: function onClick() {
           return handlerClickCategory(category);
         }
       }, category.name);
-    }));
+    });
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {

@@ -71,7 +71,7 @@ var StripeRedirectFormUI = function StripeRedirectFormUI(props) {
     }, paymethod.name);
   })), errors.type && errors.type.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('FIELD_REQUIRED', 'This field is required'))), /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('ACCOUNT_HOLDER', 'Account holder')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "name",
-    defaultValue: user.name,
+    defaultValue: user === null || user === void 0 ? void 0 : user.name,
     placeholder: t('TYPE_ACCOUNT_HOLDER', 'Type an Account holder'),
     ref: register({
       required: true
@@ -80,7 +80,7 @@ var StripeRedirectFormUI = function StripeRedirectFormUI(props) {
   }), errors.name && errors.name.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('FIELD_REQUIRED', 'This field is required'))), /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "email",
     type: "email",
-    defaultValue: user.email,
+    defaultValue: user === null || user === void 0 ? void 0 : user.email,
     placeholder: t('TYPE_AN_EMAIL', 'Type an email'),
     ref: register({
       required: true

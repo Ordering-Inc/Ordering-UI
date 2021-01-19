@@ -25,6 +25,10 @@ var _FaRegListAlt = _interopRequireDefault(require("@meronex/icons/fa/FaRegListA
 
 var _FaSignOutAlt = _interopRequireDefault(require("@meronex/icons/fa/FaSignOutAlt"));
 
+var _MdcMenuRightOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcMenuRightOutline"));
+
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -51,11 +55,36 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var IconOption = function IconOption(_ref) {
+  var value = _ref.value;
+
+  switch (value) {
+    case 'profile':
+      return /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null);
+
+    case 'orders':
+      return /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null);
+
+    default:
+      return /*#__PURE__*/_react.default.createElement(_MdcMenuRightOutline.default, null);
+  }
+};
+
+var optionsDefault = [{
+  name: 'profile',
+  pathname: '/profile'
+}, {
+  name: 'orders',
+  pathname: '/profile/orders'
+}];
+
 var UserPopover = function UserPopover(props) {
   var _sessionState$user, _sessionState$user2;
 
   var open = props.open,
-      isHome = props.isHome;
+      isHome = props.isHome,
+      optionsList = props.optionsList,
+      withLogout = props.withLogout;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -72,6 +101,7 @@ var UserPopover = function UserPopover(props) {
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
+  var options = optionsList || optionsDefault;
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
     placement: 'auto',
     modifiers: [{
@@ -151,17 +181,17 @@ var UserPopover = function UserPopover(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
-    active: window.location.pathname === '/profile',
-    onClick: function onClick() {
-      return handleGoToPage('profile');
-    }
-  }, /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null), " ", t('PROFILE', 'Profile')), /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
-    active: window.location.pathname === '/profile/orders',
-    onClick: function onClick() {
-      return handleGoToPage('orders');
-    }
-  }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null), " ", t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {
+  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, options && options.length > 0 && options.map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
+      key: option.name,
+      active: window.location.pathname === option.pathname,
+      onClick: function onClick() {
+        return handleGoToPage(option.name);
+      }
+    }, /*#__PURE__*/_react.default.createElement(IconOption, {
+      value: option.name
+    }), " ", t(option.name.toUpperCase(), (0, _utils.capitalize)(option.name)));
+  }), withLogout && /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {
     onClose: props.onClose
   })), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",

@@ -115,14 +115,17 @@ var Select = function Select(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+    id: "select-input",
     isHome: isHome,
     disabled: orderState.loading && !notReload,
     onClick: handleSelectClick
   }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+    id: "list",
     position: "right",
     ref: dropdownReference
   }, options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
+      id: "item",
       key: option.value,
       selected: value === option.value,
       onClick: function onClick() {

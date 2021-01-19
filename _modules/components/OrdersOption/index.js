@@ -17,6 +17,8 @@ var _ActiveOrders = require("../ActiveOrders");
 
 var _PreviousOrders = require("../PreviousOrders");
 
+var _NotFoundSource = require("../NotFoundSource");
+
 var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
@@ -70,6 +72,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var loading = orderList.loading,
       error = orderList.error,
       orders = orderList.orders;
+  var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -134,12 +137,11 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     });
     setOrdersSorted(ordersSorted);
   }, [orders]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.ImageNotFound, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders,
-    alt: "empty-".concat(activeOrders ? 'active' : 'past', "-orders"),
-    width: "300px",
-    height: "300px"
-  })), loading && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    image: imageFails,
+    content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
+    conditioned: true
+  }), loading && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     activeOrders: activeOrders,
     isSkeleton: true
   }, activeOrders ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {

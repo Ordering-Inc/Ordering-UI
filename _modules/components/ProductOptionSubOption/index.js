@@ -96,7 +96,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
 
     toggleSelect();
 
-    if (balance === option.max && (option === null || option === void 0 ? void 0 : (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length) > balance && !(option.min === 1 && option.max === 1)) {
+    if (balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 ? void 0 : (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1)) {
       setShowMessage(true);
     }
   };
@@ -104,27 +104,27 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
   (0, _react.useEffect)(function () {
     var _option$suboptions2;
 
-    if (!(balance === option.max && (option === null || option === void 0 ? void 0 : (_option$suboptions2 = option.suboptions) === null || _option$suboptions2 === void 0 ? void 0 : _option$suboptions2.length) > balance && !(option.min === 1 && option.max === 1))) {
+    if (!(balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 ? void 0 : (_option$suboptions2 = option.suboptions) === null || _option$suboptions2 === void 0 ? void 0 : _option$suboptions2.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1))) {
       setShowMessage(false);
     }
   }, [balance]);
-  var disableIncrement = option.limit_suboptions_by_max ? balance === option.max : state.quantity === suboption.max || !state.selected && balance === option.max;
-  var price = option.with_half_option && suboption.half_price && state.position !== 'whole' ? suboption.half_price : suboption.price;
+  var disableIncrement = (option === null || option === void 0 ? void 0 : option.limit_suboptions_by_max) ? balance === (option === null || option === void 0 ? void 0 : option.max) : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
+  var price = (option === null || option === void 0 ? void 0 : option.with_half_option) && (suboption === null || suboption === void 0 ? void 0 : suboption.half_price) && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     onClick: function onClick() {
       return handleSuboptionClick();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, option.min === 0 && option.max === 1 || option.max > 1 ? (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
   }) : (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
     disabled: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option.max))), option.allow_suboption_quantity && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))), (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
     disabled: state.quantity === 0,
     onClick: handleDecrement
   }), state.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {
     disabled: disableIncrement,
     onClick: handleIncrement
-  })), option.with_half_option && /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
+  })), (option === null || option === void 0 ? void 0 : option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
     className: ['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),

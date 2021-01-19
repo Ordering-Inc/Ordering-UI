@@ -66,7 +66,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _theme$images, _theme$images$logos, _validationFields$fie8, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2;
+  var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _theme$images, _theme$images$logos, _validationFields$fie8, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -215,12 +215,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     handleChangeInput(phoneNumber, true);
   };
 
-  var showInputPhoneNumber = function showInputPhoneNumber() {
-    var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7;
-
-    return (_validationFields$fie4 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.checkout) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.enabled) !== null && _validationFields$fie4 !== void 0 ? _validationFields$fie4 : false;
-  };
-
+  var showInputPhoneNumber = (_validationFields$fie4 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.checkout) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.enabled) !== null && _validationFields$fie4 !== void 0 ? _validationFields$fie4 : false;
   return /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_SIGN_UP', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
@@ -255,7 +250,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       required: field.required,
       autoComplete: "off"
     });
-  }), !!showInputPhoneNumber() && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber

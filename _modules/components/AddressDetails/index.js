@@ -46,9 +46,10 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var isCartPending = props.isCartPending,
-      userAddress = props.userAddress,
-      orderType = props.orderType,
+  var _orderState$options2, _orderState$options2$, _orderState$options3;
+
+  var addressToShow = props.addressToShow,
+      isCartPending = props.isCartPending,
       googleMapsUrl = props.googleMapsUrl;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
@@ -91,12 +92,13 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       return setOpenModal(false);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h4", null, userAddress), orderType === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     onClick: function onClick() {
       return setOpenModal(true);
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
+    id: "google-maps-image",
     alt: "google-maps-location",
     width: "288px",
     height: "162px"

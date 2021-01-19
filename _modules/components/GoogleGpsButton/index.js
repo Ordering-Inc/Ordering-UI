@@ -27,9 +27,10 @@ var GoogleGpsButtonUI = function GoogleGpsButtonUI(props) {
       IconButton = props.IconButton,
       IconLoadingButton = props.IconLoadingButton;
   return /*#__PURE__*/_react.default.createElement(_styles.GpsButtonStyle, {
+    className: props.className || '',
     type: "button",
-    onClick: handleGPS,
-    disabled: isGoogleButton && !googleReady || isLoading
+    disabled: isGoogleButton && !googleReady || isLoading,
+    onClick: handleGPS
   }, isLoading ? IconLoadingButton ? /*#__PURE__*/_react.default.createElement(IconLoadingButton, null) : '...' : IconButton ? /*#__PURE__*/_react.default.createElement(IconButton, null) : 'GPS');
 };
 

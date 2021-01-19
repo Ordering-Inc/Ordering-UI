@@ -15,17 +15,17 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var NotNetworkConnectivity = function NotNetworkConnectivity() {
-  var _theme$images, _theme$images$general;
+var NotNetworkConnectivity = function NotNetworkConnectivity(props) {
+  var _props$isOnline, _theme$images, _theme$images$general;
 
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
-    style: {
-      display: onlineStatus ? 'none' : 'flex'
-    }
+    id: "container",
+    isOnline: (_props$isOnline = props.isOnline) !== null && _props$isOnline !== void 0 ? _props$isOnline : onlineStatus
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notNetwork,
+    id: "not-network",
+    src: props.image || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notNetwork),
     alt: "Not network",
     width: "640",
     height: "320"

@@ -30,7 +30,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PageNotFound = function PageNotFound() {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera;
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera, _theme$images4, _theme$images4$genera;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -43,13 +43,13 @@ var PageNotFound = function PageNotFound() {
 
   return /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundContainer, {
     width: width
-  }, /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundText, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAGE_NOT_FOUND', 'PAGE NOT FOUND')), /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFoundLighting,
+  }, /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundText, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAGE_NOT_FOUND', 'PAGE NOT FOUND')), ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFoundLighting) && /*#__PURE__*/_react.default.createElement("img", {
+    src: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.notFoundLighting,
     alt: "lighting",
     height: "40",
     width: "40"
-  })), /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundImage, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.notFound404,
+  })), ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.notFound404) && /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundImage, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.notFound404,
     alt: "error404",
     width: "300",
     height: "300"

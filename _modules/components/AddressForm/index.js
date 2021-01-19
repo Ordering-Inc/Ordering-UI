@@ -86,7 +86,7 @@ var inputNames = [{
 }];
 
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _addressState$address5, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _addressState$address12, _formState$changes17, _ref8, _formState$changes$in, _formState$changes18, _ref9, _formState$changes$zi, _formState$changes19, _ref10, _formState$changes$ad5, _formState$changes20, _orderState$options5, _orderState$options5$;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _addressState$address5, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _addressState$address12, _formState$changes17, _ref8, _formState$changes$in, _formState$changes18, _ref9, _formState$changes$zi, _formState$changes19, _ref10, _formState$changes$ad5, _formState$changes20, _orderState$options6, _orderState$options6$;
 
   var addressesList = props.addressesList,
       googleMapsControls = props.googleMapsControls,
@@ -395,9 +395,9 @@ var AddressFormUI = function AddressFormUI(props) {
       setLocationChange((_ref3 = (_formState$changes$lo2 = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.location) !== null && _formState$changes$lo2 !== void 0 ? _formState$changes$lo2 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location) !== null && _ref3 !== void 0 ? _ref3 : '');
       setAddressValue((_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.address) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) !== null && _ref4 !== void 0 ? _ref4 : '');
       inputNames.forEach(function (field) {
-        var _orderState$options3;
+        var _orderState$options3, _orderState$options4;
 
-        return formMethods.setValue(field.name, (formState === null || formState === void 0 ? void 0 : formState.changes[field.name]) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address[field.name]) || '');
+        return formMethods.setValue(field.name, (formState === null || formState === void 0 ? void 0 : formState.changes[field.name]) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address[field.name]) || '');
       });
       return;
     }
@@ -458,9 +458,9 @@ var AddressFormUI = function AddressFormUI(props) {
   }, [addressState]);
   (0, _react.useEffect)(function () {
     if (!auth) {
-      var _ref7, _formState$changes$lo3, _formState$changes16, _orderState$options4, _orderState$options4$;
+      var _ref7, _formState$changes$lo3, _formState$changes16, _orderState$options5, _orderState$options5$;
 
-      setLocationChange((_ref7 = (_formState$changes$lo3 = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.location) !== null && _formState$changes$lo3 !== void 0 ? _formState$changes$lo3 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location) !== null && _ref7 !== void 0 ? _ref7 : '');
+      setLocationChange((_ref7 = (_formState$changes$lo3 = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.location) !== null && _formState$changes$lo3 !== void 0 ? _formState$changes$lo3 : orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.location) !== null && _ref7 !== void 0 ? _ref7 : '');
     }
   }, []);
   /** Form events control */
@@ -626,7 +626,7 @@ var AddressFormUI = function AddressFormUI(props) {
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, !formState.loading ? isEditing || !auth && ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.address) ? t('UPDATE', 'Update') : t('ADD', 'Add') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? isEditing || !auth && ((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.address) ? t('UPDATE', 'Update') : t('ADD', 'Add') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ADDRESS', 'Address'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

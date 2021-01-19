@@ -207,6 +207,7 @@ var Header = function Header(props) {
     },
     highlight: 1
   }, t('SIGN_UP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+    withLogout: true,
     open: openPopover.user,
     isHome: isHome,
     onClick: function onClick() {

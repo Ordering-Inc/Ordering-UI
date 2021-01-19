@@ -214,9 +214,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
       key: ingredient.id,
-      onChange: handleChangeIngredientState,
+      ingredient: ingredient,
       state: productCart.ingredients["id:".concat(ingredient.id)],
-      ingredient: ingredient
+      onChange: handleChangeIngredientState
     });
   })), product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
     return extra.options.map(function (option) {

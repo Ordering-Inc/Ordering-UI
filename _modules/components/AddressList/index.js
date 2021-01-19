@@ -231,7 +231,9 @@ var AddressListUI = function AddressListUI(props) {
       return setAddressOpen(false);
     },
     onSaveAddress: handleSaveAddress
-  })), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, uniqueAddressesList.map(function (address) {
+  })), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+    id: "list"
+  }, uniqueAddressesList.map(function (address) {
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
       key: address === null || address === void 0 ? void 0 : address.id
     }, /*#__PURE__*/_react.default.createElement("div", {

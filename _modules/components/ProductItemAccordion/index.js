@@ -153,7 +153,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     onClick: function onClick(e) {
       return toggleAccordion(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, isCartProduct && !isCartPending ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, {
+    className: "info"
+  }, isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
     ref: productSelect,
     value: product.quantity,
     onChange: function onChange(e) {
@@ -181,7 +183,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     onClick: function onClick() {
       return onDeleteProduct(product);
     }
-  })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+  })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
+    className: "prod-price"
+  }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
   }))), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
