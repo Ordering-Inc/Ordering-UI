@@ -55,23 +55,23 @@ const ProductOptionSubOptionUI = (props) => {
 
   const handleSuboptionClick = () => {
     toggleSelect()
-    if (balance === option.max && option?.suboptions?.length > balance && !(option.min === 1 && option.max === 1)) {
+    if (balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1)) {
       setShowMessage(true)
     }
   }
 
   useEffect(() => {
-    if (!(balance === option.max && option?.suboptions?.length > balance && !(option.min === 1 && option.max === 1))) {
+    if (!(balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1))) {
       setShowMessage(false)
     }
   }, [balance])
 
-  const disableIncrement = option.limit_suboptions_by_max ? balance === option.max : state.quantity === suboption.max || (!state.selected && balance === option.max)
-  const price = option.with_half_option && suboption.half_price && state.position !== 'whole' ? suboption.half_price : suboption.price
+  const disableIncrement = option?.limit_suboptions_by_max ? balance === option?.max : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
+  const price = option?.with_half_option && suboption?.half_price && state.position !== 'whole' ? suboption?.half_price : suboption?.price
   return (
     <Container onClick={() => handleSuboptionClick()}>
       <IconControl>
-        {((option.min === 0 && option.max === 1) || option.max > 1) ? (
+        {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
           state?.selected ? (
             <MdCheckBox />
           ) : (
@@ -86,10 +86,10 @@ const ProductOptionSubOptionUI = (props) => {
         )}
       </IconControl>
       <Text>
-        <div>{suboption.name}</div>
-        {showMessage && <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option.max}`}</span>}
+        <div>{suboption?.name}</div>
+        {showMessage && <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}</span>}
       </Text>
-      {option.allow_suboption_quantity && (
+      {option?.allow_suboption_quantity && (
         <QuantityControl>
           <BsDashCircle
             disabled={state.quantity === 0}
@@ -103,7 +103,7 @@ const ProductOptionSubOptionUI = (props) => {
         </QuantityControl>
       )}
       {
-        option.with_half_option && (
+        option?.with_half_option && (
           <PositionControl>
             <BsCircleHalf
               className={['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}

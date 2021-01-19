@@ -10,7 +10,16 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
+Cypress.Commands.add('login', (email, password) => {
+  cy.visit('/signin')
+  cy.server({ method: 'POST' })
+  cy.route('/*/*/*/auth**').as('postLogin')
+  cy.get('div').contains('Login with Email').click()
+  cy.get('input[name=email]').type(email)
+  cy.get('input[name=password]').type(password)
+  cy.get('button').contains('Login').click()
+  cy.wait('@postLogin').its('status').should('eq', 200)
+})
 //
 //
 // -- This is a child command --

@@ -4,12 +4,12 @@ import { OrderList, useLanguage } from 'ordering-components'
 
 import { ActiveOrders } from '../ActiveOrders'
 import { PreviousOrders } from '../PreviousOrders'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { useTheme } from 'styled-components'
 
 import {
   OptionTitle,
-  ImageNotFound,
   OrdersContainer,
   SkeletonOrder,
   SkeletonCard,
@@ -33,6 +33,10 @@ const OrdersOptionUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const { loading, error, orders } = orderList
+
+  const imageFails = activeOrders
+    ? theme.images?.general?.emptyActiveOrders
+    : theme.images?.general?.emptyPastOrders
 
   const [ordersSorted, setOrdersSorted] = useState([])
 
@@ -79,14 +83,11 @@ const OrdersOptionUI = (props) => {
         </h1>
       </OptionTitle>
       {!loading && ordersSorted.length === 0 && (
-        <ImageNotFound>
-          <img
-            src={activeOrders ? theme.images?.general?.emptyActiveOrders : theme.images?.general?.emptyPastOrders}
-            alt={`empty-${activeOrders ? 'active' : 'past'}-orders`}
-            width='300px'
-            height='300px'
-          />
-        </ImageNotFound>
+        <NotFoundSource
+          image={imageFails}
+          content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
+          conditioned
+        />
       )}
 
       {loading && (

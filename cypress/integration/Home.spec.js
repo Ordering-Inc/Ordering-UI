@@ -15,9 +15,9 @@ context('Home Page', () => {
   })
 
   it('Going to business', () => {
-    cy.get('input[name="address-selection"]').click({ force: true })
+    cy.get('[name="address-selection"]').click({ force: true })
     cy.get('.address-form').should('be.visible')
-    cy.get('input[name=address]').type('5th Ave, New York, NY, EE. UU.')
+    cy.get('.input-autocomplete').type('5th Ave, New York, NY, EE. UU.', { force: true })
     cy.get('form').submit()
   })
 })
