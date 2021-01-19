@@ -12,43 +12,14 @@ const OrderTypeSelectorHeaderUI = (props) => {
   const {
     handleChangeOrderType,
     typeSelected,
-    configTypes
+    configTypes,
+    orderTypes
   } = props
-
-  const [, t] = useLanguage()
-
-  const orderTypes = [
-    {
-      value: 1,
-      content: <Option><MdcTruckDeliveryOutline /><ContentOption>{t('DELIVERY', 'Delivery')}</ContentOption></Option>,
-      showOnSelected: <Option><MdcTruckDeliveryOutline /><SelectedOption>{t('DELIVERY', 'Delivery')}</SelectedOption></Option>
-    },
-    {
-      value: 2,
-      content: <Option><FaTruckPickup /><ContentOption>{t('PICKUP', 'Pickup')}</ContentOption></Option>,
-      showOnSelected: <Option><FaTruckPickup /><SelectedOption>{t('PICKUP', 'Pickup')}</SelectedOption></Option>
-    },
-    {
-      value: 3,
-      content: <Option><AiFillShop /><ContentOption>{t('EAT_IN', 'Eat in')}</ContentOption></Option>,
-      showOnSelected: <Option><AiFillShop /><SelectedOption>{t('EAT_IN', 'Eat in')}</SelectedOption></Option>
-    },
-    {
-      value: 4,
-      content: <Option><GiFoodTruck /><ContentOption>{t('CURBSIDE', 'Curbside')}</ContentOption></Option>,
-      showOnSelected: <Option><GiFoodTruck /><SelectedOption>{t('CURBSIDE', 'Curbside')}</SelectedOption></Option>
-    },
-    {
-      value: 5,
-      content: <Option><FaCarSide /><ContentOption>{t('DRIVE_THRU', 'Drive thru')}</ContentOption></Option>,
-      showOnSelected: <Option><FaCarSide /><SelectedOption>{t('DRIVE_THRU', 'Drive thru')}</SelectedOption></Option>
-    }
-  ]
 
   return (
     <OrderTypeWrapper>
       <Select
-        options={orderTypes.filter(type => configTypes.includes(type.value))}
+        options={orderTypes.filter(type => configTypes?.includes(type.value))}
         defaultValue={typeSelected}
         onChange={(orderType) => handleChangeOrderType(orderType)}
       />
@@ -57,9 +28,38 @@ const OrderTypeSelectorHeaderUI = (props) => {
 }
 
 export const OrderTypeSelectorHeader = (props) => {
+  const [, t] = useLanguage()
+
   const orderTypeProps = {
     ...props,
-    UIComponent: OrderTypeSelectorHeaderUI
+    UIComponent: OrderTypeSelectorHeaderUI,
+    orderTypes: props.orderTypes || [
+      {
+        value: 1,
+        content: <Option><MdcTruckDeliveryOutline /><ContentOption>{t('DELIVERY', 'Delivery')}</ContentOption></Option>,
+        showOnSelected: <Option><MdcTruckDeliveryOutline /><SelectedOption>{t('DELIVERY', 'Delivery')}</SelectedOption></Option>
+      },
+      {
+        value: 2,
+        content: <Option><FaTruckPickup /><ContentOption>{t('PICKUP', 'Pickup')}</ContentOption></Option>,
+        showOnSelected: <Option><FaTruckPickup /><SelectedOption>{t('PICKUP', 'Pickup')}</SelectedOption></Option>
+      },
+      {
+        value: 3,
+        content: <Option><AiFillShop /><ContentOption>{t('EAT_IN', 'Eat in')}</ContentOption></Option>,
+        showOnSelected: <Option><AiFillShop /><SelectedOption>{t('EAT_IN', 'Eat in')}</SelectedOption></Option>
+      },
+      {
+        value: 4,
+        content: <Option><GiFoodTruck /><ContentOption>{t('CURBSIDE', 'Curbside')}</ContentOption></Option>,
+        showOnSelected: <Option><GiFoodTruck /><SelectedOption>{t('CURBSIDE', 'Curbside')}</SelectedOption></Option>
+      },
+      {
+        value: 5,
+        content: <Option><FaCarSide /><ContentOption>{t('DRIVE_THRU', 'Drive thru')}</ContentOption></Option>,
+        showOnSelected: <Option><FaCarSide /><SelectedOption>{t('DRIVE_THRU', 'Drive thru')}</SelectedOption></Option>
+      }
+    ]
   }
 
   return <OrderTypeControl {...orderTypeProps} />

@@ -62,10 +62,10 @@ export const BusinessReviewsUI = (props) => {
           <WrapperSelect>
             {!reviewsList.loading ? <Select options={options} defaultValue={options[0].value} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} /> : <Skeleton width={200} height={30} />}
           </WrapperSelect>
-          <Content>
+          <Content id='content'>
             <h3>{!reviewsList.loading ? <><AiOutlineStar color='#D81212' />{stars}</> : <Skeleton width={100} height={30} />}</h3>
             {!reviewsList.loading ? reviewsList?.reviews.map((review) => (
-              <Review key={review.id}>
+              <Review key={review.id} id='review'>
                 <ReviewContainer>
                   <Comments>
                     <div>

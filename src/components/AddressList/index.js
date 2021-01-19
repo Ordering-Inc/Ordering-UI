@@ -177,7 +177,7 @@ const AddressListUI = (props) => {
       }
 
       {!addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && addressList?.addresses?.length > 0 && (
-        <AddressListUl>
+        <AddressListUl id='list'>
           {uniqueAddressesList.map(address => (
             <AddressItem key={address?.id}>
               <div className='wrapAddress' onClick={() => handleSetAddress(address)}>

@@ -238,7 +238,14 @@ const AddressFormUI = (props) => {
     if (!auth) {
       setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
       setAddressValue(formState?.changes?.address ?? orderState?.options?.address?.address ?? '')
-      inputNames.forEach(field => formMethods.setValue(field.name, formState?.changes[field.name] || orderState?.options?.address[field.name] || ''))
+      inputNames.forEach(field =>
+        formMethods.setValue(
+          field.name,
+          formState?.changes[field.name] ||
+            (orderState?.options?.address && orderState?.options?.address[field.name]) ||
+            ''
+        )
+      )
       return
     }
 

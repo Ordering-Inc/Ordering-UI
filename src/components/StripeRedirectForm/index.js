@@ -47,7 +47,7 @@ const StripeRedirectFormUI = (props) => {
         <label>{t('ACCOUNT_HOLDER', 'Account holder')}</label>
         <Input
           name='name'
-          defaultValue={user.name}
+          defaultValue={user?.name}
           placeholder={t('TYPE_ACCOUNT_HOLDER', 'Type an Account holder')}
           ref={
             register({
@@ -66,7 +66,7 @@ const StripeRedirectFormUI = (props) => {
         <Input
           name='email'
           type='email'
-          defaultValue={user.email}
+          defaultValue={user?.email}
           placeholder={t('TYPE_AN_EMAIL', 'Type an email')}
           ref={
             register({

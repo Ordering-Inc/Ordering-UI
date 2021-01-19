@@ -7,14 +7,14 @@ import {
   Image
 } from './styles'
 
-export const NotNetworkConnectivity = () => {
+export const NotNetworkConnectivity = (props) => {
   const onlineStatus = useOnlineStatus()
   const theme = useTheme()
 
   return (
-    <Container style={{ display: onlineStatus ? 'none' : 'flex' }}>
+    <Container id='container' isOnline={props.isOnline ?? onlineStatus}>
       <Image>
-        <img src={theme.images?.general?.notNetwork} alt='Not network' width='640' height='320' />
+        <img id='not-network' src={props.image || theme.images?.general?.notNetwork} alt='Not network' width='640' height='320' />
       </Image>
     </Container>
   )
