@@ -12,7 +12,7 @@ describe('Mounting Order Reviews component', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>
-        <ReviewOrder order={order} setIsReviewed={setIsReviewed} isTesting />
+        <ReviewOrder order={order} setIsReviewed={setIsReviewed} />
       </ProviderMock>
     )
     cy.get(':nth-child(6) > .sc-AxhUy > :nth-child(1)').click()
