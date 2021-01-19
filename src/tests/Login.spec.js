@@ -9,8 +9,8 @@ describe('Mounting Login component', () => {
       <ProviderMock>
         <LoginForm
           useLoginByCellphone
-          elementLinkToSignup={<a to='/signup'>Create account</a>}
-          elementLinkToForgotPassword={<a to='/password/forgot'>Reset password</a>}
+          elementLinkToSignup={<a>Create account</a>}
+          elementLinkToForgotPassword={<a>Reset password</a>}
         />
       </ProviderMock>
     )

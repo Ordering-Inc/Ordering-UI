@@ -26,7 +26,7 @@ describe('Mounting Messages component', () => {
         id: 2500,
         type: 2,
         created_at: '2021-01-14 21:28:50',
-        comment: 'test'
+        comment: 'test 1'
       },
       {
         author: { id: 1, name: 'super', lastname: 'admin', level: 1 },
@@ -35,7 +35,7 @@ describe('Mounting Messages component', () => {
         id: 2501,
         created_at: '2021-01-14 21:28:50',
         type: 2,
-        comment: 'test'
+        comment: 'test 2'
       }
     ]
   }
@@ -45,5 +45,11 @@ describe('Mounting Messages component', () => {
         <Messages business order={order} messagesToShow={messages} orderId={order.id} />
       </ProviderMock>
     )
+    cy.get('h1').should('be.visible')
+    cy.get('div').contains('Order placed').should('be.visible')
+    cy.get('div').contains('test 1').should('be.visible')
+    cy.get('div').contains('test 2').should('be.visible')
+    cy.get('#message').type('test 3')
+    cy.get('button[type=submit]').click()
   })
 })
