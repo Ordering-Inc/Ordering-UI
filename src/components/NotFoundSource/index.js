@@ -9,21 +9,26 @@ import {
 
 export const NotFoundSource = (props) => {
   const {
+    image,
     content,
     btnTitle,
+    conditioned,
     onClickButton
   } = props
 
   const theme = useTheme()
 
+  const errorImage = image || theme.images?.general?.notFound
+
   return (
     <NotFound id='not-found-source'>
-      {theme.images?.general?.notFound && (
+      {errorImage && (
         <NotFoundImage>
-          <img src={theme.images?.general?.notFound} alt='Not Found' width='300' height='260' />
+          <img src={errorImage} alt='Not Found' width='300' height='260' />
         </NotFoundImage>
       )}
-      {content && <h1>{content}</h1>}
+      {content && conditioned && !errorImage && <h1>{content}</h1>}
+      {content && !conditioned && <h1>{content}</h1>}
       {!onClickButton && props.children && (
         props.children
       )}

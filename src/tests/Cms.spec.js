@@ -1,20 +1,18 @@
 import React from 'react'
 import { mount } from '@cypress/react'
-import { SpinnerLoader } from '../components/SpinnerLoader'
+import { Cms } from '../components/Cms'
 import ProviderMock from '../__mocks__/ProviderMock'
 
-const content = 'Loading'
+const content = 'Sorry, the selected page was not found'
 
-describe('Mounting Spinner Loader component', () => {
+describe('Mounting Cms component', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>
-        <SpinnerLoader
-          content={content}
-        />
+        <Cms pageSlug='testing' />
       </ProviderMock>
     )
     cy.get('h1').contains(content).should('be.visible')
-    cy.get('div.spinner').should('be.visible')
+    cy.get('Button').contains('Go to pages list').should('be.visible')
   })
 })

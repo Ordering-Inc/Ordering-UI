@@ -18,7 +18,7 @@ const business = {
   open: true
 }
 
-describe('Mounting Floating button component', () => {
+describe('Mounting Business Controller component', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>
