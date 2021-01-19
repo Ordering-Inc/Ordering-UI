@@ -53,6 +53,7 @@ const getPayIcon = (method) => {
 
 const PaymentOptionsUI = (props) => {
   const {
+    isLoading,
     orderTotal,
     paymethodSelected,
     paymethodData,
@@ -75,7 +76,7 @@ const PaymentOptionsUI = (props) => {
           paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
             <PayCard
               key={paymethod.id}
-              className={`${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
+              className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
               onClick={() => handlePaymethodClick(paymethod)}
             >
               {getPayIcon(paymethod.id)}
@@ -86,8 +87,8 @@ const PaymentOptionsUI = (props) => {
           ))
         )}
 
-        {paymethodsList.loading && (
-          [...Array(6).keys()].map(i => (
+        {(paymethodsList.loading || isLoading) && (
+          [...Array(5).keys()].map(i => (
             <PayCard key={i} isSkeleton>
               <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
             </PayCard>
@@ -100,7 +101,10 @@ const PaymentOptionsUI = (props) => {
           />
         )}
 
-        {!paymethodsList.loading && !paymethodsList.error && paymethodsList.paymethods.length === 0 && (
+        {!(paymethodsList.loading || isLoading) &&
+          !paymethodsList.error &&
+          (!paymethodsList?.paymethods || paymethodsList.paymethods.length === 0) &&
+        (
           <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>
         )}
       </PaymentMethodsList>
