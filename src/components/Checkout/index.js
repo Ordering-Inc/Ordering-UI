@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import {
-  Checkout as CheckoutController,
+  // Checkout as CheckoutController,
   useOrder,
   useSession,
   useApi,
@@ -11,6 +11,7 @@ import {
   useConfig,
   useValidationFields
 } from 'ordering-components'
+import { Checkout as CheckoutController } from './test'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 
@@ -406,14 +407,21 @@ export const Checkout = (props) => {
         setCartState({ ...cartState, loading: false })
       } else if (result.status === 2 && result.paymethod_data?.gateway === 'stripe_redirect' && query.get('payment_intent')) {
         try {
-          const { error } = await confirmCart(cartUuid)
-          if (error) {
+          const confirmCartRes = await confirmCart(cartUuid)
+          if (confirmCartRes.error) {
             setAlertState({
               open: true,
-              content: [error.message]
+              content: [confirmCartRes.error.message]
             })
           }
-          handleOrderRedirect(result.order.uuid)
+          if (confirmCartRes.result.order?.uuid) {
+            handleOrderRedirect(confirmCartRes.result.order.uuid)
+          }
+          setCartState({
+            ...cartState,
+            loading: false,
+            cart: result
+          })
         } catch (error) {
           setAlertState({
             open: true,
