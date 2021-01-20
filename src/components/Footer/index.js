@@ -13,7 +13,7 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <Content>
-        <h1>{t('FOOTER_QL1_TITLE')}</h1>
+        <h1 name='title-1'>{t('FOOTER_QL1_TITLE')}</h1>
         <a
           rel='noopener noreferrer'
           target='_blank'
@@ -40,7 +40,7 @@ export const Footer = () => {
         </a>
       </Content>
       <Content>
-        <h1>{t('FOOTER_QL2_TITLE')}</h1>
+        <h1 name='title-2'>{t('FOOTER_QL2_TITLE')}</h1>
         <a
           rel='noopener noreferrer'
           target='_blank'
@@ -67,7 +67,7 @@ export const Footer = () => {
         </a>
       </Content>
       <Content>
-        <h1>{t('FOOTER_QL3_TITLE')}</h1>
+        <h1 name='title-3'>{t('FOOTER_QL3_TITLE')}</h1>
         <div>
           <SocialIcon
             target='_blank'
@@ -111,7 +111,7 @@ export const Footer = () => {
           </SocialIcon>
         </div>
       </Content>
-      <Copy>
+      <Copy name='copy'>
         {t('FOOTER_COPY', '© 2016 - 2020 Ordering - Create e-commerce Apps and Websites with your brand. All rights reserved. Ordering, Inc.')}
       </Copy>
     </FooterContainer>

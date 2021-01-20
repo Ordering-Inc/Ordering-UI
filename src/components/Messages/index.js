@@ -45,7 +45,7 @@ import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import { Modal } from '../Modal'
 
-export const MessagesUI = (props) => {
+const MessagesUI = (props) => {
   const {
     order,
     messages,
@@ -56,7 +56,8 @@ export const MessagesUI = (props) => {
     setImage,
     setMessage,
     business,
-    driver
+    driver,
+    messagesToShow
   } = props
 
   const [, t] = useLanguage()
@@ -218,6 +219,93 @@ export const MessagesUI = (props) => {
       content: []
     })
   }
+
+  const MapMessages = ({ messages }) => {
+    return (
+      <>
+        {messages?.messages.map((message) => (
+          <React.Fragment key={message.id}>
+            {message.type === 1 && (
+              <MessageConsole key={message.id}>
+                {message.change?.attribute !== 'driver_id' ? (
+                  <BubbleConsole>
+                    {t('ORDER', 'Order')} {' '}
+                    <strong>{message.change.attribute}</strong> {}
+                    {t('CHANGED_FROM', 'Changed from')} {' '}
+                    {message.change.old !== null && (
+                      <>
+                        <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                      </>
+                    )}
+                    <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                  </BubbleConsole>
+                ) : (
+                  <BubbleConsole>
+                    {message.change.new ? (
+                      <>
+                        <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                        {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
+                        {message.comment && (<><br /> {message.comment.length}</>)}
+                      </>
+                    ) : <>{t('DRIVER_UNASSIGNED', 'Driver unassigned')}</>}
+                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                  </BubbleConsole>
+                )}
+              </MessageConsole>
+            )}
+            {message.type === 2 && user?.id === message.author_id && (
+              <MessageCustomer>
+                <BubbleCustomer>
+                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                  {message.comment}
+                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                </BubbleCustomer>
+              </MessageCustomer>
+            )}
+            {message.type === 3 && user.id === message.author_id && (
+              <MessageCustomer>
+                <BubbleCustomer name='image'>
+                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
+                  {message.comment && (
+                    <>
+                      {message.comment}
+                    </>
+                  )}
+                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                </BubbleCustomer>
+              </MessageCustomer>
+            )}
+            {message.type === 2 && user?.id !== message.author_id && (
+              <MessageBusiness>
+                <BubbleBusines>
+                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                  {message.comment}
+                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                </BubbleBusines>
+              </MessageBusiness>
+            )}
+            {message.type === 3 && user.id !== message.author_id && (
+              <MessageBusiness>
+                <BubbleBusines name='image'>
+                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
+                  {message.comment && (
+                    <>
+                      {message.comment}
+                    </>
+                  )}
+                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                </BubbleBusines>
+              </MessageBusiness>
+            )}
+          </React.Fragment>
+        ))}
+      </>
+    )
+  }
+
   return (
     <MessagesContainer>
       <HeaderProfile>
@@ -290,85 +378,7 @@ export const MessagesUI = (props) => {
                   <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
                 </BubbleConsole>
               </MessageConsole>
-              {messages?.messages.map((message) => (
-                <React.Fragment key={message.id}>
-                  {message.type === 1 && (
-                    <MessageConsole key={message.id}>
-                      {message.change?.attribute !== 'driver_id' ? (
-                        <BubbleConsole>
-                          {t('ORDER', 'Order')} {' '}
-                          <strong>{message.change.attribute}</strong> {}
-                          {t('CHANGED_FROM', 'Changed from')} {' '}
-                          {message.change.old !== null && (
-                            <>
-                              <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
-                            </>
-                          )}
-                          <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
-                          <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                        </BubbleConsole>
-                      ) : (
-                        <BubbleConsole>
-                          {message.change.new ? (
-                            <>
-                              <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                              {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
-                              {message.comment && (<><br /> {message.comment.length}</>)}
-                            </>
-                          ) : <>{t('DRIVER_UNASSIGNED', 'Driver unassigned')}</>}
-                          <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                        </BubbleConsole>
-                      )}
-                    </MessageConsole>
-                  )}
-                  {message.type === 2 && user.id === message.author_id && (
-                    <MessageCustomer>
-                      <BubbleCustomer>
-                        <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                        {message.comment}
-                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                      </BubbleCustomer>
-                    </MessageCustomer>
-                  )}
-                  {message.type === 3 && user.id === message.author_id && (
-                    <MessageCustomer>
-                      <BubbleCustomer name='image'>
-                        <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
-                        {message.comment && (
-                          <>
-                            {message.comment}
-                          </>
-                        )}
-                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                      </BubbleCustomer>
-                    </MessageCustomer>
-                  )}
-                  {message.type === 2 && user.id !== message.author_id && (
-                    <MessageBusiness>
-                      <BubbleBusines>
-                        <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                        {message.comment}
-                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                      </BubbleBusines>
-                    </MessageBusiness>
-                  )}
-                  {message.type === 3 && user.id !== message.author_id && (
-                    <MessageBusiness>
-                      <BubbleBusines name='image'>
-                        <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                        <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
-                        {message.comment && (
-                          <>
-                            {message.comment}
-                          </>
-                        )}
-                        <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                      </BubbleBusines>
-                    </MessageBusiness>
-                  )}
-                </React.Fragment>
-              ))}
+              <MapMessages messages={messagesToShow?.messages?.length ? messagesToShow : messages} />
             </>
           )
         }
