@@ -26,19 +26,19 @@ export const HeaderOption = (props) => {
     >
       {variant === 'cart' && (
         <span>
-          <IosBasket />
+          <IosBasket id='icon' />
           {totalCarts > 0 && <p>{totalCarts}</p>}
         </span>
       )}
       {variant === 'address' && (
         <>
-          <FaMapMarkerAlt />
+          <FaMapMarkerAlt id='icon' />
           {addressState || t('SELECT_AN_ADDRESS', 'Select an address')}
         </>
       )}
       {variant === 'moment' && (
         <>
-          <FaRegClock />
+          <FaRegClock id='icon' />
           {momentState
             ? parseDate(momentState, { outputFormat: 'MM/DD hh:mma' })
             : t('ASAP_ABBREVIATION', 'ASAP')}
