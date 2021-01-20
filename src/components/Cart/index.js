@@ -187,8 +187,6 @@ const CartUI = (props) => {
                 <CouponControl
                   businessId={cart.business_id}
                   price={cart.total}
-                  isCartPopover={isCartPopover}
-                  isCheckout={isCheckout}
                 />
               </CouponContainer>
             )}

@@ -1,11 +1,10 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components'
+import { CouponControl as CouponController, useLanguage } from 'ordering-components'
 
 import {
   CouponContainer
 } from './styles'
 
-import { CouponControl as CouponController } from './test'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
