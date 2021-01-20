@@ -10,7 +10,7 @@ export const OrderDetailsPage = (props) => {
 
   const orderDetailsProps = {
     ...props,
-    orderId: orderId,
+    orderId,
     handleOrderRedirect: () => {
       history.push('/profile/orders')
     },
