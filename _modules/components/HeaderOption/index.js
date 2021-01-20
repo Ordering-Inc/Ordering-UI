@@ -51,7 +51,13 @@ var HeaderOption = function HeaderOption(props) {
       return props.onClick(variant);
     },
     isHome: props.isHome
-  }, variant === 'cart' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosBasket.default, null), totalCarts > 0 && /*#__PURE__*/_react.default.createElement("p", null, totalCarts)), variant === 'address' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), addressState || t('SELECT_AN_ADDRESS', 'Select an address')), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, null), momentState ? parseDate(momentState, {
+  }, variant === 'cart' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosBasket.default, {
+    id: "icon"
+  }), totalCarts > 0 && /*#__PURE__*/_react.default.createElement("p", null, totalCarts)), variant === 'address' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, {
+    id: "icon"
+  }), addressState || t('SELECT_AN_ADDRESS', 'Select an address')), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, {
+    id: "icon"
+  }), momentState ? parseDate(momentState, {
     outputFormat: 'MM/DD hh:mma'
   }) : t('ASAP_ABBREVIATION', 'ASAP')));
 };

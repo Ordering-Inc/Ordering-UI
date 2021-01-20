@@ -16,13 +16,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 var LanguageSelectorUI = function LanguageSelectorUI(props) {
-  var _languages$languages;
+  var _languagesState$langu;
 
-  var languages = props.languages,
+  var languagesState = props.languagesState,
       currentLanguage = props.currentLanguage,
-      handleChangeLanguage = props.handleChangeLanguage;
+      handleChangeLanguage = props.handleChangeLanguage,
+      notReload = props.notReload;
 
-  var _languages = (_languages$languages = languages.languages) === null || _languages$languages === void 0 ? void 0 : _languages$languages.map(function (language) {
+  var _languages = (_languagesState$langu = languagesState.languages) === null || _languagesState$langu === void 0 ? void 0 : _languagesState$langu.map(function (language) {
     return {
       value: language.code,
       content: language.name,
@@ -38,7 +39,8 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     defaultValue: currentLanguage,
     onChange: function onChange(languageId) {
       return handleChangeLanguage(languageId);
-    }
+    },
+    notReload: notReload
   });
 };
 
