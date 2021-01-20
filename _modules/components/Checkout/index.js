@@ -442,7 +442,7 @@ var Checkout = function Checkout(props) {
 
   var getOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(cartId) {
-      var _result$order, _result$paymethod_dat, response, _yield$response$json, result, _yield$confirmCart, error, cart;
+      var _result$order, _result$paymethod_dat, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart;
 
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -493,17 +493,23 @@ var Checkout = function Checkout(props) {
               return confirmCart(cartUuid);
 
             case 18:
-              _yield$confirmCart = _context.sent;
-              error = _yield$confirmCart.error;
+              confirmCartRes = _context.sent;
 
-              if (error) {
+              if (confirmCartRes.error) {
                 setAlertState({
                   open: true,
-                  content: [error.message]
+                  content: [confirmCartRes.error.message]
                 });
               }
 
-              handleOrderRedirect(result.order.uuid);
+              if ((_confirmCartRes$resul = confirmCartRes.result.order) === null || _confirmCartRes$resul === void 0 ? void 0 : _confirmCartRes$resul.uuid) {
+                handleOrderRedirect(confirmCartRes.result.order.uuid);
+              }
+
+              setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
+                loading: false,
+                cart: result
+              }));
               _context.next = 27;
               break;
 

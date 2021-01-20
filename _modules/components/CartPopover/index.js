@@ -142,6 +142,7 @@ var CartPopover = function CartPopover(props) {
     ref: popperElement,
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    isCartPopover: true,
     carts: props.carts,
     isOrderStateCarts: !!orderState.carts,
     onClose: props.onClose

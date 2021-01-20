@@ -37,7 +37,8 @@ var CartContent = function CartContent(props) {
   var _theme$images, _theme$images$general;
 
   var carts = props.carts,
-      isOrderStateCarts = props.isOrderStateCarts;
+      isOrderStateCarts = props.isOrderStateCarts,
+      isCartPopover = props.isCartPopover;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -76,6 +77,7 @@ var CartContent = function CartContent(props) {
     }, cart.products.length > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
       isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
       cart: cart,
+      isCartPopover: isCartPopover,
       isCheckout: window.location.pathname === "/checkout/".concat(cart === null || cart === void 0 ? void 0 : cart.uuid),
       currentCartUuid: currentCartUuid,
       isProducts: cart.products.length,
