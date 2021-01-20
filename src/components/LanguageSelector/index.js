@@ -4,11 +4,12 @@ import { Select } from '../../styles/Select'
 
 const LanguageSelectorUI = (props) => {
   const {
-    languages,
+    languagesState,
     currentLanguage,
-    handleChangeLanguage
+    handleChangeLanguage,
+    notReload
   } = props
-  const _languages = languages.languages?.map(language => {
+  const _languages = languagesState.languages?.map(language => {
     return {
       value: language.code, content: language.name, showOnSelected: language.code.toUpperCase()
     }
@@ -21,6 +22,7 @@ const LanguageSelectorUI = (props) => {
       options={_languages}
       defaultValue={currentLanguage}
       onChange={(languageId) => handleChangeLanguage(languageId)}
+      notReload={notReload}
     />
   )
 }
