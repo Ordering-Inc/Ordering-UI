@@ -26,23 +26,44 @@ export const CheckoutPage = (props) => {
       }
       case 'stripe_redirect': {
         const stripe = await loadStripe(paymethod.paymethod.credentials.publishable)
-        stripe.confirmBancontactPayment(
-          cart.paymethod_data.result.client_secret,
-          {
+        const confirmOption = {
+          bancontact: {
+            name: 'confirmBancontactPayment',
+            type: 1
+          },
+          alipay: {
+            name: 'confirmAlipayPayment',
+            type: 2
+          },
+          giropay: {
+            name: 'confirmGiropayPayment',
+            type: 1
+          },
+          ideal: {
+            name: 'confirmIdealPayment',
+            type: 2
+          }
+        }
+        const params = {
+          1: {
             payment_method: {
               billing_details: cart.paymethod_data.data.owner
             },
             return_url: `${window.location.origin}/checkout/${cartUuid}`
+          },
+          2: {
+            return_url: `${window.location.origin}/checkout/${cartUuid}`
           }
+        }
+        stripe[confirmOption[paymethod.data.type].name](
+          cart.paymethod_data.result.client_secret,
+          params[confirmOption[paymethod.data.type].type]
         ).then((result) => {
           if (result?.error) {
             setErrors([...errors, result?.error?.message])
           }
         })
-        return true
       }
-      default:
-        return true
     }
   }
 
