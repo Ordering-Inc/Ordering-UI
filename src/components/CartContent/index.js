@@ -8,7 +8,8 @@ import { Cart } from '../Cart'
 export const CartContent = (props) => {
   const {
     carts,
-    isOrderStateCarts
+    isOrderStateCarts,
+    isCartPopover
   } = props
 
   const [, t] = useLanguage()
@@ -43,6 +44,7 @@ export const CartContent = (props) => {
               <Cart
                 isCartPending={cart?.status === 2}
                 cart={cart}
+                isCartPopover={isCartPopover}
                 isCheckout={window.location.pathname === `/checkout/${cart?.uuid}`}
                 currentCartUuid={currentCartUuid}
                 isProducts={cart.products.length}

@@ -30,7 +30,8 @@ const CartUI = (props) => {
     removeProduct,
     onClickCheckout,
     isCheckout,
-    isCartPending
+    isCartPending,
+    isCartPopover
   } = props
 
   const [, t] = useLanguage()
@@ -169,7 +170,7 @@ const CartUI = (props) => {
                     <td>{parsePrice(cart?.service_fee)}</td>
                   </tr>
                 )}
-                {cart?.discount > 0 && (
+                {cart?.discount > 0 && cart?.total >= 0 && (
                   <tr>
                     {cart?.discount_type === 1 ? (
                       <td>{t('DISCOUNT', 'Discount')} ({parseNumber(cart?.discount_rate)}%)</td>
@@ -181,10 +182,13 @@ const CartUI = (props) => {
                 )}
               </tbody>
             </table>
-            {isCouponEnabled && !isCartPending && (
+            {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
               <CouponContainer>
                 <CouponControl
                   businessId={cart.business_id}
+                  price={cart.total}
+                  isCartPopover={isCartPopover}
+                  isCheckout={isCheckout}
                 />
               </CouponContainer>
             )}
@@ -192,7 +196,7 @@ const CartUI = (props) => {
               <tbody>
                 <tr>
                   <td>{t('TOTAL', 'Total')}</td>
-                  <td>{parsePrice(cart?.total)}</td>
+                  <td>{cart?.total >= 0 && parsePrice(cart?.total)}</td>
                 </tr>
               </tbody>
             </table>

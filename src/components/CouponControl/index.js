@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { CouponControl as CouponController, useLanguage } from 'ordering-components'
+import React from 'react'
+import { useLanguage } from 'ordering-components'
 
 import {
   CouponContainer
 } from './styles'
 
+import { CouponControl as CouponController } from './test'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
@@ -16,22 +17,33 @@ const CouponControlUI = (props) => {
     couponInput,
     handleButtonApplyClick,
     handleRemoveCouponClick,
-    onChangeInputCoupon
+    onChangeInputCoupon,
+    confirm,
+    setConfirm
   } = props
 
   const [, t] = useLanguage()
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const onRemoveCoupon = () => {
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_COUPON', 'Are you sure that you want to delete the coupon?'),
-      handleOnAccept: () => {
-        handleRemoveCouponClick && handleRemoveCouponClick()
-        setConfirm({ ...confirm, open: false })
-      }
+      content: t('QUESTION_DELETE_COUPON', 'Are you sure that you want to delete the coupon?')
     })
   }
+
+  const handleOnAccept = () => {
+    if (!confirm.error) {
+      handleRemoveCouponClick && handleRemoveCouponClick()
+    }
+    setConfirm({ ...confirm, open: false, error: false })
+    onChangeInputCoupon('')
+  }
+
+  const handleClose = () => {
+    setConfirm({ ...confirm, open: false, error: false })
+    onChangeInputCoupon('')
+  }
+
   return (
     <CouponContainer>
       {couponDefault ? (
@@ -59,9 +71,9 @@ const CouponControlUI = (props) => {
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
+        onClose={handleClose}
+        onCancel={!confirm.error ? () => setConfirm({ ...confirm, open: false, error: false }) : null}
+        onAccept={handleOnAccept}
         closeOnBackdrop={false}
       />
     </CouponContainer>
