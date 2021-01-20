@@ -79,9 +79,9 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
 
   var handleError = function handleError() {
     if (errors.cash) {
-      setErrorCash(true);
+      setErrorCash && setErrorCash(true);
     } else {
-      setErrorCash(false);
+      setErrorCash && setErrorCash(false);
     }
   };
 
@@ -94,7 +94,7 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
     onChange: handleChangeCash,
     ref: register({
       validate: function validate(value) {
-        return value === '' || value >= orderTotal;
+        return !value || value >= orderTotal;
       }
     })
   })), errors.cash && errors.cash.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('FIELD_REQUIRED', 'This field is required')), errors.cash && errors.cash.type === 'validate' && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total'), ": ", parsePrice(orderTotal))));

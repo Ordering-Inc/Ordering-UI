@@ -40,7 +40,9 @@ var Footer = function Footer() {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.FooterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h1", null, t('FOOTER_QL1_TITLE')), /*#__PURE__*/_react.default.createElement("a", {
+  return /*#__PURE__*/_react.default.createElement(_styles.FooterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h1", {
+    name: "title-1"
+  }, t('FOOTER_QL1_TITLE')), /*#__PURE__*/_react.default.createElement("a", {
     rel: "noopener noreferrer",
     target: "_blank",
     "aria-label": "link1",
@@ -55,7 +57,9 @@ var Footer = function Footer() {
     target: "_blank",
     "aria-label": "link3",
     href: t('FOOTER_QL1_3_HREF')
-  }, t('FOOTER_QL1_3'))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h1", null, t('FOOTER_QL2_TITLE')), /*#__PURE__*/_react.default.createElement("a", {
+  }, t('FOOTER_QL1_3'))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h1", {
+    name: "title-2"
+  }, t('FOOTER_QL2_TITLE')), /*#__PURE__*/_react.default.createElement("a", {
     rel: "noopener noreferrer",
     target: "_blank",
     "aria-label": "link4",
@@ -70,7 +74,9 @@ var Footer = function Footer() {
     target: "_blank",
     "aria-label": "link6",
     href: t('FOOTER_QL2_3_HREF')
-  }, t('FOOTER_QL2_3'))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h1", null, t('FOOTER_QL3_TITLE')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
+  }, t('FOOTER_QL2_3'))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h1", {
+    name: "title-3"
+  }, t('FOOTER_QL3_TITLE')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
     target: "_blank",
     rel: "noreferrer",
     href: t('FOOTER_QL3_1_HREF'),
@@ -95,7 +101,9 @@ var Footer = function Footer() {
     rel: "noreferrer",
     href: t('FOOTER_QL3_5_HREF'),
     "aria-label": "whatsapp"
-  }, /*#__PURE__*/_react.default.createElement(_FaWhatsapp.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.Copy, null, t('FOOTER_COPY', '© 2016 - 2020 Ordering - Create e-commerce Apps and Websites with your brand. All rights reserved. Ordering, Inc.')));
+  }, /*#__PURE__*/_react.default.createElement(_FaWhatsapp.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.Copy, {
+    name: "copy"
+  }, t('FOOTER_COPY', '© 2016 - 2020 Ordering - Create e-commerce Apps and Websites with your brand. All rights reserved. Ordering, Inc.')));
 };
 
 exports.Footer = Footer;
