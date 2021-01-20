@@ -45,9 +45,9 @@ export const PaymentOptionCash = (props) => {
 
   const handleError = () => {
     if (errors.cash) {
-      setErrorCash(true)
+      setErrorCash && setErrorCash(true)
     } else {
-      setErrorCash(false)
+      setErrorCash && setErrorCash(false)
     }
   }
 
@@ -64,7 +64,7 @@ export const PaymentOptionCash = (props) => {
             ref={
               register({
                 validate: value => {
-                  return value === '' || value >= orderTotal
+                  return !value || value >= orderTotal
                 }
               })
             }

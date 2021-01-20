@@ -243,14 +243,12 @@ const CheckoutUI = (props) => {
         {!cartState.loading && cart && cart?.status !== 2 && (
           <PaymentMethodContainer>
             <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
-            {businessDetails.business && (
-              <PaymentOptions
-                businessId={cart?.business_id}
-                paymethods={businessDetails?.business?.paymethods}
-                onPaymentChange={handlePaymethodChange}
-                setErrorCash={setErrorCash}
-              />
-            )}
+            <PaymentOptions
+              isLoading={businessDetails.loading}
+              paymethods={businessDetails?.business?.paymethods}
+              onPaymentChange={handlePaymethodChange}
+              setErrorCash={setErrorCash}
+            />
           </PaymentMethodContainer>
         )}
 
