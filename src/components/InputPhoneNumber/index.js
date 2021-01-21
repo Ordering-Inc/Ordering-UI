@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import parsePhoneNumber from 'libphonenumber-js'
-import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { useLanguage, useConfig, useSession } from 'ordering-components'
 
@@ -40,7 +39,7 @@ export const InputPhoneNumber = (props) => {
           defaultCountry={configs?.default_country_code?.value}
           value={value}
           displayInitialValueAsLocalNumber
-          onChange={(val) => setValue(val, isValidPhoneNumber(val))}
+          onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val))}
         />
         {value && !isValidPhoneNumber(value) && !disabled && (
           <>
