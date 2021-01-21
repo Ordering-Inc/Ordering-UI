@@ -76,10 +76,7 @@ const UserDetailsUI = (props) => {
               </UserData>
             ) : (
               <SideForm>
-                <UserFormDetailsUI
-                  t={t}
-                  {...props}
-                />
+                <UserFormDetailsUI {...props} />
               </SideForm>
             )}
           </Container>
