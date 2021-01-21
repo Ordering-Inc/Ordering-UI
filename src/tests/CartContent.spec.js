@@ -3,7 +3,7 @@ import { mount } from '@cypress/react'
 import { CartContent } from '../components/CartContent'
 import ProviderMock from '../__mocks__/ProviderMock'
 
-describe('Mounting Cart component', () => {
+describe('Mounting Cart Content component', () => {
   const carts = [{
     business: {
       currency: 'USD',

@@ -3,7 +3,7 @@ import { mount } from '@cypress/react'
 import { CartPopover } from '../components/CartPopover'
 import ProviderMock from '../__mocks__/ProviderMock'
 
-describe('Mounting Cart component', () => {
+describe('Mounting Cart Popover component', () => {
   const carts = [{
     business: {
       currency: 'USD',
