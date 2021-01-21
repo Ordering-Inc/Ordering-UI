@@ -36,7 +36,7 @@ const ProductShareUI = (props) => {
 
   return (
     <>
-      <IconShare ref={iconElement}>
+      <IconShare ref={iconElement} name='icon-share'>
         <FiShare2 onClick={handleClickShare} />
         <ShareButtons
           ref={contentElement}
