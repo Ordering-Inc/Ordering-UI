@@ -160,7 +160,7 @@ const CartUI = (props) => {
                 )}
                 {cart?.driver_tip > 0 && (
                   <tr>
-                    <td>{t('DRIVER_TIP', 'Driver tip')} ({parseNumber(cart?.driver_tip_rate)}%)</td>
+                    <td>{t('DRIVER_TIP', 'Driver tip')} {cart?.driver_tip_rate > 0 && `(${parseNumber(cart?.driver_tip_rate)}%)`}</td>
                     <td>{parsePrice(cart?.driver_tip)}</td>
                   </tr>
                 )}
