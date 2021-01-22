@@ -267,7 +267,7 @@ const OrderDetailsUI = (props) => {
                   </tr>
                   <tr>
                     <td>{t('DRIVER_TIP', 'Driver tip')}</td>
-                    <td>{parsePrice(order?.driver_tip)}</td>
+                    <td>{parsePrice(order?.totalDriverTip)}</td>
                   </tr>
                   <tr>
                     <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
