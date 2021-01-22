@@ -60,10 +60,8 @@ export const CartPopover = (props) => {
   }, [auth])
 
   useEffect(() => {
-    if (location) {
-      if (location.pathname.includes('/checkout/')) {
-        props.onClose && props.onClose()
-      }
+    if (location && location.pathname.includes('/checkout/')) {
+      props.onClose && props.onClose()
     }
   }, [location])
 
