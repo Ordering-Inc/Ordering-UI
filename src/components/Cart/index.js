@@ -194,7 +194,7 @@ const CartUI = (props) => {
               <tbody>
                 <tr>
                   <td>{t('TOTAL', 'Total')}</td>
-                  <td>{cart?.total >= 0 && parsePrice(cart?.total)}</td>
+                  <td>{cart?.total >= 1 && parsePrice(cart?.total)}</td>
                 </tr>
               </tbody>
             </table>
