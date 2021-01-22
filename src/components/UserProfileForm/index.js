@@ -36,6 +36,7 @@ import {
 
 const UserProfileFormUI = (props) => {
   const {
+    userData,
     handleButtonUpdateClick,
     handlechangeImage,
     formState,
@@ -136,10 +137,10 @@ const UserProfileFormUI = (props) => {
                 </UserData>
               ) : (
                 <UserData>
-                  <h1>{user.name} {user.lastname}</h1>
-                  <p>{user.email}</p>
-                  {user.cellphone && (
-                    <p>{user.country_phone_code && `+${user.country_phone_code} `}{user.cellphone}</p>
+                  <h1>{userData?.name || user?.name} {userData?.lastname || user?.lastname}</h1>
+                  <p>{userData?.email || user.email}</p>
+                  {(userData?.cellphone || user?.cellphone) && (
+                    <p>{(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}</p>
                   )}
                   <Button
                     color='primary'
@@ -153,7 +154,6 @@ const UserProfileFormUI = (props) => {
             ) : (
               <WrapperForm>
                 <UserFormDetailsUI
-                  t={t}
                   {...props}
                   onCancel={toggleEditState}
                   onCloseProfile={() => setEdit(false)}
@@ -163,10 +163,12 @@ const UserProfileFormUI = (props) => {
 
           </SideForm>
         </UserProfileContainer>
-        <SavedPlaces>
-          <h1>Saved Places</h1>
-          <AddressList addressList={user.addresses} />
-        </SavedPlaces>
+        {(userData?.addresses || user?.addresses) && (
+          <SavedPlaces>
+            <h1>Saved Places</h1>
+            <AddressList addressList={user?.addresses} />
+          </SavedPlaces>
+        )}
       </Container>
       <Alert
         title={t('PROFILE', 'Profile')}
