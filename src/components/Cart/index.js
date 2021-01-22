@@ -166,7 +166,7 @@ const CartUI = (props) => {
                 )}
                 {cart?.service_fee > 0 && (
                   <tr>
-                    <td>{t('SERVICE_FEE', 'Service Fee')} </td>
+                    <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(cart?.business?.service_fee)}%)</td>
                     <td>{parsePrice(cart?.service_fee)}</td>
                   </tr>
                 )}
