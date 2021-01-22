@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
-require("react-phone-number-input/style.css");
-
 var _reactPhoneNumberInput = _interopRequireDefault(require("react-phone-number-input"));
 
 var _orderingComponents = require("ordering-components");
@@ -80,7 +78,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     value: value,
     displayInitialValueAsLocalNumber: true,
     onChange: function onChange(val) {
-      return setValue(val, isValidPhoneNumber(val));
+      return setValue && setValue(val, isValidPhoneNumber(val));
     }
   }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (auth && (user === null || user === void 0 ? void 0 : user.country_phone_code) || !auth || value.includes('+')) && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')), auth && !(user === null || user === void 0 ? void 0 : user.country_phone_code) && !value.includes('+') && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')))));
 };

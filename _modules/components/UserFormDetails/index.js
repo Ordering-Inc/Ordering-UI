@@ -60,8 +60,7 @@ var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone'];
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
   var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie13;
 
-  var t = props.t,
-      isEdit = props.isEdit,
+  var isEdit = props.isEdit,
       formState = props.formState,
       onCancel = props.onCancel,
       showField = props.showField,
@@ -77,6 +76,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
       errors = _useForm.errors;
+
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -258,7 +261,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result;
 
-    if (!formState.loading && ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.error)) {
+    if (!(formState === null || formState === void 0 ? void 0 : formState.loading) && (formState === null || formState === void 0 ? void 0 : (_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.error)) {
       var _formState$result2;
 
       setAlertState({
@@ -266,23 +269,23 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
     }
-  }, [formState.loading]);
+  }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   (0, _react.useEffect)(function () {
     var _validationFields$fie12;
 
-    if ((_validationFields$fie12 = validationFields.fields) === null || _validationFields$fie12 === void 0 ? void 0 : _validationFields$fie12.checkout) {
+    if (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie12 = validationFields.fields) === null || _validationFields$fie12 === void 0 ? void 0 : _validationFields$fie12.checkout) {
       sortValidationFields();
     }
-  }, [(_validationFields$fie13 = validationFields.fields) === null || _validationFields$fie13 === void 0 ? void 0 : _validationFields$fie13.checkout]);
+  }, [validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie13 = validationFields.fields) === null || _validationFields$fie13 === void 0 ? void 0 : _validationFields$fie13.checkout]);
   (0, _react.useEffect)(function () {
     if (!isEdit && onCloseProfile) {
       onCloseProfile();
     }
 
-    if ((user || !isEdit) && !formState.loading) {
+    if ((user || !isEdit) && !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
       setUserCellPhone();
 
-      if (!isEdit && !formState.loading) {
+      if (!isEdit && !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
         cleanFormState && cleanFormState({
           changes: {}
         });
@@ -293,10 +296,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: handleSubmit(onSubmit),
     isCheckout: isCheckout
-  }, !validationFields.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, validationFieldsSorted.map(function (field) {
+  }, !(validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, validationFieldsSorted.map(function (field) {
     var _formState$result3, _formState$result4, _ref, _formState$changes$fi;
 
-    return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    return !notValidationFields.includes(field.code) && showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
@@ -304,11 +307,11 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       name: field.code,
       className: "form",
       disabled: !isEdit,
-      placeholder: t(field.code.toUpperCase(), field.name),
-      defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result[field.code] : (_ref = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user[field.code]) !== null && _ref !== void 0 ? _ref : '',
+      placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
+      defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result[field.code] : (_ref = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user[field.code]) !== null && _ref !== void 0 ? _ref : '',
       onChange: handleChangeInput,
       ref: register({
-        required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null,
+        required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field === null || field === void 0 ? void 0 : field.name, " is required")).replace('_attribute_', t(field === null || field === void 0 ? void 0 : field.name, field.code)) : null,
         pattern: {
           value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
           message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
@@ -343,7 +346,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return onCancel(false);
     },
     disabled: formState.loading
-  }, t('CANCEL', 'Cancel')), (Object.keys(formState.changes).length > 0 && isEdit || formState.loading) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('CANCEL', 'Cancel')), (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && isEdit || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "form-btn",
     color: "primary",
     type: "submit",

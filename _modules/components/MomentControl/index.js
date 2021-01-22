@@ -60,7 +60,9 @@ var MomentControlUI = function MomentControlUI(props) {
   var windowSize = (0, _useWindowSize.useWindowSize)();
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')), /*#__PURE__*/_react.default.createElement(_styles.Days, null, datesList.slice(0, 6).map(function (date) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')), /*#__PURE__*/_react.default.createElement(_styles.Days, {
+    name: "days"
+  }, datesList.slice(0, 6).map(function (date) {
     var dateParts = date.split('-');
 
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
@@ -78,7 +80,9 @@ var MomentControlUI = function MomentControlUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.ContentDay, {
       className: "content-day"
     }, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
-  }), /*#__PURE__*/_react.default.createElement(_styles.MiddleLine, null)), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')), /*#__PURE__*/_react.default.createElement(_styles.Hours, null, /*#__PURE__*/_react.default.createElement(_styles.Hour, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.MiddleLine, null)), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')), /*#__PURE__*/_react.default.createElement(_styles.Hours, {
+    name: "hours"
+  }, /*#__PURE__*/_react.default.createElement(_styles.Hour, {
     selected: isAsap,
     onClick: function onClick() {
       return handleAsap();

@@ -66,7 +66,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _theme$images, _theme$images$logos, _validationFields$fie8, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2;
+  var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _theme$images, _theme$images$logos, _validationFields$fie8, _validationFields$fie9, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -230,8 +230,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit),
-    isSkeleton: useChekoutFileds && validationFields.loading
-  }, !(useChekoutFileds && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.values((_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout).map(function (field) {
+    isSkeleton: useChekoutFileds && (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
+  }, !(useChekoutFileds && (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout) && Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.checkout).map(function (field) {
     return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.enabled && field.required ? field.type : 'hidden',

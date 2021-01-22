@@ -60,7 +60,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserProfileFormUI = function UserProfileFormUI(props) {
   var _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result, _formState$changes6, _formState$changes7;
 
-  var handleButtonUpdateClick = props.handleButtonUpdateClick,
+  var userData = props.userData,
+      handleButtonUpdateClick = props.handleButtonUpdateClick,
       handlechangeImage = props.handlechangeImage,
       formState = props.formState,
       cleanFormState = props.cleanFormState,
@@ -189,21 +190,19 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 40
-  })) : /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement("h1", null, user.name, " ", user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user.email), user.cellphone && /*#__PURE__*/_react.default.createElement("p", null, user.country_phone_code && "+".concat(user.country_phone_code, " "), user.cellphone), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement("h1", null, (userData === null || userData === void 0 ? void 0 : userData.name) || (user === null || user === void 0 ? void 0 : user.name), " ", (userData === null || userData === void 0 ? void 0 : userData.lastname) || (user === null || user === void 0 ? void 0 : user.lastname)), /*#__PURE__*/_react.default.createElement("p", null, (userData === null || userData === void 0 ? void 0 : userData.email) || user.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, ((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code)) && "+".concat((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code), " "), (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     outline: true,
     onClick: function onClick() {
       return toggleEditState(true);
     }
-  }, t('EDIT', 'Edit'))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({
-    t: t
-  }, props, {
+  }, t('EDIT', 'Edit'))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
     onCancel: toggleEditState,
     onCloseProfile: function onCloseProfile() {
       return setEdit(false);
     }
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
-    addressList: user.addresses
+  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    addressList: user === null || user === void 0 ? void 0 : user.addresses
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,

@@ -21,8 +21,6 @@ var _styledComponents = require("styled-components");
 
 var _CartContent = require("../CartContent");
 
-var _reactRouterDom = require("react-router-dom");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -53,7 +51,8 @@ var CartPopover = function CartPopover(props) {
   var _props$carts, _props$carts2;
 
   var open = props.open,
-      auth = props.auth;
+      auth = props.auth,
+      location = props.location;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -65,7 +64,6 @@ var CartPopover = function CartPopover(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
-  var location = (0, _reactRouterDom.useLocation)();
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
@@ -114,7 +112,7 @@ var CartPopover = function CartPopover(props) {
     props.onClose();
   }, [auth]);
   (0, _react.useEffect)(function () {
-    if (location.pathname.includes('/checkout/')) {
+    if (location && location.pathname.includes('/checkout/')) {
       props.onClose && props.onClose();
     }
   }, [location]);

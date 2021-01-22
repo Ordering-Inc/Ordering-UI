@@ -93,11 +93,11 @@ var CouponControlUI = function CouponControlUI(props) {
     onClick: handleButtonApplyClick
   }, t('APPLY', 'Apply'))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('COUPON', 'Coupon'),
-    content: confirm.content,
+    content: confirm === null || confirm === void 0 ? void 0 : confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
-    open: confirm.open,
+    open: confirm === null || confirm === void 0 ? void 0 : confirm.open,
     onClose: handleClose,
-    onCancel: !confirm.error ? function () {
+    onCancel: !(confirm === null || confirm === void 0 ? void 0 : confirm.error) ? function () {
       return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
         open: false,
         error: false

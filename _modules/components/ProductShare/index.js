@@ -57,7 +57,8 @@ var ProductShareUI = function ProductShareUI(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.IconShare, {
-    ref: iconElement
+    ref: iconElement,
+    name: "icon-share"
   }, /*#__PURE__*/_react.default.createElement(_FiShare.default, {
     onClick: handleClickShare
   }), /*#__PURE__*/_react.default.createElement(_styles.ShareButtons, {
