@@ -9,9 +9,9 @@ const LanguageSelectorUI = (props) => {
     handleChangeLanguage,
     notReload
   } = props
-  const _languages = languagesState.languages?.map(language => {
+  const _languages = languagesState?.languages?.map(language => {
     return {
-      value: language.code, content: language.name, showOnSelected: language.code.toUpperCase()
+      value: language?.code, content: language?.name, showOnSelected: language.code?.toUpperCase()
     }
   })
   _languages && _languages.sort((a, b) =>
