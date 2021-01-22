@@ -14,6 +14,7 @@ import { UserFormDetailsUI } from '../UserFormDetails'
 
 const UserDetailsUI = (props) => {
   const {
+    userData,
     isEdit,
     formState,
     cleanFormState,
@@ -63,18 +64,19 @@ const UserDetailsUI = (props) => {
 
             {!isEdit ? (
               <UserData>
-                <p><strong>{t('NAME', 'Name')}:</strong> {user.name} {user?.middle_name} {user.lastname} {user?.second_lastname}</p>
-                <p><strong>{t('EMAIL', 'Email')}:</strong> {user.email}</p>
-                {user.cellphone && (
-                  <p><strong>{t('CELLPHONE', 'Cellphone')}:</strong> {user.country_phone_code && `+${user.country_phone_code} `}{user.cellphone}</p>
+                <p>
+                  <strong>{t('NAME', 'Name')}:</strong> {userData?.name || user?.name} {userData?.middle_name || user?.middle_name} {userData?.lastname || user?.lastname} {userData?.second_lastname || user?.second_lastname}
+                </p>
+                <p><strong>{t('EMAIL', 'Email')}:</strong> {userData?.email || user?.email}</p>
+                {(userData?.cellphone || user?.cellphone) && (
+                  <p>
+                    <strong>{t('CELLPHONE', 'Cellphone')}:</strong> {(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}
+                  </p>
                 )}
               </UserData>
             ) : (
               <SideForm>
-                <UserFormDetailsUI
-                  t={t}
-                  {...props}
-                />
+                <UserFormDetailsUI {...props} />
               </SideForm>
             )}
           </Container>

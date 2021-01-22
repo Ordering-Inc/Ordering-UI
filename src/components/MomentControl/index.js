@@ -25,7 +25,7 @@ const MomentControlUI = (props) => {
   return (
     <div id='moment_control'>
       <Title>{t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')}</Title>
-      <Days>
+      <Days name='days'>
         {
           datesList.slice(0, 6).map(date => {
             const dateParts = date.split('-')
@@ -45,7 +45,7 @@ const MomentControlUI = (props) => {
         <MiddleLine />
       </Days>
       <Title>{t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')}</Title>
-      <Hours>
+      <Hours name='hours'>
         <Hour
           selected={isAsap}
           onClick={() => handleAsap()}

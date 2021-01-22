@@ -103,7 +103,7 @@ export const App = () => {
       {
         loaded && (
           <>
-            <Header isHome={isHome} />
+            <Header isHome={isHome} location={location} />
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>

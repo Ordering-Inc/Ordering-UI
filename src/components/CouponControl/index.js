@@ -67,11 +67,11 @@ const CouponControlUI = (props) => {
       )}
       <Confirm
         title={t('COUPON', 'Coupon')}
-        content={confirm.content}
+        content={confirm?.content}
         acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
+        open={confirm?.open}
         onClose={handleClose}
-        onCancel={!confirm.error ? () => setConfirm({ ...confirm, open: false, error: false }) : null}
+        onCancel={!confirm?.error ? () => setConfirm({ ...confirm, open: false, error: false }) : null}
         onAccept={handleOnAccept}
         closeOnBackdrop={false}
       />
