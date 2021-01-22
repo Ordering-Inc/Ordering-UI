@@ -156,13 +156,13 @@ const SignUpFormUI = (props) => {
           noValidate
           isPopup={isPopup}
           onSubmit={handleSubmit(onSubmit)}
-          isSkeleton={useChekoutFileds && validationFields.loading}
+          isSkeleton={useChekoutFileds && validationFields?.loading}
         >
           {
-            !(useChekoutFileds && validationFields.loading) ? (
+            !(useChekoutFileds && validationFields?.loading) ? (
               <>
                 {
-                  Object.values(validationFields.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
+                  validationFields?.fields?.checkout && Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
                     showField(field.code) && (
                       <Input
                         key={field.id}
