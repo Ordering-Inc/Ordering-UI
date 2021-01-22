@@ -177,7 +177,7 @@ const CartUI = (props) => {
                     ) : (
                       <td>{t('DISCOUNT', 'Discount')}</td>
                     )}
-                    <td>{parsePrice(cart?.discount || 0)}</td>
+                    <td>- {parsePrice(cart?.discount || 0)}</td>
                   </tr>
                 )}
               </tbody>

@@ -280,7 +280,7 @@ const OrderDetailsUI = (props) => {
                       ) : (
                         <td>{t('DISCOUNT', 'Discount')}</td>
                       )}
-                      <td>{parsePrice(order?.discount)}</td>
+                      <td>- {parsePrice(order?.discount)}</td>
                     </tr>
                   )}
                 </tbody>
