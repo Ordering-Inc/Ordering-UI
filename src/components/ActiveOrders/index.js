@@ -58,7 +58,7 @@ export const ActiveOrders = (props) => {
                 </BusinessInformation>
                 <Price>
                   <h2>
-                    {parsePrice(order?.total)}
+                    {parsePrice(order?.summary?.total || order?.total)}
                   </h2>
                   <p>{getOrderStatus(order.status)?.value}</p>
                 </Price>
