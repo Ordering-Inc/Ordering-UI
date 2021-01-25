@@ -17,11 +17,11 @@ var _IosCard = _interopRequireDefault(require("@meronex/icons/ios/IosCard"));
 
 var _IosRadioButtonOn = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOn"));
 
-var _FaStripe = _interopRequireDefault(require("@meronex/icons/Fa/FaStripe"));
+var _FaStripe = _interopRequireDefault(require("@meronex/icons/fa/FaStripe"));
 
-var _FaCcStripe = _interopRequireDefault(require("@meronex/icons/Fa/FaCcStripe"));
+var _FaCcStripe = _interopRequireDefault(require("@meronex/icons/fa/FaCcStripe"));
 
-var _FaStripeS = _interopRequireDefault(require("@meronex/icons/Fa/FaStripeS"));
+var _FaStripeS = _interopRequireDefault(require("@meronex/icons/fa/FaStripeS"));
 
 var _GrStripe = _interopRequireDefault(require("@meronex/icons/gr/GrStripe"));
 

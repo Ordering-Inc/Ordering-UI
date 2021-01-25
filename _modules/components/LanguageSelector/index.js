@@ -23,11 +23,13 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
       handleChangeLanguage = props.handleChangeLanguage,
       notReload = props.notReload;
 
-  var _languages = (_languagesState$langu = languagesState.languages) === null || _languagesState$langu === void 0 ? void 0 : _languagesState$langu.map(function (language) {
+  var _languages = languagesState === null || languagesState === void 0 ? void 0 : (_languagesState$langu = languagesState.languages) === null || _languagesState$langu === void 0 ? void 0 : _languagesState$langu.map(function (language) {
+    var _language$code;
+
     return {
-      value: language.code,
-      content: language.name,
-      showOnSelected: language.code.toUpperCase()
+      value: language === null || language === void 0 ? void 0 : language.code,
+      content: language === null || language === void 0 ? void 0 : language.name,
+      showOnSelected: (_language$code = language.code) === null || _language$code === void 0 ? void 0 : _language$code.toUpperCase()
     };
   });
 
