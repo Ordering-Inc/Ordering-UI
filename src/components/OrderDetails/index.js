@@ -255,20 +255,20 @@ const OrderDetailsUI = (props) => {
                 <tbody>
                   <tr>
                     <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                    <td>{order?.tax_type === 1 ? parsePrice((order?.summary?.subtotal - order?.summary?.tax) || (order?.subtotal - order?.totalTax)) : parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
+                    <td>{order?.tax_type === 1 ? parsePrice(order?.summary?.subtotal_with_tax || order?.subtotal) : parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                   </tr>
                   <tr>
                     <td>{order?.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
                     <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
                   </tr>
-                  {(order?.sumamry?.deliveryFee > 0 || order?.deliveryFee > 0) && (
+                  {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
                     <tr>
                       <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                      <td>{parsePrice(order?.summary?.deliveryFee || order?.deliveryFee)}</td>
+                      <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
                     </tr>
                   )}
                   <tr>
-                    <td>{t('DRIVER_TIP', 'Driver tip')} {order?.summary?.driver_tip > 0 && `(${parseNumber(order?.driver_tip)}%)`}</td>
+                    <td>{t('DRIVER_TIP', 'Driver tip')} {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && `(${parseNumber(order?.summary?.driver_tip || order?.driver_tip)}%)`}</td>
                     <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
                   </tr>
                   <tr>
