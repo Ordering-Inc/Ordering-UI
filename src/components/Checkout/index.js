@@ -244,6 +244,7 @@ const CheckoutUI = (props) => {
           <PaymentMethodContainer>
             <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
             <PaymentOptions
+              businessId={businessDetails?.business?.id}
               isLoading={businessDetails.loading}
               paymethods={businessDetails?.business?.paymethods}
               onPaymentChange={handlePaymethodChange}
