@@ -1,5 +1,7 @@
 import React from 'react'
-import { PaymentOptionPaypal as PaymentPaypalController } from 'ordering-components'
+// import { PaymentOptionPaypal as PaymentPaypalController } from 'ordering-components'
+import { PaymentOptionPaypal as PaymentPaypalController } from './test'
+import Skeleton from 'react-loading-skeleton'
 
 import { Container } from './styles'
 
@@ -19,7 +21,9 @@ const PaymentOptionPaypalUI = (props) => {
         isSdkReady ? (
           PaypalButton && <PaypalButton {...paypalButtonProps} />
         ) : (
-          <div>Loading...</div>
+          <div>
+            <Skeleton count={3} height={55} />
+          </div>
         )
       )}
     </Container>

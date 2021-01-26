@@ -240,7 +240,7 @@ const CheckoutUI = (props) => {
           )}
         </BusinessDetailsContainer>
 
-        {!cartState.loading && cart && cart?.status !== 2 && (
+        {!cartState.loading && cart && (
           <PaymentMethodContainer>
             <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
             <PaymentOptions
