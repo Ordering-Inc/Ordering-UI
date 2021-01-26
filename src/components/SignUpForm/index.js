@@ -196,6 +196,7 @@ const SignUpFormUI = (props) => {
                 {props?.phone && (
                   <Input
                     value={props.phone}
+                    name='cellphone'
                     className='form'
                     readOnly
                   />
