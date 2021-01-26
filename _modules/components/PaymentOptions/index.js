@@ -25,6 +25,8 @@ var _FaStripeS = _interopRequireDefault(require("@meronex/icons/fa/FaStripeS"));
 
 var _GrStripe = _interopRequireDefault(require("@meronex/icons/gr/GrStripe"));
 
+var _EnPaypal = _interopRequireDefault(require("@meronex/icons/en/EnPaypal"));
+
 var _orderingComponents = require("ordering-components");
 
 var _Modal = require("../Modal");
@@ -32,6 +34,8 @@ var _Modal = require("../Modal");
 var _PaymentOptionCash = require("../PaymentOptionCash");
 
 var _PaymentOptionStripe = require("../PaymentOptionStripe");
+
+var _PaymentOptionPaypal = require("../PaymentOptionPaypal");
 
 var _StripeElementsForm = require("../StripeElementsForm");
 
@@ -107,25 +111,42 @@ var getPayIcon = function getPayIcon(method) {
     case 32:
       return /*#__PURE__*/_react.default.createElement(_GrStripe.default, null);
 
+    case 3:
+      return /*#__PURE__*/_react.default.createElement(_EnPaypal.default, null);
+
     default:
       return /*#__PURE__*/_react.default.createElement(_IosCard.default, null);
   }
 };
 
-var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _paymethodsList$error, _paymethodData$card, _paymethodData$card2;
+var paypalBtnStyle = {
+  color: 'gold',
+  shape: 'pill',
+  label: 'paypal',
+  size: 'responsive'
+};
 
-  var isLoading = props.isLoading,
+var PaymentOptionsUI = function PaymentOptionsUI(props) {
+  var _paymethodsList$error, _paymethodData$card, _paymethodData$card2, _paymethodSelected$cr;
+
+  var cart = props.cart,
+      isLoading = props.isLoading,
       orderTotal = props.orderTotal,
+      isDisabled = props.isDisabled,
       paymethodSelected = props.paymethodSelected,
       paymethodData = props.paymethodData,
       paymethodsList = props.paymethodsList,
+      handleOrderRedirect = props.handleOrderRedirect,
       handlePaymethodClick = props.handlePaymethodClick,
       handlePaymethodDataChange = props.handlePaymethodDataChange;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      token = _useSession2[0].token;
 
   (0, _react.useEffect)(function () {
     if (paymethodsList.paymethods.length === 1) {
@@ -138,6 +159,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     return a.id - b.id;
   }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
+      isDisabled: isDisabled,
       key: paymethod.id,
       className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {
@@ -168,11 +190,31 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     className: "brand"
   }, (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand)), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.last4))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     className: "modal-info",
+    open: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'paypal' && !paymethodData.id,
+    onClose: function onClose() {
+      return handlePaymethodClick(null);
+    },
+    title: t('PAY_WITH_PAYPAL', 'Pay with PayPal')
+  }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
+    clientId: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr = paymethodSelected.credentials) === null || _paymethodSelected$cr === void 0 ? void 0 : _paymethodSelected$cr.client_id,
+    body: {
+      paymethod_id: paymethodSelected.id,
+      amount: cart.total,
+      delivery_zone_id: cart.delivery_zone_id,
+      cartUuid: cart.uuid
+    },
+    btnStyle: paypalBtnStyle,
+    noAuthMessage: !token ? t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method') : null,
+    handlerChangePaypal: function handlerChangePaypal(uuid) {
+      return handleOrderRedirect && handleOrderRedirect(uuid);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    className: "modal-info",
     open: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && !paymethodData.id,
     onClose: function onClose() {
       return handlePaymethodClick(null);
     },
-    title: "Select a card"
+    title: t('SELECT_A_CARD', 'Select a card')
   }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     paymethod: paymethodSelected,
     businessId: props.businessId,
@@ -183,12 +225,12 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       return handlePaymethodClick(null);
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    className: "modal-info",
+    title: t('SELECT_A_CARD', 'Select a card'),
     open: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_connect' && !paymethodData.id,
+    className: "modal-info",
     onClose: function onClose() {
       return handlePaymethodClick(null);
-    },
-    title: "Select a card"
+    }
   }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_connect' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     paymethod: paymethodSelected,
     businessId: props.businessId,
@@ -200,12 +242,12 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       return handlePaymethodClick(null);
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    className: "modal-info",
+    title: t('ADD_CARD', 'Add card'),
     open: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_direct' && !paymethodData.id,
+    className: "modal-info",
     onClose: function onClose() {
       return handlePaymethodClick(null);
-    },
-    title: "Add card"
+    }
   }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_direct' && /*#__PURE__*/_react.default.createElement(_StripeElementsForm.StripeElementsForm, {
     businessId: props.businessId,
     publicKey: paymethodSelected.credentials.publishable,
@@ -214,9 +256,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       return handlePaymethodClick(null);
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: "Stripe Redirect",
-    className: "modal-info",
+    title: t('STRIPE_REDIRECT', 'Stripe Redirect'),
     open: ['stripe_redirect'].includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && !paymethodData.type,
+    className: "modal-info",
     onClose: function onClose() {
       return handlePaymethodClick(null);
     }
