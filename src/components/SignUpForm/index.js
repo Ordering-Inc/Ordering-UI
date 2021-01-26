@@ -88,7 +88,7 @@ const SignUpFormUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required) {
+    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required && !props.notShowInputPhoneNumber) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -140,7 +140,7 @@ const SignUpFormUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
-  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const showInputPhoneNumber = !props?.notShowInputPhoneNumber ?? validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   return (
     <SignUpContainer isPopup={isPopup}>
@@ -193,6 +193,14 @@ const SignUpFormUI = (props) => {
                   />
                 )}
 
+                {props?.phone && (
+                  <Input
+                    value={props.phone}
+                    className='form'
+                    readOnly
+                  />
+                )}
+
                 <Input
                   type='password'
                   name='password'
@@ -234,19 +242,23 @@ const SignUpFormUI = (props) => {
             {elementLinkToLogin}
           </RedirectLink>
         )}
-        {Object.keys(configs).length > 0 ? (
-          <SocialButtons isPopup={isPopup}>
-            {configs?.facebook_login?.value && configs?.facebook_id?.value && (
-              <FacebookLoginButton
-                appId={configs?.facebook_id?.value}
-                handleSuccessFacebookLogin={handleSuccessFacebook}
-              />
+        {!props?.notShowInputPhoneNumber && (
+          <>
+            {Object.keys(configs).length > 0 ? (
+              <SocialButtons isPopup={isPopup}>
+                {configs?.facebook_login?.value && configs?.facebook_id?.value && (
+                  <FacebookLoginButton
+                    appId={configs?.facebook_id?.value}
+                    handleSuccessFacebookLogin={handleSuccessFacebook}
+                  />
+                )}
+              </SocialButtons>
+            ) : (
+              <SkeletonSocialWrapper>
+                <Skeleton height={43} />
+              </SkeletonSocialWrapper>
             )}
-          </SocialButtons>
-        ) : (
-          <SkeletonSocialWrapper>
-            <Skeleton height={43} />
-          </SkeletonSocialWrapper>
+          </>
         )}
       </FormSide>
       <Alert
