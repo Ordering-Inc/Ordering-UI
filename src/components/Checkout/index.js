@@ -65,7 +65,8 @@ const CheckoutUI = (props) => {
     businessDetails,
     paymethodSelected,
     handlePaymethodChange,
-    handlerClickPlaceOrder
+    handlerClickPlaceOrder,
+    handleOrderRedirect
   } = props
 
   const [validationFields] = useValidationFields()
@@ -240,14 +241,18 @@ const CheckoutUI = (props) => {
           )}
         </BusinessDetailsContainer>
 
-        {!cartState.loading && cart && cart?.status !== 2 && (
+        {!cartState.loading && cart && (
           <PaymentMethodContainer>
             <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
             <PaymentOptions
+              cart={cart}
+              isDisabled={cart?.status === 2}
+              businessId={businessDetails?.business?.id}
               isLoading={businessDetails.loading}
               paymethods={businessDetails?.business?.paymethods}
               onPaymentChange={handlePaymethodChange}
               setErrorCash={setErrorCash}
+              handleOrderRedirect={handleOrderRedirect}
             />
           </PaymentMethodContainer>
         )}
