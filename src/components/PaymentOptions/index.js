@@ -55,23 +55,28 @@ const getPayIcon = (method) => {
   }
 }
 
-const clientId = 'AULNRFhxjY5BzJ_uXoiB6R4hM1SNwKGowkphqzGuVpACCGF-VXeKYEoyftxycsCSXnsl1x2lp7Ygjnkr'
+const paypalBtnStyle = {
+  color: 'gold',
+  shape: 'pill',
+  label: 'paypal',
+  size: 'responsive'
+}
 
 const PaymentOptionsUI = (props) => {
   const {
     cart,
     isLoading,
     orderTotal,
+    isDisabled,
     paymethodSelected,
     paymethodData,
     paymethodsList,
+    handleOrderRedirect,
     handlePaymethodClick,
     handlePaymethodDataChange
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
-
-  const handlerChangePaypal = (res) => { console.log(res) }
 
   useEffect(() => {
     if (paymethodsList.paymethods.length === 1) {
@@ -85,6 +90,7 @@ const PaymentOptionsUI = (props) => {
         {paymethodsList.paymethods.length > 0 && (
           paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
             <PayCard
+              isDisabled={isDisabled}
               key={paymethod.id}
               className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
               onClick={() => handlePaymethodClick(paymethod)}
@@ -143,63 +149,32 @@ const PaymentOptionsUI = (props) => {
         </PayCardSelected>
       )}
 
-      {paymethodSelected?.gateway === 'paypal' && (
-        <PaymentOptionPaypal
-          token={token}
-          clientId={clientId}
-          body={{
-            paymethod_id: paymethodSelected.id,
-            amount: cart.total,
-            delivery_zone_id: cart.delivery_zone_id,
-            cartUuid: cart.uuid
-          }}
-          btnStyle={{
-            color: 'gold',
-            shape: 'pill',
-            label: 'paypal',
-            size: 'responsive'
-          }}
-          noAuthMessage={
-            !token
-              ? t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')
-              : null
-          }
-          handlerChangePaypal={handlerChangePaypal}
-        />
-      )}
-
       {/* Paypal */}
-      {/* <Modal
+      <Modal
         className='modal-info'
         open={paymethodSelected?.gateway === 'paypal' && !paymethodData.id}
         onClose={() => handlePaymethodClick(null)}
-        title={t('PAY_ORDER_WITH_PAYPAL', 'Pay order with PayPal')}
+        title={t('PAY_WITH_PAYPAL', 'Pay with PayPal')}
       >
         {paymethodSelected?.gateway === 'paypal' && (
           <PaymentOptionPaypal
-            token={token}
-            clientId={clientId}
+            clientId={paymethodSelected?.credentials?.client_id}
             body={{
               paymethod_id: paymethodSelected.id,
               amount: cart.total,
               delivery_zone_id: cart.delivery_zone_id,
               cartUuid: cart.uuid
             }}
-            btnStyle={{
-              color: 'gold',
-              shape: 'pill',
-              label: 'paypal',
-              size: 'responsive'
-            }}
+            btnStyle={paypalBtnStyle}
             noAuthMessage={
               !token
                 ? t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')
                 : null
             }
-            handlerChangePaypal={handlerChangePaypal}
+            handlerChangePaypal={(uuid) => handleOrderRedirect && handleOrderRedirect(uuid)}
           />
         )}
-      </Modal> */}
+      </Modal>
 
       {/* Stripe */}
       <Modal
