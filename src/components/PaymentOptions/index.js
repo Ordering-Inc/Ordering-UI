@@ -7,11 +7,13 @@ import FaStripe from '@meronex/icons/fa/FaStripe'
 import FaCcStripe from '@meronex/icons/fa/FaCcStripe'
 import FaStripeS from '@meronex/icons/fa/FaStripeS'
 import GrStripe from '@meronex/icons/gr/GrStripe'
-import { PaymentOptions as PaymentOptionsController, useLanguage } from 'ordering-components'
+import EnPaypal from '@meronex/icons/en/EnPaypal'
+import { PaymentOptions as PaymentOptionsController, useLanguage, useSession } from 'ordering-components'
 
 import { Modal } from '../Modal'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
+import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
 import { NotFoundSource } from '../NotFoundSource'
@@ -46,13 +48,18 @@ const getPayIcon = (method) => {
       return <FaStripeS />
     case 32:
       return <GrStripe />
+    case 3:
+      return <EnPaypal />
     default:
       return <IosCard />
   }
 }
 
+const clientId = 'AULNRFhxjY5BzJ_uXoiB6R4hM1SNwKGowkphqzGuVpACCGF-VXeKYEoyftxycsCSXnsl1x2lp7Ygjnkr'
+
 const PaymentOptionsUI = (props) => {
   const {
+    cart,
     isLoading,
     orderTotal,
     paymethodSelected,
@@ -62,6 +69,9 @@ const PaymentOptionsUI = (props) => {
     handlePaymethodDataChange
   } = props
   const [, t] = useLanguage()
+  const [{ token }] = useSession()
+
+  const handlerChangePaypal = (res) => { console.log(res) }
 
   useEffect(() => {
     if (paymethodsList.paymethods.length === 1) {
@@ -114,6 +124,25 @@ const PaymentOptionsUI = (props) => {
           orderTotal={orderTotal}
           onChangeData={handlePaymethodDataChange}
           setErrorCash={props.setErrorCash}
+        />
+      )}
+
+      {paymethodSelected?.gateway === 'cash' && (
+        <PaymentOptionPaypal
+          token={token}
+          clientId={clientId}
+          body={{
+            paymethod_id: paymethodSelected.id,
+            amount: cart.total,
+            delivery_zone_id: cart.delivery_zone_id,
+            cartUuid: cart.uuid
+          }}
+          noAuthMessage={
+            !token
+              ? t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')
+              : null
+          }
+          handlerChangePaypal={handlerChangePaypal}
         />
       )}
 
