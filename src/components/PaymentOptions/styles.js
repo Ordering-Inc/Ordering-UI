@@ -35,6 +35,10 @@ export const PayCard = styled.div`
     margin-right: 0;
   `}
 
+  ${props => props.isDisabled && css`
+    pointer-events: none;
+  `}
+
   svg path {
     fill: #000;
   }
