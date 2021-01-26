@@ -83,7 +83,7 @@ export const Details = styled.div`
     }
   }
   p{
-    color: #D81313;
+    color: ${props => props.theme.colors.primary};
     margin: 2px auto;
   }
   button {
@@ -98,7 +98,7 @@ export const Details = styled.div`
   @media (min-width: 480px){
     div{
       h3{
-        font-size: 14px;  
+        font-size: 14px;
       }
     }
   }
