@@ -6,5 +6,8 @@
   "baseUrl": "http://localhost:8300",
   "env": {
     "coverage": false
-  }
+  },
+  "fixturesFolder": false,
+  "supportFile": false,
+  "pluginsFile": false
 }
