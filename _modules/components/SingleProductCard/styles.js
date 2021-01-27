@@ -21,8 +21,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _templateObject8() {
+function _templateObject9() {
   var data = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 75px;\n  border-radius: 10px;\n"]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n    margin-left: 5px;\n    margin-right: 0px;\n  "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -32,7 +42,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n    margin-left: 5px;\n    margin-right: 0px;\n  "]);
+  var data = _taggedTemplateLiteral(["\n  max-width: 75px;\n  max-height: 75px;\n  height: 75px;\n  width: 75px;\n  margin-right: 5px;\n  ", "\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -42,7 +52,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  max-width: 75px;\n  max-height: 75px;\n  height: 75px;\n  width: 75px;\n  margin-right: 5px;\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n      text-align: right;\n    "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -52,7 +62,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n      text-align: right;\n    "]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  max-width: calc(100% - 90px);\n  > * {\n    margin: 5px;\n  }\n\n  h1 {\n    font-size: 16px;\n    font-weight: ", ";\n    text-align: left;\n    color: #263238;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  p {\n    font-weight: ", ";\n    text-align: left;\n    ", "\n\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    color: ", ";\n    font-weight: bold;\n  }\n\n  p, span {\n    font-size: 13px;\n  }\n\n  @media (min-width: 1024px) {\n    h1 {\n      font-size: 18px;\n    }\n\n    p {\n      font-size: 16px;\n    }\n\n    span {\n      font-size: 15px;\n    }\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -62,7 +72,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  max-width: calc(100% - 90px);\n  > * {\n    margin: 5px;\n  }\n\n  h1 {\n    font-size: 16px;\n    font-weight: ", ";\n    text-align: left;\n    color: #263238;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  p {\n    font-weight: ", ";\n    text-align: left;\n    ", "\n\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    color: ", ";\n    font-weight: bold;\n  }\n\n  p, span {\n    font-size: 13px;\n  }\n\n  @media (min-width: 1024px) {\n    h1 {\n      font-size: 18px;\n    }\n\n    p {\n      font-size: 16px;\n    }\n\n    span {\n      font-size: 15px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n    left: 6px;\n    right: initial;\n  "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -72,7 +82,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    left: 6px;\n    right: initial;\n  "]);
+  var data = _taggedTemplateLiteral(["\n  font-weight: bold;\n  position: absolute;\n  background: #D6D6D6 0% 0% no-repeat padding-box;\n  border-radius: 23px;\n  padding: 5px 10px;\n  top: 8px;\n  right: 6px;\n  text-transform: uppercase;\n  font-size: 14px;\n  ", "\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -82,7 +92,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  font-weight: bold;\n  position: absolute;\n  background: #D6D6D6 0% 0% no-repeat padding-box;\n  border-radius: 23px;\n  padding: 5px 10px;\n  top: 8px;\n  right: 6px;\n  text-transform: uppercase;\n  font-size: 14px;\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n  "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -92,7 +102,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% - 40px);\n  padding: 10px;\n  margin: 10px;\n  border-radius: 10px;\n  cursor: pointer;\n  position: relative;\n\n  background: ", ";\n\n  @media (min-width: 681px) {\n    width: calc(50% - 40px);\n  }\n\n  @media (min-width: 993px) {\n    width: calc(33% - 40px);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% - 40px);\n  padding: 10px;\n  margin: 10px;\n  border-radius: 10px;\n  cursor: pointer;\n  position: relative;\n\n  background: ", ";\n\n  ", "\n\n  @media (min-width: 681px) {\n    width: calc(50% - 40px);\n  }\n\n  @media (min-width: 993px) {\n    width: calc(33% - 40px);\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -106,19 +116,21 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var CardContainer = _styledComponents.default.div(_templateObject(), function (_ref) {
   var soldOut = _ref.soldOut;
   return soldOut ? '#B8B8B8' : '#FFF';
+}, function (props) {
+  return props.theme.colors.backgroundPage === '#FFF' && (0, _styledComponents.css)(_templateObject2());
 });
 
 exports.CardContainer = CardContainer;
 
-var SoldOut = _styledComponents.default.span(_templateObject2(), function (props) {
+var SoldOut = _styledComponents.default.span(_templateObject3(), function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3());
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4());
 });
 
 exports.SoldOut = SoldOut;
 
-var CardInfo = _styledComponents.default.div(_templateObject4(), function (_ref2) {
+var CardInfo = _styledComponents.default.div(_templateObject5(), function (_ref2) {
   var soldOut = _ref2.soldOut;
   return soldOut ? 'bold' : '500';
 }, function (_ref3) {
@@ -127,7 +139,7 @@ var CardInfo = _styledComponents.default.div(_templateObject4(), function (_ref2
 }, function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5());
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6());
 }, function (_ref4) {
   var soldOut = _ref4.soldOut,
       theme = _ref4.theme;
@@ -136,15 +148,15 @@ var CardInfo = _styledComponents.default.div(_templateObject4(), function (_ref2
 
 exports.CardInfo = CardInfo;
 
-var WrapLogo = _styledComponents.default.div(_templateObject6(), function (props) {
+var WrapLogo = _styledComponents.default.div(_templateObject7(), function (props) {
   var _props$theme3;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject7());
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject8());
 });
 
 exports.WrapLogo = WrapLogo;
 
-var CardLogoStyled = _styledComponents.default.div(_templateObject8());
+var CardLogoStyled = _styledComponents.default.div(_templateObject9());
 
 var CardLogo = function CardLogo(props) {
   var style = {};

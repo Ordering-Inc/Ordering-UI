@@ -74,7 +74,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: #F8F8F8;\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -99,7 +99,9 @@ var ProductsContainer = _styledComponents.default.div(_templateObject());
 
 exports.ProductsContainer = ProductsContainer;
 
-var WrapContent = _styledComponents.default.div(_templateObject2());
+var WrapContent = _styledComponents.default.div(_templateObject2(), function (props) {
+  return props.theme.colors.backgroundPage;
+});
 
 exports.WrapContent = WrapContent;
 

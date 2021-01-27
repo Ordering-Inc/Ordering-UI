@@ -13,8 +13,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _templateObject9() {
+function _templateObject10() {
   var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 88px;\n  img{\n    width: 100%;\n    height: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    image-rendering: -webkit-optimize-contrast;\n    object-fit: cover;\n  }\n  @media(min-width: 480px){\n    height: 100px;\n  }\n"]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n  "]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -54,7 +64,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  max-height: 220px;\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    max-height: 250px;\n    width: 400px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  max-height: 220px;\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    max-height: 250px;\n    width: 400px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -129,10 +139,12 @@ var Card = _styledComponents.default.div(_templateObject5(), function (props) {
   return props.nobg && (0, _styledComponents.css)(_templateObject7());
 }, function (props) {
   return props.flex && (0, _styledComponents.css)(_templateObject8());
+}, function (props) {
+  return props.theme.colors.backgroundPage === '#FFF' && (0, _styledComponents.css)(_templateObject9());
 });
 
 exports.Card = Card;
 
-var Map = _styledComponents.default.div(_templateObject9());
+var Map = _styledComponents.default.div(_templateObject10());
 
 exports.Map = Map;

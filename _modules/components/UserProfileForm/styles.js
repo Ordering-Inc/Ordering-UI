@@ -74,7 +74,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  width: 100%;\n\n  h1 {\n    font-size: 20px\n  }\n\n  > * {\n    margin: 5px 0;\n    width: 75%;\n  }\n\n  > button {\n    width: auto;\n    background: #F8F8F8;\n  }\n\n  @media (min-width: 768px){\n    align-items: flex-start;\n    text-align: left;\n    ", "\n  }\n\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  width: 100%;\n\n  h1 {\n    font-size: 20px\n  }\n\n  > * {\n    margin: 5px 0;\n    width: 75%;\n  }\n\n  > button {\n    width: auto;\n    background: ", ";\n  }\n\n  @media (min-width: 768px){\n    align-items: flex-start;\n    text-align: left;\n    ", "\n  }\n\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -170,8 +170,9 @@ exports.UserImage = UserImage;
 var Image = _styledComponents.default.div(_templateObject4(), function (props) {
   return props.theme.colors.primary;
 }, function (_ref) {
-  var isImage = _ref.isImage;
-  return isImage ? '#FFF' : 'rgba(204, 204, 204, 0.2)';
+  var isImage = _ref.isImage,
+      theme = _ref.theme;
+  return isImage ? '#FFF' : "".concat(theme.colors.backgroundPage);
 });
 
 exports.Image = Image;
@@ -189,6 +190,8 @@ var Camera = _styledComponents.default.div(_templateObject7());
 exports.Camera = Camera;
 
 var UserData = _styledComponents.default.div(_templateObject8(), function (props) {
+  return props.theme.colors.backgroundPage;
+}, function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject9());

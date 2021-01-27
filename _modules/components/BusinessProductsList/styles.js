@@ -64,7 +64,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  background: '#F8F8F8'\n"]);
+  var data = _taggedTemplateLiteral(["\n  background: ", ";\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -75,7 +75,9 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject());
+var ProductsContainer = _styledComponents.default.div(_templateObject(), function (props) {
+  return props.theme.colors.backgroundPage;
+});
 
 exports.ProductsContainer = ProductsContainer;
 

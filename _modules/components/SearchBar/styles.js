@@ -24,7 +24,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: flex-end;\n\n  input {\n    width: 100%;\n    -webkit-transition: width 0.4s ease-in-out;\n    transition: width 0.4s ease-in-out;\n    background-image: url(", ");\n    background-position: right 10px center;\n    background-repeat: no-repeat;\n    background-size: 15px;\n    background-color: #F8F8F8;\n    ", "\n\n    @media (min-width: 681px) {\n      width: 200px;\n      &:focus {\n        width: 50%;\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: flex-end;\n\n  input {\n    width: 100%;\n    -webkit-transition: width 0.4s ease-in-out;\n    transition: width 0.4s ease-in-out;\n    background-image: url(", ");\n    background-position: right 10px center;\n    background-repeat: no-repeat;\n    background-size: 15px;\n    background-color: ", ";\n    ", "\n\n    @media (min-width: 681px) {\n      width: 200px;\n      &:focus {\n        width: 50%;\n      }\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -40,9 +40,13 @@ var BusinessSearch = _styledComponents.default.div(_templateObject(), function (
 
   return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$images = _props$theme.images) === null || _props$theme$images === void 0 ? void 0 : (_props$theme$images$g = _props$theme$images.general) === null || _props$theme$images$g === void 0 ? void 0 : _props$theme$images$g.searchIcon;
 }, function (props) {
-  var _props$theme2;
+  var _props$theme2, _props$theme2$colors;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject2());
+  return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : (_props$theme2$colors = _props$theme2.colors) === null || _props$theme2$colors === void 0 ? void 0 : _props$theme2$colors.backgroundPage;
+}, function (props) {
+  var _props$theme3;
+
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject2());
 });
 
 exports.BusinessSearch = BusinessSearch;

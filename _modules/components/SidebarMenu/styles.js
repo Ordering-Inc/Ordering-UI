@@ -209,8 +209,9 @@ var IconContent = _styledComponents.default.button(_templateObject4(), function 
 exports.IconContent = IconContent;
 
 var SidebarContent = _styledComponents.default.div(_templateObject5(), function (_ref6) {
-  var isHome = _ref6.isHome;
-  return isHome ? '#333' : '#F8F8F8';
+  var isHome = _ref6.isHome,
+      theme = _ref6.theme;
+  return isHome ? '#333' : "".concat(theme.colors.backgroundPage);
 }, function (_ref7) {
   var isHome = _ref7.isHome;
   return isHome ? 'rgba(0, 0, 0, 0.7) 0px 8px 24px;' : 'rgba(0, 0, 0, 0.2) 0px 8px 24px;';
@@ -236,8 +237,9 @@ var MenuClose = _styledComponents.default.button(_templateObject8(), function (_
 exports.MenuClose = MenuClose;
 
 var MenuLink = _styledComponents.default.a(_templateObject9(), function (_ref11) {
-  var isHome = _ref11.isHome;
-  return isHome ? '#333' : '#F8F8F8';
+  var isHome = _ref11.isHome,
+      theme = _ref11.theme;
+  return isHome ? '#333' : "".concat(theme.colors.backgroundPage);
 });
 
 exports.MenuLink = MenuLink;
