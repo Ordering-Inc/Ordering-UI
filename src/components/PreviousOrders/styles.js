@@ -5,6 +5,11 @@ export const SingleCard = styled.div`
   display: flex;
   height: 100px;
   border: none;
+
+  ${props => props.theme.colors.backgroundPage === '#FFF' && css`
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  `}
+
   @media(min-width: 480px){
     height: 140px;
     border-top: 1px solid #ccc;

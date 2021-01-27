@@ -4,7 +4,7 @@ export const CategoriesContainer = styled.div`
   display: flex;
   overflow-x: auto;
   padding: 5px;
-  background: #F8F8F8;
+  background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
   position: sticky;
   top: 0;
@@ -19,7 +19,7 @@ export const CategoriesContainer = styled.div`
 
   div.special{
     ${props => !props.featured && css`
-      display: none 
+      display: none
     `}
   }
 
