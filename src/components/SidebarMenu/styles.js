@@ -57,7 +57,7 @@ export const SidebarContent = styled.div`
   position: fixed;
   z-index: 1005;
   top: 0;
-  background-color: ${({ isHome }) => isHome ? '#333' : '#F8F8F8'};
+  background-color: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -120,7 +120,7 @@ export const MenuLink = styled.a`
   text-align: inherit;
   display: block;
   width: 100%;
-  background: ${({ isHome }) => isHome ? '#333' : '#F8F8F8'};;
+  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};;
   outline: none !important;
 
   &:hover {
