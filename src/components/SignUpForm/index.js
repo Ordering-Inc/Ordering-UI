@@ -88,7 +88,7 @@ const SignUpFormUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required && !props.notShowInputPhoneNumber) {
+    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required && !props.externalPhoneNumber) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -140,7 +140,7 @@ const SignUpFormUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
-  const showInputPhoneNumber = !props?.notShowInputPhoneNumber ?? validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   return (
     <SignUpContainer isPopup={isPopup}>
@@ -185,7 +185,7 @@ const SignUpFormUI = (props) => {
                     )
                   ))
                 }
-                {!!showInputPhoneNumber && (
+                {!!showInputPhoneNumber && !props.externalPhoneNumber && (
                   <InputPhoneNumber
                     value={userPhoneNumber}
                     setValue={handleChangePhoneNumber}
@@ -193,12 +193,12 @@ const SignUpFormUI = (props) => {
                   />
                 )}
 
-                {props?.phone && (
+                {props.externalPhoneNumber && (
                   <Input
-                    value={props.phone}
-                    name='cellphone'
+                    value={props.externalPhoneNumber}
                     className='form'
                     readOnly
+                    name='cellphone'
                   />
                 )}
 
@@ -243,7 +243,7 @@ const SignUpFormUI = (props) => {
             {elementLinkToLogin}
           </RedirectLink>
         )}
-        {!props?.notShowInputPhoneNumber && (
+        {!props.externalPhoneNumber && (
           <>
             {Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
