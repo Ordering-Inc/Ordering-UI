@@ -150,6 +150,7 @@ const AddressListUI = (props) => {
       {
         popover && addressOpen && (
           <AddressForm
+            userId={props?.userId}
             addressesList={addressList?.addresses}
             useValidationFileds
             address={curAddress}
