@@ -24,7 +24,7 @@ function _templateObject34() {
 }
 
 function _templateObject33() {
-  var data = _taggedTemplateLiteral(["\n    font-size: 0.8em;\n  "]);
+  var data = _taggedTemplateLiteral(["\n      font-size: 0.8em;\n    "]);
 
   _templateObject33 = function _templateObject33() {
     return data;
@@ -54,7 +54,7 @@ function _templateObject31() {
 }
 
 function _templateObject30() {
-  var data = _taggedTemplateLiteral(["\n  display: inline-flex;\n  flex-direction: column;\n  flex: 1;\n  padding-left: 10px;\n  font-size: 0.9em;\n  ", "\n  ", "\n  h2 {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n    margin-block-end: 0;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    color : #9A9A9A;\n    white-space: nowrap;\n    font-size: 0.9em;\n    ", "\n  \n  }\n\n  p[name='order_number']{\n    width: 170px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  p[name='view_order'] {\n    color: #D81313;\n    cursor: pointer;\n    text-decoration: none;\n  }\n\n  @media (min-width: 480px){\n    h2 {\n    font-size: 14px;\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    }\n    p{\n      ", "\n    }\n    p[name='order_number']{\n      width: 230px;\n    }\n  }\n\n  @media (min-width: 768px){\n    font-size: 0.9em;\n    p {\n      font-size: 1em;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: inline-flex;\n  flex-direction: column;\n  flex: 1;\n  padding-left: 10px;\n  font-size: 0.9em;\n  ", "\n  ", "\n  h2 {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n    margin-block-end: 0;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    color : #9A9A9A;\n    white-space: nowrap;\n    font-size: 0.9em;\n    ", "\n  }\n\n  p[name='order_number']{\n    width: 170px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  p[name='view_order'] {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  @media (min-width: 480px){\n    h2 {\n    font-size: 14px;\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    }\n    p{\n      ", "\n    }\n    p[name='order_number']{\n      width: 230px;\n    }\n  }\n\n  @media (min-width: 768px){\n    font-size: 0.9em;\n    p {\n      font-size: 1em;\n    }\n  }\n"]);
 
   _templateObject30 = function _templateObject30() {
     return data;
@@ -244,7 +244,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n    width: 100%;\n    padding: 0 10px;\n    display: flex;\n    flex-direction: column-reverse;\n    margin: 0 auto;\n\n    p{\n      margin-block-end: 0;\n      margin-block-start: 0;\n      color: #9A9A9A\n    }\n\n    @media(min-width: 480px){\n      width: 80%;\n      padding: 0;\n        div:last-child{\n        border-top: none;\n      }\n    }\n  "]);
+  var data = _taggedTemplateLiteral(["\n    width: 98%;\n    display: flex;\n    flex-direction: column-reverse;\n    margin: 0 auto;\n\n    p{\n      margin-block-end: 0;\n      margin-block-start: 0;\n      color: #9A9A9A\n    }\n\n    @media(min-width: 480px){\n      width: 80%;\n      padding: 0;\n      div:last-child {\n        border-top: none;\n      }\n    }\n  "]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -324,7 +324,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    display: flex;\n    overflow-x: auto;\n    overflow-y: hidden;\n    justify-content: ", ";\n    width: 100%;\n    margin: auto 0px auto auto;\n    ", "\n    ::-webkit-scrollbar {\n      width: 0px;\n      height: 0px;\n    }\n\n    ", "\n    \n    @media (min-width: 768px) {\n      width: 90%;\n      justify-content: flex-start;\n      ", "\n  "]);
+  var data = _taggedTemplateLiteral(["\n    padding: 0 10px;\n    text-align: center;\n    display: flex;\n    overflow-x: auto;\n    overflow-y: hidden;\n    justify-content: ", ";\n    width: 100%;\n    margin: auto 0px auto auto;\n    ", "\n    ::-webkit-scrollbar {\n      width: 0px;\n      height: 0px;\n    }\n\n    ", "\n    \n    @media (min-width: 768px) {\n      width: 90%;\n      justify-content: flex-start;\n      ", "\n  "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -472,6 +472,8 @@ var BusinessInformation = _styledComponents.default.div(_templateObject30(), fun
 }, function (_ref12) {
   var activeOrders = _ref12.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject33());
+}, function (props) {
+  return props.theme.colors.primary;
 }, function (_ref13) {
   var activeOrders = _ref13.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject34());

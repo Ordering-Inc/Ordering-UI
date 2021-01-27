@@ -173,7 +173,7 @@ var CheckoutUI = function CheckoutUI(props) {
 
     setUserErrors([]);
     var errors = [];
-    var notFields = ['coupon', 'driver_tip', 'mobile_phone'];
+    var notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes'];
     Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.checkout).map(function (field) {
       if ((field === null || field === void 0 ? void 0 : field.required) && !notFields.includes(field.code)) {
         if (!user[field === null || field === void 0 ? void 0 : field.code]) {

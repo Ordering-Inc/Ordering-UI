@@ -117,7 +117,7 @@ var CardContainer = _styledComponents.default.div(_templateObject(), function (_
   var soldOut = _ref.soldOut;
   return soldOut ? '#B8B8B8' : '#FFF';
 }, function (props) {
-  return props.theme.colors.backgroundPage === '#FFF' && (0, _styledComponents.css)(_templateObject2());
+  return (props.theme.colors.backgroundPage === '#FFF' || props.theme.colors.backgroundPage === '#FFFFFF') && (0, _styledComponents.css)(_templateObject2());
 });
 
 exports.CardContainer = CardContainer;

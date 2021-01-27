@@ -140,7 +140,7 @@ var Card = _styledComponents.default.div(_templateObject5(), function (props) {
 }, function (props) {
   return props.flex && (0, _styledComponents.css)(_templateObject8());
 }, function (props) {
-  return props.theme.colors.backgroundPage === '#FFF' && (0, _styledComponents.css)(_templateObject9());
+  return (props.theme.colors.backgroundPage === '#FFF' || props.theme.colors.backgroundPage === '#FFFFFF') && (0, _styledComponents.css)(_templateObject9());
 });
 
 exports.Card = Card;
