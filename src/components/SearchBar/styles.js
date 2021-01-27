@@ -13,7 +13,7 @@ export const BusinessSearch = styled.div`
     background-position: right 10px center;
     background-repeat: no-repeat;
     background-size: 15px;
-    background-color: #F8F8F8;
+    background-color: ${props => props.theme?.colors?.backgroundPage};
     ${props => props.theme?.rtl && css`
       background-position: left 10px center;
     `}

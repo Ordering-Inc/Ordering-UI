@@ -7,7 +7,7 @@ export const ProductsContainer = styled.div`
 
 export const WrapContent = styled.div`
   padding: 5px;
-  background: #F8F8F8;
+  background: ${props => props.theme.colors.backgroundPage};
 
   @media (min-width: 381px) {
     padding: 15px;

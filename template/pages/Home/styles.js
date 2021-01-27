@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const HomeContainer = styled.div`
-  background-color: #F8F8F8;
+  background-color: ${props => props.theme.colors.backgroundPage};
   display: flex;
   flex-direction: column;
 `

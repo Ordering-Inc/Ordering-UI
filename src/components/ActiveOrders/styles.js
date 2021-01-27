@@ -90,6 +90,10 @@ export const Card = styled.div`
     justify-content: center;
   `}
 
+  ${props => props.theme.colors.backgroundPage === '#FFF' && css`
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  `}
+
   @media (min-width: 480px){
     min-width: 400px;
     max-height: 250px;

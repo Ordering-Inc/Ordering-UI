@@ -38,7 +38,7 @@ export const Image = styled.div`
   border-radius: 100%;
   overflow: hidden;
   padding: 20px;
-  background: ${({ isImage }) => isImage ? '#FFF' : 'rgba(204, 204, 204, 0.2)'};
+  background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};
   cursor: -webkit-grab;
   cursor: grab;
 
@@ -115,7 +115,7 @@ export const UserData = styled.div`
 
   > button {
     width: auto;
-    background: #F8F8F8;
+    background: ${props => props.theme.colors.backgroundPage};
   }
 
   @media (min-width: 768px){

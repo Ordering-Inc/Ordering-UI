@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-const BusinessContainerStyled = styled.div`
+export const BusinessContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
@@ -18,24 +18,18 @@ const BusinessContainerStyled = styled.div`
   align-items: flex-end;
   border-radius: 20px;
 
+  ${props => props.isSkeleton && css`
+    background-color: #F8F8F8;
+  `}
+
+  ${props => props.bgimage && css`
+    background-image: url(${props.bgimage});
+  `}
+
   @media (min-width: 490px) {
     justify-content: flex-start;
   }
 `
-export const BusinessContainer = (props) => {
-  const style = {}
-  if (props.bgimage) {
-    style.backgroundImage = `url(${props.bgimage})`
-  }
-  if (props.isSkeleton) {
-    style.backgroundColor = '#F8F8F8'
-  }
-  return (
-    <BusinessContainerStyled {...props} style={style}>
-      {props.children}
-    </BusinessContainerStyled>
-  )
-}
 
 export const BusinessContent = styled.div`
   display: flex;

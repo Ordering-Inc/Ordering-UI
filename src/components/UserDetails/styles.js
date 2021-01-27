@@ -48,10 +48,4 @@ export const UserData = styled.div`
     margin: 8px 0;
     width: 75%;
   }
-
-  > button {
-    width: auto;
-    background: #F8F8F8;
-  }
-
 `
