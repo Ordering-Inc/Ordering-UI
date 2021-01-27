@@ -3,15 +3,27 @@ import styled, { css } from 'styled-components'
 export const SingleCard = styled.div`
   width: 100%;
   display: flex;
-  height: 100px;
+  max-height: 100px;
+  height: auto;
   border: none;
 
-  ${props => props.theme.colors.backgroundPage === '#FFF' && css`
+  ${props => (
+    props.theme.colors.backgroundPage === '#FFF' ||
+    props.theme.colors.backgroundPage === '#FFFFFF'
+  ) && css`
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+    border-radius: 16px;
+    margin-bottom: 15px;
   `}
 
   @media(min-width: 480px){
     height: 140px;
+    ${props => (
+      props.theme.colors.backgroundPage === '#FFF' ||
+      props.theme.colors.backgroundPage === '#FFFFFF'
+    ) && css`
+      border-top: none !important;
+    `}
     border-top: 1px solid #ccc;
   }
 `
