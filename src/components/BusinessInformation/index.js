@@ -5,7 +5,8 @@ import {
   GoogleMapsMap,
   useOrder,
   useLanguage,
-  useUtils
+  useUtils,
+  useConfig
 } from 'ordering-components'
 import { BusinessReviews } from '../BusinessReviews'
 import { Modal } from '../Modal'
@@ -51,7 +52,8 @@ export const BusinessInformationUI = (props) => {
   } = props
 
   const [orderState] = useOrder()
-  const [languageState, t] = useLanguage()
+  const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [tabValue, setTabValue] = useState('General Info')
 
   const daysOfWeek = [
@@ -173,7 +175,7 @@ export const BusinessInformationUI = (props) => {
                 {businessLocation.location && (
                   <Map>
                     <GoogleMapsMap
-                      apiKey={languageState?.dictionary?.GM_API_KEY}
+                      apiKey={configs?.google_maps_api_key?.value}
                       location={businessLocation.location}
                       mapControls={businessLocation.googleMapsControls || business.googleMapsControls}
                     />

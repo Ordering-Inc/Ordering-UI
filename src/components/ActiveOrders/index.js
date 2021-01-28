@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils } from 'ordering-components'
+import { useLanguage, useConfig, useUtils } from 'ordering-components'
 
 import {
   OpenOrder,
@@ -25,7 +25,8 @@ export const ActiveOrders = (props) => {
     getOrderStatus
   } = props
 
-  const [languageState, t] = useLanguage()
+  const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
 
   return (
@@ -34,10 +35,10 @@ export const ActiveOrders = (props) => {
         <AutoScroll special>
           {orders.map(order => (
             <Card key={order.id} id='order-card'>
-              {languageState?.dictionary?.GM_API_KEY && (
+              {configs?.google_maps_api_key?.value && (
                 <Map>
                   <img
-                    src={getGoogleMapImage(order?.business?.location, languageState?.dictionary?.GM_API_KEY)}
+                    src={getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
                     alt='google-maps-img'
                     height='100px'
                     width='400px'
