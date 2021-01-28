@@ -68,7 +68,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "cypress run"
+      "pre-push": "cypress run"
     }
   },
   "peerDependencies": {
