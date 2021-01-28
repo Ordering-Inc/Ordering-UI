@@ -11,12 +11,11 @@ describe('Mounting Address details component', () => {
       <ProviderMock>
         <AddressDetails
           businessId={22}
-          apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
           addressToShow={address}
         />
       </ProviderMock>
     )
-    cy.get('h4#address').contains(address).should('be.visible')
+    cy.get('h4').contains(address).should('be.visible')
     cy.get('img#google-maps-image').should('be.visible')
   })
 })

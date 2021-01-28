@@ -30,6 +30,7 @@
     "eslint-plugin-cypress": "^2.11.1",
     "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.3.8",
     "postcss-loader": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -64,6 +65,11 @@
     "react-phone-number-input": "^3.1.6",
     "react-popper": "^2.2.3",
     "styled-components": "^5.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "cypress run"
+    }
   },
   "peerDependencies": {
     "react": ">=16.13.1",
