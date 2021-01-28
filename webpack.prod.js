@@ -38,7 +38,12 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader // inject CSS to page
+          },
+          'css-loader'
+        ]
       },
       {
         test: /\.s[ac]ss$/i,
