@@ -11,7 +11,6 @@ describe('Mounting Address details component', () => {
       <ProviderMock>
         <AddressDetails
           businessId={22}
-          apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
           addressToShow={address}
         />
       </ProviderMock>
