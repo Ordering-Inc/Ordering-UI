@@ -78,10 +78,8 @@
   "lint-staged": {
     "./src/*.{js,jsx,ts,tsx}": [
       "npx prettier --write",
-      "eslint src/*.js --fix-dry-run"
-    ],
-    "./src/tests/*.spec.js": [
-      "npm run test"
+      "eslint src/*.js --fix-dry-run",
+      "npm test"
     ]
   },
   "peerDependencies": {

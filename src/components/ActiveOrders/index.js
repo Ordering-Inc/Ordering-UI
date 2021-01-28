@@ -34,7 +34,7 @@ export const ActiveOrders = (props) => {
         <AutoScroll special>
           {orders.map(order => (
             <Card key={order.id} id='order-card'>
-              {/* {languageState?.dictionary?.GM_API_KEY && (
+              {languageState?.dictionary?.GM_API_KEY && (
                 <Map>
                   <img
                     src={getGoogleMapImage(order?.business?.location, languageState?.dictionary?.GM_API_KEY)}
@@ -43,7 +43,7 @@ export const ActiveOrders = (props) => {
                     width='400px'
                   />
                 </Map>
-              )} */}
+              )}
               <Content>
                 {order.business?.logo && (
                   <Logo>
