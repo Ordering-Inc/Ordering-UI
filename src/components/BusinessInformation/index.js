@@ -85,7 +85,7 @@ export const BusinessInformationUI = (props) => {
         <MdClose onClick={() => onClose(false)} />
       </ModalIcon>
       <BusinessHeader>
-        <img src={business.header} alt='business-image' width='444px' height='250px' />
+        <img src={business.header} alt='business-image' width='444px' height='250px' loading='lazy' />
         <BusinessBasicContent>
           {business?.logo && (
             <WrapperBusinessLogo>
@@ -215,7 +215,7 @@ export const BusinessInformationUI = (props) => {
                 <div>
                   {
                     businessPhotos.map((photo, i) => (
-                      <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' onClick={() => handleModalImage(photo.file)} />
+                      <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' onClick={() => handleModalImage(photo.file)} loading='lazy' />
                     ))
                   }
                 </div>
@@ -257,7 +257,7 @@ export const BusinessInformationUI = (props) => {
           <ModalIcon>
             <MdClose onClick={() => setModalImage(false)} />
           </ModalIcon>
-          <img src={image} width='320px' height='180px' />
+          <img src={image} width='320px' height='180px' loading='lazy' />
         </ImageContainer>
       </Modal>
     </BusinessInformationContainer>

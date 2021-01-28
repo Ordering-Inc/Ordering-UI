@@ -4,6 +4,7 @@ import TiPencil from '@meronex/icons/ti/TiPencil'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
+import { scrollTo } from '../../utils'
 
 import {
   AddressList as AddressListController,
@@ -26,7 +27,6 @@ import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
-import { scrollTo } from '../../utils'
 
 const AddressListUI = (props) => {
   const {
@@ -58,7 +58,7 @@ const AddressListUI = (props) => {
         address.internal_number === obj.internal_number
       )))) || []
 
-  const openAddress = (address) => {
+  const openAddress = async (address) => {
     setCurAddress(address)
     setAddressOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
@@ -204,7 +204,7 @@ const AddressListUI = (props) => {
 
       {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
         <WrappNotAddresses>
-          <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' />
+          <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
           <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
         </WrappNotAddresses>
       )}

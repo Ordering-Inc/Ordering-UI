@@ -42,8 +42,9 @@ import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
 import { Alert } from '../Confirm'
-import { bytesConverter } from '../../utils'
 import { Modal } from '../Modal'
+import { bytesConverter } from '../../utils'
+
 
 const MessagesUI = (props) => {
   const {
@@ -120,7 +121,7 @@ const MessagesUI = (props) => {
     imageRef.current.value = ''
   }
 
-  const onChangeImage = e => {
+  const onChangeImage = async e => {
     const files = e.target.files[0]
     const reader = new window.FileReader()
     reader.readAsDataURL(files)
@@ -135,6 +136,7 @@ const MessagesUI = (props) => {
       })
       return
     }
+
 
     if (bytesConverter(files[0]?.size) > 2048) {
       setAlertState({
@@ -267,7 +269,7 @@ const MessagesUI = (props) => {
               <MessageCustomer>
                 <BubbleCustomer name='image'>
                   <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
+                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' loading='lazy' /></ChatImage>
                   {message.comment && (
                     <>
                       {message.comment}
@@ -290,7 +292,7 @@ const MessagesUI = (props) => {
               <MessageBusiness>
                 <BubbleBusines name='image'>
                   <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
+                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' loading='lazy' /></ChatImage>
                   {message.comment && (
                     <>
                       {message.comment}
@@ -417,6 +419,7 @@ const MessagesUI = (props) => {
               </Button>
               <img
                 src={image}
+                loading='lazy'
               />
             </WrapperDeleteImage>
           )}
@@ -462,7 +465,7 @@ const MessagesUI = (props) => {
           <ModalIcon>
             <MdClose onClick={() => setModalImage({ ...modalImage, open: false })} />
           </ModalIcon>
-          <img src={modalImage.src} width='320px' height='180px' />
+          <img src={modalImage.src} width='320px' height='180px' loading='lazy'/>
         </ImageContainer>
       </Modal>
     </MessagesContainer>

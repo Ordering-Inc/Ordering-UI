@@ -92,7 +92,7 @@ const LoginFormUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img src={theme?.images?.logos?.logotype} alt='Logo login' width='200' height='66' />
+        <img src={theme?.images?.logos?.logotype} alt='Logo login' width='200' height='66' loading='lazy' />
 
         {useLoginByEmail && useLoginByCellphone && (
           <LoginWith isPopup={isPopup}>

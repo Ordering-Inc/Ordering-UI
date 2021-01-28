@@ -59,7 +59,6 @@
     "moment": "^2.29.0",
     "ordering-components": "github:sergioaok/ordering-components#webpack",
     "polished": "^3.6.6",
-    "prop-types": "^15.7.2",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.8.1",
     "react-loading-skeleton": "^2.1.1",
