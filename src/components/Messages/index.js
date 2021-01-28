@@ -41,10 +41,9 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
+import { bytesConverter } from '../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
-import { bytesConverter } from '../../utils'
-
 
 const MessagesUI = (props) => {
   const {
@@ -121,7 +120,7 @@ const MessagesUI = (props) => {
     imageRef.current.value = ''
   }
 
-  const onChangeImage = async e => {
+  const onChangeImage = e => {
     const files = e.target.files[0]
     const reader = new window.FileReader()
     reader.readAsDataURL(files)
@@ -136,7 +135,6 @@ const MessagesUI = (props) => {
       })
       return
     }
-
 
     if (bytesConverter(files[0]?.size) > 2048) {
       setAlertState({
@@ -465,7 +463,7 @@ const MessagesUI = (props) => {
           <ModalIcon>
             <MdClose onClick={() => setModalImage({ ...modalImage, open: false })} />
           </ModalIcon>
-          <img src={modalImage.src} width='320px' height='180px' loading='lazy'/>
+          <img src={modalImage.src} width='320px' height='180px' loading='lazy' />
         </ImageContainer>
       </Modal>
     </MessagesContainer>

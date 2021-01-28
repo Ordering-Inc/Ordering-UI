@@ -11,6 +11,7 @@ import {
   useUtils
 } from 'ordering-components'
 
+import { scrollTo } from '../../utils'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../ProductIngredient'
@@ -24,8 +25,6 @@ import { AddressList } from '../AddressList'
 
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
-import { scrollTo } from '../../utils'
-
 
 import {
   ProductContainer,
@@ -86,7 +85,7 @@ const ProductOptionsUI = (props) => {
     }
   }
 
-  const handleSaveProduct = async () => {
+  const handleSaveProduct = () => {
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
       handleSave && handleSave()
