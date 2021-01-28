@@ -85,7 +85,7 @@ const ReviewOrderUI = (props) => {
     <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
       <Reviews>
         <h2>{t('REVIEWS', 'Reviews')}:</h2>
-        <Categories>
+        <Categories id='list'>
           {Object.keys(stars).map(key => (
             <React.Fragment key={key}>
               {key !== 'Comments' && (
@@ -101,25 +101,25 @@ const ReviewOrderUI = (props) => {
               )}
             </React.Fragment>
           ))}
-          <Category onMouseLeave={() => setHover(stars)}>
+          <Category id='stars' onMouseLeave={() => setHover(stars)}>
             <p>{t('QUALITY', 'Quality of Product')}:</p>
             <Stars>
               <StarsComponent name='quality' />
             </Stars>
           </Category>
-          <Category onMouseLeave={() => setHover(stars)}>
+          <Category id='stars' onMouseLeave={() => setHover(stars)}>
             <p>{t('PUNCTUALITY', 'Punctuality')}:</p>
             <Stars>
               <StarsComponent name='punctiality' />
             </Stars>
           </Category>
-          <Category onMouseLeave={() => setHover(stars)}>
+          <Category id='stars' onMouseLeave={() => setHover(stars)}>
             <p>{t('SERVICE', 'Service')}:</p>
             <Stars>
               <StarsComponent name='service' />
             </Stars>
           </Category>
-          <Category onMouseLeave={() => setHover(stars)}>
+          <Category id='stars' onMouseLeave={() => setHover(stars)}>
             <p>{t('PRODUCT_PACKAGING', 'Product Packaging')}:</p>
             <Stars>
               <StarsComponent name='packaging' />

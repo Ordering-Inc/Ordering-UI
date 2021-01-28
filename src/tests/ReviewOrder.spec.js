@@ -15,11 +15,16 @@ describe('Mounting Order Reviews component', () => {
         <ReviewOrder order={order} setIsReviewed={setIsReviewed} />
       </ProviderMock>
     )
-    cy.get(':nth-child(6) > .sc-AxhUy > :nth-child(1)').click()
-    cy.get(':nth-child(7) > .sc-AxhUy > :nth-child(1)').click()
-    cy.get(':nth-child(8) > .sc-AxhUy > :nth-child(1)').click()
-    cy.get(':nth-child(9) > .sc-AxhUy > :nth-child(1)').click()
-    cy.get('.sc-fznZeY').type('test')
+    // cy.get('#list #stars:first-child').should('exist')
+    cy.wait(4000)
+    cy.get(':nth-child(6) > .sc-AxhUy > :nth-child(1) > input[type=radio]').first().check({ force: true })
+    cy.get(':nth-child(7) > .sc-AxhUy > :nth-child(1) > input[type=radio]').first().check({ force: true })
+    cy.get(':nth-child(8) > .sc-AxhUy > :nth-child(1) > input[type=radio]').first().check({ force: true })
+    cy.get(':nth-child(9) > .sc-AxhUy > :nth-child(1) > input[type=radio]').first().check({ force: true })
+    cy.get('input[placeholder=Comments]').type('test')
     cy.get('button[type=submit]').click()
+
+    cy.get('.popup-dialog').should('exist')
+    cy.get('div').should('contain', 'Thank you, Review successfully submitted')
   })
 })

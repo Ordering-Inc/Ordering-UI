@@ -15,7 +15,7 @@ describe('Mounting Address details component', () => {
         />
       </ProviderMock>
     )
-    cy.get('h4#address').contains(address).should('be.visible')
+    cy.get('h4').contains(address).should('be.visible')
     cy.get('img#google-maps-image').should('be.visible')
   })
 })
