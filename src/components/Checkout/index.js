@@ -8,7 +8,8 @@ import {
   useApi,
   useLanguage,
   useUtils,
-  useValidationFields
+  useValidationFields,
+  useConfig
 } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -70,9 +71,11 @@ const CheckoutUI = (props) => {
 
   const [validationFields] = useValidationFields()
   const [{ options }] = useOrder()
-  const [languageState, t] = useLanguage()
+  const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
+  const [{ configs }] = useConfig()
+
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -177,7 +180,7 @@ const CheckoutUI = (props) => {
             businessLogo={businessDetails?.business?.logo}
             isCartPending={cart?.status === 2}
             businessId={cart?.business_id}
-            apiKey={languageState?.dictionary?.GM_API_KEY}
+            apiKey={configs?.google_maps_api_key?.value}
             mapConfigs={mapConfigs}
           />
         )}

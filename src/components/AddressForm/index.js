@@ -52,7 +52,7 @@ const AddressFormUI = (props) => {
 
   const [configState] = useConfig()
   const [orderState] = useOrder()
-  const [languageState, t] = useLanguage()
+  const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
 
@@ -69,7 +69,7 @@ const AddressFormUI = (props) => {
 
   const isEditing = !!addressState.address?.id
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
-  const googleMapsApiKey = languageState?.dictionary?.GM_API_KEY
+  const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
                               configState.configs?.google_autocomplete_selection_required?.value === 'true'
 
