@@ -4,7 +4,6 @@ import TiPencil from '@meronex/icons/ti/TiPencil'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
-import { scrollTo } from '../../utils'
 
 import {
   AddressList as AddressListController,
@@ -27,6 +26,7 @@ import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
+import { scrollTo } from '../../utils'
 
 const AddressListUI = (props) => {
   const {
@@ -58,7 +58,7 @@ const AddressListUI = (props) => {
         address.internal_number === obj.internal_number
       )))) || []
 
-  const openAddress = async (address) => {
+  const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
