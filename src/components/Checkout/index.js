@@ -252,6 +252,7 @@ const CheckoutUI = (props) => {
               isLoading={businessDetails.loading}
               paymethods={businessDetails?.business?.paymethods}
               onPaymentChange={handlePaymethodChange}
+              errorCash={errorCash}
               setErrorCash={setErrorCash}
               handleOrderRedirect={handleOrderRedirect}
             />
