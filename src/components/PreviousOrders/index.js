@@ -52,7 +52,7 @@ export const PreviousOrders = (props) => {
             <OrderPastContent>
               {order.business?.logo && (
                 <PastLogo>
-                  <img src={order.business?.logo} alt='business-logo' width='55px' height='64px' />
+                  <img src={order.business?.logo} alt='business-logo' width='55px' height='64px' loading='lazy' />
                 </PastLogo>
               )}
               <BusinessInformation>
