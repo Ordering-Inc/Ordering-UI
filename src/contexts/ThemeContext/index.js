@@ -47,10 +47,12 @@ export const ThemeProvider = ({ children, ...props }) => {
       margin: 0;
       background-color: ${theme.colors.backgroundPage};
       color: ${theme.colors.colorPage};
+      direction: ltr;
 
       ${theme.rtl && css`
         direction: rtl;
       `}
+      -webkit-overflow-scrolling: auto;
     }
 
     input, textarea, button {
