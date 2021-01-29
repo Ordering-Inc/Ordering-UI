@@ -24,7 +24,7 @@ export const NotFoundSource = (props) => {
     <NotFound id='not-found-source'>
       {errorImage && (
         <NotFoundImage>
-          <img src={errorImage} alt='Not Found' width='300' height='260' />
+          <img src={errorImage} alt='Not Found' width='300' height='260' loading='lazy' />
         </NotFoundImage>
       )}
       {content && conditioned && !errorImage && <h1>{content}</h1>}

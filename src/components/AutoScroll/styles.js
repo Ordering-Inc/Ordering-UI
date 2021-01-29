@@ -16,7 +16,7 @@ export const AutoscrollContainer = styled.span`
     position: sticky;
     color: #000000;
     border: 1px solid #333;
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   #right-autoscroll{
