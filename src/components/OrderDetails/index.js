@@ -5,8 +5,8 @@ import {
   OrderDetails as OrderDetailsController,
   useEvent,
   useUtils,
-  GoogleMapsMap,
-  useConfig
+  useConfig,
+  GoogleMapsMap
 } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
@@ -65,13 +65,14 @@ const OrderDetailsUI = (props) => {
     googleMapsControls,
     driverLocation
   } = props
-  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
-  const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
-  const [openReview, setOpenReview] = useState(false)
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+
+  const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
+  const [openReview, setOpenReview] = useState(false)
   const [isReviewed, setIsReviewed] = useState(false)
 
   const { order, loading, businessData, error } = props.order

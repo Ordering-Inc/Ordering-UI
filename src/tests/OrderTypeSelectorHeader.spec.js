@@ -9,11 +9,11 @@ const Block = (props) => (
   </div>
 )
 const configTypes = [1, 2, 3]
-const typeSelected = 2
+const defaultValue = 2
 const orderTypes = [
   { value: 1, content: <Block text='Test#1' />, showOnSelected: <Block text='Test#1' /> },
   { value: 2, content: <Block text='Test#2' />, showOnSelected: <Block text='Test#2' /> },
-  { value: 2, content: <Block text='Test#3' />, showOnSelected: <Block text='Test#3' /> }
+  { value: 3, content: <Block text='Test#3' />, showOnSelected: <Block text='Test#3' /> }
 ]
 
 describe('Mounting Order Type Selector Header component', () => {
@@ -23,12 +23,11 @@ describe('Mounting Order Type Selector Header component', () => {
         <OrderTypeSelectorHeader
           configTypes={configTypes}
           orderTypes={orderTypes}
-          typeSelected={typeSelected}
+          defaultValue={defaultValue}
         />
       </ProviderMock>
     )
-    cy.wait(4000)
-    cy.get('div#select-input').should('exist').click()
+    cy.get('div#select-input').should('exist').click({ force: true })
     cy.get('div#list').find('div#item').should('have.length', orderTypes.length)
   })
 })

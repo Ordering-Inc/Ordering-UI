@@ -8,8 +8,8 @@ import {
   useApi,
   useLanguage,
   useUtils,
-  useConfig,
-  useValidationFields
+  useValidationFields,
+  useConfig
 } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -70,11 +70,12 @@ const CheckoutUI = (props) => {
   } = props
 
   const [validationFields] = useValidationFields()
-  const [{ configs }] = useConfig()
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
+  const [{ configs }] = useConfig()
+
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -103,7 +104,7 @@ const CheckoutUI = (props) => {
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
-    const notFields = ['coupon', 'driver_tip', 'mobile_phone']
+    const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes']
 
     Object.values(validationFields?.fields?.checkout).map(field => {
       if (field?.required && !notFields.includes(field.code)) {
@@ -251,6 +252,7 @@ const CheckoutUI = (props) => {
               isLoading={businessDetails.loading}
               paymethods={businessDetails?.business?.paymethods}
               onPaymentChange={handlePaymethodChange}
+              errorCash={errorCash}
               setErrorCash={setErrorCash}
               handleOrderRedirect={handleOrderRedirect}
             />

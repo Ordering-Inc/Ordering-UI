@@ -51,9 +51,9 @@ export const BusinessInformationUI = (props) => {
     onClose
   } = props
 
-  const [{ configs }] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [tabValue, setTabValue] = useState('General Info')
 
   const daysOfWeek = [
