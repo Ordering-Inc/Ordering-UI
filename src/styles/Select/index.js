@@ -76,7 +76,7 @@ export const Select = (props) => {
       id='select-input'
       isHome={isHome}
       disabled={orderState.loading && !notReload}
-      onClick={handleSelectClick}
+      onMouseUp={handleSelectClick}
     >
       {!selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>}
       {selectedOption && (
