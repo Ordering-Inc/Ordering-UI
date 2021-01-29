@@ -455,7 +455,7 @@ export const OrderBill = styled.div`
   flex-direction: column;
   table {
     width: 90%;
-    font-size: 15px;
+    font-size: 12px;
     tr td:nth-child(2) {
       text-align: right;
       ${props => props.theme?.rtl && css`
@@ -555,4 +555,80 @@ export const SkeletonBlockWrapp = styled.div`
   align-items: center;
   margin-top: 20px;
   line-height: 40px;
+`
+
+export const ShareOrder = styled.div`
+  display: flex;
+  margin: 0 0 20px;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 15px;
+    margin: 0px;
+  }
+
+  p {
+    font-size: 13px;
+    margin: 0px;
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    font-size: 14px;
+    align-items: center;
+    background: ${props => props.theme.colors.backgroundPage};
+
+    svg {
+      left: 0;
+      margin-right: 6px;
+    }
+  }
+
+  div:first-child {
+    width: 60%;
+  }
+
+  div:last-child {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: 425px) {
+    div:first-child {
+      width: 70%;
+    }
+
+    h1 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    div:last-child {
+      width: 30%;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    button {
+      font-size: 18px;
+      width: 100%;
+      svg {
+        position: absolute;
+        margin-left: 10px;
+      }
+    }
+  }
 `

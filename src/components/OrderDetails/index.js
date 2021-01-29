@@ -14,6 +14,7 @@ import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
+import FiShare2 from '@meronex/icons/fi/FiShare2'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -54,7 +55,8 @@ import {
   FootActions,
   SkeletonBlockWrapp,
   SkeletonBlock,
-  HeaderImg
+  HeaderImg,
+  ShareOrder
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -63,7 +65,8 @@ const OrderDetailsUI = (props) => {
     handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
-    driverLocation
+    driverLocation,
+    shareOrder
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -196,6 +199,23 @@ const OrderDetailsUI = (props) => {
               </InfoBlock>
             </OrderCustomer>
 
+            <ShareOrder>
+              <div>
+                <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
+                <p>{t('LET_SOMEONE_FOLLOW_ALONG', 'Let someone follow along')}</p>
+              </div>
+              <div>
+                <Button
+                  outline
+                  color='primary'
+                  onClick={() => shareOrder(order?.hash_key)}
+                >
+                  <FiShare2 />
+                  {t('SHARE', 'Share')}
+                </Button>
+              </div>
+            </ShareOrder>
+
             {order?.driver && (
               <>
                 {order?.driver?.location && parseInt(order?.status) === 9 && (
@@ -315,11 +335,6 @@ const OrderDetailsUI = (props) => {
             )}
 
             <FootActions>
-              {/* <a>
-                Support
-                <BiCaretUp />
-              </a>
-              */}
               <a onClick={() => handleGoToPage({ page: 'orders' })}>
                 {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
@@ -344,13 +359,20 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {!loading && (!order || error) && (
-        <NotFoundSource
-          content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
-          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
-          onClickButton={handleOrderRedirect}
-        />
+      {!loading && error && (
+        error.includes('ERROR_ACCESS_EXPIRED') ? (
+          <NotFoundSource
+            content={t(error[0], 'Sorry, the order has expired.')}
+          />
+        ) : (
+          <NotFoundSource
+            content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
+            btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
+            onClickButton={handleOrderRedirect}
+          />
+        )
       )}
+
       {(openMessages.driver || openMessages.business) && (
         <Modal
           open={openMessages.driver || openMessages.business}
