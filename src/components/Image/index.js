@@ -22,13 +22,13 @@ export const Image = React.forwardRef((props, ref) => {
   return (
     <>
       {
-        !error && props.src && <img className={props.className} style={props.style} src={props.src} ref={imageRef} alt='profile-image' width='28px' height='28px' />
+        !error && props.src && <img className={props.className} style={props.style} src={props.src} ref={imageRef} alt='profile-image' width='28px' height='28px' loading='lazy' />
       }
       {
         !error && !props.src && props.fallback && props.fallback
       }
       {
-        error && !remove && typeof props.fallback === 'string' && <img className={props.className} style={props.style} src={props.fallback} ref={imageRef} alt='profile-image' />
+        error && !remove && typeof props.fallback === 'string' && <img className={props.className} style={props.style} src={props.fallback} ref={imageRef} alt='profile-image' loading='lazy' />
       }
       {
         error && remove && typeof props.fallback === 'string' && <div className={props.className} style={props.style} ref={imageRef} />

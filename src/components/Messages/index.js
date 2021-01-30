@@ -41,8 +41,8 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
-import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
+import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 
 const MessagesUI = (props) => {
@@ -267,7 +267,7 @@ const MessagesUI = (props) => {
               <MessageCustomer>
                 <BubbleCustomer name='image'>
                   <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
+                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' loading='lazy' /></ChatImage>
                   {message.comment && (
                     <>
                       {message.comment}
@@ -290,7 +290,7 @@ const MessagesUI = (props) => {
               <MessageBusiness>
                 <BubbleBusines name='image'>
                   <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
+                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' loading='lazy' /></ChatImage>
                   {message.comment && (
                     <>
                       {message.comment}
@@ -417,6 +417,7 @@ const MessagesUI = (props) => {
               </Button>
               <img
                 src={image}
+                loading='lazy'
               />
             </WrapperDeleteImage>
           )}
@@ -462,7 +463,7 @@ const MessagesUI = (props) => {
           <ModalIcon>
             <MdClose onClick={() => setModalImage({ ...modalImage, open: false })} />
           </ModalIcon>
-          <img src={modalImage.src} width='320px' height='180px' />
+          <img src={modalImage.src} width='320px' height='180px' loading='lazy' />
         </ImageContainer>
       </Modal>
     </MessagesContainer>

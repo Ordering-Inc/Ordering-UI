@@ -16,7 +16,7 @@ export const SpinnerLoader = (props) => {
     <Container style={style}>
       {logotype && (
         <Logo>
-          <img src={logotype} alt='logo' width='266px' height='150px' />
+          <img src={logotype} alt='logo' width='266px' height='150px' loading='lazy' />
         </Logo>
       )}
       {content && (
