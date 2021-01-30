@@ -11,12 +11,14 @@ export const BusinessSearch = styled.div`
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
     background-size: 15px;
-    background-color: ${props => props.theme?.colors?.backgroundPage};
-    ${props => props.theme?.rtl && css`
-      background-position: left 10px center;
-    `}
-    padding-right: 60px;
     box-sizing: border-box;
+
+    ${props => props.theme?.rtl ? css`
+      padding-left: 60px;
+    ` : css`
+      padding-right: 60px;
+    `}
+    background-color: ${props => props.theme?.colors?.backgroundPage};
 
     @media (min-width: 681px) {
       width: 200px;
@@ -36,12 +38,18 @@ export const DeleteContent = styled.span`
   transform: translate(-30%, 0%);
   border-radius: 25%;
   max-height: 100%;
+  ${props => props.theme?.rtl && css`
+    transform: translate(30%, 0%);
+  `}
   span{
     cursor: pointer;
   }
   img{
     width: 20px;
     transform: translate(-25%, 0%);
+    ${props => props.theme?.rtl && css`
+      transform: translate(25%, 0%);
+    `}
   }
 `
 export const SearchIcon = styled.div`
