@@ -258,7 +258,7 @@ const MessagesUI = (props) => {
                 )}
               </MessageConsole>
             )}
-            {((message?.can_see?.includes('2') && business) || (message?.can_see?.includes('4') && driver)) && (
+            {(messagesToShow?.messages?.length || (message?.can_see?.includes('2') && business) || (message?.can_see?.includes('4') && driver)) && (
               <>
                 {message.type === 2 && user?.id === message.author_id && (
                   <MessageCustomer>
