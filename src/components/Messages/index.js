@@ -74,6 +74,10 @@ const MessagesUI = (props) => {
     setModalImage({ open: true, src })
   }
 
+  const handleLoadCountImages = () => {
+    setLoad(() => load + 1)
+  }
+
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -254,51 +258,55 @@ const MessagesUI = (props) => {
                 )}
               </MessageConsole>
             )}
-            {message.type === 2 && user?.id === message.author_id && (
-              <MessageCustomer>
-                <BubbleCustomer>
-                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                  {message.comment}
-                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                </BubbleCustomer>
-              </MessageCustomer>
-            )}
-            {message.type === 3 && user.id === message.author_id && (
-              <MessageCustomer>
-                <BubbleCustomer name='image'>
-                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' loading='lazy' /></ChatImage>
-                  {message.comment && (
-                    <>
+            {((message?.can_see?.includes('2') && business) || (message?.can_see?.includes('4') && driver)) && (
+              <>
+                {message.type === 2 && user?.id === message.author_id && (
+                  <MessageCustomer>
+                    <BubbleCustomer>
+                      <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
                       {message.comment}
-                    </>
-                  )}
-                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                </BubbleCustomer>
-              </MessageCustomer>
-            )}
-            {message.type === 2 && user?.id !== message.author_id && (
-              <MessageBusiness>
-                <BubbleBusines>
-                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                  {message.comment}
-                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                </BubbleBusines>
-              </MessageBusiness>
-            )}
-            {message.type === 3 && user.id !== message.author_id && (
-              <MessageBusiness>
-                <BubbleBusines name='image'>
-                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' loading='lazy' /></ChatImage>
-                  {message.comment && (
-                    <>
+                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                    </BubbleCustomer>
+                  </MessageCustomer>
+                )}
+                {message.type === 3 && user.id === message.author_id && (
+                  <MessageCustomer>
+                    <BubbleCustomer name='image'>
+                      <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                      <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
+                      {message.comment && (
+                        <>
+                          {message.comment}
+                        </>
+                      )}
+                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                    </BubbleCustomer>
+                  </MessageCustomer>
+                )}
+                {message.type === 2 && user?.id !== message.author_id && (
+                  <MessageBusiness>
+                    <BubbleBusines>
+                      <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
                       {message.comment}
-                    </>
-                  )}
-                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                </BubbleBusines>
-              </MessageBusiness>
+                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                    </BubbleBusines>
+                  </MessageBusiness>
+                )}
+                {message.type === 3 && user.id !== message.author_id && (
+                  <MessageBusiness>
+                    <BubbleBusines name='image'>
+                      <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                      <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
+                      {message.comment && (
+                        <>
+                          {message.comment}
+                        </>
+                      )}
+                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                    </BubbleBusines>
+                  </MessageBusiness>
+                )}
+              </>
             )}
           </React.Fragment>
         ))}
