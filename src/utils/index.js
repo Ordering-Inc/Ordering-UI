@@ -110,7 +110,8 @@ export const getTraduction = key => {
     ERROR_INVALID_COUPON: "The coupon doesn't exist",
     ERROR_IVALID_COUPON_MINIMUM: 'You must have more products in your cart to use the coupon',
     ERROR_ADD_PRODUCT_VERY_FAR_FOR_PICKUP: 'The business is too far for order type pickup',
-    ERROR_PLACE_PAY_WITH_CARD2: 'An error occurred while trying to pay by card'
+    ERROR_PLACE_PAY_WITH_CARD2: 'An error occurred while trying to pay by card',
+    ERROR_ADD_PRODUCT_BUSINESS_CLOSED: 'The business is closed at the moment'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)
