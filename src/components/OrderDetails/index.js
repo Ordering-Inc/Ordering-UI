@@ -139,7 +139,7 @@ const OrderDetailsUI = (props) => {
               <HeaderInfo className='order-header'>
                 <HeaderText column>
                   <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
-                  <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
+                  <p>{t('ORDER_MESSAGE_HEADER_TEXT', 'Once business accepts your order, we will send you an email, thank you!')}</p>
                 </HeaderText>
               </HeaderInfo>
             </Header>
