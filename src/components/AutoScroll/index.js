@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { AutoscrollContainer } from './styles'
-import MdcArrowLeftCircleOutline from '@meronex/icons/mdc/MdcArrowLeftCircleOutline';
-import MdcArrowRightCircleOutline from '@meronex/icons/mdc/MdcArrowRightCircleOutline';
+import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
+import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
 import { useTheme } from '../../contexts/ThemeContext'
 
 export const AutoScroll = ({ children, modal, special }) => {
@@ -78,11 +78,11 @@ export const AutoScroll = ({ children, modal, special }) => {
   return (
     <AutoscrollContainer modal={modal} id='autoscroll'>
       {
-        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <MdcArrowLeftCircleOutline id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <MdKeyboardArrowLeft id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <MdcArrowRightCircleOutline id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <MdKeyboardArrowRight id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
 
