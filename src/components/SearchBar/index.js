@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react'
 
 import { Input } from '../../styles/Inputs'
 import { useTheme } from '../../contexts/ThemeContext'
+import { useLanguage } from 'ordering-components'
 
 import {
   BusinessSearch,
@@ -10,6 +11,7 @@ import {
 
 export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
   const [theme] = useTheme()
+  const [ ,t] = useLanguage()
   let timeout = null
   let previousSearch
   const el = useRef()
@@ -54,7 +56,7 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
         maxLength='500'
       />
       <DeleteContent>
-        {el.current?.value ? <span onClick={handleClear}>Clear</span> : <img src={theme?.images?.general?.searchIcon}/>}
+        {el.current?.value ? <span onClick={handleClear}>{t('CLEAR','Clear')}</span> : <img src={theme?.images?.general?.searchIcon}/>}
       </DeleteContent>
      
     </BusinessSearch>
