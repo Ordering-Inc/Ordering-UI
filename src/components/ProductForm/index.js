@@ -267,7 +267,11 @@ const ProductOptionsUI = (props) => {
                     {t('LOADING', 'Loading')}
                   </Button>
                 ) : (
-                  <AddressList addressList={user.addresses} isProductForm />
+                  <AddressList
+                    isModal
+                    addressList={user.addresses}
+                    isProductForm
+                  />
                 )
               )}
 

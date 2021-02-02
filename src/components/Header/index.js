@@ -218,6 +218,7 @@ export const Header = (props) => {
           {modalSelected === 'address' && (
             auth ? (
               <AddressList
+                isModal
                 changeOrderAddressWithDefault
                 onCancel={() => setModalIsOpen(false)}
                 onAccept={() => setModalIsOpen(false)}
