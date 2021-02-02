@@ -30,7 +30,7 @@ export const Select = (props) => {
   const [orderState] = useOrder()
 
   const handleSelectClick = (e) => {
-    setOpen(!open)
+    !open && setOpen(true)
   }
 
   const closeSelect = (e) => {
@@ -69,6 +69,7 @@ export const Select = (props) => {
     setSelectedOption(option)
     setValue(option.value)
     onChange && onChange(option.value)
+    setOpen(false)
   }
 
   return (
@@ -76,7 +77,7 @@ export const Select = (props) => {
       id='select-input'
       isHome={isHome}
       disabled={orderState.loading && !notReload}
-      onClick={handleSelectClick}
+      onMouseUp={handleSelectClick}
     >
       {!selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>}
       {selectedOption && (
