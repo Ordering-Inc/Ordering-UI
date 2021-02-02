@@ -127,8 +127,6 @@ const OrderDetailsUI = (props) => {
     }
   }, [driverLocation])
 
-  configs.guest_uuid_access = 1
-
   return (
     <Container>
       {order && Object.keys(order).length > 0 && (
@@ -201,7 +199,7 @@ const OrderDetailsUI = (props) => {
               </InfoBlock>
             </OrderCustomer>
 
-            {configs?.guest_uuid_access && (
+            {configs?.guest_uuid_access && order?.hash_key && (
               <ShareOrder>
                 <div>
                   <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
