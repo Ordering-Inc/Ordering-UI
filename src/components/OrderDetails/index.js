@@ -127,6 +127,8 @@ const OrderDetailsUI = (props) => {
     }
   }, [driverLocation])
 
+  configs.guest_uuid_access = 1
+
   return (
     <Container>
       {order && Object.keys(order).length > 0 && (
@@ -199,22 +201,24 @@ const OrderDetailsUI = (props) => {
               </InfoBlock>
             </OrderCustomer>
 
-            <ShareOrder>
-              <div>
-                <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
-                <p>{t('LET_SOMEONE_FOLLOW_ALONG', 'Let someone follow along')}</p>
-              </div>
-              <div>
-                <Button
-                  outline
-                  color='primary'
-                  onClick={() => shareOrder(order?.hash_key)}
-                >
-                  <FiShare2 />
-                  {t('SHARE', 'Share')}
-                </Button>
-              </div>
-            </ShareOrder>
+            {configs?.guest_uuid_access && (
+              <ShareOrder>
+                <div>
+                  <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
+                  <p>{t('LET_SOMEONE_FOLLOW_ALONG', 'Let someone follow along')}</p>
+                </div>
+                <div>
+                  <Button
+                    outline
+                    color='primary'
+                    onClick={() => shareOrder(order?.hash_key)}
+                  >
+                    <FiShare2 />
+                    {t('SHARE', 'Share')}
+                  </Button>
+                </div>
+              </ShareOrder>
+            )}
 
             {order?.driver && (
               <>
