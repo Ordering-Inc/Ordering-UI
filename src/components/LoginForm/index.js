@@ -87,7 +87,7 @@ const LoginFormUI = (props) => {
     <LoginContainer isPopup={isPopup}>
       <HeroSide>
         <TitleHeroSide>
-          {/* <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1> */}
+          <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
           <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
         </TitleHeroSide>
       </HeroSide>
