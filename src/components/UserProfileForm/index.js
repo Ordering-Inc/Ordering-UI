@@ -166,7 +166,7 @@ const UserProfileFormUI = (props) => {
         {(userData?.addresses || user?.addresses) && (
           <SavedPlaces>
             <h1>Saved Places</h1>
-            <AddressList addressList={user?.addresses} />
+            <AddressList isModal addressList={user?.addresses} />
           </SavedPlaces>
         )}
       </Container>

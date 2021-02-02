@@ -149,7 +149,12 @@ const CartUI = (props) => {
                   <td>{parsePrice(cart?.subtotal || 0)}</td>
                 </tr>
                 <tr>
-                  <td>{cart.business.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax')} ({parseNumber(cart?.business?.tax)}%)</td>
+                  <td>
+                    {cart.business.tax_type === 1
+                      ? t('TAX_INCLUDED', 'Tax (included)')
+                      : t('TAX', 'Tax')}
+                    <span>{`(${parseNumber(cart?.business?.tax)}%)`}</span>
+                  </td>
                   <td>{parsePrice(cart?.tax || 0)}</td>
                 </tr>
                 {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
@@ -160,20 +165,29 @@ const CartUI = (props) => {
                 )}
                 {cart?.driver_tip > 0 && (
                   <tr>
-                    <td>{t('DRIVER_TIP', 'Driver tip')} {cart?.driver_tip_rate > 0 && `(${parseNumber(cart?.driver_tip_rate)}%)`}</td>
+                    <td>
+                      {t('DRIVER_TIP', 'Driver tip')}
+                      {cart?.driver_tip_rate > 0 && <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>}
+                    </td>
                     <td>{parsePrice(cart?.driver_tip)}</td>
                   </tr>
                 )}
                 {cart?.service_fee > 0 && (
                   <tr>
-                    <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(cart?.business?.service_fee)}%)</td>
+                    <td>
+                      {t('SERVICE_FEE', 'Service Fee')}
+                      <span>{`(${parseNumber(cart?.business?.service_fee)}%)`}</span>
+                    </td>
                     <td>{parsePrice(cart?.service_fee)}</td>
                   </tr>
                 )}
                 {cart?.discount > 0 && cart?.total >= 0 && (
                   <tr>
                     {cart?.discount_type === 1 ? (
-                      <td>{t('DISCOUNT', 'Discount')} ({parseNumber(cart?.discount_rate)}%)</td>
+                      <td>
+                        {t('DISCOUNT', 'Discount')}
+                        <span>{`(${parseNumber(cart?.discount_rate)}%)`}</span>
+                      </td>
                     ) : (
                       <td>{t('DISCOUNT', 'Discount')}</td>
                     )}

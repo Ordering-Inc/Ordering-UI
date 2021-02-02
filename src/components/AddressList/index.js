@@ -35,7 +35,8 @@ const AddressListUI = (props) => {
     handleDelete,
     setAddressList,
     handleSetDefault,
-    popover,
+    isModal,
+    isPopover,
     isProductForm,
     onCancel,
     onAccept
@@ -136,7 +137,7 @@ const AddressListUI = (props) => {
   return (
     <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
       {
-        (!popover || !addressOpen) && (
+        (!isPopover || !addressOpen) && (
           <Button
             className='add'
             color='primary'
@@ -148,7 +149,7 @@ const AddressListUI = (props) => {
         )
       }
       {
-        popover && addressOpen && (
+        isPopover && addressOpen && (
           <AddressForm
             addressesList={addressList?.addresses}
             useValidationFileds
@@ -159,10 +160,10 @@ const AddressListUI = (props) => {
         )
       }
       {
-        !popover && (
+        !isPopover && (
           <Modal
             title={t('ADDRESS', 'Address')}
-            open={!popover && addressOpen}
+            open={!isPopover && addressOpen}
             onClose={() => setAddressOpen(false)}
           >
             <AddressForm
@@ -176,31 +177,38 @@ const AddressListUI = (props) => {
         )
       }
 
-      {!addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && addressList?.addresses?.length > 0 && (
-        <AddressListUl id='list'>
-          {uniqueAddressesList.map(address => (
-            <AddressItem key={address?.id}>
-              <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
-                <span className='radio'>
-                  {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
-                </span>
-                <div className='address'>
-                  <span>{address.address}</span>
-                  <span>{address.internal_number} {address.zipcode}</span>
+      {
+        !addressList.loading &&
+        !actionStatus.loading &&
+        !orderState.loading &&
+        !addressList.error &&
+        addressList?.addresses?.length > 0 &&
+        ((!addressOpen && isPopover) || isModal) && (
+          <AddressListUl id='list'>
+            {uniqueAddressesList.map(address => (
+              <AddressItem key={address?.id}>
+                <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
+                  <span className='radio'>
+                    {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
+                  </span>
+                  <div className='address'>
+                    <span>{address.address}</span>
+                    <span>{address.internal_number} {address.zipcode}</span>
+                  </div>
                 </div>
-              </div>
-              <AddressItemActions className='form'>
-                <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                  <TiPencil />
-                </a>
-                <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
-                  <VscTrash />
-                </a>
-              </AddressItemActions>
-            </AddressItem>
-          ))}
-        </AddressListUl>
-      )}
+                <AddressItemActions className='form'>
+                  <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
+                    <TiPencil />
+                  </a>
+                  <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
+                    <VscTrash />
+                  </a>
+                </AddressItemActions>
+              </AddressItem>
+            ))}
+          </AddressListUl>
+        )
+      }
 
       {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
         <WrappNotAddresses>

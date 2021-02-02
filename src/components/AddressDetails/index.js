@@ -62,6 +62,7 @@ const AddressDetailsUI = (props) => {
         onClose={() => setOpenModal(false)}
       >
         <AddressList
+          isModal
           changeOrderAddressWithDefault
           onCancel={() => setOpenModal(false)}
           onAccept={() => handleFindBusinesses()}

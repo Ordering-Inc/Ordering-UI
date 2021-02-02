@@ -10,7 +10,7 @@ describe('Mounting MomentContent component', () => {
         <MomentContent />
       </ProviderMock>
     )
-    cy.wait(4000)
+    cy.wait(8000)
     cy.get('[name="days"]').should('be.visible')
     cy.get('[name="hours"]').should('be.visible')
     cy.get('.sc-AxhCb > :nth-child(2)').click()

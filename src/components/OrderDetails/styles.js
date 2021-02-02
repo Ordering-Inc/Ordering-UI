@@ -456,6 +456,9 @@ export const OrderBill = styled.div`
   table {
     width: 90%;
     font-size: 12px;
+    td span {
+      unicode-bidi: bidi-override;
+    }
     tr td:nth-child(2) {
       text-align: right;
       ${props => props.theme?.rtl && css`

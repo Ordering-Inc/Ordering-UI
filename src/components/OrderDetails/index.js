@@ -281,7 +281,12 @@ const OrderDetailsUI = (props) => {
                     <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                   </tr>
                   <tr>
-                    <td>{order?.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
+                    <td>
+                      {order?.tax_type === 1
+                        ? t('TAX_INCLUDED', 'Tax (included)')
+                        : t('TAX', 'Tax')}
+                      <span>{`(${parseNumber(order?.tax)}%)`}</span>
+                    </td>
                     <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
                   </tr>
                   {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
@@ -291,17 +296,28 @@ const OrderDetailsUI = (props) => {
                     </tr>
                   )}
                   <tr>
-                    <td>{t('DRIVER_TIP', 'Driver tip')} {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && `(${parseNumber(order?.driver_tip)}%)`}</td>
+                    <td>
+                      {t('DRIVER_TIP', 'Driver tip')}
+                      {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                        <span>{`(${parseNumber(order?.driver_tip)}%)`}</span>
+                      )}
+                    </td>
                     <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
                   </tr>
                   <tr>
-                    <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
+                    <td>
+                      {t('SERVICE_FEE', 'Service Fee')}
+                      <span>{`(${parseNumber(order?.service_fee)}%)`}</span>
+                    </td>
                     <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
                   </tr>
                   {(order?.summary?.discount > 0 || order?.discount > 0) && (
                     <tr>
                       {order?.offer_type === 1 ? (
-                        <td>{t('DISCOUNT', 'Discount')} ({parseNumber(order?.offer_rate)}%)</td>
+                        <td>
+                          {t('DISCOUNT', 'Discount')}
+                          <span>{`(${parseNumber(order?.offer_rate)}%)`}</span>
+                        </td>
                       ) : (
                         <td>{t('DISCOUNT', 'Discount')}</td>
                       )}
