@@ -14,6 +14,11 @@ export const OrderBill = styled.div`
     width: 100%;
     font-size: 16px;
     font-weight: 300;
+
+    td span {
+      unicode-bidi: bidi-override;
+    }
+
     tr td:nth-child(2) {
       font-weight: 500;
       text-align: right;
