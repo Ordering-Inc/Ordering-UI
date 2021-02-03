@@ -455,7 +455,7 @@ export const OrderBill = styled.div`
   flex-direction: column;
   table {
     width: 90%;
-    font-size: 15px;
+    font-size: 12px;
     td span {
       unicode-bidi: bidi-override;
     }
@@ -558,4 +558,105 @@ export const SkeletonBlockWrapp = styled.div`
   align-items: center;
   margin-top: 20px;
   line-height: 40px;
+`
+
+export const ShareOrder = styled.div`
+  display: flex;
+  margin: 0 0 20px;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 15px;
+    margin: 0px;
+  }
+
+  p {
+    font-size: 13px;
+    margin: 0px;
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    font-size: 14px;
+    align-items: center;
+    background: ${props => props.theme.colors.backgroundPage};
+
+    svg {
+      left: 0;
+      margin-right: 6px;
+      color: ${props => props.theme.colors.primary};
+    }
+
+    &:hover {
+      svg {
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  div.text {
+    width: 60%;
+  }
+
+  div.wrap {
+    display: flex;
+    align-items: center;
+
+    & > div:first-child {
+      width: 100%;
+      position: relative;
+      div {
+        right: 0px;
+        left: initial;
+        top: 35px;
+      }
+    }
+  }
+
+  @media (min-width: 1201px) {
+    div.wrap {
+      & > div:first-child {
+        left: 0;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    div.wrap {
+      width: 30%;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    button {
+      font-size: 18px;
+      width: 100%;
+      svg {
+        position: absolute;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  @media (min-width: 425px) {
+    div.text {
+      width: 70%;
+    }
+
+    h1 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+  }
 `
