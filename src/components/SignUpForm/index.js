@@ -42,7 +42,8 @@ const SignUpFormUI = (props) => {
     isRequiredField,
     formState,
     handleSuccessSignup,
-    isPopup
+    isPopup,
+    externalPhoneNumber
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -88,7 +89,7 @@ const SignUpFormUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required && !props.externalPhoneNumber) {
+    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required && !externalPhoneNumber) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -185,7 +186,7 @@ const SignUpFormUI = (props) => {
                     )
                   ))
                 }
-                {!!showInputPhoneNumber && !props.externalPhoneNumber && (
+                {!!showInputPhoneNumber && !externalPhoneNumber && (
                   <InputPhoneNumber
                     value={userPhoneNumber}
                     setValue={handleChangePhoneNumber}
@@ -193,9 +194,9 @@ const SignUpFormUI = (props) => {
                   />
                 )}
 
-                {props.externalPhoneNumber && (
+                {externalPhoneNumber && (
                   <Input
-                    value={props.externalPhoneNumber}
+                    value={externalPhoneNumber}
                     className='form'
                     readOnly
                     name='cellphone'
@@ -243,7 +244,7 @@ const SignUpFormUI = (props) => {
             {elementLinkToLogin}
           </RedirectLink>
         )}
-        {!props.externalPhoneNumber && (
+        {!externalPhoneNumber && (
           <>
             {Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>

@@ -27,7 +27,8 @@ export const UserFormDetailsUI = (props) => {
     validationFields,
     handleChangeInput,
     handleButtonUpdateClick,
-    isCheckout
+    isCheckout,
+    autocompletephone
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -251,7 +252,7 @@ export const UserFormDetailsUI = (props) => {
                 })}
               />
             )}
-            {!!showInputPhoneNumber && !props?.phone && (
+            {!!showInputPhoneNumber && !autocompletephone && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}
@@ -261,9 +262,9 @@ export const UserFormDetailsUI = (props) => {
               />
             )}
 
-            {props?.phone && (
+            {autocompletephone && (
               <Input
-                value={props.phone}
+                value={autocompletephone}
                 className='form'
                 name='cellphone'
               />
