@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const OptionTitle = styled.div`
-  width: ${({ businessList }) => businessList ? '80%' : '100%'};
-  margin: ${({ businessList }) => businessList ? '10px 20px 0' : '0 auto'};
-  padding: ${({ businessList }) => !businessList && '0 15px'};
+  width: ${({ isBusinessList }) => isBusinessList ? '80%' : '100%'};
+  margin: ${({ isBusinessList }) => isBusinessList ? '10px 20px 0' : '0 auto'};
+  padding: ${({ isBusinessList }) => !isBusinessList && '0 15px'};
 
   h1{
     text-transform: capitalize;
@@ -39,7 +39,7 @@ export const OrdersContainer = styled.div`
       width: 6px;
       height: 6px;
       }
-      ${({ ordersLength, businessList }) => !ordersLength && !businessList && css`
+      ${({ ordersLength, isBusinessList }) => !ordersLength && !isBusinessList && css`
         > div {
           margin-left: -10px;
           ${props => props.theme?.rtl && css`
@@ -58,11 +58,11 @@ export const OrdersContainer = styled.div`
     `}
     
     @media (min-width: 768px) {
-      width: ${({ businessList }) => businessList ? '100%' : '90%'};
+      width: ${({ isBusinessList }) => isBusinessList ? '100%' : '90%'};
       justify-content: flex-start;
       ${({ isSkeleton, ordersLength }) => !isSkeleton && !ordersLength && css`
       > div:first-child{
-        ${({ businessList }) => !businessList && css`
+        ${({ isBusinessList }) => !isBusinessList && css`
           margin-left: -10px;
           ${props => props.theme?.rtl && css`
             margin-left: 0;

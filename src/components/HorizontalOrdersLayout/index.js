@@ -23,7 +23,8 @@ export const HorizontalOrdersLayout = (props) => {
     onOrderClick,
     loadMoreOrders,
     getOrderStatus,
-    businessList
+    isBusinessList,
+    handleReorder
   } = props
 
   const [, t] = useLanguage()
@@ -34,13 +35,13 @@ export const HorizontalOrdersLayout = (props) => {
     return (
       <>
         {orders.map(order => (
-          <Card key={order.id} id='order-card' businessList={businessList} onClick={() => businessList && onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })}>
+          <Card key={order.id} id='order-card' isBusinessList={isBusinessList} onClick={() => isBusinessList && onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })}>
             {configs?.google_maps_api_key?.value && (
-              <Map>
+              <Map isBusinessList={isBusinessList}>
                 <img
-                  src={getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
+                  src={isBusinessList ? order?.business?.logo : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
                   alt='google-maps-img'
-                  height='100px'
+                  height={isBusinessList ? '200px' : '100px'}
                   width='400px'
                 />
               </Map>
@@ -61,9 +62,14 @@ export const HorizontalOrdersLayout = (props) => {
                   {parsePrice(order?.summary?.total || order?.total)}
                 </h2>
                 <p>{getOrderStatus(order.status)?.value}</p>
+                {isBusinessList && (
+                  <Button color='primary' onClick={() => handleReorder(order.id)}>
+                    {t('REORDER', 'Reorder')}
+                  </Button>
+                )}
               </Price>
             </Content>
-            {!businessList && (
+            {!isBusinessList && (
               <OpenOrder>
                 <Button color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })}>
                   {t('OPEN_ORDER', 'Open order')}
@@ -90,8 +96,8 @@ export const HorizontalOrdersLayout = (props) => {
   }
 
   return (
-    <OrdersContainer activeOrders ordersLength={orders?.length <= 1} id='orders-container' businessList={businessList}>
-      {!businessList ? (
+    <OrdersContainer activeOrders ordersLength={orders?.length <= 1} id='orders-container' isBusinessList={isBusinessList}>
+      {!isBusinessList ? (
         <Tabs>
           <AutoScroll>
             <Orders />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { OrderList, useLanguage } from 'ordering-components'
+import { OrderList, useLanguage, useEvent, useOrder } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../VerticalOrdersLayout'
@@ -29,11 +29,13 @@ const OrdersOptionUI = (props) => {
     onOrderClick,
     loadMoreOrders,
     horizontal,
-    businessList
+    isBusinessList
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [events] = useEvent()
+  const [, { reorder }] = useOrder()
   const { loading, error, orders } = orderList
 
   const imageFails = activeOrders
@@ -41,6 +43,22 @@ const OrdersOptionUI = (props) => {
     : theme.images?.general?.emptyPastOrders
 
   const [ordersSorted, setOrdersSorted] = useState([])
+
+  const [reorderLoading, setReorderLoading] = useState(false)
+  const [orderID, setOrderID] = useState(null)
+
+  const handleReorder = async (orderId) => {
+    setReorderLoading(true)
+    setOrderID(orderId)
+    try {
+      const { error, result } = await reorder(orderId)
+      if (!error) {
+        events.emit('go_to_page', { page: 'checkout', params: { cartUuid: result.uuid } })
+      }
+    } catch (err) {
+      setReorderLoading(false)
+    }
+  }
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -77,7 +95,7 @@ const OrdersOptionUI = (props) => {
 
   return (
     <>
-      <OptionTitle businessList={businessList}>
+      <OptionTitle isBusinessList={isBusinessList}>
         <h1>
           {activeOrders
             ? t('ACTIVE_ORDERS', 'Active Orders')
@@ -93,9 +111,9 @@ const OrdersOptionUI = (props) => {
       )}
 
       {loading && (
-        <OrdersContainer activeOrders={horizontal} isSkeleton businessList={businessList}>
+        <OrdersContainer activeOrders={horizontal} isSkeleton isBusinessList={isBusinessList}>
           {horizontal ? (
-            <SkeletonOrder activeOrders={horizontal} businessList={businessList}>
+            <SkeletonOrder activeOrders={horizontal} isBusinessList={isBusinessList}>
               {[...Array(3)].map((item, i) => (
                 <SkeletonCard key={i}>
                   <SkeletonMap>
@@ -150,7 +168,10 @@ const OrdersOptionUI = (props) => {
             onOrderClick={onOrderClick}
             loadMoreOrders={loadMoreOrders}
             getOrderStatus={getOrderStatus}
-            businessList={businessList}
+            isBusinessList={isBusinessList}
+            handleReorder={handleReorder}
+            reorderLoading={reorderLoading}
+            orderID={orderID}
           />
         ) : (
           <VerticalOrdersLayout
@@ -159,6 +180,9 @@ const OrdersOptionUI = (props) => {
             onOrderClick={onOrderClick}
             loadMoreOrders={loadMoreOrders}
             getOrderStatus={getOrderStatus}
+            handleReorder={handleReorder}
+            reorderLoading={reorderLoading}
+            orderID={orderID}
           />
         )
       )}

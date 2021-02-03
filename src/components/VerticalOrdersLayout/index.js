@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useLanguage, useEvent, useOrder, useUtils } from 'ordering-components'
+import React from 'react'
+import { useLanguage, useUtils } from 'ordering-components'
 
 import { Button } from '../../styles/Buttons'
 
@@ -20,29 +20,14 @@ export const VerticalOrdersLayout = (props) => {
     pagination,
     onOrderClick,
     loadMoreOrders,
-    getOrderStatus
+    getOrderStatus,
+    handleReorder,
+    reorderLoading,
+    orderID
   } = props
 
   const [, t] = useLanguage()
-  const [events] = useEvent()
-  const [, { reorder }] = useOrder()
   const [{ parseDate }] = useUtils()
-
-  const [reorderLoading, setReorderLoading] = useState(false)
-  const [orderID, setOrderID] = useState(null)
-
-  const handleReorder = async (orderId) => {
-    setReorderLoading(true)
-    setOrderID(orderId)
-    try {
-      const { error, result } = await reorder(orderId)
-      if (!error) {
-        events.emit('go_to_page', { page: 'checkout', params: { cartUuid: result.uuid } })
-      }
-    } catch (err) {
-      setReorderLoading(false)
-    }
-  }
 
   return (
     <>

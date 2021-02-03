@@ -68,8 +68,8 @@ export const Card = styled.div`
   margin: 10px;
   display: inline-block;
   background: white;
-  height: ${({ businessList }) => businessList && '300px'};
-  max-height: ${({ businessList }) => businessList ? '300px' : '220px'};
+  height: ${({ isBusinessList }) => isBusinessList && '300px'};
+  max-height: ${({ isBusinessList }) => isBusinessList ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
 
@@ -93,12 +93,12 @@ export const Card = styled.div`
    
   @media (min-width: 480px){
     min-width: 400px;
-    max-height: ${({ businessList }) => businessList ? '300px' : '250px'};;
+    max-height: ${({ isBusinessList }) => isBusinessList ? '300px' : '250px'};;
     width: 400px;
   }
 
   @media(min-width: 993px){
-    ${({ businessList }) => businessList && css`
+    ${({ isBusinessList }) => isBusinessList && css`
       margin: 30px 20px;
       width: calc(33% - 40px);
       min-width: initial;
@@ -109,16 +109,19 @@ export const Card = styled.div`
 
 export const Map = styled.div`
   width: 100%;
-  height: 88px;
+  height: ${({ isBusinessList }) => isBusinessList ? '200px' : '88px'};
+  min-height: ${({ isBusinessList }) => isBusinessList && '175px'};
   img{
     width: 100%;
     height: 100%;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+    border-radius: ${({ isBusinessList }) => isBusinessList && '16px'};
     image-rendering: -webkit-optimize-contrast;
     object-fit: cover;
   }
   @media(min-width: 480px){
-    height: 100px;
+    height: ${({ isBusinessList }) => isBusinessList ? '200px' : '100px'};
+    min-height: ${({ isBusinessList }) => isBusinessList && '200px'}
   }
 `

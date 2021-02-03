@@ -39,7 +39,8 @@ const BusinessesListingUI = (props) => {
     getBusinesses,
     handleChangeSearch,
     handleChangeBusinessType,
-    handleBusinessClick
+    handleBusinessClick,
+    externalBusinessMap
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -90,7 +91,9 @@ const BusinessesListingUI = (props) => {
           lazyLoad
         />
       </WrapperSearch>
-      <OrdersOption onOrderClick={(data) => events.emit('go_to_page', data)} horizontal businessList />
+      {externalBusinessMap && (
+        <OrdersOption onOrderClick={(data) => events.emit('go_to_page', data)} horizontal isBusinessList />
+      )}
       <BusinessList>
         {
           !businessesList.loading && businessesList.businesses.length === 0 && (
