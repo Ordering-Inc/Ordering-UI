@@ -71,6 +71,7 @@ const PaymentOptionsUI = (props) => {
     paymethodSelected,
     paymethodData,
     paymethodsList,
+    isPaymethodNull,
     handleOrderRedirect,
     handlePaymethodClick,
     handlePaymethodDataChange
@@ -89,6 +90,12 @@ const PaymentOptionsUI = (props) => {
       props.setErrorCash(false)
     }
   }, [paymethodSelected])
+
+  useEffect(() => {
+    !isPaymethodNull &&
+    handlePaymethodClick &&
+    handlePaymethodClick(isPaymethodNull)
+  }, [isPaymethodNull])
 
   return (
     <PaymentMethodsContainer>
