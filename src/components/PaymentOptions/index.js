@@ -65,12 +65,13 @@ const paypalBtnStyle = {
 const PaymentOptionsUI = (props) => {
   const {
     cart,
+    errorCash,
     isLoading,
-    orderTotal,
     isDisabled,
     paymethodSelected,
     paymethodData,
     paymethodsList,
+    isPaymethodNull,
     handleOrderRedirect,
     handlePaymethodClick,
     handlePaymethodDataChange
@@ -83,6 +84,18 @@ const PaymentOptionsUI = (props) => {
       handlePaymethodClick && handlePaymethodClick(paymethodsList.paymethods[0])
     }
   }, [paymethodsList.paymethods])
+
+  useEffect(() => {
+    if (paymethodSelected?.gateway !== 'cash' && errorCash) {
+      props.setErrorCash(false)
+    }
+  }, [paymethodSelected])
+
+  useEffect(() => {
+    !isPaymethodNull &&
+    handlePaymethodClick &&
+    handlePaymethodClick(isPaymethodNull)
+  }, [isPaymethodNull])
 
   return (
     <PaymentMethodsContainer>
@@ -127,7 +140,7 @@ const PaymentOptionsUI = (props) => {
 
       {paymethodSelected?.gateway === 'cash' && (
         <PaymentOptionCash
-          orderTotal={orderTotal}
+          orderTotal={cart.total}
           onChangeData={handlePaymethodDataChange}
           setErrorCash={props.setErrorCash}
         />

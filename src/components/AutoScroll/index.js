@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import IosArrowForward from '@meronex/icons/ios/IosArrowForward'
-import IosArrowBack from '@meronex/icons/ios/IosArrowBack'
 import { AutoscrollContainer } from './styles'
-
+import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
+import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
 import { useTheme } from '../../contexts/ThemeContext'
 
 export const AutoScroll = ({ children, modal, special }) => {
@@ -79,11 +78,11 @@ export const AutoScroll = ({ children, modal, special }) => {
   return (
     <AutoscrollContainer modal={modal} id='autoscroll'>
       {
-        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <IosArrowBack id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <MdKeyboardArrowLeft id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <IosArrowForward id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <MdKeyboardArrowRight id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
 

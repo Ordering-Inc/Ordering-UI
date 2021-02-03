@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
-  background: '#F8F8F8'
+  background: ${props => props.theme.colors.backgroundPage};
 `
 
 export const ErrorMessage = styled.div`

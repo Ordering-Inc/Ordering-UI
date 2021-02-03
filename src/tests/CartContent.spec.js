@@ -52,8 +52,7 @@ describe('Mounting Cart Content component', () => {
         <CartContent carts={carts} onClose={() => {}} isCartPopover isOrderStateCarts />
       </ProviderMock>
     )
-    cy.get('.sc-fznxsB').should('be.visible').click()
-    cy.get('.cart').should('be.visible')
-    cy.get('.sc-pzMyG > .sc-AxiKw').should('be.visible').click()
+    cy.get('.cart').should('be.visible').click()
+    cy.get('button').should('be.visible').click()
   })
 })

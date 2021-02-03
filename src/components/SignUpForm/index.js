@@ -151,7 +151,7 @@ const SignUpFormUI = (props) => {
         </TitleHeroSide>
       </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo sign up' width='200' height='66' />
+        <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo sign up' width='200' height='66' loading='lazy' />
         <FormInput
           noValidate
           isPopup={isPopup}

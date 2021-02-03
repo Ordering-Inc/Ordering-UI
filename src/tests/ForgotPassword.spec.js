@@ -10,7 +10,7 @@ describe('Mounting Forgot password component', () => {
         <ForgotPasswordForm elementLinkToLogin={<a>Login</a>} />
       </ProviderMock>
     )
-    cy.get('.sc-fznyAO').should('be.visible')
+    cy.get('div').contains('Login').should('be.visible')
     cy.get('input').type('superadmin@ordering.co')
     cy.get('button[type=submit]').click()
   })
