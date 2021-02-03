@@ -14,10 +14,10 @@ describe('Mounting Address List component', function () {
   it('Component UI', function () {
     (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
       userId: 25,
-      accessToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGl2NC1kZXYub3JkZXJpbmcuY29cL3Y0MDBcL2VuXC9sdWlzdjRcL2F1dGgiLCJpYXQiOjE2MTA2NjYxMTUsImV4cCI6MTY0MjIwMjExNSwibmJmIjoxNjEwNjY2MTE1LCJqdGkiOiJRcFlqaTRLMExWVmJnbjBFIiwic3ViIjoyNSwibGV2ZWwiOjN9.VEuyodluyOY6KrgfPUeXJzf5418kVPbcbN0z7pkwudE"
+      accessToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGl2NC1zdGFnaW5nLm9yZGVyaW5nLmNvXC92NDAwXC9lblwvbHVpc3Y0XC9hdXRoIiwiaWF0IjoxNjExNzg0MzQ1LCJleHAiOjE2NDMzMjAzNDUsIm5iZiI6MTYxMTc4NDM0NSwianRpIjoiU2hzdmprTXV5YzZvUVFsMSIsInN1YiI6MjYwLCJsZXZlbCI6M30.I6Y_dVsKZHy5PITORU4mISo2gHj9YDevUUJEmv0X0og"
     })));
+    cy.wait(4000);
     cy.get('button').contains('Add Address').should('exist');
-    cy.get('ul#list').should('be.visible');
     cy.log('Test functionality');
     cy.get('button').contains('Add Address').click();
     cy.get('div.popup-dialog').should('be.visible');

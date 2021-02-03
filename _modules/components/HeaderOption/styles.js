@@ -112,7 +112,7 @@ var Container = _styledComponents.default.div(_templateObject(), function (_ref)
   }, function (props) {
     var _props$theme;
 
-    return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) ? (0, _styledComponents.css)(_templateObject3()) : (0, _styledComponents.css)(_templateObject4());
+    return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3()) : (0, _styledComponents.css)(_templateObject4());
   }, function (props) {
     return props.theme.colors.primary;
   });

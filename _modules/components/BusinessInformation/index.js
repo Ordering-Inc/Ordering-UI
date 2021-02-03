@@ -69,10 +69,6 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       businessVideos = props.businessVideos,
       onClose = props.onClose;
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
@@ -80,6 +76,10 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useState = (0, _react.useState)('General Info'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -128,7 +128,8 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     src: business.header,
     alt: "business-image",
     width: "444px",
-    height: "250px"
+    height: "250px",
+    loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessBasicContent, null, (business === null || business === void 0 ? void 0 : business.logo) && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage ? optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit') : business === null || business === void 0 ? void 0 : business.logo
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
@@ -168,7 +169,8 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       height: "128",
       onClick: function onClick() {
         return handleModalImage(photo.file);
-      }
+      },
+      loading: "lazy"
     });
   }))), (businessVideos === null || businessVideos === void 0 ? void 0 : businessVideos.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessMediaContent, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_VIDEOS', 'Business Videos')), /*#__PURE__*/_react.default.createElement("div", null, businessVideos.map(function (video, i) {
     return /*#__PURE__*/_react.default.createElement("iframe", {
@@ -201,7 +203,8 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   })), /*#__PURE__*/_react.default.createElement("img", {
     src: image,
     width: "320px",
-    height: "180px"
+    height: "180px",
+    loading: "lazy"
   }))));
 };
 

@@ -97,7 +97,7 @@ var CouponControlUI = function CouponControlUI(props) {
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm === null || confirm === void 0 ? void 0 : confirm.open,
     onClose: handleClose,
-    onCancel: !(confirm === null || confirm === void 0 ? void 0 : confirm.error) ? function () {
+    onCancel: !(confirm !== null && confirm !== void 0 && confirm.error) ? function () {
       return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
         open: false,
         error: false

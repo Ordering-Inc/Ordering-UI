@@ -47,12 +47,14 @@ var PageNotFound = function PageNotFound() {
     src: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.notFoundLighting,
     alt: "lighting",
     height: "40",
-    width: "40"
+    width: "40",
+    loading: "lazy"
   })), ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.notFound404) && /*#__PURE__*/_react.default.createElement(_styles.PageNotFoundImage, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.notFound404,
     alt: "error404",
     width: "300",
-    height: "300"
+    height: "300",
+    loading: "lazy"
   })));
 };
 

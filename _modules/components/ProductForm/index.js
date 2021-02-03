@@ -208,7 +208,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
     alt: "product",
     width: "300px",
-    height: "300px"
+    height: "300px",
+    loading: "lazy"
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
     isProductSoldout: isSoldOut || maxProductQuantity <= 0
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
@@ -265,11 +266,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleSaveProduct();
     },
     disabled: orderState.loading
-  }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')), /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))), auth && !((_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')), /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))), auth && !((_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     color: "primary",
     disabled: true
   }, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    isModal: true,
     addressList: user.addresses,
     isProductForm: true
   })), (!auth || isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

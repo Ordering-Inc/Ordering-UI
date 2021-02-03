@@ -31,7 +31,8 @@ var NotFoundSource = function NotFoundSource(props) {
     src: errorImage,
     alt: "Not Found",
     width: "300",
-    height: "260"
+    height: "260",
+    loading: "lazy"
   })), content && conditioned && !errorImage && /*#__PURE__*/_react.default.createElement("h1", null, content), content && !conditioned && /*#__PURE__*/_react.default.createElement("h1", null, content), !onClickButton && props.children && props.children, onClickButton && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",

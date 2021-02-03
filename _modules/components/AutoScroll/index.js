@@ -11,11 +11,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _useWindowSize2 = require("../../hooks/useWindowSize");
 
-var _IosArrowForward = _interopRequireDefault(require("@meronex/icons/ios/IosArrowForward"));
-
-var _IosArrowBack = _interopRequireDefault(require("@meronex/icons/ios/IosArrowBack"));
-
 var _styles = require("./styles");
+
+var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowLeft"));
+
+var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
 
 var _ThemeContext = require("../../contexts/ThemeContext");
 
@@ -68,7 +68,7 @@ var AutoScroll = function AutoScroll(_ref) {
     setParentElement(element);
     setContainerElement(containerElement);
     return function () {
-      if (containerElement === null || containerElement === void 0 ? void 0 : containerElement.length) {
+      if (containerElement !== null && containerElement !== void 0 && containerElement.length) {
         containerElement.removeEventListener('scroll', handleScroll);
       }
     };
@@ -82,7 +82,7 @@ var AutoScroll = function AutoScroll(_ref) {
     var botonLeft = document.getElementById('left-autoscroll');
 
     if (botonLeft || botonRight) {
-      if (theme === null || theme === void 0 ? void 0 : theme.rtl) {
+      if (theme !== null && theme !== void 0 && theme.rtl) {
         if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) * -1 < 40) {
           botonRight && botonRight.classList.add('hidden');
         } else {
@@ -129,12 +129,12 @@ var AutoScroll = function AutoScroll(_ref) {
   return /*#__PURE__*/_react.default.createElement(_styles.AutoscrollContainer, {
     modal: modal,
     id: "autoscroll"
-  }, (!special ? width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_IosArrowBack.default, {
+  }, (!special ? width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, {
     id: "left-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling(true);
     }
-  }) : '', children, (!special ? width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_IosArrowForward.default, {
+  }) : '', children, (!special ? width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, {
     id: "right-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling();

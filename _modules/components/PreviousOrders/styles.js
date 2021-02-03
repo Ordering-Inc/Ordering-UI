@@ -166,7 +166,7 @@ var Reorder = _styledComponents.default.div(_templateObject8(), function (props)
 }, function (props) {
   var _props$theme3;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) ? (0, _styledComponents.css)(_templateObject10()) : (0, _styledComponents.css)(_templateObject11());
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject10()) : (0, _styledComponents.css)(_templateObject11());
 });
 
 exports.Reorder = Reorder;

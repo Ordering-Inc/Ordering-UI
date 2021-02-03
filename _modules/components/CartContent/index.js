@@ -87,7 +87,8 @@ var CartContent = function CartContent(props) {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found",
     width: "200px",
-    height: "122px"
+    height: "122px",
+    loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement("h1", null, t('CARTS_NOT_FOUND', 'You don\'t have carts available'))));
 };
 

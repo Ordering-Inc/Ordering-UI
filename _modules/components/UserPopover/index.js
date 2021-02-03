@@ -127,8 +127,8 @@ var UserPopover = function UserPopover(props) {
     var _popperElement$curren, _referenceElement$cur;
 
     if (!open) return;
-    var outsidePopover = !((_popperElement$curren = popperElement.current) === null || _popperElement$curren === void 0 ? void 0 : _popperElement$curren.contains(e.target));
-    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) === null || _referenceElement$cur === void 0 ? void 0 : _referenceElement$cur.contains(e.target));
+    var outsidePopover = !((_popperElement$curren = popperElement.current) !== null && _popperElement$curren !== void 0 && _popperElement$curren.contains(e.target));
+    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) !== null && _referenceElement$cur !== void 0 && _referenceElement$cur.contains(e.target));
 
     if (outsidePopover && outsidePopoverMenu) {
       props.onClose && props.onClose();

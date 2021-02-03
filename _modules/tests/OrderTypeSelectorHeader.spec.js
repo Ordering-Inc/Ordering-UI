@@ -15,7 +15,7 @@ var Block = function Block(props) {
 };
 
 var configTypes = [1, 2, 3];
-var typeSelected = 2;
+var defaultValue = 2;
 var orderTypes = [{
   value: 1,
   content: /*#__PURE__*/_react.default.createElement(Block, {
@@ -33,7 +33,7 @@ var orderTypes = [{
     text: "Test#2"
   })
 }, {
-  value: 2,
+  value: 3,
   content: /*#__PURE__*/_react.default.createElement(Block, {
     text: "Test#3"
   }),
@@ -46,10 +46,11 @@ describe('Mounting Order Type Selector Header component', function () {
     (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
       configTypes: configTypes,
       orderTypes: orderTypes,
-      typeSelected: typeSelected
+      defaultValue: defaultValue
     })));
-    cy.wait(4000);
-    cy.get('div#select-input').should('exist').click();
+    cy.get('div#select-input').should('exist').click({
+      force: true
+    });
     cy.get('div#list').find('div#item').should('have.length', orderTypes.length);
   });
 });

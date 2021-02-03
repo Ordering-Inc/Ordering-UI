@@ -90,7 +90,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result3;
 
-    if (!formState.loading && ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.error)) {
+    if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
 
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
@@ -101,7 +101,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       }));
     }
 
-    if (!formState.loading && !((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.error) && alertState.success) {
+    if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && alertState.success) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         open: true,
         title: t('LINK_SEND_SUCCESSFULLY', 'Link Sent Successfully'),
@@ -134,7 +134,8 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
     alt: "Logo",
     width: "200",
-    height: "66"
+    height: "66",
+    loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,

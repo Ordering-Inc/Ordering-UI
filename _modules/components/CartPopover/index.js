@@ -68,7 +68,7 @@ var CartPopover = function CartPopover(props) {
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
-    placement: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'bottom' : 'auto',
+    placement: theme !== null && theme !== void 0 && theme.rtl ? 'bottom' : 'auto',
     modifiers: [{
       name: 'arrow',
       options: {
@@ -92,8 +92,8 @@ var CartPopover = function CartPopover(props) {
     var _popperElement$curren, _referenceElement$cur;
 
     if (!open) return;
-    var outsidePopover = !((_popperElement$curren = popperElement.current) === null || _popperElement$curren === void 0 ? void 0 : _popperElement$curren.contains(e.target));
-    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) === null || _referenceElement$cur === void 0 ? void 0 : _referenceElement$cur.contains(e.target));
+    var outsidePopover = !((_popperElement$curren = popperElement.current) !== null && _popperElement$curren !== void 0 && _popperElement$curren.contains(e.target));
+    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) !== null && _referenceElement$cur !== void 0 && _referenceElement$cur.contains(e.target));
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
     if (outsidePopover && outsidePopoverMenu && outsideModal) {

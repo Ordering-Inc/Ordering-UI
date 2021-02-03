@@ -225,7 +225,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     if (categoryId && productId && isInitialRender) {
       var _productModal$product;
 
-      if (productModal === null || productModal === void 0 ? void 0 : (_productModal$product = productModal.product) === null || _productModal$product === void 0 ? void 0 : _productModal$product.id) {
+      if (productModal !== null && productModal !== void 0 && (_productModal$product = productModal.product) !== null && _productModal$product !== void 0 && _productModal$product.id) {
         setCurProduct(productModal.product);
       }
 

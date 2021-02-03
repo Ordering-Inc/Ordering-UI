@@ -95,8 +95,8 @@ var MomentPopover = function MomentPopover(props) {
     var _popperElement$curren, _referenceElement$cur;
 
     if (!open) return;
-    var outsidePopover = !((_popperElement$curren = popperElement.current) === null || _popperElement$curren === void 0 ? void 0 : _popperElement$curren.contains(e.target));
-    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) === null || _referenceElement$cur === void 0 ? void 0 : _referenceElement$cur.contains(e.target));
+    var outsidePopover = !((_popperElement$curren = popperElement.current) !== null && _popperElement$curren !== void 0 && _popperElement$curren.contains(e.target));
+    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) !== null && _referenceElement$cur !== void 0 && _referenceElement$cur.contains(e.target));
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
     if (outsidePopover && outsidePopoverMenu && outsideModal) {
@@ -139,7 +139,7 @@ var MomentPopover = function MomentPopover(props) {
     ref: referenceElement,
     onClick: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) === -1 || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) === 0 ? null : props.onClick,
     isHome: props.isHome
-  }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, null), ((_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.moment) ? parseDate((_orderStatus$options2 = orderStatus.options) === null || _orderStatus$options2 === void 0 ? void 0 : _orderStatus$options2.moment, {
+  }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, null), (_orderStatus$options = orderStatus.options) !== null && _orderStatus$options !== void 0 && _orderStatus$options.moment ? parseDate((_orderStatus$options2 = orderStatus.options) === null || _orderStatus$options2 === void 0 ? void 0 : _orderStatus$options2.moment, {
     outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? 'MM/DD hh:mma' : 'MM/DD HH:mm'
   }) : t('ASAP_ABBREVIATION', 'ASAP')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,

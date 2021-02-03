@@ -453,7 +453,7 @@ var SkeletonReorder = _styledComponents.default.div(_templateObject25(), functio
 }, function (props) {
   var _props$theme8;
 
-  return ((_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.rtl) ? (0, _styledComponents.css)(_templateObject27()) : (0, _styledComponents.css)(_templateObject28());
+  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject27()) : (0, _styledComponents.css)(_templateObject28());
 });
 
 exports.SkeletonReorder = SkeletonReorder;

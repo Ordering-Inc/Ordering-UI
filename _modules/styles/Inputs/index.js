@@ -185,7 +185,7 @@ exports.InputGroup = InputGroup;
 var InputGroupLeft = _styledComponents.default.div(_templateObject4(), function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) ? (0, _styledComponents.css)(_templateObject5()) : (0, _styledComponents.css)(_templateObject6());
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject5()) : (0, _styledComponents.css)(_templateObject6());
 }, _Buttons.Button, function (props) {
   var _props$theme2;
 

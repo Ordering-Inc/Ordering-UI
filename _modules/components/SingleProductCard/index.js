@@ -68,7 +68,7 @@ var SingleProductCard = function SingleProductCard(props) {
   var productBalance = ((cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.reduce(function (sum, _product) {
     return sum + (product && _product.id === (product === null || product === void 0 ? void 0 : product.id) ? _product.quantity : 0);
   }, 0)) || 0) - removeToBalance;
-  var maxCartProductInventory = ((product === null || product === void 0 ? void 0 : product.inventoried) ? product === null || product === void 0 ? void 0 : product.quantity : undefined) - productBalance;
+  var maxCartProductInventory = (product !== null && product !== void 0 && product.inventoried ? product === null || product === void 0 ? void 0 : product.quantity : undefined) - productBalance;
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig;
   var maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory);
   return /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {

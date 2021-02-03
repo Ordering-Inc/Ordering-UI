@@ -104,7 +104,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: ", ";\n  width: ", ";\n  \n  svg{\n    background: #D9D9D9;\n    display: inline-block;\n    border-radius: 50%;\n    width: 25px;\n    min-width: 25px;\n    height: 25px;\n    align-self: center;\n    top: ", ";\n    position: sticky;\n    color: #000000;\n    border: 1px solid #333;\n    opacity: 0.7;\n  }\n\n  #right-autoscroll{\n    ", "\n  }\n  #left-autoscroll{\n    ", "    \n  }\n  svg:active{\n    border: 0\n  }\n  svg.hidden{\n    opacity: 0;\n  }\n\n  @media (min-width: 480px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n    }\n  }\n\n  @media (min-width: 768px){\n    width: ", ";\n    display: inherit;\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n  }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: ", ";\n  width: ", ";\n  \n  svg{\n    background: #D9D9D9;\n    display: inline-block;\n    border-radius: 50%;\n    width: 16px;\n    min-width: 16px;\n    height: 16px;\n    align-self: center;\n    top: ", ";\n    position: sticky;\n    color: #000000;\n    border: 1px solid #D9D9D9;\n    opacity: 0.8;\n  }\n\n  #right-autoscroll{\n    ", "\n  }\n  #left-autoscroll{\n    ", "    \n  }\n  svg:active{\n    border: 0\n  }\n  svg.hidden{\n    opacity: 0;\n  }\n\n  @media (min-width: 480px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n    }\n  }\n\n  @media (min-width: 768px){\n    width: ", ";\n    display: inherit;\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n  }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -124,11 +124,11 @@ var AutoscrollContainer = _styledComponents.default.span(_templateObject(), func
 }, function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) ? (0, _styledComponents.css)(_templateObject2()) : (0, _styledComponents.css)(_templateObject3());
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2()) : (0, _styledComponents.css)(_templateObject3());
 }, function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) ? (0, _styledComponents.css)(_templateObject4()) : (0, _styledComponents.css)(_templateObject5());
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject4()) : (0, _styledComponents.css)(_templateObject5());
 }, function (props) {
   var _props$theme3;
 

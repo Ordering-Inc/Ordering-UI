@@ -141,7 +141,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$changes;
 
-    if ((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.photo) {
+    if ((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.photo) {
       var isImage = true;
       handleButtonUpdateClick(null, isImage);
     }
@@ -168,14 +168,16 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, ((_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.photo) && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.photo) || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) === 'Network Error' || formState.result.error ? (user === null || user === void 0 ? void 0 : user.photo) ? /*#__PURE__*/_react.default.createElement("img", {
+  }, (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.photo && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.photo) || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) === 'Network Error' || formState.result.error ? user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement("img", {
     src: user === null || user === void 0 ? void 0 : user.photo,
     alt: "user image",
     width: "200px",
-    height: "200px"
+    height: "200px",
+    loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))) : (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.photo) && formState.result.error && /*#__PURE__*/_react.default.createElement("img", {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.photo,
-    alt: "user image"
+    alt: "user image",
+    loading: "lazy"
   })))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, {
     className: "user-form"
   }, !edit ? formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -202,6 +204,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       return setEdit(false);
     }
   }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PROFILE', 'Profile'),

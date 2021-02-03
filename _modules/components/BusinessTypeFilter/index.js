@@ -78,7 +78,8 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         return handleChangeBusinessType(type.value);
       },
       width: "150px",
-      height: "150px"
+      height: "150px",
+      loading: "lazy"
     })) : '', images.map(function (image) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: image.value
@@ -92,7 +93,8 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
           return handleChangeBusinessType(type.value);
         },
         width: "150px",
-        height: "150px"
+        height: "150px",
+        loading: "lazy"
       })) : '');
     }), t("BUSINESS_TYPE_".concat(type.value ? type.value.toUpperCase() : 'ALL'), type.key));
   }))));

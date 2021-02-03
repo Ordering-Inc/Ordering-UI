@@ -22,6 +22,5 @@ describe('Mounting Login component', function () {
     cy.get('div').contains('Login with Cellphone').click();
     cy.get('input[type="tel"]').type('1234567890');
     cy.get('button[type=submit]').click();
-    cy.get('button[name="facebook-button"]').should('exist');
   });
 });

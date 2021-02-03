@@ -218,7 +218,7 @@ var SidebarContent = _styledComponents.default.div(_templateObject5(), function 
 }, function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) ? (0, _styledComponents.css)(_templateObject6()) : (0, _styledComponents.css)(_templateObject7());
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject6()) : (0, _styledComponents.css)(_templateObject7());
 });
 
 exports.SidebarContent = SidebarContent;
@@ -277,7 +277,7 @@ exports.TextInfo = TextInfo;
 var MenuLinkSeparator = _styledComponents.default.div(_templateObject15(), function (props) {
   var _props$theme3;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) ? (0, _styledComponents.css)(_templateObject16()) : (0, _styledComponents.css)(_templateObject17());
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject16()) : (0, _styledComponents.css)(_templateObject17());
 });
 
 exports.MenuLinkSeparator = MenuLinkSeparator;

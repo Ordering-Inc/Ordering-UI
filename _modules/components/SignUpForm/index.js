@@ -126,7 +126,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result;
 
-    if (!formState.loading && ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.error)) {
+    if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
 
       setAlertState({
@@ -158,7 +158,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
 
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
 
-    if (!userPhoneNumber && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.cellphone) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.required)) {
+    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.required) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -225,13 +225,14 @@ var SignUpFormUI = function SignUpFormUI(props) {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
     alt: "Logo sign up",
     width: "200",
-    height: "66"
+    height: "66",
+    loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit),
     isSkeleton: useChekoutFileds && (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
-  }, !(useChekoutFileds && (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout) && Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.checkout).map(function (field) {
+  }, !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout) && Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.checkout).map(function (field) {
     return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.enabled && field.required ? field.type : 'hidden',

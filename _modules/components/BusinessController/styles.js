@@ -284,7 +284,7 @@ var BusinessTags = _styledComponents.default.div(_templateObject5(), function (p
 }, function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) ? (0, _styledComponents.css)(_templateObject7()) : (0, _styledComponents.css)(_templateObject8());
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject7()) : (0, _styledComponents.css)(_templateObject8());
 });
 
 exports.BusinessTags = BusinessTags;

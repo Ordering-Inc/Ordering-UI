@@ -214,7 +214,7 @@ exports.ContentDay = ContentDay;
 var Day = _styledComponents.default.div(_templateObject5(), function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) ? (0, _styledComponents.css)(_templateObject6()) : (0, _styledComponents.css)(_templateObject7());
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6()) : (0, _styledComponents.css)(_templateObject7());
 }, function (props) {
   var _props$theme3;
 
@@ -227,7 +227,7 @@ var Day = _styledComponents.default.div(_templateObject5(), function (props) {
 }, ContentDay, function (props) {
   var _props$theme4;
 
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) ? (0, _styledComponents.css)(_templateObject10()) : (0, _styledComponents.css)(_templateObject11());
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject10()) : (0, _styledComponents.css)(_templateObject11());
 });
 
 exports.Day = Day;

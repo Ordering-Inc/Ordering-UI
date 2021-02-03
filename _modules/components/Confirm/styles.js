@@ -169,7 +169,7 @@ var PopupActions = _styledComponents.default.div(_templateObject3(), function (p
 }, function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) ? (0, _styledComponents.css)(_templateObject5()) : (0, _styledComponents.css)(_templateObject6());
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject5()) : (0, _styledComponents.css)(_templateObject6());
 });
 
 exports.PopupActions = PopupActions;

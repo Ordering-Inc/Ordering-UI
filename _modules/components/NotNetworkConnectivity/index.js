@@ -28,7 +28,8 @@ var NotNetworkConnectivity = function NotNetworkConnectivity(props) {
     src: props.image || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notNetwork),
     alt: "Not network",
     width: "640",
-    height: "320"
+    height: "320",
+    loading: "lazy"
   })));
 };
 

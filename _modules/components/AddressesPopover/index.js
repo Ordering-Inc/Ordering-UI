@@ -109,11 +109,11 @@ var AddressesPopover = function AddressesPopover(props) {
     var _popperElement$curren, _referenceElement$cur, _testElement$current;
 
     if (!open) return;
-    var outsidePopover = !((_popperElement$curren = popperElement.current) === null || _popperElement$curren === void 0 ? void 0 : _popperElement$curren.contains(e.target));
-    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) === null || _referenceElement$cur === void 0 ? void 0 : _referenceElement$cur.contains(e.target));
+    var outsidePopover = !((_popperElement$curren = popperElement.current) !== null && _popperElement$curren !== void 0 && _popperElement$curren.contains(e.target));
+    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) !== null && _referenceElement$cur !== void 0 && _referenceElement$cur.contains(e.target));
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
-    if (outsidePopover && outsidePopoverMenu && outsideModal && !((_testElement$current = testElement.current) === null || _testElement$current === void 0 ? void 0 : _testElement$current.isMapDragging)) {
+    if (outsidePopover && outsidePopoverMenu && outsideModal && !((_testElement$current = testElement.current) !== null && _testElement$current !== void 0 && _testElement$current.isMapDragging)) {
       props.onClose && props.onClose();
     }
 
@@ -157,7 +157,7 @@ var AddressesPopover = function AddressesPopover(props) {
     ref: popperElement,
     style: popStyle
   }, attributes.popper), open && /*#__PURE__*/_react.default.createElement(_styles.Container, null, auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESSES', 'Addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
-    popover: true,
+    isPopover: true,
     changeOrderAddressWithDefault: true,
     onClosePopover: props.onClose
   })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {

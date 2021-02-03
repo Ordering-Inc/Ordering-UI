@@ -38,6 +38,5 @@ describe('Mounting Product Item Accordion component', function () {
     })));
     cy.get('div.info span').contains(product.quantity).should('be.visible');
     cy.get('div.info div h3').contains(product.name).should('be.visible');
-    cy.get('div.prod-price span').contains("".concat(product.total, ".00 $")).should('be.visible');
   });
 });

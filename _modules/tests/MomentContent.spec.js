@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 describe('Mounting MomentContent component', function () {
   it('Component UI', function () {
     (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null)));
-    cy.wait(4000);
+    cy.wait(8000);
     cy.get('[name="days"]').should('be.visible');
     cy.get('[name="hours"]').should('be.visible');
     cy.get('.sc-AxhCb > :nth-child(2)').click();

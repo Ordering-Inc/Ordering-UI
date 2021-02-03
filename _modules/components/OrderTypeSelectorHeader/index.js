@@ -46,13 +46,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
   var handleChangeOrderType = props.handleChangeOrderType,
       typeSelected = props.typeSelected,
+      defaultValue = props.defaultValue,
       configTypes = props.configTypes,
       orderTypes = props.orderTypes;
-  return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: orderTypes.filter(function (type) {
       return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
     }),
-    defaultValue: typeSelected,
+    defaultValue: defaultValue || typeSelected,
     onChange: function onChange(orderType) {
       return handleChangeOrderType(orderType);
     }

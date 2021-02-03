@@ -31,7 +31,7 @@ var ProductIngredientUI = function ProductIngredientUI(props) {
     onClick: function onClick() {
       return toggleSelect();
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
   })), /*#__PURE__*/_react.default.createElement("span", null, ingredient.name));
 };

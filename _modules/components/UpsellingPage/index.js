@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UpsellingPageUI = function UpsellingPageUI(props) {
-  var _upsellingProducts$pr4;
+  var _upsellingProducts$pr3;
 
   var upsellingProducts = props.upsellingProducts,
       handleUpsellingPage = props.handleUpsellingPage,
@@ -82,15 +82,11 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       parsePrice = _useUtils2[0].parsePrice;
 
   (0, _react.useEffect)(function () {
-    var _upsellingProducts$pr, _upsellingProducts$pr2, _upsellingProducts$pr3;
+    var _upsellingProducts$pr, _upsellingProducts$pr2;
 
-    if ((upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr = upsellingProducts.products) === null || _upsellingProducts$pr === void 0 ? void 0 : _upsellingProducts$pr.length) && !upsellingProducts.loading) {
+    if (upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr = upsellingProducts.products) !== null && _upsellingProducts$pr !== void 0 && _upsellingProducts$pr.length && !upsellingProducts.loading) {
       setCanOpenUpselling(true);
-    } else if (!(upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr2 = upsellingProducts.products) === null || _upsellingProducts$pr2 === void 0 ? void 0 : _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
-      handleUpsellingPage();
-    }
-
-    if ((upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr3 = upsellingProducts.products) === null || _upsellingProducts$pr3 === void 0 ? void 0 : _upsellingProducts$pr3.length) === 0 && !upsellingProducts.loading) {
+    } else if (!(upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr2 = upsellingProducts.products) !== null && _upsellingProducts$pr2 !== void 0 && _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
       handleUpsellingPage();
     }
   }, [upsellingProducts.loading, upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length]);
@@ -100,7 +96,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     setModalIsOpen(true);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr4 = upsellingProducts.products) === null || _upsellingProducts$pr4 === void 0 ? void 0 : _upsellingProducts$pr4.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr3 = upsellingProducts.products) === null || _upsellingProducts$pr3 === void 0 ? void 0 : _upsellingProducts$pr3.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WANT_SOMETHING_ELSE', 'Do you want something else?'),
     open: openUpselling,
     onClose: function onClose() {
@@ -114,7 +110,8 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       src: product.images,
       alt: "product-".concat(i),
       width: "150px",
-      height: "150px"
+      height: "150px",
+      loading: "lazy"
     })), /*#__PURE__*/_react.default.createElement(_styles.Details, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
       title: product.name
     }, product.name)), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.price)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

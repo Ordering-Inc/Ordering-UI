@@ -97,7 +97,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result3;
 
-    if (!formState.loading && ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.error)) {
+    if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
 
       setAlertState({
@@ -107,7 +107,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       });
     }
 
-    if (!formState.loading && !((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.error) && alertState.success) {
+    if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && alertState.success) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         open: true,
         title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
@@ -143,7 +143,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       content: []
     });
 
-    if (!formState.loading && !((_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.error) && alertState.success) {
+    if (!formState.loading && !((_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.error) && alertState.success) {
       closeReviewOrder();
     }
   };
@@ -175,7 +175,9 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderContainer, {
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_styles.Reviews, null, /*#__PURE__*/_react.default.createElement("h2", null, t('REVIEWS', 'Reviews'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Categories, null, Object.keys(stars).map(function (key) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Reviews, null, /*#__PURE__*/_react.default.createElement("h2", null, t('REVIEWS', 'Reviews'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Categories, {
+    id: "list"
+  }, Object.keys(stars).map(function (key) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: key
     }, key !== 'Comments' && /*#__PURE__*/_react.default.createElement(_styles.InvisibleInput, {
@@ -190,24 +192,28 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       disabled: true
     }));
   }), /*#__PURE__*/_react.default.createElement(_styles.Category, {
+    id: "stars",
     onMouseLeave: function onMouseLeave() {
       return setHover(stars);
     }
   }, /*#__PURE__*/_react.default.createElement("p", null, t('QUALITY', 'Quality of Product'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Stars, null, /*#__PURE__*/_react.default.createElement(StarsComponent, {
     name: "quality"
   }))), /*#__PURE__*/_react.default.createElement(_styles.Category, {
+    id: "stars",
     onMouseLeave: function onMouseLeave() {
       return setHover(stars);
     }
   }, /*#__PURE__*/_react.default.createElement("p", null, t('PUNCTUALITY', 'Punctuality'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Stars, null, /*#__PURE__*/_react.default.createElement(StarsComponent, {
     name: "punctiality"
   }))), /*#__PURE__*/_react.default.createElement(_styles.Category, {
+    id: "stars",
     onMouseLeave: function onMouseLeave() {
       return setHover(stars);
     }
   }, /*#__PURE__*/_react.default.createElement("p", null, t('SERVICE', 'Service'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Stars, null, /*#__PURE__*/_react.default.createElement(StarsComponent, {
     name: "service"
   }))), /*#__PURE__*/_react.default.createElement(_styles.Category, {
+    id: "stars",
     onMouseLeave: function onMouseLeave() {
       return setHover(stars);
     }

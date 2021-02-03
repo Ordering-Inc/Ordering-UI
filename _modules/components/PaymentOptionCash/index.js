@@ -9,8 +9,6 @@ exports.PaymentOptionCash = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactHookForm = require("react-hook-form");
-
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
@@ -42,62 +40,39 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors;
-
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
+
+  var _useState = (0, _react.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setvalue = _useState2[1];
 
   var handleChangeCash = function handleChangeCash(e) {
     var _e$target;
 
     var cash = parseFloat(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
     cash = isNaN(cash) ? null : cash;
+    setvalue(cash);
     onChangeData && onChangeData({
       cash: cash
     });
-    handleSubmit(function () {})(e);
   };
-  /**
-   * effect for disable the place button on component did mount
-   */
-
 
   (0, _react.useEffect)(function () {
-    handleChangeCash();
-  }, []);
-  /**
-   * effect for disable the place button on errors with cash
-   */
-
-  (0, _react.useEffect)(function () {
-    handleError();
-  }, [errors]);
-
-  var handleError = function handleError() {
-    if (errors.cash) {
+    if (value && parseFloat(value) < orderTotal) {
       setErrorCash && setErrorCash(true);
     } else {
       setErrorCash && setErrorCash(false);
     }
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_styles.PaymentCashContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormCash, {
-    onSubmit: handleSubmit(function () {})
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, [value, orderTotal]);
+  return /*#__PURE__*/_react.default.createElement(_styles.PaymentCashContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormCash, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "cash",
-    type: "number",
+    type: "text",
     placeholder: "0",
-    onChange: handleChangeCash,
-    ref: register({
-      validate: function validate(value) {
-        return !value || value >= orderTotal;
-      }
-    })
-  })), errors.cash && errors.cash.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('FIELD_REQUIRED', 'This field is required')), errors.cash && errors.cash.type === 'validate' && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total'), ": ", parsePrice(orderTotal))));
+    onChange: handleChangeCash
+  })), value && parseFloat(value) < orderTotal && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total'), ": ", parsePrice(orderTotal))));
 };
 
 exports.PaymentOptionCash = PaymentOptionCash;

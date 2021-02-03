@@ -106,7 +106,7 @@ var PagesList = function PagesList(_ref) {
     return /*#__PURE__*/_react.default.createElement("span", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("a", {
-      href: (route === null || route === void 0 ? void 0 : route.id) ? "pages/".concat(route.slug) : route.slug
+      href: route !== null && route !== void 0 && route.id ? "pages/".concat(route.slug) : route.slug
     }, route.name));
   }));
 };

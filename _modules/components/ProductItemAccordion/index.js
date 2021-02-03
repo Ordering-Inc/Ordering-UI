@@ -124,7 +124,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     var _productSelect$curren, _productActionsEdit$c, _productActionsDelete;
 
     var isActionsClick = ((_productSelect$curren = productSelect.current) === null || _productSelect$curren === void 0 ? void 0 : _productSelect$curren.contains(e.target)) || ((_productActionsEdit$c = productActionsEdit.current) === null || _productActionsEdit$c === void 0 ? void 0 : _productActionsEdit$c.contains(e.target)) || ((_productActionsDelete = productActionsDelete.current) === null || _productActionsDelete === void 0 ? void 0 : _productActionsDelete.contains(e.target));
-    if (!(product === null || product === void 0 ? void 0 : product.valid_menu) && isCartProduct || isActionsClick) return;
+    if (!(product !== null && product !== void 0 && product.valid_menu) && isCartProduct || isActionsClick) return;
     setActiveState(setActive === '' ? 'active' : '');
     setHeightState(setActive === 'active' ? '0px' : "".concat(content.current.scrollHeight, "px"));
     setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
@@ -203,7 +203,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
     color: "#D81212"
-  })))), isCartProduct && !isCartPending && (product === null || product === void 0 ? void 0 : product.valid_menu) && !(product === null || product === void 0 ? void 0 : product.valid_quantity) && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
+  })))), isCartProduct && !isCartPending && (product === null || product === void 0 ? void 0 : product.valid_menu) && !(product !== null && product !== void 0 && product.valid_quantity) && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
     onClick: function onClick() {
       return onEditProduct(product);
@@ -219,7 +219,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
     color: "#D81212"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))), !(product === null || product === void 0 ? void 0 : product.valid_menu) && isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))), !(product !== null && product !== void 0 && product.valid_menu) && isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);

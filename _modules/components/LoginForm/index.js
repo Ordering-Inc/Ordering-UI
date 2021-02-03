@@ -131,7 +131,7 @@ var LoginFormUI = function LoginFormUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result;
 
-    if (!formState.loading && ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.error)) {
+    if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
 
       setAlertState({
@@ -166,7 +166,8 @@ var LoginFormUI = function LoginFormUI(props) {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
     alt: "Logo login",
     width: "200",
-    height: "66"
+    height: "66",
+    loading: "lazy"
   }), useLoginByEmail && useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
@@ -219,11 +220,7 @@ var LoginFormUI = function LoginFormUI(props) {
     "aria-label": "password",
     placeholder: t('PASSWORD', 'Password'),
     ref: register({
-      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
-      minLength: {
-        value: 8,
-        message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-      }
+      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
     }),
     onChange: function onChange(e) {
       return hanldeChangeInput(e);

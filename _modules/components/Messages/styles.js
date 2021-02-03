@@ -174,7 +174,7 @@ function _templateObject25() {
 }
 
 function _templateObject24() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: auto;\n  margin-bottom: 10px;\n  img{\n    width: 100%;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height);\n    vertical-align: middle;\n    object-fit: contain;\n    cursor: pointer;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: auto;\n  margin-bottom: 10px;\n  img{\n    width: 100%;\n    height: auto;\n    max-height: 300;\n    aspect-ratio: attr(width) / attr(height);\n    vertical-align: middle;\n    object-fit: contain;\n    cursor: pointer;\n  }\n"]);
 
   _templateObject24 = function _templateObject24() {
     return data;

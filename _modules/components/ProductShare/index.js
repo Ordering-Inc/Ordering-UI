@@ -37,8 +37,8 @@ var ProductShareUI = function ProductShareUI(props) {
   var handleClickOutside = function handleClickOutside(e) {
     var _iconElement$current, _contentElement$curre;
 
-    var outsideIcon = !((_iconElement$current = iconElement.current) === null || _iconElement$current === void 0 ? void 0 : _iconElement$current.contains(e.target));
-    var outsideButtonsShare = !((_contentElement$curre = contentElement.current) === null || _contentElement$curre === void 0 ? void 0 : _contentElement$curre.contains(e.target));
+    var outsideIcon = !((_iconElement$current = iconElement.current) !== null && _iconElement$current !== void 0 && _iconElement$current.contains(e.target));
+    var outsideButtonsShare = !((_contentElement$curre = contentElement.current) !== null && _contentElement$curre !== void 0 && _contentElement$curre.contains(e.target));
 
     if (outsideIcon && outsideButtonsShare) {
       updateShowValue && updateShowValue(false);

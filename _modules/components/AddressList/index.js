@@ -69,7 +69,8 @@ var AddressListUI = function AddressListUI(props) {
       handleDelete = props.handleDelete,
       setAddressList = props.setAddressList,
       handleSetDefault = props.handleSetDefault,
-      popover = props.popover,
+      isModal = props.isModal,
+      isPopover = props.isPopover,
       isProductForm = props.isProductForm,
       onCancel = props.onCancel,
       onAccept = props.onAccept;
@@ -162,7 +163,7 @@ var AddressListUI = function AddressListUI(props) {
   var checkAddress = function checkAddress(address) {
     var _orderState$options2;
 
-    if (!(orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address)) return true;
+    if (!(orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address)) return true;
     var props = ['address', 'address_notes', 'zipcode', 'location', 'internal_number'];
     var values = [];
     props.forEach(function (prop) {
@@ -202,14 +203,14 @@ var AddressListUI = function AddressListUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
     id: "address_control",
     isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
-  }, (!popover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, (!isPopover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     color: "primary",
     onClick: function onClick() {
       return openAddress({});
     },
     disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading
-  }, (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')), popover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
     address: curAddress,
@@ -217,9 +218,9 @@ var AddressListUI = function AddressListUI(props) {
       return setAddressOpen(false);
     },
     onSaveAddress: handleSaveAddress
-  }), !popover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }), !isPopover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS', 'Address'),
-    open: !popover && addressOpen,
+    open: !isPopover && addressOpen,
     onClose: function onClose() {
       return setAddressOpen(false);
     }
@@ -231,7 +232,7 @@ var AddressListUI = function AddressListUI(props) {
       return setAddressOpen(false);
     },
     onSaveAddress: handleSaveAddress
-  })), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+  })), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, uniqueAddressesList.map(function (address) {
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
@@ -262,7 +263,8 @@ var AddressListUI = function AddressListUI(props) {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found",
     width: "200px",
-    height: "112px"
+    height: "112px",
+    loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.'))), !addressList.loading && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_addressList$error$ = addressList.error[0]) === null || _addressList$error$ === void 0 ? void 0 : _addressList$error$.message) || addressList.error[0]
   }), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

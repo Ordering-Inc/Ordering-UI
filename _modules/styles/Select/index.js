@@ -68,14 +68,14 @@ var Select = function Select(props) {
       orderState = _useOrder2[0];
 
   var handleSelectClick = function handleSelectClick(e) {
-    setOpen(!open);
+    !open && setOpen(true);
   };
 
   var closeSelect = function closeSelect(e) {
     if (open) {
       var _dropdownReference$cu;
 
-      var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) === null || _dropdownReference$cu === void 0 ? void 0 : _dropdownReference$cu.contains(e.target));
+      var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) !== null && _dropdownReference$cu !== void 0 && _dropdownReference$cu.contains(e.target));
 
       if (outsideDropdown) {
         setOpen(false);
@@ -112,13 +112,14 @@ var Select = function Select(props) {
     setSelectedOption(option);
     setValue(option.value);
     onChange && onChange(option.value);
+    setOpen(false);
   };
 
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
     id: "select-input",
     isHome: isHome,
     disabled: orderState.loading && !notReload,
-    onClick: handleSelectClick
+    onMouseUp: handleSelectClick
   }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     id: "list",
     position: "right",

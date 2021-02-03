@@ -133,7 +133,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
 
-    if (!(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) {
+    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
       setAlertState({
         open: true,
         content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
@@ -222,6 +222,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    isModal: true,
     changeOrderAddressWithDefault: true,
     onCancel: function onCancel() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {

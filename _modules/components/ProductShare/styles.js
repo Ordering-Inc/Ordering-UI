@@ -141,11 +141,11 @@ var ShareButtons = _styledComponents.default.div(_templateObject6(), function (_
 }, function (props) {
   var _props$theme5;
 
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) ? (0, _styledComponents.css)(_templateObject7()) : (0, _styledComponents.css)(_templateObject8());
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject7()) : (0, _styledComponents.css)(_templateObject8());
 }, function (props) {
   var _props$theme6;
 
-  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) ? (0, _styledComponents.css)(_templateObject9()) : (0, _styledComponents.css)(_templateObject10());
+  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject9()) : (0, _styledComponents.css)(_templateObject10());
 });
 
 exports.ShareButtons = ShareButtons;

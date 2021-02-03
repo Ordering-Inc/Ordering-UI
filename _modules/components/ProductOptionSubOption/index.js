@@ -108,15 +108,15 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
       setShowMessage(false);
     }
   }, [balance]);
-  var disableIncrement = (option === null || option === void 0 ? void 0 : option.limit_suboptions_by_max) ? balance === (option === null || option === void 0 ? void 0 : option.max) : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
-  var price = (option === null || option === void 0 ? void 0 : option.with_half_option) && (suboption === null || suboption === void 0 ? void 0 : suboption.half_price) && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
+  var disableIncrement = option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
+  var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     onClick: function onClick() {
       return handleSuboptionClick();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
-  }) : (state === null || state === void 0 ? void 0 : state.selected) ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
+  }) : state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
     disabled: true
   })), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))), (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
     disabled: state.quantity === 0,

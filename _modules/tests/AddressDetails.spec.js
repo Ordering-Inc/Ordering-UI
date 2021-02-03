@@ -15,10 +15,9 @@ describe('Mounting Address details component', function () {
   it('Component UI', function () {
     (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
       businessId: 22,
-      apiKey: "AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk",
       addressToShow: address
     })));
-    cy.get('h4#address').contains(address).should('be.visible');
+    cy.get('h4').contains(address).should('be.visible');
     cy.get('img#google-maps-image').should('be.visible');
   });
 });

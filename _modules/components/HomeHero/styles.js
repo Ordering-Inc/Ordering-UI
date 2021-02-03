@@ -264,7 +264,7 @@ var WrapInput = _styledComponents.default.label(_templateObject10(), function (_
 }, function (props) {
   var _props$theme8;
 
-  return ((_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.rtl) ? (0, _styledComponents.css)(_templateObject15()) : (0, _styledComponents.css)(_templateObject16());
+  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject15()) : (0, _styledComponents.css)(_templateObject16());
 });
 
 exports.WrapInput = WrapInput;

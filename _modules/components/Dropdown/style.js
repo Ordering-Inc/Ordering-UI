@@ -172,6 +172,6 @@ var DropDownCircleImage = (0, _styledComponents.default)(_Image.Image)(_template
 }, function (props) {
   var _props$theme3;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) ? (0, _styledComponents.css)(_templateObject11()) : (0, _styledComponents.css)(_templateObject12());
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject11()) : (0, _styledComponents.css)(_templateObject12());
 });
 exports.DropDownCircleImage = DropDownCircleImage;

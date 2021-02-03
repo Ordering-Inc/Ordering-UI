@@ -72,17 +72,19 @@ var ActiveOrders = function ActiveOrders(props) {
       src: (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location, configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value),
       alt: "google-maps-img",
       height: "100px",
-      width: "400px"
+      width: "400px",
+      loading: "lazy"
     })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, ((_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
       src: (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo,
       alt: "business-logo",
       width: "75px",
-      height: "75px"
+      height: "75px",
+      loading: "lazy"
     })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
       activeOrders: true
     }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.name), /*#__PURE__*/_react.default.createElement("p", {
       name: "order_number"
-    }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     }))), /*#__PURE__*/_react.default.createElement(_styles.Price, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))), /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value))), /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",

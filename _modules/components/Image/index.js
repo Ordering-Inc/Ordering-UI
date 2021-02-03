@@ -58,13 +58,15 @@ var Image = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     ref: imageRef,
     alt: "profile-image",
     width: "28px",
-    height: "28px"
+    height: "28px",
+    loading: "lazy"
   }), !error && !props.src && props.fallback && props.fallback, error && !remove && typeof props.fallback === 'string' && /*#__PURE__*/_react.default.createElement("img", {
     className: props.className,
     style: props.style,
     src: props.fallback,
     ref: imageRef,
-    alt: "profile-image"
+    alt: "profile-image",
+    loading: "lazy"
   }), error && remove && typeof props.fallback === 'string' && /*#__PURE__*/_react.default.createElement("div", {
     className: props.className,
     style: props.style,
