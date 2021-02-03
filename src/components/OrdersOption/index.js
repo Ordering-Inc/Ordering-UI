@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { OrderList, useLanguage } from 'ordering-components'
 
-import { ActiveOrders } from '../ActiveOrders'
-import { PreviousOrders } from '../PreviousOrders'
+import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
+import { VerticalOrdersLayout } from '../VerticalOrdersLayout'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { useTheme } from 'styled-components'
@@ -27,7 +27,9 @@ const OrdersOptionUI = (props) => {
     pagination,
     activeOrders,
     onOrderClick,
-    loadMoreOrders
+    loadMoreOrders,
+    horizontal,
+    businessList
   } = props
 
   const [, t] = useLanguage()
@@ -75,7 +77,7 @@ const OrdersOptionUI = (props) => {
 
   return (
     <>
-      <OptionTitle>
+      <OptionTitle businessList={businessList}>
         <h1>
           {activeOrders
             ? t('ACTIVE_ORDERS', 'Active Orders')
@@ -91,15 +93,15 @@ const OrdersOptionUI = (props) => {
       )}
 
       {loading && (
-        <OrdersContainer activeOrders={activeOrders} isSkeleton>
-          {activeOrders ? (
-            <SkeletonOrder activeOrders={activeOrders}>
+        <OrdersContainer activeOrders={horizontal} isSkeleton businessList={businessList}>
+          {horizontal ? (
+            <SkeletonOrder activeOrders={horizontal} businessList={businessList}>
               {[...Array(3)].map((item, i) => (
                 <SkeletonCard key={i}>
                   <SkeletonMap>
                     <Skeleton />
                   </SkeletonMap>
-                  <SkeletonContent activeOrders={activeOrders}>
+                  <SkeletonContent activeOrders={horizontal}>
                     <div>
                       <Skeleton width={70} height={70} />
                     </div>
@@ -141,16 +143,17 @@ const OrdersOptionUI = (props) => {
       )}
 
       {!loading && !error && orders.length > 0 && (
-        activeOrders ? (
-          <ActiveOrders
+        horizontal ? (
+          <HorizontalOrdersLayout
             orders={ordersSorted}
             pagination={pagination}
             onOrderClick={onOrderClick}
             loadMoreOrders={loadMoreOrders}
             getOrderStatus={getOrderStatus}
+            businessList={businessList}
           />
         ) : (
-          <PreviousOrders
+          <VerticalOrdersLayout
             orders={ordersSorted}
             pagination={pagination}
             onOrderClick={onOrderClick}

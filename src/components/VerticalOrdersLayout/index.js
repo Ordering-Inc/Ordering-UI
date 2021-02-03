@@ -14,7 +14,7 @@ import {
 
 import { OrdersContainer, BusinessInformation } from '../OrdersOption/styles'
 
-export const PreviousOrders = (props) => {
+export const VerticalOrdersLayout = (props) => {
   const {
     orders,
     pagination,

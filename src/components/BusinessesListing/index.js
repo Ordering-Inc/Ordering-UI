@@ -18,11 +18,15 @@ import { SearchBar } from '../SearchBar'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
+
+import { OrdersOption } from '../OrdersOption'
+
 import {
   useOrder,
   useSession,
   useLanguage,
-  BusinessList as BusinessListController
+  BusinessList as BusinessListController,
+  useEvent
 } from 'ordering-components'
 
 const PIXELS_TO_SCROLL = 300
@@ -42,6 +46,7 @@ const BusinessesListingUI = (props) => {
   const [{ auth }] = useSession()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [events] = useEvent()
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -85,6 +90,7 @@ const BusinessesListingUI = (props) => {
           lazyLoad
         />
       </WrapperSearch>
+      <OrdersOption onOrderClick={(data) => events.emit('go_to_page', data)} horizontal businessList />
       <BusinessList>
         {
           !businessesList.loading && businessesList.businesses.length === 0 && (

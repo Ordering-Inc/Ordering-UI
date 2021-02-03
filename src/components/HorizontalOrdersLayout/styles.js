@@ -68,7 +68,8 @@ export const Card = styled.div`
   margin: 10px;
   display: inline-block;
   background: white;
-  max-height: 220px;
+  height: ${({ businessList }) => businessList && '300px'};
+  max-height: ${({ businessList }) => businessList ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
 
@@ -89,12 +90,21 @@ export const Card = styled.div`
     align-items: center;
     justify-content: center;
   `}
-
+   
   @media (min-width: 480px){
     min-width: 400px;
-    max-height: 250px;
+    max-height: ${({ businessList }) => businessList ? '300px' : '250px'};;
     width: 400px;
   }
+
+  @media(min-width: 993px){
+    ${({ businessList }) => businessList && css`
+      margin: 30px 20px;
+      width: calc(33% - 40px);
+      min-width: initial;
+    `}
+  }
+
 `
 
 export const Map = styled.div`
