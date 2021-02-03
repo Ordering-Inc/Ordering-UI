@@ -586,34 +586,45 @@ export const ShareOrder = styled.div`
     svg {
       left: 0;
       margin-right: 6px;
+      color: ${props => props.theme.colors.primary};
+    }
+
+    &:hover {
+      svg {
+        color: #FFFFFF;
+      }
     }
   }
 
-  div:first-child {
+  div.text {
     width: 60%;
   }
 
-  div:last-child {
+  div.wrap {
     display: flex;
     align-items: center;
+
+    & > div:first-child {
+      width: 100%;
+      position: relative;
+      div {
+        right: 0px;
+        left: initial;
+        top: 35px;
+      }
+    }
   }
 
-  @media (min-width: 425px) {
-    div:first-child {
-      width: 70%;
-    }
-
-    h1 {
-      font-size: 18px;
-    }
-
-    p {
-      font-size: 15px;
+  @media (min-width: 1201px) {
+    div.wrap {
+      & > div:first-child {
+        left: 0;
+      }
     }
   }
 
   @media (min-width: 768px) {
-    div:last-child {
+    div.wrap {
       width: 30%;
     }
 
@@ -632,6 +643,20 @@ export const ShareOrder = styled.div`
         position: absolute;
         margin-left: 10px;
       }
+    }
+  }
+
+  @media (min-width: 425px) {
+    div.text {
+      width: 70%;
+    }
+
+    h1 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 15px;
     }
   }
 `

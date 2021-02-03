@@ -14,7 +14,6 @@ import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
-import FiShare2 from '@meronex/icons/fi/FiShare2'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -23,6 +22,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 import { ReviewOrder } from '../ReviewOrder'
+import { ProductShare } from '../ProductShare'
 
 import {
   Container,
@@ -66,7 +66,7 @@ const OrderDetailsUI = (props) => {
     handleOrderRedirect,
     googleMapsControls,
     driverLocation,
-    shareOrder
+    urlToShare
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -171,7 +171,13 @@ const OrderDetailsUI = (props) => {
               <OrderData>
                 <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
+                <p className='date'>
+                  {
+                    order?.delivery_datetime_utc
+                      ? parseDate(order?.delivery_datetime_utc)
+                      : parseDate(order?.delivery_datetime, { utc: false })
+                  }
+                </p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>
@@ -201,19 +207,16 @@ const OrderDetailsUI = (props) => {
 
             {configs?.guest_uuid_access && order?.hash_key && (
               <ShareOrder>
-                <div>
+                <div className='text'>
                   <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
                   <p>{t('LET_SOMEONE_FOLLOW_ALONG', 'Let someone follow along')}</p>
                 </div>
-                <div>
-                  <Button
-                    outline
-                    color='primary'
-                    onClick={() => shareOrder(order?.hash_key)}
-                  >
-                    <FiShare2 />
-                    {t('SHARE', 'Share')}
-                  </Button>
+                <div className='wrap'>
+                  <ProductShare
+                    withBtn
+                    btnText={t('SHARE', 'Share')}
+                    defaultUrl={urlToShare(order?.hash_key)}
+                  />
                 </div>
               </ShareOrder>
             )}

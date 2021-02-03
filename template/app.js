@@ -43,6 +43,7 @@ export const App = () => {
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
   const closeAlert = () => {
     setAlertState({
@@ -218,7 +219,7 @@ export const App = () => {
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/orders/:orderId'>
-                    {auth
+                    {(auth || hashKey)
                       ? <OrderDetailsPage />
                       : <Redirect to='/login' />}
                   </Route>

@@ -13,16 +13,12 @@ export const OrderDetailsPage = (props) => {
     ...props,
     orderId,
     hashKey,
+    urlToShare: (hashKey) => hashKey ? `${window.location.origin}/orders/${orderId}?hash=${hashKey}` : null,
     handleOrderRedirect: () => {
       history.push('/profile/orders')
     },
     handleBusinessRedirect: (slug) => {
       history.push(`/store/${slug}`)
-    },
-    shareOrder: (hash) => {
-      if (hash) {
-        navigator.clipboard.writeText(`${window.location.origin}/orders/${orderId}?hash=${hash}`)
-      }
     }
   }
   return (
