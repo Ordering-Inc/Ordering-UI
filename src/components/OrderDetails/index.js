@@ -22,6 +22,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 import { ReviewOrder } from '../ReviewOrder'
+import { ProductShare } from '../ProductShare'
 
 import {
   Container,
@@ -54,7 +55,8 @@ import {
   FootActions,
   SkeletonBlockWrapp,
   SkeletonBlock,
-  HeaderImg
+  HeaderImg,
+  ShareOrder
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -63,7 +65,8 @@ const OrderDetailsUI = (props) => {
     handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
-    driverLocation
+    driverLocation,
+    urlToShare
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -136,7 +139,7 @@ const OrderDetailsUI = (props) => {
               <HeaderInfo className='order-header'>
                 <HeaderText column>
                   <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
-                  <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
+                  <p>{t('ORDER_MESSAGE_HEADER_TEXT', 'Once business accepts your order, we will send you an email, thank you!')}</p>
                 </HeaderText>
               </HeaderInfo>
             </Header>
@@ -168,7 +171,13 @@ const OrderDetailsUI = (props) => {
               <OrderData>
                 <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
+                <p className='date'>
+                  {
+                    order?.delivery_datetime_utc
+                      ? parseDate(order?.delivery_datetime_utc)
+                      : parseDate(order?.delivery_datetime, { utc: false })
+                  }
+                </p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>
@@ -195,6 +204,22 @@ const OrderDetailsUI = (props) => {
                 <span>{order?.customer?.address}</span>
               </InfoBlock>
             </OrderCustomer>
+
+            {configs?.guest_uuid_access && order?.hash_key && (
+              <ShareOrder>
+                <div className='text'>
+                  <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
+                  <p>{t('LET_SOMEONE_FOLLOW_ALONG', 'Let someone follow along')}</p>
+                </div>
+                <div className='wrap'>
+                  <ProductShare
+                    withBtn
+                    btnText={t('SHARE', 'Share')}
+                    defaultUrl={urlToShare(order?.hash_key)}
+                  />
+                </div>
+              </ShareOrder>
+            )}
 
             {order?.driver && (
               <>
@@ -331,11 +356,6 @@ const OrderDetailsUI = (props) => {
             )}
 
             <FootActions>
-              {/* <a>
-                Support
-                <BiCaretUp />
-              </a>
-              */}
               <a onClick={() => handleGoToPage({ page: 'orders' })}>
                 {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
@@ -360,13 +380,20 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {!loading && (!order || error) && (
-        <NotFoundSource
-          content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
-          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
-          onClickButton={handleOrderRedirect}
-        />
+      {!loading && error && (
+        error.includes('ERROR_ACCESS_EXPIRED') ? (
+          <NotFoundSource
+            content={t(error[0], 'Sorry, the order has expired.')}
+          />
+        ) : (
+          <NotFoundSource
+            content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
+            btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
+            onClickButton={handleOrderRedirect}
+          />
+        )
       )}
+
       {(openMessages.driver || openMessages.business) && (
         <Modal
           open={openMessages.driver || openMessages.business}

@@ -63,7 +63,6 @@ const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [load, setLoad] = useState(0)
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
@@ -72,10 +71,6 @@ const MessagesUI = (props) => {
 
   const handleModalImage = (src) => {
     setModalImage({ open: true, src })
-  }
-
-  const handleLoadCountImages = () => {
-    setLoad(() => load + 1)
   }
 
   useEffect(() => {
@@ -98,13 +93,6 @@ const MessagesUI = (props) => {
       clearInputs()
     }
   }, [sendMessage])
-
-  useEffect(() => {
-    if (load < 3) {
-      const chat = document.getElementById('chat')
-      chat.scrollTop = chat.scrollHeight
-    }
-  }, [load])
 
   useEffect(() => {
     const chat = document.getElementById('chat')
