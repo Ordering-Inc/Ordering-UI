@@ -45,7 +45,7 @@ const AddressFormUI = (props) => {
     isRequiredField,
     updateChanges,
     onCancel,
-    hanldeChangeInput,
+    handleChangeInput,
     saveAddress,
     setIsEdit
   } = props
@@ -61,13 +61,15 @@ const AddressFormUI = (props) => {
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
+  const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
+  const isEditing = !!addressState.address?.id
+
   const [locationChange, setLocationChange] = useState(
-    addressState?.address?.id
+    isEditing
       ? addressState?.address?.location
       : formState.changes?.location ?? null
   )
 
-  const isEditing = !!addressState.address?.id
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
@@ -159,6 +161,11 @@ const AddressFormUI = (props) => {
     })
   }
 
+  const checkKeyDown = (e) => {
+    const keyCode = e.keyCode ? e.keyCode : e.which
+    if (keyCode === 13) { e.preventDefault() }
+  }
+
   const onSubmit = async () => {
     if (!auth && formState?.changes?.address === '' && addressState?.address?.address) {
       setAlertState({
@@ -204,7 +211,7 @@ const AddressFormUI = (props) => {
 
   const handleAddressTag = (tag) => {
     setAddressTag(tag)
-    hanldeChangeInput({
+    handleChangeInput({
       target: {
         name: 'tag',
         value: tag
@@ -218,13 +225,6 @@ const AddressFormUI = (props) => {
       selectedFromAutocomplete: true
     })
     updateChanges(address)
-  }
-
-  const handleAddressKeyDown = () => {
-    state.selectedFromAutocomplete && setState({
-      ...state,
-      selectedFromAutocomplete: false
-    })
   }
 
   const setMapErrors = (errKey) => {
@@ -255,11 +255,24 @@ const AddressFormUI = (props) => {
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
     }
+
     setAddressValue(formState?.changes?.address ?? addressState.address?.address ?? '')
     formMethods.setValue('address', formState?.changes?.address ?? addressState.address?.address ?? '')
     if (!isEditing) {
       inputNames.forEach(field => formMethods.setValue(field.name, formState?.changes[field.name] || ''))
-      setLocationChange(formState?.changes?.location)
+      formState?.changes?.address && setLocationChange(formState?.changes?.location)
+      if (
+        formState?.changes?.address &&
+        formState?.changes?.address !== firstLocationNoEdit?.address &&
+        formState?.changes?.location &&
+        formState?.changes?.location?.lat !== firstLocationNoEdit.value?.lat &&
+        formState?.changes?.location?.lng !== firstLocationNoEdit.value?.lng
+      ) {
+        setFirstLocationNoEdit({
+          value: formState?.changes?.location,
+          address: formState?.changes?.address
+        })
+      }
     }
 
     if (isEditing) {
@@ -285,6 +298,10 @@ const AddressFormUI = (props) => {
   useEffect(() => {
     if (!auth) {
       setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
+    }
+
+    return () => {
+      setFirstLocationNoEdit({ value: null })
     }
   }, [])
 
@@ -318,12 +335,17 @@ const AddressFormUI = (props) => {
       )}
 
       {!configState.loading && !addressState.loading && (
-        <FormControl onSubmit={formMethods.handleSubmit(onSubmit)} autoComplete='off'>
+        <FormControl
+          onSubmit={formMethods.handleSubmit(onSubmit)}
+          onKeyDown={(e) => checkKeyDown(e)}
+          autoComplete='off'
+        >
           {locationChange && toggleMap && (
             <WrapperMap>
               <GoogleMapsMap
                 apiKey={googleMapsApiKey}
                 location={locationChange}
+                fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
                 mapControls={googleMapsControls}
                 handleChangeAddressMap={handleChangeAddress}
                 setErrors={setMapErrors}
@@ -342,9 +364,8 @@ const AddressFormUI = (props) => {
                   formMethods.setValue('address', e.address)
                   handleChangeAddress(e)
                 }}
-                onKeyDown={handleAddressKeyDown}
                 onChange={(e) => {
-                  hanldeChangeInput({ target: { name: 'address', value: e.target.value } })
+                  handleChangeInput({ target: { name: 'address', value: e.target.value } })
                   setAddressValue(e.target.value)
                 }}
                 value={addressValue}
@@ -374,7 +395,7 @@ const AddressFormUI = (props) => {
             value={formState.changes?.internal_number ?? addressState.address.internal_number ?? ''}
             onChange={(e) => {
               formMethods.setValue('internal_number', e.target.value)
-              hanldeChangeInput({ target: { name: 'internal_number', value: e.target.value } })
+              handleChangeInput({ target: { name: 'internal_number', value: e.target.value } })
             }}
             autoComplete='new-field'
           />
@@ -385,7 +406,7 @@ const AddressFormUI = (props) => {
             value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
             onChange={(e) => {
               formMethods.setValue('zipcode', e.target.value)
-              hanldeChangeInput({ target: { name: 'zipcode', value: e.target.value } })
+              handleChangeInput({ target: { name: 'zipcode', value: e.target.value } })
             }}
             autoComplete='new-field'
           />
@@ -396,7 +417,7 @@ const AddressFormUI = (props) => {
             value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
             onChange={(e) => {
               formMethods.setValue('address_notes', e.target.value)
-              hanldeChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+              handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
             }}
             autoComplete='new-field'
           />

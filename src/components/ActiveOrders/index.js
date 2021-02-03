@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils, useConfig } from 'ordering-components'
+import { useLanguage, useConfig, useUtils } from 'ordering-components'
 
 import {
   OpenOrder,
@@ -42,13 +42,14 @@ export const ActiveOrders = (props) => {
                     alt='google-maps-img'
                     height='100px'
                     width='400px'
+                    loading='lazy'
                   />
                 </Map>
               )}
               <Content>
                 {order.business?.logo && (
                   <Logo>
-                    <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
+                    <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' loading='lazy' />
                   </Logo>
                 )}
                 <BusinessInformation activeOrders>

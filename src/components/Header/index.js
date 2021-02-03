@@ -88,8 +88,8 @@ export const Header = (props) => {
         <LeftHeader>
           <SidebarMenu auth={auth} />
           <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location ? 'search' : 'home' })}>
-            <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} />
-            <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} />
+            <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} loading='lazy' />
+            <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy'/>
           </LogoHeader>
           <Menu className='left-header'>
             {!configState?.loading && configTypes.length > 0 && (
@@ -218,6 +218,7 @@ export const Header = (props) => {
           {modalSelected === 'address' && (
             auth ? (
               <AddressList
+                isModal
                 changeOrderAddressWithDefault
                 onCancel={() => setModalIsOpen(false)}
                 onAccept={() => setModalIsOpen(false)}

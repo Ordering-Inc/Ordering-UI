@@ -51,7 +51,7 @@ const AddressDetailsUI = (props) => {
       </Header>
       <WrappMap>
         <Map>
-          <img src={googleMapsUrl} id='google-maps-image' alt='google-maps-location' width='288px' height='162px' />
+          <img src={googleMapsUrl} id='google-maps-image' alt='google-maps-location' width='288px' height='162px' loading='lazy' />
         </Map>
       </WrappMap>
 
@@ -62,6 +62,7 @@ const AddressDetailsUI = (props) => {
         onClose={() => setOpenModal(false)}
       >
         <AddressList
+          isModal
           changeOrderAddressWithDefault
           onCancel={() => setOpenModal(false)}
           onAccept={() => handleFindBusinesses()}

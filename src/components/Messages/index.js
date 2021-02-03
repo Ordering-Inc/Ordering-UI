@@ -41,8 +41,8 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
-import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
+import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 
 const MessagesUI = (props) => {
@@ -72,6 +72,10 @@ const MessagesUI = (props) => {
 
   const handleModalImage = (src) => {
     setModalImage({ open: true, src })
+  }
+
+  const handleLoadCountImages = () => {
+    setLoad(() => load + 1)
   }
 
   useEffect(() => {
@@ -254,51 +258,55 @@ const MessagesUI = (props) => {
                 )}
               </MessageConsole>
             )}
-            {message.type === 2 && user?.id === message.author_id && (
-              <MessageCustomer>
-                <BubbleCustomer>
-                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                  {message.comment}
-                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                </BubbleCustomer>
-              </MessageCustomer>
-            )}
-            {message.type === 3 && user.id === message.author_id && (
-              <MessageCustomer>
-                <BubbleCustomer name='image'>
-                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
-                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
-                  {message.comment && (
-                    <>
+            {(messagesToShow?.messages?.length || (message?.can_see?.includes('2') && business) || (message?.can_see?.includes('4') && driver)) && (
+              <>
+                {message.type === 2 && user?.id === message.author_id && (
+                  <MessageCustomer>
+                    <BubbleCustomer>
+                      <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
                       {message.comment}
-                    </>
-                  )}
-                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                </BubbleCustomer>
-              </MessageCustomer>
-            )}
-            {message.type === 2 && user?.id !== message.author_id && (
-              <MessageBusiness>
-                <BubbleBusines>
-                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                  {message.comment}
-                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                </BubbleBusines>
-              </MessageBusiness>
-            )}
-            {message.type === 3 && user.id !== message.author_id && (
-              <MessageBusiness>
-                <BubbleBusines name='image'>
-                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='94px' /></ChatImage>
-                  {message.comment && (
-                    <>
+                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                    </BubbleCustomer>
+                  </MessageCustomer>
+                )}
+                {message.type === 3 && user.id === message.author_id && (
+                  <MessageCustomer>
+                    <BubbleCustomer name='image'>
+                      <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                      <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
+                      {message.comment && (
+                        <>
+                          {message.comment}
+                        </>
+                      )}
+                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                    </BubbleCustomer>
+                  </MessageCustomer>
+                )}
+                {message.type === 2 && user?.id !== message.author_id && (
+                  <MessageBusiness>
+                    <BubbleBusines>
+                      <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
                       {message.comment}
-                    </>
-                  )}
-                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                </BubbleBusines>
-              </MessageBusiness>
+                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                    </BubbleBusines>
+                  </MessageBusiness>
+                )}
+                {message.type === 3 && user.id !== message.author_id && (
+                  <MessageBusiness>
+                    <BubbleBusines name='image'>
+                      <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                      <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
+                      {message.comment && (
+                        <>
+                          {message.comment}
+                        </>
+                      )}
+                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                    </BubbleBusines>
+                  </MessageBusiness>
+                )}
+              </>
             )}
           </React.Fragment>
         ))}
@@ -417,6 +425,7 @@ const MessagesUI = (props) => {
               </Button>
               <img
                 src={image}
+                loading='lazy'
               />
             </WrapperDeleteImage>
           )}
@@ -462,7 +471,7 @@ const MessagesUI = (props) => {
           <ModalIcon>
             <MdClose onClick={() => setModalImage({ ...modalImage, open: false })} />
           </ModalIcon>
-          <img src={modalImage.src} width='320px' height='180px' />
+          <img src={modalImage.src} width='320px' height='180px' loading='lazy' />
         </ImageContainer>
       </Modal>
     </MessagesContainer>

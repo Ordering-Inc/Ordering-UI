@@ -32,6 +32,7 @@ const BusinessTypeFilterUI = (props) => {
                     onClick={() => handleChangeBusinessType(type.value)}
                     width='150px'
                     height='150px'
+                    loading='lazy'
                   />
                 </ImageContainer>)
                 : ''}
@@ -45,6 +46,7 @@ const BusinessTypeFilterUI = (props) => {
                         onClick={() => handleChangeBusinessType(type.value)}
                         width='150px'
                         height='150px'
+                        loading='lazy'
                       />
                     </ImageContainer>)
                     : ''}

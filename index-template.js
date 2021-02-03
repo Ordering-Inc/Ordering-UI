@@ -22,7 +22,6 @@ import notNetwork from './template/assets/images/not-network.svg'
 import notFound404 from './template/assets/images/not-found-404.svg'
 import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import searchIcon from './template/assets/images/search-icon.svg'
-import orderDetailsHeader from './template/assets/images/order-details-header.png'
 import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
 
@@ -90,10 +89,10 @@ theme.images = {
     notFoundLighting,
     searchIcon,
     notNetwork,
-    orderDetailsHeader,
     emptyActiveOrders,
     emptyPastOrders
   },
+
   order: {
     status0: orderStatus0,
     status1: orderStatus1,

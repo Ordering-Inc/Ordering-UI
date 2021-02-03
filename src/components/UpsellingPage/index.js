@@ -26,9 +26,6 @@ const UpsellingPageUI = (props) => {
     } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
       handleUpsellingPage()
     }
-    if (upsellingProducts?.products?.length === 0 && !upsellingProducts.loading) {
-      handleUpsellingPage()
-    }
   }, [upsellingProducts.loading, upsellingProducts?.products.length])
 
   const handleFormProduct = (product) => {
@@ -54,7 +51,7 @@ const UpsellingPageUI = (props) => {
                       !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
                         <Item key={product.id}>
                           <Image>
-                            <img src={product.images} alt={`product-${i}`} width='150px' height='150px' />
+                            <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
                           </Image>
                           <Details>
                             <div>
