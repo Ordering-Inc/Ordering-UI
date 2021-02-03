@@ -15,6 +15,8 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
+var _Buttons = require("../../styles/Buttons");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -30,7 +32,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var ProductShareUI = function ProductShareUI(props) {
   var updateShowValue = props.updateShowValue,
       showShareButton = props.showShareButton,
-      urlToShare = props.urlToShare;
+      urlToShare = props.urlToShare,
+      btnText = props.btnText,
+      withBtn = props.withBtn;
   var iconElement = (0, _react.useRef)();
   var contentElement = (0, _react.useRef)();
 
@@ -59,7 +63,11 @@ var ProductShareUI = function ProductShareUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.IconShare, {
     ref: iconElement,
     name: "icon-share"
-  }, /*#__PURE__*/_react.default.createElement(_FiShare.default, {
+  }, withBtn ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    color: "primary",
+    onClick: handleClickShare
+  }, /*#__PURE__*/_react.default.createElement(_FiShare.default, null), btnText) : /*#__PURE__*/_react.default.createElement(_FiShare.default, {
     onClick: handleClickShare
   }), /*#__PURE__*/_react.default.createElement(_styles.ShareButtons, {
     ref: contentElement,
@@ -67,6 +75,8 @@ var ProductShareUI = function ProductShareUI(props) {
     "data-a2a-url": urlToShare,
     showShareButton: showShareButton
   }, /*#__PURE__*/_react.default.createElement("a", {
+    className: "a2a_button_copy_link"
+  }), /*#__PURE__*/_react.default.createElement("a", {
     className: "a2a_button_facebook"
   }), /*#__PURE__*/_react.default.createElement("a", {
     className: "a2a_button_whatsapp"

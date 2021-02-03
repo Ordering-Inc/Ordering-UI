@@ -59,7 +59,6 @@ describe('Mounting Cart component', function () {
       isProducts: 1
     })));
     cy.get('.cart').should('be.visible').click();
-    cy.get('.sc-AxirZ').should('be.visible');
-    cy.get('.sc-pjHjD').should('be.visible');
+    cy.get('div').contains('total').should('be.visible');
   });
 });

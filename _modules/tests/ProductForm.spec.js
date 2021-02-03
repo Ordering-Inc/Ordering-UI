@@ -40,10 +40,10 @@ describe('Mounting Product form component', function () {
     })));
     cy.get('h1').should('be.visible');
     cy.get('[name="icon-share"]').should('be.visible');
-    cy.get('.sc-fznWOq').type('test');
+    cy.get('textarea').type('test');
     cy.get('.incdec-control > :nth-child(3)').should('be.visible').click();
     cy.get('.incdec-control > :nth-child(1)').should('be.visible');
-    cy.get('.sc-fzoyAV').click();
+    cy.get('button').click();
     cy.get('[type="email"]').type('sergio@ordering.co');
     cy.get('[type="password"]').type('test2020');
     cy.get('[type=submit]').contains('Login').click();

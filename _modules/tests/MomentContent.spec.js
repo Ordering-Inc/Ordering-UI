@@ -16,7 +16,7 @@ describe('Mounting MomentContent component', function () {
     cy.wait(8000);
     cy.get('[name="days"]').should('be.visible');
     cy.get('[name="hours"]').should('be.visible');
-    cy.get('.sc-AxhCb > :nth-child(2)').click();
+    cy.get('div').contains('WED').click();
     cy.get('div').contains('As soon as possible').should('be.visible').click();
   });
 });

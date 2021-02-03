@@ -60,7 +60,9 @@ describe('Mounting Cart Popover component', function () {
       onClose: function onClose() {},
       open: true
     })));
-    cy.get('.sc-AxjAm > span > svg').should('be.visible');
-    cy.get('.sc-fzoiQi').should('be.visible').click();
+    cy.get('span > svg').should('be.visible');
+    cy.get('.accordion').should('be.visible').click({
+      multiple: true
+    });
   });
 });

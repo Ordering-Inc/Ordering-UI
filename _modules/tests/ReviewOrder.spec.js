@@ -27,16 +27,16 @@ describe('Mounting Order Reviews component', function () {
     }))); // cy.get('#list #stars:first-child').should('exist')
 
     cy.wait(4000);
-    cy.get(':nth-child(6) > .sc-AxhUy > :nth-child(1) > input[type=radio]').first().check({
+    cy.get(':nth-child(6) > div > :nth-child(1) > input[type=radio]').first().check({
       force: true
     });
-    cy.get(':nth-child(7) > .sc-AxhUy > :nth-child(1) > input[type=radio]').first().check({
+    cy.get(':nth-child(7) > div > :nth-child(1) > input[type=radio]').first().check({
       force: true
     });
-    cy.get(':nth-child(8) > .sc-AxhUy > :nth-child(1) > input[type=radio]').first().check({
+    cy.get(':nth-child(8) > div > :nth-child(1) > input[type=radio]').first().check({
       force: true
     });
-    cy.get(':nth-child(9) > .sc-AxhUy > :nth-child(1) > input[type=radio]').first().check({
+    cy.get(':nth-child(9) > div > :nth-child(1) > input[type=radio]').first().check({
       force: true
     });
     cy.get('input[placeholder=Comments]').type('test');

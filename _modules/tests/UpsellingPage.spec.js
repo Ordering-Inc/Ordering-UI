@@ -33,8 +33,7 @@ describe('Mounting Upselling Page component', function () {
       setCanOpenUpselling: function setCanOpenUpselling() {},
       handleUpsellingPage: function handleUpsellingPage() {}
     })));
-    cy.get('.sc-fzozJi').should('be.visible');
-    cy.get('.sc-AxgMl > .sc-Axmtr').should('exist');
-    cy.get('.sc-AxirZ > :nth-child(1)').should('be.visible');
+    cy.get('.popup-component').should('be.visible');
+    cy.get('div[name="Chipotle BBQ Snack Wrap (Grilled or Crispy)"]').should('be.visible');
   });
 });

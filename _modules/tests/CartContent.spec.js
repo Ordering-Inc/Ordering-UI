@@ -60,8 +60,7 @@ describe('Mounting Cart Content component', function () {
       isCartPopover: true,
       isOrderStateCarts: true
     })));
-    cy.get('.sc-fznxsB').should('be.visible').click();
-    cy.get('.cart').should('be.visible');
-    cy.get('.sc-pzMyG > .sc-AxiKw').should('be.visible').click();
+    cy.get('.cart').should('be.visible').click();
+    cy.get('button').should('be.visible').click();
   });
 });

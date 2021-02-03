@@ -95,11 +95,6 @@ var MessagesUI = function MessagesUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      load = _useState4[0],
-      setLoad = _useState4[1];
-
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
@@ -112,13 +107,13 @@ var MessagesUI = function MessagesUI(props) {
 
   var buttonRef = (0, _react.useRef)(null);
 
-  var _useState5 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     open: false,
     src: ''
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      modalImage = _useState6[0],
-      setModalImage = _useState6[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      modalImage = _useState4[0],
+      setModalImage = _useState4[1];
 
   var imageRef = (0, _react.useRef)(null);
 
@@ -126,12 +121,6 @@ var MessagesUI = function MessagesUI(props) {
     setModalImage({
       open: true,
       src: src
-    });
-  };
-
-  var handleLoadCountImages = function handleLoadCountImages() {
-    setLoad(function () {
-      return load + 1;
     });
   };
 
@@ -157,12 +146,6 @@ var MessagesUI = function MessagesUI(props) {
       clearInputs();
     }
   }, [sendMessage]);
-  (0, _react.useEffect)(function () {
-    if (load < 3) {
-      var chat = document.getElementById('chat');
-      chat.scrollTop = chat.scrollHeight;
-    }
-  }, [load]);
   (0, _react.useEffect)(function () {
     var chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight;

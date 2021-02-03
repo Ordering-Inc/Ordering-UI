@@ -201,14 +201,16 @@ var Header = function Header(props) {
       return handleGoToPage({
         page: 'signin'
       });
-    }
+    },
+    name: "signin"
   }, t('SIGN_IN', 'Sign in')), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signup'
       });
     },
-    highlight: 1
+    highlight: 1,
+    name: "signup"
   }, t('SIGN_UP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     withLogout: true,
     open: openPopover.user,

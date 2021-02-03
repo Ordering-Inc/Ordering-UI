@@ -105,7 +105,8 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     width: "70%"
   }, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !upsellingProducts.error ? upsellingProducts.products.map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.Item, {
-      key: product.id
+      key: product.id,
+      name: product.name
     }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
       src: product.images,
       alt: "product-".concat(i),
