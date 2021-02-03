@@ -89,7 +89,7 @@ export const Header = (props) => {
           <SidebarMenu auth={auth} />
           <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location ? 'search' : 'home' })}>
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} loading='lazy' />
-            <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy'/>
+            <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
           </LogoHeader>
           <Menu className='left-header'>
             {!configState?.loading && configTypes.length > 0 && (
@@ -121,8 +121,8 @@ export const Header = (props) => {
               {
                 !auth && windowSize.width > 870 && (
                   <>
-                    <MenuLink onClick={() => handleGoToPage({ page: 'signin' })}>{t('SIGN_IN', 'Sign in')}</MenuLink>
-                    <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1}>{t('SIGN_UP', 'Sign up')}</MenuLink>
+                    <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', 'Sign in')}</MenuLink>
+                    <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', 'Sign up')}</MenuLink>
                   </>
                 )
               }

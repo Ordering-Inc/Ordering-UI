@@ -72,7 +72,7 @@ export const CartPopover = (props) => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick}>
+      <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover'>
         <span>
           <IosBasket />
           {props.carts?.length > 0 && <p>{props.carts?.length}</p>}

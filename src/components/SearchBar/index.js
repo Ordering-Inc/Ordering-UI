@@ -11,7 +11,7 @@ import {
 
 export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
   const [theme] = useTheme()
-  const [ ,t] = useLanguage()
+  const [, t] = useLanguage()
   let timeout = null
   let previousSearch
   const el = useRef()
@@ -56,9 +56,9 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
         maxLength='500'
       />
       <DeleteContent>
-        {el.current?.value ? <span onClick={handleClear}>{t('CLEAR','Clear')}</span> : <img src={theme?.images?.general?.searchIcon}/>}
+        {el.current?.value ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span> : <img src={theme?.images?.general?.searchIcon} />}
       </DeleteContent>
-     
+
     </BusinessSearch>
   )
 }
