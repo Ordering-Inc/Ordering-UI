@@ -6,7 +6,7 @@ import {
   BusinessSearch
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
+export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, externalBusinessMap }) => {
   let timeout = null
   let previousSearch
   const el = useRef()
@@ -37,7 +37,7 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
   }, [search])
 
   return (
-    <BusinessSearch className='search-bar'>
+    <BusinessSearch className={!externalBusinessMap && 'search-bar'} externalBusinessMap={externalBusinessMap}>
       <Input
         ref={el}
         name='search'

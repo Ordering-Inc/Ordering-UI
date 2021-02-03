@@ -53,7 +53,7 @@ const configFile = {
   app_id: 'ordering-react',
   project: 'luisv4',
   api: {
-    url: 'https://apiv4-staging.ordering.co',
+    url: 'https://apiv4-dev.ordering.co',
     language: 'en',
     version: 'v400'
   },

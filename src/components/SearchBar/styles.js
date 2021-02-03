@@ -7,8 +7,6 @@ export const BusinessSearch = styled.div`
 
   input {
     width: 100%;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
     background-image: url(${props => props.theme?.images?.general?.searchIcon});
     background-position: right 10px center;
     background-repeat: no-repeat;
@@ -18,11 +16,23 @@ export const BusinessSearch = styled.div`
       background-position: left 10px center;
     `}
 
-    @media (min-width: 681px) {
-      width: 200px;
-      &:focus {
-        width: 50%;
+    ${({ externalBusinessMap }) => !externalBusinessMap && css`
+      justify-content: center;
+      input {
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out; 
       }
+    `}
+
+    @media (min-width: 681px) {
+      width: 100%;
+      ${({ externalBusinessMap }) => !externalBusinessMap && css`
+        width: 200px;
+        &:focus {
+          width: 50%;
+        }
+      `}
     }
+
   }
 `
