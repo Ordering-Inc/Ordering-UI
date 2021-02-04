@@ -40,7 +40,7 @@ export const HorizontalOrdersLayout = (props) => {
             {(configs?.google_maps_api_key?.value || isBusinessList) && (
               <Map isBusinessList={isBusinessList}>
                 <img
-                  src={isBusinessList ? order?.business?.logo : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
+                  src={isBusinessList ? (order?.business?.header || order?.business?.logo) : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
                   alt={isBusinessList ? 'business_header' : 'google-maps-img'}
                   height={isBusinessList ? '200px' : '100px'}
                   width='400px'
