@@ -189,3 +189,29 @@ export const SkeletonSocialWrapper = styled.div`
     border-radius: 30px;
   }
 `
+
+export const TogglePassword = styled.span`
+  position: absolute;
+  font-weight: 300;
+  padding: 10px 0;
+  color: #333;
+  font-size: 26px;
+  transform: translate(-150%, 10%);
+  max-height: 100%;
+  ${props => props.theme?.rtl && css`
+    transform: translate(150%, 10%);
+  `}
+  span{
+    cursor: pointer;
+  }
+ 
+`
+
+export const WrapperPassword = styled.div`
+  position: relative;
+  input{
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: 40px;
+  }
+`
