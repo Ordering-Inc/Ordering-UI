@@ -7,7 +7,8 @@ import {
   Price,
   Logo,
   Card,
-  Map
+  Map,
+  Reorder
 } from './styles'
 import { OrdersContainer, BusinessInformation } from '../OrdersOption/styles'
 
@@ -36,18 +37,18 @@ export const HorizontalOrdersLayout = (props) => {
       <>
         {orders.map(order => (
           <Card key={order.id} id='order-card' isBusinessList={isBusinessList} onClick={() => isBusinessList && onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })}>
-            {configs?.google_maps_api_key?.value && (
+            {(configs?.google_maps_api_key?.value || isBusinessList) && (
               <Map isBusinessList={isBusinessList}>
                 <img
                   src={isBusinessList ? order?.business?.logo : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
-                  alt='google-maps-img'
+                  alt={isBusinessList ? 'business_header' : 'google-maps-img'}
                   height={isBusinessList ? '200px' : '100px'}
                   width='400px'
                 />
               </Map>
             )}
             <Content>
-              {order.business?.logo && (
+              {order.business?.logo && !isBusinessList && (
                 <Logo>
                   <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
                 </Logo>
@@ -57,20 +58,22 @@ export const HorizontalOrdersLayout = (props) => {
                 <p name='order_number'>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
                 <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
               </BusinessInformation>
-              <Price>
+              <Price isBusinessList={isBusinessList}>
                 <h2>
                   {parsePrice(order?.summary?.total || order?.total)}
                 </h2>
                 <p>{getOrderStatus(order.status)?.value}</p>
                 {isBusinessList && (
-                  <Button color='primary' onClick={() => handleReorder(order.id)}>
-                    {t('REORDER', 'Reorder')}
-                  </Button>
+                  <Reorder>
+                    <Button color='primary' onClick={() => handleReorder(order.id)}>
+                      {t('REORDER', 'Reorder')}
+                    </Button>
+                  </Reorder>
                 )}
               </Price>
             </Content>
             {!isBusinessList && (
-              <OpenOrder>
+              <OpenOrder isBusinessList={isBusinessList}>
                 <Button color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })}>
                   {t('OPEN_ORDER', 'Open order')}
                 </Button>

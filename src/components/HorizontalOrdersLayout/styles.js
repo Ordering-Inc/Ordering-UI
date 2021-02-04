@@ -33,12 +33,12 @@ export const Price = styled.div`
   width: 35%;
   h2 {
     font-size: 14px;
-    margin-block-end: 1em;
-    margin-block-start: 0;
+    margin-block-end: ${({ isBusinessList }) => isBusinessList ? '0.1em' : '1em'};
+    margin-block-start: 0.1em;
   }
   p {
-    margin-block-end: 0;
-    margin-block-start: 1em;
+    margin-block-end: 0.1em;
+    margin-block-start: ${({ isBusinessList }) => isBusinessList ? '0.1em' : '1em'};
     color: #ff9300;
     font-size: 0.8em;
     overflow:hidden;
@@ -81,7 +81,7 @@ export const Card = styled.div`
     text-align: right;
   `}
 
-  ${props => props.nobg && css`
+  ${props => (props.nobg || props.isBusinessList) && css`
     background: transparent;
   `}
 
@@ -123,5 +123,14 @@ export const Map = styled.div`
   @media(min-width: 480px){
     height: ${({ isBusinessList }) => isBusinessList ? '200px' : '100px'};
     min-height: ${({ isBusinessList }) => isBusinessList && '200px'}
+  }
+`
+
+export const Reorder = styled.div`
+  margin-bottom: 10px;
+  button{
+    line-height: 0;
+    height: 30px;
+    font-size: 14px;
   }
 `
