@@ -15,6 +15,13 @@ export const CardContainer = styled.div`
 
   background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
 
+  ${props => (
+    props.theme.colors.backgroundPage === '#FFF' ||
+    props.theme.colors.backgroundPage === '#FFFFFF'
+  ) && css`
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  `}
+
   @media (min-width: 681px) {
     width: calc(50% - 40px);
   }

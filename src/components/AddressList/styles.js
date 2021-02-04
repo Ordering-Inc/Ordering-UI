@@ -114,7 +114,7 @@ export const WrappNotAddresses = styled.div`
   justify-content: center;
   align-items: center;
   width: 80%;
-  margin: 5px auto 0px;
+  margin: 20px auto 10px;
 
   img {
     width: 200px;

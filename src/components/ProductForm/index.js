@@ -148,7 +148,7 @@ const ProductOptionsUI = (props) => {
         <>
           <WrapperImage>
             <ProductImage id='product_image'>
-              <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' />
+              <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
             </ProductImage>
           </WrapperImage>
           <ProductInfo>
@@ -267,7 +267,11 @@ const ProductOptionsUI = (props) => {
                     {t('LOADING', 'Loading')}
                   </Button>
                 ) : (
-                  <AddressList addressList={user.addresses} isProductForm />
+                  <AddressList
+                    isModal
+                    addressList={user.addresses}
+                    isProductForm
+                  />
                 )
               )}
 

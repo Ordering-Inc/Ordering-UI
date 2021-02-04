@@ -45,12 +45,14 @@ export const ThemeProvider = ({ children, ...props }) => {
     body {
       font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
       margin: 0;
-      background-color: #F8F8F8;
-      color: #333;
+      background-color: ${theme.colors.backgroundPage};
+      color: ${theme.colors.colorPage};
+      direction: ltr;
 
       ${theme.rtl && css`
         direction: rtl;
       `}
+      -webkit-overflow-scrolling: auto;
     }
 
     input, textarea, button {

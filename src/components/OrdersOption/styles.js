@@ -19,6 +19,7 @@ export const OptionTitle = styled.div`
 
 export const OrdersContainer = styled.div`
   ${({ activeOrders }) => activeOrders && css`
+    padding: 0 10px;
     text-align: center;
     display: flex;
     overflow-x: auto;
@@ -75,8 +76,7 @@ export const OrdersContainer = styled.div`
   `}
 
   ${({ activeOrders }) => !activeOrders && css`
-    width: 100%;
-    padding: 0 10px;
+    width: 98%;
     display: flex;
     flex-direction: column-reverse;
     margin: 0 auto;
@@ -90,7 +90,7 @@ export const OrdersContainer = styled.div`
     @media(min-width: 480px){
       width: 80%;
       padding: 0;
-        div:last-child{
+      div:last-child {
         border-top: none;
       }
     }
@@ -258,9 +258,8 @@ export const BusinessInformation = styled.div`
     white-space: nowrap;
     font-size: 0.9em;
     ${({ activeOrders }) => activeOrders && css`
-    font-size: 0.8em;
-  `}
-  
+      font-size: 0.8em;
+    `}
   }
 
   p[name='order_number']{
@@ -271,9 +270,10 @@ export const BusinessInformation = styled.div`
   }
 
   p[name='view_order'] {
-    color: #D81313;
+    color: ${props => props.theme.colors.primary};
     cursor: pointer;
     text-decoration: none;
+    width: fit-content;
   }
 
   @media (min-width: 480px){

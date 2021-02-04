@@ -90,7 +90,14 @@ export const Card = styled.div`
     align-items: center;
     justify-content: center;
   `}
-   
+
+  ${props => (
+    props.theme.colors.backgroundPage === '#FFF' ||
+    props.theme.colors.backgroundPage === '#FFFFFF'
+  ) && css`
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  `}
+
   @media (min-width: 480px){
     min-width: 400px;
     max-height: ${({ isBusinessList }) => isBusinessList ? '300px' : '250px'};;

@@ -18,6 +18,5 @@ describe('Mounting Sign up component', () => {
     cy.get('.PhoneInputInput').should('be.visible').type('584141234123')
     cy.get('[name="password"]').should('be.visible').type('test2021')
     cy.get('button[type=submit]').click()
-    cy.get('button[name="facebook-button"]').should('exist')
   })
 })

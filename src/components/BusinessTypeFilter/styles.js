@@ -25,6 +25,16 @@ export const TypeContainer = styled.div`
     width: 100%;
   }
   }
+
+  .category{
+    padding: 10px 7px;
+  }
+
+  @media (min-width: 480px){
+    .category{
+      padding: 10px 15px;
+    }
+  }
   
 `
 

@@ -5,8 +5,8 @@ import {
   OrderDetails as OrderDetailsController,
   useEvent,
   useUtils,
-  GoogleMapsMap,
-  useConfig
+  useConfig,
+  GoogleMapsMap
 } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
@@ -22,6 +22,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 import { ReviewOrder } from '../ReviewOrder'
+import { ProductShare } from '../ProductShare'
 
 import {
   Container,
@@ -54,7 +55,8 @@ import {
   FootActions,
   SkeletonBlockWrapp,
   SkeletonBlock,
-  HeaderImg
+  HeaderImg,
+  ShareOrder
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -63,15 +65,17 @@ const OrderDetailsUI = (props) => {
     handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
-    driverLocation
+    driverLocation,
+    urlToShare
   } = props
-  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
-  const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
-  const [openReview, setOpenReview] = useState(false)
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+
+  const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
+  const [openReview, setOpenReview] = useState(false)
   const [isReviewed, setIsReviewed] = useState(false)
 
   const { order, loading, businessData, error } = props.order
@@ -130,12 +134,12 @@ const OrderDetailsUI = (props) => {
           <Content className='order-content'>
             <Header>
               <HeaderImg>
-                <img src={businessData?.header} alt='business-header' height='200px' width='355px' />
+                <img src={businessData?.header} alt='business-header' height='200px' width='355px' loading='lazy' />
               </HeaderImg>
               <HeaderInfo className='order-header'>
                 <HeaderText column>
                   <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
-                  <p>{t('ORDER_MESSAGE_TEXT', 'Once business accepts your order, we will send you and email, thank you!')}</p>
+                  <p>{t('ORDER_MESSAGE_HEADER_TEXT', 'Once business accepts your order, we will send you an email, thank you!')}</p>
                 </HeaderText>
               </HeaderInfo>
             </Header>
@@ -167,13 +171,19 @@ const OrderDetailsUI = (props) => {
               <OrderData>
                 <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
+                <p className='date'>
+                  {
+                    order?.delivery_datetime_utc
+                      ? parseDate(order?.delivery_datetime_utc)
+                      : parseDate(order?.delivery_datetime, { utc: false })
+                  }
+                </p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>
                 <span>{getOrderStatus(order?.status)?.value}</span>
                 <StatusImage>
-                  <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' />
+                  <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' loading='lazy' />
                 </StatusImage>
               </OrderStatus>
             </OrderInfo>
@@ -194,6 +204,22 @@ const OrderDetailsUI = (props) => {
                 <span>{order?.customer?.address}</span>
               </InfoBlock>
             </OrderCustomer>
+
+            {configs?.guest_uuid_access && order?.hash_key && (
+              <ShareOrder>
+                <div className='text'>
+                  <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
+                  <p>{t('LET_SOMEONE_FOLLOW_ALONG', 'Let someone follow along')}</p>
+                </div>
+                <div className='wrap'>
+                  <ProductShare
+                    withBtn
+                    btnText={t('SHARE', 'Share')}
+                    defaultUrl={urlToShare(order?.hash_key)}
+                  />
+                </div>
+              </ShareOrder>
+            )}
 
             {order?.driver && (
               <>
@@ -258,7 +284,12 @@ const OrderDetailsUI = (props) => {
                     <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                   </tr>
                   <tr>
-                    <td>{order?.tax_type === 1 ? t('TAX_INCLUDED', 'Tax (included)') : t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
+                    <td>
+                      {order?.tax_type === 1
+                        ? t('TAX_INCLUDED', 'Tax (included)')
+                        : t('TAX', 'Tax')}
+                      <span>{`(${parseNumber(order?.tax)}%)`}</span>
+                    </td>
                     <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
                   </tr>
                   {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
@@ -268,17 +299,28 @@ const OrderDetailsUI = (props) => {
                     </tr>
                   )}
                   <tr>
-                    <td>{t('DRIVER_TIP', 'Driver tip')} {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && `(${parseNumber(order?.driver_tip)}%)`}</td>
+                    <td>
+                      {t('DRIVER_TIP', 'Driver tip')}
+                      {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                        <span>{`(${parseNumber(order?.driver_tip)}%)`}</span>
+                      )}
+                    </td>
                     <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
                   </tr>
                   <tr>
-                    <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
+                    <td>
+                      {t('SERVICE_FEE', 'Service Fee')}
+                      <span>{`(${parseNumber(order?.service_fee)}%)`}</span>
+                    </td>
                     <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
                   </tr>
                   {(order?.summary?.discount > 0 || order?.discount > 0) && (
                     <tr>
                       {order?.offer_type === 1 ? (
-                        <td>{t('DISCOUNT', 'Discount')} ({parseNumber(order?.offer_rate)}%)</td>
+                        <td>
+                          {t('DISCOUNT', 'Discount')}
+                          <span>{`(${parseNumber(order?.offer_rate)}%)`}</span>
+                        </td>
                       ) : (
                         <td>{t('DISCOUNT', 'Discount')}</td>
                       )}
@@ -314,11 +356,6 @@ const OrderDetailsUI = (props) => {
             )}
 
             <FootActions>
-              {/* <a>
-                Support
-                <BiCaretUp />
-              </a>
-              */}
               <a onClick={() => handleGoToPage({ page: 'orders' })}>
                 {t('MY_ORDERS', 'My Orders')}
                 <BiCaretUp />
@@ -343,13 +380,20 @@ const OrderDetailsUI = (props) => {
         </WrapperContainer>
       )}
 
-      {!loading && (!order || error) && (
-        <NotFoundSource
-          content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
-          btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
-          onClickButton={handleOrderRedirect}
-        />
+      {!loading && error && (
+        error.includes('ERROR_ACCESS_EXPIRED') ? (
+          <NotFoundSource
+            content={t(error[0], 'Sorry, the order has expired.')}
+          />
+        ) : (
+          <NotFoundSource
+            content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
+            btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
+            onClickButton={handleOrderRedirect}
+          />
+        )
       )}
+
       {(openMessages.driver || openMessages.business) && (
         <Modal
           open={openMessages.driver || openMessages.business}

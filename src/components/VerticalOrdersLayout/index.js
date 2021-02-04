@@ -37,7 +37,7 @@ export const VerticalOrdersLayout = (props) => {
             <OrderPastContent>
               {order.business?.logo && (
                 <PastLogo>
-                  <img src={order.business?.logo} alt='business-logo' width='55px' height='64px' />
+                  <img src={order.business?.logo} alt='business-logo' width='55px' height='64px' loading='lazy' />
                 </PastLogo>
               )}
               <BusinessInformation>
@@ -45,7 +45,10 @@ export const VerticalOrdersLayout = (props) => {
                   <h2>{order.business?.name}</h2>
                 </WrapperBusinessTitle>
                 <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
-                <p name='view_order' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.uuid } })}>
+                <p
+                  name='view_order'
+                  onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.uuid } })}
+                >
                   {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
                 </p>
               </BusinessInformation>

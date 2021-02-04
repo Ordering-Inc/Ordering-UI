@@ -1,23 +1,87 @@
 const path = require('path')
-const { merge } = require('webpack-merge')
-const common = require('./webpack.common.js')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
-module.exports = merge(common, {
+module.exports = {
   mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, '_bundles'),
-    filename: 'ordering-ui.js',
+    filename: 'ordering-ui.[hash].js',
     libraryTarget: 'umd',
     library: 'OrderingUI',
     umdNamedDefine: true,
     publicPath: '/_bundles/'
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin()
+    ]
   },
   resolve: {
     alias: {
       react: path.resolve(__dirname, './node_modules/react'),
       'react-dom': path.resolve(__dirname, './node_modules/react-dom')
     }
+  },
+  plugins: [
+    new MiniCssExtractPlugin()
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader'
+        }
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader // inject CSS to page
+          },
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader // inject CSS to page
+          },
+          {
+            loader: 'css-loader' // translates CSS into CommonJS modules
+          },
+          {
+            loader: 'postcss-loader', // Run postcss actions
+            options: {
+              plugins: function () { // postcss plugins, can be exported to postcss.config.js
+                return [
+                  require('autoprefixer')
+                ]
+              }
+            }
+          },
+          {
+            loader: 'sass-loader' // compiles Sass to CSS
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              esModule: false,
+              limit: 1000
+            }
+          }
+        ]
+      }
+    ]
   },
   externals: {
     react: {
@@ -33,4 +97,4 @@ module.exports = merge(common, {
       root: 'ReactDOM'
     }
   }
-})
+}

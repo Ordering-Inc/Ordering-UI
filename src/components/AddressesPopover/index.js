@@ -91,7 +91,7 @@ export const AddressesPopover = (props) => {
               <>
                 <Title>{t('ADDRESSES', 'Addresses')}</Title>
                 <AddressList
-                  popover
+                  isPopover
                   changeOrderAddressWithDefault
                   onClosePopover={props.onClose}
                 />
