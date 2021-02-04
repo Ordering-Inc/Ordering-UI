@@ -17,7 +17,9 @@ import {
   TitleHeroSide,
   SocialButtons,
   LoginWith,
-  SkeletonSocialWrapper
+  SkeletonSocialWrapper,
+  WrapperPassword,
+  TogglePassword
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -26,6 +28,8 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { useTheme } from 'styled-components'
+import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
+import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 
 const LoginFormUI = (props) => {
   const {
@@ -46,6 +50,7 @@ const LoginFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const theme = useTheme()
+  const [passwordSee, setPasswordSee] = useState(false)
 
   const onSubmit = async () => {
     handleButtonLoginClick()
@@ -56,6 +61,10 @@ const LoginFormUI = (props) => {
       user,
       token: user.session.access_token
     })
+  }
+
+  const togglePasswordView = () => {
+    setPasswordSee(!passwordSee)
   }
 
   useEffect(() => {
@@ -153,16 +162,21 @@ const LoginFormUI = (props) => {
                 autoComplete='off'
               />
             )}
-            <Input
-              type='password'
-              name='password'
-              aria-label='password'
-              placeholder={t('PASSWORD', 'Password')}
-              ref={register({
-                required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-              })}
-              onChange={(e) => hanldeChangeInput(e)}
-            />
+            <WrapperPassword>
+              <Input
+                type={!passwordSee ? 'password' : 'text'}
+                name='password'
+                aria-label='password'
+                placeholder={t('PASSWORD', 'Password')}
+                ref={register({
+                  required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                })}
+                onChange={(e) => hanldeChangeInput(e)}
+              />
+              <TogglePassword onClick={togglePasswordView}>
+                {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+              </TogglePassword>
+            </WrapperPassword>
             <RedirectLink isPopup={isPopup}>
               <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
               {elementLinkToForgotPassword}
