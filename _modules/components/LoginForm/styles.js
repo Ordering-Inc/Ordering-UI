@@ -5,13 +5,43 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SkeletonSocialWrapper = exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.LoginWith = exports.FormSide = exports.TitleHeroSide = exports.HeroSide = exports.LoginContainer = void 0;
+exports.WrapperPassword = exports.TogglePassword = exports.SkeletonSocialWrapper = exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.LoginWith = exports.FormSide = exports.TitleHeroSide = exports.HeroSide = exports.LoginContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _templateObject18() {
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px;\n  }\n"]);
+
+  _templateObject18 = function _templateObject18() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject17() {
+  var data = _taggedTemplateLiteral(["\n    transform: translate(150%, 10%);\n  "]);
+
+  _templateObject17 = function _templateObject17() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject16() {
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  font-weight: 300;\n  padding: 10px 0;\n  color: #333;\n  font-size: 26px;\n  transform: translate(-150%, 10%);\n  max-height: 100%;\n  ", "\n  span{\n    cursor: pointer;\n  }\n \n"]);
+
+  _templateObject16 = function _templateObject16() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject15() {
   var data = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    border-radius: 30px;\n  }\n"]);
@@ -248,3 +278,15 @@ var SkeletonSocialWrapper = _styledComponents.default.div(_templateObject15(), f
 });
 
 exports.SkeletonSocialWrapper = SkeletonSocialWrapper;
+
+var TogglePassword = _styledComponents.default.span(_templateObject16(), function (props) {
+  var _props$theme2;
+
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject17());
+});
+
+exports.TogglePassword = TogglePassword;
+
+var WrapperPassword = _styledComponents.default.div(_templateObject18());
+
+exports.WrapperPassword = WrapperPassword;

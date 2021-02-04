@@ -73,7 +73,8 @@ var AddressListUI = function AddressListUI(props) {
       isPopover = props.isPopover,
       isProductForm = props.isProductForm,
       onCancel = props.onCancel,
-      onAccept = props.onAccept;
+      onAccept = props.onAccept,
+      userId = props.userId;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -211,6 +212,7 @@ var AddressListUI = function AddressListUI(props) {
     },
     disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading
   }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
     address: curAddress,

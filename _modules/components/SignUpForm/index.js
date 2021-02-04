@@ -77,7 +77,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       isRequiredField = props.isRequiredField,
       formState = props.formState,
       handleSuccessSignup = props.handleSuccessSignup,
-      isPopup = props.isPopup;
+      isPopup = props.isPopup,
+      externalPhoneNumber = props.externalPhoneNumber;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -158,7 +159,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
 
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
 
-    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.required) {
+    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.required && !externalPhoneNumber) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -251,10 +252,15 @@ var SignUpFormUI = function SignUpFormUI(props) {
       required: field.required,
       autoComplete: "off"
     });
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber
+  }), externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    value: externalPhoneNumber,
+    className: "form",
+    readOnly: true,
+    name: "cellphone"
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
@@ -283,14 +289,14 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_UP', 'Sign up'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
   }, (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
   })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43
-  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SIGN_UP', 'Sign up'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

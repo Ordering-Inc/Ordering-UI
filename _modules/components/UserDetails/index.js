@@ -33,6 +33,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -46,14 +48,17 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserDetailsUI = function UserDetailsUI(props) {
-  var userData = props.userData,
+  var _formState$result, _formState$result2;
+
+  var externalUserData = props.userData,
       isEdit = props.isEdit,
       formState = props.formState,
       cleanFormState = props.cleanFormState,
       cartStatus = props.cartStatus,
       toggleIsEdit = props.toggleIsEdit,
       validationFields = props.validationFields,
-      isUserDetailsEdit = props.isUserDetailsEdit;
+      isUserDetailsEdit = props.isUserDetailsEdit,
+      externalLoading = props.externalLoading;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -63,6 +68,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
+  var userData = (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result : externalUserData;
   (0, _react.useEffect)(function () {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit();
@@ -76,7 +82,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     });
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields.loading || formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields.loading || formState.loading || externalLoading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 250,
     height: 25
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -85,7 +91,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 210,
     height: 25
-  })), !(validationFields.loading || formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
+  })), !(validationFields.loading || formState.loading || externalLoading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
   }, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     className: "edit",
@@ -97,7 +103,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     onClick: function onClick() {
       return toggleEditState();
     }
-  }))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('NAME', 'Name'), ":"), " ", (userData === null || userData === void 0 ? void 0 : userData.name) || (user === null || user === void 0 ? void 0 : user.name), " ", (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (user === null || user === void 0 ? void 0 : user.middle_name), " ", (userData === null || userData === void 0 ? void 0 : userData.lastname) || (user === null || user === void 0 ? void 0 : user.lastname), " ", (userData === null || userData === void 0 ? void 0 : userData.second_lastname) || (user === null || user === void 0 ? void 0 : user.second_lastname)), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('EMAIL', 'Email'), ":"), " ", (userData === null || userData === void 0 ? void 0 : userData.email) || (user === null || user === void 0 ? void 0 : user.email)), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CELLPHONE', 'Cellphone'), ":"), " ", ((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code)) && "+".concat((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code), " "), (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone))) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, props))));
+  }))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('NAME', 'Name'), ":"), " ", (userData === null || userData === void 0 ? void 0 : userData.name) || (user === null || user === void 0 ? void 0 : user.name), " ", (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (user === null || user === void 0 ? void 0 : user.middle_name), " ", (userData === null || userData === void 0 ? void 0 : userData.lastname) || (user === null || user === void 0 ? void 0 : user.lastname), " ", (userData === null || userData === void 0 ? void 0 : userData.second_lastname) || (user === null || user === void 0 ? void 0 : user.second_lastname)), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('EMAIL', 'Email'), ":"), " ", (userData === null || userData === void 0 ? void 0 : userData.email) || (user === null || user === void 0 ? void 0 : user.email)), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CELLPHONE', 'Cellphone'), ":"), " ", ((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code)) && "+".concat((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code), " "), (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone))) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+    externalUserData: userData
+  })))));
 };
 
 var UserDetails = function UserDetails(props) {

@@ -70,7 +70,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       validationFields = props.validationFields,
       handleChangeInput = props.handleChangeInput,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
-      isCheckout = props.isCheckout;
+      isCheckout = props.isCheckout,
+      phoneAutocomplete = props.phoneAutocomplete;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -83,7 +84,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
+      userSession = _useSession2[0].user;
 
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -107,6 +108,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       alertState = _useState8[0],
       setAlertState = _useState8[1];
+
+  var user = props.externalUserData || userSession;
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -333,12 +336,16 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && !phoneAutocomplete && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
+  }), phoneAutocomplete && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    value: phoneAutocomplete,
+    className: "form",
+    name: "cellphone"
   }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",

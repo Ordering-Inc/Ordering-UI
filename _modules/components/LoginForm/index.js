@@ -31,6 +31,10 @@ var _FacebookLogin = require("../FacebookLogin");
 
 var _styledComponents = require("styled-components");
 
+var _AiOutlineEye = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEye"));
+
+var _AiOutlineEyeInvisible = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEyeInvisible"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -100,6 +104,11 @@ var LoginFormUI = function LoginFormUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      passwordSee = _useState4[0],
+      setPasswordSee = _useState4[1];
+
   var onSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
       return _regenerator.default.wrap(function _callee$(_context) {
@@ -126,6 +135,10 @@ var LoginFormUI = function LoginFormUI(props) {
       user: user,
       token: user.session.access_token
     });
+  };
+
+  var togglePasswordView = function togglePasswordView() {
+    setPasswordSee(!passwordSee);
   };
 
   (0, _react.useEffect)(function () {
@@ -214,8 +227,8 @@ var LoginFormUI = function LoginFormUI(props) {
       return hanldeChangeInput(e);
     },
     autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    type: "password",
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    type: !passwordSee ? 'password' : 'text',
     name: "password",
     "aria-label": "password",
     placeholder: t('PASSWORD', 'Password'),
@@ -225,7 +238,9 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: function onChange(e) {
       return hanldeChangeInput(e);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.TogglePassword, {
+    onClick: togglePasswordView
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_AiOutlineEye.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineEyeInvisible.default, null))), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
