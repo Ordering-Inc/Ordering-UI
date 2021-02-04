@@ -27,6 +27,7 @@ export const OrdersContainer = styled.div`
     justify-content: ${({ ordersLength }) => !ordersLength ? 'flex-start' : 'center'};
     width: 100%;
     margin: auto 0px auto auto;
+    box-sizing: border-box;
     ${props => props.theme?.rtl && css`
       margin: auto auto auto 0px;
     `}

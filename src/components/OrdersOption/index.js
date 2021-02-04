@@ -110,7 +110,7 @@ const OrdersOptionUI = (props) => {
         />
       )}
 
-      {loading && (
+      {!loading && (
         <OrdersContainer activeOrders={horizontal} isSkeleton isBusinessList={isBusinessList}>
           {horizontal ? (
             <SkeletonOrder activeOrders={horizontal} isBusinessList={isBusinessList}>

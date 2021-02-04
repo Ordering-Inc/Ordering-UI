@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from '@cypress/react'
-import { ActiveOrders } from '../components/ActiveOrders'
+import { VerticalOrdersLayout } from '../components/VerticalOrdersLayout'
 import ProviderMock from '../__mocks__/ProviderMock'
 
 const getOrderStatus = () => { console.log('get order status fn') }
@@ -12,11 +12,11 @@ const orders = [
   { id: 2, total: 55 }
 ]
 
-describe('Mounting Active orders component', () => {
+describe('Mounting Previous orders component', () => {
   it('Component UI', () => {
     mount(
       <ProviderMock>
-        <ActiveOrders
+        <VerticalOrdersLayout
           orders={orders}
           pagination={pagination}
           onOrderClick={onOrderClick}
@@ -26,6 +26,7 @@ describe('Mounting Active orders component', () => {
       </ProviderMock>
     )
     cy.get('#orders-container').find('div#order-card').should('have.length', orders.length)
-    cy.get('button').contains('Open order').should('exist')
+    cy.get('p[name=view_order]').should('be.visible')
+    cy.get('button').contains('Reorder').should('be.visible')
   })
 })
