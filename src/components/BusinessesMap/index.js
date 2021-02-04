@@ -1,8 +1,8 @@
 import React from 'react'
-import { BusinessMap as BusinessMapController, GoogleMapsMap, useConfig } from 'ordering-components'
+import { BusinessesMap as BusinessesMapController, GoogleMapsMap, useConfig } from 'ordering-components'
 import { WrapperMap } from './styles'
 
-const BusinessMapUI = (props) => {
+const BusinessesMapUI = (props) => {
   const {
     userLocation,
     businessLocations,
@@ -39,10 +39,10 @@ const BusinessMapUI = (props) => {
   )
 }
 
-export const BusinessMap = (props) => {
+export const BusinessesMap = (props) => {
   const businessMapController = {
     ...props,
-    UIComponent: BusinessMapUI
+    UIComponent: BusinessesMapUI
   }
-  return <BusinessMapController {...businessMapController} />
+  return <BusinessesMapController {...businessMapController} />
 }

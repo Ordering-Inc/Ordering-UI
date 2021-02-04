@@ -18,7 +18,7 @@ import { SearchBar } from '../SearchBar'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
-import { BusinessMap } from '../BusinessMap'
+import { BusinessesMap } from '../BusinessesMap'
 
 import {
   useOrder,
@@ -104,7 +104,7 @@ const BusinessesListingUI = (props) => {
         )}
       </WrapperSearch>
       {activeMap && (
-        <BusinessMap businessList={businessesList.businesses} userLocation={userLocation} />
+        <BusinessesMap businessList={businessesList.businesses} userLocation={userLocation} />
       )}
       <BusinessList>
         {
