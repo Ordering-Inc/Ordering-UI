@@ -21,7 +21,8 @@ const UserDetailsUI = (props) => {
     cartStatus,
     toggleIsEdit,
     validationFields,
-    isUserDetailsEdit
+    isUserDetailsEdit,
+    externalLoading
   } = props
 
   const [, t] = useLanguage()
@@ -41,7 +42,7 @@ const UserDetailsUI = (props) => {
 
   return (
     <>
-      {(validationFields.loading || formState.loading || props?.externalLoading) && (
+      {(validationFields.loading || formState.loading || externalLoading) && (
         <UserData>
           <Skeleton width={250} height={25} />
           <Skeleton width={180} height={25} />
@@ -49,39 +50,38 @@ const UserDetailsUI = (props) => {
         </UserData>
       )}
 
-      {!(validationFields.loading || formState.loading || props?.externalLoading) &&
-        (
-          <Container>
-            <Header className='user-form'>
-              <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
-              {cartStatus !== 2 && (
-                !isEdit ? (
-                  <TiPencil className='edit' onClick={() => toggleIsEdit()} />
-                ) : (
-                  <FcCancel className='cancel' onClick={() => toggleEditState()} />
-                )
-              )}
-            </Header>
-
-            {!isEdit ? (
-              <UserData>
-                <p>
-                  <strong>{t('NAME', 'Name')}:</strong> {userData?.name || user?.name} {userData?.middle_name || user?.middle_name} {userData?.lastname || user?.lastname} {userData?.second_lastname || user?.second_lastname}
-                </p>
-                <p><strong>{t('EMAIL', 'Email')}:</strong> {userData?.email || user?.email}</p>
-                {(userData?.cellphone || user?.cellphone) && (
-                  <p>
-                    <strong>{t('CELLPHONE', 'Cellphone')}:</strong> {(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}
-                  </p>
-                )}
-              </UserData>
-            ) : (
-              <SideForm>
-                <UserFormDetailsUI {...props} externalUserData={userData} />
-              </SideForm>
+      {!(validationFields.loading || formState.loading || externalLoading) && (
+        <Container>
+          <Header className='user-form'>
+            <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
+            {cartStatus !== 2 && (
+              !isEdit ? (
+                <TiPencil className='edit' onClick={() => toggleIsEdit()} />
+              ) : (
+                <FcCancel className='cancel' onClick={() => toggleEditState()} />
+              )
             )}
-          </Container>
-        )}
+          </Header>
+
+          {!isEdit ? (
+            <UserData>
+              <p>
+                <strong>{t('NAME', 'Name')}:</strong> {userData?.name || user?.name} {userData?.middle_name || user?.middle_name} {userData?.lastname || user?.lastname} {userData?.second_lastname || user?.second_lastname}
+              </p>
+              <p><strong>{t('EMAIL', 'Email')}:</strong> {userData?.email || user?.email}</p>
+              {(userData?.cellphone || user?.cellphone) && (
+                <p>
+                  <strong>{t('CELLPHONE', 'Cellphone')}:</strong> {(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}
+                </p>
+              )}
+            </UserData>
+          ) : (
+            <SideForm>
+              <UserFormDetailsUI {...props} externalUserData={userData} />
+            </SideForm>
+          )}
+        </Container>
+      )}
     </>
   )
 }
