@@ -39,7 +39,8 @@ const AddressListUI = (props) => {
     isPopover,
     isProductForm,
     onCancel,
-    onAccept
+    onAccept,
+    userId
   } = props
 
   const [, t] = useLanguage()
@@ -151,6 +152,7 @@ const AddressListUI = (props) => {
       {
         isPopover && addressOpen && (
           <AddressForm
+            userId={userId}
             addressesList={addressList?.addresses}
             useValidationFileds
             address={curAddress}

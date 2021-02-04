@@ -27,17 +27,20 @@ export const UserFormDetailsUI = (props) => {
     validationFields,
     handleChangeInput,
     handleButtonUpdateClick,
-    isCheckout
+    isCheckout,
+    phoneAutocomplete
   } = props
 
   const { handleSubmit, register, errors } = useForm()
   const [, t] = useLanguage()
 
-  const [{ user }] = useSession()
+  const [{ user: userSession }] = useSession()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [validationFieldsSorted, setValidationFieldsSorted] = useState([])
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const user = props.externalUserData || userSession
 
   const closeAlert = () => {
     setAlertState({
@@ -249,13 +252,21 @@ export const UserFormDetailsUI = (props) => {
                 })}
               />
             )}
-            {!!showInputPhoneNumber && (
+            {!!showInputPhoneNumber && !phoneAutocomplete && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
                 disabled={!isEdit}
+              />
+            )}
+
+            {phoneAutocomplete && (
+              <Input
+                value={phoneAutocomplete}
+                className='form'
+                name='cellphone'
               />
             )}
             <ActionsForm>
