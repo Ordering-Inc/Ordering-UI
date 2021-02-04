@@ -42,7 +42,8 @@ const SignUpFormUI = (props) => {
     isRequiredField,
     formState,
     handleSuccessSignup,
-    isPopup
+    isPopup,
+    externalPhoneNumber
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -88,7 +89,7 @@ const SignUpFormUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required) {
+    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required && !externalPhoneNumber) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -185,11 +186,20 @@ const SignUpFormUI = (props) => {
                     )
                   ))
                 }
-                {!!showInputPhoneNumber && (
+                {!!showInputPhoneNumber && !externalPhoneNumber && (
                   <InputPhoneNumber
                     value={userPhoneNumber}
                     setValue={handleChangePhoneNumber}
                     handleIsValid={setIsValidPhoneNumber}
+                  />
+                )}
+
+                {externalPhoneNumber && (
+                  <Input
+                    value={externalPhoneNumber}
+                    className='form'
+                    readOnly
+                    name='cellphone'
                   />
                 )}
 
@@ -234,19 +244,23 @@ const SignUpFormUI = (props) => {
             {elementLinkToLogin}
           </RedirectLink>
         )}
-        {Object.keys(configs).length > 0 ? (
-          <SocialButtons isPopup={isPopup}>
-            {configs?.facebook_login?.value && configs?.facebook_id?.value && (
-              <FacebookLoginButton
-                appId={configs?.facebook_id?.value}
-                handleSuccessFacebookLogin={handleSuccessFacebook}
-              />
+        {!externalPhoneNumber && (
+          <>
+            {Object.keys(configs).length > 0 ? (
+              <SocialButtons isPopup={isPopup}>
+                {configs?.facebook_login?.value && configs?.facebook_id?.value && (
+                  <FacebookLoginButton
+                    appId={configs?.facebook_id?.value}
+                    handleSuccessFacebookLogin={handleSuccessFacebook}
+                  />
+                )}
+              </SocialButtons>
+            ) : (
+              <SkeletonSocialWrapper>
+                <Skeleton height={43} />
+              </SkeletonSocialWrapper>
             )}
-          </SocialButtons>
-        ) : (
-          <SkeletonSocialWrapper>
-            <Skeleton height={43} />
-          </SkeletonSocialWrapper>
+          </>
         )}
       </FormSide>
       <Alert
