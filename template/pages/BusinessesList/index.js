@@ -19,7 +19,7 @@ export const BusinessesList = (props) => {
   return (
     <>
       <HelmetTags page='search' />
-      <BusinessesListing {...businessListingProps} externalBusinessMap />
+      <BusinessesListing {...businessListingProps} />
     </>
   )
 }
