@@ -159,7 +159,7 @@ const OrderDetailsUI = (props) => {
   }, [messages?.messages])
 
   useEffect(() => {
-    if (messagesReadList.length) {
+    if (messagesReadList?.length) {
       openMessages.business ? setUnreadAlert({ ...unreadAlert, business: false }) : setUnreadAlert({ ...unreadAlert, driver: false })
     }
   }, [messagesReadList])
