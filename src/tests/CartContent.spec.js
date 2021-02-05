@@ -44,7 +44,8 @@ describe('Mounting Cart Content component', () => {
     uuid: '972dc9dd-85c7-4e8f-a7d0-848983010eaa',
     valid_schedule: true,
     valid_products: true,
-    valid: true
+    valid: true,
+    valid_address: true
   }]
   it('Component UI', () => {
     mount(
