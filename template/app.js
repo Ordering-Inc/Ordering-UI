@@ -194,12 +194,24 @@ export const App = () => {
                   <Route exact path='/profile'>
                     {auth
                       ? (<Profile userId={user.id} accessToken={user.session.access_token} useValidationFields />)
-                      : <Redirect to='/login' />}
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
                       ? (<MyOrders />)
-                      : <Redirect to='/login' />}
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
                   </Route>
                   <Route exact path='/search'>
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
@@ -216,12 +228,24 @@ export const App = () => {
                   <Route path='/checkout/:cartUuid?'>
                     {auth
                       ? <CheckoutPage />
-                      : <Redirect to='/login' />}
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     {(auth || hashKey)
                       ? <OrderDetailsPage />
-                      : <Redirect to='/login' />}
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />
