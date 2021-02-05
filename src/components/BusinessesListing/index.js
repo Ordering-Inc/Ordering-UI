@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-
+import FiMap from '@meronex/icons/fi/FiMap'
 import {
   BusinessContainer,
   BusinessList,
@@ -18,6 +18,8 @@ import { SearchBar } from '../SearchBar'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
+import { BusinessesMap } from '../BusinessesMap'
+
 import {
   useOrder,
   useSession,
@@ -35,13 +37,19 @@ const BusinessesListingUI = (props) => {
     getBusinesses,
     handleChangeSearch,
     handleChangeBusinessType,
-    handleBusinessClick
+    handleBusinessClick,
+    externalBusinessMap
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [activeMap, setActiveMap] = useState(false)
+
+  const toggleMap = () => {
+    setActiveMap(!activeMap)
+  }
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -77,14 +85,22 @@ const BusinessesListingUI = (props) => {
       <BusinessTypeFilter
         handleChangeBusinessType={handleChangeBusinessType}
       />
-      <WrapperSearch>
+
+      <WrapperSearch externalBusinessMap={externalBusinessMap}>
         <SearchBar
           onSearch={handleChangeSearch}
           search={searchValue}
           placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
           lazyLoad
+          externalBusinessMap={externalBusinessMap}
         />
+        {externalBusinessMap && (
+          <FiMap onClick={toggleMap} />
+        )}
       </WrapperSearch>
+      {activeMap && (
+        <BusinessesMap businessList={businessesList.businesses} userLocation={orderState?.options?.address?.location} />
+      )}
       <BusinessList>
         {
           !businessesList.loading && businessesList.businesses.length === 0 && (
