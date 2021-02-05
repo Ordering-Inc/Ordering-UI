@@ -80,11 +80,6 @@ const BusinessesListingUI = (props) => {
     setModals({ listOpen: false, formOpen: false })
   }
 
-  /**
-   * User location hardcoded, this location must be provided from user on useSession or props
-   */
-  const userLocation = { lat: 40.7751052, lng: -73.9651148 }
-
   return (
     <BusinessContainer>
       <BusinessTypeFilter
@@ -104,7 +99,7 @@ const BusinessesListingUI = (props) => {
         )}
       </WrapperSearch>
       {activeMap && (
-        <BusinessesMap businessList={businessesList.businesses} userLocation={userLocation} />
+        <BusinessesMap businessList={businessesList.businesses} userLocation={orderState?.options?.address?.location} />
       )}
       <BusinessList>
         {
