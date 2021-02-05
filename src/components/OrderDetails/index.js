@@ -14,6 +14,7 @@ import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
+import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -56,7 +57,9 @@ import {
   SkeletonBlockWrapp,
   SkeletonBlock,
   HeaderImg,
-  ShareOrder
+  ShareOrder,
+  MessagesIcon,
+  ExclamationWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -66,7 +69,11 @@ const OrderDetailsUI = (props) => {
     handleOrderRedirect,
     googleMapsControls,
     driverLocation,
-    urlToShare
+    urlToShare,
+    messages,
+    setMessages,
+    readMessages,
+    messagesReadList
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -77,6 +84,7 @@ const OrderDetailsUI = (props) => {
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
   const [isReviewed, setIsReviewed] = useState(false)
+  const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
 
   const { order, loading, businessData, error } = props.order
 
@@ -115,6 +123,25 @@ const OrderDetailsUI = (props) => {
     events.emit('go_to_page', data)
   }
 
+  const handleOpenMessages = (data) => {
+    setOpenMessages(data)
+    readMessages()
+    if (order?.unread_count > 0) {
+      data.business
+        ? setUnreadAlert({ ...unreadAlert, business: false })
+        : setUnreadAlert({ ...unreadAlert, driver: false })
+    }
+  }
+
+  const unreadMessages = () => {
+    const length = messages?.messages.length
+    const unreadLength = order?.unread_count
+    const unreadedMessages = messages.messages.slice(length - unreadLength, length)
+    const business = unreadedMessages.some(message => message?.can_see?.includes(2))
+    const driver = unreadedMessages.some(message => message?.can_see?.includes(4))
+    setUnreadAlert({ business, driver })
+  }
+
   const locations = [
     { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
     { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
@@ -126,6 +153,16 @@ const OrderDetailsUI = (props) => {
       locations[0] = driverLocation
     }
   }, [driverLocation])
+
+  useEffect(() => {
+    unreadMessages()
+  }, [messages?.messages])
+
+  useEffect(() => {
+    if (messagesReadList.length) {
+      openMessages.business ? setUnreadAlert({ ...unreadAlert, business: false }) : setUnreadAlert({ ...unreadAlert, driver: false })
+    }
+  }, [messagesReadList])
 
   return (
     <Container>
@@ -161,9 +198,14 @@ const OrderDetailsUI = (props) => {
                 <span>
                   <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
                 </span>
-                <span>
-                  <HiOutlineChat onClick={() => setOpenMessages({ driver: false, business: true })} />
-                </span>
+                <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
+                  {order?.unread_count > 0 && unreadAlert.business && (
+                    <ExclamationWrapper>
+                      <AiFillExclamationCircle />
+                    </ExclamationWrapper>
+                  )}
+                  <HiOutlineChat />
+                </MessagesIcon>
               </ActionsBlock>
             </OrderBusiness>
 
@@ -256,9 +298,14 @@ const OrderDetailsUI = (props) => {
                         <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
                           <FiPhone />
                         </span>}
-                      <span>
-                        <HiOutlineChat onClick={() => setOpenMessages({ driver: true, business: false })} />
-                      </span>
+                      <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
+                        {order?.unread_count > 0 && unreadAlert.driver && (
+                          <ExclamationWrapper>
+                            <AiFillExclamationCircle />
+                          </ExclamationWrapper>
+                        )}
+                        <HiOutlineChat />
+                      </MessagesIcon>
                     </ActionsBlock>
                   </OrderDriver>
                 </>
@@ -401,7 +448,15 @@ const OrderDetailsUI = (props) => {
           padding='0'
           width='70%'
         >
-          <Messages orderId={order?.id} order={order} business={openMessages.business} driver={openMessages.driver} />
+          <Messages
+            orderId={order?.id}
+            order={order}
+            business={openMessages.business}
+            driver={openMessages.driver}
+            messages={messages}
+            setMessages={setMessages}
+            readMessages={readMessages}
+          />
         </Modal>
       )}
       {openReview && (

@@ -57,7 +57,8 @@ const MessagesUI = (props) => {
     setMessage,
     business,
     driver,
-    messagesToShow
+    messagesToShow,
+    readMessages
   } = props
 
   const [, t] = useLanguage()
@@ -97,6 +98,7 @@ const MessagesUI = (props) => {
   useEffect(() => {
     const chat = document.getElementById('chat')
     chat.scrollTop = chat.scrollHeight
+    readMessages()
   }, [messages.messages.length])
 
   useEffect(() => {
