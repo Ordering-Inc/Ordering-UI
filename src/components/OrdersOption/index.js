@@ -95,21 +95,24 @@ const OrdersOptionUI = (props) => {
 
   return (
     <>
-      <OptionTitle isBusinessList={isBusinessList}>
-        <h1>
-          {activeOrders
-            ? t('ACTIVE_ORDERS', 'Active Orders')
-            : t('PREVIOUS_ORDERS', 'Previous Orders')}
-        </h1>
-      </OptionTitle>
-      {!loading && ordersSorted.length === 0 && (
-        <NotFoundSource
-          image={imageFails}
-          content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
-          conditioned
-        />
+      {(orders.length > 0 || !isBusinessList) && (
+        <>
+          <OptionTitle isBusinessList={isBusinessList}>
+            <h1>
+              {activeOrders
+                ? t('ACTIVE_ORDERS', 'Active Orders')
+                : t('PREVIOUS_ORDERS', 'Previous Orders')}
+            </h1>
+          </OptionTitle>
+          {!loading && ordersSorted.length === 0 && (
+            <NotFoundSource
+              image={imageFails}
+              content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
+              conditioned
+            />
+          )}
+        </>
       )}
-
       {loading && (
         <OrdersContainer activeOrders={horizontal} isSkeleton isBusinessList={isBusinessList}>
           {horizontal ? (
