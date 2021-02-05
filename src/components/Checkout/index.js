@@ -496,7 +496,7 @@ export const Checkout = (props) => {
               </CartItemWrapper>
               <CartItemActions>
                 <Button
-                  color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
+                  color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
                   onClick={() => handleOpenUpsellingPage(cart)}
                   disabled={currentCart?.uuid === cart?.uuid || openUpselling || cart?.subtotal < cart?.minimum || !cart?.valid_address}
                 >
