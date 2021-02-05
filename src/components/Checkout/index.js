@@ -496,14 +496,16 @@ export const Checkout = (props) => {
               </CartItemWrapper>
               <CartItemActions>
                 <Button
-                  color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
+                  color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
                   onClick={() => handleOpenUpsellingPage(cart)}
-                  disabled={currentCart?.uuid === cart?.uuid || openUpselling || cart?.subtotal < cart?.minimum}
+                  disabled={currentCart?.uuid === cart?.uuid || openUpselling || cart?.subtotal < cart?.minimum || !cart?.valid_address}
                 >
-                  {cart?.subtotal >= cart?.minimum ? (
+                  {(cart?.subtotal >= cart?.minimum || !cart?.minimum) && cart?.valid_address ? (
                     (currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid
                       ? t('LOADING', 'Loading...')
                       : t('VIEW_ORDER', 'View order')
+                  ) : !cart?.valid_address ? (
+                    t('OUT_OF_COVERAGE', 'Out of Coverage')
                   ) : (
                     `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
                   )}

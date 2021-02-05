@@ -660,3 +660,17 @@ export const ShareOrder = styled.div`
     }
   }
 `
+
+export const MessagesIcon = styled.span`
+  position: relative;
+  cursor: pointer;
+`
+
+export const ExclamationWrapper = styled.div`
+  position: absolute;
+  transform: translate(75%, -25%);
+  svg{
+    font-size: 16px;
+    color: ${props => props.theme?.colors?.primary}
+  }
+`
