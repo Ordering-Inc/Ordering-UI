@@ -194,24 +194,12 @@ export const App = () => {
                   <Route exact path='/profile'>
                     {auth
                       ? (<Profile userId={user.id} accessToken={user.session.access_token} useValidationFields />)
-                      : (
-                        <Redirect to={{
-                          pathname: '/login',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
-                      )}
+                      : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
                       ? (<MyOrders />)
-                      : (
-                        <Redirect to={{
-                          pathname: '/login',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
-                      )}
+                      : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/search'>
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
