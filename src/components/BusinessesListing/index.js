@@ -101,11 +101,11 @@ const BusinessesListingUI = (props) => {
           <FiMap onClick={toggleMap} />
         )}
       </WrapperSearch>
-      {externalBusinessMap && (
-        <OrdersOption onOrderClick={(data) => events.emit('go_to_page', data)} horizontal isBusinessList />
-      )}
       {activeMap && (
         <BusinessesMap businessList={businessesList.businesses} userLocation={orderState?.options?.address?.location} />
+      )}
+      {externalBusinessMap && (
+        <OrdersOption onOrderClick={(data) => events.emit('go_to_page', data)} horizontal isBusinessList />
       )}
       <BusinessList>
         {
