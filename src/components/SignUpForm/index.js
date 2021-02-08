@@ -43,7 +43,8 @@ const SignUpFormUI = (props) => {
     formState,
     handleSuccessSignup,
     isPopup,
-    externalPhoneNumber
+    externalPhoneNumber,
+    externalCloseModal
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -68,6 +69,8 @@ const SignUpFormUI = (props) => {
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
+    } else if (!formState.loading && !formState.result?.error && formState.result?.result) {
+      externalCloseModal && externalCloseModal()
     }
   }, [formState])
 

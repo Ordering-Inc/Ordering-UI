@@ -97,8 +97,8 @@ const AddressFormUI = (props) => {
     props.forEach(prop => {
       if (addressToCompare[prop]) {
         if (prop === 'location') {
-          values.push(address[prop].lat === addressToCompare[prop].lat &&
-            address[prop].lng === addressToCompare[prop].lng)
+          values.push(address[prop]?.lat === addressToCompare[prop]?.lat &&
+            address[prop]?.lng === addressToCompare[prop]?.lng)
         } else {
           values.push(address[prop] === addressToCompare[prop])
         }
