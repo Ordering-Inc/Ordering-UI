@@ -57,7 +57,8 @@ const MessagesUI = (props) => {
     setMessage,
     business,
     driver,
-    messagesToShow
+    messagesToShow,
+    readMessages
   } = props
 
   const [, t] = useLanguage()
@@ -97,7 +98,8 @@ const MessagesUI = (props) => {
   useEffect(() => {
     const chat = document.getElementById('chat')
     chat.scrollTop = chat.scrollHeight
-  }, [messages.messages.length])
+    readMessages && readMessages()
+  }, [messages?.messages?.length])
 
   useEffect(() => {
     setImage(null)
@@ -338,7 +340,7 @@ const MessagesUI = (props) => {
       </HeaderProfile>
       <Chat id='chat'>
         {
-          messages.loading && (
+          messages?.loading && (
             <>
               <MessageBusiness>
                 <SkeletonBubbleBusiness>
@@ -364,7 +366,7 @@ const MessagesUI = (props) => {
           )
         }
         {
-          !messages.loading && (
+          !messages?.loading && (
             <>
               <MessageConsole>
                 <BubbleConsole>
@@ -421,7 +423,7 @@ const MessagesUI = (props) => {
             <Button
               color='primary'
               type='submit'
-              disabled={sendMessage.loading || (message === '' && !image) || messages.loading}
+              disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
               ref={buttonRef}
             >
               <IosSend />

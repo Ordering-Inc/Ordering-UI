@@ -9,7 +9,7 @@ export const MyOrders = (props) => {
     <>
       <ProfileOptions value='orders' />
       <Container>
-        <OrdersOption {...props} activeOrders />
+        <OrdersOption {...props} activeOrders horizontal />
         <OrdersOption {...props} />
       </Container>
     </>

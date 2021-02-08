@@ -9,7 +9,7 @@ import {
   DeleteContent
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
+export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, externalBusinessMap }) => {
   const [theme] = useTheme()
   const [, t] = useLanguage()
   let timeout = null
@@ -46,7 +46,7 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad }) => {
   }, [search])
 
   return (
-    <BusinessSearch className='search-bar' hasValue={el.current?.value}>
+    <BusinessSearch className={!externalBusinessMap && 'search-bar'} externalBusinessMap={externalBusinessMap} hasValue={el.current?.value}>
       <Input
         ref={el}
         name='search'

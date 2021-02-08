@@ -31,7 +31,8 @@ const CartUI = (props) => {
     onClickCheckout,
     isCheckout,
     isCartPending,
-    isCartPopover
+    isCartPopover,
+    isCheckoutPage
   } = props
 
   const [, t] = useLanguage()
@@ -124,6 +125,7 @@ const CartUI = (props) => {
         moment={momentFormatted}
         isProducts={isProducts}
         isValidProducts={cart?.valid_products}
+        isForceOpenAccordion={isCheckoutPage}
         handleClearProducts={handleClearProducts}
         handleStoreRedirect={handleStoreRedirect}
       >
@@ -214,15 +216,17 @@ const CartUI = (props) => {
             </table>
           </OrderBill>
         )}
-        {onClickCheckout && !isCheckout && (
+        {(onClickCheckout || isCheckoutPage) && !isCheckout && (
           <CheckoutAction>
             <Button
-              color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
+              color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
               onClick={() => setOpenUpselling(true)}
-              disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum}
+              disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum || !cart?.valid_address}
             >
-              {cart?.subtotal >= cart?.minimum || !cart?.minimum ? (
+              {(cart?.subtotal >= cart?.minimum || !cart?.minimum) && cart?.valid_address ? (
                 !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
+              ) : !cart?.valid_address ? (
+                t('OUT_OF_COVERAGE', 'Out of Coverage')
               ) : (
                 `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
               )}

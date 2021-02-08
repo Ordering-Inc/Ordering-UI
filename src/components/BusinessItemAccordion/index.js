@@ -31,6 +31,7 @@ export const BusinessItemAccordion = (props) => {
     orderTotal,
     isProducts,
     isValidProducts,
+    isForceOpenAccordion,
     handleClearProducts,
     handleStoreRedirect
   } = props
@@ -69,7 +70,7 @@ export const BusinessItemAccordion = (props) => {
 
   const handleCloseCartPopover = () => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
-    if (cartsLength > 1 && !isCheckout) {
+    if (cartsLength > 1 && !isCheckout && !isForceOpenAccordion) {
       activeAccordion(false)
     }
   }
@@ -92,6 +93,12 @@ export const BusinessItemAccordion = (props) => {
       activeAccordion(true)
     }
   }, [orderState?.carts])
+
+  useEffect(() => {
+    if (isForceOpenAccordion) {
+      activeAccordion(true)
+    }
+  }, [isForceOpenAccordion])
 
   useEffect(() => {
     events.on('cart_popover_closed', handleCloseCartPopover)
