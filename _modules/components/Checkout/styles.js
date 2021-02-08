@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WarningText = exports.CartItemActions = exports.CartItemInfo = exports.CartItemLogo = exports.LogoWrapper = exports.CartItemWrapper = exports.CartItem = exports.CartsList = exports.NotFoundImage = exports.WarningMessage = exports.WrapperPlaceOrderButton = exports.CartContainer = exports.DriverTipContainer = exports.PaymentMethodContainer = exports.BusinessDetailsContainer = exports.UserDetailsContainer = exports.WrapperUserDetails = exports.WrappContainer = exports.Container = void 0;
+exports.WarningText = exports.CartsList = exports.NotFoundImage = exports.WarningMessage = exports.WrapperPlaceOrderButton = exports.CartContainer = exports.DriverTipContainer = exports.PaymentMethodContainer = exports.BusinessDetailsContainer = exports.UserDetailsContainer = exports.WrapperUserDetails = exports.WrappContainer = exports.Container = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,70 +17,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject20() {
-  var data = _taggedTemplateLiteral(["\n  margin: 10px auto;\n  text-align: center;\n  color: ", ";\n"]);
-
-  _templateObject20 = function _templateObject20() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  font-size: 14px;\n\n  button {\n    cursor: pointer;\n    font-size: 14px;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n    @media (min-width: 361px) {\n      font-size: 16px;\n    }\n  }\n\n  span {\n    font-weight: bold;\n  }\n\n  @media (min-width: 577px) {\n    font-size: 16px;\n  }\n"]);
-
-  _templateObject19 = function _templateObject19() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject18() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  width: 70%;\n  h1,\n  p {\n    margin: 3px 10px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  h1 {\n    font-size: 16px;\n  }\n  p {\n    font-size: 12px;\n    opacity: 0.8;\n    color: ", ";\n    font-weight: bold;\n  }\n\n  @media (min-width: 768px) {\n    h1 {\n      font-size: 18px;\n    }\n\n    p {\n      font-size: 15px;\n    }\n  }\n"]);
-
-  _templateObject18 = function _templateObject18() {
-    return data;
-  };
-
-  return data;
-}
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 50px;\n  height: 50px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: contain;\n  object-fit: cover;\n  background-position: center;\n  min-height: 50px;\n  border-radius: 10px;\n\n  @media (min-width: 481px){\n    width: 100%;\n    height: 100%;\n    min-height: 75px;\n  }\n"]);
-
-  _templateObject17 = function _templateObject17() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n  align-self: center;\n  width: 50px;\n  height: 50px;\n  min-height: 50px;\n  max-width: 50px;\n\n  @media (min-width: 481px){\n    max-width: 75px;\n    max-height: 75px;\n    height: 75px;\n    width: 75px;\n  }\n"]);
-
-  _templateObject16 = function _templateObject16() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n"]);
-
-  _templateObject15 = function _templateObject15() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  background: #F8F8F8 0% 0% no-repeat padding-box;\n  box-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  margin: 20px 0px;\n  padding: 10px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 10px auto;\n  text-align: center;\n  color: ", ";\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -267,41 +205,7 @@ var CartsList = _styledComponents.default.div(_templateObject13());
 
 exports.CartsList = CartsList;
 
-var CartItem = _styledComponents.default.div(_templateObject14());
-
-exports.CartItem = CartItem;
-
-var CartItemWrapper = _styledComponents.default.div(_templateObject15());
-
-exports.CartItemWrapper = CartItemWrapper;
-
-var LogoWrapper = _styledComponents.default.div(_templateObject16());
-
-exports.LogoWrapper = LogoWrapper;
-
-var CartItemLogoStyled = _styledComponents.default.div(_templateObject17());
-
-var CartItemLogo = function CartItemLogo(props) {
-  return /*#__PURE__*/_react.default.createElement(CartItemLogoStyled, _extends({}, props, {
-    style: {
-      backgroundImage: "url(".concat(props.bgimage, ")")
-    }
-  }), props.children);
-};
-
-exports.CartItemLogo = CartItemLogo;
-
-var CartItemInfo = _styledComponents.default.div(_templateObject18(), function (props) {
-  return props.theme.colors.primary;
-});
-
-exports.CartItemInfo = CartItemInfo;
-
-var CartItemActions = _styledComponents.default.div(_templateObject19());
-
-exports.CartItemActions = CartItemActions;
-
-var WarningText = _styledComponents.default.p(_templateObject20(), function (props) {
+var WarningText = _styledComponents.default.p(_templateObject14(), function (props) {
   return props.theme.colors.primary;
 });
 

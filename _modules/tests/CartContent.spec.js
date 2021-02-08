@@ -51,7 +51,8 @@ describe('Mounting Cart Content component', function () {
     uuid: '972dc9dd-85c7-4e8f-a7d0-848983010eaa',
     valid_schedule: true,
     valid_products: true,
-    valid: true
+    valid: true,
+    valid_address: true
   }];
   it('Component UI', function () {
     (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {

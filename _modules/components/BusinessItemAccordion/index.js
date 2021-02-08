@@ -54,6 +54,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       orderTotal = props.orderTotal,
       isProducts = props.isProducts,
       isValidProducts = props.isValidProducts,
+      isForceOpenAccordion = props.isForceOpenAccordion,
       handleClearProducts = props.handleClearProducts,
       handleStoreRedirect = props.handleStoreRedirect;
 
@@ -122,7 +123,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       return cart.products.length > 0;
     }).length) !== null && _Object$values$filter !== void 0 ? _Object$values$filter : 0;
 
-    if (cartsLength > 1 && !isCheckout) {
+    if (cartsLength > 1 && !isCheckout && !isForceOpenAccordion) {
       activeAccordion(false);
     }
   };
@@ -149,6 +150,11 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       activeAccordion(true);
     }
   }, [orderState === null || orderState === void 0 ? void 0 : orderState.carts]);
+  (0, _react.useEffect)(function () {
+    if (isForceOpenAccordion) {
+      activeAccordion(true);
+    }
+  }, [isForceOpenAccordion]);
   (0, _react.useEffect)(function () {
     events.on('cart_popover_closed', handleCloseCartPopover);
     events.on('cart_product_updated', handleCartProductUpdated);

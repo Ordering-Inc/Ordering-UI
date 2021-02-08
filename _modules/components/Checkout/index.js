@@ -39,6 +39,8 @@ var _Cart = require("../Cart");
 
 var _Confirm = require("../Confirm");
 
+var _CartContent = require("../CartContent");
+
 var _utils = require("../../utils");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -372,10 +374,6 @@ var Checkout = function Checkout(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  var _useUtils3 = (0, _orderingComponents.useUtils)(),
-      _useUtils4 = _slicedToArray(_useUtils3, 1),
-      parsePrice = _useUtils4[0].parsePrice;
-
   var _useState9 = (0, _react.useState)({
     loading: true,
     error: null,
@@ -418,10 +416,6 @@ var Checkout = function Checkout(props) {
       content: []
     });
     clearErrors && clearErrors();
-  };
-
-  var handleOpenUpsellingPage = function handleOpenUpsellingPage(cart) {
-    setCurrentCart(cart);
   };
 
   var handleUpsellingPage = function handleUpsellingPage() {
@@ -586,20 +580,10 @@ var Checkout = function Checkout(props) {
     content: t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  }), !cartUuid && orderState.carts && cartsWithProducts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.CartsList, null, cartsWithProducts.map(function (cart) {
-    var _cart$business, _cart$business2;
-
-    return /*#__PURE__*/_react.default.createElement(_styles.CartItem, {
-      key: cart.uuid
-    }, /*#__PURE__*/_react.default.createElement(_styles.CartItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CartItemLogo, {
-      bgimage: cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.logo
-    })), /*#__PURE__*/_react.default.createElement(_styles.CartItemInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.name), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)))), /*#__PURE__*/_react.default.createElement(_styles.CartItemActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-      color: (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum) ? 'secundary' : 'primary',
-      onClick: function onClick() {
-        return handleOpenUpsellingPage(cart);
-      },
-      disabled: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) || openUpselling || (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum)
-    }, (cart === null || cart === void 0 ? void 0 : cart.subtotal) >= (cart === null || cart === void 0 ? void 0 : cart.minimum) ? ((currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) && canOpenUpselling) ^ (currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid) === (cart === null || cart === void 0 ? void 0 : cart.uuid) ? t('LOADING', 'Loading...') : t('VIEW_ORDER', 'View order') : "".concat(t('MINIMUN_PURCHASE', 'Minimum'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)))));
+  }), !cartUuid && orderState.carts && cartsWithProducts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.CartsList, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    carts: cartsWithProducts,
+    isOrderStateCarts: !!orderState.carts,
+    isCheckoutPage: true
   })), cartUuid && cartState.error && ((_cartState$error = cartState.error) === null || _cartState$error === void 0 ? void 0 : _cartState$error.length) > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_CART_SELECTED', 'Sorry, the selected cart was not found.'),
     btnTitle: t('CHECKOUT_REDIRECT', 'Go to Checkout list'),

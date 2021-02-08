@@ -71,7 +71,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
       isCheckout = props.isCheckout,
-      phoneAutocomplete = props.phoneAutocomplete;
+      externalUserData = props.externalUserData;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -109,7 +109,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       alertState = _useState8[0],
       setAlertState = _useState8[1];
 
-  var user = props.externalUserData || userSession;
+  var user = externalUserData || userSession;
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -336,14 +336,14 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  }), !!showInputPhoneNumber && !phoneAutocomplete && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && !externalUserData && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
-  }), phoneAutocomplete && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    value: phoneAutocomplete,
+  }), externalUserData && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    value: (externalUserData === null || externalUserData === void 0 ? void 0 : externalUserData.phone) || (externalUserData === null || externalUserData === void 0 ? void 0 : externalUserData.cellphone),
     className: "form",
     name: "cellphone"
   }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

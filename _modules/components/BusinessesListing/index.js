@@ -9,6 +9,8 @@ exports.BusinessesListing = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _FiMap = _interopRequireDefault(require("@meronex/icons/fi/FiMap"));
+
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
@@ -29,7 +31,13 @@ var _BusinessTypeFilter = require("../BusinessTypeFilter");
 
 var _BusinessController = require("../BusinessController");
 
+var _OrdersOption = require("../OrdersOption");
+
+var _BusinessesMap = require("../BusinessesMap");
+
 var _orderingComponents = require("ordering-components");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -64,7 +72,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _orderState$options4;
+  var _orderState$options2, _orderState$options2$, _businessesList$busin, _orderState$options5;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -72,7 +80,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       getBusinesses = props.getBusinesses,
       handleChangeSearch = props.handleChangeSearch,
       handleChangeBusinessType = props.handleChangeBusinessType,
-      handleBusinessClick = props.handleBusinessClick;
+      handleBusinessClick = props.handleBusinessClick,
+      externalBusinessMap = props.externalBusinessMap,
+      onOrderClick = props.onOrderClick;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -101,6 +111,15 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       alertState = _useState4[0],
       setAlertState = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      activeMap = _useState6[0],
+      setActiveMap = _useState6[1];
+
+  var toggleMap = function toggleMap() {
+    setActiveMap(!activeMap);
+  };
 
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle;
@@ -149,12 +168,24 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     handleChangeBusinessType: handleChangeBusinessType
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+    externalBusinessMap: externalBusinessMap
+  }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
-    lazyLoad: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    lazyLoad: true,
+    externalBusinessMap: externalBusinessMap
+  }), externalBusinessMap && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
+    onClick: toggleMap
+  })), activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
+    businessList: businessesList.businesses,
+    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.location
+  }), externalBusinessMap && onOrderClick && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    horizontal: true,
+    isBusinessList: true,
+    onOrderClick: onOrderClick
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
@@ -163,24 +194,24 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleClickAddress();
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
-    var _orderState$options2;
+    var _orderState$options3;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
       className: "card",
       business: business,
       handleCustomClick: handleBusinessClick,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
     });
   }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
-    var _orderState$options3;
+    var _orderState$options4;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type
     });
   }), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
@@ -196,7 +227,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false

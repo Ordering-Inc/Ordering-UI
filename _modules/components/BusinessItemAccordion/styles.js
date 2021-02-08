@@ -150,7 +150,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  border-bottom: 1px solid #BFBFBF;\n  box-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n\n  &:last-child {\n    border-bottom: 0;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  border-bottom: 1px solid #BFBFBF;\n  box-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n\n  &:last-child {\n    border-bottom: 0;\n    margin-bottom: 10px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

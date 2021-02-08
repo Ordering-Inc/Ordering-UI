@@ -39,7 +39,8 @@ var SearchBar = function SearchBar(_ref) {
   var onSearch = _ref.onSearch,
       search = _ref.search,
       placeholder = _ref.placeholder,
-      lazyLoad = _ref.lazyLoad;
+      lazyLoad = _ref.lazyLoad,
+      externalBusinessMap = _ref.externalBusinessMap;
 
   var _useTheme = (0, _ThemeContext.useTheme)(),
       _useTheme2 = _slicedToArray(_useTheme, 1),
@@ -83,7 +84,8 @@ var SearchBar = function SearchBar(_ref) {
     }
   }, [search]);
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, {
-    className: "search-bar",
+    className: !externalBusinessMap && 'search-bar',
+    externalBusinessMap: externalBusinessMap,
     hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: el,

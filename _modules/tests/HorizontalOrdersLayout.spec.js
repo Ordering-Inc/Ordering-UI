@@ -4,7 +4,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _react2 = require("@cypress/react");
 
-var _ActiveOrders = require("../components/ActiveOrders");
+var _HorizontalOrdersLayout = require("../components/HorizontalOrdersLayout");
 
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
 
@@ -32,10 +32,11 @@ var orders = [{
 }];
 describe('Mounting Active orders component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_ActiveOrders.ActiveOrders, {
+    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
       orders: orders,
       pagination: pagination,
       onOrderClick: onOrderClick,
+      activeOrders: true,
       loadMoreOrders: loadMoreOrders,
       getOrderStatus: getOrderStatus
     })));

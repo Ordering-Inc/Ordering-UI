@@ -25,6 +25,8 @@ var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill
 
 var _BiStoreAlt = _interopRequireDefault(require("@meronex/icons/bi/BiStoreAlt"));
 
+var _AiFillExclamationCircle = _interopRequireDefault(require("@meronex/icons/ai/AiFillExclamationCircle"));
+
 var _Buttons = require("../../styles/Buttons");
 
 var _NotFoundSource = require("../NotFoundSource");
@@ -74,7 +76,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       handleOrderRedirect = props.handleOrderRedirect,
       googleMapsControls = props.googleMapsControls,
       driverLocation = props.driverLocation,
-      urlToShare = props.urlToShare;
+      urlToShare = props.urlToShare,
+      messages = props.messages,
+      setMessages = props.setMessages,
+      readMessages = props.readMessages,
+      messagesReadList = props.messagesReadList;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -114,6 +120,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       isReviewed = _useState6[0],
       setIsReviewed = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
+    business: false,
+    driver: false
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      unreadAlert = _useState8[0],
+      setUnreadAlert = _useState8[1];
 
   var _props$order = props.order,
       order = _props$order.order,
@@ -209,6 +223,39 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     events.emit('go_to_page', data);
   };
 
+  var handleOpenMessages = function handleOpenMessages(data) {
+    setOpenMessages(data);
+    readMessages();
+
+    if ((order === null || order === void 0 ? void 0 : order.unread_count) > 0) {
+      data.business ? setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
+        business: false
+      })) : setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
+        driver: false
+      }));
+    }
+  };
+
+  var unreadMessages = function unreadMessages() {
+    var length = messages === null || messages === void 0 ? void 0 : messages.messages.length;
+    var unreadLength = order === null || order === void 0 ? void 0 : order.unread_count;
+    var unreadedMessages = messages.messages.slice(length - unreadLength, length);
+    var business = unreadedMessages.some(function (message) {
+      var _message$can_see;
+
+      return message === null || message === void 0 ? void 0 : (_message$can_see = message.can_see) === null || _message$can_see === void 0 ? void 0 : _message$can_see.includes(2);
+    });
+    var driver = unreadedMessages.some(function (message) {
+      var _message$can_see2;
+
+      return message === null || message === void 0 ? void 0 : (_message$can_see2 = message.can_see) === null || _message$can_see2 === void 0 ? void 0 : _message$can_see2.includes(4);
+    });
+    setUnreadAlert({
+      business: business,
+      driver: driver
+    });
+  };
+
   var locations = [_objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.location), {}, {
     icon: (order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.driverPhoto)
   }), _objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location), {}, {
@@ -221,6 +268,18 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       locations[0] = driverLocation;
     }
   }, [driverLocation]);
+  (0, _react.useEffect)(function () {
+    unreadMessages();
+  }, [messages === null || messages === void 0 ? void 0 : messages.messages]);
+  (0, _react.useEffect)(function () {
+    if (messagesReadList !== null && messagesReadList !== void 0 && messagesReadList.length) {
+      openMessages.business ? setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
+        business: false
+      })) : setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
+        driver: false
+      }));
+    }
+  }, [messagesReadList]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderImg, null, /*#__PURE__*/_react.default.createElement("img", {
@@ -243,14 +302,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
     }
-  })), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.MessagesIcon, {
     onClick: function onClick() {
-      return setOpenMessages({
+      return handleOpenMessages({
         driver: false,
         business: true
       });
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.OrderData, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, t('DATE_TIME_FOR_ORDER', 'Date and time for your order')), /*#__PURE__*/_react.default.createElement("p", {
+  }, (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && unreadAlert.business && /*#__PURE__*/_react.default.createElement(_styles.ExclamationWrapper, null, /*#__PURE__*/_react.default.createElement(_AiFillExclamationCircle.default, null)), /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.OrderData, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, t('DATE_TIME_FOR_ORDER', 'Date and time for your order')), /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
   }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
@@ -289,14 +348,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return window.open("tel:".concat(order.driver.phone));
     }
-  }, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, {
+  }, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MessagesIcon, {
     onClick: function onClick() {
-      return setOpenMessages({
+      return handleOpenMessages({
         driver: true,
         business: false
       });
     }
-  })))))), /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('YOUR_ORDER', 'Your Order')), /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
+  }, (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && unreadAlert.driver && /*#__PURE__*/_react.default.createElement(_styles.ExclamationWrapper, null, /*#__PURE__*/_react.default.createElement(_AiFillExclamationCircle.default, null)), /*#__PURE__*/_react.default.createElement(_HiOutlineChat.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('YOUR_ORDER', 'Your Order')), /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
       product: product
@@ -347,7 +406,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     business: openMessages.business,
-    driver: openMessages.driver
+    driver: openMessages.driver,
+    messages: messages,
+    setMessages: setMessages,
+    readMessages: readMessages
   })), openReview && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openReview,
     onClose: function onClose() {

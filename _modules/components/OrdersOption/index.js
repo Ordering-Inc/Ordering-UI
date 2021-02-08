@@ -7,15 +7,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrdersOption = void 0;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _orderingComponents = require("ordering-components");
 
-var _ActiveOrders = require("../ActiveOrders");
+var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 
-var _PreviousOrders = require("../PreviousOrders");
+var _VerticalOrdersLayout = require("../VerticalOrdersLayout");
 
 var _NotFoundSource = require("../NotFoundSource");
 
@@ -23,11 +25,11 @@ var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -42,6 +44,10 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -62,13 +68,24 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       pagination = props.pagination,
       activeOrders = props.activeOrders,
       onOrderClick = props.onOrderClick,
-      loadMoreOrders = props.loadMoreOrders;
+      loadMoreOrders = props.loadMoreOrders,
+      horizontal = props.horizontal,
+      isBusinessList = props.isBusinessList;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      reorder = _useOrder2[1].reorder;
+
   var loading = orderList.loading,
       error = orderList.error,
       orders = orderList.orders;
@@ -78,6 +95,65 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       ordersSorted = _useState2[0],
       setOrdersSorted = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      reorderLoading = _useState4[0],
+      setReorderLoading = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      orderID = _useState6[0],
+      setOrderID = _useState6[1];
+
+  var handleReorder = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(orderId) {
+      var _yield$reorder, _error, result;
+
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setReorderLoading(true);
+              setOrderID(orderId);
+              _context.prev = 2;
+              _context.next = 5;
+              return reorder(orderId);
+
+            case 5:
+              _yield$reorder = _context.sent;
+              _error = _yield$reorder.error;
+              result = _yield$reorder.result;
+
+              if (!_error) {
+                events.emit('go_to_page', {
+                  page: 'checkout',
+                  params: {
+                    cartUuid: result.uuid
+                  }
+                });
+              }
+
+              _context.next = 14;
+              break;
+
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](2);
+              setReorderLoading(false);
+
+            case 14:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[2, 11]]);
+    }));
+
+    return function handleReorder(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   var getOrderStatus = function getOrderStatus(s) {
     var status = parseInt(s);
@@ -137,20 +213,24 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     });
     setOrdersSorted(ordersSorted);
   }, [orders]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orders.length > 0 || !isBusinessList) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
+    isBusinessList: isBusinessList
+  }, /*#__PURE__*/_react.default.createElement("h1", null, activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
-  }), loading && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
-    activeOrders: activeOrders,
-    isSkeleton: true
-  }, activeOrders ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
-    activeOrders: activeOrders
+  })), loading && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
+    activeOrders: horizontal,
+    isSkeleton: true,
+    isBusinessList: isBusinessList
+  }, horizontal ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
+    activeOrders: horizontal,
+    isBusinessList: isBusinessList
   }, _toConsumableArray(Array(3)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonCard, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonMap, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, {
-      activeOrders: activeOrders
+      activeOrders: horizontal
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 70,
       height: 70
@@ -174,18 +254,25 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 80
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
-  })), !loading && !error && orders.length > 0 && (activeOrders ? /*#__PURE__*/_react.default.createElement(_ActiveOrders.ActiveOrders, {
+  })), !loading && !error && orders.length > 0 && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     orders: ordersSorted,
     pagination: pagination,
     onOrderClick: onOrderClick,
     loadMoreOrders: loadMoreOrders,
-    getOrderStatus: getOrderStatus
-  }) : /*#__PURE__*/_react.default.createElement(_PreviousOrders.PreviousOrders, {
+    getOrderStatus: getOrderStatus,
+    isBusinessList: isBusinessList,
+    handleReorder: handleReorder,
+    reorderLoading: reorderLoading,
+    orderID: orderID
+  }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     orders: ordersSorted,
     pagination: pagination,
     onOrderClick: onOrderClick,
     loadMoreOrders: loadMoreOrders,
-    getOrderStatus: getOrderStatus
+    getOrderStatus: getOrderStatus,
+    handleReorder: handleReorder,
+    reorderLoading: reorderLoading,
+    orderID: orderID
   })));
 };
 

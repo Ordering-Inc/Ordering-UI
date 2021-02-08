@@ -21,7 +21,8 @@ var MyOrders = function MyOrders(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "orders"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
-    activeOrders: true
+    activeOrders: true,
+    horizontal: true
   })), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, props)));
 };
 

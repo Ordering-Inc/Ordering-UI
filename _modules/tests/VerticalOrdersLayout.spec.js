@@ -4,7 +4,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _react2 = require("@cypress/react");
 
-var _PreviousOrders = require("../components/PreviousOrders");
+var _VerticalOrdersLayout = require("../components/VerticalOrdersLayout");
 
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
 
@@ -32,7 +32,7 @@ var orders = [{
 }];
 describe('Mounting Previous orders component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_PreviousOrders.PreviousOrders, {
+    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
       orders: orders,
       pagination: pagination,
       onOrderClick: onOrderClick,

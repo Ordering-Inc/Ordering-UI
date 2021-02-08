@@ -38,7 +38,8 @@ var CartContent = function CartContent(props) {
 
   var carts = props.carts,
       isOrderStateCarts = props.isOrderStateCarts,
-      isCartPopover = props.isCartPopover;
+      isCartPopover = props.isCartPopover,
+      isCheckoutPage = props.isCheckoutPage;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -71,7 +72,7 @@ var CartContent = function CartContent(props) {
       events.off('cart_product_added', handleAddProduct);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, isOrderStateCarts && carts.length > 0 && carts.map(function (cart) {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && carts.map(function (cart) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: cart.uuid
     }, cart.products.length > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
@@ -79,11 +80,12 @@ var CartContent = function CartContent(props) {
       cart: cart,
       isCartPopover: isCartPopover,
       isCheckout: window.location.pathname === "/checkout/".concat(cart === null || cart === void 0 ? void 0 : cart.uuid),
+      isCheckoutPage: isCheckoutPage,
       currentCartUuid: currentCartUuid,
       isProducts: cart.products.length,
       onClickCheckout: props.onClose
     }));
-  }), (!carts || carts.length === 0) && /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
+  }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0) && /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found",
     width: "200px",
