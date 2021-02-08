@@ -11,6 +11,7 @@ export const AccordionSection = styled.div`
 
   &:last-child {
     border-bottom: 0;
+    margin-bottom: 10px;
   }
 `
 

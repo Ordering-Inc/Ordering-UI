@@ -31,7 +31,8 @@ const CartUI = (props) => {
     onClickCheckout,
     isCheckout,
     isCartPending,
-    isCartPopover
+    isCartPopover,
+    isCheckoutPage
   } = props
 
   const [, t] = useLanguage()
@@ -124,6 +125,7 @@ const CartUI = (props) => {
         moment={momentFormatted}
         isProducts={isProducts}
         isValidProducts={cart?.valid_products}
+        isForceOpenAccordion={isCheckoutPage}
         handleClearProducts={handleClearProducts}
         handleStoreRedirect={handleStoreRedirect}
       >
@@ -214,7 +216,7 @@ const CartUI = (props) => {
             </table>
           </OrderBill>
         )}
-        {onClickCheckout && !isCheckout && (
+        {(onClickCheckout || isCheckoutPage) && !isCheckout && (
           <CheckoutAction>
             <Button
               color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
