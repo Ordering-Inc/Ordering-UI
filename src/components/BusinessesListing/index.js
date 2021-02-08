@@ -46,10 +46,7 @@ const BusinessesListingUI = (props) => {
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
-
-  const toggleMap = () => {
-    setActiveMap(!activeMap)
-  }
+  const [mapErrors, setMapErrors] = useState('')
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -80,6 +77,29 @@ const BusinessesListingUI = (props) => {
     setModals({ listOpen: false, formOpen: false })
   }
 
+  const toggleMap = () => {
+    setActiveMap(!activeMap)
+  }
+
+  const handleCloseAlerts = () => {
+    setAlertState({ open: false, content: [] })
+    setMapErrors('')
+  }
+
+  const handleMapErrors = (errKey) => {
+    setAlertState({
+      open: true,
+      content: [t(errKey, mapErrors[errKey])]
+    })
+  }
+
+  useEffect(() => {
+    if (mapErrors) {
+      handleMapErrors(mapErrors)
+      setActiveMap(false)
+    }
+  }, [mapErrors])
+
   return (
     <BusinessContainer>
       <BusinessTypeFilter
@@ -99,7 +119,11 @@ const BusinessesListingUI = (props) => {
         )}
       </WrapperSearch>
       {activeMap && (
-        <BusinessesMap businessList={businessesList.businesses} userLocation={orderState?.options?.address?.location} />
+        <BusinessesMap
+          businessList={businessesList.businesses}
+          userLocation={orderState?.options?.address?.location}
+          setErrors={setMapErrors}
+        />
       )}
       <BusinessList>
         {
@@ -175,12 +199,12 @@ const BusinessesListingUI = (props) => {
       </Modal>
 
       <Alert
-        title={t('SEARCH', 'Search')}
+        title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
-        onClose={() => setAlertState({ open: false, content: [] })}
-        onAccept={() => setAlertState({ open: false, content: [] })}
+        onClose={() => handleCloseAlerts()}
+        onAccept={() => handleCloseAlerts()}
         closeOnBackdrop={false}
       />
     </BusinessContainer>
