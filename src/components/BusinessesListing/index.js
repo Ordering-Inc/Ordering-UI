@@ -25,8 +25,7 @@ import {
   useOrder,
   useSession,
   useLanguage,
-  BusinessList as BusinessListController,
-  useEvent
+  BusinessList as BusinessListController
 } from 'ordering-components'
 
 const PIXELS_TO_SCROLL = 300
@@ -40,14 +39,14 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
-    externalBusinessMap
+    externalBusinessMap,
+    onOrderClick
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [events] = useEvent()
   const [activeMap, setActiveMap] = useState(false)
 
   const toggleMap = () => {
@@ -102,10 +101,17 @@ const BusinessesListingUI = (props) => {
         )}
       </WrapperSearch>
       {activeMap && (
-        <BusinessesMap businessList={businessesList.businesses} userLocation={orderState?.options?.address?.location} />
+        <BusinessesMap
+          businessList={businessesList.businesses}
+          userLocation={orderState?.options?.address?.location}
+        />
       )}
       {externalBusinessMap && (
-        <OrdersOption onOrderClick={(data) => events.emit('go_to_page', data)} horizontal isBusinessList />
+        <OrdersOption
+          horizontal
+          isBusinessList
+          onOrderClick={onOrderClick}
+        />
       )}
       <BusinessList>
         {
