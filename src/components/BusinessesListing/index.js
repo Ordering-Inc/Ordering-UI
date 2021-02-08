@@ -106,7 +106,7 @@ const BusinessesListingUI = (props) => {
           userLocation={orderState?.options?.address?.location}
         />
       )}
-      {externalBusinessMap && (
+      {externalBusinessMap && onOrderClick && (
         <OrdersOption
           horizontal
           isBusinessList
