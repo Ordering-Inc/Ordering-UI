@@ -85,7 +85,7 @@ export const WrappLayout = styled.div`
       width: 100%;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 870px) {
       flex-direction: row;
       .bp-list {
         width: 55%;
