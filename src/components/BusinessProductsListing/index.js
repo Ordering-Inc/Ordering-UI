@@ -15,7 +15,8 @@ import {
   WrapContent,
   ProductLoading,
   SkeletonItem,
-  WrapperSearch
+  WrapperSearch,
+  WrappLayout
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -29,6 +30,7 @@ import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
 import { UpsellingPage } from '../UpsellingPage'
+import { Cart } from '../Cart'
 import { Select } from '../../styles/Select'
 
 const PIXELS_TO_SCROLL = 300
@@ -54,22 +56,24 @@ const BusinessProductsListingUI = (props) => {
     handleChangeSearch,
     handleSearchRedirect,
     featuredProducts,
-    handleChangeSortBy
+    handleChangeSortBy,
+    isCartOnProductsList
   } = props
 
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
+  const [events] = useEvent()
+  const [{ auth }] = useSession()
+  const location = useLocation()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
-  const [events] = useEvent()
-  const [{ auth }] = useSession()
-  const location = useLocation()
+  const [isCartOpen, setIsCartOpen] = useState(false)
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -167,97 +171,76 @@ const BusinessProductsListingUI = (props) => {
       <ProductsContainer>
         {
           !loading && business?.id && (
-            <>
-              <BusinessBasicInformation
-                businessState={businessState}
-                setOpenBusinessInformation={setOpenBusinessInformation}
-                openBusinessInformation={openBusinessInformation}
-              />
-              {(categoryState.products.length !== 0 || searchValue) && (
-                <WrapperSearch>
-                  <SearchBar
-                    onSearch={handleChangeSearch}
-                    search={searchValue}
-                    placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
-                    lazyLoad={businessState?.business?.lazy_load_products_recommended}
-                  />
-                  <Select
-                    notAsync
-                    notReload
-                    options={sortByOptions}
-                    defaultValue={sortByValue}
-                    onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-                  />
-                </WrapperSearch>
-              )}
-              {!(business?.categories?.length === 0 && !categoryId) && (
-                <BusinessProductsCategories
-                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                  categorySelected={categorySelected}
-                  onClickCategory={handleChangeCategory}
-                  featured={featuredProducts}
+            <WrappLayout
+              isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+            >
+              <div className='bp-list'>
+                <BusinessBasicInformation
+                  businessState={businessState}
+                  setOpenBusinessInformation={setOpenBusinessInformation}
                   openBusinessInformation={openBusinessInformation}
                 />
-              )}
+                {(categoryState.products.length !== 0 || searchValue) && (
+                  <WrapperSearch>
+                    <SearchBar
+                      onSearch={handleChangeSearch}
+                      search={searchValue}
+                      placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                      lazyLoad={businessState?.business?.lazy_load_products_recommended}
+                    />
+                    <Select
+                      notAsync
+                      notReload
+                      options={sortByOptions}
+                      defaultValue={sortByValue}
+                      onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                    />
+                  </WrapperSearch>
+                )}
+                {!(business?.categories?.length === 0 && !categoryId) && (
+                  <BusinessProductsCategories
+                    categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                    categorySelected={categorySelected}
+                    onClickCategory={handleChangeCategory}
+                    featured={featuredProducts}
+                    openBusinessInformation={openBusinessInformation}
+                  />
+                )}
 
-              <WrapContent>
-                <BusinessProductsList
-                  categories={[
-                    { id: null, name: t('ALL', 'All') },
-                    { id: 'featured', name: t('FEATURED', 'Featured') },
-                    ...business?.categories.sort((a, b) => a.rank - b.rank)
-                  ]}
-                  category={categorySelected}
-                  categoryState={categoryState}
-                  businessId={business.id}
-                  errors={errors}
-                  onProductClick={onProductClick}
-                  handleSearchRedirect={handleSearchRedirect}
-                  featured={featuredProducts}
-                  searchValue={searchValue}
-                  handleClearSearch={handleChangeSearch}
+                <WrapContent>
+                  <BusinessProductsList
+                    categories={[
+                      { id: null, name: t('ALL', 'All') },
+                      { id: 'featured', name: t('FEATURED', 'Featured') },
+                      ...business?.categories.sort((a, b) => a.rank - b.rank)
+                    ]}
+                    category={categorySelected}
+                    categoryState={categoryState}
+                    businessId={business.id}
+                    errors={errors}
+                    onProductClick={onProductClick}
+                    handleSearchRedirect={handleSearchRedirect}
+                    featured={featuredProducts}
+                    searchValue={searchValue}
+                    isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                    handleClearSearch={handleChangeSearch}
+                  />
+                </WrapContent>
+              </div>
+              {isCartOnProductsList && currentCart?.products?.length > 0 && (
+                <Cart
+                  isForceOpenCart
+                  cart={currentCart}
+                  isCartPending={currentCart?.status === 2}
+                  isProducts={currentCart.products.length}
+                  isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                  handleCartOpen={(val) => setIsCartOpen(val)}
                 />
-              </WrapContent>
-            </>
+              )}
+            </WrappLayout>
           )
         }
 
-        <Modal
-          width='70%'
-          open={openProduct}
-          closeOnBackdrop
-          onClose={() => closeModalProductForm()}
-          padding='0'
-        >
-
-          {productModal.loading && !productModal.error && (
-            <ProductLoading>
-              <SkeletonItem>
-                <Skeleton height={45} count={8} />
-              </SkeletonItem>
-            </ProductLoading>
-          )}
-
-          {productModal.error && productModal.error.length > 0 && (
-            <NotFoundSource
-              content={productModal.error[0]?.message || productModal.error[0]}
-            />
-          )}
-
-          {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
-            <NotFoundSource
-              content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
-            />
-          )}
-          {(productModal.product || curProduct) && (
-            <ProductForm
-              businessSlug={business?.slug}
-              product={productModal.product || curProduct}
-              businessId={business?.id}
-              onSave={handlerProductAction}
-            />
-          )}
-        </Modal>
         {loading && !error && (
           <>
             <BusinessBasicInformation
@@ -316,7 +299,8 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
-      {currentCart?.products?.length > 0 && auth && (
+
+      {currentCart?.products?.length > 0 && auth && !isCartOpen && (
         <FloatingButton
           btnText={
             currentCart?.subtotal >= currentCart?.minimum
@@ -329,6 +313,44 @@ const BusinessProductsListingUI = (props) => {
           disabled={openUpselling || currentCart?.subtotal < currentCart?.minimum}
         />
       )}
+
+      <Modal
+        width='70%'
+        open={openProduct}
+        closeOnBackdrop
+        onClose={() => closeModalProductForm()}
+        padding='0'
+      >
+
+        {productModal.loading && !productModal.error && (
+          <ProductLoading>
+            <SkeletonItem>
+              <Skeleton height={45} count={8} />
+            </SkeletonItem>
+          </ProductLoading>
+        )}
+
+        {productModal.error && productModal.error.length > 0 && (
+          <NotFoundSource
+            content={productModal.error[0]?.message || productModal.error[0]}
+          />
+        )}
+
+        {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
+          <NotFoundSource
+            content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
+          />
+        )}
+        {(productModal.product || curProduct) && (
+          <ProductForm
+            businessSlug={business?.slug}
+            product={productModal.product || curProduct}
+            businessId={business?.id}
+            onSave={handlerProductAction}
+          />
+        )}
+      </Modal>
+
       {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}
