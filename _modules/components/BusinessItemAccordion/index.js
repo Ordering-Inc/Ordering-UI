@@ -55,8 +55,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       isProducts = props.isProducts,
       isValidProducts = props.isValidProducts,
       isForceOpenAccordion = props.isForceOpenAccordion,
+      isCartOnProductsList = props.isCartOnProductsList,
       handleClearProducts = props.handleClearProducts,
-      handleStoreRedirect = props.handleStoreRedirect;
+      handleStoreRedirect = props.handleStoreRedirect,
+      handleCartOpen = props.handleCartOpen;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -163,6 +165,9 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       events.off('cart_product_updated', handleCartProductUpdated);
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    handleCartOpen && handleCartOpen(!!setActive);
+  }, [setActive]);
   return /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, {
     isClosed: isClosed
   }, /*#__PURE__*/_react.default.createElement(_styles.Accordion, {
@@ -171,7 +176,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     onClick: function onClick(e) {
       return toggleAccordion(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, (business === null || business === void 0 ? void 0 : business.logo) && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, (business === null || business === void 0 ? void 0 : business.logo) && !isCartOnProductsList && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: business === null || business === void 0 ? void 0 : business.logo
   })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
     className: "info"
@@ -179,7 +184,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     className: "total"
   }, isValidProducts && orderTotal > 0 && /*#__PURE__*/_react.default.createElement("p", null, parsePrice(orderTotal)), /*#__PURE__*/_react.default.createElement("p", null, t('CART_TOTAL', 'Total'))), isClosed && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
     className: "closed"
-  }, /*#__PURE__*/_react.default.createElement("p", null, t('CLOSED', 'Closed'), " ", moment)), !isClosed && !isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, /*#__PURE__*/_react.default.createElement("p", null, t('NO_PRODUCTS', 'No products'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessActions, null, handleStoreRedirect && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("p", null, t('CLOSED', 'Closed'), " ", moment)), !isClosed && !isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, /*#__PURE__*/_react.default.createElement("p", null, t('NO_PRODUCTS', 'No products'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessActions, null, handleStoreRedirect && !isCartOnProductsList && /*#__PURE__*/_react.default.createElement("span", {
     ref: businessStore,
     onClick: function onClick() {
       return handleStoreRedirect(business === null || business === void 0 ? void 0 : business.slug);

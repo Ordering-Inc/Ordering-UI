@@ -73,7 +73,8 @@ var Header = function Header(props) {
   var _configState$configs, _configState$configs$, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _orderState$options2, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6;
 
   var isHome = props.isHome,
-      location = props.location;
+      location = props.location,
+      closeCartPopover = props.closeCartPopover;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -135,7 +136,9 @@ var Header = function Header(props) {
   };
 
   var handleAddProduct = function handleAddProduct() {
-    handleTogglePopover('cart');
+    if (!closeCartPopover) {
+      handleTogglePopover('cart');
+    }
   };
 
   var handleGoToPage = function handleGoToPage(data) {

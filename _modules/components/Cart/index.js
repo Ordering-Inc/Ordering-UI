@@ -68,7 +68,9 @@ var CartUI = function CartUI(props) {
       isCheckout = props.isCheckout,
       isCartPending = props.isCartPending,
       isCartPopover = props.isCartPopover,
-      isCheckoutPage = props.isCheckoutPage;
+      isForceOpenCart = props.isForceOpenCart,
+      isCartOnProductsList = props.isCartOnProductsList,
+      handleCartOpen = props.handleCartOpen;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -217,9 +219,11 @@ var CartUI = function CartUI(props) {
     moment: momentFormatted,
     isProducts: isProducts,
     isValidProducts: cart === null || cart === void 0 ? void 0 : cart.valid_products,
-    isForceOpenAccordion: isCheckoutPage,
+    isForceOpenAccordion: isForceOpenCart,
+    isCartOnProductsList: isCartOnProductsList,
     handleClearProducts: handleClearProducts,
-    handleStoreRedirect: handleStoreRedirect
+    handleStoreRedirect: handleStoreRedirect,
+    handleCartOpen: handleCartOpen
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,
@@ -237,7 +241,7 @@ var CartUI = function CartUI(props) {
     price: cart.total
   })), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)))))), (onClickCheckout || isCheckoutPage) && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)))))), (onClickCheckout || isForceOpenCart) && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: (cart === null || cart === void 0 ? void 0 : cart.subtotal) < (cart === null || cart === void 0 ? void 0 : cart.minimum) || !(cart !== null && cart !== void 0 && cart.valid_address) ? 'secundary' : 'primary',
     onClick: function onClick() {
       return setOpenUpselling(true);

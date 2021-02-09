@@ -39,7 +39,7 @@ var CartContent = function CartContent(props) {
   var carts = props.carts,
       isOrderStateCarts = props.isOrderStateCarts,
       isCartPopover = props.isCartPopover,
-      isCheckoutPage = props.isCheckoutPage;
+      isForceOpenCart = props.isForceOpenCart;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -80,7 +80,7 @@ var CartContent = function CartContent(props) {
       cart: cart,
       isCartPopover: isCartPopover,
       isCheckout: window.location.pathname === "/checkout/".concat(cart === null || cart === void 0 ? void 0 : cart.uuid),
-      isCheckoutPage: isCheckoutPage,
+      isForceOpenCart: isForceOpenCart,
       currentCartUuid: currentCartUuid,
       isProducts: cart.products.length,
       onClickCheckout: props.onClose

@@ -56,6 +56,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       handleSearchRedirect = props.handleSearchRedirect,
       featured = props.featured,
       searchValue = props.searchValue,
+      isCartOnProductsList = props.isCartOnProductsList,
       handleClearSearch = props.handleClearSearch;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -68,7 +69,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       isSoldOut: product.inventoried && !product.quantity,
       product: product,
       businessId: businessId,
-      onProductClick: onProductClick
+      onProductClick: onProductClick,
+      isCartOnProductsList: isCartOnProductsList
     });
   })), !category.id && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
     return product.featured;
@@ -78,7 +80,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       isSoldOut: product.inventoried && !product.quantity,
       product: product,
       businessId: businessId,
-      onProductClick: onProductClick
+      onProductClick: onProductClick,
+      isCartOnProductsList: isCartOnProductsList
     });
   })))), !category.id && categories.filter(function (category) {
     return category.id !== null;
@@ -98,7 +101,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         isSoldOut: product.inventoried && !product.quantity,
         businessId: businessId,
         product: product,
-        onProductClick: onProductClick
+        onProductClick: onProductClick,
+        isCartOnProductsList: isCartOnProductsList
       });
     }), categoryState.loading && i + 1 === _categories.length && _toConsumableArray(Array(categoryState.pagination.nextPageItems).keys()).map(function (i) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
