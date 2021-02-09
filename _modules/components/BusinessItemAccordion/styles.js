@@ -38,7 +38,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  width: 25%;\n  display: none;\n  flex-direction: column;\n  align-items: center;\n\n  p {\n    font-size: 18px;\n    margin: 0px 5px;\n    font-weight: 300;\n\n    &:nth-child(1) {\n      font-weight: 500;\n    }\n  }\n\n  &.closed {\n    flex: 1;\n    p {\n      text-align: center;\n      margin: 0px 20px;\n      font-size: 18px;\n    }\n  }\n\n  @media (min-width: 481px) {\n    display: flex;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: ", ";\n  display: none;\n  flex-direction: column;\n  align-items: center;\n\n  p {\n    font-size: 18px;\n    margin: 0px 5px;\n    font-weight: 300;\n\n    &:nth-child(1) {\n      font-weight: 500;\n    }\n  }\n\n  &.closed {\n    flex: 1;\n    p {\n      text-align: center;\n      margin: 0px 20px;\n      font-size: 18px;\n    }\n  }\n\n  @media (min-width: 481px) {\n    display: flex;\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -214,7 +214,10 @@ var BusinessInfo = _styledComponents.default.div(_templateObject11());
 
 exports.BusinessInfo = BusinessInfo;
 
-var BusinessTotal = _styledComponents.default.div(_templateObject12());
+var BusinessTotal = _styledComponents.default.div(_templateObject12(), function (_ref2) {
+  var isCartOnProductsList = _ref2.isCartOnProductsList;
+  return isCartOnProductsList ? '30%' : '25%';
+});
 
 exports.BusinessTotal = BusinessTotal;
 
