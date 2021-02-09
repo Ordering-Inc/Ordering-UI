@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const OptionTitle = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 15px;
+  width: ${({ isBusinessList }) => isBusinessList ? '80%' : '100%'};
+  margin: ${({ isBusinessList }) => isBusinessList ? '10px 20px 0' : '0 auto'};
+  padding: ${({ isBusinessList }) => !isBusinessList && '0 15px'};
 
   h1{
     text-transform: capitalize;
@@ -27,6 +27,7 @@ export const OrdersContainer = styled.div`
     justify-content: ${({ ordersLength }) => !ordersLength ? 'flex-start' : 'center'};
     width: 100%;
     margin: auto 0px auto auto;
+    box-sizing: border-box;
     ${props => props.theme?.rtl && css`
       margin: auto auto auto 0px;
     `}
@@ -40,7 +41,7 @@ export const OrdersContainer = styled.div`
       width: 6px;
       height: 6px;
       }
-      ${({ ordersLength }) => !ordersLength && css`
+      ${({ ordersLength, isBusinessList }) => !ordersLength && !isBusinessList && css`
         > div {
           margin-left: -10px;
           ${props => props.theme?.rtl && css`
@@ -56,18 +57,19 @@ export const OrdersContainer = styled.div`
           `}
         }
       `}
-     
     `}
     
     @media (min-width: 768px) {
-      width: 90%;
+      width: ${({ isBusinessList }) => isBusinessList ? '100%' : '90%'};
       justify-content: flex-start;
       ${({ isSkeleton, ordersLength }) => !isSkeleton && !ordersLength && css`
       > div:first-child{
-        margin-left: -10px;
-        ${props => props.theme?.rtl && css`
-          margin-left: 0;
-          margin-right: -10px;
+        ${({ isBusinessList }) => !isBusinessList && css`
+          margin-left: -10px;
+          ${props => props.theme?.rtl && css`
+            margin-left: 0;
+            margin-right: -10px;
+          `}
         `}
       }
       `

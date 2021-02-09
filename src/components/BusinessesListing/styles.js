@@ -52,3 +52,13 @@ export const ErrorMessage = styled.span`
   color: #D81313;
   font-weight: bold;
 `
+
+export const PreviousOrders = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 20px 0px;
+`
+
+export const PreviousOrdersTitle = styled.h1`
+
+`
