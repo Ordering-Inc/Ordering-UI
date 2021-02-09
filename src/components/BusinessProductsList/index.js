@@ -24,6 +24,7 @@ const BusinessProductsListUI = (props) => {
     handleSearchRedirect,
     featured,
     searchValue,
+    isCartOnProductsList,
     handleClearSearch
   } = props
 
@@ -41,6 +42,7 @@ const BusinessProductsListUI = (props) => {
                 product={product}
                 businessId={businessId}
                 onProductClick={onProductClick}
+                isCartOnProductsList={isCartOnProductsList}
               />
             ))
           }
@@ -62,6 +64,7 @@ const BusinessProductsListUI = (props) => {
                         product={product}
                         businessId={businessId}
                         onProductClick={onProductClick}
+                        isCartOnProductsList={isCartOnProductsList}
                       />
                     ))}
                   </ProductsListing>
@@ -90,6 +93,7 @@ const BusinessProductsListUI = (props) => {
                             businessId={businessId}
                             product={product}
                             onProductClick={onProductClick}
+                            isCartOnProductsList={isCartOnProductsList}
                           />
                         ))
                       }

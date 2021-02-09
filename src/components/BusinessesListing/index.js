@@ -18,6 +18,7 @@ import { SearchBar } from '../SearchBar'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
+import { OrdersOption } from '../OrdersOption'
 import { BusinessesMap } from '../BusinessesMap'
 
 import {
@@ -38,7 +39,8 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
-    externalBusinessMap
+    externalBusinessMap,
+    onOrderClick
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -99,7 +101,17 @@ const BusinessesListingUI = (props) => {
         )}
       </WrapperSearch>
       {activeMap && (
-        <BusinessesMap businessList={businessesList.businesses} userLocation={orderState?.options?.address?.location} />
+        <BusinessesMap
+          businessList={businessesList.businesses}
+          userLocation={orderState?.options?.address?.location}
+        />
+      )}
+      {externalBusinessMap && onOrderClick && (
+        <OrdersOption
+          horizontal
+          isBusinessList
+          onOrderClick={onOrderClick}
+        />
       )}
       <BusinessList>
         {

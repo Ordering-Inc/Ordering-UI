@@ -33,12 +33,12 @@ export const Price = styled.div`
   width: 35%;
   h2 {
     font-size: 14px;
-    margin-block-end: 1em;
-    margin-block-start: 0;
+    margin-block-end: ${({ isBusinessList }) => isBusinessList ? '0.1em' : '1em'};
+    margin-block-start: 0.1em;
   }
   p {
-    margin-block-end: 0;
-    margin-block-start: 1em;
+    margin-block-end: 0.1em;
+    margin-block-start: ${({ isBusinessList }) => isBusinessList ? '0.1em' : '1em'};
     color: #ff9300;
     font-size: 0.8em;
     overflow:hidden;
@@ -68,7 +68,8 @@ export const Card = styled.div`
   margin: 10px;
   display: inline-block;
   background: white;
-  max-height: 220px;
+  height: ${({ isBusinessList }) => isBusinessList && '300px'};
+  max-height: ${({ isBusinessList }) => isBusinessList ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
 
@@ -80,7 +81,7 @@ export const Card = styled.div`
     text-align: right;
   `}
 
-  ${props => props.nobg && css`
+  ${props => (props.nobg || props.isBusinessList) && css`
     background: transparent;
   `}
 
@@ -99,23 +100,44 @@ export const Card = styled.div`
 
   @media (min-width: 480px){
     min-width: 400px;
-    max-height: 250px;
+    max-height: ${({ isBusinessList }) => isBusinessList ? '300px' : '250px'};;
     width: 400px;
   }
+
+  @media(min-width: 993px){
+    ${({ isBusinessList }) => isBusinessList && css`
+      margin: 30px 20px;
+      width: calc(33% - 40px);
+      min-width: initial;
+    `}
+  }
+
 `
 
 export const Map = styled.div`
   width: 100%;
-  height: 88px;
+  height: ${({ isBusinessList }) => isBusinessList ? '200px' : '88px'};
+  min-height: ${({ isBusinessList }) => isBusinessList && '175px'};
   img{
     width: 100%;
     height: 100%;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+    border-radius: ${({ isBusinessList }) => isBusinessList && '16px'};
     image-rendering: -webkit-optimize-contrast;
     object-fit: cover;
   }
   @media(min-width: 480px){
-    height: 100px;
+    height: ${({ isBusinessList }) => isBusinessList ? '200px' : '100px'};
+    min-height: ${({ isBusinessList }) => isBusinessList && '200px'}
+  }
+`
+
+export const Reorder = styled.div`
+  margin-bottom: 10px;
+  button{
+    line-height: 0;
+    height: 30px;
+    font-size: 14px;
   }
 `

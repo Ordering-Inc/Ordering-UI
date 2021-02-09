@@ -31,7 +31,7 @@ import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 
 export const Header = (props) => {
-  const { isHome, location } = props
+  const { isHome, location, closeCartPopover } = props
 
   const [events] = useEvent()
   const [, t] = useLanguage()
@@ -70,7 +70,9 @@ export const Header = (props) => {
   }
 
   const handleAddProduct = () => {
-    handleTogglePopover('cart')
+    if (!closeCartPopover) {
+      handleTogglePopover('cart')
+    }
   }
 
   const handleGoToPage = (data) => {

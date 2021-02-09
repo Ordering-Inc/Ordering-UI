@@ -17,7 +17,8 @@ export const SingleProductCard = (props) => {
     product,
     isSoldOut,
     isSkeleton,
-    onProductClick
+    onProductClick,
+    isCartOnProductsList
   } = props
 
   const [, t] = useLanguage()
@@ -45,6 +46,7 @@ export const SingleProductCard = (props) => {
     <CardContainer
       soldOut={isSoldOut || maxProductQuantity <= 0}
       onClick={() => !isSkeleton && onProductClick(product)}
+      isCartOnProductsList={isCartOnProductsList}
     >
       <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
         {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}

@@ -31,8 +31,11 @@ export const BusinessItemAccordion = (props) => {
     orderTotal,
     isProducts,
     isValidProducts,
+    isForceOpenAccordion,
+    isCartOnProductsList,
     handleClearProducts,
-    handleStoreRedirect
+    handleStoreRedirect,
+    handleCartOpen
   } = props
 
   const [orderState] = useOrder()
@@ -69,7 +72,7 @@ export const BusinessItemAccordion = (props) => {
 
   const handleCloseCartPopover = () => {
     const cartsLength = Object.values(orderState?.carts).filter(cart => cart.products.length > 0).length ?? 0
-    if (cartsLength > 1 && !isCheckout) {
+    if (cartsLength > 1 && !isCheckout && !isForceOpenAccordion) {
       activeAccordion(false)
     }
   }
@@ -94,6 +97,12 @@ export const BusinessItemAccordion = (props) => {
   }, [orderState?.carts])
 
   useEffect(() => {
+    if (isForceOpenAccordion) {
+      activeAccordion(true)
+    }
+  }, [isForceOpenAccordion])
+
+  useEffect(() => {
     events.on('cart_popover_closed', handleCloseCartPopover)
     events.on('cart_product_updated', handleCartProductUpdated)
     return () => {
@@ -101,6 +110,10 @@ export const BusinessItemAccordion = (props) => {
       events.off('cart_product_updated', handleCartProductUpdated)
     }
   }, [])
+
+  useEffect(() => {
+    handleCartOpen && handleCartOpen(!!setActive)
+  }, [setActive])
 
   return (
     <AccordionSection isClosed={isClosed}>
@@ -110,7 +123,7 @@ export const BusinessItemAccordion = (props) => {
         onClick={(e) => toggleAccordion(e)}
       >
         <BusinessInfo>
-          {business?.logo && (
+          {business?.logo && !isCartOnProductsList && (
             <WrapperBusinessLogo>
               <BusinessLogo bgimage={business?.logo} />
             </WrapperBusinessLogo>
@@ -132,7 +145,7 @@ export const BusinessItemAccordion = (props) => {
         </BusinessInfo>
 
         {!isClosed && !!isProducts && (
-          <BusinessTotal className='total'>
+          <BusinessTotal className='total' isCartOnProductsList={isCartOnProductsList}>
             {isValidProducts && orderTotal > 0 && <p>{parsePrice(orderTotal)}</p>}
             <p>{t('CART_TOTAL', 'Total')}</p>
           </BusinessTotal>
@@ -151,7 +164,7 @@ export const BusinessItemAccordion = (props) => {
         )}
 
         <BusinessActions>
-          {handleStoreRedirect && (
+          {handleStoreRedirect && !isCartOnProductsList && (
             <span
               ref={businessStore}
               onClick={() => handleStoreRedirect(business?.slug)}

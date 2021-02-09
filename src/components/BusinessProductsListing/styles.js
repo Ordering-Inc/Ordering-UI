@@ -73,3 +73,45 @@ export const SkeletonItem = styled.div`
     margin-bottom: 10px;
   }
 `
+
+export const WrappLayout = styled.div`
+  ${({ isCartOnProductsList }) => isCartOnProductsList && css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .bp-list,
+    .cart {
+      width: 100%;
+    }
+
+    @media (min-width: 870px) {
+      flex-direction: row;
+      .bp-list {
+        width: 55%;
+      }
+      .cart {
+        width: calc(45% - 20px);
+        margin-left: 20px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .bp-list {
+        width: 60%;
+      }
+      .cart {
+        width: calc(40% - 20px);
+      }
+    }  
+
+    @media (min-width: 1200px) {
+      .bp-list {
+        width: 70%;
+      }
+      .cart {
+        width: calc(30% - 20px);
+      }
+    }  
+  `}
+`
