@@ -474,7 +474,7 @@ export const Checkout = (props) => {
           <CartContent
             carts={cartsWithProducts}
             isOrderStateCarts={!!orderState.carts}
-            isCheckoutPage
+            isForceOpenCart
           />
         </CartsList>
       )}
