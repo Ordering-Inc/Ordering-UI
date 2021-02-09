@@ -64,7 +64,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n      justify-content: center;\n      input {\n        -webkit-transition: width 0.4s ease-in-out;\n        transition: width 0.4s ease-in-out; \n      }\n    "]);
+  var data = _taggedTemplateLiteral(["\n      justify-content: center;\n      -webkit-transition: width 0.4s ease-in-out;\n      transition: width 0.4s ease-in-out; \n    "]);
 
   _templateObject4 = function _templateObject4() {
     return data;

@@ -187,7 +187,9 @@ var AddressFormUI = function AddressFormUI(props) {
     props.forEach(function (prop) {
       if (addressToCompare[prop]) {
         if (prop === 'location') {
-          values.push(address[prop].lat === addressToCompare[prop].lat && address[prop].lng === addressToCompare[prop].lng);
+          var _address$prop, _addressToCompare$pro, _address$prop2, _addressToCompare$pro2;
+
+          values.push(((_address$prop = address[prop]) === null || _address$prop === void 0 ? void 0 : _address$prop.lat) === ((_addressToCompare$pro = addressToCompare[prop]) === null || _addressToCompare$pro === void 0 ? void 0 : _addressToCompare$pro.lat) && ((_address$prop2 = address[prop]) === null || _address$prop2 === void 0 ? void 0 : _address$prop2.lng) === ((_addressToCompare$pro2 = addressToCompare[prop]) === null || _addressToCompare$pro2 === void 0 ? void 0 : _addressToCompare$pro2.lng));
         } else {
           values.push(address[prop] === addressToCompare[prop]);
         }

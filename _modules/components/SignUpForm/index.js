@@ -78,7 +78,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       formState = props.formState,
       handleSuccessSignup = props.handleSuccessSignup,
       isPopup = props.isPopup,
-      externalPhoneNumber = props.externalPhoneNumber;
+      externalPhoneNumber = props.externalPhoneNumber,
+      externalCloseModal = props.externalCloseModal;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -125,7 +126,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    var _formState$result;
+    var _formState$result, _formState$result3, _formState$result4;
 
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
@@ -134,6 +135,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
         open: true,
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
+    } else if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.result) {
+      externalCloseModal && externalCloseModal();
     }
   }, [formState]);
   (0, _react.useEffect)(function () {

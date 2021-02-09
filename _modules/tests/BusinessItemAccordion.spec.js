@@ -34,7 +34,7 @@ describe('Mounting Business Item Accordion component', function () {
       isValidProducts: true
     })));
     cy.wait(4000);
-    cy.get('div.total > p').contains("".concat(cart.total, ".00 $")).should('be.visible');
+    cy.get('div.total > p').contains("".concat(cart.total, ",00 $")).should('be.visible');
     cy.get('div.info > h2').contains(cart.business.name).should('be.visible');
   });
 });
