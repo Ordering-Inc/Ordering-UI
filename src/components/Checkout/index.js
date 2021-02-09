@@ -359,7 +359,7 @@ export const Checkout = (props) => {
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const cartsWithProducts = Object.values(orderState.carts).filter(cart => cart.products.length)
+  const cartsWithProducts = Object.values(orderState?.carts).filter(cart => cart.products.length)
 
   const closeAlert = () => {
     setAlertState({
