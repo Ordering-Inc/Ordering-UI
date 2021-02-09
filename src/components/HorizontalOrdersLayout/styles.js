@@ -45,6 +45,10 @@ export const Price = styled.div`
     text-overflow: ellipsis;
     margin-left: 5px;
   }
+  p[name='view-cart']{
+    color: ${props => props.theme.colors.primary};
+    cursor: pointer;
+  }
 `
 
 export const Logo = styled.div`

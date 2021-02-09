@@ -75,6 +75,9 @@ export const HorizontalOrdersLayout = (props) => {
                 {order?.status !== 0 && (
                   <p>{getOrderStatus(order.status)?.value}</p>
                 )}
+                {carts && (
+                  <p name='view-cart' onClick={() => handleClickCard(order)}>{t('VIEW_ORDER', 'View Order')}</p>
+                )}
                 {isBusinessList && !carts && (
                   <Reorder>
                     <Button color='primary' onClick={() => handleReorder(order.id)}>
