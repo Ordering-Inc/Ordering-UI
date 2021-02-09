@@ -406,7 +406,7 @@ var Checkout = function Checkout(props) {
       alertState = _useState18[0],
       setAlertState = _useState18[1];
 
-  var cartsWithProducts = Object.values(orderState.carts).filter(function (cart) {
+  var cartsWithProducts = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     return cart.products.length;
   });
 
