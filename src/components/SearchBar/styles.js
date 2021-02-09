@@ -22,10 +22,8 @@ export const BusinessSearch = styled.div`
 
     ${({ externalBusinessMap }) => !externalBusinessMap && css`
       justify-content: center;
-      input {
-        -webkit-transition: width 0.4s ease-in-out;
-        transition: width 0.4s ease-in-out; 
-      }
+      -webkit-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out; 
     `}
 
     @media (min-width: 681px) {
