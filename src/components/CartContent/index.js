@@ -10,7 +10,7 @@ export const CartContent = (props) => {
     carts,
     isOrderStateCarts,
     isCartPopover,
-    isCheckoutPage
+    isForceOpenCart
   } = props
 
   const [, t] = useLanguage()
@@ -47,7 +47,7 @@ export const CartContent = (props) => {
                 cart={cart}
                 isCartPopover={isCartPopover}
                 isCheckout={window.location.pathname === `/checkout/${cart?.uuid}`}
-                isCheckoutPage={isCheckoutPage}
+                isForceOpenCart={isForceOpenCart}
                 currentCartUuid={currentCartUuid}
                 isProducts={cart.products.length}
                 onClickCheckout={props.onClose}
