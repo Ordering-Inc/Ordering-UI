@@ -16,6 +16,6 @@ describe('Mounting Payment Option Cash component', () => {
     )
     cy.get('label').should('contain', 'Don\'t have exact amount? Let us know with how much will you pay')
     cy.get('input[name=cash]').type(4)
-    cy.get('p').should('contain', `This value must be greater than order total: ${orderTotal}.00 $`)
+    cy.get('p').should('contain', `This value must be greater than order total: ${orderTotal},00 $`)
   })
 })
