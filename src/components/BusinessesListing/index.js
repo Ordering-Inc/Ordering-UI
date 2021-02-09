@@ -40,7 +40,8 @@ const BusinessesListingUI = (props) => {
     handleChangeBusinessType,
     handleBusinessClick,
     externalBusinessMap,
-    onOrderClick
+    onOrderClick,
+    onCartClick
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -104,6 +105,13 @@ const BusinessesListingUI = (props) => {
         <BusinessesMap
           businessList={businessesList.businesses}
           userLocation={orderState?.options?.address?.location}
+        />
+      )}
+      {externalBusinessMap && onCartClick && (
+        <OrdersOption
+          horizontal
+          isBusinessList
+          carts={orderState.carts}
         />
       )}
       {externalBusinessMap && onOrderClick && (

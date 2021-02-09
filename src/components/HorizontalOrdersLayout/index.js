@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils, useConfig } from 'ordering-components'
+import { useLanguage, useUtils, useConfig, useEvent } from 'ordering-components'
 
 import {
   OpenOrder,
@@ -25,18 +25,28 @@ export const HorizontalOrdersLayout = (props) => {
     loadMoreOrders,
     getOrderStatus,
     isBusinessList,
-    handleReorder
+    handleReorder,
+    carts
   } = props
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
+  const [events] = useEvent()
+
+  const handleClickCard = (order) => {
+    if (carts) {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: order.uuid } })
+    } else if (isBusinessList) {
+      onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })
+    }
+  }
 
   const Orders = () => {
     return (
       <>
-        {orders.map(order => (
-          <Card key={order.id} id='order-card' isBusinessList={isBusinessList} onClick={() => isBusinessList && onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })}>
+        {orders.length > 0 && orders.map(order => (
+          <Card key={order.id || order.uuid} id='order-card' isBusinessList={isBusinessList} onClick={() => handleClickCard(order)}>
             {(configs?.google_maps_api_key?.value || isBusinessList) && (
               <Map isBusinessList={isBusinessList}>
                 <img
@@ -62,8 +72,10 @@ export const HorizontalOrdersLayout = (props) => {
                 <h2>
                   {parsePrice(order?.summary?.total || order?.total)}
                 </h2>
-                <p>{getOrderStatus(order.status)?.value}</p>
-                {isBusinessList && (
+                {order?.status !== 0 && (
+                  <p>{getOrderStatus(order.status)?.value}</p>
+                )}
+                {isBusinessList && !carts && (
                   <Reorder>
                     <Button color='primary' onClick={() => handleReorder(order.id)}>
                       {t('REORDER', 'Reorder')}
@@ -81,7 +93,7 @@ export const HorizontalOrdersLayout = (props) => {
             )}
           </Card>
         ))}
-        {pagination.totalPages && pagination.currentPage < pagination.totalPages && (
+        {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
           <Card flex nobg>
             <Button
               className='load-orders'

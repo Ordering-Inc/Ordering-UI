@@ -72,6 +72,7 @@ export const Card = styled.div`
   max-height: ${({ isBusinessList }) => isBusinessList ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
+  cursor: ${({ isBusinessList }) => isBusinessList && 'pointer'};
 
   button.load-orders {
     padding: 10px 30px;

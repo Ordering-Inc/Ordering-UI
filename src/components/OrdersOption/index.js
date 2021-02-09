@@ -29,18 +29,21 @@ const OrdersOptionUI = (props) => {
     onOrderClick,
     loadMoreOrders,
     horizontal,
-    isBusinessList
+    isBusinessList,
+    carts
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [events] = useEvent()
   const [, { reorder }] = useOrder()
-  const { loading, error, orders } = orderList
+  const { loading, error, orders: values } = orderList
 
   const imageFails = activeOrders
     ? theme.images?.general?.emptyActiveOrders
     : theme.images?.general?.emptyPastOrders
+
+  const orders = carts ? Object?.values(carts) : values
 
   const [ordersSorted, setOrdersSorted] = useState([])
 
@@ -84,14 +87,20 @@ const OrdersOptionUI = (props) => {
   }
 
   useEffect(() => {
-    const ordersSorted = orders.sort((a, b) => {
-      if (activeOrders) {
-        return new Date(b.created_at) - new Date(a.created_at)
-      }
-      return new Date(a.created_at) - new Date(b.created_at)
-    })
-    setOrdersSorted(ordersSorted)
+    if (!carts) {
+      const ordersSorted = orders.sort((a, b) => {
+        if (activeOrders) {
+          return new Date(b.created_at) - new Date(a.created_at)
+        }
+        return new Date(a.created_at) - new Date(b.created_at)
+      })
+      setOrdersSorted(ordersSorted)
+    }
   }, [orders])
+
+  useEffect(() => {
+    setOrdersSorted(orders)
+  }, [carts])
 
   return (
     <>
@@ -99,9 +108,17 @@ const OrdersOptionUI = (props) => {
         <>
           <OptionTitle isBusinessList={isBusinessList}>
             <h1>
-              {activeOrders
-                ? t('ACTIVE_ORDERS', 'Active Orders')
-                : t('PREVIOUS_ORDERS', 'Previous Orders')}
+              {!carts ? (
+                <>
+                  {activeOrders
+                    ? t('ACTIVE_ORDERS', 'Active Orders')
+                    : t('PREVIOUS_ORDERS', 'Previous Orders')}
+                </>
+              ) : (
+                <>
+                  {t('CARTS', 'Carts')}
+                </>
+              )}
             </h1>
           </OptionTitle>
           {!loading && ordersSorted.length === 0 && (
@@ -175,6 +192,7 @@ const OrdersOptionUI = (props) => {
             handleReorder={handleReorder}
             reorderLoading={reorderLoading}
             orderID={orderID}
+            carts={carts}
           />
         ) : (
           <VerticalOrdersLayout
