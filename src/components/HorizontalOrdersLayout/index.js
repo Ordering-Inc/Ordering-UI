@@ -21,24 +21,23 @@ export const HorizontalOrdersLayout = (props) => {
   const {
     orders,
     pagination,
-    onOrderClick,
     loadMoreOrders,
     getOrderStatus,
-    isBusinessList,
+    isBusinessesPage,
     handleReorder,
-    carts
+    customArray,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
-  const [events] = useEvent()
 
-  const handleClickCard = (order) => {
-    if (carts) {
-      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: order.uuid } })
-    } else if (isBusinessList) {
-      onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })
+  const handleClickCard = (uuid) => {
+    if (customArray) {
+      onRedirectPage({ page: 'checkout', params: { cartUuid: uuid } })
+    } else if (isBusinessesPage) {
+      onRedirectPage({ page: 'order_detail', params: { orderId: uuid } })
     }
   }
 
@@ -46,39 +45,55 @@ export const HorizontalOrdersLayout = (props) => {
     return (
       <>
         {orders.length > 0 && orders.map(order => (
-          <Card key={order.id || order.uuid} id='order-card' isBusinessList={isBusinessList} onClick={() => handleClickCard(order)}>
-            {(configs?.google_maps_api_key?.value || isBusinessList) && (
-              <Map isBusinessList={isBusinessList}>
+          <Card
+            key={order.id || order.uuid}
+            id='order-card'
+            isBusinessesPage={isBusinessesPage}
+            onClick={() => handleClickCard(order?.uuid)}
+          >
+            {(configs?.google_maps_api_key?.value || isBusinessesPage) && (
+              <Map isBusinessesPage={isBusinessesPage}>
                 <img
-                  src={isBusinessList ? (order?.business?.header || order?.business?.logo) : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)}
-                  alt={isBusinessList ? 'business_header' : 'google-maps-img'}
-                  height={isBusinessList ? '200px' : '100px'}
+                  src={
+                    isBusinessesPage 
+                      ? (order?.business?.header || order?.business?.logo) 
+                      : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)
+                  }
+                  alt={isBusinessesPage ? 'business_header' : 'google-maps-img'}
+                  height={isBusinessesPage ? '200px' : '100px'}
                   width='400px'
                 />
               </Map>
             )}
             <Content>
-              {order.business?.logo && !isBusinessList && (
+              {order.business?.logo && !isBusinessesPage && (
                 <Logo>
                   <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
                 </Logo>
               )}
+
               <BusinessInformation activeOrders>
                 <h2>{order.business?.name}</h2>
                 <p name='order_number'>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
-                <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
+                <p>{order?.delivery_datetime_utc 
+                  ? parseDate(order?.delivery_datetime_utc) 
+                  : parseDate(order?.delivery_datetime, { utc: false })}
+                </p>
               </BusinessInformation>
-              <Price isBusinessList={isBusinessList}>
+
+              <Price isBusinessesPage={isBusinessesPage}>
                 <h2>
                   {parsePrice(order?.summary?.total || order?.total)}
                 </h2>
                 {order?.status !== 0 && (
                   <p>{getOrderStatus(order.status)?.value}</p>
                 )}
-                {carts && (
-                  <p name='view-cart' onClick={() => handleClickCard(order)}>{t('VIEW_ORDER', 'View Order')}</p>
+                {customArray && (
+                  <p name='view-cart' onClick={() => handleClickCard(order.uuid)}>
+                    {t('VIEW_ORDER', 'View Order')}
+                  </p>
                 )}
-                {isBusinessList && !carts && (
+                {isBusinessesPage && !customArray && (
                   <Reorder>
                     <Button color='primary' onClick={() => handleReorder(order.id)}>
                       {t('REORDER', 'Reorder')}
@@ -87,9 +102,12 @@ export const HorizontalOrdersLayout = (props) => {
                 )}
               </Price>
             </Content>
-            {!isBusinessList && (
-              <OpenOrder isBusinessList={isBusinessList}>
-                <Button color='primary' onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order?.uuid } })}>
+            {!isBusinessesPage && (
+              <OpenOrder isBusinessesPage={isBusinessesPage}>
+                <Button
+                  color='primary'
+                  onClick={() => onRedirectPage({ page: 'order_detail', params: { orderId: order?.uuid } })}
+                >
                   {t('OPEN_ORDER', 'Open order')}
                 </Button>
               </OpenOrder>
@@ -114,8 +132,13 @@ export const HorizontalOrdersLayout = (props) => {
   }
 
   return (
-    <OrdersContainer activeOrders ordersLength={orders?.length <= 1} id='orders-container' isBusinessList={isBusinessList}>
-      {!isBusinessList ? (
+    <OrdersContainer
+      id='orders-container'
+      activeOrders
+      ordersLength={orders?.length <= 1}
+      isBusinessesPage={isBusinessesPage}
+    >
+      {!isBusinessesPage ? (
         <Tabs>
           <AutoScroll>
             <Orders />

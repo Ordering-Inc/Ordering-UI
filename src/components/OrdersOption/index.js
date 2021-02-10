@@ -23,19 +23,19 @@ import {
 
 const OrdersOptionUI = (props) => {
   const {
+    horizontal,
+    activeOrders,
     orderList,
     pagination,
-    activeOrders,
-    onOrderClick,
+    isBusinessesPage,
     loadMoreOrders,
-    horizontal,
-    isBusinessList,
-    carts
+    titleContent,
+    customArray,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [events] = useEvent()
   const [, { reorder }] = useOrder()
   const { loading, error, orders: values } = orderList
 
@@ -43,20 +43,20 @@ const OrdersOptionUI = (props) => {
     ? theme.images?.general?.emptyActiveOrders
     : theme.images?.general?.emptyPastOrders
 
-  const orders = carts ? Object?.values(carts) : values
+  const orders = customArray || values
 
   const [ordersSorted, setOrdersSorted] = useState([])
 
   const [reorderLoading, setReorderLoading] = useState(false)
-  const [orderID, setOrderID] = useState(null)
+  const [orderId, setorderId] = useState(null)
 
   const handleReorder = async (orderId) => {
     setReorderLoading(true)
-    setOrderID(orderId)
+    setorderId(orderId)
     try {
       const { error, result } = await reorder(orderId)
       if (!error) {
-        events.emit('go_to_page', { page: 'checkout', params: { cartUuid: result.uuid } })
+        onRedirectPage && onRedirectPage({ page: 'checkout', params: { cartUuid: result.uuid } })
       }
     } catch (err) {
       setReorderLoading(false)
@@ -87,38 +87,24 @@ const OrdersOptionUI = (props) => {
   }
 
   useEffect(() => {
-    if (!carts) {
-      const ordersSorted = orders.sort((a, b) => {
-        if (activeOrders) {
-          return new Date(b.created_at) - new Date(a.created_at)
-        }
-        return new Date(a.created_at) - new Date(b.created_at)
-      })
-      setOrdersSorted(ordersSorted)
-    }
+    const ordersSorted = orders.sort((a, b) => {
+      if (activeOrders) {
+        return new Date(b.created_at) - new Date(a.created_at)
+      }
+      return new Date(a.created_at) - new Date(b.created_at)
+    })
+    setOrdersSorted(ordersSorted)
   }, [orders])
-
-  useEffect(() => {
-    setOrdersSorted(orders)
-  }, [carts])
 
   return (
     <>
-      {(orders.length > 0 || !isBusinessList) && (
+      {(orders.length > 0 || !isBusinessesPage) && (
         <>
-          <OptionTitle isBusinessList={isBusinessList}>
+          <OptionTitle isBusinessesPage={isBusinessesPage}>
             <h1>
-              {!carts ? (
-                <>
-                  {activeOrders
-                    ? t('ACTIVE_ORDERS', 'Active Orders')
-                    : t('PREVIOUS_ORDERS', 'Previous Orders')}
-                </>
-              ) : (
-                <>
-                  {t('CARTS', 'Carts')}
-                </>
-              )}
+              {titleContent ? titleContent : activeOrders
+                ? t('ACTIVE_ORDERS', 'Active Orders')
+                : t('PREVIOUS_ORDERS', 'Previous Orders')}
             </h1>
           </OptionTitle>
           {!loading && ordersSorted.length === 0 && (
@@ -130,10 +116,15 @@ const OrdersOptionUI = (props) => {
           )}
         </>
       )}
+
       {loading && (
-        <OrdersContainer activeOrders={horizontal} isSkeleton isBusinessList={isBusinessList}>
+        <OrdersContainer
+          isSkeleton 
+          activeOrders={horizontal}
+          isBusinessesPage={isBusinessesPage}
+        >
           {horizontal ? (
-            <SkeletonOrder activeOrders={horizontal} isBusinessList={isBusinessList}>
+            <SkeletonOrder activeOrders={horizontal} isBusinessesPage={isBusinessesPage}>
               {[...Array(3)].map((item, i) => (
                 <SkeletonCard key={i}>
                   <SkeletonMap>
@@ -183,27 +174,27 @@ const OrdersOptionUI = (props) => {
       {!loading && !error && orders.length > 0 && (
         horizontal ? (
           <HorizontalOrdersLayout
+            orderId={orderId}
             orders={ordersSorted}
             pagination={pagination}
-            onOrderClick={onOrderClick}
+            onRedirectPage={onRedirectPage}
             loadMoreOrders={loadMoreOrders}
-            getOrderStatus={getOrderStatus}
-            isBusinessList={isBusinessList}
-            handleReorder={handleReorder}
+            isBusinessesPage={isBusinessesPage}
             reorderLoading={reorderLoading}
-            orderID={orderID}
-            carts={carts}
+            customArray={customArray}
+            getOrderStatus={getOrderStatus}
+            handleReorder={handleReorder}
           />
         ) : (
           <VerticalOrdersLayout
+            reorderLoading={reorderLoading}
+            orderId={orderId}
             orders={ordersSorted}
             pagination={pagination}
-            onOrderClick={onOrderClick}
             loadMoreOrders={loadMoreOrders}
+            onRedirectPage={onRedirectPage}
             getOrderStatus={getOrderStatus}
             handleReorder={handleReorder}
-            reorderLoading={reorderLoading}
-            orderID={orderID}
           />
         )
       )}

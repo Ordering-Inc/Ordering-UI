@@ -7,7 +7,7 @@ export const MyOrders = (props) => {
   const [events] = useEvent()
   const ordersProps = {
     ...props,
-    onOrderClick: (data) => events.emit('go_to_page', data)
+    onRedirectPage: (data) => events.emit('go_to_page', data)
   }
   return (
     <>

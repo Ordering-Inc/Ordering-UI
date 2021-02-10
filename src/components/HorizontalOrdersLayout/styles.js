@@ -33,12 +33,12 @@ export const Price = styled.div`
   width: 35%;
   h2 {
     font-size: 14px;
-    margin-block-end: ${({ isBusinessList }) => isBusinessList ? '0.1em' : '1em'};
+    margin-block-end: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
     margin-block-start: 0.1em;
   }
   p {
     margin-block-end: 0.1em;
-    margin-block-start: ${({ isBusinessList }) => isBusinessList ? '0.1em' : '1em'};
+    margin-block-start: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
     color: #ff9300;
     font-size: 0.8em;
     overflow:hidden;
@@ -72,11 +72,11 @@ export const Card = styled.div`
   margin: 10px;
   display: inline-block;
   background: white;
-  height: ${({ isBusinessList }) => isBusinessList && '300px'};
-  max-height: ${({ isBusinessList }) => isBusinessList ? '300px' : '220px'};
+  height: ${({ isBusinessesPage }) => isBusinessesPage && '300px'};
+  max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
-  cursor: ${({ isBusinessList }) => isBusinessList && 'pointer'};
+  cursor: ${({ isBusinessesPage }) => isBusinessesPage && 'pointer'};
 
   button.load-orders {
     padding: 10px 30px;
@@ -86,7 +86,7 @@ export const Card = styled.div`
     text-align: right;
   `}
 
-  ${props => (props.nobg || props.isBusinessList) && css`
+  ${props => (props.nobg || props.isBusinessesPage) && css`
     background: transparent;
   `}
 
@@ -105,12 +105,12 @@ export const Card = styled.div`
 
   @media (min-width: 480px){
     min-width: 400px;
-    max-height: ${({ isBusinessList }) => isBusinessList ? '300px' : '250px'};;
+    max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '250px'};;
     width: 400px;
   }
 
   @media(min-width: 993px){
-    ${({ isBusinessList }) => isBusinessList && css`
+    ${({ isBusinessesPage }) => isBusinessesPage && css`
       margin: 30px 20px;
       width: calc(33% - 40px);
       min-width: initial;
@@ -121,20 +121,20 @@ export const Card = styled.div`
 
 export const Map = styled.div`
   width: 100%;
-  height: ${({ isBusinessList }) => isBusinessList ? '200px' : '88px'};
-  min-height: ${({ isBusinessList }) => isBusinessList && '175px'};
+  height: ${({ isBusinessesPage }) => isBusinessesPage ? '200px' : '88px'};
+  min-height: ${({ isBusinessesPage }) => isBusinessesPage && '175px'};
   img{
     width: 100%;
     height: 100%;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    border-radius: ${({ isBusinessList }) => isBusinessList && '16px'};
+    border-radius: ${({ isBusinessesPage }) => isBusinessesPage && '16px'};
     image-rendering: -webkit-optimize-contrast;
     object-fit: cover;
   }
   @media(min-width: 480px){
-    height: ${({ isBusinessList }) => isBusinessList ? '200px' : '100px'};
-    min-height: ${({ isBusinessList }) => isBusinessList && '200px'}
+    height: ${({ isBusinessesPage }) => isBusinessesPage ? '200px' : '100px'};
+    min-height: ${({ isBusinessesPage }) => isBusinessesPage && '200px'}
   }
 `
 

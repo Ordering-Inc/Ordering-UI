@@ -9,7 +9,7 @@ import {
   DeleteContent
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, externalBusinessMap }) => {
+export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isCustomLayout }) => {
   const [theme] = useTheme()
   const [, t] = useLanguage()
   let timeout = null
@@ -46,7 +46,11 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, externalBus
   }, [search])
 
   return (
-    <BusinessSearch className={!externalBusinessMap && 'search-bar'} externalBusinessMap={externalBusinessMap} hasValue={el.current?.value}>
+    <BusinessSearch
+      className={!isCustomLayout && 'search-bar'}
+      isCustomLayout={isCustomLayout}
+      hasValue={el.current?.value}
+    >
       <Input
         ref={el}
         name='search'
@@ -56,9 +60,10 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, externalBus
         maxLength='500'
       />
       <DeleteContent>
-        {el.current?.value ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span> : <img src={theme?.images?.general?.searchIcon} />}
+        {el.current?.value 
+          ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span> 
+          : <img src={theme?.images?.general?.searchIcon} />}
       </DeleteContent>
-
     </BusinessSearch>
   )
 }
