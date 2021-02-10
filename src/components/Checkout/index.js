@@ -359,7 +359,7 @@ export const Checkout = (props) => {
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const cartsWithProducts = Object.values(orderState?.carts).filter(cart => cart.products.length)
+  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length) || null
 
   const closeAlert = () => {
     setAlertState({
@@ -462,14 +462,14 @@ export const Checkout = (props) => {
 
   return (
     <>
-      {!cartUuid && orderState.carts && cartsWithProducts.length === 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length === 0 && (
         <NotFoundSource
           content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
           btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
           onClickButton={handleSearchRedirect}
         />
       )}
-      {!cartUuid && orderState.carts && cartsWithProducts.length > 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length > 0 && (
         <CartsList>
           <CartContent
             carts={cartsWithProducts}
