@@ -14,7 +14,7 @@ export const BusinessList = styled.div`
 export const WrapperSearch = styled.div`
   margin: 10px 20px 0px;
 
-  ${({ externalBusinessMap }) => externalBusinessMap && css`
+  ${({ isCustomLayout }) => isCustomLayout && css`
     box-sizing: border-box;
     display: flex;
     justify-content: center;

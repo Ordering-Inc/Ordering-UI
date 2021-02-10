@@ -20,7 +20,7 @@ export const BusinessSearch = styled.div`
     `}
     background-color: ${props => props.theme?.colors?.backgroundPage};
 
-    ${({ externalBusinessMap }) => !externalBusinessMap && css`
+    ${({ isCustomLayout }) => !isCustomLayout && css`
       justify-content: center;
       -webkit-transition: width 0.4s ease-in-out;
       transition: width 0.4s ease-in-out; 
@@ -28,7 +28,7 @@ export const BusinessSearch = styled.div`
 
     @media (min-width: 681px) {
       width: 100%;
-      ${({ externalBusinessMap }) => !externalBusinessMap && css`
+      ${({ isCustomLayout }) => !isCustomLayout && css`
         width: 200px;
         &:focus {
           width: 50%;
