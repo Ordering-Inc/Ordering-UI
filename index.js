@@ -34,6 +34,7 @@ import { MyOrdersList } from './src/components/MyOrdersList'
 import { OrderList } from './src/components/OrderList'
 import { OrderTypeControl } from './src/components/OrderTypeControl'
 import { PaymentOptions } from './src/components/PaymentOptions'
+import { PhoneAutocomplete } from './src/components/PhoneAutocomplete'
 import { Popup } from './src/components/Popup'
 import { ProductComponent } from './src/components/ProductComponent'
 import { ProductForm } from './src/components/ProductForm'
@@ -96,6 +97,7 @@ export {
   OrderList,
   OrderTypeControl,
   PaymentOptions,
+  PhoneAutocomplete,
   Popup,
   ProductComponent,
   ProductForm,
