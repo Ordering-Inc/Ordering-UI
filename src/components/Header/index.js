@@ -43,7 +43,7 @@ export const Header = (props) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
-  const cartsWithProducts = Object.values(orderState?.carts).filter(cart => cart.products.length > 0)
+  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length > 0) || null
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
@@ -152,7 +152,7 @@ export const Header = (props) => {
                     ) : (
                       <HeaderOption
                         variant='cart'
-                        totalCarts={cartsWithProducts.length}
+                        totalCarts={cartsWithProducts?.length}
                         onClick={(variant) => openModal(variant)}
                       />
                     )}
