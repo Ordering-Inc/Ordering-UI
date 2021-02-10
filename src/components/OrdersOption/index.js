@@ -48,11 +48,9 @@ const OrdersOptionUI = (props) => {
   const [ordersSorted, setOrdersSorted] = useState([])
 
   const [reorderLoading, setReorderLoading] = useState(false)
-  const [orderId, setorderId] = useState(null)
 
   const handleReorder = async (orderId) => {
     setReorderLoading(true)
-    setorderId(orderId)
     try {
       const { error, result } = await reorder(orderId)
       if (!error) {
@@ -174,7 +172,6 @@ const OrdersOptionUI = (props) => {
       {!loading && !error && orders.length > 0 && (
         horizontal ? (
           <HorizontalOrdersLayout
-            orderId={orderId}
             orders={ordersSorted}
             pagination={pagination}
             onRedirectPage={onRedirectPage}
@@ -188,7 +185,6 @@ const OrdersOptionUI = (props) => {
         ) : (
           <VerticalOrdersLayout
             reorderLoading={reorderLoading}
-            orderId={orderId}
             orders={ordersSorted}
             pagination={pagination}
             loadMoreOrders={loadMoreOrders}
