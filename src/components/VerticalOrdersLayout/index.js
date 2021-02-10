@@ -18,7 +18,7 @@ export const VerticalOrdersLayout = (props) => {
   const {
     orders,
     pagination,
-    onOrderClick,
+    onRedirectPage,
     loadMoreOrders,
     getOrderStatus,
     handleReorder,
@@ -47,7 +47,7 @@ export const VerticalOrdersLayout = (props) => {
                 <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
                 <p
                   name='view_order'
-                  onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.uuid } })}
+                  onClick={() => onRedirectPage({ page: 'order_detail', params: { orderId: order.uuid } })}
                 >
                   {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
                 </p>
