@@ -36,15 +36,16 @@ const BusinessesListingUI = (props) => {
     paginationProps,
     searchValue,
     getBusinesses,
+    isCustomLayout,
+    onRedirectPage,
     handleChangeSearch,
     handleChangeBusinessType,
-    handleBusinessClick,
-    externalBusinessMap,
-    onOrderClick
+    handleBusinessClick
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
+
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
@@ -82,37 +83,54 @@ const BusinessesListingUI = (props) => {
     setModals({ listOpen: false, formOpen: false })
   }
 
+  const getCustomArray = (list) => {
+    const isArray = Array.isArray(list)
+    return isArray ? list : Object.values(list)
+  }
+
   return (
     <BusinessContainer>
       <BusinessTypeFilter
         handleChangeBusinessType={handleChangeBusinessType}
       />
 
-      <WrapperSearch externalBusinessMap={externalBusinessMap}>
+      <WrapperSearch isCustomLayout={isCustomLayout}>
         <SearchBar
-          onSearch={handleChangeSearch}
-          search={searchValue}
-          placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
           lazyLoad
-          externalBusinessMap={externalBusinessMap}
+          search={searchValue}
+          isCustomLayout={isCustomLayout}
+          placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+          onSearch={handleChangeSearch}
         />
-        {externalBusinessMap && (
+        {isCustomLayout && (
           <FiMap onClick={toggleMap} />
         )}
       </WrapperSearch>
+
       {activeMap && (
         <BusinessesMap
           businessList={businessesList.businesses}
           userLocation={orderState?.options?.address?.location}
         />
       )}
-      {externalBusinessMap && onOrderClick && (
-        <OrdersOption
-          horizontal
-          isBusinessList
-          onOrderClick={onOrderClick}
-        />
+
+      {isCustomLayout && onRedirectPage && (
+        <>
+          <OrdersOption
+            horizontal
+            isBusinessesPage
+            onRedirectPage={onRedirectPage}
+            titleContent={t('CARTS', 'Carts')}
+            customArray={getCustomArray(orderState.carts)}
+          />
+          <OrdersOption
+            horizontal
+            isBusinessesPage
+            onRedirectPage={onRedirectPage}
+          />
+        </>
       )}
+
       <BusinessList>
         {
           !businessesList.loading && businessesList.businesses.length === 0 && (
