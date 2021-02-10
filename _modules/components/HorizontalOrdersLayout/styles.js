@@ -84,7 +84,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  height: ", ";\n  max-height: ", ";\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    max-height: ", ";;\n    width: 400px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n\n"]);
+  var data = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  height: ", ";\n  max-height: ", ";\n  border-radius: 16px;\n  text-align: left;\n  cursor: ", ";\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    max-height: ", ";;\n    width: 400px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -104,7 +104,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  text-align: end;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  width: 35%;\n  h2 {\n    font-size: 14px;\n    margin-block-end: ", ";\n    margin-block-start: 0.1em;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: ", ";\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n    margin-left: 5px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  text-align: end;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  width: 35%;\n  h2 {\n    font-size: 14px;\n    margin-block-end: ", ";\n    margin-block-start: 0.1em;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: ", ";\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n    margin-left: 5px;\n  }\n  p[name='view-cart']{\n    color: ", ";\n    cursor: pointer;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -144,11 +144,13 @@ var Content = _styledComponents.default.div(_templateObject2());
 exports.Content = Content;
 
 var Price = _styledComponents.default.div(_templateObject3(), function (_ref) {
-  var isBusinessList = _ref.isBusinessList;
-  return isBusinessList ? '0.1em' : '1em';
+  var isBusinessesPage = _ref.isBusinessesPage;
+  return isBusinessesPage ? '0.1em' : '1em';
 }, function (_ref2) {
-  var isBusinessList = _ref2.isBusinessList;
-  return isBusinessList ? '0.1em' : '1em';
+  var isBusinessesPage = _ref2.isBusinessesPage;
+  return isBusinessesPage ? '0.1em' : '1em';
+}, function (props) {
+  return props.theme.colors.primary;
 });
 
 exports.Price = Price;
@@ -158,46 +160,49 @@ var Logo = _styledComponents.default.div(_templateObject4());
 exports.Logo = Logo;
 
 var Card = _styledComponents.default.div(_templateObject5(), function (_ref3) {
-  var isBusinessList = _ref3.isBusinessList;
-  return isBusinessList && '300px';
+  var isBusinessesPage = _ref3.isBusinessesPage;
+  return isBusinessesPage && '300px';
 }, function (_ref4) {
-  var isBusinessList = _ref4.isBusinessList;
-  return isBusinessList ? '300px' : '220px';
+  var isBusinessesPage = _ref4.isBusinessesPage;
+  return isBusinessesPage ? '300px' : '220px';
+}, function (_ref5) {
+  var isBusinessesPage = _ref5.isBusinessesPage;
+  return isBusinessesPage && 'pointer';
 }, function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject6());
 }, function (props) {
-  return (props.nobg || props.isBusinessList) && (0, _styledComponents.css)(_templateObject7());
+  return (props.nobg || props.isBusinessesPage) && (0, _styledComponents.css)(_templateObject7());
 }, function (props) {
   return props.flex && (0, _styledComponents.css)(_templateObject8());
 }, function (props) {
   return (props.theme.colors.backgroundPage === '#FFF' || props.theme.colors.backgroundPage === '#FFFFFF') && (0, _styledComponents.css)(_templateObject9());
-}, function (_ref5) {
-  var isBusinessList = _ref5.isBusinessList;
-  return isBusinessList ? '300px' : '250px';
 }, function (_ref6) {
-  var isBusinessList = _ref6.isBusinessList;
-  return isBusinessList && (0, _styledComponents.css)(_templateObject10());
+  var isBusinessesPage = _ref6.isBusinessesPage;
+  return isBusinessesPage ? '300px' : '250px';
+}, function (_ref7) {
+  var isBusinessesPage = _ref7.isBusinessesPage;
+  return isBusinessesPage && (0, _styledComponents.css)(_templateObject10());
 });
 
 exports.Card = Card;
 
-var Map = _styledComponents.default.div(_templateObject11(), function (_ref7) {
-  var isBusinessList = _ref7.isBusinessList;
-  return isBusinessList ? '200px' : '88px';
-}, function (_ref8) {
-  var isBusinessList = _ref8.isBusinessList;
-  return isBusinessList && '175px';
+var Map = _styledComponents.default.div(_templateObject11(), function (_ref8) {
+  var isBusinessesPage = _ref8.isBusinessesPage;
+  return isBusinessesPage ? '200px' : '88px';
 }, function (_ref9) {
-  var isBusinessList = _ref9.isBusinessList;
-  return isBusinessList && '16px';
+  var isBusinessesPage = _ref9.isBusinessesPage;
+  return isBusinessesPage && '175px';
 }, function (_ref10) {
-  var isBusinessList = _ref10.isBusinessList;
-  return isBusinessList ? '200px' : '100px';
+  var isBusinessesPage = _ref10.isBusinessesPage;
+  return isBusinessesPage && '16px';
 }, function (_ref11) {
-  var isBusinessList = _ref11.isBusinessList;
-  return isBusinessList && '200px';
+  var isBusinessesPage = _ref11.isBusinessesPage;
+  return isBusinessesPage ? '200px' : '100px';
+}, function (_ref12) {
+  var isBusinessesPage = _ref12.isBusinessesPage;
+  return isBusinessesPage && '200px';
 });
 
 exports.Map = Map;

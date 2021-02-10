@@ -366,14 +366,14 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var OptionTitle = _styledComponents.default.div(_templateObject(), function (_ref) {
-  var isBusinessList = _ref.isBusinessList;
-  return isBusinessList ? '80%' : '100%';
+  var isBusinessesPage = _ref.isBusinessesPage;
+  return isBusinessesPage ? '80%' : '100%';
 }, function (_ref2) {
-  var isBusinessList = _ref2.isBusinessList;
-  return isBusinessList ? '10px 20px 0' : '0 auto';
+  var isBusinessesPage = _ref2.isBusinessesPage;
+  return isBusinessesPage ? '10px 20px 0' : '0 auto';
 }, function (_ref3) {
-  var isBusinessList = _ref3.isBusinessList;
-  return !isBusinessList && '0 15px';
+  var isBusinessesPage = _ref3.isBusinessesPage;
+  return !isBusinessesPage && '0 15px';
 });
 
 exports.OptionTitle = OptionTitle;
@@ -391,8 +391,8 @@ var OrdersContainer = _styledComponents.default.div(_templateObject2(), function
     var isSkeleton = _ref6.isSkeleton;
     return !isSkeleton && (0, _styledComponents.css)(_templateObject5(), function (_ref7) {
       var ordersLength = _ref7.ordersLength,
-          isBusinessList = _ref7.isBusinessList;
-      return !ordersLength && !isBusinessList && (0, _styledComponents.css)(_templateObject6(), function (props) {
+          isBusinessesPage = _ref7.isBusinessesPage;
+      return !ordersLength && !isBusinessesPage && (0, _styledComponents.css)(_templateObject6(), function (props) {
         var _props$theme2;
 
         return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject7());
@@ -403,14 +403,14 @@ var OrdersContainer = _styledComponents.default.div(_templateObject2(), function
       });
     });
   }, function (_ref8) {
-    var isBusinessList = _ref8.isBusinessList;
-    return isBusinessList ? '100%' : '90%';
+    var isBusinessesPage = _ref8.isBusinessesPage;
+    return isBusinessesPage ? '100%' : '90%';
   }, function (_ref9) {
     var isSkeleton = _ref9.isSkeleton,
         ordersLength = _ref9.ordersLength;
     return !isSkeleton && !ordersLength && (0, _styledComponents.css)(_templateObject9(), function (_ref10) {
-      var isBusinessList = _ref10.isBusinessList;
-      return !isBusinessList && (0, _styledComponents.css)(_templateObject10(), function (props) {
+      var isBusinessesPage = _ref10.isBusinessesPage;
+      return !isBusinessesPage && (0, _styledComponents.css)(_templateObject10(), function (props) {
         var _props$theme4;
 
         return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject11());
