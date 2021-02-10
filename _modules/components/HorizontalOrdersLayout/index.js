@@ -38,11 +38,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
   var orders = props.orders,
       pagination = props.pagination,
-      onOrderClick = props.onOrderClick,
       loadMoreOrders = props.loadMoreOrders,
       getOrderStatus = props.getOrderStatus,
-      isBusinessList = props.isBusinessList,
-      handleReorder = props.handleReorder;
+      isBusinessesPage = props.isBusinessesPage,
+      handleReorder = props.handleReorder,
+      customArray = props.customArray,
+      onRedirectPage = props.onRedirectPage;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -58,30 +59,43 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       parsePrice = _useUtils2$.parsePrice,
       parseDate = _useUtils2$.parseDate;
 
+  var handleClickCard = function handleClickCard(uuid) {
+    if (customArray) {
+      onRedirectPage({
+        page: 'checkout',
+        params: {
+          cartUuid: uuid
+        }
+      });
+    } else if (isBusinessesPage) {
+      onRedirectPage({
+        page: 'order_detail',
+        params: {
+          orderId: uuid
+        }
+      });
+    }
+  };
+
   var Orders = function Orders() {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.map(function (order) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.length > 0 && orders.map(function (order) {
       var _configs$google_maps_, _order$business, _order$business2, _order$business3, _configs$google_maps_2, _order$business4, _order$business5, _order$business6, _order$summary, _getOrderStatus;
 
       return /*#__PURE__*/_react.default.createElement(_styles.Card, {
-        key: order.id,
+        key: order.id || order.uuid,
         id: "order-card",
-        isBusinessList: isBusinessList,
+        isBusinessesPage: isBusinessesPage,
         onClick: function onClick() {
-          return isBusinessList && onOrderClick({
-            page: 'order_detail',
-            params: {
-              orderId: order === null || order === void 0 ? void 0 : order.uuid
-            }
-          });
+          return handleClickCard(order === null || order === void 0 ? void 0 : order.uuid);
         }
-      }, ((configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) || isBusinessList) && /*#__PURE__*/_react.default.createElement(_styles.Map, {
-        isBusinessList: isBusinessList
+      }, ((configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) || isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_styles.Map, {
+        isBusinessesPage: isBusinessesPage
       }, /*#__PURE__*/_react.default.createElement("img", {
-        src: isBusinessList ? (order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.header) || (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) : (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.location, configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value),
-        alt: isBusinessList ? 'business_header' : 'google-maps-img',
-        height: isBusinessList ? '200px' : '100px',
+        src: isBusinessesPage ? (order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.header) || (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) : (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.location, configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value),
+        alt: isBusinessesPage ? 'business_header' : 'google-maps-img',
+        height: isBusinessesPage ? '200px' : '100px',
         width: "400px"
-      })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, ((_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo) && !isBusinessList && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
+      })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, ((_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo) && !isBusinessesPage && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
         src: (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo,
         alt: "business-logo",
         width: "75px",
@@ -93,18 +107,23 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
         utc: false
       }))), /*#__PURE__*/_react.default.createElement(_styles.Price, {
-        isBusinessList: isBusinessList
-      }, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))), /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), isBusinessList && /*#__PURE__*/_react.default.createElement(_styles.Reorder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+        isBusinessesPage: isBusinessesPage
+      }, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))), (order === null || order === void 0 ? void 0 : order.status) !== 0 && /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), customArray && /*#__PURE__*/_react.default.createElement("p", {
+        name: "view-cart",
+        onClick: function onClick() {
+          return handleClickCard(order.uuid);
+        }
+      }, t('VIEW_ORDER', 'View Order')), isBusinessesPage && !customArray && /*#__PURE__*/_react.default.createElement(_styles.Reorder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
         color: "primary",
         onClick: function onClick() {
           return handleReorder(order.id);
         }
-      }, t('REORDER', 'Reorder'))))), !isBusinessList && /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, {
-        isBusinessList: isBusinessList
+      }, t('REORDER', 'Reorder'))))), !isBusinessesPage && /*#__PURE__*/_react.default.createElement(_styles.OpenOrder, {
+        isBusinessesPage: isBusinessesPage
       }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
         color: "primary",
         onClick: function onClick() {
-          return onOrderClick({
+          return onRedirectPage({
             page: 'order_detail',
             params: {
               orderId: order === null || order === void 0 ? void 0 : order.uuid
@@ -112,7 +131,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
           });
         }
       }, t('OPEN_ORDER', 'Open order'))));
-    }), pagination.totalPages && pagination.currentPage < pagination.totalPages && /*#__PURE__*/_react.default.createElement(_styles.Card, {
+    }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {
       flex: true,
       nobg: true
     }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -125,11 +144,11 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles2.OrdersContainer, {
+    id: "orders-container",
     activeOrders: true,
     ordersLength: (orders === null || orders === void 0 ? void 0 : orders.length) <= 1,
-    id: "orders-container",
-    isBusinessList: isBusinessList
-  }, !isBusinessList ? /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, /*#__PURE__*/_react.default.createElement(Orders, null))) : /*#__PURE__*/_react.default.createElement(Orders, null));
+    isBusinessesPage: isBusinessesPage
+  }, !isBusinessesPage ? /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, /*#__PURE__*/_react.default.createElement(Orders, null))) : /*#__PURE__*/_react.default.createElement(Orders, null));
 };
 
 exports.HorizontalOrdersLayout = HorizontalOrdersLayout;

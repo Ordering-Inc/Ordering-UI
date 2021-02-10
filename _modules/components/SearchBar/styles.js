@@ -114,11 +114,11 @@ var BusinessSearch = _styledComponents.default.div(_templateObject(), function (
 
   return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : (_props$theme2$colors = _props$theme2.colors) === null || _props$theme2$colors === void 0 ? void 0 : _props$theme2$colors.backgroundPage;
 }, function (_ref) {
-  var externalBusinessMap = _ref.externalBusinessMap;
-  return !externalBusinessMap && (0, _styledComponents.css)(_templateObject4());
+  var isCustomLayout = _ref.isCustomLayout;
+  return !isCustomLayout && (0, _styledComponents.css)(_templateObject4());
 }, function (_ref2) {
-  var externalBusinessMap = _ref2.externalBusinessMap;
-  return !externalBusinessMap && (0, _styledComponents.css)(_templateObject5());
+  var isCustomLayout = _ref2.isCustomLayout;
+  return !isCustomLayout && (0, _styledComponents.css)(_templateObject5());
 });
 
 exports.BusinessSearch = BusinessSearch;

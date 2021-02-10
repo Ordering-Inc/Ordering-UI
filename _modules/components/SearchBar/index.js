@@ -40,7 +40,7 @@ var SearchBar = function SearchBar(_ref) {
       search = _ref.search,
       placeholder = _ref.placeholder,
       lazyLoad = _ref.lazyLoad,
-      externalBusinessMap = _ref.externalBusinessMap;
+      isCustomLayout = _ref.isCustomLayout;
 
   var _useTheme = (0, _ThemeContext.useTheme)(),
       _useTheme2 = _slicedToArray(_useTheme, 1),
@@ -84,8 +84,8 @@ var SearchBar = function SearchBar(_ref) {
     }
   }, [search]);
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, {
-    className: !externalBusinessMap && 'search-bar',
-    externalBusinessMap: externalBusinessMap,
+    className: !isCustomLayout && 'search-bar',
+    isCustomLayout: isCustomLayout,
     hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: el,

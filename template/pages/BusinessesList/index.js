@@ -14,6 +14,8 @@ export const BusinessesList = (props) => {
       events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     },
     propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
+    onCartClick: (cart) => events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } }),
+
   }
 
   return (

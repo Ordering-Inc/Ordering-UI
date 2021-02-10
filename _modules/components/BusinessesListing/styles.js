@@ -94,8 +94,8 @@ var BusinessList = _styledComponents.default.div(_templateObject2());
 exports.BusinessList = BusinessList;
 
 var WrapperSearch = _styledComponents.default.div(_templateObject3(), function (_ref) {
-  var externalBusinessMap = _ref.externalBusinessMap;
-  return externalBusinessMap && (0, _styledComponents.css)(_templateObject4(), function (props) {
+  var isCustomLayout = _ref.isCustomLayout;
+  return isCustomLayout && (0, _styledComponents.css)(_templateObject4(), function (props) {
     var _props$theme, _props$theme$colors;
 
     return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;

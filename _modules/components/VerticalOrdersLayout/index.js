@@ -32,7 +32,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var VerticalOrdersLayout = function VerticalOrdersLayout(props) {
   var orders = props.orders,
       pagination = props.pagination,
-      onOrderClick = props.onOrderClick,
+      onRedirectPage = props.onRedirectPage,
       loadMoreOrders = props.loadMoreOrders,
       getOrderStatus = props.getOrderStatus,
       handleReorder = props.handleReorder,
@@ -66,7 +66,7 @@ var VerticalOrdersLayout = function VerticalOrdersLayout(props) {
     })), /*#__PURE__*/_react.default.createElement("p", {
       name: "view_order",
       onClick: function onClick() {
-        return onOrderClick({
+        return onRedirectPage({
           page: 'order_detail',
           params: {
             orderId: order.uuid

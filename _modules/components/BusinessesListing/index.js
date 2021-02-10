@@ -78,11 +78,11 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       paginationProps = props.paginationProps,
       searchValue = props.searchValue,
       getBusinesses = props.getBusinesses,
+      isCustomLayout = props.isCustomLayout,
+      onRedirectPage = props.onRedirectPage,
       handleChangeSearch = props.handleChangeSearch,
       handleChangeBusinessType = props.handleChangeBusinessType,
-      handleBusinessClick = props.handleBusinessClick,
-      externalBusinessMap = props.externalBusinessMap,
-      onOrderClick = props.onOrderClick;
+      handleBusinessClick = props.handleBusinessClick;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -166,26 +166,37 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     });
   };
 
+  var getCustomArray = function getCustomArray(list) {
+    var isArray = Array.isArray(list);
+    return isArray ? list : Object.values(list);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     handleChangeBusinessType: handleChangeBusinessType
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
-    externalBusinessMap: externalBusinessMap
+    isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
-    onSearch: handleChangeSearch,
-    search: searchValue,
-    placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     lazyLoad: true,
-    externalBusinessMap: externalBusinessMap
-  }), externalBusinessMap && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
+    search: searchValue,
+    isCustomLayout: isCustomLayout,
+    placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
+    onSearch: handleChangeSearch
+  }), isCustomLayout && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
     onClick: toggleMap
   })), activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.location
-  }), externalBusinessMap && onOrderClick && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+  }), isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
     horizontal: true,
-    isBusinessList: true,
-    onOrderClick: onOrderClick
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    isBusinessesPage: true,
+    onRedirectPage: onRedirectPage,
+    titleContent: t('CARTS', 'Carts'),
+    customArray: getCustomArray(orderState.carts)
+  }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    horizontal: true,
+    isBusinessesPage: true,
+    onRedirectPage: onRedirectPage
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
