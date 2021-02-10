@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils, useConfig, useEvent } from 'ordering-components'
+import { useLanguage, useUtils, useConfig } from 'ordering-components'
 
 import {
   OpenOrder,
