@@ -43,7 +43,7 @@ export const Header = (props) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
-  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length > 0) || null
+  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length > 0)) || null
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
