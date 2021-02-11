@@ -100,9 +100,9 @@ const OrdersOptionUI = (props) => {
         <>
           <OptionTitle isBusinessesPage={isBusinessesPage}>
             <h1>
-              {titleContent ? titleContent : activeOrders
+              {titleContent || (activeOrders
                 ? t('ACTIVE_ORDERS', 'Active Orders')
-                : t('PREVIOUS_ORDERS', 'Previous Orders')}
+                : t('PREVIOUS_ORDERS', 'Previous Orders'))}
             </h1>
           </OptionTitle>
           {!loading && ordersSorted.length === 0 && (
@@ -117,7 +117,7 @@ const OrdersOptionUI = (props) => {
 
       {loading && (
         <OrdersContainer
-          isSkeleton 
+          isSkeleton
           activeOrders={horizontal}
           isBusinessesPage={isBusinessesPage}
         >
