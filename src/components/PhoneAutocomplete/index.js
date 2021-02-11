@@ -82,11 +82,11 @@ const PhoneAutocompleteUI = (props) => {
         onClose={handleCloseAddress}
       >
         <UserEdit>
-          {userState?.result?.id && (
+          {!userState?.loading && (
             <>
-              <UserDetails userData={user?.id === userState?.result?.id ? user : userState?.result} externalLoading={userState?.loading} userId={parseInt(userState?.result?.id)} />
+              <UserDetails userData={userState?.result || user} externalLoading={userState?.loading} userId={userState?.result?.id || user?.id?.toString()} />
               {!userState?.loading && (
-                <AddressList userId={userState?.result?.id} isModal />
+                <AddressList userId={userState?.result?.id?.toString() || user?.id?.toString()} isModal />
               )}
             </>
           )}
