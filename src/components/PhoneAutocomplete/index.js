@@ -1,5 +1,9 @@
 import React from 'react'
-import { PhoneAutocomplete as PhoneAutocompleteController, useLanguage, useSession } from 'ordering-components'
+import {
+  PhoneAutocomplete as PhoneAutocompleteController,
+  useLanguage,
+  useSession
+} from 'ordering-components'
 
 import { Modal } from '../Modal'
 import { SignUpForm } from '../SignUpForm'
@@ -9,7 +13,14 @@ import { Alert } from '../Confirm'
 import { UserDetails } from '../UserDetails'
 import { AddressList } from '../AddressList'
 
-import { PhoneContainer, ContentWrapper, Title, Slogan, AutoComplete, UserEdit } from './styles'
+import {
+  PhoneContainer,
+  ContentWrapper,
+  Title,
+  Slogan,
+  AutoComplete,
+  UserEdit
+} from './styles'
 
 const PhoneAutocompleteUI = (props) => {
   const {
@@ -86,9 +97,16 @@ const PhoneAutocompleteUI = (props) => {
         <UserEdit>
           {!userState?.loading && (
             <>
-              <UserDetails userData={userState?.result || user} externalLoading={userState?.loading} userId={userState?.result?.id || user?.id?.toString()} />
+              <UserDetails
+                userData={userState?.result || user}
+                externalLoading={userState?.loading}
+                userId={userState?.result?.id || user?.id?.toString()}
+              />
               {!userState?.loading && (
-                <AddressList userId={userState?.result?.id?.toString() || user?.id?.toString()} isModal />
+                <AddressList
+                  isModal
+                  userId={userState?.result?.id?.toString() || user?.id?.toString()}
+                />
               )}
             </>
           )}
