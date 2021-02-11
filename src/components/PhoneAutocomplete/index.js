@@ -21,7 +21,8 @@ const PhoneAutocompleteUI = (props) => {
     setOpenCustomer,
     openAddress,
     setOpenAddress,
-    userState
+    userState,
+    gettingPhones
   } = props
   const [, t] = useLanguage()
   const [{ user }] = useSession()
@@ -56,6 +57,7 @@ const PhoneAutocompleteUI = (props) => {
               onChange={() => {}}
               maxLength='10'
               autoComplete='off'
+              disabled={gettingPhones?.loading}
             />
           </AutoComplete>
           <Button
