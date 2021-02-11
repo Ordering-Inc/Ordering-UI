@@ -27,7 +27,7 @@ import {
 } from './styles'
 
 export const SidebarMenu = (props) => {
-  const { auth } = props
+  const { auth, isHideSignup } = props
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
@@ -224,37 +224,38 @@ export const SidebarMenu = (props) => {
                 </MenuLinkSeparator>
               </WrappContent>
             </MenuLink>
-
-            <MenuLink
-              isHome={isHome}
-              onClick={() => handleGoToPage({ page: 'signup' })}
-            >
-              <WrappContent>
-                <MenuLinkIcon
-                  isHome={isHome}
-                  active={
-                    window.location.pathname === '/signup'
-                  }
-                >
-                  <AiOutlineUserAdd />
-                </MenuLinkIcon>
-                <MenuLinkText>
-                  <TextInfo
+            {!isHideSignup && (
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: 'signup' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
                     isHome={isHome}
                     active={
                       window.location.pathname === '/signup'
                     }
                   >
-                    {t('SIGNUP', 'Sign up')}
-                  </TextInfo>
-                </MenuLinkText>
-                <MenuLinkSeparator>
-                  <div>
-                    <hr />
-                  </div>
-                </MenuLinkSeparator>
-              </WrappContent>
-            </MenuLink>
+                    <AiOutlineUserAdd />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/signup'
+                      }
+                    >
+                      {t('SIGNUP', 'Sign up')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
+            )}
           </>
         )}
       </SidebarContent>
