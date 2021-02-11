@@ -74,7 +74,9 @@ var Header = function Header(props) {
 
   var isHome = props.isHome,
       location = props.location,
-      closeCartPopover = props.closeCartPopover;
+      closeCartPopover = props.closeCartPopover,
+      isShowOrderOptions = props.isShowOrderOptions,
+      isHideSignup = props.isHideSignup;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -154,7 +156,8 @@ var Header = function Header(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.Header, {
     home: isHome
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
-    auth: auth
+    auth: auth,
+    isHideSignup: isHideSignup
   }), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       var _orderState$options, _orderState$options$a;
@@ -175,7 +178,7 @@ var Header = function Header(props) {
     height: "45px",
     src: isHome ? theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.isotypeInvert : theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$logos = _theme$images4.logos) === null || _theme$images4$logos === void 0 ? void 0 : _theme$images4$logos.isotype,
     loading: "lazy"
-  })), /*#__PURE__*/_react.default.createElement(_styles.Menu, {
+  })), isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header"
   }, !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: configTypes
@@ -206,7 +209,7 @@ var Header = function Header(props) {
       });
     },
     name: "signin"
-  }, t('SIGN_IN', 'Sign in')), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('SIGN_IN', 'Sign in')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signup'
@@ -224,7 +227,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  }), windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
+  }), isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
     carts: cartsWithProducts,
     onClick: function onClick() {
@@ -241,7 +244,7 @@ var Header = function Header(props) {
     onClick: function onClick(variant) {
       return openModal(variant);
     }
-  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), onlineStatus && (windowSize.width <= 820 && windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
+  }))), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), onlineStatus && isShowOrderOptions && (windowSize.width <= 820 && windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
     auth: auth,
     addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address,
     open: openPopover.addresses,
@@ -311,3 +314,6 @@ var Header = function Header(props) {
 };
 
 exports.Header = Header;
+Header.defaultProps = {
+  isShowOrderOptions: true
+};

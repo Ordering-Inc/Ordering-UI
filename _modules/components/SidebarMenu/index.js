@@ -54,7 +54,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SidebarMenu = function SidebarMenu(props) {
   var _options$address2, _options$address3;
 
-  var auth = props.auth;
+  var auth = props.auth,
+      isHideSignup = props.isHideSignup;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -173,7 +174,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineLogin.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
     active: window.location.pathname === '/signin' || window.location.pathname === '/login'
-  }, t('SIGNIN', 'Sign in'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('SIGNIN', 'Sign in'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({
