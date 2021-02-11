@@ -31,7 +31,13 @@ import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 
 export const Header = (props) => {
-  const { isHome, location, closeCartPopover } = props
+  const {
+    isHome,
+    location,
+    closeCartPopover,
+    isShowOrderOptions,
+    isHideSignup
+} = props
 
   const [events] = useEvent()
   const [, t] = useLanguage()
@@ -88,34 +94,36 @@ export const Header = (props) => {
     <HeaderContainer home={isHome}>
       <InnerHeader>
         <LeftHeader>
-          <SidebarMenu auth={auth} />
+          <SidebarMenu auth={auth} isHideSignup={isHideSignup} />
           <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location ? 'search' : 'home' })}>
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} loading='lazy' />
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
           </LogoHeader>
-          <Menu className='left-header'>
-            {!configState?.loading && configTypes.length > 0 && (
-              <OrderTypeSelectorHeader configTypes={configTypes} />
-            )}
-            {onlineStatus && windowSize.width > 820 && (
-              <>
-                <MomentPopover
-                  open={openPopover.moment}
-                  onClick={() => handleTogglePopover('moment')}
-                  onClose={() => handleClosePopover('moment')}
-                  isHome={isHome}
-                />
-                <AddressesPopover
-                  auth={auth}
-                  addressState={orderState?.options?.address}
-                  open={openPopover.addresses}
-                  onClick={() => handleTogglePopover('addresses')}
-                  onClose={() => handleClosePopover('addresses')}
-                  isHome={isHome}
-                />
-              </>
-            )}
-          </Menu>
+          {isShowOrderOptions && (
+            <Menu className='left-header'>
+              {!configState?.loading && configTypes.length > 0 && (
+                <OrderTypeSelectorHeader configTypes={configTypes} />
+              )}
+              {onlineStatus && windowSize.width > 820 && (
+                <>
+                  <MomentPopover
+                    open={openPopover.moment}
+                    onClick={() => handleTogglePopover('moment')}
+                    onClose={() => handleClosePopover('moment')}
+                    isHome={isHome}
+                    />
+                  <AddressesPopover
+                    auth={auth}
+                    addressState={orderState?.options?.address}
+                    open={openPopover.addresses}
+                    onClick={() => handleTogglePopover('addresses')}
+                    onClose={() => handleClosePopover('addresses')}
+                    isHome={isHome}
+                    />
+                </>
+              )}
+            </Menu>
+          )}
         </LeftHeader>
         {onlineStatus && (
           <RightHeader>
@@ -124,7 +132,9 @@ export const Header = (props) => {
                 !auth && windowSize.width > 870 && (
                   <>
                     <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', 'Sign in')}</MenuLink>
-                    <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', 'Sign up')}</MenuLink>
+                    {!isHideSignup && (
+                      <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', 'Sign up')}</MenuLink>
+                    )}
                   </>
                 )
               }
@@ -140,32 +150,33 @@ export const Header = (props) => {
                         onClose={() => handleClosePopover('user')}
                       />
                     )}
-                    {windowSize.width > 768 ? (
-                      <CartPopover
-                        open={openPopover.cart}
-                        carts={cartsWithProducts}
-                        onClick={() => handleTogglePopover('cart')}
-                        onClose={() => handleClosePopover('cart')}
-                        auth={auth}
-                        location={location}
-                      />
-                    ) : (
-                      <HeaderOption
-                        variant='cart'
-                        totalCarts={cartsWithProducts?.length}
-                        onClick={(variant) => openModal(variant)}
-                      />
+                    {isShowOrderOptions && (
+                      windowSize.width > 768 ? (
+                        <CartPopover
+                          open={openPopover.cart}
+                          carts={cartsWithProducts}
+                          onClick={() => handleTogglePopover('cart')}
+                          onClose={() => handleClosePopover('cart')}
+                          auth={auth}
+                          location={location}
+                        />
+                      ) : (
+                        <HeaderOption
+                          variant='cart'
+                          totalCarts={cartsWithProducts?.length}
+                          onClick={(variant) => openModal(variant)}
+                        />
+                      )
                     )}
                   </>
                 )
               }
               <LanguageSelector />
-
             </Menu>
           </RightHeader>
         )}
       </InnerHeader>
-      {onlineStatus && (
+      {onlineStatus && isShowOrderOptions && (
         windowSize.width <= 820 && windowSize.width > 768 ? (
           <SubMenu>
             <AddressesPopover
@@ -241,4 +252,8 @@ export const Header = (props) => {
       )}
     </HeaderContainer>
   )
+}
+
+Header.defaultProps = {
+  isShowOrderOptions: true
 }
