@@ -14,7 +14,6 @@ import { UserFormDetailsUI } from '../UserFormDetails'
 
 const UserDetailsUI = (props) => {
   const {
-    userData: externalUserData,
     isEdit,
     formState,
     cleanFormState,
@@ -26,7 +25,7 @@ const UserDetailsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const userData = formState.result?.result ? formState.result?.result : externalUserData
+  const userData = props.userData || formState.result?.result
 
   useEffect(() => {
     if (isUserDetailsEdit) {
@@ -76,7 +75,7 @@ const UserDetailsUI = (props) => {
             </UserData>
           ) : (
             <SideForm>
-              <UserFormDetailsUI {...props} externalUserData={userData} />
+              <UserFormDetailsUI {...props} />
             </SideForm>
           )}
         </Container>

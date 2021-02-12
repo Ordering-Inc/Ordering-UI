@@ -164,7 +164,7 @@ export const RedirectLink = styled.div`
 
 export const SocialButtons = styled.div`
    width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
-   margin-top: 5px;
+   margin-top: 10px;
 
   button {
     display: flex;

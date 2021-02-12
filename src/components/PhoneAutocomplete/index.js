@@ -41,7 +41,7 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const saveCustomerUser = (user) => {
-    setCustomersPhones({ ...customersPhones, phones: [...customersPhones.phones, user] })
+    setCustomersPhones({ ...customersPhones, users: [...customersPhones.users, user] })
     setCustomerState({ ...customerState, result: user })
     setOpenModal({ customer: true, signup: false })
   }
@@ -89,7 +89,6 @@ const PhoneAutocompleteUI = (props) => {
         <SignUpForm
           externalPhoneNumber={phone}
           saveCustomerUser={saveCustomerUser}
-          setCustomersPhones={setCustomersPhones}
         />
       </Modal>
       <Modal
@@ -107,6 +106,7 @@ const PhoneAutocompleteUI = (props) => {
               <AddressList
                 isModal
                 userId={customerState?.result?.id?.toString()}
+                changeOrderAddressWithDefault
               />
             </>
           )}
