@@ -43,7 +43,7 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const saveCustomerUser = (user) => {
-    setCustomersPhones({ ...customersPhones, phones: [...customersPhones.phones, { name: user.name, phone: user.phone || user.cellphone }] })
+    setCustomersPhones({ ...customersPhones, phones: [...customersPhones.phones, user] })
     setCustomerState({ ...customerState, result: user })
     setOpenModal({ customer: true, signup: false })
   }
@@ -100,7 +100,7 @@ const PhoneAutocompleteUI = (props) => {
         onClose={() => setOpenModal({ openModal, customer: false })}
       >
         <UserEdit>
-          {!customerState?.loading && customerState?.result?.id && (
+          {!customerState?.loading && (
             <>
               <UserDetails
                 userData={customerState?.result || user}
