@@ -44,7 +44,7 @@ const PhoneAutocompleteUI = (props) => {
 
   const saveCustomerUser = (user) => {
     setCustomersPhones({ ...customersPhones, phones: [...customersPhones.phones, { name: user.name, phone: user.phone || user.cellphone }] })
-    setCustomerState({ ...customersPhones, result: user })
+    setCustomerState({ ...customerState, result: user })
     setOpenModal({ ...openModal, customer: true })
   }
 
