@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   PhoneAutocomplete as PhoneAutocompleteController,
   useLanguage,
@@ -24,31 +24,36 @@ import {
 
 const PhoneAutocompleteUI = (props) => {
   const {
-    onChangeNumber,
     phone,
-    errorMinLength,
-    setErrorMinLength,
-    openCustomer,
-    setOpenCustomer,
-    openAddress,
-    setOpenAddress,
-    userState,
-    gettingPhones
+    customerState,
+    customersPhones,
+    setCustomersPhones,
+    openModal,
+    setOpenModal,
+    onChangeNumber
   } = props
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleCloseAlert = () => {
-    setErrorMinLength({ error: false, dispatch: false })
+    setCustomersPhones({ ...customersPhones, error: null })
+    setAlertState({ open: false, content: [] })
   }
 
   const handleCloseCustomer = () => {
-    setOpenCustomer(false)
+    setOpenModal({ ...openModal, customer: false })
   }
 
   const handleCloseAddress = () => {
-    setOpenAddress(false)
+    setOpenModal({ ...openModal, address: false })
   }
+
+  useEffect(() => {
+    if (customersPhones.error) {
+      setAlertState({ open: true, content: [customersPhones.error] })
+    }
+  }, [customersPhones.error])
 
   return (
     <>
@@ -68,7 +73,7 @@ const PhoneAutocompleteUI = (props) => {
               onChange={() => {}}
               maxLength='10'
               autoComplete='off'
-              disabled={gettingPhones?.loading}
+              disabled={customersPhones?.loading}
             />
           </AutoComplete>
           <Button
@@ -80,42 +85,41 @@ const PhoneAutocompleteUI = (props) => {
         </ContentWrapper>
       </PhoneContainer>
       <Modal
-        open={openCustomer}
+        open={openModal.customer}
         width='80%'
         onClose={handleCloseCustomer}
       >
         <SignUpForm
           externalPhoneNumber={phone}
           externalCloseModal={handleCloseCustomer}
+          setCustomersPhones={setCustomersPhones}
         />
       </Modal>
       <Modal
-        open={openAddress}
+        open={openModal.address}
         width='60%'
         onClose={handleCloseAddress}
       >
         <UserEdit>
-          {!userState?.loading && (
+          {!customerState?.loading && (
             <>
               <UserDetails
-                userData={userState?.result || user}
-                externalLoading={userState?.loading}
-                userId={userState?.result?.id || user?.id?.toString()}
+                userData={customerState?.result || user}
+                externalLoading={customerState?.loading}
+                userId={customerState?.result?.id || user?.id?.toString()}
               />
-              {!userState?.loading && (
-                <AddressList
-                  isModal
-                  userId={userState?.result?.id?.toString() || user?.id?.toString()}
-                />
-              )}
+              <AddressList
+                isModal
+                userId={customerState?.result?.id?.toString() || user?.id?.toString()}
+              />
             </>
           )}
         </UserEdit>
       </Modal>
       <Alert
         title={t('ERROR', 'Error')}
-        open={errorMinLength.dispatch}
-        content='The Phone / Mobile must be 10 characters'
+        open={alertState.open}
+        content={{}}
         onClose={handleCloseAlert}
         onAccept={handleCloseAlert}
       />

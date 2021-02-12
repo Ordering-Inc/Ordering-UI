@@ -21,8 +21,7 @@ const UserDetailsUI = (props) => {
     cartStatus,
     toggleIsEdit,
     validationFields,
-    isUserDetailsEdit,
-    externalLoading
+    isUserDetailsEdit
   } = props
 
   const [, t] = useLanguage()
@@ -42,7 +41,7 @@ const UserDetailsUI = (props) => {
 
   return (
     <>
-      {(validationFields.loading || formState.loading || externalLoading) && (
+      {(validationFields.loading || formState.loading) && (
         <UserData>
           <Skeleton width={250} height={25} />
           <Skeleton width={180} height={25} />
@@ -50,7 +49,7 @@ const UserDetailsUI = (props) => {
         </UserData>
       )}
 
-      {!(validationFields.loading || formState.loading || externalLoading) && (
+      {!(validationFields.loading || formState.loading) && (
         <Container>
           <Header className='user-form'>
             <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
