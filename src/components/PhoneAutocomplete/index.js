@@ -41,8 +41,10 @@ const PhoneAutocompleteUI = (props) => {
     setAlertState({ open: false, content: [] })
   }
 
-  const handleCloseCustomer = () => {
-    setOpenModal({ ...openModal, customer: false })
+  const handleCloseCustomer = (user) => {
+    if (user) {
+      setCustomersPhones({ ...customersPhones, phones: [...customersPhones, { name: user.name, phone: user.phone || user.cellphone }] })
+    }
   }
 
   const handleCloseAddress = () => {
@@ -119,7 +121,7 @@ const PhoneAutocompleteUI = (props) => {
       <Alert
         title={t('ERROR', 'Error')}
         open={alertState.open}
-        content={{}}
+        content={alertState.content}
         onClose={handleCloseAlert}
         onAccept={handleCloseAlert}
       />

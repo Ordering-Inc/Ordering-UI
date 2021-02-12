@@ -70,7 +70,7 @@ const SignUpFormUI = (props) => {
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
     } else if (!formState.loading && !formState.result?.error && formState.result?.result) {
-      externalCloseModal && externalCloseModal()
+      externalCloseModal && externalCloseModal(formState.result?.result)
     }
   }, [formState])
 
