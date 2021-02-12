@@ -30,7 +30,8 @@ const PhoneAutocompleteUI = (props) => {
     setCustomersPhones,
     openModal,
     setOpenModal,
-    onChangeNumber
+    onChangeNumber,
+    setCustomerState
   } = props
   const [, t] = useLanguage()
   const [{ user }] = useSession()
@@ -41,14 +42,10 @@ const PhoneAutocompleteUI = (props) => {
     setAlertState({ open: false, content: [] })
   }
 
-  const handleCloseCustomer = (user) => {
-    if (user) {
-      setCustomersPhones({ ...customersPhones, phones: [...customersPhones, { name: user.name, phone: user.phone || user.cellphone }] })
-    }
-  }
-
-  const handleCloseAddress = () => {
-    setOpenModal({ ...openModal, address: false })
+  const saveCustomerUser = (user) => {
+    setCustomersPhones({ ...customersPhones, phones: [...customersPhones, { name: user.name, phone: user.phone || user.cellphone }] })
+    setCustomerState({ ...customersPhones, result: user })
+    setOpenModal({ ...openModal, customer: true })
   }
 
   useEffect(() => {
@@ -89,25 +86,24 @@ const PhoneAutocompleteUI = (props) => {
       <Modal
         open={openModal.customer}
         width='80%'
-        onClose={handleCloseCustomer}
+        onClose={() => setOpenModal({ openModal, customer: false })}
       >
         <SignUpForm
           externalPhoneNumber={phone}
-          externalCloseModal={handleCloseCustomer}
+          saveCustomerUser={saveCustomerUser}
           setCustomersPhones={setCustomersPhones}
         />
       </Modal>
       <Modal
         open={openModal.address}
         width='60%'
-        onClose={handleCloseAddress}
+        onClose={() => setOpenModal({ openModal, address: false })}
       >
         <UserEdit>
-          {!customerState?.loading && (
+          {!customerState?.loading && customerState?.result?.id && (
             <>
               <UserDetails
                 userData={customerState?.result || user}
-                externalLoading={customerState?.loading}
                 userId={customerState?.result?.id || user?.id?.toString()}
               />
               <AddressList

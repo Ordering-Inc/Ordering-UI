@@ -31,6 +31,14 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -50,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _customerState$result, _user$id, _customerState$result2, _customerState$result3, _user$id2;
+  var _customerState$result, _customerState$result2, _user$id, _customerState$result3, _customerState$result4, _user$id2;
 
   var phone = props.phone,
       customerState = props.customerState,
@@ -58,7 +66,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       setCustomersPhones = props.setCustomersPhones,
       openModal = props.openModal,
       setOpenModal = props.setOpenModal,
-      onChangeNumber = props.onChangeNumber;
+      onChangeNumber = props.onChangeNumber,
+      setCustomerState = props.setCustomerState;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -86,15 +95,18 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     });
   };
 
-  var handleCloseCustomer = function handleCloseCustomer() {
-    setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
-      customer: false
+  var saveCustomerUser = function saveCustomerUser(user) {
+    setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
+      phones: [].concat(_toConsumableArray(customersPhones), [{
+        name: user.name,
+        phone: user.phone || user.cellphone
+      }])
     }));
-  };
-
-  var handleCloseAddress = function handleCloseAddress() {
+    setCustomerState(_objectSpread(_objectSpread({}, customersPhones), {}, {
+      result: user
+    }));
     setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
-      address: false
+      customer: true
     }));
   };
 
@@ -126,26 +138,35 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }, t('FIND', 'Find')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.customer,
     width: "80%",
-    onClose: handleCloseCustomer
+    onClose: function onClose() {
+      return setOpenModal({
+        openModal: openModal,
+        customer: false
+      });
+    }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
     externalPhoneNumber: phone,
-    externalCloseModal: handleCloseCustomer,
+    saveCustomerUser: saveCustomerUser,
     setCustomersPhones: setCustomersPhones
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.address,
     width: "60%",
-    onClose: handleCloseAddress
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+    onClose: function onClose() {
+      return setOpenModal({
+        openModal: openModal,
+        address: false
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && (customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     userData: (customerState === null || customerState === void 0 ? void 0 : customerState.result) || user,
-    externalLoading: customerState === null || customerState === void 0 ? void 0 : customerState.loading,
-    userId: (customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id) || (user === null || user === void 0 ? void 0 : (_user$id = user.id) === null || _user$id === void 0 ? void 0 : _user$id.toString())
+    userId: (customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id) || (user === null || user === void 0 ? void 0 : (_user$id = user.id) === null || _user$id === void 0 ? void 0 : _user$id.toString())
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
-    userId: (customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : (_customerState$result3 = _customerState$result2.id) === null || _customerState$result3 === void 0 ? void 0 : _customerState$result3.toString()) || (user === null || user === void 0 ? void 0 : (_user$id2 = user.id) === null || _user$id2 === void 0 ? void 0 : _user$id2.toString())
+    userId: (customerState === null || customerState === void 0 ? void 0 : (_customerState$result3 = customerState.result) === null || _customerState$result3 === void 0 ? void 0 : (_customerState$result4 = _customerState$result3.id) === null || _customerState$result4 === void 0 ? void 0 : _customerState$result4.toString()) || (user === null || user === void 0 ? void 0 : (_user$id2 = user.id) === null || _user$id2 === void 0 ? void 0 : _user$id2.toString())
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,
-    content: {},
+    content: alertState.content,
     onClose: handleCloseAlert,
     onAccept: handleCloseAlert
   }));
