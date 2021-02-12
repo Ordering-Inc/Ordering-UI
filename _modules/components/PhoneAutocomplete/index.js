@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _customerState$result, _customerState$result2, _user$id, _customerState$result3, _customerState$result4, _user$id2;
+  var _customerState$result, _user$id, _customerState$result2, _customerState$result3, _user$id2;
 
   var phone = props.phone,
       customerState = props.customerState,
@@ -97,10 +97,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
 
   var saveCustomerUser = function saveCustomerUser(user) {
     setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
-      phones: [].concat(_toConsumableArray(customersPhones.phones), [{
-        name: user.name,
-        phone: user.phone || user.cellphone
-      }])
+      phones: [].concat(_toConsumableArray(customersPhones.phones), [user])
     }));
     setCustomerState(_objectSpread(_objectSpread({}, customerState), {}, {
       result: user
@@ -158,12 +155,12 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
         customer: false
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && (customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     userData: (customerState === null || customerState === void 0 ? void 0 : customerState.result) || user,
-    userId: (customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id) || (user === null || user === void 0 ? void 0 : (_user$id = user.id) === null || _user$id === void 0 ? void 0 : _user$id.toString())
+    userId: (customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id) || (user === null || user === void 0 ? void 0 : (_user$id = user.id) === null || _user$id === void 0 ? void 0 : _user$id.toString())
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
-    userId: (customerState === null || customerState === void 0 ? void 0 : (_customerState$result3 = customerState.result) === null || _customerState$result3 === void 0 ? void 0 : (_customerState$result4 = _customerState$result3.id) === null || _customerState$result4 === void 0 ? void 0 : _customerState$result4.toString()) || (user === null || user === void 0 ? void 0 : (_user$id2 = user.id) === null || _user$id2 === void 0 ? void 0 : _user$id2.toString())
+    userId: (customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : (_customerState$result3 = _customerState$result2.id) === null || _customerState$result3 === void 0 ? void 0 : _customerState$result3.toString()) || (user === null || user === void 0 ? void 0 : (_user$id2 = user.id) === null || _user$id2 === void 0 ? void 0 : _user$id2.toString())
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,
