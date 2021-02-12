@@ -106,8 +106,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       result: user
     }));
     setOpenModal({
-      address: true,
-      customer: false
+      customer: true,
+      signup: false
     });
   };
 
@@ -137,12 +137,12 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     color: "primary",
     name: ""
   }, t('FIND', 'Find')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openModal.customer,
+    open: openModal.signup,
     width: "80%",
     onClose: function onClose() {
       return setOpenModal({
         openModal: openModal,
-        customer: false
+        signup: false
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
@@ -150,12 +150,12 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     saveCustomerUser: saveCustomerUser,
     setCustomersPhones: setCustomersPhones
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openModal.address,
+    open: openModal.customer,
     width: "60%",
     onClose: function onClose() {
       return setOpenModal({
         openModal: openModal,
-        address: false
+        customer: false
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && (customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
