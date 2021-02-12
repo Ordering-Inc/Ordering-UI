@@ -45,7 +45,7 @@ const PhoneAutocompleteUI = (props) => {
   const saveCustomerUser = (user) => {
     setCustomersPhones({ ...customersPhones, phones: [...customersPhones.phones, { name: user.name, phone: user.phone || user.cellphone }] })
     setCustomerState({ ...customerState, result: user })
-    setOpenModal({ address: true, customer: false })
+    setOpenModal({ customer: true, signup: false })
   }
 
   useEffect(() => {
@@ -84,9 +84,9 @@ const PhoneAutocompleteUI = (props) => {
         </ContentWrapper>
       </PhoneContainer>
       <Modal
-        open={openModal.customer}
+        open={openModal.signup}
         width='80%'
-        onClose={() => setOpenModal({ openModal, customer: false })}
+        onClose={() => setOpenModal({ openModal, signup: false })}
       >
         <SignUpForm
           externalPhoneNumber={phone}
@@ -95,9 +95,9 @@ const PhoneAutocompleteUI = (props) => {
         />
       </Modal>
       <Modal
-        open={openModal.address}
+        open={openModal.customer}
         width='60%'
-        onClose={() => setOpenModal({ openModal, address: false })}
+        onClose={() => setOpenModal({ openModal, customer: false })}
       >
         <UserEdit>
           {!customerState?.loading && customerState?.result?.id && (
