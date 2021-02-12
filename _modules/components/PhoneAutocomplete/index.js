@@ -102,7 +102,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
         phone: user.phone || user.cellphone
       }])
     }));
-    setCustomerState(_objectSpread(_objectSpread({}, customersPhones), {}, {
+    setCustomerState(_objectSpread(_objectSpread({}, customerState), {}, {
       result: user
     }));
     setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
