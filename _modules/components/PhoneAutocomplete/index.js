@@ -97,7 +97,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
 
   var saveCustomerUser = function saveCustomerUser(user) {
     setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
-      phones: [].concat(_toConsumableArray(customersPhones), [{
+      phones: [].concat(_toConsumableArray(customersPhones.phones), [{
         name: user.name,
         phone: user.phone || user.cellphone
       }])
