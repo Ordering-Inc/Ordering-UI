@@ -1,8 +1,7 @@
 import React from 'react'
 import {
   PhoneAutocomplete as PhoneAutocompleteController,
-  useLanguage,
-  useSession
+  useLanguage
 } from 'ordering-components'
 
 import { Modal } from '../Modal'
@@ -36,7 +35,6 @@ const PhoneAutocompleteUI = (props) => {
     gettingPhones
   } = props
   const [, t] = useLanguage()
-  const [{ user }] = useSession()
 
   const handleCloseAlert = () => {
     setErrorMinLength({ error: false, dispatch: false })
@@ -98,14 +96,15 @@ const PhoneAutocompleteUI = (props) => {
           {!userState?.loading && (
             <>
               <UserDetails
-                userData={userState?.result || user}
-                externalLoading={userState?.loading}
-                userId={userState?.result?.id || user?.id?.toString()}
+                userData={userState?.result}
+                isLoading={userState?.loading}
+                userId={userState?.result?.id}
               />
               {!userState?.loading && (
                 <AddressList
                   isModal
-                  userId={userState?.result?.id?.toString() || user?.id?.toString()}
+                  userId={userState?.result?.id}
+                  changeOrderAddressWithDefault
                 />
               )}
             </>
