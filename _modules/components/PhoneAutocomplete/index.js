@@ -105,9 +105,10 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     setCustomerState(_objectSpread(_objectSpread({}, customerState), {}, {
       result: user
     }));
-    setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
-      customer: true
-    }));
+    setOpenModal({
+      address: true,
+      customer: false
+    });
   };
 
   (0, _react.useEffect)(function () {
