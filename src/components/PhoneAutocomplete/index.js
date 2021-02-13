@@ -20,6 +20,7 @@ import {
   AutoComplete,
   UserEdit
 } from './styles'
+import { SpinnerLoader } from '../SpinnerLoader'
 
 const PhoneAutocompleteUI = (props) => {
   const {
@@ -72,6 +73,18 @@ const PhoneAutocompleteUI = (props) => {
               autoComplete='off'
               disabled={customersPhones?.loading}
             />
+            {customersPhones?.loading && (
+              <SpinnerLoader
+                style={{
+                  top: 0,
+                  position: 'absolute',
+                  height: 'auto',
+                  left: '100%',
+                  width: '0px',
+                  transform: 'translate(-10px, 10%)'
+                }}
+              />
+            )}
           </AutoComplete>
           <Button
             color='primary'
