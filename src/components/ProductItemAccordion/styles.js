@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import BsChevronDown from '@meronex/icons/bs/BsChevronDown'
 
 export const AccordionSection = styled.div`
   display: flex;

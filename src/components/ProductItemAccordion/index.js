@@ -4,7 +4,6 @@ import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import BsChevronDown from '@meronex/icons/bs/BsChevronDown'
 
 import {
   AccordionSection,
@@ -108,7 +107,6 @@ export const ProductItemAccordion = (props) => {
               ref={productSelect}
               value={product.quantity}
               onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-              bgimage={BsChevronDown}
             >
               {[...Array(getProductMax(product) + 1)].map((v, i) => (
                 <option
