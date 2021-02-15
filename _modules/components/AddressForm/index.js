@@ -97,7 +97,8 @@ var AddressFormUI = function AddressFormUI(props) {
       onCancel = props.onCancel,
       handleChangeInput = props.handleChangeInput,
       saveAddress = props.saveAddress,
-      setIsEdit = props.setIsEdit;
+      setIsEdit = props.setIsEdit,
+      userCustomerSetup = props.userCustomerSetup;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -265,7 +266,7 @@ var AddressFormUI = function AddressFormUI(props) {
         })) !== null && _arrayList$map$some !== void 0 ? _arrayList$map$some : false;
 
         if (!isAddressAlreadyExist) {
-          saveAddress(data.address);
+          saveAddress(data.address, userCustomerSetup);
           return;
         }
 
@@ -352,7 +353,7 @@ var AddressFormUI = function AddressFormUI(props) {
                 break;
               }
 
-              saveAddress();
+              saveAddress({}, userCustomerSetup);
               return _context.abrupt("return");
 
             case 17:

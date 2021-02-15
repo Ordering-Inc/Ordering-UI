@@ -74,7 +74,8 @@ var AddressListUI = function AddressListUI(props) {
       isProductForm = props.isProductForm,
       onCancel = props.onCancel,
       onAccept = props.onAccept,
-      userId = props.userId;
+      userId = props.userId,
+      userCustomerSetup = props.userCustomerSetup;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -145,7 +146,7 @@ var AddressListUI = function AddressListUI(props) {
 
     if (address.id === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id)) return;
     setAddressOpen(false);
-    handleSetDefault(address);
+    handleSetDefault(address, userCustomerSetup);
   };
 
   var handleDeleteClick = function handleDeleteClick(address) {
@@ -219,7 +220,8 @@ var AddressListUI = function AddressListUI(props) {
     onCancel: function onCancel() {
       return setAddressOpen(false);
     },
-    onSaveAddress: handleSaveAddress
+    onSaveAddress: handleSaveAddress,
+    userCustomerSetup: userCustomerSetup
   }), !isPopover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS', 'Address'),
     open: !isPopover && addressOpen,

@@ -207,7 +207,12 @@ var LogoutActionUI = function LogoutActionUI(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 2),
+      deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+
   var handleClick = function handleClick() {
+    deleteUserCustomer(true);
     props.handleLogoutClick();
     props.onClose && props.onClose();
   };

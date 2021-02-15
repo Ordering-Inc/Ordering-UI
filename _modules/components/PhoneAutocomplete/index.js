@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PhoneAutocomplete = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -25,7 +27,19 @@ var _AddressList = require("../AddressList");
 
 var _styles = require("./styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _SpinnerLoader = require("../SpinnerLoader");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -46,42 +60,60 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _userState$result, _user$id, _userState$result2, _userState$result2$id, _user$id2;
+  var _customerState$result, _customerState$result2, _customerState$result3;
 
-  var onChangeNumber = props.onChangeNumber,
-      phone = props.phone,
-      errorMinLength = props.errorMinLength,
-      setErrorMinLength = props.setErrorMinLength,
-      openCustomer = props.openCustomer,
-      setOpenCustomer = props.setOpenCustomer,
-      openAddress = props.openAddress,
-      setOpenAddress = props.setOpenAddress,
-      userState = props.userState,
-      gettingPhones = props.gettingPhones;
+  var phone = props.phone,
+      customerState = props.customerState,
+      customersPhones = props.customersPhones,
+      setCustomersPhones = props.setCustomersPhones,
+      openModal = props.openModal,
+      setOpenModal = props.setOpenModal,
+      onChangeNumber = props.onChangeNumber,
+      setCustomerState = props.setCustomerState;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
   var handleCloseAlert = function handleCloseAlert() {
-    setErrorMinLength({
-      error: false,
-      dispatch: false
+    setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
+      error: null
+    }));
+    setAlertState({
+      open: false,
+      content: []
     });
   };
 
-  var handleCloseCustomer = function handleCloseCustomer() {
-    setOpenCustomer(false);
+  var saveCustomerUser = function saveCustomerUser(user) {
+    setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
+      users: [].concat(_toConsumableArray(customersPhones.users), [user])
+    }));
+    setCustomerState(_objectSpread(_objectSpread({}, customerState), {}, {
+      result: user
+    }));
+    setOpenModal({
+      customer: true,
+      signup: false
+    });
   };
 
-  var handleCloseAddress = function handleCloseAddress() {
-    setOpenAddress(false);
-  };
-
+  (0, _react.useEffect)(function () {
+    if (customersPhones.error) {
+      setAlertState({
+        open: true,
+        content: [customersPhones.error]
+      });
+    }
+  }, [customersPhones.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.AutoComplete, {
     className: "autocomplete"
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -95,32 +127,52 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onChange: function onChange() {},
     maxLength: "10",
     autoComplete: "off",
-    disabled: gettingPhones === null || gettingPhones === void 0 ? void 0 : gettingPhones.loading
+    disabled: customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading
+  }), (customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+    style: {
+      top: 0,
+      position: 'absolute',
+      height: 'auto',
+      left: '100%',
+      width: '0px',
+      transform: 'translate(-10px, 10%)'
+    }
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     name: ""
   }, t('FIND', 'Find')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openCustomer,
+    open: openModal.signup,
     width: "80%",
-    onClose: handleCloseCustomer
+    onClose: function onClose() {
+      return setOpenModal({
+        openModal: openModal,
+        signup: false
+      });
+    }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
     externalPhoneNumber: phone,
-    externalCloseModal: handleCloseCustomer
+    saveCustomerUser: saveCustomerUser
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openAddress,
+    open: openModal.customer,
     width: "60%",
-    onClose: handleCloseAddress
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(userState !== null && userState !== void 0 && userState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
-    userData: (userState === null || userState === void 0 ? void 0 : userState.result) || user,
-    externalLoading: userState === null || userState === void 0 ? void 0 : userState.loading,
-    userId: (userState === null || userState === void 0 ? void 0 : (_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : _userState$result.id) || (user === null || user === void 0 ? void 0 : (_user$id = user.id) === null || _user$id === void 0 ? void 0 : _user$id.toString())
-  }), !(userState !== null && userState !== void 0 && userState.loading) && /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    onClose: function onClose() {
+      return setOpenModal({
+        openModal: openModal,
+        customer: false
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+    userData: customerState === null || customerState === void 0 ? void 0 : customerState.result,
+    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id
+  }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
-    userId: (userState === null || userState === void 0 ? void 0 : (_userState$result2 = userState.result) === null || _userState$result2 === void 0 ? void 0 : (_userState$result2$id = _userState$result2.id) === null || _userState$result2$id === void 0 ? void 0 : _userState$result2$id.toString()) || (user === null || user === void 0 ? void 0 : (_user$id2 = user.id) === null || _user$id2 === void 0 ? void 0 : _user$id2.toString())
+    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
+    changeOrderAddressWithDefault: true,
+    userCustomerSetup: customerState === null || customerState === void 0 ? void 0 : (_customerState$result3 = customerState.result) === null || _customerState$result3 === void 0 ? void 0 : _customerState$result3.id
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
-    open: errorMinLength.dispatch,
-    content: "The Phone / Mobile must be 10 characters",
+    open: alertState.open,
+    content: alertState.content,
     onClose: handleCloseAlert,
     onAccept: handleCloseAlert
   }));

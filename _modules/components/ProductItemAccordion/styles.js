@@ -88,7 +88,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = _taggedTemplateLiteral(["\n  max-width: 55px;\n  height: 50px;\n  border: 0;\n  background-color: transparent;\n  font-size: 17px;\n  outline: none;\n  margin-right: 5px;\n  cursor: pointer;\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  max-width: 55px;\n  height: 50px;\n  border: none;\n  background-color: transparent;\n  font-size: 17px;\n  outline: none;\n  margin-right: 5px;\n  cursor: pointer;\n  -moz-appearance: none;\n  -webkit-appearance: none;\n  -ms-progress-appearance: none;\n\n  background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');\n  background-repeat: no-repeat, repeat;\n  background-position: right .7em top 50%, 0 0;\n  background-size: .65em auto, 100%;\n\n  ", "\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
