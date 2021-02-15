@@ -40,7 +40,8 @@ const AddressListUI = (props) => {
     isProductForm,
     onCancel,
     onAccept,
-    userId
+    userId,
+    userCustomerSetup
   } = props
 
   const [, t] = useLanguage()
@@ -91,7 +92,7 @@ const AddressListUI = (props) => {
   const handleSetAddress = (address) => {
     if (address.id === orderState?.options?.address_id) return
     setAddressOpen(false)
-    handleSetDefault(address)
+    handleSetDefault(address, userCustomerSetup)
   }
 
   const handleDeleteClick = (address) => {
@@ -158,6 +159,7 @@ const AddressListUI = (props) => {
             address={curAddress}
             onCancel={() => setAddressOpen(false)}
             onSaveAddress={handleSaveAddress}
+            userCustomerSetup={userCustomerSetup}
           />
         )
       }

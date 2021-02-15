@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   PhoneAutocomplete as PhoneAutocompleteController,
-  useLanguage,
-  useSession
+  useLanguage
 } from 'ordering-components'
 
 import { Modal } from '../Modal'
@@ -21,34 +20,38 @@ import {
   AutoComplete,
   UserEdit
 } from './styles'
+import { SpinnerLoader } from '../SpinnerLoader'
 
 const PhoneAutocompleteUI = (props) => {
   const {
-    onChangeNumber,
     phone,
-    errorMinLength,
-    setErrorMinLength,
-    openCustomer,
-    setOpenCustomer,
-    openAddress,
-    setOpenAddress,
-    userState,
-    gettingPhones
+    customerState,
+    customersPhones,
+    setCustomersPhones,
+    openModal,
+    setOpenModal,
+    onChangeNumber,
+    setCustomerState
   } = props
   const [, t] = useLanguage()
-  const [{ user }] = useSession()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleCloseAlert = () => {
-    setErrorMinLength({ error: false, dispatch: false })
+    setCustomersPhones({ ...customersPhones, error: null })
+    setAlertState({ open: false, content: [] })
   }
 
-  const handleCloseCustomer = () => {
-    setOpenCustomer(false)
+  const saveCustomerUser = (user) => {
+    setCustomersPhones({ ...customersPhones, users: [...customersPhones.users, user] })
+    setCustomerState({ ...customerState, result: user })
+    setOpenModal({ customer: true, signup: false })
   }
 
-  const handleCloseAddress = () => {
-    setOpenAddress(false)
-  }
+  useEffect(() => {
+    if (customersPhones.error) {
+      setAlertState({ open: true, content: [customersPhones.error] })
+    }
+  }, [customersPhones.error])
 
   return (
     <>
@@ -68,8 +71,20 @@ const PhoneAutocompleteUI = (props) => {
               onChange={() => {}}
               maxLength='10'
               autoComplete='off'
-              disabled={gettingPhones?.loading}
+              disabled={customersPhones?.loading}
             />
+            {customersPhones?.loading && (
+              <SpinnerLoader
+                style={{
+                  top: 0,
+                  position: 'absolute',
+                  height: 'auto',
+                  left: '100%',
+                  width: '0px',
+                  transform: 'translate(-10px, 10%)'
+                }}
+              />
+            )}
           </AutoComplete>
           <Button
             color='primary'
@@ -80,42 +95,41 @@ const PhoneAutocompleteUI = (props) => {
         </ContentWrapper>
       </PhoneContainer>
       <Modal
-        open={openCustomer}
+        open={openModal.signup}
         width='80%'
-        onClose={handleCloseCustomer}
+        onClose={() => setOpenModal({ openModal, signup: false })}
       >
         <SignUpForm
           externalPhoneNumber={phone}
-          externalCloseModal={handleCloseCustomer}
+          saveCustomerUser={saveCustomerUser}
         />
       </Modal>
       <Modal
-        open={openAddress}
+        open={openModal.customer}
         width='60%'
-        onClose={handleCloseAddress}
+        onClose={() => setOpenModal({ openModal, customer: false })}
       >
         <UserEdit>
-          {!userState?.loading && (
+          {!customerState?.loading && (
             <>
               <UserDetails
-                userData={userState?.result || user}
-                externalLoading={userState?.loading}
-                userId={userState?.result?.id || user?.id?.toString()}
+                userData={customerState?.result}
+                userId={customerState?.result?.id}
               />
-              {!userState?.loading && (
-                <AddressList
-                  isModal
-                  userId={userState?.result?.id?.toString() || user?.id?.toString()}
-                />
-              )}
+              <AddressList
+                isModal
+                userId={customerState?.result?.id}
+                changeOrderAddressWithDefault
+                userCustomerSetup={customerState?.result?.id}
+              />
             </>
           )}
         </UserEdit>
       </Modal>
       <Alert
         title={t('ERROR', 'Error')}
-        open={errorMinLength.dispatch}
-        content='The Phone / Mobile must be 10 characters'
+        open={alertState.open}
+        content={alertState.content}
         onClose={handleCloseAlert}
         onAccept={handleCloseAlert}
       />

@@ -4,6 +4,14 @@ export const PhoneContainer = styled.div`
   width: 100%;
   height: calc(100vh - 97px);
 
+  .spinner-content{
+    > div{
+      width: 40px;
+      height: 40px;
+      border-width: 5px;
+    }
+  }
+
  .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;

@@ -28,7 +28,7 @@ export const UserFormDetailsUI = (props) => {
     handleChangeInput,
     handleButtonUpdateClick,
     isCheckout,
-    externalUserData
+    userData
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -40,7 +40,7 @@ export const UserFormDetailsUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const user = externalUserData || userSession
+  const user = userData || userSession
 
   const closeAlert = () => {
     setAlertState({
@@ -252,7 +252,7 @@ export const UserFormDetailsUI = (props) => {
                 })}
               />
             )}
-            {!!showInputPhoneNumber && !externalUserData && (
+            {!!showInputPhoneNumber && !userData && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}
@@ -262,9 +262,9 @@ export const UserFormDetailsUI = (props) => {
               />
             )}
 
-            {externalUserData && (
+            {userData && (
               <Input
-                value={externalUserData?.phone || externalUserData?.cellphone}
+                value={userData?.phone || userData?.cellphone}
                 className='form'
                 name='cellphone'
               />

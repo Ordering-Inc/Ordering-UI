@@ -312,12 +312,20 @@ export const ProductPrice = styled.div`
 export const ProductSelect = styled.select`
   max-width: 55px;
   height: 50px;
-  border: 0;
+  border: none;
   background-color: transparent;
   font-size: 17px;
   outline: none;
   margin-right: 5px;
   cursor: pointer;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-progress-appearance: none;
+
+  background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
+  background-repeat: no-repeat, repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
 
   ${props => props.theme?.rtl && css`
     margin-left: 5px;

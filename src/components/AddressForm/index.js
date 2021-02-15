@@ -47,7 +47,8 @@ const AddressFormUI = (props) => {
     onCancel,
     handleChangeInput,
     saveAddress,
-    setIsEdit
+    setIsEdit,
+    userCustomerSetup
   } = props
 
   const [configState] = useConfig()
@@ -144,7 +145,7 @@ const AddressFormUI = (props) => {
 
         const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
         if (!isAddressAlreadyExist) {
-          saveAddress(data.address)
+          saveAddress(data.address, userCustomerSetup)
           return
         }
 
@@ -199,7 +200,7 @@ const AddressFormUI = (props) => {
     const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
 
     if (!isAddressAlreadyExist) {
-      saveAddress()
+      saveAddress({}, userCustomerSetup)
       return
     }
 
