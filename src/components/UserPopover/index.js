@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent } from 'ordering-components'
+import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow, PopoverList, PopoverListItem, PopoverListLink } from './styles'
 import { DropDownCircleImage } from '../Dropdown/style'
@@ -134,8 +134,10 @@ export const UserPopover = (props) => {
 
 const LogoutActionUI = (props) => {
   const [, t] = useLanguage()
+  const [, { deleteUserCustomer }] = useCustomer()
 
   const handleClick = () => {
+    deleteUserCustomer(true)
     props.handleLogoutClick()
     props.onClose && props.onClose()
   }
