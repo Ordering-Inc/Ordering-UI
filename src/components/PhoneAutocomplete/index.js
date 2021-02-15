@@ -118,8 +118,9 @@ const PhoneAutocompleteUI = (props) => {
               />
               <AddressList
                 isModal
-                userId={customerState?.result?.id?.toString()}
+                userId={customerState?.result?.id}
                 changeOrderAddressWithDefault
+                userCustomerSetup={customerState?.result?.id}
               />
             </>
           )}
