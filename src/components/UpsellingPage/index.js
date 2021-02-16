@@ -13,7 +13,8 @@ const UpsellingPageUI = (props) => {
     openUpselling,
     canOpenUpselling,
     setCanOpenUpselling,
-    business
+    business,
+    isCustomMode
   } = props
   const [, t] = useLanguage()
   const [actualProduct, setActualProduct] = useState(null)
@@ -33,71 +34,84 @@ const UpsellingPageUI = (props) => {
     setModalIsOpen(true)
   }
 
+  const UpsellingLayout = () => {
+    return (
+      <Container>
+        <UpsellingContainer>
+          {
+            !upsellingProducts.loading ? (
+              <>
+                {
+                  !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
+                    <Item key={product.id} name={product.name}>
+                      <Image>
+                        <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
+                      </Image>
+                      <Details>
+                        <div>
+                          <h3 title={product.name}>{product.name}</h3>
+                        </div>
+                        <p>{parsePrice(product.price)}</p>
+                        <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
+                      </Details>
+                    </Item>
+                  )) : (
+                    <>
+                      {upsellingProducts.message}
+                    </>
+                  )
+                }
+              </>
+            ) : [...Array(8)].map((item, i) => (
+              <SkeletonContainer key={i}>
+                <Skeleton width={150} height={250} />
+              </SkeletonContainer>
+            ))
+          }
+        </UpsellingContainer>
+        {actualProduct && (
+          <Modal open={modalIsOpen} onClose={() => setActualProduct(null)} width='70%' padding='0'>
+            <ProductForm
+              product={actualProduct}
+              businessId={actualProduct.api.businessId}
+              businessSlug={business.slug}
+              onSave={() => setModalIsOpen(false)}
+            />
+          </Modal>
+        )}
+      </Container>
+    )
+  }
+
   return (
     <>
-      {!canOpenUpselling || upsellingProducts?.products?.length === 0 ? '' : (
-        <Modal
-          title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
-          open={openUpselling}
-          onClose={() => handleUpsellingPage()}
-          width='70%'
-        >
-          <Container>
-            <UpsellingContainer>
-              {
-                !upsellingProducts.loading ? (
-                  <>
-                    {
-                      !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
-                        <Item key={product.id} name={product.name}>
-                          <Image>
-                            <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
-                          </Image>
-                          <Details>
-                            <div>
-                              <h3 title={product.name}>{product.name}</h3>
-                            </div>
-                            <p>{parsePrice(product.price)}</p>
-                            <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
-                          </Details>
-                        </Item>
-                      )) : (
-                        <>
-                          {upsellingProducts.message}
-                        </>
-                      )
-                    }
-                  </>
-                ) : [...Array(8)].map((item, i) => (
-                  <SkeletonContainer key={i}>
-                    <Skeleton width={150} height={250} />
-                  </SkeletonContainer>
-                ))
-              }
-            </UpsellingContainer>
-            <CloseUpselling>
-              <Button
-                color='secondary'
-                outline
-                onClick={() => handleUpsellingPage(false)}
-              >
-                {t('NO_THANKS', 'No, Thanks')}
-              </Button>
-            </CloseUpselling>
 
-          </Container>
-          {actualProduct && (
-            <Modal open={modalIsOpen} onClose={() => setActualProduct(null)} width='70%' padding='0'>
-              <ProductForm
-                product={actualProduct}
-                businessId={actualProduct.api.businessId}
-                businessSlug={business.slug}
-                onSave={() => setModalIsOpen(false)}
-              />
+      {isCustomMode ? (
+        <UpsellingLayout />
+      ) : (
+        <>
+          {!canOpenUpselling || upsellingProducts?.products?.length === 0 ? '' : (
+            <Modal
+              title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
+              open={openUpselling}
+              onClose={() => handleUpsellingPage()}
+              width='70%'
+            >
+              <UpsellingLayout />
+              <CloseUpselling>
+                <Button
+                  color='secondary'
+                  outline
+                  onClick={() => handleUpsellingPage(false)}
+                >
+                  {t('NO_THANKS', 'No, Thanks')}
+                </Button>
+              </CloseUpselling>
             </Modal>
           )}
-        </Modal>
+        </>
       )}
+
     </>
   )
 }
