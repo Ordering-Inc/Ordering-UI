@@ -61,7 +61,8 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       openUpselling = props.openUpselling,
       canOpenUpselling = props.canOpenUpselling,
       setCanOpenUpselling = props.setCanOpenUpselling,
-      business = props.business;
+      business = props.business,
+      isCustomMode = props.isCustomMode;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -96,59 +97,63 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     setModalIsOpen(true);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr3 = upsellingProducts.products) === null || _upsellingProducts$pr3 === void 0 ? void 0 : _upsellingProducts$pr3.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  var UpsellingLayout = function UpsellingLayout() {
+    return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !upsellingProducts.error ? upsellingProducts.products.map(function (product, i) {
+      return /*#__PURE__*/_react.default.createElement(_styles.Item, {
+        key: product.id,
+        name: product.name
+      }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
+        src: product.images,
+        alt: "product-".concat(i),
+        width: "150px",
+        height: "150px",
+        loading: "lazy"
+      })), /*#__PURE__*/_react.default.createElement(_styles.Details, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
+        title: product.name
+      }, product.name)), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.price)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+        color: "primary",
+        onClick: function onClick() {
+          return handleFormProduct(product);
+        }
+      }, t('ADD', 'Add'))));
+    }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, upsellingProducts.message)) : _toConsumableArray(Array(8)).map(function (item, i) {
+      return /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, {
+        key: i
+      }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+        width: 150,
+        height: 250
+      }));
+    })), actualProduct && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+      open: modalIsOpen,
+      onClose: function onClose() {
+        return setActualProduct(null);
+      },
+      width: "70%",
+      padding: "0"
+    }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+      product: actualProduct,
+      businessId: actualProduct.api.businessId,
+      businessSlug: business.slug,
+      onSave: function onSave() {
+        return setModalIsOpen(false);
+      }
+    })));
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomMode ? /*#__PURE__*/_react.default.createElement(UpsellingLayout, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr3 = upsellingProducts.products) === null || _upsellingProducts$pr3 === void 0 ? void 0 : _upsellingProducts$pr3.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WANT_SOMETHING_ELSE', 'Do you want something else?'),
     open: openUpselling,
     onClose: function onClose() {
       return handleUpsellingPage();
     },
     width: "70%"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !upsellingProducts.error ? upsellingProducts.products.map(function (product, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.Item, {
-      key: product.id,
-      name: product.name
-    }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: product.images,
-      alt: "product-".concat(i),
-      width: "150px",
-      height: "150px",
-      loading: "lazy"
-    })), /*#__PURE__*/_react.default.createElement(_styles.Details, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
-      title: product.name
-    }, product.name)), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.price)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-      color: "primary",
-      onClick: function onClick() {
-        return handleFormProduct(product);
-      }
-    }, t('ADD', 'Add'))));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, upsellingProducts.message)) : _toConsumableArray(Array(8)).map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 150,
-      height: 250
-    }));
-  })), /*#__PURE__*/_react.default.createElement(_styles.CloseUpselling, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(UpsellingLayout, null), /*#__PURE__*/_react.default.createElement(_styles.CloseUpselling, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "secondary",
     outline: true,
     onClick: function onClick() {
       return handleUpsellingPage(false);
     }
-  }, t('NO_THANKS', 'No, Thanks')))), actualProduct && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: modalIsOpen,
-    onClose: function onClose() {
-      return setActualProduct(null);
-    },
-    width: "70%",
-    padding: "0"
-  }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
-    product: actualProduct,
-    businessId: actualProduct.api.businessId,
-    businessSlug: business.slug,
-    onSave: function onSave() {
-      return setModalIsOpen(false);
-    }
-  }))));
+  }, t('NO_THANKS', 'No, Thanks'))))));
 };
 
 var UpsellingPage = function UpsellingPage(props) {
