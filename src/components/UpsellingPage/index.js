@@ -69,15 +69,6 @@ const UpsellingPageUI = (props) => {
             ))
           }
         </UpsellingContainer>
-        <CloseUpselling>
-          <Button
-            color='secondary'
-            outline
-            onClick={() => handleUpsellingPage(false)}
-          >
-            {t('NO_THANKS', 'No, Thanks')}
-          </Button>
-        </CloseUpselling>
         {actualProduct && (
           <Modal open={modalIsOpen} onClose={() => setActualProduct(null)} width='70%' padding='0'>
             <ProductForm
@@ -107,6 +98,15 @@ const UpsellingPageUI = (props) => {
               width='70%'
             >
               <UpsellingLayout />
+              <CloseUpselling>
+                <Button
+                  color='secondary'
+                  outline
+                  onClick={() => handleUpsellingPage(false)}
+                >
+                  {t('NO_THANKS', 'No, Thanks')}
+                </Button>
+              </CloseUpselling>
             </Modal>
           )}
         </>
