@@ -49,8 +49,8 @@ const MomentControlUI = (props) => {
       <Hours name='hours'>
         <Hour
           selected={isAsap}
-          onClick={() => handleAsap()}
-          isLoading={orderState?.isLoading}
+          onClick={() => !orderState.loading && handleAsap()}
+          isLoading={orderState?.loading}
         >
           {windowSize.width > 410 ? (
             t('ASAP', 'As soon as possible')
@@ -63,8 +63,8 @@ const MomentControlUI = (props) => {
             <Hour
               key={i}
               selected={timeSelected === hour.startTime}
-              onClick={() => handleChangeTime(hour.startTime)}
-              isLoading={orderState?.isLoading}
+              onClick={() => !orderState.loading && handleChangeTime(hour.startTime)}
+              isLoading={orderState?.loading}
             >
               {configs?.format_time?.value === '12' ? (
                 hour.startTime.includes('12')
