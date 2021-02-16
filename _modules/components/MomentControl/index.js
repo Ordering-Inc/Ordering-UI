@@ -90,9 +90,9 @@ var MomentControlUI = function MomentControlUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Hour, {
     selected: isAsap,
     onClick: function onClick() {
-      return handleAsap();
+      return !orderState.loading && handleAsap();
     },
-    isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.isLoading
+    isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, windowSize.width > 410 ? t('ASAP', 'As soon as possible') : t('ASAP_ABBREVIATION', 'ASAP')), hoursList.map(function (hour, i) {
     var _configs$format_time;
 
@@ -100,9 +100,9 @@ var MomentControlUI = function MomentControlUI(props) {
       key: i,
       selected: timeSelected === hour.startTime,
       onClick: function onClick() {
-        return handleChangeTime(hour.startTime);
+        return !orderState.loading && handleChangeTime(hour.startTime);
       },
-      isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.isLoading
+      isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
     }, (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
       outputFormat: 'hh:mma'
     }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
