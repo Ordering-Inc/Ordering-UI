@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import { MomentOption, useLanguage, useUtils, useConfig, useOrder } from 'ordering-components'
+import { MomentOption, useLanguage, useUtils, useConfig } from 'ordering-components'
 
 import { Days, Day, DayName, DayNumber, ContentDay, Hours, Hour, Title, MiddleLine } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
@@ -21,7 +21,6 @@ const MomentControlUI = (props) => {
   const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()
   const windowSize = useWindowSize()
-  const [orderState] = useOrder()
 
   return (
     <div id='moment_control'>
@@ -49,8 +48,7 @@ const MomentControlUI = (props) => {
       <Hours name='hours'>
         <Hour
           selected={isAsap}
-          onClick={() => !orderState.loading && handleAsap()}
-          isLoading={orderState?.loading}
+          onClick={() => handleAsap()}
         >
           {windowSize.width > 410 ? (
             t('ASAP', 'As soon as possible')
@@ -63,8 +61,7 @@ const MomentControlUI = (props) => {
             <Hour
               key={i}
               selected={timeSelected === hour.startTime}
-              onClick={() => !orderState.loading && handleChangeTime(hour.startTime)}
-              isLoading={orderState?.loading}
+              onClick={() => handleChangeTime(hour.startTime)}
             >
               {configs?.format_time?.value === '12' ? (
                 hour.startTime.includes('12')

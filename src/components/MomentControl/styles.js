@@ -131,10 +131,6 @@ export const Hour = styled.div`
     border-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
   `}
-
-  ${({ isLoading }) => isLoading && css`
-    pointer-events: none;
-  `}
 `
 
 export const MiddleLine = styled.span`
