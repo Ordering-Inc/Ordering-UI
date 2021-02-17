@@ -35,8 +35,8 @@ const LoginFormUI = (props) => {
   const {
     useLoginByEmail,
     useLoginByCellphone,
-    hanldeChangeInput,
-    hanldeChangeTab,
+    handleChangeInput,
+    handleChangeTab,
     handleButtonLoginClick,
     elementLinkToSignup,
     elementLinkToForgotPassword,
@@ -108,7 +108,7 @@ const LoginFormUI = (props) => {
             <Tabs variant='primary'>
               {useLoginByEmail && (
                 <Tab
-                  onClick={() => hanldeChangeTab('email')}
+                  onClick={() => handleChangeTab('email')}
                   active={loginTab === 'email'}
                 >
                   {t('LOGIN_WITH_EMAIL', 'Login with Email')}
@@ -116,7 +116,7 @@ const LoginFormUI = (props) => {
               )}
               {useLoginByCellphone && (
                 <Tab
-                  onClick={() => hanldeChangeTab('cellphone')}
+                  onClick={() => handleChangeTab('cellphone')}
                   active={loginTab === 'cellphone'}
                 >
                   {t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}
@@ -145,7 +145,7 @@ const LoginFormUI = (props) => {
                     message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
                   }
                 })}
-                onChange={(e) => hanldeChangeInput(e)}
+                onChange={(e) => handleChangeInput(e)}
                 autoComplete='off'
               />
             )}
@@ -158,7 +158,7 @@ const LoginFormUI = (props) => {
                 ref={register({
                   required: t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
                 })}
-                onChange={(e) => hanldeChangeInput(e)}
+                onChange={(e) => handleChangeInput(e)}
                 autoComplete='off'
               />
             )}
@@ -171,7 +171,7 @@ const LoginFormUI = (props) => {
                 ref={register({
                   required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
                 })}
-                onChange={(e) => hanldeChangeInput(e)}
+                onChange={(e) => handleChangeInput(e)}
               />
               <TogglePassword onClick={togglePasswordView}>
                 {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
