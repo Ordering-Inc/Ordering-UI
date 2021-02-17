@@ -13,8 +13,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _templateObject18() {
+function _templateObject19() {
   var data = _taggedTemplateLiteral(["\n    left: initial;\n    right: 50%;\n    transform: translateX(50%);\n  "]);
+
+  _templateObject19 = function _templateObject19() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject18() {
+  var data = _taggedTemplateLiteral(["\n  display: block;\n  width: 80%;\n  height: 1px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: ", ";\n\n  ", "\n\n  @media (min-width: 426px) {\n    display: none;\n  }\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -24,7 +34,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  display: block;\n  width: 80%;\n  height: 1px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: ", ";\n\n  ", "\n\n  @media (min-width: 426px) {\n    display: none;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -44,7 +54,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: calc(50% - 5px);\n  justify-content: center;\n  cursor: pointer;\n  font-weight: 300;\n  border: 1px solid #d9d9d9;\n  border-radius: 1000px;\n  padding: 5px 10px;\n  margin-bottom: 7px;\n  box-sizing: border-box;\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: calc(50% - 5px);\n  justify-content: center;\n  cursor: pointer;\n  font-weight: 300;\n  border: 1px solid #d9d9d9;\n  border-radius: 1000px;\n  padding: 5px 10px;\n  margin-bottom: 7px;\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -251,16 +261,19 @@ var Hour = _styledComponents.default.div(_templateObject15(), function (_ref2) {
   }, function (props) {
     return props.theme.colors.primary;
   });
+}, function (_ref3) {
+  var isLoading = _ref3.isLoading;
+  return isLoading && (0, _styledComponents.css)(_templateObject17());
 });
 
 exports.Hour = Hour;
 
-var MiddleLine = _styledComponents.default.span(_templateObject17(), function (props) {
+var MiddleLine = _styledComponents.default.span(_templateObject18(), function (props) {
   return props.theme.colors.disabled;
 }, function (props) {
   var _props$theme5;
 
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject18());
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject19());
 });
 
 exports.MiddleLine = MiddleLine;

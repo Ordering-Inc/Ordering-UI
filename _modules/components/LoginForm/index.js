@@ -68,8 +68,8 @@ var LoginFormUI = function LoginFormUI(props) {
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
-      hanldeChangeInput = props.hanldeChangeInput,
-      hanldeChangeTab = props.hanldeChangeTab,
+      handleChangeInput = props.handleChangeInput,
+      handleChangeTab = props.handleChangeTab,
       handleButtonLoginClick = props.handleButtonLoginClick,
       elementLinkToSignup = props.elementLinkToSignup,
       elementLinkToForgotPassword = props.elementLinkToForgotPassword,
@@ -187,12 +187,12 @@ var LoginFormUI = function LoginFormUI(props) {
     variant: "primary"
   }, useLoginByEmail && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
-      return hanldeChangeTab('email');
+      return handleChangeTab('email');
     },
     active: loginTab === 'email'
   }, t('LOGIN_WITH_EMAIL', 'Login with Email')), useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
-      return hanldeChangeTab('cellphone');
+      return handleChangeTab('cellphone');
     },
     active: loginTab === 'cellphone'
   }, t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
@@ -212,7 +212,7 @@ var LoginFormUI = function LoginFormUI(props) {
       }
     }),
     onChange: function onChange(e) {
-      return hanldeChangeInput(e);
+      return handleChangeInput(e);
     },
     autoComplete: "off"
   }), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -224,7 +224,7 @@ var LoginFormUI = function LoginFormUI(props) {
       required: t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
     }),
     onChange: function onChange(e) {
-      return hanldeChangeInput(e);
+      return handleChangeInput(e);
     },
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -236,7 +236,7 @@ var LoginFormUI = function LoginFormUI(props) {
       required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
     }),
     onChange: function onChange(e) {
-      return hanldeChangeInput(e);
+      return handleChangeInput(e);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.TogglePassword, {
     onClick: togglePasswordView
