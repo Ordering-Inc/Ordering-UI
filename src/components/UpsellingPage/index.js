@@ -22,16 +22,23 @@ const UpsellingPageUI = (props) => {
   const [{ parsePrice }] = useUtils()
 
   useEffect(() => {
-    if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
-      setCanOpenUpselling && setCanOpenUpselling(true)
-    } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
-      handleUpsellingPage()
+    if (!isCustomMode) {
+      if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
+        setCanOpenUpselling && setCanOpenUpselling(true)
+      } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
+        handleUpsellingPage()
+      }
     }
   }, [upsellingProducts.loading, upsellingProducts?.products.length])
 
   const handleFormProduct = (product) => {
     setActualProduct(product)
     setModalIsOpen(true)
+  }
+
+  const handleSaveProduct = () => {
+    setActualProduct(null)
+    setModalIsOpen(false)
   }
 
   const UpsellingLayout = () => {
@@ -69,16 +76,6 @@ const UpsellingPageUI = (props) => {
             ))
           }
         </UpsellingContainer>
-        {actualProduct && (
-          <Modal open={modalIsOpen} onClose={() => setActualProduct(null)} width='70%' padding='0'>
-            <ProductForm
-              product={actualProduct}
-              businessId={actualProduct.api.businessId}
-              businessSlug={business.slug}
-              onSave={() => setModalIsOpen(false)}
-            />
-          </Modal>
-        )}
       </Container>
     )
   }
@@ -111,7 +108,16 @@ const UpsellingPageUI = (props) => {
           )}
         </>
       )}
-
+      <Modal open={modalIsOpen} onClose={() => setModalIsOpen(false)} width='70%' padding='0' closeOnBackdrop>
+        {actualProduct && (
+          <ProductForm
+            product={actualProduct}
+            businessId={actualProduct.api.businessId}
+            businessSlug={business.slug}
+            onSave={() => handleSaveProduct()}
+          />
+        )}
+      </Modal>
     </>
   )
 }
