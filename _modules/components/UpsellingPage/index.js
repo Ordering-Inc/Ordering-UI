@@ -83,18 +83,25 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       parsePrice = _useUtils2[0].parsePrice;
 
   (0, _react.useEffect)(function () {
-    var _upsellingProducts$pr, _upsellingProducts$pr2;
+    if (!isCustomMode) {
+      var _upsellingProducts$pr, _upsellingProducts$pr2;
 
-    if (upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr = upsellingProducts.products) !== null && _upsellingProducts$pr !== void 0 && _upsellingProducts$pr.length && !upsellingProducts.loading) {
-      setCanOpenUpselling && setCanOpenUpselling(true);
-    } else if (!(upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr2 = upsellingProducts.products) !== null && _upsellingProducts$pr2 !== void 0 && _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
-      handleUpsellingPage();
+      if (upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr = upsellingProducts.products) !== null && _upsellingProducts$pr !== void 0 && _upsellingProducts$pr.length && !upsellingProducts.loading) {
+        setCanOpenUpselling && setCanOpenUpselling(true);
+      } else if (!(upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr2 = upsellingProducts.products) !== null && _upsellingProducts$pr2 !== void 0 && _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
+        handleUpsellingPage();
+      }
     }
   }, [upsellingProducts.loading, upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length]);
 
   var handleFormProduct = function handleFormProduct(product) {
     setActualProduct(product);
     setModalIsOpen(true);
+  };
+
+  var handleSaveProduct = function handleSaveProduct() {
+    setActualProduct(null);
+    setModalIsOpen(false);
   };
 
   var UpsellingLayout = function UpsellingLayout() {
@@ -123,20 +130,6 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
         width: 150,
         height: 250
       }));
-    })), actualProduct && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-      open: modalIsOpen,
-      onClose: function onClose() {
-        return setActualProduct(null);
-      },
-      width: "70%",
-      padding: "0"
-    }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
-      product: actualProduct,
-      businessId: actualProduct.api.businessId,
-      businessSlug: business.slug,
-      onSave: function onSave() {
-        return setModalIsOpen(false);
-      }
     })));
   };
 
@@ -153,7 +146,22 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     onClick: function onClick() {
       return handleUpsellingPage(false);
     }
-  }, t('NO_THANKS', 'No, Thanks'))))));
+  }, t('NO_THANKS', 'No, Thanks'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: modalIsOpen,
+    onClose: function onClose() {
+      return setModalIsOpen(false);
+    },
+    width: "70%",
+    padding: "0",
+    closeOnBackdrop: true
+  }, actualProduct && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+    product: actualProduct,
+    businessId: actualProduct.api.businessId,
+    businessSlug: business.slug,
+    onSave: function onSave() {
+      return handleSaveProduct();
+    }
+  })));
 };
 
 var UpsellingPage = function UpsellingPage(props) {
