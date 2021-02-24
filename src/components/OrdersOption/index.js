@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { OrderList, useLanguage } from 'ordering-components'
+import { OrderList, useLanguage, useOrder } from 'ordering-components'
 
-import { ActiveOrders } from '../ActiveOrders'
-import { PreviousOrders } from '../PreviousOrders'
+import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
+import { VerticalOrdersLayout } from '../VerticalOrdersLayout'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { useTheme } from 'styled-components'
@@ -23,22 +23,43 @@ import {
 
 const OrdersOptionUI = (props) => {
   const {
+    horizontal,
+    activeOrders,
     orderList,
     pagination,
-    activeOrders,
-    onOrderClick,
-    loadMoreOrders
+    isBusinessesPage,
+    loadMoreOrders,
+    titleContent,
+    customArray,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const { loading, error, orders } = orderList
+  const [, { reorder }] = useOrder()
+  const { loading, error, orders: values } = orderList
 
   const imageFails = activeOrders
     ? theme.images?.general?.emptyActiveOrders
     : theme.images?.general?.emptyPastOrders
 
+  const orders = customArray || values
+
   const [ordersSorted, setOrdersSorted] = useState([])
+
+  const [reorderLoading, setReorderLoading] = useState(false)
+
+  const handleReorder = async (orderId) => {
+    setReorderLoading(true)
+    try {
+      const { error, result } = await reorder(orderId)
+      if (!error) {
+        onRedirectPage && onRedirectPage({ page: 'checkout', params: { cartUuid: result.uuid } })
+      }
+    } catch (err) {
+      setReorderLoading(false)
+    }
+  }
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -75,31 +96,39 @@ const OrdersOptionUI = (props) => {
 
   return (
     <>
-      <OptionTitle>
-        <h1>
-          {activeOrders
-            ? t('ACTIVE_ORDERS', 'Active Orders')
-            : t('PREVIOUS_ORDERS', 'Previous Orders')}
-        </h1>
-      </OptionTitle>
-      {!loading && ordersSorted.length === 0 && (
-        <NotFoundSource
-          image={imageFails}
-          content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
-          conditioned
-        />
+      {(orders.length > 0 || !isBusinessesPage) && (
+        <>
+          <OptionTitle isBusinessesPage={isBusinessesPage}>
+            <h1>
+              {titleContent || (activeOrders
+                ? t('ACTIVE_ORDERS', 'Active Orders')
+                : t('PREVIOUS_ORDERS', 'Previous Orders'))}
+            </h1>
+          </OptionTitle>
+          {!loading && ordersSorted.length === 0 && (
+            <NotFoundSource
+              image={imageFails}
+              content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
+              conditioned
+            />
+          )}
+        </>
       )}
 
       {loading && (
-        <OrdersContainer activeOrders={activeOrders} isSkeleton>
-          {activeOrders ? (
-            <SkeletonOrder activeOrders={activeOrders}>
+        <OrdersContainer
+          isSkeleton
+          activeOrders={horizontal}
+          isBusinessesPage={isBusinessesPage}
+        >
+          {horizontal ? (
+            <SkeletonOrder activeOrders={horizontal} isBusinessesPage={isBusinessesPage}>
               {[...Array(3)].map((item, i) => (
                 <SkeletonCard key={i}>
                   <SkeletonMap>
                     <Skeleton />
                   </SkeletonMap>
-                  <SkeletonContent activeOrders={activeOrders}>
+                  <SkeletonContent activeOrders={horizontal}>
                     <div>
                       <Skeleton width={70} height={70} />
                     </div>
@@ -141,21 +170,27 @@ const OrdersOptionUI = (props) => {
       )}
 
       {!loading && !error && orders.length > 0 && (
-        activeOrders ? (
-          <ActiveOrders
+        horizontal ? (
+          <HorizontalOrdersLayout
             orders={ordersSorted}
             pagination={pagination}
-            onOrderClick={onOrderClick}
+            onRedirectPage={onRedirectPage}
             loadMoreOrders={loadMoreOrders}
+            isBusinessesPage={isBusinessesPage}
+            reorderLoading={reorderLoading}
+            customArray={customArray}
             getOrderStatus={getOrderStatus}
+            handleReorder={handleReorder}
           />
         ) : (
-          <PreviousOrders
+          <VerticalOrdersLayout
+            reorderLoading={reorderLoading}
             orders={ordersSorted}
             pagination={pagination}
-            onOrderClick={onOrderClick}
             loadMoreOrders={loadMoreOrders}
+            onRedirectPage={onRedirectPage}
             getOrderStatus={getOrderStatus}
+            handleReorder={handleReorder}
           />
         )
       )}

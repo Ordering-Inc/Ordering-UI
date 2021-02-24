@@ -14,7 +14,7 @@ export const BusinessList = styled.div`
 export const WrapperSearch = styled.div`
   margin: 10px 20px 0px;
 
-  ${({ externalBusinessMap }) => externalBusinessMap && css`
+  ${({ isCustomLayout }) => isCustomLayout && css`
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -51,4 +51,14 @@ export const ErrorMessage = styled.span`
   margin: 0px 15px;
   color: #D81313;
   font-weight: bold;
+`
+
+export const PreviousOrders = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 20px 0px;
+`
+
+export const PreviousOrdersTitle = styled.h1`
+
 `

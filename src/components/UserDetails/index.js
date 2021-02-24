@@ -14,20 +14,18 @@ import { UserFormDetailsUI } from '../UserFormDetails'
 
 const UserDetailsUI = (props) => {
   const {
-    userData: externalUserData,
     isEdit,
     formState,
     cleanFormState,
     cartStatus,
     toggleIsEdit,
     validationFields,
-    isUserDetailsEdit,
-    externalLoading
+    isUserDetailsEdit
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const userData = formState.result?.result ? formState.result?.result : externalUserData
+  const userData = props.userData || formState.result?.result
 
   useEffect(() => {
     if (isUserDetailsEdit) {
@@ -42,7 +40,7 @@ const UserDetailsUI = (props) => {
 
   return (
     <>
-      {(validationFields.loading || formState.loading || externalLoading) && (
+      {(validationFields.loading || formState.loading) && (
         <UserData>
           <Skeleton width={250} height={25} />
           <Skeleton width={180} height={25} />
@@ -50,7 +48,7 @@ const UserDetailsUI = (props) => {
         </UserData>
       )}
 
-      {!(validationFields.loading || formState.loading || externalLoading) && (
+      {!(validationFields.loading || formState.loading) && (
         <Container>
           <Header className='user-form'>
             <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
@@ -77,7 +75,7 @@ const UserDetailsUI = (props) => {
             </UserData>
           ) : (
             <SideForm>
-              <UserFormDetailsUI {...props} externalUserData={userData} />
+              <UserFormDetailsUI {...props} />
             </SideForm>
           )}
         </Container>

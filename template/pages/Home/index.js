@@ -4,7 +4,6 @@ import { HomeHero } from '../../../src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 import Skeleton from 'react-loading-skeleton'
-import { NotFoundSource } from '../../../src/components/NotFoundSource'
 
 import {
   HomeContainer,
@@ -16,7 +15,6 @@ import {
 } from './styles'
 
 export const HomePage = (props) => {
-  const [, t] = useLanguage()
   const history = useHistory()
   const [homeState, setHomeState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
@@ -89,12 +87,6 @@ export const HomePage = (props) => {
             }}
             />
           )
-        }
-        {
-          (!homeState.loading && homeState.error) &&
-            <NotFoundSource
-              content={t('ERROR_HOME', 'Ups... an error has occured')}
-            />
         }
       </HomeContainer>
     </>

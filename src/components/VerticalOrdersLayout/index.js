@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useLanguage, useEvent, useOrder, useUtils } from 'ordering-components'
+import React from 'react'
+import { useLanguage, useUtils } from 'ordering-components'
 
 import { Button } from '../../styles/Buttons'
 
@@ -14,35 +14,20 @@ import {
 
 import { OrdersContainer, BusinessInformation } from '../OrdersOption/styles'
 
-export const PreviousOrders = (props) => {
+export const VerticalOrdersLayout = (props) => {
   const {
     orders,
     pagination,
-    onOrderClick,
+    onRedirectPage,
     loadMoreOrders,
-    getOrderStatus
+    getOrderStatus,
+    handleReorder,
+    reorderLoading,
+    orderID
   } = props
 
   const [, t] = useLanguage()
-  const [events] = useEvent()
-  const [, { reorder }] = useOrder()
   const [{ parseDate }] = useUtils()
-
-  const [reorderLoading, setReorderLoading] = useState(false)
-  const [orderID, setOrderID] = useState(null)
-
-  const handleReorder = async (orderId) => {
-    setReorderLoading(true)
-    setOrderID(orderId)
-    try {
-      const { error, result } = await reorder(orderId)
-      if (!error) {
-        events.emit('go_to_page', { page: 'checkout', params: { cartUuid: result.uuid } })
-      }
-    } catch (err) {
-      setReorderLoading(false)
-    }
-  }
 
   return (
     <>
@@ -62,7 +47,7 @@ export const PreviousOrders = (props) => {
                 <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
                 <p
                   name='view_order'
-                  onClick={() => onOrderClick({ page: 'order_detail', params: { orderId: order.uuid } })}
+                  onClick={() => onRedirectPage({ page: 'order_detail', params: { orderId: order.uuid } })}
                 >
                   {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
                 </p>

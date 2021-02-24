@@ -25,12 +25,6 @@ import {
   WrapperPlaceOrderButton,
   WarningMessage,
   CartsList,
-  CartItem,
-  CartItemWrapper,
-  LogoWrapper,
-  CartItemLogo,
-  CartItemInfo,
-  CartItemActions,
   WarningText,
   WrapperUserDetails
 } from './styles'
@@ -45,6 +39,7 @@ import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
+import { CartContent } from '../CartContent'
 
 import { DriverTipsOptions } from '../../utils'
 
@@ -356,7 +351,6 @@ export const Checkout = (props) => {
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
-  const [{ parsePrice }] = useUtils()
 
   const [cartState, setCartState] = useState({ loading: true, error: null, cart: null })
 
@@ -365,7 +359,7 @@ export const Checkout = (props) => {
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const cartsWithProducts = Object.values(orderState.carts).filter(cart => cart.products.length)
+  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length) || null
 
   const closeAlert = () => {
     setAlertState({
@@ -373,10 +367,6 @@ export const Checkout = (props) => {
       content: []
     })
     clearErrors && clearErrors()
-  }
-
-  const handleOpenUpsellingPage = (cart) => {
-    setCurrentCart(cart)
   }
 
   const handleUpsellingPage = () => {
@@ -472,47 +462,20 @@ export const Checkout = (props) => {
 
   return (
     <>
-      {!cartUuid && orderState.carts && cartsWithProducts.length === 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length === 0 && (
         <NotFoundSource
           content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
           btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
           onClickButton={handleSearchRedirect}
         />
       )}
-      {!cartUuid && orderState.carts && cartsWithProducts.length > 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length > 0 && (
         <CartsList>
-          {cartsWithProducts.map(cart => (
-            <CartItem
-              key={cart.uuid}
-            >
-              <CartItemWrapper>
-                <LogoWrapper>
-                  <CartItemLogo bgimage={cart?.business?.logo} />
-                </LogoWrapper>
-                <CartItemInfo>
-                  <h1>{cart?.business?.name}</h1>
-                  <p>{parsePrice(cart?.total)}</p>
-                </CartItemInfo>
-              </CartItemWrapper>
-              <CartItemActions>
-                <Button
-                  color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
-                  onClick={() => handleOpenUpsellingPage(cart)}
-                  disabled={currentCart?.uuid === cart?.uuid || openUpselling || cart?.subtotal < cart?.minimum || !cart?.valid_address}
-                >
-                  {(cart?.subtotal >= cart?.minimum || !cart?.minimum) && cart?.valid_address ? (
-                    (currentCart?.uuid === cart?.uuid && canOpenUpselling) ^ currentCart?.uuid === cart?.uuid
-                      ? t('LOADING', 'Loading...')
-                      : t('VIEW_ORDER', 'View order')
-                  ) : !cart?.valid_address ? (
-                    t('OUT_OF_COVERAGE', 'Out of Coverage')
-                  ) : (
-                    `${t('MINIMUN_PURCHASE', 'Minimum')} ${parsePrice(cart?.minimum)}`
-                  )}
-                </Button>
-              </CartItemActions>
-            </CartItem>
-          ))}
+          <CartContent
+            carts={cartsWithProducts}
+            isOrderStateCarts={!!orderState.carts}
+            isForceOpenCart
+          />
         </CartsList>
       )}
 
