@@ -117,9 +117,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       activeMap = _useState6[0],
       setActiveMap = _useState6[1];
 
-  var toggleMap = function toggleMap() {
-    setActiveMap(!activeMap);
-  };
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      mapErrors = _useState8[0],
+      setMapErrors = _useState8[1];
 
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle;
@@ -166,6 +167,32 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     });
   };
 
+  var toggleMap = function toggleMap() {
+    setActiveMap(!activeMap);
+  };
+
+  var handleCloseAlerts = function handleCloseAlerts() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+    setMapErrors('');
+  };
+
+  var handleMapErrors = function handleMapErrors(errKey) {
+    setAlertState({
+      open: true,
+      content: [t(errKey, mapErrors[errKey])]
+    });
+  };
+
+  (0, _react.useEffect)(function () {
+    if (mapErrors) {
+      handleMapErrors(mapErrors);
+      setActiveMap(false);
+    }
+  }, [mapErrors]);
+
   var getCustomArray = function getCustomArray(list) {
     var isArray = Array.isArray(list);
     return isArray ? list : Object.values(list);
@@ -185,7 +212,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: toggleMap
   })), activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
-    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.location
+    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.location,
+    setErrors: setMapErrors
   }), isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
     horizontal: true,
     isBusinessesPage: true,
@@ -275,21 +303,15 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleFindBusinesses();
     }
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('SEARCH', 'Search'),
+    title: !mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
-      return setAlertState({
-        open: false,
-        content: []
-      });
+      return handleCloseAlerts();
     },
     onAccept: function onAccept() {
-      return setAlertState({
-        open: false,
-        content: []
-      });
+      return handleCloseAlerts();
     },
     closeOnBackdrop: false
   }));

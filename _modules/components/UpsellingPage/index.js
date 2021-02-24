@@ -86,7 +86,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     var _upsellingProducts$pr, _upsellingProducts$pr2;
 
     if (upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr = upsellingProducts.products) !== null && _upsellingProducts$pr !== void 0 && _upsellingProducts$pr.length && !upsellingProducts.loading) {
-      setCanOpenUpselling(true);
+      setCanOpenUpselling && setCanOpenUpselling(true);
     } else if (!(upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr2 = upsellingProducts.products) !== null && _upsellingProducts$pr2 !== void 0 && _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
       handleUpsellingPage();
     }

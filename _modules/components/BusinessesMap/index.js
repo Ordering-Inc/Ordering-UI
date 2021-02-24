@@ -36,7 +36,8 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
 
   var userLocation = props.userLocation,
       businessLocations = props.businessLocations,
-      onBusinessClick = props.onBusinessClick;
+      onBusinessClick = props.onBusinessClick,
+      setErrors = props.setErrors;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -55,15 +56,16 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
     },
     isMarkerDraggable: true
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value,
     location: userLocation,
     locations: businessLocations,
     mapControls: googleMapsControls,
     maxLimitLocation: configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.meters_to_change_address) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value,
     businessMap: true,
-    onBusinessClick: onBusinessClick
-  }));
+    onBusinessClick: onBusinessClick,
+    setErrors: setErrors
+  })));
 };
 
 var BusinessesMap = function BusinessesMap(props) {
