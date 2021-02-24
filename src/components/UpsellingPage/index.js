@@ -23,7 +23,7 @@ const UpsellingPageUI = (props) => {
 
   useEffect(() => {
     if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
-      setCanOpenUpselling(true)
+      setCanOpenUpselling && setCanOpenUpselling(true)
     } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
       handleUpsellingPage()
     }
