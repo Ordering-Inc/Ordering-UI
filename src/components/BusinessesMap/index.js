@@ -6,7 +6,8 @@ const BusinessesMapUI = (props) => {
   const {
     userLocation,
     businessLocations,
-    onBusinessClick
+    onBusinessClick,
+    setErrors
   } = props
 
   const [configState] = useConfig()
@@ -25,17 +26,20 @@ const BusinessesMapUI = (props) => {
   }
 
   return (
-    <WrapperMap>
-      <GoogleMapsMap
-        apiKey={configState?.configs?.google_maps_api_key?.value}
-        location={userLocation}
-        locations={businessLocations}
-        mapControls={googleMapsControls}
-        maxLimitLocation={configState?.configs?.meters_to_change_address?.value}
-        businessMap
-        onBusinessClick={onBusinessClick}
-      />
-    </WrapperMap>
+    <>
+      <WrapperMap>
+        <GoogleMapsMap
+          apiKey={configState?.configs?.google_maps_api_key?.value}
+          location={userLocation}
+          locations={businessLocations}
+          mapControls={googleMapsControls}
+          maxLimitLocation={configState?.configs?.meters_to_change_address?.value}
+          businessMap
+          onBusinessClick={onBusinessClick}
+          setErrors={setErrors}
+        />
+      </WrapperMap>
+    </>
   )
 }
 
