@@ -1,105 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useTheme } from 'styled-components'
-import { useSession, useOrder, useLanguage } from 'ordering-components'
-import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import { useLanguage } from 'ordering-components'
+import { GoogleAutoCompletAddressForm } from '../GoogleAutoCompletAddressForm'
+
 import {
   HeroContainer,
   ContentWrapper,
-  Title,
-  Slogan,
-  WrapInput,
-  InputSpan
+  Title
 } from './styles'
 
-import { Modal } from '../Modal'
-import { Button } from '../../styles/Buttons'
-import { AddressForm } from '../AddressForm'
-import { AddressList } from '../AddressList'
-
 export const HomeHero = (props) => {
-  const {
-    onFindBusiness
-  } = props
-
-  const [{ auth }] = useSession()
-  const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const theme = useTheme()
-
-  const handleFindBusinesses = () => {
-    if (!orderState?.options?.address?.location) {
-      setModals({ ...modals, formOpen: true })
-      return
-    }
-    setModals({ listOpen: false, formOpen: false })
-    onFindBusiness && onFindBusiness()
-  }
-
-  const handleAddressInput = () => {
-    if (auth) {
-      setModals({ ...modals, listOpen: true })
-    } else {
-      setModals({ ...modals, formOpen: true })
-    }
-  }
-
-  useEffect(() => {
-    return () => setModals({ listOpen: false, formOpen: false })
-  }, [])
 
   return (
     <HeroContainer bgimage={theme.images?.general?.homeHero}>
       <ContentWrapper>
-        <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-        <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
-        <WrapInput onClick={handleAddressInput} withIcon>
-          <HiOutlineLocationMarker />
-          <InputSpan
-            name='address-selection'
-            aria-label='address selection'
-            type='text'
-            placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
-          />
-          <div>
-            {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
-          </div>
-        </WrapInput>
-        <Button
-          color='primary'
-          name='find-business'
-          onClick={handleFindBusinesses}
-        >
-          {t('FIND_BUSINESSES', 'Find businesses')}
-        </Button>
+        <Title>{t('YOUR_FAVORITE_RESTURANTS', 'Your favorite restaurants, delivered')}</Title>
+        <GoogleAutoCompletAddressForm />
       </ContentWrapper>
-
-      <Modal
-        title={t('ADDRESS', 'Address')}
-        open={modals.formOpen}
-        onClose={() => setModals({ ...modals, formOpen: false })}
-      >
-        <AddressForm
-          useValidationFileds
-          address={orderState?.options?.address || {}}
-          onClose={() => setModals({ ...modals, formOpen: false })}
-          onSaveAddress={() => setModals({ ...modals, formOpen: false })}
-          onCancel={() => setModals({ ...modals, formOpen: false })}
-        />
-      </Modal>
-      <Modal
-        title={t('ADDRESSES', 'Addresses')}
-        open={modals.listOpen}
-        width='70%'
-        onClose={() => setModals({ ...modals, listOpen: false })}
-      >
-        <AddressList
-          isModal
-          changeOrderAddressWithDefault
-          onCancel={() => setModals({ ...modals, listOpen: false })}
-          onAccept={() => handleFindBusinesses()}
-        />
-      </Modal>
     </HeroContainer>
   )
 }

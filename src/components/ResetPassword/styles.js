@@ -11,6 +11,7 @@ export const ResetPasswordContainer = styled.div`
     height: 100%;
     min-height: calc(100vh - 65px)
   }
+  padding-top: 60px;
 `
 const Side = styled.div`
   display: flex;

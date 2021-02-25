@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import TiPencil from '@meronex/icons/ti/TiPencil'
 import { AddressDetails as AddressDetailsController, useOrder, useLanguage } from 'ordering-components'
-
 import {
   AddressContainer,
-  Header,
+  UserAddress,
   Map,
   Text,
   WrappMap
@@ -16,6 +14,7 @@ import { AddressList } from '../AddressList'
 
 const AddressDetailsUI = (props) => {
   const {
+    isCartView,
     addressToShow,
     isCartPending,
     googleMapsUrl
@@ -23,7 +22,8 @@ const AddressDetailsUI = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const [openModal, setOpenModal] = useState(false)
+  const [openChangeAddressModal, setOpenChangeAddressModal] = useState(false)
+  const [openEditAddressModal, setOpenEditAddressModal] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleFindBusinesses = () => {
@@ -31,41 +31,64 @@ const AddressDetailsUI = (props) => {
       setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')] })
       return
     }
-    setOpenModal(false)
+    setOpenChangeAddressModal(false)
   }
 
   useEffect(() => {
-    return () => setOpenModal(false)
+    return () => setOpenChangeAddressModal(false)
   }, [])
 
   return (
-    <AddressContainer>
-      <Header>
-        <Text>
-          <h4>{addressToShow || orderState?.options?.address?.address}</h4>
-          {orderState?.options?.type === 1 && !isCartPending &&
-            <TiPencil
-              onClick={() => setOpenModal(true)}
-            />}
-        </Text>
-      </Header>
+    <AddressContainer isCartView={isCartView}>
+      {!isCartView && (
+        <UserAddress>
+          <h1>{t('ADDRESS', 'Address')}</h1>
+          <span onClick={() => setOpenChangeAddressModal(true)}>{t('CHANGE', 'Change')}</span>
+        </UserAddress>
+      )}
       <WrappMap>
         <Map>
           <img src={googleMapsUrl} id='google-maps-image' alt='google-maps-location' width='288px' height='162px' loading='lazy' />
         </Map>
+        {!isCartView && (
+          <Text>
+            <h4>{addressToShow || orderState?.options?.address?.address}</h4>
+            {orderState?.options?.type === 1 && !isCartPending &&
+              <h4>
+                {t('DROP_OFF:LEAVE_IT_AT_MY_DOOR', 'Drop-off: Leave it at my door')}
+                <span onClick={() => setOpenEditAddressModal(true)}>
+                  {t('ADD/EDIT', 'Add/Edit')}
+                </span>
+              </h4>}
+          </Text>
+        )}
       </WrappMap>
 
       <Modal
-        title={t('ADDRESSES', 'Addresses')}
-        open={openModal}
+        title={t('CHANGE_ADDRESS', 'Change Address')}
+        open={openChangeAddressModal}
         width='70%'
-        onClose={() => setOpenModal(false)}
+        onClose={() => setOpenChangeAddressModal(false)}
       >
         <AddressList
           isModal
           changeOrderAddressWithDefault
-          onCancel={() => setOpenModal(false)}
+          onCancel={() => setOpenChangeAddressModal(false)}
           onAccept={() => handleFindBusinesses()}
+        />
+      </Modal>
+
+      <Modal
+        title={t(orderState?.options?.address?.address)}
+        open={openEditAddressModal}
+        width='70%'
+        onClose={() => setOpenEditAddressModal(false)}
+      >
+        <AddressList
+          isAddAndEdit
+          EditAddress={orderState?.options?.address}
+          changeOrderAddressWithDefault
+          onCancel={() => setOpenEditAddressModal(false)}
         />
       </Modal>
 

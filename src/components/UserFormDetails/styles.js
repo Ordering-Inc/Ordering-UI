@@ -2,18 +2,19 @@ import styled, { css } from 'styled-components'
 
 export const FormInput = styled.form`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 30px;
+  column-gap: 40px;
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  div.phone_number {
-    margin-bottom: 20px;
-    width: 100%;
+  > div {
+    width: calc(50% - 20px);
   }
   input.form {
+    border-radius: 10px;
     padding: 10px 15px;
     width: 100%;
-    margin-bottom: 20px;
     box-sizing: border-box;
     &:disabled {
       background-color: rgba(239, 239, 239, 0.3);
@@ -24,26 +25,27 @@ export const FormInput = styled.form`
     width: 100%;
     padding: 7px 0;
   }
-  @media (min-width: 769px) {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    input.form {
-      width: 49%;
+
+  @media (max-width: 576px) {
+    > div {
+      width: 100%;
     }
-    ${({ isCheckout }) => isCheckout && css`
-      div.phone_number  {
-        width: 49%;
-      }
-    `}
   }
+  ${({ isCheckout }) => isCheckout && css`
+    > div {
+      width: 100%;
+    }
+  `}
 `
 
 export const ActionsForm = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
+
+  ${({ isCheckout }) => isCheckout && css`
+    justify-content: space-between;
+    align-items: center;
+  `}
 
   button {
     flex: 1;
@@ -55,26 +57,14 @@ export const ActionsForm = styled.div`
     &:disabled {
       cursor: not-allowed;
     }
-
-    &:nth-child(2) {
-      margin-left: 10px;
-    }
+    ${({ isCheckout }) => isCheckout && css`
+      margin-right: 5px;
+    `}
   }
-
-  ${props => props.theme?.rtl && css`
-    button {
-      &:nth-child(1) {
-        margin-right: 0px;
-      }
-      &:last-child {
-        margin-right: 5px;
-      }
-    }
-  `}
 `
 
 export const SkeletonForm = styled.div`
-  width: 100%;
+  width: 100% !important;
   justify-content: center;
   height: auto;
   display: inline-flex;
@@ -98,5 +88,14 @@ export const SkeletonForm = styled.div`
       width: calc(50% - 10px);
       margin: 5px;
     }
+  }
+`
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  label {
+    font-weight: 500;
+    font-size: 18px;
   }
 `

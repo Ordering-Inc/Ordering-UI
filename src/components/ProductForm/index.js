@@ -17,7 +17,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
-import { ProductShare } from '../ProductShare'
+// import { ProductShare } from '../ProductShare'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
@@ -28,6 +28,7 @@ import { Button } from '../../styles/Buttons'
 
 import {
   ProductContainer,
+  ProductHeader,
   WrapperImage,
   ProductImage,
   ProductInfo,
@@ -39,15 +40,18 @@ import {
   WrapperSubOption,
   SkuContent,
   ProductFormTitle,
-  WrapperIngredients
+  WrapperIngredients,
+  SectionDescription,
+  AuthContainer
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../NotFoundSource'
+// import { SoldOutRecommendationSelector } from '../SoldOutRecommendationSelector'
 
 const ProductOptionsUI = (props) => {
   const {
-    businessSlug,
+    // businessSlug,
     editMode,
     isSoldOut,
     productObject,
@@ -130,28 +134,15 @@ const ProductOptionsUI = (props) => {
     <ProductContainer className='product-container'>
       {loading && !error && (
         <SkeletonBlock width={90}>
-          <Skeleton variant='rect' height={50} />
-          <Skeleton variant='rect' height={50} />
           <Skeleton variant='rect' height={200} />
+          <Skeleton variant='rect' height={50} />
+          <Skeleton variant='rect' height={50} />
         </SkeletonBlock>
-      )}
-
-      {product && !loading && !error && (
-        <ProductShare
-          slug={businessSlug}
-          categoryId={product?.category_id}
-          productId={product?.id}
-        />
       )}
 
       {!loading && !error && product && (
         <>
-          <WrapperImage>
-            <ProductImage id='product_image'>
-              <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
-            </ProductImage>
-          </WrapperImage>
-          <ProductInfo>
+          <ProductHeader>
             <ProductFormTitle>
               <h1>{product?.name}</h1>
               {product?.description && <p>{product?.description}</p>}
@@ -162,6 +153,13 @@ const ProductOptionsUI = (props) => {
                 </SkuContent>
               )}
             </ProductFormTitle>
+            <WrapperImage>
+              <ProductImage id='product_image'>
+                <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
+              </ProductImage>
+            </WrapperImage>
+          </ProductHeader>
+          <ProductInfo>
             <ProductEdition>
               {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
               <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
@@ -199,6 +197,7 @@ const ProductOptionsUI = (props) => {
                                       option={option}
                                       suboption={suboption}
                                       state={currentState}
+                                      productName={product?.name}
                                     />
                                   )
                                 })
@@ -212,82 +211,94 @@ const ProductOptionsUI = (props) => {
                 }))
               }
               <ProductComment>
-                <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
+                <SectionTitle>{t('PREFERENCES', 'Preferences')}</SectionTitle>
+                <SectionDescription>
+                  <span>{t('EXTRA_INSTRUCTIONS', 'Extra instructions')}</span>
+                  <span>{t('LIST_ANY_SPECIAL_REQUEST', 'List any special request')}</span>
+                </SectionDescription>
                 <TextArea
                   rows={4}
-                  placeholder={t('SPECIAL_COMMENT', 'Special comment')}
+                  placeholder={t('e.g. allergies, extra spicy, etc.')}
                   defaultValue={productCart.comment}
                   onChange={handleChangeCommentState}
                   disabled={!(productCart && !isSoldOut && maxProductQuantity)}
                 />
               </ProductComment>
+              {/* {isSoldOut && (
+                <SoldOutRecommendationSelector />
+              )} */}
             </ProductEdition>
-            <ProductActions>
-              {
-                productCart && !isSoldOut && maxProductQuantity > 0 && (
-                  <div className='incdec-control'>
-                    <FiMinusCircle
-                      onClick={decrement}
-                      className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
-                    />
-                    <span>{productCart.quantity}</span>
-                    <FiPlusCircle
-                      onClick={increment}
-                      className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
-                    />
-                  </div>
-                )
-              }
-
-              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
-                <Button
-                  className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
-                  color='primary'
-                  onClick={() => handleSaveProduct()}
-                  disabled={orderState.loading}
-                >
-                  {orderState.loading ? (
-                    <span>{t('LOADING', 'Loading')}</span>
-                  ) : (
-                    <span>
-                      {editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')}
-                    </span>
-                  )}
-                  <span>{productCart.total && parsePrice(productCart.total)}</span>
-                </Button>
-              )}
-
-              {auth && !orderState.options?.address_id && (
-                orderState.loading ? (
-                  <Button
-                    className='add'
-                    color='primary'
-                    disabled
-                  >
-                    {t('LOADING', 'Loading')}
-                  </Button>
-                ) : (
-                  <AddressList
-                    isModal
-                    addressList={user.addresses}
-                    isProductForm
-                  />
-                )
-              )}
-
-              {(!auth || isSoldOut || maxProductQuantity <= 0) && (
-                <Button
-                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
-                  color='primary'
-                  outline
-                  disabled={isSoldOut || maxProductQuantity <= 0}
-                  onClick={() => setModalIsOpen(true)}
-                >
-                  {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
-                </Button>
-              )}
-            </ProductActions>
           </ProductInfo>
+          <ProductActions>
+            {
+              productCart && !isSoldOut && maxProductQuantity > 0 && (
+                <div className='incdec-control'>
+                  <FiMinusCircle
+                    onClick={decrement}
+                    className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
+                  />
+                  <span>{productCart.quantity}</span>
+                  <FiPlusCircle
+                    onClick={increment}
+                    className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                  />
+                </div>
+              )
+            }
+
+            {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
+              <Button
+                className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
+                color='primary'
+                onClick={() => handleSaveProduct()}
+                disabled={orderState.loading}
+                borderRounded
+              >
+                {orderState.loading ? (
+                  <span>{t('LOADING', 'Loading ')}</span>
+                ) : (
+                  <span>
+                    {editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')}
+                  </span>
+                )}
+                {!orderState.loading &&
+                  <span> - </span>}
+                <span>{productCart.total && parsePrice(productCart.total)}</span>
+              </Button>
+            )}
+
+            {auth && !orderState.options?.address_id && (
+              orderState.loading ? (
+                <Button
+                  className='add'
+                  color='primary'
+                  disabled
+                  borderRounded
+                >
+                  {t('LOADING', 'Loading ')}
+                </Button>
+              ) : (
+                <AddressList
+                  isModal
+                  addressList={user.addresses}
+                  isProductForm
+                />
+              )
+            )}
+
+            {(!auth || isSoldOut || maxProductQuantity <= 0) && (
+              <Button
+                className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
+                color='primary'
+                outline
+                borderRounded
+                disabled={isSoldOut || maxProductQuantity <= 0}
+                onClick={() => setModalIsOpen(true)}
+              >
+                {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
+              </Button>
+            )}
+          </ProductActions>
         </>
       )}
 
@@ -295,61 +306,63 @@ const ProductOptionsUI = (props) => {
         <Modal
           open={modalIsOpen}
           onClose={() => closeModal()}
-          width='70%'
+          width='55%'
           padding='0'
         >
-          {modalPageToShow === 'login' && (
-            <LoginForm
-              handleSuccessLogin={handleSuccessLogin}
-              elementLinkToSignup={
-                <a
-                  onClick={
-                    (e) => handleCustomModalClick(e, { page: 'signup' })
-                  } href='#'
-                >{t('CREATE_ACCOUNT', 'Create account')}
-                </a>
-              }
-              elementLinkToForgotPassword={
-                <a
-                  onClick={
-                    (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
-                  } href='#'
-                >{t('RESET_PASSWORD', 'Reset password')}
-                </a>
-              }
-              useLoginByCellphone
-              isPopup
-            />
-          )}
-          {modalPageToShow === 'signup' && (
-            <SignUpForm
-              elementLinkToLogin={
-                <a
-                  onClick={
-                    (e) => handleCustomModalClick(e, { page: 'login' })
-                  } href='#'
-                >{t('LOGIN', 'Login')}
-                </a>
-              }
-              useLoginByCellphone
-              useChekoutFileds
-              handleSuccessSignup={handleSuccessSignup}
-              isPopup
-            />
-          )}
-          {modalPageToShow === 'forgotpassword' && (
-            <ForgotPasswordForm
-              elementLinkToLogin={
-                <a
-                  onClick={
-                    (e) => handleCustomModalClick(e, { page: 'login' })
-                  } href='#'
-                >{t('LOGIN', 'Login')}
-                </a>
-              }
-              isPopup
-            />
-          )}
+          <AuthContainer>
+            {modalPageToShow === 'login' && (
+              <LoginForm
+                handleSuccessLogin={handleSuccessLogin}
+                elementLinkToSignup={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'signup' })
+                    } href='#'
+                  >{t('CREATE_ACCOUNT', 'Create account')}
+                  </a>
+                }
+                elementLinkToForgotPassword={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                    } href='#'
+                  >{t('RESET_PASSWORD', 'Reset password')}
+                  </a>
+                }
+                useLoginByCellphone
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'signup' && (
+              <SignUpForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', 'Login')}
+                  </a>
+                }
+                useLoginByCellphone
+                useChekoutFileds
+                handleSuccessSignup={handleSuccessSignup}
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'forgotpassword' && (
+              <ForgotPasswordForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', 'Login')}
+                  </a>
+                }
+                isPopup
+              />
+            )}
+          </AuthContainer>
         </Modal>
       )}
 

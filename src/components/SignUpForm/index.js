@@ -4,6 +4,8 @@ import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
+import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
+import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 
 import {
   SignupForm as SignUpController,
@@ -14,20 +16,24 @@ import {
 import {
   SignUpContainer,
   FormSide,
-  HeroSide,
   FormInput,
   SocialButtons,
-  TitleHeroSide,
   RedirectLink,
   SkeletonWrapper,
-  SkeletonSocialWrapper
+  SkeletonSocialWrapper,
+  FormTitle,
+  SignupWithEmail,
+  Line,
+  InputGroup,
+  WrapperPassword,
+  TogglePassword,
+  WrapTermsAndAgree
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
-import { useTheme } from 'styled-components'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
 
@@ -43,18 +49,17 @@ const SignUpFormUI = (props) => {
     formState,
     handleSuccessSignup,
     isPopup,
-    externalPhoneNumber,
-    saveCustomerUser
+    externalPhoneNumber
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
-  const theme = useTheme()
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
+  const [passwordSee, setPasswordSee] = useState(false)
 
   const handleSuccessFacebook = (user) => {
     login({
@@ -63,14 +68,16 @@ const SignUpFormUI = (props) => {
     })
   }
 
+  const togglePasswordView = () => {
+    setPasswordSee(!passwordSee)
+  }
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
-    } else if (!formState.loading && !formState.result?.error && formState.result?.result) {
-      saveCustomerUser && saveCustomerUser(formState.result?.result)
     }
   }, [formState])
 
@@ -148,99 +155,10 @@ const SignUpFormUI = (props) => {
 
   return (
     <SignUpContainer isPopup={isPopup}>
-      <HeroSide>
-        <TitleHeroSide>
-          <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
-          <p>{t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}</p>
-        </TitleHeroSide>
-      </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo sign up' width='200' height='66' loading='lazy' />
-        <FormInput
-          noValidate
-          isPopup={isPopup}
-          onSubmit={handleSubmit(onSubmit)}
-          isSkeleton={useChekoutFileds && validationFields?.loading}
-        >
-          {
-            !(useChekoutFileds && validationFields?.loading) ? (
-              <>
-                {
-                  validationFields?.fields?.checkout && Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
-                    showField(field.code) && (
-                      <Input
-                        key={field.id}
-                        type={field.enabled && field.required ? field.type : 'hidden'}
-                        name={field.code}
-                        aria-label={field.code}
-                        className='form'
-                        placeholder={t(field.name)}
-                        onChange={handleChangeInput}
-                        ref={register({
-                          required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
-                          pattern: {
-                            value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                            message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-                          }
-                        })}
-                        required={field.required}
-                        autoComplete='off'
-                      />
-                    )
-                  ))
-                }
-                {!!showInputPhoneNumber && !externalPhoneNumber && (
-                  <InputPhoneNumber
-                    value={userPhoneNumber}
-                    setValue={handleChangePhoneNumber}
-                    handleIsValid={setIsValidPhoneNumber}
-                  />
-                )}
-
-                {externalPhoneNumber && (
-                  <Input
-                    value={externalPhoneNumber}
-                    className='form'
-                    readOnly
-                    name='cellphone'
-                  />
-                )}
-
-                <Input
-                  type='password'
-                  name='password'
-                  aria-label='password'
-                  className='form'
-                  placeholder={t('PASSWORD', 'Password')}
-                  onChange={handleChangeInput}
-                  required
-                  ref={register({
-                    required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
-                    minLength: {
-                      value: 8,
-                      message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                    }
-                  })}
-                />
-              </>
-            ) : (
-              <>
-                {[...Array(5)].map((item, i) => (
-                  <SkeletonWrapper key={i}>
-                    <Skeleton height={43} />
-                  </SkeletonWrapper>
-                ))}
-              </>
-            )
-          }
-          <Button
-            color='primary'
-            type='submit'
-            disabled={formState.loading || validationFields.loading}
-          >
-            {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
-          </Button>
-        </FormInput>
+        <FormTitle>
+          {t('SIGN_UP', 'Sign up')}
+        </FormTitle>
         {elementLinkToLogin && (
           <RedirectLink register isPopup={isPopup}>
             <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')}</span>
@@ -265,6 +183,106 @@ const SignUpFormUI = (props) => {
             )}
           </>
         )}
+        <SignupWithEmail>
+          <Line />
+          <p>{t('OR_CONTINUE_WITH_EMAIL', 'or continue with email')}</p>
+          <Line />
+        </SignupWithEmail>
+        <FormInput
+          noValidate
+          isPopup={isPopup}
+          onSubmit={handleSubmit(onSubmit)}
+          isSkeleton={useChekoutFileds && validationFields?.loading}
+        >
+          {
+            !(useChekoutFileds && validationFields?.loading) ? (
+              <>
+                {
+                  validationFields?.fields?.checkout && Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
+                    showField(field.code) && (
+                      <InputGroup key={field.id}>
+                        <label>{t(field.name)}</label>
+                        <Input
+                          type={field.enabled && field.required ? field.type : 'hidden'}
+                          name={field.code}
+                          aria-label={field.code}
+                          className='form'
+                          onChange={handleChangeInput}
+                          ref={register({
+                            required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
+                            pattern: {
+                              value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
+                              message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+                            }
+                          })}
+                          required={field.required}
+                          autoComplete='off'
+                        />
+                      </InputGroup>
+                    )
+                  ))
+                }
+                {!!showInputPhoneNumber && !externalPhoneNumber && (
+                  <InputPhoneNumber
+                    value={userPhoneNumber}
+                    setValue={handleChangePhoneNumber}
+                    handleIsValid={setIsValidPhoneNumber}
+                  />
+                )}
+
+                {externalPhoneNumber && (
+                  <Input
+                    value={externalPhoneNumber}
+                    className='form'
+                    readOnly
+                    name='cellphone'
+                  />
+                )}
+                <InputGroup>
+                  <label>{t('PASSWORD', 'Password')}</label>
+                  <WrapperPassword>
+                    <Input
+                      type={!passwordSee ? 'password' : 'text'}
+                      name='password'
+                      aria-label='password'
+                      className='form'
+                      onChange={handleChangeInput}
+                      required
+                      ref={register({
+                        required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                        minLength: {
+                          value: 8,
+                          message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                        }
+                      })}
+                    />
+                    <TogglePassword onClick={togglePasswordView}>
+                      {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                    </TogglePassword>
+                  </WrapperPassword>
+                </InputGroup>
+              </>
+            ) : (
+              <>
+                {[...Array(5)].map((item, i) => (
+                  <SkeletonWrapper key={i}>
+                    <Skeleton height={43} />
+                  </SkeletonWrapper>
+                ))}
+              </>
+            )
+          }
+          <Button
+            color='primary'
+            type='submit'
+            disabled={formState.loading || validationFields.loading}
+          >
+            {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
+          </Button>
+          <WrapTermsAndAgree>
+            When you click Register, Continue with Facebook, Continue with Google, Continue with Apple, you agree to our <span>Terms and Conditions</span> and <span>Privacy Statement</span>
+          </WrapTermsAndAgree>
+        </FormInput>
       </FormSide>
       <Alert
         title={t('SIGN_UP', 'Sign up')}

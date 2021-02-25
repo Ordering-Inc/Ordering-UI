@@ -5,52 +5,27 @@ export const SignUpContainer = styled.div`
   height: 100%;
   display: flex;
   min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
-
+  background: ${props => props.theme.colors.lightGrayColor};
   flex-direction: column;
-
+  
   @media (min-width: 768px) {
     flex-direction: row;
+    ${({ isPopup }) => !isPopup && css`
+      padding-top: 60px;
+    `}
   }
 `
 const Side = styled.div`
   display: flex;
   width: 100%;
 `
-export const HeroSide = styled(Side)`
-  display: none;
-
-  @media (min-width: 992px) {
-    width: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: ${props => props.theme.colors.primaryContrast};
-    background-color:  ${props => props.theme.colors.primary};
-  }
-`
-
-export const TitleHeroSide = styled.div`
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-  h1 {
-    font-size: 50px;
-  }
-
-  h1,
-  p {
-    margin: 0px;
-    color: #FFF;
-  }
-`
 
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  margin: 0 auto;
+  background: #fff;
+  padding-bottom: 40px;
 
   @media (min-width: 769px) {
     ${({ isPopup }) => isPopup && css`
@@ -59,7 +34,8 @@ export const FormSide = styled(Side)`
   }
 
   @media (min-width: 992px) {
-    width: 45%;
+    min-width: 580px;
+    width: ${({ isPopup }) => isPopup ? '100%' : '45%'};
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }
 
@@ -73,6 +49,10 @@ export const FormInput = styled.form`
   display: flex;
   flex-direction: column;
 
+  input {
+    padding: 10px 20px;
+  }
+
   div.phone_number {
     margin: 10px 0px;
     width: 100%;
@@ -85,12 +65,12 @@ export const FormInput = styled.form`
 
   button {
     margin-top: 10px;
-    padding: 5px;
+    padding: 10px 15px;
   }
 `
 
 export const RedirectLink = styled.div`
-  padding: 10px;
+  padding: 20px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,6 +80,7 @@ export const RedirectLink = styled.div`
 
   span {
     margin-right: 5px;
+    color: ${props => props.theme.colors.grayTextColor};
 
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
@@ -169,7 +150,7 @@ export const SocialButtons = styled.div`
 export const SkeletonWrapper = styled.div`
   span{
     margin: 10px 0;
-    border-radius: 30px;
+    border-radius: 10px;
   }
 `
 
@@ -177,5 +158,77 @@ export const SkeletonSocialWrapper = styled(SkeletonWrapper)`
   width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   span{
     margin-top: 0;
+  }
+`
+export const FormTitle = styled.h1`
+  font-size: 42px;
+  margin-bottom: 0px;
+
+  @media (max-width: 992px) {
+    font-size: 32px;
+  }
+`
+export const SignupWithEmail = styled.div`
+  display: flex;
+  align-items: center;
+  width: 80%;
+  p {
+    color: ${props => props.theme.colors.grayTextColor};
+    padding: 0 10px;
+    font-size: 16px;
+  }
+`
+export const Line = styled.div`
+  flex: 1;
+  border-bottom: 1px solid ${props => props.theme.colors.grayTextColor};
+`
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  padding: 10px 0;
+  label {
+    font-weight: 500;
+    font-size: 18px;
+  }
+`
+export const TogglePassword = styled.span`
+  position: absolute;
+  font-weight: 300;
+  padding: 10px 0;
+  color: #333;
+  font-size: 26px;
+  transform: translate(-150%, 10%);
+  max-height: 100%;
+  ${props => props.theme?.rtl && css`
+    transform: translate(150%, 10%);
+  `}
+  svg{
+    cursor: pointer;
+  }
+ 
+`
+
+export const WrapperPassword = styled.div`
+  position: relative;
+  input{
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: 40px;
+  }
+`
+
+export const WrapTermsAndAgree = styled.div`
+  padding: 20px 0;
+  color: ${props => props.theme.colors.grayTextColor};
+  font-size: 18px;
+  span {
+    cursor: pointer;
+    color: ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+  }
+
+  @media (max-width: 576px) {
+    font-size: 14px;
   }
 `

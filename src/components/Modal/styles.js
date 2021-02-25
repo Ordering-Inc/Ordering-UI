@@ -83,7 +83,7 @@ export const ModalIcon = styled.span`
   top: 6px;
   font-size: 30px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 1000;
   ${props => props.theme?.rtl && css`
     left: 5px;
     right: initial;

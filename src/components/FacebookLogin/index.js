@@ -1,23 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   FacebookLoginButton as FacebookLoginController,
   useLanguage
 } from 'ordering-components'
-import FaFacebook from '@meronex/icons/fa/FaFacebook'
+import EnFacebook from '@meronex/icons/en/EnFacebook'
+import { Modal } from '../Modal'
+import { FacebookLoginContent } from '../FacebookLoginContent'
 import { FacebookButton } from './styles'
 
 const FacebookLoginButtonUI = (props) => {
+  const {
+    isCustomTitle,
+    handleFacebookLogin
+  } = props
+
   const [, t] = useLanguage()
-  const { handleFacebookLogin } = props
+  const [openModal, setOpenModal] = useState(false)
+
+  const onClickFacebookButton = () => {
+    setOpenModal(true)
+  }
   return (
-    <FacebookButton
-      initialIcon
-      color='secondary'
-      onClick={() => handleFacebookLogin()}
-    >
-      <FaFacebook />
-      <div>{t('LOGIN_WITH_FACEBOOK', 'Login with Facebook')}</div>
-    </FacebookButton>
+    <>
+      <FacebookButton
+        initialIcon
+        isCustomTitle={isCustomTitle}
+        onClick={() => onClickFacebookButton()}
+      >
+        {!isCustomTitle ? (
+          <div><EnFacebook /> {t('CONTINUE_WITH_FACEBOOK', 'Continue with Facebook')}</div>
+        ) : (
+          <div>{isCustomTitle}</div>
+        )}
+      </FacebookButton>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        hideCloseDefault
+      >
+        <FacebookLoginContent
+          handleFacebookLogin={handleFacebookLogin}
+          onCancel={() => setOpenModal(false)}
+        />
+      </Modal>
+    </>
   )
 }
 

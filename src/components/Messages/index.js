@@ -372,10 +372,7 @@ const MessagesUI = (props) => {
                 <BubbleConsole>
                   {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
                   <strong>{parseDate(order.created_at)}</strong> {' '}
-                  {t('VIA', 'Via')}{' '}
-                  <strong>
-                    {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
-                  </strong>{' '}
+                  {t('VIA', 'Via')} <strong>{order.app_id}</strong>{' '}
                   <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
                 </BubbleConsole>
               </MessageConsole>

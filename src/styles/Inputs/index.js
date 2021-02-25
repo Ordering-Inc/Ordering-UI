@@ -6,7 +6,7 @@ export const Input = styled.input`
   background: #FFF;
   color: #010300;
   border: 1px solid #DBDCDB;
-  border-radius: 30px;
+  border-radius: 5px;
   font-size: 16px;
   padding: 7px 15px;
   outline: none;
@@ -76,7 +76,7 @@ export const TextArea = styled.textarea`
   background: #FFF;
   color: #010300;
   border: 1px solid #DBDCDB;
-  border-radius: 16px;
+  border-radius: 10px;
   font-size: 16px;
   padding: 7px 15px;
   outline: none;

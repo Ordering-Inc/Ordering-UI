@@ -2,15 +2,19 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
   width: 100%;
   margin-top: 20px;
+  padding-top: 60px;
 `
 
 export const WrapperContainer = styled.div`
-  width: ${({ isLoading }) => isLoading ? '100%' : '80%'};
+  width: ${({ isLoading }) => isLoading ? '100%' : '91%'};
   margin: auto;
+  display: flex;
+
+  @media (max-width: 992px) {
+    flex-direction: column-reverse;
+  }
 `
 
 export const Header = styled.div`
@@ -106,24 +110,11 @@ export const HeaderText = styled.div`
 `
 
 export const Content = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   margin: 10px 0px;
-`
-
-export const OrderBusiness = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background: #F8F8F8 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #00000029;
-  opacity: 1;
-  margin: 20px 0px;
-  padding: 10px;
-`
-
-export const BusinessWrapper = styled.div`
-  width: 90%;
-  display: flex;
+  padding: 0 10px;
 `
 
 export const LogoWrapper = styled.div`
@@ -159,28 +150,25 @@ export const BusinessLogo = (props) => {
 }
 
 export const BusinessInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 65%;
-  h1,
-  p {
-    margin: 3px 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   h1 {
-    font-size: 18px;
-  }
-  p {
-    font-size: 15px;
-    opacity: 0.8;
+    cursor: pointer;
+    width: 100%;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: ${props => props.theme.colors.darkTextColor};
   }
 
-  @media (min-width: 380px) {
-    width: 75%;
+  p {
+    color: ${props => props.theme.colors.grayTextColor};
+    margin-bottom: 0px;
+  }
+
+  @media (max-width: 992px) {
+    h1 {
+      font-size: 18px;
+    }
   }
 `
 
@@ -212,76 +200,80 @@ export const ActionsBlock = styled.div`
 `
 
 export const OrderInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin: 10px 0px 20px;
+  padding: 0 30px;
+  border-bottom: 1px solid ${props => props.theme.colors.secondary};
+
+  @media (max-width: 1200px) {
+    padding: 0 10px;
+  }
 `
 
 export const OrderData = styled.div`
-  width: 55%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  h1, p {
-    margin: 0px;
-  }
   h1 {
-    margin-bottom: 5px;
-    font-size: 24px;
-  }
-  p {
-    font-size: 14px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  p:nth-child(1) {
-    opacity: 0.8;
-  }
-  p.date {
-    font-weight: bold;
-  }
-  p.uuid {
-    display: none;
-  }
-
-  @media (min-width: 768px){
-    width: 75%;
-  }
-
-  @media (min-width: 512px) {
-    p.uuid {
-      display: block;
+    width: 100%;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: ${props => props.theme.colors.darkTextColor};
+    span {
+      &:not(:first-child) {
+        color: ${props => props.theme.colors.primary};
+        font-size: 24px;
+        cursor: pointer;
+      }
     }
   }
 
-  @media (min-width: 425px) {
-    p {
-      font-size: 18px;
+  p {
+    color: ${props => props.theme.colors.grayTextColor};
+  }
+
+  @media (max-width: 992px) {
+    h1 {
+      font-size: 24px;
     }
   }
 `
+export const OrderBusiness = styled(OrderInfo)`
+`
 
-const StatusBarStyled = styled.div`
+export const StatusBar = styled.div`
+  position: relative;
   height: 7px;
-  margin: 10px 0px 0px;
+  margin: 25px 0px 40px;
   background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
   ${props => props.theme?.rtl && css`
     background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)
   `}
+
+  > div {
+    position: absolute;
+    top: -8px;
+    width: 100%;
+    display: flex;
+
+    div {
+      width: calc(100% / 3);
+      text-align: right;
+    }
+  }
 `
 
-export const StatusBar = (props) => {
-  return (
-    <StatusBarStyled
-      {...props}
-      // style={{ background: `linear-gradient(to right, #D81212 ${props.percentage}%, #BFBFBF ${props.percentage}%)` }}
-    >
-      {props.children}
-    </StatusBarStyled>
-  )
-}
+export const Step = styled.span`
+  background: #fff;
+  padding: 0 5px;
+  svg {
+    color: ${props => props.theme.colors.disabled};
+    font-size: 24px;
+  }
+
+  ${({ active }) => active && css`
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
+  `}
+`
 
 export const OrderStatus = styled.div`
   width: 45%;
@@ -348,27 +340,26 @@ export const SectionTitle = styled.h1`
   }
 `
 
-export const OrderCustomer = styled.div`
-  display: flex;
-  margin: 10px 0px 20px;
-  width: 100%;
-
-  div.photo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      width: 70px;
-      height: 70px;
-      margin: 0 10px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 10px;
-        margin-right: 0;
-      `}
-    }
+export const OrderCustomer = styled(OrderInfo)`
+  h1 {
+    font-size: 24px;
+    margin-bottom: 0px;
   }
 
+  p {
+    color: ${props => props.theme.colors.grayTextColor};
+    font-size: 18px;
+  }
+
+  @media (max-width: 992px) {
+    h1 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
 `
 
 export const PhotoBlock = styled.img`
@@ -406,8 +397,8 @@ export const InfoBlock = styled.div`
 `
 
 export const Map = styled.div`
-  width: 100%;
-  height: 50vh;
+  width: 60%;
+  height: calc(100vh - 120px);
   margin-bottom: 10px;
 
   > div {
@@ -415,6 +406,16 @@ export const Map = styled.div`
     width: 100% !important;
     height: 100% !important;
     border-radius: 15px;
+  }
+
+  ${({ isSkeleton }) => isSkeleton && css`
+    padding-top: 37px;
+  `}
+
+  @media (max-width: 992px) {
+    height: 30vh;
+    min-height: 200px;
+    width: 100%;
   }
 `
 
@@ -454,7 +455,8 @@ export const OrderBill = styled.div`
   align-items: center;
   flex-direction: column;
   table {
-    width: 90%;
+    padding: 0 30px;
+    width: 100%;
     font-size: 12px;
     td span {
       unicode-bidi: bidi-override;
@@ -484,6 +486,12 @@ export const OrderBill = styled.div`
     }
   }
 
+  @media (max-width: 1200px) {
+    table {
+      padding: 0 10px;
+    }
+  }
+
   @media (min-width: 678px) {
     table {
       font-size: 18px;
@@ -492,23 +500,32 @@ export const OrderBill = styled.div`
 `
 
 export const ReviewsAction = styled.div`
+  margin: 30px 0 20px;
+  padding: 20px;
+  cursor: pointer;
+  background: #F7F7F7;
   width: 100%;
   display: flex;
-  justify-content: center;
-  margin: 20px 0px;
-
-  button {
-    width: 100%;
-    padding: 5px 20px;
-    color: #FFF;
-    cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    margin: 0px;
   }
-
-  @media (min-width: 480px) {
-    button {
-      width: 70%;
+  >div {
+    > div {
+      display: flex;
+      column-gap: 5px;
+  
+      svg {
+        color: ${props => props.theme.colors.grayTextColor};
+      }
     }
   }
+
+  svg {
+    font-size: 24px;
+  }
+  
 `
 
 export const FootActions = styled.div`
@@ -538,18 +555,6 @@ export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
   border-radius: 16px;
   margin-bottom: 30px;
-  span:nth-child(2),span:nth-child(5){
-      span{
-        height: 100px;
-      }
-    }
-  @media (min-width: 768px){
-    span:nth-child(2), span:nth-child(5){
-      span{
-        height: 200px;
-      }
-    }
-  }
 `
 
 export const SkeletonBlockWrapp = styled.div`
@@ -558,105 +563,43 @@ export const SkeletonBlockWrapp = styled.div`
   align-items: center;
   margin-top: 20px;
   line-height: 40px;
+  width: 100%;
 `
 
-export const ShareOrder = styled.div`
+export const ShareOrder = styled(OrderInfo)`
   display: flex;
-  margin: 0 0 20px;
   justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  cursor: pointer;
 
-  h1 {
-    font-size: 15px;
-    margin: 0px;
+  svg {
+    font-size: 24px;
   }
 
-  p {
-    font-size: 13px;
-    margin: 0px;
-  }
-
-  button {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    font-size: 14px;
-    align-items: center;
-    background: ${props => props.theme.colors.backgroundPage};
-
-    svg {
-      left: 0;
-      margin-right: 6px;
-      color: ${props => props.theme.colors.primary};
-    }
-
-    &:hover {
-      svg {
-        color: #FFFFFF;
-      }
-    }
-  }
-
-  div.text {
-    width: 60%;
-  }
-
-  div.wrap {
+  > div {
     display: flex;
     align-items: center;
-
-    & > div:first-child {
-      width: 100%;
-      position: relative;
-      div {
-        right: 0px;
-        left: initial;
-        top: 35px;
-      }
-    }
-  }
-
-  @media (min-width: 1201px) {
-    div.wrap {
-      & > div:first-child {
-        left: 0;
-      }
-    }
-  }
-
-  @media (min-width: 768px) {
-    div.wrap {
-      width: 30%;
-    }
-
-    h1 {
-      font-size: 20px;
-    }
+    column-gap: 10px;
 
     p {
+      margin: 0px;
       font-size: 18px;
-    }
-
-    button {
-      font-size: 18px;
-      width: 100%;
-      svg {
-        position: absolute;
-        margin-left: 10px;
+      span {
+        &:not(:first-child) {
+          font-weight: 500;
+          padding: 0 5px;
+        }
       }
     }
   }
 
-  @media (min-width: 425px) {
-    div.text {
-      width: 70%;
-    }
-
-    h1 {
-      font-size: 18px;
-    }
-
-    p {
-      font-size: 15px;
+  @media (max-width: 992px) {
+    > div {
+      p {
+        font-size: 14px;
+      }
     }
   }
 `
@@ -673,4 +616,13 @@ export const ExclamationWrapper = styled.div`
     font-size: 16px;
     color: ${props => props.theme?.colors?.primary}
   }
+`
+export const WrapBack = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 24px;
+  color: ${props => props.theme.colors.primary};
+  font-weight: 500;
+  cursor: pointer;
 `

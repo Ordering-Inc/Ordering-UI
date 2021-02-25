@@ -1,153 +1,171 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import FiClock from '@meronex/icons/fi/FiClock'
-import GrLocation from '@meronex/icons/gr/GrLocation'
-import GrDeliver from '@meronex/icons/gr/GrDeliver'
-import FaStar from '@meronex/icons/fa/FaStar'
-import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
-
-import { Modal } from '../Modal'
-import { BusinessInformation } from '../BusinessInformation'
-
-import { useUtils, useOrder } from 'ordering-components'
+import AiFillStar from '@meronex/icons/ai/AiFillStar'
+import BsDot from '@meronex/icons/bs/BsDot'
+import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
+import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 
 import { convertHoursToMinutes } from '../../utils'
 
 import {
   BusinessContainer,
-  BusinessContent,
   WrapperBusinessLogo,
   BusinessLogo,
   BusinessInfo,
-  BusinessInfoItem
+  BusinessInfoItem,
+  BusinessName,
+  BusinessDetail,
+  WrapperBottom,
+  DeliveryAndMin,
+  GroupAndSelector
 } from './styles'
-
-const types = ['food', 'laundry', 'alcohol', 'groceries']
 
 export const BusinessBasicInformation = (props) => {
   const {
     isSkeleton,
-    businessState,
-    setOpenBusinessInformation,
-    openBusinessInformation
+    businessState
   } = props
   const { business, loading } = businessState
 
   const [orderState] = useOrder()
+  const [, t] = useLanguage()
+  const [configState] = useConfig()
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
-  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
-
-  const getBusinessType = () => {
-    if (Object.keys(business).length <= 0) return 'none'
-    const typeObj = types.map(t => {
-      return { [t]: business[t] }
-    }).reduce((r, c) => ({ ...r, ...c }), {})
-    const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])[0]
-    return businessType[0]
-  }
+  const [{ parsePrice, optimizeImage }] = useUtils()
 
   return (
-    <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container'>
-      <BusinessContent>
+    <>
+      <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container'>
         <WrapperBusinessLogo>
           {!loading ? (
             <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
           ) : (
-            <Skeleton height={70} width={70} />
+            <Skeleton height={90} width={90} />
           )}
         </WrapperBusinessLogo>
-        <BusinessInfo className='info'>
-          <BusinessInfoItem>
-            <div>
-              {!loading ? (
-                <p className='bold'>{business?.name}</p>
-              ) : (
-                <Skeleton width={100} />
-              )}
-              {!loading ? (
+      </BusinessContainer>
+
+      <BusinessInfo className='info'>
+        <BusinessInfoItem>
+          <BusinessName>
+            {!loading ? (
+              <>{business?.name}</>
+            ) : (
+              <Skeleton width={100} />
+            )}
+          </BusinessName>
+          <BusinessDetail>
+            {!loading ? (
+              <>
+                <p>{t('ORDER_PASS', 'OrderPass')}</p>
+                <BsDot />
+              </>
+            ) : (
+              <Skeleton width={150} />
+            )}
+            {!loading ? (
+              <>
+                {orderState?.options.type === 1 && (
+                  <>
+                    <p>{parsePrice(business?.delivery_price || 0)} {t('DELIVERY', 'delivery')}</p>
+                    <BsDot />
+                  </>
+                )}
+              </>
+            ) : (
+              <Skeleton width={200} />
+            )}
+            {!loading ? (
+              <p>
+                {business?.reviews?.total}
+                <AiFillStar />
+              </p>
+            ) : (
+              <Skeleton width={100} />
+            )}
+            {!loading ? (
+              <>
                 <p>
-                  <FaStar className='start' />
-                  {business?.reviews?.total}
+                  ({business?.reviews?.reviews.length} {t('RATINGS', 'ratings')})
                 </p>
-              ) : (
-                <Skeleton width={100} />
-              )}
-            </div>
-            <div>
-              {!loading ? (
-                <p className='type'>{getBusinessType()}</p>
-              ) : (
-                <Skeleton width={100} />
-              )}
-            </div>
-            <div>
+                <BsDot />
+              </>
+            ) : (
+              <Skeleton width={150} />
+            )}
+            {!loading ? (
+              <>
+                {orderState?.options?.type === 1 ? (
+                  <p>
+                    {convertHoursToMinutes(business?.delivery_time)}
+                  </p>
+                ) : (
+                  <p>
+                    {convertHoursToMinutes(business?.pickup_time)}
+                  </p>
+                )}
+              </>
+            ) : (
+              <Skeleton width={70} />
+            )}
+          </BusinessDetail>
+        </BusinessInfoItem>
+      </BusinessInfo>
+      <WrapperBottom>
+        <DeliveryAndMin>
+          {orderState?.options.type === 1 && (
+            <div className='delivery'>
               {!loading ? (
                 <>
-                  {orderState?.options?.type === 1 ? (
-                    <h5>
-                      <FiClock />
-                      {convertHoursToMinutes(business?.delivery_time)}
-                    </h5>
-                  ) : (
-                    <h5>
-                      <FiClock />
-                      {convertHoursToMinutes(business?.pickup_time)}
-                    </h5>
-                  )}
+                  <p>
+                    {business && parsePrice(business?.delivery_price || 0)}
+                  </p>
+                  <p>{t('DELIVERY_FEE', 'Delivery fee')}</p>
                 </>
               ) : (
-                <Skeleton width={70} />
-              )}
-
-              {!loading ? (
-                <h5>
-                  <GrLocation />
-                  {parseDistance(business?.distance || 0)}
-                </h5>
-              ) : (
-                <Skeleton width={70} />
-              )}
-              {orderState?.options.type === 1 && (
                 <>
-                  {!loading ? (
-                    <h5>
-                      <GrDeliver />
-                      {business && parsePrice(business?.delivery_price || 0)}
-                    </h5>
-                  ) : (
+                  <p>
                     <Skeleton width={70} />
-                  )}
+                  </p>
+                  <p>
+                    <Skeleton width={70} />
+                  </p>
                 </>
               )}
-
-              {!loading && (
-                <h5>
-                  <BsExclamationCircle
-                    className='popup'
-                    onClick={() => setOpenBusinessInformation(true)}
-                  />
-                </h5>
-              )}
             </div>
-          </BusinessInfoItem>
-        </BusinessInfo>
-      </BusinessContent>
-
-      <Modal
-        width='70%'
-        open={openBusinessInformation}
-        onClose={setOpenBusinessInformation}
-        padding='0'
-        hideCloseDefault
-        isTransparent
-      >
-        <BusinessInformation
-          business={business}
-          getBusinessType={getBusinessType}
-          optimizeImage={optimizeImage}
-          onClose={setOpenBusinessInformation}
-        />
-      </Modal>
-    </BusinessContainer>
+          )}
+          <div>
+            {!loading ? (
+              <>
+                <p>{convertHoursToMinutes(business?.delivery_time)}</p>
+                <p>{t('MINUTES', 'Minutes')}</p>
+              </>
+            ) : (
+              <>
+                <p>
+                  <Skeleton width={70} />
+                </p>
+                <p>
+                  <Skeleton width={70} />
+                </p>
+              </>
+            )}
+          </div>
+        </DeliveryAndMin>
+        {!loading && (
+          <GroupAndSelector>
+            {/* <Button color='secondary' onClick={() => OnGroupOrderClick()}>
+              <AiOutlineUserAdd />
+              {t('GROUP_ORDER', 'Group Order')}
+            </Button> */}
+            <OrderTypeSelectorHeader
+              configTypes={configTypes}
+              toggle
+            />
+          </GroupAndSelector>
+        )}
+      </WrapperBottom>
+    </>
   )
 }

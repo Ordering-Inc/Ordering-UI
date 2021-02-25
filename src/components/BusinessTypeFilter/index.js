@@ -12,51 +12,88 @@ const BusinessTypeFilterUI = (props) => {
     images,
     businessTypes,
     currentTypeSelected,
-    handleChangeBusinessType
+    handleChangeBusinessType,
+    noAutoScroll
   } = props
   const [, t] = useLanguage()
   const [load, setLoad] = useState(false)
 
   return (
-    <TypeContainer id='container'>
+    <TypeContainer id='container' noAutoScroll={noAutoScroll}>
       <Tabs variant='primary'>
-        <AutoScroll>
-          {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
-            <Tab className='category' active={type.value === currentTypeSelected} key={type.value}>
-              {!type.value || i > (images.length - 1) ? (
-                <ImageContainer active={type.value === currentTypeSelected} load={load}>
-                  <img
-                    src={images[0].image}
-                    alt='all'
-                    onLoad={() => setLoad(true)}
-                    onClick={() => handleChangeBusinessType(type.value)}
-                    width='150px'
-                    height='150px'
-                    loading='lazy'
-                  />
-                </ImageContainer>)
-                : ''}
-              {images.map(image => (
-                <React.Fragment key={image.value}>
-                  {image.value === type.value ? (
-                    <ImageContainer active={type.value === currentTypeSelected} load={load}>
-                      <img
-                        src={image.image}
-                        alt={type.value}
-                        onClick={() => handleChangeBusinessType(type.value)}
-                        width='150px'
-                        height='150px'
-                        loading='lazy'
-                      />
-                    </ImageContainer>)
-                    : ''}
-                </React.Fragment>
-              )
-              )}
-              {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
-            </Tab>
-          ))}
-        </AutoScroll>
+        {!noAutoScroll ? (
+          <AutoScroll>
+            {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
+              <Tab className='category' active={type.value === currentTypeSelected} key={type.value}>
+                {!type.value || i > (images.length - 1) ? (
+                  <ImageContainer active={type.value === currentTypeSelected} load={load}>
+                    <img
+                      src={images[0].image}
+                      alt='all'
+                      onLoad={() => setLoad(true)}
+                      onClick={() => handleChangeBusinessType(type.value)}
+                      width='150px'
+                      height='150px'
+                      loading='lazy'
+                    />
+                  </ImageContainer>)
+                  : ''}
+                {images.map(image => (
+                  <React.Fragment key={image.value}>
+                    {image.value === type.value ? (
+                      <ImageContainer active={type.value === currentTypeSelected} load={load}>
+                        <img
+                          src={image.image}
+                          alt={type.value}
+                          onClick={() => handleChangeBusinessType(type.value)}
+                          width='150px'
+                          height='150px'
+                          loading='lazy'
+                        />
+                      </ImageContainer>)
+                      : ''}
+                  </React.Fragment>
+                )
+                )}
+                {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
+              </Tab>
+            ))}
+          </AutoScroll>
+        ) : (
+          <>
+            {businessTypes && businessTypes.length > 0 && businessTypes.map((type, i) => (
+              <Tab className='category' active={type.value === currentTypeSelected} key={type.value}>
+                {!type.value || i > (images.length - 1) ? (
+                  <ImageContainer noAutoScroll={noAutoScroll} active={type.value === currentTypeSelected} load={load}>
+                    <img
+                      src={images[0].image}
+                      alt='all'
+                      onLoad={() => setLoad(true)}
+                      onClick={() => handleChangeBusinessType(type.value)}
+                      loading='lazy'
+                    />
+                  </ImageContainer>)
+                  : ''}
+                {images.map(image => (
+                  <React.Fragment key={image.value}>
+                    {image.value === type.value ? (
+                      <ImageContainer noAutoScroll={noAutoScroll} active={type.value === currentTypeSelected} load={load}>
+                        <img
+                          src={image.image}
+                          alt={type.value}
+                          onClick={() => handleChangeBusinessType(type.value)}
+                          loading='lazy'
+                        />
+                      </ImageContainer>)
+                      : ''}
+                  </React.Fragment>
+                )
+                )}
+                {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
+              </Tab>
+            ))}
+          </>
+        )}
       </Tabs>
     </TypeContainer>
   )
@@ -70,14 +107,14 @@ export const BusinessTypeFilter = (props) => {
     businessTypes: props.businessTypes || [
       { key: 'All', value: null },
       { key: 'Food', value: 'food' },
-      { key: 'Alcohol', value: 'alcohol' },
       { key: 'Groceries', value: 'groceries' },
+      { key: 'Alcohol', value: 'alcohol' },
       { key: 'Laundry', value: 'laundry' }
     ],
     images: props.images || [
       { image: theme.images?.categories?.all, value: 'all' },
       { image: theme.images?.categories?.food, value: 'food' },
-      { image: theme.images?.categories?.groceries, value: 'groceries' },
+      { image: theme.images?.categories?.grocery, value: 'groceries' },
       { image: theme.images?.categories?.alcohol, value: 'alcohol' },
       { image: theme.images?.categories?.laundry, value: 'laundry' }
     ],

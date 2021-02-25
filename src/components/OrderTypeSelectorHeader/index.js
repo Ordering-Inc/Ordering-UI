@@ -1,30 +1,55 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
+import MdRadioButtonChecked from '@meronex/icons/md/MdRadioButtonChecked'
+import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
+
 import { OrderTypeControl, useLanguage } from 'ordering-components'
-import { Select } from '../../styles/Select'
-import FaCarSide from '@meronex/icons/fa/FaCarSide'
-import FaTruckPickup from '@meronex/icons/fa/FaTruckPickup'
-import MdcTruckDeliveryOutline from '@meronex/icons/mdc/MdcTruckDeliveryOutline'
-import AiFillShop from '@meronex/icons/ai/AiFillShop'
-import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
-import { Option, OrderTypeWrapper, SelectedOption, ContentOption } from './styles'
+import {
+  Option,
+  OrderTypeWrapper
+} from './styles'
 
 const OrderTypeSelectorHeaderUI = (props) => {
   const {
+    toggle,
+    radioStyle,
     handleChangeOrderType,
     typeSelected,
     defaultValue,
     configTypes,
     orderTypes
   } = props
+  const location = useLocation()
+  const isDeliveryAndPickup = location.pathname === '/search' || location.pathname === '/pickup'
+  const options = orderTypes.filter(type => configTypes?.includes(type.value))
 
   return (
     typeSelected !== undefined && (
-      <OrderTypeWrapper>
-        <Select
-          options={orderTypes.filter(type => configTypes?.includes(type.value))}
-          defaultValue={defaultValue || typeSelected}
-          onChange={(orderType) => handleChangeOrderType(orderType)}
-        />
+      <OrderTypeWrapper
+        radioStyle={radioStyle}
+        toggle={toggle}
+        isDeliveryAndPickup={isDeliveryAndPickup}
+      >
+        {options.map(type => (
+          <Option
+            key={type.value}
+            selected={type.value === defaultValue || type.value === typeSelected}
+            onClick={() => handleChangeOrderType(type.value)}
+            toggle={toggle}
+            radioStyle={radioStyle}
+          >
+            {radioStyle && (
+              <>
+                {type.value === typeSelected ? (
+                  <MdRadioButtonChecked />
+                ) : (
+                  <MdRadioButtonUnchecked />
+                )}
+              </>
+            )}
+            {type.content}
+          </Option>
+        ))}
       </OrderTypeWrapper>
     )
   )
@@ -39,28 +64,11 @@ export const OrderTypeSelectorHeader = (props) => {
     orderTypes: props.orderTypes || [
       {
         value: 1,
-        content: <Option><MdcTruckDeliveryOutline /><ContentOption>{t('DELIVERY', 'Delivery')}</ContentOption></Option>,
-        showOnSelected: <Option><MdcTruckDeliveryOutline /><SelectedOption>{t('DELIVERY', 'Delivery')}</SelectedOption></Option>
+        content: t('DELIVERY', 'Delivery')
       },
       {
         value: 2,
-        content: <Option><FaTruckPickup /><ContentOption>{t('PICKUP', 'Pickup')}</ContentOption></Option>,
-        showOnSelected: <Option><FaTruckPickup /><SelectedOption>{t('PICKUP', 'Pickup')}</SelectedOption></Option>
-      },
-      {
-        value: 3,
-        content: <Option><AiFillShop /><ContentOption>{t('EAT_IN', 'Eat in')}</ContentOption></Option>,
-        showOnSelected: <Option><AiFillShop /><SelectedOption>{t('EAT_IN', 'Eat in')}</SelectedOption></Option>
-      },
-      {
-        value: 4,
-        content: <Option><GiFoodTruck /><ContentOption>{t('CURBSIDE', 'Curbside')}</ContentOption></Option>,
-        showOnSelected: <Option><GiFoodTruck /><SelectedOption>{t('CURBSIDE', 'Curbside')}</SelectedOption></Option>
-      },
-      {
-        value: 5,
-        content: <Option><FaCarSide /><ContentOption>{t('DRIVE_THRU', 'Drive thru')}</ContentOption></Option>,
-        showOnSelected: <Option><FaCarSide /><SelectedOption>{t('DRIVE_THRU', 'Drive thru')}</SelectedOption></Option>
+        content: t('PICKUP', 'Pickup')
       }
     ]
   }

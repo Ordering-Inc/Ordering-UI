@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 import { useOrder, useLanguage, useEvent } from 'ordering-components'
 import { usePopper } from 'react-popper'
-import { HeaderItem, PopoverBody, PopoverArrow, Container, Title } from './styles'
-import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
-import { AddressList } from '../AddressList'
-import { AddressForm } from '../AddressForm'
+import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
+import { AddressContent } from '../AddressContent'
 
 export const AddressesPopover = (props) => {
   const {
@@ -82,32 +80,15 @@ export const AddressesPopover = (props) => {
   return (
     <div className='address-popover' style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick} isHome={props.isHome}>
-        <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
+        {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
       </HeaderItem>
       <PopoverBody className='form_edit' ref={popperElement} style={popStyle} {...attributes.popper}>
         {open && (
-          <Container>
-            {auth && (
-              <>
-                <Title>{t('ADDRESSES', 'Addresses')}</Title>
-                <AddressList
-                  isPopover
-                  changeOrderAddressWithDefault
-                  onClosePopover={props.onClose}
-                />
-              </>)}
-            {!auth && (
-              <>
-                <Title>{t('ADDRESS', 'Address')}</Title>
-                <AddressForm
-                  useValidationFileds
-                  address={addressState || {}}
-                  onClose={() => props.onClose && props.onClose()}
-                  onCancel={() => props.onClose && props.onClose()}
-                  onSaveAddress={() => props.onClose && props.onClose()}
-                />
-              </>)}
-          </Container>
+          <AddressContent
+            auth={auth}
+            onClose={props.onClose}
+            addressState={addressState}
+          />
         )}
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>

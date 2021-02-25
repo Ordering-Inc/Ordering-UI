@@ -3,21 +3,18 @@ import styled, { css } from 'styled-components'
 export const SingleCard = styled.div`
   width: 100%;
   display: flex;
-  max-height: 100px;
   height: auto;
   border: none;
+  padding: 15px 10px 10px 10px;
 
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
     props.theme.colors.backgroundPage === '#FFFFFF'
   ) && css`
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
-    border-radius: 16px;
-    margin-bottom: 15px;
+    border-bottom: 1px solid ${props => props.theme.colors.secondary};
   `}
 
   @media(min-width: 480px){
-    height: 140px;
     ${props => (
       props.theme.colors.backgroundPage === '#FFF' ||
       props.theme.colors.backgroundPage === '#FFFFFF'
@@ -26,13 +23,20 @@ export const SingleCard = styled.div`
     `}
     border-top: 1px solid #ccc;
   }
+
+  button {
+    font-weight: 500;
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
 `
 
 export const OrderPastContent = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
-  padding: 10px 0;
   padding-right: 5px;
   min-width: 220px;
 
@@ -66,14 +70,7 @@ export const Reorder = styled.div`
   width: 25%;
   text-align: center;
   align-items: center;
-  justify-content: center;
   font-size: 0.8em;
-  margin-right: 25px;
-
-  ${props => props.theme?.rtl && css`
-      margin-left: 25px;
-      margin-right: 0;
-  `}
 
   p {
     color: #53ad26;
@@ -111,6 +108,12 @@ export const Reorder = styled.div`
       width: 50%;
     }
   }
+
+  @media (max-width: 576px) {
+    flex-direction: row;
+    width: 100%;
+    column-gap: 20px;
+  }
 `
 
 export const WrappButton = styled.div`
@@ -129,4 +132,7 @@ export const WrappButton = styled.div`
       width: 60%;
     }
   }
+`
+export const WrapProducts = styled.div`
+  max-width: 800px;
 `

@@ -6,6 +6,12 @@ export const FormActions = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  ${({ onlyGoogleAutoComplete }) => onlyGoogleAutoComplete && css`
+    button {
+      margin-left: 0px !important;
+      margin-right: 0px !important;
+    }
+  `}
   button {
     height: 45px;
     flex: 1;
@@ -17,7 +23,7 @@ export const FormActions = styled.div`
         margin-right: 10px;
       `}
     }
-  }
+  }  
 
   @media (min-width: 769px) {
     button {
@@ -30,6 +36,7 @@ export const FormActions = styled.div`
       }
     }
   }
+
 `
 
 export const FormControl = styled.form`
@@ -54,9 +61,10 @@ export const FormControl = styled.form`
     @media (min-width: 621px) {
       &.internal_number,
       &.zipcode  {
-        width: 48%;
+        width: ${({ isAddressEditView }) => isAddressEditView ? '100%' : '48%'};
       }
     }
+  
   }
 
   textarea {
@@ -165,21 +173,23 @@ export const AddressTagSection = styled.div`
 
 export const WrapperMap = styled.div`
   width: 100%;
-  height: 250px;
+  height: 260px;
   > div {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
     border-radius: 15px;
   }
-`
 
-export const ShowMap = styled.p`
-  text-align: center;
-  color: #000;
-  width: 100%;
-  font-weight: 600;
-  cursor: pointer
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ${({ mapView }) => mapView && css`
+    height: 500px;
+  `}
 `
 
 export const WrapperSkeleton = styled.div`
@@ -189,5 +199,25 @@ export const WrapperSkeleton = styled.div`
 
   span {
     width: 100%;
+  }
+`
+export const WrapAdjustPin = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+  column-gap: 5px;
+  border-bottom: 15px solid ${props => props.theme.colors.lightGrayColor};
+
+  > span {
+    color: ${props => props.theme.colors.grayTextColor};
+    font-weight: 500;
+  }
+
+  button {
+    font-weight: 500;
+    min-width: 112px;
+    padding: 5px 10px;
   }
 `

@@ -1,55 +1,77 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessSearch = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
+  position: fixed;
+  z-index: 1200;
+  top: 10px;
+  right: 200px;
+  ${props => props.theme?.rtl && css`
+    right: initial;
+    left: 200px;
+  `}
+  
+  @media (max-width: 1200px) {
+    right: 150px;
+    ${props => props.theme?.rtl && css`
+      right: initial;
+      left: 150px;
+    `}
+  }
+
+  @media (max-width: 576px) {
+    right: 110px;
+    ${props => props.theme?.rtl && css`
+      right: initial;
+      left: 110px;
+    `}
+  }
 
   input {
     width: 100%;
+    border-radius: 40px;
     background-position: right 10px center;
     background-repeat: no-repeat;
     background-size: 15px;
     box-sizing: border-box;
+    padding: 7px 15px;
 
     ${props => props.theme?.rtl ? css`
-      padding-left: 60px;
+      padding-right: 40px;
     ` : css`
-      padding-right: 60px;
+      padding-left: 40px;
     `}
     background-color: ${props => props.theme?.colors?.backgroundPage};
 
-    ${({ isCustomLayout }) => !isCustomLayout && css`
+    ${({ externalBusinessMap }) => !externalBusinessMap && css`
       justify-content: center;
-      -webkit-transition: width 0.4s ease-in-out;
-      transition: width 0.4s ease-in-out; 
+      input {
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out; 
+      }
     `}
 
     @media (min-width: 681px) {
-      width: 100%;
-      ${({ isCustomLayout }) => !isCustomLayout && css`
-        width: 200px;
-        &:focus {
-          width: 50%;
-        }
+      ${({ externalBusinessMap }) => !externalBusinessMap && css`
+        width: 240px;
       `}
     }
 
+    @media (max-width: 576px) {
+      width: 42vw;
+    }
   }
 `
 
 export const DeleteContent = styled.span`
   position: absolute;
   font-weight: 300;
-  padding: 10px 0;
   color: #333;
   font-size: 14px;
-  transform: translate(-30%, 0%);
-  border-radius: 25%;
-  max-height: 100%;
+  left: 20px;
+  top: 12px;
   ${props => props.theme?.rtl && css`
-    transform: translate(30%, 0%);
+    left: initial;
+    right: 20px;
   `}
   span{
     cursor: pointer;
@@ -68,5 +90,4 @@ export const SearchIcon = styled.div`
   background-repeat: no-repeat;
   background-size: 15px;
   background-color: ${props => props.theme?.colors?.backgroundPage};
-
 `

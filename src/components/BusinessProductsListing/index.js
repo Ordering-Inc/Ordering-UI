@@ -9,14 +9,13 @@ import {
   useSession,
   useUtils
 } from 'ordering-components'
-
 import {
+  Container,
   ProductsContainer,
   WrapContent,
   ProductLoading,
   SkeletonItem,
-  WrapperSearch,
-  WrappLayout
+  WrapBottomSection
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -26,12 +25,12 @@ import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { PageNotFound } from '../PageNotFound'
 import { ProductForm } from '../ProductForm'
-import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
-import { SearchBar } from '../SearchBar'
-import { UpsellingPage } from '../UpsellingPage'
-import { Cart } from '../Cart'
-import { Select } from '../../styles/Select'
+import { BusinessCartContent } from '../BusinessCartContent'
+import { GroupOrderForm } from '../GroupOrderForm'
+import { AllDayPopover } from '../AllDayPopover'
+import { FloatingButton } from '../FloatingButton'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -42,7 +41,6 @@ const BusinessProductsListingUI = (props) => {
     businessState,
     categorySelected,
     searchValue,
-    sortByValue,
     categoryState,
     categoryId,
     productId,
@@ -56,35 +54,33 @@ const BusinessProductsListingUI = (props) => {
     handleChangeSearch,
     handleSearchRedirect,
     featuredProducts,
-    handleChangeSortBy,
-    isCartOnProductsList
+    filterByMenus,
+    handleChangeFilterByMenus
   } = props
 
-  const { business, loading, error } = businessState
+  const { business, menus, loading, error } = businessState
   const [, t] = useLanguage()
-  const [{ carts }] = useOrder()
+  const [{ carts, options }] = useOrder()
   const [{ parsePrice }] = useUtils()
-  const [events] = useEvent()
   const [{ auth }] = useSession()
-  const location = useLocation()
+  const windowSize = useWindowSize()
 
   const [openProduct, setModalIsOpen] = useState(false)
+  const [openGroupOrder, setOpenGroupOrder] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
-  const [openUpselling, setOpenUpselling] = useState(false)
-  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
-  const [isCartOpen, setIsCartOpen] = useState(false)
+  const [openPopover, setOpenPopover] = useState({})
+  const [events] = useEvent()
+  const location = useLocation()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
-  const sortByOptions = [
-    { value: null, content: t('SORT_BY', 'Sort By'), showOnSelected: t('SORT_BY', 'Sort By') },
-    { value: 'rank', content: t('RANK', 'Rank'), showOnSelected: t('RANK', 'Rank') },
-    { value: 'a-z', content: t('A_to_Z', 'A-Z'), showOnSelected: t('A_to_Z', 'A-Z') }
-  ]
-
   const handler = () => {
     setOpenBusinessInformation(true)
+  }
+
+  const OnGroupOrderClick = () => {
+    setOpenGroupOrder(true)
   }
 
   const onProductClick = (product) => {
@@ -117,6 +113,10 @@ const BusinessProductsListingUI = (props) => {
     })
   }
 
+  const closeModalGroupOrderForm = () => {
+    setOpenGroupOrder(false)
+  }
+
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
@@ -131,10 +131,17 @@ const BusinessProductsListingUI = (props) => {
     }
   }
 
-  const handleUpsellingPage = () => {
-    onCheckoutRedirect(currentCart?.uuid)
-    setOpenUpselling(false)
-    setCanOpenUpselling(false)
+  const handleTogglePopover = (type) => {
+    setOpenPopover({
+      ...openPopover,
+      [type]: !openPopover[type]
+    })
+  }
+  const handleClosePopover = (type) => {
+    setOpenPopover({
+      ...openPopover,
+      [type]: false
+    })
   }
 
   useEffect(() => {
@@ -167,80 +174,109 @@ const BusinessProductsListingUI = (props) => {
   }, [handleScroll])
 
   return (
-    <>
+    <Container>
       <ProductsContainer>
         {
           !loading && business?.id && (
-            <WrappLayout
-              isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-            >
-              <div className='bp-list'>
-                <BusinessBasicInformation
-                  businessState={businessState}
-                  setOpenBusinessInformation={setOpenBusinessInformation}
+            <>
+              <BusinessBasicInformation
+                businessState={businessState}
+                setOpenBusinessInformation={setOpenBusinessInformation}
+                openBusinessInformation={openBusinessInformation}
+                OnGroupOrderClick={OnGroupOrderClick}
+              />
+              <AllDayPopover
+                menus={menus}
+                filterByMenus={filterByMenus}
+                handleChangeFilterByMenus={handleChangeFilterByMenus}
+                allTime={business?.today}
+                open={openPopover.allDay}
+                onClick={() => handleTogglePopover('allDay')}
+                onClose={() => handleClosePopover('allDay')}
+              />
+              {!(business?.categories?.length === 0 && !categoryId) && (
+                <BusinessProductsCategories
+                  categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                  categorySelected={categorySelected}
+                  onClickCategory={handleChangeCategory}
+                  featured={featuredProducts}
+                  allTime={business?.today}
                   openBusinessInformation={openBusinessInformation}
                 />
-                {(categoryState.products.length !== 0 || searchValue) && (
-                  <WrapperSearch>
-                    <SearchBar
-                      onSearch={handleChangeSearch}
-                      search={searchValue}
-                      placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
-                      lazyLoad={businessState?.business?.lazy_load_products_recommended}
-                    />
-                    <Select
-                      notAsync
-                      notReload
-                      options={sortByOptions}
-                      defaultValue={sortByValue}
-                      onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-                    />
-                  </WrapperSearch>
-                )}
-                {!(business?.categories?.length === 0 && !categoryId) && (
-                  <BusinessProductsCategories
-                    categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                    categorySelected={categorySelected}
-                    onClickCategory={handleChangeCategory}
-                    featured={featuredProducts}
-                    openBusinessInformation={openBusinessInformation}
-                  />
-                )}
-
-                <WrapContent>
-                  <BusinessProductsList
-                    categories={[
-                      { id: null, name: t('ALL', 'All') },
-                      { id: 'featured', name: t('FEATURED', 'Featured') },
-                      ...business?.categories.sort((a, b) => a.rank - b.rank)
-                    ]}
-                    category={categorySelected}
-                    categoryState={categoryState}
-                    businessId={business.id}
-                    errors={errors}
-                    onProductClick={onProductClick}
-                    handleSearchRedirect={handleSearchRedirect}
-                    featured={featuredProducts}
-                    searchValue={searchValue}
-                    isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                    handleClearSearch={handleChangeSearch}
-                  />
-                </WrapContent>
-              </div>
-              {isCartOnProductsList && currentCart?.products?.length > 0 && (
-                <Cart
-                  isForceOpenCart
-                  cart={currentCart}
-                  isCartPending={currentCart?.status === 2}
-                  isProducts={currentCart.products.length}
-                  isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                  handleCartOpen={(val) => setIsCartOpen(val)}
-                />
               )}
-            </WrappLayout>
+
+              <WrapContent>
+                <BusinessProductsList
+                  categories={[
+                    { id: null, name: t('ALL', 'All') },
+                    { id: 'featured', name: t('FEATURED', 'Featured') },
+                    ...business?.categories.sort((a, b) => a.rank - b.rank)
+                  ]}
+                  category={categorySelected}
+                  categoryState={categoryState}
+                  businessId={business.id}
+                  errors={errors}
+                  onProductClick={onProductClick}
+                  handleSearchRedirect={handleSearchRedirect}
+                  featured={featuredProducts}
+                  searchValue={searchValue}
+                  handleClearSearch={handleChangeSearch}
+                />
+              </WrapContent>
+              <WrapBottomSection>
+                <p>{t('PRICES_ON_THIS_MENU_ARE_SET_DIRECTLY_BY_THE_MERCHANT', 'Prices on this menu are set directly by the Merchant.')}</p>
+              </WrapBottomSection>
+            </>
           )
         }
 
+        <Modal
+          width='55%'
+          open={openProduct}
+          closeOnBackdrop
+          onClose={() => closeModalProductForm()}
+          padding='0'
+        >
+
+          {productModal.loading && !productModal.error && (
+            <ProductLoading>
+              <SkeletonItem>
+                <Skeleton height={45} />
+                <Skeleton height={250} />
+                <Skeleton height={45} count={8} />
+              </SkeletonItem>
+            </ProductLoading>
+          )}
+
+          {productModal.error && productModal.error.length > 0 && (
+            <NotFoundSource
+              content={productModal.error[0]?.message || productModal.error[0]}
+            />
+          )}
+
+          {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
+            <NotFoundSource
+              content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
+            />
+          )}
+          {(productModal.product || curProduct) && (
+            <ProductForm
+              businessSlug={business?.slug}
+              product={productModal.product || curProduct}
+              businessId={business?.id}
+              onSave={handlerProductAction}
+            />
+          )}
+        </Modal>
+        <Modal
+          width='70%'
+          open={openGroupOrder}
+          closeOnBackdrop
+          onClose={() => closeModalGroupOrderForm()}
+          padding='0'
+        >
+          <GroupOrderForm />
+        </Modal>
         {loading && !error && (
           <>
             <BusinessBasicInformation
@@ -248,6 +284,7 @@ const BusinessProductsListingUI = (props) => {
               isSkeleton
               handler={handler}
               openBusinessInformation={openBusinessInformation}
+              OnGroupOrderClick={OnGroupOrderClick}
             />
             <BusinessProductsCategories
               categories={[]}
@@ -299,76 +336,38 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
-
-      {currentCart?.products?.length > 0 && auth && !isCartOpen && (
+      {!loading && business?.id ? (
+        <BusinessCartContent
+          cart={currentCart}
+          orderType={options?.type || 1}
+          business={business}
+          userLocation={options?.address?.location}
+          categoryState={categoryState}
+        />
+      ) : (
+        <BusinessCartContent
+          isSkeleton
+        />
+      )}
+      {currentCart?.products?.length > 0 && auth && windowSize.width < 768 && (
         <FloatingButton
           btnText={
             currentCart?.subtotal >= currentCart?.minimum
-              ? !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')
+              ? t('VIEW_ORDER', 'View Order')
               : `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
           }
           isSecondaryBtn={currentCart?.subtotal < currentCart?.minimum}
           btnValue={currentCart?.products?.length}
-          handleClick={() => setOpenUpselling(true)}
-          disabled={openUpselling || currentCart?.subtotal < currentCart?.minimum}
+          handleClick={() => onCheckoutRedirect(currentCart?.uuid)}
+          disabled={currentCart?.subtotal < currentCart?.minimum}
         />
       )}
-
-      <Modal
-        width='70%'
-        open={openProduct}
-        closeOnBackdrop
-        onClose={() => closeModalProductForm()}
-        padding='0'
-      >
-
-        {productModal.loading && !productModal.error && (
-          <ProductLoading>
-            <SkeletonItem>
-              <Skeleton height={45} count={8} />
-            </SkeletonItem>
-          </ProductLoading>
-        )}
-
-        {productModal.error && productModal.error.length > 0 && (
-          <NotFoundSource
-            content={productModal.error[0]?.message || productModal.error[0]}
-          />
-        )}
-
-        {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
-          <NotFoundSource
-            content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
-          />
-        )}
-        {(productModal.product || curProduct) && (
-          <ProductForm
-            businessSlug={business?.slug}
-            product={productModal.product || curProduct}
-            businessId={business?.id}
-            onSave={handlerProductAction}
-          />
-        )}
-      </Modal>
-
-      {currentCart?.products && openUpselling && (
-        <UpsellingPage
-          businessId={currentCart?.business_id}
-          business={currentCart?.business}
-          cartProducts={currentCart?.products}
-          handleUpsellingPage={handleUpsellingPage}
-          openUpselling={openUpselling}
-          canOpenUpselling={canOpenUpselling}
-          setCanOpenUpselling={setCanOpenUpselling}
-        />
-      )}
-    </>
+    </Container>
   )
 }
 
 export const BusinessProductsListing = (props) => {
   const [isInitialRender, setIsInitialRender] = useState(false)
-
   const businessProductslistingProps = {
     ...props,
     UIComponent: BusinessProductsListingUI,

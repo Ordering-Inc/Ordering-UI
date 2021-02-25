@@ -12,13 +12,18 @@ export const AddressListContainer = styled.div`
   button.add {
     height: 50px;
   }
+
+  > p {
+    font-weight: 500;
+    margin: 0px;
+  }
 `
 
 export const AddressListUl = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0px;
-  margin-top: 40px;
+  margin-top: 10px;
 `
 
 export const AddressItem = styled.li`
@@ -52,7 +57,7 @@ export const AddressItem = styled.li`
         margin-right: 0px;
       `}
       &.radio {
-        color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.darkTextColor};
         font-size: 24px;
       }
 
@@ -76,6 +81,16 @@ export const AddressItem = styled.li`
   &:last-child {
     border-bottom: 1px solid #00000029;
   }
+
+  ${({ active }) => active && css`
+    .wrapAddress {
+      span {
+        &.radio {
+          color: ${props => props.theme.colors.primary};
+        }
+      }
+    }
+  `}
 `
 
 export const AddressItemActions = styled.div`
@@ -86,17 +101,8 @@ export const AddressItemActions = styled.div`
     cursor: pointer;
     margin: 0px 5px;
     font-size: 30px;
-
-    &:nth-child(1) {
-      svg {
-        color: #F2BB40;
-      }
-    }
-
-    &:nth-child(2) {
-      svg {
-        color: #D81212;
-      }
+    svg {
+      color: ${props => props.theme.colors.darkTextColor};
     }
   }
   a.disabled {
@@ -157,5 +163,13 @@ export const FormActions = styled.div`
       `}
       }
     }
+  }
+`
+export const WrapAddressForm = styled.div`
+  input {
+    border-radius: 5px !important;
+  }
+  button {
+    border-radius: 5px;
   }
 `

@@ -9,23 +9,37 @@ import {
   DeleteContent
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isCustomLayout }) => {
+export const SearchBar = (props) => {
+  const {
+    onSearch,
+    search,
+    placeholder,
+    lazyLoad,
+    isEnterKeyLoad,
+    isCustomMode,
+    externalBusinessMap
+  } = props
   const [theme] = useTheme()
   const [, t] = useLanguage()
   let timeout = null
   let previousSearch
   const el = useRef()
   const onChangeSearch = e => {
-    if (e.keyCode === 13) return
-
-    if (previousSearch !== e.target.value) {
-      if (!lazyLoad) {
+    if (isEnterKeyLoad) {
+      if (e.keyCode === 13) {
         onSearch(e.target.value)
-      } else {
-        clearTimeout(timeout)
-        timeout = setTimeout(function () {
+      }
+    } else {
+      if (e.keyCode === 13) return
+      if (previousSearch !== e.target.value) {
+        if (!lazyLoad) {
           onSearch(e.target.value)
-        }, 750)
+        } else {
+          clearTimeout(timeout)
+          timeout = setTimeout(function () {
+            onSearch(e.target.value)
+          }, 750)
+        }
       }
     }
     previousSearch = e.target.value
@@ -46,11 +60,7 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isCustomLay
   }, [search])
 
   return (
-    <BusinessSearch
-      className={!isCustomLayout && 'search-bar'}
-      isCustomLayout={isCustomLayout}
-      hasValue={el.current?.value}
-    >
+    <BusinessSearch className={!externalBusinessMap && 'search-bar'} externalBusinessMap={externalBusinessMap} hasValue={el.current?.value}>
       <Input
         ref={el}
         name='search'
@@ -60,10 +70,15 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isCustomLay
         maxLength='500'
       />
       <DeleteContent>
-        {el.current?.value 
-          ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span> 
-          : <img src={theme?.images?.general?.searchIcon} />}
+        {isCustomMode ? (
+          <img src={theme?.images?.general?.searchIcon} />
+        ) : (
+          <>
+            {el.current?.value ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span> : <img src={theme?.images?.general?.searchIcon} />}
+          </>
+        )}
       </DeleteContent>
+
     </BusinessSearch>
   )
 }

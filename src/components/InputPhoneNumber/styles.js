@@ -1,6 +1,16 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  label {
+    color: ${props => props.theme.colors.darkTextColor};
+    font-weight: 500;
+    font-size: 18px;
+    text-align: left;
+  }
+
   text-align: center;
 
   select:focus {
@@ -122,7 +132,7 @@ export const Container = styled.div`
   `}
 
   input.PhoneInputInput {
-    border-radius: 30px;
+    border-radius: 10px;
     border: 1px solid #DBDCDB;
     font-size: 16px;
     outline: none;

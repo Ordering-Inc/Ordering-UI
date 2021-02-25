@@ -1,24 +1,29 @@
-import { lighten } from 'polished'
 import styled, { css } from 'styled-components'
 
 export const ProductContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   max-height: 100vh;
   position: relative;
-  padding: 10px;
 
-  @media (min-width: 768px) {
-    height: 100%;
+  @media (min-width: 577px) {
+    overflow: auto;
   }
 
-  @media (min-width: 1201px) {
-    flex-wrap: nowrap;
-    overflow: auto;
-    max-height: 70vh;
+  @media (min-width: 769px) {
+    max-height: 90vh;
   }
 `
-
+export const AuthContainer = styled.div`
+  @media (min-width: 769px) {
+    > div {
+      height: 90vh;
+    }
+  }
+`
+export const ProductHeader = styled.div`
+  padding: 20px;
+  z-index: 10;  
+  position: relative;
+`
 export const WrapperImage = styled.div`
   width: 100%;
   position: relative;
@@ -26,33 +31,28 @@ export const WrapperImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (min-width: 1201px) {
-    width: calc(50% - 10px);
-    position: sticky;
-    top: 0;
-  }
 `
 
 export const ProductImage = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  height: 300px;
+  width: 100%;
 
   img {
     border-radius: 16px;
-    object-fit: contain;
     height: 100%;
     box-sizing: border-box;
   }
 
-  @media (min-width: 1201px) {
-    height: 100%;
-    img {
-      width: 100%;
-      object-fit: cover;
-    }
+  height: 350px;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1200px) {
+    height: 250px;
   }
 `
 
@@ -60,9 +60,9 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0px;
   position: relative;
   margin-top: 10px;
+  padding: 0 20px 20px 20px;
 
   h1 {
     font-size: 20px;
@@ -93,20 +93,16 @@ export const ProductInfo = styled.div`
     }
   }
 
-  @media (min-width: 411px) {
-    padding: 10px 0px;
-  }
-
   @media (min-width: 1201px) {
-    width: calc(50% - 20px);
-    padding: 0px 10px;
-    top: 0;
     margin-top: 0px;
   }
 `
 
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
+  h1 {
+    margin-bottom: 0px;
+  }
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
   }
@@ -126,7 +122,7 @@ export const SectionTitle = styled.h3`
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 115px;
+  margin-bottom: 120px;
 
   p {
     font-weight: 300;
@@ -145,9 +141,12 @@ export const ProductComment = styled.div`
 export const ProductActions = styled.div`
   display: flex;
   flex-direction: column;
+  row-gap: 10px;
   align-items: center;
-  padding: 10px 0px;
+  padding: 10px;
   width: 100%;
+  box-shadow: 0px -3px 6px #00000029;
+  z-index: 100;
 
   position: fixed;
   bottom: 0;
@@ -155,11 +154,25 @@ export const ProductActions = styled.div`
   width: 100%;
   background-color: #FFF;
 
+  button {
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+  }
+
   div.incdec-control {
     width: 50%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    span {
+      border: 1px solid ${props => props.theme.colors.secondary};
+      border-radius: 10px;
+      min-width: 80px;
+      text-align: center;
+      padding: 10px 0;
+    }
 
     svg {
       width: 35px;
@@ -184,73 +197,40 @@ export const ProductActions = styled.div`
   }
 
   button.add {
-    width: 90%;
-    padding: 5px 10px;
-    margin: 10px 0px 0px;
-    position: relative;
+    position: absolute;
+    right: 20px;
+    padding: 10px 15px;
 
-    span:last-child {
-      position: absolute;
-      right: 0;
-      margin-right: 10px;
-
-      ${props => props.theme?.rtl && css`
-        position: absolute;
-        left: 0;
-        right: initial;
-        margin-left: 10px;
-        margin-right: 0px;
-      `}
-    }
     &.soldout {
       width: 100%;
       pointer-events: none;
+      position: relative;
+      right: 0px;
     }
   }
 
-  @media (min-width: 577px) {
-    justify-content: space-between;
+  @media (min-width: 766px) {
+    position: sticky;
+    bottom: 0px;
+    justify-content: center;
     flex-direction: row;
-
-    div.incdec-control {
-      width: 25%;
-    }
-    div:last-child {
-      width: 75%;
-    }
-    button.add {
-      width: 75%;
-      margin: 0 10px;
+    button {
+      min-width: 190px;
     }
   }
 
-  @media (min-width: 769px) {
-    position: relative;
-    bottom: initial;
-    right: initial;
-
-    button.add {
-      width: 100%;
-      margin: 0px;
-    }
-  }
 
   @media (min-width: 1201px) {
-    position: sticky;
-    top: 100%;
-    padding: 10px 0px;
-
     div.incdec-control {
       width: 30%;
     }
-    div:last-child {
-      width: 70%;
-      button {
-        width: 100%;
-      }
-    }
+  }
+
+  @media (max-width: 1200px) {
+    justify-content: space-between;
     button.add {
-      width: 68%;
+      position: relative;
+      right: 0px;
     }
   }
 `
@@ -266,9 +246,7 @@ export const SkeletonBlock = styled.div`
 
 export const WrapperSubOption = styled.div`
   border-radius: 10px;
-  &.error {
-    background-color: ${lighten(0.58, '#A52121')};
-  }
+
   &.soldout {
     pointer-events: none;
     background-color: hsl(0, 0%, 72%);
@@ -296,4 +274,10 @@ export const WrapperIngredients = styled.div`
     pointer-events: none;
     background: hsl(0, 0%, 72%);
   `}
+`
+export const SectionDescription = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 10px;
 `

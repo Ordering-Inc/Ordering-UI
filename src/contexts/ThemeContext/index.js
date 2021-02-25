@@ -46,7 +46,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
       margin: 0;
       background-color: ${theme.colors.backgroundPage};
-      color: ${theme.colors.colorPage};
+      color: ${theme.colors.darkTextColor};
       direction: ltr;
 
       ${theme.rtl && css`
@@ -74,6 +74,10 @@ export const ThemeProvider = ({ children, ...props }) => {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    * {
+      box-sizing: border-box;
     }
   `
 

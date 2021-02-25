@@ -5,7 +5,7 @@ import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
 import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, modal, special }) => {
+export const AutoScroll = ({ children, modal, special, innerScroll }) => {
   const { width } = useWindowSize()
   const [parentElement, setParentElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
@@ -78,11 +78,11 @@ export const AutoScroll = ({ children, modal, special }) => {
   return (
     <AutoscrollContainer modal={modal} id='autoscroll'>
       {
-        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <MdKeyboardArrowLeft id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        ((!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth)) ? <MdKeyboardArrowLeft id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        (!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) ? <MdKeyboardArrowRight id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        ((!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth)) ? <MdKeyboardArrowRight id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
 

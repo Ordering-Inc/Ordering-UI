@@ -11,37 +11,29 @@ import { Alert } from '../Confirm'
 import {
   LoginContainer,
   FormSide,
-  HeroSide,
   FormInput,
   RedirectLink,
-  TitleHeroSide,
   SocialButtons,
-  LoginWith,
   SkeletonSocialWrapper,
   WrapperPassword,
-  TogglePassword
+  LoginWithEmail,
+  Line,
+  InputGroup,
+  FormTitle
 } from './styles'
-
-import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
-import { useTheme } from 'styled-components'
-import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
-import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 
 const LoginFormUI = (props) => {
   const {
     useLoginByEmail,
-    useLoginByCellphone,
     handleChangeInput,
-    handleChangeTab,
     handleButtonLoginClick,
     elementLinkToSignup,
     elementLinkToForgotPassword,
     formState,
-    loginTab,
     isPopup
   } = props
   const [, t] = useLanguage()
@@ -49,8 +41,6 @@ const LoginFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
-  const theme = useTheme()
-  const [passwordSee, setPasswordSee] = useState(false)
 
   const onSubmit = async () => {
     handleButtonLoginClick()
@@ -62,11 +52,6 @@ const LoginFormUI = (props) => {
       token: user.session.access_token
     })
   }
-
-  const togglePasswordView = () => {
-    setPasswordSee(!passwordSee)
-  }
-
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
@@ -94,106 +79,13 @@ const LoginFormUI = (props) => {
 
   return (
     <LoginContainer isPopup={isPopup}>
-      <HeroSide>
-        <TitleHeroSide>
-          <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
-          <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
-        </TitleHeroSide>
-      </HeroSide>
       <FormSide isPopup={isPopup}>
-        <img src={theme?.images?.logos?.logotype} alt='Logo login' width='200' height='66' loading='lazy' />
-
-        {useLoginByEmail && useLoginByCellphone && (
-          <LoginWith isPopup={isPopup}>
-            <Tabs variant='primary'>
-              {useLoginByEmail && (
-                <Tab
-                  onClick={() => handleChangeTab('email')}
-                  active={loginTab === 'email'}
-                >
-                  {t('LOGIN_WITH_EMAIL', 'Login with Email')}
-                </Tab>
-              )}
-              {useLoginByCellphone && (
-                <Tab
-                  onClick={() => handleChangeTab('cellphone')}
-                  active={loginTab === 'cellphone'}
-                >
-                  {t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}
-                </Tab>
-              )}
-            </Tabs>
-          </LoginWith>
-        )}
-
-        {(useLoginByCellphone || useLoginByEmail) && (
-          <FormInput
-            noValidate
-            isPopup={isPopup}
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            {useLoginByEmail && loginTab === 'email' && (
-              <Input
-                type='email'
-                name='email'
-                aria-label='email'
-                placeholder={t('EMAIL', 'Email')}
-                ref={register({
-                  required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-                  }
-                })}
-                onChange={(e) => handleChangeInput(e)}
-                autoComplete='off'
-              />
-            )}
-            {useLoginByCellphone && loginTab === 'cellphone' && (
-              <Input
-                type='tel'
-                name='cellphone'
-                aria-label='cellphone'
-                placeholder='Cellphone'
-                ref={register({
-                  required: t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
-                })}
-                onChange={(e) => handleChangeInput(e)}
-                autoComplete='off'
-              />
-            )}
-            <WrapperPassword>
-              <Input
-                type={!passwordSee ? 'password' : 'text'}
-                name='password'
-                aria-label='password'
-                placeholder={t('PASSWORD', 'Password')}
-                ref={register({
-                  required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                })}
-                onChange={(e) => handleChangeInput(e)}
-              />
-              <TogglePassword onClick={togglePasswordView}>
-                {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-              </TogglePassword>
-            </WrapperPassword>
-            <RedirectLink isPopup={isPopup}>
-              <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
-              {elementLinkToForgotPassword}
-            </RedirectLink>
-            <Button
-              color='primary'
-              type='submit'
-              disabled={formState.loading}
-            >
-              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('LOGIN', 'Login')}
-            </Button>
-          </FormInput>
-        )}
-
+        <FormTitle>
+          {t('SIGN_IN', 'Sign in')}
+        </FormTitle>
         {elementLinkToSignup && (
           <RedirectLink register isPopup={isPopup}>
-            <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
+            <span>{t('NEW_ON_ORDERING', 'Are you new to Ordering?')}</span>
             {elementLinkToSignup}
           </RedirectLink>
         )}
@@ -213,6 +105,64 @@ const LoginFormUI = (props) => {
           <SkeletonSocialWrapper>
             <Skeleton height={43} />
           </SkeletonSocialWrapper>
+        )}
+        <LoginWithEmail>
+          <Line />
+          <p>{t('OR_CONTINUE_WITH_EMAIL', 'or continue with email')}</p>
+          <Line />
+        </LoginWithEmail>
+        {(useLoginByEmail) && (
+          <FormInput
+            noValidate
+            isPopup={isPopup}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <InputGroup>
+              <label>{t('EMAIL', 'Email')}</label>
+              {useLoginByEmail && (
+                <Input
+                  type='email'
+                  name='email'
+                  aria-label='email'
+                  placeholder={t('EMAIL', 'Email')}
+                  ref={register({
+                    required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+                    }
+                  })}
+                  onChange={(e) => handleChangeInput(e)}
+                  autoComplete='off'
+                />
+              )}
+            </InputGroup>
+            <WrapperPassword>
+              <div>
+                <label>{t('PASSWORD', 'Password')}</label>
+                <RedirectLink isPopup={isPopup}>
+                  {elementLinkToForgotPassword}
+                </RedirectLink>
+              </div>
+              <Input
+                type='password'
+                name='password'
+                aria-label='password'
+                placeholder={t('PASSWORD', 'Password')}
+                ref={register({
+                  required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                })}
+                onChange={(e) => handleChangeInput(e)}
+              />
+            </WrapperPassword>
+            <Button
+              color='primary'
+              type='submit'
+              disabled={formState.loading}
+            >
+              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGNIN', 'Sign in')}
+            </Button>
+          </FormInput>
         )}
       </FormSide>
       <Alert

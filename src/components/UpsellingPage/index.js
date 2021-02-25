@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { UpsellingPage as UpsellingPageController, useLanguage, useUtils } from 'ordering-components'
-import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling, SkeletonContainer } from './styles'
+import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling } from './styles'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../Modal'
 import { ProductForm } from '../ProductForm'
+import { AutoScroll } from '../AutoScroll'
 
 const UpsellingPageUI = (props) => {
   const {
@@ -22,18 +23,16 @@ const UpsellingPageUI = (props) => {
   const [{ parsePrice }] = useUtils()
 
   useEffect(() => {
-    if (!isCustomMode) {
-      if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
-        setCanOpenUpselling && setCanOpenUpselling(true)
-      } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
-        handleUpsellingPage()
-      }
+    if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
+      setCanOpenUpselling && setCanOpenUpselling(true)
+    } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
+      handleUpsellingPage()
     }
   }, [upsellingProducts.loading, upsellingProducts?.products.length])
 
   const handleFormProduct = (product) => {
-    setActualProduct(product)
     setModalIsOpen(true)
+    setActualProduct(product)
   }
 
   const handleSaveProduct = () => {
@@ -45,36 +44,37 @@ const UpsellingPageUI = (props) => {
     return (
       <Container>
         <UpsellingContainer>
-          {
-            !upsellingProducts.loading ? (
-              <>
-                {
-                  !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
-                    <Item key={product.id} name={product.name}>
-                      <Image>
-                        <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
-                      </Image>
-                      <Details>
-                        <div>
-                          <h3 title={product.name}>{product.name}</h3>
-                        </div>
-                        <p>{parsePrice(product.price)}</p>
-                        <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
-                      </Details>
-                    </Item>
-                  )) : (
-                    <>
-                      {upsellingProducts.message}
-                    </>
-                  )
-                }
-              </>
-            ) : [...Array(8)].map((item, i) => (
-              <SkeletonContainer key={i}>
-                <Skeleton width={150} height={250} />
-              </SkeletonContainer>
-            ))
-          }
+          <AutoScroll innerScroll>
+            {
+              !upsellingProducts.loading ? (
+                <>
+                  {
+                    !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
+                      <Item key={product.id} name={product.name} onClick={() => handleFormProduct(product)}>
+                        <Details>
+                          <div>
+                            <h3 title={product.name}>{product.name}</h3>
+                          </div>
+                          <p>{parsePrice(product.price)}</p>
+                        </Details>
+                        <Image>
+                          <img src={product.images} alt={`product-${i}`} width='70px' height='70px' loading='lazy' />
+                        </Image>
+                      </Item>
+                    )) : (
+                      <>
+                        {upsellingProducts.message}
+                      </>
+                    )
+                  }
+                </>
+              ) : [...Array(8)].map((item, i) => (
+                <Item key={i}>
+                  <Skeleton width={250} height={50} />
+                </Item>
+              ))
+            }
+          </AutoScroll>
         </UpsellingContainer>
       </Container>
     )
@@ -82,7 +82,6 @@ const UpsellingPageUI = (props) => {
 
   return (
     <>
-
       {isCustomMode ? (
         <UpsellingLayout />
       ) : (

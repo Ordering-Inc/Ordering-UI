@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+export const WrapIngredient = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px;
   cursor: pointer;
+  border-bottom: 1px solid ${props => props.theme.colors.secondary};
+  padding: 15px 0;
 
   span {
     display: flex;
@@ -19,7 +20,7 @@ export const Container = styled.div`
       margin-right: 0px;
     `}
     svg {
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.grayTextColor};
       font-size: 25px;
       &[disabled] {
         color: #CBCBCB;

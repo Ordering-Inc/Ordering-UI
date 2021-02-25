@@ -9,23 +9,25 @@ export const Title = styled.div`
 export const Days = styled.div`
   display: flex;
   border: 1px solid #d9d9d9;
-  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
   margin-bottom: 20px;
   width: 100%;
   flex-wrap: wrap;
   position: relative;
+  background: ${props => props.theme.colors.secondary};
+
+  @media (min-width: 576px) {
+    border-radius: 60px;
+  }
 `
 
 export const ContentDay = styled.div`
   display: flex;
   flex-grow: 1;
-  margin: 10px 0;
   padding: 3px 0;
   flex-direction: column;
   align-items: center;
-  border-right: 1px solid #d9d9d9;
   ${props => props.theme?.rtl && css`
     border-right: 0;
     border-left: 1px solid #d9d9d9;
@@ -35,19 +37,9 @@ export const ContentDay = styled.div`
 export const Day = styled.div`
   display: flex;
   flex-grow: 1;
-  padding: 5px 0;
   align-items: center;
   font-weight: 300;
-  color: #9A9A9A;
   width: calc(100% / 3);
-  /**
-    ** Modify this validation in case the dates to display change
-   */
-  &:nth-child(1) div,
-  &:nth-child(2) div,
-  &:nth-child(3) div {
-    margin-bottom: 5px;
-  }
 
   &:nth-child(3) div,
   &:nth-child(6) div {
@@ -58,16 +50,9 @@ export const Day = styled.div`
     `}
   }
 
-  &:nth-child(4) div,
-  &:nth-child(5) div,
-  &:nth-child(6) div {
-    margin-top: 5px;
-  }
-
   @media (min-width: 426px) {
     width: calc(100% / 6);
     &:nth-child(3) div.content-day {
-      border-right: 1px solid #d9d9d9;
       ${props => props.theme?.rtl && css`
         border-right: 0;
         border-left: 1px solid #d9d9d9;
@@ -77,7 +62,8 @@ export const Day = styled.div`
 
   ${({ selected }) => selected && css`
     font-weight: 400;
-    color: ${props => props.theme.colors.primary};
+    color: #fff;
+    background: ${props => props.theme.colors.darkTextColor};
   `}
 
 
@@ -92,19 +78,25 @@ export const Day = styled.div`
   }
 
   :hover {
-    background-color: #f9f9f9;
+    background-color: ${props => props.theme.colors.grayTextColor};
+  }
+
+  @media (min-width: 576px) {
+    border-radius: 60px;
   }
 `
 
 export const DayName = styled.div`
   display: flex;
-  font-size: 20px;
+  font-size: 14px;
   line-height: 24px;
+  text-transform: uppercase;
 `
 
 export const DayNumber = styled.div`
   display: flex;
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 24px;
 `
 
@@ -155,5 +147,38 @@ export const MiddleLine = styled.span`
 
   @media (min-width: 426px) {
     display: none;
+  }
+`
+export const WrapToggle = styled.div`
+  display: flex;
+  border-radius: 30px;
+  background: ${props => props.theme.colors.secondary};
+  margin-bottom: 20px;
+`
+export const Tab = styled.div`
+  width: calc(100% / 2);
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: center;
+  padding: 5px 0;
+  ${({ selected }) => selected && css`
+    background: ${props => props.theme.colors.darkTextColor};
+    color: #fff;
+  `}
+`
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  span {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 20px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 20px;
+      margin-right: 0px;
+    `}
   }
 `

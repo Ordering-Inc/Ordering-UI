@@ -1,31 +1,31 @@
-import React, { useEffect } from 'react'
-import FcCancel from '@meronex/icons/fc/FcCancel'
-import TiPencil from '@meronex/icons/ti/TiPencil'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { Container, Header, SideForm, UserData } from './styles'
-
+import { Modal } from '../Modal'
 import {
   UserFormDetails as UserFormController,
   useLanguage,
   useSession
 } from 'ordering-components'
-
 import { UserFormDetailsUI } from '../UserFormDetails'
+import { Container, Header, UserData } from './styles'
 
 const UserDetailsUI = (props) => {
   const {
+    userData: externalUserData,
     isEdit,
     formState,
-    cleanFormState,
-    cartStatus,
+    // cleanFormState,
+    // cartStatus,
     toggleIsEdit,
     validationFields,
-    isUserDetailsEdit
+    isUserDetailsEdit,
+    externalLoading
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const userData = props.userData || formState.result?.result
+  const [openModal, setOpenModal] = useState(false)
+  const userData = formState.result?.result ? formState.result?.result : externalUserData
 
   useEffect(() => {
     if (isUserDetailsEdit) {
@@ -33,14 +33,14 @@ const UserDetailsUI = (props) => {
     }
   }, [isUserDetailsEdit])
 
-  const toggleEditState = () => {
-    toggleIsEdit()
-    cleanFormState({ changes: {} })
-  }
+  // const toggleEditState = () => {
+  //   toggleIsEdit()
+  //   cleanFormState({ changes: {} })
+  // }
 
   return (
     <>
-      {(validationFields.loading || formState.loading) && (
+      {(validationFields.loading || formState.loading || externalLoading) && (
         <UserData>
           <Skeleton width={250} height={25} />
           <Skeleton width={180} height={25} />
@@ -48,38 +48,36 @@ const UserDetailsUI = (props) => {
         </UserData>
       )}
 
-      {!(validationFields.loading || formState.loading) && (
+      {!(validationFields.loading || formState.loading || externalLoading) && (
         <Container>
           <Header className='user-form'>
-            <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
-            {cartStatus !== 2 && (
-              !isEdit ? (
-                <TiPencil className='edit' onClick={() => toggleIsEdit()} />
-              ) : (
-                <FcCancel className='cancel' onClick={() => toggleEditState()} />
-              )
-            )}
+            <h1>{t('PHONE_NUMBER', 'Phone number')}</h1>
+            <span onClick={() => setOpenModal(true)}>
+              {t('CHANGE', 'Change')}
+            </span>
           </Header>
 
-          {!isEdit ? (
-            <UserData>
-              <p>
-                <strong>{t('NAME', 'Name')}:</strong> {userData?.name || user?.name} {userData?.middle_name || user?.middle_name} {userData?.lastname || user?.lastname} {userData?.second_lastname || user?.second_lastname}
-              </p>
-              <p><strong>{t('EMAIL', 'Email')}:</strong> {userData?.email || user?.email}</p>
-              {(userData?.cellphone || user?.cellphone) && (
-                <p>
-                  <strong>{t('CELLPHONE', 'Cellphone')}:</strong> {(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}
-                </p>
-              )}
-            </UserData>
-          ) : (
-            <SideForm>
-              <UserFormDetailsUI {...props} />
-            </SideForm>
-          )}
+          <UserData>
+            {(userData?.cellphone || user?.cellphone) && (
+              <>
+                {(userData?.cellphone || user?.cellphone)}
+              </>
+            )}
+          </UserData>
         </Container>
       )}
+
+      <Modal
+        title={t('EDIT_PHONE_NUMBER', 'Edit phone number')}
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+      >
+        <UserFormDetailsUI
+          isCheckout
+          {...props}
+          onCancel={() => setOpenModal(false)}
+        />
+      </Modal>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProductOption as ProductOptionController, useLanguage } from 'ordering-components'
-
+import BsCheck from '@meronex/icons/bs/BsCheck'
 import {
   Container,
   WrapHeader,
@@ -11,7 +11,8 @@ import {
 const ProductOptionUI = (props) => {
   const {
     children,
-    option
+    option,
+    error
   } = props
 
   const [, t] = useLanguage()
@@ -28,8 +29,18 @@ const ProductOptionUI = (props) => {
   return (
     <Container>
       <WrapHeader>
-        <Title>{option.name}</Title>
-        <Flag>{maxMin}</Flag>
+        <Title>
+          <span>{option.name}</span>
+          {option.min === 1 && option.max === 1 && (
+            <span>{t('SELECT_AT_LEAST_1', 'select at least 1')}</span>
+          )}
+        </Title>
+        <Flag error={error}>
+          {option.min === 1 && option.max === 1 && !error && (
+            <BsCheck />
+          )}
+          {maxMin}
+        </Flag>
       </WrapHeader>
       {children}
     </Container>

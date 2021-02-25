@@ -1,15 +1,22 @@
 import styled, { css } from 'styled-components'
 
+export const Conatiner = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export const CategoriesContainer = styled.div`
   display: flex;
+  align-items: center;
   overflow-x: auto;
-  padding: 5px;
+  padding: 0 5px;
   background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
   position: sticky;
   top: 0;
   border-bottom: 1px solid #D9D9D9;
   text-align: center;
+  z-index: 10;
 
   div.category {
     text-overflow: ellipsis;
@@ -24,6 +31,6 @@ export const CategoriesContainer = styled.div`
   }
 
   @media (min-width: 381px) {
-    padding: 15px;
+    padding: 0 5px;
   }
 `

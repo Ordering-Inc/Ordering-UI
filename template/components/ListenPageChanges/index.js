@@ -12,6 +12,9 @@ export const ListenPageChanges = ({ children }) => {
   const routes = {
     home: '/',
     search: '/search',
+    pickup: '/pickup',
+    filter: '/filter',
+    businesses_feature: '/businesses/:feature',
     signin: '/signin',
     signup: '/signup',
     profile: '/profile',

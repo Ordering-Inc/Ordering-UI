@@ -1,73 +1,222 @@
 import React from 'react'
-import { FooterContainer, Content, Copy, SocialIcon } from './styles'
-import FaWhatsapp from '@meronex/icons/fa/FaWhatsapp'
-import FaYoutube from '@meronex/icons/fa/FaYoutube'
+import { useLocation } from 'react-router-dom'
+import {
+  FooterContainer,
+  FooterTopContent,
+  LinkBlock,
+  SupportContent,
+  WrapAppImgae,
+  FooterBottomContent,
+  SocialIcon
+} from './styles'
 import FaTwitter from '@meronex/icons/fa/FaTwitter'
 import FaInstagram from '@meronex/icons/fa/FaInstagram'
-import FaFacebook from '@meronex/icons/fa/FaFacebook'
+import FaFacebook from '@meronex/icons/ai/AiFillFacebook'
 import { useLanguage } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 export const Footer = () => {
   const [, t] = useLanguage()
+  const theme = useTheme()
+  const location = useLocation()
+  const isHomePage = location.pathname === '/home' || location.pathname === '/'
 
   return (
-    <FooterContainer>
-      <Content>
-        <h1 name='title-1'>{t('FOOTER_QL1_TITLE')}</h1>
-        <a
-          rel='noopener noreferrer'
-          target='_blank'
-          aria-label='link1'
-          href={t('FOOTER_QL1_1_HREF')}
-        >
-          {t('FOOTER_QL1_1')}
-        </a>
-        <a
-          rel='noopener noreferrer'
-          target='_blank'
-          aria-label='link2'
-          href={t('FOOTER_QL1_2_HREF')}
-        >
-          {t('FOOTER_QL1_2')}
-        </a>
-        <a
-          rel='noopener noreferrer'
-          target='_blank'
-          aria-label='link3'
-          href={t('FOOTER_QL1_3_HREF')}
-        >
-          {t('FOOTER_QL1_3')}
-        </a>
-      </Content>
-      <Content>
-        <h1 name='title-2'>{t('FOOTER_QL2_TITLE')}</h1>
-        <a
-          rel='noopener noreferrer'
-          target='_blank'
-          aria-label='link4'
-          href={t('FOOTER_QL2_1_HREF')}
-        >
-          {t('FOOTER_QL2_1')}
-        </a>
-        <a
-          rel='noopener noreferrer'
-          target='_blank'
-          aria-label='link5'
-          href={t('FOOTER_QL2_2_HREF')}
-        >
-          {t('FOOTER_QL2_2')}
-        </a>
-        <a
-          rel='noopener noreferrer'
-          target='_blank'
-          aria-label='link6'
-          href={t('FOOTER_QL2_3_HREF')}
-        >
-          {t('FOOTER_QL2_3')}
-        </a>
-      </Content>
-      <Content>
-        <h1 name='title-3'>{t('FOOTER_QL3_TITLE')}</h1>
+    <FooterContainer isHomePage={isHomePage}>
+      <FooterTopContent>
+        <div>
+          <h1>{t('TOP_CITIES', 'Top Cities')}</h1>
+          <LinkBlock>
+            <div>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+            </div>
+            <div>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+            </div>
+            <div>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+            </div>
+          </LinkBlock>
+        </div>
+        <div>
+          <h1>{t('TOP_CUISINES_NEAY_YOU', 'Top Cuisines Near You')}</h1>
+          <LinkBlock>
+            <div>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+            </div>
+            <div>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+              <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+                {t('LOREM_IPSUM', 'Lorem Ipsum')}
+              </a>
+            </div>
+          </LinkBlock>
+        </div>
+      </FooterTopContent>
+      <SupportContent>
+        <div>
+          <h1>{t('GET_TO_KNOW_US', 'Get to Know Us')}</h1>
+          <div>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+          </div>
+        </div>
+        <div>
+          <h1>{t('LET_US_HELP_YOU', 'Let Us Help You')}</h1>
+          <div>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+          </div>
+        </div>
+        <div>
+          <h1>{t('DOING_BUSINESS', 'Doing business')}</h1>
+          <div>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+              {t('LOREM_IPSUM', 'Lorem Ipsum')}
+            </a>
+          </div>
+        </div>
+        <div>
+          <div>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')} className='right'>
+              <WrapAppImgae>
+                <img src={theme?.images?.general?.appStore} alt='app store' />
+              </WrapAppImgae>
+            </a>
+            <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')} className='right'>
+              <WrapAppImgae>
+                <img src={theme?.images?.general?.googlePlay} alt='google play' />
+              </WrapAppImgae>
+            </a>
+          </div>
+        </div>
+      </SupportContent>
+      <FooterBottomContent>
+        <div>
+          <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+            <img alt='Isotype' width='35px' height='45px' src={theme?.images?.logos?.isotypeInvert} loading='lazy' />
+          </a>
+          <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+            {t('LOREM_IPSUM', 'Lorem Ipsum')}
+          </a>
+          <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+            {t('LOREM_IPSUM', 'Lorem Ipsum')}
+          </a>
+          <a rel='noopener noreferrer' target='_blank' aria-label='link1' href={t('FOOTER_QL1_1_HREF')}>
+            {t('LOREM_IPSUM', 'Lorem Ipsum')}
+          </a>
+        </div>
         <div>
           <SocialIcon
             target='_blank'
@@ -93,27 +242,8 @@ export const Footer = () => {
           >
             <FaTwitter />
           </SocialIcon>
-          <SocialIcon
-            target='_blank'
-            rel='noreferrer'
-            href={t('FOOTER_QL3_4_HREF')}
-            aria-label='youtube'
-          >
-            <FaYoutube />
-          </SocialIcon>
-          <SocialIcon
-            target='_blank'
-            rel='noreferrer'
-            href={t('FOOTER_QL3_5_HREF')}
-            aria-label='whatsapp'
-          >
-            <FaWhatsapp />
-          </SocialIcon>
         </div>
-      </Content>
-      <Copy name='copy'>
-        {t('FOOTER_COPY', '© 2016 - 2020 Ordering - Create e-commerce Apps and Websites with your brand. All rights reserved. Ordering, Inc.')}
-      </Copy>
+      </FooterBottomContent>
     </FooterContainer>
   )
 }

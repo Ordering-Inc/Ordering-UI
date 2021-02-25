@@ -1,8 +1,32 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
+export const Container = styled.div`
+  width: 91%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+  
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
+  @media (min-width: 992px) {
+    flex-direction: row;
+  }
+`
 export const ProductsContainer = styled.div`
-  width: 95%;
-  margin: 20px auto 0px;
+  width: 70%;
+  padding: 30px 20px 30px 0;
+
+  @media (max-width: 992px) {
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  @media (max-width: 576px) {
+    padding: 0px;
+  }
 `
 
 export const WrapContent = styled.div`
@@ -11,29 +35,6 @@ export const WrapContent = styled.div`
 
   @media (min-width: 381px) {
     padding: 15px;
-  }
-`
-
-export const WrapperSearch = styled.div`
-  margin: 15px 0px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  .search-bar {
-    margin-right: 10px;
-    ${props => props.theme?.rtl && css`
-      margin-left: 10px;
-      margin-right: 0;
-    `}
-  }
-
-  div:last-child {
-    text-align: right;
-
-    ${props => props.theme?.rtl && css`
-      text-align: left;
-    `}
   }
 `
 
@@ -73,45 +74,8 @@ export const SkeletonItem = styled.div`
     margin-bottom: 10px;
   }
 `
-
-export const WrappLayout = styled.div`
-  ${({ isCartOnProductsList }) => isCartOnProductsList && css`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    .bp-list,
-    .cart {
-      width: 100%;
-    }
-
-    @media (min-width: 870px) {
-      flex-direction: row;
-      .bp-list {
-        width: 55%;
-      }
-      .cart {
-        width: calc(45% - 20px);
-        margin-left: 20px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .bp-list {
-        width: 60%;
-      }
-      .cart {
-        width: calc(40% - 20px);
-      }
-    }  
-
-    @media (min-width: 1200px) {
-      .bp-list {
-        width: 70%;
-      }
-      .cart {
-        width: calc(30% - 20px);
-      }
-    }  
-  `}
+export const WrapBottomSection = styled.div`
+  p {
+    text-align: center;
+  }
 `

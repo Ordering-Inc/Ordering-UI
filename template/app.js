@@ -17,11 +17,14 @@ import { Alert } from '../src/components/Confirm'
 
 import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
+import { FeaturedBusinessList } from './pages/FeaturedBusinessList'
 import { CheckoutPage } from './pages/Checkout'
-import { Cms } from './pages/Cms'
+// import { Cms } from './pages/Cms'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { HomePage } from './pages/Home'
 import { Login } from './pages/Login'
+import { FilterPage } from './pages/Filter'
+import { PickupPage } from './pages/Pickup'
 import { MyOrders } from './pages/MyOrders'
 import { OrderDetailsPage } from './pages/OrderDetails'
 import { PageNotFound } from './pages/PageNotFound'
@@ -124,6 +127,35 @@ export const App = () => {
                         : <HomePage />
                     }
                   </Route>
+                  <Route exact path='/search'>
+                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
+                      <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                    ) : (
+                      orderStatus.options?.address?.location
+                        ? <BusinessesList />
+                        : <Redirect to='/' />
+                    )}
+                  </Route>
+                  <Route exact path='/pickup'>
+                    {
+                      orderStatus.options?.address?.location
+                        ? <PickupPage />
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/filter'>
+                    {
+                      orderStatus.options?.address?.location
+                        ? <FilterPage />
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/businesses/:feature'>
+                    <FeaturedBusinessList />
+                  </Route>
+                  <Route exact path='/store/:store'>
+                    <BusinessProductsList />
+                  </Route>
                   <Route exact path='/signup'>
                     {
                       !auth
@@ -144,7 +176,7 @@ export const App = () => {
                         ? (
                           <Login
                             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -164,9 +196,8 @@ export const App = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                            useLoginByCellphone
+                            elementLinkToSignup={<Link to='/signup'>{t('SIGNUP', 'Sign up')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</Link>}
                           />
                         )
                         : (
@@ -190,29 +221,6 @@ export const App = () => {
                         : <Redirect to='/' />
                     }
                   </Route>
-                  <Route exact path='/password/reset' component={ResetPassword} />
-                  <Route exact path='/profile'>
-                    {auth
-                      ? (<Profile userId={user.id} accessToken={user.session.access_token} useValidationFields />)
-                      : <Redirect to='/login' />}
-                  </Route>
-                  <Route exact path='/profile/orders'>
-                    {auth
-                      ? (<MyOrders />)
-                      : <Redirect to='/login' />}
-                  </Route>
-                  <Route exact path='/search'>
-                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
-                      <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
-                    ) : (
-                      orderStatus.options?.address?.location
-                        ? <BusinessesList />
-                        : <Redirect to='/' />
-                    )}
-                  </Route>
-                  <Route exact path='/store/:store'>
-                    <BusinessProductsList />
-                  </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
                       ? <CheckoutPage />
@@ -235,14 +243,19 @@ export const App = () => {
                         />
                       )}
                   </Route>
-                  <Route exact path='/pages/:pageSlug'>
-                    <Cms />
-                  </Route>
                   <Route exact path='/pages'>
                     <PagesList />
                   </Route>
-                  <Route exact path='/:store'>
-                    <BusinessProductsList />
+                  <Route exact path='/password/reset' component={ResetPassword} />
+                  <Route exact path='/profile'>
+                    {auth
+                      ? (<Profile userId={user.id} accessToken={user.session.access_token} useValidationFields />)
+                      : <Redirect to='/login' />}
+                  </Route>
+                  <Route exact path='/profile/orders'>
+                    {auth
+                      ? (<MyOrders />)
+                      : <Redirect to='/login' />}
                   </Route>
                   <Route path='*'>
                     <PageNotFound />

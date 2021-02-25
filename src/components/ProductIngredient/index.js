@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProductIngredient as ProductIngredientController } from 'ordering-components'
 
-import { Container } from './styles'
+import { WrapIngredient } from './styles'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 
@@ -13,18 +13,20 @@ const ProductIngredientUI = (props) => {
   } = props
 
   return (
-    <Container onClick={() => toggleSelect()}>
-      <span>
-        {state?.selected ? (
-          <MdCheckBox />
-        ) : (
-          <MdCheckBoxOutlineBlank disabled />
-        )}
-      </span>
-      <span>
-        {ingredient.name}
-      </span>
-    </Container>
+    <>
+      <WrapIngredient onClick={() => toggleSelect()}>
+        <span>
+          {state?.selected ? (
+            <MdCheckBox />
+          ) : (
+            <MdCheckBoxOutlineBlank disabled />
+          )}
+        </span>
+        <span>
+          {ingredient.name}
+        </span>
+      </WrapIngredient>
+    </>
   )
 }
 

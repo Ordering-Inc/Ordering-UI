@@ -173,7 +173,7 @@ export const BusinessInfo = styled.div`
 `
 
 export const BusinessTotal = styled.div`
-  width: ${({ isCartOnProductsList }) => isCartOnProductsList ? '30%' : '25%' };
+  width: 25%;
   display: none;
   flex-direction: column;
   align-items: center;

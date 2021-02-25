@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const OptionTitle = styled.div`
-  width: ${({ isBusinessesPage }) => isBusinessesPage ? '80%' : '100%'};
-  margin: ${({ isBusinessesPage }) => isBusinessesPage ? '10px 20px 0' : '0 auto'};
-  padding: ${({ isBusinessesPage }) => !isBusinessesPage && '0 15px'};
+  width: ${({ isBusinessList }) => isBusinessList ? '80%' : '100%'};
+  margin: ${({ isBusinessList }) => isBusinessList ? '10px 20px 0' : '0 auto'};
+  padding: ${({ isBusinessList }) => !isBusinessList && '0 15px'};
 
   h1{
     text-transform: capitalize;
@@ -13,7 +13,7 @@ export const OptionTitle = styled.div`
 
   @media (min-width: 768px){
     padding: 0;
-    width: 80%
+    width: 100%
   }
 `
 
@@ -41,7 +41,7 @@ export const OrdersContainer = styled.div`
       width: 6px;
       height: 6px;
       }
-      ${({ ordersLength, isBusinessesPage }) => !ordersLength && !isBusinessesPage && css`
+      ${({ ordersLength, isBusinessList }) => !ordersLength && !isBusinessList && css`
         > div {
           margin-left: -10px;
           ${props => props.theme?.rtl && css`
@@ -60,11 +60,11 @@ export const OrdersContainer = styled.div`
     `}
     
     @media (min-width: 768px) {
-      width: ${({ isBusinessesPage }) => isBusinessesPage ? '100%' : '90%'};
+      width: ${({ isBusinessList }) => isBusinessList ? '100%' : '90%'};
       justify-content: flex-start;
       ${({ isSkeleton, ordersLength }) => !isSkeleton && !ordersLength && css`
       > div:first-child{
-        ${({ isBusinessesPage }) => !isBusinessesPage && css`
+        ${({ isBusinessList }) => !isBusinessList && css`
           margin-left: -10px;
           ${props => props.theme?.rtl && css`
             margin-left: 0;
@@ -77,10 +77,11 @@ export const OrdersContainer = styled.div`
   `}
 
   ${({ activeOrders }) => !activeOrders && css`
-    width: 98%;
+    width: 100%;
     display: flex;
     flex-direction: column-reverse;
     margin: 0 auto;
+    border: 1px solid ${props => props.theme.colors.secondary};
 
     p{
       margin-block-end: 0;
@@ -89,7 +90,6 @@ export const OrdersContainer = styled.div`
     }
 
     @media(min-width: 480px){
-      width: 80%;
       padding: 0;
       div:last-child {
         border-top: none;
@@ -100,6 +100,8 @@ export const OrdersContainer = styled.div`
 
 export const SkeletonOrder = styled.div`
   display: flex;
+  border-bottom: 1px solid ${props => props.theme.colors.secondary};
+  padding: 0 15px;
 
   ${({ activeOrders }) => activeOrders && css`
     width: auto;
@@ -153,6 +155,11 @@ export const SkeletonContent = styled.div`
   ${({ activeOrders }) => !activeOrders && css`
     justify-content: space-between;
   `}
+
+  
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
 `
 
 export const SkeletonText = styled.div`
@@ -180,9 +187,8 @@ export const SkeletonButton = styled.div`
 
 export const SkeletonInformation = styled.div`
   display: flex;
-
   > *{
-    margin: 5px;
+    margin: 0 5px;
   }
 `
 
@@ -192,15 +198,13 @@ export const SkeletonReorder = styled.div`
   position: relative;
   text-align: center;
   align-items: center;
-  margin-right: 25px;
 
-  ${props => props.theme?.rtl && css`
-    margin-left: 25px;
-    margin-right: 0;
-  `}
+  span {
+    border-radius: 20px;
+  }
 
   span:first-child span{
-    width: 40px;
+    width: 75px;
   }
 
   span:last-child{
@@ -215,11 +219,16 @@ export const SkeletonReorder = styled.div`
       margin-right: 0;
     `}
     span:first-child span{
-      width: 80px;
+      width: 150px;
     }
     span:last-child{
       width: 150px;
     }
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: row;
+    justify-content: space-between;
   }
 `
 
@@ -248,7 +257,7 @@ export const BusinessInformation = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 16px;
     margin-block-end: 0;
     margin-block-start: 0;
   }
@@ -279,13 +288,13 @@ export const BusinessInformation = styled.div`
 
   @media (min-width: 480px){
     h2 {
-    font-size: 14px;
+    font-size: 20px;
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
     }
     p{
       ${({ activeOrders }) => activeOrders && css`
-        font-size: 0.9em;
+        font-size: 18px;
       `}
     }
     p[name='order_number']{
@@ -294,9 +303,9 @@ export const BusinessInformation = styled.div`
   }
 
   @media (min-width: 768px){
-    font-size: 0.9em;
+    font-size: 18px;
     p {
-      font-size: 1em;
+      font-size: 18px;
     }
   }
 `
