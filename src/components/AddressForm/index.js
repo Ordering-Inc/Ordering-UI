@@ -381,6 +381,7 @@ const AddressFormUI = (props) => {
                 formMethods.setValue('address', e.address)
                 handleChangeAddress(e)
               }}
+              onError={setMapErrors}
               IconButton={BiCurrentLocation}
               IconLoadingButton={CgSearchLoading}
             />
