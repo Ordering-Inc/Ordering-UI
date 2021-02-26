@@ -55,8 +55,8 @@ export const HorizontalOrdersLayout = (props) => {
               <Map isBusinessesPage={isBusinessesPage}>
                 <img
                   src={
-                    isBusinessesPage 
-                      ? (order?.business?.header || order?.business?.logo) 
+                    isBusinessesPage
+                      ? (order?.business?.header || order?.business?.logo)
                       : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)
                   }
                   alt={isBusinessesPage ? 'business_header' : 'google-maps-img'}
@@ -75,8 +75,8 @@ export const HorizontalOrdersLayout = (props) => {
               <BusinessInformation activeOrders>
                 <h2>{order.business?.name}</h2>
                 <p name='order_number'>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
-                <p>{order?.delivery_datetime_utc 
-                  ? parseDate(order?.delivery_datetime_utc) 
+                <p>{order?.delivery_datetime_utc
+                  ? parseDate(order?.delivery_datetime_utc)
                   : parseDate(order?.delivery_datetime, { utc: false })}
                 </p>
               </BusinessInformation>
