@@ -196,7 +196,7 @@ var CheckoutUI = function CheckoutUI(props) {
         phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code).concat(user === null || user === void 0 ? void 0 : user.cellphone);
         var phoneNumber = (0, _libphonenumberJs.default)(phone);
 
-        if (!phoneNumber.isValid()) {
+        if (!(phoneNumber !== null && phoneNumber !== void 0 && phoneNumber.isValid())) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'));
         }
       } else {

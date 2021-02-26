@@ -150,10 +150,8 @@ var capitalize = function capitalize(str) {
 
 exports.capitalize = capitalize;
 
-var getGoogleMapImage = function getGoogleMapImage(_ref, apiKey) {
-  var lat = _ref.lat,
-      lng = _ref.lng;
-  return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(lat, ",").concat(lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(lat, ",").concat(lng, "&key=").concat(apiKey);
+var getGoogleMapImage = function getGoogleMapImage(location, apiKey) {
+  return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(location === null || location === void 0 ? void 0 : location.lat, ",").concat(location === null || location === void 0 ? void 0 : location.lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(location === null || location === void 0 ? void 0 : location.lat, ",").concat(location === null || location === void 0 ? void 0 : location.lng, "&key=").concat(apiKey);
 };
 /**
  * _Function to flat array of one level
@@ -164,9 +162,9 @@ var getGoogleMapImage = function getGoogleMapImage(_ref, apiKey) {
 exports.getGoogleMapImage = getGoogleMapImage;
 
 var flatArray = function flatArray(arr) {
-  var _ref2;
+  var _ref;
 
-  return (_ref2 = []).concat.apply(_ref2, _toConsumableArray(arr));
+  return (_ref = []).concat.apply(_ref, _toConsumableArray(arr));
 };
 /**
  * Function to return the traduction depending of a key 't'

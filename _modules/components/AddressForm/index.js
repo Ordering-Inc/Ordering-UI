@@ -561,6 +561,7 @@ var AddressFormUI = function AddressFormUI(props) {
       formMethods.setValue('address', e.address);
       handleChangeAddress(e);
     },
+    onError: setMapErrors,
     IconButton: _BiCurrentLocation.default,
     IconLoadingButton: _CgSearchLoading.default
   })), ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.location)) && !toggleMap && /*#__PURE__*/_react.default.createElement(_styles.ShowMap, {

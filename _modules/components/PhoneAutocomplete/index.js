@@ -107,13 +107,13 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (customersPhones.error) {
+    if (customersPhones !== null && customersPhones !== void 0 && customersPhones.error) {
       setAlertState({
         open: true,
-        content: [customersPhones.error]
+        content: [customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.error]
       });
     }
-  }, [customersPhones.error]);
+  }, [customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.AutoComplete, {
     className: "autocomplete"
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
