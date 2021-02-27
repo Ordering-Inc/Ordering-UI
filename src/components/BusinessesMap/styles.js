@@ -14,6 +14,10 @@ export const WrapperMap = styled.div`
     border-radius: 15px;
   }
 
+  ${({ disabled }) => disabled && css`
+    pointer-events: none
+  `}
+
   @media(min-width: 681px){
     padding: 0px;
     > div {
