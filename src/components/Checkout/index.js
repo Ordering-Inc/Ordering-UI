@@ -118,7 +118,7 @@ const CheckoutUI = (props) => {
         let phone = null
         phone = `+${user?.country_phone_code}${user?.cellphone}`
         const phoneNumber = parsePhoneNumber(phone)
-        if (!phoneNumber.isValid()) {
+        if (!phoneNumber?.isValid()) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'))
         }
       } else {
