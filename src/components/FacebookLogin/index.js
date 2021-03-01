@@ -4,7 +4,7 @@ import {
   useLanguage
 } from 'ordering-components'
 import EnFacebook from '@meronex/icons/en/EnFacebook'
-import { Modal } from '../Modal'
+import { Modal } from '../Modal/theme/two'
 import { FacebookLoginContent } from '../FacebookLoginContent'
 import { FacebookButton } from './styles'
 

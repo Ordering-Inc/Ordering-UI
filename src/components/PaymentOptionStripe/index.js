@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   PaymentOptionStripe as PaymentOptionStripeController,
   useSession,
   useLanguage
 } from 'ordering-components'
-import BsThreeDots from '@meronex/icons/bs/BsThreeDots'
-import BsCheck from '@meronex/icons/bs/BsCheck'
-import AiFillCreditCard from '@meronex/icons/ai/AiFillCreditCard'
-import BisChevronRight from '@meronex/icons/bi/BisChevronRight'
+
+import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
+import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
+import VscTrash from '@meronex/icons/vsc/VscTrash'
+
 import { getIconCard } from '../../utils'
 
 import { Modal } from '../Modal'
@@ -17,7 +18,6 @@ import { StripeElementsForm } from '../StripeElementsForm'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
-import { SpinnerLoader } from '../SpinnerLoader'
 
 import {
   OptionStripeContainer,
@@ -27,22 +27,17 @@ import {
   CardItemActions,
   WrapperItems,
   ActionsModal,
-  BlockLoading,
-  CardItemActionsContent,
-  DefaultCardItem,
-  AddActionButton,
-  Layer
+  BlockLoading
 } from './styles'
 
 const PaymentOptionStripeUI = (props) => {
   const {
-    defaultCardSetActionStatus,
     onSelectCard,
     onCancel,
     deleteCard,
-    setDefaultCard,
     cardSelected,
     cardsList,
+    handleCardClick,
     handleNewCard
   } = props
   const [{ token }] = useSession()
@@ -50,9 +45,6 @@ const PaymentOptionStripeUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const [addCartOpen, setAddCardOpen] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [openActionCardId, setOpenActionCardId] = useState(null)
-  const dropdownReference = useRef()
 
   const _handleNewCard = (card) => {
     setAddCardOpen(false)
@@ -60,7 +52,6 @@ const PaymentOptionStripeUI = (props) => {
   }
 
   const handleDeleteCard = (card) => {
-    setOpen(false)
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_CARD', 'Are you sure that you want to delete the card?'),
@@ -70,32 +61,6 @@ const PaymentOptionStripeUI = (props) => {
       }
     })
   }
-
-  const _handleCardClick = (card) => {
-    setDefaultCard(card)
-    setOpen(false)
-  }
-
-  const closeActionContent = (e) => {
-    if (open) {
-      const outsideDropdown = !dropdownReference.current?.contains(e.target)
-      if (outsideDropdown) {
-        setOpen(false)
-      }
-    }
-  }
-
-  const handleOpenActionContent = (card) => {
-    setOpen(true)
-    setOpenActionCardId(card)
-  }
-
-  useEffect(() => {
-    document.addEventListener('mouseup', closeActionContent)
-    return () => {
-      document.removeEventListener('mouseup', closeActionContent)
-    }
-  }, [open])
 
   return (
     <OptionStripeContainer>
@@ -114,37 +79,26 @@ const PaymentOptionStripeUI = (props) => {
       )}
 
       {token && cardsList.cards && cardsList.cards.length > 0 && (
-        <WrapperItems borderBottom>
-          <p>{t('SAVED_CARDS', 'Saved cards')}</p>
+        <WrapperItems>
           {cardsList.cards.map((card, i) => (
             <CardItem key={i}>
-              <CardItemContent>
+              <CardItemContent onClick={() => handleCardClick(card)}>
+                <span className='checks'>
+                  {card.id === cardSelected?.id ? (
+                    <IosRadioButtonOn />
+                  ) : (
+                    <IosRadioButtonOff />
+                  )}
+                </span>
                 <span className='brand'>
                   {getIconCard(card.brand)}
                 </span>
-                <span className='brandName'>{card.brand}</span>
                 <span>
-                  ...{card.last4}
+                  XXXX-XXXX-XXXX-{card.last4}
                 </span>
               </CardItemContent>
               <CardItemActions>
-                {card.id === cardSelected?.id && (
-                  <DefaultCardItem>
-                    <BsCheck />
-                    <span>{t('DEFAULT', 'Default')}</span>
-                  </DefaultCardItem>
-                )}
-                <BsThreeDots onClick={() => handleOpenActionContent(card.id)} />
-                {open && openActionCardId === card.id && (
-                  <CardItemActionsContent ref={dropdownReference}>
-                    <span onClick={() => _handleCardClick(card)}>
-                      {t('SET_DEFAULT', 'Set Default')}
-                    </span>
-                    <span onClick={() => handleDeleteCard(card)}>
-                      {t('DELETE', 'Delete')}
-                    </span>
-                  </CardItemActionsContent>
-                )}
+                <VscTrash onClick={() => handleDeleteCard(card)} />
               </CardItemActions>
             </CardItem>
           ))}
@@ -152,15 +106,10 @@ const PaymentOptionStripeUI = (props) => {
       )}
 
       {token && !cardsList.loading && (
-        <WrapperItems bottomSection>
-          <p>{t('ADD_PAYMENT_CARD', 'Add New Payment Card')}</p>
-          <AddActionButton onClick={() => setAddCardOpen(true)}>
-            <div>
-              <AiFillCreditCard />
-              <span>{t('CREDIT/DEBIT_CARD', 'Credit/Debit Card')}</span>
-            </div>
-            <BisChevronRight />
-          </AddActionButton>
+        <WrapperItems>
+          <Button className='addcard' color='primary' onClick={() => setAddCardOpen(true)}>
+            {t('ADD_PAYMENT_CARD', 'Add New Payment Card')}
+          </Button>
           <ActionsModal>
             <Button onClick={() => onCancel()}>
               {t('CANCEL', 'Cancel')}
@@ -170,11 +119,6 @@ const PaymentOptionStripeUI = (props) => {
             </Button>
           </ActionsModal>
         </WrapperItems>
-      )}
-      {defaultCardSetActionStatus?.loading && (
-        <Layer>
-          <SpinnerLoader />
-        </Layer>
       )}
 
       <Modal

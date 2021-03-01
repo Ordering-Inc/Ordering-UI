@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   &.error {
@@ -21,36 +21,15 @@ export const Title = styled.h3`
   overflow: hidden;
   white-space: nowrap;
   width: 70%;
-  display: flex;
-  flex-direction: column;
-
-  span {
-    &:not(:first-child) {
-      color: ${props => props.theme.colors.grayTextColor};
-      font-size: 12px;
-      font-weight: 400;
-    }
-  }
 `
 
 export const Flag = styled.span`
-  display: flex;
-  align-items: center;
-  column-gap: 5px;
-  padding: 10px 15px;
   font-size: 13px;
   margin: 0px;
   text-transform: capitalize;
+  color: #A52121;
   font-weight: 500;
-  
   @media (min-width: 381px) {
     font-size: 14px;
   }
-
-  color: #028389;
-  
-  ${({ error }) => error && css`
-    background: #FEFE58;
-    color: ${props => props.theme.colors.grayTextColor};
-  `}
 `

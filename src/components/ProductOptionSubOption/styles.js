@@ -1,26 +1,11 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  padding: 15px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid ${props => props.theme.colors.secondary};
-
-  > span {
-    cursor: pointer;
-    svg {
-      font-size: 24px;
-    }
-  }
-`
-
-export const WrapSubOption = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 10px;
   cursor: pointer;
-
   -webkit-touch-callout: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -31,7 +16,7 @@ export const WrapSubOption = styled.div`
 
 export const IconControl = styled.div`
   display: flex;
-  color: ${props => props.theme.colors.grayTextColor};
+  color: ${props => props.theme.colors.primary};
   margin-right: 5px;
   ${props => props.theme?.rtl && css`
     margin-left: 5px;
@@ -40,7 +25,6 @@ export const IconControl = styled.div`
   svg {
     font-size: 25px;
   }
-
   svg[disabled] {
     color: #CBCBCB;
   }
@@ -54,13 +38,11 @@ export const Text = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0 5px;
-
   div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
   span {
     margin-left: 10px;
     font-weight: 500;
@@ -77,21 +59,13 @@ export const Text = styled.div`
 
 export const QuantityControl = styled.div`
   display: flex;
-  column-gap: 25px;
   color: #555;
   align-items: center;
   font-weight: 300;
   font-size: 18px;
   margin: 0 5px;
-
-  span {
-    padding: 5px 25px;
-    border-radius: 3px;
-    border: 1px solid ${props => props.theme.colors.secondary};
-  }
-
   svg {
-    color: ${props => props.theme.colors.darkTextColor};
+    color: ${props => props.theme.colors.primary};
     font-size: 20px;
     margin-right: 3px;
     ${props => props.theme?.rtl && css`
@@ -99,11 +73,9 @@ export const QuantityControl = styled.div`
       margin-right: 0px;
     `}
   }
-
   svg[disabled] {
     color: #CBCBCB;
   }
-
   svg:last-child {
     margin-left: 3px;
     margin-right: 0;
@@ -121,7 +93,6 @@ export const PositionControl = styled.div`
   font-weight: 300;
   font-size: 18px;
   margin: 0 5px;
-
   svg {
     font-size: 20px;
     margin-right: 3px;
@@ -132,11 +103,9 @@ export const PositionControl = styled.div`
     &.reverse {
       transform: rotate(180deg);
     }
-
     &.selected {
       color: ${props => props.theme.colors.primary};
     }
-
     &:last-child {
       margin-right: 0;
       ${props => props.theme?.rtl && css`
@@ -157,47 +126,4 @@ export const SuboptionPrice = styled.div`
     margin-right: 5px;
     margin-left: 0px;
   `}
-`
-export const SuboptionQuanitySelectContainer = styled.div`
-  > div {
-    &:first-child {
-      margin-bottom: 50px;
-      p {
-        margin: 0px;
-        font-weight: 500;
-        font-size: 18px;
-        &:first-child {
-          color: ${props => props.theme.colors.grayTextColor};
-        }
-      }
-    }
-
-    &:nth-child(2 ){
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 5px 0;
-      span {
-        font-size: 18px;
-        &:first-child {
-          font-weight: 500;
-        }
-        &:last-child {
-          color: ${props => props.theme.colors.grayTextColor};
-        }
-      }
-    }
-    &:last-child {
-      margin-bottom: 30px;
-      padding: 10px 0;
-      border-bottom: 1px solid ${props => props.theme.colors.secondary};
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      p {
-        font-size: 14px;
-        font-weight: 500;
-      }
-    }
-  }
 `

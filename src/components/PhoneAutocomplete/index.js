@@ -48,10 +48,10 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   useEffect(() => {
-    if (customersPhones.error) {
-      setAlertState({ open: true, content: [customersPhones.error] })
+    if (customersPhones?.error) {
+      setAlertState({ open: true, content: [customersPhones?.error] })
     }
-  }, [customersPhones.error])
+  }, [customersPhones?.error])
 
   return (
     <>

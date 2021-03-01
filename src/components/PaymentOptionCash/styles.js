@@ -16,7 +16,6 @@ export const FormCash = styled.form`
         margin-right: 0;
     `}
   }
-
   @media (min-width: 381px) {
     label {
       font-size: 18px;
@@ -29,13 +28,11 @@ export const WrapperInput = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   input {
     margin-top: 10px;
     width: 100%;
     box-sizing: border-box;
   }
-
   @media (min-width: 768px) {
     flex-direction: row;
   }
@@ -46,7 +43,6 @@ export const ErrorText = styled.p`
   color: #D81212;
   font-size: 14px;
   font-weight: bold;
-
   @media (min-width: 381px) {
     font-size: 20px;
   }

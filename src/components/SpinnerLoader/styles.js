@@ -23,7 +23,6 @@ export const Content = styled.h1`
   margin-top: 0px;
   padding-bottom: 50px;
   font-size: 25px;
-
   @media (min-width: 768px) {
     font-size: 32px;
   }
@@ -34,11 +33,9 @@ export const Spinner = styled.div`
     0% { transform: rotate(0) }
     100% { transform: rotate(360deg) }
   }
-
   .spinner-content div {
     box-sizing: border-box!important
   }
-
   .spinner-content > div {
     width: 108px;
     height: 108px;
@@ -47,7 +44,6 @@ export const Spinner = styled.div`
     border-color: ${props => `${props.theme.colors.primary} transparent ${props.theme.colors.primary} transparent`};
     animation: spinner-content 1.8518518518518516s linear infinite;
   }
-
   .spinner-content > div:nth-child(2) { border-color: transparent }
   .spinner-content > div:nth-child(2) div {
     position: absolute;
@@ -55,7 +51,6 @@ export const Spinner = styled.div`
     height: 100%;
     transform: rotate(45deg);
   }
-
   .spinner-content > div:nth-child(2) div:before,
   .spinner-content > div:nth-child(2) div:after {
     content: "";
@@ -69,13 +64,11 @@ export const Spinner = styled.div`
     border-radius: 50%;
     box-shadow: 0 100px 0 0 ${props => props.theme.colors.primary};
   }
-
   .spinner-content > div:nth-child(2) div:after {
     left: -8px;
     top: 42px;
     box-shadow: 100px 0 0 0 ${props => props.theme.colors.primary};
   }
-
   .spinner {
     width: 200px;
     height: 200px;
@@ -83,7 +76,6 @@ export const Spinner = styled.div`
     overflow: hidden;
     background: #ffffff;
   }
-
   .spinner-content {
     width: 100%;
     height: 100%;
@@ -92,7 +84,6 @@ export const Spinner = styled.div`
     backface-visibility: hidden;
     transform-origin: 0 0;
   }
-
   .spinner-content div {
     box-sizing: content-box;
   }

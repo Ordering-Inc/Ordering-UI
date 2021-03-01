@@ -3,6 +3,7 @@ import { useOrder, useLanguage, useUtils, useConfig } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
 import { MomentContent } from '../MomentContent'
+import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
 export const MomentPopover = (props) => {
   const { open } = props
@@ -59,7 +60,7 @@ export const MomentPopover = (props) => {
     }
   }, [open])
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '550px', maxHeight: '70vh', overflowY: 'auto' }
+  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
@@ -71,6 +72,7 @@ export const MomentPopover = (props) => {
         onClick={configs?.max_days_preorder?.value === -1 || configs?.max_days_preorder?.value === 0 ? null : props.onClick}
         isHome={props.isHome}
       >
+        <FaRegClock />
         {orderStatus.options?.moment
           ? parseDate(orderStatus.options?.moment, { outputFormat: configs?.format_time?.value === '12' ? 'MM/DD hh:mma' : 'MM/DD HH:mm' })
           : t('ASAP_ABBREVIATION', 'ASAP')}
