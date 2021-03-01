@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { UserFormDetailsUI } from '../UserFormDetails'
-import { AccountManage } from '../AccountManage'
+import { AccountManage } from '../AccountManage/theme/two'
 
 import {
   UserFormDetails as UserProfileController,
