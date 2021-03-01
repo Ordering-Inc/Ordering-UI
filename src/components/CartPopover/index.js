@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react'
-import FaShoppingCart from '@meronex/icons/fa/FaShoppingCart'
+import React, { useEffect, useRef } from 'react'
+import IosBasket from '@meronex/icons/ios/IosBasket'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -74,8 +74,8 @@ export const CartPopover = (props) => {
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover'>
         <span>
-          <FaShoppingCart />
-          <p>{props.carts?.length}</p>
+          <IosBasket />
+          {props.carts?.length > 0 && <p>{props.carts?.length}</p>}
         </span>
       </HeaderItem>
       <PopoverBody className='cart-popover' ref={popperElement} style={popStyle} {...attributes.popper}>

@@ -13,18 +13,18 @@ export const WrapperMap = styled.div`
     height: 100% !important;
     border-radius: 15px;
   }
-
+  ${({ disabled }) => disabled && css`
+    pointer-events: none
+  `}
   @media(min-width: 681px){
     padding: 0px;
     > div {
       width: 75% !important;
     }
   }
-
   @media(min-width: 1201px){
     > div {
       width: 50% !important;
     }
   }
-
 `

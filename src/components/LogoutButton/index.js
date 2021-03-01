@@ -1,13 +1,15 @@
 import React from 'react'
 import { LogoutAction, useLanguage } from 'ordering-components'
-import IosCloseCircleOutline from '@meronex/icons/ios/IosCloseCircleOutline'
+
+import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
 
 import {
   MenuLink,
   WrappContent,
   MenuLinkIcon,
   MenuLinkText,
-  TextInfo
+  TextInfo,
+  MenuLinkSeparator
 } from '../SidebarMenu/styles'
 
 const LogoutButtonUI = (props) => {
@@ -31,13 +33,18 @@ const LogoutButtonUI = (props) => {
     <MenuLink onClick={handleLogOutClick} isHome={isHome}>
       <WrappContent>
         <MenuLinkIcon isHome={isHome}>
-          <IosCloseCircleOutline />
+          <FaSignOutAlt />
         </MenuLinkIcon>
         <MenuLinkText>
           <TextInfo isHome={isHome}>
-            {t('SIGNOUT', 'Sign out')}
+            {t('LOGOUT', 'Logout')}
           </TextInfo>
         </MenuLinkText>
+        <MenuLinkSeparator>
+          <div>
+            <hr />
+          </div>
+        </MenuLinkSeparator>
       </WrappContent>
     </MenuLink>
   )

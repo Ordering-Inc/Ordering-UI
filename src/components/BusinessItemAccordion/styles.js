@@ -8,7 +8,6 @@ export const AccordionSection = styled.div`
   border-bottom: 1px solid #BFBFBF;
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
-
   &:last-child {
     border-bottom: 0;
     margin-bottom: 10px;
@@ -24,15 +23,12 @@ export const Accordion = styled.div`
   position: relative;
   padding: 10px;
   background: #F8F8F8;
-
   ${props => props.isClosed && css`
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   `}
-
   .rotate {
     transform: rotate(180deg);
   }
-
   .accordion__icon {
     transition: transform 0.6s ease;
   }
@@ -43,7 +39,6 @@ export const WrapperBusinessLogo = styled.div`
   height: 50px;
   max-width: 50px;
   max-height: 50px;
-
   @media (min-width: 481px){
     width: 55px;
     height: 55px;
@@ -51,7 +46,6 @@ export const WrapperBusinessLogo = styled.div`
     max-height: 55px;
     padding-bottom: 0 !important;
   }
-
   @media (min-width: 769px){
     max-width: 75px;
     max-height: 75px;
@@ -72,13 +66,11 @@ const BusinessLogoStyled = styled.div`
   object-fit: contain;
   background-position: center;
   border-radius: 10px;
-
   @media (min-width: 481px){
     min-height: 55px;
     width: 55px;
     height: 55px;
   }
-
   @media (min-width: 769px){
     width: 75px;
     height: 75px;
@@ -104,28 +96,23 @@ export const ContentInfo = styled.div`
   text-transform: capitalize;
   margin-left: 10px;
   width: 65%;
-
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
     margin-left: 0;
   `}
-
   h2, span {
     margin: 0px;
   }
-
   h2 {
     font-size: 16px;
     font-weight: 500;
   }
-
   span {
     font-size: 16px;
     opacity: 0.8;
     display: flex;
     align-items: center;
     font-weight: 300;
-
     svg {
       margin-right: 3px;
       ${props => props.theme?.rtl && css`
@@ -134,7 +121,6 @@ export const ContentInfo = styled.div`
     `}
     }
   }
-
   @media (min-width: 576px) {
     h2 {
       font-size: 20px;
@@ -160,34 +146,29 @@ export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
   width: 60%;
-
   h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
   @media (min-width: 481px) {
     width: 45%;
   }
 `
 
 export const BusinessTotal = styled.div`
-  width: 25%;
+  width: ${({ isCartOnProductsList }) => isCartOnProductsList ? '30%' : '25%' };
   display: none;
   flex-direction: column;
   align-items: center;
-
   p {
     font-size: 18px;
     margin: 0px 5px;
     font-weight: 300;
-
     &:nth-child(1) {
       font-weight: 500;
     }
   }
-
   &.closed {
     flex: 1;
     p {
@@ -196,7 +177,6 @@ export const BusinessTotal = styled.div`
       font-size: 18px;
     }
   }
-
   @media (min-width: 481px) {
     display: flex;
   }
@@ -207,13 +187,11 @@ export const BusinessActions = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
   span {
     height: 22px;
     svg {
       font-size: 22px;
     }
-
     &:not(:last-child) {
       margin-right: 5px;
       ${props => props.theme?.rtl && css`
@@ -222,7 +200,6 @@ export const BusinessActions = styled.div`
     `}
     }
   }
-
   @media (min-width: 768px) {
     span {
       height: 27px;

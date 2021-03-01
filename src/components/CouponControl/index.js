@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { CouponControl as CouponController, useLanguage } from 'ordering-components'
 
 import {
-  CouponContainer,
-  WrapPromoCodeApply
+  CouponContainer
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { Confirm } from '../Confirm'
-import { Modal } from '../Modal'
 
 const CouponControlUI = (props) => {
   const {
@@ -24,7 +22,6 @@ const CouponControlUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [openPromoModal, setOpenPromoModal] = useState(false)
 
   const onRemoveCoupon = () => {
     setConfirm({
@@ -46,11 +43,6 @@ const CouponControlUI = (props) => {
     onChangeInputCoupon('')
   }
 
-  const handleApply = () => {
-    handleButtonApplyClick()
-    setOpenPromoModal(false)
-  }
-
   return (
     <CouponContainer>
       {couponDefault ? (
@@ -58,32 +50,21 @@ const CouponControlUI = (props) => {
           {t('REMOVE_COUPON', 'Remove Coupon')} {couponDefault}
         </Button>
       ) : (
-        <a onClick={() => setOpenPromoModal(true)}>{t('CHANGE_PROMO_CODE', 'Change promo code')}</a>
+        <>
+          <Input
+            placeholder={t('DISCOUNT_COUPON', 'Discount coupon')}
+            onChange={(e) => onChangeInputCoupon(e.target.value)}
+            autoComplete='off'
+          />
+          <Button
+            color='primary'
+            disabled={!couponInput}
+            onClick={handleButtonApplyClick}
+          >
+            {t('APPLY', 'Apply')}
+          </Button>
+        </>
       )}
-
-      <Modal
-        open={openPromoModal}
-        onClose={() => setOpenPromoModal(false)}
-      >
-        <WrapPromoCodeApply>
-          <p>{t('ENTER_PROMO_CODE', 'Enter Promo Code')}</p>
-          <div>
-            <Input
-              placeholder={t('DISCOUNT_COUPON', 'Discount coupon')}
-              onChange={(e) => onChangeInputCoupon(e.target.value)}
-              autoComplete='off'
-            />
-            <Button
-              color='secondary'
-              borderRounded
-              disabled={!couponInput}
-              onClick={() => handleApply()}
-            >
-              {t('APPLY', 'Apply')}
-            </Button>
-          </div>
-        </WrapPromoCodeApply>
-      </Modal>
       <Confirm
         title={t('COUPON', 'Coupon')}
         content={confirm?.content}

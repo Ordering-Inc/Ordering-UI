@@ -17,8 +17,7 @@ import parsePhoneNumber from 'libphonenumber-js'
 import {
   Container,
   WrappContainer,
-  LeftContainer,
-  RightContainer,
+  UserDetailsContainer,
   BusinessDetailsContainer,
   PaymentMethodContainer,
   DriverTipContainer,
@@ -27,33 +26,21 @@ import {
   WarningMessage,
   CartsList,
   WarningText,
-  WrapperUserDetails,
-  WrapOrderTypeMethod,
-  BusinessLogo,
-  WrapperBusinessLogo,
-  WrapCartPrice,
-  WrapCartTotalPrice,
-  WrapMaxLimtAndSavePrice,
-  PickupOrderTitle,
-  PaymentContent,
-  UpsellingPageContainer,
-  WrapFloatingButton,
-  WrapDeliveryTimeSelect,
-  RightInnerContainer
+  WrapperUserDetails
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
+
 import { NotFoundSource } from '../NotFoundSource'
+
 import { AddressDetails } from '../AddressDetails'
 import { UserDetails } from '../UserDetails'
 import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'
-import { ProductItemAccordion } from '../ProductItemAccordion'
+import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
-import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
-import { DeliveryTimeSelector } from '../DeliveryTimeSelector'
-import { CouponControl } from '../CouponControl'
+
 import { DriverTipsOptions } from '../../utils'
 
 const mapConfigs = {
@@ -78,9 +65,9 @@ const CheckoutUI = (props) => {
   } = props
 
   const [validationFields] = useValidationFields()
-  const [{ options }] = useOrder()
+  const [{ options, carts }] = useOrder()
   const [, t] = useLanguage()
-  const [{ parseNumber, parsePrice, optimizeImage }] = useUtils()
+  const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
 
@@ -88,7 +75,7 @@ const CheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
-  const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder()
@@ -131,7 +118,7 @@ const CheckoutUI = (props) => {
         let phone = null
         phone = `+${user?.country_phone_code}${user?.cellphone}`
         const phoneNumber = parsePhoneNumber(phone)
-        if (!phoneNumber.isValid()) {
+        if (!phoneNumber?.isValid()) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'))
         }
       } else {
@@ -162,53 +149,42 @@ const CheckoutUI = (props) => {
   }, [cart?.total])
 
   return (
-    <>
+    <Container>
       <WrappContainer>
-        <LeftContainer>
-          {!cartState.loading && cart?.status === 2 && (
-            <WarningMessage>
-              <VscWarning />
-              <h1>
-                {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
-              </h1>
-            </WarningMessage>
-          )}
-          {!cartState.loading && cart?.status === 4 && (
-            <WarningMessage>
-              <VscWarning />
-              <h1>
-                {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
-              </h1>
-            </WarningMessage>
-          )}
+        {!cartState.loading && cart?.status === 2 && (
+          <WarningMessage>
+            <VscWarning />
+            <h1>
+              {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
+            </h1>
+          </WarningMessage>
+        )}
+        {!cartState.loading && cart?.status === 4 && (
+          <WarningMessage>
+            <VscWarning />
+            <h1>
+              {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
+            </h1>
+          </WarningMessage>
+        )}
 
-          <WrapOrderTypeMethod>
-            <h1>{t('METHOD', 'Method')}</h1>
-            <OrderTypeSelectorHeader
-              radioStyle
-              configTypes={configTypes}
-            />
-          </WrapOrderTypeMethod>
-          <WrapDeliveryTimeSelect>
-            <h1>{t('TIME', 'Time')}</h1>
-            <DeliveryTimeSelector />
-          </WrapDeliveryTimeSelect>
+        {(businessDetails?.loading || cartState.loading) ? (
+          <div style={{ width: '100%', marginBottom: '20px' }}>
+            <Skeleton height={35} style={{ marginBottom: '10px' }} />
+            <Skeleton height={150} />
+          </div>
+        ) : (
+          <AddressDetails
+            location={businessDetails?.business?.location}
+            businessLogo={businessDetails?.business?.logo}
+            isCartPending={cart?.status === 2}
+            businessId={cart?.business_id}
+            apiKey={configs?.google_maps_api_key?.value}
+            mapConfigs={mapConfigs}
+          />
+        )}
 
-          {(businessDetails?.loading || cartState.loading) ? (
-            <div style={{ width: '100%', marginBottom: '20px' }}>
-              <Skeleton height={170} />
-            </div>
-          ) : (
-            <AddressDetails
-              location={businessDetails?.business?.location}
-              businessLogo={businessDetails?.business?.logo}
-              isCartPending={cart?.status === 2}
-              businessId={cart?.business_id}
-              apiKey={configs?.google_maps_api_key?.value}
-              mapConfigs={mapConfigs}
-            />
-          )}
-
+        <UserDetailsContainer>
           <WrapperUserDetails>
             {cartState.loading ? (
               <div>
@@ -230,263 +206,121 @@ const CheckoutUI = (props) => {
               />
             )}
           </WrapperUserDetails>
+        </UserDetailsContainer>
 
-          {!cartState.loading && cart && (
-            <PaymentMethodContainer>
-              <h1>{t('PAYMENT', 'Payment')}</h1>
-              <PaymentContent>
-                <PaymentOptions
-                  cart={cart}
-                  isDisabled={cart?.status === 2}
-                  businessId={businessDetails?.business?.id}
-                  isLoading={businessDetails.loading}
-                  paymethods={businessDetails?.business?.paymethods}
-                  onPaymentChange={handlePaymethodChange}
-                  errorCash={errorCash}
-                  setErrorCash={setErrorCash}
-                  handleOrderRedirect={handleOrderRedirect}
-                  isPaymethodNull={paymethodSelected}
-                />
-                <CouponControl
-                  businessId={cart?.business_id}
-                  price={cart?.total}
-                />
-              </PaymentContent>
-            </PaymentMethodContainer>
-          )}
-
-          {!cartState.loading && cart && (
-            <CartContainer>
-              <h1>{t('SUMMARY', 'Summary')}</h1>
+        <BusinessDetailsContainer>
+          {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
+            <div>
               <div>
-                {cart.products.map(product => (
-                  <ProductItemAccordion
-                    key={product.id}
-                    isCartProduct
-                    product={product}
-                  />
-                ))}
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
               </div>
-            </CartContainer>
+            </div>
           )}
-          {!cartState.loading && cart && (
-            <UpsellingPageContainer>
-              <h1>{t('PEOPLE_ALSO_ORDERED', 'People also ordered')}</h1>
-              <UpsellingPage
-                isCustomMode
-                businessId={cart?.business_id}
-                cartProducts={cart?.products}
-                business={cart?.business}
+          {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
+            <div>
+              <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+              <div>
+                <p><strong>{t('NAME', 'Name')}:</strong> {businessDetails?.business?.name}</p>
+                <p><strong>{t('EMAIL', 'Email')}:</strong> {businessDetails?.business?.email}</p>
+                <p><strong>{t('CELLPHONE', 'Cellphone')}:</strong> {businessDetails?.business?.cellphone}</p>
+                <p><strong>{t('ADDRESS', 'Address')}:</strong> {businessDetails?.business?.address}</p>
+              </div>
+            </div>
+          )}
+          {businessDetails?.error && businessDetails?.error?.length > 0 && (
+            <div>
+              <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+              <NotFoundSource
+                content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
               />
-            </UpsellingPageContainer>
+            </div>
           )}
+        </BusinessDetailsContainer>
 
-          <WrapFloatingButton>
-            {!cartState.loading && cart && cart?.status !== 2 && (
-              <WrapperPlaceOrderButton bottom>
-                <Button
-                  color={cart?.subtotal < cart?.minimum ? 'secondary' : 'primary'}
-                  disabled={!cart?.valid || !paymethodSelected || placing || errorCash || cart?.subtotal < cart?.minimum}
-                  onClick={() => handlePlaceOrder()}
-                >
-                  {cart?.subtotal >= cart?.minimum ? (
-                    placing ? t('PLACING', 'Placing') : options?.type === 1 ? t('PLACE_ORDER', 'Place Order') : t('PLACE_PICKUP_ORDER', 'Place Pickup Order')
-                  ) : (
-                    `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-                  )}
-                </Button>
-              </WrapperPlaceOrderButton>
-            )}
+        {!cartState.loading && cart && (
+          <PaymentMethodContainer>
+            <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+            <PaymentOptions
+              cart={cart}
+              isDisabled={cart?.status === 2}
+              businessId={businessDetails?.business?.id}
+              isLoading={businessDetails.loading}
+              paymethods={businessDetails?.business?.paymethods}
+              onPaymentChange={handlePaymethodChange}
+              errorCash={errorCash}
+              setErrorCash={setErrorCash}
+              handleOrderRedirect={handleOrderRedirect}
+              isPaymethodNull={paymethodSelected}
+            />
+          </PaymentMethodContainer>
+        )}
 
-            {!cart?.valid_address && cart?.status !== 2 && (
-              <WarningText>
-                {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
-              </WarningText>
-            )}
+        {!cartState.loading &&
+          cart &&
+          options.type === 1 &&
+          cart?.status !== 2 &&
+          validationFields?.fields?.checkout?.driver_tip?.enabled &&
+        (
+          <DriverTipContainer>
+            <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+            <DriverTips
+              businessId={cart?.business_id}
+              driverTipsOptions={DriverTipsOptions}
+              useOrderContext
+            />
+          </DriverTipContainer>
+        )}
 
-            {!paymethodSelected && cart?.status !== 2 && (
-              <WarningText>
-                {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
-              </WarningText>
-            )}
+        {!cartState.loading && cart && (
+          <CartContainer>
+            <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
+            <Cart
+              isCartPending={cart?.status === 2}
+              cart={cart}
+              isCheckout
+              isProducts={cart?.products?.length || 0}
+            />
+          </CartContainer>
+        )}
 
-            {!cart?.valid_products && cart?.status !== 2 && (
-              <WarningText>
-                {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
-              </WarningText>
-            )}
-          </WrapFloatingButton>
-        </LeftContainer>
-        <RightContainer>
-          <RightInnerContainer>
-            <BusinessDetailsContainer>
-              {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
-                <>
-                  <WrapperBusinessLogo>
-                    <Skeleton height={70} width={70} />
-                  </WrapperBusinessLogo>
-                  <div>
-                    <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                    <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  </div>
-                </>
+        {!cartState.loading && cart && cart?.status !== 2 && (
+          <WrapperPlaceOrderButton>
+            <Button
+              color={cart?.subtotal < cart?.minimum ? 'secundary' : 'primary'}
+              disabled={!cart?.valid || !paymethodSelected || placing || errorCash || cart?.subtotal < cart?.minimum}
+              onClick={() => handlePlaceOrder()}
+            >
+              {cart?.subtotal >= cart?.minimum ? (
+                placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')
+              ) : (
+                `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
               )}
-              {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
-                <>
-                  <WrapperBusinessLogo>
-                    <BusinessLogo bgimage={optimizeImage(businessDetails?.business?.logo, 'h_200,c_limit')} />
-                  </WrapperBusinessLogo>
-                  <div>
-                    <p>{t('ORDER_FROM', 'Order from')}</p>
-                    <p>{businessDetails?.business?.name}</p>
-                  </div>
-                </>
-              )}
-              {businessDetails?.error && businessDetails?.error?.length > 0 && (
-                <div>
-                  <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                  <NotFoundSource
-                    content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
-                  />
-                </div>
-              )}
-            </BusinessDetailsContainer>
+            </Button>
+          </WrapperPlaceOrderButton>
+        )}
 
-            {!cartState.loading && cart && cart?.status !== 2 && (
-              <WrapperPlaceOrderButton>
-                <Button
-                  color={cart?.subtotal < cart?.minimum ? 'secondary' : 'primary'}
-                  disabled={!cart?.valid || !paymethodSelected || placing || errorCash || cart?.subtotal < cart?.minimum}
-                  onClick={() => handlePlaceOrder()}
-                >
-                  {cart?.subtotal >= cart?.minimum ? (
-                    placing ? t('PLACING', 'Placing') : options?.type === 1 ? t('PLACE_ORDER', 'Place Order') : t('PLACE_PICKUP_ORDER', 'Place Pickup Order')
-                  ) : (
-                    `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-                  )}
-                </Button>
-              </WrapperPlaceOrderButton>
-            )}
+        {!cart?.valid_address && cart?.status !== 2 && (
+          <WarningText>
+            {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
+          </WarningText>
+        )}
 
-            {options?.type === 2 && (
-              <PickupOrderTitle>
-                <p>{t('THIS_IS_A_PICKUP_ORDER', 'This is a pickup order')}</p>
-                {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
-                  <p>
-                    <span>
-                      {t('YOULL_NEED_TO_GO', 'You’ll need to go')}
-                    </span>
-                    <span>{businessDetails?.business?.name}</span>
-                    <span>{t('TO_PICK_UP_THIS_ORDER', 'to pick up this order.')}</span>
-                  </p>
-                )}
-              </PickupOrderTitle>
-            )}
+        {!paymethodSelected && cart?.status !== 2 && (
+          <WarningText>
+            {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
+          </WarningText>
+        )}
 
-            {cart?.valid_products && (
-              <WrapCartPrice>
-                <div>
-                  <span>{t('SUBTOTAL', 'Subtotal')}</span>
-                  <span>{parsePrice(cart?.subtotal)}</span>
-                </div>
-                {options?.type === 1 && cart?.delivery_price > 0 && (
-                  <div>
-                    <span>{t('DELIVERY_FEE', 'Delivey Fee')}</span>
-                    <span>{parsePrice(cart?.delivery_price)}</span>
-                  </div>
-                )}
-                <div>
-                  <span>
-                    {cart?.business?.tax_type === 1
-                      ? t('TAX_INCLUDED', 'Tax (included)')
-                      : t('TAX', 'Tax')}
-                    {`(${parseNumber(cart?.business?.tax)}%)`}
-                  </span>
-                  <span>{parsePrice(cart?.tax || 0)}</span>
-                </div>
-                {cart?.driver_tip > 0 && (
-                  <div>
-                    <span>
-                      {t('DRIVER_TIP', 'Driver tip')}
-                      {cart?.driver_tip_rate > 0 && <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>}
-                    </span>
-                    <span>{parsePrice(cart?.driver_tip)}</span>
-                  </div>
-                )}
-                {cart?.service_fee > 0 && (
-                  <div>
-                    <span>
-                      {t('SERVICE_FEE', 'Service Fee')}
-                      {`(${parseNumber(cart?.business?.service_fee)}%)`}
-                    </span>
-                    <span>{parsePrice(cart?.service_fee)}</span>
-                  </div>
-                )}
-                {cart?.discount > 0 && cart?.total >= 0 && (
-                  <div>
-                    {cart?.discount_type === 1 ? (
-                      <span>
-                        {t('DISCOUNT', 'Discount')}
-                        {`(${parseNumber(cart?.discount_rate)}%)`}
-                      </span>
-                    ) : (
-                      <span>{t('DISCOUNT', 'Discount')}</span>
-                    )}
-                    <span>- {parsePrice(cart?.discount || 0)}</span>
-                  </div>
-                )}
-              </WrapCartPrice>
-            )}
+        {!cart?.valid_products && cart?.status !== 2 && (
+          <WarningText>
+            {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+          </WarningText>
+        )}
 
-            {options?.type === 1 && (
-              <>
-                {!cartState.loading &&
-                    cart &&
-                    options.type === 1 &&
-                    cart?.status !== 2 &&
-                    validationFields?.fields?.checkout?.driver_tip?.enabled &&
-                  (
-                    <DriverTipContainer>
-                      <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                      <DriverTips
-                        businessId={cart?.business_id}
-                        driverTipsOptions={DriverTipsOptions}
-                        useOrderContext
-                      />
-                    </DriverTipContainer>
-                  )}
-              </>
-            )}
-
-            {cart?.valid_products && (
-              <>
-                <WrapCartTotalPrice>
-                  <span>{t('TOTAL', 'Total')}</span>
-                  <span>{parsePrice(cart?.total)}</span>
-                </WrapCartTotalPrice>
-                <WrapMaxLimtAndSavePrice>
-                  <div>
-                    <span>{t('AMOUNT_DUE', 'Amount Due')}</span>
-                    <span>{parsePrice(cart?.total)}</span>
-                  </div>
-                  {cart?.minimum > 0 && (
-                    <div>
-                      <span>{t('MINIMUM_ORDER_LIMIT', 'Minimum order limit: ')}</span>
-                      <span>{parsePrice(cart?.minimum)}</span>
-                    </div>
-                  )}
-                  {cart?.discount > 0 && cart?.total >= 0 && (
-                    <div>
-                      <span>{t('YOU_SAVED', 'You saved ')}</span>
-                      <span>{parsePrice(cart?.discount || 0)}</span>
-                      <span>{t('WITH_PROMOTIONS', 'With Promotions')}</span>
-                    </div>
-                  )}
-                </WrapMaxLimtAndSavePrice>
-              </>
-            )}
-          </RightInnerContainer>
-        </RightContainer>
       </WrappContainer>
       <Alert
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
@@ -497,7 +331,7 @@ const CheckoutUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-    </>
+    </Container>
   )
 }
 
@@ -508,6 +342,7 @@ export const Checkout = (props) => {
     query,
     cartUuid,
     handleOrderRedirect,
+    handleCheckoutRedirect,
     handleSearchRedirect,
     handleCheckoutListRedirect
   } = props
@@ -519,10 +354,12 @@ export const Checkout = (props) => {
 
   const [cartState, setCartState] = useState({ loading: true, error: null, cart: null })
 
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const cartsWithProducts = Object.values(orderState.carts).filter(cart => cart.products.length)
+  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length) || null
 
   const closeAlert = () => {
     setAlertState({
@@ -532,11 +369,24 @@ export const Checkout = (props) => {
     clearErrors && clearErrors()
   }
 
+  const handleUpsellingPage = () => {
+    setOpenUpselling(false)
+    setCurrentCart(null)
+    setCanOpenUpselling(false)
+    handleCheckoutRedirect(currentCart.uuid)
+  }
+
   useEffect(() => {
     if (!orderState.loading && currentCart?.business_id) {
-      setCurrentCart(...Object.values(orderState.carts).filter(cart => cart?.business_id === currentCart?.business_id))
+      setCurrentCart(...Object.values(orderState.carts).filter(cart => cart.business_id === currentCart?.business_id))
     }
   }, [orderState.loading])
+
+  useEffect(() => {
+    if (currentCart?.products) {
+      setOpenUpselling(true)
+    }
+  }, [currentCart])
 
   useEffect(() => {
     if (errors?.length) {
@@ -611,20 +461,20 @@ export const Checkout = (props) => {
   }
 
   return (
-    <Container>
-      {!cartUuid && orderState.carts && cartsWithProducts.length === 0 && (
+    <>
+      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length === 0 && (
         <NotFoundSource
           content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
           btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
           onClickButton={handleSearchRedirect}
         />
       )}
-      {!cartUuid && orderState.carts && cartsWithProducts.length > 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length > 0 && (
         <CartsList>
           <CartContent
             carts={cartsWithProducts}
             isOrderStateCarts={!!orderState.carts}
-            isCheckoutPage
+            isForceOpenCart
           />
         </CartsList>
       )}
@@ -638,22 +488,26 @@ export const Checkout = (props) => {
       )}
 
       {cartState.loading && !(window.location.pathname === '/checkout') && (
-        <WrappContainer>
-          <LeftContainer>
-            <Skeleton height={80} count={2} style={{ marginBottom: '10px' }} />
-            <Skeleton height={150} style={{ marginBottom: '10px' }} />
-            <Skeleton height={80} count={4} style={{ marginBottom: '10px' }} />
-          </LeftContainer>
-          <RightContainer>
-            <RightInnerContainer>
-              <Skeleton height={150} count={2} style={{ marginBottom: '10px' }} />
-              <Skeleton height={50} count={2} style={{ marginBottom: '10px' }} />
-            </RightInnerContainer>
-          </RightContainer>
-        </WrappContainer>
+        <div style={{ width: '80%', margin: 'auto auto 20px' }}>
+          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+          <Skeleton height={150} style={{ marginBottom: '10px' }} />
+          <Skeleton height={35} count={6} style={{ marginBottom: '10px' }} />
+        </div>
       )}
 
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
+
+      {currentCart?.products && (
+        <UpsellingPage
+          businessId={currentCart?.business_id}
+          cartProducts={currentCart?.products}
+          business={currentCart?.business}
+          handleUpsellingPage={handleUpsellingPage}
+          openUpselling={openUpselling}
+          canOpenUpselling={canOpenUpselling}
+          setCanOpenUpselling={setCanOpenUpselling}
+        />
+      )}
 
       <Alert
         title={t('CHECKOUT ', 'Checkout')}
@@ -664,6 +518,6 @@ export const Checkout = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-    </Container>
+    </>
   )
 }

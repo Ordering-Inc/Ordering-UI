@@ -32,10 +32,10 @@ export const InputPhoneNumber = (props) => {
 
   return (
     <Container className='phone_number' disabled={disabled} isValid={value ? isValidPhoneNumber(value) : true}>
-      <label>{t('PHONE_NUMBER', 'Phone number')}</label>
       <>
         <PhoneInput
           disabled={disabled}
+          placeholder={t('PHONE_NUMBER', 'Phone number')}
           defaultCountry={configs?.default_country_code?.value}
           value={value}
           displayInitialValueAsLocalNumber
