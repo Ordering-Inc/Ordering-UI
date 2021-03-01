@@ -1,12 +1,20 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
-  color: ${props => props.theme.colors.primary};
+  color: #333;
   display: flex;
   align-items: center;
-  font-weight: 500;
-  padding-left: 15px;
+  ${props => props.isHome && css`
+    color: #FFF;
+  `}
+  svg {
+    margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `} 
+  }
 `
 
 export const PopoverBody = styled.div`
@@ -14,7 +22,7 @@ export const PopoverBody = styled.div`
   color: #333;
   padding: 15px;
   border-radius: 10px;
-  max-width: 550px;
+  max-width: 500px;
   z-index: 1001;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
 `

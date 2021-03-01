@@ -4,12 +4,7 @@ import { useSession, useLanguage } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 
-import {
-  FormInput,
-  ActionsForm,
-  SkeletonForm,
-  InputGroup
-} from './styles'
+import { FormInput, ActionsForm, SkeletonForm } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -22,8 +17,9 @@ const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
 
 export const UserFormDetailsUI = (props) => {
   const {
-    onCancel,
+    isEdit,
     formState,
+    onCancel,
     showField,
     cleanFormState,
     onCloseProfile,
@@ -32,7 +28,7 @@ export const UserFormDetailsUI = (props) => {
     handleChangeInput,
     handleButtonUpdateClick,
     isCheckout,
-    externalUserData
+    userData
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -44,7 +40,7 @@ export const UserFormDetailsUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const user = externalUserData || userSession
+  const user = userData || userSession
 
   const closeAlert = () => {
     setAlertState({
@@ -56,8 +52,8 @@ export const UserFormDetailsUI = (props) => {
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
-  const setUserCellPhone = () => {
-    if (userPhoneNumber && !userPhoneNumber.includes('null')) {
+  const setUserCellPhone = (isEdit = false) => {
+    if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
       setUserPhoneNumber(userPhoneNumber)
       return
     }
@@ -190,88 +186,102 @@ export const UserFormDetailsUI = (props) => {
   }, [validationFields?.fields?.checkout])
 
   useEffect(() => {
-    if (onCloseProfile) {
+    if (!isEdit && onCloseProfile) {
       onCloseProfile()
     }
-    if (user && !formState?.loading) {
+    if ((user || !isEdit) && !formState?.loading) {
       setUserCellPhone()
-      if (!formState?.loading) {
+      if (!isEdit && !formState?.loading) {
         cleanFormState && cleanFormState({ changes: {} })
         setUserCellPhone(true)
       }
     }
-  }, [user])
+  }, [user, isEdit])
 
   return (
     <>
       <FormInput onSubmit={handleSubmit(onSubmit)} isCheckout={isCheckout}>
         {!validationFields?.loading ? (
           <>
+            {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
+              showField && showField(field.code) && (
+                <React.Fragment key={field.id}>
+                  <Input
+                    key={field.id}
+                    type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
+                    name={field.code}
+                    className='form'
+                    disabled={!isEdit}
+                    placeholder={t(field.code.toUpperCase(), field?.name)}
+                    defaultValue={
+                      formState?.result?.result
+                        ? formState?.result?.result[field.code]
+                        : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                    }
+                    onChange={handleChangeInput}
+                    ref={register({
+                      required: isRequiredField(field.code)
+                        ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
+                        : null,
+                      pattern: {
+                        value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
+                        message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+                      }
+                    })}
+                    autoComplete='off'
+                  />
+                </React.Fragment>
+              )
+            ))}
             {!isCheckout && (
-              <>
-                {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
-                  showField && showField(field.code) && (
-                    <React.Fragment key={field.id}>
-                      {((field.id >= 1 && field.id < 6) || field.id >= 55) && (
-                        <InputGroup key={field.id}>
-                          <label>{t(field.code.toUpperCase(), field?.name)}</label>
-                          <Input
-                            type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
-                            name={field.code}
-                            className='form'
-                            defaultValue={
-                              formState?.result?.result
-                                ? formState?.result?.result[field.code]
-                                : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
-                            }
-                            onChange={handleChangeInput}
-                            ref={register({
-                              required: isRequiredField(field.code)
-                                ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
-                                : null,
-                              pattern: {
-                                value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                                message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-                              }
-                            })}
-                            autoComplete='off'
-                          />
-                        </InputGroup>
-                      )}
-                    </React.Fragment>
-                  )
-                ))}
-              </>
+              <Input
+                type='password'
+                name='password'
+                className='form'
+                disabled={!isEdit}
+                placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
+                onChange={handleChangeInput}
+                ref={register({
+                  required: isRequiredField('password')
+                    ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                    : null,
+                  minLength: {
+                    value: 8,
+                    message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                  }
+                })}
+              />
             )}
-
-            {!!showInputPhoneNumber && !externalUserData && (
+            {!!showInputPhoneNumber && !userData && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
+                disabled={!isEdit}
               />
             )}
 
-            {externalUserData && (
+            {userData && (
               <Input
-                value={externalUserData?.phone || externalUserData?.cellphone}
+                value={userData?.phone || userData?.cellphone}
                 className='form'
                 name='cellphone'
               />
             )}
-            <ActionsForm isCheckout={isCheckout}>
+            <ActionsForm>
               {onCancel && (
                 <Button
                   outline
                   type='button'
-                  onClick={() => onCancel()}
+                  onClick={() => onCancel(false)}
                   disabled={formState.loading}
                 >
                   {t('CANCEL', 'Cancel')}
                 </Button>
               )}
-              {((formState && Object.keys(formState?.changes).length > 0) || formState?.loading) && (
+
+              {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
                 <Button
                   id='form-btn'
                   color='primary'

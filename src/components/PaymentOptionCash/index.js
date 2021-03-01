@@ -54,4 +54,3 @@ export const PaymentOptionCash = (props) => {
       </FormCash>
     </PaymentCashContainer>
   )
-}

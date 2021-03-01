@@ -20,7 +20,6 @@ export const ModalDialog = styled.div`
   height: ${({ height }) => height || '100%'};;
   max-height: 100vh;
   overflow: auto;
-
   @media (min-width: 769px) {
     width: ${({ width }) => width || '50%'};
     max-height: 90vh;
@@ -49,7 +48,6 @@ export const ModalActions = styled.div`
 `
 export const ModalHeader = styled.div`
   display: flex;
-
 `
 
 export const ModalTitle = styled.h2`
@@ -83,7 +81,7 @@ export const ModalIcon = styled.span`
   top: 6px;
   font-size: 30px;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 1;
   ${props => props.theme?.rtl && css`
     left: 5px;
     right: initial;
@@ -92,7 +90,6 @@ export const ModalIcon = styled.span`
     background: rgba(255,255,255,0.5);
     border-radius: 50%;
   }
-
   @media(min-width: 769px){
     position: absolute;
   }

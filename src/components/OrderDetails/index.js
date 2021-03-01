@@ -20,7 +20,7 @@ import MdHome from '@meronex/icons/md/MdHome'
 import BisCar from '@meronex/icons/bi/BisCar'
 import AiOutlineStar from '@meronex/icons/ai/AiOutlineStar'
 import BsDot from '@meronex/icons/bs/BsDot'
-import { NotFoundSource } from '../NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource/theme/two'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'

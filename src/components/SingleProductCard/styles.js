@@ -6,22 +6,31 @@ export const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 20px;
+  width: calc(100% - 40px);
+  padding: 10px;
+  margin: 10px;
   border-radius: 10px;
   cursor: pointer;
   position: relative;
-
   background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
-  border: none;
-  border-radius: initial;
-  border-bottom: 1px solid ${props => props.theme.colors.secondary};
-  @media (min-width: 767px) {
-    border-radius: 10px;
-    border: 1px solid ${props => props.theme.colors.secondary};
-    width: calc(50% - 20px);
-    margin: 10px;
-  }
+  ${props => (
+    props.theme.colors.backgroundPage === '#FFF' ||
+    props.theme.colors.backgroundPage === '#FFFFFF'
+  ) && css`
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  `}
+  ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
+    @media (min-width: 993px) {
+      width: calc(50% - 40px);
+    }
+  ` : css`
+    @media (min-width: 681px) {
+      width: calc(50% - 40px);
+    }
+    @media (min-width: 993px) {
+      width: calc(33% - 40px);
+    }
+  `}
 `
 
 export const SoldOut = styled.span`
@@ -47,49 +56,40 @@ export const CardInfo = styled.div`
   > * {
     margin: 5px;
   }
-
   h1 {
     font-size: 16px;
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '500'};
     text-align: left;
-    color: ${props => props.theme.colors.darkTextColor};
+    color: #263238;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
   p {
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};
     text-align: left;
-    color: ${props => props.theme.colors.grayTextColor};
     ${props => props.theme?.rtl && css`
       text-align: right;
     `}
-
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
   }
-
   span {
-    color: ${({ soldOut, theme }) => soldOut ? lighten(0.05, theme.colors.grayTextColor) : theme.colors.grayTextColor};
+    color: ${({ soldOut, theme }) => soldOut ? lighten(0.05, theme.colors.primary) : theme.colors.primary};
     font-weight: bold;
   }
-
   p, span {
     font-size: 13px;
   }
-
   @media (min-width: 1024px) {
     h1 {
       font-size: 18px;
     }
-
     p {
       font-size: 16px;
     }
-
     span {
       font-size: 15px;
     }
@@ -97,10 +97,15 @@ export const CardInfo = styled.div`
 `
 
 export const WrapLogo = styled.div`
-  max-width: 100px;
-  max-height: 100px;
-  height: 100px;
-  width: 100px;
+  max-width: 75px;
+  max-height: 75px;
+  height: 75px;
+  width: 75px;
+  margin-right: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-left: 5px;
+    margin-right: 0px;
+  `}
 `
 
 const CardLogoStyled = styled.div`
@@ -110,7 +115,8 @@ const CardLogoStyled = styled.div`
   background-size: cover;
   background-position: center;
   object-fit: cover;
-  min-height: 100px;
+  min-height: 75px;
+  border-radius: 10px;
 `
 export const CardLogo = (props) => {
   const style = {}
