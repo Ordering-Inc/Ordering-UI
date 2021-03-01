@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessesMap as BusinessesMapController, GoogleMapsMap, useConfig, useOrder, useCustomer } from 'ordering-components'
+import { BusinessesMap as BusinessesMapController, GoogleMapsMap, useConfig, useOrder } from 'ordering-components'
 import { WrapperMap } from './styles'
 
 const BusinessesMapUI = (props) => {
@@ -11,7 +11,6 @@ const BusinessesMapUI = (props) => {
   } = props
 
   const [configState] = useConfig()
-  const [customerState] = useCustomer()
   const [orderState] = useOrder()
 
   const googleMapsControls = {
@@ -29,7 +28,7 @@ const BusinessesMapUI = (props) => {
 
   return (
     <>
-      <WrapperMap disabled={customerState.loading || orderState.loading}>
+      <WrapperMap disabled={orderState.loading}>
         <GoogleMapsMap
           apiKey={configState?.configs?.google_maps_api_key?.value}
           location={userLocation}
