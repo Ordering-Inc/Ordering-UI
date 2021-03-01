@@ -43,6 +43,10 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
 
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
+
   var googleMapsControls = {
     defaultZoom: 15,
     zoomControl: true,
@@ -56,7 +60,9 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
     },
     isMarkerDraggable: true
   };
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+    disabled: orderState.loading
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value,
     location: userLocation,
     locations: businessLocations,
