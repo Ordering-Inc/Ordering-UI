@@ -17,8 +17,9 @@ import {
   useOrder,
   useConfig
 } from 'ordering-components'
-import { Alert } from '../Confirm'
-import { GoogleGpsButton } from '../GoogleGpsButton'
+import { Alert } from '../../../Confirm'
+import { GoogleGpsButton } from '../../../GoogleGpsButton'
+import { getGoogleMapImage } from '../../../../utils'
 
 import {
   FormControl,
@@ -27,17 +28,18 @@ import {
   WrapAddressInput,
   AddressTagSection,
   WrapperMap,
-  ShowMap,
-  WrapperSkeleton
+  WrapperSkeleton,
+  WrapAdjustPin
 } from './styles'
 
-import { Button } from '../../styles/Buttons'
-import { Input, TextArea } from '../../styles/Inputs'
+import { Button } from '../../../../styles/Buttons'
+import { Input, TextArea } from '../../../../styles/Inputs'
 
 const inputNames = [{ name: 'address', code: 'Address' }, { name: 'internal_number', code: 'Internal number' }, { name: 'zipcode', code: 'Zipcode' }, { name: 'address_notes', code: 'Address notes' }]
 
 const AddressFormUI = (props) => {
   const {
+    isAddressEdit,
     addressesList,
     googleMapsControls,
     formState,
@@ -48,7 +50,7 @@ const AddressFormUI = (props) => {
     handleChangeInput,
     saveAddress,
     setIsEdit,
-    userCustomerSetup
+    onlyGoogleAutoComplete
   } = props
 
   const [configState] = useConfig()
@@ -59,10 +61,10 @@ const AddressFormUI = (props) => {
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
-  const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
+  const [toggleMap, setToggleMap] = useState(false)
   const isEditing = !!addressState.address?.id
 
   const [locationChange, setLocationChange] = useState(
@@ -98,8 +100,8 @@ const AddressFormUI = (props) => {
     props.forEach(prop => {
       if (addressToCompare[prop]) {
         if (prop === 'location') {
-          values.push(address[prop]?.lat === addressToCompare[prop]?.lat &&
-            address[prop]?.lng === addressToCompare[prop]?.lng)
+          values.push(address[prop].lat === addressToCompare[prop].lat &&
+            address[prop].lng === addressToCompare[prop].lng)
         } else {
           values.push(address[prop] === addressToCompare[prop])
         }
@@ -145,7 +147,7 @@ const AddressFormUI = (props) => {
 
         const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
         if (!isAddressAlreadyExist) {
-          saveAddress(data.address, userCustomerSetup)
+          saveAddress(data.address)
           return
         }
 
@@ -200,7 +202,7 @@ const AddressFormUI = (props) => {
     const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
 
     if (!isAddressAlreadyExist) {
-      saveAddress({}, userCustomerSetup)
+      saveAddress()
       return
     }
 
@@ -233,6 +235,14 @@ const AddressFormUI = (props) => {
       open: true,
       content: [t(errKey, mapErrors[errKey])]
     })
+  }
+
+  const onhandleCancel = () => {
+    if (toggleMap) {
+      setToggleMap(false)
+      return
+    }
+    onCancel()
   }
 
   useEffect(() => {
@@ -340,115 +350,144 @@ const AddressFormUI = (props) => {
           onSubmit={formMethods.handleSubmit(onSubmit)}
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
+          isAddressEditView={isAddressEdit}
         >
-          {locationChange && toggleMap && (
-            <WrapperMap>
-              <GoogleMapsMap
-                apiKey={googleMapsApiKey}
-                location={locationChange}
-                fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
-                mapControls={googleMapsControls}
-                handleChangeAddressMap={handleChangeAddress}
-                setErrors={setMapErrors}
-                maxLimitLocation={maxLimitLocation}
-              />
+          {locationChange && isAddressEdit && (
+            <WrapperMap mapView={toggleMap}>
+              {toggleMap ? (
+                <GoogleMapsMap
+                  apiKey={googleMapsApiKey}
+                  location={locationChange}
+                  fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
+                  mapControls={googleMapsControls}
+                  handleChangeAddressMap={handleChangeAddress}
+                  setErrors={setMapErrors}
+                  maxLimitLocation={maxLimitLocation}
+                />
+              ) : (
+                <img
+                  src={getGoogleMapImage(addressState?.address?.location, configState?.configs?.google_maps_api_key?.value)}
+                  alt='google-maps-img'
+                />
+              )}
             </WrapperMap>
           )}
-          <AddressWrap className='google-control'>
-            <WrapAddressInput>
-              <HiOutlineLocationMarker />
-              <GoogleAutocompleteInput
-                className='input-autocomplete'
-                apiKey={googleMapsApiKey}
-                placeholder={t('ADDRESS', 'Address')}
-                onChangeAddress={(e) => {
-                  formMethods.setValue('address', e.address)
-                  handleChangeAddress(e)
-                }}
-                onChange={(e) => {
-                  handleChangeInput({ target: { name: 'address', value: e.target.value } })
-                  setAddressValue(e.target.value)
-                }}
-                value={addressValue}
-                autoComplete='new-field'
-                countryCode={configState?.configs?.country_autocomplete?.value || '*'}
-              />
-            </WrapAddressInput>
-            <GoogleGpsButton
-              className='gps-button'
-              apiKey={googleMapsApiKey}
-              onAddress={(e) => {
-                formMethods.setValue('address', e.address)
-                handleChangeAddress(e)
-              }}
-              onError={setMapErrors}
-              IconButton={BiCurrentLocation}
-              IconLoadingButton={CgSearchLoading}
-            />
-          </AddressWrap>
-
-          {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
-            <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
+          {isAddressEdit && !toggleMap && (
+            <WrapAdjustPin>
+              <span>{addressValue}</span>
+              <Button
+                type='button'
+                color='secondary'
+                borderRounded
+                onClick={() => setToggleMap(true)}
+              >
+                {t('ADJUST_PIN', 'Adjust pin')}
+              </Button>
+            </WrapAdjustPin>
+          )}
+          {!isAddressEdit && (
+            <AddressWrap className='google-control'>
+              <WrapAddressInput>
+                <HiOutlineLocationMarker />
+                <GoogleAutocompleteInput
+                  className='input-autocomplete'
+                  apiKey={googleMapsApiKey}
+                  placeholder={t('ADDRESS', 'Address')}
+                  onChangeAddress={(e) => {
+                    formMethods.setValue('address', e.address)
+                    handleChangeAddress(e)
+                  }}
+                  onChange={(e) => {
+                    handleChangeInput({ target: { name: 'address', value: e.target.value } })
+                    setAddressValue(e.target.value)
+                  }}
+                  value={addressValue}
+                  autoComplete='new-field'
+                  countryCode={configState?.configs?.country_autocomplete?.value || '*'}
+                />
+              </WrapAddressInput>
+              {!onlyGoogleAutoComplete && (
+                <GoogleGpsButton
+                  className='gps-button'
+                  apiKey={googleMapsApiKey}
+                  onAddress={(e) => {
+                    formMethods.setValue('address', e.address)
+                    handleChangeAddress(e)
+                  }}
+                  IconButton={BiCurrentLocation}
+                  IconLoadingButton={CgSearchLoading}
+                />
+              )}
+            </AddressWrap>
           )}
 
-          <Input
-            className='internal_number'
-            placeholder={t('INTERNAL_NUMBER', 'Internal number')}
-            value={formState.changes?.internal_number ?? addressState.address.internal_number ?? ''}
-            onChange={(e) => {
-              formMethods.setValue('internal_number', e.target.value)
-              handleChangeInput({ target: { name: 'internal_number', value: e.target.value } })
-            }}
-            autoComplete='new-field'
-          />
+          {!onlyGoogleAutoComplete && !toggleMap && (
+            <>
+              <Input
+                className='internal_number'
+                placeholder={t('INTERNAL_NUMBER', 'Internal number')}
+                value={formState.changes?.internal_number ?? addressState.address.internal_number ?? ''}
+                onChange={(e) => {
+                  formMethods.setValue('internal_number', e.target.value)
+                  handleChangeInput({ target: { name: 'internal_number', value: e.target.value } })
+                }}
+                autoComplete='new-field'
+              />
+              {!isAddressEdit && (
+                <Input
+                  className='zipcode'
+                  placeholder={t('ZIP_CODE', 'Zip code')}
+                  value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
+                  onChange={(e) => {
+                    formMethods.setValue('zipcode', e.target.value)
+                    handleChangeInput({ target: { name: 'zipcode', value: e.target.value } })
+                  }}
+                  autoComplete='new-field'
+                />
+              )}
 
-          <Input
-            className='zipcode'
-            placeholder={t('ZIP_CODE', 'Zip code')}
-            value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
-            onChange={(e) => {
-              formMethods.setValue('zipcode', e.target.value)
-              handleChangeInput({ target: { name: 'zipcode', value: e.target.value } })
-            }}
-            autoComplete='new-field'
-          />
-
-          <TextArea
-            rows={4}
-            placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-            value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
-            onChange={(e) => {
-              formMethods.setValue('address_notes', e.target.value)
-              handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
-            }}
-            autoComplete='new-field'
-          />
+              <TextArea
+                rows={4}
+                placeholder={t('ADDRESS_NOTES', 'Address Notes')}
+                value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
+                onChange={(e) => {
+                  formMethods.setValue('address_notes', e.target.value)
+                  handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+                }}
+                autoComplete='new-field'
+              />
+              {!isAddressEdit && (
+                <AddressTagSection>
+                  <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
+                    <span><FaHome /></span>
+                  </Button>
+                  <Button className={addressTag === 'office' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('office')}>
+                    <span><FaRegBuilding /></span>
+                  </Button>
+                  <Button className={addressTag === 'favorite' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('favorite')}>
+                    <span><FaRegHeart /></span>
+                  </Button>
+                  <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
+                    <span><FaPlus /></span>
+                  </Button>
+                </AddressTagSection>
+              )}
+            </>
+          )}
 
           {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
 
-          <AddressTagSection>
-            <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
-              <span><FaHome /></span>
-            </Button>
-            <Button className={addressTag === 'office' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('office')}>
-              <span><FaRegBuilding /></span>
-            </Button>
-            <Button className={addressTag === 'favorite' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('favorite')}>
-              <span><FaRegHeart /></span>
-            </Button>
-            <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
-              <span><FaPlus /></span>
-            </Button>
-          </AddressTagSection>
-          <FormActions>
-            <Button
-              outline
-              type='button'
-              disabled={formState.loading}
-              onClick={() => onCancel()}
-            >
-              {t('CANCEL', 'Cancel')}
-            </Button>
+          <FormActions onlyGoogleAutoComplete={onlyGoogleAutoComplete}>
+            {!onlyGoogleAutoComplete && (
+              <Button
+                outline
+                type='button'
+                disabled={formState.loading}
+                onClick={() => onhandleCancel()}
+              >
+                {t('CANCEL', 'Cancel')}
+              </Button>
+            )}
             {Object.keys(formState?.changes).length > 0 && (
               <Button
                 id='submit-btn'

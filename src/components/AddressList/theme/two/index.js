@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import TiPencil from '@meronex/icons/ti/TiPencil'
-import VscTrash from '@meronex/icons/vsc/VscTrash'
+import VscClose from '@meronex/icons/vsc/VscClose'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 
@@ -17,16 +17,17 @@ import {
   AddressItem,
   AddressItemActions,
   WrappNotAddresses,
-  FormActions
+  FormActions,
+  WrapAddressForm
 } from './styles'
 
-import { NotFoundSource } from '../NotFoundSource'
-import { Button } from '../../styles/Buttons'
-import { Modal } from '../Modal'
-import { AddressForm } from '../AddressForm'
-import { Confirm } from '../Confirm'
+import { NotFoundSource } from '../../../NotFoundSource'
+import { Button } from '../../../../styles/Buttons'
+import { Modal } from '../../../Modal'
+import { AddressForm } from '../../../AddressForm'
+import { Confirm } from '../../../Confirm'
 import { useTheme } from 'styled-components'
-import { scrollTo } from '../../utils'
+import { scrollTo } from '../../../../utils'
 
 const AddressListUI = (props) => {
   const {
@@ -38,10 +39,11 @@ const AddressListUI = (props) => {
     isModal,
     isPopover,
     isProductForm,
+    isAddAndEdit,
+    EditAddress,
     onCancel,
     onAccept,
-    userId,
-    userCustomerSetup
+    userId
   } = props
 
   const [, t] = useLanguage()
@@ -92,7 +94,7 @@ const AddressListUI = (props) => {
   const handleSetAddress = (address) => {
     if (address.id === orderState?.options?.address_id) return
     setAddressOpen(false)
-    handleSetDefault(address, userCustomerSetup)
+    handleSetDefault(address)
   }
 
   const handleDeleteClick = (address) => {
@@ -139,27 +141,15 @@ const AddressListUI = (props) => {
   return (
     <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
       {
-        (!isPopover || !addressOpen) && (
-          <Button
-            className='add'
-            color='primary'
-            onClick={() => openAddress({})}
-            disabled={orderState?.loading || actionStatus.loading}
-          >
-            {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')}
-          </Button>
-        )
-      }
-      {
         isPopover && addressOpen && (
           <AddressForm
+            isAddressEdit
             userId={userId}
             addressesList={addressList?.addresses}
             useValidationFileds
             address={curAddress}
             onCancel={() => setAddressOpen(false)}
             onSaveAddress={handleSaveAddress}
-            userCustomerSetup={userCustomerSetup}
           />
         )
       }
@@ -171,6 +161,7 @@ const AddressListUI = (props) => {
             onClose={() => setAddressOpen(false)}
           >
             <AddressForm
+              isAddressEdit
               addressesList={addressList?.addresses}
               useValidationFileds
               address={curAddress}
@@ -181,6 +172,17 @@ const AddressListUI = (props) => {
         )
       }
 
+      {isAddAndEdit && (
+        <AddressForm
+          isAddressEdit
+          addressesList={addressList?.addresses}
+          useValidationFileds
+          address={EditAddress}
+          onCancel={props.onCancel}
+          onSaveAddress={handleSaveAddress}
+        />
+      )}
+
       {
         !addressList.loading &&
         !actionStatus.loading &&
@@ -188,29 +190,41 @@ const AddressListUI = (props) => {
         !addressList.error &&
         addressList?.addresses?.length > 0 &&
         ((!addressOpen && isPopover) || isModal) && (
-          <AddressListUl id='list'>
-            {uniqueAddressesList.map(address => (
-              <AddressItem key={address?.id}>
-                <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
-                  <span className='radio'>
-                    {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
-                  </span>
-                  <div className='address'>
-                    <span>{address.address}</span>
-                    <span>{address.internal_number} {address.zipcode}</span>
+          <>
+            <p>{t('SEARCH_FOR_NEW_ADDRESS', 'Search for a new address')}</p>
+            <WrapAddressForm>
+              <AddressForm
+                onlyGoogleAutoComplete
+                addressesList={addressList?.addresses}
+                useValidationFileds
+                onCancel={() => setAddressOpen(false)}
+                onSaveAddress={handleSaveAddress}
+              />
+            </WrapAddressForm>
+            <AddressListUl id='list'>
+              {uniqueAddressesList.map(address => (
+                <AddressItem key={address?.id} active={checkAddress(address)}>
+                  <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
+                    <span className='radio'>
+                      {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
+                    </span>
+                    <div className='address'>
+                      <span>{address.address}</span>
+                      <span>{address.internal_number} {address.zipcode}</span>
+                    </div>
                   </div>
-                </div>
-                <AddressItemActions className='form'>
-                  <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                    <TiPencil />
-                  </a>
-                  <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
-                    <VscTrash />
-                  </a>
-                </AddressItemActions>
-              </AddressItem>
-            ))}
-          </AddressListUl>
+                  <AddressItemActions className='form'>
+                    <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
+                      <TiPencil />
+                    </a>
+                    <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
+                      <VscClose />
+                    </a>
+                  </AddressItemActions>
+                </AddressItem>
+              ))}
+            </AddressListUl>
+          </>
         )
       }
 
@@ -229,7 +243,7 @@ const AddressListUI = (props) => {
         )
       )}
 
-      {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && (
+      {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && !isAddAndEdit && (
         <AddressListUl>
           <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
         </AddressListUl>

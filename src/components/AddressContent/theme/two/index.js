@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components'
-import { AddressList } from '../AddressList'
-import { AddressForm } from '../AddressForm'
+import { AddressList } from '../../../AddressList'
+import { AddressForm } from '../../../AddressForm'
 import {
   Container,
   Title
