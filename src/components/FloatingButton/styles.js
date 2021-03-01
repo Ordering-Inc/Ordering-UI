@@ -9,7 +9,6 @@ export const Container = styled.div`
   justify-content: center;
   background-color: #FFF;
   z-index: 1000;
-
   button {
     position: relative;
     width: 90%;
@@ -20,11 +19,9 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
     @media (min-width: 850px) {
       width: 80%;
     }
-
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed

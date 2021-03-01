@@ -14,13 +14,11 @@ export const DropdownToggleStyled = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-
   /* img {
     width: 28px;
     height: 28px;
     margin-right: 5px;
     border-radius: 1000px;
-
     :last-child {
       margin-right: 0;
     }
@@ -54,7 +52,6 @@ const DropdownItemShared = css`
   color: #333;
   align-items: center;
   border-bottom: 1px solid #eee;
-
   svg {
     margin-right: 7px;
     ${props => props.theme?.rtl && css`
@@ -62,18 +59,15 @@ const DropdownItemShared = css`
       margin-right: 0px;
     `}
   }
-
   :hover {
     background-color: #eee;
   }
   :active {
     background-color: #ddd;
   }
-
   :first-child {
     border-radius: 10px 10px 0 0;
   }
-
   :nth-last-child(2) {
     border-bottom: 0px;
     border-radius: 0 0 10px 10px;
@@ -103,11 +97,9 @@ export const DropDownCircleImage = styled(Image)`
     margin-left: 5px;
     margin-right: 0;
   `}
-
   /* svg {
     display: flex;
   } */
-
   :last-child {
     ${props => props.theme?.rtl ? css`
         margin-left: 0;

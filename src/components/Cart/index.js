@@ -8,6 +8,7 @@ import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../CouponControl'
 import { ProductForm } from '../ProductForm'
+import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import {
@@ -31,7 +32,9 @@ const CartUI = (props) => {
     isCheckout,
     isCartPending,
     isCartPopover,
-    isCheckoutPage
+    isForceOpenCart,
+    isCartOnProductsList,
+    handleCartOpen
   } = props
 
   const [, t] = useLanguage()
@@ -43,6 +46,8 @@ const CartUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const windowSize = useWindowSize()
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
@@ -103,6 +108,12 @@ const CartUI = (props) => {
     })
   }
 
+  const handleUpsellingPage = () => {
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+    handleClickCheckout()
+  }
+
   return (
     <CartContainer className='cart'>
       <BusinessItemAccordion
@@ -116,9 +127,11 @@ const CartUI = (props) => {
         moment={momentFormatted}
         isProducts={isProducts}
         isValidProducts={cart?.valid_products}
-        isForceOpenAccordion={isCheckoutPage}
+        isForceOpenAccordion={isForceOpenCart}
+        isCartOnProductsList={isCartOnProductsList}
         handleClearProducts={handleClearProducts}
         handleStoreRedirect={handleStoreRedirect}
+        handleCartOpen={handleCartOpen}
       >
         {cart?.products?.length > 0 && cart?.products.map(product => (
           <ProductItemAccordion
@@ -207,15 +220,15 @@ const CartUI = (props) => {
             </table>
           </OrderBill>
         )}
-        {(onClickCheckout || isCheckoutPage) && !isCheckout && (
+        {(onClickCheckout || isForceOpenCart) && !isCheckout && (
           <CheckoutAction>
             <Button
               color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
-              onClick={() => handleClickCheckout()}
-              disabled={cart?.subtotal < cart?.minimum || !cart?.valid_address}
+              onClick={() => setOpenUpselling(true)}
+              disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum || !cart?.valid_address}
             >
               {(cart?.subtotal >= cart?.minimum || !cart?.minimum) && cart?.valid_address ? (
-                t('CHECKOUT', 'Checkout')
+                !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
               ) : !cart?.valid_address ? (
                 t('OUT_OF_COVERAGE', 'Out of Coverage')
               ) : (
@@ -252,6 +265,17 @@ const CartUI = (props) => {
           onSave={handlerProductAction}
         />
       </Modal>
+      {openUpselling && (
+        <UpsellingPage
+          businessId={cart.business_id}
+          cartProducts={cart.products}
+          business={cart.business}
+          handleUpsellingPage={handleUpsellingPage}
+          openUpselling={openUpselling}
+          canOpenUpselling={canOpenUpselling}
+          setCanOpenUpselling={setCanOpenUpselling}
+        />
+      )}
     </CartContainer>
   )
 }

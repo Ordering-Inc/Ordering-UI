@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessesMap as BusinessesMapController, GoogleMapsMap, useConfig } from 'ordering-components'
+import { BusinessesMap as BusinessesMapController, GoogleMapsMap, useConfig, useOrder } from 'ordering-components'
 import { WrapperMap } from './styles'
 
 const BusinessesMapUI = (props) => {
@@ -11,6 +11,7 @@ const BusinessesMapUI = (props) => {
   } = props
 
   const [configState] = useConfig()
+  const [orderState] = useOrder()
 
   const googleMapsControls = {
     defaultZoom: 15,
@@ -27,7 +28,7 @@ const BusinessesMapUI = (props) => {
 
   return (
     <>
-      <WrapperMap>
+      <WrapperMap disabled={orderState.loading}>
         <GoogleMapsMap
           apiKey={configState?.configs?.google_maps_api_key?.value}
           location={userLocation}
