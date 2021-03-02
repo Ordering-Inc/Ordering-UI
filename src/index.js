@@ -62,6 +62,11 @@ import { UpsellingPage } from './components/UpsellingPage'
 import { UserDetails } from './components/UserDetails'
 import { UserPopover } from './components/UserPopover'
 import { UserProfileForm } from './components/UserProfileForm'
+import { SoldOutRecommendationSelector } from './components/SoldOutRecommendationSelector'
+import { ReviewSettingPopover } from './components/ReviewSettingPopover'
+import { ReviewSettingContent } from './components/ReviewSettingContent'
+import { PickupOrderTypeToggleButton } from './components/PickupOrderTypeToggleButton'
+import { PickupBusinessesListing } from './components/PickupBusinessesListing'
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
@@ -136,6 +141,11 @@ export {
   UserDetails,
   UserPopover,
   UserProfileForm,
+  SoldOutRecommendationSelector,
+  PickupBusinessesListing,
+  PickupOrderTypeToggleButton,
+  ReviewSettingContent,
+  ReviewSettingPopover,
   // Contexts
   ThemeContext,
   ThemeProvider,
