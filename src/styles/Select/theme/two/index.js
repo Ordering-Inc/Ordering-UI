@@ -9,7 +9,7 @@ import {
   Option,
   Chevron,
   Header
-} from '../Selects'
+} from '../../../Selects/theme/two'
 
 export const Select = (props) => {
   const {
