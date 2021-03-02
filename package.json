@@ -5,7 +5,7 @@
   "main": "./_modules/index.js",
   "scripts": {
     "clean": "shx rm -rf _bundles _modules",
-    "build": "npm run clean && babel ./src --out-dir ./_modules && babel ./themes --out-dir ./_modules/themes && webpack --config webpack.prod.js",
+    "build": "npm run clean && babel ./src --out-dir ./_modules && babel ./src/themes --out-dir ./_modules/themes && webpack --config webpack.prod.js",
     "build-dev": "npx webpack --mode=development",
     "serve": "npx webpack-dev-server --config webpack.dev.js",
     "lint": "standard",
