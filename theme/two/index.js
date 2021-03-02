@@ -31,7 +31,7 @@ import { CouponControl } from '../../src/components/CouponControl/theme/two'
 import { DeliveryDateContent } from '../../src/components/DeliveryDateContent/theme/two'
 import { DeliveryTimeSelector } from '../../src/components/DeliveryTimeSelector/theme/two'
 import { DriverTips } from '../../src/components/DriverTips/theme/two'
-import { Drowpdown } from '../../src/components/Drowpdown/theme/two'
+import { Dropdown } from '../../src/components/Dropdown/theme/two'
 import { FacebookLoginButton } from '../../src/components/FacebookLogin/theme/two'
 import { FacebookLoginContent } from '../../src/components/FacebookLoginContent/theme/two'
 import { FeaturedBusinessListing } from '../../src/components/FeaturedBusinessListing/theme/two'
@@ -135,11 +135,12 @@ export {
   Checkout,
   Cms,
   Confirm,
+  Alert,
   CouponControl,
   DeliveryDateContent,
   DeliveryTimeSelector,
   DriverTips,
-  Drowpdown,
+  Dropdown,
   FacebookLoginButton,
   FacebookLoginContent,
   FeaturedBusinessListing,
