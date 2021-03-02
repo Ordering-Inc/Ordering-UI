@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
-import { Button } from '../Buttons'
+import { Button } from '../../../Buttons/theme/two'
 
 export const Input = styled.input`
   background: #FFF;
