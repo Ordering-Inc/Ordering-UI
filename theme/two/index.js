@@ -1,4 +1,4 @@
-import { AccountManage } from '../../src/components/AccountManage/theme/two'
+// import { AccountManage } from '../../src/components/AccountManage/theme/two'
 import { AddressContent } from '../../src/components/AddressContent/theme/two'
 import { AddressDetails } from '../../src/components/AddressDetails/theme/two'
 import { AddressesPopover } from '../../src/components/AddressesPopover/theme/two'
@@ -106,7 +106,7 @@ import { useOnlineStatus } from '../../src/hooks/useOnlineStatus'
 import { useWindowSize } from '../../src/hooks/useWindowSize'
 
 export {
-  AccountManage,
+  // AccountManage,
   AddressContent,
   AddressDetails,
   AddressesPopover,
