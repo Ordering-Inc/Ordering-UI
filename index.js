@@ -52,11 +52,6 @@ import { SingleProductCard } from './src/components/SingleProductCard'
 import { UserDetails } from './src/components/UserDetails'
 import { UserProfileForm } from './src/components/UserProfileForm'
 import { WrapperGoogleMaps } from './src/components/WrapperGoogleMaps'
-import { SoldOutRecommendationSelector } from './src/components/SoldOutRecommendationSelector'
-import { ReviewSettingPopover } from './src/components/ReviewSettingPopover'
-import { ReviewSettingContent } from './src/components/ReviewSettingContent'
-import { PickupOrderTypeToggleButton } from './src/components/PickupOrderTypeToggleButton'
-import { PickupBusinessesListing } from './src/components/PickupBusinessesListing'
 import { ConfigContext, ConfigProvider, useConfig } from './src/contexts/ConfigContext'
 import { LanguageContext, LanguageProvider, useLanguage } from './src/contexts/LanguageContext'
 import { OrderContext, OrderProvider, useOrder } from './src/contexts/OrderContext'
@@ -119,11 +114,6 @@ export {
   UserDetails,
   UserProfileForm,
   WrapperGoogleMaps,
-  PickupBusinessesListing,
-  ReviewSettingContent,
-  PickupOrderTypeToggleButton,
-  SoldOutRecommendationSelector,
-  ReviewSettingPopover,
   // Contexts
   ConfigContext,
   ConfigProvider,
