@@ -19,7 +19,7 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 import { FeaturedBusinessListing } from '../../../FeaturedBusinessListing/theme/two'
-import { AllBusinessesListing } from '../AllBusinessesListing/theme/two'
+import { AllBusinessesListing } from '../../../AllBusinessesListing/theme/two'
 import { ReviewSettingPopover } from '../../../ReviewSettingPopover/theme/two'
 export const BusinessesListing = (props) => {
   const [, t] = useLanguage()

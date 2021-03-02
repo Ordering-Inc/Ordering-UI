@@ -61,7 +61,7 @@ import { MyOrders } from '../../src/components/MyOrders/theme/two'
 import { NotFoundSource } from '../../src/components/NotFoundSource/theme/two'
 import { NotNetworkConnectivity } from '../../src/components/NotNetworkConnectivity/theme/two'
 import { OrderDetails } from '../../src/components/OrderDetails/theme/two'
-import { Ordersoption } from '../../src/components/Ordersoption/theme/two'
+import { OrdersOption } from '../../src/components/OrdersOption/theme/two'
 import { OrderTypeSelectorHeader } from '../../src/components/OrderTypeSelectorHeader/theme/two'
 import { PageNotFound } from '../../src/components/PageNotFound/theme/two'
 import { PagesList } from '../../src/components/PagesList/theme/two'
@@ -91,12 +91,12 @@ import { StripeElementsForm } from '../../src/components/StripeElementsForm/them
 import { StripeRedirectForm } from '../../src/components/StripeRedirectForm/theme/two'
 import { UpsellingPage } from '../../src/components/UpsellingPage/theme/two'
 import { UserDetails } from '../../src/components/UserDetails/theme/two'
-import { UserFormDetails } from '../../src/components/UserFormDetails/theme/two'
+import { UserFormDetailsUI } from '../../src/components/UserFormDetails/theme/two'
 import { UserPopover } from '../../src/components/UserPopover/theme/two'
 import { UserProfileForm } from '../../src/components/UserProfileForm/theme/two'
 import { VerticalOrdersLayout } from '../../src/components/VerticalOrdersLayout/theme/two'
 
-import { ThemeContext, ThemeProvider, useTheme } from '../../src/contexts/ThemeContext/theme/two'
+import { ThemeContext, ThemeProvider, useTheme } from '../../src/contexts/ThemeContext'
 import { Button } from '../../src/styles/Buttons/theme/two'
 import {Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from '../../src/styles/Inputs/theme/two'
 import { Select } from '../../src/styles/Select/theme/two'
@@ -170,7 +170,7 @@ export {
   NotFoundSource,
   NotNetworkConnectivity,
   OrderDetails,
-  Ordersoption,
+  OrdersOption,
   OrderTypeSelectorHeader,
   PageNotFound,
   PagesList,
@@ -200,7 +200,7 @@ export {
   StripeRedirectForm,
   UpsellingPage,
   UserDetails,
-  UserFormDetails,
+  UserFormDetailsUI,
   UserPopover,
   UserProfileForm,
   VerticalOrdersLayout,

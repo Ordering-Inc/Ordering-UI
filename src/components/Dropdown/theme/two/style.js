@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Image } from '../Image'
+import { Image } from '../../../Image/theme/two'
 
 export const DropdownStyled = styled.div`
   display: flex;

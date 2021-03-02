@@ -9,7 +9,7 @@ import BsThreeDots from '@meronex/icons/bs/BsThreeDots'
 import BsCheck from '@meronex/icons/bs/BsCheck'
 import AiFillCreditCard from '@meronex/icons/ai/AiFillCreditCard'
 import BisChevronRight from '@meronex/icons/bi/BisChevronRight'
-import { getIconCard } from '../../utils'
+import { getIconCard } from '../../../../utils'
 
 import { Modal } from '../../../Modal/theme/two'
 import { Confirm } from '../../../Confirm/theme/two'

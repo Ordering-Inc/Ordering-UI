@@ -14,6 +14,15 @@ export const ThemeContext = createContext()
 export const ThemeProvider = ({ children, ...props }) => {
   const [theme, setTheme] = useState(props.theme)
 
+  const getThemeColor = () => {
+    switch (props.themeType) {
+      case 'two':
+        return theme.colors.darkTextColor
+      default:
+        return theme.colors.colorPage
+    }
+  }
+
   const GlobalStyle = createGlobalStyle`
     @media (min-width: 578px) {
       /** Mozilla scrollbar*/
@@ -43,7 +52,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
       margin: 0;
       background-color: ${theme.colors.backgroundPage};
-      color: ${theme.colors.colorPage};
+      color: ${getThemeColor()};
       direction: ltr;
       ${theme.rtl && css`
         direction: rtl;

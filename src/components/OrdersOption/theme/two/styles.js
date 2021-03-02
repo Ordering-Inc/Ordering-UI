@@ -36,10 +36,10 @@ export const OrdersContainer = styled.div`
       height: 0px;
     }
 
-    ${({ isSkeleton }) => !isSkeleton && css`   
+    ${({ isSkeleton }) => !isSkeleton && css`
       ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+        width: 6px;
+        height: 6px;
       }
       ${({ ordersLength, isBusinessList }) => !ordersLength && !isBusinessList && css`
         > div {
@@ -49,7 +49,7 @@ export const OrdersContainer = styled.div`
             margin-right: -10px;
           `}
         }
-        > div:first-child{
+        > div:first-child {
           margin-left: -15px;
           ${props => props.theme?.rtl && css`
             margin-left: 0;
@@ -58,21 +58,21 @@ export const OrdersContainer = styled.div`
         }
       `}
     `}
-    
+
     @media (min-width: 768px) {
       width: ${({ isBusinessList }) => isBusinessList ? '100%' : '90%'};
       justify-content: flex-start;
       ${({ isSkeleton, ordersLength }) => !isSkeleton && !ordersLength && css`
-      > div:first-child{
-        ${({ isBusinessList }) => !isBusinessList && css`
-          margin-left: -10px;
-          ${props => props.theme?.rtl && css`
-            margin-left: 0;
-            margin-right: -10px;
+        > div:first-child {
+          ${({ isBusinessList }) => !isBusinessList && css`
+            margin-left: -10px;
+            ${props => props.theme?.rtl && css`
+              margin-left: 0;
+              margin-right: -10px;
+            `}
           `}
-        `}
-      }
-      `
+        }
+      `}
     }
   `}
 

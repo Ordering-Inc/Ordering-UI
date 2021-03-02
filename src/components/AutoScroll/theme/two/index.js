@@ -3,7 +3,7 @@ import { useWindowSize } from '../../../../hooks/useWindowSize'
 import { AutoscrollContainer } from './styles'
 import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
 import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
-import { useTheme } from '../../../../contexts/ThemeContext/theme/two'
+import { useTheme } from '../../../../contexts/ThemeContext'
 
 export const AutoScroll = ({ children, modal, special, innerScroll }) => {
   const { width } = useWindowSize()
