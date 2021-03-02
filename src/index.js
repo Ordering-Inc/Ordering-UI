@@ -28,7 +28,6 @@ import { Header } from './components/Header'
 import { HomeHero } from './components/HomeHero'
 import { Image } from './components/Image'
 import { LanguageSelector } from './components/LanguageSelector'
-import { Link } from './components/Link'
 import { LoginForm } from './components/LoginForm'
 import { Messages } from './components/Messages'
 import { Modal } from './components/Modal'
@@ -107,7 +106,6 @@ export {
   HomeHero,
   Image,
   LanguageSelector,
-  Link,
   LoginForm,
   Messages,
   Modal,
