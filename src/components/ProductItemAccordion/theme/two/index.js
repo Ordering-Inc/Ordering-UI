@@ -3,7 +3,7 @@ import TiPencil from '@meronex/icons/ti/TiPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import MdClose from '@meronex/icons/md/MdClose'
 import { Cart as CartController, useUtils, useLanguage, useOrder } from 'ordering-components'
-import { Confirm } from '../../../Confirm'
+import { Confirm } from '../../../Confirm/theme/two'
 
 import {
   AccordionSection,

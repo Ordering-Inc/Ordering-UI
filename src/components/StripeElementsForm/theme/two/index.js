@@ -7,7 +7,7 @@ import {
   ErrorMessage
 } from './styles'
 
-import { CardForm } from '../../../CardForm'
+import { CardForm } from '../../../CardForm/theme/two'
 
 const StripeElementsFormUI = (props) => {
   const {

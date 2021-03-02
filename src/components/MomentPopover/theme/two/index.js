@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { useOrder, useLanguage, useUtils, useConfig } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import { HeaderItem, PopoverBody, PopoverArrow } from './styles'
-import { MomentContent } from '../../../MomentContent'
+import { MomentContent } from '../../../MomentContent/theme/two'
 
 export const MomentPopover = (props) => {
   const { open } = props

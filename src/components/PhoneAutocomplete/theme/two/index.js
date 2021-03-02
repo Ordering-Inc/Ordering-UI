@@ -4,13 +4,13 @@ import {
   useLanguage
 } from 'ordering-components'
 
-import { Modal } from '../../../Modal'
-import { SignUpForm } from '../../../SignUpForm'
-import { Button } from '../../../../styles/Buttons'
+import { Modal } from '../../../Modal/theme/two'
+import { SignUpForm } from '../../../SignUpForm/theme/two'
+import { Button } from '../../../../styles/Buttons/'
 import { Input } from '../../../../styles/Inputs'
-import { Alert } from '../../../Confirm'
-import { UserDetails } from '../../../UserDetails'
-import { AddressList } from '../../../AddressList'
+import { Alert } from '../../../Confirm/theme/two'
+import { UserDetails } from '../../../UserDetails/theme/two'
+import { AddressList } from '../../../AddressList/theme/two'
 
 import {
   PhoneContainer,
@@ -20,7 +20,7 @@ import {
   AutoComplete,
   UserEdit
 } from './styles'
-import { SpinnerLoader } from '../../../SpinnerLoader'
+import { SpinnerLoader } from '../../../SpinnerLoader/theme/two'
 
 const PhoneAutocompleteUI = (props) => {
   const {

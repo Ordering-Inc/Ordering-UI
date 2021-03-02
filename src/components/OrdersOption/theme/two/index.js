@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { OrderList, useLanguage, useEvent, useOrder } from 'ordering-components'
 
-import { HorizontalOrdersLayout } from '../../../HorizontalOrdersLayout'
-import { VerticalOrdersLayout } from '../../../VerticalOrdersLayout'
+import { HorizontalOrdersLayout } from '../../../HorizontalOrdersLayout/theme/two'
+import { VerticalOrdersLayout } from '../../../VerticalOrdersLayout/theme/two'
 import { NotFoundSource } from '../../../NotFoundSource/theme/two'
 
 import { useTheme } from 'styled-components'

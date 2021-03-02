@@ -4,7 +4,7 @@ import { useOrder, useConfig } from 'ordering-components'
 import { Container, Layer } from './styles'
 
 import { MomentControl } from '../../../MomentControl/theme/two'
-import { SpinnerLoader } from '../../../SpinnerLoader'
+import { SpinnerLoader } from '../../../SpinnerLoader/theme/two'
 import { useWindowSize } from '../../../../hooks/useWindowSize'
 
 export const MomentContent = (props) => {

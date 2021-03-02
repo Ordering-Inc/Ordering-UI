@@ -12,8 +12,8 @@ import HiOutlineShoppingBag from '@meronex/icons/hi/HiOutlineShoppingBag'
 import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
 
 import { useWindowSize } from '../../../../hooks/useWindowSize'
-import { LogoutButton } from '../../../LogoutButton'
-import { LanguageSelector } from '../../../LanguageSelector'
+import { LogoutButton } from '../../../LogoutButton/theme/two'
+import { LanguageSelector } from '../../../LanguageSelector/theme/two'
 
 import {
   Container,

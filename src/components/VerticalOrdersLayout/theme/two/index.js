@@ -2,7 +2,7 @@ import React from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { Button } from '../../../../styles/Buttons'
-import { ProductItemAccordion } from '../../../ProductItemAccordion'
+import { ProductItemAccordion } from '../../../ProductItemAccordion/theme/two'
 
 import {
   SingleCard,

@@ -24,7 +24,7 @@ import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdRadioButtonChecked from '@meronex/icons/md/MdRadioButtonChecked'
 import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
-import { Modal } from '../../../Modal'
+import { Modal } from '../../../Modal/theme/two'
 
 const ProductOptionSubOptionUI = (props) => {
   const {

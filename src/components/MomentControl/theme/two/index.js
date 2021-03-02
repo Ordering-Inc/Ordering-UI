@@ -3,7 +3,7 @@ import moment from 'moment'
 import { MomentOption, useLanguage, useUtils, useConfig } from 'ordering-components'
 import BsPencil from '@meronex/icons/bs/BsPencil'
 import SuBackward from '@meronex/icons/su/SuBackward'
-import { DeliveryDateContent } from '../../../DeliveryDateContent'
+import { DeliveryDateContent } from '../../../DeliveryDateContent/theme/two'
 import {
   Days,
   Day,

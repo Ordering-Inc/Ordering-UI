@@ -13,8 +13,8 @@ import {
 
 import { Input } from '../../../../styles/Inputs'
 import { Button } from '../../../../styles/Buttons'
-import { InputPhoneNumber } from '../../../InputPhoneNumber'
-import { Alert } from '../../../Confirm'
+import { InputPhoneNumber } from '../../../InputPhoneNumber/theme/two'
+import { Alert } from '../../../Confirm/theme/two'
 
 import { flatArray } from '../../../../utils'
 

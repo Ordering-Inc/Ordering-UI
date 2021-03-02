@@ -11,13 +11,13 @@ import AiFillCreditCard from '@meronex/icons/ai/AiFillCreditCard'
 import BisChevronRight from '@meronex/icons/bi/BisChevronRight'
 import { getIconCard } from '../../utils'
 
-import { Modal } from '../Modal'
-import { Confirm } from '../Confirm'
-import { StripeElementsForm } from '../StripeElementsForm'
+import { Modal } from '../../../Modal/theme/two'
+import { Confirm } from '../../../Confirm/theme/two'
+import { StripeElementsForm } from '../../../StripeElementsForm/theme/two'
 
 import { Button } from '../../styles/Buttons'
-import { NotFoundSource } from '../NotFoundSource'
-import { SpinnerLoader } from '../SpinnerLoader'
+import { NotFoundSource } from '../../../NotFoundSource/theme/two'
+import { SpinnerLoader } from '../../../SpinnerLoader/theme/two'
 
 import {
   OptionStripeContainer,

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/theme/two'
 import {
   useLanguage,
   ResetPassword as ResetPasswordController,
@@ -17,7 +17,7 @@ import {
 import { Input } from '../../../../styles/Inputs'
 import { Button } from '../../../../styles/Buttons'
 import { useTheme } from 'styled-components'
-import { PageNotFound } from '../../../PageNotFound'
+import { PageNotFound } from '../../../PageNotFound/theme/two'
 
 const ResetPasswordUI = (props) => {
   const {

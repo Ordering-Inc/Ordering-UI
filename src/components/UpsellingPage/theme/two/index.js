@@ -3,8 +3,8 @@ import { UpsellingPage as UpsellingPageController, useLanguage, useUtils } from 
 import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling } from './styles'
 import { Button } from '../../../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
-import { Modal } from '../../../Modal'
-import { ProductForm } from '../../../ProductForm'
+import { Modal } from '../../../Modal/theme/two'
+import { ProductForm } from '../../../ProductForm/theme/two'
 import { AutoScroll } from '../../../AutoScroll'
 
 const UpsellingPageUI = (props) => {

@@ -22,11 +22,11 @@ import AiOutlineStar from '@meronex/icons/ai/AiOutlineStar'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { NotFoundSource } from '../../../NotFoundSource/theme/two'
 
-import { ProductItemAccordion } from '../../../ProductItemAccordion'
+import { ProductItemAccordion } from '../../../ProductItemAccordion/theme/two'
 import { Modal } from '../../../Modal/theme/two'
-import { Messages } from '../../../Messages'
-import { ReviewOrder } from '../../../ReviewOrder'
-import { ProductShare } from '../../../ProductShare'
+import { Messages } from '../../../Messages/theme/two'
+import { ReviewOrder } from '../../../ReviewOrder/theme/two'
+import { ProductShare } from '../../../ProductShare/theme/two'
 
 import {
   Container,

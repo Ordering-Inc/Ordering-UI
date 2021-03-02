@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { UserFormDetailsUI } from '../../../UserFormDetails'
+import { UserFormDetailsUI } from '../../../UserFormDetails/theme/two'
 import { AccountManage } from '../../../AccountManage/theme/two'
 
 import {

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { Modal } from '../../../Modal'
+import { Modal } from '../../../Modal/theme/two'
 import {
   UserFormDetails as UserFormController,
   useLanguage,
   useSession
 } from 'ordering-components'
-import { UserFormDetailsUI } from '../../../UserFormDetails'
+import { UserFormDetailsUI } from '../../../UserFormDetails/theme/two'
 import { Container, Header, UserData } from './styles'
 
 const UserDetailsUI = (props) => {

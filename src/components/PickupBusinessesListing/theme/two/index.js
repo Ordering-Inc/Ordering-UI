@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useOrder, useSession, useConfig, BusinessList as BusinessListController } from 'ordering-components'
-import { BusinessTypeFilter } from '../../../BusinessTypeFilter'
+import { BusinessTypeFilter } from '../../../BusinessTypeFilter/theme/two'
 import { Button } from '../../../../styles/Buttons'
-import { SearchBar } from '../../../SearchBar'
-import { BusinessController } from '../../../BusinessController'
-import { NotFoundSource } from '../../../NotFoundSource'
-import { Modal } from '../../../Modal'
-import { AddressForm } from '../../../AddressForm'
-import { BusinessesMap } from '../../../BusinessesMap'
+import { SearchBar } from '../../../SearchBar/theme/two'
+import { BusinessController } from '../../../BusinessController/theme/two'
+import { NotFoundSource } from '../../../NotFoundSource/theme/two'
+import { Modal } from '../../../Modal/theme/two'
+import { AddressForm } from '../../../AddressForm/theme/two'
+import { BusinessesMap } from '../../../BusinessesMap/theme/two'
 
 import {
   PickupBusinessContainer,
