@@ -105,7 +105,7 @@ import { Tab, Tabs } from '../../src/styles/Tabs/theme/two'
 import { useOnlineStatus } from '../../src/hooks/useOnlineStatus'
 import { useWindowSize } from '../../src/hooks/useWindowSize'
 
-export const themeTwo = {
+export {
   AccountManage,
   AddressContent,
   AddressDetails,

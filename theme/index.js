@@ -1,4 +1,4 @@
-import { themeTwo } from './two'
+import themeTwo from './two'
 
 export {
   themeTwo
