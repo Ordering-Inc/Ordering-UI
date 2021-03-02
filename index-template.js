@@ -17,13 +17,6 @@ import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
 
 import homeHero from './template/assets/images/home-hero.png'
-import homeDriver from './template/assets/images/driver.svg'
-import homePartner from './template/assets/images/partner.svg'
-import homeMobileApp from './template/assets/images/mobile-app.png'
-import homeSectionImg1 from './template/assets/images/home-image-1.png'
-import homeSectionImg2 from './template/assets/images/home-image-2.png'
-import appStore from './template/assets/images/app_store.png'
-import googlePlay from './template/assets/images/google_play.png'
 import notFound from './template/assets/images/not-found.svg'
 import notNetwork from './template/assets/images/not-network.svg'
 import notFound404 from './template/assets/images/not-found-404.svg'
@@ -31,9 +24,6 @@ import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import searchIcon from './template/assets/images/search-icon.svg'
 import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
-import emptyCart from './template/assets/images/empty-cart.png'
-import orderingPass from './template/assets/images/ordering_pass.png'
-import gift from './template/assets/images/gift.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -49,11 +39,11 @@ import orderStatus10 from './template/assets/images/order/status-10.svg'
 import orderStatus11 from './template/assets/images/order/status-11.svg'
 import orderStatus12 from './template/assets/images/order/status-12.svg'
 
-import categoryFood from './template/assets/images/categories/category-food.svg'
-import categoryGrocery from './template/assets/images/categories/category-groceries.svg'
-import categoryAlcohol from './template/assets/images/categories/category-alcohol.svg'
+import categoryFood from './template/assets/images/categories/category-food.png'
+import categoryGroceries from './template/assets/images/categories/category-groceries.png'
+import categoryAlcohol from './template/assets/images/categories/category-alcohol.png'
 import categoryLaundry from './template/assets/images/categories/category-laundry.png'
-import categoryAll from './template/assets/images/categories/category-all.svg'
+import categoryAll from './template/assets/images/categories/category-all.png'
 
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
@@ -94,23 +84,13 @@ theme.images = {
   logos,
   general: {
     homeHero,
-    homeDriver,
-    homePartner,
-    homeMobileApp,
-    homeSectionImg1,
-    homeSectionImg2,
     notFound,
     notFound404,
     notFoundLighting,
     searchIcon,
     notNetwork,
     emptyActiveOrders,
-    emptyCart,
-    emptyPastOrders,
-    appStore,
-    googlePlay,
-    orderingPass,
-    gift
+    emptyPastOrders
   },
 
   order: {
@@ -130,7 +110,7 @@ theme.images = {
   },
   categories: {
     food: categoryFood,
-    grocery: categoryGrocery,
+    groceries: categoryGroceries,
     alcohol: categoryAlcohol,
     laundry: categoryLaundry,
     all: categoryAll

@@ -100,6 +100,9 @@ export const Select = (props) => {
                 selected={value === option.value}
                 onClick={() => handleChangeOption(option)}
               >
+                {/* {value === option.value && (
+                  <BsChevronDown />
+                )} */}
                 {option.content}
               </Option>
             ))
