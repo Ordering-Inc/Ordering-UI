@@ -102,14 +102,14 @@ import { UserPopover } from '../src/components/UserPopover/theme/two'
 import { UserProfileForm } from '../src/components/UserProfileForm/theme/two'
 import { VerticalOrdersLayout } from '../src/components/VerticalOrdersLayout/theme/two'
 
-import { ThemeContext, ThemeProvider, useTheme } from '../../contexts/ThemeContext'
-import { Button } from '../../styles/Buttons/theme/two'
-import {Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from '../../styles/Inputs/theme/two'
-import { Select } from '../../styles/Select/theme/two'
-import { Tab, Tabs } from '../../styles/Tabs/theme/two'
+import { ThemeContext, ThemeProvider, useTheme } from '../src/contexts/ThemeContext'
+import { Button } from '../src/styles/Buttons/theme/two'
+import {Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from '../src/styles/Inputs/theme/two'
+import { Select } from '../src/styles/Select/theme/two'
+import { Tab, Tabs } from '../src/styles/Tabs/theme/two'
 
-import { useOnlineStatus } from '../../hooks/useOnlineStatus'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
+import { useWindowSize } from '../src/hooks/useWindowSize'
 
 export {
   AccountManage,
