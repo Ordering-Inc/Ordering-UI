@@ -9,8 +9,8 @@ import {
 import { Input } from '../../../../styles/Inputs'
 import { Button } from '../../../../styles/Buttons'
 
-import { Confirm } from '../../../Confirm'
-import { Modal } from '../../../Modal'
+import { Confirm } from '../../../Confirm/theme/two'
+import { Modal } from '../../../Modal/theme/two'
 
 const CouponControlUI = (props) => {
   const {

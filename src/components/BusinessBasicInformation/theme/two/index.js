@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import AiFillStar from '@meronex/icons/ai/AiFillStar'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
-import { OrderTypeSelectorHeader } from '../../../OrderTypeSelectorHeader'
+import { OrderTypeSelectorHeader } from '../../../OrderTypeSelectorHeader/theme/two'
 
 import { convertHoursToMinutes } from '../../../../utils'
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/theme/two'
 import {
   ForgotPasswordForm as ForgotPasswordController,
   useLanguage

@@ -1,7 +1,7 @@
 import React from 'react'
 import { CmsContent, useLanguage } from 'ordering-components'
 import { CmsContainer, SkeletonContainer, SkeletonHeader, SkeletonContent, SkeletonInformation, SkeletonSide } from './styles'
-import { NotFoundSource } from '../../../NotFoundSource'
+import { NotFoundSource } from '../../../NotFoundSource/theme/two'
 import Skeleton from 'react-loading-skeleton'
 
 const CmsUI = (props) => {

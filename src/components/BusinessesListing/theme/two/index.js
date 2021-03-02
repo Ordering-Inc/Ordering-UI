@@ -5,11 +5,11 @@ import {
   useEvent,
   useSession
 } from 'ordering-components'
-import { SearchBar } from '../../../SearchBar'
+import { SearchBar } from '../../../SearchBar/theme/two'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
 import { Button } from '../../../../styles/Buttons'
-import { BusinessTypeFilter } from '../../../BusinessTypeFilter'
-import { PickupOrderTypeToggleButton } from '../../../PickupOrderTypeToggleButton'
+import { BusinessTypeFilter } from '../../../BusinessTypeFilter/theme/two'
+import { PickupOrderTypeToggleButton } from '../../../PickupOrderTypeToggleButton/theme/two'
 import {
   BusinessContainer,
   InnerContainer,
@@ -18,9 +18,9 @@ import {
   WrapperGoButton
 } from './styles'
 import { useTheme } from 'styled-components'
-import { FeaturedBusinessListing } from '../../../FeaturedBusinessListing'
-import { AllBusinessesListing } from '../AllBusinessesListing'
-import { ReviewSettingPopover } from '../../../ReviewSettingPopover'
+import { FeaturedBusinessListing } from '../../../FeaturedBusinessListing/theme/two'
+import { AllBusinessesListing } from '../AllBusinessesListing/theme/two'
+import { ReviewSettingPopover } from '../../../ReviewSettingPopover/theme/two'
 export const BusinessesListing = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()

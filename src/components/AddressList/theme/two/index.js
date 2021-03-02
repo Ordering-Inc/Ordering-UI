@@ -21,11 +21,11 @@ import {
   WrapAddressForm
 } from './styles'
 
-import { NotFoundSource } from '../../../NotFoundSource'
+import { NotFoundSource } from '../../../NotFoundSource/theme/two'
 import { Button } from '../../../../styles/Buttons'
-import { Modal } from '../../../Modal'
-import { AddressForm } from '../../../AddressForm'
-import { Confirm } from '../../../Confirm'
+import { Modal } from '../../../Modal/theme/two'
+import { AddressForm } from '../../../AddressForm/theme/two'
+import { Confirm } from '../../../Confirm/theme/two'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../../../utils'
 

@@ -8,9 +8,9 @@ import {
   WrappMap
 } from './styles'
 
-import { Modal } from '../../../Modal'
-import { Alert } from '../../../Confirm'
-import { AddressList } from '../../../AddressList'
+import { Modal } from '../../../Modal/theme/two'
+import { Alert } from '../../../Confirm/theme/two'
+import { AddressList } from '../../../AddressList/theme/two'
 
 const AddressDetailsUI = (props) => {
   const {

@@ -11,7 +11,7 @@ import {
   useOrder,
   useConfig
 } from 'ordering-components'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/theme/two'
 
 import {
   WrapAddressForm,

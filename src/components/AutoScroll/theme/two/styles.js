@@ -18,6 +18,7 @@ export const AutoscrollContainer = styled.span`
     border: 1px solid #D9D9D9;
     opacity: 0.8;
   }
+
   #right-autoscroll{
     ${props => props.theme?.rtl ? css`
       left: 91%;
@@ -38,6 +39,7 @@ export const AutoscrollContainer = styled.span`
   svg.hidden{
     opacity: 0;
   }
+
   @media (min-width: 480px){
     #right-autoscroll{
     ${props => props.theme?.rtl && css`
@@ -51,6 +53,7 @@ export const AutoscrollContainer = styled.span`
       }
     }
   }
+
   @media (min-width: 768px){
     width: ${props => props.modal && '100%'};
     display: inherit;
@@ -63,6 +66,7 @@ export const AutoscrollContainer = styled.span`
       }
     `}
   }
+
   @media (min-width: 1024px){
     #right-autoscroll{
     ${props => props.theme?.rtl && css`

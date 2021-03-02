@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage } from 'ordering-components'
-import { GoogleAutoCompletAddressForm } from '../GoogleAutoCompletAddressForm'
+import { GoogleAutoCompletAddressForm } from '../../../GoogleAutoCompletAddressForm/theme/two'
 
 import {
   HeroContainer,

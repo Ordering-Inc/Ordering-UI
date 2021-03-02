@@ -3,8 +3,8 @@ import { MomentOption, useLanguage, useConfig, useOrder, useUtils } from 'orderi
 import MdRadioButtonChecked from '@meronex/icons/md/MdRadioButtonChecked'
 import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
 import BsDot from '@meronex/icons/bs/BsDot'
-import { Modal } from '../../../Modal'
-import { MomentContent } from '../../../MomentContent'
+import { Modal } from '../../../Modal/theme/two'
+import { MomentContent } from '../../../MomentContent/theme/two'
 import {
   WrapTimeSelect,
   Selector,

@@ -1,8 +1,8 @@
 import React from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
 
-import { SingleProductCard } from '../../../SingleProductCard'
-import { NotFoundSource } from '../../../NotFoundSource'
+import { SingleProductCard } from '../../../SingleProductCard/theme/two'
+import { NotFoundSource } from '../../../NotFoundSource/theme/two'
 import {
   ProductsContainer,
   ProductsListing,

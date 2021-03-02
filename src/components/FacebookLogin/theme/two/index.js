@@ -4,8 +4,8 @@ import {
   useLanguage
 } from 'ordering-components'
 import EnFacebook from '@meronex/icons/en/EnFacebook'
-import { Modal } from '../../../Modal'
-import { FacebookLoginContent } from '../../../FacebookLoginContent'
+import { Modal } from '../../../Modal/theme/two'
+import { FacebookLoginContent } from '../../../FacebookLoginContent/theme/two'
 import { FacebookButton } from './styles'
 
 const FacebookLoginButtonUI = (props) => {

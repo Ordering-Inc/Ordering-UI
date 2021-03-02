@@ -17,8 +17,8 @@ import {
   useOrder,
   useConfig
 } from 'ordering-components'
-import { Alert } from '../../../Confirm'
-import { GoogleGpsButton } from '../../../GoogleGpsButton'
+import { Alert } from '../../../Confirm/theme/two'
+import { GoogleGpsButton } from '../../../GoogleGpsButton/theme/two'
 import { getGoogleMapImage } from '../../../../utils'
 
 import {

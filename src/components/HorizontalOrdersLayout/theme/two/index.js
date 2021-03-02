@@ -12,7 +12,7 @@ import {
 } from './styles'
 import { OrdersContainer, BusinessInformation } from '../../../OrdersOption/styles'
 
-import { AutoScroll } from '../../../AutoScroll'
+import { AutoScroll } from '../../../AutoScroll/theme/two'
 import { Tabs } from '../../../../styles/Tabs'
 import { Button } from '../../../../styles/Buttons'
 import { getGoogleMapImage } from '../../../../utils'

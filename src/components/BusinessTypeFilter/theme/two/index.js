@@ -4,7 +4,7 @@ import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 
 import { Tabs, Tab } from '../../../../styles/Tabs'
 
 import { TypeContainer, ImageContainer } from './styles'
-import { AutoScroll } from '../../../AutoScroll'
+import { AutoScroll } from '../../../AutoScroll/theme/two'
 import { useTheme } from 'styled-components'
 
 const BusinessTypeFilterUI = (props) => {

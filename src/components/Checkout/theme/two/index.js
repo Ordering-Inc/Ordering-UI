@@ -11,7 +11,7 @@ import {
   useValidationFields,
   useConfig
 } from 'ordering-components'
-import { UpsellingPage } from '../../../UpsellingPage'
+import { UpsellingPage } from '../../../UpsellingPage/theme/two'
 import parsePhoneNumber from 'libphonenumber-js'
 
 import {

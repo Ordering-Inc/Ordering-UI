@@ -8,8 +8,8 @@ import {
   useUtils,
   useConfig
 } from 'ordering-components'
-import { BusinessReviews } from '../../../BusinessReviews'
-import { Modal } from '../../../Modal'
+import { BusinessReviews } from '../../../BusinessReviews/theme/two'
+import { Modal } from '../../../Modal/theme/two'
 import {
   BusinessInformationContainer,
   BusinessHeader,

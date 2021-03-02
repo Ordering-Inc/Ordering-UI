@@ -1,30 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import {
-  useLanguage,
-  useOrder,
-  useSession,
-  useEvent,
-  BusinessList as BusinessListController
-} from 'ordering-components'
-
-import { BusinessTypeFilter } from '../../../BusinessTypeFilter/theme/two'
+import { useLanguage, useOrder, useSession, BusinessList as BusinessListController } from 'ordering-components'
+import { BusinessTypeFilter } from '../../../BusinessTypeFilter'
 import { Button } from '../../../../styles/Buttons'
-import { SearchBar } from '../../../SearchBar/theme/two'
-import { BusinessController } from '../../../BusinessController/theme/two'
-import { NotFoundSource } from '../../../NotFoundSource/theme/two'
-import { Modal } from '../../../Modal/theme/two'
-import { AddressForm } from '../../../AddressForm/theme/two'
-import { PickupOrderTypeToggleButton } from '../../../PickupOrderTypeToggleButton/theme/two'
-import { ReviewSettingPopover } from '../../../ReviewSettingPopover/theme/two'
-import { FilterViewBackButton } from '../../../FilterViewBackButton/theme/two'
+import { BusinessController } from '../../../BusinessController'
+import { NotFoundSource } from '../../../NotFoundSource'
+import { Modal } from '../../../Modal'
+import { AddressForm } from '../../../AddressForm'
+import { ReviewSettingPopover } from '../../../ReviewSettingPopover'
 import {
-  FilterBuinessContainer,
+  AllBuinessContainer,
   LeftContent,
   Title,
   AllStoreNumber,
+  WrapperSeeAllButton,
   WrapButtonGroup,
-  FilterBusinessList,
+  AllBusinessList,
   ErrorMessage,
   InnerContainer,
   WrapperBusinesses,
@@ -33,33 +24,22 @@ import {
 
 const PIXELS_TO_SCROLL = 700
 
-const FilterBusinessesListingUI = (props) => {
+const AllBusinessesListingUI = (props) => {
   const {
-    onFilterBusinessRedirect,
     businessesList,
     paginationProps,
-    searchValue,
-    timeLimitValue,
-    businessTypeSelected,
     getBusinesses,
-    handleChangeSearch,
     handleBusinessClick,
-    handleChangeBusinessType,
-    handleChangeTimeLimit
+    handleGoToPage,
+    handleChangeCategory
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const [events] = useEvent()
   const [{ auth }] = useSession()
 
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [reviewQuality, setReviewQuality] = useState(4.5)
   const [openPopover, setOpenPopover] = useState({})
-  const [isGoBackClicked, setIsGoBackClicked] = useState(false)
-
-  const handleGoToPage = () => {
-    events.emit('go_to_page', { page: 'search' })
-  }
 
   const handleClickAddress = (e) => {
     if (auth) {
@@ -86,20 +66,6 @@ const FilterBusinessesListingUI = (props) => {
     })
   }
 
-  const changeBusinessType = (type) => {
-    handleChangeBusinessType(type)
-    onFilterBusinessRedirect()
-  }
-
-  const toggelTimeLimit = () => {
-    onFilterBusinessRedirect()
-    if (!timeLimitValue) {
-      handleChangeTimeLimit('0:30')
-    } else {
-      handleChangeTimeLimit(null)
-    }
-  }
-
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
@@ -113,66 +79,56 @@ const FilterBusinessesListingUI = (props) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
-  useEffect(() => {
-    if (!isGoBackClicked) return
-    if (orderState?.options?.type === 1) {
-      handleGoToPage()
-    }
-  }, [isGoBackClicked, orderState?.options?.type])
-
   return (
-    <FilterBuinessContainer>
-      <SearchBar
-        lazyLoad
-        isCustomMode
-        search={searchValue}
-        placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-        onSearch={handleChangeSearch}
-      />
+    <AllBuinessContainer>
       <InnerContainer>
         <WrapperBusinesses>
           <LeftContent>
             <LeftInnerContainer>
-              <>
-                <FilterViewBackButton
-                  handleCustomClick={() => setIsGoBackClicked(true)}
-                />
-                <Title>
-                  {businessTypeSelected === null ? t('ALL_BUSINESS', 'All Business') : businessTypeSelected}
-                </Title>
-                <AllStoreNumber>
-                  {!businessesList.loading ? (
-                    <>
-                      {paginationProps?.totalItems} {t('STORES_NEARBY', 'STORES NEARBY')}
-                    </>
-                  ) : (
-                    <Skeleton width={150} />
-                  )}
-                </AllStoreNumber>
-              </>
+              <Title>
+                {t('ALL_BUSINESS', 'All Business')}
+              </Title>
+              <AllStoreNumber>
+                {!businessesList.loading ? (
+                  <>
+                    {paginationProps?.totalItems} {t('STORES_NEARBY', 'STORES NEARBY')}
+                  </>
+                ) : (
+                  <Skeleton width={150} />
+                )}
+              </AllStoreNumber>
               <BusinessTypeFilter
                 noAutoScroll
-                handleChangeBusinessType={changeBusinessType}
+                handleChangeBusinessType={handleChangeCategory}
               />
-              <WrapButtonGroup>
-                <PickupOrderTypeToggleButton />
-                <ReviewSettingPopover
-                  open={openPopover.reviewSetting}
-                  reviewQuality={reviewQuality}
-                  onClick={() => handleTogglePopover('reviewSetting')}
-                  onClose={() => handleClosePopover('reviewSetting')}
-                  handleReviewSettingValue={handleReviewSettingValue}
-                />
-                <Button
-                  color={timeLimitValue ? 'dark' : 'secondary'}
-                  onClick={() => toggelTimeLimit()}
-                >
-                  {t('UNDER_30_MIN', 'Under 30 min')}
-                </Button>
-              </WrapButtonGroup>
+              <>
+                <WrapperSeeAllButton>
+                  <WrapButtonGroup>
+                    <Button
+                      color='secondary'
+                      onClick={() => handleGoToPage('pickup=true')}
+                    >
+                      {t('PICKUP', 'Pickup')}
+                    </Button>
+                    <ReviewSettingPopover
+                      open={openPopover.reviewSetting}
+                      reviewQuality={reviewQuality}
+                      onClick={() => handleTogglePopover('reviewSetting')}
+                      onClose={() => handleClosePopover('reviewSetting')}
+                      handleReviewSettingValue={handleReviewSettingValue}
+                    />
+                    <Button
+                      color='secondary'
+                      onClick={() => handleGoToPage('timeLimit=0:30')}
+                    >
+                      {t('UNDER_30_MIN', 'Under 30 min')}
+                    </Button>
+                  </WrapButtonGroup>
+                </WrapperSeeAllButton>
+              </>
             </LeftInnerContainer>
           </LeftContent>
-          <FilterBusinessList>
+          <AllBusinessList>
             {
               !businessesList.loading && businessesList.businesses.length === 0 && (
                 <NotFoundSource
@@ -215,7 +171,7 @@ const FilterBusinessesListingUI = (props) => {
                 <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
               ))
             )}
-          </FilterBusinessList>
+          </AllBusinessList>
         </WrapperBusinesses>
       </InnerContainer>
       <Modal
@@ -231,14 +187,14 @@ const FilterBusinessesListingUI = (props) => {
           onSaveAddress={() => setModals({ ...modals, formOpen: false })}
         />
       </Modal>
-    </FilterBuinessContainer>
+    </AllBuinessContainer>
   )
 }
 
-export const FilterBusinessesListing = (props) => {
+export const AllBusinessesListing = (props) => {
   const AllBusinessesListingProps = {
     ...props,
-    UIComponent: FilterBusinessesListingUI
+    UIComponent: AllBusinessesListingUI
   }
 
   return <BusinessListController {...AllBusinessesListingProps} />

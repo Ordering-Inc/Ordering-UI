@@ -7,7 +7,7 @@ import {
   useConfig,
   useSession
 } from 'ordering-components'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/theme/two'
 import {
   LoginContainer,
   FormSide,
@@ -24,7 +24,7 @@ import {
 
 import { Input } from '../../../../styles/Inputs'
 import { Button } from '../../../../styles/Buttons'
-import { FacebookLoginButton } from '../../../FacebookLogin'
+import { FacebookLoginButton } from '../../../FacebookLogin/theme/two'
 
 const LoginFormUI = (props) => {
   const {

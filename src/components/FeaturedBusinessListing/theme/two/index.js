@@ -1,10 +1,10 @@
 import React from 'react'
 import { useLanguage, useOrder, useEvent, BusinessList as BusinessListController } from 'ordering-components'
-import { SearchBar } from '../../../SearchBar'
+import { SearchBar } from '../../../SearchBar/theme/two'
 import { Button } from '../../../../styles/Buttons'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import EnChevronLeft from '@meronex/icons/en/EnChevronLeft'
-import { BusinessController } from '../../../BusinessController'
+import { BusinessController } from '../../../BusinessController/theme/two'
 import {
   PopularBusinessContainer,
   TextContent,

@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components'
 import { useLanguage, useEvent } from 'ordering-components'
 import { Container, NotCarts } from './styles'
 
-import { Cart } from '../../../Cart'
+import { Cart } from '../../../Cart/theme/two'
 
 export const CartContent = (props) => {
   const {

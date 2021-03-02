@@ -42,8 +42,8 @@ import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
 import { bytesConverter } from '../../../../utils'
-import { Alert } from '../../../Confirm'
-import { Modal } from '../../../Modal'
+import { Alert } from '../../../Confirm/theme/two'
+import { Modal } from '../../../Modal/theme/two'
 
 const MessagesUI = (props) => {
   const {

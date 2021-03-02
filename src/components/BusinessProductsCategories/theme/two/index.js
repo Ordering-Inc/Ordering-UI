@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
-import { AutoScroll } from '../../../AutoScroll'
-
+import { AutoScroll } from '../../../AutoScroll/theme/two'
 import { Conatiner, CategoriesContainer } from './styles'
 import { Tabs, Tab } from '../../../../styles/Tabs'
-import { CategoryMenuPopover } from '../../../CategoryMenuPopover'
+import { CategoryMenuPopover } from '../../../CategoryMenuPopover/theme/two'
 
 const BusinessProductsCategoriesUI = (props) => {
   const {
