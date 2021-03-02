@@ -11,8 +11,8 @@ import {
   InputGroup
 } from './styles'
 
-import { Input } from '../../../../styles/Inputs'
-import { Button } from '../../../../styles/Buttons'
+import { Input } from '../../../../styles/Inputs/theme/two'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { InputPhoneNumber } from '../../../InputPhoneNumber/theme/two'
 import { Alert } from '../../../Confirm/theme/two'
 

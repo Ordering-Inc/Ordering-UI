@@ -9,7 +9,7 @@ import {
   FormActions
 } from './styles'
 
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 
 const CARD_ELEMENT_OPTIONS = {
   style: {

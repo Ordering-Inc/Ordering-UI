@@ -8,8 +8,8 @@ import {
   ErrorMessage
 } from './styles'
 
-import { Button } from '../../../../styles/Buttons'
-import { Input } from '../../../../styles/Inputs'
+import { Button } from '../../../../styles/Buttons/theme/two'
+import { Input } from '../../../../styles/Inputs/theme/two'
 
 const StripeRedirectFormUI = (props) => {
   const {

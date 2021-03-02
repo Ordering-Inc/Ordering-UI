@@ -6,8 +6,8 @@ import {
 
 import { Modal } from '../../../Modal/theme/two'
 import { SignUpForm } from '../../../SignUpForm/theme/two'
-import { Button } from '../../../../styles/Buttons/'
-import { Input } from '../../../../styles/Inputs'
+import { Button } from '../../../../styles/Buttons/theme/two'
+import { Input } from '../../../../styles/Inputs/theme/two'
 import { Alert } from '../../../Confirm/theme/two'
 import { UserDetails } from '../../../UserDetails/theme/two'
 import { AddressList } from '../../../AddressList/theme/two'

@@ -8,7 +8,7 @@ import {
   Tab,
   ActionButtonGroup
 } from './styles'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 
 export const GroupOrderForm = (props) => {
   const [, t] = useLanguage()

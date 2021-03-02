@@ -86,7 +86,7 @@ export const OrdersContainer = styled.div`
     p{
       margin-block-end: 0;
       margin-block-start: 0;
-      color: #9A9A9A
+      color: #9A9A9A;
     }
 
     @media(min-width: 480px){
@@ -236,7 +236,7 @@ export const ImageNotFound = styled.div`
   
   margin: 0 auto;
   img{
-    width: 100%
+    width: 100%;
   }
 `
 

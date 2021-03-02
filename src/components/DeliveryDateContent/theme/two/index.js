@@ -9,8 +9,8 @@ import {
   Option,
   TimeSelectContent
 } from './styles'
-import { Select } from '../../../../styles/Select'
-import { Button } from '../../../../styles/Buttons'
+import { Select } from '../../../../styles/Select/theme/two'
+import { Button } from '../../../../styles/Buttons/theme/two'
 
 export const DeliveryDateContent = (props) => {
   const {

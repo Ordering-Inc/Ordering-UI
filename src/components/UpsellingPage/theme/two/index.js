@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { UpsellingPage as UpsellingPageController, useLanguage, useUtils } from 'ordering-components'
 import { Container, UpsellingContainer, Item, Image, Details, CloseUpselling } from './styles'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../../../Modal/theme/two'
 import { ProductForm } from '../../../ProductForm/theme/two'
-import { AutoScroll } from '../../../AutoScroll'
+import { AutoScroll } from '../../../AutoScroll/theme/two'
 
 const UpsellingPageUI = (props) => {
   const {

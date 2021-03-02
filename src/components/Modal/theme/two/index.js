@@ -9,7 +9,7 @@ import {
   ModalHeader
 } from './styles'
 
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 
 const ModalUI = (props) => {
   const {

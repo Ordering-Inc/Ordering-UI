@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components'
 import AiFillStar from '@meronex/icons/ai/AiFillStar'
 import BsDot from '@meronex/icons/bs/BsDot'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import {
   HeaderItem,
   Container,

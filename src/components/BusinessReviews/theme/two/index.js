@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { BusinessReviews as BusinessReviewController, useLanguage } from 'ordering-components'
 
 import { BusinessReviewsContainer, ReviewOf, WrapperSelect, WrapperStars, Content, Review, ReviewContainer, Comments, ReviewsNotFound, Comment, ScoresContainer, Scores, ScoreDiv, SkeletonContainer } from './styles'
-import { Select } from '../../../../styles/Select'
+import { Select } from '../../../../styles/Select/theme/two'
 
 import AiOutlineStar from '@meronex/icons/ai/AiOutlineStar'
 

@@ -9,7 +9,7 @@ import {
   PopupIcon
 } from './styles'
 
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { useTheme } from 'styled-components'
 import { getTraduction } from '../../../../utils'
 

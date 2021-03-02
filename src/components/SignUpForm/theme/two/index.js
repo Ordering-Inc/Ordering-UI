@@ -30,10 +30,10 @@ import {
   WrapTermsAndAgree
 } from './styles'
 
-import { Input } from '../../../../styles/Inputs'
-import { Button } from '../../../../styles/Buttons'
+import { Input } from '../../../../styles/Inputs/theme/two'
+import { Button } from '../../../../styles/Buttons/theme/two'
 
-import { FacebookLoginButton } from '../../../FacebookLogin'
+import { FacebookLoginButton } from '../../../FacebookLogin/theme/two'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
 

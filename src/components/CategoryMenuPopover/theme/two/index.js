@@ -14,7 +14,7 @@ import {
 } from './styles'
 import AiOutlineUnorderedList from '@meronex/icons/ai/AiOutlineUnorderedList'
 import GrClose from '@meronex/icons/gr/GrClose'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 
 export const CategoryMenuPopover = (props) => {
   const {

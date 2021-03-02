@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
-import { Input } from '../../../../styles/Inputs'
-import { useTheme } from '../../../../contexts/ThemeContext'
+import { Input } from '../../../../styles/Inputs/theme/two'
+import { useTheme } from '../../../../contexts/ThemeContext/theme/two'
 import { useLanguage } from 'ordering-components'
 
 import {

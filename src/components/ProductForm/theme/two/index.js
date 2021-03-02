@@ -24,7 +24,7 @@ import { ForgotPasswordForm } from '../../../ForgotPasswordForm/theme/two'
 import { AddressList } from '../../../AddressList/theme/two'
 
 import { Modal } from '../../../Modal/theme/two'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 
 import {
   ProductContainer,
@@ -45,7 +45,7 @@ import {
   AuthContainer
 } from './styles'
 import { useTheme } from 'styled-components'
-import { TextArea } from '../../../../styles/Inputs'
+import { TextArea } from '../../../../styles/Inputs/theme/two'
 import { NotFoundSource } from '../../../NotFoundSource/theme/two'
 // import { SoldOutRecommendationSelector } from '../SoldOutRecommendationSelector'
 

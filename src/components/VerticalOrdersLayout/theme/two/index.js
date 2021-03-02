@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
 import BsDot from '@meronex/icons/bs/BsDot'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { ProductItemAccordion } from '../../../ProductItemAccordion/theme/two'
 
 import {
@@ -14,7 +14,7 @@ import {
   WrapProducts
 } from './styles'
 
-import { OrdersContainer, BusinessInformation } from '../../../OrdersOption/styles'
+import { OrdersContainer, BusinessInformation } from '../../../OrdersOption/theme/two/styles'
 
 export const VerticalOrdersLayout = (props) => {
   const {

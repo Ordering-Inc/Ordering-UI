@@ -15,7 +15,7 @@ import { Modal } from '../../../Modal/theme/two'
 import { Confirm } from '../../../Confirm/theme/two'
 import { StripeElementsForm } from '../../../StripeElementsForm/theme/two'
 
-import { Button } from '../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { NotFoundSource } from '../../../NotFoundSource/theme/two'
 import { SpinnerLoader } from '../../../SpinnerLoader/theme/two'
 

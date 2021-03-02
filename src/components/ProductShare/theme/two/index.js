@@ -1,8 +1,8 @@
 import React from 'react'
 import { ProductShare as ProductShareController, useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import { Input } from '../../../../styles/Inputs'
-import { Button } from '../../../../styles/Buttons'
+import { Input } from '../../../../styles/Inputs/theme/two'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 import {
   Container,

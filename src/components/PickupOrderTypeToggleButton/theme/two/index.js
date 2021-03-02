@@ -1,7 +1,7 @@
 import React from 'react'
 import { OrderTypeControl, useLanguage } from 'ordering-components'
 
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 
 const PickupOrderTypeToggleButtonUI = (props) => {
   const {

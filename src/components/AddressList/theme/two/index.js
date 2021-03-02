@@ -22,7 +22,7 @@ import {
 } from './styles'
 
 import { NotFoundSource } from '../../../NotFoundSource/theme/two'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { Modal } from '../../../Modal/theme/two'
 import { AddressForm } from '../../../AddressForm/theme/two'
 import { Confirm } from '../../../Confirm/theme/two'

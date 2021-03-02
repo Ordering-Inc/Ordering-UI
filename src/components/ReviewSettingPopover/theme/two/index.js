@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components'
 import AiFillStar from '@meronex/icons/ai/AiFillStar'
 import BiChevronDown from '@meronex/icons/bi/BiChevronDown'
 import { ReviewSettingContent } from '../../../ReviewSettingContent/theme/two'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import {
   HeaderItem,
   PopoverBody,

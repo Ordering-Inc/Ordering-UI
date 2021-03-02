@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../AutoScroll/theme/two'
 import { Conatiner, CategoriesContainer } from './styles'
-import { Tabs, Tab } from '../../../../styles/Tabs'
+import { Tabs, Tab } from '../../../../styles/Tabs/theme/two'
 import { CategoryMenuPopover } from '../../../CategoryMenuPopover/theme/two'
 
 const BusinessProductsCategoriesUI = (props) => {

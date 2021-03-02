@@ -32,8 +32,8 @@ import {
   WrapAdjustPin
 } from './styles'
 
-import { Button } from '../../../../styles/Buttons'
-import { Input, TextArea } from '../../../../styles/Inputs'
+import { Button } from '../../../../styles/Buttons/theme/two'
+import { Input, TextArea } from '../../../../styles/Inputs/theme/two'
 
 const inputNames = [{ name: 'address', code: 'Address' }, { name: 'internal_number', code: 'Internal number' }, { name: 'zipcode', code: 'Zipcode' }, { name: 'address_notes', code: 'Address notes' }]
 

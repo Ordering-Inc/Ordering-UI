@@ -18,7 +18,7 @@ import {
   WrapBottomSection
 } from './styles'
 
-import { NotFoundSource } from '../../../NotFoundSource'
+import { NotFoundSource } from '../../../NotFoundSource/theme/two'
 
 import { BusinessBasicInformation } from '../../../BusinessBasicInformation/theme/two'
 import { BusinessProductsCategories } from '../../../BusinessProductsCategories/theme/two'

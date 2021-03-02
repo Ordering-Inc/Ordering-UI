@@ -7,7 +7,7 @@ import {
 } from 'ordering-components'
 import { SearchBar } from '../../../SearchBar/theme/two'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { BusinessTypeFilter } from '../../../BusinessTypeFilter/theme/two'
 import { PickupOrderTypeToggleButton } from '../../../PickupOrderTypeToggleButton/theme/two'
 import {

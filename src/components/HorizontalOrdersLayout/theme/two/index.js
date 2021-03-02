@@ -10,11 +10,11 @@ import {
   Map,
   Reorder
 } from './styles'
-import { OrdersContainer, BusinessInformation } from '../../../OrdersOption/styles'
+import { OrdersContainer, BusinessInformation } from '../../../OrdersOption/theme/two/styles'
 
 import { AutoScroll } from '../../../AutoScroll/theme/two'
-import { Tabs } from '../../../../styles/Tabs'
-import { Button } from '../../../../styles/Buttons'
+import { Tabs } from '../../../../styles/Tabs/theme/two'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { getGoogleMapImage } from '../../../../utils'
 
 export const HorizontalOrdersLayout = (props) => {

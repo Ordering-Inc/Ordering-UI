@@ -14,8 +14,8 @@ import {
   TitleHeroSide
 } from './styles'
 
-import { Input } from '../../../../styles/Inputs'
-import { Button } from '../../../../styles/Buttons'
+import { Input } from '../../../../styles/Inputs/theme/two'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { useTheme } from 'styled-components'
 import { PageNotFound } from '../../../PageNotFound/theme/two'
 

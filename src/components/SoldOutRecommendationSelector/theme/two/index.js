@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components'
-import { Select } from '../../../../styles/Select'
+import { Select } from '../../../../styles/Select/theme/two'
 
 import {
   Container,

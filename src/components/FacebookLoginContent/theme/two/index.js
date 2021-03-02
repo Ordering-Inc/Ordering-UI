@@ -9,7 +9,7 @@ import {
   TermsAndPrivacy,
   Cancel
 } from './styles'
-import { Button } from '../../../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons/theme/two'
 export const FacebookLoginContent = (props) => {
   const {
     handleFacebookLogin

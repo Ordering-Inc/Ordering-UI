@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import { useWindowSize } from '../../../../hooks/useWindowSize'
 import { AutoscrollContainer } from './styles'
 import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
 import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
-import { useTheme } from '../../contexts/ThemeContext'
+import { useTheme } from '../../../../contexts/ThemeContext/theme/two'
 
 export const AutoScroll = ({ children, modal, special, innerScroll }) => {
   const { width } = useWindowSize()

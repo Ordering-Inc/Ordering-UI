@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form'
 
 import { OrderReview as ReviewOrderController, useLanguage } from 'ordering-components'
 import { ReviewOrderContainer, Reviews, Categories, Category, Stars, Comments, Send, InvisibleInput } from './styles'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/theme/two'
 import AiFillStar from '@meronex/icons/ai/AiFillStar'
 
-import { Input } from '../../../../styles/Inputs'
-import { Button } from '../../../../styles/Buttons'
+import { Input } from '../../../../styles/Inputs/theme/two'
+import { Button } from '../../../../styles/Buttons/theme/two'
 import { ThemeContext } from 'styled-components'
 import { capitalize } from '../../../../utils'
 

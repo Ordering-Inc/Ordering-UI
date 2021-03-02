@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 'ordering-components'
 
-import { Tabs, Tab } from '../../../../styles/Tabs'
+import { Tabs, Tab } from '../../../../styles/Tabs/theme/two'
 
 import { TypeContainer, ImageContainer } from './styles'
 import { AutoScroll } from '../../../AutoScroll/theme/two'

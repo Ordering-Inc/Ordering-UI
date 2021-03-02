@@ -12,8 +12,8 @@ import {
   WrapBusinessMap,
   BusinessAddress
 } from './styles'
-import { Button } from '../../../../styles/Buttons'
-import { AddressDetails } from '../../../AddressDetails'
+import { Button } from '../../../../styles/Buttons/theme/two'
+import { AddressDetails } from '../../../AddressDetails/theme/two'
 
 export const BusinessCartContent = (props) => {
   const {
