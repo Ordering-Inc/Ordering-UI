@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useApi } from 'ordering-components'
-import { HomeHero } from '../../../src/components/HomeHero'
-import { useHistory } from 'react-router-dom'
+import { NotFoundSource } from '../../../src/components/NotFoundSource'
+import { PhoneAutocomplete } from '../../../src/components/PhoneAutocomplete'
 import { HelmetTags } from '../../components/HelmetTags'
 import Skeleton from 'react-loading-skeleton'
 
@@ -15,14 +15,10 @@ import {
 } from './styles'
 
 export const HomePage = (props) => {
-  const history = useHistory()
+  const [, t] = useLanguage()
   const [homeState, setHomeState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
   const requestsState = {}
-
-  const handlerFindBusiness = () => {
-    history.push('/search')
-  }
 
   const getPage = async () => {
     setHomeState({ ...homeState, loading: true })
@@ -56,9 +52,8 @@ export const HomePage = (props) => {
     <>
       <HelmetTags page='home' />
       <HomeContainer>
-        <HomeHero
+        <PhoneAutocomplete
           {...props}
-          onFindBusiness={handlerFindBusiness}
         />
         {
           homeState.loading && (
@@ -87,6 +82,12 @@ export const HomePage = (props) => {
             }}
             />
           )
+        }
+        {
+          (!homeState.loading && homeState.error) &&
+            <NotFoundSource
+              content={t('ERROR_HOME', 'Ups... an error has occured')}
+            />
         }
       </HomeContainer>
     </>

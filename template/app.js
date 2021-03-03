@@ -28,7 +28,6 @@ import { PageNotFound } from './pages/PageNotFound'
 import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
-import { SignUp } from './pages/SignUp'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -59,12 +58,7 @@ export const App = () => {
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
 
-  const handleSuccessSignup = (user) => {
-    login({
-      user,
-      token: user.session.access_token
-    })
-  }
+  const userCustomerId = window.localStorage.getItem('user-customer')
 
   useEffect(() => {
     if (!loaded && !orderStatus.loading) {
@@ -104,7 +98,12 @@ export const App = () => {
       {
         loaded && (
           <>
-            <Header isHome={isHome} location={location} />
+            <Header
+              isHome={isHome}
+              location={location}
+              isShowOrderOptions={!!userCustomerId}
+              isHideSignup
+            />
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
@@ -112,30 +111,30 @@ export const App = () => {
                 <Switch>
                   <Route exact path='/home'>
                     {
-                      orderStatus.options?.address?.location
+                      userCustomerId
                         ? <Redirect to='/search' />
-                        : <HomePage />
+                        : (
+                          <>
+                            {auth
+                              ? <HomePage />
+                              : <Redirect to='/signin' />
+                            }
+                          </>
+                        )
                     }
                   </Route>
                   <Route exact path='/'>
                     {
-                      orderStatus.options?.address?.location
+                      userCustomerId
                         ? <Redirect to='/search' />
-                        : <HomePage />
-                    }
-                  </Route>
-                  <Route exact path='/signup'>
-                    {
-                      !auth
-                        ? (
-                          <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                            useLoginByCellphone
-                            useChekoutFileds
-                            handleSuccessSignup={handleSuccessSignup}
-                          />
+                        : (
+                          <>
+                            {auth
+                              ? <HomePage />
+                              : <Redirect to='/signin' />
+                            }
+                          </>
                         )
-                        : <Redirect to='/' />
                     }
                   </Route>
                   <Route exact path='/login'>
@@ -143,19 +142,14 @@ export const App = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
                             elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
                         : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
+                          userCustomerId
                             ? <Redirect to='/search' />
                             : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
-                        )
                         )
                     }
                   </Route>
@@ -164,19 +158,14 @@ export const App = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
                             elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                           />
                         )
                         : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
+                          userCustomerId
                             ? <Redirect to='/search' />
                             : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
-                        )
                         )
                     }
                   </Route>
@@ -202,13 +191,9 @@ export const App = () => {
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/search'>
-                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
-                      <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
-                    ) : (
-                      orderStatus.options?.address?.location
-                        ? <BusinessesList />
-                        : <Redirect to='/' />
-                    )}
+                    {userCustomerId
+                      ? <BusinessesList />
+                      : <Redirect to='/' />}
                   </Route>
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />

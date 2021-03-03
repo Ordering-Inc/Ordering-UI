@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const HomeContainer = styled.div`
-  background-color: ${props => props.theme.colors.backgroundPage};
+  background-color: #F8F8F8;
   display: flex;
   flex-direction: column;
 `
@@ -273,7 +273,7 @@ export const SkeletonInformation = styled.div`
   ${props => props.theme?.rtl && css`
     margin-left: 10px;
     margin-right: 0;
-  `}  
+  `}
 `
 
 export const SkeletonSide = styled.div`
@@ -282,6 +282,6 @@ export const SkeletonSide = styled.div`
   margin-left: 10px;
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
-    margin-left: 0;    
-  `}  
+    margin-left: 0;
+  `}
 `
