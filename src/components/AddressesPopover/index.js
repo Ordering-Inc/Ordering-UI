@@ -33,6 +33,8 @@ export const AddressesPopover = (props) => {
     ]
   })
 
+  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
+
   const { styles, attributes, forceUpdate } = popper
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
@@ -93,6 +95,7 @@ export const AddressesPopover = (props) => {
                 <AddressList
                   isPopover
                   changeOrderAddressWithDefault
+                  userId={isNaN(userCustomer) ? null : userCustomer}
                   onClosePopover={props.onClose}
                 />
               </>)}

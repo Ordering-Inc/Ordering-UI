@@ -54,6 +54,8 @@ export const Header = (props) => {
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
+  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
+
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const openModal = (opt) => {
@@ -233,6 +235,7 @@ export const Header = (props) => {
               <AddressList
                 isModal
                 changeOrderAddressWithDefault
+                userId={isNaN(userCustomer) ? null : userCustomer}
                 onCancel={() => setModalIsOpen(false)}
                 onAccept={() => setModalIsOpen(false)}
               />
