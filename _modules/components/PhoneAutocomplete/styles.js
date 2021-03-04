@@ -33,7 +33,7 @@ var ContentWrapper = _styledComponents.default.div(_templateObject2 || (_templat
 
 exports.ContentWrapper = ContentWrapper;
 
-var WrappBtn = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 50%;\n"])));
+var WrappBtn = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 50%;\n\n  button {\n    min-width: 130px;\n  }\n"])));
 
 exports.WrappBtn = WrappBtn;
 
