@@ -4,7 +4,8 @@ import {
   BusinessContainer,
   BusinessList,
   ErrorMessage,
-  WrapperSearch
+  WrapperSearch,
+  BusinessesTitle
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -144,7 +145,11 @@ const BusinessesListingUI = (props) => {
             isBusinessesPage
             onRedirectPage={onRedirectPage}
             titleContent={t('CARTS', 'Carts')}
-            customArray={getCustomArray(orderState.carts)}
+            customArray={
+              getCustomArray(
+                orderState.carts)?.filter(cart => cart.products.length > 0
+              )
+            }
           />
           <OrdersOption
             horizontal
@@ -152,6 +157,12 @@ const BusinessesListingUI = (props) => {
             onRedirectPage={onRedirectPage}
           />
         </>
+      )}
+
+      {isCustomLayout && businessesList?.businesses?.length > 0 && (
+        <BusinessesTitle>
+          {t('BUSINESSES', 'Businesses')}
+        </BusinessesTitle>
       )}
 
       <BusinessList>
