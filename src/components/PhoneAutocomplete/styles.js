@@ -95,6 +95,10 @@ export const ContentWrapper = styled.div`
 
 export const WrappBtn = styled.div`
   width: 50%;
+
+  button {
+    min-width: 130px;
+  }
 `
 
 export const Title = styled.h1`
