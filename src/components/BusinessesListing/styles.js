@@ -59,6 +59,7 @@ export const PreviousOrders = styled.div`
   margin: 10px 20px 0px;
 `
 
-export const PreviousOrdersTitle = styled.h1`
-
+export const BusinessesTitle = styled.h1`
+  font-size: 18px;
+  margin: 0px 20px;
 `
