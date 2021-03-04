@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PreviousOrdersTitle = exports.PreviousOrders = exports.ErrorMessage = exports.WrapperSearch = exports.BusinessList = exports.BusinessContainer = void 0;
+exports.BusinessesTitle = exports.PreviousOrders = exports.ErrorMessage = exports.WrapperSearch = exports.BusinessList = exports.BusinessContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -44,6 +44,6 @@ var PreviousOrders = _styledComponents.default.div(_templateObject6 || (_templat
 
 exports.PreviousOrders = PreviousOrders;
 
-var PreviousOrdersTitle = _styledComponents.default.h1(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n\n"])));
+var BusinessesTitle = _styledComponents.default.h1(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  margin: 0px 20px;\n"])));
 
-exports.PreviousOrdersTitle = PreviousOrdersTitle;
+exports.BusinessesTitle = BusinessesTitle;
