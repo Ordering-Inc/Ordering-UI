@@ -65,6 +65,7 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
+    userCustomerId,
     handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
@@ -402,12 +403,14 @@ const OrderDetailsUI = (props) => {
               </ReviewsAction>
             )}
 
-            <FootActions>
-              <a onClick={() => handleGoToPage({ page: 'orders' })}>
-                {t('MY_ORDERS', 'My Orders')}
-                <BiCaretUp />
-              </a>
-            </FootActions>
+            {!userCustomerId && (
+              <FootActions>
+                <a onClick={() => handleGoToPage({ page: 'orders' })}>
+                  {t('MY_ORDERS', 'My Orders')}
+                  <BiCaretUp />
+                </a>
+              </FootActions>
+            )}
           </Content>
         </WrapperContainer>
       )}
@@ -473,8 +476,10 @@ const OrderDetailsUI = (props) => {
 }
 
 export const OrderDetails = (props) => {
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const orderDetailsProps = {
     ...props,
+    userCustomerId: userCustomer?.id,
     googleMapsControls: {
       defaultZoom: 15,
       zoomControl: true,

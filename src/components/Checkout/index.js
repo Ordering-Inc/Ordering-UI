@@ -400,7 +400,15 @@ export const Checkout = (props) => {
   const getOrder = async (cartId) => {
     try {
       setCartState({ ...cartState, loading: true })
-      const response = await fetch(`${ordering.root}/carts/${cartId}`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
+      const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+      const url = userCustomer
+        ? `${ordering.root}/carts/${cartId}?user_id=${userCustomer?.id}`
+        : `${ordering.root}/carts/${cartId}`
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}` }
+      })
       const { result } = await response.json()
 
       if (result.status === 1 && result.order?.uuid) {
