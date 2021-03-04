@@ -26,6 +26,7 @@ export const HomeHero = (props) => {
   const [, t] = useLanguage()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const theme = useTheme()
+  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -96,6 +97,7 @@ export const HomeHero = (props) => {
         <AddressList
           isModal
           changeOrderAddressWithDefault
+          userId={isNaN(userCustomer) ? null : userCustomer}
           onCancel={() => setModals({ ...modals, listOpen: false })}
           onAccept={() => handleFindBusinesses()}
         />

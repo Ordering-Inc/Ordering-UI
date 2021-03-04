@@ -41,7 +41,8 @@ const UserProfileFormUI = (props) => {
     handlechangeImage,
     formState,
     cleanFormState,
-    toggleIsEdit
+    toggleIsEdit,
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -100,9 +101,11 @@ const UserProfileFormUI = (props) => {
 
   return (
     <>
-      <ProfileOptions value='account' />
+      {!isCustomerMode && (
+        <ProfileOptions value='account' />
+      )}
       <Container>
-        <UserProfileContainer>
+        <UserProfileContainer mbottom={isCustomerMode && 25}>
           <UserImage className='user-image'>
             <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
               <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
@@ -163,7 +166,7 @@ const UserProfileFormUI = (props) => {
 
           </SideForm>
         </UserProfileContainer>
-        {(userData?.addresses || user?.addresses) && (
+        {(userData?.addresses || user?.addresses) && !isCustomerMode && (
           <SavedPlaces>
             <h1>Saved Places</h1>
             <AddressList isModal addressList={user?.addresses} />

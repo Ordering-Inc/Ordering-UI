@@ -33,7 +33,8 @@ export const UserPopover = (props) => {
     open,
     isHome,
     optionsList,
-    withLogout
+    withLogout,
+    isCustomerMode
   } = props
   const [sessionState] = useSession()
   const [, t] = useLanguage()
@@ -42,7 +43,9 @@ export const UserPopover = (props) => {
   const popperElement = useRef()
   const arrowElement = useRef()
 
-  const options = optionsList || optionsDefault
+  const options = isCustomerMode
+    ? optionsDefault.filter(option => option.name === 'profile')
+    : optionsList || optionsDefault
 
   const popper = usePopper(referenceElement.current, popperElement.current, {
     placement: 'auto',
