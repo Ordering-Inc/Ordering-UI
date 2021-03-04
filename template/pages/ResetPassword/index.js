@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { ResetPassword as ResetPasswordController } from '../../../src/components/ResetPassword'
+import { ResetPassword as ResetPasswordController } from 'ordering-ui'
 import { useEvent } from 'ordering-components'
 
 export const ResetPassword = (props) => {

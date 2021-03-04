@@ -13,9 +13,7 @@ export const BusinessesList = (props) => {
     onBusinessClick: (business) => {
       events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     },
-    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug'],
-    isCustomLayout: true,
-    onRedirectPage: (data) => events.emit('go_to_page', data)
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
   }
 
   return (
