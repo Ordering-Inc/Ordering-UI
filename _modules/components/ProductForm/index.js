@@ -126,6 +126,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       modalPageToShow = _useState4[0],
       setModalPageToShow = _useState4[1];
 
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
   var closeModal = function closeModal() {
     setModalIsOpen(false);
     setModalPageToShow('login');
@@ -272,7 +274,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     disabled: true
   }, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
-    addressList: user.addresses,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
+    addressList: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? user.addresses : null,
     isProductForm: true
   })), (!auth || isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''),

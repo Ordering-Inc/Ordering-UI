@@ -76,7 +76,8 @@ var Header = function Header(props) {
       location = props.location,
       closeCartPopover = props.closeCartPopover,
       isShowOrderOptions = props.isShowOrderOptions,
-      isHideSignup = props.isHideSignup;
+      isHideSignup = props.isHideSignup,
+      isCustomerMode = props.isCustomerMode;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -120,6 +121,7 @@ var Header = function Header(props) {
   }) || null;
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
@@ -163,7 +165,7 @@ var Header = function Header(props) {
       var _orderState$options, _orderState$options$a;
 
       return handleGoToPage({
-        page: orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location ? 'search' : 'home'
+        page: orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location && !isCustomerMode ? 'search' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
@@ -219,6 +221,7 @@ var Header = function Header(props) {
     name: "signup"
   }, t('SIGN_UP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     withLogout: true,
+    isCustomerMode: isCustomerMode,
     open: openPopover.user,
     isHome: isHome,
     onClick: function onClick() {
@@ -295,6 +298,7 @@ var Header = function Header(props) {
   }), modalSelected === 'address' && (auth ? /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },

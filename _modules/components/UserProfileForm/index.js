@@ -65,7 +65,8 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       handlechangeImage = props.handlechangeImage,
       formState = props.formState,
       cleanFormState = props.cleanFormState,
-      toggleIsEdit = props.toggleIsEdit;
+      toggleIsEdit = props.toggleIsEdit,
+      isCustomerMode = props.isCustomerMode;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -146,9 +147,11 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       handleButtonUpdateClick(null, isImage);
     }
   }, [(_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "account"
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
+    mbottom: isCustomerMode && 25
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
     onClick: function onClick() {
@@ -203,7 +206,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onCloseProfile: function onCloseProfile() {
       return setEdit(false);
     }
-  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {

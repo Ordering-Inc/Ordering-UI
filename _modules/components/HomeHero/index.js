@@ -75,6 +75,7 @@ var HomeHero = function HomeHero(props) {
       setModals = _useState2[1];
 
   var theme = (0, _styledComponents.useTheme)();
+  var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -165,6 +166,7 @@ var HomeHero = function HomeHero(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer) ? null : userCustomer,
     onCancel: function onCancel() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: false

@@ -448,7 +448,7 @@ var Checkout = function Checkout(props) {
 
   var getOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(cartId) {
-      var _result$order, _result$paymethod_dat, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart;
+      var _result$order, _result$paymethod_dat, userCustomer, url, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart;
 
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -458,8 +458,10 @@ var Checkout = function Checkout(props) {
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: true
               }));
-              _context.next = 4;
-              return fetch("".concat(ordering.root, "/carts/").concat(cartId), {
+              userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+              url = userCustomer ? "".concat(ordering.root, "/carts/").concat(cartId, "?user_id=").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) : "".concat(ordering.root, "/carts/").concat(cartId);
+              _context.next = 6;
+              return fetch(url, {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
@@ -467,17 +469,17 @@ var Checkout = function Checkout(props) {
                 }
               });
 
-            case 4:
+            case 6:
               response = _context.sent;
-              _context.next = 7;
+              _context.next = 9;
               return response.json();
 
-            case 7:
+            case 9:
               _yield$response$json = _context.sent;
               result = _yield$response$json.result;
 
               if (!(result.status === 1 && (_result$order = result.order) !== null && _result$order !== void 0 && _result$order.uuid)) {
-                _context.next = 14;
+                _context.next = 16;
                 break;
               }
 
@@ -485,20 +487,20 @@ var Checkout = function Checkout(props) {
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false
               }));
-              _context.next = 31;
+              _context.next = 33;
               break;
 
-            case 14:
+            case 16:
               if (!(result.status === 2 && ((_result$paymethod_dat = result.paymethod_data) === null || _result$paymethod_dat === void 0 ? void 0 : _result$paymethod_dat.gateway) === 'stripe_redirect' && query.get('payment_intent'))) {
-                _context.next = 29;
+                _context.next = 31;
                 break;
               }
 
-              _context.prev = 15;
-              _context.next = 18;
+              _context.prev = 17;
+              _context.next = 20;
               return confirmCart(cartUuid);
 
-            case 18:
+            case 20:
               confirmCartRes = _context.sent;
 
               if (confirmCartRes.error) {
@@ -516,22 +518,22 @@ var Checkout = function Checkout(props) {
                 loading: false,
                 cart: result
               }));
-              _context.next = 27;
+              _context.next = 29;
               break;
 
-            case 24:
-              _context.prev = 24;
-              _context.t0 = _context["catch"](15);
+            case 26:
+              _context.prev = 26;
+              _context.t0 = _context["catch"](17);
               setAlertState({
                 open: true,
                 content: [_context.t0.message]
               });
 
-            case 27:
-              _context.next = 31;
+            case 29:
+              _context.next = 33;
               break;
 
-            case 29:
+            case 31:
               cart = Array.isArray(result) ? null : result;
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
@@ -539,24 +541,24 @@ var Checkout = function Checkout(props) {
                 error: cart ? null : result
               }));
 
-            case 31:
-              _context.next = 36;
+            case 33:
+              _context.next = 38;
               break;
 
-            case 33:
-              _context.prev = 33;
+            case 35:
+              _context.prev = 35;
               _context.t1 = _context["catch"](0);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
                 error: [_context.t1.toString()]
               }));
 
-            case 36:
+            case 38:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 33], [15, 24]]);
+      }, _callee, null, [[0, 35], [17, 26]]);
     }));
 
     return function getOrder(_x) {

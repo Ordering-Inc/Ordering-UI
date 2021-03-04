@@ -84,7 +84,8 @@ var UserPopover = function UserPopover(props) {
   var open = props.open,
       isHome = props.isHome,
       optionsList = props.optionsList,
-      withLogout = props.withLogout;
+      withLogout = props.withLogout,
+      isCustomerMode = props.isCustomerMode;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -101,7 +102,9 @@ var UserPopover = function UserPopover(props) {
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
-  var options = optionsList || optionsDefault;
+  var options = isCustomerMode ? optionsDefault.filter(function (option) {
+    return option.name === 'profile';
+  }) : optionsList || optionsDefault;
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
     placement: 'auto',
     modifiers: [{

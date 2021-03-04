@@ -73,6 +73,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       alertState = _useState4[0],
       setAlertState = _useState4[1];
 
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
 
@@ -113,6 +115,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     onCancel: function onCancel() {
       return setOpenModal(false);
     },

@@ -72,7 +72,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderDetailsUI = function OrderDetailsUI(props) {
   var _order$driver, _order$driver2, _theme$images2, _theme$images2$dummie, _order$business, _order$business2, _theme$images3, _theme$images3$dummie, _order$customer, _order$customer2, _theme$images4, _theme$images4$dummie, _order$business3, _order$business4, _order$business5, _getOrderStatus, _getOrderStatus2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$driver3, _configs$google_maps_, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$products, _order$summary, _order$summary2, _order$summary3, _order$summary4, _order$summary5, _order$summary6, _order$summary7, _order$summary8, _order$summary9, _order$summary10;
 
-  var handleBusinessRedirect = props.handleBusinessRedirect,
+  var userCustomerId = props.userCustomerId,
+      handleBusinessRedirect = props.handleBusinessRedirect,
       handleOrderRedirect = props.handleOrderRedirect,
       googleMapsControls = props.googleMapsControls,
       driverLocation = props.driverLocation,
@@ -367,7 +368,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return setOpenReview(true);
     }
-  }, t('REVIEW_ORDER', 'Review your Order'))), /*#__PURE__*/_react.default.createElement(_styles.FootActions, null, /*#__PURE__*/_react.default.createElement("a", {
+  }, t('REVIEW_ORDER', 'Review your Order'))), !userCustomerId && /*#__PURE__*/_react.default.createElement(_styles.FootActions, null, /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'orders'
@@ -426,7 +427,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 };
 
 var OrderDetails = function OrderDetails(props) {
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
+    userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     googleMapsControls: {
       defaultZoom: 15,
       zoomControl: true,

@@ -60,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _customerState$result, _customerState$result2, _customerState$result3;
+  var _customerState$result, _customerState$result2, _customerState$result3, _customerState$result4, _customerState$result5;
 
   var phone = props.phone,
       customerState = props.customerState,
@@ -69,7 +69,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       openModal = props.openModal,
       setOpenModal = props.setOpenModal,
       onChangeNumber = props.onChangeNumber,
-      setCustomerState = props.setCustomerState;
+      setCustomerState = props.setCustomerState,
+      onRedirectPage = props.onRedirectPage;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -82,6 +83,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
       setAlertState = _useState2[1];
+
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
   var handleCloseAlert = function handleCloseAlert() {
     setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
@@ -104,6 +107,12 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       customer: true,
       signup: false
     });
+  };
+
+  var handleFindClick = function handleFindClick() {
+    if (userCustomer !== null && userCustomer !== void 0 && userCustomer.id) {
+      onRedirectPage && onRedirectPage('search');
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -137,10 +146,13 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       width: '0px',
       transform: 'translate(-10px, 10%)'
     }
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrappBtn, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    name: ""
-  }, t('FIND', 'Find')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    name: "find",
+    onClick: function onClick() {
+      return handleFindClick();
+    }
+  }, userCustomer !== null && userCustomer !== void 0 && userCustomer.id ? "".concat(t('CONTINUE_WITH', 'Continue with'), " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname) : t('FIND', 'Find'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.signup,
     width: "80%",
     onClose: function onClose() {
@@ -168,7 +180,12 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     isModal: true,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
     changeOrderAddressWithDefault: true,
-    userCustomerSetup: customerState === null || customerState === void 0 ? void 0 : (_customerState$result3 = customerState.result) === null || _customerState$result3 === void 0 ? void 0 : _customerState$result3.id
+    userCustomerSetup: {
+      id: customerState === null || customerState === void 0 ? void 0 : (_customerState$result3 = customerState.result) === null || _customerState$result3 === void 0 ? void 0 : _customerState$result3.id,
+      name: customerState === null || customerState === void 0 ? void 0 : (_customerState$result4 = customerState.result) === null || _customerState$result4 === void 0 ? void 0 : _customerState$result4.name,
+      lastname: customerState === null || customerState === void 0 ? void 0 : (_customerState$result5 = customerState.result) === null || _customerState$result5 === void 0 ? void 0 : _customerState$result5.lastname,
+      phone: phone
+    }
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,

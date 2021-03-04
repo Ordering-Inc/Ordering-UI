@@ -122,6 +122,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       mapErrors = _useState8[0],
       setMapErrors = _useState8[1];
 
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle;
 
@@ -294,6 +295,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     onCancel: function onCancel() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: false
