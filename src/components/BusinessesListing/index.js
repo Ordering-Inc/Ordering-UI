@@ -51,7 +51,7 @@ const BusinessesListingUI = (props) => {
   const [activeMap, setActiveMap] = useState(false)
   const [mapErrors, setMapErrors] = useState('')
 
-  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -222,7 +222,7 @@ const BusinessesListingUI = (props) => {
         <AddressList
           isModal
           changeOrderAddressWithDefault
-          userId={isNaN(userCustomer) ? null : userCustomer}
+          userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
           onCancel={() => setModals({ ...modals, listOpen: false })}
           onAccept={() => handleFindBusinesses()}
         />

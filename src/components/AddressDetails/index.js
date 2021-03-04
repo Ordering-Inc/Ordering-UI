@@ -25,7 +25,7 @@ const AddressDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [openModal, setOpenModal] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -65,7 +65,7 @@ const AddressDetailsUI = (props) => {
         <AddressList
           isModal
           changeOrderAddressWithDefault
-          userId={isNaN(userCustomer) ? null : userCustomer}
+          userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
           onCancel={() => setOpenModal(false)}
           onAccept={() => handleFindBusinesses()}
         />

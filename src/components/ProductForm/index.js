@@ -74,7 +74,7 @@ const ProductOptionsUI = (props) => {
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
 
-  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -271,8 +271,8 @@ const ProductOptionsUI = (props) => {
                 ) : (
                   <AddressList
                     isModal
-                    userId={isNaN(userCustomer) ? null : userCustomer}
-                    addressList={isNaN(userCustomer) ? user.addresses : null}
+                    userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                    addressList={isNaN(userCustomer?.id) ? user.addresses : null}
                     isProductForm
                   />
                 )

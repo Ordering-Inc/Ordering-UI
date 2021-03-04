@@ -10,7 +10,7 @@ export const UserProfileContainer = styled.div`
   text-align: center;
   width: 90%;
   overflow-x: hidden;
-  margin: 25px auto auto;
+  margin: 25px auto ${props => props.mbottom ? `${props.mbottom}px` : 'auto'};
 
   @media (min-width: 768px) {
     align-items: flex-start;

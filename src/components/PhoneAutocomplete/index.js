@@ -18,7 +18,8 @@ import {
   Title,
   Slogan,
   AutoComplete,
-  UserEdit
+  UserEdit,
+  WrappBtn
 } from './styles'
 import { SpinnerLoader } from '../SpinnerLoader'
 
@@ -31,10 +32,13 @@ const PhoneAutocompleteUI = (props) => {
     openModal,
     setOpenModal,
     onChangeNumber,
-    setCustomerState
+    setCustomerState,
+    onRedirectPage
   } = props
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const handleCloseAlert = () => {
     setCustomersPhones({ ...customersPhones, error: null })
@@ -45,6 +49,12 @@ const PhoneAutocompleteUI = (props) => {
     setCustomersPhones({ ...customersPhones, users: [...customersPhones.users, user] })
     setCustomerState({ ...customerState, result: user })
     setOpenModal({ customer: true, signup: false })
+  }
+
+  const handleFindClick = () => {
+    if (userCustomer?.id) {
+      onRedirectPage && onRedirectPage('search')
+    }
   }
 
   useEffect(() => {
@@ -86,12 +96,19 @@ const PhoneAutocompleteUI = (props) => {
               />
             )}
           </AutoComplete>
-          <Button
-            color='primary'
-            name=''
-          >
-            {t('FIND', 'Find')}
-          </Button>
+          <WrappBtn>
+            <Button
+              color='primary'
+              name='find'
+              onClick={() => handleFindClick()}
+              >
+              {userCustomer?.id ? (
+                `${t('CONTINUE_WITH', 'Continue with')} ${userCustomer?.name} ${userCustomer?.lastname}`
+                ) : (
+                  t('FIND', 'Find')
+                  )}
+            </Button>
+          </WrappBtn>
         </ContentWrapper>
       </PhoneContainer>
       <Modal
@@ -120,7 +137,12 @@ const PhoneAutocompleteUI = (props) => {
                 isModal
                 userId={customerState?.result?.id}
                 changeOrderAddressWithDefault
-                userCustomerSetup={customerState?.result?.id}
+                userCustomerSetup={{
+                  id: customerState?.result?.id,
+                  name: customerState?.result?.name,
+                  lastname: customerState?.result?.lastname,
+                  phone
+                }}
               />
             </>
           )}

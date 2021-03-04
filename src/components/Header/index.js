@@ -36,7 +36,8 @@ export const Header = (props) => {
     location,
     closeCartPopover,
     isShowOrderOptions,
-    isHideSignup
+    isHideSignup,
+    isCustomerMode
 } = props
 
   const [events] = useEvent()
@@ -54,7 +55,7 @@ export const Header = (props) => {
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
-  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
@@ -97,7 +98,9 @@ export const Header = (props) => {
       <InnerHeader>
         <LeftHeader>
           <SidebarMenu auth={auth} isHideSignup={isHideSignup} />
-          <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location ? 'search' : 'home' })}>
+          <LogoHeader
+            onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+          >
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} loading='lazy' />
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
           </LogoHeader>
@@ -146,6 +149,7 @@ export const Header = (props) => {
                     {windowSize.width > 768 && (
                       <UserPopover
                         withLogout
+                        isCustomerMode={isCustomerMode}
                         open={openPopover.user}
                         isHome={isHome}
                         onClick={() => handleTogglePopover('user')}
@@ -235,7 +239,7 @@ export const Header = (props) => {
               <AddressList
                 isModal
                 changeOrderAddressWithDefault
-                userId={isNaN(userCustomer) ? null : userCustomer}
+                userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
                 onCancel={() => setModalIsOpen(false)}
                 onAccept={() => setModalIsOpen(false)}
               />
