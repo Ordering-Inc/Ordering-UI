@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSession, useLanguage, useOrder, useEvent, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
+import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 
 import {
   Header as HeaderContainer,
@@ -10,7 +11,8 @@ import {
   RightHeader,
   Menu,
   MenuLink,
-  SubMenu
+  SubMenu,
+  CustomerInfo
 } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
@@ -97,7 +99,11 @@ export const Header = (props) => {
     <HeaderContainer home={isHome}>
       <InnerHeader>
         <LeftHeader>
-          <SidebarMenu auth={auth} isHideSignup={isHideSignup} />
+          <SidebarMenu
+            auth={auth}
+            isHideSignup={isHideSignup}
+            userCustomer={userCustomer}
+          />
           <LogoHeader
             onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
           >
@@ -106,6 +112,14 @@ export const Header = (props) => {
           </LogoHeader>
           {isShowOrderOptions && (
             <Menu className='left-header'>
+              {isCustomerMode && windowSize.width > 450 && (
+                <CustomerInfo isHome={isHome}>
+                  <span>
+                    <FaUserCircle />
+                    <p>{userCustomer?.name} {userCustomer?.lastname}</p>
+                  </span>
+                </CustomerInfo>
+              )}
               {!configState?.loading && configTypes.length > 0 && (
                 <OrderTypeSelectorHeader configTypes={configTypes} />
               )}
