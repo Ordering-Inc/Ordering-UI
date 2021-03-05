@@ -25,6 +25,8 @@ var _AiOutlineHome = _interopRequireDefault(require("@meronex/icons/ai/AiOutline
 
 var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 
+var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
+
 var _orderingComponents = require("ordering-components");
 
 var _useWindowSize2 = require("../../hooks/useWindowSize");
@@ -55,7 +57,8 @@ var SidebarMenu = function SidebarMenu(props) {
   var _options$address2, _options$address3;
 
   var auth = props.auth,
-      isHideSignup = props.isHideSignup;
+      isHideSignup = props.isHideSignup,
+      userCustomer = props.userCustomer;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -116,7 +119,16 @@ var SidebarMenu = function SidebarMenu(props) {
     onClick: function onClick() {
       return actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), userCustomer && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    isCustomer: userCustomer
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: false
+  }, /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: false
+  }, "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       var _options$address;
