@@ -127,6 +127,14 @@ export const MenuLink = styled.a`
     color: #f1f1f1;
   }
 
+  ${({ isCustomer }) => isCustomer && css`
+    border-bottom: 1px solid black;
+
+    @media (min-width: 451px) {
+      display: none;
+    }
+  `};
+
   @media (max-height: 450px) {
     font-size: 18px;
   }
