@@ -144,3 +144,33 @@ export const SubMenu = styled(InnerHeader)`
     display: none;
   }
 `
+
+export const CustomerInfo = styled.div`
+  display: none;
+
+  @media (min-width: 450px) {
+    display: initial;
+
+    span {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      p {
+        color: ${props => props.isHome ? '#FFF' : '#333'};
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 50px;
+
+        @media (min-width: 768px) {
+          max-width: 70px;
+        }
+      }
+      svg {
+        color: ${props => props.theme.colors.primary};
+        font-size: 30px;
+        margin-right: 5px;
+      }
+    }
+  }
+`
