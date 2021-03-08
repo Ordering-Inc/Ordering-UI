@@ -25,7 +25,7 @@ import {
   WrapMomentAndAddress,
   WrapDeliveryAndPickupLink,
   MenuLinkTab
-} from './styles/two'
+} from './styles'
 import { capitalize } from '../../../../../src/utils'
 import { useWindowSize } from '../../../../../src/hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../src/hooks/useOnlineStatus'
