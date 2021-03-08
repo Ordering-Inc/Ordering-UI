@@ -9,7 +9,7 @@ import {
 } from 'ordering-components'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
-import { Button } from 'styles/Buttons'
+import { Button } from '../../styles/Buttons'
 import { SearchBar } from '../SearchBar'
 import { BusinessController } from '../BusinessController'
 import { NotFoundSource } from '../NotFoundSource'
