@@ -189,12 +189,6 @@ Object.defineProperty(exports, "LanguageSelector", {
     return _LanguageSelector.LanguageSelector;
   }
 });
-Object.defineProperty(exports, "Link", {
-  enumerable: true,
-  get: function get() {
-    return _Link.Link;
-  }
-});
 Object.defineProperty(exports, "LoginForm", {
   enumerable: true,
   get: function get() {
@@ -313,12 +307,6 @@ Object.defineProperty(exports, "ProductOptionSubOption", {
   enumerable: true,
   get: function get() {
     return _ProductOptionSubOption.ProductOptionSubOption;
-  }
-});
-Object.defineProperty(exports, "PhoneAutocomplete", {
-  enumerable: true,
-  get: function get() {
-    return _PhoneAutocomplete.PhoneAutocomplete;
   }
 });
 Object.defineProperty(exports, "ProductShare", {
@@ -562,8 +550,6 @@ var _Image = require("./components/Image");
 
 var _LanguageSelector = require("./components/LanguageSelector");
 
-var _Link = require("./components/Link");
-
 var _LoginForm = require("./components/LoginForm");
 
 var _Messages = require("./components/Messages");
@@ -603,8 +589,6 @@ var _ProductItemAccordion = require("./components/ProductItemAccordion");
 var _ProductOption = require("./components/ProductOption");
 
 var _ProductOptionSubOption = require("./components/ProductOptionSubOption");
-
-var _PhoneAutocomplete = require("./components/PhoneAutocomplete");
 
 var _ProductShare = require("./components/ProductShare");
 

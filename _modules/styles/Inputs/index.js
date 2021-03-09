@@ -21,7 +21,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 30px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n\n  &:focus {\n    border-color: ", ";\n  }\n\n  ", "\n\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"])), function () {
+var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 30px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"])), function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref) {
   var w = _ref.w;
@@ -30,23 +30,23 @@ var Input = _styledComponents.default.input(_templateObject || (_templateObject 
 
 exports.Input = Input;
 
-var InputGroup = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n\n  & > ", ":not(:first-child) {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n    border-left: 0;\n    padding-left: 0;\n  }\n\n  & > ", ":not(:last-child) {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n    border-right: 0;\n    padding-right: 0;\n  }\n\n"])), Input, Input);
+var InputGroup = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  & > ", ":not(:first-child) {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n    border-left: 0;\n    padding-left: 0;\n  }\n  & > ", ":not(:last-child) {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n    border-right: 0;\n    padding-right: 0;\n  }\n"])), Input, Input);
 
 exports.InputGroup = InputGroup;
 
-var InputGroupLeft = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  line-height: 34px;\n  padding-left: 7px;\n  padding-right: 7px;\n  font-size: 16px;\n  border-width: 1px;\n  height: 34px;\n  border-style: solid;\n  ", "\n\n  & ", " {\n    margin-left: -7px;\n    ", "\n  }\n"])), function (props) {
+var InputGroupLeft = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  line-height: 34px;\n  padding-left: 7px;\n  padding-right: 7px;\n  font-size: 16px;\n  border-width: 1px;\n  height: 34px;\n  border-style: solid;\n  ", "\n  & ", " {\n    margin-left: -7px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      border-left-width: 0;\n      border-radius: 34px 34px 0 0;\n  "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      border-radius: 34px 0 0 34px;\n      border-right-width: 0;\n  "])));
 }, _Buttons.Button, function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-right: -7px;\n        margin-left: 0\n    "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-right: -7px;\n        margin-left: 0;\n    "])));
 });
 
 exports.InputGroupLeft = InputGroupLeft;
 
-var TextArea = _styledComponents.default.textarea(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 16px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n\n  ", "\n\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"])), function () {
+var TextArea = _styledComponents.default.textarea(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 16px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"])), function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref2) {
   var w = _ref2.w;
@@ -54,7 +54,7 @@ var TextArea = _styledComponents.default.textarea(_templateObject8 || (_template
 });
 
 exports.TextArea = TextArea;
-var InputGroupRight = (0, _styledComponents.default)(InputGroupLeft)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  border-radius: 0 34px 34px 0;\n  line-height: 34px;\n  border-right-width: 1px;\n  border-left-width: 0;\n\n  ", "\n\n  & ", " {\n    margin-left: 0;\n    margin-right: -7px;\n    ", "\n  }\n\n  \n"])), function (props) {
+var InputGroupRight = (0, _styledComponents.default)(InputGroupLeft)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  border-radius: 0 34px 34px 0;\n  line-height: 34px;\n  border-right-width: 1px;\n  border-left-width: 0;\n  ", "\n  & ", " {\n    margin-left: 0;\n    margin-right: -7px;\n    ", "\n  }\n  \n"])), function (props) {
   var _props$theme3;
 
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        border-left-width: 1px;\n        border-right-width: 0;\n        border-radius: 0 0 34px 34px;\n    "])));
@@ -64,7 +64,7 @@ var InputGroupRight = (0, _styledComponents.default)(InputGroupLeft)(_templateOb
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-left: -7px;\n        margin-right: 0\n    "])));
 });
 exports.InputGroupRight = InputGroupRight;
-var InputPrimary = (0, _styledComponents.default)(Input)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border-color: ", ";\n\n  &:focus {\n    border-color: ", ";\n  }\n"])), function (props) {
+var InputPrimary = (0, _styledComponents.default)(Input)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border-color: ", ";\n  &:focus {\n    border-color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primary;
@@ -72,7 +72,7 @@ var InputPrimary = (0, _styledComponents.default)(Input)(_templateObject13 || (_
   return (0, _polished.darken)(0.1, props.theme.colors.primary);
 });
 exports.InputPrimary = InputPrimary;
-var InputSecundary = (0, _styledComponents.default)(Input)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border-color: ", ";\n\n  &:focus {\n    border-color: ", ";\n  }\n"])), function (props) {
+var InputSecundary = (0, _styledComponents.default)(Input)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border-color: ", ";\n  &:focus {\n    border-color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 }, function (props) {
   return props.theme.colors.secundary;

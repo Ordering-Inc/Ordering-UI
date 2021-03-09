@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = void 0;
+exports.getHourMin = exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -150,8 +150,10 @@ var capitalize = function capitalize(str) {
 
 exports.capitalize = capitalize;
 
-var getGoogleMapImage = function getGoogleMapImage(location, apiKey) {
-  return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(location === null || location === void 0 ? void 0 : location.lat, ",").concat(location === null || location === void 0 ? void 0 : location.lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(location === null || location === void 0 ? void 0 : location.lat, ",").concat(location === null || location === void 0 ? void 0 : location.lng, "&key=").concat(apiKey);
+var getGoogleMapImage = function getGoogleMapImage(_ref, apiKey) {
+  var lat = _ref.lat,
+      lng = _ref.lng;
+  return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(lat, ",").concat(lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(lat, ",").concat(lng, "&key=").concat(apiKey);
 };
 /**
  * _Function to flat array of one level
@@ -162,9 +164,9 @@ var getGoogleMapImage = function getGoogleMapImage(location, apiKey) {
 exports.getGoogleMapImage = getGoogleMapImage;
 
 var flatArray = function flatArray(arr) {
-  var _ref;
+  var _ref2;
 
-  return (_ref = []).concat.apply(_ref, _toConsumableArray(arr));
+  return (_ref2 = []).concat.apply(_ref2, _toConsumableArray(arr));
 };
 /**
  * Function to return the traduction depending of a key 't'
@@ -187,9 +189,7 @@ var getTraduction = function getTraduction(key) {
     ERROR_ADD_PRODUCT_VERY_FAR_FOR_PICKUP: 'The business is too far for order type pickup',
     ERROR_PLACE_PAY_WITH_CARD2: 'An error occurred while trying to pay by card',
     ERROR_ADD_PRODUCT_BUSINESS_CLOSED: 'The business is closed at the moment',
-    INTERNAL_ERROR: 'Server Error, please wait, we are working to fix it',
-    ERROR_NOT_FOUND_BUSINESSES: 'No businesses found near your location',
-    YOU_DO_NOT_HAVE_PERMISSION: 'You do not have permission'
+    INTERNAL_ERROR: 'Server Error, please wait, we are working to fix it'
   };
   return keyList[key] ? t(key, keyList[key]) : t(key);
 };
@@ -205,5 +205,29 @@ exports.getTraduction = getTraduction;
 var bytesConverter = function bytesConverter(bytes) {
   return Math.floor(bytes / 1024);
 };
+/**
+ * Function to get time in 12 hours format.
+ */
+
 
 exports.bytesConverter = bytesConverter;
+
+var getHourMin = function getHourMin(hour, min) {
+  var _hour;
+
+  if (hour < 12) {
+    _hour = hour < 10 ? "0".concat(hour) : "".concat(hour);
+  } else {
+    _hour = hour - 12 < 10 ? "0".concat(hour - 12) : "".concat(hour - 12);
+  }
+
+  var _min = min < 10 ? "0".concat(min) : "".concat(min);
+
+  if (hour < 12) {
+    return "".concat(_hour, " : ").concat(_min, " AM");
+  } else {
+    return "".concat(_hour, " : ").concat(_min, " PM");
+  }
+};
+
+exports.getHourMin = getHourMin;
