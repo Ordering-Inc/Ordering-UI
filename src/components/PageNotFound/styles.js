@@ -13,7 +13,6 @@ export const PageNotFoundContainer = styled.div`
   @media (min-width: 1024px) {
     height: auto;
     margin: 40px auto;
-    padding-top: 80px;
   }
 `
 

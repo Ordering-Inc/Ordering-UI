@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   cursor: pointer;
+
   ${({ variant }) => variant === 'cart' && css`
     span {
       display: flex;
@@ -30,10 +31,12 @@ export const Container = styled.div`
       }
     }
   `}
+
   ${({ variant }) => variant === 'address' && css`
     color: #333;
     display: flex;
     align-items: center;
+
     svg {
       margin-right: 5px;
       ${props => props.theme?.rtl && css`
@@ -41,11 +44,14 @@ export const Container = styled.div`
         margin-right: 0px;
       `}
     }
+
   `}
+
   ${({ variant }) => variant === 'moment' && css`
     color: #333;
     display: flex;
     align-items: center;
+
     svg {
       margin-right: 5px;
       ${props => props.theme?.rtl && css`
@@ -54,6 +60,7 @@ export const Container = styled.div`
       `}
     }
   `}
+
   ${({ isHome }) => isHome && css`
     color: #FFF;
   `}

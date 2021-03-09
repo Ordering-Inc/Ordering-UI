@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const Option = styled.div`
   display: flex;
   align-items: center;
+
   svg {
     min-width: 14px;
     margin-right: 5px;
@@ -11,6 +12,7 @@ export const Option = styled.div`
       margin-right: 0px;
     `}
   }
+
   
 `
 

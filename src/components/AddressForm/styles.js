@@ -9,6 +9,7 @@ export const FormActions = styled.div`
   button {
     height: 45px;
     flex: 1;
+
     &:last-child#submit-btn {
       margin-left: 10px;
       ${props => props.theme?.rtl && css`
@@ -17,6 +18,7 @@ export const FormActions = styled.div`
       `}
     }
   }
+
   @media (min-width: 769px) {
     button {
       &:last-child#submit-btn {
@@ -35,6 +37,7 @@ export const FormControl = styled.form`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
   input {
     box-sizing: border-box;
     margin: 10px 0px;
@@ -47,6 +50,7 @@ export const FormControl = styled.form`
     &::placeholder{
       color: #CBCBCB
     }
+
     @media (min-width: 621px) {
       &.internal_number,
       &.zipcode  {
@@ -54,9 +58,11 @@ export const FormControl = styled.form`
       }
     }
   }
+
   textarea {
     width: 100%;
   }
+
   .input-autocomplete {
     width: 100%;
     background: #FFF;
@@ -68,9 +74,11 @@ export const FormControl = styled.form`
     ::placeholder {
       color: #DBDCDB;
     }
+
     &:-ms-input-placeholder {
       color: #DBDCDB;
     }
+
     &::-ms-input-placeholder { /* Microsoft Edge */
       color: #DBDCDB;
     }
@@ -78,6 +86,7 @@ export const FormControl = styled.form`
       border-color: ${() => darken(0.07, '#CCC')};
     }
   }
+
   @media (min-width: 481px) {
     padding: 10px;
   }
@@ -98,6 +107,7 @@ export const WrapAddressInput = styled.div`
   i {
     padding: 0px 10px;
   }
+
   svg {
     position: absolute;
     color: #9A9A9A;
@@ -109,6 +119,7 @@ export const WrapAddressInput = styled.div`
       left: initial;
     `}
   }
+
   input {
     background-position: left 10px center !important;
     background-repeat: no-repeat !important;
@@ -125,16 +136,19 @@ export const AddressTagSection = styled.div`
   margin: 10px 0px;
   display: flex;
   justify-content: space-between;
+
   button {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 46px;
     height: 46px;
+
     img {
       width: 22px;
       height: 22px;
     }
+
     span {
       display: flex;
       justify-content: center;
@@ -142,6 +156,7 @@ export const AddressTagSection = styled.div`
       font-size: 22px;
     }
   }
+
   button.active {
     border: 1px solid ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
@@ -171,6 +186,7 @@ export const WrapperSkeleton = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+
   span {
     width: 100%;
   }

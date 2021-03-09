@@ -12,13 +12,16 @@ export const CardContainer = styled.div`
   border-radius: 10px;
   cursor: pointer;
   position: relative;
+
   background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
+
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
     props.theme.colors.backgroundPage === '#FFFFFF'
   ) && css`
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
   `}
+
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
       width: calc(50% - 40px);
@@ -27,6 +30,7 @@ export const CardContainer = styled.div`
     @media (min-width: 681px) {
       width: calc(50% - 40px);
     }
+
     @media (min-width: 993px) {
       width: calc(33% - 40px);
     }
@@ -56,6 +60,7 @@ export const CardInfo = styled.div`
   > * {
     margin: 5px;
   }
+
   h1 {
     font-size: 16px;
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '500'};
@@ -65,31 +70,38 @@ export const CardInfo = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   p {
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};
     text-align: left;
     ${props => props.theme?.rtl && css`
       text-align: right;
     `}
+
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
   }
+
   span {
     color: ${({ soldOut, theme }) => soldOut ? lighten(0.05, theme.colors.primary) : theme.colors.primary};
     font-weight: bold;
   }
+
   p, span {
     font-size: 13px;
   }
+
   @media (min-width: 1024px) {
     h1 {
       font-size: 18px;
     }
+
     p {
       font-size: 16px;
     }
+
     span {
       font-size: 15px;
     }

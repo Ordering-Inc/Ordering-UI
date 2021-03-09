@@ -22,11 +22,13 @@ export const WrapperItems = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+
   button.addcard {
     width: 100%;
     margin-top: 20px;
     padding-top: 8px;
     padding-bottom: 8px;
+
     @media (min-width: 381px) {
       width: 60%;
     }
@@ -45,13 +47,16 @@ export const CardItemContent = styled.div`
   display: flex;
   cursor: pointer;
   width: 90%;
+
   .checks svg {
     color: #D81212;
     font-size: 22px;
   }
+
   .brand svg {
     font-size: 26px;
   }
+
   > * {
     margin-right: 10px;
     ${props => props.theme?.rtl && css`
@@ -75,6 +80,7 @@ export const ActionsModal = styled.div`
   justify-content: space-between;
   margin-top: 30px;
   width: 100%;
+
   button {
     width: 48%;
     padding-top: 8px;

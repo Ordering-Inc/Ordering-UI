@@ -6,10 +6,13 @@ export const ContainerCard = styled.div`
   height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '300px'};
   border-radius: 10px;
   margin: 30px 20px;
+
   width: calc(100% - 40px);
+
   @media (min-width: 681px) {
     width: calc(50% - 40px);
   }
+
   @media (min-width: 993px) {
     width: calc(33% - 40px);
   }
@@ -38,10 +41,12 @@ const BusinessHeaderStyled = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+
   h1 {
     color: #FFF;
     opacity: 0.5;
   }
+
   @media (min-width: 481px) {
     min-height: 200px;
   }
@@ -70,6 +75,7 @@ export const BusinessTags = styled.div`
   top: 0;
   margin: 15px;
   width: calc(100% - 35px);
+
   span.crown {
     background-color: rgba(0, 0, 0, 0.5);
     font-size: 20px;
@@ -77,11 +83,13 @@ export const BusinessTags = styled.div`
     align-items: center;
     color: #FFC917;
   }
+
   div {
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
+
   span {
     background-color: #6C6C6C;
     font-size: 12px;
@@ -116,10 +124,12 @@ export const WrapperBusinessLogo = styled.div`
   height: 65px;
   min-height: 65px;
   max-width: 65px;
+
   ${({ isSkeleton }) => isSkeleton && css`
     width: auto;
     height: auto;
   `}
+
   @media (min-width: 481px){
     max-width: 75px;
     max-height: 75px;
@@ -140,6 +150,7 @@ const BusinessLogoStyled = styled.div`
   background-position: center;
   min-height: 65px;
   border-radius: 10px;
+
   @media (min-width: 481px){
     width: 100%;
     height: 100%;
@@ -163,6 +174,7 @@ export const BusinessLogo = (props) => {
 export const BusinessInfo = styled.div`
   display: flex;
   width: calc(100% - 65px);
+
   @media (min-width: 481px){
     width: calc(100% - 75px);
   }
@@ -191,6 +203,7 @@ export const BusinessInfoItem = styled.div`
     `}
     }
   }
+
   div {
     display: flex;
     justify-content: space-between;
@@ -214,12 +227,15 @@ export const BusinessInfoItem = styled.div`
       font-weight: bold;
     }
   }
+
   @media (min-width: 1201px) {
     width: 95%;
   }
+
   @media (min-width: 481px){
     padding: 0px 5px 0px 16px;
     font-size: 16px;
+
     ${props => props.theme?.rtl && css`
         padding: 0px 16px 0px 5px;
     `}
@@ -240,6 +256,7 @@ export const Categories = styled.div`
   font-size: 14px;
   font-weight: 300;
   color: #6C6C6C;
+
   @media (min-width: 481px) {
     font-size: 16px;
   }
@@ -249,6 +266,7 @@ export const Medadata = styled.div`
   display: flex;
   font-weight: 300;
   font-size: 12px;
+
   p {
     svg {
       margin-right: 3px;
@@ -258,6 +276,7 @@ export const Medadata = styled.div`
     `}
     }
   }
+
   @media (min-width: 481px) {
     font-size: 14px;
   }

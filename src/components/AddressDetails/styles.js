@@ -18,6 +18,7 @@ export const WrappMap = styled.div`
 
 export const Map = styled.div`
   font-size: 100%;
+
   img {
     width: 100%;
     height: auto;
@@ -36,12 +37,14 @@ export const Text = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
   h4{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
   }
+
   svg {
     color: #F2BB40;
     margin-left: 5px;
@@ -61,12 +64,14 @@ export const Text = styled.div`
       margin-left: initial;
     `}
   }
+
   @media (min-width: 425px) {
     font-size: 18px;
     span {
       font-size: 18px;
     }
   }
+
   @media (min-width: 768px) {
     font-size: 24px;
   }

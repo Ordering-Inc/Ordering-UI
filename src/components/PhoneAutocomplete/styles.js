@@ -1,169 +1,205 @@
-import React, { useState, useEffect } from 'react'
-import {
-  PhoneAutocomplete as PhoneAutocompleteController,
-  useLanguage
-} from 'ordering-components'
+import styled, { css } from 'styled-components'
 
-import { Modal } from '../Modal'
-import { SignUpForm } from '../SignUpForm'
-import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
-import { Alert } from '../Confirm'
-import { UserDetails } from '../UserDetails'
-import { AddressList } from '../AddressList'
+export const PhoneContainer = styled.div`
+  width: 100%;
+  height: calc(100vh - 97px);
 
-import {
-  PhoneContainer,
-  ContentWrapper,
-  Title,
-  Slogan,
-  AutoComplete,
-  UserEdit,
-  WrappBtn
-} from './styles'
-import { SpinnerLoader } from '../SpinnerLoader'
-
-const PhoneAutocompleteUI = (props) => {
-  const {
-    phone,
-    customerState,
-    customersPhones,
-    setCustomersPhones,
-    openModal,
-    setOpenModal,
-    onChangeNumber,
-    setCustomerState,
-    onRedirectPage
-  } = props
-  const [, t] = useLanguage()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
-
-  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-
-  const handleCloseAlert = () => {
-    setCustomersPhones({ ...customersPhones, error: null })
-    setAlertState({ open: false, content: [] })
-  }
-
-  const saveCustomerUser = (user) => {
-    setCustomersPhones({ ...customersPhones, users: [...customersPhones.users, user] })
-    setCustomerState({ ...customerState, result: user })
-    setOpenModal({ customer: true, signup: false })
-  }
-
-  const handleFindClick = () => {
-    if (userCustomer?.id) {
-      onRedirectPage && onRedirectPage('search')
+  .spinner-content{
+    > div{
+      width: 40px;
+      height: 40px;
+      border-width: 5px;
     }
   }
 
-  useEffect(() => {
-    if (customersPhones?.error) {
-      setAlertState({ open: true, content: [customersPhones?.error] })
-    }
-  }, [customersPhones?.error])
-
-  return (
-    <>
-      <PhoneContainer>
-        <ContentWrapper>
-          <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-          <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
-          <AutoComplete className='autocomplete'>
-            <Input
-              name='phone-input'
-              id='phone-input'
-              placeholder='Phone'
-              type='text'
-              pattern='[0-9]*'
-              onInput={onChangeNumber}
-              value={phone}
-              onChange={() => {}}
-              maxLength='10'
-              autoComplete='off'
-              disabled={customersPhones?.loading}
-            />
-            {customersPhones?.loading && (
-              <SpinnerLoader
-                style={{
-                  top: 0,
-                  position: 'absolute',
-                  height: 'auto',
-                  left: '100%',
-                  width: '0px',
-                  transform: 'translate(-10px, 10%)'
-                }}
-              />
-            )}
-          </AutoComplete>
-          <WrappBtn>
-            <Button
-              color='primary'
-              name='find'
-              onClick={() => handleFindClick()}
-              >
-              {userCustomer?.id ? (
-                `${t('CONTINUE_WITH', 'Continue with')} ${userCustomer?.name} ${userCustomer?.lastname}`
-                ) : (
-                  t('FIND', 'Find')
-                  )}
-            </Button>
-          </WrappBtn>
-        </ContentWrapper>
-      </PhoneContainer>
-      <Modal
-        open={openModal.signup}
-        width='80%'
-        onClose={() => setOpenModal({ openModal, signup: false })}
-      >
-        <SignUpForm
-          externalPhoneNumber={phone}
-          saveCustomerUser={saveCustomerUser}
-        />
-      </Modal>
-      <Modal
-        open={openModal.customer}
-        width='60%'
-        onClose={() => setOpenModal({ openModal, customer: false })}
-      >
-        <UserEdit>
-          {!customerState?.loading && (
-            <>
-              <UserDetails
-                userData={customerState?.result}
-                userId={customerState?.result?.id}
-              />
-              <AddressList
-                isModal
-                userId={customerState?.result?.id}
-                changeOrderAddressWithDefault
-                userCustomerSetup={{
-                  id: customerState?.result?.id,
-                  name: customerState?.result?.name,
-                  lastname: customerState?.result?.lastname,
-                  phone
-                }}
-              />
-            </>
-          )}
-        </UserEdit>
-      </Modal>
-      <Alert
-        title={t('ERROR', 'Error')}
-        open={alertState.open}
-        content={alertState.content}
-        onClose={handleCloseAlert}
-        onAccept={handleCloseAlert}
-      />
-    </>
-  )
-}
-
-export const PhoneAutocomplete = (props) => {
-  const phoneProps = {
-    UIComponent: PhoneAutocompleteUI,
-    ...props
+ .autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  }
+  input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+  }
+  input[type=text] {
+    background-color: #f1f1f1;
+    width: 100%;
+  }
+  input[type=submit] {
+    background-color: #f1f1f1;
+    width: 100%;
+  }
+  .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+  }
+  .autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+  }
+  .autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
   }
 
-  return <PhoneAutocompleteController {...phoneProps} />
-}
+  @media (min-width: 821px) {
+    height: calc(100vh - 65px);
+  }
+`
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 0px 20px 0px;
+
+  ${props => props.theme?.rtl && css`
+      padding: 0px 20px 0px;
+    `}
+
+    input {
+      width: 90%;
+      margin-bottom: 15px;
+    }
+
+    @media (min-width: 425px) {
+      input {
+        width: 45%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      padding: 0px 40px 0px;
+
+      ${props => props.theme?.rtl && css`
+        padding: 0px 40px 0px;
+      `}
+    }
+`
+
+export const WrappBtn = styled.div`
+  width: 50%;
+
+  button {
+    min-width: 130px;
+  }
+`
+
+export const Title = styled.h1`
+  margin: 0px;
+  text-align: left;
+  font: normal normal normal 80px ${props => props.theme.fonts.special?.name || 'Georgia'};
+  letter-spacing: 0px;
+  color: #000000;
+  text-shadow: 0px 3px 6px #00000029;
+  opacity: 1;
+  font-size: 35px;
+
+  ${props => props.theme?.rtl && css`
+      text-align: right;
+  `}
+`
+
+export const Slogan = styled.p`
+  margin: 0px;
+  text-align: left;
+  font-size: 18px;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-bottom: 15px;
+
+  ${props => props.theme?.rtl && css`
+      text-align: right;
+  `}
+
+  @media (min-width: 480px) {
+    font-size: 24px;
+  }
+`
+
+export const WrapInput = styled.div`
+  position: relative;
+  cursor: pointer;
+
+  ${({ withIcon }) => withIcon && css`
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+
+    &::before {
+      content: "";
+      position: absolute;
+      right: 5px;
+      top: 0;
+      bottom: 18px;
+      width: 15px;
+
+      ${props => props.theme?.rtl && css`
+        left: 5px;
+        right: initial;
+     `}
+    }
+
+    @media (min-width: 1024px) {
+      width: calc(50% - 20px);
+    }
+  `}
+  
+  div{
+    color: #FFF;
+    position: relative;
+    bottom: 25px;
+    left: 15px;
+    ${props => props.theme?.rtl && css`
+      left: initial;
+      right: 15px;
+    `}
+  }
+
+  svg {
+    color: #FFF;
+    position: absolute;
+    font-size: 22px;
+
+    margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
+
+    ${props => props.theme?.rtl ? css`
+      left: 0px;
+    ` : css`
+      right: 0px;
+    `}
+
+  }
+`
+
+export const AutoComplete = styled.div`
+  width: 45%; 
+`
+
+export const UserEdit = styled.div`
+  > :first-child{
+     margin-bottom: 20px;  
+  }
+`
+
+export const Info = styled.p``

@@ -39,13 +39,16 @@ export const Item = styled.div`
   text-align: center;
   border-radius: 9px;
   box-sizing: border-box;
+
   @media (min-width: 490px) {
     width: 43%;
   }
+
   @media (min-width: 769px) {
     width: 27%;
     padding: 11px;
   }
+
   @media (min-width: 1024px) {
     width: 20%;
     margin: 10px 15px;
@@ -89,7 +92,9 @@ export const Details = styled.div`
     padding: 0 20px;
     font-size: 1em;
     line-height: 22px;
+
   }
+
   @media (min-width: 480px){
     div{
       h3{
@@ -97,16 +102,19 @@ export const Details = styled.div`
       }
     }
   }
+
 `
 
 export const CloseUpselling = styled.div`
   width: 100%;
   text-align: center;
+
   button{
     width: 90%;
     font-size: 1.4em;
     padding: 10px 0;
   }
+
   @media (min-width: 720px){
     button{
       width: 40%;

@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  entry: ['./src/index.js', './themes/index.js'],
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, '_bundles'),
     filename: 'ordering-ui.[hash].js',

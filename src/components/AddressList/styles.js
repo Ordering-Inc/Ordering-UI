@@ -4,9 +4,11 @@ export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 10px;
+
   ${({ isLoading }) => isLoading && css`
     pointer-events: none;
   `}
+
   button.add {
     height: 50px;
   }
@@ -25,6 +27,7 @@ export const AddressItem = styled.li`
   align-items: center;
   padding: 15px 0px;
   border-top: 1px solid #00000029;
+
   label {
     font-size: 15px;
     margin-left: 5px;
@@ -34,9 +37,11 @@ export const AddressItem = styled.li`
       margin-left: 0;
   `}
   }
+
   .wrapAddress {
     display: flex;
     align-items: center;
+
     span {
       font-size: 14px;
       display: flex;
@@ -50,20 +55,24 @@ export const AddressItem = styled.li`
         color: ${props => props.theme.colors.primary};
         font-size: 24px;
       }
+
       @media (min-width: 768px) {
         font-size: 16px;
       }
     }
   }
+
   .address {
     display: flex;
     flex-direction: column;
     line-height: 1.5;
+
     span:last-child {
       opacity: 0.5;
       font-size: 12px;
     }
   }
+
   &:last-child {
     border-bottom: 1px solid #00000029;
   }
@@ -77,11 +86,13 @@ export const AddressItemActions = styled.div`
     cursor: pointer;
     margin: 0px 5px;
     font-size: 30px;
+
     &:nth-child(1) {
       svg {
         color: #F2BB40;
       }
     }
+
     &:nth-child(2) {
       svg {
         color: #D81212;
@@ -104,6 +115,7 @@ export const WrappNotAddresses = styled.div`
   align-items: center;
   width: 80%;
   margin: 20px auto 10px;
+
   img {
     width: 200px;
     height: auto;
@@ -125,6 +137,7 @@ export const FormActions = styled.div`
   button {
     height: 45px;
     flex: 1;
+
     &:last-child#second-btn {
       margin-left: 10px;
       ${props => props.theme?.rtl && css`
@@ -133,6 +146,7 @@ export const FormActions = styled.div`
       `}
     }
   }
+
   @media (min-width: 769px) {
     button {
       &:last-child#second-btn {

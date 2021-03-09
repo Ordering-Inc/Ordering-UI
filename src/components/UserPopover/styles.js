@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const HeaderItem = styled.div`
   cursor: pointer;
   height: ${({ isPhoto }) => isPhoto ? 'auto' : '25px'};
+
   svg {
     color: ${({ isHome }) => isHome ? '#FFF' : '#000'};
     height: 25px;
@@ -41,6 +42,7 @@ const PopoverListItemStyles = css`
   align-items: center;
   color: #333;
   font-size: 18px;
+
   svg {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
@@ -48,10 +50,12 @@ const PopoverListItemStyles = css`
       margin-right: 0px;
     `}
   }
+
   :hover {
     cursor: pointer;
     background-color: #eee;
   }
+
   :last-child {
     border-bottom: 0;
   }

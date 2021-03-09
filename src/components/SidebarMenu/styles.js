@@ -4,11 +4,13 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   ${({ auth }) => auth && css`
     @media (min-width: 769px) {
       display: none;
     }
   `}
+
   ${({ auth }) => !auth && css`
     @media (min-width: 871px) {
       display: none;
@@ -36,10 +38,12 @@ export const IconContent = styled.button`
   padding: 0px;
   align-items: center;
   justify-content: center;
+
   &:hover {
     background-color: ${({ isHome }) => isHome ? 'rgba(255,255,255,0.1)' : 'rgb(255, 255, 255)'};
     box-shadow: transparent 0px 0px 0px 1px inset;
   }
+
   svg {
     flex-shrink: 0;
     font-size: 30px;
@@ -58,11 +62,13 @@ export const SidebarContent = styled.div`
   transition: 0.5s;
   padding-top: 60px;
   box-shadow: ${({ isHome }) => isHome ? 'rgba(0, 0, 0, 0.7) 0px 8px 24px;' : 'rgba(0, 0, 0, 0.2) 0px 8px 24px;'};
+
   ${props => props.theme?.rtl ? css`
       right: 0;
   ` : css`
       left: 0;
   `}
+
   @media (max-height: 450px) {
     padding-top: 15px;
   }
@@ -89,10 +95,12 @@ export const MenuClose = styled.button`
   padding: 0px;
   align-items: center;
   justify-content: center;
+
   &:hover {
     background-color: ${({ isHome }) => isHome ? 'rgba(255,255,255,0.1)' : 'rgb(255, 255, 255)'};
     box-shadow: transparent 0px 0px 0px 1px inset;
   }
+
   svg {
     flex-shrink: 0;
     font-size: 30px;
@@ -114,9 +122,19 @@ export const MenuLink = styled.a`
   width: 100%;
   background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};;
   outline: none !important;
+
   &:hover {
     color: #f1f1f1;
   }
+
+  ${({ isCustomer }) => isCustomer && css`
+    border-bottom: 1px solid black;
+
+    @media (min-width: 451px) {
+      display: none;
+    }
+  `};
+
   @media (max-height: 450px) {
     font-size: 18px;
   }
@@ -139,6 +157,7 @@ export const MenuLinkIcon = styled.div`
   display: flex;
   align-items: center;
   margin: 0px;
+
   svg {
     flex-shrink: 0;
     color: #000;
@@ -172,6 +191,7 @@ export const TextInfo = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   color: ${({ active, theme, isHome }) => active ? theme.colors.primary : isHome ? '#FFF' : '#000'}
+
   ${props => props.theme?.rtl && css`
     text-align: right;
     display: inline-block;
@@ -182,11 +202,13 @@ export const TextInfo = styled.span`
 export const MenuLinkSeparator = styled.div`
   grid-area: -1 / 1 / auto / -1;
   margin: 15px -16px -16px 0px;
+
   div {
     width: 100%;
     padding-left: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
+
     ${props => props.theme?.rtl ? css`
       padding-right: 0px;
       margin: 15px 0px -16px -16px;
@@ -194,6 +216,7 @@ export const MenuLinkSeparator = styled.div`
       padding-left: 0px;
       margin: 15px -16px -16px 0px;
     `}
+
     hr {
       display: block;
       width: 100%;

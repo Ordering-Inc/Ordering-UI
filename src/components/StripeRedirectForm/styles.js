@@ -14,10 +14,12 @@ export const FormRedirect = styled.form`
     padding-top: 8px;
     padding-bottom: 8px;
     margin-top: 10px;
+
     &:disabled {
       opacity: 0.5;
     }
   }
+
   .StripeElement,
   .StripeElementIdeal {
     display: block;
@@ -28,6 +30,7 @@ export const FormRedirect = styled.form`
     border-radius: 4px;
     background: white;
   }
+
   .StripeElement--focus,
   .StripeElementIdeal--focus {
     box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,
@@ -35,10 +38,12 @@ export const FormRedirect = styled.form`
     -webkit-transition: all 150ms ease;
     transition: all 150ms ease;
   }
+
   .StripeElement.loading {
     height: 41.6px;
     opacity: 0.6;
   }
+
   .StripeElementIdeal {
     padding: 0;
   }
@@ -48,9 +53,11 @@ export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+
   label {
     margin-bottom: 5px;
   }
+
   select {
     padding: 7px 5px;
     margin-top: 8px;

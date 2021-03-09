@@ -6,6 +6,7 @@ export const SingleCard = styled.div`
   max-height: 100px;
   height: auto;
   border: none;
+
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
     props.theme.colors.backgroundPage === '#FFFFFF'
@@ -14,6 +15,7 @@ export const SingleCard = styled.div`
     border-radius: 16px;
     margin-bottom: 15px;
   `}
+
   @media(min-width: 480px){
     height: 140px;
     ${props => (
@@ -33,6 +35,7 @@ export const OrderPastContent = styled.div`
   padding: 10px 0;
   padding-right: 5px;
   min-width: 220px;
+
   ${props => props.theme?.rtl && css`
     padding-left: 5px;
     padding-right: 0px;
@@ -66,10 +69,12 @@ export const Reorder = styled.div`
   justify-content: center;
   font-size: 0.8em;
   margin-right: 25px;
+
   ${props => props.theme?.rtl && css`
       margin-left: 25px;
       margin-right: 0;
   `}
+
   p {
     color: #53ad26;
     margin-block-start: 0;
@@ -81,6 +86,7 @@ export const Reorder = styled.div`
     font-size: 0.9em;
     white-space: nowrap;
   }
+
   @media (min-width: 480px){
     font-size: 1em;
     button{
@@ -88,6 +94,7 @@ export const Reorder = styled.div`
       font-size: 0.9em;
     }
   }
+
   @media (min-width: 768px){
     ${props => props.theme?.rtl ? css`
       margin-left: 0;
@@ -98,6 +105,7 @@ export const Reorder = styled.div`
       width: 80%;
     }
   }
+
   @media (min-width: 1024px){
     button{
       width: 50%;
@@ -110,10 +118,12 @@ export const WrappButton = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px auto;
+
   button {
     padding: 10px 0px;
     width: 100%;
   }
+
   @media (min-width: 768px) {
     button {
       width: 60%;

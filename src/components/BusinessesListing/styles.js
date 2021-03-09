@@ -13,6 +13,7 @@ export const BusinessList = styled.div`
 
 export const WrapperSearch = styled.div`
   margin: 10px 20px 0px;
+
   ${({ isCustomLayout }) => isCustomLayout && css`
     box-sizing: border-box;
     display: flex;
@@ -24,6 +25,7 @@ export const WrapperSearch = styled.div`
     margin-bottom: 20px;
     width: 100%; 
     padding: 0 20px;
+
     svg {
       font-size: 26px;
       color: ${props => props.theme?.colors?.primary};
@@ -35,6 +37,7 @@ export const WrapperSearch = styled.div`
       width: 75%;
       padding: 0;
     }
+
     @media(min-width: 1201px){
       width: 50%;
     }
@@ -56,5 +59,7 @@ export const PreviousOrders = styled.div`
   margin: 10px 20px 0px;
 `
 
-export const PreviousOrdersTitle = styled.h1`
+export const BusinessesTitle = styled.h1`
+  font-size: 18px;
+  margin: 0px 20px;
 `

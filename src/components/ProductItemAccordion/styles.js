@@ -18,9 +18,11 @@ const AccordionStyled = styled.div`
   cursor: initial;
   transition: background-color 0.6s ease;
   margin: 0px 10px;
+
   .rotate {
     transform: rotate(180deg);
   }
+
   .accordion__icon {
     margin-left: auto;
     transition: transform 0.6s ease;
@@ -29,9 +31,11 @@ const AccordionStyled = styled.div`
       margin-left: initial;
     `}
   }
+
   @media (min-width: 411px){
     flex-direction: row;
   }
+
 `
 
 export const Accordion = (props) => {
@@ -54,12 +58,14 @@ export const WrapperProductImage = styled.div`
   max-height: 55px;
   height: 55px;
   width: 55px;
+
   @media (min-width: 361px) {
     max-width: 65px;
     max-height: 65px;
     height: 65px;
     width: 65px;
   }
+
   @media (min-width: 411px) {
     max-width: 75px;
     max-height: 75px;
@@ -99,28 +105,35 @@ export const ContentInfo = styled.div`
   text-transform: capitalize;
   margin-left: 10px;
   width: 55%;
+
   @media (min-width: 411px) {
     width: calc(65% - 60px);
   }
+
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
     margin-left: 0px;
   `}
+
   h3 {
     font-size: 14px;
     margin: 0px;
     font-weight: 600;
   }
+
   span {
     display: flex;
     justify-content: space-between;
     margin: 0px;
+
     p {
       margin: 0px;
       font-size: 14px;
     }
+
     div {
       display: flex;
+
       span {
         height: 20px;
         svg {
@@ -136,6 +149,7 @@ export const ContentInfo = styled.div`
       }
     }
   }
+
   @media (min-width: 577px) {
     h3 {
       font-size: 18px;
@@ -148,6 +162,7 @@ export const AccordionContent = styled.div`
   transition: max-height 0.6s ease;
   width: 100%;
   margin: auto;
+
   @media (min-width: 481px) {
     width: 80%;
   }
@@ -169,6 +184,7 @@ export const ProductComment = styled.div`
     font-weight: bold;
     margin: 0px;
   }
+
   h3 {
     font-weight: normal;
     text-transform: capitalize;
@@ -186,19 +202,23 @@ export const ProductInfo = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+
   h1,
   h3 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   p {
     font-size: 20px;
     margin: 0px 5px;
   }
+
   @media (min-width: 411px) {
     width: 80%;
   }
+
   @media (min-width: 481px) {
     width: 70%;
   }
@@ -209,12 +229,15 @@ export const ProductError = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   span {
     font-size: 18px;
     text-align: center;
   }
+
   @media (min-width: 411px){
     width: 35%;
+
     span{
       text-align: right;
     }
@@ -243,6 +266,7 @@ export const ProductActionsDelete = styled(ProductActionsEdit)`
   svg {
     margin-right: 0px;
   }
+
   @media (min-width: 411px){
     display: block;
   }
@@ -259,19 +283,24 @@ export const ProductPrice = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+
   p,
   span {
     font-size: 14px;
   }
+
   span {
     font-weight: 500;
   }
+
   p {
     margin: 0px 5px;
   }
+
   svg {
     cursor: pointer;
   }
+
   @media (min-width: 512px) {
     span,
     p {
@@ -292,10 +321,12 @@ export const ProductSelect = styled.select`
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-progress-appearance: none;
+
   background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
   background-repeat: no-repeat, repeat;
   background-position: right .7em top 50%, 0 0;
   background-size: .65em auto, 100%;
+
   ${props => props.theme?.rtl && css`
     margin-left: 5px;
     margin-right: 0px;
@@ -308,6 +339,7 @@ export const ProductNotAvailable = styled.span`
 
 export const ProductOptionsList = styled.ul`
   list-style-type: none;
+
   .suboption {
     margin-left: -25px;
     ${props => props.theme?.rtl && css`
@@ -315,16 +347,20 @@ export const ProductOptionsList = styled.ul`
       margin-left: 0px;
   `}
   }
+
   p:nth-child(1) {
     margin-bottom: 0;
   }
+
   p {
     font-weight: 400;
     margin: 0px;
   }
+
   li span {
     font-weight: 300;
   }
+
   li.ingredient {
     padding-left: 15px;
     ${props => props.theme?.rtl && css`

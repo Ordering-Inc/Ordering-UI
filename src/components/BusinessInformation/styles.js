@@ -20,6 +20,7 @@ export const BusinessHeader = styled.div`
   align-items: flex-end;
   position: relative;
   background-color: #FFF;
+
   img{
     object-fit: cover;
     position: absolute;
@@ -117,6 +118,7 @@ export const BusinessInfoItem = styled.div`
     font-size: 14px;
     display: flex;
     justify-content: space-between;
+
     h5,
     p {
       display: flex;
@@ -212,6 +214,7 @@ export const ScheduleContainer = styled.div`
   > div {
     width: 100%;
   }
+
 `
 
 export const ScheduleBlock = styled.div`
@@ -239,6 +242,7 @@ export const ScheduleBlock = styled.div`
     margin: 0px;
     font-size: 14px;
   }
+
   &:last-child {
     border: 0;
   }
@@ -254,6 +258,7 @@ export const DeliveryInfo = styled.div`
   margin-top: 10px;
   border-top: 1px solid #CCC;
   border-bottom: 1px solid #CCC;
+
   div {
     width: 100%;
     &:last-child {
@@ -262,6 +267,7 @@ export const DeliveryInfo = styled.div`
       }
     }
   }
+
   @media (min-width: 769px) {
     flex-wrap: nowrap;
     div {
@@ -279,6 +285,7 @@ export const BusinessMediaContent = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+
     > img,
     > iframe {
       object-fit: cover;
@@ -286,12 +293,15 @@ export const BusinessMediaContent = styled.div`
       margin: 10px 10px;
       width: calc(100% - 12px);
       cursor: pointer;
+
       @media (min-width: 481px) {
         width: calc(50% - 20px);
       }
+
       @media (min-width: 681px) {
         width: calc(33% - 20px);
       }
+
       @media (min-width: 993px) {
         width: calc(25% - 20px);
       }

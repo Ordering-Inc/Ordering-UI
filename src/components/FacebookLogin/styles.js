@@ -15,6 +15,7 @@ export const FacebookButton = styled(Button)`
     font-size: 28px;
     color: #1977F2;
   }
+
   div {
     margin: 0 auto;
   }

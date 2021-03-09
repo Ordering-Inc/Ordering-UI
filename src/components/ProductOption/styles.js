@@ -29,6 +29,7 @@ export const Flag = styled.span`
   text-transform: capitalize;
   color: #A52121;
   font-weight: 500;
+
   @media (min-width: 381px) {
     font-size: 14px;
   }

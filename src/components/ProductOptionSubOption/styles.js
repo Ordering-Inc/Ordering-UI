@@ -6,6 +6,7 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 10px;
   cursor: pointer;
+
   -webkit-touch-callout: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -25,6 +26,7 @@ export const IconControl = styled.div`
   svg {
     font-size: 25px;
   }
+
   svg[disabled] {
     color: #CBCBCB;
   }
@@ -38,11 +40,13 @@ export const Text = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0 5px;
+
   div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   span {
     margin-left: 10px;
     font-weight: 500;
@@ -64,6 +68,7 @@ export const QuantityControl = styled.div`
   font-weight: 300;
   font-size: 18px;
   margin: 0 5px;
+
   svg {
     color: ${props => props.theme.colors.primary};
     font-size: 20px;
@@ -73,9 +78,11 @@ export const QuantityControl = styled.div`
       margin-right: 0px;
     `}
   }
+
   svg[disabled] {
     color: #CBCBCB;
   }
+
   svg:last-child {
     margin-left: 3px;
     margin-right: 0;
@@ -93,6 +100,7 @@ export const PositionControl = styled.div`
   font-weight: 300;
   font-size: 18px;
   margin: 0 5px;
+
   svg {
     font-size: 20px;
     margin-right: 3px;
@@ -103,9 +111,11 @@ export const PositionControl = styled.div`
     &.reverse {
       transform: rotate(180deg);
     }
+
     &.selected {
       color: ${props => props.theme.colors.primary};
     }
+
     &:last-child {
       margin-right: 0;
       ${props => props.theme?.rtl && css`

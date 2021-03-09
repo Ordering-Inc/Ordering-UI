@@ -7,9 +7,11 @@ export const ProductContainer = styled.div`
   max-height: 100vh;
   position: relative;
   padding: 10px;
+
   @media (min-width: 768px) {
     height: 100%;
   }
+
   @media (min-width: 1201px) {
     flex-wrap: nowrap;
     overflow: auto;
@@ -24,6 +26,7 @@ export const WrapperImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   @media (min-width: 1201px) {
     width: calc(50% - 10px);
     position: sticky;
@@ -36,12 +39,14 @@ export const ProductImage = styled.div`
   display: flex;
   align-items: center;
   height: 300px;
+
   img {
     border-radius: 16px;
     object-fit: contain;
     height: 100%;
     box-sizing: border-box;
   }
+
   @media (min-width: 1201px) {
     height: 100%;
     img {
@@ -58,6 +63,7 @@ export const ProductInfo = styled.div`
   padding: 0px;
   position: relative;
   margin-top: 10px;
+
   h1 {
     font-size: 20px;
     font-weight: 500;
@@ -65,6 +71,7 @@ export const ProductInfo = styled.div`
     color: #263238;
     margin-top: 0px;
   }
+
   p {
     font-size: 14px;
     font-weight: 200;
@@ -76,6 +83,7 @@ export const ProductInfo = styled.div`
       text-align: right;
     `}
   }
+
   @media (min-width: 381px) {
     h1 {
       font-size: 24px;
@@ -84,9 +92,11 @@ export const ProductInfo = styled.div`
       font-size: 16px;
     }
   }
+
   @media (min-width: 411px) {
     padding: 10px 0px;
   }
+
   @media (min-width: 1201px) {
     width: calc(50% - 20px);
     padding: 0px 10px;
@@ -117,13 +127,16 @@ export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 115px;
+
   p {
     font-weight: 300;
     margin-bottom: 5px;
   }
+
   @media (min-width: 577px) {
     margin-bottom: 62px;
   }
+
   @media (min-width: 769px) {
     margin-bottom: 0px;
   }
@@ -135,16 +148,19 @@ export const ProductActions = styled.div`
   align-items: center;
   padding: 10px 0px;
   width: 100%;
+
   position: fixed;
   bottom: 0;
   right: 0;
   width: 100%;
   background-color: #FFF;
+
   div.incdec-control {
     width: 50%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+
     svg {
       width: 35px;
       height: 35px;
@@ -156,23 +172,28 @@ export const ProductActions = styled.div`
     display: flex;
     align-items: center;
   }
+
   button:disabled,
   button.disabled,
   svg.disabled {
     opacity: 0.5;
   }
+
   svg.disabled {
     pointer-events: none;
   }
+
   button.add {
     width: 90%;
     padding: 5px 10px;
     margin: 10px 0px 0px;
     position: relative;
+
     span:last-child {
       position: absolute;
       right: 0;
       margin-right: 10px;
+
       ${props => props.theme?.rtl && css`
         position: absolute;
         left: 0;
@@ -186,9 +207,11 @@ export const ProductActions = styled.div`
       pointer-events: none;
     }
   }
+
   @media (min-width: 577px) {
     justify-content: space-between;
     flex-direction: row;
+
     div.incdec-control {
       width: 25%;
     }
@@ -200,19 +223,23 @@ export const ProductActions = styled.div`
       margin: 0 10px;
     }
   }
+
   @media (min-width: 769px) {
     position: relative;
     bottom: initial;
     right: initial;
+
     button.add {
       width: 100%;
       margin: 0px;
     }
   }
+
   @media (min-width: 1201px) {
     position: sticky;
     top: 100%;
     padding: 10px 0px;
+
     div.incdec-control {
       width: 30%;
     }
@@ -231,6 +258,7 @@ export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
   border-radius: 16px;
   margin: auto;
+
   span {
     margin-bottom: 10px;
   }
@@ -250,11 +278,13 @@ export const WrapperSubOption = styled.div`
 export const SkuContent = styled.div`
   display: flex;
   flex-direction: column;
+
   h2 {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 0px;
   }
+
   p {
     font-size: 14px;
   }

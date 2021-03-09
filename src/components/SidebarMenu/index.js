@@ -7,6 +7,7 @@ import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
 import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
+import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 
 import { useEvent, useLanguage, useOrder } from 'ordering-components'
 
@@ -27,7 +28,7 @@ import {
 } from './styles'
 
 export const SidebarMenu = (props) => {
-  const { auth, isHideSignup } = props
+  const { auth, isHideSignup, userCustomer } = props
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
@@ -79,6 +80,32 @@ export const SidebarMenu = (props) => {
         >
           <MdClose />
         </MenuClose>
+
+        {userCustomer && (
+          <MenuLink isHome={isHome} isCustomer={userCustomer}>
+            <WrappContent>
+              <MenuLinkIcon
+                isHome={isHome}
+                active={false}
+              >
+                <FaUserCircle />
+              </MenuLinkIcon>
+              <MenuLinkText>
+                <TextInfo
+                  isHome={isHome}
+                  active={false}
+                >
+                  {`${userCustomer?.name} ${userCustomer?.lastname}`}
+                </TextInfo>
+              </MenuLinkText>
+              <MenuLinkSeparator>
+                <div>
+                  <hr />
+                </div>
+              </MenuLinkSeparator>
+            </WrappContent>
+          </MenuLink>
+        )}
 
         <MenuLink
           isHome={isHome}

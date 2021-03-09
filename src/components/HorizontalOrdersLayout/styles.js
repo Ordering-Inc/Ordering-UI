@@ -10,6 +10,7 @@ export const OpenOrder = styled.div`
     font-size: 0.8em;
     height: 36px;
   }
+
   @media (min-width: 480px){
     button{
       font-size: 1em
@@ -22,6 +23,7 @@ export const Content = styled.div`
   align-items: center;
   border-radius: 16px;
   padding: 10px;
+
 `
 
 export const Price = styled.div`
@@ -57,6 +59,7 @@ export const Logo = styled.div`
     height: 100%;
     border-radius: 16px;
   }
+
   @media (min-width: 480px){
     width: 75px;
     height: 75px;
@@ -74,31 +77,38 @@ export const Card = styled.div`
   border-radius: 16px;
   text-align: left;
   cursor: ${({ isBusinessesPage }) => isBusinessesPage && 'pointer'};
+
   button.load-orders {
     padding: 10px 30px;
   }
+
   ${props => props.theme?.rtl && css`
     text-align: right;
   `}
+
   ${props => (props.nobg || props.isBusinessesPage) && css`
     background: transparent;
   `}
+
   ${props => props.flex && css`
     display: flex;
     align-items: center;
     justify-content: center;
   `}
+
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
     props.theme.colors.backgroundPage === '#FFFFFF'
   ) && css`
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
   `}
+
   @media (min-width: 480px){
     min-width: 400px;
     max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '250px'};;
     width: 400px;
   }
+
   @media(min-width: 993px){
     ${({ isBusinessesPage }) => isBusinessesPage && css`
       margin: 30px 20px;
@@ -106,6 +116,7 @@ export const Card = styled.div`
       min-width: initial;
     `}
   }
+
 `
 
 export const Map = styled.div`

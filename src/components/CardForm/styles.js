@@ -4,6 +4,7 @@ export const FormStripe = styled.form`
   max-width: 800px;
   display: flex;
   flex-direction: column;
+
   .StripeElement,
   .StripeElementIdeal {
     display: block;
@@ -14,6 +15,7 @@ export const FormStripe = styled.form`
     border-radius: 4px;
     background: white;
   }
+
   .StripeElement--focus,
   .StripeElementIdeal--focus {
     box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,
@@ -21,10 +23,12 @@ export const FormStripe = styled.form`
     -webkit-transition: all 150ms ease;
     transition: all 150ms ease;
   }
+
   .StripeElement.loading {
     height: 41.6px;
     opacity: 0.6;
   }
+
   .StripeElementIdeal {
     padding: 0;
   }
@@ -46,6 +50,7 @@ export const FormRow = styled.div`
     letter-spacing: 0.025em;
     width: 500px;
   }
+
   input::placeholder {
     color: #aab7c4;
   }
@@ -68,10 +73,12 @@ export const FormActions = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+
   button {
     width: 48%;
     padding-top: 8px;
     padding-bottom: 8px;
+
     &:disabled {
       opacity: 0.5;
     }

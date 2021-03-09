@@ -10,6 +10,7 @@ export const Container = styled.div`
 export const WrappContainer = styled.div`
   width: 90%;
   margin: auto;
+
   @media (min-width: 513px) {
     width: 80%;
   }
@@ -60,15 +61,18 @@ export const WrapperPlaceOrderButton = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px 0px 10px;
+
   button {
     width: 100%;
     padding: 5px 20px;
     cursor: pointer;
+
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
   }
+
   @media (min-width: 513px) {
     button {
       width: 70%;
@@ -87,6 +91,7 @@ export const WarningMessage = styled.div`
   opacity: 0.8;
   border-radius: 10px;
   position: relative;
+
   svg {
     position: absolute;
     font-size: 30px;
@@ -98,6 +103,7 @@ export const WarningMessage = styled.div`
         left: initial
     `}
   }
+
   h1 {
     font-size: 20px;
     margin: 0px 60px;
@@ -107,6 +113,7 @@ export const WarningMessage = styled.div`
 
 export const NotFoundImage = styled.div`
   max-width: 300px;
+
   img {
     width: 300px;
   }
@@ -117,6 +124,7 @@ export const CartsList = styled.div`
   flex-direction: column;
   width: 90%;
   margin: auto;
+
   @media (min-width: 381px) {
     width: 80%;
   }

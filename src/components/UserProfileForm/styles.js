@@ -11,6 +11,7 @@ export const UserProfileContainer = styled.div`
   width: 90%;
   overflow-x: hidden;
   margin: 25px auto ${props => props.mbottom ? `${props.mbottom}px` : 'auto'};
+
   @media (min-width: 768px) {
     align-items: flex-start;
     flex-direction: row;
@@ -23,6 +24,7 @@ export const UserImage = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+
   @media (min-width: 768px){
     width: auto;
     align-items: flex-end;
@@ -39,6 +41,7 @@ export const Image = styled.div`
   background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};
   cursor: -webkit-grab;
   cursor: grab;
+
   img,
   div {
     width: 100%;
@@ -47,13 +50,16 @@ export const Image = styled.div`
     border: none;
     overflow: hidden;
   };
+
   img{
     object-fit: cover;
   }
+
   @media (min-width: 480px){
     width: 200px;
     height: 200px;
   }
+
   @media (min-width: 768px){
     width: 170px;
     height: 170px;
@@ -62,6 +68,7 @@ export const Image = styled.div`
 
 export const SideForm = styled.div`
   width: 100%;
+
   @media (min-width: 768px) {
     width: 70%;
     display: flex;
@@ -80,9 +87,11 @@ export const Camera = styled.div`
     width: 30px;
     height: 30px;
   }
+
   @media (min-width: 480px){
     width:242px;
   }
+
   @media (min-width: 768px){
     width:212px;
   }
@@ -94,17 +103,21 @@ export const UserData = styled.div`
   align-items: center;
   text-align: center;
   width: 100%;
+
   h1 {
     font-size: 20px
   }
+
   > * {
     margin: 5px 0;
     width: 75%;
   }
+
   > button {
     width: auto;
     background: ${props => props.theme.colors.backgroundPage};
   }
+
   @media (min-width: 768px){
     align-items: flex-start;
     text-align: left;
@@ -112,6 +125,7 @@ export const UserData = styled.div`
      text-align: right;
     `}
   }
+
 `
 
 export const SavedPlaces = styled.div`
@@ -120,6 +134,8 @@ export const SavedPlaces = styled.div`
   margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 20px;
+
+
   h1{
     font-size: 24px;
     text-align: left;
@@ -127,15 +143,18 @@ export const SavedPlaces = styled.div`
     text-align: right;
     `}
   }
+
   > div{
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
   }
+
   button{
     width: 100%;
     align-self: center;
   }
+
   @media (min-width: 768px){
     width: 90%;
     margin-top: 40px;
@@ -149,6 +168,7 @@ export const SavedPlaces = styled.div`
       width: 65%;
     }
   }
+
 `
 
 export const UploadImageIcon = styled.div`
@@ -156,9 +176,11 @@ export const UploadImageIcon = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   span {
     margin: 0;
   }
+
   svg {
     width: 45px;
     height: 45px;

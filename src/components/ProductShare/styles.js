@@ -26,6 +26,8 @@ export const IconShare = styled.div`
     left: 16px;
     right: 10px;
   `}
+
+
   @media(min-width: 769px){
     position: relative;
     left: 5px;
@@ -38,6 +40,7 @@ export const IconShare = styled.div`
       position: static;
     }
   }
+
   @media (min-width: 1201px) {
     position: sticky;
     left: calc(100% - 45px);
@@ -54,11 +57,13 @@ export const ShareButtons = styled.div`
   top: 28px;
   width: 40px;
   position: absolute !important;
+
   ${props => props.theme?.rtl ? css`
     right: -12px;
   ` : css`
     left: -12px;
   `}
+
   @media (min-width: 1201px) {
     ${props => props.theme?.rtl ? css`
       left: 0px;

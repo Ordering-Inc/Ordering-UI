@@ -44,19 +44,23 @@ export const ActionsForm = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
   button {
     flex: 1;
     margin-top: 10px;
     padding: 7px 0px;
     width: 49%;
     box-sizing: border-box;
+
     &:disabled {
       cursor: not-allowed;
     }
+
     &:nth-child(2) {
       margin-left: 10px;
     }
   }
+
   ${props => props.theme?.rtl && css`
     button {
       &:nth-child(1) {

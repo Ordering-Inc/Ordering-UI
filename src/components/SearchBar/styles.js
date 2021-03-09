@@ -5,23 +5,27 @@ export const BusinessSearch = styled.div`
   display: flex;
   justify-content: flex-end;
   position: relative;
+
   input {
     width: 100%;
     background-position: right 10px center;
     background-repeat: no-repeat;
     background-size: 15px;
     box-sizing: border-box;
+
     ${props => props.theme?.rtl ? css`
       padding-left: 60px;
     ` : css`
       padding-right: 60px;
     `}
     background-color: ${props => props.theme?.colors?.backgroundPage};
+
     ${({ isCustomLayout }) => !isCustomLayout && css`
       justify-content: center;
       -webkit-transition: width 0.4s ease-in-out;
       transition: width 0.4s ease-in-out; 
     `}
+
     @media (min-width: 681px) {
       width: 100%;
       ${({ isCustomLayout }) => !isCustomLayout && css`
@@ -31,6 +35,7 @@ export const BusinessSearch = styled.div`
         }
       `}
     }
+
   }
 `
 
@@ -63,4 +68,5 @@ export const SearchIcon = styled.div`
   background-repeat: no-repeat;
   background-size: 15px;
   background-color: ${props => props.theme?.colors?.backgroundPage};
+
 `

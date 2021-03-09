@@ -19,10 +19,12 @@ export const TipCard = styled.div`
   height: 30px;
   width: 30px;
   font-size: 14px;
+
   &.active {
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
   }
+
   @media (min-width: 768px) {
     border-radius: 16px;
     padding: 5px 30px;

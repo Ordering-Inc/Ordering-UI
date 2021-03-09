@@ -105,7 +105,7 @@ const ResetPasswordUI = (props) => {
           {code && random ? (
             <>
               <FormSide>
-                <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' loading='lazy' />
+                <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' loading='lazy'/>
                 <FormInput
                   noValidate
                   onSubmit={handleSubmit(onSubmit)}

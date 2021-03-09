@@ -2,9 +2,11 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   padding: 0px 20px;
+
   div:not(:last-child) {
     padding-bottom: 5px;
   }
+
   @media (min-width: 769px) {
     margin-bottom: 10px;
     padding: 0;
@@ -19,6 +21,7 @@ export const NotCarts = styled.div`
   align-items: center;
   width: 80%;
   margin: auto;
+
   img {
     width: 200px;
     height: auto;

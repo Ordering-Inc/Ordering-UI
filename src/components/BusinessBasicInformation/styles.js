@@ -17,12 +17,15 @@ export const BusinessContainer = styled.div`
   justify-content: center;
   align-items: flex-end;
   border-radius: 20px;
+
   ${props => props.isSkeleton && css`
     background-color: #F8F8F8;
   `}
+
   ${props => props.bgimage && css`
     background-image: url(${props.bgimage});
   `}
+
   @media (min-width: 490px) {
     justify-content: flex-start;
   }
@@ -36,6 +39,7 @@ export const BusinessContent = styled.div`
   margin: 10px;
   max-height: 75px;
   width: 340px;
+
   @media (min-width: 426px) {
     margin: 15px;
   }
@@ -91,12 +95,14 @@ export const BusinessInfoItem = styled.div`
     font-size: 14px;
     display: flex;
     justify-content: space-between;
+
     h5 {
       font-weight: 300;
       svg{
         margin-bottom: 1px;
       }
     }
+
     h5,
     p {
       display: flex;
@@ -106,28 +112,35 @@ export const BusinessInfoItem = styled.div`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+
       svg {
         margin-right: 4px;
+
         ${props => props.theme?.rtl && css`
           margin-left: 4px;
           margin-right: 0px;
         `}
+
         &.start {
           color: #FFC917;
         }
+
         &.popup {
           color: ${props => props.theme.colors.primary};
           cursor: pointer;
           transform: rotate(180deg);
         }
       }
+
       &.bold {
         font-weight: 600;
       }
+
       &.type {
         font-weight: 300;
       }
     }
+
     @media (min-width: 481px) {
       font-size: 16px;
     }

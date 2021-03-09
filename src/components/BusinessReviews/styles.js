@@ -14,9 +14,11 @@ export const ReviewOf = styled.div`
     margin: 0px;
     font-size: 16px;
   }
+
   > div {
     width: 30%;
   }
+
   span {
     display: none;
     width: 30%;
@@ -29,6 +31,7 @@ export const ReviewOf = styled.div`
       width: 100%;
     }
   }
+
   @media (min-width: 480px){
     span{
       display: block;
@@ -62,12 +65,14 @@ export const WrapperSelect = styled.div`
 `
 
 export const Content = styled.div`
+
   display: flex;
   flex-direction: column;
   
   h3{
     display: none;
   }
+
   @media (min-width: 480px){
     h3 {
       display: block;
@@ -106,9 +111,11 @@ export const Comments = styled.div`
   flex-wrap: wrap;
   width: 100%;
   overflow: hidden;
+
   h4 {
     margin: 10px 0 5px 0;
   }
+
   div p {
     display: flex;
     justify-content: space-between;
@@ -141,6 +148,7 @@ export const Scores = styled.div`
   text-align: center;
   width: 800px;
   margin: 10px auto;
+
   @media (min-width: 768px){
     width: 100%;
   }
@@ -158,9 +166,11 @@ export const ScoreDiv = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   font-size: 16px;
+
   p {
     margin: 0px;
   }
+
   span {
     display: flex;
     justify-content: center;
@@ -182,6 +192,7 @@ export const SkeletonContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     flex: 1;
+
     > div{
       display: flex;
       width: 100%;

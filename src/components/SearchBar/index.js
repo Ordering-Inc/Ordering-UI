@@ -60,8 +60,8 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isCustomLay
         maxLength='500'
       />
       <DeleteContent>
-        {el.current?.value
-          ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span>
+        {el.current?.value 
+          ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span> 
           : <img src={theme?.images?.general?.searchIcon} />}
       </DeleteContent>
     </BusinessSearch>

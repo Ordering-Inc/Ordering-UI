@@ -5,16 +5,20 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;  
+
   ${props => props.home ? css`
     background-color: #333;
+
   & ${Select} {
     background-color: transparent;
     border-color: transparent;
     color: ${props => props.theme.colors.primaryContrast}
   }
+
   & ${MenuLink} {
     color: #FFF;
   }
+
   `
   : css`
     & ${SubMenu}{
@@ -36,23 +40,28 @@ export const InnerHeader = styled.div`
 
 export const LogoHeader = styled.div`
   cursor: pointer;
+
   img {
     width: 35px;
     height: 45px;
     margin: 0;
     vertical-align: middle;
     margin-left: 10px;
+
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0;
     `}
+
     @media (min-width: 768px) {
       width: 150px;
     }
   }
+
   img:nth-child(1) {
     display: none;
   }
+
   @media (min-width: 768px) {
     img:nth-child(1) {
       display: block;
@@ -76,6 +85,7 @@ export const RightHeader = styled.div`
 export const Menu = styled.div`
   display: flex;
   align-items: center;
+
   &.left-header {
     > :first-child {
       margin-left: 15px;
@@ -85,13 +95,16 @@ export const Menu = styled.div`
       `}
     }
   }
+
   > *:not(:last-child) {
     margin: 0 5px;
   }
+
   .moment-popover,
   .address-popover {
     display: none;
   }
+
   @media (min-width: 821px) {
     .moment-popover,
     .address-popover {
@@ -110,6 +123,7 @@ export const MenuLink = styled.a`
   padding: 10px;
   color: #333;
   cursor: pointer;
+
   ${({ highlight }) => highlight && css`
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
@@ -125,7 +139,38 @@ export const SubMenu = styled(InnerHeader)`
   padding: 0px 20px 7px;
   box-sizing: border-box;
   margin: 0px;
+
   @media (min-width: 821px) {
     display: none;
+  }
+`
+
+export const CustomerInfo = styled.div`
+  display: none;
+
+  @media (min-width: 450px) {
+    display: initial;
+
+    span {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      p {
+        color: ${props => props.isHome ? '#FFF' : '#333'};
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 50px;
+
+        @media (min-width: 768px) {
+          max-width: 70px;
+        }
+      }
+      svg {
+        color: ${props => props.theme.colors.primary};
+        font-size: 30px;
+        margin-right: 5px;
+      }
+    }
   }
 `

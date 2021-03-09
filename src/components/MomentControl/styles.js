@@ -48,6 +48,7 @@ export const Day = styled.div`
   &:nth-child(3) div {
     margin-bottom: 5px;
   }
+
   &:nth-child(3) div,
   &:nth-child(6) div {
     ${props => props.theme?.rtl ? css`
@@ -56,11 +57,13 @@ export const Day = styled.div`
        border-right: 0;
     `}
   }
+
   &:nth-child(4) div,
   &:nth-child(5) div,
   &:nth-child(6) div {
     margin-top: 5px;
   }
+
   @media (min-width: 426px) {
     width: calc(100% / 6);
     &:nth-child(3) div.content-day {
@@ -71,10 +74,13 @@ export const Day = styled.div`
       `}
     }
   }
+
   ${({ selected }) => selected && css`
     font-weight: 400;
     color: ${props => props.theme.colors.primary};
   `}
+
+
   :last-child {
     ${ContentDay} {
       ${props => props.theme?.rtl ? css`
@@ -84,6 +90,7 @@ export const Day = styled.div`
       `}
     }
   }
+
   :hover {
     background-color: #f9f9f9;
   }
@@ -119,10 +126,12 @@ export const Hour = styled.div`
   padding: 5px 10px;
   margin-bottom: 7px;
   box-sizing: border-box;
+
   ${({ selected }) => selected && css`
     border-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
   `}
+
   ${({ isLoading }) => isLoading && css`
     pointer-events: none;
   `}
@@ -137,11 +146,13 @@ export const MiddleLine = styled.span`
   left: 50%;
   transform: translateX(-50%);
   background-color: ${props => props.theme.colors.disabled};
+
   ${props => props.theme?.rtl && css`
     left: initial;
     right: 50%;
     transform: translateX(50%);
   `}
+
   @media (min-width: 426px) {
     display: none;
   }

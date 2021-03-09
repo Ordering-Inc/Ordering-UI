@@ -5,9 +5,11 @@ export const HeaderItem = styled.div`
   color: #333;
   display: flex;
   align-items: center;
+
   ${props => props.isHome && css`
     color: #FFF;
   `}
+
   svg {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
@@ -15,6 +17,7 @@ export const HeaderItem = styled.div`
       margin-right: 0px;
     `} 
   }
+
 `
 
 export const PopoverBody = styled.div`

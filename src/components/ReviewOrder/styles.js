@@ -39,6 +39,7 @@ export const Comments = styled.div`
   > input {
   width: 100%;
   }
+
   h2 {
     text-transform: capitalize;
   }

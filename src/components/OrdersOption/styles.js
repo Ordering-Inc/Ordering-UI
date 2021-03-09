@@ -4,11 +4,13 @@ export const OptionTitle = styled.div`
   width: ${({ isBusinessesPage }) => isBusinessesPage ? '80%' : '100%'};
   margin: ${({ isBusinessesPage }) => isBusinessesPage ? '10px 20px 0' : '0 auto'};
   padding: ${({ isBusinessesPage }) => !isBusinessesPage && '0 15px'};
+
   h1{
     text-transform: capitalize;
     font-size: 18px;
     margin: 18px 0;
   }
+
   @media (min-width: 768px){
     padding: 0;
     width: 80%
@@ -33,6 +35,7 @@ export const OrdersContainer = styled.div`
       width: 0px;
       height: 0px;
     }
+
     ${({ isSkeleton }) => !isSkeleton && css`   
       ::-webkit-scrollbar {
       width: 6px;
@@ -72,16 +75,19 @@ export const OrdersContainer = styled.div`
       `
     }
   `}
+
   ${({ activeOrders }) => !activeOrders && css`
     width: 98%;
     display: flex;
     flex-direction: column-reverse;
     margin: 0 auto;
+
     p{
       margin-block-end: 0;
       margin-block-start: 0;
       color: #9A9A9A
     }
+
     @media(min-width: 480px){
       width: 80%;
       padding: 0;
@@ -94,15 +100,18 @@ export const OrdersContainer = styled.div`
 
 export const SkeletonOrder = styled.div`
   display: flex;
+
   ${({ activeOrders }) => activeOrders && css`
     width: auto;
     text-align: center;
     margin-left: 10px;
+
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0;
     `}
   `}
+
   ${({ activeOrders }) => !activeOrders && css`
     width: 100%;
     flex-direction: column;
@@ -134,11 +143,13 @@ export const SkeletonMap = styled.div`
 export const SkeletonContent = styled.div`
   display: flex;
   width: 100%;
+
   ${({ activeOrders }) => activeOrders && css`
     > * {
       margin: 5px;
     }
   `}
+
   ${({ activeOrders }) => !activeOrders && css`
     justify-content: space-between;
   `}
@@ -148,6 +159,7 @@ export const SkeletonText = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
+
   ${props => props.theme?.rtl && css`
     text-align: right;
   `}
@@ -168,6 +180,7 @@ export const SkeletonButton = styled.div`
 
 export const SkeletonInformation = styled.div`
   display: flex;
+
   > *{
     margin: 5px;
   }
@@ -180,17 +193,21 @@ export const SkeletonReorder = styled.div`
   text-align: center;
   align-items: center;
   margin-right: 25px;
+
   ${props => props.theme?.rtl && css`
     margin-left: 25px;
     margin-right: 0;
   `}
+
   span:first-child span{
     width: 40px;
   }
+
   span:last-child{
     width: 75px;
     height: 30px;
   }
+
   @media(min-width: 480px){
     ${props => props.theme?.rtl ? css`
       margin-left: 0;
@@ -245,18 +262,21 @@ export const BusinessInformation = styled.div`
       font-size: 0.8em;
     `}
   }
+
   p[name='order_number']{
     width: 170px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   p[name='view_order'] {
     color: ${props => props.theme.colors.primary};
     cursor: pointer;
     text-decoration: none;
     width: fit-content;
   }
+
   @media (min-width: 480px){
     h2 {
     font-size: 14px;
@@ -272,6 +292,7 @@ export const BusinessInformation = styled.div`
       width: 230px;
     }
   }
+
   @media (min-width: 768px){
     font-size: 0.9em;
     p {

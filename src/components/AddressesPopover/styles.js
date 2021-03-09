@@ -5,9 +5,11 @@ export const HeaderItem = styled.div`
   color: #333;
   display: flex;
   align-items: center;
+
   ${props => props.isHome && css`
     color: #FFF;
   `}
+
   svg {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
@@ -38,6 +40,7 @@ export const PopoverArrow = styled.div`
 
 export const Container = styled.div`
   padding: 20px 10px;
+
   @media (min-width: 769px) {
     padding: 0px;
   }
