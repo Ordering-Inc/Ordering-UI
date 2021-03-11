@@ -63,7 +63,7 @@ export const ProductInfo = styled.div`
   position: relative;
   margin-top: 10px;
   padding: 0 20px 20px 20px;
-
+  box-sizing: border-box;
   h1 {
     font-size: 20px;
     font-weight: 500;
@@ -147,6 +147,7 @@ export const ProductActions = styled.div`
   width: 100%;
   box-shadow: 0px -3px 6px #00000029;
   z-index: 100;
+  box-sizing: border-box;
 
   position: fixed;
   bottom: 0;
