@@ -15,6 +15,13 @@
     "lint": "standard",
     "test": "cypress open"
   },
+  "repository": {
+    "url": "git@github.com:Ordering-Inc/Ordering-UI.git"
+  },
+  "keywords": [
+    "ordering",
+    "ordering-ui"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
