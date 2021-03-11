@@ -253,21 +253,6 @@ export const WrapperSubOption = styled.div`
   }
 `
 
-export const SkuContent = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  h2 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 0px;
-  }
-
-  p {
-    font-size: 14px;
-  }
-`
-
 export const WrapperIngredients = styled.div`
   ${({ isProductSoldout }) => isProductSoldout && css`
     border-radius: 10px;
