@@ -27,6 +27,8 @@ var _AddressForm = require("../AddressForm");
 
 var _ReviewSettingPopover = require("../ReviewSettingPopover");
 
+var _PickupOrderTypeToggleButton = require("../PickupOrderTypeToggleButton");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -69,6 +71,7 @@ var AllBusinessesListingUI = function AllBusinessesListingUI(props) {
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
       getBusinesses = props.getBusinesses,
+      setIsPickupClicked = props.setIsPickupClicked,
       handleBusinessClick = props.handleBusinessClick,
       handleGoToPage = props.handleGoToPage,
       handleChangeCategory = props.handleChangeCategory;
@@ -147,12 +150,12 @@ var AllBusinessesListingUI = function AllBusinessesListingUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     noAutoScroll: true,
     handleChangeBusinessType: handleChangeCategory
-  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSeeAllButton, null, /*#__PURE__*/_react.default.createElement(_styles.WrapButtonGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "secondary",
-    onClick: function onClick() {
-      return handleGoToPage('pickup=true');
+  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSeeAllButton, null, /*#__PURE__*/_react.default.createElement(_styles.WrapButtonGroup, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
+    isMainBusinessListingPage: true,
+    handleCustomClick: function handleCustomClick() {
+      return setIsPickupClicked(true);
     }
-  }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_ReviewSettingPopover.ReviewSettingPopover, {
+  }), /*#__PURE__*/_react.default.createElement(_ReviewSettingPopover.ReviewSettingPopover, {
     open: openPopover.reviewSetting,
     reviewQuality: reviewQuality,
     onClick: function onClick() {

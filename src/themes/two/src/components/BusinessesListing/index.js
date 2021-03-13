@@ -120,6 +120,7 @@ export const BusinessesListing = (props) => {
         </InnerContainer>
         <AllBusinessesListing
           {...props}
+          setIsPickupClicked={setIsPickupClicked}
           handleGoToPage={handleGoToPage}
           handleChangeCategory={handleChangeCategory}
         />

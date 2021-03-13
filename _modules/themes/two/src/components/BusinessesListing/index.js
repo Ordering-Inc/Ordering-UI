@@ -175,6 +175,7 @@ var BusinessesListing = function BusinessesListing(props) {
     twoColumnView: true,
     defaultShowNumber: 4
   }))), /*#__PURE__*/_react.default.createElement(_AllBusinessesListing.AllBusinessesListing, _extends({}, props, {
+    setIsPickupClicked: setIsPickupClicked,
     handleGoToPage: handleGoToPage,
     handleChangeCategory: handleChangeCategory
   }))));
