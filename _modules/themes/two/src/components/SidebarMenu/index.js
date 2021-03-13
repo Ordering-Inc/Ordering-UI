@@ -227,19 +227,7 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/signup'
   }, t('SIGNUP', 'Sign up')))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, {
     isHome: isHome
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapLanguageSelector, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'about'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, {
-    noneGrid: true
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
-    active: window.location.pathname === '/about'
-  }, t('ABOUTUS', 'About Us'))))))));
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapLanguageSelector, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))));
 };
 
 exports.SidebarMenu = SidebarMenu;

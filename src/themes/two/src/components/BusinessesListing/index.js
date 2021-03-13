@@ -82,7 +82,6 @@ export const BusinessesListing = (props) => {
           />
           <WrappperButtonGroup>
             <PickupOrderTypeToggleButton
-              isMainBusinessListingPage
               handleCustomClick={() => setIsPickupClicked(true)}
             />
             <ReviewSettingPopover
