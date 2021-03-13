@@ -79,6 +79,7 @@ export const Text = styled.div`
 
   span {
     color: ${props => props.theme.colors.primary};
+    margin-left: 20px;
     cursor: pointer;
   }
 

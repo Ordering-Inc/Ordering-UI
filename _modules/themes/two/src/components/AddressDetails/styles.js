@@ -40,7 +40,7 @@ var Map = _styledComponents.default.div(_templateObject5 || (_templateObject5 = 
 
 exports.Map = Map;
 
-var Text = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  font-weight: bold;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n\n  h4{\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    width: 100%;\n    margin: 20px 0 10px 0;\n\n    &:not(:first-child) {\n      margin: 0px;\n    }\n  }\n\n  span {\n    color: ", ";\n    cursor: pointer;\n  }\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n"])), function (props) {
+var Text = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  font-weight: bold;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n\n  h4{\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    width: 100%;\n    margin: 20px 0 10px 0;\n\n    &:not(:first-child) {\n      margin: 0px;\n    }\n  }\n\n  span {\n    color: ", ";\n    margin-left: 20px;\n    cursor: pointer;\n  }\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

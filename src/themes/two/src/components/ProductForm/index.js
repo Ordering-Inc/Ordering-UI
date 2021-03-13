@@ -38,6 +38,7 @@ import {
   ProductComment,
   SkeletonBlock,
   WrapperSubOption,
+  SkuContent,
   ProductFormTitle,
   WrapperIngredients,
   SectionDescription,
@@ -145,6 +146,12 @@ const ProductOptionsUI = (props) => {
             <ProductFormTitle>
               <h1>{product?.name}</h1>
               {product?.description && <p>{product?.description}</p>}
+              {product?.sku && (
+                <SkuContent>
+                  <h2>{t('SKU', 'Sku')}</h2>
+                  <p>{product?.sku}</p>
+                </SkuContent>
+              )}
             </ProductFormTitle>
             <WrapperImage>
               <ProductImage id='product_image'>

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { OrderTypeControl, useLanguage } from 'ordering-components'
 
 import { Button } from '../../styles/Buttons'
 
 const PickupOrderTypeToggleButtonUI = (props) => {
   const {
+    isMainBusinessListingPage,
     handleChangeOrderType,
     typeSelected,
     handleCustomClick
@@ -19,6 +20,13 @@ const PickupOrderTypeToggleButtonUI = (props) => {
       handleChangeOrderType(1)
     }
   }
+
+  useEffect(() => {
+    if (!isMainBusinessListingPage) return
+    if (typeSelected !== 1) {
+      handleChangeOrderType(1)
+    }
+  }, [isMainBusinessListingPage])
 
   return (
     typeSelected !== undefined && (

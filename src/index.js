@@ -47,7 +47,6 @@ import { ProductForm } from './components/ProductForm'
 import { ProductIngredient } from './components/ProductIngredient'
 import { ProductItemAccordion } from './components/ProductItemAccordion'
 import { ProductOption } from './components/ProductOption'
-import { PhoneAutocomplete } from './components/PhoneAutocomplete'
 import { ProductOptionSubOption } from './components/ProductOptionSubOption'
 import { ProductShare } from './components/ProductShare'
 import { ResetPassword } from './components/ResetPassword'
@@ -117,7 +116,6 @@ export {
   PaymentOptionCash,
   PaymentOptions,
   PaymentOptionStripe,
-  PhoneAutocomplete,
   ProductForm,
   ProductIngredient,
   ProductItemAccordion,

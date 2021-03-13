@@ -11,7 +11,6 @@ export const CardContainer = styled.div`
   border-radius: 10px;
   cursor: pointer;
   position: relative;
-  box-sizing: border-box;
 
   background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
   border: none;
