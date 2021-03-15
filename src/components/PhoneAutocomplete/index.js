@@ -105,6 +105,7 @@ const PhoneAutocompleteUI = (props) => {
               color='primary'
               name='find'
               onClick={() => handleFindClick()}
+              disabled={!userCustomer?.id}
               >
               {userCustomer?.id ? (
                 `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
