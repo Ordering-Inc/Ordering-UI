@@ -40,6 +40,10 @@ const PhoneAutocompleteUI = (props) => {
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
+  const userName = userCustomer?.lastname
+    ? `${userCustomer?.name} ${userCustomer?.lastname}`
+    : userCustomer?.name
+
   const handleCloseAlert = () => {
     setCustomersPhones({ ...customersPhones, error: null })
     setAlertState({ open: false, content: [] })
@@ -103,10 +107,10 @@ const PhoneAutocompleteUI = (props) => {
               onClick={() => handleFindClick()}
               >
               {userCustomer?.id ? (
-                `${t('CONTINUE_WITH', 'Continue with')} ${userCustomer?.name} ${userCustomer?.lastname}`
-                ) : (
-                  t('FIND', 'Find')
-                  )}
+                `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
+              ) : (
+                t('FIND', 'Find')
+              )}
             </Button>
           </WrappBtn>
         </ContentWrapper>
