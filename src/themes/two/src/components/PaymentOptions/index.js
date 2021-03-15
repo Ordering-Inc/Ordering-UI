@@ -103,18 +103,19 @@ const PaymentOptionsUI = (props) => {
         {paymethodsList.paymethods.length > 0 && (
           paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
             <>
-              {(paymethod.gateway !== 'paypal' || (paymethod.gateway === 'paypal' && paymethod?.credentials?.client_id))}
-              <PayCard
-                isDisabled={isDisabled}
-                key={paymethod.id}
-                className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
-                onClick={() => handlePaymethodClick(paymethod)}
-              >
-                {getPayIcon(paymethod.id)}
-                <p>
-                  {paymethod.name}
-                </p>
-              </PayCard>
+              {(paymethod.gateway !== 'paypal' || (paymethod.gateway === 'paypal' && paymethod?.credentials?.client_id)) && (
+                <PayCard
+                  isDisabled={isDisabled}
+                  key={paymethod.id}
+                  className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
+                  onClick={() => handlePaymethodClick(paymethod)}
+                >
+                  {getPayIcon(paymethod.id)}
+                  <p>
+                    {paymethod.name}
+                  </p>
+                </PayCard>
+              )}
             </>
           ))
         )}

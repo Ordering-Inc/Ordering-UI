@@ -169,7 +169,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   }).map(function (paymethod) {
     var _paymethod$credential;
 
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paymethod.gateway !== 'paypal' || paymethod.gateway === 'paypal' && (paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$credential = paymethod.credentials) === null || _paymethod$credential === void 0 ? void 0 : _paymethod$credential.client_id), /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (paymethod.gateway !== 'paypal' || paymethod.gateway === 'paypal' && (paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$credential = paymethod.credentials) === null || _paymethod$credential === void 0 ? void 0 : _paymethod$credential.client_id)) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled,
       key: paymethod.id,
       className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id ? 'active' : ''),
