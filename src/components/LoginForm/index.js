@@ -197,22 +197,24 @@ const LoginFormUI = (props) => {
             {elementLinkToSignup}
           </RedirectLink>
         )}
-        {Object.keys(configs).length > 0 ? (
-          <SocialButtons isPopup={isPopup}>
-            {(configs?.facebook_login?.value === 'true' ||
-              configs?.facebook_login?.value === '1') &&
-              configs?.facebook_id?.value &&
-            (
-              <FacebookLoginButton
-                appId={configs?.facebook_id?.value}
-                handleSuccessFacebookLogin={handleSuccessFacebook}
-              />
-            )}
-          </SocialButtons>
-        ) : (
-          <SkeletonSocialWrapper>
-            <Skeleton height={43} />
-          </SkeletonSocialWrapper>
+        {!props.isDisableButtons && (
+          Object.keys(configs).length > 0 ? (
+            <SocialButtons isPopup={isPopup}>
+              {(configs?.facebook_login?.value === 'true' ||
+                configs?.facebook_login?.value === '1') &&
+                configs?.facebook_id?.value &&
+              (
+                <FacebookLoginButton
+                  appId={configs?.facebook_id?.value}
+                  handleSuccessFacebookLogin={handleSuccessFacebook}
+                />
+              )}
+            </SocialButtons>
+          ) : (
+            <SkeletonSocialWrapper>
+              <Skeleton height={43} />
+            </SkeletonSocialWrapper>
+          )
         )}
       </FormSide>
       <Alert

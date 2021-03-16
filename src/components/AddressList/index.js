@@ -171,11 +171,13 @@ const AddressListUI = (props) => {
             onClose={() => setAddressOpen(false)}
           >
             <AddressForm
+              userId={userId}
               addressesList={addressList?.addresses}
               useValidationFileds
               address={curAddress}
               onCancel={() => setAddressOpen(false)}
               onSaveAddress={handleSaveAddress}
+              userCustomerSetup={userCustomerSetup}
             />
           </Modal>
         )
