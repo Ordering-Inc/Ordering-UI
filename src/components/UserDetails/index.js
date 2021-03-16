@@ -25,7 +25,7 @@ const UserDetailsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const userData = props.userData || formState.result?.result
+  const userData = props.userData || formState.result?.result || user
 
   useEffect(() => {
     if (isUserDetailsEdit) {
@@ -64,12 +64,13 @@ const UserDetailsUI = (props) => {
           {!isEdit ? (
             <UserData>
               <p>
-                <strong>{t('NAME', 'Name')}:</strong> {userData?.name || user?.name} {userData?.middle_name || user?.middle_name} {userData?.lastname || user?.lastname} {userData?.second_lastname || user?.second_lastname}
+                <strong>{t('NAME', 'Name')}:</strong> {userData?.name} {userData?.middle_name} {userData?.lastname} {userData?.second_lastname}
               </p>
-              <p><strong>{t('EMAIL', 'Email')}:</strong> {userData?.email || user?.email}</p>
+              <p><strong>{t('EMAIL', 'Email')}:</strong> {userData?.email}</p>
               {(userData?.cellphone || user?.cellphone) && (
                 <p>
-                  <strong>{t('CELLPHONE', 'Cellphone')}:</strong> {(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}
+                  <strong>{t('CELLPHONE', 'Cellphone')}:</strong>
+                  {(userData?.country_phone_code) && `+${(userData?.country_phone_code)} `}{(userData?.cellphone)}
                 </p>
               )}
             </UserData>

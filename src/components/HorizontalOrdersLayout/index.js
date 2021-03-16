@@ -19,7 +19,6 @@ import { getGoogleMapImage } from '../../utils'
 
 export const HorizontalOrdersLayout = (props) => {
   const {
-    orders,
     pagination,
     loadMoreOrders,
     getOrderStatus,
@@ -28,6 +27,8 @@ export const HorizontalOrdersLayout = (props) => {
     customArray,
     onRedirectPage
   } = props
+
+  const orders = customArray || props.orders
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -115,7 +116,11 @@ export const HorizontalOrdersLayout = (props) => {
           </Card>
         ))}
         {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
-          <Card flex nobg>
+          <Card
+            flex
+            nobg
+            isBusinessesPage={isBusinessesPage}
+          >
             <Button
               className='load-orders'
               bgtransparent
