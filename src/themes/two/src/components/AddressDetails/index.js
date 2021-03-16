@@ -55,7 +55,6 @@ const AddressDetailsUI = (props) => {
             <h4>{addressToShow || orderState?.options?.address?.address}</h4>
             {orderState?.options?.type === 1 && !isCartPending &&
               <h4>
-                {t('DROP_OFF:LEAVE_IT_AT_MY_DOOR', 'Drop-off: Leave it at my door')}
                 <span onClick={() => setOpenEditAddressModal(true)}>
                   {t('ADD/EDIT', 'Add/Edit')}
                 </span>

@@ -8,6 +8,7 @@ import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { ReviewSettingPopover } from '../ReviewSettingPopover'
+import { PickupOrderTypeToggleButton } from '../PickupOrderTypeToggleButton'
 import {
   AllBuinessContainer,
   LeftContent,
@@ -29,6 +30,7 @@ const AllBusinessesListingUI = (props) => {
     businessesList,
     paginationProps,
     getBusinesses,
+    setIsPickupClicked,
     handleBusinessClick,
     handleGoToPage,
     handleChangeCategory
@@ -104,12 +106,10 @@ const AllBusinessesListingUI = (props) => {
               <>
                 <WrapperSeeAllButton>
                   <WrapButtonGroup>
-                    <Button
-                      color='secondary'
-                      onClick={() => handleGoToPage('pickup=true')}
-                    >
-                      {t('PICKUP', 'Pickup')}
-                    </Button>
+                    <PickupOrderTypeToggleButton
+                      isMainBusinessListingPage
+                      handleCustomClick={() => setIsPickupClicked(true)}
+                    />
                     <ReviewSettingPopover
                       open={openPopover.reviewSetting}
                       reviewQuality={reviewQuality}
