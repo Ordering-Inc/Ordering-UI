@@ -295,23 +295,6 @@ export const SidebarMenu = (props) => {
             <WrapLanguageSelector>
               <LanguageSelector />
             </WrapLanguageSelector>
-            <MenuLink
-              isHome={isHome}
-              onClick={() => handleGoToPage({ page: 'about' })}
-            >
-              <WrappContent noneGrid>
-                <MenuLinkText>
-                  <TextInfo
-                    isHome={isHome}
-                    active={
-                      window.location.pathname === '/about'
-                    }
-                  >
-                    {t('ABOUTUS', 'About Us')}
-                  </TextInfo>
-                </MenuLinkText>
-              </WrappContent>
-            </MenuLink>
           </SidebarContent>
         </Container>
       )}
