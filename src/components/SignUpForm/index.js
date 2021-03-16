@@ -152,15 +152,13 @@ const SignUpFormUI = (props) => {
 
   return (
     <>
-      {
-        beforeElements.map((BeforeElement, i) => (
-          <React.Fragment key={i}>
-            {BeforeElement}
-          </React.Fragment>
-        ))
+      {beforeElements.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
       }
-      {
-        beforeComponents.map((BeforeComponent, i) => <BeforeComponent key={i} {...props} />)
+      {beforeComponents.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
       }
       <SignUpContainer isPopup={isPopup}>
         <HeroSide>
@@ -291,15 +289,13 @@ const SignUpFormUI = (props) => {
           closeOnBackdrop={false}
         />
       </SignUpContainer>
-      {
-        afterComponents.map((AfterComponent, i) => <AfterComponent key={i} {...props} />)
+      {afterComponents.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
       }
-      {
-        afterElements.map((AfterElement, i) => (
-          <React.Fragment key={i}>
-            {AfterElement}
-          </React.Fragment>
-        ))
+      {afterElements.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
       }
     </>
   )
