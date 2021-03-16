@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressesPopover = function AddressesPopover(props) {
-  var _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options$a3;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options$a3, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       auth = props.auth,
@@ -149,7 +149,15 @@ var AddressesPopover = function AddressesPopover(props) {
     style: {
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+  }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
     onClick: props.onClick,
     isHome: props.isHome
@@ -178,7 +186,15 @@ var AddressesPopover = function AddressesPopover(props) {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow
-  })));
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.AddressesPopover = AddressesPopover;

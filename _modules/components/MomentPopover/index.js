@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MomentPopover = function MomentPopover(props) {
-  var _configs$max_days_pre, _configs$max_days_pre2, _orderStatus$options, _orderStatus$options2, _configs$format_time;
+  var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _orderStatus$options, _orderStatus$options2, _configs$format_time, _props$afterComponent, _props$afterElements;
 
   var open = props.open;
 
@@ -135,7 +135,15 @@ var MomentPopover = function MomentPopover(props) {
     style: {
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+  }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
     onClick: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) === -1 || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) === 0 ? null : props.onClick,
     isHome: props.isHome
@@ -148,7 +156,15 @@ var MomentPopover = function MomentPopover(props) {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow
-  })));
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.MomentPopover = MomentPopover;

@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _theme$images, _theme$images$logos, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -77,11 +77,7 @@ var LoginFormUI = function LoginFormUI(props) {
       elementLinkToForgotPassword = props.elementLinkToForgotPassword,
       formState = props.formState,
       loginTab = props.loginTab,
-      isPopup = props.isPopup,
-      afterComponents = props.afterComponents,
-      afterElements = props.afterElements,
-      beforeComponents = props.beforeComponents,
-      beforeElements = props.beforeElements;
+      isPopup = props.isPopup;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -177,11 +173,11 @@ var LoginFormUI = function LoginFormUI(props) {
     });
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, beforeElements.map(function (BeforeElement, i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, BeforeElement);
-  }), beforeComponents.map(function (BeforeComponent, i) {
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
@@ -282,11 +278,11 @@ var LoginFormUI = function LoginFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  })), afterComponents.map(function (AfterComponent, i) {
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
-  }), afterElements.map(function (AfterElement, i) {
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, AfterElement);

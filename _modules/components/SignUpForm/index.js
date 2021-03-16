@@ -68,7 +68,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _theme$images, _theme$images$logos, _validationFields$fie8, _validationFields$fie9, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2;
+  var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _validationFields$fie8, _validationFields$fie9, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -81,11 +81,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       handleSuccessSignup = props.handleSuccessSignup,
       isPopup = props.isPopup,
       externalPhoneNumber = props.externalPhoneNumber,
-      saveCustomerUser = props.saveCustomerUser,
-      afterComponents = props.afterComponents,
-      afterElements = props.afterElements,
-      beforeComponents = props.beforeComponents,
-      beforeElements = props.beforeElements;
+      saveCustomerUser = props.saveCustomerUser;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -228,11 +224,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
   };
 
   var showInputPhoneNumber = (_validationFields$fie4 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.checkout) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.enabled) !== null && _validationFields$fie4 !== void 0 ? _validationFields$fie4 : false;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, beforeElements.map(function (BeforeElement, i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, BeforeElement);
-  }), beforeComponents.map(function (BeforeComponent, i) {
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
@@ -327,11 +323,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  })), afterComponents.map(function (AfterComponent, i) {
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
-  }), afterElements.map(function (AfterElement, i) {
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, AfterElement);
