@@ -53,6 +53,14 @@ const BusinessControllerUI = (props) => {
 
   return (
     <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
       <ContainerCard isSkeleton={isSkeleton}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleClick(business)}>
           <BusinessHero>
@@ -143,6 +151,14 @@ const BusinessControllerUI = (props) => {
           </BusinessContent>
         </WrapperBusinessCard>
       </ContainerCard>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
     </>
   )
 }

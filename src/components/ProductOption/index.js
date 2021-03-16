@@ -26,13 +26,31 @@ const ProductOptionUI = (props) => {
   }
 
   return (
-    <Container>
-      <WrapHeader>
-        <Title>{option.name}</Title>
-        <Flag>{maxMin}</Flag>
-      </WrapHeader>
-      {children}
-    </Container>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <Container>
+        <WrapHeader>
+          <Title>{option.name}</Title>
+          <Flag>{maxMin}</Flag>
+        </WrapHeader>
+        {children}
+      </Container>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

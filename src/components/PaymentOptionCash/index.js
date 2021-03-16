@@ -37,21 +37,39 @@ export const PaymentOptionCash = (props) => {
   }, [value, orderTotal])
 
   return (
-    <PaymentCashContainer>
-      <FormCash>
-        <WrapperInput>
-          <label>{t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')}</label>
-          <Input
-            name='cash'
-            type='text'
-            placeholder='0'
-            onChange={handleChangeCash}
-          />
-        </WrapperInput>
-        {value && parseFloat(value) < orderTotal && (
-          <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: {parsePrice(orderTotal)}</ErrorText>
-        )}
-      </FormCash>
-    </PaymentCashContainer>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <PaymentCashContainer>
+        <FormCash>
+          <WrapperInput>
+            <label>{t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')}</label>
+            <Input
+              name='cash'
+              type='text'
+              placeholder='0'
+              onChange={handleChangeCash}
+            />
+          </WrapperInput>
+          {value && parseFloat(value) < orderTotal && (
+            <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: {parsePrice(orderTotal)}</ErrorText>
+          )}
+        </FormCash>
+      </PaymentCashContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
