@@ -137,6 +137,7 @@ var BusinessesListing = function BusinessesListing(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     handleChangeBusinessType: handleChangeCategory
   }), /*#__PURE__*/_react.default.createElement(_styles.WrappperButtonGroup, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
+    isMainBusinessListingPage: true,
     handleCustomClick: function handleCustomClick() {
       return setIsPickupClicked(true);
     }
@@ -174,6 +175,7 @@ var BusinessesListing = function BusinessesListing(props) {
     twoColumnView: true,
     defaultShowNumber: 4
   }))), /*#__PURE__*/_react.default.createElement(_AllBusinessesListing.AllBusinessesListing, _extends({}, props, {
+    setIsPickupClicked: setIsPickupClicked,
     handleGoToPage: handleGoToPage,
     handleChangeCategory: handleChangeCategory
   }))));

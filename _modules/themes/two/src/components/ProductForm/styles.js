@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SectionDescription = exports.WrapperIngredients = exports.SkuContent = exports.WrapperSubOption = exports.SkeletonBlock = exports.ProductActions = exports.ProductComment = exports.SectionTitle = exports.ProductEdition = exports.ProductFormTitle = exports.ProductInfo = exports.ProductImage = exports.WrapperImage = exports.ProductHeader = exports.AuthContainer = exports.ProductContainer = void 0;
+exports.SectionDescription = exports.WrapperIngredients = exports.WrapperSubOption = exports.SkeletonBlock = exports.ProductActions = exports.ProductComment = exports.SectionTitle = exports.ProductEdition = exports.ProductFormTitle = exports.ProductInfo = exports.ProductImage = exports.WrapperImage = exports.ProductHeader = exports.AuthContainer = exports.ProductContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -37,7 +37,7 @@ var ProductImage = _styledComponents.default.div(_templateObject5 || (_templateO
 
 exports.ProductImage = ProductImage;
 
-var ProductInfo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  position: relative;\n  margin-top: 10px;\n  padding: 0 20px 20px 20px;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 500;\n    text-align: center;\n    color: #263238;\n    margin-top: 0px;\n  }\n\n  p {\n    font-size: 14px;\n    font-weight: 200;\n    margin-top: 0px;\n    line-height: 1.5em;\n    width: 100%;\n    text-align: left;\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    h1 {\n      font-size: 24px;\n    }\n    p {\n      font-size: 16px;\n    }\n  }\n\n  @media (min-width: 1201px) {\n    margin-top: 0px;\n  }\n"])), function (props) {
+var ProductInfo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  position: relative;\n  margin-top: 10px;\n  padding: 0 20px 20px 20px;\n  box-sizing: border-box;\n  h1 {\n    font-size: 20px;\n    font-weight: 500;\n    text-align: center;\n    color: #263238;\n    margin-top: 0px;\n  }\n\n  p {\n    font-size: 14px;\n    font-weight: 200;\n    margin-top: 0px;\n    line-height: 1.5em;\n    width: 100%;\n    text-align: left;\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    h1 {\n      font-size: 24px;\n    }\n    p {\n      font-size: 16px;\n    }\n  }\n\n  @media (min-width: 1201px) {\n    margin-top: 0px;\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      text-align: right;\n    "])));
@@ -61,7 +61,7 @@ var ProductComment = _styledComponents.default.div(_templateObject11 || (_templa
 
 exports.ProductComment = ProductComment;
 
-var ProductActions = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  row-gap: 10px;\n  align-items: center;\n  padding: 10px;\n  width: 100%;\n  box-shadow: 0px -3px 6px #00000029;\n  z-index: 100;\n\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  button {\n    display: flex;\n    justify-content: center;\n    column-gap: 5px;\n  }\n\n  div.incdec-control {\n    width: 50%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    span {\n      border: 1px solid ", ";\n      border-radius: 10px;\n      min-width: 80px;\n      text-align: center;\n      padding: 10px 0;\n    }\n\n    svg {\n      width: 35px;\n      height: 35px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    position: absolute;\n    right: 20px;\n    padding: 10px 15px;\n\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n      position: relative;\n      right: 0px;\n    }\n  }\n\n  @media (min-width: 766px) {\n    position: sticky;\n    bottom: 0px;\n    justify-content: center;\n    flex-direction: row;\n    button {\n      min-width: 190px;\n    }\n  }\n\n\n  @media (min-width: 1201px) {\n    div.incdec-control {\n      width: 30%;\n    }\n  }\n\n  @media (max-width: 1200px) {\n    justify-content: space-between;\n    button.add {\n      position: relative;\n      right: 0px;\n    }\n  }\n"])), function (props) {
+var ProductActions = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  row-gap: 10px;\n  align-items: center;\n  padding: 10px;\n  width: 100%;\n  box-shadow: 0px -3px 6px #00000029;\n  z-index: 100;\n  box-sizing: border-box;\n\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  button {\n    display: flex;\n    justify-content: center;\n    column-gap: 5px;\n  }\n\n  div.incdec-control {\n    width: 50%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    span {\n      border: 1px solid ", ";\n      border-radius: 10px;\n      min-width: 80px;\n      text-align: center;\n      padding: 10px 0;\n    }\n\n    svg {\n      width: 35px;\n      height: 35px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    position: absolute;\n    right: 20px;\n    padding: 10px 15px;\n\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n      position: relative;\n      right: 0px;\n    }\n  }\n\n  @media (min-width: 766px) {\n    position: sticky;\n    bottom: 0px;\n    justify-content: center;\n    flex-direction: row;\n    button {\n      min-width: 190px;\n    }\n  }\n\n\n  @media (min-width: 1201px) {\n    div.incdec-control {\n      width: 30%;\n    }\n  }\n\n  @media (max-width: 1200px) {\n    justify-content: space-between;\n    button.add {\n      position: relative;\n      right: 0px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.secondary;
 });
 
@@ -78,17 +78,13 @@ var WrapperSubOption = _styledComponents.default.div(_templateObject14 || (_temp
 
 exports.WrapperSubOption = WrapperSubOption;
 
-var SkuContent = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  h2 {\n    font-size: 16px;\n    font-weight: 500;\n    margin-bottom: 0px;\n  }\n\n  p {\n    font-size: 14px;\n  }\n"])));
-
-exports.SkuContent = SkuContent;
-
-var WrapperIngredients = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref2) {
+var WrapperIngredients = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref2) {
   var isProductSoldout = _ref2.isProductSoldout;
-  return isProductSoldout && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    pointer-events: none;\n    background: hsl(0, 0%, 72%);\n  "])));
+  return isProductSoldout && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    pointer-events: none;\n    background: hsl(0, 0%, 72%);\n  "])));
 });
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var SectionDescription = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  padding-bottom: 10px;\n"])));
+var SectionDescription = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  padding-bottom: 10px;\n"])));
 
 exports.SectionDescription = SectionDescription;
