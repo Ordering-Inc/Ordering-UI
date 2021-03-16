@@ -329,6 +329,14 @@ const AddressFormUI = (props) => {
 
   return (
     <div className='address-form'>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
       {(configState.loading || addressState.loading) && (
         <WrapperSkeleton>
           <Skeleton height={50} count={5} style={{ marginBottom: '10px' }} />
@@ -478,6 +486,14 @@ const AddressFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
     </div>
   )
 }

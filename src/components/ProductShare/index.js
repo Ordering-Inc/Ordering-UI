@@ -40,6 +40,14 @@ const ProductShareUI = (props) => {
 
   return (
     <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
       <IconShare ref={iconElement} name='icon-share'>
         {withBtn ? (
           <Button
@@ -67,6 +75,14 @@ const ProductShareUI = (props) => {
           <a className='a2a_dd' href='https://www.addtoany.com/share' />
         </ShareButtons>
       </IconShare>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
     </>
   )
 }

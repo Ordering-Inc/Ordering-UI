@@ -50,58 +50,76 @@ export const HomeHero = (props) => {
   }, [])
 
   return (
-    <HeroContainer bgimage={theme.images?.general?.homeHero}>
-      <ContentWrapper>
-        <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-        <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
-        <WrapInput onClick={handleAddressInput} withIcon>
-          <HiOutlineLocationMarker />
-          <InputSpan
-            name='address-selection'
-            aria-label='address selection'
-            type='text'
-            placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
-          />
-          <div>
-            {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
-          </div>
-        </WrapInput>
-        <Button
-          color='primary'
-          name='find-business'
-          onClick={handleFindBusinesses}
-        >
-          {t('FIND_BUSINESSES', 'Find businesses')}
-        </Button>
-      </ContentWrapper>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <HeroContainer bgimage={theme.images?.general?.homeHero}>
+        <ContentWrapper>
+          <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
+          <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
+          <WrapInput onClick={handleAddressInput} withIcon>
+            <HiOutlineLocationMarker />
+            <InputSpan
+              name='address-selection'
+              aria-label='address selection'
+              type='text'
+              placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
+            />
+            <div>
+              {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
+            </div>
+          </WrapInput>
+          <Button
+            color='primary'
+            name='find-business'
+            onClick={handleFindBusinesses}
+          >
+            {t('FIND_BUSINESSES', 'Find businesses')}
+          </Button>
+        </ContentWrapper>
 
-      <Modal
-        title={t('ADDRESS', 'Address')}
-        open={modals.formOpen}
-        onClose={() => setModals({ ...modals, formOpen: false })}
-      >
-        <AddressForm
-          useValidationFileds
-          address={orderState?.options?.address || {}}
+        <Modal
+          title={t('ADDRESS', 'Address')}
+          open={modals.formOpen}
           onClose={() => setModals({ ...modals, formOpen: false })}
-          onSaveAddress={() => setModals({ ...modals, formOpen: false })}
-          onCancel={() => setModals({ ...modals, formOpen: false })}
-        />
-      </Modal>
-      <Modal
-        title={t('ADDRESSES', 'Addresses')}
-        open={modals.listOpen}
-        width='70%'
-        onClose={() => setModals({ ...modals, listOpen: false })}
-      >
-        <AddressList
-          isModal
-          changeOrderAddressWithDefault
-          userId={isNaN(userCustomer) ? null : userCustomer}
-          onCancel={() => setModals({ ...modals, listOpen: false })}
-          onAccept={() => handleFindBusinesses()}
-        />
-      </Modal>
-    </HeroContainer>
+        >
+          <AddressForm
+            useValidationFileds
+            address={orderState?.options?.address || {}}
+            onClose={() => setModals({ ...modals, formOpen: false })}
+            onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+            onCancel={() => setModals({ ...modals, formOpen: false })}
+          />
+        </Modal>
+        <Modal
+          title={t('ADDRESSES', 'Addresses')}
+          open={modals.listOpen}
+          width='70%'
+          onClose={() => setModals({ ...modals, listOpen: false })}
+        >
+          <AddressList
+            isModal
+            changeOrderAddressWithDefault
+            userId={isNaN(userCustomer) ? null : userCustomer}
+            onCancel={() => setModals({ ...modals, listOpen: false })}
+            onAccept={() => handleFindBusinesses()}
+          />
+        </Modal>
+      </HeroContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }

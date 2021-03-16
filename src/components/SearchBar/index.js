@@ -9,7 +9,14 @@ import {
   DeleteContent
 } from './styles'
 
-export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isCustomLayout }) => {
+export const SearchBar = (props) => {
+  const {
+    onSearch,
+    search,
+    placeholder,
+    lazyLoad,
+    isCustomLayout
+  } = props
   const [theme] = useTheme()
   const [, t] = useLanguage()
   let timeout = null
@@ -46,24 +53,42 @@ export const SearchBar = ({ onSearch, search, placeholder, lazyLoad, isCustomLay
   }, [search])
 
   return (
-    <BusinessSearch
-      className={!isCustomLayout && 'search-bar'}
-      isCustomLayout={isCustomLayout}
-      hasValue={el.current?.value}
-    >
-      <Input
-        ref={el}
-        name='search'
-        aria-label='search'
-        placeholder={placeholder}
-        autoComplete='off'
-        maxLength='500'
-      />
-      <DeleteContent>
-        {el.current?.value 
-          ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span> 
-          : <img src={theme?.images?.general?.searchIcon} />}
-      </DeleteContent>
-    </BusinessSearch>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <BusinessSearch
+        className={!isCustomLayout && 'search-bar'}
+        isCustomLayout={isCustomLayout}
+        hasValue={el.current?.value}
+      >
+        <Input
+          ref={el}
+          name='search'
+          aria-label='search'
+          placeholder={placeholder}
+          autoComplete='off'
+          maxLength='500'
+        />
+        <DeleteContent>
+          {el.current?.value
+            ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span>
+            : <img src={theme?.images?.general?.searchIcon} />}
+        </DeleteContent>
+      </BusinessSearch>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }

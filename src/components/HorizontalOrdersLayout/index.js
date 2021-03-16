@@ -45,6 +45,14 @@ export const HorizontalOrdersLayout = (props) => {
   const Orders = () => {
     return (
       <>
+        {props.beforeElements?.map((BeforeElement, i) => (
+          <React.Fragment key={i}>
+            {BeforeElement}
+          </React.Fragment>))
+        }
+        {props.beforeComponents?.map((BeforeComponent, i) => (
+          <BeforeComponent key={i} {...props} />))
+        }
         {orders.length > 0 && orders.map(order => (
           <Card
             key={order.id || order.uuid}
@@ -132,6 +140,14 @@ export const HorizontalOrdersLayout = (props) => {
             </Button>
           </Card>
         )}
+        {props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
+        }
+        {props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
+        }
       </>
     )
   }

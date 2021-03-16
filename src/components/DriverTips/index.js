@@ -14,17 +14,35 @@ const DriverTipsUI = (props) => {
   } = props
 
   return (
-    <DriverTipContainer id='driver-tip-container'>
-      {driverTipsOptions?.length > 0 && driverTipsOptions.map((option, i) => (
-        <TipCard
-          key={i}
-          className={`${option === optionSelected ? 'active' : ''}`}
-          onClick={() => handlerChangeOption(option)}
-        >
-          {option}%
-        </TipCard>
-      ))}
-    </DriverTipContainer>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <DriverTipContainer id='driver-tip-container'>
+        {driverTipsOptions?.length > 0 && driverTipsOptions.map((option, i) => (
+          <TipCard
+            key={i}
+            className={`${option === optionSelected ? 'active' : ''}`}
+            onClick={() => handlerChangeOption(option)}
+          >
+            {option}%
+          </TipCard>
+        ))}
+      </DriverTipContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 
