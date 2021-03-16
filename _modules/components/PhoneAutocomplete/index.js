@@ -85,6 +85,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       setAlertState = _useState2[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+  var userName = userCustomer !== null && userCustomer !== void 0 && userCustomer.lastname ? "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname) : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name;
 
   var handleCloseAlert = function handleCloseAlert() {
     setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
@@ -151,8 +152,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     name: "find",
     onClick: function onClick() {
       return handleFindClick();
-    }
-  }, userCustomer !== null && userCustomer !== void 0 && userCustomer.id ? "".concat(t('CONTINUE_WITH', 'Continue with'), " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname) : t('FIND', 'Find'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    },
+    disabled: !(userCustomer !== null && userCustomer !== void 0 && userCustomer.id)
+  }, userCustomer !== null && userCustomer !== void 0 && userCustomer.id ? "".concat(t('CONTINUE_WITH', 'Continue with'), " ").concat(userName) : t('FIND', 'Find'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.signup,
     width: "80%",
     onClose: function onClose() {

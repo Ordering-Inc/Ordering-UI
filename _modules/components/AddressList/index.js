@@ -229,13 +229,15 @@ var AddressListUI = function AddressListUI(props) {
       return setAddressOpen(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
       return setAddressOpen(false);
     },
-    onSaveAddress: handleSaveAddress
+    onSaveAddress: handleSaveAddress,
+    userCustomerSetup: userCustomerSetup
   })), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, uniqueAddressesList.map(function (address) {

@@ -36,14 +36,14 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
-  var orders = props.orders,
-      pagination = props.pagination,
+  var pagination = props.pagination,
       loadMoreOrders = props.loadMoreOrders,
       getOrderStatus = props.getOrderStatus,
       isBusinessesPage = props.isBusinessesPage,
       handleReorder = props.handleReorder,
       customArray = props.customArray,
       onRedirectPage = props.onRedirectPage;
+  var orders = customArray || props.orders;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -133,7 +133,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       }, t('OPEN_ORDER', 'Open order'))));
     }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {
       flex: true,
-      nobg: true
+      nobg: true,
+      isBusinessesPage: isBusinessesPage
     }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       className: "load-orders",
       bgtransparent: true,
