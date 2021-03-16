@@ -19,31 +19,49 @@ export const HeaderOption = (props) => {
   const [{ parseDate }] = useUtils()
   const [, t] = useLanguage()
   return (
-    <Container
-      variant={variant}
-      onClick={() => props.onClick(variant)}
-      isHome={props.isHome}
-    >
-      {variant === 'cart' && (
-        <span>
-          <IosBasket id='icon' />
-          {totalCarts > 0 && <p>{totalCarts}</p>}
-        </span>
-      )}
-      {variant === 'address' && (
-        <>
-          <FaMapMarkerAlt id='icon' />
-          {addressState || t('SELECT_AN_ADDRESS', 'Select an address')}
-        </>
-      )}
-      {variant === 'moment' && (
-        <>
-          <FaRegClock id='icon' />
-          {momentState
-            ? parseDate(momentState, { outputFormat: 'MM/DD hh:mma' })
-            : t('ASAP_ABBREVIATION', 'ASAP')}
-        </>
-      )}
-    </Container>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <Container
+        variant={variant}
+        onClick={() => props.onClick(variant)}
+        isHome={props.isHome}
+      >
+        {variant === 'cart' && (
+          <span>
+            <IosBasket id='icon' />
+            {totalCarts > 0 && <p>{totalCarts}</p>}
+          </span>
+        )}
+        {variant === 'address' && (
+          <>
+            <FaMapMarkerAlt id='icon' />
+            {addressState || t('SELECT_AN_ADDRESS', 'Select an address')}
+          </>
+        )}
+        {variant === 'moment' && (
+          <>
+            <FaRegClock id='icon' />
+            {momentState
+              ? parseDate(momentState, { outputFormat: 'MM/DD hh:mma' })
+              : t('ASAP_ABBREVIATION', 'ASAP')}
+          </>
+        )}
+      </Container>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }

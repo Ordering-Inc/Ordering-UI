@@ -42,11 +42,7 @@ const LoginFormUI = (props) => {
     elementLinkToForgotPassword,
     formState,
     loginTab,
-    isPopup,
-    afterComponents,
-    afterElements,
-    beforeComponents,
-    beforeElements
+    isPopup
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -98,12 +94,12 @@ const LoginFormUI = (props) => {
 
   return (
     <>
-      {beforeElements.map((BeforeElement, i) => (
+      {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
         </React.Fragment>))
       }
-      {beforeComponents.map((BeforeComponent, i) => (
+      {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))
       }
       <LoginContainer isPopup={isPopup}>
@@ -240,10 +236,10 @@ const LoginFormUI = (props) => {
           closeOnBackdrop={false}
         />
       </LoginContainer>
-      {afterComponents.map((AfterComponent, i) => (
+      {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))
       }
-      {afterElements.map((AfterElement, i) => (
+      {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
         </React.Fragment>))

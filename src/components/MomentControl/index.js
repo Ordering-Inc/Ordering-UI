@@ -25,6 +25,14 @@ const MomentControlUI = (props) => {
 
   return (
     <div id='moment_control'>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
       <Title>{t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')}</Title>
       <Days name='days'>
         {
@@ -77,6 +85,14 @@ const MomentControlUI = (props) => {
           ))
         }
       </Hours>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
     </div>
   )
 }

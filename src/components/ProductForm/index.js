@@ -129,239 +129,257 @@ const ProductOptionsUI = (props) => {
   }
 
   return (
-    <ProductContainer className='product-container'>
-      {loading && !error && (
-        <SkeletonBlock width={90}>
-          <Skeleton variant='rect' height={50} />
-          <Skeleton variant='rect' height={50} />
-          <Skeleton variant='rect' height={200} />
-        </SkeletonBlock>
-      )}
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <ProductContainer className='product-container'>
+        {loading && !error && (
+          <SkeletonBlock width={90}>
+            <Skeleton variant='rect' height={50} />
+            <Skeleton variant='rect' height={50} />
+            <Skeleton variant='rect' height={200} />
+          </SkeletonBlock>
+        )}
 
-      {product && !loading && !error && (
-        <ProductShare
-          slug={businessSlug}
-          categoryId={product?.category_id}
-          productId={product?.id}
-        />
-      )}
+        {product && !loading && !error && (
+          <ProductShare
+            slug={businessSlug}
+            categoryId={product?.category_id}
+            productId={product?.id}
+          />
+        )}
 
-      {!loading && !error && product && (
-        <>
-          <WrapperImage>
-            <ProductImage id='product_image'>
-              <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
-            </ProductImage>
-          </WrapperImage>
-          <ProductInfo>
-            <ProductFormTitle>
-              <h1>{product?.name}</h1>
-              {product?.description && <p>{product?.description}</p>}
-              {product?.sku && (
-                <SkuContent>
-                  <h2>{t('SKU', 'Sku')}</h2>
-                  <p>{product?.sku}</p>
-                </SkuContent>
-              )}
-            </ProductFormTitle>
-            <ProductEdition>
-              {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
-              <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
-                {product?.ingredients.map(ingredient => (
-                  <ProductIngredient
-                    key={ingredient.id}
-                    ingredient={ingredient}
-                    state={productCart.ingredients[`id:${ingredient.id}`]}
-                    onChange={handleChangeIngredientState}
+        {!loading && !error && product && (
+          <>
+            <WrapperImage>
+              <ProductImage id='product_image'>
+                <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
+              </ProductImage>
+            </WrapperImage>
+            <ProductInfo>
+              <ProductFormTitle>
+                <h1>{product?.name}</h1>
+                {product?.description && <p>{product?.description}</p>}
+                {product?.sku && (
+                  <SkuContent>
+                    <h2>{t('SKU', 'Sku')}</h2>
+                    <p>{product?.sku}</p>
+                  </SkuContent>
+                )}
+              </ProductFormTitle>
+              <ProductEdition>
+                {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
+                <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                  {product?.ingredients.map(ingredient => (
+                    <ProductIngredient
+                      key={ingredient.id}
+                      ingredient={ingredient}
+                      state={productCart.ingredients[`id:${ingredient.id}`]}
+                      onChange={handleChangeIngredientState}
+                    />
+                  ))}
+                </WrapperIngredients>
+                {
+                  product?.extras.map(extra => extra.options.map(option => {
+                    const currentState = productCart.options[`id:${option.id}`] || {}
+                    return (
+                      <div key={option.id}>
+                        {
+                          showOption(option) && (
+                            <ProductOption
+                              option={option}
+                              currentState={currentState}
+                              error={errors[`id:${option.id}`]}
+                            >
+                              <WrapperSubOption className={isError(option.id)}>
+                                {
+                                  option.suboptions.map(suboption => {
+                                    const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
+                                    const balance = productCart.options[`id:${option.id}`]?.balance || 0
+                                    return (
+                                      <ProductOptionSubOption
+                                        key={suboption.id}
+                                        onChange={handleChangeSuboptionState}
+                                        balance={balance}
+                                        option={option}
+                                        suboption={suboption}
+                                        state={currentState}
+                                      />
+                                    )
+                                  })
+                                }
+                              </WrapperSubOption>
+                            </ProductOption>
+                          )
+                        }
+                      </div>
+                    )
+                  }))
+                }
+                <ProductComment>
+                  <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
+                  <TextArea
+                    rows={4}
+                    placeholder={t('SPECIAL_COMMENT', 'Special comment')}
+                    defaultValue={productCart.comment}
+                    onChange={handleChangeCommentState}
+                    disabled={!(productCart && !isSoldOut && maxProductQuantity)}
                   />
-                ))}
-              </WrapperIngredients>
-              {
-                product?.extras.map(extra => extra.options.map(option => {
-                  const currentState = productCart.options[`id:${option.id}`] || {}
-                  return (
-                    <div key={option.id}>
-                      {
-                        showOption(option) && (
-                          <ProductOption
-                            option={option}
-                            currentState={currentState}
-                            error={errors[`id:${option.id}`]}
-                          >
-                            <WrapperSubOption className={isError(option.id)}>
-                              {
-                                option.suboptions.map(suboption => {
-                                  const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
-                                  const balance = productCart.options[`id:${option.id}`]?.balance || 0
-                                  return (
-                                    <ProductOptionSubOption
-                                      key={suboption.id}
-                                      onChange={handleChangeSuboptionState}
-                                      balance={balance}
-                                      option={option}
-                                      suboption={suboption}
-                                      state={currentState}
-                                    />
-                                  )
-                                })
-                              }
-                            </WrapperSubOption>
-                          </ProductOption>
-                        )
-                      }
+                </ProductComment>
+              </ProductEdition>
+              <ProductActions>
+                {
+                  productCart && !isSoldOut && maxProductQuantity > 0 && (
+                    <div className='incdec-control'>
+                      <FiMinusCircle
+                        onClick={decrement}
+                        className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
+                      />
+                      <span>{productCart.quantity}</span>
+                      <FiPlusCircle
+                        onClick={increment}
+                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                      />
                     </div>
                   )
-                }))
-              }
-              <ProductComment>
-                <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
-                <TextArea
-                  rows={4}
-                  placeholder={t('SPECIAL_COMMENT', 'Special comment')}
-                  defaultValue={productCart.comment}
-                  onChange={handleChangeCommentState}
-                  disabled={!(productCart && !isSoldOut && maxProductQuantity)}
-                />
-              </ProductComment>
-            </ProductEdition>
-            <ProductActions>
-              {
-                productCart && !isSoldOut && maxProductQuantity > 0 && (
-                  <div className='incdec-control'>
-                    <FiMinusCircle
-                      onClick={decrement}
-                      className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
-                    />
-                    <span>{productCart.quantity}</span>
-                    <FiPlusCircle
-                      onClick={increment}
-                      className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
-                    />
-                  </div>
-                )
-              }
+                }
 
-              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
-                <Button
-                  className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
-                  color='primary'
-                  onClick={() => handleSaveProduct()}
-                  disabled={orderState.loading}
-                >
-                  {orderState.loading ? (
-                    <span>{t('LOADING', 'Loading')}</span>
-                  ) : (
-                    <span>
-                      {editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')}
-                    </span>
-                  )}
-                  <span>{productCart.total && parsePrice(productCart.total)}</span>
-                </Button>
-              )}
-
-              {auth && !orderState.options?.address_id && (
-                orderState.loading ? (
+                {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                   <Button
-                    className='add'
+                    className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                     color='primary'
-                    disabled
+                    onClick={() => handleSaveProduct()}
+                    disabled={orderState.loading}
                   >
-                    {t('LOADING', 'Loading')}
+                    {orderState.loading ? (
+                      <span>{t('LOADING', 'Loading')}</span>
+                    ) : (
+                      <span>
+                        {editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')}
+                      </span>
+                    )}
+                    <span>{productCart.total && parsePrice(productCart.total)}</span>
                   </Button>
-                ) : (
-                  <AddressList
-                    isModal
-                    userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-                    addressList={isNaN(userCustomer?.id) ? user.addresses : null}
-                    isProductForm
-                  />
-                )
-              )}
+                )}
 
-              {(!auth || isSoldOut || maxProductQuantity <= 0) && (
-                <Button
-                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
-                  color='primary'
-                  outline
-                  disabled={isSoldOut || maxProductQuantity <= 0}
-                  onClick={() => setModalIsOpen(true)}
-                >
-                  {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
-                </Button>
-              )}
-            </ProductActions>
-          </ProductInfo>
-        </>
-      )}
+                {auth && !orderState.options?.address_id && (
+                  orderState.loading ? (
+                    <Button
+                      className='add'
+                      color='primary'
+                      disabled
+                    >
+                      {t('LOADING', 'Loading')}
+                    </Button>
+                  ) : (
+                    <AddressList
+                      isModal
+                      userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                      addressList={isNaN(userCustomer?.id) ? user.addresses : null}
+                      isProductForm
+                    />
+                  )
+                )}
 
-      {modalIsOpen && (
-        <Modal
-          open={modalIsOpen}
-          onClose={() => closeModal()}
-          width='70%'
-          padding='0'
-        >
-          {modalPageToShow === 'login' && (
-            <LoginForm
-              handleSuccessLogin={handleSuccessLogin}
-              elementLinkToSignup={
-                <a
-                  onClick={
-                    (e) => handleCustomModalClick(e, { page: 'signup' })
-                  } href='#'
-                >{t('CREATE_ACCOUNT', 'Create account')}
-                </a>
-              }
-              elementLinkToForgotPassword={
-                <a
-                  onClick={
-                    (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
-                  } href='#'
-                >{t('RESET_PASSWORD', 'Reset password')}
-                </a>
-              }
-              useLoginByCellphone
-              isPopup
-            />
-          )}
-          {modalPageToShow === 'signup' && (
-            <SignUpForm
-              elementLinkToLogin={
-                <a
-                  onClick={
-                    (e) => handleCustomModalClick(e, { page: 'login' })
-                  } href='#'
-                >{t('LOGIN', 'Login')}
-                </a>
-              }
-              useLoginByCellphone
-              useChekoutFileds
-              handleSuccessSignup={handleSuccessSignup}
-              isPopup
-            />
-          )}
-          {modalPageToShow === 'forgotpassword' && (
-            <ForgotPasswordForm
-              elementLinkToLogin={
-                <a
-                  onClick={
-                    (e) => handleCustomModalClick(e, { page: 'login' })
-                  } href='#'
-                >{t('LOGIN', 'Login')}
-                </a>
-              }
-              isPopup
-            />
-          )}
-        </Modal>
-      )}
+                {(!auth || isSoldOut || maxProductQuantity <= 0) && (
+                  <Button
+                    className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
+                    color='primary'
+                    outline
+                    disabled={isSoldOut || maxProductQuantity <= 0}
+                    onClick={() => setModalIsOpen(true)}
+                  >
+                    {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
+                  </Button>
+                )}
+              </ProductActions>
+            </ProductInfo>
+          </>
+        )}
 
-      {error && error.length > 0 && (
-        <NotFoundSource
-          content={error[0]?.message || error[0]}
-        />
-      )}
-    </ProductContainer>
+        {modalIsOpen && (
+          <Modal
+            open={modalIsOpen}
+            onClose={() => closeModal()}
+            width='70%'
+            padding='0'
+          >
+            {modalPageToShow === 'login' && (
+              <LoginForm
+                handleSuccessLogin={handleSuccessLogin}
+                elementLinkToSignup={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'signup' })
+                    } href='#'
+                  >{t('CREATE_ACCOUNT', 'Create account')}
+                  </a>
+                }
+                elementLinkToForgotPassword={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                    } href='#'
+                  >{t('RESET_PASSWORD', 'Reset password')}
+                  </a>
+                }
+                useLoginByCellphone
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'signup' && (
+              <SignUpForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', 'Login')}
+                  </a>
+                }
+                useLoginByCellphone
+                useChekoutFileds
+                handleSuccessSignup={handleSuccessSignup}
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'forgotpassword' && (
+              <ForgotPasswordForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', 'Login')}
+                  </a>
+                }
+                isPopup
+              />
+            )}
+          </Modal>
+        )}
+
+        {error && error.length > 0 && (
+          <NotFoundSource
+            content={error[0]?.message || error[0]}
+          />
+        )}
+      </ProductContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

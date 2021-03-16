@@ -63,99 +63,117 @@ const PaymentOptionStripeUI = (props) => {
   }
 
   return (
-    <OptionStripeContainer>
-      {!token && <WarningMessage>{t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')}</WarningMessage>}
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <OptionStripeContainer>
+        {!token && <WarningMessage>{t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')}</WarningMessage>}
 
-      {token && !cardsList.loading && cardsList.cards && cardsList.cards.length === 0 && (
-        <CardItem>
-          <span>{t('NO_CARDS', 'No cards')}</span>
-        </CardItem>
-      )}
+        {token && !cardsList.loading && cardsList.cards && cardsList.cards.length === 0 && (
+          <CardItem>
+            <span>{t('NO_CARDS', 'No cards')}</span>
+          </CardItem>
+        )}
 
-      {token && cardsList.error && cardsList.error.length > 0 && (
-        <NotFoundSource
-          content={cardsList?.error[0]?.message || cardsList?.error[0]}
-        />
-      )}
+        {token && cardsList.error && cardsList.error.length > 0 && (
+          <NotFoundSource
+            content={cardsList?.error[0]?.message || cardsList?.error[0]}
+          />
+        )}
 
-      {token && cardsList.cards && cardsList.cards.length > 0 && (
-        <WrapperItems>
-          {cardsList.cards.map((card, i) => (
-            <CardItem key={i}>
-              <CardItemContent onClick={() => handleCardClick(card)}>
-                <span className='checks'>
-                  {card.id === cardSelected?.id ? (
-                    <IosRadioButtonOn />
-                  ) : (
-                    <IosRadioButtonOff />
-                  )}
-                </span>
-                <span className='brand'>
-                  {getIconCard(card.brand)}
-                </span>
-                <span>
-                  XXXX-XXXX-XXXX-{card.last4}
-                </span>
-              </CardItemContent>
-              <CardItemActions>
-                <VscTrash onClick={() => handleDeleteCard(card)} />
-              </CardItemActions>
-            </CardItem>
-          ))}
-        </WrapperItems>
-      )}
+        {token && cardsList.cards && cardsList.cards.length > 0 && (
+          <WrapperItems>
+            {cardsList.cards.map((card, i) => (
+              <CardItem key={i}>
+                <CardItemContent onClick={() => handleCardClick(card)}>
+                  <span className='checks'>
+                    {card.id === cardSelected?.id ? (
+                      <IosRadioButtonOn />
+                    ) : (
+                      <IosRadioButtonOff />
+                    )}
+                  </span>
+                  <span className='brand'>
+                    {getIconCard(card.brand)}
+                  </span>
+                  <span>
+                    XXXX-XXXX-XXXX-{card.last4}
+                  </span>
+                </CardItemContent>
+                <CardItemActions>
+                  <VscTrash onClick={() => handleDeleteCard(card)} />
+                </CardItemActions>
+              </CardItem>
+            ))}
+          </WrapperItems>
+        )}
 
-      {token && !cardsList.loading && (
-        <WrapperItems>
-          <Button className='addcard' color='primary' onClick={() => setAddCardOpen(true)}>
-            {t('ADD_PAYMENT_CARD', 'Add New Payment Card')}
-          </Button>
-          <ActionsModal>
-            <Button onClick={() => onCancel()}>
-              {t('CANCEL', 'Cancel')}
+        {token && !cardsList.loading && (
+          <WrapperItems>
+            <Button className='addcard' color='primary' onClick={() => setAddCardOpen(true)}>
+              {t('ADD_PAYMENT_CARD', 'Add New Payment Card')}
             </Button>
-            <Button color='primary' onClick={() => onSelectCard(cardSelected)} disabled={!cardSelected}>
-              {t('ACCEPT', 'Accept')}
-            </Button>
-          </ActionsModal>
-        </WrapperItems>
-      )}
+            <ActionsModal>
+              <Button onClick={() => onCancel()}>
+                {t('CANCEL', 'Cancel')}
+              </Button>
+              <Button color='primary' onClick={() => onSelectCard(cardSelected)} disabled={!cardSelected}>
+                {t('ACCEPT', 'Accept')}
+              </Button>
+            </ActionsModal>
+          </WrapperItems>
+        )}
 
-      <Modal
-        title='Add credit or debit card'
-        className='modal-info'
-        open={addCartOpen}
-        onClose={() => setAddCardOpen(false)}
-      >
-        <StripeElementsForm
-          businessId={props.businessId}
-          publicKey={props.publicKey}
-          toSave
-          requirements={props.clientSecret}
-          onCancel={() => setAddCardOpen(false)}
-          onNewCard={_handleNewCard}
+        <Modal
+          title='Add credit or debit card'
+          className='modal-info'
+          open={addCartOpen}
+          onClose={() => setAddCardOpen(false)}
+        >
+          <StripeElementsForm
+            businessId={props.businessId}
+            publicKey={props.publicKey}
+            toSave
+            requirements={props.clientSecret}
+            onCancel={() => setAddCardOpen(false)}
+            onNewCard={_handleNewCard}
+          />
+        </Modal>
+
+        <Confirm
+          title={t('CARD', 'Card')}
+          content={confirm.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={confirm.open}
+          onClose={() => setConfirm({ ...confirm, open: false })}
+          onCancel={() => setConfirm({ ...confirm, open: false })}
+          onAccept={confirm.handleOnAccept}
+          closeOnBackdrop={false}
         />
-      </Modal>
 
-      <Confirm
-        title={t('CARD', 'Card')}
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
-        closeOnBackdrop={false}
-      />
-
-      {token && cardsList.loading && (
-        [...Array(5).keys()].map(i => (
-          <BlockLoading key={i}>
-            <Skeleton height={50} />
-          </BlockLoading>
-        ))
-      )}
-    </OptionStripeContainer>
+        {token && cardsList.loading && (
+          [...Array(5).keys()].map(i => (
+            <BlockLoading key={i}>
+              <Skeleton height={50} />
+            </BlockLoading>
+          ))
+        )}
+      </OptionStripeContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

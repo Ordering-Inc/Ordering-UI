@@ -82,82 +82,100 @@ const ReviewOrderUI = (props) => {
   )
 
   return (
-    <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
-      <Reviews>
-        <h2>{t('REVIEWS', 'Reviews')}:</h2>
-        <Categories id='list'>
-          {Object.keys(stars).map(key => (
-            <React.Fragment key={key}>
-              {key !== 'Comments' && (
-                <InvisibleInput
-                  type='text'
-                  name={key}
-                  value={stars[key]}
-                  ref={register({
-                    validate: value => value === '0' ? t('CATEGORY_ATLEAST_ONE', `${capitalize(key)} must be at least one point`).replace('CATEGORY', key.toUpperCase()) : null
-                  })}
-                  disabled
-                />
-              )}
-            </React.Fragment>
-          ))}
-          <Category id='stars' onMouseLeave={() => setHover(stars)}>
-            <p>{t('QUALITY', 'Quality of Product')}:</p>
-            <Stars>
-              <StarsComponent name='quality' />
-            </Stars>
-          </Category>
-          <Category id='stars' onMouseLeave={() => setHover(stars)}>
-            <p>{t('PUNCTUALITY', 'Punctuality')}:</p>
-            <Stars>
-              <StarsComponent name='punctiality' />
-            </Stars>
-          </Category>
-          <Category id='stars' onMouseLeave={() => setHover(stars)}>
-            <p>{t('SERVICE', 'Service')}:</p>
-            <Stars>
-              <StarsComponent name='service' />
-            </Stars>
-          </Category>
-          <Category id='stars' onMouseLeave={() => setHover(stars)}>
-            <p>{t('PRODUCT_PACKAGING', 'Product Packaging')}:</p>
-            <Stars>
-              <StarsComponent name='packaging' />
-            </Stars>
-          </Category>
-        </Categories>
-      </Reviews>
-      <Comments>
-        <h2>{t('COMMENTS', 'Comments')}:</h2>
-        <Input
-          placeholder={t('COMMENTS', 'Comments')}
-          name='comments'
-          onChange={(e) => handleChangeInput(e)}
-          ref={register({
-            required: t('FIELD_COMMENT_REQUIRED', 'The field comments is required')
-          })}
-          autoComplete='off'
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
+        <Reviews>
+          <h2>{t('REVIEWS', 'Reviews')}:</h2>
+          <Categories id='list'>
+            {Object.keys(stars).map(key => (
+              <React.Fragment key={key}>
+                {key !== 'Comments' && (
+                  <InvisibleInput
+                    type='text'
+                    name={key}
+                    value={stars[key]}
+                    ref={register({
+                      validate: value => value === '0' ? t('CATEGORY_ATLEAST_ONE', `${capitalize(key)} must be at least one point`).replace('CATEGORY', key.toUpperCase()) : null
+                    })}
+                    disabled
+                  />
+                )}
+              </React.Fragment>
+            ))}
+            <Category id='stars' onMouseLeave={() => setHover(stars)}>
+              <p>{t('QUALITY', 'Quality of Product')}:</p>
+              <Stars>
+                <StarsComponent name='quality' />
+              </Stars>
+            </Category>
+            <Category id='stars' onMouseLeave={() => setHover(stars)}>
+              <p>{t('PUNCTUALITY', 'Punctuality')}:</p>
+              <Stars>
+                <StarsComponent name='punctiality' />
+              </Stars>
+            </Category>
+            <Category id='stars' onMouseLeave={() => setHover(stars)}>
+              <p>{t('SERVICE', 'Service')}:</p>
+              <Stars>
+                <StarsComponent name='service' />
+              </Stars>
+            </Category>
+            <Category id='stars' onMouseLeave={() => setHover(stars)}>
+              <p>{t('PRODUCT_PACKAGING', 'Product Packaging')}:</p>
+              <Stars>
+                <StarsComponent name='packaging' />
+              </Stars>
+            </Category>
+          </Categories>
+        </Reviews>
+        <Comments>
+          <h2>{t('COMMENTS', 'Comments')}:</h2>
+          <Input
+            placeholder={t('COMMENTS', 'Comments')}
+            name='comments'
+            onChange={(e) => handleChangeInput(e)}
+            ref={register({
+              required: t('FIELD_COMMENT_REQUIRED', 'The field comments is required')
+            })}
+            autoComplete='off'
+          />
+        </Comments>
+        <Send>
+          <Button
+            color={!formState.loading ? 'primary' : 'secondary'}
+            type='submit'
+            disabled={formState.loading}
+          >
+            {!formState.loading ? t('SEND_REVIEW', 'Send a Review') : t('LOADING', 'Loading')}
+          </Button>
+        </Send>
+        <Alert
+          title={t('ORDER_REVIEW', 'Order Review')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
+          closeOnBackdrop={false}
         />
-      </Comments>
-      <Send>
-        <Button
-          color={!formState.loading ? 'primary' : 'secondary'}
-          type='submit'
-          disabled={formState.loading}
-        >
-          {!formState.loading ? t('SEND_REVIEW', 'Send a Review') : t('LOADING', 'Loading')}
-        </Button>
-      </Send>
-      <Alert
-        title={t('ORDER_REVIEW', 'Order Review')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-    </ReviewOrderContainer>
+      </ReviewOrderContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

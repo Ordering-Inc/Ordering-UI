@@ -17,18 +17,36 @@ const FloatingButtonUI = (props) => {
   } = props
 
   return (
-    <Container>
-      <Button
-        color={isSecondaryBtn ? 'secundary' : 'primary'}
-        onClick={handleButtonClick}
-        disabled={disabled}
-      >
-        {btnText}
-        <BtnValue>
-          {btnValue}
-        </BtnValue>
-      </Button>
-    </Container>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <Container>
+        <Button
+          color={isSecondaryBtn ? 'secundary' : 'primary'}
+          onClick={handleButtonClick}
+          disabled={disabled}
+        >
+          {btnText}
+          <BtnValue>
+            {btnValue}
+          </BtnValue>
+        </Button>
+      </Container>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

@@ -40,47 +40,65 @@ const AddressDetailsUI = (props) => {
   }, [])
 
   return (
-    <AddressContainer>
-      <Header>
-        <Text>
-          <h4>{addressToShow || orderState?.options?.address?.address}</h4>
-          {orderState?.options?.type === 1 && !isCartPending &&
-            <TiPencil
-              onClick={() => setOpenModal(true)}
-            />}
-        </Text>
-      </Header>
-      <WrappMap>
-        <Map>
-          <img src={googleMapsUrl} id='google-maps-image' alt='google-maps-location' width='288px' height='162px' loading='lazy' />
-        </Map>
-      </WrappMap>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <AddressContainer>
+        <Header>
+          <Text>
+            <h4>{addressToShow || orderState?.options?.address?.address}</h4>
+            {orderState?.options?.type === 1 && !isCartPending &&
+              <TiPencil
+                onClick={() => setOpenModal(true)}
+              />}
+          </Text>
+        </Header>
+        <WrappMap>
+          <Map>
+            <img src={googleMapsUrl} id='google-maps-image' alt='google-maps-location' width='288px' height='162px' loading='lazy' />
+          </Map>
+        </WrappMap>
 
-      <Modal
-        title={t('ADDRESSES', 'Addresses')}
-        open={openModal}
-        width='70%'
-        onClose={() => setOpenModal(false)}
-      >
-        <AddressList
-          isModal
-          changeOrderAddressWithDefault
-          userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-          onCancel={() => setOpenModal(false)}
-          onAccept={() => handleFindBusinesses()}
+        <Modal
+          title={t('ADDRESSES', 'Addresses')}
+          open={openModal}
+          width='70%'
+          onClose={() => setOpenModal(false)}
+        >
+          <AddressList
+            isModal
+            changeOrderAddressWithDefault
+            userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+            onCancel={() => setOpenModal(false)}
+            onAccept={() => handleFindBusinesses()}
+          />
+        </Modal>
+
+        <Alert
+          title={t('SEARCH', 'Search')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => setAlertState({ open: false, content: [] })}
+          onAccept={() => setAlertState({ open: false, content: [] })}
+          closeOnBackdrop={false}
         />
-      </Modal>
-
-      <Alert
-        title={t('SEARCH', 'Search')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => setAlertState({ open: false, content: [] })}
-        onAccept={() => setAlertState({ open: false, content: [] })}
-        closeOnBackdrop={false}
-      />
-    </AddressContainer>
+      </AddressContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 
