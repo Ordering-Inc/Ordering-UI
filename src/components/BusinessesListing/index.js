@@ -153,8 +153,10 @@ const BusinessesListingUI = (props) => {
           />
           <OrdersOption
             horizontal
+            asDashboard
             isBusinessesPage
             onRedirectPage={onRedirectPage}
+            userCustomerId={userCustomer?.id}
           />
         </>
       )}

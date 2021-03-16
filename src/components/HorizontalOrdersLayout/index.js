@@ -19,7 +19,6 @@ import { getGoogleMapImage } from '../../utils'
 
 export const HorizontalOrdersLayout = (props) => {
   const {
-    orders,
     pagination,
     loadMoreOrders,
     getOrderStatus,
@@ -28,6 +27,8 @@ export const HorizontalOrdersLayout = (props) => {
     customArray,
     onRedirectPage
   } = props
+
+  const orders = customArray || props.orders
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
