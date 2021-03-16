@@ -3,14 +3,25 @@
   "version": "0.0.1",
   "description": "Ordering UI Components",
   "main": "./_modules/index.js",
+  "exports": {
+    ".": "./_modules/index.js",
+    "./theme_two": "./_modules/themes/two/index.js"
+  },
   "scripts": {
     "clean": "shx rm -rf _bundles _modules",
-    "build": "npm run clean && babel ./src --out-dir ./_modules && webpack --config webpack.prod.js",
+    "build": "npm run clean && babel ./src --out-dir ./_modules && babel ./src/themes --out-dir ./_modules/themes && webpack --config webpack.prod.js",
     "build-dev": "npx webpack --mode=development",
     "serve": "npx webpack-dev-server --config webpack.dev.js",
     "lint": "standard",
     "test": "cypress open"
   },
+  "repository": {
+    "url": "git@github.com:Ordering-Inc/Ordering-UI.git"
+  },
+  "keywords": [
+    "ordering",
+    "ordering-ui"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -60,6 +71,7 @@
     "moment": "^2.29.0",
     "ordering-components": "github:Ordering-Inc/ordering-components#development",
     "polished": "^3.6.6",
+    "react-calendar": "^3.3.1",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.8.1",
     "react-loading-skeleton": "^2.1.1",

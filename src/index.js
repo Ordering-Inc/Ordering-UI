@@ -28,7 +28,6 @@ import { Header } from './components/Header'
 import { HomeHero } from './components/HomeHero'
 import { Image } from './components/Image'
 import { LanguageSelector } from './components/LanguageSelector'
-import { Link } from './components/Link'
 import { LoginForm } from './components/LoginForm'
 import { Messages } from './components/Messages'
 import { Modal } from './components/Modal'
@@ -48,8 +47,8 @@ import { ProductForm } from './components/ProductForm'
 import { ProductIngredient } from './components/ProductIngredient'
 import { ProductItemAccordion } from './components/ProductItemAccordion'
 import { ProductOption } from './components/ProductOption'
-import { ProductOptionSubOption } from './components/ProductOptionSubOption'
 import { PhoneAutocomplete } from './components/PhoneAutocomplete'
+import { ProductOptionSubOption } from './components/ProductOptionSubOption'
 import { ProductShare } from './components/ProductShare'
 import { ResetPassword } from './components/ResetPassword'
 import { ReviewOrder } from './components/ReviewOrder'
@@ -103,7 +102,6 @@ export {
   HomeHero,
   Image,
   LanguageSelector,
-  Link,
   LoginForm,
   Messages,
   Modal,

@@ -62,6 +62,27 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "pickup" : {
+    "title": "pickup",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "filter" : {
+    "title": "filter",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "feature" : {
+    "title": "feature",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "business": {
     "title": "Business",
     "description": "a dummy description about this page",

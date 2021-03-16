@@ -14,15 +14,22 @@ export const ThemeContext = createContext()
 export const ThemeProvider = ({ children, ...props }) => {
   const [theme, setTheme] = useState(props.theme)
 
-  const GlobalStyle = createGlobalStyle`
+  const getThemeColor = () => {
+    switch (props.themeType) {
+      case 'two':
+        return theme.colors.darkTextColor
+      default:
+        return theme.colors.colorPage
+    }
+  }
 
+  const GlobalStyle = createGlobalStyle`
     @media (min-width: 578px) {
       /** Mozilla scrollbar*/
       * {
         scrollbar-color: #CCC !important;
         scrollbar-width: thin !important;
       }
-
       /** Scrollbar for browser based on webkit */
       ::-webkit-scrollbar {
         width: 6px;
@@ -41,24 +48,20 @@ export const ThemeProvider = ({ children, ...props }) => {
         background: rgba(204, 204, 204, 0.3);
       }
     }
-
     body {
       font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
       margin: 0;
       background-color: ${theme.colors.backgroundPage};
-      color: ${theme.colors.colorPage};
+      color: ${getThemeColor()};
       direction: ltr;
-
       ${theme.rtl && css`
         direction: rtl;
       `}
       -webkit-overflow-scrolling: auto;
     }
-
     input, textarea, button {
       font-family: inherit;
     }
-
     .popup-backdrop {
       background-color: rgba(0, 0, 0, 0.4);
       position: fixed;
@@ -68,7 +71,6 @@ export const ThemeProvider = ({ children, ...props }) => {
       right: 0;
       z-index: 2000;
     }
-
     .popup-component {
       background-color: rgba(0, 0, 0, 0.3);
       display: flex;

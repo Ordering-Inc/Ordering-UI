@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSession, useLanguage, useOrder, useEvent, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
+import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 
 import {
   Header as HeaderContainer,
@@ -10,7 +11,8 @@ import {
   RightHeader,
   Menu,
   MenuLink,
-  SubMenu
+  SubMenu,
+  CustomerInfo
 } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
@@ -36,7 +38,8 @@ export const Header = (props) => {
     location,
     closeCartPopover,
     isShowOrderOptions,
-    isHideSignup
+    isHideSignup,
+    isCustomerMode
 } = props
 
   const [events] = useEvent()
@@ -53,6 +56,8 @@ export const Header = (props) => {
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
+
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
@@ -94,13 +99,27 @@ export const Header = (props) => {
     <HeaderContainer home={isHome}>
       <InnerHeader>
         <LeftHeader>
-          <SidebarMenu auth={auth} isHideSignup={isHideSignup} />
-          <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location ? 'search' : 'home' })}>
+          <SidebarMenu
+            auth={auth}
+            isHideSignup={isHideSignup}
+            userCustomer={userCustomer}
+          />
+          <LogoHeader
+            onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+          >
             <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} loading='lazy' />
             <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
           </LogoHeader>
           {isShowOrderOptions && (
             <Menu className='left-header'>
+              {isCustomerMode && windowSize.width > 450 && (
+                <CustomerInfo isHome={isHome}>
+                  <span>
+                    <FaUserCircle />
+                    <p>{userCustomer?.name} {userCustomer?.lastname}</p>
+                  </span>
+                </CustomerInfo>
+              )}
               {!configState?.loading && configTypes.length > 0 && (
                 <OrderTypeSelectorHeader configTypes={configTypes} />
               )}
@@ -144,6 +163,7 @@ export const Header = (props) => {
                     {windowSize.width > 768 && (
                       <UserPopover
                         withLogout
+                        isCustomerMode={isCustomerMode}
                         open={openPopover.user}
                         isHome={isHome}
                         onClick={() => handleTogglePopover('user')}
@@ -233,6 +253,7 @@ export const Header = (props) => {
               <AddressList
                 isModal
                 changeOrderAddressWithDefault
+                userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
                 onCancel={() => setModalIsOpen(false)}
                 onAccept={() => setModalIsOpen(false)}
               />

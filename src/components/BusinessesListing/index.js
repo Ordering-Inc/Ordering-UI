@@ -4,7 +4,8 @@ import {
   BusinessContainer,
   BusinessList,
   ErrorMessage,
-  WrapperSearch
+  WrapperSearch,
+  BusinessesTitle
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -50,6 +51,8 @@ const BusinessesListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
   const [mapErrors, setMapErrors] = useState('')
+
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -142,7 +145,11 @@ const BusinessesListingUI = (props) => {
             isBusinessesPage
             onRedirectPage={onRedirectPage}
             titleContent={t('CARTS', 'Carts')}
-            customArray={getCustomArray(orderState.carts)}
+            customArray={
+              getCustomArray(
+                orderState.carts)?.filter(cart => cart.products.length > 0
+              )
+            }
           />
           <OrdersOption
             horizontal
@@ -150,6 +157,12 @@ const BusinessesListingUI = (props) => {
             onRedirectPage={onRedirectPage}
           />
         </>
+      )}
+
+      {isCustomLayout && businessesList?.businesses?.length > 0 && (
+        <BusinessesTitle>
+          {t('BUSINESSES', 'Businesses')}
+        </BusinessesTitle>
       )}
 
       <BusinessList>
@@ -220,6 +233,7 @@ const BusinessesListingUI = (props) => {
         <AddressList
           isModal
           changeOrderAddressWithDefault
+          userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
           onCancel={() => setModals({ ...modals, listOpen: false })}
           onAccept={() => handleFindBusinesses()}
         />

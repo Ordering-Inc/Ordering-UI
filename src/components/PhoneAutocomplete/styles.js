@@ -73,10 +73,6 @@ export const ContentWrapper = styled.div`
       padding: 0px 20px 0px;
     `}
 
-    button {
-      width: 180px;
-    }
-
     input {
       width: 90%;
       margin-bottom: 15px;
@@ -95,6 +91,14 @@ export const ContentWrapper = styled.div`
         padding: 0px 40px 0px;
       `}
     }
+`
+
+export const WrappBtn = styled.div`
+  width: 50%;
+
+  button {
+    min-width: 130px;
+  }
 `
 
 export const Title = styled.h1`
