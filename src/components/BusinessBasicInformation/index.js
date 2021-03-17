@@ -47,107 +47,125 @@ export const BusinessBasicInformation = (props) => {
   }
 
   return (
-    <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container'>
-      <BusinessContent>
-        <WrapperBusinessLogo>
-          {!loading ? (
-            <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
-          ) : (
-            <Skeleton height={70} width={70} />
-          )}
-        </WrapperBusinessLogo>
-        <BusinessInfo className='info'>
-          <BusinessInfoItem>
-            <div>
-              {!loading ? (
-                <p className='bold'>{business?.name}</p>
-              ) : (
-                <Skeleton width={100} />
-              )}
-              {!loading ? (
-                <p>
-                  <FaStar className='start' />
-                  {business?.reviews?.total}
-                </p>
-              ) : (
-                <Skeleton width={100} />
-              )}
-            </div>
-            <div>
-              {!loading ? (
-                <p className='type'>{getBusinessType()}</p>
-              ) : (
-                <Skeleton width={100} />
-              )}
-            </div>
-            <div>
-              {!loading ? (
-                <>
-                  {orderState?.options?.type === 1 ? (
-                    <h5>
-                      <FiClock />
-                      {convertHoursToMinutes(business?.delivery_time)}
-                    </h5>
-                  ) : (
-                    <h5>
-                      <FiClock />
-                      {convertHoursToMinutes(business?.pickup_time)}
-                    </h5>
-                  )}
-                </>
-              ) : (
-                <Skeleton width={70} />
-              )}
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container'>
+        <BusinessContent>
+          <WrapperBusinessLogo>
+            {!loading ? (
+              <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
+            ) : (
+              <Skeleton height={70} width={70} />
+            )}
+          </WrapperBusinessLogo>
+          <BusinessInfo className='info'>
+            <BusinessInfoItem>
+              <div>
+                {!loading ? (
+                  <p className='bold'>{business?.name}</p>
+                ) : (
+                  <Skeleton width={100} />
+                )}
+                {!loading ? (
+                  <p>
+                    <FaStar className='start' />
+                    {business?.reviews?.total}
+                  </p>
+                ) : (
+                  <Skeleton width={100} />
+                )}
+              </div>
+              <div>
+                {!loading ? (
+                  <p className='type'>{getBusinessType()}</p>
+                ) : (
+                  <Skeleton width={100} />
+                )}
+              </div>
+              <div>
+                {!loading ? (
+                  <>
+                    {orderState?.options?.type === 1 ? (
+                      <h5>
+                        <FiClock />
+                        {convertHoursToMinutes(business?.delivery_time)}
+                      </h5>
+                    ) : (
+                      <h5>
+                        <FiClock />
+                        {convertHoursToMinutes(business?.pickup_time)}
+                      </h5>
+                    )}
+                  </>
+                ) : (
+                  <Skeleton width={70} />
+                )}
 
-              {!loading ? (
-                <h5>
-                  <GrLocation />
-                  {parseDistance(business?.distance || 0)}
-                </h5>
-              ) : (
-                <Skeleton width={70} />
-              )}
-              {orderState?.options.type === 1 && (
-                <>
-                  {!loading ? (
-                    <h5>
-                      <GrDeliver />
-                      {business && parsePrice(business?.delivery_price || 0)}
-                    </h5>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                </>
-              )}
+                {!loading ? (
+                  <h5>
+                    <GrLocation />
+                    {parseDistance(business?.distance || 0)}
+                  </h5>
+                ) : (
+                  <Skeleton width={70} />
+                )}
+                {orderState?.options.type === 1 && (
+                  <>
+                    {!loading ? (
+                      <h5>
+                        <GrDeliver />
+                        {business && parsePrice(business?.delivery_price || 0)}
+                      </h5>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+                  </>
+                )}
 
-              {!loading && (
-                <h5>
-                  <BsExclamationCircle
-                    className='popup'
-                    onClick={() => setOpenBusinessInformation(true)}
-                  />
-                </h5>
-              )}
-            </div>
-          </BusinessInfoItem>
-        </BusinessInfo>
-      </BusinessContent>
+                {!loading && (
+                  <h5>
+                    <BsExclamationCircle
+                      className='popup'
+                      onClick={() => setOpenBusinessInformation(true)}
+                    />
+                  </h5>
+                )}
+              </div>
+            </BusinessInfoItem>
+          </BusinessInfo>
+        </BusinessContent>
 
-      <Modal
-        width='70%'
-        open={openBusinessInformation}
-        onClose={setOpenBusinessInformation}
-        padding='0'
-        hideCloseDefault
-        isTransparent
-      >
-        <BusinessInformation
-          business={business}
-          getBusinessType={getBusinessType}
-          optimizeImage={optimizeImage}
+        <Modal
+          width='70%'
+          open={openBusinessInformation}
           onClose={setOpenBusinessInformation}
-        />
-      </Modal>
-    </BusinessContainer>
+          padding='0'
+          hideCloseDefault
+          isTransparent
+        >
+          <BusinessInformation
+            business={business}
+            getBusinessType={getBusinessType}
+            optimizeImage={optimizeImage}
+            onClose={setOpenBusinessInformation}
+          />
+        </Modal>
+      </BusinessContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }

@@ -166,314 +166,333 @@ const OrderDetailsUI = (props) => {
   }, [messagesReadList])
 
   return (
-    <Container>
-      {order && Object.keys(order).length > 0 && (
-        <WrapperContainer>
-          <Content className='order-content'>
-            <Header>
-              <HeaderImg>
-                <img src={businessData?.header} alt='business-header' height='200px' width='355px' loading='lazy' />
-              </HeaderImg>
-              <HeaderInfo className='order-header'>
-                <HeaderText column>
-                  <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
-                  <p>{t('ORDER_MESSAGE_HEADER_TEXT', 'Once business accepts your order, we will send you an email, thank you!')}</p>
-                </HeaderText>
-              </HeaderInfo>
-            </Header>
-            <OrderBusiness>
-              <BusinessWrapper>
-                <LogoWrapper>
-                  <BusinessLogo bgimage={order?.business?.logo} />
-                </LogoWrapper>
-                <BusinessInfo>
-                  <h1>{order?.business?.name}</h1>
-                  <p>{order?.business?.address}</p>
-                </BusinessInfo>
-              </BusinessWrapper>
-              <ActionsBlock>
-                {order.driver && order.driver.phone &&
-                  <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                    <FiPhone />
-                  </span>}
-                <span>
-                  <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
-                </span>
-                <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                  {order?.unread_count > 0 && unreadAlert.business && (
-                    <ExclamationWrapper>
-                      <AiFillExclamationCircle />
-                    </ExclamationWrapper>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <Container>
+        {order && Object.keys(order).length > 0 && (
+          <WrapperContainer>
+            <Content className='order-content'>
+              <Header>
+                <HeaderImg>
+                  <img src={businessData?.header} alt='business-header' height='200px' width='355px' loading='lazy' />
+                </HeaderImg>
+                <HeaderInfo className='order-header'>
+                  <HeaderText column>
+                    <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
+                    <p>{t('ORDER_MESSAGE_HEADER_TEXT', 'Once business accepts your order, we will send you an email, thank you!')}</p>
+                  </HeaderText>
+                </HeaderInfo>
+              </Header>
+              <OrderBusiness>
+                <BusinessWrapper>
+                  <LogoWrapper>
+                    <BusinessLogo bgimage={order?.business?.logo} />
+                  </LogoWrapper>
+                  <BusinessInfo>
+                    <h1>{order?.business?.name}</h1>
+                    <p>{order?.business?.address}</p>
+                  </BusinessInfo>
+                </BusinessWrapper>
+                <ActionsBlock>
+                  {order.driver && order.driver.phone &&
+                    <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                      <FiPhone />
+                    </span>}
+                  <span>
+                    <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
+                  </span>
+                  <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
+                    {order?.unread_count > 0 && unreadAlert.business && (
+                      <ExclamationWrapper>
+                        <AiFillExclamationCircle />
+                      </ExclamationWrapper>
+                    )}
+                    <HiOutlineChat />
+                  </MessagesIcon>
+                </ActionsBlock>
+              </OrderBusiness>
+
+              <OrderInfo>
+                <OrderData>
+                  <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
+                  <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
+                  <p className='date'>
+                    {
+                      order?.delivery_datetime_utc
+                        ? parseDate(order?.delivery_datetime_utc)
+                        : parseDate(order?.delivery_datetime, { utc: false })
+                    }
+                  </p>
+                  <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                </OrderData>
+                <OrderStatus>
+                  <span>{getOrderStatus(order?.status)?.value}</span>
+                  <StatusImage>
+                    <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' loading='lazy' />
+                  </StatusImage>
+                </OrderStatus>
+              </OrderInfo>
+
+              <SectionTitle>
+                {t('CUSTOMER', 'Customer')}
+              </SectionTitle>
+              <OrderCustomer>
+                <div className='photo'>
+                  {order?.customer?.photo ? (
+                    <PhotoBlock src={order?.customer?.photo} />
+                  ) : (
+                    <FaUserCircle />
                   )}
-                  <HiOutlineChat />
-                </MessagesIcon>
-              </ActionsBlock>
-            </OrderBusiness>
-
-            <OrderInfo>
-              <OrderData>
-                <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
-                <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>
-                  {
-                    order?.delivery_datetime_utc
-                      ? parseDate(order?.delivery_datetime_utc)
-                      : parseDate(order?.delivery_datetime, { utc: false })
-                  }
-                </p>
-                <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-              </OrderData>
-              <OrderStatus>
-                <span>{getOrderStatus(order?.status)?.value}</span>
-                <StatusImage>
-                  <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' loading='lazy' />
-                </StatusImage>
-              </OrderStatus>
-            </OrderInfo>
-
-            <SectionTitle>
-              {t('CUSTOMER', 'Customer')}
-            </SectionTitle>
-            <OrderCustomer>
-              <div className='photo'>
-                {order?.customer?.photo ? (
-                  <PhotoBlock src={order?.customer?.photo} />
-                ) : (
-                  <FaUserCircle />
-                )}
-              </div>
-              <InfoBlock>
-                <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
-                <span>{order?.customer?.address}</span>
-              </InfoBlock>
-            </OrderCustomer>
-            {(typeof configs?.guest_uuid_access.value === 'number'
-              ? configs?.guest_uuid_access.value
-              : parseInt(configs?.guest_uuid_access.value)) &&
-            order?.hash_key && (
-              <ShareOrder>
-                <div className='text'>
-                  <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
-                  <p>{t('LET_SOMEONE_FOLLOW_ALONG', 'Let someone follow along')}</p>
                 </div>
-                <div className='wrap'>
-                  <ProductShare
-                    withBtn
-                    btnText={t('SHARE', 'Share')}
-                    defaultUrl={urlToShare(order?.hash_key)}
-                  />
-                </div>
-              </ShareOrder>
-            )}
+                <InfoBlock>
+                  <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
+                  <span>{order?.customer?.address}</span>
+                </InfoBlock>
+              </OrderCustomer>
 
-            {order?.driver && (
-              <>
-                {order?.driver?.location && parseInt(order?.status) === 9 && (
-                  <Map>
-                    <GoogleMapsMap
-                      apiKey={configs?.google_maps_api_key?.value}
-                      location={order?.driver?.location}
-                      locations={locations}
-                      mapControls={googleMapsControls}
+              {(typeof configs?.guest_uuid_access.value === 'number'
+                ? configs?.guest_uuid_access.value
+                : parseInt(configs?.guest_uuid_access.value)) &&
+              order?.hash_key && (
+                <ShareOrder>
+                  <div className='text'>
+                    <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
+                    <p>{t('LET_SOMEONE_FOLLOW_ALONG', 'Let someone follow along')}</p>
+                  </div>
+                  <div className='wrap'>
+                    <ProductShare
+                      withBtn
+                      btnText={t('SHARE', 'Share')}
+                      defaultUrl={urlToShare(order?.hash_key)}
                     />
-                  </Map>
-                )}
+                  </div>
+                </ShareOrder>
+              )}
+
+              {order?.driver && (
                 <>
-                  <SectionTitle>
-                    {t('YOUR_DRIVER', 'Your Driver')}
-                  </SectionTitle>
-                  <OrderDriver>
-                    <WrapperDriver>
-                      <div className='photo'>
-                        {order?.driver?.photo ? (
-                          <PhotoBlock src={order?.driver?.photo} width='70' height='70' />
-                        ) : (
-                          <RiUser2Fill />
-                        )}
-                      </div>
-                      <InfoBlock>
-                        <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                        <span>{t('DRIVER', 'Driver')}</span>
-                      </InfoBlock>
-                    </WrapperDriver>
-                    <ActionsBlock>
-                      {order.driver && order.driver.phone &&
-                        <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                          <FiPhone />
-                        </span>}
-                      <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
-                        {order?.unread_count > 0 && unreadAlert.driver && (
-                          <ExclamationWrapper>
-                            <AiFillExclamationCircle />
-                          </ExclamationWrapper>
-                        )}
-                        <HiOutlineChat />
-                      </MessagesIcon>
-                    </ActionsBlock>
-                  </OrderDriver>
+                  {order?.driver?.location && parseInt(order?.status) === 9 && (
+                    <Map>
+                      <GoogleMapsMap
+                        apiKey={configs?.google_maps_api_key?.value}
+                        location={order?.driver?.location}
+                        locations={locations}
+                        mapControls={googleMapsControls}
+                      />
+                    </Map>
+                  )}
+                  <>
+                    <SectionTitle>
+                      {t('YOUR_DRIVER', 'Your Driver')}
+                    </SectionTitle>
+                    <OrderDriver>
+                      <WrapperDriver>
+                        <div className='photo'>
+                          {order?.driver?.photo ? (
+                            <PhotoBlock src={order?.driver?.photo} width='70' height='70' />
+                          ) : (
+                            <RiUser2Fill />
+                          )}
+                        </div>
+                        <InfoBlock>
+                          <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                          <span>{t('DRIVER', 'Driver')}</span>
+                        </InfoBlock>
+                      </WrapperDriver>
+                      <ActionsBlock>
+                        {order.driver && order.driver.phone &&
+                          <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                            <FiPhone />
+                          </span>}
+                        <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
+                          {order?.unread_count > 0 && unreadAlert.driver && (
+                            <ExclamationWrapper>
+                              <AiFillExclamationCircle />
+                            </ExclamationWrapper>
+                          )}
+                          <HiOutlineChat />
+                        </MessagesIcon>
+                      </ActionsBlock>
+                    </OrderDriver>
+                  </>
                 </>
-              </>
-            )}
+              )}
 
-            <SectionTitle>
-              {t('YOUR_ORDER', 'Your Order')}
-            </SectionTitle>
-            <OrderProducts>
-              {order?.products?.length && order?.products.map(product => (
-                <ProductItemAccordion
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </OrderProducts>
-            <OrderBill>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                    <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      {order?.tax_type === 1
-                        ? t('TAX_INCLUDED', 'Tax (included)')
-                        : t('TAX', 'Tax')}
-                      <span>{`(${parseNumber(order?.tax)}%)`}</span>
-                    </td>
-                    <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
-                  </tr>
-                  {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
+              <SectionTitle>
+                {t('YOUR_ORDER', 'Your Order')}
+              </SectionTitle>
+              <OrderProducts>
+                {order?.products?.length && order?.products.map(product => (
+                  <ProductItemAccordion
+                    key={product.id}
+                    product={product}
+                  />
+                ))}
+              </OrderProducts>
+              <OrderBill>
+                <table>
+                  <tbody>
                     <tr>
-                      <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                      <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
+                      <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                      <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                     </tr>
-                  )}
-                  <tr>
-                    <td>
-                      {t('DRIVER_TIP', 'Driver tip')}
-                      {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
-                        <span>{`(${parseNumber(order?.driver_tip)}%)`}</span>
-                      )}
-                    </td>
-                    <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      {t('SERVICE_FEE', 'Service Fee')}
-                      <span>{`(${parseNumber(order?.service_fee)}%)`}</span>
-                    </td>
-                    <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
-                  </tr>
-                  {(order?.summary?.discount > 0 || order?.discount > 0) && (
                     <tr>
-                      {order?.offer_type === 1 ? (
-                        <td>
-                          {t('DISCOUNT', 'Discount')}
-                          <span>{`(${parseNumber(order?.offer_rate)}%)`}</span>
-                        </td>
-                      ) : (
-                        <td>{t('DISCOUNT', 'Discount')}</td>
-                      )}
-                      <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
+                      <td>
+                        {order?.tax_type === 1
+                          ? t('TAX_INCLUDED', 'Tax (included)')
+                          : t('TAX', 'Tax')}
+                        <span>{`(${parseNumber(order?.tax)}%)`}</span>
+                      </td>
+                      <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-              <table className='total'>
-                <tbody>
-                  <tr>
-                    <td>{t('TOTAL', 'Total')}</td>
-                    <td>{parsePrice(order?.summary?.total || order?.total)}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </OrderBill>
+                    {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
+                      <tr>
+                        <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                        <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
+                      </tr>
+                    )}
+                    <tr>
+                      <td>
+                        {t('DRIVER_TIP', 'Driver tip')}
+                        {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                          <span>{`(${parseNumber(order?.driver_tip)}%)`}</span>
+                        )}
+                      </td>
+                      <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {t('SERVICE_FEE', 'Service Fee')}
+                        <span>{`(${parseNumber(order?.service_fee)}%)`}</span>
+                      </td>
+                      <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
+                    </tr>
+                    {(order?.summary?.discount > 0 || order?.discount > 0) && (
+                      <tr>
+                        {order?.offer_type === 1 ? (
+                          <td>
+                            {t('DISCOUNT', 'Discount')}
+                            <span>{`(${parseNumber(order?.offer_rate)}%)`}</span>
+                          </td>
+                        ) : (
+                          <td>{t('DISCOUNT', 'Discount')}</td>
+                        )}
+                        <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+                <table className='total'>
+                  <tbody>
+                    <tr>
+                      <td>{t('TOTAL', 'Total')}</td>
+                      <td>{parsePrice(order?.summary?.total || order?.total)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </OrderBill>
 
-            {(
-              parseInt(order?.status) === 1 ||
-              parseInt(order?.status) === 2 ||
-              parseInt(order?.status) === 5 ||
-              parseInt(order?.status) === 6 ||
-              parseInt(order?.status) === 10 ||
-              parseInt(order?.status) === 11 ||
-              parseInt(order?.status) === 12
-            ) && !order.review && !isReviewed && (
-              <ReviewsAction>
-                <Button color='primary' onClick={() => setOpenReview(true)}>
-                  {t('REVIEW_ORDER', 'Review your Order')}
-                </Button>
-              </ReviewsAction>
-            )}
+              {(
+                parseInt(order?.status) === 1 ||
+                parseInt(order?.status) === 2 ||
+                parseInt(order?.status) === 5 ||
+                parseInt(order?.status) === 6 ||
+                parseInt(order?.status) === 10 ||
+                parseInt(order?.status) === 11 ||
+                parseInt(order?.status) === 12
+              ) && !order.review && !isReviewed && (
+                <ReviewsAction>
+                  <Button color='primary' onClick={() => setOpenReview(true)}>
+                    {t('REVIEW_ORDER', 'Review your Order')}
+                  </Button>
+                </ReviewsAction>
+              )}
 
-            {!userCustomerId && (
-              <FootActions>
-                <a onClick={() => handleGoToPage({ page: 'orders' })}>
-                  {t('MY_ORDERS', 'My Orders')}
-                  <BiCaretUp />
-                </a>
-              </FootActions>
-            )}
-          </Content>
-        </WrapperContainer>
-      )}
+              {!userCustomerId && (
+                <FootActions>
+                  <a onClick={() => handleGoToPage({ page: 'orders' })}>
+                    {t('MY_ORDERS', 'My Orders')}
+                    <BiCaretUp />
+                  </a>
+                </FootActions>
+              )}
+            </Content>
+          </WrapperContainer>
+        )}
 
-      {loading && !error && (
-        <WrapperContainer isLoading className='skeleton-loading'>
-          <SkeletonBlockWrapp>
-            <SkeletonBlock width={80}>
-              <Skeleton height={300} />
-              <Skeleton />
-              <Skeleton height={100} />
-              <Skeleton height={100} />
-              <Skeleton />
-              <Skeleton height={200} />
-            </SkeletonBlock>
-          </SkeletonBlockWrapp>
-        </WrapperContainer>
-      )}
+        {loading && !error && (
+          <WrapperContainer isLoading className='skeleton-loading'>
+            <SkeletonBlockWrapp>
+              <SkeletonBlock width={80}>
+                <Skeleton height={300} />
+                <Skeleton />
+                <Skeleton height={100} />
+                <Skeleton height={100} />
+                <Skeleton />
+                <Skeleton height={200} />
+              </SkeletonBlock>
+            </SkeletonBlockWrapp>
+          </WrapperContainer>
+        )}
 
-      {!loading && error && (
-        error.includes('ERROR_ACCESS_EXPIRED') ? (
-          <NotFoundSource
-            content={t(error[0], 'Sorry, the order has expired.')}
-          />
-        ) : (
-          <NotFoundSource
-            content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
-            btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
-            onClickButton={handleOrderRedirect}
-          />
-        )
-      )}
+        {!loading && error && (
+          error.includes('ERROR_ACCESS_EXPIRED') ? (
+            <NotFoundSource
+              content={t(error[0], 'Sorry, the order has expired.')}
+            />
+          ) : (
+            <NotFoundSource
+              content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
+              btnTitle={t('ORDERS_REDIRECT', 'Go to Orders')}
+              onClickButton={handleOrderRedirect}
+            />
+          )
+        )}
 
-      {(openMessages.driver || openMessages.business) && (
-        <Modal
-          open={openMessages.driver || openMessages.business}
-          onClose={() => setOpenMessages({ driver: false, business: false })}
-          padding='0'
-          width='70%'
-        >
-          <Messages
-            orderId={order?.id}
-            order={order}
-            business={openMessages.business}
-            driver={openMessages.driver}
-            messages={messages}
-            setMessages={setMessages}
-            readMessages={readMessages}
-          />
-        </Modal>
-      )}
-      {openReview && (
-        <Modal
-          open={openReview}
-          onClose={() => setOpenReview(false)}
-          title={order ? `${t('WRITE_A_REVIEW', 'Write a Review')} #${order?.id}` : t('LOADING', 'Loading...')}
-        >
-          <ReviewOrder order={order} closeReviewOrder={() => setOpenReview(false)} setIsReviewed={setIsReviewed} />
-        </Modal>
-      )}
-    </Container>
+        {(openMessages.driver || openMessages.business) && (
+          <Modal
+            open={openMessages.driver || openMessages.business}
+            onClose={() => setOpenMessages({ driver: false, business: false })}
+            padding='0'
+            width='70%'
+          >
+            <Messages
+              orderId={order?.id}
+              order={order}
+              business={openMessages.business}
+              driver={openMessages.driver}
+              messages={messages}
+              setMessages={setMessages}
+              readMessages={readMessages}
+            />
+          </Modal>
+        )}
+        {openReview && (
+          <Modal
+            open={openReview}
+            onClose={() => setOpenReview(false)}
+            title={order ? `${t('WRITE_A_REVIEW', 'Write a Review')} #${order?.id}` : t('LOADING', 'Loading...')}
+          >
+            <ReviewOrder order={order} closeReviewOrder={() => setOpenReview(false)} setIsReviewed={setIsReviewed} />
+          </Modal>
+        )}
+      </Container>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

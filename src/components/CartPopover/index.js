@@ -71,22 +71,40 @@ export const CartPopover = (props) => {
   }
 
   return (
-    <div style={{ overflow: 'hidden' }}>
-      <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover'>
-        <span>
-          <IosBasket />
-          {props.carts?.length > 0 && <p>{props.carts?.length}</p>}
-        </span>
-      </HeaderItem>
-      <PopoverBody className='cart-popover' ref={popperElement} style={popStyle} {...attributes.popper}>
-        <CartContent
-          isCartPopover
-          carts={props.carts}
-          isOrderStateCarts={!!orderState.carts}
-          onClose={props.onClose}
-        />
-        <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
-      </PopoverBody>
-    </div>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <div style={{ overflow: 'hidden' }}>
+        <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover'>
+          <span>
+            <IosBasket />
+            {props.carts?.length > 0 && <p>{props.carts?.length}</p>}
+          </span>
+        </HeaderItem>
+        <PopoverBody className='cart-popover' ref={popperElement} style={popStyle} {...attributes.popper}>
+          <CartContent
+            isCartPopover
+            carts={props.carts}
+            isOrderStateCarts={!!orderState.carts}
+            onClose={props.onClose}
+          />
+          <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
+        </PopoverBody>
+      </div>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }

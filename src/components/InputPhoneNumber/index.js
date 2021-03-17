@@ -33,6 +33,14 @@ export const InputPhoneNumber = (props) => {
   return (
     <Container className='phone_number' disabled={disabled} isValid={value ? isValidPhoneNumber(value) : true}>
       <>
+        {props.beforeElements?.map((BeforeElement, i) => (
+          <React.Fragment key={i}>
+            {BeforeElement}
+          </React.Fragment>))
+        }
+        {props.beforeComponents?.map((BeforeComponent, i) => (
+          <BeforeComponent key={i} {...props} />))
+        }
         <PhoneInput
           disabled={disabled}
           placeholder={t('PHONE_NUMBER', 'Phone number')}
@@ -52,6 +60,14 @@ export const InputPhoneNumber = (props) => {
             )}
           </>
         )}
+        {props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
+        }
+        {props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
+        }
       </>
     </Container>
   )

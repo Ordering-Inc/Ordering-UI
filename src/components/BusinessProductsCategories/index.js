@@ -32,29 +32,47 @@ const BusinessProductsCategoriesUI = (props) => {
   }
 
   return (
-    <CategoriesContainer featured={featured}>
-      {!isSkeleton ? (
-        <Tabs variant='primary'>
-          {openBusinessInformation ? (
-            <>
-              <ProductCategories />
-            </>
-          ) : (
-            <AutoScroll>
-              <ProductCategories />
-            </AutoScroll>
-          )}
-        </Tabs>
-      ) : (
-        <Tabs variant='primary'>
-          {[...Array(4).keys()].map(i => (
-            <Tab key={i}>
-              <Skeleton width={100} />
-            </Tab>
-          ))}
-        </Tabs>
-      )}
-    </CategoriesContainer>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <CategoriesContainer featured={featured}>
+        {!isSkeleton ? (
+          <Tabs variant='primary'>
+            {openBusinessInformation ? (
+              <>
+                <ProductCategories />
+              </>
+            ) : (
+              <AutoScroll>
+                <ProductCategories />
+              </AutoScroll>
+            )}
+          </Tabs>
+        ) : (
+          <Tabs variant='primary'>
+            {[...Array(4).keys()].map(i => (
+              <Tab key={i}>
+                <Skeleton width={100} />
+              </Tab>
+            ))}
+          </Tabs>
+        )}
+      </CategoriesContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

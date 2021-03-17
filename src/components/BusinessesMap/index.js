@@ -28,6 +28,14 @@ const BusinessesMapUI = (props) => {
 
   return (
     <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
       <WrapperMap disabled={orderState.loading}>
         <GoogleMapsMap
           apiKey={configState?.configs?.google_maps_api_key?.value}
@@ -40,6 +48,14 @@ const BusinessesMapUI = (props) => {
           setErrors={setErrors}
         />
       </WrapperMap>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
     </>
   )
 }

@@ -147,135 +147,153 @@ const SignUpFormUI = (props) => {
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   return (
-    <SignUpContainer isPopup={isPopup}>
-      <HeroSide>
-        <TitleHeroSide>
-          <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
-          <p>{t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}</p>
-        </TitleHeroSide>
-      </HeroSide>
-      <FormSide isPopup={isPopup}>
-        <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo sign up' width='200' height='66' loading='lazy' />
-        <FormInput
-          noValidate
-          isPopup={isPopup}
-          onSubmit={handleSubmit(onSubmit)}
-          isSkeleton={useChekoutFileds && validationFields?.loading}
-        >
-          {
-            !(useChekoutFileds && validationFields?.loading) ? (
-              <>
-                {
-                  validationFields?.fields?.checkout && Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
-                    showField(field.code) && (
-                      <Input
-                        key={field.id}
-                        type={field.enabled && field.required ? field.type : 'hidden'}
-                        name={field.code}
-                        aria-label={field.code}
-                        className='form'
-                        placeholder={t(field.name)}
-                        onChange={handleChangeInput}
-                        ref={register({
-                          required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
-                          pattern: {
-                            value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                            message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-                          }
-                        })}
-                        required={field.required}
-                        autoComplete='off'
-                      />
-                    )
-                  ))
-                }
-                {!!showInputPhoneNumber && !externalPhoneNumber && (
-                  <InputPhoneNumber
-                    value={userPhoneNumber}
-                    setValue={handleChangePhoneNumber}
-                    handleIsValid={setIsValidPhoneNumber}
-                  />
-                )}
-
-                {externalPhoneNumber && (
-                  <Input
-                    value={externalPhoneNumber}
-                    className='form'
-                    readOnly
-                    name='cellphone'
-                  />
-                )}
-
-                <Input
-                  type='password'
-                  name='password'
-                  aria-label='password'
-                  className='form'
-                  placeholder={t('PASSWORD', 'Password')}
-                  onChange={handleChangeInput}
-                  required
-                  ref={register({
-                    required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
-                    minLength: {
-                      value: 8,
-                      message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                    }
-                  })}
-                />
-              </>
-            ) : (
-              <>
-                {[...Array(5)].map((item, i) => (
-                  <SkeletonWrapper key={i}>
-                    <Skeleton height={43} />
-                  </SkeletonWrapper>
-                ))}
-              </>
-            )
-          }
-          <Button
-            color='primary'
-            type='submit'
-            disabled={formState.loading || validationFields.loading}
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <SignUpContainer isPopup={isPopup}>
+        <HeroSide>
+          <TitleHeroSide>
+            <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
+            <p>{t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}</p>
+          </TitleHeroSide>
+        </HeroSide>
+        <FormSide isPopup={isPopup}>
+          <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo sign up' width='200' height='66' loading='lazy' />
+          <FormInput
+            noValidate
+            isPopup={isPopup}
+            onSubmit={handleSubmit(onSubmit)}
+            isSkeleton={useChekoutFileds && validationFields?.loading}
           >
-            {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
-          </Button>
-        </FormInput>
-        {elementLinkToLogin && (
-          <RedirectLink register isPopup={isPopup}>
-            <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')}</span>
-            {elementLinkToLogin}
-          </RedirectLink>
-        )}
-        {!externalPhoneNumber && (
-          <>
-            {Object.keys(configs).length > 0 ? (
-              <SocialButtons isPopup={isPopup}>
-                {configs?.facebook_login?.value && configs?.facebook_id?.value && (
-                  <FacebookLoginButton
-                    appId={configs?.facebook_id?.value}
-                    handleSuccessFacebookLogin={handleSuccessFacebook}
+            {
+              !(useChekoutFileds && validationFields?.loading) ? (
+                <>
+                  {
+                  validationFields?.fields?.checkout && Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
+                      showField(field.code) && (
+                        <Input
+                          key={field.id}
+                          type={field.enabled && field.required ? field.type : 'hidden'}
+                          name={field.code}
+                          aria-label={field.code}
+                          className='form'
+                          placeholder={t(field.name)}
+                          onChange={handleChangeInput}
+                          ref={register({
+                            required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
+                            pattern: {
+                              value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
+                              message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
+                            }
+                          })}
+                          required={field.required}
+                          autoComplete='off'
+                        />
+                      )
+                    ))
+                  }
+                  {!!showInputPhoneNumber && !externalPhoneNumber && (
+                    <InputPhoneNumber
+                      value={userPhoneNumber}
+                      setValue={handleChangePhoneNumber}
+                      handleIsValid={setIsValidPhoneNumber}
+                    />
+                  )}
+
+                  {externalPhoneNumber && (
+                    <Input
+                      value={externalPhoneNumber}
+                      className='form'
+                      readOnly
+                      name='cellphone'
+                    />
+                  )}
+
+                  <Input
+                    type='password'
+                    name='password'
+                    aria-label='password'
+                    className='form'
+                    placeholder={t('PASSWORD', 'Password')}
+                    onChange={handleChangeInput}
+                    required
+                    ref={register({
+                      required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                      minLength: {
+                        value: 8,
+                        message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                      }
+                    })}
                   />
-                )}
-              </SocialButtons>
-            ) : (
-              <SkeletonSocialWrapper>
-                <Skeleton height={43} />
-              </SkeletonSocialWrapper>
-            )}
-          </>
-        )}
-      </FormSide>
-      <Alert
-        title={t('SIGN_UP', 'Sign up')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-    </SignUpContainer>
+                </>
+              ) : (
+                <>
+                  {[...Array(5)].map((item, i) => (
+                    <SkeletonWrapper key={i}>
+                      <Skeleton height={43} />
+                    </SkeletonWrapper>
+                  ))}
+                </>
+              )
+            }
+            <Button
+              color='primary'
+              type='submit'
+              disabled={formState.loading || validationFields.loading}
+            >
+              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
+            </Button>
+          </FormInput>
+          {elementLinkToLogin && (
+            <RedirectLink register isPopup={isPopup}>
+              <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')}</span>
+              {elementLinkToLogin}
+            </RedirectLink>
+          )}
+          {!externalPhoneNumber && (
+            <>
+              {Object.keys(configs).length > 0 ? (
+                <SocialButtons isPopup={isPopup}>
+                  {configs?.facebook_login?.value && configs?.facebook_id?.value && (
+                    <FacebookLoginButton
+                      appId={configs?.facebook_id?.value}
+                      handleSuccessFacebookLogin={handleSuccessFacebook}
+                    />
+                  )}
+                </SocialButtons>
+              ) : (
+                <SkeletonSocialWrapper>
+                  <Skeleton height={43} />
+                </SkeletonSocialWrapper>
+              )}
+            </>
+          )}
+        </FormSide>
+        <Alert
+          title={t('SIGN_UP', 'Sign up')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
+          closeOnBackdrop={false}
+        />
+      </SignUpContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

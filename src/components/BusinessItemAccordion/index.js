@@ -116,86 +116,104 @@ export const BusinessItemAccordion = (props) => {
   }, [setActive])
 
   return (
-    <AccordionSection isClosed={isClosed}>
-      <Accordion
-        isClosed={isClosed}
-        className={`accordion ${setActive}`}
-        onClick={(e) => toggleAccordion(e)}
-      >
-        <BusinessInfo>
-          {business?.logo && !isCartOnProductsList && (
-            <WrapperBusinessLogo>
-              <BusinessLogo bgimage={business?.logo} />
-            </WrapperBusinessLogo>
-          )}
-          <ContentInfo className='info'>
-            <h2>{business?.name}</h2>
-            {orderState?.options?.type === 1 ? (
-              <span>
-                <FiClock />
-                {convertHoursToMinutes(business?.delivery_time)}
-              </span>
-            ) : (
-              <span>
-                <FiClock />
-                {convertHoursToMinutes(business?.pickup_time)}
-              </span>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <AccordionSection isClosed={isClosed}>
+        <Accordion
+          isClosed={isClosed}
+          className={`accordion ${setActive}`}
+          onClick={(e) => toggleAccordion(e)}
+        >
+          <BusinessInfo>
+            {business?.logo && !isCartOnProductsList && (
+              <WrapperBusinessLogo>
+                <BusinessLogo bgimage={business?.logo} />
+              </WrapperBusinessLogo>
             )}
-          </ContentInfo>
-        </BusinessInfo>
-
-        {!isClosed && !!isProducts && (
-          <BusinessTotal className='total' isCartOnProductsList={isCartOnProductsList}>
-            {isValidProducts && orderTotal > 0 && <p>{parsePrice(orderTotal)}</p>}
-            <p>{t('CART_TOTAL', 'Total')}</p>
-          </BusinessTotal>
-        )}
-
-        {isClosed && (
-          <BusinessTotal className='closed'>
-            <p>{t('CLOSED', 'Closed')} {moment}</p>
-          </BusinessTotal>
-        )}
-
-        {!isClosed && !isProducts && (
-          <BusinessTotal>
-            <p>{t('NO_PRODUCTS', 'No products')}</p>
-          </BusinessTotal>
-        )}
-
-        <BusinessActions>
-          {handleStoreRedirect && !isCartOnProductsList && (
-            <span
-              ref={businessStore}
-              onClick={() => handleStoreRedirect(business?.slug)}
-            >
-              <BiStoreAlt color='#CCC' />
-            </span>
-          )}
-          {!isClosed && !!isProducts && (
-            <>
-              {!isCartPending && (
-                <span
-                  ref={businessDelete}
-                  onClick={() => handleClearProducts()}
-                >
-                  <VscTrash color='#D81212' />
+            <ContentInfo className='info'>
+              <h2>{business?.name}</h2>
+              {orderState?.options?.type === 1 ? (
+                <span>
+                  <FiClock />
+                  {convertHoursToMinutes(business?.delivery_time)}
+                </span>
+              ) : (
+                <span>
+                  <FiClock />
+                  {convertHoursToMinutes(business?.pickup_time)}
                 </span>
               )}
-              <span>
-                <IosArrowDown className={`${setRotate}`} />
-              </span>
-            </>
-          )}
-        </BusinessActions>
-      </Accordion>
+            </ContentInfo>
+          </BusinessInfo>
 
-      <AccordionContent
-        ref={content}
-        style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
-      >
-        {props.children}
-      </AccordionContent>
-    </AccordionSection>
+          {!isClosed && !!isProducts && (
+            <BusinessTotal className='total' isCartOnProductsList={isCartOnProductsList}>
+              {isValidProducts && orderTotal > 0 && <p>{parsePrice(orderTotal)}</p>}
+              <p>{t('CART_TOTAL', 'Total')}</p>
+            </BusinessTotal>
+          )}
+
+          {isClosed && (
+            <BusinessTotal className='closed'>
+              <p>{t('CLOSED', 'Closed')} {moment}</p>
+            </BusinessTotal>
+          )}
+
+          {!isClosed && !isProducts && (
+            <BusinessTotal>
+              <p>{t('NO_PRODUCTS', 'No products')}</p>
+            </BusinessTotal>
+          )}
+
+          <BusinessActions>
+            {handleStoreRedirect && !isCartOnProductsList && (
+              <span
+                ref={businessStore}
+                onClick={() => handleStoreRedirect(business?.slug)}
+              >
+                <BiStoreAlt color='#CCC' />
+              </span>
+            )}
+            {!isClosed && !!isProducts && (
+              <>
+                {!isCartPending && (
+                  <span
+                    ref={businessDelete}
+                    onClick={() => handleClearProducts()}
+                  >
+                    <VscTrash color='#D81212' />
+                  </span>
+                )}
+                <span>
+                  <IosArrowDown className={`${setRotate}`} />
+                </span>
+              </>
+            )}
+          </BusinessActions>
+        </Accordion>
+
+        <AccordionContent
+          ref={content}
+          style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
+        >
+          {props.children}
+        </AccordionContent>
+      </AccordionSection>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
