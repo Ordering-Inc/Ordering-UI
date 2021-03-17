@@ -247,8 +247,10 @@ const OrderDetailsUI = (props) => {
                 <span>{order?.customer?.address}</span>
               </InfoBlock>
             </OrderCustomer>
-
-            {configs?.guest_uuid_access && order?.hash_key && (
+            {(typeof configs?.guest_uuid_access.value === 'number'
+              ? configs?.guest_uuid_access.value
+              : parseInt(configs?.guest_uuid_access.value)) &&
+            order?.hash_key && (
               <ShareOrder>
                 <div className='text'>
                   <h1>{t('SHARE_THIS_DELIVERY', 'Share this delivery')}</h1>
