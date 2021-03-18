@@ -82,11 +82,9 @@ const ForgotPasswordUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <ForgotPasswordContainer isPopup={isPopup}>
         <HeroSide isPopup={isPopup}>
           <TitleHeroSide>
@@ -101,6 +99,12 @@ const ForgotPasswordUI = (props) => {
             isPopup={isPopup}
             onSubmit={handleSubmit(onSubmit)}
           >
+            {props.beforeMidElements?.map((BeforeMidElements, i) => (
+              <React.Fragment key={i}>
+                {BeforeMidElements}
+              </React.Fragment>))}
+            {props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+              <BeforeMidComponents key={i} {...props} />))}
             <Input
               type='text'
               name='email'
@@ -117,6 +121,16 @@ const ForgotPasswordUI = (props) => {
               })}
               autoComplete='off'
             />
+            {
+              props.afterMidElements?.map((MidElement, i) => (
+                <React.Fragment key={i}>
+                  {MidElement}
+                </React.Fragment>))
+            }
+            {
+              props.afterMidComponents?.map((MidComponent, i) => (
+                <MidComponent key={i} {...props} />))
+            }
             <Button color={formState.loading || alertState.success ? 'secondary' : 'primary'} type='submit' disabled={formState.loading || alertState.success}>
               {formState.loading
                 ? t('LOADING', 'Loading...')
@@ -143,13 +157,11 @@ const ForgotPasswordUI = (props) => {
         />
       </ForgotPasswordContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

@@ -97,11 +97,9 @@ const LoginFormUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <LoginContainer isPopup={isPopup}>
         <HeroSide>
           <TitleHeroSide>
@@ -141,6 +139,16 @@ const LoginFormUI = (props) => {
               isPopup={isPopup}
               onSubmit={handleSubmit(onSubmit)}
             >
+              {
+              props.beforeMidElements?.map((BeforeMidElements, i) => (
+                <React.Fragment key={i}>
+                  {BeforeMidElements}
+                </React.Fragment>))
+              }
+              {
+              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                <BeforeMidComponents key={i} {...props} />))
+              }
               {useLoginByEmail && loginTab === 'email' && (
                 <Input
                   type='email'
@@ -186,6 +194,16 @@ const LoginFormUI = (props) => {
                   {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                 </TogglePassword>
               </WrapperPassword>
+              {
+              props.afterMidElements?.map((MidElement, i) => (
+                <React.Fragment key={i}>
+                  {MidElement}
+                </React.Fragment>))
+              }
+              {
+              props.afterMidComponents?.map((MidComponent, i) => (
+                <MidComponent key={i} {...props} />))
+              }
               <RedirectLink isPopup={isPopup}>
                 <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                 {elementLinkToForgotPassword}
@@ -237,13 +255,11 @@ const LoginFormUI = (props) => {
         />
       </LoginContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
