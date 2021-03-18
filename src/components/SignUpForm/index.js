@@ -171,6 +171,14 @@ const SignUpFormUI = (props) => {
             onSubmit={handleSubmit(onSubmit)}
             isSkeleton={useChekoutFileds && validationFields?.loading}
           >
+            {props.beforeMidElements?.map((BeforeMidElements, i) => (
+              <React.Fragment key={i}>
+                {BeforeMidElements}
+              </React.Fragment>))
+            }
+            {props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+              <BeforeMidComponents key={i} {...props} />))
+            }
             {
               !(useChekoutFileds && validationFields?.loading) ? (
                 <>
@@ -231,6 +239,14 @@ const SignUpFormUI = (props) => {
                       }
                     })}
                   />
+                  {props.afterMidElements?.map((MidElement, i) => (
+                    <React.Fragment Fragmentkey={i}>
+                      {MidElement}
+                    </React.Fragment>))
+                  }
+                  {props.afterMidComponents?.map((MidComponent, i) => (
+                    <MidComponent key={i} {...props} />))
+                  }
                 </>
               ) : (
                 <>
