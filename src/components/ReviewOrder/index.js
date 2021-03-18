@@ -86,11 +86,9 @@ const ReviewOrderUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
         <Reviews>
           <h2>{t('REVIEWS', 'Reviews')}:</h2>
@@ -110,6 +108,16 @@ const ReviewOrderUI = (props) => {
                 )}
               </React.Fragment>
             ))}
+            {
+            props.beforeMidElements?.map((BeforeMidElements, i) => (
+              <React.Fragment key={i}>
+                {BeforeMidElements}
+              </React.Fragment>))
+            }
+            {
+            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+              <BeforeMidComponents key={i} {...props} />))
+            }
             <Category id='stars' onMouseLeave={() => setHover(stars)}>
               <p>{t('QUALITY', 'Quality of Product')}:</p>
               <Stars>
@@ -148,6 +156,16 @@ const ReviewOrderUI = (props) => {
             autoComplete='off'
           />
         </Comments>
+        {
+          props.afterMidElements?.map((MidElement, i) => (
+            <React.Fragment key={i}>
+              {MidElement}
+            </React.Fragment>))
+        }
+        {
+          props.afterMidComponents?.map((MidComponent, i) => (
+            <MidComponent key={i} {...props} />))
+        }
         <Send>
           <Button
             color={!formState.loading ? 'primary' : 'secondary'}
@@ -168,13 +186,11 @@ const ReviewOrderUI = (props) => {
         />
       </ReviewOrderContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

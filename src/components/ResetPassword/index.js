@@ -95,11 +95,9 @@ const ResetPasswordUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <ResetPasswordContainer>
         {auth ? (
           <PageNotFound />
@@ -111,10 +109,20 @@ const ResetPasswordUI = (props) => {
                 <p>{code && random ? t('SUBTITLE_RESET_PASSWORD', 'Reset your password') : t('RESET_PASSWORD_CODES_TITLE', 'Please insert the codes')}</p>
               </TitleHeroSide>
             </HeroSide>
+            {
+            props.beforeMidElements?.map((BeforeMidElements, i) => (
+              <React.Fragment key={i}>
+                {BeforeMidElements}
+              </React.Fragment>))
+            }
+            {
+            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+              <BeforeMidComponents key={i} {...props} />))
+            }
             {code && random ? (
               <>
                 <FormSide>
-                  <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' loading='lazy'/>
+                  <img src={theme?.images?.logos?.logotype} alt='Logo' width='200' height='66' loading='lazy' />
                   <FormInput
                     noValidate
                     onSubmit={handleSubmit(onSubmit)}
@@ -199,6 +207,16 @@ const ResetPasswordUI = (props) => {
                 </FormInput>
               </FormSide>
             )}
+            {
+            props.afterMidElements?.map((MidElement, i) => (
+              <React.Fragment key={i}>
+                {MidElement}
+              </React.Fragment>))
+            }
+            {
+            props.afterMidComponents?.map((MidComponent, i) => (
+              <MidComponent key={i} {...props} />))
+            }
             <Alert
               title={t('RESET_PASSWORD', 'Reset Password')}
               content={alertState?.content}
@@ -212,13 +230,11 @@ const ResetPasswordUI = (props) => {
         )}
       </ResetPasswordContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

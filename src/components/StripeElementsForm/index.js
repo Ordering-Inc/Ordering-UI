@@ -22,6 +22,12 @@ const StripeElementsFormUI = (props) => {
   const [, t] = useLanguage()
   return (
     <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))}
       {publicKey ? (
         <Elements stripe={loadStripe(publicKey)}>
           <CardForm
@@ -36,6 +42,12 @@ const StripeElementsFormUI = (props) => {
       ) : (
         <ErrorMessage>{t('SOMETHING_WRONG', 'Something is wrong!')}</ErrorMessage>
       )}
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))}
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))}
     </>
   )
 }
