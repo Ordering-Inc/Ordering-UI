@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ForgotPasswordUI = function ForgotPasswordUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var hanldeChangeInput = props.hanldeChangeInput,
       handleButtonForgotPasswordClick = props.handleButtonForgotPasswordClick,
@@ -150,7 +150,15 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeMidElements);
+  }), (_props$beforeMidCompo = props.beforeMidComponents) === null || _props$beforeMidCompo === void 0 ? void 0 : _props$beforeMidCompo.map(function (BeforeMidComponents, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     name: "email",
     "aria-label": "email",
@@ -167,6 +175,14 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       }
     }),
     autoComplete: "off"
+  }), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, MidElement);
+  }), (_props$afterMidCompon = props.afterMidComponents) === null || _props$afterMidCompon === void 0 ? void 0 : _props$afterMidCompon.map(function (MidComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
+      key: i
+    }, props));
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: formState.loading || alertState.success ? 'secondary' : 'primary',
     type: "submit",
