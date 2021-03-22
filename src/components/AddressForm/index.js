@@ -117,8 +117,8 @@ const AddressFormUI = (props) => {
     geocoder.geocode({ address: addressChange }, (results, status) => {
       let postalCode = null
       if (status === 'OK' && results && results.length > 0) {
-        for (const component of results[0].address_components) {
-          const addressType = component.types[0]
+        for (const component of results?.[0].address_components) {
+          const addressType = component.types?.[0]
           if (addressType === 'postal_code') {
             postalCode = component.short_name
             break
@@ -126,11 +126,11 @@ const AddressFormUI = (props) => {
         }
         data.address = {
           address: addressChange,
-          location: { lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() },
-          utc_offset: results[0].utc_offset_minutes ?? 0,
+          location: { lat: results?.[0].geometry.location.lat(), lng: results?.[0].geometry.location.lng() },
+          utc_offset: results?.[0].utc_offset_minutes ?? 0,
           map_data: {
             library: 'google',
-            place_id: results[0].place_id
+            place_id: results?.[0].place_id
           }
         }
         if (postalCode) {

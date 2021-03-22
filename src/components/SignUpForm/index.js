@@ -106,7 +106,7 @@ const SignUpFormUI = (props) => {
       })
       return
     }
-    handleButtonSignupClick()
+    handleButtonSignupClick && handleButtonSignupClick()
     if (!formState.loading && formState.result.result && !formState.result.error) {
       handleSuccessSignup(formState.result.result)
     }
@@ -180,7 +180,7 @@ const SignUpFormUI = (props) => {
                 <>
                   {
                   validationFields?.fields?.checkout && Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
-                      showField(field.code) && (
+                      showField && showField(field.code) && (
                         <Input
                           key={field.id}
                           type={field.enabled && field.required ? field.type : 'hidden'}
@@ -255,7 +255,7 @@ const SignUpFormUI = (props) => {
             <Button
               color='primary'
               type='submit'
-              disabled={formState.loading || validationFields.loading}
+              disabled={formState.loading || validationFields?.loading}
             >
               {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
             </Button>
