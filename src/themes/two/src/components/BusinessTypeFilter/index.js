@@ -18,6 +18,10 @@ const BusinessTypeFilterUI = (props) => {
   const [, t] = useLanguage()
   const [load, setLoad] = useState(false)
 
+  const handleChangeCategory = (category) => {
+    handleChangeBusinessType && handleChangeBusinessType(category)
+  }
+
   return (
     <TypeContainer id='container' noAutoScroll={noAutoScroll}>
       <Tabs variant='primary'>
@@ -31,7 +35,7 @@ const BusinessTypeFilterUI = (props) => {
                       src={images[0].image}
                       alt='all'
                       onLoad={() => setLoad(true)}
-                      onClick={() => handleChangeBusinessType(type.value)}
+                      onClick={() => handleChangeCategory(type.value)}
                       width='150px'
                       height='150px'
                       loading='lazy'
@@ -45,7 +49,7 @@ const BusinessTypeFilterUI = (props) => {
                         <img
                           src={image.image}
                           alt={type.value}
-                          onClick={() => handleChangeBusinessType(type.value)}
+                          onClick={() => handleChangeCategory(type.value)}
                           width='150px'
                           height='150px'
                           loading='lazy'
@@ -69,7 +73,7 @@ const BusinessTypeFilterUI = (props) => {
                       src={images[0].image}
                       alt='all'
                       onLoad={() => setLoad(true)}
-                      onClick={() => handleChangeBusinessType(type.value)}
+                      onClick={() => handleChangeCategory(type.value)}
                       loading='lazy'
                     />
                   </ImageContainer>)
@@ -81,7 +85,7 @@ const BusinessTypeFilterUI = (props) => {
                         <img
                           src={image.image}
                           alt={type.value}
-                          onClick={() => handleChangeBusinessType(type.value)}
+                          onClick={() => handleChangeCategory(type.value)}
                           loading='lazy'
                         />
                       </ImageContainer>)
