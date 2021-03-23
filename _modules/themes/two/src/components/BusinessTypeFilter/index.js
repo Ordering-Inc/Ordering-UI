@@ -57,6 +57,10 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       load = _useState2[0],
       setLoad = _useState2[1];
 
+  var handleChangeCategory = function handleChangeCategory(category) {
+    handleChangeBusinessType && handleChangeBusinessType(category);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
     id: "container",
     noAutoScroll: noAutoScroll
@@ -77,7 +81,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         return setLoad(true);
       },
       onClick: function onClick() {
-        return handleChangeBusinessType(type.value);
+        return handleChangeCategory(type.value);
       },
       width: "150px",
       height: "150px",
@@ -92,7 +96,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         src: image.image,
         alt: type.value,
         onClick: function onClick() {
-          return handleChangeBusinessType(type.value);
+          return handleChangeCategory(type.value);
         },
         width: "150px",
         height: "150px",
@@ -115,7 +119,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         return setLoad(true);
       },
       onClick: function onClick() {
-        return handleChangeBusinessType(type.value);
+        return handleChangeCategory(type.value);
       },
       loading: "lazy"
     })) : '', images.map(function (image) {
@@ -129,7 +133,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         src: image.image,
         alt: type.value,
         onClick: function onClick() {
-          return handleChangeBusinessType(type.value);
+          return handleChangeCategory(type.value);
         },
         loading: "lazy"
       })) : '');

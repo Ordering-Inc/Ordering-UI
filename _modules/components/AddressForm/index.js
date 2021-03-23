@@ -219,13 +219,15 @@ var AddressFormUI = function AddressFormUI(props) {
       if (status === 'OK' && results && results.length > 0) {
         var _results$0$utc_offset, _arrayList$map$some;
 
-        var _iterator = _createForOfIteratorHelper(results[0].address_components),
+        var _iterator = _createForOfIteratorHelper(results === null || results === void 0 ? void 0 : results[0].address_components),
             _step;
 
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var _component$types;
+
             var component = _step.value;
-            var addressType = component.types[0];
+            var addressType = (_component$types = component.types) === null || _component$types === void 0 ? void 0 : _component$types[0];
 
             if (addressType === 'postal_code') {
               postalCode = component.short_name;
@@ -241,13 +243,13 @@ var AddressFormUI = function AddressFormUI(props) {
         data.address = {
           address: addressChange,
           location: {
-            lat: results[0].geometry.location.lat(),
-            lng: results[0].geometry.location.lng()
+            lat: results === null || results === void 0 ? void 0 : results[0].geometry.location.lat(),
+            lng: results === null || results === void 0 ? void 0 : results[0].geometry.location.lng()
           },
-          utc_offset: (_results$0$utc_offset = results[0].utc_offset_minutes) !== null && _results$0$utc_offset !== void 0 ? _results$0$utc_offset : 0,
+          utc_offset: (_results$0$utc_offset = results === null || results === void 0 ? void 0 : results[0].utc_offset_minutes) !== null && _results$0$utc_offset !== void 0 ? _results$0$utc_offset : 0,
           map_data: {
             library: 'google',
-            place_id: results[0].place_id
+            place_id: results === null || results === void 0 ? void 0 : results[0].place_id
           }
         };
 

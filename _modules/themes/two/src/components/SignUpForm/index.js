@@ -246,7 +246,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     onSubmit: handleSubmit(onSubmit),
     isSkeleton: useChekoutFileds && (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
   }, !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout) && Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.checkout).map(function (field) {
-    return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, {
+    return !notValidationFields.includes(field.code) && showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement("label", null, t(field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       type: field.enabled && field.required ? field.type : 'hidden',

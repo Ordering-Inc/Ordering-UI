@@ -182,7 +182,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       return;
     }
 
-    handleButtonSignupClick();
+    handleButtonSignupClick && handleButtonSignupClick();
 
     if (!formState.loading && formState.result.result && !formState.result.error) {
       handleSuccessSignup(formState.result.result);
@@ -257,7 +257,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       key: i
     }, props));
   }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout) && Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.checkout).map(function (field) {
-    return !notValidationFields.includes(field.code) && showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    return !notValidationFields.includes(field.code) && showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.enabled && field.required ? field.type : 'hidden',
       name: field.code,
@@ -316,7 +316,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
-    disabled: formState.loading || validationFields.loading
+    disabled: formState.loading || (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
   }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_UP', 'Sign up'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
