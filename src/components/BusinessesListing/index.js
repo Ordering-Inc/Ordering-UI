@@ -123,6 +123,9 @@ const BusinessesListingUI = (props) => {
       }
       <BusinessContainer>
         <BusinessTypeFilter
+          images={props.images}
+          businessTypes={props.businessTypes}
+          defaultBusinessType={props.defaultBusinessType}
           handleChangeBusinessType={handleChangeBusinessType}
         />
 
