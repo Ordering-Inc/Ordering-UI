@@ -25,7 +25,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  padding: 20px;\n  border-radius: 10px;\n  cursor: pointer;\n  position: relative;\n\n  background: ", ";\n  border: none;\n  border-radius: initial;\n  border-bottom: 1px solid ", ";\n  @media (min-width: 767px) {\n    border-radius: 10px;\n    border: 1px solid ", ";\n    width: calc(50% - 20px);\n    margin: 10px;\n  }\n"])), function (_ref) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  padding: 20px;\n  border-radius: 10px;\n  cursor: pointer;\n  position: relative;\n  box-sizing: border-box;\n\n  background: ", ";\n  border: none;\n  border-radius: initial;\n  border-bottom: 1px solid ", ";\n  @media (min-width: 767px) {\n    border-radius: 10px;\n    border: 1px solid ", ";\n    width: calc(50% - 20px);\n    margin: 10px;\n  }\n"])), function (_ref) {
   var soldOut = _ref.soldOut;
   return soldOut ? '#B8B8B8' : '#FFF';
 }, function (props) {

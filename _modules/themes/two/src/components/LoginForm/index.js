@@ -141,6 +141,9 @@ var LoginFormUI = function LoginFormUI(props) {
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    document.querySelector('.wrap-reset > a').tabIndex = '-1';
+  }, []);
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -172,6 +175,7 @@ var LoginFormUI = function LoginFormUI(props) {
     name: "email",
     "aria-label": "email",
     placeholder: t('EMAIL', 'Email'),
+    tabindex: "1",
     ref: register({
       required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
       pattern: {
@@ -184,12 +188,14 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
-    isPopup: isPopup
+    isPopup: isPopup,
+    className: "wrap-reset"
   }, elementLinkToForgotPassword)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     "aria-label": "password",
     placeholder: t('PASSWORD', 'Password'),
+    tabindex: "2",
     ref: register({
       required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
     }),

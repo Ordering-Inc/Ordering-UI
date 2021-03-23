@@ -79,7 +79,7 @@ var optionsDefault = [{
 }];
 
 var UserPopover = function UserPopover(props) {
-  var _sessionState$user, _sessionState$user2;
+  var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       isHome = props.isHome,
@@ -173,7 +173,15 @@ var UserPopover = function UserPopover(props) {
     style: {
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+  }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     isPhoto: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     isHome: isHome,
     ref: referenceElement,
@@ -200,7 +208,15 @@ var UserPopover = function UserPopover(props) {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow
-  })));
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.UserPopover = UserPopover;

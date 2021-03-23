@@ -49,11 +49,12 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
       defaultValue = props.defaultValue,
       configTypes = props.configTypes,
       orderTypes = props.orderTypes;
+  var defaultType = configTypes !== null && configTypes !== void 0 && configTypes.includes(typeSelected) ? null : configTypes[0];
   return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: orderTypes.filter(function (type) {
       return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
     }),
-    defaultValue: defaultValue || typeSelected,
+    defaultValue: defaultType || defaultValue || typeSelected,
     onChange: function onChange(orderType) {
       return handleChangeOrderType(orderType);
     }

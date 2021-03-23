@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result, _formState$changes6, _formState$changes7;
+  var _formState$changes2, _props$beforeElements, _props$beforeComponen, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result, _formState$changes6, _formState$changes7, _props$afterComponent, _props$afterElements;
 
   var userData = props.userData,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
@@ -147,7 +147,15 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       handleButtonUpdateClick(null, isImage);
     }
   }, [(_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "account"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     mbottom: isCustomerMode && 25
@@ -221,6 +229,14 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
+  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
   }));
 };
 
