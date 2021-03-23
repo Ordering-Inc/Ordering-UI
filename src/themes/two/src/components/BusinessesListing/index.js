@@ -82,6 +82,7 @@ export const BusinessesListing = (props) => {
           />
           <WrappperButtonGroup>
             <PickupOrderTypeToggleButton
+              isMainBusinessListingPage
               handleCustomClick={() => setIsPickupClicked(true)}
             />
             <ReviewSettingPopover
@@ -119,6 +120,7 @@ export const BusinessesListing = (props) => {
         </InnerContainer>
         <AllBusinessesListing
           {...props}
+          setIsPickupClicked={setIsPickupClicked}
           handleGoToPage={handleGoToPage}
           handleChangeCategory={handleChangeCategory}
         />

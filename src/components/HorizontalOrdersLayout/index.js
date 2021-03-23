@@ -19,7 +19,6 @@ import { getGoogleMapImage } from '../../utils'
 
 export const HorizontalOrdersLayout = (props) => {
   const {
-    orders,
     pagination,
     loadMoreOrders,
     getOrderStatus,
@@ -28,6 +27,8 @@ export const HorizontalOrdersLayout = (props) => {
     customArray,
     onRedirectPage
   } = props
+
+  const orders = customArray || props.orders
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -44,6 +45,14 @@ export const HorizontalOrdersLayout = (props) => {
   const Orders = () => {
     return (
       <>
+        {props.beforeElements?.map((BeforeElement, i) => (
+          <React.Fragment key={i}>
+            {BeforeElement}
+          </React.Fragment>))
+        }
+        {props.beforeComponents?.map((BeforeComponent, i) => (
+          <BeforeComponent key={i} {...props} />))
+        }
         {orders.length > 0 && orders.map(order => (
           <Card
             key={order.id || order.uuid}
@@ -115,7 +124,11 @@ export const HorizontalOrdersLayout = (props) => {
           </Card>
         ))}
         {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
-          <Card flex nobg>
+          <Card
+            flex
+            nobg
+            isBusinessesPage={isBusinessesPage}
+          >
             <Button
               className='load-orders'
               bgtransparent
@@ -127,6 +140,14 @@ export const HorizontalOrdersLayout = (props) => {
             </Button>
           </Card>
         )}
+        {props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
+        }
+        {props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
+        }
       </>
     )
   }

@@ -115,168 +115,186 @@ const CartUI = (props) => {
   }
 
   return (
-    <CartContainer className='cart'>
-      <BusinessItemAccordion
-        isCartPending={isCartPending}
-        currentCartUuid={currentCartUuid}
-        uuid={cart?.uuid}
-        isCheckout={isCheckout}
-        orderTotal={cart?.total}
-        business={cart?.business}
-        isClosed={!cart?.valid_schedule}
-        moment={momentFormatted}
-        isProducts={isProducts}
-        isValidProducts={cart?.valid_products}
-        isForceOpenAccordion={isForceOpenCart}
-        isCartOnProductsList={isCartOnProductsList}
-        handleClearProducts={handleClearProducts}
-        handleStoreRedirect={handleStoreRedirect}
-        handleCartOpen={handleCartOpen}
-      >
-        {cart?.products?.length > 0 && cart?.products.map(product => (
-          <ProductItemAccordion
-            key={product.code}
-            isCartPending={isCartPending}
-            isCartProduct
-            product={product}
-            changeQuantity={changeQuantity}
-            getProductMax={getProductMax}
-            offsetDisabled={offsetDisabled}
-            onDeleteProduct={handleDeleteClick}
-            onEditProduct={handleEditProduct}
-          />
-        ))}
-        {cart?.valid_products && (
-          <OrderBill>
-            <table>
-              <tbody>
-                <tr>
-                  <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                  <td>{parsePrice(cart?.subtotal || 0)}</td>
-                </tr>
-                <tr>
-                  <td>
-                    {cart.business.tax_type === 1
-                      ? t('TAX_INCLUDED', 'Tax (included)')
-                      : t('TAX', 'Tax')}
-                    <span>{`(${parseNumber(cart?.business?.tax)}%)`}</span>
-                  </td>
-                  <td>{parsePrice(cart?.tax || 0)}</td>
-                </tr>
-                {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <CartContainer className='cart'>
+        <BusinessItemAccordion
+          isCartPending={isCartPending}
+          currentCartUuid={currentCartUuid}
+          uuid={cart?.uuid}
+          isCheckout={isCheckout}
+          orderTotal={cart?.total}
+          business={cart?.business}
+          isClosed={!cart?.valid_schedule}
+          moment={momentFormatted}
+          isProducts={isProducts}
+          isValidProducts={cart?.valid_products}
+          isForceOpenAccordion={isForceOpenCart}
+          isCartOnProductsList={isCartOnProductsList}
+          handleClearProducts={handleClearProducts}
+          handleStoreRedirect={handleStoreRedirect}
+          handleCartOpen={handleCartOpen}
+        >
+          {cart?.products?.length > 0 && cart?.products.map(product => (
+            <ProductItemAccordion
+              key={product.code}
+              isCartPending={isCartPending}
+              isCartProduct
+              product={product}
+              changeQuantity={changeQuantity}
+              getProductMax={getProductMax}
+              offsetDisabled={offsetDisabled}
+              onDeleteProduct={handleDeleteClick}
+              onEditProduct={handleEditProduct}
+            />
+          ))}
+          {cart?.valid_products && (
+            <OrderBill>
+              <table>
+                <tbody>
                   <tr>
-                    <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                    <td>{parsePrice(cart?.delivery_price)}</td>
+                    <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                    <td>{parsePrice(cart?.subtotal || 0)}</td>
                   </tr>
-                )}
-                {cart?.driver_tip > 0 && (
                   <tr>
                     <td>
-                      {t('DRIVER_TIP', 'Driver tip')}
-                      {cart?.driver_tip_rate > 0 && <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>}
+                      {cart.business.tax_type === 1
+                        ? t('TAX_INCLUDED', 'Tax (included)')
+                        : t('TAX', 'Tax')}
+                      <span>{`(${parseNumber(cart?.business?.tax)}%)`}</span>
                     </td>
-                    <td>{parsePrice(cart?.driver_tip)}</td>
+                    <td>{parsePrice(cart?.tax || 0)}</td>
                   </tr>
-                )}
-                {cart?.service_fee > 0 && (
-                  <tr>
-                    <td>
-                      {t('SERVICE_FEE', 'Service Fee')}
-                      <span>{`(${parseNumber(cart?.business?.service_fee)}%)`}</span>
-                    </td>
-                    <td>{parsePrice(cart?.service_fee)}</td>
-                  </tr>
-                )}
-                {cart?.discount > 0 && cart?.total >= 0 && (
-                  <tr>
-                    {cart?.discount_type === 1 ? (
+                  {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
+                    <tr>
+                      <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                      <td>{parsePrice(cart?.delivery_price)}</td>
+                    </tr>
+                  )}
+                  {cart?.driver_tip > 0 && (
+                    <tr>
                       <td>
-                        {t('DISCOUNT', 'Discount')}
-                        <span>{`(${parseNumber(cart?.discount_rate)}%)`}</span>
+                        {t('DRIVER_TIP', 'Driver tip')}
+                        {cart?.driver_tip_rate > 0 && <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>}
                       </td>
-                    ) : (
-                      <td>{t('DISCOUNT', 'Discount')}</td>
-                    )}
-                    <td>- {parsePrice(cart?.discount || 0)}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-            {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
-              <CouponContainer>
-                <CouponControl
-                  businessId={cart.business_id}
-                  price={cart.total}
-                />
-              </CouponContainer>
-            )}
-            <table className='total'>
-              <tbody>
-                <tr>
-                  <td>{t('TOTAL', 'Total')}</td>
-                  <td>{cart?.total >= 1 && parsePrice(cart?.total)}</td>
-                </tr>
-              </tbody>
-            </table>
-          </OrderBill>
-        )}
-        {(onClickCheckout || isForceOpenCart) && !isCheckout && (
-          <CheckoutAction>
-            <Button
-              color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
-              onClick={() => setOpenUpselling(true)}
-              disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum || !cart?.valid_address}
-            >
-              {(cart?.subtotal >= cart?.minimum || !cart?.minimum) && cart?.valid_address ? (
-                !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
-              ) : !cart?.valid_address ? (
-                t('OUT_OF_COVERAGE', 'Out of Coverage')
-              ) : (
-                `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+                      <td>{parsePrice(cart?.driver_tip)}</td>
+                    </tr>
+                  )}
+                  {cart?.service_fee > 0 && (
+                    <tr>
+                      <td>
+                        {t('SERVICE_FEE', 'Service Fee')}
+                        <span>{`(${parseNumber(cart?.business?.service_fee)}%)`}</span>
+                      </td>
+                      <td>{parsePrice(cart?.service_fee)}</td>
+                    </tr>
+                  )}
+                  {cart?.discount > 0 && cart?.total >= 0 && (
+                    <tr>
+                      {cart?.discount_type === 1 ? (
+                        <td>
+                          {t('DISCOUNT', 'Discount')}
+                          <span>{`(${parseNumber(cart?.discount_rate)}%)`}</span>
+                        </td>
+                      ) : (
+                        <td>{t('DISCOUNT', 'Discount')}</td>
+                      )}
+                      <td>- {parsePrice(cart?.discount || 0)}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+              {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
+                <CouponContainer>
+                  <CouponControl
+                    businessId={cart.business_id}
+                    price={cart.total}
+                  />
+                </CouponContainer>
               )}
-            </Button>
-          </CheckoutAction>
+              <table className='total'>
+                <tbody>
+                  <tr>
+                    <td>{t('TOTAL', 'Total')}</td>
+                    <td>{cart?.total >= 1 && parsePrice(cart?.total)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </OrderBill>
+          )}
+          {(onClickCheckout || isForceOpenCart) && !isCheckout && (
+            <CheckoutAction>
+              <Button
+                color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
+                onClick={() => setOpenUpselling(true)}
+                disabled={(openUpselling && !canOpenUpselling) || cart?.subtotal < cart?.minimum || !cart?.valid_address}
+              >
+                {(cart?.subtotal >= cart?.minimum || !cart?.minimum) && cart?.valid_address ? (
+                  !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')
+                ) : !cart?.valid_address ? (
+                  t('OUT_OF_COVERAGE', 'Out of Coverage')
+                ) : (
+                  `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+                )}
+              </Button>
+            </CheckoutAction>
+          )}
+        </BusinessItemAccordion>
+        <Confirm
+          title={t('PRODUCT', 'Product')}
+          content={confirm.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={confirm.open}
+          onClose={() => setConfirm({ ...confirm, open: false })}
+          onCancel={() => setConfirm({ ...confirm, open: false })}
+          onAccept={confirm.handleOnAccept}
+          closeOnBackdrop={false}
+        />
+        <Modal
+          width='70%'
+          open={openProduct}
+          padding='0'
+          closeOnBackdrop
+          onClose={() => setModalIsOpen(false)}
+        >
+          <ProductForm
+            isCartProduct
+            productCart={curProduct}
+            businessSlug={cart?.business?.slug}
+            businessId={curProduct?.business_id}
+            categoryId={curProduct?.category_id}
+            productId={curProduct?.id}
+            onSave={handlerProductAction}
+          />
+        </Modal>
+        {openUpselling && (
+          <UpsellingPage
+            businessId={cart.business_id}
+            cartProducts={cart.products}
+            business={cart.business}
+            handleUpsellingPage={handleUpsellingPage}
+            openUpselling={openUpselling}
+            canOpenUpselling={canOpenUpselling}
+            setCanOpenUpselling={setCanOpenUpselling}
+          />
         )}
-      </BusinessItemAccordion>
-      <Confirm
-        title={t('PRODUCT', 'Product')}
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
-        closeOnBackdrop={false}
-      />
-      <Modal
-        width='70%'
-        open={openProduct}
-        padding='0'
-        closeOnBackdrop
-        onClose={() => setModalIsOpen(false)}
-      >
-        <ProductForm
-          isCartProduct
-          productCart={curProduct}
-          businessSlug={cart?.business?.slug}
-          businessId={curProduct?.business_id}
-          categoryId={curProduct?.category_id}
-          productId={curProduct?.id}
-          onSave={handlerProductAction}
-        />
-      </Modal>
-      {openUpselling && (
-        <UpsellingPage
-          businessId={cart.business_id}
-          cartProducts={cart.products}
-          business={cart.business}
-          handleUpsellingPage={handleUpsellingPage}
-          openUpselling={openUpselling}
-          canOpenUpselling={canOpenUpselling}
-          setCanOpenUpselling={setCanOpenUpselling}
-        />
-      )}
-    </CartContainer>
+      </CartContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

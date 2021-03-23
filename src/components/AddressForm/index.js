@@ -231,7 +231,9 @@ const AddressFormUI = (props) => {
   const setMapErrors = (errKey) => {
     setAlertState({
       open: true,
-      content: [t(errKey, mapErrors[errKey])]
+      content: !(errKey === 'ERROR_MAX_LIMIT_LOCATION')
+        ? [t(errKey, mapErrors[errKey])]
+        : `${[t(errKey, mapErrors[errKey])]} ${maxLimitLocation} ${[t('METTERS', 'meters')]}`
     })
   }
 
@@ -329,6 +331,12 @@ const AddressFormUI = (props) => {
 
   return (
     <div className='address-form'>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))}
       {(configState.loading || addressState.loading) && (
         <WrapperSkeleton>
           <Skeleton height={50} count={5} style={{ marginBottom: '10px' }} />
@@ -341,6 +349,16 @@ const AddressFormUI = (props) => {
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
         >
+          {
+            props.beforeMidElements?.map((BeforeMidElements, i) => (
+              <React.Fragment key={i}>
+                {BeforeMidElements}
+              </React.Fragment>))
+          }
+          {
+            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+              <BeforeMidComponents key={i} {...props} />))
+          }
           {locationChange && toggleMap && (
             <WrapperMap>
               <GoogleMapsMap
@@ -440,6 +458,16 @@ const AddressFormUI = (props) => {
               <span><FaPlus /></span>
             </Button>
           </AddressTagSection>
+          {
+            props.afterMidElements?.map((MidElement, i) => (
+              <React.Fragment key={i}>
+                {MidElement}
+              </React.Fragment>))
+          }
+          {
+            props.afterMidComponents?.map((MidComponent, i) => (
+              <MidComponent key={i} {...props} />))
+          }
           <FormActions>
             <Button
               outline
@@ -478,6 +506,12 @@ const AddressFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))}
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))}
     </div>
   )
 }

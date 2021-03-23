@@ -200,9 +200,25 @@ export const UserFormDetailsUI = (props) => {
 
   return (
     <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))}
       <FormInput onSubmit={handleSubmit(onSubmit)} isCheckout={isCheckout}>
         {!validationFields?.loading ? (
           <>
+            {
+            props.beforeMidElements?.map((BeforeMidElements, i) => (
+              <React.Fragment key={i}>
+                {BeforeMidElements}
+              </React.Fragment>))
+            }
+            {
+            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+              <BeforeMidComponents key={i} {...props} />))
+            }
             {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
               showField && showField(field.code) && (
                 <React.Fragment key={field.id}>
@@ -269,6 +285,16 @@ export const UserFormDetailsUI = (props) => {
                 name='cellphone'
               />
             )}
+            {
+            props.afterMidElements?.map((MidElement, i) => (
+              <React.Fragment key={i}>
+                {MidElement}
+              </React.Fragment>))
+            }
+            {
+             props.afterMidComponents?.map((MidComponent, i) => (
+               <MidComponent key={i} {...props} />))
+            }
             <ActionsForm>
               {onCancel && (
                 <Button
@@ -310,6 +336,12 @@ export const UserFormDetailsUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))}
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))}
     </>
   )
 }

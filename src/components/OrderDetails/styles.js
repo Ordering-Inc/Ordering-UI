@@ -564,6 +564,7 @@ export const ShareOrder = styled.div`
   display: flex;
   margin: 0 0 20px;
   justify-content: space-between;
+  z-index: 1;
 
   h1 {
     font-size: 15px;

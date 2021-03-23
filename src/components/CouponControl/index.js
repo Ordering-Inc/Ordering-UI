@@ -44,38 +44,56 @@ const CouponControlUI = (props) => {
   }
 
   return (
-    <CouponContainer>
-      {couponDefault ? (
-        <Button onClick={() => onRemoveCoupon()}>
-          {t('REMOVE_COUPON', 'Remove Coupon')} {couponDefault}
-        </Button>
-      ) : (
-        <>
-          <Input
-            placeholder={t('DISCOUNT_COUPON', 'Discount coupon')}
-            onChange={(e) => onChangeInputCoupon(e.target.value)}
-            autoComplete='off'
-          />
-          <Button
-            color='primary'
-            disabled={!couponInput}
-            onClick={handleButtonApplyClick}
-          >
-            {t('APPLY', 'Apply')}
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
+      <CouponContainer>
+        {couponDefault ? (
+          <Button onClick={() => onRemoveCoupon()}>
+            {t('REMOVE_COUPON', 'Remove Coupon')} {couponDefault}
           </Button>
-        </>
-      )}
-      <Confirm
-        title={t('COUPON', 'Coupon')}
-        content={confirm?.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm?.open}
-        onClose={handleClose}
-        onCancel={!confirm?.error ? () => setConfirm({ ...confirm, open: false, error: false }) : null}
-        onAccept={handleOnAccept}
-        closeOnBackdrop={false}
-      />
-    </CouponContainer>
+        ) : (
+          <>
+            <Input
+              placeholder={t('DISCOUNT_COUPON', 'Discount coupon')}
+              onChange={(e) => onChangeInputCoupon(e.target.value)}
+              autoComplete='off'
+            />
+            <Button
+              color='primary'
+              disabled={!couponInput}
+              onClick={handleButtonApplyClick}
+            >
+              {t('APPLY', 'Apply')}
+            </Button>
+          </>
+        )}
+        <Confirm
+          title={t('COUPON', 'Coupon')}
+          content={confirm?.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={confirm?.open}
+          onClose={handleClose}
+          onCancel={!confirm?.error ? () => setConfirm({ ...confirm, open: false, error: false }) : null}
+          onAccept={handleOnAccept}
+          closeOnBackdrop={false}
+        />
+      </CouponContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
+    </>
   )
 }
 

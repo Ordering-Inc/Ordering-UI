@@ -113,7 +113,9 @@ export const Card = styled.div`
     ${({ isBusinessesPage }) => isBusinessesPage && css`
       margin: 30px 20px;
       width: calc(33% - 40px);
-      min-width: initial;
+      ${({ flex }) => !flex && css`
+        min-width: initial;
+      `}
     `}
   }
 

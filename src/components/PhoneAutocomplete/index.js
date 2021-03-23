@@ -40,6 +40,10 @@ const PhoneAutocompleteUI = (props) => {
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
+  const userName = userCustomer?.lastname
+    ? `${userCustomer?.name} ${userCustomer?.lastname}`
+    : userCustomer?.name
+
   const handleCloseAlert = () => {
     setCustomersPhones({ ...customersPhones, error: null })
     setAlertState({ open: false, content: [] })
@@ -65,6 +69,14 @@ const PhoneAutocompleteUI = (props) => {
 
   return (
     <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))
+      }
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))
+      }
       <PhoneContainer>
         <ContentWrapper>
           <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
@@ -101,12 +113,13 @@ const PhoneAutocompleteUI = (props) => {
               color='primary'
               name='find'
               onClick={() => handleFindClick()}
+              disabled={!userCustomer?.id}
               >
               {userCustomer?.id ? (
-                `${t('CONTINUE_WITH', 'Continue with')} ${userCustomer?.name} ${userCustomer?.lastname}`
-                ) : (
-                  t('FIND', 'Find')
-                  )}
+                `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
+              ) : (
+                t('FIND', 'Find')
+              )}
             </Button>
           </WrappBtn>
         </ContentWrapper>
@@ -155,6 +168,14 @@ const PhoneAutocompleteUI = (props) => {
         onClose={handleCloseAlert}
         onAccept={handleCloseAlert}
       />
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
+      }
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
+      }
     </>
   )
 }

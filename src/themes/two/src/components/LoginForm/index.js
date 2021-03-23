@@ -70,6 +70,10 @@ const LoginFormUI = (props) => {
     }
   }, [errors])
 
+  useEffect(() => {
+    document.querySelector('.wrap-reset > a').tabIndex = '-1'
+  }, [])
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -125,6 +129,7 @@ const LoginFormUI = (props) => {
                   name='email'
                   aria-label='email'
                   placeholder={t('EMAIL', 'Email')}
+                  tabindex='1'
                   ref={register({
                     required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
                     pattern: {
@@ -140,7 +145,7 @@ const LoginFormUI = (props) => {
             <WrapperPassword>
               <div>
                 <label>{t('PASSWORD', 'Password')}</label>
-                <RedirectLink isPopup={isPopup}>
+                <RedirectLink isPopup={isPopup} className='wrap-reset'>
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               </div>
@@ -149,6 +154,7 @@ const LoginFormUI = (props) => {
                 name='password'
                 aria-label='password'
                 placeholder={t('PASSWORD', 'Password')}
+                tabindex='2'
                 ref={register({
                   required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
                 })}
