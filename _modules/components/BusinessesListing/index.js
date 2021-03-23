@@ -210,6 +210,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+    images: props.images,
+    businessTypes: props.businessTypes,
+    defaultBusinessType: props.defaultBusinessType,
     handleChangeBusinessType: handleChangeBusinessType
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout
