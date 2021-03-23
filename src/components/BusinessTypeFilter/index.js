@@ -17,16 +17,18 @@ const BusinessTypeFilterUI = (props) => {
   const [, t] = useLanguage()
   const [load, setLoad] = useState(false)
 
+  const handleChangeCategory = (category) => {
+    handleChangeBusinessType && handleChangeBusinessType(category)
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <TypeContainer id='container'>
         <Tabs variant='primary'>
           <AutoScroll>
@@ -38,7 +40,7 @@ const BusinessTypeFilterUI = (props) => {
                       src={images[0].image}
                       alt='all'
                       onLoad={() => setLoad(true)}
-                      onClick={() => handleChangeBusinessType(type.value)}
+                      onClick={() => handleChangeCategory(type.value)}
                       width='150px'
                       height='150px'
                       loading='lazy'
@@ -52,7 +54,7 @@ const BusinessTypeFilterUI = (props) => {
                         <img
                           src={image.image}
                           alt={type.value}
-                          onClick={() => handleChangeBusinessType(type.value)}
+                          onClick={() => handleChangeCategory(type.value)}
                           width='150px'
                           height='150px'
                           loading='lazy'
@@ -69,13 +71,11 @@ const BusinessTypeFilterUI = (props) => {
         </Tabs>
       </TypeContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

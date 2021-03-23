@@ -42,8 +42,8 @@ export const BusinessBasicInformation = (props) => {
     const typeObj = types.map(t => {
       return { [t]: business[t] }
     }).reduce((r, c) => ({ ...r, ...c }), {})
-    const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])[0]
-    return businessType[0]
+    const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])?.[0]
+    return businessType?.[0]
   }
 
   return (
@@ -51,11 +51,9 @@ export const BusinessBasicInformation = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container'>
         <BusinessContent>
           <WrapperBusinessLogo>
@@ -159,13 +157,11 @@ export const BusinessBasicInformation = (props) => {
         </Modal>
       </BusinessContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
