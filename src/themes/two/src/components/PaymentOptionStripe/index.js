@@ -42,6 +42,7 @@ const PaymentOptionStripeUI = (props) => {
     deleteCard,
     setDefaultCard,
     cardSelected,
+    cardDefault,
     cardsList,
     handleNewCard
   } = props
@@ -97,6 +98,7 @@ const PaymentOptionStripeUI = (props) => {
     }
   }, [open])
 
+  console.log(cardSelected)
   return (
     <OptionStripeContainer>
       {!token && <WarningMessage>{t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')}</WarningMessage>}
@@ -128,7 +130,7 @@ const PaymentOptionStripeUI = (props) => {
                 </span>
               </CardItemContent>
               <CardItemActions>
-                {card.id === cardSelected?.id && (
+                {card.id === cardDefault?.id && (
                   <DefaultCardItem>
                     <BsCheck />
                     <span>{t('DEFAULT', 'Default')}</span>
@@ -165,7 +167,7 @@ const PaymentOptionStripeUI = (props) => {
             <Button onClick={() => onCancel()}>
               {t('CANCEL', 'Cancel')}
             </Button>
-            <Button color='primary' onClick={() => onSelectCard(cardSelected)} disabled={!cardSelected}>
+            <Button color='primary' onClick={() => onSelectCard(cardDefault)} disabled={!cardDefault}>
               {t('ACCEPT', 'Accept')}
             </Button>
           </ActionsModal>
