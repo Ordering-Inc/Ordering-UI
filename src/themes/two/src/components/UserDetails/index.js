@@ -14,8 +14,6 @@ const UserDetailsUI = (props) => {
     userData: externalUserData,
     isEdit,
     formState,
-    // cleanFormState,
-    // cartStatus,
     toggleIsEdit,
     validationFields,
     isUserDetailsEdit,
@@ -32,11 +30,6 @@ const UserDetailsUI = (props) => {
       !isEdit && toggleIsEdit()
     }
   }, [isUserDetailsEdit])
-
-  // const toggleEditState = () => {
-  //   toggleIsEdit()
-  //   cleanFormState({ changes: {} })
-  // }
 
   return (
     <>

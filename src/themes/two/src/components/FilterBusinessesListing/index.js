@@ -16,7 +16,6 @@ import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { PickupOrderTypeToggleButton } from '../PickupOrderTypeToggleButton'
-import { ReviewSettingPopover } from '../ReviewSettingPopover'
 import { FilterViewBackButton } from '../FilterViewBackButton'
 import {
   FilterBuinessContainer,
@@ -53,8 +52,6 @@ const FilterBusinessesListingUI = (props) => {
   const [{ auth }] = useSession()
 
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
-  const [reviewQuality, setReviewQuality] = useState(4.5)
-  const [openPopover, setOpenPopover] = useState({})
   const [isGoBackClicked, setIsGoBackClicked] = useState(false)
 
   const handleGoToPage = () => {
@@ -67,23 +64,6 @@ const FilterBusinessesListingUI = (props) => {
     } else {
       setModals({ ...modals, formOpen: true })
     }
-  }
-
-  const handleReviewSettingValue = (value) => {
-    setReviewQuality(value)
-  }
-
-  const handleTogglePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: !openPopover[type]
-    })
-  }
-  const handleClosePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: false
-    })
   }
 
   const changeBusinessType = (type) => {
@@ -156,13 +136,6 @@ const FilterBusinessesListingUI = (props) => {
               />
               <WrapButtonGroup>
                 <PickupOrderTypeToggleButton />
-                <ReviewSettingPopover
-                  open={openPopover.reviewSetting}
-                  reviewQuality={reviewQuality}
-                  onClick={() => handleTogglePopover('reviewSetting')}
-                  onClose={() => handleClosePopover('reviewSetting')}
-                  handleReviewSettingValue={handleReviewSettingValue}
-                />
                 <Button
                   color={timeLimitValue ? 'dark' : 'secondary'}
                   onClick={() => toggelTimeLimit()}

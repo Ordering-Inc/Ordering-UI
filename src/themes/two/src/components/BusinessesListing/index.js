@@ -20,7 +20,6 @@ import {
 import { useTheme } from 'styled-components'
 import { FeaturedBusinessListing } from '../FeaturedBusinessListing'
 import { AllBusinessesListing } from '../AllBusinessesListing'
-import { ReviewSettingPopover } from '../ReviewSettingPopover'
 export const BusinessesListing = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -28,8 +27,6 @@ export const BusinessesListing = (props) => {
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
   const orderType = orderState?.options?.type || 1
-  const [reviewQuality, setReviewQuality] = useState(4.5)
-  const [openPopover, setOpenPopover] = useState({})
   const [isPickupClicked, setIsPickupClicked] = useState(false)
 
   const handleGoToPage = (search) => {
@@ -41,23 +38,6 @@ export const BusinessesListing = (props) => {
 
   const handleChangeCategory = (value) => {
     handleGoToPage(`category=${value}`)
-  }
-
-  const handleReviewSettingValue = (value) => {
-    setReviewQuality(value)
-  }
-
-  const handleTogglePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: !openPopover[type]
-    })
-  }
-  const handleClosePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: false
-    })
   }
 
   useEffect(() => {
@@ -84,13 +64,6 @@ export const BusinessesListing = (props) => {
             <PickupOrderTypeToggleButton
               isMainBusinessListingPage
               handleCustomClick={() => setIsPickupClicked(true)}
-            />
-            <ReviewSettingPopover
-              open={openPopover.reviewSetting}
-              reviewQuality={reviewQuality}
-              onClick={() => handleTogglePopover('reviewSetting')}
-              onClose={() => handleClosePopover('reviewSetting')}
-              handleReviewSettingValue={handleReviewSettingValue}
             />
             <Button
               color='secondary'
