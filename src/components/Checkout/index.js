@@ -153,11 +153,9 @@ const CheckoutUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <Container>
         <WrappContainer>
           {!cartState.loading && cart?.status === 2 && (
@@ -180,11 +178,9 @@ const CheckoutUI = (props) => {
           {props.beforeElementsSectionOne?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
-            </React.Fragment>))
-          }
+            </React.Fragment>))}
           {props.beforeComponentsSectionOne?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))
-          }
+            <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionOne && (
             (businessDetails?.loading || cartState.loading) ? (
@@ -207,11 +203,9 @@ const CheckoutUI = (props) => {
           {props.beforeElementsSectionTwo?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
-            </React.Fragment>))
-          }
+            </React.Fragment>))}
           {props.beforeComponentsSectionTwo?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))
-          }
+            <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionTwo && (
             <UserDetailsContainer>
@@ -242,11 +236,9 @@ const CheckoutUI = (props) => {
           {props.beforeElementsSectionThree?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
-            </React.Fragment>))
-          }
+            </React.Fragment>))}
           {props.beforeComponentsSectionThree?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))
-          }
+            <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionThree && (
             <BusinessDetailsContainer>
@@ -261,7 +253,7 @@ const CheckoutUI = (props) => {
                   </div>
                 </div>
               )}
-              {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
+              {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
                 <div>
                   <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
                   <div>
@@ -286,11 +278,9 @@ const CheckoutUI = (props) => {
           {props.beforeElementsSectionFour?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
-            </React.Fragment>))
-          }
+            </React.Fragment>))}
           {props.beforeComponentsSectionFour?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))
-          }
+            <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionFour && !cartState.loading && cart && (
             <PaymentMethodContainer>
@@ -313,11 +303,9 @@ const CheckoutUI = (props) => {
           {props.beforeElementsSectionFive?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
-            </React.Fragment>))
-          }
+            </React.Fragment>))}
           {props.beforeComponentsSectionFive?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))
-          }
+            <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionFive &&
             !cartState.loading &&
@@ -339,11 +327,9 @@ const CheckoutUI = (props) => {
           {props.beforeElementsSectionSix?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
-            </React.Fragment>))
-          }
+            </React.Fragment>))}
           {props.beforeComponentsSectionSix?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))
-          }
+            <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionSix && !cartState.loading && cart && (
             <CartContainer>
@@ -360,11 +346,9 @@ const CheckoutUI = (props) => {
           {props.beforeElementsSectionSeven?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
-            </React.Fragment>))
-          }
+            </React.Fragment>))}
           {props.beforeComponentsSectionSeven?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))
-          }
+            <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionSeven && !cartState.loading && cart && cart?.status !== 2 && (
             <WrapperPlaceOrderButton>
@@ -412,13 +396,11 @@ const CheckoutUI = (props) => {
         />
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
@@ -447,7 +429,7 @@ export const Checkout = (props) => {
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length) || null
+  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products?.length) || null
 
   const closeAlert = () => {
     setAlertState({
@@ -494,8 +476,10 @@ export const Checkout = (props) => {
         : `${ordering.root}/carts/${cartId}`
       const response = await fetch(url, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}` }
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
       })
       const { result } = await response.json()
 
