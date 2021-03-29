@@ -73,7 +73,7 @@ const AddressFormUI = (props) => {
       : formState.changes?.location ?? null
   )
 
-  const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
+  const maxLimitLocation = parseInt(configState?.configs?.meters_to_change_address?.value)
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
                               configState.configs?.google_autocomplete_selection_required?.value === 'true'
