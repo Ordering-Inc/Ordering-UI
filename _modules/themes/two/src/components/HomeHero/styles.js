@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapAddressInput = exports.AddressWrap = exports.Title = exports.ContentWrapper = exports.HeroContainer = exports.HeroContainerStyled = void 0;
+exports.WrapInput = exports.WrapAddressInput = exports.AddressWrap = exports.Title = exports.ContentWrapper = exports.HeroContainer = exports.HeroContainerStyled = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -46,7 +46,7 @@ var HeroContainer = function HeroContainer(props) {
 
 exports.HeroContainer = HeroContainer;
 
-var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    height: 100%;\n    padding: 0px 20px 0px;\n    max-width: 600px;\n\n    ", "\n\n    input {\n      width: 90%;\n      margin-bottom: 15px;\n    }\n\n    @media (min-width: 425px) {\n      input {\n        width: 97%;\n      }\n    }\n\n    @media (min-width: 768px) {\n      padding: 0px 40px 0px;\n\n      ", "\n    }\n\n    @media (min-width: 1200px) {\n      max-width: 800px;\n    }\n"])), function (props) {
+var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    height: 100%;\n    padding: 0px 20px 0px;\n    max-width: 600px;\n\n    ", "\n\n    input {\n      width: 90%;\n      margin-bottom: 15px;\n    }\n\n    @media (min-width: 425px) {\n      input {\n        width: 97%;\n      }\n    }\n\n    @media (min-width: 768px) {\n      padding: 0px 40px 0px;\n\n      ", "\n    }\n\n    @media (min-width: 1200px) {\n      max-width: 800px;\n    }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      padding: 0px 20px 0px;\n    "])));
@@ -77,3 +77,7 @@ var WrapAddressInput = _styledComponents.default.div(_templateObject8 || (_templ
 });
 
 exports.WrapAddressInput = WrapAddressInput;
+
+var WrapInput = _styledComponents.default.label(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 80%;\n  margin: 20px 0;\n  position: relative;\n  cursor: pointer;\n  background: #fff;\n  height: 45px;\n  border-radius: 30px;\n\n  display: flex;\n  align-items: center;\n\n  svg {\n    font-size: 32px;\n    padding: 0 10px;\n    color: #ccc;\n  }\n\n  div {\n    color: #ccc;\n  }  \n"])));
+
+exports.WrapInput = WrapInput;
