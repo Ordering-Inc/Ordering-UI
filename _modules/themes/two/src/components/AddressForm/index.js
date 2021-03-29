@@ -396,7 +396,7 @@ var AddressFormUI = function AddressFormUI(props) {
   var setMapErrors = function setMapErrors(errKey) {
     setAlertState({
       open: true,
-      content: [t(errKey, mapErrors[errKey])]
+      content: !(errKey === 'ERROR_MAX_LIMIT_LOCATION') ? [t(errKey, mapErrors[errKey])] : "".concat([t(errKey, mapErrors[errKey])], " ").concat(maxLimitLocation, " ").concat([t('METTERS', 'meters')])
     });
   };
 

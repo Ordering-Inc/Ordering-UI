@@ -233,7 +233,9 @@ const AddressFormUI = (props) => {
   const setMapErrors = (errKey) => {
     setAlertState({
       open: true,
-      content: [t(errKey, mapErrors[errKey])]
+      content: !(errKey === 'ERROR_MAX_LIMIT_LOCATION')
+        ? [t(errKey, mapErrors[errKey])]
+        : `${[t(errKey, mapErrors[errKey])]} ${maxLimitLocation} ${[t('METTERS', 'meters')]}`
     })
   }
 
