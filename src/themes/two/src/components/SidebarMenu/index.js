@@ -109,11 +109,11 @@ export const SidebarMenu = (props) => {
                     active={
                       window.location.pathname === '/' ||
                       window.location.pathname === '/home' ||
-                      window.location.pathname === '/search'
+                      window.location.pathname === '/delivery'
                     }
                   >
                     {options?.address?.location ? (
-                      t('BUSINESSES', 'Businesses')
+                      t('DELIVERY', 'Delivery')
                     ) : (
                       t('HOME', 'Home')
                     )}

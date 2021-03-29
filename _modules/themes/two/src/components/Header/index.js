@@ -153,10 +153,10 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
     auth: auth
   }), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && windowSize.width > 768 && isDeliveryAndPickupPage && /*#__PURE__*/_react.default.createElement(_styles.WrapDeliveryAndPickupLink, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkTab, {
-    active: window.location.pathname === '/search',
+    active: window.location.pathname === '/delivery',
     onClick: function onClick() {
       return handleGoToPage({
-        page: 'search'
+        page: 'delivery'
       });
     }
   }, t('DELIVERY', 'Delivery')), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkTab, {

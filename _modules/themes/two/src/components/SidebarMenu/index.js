@@ -137,8 +137,8 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
-    active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
-  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/delivery'
+  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('DELIVERY', 'Delivery') : t('HOME', 'Home'))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       var _options$address4;

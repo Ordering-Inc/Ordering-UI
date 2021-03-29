@@ -93,8 +93,8 @@ export const Header = (props) => {
             {!configState?.loading && configTypes.length > 0 && windowSize.width > 768 && isDeliveryAndPickupPage && (
               <WrapDeliveryAndPickupLink>
                 <MenuLinkTab
-                  active={window.location.pathname === '/search'}
-                  onClick={() => handleGoToPage({ page: 'search' })}
+                  active={window.location.pathname === '/delivery'}
+                  onClick={() => handleGoToPage({ page: 'delivery' })}
                 >
                   {t('DELIVERY', 'Delivery')}
                 </MenuLinkTab>
