@@ -96,7 +96,9 @@ const ProductOptionsUI = (props) => {
     }
     const myElement = document.getElementsByClassName('error')[0]
     const productContainer = document.getElementsByClassName('product-container')[0]
-
+    if (!myElement || !productContainer) {
+      return
+    }
     let topPos = myElement.offsetTop - productContainer.offsetTop
     if (windowSize.width <= 768) {
       const productImage = document.getElementById('product_image')
