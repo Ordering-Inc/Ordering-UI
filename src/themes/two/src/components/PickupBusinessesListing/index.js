@@ -9,6 +9,7 @@ import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { BusinessesMap } from '../BusinessesMap'
+import { PickupOrderTypeToggleButton } from '../PickupOrderTypeToggleButton'
 
 import {
   PickupBusinessContainer,
@@ -19,7 +20,8 @@ import {
   WrapperBusinesses,
   MapSkeleton,
   LeftInnerContainer,
-  WrapperBusinessMap
+  WrapperBusinessMap,
+  WrapPickupButton
 } from './styles'
 
 const PIXELS_TO_SCROLL = 700
@@ -72,6 +74,11 @@ const PickupBusinessesListingUI = (props) => {
         onSearch={handleChangeSearch}
       />
       <InnerContainer>
+        <WrapPickupButton>
+          <PickupOrderTypeToggleButton
+            isPickupPage
+          />
+        </WrapPickupButton>
         <WrapperBusinesses>
           <LeftContent>
             <LeftInnerContainer>

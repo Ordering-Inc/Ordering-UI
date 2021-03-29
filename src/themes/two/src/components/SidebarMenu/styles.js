@@ -1,16 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const BackDropBackground = styled.div`
-  background-color: #000;
-  opacity: 0.6;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1000;
-`
-
 export const Container = styled.div`
   display: flex;
   justify-content: center;

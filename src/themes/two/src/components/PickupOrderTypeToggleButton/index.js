@@ -6,6 +6,7 @@ import { Button } from '../../styles/Buttons'
 const PickupOrderTypeToggleButtonUI = (props) => {
   const {
     isMainBusinessListingPage,
+    isPickupPage,
     handleChangeOrderType,
     typeSelected,
     handleCustomClick
@@ -27,6 +28,13 @@ const PickupOrderTypeToggleButtonUI = (props) => {
       handleChangeOrderType(1)
     }
   }, [isMainBusinessListingPage])
+
+  useEffect(() => {
+    if (!isPickupPage) return
+    if (typeSelected !== 2) {
+      handleChangeOrderType(2)
+    }
+  }, [isPickupPage])
 
   return (
     typeSelected !== undefined && (

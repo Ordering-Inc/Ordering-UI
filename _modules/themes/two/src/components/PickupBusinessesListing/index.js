@@ -29,6 +29,8 @@ var _AddressForm = require("../AddressForm");
 
 var _BusinessesMap = require("../BusinessesMap");
 
+var _PickupOrderTypeToggleButton = require("../PickupOrderTypeToggleButton");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -133,7 +135,9 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
     search: searchValue,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch
-  }), /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinesses, null, /*#__PURE__*/_react.default.createElement(_styles.LeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.LeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapPickupButton, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
+    isPickupPage: true
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinesses, null, /*#__PURE__*/_react.default.createElement(_styles.LeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.LeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     noAutoScroll: true,
     handleChangeBusinessType: handleChangeBusinessType
   }))), /*#__PURE__*/_react.default.createElement("h1", null, t('RESTAURANTS_NEARBY', 'Restaurants Nearby')), /*#__PURE__*/_react.default.createElement(_styles.PickupBusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

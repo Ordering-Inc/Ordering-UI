@@ -106,11 +106,7 @@ var SidebarMenu = function SidebarMenu(props) {
       }
     }
   }, [width]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isHome && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isMenuOpen && /*#__PURE__*/_react.default.createElement(_styles.BackDropBackground, {
-    onClick: function onClick() {
-      return actionSidebar(false);
-    }
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isHome && /*#__PURE__*/_react.default.createElement(_styles.Container, {
     auth: auth
   }, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
     isHome: isHome,
@@ -215,7 +211,7 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/signup'
   }, t('SIGNUP', 'Sign up')))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, {
     isHome: isHome
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapLanguageSelector, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))))));
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapLanguageSelector, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))));
 };
 
 exports.SidebarMenu = SidebarMenu;

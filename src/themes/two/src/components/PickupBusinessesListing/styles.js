@@ -113,3 +113,7 @@ export const ErrorMessage = styled.span`
   color: #D81313;
   font-weight: bold;
 `
+
+export const WrapPickupButton = styled.div`
+  display: none;
+`

@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ErrorMessage = exports.PickupBusinessList = exports.LeftInnerContainer = exports.LeftContent = exports.WrapperBusinesses = exports.MapSkeleton = exports.WrapperBusinessMap = exports.InnerContainer = exports.PickupBusinessContainer = void 0;
+exports.WrapPickupButton = exports.ErrorMessage = exports.PickupBusinessList = exports.LeftInnerContainer = exports.LeftContent = exports.WrapperBusinesses = exports.MapSkeleton = exports.WrapperBusinessMap = exports.InnerContainer = exports.PickupBusinessContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,3 +48,7 @@ exports.PickupBusinessList = PickupBusinessList;
 var ErrorMessage = _styledComponents.default.span(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 20px;\n  width: 100%;\n  background-color: #CCCCCC;\n  margin: 0px 15px;\n  color: #D81313;\n  font-weight: bold;\n"])));
 
 exports.ErrorMessage = ErrorMessage;
+
+var WrapPickupButton = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: none;\n"])));
+
+exports.WrapPickupButton = WrapPickupButton;
