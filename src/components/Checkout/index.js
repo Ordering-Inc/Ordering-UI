@@ -429,7 +429,7 @@ export const Checkout = (props) => {
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products?.length) || null
+  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts)?.filter(cart => cart?.products?.length) || null
 
   const closeAlert = () => {
     setAlertState({
@@ -448,7 +448,7 @@ export const Checkout = (props) => {
 
   useEffect(() => {
     if (!orderState.loading && currentCart?.business_id) {
-      setCurrentCart(...Object.values(orderState.carts).filter(cart => cart.business_id === currentCart?.business_id))
+      setCurrentCart(...Object.values(orderState.carts)?.filter(cart => cart?.business_id === currentCart?.business_id))
     }
   }, [orderState.loading])
 
