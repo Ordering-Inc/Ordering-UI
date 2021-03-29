@@ -350,7 +350,6 @@ const AddressFormUI = (props) => {
           onSubmit={formMethods.handleSubmit(onSubmit)}
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
-          isAddressEditView={isAddressEdit}
         >
           {locationChange && isAddressEdit && (
             <WrapperMap mapView={toggleMap}>

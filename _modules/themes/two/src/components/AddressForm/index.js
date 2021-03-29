@@ -533,8 +533,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onKeyDown: function onKeyDown(e) {
       return checkKeyDown(e);
     },
-    autoComplete: "off",
-    isAddressEditView: isAddressEdit
+    autoComplete: "off"
   }, locationChange && isAddressEdit && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     mapView: toggleMap
   }, toggleMap ? /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
