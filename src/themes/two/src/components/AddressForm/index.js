@@ -385,41 +385,39 @@ const AddressFormUI = (props) => {
               </Button>
             </WrapAdjustPin>
           )}
-          {!isAddressEdit && (
-            <AddressWrap className='google-control'>
-              <WrapAddressInput>
-                <HiOutlineLocationMarker />
-                <GoogleAutocompleteInput
-                  className='input-autocomplete'
-                  apiKey={googleMapsApiKey}
-                  placeholder={t('ADDRESS', 'Address')}
-                  onChangeAddress={(e) => {
-                    formMethods.setValue('address', e.address)
-                    handleChangeAddress(e)
-                  }}
-                  onChange={(e) => {
-                    handleChangeInput({ target: { name: 'address', value: e.target.value } })
-                    setAddressValue(e.target.value)
-                  }}
-                  value={addressValue}
-                  autoComplete='new-field'
-                  countryCode={configState?.configs?.country_autocomplete?.value || '*'}
-                />
-              </WrapAddressInput>
-              {!onlyGoogleAutoComplete && (
-                <GoogleGpsButton
-                  className='gps-button'
-                  apiKey={googleMapsApiKey}
-                  onAddress={(e) => {
-                    formMethods.setValue('address', e.address)
-                    handleChangeAddress(e)
-                  }}
-                  IconButton={BiCurrentLocation}
-                  IconLoadingButton={CgSearchLoading}
-                />
-              )}
-            </AddressWrap>
-          )}
+          <AddressWrap className='google-control'>
+            <WrapAddressInput>
+              <HiOutlineLocationMarker />
+              <GoogleAutocompleteInput
+                className='input-autocomplete'
+                apiKey={googleMapsApiKey}
+                placeholder={t('ADDRESS', 'Address')}
+                onChangeAddress={(e) => {
+                  formMethods.setValue('address', e.address)
+                  handleChangeAddress(e)
+                }}
+                onChange={(e) => {
+                  handleChangeInput({ target: { name: 'address', value: e.target.value } })
+                  setAddressValue(e.target.value)
+                }}
+                value={addressValue}
+                autoComplete='new-field'
+                countryCode={configState?.configs?.country_autocomplete?.value || '*'}
+              />
+            </WrapAddressInput>
+            {!onlyGoogleAutoComplete && (
+              <GoogleGpsButton
+                className='gps-button'
+                apiKey={googleMapsApiKey}
+                onAddress={(e) => {
+                  formMethods.setValue('address', e.address)
+                  handleChangeAddress(e)
+                }}
+                IconButton={BiCurrentLocation}
+                IconLoadingButton={CgSearchLoading}
+              />
+            )}
+          </AddressWrap>
 
           {!onlyGoogleAutoComplete && !toggleMap && (
             <>
@@ -433,19 +431,16 @@ const AddressFormUI = (props) => {
                 }}
                 autoComplete='new-field'
               />
-              {!isAddressEdit && (
-                <Input
-                  className='zipcode'
-                  placeholder={t('ZIP_CODE', 'Zip code')}
-                  value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
-                  onChange={(e) => {
-                    formMethods.setValue('zipcode', e.target.value)
-                    handleChangeInput({ target: { name: 'zipcode', value: e.target.value } })
-                  }}
-                  autoComplete='new-field'
-                />
-              )}
-
+              <Input
+                className='zipcode'
+                placeholder={t('ZIP_CODE', 'Zip code')}
+                value={formState.changes?.zipcode ?? addressState.address.zipcode ?? ''}
+                onChange={(e) => {
+                  formMethods.setValue('zipcode', e.target.value)
+                  handleChangeInput({ target: { name: 'zipcode', value: e.target.value } })
+                }}
+                autoComplete='new-field'
+              />
               <TextArea
                 rows={4}
                 placeholder={t('ADDRESS_NOTES', 'Address Notes')}

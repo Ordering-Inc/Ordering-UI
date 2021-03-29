@@ -555,7 +555,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return setToggleMap(true);
     }
-  }, t('ADJUST_PIN', 'Adjust pin'))), !isAddressEdit && /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
+  }, t('ADJUST_PIN', 'Adjust pin'))), /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
     className: "google-control"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
     className: "input-autocomplete",
@@ -600,7 +600,7 @@ var AddressFormUI = function AddressFormUI(props) {
       });
     },
     autoComplete: "new-field"
-  }), !isAddressEdit && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "zipcode",
     placeholder: t('ZIP_CODE', 'Zip code'),
     value: (_ref9 = (_formState$changes$zi = (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : addressState.address.zipcode) !== null && _ref9 !== void 0 ? _ref9 : '',
