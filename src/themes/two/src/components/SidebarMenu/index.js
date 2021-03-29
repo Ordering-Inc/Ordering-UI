@@ -199,7 +199,7 @@ export const SidebarMenu = (props) => {
                         }
                       >
                         <span>{t('ACCOUNT', 'Account')}</span>
-                        <span>{user.name} {user.lastname}</span>
+                        <span>{user?.name} {user?.lastname}</span>
                       </TextInfo>
                     </MenuLinkText>
                   </WrappContent>
