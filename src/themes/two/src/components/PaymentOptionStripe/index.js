@@ -41,7 +41,6 @@ const PaymentOptionStripeUI = (props) => {
     onCancel,
     deleteCard,
     setDefaultCard,
-    cardSelected,
     cardDefault,
     cardsList,
     handleNewCard
@@ -98,7 +97,6 @@ const PaymentOptionStripeUI = (props) => {
     }
   }, [open])
 
-  console.log(cardSelected)
   return (
     <OptionStripeContainer>
       {!token && <WarningMessage>{t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')}</WarningMessage>}
