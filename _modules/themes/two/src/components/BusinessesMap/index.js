@@ -61,7 +61,7 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
     location: userLocation,
     locations: businessLocations,
     mapControls: googleMapsControls,
-    maxLimitLocation: configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.meters_to_change_address) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value,
+    maxLimitLocation: parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.meters_to_change_address) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value),
     businessMap: true,
     onBusinessClick: onBusinessClick,
     setErrors: setErrors
