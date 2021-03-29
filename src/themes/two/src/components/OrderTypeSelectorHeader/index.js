@@ -47,7 +47,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
                 )}
               </>
             )}
-            {type.content}
+            {type?.content}
           </Option>
         ))}
       </OrderTypeWrapper>
