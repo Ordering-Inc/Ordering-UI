@@ -285,7 +285,7 @@ const OrderDetailsUI = (props) => {
                   </OrderBill>
                 )}
 
-                {parseInt(configs?.guest_uuid_access?.value === 1) && (moment().diff(moment(order?.delivery_datetime), 'days') <= parseInt(configs?.guest_uuid_max_days?.value)) && order?.hash_key && (
+                {parseInt(configs?.guest_uuid_access?.value) === 1 && (moment().diff(moment(order?.delivery_datetime), 'days') <= parseInt(configs?.guest_uuid_max_days?.value)) && order?.hash_key && (
                   <ShareOrder onClick={() => setOpenProductShare(true)}>
                     <div>
                       <img src={theme.images.general.gift} width='40' height='40' alt='gift' />
