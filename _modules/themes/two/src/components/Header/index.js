@@ -108,7 +108,7 @@ var Header = function Header(props) {
       modalSelected = _useState6[0],
       setModalSelected = _useState6[1];
 
-  var isDeliveryAndPickupPage = location.pathname === '/search' || location.pathname === '/pickup';
+  var isDeliveryAndPickupPage = location.pathname === '/delivery' || location.pathname === '/pickup';
   var isAuthPage = location.pathname === '/signin' || location.pathname === '/login' || location.pathname === '/signup';
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();

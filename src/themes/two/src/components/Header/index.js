@@ -43,7 +43,7 @@ export const Header = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
 
-  const isDeliveryAndPickupPage = location.pathname === '/search' || location.pathname === '/pickup'
+  const isDeliveryAndPickupPage = location.pathname === '/delivery' || location.pathname === '/pickup'
   const isAuthPage = location.pathname === '/signin' || location.pathname === '/login' || location.pathname === '/signup'
 
   const windowSize = useWindowSize()
