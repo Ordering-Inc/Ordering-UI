@@ -86,7 +86,7 @@ export const SidebarMenu = (props) => {
 
             <MenuLink
               isHome={isHome}
-              onClick={() => handleGoToPage({ page: options?.address?.location ? 'search' : 'home' })}
+              onClick={() => handleGoToPage({ page: options?.address?.location ? 'delivery' : 'home' })}
             >
               <WrappContent>
                 <MenuLinkIcon
