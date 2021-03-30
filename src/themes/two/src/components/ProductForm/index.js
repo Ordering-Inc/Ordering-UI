@@ -115,7 +115,7 @@ const ProductOptionsUI = (props) => {
   const handleSuccessSignup = (user) => {
     login({
       user,
-      token: user.session.access_token
+      token: user?.session?.access_token
     })
     closeModal()
   }
