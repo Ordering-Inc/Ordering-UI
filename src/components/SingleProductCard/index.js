@@ -30,7 +30,7 @@ export const SingleProductCard = (props) => {
   const editMode = typeof product?.code !== 'undefined'
 
   const removeToBalance = editMode ? product?.quantity : 0
-  const cart = orderState.carts[`businessId:${businessId}`]
+  const cart = orderState.carts?.[`businessId:${businessId}`]
   const productCart = cart?.products?.find(prod => prod.id === product?.id)
   const totalBalance = (productCart?.quantity || 0) - removeToBalance
 
@@ -47,11 +47,9 @@ export const SingleProductCard = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <CardContainer
         soldOut={isSoldOut || maxProductQuantity <= 0}
         onClick={() => !isSkeleton && onProductClick(product)}
@@ -80,13 +78,11 @@ export const SingleProductCard = (props) => {
         {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
       </CardContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
