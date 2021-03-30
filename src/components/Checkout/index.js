@@ -310,20 +310,20 @@ const CheckoutUI = (props) => {
           {!props.isHideSectionFive &&
             !cartState.loading &&
             cart &&
+            cart?.business_id &&
             options.type === 1 &&
             cart?.status !== 2 &&
             validationFields?.fields?.checkout?.driver_tip?.enabled &&
-          (
-            <DriverTipContainer>
-              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-              <DriverTips
-                businessId={cart?.business_id}
-                driverTipsOptions={DriverTipsOptions}
-                useOrderContext
-              />
-            </DriverTipContainer>
-          )}
-
+            (
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={DriverTipsOptions}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+            )}
           {props.beforeElementsSectionSix?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
