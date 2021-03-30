@@ -9,7 +9,7 @@ exports.Reorder = exports.Map = exports.Card = exports.Logo = exports.Price = ex
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -65,33 +65,30 @@ var Card = _styledComponents.default.div(_templateObject5 || (_templateObject5 =
   return isBusinessesPage ? '300px' : '250px';
 }, function (_ref7) {
   var isBusinessesPage = _ref7.isBusinessesPage;
-  return isBusinessesPage && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin: 30px 20px;\n      width: calc(33% - 40px);\n      ", "\n    "])), function (_ref8) {
-    var flex = _ref8.flex;
-    return !flex && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        min-width: initial;\n      "])));
-  });
+  return isBusinessesPage && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin: 30px 20px;\n      width: calc(33% - 40px);\n    "])));
 });
 
 exports.Card = Card;
 
-var Map = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n  min-height: ", ";\n  img{\n    width: 100%;\n    height: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    border-radius: ", ";\n    image-rendering: -webkit-optimize-contrast;\n    object-fit: cover;\n  }\n  @media(min-width: 480px){\n    height: ", ";\n    min-height: ", "\n  }\n"])), function (_ref9) {
-  var isBusinessesPage = _ref9.isBusinessesPage;
+var Map = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n  min-height: ", ";\n  img{\n    width: 100%;\n    height: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    border-radius: ", ";\n    image-rendering: -webkit-optimize-contrast;\n    object-fit: cover;\n  }\n  @media(min-width: 480px){\n    height: ", ";\n    min-height: ", "\n  }\n"])), function (_ref8) {
+  var isBusinessesPage = _ref8.isBusinessesPage;
   return isBusinessesPage ? '200px' : '88px';
+}, function (_ref9) {
+  var isBusinessesPage = _ref9.isBusinessesPage;
+  return isBusinessesPage && '175px';
 }, function (_ref10) {
   var isBusinessesPage = _ref10.isBusinessesPage;
-  return isBusinessesPage && '175px';
+  return isBusinessesPage && '16px';
 }, function (_ref11) {
   var isBusinessesPage = _ref11.isBusinessesPage;
-  return isBusinessesPage && '16px';
+  return isBusinessesPage ? '200px' : '100px';
 }, function (_ref12) {
   var isBusinessesPage = _ref12.isBusinessesPage;
-  return isBusinessesPage ? '200px' : '100px';
-}, function (_ref13) {
-  var isBusinessesPage = _ref13.isBusinessesPage;
   return isBusinessesPage && '200px';
 });
 
 exports.Map = Map;
 
-var Reorder = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  button{\n    line-height: 0;\n    height: 30px;\n    font-size: 14px;\n  }\n"])));
+var Reorder = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  button{\n    line-height: 0;\n    height: 30px;\n    font-size: 14px;\n  }\n"])));
 
 exports.Reorder = Reorder;
