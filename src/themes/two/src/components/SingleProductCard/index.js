@@ -29,7 +29,7 @@ export const SingleProductCard = (props) => {
   const editMode = typeof product?.code !== 'undefined'
 
   const removeToBalance = editMode ? product?.quantity : 0
-  const cart = orderState.carts[`businessId:${businessId}`]
+  const cart = orderState.carts?.[`businessId:${businessId}`]
   const productCart = cart?.products?.find(prod => prod.id === product?.id)
   const totalBalance = (productCart?.quantity || 0) - removeToBalance
 

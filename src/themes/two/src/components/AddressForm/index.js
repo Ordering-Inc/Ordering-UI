@@ -193,7 +193,7 @@ const AddressFormUI = (props) => {
 
     setToggleMap(false)
     const arrayList = isEditing
-      ? addressesList.filter(address => address.id !== addressState.address?.id) || []
+      ? addressesList?.filter(address => address?.id !== addressState?.address?.id) || []
       : addressesList || []
     const addressToCompare = isEditing
       ? { ...addressState.address, ...formState.changes }
