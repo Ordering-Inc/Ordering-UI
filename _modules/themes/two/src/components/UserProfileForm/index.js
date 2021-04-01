@@ -42,16 +42,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserProfileFormUI = function UserProfileFormUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1]; // const [events] = useEvent()
-
+      t = _useLanguage2[1];
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       isManageAccountPage = _useState2[0],
-      setIsManageAccountPage = _useState2[1]; // const handleGoToPage = (data) => {
-  //   events.emit('go_to_page', data)
-  // }
-
+      setIsManageAccountPage = _useState2[1];
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ProfileContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", {
     onClick: function onClick() {

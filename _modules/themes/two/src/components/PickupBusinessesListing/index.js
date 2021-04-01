@@ -27,7 +27,11 @@ var _Modal = require("../Modal");
 
 var _AddressForm = require("../AddressForm");
 
+var _AddressList = require("../AddressList");
+
 var _BusinessesMap = require("../BusinessesMap");
+
+var _PickupOrderTypeToggleButton = require("../PickupOrderTypeToggleButton");
 
 var _styles = require("./styles");
 
@@ -66,7 +70,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 700;
 
 var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
-  var _businessesList$busin, _orderState$options3, _orderState$options3$, _orderState$options4;
+  var _businessesList$busin, _orderState$options4, _orderState$options4$, _orderState$options5;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -100,6 +104,8 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
       modals = _useState2[0],
       setModals = _useState2[1];
 
+  var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
+
   var handleClickAddress = function handleClickAddress(e) {
     if (auth) {
       setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -110,6 +116,22 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
         formOpen: true
       }));
     }
+  };
+
+  var handleFindBusinesses = function handleFindBusinesses() {
+    var _orderState$options, _orderState$options$a;
+
+    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
+      setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        formOpen: true
+      }));
+      return;
+    }
+
+    setModals({
+      listOpen: false,
+      formOpen: false
+    });
   };
 
   var handleScroll = (0, _react.useCallback)(function () {
@@ -133,7 +155,9 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
     search: searchValue,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch
-  }), /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinesses, null, /*#__PURE__*/_react.default.createElement(_styles.LeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.LeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapPickupButton, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
+    isPickupPage: true
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinesses, null, /*#__PURE__*/_react.default.createElement(_styles.LeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.LeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     noAutoScroll: true,
     handleChangeBusinessType: handleChangeBusinessType
   }))), /*#__PURE__*/_react.default.createElement("h1", null, t('RESTAURANTS_NEARBY', 'Restaurants Nearby')), /*#__PURE__*/_react.default.createElement(_styles.PickupBusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
@@ -145,24 +169,24 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
       return handleClickAddress();
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
-    var _orderState$options;
+    var _orderState$options2;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
       className: "card",
       business: business,
       handleCustomClick: handleBusinessClick,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
     });
   }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 10).keys()).map(function (i) {
-    var _orderState$options2;
+    var _orderState$options3;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
     });
   }), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
@@ -170,7 +194,7 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessMap, null, !businessesList.loading && !configState.loading ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
-    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location
+    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location
   }) : /*#__PURE__*/_react.default.createElement(_styles.MapSkeleton, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,
@@ -181,7 +205,7 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
@@ -196,6 +220,27 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
       }));
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESSES', 'Addresses'),
+    open: modals.listOpen,
+    width: "70%",
+    onClose: function onClose() {
+      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    isModal: true,
+    changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer) ? null : userCustomer,
+    onCancel: function onCancel() {
+      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: false
+      }));
+    },
+    onAccept: function onAccept() {
+      return handleFindBusinesses();
     }
   })));
 };

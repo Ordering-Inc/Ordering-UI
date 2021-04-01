@@ -25,8 +25,6 @@ var _Modal = require("../Modal");
 
 var _AddressForm = require("../AddressForm");
 
-var _ReviewSettingPopover = require("../ReviewSettingPopover");
-
 var _PickupOrderTypeToggleButton = require("../PickupOrderTypeToggleButton");
 
 var _styles = require("./styles");
@@ -96,16 +94,6 @@ var AllBusinessesListingUI = function AllBusinessesListingUI(props) {
       modals = _useState2[0],
       setModals = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(4.5),
-      _useState4 = _slicedToArray(_useState3, 2),
-      reviewQuality = _useState4[0],
-      setReviewQuality = _useState4[1];
-
-  var _useState5 = (0, _react.useState)({}),
-      _useState6 = _slicedToArray(_useState5, 2),
-      openPopover = _useState6[0],
-      setOpenPopover = _useState6[1];
-
   var handleClickAddress = function handleClickAddress(e) {
     if (auth) {
       setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -116,18 +104,6 @@ var AllBusinessesListingUI = function AllBusinessesListingUI(props) {
         formOpen: true
       }));
     }
-  };
-
-  var handleReviewSettingValue = function handleReviewSettingValue(value) {
-    setReviewQuality(value);
-  };
-
-  var handleTogglePopover = function handleTogglePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, !openPopover[type])));
-  };
-
-  var handleClosePopover = function handleClosePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
   };
 
   var handleScroll = (0, _react.useCallback)(function () {
@@ -155,16 +131,6 @@ var AllBusinessesListingUI = function AllBusinessesListingUI(props) {
     handleCustomClick: function handleCustomClick() {
       return setIsPickupClicked(true);
     }
-  }), /*#__PURE__*/_react.default.createElement(_ReviewSettingPopover.ReviewSettingPopover, {
-    open: openPopover.reviewSetting,
-    reviewQuality: reviewQuality,
-    onClick: function onClick() {
-      return handleTogglePopover('reviewSetting');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('reviewSetting');
-    },
-    handleReviewSettingValue: handleReviewSettingValue
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "secondary",
     onClick: function onClick() {

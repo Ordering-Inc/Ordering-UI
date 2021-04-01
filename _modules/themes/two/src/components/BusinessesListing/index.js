@@ -29,8 +29,6 @@ var _FeaturedBusinessListing = require("../FeaturedBusinessListing");
 
 var _AllBusinessesListing = require("../AllBusinessesListing");
 
-var _ReviewSettingPopover = require("../ReviewSettingPopover");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -38,12 +36,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -80,20 +72,10 @@ var BusinessesListing = function BusinessesListing(props) {
 
   var orderType = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) || 1;
 
-  var _useState = (0, _react.useState)(4.5),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      reviewQuality = _useState2[0],
-      setReviewQuality = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({}),
-      _useState4 = _slicedToArray(_useState3, 2),
-      openPopover = _useState4[0],
-      setOpenPopover = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isPickupClicked = _useState6[0],
-      setIsPickupClicked = _useState6[1];
+      isPickupClicked = _useState2[0],
+      setIsPickupClicked = _useState2[1];
 
   var handleGoToPage = function handleGoToPage(search) {
     events.emit('go_to_page', {
@@ -104,18 +86,6 @@ var BusinessesListing = function BusinessesListing(props) {
 
   var handleChangeCategory = function handleChangeCategory(value) {
     handleGoToPage("category=".concat(value));
-  };
-
-  var handleReviewSettingValue = function handleReviewSettingValue(value) {
-    setReviewQuality(value);
-  };
-
-  var handleTogglePopover = function handleTogglePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, !openPopover[type])));
-  };
-
-  var handleClosePopover = function handleClosePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
   };
 
   (0, _react.useEffect)(function () {
@@ -141,16 +111,6 @@ var BusinessesListing = function BusinessesListing(props) {
     handleCustomClick: function handleCustomClick() {
       return setIsPickupClicked(true);
     }
-  }), /*#__PURE__*/_react.default.createElement(_ReviewSettingPopover.ReviewSettingPopover, {
-    open: openPopover.reviewSetting,
-    reviewQuality: reviewQuality,
-    onClick: function onClick() {
-      return handleTogglePopover('reviewSetting');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('reviewSetting');
-    },
-    handleReviewSettingValue: handleReviewSettingValue
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "secondary",
     onClick: function onClick() {

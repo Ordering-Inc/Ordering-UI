@@ -145,6 +145,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
     var myElement = document.getElementsByClassName('error')[0];
     var productContainer = document.getElementsByClassName('product-container')[0];
+
+    if (!myElement || !productContainer) {
+      return;
+    }
+
     var topPos = myElement.offsetTop - productContainer.offsetTop;
 
     if (windowSize.width <= 768) {
@@ -162,9 +167,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   };
 
   var handleSuccessSignup = function handleSuccessSignup(user) {
+    var _user$session;
+
     login({
       user: user,
-      token: user.session.access_token
+      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
     closeModal();
   };

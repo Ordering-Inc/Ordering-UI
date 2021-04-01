@@ -362,7 +362,7 @@ var CheckoutUI = function CheckoutUI(props) {
 };
 
 var Checkout = function Checkout(props) {
-  var _cartState$cart, _cartState$error, _cartState$cart2;
+  var _Object$values, _cartState$cart, _cartState$error, _cartState$cart2;
 
   var errors = props.errors,
       clearErrors = props.clearErrors,
@@ -411,8 +411,10 @@ var Checkout = function Checkout(props) {
       alertState = _useState14[0],
       setAlertState = _useState14[1];
 
-  var cartsWithProducts = Object.values(orderState.carts).filter(function (cart) {
-    return cart.products.length;
+  var cartsWithProducts = (_Object$values = Object.values(orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
+    var _cart$products;
+
+    return cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length;
   });
 
   var closeAlert = function closeAlert() {
@@ -425,7 +427,9 @@ var Checkout = function Checkout(props) {
 
   (0, _react.useEffect)(function () {
     if (!orderState.loading && currentCart !== null && currentCart !== void 0 && currentCart.business_id) {
-      setCurrentCart.apply(void 0, _toConsumableArray(Object.values(orderState.carts).filter(function (cart) {
+      var _Object$values2;
+
+      setCurrentCart.apply(void 0, _toConsumableArray((_Object$values2 = Object.values(orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
         return (cart === null || cart === void 0 ? void 0 : cart.business_id) === (currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id);
       })));
     }

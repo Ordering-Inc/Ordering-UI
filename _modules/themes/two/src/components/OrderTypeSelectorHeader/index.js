@@ -63,7 +63,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
       },
       toggle: toggle,
       radioStyle: radioStyle
-    }, radioStyle && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, type.value === typeSelected ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, null)), type.content);
+    }, radioStyle && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, type.value === typeSelected ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, null)), type === null || type === void 0 ? void 0 : type.content);
   }));
 };
 

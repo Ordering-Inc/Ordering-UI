@@ -34,10 +34,7 @@ var FormActions = _styledComponents.default.div(_templateObject || (_templateObj
 
 exports.FormActions = FormActions;
 
-var FormControl = _styledComponents.default.form(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  padding: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  input {\n    box-sizing: border-box;\n    margin: 10px 0px;\n    height: 43px;\n    width: 100%;\n    &.internal_number,\n    &.zipcode {\n      width: 100%;\n    }\n    &::placeholder{\n      color: #CBCBCB\n    }\n\n    @media (min-width: 621px) {\n      &.internal_number,\n      &.zipcode  {\n        width: ", ";\n      }\n    }\n  \n  }\n\n  textarea {\n    width: 100%;\n  }\n\n  .input-autocomplete {\n    width: 100%;\n    background: #FFF;\n    border: 1px solid #BBB;\n    border-radius: 30px;\n    font-size: 16px;\n    padding: 7px 15px;\n    outline: none;\n    ::placeholder {\n      color: #DBDCDB;\n    }\n\n    &:-ms-input-placeholder {\n      color: #DBDCDB;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: #DBDCDB;\n    }\n    &:focus {\n      border-color: ", ";\n    }\n  }\n\n  @media (min-width: 481px) {\n    padding: 10px;\n  }\n"])), function (_ref2) {
-  var isAddressEditView = _ref2.isAddressEditView;
-  return isAddressEditView ? '100%' : '48%';
-}, function () {
+var FormControl = _styledComponents.default.form(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  padding: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  input {\n    box-sizing: border-box;\n    margin: 10px 0px;\n    height: 43px;\n    width: 100%;\n    &.internal_number,\n    &.zipcode {\n      width: 100%;\n    }\n    &::placeholder{\n      color: #CBCBCB\n    }\n\n    @media (min-width: 621px) {\n      &.internal_number,\n      &.zipcode  {\n        width: 48%;\n      }\n    }\n  \n  }\n\n  textarea {\n    width: 100%;\n  }\n\n  .input-autocomplete {\n    width: 100%;\n    background: #FFF;\n    border: 1px solid #BBB;\n    border-radius: 30px;\n    font-size: 16px;\n    padding: 7px 15px;\n    outline: none;\n    ::placeholder {\n      color: #DBDCDB;\n    }\n\n    &:-ms-input-placeholder {\n      color: #DBDCDB;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: #DBDCDB;\n    }\n    &:focus {\n      border-color: ", ";\n    }\n  }\n\n  @media (min-width: 481px) {\n    padding: 10px;\n  }\n"])), function () {
   return (0, _polished.darken)(0.07, '#CCC');
 });
 
@@ -67,8 +64,8 @@ var AddressTagSection = _styledComponents.default.div(_templateObject10 || (_tem
 
 exports.AddressTagSection = AddressTagSection;
 
-var WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 260px;\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n  }\n\n  ", "\n"])), function (_ref3) {
-  var mapView = _ref3.mapView;
+var WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 260px;\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n  }\n\n  ", "\n"])), function (_ref2) {
+  var mapView = _ref2.mapView;
   return mapView && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    height: 500px;\n  "])));
 });
 

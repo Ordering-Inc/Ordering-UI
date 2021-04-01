@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapAccountManage = exports.PrivacyContainer = exports.WrapperForm = exports.Tab = exports.ProfileOptionsContainer = exports.ProfileContainer = exports.Header = exports.Container = void 0;
+exports.WrapAccountManage = exports.PrivacyContainer = exports.WrapperForm = exports.ProfileContainer = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,29 +29,19 @@ var ProfileContainer = _styledComponents.default.div(_templateObject3 || (_templ
 
 exports.ProfileContainer = ProfileContainer;
 
-var ProfileOptionsContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  justify-content: space-between;\n  @media (max-width: 992px) {\n    width: 100%;\n    flex-wrap: wrap;\n  }\n"])));
-
-exports.ProfileOptionsContainer = ProfileOptionsContainer;
-
-var Tab = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 18px;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n\n  @media (max-width: 576px) {\n    font-size: 16px;\n  }\n  \n"])), function (props) {
-  return props.theme.colors.primary;
-});
-
-exports.Tab = Tab;
-
-var WrapperForm = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  padding: 20px;\n\n  > p {\n    span {\n      cursor: pointer;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var WrapperForm = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  padding: 20px;\n\n  > p {\n    span {\n      cursor: pointer;\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
 exports.WrapperForm = WrapperForm;
 
-var PrivacyContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n"])), function (props) {
+var PrivacyContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n"])), function (props) {
   return props.theme.colors.secondary;
 });
 
 exports.PrivacyContainer = PrivacyContainer;
 
-var WrapAccountManage = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 50%;\n  margin: 30px auto;\n  border: 1px solid ", ";\n  border-radius: 5px;\n\n  @media (max-width: 992px) {\n    width: 91%;\n  }\n"])), function (props) {
+var WrapAccountManage = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 50%;\n  margin: 30px auto;\n  border: 1px solid ", ";\n  border-radius: 5px;\n\n  @media (max-width: 992px) {\n    width: 91%;\n  }\n"])), function (props) {
   return props.theme.colors.secondary;
 });
 

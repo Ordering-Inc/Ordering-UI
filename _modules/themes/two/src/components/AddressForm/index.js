@@ -165,7 +165,7 @@ var AddressFormUI = function AddressFormUI(props) {
       locationChange = _useState14[0],
       setLocationChange = _useState14[1];
 
-  var maxLimitLocation = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.meters_to_change_address) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+  var maxLimitLocation = parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.meters_to_change_address) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value);
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
   var isLocationRequired = ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === '1' || ((_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.google_autocomplete_selection_required) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === 'true';
   var mapErrors = {
@@ -337,11 +337,11 @@ var AddressFormUI = function AddressFormUI(props) {
 
             case 10:
               setToggleMap(false);
-              arrayList = isEditing ? addressesList.filter(function (address) {
+              arrayList = isEditing ? (addressesList === null || addressesList === void 0 ? void 0 : addressesList.filter(function (address) {
                 var _addressState$address7;
 
-                return address.id !== ((_addressState$address7 = addressState.address) === null || _addressState$address7 === void 0 ? void 0 : _addressState$address7.id);
-              }) || [] : addressesList || [];
+                return (address === null || address === void 0 ? void 0 : address.id) !== (addressState === null || addressState === void 0 ? void 0 : (_addressState$address7 = addressState.address) === null || _addressState$address7 === void 0 ? void 0 : _addressState$address7.id);
+              })) || [] : addressesList || [];
               addressToCompare = isEditing ? _objectSpread(_objectSpread({}, addressState.address), formState.changes) : formState === null || formState === void 0 ? void 0 : formState.changes;
               isAddressAlreadyExist = (_arrayList$map$some2 = arrayList.map(function (address) {
                 return checkAddress(address, addressToCompare);
@@ -396,7 +396,7 @@ var AddressFormUI = function AddressFormUI(props) {
   var setMapErrors = function setMapErrors(errKey) {
     setAlertState({
       open: true,
-      content: [t(errKey, mapErrors[errKey])]
+      content: !(errKey === 'ERROR_MAX_LIMIT_LOCATION') ? [t(errKey, mapErrors[errKey])] : "".concat([t(errKey, mapErrors[errKey])], " ").concat(maxLimitLocation, " ").concat([t('METTERS', 'meters')])
     });
   };
 
@@ -533,8 +533,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onKeyDown: function onKeyDown(e) {
       return checkKeyDown(e);
     },
-    autoComplete: "off",
-    isAddressEditView: isAddressEdit
+    autoComplete: "off"
   }, locationChange && isAddressEdit && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     mapView: toggleMap
   }, toggleMap ? /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
@@ -555,7 +554,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return setToggleMap(true);
     }
-  }, t('ADJUST_PIN', 'Adjust pin'))), !isAddressEdit && /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
+  }, t('ADJUST_PIN', 'Adjust pin'))), /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
     className: "google-control"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
     className: "input-autocomplete",
@@ -600,7 +599,7 @@ var AddressFormUI = function AddressFormUI(props) {
       });
     },
     autoComplete: "new-field"
-  }), !isAddressEdit && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "zipcode",
     placeholder: t('ZIP_CODE', 'Zip code'),
     value: (_ref9 = (_formState$changes$zi = (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : addressState.address.zipcode) !== null && _ref9 !== void 0 ? _ref9 : '',

@@ -37,6 +37,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PickupOrderTypeToggleButtonUI = function PickupOrderTypeToggleButtonUI(props) {
   var isMainBusinessListingPage = props.isMainBusinessListingPage,
+      isPickupPage = props.isPickupPage,
       handleChangeOrderType = props.handleChangeOrderType,
       typeSelected = props.typeSelected,
       handleCustomClick = props.handleCustomClick;
@@ -62,6 +63,13 @@ var PickupOrderTypeToggleButtonUI = function PickupOrderTypeToggleButtonUI(props
       handleChangeOrderType(1);
     }
   }, [isMainBusinessListingPage]);
+  (0, _react.useEffect)(function () {
+    if (!isPickupPage) return;
+
+    if (typeSelected !== 2) {
+      handleChangeOrderType(2);
+    }
+  }, [isPickupPage]);
   return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: typeSelected === 2 ? 'dark' : 'secondary',
     onClick: function onClick() {

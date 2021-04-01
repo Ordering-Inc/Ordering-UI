@@ -74,11 +74,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit();
     }
-  }, [isUserDetailsEdit]); // const toggleEditState = () => {
-  //   toggleIsEdit()
-  //   cleanFormState({ changes: {} })
-  // }
-
+  }, [isUserDetailsEdit]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields.loading || formState.loading || externalLoading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 250,
     height: 25

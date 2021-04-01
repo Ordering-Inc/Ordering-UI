@@ -27,9 +27,9 @@ var _Modal = require("../Modal");
 
 var _AddressForm = require("../AddressForm");
 
-var _PickupOrderTypeToggleButton = require("../PickupOrderTypeToggleButton");
+var _AddressList = require("../AddressList");
 
-var _ReviewSettingPopover = require("../ReviewSettingPopover");
+var _PickupOrderTypeToggleButton = require("../PickupOrderTypeToggleButton");
 
 var _FilterViewBackButton = require("../FilterViewBackButton");
 
@@ -70,7 +70,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 700;
 
 var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
-  var _orderState$options2, _businessesList$busin, _orderState$options5;
+  var _orderState$options3, _businessesList$busin, _orderState$options6;
 
   var onFilterBusinessRedirect = props.onFilterBusinessRedirect,
       businessesList = props.businessesList,
@@ -108,20 +108,12 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
       modals = _useState2[0],
       setModals = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(4.5),
+  var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
+
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      reviewQuality = _useState4[0],
-      setReviewQuality = _useState4[1];
-
-  var _useState5 = (0, _react.useState)({}),
-      _useState6 = _slicedToArray(_useState5, 2),
-      openPopover = _useState6[0],
-      setOpenPopover = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isGoBackClicked = _useState8[0],
-      setIsGoBackClicked = _useState8[1];
+      isGoBackClicked = _useState4[0],
+      setIsGoBackClicked = _useState4[1];
 
   var handleGoToPage = function handleGoToPage() {
     events.emit('go_to_page', {
@@ -141,21 +133,25 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
     }
   };
 
-  var handleReviewSettingValue = function handleReviewSettingValue(value) {
-    setReviewQuality(value);
-  };
-
-  var handleTogglePopover = function handleTogglePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, !openPopover[type])));
-  };
-
-  var handleClosePopover = function handleClosePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
-  };
-
   var changeBusinessType = function changeBusinessType(type) {
     handleChangeBusinessType(type);
     onFilterBusinessRedirect();
+  };
+
+  var handleFindBusinesses = function handleFindBusinesses() {
+    var _orderState$options, _orderState$options$a;
+
+    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
+      setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        formOpen: true
+      }));
+      return;
+    }
+
+    setModals({
+      listOpen: false,
+      formOpen: false
+    });
   };
 
   var toggelTimeLimit = function toggelTimeLimit() {
@@ -184,14 +180,14 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
     };
   }, [handleScroll]);
   (0, _react.useEffect)(function () {
-    var _orderState$options;
+    var _orderState$options2;
 
     if (!isGoBackClicked) return;
 
-    if ((orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1) {
+    if ((orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1) {
       handleGoToPage();
     }
-  }, [isGoBackClicked, orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type]);
+  }, [isGoBackClicked, orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type]);
   return /*#__PURE__*/_react.default.createElement(_styles.FilterBuinessContainer, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     isCustomMode: true,
@@ -207,17 +203,7 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     noAutoScroll: true,
     handleChangeBusinessType: changeBusinessType
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapButtonGroup, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, null), /*#__PURE__*/_react.default.createElement(_ReviewSettingPopover.ReviewSettingPopover, {
-    open: openPopover.reviewSetting,
-    reviewQuality: reviewQuality,
-    onClick: function onClick() {
-      return handleTogglePopover('reviewSetting');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('reviewSetting');
-    },
-    handleReviewSettingValue: handleReviewSettingValue
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapButtonGroup, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, null), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: timeLimitValue ? 'dark' : 'secondary',
     onClick: function onClick() {
       return toggelTimeLimit();
@@ -231,24 +217,24 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
       return handleClickAddress();
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
-    var _orderState$options3;
+    var _orderState$options4;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
       className: "card",
       business: business,
       handleCustomClick: handleBusinessClick,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type
     });
   }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 10).keys()).map(function (i) {
-    var _orderState$options4;
+    var _orderState$options5;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type
     });
   }), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
@@ -264,7 +250,7 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
@@ -279,6 +265,27 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
       }));
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESSES', 'Addresses'),
+    open: modals.listOpen,
+    width: "70%",
+    onClose: function onClose() {
+      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    isModal: true,
+    changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer) ? null : userCustomer,
+    onCancel: function onCancel() {
+      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: false
+      }));
+    },
+    onAccept: function onAccept() {
+      return handleFindBusinesses();
     }
   })));
 };

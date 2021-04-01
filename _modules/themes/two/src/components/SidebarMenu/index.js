@@ -25,8 +25,6 @@ var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 
 var _VscAccount = _interopRequireDefault(require("@meronex/icons/vsc/VscAccount"));
 
-var _FaDollarSign = _interopRequireDefault(require("@meronex/icons/fa/FaDollarSign"));
-
 var _HiOutlineShoppingBag = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineShoppingBag"));
 
 var _orderingComponents = require("ordering-components");
@@ -64,8 +62,7 @@ var SidebarMenu = function SidebarMenu(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       _useSession2$ = _useSession2[0],
       auth = _useSession2$.auth,
-      user = _useSession2$.user; // const { auth } = props
-
+      user = _useSession2$.user;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -132,7 +129,7 @@ var SidebarMenu = function SidebarMenu(props) {
       var _options$address;
 
       return handleGoToPage({
-        page: options !== null && options !== void 0 && (_options$address = options.address) !== null && _options$address !== void 0 && _options$address.location ? 'search' : 'home'
+        page: options !== null && options !== void 0 && (_options$address = options.address) !== null && _options$address !== void 0 && _options$address.location ? 'delivery' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
@@ -140,8 +137,8 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
-    active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
-  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/delivery'
+  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('DELIVERY', 'Delivery') : t('HOME', 'Home'))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       var _options$address4;
@@ -182,20 +179,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_VscAccount.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
     active: window.location.pathname === '/profile'
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('ACCOUNT', 'Account')), /*#__PURE__*/_react.default.createElement("span", null, user.name, " ", user.lastname))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'payment'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
-    active: window.location.pathname === '/payment'
-  }, /*#__PURE__*/_react.default.createElement(_FaDollarSign.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
-    active: window.location.pathname === '/payment'
-  }, t('PAYMENT', 'Payment'))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('ACCOUNT', 'Account')), /*#__PURE__*/_react.default.createElement("span", null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     onCustomClick: function onCustomClick() {
       return actionSidebar(false);
     }

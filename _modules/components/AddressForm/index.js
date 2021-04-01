@@ -340,11 +340,11 @@ var AddressFormUI = function AddressFormUI(props) {
 
             case 10:
               setToggleMap(false);
-              arrayList = isEditing ? addressesList.filter(function (address) {
+              arrayList = isEditing ? (addressesList === null || addressesList === void 0 ? void 0 : addressesList.filter(function (address) {
                 var _addressState$address7;
 
-                return address.id !== ((_addressState$address7 = addressState.address) === null || _addressState$address7 === void 0 ? void 0 : _addressState$address7.id);
-              }) || [] : addressesList || [];
+                return (address === null || address === void 0 ? void 0 : address.id) !== (addressState === null || addressState === void 0 ? void 0 : (_addressState$address7 = addressState.address) === null || _addressState$address7 === void 0 ? void 0 : _addressState$address7.id);
+              })) || [] : addressesList || [];
               addressToCompare = isEditing ? _objectSpread(_objectSpread({}, addressState.address), formState.changes) : formState === null || formState === void 0 ? void 0 : formState.changes;
               isAddressAlreadyExist = (_arrayList$map$some2 = arrayList.map(function (address) {
                 return checkAddress(address, addressToCompare);

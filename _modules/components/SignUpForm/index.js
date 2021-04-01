@@ -121,9 +121,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
       setIsValidPhoneNumber = _useState6[1];
 
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
+    var _user$session;
+
     login({
       user: user,
-      token: user.session.access_token
+      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
   };
 

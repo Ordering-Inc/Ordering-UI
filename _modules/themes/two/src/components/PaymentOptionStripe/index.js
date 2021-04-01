@@ -77,7 +77,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
       onCancel = props.onCancel,
       deleteCard = props.deleteCard,
       setDefaultCard = props.setDefaultCard,
-      cardSelected = props.cardSelected,
+      cardDefault = props.cardDefault,
       cardsList = props.cardsList,
       handleNewCard = props.handleNewCard;
 
@@ -173,7 +173,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
       className: "brand"
     }, (0, _utils.getIconCard)(card.brand)), /*#__PURE__*/_react.default.createElement("span", {
       className: "brandName"
-    }, card.brand), /*#__PURE__*/_react.default.createElement("span", null, "...", card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, card.id === (cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.id) && /*#__PURE__*/_react.default.createElement(_styles.DefaultCardItem, null, /*#__PURE__*/_react.default.createElement(_BsCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DEFAULT', 'Default'))), /*#__PURE__*/_react.default.createElement(_BsThreeDots.default, {
+    }, card.brand), /*#__PURE__*/_react.default.createElement("span", null, "...", card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, card.id === (cardDefault === null || cardDefault === void 0 ? void 0 : cardDefault.id) && /*#__PURE__*/_react.default.createElement(_styles.DefaultCardItem, null, /*#__PURE__*/_react.default.createElement(_BsCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DEFAULT', 'Default'))), /*#__PURE__*/_react.default.createElement(_BsThreeDots.default, {
       onClick: function onClick() {
         return handleOpenActionContent(card.id);
       }
@@ -201,9 +201,9 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
-      return onSelectCard(cardSelected);
+      return onSelectCard(cardDefault);
     },
-    disabled: !cardSelected
+    disabled: !cardDefault
   }, t('ACCEPT', 'Accept')))), (defaultCardSetActionStatus === null || defaultCardSetActionStatus === void 0 ? void 0 : defaultCardSetActionStatus.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: "Add credit or debit card",
     className: "modal-info",
