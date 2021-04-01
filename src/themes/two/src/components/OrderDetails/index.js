@@ -8,13 +8,8 @@ import {
   GoogleMapsMap
 } from 'ordering-components'
 
-// import FiPhone from '@meronex/icons/fi/FiPhone'
-// import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
-// import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import BsChevronLeft from '@meronex/icons/bs/BsChevronLeft'
-// import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
-// import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import MdcSilverwareForkKnife from '@meronex/icons/mdc/MdcSilverwareForkKnife'
 import MdHome from '@meronex/icons/md/MdHome'
 import BisCar from '@meronex/icons/bi/BisCar'
@@ -27,50 +22,31 @@ import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 import { ReviewOrder } from '../ReviewOrder'
 import { ProductShare } from '../ProductShare'
+import moment from 'moment'
 
 import {
   Container,
   WrapperContainer,
-  // Header,
-  // HeaderInfo,
-  // HeaderText,
   Content,
   OrderBusiness,
-  // BusinessWrapper,
-  // LogoWrapper,
-  // BusinessLogo,
   BusinessInfo,
-  // ActionsBlock,
   OrderInfo,
   OrderData,
   StatusBar,
-  // OrderStatus,
-  // StatusImage,
-  // SectionTitle,
   OrderCustomer,
-  // PhotoBlock,
-  // InfoBlock,
   Map,
-  // OrderDriver,
-  // WrapperDriver,
-  // OrderProducts,
   OrderBill,
   ReviewsAction,
-  // FootActions,
   SkeletonBlockWrapp,
   SkeletonBlock,
-  // HeaderImg,
   ShareOrder,
   Step,
   WrapBack
-  // MessagesIcon,
-  // ExclamationWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
-    // handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
     driverLocation,
@@ -91,7 +67,6 @@ const OrderDetailsUI = (props) => {
   const [isReviewed, setIsReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
   const [openProductShare, setOpenProductShare] = useState(false)
-  // const { order, loading, businessData, error } = props.order
   const { order, loading, error } = props.order
 
   const getOrderStatus = (s) => {
@@ -310,7 +285,7 @@ const OrderDetailsUI = (props) => {
                   </OrderBill>
                 )}
 
-                {configs?.guest_uuid_access && order?.hash_key && (
+                {parseInt(configs?.guest_uuid_access?.value) === 1 && (moment().diff(moment(order?.delivery_datetime), 'days') <= parseInt(configs?.guest_uuid_max_days?.value)) && order?.hash_key && (
                   <ShareOrder onClick={() => setOpenProductShare(true)}>
                     <div>
                       <img src={theme.images.general.gift} width='40' height='40' alt='gift' />

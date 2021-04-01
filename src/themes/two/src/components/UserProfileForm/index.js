@@ -5,15 +5,12 @@ import { AccountManage } from '../AccountManage'
 import {
   UserFormDetails as UserProfileController,
   useLanguage
-  // useEvent
 } from 'ordering-components'
 
 import {
   Container,
   ProfileContainer,
   Header,
-  // ProfileOptionsContainer,
-  // Tab,
   WrapperForm,
   PrivacyContainer,
   WrapAccountManage
@@ -21,27 +18,13 @@ import {
 
 const UserProfileFormUI = (props) => {
   const [, t] = useLanguage()
-  // const [events] = useEvent()
-
   const [isManageAccountPage, setIsManageAccountPage] = useState(false)
-
-  // const handleGoToPage = (data) => {
-  //   events.emit('go_to_page', data)
-  // }
 
   return (
     <Container>
       <ProfileContainer>
         <Header>
           <h1 onClick={() => setIsManageAccountPage(false)}>{t('PROFILE', 'Profile')}</h1>
-          {/* <ProfileOptionsContainer>
-            <Tab onClick={() => handleGoToPage({ page: 'reset_password' })}>
-              {t('CHANGE_PASSWORD', 'Change Password')}
-            </Tab>
-            <Tab onClick={() => setIsManageAccountPage(true)}>
-              {t('MANAGE_ACCOUNT', 'Manage Account')}
-            </Tab>
-          </ProfileOptionsContainer> */}
         </Header>
         {!isManageAccountPage ? (
           <WrapperForm>

@@ -8,7 +8,9 @@ import { BusinessController } from '../BusinessController'
 import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
+import { AddressList } from '../AddressList'
 import { BusinessesMap } from '../BusinessesMap'
+import { PickupOrderTypeToggleButton } from '../PickupOrderTypeToggleButton'
 
 import {
   PickupBusinessContainer,
@@ -19,7 +21,8 @@ import {
   WrapperBusinesses,
   MapSkeleton,
   LeftInnerContainer,
-  WrapperBusinessMap
+  WrapperBusinessMap,
+  WrapPickupButton
 } from './styles'
 
 const PIXELS_TO_SCROLL = 700
@@ -40,6 +43,7 @@ const PickupBusinessesListingUI = (props) => {
   const [configState] = useConfig()
 
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
+  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
 
   const handleClickAddress = (e) => {
     if (auth) {
@@ -47,6 +51,14 @@ const PickupBusinessesListingUI = (props) => {
     } else {
       setModals({ ...modals, formOpen: true })
     }
+  }
+
+  const handleFindBusinesses = () => {
+    if (!orderState?.options?.address?.location) {
+      setModals({ ...modals, formOpen: true })
+      return
+    }
+    setModals({ listOpen: false, formOpen: false })
   }
 
   const handleScroll = useCallback(() => {
@@ -72,6 +84,11 @@ const PickupBusinessesListingUI = (props) => {
         onSearch={handleChangeSearch}
       />
       <InnerContainer>
+        <WrapPickupButton>
+          <PickupOrderTypeToggleButton
+            isPickupPage
+          />
+        </WrapPickupButton>
         <WrapperBusinesses>
           <LeftContent>
             <LeftInnerContainer>
@@ -153,6 +170,20 @@ const PickupBusinessesListingUI = (props) => {
           onClose={() => setModals({ ...modals, formOpen: false })}
           onCancel={() => setModals({ ...modals, formOpen: false })}
           onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+        />
+      </Modal>
+      <Modal
+        title={t('ADDRESSES', 'Addresses')}
+        open={modals.listOpen}
+        width='70%'
+        onClose={() => setModals({ ...modals, listOpen: false })}
+      >
+        <AddressList
+          isModal
+          changeOrderAddressWithDefault
+          userId={isNaN(userCustomer) ? null : userCustomer}
+          onCancel={() => setModals({ ...modals, listOpen: false })}
+          onAccept={() => handleFindBusinesses()}
         />
       </Modal>
     </PickupBusinessContainer>

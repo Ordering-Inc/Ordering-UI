@@ -7,7 +7,6 @@ import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
 import VscAccount from '@meronex/icons/vsc/VscAccount'
-import FaDollarSign from '@meronex/icons/fa/FaDollarSign'
 import HiOutlineShoppingBag from '@meronex/icons/hi/HiOutlineShoppingBag'
 import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
 
@@ -31,8 +30,6 @@ import {
 
 export const SidebarMenu = (props) => {
   const [{ auth, user }] = useSession()
-
-  // const { auth } = props
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
@@ -89,7 +86,7 @@ export const SidebarMenu = (props) => {
 
             <MenuLink
               isHome={isHome}
-              onClick={() => handleGoToPage({ page: options?.address?.location ? 'search' : 'home' })}
+              onClick={() => handleGoToPage({ page: options?.address?.location ? 'delivery' : 'home' })}
             >
               <WrappContent>
                 <MenuLinkIcon
@@ -112,11 +109,11 @@ export const SidebarMenu = (props) => {
                     active={
                       window.location.pathname === '/' ||
                       window.location.pathname === '/home' ||
-                      window.location.pathname === '/search'
+                      window.location.pathname === '/delivery'
                     }
                   >
                     {options?.address?.location ? (
-                      t('BUSINESSES', 'Businesses')
+                      t('DELIVERY', 'Delivery')
                     ) : (
                       t('HOME', 'Home')
                     )}
@@ -204,32 +201,6 @@ export const SidebarMenu = (props) => {
                     </MenuLinkText>
                   </WrappContent>
                 </MenuLink>
-                <MenuLink
-                  isHome={isHome}
-                  onClick={() => handleGoToPage({ page: 'payment' })}
-                >
-                  <WrappContent>
-                    <MenuLinkIcon
-                      isHome={isHome}
-                      active={
-                        window.location.pathname === '/payment'
-                      }
-                    >
-                      <FaDollarSign />
-                    </MenuLinkIcon>
-                    <MenuLinkText>
-                      <TextInfo
-                        isHome={isHome}
-                        active={
-                          window.location.pathname === '/payment'
-                        }
-                      >
-                        {t('PAYMENT', 'Payment')}
-                      </TextInfo>
-                    </MenuLinkText>
-                  </WrappContent>
-                </MenuLink>
-
                 <LogoutButton onCustomClick={() => actionSidebar(false)} />
               </>
             )}

@@ -38,6 +38,7 @@ export const HeroContainer = (props) => {
 export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     height: 100%;
     padding: 0px 20px 0px;
@@ -127,4 +128,27 @@ export const WrapAddressInput = styled.div`
       padding: 7px 30px 7px 15px !important;
     `}
   }
+`
+
+export const WrapInput = styled.label`
+  width: 80%;
+  margin: 20px 0;
+  position: relative;
+  cursor: pointer;
+  background: #fff;
+  height: 45px;
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 32px;
+    padding: 0 10px;
+    color: #ccc;
+  }
+
+  div {
+    color: #ccc;
+  }  
 `

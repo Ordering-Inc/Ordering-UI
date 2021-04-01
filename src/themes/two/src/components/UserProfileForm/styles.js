@@ -35,28 +35,7 @@ export const ProfileContainer = styled.div`
   border: 1px solid ${props => props.theme.colors.secondary};
   margin-bottom: 30px;
 `
-export const ProfileOptionsContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  @media (max-width: 992px) {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-`
-export const Tab = styled.div`
-  cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-  font-size: 18px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
 
-  @media (max-width: 576px) {
-    font-size: 16px;
-  }
-  
-`
 export const WrapperForm = styled.div`
   padding: 20px;
 

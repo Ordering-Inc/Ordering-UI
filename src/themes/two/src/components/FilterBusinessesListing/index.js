@@ -15,8 +15,8 @@ import { BusinessController } from '../BusinessController'
 import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
+import { AddressList } from '../AddressList'
 import { PickupOrderTypeToggleButton } from '../PickupOrderTypeToggleButton'
-import { ReviewSettingPopover } from '../ReviewSettingPopover'
 import { FilterViewBackButton } from '../FilterViewBackButton'
 import {
   FilterBuinessContainer,
@@ -53,8 +53,7 @@ const FilterBusinessesListingUI = (props) => {
   const [{ auth }] = useSession()
 
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
-  const [reviewQuality, setReviewQuality] = useState(4.5)
-  const [openPopover, setOpenPopover] = useState({})
+  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
   const [isGoBackClicked, setIsGoBackClicked] = useState(false)
 
   const handleGoToPage = () => {
@@ -69,26 +68,17 @@ const FilterBusinessesListingUI = (props) => {
     }
   }
 
-  const handleReviewSettingValue = (value) => {
-    setReviewQuality(value)
-  }
-
-  const handleTogglePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: !openPopover[type]
-    })
-  }
-  const handleClosePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: false
-    })
-  }
-
   const changeBusinessType = (type) => {
     handleChangeBusinessType(type)
     onFilterBusinessRedirect()
+  }
+
+  const handleFindBusinesses = () => {
+    if (!orderState?.options?.address?.location) {
+      setModals({ ...modals, formOpen: true })
+      return
+    }
+    setModals({ listOpen: false, formOpen: false })
   }
 
   const toggelTimeLimit = () => {
@@ -156,13 +146,6 @@ const FilterBusinessesListingUI = (props) => {
               />
               <WrapButtonGroup>
                 <PickupOrderTypeToggleButton />
-                <ReviewSettingPopover
-                  open={openPopover.reviewSetting}
-                  reviewQuality={reviewQuality}
-                  onClick={() => handleTogglePopover('reviewSetting')}
-                  onClose={() => handleClosePopover('reviewSetting')}
-                  handleReviewSettingValue={handleReviewSettingValue}
-                />
                 <Button
                   color={timeLimitValue ? 'dark' : 'secondary'}
                   onClick={() => toggelTimeLimit()}
@@ -229,6 +212,20 @@ const FilterBusinessesListingUI = (props) => {
           onClose={() => setModals({ ...modals, formOpen: false })}
           onCancel={() => setModals({ ...modals, formOpen: false })}
           onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+        />
+      </Modal>
+      <Modal
+        title={t('ADDRESSES', 'Addresses')}
+        open={modals.listOpen}
+        width='70%'
+        onClose={() => setModals({ ...modals, listOpen: false })}
+      >
+        <AddressList
+          isModal
+          changeOrderAddressWithDefault
+          userId={isNaN(userCustomer) ? null : userCustomer}
+          onCancel={() => setModals({ ...modals, listOpen: false })}
+          onAccept={() => handleFindBusinesses()}
         />
       </Modal>
     </FilterBuinessContainer>
