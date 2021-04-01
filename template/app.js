@@ -62,7 +62,7 @@ export const App = () => {
   const handleSuccessSignup = (user) => {
     login({
       user,
-      token: user.session.access_token
+      token: user?.session?.access_token
     })
   }
 
@@ -193,7 +193,7 @@ export const App = () => {
                   <Route exact path='/password/reset' component={ResetPassword} />
                   <Route exact path='/profile'>
                     {auth
-                      ? (<Profile userId={user.id} accessToken={user.session.access_token} useValidationFields />)
+                      ? (<Profile userId={user.id} accessToken={user?.session?.access_token} useValidationFields />)
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/profile/orders'>

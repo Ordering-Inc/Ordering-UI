@@ -220,11 +220,9 @@ const MessagesUI = (props) => {
         {props.beforeElements?.map((BeforeElement, i) => (
           <React.Fragment key={i}>
             {BeforeElement}
-          </React.Fragment>))
-        }
+          </React.Fragment>))}
         {props.beforeComponents?.map((BeforeComponent, i) => (
-          <BeforeComponent key={i} {...props} />))
-        }
+          <BeforeComponent key={i} {...props} />))}
         {messages?.messages.map((message) => (
           <React.Fragment key={message.id}>
             {message.type === 1 && (
@@ -309,13 +307,11 @@ const MessagesUI = (props) => {
           </React.Fragment>
         ))}
         {props.afterComponents?.map((AfterComponent, i) => (
-          <AfterComponent key={i} {...props} />))
-        }
+          <AfterComponent key={i} {...props} />))}
         {props.afterElements?.map((AfterElement, i) => (
           <React.Fragment key={i}>
             {AfterElement}
-          </React.Fragment>))
-        }
+          </React.Fragment>))}
       </>
     )
   }
@@ -382,7 +378,7 @@ const MessagesUI = (props) => {
           )
         }
         {
-          !messages?.loading && (
+          !messages?.loading && order && (
             <>
               <MessageConsole>
                 <BubbleConsole>

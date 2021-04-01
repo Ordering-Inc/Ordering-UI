@@ -7,7 +7,6 @@ import { BusinessController } from '../BusinessController'
 import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
-import { ReviewSettingPopover } from '../ReviewSettingPopover'
 import { PickupOrderTypeToggleButton } from '../PickupOrderTypeToggleButton'
 import {
   AllBuinessContainer,
@@ -40,8 +39,6 @@ const AllBusinessesListingUI = (props) => {
   const [{ auth }] = useSession()
 
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
-  const [reviewQuality, setReviewQuality] = useState(4.5)
-  const [openPopover, setOpenPopover] = useState({})
 
   const handleClickAddress = (e) => {
     if (auth) {
@@ -49,23 +46,6 @@ const AllBusinessesListingUI = (props) => {
     } else {
       setModals({ ...modals, formOpen: true })
     }
-  }
-
-  const handleReviewSettingValue = (value) => {
-    setReviewQuality(value)
-  }
-
-  const handleTogglePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: !openPopover[type]
-    })
-  }
-  const handleClosePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: false
-    })
   }
 
   const handleScroll = useCallback(() => {
@@ -109,13 +89,6 @@ const AllBusinessesListingUI = (props) => {
                     <PickupOrderTypeToggleButton
                       isMainBusinessListingPage
                       handleCustomClick={() => setIsPickupClicked(true)}
-                    />
-                    <ReviewSettingPopover
-                      open={openPopover.reviewSetting}
-                      reviewQuality={reviewQuality}
-                      onClick={() => handleTogglePopover('reviewSetting')}
-                      onClose={() => handleClosePopover('reviewSetting')}
-                      handleReviewSettingValue={handleReviewSettingValue}
                     />
                     <Button
                       color='secondary'

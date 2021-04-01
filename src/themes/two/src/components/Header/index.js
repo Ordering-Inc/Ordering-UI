@@ -43,7 +43,7 @@ export const Header = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
 
-  const isDeliveryAndPickupPage = location.pathname === '/search' || location.pathname === '/pickup'
+  const isDeliveryAndPickupPage = location.pathname === '/delivery' || location.pathname === '/pickup'
   const isAuthPage = location.pathname === '/signin' || location.pathname === '/login' || location.pathname === '/signup'
 
   const windowSize = useWindowSize()
@@ -93,8 +93,8 @@ export const Header = (props) => {
             {!configState?.loading && configTypes.length > 0 && windowSize.width > 768 && isDeliveryAndPickupPage && (
               <WrapDeliveryAndPickupLink>
                 <MenuLinkTab
-                  active={window.location.pathname === '/search'}
-                  onClick={() => handleGoToPage({ page: 'search' })}
+                  active={window.location.pathname === '/delivery'}
+                  onClick={() => handleGoToPage({ page: 'delivery' })}
                 >
                   {t('DELIVERY', 'Delivery')}
                 </MenuLinkTab>

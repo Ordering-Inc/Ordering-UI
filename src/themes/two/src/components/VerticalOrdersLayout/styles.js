@@ -46,20 +46,6 @@ export const OrderPastContent = styled.div`
   `}
 `
 
-export const PastLogo = styled.div`
-  width: 55px;
-  height: 80%;
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 17px;
-    object-fit: contain;
-  }
-  @media (min-width: 480px){
-    width: 75px;
-  }
-`
-
 export const WrapperBusinessTitle = styled.div`
   width: 95%
 `

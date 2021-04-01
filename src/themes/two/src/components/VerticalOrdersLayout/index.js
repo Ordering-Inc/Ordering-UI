@@ -7,7 +7,6 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import {
   SingleCard,
   OrderPastContent,
-  // PastLogo,
   WrapperBusinessTitle,
   Reorder,
   WrappButton,
@@ -22,7 +21,6 @@ export const VerticalOrdersLayout = (props) => {
     pagination,
     onOrderClick,
     loadMoreOrders,
-    // getOrderStatus,
     handleReorder,
     reorderLoading,
     orderID

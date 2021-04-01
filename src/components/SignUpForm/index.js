@@ -59,7 +59,7 @@ const SignUpFormUI = (props) => {
   const handleSuccessFacebook = (user) => {
     login({
       user,
-      token: user.session.access_token
+      token: user?.session?.access_token
     })
   }
 

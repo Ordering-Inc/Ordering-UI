@@ -95,7 +95,9 @@ const ProductOptionsUI = (props) => {
     }
     const myElement = document.getElementsByClassName('error')[0]
     const productContainer = document.getElementsByClassName('product-container')[0]
-
+    if (!myElement || !productContainer) {
+      return
+    }
     let topPos = myElement.offsetTop - productContainer.offsetTop
     if (windowSize.width <= 768) {
       const productImage = document.getElementById('product_image')
@@ -112,7 +114,7 @@ const ProductOptionsUI = (props) => {
   const handleSuccessSignup = (user) => {
     login({
       user,
-      token: user.session.access_token
+      token: user?.session?.access_token
     })
     closeModal()
   }

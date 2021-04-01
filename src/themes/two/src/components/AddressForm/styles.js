@@ -61,7 +61,7 @@ export const FormControl = styled.form`
     @media (min-width: 621px) {
       &.internal_number,
       &.zipcode  {
-        width: ${({ isAddressEditView }) => isAddressEditView ? '100%' : '48%'};
+        width: 48%;
       }
     }
   
