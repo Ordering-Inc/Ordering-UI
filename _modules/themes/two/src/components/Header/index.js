@@ -189,9 +189,11 @@ var Header = function Header(props) {
         });
         break;
     }
-
-    setIsSelectedOrderType(false);
   }, [orderType, isSelectedOrderType]);
+  (0, _react.useEffect)(function () {
+    if (isBusinessListingPage) return;
+    setIsSelectedOrderType(false);
+  }, [isBusinessListingPage]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     isHome: isHome,
     isAuthPage: isAuthPage

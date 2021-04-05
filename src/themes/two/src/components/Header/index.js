@@ -105,8 +105,12 @@ export const Header = (props) => {
         handleGoToPage({ page: 'drivethru' })
         break
     }
-    setIsSelectedOrderType(false)
   }, [orderType, isSelectedOrderType])
+
+  useEffect(() => {
+    if (isBusinessListingPage) return
+    setIsSelectedOrderType(false)
+  }, [isBusinessListingPage])
 
   return (
     <>
