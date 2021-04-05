@@ -41,6 +41,10 @@ export const OrderTypeWrapper = styled.div`
   display: flex;
   padding: 0 10px;
   border-right: 1px solid ${props => props.theme.colors.secondary};
+
+  #list {
+    width: 100%;
+  }
   ${({ toggle }) => toggle && css`
     border-right: none;
     background: ${props => props.theme.colors.secondary};
@@ -56,7 +60,7 @@ export const OrderTypeWrapper = styled.div`
     padding: 10px 0;
   `}
   @media (max-width: 576px) {
-    ${({ isDeliveryAndPickup }) => isDeliveryAndPickup && css`
+    ${({ dropDownStyle }) => dropDownStyle && css`
       display: none;
     `}
   }

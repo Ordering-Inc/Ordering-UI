@@ -84,11 +84,11 @@ const PickupBusinessesListingUI = (props) => {
         onSearch={handleChangeSearch}
       />
       <InnerContainer>
-        <WrapPickupButton>
+        {/* <WrapPickupButton>
           <PickupOrderTypeToggleButton
             isPickupPage
           />
-        </WrapPickupButton>
+        </WrapPickupButton> */}
         <WrapperBusinesses>
           <LeftContent>
             <LeftInnerContainer>

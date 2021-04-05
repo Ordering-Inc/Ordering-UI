@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { Select } from '../../styles/Select'
 import MdRadioButtonChecked from '@meronex/icons/md/MdRadioButtonChecked'
 import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
 
@@ -11,45 +11,60 @@ import {
 
 const OrderTypeSelectorHeaderUI = (props) => {
   const {
+    dropDownStyle,
     toggle,
     radioStyle,
     handleChangeOrderType,
     typeSelected,
     defaultValue,
     configTypes,
-    orderTypes
+    orderTypes,
+    handleChangePage
   } = props
-  const location = useLocation()
-  const isDeliveryAndPickup = location.pathname === '/search' || location.pathname === '/pickup'
   const options = orderTypes.filter(type => configTypes?.includes(type.value))
+  const defaultType = configTypes?.includes(typeSelected) ? null : configTypes[0]
+
+  const _handleChangeOrderType = (orderType) => {
+    handleChangeOrderType(orderType)
+    handleChangePage && handleChangePage()
+  }
 
   return (
     typeSelected !== undefined && (
       <OrderTypeWrapper
         radioStyle={radioStyle}
         toggle={toggle}
-        isDeliveryAndPickup={isDeliveryAndPickup}
       >
-        {options.map(type => (
-          <Option
-            key={type.value}
-            selected={type.value === defaultValue || type.value === typeSelected}
-            onClick={() => handleChangeOrderType(type.value)}
-            toggle={toggle}
-            radioStyle={radioStyle}
-          >
-            {radioStyle && (
-              <>
-                {type.value === typeSelected ? (
-                  <MdRadioButtonChecked />
-                ) : (
-                  <MdRadioButtonUnchecked />
+        {dropDownStyle ? (
+          <Select
+            options={orderTypes.filter(type => configTypes?.includes(type.value))}
+            defaultValue={defaultType || defaultValue || typeSelected}
+            onChange={(orderType) => _handleChangeOrderType(orderType)}
+          />
+        ) : (
+          <>
+            {options.map(type => (
+              <Option
+                key={type.value}
+                selected={type.value === defaultValue || type.value === typeSelected}
+                onClick={() => handleChangeOrderType(type.value)}
+                toggle={toggle}
+                radioStyle={radioStyle}
+              >
+                {radioStyle && (
+                  <>
+                    {type.value === typeSelected ? (
+                      <MdRadioButtonChecked />
+                    ) : (
+                      <MdRadioButtonUnchecked />
+                    )}
+                  </>
                 )}
-              </>
-            )}
-            {type?.content}
-          </Option>
-        ))}
+                {type?.content}
+              </Option>
+            ))}
+          </>
+        )}
       </OrderTypeWrapper>
     )
   )
@@ -69,6 +84,18 @@ export const OrderTypeSelectorHeader = (props) => {
       {
         value: 2,
         content: t('PICKUP', 'Pickup')
+      },
+      {
+        value: 3,
+        content: t('EAT_IN', 'Eat in')
+      },
+      {
+        value: 4,
+        content: t('CURBSIDE', 'Curbside')
+      },
+      {
+        value: 5,
+        content: t('DRIVE_THRU', 'Drive thru')
       }
     ]
   }
