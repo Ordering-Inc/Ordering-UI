@@ -45,7 +45,7 @@ export const Header = (props) => {
   const [isSelectedOrderType, setIsSelectedOrderType] = useState(false)
   const orderType = orderState?.options?.type || 1
 
-  const isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === 'eatin' || location.pathname === 'curbside' || location.pathname === 'drivethru'
+  const isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === '/eatin' || location.pathname === '/curbside' || location.pathname === '/drivethru'
   const isAuthPage = location.pathname === '/signin' || location.pathname === '/login' || location.pathname === '/signup'
 
   const windowSize = useWindowSize()

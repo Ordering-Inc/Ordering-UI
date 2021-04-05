@@ -34,6 +34,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
       <OrderTypeWrapper
         radioStyle={radioStyle}
         toggle={toggle}
+        dropDownStyle={dropDownStyle}
       >
         {dropDownStyle ? (
           <Select

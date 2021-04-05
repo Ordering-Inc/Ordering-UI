@@ -59,7 +59,8 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
 
   return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, {
     radioStyle: radioStyle,
-    toggle: toggle
+    toggle: toggle,
+    dropDownStyle: dropDownStyle
   }, dropDownStyle ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: orderTypes.filter(function (type) {
       return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);

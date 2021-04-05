@@ -116,7 +116,7 @@ var Header = function Header(props) {
       setIsSelectedOrderType = _useState8[1];
 
   var orderType = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) || 1;
-  var isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === 'eatin' || location.pathname === 'curbside' || location.pathname === 'drivethru';
+  var isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === '/eatin' || location.pathname === '/curbside' || location.pathname === '/drivethru';
   var isAuthPage = location.pathname === '/signin' || location.pathname === '/login' || location.pathname === '/signup';
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
