@@ -34,7 +34,7 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
   });
 }, function (_ref4) {
   var toggle = _ref4.toggle;
-  return toggle && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    padding: 0px;\n    width: 50%;\n    border-radius: 25px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  "])));
+  return toggle && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    padding: 0px 10px;\n    width: 50%;\n    border-radius: 25px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    white-space: nowrap;\n  "])));
 }, function (_ref5) {
   var radioStyle = _ref5.radioStyle;
   return radioStyle && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    column-gap: 10px;\n    padding: 0px;\n    svg {\n      font-size: 24px;\n    }\n  "])));
@@ -42,11 +42,9 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
 
 exports.Option = Option;
 
-var OrderTypeWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0 10px;\n  border-right: 1px solid ", ";\n\n  #list {\n    width: 100%;\n  }\n  ", "\n  ", "\n  @media (max-width: 576px) {\n    ", "\n  }\n"])), function (props) {
-  return props.theme.colors.secondary;
-}, function (_ref6) {
+var OrderTypeWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0 10px;\n\n  ", "\n  ", "\n  @media (max-width: 576px) {\n    ", "\n  }\n"])), function (_ref6) {
   var toggle = _ref6.toggle;
-  return toggle && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    border-right: none;\n    background: ", ";\n    height: 42px;\n    width: 200px;\n    border-radius: 25px;\n    padding: 0px;\n  "])), function (props) {
+  return toggle && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    border-right: none;\n    background: ", ";\n    height: 42px;\n    border-radius: 25px;\n    padding: 0px;\n  "])), function (props) {
     return props.theme.colors.secondary;
   });
 }, function (_ref7) {

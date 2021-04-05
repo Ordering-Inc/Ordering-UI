@@ -95,6 +95,6 @@ var DeliveryAndMin = _styledComponents.default.div(_templateObject13 || (_templa
 
 exports.DeliveryAndMin = DeliveryAndMin;
 
-var GroupAndSelector = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  column-gap: 10px;\n  align-items: center;\n\n  button {\n    font-weight: 500;\n    display: flex;\n    align-items: center;\n    column-gap: 10px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n  }\n\n  @media (max-width: 767px){\n    justify-content: space-between;\n  }\n"])));
+var GroupAndSelector = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  column-gap: 10px;\n  align-items: center;\n  overflow: auto;\n\n  button {\n    font-weight: 500;\n    display: flex;\n    align-items: center;\n    column-gap: 10px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n  }\n\n  @media (max-width: 767px){\n    justify-content: space-between;\n  }\n"])));
 
 exports.GroupAndSelector = GroupAndSelector;

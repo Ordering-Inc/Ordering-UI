@@ -5,6 +5,9 @@ import AiOutlineLogin from '@meronex/icons/ai/AiOutlineLogin'
 import AiOutlineUserAdd from '@meronex/icons/ai/AiOutlineUserAdd'
 import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
+import AiFillShop from '@meronex/icons/ai/AiFillShop'
+import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
+import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import BiStore from '@meronex/icons/bi/BiStore'
 import VscAccount from '@meronex/icons/vsc/VscAccount'
 import HiOutlineShoppingBag from '@meronex/icons/hi/HiOutlineShoppingBag'
@@ -29,6 +32,7 @@ import {
 } from './styles'
 
 export const SidebarMenu = (props) => {
+  const { configTypes } = props
   const [{ auth, user }] = useSession()
   const [events] = useEvent()
   const [, t] = useLanguage()
@@ -122,31 +126,117 @@ export const SidebarMenu = (props) => {
               </WrappContent>
             </MenuLink>
 
-            <MenuLink
-              isHome={isHome}
-              onClick={() => handleGoToPage({ page: options?.address?.location ? 'pickup' : 'home' })}
-            >
-              <WrappContent>
-                <MenuLinkIcon
-                  isHome={isHome}
-                  active={
-                    window.location.pathname === '/pickup'
-                  }
-                >
-                  <HiOutlineShoppingBag />
-                </MenuLinkIcon>
-                <MenuLinkText>
-                  <TextInfo
+            {configTypes.includes(2) && (
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: options?.address?.location ? 'pickup' : 'home' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
                     isHome={isHome}
                     active={
                       window.location.pathname === '/pickup'
                     }
                   >
-                    {t('PICKUP', 'Pickup')}
-                  </TextInfo>
-                </MenuLinkText>
-              </WrappContent>
-            </MenuLink>
+                    <HiOutlineShoppingBag />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/pickup'
+                      }
+                    >
+                      {t('PICKUP', 'Pickup')}
+                    </TextInfo>
+                  </MenuLinkText>
+                </WrappContent>
+              </MenuLink>
+            )}
+
+            {configTypes.includes(3) && (
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: options?.address?.location ? 'eatin' : 'home' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    isHome={isHome}
+                    active={
+                      window.location.pathname === '/eatin'
+                    }
+                  >
+                    <AiFillShop />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/eatin'
+                      }
+                    >
+                      {t('EAT_IN', 'Eat in')}
+                    </TextInfo>
+                  </MenuLinkText>
+                </WrappContent>
+              </MenuLink>
+            )}
+
+            {configTypes.includes(4) && (
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: options?.address?.location ? 'curbside' : 'home' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    isHome={isHome}
+                    active={
+                      window.location.pathname === '/curbside'
+                    }
+                  >
+                    <GiFoodTruck />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/curbside'
+                      }
+                    >
+                      {t('CURBSIDE', 'Curbside')}
+                    </TextInfo>
+                  </MenuLinkText>
+                </WrappContent>
+              </MenuLink>
+            )}
+
+            {configTypes.includes(5) && (
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: options?.address?.location ? 'drivethru' : 'home' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    isHome={isHome}
+                    active={
+                      window.location.pathname === '/drivethru'
+                    }
+                  >
+                    <FaCarSide />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/drivethru'
+                      }
+                    >
+                      {t('DRIVE_THRU', 'Drive thru')}
+                    </TextInfo>
+                  </MenuLinkText>
+                </WrappContent>
+              </MenuLink>
+            )}
 
             {auth && (
               <>

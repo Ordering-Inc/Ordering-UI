@@ -110,7 +110,10 @@ export const Header = (props) => {
       <HeaderContainer isHome={isHome} isAuthPage={isAuthPage}>
         <InnerHeader>
           <LeftHeader>
-            <SidebarMenu auth={auth} />
+            <SidebarMenu
+              auth={auth}
+              configTypes={configTypes}
+            />
             {!configState?.loading && configTypes.length > 0 && isBusinessListingPage && (
               <OrderTypeSelectorHeader
                 dropDownStyle

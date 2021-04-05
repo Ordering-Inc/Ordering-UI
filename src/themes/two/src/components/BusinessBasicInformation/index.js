@@ -155,10 +155,6 @@ export const BusinessBasicInformation = (props) => {
         </DeliveryAndMin>
         {!loading && (
           <GroupAndSelector>
-            {/* <Button color='secondary' onClick={() => OnGroupOrderClick()}>
-              <AiOutlineUserAdd />
-              {t('GROUP_ORDER', 'Group Order')}
-            </Button> */}
             <OrderTypeSelectorHeader
               configTypes={configTypes}
               toggle
