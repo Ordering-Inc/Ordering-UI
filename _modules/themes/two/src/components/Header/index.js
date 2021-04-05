@@ -203,7 +203,7 @@ var Header = function Header(props) {
     handleChangePage: function handleChangePage() {
       return setIsSelectedOrderType(true);
     }
-  }), onlineStatus && isDeliveryAndPickupPage && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
+  }), onlineStatus && isBusinessListingPage && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
       return handleTogglePopover('moment');
@@ -310,7 +310,7 @@ var Header = function Header(props) {
     onSaveAddress: function onSaveAddress() {
       return setModalIsOpen(false);
     }
-  })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null))), onlineStatus && isDeliveryAndPickupPage && windowSize.width <= 992 && /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null))), onlineStatus && isBusinessListingPage && windowSize.width <= 992 && /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
     momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function (variant) {

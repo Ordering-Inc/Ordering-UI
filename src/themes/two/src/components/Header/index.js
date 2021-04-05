@@ -121,7 +121,7 @@ export const Header = (props) => {
                 handleChangePage={() => setIsSelectedOrderType(true)}
               />
             )}
-            {onlineStatus && isDeliveryAndPickupPage && (
+            {onlineStatus && isBusinessListingPage && (
               windowSize.width > 992 && (
                 <WrapMomentAndAddress>
                   <MomentPopover
@@ -220,7 +220,7 @@ export const Header = (props) => {
           </Modal>
         )}
       </HeaderContainer>
-      {onlineStatus && isDeliveryAndPickupPage && (
+      {onlineStatus && isBusinessListingPage && (
         windowSize.width <= 992 && (
           <WrapMomentAndAddress>
             <HeaderOption
