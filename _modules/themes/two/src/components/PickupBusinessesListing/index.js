@@ -72,7 +72,8 @@ var PIXELS_TO_SCROLL = 700;
 var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
   var _businessesList$busin, _orderState$options4, _orderState$options4$, _orderState$options5;
 
-  var businessesList = props.businessesList,
+  var initialOrderType = props.initialOrderType,
+      businessesList = props.businessesList,
       paginationProps = props.paginationProps,
       searchValue = props.searchValue,
       getBusinesses = props.getBusinesses,
@@ -155,7 +156,9 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
     search: searchValue,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch
-  }), /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinesses, null, /*#__PURE__*/_react.default.createElement(_styles.LeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.LeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapPickupButton, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
+    initialOrderType: initialOrderType
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinesses, null, /*#__PURE__*/_react.default.createElement(_styles.LeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.LeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     noAutoScroll: true,
     handleChangeBusinessType: handleChangeBusinessType
   }))), /*#__PURE__*/_react.default.createElement("h1", null, t('RESTAURANTS_NEARBY', 'Restaurants Nearby')), /*#__PURE__*/_react.default.createElement(_styles.PickupBusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

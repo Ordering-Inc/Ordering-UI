@@ -42,7 +42,6 @@ export const Header = (props) => {
   const [configState] = useConfig()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
-  const [isSelectedOrderType, setIsSelectedOrderType] = useState(false)
   const orderType = orderState?.options?.type || 1
 
   const isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === '/eatin' || location.pathname === '/curbside' || location.pathname === '/drivethru'
@@ -86,8 +85,7 @@ export const Header = (props) => {
     return () => events.off('cart_product_added', handleAddProduct)
   }, [windowSize.width])
 
-  useEffect(() => {
-    if (!isSelectedOrderType) return
+  const handleChangePage = (orderType) => {
     switch (orderType) {
       case 1: 
         handleGoToPage({ page: 'delivery' })
@@ -105,12 +103,7 @@ export const Header = (props) => {
         handleGoToPage({ page: 'drivethru' })
         break
     }
-  }, [orderType, isSelectedOrderType])
-
-  useEffect(() => {
-    if (isBusinessListingPage) return
-    setIsSelectedOrderType(false)
-  }, [isBusinessListingPage])
+  }
 
   return (
     <>
@@ -122,7 +115,7 @@ export const Header = (props) => {
               <OrderTypeSelectorHeader
                 dropDownStyle
                 configTypes={configTypes}
-                handleChangePage={() => setIsSelectedOrderType(true)}
+                handleChangePage={handleChangePage}
               />
             )}
             {onlineStatus && isBusinessListingPage && (

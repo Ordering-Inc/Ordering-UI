@@ -62,7 +62,7 @@ export const BusinessesListing = (props) => {
           />
           <WrappperButtonGroup>
             <PickupOrderTypeToggleButton
-              isMainBusinessListingPage
+              initialOrderType={props.initialOrderType}
               handleCustomClick={() => setIsPickupClicked(true)}
             />
             <Button

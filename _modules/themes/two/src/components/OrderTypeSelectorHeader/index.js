@@ -51,12 +51,6 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
     return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
   });
   var defaultType = configTypes !== null && configTypes !== void 0 && configTypes.includes(typeSelected) ? null : configTypes[0];
-
-  var _handleChangeOrderType = function _handleChangeOrderType(orderType) {
-    handleChangeOrderType(orderType);
-    handleChangePage && handleChangePage();
-  };
-
   return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, {
     radioStyle: radioStyle,
     toggle: toggle,
@@ -67,7 +61,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
     }),
     defaultValue: defaultType || defaultValue || typeSelected,
     onChange: function onChange(orderType) {
-      return _handleChangeOrderType(orderType);
+      return handleChangePage(orderType);
     }
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, options.map(function (type) {
     return /*#__PURE__*/_react.default.createElement(_styles.Option, {

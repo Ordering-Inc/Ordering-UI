@@ -110,11 +110,6 @@ var Header = function Header(props) {
       modalSelected = _useState6[0],
       setModalSelected = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isSelectedOrderType = _useState8[0],
-      setIsSelectedOrderType = _useState8[1];
-
   var orderType = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) || 1;
   var isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === '/eatin' || location.pathname === '/curbside' || location.pathname === '/drivethru';
   var isAuthPage = location.pathname === '/signin' || location.pathname === '/login' || location.pathname === '/signup';
@@ -155,9 +150,8 @@ var Header = function Header(props) {
       return events.off('cart_product_added', handleAddProduct);
     };
   }, [windowSize.width]);
-  (0, _react.useEffect)(function () {
-    if (!isSelectedOrderType) return;
 
+  var handleChangePage = function handleChangePage(orderType) {
     switch (orderType) {
       case 1:
         handleGoToPage({
@@ -189,11 +183,8 @@ var Header = function Header(props) {
         });
         break;
     }
-  }, [orderType, isSelectedOrderType]);
-  (0, _react.useEffect)(function () {
-    if (isBusinessListingPage) return;
-    setIsSelectedOrderType(false);
-  }, [isBusinessListingPage]);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     isHome: isHome,
     isAuthPage: isAuthPage
@@ -202,9 +193,7 @@ var Header = function Header(props) {
   }), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && isBusinessListingPage && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     dropDownStyle: true,
     configTypes: configTypes,
-    handleChangePage: function handleChangePage() {
-      return setIsSelectedOrderType(true);
-    }
+    handleChangePage: handleChangePage
   }), onlineStatus && isBusinessListingPage && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
