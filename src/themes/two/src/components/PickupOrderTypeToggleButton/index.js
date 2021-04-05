@@ -5,6 +5,7 @@ import { Button } from '../../styles/Buttons'
 
 const PickupOrderTypeToggleButtonUI = (props) => {
   const {
+    initialOrderType,
     handleChangeOrderType,
     typeSelected,
     handleCustomClick

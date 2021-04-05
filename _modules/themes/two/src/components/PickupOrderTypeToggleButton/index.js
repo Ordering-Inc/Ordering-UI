@@ -36,7 +36,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PickupOrderTypeToggleButtonUI = function PickupOrderTypeToggleButtonUI(props) {
-  var handleChangeOrderType = props.handleChangeOrderType,
+  var initialOrderType = props.initialOrderType,
+      handleChangeOrderType = props.handleChangeOrderType,
       typeSelected = props.typeSelected,
       handleCustomClick = props.handleCustomClick;
 

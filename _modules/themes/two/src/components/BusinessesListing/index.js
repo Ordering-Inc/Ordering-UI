@@ -107,7 +107,7 @@ var BusinessesListing = function BusinessesListing(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     handleChangeBusinessType: handleChangeCategory
   }), /*#__PURE__*/_react.default.createElement(_styles.WrappperButtonGroup, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
-    initialOrderType: props.initialOrderType,
+    initialOrderType: 1,
     handleCustomClick: function handleCustomClick() {
       return setIsPickupClicked(true);
     }
