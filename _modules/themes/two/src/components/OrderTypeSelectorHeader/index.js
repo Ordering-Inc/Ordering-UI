@@ -7,7 +7,7 @@ exports.OrderTypeSelectorHeader = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
+var _Select = require("../../styles/Select");
 
 var _MdRadioButtonChecked = _interopRequireDefault(require("@meronex/icons/md/MdRadioButtonChecked"));
 
@@ -38,23 +38,32 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
-  var toggle = props.toggle,
+  var dropDownStyle = props.dropDownStyle,
+      toggle = props.toggle,
       radioStyle = props.radioStyle,
       handleChangeOrderType = props.handleChangeOrderType,
       typeSelected = props.typeSelected,
       defaultValue = props.defaultValue,
       configTypes = props.configTypes,
-      orderTypes = props.orderTypes;
-  var location = (0, _reactRouterDom.useLocation)();
-  var isDeliveryAndPickup = location.pathname === '/search' || location.pathname === '/pickup';
+      orderTypes = props.orderTypes,
+      handleChangePage = props.handleChangePage;
   var options = orderTypes.filter(function (type) {
     return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
   });
+  var defaultType = configTypes !== null && configTypes !== void 0 && configTypes.includes(typeSelected) ? null : configTypes[0];
   return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, {
     radioStyle: radioStyle,
     toggle: toggle,
-    isDeliveryAndPickup: isDeliveryAndPickup
-  }, options.map(function (type) {
+    dropDownStyle: dropDownStyle
+  }, dropDownStyle ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    options: orderTypes.filter(function (type) {
+      return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
+    }),
+    defaultValue: defaultType || defaultValue || typeSelected,
+    onChange: function onChange(orderType) {
+      return handleChangePage(orderType);
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, options.map(function (type) {
     return /*#__PURE__*/_react.default.createElement(_styles.Option, {
       key: type.value,
       selected: type.value === defaultValue || type.value === typeSelected,
@@ -64,7 +73,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
       toggle: toggle,
       radioStyle: radioStyle
     }, radioStyle && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, type.value === typeSelected ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, null)), type === null || type === void 0 ? void 0 : type.content);
-  }));
+  })));
 };
 
 var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
@@ -80,6 +89,15 @@ var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
     }, {
       value: 2,
       content: t('PICKUP', 'Pickup')
+    }, {
+      value: 3,
+      content: t('EAT_IN', 'Eat in')
+    }, {
+      value: 4,
+      content: t('CURBSIDE', 'Curbside')
+    }, {
+      value: 5,
+      content: t('DRIVE_THRU', 'Drive thru')
     }]
   });
 

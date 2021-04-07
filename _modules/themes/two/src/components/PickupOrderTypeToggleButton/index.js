@@ -36,8 +36,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PickupOrderTypeToggleButtonUI = function PickupOrderTypeToggleButtonUI(props) {
-  var isMainBusinessListingPage = props.isMainBusinessListingPage,
-      isPickupPage = props.isPickupPage,
+  var initialOrderType = props.initialOrderType,
       handleChangeOrderType = props.handleChangeOrderType,
       typeSelected = props.typeSelected,
       handleCustomClick = props.handleCustomClick;
@@ -57,19 +56,9 @@ var PickupOrderTypeToggleButtonUI = function PickupOrderTypeToggleButtonUI(props
   };
 
   (0, _react.useEffect)(function () {
-    if (!isMainBusinessListingPage) return;
-
-    if (typeSelected !== 1) {
-      handleChangeOrderType(1);
-    }
-  }, [isMainBusinessListingPage]);
-  (0, _react.useEffect)(function () {
-    if (!isPickupPage) return;
-
-    if (typeSelected !== 2) {
-      handleChangeOrderType(2);
-    }
-  }, [isPickupPage]);
+    if (!initialOrderType) return;
+    handleChangeOrderType(initialOrderType);
+  }, [initialOrderType]);
   return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: typeSelected === 2 ? 'dark' : 'secondary',
     onClick: function onClick() {

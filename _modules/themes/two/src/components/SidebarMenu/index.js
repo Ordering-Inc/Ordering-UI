@@ -21,6 +21,12 @@ var _FaRegListAlt = _interopRequireDefault(require("@meronex/icons/fa/FaRegListA
 
 var _AiOutlineHome = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineHome"));
 
+var _AiFillShop = _interopRequireDefault(require("@meronex/icons/ai/AiFillShop"));
+
+var _GiFoodTruck = _interopRequireDefault(require("@meronex/icons/gi/GiFoodTruck"));
+
+var _FaCarSide = _interopRequireDefault(require("@meronex/icons/fa/FaCarSide"));
+
 var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 
 var _VscAccount = _interopRequireDefault(require("@meronex/icons/vsc/VscAccount"));
@@ -57,6 +63,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
   var _options$address2, _options$address3;
+
+  var configTypes = props.configTypes;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -138,7 +146,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/delivery'
-  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('DELIVERY', 'Delivery') : t('HOME', 'Home'))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('DELIVERY', 'Delivery') : t('HOME', 'Home'))))), configTypes.includes(2) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       var _options$address4;
@@ -153,7 +161,52 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_HiOutlineShoppingBag.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
     active: window.location.pathname === '/pickup'
-  }, t('PICKUP', 'Pickup'))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('PICKUP', 'Pickup'))))), configTypes.includes(3) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    onClick: function onClick() {
+      var _options$address5;
+
+      return handleGoToPage({
+        page: options !== null && options !== void 0 && (_options$address5 = options.address) !== null && _options$address5 !== void 0 && _options$address5.location ? 'eatin' : 'home'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: window.location.pathname === '/eatin'
+  }, /*#__PURE__*/_react.default.createElement(_AiFillShop.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: window.location.pathname === '/eatin'
+  }, t('EAT_IN', 'Eat in'))))), configTypes.includes(4) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    onClick: function onClick() {
+      var _options$address6;
+
+      return handleGoToPage({
+        page: options !== null && options !== void 0 && (_options$address6 = options.address) !== null && _options$address6 !== void 0 && _options$address6.location ? 'curbside' : 'home'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: window.location.pathname === '/curbside'
+  }, /*#__PURE__*/_react.default.createElement(_GiFoodTruck.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: window.location.pathname === '/curbside'
+  }, t('CURBSIDE', 'Curbside'))))), configTypes.includes(5) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    onClick: function onClick() {
+      var _options$address7;
+
+      return handleGoToPage({
+        page: options !== null && options !== void 0 && (_options$address7 = options.address) !== null && _options$address7 !== void 0 && _options$address7.location ? 'drivethru' : 'home'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: window.location.pathname === '/drivethru'
+  }, /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: window.location.pathname === '/drivethru'
+  }, t('DRIVE_THRU', 'Drive thru'))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({

@@ -72,7 +72,8 @@ var PIXELS_TO_SCROLL = 700;
 var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
   var _businessesList$busin, _orderState$options4, _orderState$options4$, _orderState$options5;
 
-  var businessesList = props.businessesList,
+  var initialOrderType = props.initialOrderType,
+      businessesList = props.businessesList,
       paginationProps = props.paginationProps,
       searchValue = props.searchValue,
       getBusinesses = props.getBusinesses,
@@ -156,7 +157,7 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch
   }), /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapPickupButton, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
-    isPickupPage: true
+    initialOrderType: initialOrderType
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinesses, null, /*#__PURE__*/_react.default.createElement(_styles.LeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.LeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     noAutoScroll: true,
     handleChangeBusinessType: handleChangeBusinessType
