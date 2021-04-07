@@ -3,6 +3,7 @@ import {
   PhoneAutocomplete as PhoneAutocompleteController,
   useLanguage
 } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
 import { SignUpForm } from '../SignUpForm'
@@ -36,6 +37,7 @@ const PhoneAutocompleteUI = (props) => {
     onRedirectPage
   } = props
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
@@ -77,7 +79,7 @@ const PhoneAutocompleteUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))
       }
-      <PhoneContainer>
+      <PhoneContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
           <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
           <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
