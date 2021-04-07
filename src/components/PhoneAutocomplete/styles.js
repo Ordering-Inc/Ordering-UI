@@ -4,6 +4,14 @@ export const PhoneContainer = styled.div`
   width: 100%;
   height: calc(100vh - 97px);
 
+  ${({ bgimage }) => bgimage && css`
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center;
+    background-image: url(${bgimage});
+  `}
+
   .spinner-content{
     > div{
       width: 40px;
