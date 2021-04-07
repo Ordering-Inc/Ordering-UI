@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
+var _styledComponents = require("styled-components");
+
 var _Modal = require("../Modal");
 
 var _SignUpForm = require("../SignUpForm");
@@ -62,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _customerState$result, _customerState$result2, _customerState$result3, _customerState$result4, _customerState$result5, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _customerState$result, _customerState$result2, _customerState$result3, _customerState$result4, _customerState$result5, _props$afterComponent, _props$afterElements;
 
   var phone = props.phone,
       customerState = props.customerState,
@@ -77,6 +79,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -134,7 +138,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.AutoComplete, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, {
+    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
+  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.AutoComplete, {
     className: "autocomplete"
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "phone-input",
