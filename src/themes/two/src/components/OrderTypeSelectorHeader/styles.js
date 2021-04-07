@@ -18,12 +18,13 @@ export const Option = styled.div`
   `}
 
   ${({ toggle }) => toggle && css`
-    padding: 0px;
+    padding: 0px 10px;
     width: 50%;
     border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
   `}
 
   ${({ radioStyle }) => radioStyle && css`
@@ -40,12 +41,11 @@ export const Option = styled.div`
 export const OrderTypeWrapper = styled.div`
   display: flex;
   padding: 0 10px;
-  border-right: 1px solid ${props => props.theme.colors.secondary};
+
   ${({ toggle }) => toggle && css`
     border-right: none;
     background: ${props => props.theme.colors.secondary};
     height: 42px;
-    width: 200px;
     border-radius: 25px;
     padding: 0px;
   `}
@@ -56,7 +56,7 @@ export const OrderTypeWrapper = styled.div`
     padding: 10px 0;
   `}
   @media (max-width: 576px) {
-    ${({ isDeliveryAndPickup }) => isDeliveryAndPickup && css`
+    ${({ dropDownStyle }) => dropDownStyle && css`
       display: none;
     `}
   }

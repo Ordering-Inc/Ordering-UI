@@ -207,6 +207,7 @@ export const GroupAndSelector = styled.div`
   display: flex;
   column-gap: 10px;
   align-items: center;
+  overflow: auto;
 
   button {
     font-weight: 500;
