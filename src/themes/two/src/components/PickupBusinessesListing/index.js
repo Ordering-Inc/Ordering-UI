@@ -29,6 +29,7 @@ const PIXELS_TO_SCROLL = 700
 
 const PickupBusinessesListingUI = (props) => {
   const {
+    initialOrderType,
     businessesList,
     paginationProps,
     searchValue,
@@ -86,7 +87,7 @@ const PickupBusinessesListingUI = (props) => {
       <InnerContainer>
         <WrapPickupButton>
           <PickupOrderTypeToggleButton
-            isPickupPage
+            initialOrderType={initialOrderType}
           />
         </WrapPickupButton>
         <WrapperBusinesses>

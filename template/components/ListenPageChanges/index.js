@@ -12,7 +12,11 @@ export const ListenPageChanges = ({ children }) => {
   const routes = {
     home: '/',
     search: '/search',
-    signin: '/signin',
+    delivery: '/delivery',
+    pickup: '/pickup',
+    eatin: '/eatin',
+    curbside: '/curbside',
+    drivethru: '/drivethru',
     signup: '/signup',
     profile: '/profile',
     orders: '/profile/orders',

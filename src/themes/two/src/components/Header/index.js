@@ -29,7 +29,7 @@ import {
 import { capitalize } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
-
+import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 export const Header = (props) => {
   const { isHome } = props
   const location = useLocation()
@@ -42,8 +42,9 @@ export const Header = (props) => {
   const [configState] = useConfig()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
+  const orderType = orderState?.options?.type || 1
 
-  const isDeliveryAndPickupPage = location.pathname === '/delivery' || location.pathname === '/pickup'
+  const isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === '/eatin' || location.pathname === '/curbside' || location.pathname === '/drivethru'
   const isAuthPage = location.pathname === '/signin' || location.pathname === '/login' || location.pathname === '/signup'
 
   const windowSize = useWindowSize()
@@ -84,29 +85,43 @@ export const Header = (props) => {
     return () => events.off('cart_product_added', handleAddProduct)
   }, [windowSize.width])
 
+  const handleChangePage = (orderType) => {
+    switch (orderType) {
+      case 1: 
+        handleGoToPage({ page: 'delivery' })
+        break
+      case 2: 
+        handleGoToPage({ page: 'pickup' })
+        break
+      case 3: 
+        handleGoToPage({ page: 'eatin' })
+        break
+      case 4: 
+        handleGoToPage({ page: 'curbside' })
+        break
+      case 5: 
+        handleGoToPage({ page: 'drivethru' })
+        break
+    }
+  }
+
   return (
     <>
       <HeaderContainer isHome={isHome} isAuthPage={isAuthPage}>
         <InnerHeader>
           <LeftHeader>
-            <SidebarMenu auth={auth} />
-            {!configState?.loading && configTypes.length > 0 && windowSize.width > 768 && isDeliveryAndPickupPage && (
-              <WrapDeliveryAndPickupLink>
-                <MenuLinkTab
-                  active={window.location.pathname === '/delivery'}
-                  onClick={() => handleGoToPage({ page: 'delivery' })}
-                >
-                  {t('DELIVERY', 'Delivery')}
-                </MenuLinkTab>
-                <MenuLinkTab
-                  active={window.location.pathname === '/pickup'}
-                  onClick={() => handleGoToPage({ page: 'pickup' })}
-                >
-                  {t('PICKUP', 'Pickup')}
-                </MenuLinkTab>
-              </WrapDeliveryAndPickupLink>
+            <SidebarMenu
+              auth={auth}
+              configTypes={configTypes}
+            />
+            {!configState?.loading && configTypes.length > 0 && isBusinessListingPage && (
+              <OrderTypeSelectorHeader
+                dropDownStyle
+                configTypes={configTypes}
+                handleChangePage={handleChangePage}
+              />
             )}
-            {onlineStatus && isDeliveryAndPickupPage && (
+            {onlineStatus && isBusinessListingPage && (
               windowSize.width > 992 && (
                 <WrapMomentAndAddress>
                   <MomentPopover
@@ -205,7 +220,7 @@ export const Header = (props) => {
           </Modal>
         )}
       </HeaderContainer>
-      {onlineStatus && isDeliveryAndPickupPage && (
+      {onlineStatus && isBusinessListingPage && (
         windowSize.width <= 992 && (
           <WrapMomentAndAddress>
             <HeaderOption
