@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 import {
   Checkout as CheckoutController,
   useOrder,
@@ -64,6 +65,7 @@ const CheckoutUI = (props) => {
     handleOrderRedirect
   } = props
 
+  const theme = useTheme()
   const [validationFields] = useValidationFields()
   const [{ options, carts }] = useOrder()
   const [, t] = useLanguage()
@@ -191,7 +193,7 @@ const CheckoutUI = (props) => {
             ) : (
               <AddressDetails
                 location={businessDetails?.business?.location}
-                businessLogo={businessDetails?.business?.logo}
+                businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
                 isCartPending={cart?.status === 2}
                 businessId={cart?.business_id}
                 apiKey={configs?.google_maps_api_key?.value}

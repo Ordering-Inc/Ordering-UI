@@ -4,7 +4,7 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useOrder, useLanguage, useUtils, useEvent } from 'ordering-components'
-
+import { useTheme } from 'styled-components'
 import { convertHoursToMinutes } from '../../utils'
 
 import {
@@ -38,6 +38,7 @@ export const BusinessItemAccordion = (props) => {
     handleCartOpen
   } = props
 
+  const theme = useTheme()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -132,9 +133,9 @@ export const BusinessItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <BusinessInfo>
-            {business?.logo && !isCartOnProductsList && (
+            {(business?.logo || theme.images?.dummies?.businessLogo) && !isCartOnProductsList && (
               <WrapperBusinessLogo>
-                <BusinessLogo bgimage={business?.logo} />
+                <BusinessLogo bgimage={business?.logo || theme.images?.dummies?.businessLogo} />
               </WrapperBusinessLogo>
             )}
             <ContentInfo className='info'>

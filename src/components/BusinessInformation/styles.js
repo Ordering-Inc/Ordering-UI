@@ -356,3 +356,62 @@ export const ImageContainer = styled.div`
     border-bottom-right-radius: 10px;
   }
 `
+export const OffersSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 20px;
+`
+
+export const OfferText = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+export const OfferTextP = styled.div`
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+`
+
+export const OfferTable = styled.div`
+  width: 100%;
+  margin-top: 15px;
+
+  table>tbody>tr>td, table>tbody>tr>th,
+  table>thead>tr>td, table>thead>tr>th
+  {
+    border-top: 0
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-style: hidden;
+    border: 1px solid  ${props => props.theme.colors.disabled};
+
+    thead {
+      background-color: ${props => props.theme.colors.disabled};
+    }
+    tr th {
+      font-size: 15px;
+    }
+    tr td {
+      font-size: 12px;
+    }
+    td span {
+      unicode-bidi: bidi-override;
+    }
+    tr td,
+    tr th {
+      text-align: left;
+      padding: 10px;
+      ${props => props.theme?.rtl && css`
+        text-align: right;
+      `}
+    }
+  }
+`

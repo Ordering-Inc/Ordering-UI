@@ -5,7 +5,8 @@
   "main": "./_modules/index.js",
   "exports": {
     ".": "./_modules/index.js",
-    "./theme_two": "./_modules/themes/two/index.js"
+    "./theme_two": "./_modules/themes/two/index.js",
+    "./theme_three": "./_modules/themes/three/index.js"
   },
   "scripts": {
     "clean": "shx rm -rf _bundles _modules",
@@ -66,6 +67,8 @@
     "@sentry/tracing": "^5.25.0",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.9.0",
+    "dom-to-image": "^2.6.0",
+    "jspdf": "^2.3.1",
     "libphonenumber-js": "^1.9.4",
     "lodash": "^4.17.19",
     "moment": "^2.29.0",
@@ -77,6 +80,7 @@
     "react-loading-skeleton": "^2.1.1",
     "react-phone-number-input": "^3.1.6",
     "react-popper": "^2.2.3",
+    "react-to-print": "^2.12.3",
     "styled-components": "^5.1.1"
   },
   "husky": {
