@@ -230,7 +230,7 @@ const CheckoutUI = (props) => {
                     useDefualtSessionManager
                     useSessionUser
                     isCheckout
-                    userData={customerState.user}
+                    userData={isCustomerMode && customerState.user}
                   />
                 )}
               </WrapperUserDetails>
