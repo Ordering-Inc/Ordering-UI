@@ -11,7 +11,7 @@ import {
   useConfig
 } from 'ordering-components'
 import { Alert } from '../../../../../components/Confirm'
-import { Button } from '../../../../../styles/Buttons/theme/three'
+import { Button } from '../../styles/Buttons'
 
 import {
   WrapAddressForm,

@@ -21,9 +21,7 @@ import { SidebarMenu } from '../SidebarMenu'
 import { CartPopover } from '../CartPopover'
 
 import { useTheme } from 'styled-components'
-import {
-  Button
-} from '../../../../../styles/Buttons/theme/three'
+import { Button } from '../../styles/Buttons'
 import { Modal } from '../../../../../components/Modal'
 import { DeliveryDetailsContent } from '../DeliveryDetailsContent'
 import { CartContent } from '../CartContent'

@@ -21,7 +21,7 @@ var _orderingComponents = require("ordering-components");
 
 var _Confirm = require("../../../../../components/Confirm");
 
-var _three = require("../../../../../styles/Buttons/theme/three");
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -478,7 +478,7 @@ var AddressFormUI = function AddressFormUI(props) {
     value: addressValue,
     autoComplete: "new-field",
     countryCode: (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.country_autocomplete) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) || '*'
-  })), /*#__PURE__*/_react.default.createElement(_three.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "submit-btn",
     type: "submit",
     disabled: formState.loading,

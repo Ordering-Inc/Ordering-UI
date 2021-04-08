@@ -29,7 +29,7 @@ var _CartPopover = require("../CartPopover");
 
 var _styledComponents = require("styled-components");
 
-var _three = require("../../../../../styles/Buttons/theme/three");
+var _Buttons = require("../../styles/Buttons");
 
 var _Modal = require("../../../../../components/Modal");
 
@@ -198,7 +198,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('deliveryDetails');
     }
-  })), isHome && /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_three.Button, {
+  })), isHome && /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "secundary",
     onClick: function onClick() {
       return handleGoToPage({
