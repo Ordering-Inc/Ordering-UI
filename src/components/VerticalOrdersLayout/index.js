@@ -43,9 +43,9 @@ export const VerticalOrdersLayout = (props) => {
         {orders.map(order => (
           <SingleCard key={order.id} id='order-card'>
             <OrderPastContent>
-              {order.business?.logo && (
+              {order.business?.logo || theme.images?.dummies?.businessLogo && (
                 <PastLogo>
-                  <img src={order.business?.logo} alt='business-logo' width='55px' height='64px' loading='lazy' />
+                  <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='55px' height='64px' loading='lazy' />
                 </PastLogo>
               )}
               <BusinessInformation>

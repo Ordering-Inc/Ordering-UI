@@ -311,7 +311,7 @@ const MessagesUI = (props) => {
           {
             business && (
               <ImageWithFallback
-                src={order.business?.logo}
+                src={order.business?.logo || theme.images?.dummies?.businessLogo}
                 fallback={<FaUserAlt />}
               />
             )

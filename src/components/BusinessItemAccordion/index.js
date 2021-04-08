@@ -132,9 +132,9 @@ export const BusinessItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <BusinessInfo>
-            {business?.logo && !isCartOnProductsList && (
+            {business?.logo || theme.images?.dummies?.businessLogo && !isCartOnProductsList && (
               <WrapperBusinessLogo>
-                <BusinessLogo bgimage={business?.logo} />
+                <BusinessLogo bgimage={business?.logo || theme.images?.dummies?.businessLogo} />
               </WrapperBusinessLogo>
             )}
             <ContentInfo className='info'>

@@ -84,8 +84,8 @@ const BusinessControllerUI = (props) => {
           </BusinessHero>
           <BusinessContent>
             <WrapperBusinessLogo isSkeleton={isSkeleton}>
-              {business?.logo ? (
-                <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
+              {business?.logo || theme.images?.dummies?.businessLogo ? (
+                <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
               ) : (
                 <Skeleton height={70} width={70} />
               )}

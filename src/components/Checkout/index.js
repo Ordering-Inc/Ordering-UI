@@ -191,7 +191,7 @@ const CheckoutUI = (props) => {
             ) : (
               <AddressDetails
                 location={businessDetails?.business?.location}
-                businessLogo={businessDetails?.business?.logo}
+                businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
                 isCartPending={cart?.status === 2}
                 businessId={cart?.business_id}
                 apiKey={configs?.google_maps_api_key?.value}

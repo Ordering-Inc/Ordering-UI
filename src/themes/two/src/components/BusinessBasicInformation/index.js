@@ -39,7 +39,7 @@ export const BusinessBasicInformation = (props) => {
       <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container'>
         <WrapperBusinessLogo>
           {!loading ? (
-            <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
+            <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
           ) : (
             <Skeleton height={90} width={90} />
           )}

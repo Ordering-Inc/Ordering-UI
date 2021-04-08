@@ -96,13 +96,13 @@ export const BusinessInformationUI = (props) => {
         <BusinessHeader>
           <img src={business.header} alt='business-image' width='444px' height='250px' loading='lazy' />
           <BusinessBasicContent>
-            {business?.logo && (
+            {business?.logo || theme.images?.dummies?.businessLogo && (
               <WrapperBusinessLogo>
                 <BusinessLogo
                   bgimage={
                     optimizeImage
-                      ? optimizeImage(business?.logo, 'h_200,c_limit')
-                      : business?.logo
+                      ? optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')
+                      : business?.logo || theme.images?.dummies?.businessLogo
                   }
                 />
               </WrapperBusinessLogo>
