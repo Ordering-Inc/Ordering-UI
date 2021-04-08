@@ -114,16 +114,22 @@ const CartUI = (props) => {
     handleClickCheckout()
   }
 
+  const verifyDecimals = (value, parser) => {
+    if (value % 1 === 0) {
+      return value
+    } else {
+      return parser(value)
+    }
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <CartContainer className='cart'>
         <BusinessItemAccordion
           isCartPending={isCartPending}
@@ -161,17 +167,32 @@ const CartUI = (props) => {
                 <tbody>
                   <tr>
                     <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                    <td>{parsePrice(cart?.subtotal || 0)}</td>
+                    <td>{cart.business.tax_type === 1 ? parsePrice((cart?.subtotal + cart?.tax) || 0) : parsePrice(cart?.subtotal || 0)}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      {cart.business.tax_type === 1
-                        ? t('TAX_INCLUDED', 'Tax (included)')
-                        : t('TAX', 'Tax')}
-                      <span>{`(${parseNumber(cart?.business?.tax)}%)`}</span>
-                    </td>
-                    <td>{parsePrice(cart?.tax || 0)}</td>
-                  </tr>
+                  {cart?.discount > 0 && cart?.total >= 0 && (
+                    <tr>
+                      {cart?.discount_type === 1 ? (
+                        <td>
+                          {t('DISCOUNT', 'Discount')}
+                          <span>{`(${verifyDecimals(cart?.discount_rate, parsePrice)}%)`}</span>
+                        </td>
+                      ) : (
+                        <td>{t('DISCOUNT', 'Discount')}</td>
+                      )}
+                      <td>- {parsePrice(cart?.discount || 0)}</td>
+                    </tr>
+                  )}
+                  {
+                    cart.business.tax_type !== 1 && (
+                      <tr>
+                        <td>
+                          {t('TAX', 'Tax')}
+                          <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
+                        </td>
+                        <td>{parsePrice(cart?.tax || 0)}</td>
+                      </tr>
+                    )
+                  }
                   {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                     <tr>
                       <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
@@ -182,7 +203,7 @@ const CartUI = (props) => {
                     <tr>
                       <td>
                         {t('DRIVER_TIP', 'Driver tip')}
-                        {cart?.driver_tip_rate > 0 && <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>}
+                        {cart?.driver_tip_rate > 0 && <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>}
                       </td>
                       <td>{parsePrice(cart?.driver_tip)}</td>
                     </tr>
@@ -191,24 +212,12 @@ const CartUI = (props) => {
                     <tr>
                       <td>
                         {t('SERVICE_FEE', 'Service Fee')}
-                        <span>{`(${parseNumber(cart?.business?.service_fee)}%)`}</span>
+                        <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
                       </td>
                       <td>{parsePrice(cart?.service_fee)}</td>
                     </tr>
                   )}
-                  {cart?.discount > 0 && cart?.total >= 0 && (
-                    <tr>
-                      {cart?.discount_type === 1 ? (
-                        <td>
-                          {t('DISCOUNT', 'Discount')}
-                          <span>{`(${parseNumber(cart?.discount_rate)}%)`}</span>
-                        </td>
-                      ) : (
-                        <td>{t('DISCOUNT', 'Discount')}</td>
-                      )}
-                      <td>- {parsePrice(cart?.discount || 0)}</td>
-                    </tr>
-                  )}
+
                 </tbody>
               </table>
               {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
@@ -287,13 +296,11 @@ const CartUI = (props) => {
         )}
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTheme } from 'styled-components'
 import {
   Messages as MessagesController,
   useUtils,
@@ -41,7 +42,7 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
-import { bytesConverter } from '../../utils'
+import { bytesConverter, getTraduction } from '../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 
@@ -61,6 +62,7 @@ const MessagesUI = (props) => {
     readMessages
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -177,7 +179,7 @@ const MessagesUI = (props) => {
       case 12:
         return 'ORDER_DELIVERY_FAILED_BY_DRIVER'
       default:
-        return status
+        return getTraduction(status)
     }
   }
 
@@ -323,7 +325,7 @@ const MessagesUI = (props) => {
           {
             business && (
               <ImageWithFallback
-                src={order.business?.logo}
+                src={order.business?.logo || theme.images?.dummies?.businessLogo}
                 fallback={<FaUserAlt />}
               />
             )
