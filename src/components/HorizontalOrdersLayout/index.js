@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage, useUtils, useConfig } from 'ordering-components'
-
+import { useTheme } from 'styled-components'
 import {
   OpenOrder,
   Content,
@@ -30,6 +30,7 @@ export const HorizontalOrdersLayout = (props) => {
 
   const orders = customArray || props.orders
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()

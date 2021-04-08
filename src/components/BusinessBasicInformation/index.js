@@ -5,6 +5,7 @@ import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import FaStar from '@meronex/icons/fa/FaStar'
 import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
+import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
@@ -33,6 +34,7 @@ export const BusinessBasicInformation = (props) => {
   } = props
   const { business, loading } = businessState
 
+  const theme = useTheme()
   const [orderState] = useOrder()
 
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()

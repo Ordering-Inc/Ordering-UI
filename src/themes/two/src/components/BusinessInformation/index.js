@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../../../../utils'
+import { useTheme } from 'styled-components'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
@@ -51,6 +52,7 @@ export const BusinessInformationUI = (props) => {
     onClose
   } = props
 
+  const theme = useTheme()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -87,7 +89,7 @@ export const BusinessInformationUI = (props) => {
       <BusinessHeader>
         <img src={business.header} alt='business-image' width='444px' height='250px' loading='lazy' />
         <BusinessBasicContent>
-          {business?.logo || theme.images?.dummies?.businessLogo && (
+          {(business?.logo || theme.images?.dummies?.businessLogo) && (
             <WrapperBusinessLogo>
               <BusinessLogo
                 bgimage={

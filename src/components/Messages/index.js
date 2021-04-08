@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTheme } from 'styled-components'
 import {
   Messages as MessagesController,
   useUtils,
@@ -61,6 +62,7 @@ const MessagesUI = (props) => {
     readMessages
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })

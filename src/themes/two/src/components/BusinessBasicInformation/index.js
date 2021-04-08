@@ -4,6 +4,7 @@ import AiFillStar from '@meronex/icons/ai/AiFillStar'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
+import { useTheme } from 'styled-components'
 
 import { convertHoursToMinutes } from '../../../../../utils'
 
@@ -27,6 +28,7 @@ export const BusinessBasicInformation = (props) => {
   } = props
   const { business, loading } = businessState
 
+  const theme = useTheme()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [configState] = useConfig()

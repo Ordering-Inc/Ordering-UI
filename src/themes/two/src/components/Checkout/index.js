@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 import {
   Checkout as CheckoutController,
   useOrder,
@@ -77,6 +78,7 @@ const CheckoutUI = (props) => {
     handleOrderRedirect
   } = props
 
+  const theme = useTheme()
   const [validationFields] = useValidationFields()
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
