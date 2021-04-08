@@ -147,7 +147,7 @@ export const SubMenu = styled(InnerHeader)`
 
 export const CustomerInfo = styled.div`
   display: none;
-
+  cursor: pointer;
   @media (min-width: 450px) {
     display: initial;
 
@@ -172,5 +172,11 @@ export const CustomerInfo = styled.div`
         margin-right: 5px;
       }
     }
+  }
+`
+
+export const UserEdit = styled.div`
+  > :first-child{
+     margin-bottom: 20px;  
   }
 `

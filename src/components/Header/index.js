@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSession, useLanguage, useOrder, useEvent, useConfig } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 
@@ -12,7 +12,8 @@ import {
   Menu,
   MenuLink,
   SubMenu,
-  CustomerInfo
+  CustomerInfo,
+  UserEdit
 } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
@@ -31,6 +32,7 @@ import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
+import { UserDetails } from '../UserDetails'
 
 export const Header = (props) => {
   const {
@@ -40,7 +42,7 @@ export const Header = (props) => {
     isShowOrderOptions,
     isHideSignup,
     isCustomerMode
-} = props
+  } = props
 
   const [events] = useEvent()
   const [, t] = useLanguage()
@@ -49,8 +51,10 @@ export const Header = (props) => {
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
   const [configState] = useConfig()
+  const [customerState] = useCustomer()
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [customerModalOpen, setCustomerModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length > 0)) || null
 
@@ -100,11 +104,9 @@ export const Header = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <HeaderContainer home={isHome}>
         <InnerHeader>
           <LeftHeader>
@@ -122,7 +124,7 @@ export const Header = (props) => {
             {isShowOrderOptions && (
               <Menu className='left-header'>
                 {isCustomerMode && windowSize.width > 450 && (
-                  <CustomerInfo isHome={isHome}>
+                  <CustomerInfo isHome={isHome} onClick={() => setCustomerModalOpen(true)}>
                     <span>
                       <FaUserCircle />
                       <p>{userCustomer?.name} {userCustomer?.lastname}</p>
@@ -139,7 +141,7 @@ export const Header = (props) => {
                       onClick={() => handleTogglePopover('moment')}
                       onClose={() => handleClosePopover('moment')}
                       isHome={isHome}
-                      />
+                    />
                     <AddressesPopover
                       auth={auth}
                       addressState={orderState?.options?.address}
@@ -147,7 +149,7 @@ export const Header = (props) => {
                       onClick={() => handleTogglePopover('addresses')}
                       onClose={() => handleClosePopover('addresses')}
                       isHome={isHome}
-                      />
+                    />
                   </>
                 )}
               </Menu>
@@ -280,15 +282,37 @@ export const Header = (props) => {
             )}
           </Modal>
         )}
+        {isCustomerMode && (
+          <Modal
+            open={customerModalOpen}
+            width='60%'
+            onClose={() => setCustomerModalOpen(false)}
+          >
+            <UserEdit>
+              {!customerState?.loading && (
+                <>
+                  <UserDetails
+                    userData={customerState?.user}
+                    userId={customerState?.user?.id}
+                  />
+                  <AddressList
+                    isModal
+                    userId={customerState?.user?.id}
+                    changeOrderAddressWithDefault
+                    userCustomerSetup={customerState.user}
+                  />
+                </>
+              )}
+            </UserEdit>
+          </Modal>
+        )}
       </HeaderContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

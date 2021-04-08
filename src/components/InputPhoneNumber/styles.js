@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   text-align: center;
-
+  max-width: ${({ halfWidth }) => halfWidth ? '49%' : 'auto'};
   select:focus {
     outline: none;
   }

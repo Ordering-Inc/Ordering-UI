@@ -268,21 +268,14 @@ export const UserFormDetailsUI = (props) => {
                 })}
               />
             )}
-            {!!showInputPhoneNumber && !userData && (
+            {!!showInputPhoneNumber && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
                 disabled={!isEdit}
-              />
-            )}
-
-            {userData && (
-              <Input
-                value={userData?.phone || userData?.cellphone}
-                className='form'
-                name='cellphone'
+                halfWidth
               />
             )}
             {
