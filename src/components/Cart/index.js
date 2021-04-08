@@ -167,7 +167,7 @@ const CartUI = (props) => {
                 <tbody>
                   <tr>
                     <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                    <td>{parsePrice(cart?.subtotal || 0)}</td>
+                    <td>{cart.business.tax_type === 1 ? parsePrice((cart?.subtotal + cart?.tax) || 0) : parsePrice(cart?.subtotal || 0)}</td>
                   </tr>
                   {cart?.discount > 0 && cart?.total >= 0 && (
                     <tr>
@@ -182,15 +182,17 @@ const CartUI = (props) => {
                       <td>- {parsePrice(cart?.discount || 0)}</td>
                     </tr>
                   )}
-                  <tr>
-                    <td>
-                      {cart.business.tax_type === 1
-                        ? t('TAX_INCLUDED', 'Tax (included)')
-                        : t('TAX', 'Tax')}
-                      <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
-                    </td>
-                    <td>{parsePrice(cart?.tax || 0)}</td>
-                  </tr>
+                  {
+                    cart.business.tax_type !== 1 && (
+                      <tr>
+                        <td>
+                          {t('TAX', 'Tax')}
+                          <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
+                        </td>
+                        <td>{parsePrice(cart?.tax || 0)}</td>
+                      </tr>
+                    )
+                  }
                   {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                     <tr>
                       <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
