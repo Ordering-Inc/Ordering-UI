@@ -17,6 +17,8 @@ var _orderingComponents = require("ordering-components");
 
 var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
 
+var _styledComponents = require("styled-components");
+
 var _utils = require("../../../../../utils");
 
 var _styles = require("./styles");
@@ -36,12 +38,13 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _configState$configs, _configState$configs$, _business$reviews, _business$reviews2, _orderState$options;
+  var _configState$configs, _configState$configs$, _theme$images, _theme$images$dummies, _business$reviews, _business$reviews2, _orderState$options;
 
   var isSkeleton = props.isSkeleton,
       businessState = props.businessState;
   var business = businessState.business,
       loading = businessState.loading;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -70,7 +73,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     isSkeleton: isSkeleton,
     id: "container"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 90,
     width: 90

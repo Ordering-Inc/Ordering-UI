@@ -42,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessCartContent = function BusinessCartContent(props) {
-  var _cart$business, _cart$business2, _configs$google_maps_, _theme$images, _theme$images$general;
+  var _cart$business, _cart$business2, _theme$images, _theme$images$dummies, _configs$google_maps_, _theme$images2, _theme$images2$genera;
 
   var isSkeleton = props.isSkeleton,
       cart = props.cart,
@@ -108,7 +108,7 @@ var BusinessCartContent = function BusinessCartContent(props) {
   }, /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT', 'Checkout')), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(cart.total)))), orderType === 2 && businessSingleList.length !== 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PickupOrderCartHeader, null, /*#__PURE__*/_react.default.createElement("p", null, t('THIS_IS_A_PICKUP_ORDER', 'This is a Pickup order')), /*#__PURE__*/_react.default.createElement("p", null, t('You’ll need to go to'), " ", cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.name, " ", t('to pick up this order.'))), /*#__PURE__*/_react.default.createElement(_styles.WrapBusinessMap, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessAddress, null, /*#__PURE__*/_react.default.createElement("span", null, t('PICK_UP_AT', 'Pick up at')), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : business.address)), /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
     isCartView: true,
     location: business === null || business === void 0 ? void 0 : business.location,
-    businessLogo: business === null || business === void 0 ? void 0 : business.logo,
+    businessLogo: (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
     mapConfigs: mapConfigs
   }))), cart.products.map(function (product) {
@@ -119,7 +119,7 @@ var BusinessCartContent = function BusinessCartContent(props) {
       product: product
     });
   }))), (!cart || Object.keys(cart).length === 0 || cart.products.length === 0) && /*#__PURE__*/_react.default.createElement(_styles.NoCarts, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyCart,
+    src: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyCart,
     alt: "empty cart",
     width: "200px",
     height: "200px",

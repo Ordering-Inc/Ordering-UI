@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _utils = require("../../utils");
 
+var _styledComponents = require("styled-components");
+
 var _orderingComponents = require("ordering-components");
 
 var _BusinessReviews = require("../BusinessReviews");
@@ -60,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessInformationUI = function BusinessInformationUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _business$reviews, _orderState$options, _business$reviews2, _configs$google_maps_, _business$reviews3, _business$reviews4, _business$reviews5, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _orderState$options, _business$reviews2, _business$offers, _configs$google_maps_, _business$reviews3, _business$reviews4, _business$reviews5, _business$offers2, _props$afterComponent, _props$afterElements;
 
   var business = props.business,
       getBusinessType = props.getBusinessType,
@@ -70,6 +72,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       businessPhotos = props.businessPhotos,
       businessVideos = props.businessVideos,
       onClose = props.onClose;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -140,8 +143,8 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     width: "444px",
     height: "250px",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessBasicContent, null, (business === null || business === void 0 ? void 0 : business.logo) && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage ? optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit') : business === null || business === void 0 ? void 0 : business.logo
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessBasicContent, null, ((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    bgimage: optimizeImage ? optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit') : (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo)
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
@@ -160,7 +163,12 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return setTabValue('Reviews');
     },
     active: tabValue === 'Reviews'
-  }, t('REVIEWS', 'Reviews')))), tabValue === 'General Info' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, business.about && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_ABOUT', 'Business short description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.about)), business.description && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.description)), businessLocation.location && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_LOCATION', 'Business location')), businessLocation.location && /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+  }, t('REVIEWS', 'Reviews')), (business === null || business === void 0 ? void 0 : (_business$offers = business.offers) === null || _business$offers === void 0 ? void 0 : _business$offers.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return setTabValue('Offers');
+    },
+    active: tabValue === 'Offers'
+  }, t('OFFERS', 'Offers')))), tabValue === 'General Info' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, business.about && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_ABOUT', 'Business short description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.about)), business.description && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.description)), businessLocation.location && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_LOCATION', 'Business location')), businessLocation.location && /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
     location: businessLocation.location,
     mapControls: businessLocation.googleMapsControls || business.googleMapsControls
@@ -192,12 +200,16 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       allow: "autoplay; encrypted-media",
       allowFullScreen: true
     });
-  })))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.reviews) && /*#__PURE__*/_react.default.createElement(_BusinessReviews.BusinessReviews, {
+  })))), tabValue === 'Reviews' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.reviews) && /*#__PURE__*/_react.default.createElement(_BusinessReviews.BusinessReviews, {
     businessId: business.id,
     reviews: (_business$reviews4 = business.reviews) === null || _business$reviews4 === void 0 ? void 0 : _business$reviews4.reviews,
     businessName: business.name,
     stars: (_business$reviews5 = business.reviews) === null || _business$reviews5 === void 0 ? void 0 : _business$reviews5.total
-  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), tabValue === 'Offers' && /*#__PURE__*/_react.default.createElement(_styles.OffersSection, null, /*#__PURE__*/_react.default.createElement(_styles.OfferText, null, /*#__PURE__*/_react.default.createElement(_styles.OfferTextP, null, t('DISCOUNTS_OF', 'Discounts of'), " ", business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement(_styles.OfferTextP, null, business === null || business === void 0 ? void 0 : business.address)), /*#__PURE__*/_react.default.createElement(_styles.OfferTable, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_NAME', 'Offer Name')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_PRICE', 'Offer Price')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_START_DATE', 'Start Date')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_END_DATE', 'End Date')))), /*#__PURE__*/_react.default.createElement("tbody", null, business === null || business === void 0 ? void 0 : (_business$offers2 = business.offers) === null || _business$offers2 === void 0 ? void 0 : _business$offers2.map(function (offer) {
+    return /*#__PURE__*/_react.default.createElement("tr", {
+      key: offer.id
+    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name), /*#__PURE__*/_react.default.createElement("td", null, offer.rate_type === 1 ? "".concat(offer.rate, " % ").concat(t('MIN', 'Min'), ": ").concat(parsePrice(offer.minimum)) : "".concat(parsePrice(offer.rate), " ").concat(t('MIN', 'Min'), ": ").concat(parsePrice(offer.minimum))), /*#__PURE__*/_react.default.createElement("td", null, offer.start), /*#__PURE__*/_react.default.createElement("td", null, offer.end));
+  })))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     onClose: function onClose() {
       return setModalImage(false);
     },

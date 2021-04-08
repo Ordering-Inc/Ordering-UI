@@ -189,7 +189,9 @@ var getTraduction = function getTraduction(key) {
     ERROR_ADD_PRODUCT_VERY_FAR_FOR_PICKUP: 'The business is too far for order type pickup',
     ERROR_PLACE_PAY_WITH_CARD2: 'An error occurred while trying to pay by card',
     ERROR_ADD_PRODUCT_BUSINESS_CLOSED: 'The business is closed at the moment',
-    INTERNAL_ERROR: 'Server Error, please wait, we are working to fix it'
+    INTERNAL_ERROR: 'Server Error, please wait, we are working to fix it',
+    PREPARED_IN: 'Preparation time',
+    DELIVERY_DATETIME: 'Delivery datetime'
   };
   return keyList[key] ? t(key, keyList[key]) : t(key);
 };

@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
+var _styledComponents = require("styled-components");
+
 var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
@@ -42,6 +44,7 @@ var VerticalOrdersLayout = function VerticalOrdersLayout(props) {
       handleReorder = props.handleReorder,
       reorderLoading = props.reorderLoading,
       orderID = props.orderID;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -62,13 +65,13 @@ var VerticalOrdersLayout = function VerticalOrdersLayout(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrdersContainer, {
     id: "orders-container"
   }, orders.map(function (order) {
-    var _order$business, _order$business2, _order$business3, _getOrderStatus;
+    var _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _order$business3, _getOrderStatus;
 
     return /*#__PURE__*/_react.default.createElement(_styles.SingleCard, {
       key: order.id,
       id: "order-card"
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderPastContent, null, ((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) && /*#__PURE__*/_react.default.createElement(_styles.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo,
+    }, /*#__PURE__*/_react.default.createElement(_styles.OrderPastContent, null, (((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: ((_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo),
       alt: "business-logo",
       width: "55px",
       height: "64px",

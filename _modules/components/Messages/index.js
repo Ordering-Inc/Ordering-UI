@@ -9,6 +9,8 @@ exports.Messages = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _styledComponents = require("styled-components");
+
 var _orderingComponents = require("ordering-components");
 
 var _reactHookForm = require("react-hook-form");
@@ -66,7 +68,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MessagesUI = function MessagesUI(props) {
-  var _messages$messages, _order$business, _order$driver, _order$business2, _order$driver2, _messagesToShow$messa2;
+  var _messages$messages, _order$business, _theme$images, _theme$images$dummies, _order$driver, _order$business2, _order$driver2, _messagesToShow$messa2;
 
   var order = props.order,
       messages = props.messages,
@@ -80,6 +82,7 @@ var MessagesUI = function MessagesUI(props) {
       driver = props.driver,
       messagesToShow = props.messagesToShow,
       readMessages = props.readMessages;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -251,7 +254,7 @@ var MessagesUI = function MessagesUI(props) {
         return 'ORDER_DELIVERY_FAILED_BY_DRIVER';
 
       default:
-        return status;
+        return (0, _utils.getTraduction)(status);
     }
   };
 
@@ -345,7 +348,7 @@ var MessagesUI = function MessagesUI(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.Image, null, business && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo,
+    src: ((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }), driver && /*#__PURE__*/_react.default.createElement(_Image.Image, {
     src: (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo,

@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ImageContainer = exports.Description = exports.ModalIcon = exports.BusinessMediaContent = exports.DeliveryInfo = exports.ScheduleBlock = exports.ScheduleContainer = exports.ScheduleSection = exports.Map = exports.SectionTitle = exports.FlexTabs = exports.BusinessContent = exports.Information = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessLogo = exports.WrapperBusinessLogo = exports.BusinessBasicContent = exports.HeaderImage = exports.BussinessTitle = exports.BusinessHeader = exports.BusinessInformationContainer = void 0;
+exports.OfferTable = exports.OfferTextP = exports.OfferText = exports.OffersSection = exports.ImageContainer = exports.Description = exports.ModalIcon = exports.BusinessMediaContent = exports.DeliveryInfo = exports.ScheduleBlock = exports.ScheduleContainer = exports.ScheduleSection = exports.Map = exports.SectionTitle = exports.FlexTabs = exports.BusinessContent = exports.Information = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessLogo = exports.WrapperBusinessLogo = exports.BusinessBasicContent = exports.HeaderImage = exports.BussinessTitle = exports.BusinessHeader = exports.BusinessInformationContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -152,3 +152,27 @@ exports.Description = Description;
 var ImageContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral([" \n  max-height: 500px;\n  img{\n    width: 100%;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height);\n    border-bottom-left-radius: 10px;\n    border-bottom-right-radius: 10px;\n  }\n"])));
 
 exports.ImageContainer = ImageContainer;
+
+var OffersSection = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 10px 0 20px;\n"])));
+
+exports.OffersSection = OffersSection;
+
+var OfferText = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n"])));
+
+exports.OfferText = OfferText;
+
+var OfferTextP = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n"])));
+
+exports.OfferTextP = OfferTextP;
+
+var OfferTable = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 15px;\n\n  table>tbody>tr>td, table>tbody>tr>th,\n  table>thead>tr>td, table>thead>tr>th\n  {\n    border-top: 0\n  }\n\n  table {\n    width: 100%;\n    border-collapse: collapse;\n    border-style: hidden;\n    border: 1px solid  ", ";\n\n    thead {\n      background-color: ", ";\n    }\n    tr th {\n      font-size: 15px;\n    }\n    tr td {\n      font-size: 12px;\n    }\n    td span {\n      unicode-bidi: bidi-override;\n    }\n    tr td,\n    tr th {\n      text-align: left;\n      padding: 10px;\n      ", "\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.disabled;
+}, function (props) {
+  return props.theme.colors.disabled;
+}, function (props) {
+  var _props$theme8;
+
+  return ((_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.rtl) && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n        text-align: right;\n      "])));
+});
+
+exports.OfferTable = OfferTable;

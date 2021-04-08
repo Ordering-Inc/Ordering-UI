@@ -184,7 +184,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       onClick: function onClick() {
         return handlePaymethodClick(paymethod);
       }
-    }, getPayIcon(paymethod.id), /*#__PURE__*/_react.default.createElement("p", null, paymethod.name));
+    }, getPayIcon(paymethod.id), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name)));
   }), (paymethodsList.loading || isLoading) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: i,
