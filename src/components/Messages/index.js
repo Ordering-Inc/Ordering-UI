@@ -41,7 +41,7 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
-import { bytesConverter } from '../../utils'
+import { bytesConverter, getTraduction } from '../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 
@@ -177,7 +177,7 @@ const MessagesUI = (props) => {
       case 12:
         return 'ORDER_DELIVERY_FAILED_BY_DRIVER'
       default:
-        return status
+        return getTraduction(status)
     }
   }
 
