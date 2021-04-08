@@ -8,7 +8,7 @@ export const PhoneContainer = styled.div`
     background-repeat: no-repeat, repeat;
     background-size: cover;
     object-fit: cover;
-    background-position: center;
+    background-position: bottom;
     background-image: url(${bgimage});
   `}
 
