@@ -76,7 +76,7 @@ export const HorizontalOrdersLayout = (props) => {
               </Map>
             )}
             <Content>
-              {order.business?.logo || theme.images?.dummies?.businessLogo && !isBusinessesPage && (
+              {(order.business?.logo || theme.images?.dummies?.businessLogo) && !isBusinessesPage && (
                 <Logo>
                   <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='75px' height='75px' />
                 </Logo>
