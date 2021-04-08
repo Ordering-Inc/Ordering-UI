@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage, useUtils, useConfig } from 'ordering-components'
-
+import { useTheme } from 'styled-components'
 import {
   OpenOrder,
   Content,
@@ -30,6 +30,7 @@ export const HorizontalOrdersLayout = (props) => {
 
   const orders = customArray || props.orders
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
@@ -65,7 +66,7 @@ export const HorizontalOrdersLayout = (props) => {
                 <img
                   src={
                     isBusinessesPage
-                      ? (order?.business?.header || order?.business?.logo)
+                      ? (order?.business?.header || order?.business?.logo || theme.images?.dummies?.businessLogo)
                       : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)
                   }
                   alt={isBusinessesPage ? 'business_header' : 'google-maps-img'}
@@ -75,9 +76,9 @@ export const HorizontalOrdersLayout = (props) => {
               </Map>
             )}
             <Content>
-              {order.business?.logo && !isBusinessesPage && (
+              {order.business?.logo || theme.images?.dummies?.businessLogo && !isBusinessesPage && (
                 <Logo>
-                  <img src={order.business?.logo} alt='business-logo' width='75px' height='75px' />
+                  <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='75px' height='75px' />
                 </Logo>
               )}
 
