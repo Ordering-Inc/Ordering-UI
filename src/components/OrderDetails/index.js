@@ -193,7 +193,7 @@ const OrderDetailsUI = (props) => {
               <OrderBusiness>
                 <BusinessWrapper>
                   <LogoWrapper>
-                    <BusinessLogo bgimage={order?.business?.logo} />
+                    <BusinessLogo bgimage={order?.business?.logo || theme.images?.dummies?.businessLogo} />
                   </LogoWrapper>
                   <BusinessInfo>
                     <h1>{order?.business?.name}</h1>

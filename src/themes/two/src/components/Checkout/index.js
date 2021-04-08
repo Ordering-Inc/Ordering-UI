@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 import {
   Checkout as CheckoutController,
   useOrder,
@@ -77,6 +78,7 @@ const CheckoutUI = (props) => {
     handleOrderRedirect
   } = props
 
+  const theme = useTheme()
   const [validationFields] = useValidationFields()
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
@@ -201,7 +203,7 @@ const CheckoutUI = (props) => {
           ) : (
             <AddressDetails
               location={businessDetails?.business?.location}
-              businessLogo={businessDetails?.business?.logo}
+              businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
               isCartPending={cart?.status === 2}
               businessId={cart?.business_id}
               apiKey={configs?.google_maps_api_key?.value}
@@ -334,7 +336,7 @@ const CheckoutUI = (props) => {
               {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business).length > 0 && (
                 <>
                   <WrapperBusinessLogo>
-                    <BusinessLogo bgimage={optimizeImage(businessDetails?.business?.logo, 'h_200,c_limit')} />
+                    <BusinessLogo bgimage={optimizeImage(businessDetails?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
                   </WrapperBusinessLogo>
                   <div>
                     <p>{t('ORDER_FROM', 'Order from')}</p>

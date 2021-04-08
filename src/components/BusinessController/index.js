@@ -1,6 +1,7 @@
 import React from 'react'
 import { BusinessController as BusinessSingleCard, useLanguage, useUtils } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 
 import { convertHoursToMinutes } from '../../utils'
 
@@ -35,6 +36,7 @@ const BusinessControllerUI = (props) => {
     orderType
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, parseNumber, optimizeImage }] = useUtils()
 
@@ -84,8 +86,8 @@ const BusinessControllerUI = (props) => {
           </BusinessHero>
           <BusinessContent>
             <WrapperBusinessLogo isSkeleton={isSkeleton}>
-              {business?.logo ? (
-                <BusinessLogo bgimage={optimizeImage(business?.logo, 'h_200,c_limit')} />
+              {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
+                <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
               ) : (
                 <Skeleton height={70} width={70} />
               )}

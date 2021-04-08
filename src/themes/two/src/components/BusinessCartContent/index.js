@@ -86,7 +86,7 @@ export const BusinessCartContent = (props) => {
                           <AddressDetails
                             isCartView
                             location={business?.location}
-                            businessLogo={business?.logo}
+                            businessLogo={business?.logo || theme.images?.dummies?.businessLogo}
                             apiKey={configs?.google_maps_api_key?.value}
                             mapConfigs={mapConfigs}
                           />
