@@ -114,6 +114,14 @@ const CartUI = (props) => {
     handleClickCheckout()
   }
 
+  const verifyDecimals = (value, parser) => {
+    if (value % 1 === 0) {
+      return value
+    } else {
+      return parser(value)
+    }
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -166,7 +174,7 @@ const CartUI = (props) => {
                       {cart?.discount_type === 1 ? (
                         <td>
                           {t('DISCOUNT', 'Discount')}
-                          <span>{`(${parseNumber(cart?.discount_rate)}%)`}</span>
+                          <span>{`(${verifyDecimals(cart?.discount_rate, parsePrice)}%)`}</span>
                         </td>
                       ) : (
                         <td>{t('DISCOUNT', 'Discount')}</td>
@@ -179,7 +187,7 @@ const CartUI = (props) => {
                       {cart.business.tax_type === 1
                         ? t('TAX_INCLUDED', 'Tax (included)')
                         : t('TAX', 'Tax')}
-                      <span>{`(${parseNumber(cart?.business?.tax)}%)`}</span>
+                      <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
                     </td>
                     <td>{parsePrice(cart?.tax || 0)}</td>
                   </tr>
@@ -193,7 +201,7 @@ const CartUI = (props) => {
                     <tr>
                       <td>
                         {t('DRIVER_TIP', 'Driver tip')}
-                        {cart?.driver_tip_rate > 0 && <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>}
+                        {cart?.driver_tip_rate > 0 && <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>}
                       </td>
                       <td>{parsePrice(cart?.driver_tip)}</td>
                     </tr>
@@ -202,7 +210,7 @@ const CartUI = (props) => {
                     <tr>
                       <td>
                         {t('SERVICE_FEE', 'Service Fee')}
-                        <span>{`(${parseNumber(cart?.business?.service_fee)}%)`}</span>
+                        <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
                       </td>
                       <td>{parsePrice(cart?.service_fee)}</td>
                     </tr>
