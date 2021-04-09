@@ -46,7 +46,7 @@ export const BusinessBasicInformation = (props) => {
     }).reduce((r, c) => ({ ...r, ...c }), {})
     const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])?.[0]
 
-    return t(businessType?.[0]?.toUpperCase(), businessType?.[0])
+    return t(`BUSINESS_TYPE_${businessType?.[0].replace(/\s/g, '_').toUpperCase()}`, businessType?.[0])
   }
 
   return (
