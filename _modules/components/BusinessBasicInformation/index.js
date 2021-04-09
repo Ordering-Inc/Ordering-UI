@@ -78,6 +78,10 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
@@ -86,7 +90,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       optimizeImage = _useUtils2$.optimizeImage;
 
   var getBusinessType = function getBusinessType() {
-    var _Object$entries$reduc;
+    var _Object$entries$reduc, _businessType$;
 
     if (Object.keys(business).length <= 0) return 'none';
     var typeObj = types.map(function (t) {
@@ -101,7 +105,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
 
       return v !== false ? [].concat(_toConsumableArray(a), [[k, v]]) : a;
     }, [])) === null || _Object$entries$reduc === void 0 ? void 0 : _Object$entries$reduc[0];
-    return businessType === null || businessType === void 0 ? void 0 : businessType[0];
+    return t(businessType === null || businessType === void 0 ? void 0 : (_businessType$ = businessType[0]) === null || _businessType$ === void 0 ? void 0 : _businessType$.toUpperCase(), businessType === null || businessType === void 0 ? void 0 : businessType[0]);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
