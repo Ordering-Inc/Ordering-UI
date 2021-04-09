@@ -239,7 +239,7 @@ const AddressListUI = (props) => {
           )
         )}
 
-        {!addressList.loading && (typeof orderState.options?.address !== 'object') && (
+        {!addressList.loading && (typeof orderState.options?.address !== 'object') && !addressList.error && (
           <NotFoundSource
             content={t('NETWORK_ERROR', 'Network error, please reload the page')}
           />
