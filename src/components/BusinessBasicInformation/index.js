@@ -10,7 +10,7 @@ import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 
-import { useUtils, useOrder } from 'ordering-components'
+import { useUtils, useOrder, useLanguage } from 'ordering-components'
 
 import { convertHoursToMinutes } from '../../utils'
 
@@ -36,7 +36,7 @@ export const BusinessBasicInformation = (props) => {
 
   const theme = useTheme()
   const [orderState] = useOrder()
-
+  const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
 
   const getBusinessType = () => {
@@ -45,7 +45,8 @@ export const BusinessBasicInformation = (props) => {
       return { [t]: business[t] }
     }).reduce((r, c) => ({ ...r, ...c }), {})
     const businessType = Object.entries(typeObj).reduce((a, [k, v]) => v !== false ? [...a, [k, v]] : a, [])?.[0]
-    return businessType?.[0]
+
+    return t(businessType?.[0]?.toUpperCase(), businessType?.[0])
   }
 
   return (
