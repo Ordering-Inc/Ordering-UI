@@ -80,7 +80,7 @@ export const MomentPopover = (props) => {
       >
         <FaRegClock />
         {orderStatus.options?.moment
-          ? parseDate(orderStatus.options?.moment, { outputFormat: configs.configs?.dates_moment_format })
+          ? parseDate(orderStatus.options?.moment, { outputFormat: configs?.dates_moment_format })
           : t('ASAP_ABBREVIATION', 'ASAP')}
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
