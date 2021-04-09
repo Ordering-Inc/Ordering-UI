@@ -59,6 +59,11 @@ export const UserFormDetailsUI = (props) => {
     }
     if (user?.cellphone) {
       let phone = null
+      if (formState.result.error && formState.changes?.cellphone && formState.changes?.country_phone_code) {
+        phone = `+${formState.changes?.country_phone_code} ${formState.changes?.cellphone}`
+        setUserPhoneNumber(phone)
+        return
+      }
       if (user?.country_phone_code) {
         phone = `+${user?.country_phone_code} ${user?.cellphone}`
       } else {
