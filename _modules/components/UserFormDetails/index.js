@@ -251,10 +251,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         }
       });
     });
-    fieldsSorted.push(validationsFieldsArray.filter(function (field) {
-      return !fields.includes(field.code);
-    }));
-    setValidationFieldsSorted((0, _utils.flatArray)(fieldsSorted));
+    setValidationFieldsSorted(fieldsSorted);
   };
 
   (0, _react.useEffect)(function () {
@@ -334,7 +331,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
-      type: field.id >= 1 && field.id < 6 || field.id >= 55 ? field.type : 'hidden',
+      type: field.type,
       name: field.code,
       className: "form",
       disabled: !isEdit,

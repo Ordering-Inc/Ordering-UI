@@ -112,7 +112,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         height: "150px",
         loading: "lazy"
       })) : '');
-    }), t("BUSINESS_TYPE_".concat(type.value ? type.value.toUpperCase() : 'ALL'), type.key));
+    }), t("BUSINESS_TYPE_".concat(type.value ? type.value.replace(/\s/g, '_').toUpperCase() : 'ALL'), type.key));
   })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

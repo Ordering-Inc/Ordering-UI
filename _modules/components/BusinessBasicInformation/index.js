@@ -90,7 +90,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       optimizeImage = _useUtils2$.optimizeImage;
 
   var getBusinessType = function getBusinessType() {
-    var _Object$entries$reduc, _businessType$;
+    var _Object$entries$reduc;
 
     if (Object.keys(business).length <= 0) return 'none';
     var typeObj = types.map(function (t) {
@@ -105,7 +105,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
 
       return v !== false ? [].concat(_toConsumableArray(a), [[k, v]]) : a;
     }, [])) === null || _Object$entries$reduc === void 0 ? void 0 : _Object$entries$reduc[0];
-    return t(businessType === null || businessType === void 0 ? void 0 : (_businessType$ = businessType[0]) === null || _businessType$ === void 0 ? void 0 : _businessType$.toUpperCase(), businessType === null || businessType === void 0 ? void 0 : businessType[0]);
+    return t("BUSINESS_TYPE_".concat(businessType === null || businessType === void 0 ? void 0 : businessType[0].replace(/\s/g, '_').toUpperCase()), businessType === null || businessType === void 0 ? void 0 : businessType[0]);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
