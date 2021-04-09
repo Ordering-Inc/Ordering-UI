@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MomentPopover = function MomentPopover(props) {
-  var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _orderStatus$options, _orderStatus$options2, _configs$format_time, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _orderStatus$options, _orderStatus$options2, _configs$dates_moment, _props$afterComponent, _props$afterElements;
 
   var open = props.open;
 
@@ -148,7 +148,7 @@ var MomentPopover = function MomentPopover(props) {
     onClick: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) === -1 || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) === 0 ? null : props.onClick,
     isHome: props.isHome
   }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, null), (_orderStatus$options = orderStatus.options) !== null && _orderStatus$options !== void 0 && _orderStatus$options.moment ? parseDate((_orderStatus$options2 = orderStatus.options) === null || _orderStatus$options2 === void 0 ? void 0 : _orderStatus$options2.moment, {
-    outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? 'MM/DD hh:mma' : 'MM/DD HH:mm'
+    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
