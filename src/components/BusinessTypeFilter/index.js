@@ -64,7 +64,7 @@ const BusinessTypeFilterUI = (props) => {
                   </React.Fragment>
                 )
                 )}
-                {t(`BUSINESS_TYPE_${type.value ? type.value.toUpperCase() : 'ALL'}`, type.key)}
+                {t(`BUSINESS_TYPE_${type.value ? type.value.replace(/\s/g, '_').toUpperCase() : 'ALL'}`, type.key)}
               </Tab>
             ))}
           </AutoScroll>
