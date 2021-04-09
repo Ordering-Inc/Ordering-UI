@@ -121,12 +121,10 @@ export const BusinessItemAccordion = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
-      <AccordionSection isClosed={isClosed}>
+        <BeforeComponent key={i} {...props} />))}
+      <AccordionSection isClosed={isClosed} isCartOnProductsList={isCartOnProductsList}>
         <Accordion
           isClosed={isClosed}
           className={`accordion ${setActive}`}
@@ -208,13 +206,11 @@ export const BusinessItemAccordion = (props) => {
         </AccordionContent>
       </AccordionSection>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
