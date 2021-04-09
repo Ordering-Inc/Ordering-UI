@@ -70,11 +70,9 @@ export const MomentPopover = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <HeaderItem
         ref={referenceElement}
         onClick={configs?.max_days_preorder?.value === -1 || configs?.max_days_preorder?.value === 0 ? null : props.onClick}
@@ -82,7 +80,7 @@ export const MomentPopover = (props) => {
       >
         <FaRegClock />
         {orderStatus.options?.moment
-          ? parseDate(orderStatus.options?.moment, { outputFormat: configs?.format_time?.value === '12' ? 'MM/DD hh:mma' : 'MM/DD HH:mm' })
+          ? parseDate(orderStatus.options?.moment, { outputFormat: configs.configs?.dates_moment_format })
           : t('ASAP_ABBREVIATION', 'ASAP')}
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
@@ -90,13 +88,11 @@ export const MomentPopover = (props) => {
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </div>
   )
 }
