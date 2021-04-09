@@ -136,7 +136,17 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
 
     if (user !== null && user !== void 0 && user.cellphone) {
+      var _formState$changes, _formState$changes2;
+
       var phone = null;
+
+      if (formState.result.error && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.cellphone && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.country_phone_code) {
+        var _formState$changes3, _formState$changes4;
+
+        phone = "+".concat((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.country_phone_code, " ").concat((_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.cellphone);
+        setUserPhoneNumber(phone);
+        return;
+      }
 
       if (user !== null && user !== void 0 && user.country_phone_code) {
         phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone);
