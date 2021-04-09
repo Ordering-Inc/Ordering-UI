@@ -158,8 +158,7 @@ export const UserFormDetailsUI = (props) => {
       })
     })
 
-    fieldsSorted.push(validationsFieldsArray.filter(field => !fields.includes(field.code)))
-    setValidationFieldsSorted(flatArray(fieldsSorted))
+    setValidationFieldsSorted(fieldsSorted)
   }
 
   useEffect(() => {
@@ -229,7 +228,7 @@ export const UserFormDetailsUI = (props) => {
                 <React.Fragment key={field.id}>
                   <Input
                     key={field.id}
-                    type={(field.id >= 1 && field.id < 6) || field.id >= 55 ? field.type : 'hidden'}
+                    type={field.type}
                     name={field.code}
                     className='form'
                     disabled={!isEdit}
