@@ -141,11 +141,9 @@ const AddressListUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
         {
           (!isPopover || !addressOpen) && (
@@ -198,6 +196,7 @@ const AddressListUI = (props) => {
           !orderState.loading &&
           !addressList.error &&
           addressList?.addresses?.length > 0 &&
+          typeof orderState.options?.address === 'object' &&
           ((!addressOpen && isPopover) || isModal) && (
             <AddressListUl id='list'>
               {uniqueAddressesList.map(address => (
@@ -240,13 +239,19 @@ const AddressListUI = (props) => {
           )
         )}
 
+        {!addressList.loading && (typeof orderState.options?.address !== 'object') && !addressList.error && (
+          <NotFoundSource
+            content={t('NETWORK_ERROR', 'Network error, please reload the page')}
+          />
+        )}
+
         {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && (
           <AddressListUl>
             <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
           </AddressListUl>
         )}
 
-        {onCancel && onAccept && (
+        {onCancel && onAccept && typeof orderState.options?.address === 'object' && (
           <FormActions>
             <Button
               outline
@@ -279,13 +284,11 @@ const AddressListUI = (props) => {
         />
       </AddressListContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

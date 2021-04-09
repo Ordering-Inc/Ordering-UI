@@ -119,7 +119,7 @@ const PaymentOptionsUI = (props) => {
               >
                 {getPayIcon(paymethod.id)}
                 <p>
-                  {paymethod.name}
+                  {t(paymethod.gateway.toUpperCase(), paymethod.name)}
                 </p>
               </PayCard>
             ))

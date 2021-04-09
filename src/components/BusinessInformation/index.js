@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
+import { useTheme } from 'styled-components'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
@@ -29,7 +30,11 @@ import {
   BusinessLogo,
   ModalIcon,
   Description,
-  ImageContainer
+  ImageContainer,
+  OffersSection,
+  OfferText,
+  OfferTextP,
+  OfferTable
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
@@ -51,6 +56,7 @@ export const BusinessInformationUI = (props) => {
     onClose
   } = props
 
+  const theme = useTheme()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -96,13 +102,13 @@ export const BusinessInformationUI = (props) => {
         <BusinessHeader>
           <img src={business.header} alt='business-image' width='444px' height='250px' loading='lazy' />
           <BusinessBasicContent>
-            {business?.logo && (
+            {(business?.logo || theme.images?.dummies?.businessLogo) && (
               <WrapperBusinessLogo>
                 <BusinessLogo
                   bgimage={
                     optimizeImage
-                      ? optimizeImage(business?.logo, 'h_200,c_limit')
-                      : business?.logo
+                      ? optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')
+                      : business?.logo || theme.images?.dummies?.businessLogo
                   }
                 />
               </WrapperBusinessLogo>
@@ -160,11 +166,16 @@ export const BusinessInformationUI = (props) => {
                     {t('REVIEWS', 'Reviews')}
                   </Tab>
                 )}
+                {business?.offers?.length > 0 && (
+                  <Tab onClick={() => setTabValue('Offers')} active={tabValue === 'Offers'}>
+                    {t('OFFERS', 'Offers')}
+                  </Tab>
+                )}
               </Tabs>
             </FlexTabs>
           )}
 
-          {tabValue === 'General Info' ? (
+          {tabValue === 'General Info' && (
             <>
               {business.about && (
                 <>
@@ -241,7 +252,9 @@ export const BusinessInformationUI = (props) => {
                 </BusinessMediaContent>
               )}
             </>
-          ) : (
+          )}
+
+          {tabValue === 'Reviews' && (
             <>
               {business.reviews?.reviews && (
                 <BusinessReviews
@@ -252,6 +265,43 @@ export const BusinessInformationUI = (props) => {
                 />
               )}
             </>
+          )}
+
+          {tabValue === 'Offers' && (
+            <OffersSection>
+              <OfferText>
+                <OfferTextP>{t('DISCOUNTS_OF', 'Discounts of')} {business?.name}</OfferTextP>
+                <OfferTextP>{business?.address}</OfferTextP>
+              </OfferText>
+              <OfferTable>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>{t('OFFERT_NAME', 'Offer Name')}</th>
+                      <th>{t('OFFERT_PRICE', 'Offer Price')}</th>
+                      <th>{t('OFFERT_START_DATE', 'Start Date')}</th>
+                      <th>{t('OFFERT_END_DATE', 'End Date')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {business?.offers?.map(offer => (
+                      <tr key={offer.id}>
+                        <td>{offer.name}</td>
+                        <td>
+                          {offer.rate_type === 1 ? (
+                            `${offer.rate} % ${t('MIN', 'Min')}: ${parsePrice(offer.minimum)}`
+                          ) : (
+                            `${parsePrice(offer.rate)} ${t('MIN', 'Min')}: ${parsePrice(offer.minimum)}`
+                          )}
+                        </td>
+                        <td>{offer.start}</td>
+                        <td>{offer.end}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </OfferTable>
+            </OffersSection>
           )}
         </BusinessContent>
         <Modal

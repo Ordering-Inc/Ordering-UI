@@ -98,7 +98,7 @@ export const App = () => {
       <ListenPageChanges />
       {
         !loaded && (
-          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+          <SpinnerLoader />
         )
       }
       {
@@ -154,7 +154,7 @@ export const App = () => {
                             ? <Redirect to='/search' />
                             : <Redirect to='/' />
                         ) : (
-                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                          <SpinnerLoader />
                         )
                         )
                     }
@@ -175,7 +175,7 @@ export const App = () => {
                             ? <Redirect to='/search' />
                             : <Redirect to='/' />
                         ) : (
-                          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                          <SpinnerLoader />
                         )
                         )
                     }
@@ -203,7 +203,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/search'>
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
-                      <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading delicious food...')} />
+                      <SpinnerLoader />
                     ) : (
                       orderStatus.options?.address?.location
                         ? <BusinessesList />

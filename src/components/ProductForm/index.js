@@ -175,7 +175,7 @@ const ProductOptionsUI = (props) => {
               <ProductFormTitle>
                 <h1>{product?.name}</h1>
                 {product?.description && <p>{product?.description}</p>}
-                {product?.sku && (
+                {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
                   <SkuContent>
                     <h2>{t('SKU', 'Sku')}</h2>
                     <p>{product?.sku}</p>
