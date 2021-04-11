@@ -28,7 +28,8 @@ export const UserFormDetailsUI = (props) => {
     handleChangeInput,
     handleButtonUpdateClick,
     isCheckout,
-    userData
+    userData,
+    isCustomerMode
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -105,15 +106,12 @@ export const UserFormDetailsUI = (props) => {
           cellphone: ''
         }
       }
+      if (isCustomerMode) {
+        setUserCustomer(formState.result.result, true)
+      }
       handleButtonUpdateClick(changes)
     }
   }
-
-  useEffect(() => {
-    if (!formState.loading && !formState.result.error && formState.result.result) {
-      setUserCustomer(formState.result.result, true)
-    }
-  }, [formState.result.result])
 
   const handleChangePhoneNumber = (number, isValid) => {
     setUserPhoneNumber(number)

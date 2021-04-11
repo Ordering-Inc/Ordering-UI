@@ -282,7 +282,7 @@ export const Header = (props) => {
             )}
           </Modal>
         )}
-        {isCustomerMode && (
+        {isCustomerMode && customerModalOpen && (
           <Modal
             open={customerModalOpen}
             width='60%'
@@ -294,6 +294,7 @@ export const Header = (props) => {
                   <UserDetails
                     userData={customerState?.user}
                     userId={customerState?.user?.id}
+                    isCustomerMode
                   />
                   <AddressList
                     isModal

@@ -231,7 +231,7 @@ const CheckoutUI = (props) => {
                     useValidationFields
                     useDefualtSessionManager
                     useSessionUser
-                    isCheckout
+                    isCustomerMode={isCustomerMode}
                     userData={isCustomerMode && customerState.user}
                   />
                 )}

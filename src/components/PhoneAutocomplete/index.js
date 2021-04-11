@@ -145,6 +145,7 @@ const PhoneAutocompleteUI = (props) => {
               <UserDetails
                 userData={customerState?.result}
                 userId={customerState?.result?.id}
+                isCustomerMode
               />
               <AddressList
                 isModal

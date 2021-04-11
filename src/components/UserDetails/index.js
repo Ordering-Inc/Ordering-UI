@@ -21,7 +21,7 @@ const UserDetailsUI = (props) => {
     toggleIsEdit,
     validationFields,
     isUserDetailsEdit,
-    isCheckout
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -83,7 +83,7 @@ const UserDetailsUI = (props) => {
             </UserData>
           ) : (
             <SideForm>
-              <UserFormDetailsUI {...props} />
+              <UserFormDetailsUI {...props} isCustomerMode={isCustomerMode} />
             </SideForm>
           )}
         </Container>

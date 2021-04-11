@@ -42,7 +42,7 @@ const UserProfileFormUI = (props) => {
     formState,
     cleanFormState,
     toggleIsEdit,
-    isCustomerMode
+    isHiddenAddress
   } = props
 
   const [, t] = useLanguage()
@@ -104,16 +104,14 @@ const UserProfileFormUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
-      {!isCustomerMode && (
+        <BeforeComponent key={i} {...props} />))}
+      {!isHiddenAddress && (
         <ProfileOptions value='account' />
       )}
       <Container>
-        <UserProfileContainer mbottom={isCustomerMode && 25}>
+        <UserProfileContainer mbottom={isHiddenAddress && 25}>
           <UserImage className='user-image'>
             <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
               <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
@@ -168,13 +166,14 @@ const UserProfileFormUI = (props) => {
                   {...props}
                   onCancel={toggleEditState}
                   onCloseProfile={() => setEdit(false)}
+                  isHiddenAddress={isHiddenAddress}
                 />
               </WrapperForm>
             )}
 
           </SideForm>
         </UserProfileContainer>
-        {(userData?.addresses || user?.addresses) && !isCustomerMode && (
+        {(userData?.addresses || user?.addresses) && !isHiddenAddress && (
           <SavedPlaces>
             <h1>Saved Places</h1>
             <AddressList isModal addressList={user?.addresses} />
@@ -191,13 +190,11 @@ const UserProfileFormUI = (props) => {
         closeOnBackdrop={false}
       />
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
