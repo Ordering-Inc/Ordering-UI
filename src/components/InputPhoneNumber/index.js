@@ -36,11 +36,9 @@ export const InputPhoneNumber = (props) => {
         {props.beforeElements?.map((BeforeElement, i) => (
           <React.Fragment key={i}>
             {BeforeElement}
-          </React.Fragment>))
-        }
+          </React.Fragment>))}
         {props.beforeComponents?.map((BeforeComponent, i) => (
-          <BeforeComponent key={i} {...props} />))
-        }
+          <BeforeComponent key={i} {...props} />))}
         <PhoneInput
           disabled={disabled}
           placeholder={t('PHONE_NUMBER', 'Phone number')}
@@ -61,13 +59,11 @@ export const InputPhoneNumber = (props) => {
           </>
         )}
         {props.afterComponents?.map((AfterComponent, i) => (
-          <AfterComponent key={i} {...props} />))
-        }
+          <AfterComponent key={i} {...props} />))}
         {props.afterElements?.map((AfterElement, i) => (
           <React.Fragment key={i}>
             {AfterElement}
-          </React.Fragment>))
-        }
+          </React.Fragment>))}
       </>
     </Container>
   )

@@ -20,7 +20,8 @@ const UserDetailsUI = (props) => {
     cartStatus,
     toggleIsEdit,
     validationFields,
-    isUserDetailsEdit
+    isUserDetailsEdit,
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -43,11 +44,9 @@ const UserDetailsUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       {(validationFields.loading || formState.loading) && (
         <UserData>
           <Skeleton width={250} height={25} />
@@ -84,19 +83,17 @@ const UserDetailsUI = (props) => {
             </UserData>
           ) : (
             <SideForm>
-              <UserFormDetailsUI {...props} />
+              <UserFormDetailsUI {...props} isCustomerMode={isCustomerMode} />
             </SideForm>
           )}
         </Container>
       )}
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

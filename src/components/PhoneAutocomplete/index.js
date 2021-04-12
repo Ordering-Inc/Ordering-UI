@@ -58,8 +58,10 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const handleFindClick = () => {
-    if (userCustomer?.id) {
+    if (userCustomer?.id && userCustomer?.address) {
       onRedirectPage && onRedirectPage('search')
+    } else {
+      setAlertState({ open: true, content: t('SELECT_ADDRESS_CUSTOMER', 'Please select an address for the selected customer') })
     }
   }
 
@@ -74,11 +76,9 @@ const PhoneAutocompleteUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <PhoneContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
           <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
@@ -116,7 +116,7 @@ const PhoneAutocompleteUI = (props) => {
               name='find'
               onClick={() => handleFindClick()}
               disabled={!userCustomer?.id}
-              >
+            >
               {userCustomer?.id ? (
                 `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
               ) : (
@@ -147,15 +147,14 @@ const PhoneAutocompleteUI = (props) => {
               <UserDetails
                 userData={customerState?.result}
                 userId={customerState?.result?.id}
+                isCustomerMode
               />
               <AddressList
                 isModal
                 userId={customerState?.result?.id}
                 changeOrderAddressWithDefault
                 userCustomerSetup={{
-                  id: customerState?.result?.id,
-                  name: customerState?.result?.name,
-                  lastname: customerState?.result?.lastname,
+                  ...customerState?.result,
                   phone
                 }}
               />
@@ -171,13 +170,11 @@ const PhoneAutocompleteUI = (props) => {
         onAccept={handleCloseAlert}
       />
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
