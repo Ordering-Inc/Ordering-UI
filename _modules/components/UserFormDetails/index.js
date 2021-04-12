@@ -73,7 +73,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
       isCheckout = props.isCheckout,
-      userData = props.userData;
+      userData = props.userData,
+      isCustomerMode = props.isCustomerMode;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -110,6 +111,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       alertState = _useState8[0],
       setAlertState = _useState8[1];
+
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 2),
+      setUserCustomer = _useCustomer2[1].setUserCustomer;
 
   var user = userData || userSession;
 
@@ -198,6 +203,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
           country_phone_code: '',
           cellphone: ''
         };
+      }
+
+      if (isCustomerMode) {
+        setUserCustomer(formState.result.result, true);
       }
 
       handleButtonUpdateClick(changes);
@@ -361,16 +370,12 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  }), !!showInputPhoneNumber && !userData && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
-  }), userData && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    value: (userData === null || userData === void 0 ? void 0 : userData.phone) || (userData === null || userData === void 0 ? void 0 : userData.cellphone),
-    className: "form",
-    name: "cellphone"
   }), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

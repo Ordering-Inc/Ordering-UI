@@ -182,7 +182,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, {
-    isClosed: isClosed
+    isClosed: isClosed,
+    isCartOnProductsList: isCartOnProductsList
   }, /*#__PURE__*/_react.default.createElement(_styles.Accordion, {
     isClosed: isClosed,
     className: "accordion ".concat(setActive),

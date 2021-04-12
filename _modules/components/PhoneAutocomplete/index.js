@@ -64,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _customerState$result, _customerState$result2, _customerState$result3, _customerState$result4, _customerState$result5, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _customerState$result, _customerState$result2, _props$afterComponent, _props$afterElements;
 
   var phone = props.phone,
       customerState = props.customerState,
@@ -117,8 +117,13 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   };
 
   var handleFindClick = function handleFindClick() {
-    if (userCustomer !== null && userCustomer !== void 0 && userCustomer.id) {
+    if (userCustomer !== null && userCustomer !== void 0 && userCustomer.id && userCustomer !== null && userCustomer !== void 0 && userCustomer.address) {
       onRedirectPage && onRedirectPage('search');
+    } else {
+      setAlertState({
+        open: true,
+        content: t('SELECT_ADDRESS_CUSTOMER', 'Please select an address for the selected customer')
+      });
     }
   };
 
@@ -193,17 +198,15 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     userData: customerState === null || customerState === void 0 ? void 0 : customerState.result,
-    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id
+    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
+    isCustomerMode: true
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
     changeOrderAddressWithDefault: true,
-    userCustomerSetup: {
-      id: customerState === null || customerState === void 0 ? void 0 : (_customerState$result3 = customerState.result) === null || _customerState$result3 === void 0 ? void 0 : _customerState$result3.id,
-      name: customerState === null || customerState === void 0 ? void 0 : (_customerState$result4 = customerState.result) === null || _customerState$result4 === void 0 ? void 0 : _customerState$result4.name,
-      lastname: customerState === null || customerState === void 0 ? void 0 : (_customerState$result5 = customerState.result) === null || _customerState$result5 === void 0 ? void 0 : _customerState$result5.lastname,
+    userCustomerSetup: _objectSpread(_objectSpread({}, customerState === null || customerState === void 0 ? void 0 : customerState.result), {}, {
       phone: phone
-    }
+    })
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,

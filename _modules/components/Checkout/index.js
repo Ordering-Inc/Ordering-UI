@@ -102,7 +102,8 @@ var CheckoutUI = function CheckoutUI(props) {
       paymethodSelected = props.paymethodSelected,
       handlePaymethodChange = props.handlePaymethodChange,
       handlerClickPlaceOrder = props.handlerClickPlaceOrder,
-      handleOrderRedirect = props.handleOrderRedirect;
+      handleOrderRedirect = props.handleOrderRedirect,
+      isCustomerMode = props.isCustomerMode;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
@@ -130,6 +131,10 @@ var CheckoutUI = function CheckoutUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
+
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 1),
+      customerState = _useCustomer2[0];
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -305,7 +310,8 @@ var CheckoutUI = function CheckoutUI(props) {
     useValidationFields: true,
     useDefualtSessionManager: true,
     useSessionUser: true,
-    isCheckout: true
+    isCustomerMode: isCustomerMode,
+    userData: isCustomerMode && customerState.user
   }))), (_props$beforeElements4 = props.beforeElementsSectionThree) === null || _props$beforeElements4 === void 0 ? void 0 : _props$beforeElements4.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -359,7 +365,8 @@ var CheckoutUI = function CheckoutUI(props) {
     errorCash: errorCash,
     setErrorCash: setErrorCash,
     handleOrderRedirect: handleOrderRedirect,
-    isPaymethodNull: paymethodSelected
+    isPaymethodNull: paymethodSelected,
+    isCustomerMode: isCustomerMode
   })), (_props$beforeElements6 = props.beforeElementsSectionFive) === null || _props$beforeElements6 === void 0 ? void 0 : _props$beforeElements6.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

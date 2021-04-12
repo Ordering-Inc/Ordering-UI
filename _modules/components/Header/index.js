@@ -49,6 +49,8 @@ var _HeaderOption = require("../HeaderOption");
 
 var _SidebarMenu = require("../SidebarMenu");
 
+var _UserDetails = require("../UserDetails");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -76,7 +78,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _orderState$options2, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _orderState$options2, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _customerState$user, _customerState$user2, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
@@ -112,15 +114,24 @@ var Header = function Header(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
 
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 1),
+      customerState = _useCustomer2[0];
+
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       modalIsOpen = _useState4[0],
       setModalIsOpen = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      modalSelected = _useState6[0],
-      setModalSelected = _useState6[1];
+      customerModalOpen = _useState6[0],
+      setCustomerModalOpen = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      modalSelected = _useState8[0],
+      setModalSelected = _useState8[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     return cart.products.length > 0;
@@ -198,7 +209,10 @@ var Header = function Header(props) {
   })), isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header"
   }, isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
-    isHome: isHome
+    isHome: isHome,
+    onClick: function onClick() {
+      return setCustomerModalOpen(true);
+    }
   }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null), /*#__PURE__*/_react.default.createElement("p", null, userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ", userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname))), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: configTypes
   }), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
@@ -331,7 +345,22 @@ var Header = function Header(props) {
     onSaveAddress: function onSaveAddress() {
       return setModalIsOpen(false);
     }
-  })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null)), isCustomerMode && customerModalOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: customerModalOpen,
+    width: "60%",
+    onClose: function onClose() {
+      return setCustomerModalOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+    userData: customerState === null || customerState === void 0 ? void 0 : customerState.user,
+    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.id,
+    isCustomerMode: true
+  }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    isModal: true,
+    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id,
+    changeOrderAddressWithDefault: true,
+    userCustomerSetup: customerState.user
+  }))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

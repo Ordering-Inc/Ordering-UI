@@ -66,7 +66,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       formState = props.formState,
       cleanFormState = props.cleanFormState,
       toggleIsEdit = props.toggleIsEdit,
-      isCustomerMode = props.isCustomerMode;
+      isHiddenAddress = props.isHiddenAddress;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -155,10 +155,10 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
+  }), !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "account"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
-    mbottom: isCustomerMode && 25
+    mbottom: isHiddenAddress && 25
   }, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
@@ -213,8 +213,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onCancel: toggleEditState,
     onCloseProfile: function onCloseProfile() {
       return setEdit(false);
-    }
-  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    },
+    isHiddenAddress: isHiddenAddress
+  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, "Saved Places"), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
