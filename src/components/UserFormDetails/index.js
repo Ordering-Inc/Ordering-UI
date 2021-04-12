@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useSession, useLanguage } from 'ordering-components'
+import { useSession, useLanguage, useCustomer } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 
@@ -28,7 +28,8 @@ export const UserFormDetailsUI = (props) => {
     handleChangeInput,
     handleButtonUpdateClick,
     isCheckout,
-    userData
+    userData,
+    isCustomerMode
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -39,6 +40,7 @@ export const UserFormDetailsUI = (props) => {
   const [validationFieldsSorted, setValidationFieldsSorted] = useState([])
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [, { setUserCustomer }] = useCustomer()
 
   const user = userData || userSession
 
@@ -108,6 +110,9 @@ export const UserFormDetailsUI = (props) => {
           country_phone_code: '',
           cellphone: ''
         }
+      }
+      if (isCustomerMode) {
+        setUserCustomer(formState.result.result, true)
       }
       handleButtonUpdateClick(changes)
     }
@@ -272,21 +277,13 @@ export const UserFormDetailsUI = (props) => {
                 })}
               />
             )}
-            {!!showInputPhoneNumber && !userData && (
+            {!!showInputPhoneNumber && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
                 disabled={!isEdit}
-              />
-            )}
-
-            {userData && (
-              <Input
-                value={userData?.phone || userData?.cellphone}
-                className='form'
-                name='cellphone'
               />
             )}
             {

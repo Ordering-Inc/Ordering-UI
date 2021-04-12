@@ -10,7 +10,8 @@ import {
   useLanguage,
   useUtils,
   useValidationFields,
-  useConfig
+  useConfig,
+  useCustomer
 } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -62,7 +63,8 @@ const CheckoutUI = (props) => {
     paymethodSelected,
     handlePaymethodChange,
     handlerClickPlaceOrder,
-    handleOrderRedirect
+    handleOrderRedirect,
+    isCustomerMode
   } = props
 
   const theme = useTheme()
@@ -72,6 +74,7 @@ const CheckoutUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
+  const [customerState] = useCustomer()
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
@@ -228,7 +231,8 @@ const CheckoutUI = (props) => {
                     useValidationFields
                     useDefualtSessionManager
                     useSessionUser
-                    isCheckout
+                    isCustomerMode={isCustomerMode}
+                    userData={isCustomerMode && customerState.user}
                   />
                 )}
               </WrapperUserDetails>
@@ -298,6 +302,7 @@ const CheckoutUI = (props) => {
                 setErrorCash={setErrorCash}
                 handleOrderRedirect={handleOrderRedirect}
                 isPaymethodNull={paymethodSelected}
+                isCustomerMode={isCustomerMode}
               />
             </PaymentMethodContainer>
           )}

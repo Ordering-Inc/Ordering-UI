@@ -74,7 +74,8 @@ const PaymentOptionsUI = (props) => {
     isPaymethodNull,
     handleOrderRedirect,
     handlePaymethodClick,
-    handlePaymethodDataChange
+    handlePaymethodDataChange,
+    isCustomerMode
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -102,26 +103,30 @@ const PaymentOptionsUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
           {paymethodsList.paymethods.length > 0 && (
             paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
-              <PayCard
-                isDisabled={isDisabled}
-                key={paymethod.id}
-                className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
-                onClick={() => handlePaymethodClick(paymethod)}
-              >
-                {getPayIcon(paymethod.id)}
-                <p>
-                  {t(paymethod.gateway.toUpperCase(), paymethod.name)}
-                </p>
-              </PayCard>
+              <>
+                {
+                  (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                    <PayCard
+                      isDisabled={isDisabled}
+                      key={paymethod.id}
+                      className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
+                      onClick={() => handlePaymethodClick(paymethod)}
+                    >
+                      {getPayIcon(paymethod.id)}
+                      <p>
+                        {t(paymethod.gateway.toUpperCase(), paymethod.name)}
+                      </p>
+                    </PayCard>
+                  )
+                }
+              </>
             ))
           )}
 
@@ -155,7 +160,7 @@ const PaymentOptionsUI = (props) => {
           />
         )}
 
-        {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && (
+        {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && !isCustomerMode && (
           <PayCardSelected>
             <CardItemContent>
               <span className='checks'>
@@ -270,13 +275,11 @@ const PaymentOptionsUI = (props) => {
         </Modal>
       </PaymentMethodsContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
