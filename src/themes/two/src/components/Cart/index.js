@@ -210,17 +210,17 @@ const CartUI = (props) => {
         {(onClickCheckout || isCheckoutPage) && !isCheckout && (
           <CheckoutAction>
             <Button
-              color={(cart?.subtotal < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
+              color={(!cart?.valid_maximum || !cart?.valid_minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
               onClick={() => handleClickCheckout()}
-              disabled={cart?.subtotal < cart?.minimum || !cart?.valid_address}
+              disabled={!cart?.valid_maximum || !cart?.valid_minimum || !cart?.valid_address}
             >
-              {(cart?.subtotal >= cart?.minimum || !cart?.minimum) && cart?.valid_address ? (
-                t('CHECKOUT', 'Checkout')
-              ) : !cart?.valid_address ? (
+              {!cart?.valid_address ? (
                 t('OUT_OF_COVERAGE', 'Out of Coverage')
-              ) : (
+              ) : !cart?.valid_maximum ? (
+                `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+              ) : !cart?.valid_minimum ? (
                 `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-              )}
+              ) : t('CHECKOUT', 'Checkout')}
             </Button>
           </CheckoutAction>
         )}
