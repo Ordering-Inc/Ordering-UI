@@ -4,7 +4,7 @@ export const PaymentCashContainer = styled.div`
   margin: 20px 0px 0px;
 `
 
-export const FormCash = styled.form`
+export const FormCash = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
