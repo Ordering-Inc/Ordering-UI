@@ -352,14 +352,16 @@ const BusinessProductsListingUI = (props) => {
       {currentCart?.products?.length > 0 && auth && windowSize.width < 768 && (
         <FloatingButton
           btnText={
-            currentCart?.subtotal >= currentCart?.minimum
-              ? t('VIEW_ORDER', 'View Order')
-              : `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
+            !currentCart?.valid_maximum ? (
+              `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
+            ) : !currentCart?.valid_minimum ? (
+              `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
+            ) : t('VIEW_ORDER', 'View Order')
           }
-          isSecondaryBtn={currentCart?.subtotal < currentCart?.minimum}
+          isSecondaryBtn={!currentCart?.valid_maximum || !currentCart?.valid_minimum}
           btnValue={currentCart?.products?.length}
           handleClick={() => onCheckoutRedirect(currentCart?.uuid)}
-          disabled={currentCart?.subtotal < currentCart?.minimum}
+          disabled={!currentCart?.valid_maximum || !currentCart?.valid_minimum}
         />
       )}
     </Container>

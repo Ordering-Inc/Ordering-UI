@@ -110,12 +110,11 @@ const PaymentOptionsUI = (props) => {
         <PaymentMethodsList className='payments-list'>
           {paymethodsList.paymethods.length > 0 && (
             paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
-              <>
+              <React.Fragment key={paymethod.id}>
                 {
                   (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                     <PayCard
                       isDisabled={isDisabled}
-                      key={paymethod.id}
                       className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
                       onClick={() => handlePaymethodClick(paymethod)}
                     >
@@ -126,7 +125,7 @@ const PaymentOptionsUI = (props) => {
                     </PayCard>
                   )
                 }
-              </>
+              </React.Fragment>
             ))
           )}
 
