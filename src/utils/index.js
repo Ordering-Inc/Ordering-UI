@@ -114,7 +114,8 @@ export const getTraduction = key => {
     ERROR_ADD_PRODUCT_BUSINESS_CLOSED: 'The business is closed at the moment',
     INTERNAL_ERROR: 'Server Error, please wait, we are working to fix it',
     PREPARED_IN: 'Preparation time',
-    DELIVERY_DATETIME: 'Delivery datetime'
+    DELIVERY_DATETIME: 'Delivery datetime',
+    ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)
