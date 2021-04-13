@@ -81,8 +81,8 @@ const PhoneAutocompleteUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <PhoneContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
-          <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-          <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
+          <Title>{t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')}</Title>
+          <Slogan>{t('SUBTITLE_HOME_CALLCENTER', 'Start First by adding the customers\' phone number')}</Slogan>
           <AutoComplete className='autocomplete'>
             <Input
               name='phone-input'
@@ -157,6 +157,7 @@ const PhoneAutocompleteUI = (props) => {
                   ...customerState?.result,
                   phone
                 }}
+                onRedirectPage={onRedirectPage}
               />
             </>
           )}

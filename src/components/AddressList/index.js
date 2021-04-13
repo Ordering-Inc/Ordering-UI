@@ -41,7 +41,8 @@ const AddressListUI = (props) => {
     onCancel,
     onAccept,
     userId,
-    userCustomerSetup
+    userCustomerSetup,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
@@ -107,8 +108,6 @@ const AddressListUI = (props) => {
   }
 
   const checkAddress = (address) => {
-    if (!orderState?.options?.address) return true
-
     const props = ['address', 'address_notes', 'zipcode', 'location', 'internal_number']
     const values = []
     props.forEach(prop => {
@@ -126,6 +125,11 @@ const AddressListUI = (props) => {
     return values.every(value => value)
   }
 
+  const goToBusinessList = () => {
+    if (userCustomerSetup) {
+      onRedirectPage && onRedirectPage('search')
+    }
+  }
   /**
    * Close modals and alerts
    */
