@@ -157,7 +157,7 @@ const PhoneAutocompleteUI = (props) => {
                   ...customerState?.result,
                   phone
                 }}
-                onRedirectPage={onRedirectPage}
+                isEnableContinueButton
               />
             </>
           )}
