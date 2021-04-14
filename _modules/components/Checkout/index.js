@@ -188,22 +188,23 @@ var CheckoutUI = function CheckoutUI(props) {
     setUserErrors([]);
     var errors = [];
     var notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes'];
+    var userSelected = isCustomerMode ? customerState.user : user;
     Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.checkout).map(function (field) {
       if (field !== null && field !== void 0 && field.required && !notFields.includes(field.code)) {
-        if (!user[field === null || field === void 0 ? void 0 : field.code]) {
+        if (!userSelected[field === null || field === void 0 ? void 0 : field.code]) {
           errors.push(t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "The field ".concat(field === null || field === void 0 ? void 0 : field.name, " is required")));
         }
       }
     });
 
-    if (!(user !== null && user !== void 0 && user.cellphone) && validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.checkout) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie4 = _validationFields$fie3.cellphone) !== null && _validationFields$fie4 !== void 0 && _validationFields$fie4.required) {
+    if (!(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.checkout) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie4 = _validationFields$fie3.cellphone) !== null && _validationFields$fie4 !== void 0 && _validationFields$fie4.required) {
       errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'));
     }
 
-    if (user !== null && user !== void 0 && user.cellphone) {
-      if (user !== null && user !== void 0 && user.country_phone_code) {
+    if (userSelected !== null && userSelected !== void 0 && userSelected.cellphone) {
+      if (userSelected !== null && userSelected !== void 0 && userSelected.country_phone_code) {
         var phone = null;
-        phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code).concat(user === null || user === void 0 ? void 0 : user.cellphone);
+        phone = "+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code).concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone);
         var phoneNumber = (0, _libphonenumberJs.default)(phone);
 
         if (!(phoneNumber !== null && phoneNumber !== void 0 && phoneNumber.isValid())) {

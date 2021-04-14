@@ -81,7 +81,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       handleSuccessSignup = props.handleSuccessSignup,
       isPopup = props.isPopup,
       externalPhoneNumber = props.externalPhoneNumber,
-      saveCustomerUser = props.saveCustomerUser;
+      saveCustomerUser = props.saveCustomerUser,
+      fieldsNotValid = props.fieldsNotValid;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -286,7 +287,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     className: "form",
     readOnly: true,
     name: "cellphone"
-  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     "aria-label": "password",
@@ -309,7 +310,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5)).map(function (item, i) {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5)).map(function (_, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

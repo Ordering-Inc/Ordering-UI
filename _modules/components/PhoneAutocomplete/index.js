@@ -145,7 +145,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.AutoComplete, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_CALLCENTER', 'Start First by adding the customers\' phone number')), /*#__PURE__*/_react.default.createElement(_styles.AutoComplete, {
     className: "autocomplete"
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "phone-input",
@@ -159,7 +159,11 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     maxLength: "10",
     autoComplete: "off",
     disabled: customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading
-  }), (customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    name: "phone-button",
+    id: "phone-button",
+    className: "phone-button"
+  }, t('SEE_PHONES', 'See phones')), (customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
       top: 0,
       position: 'absolute',
@@ -186,7 +190,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
     externalPhoneNumber: phone,
-    saveCustomerUser: saveCustomerUser
+    saveCustomerUser: saveCustomerUser,
+    fieldsNotValid: props.fieldsNotValid
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.customer,
     width: "60%",
@@ -206,7 +211,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     changeOrderAddressWithDefault: true,
     userCustomerSetup: _objectSpread(_objectSpread({}, customerState === null || customerState === void 0 ? void 0 : customerState.result), {}, {
       phone: phone
-    })
+    }),
+    isEnableContinueButton: true
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,

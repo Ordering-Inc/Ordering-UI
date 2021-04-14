@@ -35,20 +35,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -90,22 +76,14 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       optimizeImage = _useUtils2$.optimizeImage;
 
   var getBusinessType = function getBusinessType() {
-    var _Object$entries$reduc;
+    if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
+    var _types = [];
+    types.forEach(function (type) {
+      var _type$replace;
 
-    if (Object.keys(business).length <= 0) return 'none';
-    var typeObj = types.map(function (t) {
-      return _defineProperty({}, t, business[t]);
-    }).reduce(function (r, c) {
-      return _objectSpread(_objectSpread({}, r), c);
-    }, {});
-    var businessType = (_Object$entries$reduc = Object.entries(typeObj).reduce(function (a, _ref2) {
-      var _ref3 = _slicedToArray(_ref2, 2),
-          k = _ref3[0],
-          v = _ref3[1];
-
-      return v !== false ? [].concat(_toConsumableArray(a), [[k, v]]) : a;
-    }, [])) === null || _Object$entries$reduc === void 0 ? void 0 : _Object$entries$reduc[0];
-    return t("BUSINESS_TYPE_".concat(businessType === null || businessType === void 0 ? void 0 : businessType[0].replace(/\s/g, '_').toUpperCase()), businessType === null || businessType === void 0 ? void 0 : businessType[0]);
+      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
+    });
+    return _types.join(', ');
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
