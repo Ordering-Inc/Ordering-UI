@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessControllerUI = function BusinessControllerUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _business$reviews, _business$reviews2, _business$reviews3, _getBusinessType, _getBusinessType$repl, _orderState$options, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       business = props.business,
@@ -72,15 +72,13 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       parseNumber = _useUtils2$.parseNumber,
       optimizeImage = _useUtils2$.optimizeImage;
 
-  var types = ['food', 'laundry', 'alcohol', 'groceries'];
+  var types = ['food', 'alcohol', 'groceries', 'laundry'];
 
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
     var _types = [];
     types.forEach(function (type) {
-      if (business[type]) {
-        _types.push(t(type.toUpperCase(), type));
-      }
+      return business[type] && _types.push(type);
     });
     return _types.join(', ');
   };
@@ -122,7 +120,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "reviews"
   }, /*#__PURE__*/_react.default.createElement(_GrStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, parseNumber(business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total))) : (business === null || business === void 0 ? void 0 : (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total) !== 0 && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })), /*#__PURE__*/_react.default.createElement(_styles.Categories, null, Object.keys(business).length > 0 ? t("BUSINESS_TYPE_".concat(getBusinessType().replace(/\s/g, '_').toUpperCase()), getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Categories, null, Object.keys(business).length > 0 ? t("BUSINESS_TYPE_".concat((_getBusinessType = getBusinessType()) === null || _getBusinessType === void 0 ? void 0 : (_getBusinessType$repl = _getBusinessType.replace(/\s/g, '_')) === null || _getBusinessType$repl === void 0 ? void 0 : _getBusinessType$repl.toUpperCase()), getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), /*#__PURE__*/_react.default.createElement(_styles.Medadata, null, Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("p", {
     className: "bullet"

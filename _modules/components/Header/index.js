@@ -15,6 +15,8 @@ var _styledComponents = require("styled-components");
 
 var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _styles = require("./styles");
 
 var _useWindowSize = require("../../hooks/useWindowSize");
@@ -50,6 +52,8 @@ var _HeaderOption = require("../HeaderOption");
 var _SidebarMenu = require("../SidebarMenu");
 
 var _UserDetails = require("../UserDetails");
+
+var _Confirm = require("../Confirm");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -100,8 +104,9 @@ var Header = function Header(props) {
       auth = _useSession2[0].auth;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      orderState = _useOrder2[0],
+      refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
 
   var _useState = (0, _react.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -115,8 +120,11 @@ var Header = function Header(props) {
       configState = _useConfig2[0];
 
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
-      _useCustomer2 = _slicedToArray(_useCustomer, 1),
-      customerState = _useCustomer2[0];
+      _useCustomer2 = _slicedToArray(_useCustomer, 2),
+      customerState = _useCustomer2[0],
+      deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+
+  var clearCustomer = (0, _react.useRef)(null);
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -133,6 +141,15 @@ var Header = function Header(props) {
       modalSelected = _useState8[0],
       setModalSelected = _useState8[1];
 
+  var _useState9 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState10 = _slicedToArray(_useState9, 2),
+      confirm = _useState10[0],
+      setConfirm = _useState10[1];
+
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     return cart.products.length > 0;
   }) || null;
@@ -142,6 +159,32 @@ var Header = function Header(props) {
   var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
+
+  var handleClickUserCustomer = function handleClickUserCustomer(e) {
+    var _clearCustomer$curren;
+
+    var isActionsClick = (_clearCustomer$curren = clearCustomer.current) === null || _clearCustomer$curren === void 0 ? void 0 : _clearCustomer$curren.contains(e === null || e === void 0 ? void 0 : e.target);
+
+    if (isActionsClick) {
+      setConfirm({
+        open: true,
+        content: t('QUESTION_CLEAR_CUSTOMER', 'Are you sure that you want to clear the customer?'),
+        handleOnAccept: function handleOnAccept() {
+          deleteUserCustomer(true);
+          refreshOrderOptions();
+          handleGoToPage({
+            page: 'home'
+          });
+          setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+            open: false
+          }));
+        }
+      });
+      return;
+    }
+
+    setCustomerModalOpen(true);
+  };
 
   var openModal = function openModal(opt) {
     setModalSelected(opt);
@@ -210,10 +253,15 @@ var Header = function Header(props) {
     className: "left-header"
   }, isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
     isHome: isHome,
-    onClick: function onClick() {
-      return setCustomerModalOpen(true);
+    onClick: function onClick(e) {
+      return handleClickUserCustomer(e);
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null), /*#__PURE__*/_react.default.createElement("p", null, userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ", userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname))), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null), /*#__PURE__*/_react.default.createElement("p", null, userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ", userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname)), /*#__PURE__*/_react.default.createElement("span", {
+    style: styles.headCustomer,
+    ref: clearCustomer
+  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    style: styles.clearCustomer
+  }))), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: configTypes
   }), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
@@ -360,7 +408,24 @@ var Header = function Header(props) {
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id,
     changeOrderAddressWithDefault: true,
     userCustomerSetup: customerState.user
-  }))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    title: t('CUSTOMER', 'Customer'),
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: isCustomerMode && confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
@@ -372,6 +437,20 @@ var Header = function Header(props) {
 };
 
 exports.Header = Header;
+var styles = {
+  headCustomer: {
+    margin: 0,
+    height: 20,
+    width: 20,
+    backgroundColor: '#CCCCCC',
+    borderRadius: '100%',
+    marginLeft: 5
+  },
+  clearCustomer: {
+    margin: 0,
+    fontSize: 20
+  }
+};
 Header.defaultProps = {
   isShowOrderOptions: true
 };
