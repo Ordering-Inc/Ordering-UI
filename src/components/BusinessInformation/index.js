@@ -213,8 +213,14 @@ export const BusinessInformationUI = (props) => {
                           {businessSchedule.map((schedule, i) => (
                             <ScheduleBlock key={i}>
                               <h4>{daysOfWeek[i]}</h4>
-                              <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
-                              <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
+                              {schedule.enabled ? (
+                                <>
+                                  <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
+                                  <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
+                                </>
+                              ) : (
+                                <p style={{ fontWeight: 500 }}>{t('CLOSED_TODAY', 'Closed Today')}</p>
+                              )}
                             </ScheduleBlock>
                           ))}
                         </AutoScroll>
