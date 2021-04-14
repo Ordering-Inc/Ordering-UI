@@ -178,9 +178,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   }, paymethodsList.paymethods.length > 0 && paymethodsList.paymethods.sort(function (a, b) {
     return a.id - b.id;
   }).map(function (paymethod) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: paymethod.id
+    }, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled,
-      key: paymethod.id,
       className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {
         return handlePaymethodClick(paymethod);

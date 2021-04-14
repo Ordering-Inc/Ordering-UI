@@ -381,13 +381,13 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_BusinessCartContent.BusinessCartContent, {
     isSkeleton: true
   }), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && auth && windowSize.width < 768 && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
-    btnText: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.subtotal) >= (currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum) ? t('VIEW_ORDER', 'View Order') : "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)),
-    isSecondaryBtn: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.subtotal) < (currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum),
+    btnText: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.maximum)) : !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)) : t('VIEW_ORDER', 'View Order'),
+    isSecondaryBtn: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum),
     btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length,
     handleClick: function handleClick() {
       return onCheckoutRedirect(currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid);
     },
-    disabled: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.subtotal) < (currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)
+    disabled: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum)
   }));
 };
 

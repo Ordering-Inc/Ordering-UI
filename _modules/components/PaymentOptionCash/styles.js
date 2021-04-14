@@ -21,7 +21,7 @@ var PaymentCashContainer = _styledComponents.default.div(_templateObject || (_te
 
 exports.PaymentCashContainer = PaymentCashContainer;
 
-var FormCash = _styledComponents.default.form(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  label {\n    font-size: 16px;\n    margin-right: 20px;\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    label {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
+var FormCash = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  label {\n    font-size: 16px;\n    margin-right: 20px;\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    label {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n        margin-right: 0;\n    "])));
