@@ -227,7 +227,7 @@ const AddressListUI = (props) => {
                 </AddressItem>
               ))}
               {isEnableContinueButton && uniqueAddressesList.map(address => address.default && (
-                <ContinueButton>
+                <ContinueButton key={address.id}>
                   <Button color='primary' onClick={() => handleSetAddress(address)}>
                     {t('CONTINUE_WITH', 'Continue with')}: {address.address}
                   </Button>
