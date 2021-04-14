@@ -46,7 +46,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       isBusinessesPage = props.isBusinessesPage,
       handleReorder = props.handleReorder,
       customArray = props.customArray,
-      onRedirectPage = props.onRedirectPage;
+      onRedirectPage = props.onRedirectPage,
+      businessesIds = props.businessesIds;
   var orders = customArray || props.orders;
   var theme = (0, _styledComponents.useTheme)();
 
@@ -63,6 +64,10 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
       parseDate = _useUtils2$.parseDate;
+
+  var ordersToShow = businessesIds ? orders.filter(function (order) {
+    return businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id);
+  }) : orders;
 
   var handleClickCard = function handleClickCard(uuid) {
     if (customArray) {
@@ -93,7 +98,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
         key: i
       }, props));
-    }), orders.length > 0 && orders.map(function (order) {
+    }), orders.length > 0 && ordersToShow.map(function (order) {
       var _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _order$summary, _getOrderStatus;
 
       return /*#__PURE__*/_react.default.createElement(_styles.Card, {

@@ -282,7 +282,9 @@ var AddressListUI = function AddressListUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, null))));
   }), isEnableContinueButton && uniqueAddressesList.map(function (address) {
-    return address.default && /*#__PURE__*/_react.default.createElement(_styles.ContinueButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    return address.default && /*#__PURE__*/_react.default.createElement(_styles.ContinueButton, {
+      key: address.id
+    }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleSetAddress(address);

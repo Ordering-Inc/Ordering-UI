@@ -74,7 +74,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _getCustomArray, _businessesList$busin, _businessesList$busin2, _orderState$options5, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _getCustomArray, _businessesList$busin2, _businessesList$busin3, _orderState$options5, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -125,6 +125,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       setMapErrors = _useState8[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+  var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
+    return business.id;
+  }));
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle;
 
@@ -233,6 +236,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isBusinessesPage: true,
     onRedirectPage: onRedirectPage,
     titleContent: t('CARTS', 'Carts'),
+    businessesIds: businessesIds,
     customArray: (_getCustomArray = getCustomArray(orderState.carts)) === null || _getCustomArray === void 0 ? void 0 : _getCustomArray.filter(function (cart) {
       return cart.products.length > 0;
     })
@@ -240,9 +244,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     horizontal: true,
     asDashboard: true,
     isBusinessesPage: true,
+    businessesIds: businessesIds,
     onRedirectPage: onRedirectPage,
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id
-  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin2 = businessesList.businesses) === null || _businessesList$busin2 === void 0 ? void 0 : _businessesList$busin2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
@@ -250,7 +255,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: function onClick() {
       return handleClickAddress();
     }
-  }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin2 = businessesList.businesses) === null || _businessesList$busin2 === void 0 ? void 0 : _businessesList$busin2.map(function (business) {
+  }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.map(function (business) {
     var _orderState$options3;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {

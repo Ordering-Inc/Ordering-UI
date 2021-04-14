@@ -159,7 +159,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     maxLength: "10",
     autoComplete: "off",
     disabled: customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), phone && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     name: "phone-button",
     id: "phone-button",
     className: "phone-button"

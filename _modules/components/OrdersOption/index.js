@@ -74,7 +74,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       loadMoreOrders = props.loadMoreOrders,
       titleContent = props.titleContent,
       customArray = props.customArray,
-      onRedirectPage = props.onRedirectPage;
+      onRedirectPage = props.onRedirectPage,
+      businessesIds = props.businessesIds;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -91,6 +92,11 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       values = orderList.orders;
   var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
   var orders = customArray || values;
+  var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
+    return businessesIds && businessesIds.includes(order.business_id);
+  }).every(function (i) {
+    return !i;
+  }) : orders.length > 0;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -216,7 +222,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), (orders.length > 0 || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
+  }), (isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
     isBusinessesPage: isBusinessesPage
   }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders')))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
@@ -258,6 +264,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       width: 80
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   })), !loading && !error && orders.length > 0 && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
+    businessesIds: businessesIds,
     orders: ordersSorted,
     pagination: pagination,
     onRedirectPage: onRedirectPage,
