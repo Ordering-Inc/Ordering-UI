@@ -108,7 +108,6 @@ export const BusinessInfoItem = styled.div`
       display: flex;
       align-items: center;
       margin: 0px;
-      text-transform: capitalize;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;

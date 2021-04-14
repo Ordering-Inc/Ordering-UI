@@ -40,16 +40,12 @@ const BusinessControllerUI = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, parseNumber, optimizeImage }] = useUtils()
 
-  const types = ['food', 'laundry', 'alcohol', 'groceries']
+  const types = ['food', 'alcohol', 'groceries', 'laundry']
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
-    types.forEach(type => {
-      if (business[type]) {
-        _types.push(t(type.toUpperCase(), type))
-      }
-    })
+    types.forEach(type => business[type] && _types.push(type))
     return _types.join(', ')
   }
 
@@ -110,7 +106,7 @@ const BusinessControllerUI = (props) => {
                 <Categories>
                   {
                     Object.keys(business).length > 0 ? (
-                      t(`BUSINESS_TYPE_${getBusinessType().replace(/\s/g, '_').toUpperCase()}`, getBusinessType())
+                      t(`BUSINESS_TYPE_${getBusinessType()?.replace(/\s/g, '_')?.toUpperCase()}`, getBusinessType())
                     ) : (
                       <Skeleton width={100} />
                     )
