@@ -148,8 +148,11 @@ export const SubMenu = styled(InnerHeader)`
 export const CustomerInfo = styled.div`
   display: none;
   cursor: pointer;
+
   @media (min-width: 450px) {
-    display: initial;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     span {
       display: flex;

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
+import MdClose from '@meronex/icons/md/MdClose'
 
 import {
   Header as HeaderContainer,
@@ -33,6 +34,7 @@ import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../UserDetails'
+import { Confirm } from '../Confirm'
 
 export const Header = (props) => {
   const {
@@ -47,15 +49,19 @@ export const Header = (props) => {
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
-  const [orderState] = useOrder()
+  const [orderState, { refreshOrderOptions }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
   const [configState] = useConfig()
-  const [customerState] = useCustomer()
+  const [customerState, { deleteUserCustomer }] = useCustomer()
+
+  const clearCustomer = useRef(null)
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products.length > 0)) || null
 
   const windowSize = useWindowSize()
@@ -64,6 +70,24 @@ export const Header = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+
+  const handleClickUserCustomer = (e) => {
+    const isActionsClick = clearCustomer.current?.contains(e?.target)
+    if (isActionsClick) {
+      setConfirm({
+        open: true,
+        content: t('QUESTION_CLEAR_CUSTOMER', 'Are you sure that you want to clear the customer?'),
+        handleOnAccept: () => {
+          deleteUserCustomer(true)
+          refreshOrderOptions()
+          handleGoToPage({ page: 'home' })
+          setConfirm({ ...confirm, open: false })
+        }
+      })
+      return
+    }
+    setCustomerModalOpen(true)
+  }
 
   const openModal = (opt) => {
     setModalSelected(opt)
@@ -124,10 +148,19 @@ export const Header = (props) => {
             {isShowOrderOptions && (
               <Menu className='left-header'>
                 {isCustomerMode && windowSize.width > 450 && (
-                  <CustomerInfo isHome={isHome} onClick={() => setCustomerModalOpen(true)}>
+                  <CustomerInfo
+                    isHome={isHome}
+                    onClick={(e) => handleClickUserCustomer(e)}
+                  >
                     <span>
                       <FaUserCircle />
                       <p>{userCustomer?.name} {userCustomer?.lastname}</p>
+                    </span>
+                    <span
+                      style={styles.headCustomer}
+                      ref={clearCustomer}
+                    >
+                      <MdClose style={styles.clearCustomer}  />
                     </span>
                   </CustomerInfo>
                 )}
@@ -307,6 +340,16 @@ export const Header = (props) => {
             </UserEdit>
           </Modal>
         )}
+        <Confirm
+          title={t('CUSTOMER', 'Customer')}
+          content={confirm.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={isCustomerMode && confirm.open}
+          onClose={() => setConfirm({ ...confirm, open: false })}
+          onCancel={() => setConfirm({ ...confirm, open: false })}
+          onAccept={confirm.handleOnAccept}
+          closeOnBackdrop={false}
+        />
       </HeaderContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
@@ -316,6 +359,21 @@ export const Header = (props) => {
         </React.Fragment>))}
     </>
   )
+}
+
+const styles = {
+  headCustomer: {
+    margin: 0,
+    height: 20,
+    width: 20,
+    backgroundColor: '#CCCCCC',
+    borderRadius: '100%',
+    marginLeft: 5
+  },
+  clearCustomer: {
+    margin: 0,
+    fontSize: 20
+  }
 }
 
 Header.defaultProps = {
