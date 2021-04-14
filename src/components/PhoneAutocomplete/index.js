@@ -134,6 +134,7 @@ const PhoneAutocompleteUI = (props) => {
         <SignUpForm
           externalPhoneNumber={phone}
           saveCustomerUser={saveCustomerUser}
+          fieldsNotValid={props.fieldsNotValid}
         />
       </Modal>
       <Modal
