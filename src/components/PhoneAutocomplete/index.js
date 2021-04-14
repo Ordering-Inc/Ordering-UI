@@ -97,6 +97,9 @@ const PhoneAutocompleteUI = (props) => {
               autoComplete='off'
               disabled={customersPhones?.loading}
             />
+            <Button name='phone-button' id='phone-button' className='phone-button'>
+              {t('SEE_PHONES', 'See phones')}
+            </Button>
             {customersPhones?.loading && (
               <SpinnerLoader
                 style={{
