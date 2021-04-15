@@ -20,7 +20,9 @@ import {
   TitleHeroSide,
   RedirectLink,
   SkeletonWrapper,
-  SkeletonSocialWrapper
+  SkeletonSocialWrapper,
+  WrapperPassword,
+  TogglePassword
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -28,6 +30,9 @@ import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
 import { useTheme } from 'styled-components'
+
+import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
+import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
 
@@ -56,6 +61,7 @@ const SignUpFormUI = (props) => {
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
+  const [passwordSee, setPasswordSee] = useState(false)
 
   const handleSuccessFacebook = (user) => {
     login({
@@ -64,25 +70,9 @@ const SignUpFormUI = (props) => {
     })
   }
 
-  useEffect(() => {
-    if (!formState.loading && formState.result?.error) {
-      setAlertState({
-        open: true,
-        content: formState.result?.result || [t('ERROR', 'Error')]
-      })
-    } else if (!formState.loading && !formState.result?.error && formState.result?.result) {
-      saveCustomerUser && saveCustomerUser(formState.result?.result)
-    }
-  }, [formState])
-
-  useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      setAlertState({
-        open: true,
-        content: Object.values(errors).map(error => error.message)
-      })
-    }
-  }, [errors])
+  const togglePasswordView = () => {
+    setPasswordSee(!passwordSee)
+  }
 
   const closeAlert = () => {
     setAlertState({
@@ -145,6 +135,26 @@ const SignUpFormUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
+  useEffect(() => {
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result || [t('ERROR', 'Error')]
+      })
+    } else if (!formState.loading && !formState.result?.error && formState.result?.result) {
+      saveCustomerUser && saveCustomerUser(formState.result?.result)
+    }
+  }, [formState])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   return (
@@ -201,8 +211,7 @@ const SignUpFormUI = (props) => {
                           autoComplete='off'
                         />
                       )
-                    ))
-                  }
+                    ))}
                   {!!showInputPhoneNumber && !externalPhoneNumber && (
                     <InputPhoneNumber
                       value={userPhoneNumber}
@@ -221,22 +230,27 @@ const SignUpFormUI = (props) => {
                   )}
 
                   {(!fieldsNotValid || (fieldsNotValid && !fieldsNotValid.includes('password'))) && (
-                    <Input
-                      type='password'
-                      name='password'
-                      aria-label='password'
-                      className='form'
-                      placeholder={t('PASSWORD', 'Password')}
-                      onChange={handleChangeInput}
-                      required
-                      ref={register({
-                        required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
-                        minLength: {
-                          value: 8,
-                          message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                        }
-                      })}
-                    />
+                    <WrapperPassword>
+                      <Input
+                        type={!passwordSee ? 'password' : 'text'}
+                        name='password'
+                        aria-label='password'
+                        className='form'
+                        placeholder={t('PASSWORD', 'Password')}
+                        onChange={handleChangeInput}
+                        required
+                        ref={register({
+                          required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                          minLength: {
+                            value: 8,
+                            message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                          }
+                        })}
+                      />
+                      <TogglePassword onClick={togglePasswordView}>
+                        {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                      </TogglePassword>
+                    </WrapperPassword>
                   )}
 
                   {props.afterMidElements?.map((MidElement, i) => (
