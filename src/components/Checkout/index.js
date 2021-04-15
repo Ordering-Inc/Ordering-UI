@@ -202,6 +202,7 @@ const CheckoutUI = (props) => {
                 businessId={cart?.business_id}
                 apiKey={configs?.google_maps_api_key?.value}
                 mapConfigs={mapConfigs}
+                isCustomerMode={isCustomerMode}
               />
             )
           )}
@@ -216,7 +217,7 @@ const CheckoutUI = (props) => {
           {!props.isHideSectionTwo && (
             <UserDetailsContainer>
               <WrapperUserDetails>
-                {cartState.loading ? (
+                {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
                   <div>
                     <Skeleton height={35} style={{ marginBottom: '10px' }} />
                     <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -231,9 +232,10 @@ const CheckoutUI = (props) => {
                     businessId={cart?.business_id}
                     useValidationFields
                     useDefualtSessionManager
-                    useSessionUser
+                    useSessionUser={!isCustomerMode}
                     isCustomerMode={isCustomerMode}
                     userData={isCustomerMode && customerState.user}
+                    userId={isCustomerMode && customerState?.user?.id}
                   />
                 )}
               </WrapperUserDetails>
