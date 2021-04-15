@@ -20,6 +20,7 @@ export const WrappperButtonGroup = styled.div`
   display: flex;
   width: 100%;
   column-gap: 40px;
+  padding-top: 40px;
 
   button {
     font-weight: 500;

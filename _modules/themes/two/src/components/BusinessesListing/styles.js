@@ -31,7 +31,7 @@ var InnerContainer = _styledComponents.default.div(_templateObject2 || (_templat
 
 exports.InnerContainer = InnerContainer;
 
-var WrappperButtonGroup = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  column-gap: 40px;\n\n  button {\n    font-weight: 500;\n  }\n  @media (max-width: 992px) {\n    column-gap: 10px;\n    flex-wrap: wrap;\n    row-gap: 20px;\n  }\n"])));
+var WrappperButtonGroup = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  column-gap: 40px;\n  padding-top: 40px;\n\n  button {\n    font-weight: 500;\n  }\n  @media (max-width: 992px) {\n    column-gap: 10px;\n    flex-wrap: wrap;\n    row-gap: 20px;\n  }\n"])));
 
 exports.WrappperButtonGroup = WrappperButtonGroup;
 
