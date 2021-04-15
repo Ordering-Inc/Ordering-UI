@@ -80,7 +80,7 @@ const AllBusinessesListingUI = (props) => {
                 )}
               </AllStoreNumber>
               <BusinessTypeFilter
-                small
+                noAutoScroll
                 handleChangeBusinessType={handleChangeCategory}
               />
               <>

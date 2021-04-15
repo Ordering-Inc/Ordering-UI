@@ -17,7 +17,7 @@ import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
 import { SearchBar } from '../SearchBar'
 
-import { BusinessTypeFilter } from '../BusinessTypeFilter'
+import { BusinessTypeFilter } from '../../themes/two/src/components/BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
 import { OrdersOption } from '../OrdersOption'
 import { BusinessesMap } from '../BusinessesMap'
@@ -127,6 +127,7 @@ const BusinessesListingUI = (props) => {
       }
       <BusinessContainer>
         <BusinessTypeFilter
+          noAutoScroll
           images={props.images}
           businessTypes={props.businessTypes}
           defaultBusinessType={props.defaultBusinessType}

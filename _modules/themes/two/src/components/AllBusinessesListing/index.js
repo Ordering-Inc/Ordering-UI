@@ -124,7 +124,7 @@ var AllBusinessesListingUI = function AllBusinessesListingUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.AllBuinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinesses, null, /*#__PURE__*/_react.default.createElement(_styles.LeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.LeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ALL_BUSINESS', 'All Business')), /*#__PURE__*/_react.default.createElement(_styles.AllStoreNumber, null, !businessesList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalItems, " ", t('STORES_NEARBY', 'STORES NEARBY')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   })), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
-    small: true,
+    noAutoScroll: true,
     handleChangeBusinessType: handleChangeCategory
   }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSeeAllButton, null, /*#__PURE__*/_react.default.createElement(_styles.WrapButtonGroup, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
     isMainBusinessListingPage: true,

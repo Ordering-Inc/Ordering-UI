@@ -31,10 +31,17 @@ export const TypeContainer = styled.div`
 
   .category{
     padding: 10px 7px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
   }
+
+  ${({ noAutoScroll }) => noAutoScroll && css`
+    > div {
+      flex-wrap: wrap;
+      column-gap: 20px;
+      > div {
+        width: inherit;
+      }
+    }
+  `}
 
   @media (min-width: 480px){
     .category{
@@ -58,7 +65,7 @@ export const ImageContainer = styled.div`
     opacity: 0;
   `}
 
-  ${({ small }) => small && css`
+  ${({ noAutoScroll }) => noAutoScroll && css`
     width: 70px;
     height: 75px;
   `}

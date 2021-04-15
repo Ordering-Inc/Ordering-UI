@@ -46,7 +46,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       businessTypes = props.businessTypes,
       currentTypeSelected = props.currentTypeSelected,
       handleChangeBusinessType = props.handleChangeBusinessType,
-      small = props.small;
+      noAutoScroll = props.noAutoScroll;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -62,16 +62,16 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
-    id: "container"
+    id: "container",
+    noAutoScroll: noAutoScroll
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
-  }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, businessTypes && businessTypes.length > 0 && businessTypes.map(function (type, i) {
+  }, !noAutoScroll ? /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, businessTypes && businessTypes.length > 0 && businessTypes.map(function (type, i) {
     return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       className: "category",
       active: type.value === currentTypeSelected,
       key: type.value
     }, !type.value || i > images.length - 1 ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
-      small: small,
       active: type.value === currentTypeSelected,
       load: load
     }, /*#__PURE__*/_react.default.createElement("img", {
@@ -90,7 +90,6 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: image.value
       }, image.value === type.value ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
-        small: small,
         active: type.value === currentTypeSelected,
         load: load
       }, /*#__PURE__*/_react.default.createElement("img", {
@@ -101,6 +100,41 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         },
         width: "150px",
         height: "150px",
+        loading: "lazy"
+      })) : '');
+    }), t("BUSINESS_TYPE_".concat(type.value ? type.value.toUpperCase() : 'ALL'), type.key));
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessTypes && businessTypes.length > 0 && businessTypes.map(function (type, i) {
+    return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+      className: "category",
+      active: type.value === currentTypeSelected,
+      key: type.value
+    }, !type.value || i > images.length - 1 ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
+      noAutoScroll: noAutoScroll,
+      active: type.value === currentTypeSelected,
+      load: load
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: images[0].image,
+      alt: "all",
+      onLoad: function onLoad() {
+        return setLoad(true);
+      },
+      onClick: function onClick() {
+        return handleChangeCategory(type.value);
+      },
+      loading: "lazy"
+    })) : '', images.map(function (image) {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: image.value
+      }, image.value === type.value ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
+        noAutoScroll: noAutoScroll,
+        active: type.value === currentTypeSelected,
+        load: load
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: image.image,
+        alt: type.value,
+        onClick: function onClick() {
+          return handleChangeCategory(type.value);
+        },
         loading: "lazy"
       })) : '');
     }), t("BUSINESS_TYPE_".concat(type.value ? type.value.toUpperCase() : 'ALL'), type.key));
