@@ -137,7 +137,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         },
         loading: "lazy"
       })) : '');
-    }), t("BUSINESS_TYPE_".concat(type.value ? type.value.toUpperCase() : 'ALL'), type.key));
+    }), /*#__PURE__*/_react.default.createElement("p", null, t("BUSINESS_TYPE_".concat(type.value ? type.value.toUpperCase() : 'ALL'), type.key)));
   }))));
 };
 

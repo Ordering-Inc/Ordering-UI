@@ -31,9 +31,24 @@ export const TypeContainer = styled.div`
 
   .category{
     padding: 10px 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   ${({ noAutoScroll }) => noAutoScroll && css`
+    .category{
+      width: 120px;
+
+      p {
+        margin: 0px;
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+      }
+    }
     > div {
       flex-wrap: wrap;
       column-gap: 20px;
@@ -69,14 +84,4 @@ export const ImageContainer = styled.div`
     width: 70px;
     height: 75px;
   `}
-
-  @media (max-width: 992px) {
-    width: 75px;
-    height: 80px;
-  }
-
-  @media (max-width: 576px) {
-    width: 50px;
-    height: 50px;
-  }
 `
