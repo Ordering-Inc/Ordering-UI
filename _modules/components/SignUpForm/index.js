@@ -31,6 +31,10 @@ var _FacebookLogin = require("../FacebookLogin");
 
 var _styledComponents = require("styled-components");
 
+var _AiOutlineEye = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEye"));
+
+var _AiOutlineEyeInvisible = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEyeInvisible"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -121,6 +125,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
       isValidPhoneNumber = _useState6[0],
       setIsValidPhoneNumber = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      passwordSee = _useState8[0],
+      setPasswordSee = _useState8[1];
+
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
     var _user$session;
 
@@ -130,32 +139,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     });
   };
 
-  (0, _react.useEffect)(function () {
-    var _formState$result, _formState$result3, _formState$result4;
-
-    if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2;
-
-      setAlertState({
-        open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
-      });
-    } else if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.result) {
-      var _formState$result5;
-
-      saveCustomerUser && saveCustomerUser((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result);
-    }
-  }, [formState]);
-  (0, _react.useEffect)(function () {
-    if (Object.keys(errors).length > 0) {
-      setAlertState({
-        open: true,
-        content: Object.values(errors).map(function (error) {
-          return error.message;
-        })
-      });
-    }
-  }, [errors]);
+  var togglePasswordView = function togglePasswordView() {
+    setPasswordSee(!passwordSee);
+  };
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -226,6 +212,32 @@ var SignUpFormUI = function SignUpFormUI(props) {
     handleChangeInput(phoneNumber, true);
   };
 
+  (0, _react.useEffect)(function () {
+    var _formState$result, _formState$result3, _formState$result4;
+
+    if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
+      var _formState$result2;
+
+      setAlertState({
+        open: true,
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
+      });
+    } else if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.result) {
+      var _formState$result5;
+
+      saveCustomerUser && saveCustomerUser((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result);
+    }
+  }, [formState]);
+  (0, _react.useEffect)(function () {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(function (error) {
+          return error.message;
+        })
+      });
+    }
+  }, [errors]);
   var showInputPhoneNumber = (_validationFields$fie4 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.checkout) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.enabled) !== null && _validationFields$fie4 !== void 0 ? _validationFields$fie4 : false;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -287,8 +299,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     className: "form",
     readOnly: true,
     name: "cellphone"
-  }), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    type: "password",
+  }), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    type: !passwordSee ? 'password' : 'text',
     name: "password",
     "aria-label": "password",
     className: "form",
@@ -302,7 +314,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  }), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.TogglePassword, {
+    onClick: togglePasswordView
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_AiOutlineEye.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineEyeInvisible.default, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);

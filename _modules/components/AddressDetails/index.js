@@ -52,7 +52,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
 
   var addressToShow = props.addressToShow,
       isCartPending = props.isCartPending,
-      googleMapsUrl = props.googleMapsUrl;
+      googleMapsUrl = props.googleMapsUrl,
+      isCustomerMode = props.isCustomerMode;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -76,6 +77,10 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       setAlertState = _useState4[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 1),
+      user = _useCustomer2[0].user;
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -131,7 +136,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     },
     onAccept: function onAccept() {
       return handleFindBusinesses();
-    }
+    },
+    userCustomerSetup: isCustomerMode && user
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,

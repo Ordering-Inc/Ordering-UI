@@ -92,7 +92,7 @@ var mapConfigs = {
 };
 
 var CheckoutUI = function CheckoutUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _theme$images$dummies, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements6, _props$beforeComponen6, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _props$beforeElements7, _props$beforeComponen7, _cart$products, _props$beforeElements8, _props$beforeComponen8, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _theme$images$dummies, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _customerState$user, _customerState$user2, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements6, _props$beforeComponen6, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _props$beforeElements7, _props$beforeComponen7, _cart$products, _props$beforeElements8, _props$beforeComponen8, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errors = props.errors,
@@ -270,7 +270,8 @@ var CheckoutUI = function CheckoutUI(props) {
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
-    mapConfigs: mapConfigs
+    mapConfigs: mapConfigs,
+    isCustomerMode: isCustomerMode
   })), (_props$beforeElements3 = props.beforeElementsSectionTwo) === null || _props$beforeElements3 === void 0 ? void 0 : _props$beforeElements3.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -279,7 +280,7 @@ var CheckoutUI = function CheckoutUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), !props.isHideSectionTwo && /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserDetails, null, cartState.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), !props.isHideSectionTwo && /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserDetails, null, cartState.loading || isCustomerMode && !(customerState !== null && customerState !== void 0 && (_customerState$user = customerState.user) !== null && _customerState$user !== void 0 && _customerState$user.id) ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 35,
     style: {
       marginBottom: '10px'
@@ -310,9 +311,10 @@ var CheckoutUI = function CheckoutUI(props) {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     useValidationFields: true,
     useDefualtSessionManager: true,
-    useSessionUser: true,
+    useSessionUser: !isCustomerMode,
     isCustomerMode: isCustomerMode,
-    userData: isCustomerMode && customerState.user
+    userData: isCustomerMode && customerState.user,
+    userId: isCustomerMode && (customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id)
   }))), (_props$beforeElements4 = props.beforeElementsSectionThree) === null || _props$beforeElements4 === void 0 ? void 0 : _props$beforeElements4.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
