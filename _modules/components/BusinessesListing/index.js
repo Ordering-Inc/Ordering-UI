@@ -27,7 +27,7 @@ var _AddressList = require("../AddressList");
 
 var _SearchBar = require("../SearchBar");
 
-var _BusinessTypeFilter = require("../../themes/two/src/components/BusinessTypeFilter");
+var _BusinessTypeFilter = require("../BusinessTypeFilter");
 
 var _BusinessController = require("../BusinessController");
 
@@ -213,7 +213,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
-    noAutoScroll: true,
     images: props.images,
     businessTypes: props.businessTypes,
     defaultBusinessType: props.defaultBusinessType,
