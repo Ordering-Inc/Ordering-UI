@@ -24,7 +24,7 @@ var TypeContainer = _styledComponents.default.div(_templateObject || (_templateO
 
 exports.TypeContainer = TypeContainer;
 
-var ImageContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 120px;\n  height: 125px;\n    img{\n      width: 100%;\n      height: 100%;\n      border: 1px solid transparent;\n      padding: 4px 2px 0px 2px;\n    }\n\n  ", "\n\n  ", "\n"])), function (_ref2) {
+var ImageContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 120px;\n  height: 125px;\n    img{\n      width: 100%;\n      height: 100%;\n      border: 1px solid transparent;\n      padding: 4px;\n      box-sizing: border-box;\n    }\n\n  ", "\n\n  ", "\n"])), function (_ref2) {
   var load = _ref2.load;
   return !load && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    opacity: 0;\n  "])));
 }, function (_ref3) {
