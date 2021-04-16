@@ -38,7 +38,7 @@ export const TypeContainer = styled.div`
 
   ${({ noAutoScroll }) => noAutoScroll && css`
     .category{
-      width: 100px;
+      width: 90px;
       padding: 10px 5px;
       p {
         margin: 0px;
