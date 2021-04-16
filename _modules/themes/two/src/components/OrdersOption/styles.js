@@ -32,7 +32,7 @@ exports.OptionTitle = OptionTitle;
 
 var OrdersContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  ", "\n\n  ", "\n"])), function (_ref4) {
   var activeOrders = _ref4.activeOrders;
-  return activeOrders && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 0 10px;\n    text-align: center;\n    display: flex;\n    overflow-x: auto;\n    overflow-y: hidden;\n    justify-content: ", ";\n    width: 100%;\n    margin: auto 0px auto auto;\n    box-sizing: border-box;\n    ", "\n    ::-webkit-scrollbar {\n      width: 0px;\n      height: 0px;\n    }\n\n    ", "\n\n    @media (min-width: 768px) {\n      width: ", ";\n      justify-content: flex-start;\n      ", "\n    }\n  "])), function (_ref5) {
+  return activeOrders && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 0 10px;\n    text-align: center;\n    display: flex;\n    overflow-x: auto;\n    overflow-y: hidden;\n    justify-content: ", ";\n    width: 100%;\n    margin: auto 0px auto auto;\n    box-sizing: border-box;\n    ", "\n    ::-webkit-scrollbar {\n      width: 0px;\n      height: 0px;\n    }\n\n    ", "\n\n    @media (min-width: 768px) {\n      width: 100%;\n      justify-content: flex-start;\n      ", "\n    }\n  "])), function (_ref5) {
     var ordersLength = _ref5.ordersLength;
     return !ordersLength ? 'flex-start' : 'center';
   }, function (props) {
@@ -55,13 +55,10 @@ var OrdersContainer = _styledComponents.default.div(_templateObject2 || (_templa
       });
     });
   }, function (_ref8) {
-    var isBusinessList = _ref8.isBusinessList;
-    return isBusinessList ? '100%' : '90%';
-  }, function (_ref9) {
-    var isSkeleton = _ref9.isSkeleton,
-        ordersLength = _ref9.ordersLength;
-    return !isSkeleton && !ordersLength && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        > div:first-child {\n          ", "\n        }\n      "])), function (_ref10) {
-      var isBusinessList = _ref10.isBusinessList;
+    var isSkeleton = _ref8.isSkeleton,
+        ordersLength = _ref8.ordersLength;
+    return !isSkeleton && !ordersLength && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        > div:first-child {\n          ", "\n        }\n      "])), function (_ref9) {
+      var isBusinessList = _ref9.isBusinessList;
       return !isBusinessList && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n            margin-left: -10px;\n            ", "\n          "])), function (props) {
         var _props$theme4;
 
@@ -69,9 +66,9 @@ var OrdersContainer = _styledComponents.default.div(_templateObject2 || (_templa
       });
     });
   });
-}, function (_ref11) {
-  var activeOrders = _ref11.activeOrders;
-  return !activeOrders && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    width: 100%;\n    display: flex;\n    flex-direction: column-reverse;\n    margin: 0 auto;\n    border: 1px solid ", ";\n\n    p{\n      margin-block-end: 0;\n      margin-block-start: 0;\n      color: #9A9A9A;\n    }\n\n    @media(min-width: 480px){\n      padding: 0;\n      div:last-child {\n        border-top: none;\n      }\n    }\n  "])), function (props) {
+}, function (_ref10) {
+  var activeOrders = _ref10.activeOrders;
+  return !activeOrders && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    width: 100%;\n    display: flex;\n    flex-direction: column-reverse;\n    margin: 0 auto;\n    border: 1px solid ", ";\n    box-sizing: border-box;\n\n    p{\n      margin-block-end: 0;\n      margin-block-start: 0;\n      color: #9A9A9A;\n    }\n\n    @media(min-width: 480px){\n      padding: 0;\n      div:last-child {\n        border-top: none;\n      }\n    }\n  "])), function (props) {
     return props.theme.colors.secondary;
   });
 });
@@ -80,15 +77,15 @@ exports.OrdersContainer = OrdersContainer;
 
 var SkeletonOrder = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  border-bottom: 1px solid ", ";\n  padding: 0 15px;\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.secondary;
-}, function (_ref12) {
-  var activeOrders = _ref12.activeOrders;
+}, function (_ref11) {
+  var activeOrders = _ref11.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    width: auto;\n    text-align: center;\n    margin-left: 10px;\n\n    ", "\n  "])), function (props) {
     var _props$theme5;
 
     return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
   });
-}, function (_ref13) {
-  var activeOrders = _ref13.activeOrders;
+}, function (_ref12) {
+  var activeOrders = _ref12.activeOrders;
   return !activeOrders && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    width: 100%;\n    flex-direction: column;\n    margin: 10px 0;\n    > * {\n      margin: 20px 0;\n    }\n  "])));
 });
 
@@ -102,11 +99,11 @@ var SkeletonMap = _styledComponents.default.div(_templateObject18 || (_templateO
 
 exports.SkeletonMap = SkeletonMap;
 
-var SkeletonContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n\n  ", "\n\n  ", "\n\n  \n  @media (max-width: 576px) {\n    flex-direction: column;\n  }\n"])), function (_ref14) {
-  var activeOrders = _ref14.activeOrders;
+var SkeletonContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n\n  ", "\n\n  ", "\n\n  \n  @media (max-width: 576px) {\n    flex-direction: column;\n  }\n"])), function (_ref13) {
+  var activeOrders = _ref13.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    > * {\n      margin: 5px;\n    }\n  "])));
-}, function (_ref15) {
-  var activeOrders = _ref15.activeOrders;
+}, function (_ref14) {
+  var activeOrders = _ref14.activeOrders;
   return !activeOrders && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    justify-content: space-between;\n  "])));
 });
 
@@ -140,20 +137,20 @@ var ImageNotFound = _styledComponents.default.div(_templateObject29 || (_templat
 
 exports.ImageNotFound = ImageNotFound;
 
-var BusinessInformation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: inline-flex;\n  flex-direction: column;\n  flex: 1;\n  padding-left: 10px;\n  font-size: 0.9em;\n  ", "\n  ", "\n  h2 {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 16px;\n    margin-block-end: 0;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    color : #9A9A9A;\n    white-space: nowrap;\n    font-size: 0.9em;\n    ", "\n  }\n\n  p[name='order_number']{\n    width: 170px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    font-size: 14px;\n  }\n  p[name='order_date]{\n    font-size: 14px;\n  }\n\n  p[name='view_order'] {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  @media (min-width: 480px){\n    h2 {\n    font-size: 20px;\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    }\n    p{\n      ", "\n    }\n    p[name='order_number']{\n      width: 230px;\n    }\n  }\n\n  @media (min-width: 768px){\n    font-size: 18px;\n    p {\n      font-size: 18px;\n    }\n  }\n"])), function (_ref16) {
-  var activeOrders = _ref16.activeOrders;
+var BusinessInformation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: inline-flex;\n  flex-direction: column;\n  flex: 1;\n  padding-left: 10px;\n  font-size: 0.9em;\n  ", "\n  ", "\n  h2 {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 16px;\n    margin-block-end: 0;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    color : #9A9A9A;\n    white-space: nowrap;\n    font-size: 0.9em;\n    ", "\n  }\n\n  p[name='order_number']{\n    width: 170px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    font-size: 14px;\n  }\n  p[name='order_date]{\n    font-size: 14px;\n  }\n\n  p[name='view_order'] {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  @media (min-width: 480px){\n    h2 {\n    font-size: 20px;\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    }\n    p{\n      ", "\n    }\n    p[name='order_number']{\n      width: 230px;\n    }\n  }\n\n  @media (min-width: 768px){\n    font-size: 18px;\n    p {\n      font-size: 18px;\n    }\n  }\n"])), function (_ref15) {
+  var activeOrders = _ref15.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n      width: 30%;\n  "])));
 }, function (props) {
   var _props$theme8;
 
   return ((_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.rtl) && (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    padding-right: 10px;\n    padding-left: 0;\n  "])));
-}, function (_ref17) {
-  var activeOrders = _ref17.activeOrders;
+}, function (_ref16) {
+  var activeOrders = _ref16.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n      font-size: 0.8em;\n    "])));
 }, function (props) {
   return props.theme.colors.primary;
-}, function (_ref18) {
-  var activeOrders = _ref18.activeOrders;
+}, function (_ref17) {
+  var activeOrders = _ref17.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n        font-size: 18px;\n      "])));
 });
 

@@ -318,6 +318,7 @@ export const WrapFloatingButton = styled.div`
     bottom: 0px;
     left: 0px;
     background: #fff;
+    box-sizing: border-box;
     width: 100vw;
     z-index: 100;
     border-top: 1px solid ${props => props.theme.colors.secondary};

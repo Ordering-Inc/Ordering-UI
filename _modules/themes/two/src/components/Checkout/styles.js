@@ -165,7 +165,7 @@ var PaymentContent = _styledComponents.default.div(_templateObject31 || (_templa
 
 exports.PaymentContent = PaymentContent;
 
-var WrapFloatingButton = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  @media (max-width: 992px) {\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    background: #fff;\n    width: 100vw;\n    z-index: 100;\n    border-top: 1px solid ", ";\n    box-shadow: 0px -3px 6px #00000029;\n    padding: 0 10px;\n    > div {\n      justify-content: center;\n    }\n  }\n"])), function (props) {
+var WrapFloatingButton = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  @media (max-width: 992px) {\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    background: #fff;\n    box-sizing: border-box;\n    width: 100vw;\n    z-index: 100;\n    border-top: 1px solid ", ";\n    box-shadow: 0px -3px 6px #00000029;\n    padding: 0 10px;\n    > div {\n      justify-content: center;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.secondary;
 });
 

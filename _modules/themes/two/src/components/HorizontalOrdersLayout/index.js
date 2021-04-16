@@ -89,7 +89,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         alt: "business-logo",
         width: "75px",
         height: "75px"
-      })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
+      })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, {
         activeOrders: true
       }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.name), /*#__PURE__*/_react.default.createElement("p", {
         name: "order_number"

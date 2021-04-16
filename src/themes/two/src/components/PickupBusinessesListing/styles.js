@@ -100,7 +100,7 @@ export const PickupBusinessList = styled.div`
       }
 
       &:not(:first-child) {
-        width: calc(50% - 10px);
+        width: 100%;
       }
     }
   }

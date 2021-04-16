@@ -140,3 +140,20 @@ export const Reorder = styled.div`
     font-size: 14px;
   }
 `
+export const BusinessInformation = styled.div`
+  h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 16px;
+    margin-block-end: 0;
+    margin-block-start: 0;
+  }
+  p {
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+`

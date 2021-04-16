@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SingleCard = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  height: auto;\n  border: none;\n  padding: 15px 10px 10px 10px;\n\n  ", "\n\n  @media(min-width: 480px){\n    ", "\n    border-top: 1px solid #ccc;\n  }\n\n  button {\n    font-weight: 500;\n  }\n\n  @media (max-width: 576px) {\n    flex-direction: column;\n  }\n"])), function (props) {
+var SingleCard = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  height: auto;\n  border: none;\n  padding: 15px 10px 10px 10px;\n  box-sizing: border-box;\n\n  ", "\n\n  @media(min-width: 480px){\n    ", "\n    border-top: 1px solid #ccc;\n  }\n\n  button {\n    font-weight: 500;\n  }\n\n  @media (max-width: 576px) {\n    flex-direction: column;\n  }\n"])), function (props) {
   return (props.theme.colors.backgroundPage === '#FFF' || props.theme.colors.backgroundPage === '#FFFFFF') && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    border-bottom: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.secondary;
   });

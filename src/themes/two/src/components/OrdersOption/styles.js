@@ -60,7 +60,7 @@ export const OrdersContainer = styled.div`
     `}
 
     @media (min-width: 768px) {
-      width: ${({ isBusinessList }) => isBusinessList ? '100%' : '90%'};
+      width: 100%;
       justify-content: flex-start;
       ${({ isSkeleton, ordersLength }) => !isSkeleton && !ordersLength && css`
         > div:first-child {
@@ -82,6 +82,7 @@ export const OrdersContainer = styled.div`
     flex-direction: column-reverse;
     margin: 0 auto;
     border: 1px solid ${props => props.theme.colors.secondary};
+    box-sizing: border-box;
 
     p{
       margin-block-end: 0;
