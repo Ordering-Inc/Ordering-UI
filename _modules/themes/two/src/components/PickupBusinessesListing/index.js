@@ -67,10 +67,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var PIXELS_TO_SCROLL = document.getElementById('footer').offsetHeight + 100;
-
 var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
-  var _businessesList$busin, _orderState$options4, _orderState$options4$, _orderState$options5;
+  var _document$getElementB, _businessesList$busin, _orderState$options4, _orderState$options4$, _orderState$options5;
 
   var initialOrderType = props.initialOrderType,
       businessesList = props.businessesList,
@@ -96,6 +94,8 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
+
+  var PIXELS_TO_SCROLL = ((_document$getElementB = document.getElementById('footer')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.offsetHeight) + 100 || 700;
 
   var _useState = (0, _react.useState)({
     listOpen: false,
