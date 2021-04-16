@@ -198,7 +198,7 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
     handleCustomClick: function handleCustomClick() {
       return setIsGoBackClicked(true);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, businessTypeSelected === null ? t('ALL_BUSINESS', 'All Business') : businessTypeSelected), /*#__PURE__*/_react.default.createElement(_styles.AllStoreNumber, null, !businessesList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalItems, " ", t('STORES_NEARBY', 'STORES NEARBY')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, businessTypeSelected === null || businessTypeSelected === 'null' ? t('ALL_BUSINESS', 'All Business') : businessTypeSelected), /*#__PURE__*/_react.default.createElement(_styles.AllStoreNumber, null, !businessesList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalItems, " ", t('STORES_NEARBY', 'STORES NEARBY')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }))), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     noAutoScroll: true,

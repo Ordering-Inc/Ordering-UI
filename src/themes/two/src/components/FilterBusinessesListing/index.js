@@ -127,7 +127,7 @@ const FilterBusinessesListingUI = (props) => {
                   handleCustomClick={() => setIsGoBackClicked(true)}
                 />
                 <Title>
-                  {businessTypeSelected === null ? t('ALL_BUSINESS', 'All Business') : businessTypeSelected}
+                  {(businessTypeSelected === null || businessTypeSelected === 'null') ? t('ALL_BUSINESS', 'All Business') : businessTypeSelected}
                 </Title>
                 <AllStoreNumber>
                   {!businessesList.loading ? (
