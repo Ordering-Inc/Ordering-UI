@@ -31,7 +31,7 @@ var WrappContainer = _styledComponents.default.div(_templateObject2 || (_templat
 
 exports.WrappContainer = WrappContainer;
 
-var LeftContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 70%;\n  padding: 10px;\n\n  @media (max-width: 992px) {\n    width: 100%;\n  }\n"])));
+var LeftContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 70%;\n  padding: 10px;\n  box-sizing: border-box;\n\n  @media (max-width: 992px) {\n    width: 100%;\n  }\n"])));
 
 exports.LeftContainer = LeftContainer;
 

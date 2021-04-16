@@ -20,6 +20,7 @@ export const WrappContainer = styled.div`
 export const LeftContainer = styled.div`
   width: 70%;
   padding: 10px;
+  box-sizing: border-box;
 
   @media (max-width: 992px) {
     width: 100%;

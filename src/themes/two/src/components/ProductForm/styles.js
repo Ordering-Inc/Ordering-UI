@@ -211,10 +211,11 @@ export const ProductActions = styled.div`
   }
 
   @media (min-width: 766px) {
-    position: sticky;
+    position: fixed;
     bottom: 0px;
     justify-content: center;
     flex-direction: row;
+    padding: 10px 0;
     button {
       min-width: 190px;
     }
