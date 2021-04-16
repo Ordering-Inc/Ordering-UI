@@ -44,6 +44,7 @@ export const HeroContainerStyled = styled.div`
     object-fit: cover;
     background-position: center;
     border-radius: 10px;
+    box-sizing: border-box;
   `}
 
   p {

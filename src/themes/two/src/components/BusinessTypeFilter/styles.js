@@ -39,10 +39,10 @@ export const TypeContainer = styled.div`
   ${({ noAutoScroll }) => noAutoScroll && css`
     .category{
       width: 100px;
-
+      padding: 10px 5px;
       p {
         margin: 0px;
-        max-width: 120px;
+        max-width: 100px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -63,6 +63,12 @@ export const TypeContainer = styled.div`
       padding: 10px 15px;
       column-gap: 50px;
     }
+
+    ${({ noAutoScroll }) => noAutoScroll && css`
+      .category{
+        padding: 10px 5px;
+      }
+    `
   }
 `
 
