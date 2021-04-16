@@ -190,7 +190,7 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
     auth: auth,
     configTypes: configTypes
-  }), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && isBusinessListingPage && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
+  }), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && isBusinessListingPage && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     dropDownStyle: true,
     configTypes: configTypes,
     handleChangePage: handleChangePage

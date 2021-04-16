@@ -113,7 +113,7 @@ export const Header = (props) => {
               auth={auth}
               configTypes={configTypes}
             />
-            {!configState?.loading && configTypes.length > 0 && isBusinessListingPage && (
+            {!configState?.loading && configTypes.length > 0 && isBusinessListingPage && windowSize.width > 992 && (
               <OrderTypeSelectorHeader
                 dropDownStyle
                 configTypes={configTypes}

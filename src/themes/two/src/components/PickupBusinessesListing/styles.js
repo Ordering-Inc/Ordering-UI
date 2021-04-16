@@ -19,11 +19,6 @@ export const InnerContainer = styled.div`
     flex-direction: column;
   }
 `
-export const PickupBusinessListContainer = styled.div`
-  @media (max-width: 992px) {
-    display: none;
-  }
-`
 export const WrapperBusinessMap = styled.div`
   width: 100%;
   height: 100%;
