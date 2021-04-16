@@ -7,6 +7,7 @@ export const SingleCard = styled.div`
   border: none;
   padding: 15px 10px 10px 10px;
   box-sizing: border-box;
+  overflow: hidden;
 
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
