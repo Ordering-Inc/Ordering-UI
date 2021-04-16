@@ -37,7 +37,7 @@ exports.WrappperButtonGroup = WrappperButtonGroup;
 
 var HeroContainerStyled = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  position: relative;\n  padding: 20px 15px;\n  margin-top: 30px;\n  cursor: pointer;\n\n  ", "\n\n  p {\n    margin: 0 0 0 9px;\n    color: #fff;\n    font-weight: 500;\n    font-size: 18px;\n  }\n\n  @media (max-width: 576px) {\n    p {\n      font-size: 12px;\n    }\n  }\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
-  return bgimage && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n    border-radius: 10px;\n  "])));
+  return bgimage && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n    border-radius: 10px;\n    box-sizing: border-box;\n  "])));
 });
 
 exports.HeroContainerStyled = HeroContainerStyled;

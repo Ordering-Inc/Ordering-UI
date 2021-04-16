@@ -99,53 +99,55 @@ const PickupBusinessesListingUI = (props) => {
               />
             </LeftInnerContainer>
           </LeftContent>
-          <h1>
-            {t('RESTAURANTS_NEARBY', 'Restaurants Nearby')}
-          </h1>
-          <PickupBusinessList>
-            {
-              !businessesList.loading && businessesList.businesses.length === 0 && (
-                <NotFoundSource
-                  content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-                >
-                  <Button
-                    color='primary'
-                    outline
-                    onClick={() => handleClickAddress()}
+          <PickupBusinessListContainer>
+            <h1>
+              {t('RESTAURANTS_NEARBY', 'Restaurants Nearby')}
+            </h1>
+            <PickupBusinessList>
+              {
+                !businessesList.loading && businessesList.businesses.length === 0 && (
+                  <NotFoundSource
+                    content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
                   >
-                    {t('CHANGE_ADDRESS', 'Select other Address')}
-                  </Button>
-                </NotFoundSource>
-              )
-            }
-            {
-              businessesList.businesses?.map((business) => (
-                <BusinessController
-                  key={business.id}
-                  className='card'
-                  business={business}
-                  handleCustomClick={handleBusinessClick}
-                  orderType={orderState?.options?.type}
-                />
-              ))
-            }
-            {businessesList.loading && (
-              [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 10).keys()].map(i => (
-                <BusinessController
-                  key={i}
-                  className='card'
-                  business={{}}
-                  isSkeleton
-                  orderType={orderState?.options?.type}
-                />
-              ))
-            )}
-            {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
-              businessesList.error.map((e, i) => (
-                <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-              ))
-            )}
-          </PickupBusinessList>
+                    <Button
+                      color='primary'
+                      outline
+                      onClick={() => handleClickAddress()}
+                    >
+                      {t('CHANGE_ADDRESS', 'Select other Address')}
+                    </Button>
+                  </NotFoundSource>
+                )
+              }
+              {
+                businessesList.businesses?.map((business) => (
+                  <BusinessController
+                    key={business.id}
+                    className='card'
+                    business={business}
+                    handleCustomClick={handleBusinessClick}
+                    orderType={orderState?.options?.type}
+                  />
+                ))
+              }
+              {businessesList.loading && (
+                [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 10).keys()].map(i => (
+                  <BusinessController
+                    key={i}
+                    className='card'
+                    business={{}}
+                    isSkeleton
+                    orderType={orderState?.options?.type}
+                  />
+                ))
+              )}
+              {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
+                businessesList.error.map((e, i) => (
+                  <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+                ))
+              )}
+            </PickupBusinessList>
+          </PickupBusinessListContainer>
         </WrapperBusinesses>
         <WrapperBusinessMap>
           {!businessesList.loading && !configState.loading ? (
