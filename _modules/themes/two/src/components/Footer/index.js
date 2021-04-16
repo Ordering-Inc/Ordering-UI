@@ -46,6 +46,7 @@ var Footer = function Footer() {
   var location = (0, _reactRouterDom.useLocation)();
   var isHomePage = location.pathname === '/home' || location.pathname === '/';
   return /*#__PURE__*/_react.default.createElement(_styles.FooterContainer, {
+    id: "footer",
     isHomePage: isHomePage
   }, /*#__PURE__*/_react.default.createElement(_styles.FooterTopContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('TOP_CITIES', 'Top Cities')), /*#__PURE__*/_react.default.createElement(_styles.LinkBlock, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
     rel: "noopener noreferrer",

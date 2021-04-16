@@ -25,7 +25,7 @@ import {
   WrapPickupButton
 } from './styles'
 
-const PIXELS_TO_SCROLL = 700
+const PIXELS_TO_SCROLL = document.getElementById('footer').offsetHeight + 100
 
 const PickupBusinessesListingUI = (props) => {
   const {

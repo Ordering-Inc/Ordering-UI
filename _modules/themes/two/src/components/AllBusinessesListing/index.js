@@ -61,7 +61,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var PIXELS_TO_SCROLL = 700;
+var PIXELS_TO_SCROLL = document.getElementById('footer').offsetHeight + 100;
 
 var AllBusinessesListingUI = function AllBusinessesListingUI(props) {
   var _businessesList$busin, _orderState$options3;
