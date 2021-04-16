@@ -150,6 +150,9 @@ export const BusinessInformation = styled.div`
     margin-block-start: 0;
   }
   p {
+    margin-block-end: 0.1em;
+    margin-block-start: 0.1em;
+    color : #9A9A9A;    
     width: 170px;
     overflow: hidden;
     text-overflow: ellipsis;

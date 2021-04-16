@@ -280,9 +280,6 @@ export const BusinessInformation = styled.div`
     white-space: nowrap;
     font-size: 14px;
   }
-  p[name='order_date]{
-    font-size: 14px;
-  }
 
   p[name='view_order'] {
     color: ${props => props.theme.colors.primary};
