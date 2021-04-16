@@ -93,7 +93,9 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         activeOrders: true
       }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.name), /*#__PURE__*/_react.default.createElement("p", {
         name: "order_number"
-      }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+      }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", {
+        name: "order_date"
+      }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
         utc: false
       }))), /*#__PURE__*/_react.default.createElement(_styles.Price, {
         isBusinessList: isBusinessList

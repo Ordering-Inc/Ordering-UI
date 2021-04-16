@@ -21,7 +21,7 @@ var OpenOrder = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.OpenOrder = OpenOrder;
 
-var Content = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-radius: 16px;\n  padding: 10px;\n\n"])));
+var Content = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-radius: 16px;\n  padding: 10px;\n"])));
 
 exports.Content = Content;
 
@@ -39,7 +39,7 @@ var Logo = _styledComponents.default.div(_templateObject4 || (_templateObject4 =
 
 exports.Logo = Logo;
 
-var Card = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px;\n  display: inline-block;\n  background: white;\n  height: ", ";\n  max-height: ", ";\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    max-height: ", ";;\n    width: 400px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n\n"])), function (_ref3) {
+var Card = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  min-width: 300px;\n  width: 300px;\n  margin: 10px 10px 20px 10px;\n  display: inline-block;\n  background: white;\n  height: ", ";\n  max-height: ", ";\n  border-radius: 16px;\n  text-align: left;\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px){\n    min-width: 400px;\n    max-height: ", ";;\n    width: 400px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n\n"])), function (_ref3) {
   var isBusinessList = _ref3.isBusinessList;
   return isBusinessList && '300px';
 }, function (_ref4) {

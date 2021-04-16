@@ -23,7 +23,6 @@ export const Content = styled.div`
   align-items: center;
   border-radius: 16px;
   padding: 10px;
-
 `
 
 export const Price = styled.div`
@@ -65,7 +64,7 @@ export const Logo = styled.div`
 export const Card = styled.div`
   min-width: 300px;
   width: 300px;
-  margin: 10px;
+  margin: 10px 10px 20px 10px;
   display: inline-block;
   background: white;
   height: ${({ isBusinessList }) => isBusinessList && '300px'};

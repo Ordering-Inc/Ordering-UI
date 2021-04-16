@@ -57,7 +57,7 @@ export const HorizontalOrdersLayout = (props) => {
               <BusinessInformation activeOrders>
                 <h2>{order.business?.name}</h2>
                 <p name='order_number'>{t('ORDER_NUMBER', 'Order No.')} {order.id}</p>
-                <p>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
+                <p name='order_date'>{order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}</p>
               </BusinessInformation>
               <Price isBusinessList={isBusinessList}>
                 <h2>

@@ -277,6 +277,10 @@ export const BusinessInformation = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 14px;
+  }
+  p[name='order_date]{
+    font-size: 14px;
   }
 
   p[name='view_order'] {
