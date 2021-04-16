@@ -215,7 +215,6 @@ export const ProductActions = styled.div`
     bottom: 0px;
     justify-content: center;
     flex-direction: row;
-    padding: 10px 0;
     button {
       min-width: 190px;
     }
