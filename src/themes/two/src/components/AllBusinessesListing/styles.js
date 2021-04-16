@@ -77,7 +77,14 @@ export const AllBusinessList = styled.div`
   @media (max-width: 576px) {
     > div {
       margin: 5px;
-      width: 100%;
+
+      &: first-child {
+        width: 100%;
+      }
+
+      &:not(:first-child) {
+        width: 100%;
+      }
     }
   }
 `

@@ -71,7 +71,10 @@ export const PopularBusinesssList = styled.div`
   @media (max-width: 576px) {
     > div {
       margin: 10px 5px;
-      width: 100%;
+
+      &:not(:first-child) {
+        width: 100%;
+      }
     }
   }
 `
