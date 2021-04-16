@@ -22,7 +22,8 @@ import {
   MapSkeleton,
   LeftInnerContainer,
   WrapperBusinessMap,
-  WrapPickupButton
+  WrapPickupButton,
+  PickupBusinessListContainer
 } from './styles'
 
 const PIXELS_TO_SCROLL = 700
