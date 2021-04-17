@@ -49,7 +49,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// const PIXELS_TO_SCROLL = 700
 var FeaturedBusinessListingUI = function FeaturedBusinessListingUI(props) {
   var _businessesList$busin;
 
@@ -72,18 +71,7 @@ var FeaturedBusinessListingUI = function FeaturedBusinessListingUI(props) {
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0]; // const handleScroll = useCallback(() => {
-  //   const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
-  //   const badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight
-  //   const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
-  //   if (badScrollPosition || businessesList.loading || !hasMore) return
-  //   getBusinesses()
-  // }, [businessesList, paginationProps])
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll)
-  //   return () => window.removeEventListener('scroll', handleScroll)
-  // }, [handleScroll])
-
+      events = _useEvent2[0];
 
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);

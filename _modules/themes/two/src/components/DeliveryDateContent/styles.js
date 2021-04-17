@@ -31,6 +31,6 @@ var Option = _styledComponents.default.span(_templateObject4 || (_templateObject
 
 exports.Option = Option;
 
-var TimeSelectContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > span {\n    margin: 0 10px;\n  }\n\n  > div {\n    width: 100px;\n    background-color: #fff !important;\n    border-radius: 5px;\n\n    &:last-child {\n      margin: 0 20px;\n    }    \n  }\n"])));
+var TimeSelectContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > span {\n    margin: 0 10px;\n  }\n\n  > div {\n    width: 100px;\n    background-color: #fff !important;\n    border-radius: 5px;\n\n    &:last-child {\n      margin: 0 20px;\n    }    \n  }\n\n  #list {\n    width: 100%;\n  }\n"])));
 
 exports.TimeSelectContent = TimeSelectContent;

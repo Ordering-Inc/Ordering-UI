@@ -67,10 +67,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var PIXELS_TO_SCROLL = 700;
-
 var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
-  var _orderState$options3, _businessesList$busin, _orderState$options6;
+  var _document$getElementB, _orderState$options3, _businessesList$busin, _orderState$options6;
 
   var onFilterBusinessRedirect = props.onFilterBusinessRedirect,
       businessesList = props.businessesList,
@@ -99,6 +97,8 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       auth = _useSession2[0].auth;
+
+  var PIXELS_TO_SCROLL = ((_document$getElementB = document.getElementById('footer')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.offsetHeight) + 100 || 700;
 
   var _useState = (0, _react.useState)({
     listOpen: false,
@@ -198,7 +198,7 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
     handleCustomClick: function handleCustomClick() {
       return setIsGoBackClicked(true);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, businessTypeSelected === null ? t('ALL_BUSINESS', 'All Business') : businessTypeSelected), /*#__PURE__*/_react.default.createElement(_styles.AllStoreNumber, null, !businessesList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalItems, " ", t('STORES_NEARBY', 'STORES NEARBY')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, businessTypeSelected === null || businessTypeSelected === 'null' ? t('ALL_BUSINESS', 'All Business') : businessTypeSelected), /*#__PURE__*/_react.default.createElement(_styles.AllStoreNumber, null, !businessesList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalItems, " ", t('STORES_NEARBY', 'STORES NEARBY')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }))), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     noAutoScroll: true,

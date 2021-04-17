@@ -68,7 +68,7 @@ var WrapButtonGroup = _styledComponents.default.div(_templateObject13 || (_templ
 
 exports.WrapButtonGroup = WrapButtonGroup;
 
-var FilterBusinessList = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-wrap: wrap;\n  @media (max-width: 992px) {\n    > div {\n      margin: 10px;\n      &:not(:first-child) {\n        width: calc(50% - 20px);\n      }\n    }\n    padding-bottom: 30px;\n  }\n  @media (max-width: 576px) {\n    > div {\n      margin: 5px;\n\n      &:first-child {\n        width: 100%;\n      }\n\n      &:not(:first-child) {\n        width: calc(50% - 10px);\n      }\n    }\n  }\n"])));
+var FilterBusinessList = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-wrap: wrap;\n  @media (max-width: 992px) {\n    > div {\n      margin: 10px;\n      &:not(:first-child) {\n        width: calc(50% - 20px);\n      }\n    }\n    padding-bottom: 30px;\n  }\n  @media (max-width: 576px) {\n    > div {\n      margin: 5px;\n\n      &:first-child {\n        width: 100%;\n      }\n\n      &:not(:first-child) {\n        width: 100%;\n      }\n    }\n  }\n"])));
 
 exports.FilterBusinessList = FilterBusinessList;
 

@@ -42,11 +42,10 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _orderState$options2, _orderState$options2$, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options5;
+  var _orderState$options2, _orderState$options2$;
 
   var isCartView = props.isCartView,
       addressToShow = props.addressToShow,
-      isCartPending = props.isCartPending,
       googleMapsUrl = props.googleMapsUrl;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
@@ -62,18 +61,13 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       openChangeAddressModal = _useState2[0],
       setOpenChangeAddressModal = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      openEditAddressModal = _useState4[0],
-      setOpenEditAddressModal = _useState4[1];
-
-  var _useState5 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      alertState = _useState6[0],
-      setAlertState = _useState6[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -107,11 +101,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     width: "288px",
     height: "162px",
     loading: "lazy"
-  })), !isCartView && /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("h4", null, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: function onClick() {
-      return setOpenEditAddressModal(true);
-    }
-  }, t('ADD/EDIT', 'Add/Edit'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), !isCartView && /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('CHANGE_ADDRESS', 'Change Address'),
     open: openChangeAddressModal,
     width: "70%",
@@ -126,20 +116,6 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     },
     onAccept: function onAccept() {
       return handleFindBusinesses();
-    }
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t(orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.address),
-    open: openEditAddressModal,
-    width: "70%",
-    onClose: function onClose() {
-      return setOpenEditAddressModal(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
-    isAddAndEdit: true,
-    EditAddress: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address,
-    changeOrderAddressWithDefault: true,
-    onCancel: function onCancel() {
-      return setOpenEditAddressModal(false);
     }
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),

@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ContainerCard = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border-radius: 10px;\n  margin: 10px;\n  width: 100%;\n  background: #fff;\n  padding: 20px;\n  box-shadow: 0px 3px 6px #00000029;\n  max-height: 400px;\n  ", "\n\n  @media (max-width: 576px) {\n    padding: 10px;\n  }\n\n  ", "\n\n  ", "\n\n  @media (min-width: 681px) {\n    ", "\n  }\n"])), function (_ref) {
+var ContainerCard = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border-radius: 10px;\n  margin: 10px;\n  width: 100%;\n  background: #fff;\n  padding: 20px;\n  box-shadow: 0px 3px 6px #00000029;\n  max-height: 345px;\n  box-sizing: border-box;\n  max-height: 345px;\n  box-sizing: border-box;\n  ", "\n\n  @media (max-width: 576px) {\n    padding: 10px;\n  }\n\n  ", "\n\n  ", "\n\n  @media (min-width: 681px) {\n    ", "\n  }\n"])), function (_ref) {
   var twoColumnView = _ref.twoColumnView;
   return !twoColumnView && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    &:hover {\n      box-shadow: rgb(0 0 0 / 24%) 0px 2px 26px, rgb(0 0 0 / 8%) 0px 2px 8px;\n    }\n  "])));
 }, function (_ref2) {

@@ -17,7 +17,7 @@ var PickupBusinessContainer = _styledComponents.default.div(_templateObject || (
 
 exports.PickupBusinessContainer = PickupBusinessContainer;
 
-var InnerContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 91%;\n  padding: 20px 0;\n  display: flex;\n"])));
+var InnerContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 91%;\n  padding: 20px 0;\n  display: flex;\n  \n  @media (max-width: 992px) {\n    flex-direction: column;\n  }\n"])));
 
 exports.InnerContainer = InnerContainer;
 
@@ -29,7 +29,7 @@ var MapSkeleton = _styledComponents.default.div(_templateObject4 || (_templateOb
 
 exports.MapSkeleton = MapSkeleton;
 
-var WrapperBusinesses = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n\n\n  > div {\n    &:nth-child(2) {\n      padding-bottom: 50px;\n    }\n  }\n\n  @media (max-width: 992px) {\n    display: none;\n  }\n"])));
+var WrapperBusinesses = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n\n\n  > div {\n    &:nth-child(2) {\n      padding-bottom: 50px;\n    }\n  }\n"])));
 
 exports.WrapperBusinesses = WrapperBusinesses;
 
@@ -41,7 +41,7 @@ var LeftInnerContainer = _styledComponents.default.div(_templateObject7 || (_tem
 
 exports.LeftInnerContainer = LeftInnerContainer;
 
-var PickupBusinessList = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-wrap: wrap;\n  @media (max-width: 992px) {\n    > div {\n      margin: 10px;\n      &:not(:first-child) {\n        width: calc(50% - 20px);\n      }\n    }\n    padding-bottom: 30px;\n  }\n  @media (max-width: 576px) {\n    > div {\n      margin: 5px;\n\n      &: first-child {\n        width: 100%;\n      }\n\n      &:not(:first-child) {\n        width: calc(50% - 10px);\n      }\n    }\n  }\n"])));
+var PickupBusinessList = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-wrap: wrap;\n  @media (max-width: 992px) {\n    > div {\n      margin: 10px;\n      &:not(:first-child) {\n        width: calc(50% - 20px);\n      }\n    }\n    padding-bottom: 30px;\n  }\n  @media (max-width: 576px) {\n    > div {\n      margin: 5px;\n\n      &: first-child {\n        width: 100%;\n      }\n\n      &:not(:first-child) {\n        width: 100%;\n      }\n    }\n  }\n"])));
 
 exports.PickupBusinessList = PickupBusinessList;
 

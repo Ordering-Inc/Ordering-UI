@@ -66,7 +66,7 @@ var MomentPopover = function MomentPopover(props) {
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
-    placement: 'auto',
+    placement: 'bottom',
     modifiers: [{
       name: 'arrow',
       options: {

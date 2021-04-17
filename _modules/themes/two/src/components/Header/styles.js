@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MenuLinkTab = exports.WrapDeliveryAndPickupLink = exports.WrapMomentAndAddress = exports.ToText = exports.LeftHeader = exports.SubMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.RightHeader = exports.CenterHeader = exports.LogoHeader = exports.InnerHeader = exports.Header = void 0;
+exports.HeaderMobileViewInnerBottom = exports.HeaderMobileViewBottom = exports.WrapMomentAndAddress = exports.ToText = exports.LeftHeader = exports.SubMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.RightHeader = exports.CenterHeader = exports.LogoHeader = exports.InnerHeader = exports.Header = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -94,25 +94,16 @@ var ToText = _styledComponents.default.p(_templateObject20 || (_templateObject20
 
 exports.ToText = ToText;
 
-var WrapMomentAndAddress = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  @media (max-width: 992px) {\n    background: #fff;\n    border-bottom: 1px solid ", ";\n    width: 100vw;\n    height: 60px;\n    justify-content: center;\n    margin-top: 60px;\n  }\n"])), function (props) {
-  return props.theme.colors.secondary;
-});
+var WrapMomentAndAddress = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 
 exports.WrapMomentAndAddress = WrapMomentAndAddress;
 
-var WrapDeliveryAndPickupLink = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  height: 100%;\n"])));
-
-exports.WrapDeliveryAndPickupLink = WrapDeliveryAndPickupLink;
-
-var MenuLinkTab = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  color: ", ";\n  font-weight: 500;\n  padding: 0 8px;\n  position: relative;\n  ", "\n"])), function (props) {
-  return props.theme.colors.darkTextColor;
-}, function (_ref8) {
-  var active = _ref8.active;
-  return active && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    color: ", ";\n    &::after {\n      content: \"\";\n      position: absolute;\n      width: 100%;\n      height: 4px;\n      background-color: ", ";\n      left: 0px;\n      bottom: -1px;\n      border-top-left-radius: 4px;\n      border-top-right-radius: 4px;\n    }\n  "])), function (props) {
-    return props.theme.colors.darkTextColor;
-  }, function (props) {
-    return props.theme.colors.primary;
-  });
+var HeaderMobileViewBottom = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  background: #fff;\n  border-bottom: 1px solid ", ";\n  width: 100vw;\n  height: 60px;\n  margin-top: 60px;\n"])), function (props) {
+  return props.theme.colors.secondary;
 });
 
-exports.MenuLinkTab = MenuLinkTab;
+exports.HeaderMobileViewBottom = HeaderMobileViewBottom;
+
+var HeaderMobileViewInnerBottom = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  width: 91%;\n  margin: 0px auto;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n"])));
+
+exports.HeaderMobileViewInnerBottom = HeaderMobileViewInnerBottom;

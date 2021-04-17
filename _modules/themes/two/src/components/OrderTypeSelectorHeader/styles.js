@@ -52,7 +52,7 @@ var OrderTypeWrapper = _styledComponents.default.div(_templateObject7 || (_templ
   return radioStyle && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    border-right: none;\n    flex-direction: column;\n    row-gap: 20px;\n    padding: 10px 0;\n  "])));
 }, function (_ref8) {
   var dropDownStyle = _ref8.dropDownStyle;
-  return dropDownStyle && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      display: none;\n    "])));
+  return dropDownStyle && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      padding: 0;\n\n      #item {\n        padding-left: 5px;\n        padding-right: 5px;\n      }\n    "])));
 });
 
 exports.OrderTypeWrapper = OrderTypeWrapper;

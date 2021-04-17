@@ -28,7 +28,7 @@ var TextContent = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.TextContent = TextContent;
 
-var PopularBusinesssList = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-wrap: wrap;\n  @media (max-width: 992px) {\n    > div {\n      margin: 10px;\n\n      &:first-child {\n        width: 100%;\n      }\n\n      &:not(:first-child) {\n        width: calc(50% - 20px);\n      }\n    }\n  }\n  @media (max-width: 576px) {\n    > div {\n      margin: 10px 5px;\n\n      &:not(:first-child) {\n        width: calc(50% - 10px);\n      }\n    }\n  }\n"])));
+var PopularBusinesssList = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-wrap: wrap;\n  @media (max-width: 992px) {\n    > div {\n      margin: 10px;\n\n      &:first-child {\n        width: 100%;\n      }\n\n      &:not(:first-child) {\n        width: calc(50% - 20px);\n      }\n    }\n  }\n  @media (max-width: 576px) {\n    > div {\n      margin: 10px 5px;\n\n      &:not(:first-child) {\n        width: 100%;\n      }\n    }\n  }\n"])));
 
 exports.PopularBusinesssList = PopularBusinesssList;
 
