@@ -38,7 +38,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MomentControlUI = function MomentControlUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _props$afterComponent, _props$afterElements;
 
   var isAsap = props.isAsap,
       datesList = props.datesList,
@@ -79,7 +79,7 @@ var MomentControlUI = function MomentControlUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')), /*#__PURE__*/_react.default.createElement(_styles.Days, {
     name: "days"
-  }, datesList.slice(0, 6).map(function (date) {
+  }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
     var dateParts = date.split('-');
 
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
