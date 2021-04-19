@@ -87,7 +87,7 @@ const PhoneAutocompleteUI = (props) => {
             <Input
               name='phone-input'
               id='phone-input'
-              placeholder='Phone'
+              placeholder={t('PHONE', 'Phone')}
               type='text'
               pattern='[0-9]*'
               onInput={onChangeNumber}
