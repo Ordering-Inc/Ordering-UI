@@ -151,7 +151,7 @@ const OrderDetailsUI = (props) => {
                     <h1>
                       <span>{getOrderStatus(order?.status)?.value}</span>
                       <span onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                        {t('HELP', 'Help')}
+                        {t('ORDER_CHAT', 'Order Chat')}
                       </span>
                     </h1>
                     <p className='date'>
