@@ -10,7 +10,8 @@ import {
   TextContent,
   PopularBusinesssList,
   ErrorMessage,
-  BackView
+  BackView,
+  FixedContainer
 } from './styles'
 
 const FeaturedBusinessListingUI = (props) => {
@@ -45,25 +46,27 @@ const FeaturedBusinessListingUI = (props) => {
         />
       )}
       <TextContent>
-        {isFeaturePage &&
-          <BackView>
-            <span onClick={() => handleGoToPage({ page: 'search' })}>
-              <EnChevronLeft />
-              {t('BACK', ' Back')}
-            </span>
-          </BackView>}
-        <h1>
-          {t('MOST_POPULAR_LOCAL_BUSINESSES', 'Most Popular Local Businesses')}
-        </h1>
-        {!isFeaturePage &&
-          <Button
-            color='primary'
-            className='desktop'
-            disabled={businessesList.loading}
-            onClick={() => handleGoToPage({ page: 'businesses_feature', params: { feature: 'popular' } })}
-          >
-            {t('SEE_ALL', 'See All')} <BsArrowRight />
-          </Button>}
+        <FixedContainer>
+          {isFeaturePage &&
+            <BackView>
+              <span onClick={() => handleGoToPage({ page: 'search' })}>
+                <EnChevronLeft />
+                {t('BACK', ' Back')}
+              </span>
+            </BackView>}
+          <h1>
+            {t('MOST_POPULAR_LOCAL_BUSINESSES', 'Most Popular Local Businesses')}
+          </h1>
+          {!isFeaturePage &&
+            <Button
+              color='primary'
+              className='desktop'
+              disabled={businessesList.loading}
+              onClick={() => handleGoToPage({ page: 'businesses_feature', params: { feature: 'popular' } })}
+            >
+              {t('SEE_ALL', 'See All')} <BsArrowRight />
+            </Button>}
+        </FixedContainer>
       </TextContent>
       <PopularBusinesssList>
         {

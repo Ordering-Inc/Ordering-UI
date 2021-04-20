@@ -28,6 +28,9 @@ export const PopularBusinessContainer = styled.div`
     padding-top: 60px;
   `}
 `
+export const FixedContainer = styled.div`
+  position: fixed;
+`
 export const TextContent = styled.div`
   width: 30%;
   padding: 20px 0;
