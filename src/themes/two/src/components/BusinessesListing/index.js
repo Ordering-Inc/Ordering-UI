@@ -79,9 +79,6 @@ export const BusinessesListing = (props) => {
             <img alt='Logotype' width='130px' height='30px' src={theme?.images?.logos?.logotypeInvert} loading='lazy' />
             <p>{t('$_0_DELIVERY_FEES_REDUCED_SERVICE_FEES', '$ 0 delivery fees, reduced service fees.')}</p>
             <p>{t('SIGN_UP_FOR_ORDERING_PASS', 'Sign Up for Ordering Pass')}</p>
-            <WrapperGoButton>
-              <BsArrowRightShort />
-            </WrapperGoButton>
           </WrapperOrderingPass>
           <FeaturedBusinessListing
             {...props}
