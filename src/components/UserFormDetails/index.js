@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useSession, useLanguage, useCustomer } from 'ordering-components'
 import { useForm } from 'react-hook-form'
@@ -10,8 +10,6 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'
-
-import { flatArray } from '../../utils'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
 
@@ -32,7 +30,7 @@ export const UserFormDetailsUI = (props) => {
     isCustomerMode
   } = props
 
-  const { handleSubmit, register, errors } = useForm()
+  const formMethods = useForm()
   const [, t] = useLanguage()
 
   const [{ user: userSession }] = useSession()
@@ -41,6 +39,7 @@ export const UserFormDetailsUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { setUserCustomer }] = useCustomer()
+  const emailInput = useRef(null)
 
   const user = userData || userSession
 
@@ -166,9 +165,15 @@ export const UserFormDetailsUI = (props) => {
     setValidationFieldsSorted(fieldsSorted)
   }
 
+  const handleChangeInputEmail = (e) => {
+    handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/\s/gi, '') } })
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''))
+    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '')
+  }
+
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      const content = Object.values(errors).map(error => error.message)
+    if (Object.keys(formMethods.errors).length > 0) {
+      const content = Object.values(formMethods.errors).map(error => error.message)
       if (!isValidPhoneNumber && userPhoneNumber) {
         content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid.'))
       }
@@ -177,7 +182,7 @@ export const UserFormDetailsUI = (props) => {
         content
       })
     }
-  }, [errors])
+  }, [formMethods.errors])
 
   useEffect(() => {
     if ((!formState?.loading && formState?.result?.error)) {
@@ -207,6 +212,25 @@ export const UserFormDetailsUI = (props) => {
     }
   }, [user, isEdit])
 
+  useEffect(() => {
+    if (!validationFields.loading && emailInput.current) {
+      emailInput.current.onkeyup = handleChangeInputEmail
+      formMethods.setValue('email', formState?.result?.result
+        ? formState?.result?.result?.email
+        : formState?.changes?.email ?? (user && user?.email) ?? '')
+    }
+  }, [validationFields, emailInput.current])
+
+  useEffect(() => {
+    formMethods.register('email', {
+      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+      }
+    })
+  }, [formMethods])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -215,7 +239,7 @@ export const UserFormDetailsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <FormInput onSubmit={handleSubmit(onSubmit)} isCheckout={isCheckout}>
+      <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout}>
         {!validationFields?.loading ? (
           <>
             {
@@ -231,30 +255,47 @@ export const UserFormDetailsUI = (props) => {
             {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
               showField && showField(field.code) && (
                 <React.Fragment key={field.id}>
-                  <Input
-                    key={field.id}
-                    type={field.type}
-                    name={field.code}
-                    className='form'
-                    disabled={!isEdit}
-                    placeholder={t(field.code.toUpperCase(), field?.name)}
-                    defaultValue={
+                  {field.code === 'email' ? (
+                    <Input
+                      key={field.id}
+                      type={field.type}
+                      name={field.code}
+                      className='form'
+                      disabled={!isEdit}
+                      placeholder={t(field.code.toUpperCase(), field?.name)}
+                      defaultValue={
                       formState?.result?.result
                         ? formState?.result?.result[field.code]
                         : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
-                    }
-                    onChange={handleChangeInput}
-                    ref={register({
-                      required: isRequiredField(field.code)
-                        ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
-                        : null,
-                      pattern: {
-                        value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                        message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
                       }
-                    })}
-                    autoComplete='off'
-                  />
+                      ref={(e) => {
+                        if (field.code === 'email') emailInput.current = e
+                      }}
+                      autoComplete='off'
+                    />
+                  ) : (
+                    <Input
+                      key={field.id}
+                      type={field.type}
+                      name={field.code}
+                      className='form'
+                      disabled={!isEdit}
+                      placeholder={t(field.code.toUpperCase(), field?.name)}
+                      defaultValue={
+                      formState?.result?.result
+                        ? formState?.result?.result[field.code]
+                        : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                      }
+                      onChange={handleChangeInput}
+                      ref={formMethods.register({
+                        required: isRequiredField(field.code)
+                          ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
+                          : null
+                      })}
+                      autoComplete='off'
+                    />
+                  )}
+
                 </React.Fragment>
               )
             ))}
@@ -266,7 +307,7 @@ export const UserFormDetailsUI = (props) => {
                 disabled={!isEdit}
                 placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
                 onChange={handleChangeInput}
-                ref={register({
+                ref={formMethods.register({
                   required: isRequiredField('password')
                     ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
                     : null,

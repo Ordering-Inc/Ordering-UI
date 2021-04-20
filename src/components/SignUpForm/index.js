@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
@@ -50,14 +50,16 @@ const SignUpFormUI = (props) => {
     isPopup,
     externalPhoneNumber,
     saveCustomerUser,
-    fieldsNotValid
+    fieldsNotValid,
+    signupData
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-  const { handleSubmit, register, errors } = useForm()
+  const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const theme = useTheme()
+  const emailInput = useRef(null)
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -135,6 +137,12 @@ const SignUpFormUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
+  const handleChangeInputEmail = (e) => {
+    handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/\s/gi, '') } })
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''))
+    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '')
+  }
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
@@ -147,13 +155,43 @@ const SignUpFormUI = (props) => {
   }, [formState])
 
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map(error => error.message)
+        content: Object.values(formMethods.errors).map(error => error.message)
       })
     }
-  }, [errors])
+  }, [formMethods.errors])
+
+  useEffect(() => {
+    if (!validationFields.loading && emailInput.current) {
+      emailInput.current.onkeyup = handleChangeInputEmail
+    }
+  }, [validationFields && emailInput.current])
+
+  useEffect(() => {
+    if (!validationFields.loading) {
+      Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
+        formMethods.register(field.code, {
+          required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null
+        })
+      ))
+
+      formMethods.register('email', {
+        required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+        pattern: {
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+        }
+      })
+    }
+  }, [formMethods])
+
+  useEffect(() => {
+    Object.keys(signupData).map(fieldName => {
+      formMethods.setValue(fieldName, signupData[fieldName])
+    })
+  }, [signupData])
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
@@ -177,7 +215,7 @@ const SignUpFormUI = (props) => {
           <FormInput
             noValidate
             isPopup={isPopup}
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={formMethods.handleSubmit(onSubmit)}
             isSkeleton={useChekoutFileds && validationFields?.loading}
           >
             {props.beforeMidElements?.map((BeforeMidElements, i) => (
@@ -199,14 +237,10 @@ const SignUpFormUI = (props) => {
                           aria-label={field.code}
                           className='form'
                           placeholder={t(field.name)}
-                          onChange={handleChangeInput}
-                          ref={register({
-                            required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
-                            pattern: {
-                              value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                              message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-                            }
-                          })}
+                          onChange={field.code !== 'email' ? handleChangeInput : undefined}
+                          ref={(e) => {
+                            if (field.code === 'email') emailInput.current = e
+                          }}
                           required={field.required}
                           autoComplete='off'
                         />
@@ -239,7 +273,7 @@ const SignUpFormUI = (props) => {
                         placeholder={t('PASSWORD', 'Password')}
                         onChange={handleChangeInput}
                         required
-                        ref={register({
+                        ref={formMethods.register({
                           required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
                           minLength: {
                             value: 8,

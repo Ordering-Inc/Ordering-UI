@@ -100,8 +100,10 @@ const LoginFormUI = (props) => {
   }, [formMethods.errors])
 
   useEffect(() => {
-    emailInput.current.onkeyup = handleChangeInputEmail
-  }, [])
+    if (emailInput.current) {
+      emailInput.current.onkeyup = handleChangeInputEmail
+    }
+  }, [emailInput.current])
 
   useEffect(() => {
     formMethods.register('email', {
