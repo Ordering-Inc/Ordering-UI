@@ -214,7 +214,6 @@ export const UserFormDetailsUI = (props) => {
 
   useEffect(() => {
     if (!validationFields.loading && emailInput.current) {
-      emailInput.current.onkeyup = handleChangeInputEmail
       formMethods.setValue('email', formState?.result?.result
         ? formState?.result?.result?.email
         : formState?.changes?.email ?? (user && user?.email) ?? '')
@@ -268,8 +267,9 @@ export const UserFormDetailsUI = (props) => {
                         ? formState?.result?.result[field.code]
                         : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
                       }
+                      onChange={handleChangeInputEmail}
                       ref={(e) => {
-                        if (field.code === 'email') emailInput.current = e
+                        emailInput.current = e
                       }}
                       autoComplete='off'
                     />

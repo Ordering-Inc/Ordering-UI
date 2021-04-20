@@ -100,12 +100,6 @@ const LoginFormUI = (props) => {
   }, [formMethods.errors])
 
   useEffect(() => {
-    if (emailInput.current) {
-      emailInput.current.onkeyup = handleChangeInputEmail
-    }
-  }, [emailInput.current])
-
-  useEffect(() => {
     formMethods.register('email', {
       required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
       pattern: {
@@ -181,6 +175,7 @@ const LoginFormUI = (props) => {
                   ref={(e) => {
                     emailInput.current = e
                   }}
+                  onChange={handleChangeInputEmail}
                   autoComplete='off'
                 />
               )}

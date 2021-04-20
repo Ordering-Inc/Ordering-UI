@@ -164,12 +164,6 @@ const SignUpFormUI = (props) => {
   }, [formMethods.errors])
 
   useEffect(() => {
-    if (!validationFields.loading && emailInput.current) {
-      emailInput.current.onkeyup = handleChangeInputEmail
-    }
-  }, [validationFields && emailInput.current])
-
-  useEffect(() => {
     if (!validationFields.loading) {
       Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
         formMethods.register(field.code, {
@@ -230,20 +224,34 @@ const SignUpFormUI = (props) => {
                   {validationFields?.fields?.checkout &&
                     Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
                       showField && showField(field.code) && (
-                        <Input
-                          key={field.id}
-                          type={field.enabled && field.required ? field.type : 'hidden'}
-                          name={field.code}
-                          aria-label={field.code}
-                          className='form'
-                          placeholder={t(field.name)}
-                          onChange={field.code !== 'email' ? handleChangeInput : undefined}
-                          ref={(e) => {
-                            if (field.code === 'email') emailInput.current = e
-                          }}
-                          required={field.required}
-                          autoComplete='off'
-                        />
+                        <React.Fragment key={field.id}>
+                          {field.code === 'email' ? (
+                            <Input
+                              type={field.enabled && field.required ? field.type : 'hidden'}
+                              name={field.code}
+                              aria-label={field.code}
+                              className='form'
+                              placeholder={t(field.name)}
+                              onChange={handleChangeInputEmail}
+                              ref={(e) => {
+                                emailInput.current = e
+                              }}
+                              required={field.required}
+                              autoComplete='off'
+                            />
+                          ) : (
+                            <Input
+                              type={field.enabled && field.required ? field.type : 'hidden'}
+                              name={field.code}
+                              aria-label={field.code}
+                              className='form'
+                              placeholder={t(field.name)}
+                              onChange={handleChangeInput}
+                              required={field.required}
+                              autoComplete='off'
+                            />
+                          )}
+                        </React.Fragment>
                       )
                     ))}
                   {!!showInputPhoneNumber && !externalPhoneNumber && (
