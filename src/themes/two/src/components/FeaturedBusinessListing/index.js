@@ -11,7 +11,7 @@ import {
   PopularBusinesssList,
   ErrorMessage,
   BackView,
-  FixedContainer
+  PositionedContainer
 } from './styles'
 
 const FeaturedBusinessListingUI = (props) => {
@@ -32,6 +32,8 @@ const FeaturedBusinessListingUI = (props) => {
     events.emit('go_to_page', data)
   }
 
+  const isPopularBisnesses = window.location.pathname === '/businesses/popular'
+
   return (
     <PopularBusinessContainer
       isFeaturePage={isFeaturePage}
@@ -46,7 +48,9 @@ const FeaturedBusinessListingUI = (props) => {
         />
       )}
       <TextContent>
-        <FixedContainer>
+        <PositionedContainer
+          fixed={isPopularBisnesses}
+        >
           {isFeaturePage &&
             <BackView>
               <span onClick={() => handleGoToPage({ page: 'search' })}>
@@ -66,7 +70,7 @@ const FeaturedBusinessListingUI = (props) => {
             >
               {t('SEE_ALL', 'See All')} <BsArrowRight />
             </Button>}
-        </FixedContainer>
+        </PositionedContainer>
       </TextContent>
       <PopularBusinesssList>
         {
