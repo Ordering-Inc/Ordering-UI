@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import IosMenu from '@meronex/icons/ios/IosMenu'
 import MdClose from '@meronex/icons/md/MdClose'
 import AiOutlineLogin from '@meronex/icons/ai/AiOutlineLogin'
@@ -13,6 +13,7 @@ import VscAccount from '@meronex/icons/vsc/VscAccount'
 import HiOutlineShoppingBag from '@meronex/icons/hi/HiOutlineShoppingBag'
 import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
 
+import { useOutsideClick } from '../../../../../hooks/useOutsideClick'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { LogoutButton } from '../LogoutButton'
 import { LanguageSelector } from '../LanguageSelector'
@@ -32,6 +33,7 @@ import {
 } from './styles'
 
 export const SidebarMenu = (props) => {
+  const sideBarRef = useRef(null)
   const { configTypes } = props
   const [{ auth, user }] = useSession()
   const [events] = useEvent()
@@ -64,6 +66,11 @@ export const SidebarMenu = (props) => {
       }
     }
   }, [width])
+  
+  useOutsideClick(sideBarRef, () => {
+    actionSidebar(false)
+    setIsMenuOpen(false)
+  });
 
   return (
     <>
@@ -77,6 +84,7 @@ export const SidebarMenu = (props) => {
             <IosMenu />
           </IconContent>
           <SidebarContent
+            ref={sideBarRef}
             id='sidebar_menu'
             isHome={isHome}
           >
