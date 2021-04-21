@@ -340,6 +340,7 @@ export const Header = (props) => {
                     userId={customerState?.user?.id}
                     changeOrderAddressWithDefault
                     userCustomerSetup={customerState.user}
+                    setCustomerModalOpen={setCustomerModalOpen}
                   />
                 </>
               )}
