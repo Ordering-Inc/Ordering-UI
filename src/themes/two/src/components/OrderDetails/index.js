@@ -202,7 +202,6 @@ const OrderDetailsUI = (props) => {
                   <BusinessInfo>
                     <h1 onClick={() => setIsOrderDetail(true)}>
                       <span>{order?.business?.name}</span>
-                      <BsChevronRight />
                     </h1>
                     <p>{order.products.length} {t('ITEM', 'Item')}</p>
                     {order?.products?.length && order?.products.map(product => (
