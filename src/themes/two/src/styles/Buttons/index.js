@@ -16,6 +16,11 @@ export const Button = styled.button`
   overflow: hidden;
   text-overflow: ellipsis;
 
+  &:hover {
+    background: ${darken(0.07, '#CCC')};
+    color: #FFF;
+  }
+
   &:active {
     background: ${() => darken(0.07, '#CCC')};
   }
@@ -58,11 +63,6 @@ export const Button = styled.button`
     &:active {
       color: #FFF;
       background: ${darken(0.07, '#CCC')};
-    }
-
-    &:hover {
-      background: ${darken(0.07, '#CCC')};
-      color: #FFF;
     }
   `}
 
