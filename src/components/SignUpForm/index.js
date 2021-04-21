@@ -33,6 +33,7 @@ import { useTheme } from 'styled-components'
 
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
+import { sortInputFields } from '../../utils'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
 
@@ -222,7 +223,7 @@ const SignUpFormUI = (props) => {
               !(useChekoutFileds && validationFields?.loading) ? (
                 <>
                   {validationFields?.fields?.checkout &&
-                    Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
+                    sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
                       showField && showField(field.code) && (
                         <React.Fragment key={field.id}>
                           {field.code === 'email' ? (
@@ -253,7 +254,7 @@ const SignUpFormUI = (props) => {
                           )}
                         </React.Fragment>
                       )
-                    ))}
+                    )}
                   {!!showInputPhoneNumber && !externalPhoneNumber && (
                     <InputPhoneNumber
                       value={userPhoneNumber}

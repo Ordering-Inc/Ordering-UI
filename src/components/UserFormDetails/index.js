@@ -10,8 +10,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'
-
-const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone']
+import { sortInputFields } from '../../utils'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -35,7 +34,6 @@ export const UserFormDetailsUI = (props) => {
 
   const [{ user: userSession }] = useSession()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
-  const [validationFieldsSorted, setValidationFieldsSorted] = useState([])
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { setUserCustomer }] = useCustomer()
@@ -149,22 +147,6 @@ export const UserFormDetailsUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
-  const sortValidationFields = () => {
-    const fields = ['name', 'middle_name', 'lastname', 'second_lastname', 'email']
-    const fieldsSorted = []
-    const validationsFieldsArray = Object.values(validationFields.fields?.checkout)
-
-    fields.forEach(f => {
-      validationsFieldsArray.forEach(field => {
-        if (f === field.code) {
-          fieldsSorted.push(field)
-        }
-      })
-    })
-
-    setValidationFieldsSorted(fieldsSorted)
-  }
-
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/\s/gi, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''))
@@ -192,12 +174,6 @@ export const UserFormDetailsUI = (props) => {
       })
     }
   }, [formState?.loading])
-
-  useEffect(() => {
-    if (validationFields?.fields?.checkout) {
-      sortValidationFields()
-    }
-  }, [validationFields?.fields?.checkout])
 
   useEffect(() => {
     if (!isEdit && onCloseProfile) {
@@ -251,7 +227,7 @@ export const UserFormDetailsUI = (props) => {
             props.beforeMidComponents?.map((BeforeMidComponents, i) => (
               <BeforeMidComponents key={i} {...props} />))
             }
-            {validationFieldsSorted.map(field => !notValidationFields.includes(field.code) && (
+            {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
               showField && showField(field.code) && (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
@@ -298,7 +274,16 @@ export const UserFormDetailsUI = (props) => {
 
                 </React.Fragment>
               )
-            ))}
+            )}
+            {!!showInputPhoneNumber && (
+              <InputPhoneNumber
+                user={user}
+                value={userPhoneNumber}
+                setValue={handleChangePhoneNumber}
+                handleIsValid={setIsValidPhoneNumber}
+                disabled={!isEdit}
+              />
+            )}
             {!isCheckout && (
               <Input
                 type='password'
@@ -316,15 +301,6 @@ export const UserFormDetailsUI = (props) => {
                     message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
                   }
                 })}
-              />
-            )}
-            {!!showInputPhoneNumber && (
-              <InputPhoneNumber
-                user={user}
-                value={userPhoneNumber}
-                setValue={handleChangePhoneNumber}
-                handleIsValid={setIsValidPhoneNumber}
-                disabled={!isEdit}
               />
             )}
             {
