@@ -247,7 +247,7 @@ export const Header = (props) => {
           )}
         </InnerHeader>
         {onlineStatus && isShowOrderOptions && (
-          windowSize.width <= 820 && windowSize.width > 768 ? (
+          windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
               <AddressesPopover
                 auth={auth}
@@ -340,6 +340,7 @@ export const Header = (props) => {
                     userId={customerState?.user?.id}
                     changeOrderAddressWithDefault
                     userCustomerSetup={customerState.user}
+                    setCustomerModalOpen={setCustomerModalOpen}
                   />
                 </>
               )}
