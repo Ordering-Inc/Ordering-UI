@@ -100,7 +100,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleSearchRedirect = props.handleSearchRedirect,
       featuredProducts = props.featuredProducts,
       handleChangeSortBy = props.handleChangeSortBy,
-      isCartOnProductsList = props.isCartOnProductsList;
+      isCartOnProductsList = props.isCartOnProductsList,
+      errorQuantityProducts = props.errorQuantityProducts;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -280,7 +281,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation
-  }), (categoryState.products.length !== 0 || searchValue) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }), (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH_PRODUCTS', 'Search Products'),
@@ -326,7 +327,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     featured: featuredProducts,
     searchValue: searchValue,
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0,
-    handleClearSearch: handleChangeSearch
+    handleClearSearch: handleChangeSearch,
+    errorQuantityProducts: errorQuantityProducts
   }))), isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isForceOpenCart: true,
     cart: currentCart,
@@ -352,7 +354,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categories: [],
     category: categorySelected,
     categoryState: categoryState,
-    isBusinessLoading: loading
+    isBusinessLoading: loading,
+    errorQuantityProducts: errorQuantityProducts
   }))), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),

@@ -249,7 +249,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     });
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('PREFERENCES', 'Preferences')), /*#__PURE__*/_react.default.createElement(_styles.SectionDescription, null, /*#__PURE__*/_react.default.createElement("span", null, t('EXTRA_INSTRUCTIONS', 'Extra instructions')), /*#__PURE__*/_react.default.createElement("span", null, t('LIST_ANY_SPECIAL_REQUEST', 'List any special request'))), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
-    placeholder: t('e.g. allergies, extra spicy, etc.'),
+    placeholder: t('E_G_ALLERGIES_EXTRA_SPICY_ETC', 'e.g. allergies, extra spicy, etc.'),
     defaultValue: productCart.comment,
     onChange: handleChangeCommentState,
     disabled: !(productCart && !isSoldOut && maxProductQuantity)

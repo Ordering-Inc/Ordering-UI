@@ -150,7 +150,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "phone-input",
     id: "phone-input",
-    placeholder: "Phone",
+    placeholder: t('PHONE', 'Phone'),
     type: "text",
     pattern: "[0-9]*",
     onInput: onChangeNumber,

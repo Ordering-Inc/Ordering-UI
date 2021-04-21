@@ -78,7 +78,8 @@ var AddressListUI = function AddressListUI(props) {
       onAccept = props.onAccept,
       userId = props.userId,
       userCustomerSetup = props.userCustomerSetup,
-      isEnableContinueButton = props.isEnableContinueButton;
+      isEnableContinueButton = props.isEnableContinueButton,
+      setCustomerModalOpen = props.setCustomerModalOpen;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -87,6 +88,10 @@ var AddressListUI = function AddressListUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
+
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -108,6 +113,11 @@ var AddressListUI = function AddressListUI(props) {
       setConfirm = _useState6[1];
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 1),
+      user = _useCustomer2[0].user;
+
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
     return i === self.findIndex(function (obj) {
       return address.address === obj.address && address.address_notes === obj.address_notes && address.zipcode === obj.zipcode && address.internal_number === obj.internal_number;
@@ -151,6 +161,14 @@ var AddressListUI = function AddressListUI(props) {
   };
 
   var handleSetAddress = function handleSetAddress(address) {
+    if (checkAddress(address) && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id)) {
+      events.emit('go_to_page', {
+        page: 'search'
+      });
+      setCustomerModalOpen && setCustomerModalOpen(false);
+      return;
+    }
+
     setAddressOpen(false);
     handleSetDefault(address, userCustomerSetup);
   };

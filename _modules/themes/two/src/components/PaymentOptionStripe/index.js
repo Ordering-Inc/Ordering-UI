@@ -205,7 +205,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     },
     disabled: !cardDefault
   }, t('ACCEPT', 'Accept')))), (defaultCardSetActionStatus === null || defaultCardSetActionStatus === void 0 ? void 0 : defaultCardSetActionStatus.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: "Add credit or debit card",
+    title: t('ADD_CREDIT_OR_DEBIT_CARD', 'Add credit or debit card'),
     className: "modal-info",
     open: addCartOpen,
     onClose: function onClose() {

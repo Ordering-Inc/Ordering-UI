@@ -412,7 +412,8 @@ var Header = function Header(props) {
     isModal: true,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user3 = customerState.user) === null || _customerState$user3 === void 0 ? void 0 : _customerState$user3.id,
     changeOrderAddressWithDefault: true,
-    userCustomerSetup: customerState.user
+    userCustomerSetup: customerState.user,
+    setCustomerModalOpen: setCustomerModalOpen
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('CUSTOMER', 'Customer'),
     content: confirm.content,

@@ -129,7 +129,7 @@ var BusinessesListing = function BusinessesListing(props) {
     height: "30px",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotypeInvert,
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement("p", null, t('$ 0 delivery fees, reduced service fees.')), /*#__PURE__*/_react.default.createElement("p", null, t('Sign Up for Ordering Pass')), /*#__PURE__*/_react.default.createElement(_styles.WrapperGoButton, null, /*#__PURE__*/_react.default.createElement(_BsArrowRightShort.default, null))), /*#__PURE__*/_react.default.createElement(_FeaturedBusinessListing.FeaturedBusinessListing, _extends({}, props, {
+  }), /*#__PURE__*/_react.default.createElement("p", null, t('$_0_DELIVERY_FEES_REDUCED_SERVICE_FEES', '$ 0 delivery fees, reduced service fees.')), /*#__PURE__*/_react.default.createElement("p", null, t('SIGN_UP_FOR_ORDERING_PASS', 'Sign Up for Ordering Pass'))), /*#__PURE__*/_react.default.createElement(_FeaturedBusinessListing.FeaturedBusinessListing, _extends({}, props, {
     orderType: 1,
     isSortByReview: true,
     twoColumnView: true,
