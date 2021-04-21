@@ -34,6 +34,7 @@ export const BusinessProductsList = (props) => {
       'description',
       'address',
       'location',
+      'timezone',
       'schedule',
       'service_fee',
       'delivery_price',
