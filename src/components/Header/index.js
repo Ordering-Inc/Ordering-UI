@@ -247,7 +247,7 @@ export const Header = (props) => {
           )}
         </InnerHeader>
         {onlineStatus && isShowOrderOptions && (
-          windowSize.width <= 820 && windowSize.width > 768 ? (
+          windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
               <AddressesPopover
                 auth={auth}
