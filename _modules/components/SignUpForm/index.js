@@ -35,6 +35,8 @@ var _AiOutlineEye = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineE
 
 var _AiOutlineEyeInvisible = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEyeInvisible"));
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -72,7 +74,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie8, _validationFields$fie9, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie9, _validationFields$fie10, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -86,7 +88,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       isPopup = props.isPopup,
       externalPhoneNumber = props.externalPhoneNumber,
       saveCustomerUser = props.saveCustomerUser,
-      fieldsNotValid = props.fieldsNotValid;
+      fieldsNotValid = props.fieldsNotValid,
+      signupData = props.signupData;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -96,10 +99,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
-  var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors;
+  var formMethods = (0, _reactHookForm.useForm)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -114,6 +114,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       login = _useSession2[1].login;
 
   var theme = (0, _styledComponents.useTheme)();
+  var emailInput = (0, _react.useRef)(null);
 
   var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -212,6 +213,17 @@ var SignUpFormUI = function SignUpFormUI(props) {
     handleChangeInput(phoneNumber, true);
   };
 
+  var handleChangeInputEmail = function handleChangeInputEmail(e) {
+    handleChangeInput({
+      target: {
+        name: 'email',
+        value: e.target.value.toLowerCase().replace(/\s/gi, '')
+      }
+    });
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '');
+  };
+
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result3, _formState$result4;
 
@@ -229,16 +241,39 @@ var SignUpFormUI = function SignUpFormUI(props) {
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map(function (error) {
+        content: Object.values(formMethods.errors).map(function (error) {
           return error.message;
         })
       });
     }
-  }, [errors]);
-  var showInputPhoneNumber = (_validationFields$fie4 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.checkout) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.enabled) !== null && _validationFields$fie4 !== void 0 ? _validationFields$fie4 : false;
+  }, [formMethods.errors]);
+  (0, _react.useEffect)(function () {
+    if (!validationFields.loading) {
+      var _validationFields$fie4;
+
+      Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.checkout).map(function (field) {
+        return !notValidationFields.includes(field.code) && formMethods.register(field.code, {
+          required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null
+        });
+      });
+      formMethods.register('email', {
+        required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+        pattern: {
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+        }
+      });
+    }
+  }, [formMethods]);
+  (0, _react.useEffect)(function () {
+    Object.keys(signupData).map(function (fieldName) {
+      formMethods.setValue(fieldName, signupData[fieldName]);
+    });
+  }, [signupData]);
+  var showInputPhoneNumber = (_validationFields$fie5 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.checkout) === null || _validationFields$fie7 === void 0 ? void 0 : (_validationFields$fie8 = _validationFields$fie7.cellphone) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.enabled) !== null && _validationFields$fie5 !== void 0 ? _validationFields$fie5 : false;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -261,7 +296,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
-    onSubmit: handleSubmit(onSubmit),
+    onSubmit: formMethods.handleSubmit(onSubmit),
     isSkeleton: useChekoutFileds && (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
   }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -271,25 +306,33 @@ var SignUpFormUI = function SignUpFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout) && Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.checkout).map(function (field) {
-    return !notValidationFields.includes(field.code) && showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-      key: field.id,
+  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.checkout) && (0, _utils.sortInputFields)({
+    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie10 = validationFields.fields) === null || _validationFields$fie10 === void 0 ? void 0 : _validationFields$fie10.checkout
+  }).map(function (field) {
+    return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: field.id
+    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+      type: field.enabled && field.required ? field.type : 'hidden',
+      name: field.code,
+      "aria-label": field.code,
+      className: "form",
+      placeholder: t(field.name),
+      onChange: handleChangeInputEmail,
+      ref: function ref(e) {
+        emailInput.current = e;
+      },
+      required: field.required,
+      autoComplete: "off"
+    }) : /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       type: field.enabled && field.required ? field.type : 'hidden',
       name: field.code,
       "aria-label": field.code,
       className: "form",
       placeholder: t(field.name),
       onChange: handleChangeInput,
-      ref: register({
-        required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null,
-        pattern: {
-          value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-          message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-        }
-      }),
       required: field.required,
       autoComplete: "off"
-    });
+    }));
   }), !!showInputPhoneNumber && !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
@@ -307,7 +350,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     placeholder: t('PASSWORD', 'Password'),
     onChange: handleChangeInput,
     required: true,
-    ref: register({
+    ref: formMethods.register({
       required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
       minLength: {
         value: 8,

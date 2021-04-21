@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getHourMin = exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = void 0;
+exports.sortInputFields = exports.fieldsToSort = exports.getHourMin = exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -232,5 +232,40 @@ var getHourMin = function getHourMin(hour, min) {
     return "".concat(_hour, " : ").concat(_min, " PM");
   }
 };
+/**
+ * List of fields with correct order
+ */
+
 
 exports.getHourMin = getHourMin;
+var fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
+/**
+ * Function to return a array sorted by certain fields
+ * @param fields Array with right order
+ * @param array Array to sort
+ */
+
+exports.fieldsToSort = fieldsToSort;
+
+var sortInputFields = function sortInputFields(_ref3) {
+  var fields = _ref3.fields,
+      values = _ref3.values;
+  var fieldsBase = fields;
+  var fieldsSorted = [];
+  var fieldsArray = Array.isArray(values) ? values : Object.values(values);
+
+  if (!fieldsBase) {
+    fieldsBase = fieldsToSort;
+  }
+
+  fieldsBase.forEach(function (f) {
+    fieldsArray.forEach(function (field) {
+      if (f === field.code) {
+        fieldsSorted.push(field);
+      }
+    });
+  });
+  return fieldsSorted;
+};
+
+exports.sortInputFields = sortInputFields;

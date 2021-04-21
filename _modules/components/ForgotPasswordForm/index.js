@@ -56,11 +56,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       formData = props.formData,
       elementLinkToLogin = props.elementLinkToLogin,
       isPopup = props.isPopup;
-
-  var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors;
+  var formMethods = (0, _reactHookForm.useForm)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -77,18 +73,45 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
+  var emailInput = (0, _react.useRef)(null);
+
+  var onSubmit = function onSubmit() {
+    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+      success: true
+    }));
+    handleButtonForgotPasswordClick();
+  };
+
+  var closeAlert = function closeAlert() {
+    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+      open: false,
+      content: []
+    }));
+  };
+
+  var handleChangeInputEmail = function handleChangeInputEmail(e) {
+    hanldeChangeInput({
+      target: {
+        name: 'email',
+        value: e.target.value.toLowerCase().replace(/\s/gi, '')
+      }
+    });
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '');
+  };
+
   (0, _react.useEffect)(function () {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         success: false,
         open: true,
         title: t('ERROR_UNKNOWN', 'An error has ocurred'),
-        content: Object.values(errors).map(function (error) {
+        content: Object.values(formMethods.errors).map(function (error) {
           return error.message;
         })
       }));
     }
-  }, [errors]);
+  }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result3;
 
@@ -111,21 +134,15 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       }));
     }
   }, [formState.loading]);
-
-  var onSubmit = function onSubmit() {
-    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-      success: true
-    }));
-    handleButtonForgotPasswordClick();
-  };
-
-  var closeAlert = function closeAlert() {
-    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-      open: false,
-      content: []
-    }));
-  };
-
+  (0, _react.useEffect)(function () {
+    formMethods.register('email', {
+      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+      }
+    });
+  }, [formMethods]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -149,7 +166,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
-    onSubmit: handleSubmit(onSubmit)
+    onSubmit: formMethods.handleSubmit(onSubmit)
   }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -159,21 +176,14 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    type: "text",
+    type: "email",
     name: "email",
     "aria-label": "email",
-    spellcheck: "false",
     placeholder: t('EMAIL', 'Email'),
-    onChange: function onChange(e) {
-      return hanldeChangeInput(e);
+    ref: function ref(e) {
+      emailInput.current = e;
     },
-    ref: register({
-      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-      }
-    }),
+    onChange: handleChangeInputEmail,
     autoComplete: "off"
   }), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

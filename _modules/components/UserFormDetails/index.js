@@ -57,10 +57,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone'];
-
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie13, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var isEdit = props.isEdit,
       formState = props.formState,
@@ -75,11 +73,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       isCheckout = props.isCheckout,
       userData = props.userData,
       isCustomerMode = props.isCustomerMode;
-
-  var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors;
+  var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -94,28 +88,24 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       isValidPhoneNumber = _useState2[0],
       setIsValidPhoneNumber = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      validationFieldsSorted = _useState4[0],
-      setValidationFieldsSorted = _useState4[1];
+      userPhoneNumber = _useState4[0],
+      setUserPhoneNumber = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      userPhoneNumber = _useState6[0],
-      setUserPhoneNumber = _useState6[1];
-
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      alertState = _useState8[0],
-      setAlertState = _useState8[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      alertState = _useState6[0],
+      setAlertState = _useState6[1];
 
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
       _useCustomer2 = _slicedToArray(_useCustomer, 2),
       setUserCustomer = _useCustomer2[1].setUserCustomer;
 
+  var emailInput = (0, _react.useRef)(null);
   var user = userData || userSession;
 
   var closeAlert = function closeAlert() {
@@ -247,25 +237,20 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     handleChangeInput(phoneNumber, true);
   };
 
-  var sortValidationFields = function sortValidationFields() {
-    var _validationFields$fie11;
-
-    var fields = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
-    var fieldsSorted = [];
-    var validationsFieldsArray = Object.values((_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout);
-    fields.forEach(function (f) {
-      validationsFieldsArray.forEach(function (field) {
-        if (f === field.code) {
-          fieldsSorted.push(field);
-        }
-      });
+  var handleChangeInputEmail = function handleChangeInputEmail(e) {
+    handleChangeInput({
+      target: {
+        name: 'email',
+        value: e.target.value.toLowerCase().replace(/\s/gi, '')
+      }
     });
-    setValidationFieldsSorted(fieldsSorted);
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '');
   };
 
   (0, _react.useEffect)(function () {
-    if (Object.keys(errors).length > 0) {
-      var content = Object.values(errors).map(function (error) {
+    if (Object.keys(formMethods.errors).length > 0) {
+      var content = Object.values(formMethods.errors).map(function (error) {
         return error.message;
       });
 
@@ -278,7 +263,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         content: content
       });
     }
-  }, [errors]);
+  }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     var _formState$result;
 
@@ -291,13 +276,6 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
-  (0, _react.useEffect)(function () {
-    var _validationFields$fie12;
-
-    if (validationFields !== null && validationFields !== void 0 && (_validationFields$fie12 = validationFields.fields) !== null && _validationFields$fie12 !== void 0 && _validationFields$fie12.checkout) {
-      sortValidationFields();
-    }
-  }, [validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie13 = validationFields.fields) === null || _validationFields$fie13 === void 0 ? void 0 : _validationFields$fie13.checkout]);
   (0, _react.useEffect)(function () {
     if (!isEdit && onCloseProfile) {
       onCloseProfile();
@@ -314,6 +292,22 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }
     }
   }, [user, isEdit]);
+  (0, _react.useEffect)(function () {
+    if (!validationFields.loading && emailInput.current) {
+      var _formState$result3, _formState$result4, _formState$result4$re, _ref, _formState$changes$em, _formState$changes5;
+
+      formMethods.setValue('email', formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.email : (_ref = (_formState$changes$em = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : user && (user === null || user === void 0 ? void 0 : user.email)) !== null && _ref !== void 0 ? _ref : '');
+    }
+  }, [validationFields, emailInput.current]);
+  (0, _react.useEffect)(function () {
+    formMethods.register('email', {
+      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+      }
+    });
+  }, [formMethods]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -323,7 +317,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
-    onSubmit: handleSubmit(onSubmit),
+    onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout
   }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -333,29 +327,46 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), validationFieldsSorted.map(function (field) {
-    var _formState$result3, _formState$result4, _ref, _formState$changes$fi;
+  }), (0, _utils.sortInputFields)({
+    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout
+  }).map(function (field) {
+    var _formState$result5, _formState$result6, _ref2, _formState$changes$fi, _formState$result7, _formState$result8, _ref3, _formState$changes$fi2;
 
-    return !notValidationFields.includes(field.code) && showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
-    }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       name: field.code,
       className: "form",
       disabled: !isEdit,
       placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
-      defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result[field.code] : (_ref = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user[field.code]) !== null && _ref !== void 0 ? _ref : '',
+      defaultValue: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.result[field.code] : (_ref2 = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user[field.code]) !== null && _ref2 !== void 0 ? _ref2 : '',
+      onChange: handleChangeInputEmail,
+      ref: function ref(e) {
+        emailInput.current = e;
+      },
+      autoComplete: "off"
+    }) : /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+      key: field.id,
+      type: field.type,
+      name: field.code,
+      className: "form",
+      disabled: !isEdit,
+      placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
+      defaultValue: formState !== null && formState !== void 0 && (_formState$result7 = formState.result) !== null && _formState$result7 !== void 0 && _formState$result7.result ? formState === null || formState === void 0 ? void 0 : (_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : _formState$result8.result[field.code] : (_ref3 = (_formState$changes$fi2 = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : user && user[field.code]) !== null && _ref3 !== void 0 ? _ref3 : '',
       onChange: handleChangeInput,
-      ref: register({
-        required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field === null || field === void 0 ? void 0 : field.name, " is required")).replace('_attribute_', t(field === null || field === void 0 ? void 0 : field.name, field.code)) : null,
-        pattern: {
-          value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-          message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-        }
+      ref: formMethods.register({
+        required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field === null || field === void 0 ? void 0 : field.name, " is required")).replace('_attribute_', t(field === null || field === void 0 ? void 0 : field.name, field.code)) : null
       }),
       autoComplete: "off"
     }));
+  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    user: user,
+    value: userPhoneNumber,
+    setValue: handleChangePhoneNumber,
+    handleIsValid: setIsValidPhoneNumber,
+    disabled: !isEdit
   }), !isCheckout && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
@@ -363,19 +374,13 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     disabled: !isEdit,
     placeholder: t('FRONT_VISUALS_PASSWORD', 'Password'),
     onChange: handleChangeInput,
-    ref: register({
+    ref: formMethods.register({
       required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')) : null,
       minLength: {
         value: 8,
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
-    user: user,
-    value: userPhoneNumber,
-    setValue: handleChangePhoneNumber,
-    handleIsValid: setIsValidPhoneNumber,
-    disabled: !isEdit
   }), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

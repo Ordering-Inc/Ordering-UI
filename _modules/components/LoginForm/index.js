@@ -87,10 +87,7 @@ var LoginFormUI = function LoginFormUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
-  var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors;
+  var formMethods = (0, _reactHookForm.useForm)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -110,6 +107,8 @@ var LoginFormUI = function LoginFormUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       passwordSee = _useState4[0],
       setPasswordSee = _useState4[1];
+
+  var emailInput = (0, _react.useRef)(null);
 
   var onSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
@@ -145,6 +144,24 @@ var LoginFormUI = function LoginFormUI(props) {
     setPasswordSee(!passwordSee);
   };
 
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
+  var handleChangeInputEmail = function handleChangeInputEmail(e) {
+    handleChangeInput({
+      target: {
+        name: 'email',
+        value: e.target.value.toLowerCase().replace(/\s/gi, '')
+      }
+    });
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '');
+  };
+
   (0, _react.useEffect)(function () {
     var _formState$result;
 
@@ -158,23 +175,24 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map(function (error) {
+        content: Object.values(formMethods.errors).map(function (error) {
           return error.message;
         })
       });
     }
-  }, [errors]);
-
-  var closeAlert = function closeAlert() {
-    setAlertState({
-      open: false,
-      content: []
+  }, [formMethods.errors]);
+  (0, _react.useEffect)(function () {
+    formMethods.register('email', {
+      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+      }
     });
-  };
-
+  }, [formMethods]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -210,7 +228,7 @@ var LoginFormUI = function LoginFormUI(props) {
   }, t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
-    onSubmit: handleSubmit(onSubmit)
+    onSubmit: formMethods.handleSubmit(onSubmit)
   }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -224,25 +242,21 @@ var LoginFormUI = function LoginFormUI(props) {
     name: "email",
     "aria-label": "email",
     placeholder: t('EMAIL', 'Email'),
-    ref: register({
-      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-      }
-    }),
-    onChange: function onChange(e) {
-      return handleChangeInput(e);
+    ref: function ref(e) {
+      emailInput.current = e;
     },
+    onChange: handleChangeInputEmail,
     autoComplete: "off"
   }), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "tel",
     name: "cellphone",
     "aria-label": "cellphone",
     placeholder: "Cellphone",
-    ref: register({
-      required: t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
-    }),
+    ref: function ref(el) {
+      formMethods.register({
+        required: t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+      });
+    },
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -252,7 +266,7 @@ var LoginFormUI = function LoginFormUI(props) {
     name: "password",
     "aria-label": "password",
     placeholder: t('PASSWORD', 'Password'),
-    ref: register({
+    ref: formMethods.register({
       required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
     }),
     onChange: function onChange(e) {
