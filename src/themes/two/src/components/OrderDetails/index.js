@@ -289,8 +289,7 @@ const OrderDetailsUI = (props) => {
                     <div>
                       <img src={theme.images.general.gift} width='40' height='40' alt='gift' />
                       <p>
-                        <span>{t('GET_$15.00_OFF', 'Get $15.00 off')}</span>
-                        <span>{t('INVITE_FRIENDS', 'Invite Friends')}</span>
+                        <span>{t('SHARE_WITH_FRIENDS', 'Share with friends')}</span>
                       </p>
                     </div>
                     <span>
