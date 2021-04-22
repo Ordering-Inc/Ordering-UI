@@ -12,6 +12,7 @@ import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
 import { Modal } from '../Modal'
 import { CartContent } from '../CartContent'
+import { LanguageSelector } from '../LanguageSelector'
 import {
   Header as HeaderContainer,
   InnerHeader,
@@ -113,6 +114,7 @@ export const Header = (props) => {
               auth={auth}
               configTypes={configTypes}
             />
+            {(!auth && !isAuthPage) && <LanguageSelector />}
             {!configState?.loading && configTypes.length > 0 && isBusinessListingPage && windowSize.width > 992 && (
               <OrderTypeSelectorHeader
                 dropDownStyle
