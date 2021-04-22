@@ -12,6 +12,7 @@ import { PromotionsBusinesses } from './src/components/PromotionsBusinesses'
 import { SearchBar } from './src/components/SearchBar'
 
 import { SearchValueContext, SearchValueProvider, useSearchValue } from './src/contexts/SearchValueContext'
+import { Button } from './styles/Buttons'
 
 export {
   AutoScroll,
@@ -29,5 +30,7 @@ export {
   // Contexts
   SearchValueContext,
   SearchValueProvider,
-  useSearchValue
+  useSearchValue,
+  // styles
+  Button
 }

@@ -22,7 +22,7 @@ var WrapIconInput = _styledComponents.default.div(_templateObject || (_templateO
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      padding-right: 50px;\n    "]))) : "\n      padding-left: 50px;\n    ";
 }, function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (props) {
   var _props$theme2;
 

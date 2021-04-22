@@ -37,7 +37,7 @@ var _Tabs = require("../../../../../styles/Tabs");
 
 var _Inputs = require("../../../../../styles/Inputs");
 
-var _Buttons = require("../../../../../styles/Buttons");
+var _Buttons = require("../../styles/Buttons");
 
 var _FacebookLogin = require("../../../../../components/FacebookLogin");
 

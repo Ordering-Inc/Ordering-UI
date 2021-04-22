@@ -9,7 +9,7 @@ export const WrapIconInput = styled.div`
     ${props => props.theme?.rtl ? css`
       padding-right: 50px;
     `
-    :`
+    : `
       padding-left: 50px;
     `}
   }
@@ -20,12 +20,12 @@ export const WrapIconInput = styled.div`
     position: absolute;
     width: 25px;
     height: 25px;
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
     top: 8px;
     ${props => props.theme?.rtl ? css`
       right: 10px;
     `
-    :`
+    : `
       left: 10px;
     `}
   }

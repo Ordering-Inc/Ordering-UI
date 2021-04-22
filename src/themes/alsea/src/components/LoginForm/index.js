@@ -18,7 +18,7 @@ import {
 import { Alert } from '../../../../../components/Confirm'
 import { Tabs, Tab } from '../../../../../styles/Tabs'
 import { Input } from '../../../../../styles/Inputs'
-import { Button } from '../../../../../styles/Buttons'
+import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../../../../../components/FacebookLogin'
 import { WrapIconInput } from '../../styles/Inputs'
 
