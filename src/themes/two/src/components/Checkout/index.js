@@ -144,6 +144,18 @@ const CheckoutUI = (props) => {
     setUserErrors(errors)
   }
 
+  const getButtonLabelByType = (type) => {
+    const types = [];
+    
+    types[1] = t('PLACE_ORDER', 'Place Order')
+    types[2] = t('PLACE_PICKUP_ORDER', 'Place Pickup Order')
+    types[3] = t('PLACE_ORDER_TO_EAT_IN', 'Place Order To Eat In')
+    types[4] = t('PLACE_CURBSIDE_ORDER', 'Place Curbside Order')
+    types[5] = t('PLACE_DRIVE_THRU_ORDER', 'Place Drive Thru Order')
+
+    return types[type || 1] || types[1]
+  }
+
   useEffect(() => {
     if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
@@ -365,7 +377,7 @@ const CheckoutUI = (props) => {
                     `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
                   ) : !cart?.valid_minimum ? (
                     `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-                  ) : placing ? t('PLACING', 'Placing') : options?.type === 1 ? t('PLACE_ORDER', 'Place Order') : t('PLACE_PICKUP_ORDER', 'Place Pickup Order')}
+                  ) : placing ? t('PLACING', 'Placing') : getButtonLabelByType(options?.type)}
                 </Button>
               </WrapperPlaceOrderButton>
             )}
