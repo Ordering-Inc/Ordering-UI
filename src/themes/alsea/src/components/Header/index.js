@@ -200,7 +200,7 @@ export const Header = (props) => {
           </LeftHeader>
           {onlineStatus && (
             <RightHeader>
-              {!isHome && windowSize.width > 1200 && (
+              {isSearchPage && windowSize.width > 1200 && (
                 <WrapSearchBar>
                   <SearchBar
                     lazyLoad

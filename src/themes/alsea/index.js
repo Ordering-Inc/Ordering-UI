@@ -5,6 +5,7 @@ import { DiscountedBusinesses } from './src/components/DiscountedBusinesses'
 import { Footer } from './src/components/Footer'
 import { Header } from './src/components/Header'
 import { HomeHero } from './src/components/HomeHero'
+import { LoginForm } from './scr/components/LoginForm'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { OurBusinesses } from './src/components/OurBusinesses'
 import { PromotionsBusinesses } from './src/components/PromotionsBusinesses'
@@ -20,6 +21,7 @@ export {
   Footer,
   Header,
   HomeHero,
+  LoginForm,
   OrderTypeSelectorHeader,
   OurBusinesses,
   PromotionsBusinesses,
