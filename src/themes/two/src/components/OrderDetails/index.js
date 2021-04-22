@@ -155,6 +155,12 @@ const OrderDetailsUI = (props) => {
                       </span>
                     </h1>
                     <p className='date'>
+                      <div>
+                        <span>Order Id: </span>
+                        <span>
+                          {order?.id}
+                        </span>
+                      </div>
                       <span>{order?.business?.name}</span>
                       <BsDot />
                       <span>
