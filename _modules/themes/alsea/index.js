@@ -126,4 +126,4 @@ var _SearchBar = require("./src/components/SearchBar");
 
 var _SearchValueContext = require("./src/contexts/SearchValueContext");
 
-var _Buttons = require("./styles/Buttons");
+var _Buttons = require("./src/styles/Buttons");
