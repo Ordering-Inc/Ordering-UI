@@ -81,7 +81,7 @@ const OrderDetailsUI = (props) => {
       { key: 6, value: t('REJECTED', 'Rejected'), slug: 'REJECTED', percentage: 0 },
       { key: 7, value: t('ACCEPTED', 'Accepted'), slug: 'ACCEPTED', percentage: 66.66 },
       { key: 8, value: t('ACCEPTED', 'Accepted'), slug: 'ACCEPTED', percentage: 66.66 },
-      { key: 9, value: t('ACCEPTED', 'Accepted'), slug: 'ACCEPTED', percentage: 66.66 },
+      { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'), slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 66.66 },
       { key: 10, value: t('REJECTED', 'Rejected'), slug: 'REJECTED', percentage: 0 },
       { key: 11, value: t('COMPLETED', 'Completed'), slug: 'COMPLETED', percentage: 100 },
       { key: 12, value: t('REJECTED', 'Rejected'), slug: 'REJECTED', percentage: 0 }
