@@ -85,6 +85,9 @@ import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, Inp
 import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
 
+// additional
+import { sortInputFields } from './utils'
+
 export {
   AddressDetails,
   AddressesPopover,
@@ -187,5 +190,8 @@ export {
   Select,
   Tab,
   Tabs,
-  TextArea
+  TextArea,
+
+  // additional
+  sortInputFields
 }

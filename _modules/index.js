@@ -597,6 +597,12 @@ Object.defineProperty(exports, "Tabs", {
     return _Tabs.Tabs;
   }
 });
+Object.defineProperty(exports, "sortInputFields", {
+  enumerable: true,
+  get: function get() {
+    return _utils.sortInputFields;
+  }
+});
 
 var _AddressDetails = require("./components/AddressDetails");
 
@@ -767,3 +773,5 @@ var _Inputs = require("./styles/Inputs");
 var _Select = require("./styles/Select");
 
 var _Tabs = require("./styles/Tabs");
+
+var _utils = require("./utils");

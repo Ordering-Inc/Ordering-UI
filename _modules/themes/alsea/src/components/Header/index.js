@@ -274,7 +274,7 @@ var Header = function Header(props) {
       return openModal(variant);
     },
     isHome: isHome
-  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, !isHome && windowSize.width > 1200 && /*#__PURE__*/_react.default.createElement(_styles.WrapSearchBar, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, isSearchPage && windowSize.width > 1200 && /*#__PURE__*/_react.default.createElement(_styles.WrapSearchBar, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses')
   }), /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {

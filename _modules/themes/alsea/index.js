@@ -45,6 +45,12 @@ Object.defineProperty(exports, "HomeHero", {
     return _HomeHero.HomeHero;
   }
 });
+Object.defineProperty(exports, "LoginForm", {
+  enumerable: true,
+  get: function get() {
+    return _LoginForm.LoginForm;
+  }
+});
 Object.defineProperty(exports, "OrderTypeSelectorHeader", {
   enumerable: true,
   get: function get() {
@@ -101,6 +107,8 @@ var _Footer = require("./src/components/Footer");
 var _Header = require("./src/components/Header");
 
 var _HomeHero = require("./src/components/HomeHero");
+
+var _LoginForm = require("./src/components/LoginForm");
 
 var _OrderTypeSelectorHeader = require("./src/components/OrderTypeSelectorHeader");
 
