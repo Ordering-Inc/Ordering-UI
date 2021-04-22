@@ -74,7 +74,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie9, _validationFields$fie10, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie9, _validationFields$fie10, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -131,6 +131,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       passwordSee = _useState8[0],
       setPasswordSee = _useState8[1];
 
+  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
     var _user$session;
 
@@ -152,11 +154,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
   };
 
   var onSubmit = function onSubmit() {
-    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3;
+    var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7;
 
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
 
-    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.required && !externalPhoneNumber) {
+    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie5 = validationFields.fields) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.checkout) !== null && _validationFields$fie6 !== void 0 && (_validationFields$fie7 = _validationFields$fie6.cellphone) !== null && _validationFields$fie7 !== void 0 && _validationFields$fie7.required) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -252,9 +254,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading) {
-      var _validationFields$fie4;
+      var _validationFields$fie8;
 
-      Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.checkout).map(function (field) {
+      Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout).map(function (field) {
         return !notValidationFields.includes(field.code) && formMethods.register(field.code, {
           required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null
         });
@@ -273,7 +275,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
       formMethods.setValue(fieldName, signupData[fieldName]);
     });
   }, [signupData]);
-  var showInputPhoneNumber = (_validationFields$fie5 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.checkout) === null || _validationFields$fie7 === void 0 ? void 0 : (_validationFields$fie8 = _validationFields$fie7.cellphone) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.enabled) !== null && _validationFields$fie5 !== void 0 ? _validationFields$fie5 : false;
+  (0, _react.useEffect)(function () {
+    if (externalPhoneNumber) {
+      setUserPhoneNumber(externalPhoneNumber);
+    }
+  }, [externalPhoneNumber]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -333,15 +339,10 @@ var SignUpFormUI = function SignUpFormUI(props) {
       required: field.required,
       autoComplete: "off"
     }));
-  }), !!showInputPhoneNumber && !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber
-  }), externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    value: externalPhoneNumber,
-    className: "form",
-    readOnly: true,
-    name: "cellphone"
   }), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",
