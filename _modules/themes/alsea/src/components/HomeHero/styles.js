@@ -59,7 +59,7 @@ var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templat
 exports.ContentWrapper = ContentWrapper;
 
 var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  letter-spacing: 0px;\n  text-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  font-size: 24px;\n  margin-bottom: 15px;\n  text-align: center;\n  color: ", ";\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (props) {
   var _props$theme3;
 

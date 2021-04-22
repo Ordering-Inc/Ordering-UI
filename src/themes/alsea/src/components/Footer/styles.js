@@ -66,7 +66,7 @@ export const Content = styled.div`
     color: #FFF;
   }
   a {
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
     text-decoration: none;
   }
 
@@ -105,7 +105,7 @@ export const DownloadAppContainer = styled.div`
 `
 
 export const LogoWapper = styled.div`
-  background-color: ${props => props.theme.colors.primaryContrast};
+  background-color: ${props => props.theme.colors.primary};
   border-radius: 10px;
   display: flex;
   justify-content: center;

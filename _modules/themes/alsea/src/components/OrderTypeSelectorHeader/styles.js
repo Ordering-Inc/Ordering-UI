@@ -43,11 +43,11 @@ exports.ContentOption = ContentOption;
 var Tab = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 7px 15px;\n  margin-left: 10px;\n  border-radius: 25px;\n  position: relative;\n  &:after {\n    display: block;\n    position: absolute;\n    top: 7px;\n    bottom: 7px;\n    border-right: 1px solid ", ";\n    content: '';\n    margin: 0 -20px;\n  }\n  svg {\n    width: 20px;\n    height: 20px;\n  }\n  p {\n    display: none;\n  }\n\n  svg,\n  p {\n    color: ", ";\n  }\n  ", "\n"])), function (props) {
   return props.theme.colors.grayColor;
 }, function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (_ref2) {
   var active = _ref2.active;
   return active && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    svg,\n    p {\n      color: #FFF;\n      display: block;\n    }\n    @media (max-width: 576px) {\n      p {\n        display: none;\n      }\n    }\n  "])), function (props) {
-    return props.theme.colors.primaryContrast;
+    return props.theme.colors.primary;
   });
 });
 

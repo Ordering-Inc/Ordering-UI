@@ -74,14 +74,14 @@ export const Menu = styled.div`
   }
 
   #select-input {
-    background-color: ${props => props.theme.colors.primaryContrast} !important;
+    background-color: ${props => props.theme.colors.primary} !important;
     color: #FFF !important;
   }
 
   .address-popover {
     > div {
       &:first-child {
-        color: ${props => props.theme.colors.primaryContrast} !important;
+        color: ${props => props.theme.colors.primary} !important;
         font-weight: 600;
       }
     }
@@ -105,11 +105,11 @@ export const MenuLink = styled.a`
   padding: 10px;
   color: #333;
   cursor: pointer;
-  color: ${props => props.theme.colors.primaryContrast};
+  color: ${props => props.theme.colors.primary};
   font-weight: 600;
 
   ${({ highlight }) => highlight && css`
-    border: 1px solid ${props => props.theme.colors.primaryContrast};
+    border: 1px solid ${props => props.theme.colors.primary};
     border-radius: 100px;
     padding: 5px 15px;
   `}

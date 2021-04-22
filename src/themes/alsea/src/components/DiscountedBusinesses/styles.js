@@ -12,7 +12,7 @@ export const InnerContainer = styled.div`
   svg {
     cursor: pointer;
     z-index: 100;
-    background: ${props => props.theme.colors.primaryContrast};
+    background: ${props => props.theme.colors.primary};
     color: #FFF;
   }
 `

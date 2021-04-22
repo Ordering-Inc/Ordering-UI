@@ -50,9 +50,9 @@ var Menu = _styledComponents.default.div(_templateObject8 || (_templateObject8 =
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        margin-right: 15px;\n        margin-left: 0;\n      "])));
 }, function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 });
 
 exports.Menu = Menu;
@@ -62,11 +62,11 @@ var MenuItem = _styledComponents.default.div(_templateObject10 || (_templateObje
 exports.MenuItem = MenuItem;
 
 var MenuLink = _styledComponents.default.a(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 16px;\n  padding: 10px;\n  color: #333;\n  cursor: pointer;\n  color: ", ";\n  font-weight: 600;\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (_ref3) {
   var highlight = _ref3.highlight;
   return highlight && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n    border-radius: 100px;\n    padding: 5px 15px;\n  "])), function (props) {
-    return props.theme.colors.primaryContrast;
+    return props.theme.colors.primary;
   });
 });
 

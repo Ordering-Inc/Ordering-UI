@@ -80,10 +80,10 @@ export const Tab = styled.div`
 
   svg,
   p {
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
   }
   ${({ active }) => active && css`
-    background-color: ${props => props.theme.colors.primaryContrast};
+    background-color: ${props => props.theme.colors.primary};
     svg,
     p {
       color: #FFF;

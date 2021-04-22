@@ -215,7 +215,7 @@ export const TogglePassword = styled.span`
       right: 10px;
     `}
   svg {
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
   }
 `
 
@@ -235,7 +235,7 @@ export const TitleContainer = styled.div`
     font-weight: 600;
     font-size: 32px;
     margin: 10px 0;
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
   }
 
   p {
@@ -247,7 +247,7 @@ export const TitleContainer = styled.div`
 export const BackButton = styled.div`
   cursor: pointer;
   position: absolute;
-  color: ${props => props.theme.colors.primaryContrast};
+  color: ${props => props.theme.colors.primary};
   font-weight: 600;
   font-size: 18px;
   top: 25px;

@@ -83,7 +83,7 @@ export const Title = styled.h1`
   font-size: 24px;
   margin-bottom: 15px;
   text-align: center;
-  color: ${props => props.theme.colors.primaryContrast};
+  color: ${props => props.theme.colors.primary};
 
   ${props => props.theme?.rtl && css`
       text-align: right;

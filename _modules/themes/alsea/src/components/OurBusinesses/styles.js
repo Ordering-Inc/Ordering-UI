@@ -28,7 +28,7 @@ var BusinessListContainer = _styledComponents.default.div(_templateObject || (_t
 exports.BusinessListContainer = BusinessListContainer;
 
 var InnerContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n\n  svg {\n    cursor: pointer;\n    z-index: 100;\n    background: ", ";\n    color: #FFF;\n  }\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 });
 
 exports.InnerContainer = InnerContainer;

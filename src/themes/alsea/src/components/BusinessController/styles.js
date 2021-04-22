@@ -138,7 +138,7 @@ export const BusinessInfoItem = styled.div`
   .reviews {
     display: flex;
     align-items: center;
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
     font-weight: 600;
     svg {
       margin-right: 3px;
@@ -192,13 +192,13 @@ export const BusinessName = styled.h6`
   font-weight: 500;
   margin-block-start: 0;
   margin-block-end: 0;
-  color: ${props => props.theme.colors.primaryContrast};
+  color: ${props => props.theme.colors.primary};
 `
 
 export const Categories = styled.div`
   font-size: 14px;
   font-weight: 600;
-  color: ${props => props.theme.colors.primaryContrast};
+  color: ${props => props.theme.colors.primary};
   background-color: #D6EBC2;
   border-radius: 25px;
   padding: 5px 15px;

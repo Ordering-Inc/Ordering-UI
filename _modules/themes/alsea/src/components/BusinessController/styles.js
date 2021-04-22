@@ -80,7 +80,7 @@ var BusinessInfo = _styledComponents.default.div(_templateObject11 || (_template
 exports.BusinessInfo = BusinessInfo;
 
 var BusinessInfoItem = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  font-size: 12px;\n  .reviews {\n    display: flex;\n    align-items: center;\n    color: ", ";\n    font-weight: 600;\n    svg {\n      margin-right: 3px;\n      font-size: 22px;\n      color: #FDC918;\n      ", "\n    }\n  }\n\n  div {\n    display: flex;\n    justify-content: space-between;\n    p {\n      text-transform: capitalize;\n      display: flex;\n      align-items: center;\n      margin: 0px;\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      img {\n        margin-right: 4px;\n        ", "\n      }\n    }\n    p.bold {\n      font-weight: bold;\n    }\n  }\n\n  @media (min-width: 481px){\n    font-size: 16px;\n\n    ", "\n  }\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (props) {
   var _props$theme3;
 
@@ -98,13 +98,13 @@ var BusinessInfoItem = _styledComponents.default.div(_templateObject12 || (_temp
 exports.BusinessInfoItem = BusinessInfoItem;
 
 var BusinessName = _styledComponents.default.h6(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  font-weight: 500;\n  margin-block-start: 0;\n  margin-block-end: 0;\n  color: ", ";\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 });
 
 exports.BusinessName = BusinessName;
 
 var Categories = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  font-weight: 600;\n  color: ", ";\n  background-color: #D6EBC2;\n  border-radius: 25px;\n  padding: 5px 15px;\n  width: fit-content;\n  margin: 7px 0;\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 });
 
 exports.Categories = Categories;

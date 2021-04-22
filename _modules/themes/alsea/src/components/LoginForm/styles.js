@@ -131,7 +131,7 @@ var TogglePassword = _styledComponents.default.span(_templateObject17 || (_templ
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      left: 10px;\n    "]))) : "\n      right: 10px;\n    ";
 }, function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 });
 
 exports.TogglePassword = TogglePassword;
@@ -141,7 +141,7 @@ var WrapperPassword = _styledComponents.default.div(_templateObject19 || (_templ
 exports.WrapperPassword = WrapperPassword;
 
 var TitleContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  width: 80%;\n  h1 {\n    font-weight: 600;\n    font-size: 32px;\n    margin: 10px 0;\n    color: ", ";\n  }\n\n  p {\n    color: ", ";\n    margin: 0 0 30px 0;\n  }\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.grayColor;
 });
@@ -149,7 +149,7 @@ var TitleContainer = _styledComponents.default.div(_templateObject20 || (_templa
 exports.TitleContainer = TitleContainer;
 
 var BackButton = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  position: absolute;\n  color: ", ";\n  font-weight: 600;\n  font-size: 18px;\n  top: 25px;\n  ", "\n  display: flex;\n  align-items: center;\n\n  span {\n    padding: 0 10px;\n  }\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (props) {
   var _props$theme3;
 

@@ -14,7 +14,7 @@ export const BusinessListHeroStyled = styled.div`
     width: 60%;
     font-size: 24px;
     font-weight: 600;
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
   }
 
   ${({ bgimage }) => bgimage && css`
@@ -58,6 +58,6 @@ export const SectionContent = styled.div`
   h1 {
     font-size: 24px;
     font-weight: 600;
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
   }
 `

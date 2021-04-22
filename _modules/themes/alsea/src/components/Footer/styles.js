@@ -34,7 +34,7 @@ var LinkContainer = _styledComponents.default.div(_templateObject4 || (_template
 exports.LinkContainer = LinkContainer;
 
 var Content = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  > img {\n    width: 80px;\n    height: 30px;\n\n    @media (min-width: 768px) {\n      width: 120px;\n      height: 45px;\n    }\n  }\n  > * {\n    font-size: 14px;\n    margin: 10px 0px;\n    display: block;\n  }\n  h1 {\n    font-weight: 600;\n    color: #FFF;\n  }\n  a {\n    color: ", ";\n    text-decoration: none;\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (_ref) {
   var mobileSocialView = _ref.mobileSocialView;
   return mobileSocialView && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    svg {\n      color: #FFF;\n    }\n    @media (min-width: 768px) {\n      display: none;\n    }\n  "])));
@@ -54,7 +54,7 @@ var DownloadAppContainer = _styledComponents.default.div(_templateObject9 || (_t
 exports.DownloadAppContainer = DownloadAppContainer;
 
 var LogoWapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  border-radius: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 70px;\n  height: 70px;\n  margin-right: 10px;\n\n  ", "\n\n  img {\n    width: 80%;\n  }\n"])), function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;
 
