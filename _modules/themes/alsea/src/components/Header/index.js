@@ -126,6 +126,7 @@ var Header = function Header(props) {
       customerState = _useCustomer2[0],
       deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
 
+  var isSearchPage = location.pathname === '/search';
   var clearCustomer = (0, _react.useRef)(null);
 
   var _useState3 = (0, _react.useState)(false),
@@ -321,7 +322,7 @@ var Header = function Header(props) {
     onClick: function onClick(variant) {
       return openModal(variant);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))))), onlineStatus && !isHome && windowSize.width <= 1200 && /*#__PURE__*/_react.default.createElement(_styles.SearchBarContainer, {
+  }))), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))))), onlineStatus && isSearchPage && windowSize.width <= 1200 && /*#__PURE__*/_react.default.createElement(_styles.SearchBarContainer, {
     home: isHome
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapSearchBar, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,

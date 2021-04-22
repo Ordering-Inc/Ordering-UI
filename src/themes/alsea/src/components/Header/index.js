@@ -57,6 +57,7 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
+  const isSearchPage = location.pathname === '/search'
 
   const clearCustomer = useRef(null)
 
@@ -296,7 +297,7 @@ export const Header = (props) => {
           )
         )} */}
       </HeaderContainer>
-      {onlineStatus && !isHome && windowSize.width <= 1200 && (
+      {onlineStatus && isSearchPage && windowSize.width <= 1200 && (
         <SearchBarContainer home={isHome}>
           <WrapSearchBar>
             <SearchBar
