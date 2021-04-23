@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components'
 import { useSession, useOrder, useLanguage } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import { Modal } from '../../../../../components/Modal'
-import { Button } from '../../../../../styles/Buttons'
+import { Button } from '../../styles/Buttons'
 import { AddressForm } from '../../../../../components/AddressForm'
 import { AddressList } from '../../../../../components/AddressList'
 

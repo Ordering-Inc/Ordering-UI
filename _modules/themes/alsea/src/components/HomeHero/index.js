@@ -17,7 +17,7 @@ var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi
 
 var _Modal = require("../../../../../components/Modal");
 
-var _Buttons = require("../../../../../styles/Buttons");
+var _Buttons = require("../../styles/Buttons");
 
 var _AddressForm = require("../../../../../components/AddressForm");
 
