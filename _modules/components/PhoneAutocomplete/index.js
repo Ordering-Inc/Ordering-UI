@@ -74,6 +74,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       setOpenModal = props.setOpenModal,
       onChangeNumber = props.onChangeNumber,
       setCustomerState = props.setCustomerState,
+      countryCallingCode = props.countryCallingCode,
       onRedirectPage = props.onRedirectPage;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -189,7 +190,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
-    externalPhoneNumber: phone,
+    externalPhoneNumber: "".concat(countryCallingCode, " ").concat(phone),
     saveCustomerUser: saveCustomerUser,
     fieldsNotValid: props.fieldsNotValid
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
