@@ -148,9 +148,9 @@ export const UserFormDetailsUI = (props) => {
   }
 
   const handleChangeInputEmail = (e) => {
-    handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/\s/gi, '') } })
-    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '')
+    handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
+    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
   }
 
   useEffect(() => {
