@@ -37,6 +37,7 @@ import { Image } from './components/Image'
 import { InputPhoneNumber } from './components/InputPhoneNumber'
 import { LanguageSelector } from './components/LanguageSelector'
 import { LoginForm } from './components/LoginForm'
+import { LogoutButton } from './components/LogoutButton'
 import { Messages } from './components/Messages'
 import { Modal } from './components/Modal'
 import { MomentContent } from './components/MomentContent'
@@ -132,6 +133,7 @@ export {
   InputPhoneNumber,
   LanguageSelector,
   LoginForm,
+  LogoutButton,
   Messages,
   Modal,
   MomentControl,

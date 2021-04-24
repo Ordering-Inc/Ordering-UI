@@ -261,6 +261,12 @@ Object.defineProperty(exports, "LoginForm", {
     return _LoginForm.LoginForm;
   }
 });
+Object.defineProperty(exports, "LogoutButton", {
+  enumerable: true,
+  get: function get() {
+    return _LogoutButton.LogoutButton;
+  }
+});
 Object.defineProperty(exports, "Messages", {
   enumerable: true,
   get: function get() {
@@ -687,6 +693,8 @@ var _InputPhoneNumber = require("./components/InputPhoneNumber");
 var _LanguageSelector = require("./components/LanguageSelector");
 
 var _LoginForm = require("./components/LoginForm");
+
+var _LogoutButton = require("./components/LogoutButton");
 
 var _Messages = require("./components/Messages");
 
