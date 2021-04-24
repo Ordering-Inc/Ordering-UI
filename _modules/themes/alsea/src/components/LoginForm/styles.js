@@ -28,7 +28,7 @@ var LoginContainer = _styledComponents.default.div(_templateObject || (_template
   return isPopup ? '500px' : 'calc(100vh - 56px)';
 }, function (_ref2) {
   var isPopup = _ref2.isPopup;
-  return isPopup ? '500px' : 'calc(100vh - 69px)';
+  return isPopup ? '500px' : 'calc(100vh - 65px)';
 });
 
 exports.LoginContainer = LoginContainer;

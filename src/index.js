@@ -86,7 +86,7 @@ import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
 
 // additional
-import { sortInputFields } from './utils'
+import { sortInputFields, capitalize } from './utils'
 
 export {
   AddressDetails,
@@ -193,5 +193,6 @@ export {
   TextArea,
 
   // additional
-  sortInputFields
+  sortInputFields,
+  capitalize
 }

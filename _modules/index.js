@@ -603,6 +603,12 @@ Object.defineProperty(exports, "sortInputFields", {
     return _utils.sortInputFields;
   }
 });
+Object.defineProperty(exports, "capitalize", {
+  enumerable: true,
+  get: function get() {
+    return _utils.capitalize;
+  }
+});
 
 var _AddressDetails = require("./components/AddressDetails");
 

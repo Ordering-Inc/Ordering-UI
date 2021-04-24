@@ -11,7 +11,7 @@ export const LoginContainer = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
-    min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 69px)'};
+    min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
   }
 `
 const Side = styled.div`
