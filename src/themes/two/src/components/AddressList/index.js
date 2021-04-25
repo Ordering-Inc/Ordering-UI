@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import TiPencil from '@meronex/icons/ti/TiPencil'
 import VscClose from '@meronex/icons/vsc/VscClose'
@@ -48,6 +49,7 @@ const AddressListUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
+  const location = useLocation()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
@@ -173,7 +175,7 @@ const AddressListUI = (props) => {
             onClose={() => setAddressOpen(false)}
           >
             <AddressForm
-              isAddressEdit
+              isAddressEdit={location.pathname !== '/'}
               addressesList={addressList?.addresses}
               useValidationFileds
               address={curAddress}
