@@ -158,7 +158,7 @@ export const Header = (props) => {
                     </>
                   )
                 }
-                {!isHome && !isAuthPage && (
+                {!isHome && !isAuthPage && auth && (
                   windowSize.width > 768 ? (
                     <CartPopover
                       open={openPopover.cart}
