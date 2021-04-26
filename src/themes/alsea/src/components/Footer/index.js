@@ -29,7 +29,7 @@ export const Footer = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <FooterContainer>
+      <FooterContainer id='footer'>
         <InnerContainer>
           <LogoContainer>
             <Content>
