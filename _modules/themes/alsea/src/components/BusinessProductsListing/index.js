@@ -25,8 +25,6 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _PageNotFound = require("../../../../../components/PageNotFound");
 
-var _ProductForm = require("../../../../../components/ProductForm");
-
 var _FloatingButton = require("../../../../../components/FloatingButton");
 
 var _Modal = require("../../../../../components/Modal");
@@ -36,6 +34,8 @@ var _UpsellingPage = require("../../../../../components/UpsellingPage");
 var _Cart = require("../../../../../components/Cart");
 
 var _utils = require("../../../../../utils");
+
+var _ProductForm = require("../ProductForm");
 
 var _BusinessProductsList = require("../BusinessProductsList");
 
@@ -364,7 +364,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     },
     disabled: openUpselling || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum)
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
+    width: "60%",
     open: openProduct,
     closeOnBackdrop: true,
     onClose: function onClose() {

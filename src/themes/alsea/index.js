@@ -12,6 +12,11 @@ import { HomeHero } from './src/components/HomeHero'
 import { LoginForm } from './src/components/LoginForm'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { OurBusinesses } from './src/components/OurBusinesses'
+import { ProductForm } from './src/components/ProductForm'
+import { ProductIngredient } from './src/components/ProductIngredient'
+import { ProductOption } from './src/components/ProductOption'
+import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
+import { ProductShare } from './src/components/ProductShare'
 import { PromotionsBusinesses } from './src/components/PromotionsBusinesses'
 import { SearchBar } from './src/components/SearchBar'
 import { SingleProductCard } from './src/components/SingleProductCard'
@@ -35,6 +40,11 @@ export {
   LoginForm,
   OrderTypeSelectorHeader,
   OurBusinesses,
+  ProductForm,
+  ProductIngredient,
+  ProductOption,
+  ProductOptionSubOption,
+  ProductShare,
   PromotionsBusinesses,
   SearchBar,
   SingleProductCard,

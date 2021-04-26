@@ -9,8 +9,6 @@ exports.BusinessCategoryContainer = exports.MetaItem = exports.BusinessMetaInfo 
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _polished = require("polished");
-
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -53,7 +51,7 @@ var BusinessMetaInfo = _styledComponents.default.div(_templateObject8 || (_templ
 exports.BusinessMetaInfo = BusinessMetaInfo;
 
 var MetaItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: ", ";  \n  color: ", ";\n  border-radius: 30px;\n  padding: 3px 15px;\n  white-space: nowrap;\n  font-weight: 500;\n\n  ", "\n\n  svg {\n    ", "\n  }\n"])), function (props) {
-  return (0, _polished.darken)(0.07, props.theme.colors.secundary);
+  return props.theme.colors.primaryContrast;
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {

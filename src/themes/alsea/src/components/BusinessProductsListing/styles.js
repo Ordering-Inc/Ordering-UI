@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { darken } from 'polished'
 
 export const ProductsContainer = styled.div`
   width: 100%;
@@ -103,7 +102,7 @@ export const BusinessMetaInfo = styled.div`
 export const MetaItem = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${props => darken(0.07, props.theme.colors.secundary)};  
+  background-color: ${props => props.theme.colors.primaryContrast};  
   color: ${props => props.theme.colors.primary};
   border-radius: 30px;
   padding: 3px 15px;

@@ -15,16 +15,17 @@ import {
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
-import { ProductForm } from '../../../../../components/ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../../../../../components/Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { Cart } from '../../../../../components/Cart'
 import { convertHoursToMinutes } from '../../../../../utils'
 
+import { ProductForm } from '../ProductForm'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
+
 import {
   ProductsContainer,
   WrapContent,
@@ -346,7 +347,7 @@ const BusinessProductsListingUI = (props) => {
       )}
 
       <Modal
-        width='70%'
+        width='60%'
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
