@@ -90,7 +90,8 @@ import { Tab, Tabs } from './styles/Tabs'
 import {
   sortInputFields,
   capitalize,
-  convertHoursToMinutes
+  convertHoursToMinutes,
+  scrollTo
 } from './utils'
 
 export {
@@ -201,5 +202,6 @@ export {
   // additional
   sortInputFields,
   capitalize,
-  convertHoursToMinutes
+  convertHoursToMinutes,
+  scrollTo
 }

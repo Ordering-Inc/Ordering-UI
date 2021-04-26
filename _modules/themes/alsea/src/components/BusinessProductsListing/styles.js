@@ -68,6 +68,6 @@ var MetaItem = _styledComponents.default.div(_templateObject9 || (_templateObjec
 
 exports.MetaItem = MetaItem;
 
-var BusinessCategoryContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 91%;\n  margin: 10px auto;\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #D9D9D9;\n  z-index: 999;\n  position: sticky;\n  top: 68px;\n  background-color: #FFF;\n\n  @media (max-width: 992px) {\n    flex-direction: column;\n    align-items: flex-start;\n    top: 25px;\n  }\n"])));
+var BusinessCategoryContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 91%;\n  margin: 10px auto;\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #D9D9D9;\n  z-index: 999;\n  position: sticky;\n  top: 0px;\n  background-color: #FFF;\n\n  @media (max-width: 1200px) {\n    top: 68px;\n  }\n\n  @media (max-width: 992px) {\n    flex-direction: column;\n    align-items: flex-start;\n    top: 25px;\n  }\n"])));
 
 exports.BusinessCategoryContainer = BusinessCategoryContainer;

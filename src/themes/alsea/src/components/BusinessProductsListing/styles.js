@@ -133,8 +133,12 @@ export const BusinessCategoryContainer = styled.div`
   border-bottom: 1px solid #D9D9D9;
   z-index: 999;
   position: sticky;
-  top: 68px;
+  top: 0px;
   background-color: #FFF;
+
+  @media (max-width: 1200px) {
+    top: 68px;
+  }
 
   @media (max-width: 992px) {
     flex-direction: column;
