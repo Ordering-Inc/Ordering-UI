@@ -8,7 +8,6 @@ import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 import { capitalize } from '../../../../../utils'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { AddressesPopover } from '../../../../../components/AddressesPopover'
-import { UserPopover } from '../../../../../components/UserPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
 import { CartPopover } from '../../../../../components/CartPopover'
 import { CartContent } from '../../../../../components/CartContent'
@@ -17,12 +16,13 @@ import { MomentContent } from '../../../../../components/MomentContent'
 import { AddressList } from '../../../../../components/AddressList'
 import { AddressForm } from '../../../../../components/AddressForm'
 import { HeaderOption } from '../../../../../components/HeaderOption'
-import { SidebarMenu } from '../../../../../components/SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
 
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { SearchBar } from '../SearchBar'
+import { UserPopover } from '../UserPopover'
+import { SidebarMenu } from '../SidebarMenu'
 
 import {
   Header as HeaderContainer,
@@ -141,11 +141,6 @@ export const Header = (props) => {
       <HeaderContainer home={isHome}>
         <InnerHeader home={isHome}>
           <LeftHeader>
-            {/* <SidebarMenu
-              auth={auth}
-              isHideSignup={isHideSignup}
-              userCustomer={userCustomer}
-            /> */}
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
             >
@@ -256,6 +251,11 @@ export const Header = (props) => {
                 }
                 <LanguageSelector />
               </Menu>
+              <SidebarMenu
+                auth={auth}
+                isHideSignup={isHideSignup}
+                userCustomer={userCustomer}
+              />
             </RightHeader>
           )}
         </InnerHeader>

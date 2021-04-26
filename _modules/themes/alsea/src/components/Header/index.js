@@ -27,8 +27,6 @@ var _LanguageSelector = require("../../../../../components/LanguageSelector");
 
 var _AddressesPopover = require("../../../../../components/AddressesPopover");
 
-var _UserPopover = require("../../../../../components/UserPopover");
-
 var _MomentPopover = require("../../../../../components/MomentPopover");
 
 var _CartPopover = require("../../../../../components/CartPopover");
@@ -45,8 +43,6 @@ var _AddressForm = require("../../../../../components/AddressForm");
 
 var _HeaderOption = require("../../../../../components/HeaderOption");
 
-var _SidebarMenu = require("../../../../../components/SidebarMenu");
-
 var _UserDetails = require("../../../../../components/UserDetails");
 
 var _Confirm = require("../../../../../components/Confirm");
@@ -54,6 +50,10 @@ var _Confirm = require("../../../../../components/Confirm");
 var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
 
 var _SearchBar = require("../SearchBar");
+
+var _UserPopover = require("../UserPopover");
+
+var _SidebarMenu = require("../SidebarMenu");
 
 var _styles = require("./styles");
 
@@ -322,7 +322,11 @@ var Header = function Header(props) {
     onClick: function onClick(variant) {
       return openModal(variant);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))))), onlineStatus && isSearchPage && windowSize.width <= 1200 && /*#__PURE__*/_react.default.createElement(_styles.SearchBarContainer, {
+  }))), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
+    auth: auth,
+    isHideSignup: isHideSignup,
+    userCustomer: userCustomer
+  })))), onlineStatus && isSearchPage && windowSize.width <= 1200 && /*#__PURE__*/_react.default.createElement(_styles.SearchBarContainer, {
     home: isHome
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapSearchBar, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,

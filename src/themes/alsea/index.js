@@ -10,6 +10,7 @@ import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeade
 import { OurBusinesses } from './src/components/OurBusinesses'
 import { PromotionsBusinesses } from './src/components/PromotionsBusinesses'
 import { SearchBar } from './src/components/SearchBar'
+import { UserPopover } from './src/components/UserPopover'
 
 import { SearchValueContext, SearchValueProvider, useSearchValue } from './src/contexts/SearchValueContext'
 import { Button } from './src/styles/Buttons'
@@ -27,6 +28,7 @@ export {
   OurBusinesses,
   PromotionsBusinesses,
   SearchBar,
+  UserPopover,
   // Contexts
   SearchValueContext,
   SearchValueProvider,

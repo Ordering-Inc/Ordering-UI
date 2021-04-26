@@ -75,6 +75,12 @@ Object.defineProperty(exports, "SearchBar", {
     return _SearchBar.SearchBar;
   }
 });
+Object.defineProperty(exports, "UserPopover", {
+  enumerable: true,
+  get: function get() {
+    return _UserPopover.UserPopover;
+  }
+});
 Object.defineProperty(exports, "SearchValueContext", {
   enumerable: true,
   get: function get() {
@@ -123,6 +129,8 @@ var _OurBusinesses = require("./src/components/OurBusinesses");
 var _PromotionsBusinesses = require("./src/components/PromotionsBusinesses");
 
 var _SearchBar = require("./src/components/SearchBar");
+
+var _UserPopover = require("./src/components/UserPopover");
 
 var _SearchValueContext = require("./src/contexts/SearchValueContext");
 

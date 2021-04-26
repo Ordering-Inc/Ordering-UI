@@ -6,6 +6,7 @@ export const Header = styled.div`
   width: 100%;  
   background-color: ${props => props.theme.colors.secondary};
   position: relative;
+  z-index: 1005;
 
   @media (min-width: 1200px) {
     ${({ home }) => !home && css`

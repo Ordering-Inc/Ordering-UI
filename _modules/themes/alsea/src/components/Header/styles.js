@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n  background-color: ", ";\n  position: relative;\n\n  @media (min-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
+var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n  background-color: ", ";\n  position: relative;\n  z-index: 1005;\n\n  @media (min-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.secondary;
 }, function (_ref) {
   var home = _ref.home;
