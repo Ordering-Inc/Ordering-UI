@@ -53,7 +53,7 @@ var BusinessMetaInfo = _styledComponents.default.div(_templateObject8 || (_templ
 exports.BusinessMetaInfo = BusinessMetaInfo;
 
 var MetaItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: ", ";  \n  color: ", ";\n  border-radius: 30px;\n  padding: 3px 15px;\n  white-space: nowrap;\n  font-weight: 500;\n\n  ", "\n\n  svg {\n    ", "\n  }\n"])), function (props) {
-  return (0, _polished.darken)(0.07, props.theme.colors.secondary);
+  return (0, _polished.darken)(0.07, props.theme.colors.secundary);
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {

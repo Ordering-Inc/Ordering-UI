@@ -18,7 +18,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n  background-color: ", ";\n  position: relative;\n  z-index: 1005;\n\n  @media (min-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
-  return props.theme.colors.secondary;
+  return props.theme.colors.secundary;
 }, function (_ref) {
   var home = _ref.home;
   return !home && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      border-bottom-right-radius: 15px;\n      border-bottom-left-radius: 15px;\n    "])));
@@ -86,12 +86,12 @@ var UserEdit = _styledComponents.default.div(_templateObject15 || (_templateObje
 
 exports.UserEdit = UserEdit;
 
-var WrapSearchBar = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 5px;\n  box-sizing: border-box;\n  @media (max-width: 1200px) {\n    width: 91%;\n    margin: 0px auto;\n  }\n"])));
+var WrapSearchBar = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 5px;\n  box-sizing: border-box;\n  justify-content: flex-end;\n  @media (max-width: 1200px) {\n    width: 91%;\n    margin: 0px auto;\n  }\n"])));
 
 exports.WrapSearchBar = WrapSearchBar;
 
 var SearchBarContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  width: 100%;\n  padding: 10px 0;\n  position: sticky;\n  top: 0px;\n  z-index: 1000;\n  @media (max-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
-  return props.theme.colors.secondary;
+  return props.theme.colors.secundary;
 }, function (_ref4) {
   var home = _ref4.home;
   return !home && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      border-bottom-right-radius: 15px;\n      border-bottom-left-radius: 15px;\n    "])));

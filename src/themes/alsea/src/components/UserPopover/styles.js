@@ -89,7 +89,7 @@ export const PopoverListLink = styled.a`
 `
 
 export const DownloadAppContainer = styled.div`
-  background-color: ${props => props.theme.colors.secondary};
+  background-color: ${props => props.theme.colors.secundary};
   padding: 10px 15px;
 `
 

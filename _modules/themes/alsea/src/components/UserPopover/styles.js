@@ -67,7 +67,7 @@ var PopoverListLink = _styledComponents.default.a(_templateObject9 || (_template
 exports.PopoverListLink = PopoverListLink;
 
 var DownloadAppContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  padding: 10px 15px;\n"])), function (props) {
-  return props.theme.colors.secondary;
+  return props.theme.colors.secundary;
 });
 
 exports.DownloadAppContainer = DownloadAppContainer;

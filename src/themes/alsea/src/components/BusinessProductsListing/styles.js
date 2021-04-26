@@ -103,7 +103,7 @@ export const BusinessMetaInfo = styled.div`
 export const MetaItem = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${props => darken(0.07, props.theme.colors.secondary)};  
+  background-color: ${props => darken(0.07, props.theme.colors.secundary)};  
   color: ${props => props.theme.colors.primary};
   border-radius: 30px;
   padding: 3px 15px;

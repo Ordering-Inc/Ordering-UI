@@ -4,7 +4,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;  
-  background-color: ${props => props.theme.colors.secondary};
+  background-color: ${props => props.theme.colors.secundary};
   position: relative;
   z-index: 1005;
 
@@ -175,6 +175,7 @@ export const WrapSearchBar = styled.div`
   border-radius: 10px;
   padding: 5px;
   box-sizing: border-box;
+  justify-content: flex-end;
   @media (max-width: 1200px) {
     width: 91%;
     margin: 0px auto;
@@ -182,7 +183,7 @@ export const WrapSearchBar = styled.div`
 `
 
 export const SearchBarContainer = styled.div`
-  background-color: ${props => props.theme.colors.secondary};
+  background-color: ${props => props.theme.colors.secundary};
   width: 100%;
   padding: 10px 0;
   position: sticky;

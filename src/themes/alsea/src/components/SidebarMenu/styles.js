@@ -22,7 +22,7 @@ export const Container = styled.div`
 export const TopContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: ${props => props.theme.colors.secondary};
+  background-color: ${props => props.theme.colors.secundary};
   padding: 15px 16px;
 `
 
@@ -162,7 +162,7 @@ export const MenuLink = styled.a`
   text-align: inherit;
   display: block;
   width: 100%;
-  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};;
+  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};
   outline: none !important;
 
   &:hover {
@@ -206,7 +206,7 @@ export const MenuLinkIcon = styled.div`
     color: #000;
     width: 24px;
     height: 24px;
-    color: ${({ active, theme }) => active ? lighten(0.2, theme.colors.primary) : theme.colors.primary };
+    color: ${({ active, theme }) => active ? lighten(0.2, theme.colors.primary) : theme.colors.primary};
   }
 `
 
@@ -233,7 +233,7 @@ export const TextInfo = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${({ active, theme }) => active ? lighten(0.2, theme.colors.primary) : theme.colors.primary };
+  color: ${({ active, theme }) => active ? lighten(0.2, theme.colors.primary) : theme.colors.primary};
 
   ${props => props.theme?.rtl && css`
     text-align: right;

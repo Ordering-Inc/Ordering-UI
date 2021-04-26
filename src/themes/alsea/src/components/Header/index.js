@@ -195,12 +195,14 @@ export const Header = (props) => {
           </LeftHeader>
           {onlineStatus && (
             <RightHeader>
-              {isSearchPage && windowSize.width > 1200 && (
+              {windowSize.width > 1200 && (
                 <WrapSearchBar>
-                  <SearchBar
-                    lazyLoad
-                    placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-                  />
+                  {isSearchPage && (
+                    <SearchBar
+                      lazyLoad
+                      placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                    />
+                  )}
                   <OrderTypeSelectorHeader isTabStyle />
                 </WrapSearchBar>
               )}
@@ -297,13 +299,15 @@ export const Header = (props) => {
           )
         )} */}
       </HeaderContainer>
-      {onlineStatus && isSearchPage && windowSize.width <= 1200 && (
+      {onlineStatus && windowSize.width <= 1200 && (
         <SearchBarContainer home={isHome}>
           <WrapSearchBar>
-            <SearchBar
-              lazyLoad
-              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-            />
+            {isSearchPage && (
+              <SearchBar
+                lazyLoad
+                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+              />
+            )}
             <OrderTypeSelectorHeader isTabStyle />
           </WrapSearchBar>
         </SearchBarContainer>

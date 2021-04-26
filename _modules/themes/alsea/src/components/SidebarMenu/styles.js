@@ -30,7 +30,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 exports.Container = Container;
 
 var TopContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  background-color: ", ";\n  padding: 15px 16px;\n"])), function (props) {
-  return props.theme.colors.secondary;
+  return props.theme.colors.secundary;
 });
 
 exports.TopContainer = TopContainer;
