@@ -82,7 +82,7 @@ var MenuClose = _styledComponents.default.button(_templateObject13 || (_template
 
 exports.MenuClose = MenuClose;
 
-var MenuLink = _styledComponents.default.a(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  overflow: hidden;\n  text-decoration: none;\n  appearance: none;\n  border: none;\n  padding: 0 16px;\n  box-sizing: border-box;\n  margin: 0px;\n  text-align: inherit;\n  display: block;\n  width: 100%;\n  background: ", ";;\n  outline: none !important;\n\n  &:hover {\n    color: #f1f1f1;\n  }\n\n  ", ";\n\n  @media (max-height: 450px) {\n    font-size: 18px;\n  }\n"])), function (_ref5) {
+var MenuLink = _styledComponents.default.a(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  overflow: hidden;\n  text-decoration: none;\n  appearance: none;\n  border: none;\n  padding: 0 16px;\n  box-sizing: border-box;\n  margin: 0px;\n  text-align: inherit;\n  display: block;\n  width: 100%;\n  background: ", ";\n  outline: none !important;\n\n  &:hover {\n    color: #f1f1f1;\n  }\n\n  ", ";\n\n  @media (max-height: 450px) {\n    font-size: 18px;\n  }\n"])), function (_ref5) {
   var isHome = _ref5.isHome,
       theme = _ref5.theme;
   return isHome ? '#333' : "".concat(theme.colors.backgroundPage);

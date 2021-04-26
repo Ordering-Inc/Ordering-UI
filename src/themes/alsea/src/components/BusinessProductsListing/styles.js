@@ -127,19 +127,18 @@ export const MetaItem = styled.div`
 
 export const BusinessCategoryContainer = styled.div`
   width: 91%;
-  margin: 0 auto;
+  margin: 10px auto;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #D9D9D9;
-  z-index: 1000;
+  z-index: 999;
   position: sticky;
-  top: 0;
+  top: 68px;
   background-color: #FFF;
-  margin-top: 10px;
 
   @media (max-width: 992px) {
     flex-direction: column;
     align-items: flex-start;
-    top: -30px;
+    top: 25px;
   }
 `

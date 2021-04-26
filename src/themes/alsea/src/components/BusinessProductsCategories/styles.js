@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const CategoriesContainer = styled.div`
   width: 100%;
+  box-sizing: border-box;
   display: flex;
   overflow-x: auto;
   padding: 5px;
