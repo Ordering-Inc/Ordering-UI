@@ -1,9 +1,8 @@
 import React from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { useApi, useEvent } from 'ordering-components'
-import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
+import { BusinessProductsListing } from '../../../src/themes/two/src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
-import { capitalize } from '../../../src/utils'
 
 export const BusinessProductsList = (props) => {
   const { store } = useParams()
@@ -53,6 +52,12 @@ export const BusinessProductsList = (props) => {
       'products',
       'zones'
     ],
+    menusProps: [
+      'id',
+      'name',
+      'schedule'
+    ],
+    isGetMenus: true,
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })
     },
@@ -80,6 +85,8 @@ export const BusinessProductsList = (props) => {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid } })
     }
   }
+
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
   return (
     <>

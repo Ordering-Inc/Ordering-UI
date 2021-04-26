@@ -8,20 +8,25 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
-import { Header } from '../src/components/Header'
-import { Footer } from '../src/components/Footer'
-import { SpinnerLoader } from '../src/components/SpinnerLoader'
-import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
+import { Header } from '../src/themes/two/src/components/Header'
+import { Footer } from '../src/themes/two/src/components/Footer'
+import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
+import { NotNetworkConnectivity } from '../src/themes/two/src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
-import { Alert } from '../src/components/Confirm'
+import { Alert } from '../src/themes/two/src/components/Confirm'
 
 import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
+import { FeaturedBusinessList } from './pages/FeaturedBusinessList'
 import { CheckoutPage } from './pages/Checkout'
-import { Cms } from './pages/Cms'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { HomePage } from './pages/Home'
 import { Login } from './pages/Login'
+import { FilterPage } from './pages/Filter'
+import { PickupPage } from './pages/Pickup'
+import { EatinPage } from './pages/Eatin'
+import { CurbsidePage } from './pages/Curbside'
+import { DriveThruPage } from './pages/DriveThru'
 import { MyOrders } from './pages/MyOrders'
 import { OrderDetailsPage } from './pages/OrderDetails'
 import { PageNotFound } from './pages/PageNotFound'
@@ -62,7 +67,7 @@ export const App = () => {
   const handleSuccessSignup = (user) => {
     login({
       user,
-      token: user?.session?.access_token
+      token: user.session.access_token
     })
   }
 
@@ -89,7 +94,7 @@ export const App = () => {
       }
     }
   }, [configs, loaded])
-
+  
   return (
     <>
       {configs?.track_id_google_analytics?.value && (
@@ -124,6 +129,73 @@ export const App = () => {
                         : <HomePage />
                     }
                   </Route>
+                  <Route exact path='/search'>
+                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
+                      <SpinnerLoader />
+                    ) : (
+                      orderStatus.options?.address?.location
+                        ? (
+                          orderStatus?.options.type === 1
+                            ? <Redirect to='/delivery' />
+                            : orderStatus?.options.type === 2
+                              ? <Redirect to='/pickup' />
+                              : orderStatus?.options.type === 3
+                                ? <Redirect to='/eatin' />
+                                 : orderStatus?.options.type === 4
+                                  ? <Redirect to='/curbside' />
+                                  : <Redirect to='/drivethru' />
+                        )
+                        : <Redirect to='/' />
+                    )}
+                  </Route>
+                  <Route exact path='/delivery'>
+                    {
+                      orderStatus.options?.address?.location
+                        ? <BusinessesList />
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/pickup'>
+                    {
+                      orderStatus.options?.address?.location
+                        ? <PickupPage />
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/eatin'>
+                    {
+                      orderStatus.options?.address?.location
+                        ? <EatinPage />
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/curbside'>
+                    {
+                      orderStatus.options?.address?.location
+                        ? <CurbsidePage />
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/drivethru'>
+                    {
+                      orderStatus.options?.address?.location
+                        ? <DriveThruPage />
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/filter'>
+                    {
+                      orderStatus.options?.address?.location
+                        ? <FilterPage />
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/businesses/:feature'>
+                    <FeaturedBusinessList />
+                  </Route>
+                  <Route exact path='/store/:store'>
+                    <BusinessProductsList />
+                  </Route>
                   <Route exact path='/signup'>
                     {
                       !auth
@@ -144,7 +216,7 @@ export const App = () => {
                         ? (
                           <Login
                             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</Link>}
                             useLoginByCellphone
                           />
                         )
@@ -164,9 +236,8 @@ export const App = () => {
                       !auth
                         ? (
                           <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                            useLoginByCellphone
+                            elementLinkToSignup={<Link to='/signup'>{t('SIGNUP', 'Sign up')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</Link>}
                           />
                         )
                         : (
@@ -190,29 +261,6 @@ export const App = () => {
                         : <Redirect to='/' />
                     }
                   </Route>
-                  <Route exact path='/password/reset' component={ResetPassword} />
-                  <Route exact path='/profile'>
-                    {auth
-                      ? (<Profile userId={user.id} accessToken={user?.session?.access_token} useValidationFields />)
-                      : <Redirect to='/login' />}
-                  </Route>
-                  <Route exact path='/profile/orders'>
-                    {auth
-                      ? (<MyOrders />)
-                      : <Redirect to='/login' />}
-                  </Route>
-                  <Route exact path='/search'>
-                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
-                      <SpinnerLoader />
-                    ) : (
-                      orderStatus.options?.address?.location
-                        ? <BusinessesList />
-                        : <Redirect to='/' />
-                    )}
-                  </Route>
-                  <Route exact path='/store/:store'>
-                    <BusinessProductsList />
-                  </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
                       ? <CheckoutPage />
@@ -235,14 +283,19 @@ export const App = () => {
                         />
                       )}
                   </Route>
-                  <Route exact path='/pages/:pageSlug'>
-                    <Cms />
-                  </Route>
                   <Route exact path='/pages'>
                     <PagesList />
                   </Route>
-                  <Route exact path='/:store'>
-                    <BusinessProductsList />
+                  <Route exact path='/password/reset' component={ResetPassword} />
+                  <Route exact path='/profile'>
+                    {auth
+                      ? (<Profile userId={user.id} accessToken={user.session.access_token} useValidationFields />)
+                      : <Redirect to='/login' />}
+                  </Route>
+                  <Route exact path='/profile/orders'>
+                    {auth
+                      ? (<MyOrders />)
+                      : <Redirect to='/login' />}
                   </Route>
                   <Route path='*'>
                     <PageNotFound />

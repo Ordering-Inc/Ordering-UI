@@ -1,56 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import { useLanguage, useApi } from 'ordering-components'
-import { HomeHero } from '../../../src/components/HomeHero'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useLanguage, useOrder } from 'ordering-components'
+import { HomeHero } from '../../../src/themes/two/src/components/HomeHero'
+import { AddressForm } from '../../../src/themes/two/src/components/AddressForm'
+import { Modal } from '../../../src/themes/two/src/components/Modal'
+import { Button } from '../../../src/themes/two/src/styles/Buttons'
+import { useWindowSize } from '../../../src/hooks/useWindowSize'
+import { useTheme } from 'styled-components'
 import { HelmetTags } from '../../components/HelmetTags'
-import Skeleton from 'react-loading-skeleton'
-
 import {
   HomeContainer,
-  SkeletonContainer,
-  SkeletonHeader,
-  SkeletonContent,
-  SkeletonInformation,
-  SkeletonSide
+  HomeSection,
+  WrapBecomeBlock,
+  BecomeItem,
+  WrapImage,
+  Image,
+  TextContent,
+  WrapTextContent,
+  WrapSectionImg,
+  SectionTitle,
+  SectionTextContent,
+  InnerSection,
+  WrapperGetApp
 } from './styles'
 
 export const HomePage = (props) => {
-  const history = useHistory()
-  const [homeState, setHomeState] = useState({ body: null, loading: false, error: null })
-  const [ordering] = useApi()
-  const requestsState = {}
+  const [, t] = useLanguage()
+  const theme = useTheme()
+  const [orderState] = useOrder()
+  const [modals, setModals] = useState(false)
+  const { width } = useWindowSize()
 
-  const handlerFindBusiness = () => {
-    history.push('/search')
+  const handleFindBusinesses = () => {
+    setModals(true)
   }
-
-  const getPage = async () => {
-    setHomeState({ ...homeState, loading: true })
-    try {
-      const source = {}
-      requestsState.page = source
-      const { content: { error, result } } = await ordering.pages('orderingHome').get({ cancelToken: source })
-      setHomeState({ ...homeState, loading: false })
-      if (!error) {
-        setHomeState({ ...homeState, body: result.body })
-      } else {
-        setHomeState({ ...homeState, error: result })
-      }
-    } catch (err) {
-      if (err.constructor.name !== 'Cancel') {
-        setHomeState({ ...homeState, loading: false, error: [err.message] })
-      }
-    }
-  }
-
-  useEffect(() => {
-    getPage()
-    return () => {
-      if (requestsState.page) {
-        requestsState.page.cancel()
-      }
-    }
-  }, [])
 
   return (
     <>
@@ -58,36 +40,97 @@ export const HomePage = (props) => {
       <HomeContainer>
         <HomeHero
           {...props}
-          onFindBusiness={handlerFindBusiness}
         />
-        {
-          homeState.loading && (
-            <SkeletonContainer>
-              <SkeletonHeader>
-                <Skeleton width='100%' height='100%' />
-              </SkeletonHeader>
-              <SkeletonContent>
-                <SkeletonInformation>
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                </SkeletonInformation>
-                <SkeletonSide>
-                  <Skeleton width='100%' height='100%' />
-                </SkeletonSide>
-              </SkeletonContent>
-            </SkeletonContainer>
-          )
-        }
-        {
-          homeState.body && (
-            <div dangerouslySetInnerHTML={{
-              __html: homeState.body
-            }}
-            />
-          )
-        }
+        {width < 576 && (
+          <HomeSection>
+            <WrapperGetApp>
+              <p>{t('GET_TEH_BEST_ORDERING_EXPERIENCE', 'Get the best Ordering Experience')}</p>
+              <Button color='primary'>
+                {t('GET_THE_APP', 'Get the app')}
+              </Button>
+            </WrapperGetApp>
+          </HomeSection>
+        )}
+        <HomeSection>
+          <WrapBecomeBlock>
+            <BecomeItem>
+              <WrapImage>
+                <Image src={theme?.images?.general?.homeDriver} alt='driver' loading='lazy' />
+              </WrapImage>
+              <TextContent>{t('BECOME_A_DRIVER', 'Become a Driver')}</TextContent>
+            </BecomeItem>
+            <BecomeItem>
+              <WrapImage>
+                <Image src={theme?.images?.general?.homePartner} alt='partner' loading='lazy' />
+              </WrapImage>
+              <TextContent>{t('BECOME_A_PARTNER', 'Become a Partner')}</TextContent>
+            </BecomeItem>
+            <BecomeItem>
+              <WrapImage>
+                <Image src={theme?.images?.general?.homeMobileApp} alt='mobile app' loading='lazy' />
+              </WrapImage>
+              <TextContent>{t('TRY_THE_APP', 'Try the App')}</TextContent>
+            </BecomeItem>
+          </WrapBecomeBlock>
+        </HomeSection>
+
+        <HomeSection top>
+          <InnerSection top>
+            <WrapTextContent>
+              <SectionTitle>
+                {t('EVERY_FLAVOR_WELCOME', 'Every Flavor Welcome')}
+              </SectionTitle>
+              <SectionTextContent>
+                {t('LOREM', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.')}
+              </SectionTextContent>
+              <div>
+                <Button color='primary'>
+                  {t('GET_THE_APP', 'Get the app')}
+                </Button>
+              </div>
+            </WrapTextContent>
+            <WrapSectionImg top>
+              <Image src={theme?.images?.general?.homeSectionImg1} alt='img' loading='lazy' />
+            </WrapSectionImg>
+          </InnerSection>
+        </HomeSection>
+
+        <HomeSection bottom>
+          <InnerSection bottom>
+            <WrapSectionImg bottom>
+              <Image src={theme?.images?.general?.homeSectionImg2} alt='img' loading='lazy' />
+            </WrapSectionImg>
+            <WrapTextContent>
+              <SectionTitle>
+                {t('YOUVE_GOT_STUFF_TO_DO', 'You\'ve got stuff to do.')}
+              </SectionTitle>
+              <SectionTitle>
+                {t('WEVE_GOT_OPTIONS', 'We\'ve got options.')}
+              </SectionTitle>
+              <SectionTextContent>
+                {t('LOREM', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')}
+              </SectionTextContent>
+              <div>
+                <Button color='primary' onClick={() => handleFindBusinesses()}>
+                  {t('ORDER_NOW', 'Order now')}
+                </Button>
+              </div>
+            </WrapTextContent>
+          </InnerSection>
+        </HomeSection>
+        <Modal
+          title={t('ADDRESS', 'Address')}
+          open={modals}
+          onClose={() => setModals(false)}
+        >
+          <AddressForm
+            useValidationFileds
+            address={orderState?.options?.address || {}}
+            onClose={() => setModals(false)}
+            onSaveAddress={() => setModals(false)}
+            onCancel={() => setModals(false)}
+          />
+        </Modal>
       </HomeContainer>
     </>
   )

@@ -3,12 +3,12 @@ import { PickupBusinessesListing } from '../../../src/themes/two/src/components/
 import { useEvent } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
 
-export const PickupPage = (props) => {
+export const CurbsidePage = (props) => {
   const [events] = useEvent()
 
-  const pickupBusinessListProps = {
+  const curbsideBusinessListProps = {
     ...props,
-    initialOrderType: 2,
+    initialOrderType: 4,
     isSearchByName: true,
     isSearchByDescription: true,
     onBusinessClick: (business) => {
@@ -19,8 +19,8 @@ export const PickupPage = (props) => {
 
   return (
     <>
-      <HelmetTags page='pickup' />
-      <PickupBusinessesListing {...pickupBusinessListProps} />
+      <HelmetTags page='curbside' />
+      <PickupBusinessesListing {...curbsideBusinessListProps} />
     </>
   )
 }

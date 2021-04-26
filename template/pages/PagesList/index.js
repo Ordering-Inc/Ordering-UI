@@ -1,5 +1,5 @@
 import React from 'react'
-import { PagesList as PagesListController } from '../../../src/components/PagesList'
+import { PagesList as PagesListController } from '../../../src/themes/two/src/components/PagesList'
 
 export const PagesList = (props) => {
   const routes = [
@@ -10,7 +10,9 @@ export const PagesList = (props) => {
     { name: 'Forgot Password', slug: '/password/forgot' },
     { name: 'Profile', slug: '/profile' },
     { name: 'My Orders', slug: '/profile/orders' },
-    { name: 'Search Businesses', slug: '/search' },
+    { name: 'Main Businesses', slug: '/search' },
+    { name: 'Pickup Businesses', slug: '/pickup' },
+    { name: 'filter Businesses', slug: '/filter' },
     { name: 'Checkout', slug: '/checkout' },
     { name: 'Pages', slug: '/pages' }
   ]
