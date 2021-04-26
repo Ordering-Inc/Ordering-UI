@@ -110,7 +110,7 @@ var Header = function Header(props) {
       modalSelected = _useState6[0],
       setModalSelected = _useState6[1];
 
-  var isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === '/eatin' || location.pathname === '/curbside' || location.pathname === '/drivethru';
+  var isBusinessListingPage = location.pathname === '/delivery' || location.pathname === '/pickup' || location.pathname === '/eatin' || location.pathname === '/curbside' || location.pathname === '/drivethru' || location.pathname.includes('/store');
   var isAuthPage = location.pathname === '/signin' || location.pathname === '/login' || location.pathname === '/signup';
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
@@ -252,7 +252,7 @@ var Header = function Header(props) {
     },
     highlight: 1,
     name: "signup"
-  }, t('SIGN_UP', 'Sign up'))), !isHome && !isAuthPage && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
+  }, t('SIGN_UP', 'Sign up'))), !isHome && !isAuthPage && auth && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
     carts: cartsWithProducts,
     onClick: function onClick() {

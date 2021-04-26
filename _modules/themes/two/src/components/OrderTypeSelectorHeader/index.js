@@ -50,7 +50,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
   var options = orderTypes.filter(function (type) {
     return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
   });
-  var defaultType = configTypes !== null && configTypes !== void 0 && configTypes.includes(typeSelected) ? null : configTypes[0];
+  var defaultType = configTypes !== null && configTypes !== void 0 && configTypes.includes(typeSelected) ? null : configTypes === null || configTypes === void 0 ? void 0 : configTypes[0];
   return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, {
     radioStyle: radioStyle,
     toggle: toggle,

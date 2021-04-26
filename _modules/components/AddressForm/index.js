@@ -88,13 +88,14 @@ var inputNames = [{
 }];
 
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _configState$configs8, _configState$configs9, _addressState$address11, _formState$changes25, _ref8, _formState$changes$in, _formState$changes26, _ref9, _formState$changes$zi, _formState$changes27, _ref10, _formState$changes$ad5, _formState$changes28, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
 
   var addressesList = props.addressesList,
       googleMapsControls = props.googleMapsControls,
       formState = props.formState,
       addressState = props.addressState,
       isRequiredField = props.isRequiredField,
+      showField = props.showField,
       updateChanges = props.updateChanges,
       onCancel = props.onCancel,
       handleChangeInput = props.handleChangeInput,
@@ -552,84 +553,78 @@ var AddressFormUI = function AddressFormUI(props) {
     handleChangeAddressMap: handleChangeAddress,
     setErrors: setMapErrors,
     maxLimitLocation: maxLimitLocation
-  })), /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
-    className: "google-control"
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
-    className: "input-autocomplete",
-    apiKey: googleMapsApiKey,
-    placeholder: t('ADDRESS', 'Address'),
-    onChangeAddress: function onChangeAddress(e) {
-      formMethods.setValue('address', e.address);
-      handleChangeAddress(e);
-    },
-    onChange: function onChange(e) {
-      handleChangeInput({
-        target: {
-          name: 'address',
-          value: e.target.value
-        }
-      });
-      setAddressValue(e.target.value);
-    },
-    value: addressValue,
-    autoComplete: "new-field",
-    countryCode: (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.country_autocomplete) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) || '*'
-  })), /*#__PURE__*/_react.default.createElement(_GoogleGpsButton.GoogleGpsButton, {
-    className: "gps-button",
-    apiKey: googleMapsApiKey,
-    onAddress: function onAddress(e) {
-      formMethods.setValue('address', e.address);
-      handleChangeAddress(e);
-    },
-    onError: setMapErrors,
-    IconButton: _BiCurrentLocation.default,
-    IconLoadingButton: _CgSearchLoading.default
-  })), ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.location)) && !toggleMap && /*#__PURE__*/_react.default.createElement(_styles.ShowMap, {
-    onClick: function onClick() {
-      return setToggleMap(!toggleMap);
-    }
-  }, t('VIEW_MAP', 'View map to modify the exact location')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    className: "internal_number",
-    placeholder: t('INTERNAL_NUMBER', 'Internal number'),
-    value: (_ref8 = (_formState$changes$in = (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.internal_number) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : addressState.address.internal_number) !== null && _ref8 !== void 0 ? _ref8 : '',
-    onChange: function onChange(e) {
-      formMethods.setValue('internal_number', e.target.value);
-      handleChangeInput({
-        target: {
-          name: 'internal_number',
-          value: e.target.value
-        }
-      });
-    },
-    autoComplete: "new-field"
-  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    className: "zipcode",
-    placeholder: t('ZIP_CODE', 'Zip code'),
-    value: (_ref9 = (_formState$changes$zi = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : addressState.address.zipcode) !== null && _ref9 !== void 0 ? _ref9 : '',
-    onChange: function onChange(e) {
-      formMethods.setValue('zipcode', e.target.value);
-      handleChangeInput({
-        target: {
-          name: 'zipcode',
-          value: e.target.value
-        }
-      });
-    },
-    autoComplete: "new-field"
-  }), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
-    rows: 4,
-    placeholder: t('ADDRESS_NOTES', 'Address Notes'),
-    value: (_ref10 = (_formState$changes$ad5 = (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',
-    onChange: function onChange(e) {
-      formMethods.setValue('address_notes', e.target.value);
-      handleChangeInput({
-        target: {
-          name: 'address_notes',
-          value: e.target.value
-        }
-      });
-    },
-    autoComplete: "new-field"
+  })), inputNames.map(function (field) {
+    var _configState$configs8, _configState$configs9, _addressState$address11, _formState$changes25, _ref8, _formState$changes$fi, _formState$changes26, _addressState$address12, _ref9, _formState$changes$ad5, _formState$changes27;
+
+    return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: field.name
+    }, /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
+      className: "google-control"
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
+      className: "input-autocomplete",
+      apiKey: googleMapsApiKey,
+      placeholder: t('ADDRESS', 'Address'),
+      onChangeAddress: function onChangeAddress(e) {
+        formMethods.setValue('address', e.address);
+        handleChangeAddress(e);
+      },
+      onChange: function onChange(e) {
+        handleChangeInput({
+          target: {
+            name: 'address',
+            value: e.target.value
+          }
+        });
+        setAddressValue(e.target.value);
+      },
+      value: addressValue,
+      autoComplete: "new-field",
+      countryCode: (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.country_autocomplete) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) || '*'
+    })), /*#__PURE__*/_react.default.createElement(_GoogleGpsButton.GoogleGpsButton, {
+      className: "gps-button",
+      apiKey: googleMapsApiKey,
+      onAddress: function onAddress(e) {
+        formMethods.setValue('address', e.address);
+        handleChangeAddress(e);
+      },
+      onError: setMapErrors,
+      IconButton: _BiCurrentLocation.default,
+      IconLoadingButton: _CgSearchLoading.default
+    })), ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.location)) && !toggleMap && /*#__PURE__*/_react.default.createElement(_styles.ShowMap, {
+      onClick: function onClick() {
+        return setToggleMap(!toggleMap);
+      }
+    }, t('VIEW_MAP', 'View map to modify the exact location'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: field.name
+    }, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+      className: field.name,
+      placeholder: t(field.name.toUpperCase(), field.code),
+      value: (_ref8 = (_formState$changes$fi = (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12[field.name]) !== null && _ref8 !== void 0 ? _ref8 : '',
+      onChange: function onChange(e) {
+        formMethods.setValue(field.name, e.target.value);
+        handleChangeInput({
+          target: {
+            name: field.name,
+            value: e.target.value
+          }
+        });
+      },
+      autoComplete: "new-field"
+    }) : /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
+      rows: 4,
+      placeholder: t('ADDRESS_NOTES', 'Address Notes'),
+      value: (_ref9 = (_formState$changes$ad5 = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref9 !== void 0 ? _ref9 : '',
+      onChange: function onChange(e) {
+        formMethods.setValue('address_notes', e.target.value);
+        handleChangeInput({
+          target: {
+            name: 'address_notes',
+            value: e.target.value
+          }
+        });
+      },
+      autoComplete: "new-field"
+    })));
   }), !formState.loading && formState.error && /*#__PURE__*/_react.default.createElement("p", {
     style: {
       color: '#c10000'

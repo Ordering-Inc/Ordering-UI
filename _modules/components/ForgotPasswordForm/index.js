@@ -93,11 +93,11 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     hanldeChangeInput({
       target: {
         name: 'email',
-        value: e.target.value.toLowerCase().replace(/\s/gi, '')
+        value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
       }
     });
-    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''));
-    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '');
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
   };
 
   (0, _react.useEffect)(function () {

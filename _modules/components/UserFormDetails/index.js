@@ -241,11 +241,11 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     handleChangeInput({
       target: {
         name: 'email',
-        value: e.target.value.toLowerCase().replace(/\s/gi, '')
+        value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
       }
     });
-    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''));
-    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '');
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
   };
 
   (0, _react.useEffect)(function () {
@@ -301,7 +301,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   }, [validationFields, emailInput.current]);
   (0, _react.useEffect)(function () {
     formMethods.register('email', {
-      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+      required: isRequiredField('email') ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
       pattern: {
         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
         message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))

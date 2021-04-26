@@ -202,10 +202,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var handleScroll = (0, _react.useCallback)(function () {
-    var _document$documentEle;
+    var _document$documentEle, _document$documentEle2;
 
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
-    var badScrollPosition = innerHeightScrolltop < document.documentElement.offsetHeight;
+    var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
     var hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage);
     if (badScrollPosition || categoryState.loading || !hasMore) return;
     getNextProducts();

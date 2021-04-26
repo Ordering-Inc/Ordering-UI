@@ -126,29 +126,35 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
               _error = _yield$reorder.error;
               result = _yield$reorder.result;
 
-              if (!_error) {
-                onRedirectPage && onRedirectPage({
-                  page: 'checkout',
-                  params: {
-                    cartUuid: result.uuid
-                  }
-                });
+              if (_error) {
+                _context.next = 10;
+                break;
               }
 
-              _context.next = 13;
-              break;
+              onRedirectPage && onRedirectPage({
+                page: 'checkout',
+                params: {
+                  cartUuid: result.uuid
+                }
+              });
+              return _context.abrupt("return");
 
             case 10:
-              _context.prev = 10;
+              setReorderLoading(false);
+              _context.next = 16;
+              break;
+
+            case 13:
+              _context.prev = 13;
               _context.t0 = _context["catch"](1);
               setReorderLoading(false);
 
-            case 13:
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 10]]);
+      }, _callee, null, [[1, 13]]);
     }));
 
     return function handleReorder(_x) {

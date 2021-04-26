@@ -208,7 +208,7 @@ var LoginFormUI = function LoginFormUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading
-  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGNIN', 'Sign in')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_IN', 'Sign in')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('LOGIN', 'Login'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

@@ -219,11 +219,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
     handleChangeInput({
       target: {
         name: 'email',
-        value: e.target.value.toLowerCase().replace(/\s/gi, '')
+        value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
       }
     });
-    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''));
-    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '');
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
   };
 
   (0, _react.useEffect)(function () {
@@ -257,16 +257,15 @@ var SignUpFormUI = function SignUpFormUI(props) {
       var _validationFields$fie8;
 
       Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout).map(function (field) {
-        return !notValidationFields.includes(field.code) && formMethods.register(field.code, {
+        return !notValidationFields.includes(field.code) && (field.code === 'email' ? formMethods.register('email', {
+          required: isRequiredField(field.code) ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+          }
+        }) : formMethods.register(field.code, {
           required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null
-        });
-      });
-      formMethods.register('email', {
-        required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-        pattern: {
-          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-          message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-        }
+        }));
       });
     }
   }, [formMethods]);
@@ -318,7 +317,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
     }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-      type: field.enabled && field.required ? field.type : 'hidden',
+      type: field.type,
       name: field.code,
       "aria-label": field.code,
       className: "form",
@@ -327,10 +326,10 @@ var SignUpFormUI = function SignUpFormUI(props) {
       ref: function ref(e) {
         emailInput.current = e;
       },
-      required: field.required,
+      required: !!field.required,
       autoComplete: "off"
     }) : /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-      type: field.enabled && field.required ? field.type : 'hidden',
+      type: field.type,
       name: field.code,
       "aria-label": field.code,
       className: "form",
