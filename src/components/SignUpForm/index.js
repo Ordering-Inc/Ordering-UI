@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
@@ -33,6 +33,7 @@ import { useTheme } from 'styled-components'
 
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
+import { sortInputFields } from '../../utils'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
 
@@ -50,18 +51,22 @@ const SignUpFormUI = (props) => {
     isPopup,
     externalPhoneNumber,
     saveCustomerUser,
-    fieldsNotValid
+    fieldsNotValid,
+    signupData
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-  const { handleSubmit, register, errors } = useForm()
+  const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const theme = useTheme()
+  const emailInput = useRef(null)
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
+
+  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   const handleSuccessFacebook = (user) => {
     login({
@@ -83,7 +88,7 @@ const SignUpFormUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required && !externalPhoneNumber) {
+    if (!userPhoneNumber && validationFields?.fields?.checkout?.cellphone?.required) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -135,6 +140,12 @@ const SignUpFormUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
+  const handleChangeInputEmail = (e) => {
+    handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/\s/gi, '') } })
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/\s/gi, ''))
+    emailInput.current.value = e.target.value.toLowerCase().replace(/\s/gi, '')
+  }
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
@@ -147,15 +158,43 @@ const SignUpFormUI = (props) => {
   }, [formState])
 
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map(error => error.message)
+        content: Object.values(formMethods.errors).map(error => error.message)
       })
     }
-  }, [errors])
+  }, [formMethods.errors])
 
-  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  useEffect(() => {
+    if (!validationFields.loading) {
+      Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
+        formMethods.register(field.code, {
+          required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null
+        })
+      ))
+
+      formMethods.register('email', {
+        required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+        pattern: {
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+        }
+      })
+    }
+  }, [formMethods])
+
+  useEffect(() => {
+    Object.keys(signupData).map(fieldName => {
+      formMethods.setValue(fieldName, signupData[fieldName])
+    })
+  }, [signupData])
+
+  useEffect(() => {
+    if (externalPhoneNumber) {
+      setUserPhoneNumber(externalPhoneNumber)
+    }
+  }, [externalPhoneNumber])
 
   return (
     <>
@@ -177,7 +216,7 @@ const SignUpFormUI = (props) => {
           <FormInput
             noValidate
             isPopup={isPopup}
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={formMethods.handleSubmit(onSubmit)}
             isSkeleton={useChekoutFileds && validationFields?.loading}
           >
             {props.beforeMidElements?.map((BeforeMidElements, i) => (
@@ -190,42 +229,43 @@ const SignUpFormUI = (props) => {
               !(useChekoutFileds && validationFields?.loading) ? (
                 <>
                   {validationFields?.fields?.checkout &&
-                    Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
+                    sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
                       showField && showField(field.code) && (
-                        <Input
-                          key={field.id}
-                          type={field.enabled && field.required ? field.type : 'hidden'}
-                          name={field.code}
-                          aria-label={field.code}
-                          className='form'
-                          placeholder={t(field.name)}
-                          onChange={handleChangeInput}
-                          ref={register({
-                            required: isRequiredField(field.code) ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code)) : null,
-                            pattern: {
-                              value: field.code === 'email' ? /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i : null,
-                              message: field.code === 'email' ? t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')) : null
-                            }
-                          })}
-                          required={field.required}
-                          autoComplete='off'
-                        />
+                        <React.Fragment key={field.id}>
+                          {field.code === 'email' ? (
+                            <Input
+                              type={field.enabled && field.required ? field.type : 'hidden'}
+                              name={field.code}
+                              aria-label={field.code}
+                              className='form'
+                              placeholder={t(field.name)}
+                              onChange={handleChangeInputEmail}
+                              ref={(e) => {
+                                emailInput.current = e
+                              }}
+                              required={field.required}
+                              autoComplete='off'
+                            />
+                          ) : (
+                            <Input
+                              type={field.enabled && field.required ? field.type : 'hidden'}
+                              name={field.code}
+                              aria-label={field.code}
+                              className='form'
+                              placeholder={t(field.name)}
+                              onChange={handleChangeInput}
+                              required={field.required}
+                              autoComplete='off'
+                            />
+                          )}
+                        </React.Fragment>
                       )
-                    ))}
-                  {!!showInputPhoneNumber && !externalPhoneNumber && (
+                    )}
+                  {!!showInputPhoneNumber && (
                     <InputPhoneNumber
                       value={userPhoneNumber}
                       setValue={handleChangePhoneNumber}
                       handleIsValid={setIsValidPhoneNumber}
-                    />
-                  )}
-
-                  {externalPhoneNumber && (
-                    <Input
-                      value={externalPhoneNumber}
-                      className='form'
-                      readOnly
-                      name='cellphone'
                     />
                   )}
 
@@ -239,7 +279,7 @@ const SignUpFormUI = (props) => {
                         placeholder={t('PASSWORD', 'Password')}
                         onChange={handleChangeInput}
                         required
-                        ref={register({
+                        ref={formMethods.register({
                           required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
                           minLength: {
                             value: 8,

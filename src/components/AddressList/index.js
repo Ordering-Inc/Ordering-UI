@@ -8,7 +8,9 @@ import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 import {
   AddressList as AddressListController,
   useLanguage,
-  useOrder
+  useOrder,
+  useCustomer,
+  useEvent
 } from 'ordering-components'
 
 import {
@@ -43,16 +45,19 @@ const AddressListUI = (props) => {
     onAccept,
     userId,
     userCustomerSetup,
-    isEnableContinueButton
+    isEnableContinueButton,
+    setCustomerModalOpen
   } = props
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
+  const [events] = useEvent()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
+  const [{ user }] = useCustomer()
 
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
     (address, i, self) =>
@@ -96,6 +101,11 @@ const AddressListUI = (props) => {
   }
 
   const handleSetAddress = (address) => {
+    if (checkAddress(address) && userCustomerSetup?.id === user?.id) {
+      events.emit('go_to_page', { page: 'search' })
+      setCustomerModalOpen && setCustomerModalOpen(false)
+      return
+    }
     setAddressOpen(false)
     handleSetDefault(address, userCustomerSetup)
   }
@@ -237,14 +247,18 @@ const AddressListUI = (props) => {
           )
         }
 
-        {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
+        {!(addressList.loading || actionStatus.loading || orderState.loading) &&
+          !addressList.error &&
+          addressList?.addresses?.length === 0 &&
+          !isProductForm &&
+        (
           <WrappNotAddresses>
             <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
             <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
           </WrappNotAddresses>
         )}
 
-        {!addressList.loading && addressList.error && (
+        {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
           addressList.error.length > 0 && (
             <NotFoundSource
               content={addressList.error[0]?.message || addressList.error[0]}
@@ -252,7 +266,7 @@ const AddressListUI = (props) => {
           )
         )}
 
-        {!addressList.loading && (typeof orderState.options?.address !== 'object') && !addressList.error && (
+        {!(addressList.loading || actionStatus.loading || orderState.loading) && (typeof orderState.options?.address !== 'object') && !addressList.error && (
           <NotFoundSource
             content={t('NETWORK_ERROR', 'Network error, please reload the page')}
           />
