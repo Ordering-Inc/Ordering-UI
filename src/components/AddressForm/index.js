@@ -15,8 +15,7 @@ import {
   GoogleMapsMap,
   useSession,
   useOrder,
-  useConfig,
-  useValidationFields
+  useConfig
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../GoogleGpsButton'
