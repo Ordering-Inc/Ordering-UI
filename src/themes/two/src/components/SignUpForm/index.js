@@ -199,7 +199,7 @@ const SignUpFormUI = (props) => {
               <>
                 {
                   validationFields?.fields?.checkout && Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
-                    showField && showField(field.code) && field.enabled && field.required && (
+                    showField && showField(field.code) && (
                       <InputGroup key={field.id}>
                         <label>{t(field.name)}</label>
                         <Input
