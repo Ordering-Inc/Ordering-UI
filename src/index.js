@@ -87,7 +87,11 @@ import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
 
 // additional
-import { sortInputFields, capitalize } from './utils'
+import {
+  sortInputFields,
+  capitalize,
+  convertHoursToMinutes
+} from './utils'
 
 export {
   AddressDetails,
@@ -196,5 +200,6 @@ export {
 
   // additional
   sortInputFields,
-  capitalize
+  capitalize,
+  convertHoursToMinutes
 }

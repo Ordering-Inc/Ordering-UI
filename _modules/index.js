@@ -615,6 +615,12 @@ Object.defineProperty(exports, "capitalize", {
     return _utils.capitalize;
   }
 });
+Object.defineProperty(exports, "convertHoursToMinutes", {
+  enumerable: true,
+  get: function get() {
+    return _utils.convertHoursToMinutes;
+  }
+});
 
 var _AddressDetails = require("./components/AddressDetails");
 
