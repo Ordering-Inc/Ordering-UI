@@ -19,6 +19,7 @@ import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
 import { ProductShare } from './src/components/ProductShare'
 import { PromotionsBusinesses } from './src/components/PromotionsBusinesses'
 import { SearchBar } from './src/components/SearchBar'
+import { SidebarMenu } from './src/components/SidebarMenu'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { UserPopover } from './src/components/UserPopover'
 
@@ -47,6 +48,7 @@ export {
   ProductShare,
   PromotionsBusinesses,
   SearchBar,
+  SidebarMenu,
   SingleProductCard,
   UserPopover,
   // Contexts

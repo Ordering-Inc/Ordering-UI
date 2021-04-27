@@ -129,6 +129,12 @@ Object.defineProperty(exports, "SearchBar", {
     return _SearchBar.SearchBar;
   }
 });
+Object.defineProperty(exports, "SidebarMenu", {
+  enumerable: true,
+  get: function get() {
+    return _SidebarMenu.SidebarMenu;
+  }
+});
 Object.defineProperty(exports, "SingleProductCard", {
   enumerable: true,
   get: function get() {
@@ -207,6 +213,8 @@ var _ProductShare = require("./src/components/ProductShare");
 var _PromotionsBusinesses = require("./src/components/PromotionsBusinesses");
 
 var _SearchBar = require("./src/components/SearchBar");
+
+var _SidebarMenu = require("./src/components/SidebarMenu");
 
 var _SingleProductCard = require("./src/components/SingleProductCard");
 
