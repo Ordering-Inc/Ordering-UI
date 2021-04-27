@@ -155,14 +155,11 @@ const OrderDetailsUI = (props) => {
                       </span>
                     </h1>
                     <p className='date'>
-                      <div>
-                        <span>Order Id: </span>
-                        <span>
-                          {order?.id}
-                        </span>
-                      </div>
-                      <span>{order?.business?.name}</span>
-                      <BsDot />
+                      <span>Order Id: </span>
+                      <span>
+                        {order?.id}
+                      </span>
+                      <br />
                       <span>
                         {
                           order?.delivery_datetime_utc
@@ -171,6 +168,37 @@ const OrderDetailsUI = (props) => {
                         }
                       </span>
                     </p>
+
+                    <div className='order-data-section'>
+                      <dl>
+                        <dt>{t('FROM', 'from')}:</dt>
+                        <dd>
+                          <p>{order?.business?.name}</p>
+                          <p>{order?.business?.address}</p>
+                          <p>{order?.business?.phone} <BsDot/> {order?.business?.cellphone}</p>
+                          <p>{order?.business?.email}</p>
+                        </dd>
+                      </dl>
+
+                      <dl>
+                        <dt>{t('TO', 'to')}:</dt>
+                        <dd>
+                          <p>
+                            {order?.customer?.name}&nbsp;
+                            {order?.customer?.middle}&nbsp;
+                            {order?.customer?.lastname}&nbsp;
+                            {order?.customer?.second_lastname}
+                          </p>
+                          <p>
+                            {order?.customer?.address}&nbsp;
+                            {order?.customer?.zipcode}
+                          </p>
+                          <p>{order?.customer?.cellphone}</p>
+                          <p>{order?.customer?.email}</p>
+                        </dd>
+                      </dl>
+                    </div>
+
                     {!isOrderDetail && (
                       <StatusBar percentage={getOrderStatus(order?.status)?.percentage}>
                         <div>
