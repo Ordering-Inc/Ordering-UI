@@ -55,7 +55,7 @@ const AddressListUI = (props) => {
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
-
+  const isHome = location.pathname === '/' || location.pathname === '/home'
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
     (address, i, self) =>
       i === self.findIndex(obj => (
@@ -157,7 +157,7 @@ const AddressListUI = (props) => {
       {
         isPopover && addressOpen && (
           <AddressForm
-            isAddressEdit
+            isAddressEdit={!isHome}
             userId={userId}
             addressesList={addressList?.addresses}
             useValidationFileds
@@ -175,7 +175,7 @@ const AddressListUI = (props) => {
             onClose={() => setAddressOpen(false)}
           >
             <AddressForm
-              isAddressEdit={location.pathname !== '/'}
+              isAddressEdit={!isHome}
               addressesList={addressList?.addresses}
               useValidationFileds
               address={curAddress}
@@ -242,7 +242,7 @@ const AddressListUI = (props) => {
         )
       }
 
-      {!(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
+      {!(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && !(isPopover && addressOpen && isHome) && (
         <WrappNotAddresses>
           <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
           <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
