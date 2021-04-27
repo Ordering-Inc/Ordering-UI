@@ -91,7 +91,8 @@ import {
   sortInputFields,
   capitalize,
   convertHoursToMinutes,
-  scrollTo
+  scrollTo,
+  DriverTipsOptions
 } from './utils'
 
 export {
@@ -203,5 +204,6 @@ export {
   sortInputFields,
   capitalize,
   convertHoursToMinutes,
-  scrollTo
+  scrollTo,
+  DriverTipsOptions
 }

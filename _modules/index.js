@@ -627,6 +627,12 @@ Object.defineProperty(exports, "scrollTo", {
     return _utils.scrollTo;
   }
 });
+Object.defineProperty(exports, "DriverTipsOptions", {
+  enumerable: true,
+  get: function get() {
+    return _utils.DriverTipsOptions;
+  }
+});
 
 var _AddressDetails = require("./components/AddressDetails");
 

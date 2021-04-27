@@ -46,7 +46,7 @@ var WrappLayout = _styledComponents.default.div(_templateObject6 || (_templateOb
 
 exports.WrappLayout = WrappLayout;
 
-var BusinessMetaInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+var BusinessMetaInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 10px 0;\n"])));
 
 exports.BusinessMetaInfo = BusinessMetaInfo;
 

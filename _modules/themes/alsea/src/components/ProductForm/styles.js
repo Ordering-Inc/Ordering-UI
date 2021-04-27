@@ -60,7 +60,7 @@ var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateOb
 
 exports.ProductInfo = ProductInfo;
 
-var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n\n  h1 {\n    display: flex;\n    justify-content: space-between;\n    font-size: 20px;\n    font-weight: 500;\n    color: ", ";\n    margin-top: 0px;\n  }\n\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])), function (props) {
+var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n\n  h1 {\n    display: flex;\n    justify-content: space-between;\n    font-size: 20px;\n    font-weight: 500;\n    color: ", ";\n    margin-top: 0px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

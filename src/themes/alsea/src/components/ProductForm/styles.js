@@ -104,10 +104,6 @@ export const ProductFormTitle = styled.div`
     color: ${props => props.theme.colors.primary};
     margin-top: 0px;
   }
-
-  @media (min-width: 1201px) {
-    width: calc(100% - 25px);
-  }
 `
 
 export const ProductEdition = styled.div``

@@ -97,6 +97,7 @@ export const WrappLayout = styled.div`
 export const BusinessMetaInfo = styled.div`
   display: flex;
   align-items: center;
+  padding: 10px 0;
 `
 
 export const MetaItem = styled.div`
