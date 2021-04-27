@@ -77,6 +77,10 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       countryCallingCode = props.countryCallingCode,
       onRedirectPage = props.onRedirectPage;
 
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -118,7 +122,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   };
 
   var handleFindClick = function handleFindClick() {
-    if (userCustomer !== null && userCustomer !== void 0 && userCustomer.id && userCustomer !== null && userCustomer !== void 0 && userCustomer.address) {
+    var _orderState$options, _orderState$options$a;
+
+    if (userCustomer !== null && userCustomer !== void 0 && userCustomer.id && orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.address) {
       onRedirectPage && onRedirectPage('search');
     } else {
       setAlertState({
