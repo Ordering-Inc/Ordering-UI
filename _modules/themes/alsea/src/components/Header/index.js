@@ -31,8 +31,6 @@ var _MomentPopover = require("../../../../../components/MomentPopover");
 
 var _CartPopover = require("../../../../../components/CartPopover");
 
-var _CartContent = require("../../../../../components/CartContent");
-
 var _Modal = require("../../../../../components/Modal");
 
 var _MomentContent = require("../../../../../components/MomentContent");
@@ -46,6 +44,10 @@ var _HeaderOption = require("../../../../../components/HeaderOption");
 var _UserDetails = require("../../../../../components/UserDetails");
 
 var _Confirm = require("../../../../../components/Confirm");
+
+var _CartContent = require("../CartContent");
+
+var _CartSidebar = require("../CartSidebar");
 
 var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
 
@@ -305,24 +307,10 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  }), isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
-    open: openPopover.cart,
+  }), isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_CartSidebar.CartSidebar, {
     carts: cartsWithProducts,
-    onClick: function onClick() {
-      return handleTogglePopover('cart');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('cart');
-    },
-    auth: auth,
-    location: location
-  }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
-    variant: "cart",
-    totalCarts: cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length,
-    onClick: function onClick(variant) {
-      return openModal(variant);
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
+    isOrderStateCarts: !!orderState.carts
+  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
     auth: auth,
     isHideSignup: isHideSignup,
     userCustomer: userCustomer

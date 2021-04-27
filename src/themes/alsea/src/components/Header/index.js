@@ -3,6 +3,7 @@ import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } f
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
+
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 import { capitalize } from '../../../../../utils'
@@ -10,7 +11,6 @@ import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { AddressesPopover } from '../../../../../components/AddressesPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
 import { CartPopover } from '../../../../../components/CartPopover'
-import { CartContent } from '../../../../../components/CartContent'
 import { Modal } from '../../../../../components/Modal'
 import { MomentContent } from '../../../../../components/MomentContent'
 import { AddressList } from '../../../../../components/AddressList'
@@ -19,6 +19,8 @@ import { HeaderOption } from '../../../../../components/HeaderOption'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
 
+import { CartContent } from '../CartContent'
+import { CartSidebar } from '../CartSidebar'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { SearchBar } from '../SearchBar'
 import { UserPopover } from '../UserPopover'
@@ -60,7 +62,6 @@ export const Header = (props) => {
   const isSearchPage = location.pathname === '/search'
 
   const clearCustomer = useRef(null)
-
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
@@ -231,22 +232,10 @@ export const Header = (props) => {
                         />
                       )}
                       {isShowOrderOptions && (
-                        windowSize.width > 768 ? (
-                          <CartPopover
-                            open={openPopover.cart}
-                            carts={cartsWithProducts}
-                            onClick={() => handleTogglePopover('cart')}
-                            onClose={() => handleClosePopover('cart')}
-                            auth={auth}
-                            location={location}
-                          />
-                        ) : (
-                          <HeaderOption
-                            variant='cart'
-                            totalCarts={cartsWithProducts?.length}
-                            onClick={(variant) => openModal(variant)}
-                          />
-                        )
+                        <CartSidebar
+                          carts={cartsWithProducts}
+                          isOrderStateCarts={!!orderState.carts}
+                        />
                       )}
                     </>
                   )

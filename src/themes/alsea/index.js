@@ -2,9 +2,13 @@ import { AutoScroll } from './src/components/AutoScroll'
 import { BusinessBasicInformation } from './src/components/BusinessBasicInformation'
 import { BusinessProductsCategories } from './src/components/BusinessProductsCategories'
 import { BusinessController } from './src/components/BusinessController'
+import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessesListing } from './src/components/BusinessesListing'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
+import { Cart } from './src/components/Cart'
+import { CartContent } from './src/components/CartContent'
+import { CartSidebar } from './src/components/CartSidebar'
 import { DiscountedBusinesses } from './src/components/DiscountedBusinesses'
 import { Footer } from './src/components/Footer'
 import { Header } from './src/components/Header'
@@ -14,6 +18,7 @@ import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeade
 import { OurBusinesses } from './src/components/OurBusinesses'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductIngredient } from './src/components/ProductIngredient'
+import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { ProductOption } from './src/components/ProductOption'
 import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
 import { ProductShare } from './src/components/ProductShare'
@@ -29,11 +34,15 @@ import { Button } from './src/styles/Buttons'
 export {
   AutoScroll,
   BusinessBasicInformation,
-  BusinessProductsCategories,
   BusinessController,
+  BusinessItemAccordion,
+  BusinessProductsCategories,
   BusinessesListing,
   BusinessProductsList,
   BusinessProductsListing,
+  Cart,
+  CartContent,
+  CartSidebar,
   DiscountedBusinesses,
   Footer,
   Header,
@@ -43,6 +52,7 @@ export {
   OurBusinesses,
   ProductForm,
   ProductIngredient,
+  ProductItemAccordion,
   ProductOption,
   ProductOptionSubOption,
   ProductShare,
