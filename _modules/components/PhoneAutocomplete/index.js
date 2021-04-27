@@ -198,7 +198,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
     externalPhoneNumber: "".concat(countryCallingCode, " ").concat(phone),
     saveCustomerUser: saveCustomerUser,
-    fieldsNotValid: props.fieldsNotValid
+    fieldsNotValid: props.fieldsNotValid,
+    useChekoutFileds: true
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.customer,
     width: "60%",
