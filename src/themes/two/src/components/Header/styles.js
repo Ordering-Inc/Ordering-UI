@@ -8,9 +8,8 @@ export const Header = styled.div`
   width: 100%;
   background-color: transparent;
   height: 60px;
-  ${({ isHome, auth }) => isHome && css`
+  ${({ isHome }) => isHome && css`
     position: absolute;
-    background: ${auth && 'rgba(0,0,0,0.2)'};
   `}
   ${({ isHome }) => !isHome && css`
     border-bottom: 1px solid ${props => props.theme.colors.secondary};
