@@ -326,7 +326,7 @@ export const SidebarMenu = (props) => {
                           window.location.pathname === '/login'
                         }
                       >
-                        {t('SIGNIN', 'Sign in')}
+                        {t('SIGN_IN', 'Sign in')}
                       </TextInfo>
                     </MenuLinkText>
                   </WrappContent>
