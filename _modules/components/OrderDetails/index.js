@@ -205,6 +205,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver'),
       slug: 'DELIVERY_FAILED_BY_DRIVER',
       percentage: 0
+    }, {
+      key: 13,
+      value: t('PREORDER', 'PreOrder'),
+      slug: 'PREORDER',
+      percentage: 0
     }];
     var objectStatus = orderStatus.find(function (o) {
       return o.key === status;
