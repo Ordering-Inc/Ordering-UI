@@ -9,7 +9,7 @@ exports.BusinessCategoryContainer = exports.MetaItem = exports.BusinessMetaInfo 
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -50,22 +50,26 @@ var BusinessMetaInfo = _styledComponents.default.div(_templateObject8 || (_templ
 
 exports.BusinessMetaInfo = BusinessMetaInfo;
 
-var MetaItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: ", ";  \n  color: ", ";\n  border-radius: 30px;\n  padding: 3px 15px;\n  white-space: nowrap;\n  font-weight: 500;\n\n  ", "\n\n  svg {\n    ", "\n  }\n"])), function (props) {
+var MetaItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: ", ";  \n  color: ", ";\n  border-radius: 30px;\n  padding: 3px 15px;\n  white-space: nowrap;\n  font-weight: 500;\n  ", "\n\n  @media (min-width: 576px) {\n    ", "\n  }\n\n  svg {\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.primaryContrast;
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n  "]))) : "\n    margin-right: 20px;\n  ";
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "]))) : "\n    margin-right: 10px;\n  ";
 }, function (props) {
   var _props$theme2;
 
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : "\n      margin-right: 10px;\n    ";
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-left: 20px;\n    "]))) : "\n      margin-right: 20px;\n    ";
+}, function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : "\n      margin-right: 10px;\n    ";
 });
 
 exports.MetaItem = MetaItem;
 
-var BusinessCategoryContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 91%;\n  margin: 10px auto;\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #D9D9D9;\n  z-index: 999;\n  position: sticky;\n  top: 0px;\n  background-color: #FFF;\n\n  @media (max-width: 1200px) {\n    top: 68px;\n  }\n\n  @media (max-width: 992px) {\n    flex-direction: column;\n    align-items: flex-start;\n    top: 25px;\n  }\n"])));
+var BusinessCategoryContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 91%;\n  margin: 10px auto;\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #D9D9D9;\n  z-index: 999;\n  position: sticky;\n  top: 0px;\n  background-color: #FFF;\n\n  @media (max-width: 1200px) {\n    top: 68px;\n  }\n\n  @media (max-width: 992px) {\n    flex-direction: column;\n    align-items: flex-start;\n    top: 25px;\n  }\n"])));
 
 exports.BusinessCategoryContainer = BusinessCategoryContainer;

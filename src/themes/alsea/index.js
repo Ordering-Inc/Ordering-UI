@@ -9,13 +9,19 @@ import { BusinessProductsListing } from './src/components/BusinessProductsListin
 import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
 import { CartSidebar } from './src/components/CartSidebar'
+import { Checkout } from './src/components/Checkout'
+import { CheckoutBill } from './src/components/CheckoutBill'
+import { CouponControl } from './src/components/CouponControl'
+import { DeliveryDetails } from './src/components/DeliveryDetails'
 import { DiscountedBusinesses } from './src/components/DiscountedBusinesses'
+import { DriverTips } from './src/components/DriverTips'
 import { Footer } from './src/components/Footer'
 import { Header } from './src/components/Header'
 import { HomeHero } from './src/components/HomeHero'
 import { LoginForm } from './src/components/LoginForm'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { OurBusinesses } from './src/components/OurBusinesses'
+import { PaymentOptions } from './src/components/PaymentOptions'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductIngredient } from './src/components/ProductIngredient'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
@@ -43,13 +49,19 @@ export {
   Cart,
   CartContent,
   CartSidebar,
+  Checkout,
+  CheckoutBill,
+  CouponControl,
+  DeliveryDetails,
   DiscountedBusinesses,
+  DriverTips,
   Footer,
   Header,
   HomeHero,
   LoginForm,
   OrderTypeSelectorHeader,
   OurBusinesses,
+  PaymentOptions,
   ProductForm,
   ProductIngredient,
   ProductItemAccordion,

@@ -109,12 +109,19 @@ export const MetaItem = styled.div`
   padding: 3px 15px;
   white-space: nowrap;
   font-weight: 500;
-
   ${props => props.theme?.rtl ? css`
-    margin-left: 20px;
+    margin-left: 10px;
   ` : `
-    margin-right: 20px;
+    margin-right: 10px;
   `}
+
+  @media (min-width: 576px) {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : `
+      margin-right: 20px;
+    `}
+  }
 
   svg {
     ${props => props.theme?.rtl ? css`
