@@ -27,6 +27,7 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
+import { AppleLogin } from '../AppleLogin'
 import { useTheme } from 'styled-components'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
@@ -53,7 +54,6 @@ const LoginFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
   const emailInput = useRef(null)
   const cellphoneInput = useRef(null)
-
   const onSubmit = async () => {
     handleButtonLoginClick()
   }
@@ -80,6 +80,16 @@ const LoginFormUI = (props) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
     emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+  }
+
+  const initParams = {
+    clientId: 'co.ordering.logintest',
+    redirectURI: 'https://66193f2bd1fc.ngrok.io/login',
+    response_mode: 'fragment',
+    response_type: 'code',
+    state: 'state',
+    nonce: 'nonce',
+    usePopup: false // or false defaults to false
   }
 
   useEffect(() => {
@@ -241,6 +251,11 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
+          <AppleLogin
+            initParams={initParams}
+            onSuccess={(data) => console.log('onSuccess', data)}
+            onFailure={(data) => console.log('onFailure', data)}
+          />
           {!props.isDisableButtons && (
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
