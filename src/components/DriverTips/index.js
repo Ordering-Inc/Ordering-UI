@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DriverTips as DriverTipsController, useUtils, useLanguage } from 'ordering-components'
+import { DriverTips as DriverTipsController, useUtils, useLanguage, useConfig } from 'ordering-components'
 
 import {
   DriverTipContainer,
@@ -23,6 +23,8 @@ const DriverTipsUI = (props) => {
   } = props
   const [{ parsePrice }] = useUtils()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+
   const [value, setvalue] = useState(0)
 
   const handleChangeDriverTip = (e) => {
@@ -30,6 +32,10 @@ const DriverTipsUI = (props) => {
     tip = isNaN(tip) ? 0 : tip
     setvalue(tip)
   }
+
+  const placeholderCurrency = (configs?.currency_position?.value || 'left') === 'left'
+    ? `${configs?.format_number_currency?.value}0`
+    : `0${configs?.format_number_currency?.value}`
 
   return (
     <>
@@ -62,13 +68,13 @@ const DriverTipsUI = (props) => {
         ) : (
           <FormDriverTip>
             <DriverTipLabel>
-              {t('LOREM', 'Lorem ipsu Ad sit veniam laboris aliquip nisi.')}
+              {t('CUSTOM_DRIVER_TIP_MESSAGE', '100% of these tips go directly to your driver')}
             </DriverTipLabel>
             <WrapperInput>
               <Input
                 name='drivertip'
                 type='text'
-                placeholder='0'
+                placeholder={placeholderCurrency}
                 onChange={handleChangeDriverTip}
               />
               <Button
@@ -79,7 +85,7 @@ const DriverTipsUI = (props) => {
                   setvalue(0)
                 }}
               >
-                {t('APPLY', 'Apply')}
+                {t('APPLY_TIP', 'Apply Tip')}
               </Button>
             </WrapperInput>
             {parseFloat(driverTip || 0) > 0 && (
