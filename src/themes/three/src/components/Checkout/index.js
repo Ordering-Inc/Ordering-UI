@@ -94,6 +94,10 @@ const CheckoutUI = (props) => {
   const [openDeliveryDetailsEdit, setOpenDeliveryDetailsEdit] = useState(false)
   const [openPaymethods, setOpenPaymethods] = useState(false)
 
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
+
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder()
@@ -387,13 +391,13 @@ const CheckoutUI = (props) => {
               options.type === 1 &&
               cart?.status !== 2 &&
               validationFields?.fields?.checkout?.driver_tip?.enabled &&
-              configs?.driver_tip_options?.value?.length > 0 &&
+              driverTipsOptions.length > 0 &&
             (
               <DriverTipContainer>
                 <h1>{t('SHOW_YOUR_SUPPORT_FOR_THE_DRIVE', 'Show your support for the driver')}</h1>
                 <DriverTips
                   businessId={cart?.business_id}
-                  driverTipsOptions={configs?.driver_tip_options?.value}
+                  driverTipsOptions={driverTipsOptions}
                   isFixedPrice={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value}
                   isDriverTipUseCustom={!!configs?.driver_tip_use_custom?.value}
                   driverTip={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value
