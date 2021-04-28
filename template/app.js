@@ -58,6 +58,7 @@ export const App = () => {
   }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
+  const isFooterPage = location.pathname === '/pages/footer'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -250,7 +251,9 @@ export const App = () => {
                 </Switch>
               </ScrollToTop>
             )}
-            <Footer />
+            {!isFooterPage && (
+              <Footer />
+            )}
             <Alert
               title={t('INFORMATION', 'Information')}
               content={alertState.content}
