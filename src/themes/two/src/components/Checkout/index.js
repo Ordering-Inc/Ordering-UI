@@ -85,6 +85,10 @@ const CheckoutUI = (props) => {
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
 
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
+
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -141,6 +145,18 @@ const CheckoutUI = (props) => {
     }
 
     setUserErrors(errors)
+  }
+
+  const getButtonLabelByType = (type) => {
+    const types = [];
+    
+    types[1] = t('PLACE_ORDER', 'Place Order')
+    types[2] = t('PLACE_PICKUP_ORDER', 'Place Pickup Order')
+    types[3] = t('PLACE_ORDER_TO_EAT_IN', 'Place Order To Eat In')
+    types[4] = t('PLACE_CURBSIDE_ORDER', 'Place Curbside Order')
+    types[5] = t('PLACE_DRIVE_THRU_ORDER', 'Place Drive Thru Order')
+
+    return types[type || 1] || types[1]
   }
 
   useEffect(() => {
@@ -364,7 +380,7 @@ const CheckoutUI = (props) => {
                     `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
                   ) : !cart?.valid_minimum ? (
                     `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-                  ) : placing ? t('PLACING', 'Placing') : options?.type === 1 ? t('PLACE_ORDER', 'Place Order') : t('PLACE_PICKUP_ORDER', 'Place Pickup Order')}
+                  ) : placing ? t('PLACING', 'Placing') : getButtonLabelByType(options?.type)}
                 </Button>
               </WrapperPlaceOrderButton>
             )}
@@ -451,13 +467,13 @@ const CheckoutUI = (props) => {
                     options.type === 1 &&
                     cart?.status !== 2 &&
                     validationFields?.fields?.checkout?.driver_tip?.enabled &&
-                    configs?.driver_tip_options?.value?.length > 0 &&
+                    driverTipsOptions.length > 0 &&
                   (
                     <DriverTipContainer>
                       <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                       <DriverTips
                         businessId={cart?.business_id}
-                        driverTipsOptions={configs?.driver_tip_options?.value}
+                        driverTipsOptions={driverTipsOptions}
                         isFixedPrice={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value}
                         isDriverTipUseCustom={!!configs?.driver_tip_use_custom?.value}
                         driverTip={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value
