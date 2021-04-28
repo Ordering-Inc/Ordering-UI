@@ -71,6 +71,7 @@ export const SidebarMenu = (props) => {
         <Container auth={auth}>
           <IconContent
             isHome={isHome}
+            auth={auth}
             aria-label='menu'
             onClick={() => actionSidebar(true)}
           >

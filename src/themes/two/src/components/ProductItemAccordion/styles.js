@@ -102,7 +102,7 @@ export const ContentInfo = styled.div`
   width: 55%;
 
   @media (min-width: 411px) {
-    width: calc(65% - 60px);
+    flex: 1;
   }
 
   ${props => props.theme?.rtl && css`
@@ -182,7 +182,7 @@ export const ProductComment = styled.div`
     margin: 0px 20px 0px 40px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    overflow-x: hidden;
     ${props => props.theme?.rtl && css`
       margin: 0px 40px 0px 20px
     `}

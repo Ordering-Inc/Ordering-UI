@@ -43,8 +43,6 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 
-import { DriverTipsOptions } from '../../utils'
-
 const mapConfigs = {
   mapZoom: 16,
   mapSize: {
@@ -108,24 +106,29 @@ const CheckoutUI = (props) => {
     const userSelected = isCustomerMode ? customerState.user : user
 
     Object.values(validationFields?.fields?.checkout).map(field => {
-      if (field?.required && !notFields.includes(field.code)) {
-        if (!userSelected[field?.code]) {
+      if (field?.enabled && field?.required && !notFields.includes(field.code)) {
+        if (userSelected && !userSelected[field?.code]) {
           errors.push(t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `The field ${field?.name} is required`))
         }
       }
     })
 
-    if (!userSelected?.cellphone && validationFields?.fields?.checkout?.cellphone?.required) {
+    if (
+      userSelected &&
+      !userSelected?.cellphone &&
+      validationFields?.fields?.checkout?.cellphone?.enabled &&
+      validationFields?.fields?.checkout?.cellphone?.required
+    ) {
       errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'))
     }
 
-    if (userSelected?.cellphone) {
+    if (userSelected && userSelected?.cellphone) {
       if (userSelected?.country_phone_code) {
         let phone = null
         phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone}`
         const phoneNumber = parsePhoneNumber(phone)
         if (!phoneNumber?.isValid()) {
-          errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is invalid.'))
+          errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'))
         }
       } else {
         errors.push(t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'))
@@ -139,7 +142,7 @@ const CheckoutUI = (props) => {
     if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
     }
-  }, [validationFields, user])
+  }, [validationFields, user, customerState])
 
   useEffect(() => {
     if (errors) {
@@ -301,12 +304,19 @@ const CheckoutUI = (props) => {
             options.type === 1 &&
             cart?.status !== 2 &&
             validationFields?.fields?.checkout?.driver_tip?.enabled &&
+            configs?.driver_tip_options?.value?.length > 0 &&
             (
               <DriverTipContainer>
                 <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                 <DriverTips
                   businessId={cart?.business_id}
-                  driverTipsOptions={DriverTipsOptions}
+                  driverTipsOptions={configs?.driver_tip_options?.value}
+                  isFixedPrice={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value}
+                  isDriverTipUseCustom={!!configs?.driver_tip_use_custom?.value}
+                  driverTip={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate
+                  }
                   useOrderContext
                 />
               </DriverTipContainer>

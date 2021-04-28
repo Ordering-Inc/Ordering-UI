@@ -104,7 +104,8 @@ const OrderDetailsUI = (props) => {
       { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'), slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
       { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', 'Pick up Failed by driver'), slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
       { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver'), slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
-      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver'), slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 }
+      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver'), slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
+      { key: 13, value: t('PREORDER', 'PreOrder'), slug: 'PREORDER', percentage: 0 },
     ]
 
     const objectStatus = orderStatus.find((o) => o.key === status)
@@ -358,7 +359,10 @@ const OrderDetailsUI = (props) => {
                     <tr>
                       <td>
                         {t('DRIVER_TIP', 'Driver tip')}
-                        {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                        {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
+                          configs?.driver_tip_type?.value === 2 &&
+                          !!!configs?.driver_tip_use_custom?.value &&
+                        (
                           <span>{`(${parseNumber(order?.driver_tip)}%)`}</span>
                         )}
                       </td>
