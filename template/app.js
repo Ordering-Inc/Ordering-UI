@@ -19,6 +19,7 @@ import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { FeaturedBusinessList } from './pages/FeaturedBusinessList'
 import { CheckoutPage } from './pages/Checkout'
+import { Cms } from './pages/Cms'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { HomePage } from './pages/Home'
 import { Login } from './pages/Login'
@@ -63,6 +64,7 @@ export const App = () => {
   }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
+  const isFooterPage = location.pathname === '/pages/footer'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -94,7 +96,7 @@ export const App = () => {
       }
     }
   }, [configs, loaded])
-  
+
   return (
     <>
       {configs?.track_id_google_analytics?.value && (
@@ -141,7 +143,7 @@ export const App = () => {
                               ? <Redirect to='/pickup' />
                               : orderStatus?.options.type === 3
                                 ? <Redirect to='/eatin' />
-                                 : orderStatus?.options.type === 4
+                                : orderStatus?.options.type === 4
                                   ? <Redirect to='/curbside' />
                                   : <Redirect to='/drivethru' />
                         )
@@ -192,9 +194,19 @@ export const App = () => {
                   </Route>
                   <Route exact path='/businesses/:feature'>
                     <FeaturedBusinessList />
+                    {
+                      orderStatus.options?.address?.location
+                        ? <FeaturedBusinessList />
+                        : <Redirect to='/' />
+                    }
                   </Route>
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
+                    {
+                      orderStatus.options?.address?.location
+                        ? <BusinessProductsList />
+                        : <Redirect to='/' />
+                    }
                   </Route>
                   <Route exact path='/signup'>
                     {
@@ -286,6 +298,9 @@ export const App = () => {
                   <Route exact path='/pages'>
                     <PagesList />
                   </Route>
+                  <Route exact path='/pages/:pageSlug'>
+                    <Cms />
+                  </Route>
                   <Route exact path='/password/reset' component={ResetPassword} />
                   <Route exact path='/profile'>
                     {auth
@@ -303,7 +318,9 @@ export const App = () => {
                 </Switch>
               </ScrollToTop>
             )}
-            <Footer />
+            {!isFooterPage && (
+              <Footer />
+            )}
             <Alert
               title={t('INFORMATION', 'Information')}
               content={alertState.content}
