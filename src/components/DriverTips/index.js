@@ -7,7 +7,8 @@ import {
   FormDriverTip,
   WrapperInput,
   DriverTipMessage,
-  DriverTipLabel
+  DriverTipLabel,
+  WrapperTips
 } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -50,15 +51,17 @@ const DriverTipsUI = (props) => {
       <DriverTipContainer id='driver-tip-container'>
         {!isDriverTipUseCustom ? (
           <>
-            {driverTipsOptions.map((option, i) => (
-              <TipCard
-                key={i}
-                className={`${option === optionSelected ? 'active' : ''}`}
-                onClick={() => handlerChangeOption(option)}
-              >
-                {`${isFixedPrice ? parsePrice(option) : `${option}%`}`}
-              </TipCard>
-            ))}
+            <WrapperTips>
+              {driverTipsOptions.map((option, i) => (
+                <TipCard
+                  key={i}
+                  className={`${option === optionSelected ? 'active' : ''}`}
+                  onClick={() => handlerChangeOption(option)}
+                >
+                  {`${isFixedPrice ? parsePrice(option) : `${option}%`}`}
+                </TipCard>
+              ))}
+            </WrapperTips>
             {!driverTipsOptions.includes(driverTip) && (
               <DriverTipMessage>
                 {t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')}
