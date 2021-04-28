@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -42,6 +42,7 @@ const CartUI = (props) => {
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const [validationFields] = useValidationFields()
+  const [{ configs }] = useConfig()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
@@ -203,7 +204,12 @@ const CartUI = (props) => {
                     <tr>
                       <td>
                         {t('DRIVER_TIP', 'Driver tip')}
-                        {cart?.driver_tip_rate > 0 && <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>}
+                        {cart?.driver_tip_rate > 0 &&
+                          configs?.driver_tip_type?.value === 2 &&
+                          !!!configs?.driver_tip_use_custom?.value &&
+                        (
+                          <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>
+                        )}
                       </td>
                       <td>{parsePrice(cart?.driver_tip)}</td>
                     </tr>

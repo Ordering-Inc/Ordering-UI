@@ -359,7 +359,10 @@ const OrderDetailsUI = (props) => {
                     <tr>
                       <td>
                         {t('DRIVER_TIP', 'Driver tip')}
-                        {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                        {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
+                          configs?.driver_tip_type?.value === 2 &&
+                          !!!configs?.driver_tip_use_custom?.value &&
+                        (
                           <span>{`(${parseNumber(order?.driver_tip)}%)`}</span>
                         )}
                       </td>

@@ -55,7 +55,6 @@ import { CartContent } from '../CartContent'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { DeliveryTimeSelector } from '../DeliveryTimeSelector'
 import { CouponControl } from '../CouponControl'
-import { DriverTipsOptions } from '../../../../../utils'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -410,7 +409,12 @@ const CheckoutUI = (props) => {
                   <div>
                     <span>
                       {t('DRIVER_TIP', 'Driver tip')}
-                      {cart?.driver_tip_rate > 0 && <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>}
+                      {cart?.driver_tip_rate > 0 &&
+                        configs?.driver_tip_type?.value === 2 &&
+                        !!!configs?.driver_tip_use_custom?.value &&
+                      (
+                        <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>
+                      )}
                     </span>
                     <span>{parsePrice(cart?.driver_tip)}</span>
                   </div>
@@ -447,12 +451,19 @@ const CheckoutUI = (props) => {
                     options.type === 1 &&
                     cart?.status !== 2 &&
                     validationFields?.fields?.checkout?.driver_tip?.enabled &&
+                    configs?.driver_tip_options?.value?.length > 0 &&
                   (
                     <DriverTipContainer>
                       <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                       <DriverTips
                         businessId={cart?.business_id}
-                        driverTipsOptions={DriverTipsOptions}
+                        driverTipsOptions={configs?.driver_tip_options?.value}
+                        isFixedPrice={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value}
+                        isDriverTipUseCustom={!!configs?.driver_tip_use_custom?.value}
+                        driverTip={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value
+                          ? cart?.driver_tip
+                          : cart?.driver_tip_rate
+                        }
                         useOrderContext
                       />
                     </DriverTipContainer>
