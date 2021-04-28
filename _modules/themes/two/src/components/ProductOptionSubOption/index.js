@@ -128,7 +128,9 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     disabled: true
   }) : state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
     disabled: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))), (option === null || option === void 0 ? void 0 : option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
+  })), suboption.image && /*#__PURE__*/_react.default.createElement(_styles.SubOptionThumbnail, {
+    src: suboption.image
+  }), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))), (option === null || option === void 0 ? void 0 : option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
     className: ['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),

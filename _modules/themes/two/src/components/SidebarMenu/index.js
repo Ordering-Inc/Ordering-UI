@@ -35,6 +35,8 @@ var _HiOutlineShoppingBag = _interopRequireDefault(require("@meronex/icons/hi/Hi
 
 var _orderingComponents = require("ordering-components");
 
+var _useOutsideClick = require("../../../../../hooks/useOutsideClick");
+
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
 var _LogoutButton = require("../LogoutButton");
@@ -64,6 +66,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SidebarMenu = function SidebarMenu(props) {
   var _options$address, _options$address3, _options$address4;
 
+  var sideBarRef = (0, _react.useRef)(null);
   var configTypes = props.configTypes;
 
   var _useSession = (0, _orderingComponents.useSession)(),
@@ -114,6 +117,10 @@ var SidebarMenu = function SidebarMenu(props) {
       }
     }
   }, [width]);
+  (0, _useOutsideClick.useOutsideClick)(sideBarRef, function () {
+    actionSidebar(false);
+    setIsMenuOpen(false);
+  });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!isHome || isHome && auth) && /*#__PURE__*/_react.default.createElement(_styles.Container, {
     auth: auth
   }, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
@@ -124,6 +131,7 @@ var SidebarMenu = function SidebarMenu(props) {
       return actionSidebar(true);
     }
   }, /*#__PURE__*/_react.default.createElement(_IosMenu.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SidebarContent, {
+    ref: sideBarRef,
     id: "sidebar_menu",
     isHome: isHome
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuClose, {

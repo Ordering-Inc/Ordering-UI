@@ -46,7 +46,7 @@ var OrderInfo = _styledComponents.default.div(_templateObject5 || (_templateObje
 
 exports.OrderInfo = OrderInfo;
 
-var OrderData = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  h1 {\n    width: 100%;\n    font-size: 32px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    color: ", ";\n    span {\n      &:not(:first-child) {\n        color: ", ";\n        font-size: 24px;\n        cursor: pointer;\n      }\n    }\n  }\n\n  p {\n    color: ", ";\n  }\n\n  @media (max-width: 992px) {\n    h1 {\n      font-size: 24px;\n    }\n  }\n"])), function (props) {
+var OrderData = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  h1 {\n    width: 100%;\n    font-size: 32px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    color: ", ";\n    span {\n      &:not(:first-child) {\n        color: ", ";\n        font-size: 24px;\n        cursor: pointer;\n      }\n    }\n  }\n\n  p {\n    color: ", ";\n  }\n\n  .order-data-section {\n    max-width: 600px;\n    display: flex;\n    justify-content: space-between;\n    margin: 20px 0;\n\n    > dl dd {\n      padding: 0 10px;\n    }\n  }\n\n  @media (max-width: 992px) {\n    h1 {\n      font-size: 24px;\n    }\n\n    .order-data-section {\n      flex-direction: column;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   return props.theme.colors.primary;

@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Flag = exports.Title = exports.WrapHeader = exports.Container = void 0;
+exports.OptionThumbnail = exports.Flag = exports.Title = exports.TitleContainer = exports.WrapHeader = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -25,17 +25,28 @@ var WrapHeader = _styledComponents.default.div(_templateObject2 || (_templateObj
 
 exports.WrapHeader = WrapHeader;
 
-var Title = _styledComponents.default.h3(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  width: 70%;\n  display: flex;\n  flex-direction: column;\n\n  span {\n    &:not(:first-child) {\n      color: ", ";\n      font-size: 12px;\n      font-weight: 400;\n    }\n  }\n"])), function (props) {
+var TitleContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  width: 70%;\n  display: flex;\n  align-items: center;  \n\n  *:first-child {\n    margin-right: 8px;\n  }\n"])));
+
+exports.TitleContainer = TitleContainer;
+
+var Title = _styledComponents.default.h3(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  display: flex;\n  flex-direction: column;\n\n  span {\n    &:not(:first-child) {\n      color: ", ";\n      font-size: 12px;\n      font-weight: 400;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.grayTextColor;
 });
 
 exports.Title = Title;
 
-var Flag = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  column-gap: 5px;\n  padding: 10px 15px;\n  font-size: 13px;\n  margin: 0px;\n  text-transform: capitalize;\n  font-weight: 500;\n  \n  @media (min-width: 381px) {\n    font-size: 14px;\n  }\n\n  color: #028389;\n  \n  ", "\n"])), function (_ref) {
+var Flag = _styledComponents.default.span(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  column-gap: 5px;\n  padding: 10px 15px;\n  font-size: 13px;\n  margin: 0px;\n  text-transform: capitalize;\n  font-weight: 500;\n  \n  @media (min-width: 381px) {\n    font-size: 14px;\n  }\n\n  color: #028389;\n  \n  ", "\n"])), function (_ref) {
   var error = _ref.error;
-  return error && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background: #FEFE58;\n    color: ", ";\n  "])), function (props) {
+  return error && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background: #FEFE58;\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.grayTextColor;
   });
 });
 
 exports.Flag = Flag;
+
+var OptionThumbnail = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: inline-block;\n  border-radius: 8px;\n  background-image: url(", ");\n  background-repeat: no-repeat, repeat;\n  width: 40px;\n  height: 40px;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  justify-content: center;\n  align-items: center;\n"])), function (_ref2) {
+  var src = _ref2.src;
+  return src;
+});
+
+exports.OptionThumbnail = OptionThumbnail;

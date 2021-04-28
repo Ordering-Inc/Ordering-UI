@@ -77,6 +77,7 @@ var FeaturedBusinessListingUI = function FeaturedBusinessListingUI(props) {
     events.emit('go_to_page', data);
   };
 
+  var isPopularBisnesses = window.location.pathname === '/businesses/popular';
   return /*#__PURE__*/_react.default.createElement(_styles.PopularBusinessContainer, {
     isFeaturePage: isFeaturePage
   }, isFeaturePage && /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
@@ -85,7 +86,9 @@ var FeaturedBusinessListingUI = function FeaturedBusinessListingUI(props) {
     search: searchValue,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch
-  }), /*#__PURE__*/_react.default.createElement(_styles.TextContent, null, isFeaturePage && /*#__PURE__*/_react.default.createElement(_styles.BackView, null, /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.TextContent, null, /*#__PURE__*/_react.default.createElement(_styles.PositionedContainer, {
+    fixed: isPopularBisnesses
+  }, isFeaturePage && /*#__PURE__*/_react.default.createElement(_styles.BackView, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'search'
@@ -103,7 +106,7 @@ var FeaturedBusinessListingUI = function FeaturedBusinessListingUI(props) {
         }
       });
     }
-  }, t('SEE_ALL', 'See All'), " ", /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))), /*#__PURE__*/_react.default.createElement(_styles.PopularBusinesssList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
+  }, t('SEE_ALL', 'See All'), " ", /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.PopularBusinesssList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
     twoColumnView: twoColumnView,
     isFeaturePage: isFeaturePage,
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')

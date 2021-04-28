@@ -52,7 +52,9 @@ var ProductOptionUI = function ProductOptionUI(props) {
     maxMin = "(".concat(t('MIN', 'Min'), ": ").concat(option.min, ")");
   }
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("span", null, option.name), option.min === 1 && option.max === 1 && /*#__PURE__*/_react.default.createElement("span", null, t('SELECT_AT_LEAST_1', 'select at least 1'))), /*#__PURE__*/_react.default.createElement(_styles.Flag, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapHeader, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, option.image && /*#__PURE__*/_react.default.createElement(_styles.OptionThumbnail, {
+    src: option.image
+  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("span", null, option.name), option.min === 1 && option.max === 1 && /*#__PURE__*/_react.default.createElement("span", null, t('SELECT_AT_LEAST_1', 'select at least 1')))), /*#__PURE__*/_react.default.createElement(_styles.Flag, {
     error: error
   }, option.min === 1 && option.max === 1 && !error && /*#__PURE__*/_react.default.createElement(_BsCheck.default, null), maxMin)), children);
 };

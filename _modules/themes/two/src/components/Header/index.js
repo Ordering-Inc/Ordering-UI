@@ -35,6 +35,8 @@ var _Modal = require("../Modal");
 
 var _CartContent = require("../CartContent");
 
+var _LanguageSelector = require("../LanguageSelector");
+
 var _styles = require("./styles");
 
 var _utils = require("../../../../../utils");
@@ -191,7 +193,7 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
     auth: auth,
     configTypes: configTypes
-  }), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && isBusinessListingPage && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
+  }), !auth && !isAuthPage && /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && isBusinessListingPage && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     dropDownStyle: true,
     configTypes: configTypes,
     handleChangePage: handleChangePage

@@ -1,27 +1,33 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Footer = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-var _reactRouterDom = require("react-router-dom");
-
-var _styles = require("./styles");
-
-var _FaTwitter = _interopRequireDefault(require("@meronex/icons/fa/FaTwitter"));
-
-var _FaInstagram = _interopRequireDefault(require("@meronex/icons/fa/FaInstagram"));
-
-var _AiFillFacebook = _interopRequireDefault(require("@meronex/icons/ai/AiFillFacebook"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _styledComponents = require("styled-components");
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -36,288 +42,99 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Footer = function Footer() {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$logos;
+  var _useState = (0, _react.useState)({
+    body: null,
+    loading: false,
+    error: null
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      footerState = _useState2[0],
+      setfooterState = _useState2[1];
 
-  var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
+  var _useApi = (0, _orderingComponents.useApi)(),
+      _useApi2 = _slicedToArray(_useApi, 1),
+      ordering = _useApi2[0];
 
-  var theme = (0, _styledComponents.useTheme)();
-  var location = (0, _reactRouterDom.useLocation)();
-  var isHomePage = location.pathname === '/home' || location.pathname === '/';
-  return /*#__PURE__*/_react.default.createElement(_styles.FooterContainer, {
-    id: "footer",
-    isHomePage: isHomePage
-  }, /*#__PURE__*/_react.default.createElement(_styles.FooterTopContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('TOP_CITIES', 'Top Cities')), /*#__PURE__*/_react.default.createElement(_styles.LinkBlock, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum'))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('TOP_CUISINES_NEAY_YOU', 'Top Cuisines Near You')), /*#__PURE__*/_react.default.createElement(_styles.LinkBlock, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')))))), /*#__PURE__*/_react.default.createElement(_styles.SupportContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('GET_TO_KNOW_US', 'Get to Know Us')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('LET_US_HELP_YOU', 'Let Us Help You')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('DOING_BUSINESS', 'Doing business')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF'),
-    className: "right"
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapAppImgae, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.appStore,
-    alt: "app store"
-  }))), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF'),
-    className: "right"
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapAppImgae, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.googlePlay,
-    alt: "google play"
-  })))))), /*#__PURE__*/_react.default.createElement(_styles.FooterBottomContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    alt: "Isotype",
-    width: "35px",
-    height: "45px",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.isotypeInvert,
-    loading: "lazy"
-  })), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum')), /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    "aria-label": "link1",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('LOREM_IPSUM', 'Lorem Ipsum'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
-    target: "_blank",
-    rel: "noreferrer",
-    href: t('FOOTER_QL3_1_HREF'),
-    "aria-label": "facebook"
-  }, /*#__PURE__*/_react.default.createElement(_AiFillFacebook.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
-    target: "_blank",
-    rel: "noreferrer",
-    href: t('FOOTER_QL3_2_HREF'),
-    "aria-label": "instagram"
-  }, /*#__PURE__*/_react.default.createElement(_FaInstagram.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
-    target: "_blank",
-    rel: "noreferrer",
-    href: t('FOOTER_QL3_3_HREF'),
-    "aria-label": "twitter"
-  }, /*#__PURE__*/_react.default.createElement(_FaTwitter.default, null)))));
+  var requestsState = {};
+
+  var getPage = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var source, _yield$ordering$pages, _yield$ordering$pages2, error, result;
+
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                loading: true
+              }));
+              _context.prev = 1;
+              source = {};
+              requestsState.page = source;
+              _context.next = 6;
+              return ordering.pages('footer').get({
+                cancelToken: source
+              });
+
+            case 6:
+              _yield$ordering$pages = _context.sent;
+              _yield$ordering$pages2 = _yield$ordering$pages.content;
+              error = _yield$ordering$pages2.error;
+              result = _yield$ordering$pages2.result;
+              setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                loading: false
+              }));
+
+              if (!error) {
+                setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                  body: result.body
+                }));
+              } else {
+                setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                  error: result
+                }));
+              }
+
+              _context.next = 17;
+              break;
+
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](1);
+
+              if (_context.t0.constructor.name !== 'Cancel') {
+                setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                  loading: false,
+                  error: [_context.t0.message]
+                }));
+              }
+
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[1, 14]]);
+    }));
+
+    return function getPage() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  (0, _react.useEffect)(function () {
+    getPage();
+    return function () {
+      if (requestsState.page) {
+        requestsState.page.cancel();
+      }
+    };
+  }, []);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, footerState.body && /*#__PURE__*/_react.default.createElement("div", {
+    dangerouslySetInnerHTML: {
+      __html: footerState.body
+    }
+  }));
 };
 
 exports.Footer = Footer;

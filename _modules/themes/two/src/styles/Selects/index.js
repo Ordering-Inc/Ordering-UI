@@ -56,10 +56,10 @@ exports.Selected = Selected;
 
 var Select = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: inline-block;\n  height: 34px;\n  border-radius: 34px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  background-color: ", " !important;\n  color: ", " !important;\n  position: relative;\n\n  ", "\n\n  ", "\n"])), function (_ref4) {
   var isHome = _ref4.isHome;
-  return isHome ? 'rgba(247,247,247,0.3)' : '#CCC';
+  return isHome ? 'rgba(247,247,247,1)' : '#CCC';
 }, function (_ref5) {
   var isHome = _ref5.isHome;
-  return isHome ? '#FFF' : '#333';
+  return isHome ? '#767676' : '#333';
 }, function (props) {
   return props.disabled && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 }, function (props) {
