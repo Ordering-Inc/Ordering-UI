@@ -118,6 +118,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   var _handleNewCard = function _handleNewCard(card) {
     setAddCardOpen(false);
     handleNewCard(card);
+    setDefaultCard(card);
   };
 
   var handleDeleteCard = function handleDeleteCard(card) {

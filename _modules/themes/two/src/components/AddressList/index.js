@@ -9,6 +9,8 @@ exports.AddressList = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _TiPencil = _interopRequireDefault(require("@meronex/icons/ti/TiPencil"));
@@ -86,6 +88,8 @@ var AddressListUI = function AddressListUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
+  var location = (0, _reactRouterDom.useLocation)();
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       curAddress = _useState2[0],
@@ -106,6 +110,7 @@ var AddressListUI = function AddressListUI(props) {
       setConfirm = _useState6[1];
 
   var theme = (0, _styledComponents.useTheme)();
+  var isHome = location.pathname === '/' || location.pathname === '/home';
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
     return i === self.findIndex(function (obj) {
       return address.address === obj.address && address.address_notes === obj.address_notes && address.zipcode === obj.zipcode && address.internal_number === obj.internal_number;
@@ -206,8 +211,15 @@ var AddressListUI = function AddressListUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
     id: "address_control",
     isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
-  }, isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    isAddressEdit: true,
+  }, (!isPopover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    className: "add",
+    color: "primary",
+    onClick: function onClick() {
+      return openAddress({});
+    },
+    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading
+  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    isAddressEdit: !isHome,
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
@@ -223,7 +235,7 @@ var AddressListUI = function AddressListUI(props) {
       return setAddressOpen(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    isAddressEdit: true,
+    isAddressEdit: !isHome,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
     address: curAddress,
@@ -274,7 +286,7 @@ var AddressListUI = function AddressListUI(props) {
         return handleDeleteClick(address);
       }
     }, /*#__PURE__*/_react.default.createElement(_VscClose.default, null))));
-  }))), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
+  }))), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) === 0 && !isProductForm && !(isPopover && addressOpen && isHome) && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found",
     width: "200px",

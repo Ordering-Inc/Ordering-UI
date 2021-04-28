@@ -186,6 +186,7 @@ var Header = function Header(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     isHome: isHome,
+    auth: auth,
     isAuthPage: isAuthPage
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
     auth: auth,
@@ -194,7 +195,7 @@ var Header = function Header(props) {
     dropDownStyle: true,
     configTypes: configTypes,
     handleChangePage: handleChangePage
-  }), onlineStatus && isBusinessListingPage && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
+  }), onlineStatus && (isBusinessListingPage || isHome && auth) && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
       return handleTogglePopover('moment');
@@ -252,7 +253,7 @@ var Header = function Header(props) {
     },
     highlight: 1,
     name: "signup"
-  }, t('SIGN_UP', 'Sign up'))), !isHome && !isAuthPage && auth && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
+  }, t('SIGN_UP', 'Sign up'))), (!isHome || isHome && auth) && !isAuthPage && auth && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
     carts: cartsWithProducts,
     onClick: function onClick() {

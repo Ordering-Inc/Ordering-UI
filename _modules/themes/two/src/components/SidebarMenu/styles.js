@@ -21,22 +21,30 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var IconContent = _styledComponents.default.button(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: 100%;\n  margin: 0px;\n  display: inline-flex;\n  min-height: 35px;\n  border-radius: 40px;\n  border: none;\n  cursor: pointer;\n  transition: background-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;\n  user-select: none;\n  text-decoration: none;\n  text-align: center;\n  background-color: transparent;\n  box-shadow: transparent 0px 0px 0px 1px inset;\n  width: 35px;\n  height: 35px;\n  padding: 0px;\n  align-items: center;\n  justify-content: center;\n\n  &:hover {\n    background-color: ", ";\n    box-shadow: transparent 0px 0px 0px 1px inset;\n  }\n\n  svg {\n    flex-shrink: 0;\n    font-size: 30px;\n    color: ", ";\n  }\n"])), function (_ref) {
+var IconContent = _styledComponents.default.button(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: 100%;\n  margin: 0px;\n  display: inline-flex;\n  min-height: 35px;\n  border-radius: 40px;\n  border: none;\n  cursor: pointer;\n  transition: background-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;\n  user-select: none;\n  text-decoration: none;\n  text-align: center;\n  background-color: transparent;\n  box-shadow: transparent 0px 0px 0px 1px inset;\n  width: 35px;\n  height: 35px;\n  padding: 0px;\n  align-items: center;\n  justify-content: center;\n\n  &:hover {\n    background-color: ", ";\n    box-shadow: transparent 0px 0px 0px 1px inset;\n  }\n\n  svg {\n    flex-shrink: 0;\n    font-size: 30px;\n    color: ", ";\n    background: ", ";\n    border-radius: ", ";\n  }\n"])), function (_ref) {
   var isHome = _ref.isHome;
   return isHome ? 'rgba(255,255,255,0.1)' : 'rgb(255, 255, 255)';
 }, function (_ref2) {
   var isHome = _ref2.isHome;
   return isHome ? 'rgb(255, 255, 255)' : '#333';
+}, function (_ref3) {
+  var isHome = _ref3.isHome,
+      auth = _ref3.auth;
+  return isHome && auth && 'rgba(0,0,0,0.5)';
+}, function (_ref4) {
+  var isHome = _ref4.isHome,
+      auth = _ref4.auth;
+  return isHome && auth && '10px';
 });
 
 exports.IconContent = IconContent;
 
-var SidebarContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 0;\n  position: fixed;\n  z-index: 1005;\n  top: 0;\n  background-color: ", ";\n  overflow-x: hidden;\n  transition: 0.5s;\n  padding-top: 60px;\n  box-shadow: ", ";\n\n  ", "\n\n  @media (max-height: 450px) {\n    padding-top: 15px;\n  }\n"])), function (_ref3) {
-  var isHome = _ref3.isHome,
-      theme = _ref3.theme;
+var SidebarContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 0;\n  position: fixed;\n  z-index: 1005;\n  top: 0;\n  background-color: ", ";\n  overflow-x: hidden;\n  transition: 0.5s;\n  padding-top: 60px;\n  box-shadow: ", ";\n\n  ", "\n\n  @media (max-height: 450px) {\n    padding-top: 15px;\n  }\n"])), function (_ref5) {
+  var isHome = _ref5.isHome,
+      theme = _ref5.theme;
   return isHome ? '#333' : "".concat(theme.colors.backgroundPage);
-}, function (_ref4) {
-  var isHome = _ref4.isHome;
+}, function (_ref6) {
+  var isHome = _ref6.isHome;
   return isHome ? 'rgba(0, 0, 0, 0.7) 0px 8px 24px;' : 'rgba(0, 0, 0, 0.2) 0px 8px 24px;';
 }, function (props) {
   var _props$theme;
@@ -46,25 +54,25 @@ var SidebarContent = _styledComponents.default.div(_templateObject3 || (_templat
 
 exports.SidebarContent = SidebarContent;
 
-var MenuClose = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0;\n  max-width: 100%;\n  margin: 6px 20px 6px 20px;\n  display: inline-flex;\n  min-height: 35px;\n  border-radius: 40px;\n  border: none;\n  cursor: pointer;\n  transition: background-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;\n  user-select: none;\n  text-decoration: none;\n  text-align: center;\n  background-color: ", ";\n  box-shadow: transparent 0px 0px 0px 1px inset;\n  width: 35px;\n  height: 35px;\n  padding: 0px;\n  align-items: center;\n  justify-content: center;\n\n  &:hover {\n    background-color: ", ";\n    box-shadow: transparent 0px 0px 0px 1px inset;\n  }\n\n  svg {\n    flex-shrink: 0;\n    font-size: 30px;\n    color: ", ";\n  }\n"])), function (_ref5) {
-  var isHome = _ref5.isHome;
-  return isHome ? '#333' : 'rgb(247, 247, 247)';
-}, function (_ref6) {
-  var isHome = _ref6.isHome;
-  return isHome ? 'rgba(255,255,255,0.1)' : 'rgb(255, 255, 255)';
-}, function (_ref7) {
+var MenuClose = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0;\n  max-width: 100%;\n  margin: 6px 20px 6px 20px;\n  display: inline-flex;\n  min-height: 35px;\n  border-radius: 40px;\n  border: none;\n  cursor: pointer;\n  transition: background-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;\n  user-select: none;\n  text-decoration: none;\n  text-align: center;\n  background-color: ", ";\n  box-shadow: transparent 0px 0px 0px 1px inset;\n  width: 35px;\n  height: 35px;\n  padding: 0px;\n  align-items: center;\n  justify-content: center;\n\n  &:hover {\n    background-color: ", ";\n    box-shadow: transparent 0px 0px 0px 1px inset;\n  }\n\n  svg {\n    flex-shrink: 0;\n    font-size: 30px;\n    color: ", ";\n  }\n"])), function (_ref7) {
   var isHome = _ref7.isHome;
+  return isHome ? '#333' : 'rgb(247, 247, 247)';
+}, function (_ref8) {
+  var isHome = _ref8.isHome;
+  return isHome ? 'rgba(255,255,255,0.1)' : 'rgb(255, 255, 255)';
+}, function (_ref9) {
+  var isHome = _ref9.isHome;
   return isHome ? 'rgb(255, 255, 255)' : '#333';
 });
 
 exports.MenuClose = MenuClose;
 
-var MenuLink = _styledComponents.default.a(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  overflow: hidden;\n  text-decoration: none;\n  appearance: none;\n  border: none;\n  padding: 0px;\n  margin: 0px;\n  text-align: inherit;\n  display: block;\n  width: 100%;\n  background: ", ";\n  outline: none !important;\n\n  &:hover {\n    color: #f1f1f1;\n  }\n\n  @media (max-height: 450px) {\n    font-size: 18px;\n  }\n\n  ", "\n"])), function (_ref8) {
-  var isHome = _ref8.isHome,
-      theme = _ref8.theme;
+var MenuLink = _styledComponents.default.a(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  overflow: hidden;\n  text-decoration: none;\n  appearance: none;\n  border: none;\n  padding: 0px;\n  margin: 0px;\n  text-align: inherit;\n  display: block;\n  width: 100%;\n  background: ", ";\n  outline: none !important;\n\n  &:hover {\n    color: #f1f1f1;\n  }\n\n  @media (max-height: 450px) {\n    font-size: 18px;\n  }\n\n  ", "\n"])), function (_ref10) {
+  var isHome = _ref10.isHome,
+      theme = _ref10.theme;
   return isHome ? '#333' : "".concat(theme.colors.backgroundPage);
-}, function (_ref9) {
-  var isHome = _ref9.isHome;
+}, function (_ref11) {
+  var isHome = _ref11.isHome;
   return isHome && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    > div {\n      border-bottom: #333;\n    }\n  "])));
 });
 
@@ -72,17 +80,17 @@ exports.MenuLink = MenuLink;
 
 var WrappContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  max-width: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-rows: auto auto auto;\n  grid-template-columns: auto 1fr;\n  column-gap: 20px;\n  padding: 15px 20px;\n  border-bottom: 1px solid ", ";\n\n  ", "\n"])), function (props) {
   return props.theme.colors.secondary;
-}, function (_ref10) {
-  var noneGrid = _ref10.noneGrid;
+}, function (_ref12) {
+  var noneGrid = _ref12.noneGrid;
   return noneGrid && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    display: block;\n    border-bottom: none;\n  "])));
 });
 
 exports.WrappContent = WrappContent;
 
-var MenuLinkIcon = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  grid-area: 2 / 1 / auto / auto;\n  flex-shrink: 0;\n  line-height: 0;\n  display: flex;\n  align-items: center;\n  margin: 0px;\n\n  svg {\n    flex-shrink: 0;\n    color: #000;\n    width: 24px;\n    height: 24px;\n    color: ", "\n  }\n"])), function (_ref11) {
-  var active = _ref11.active,
-      theme = _ref11.theme,
-      isHome = _ref11.isHome;
+var MenuLinkIcon = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  grid-area: 2 / 1 / auto / auto;\n  flex-shrink: 0;\n  line-height: 0;\n  display: flex;\n  align-items: center;\n  margin: 0px;\n\n  svg {\n    flex-shrink: 0;\n    color: #000;\n    width: 24px;\n    height: 24px;\n    color: ", "\n  }\n"])), function (_ref13) {
+  var active = _ref13.active,
+      theme = _ref13.theme,
+      isHome = _ref13.isHome;
   return active ? theme.colors.primary : isHome ? '#FFF' : '#000';
 });
 
@@ -92,10 +100,10 @@ var MenuLinkText = _styledComponents.default.div(_templateObject12 || (_template
 
 exports.MenuLinkText = MenuLinkText;
 
-var TextInfo = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  font-weight: 500;\n  line-height: 24px;\n  letter-spacing: -0.04ch;\n  text-transform: capitalize;\n  text-align: left;\n  margin: 0px;\n  padding: 0px;\n  display: block;\n  font-variant-ligatures: no-common-ligatures;\n  max-width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: ", ";\n\n  ", "\n\n  > span {\n    display: block;\n\n    &:not(:first-child) {\n      color: ", ";\n      font-size: 14px;\n    }\n  }\n"])), function (_ref12) {
-  var active = _ref12.active,
-      theme = _ref12.theme,
-      isHome = _ref12.isHome;
+var TextInfo = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  font-weight: 500;\n  line-height: 24px;\n  letter-spacing: -0.04ch;\n  text-transform: capitalize;\n  text-align: left;\n  margin: 0px;\n  padding: 0px;\n  display: block;\n  font-variant-ligatures: no-common-ligatures;\n  max-width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: ", ";\n\n  ", "\n\n  > span {\n    display: block;\n\n    &:not(:first-child) {\n      color: ", ";\n      font-size: 14px;\n    }\n  }\n"])), function (_ref14) {
+  var active = _ref14.active,
+      theme = _ref14.theme,
+      isHome = _ref14.isHome;
   return active ? theme.colors.primary : isHome ? '#FFF' : '#000';
 }, function (props) {
   var _props$theme2;
@@ -109,8 +117,8 @@ exports.TextInfo = TextInfo;
 
 var MenuLinkSeparator = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  background: ", ";\n  height: 15px;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.lightGrayColor;
-}, function (_ref13) {
-  var isHome = _ref13.isHome;
+}, function (_ref15) {
+  var isHome = _ref15.isHome;
   return isHome && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    background: #333;\n  "])));
 });
 

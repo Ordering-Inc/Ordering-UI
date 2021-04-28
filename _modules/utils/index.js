@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortInputFields = exports.fieldsToSort = exports.getHourMin = exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = void 0;
+exports.sortInputFields = exports.fieldsToSort = exports.getHourMin = exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.getIconCard = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -52,9 +52,6 @@ var getIconCard = function getIconCard() {
       return /*#__PURE__*/_react.default.createElement(_FaCreditCard.default, null);
   }
 };
-
-exports.getIconCard = getIconCard;
-var DriverTipsOptions = [0, 10, 15, 20, 25];
 /**
  * Function to calculate time to scroll element
  * @param {*} t = current time
@@ -63,7 +60,8 @@ var DriverTipsOptions = [0, 10, 15, 20, 25];
  * @param {*} d = duration
  */
 
-exports.DriverTipsOptions = DriverTipsOptions;
+
+exports.getIconCard = getIconCard;
 
 var easeInOutQuad = function easeInOutQuad(t, b, c, d) {
   t /= d / 2;

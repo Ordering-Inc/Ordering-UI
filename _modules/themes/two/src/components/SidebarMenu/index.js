@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _options$address2, _options$address3;
+  var _options$address, _options$address3, _options$address4;
 
   var configTypes = props.configTypes;
 
@@ -114,10 +114,11 @@ var SidebarMenu = function SidebarMenu(props) {
       }
     }
   }, [width]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isHome && /*#__PURE__*/_react.default.createElement(_styles.Container, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!isHome || isHome && auth) && /*#__PURE__*/_react.default.createElement(_styles.Container, {
     auth: auth
   }, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
     isHome: isHome,
+    auth: auth,
     "aria-label": "menu",
     onClick: function onClick() {
       return actionSidebar(true);
@@ -131,28 +132,28 @@ var SidebarMenu = function SidebarMenu(props) {
     onClick: function onClick() {
       return actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), !(isHome && !(options !== null && options !== void 0 && (_options$address = options.address) !== null && _options$address !== void 0 && _options$address.location)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
-      var _options$address;
+      var _options$address2;
 
       return handleGoToPage({
-        page: options !== null && options !== void 0 && (_options$address = options.address) !== null && _options$address !== void 0 && _options$address.location ? 'delivery' : 'home'
+        page: options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? 'delivery' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
     isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
-  }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/delivery'
-  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('DELIVERY', 'Delivery') : t('HOME', 'Home'))))), configTypes.includes(2) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, options !== null && options !== void 0 && (_options$address4 = options.address) !== null && _options$address4 !== void 0 && _options$address4.location ? t('DELIVERY', 'Delivery') : t('HOME', 'Home'))))), configTypes.includes(2) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
-      var _options$address4;
+      var _options$address5;
 
       return handleGoToPage({
-        page: options !== null && options !== void 0 && (_options$address4 = options.address) !== null && _options$address4 !== void 0 && _options$address4.location ? 'pickup' : 'home'
+        page: options !== null && options !== void 0 && (_options$address5 = options.address) !== null && _options$address5 !== void 0 && _options$address5.location ? 'pickup' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
@@ -164,10 +165,10 @@ var SidebarMenu = function SidebarMenu(props) {
   }, t('PICKUP', 'Pickup'))))), configTypes.includes(3) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
-      var _options$address5;
+      var _options$address6;
 
       return handleGoToPage({
-        page: options !== null && options !== void 0 && (_options$address5 = options.address) !== null && _options$address5 !== void 0 && _options$address5.location ? 'eatin' : 'home'
+        page: options !== null && options !== void 0 && (_options$address6 = options.address) !== null && _options$address6 !== void 0 && _options$address6.location ? 'eatin' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
@@ -179,10 +180,10 @@ var SidebarMenu = function SidebarMenu(props) {
   }, t('EAT_IN', 'Eat in'))))), configTypes.includes(4) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
-      var _options$address6;
+      var _options$address7;
 
       return handleGoToPage({
-        page: options !== null && options !== void 0 && (_options$address6 = options.address) !== null && _options$address6 !== void 0 && _options$address6.location ? 'curbside' : 'home'
+        page: options !== null && options !== void 0 && (_options$address7 = options.address) !== null && _options$address7 !== void 0 && _options$address7.location ? 'curbside' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
@@ -194,10 +195,10 @@ var SidebarMenu = function SidebarMenu(props) {
   }, t('CURBSIDE', 'Curbside'))))), configTypes.includes(5) && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
-      var _options$address7;
+      var _options$address8;
 
       return handleGoToPage({
-        page: options !== null && options !== void 0 && (_options$address7 = options.address) !== null && _options$address7 !== void 0 && _options$address7.location ? 'drivethru' : 'home'
+        page: options !== null && options !== void 0 && (_options$address8 = options.address) !== null && _options$address8 !== void 0 && _options$address8.location ? 'drivethru' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
@@ -206,7 +207,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
     active: window.location.pathname === '/drivethru'
-  }, t('DRIVE_THRU', 'Drive thru'))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('DRIVE_THRU', 'Drive thru')))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({

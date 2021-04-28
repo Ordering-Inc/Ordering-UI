@@ -251,7 +251,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     return !notValidationFields.includes(field.code) && showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement("label", null, t(field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-      type: field.enabled && field.required ? field.type : 'hidden',
+      type: field.type,
       name: field.code,
       "aria-label": field.code,
       className: "form",
