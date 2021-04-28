@@ -85,6 +85,10 @@ const CheckoutUI = (props) => {
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
 
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
+
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -451,13 +455,13 @@ const CheckoutUI = (props) => {
                     options.type === 1 &&
                     cart?.status !== 2 &&
                     validationFields?.fields?.checkout?.driver_tip?.enabled &&
-                    configs?.driver_tip_options?.value?.length > 0 &&
+                    driverTipsOptions.length > 0 &&
                   (
                     <DriverTipContainer>
                       <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                       <DriverTips
                         businessId={cart?.business_id}
-                        driverTipsOptions={configs?.driver_tip_options?.value}
+                        driverTipsOptions={driverTipsOptions}
                         isFixedPrice={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value}
                         isDriverTipUseCustom={!!configs?.driver_tip_use_custom?.value}
                         driverTip={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value
