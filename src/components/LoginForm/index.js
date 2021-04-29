@@ -84,7 +84,7 @@ const LoginFormUI = (props) => {
 
   const initParams = {
     clientId: configs?.apple_login_client_id?.value,
-    redirectURI: 'https://66193f2bd1fc.ngrok.io/login',
+    redirectURI: configs?.apple_login_client_id?.redirectURI || 'https://example-app.com/redirect',
     response_mode: 'fragment',
     response_type: 'code',
     state: 'state',
