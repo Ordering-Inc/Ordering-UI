@@ -13,6 +13,12 @@ export const Input = styled.input`
   &:focus {
     border-color: ${() => darken(0.07, '#CCC')};
   }
+  ${({ hasError }) => hasError && css`
+    border: 1px solid #ff0000;
+    &:focus {
+      border-color: ${() => darken(0.07, '#ff0000')};
+    }
+  `}
   ${({ w }) => w && css`
     width: 20%;
   `}

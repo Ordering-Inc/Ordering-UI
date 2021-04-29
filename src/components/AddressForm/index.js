@@ -69,6 +69,7 @@ const AddressFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
+  const [ validPhoneNumberState, setValidPhoneNumber ] = useState({validPhoneNumber: true});
   const isEditing = !!addressState.address?.id
 
   const [locationChange, setLocationChange] = useState(
@@ -232,6 +233,11 @@ const AddressFormUI = (props) => {
       selectedFromAutocomplete: true
     })
     updateChanges(address)
+  }
+
+  const handlePhoneNumberValidation = (value) => {
+    const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+    setValidPhoneNumber(value === '' ? true : regex.test(value));
   }
 
   const setMapErrors = (errKey) => {
@@ -429,13 +435,16 @@ const AddressFormUI = (props) => {
                     onChange={(e) => {
                       formMethods.setValue(field.name, e.target.value)
                       handleChangeInput({ target: { name: field.name, value: e.target.value } })
+
+                      if (field.name === 'internal_number') handlePhoneNumberValidation(e.target.value)
                     }}
+                    hasError={field.name === 'internal_number' ? !validPhoneNumberState : false }
                     autoComplete='new-field'
+                    maxLength={30}
                   />
                 ) : (
                   <TextArea
-                    rows={4}
-                    placeholder={t('ADDRESS_NOTES', 'Address Notes')}
+                    rows={4}placeholder={t('ADDRESS_NOTES', 'Address Notes')}
                     value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
                     onChange={(e) => {
                       formMethods.setValue('address_notes', e.target.value)
@@ -488,7 +497,7 @@ const AddressFormUI = (props) => {
               <Button
                 id='submit-btn'
                 type='submit'
-                disabled={formState.loading}
+                disabled={formState.loading || !validPhoneNumberState}
                 color='primary'
               >
                 {!formState.loading ? (
