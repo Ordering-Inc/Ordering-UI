@@ -55,16 +55,6 @@ const LoginFormUI = (props) => {
   const emailInput = useRef(null)
   const cellphoneInput = useRef(null)
 
-  const initParams = {
-    clientId: configs?.apple_login_client_id?.value,
-    redirectURI: !window.location.origin.includes('localhost') ? window.location.href : 'https://example-app.com/redirect',
-    response_mode: 'fragment',
-    response_type: 'code',
-    state: 'state',
-    nonce: 'nonce',
-    usePopup: false // or true defaults to false
-  }
-
   const onSubmit = async () => {
     handleButtonLoginClick()
   }
@@ -268,7 +258,6 @@ const LoginFormUI = (props) => {
                 {configs?.apple_login_client_id?.value &&
               (
                 <AppleLogin
-                  initParams={initParams}
                   onSuccess={(data) => console.log('onSuccess', data)}
                   onFailure={(data) => console.log('onFailure', data)}
                 />

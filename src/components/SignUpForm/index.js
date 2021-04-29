@@ -69,16 +69,6 @@ const SignUpFormUI = (props) => {
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
-  const initParams = {
-    clientId: configs?.apple_login_client_id?.value,
-    redirectURI: !window.location.origin.includes('localhost') ? window.location.href : 'https://example-app.com/redirect',
-    response_mode: 'fragment',
-    response_type: 'code',
-    state: 'state',
-    nonce: 'nonce',
-    usePopup: false // or true defaults to false
-  }
-
   const handleSuccessFacebook = (user) => {
     login({
       user,
@@ -358,7 +348,6 @@ const SignUpFormUI = (props) => {
                   {configs?.apple_login_client_id?.value &&
                (
                  <AppleLogin
-                   initParams={initParams}
                    onSuccess={(data) => console.log('onSuccess', data)}
                    onFailure={(data) => console.log('onFailure', data)}
                  />
