@@ -147,7 +147,7 @@ const AddressListUI = (props) => {
   return (
     <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
       {
-        (!isPopover || !addressOpen) && (
+        (!isPopover || !addressOpen) && isHome && (
           <Button
             className='add'
             color='primary'
