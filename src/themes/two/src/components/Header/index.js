@@ -107,7 +107,7 @@ export const Header = (props) => {
 
   return (
     <>
-      <HeaderContainer isHome={isHome} isAuthPage={isAuthPage}>
+      <HeaderContainer isHome={isHome} auth={auth} isAuthPage={isAuthPage}>
         <InnerHeader>
           <LeftHeader>
             <SidebarMenu
@@ -122,7 +122,7 @@ export const Header = (props) => {
                 handleChangePage={handleChangePage}
               />
             )}
-            {onlineStatus && isBusinessListingPage && (
+            {onlineStatus && (isBusinessListingPage || (isHome && auth)) && (
               windowSize.width > 992 && (
                 <WrapMomentAndAddress>
                   <MomentPopover
@@ -160,7 +160,7 @@ export const Header = (props) => {
                     </>
                   )
                 }
-                {!isHome && !isAuthPage && auth && (
+                {(!isHome || (isHome && auth)) && !isAuthPage && auth && (
                   windowSize.width > 768 ? (
                     <CartPopover
                       open={openPopover.cart}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import TiPencil from '@meronex/icons/ti/TiPencil'
 import VscClose from '@meronex/icons/vsc/VscClose'
@@ -48,12 +49,13 @@ const AddressListUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
+  const location = useLocation()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
-
+  const isHome = location.pathname === '/' || location.pathname === '/home'
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
     (address, i, self) =>
       i === self.findIndex(obj => (
@@ -141,9 +143,21 @@ const AddressListUI = (props) => {
   return (
     <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
       {
+        (!isPopover || !addressOpen) && (
+          <Button
+            className='add'
+            color='primary'
+            onClick={() => openAddress({})}
+            disabled={orderState?.loading || actionStatus.loading}
+          >
+            {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')}
+          </Button>
+        )
+      }
+      {
         isPopover && addressOpen && (
           <AddressForm
-            isAddressEdit
+            isAddressEdit={!isHome}
             userId={userId}
             addressesList={addressList?.addresses}
             useValidationFileds
@@ -161,7 +175,7 @@ const AddressListUI = (props) => {
             onClose={() => setAddressOpen(false)}
           >
             <AddressForm
-              isAddressEdit
+              isAddressEdit={!isHome}
               addressesList={addressList?.addresses}
               useValidationFileds
               address={curAddress}
@@ -228,7 +242,7 @@ const AddressListUI = (props) => {
         )
       }
 
-      {!(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
+      {!(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && !(isPopover && addressOpen && isHome) && (
         <WrappNotAddresses>
           <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
           <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>

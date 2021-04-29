@@ -16,8 +16,6 @@ export const getIconCard = (brand = '') => {
   }
 }
 
-export const DriverTipsOptions = [0, 10, 15, 20, 25]
-
 /**
  * Function to calculate time to scroll element
  * @param {*} t = current time

@@ -43,8 +43,6 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 
-import { DriverTipsOptions } from '../../utils'
-
 const mapConfigs = {
   mapZoom: 16,
   mapSize: {
@@ -80,6 +78,10 @@ const CheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
+
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -306,12 +308,19 @@ const CheckoutUI = (props) => {
             options.type === 1 &&
             cart?.status !== 2 &&
             validationFields?.fields?.checkout?.driver_tip?.enabled &&
+            driverTipsOptions.length > 0 &&
             (
               <DriverTipContainer>
                 <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                 <DriverTips
                   businessId={cart?.business_id}
-                  driverTipsOptions={DriverTipsOptions}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value}
+                  isDriverTipUseCustom={!!configs?.driver_tip_use_custom?.value}
+                  driverTip={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate
+                  }
                   useOrderContext
                 />
               </DriverTipContainer>

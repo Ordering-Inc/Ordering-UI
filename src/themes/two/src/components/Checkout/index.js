@@ -55,7 +55,6 @@ import { CartContent } from '../CartContent'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { DeliveryTimeSelector } from '../DeliveryTimeSelector'
 import { CouponControl } from '../CouponControl'
-import { DriverTipsOptions } from '../../../../../utils'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -85,6 +84,10 @@ const CheckoutUI = (props) => {
   const [{ parseNumber, parsePrice, optimizeImage }] = useUtils()
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
+
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
@@ -422,7 +425,12 @@ const CheckoutUI = (props) => {
                   <div>
                     <span>
                       {t('DRIVER_TIP', 'Driver tip')}
-                      {cart?.driver_tip_rate > 0 && <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>}
+                      {cart?.driver_tip_rate > 0 &&
+                        configs?.driver_tip_type?.value === 2 &&
+                        !!!configs?.driver_tip_use_custom?.value &&
+                      (
+                        <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>
+                      )}
                     </span>
                     <span>{parsePrice(cart?.driver_tip)}</span>
                   </div>
@@ -459,12 +467,19 @@ const CheckoutUI = (props) => {
                     options.type === 1 &&
                     cart?.status !== 2 &&
                     validationFields?.fields?.checkout?.driver_tip?.enabled &&
+                    driverTipsOptions.length > 0 &&
                   (
                     <DriverTipContainer>
                       <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                       <DriverTips
                         businessId={cart?.business_id}
-                        driverTipsOptions={DriverTipsOptions}
+                        driverTipsOptions={driverTipsOptions}
+                        isFixedPrice={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value}
+                        isDriverTipUseCustom={!!configs?.driver_tip_use_custom?.value}
+                        driverTip={configs?.driver_tip_type?.value === 1 || !!configs?.driver_tip_use_custom?.value
+                          ? cart?.driver_tip
+                          : cart?.driver_tip_rate
+                        }
                         useOrderContext
                       />
                     </DriverTipContainer>
