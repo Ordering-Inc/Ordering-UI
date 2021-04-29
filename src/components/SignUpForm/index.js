@@ -29,6 +29,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
+import { AppleLogin } from '../AppleLogin'
 import { useTheme } from 'styled-components'
 
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
@@ -67,6 +68,16 @@ const SignUpFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+
+  const initParams = {
+    clientId: configs?.apple_login_client_id?.value,
+    redirectURI: configs?.apple_login_client_id?.redirectURI || 'https://example-app.com/redirect',
+    response_mode: 'fragment',
+    response_type: 'code',
+    state: 'state',
+    nonce: 'nonce',
+    usePopup: false // or true defaults to false
+  }
 
   const handleSuccessFacebook = (user) => {
     login({
@@ -344,6 +355,16 @@ const SignUpFormUI = (props) => {
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
+                  {(configs?.apple_login_client_id?.value === 'co.ordering.logintest' ||
+                  configs?.apple_login_client_id?.value === '1') &&
+                  configs?.apple_login_client_id?.value &&
+               (
+                 <AppleLogin
+                   initParams={initParams}
+                   onSuccess={(data) => console.log('onSuccess', data)}
+                   onFailure={(data) => console.log('onFailure', data)}
+                 />
+               )}
                 </SocialButtons>
               ) : (
                 <SkeletonSocialWrapper>

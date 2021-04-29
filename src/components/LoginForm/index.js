@@ -54,6 +54,17 @@ const LoginFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
   const emailInput = useRef(null)
   const cellphoneInput = useRef(null)
+
+  const initParams = {
+    clientId: configs?.apple_login_client_id?.value,
+    redirectURI: configs?.apple_login_client_id?.redirectURI || 'https://example-app.com/redirect',
+    response_mode: 'fragment',
+    response_type: 'code',
+    state: 'state',
+    nonce: 'nonce',
+    usePopup: false // or true defaults to false
+  }
+
   const onSubmit = async () => {
     handleButtonLoginClick()
   }
@@ -80,16 +91,6 @@ const LoginFormUI = (props) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
     emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
-  }
-
-  const initParams = {
-    clientId: configs?.apple_login_client_id?.value,
-    redirectURI: configs?.apple_login_client_id?.redirectURI || 'https://example-app.com/redirect',
-    response_mode: 'fragment',
-    response_type: 'code',
-    state: 'state',
-    nonce: 'nonce',
-    usePopup: false // or true defaults to false
   }
 
   useEffect(() => {
