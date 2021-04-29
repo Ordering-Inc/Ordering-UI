@@ -83,13 +83,13 @@ const LoginFormUI = (props) => {
   }
 
   const initParams = {
-    clientId: 'co.ordering.logintest',
+    clientId: configs?.apple_login_client_id?.value,
     redirectURI: 'https://66193f2bd1fc.ngrok.io/login',
     response_mode: 'fragment',
     response_type: 'code',
     state: 'state',
     nonce: 'nonce',
-    usePopup: false // or false defaults to false
+    usePopup: false // or true defaults to false
   }
 
   useEffect(() => {
@@ -264,11 +264,16 @@ const LoginFormUI = (props) => {
                   handleSuccessFacebookLogin={handleSuccessFacebook}
                 />
               )}
+                {(configs?.apple_login_client_id?.value === 'co.ordering.logintest' ||
+                configs?.apple_login_client_id?.value === '1') &&
+                configs?.apple_login_client_id?.value &&
+              (
                 <AppleLogin
                   initParams={initParams}
                   onSuccess={(data) => console.log('onSuccess', data)}
                   onFailure={(data) => console.log('onFailure', data)}
                 />
+              )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
