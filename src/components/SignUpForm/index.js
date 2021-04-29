@@ -71,7 +71,7 @@ const SignUpFormUI = (props) => {
 
   const initParams = {
     clientId: configs?.apple_login_client_id?.value,
-    redirectURI: configs?.apple_login_client_id?.redirectURI || 'https://example-app.com/redirect',
+    redirectURI: !window.location.origin.includes('localhost') ? window.location.href : 'https://example-app.com/redirect',
     response_mode: 'fragment',
     response_type: 'code',
     state: 'state',
@@ -355,9 +355,7 @@ const SignUpFormUI = (props) => {
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
-                  {(configs?.apple_login_client_id?.value === 'co.ordering.logintest' ||
-                  configs?.apple_login_client_id?.value === '1') &&
-                  configs?.apple_login_client_id?.value &&
+                  {configs?.apple_login_client_id?.value &&
                (
                  <AppleLogin
                    initParams={initParams}
