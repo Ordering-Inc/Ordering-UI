@@ -187,6 +187,7 @@ export const SkeletonSocialWrapper = styled.div`
   width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   span{
     border-radius: 30px;
+    margin-bottom: 10px
   }
 `
 
