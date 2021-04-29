@@ -13,6 +13,14 @@ var _TiPencil = _interopRequireDefault(require("@meronex/icons/ti/TiPencil"));
 
 var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
 
+var _FaHome = _interopRequireDefault(require("@meronex/icons/fa/FaHome"));
+
+var _FaPlus = _interopRequireDefault(require("@meronex/icons/fa/FaPlus"));
+
+var _FaRegBuilding = _interopRequireDefault(require("@meronex/icons/fa/FaRegBuilding"));
+
+var _FaRegHeart = _interopRequireDefault(require("@meronex/icons/fa/FaRegHeart"));
+
 var _IosRadioButtonOn = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOn"));
 
 var _IosRadioButtonOff = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOff"));
@@ -284,7 +292,9 @@ var AddressListUI = function AddressListUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("span", {
       className: "radio"
-    }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("div", {
+    }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
+      className: "tag"
+    }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_FaHome.default, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_FaRegBuilding.default, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_FaRegHeart.default, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_FaPlus.default, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
     }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
       className: "form"

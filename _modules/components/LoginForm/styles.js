@@ -94,7 +94,7 @@ var SocialButtons = _styledComponents.default.div(_templateObject14 || (_templat
 
 exports.SocialButtons = SocialButtons;
 
-var SkeletonSocialWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    border-radius: 30px;\n  }\n"])), function (_ref13) {
+var SkeletonSocialWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    border-radius: 30px;\n    margin-bottom: 10px\n  }\n"])), function (_ref13) {
   var isPopup = _ref13.isPopup;
   return isPopup ? '90%' : '80%';
 });
