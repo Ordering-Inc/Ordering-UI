@@ -239,6 +239,7 @@ const ProductOptionsUI = (props) => {
                     defaultValue={productCart.comment}
                     onChange={handleChangeCommentState}
                     disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                    maxLength={250}
                   />
                 </ProductComment>
                 {
