@@ -27,6 +27,7 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
+import { AppleLogin } from '../AppleLogin'
 import { useTheme } from 'styled-components'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
@@ -241,6 +242,7 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
+
           {!props.isDisableButtons && (
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
@@ -253,9 +255,17 @@ const LoginFormUI = (props) => {
                   handleSuccessFacebookLogin={handleSuccessFacebook}
                 />
               )}
+                {configs?.apple_login_client_id?.value &&
+              (
+                <AppleLogin
+                  onSuccess={(data) => console.log('onSuccess', data)}
+                  onFailure={(data) => console.log('onFailure', data)}
+                />
+              )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
+                <Skeleton height={43} />
                 <Skeleton height={43} />
               </SkeletonSocialWrapper>
             )

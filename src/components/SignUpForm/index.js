@@ -29,6 +29,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
+import { AppleLogin } from '../AppleLogin'
 import { useTheme } from 'styled-components'
 
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
@@ -344,6 +345,13 @@ const SignUpFormUI = (props) => {
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
+                  {configs?.apple_login_client_id?.value &&
+               (
+                 <AppleLogin
+                   onSuccess={(data) => console.log('onSuccess', data)}
+                   onFailure={(data) => console.log('onFailure', data)}
+                 />
+               )}
                 </SocialButtons>
               ) : (
                 <SkeletonSocialWrapper>
