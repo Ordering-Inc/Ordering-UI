@@ -105,6 +105,7 @@ export const ProductItemAccordion = (props) => {
           isValid={product?.valid ?? true}
           className={`product accordion ${setActive}`}
           onClick={(e) => toggleAccordion(e)}
+          isOrderDetail={isOrderDetail}
         >
           <ProductInfo className='info' isOrderDetail={isOrderDetail}>
             {product?.images && !isOrderDetail &&(

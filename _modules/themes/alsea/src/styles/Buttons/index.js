@@ -57,10 +57,8 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
     return (0, _polished.darken)(0.07, props.theme.colors.primaryContrast);
   }, function (_ref7) {
     var outline = _ref7.outline;
-    return outline && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n      &:active {\n        color: ", ";\n        background: ", ";\n      }\n      &:hover {\n        background: ", ";\n        color: #FFF;\n      }\n    "])), function (props) {
-      return props.theme.colors.primaryContrast;
-    }, function (props) {
-      return props.theme.colors.primaryContrast;
+    return outline && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n      &:active {\n        background: ", ";\n      }\n      &:hover {\n        background: ", ";\n        color: #FFF;\n      }\n    "])), function (props) {
+      return props.theme.colors.primary;
     }, function (props) {
       return props.theme.colors.primary;
     }, function (props) {

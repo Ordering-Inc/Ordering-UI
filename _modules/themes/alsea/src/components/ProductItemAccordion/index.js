@@ -156,7 +156,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     className: "product accordion ".concat(setActive),
     onClick: function onClick(e) {
       return toggleAccordion(e);
-    }
+    },
+    isOrderDetail: isOrderDetail
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, {
     className: "info",
     isOrderDetail: isOrderDetail
