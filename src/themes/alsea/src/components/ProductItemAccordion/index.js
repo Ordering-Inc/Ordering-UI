@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
+import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 
 import {
   AccordionSection,
@@ -19,11 +20,14 @@ import {
   ProductNotAvailable,
   ProductSelect,
   ProductOptionsList,
-  ProductQuantity
+  ProductQuantity,
+  ArrowDown,
+  OrderDetailShow
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
   const {
+    isOrderDetail,
     isCartPending,
     isCartProduct,
     product,
@@ -102,28 +106,32 @@ export const ProductItemAccordion = (props) => {
           className={`product accordion ${setActive}`}
           onClick={(e) => toggleAccordion(e)}
         >
-          <ProductInfo className='info'>
-            {product?.images && (
+          <ProductInfo className='info' isOrderDetail={isOrderDetail}>
+            {product?.images && !isOrderDetail &&(
               <WrapperProductImage>
                 <ProductImage bgimage={product?.images} />
               </WrapperProductImage>
             )}
-            <ContentInfo>
+            <ContentInfo fullWidth={isOrderDetail}>
               <h3>{product.name}</h3>
-              <ProductQuantity>
-                <span>{product?.quantity} </span>
-                <span>{t('PRODUCTS', 'Products')}</span>
-              </ProductQuantity>
-              <ProductPrice className='prod-price'>
-                <span>
-                  {parsePrice(product.total || product.price)}
-                </span>
-              </ProductPrice>
+              {!isOrderDetail && (
+                <>
+                  <ProductQuantity>
+                    <span>{product?.quantity} </span>
+                    <span>{t('PRODUCTS', 'Products')}</span>
+                  </ProductQuantity>
+                  <ProductPrice className='prod-price'>
+                    <span>
+                      {parsePrice(product.total || product.price)}
+                    </span>
+                  </ProductPrice>
+                </>
+              )}
             </ContentInfo>
           </ProductInfo>
 
           {(product?.valid || !isCartProduct) && (
-            <ProductActionSection>
+            <ProductActionSection isOrderDetail={ProductActionSection}>
               {isCartProduct && !isCartPending && (
                 <ProductActions>
                   {isCartProduct && !isCartPending && getProductMax && (
@@ -151,6 +159,19 @@ export const ProductItemAccordion = (props) => {
                     <VscTrash color='#D81212' />
                   </ProductActionsDelete>
                 </ProductActions>
+              )}
+
+              {isOrderDetail && (
+                <OrderDetailShow>
+                  <span>
+                    {parsePrice(product.total || product.price)}
+                  </span>
+                  {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
+                    <ArrowDown>
+                      <IosArrowDown className={`${setRotate}`} />
+                    </ArrowDown>
+                  )}
+                </OrderDetailShow>
               )}
             </ProductActionSection>
           )}

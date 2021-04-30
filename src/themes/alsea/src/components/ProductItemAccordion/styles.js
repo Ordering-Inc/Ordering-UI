@@ -102,6 +102,10 @@ export const ContentInfo = styled.div`
     margin-right: 10px;
     margin-left: 0px;
   `}
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+    margin: 0px;
+  `}
 
   color: ${props => props.theme.colors.primary};
 
@@ -191,7 +195,11 @@ export const ProductComment = styled.div`
 export const ProductInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 75%;
+  ${({ isOrderDetail }) => isOrderDetail ? css`
+    max-width: calc(100% - 120px);
+  ` : css`
+    width: 75%;
+  `}
 
   h1,
   h3 {
@@ -206,11 +214,19 @@ export const ProductInfo = styled.div`
   }
 
   @media (min-width: 411px) {
-    width: 80%;
+    ${({ isOrderDetail }) => isOrderDetail ? css`
+      max-width: calc(100% - 120px);
+    ` : css`
+      width: 80%;
+    `}
   }
 
   @media (min-width: 481px) {
-    width: 70%;
+    ${({ isOrderDetail }) => isOrderDetail ? css`
+      max-width: calc(100% - 120px);
+    ` : css`
+      width: 70%;
+    `}
   }
 `
 
@@ -260,7 +276,11 @@ export const ProductActionsDelete = styled(ProductActionsEdit)`
 `
 
 export const ProductActionSection = styled.div`
-  width: 25%;
+  ${({ isOrderDetail }) => isOrderDetail ? css`
+    width: fit-content;
+  ` : css`
+    width: 25%;
+  `}
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -365,4 +385,24 @@ export const ProductQuantity = styled.div`
   span:last-child {
     margin: 0 5px;
   }
+`
+
+export const OrderDetailShow = styled.div`
+  display: flex;
+  align-items: center;
+  > span {
+    font-size: 18px;
+    font-weight: 600;
+    color: ${props => props.theme.colors.primary};
+  }
+`
+
+export const ArrowDown = styled.span`
+  color: ${props => props.theme.colors.primary};
+
+  ${props => props.theme?.rtl ? css`
+    margin-right: 10px;
+  ` : css`
+    margin-left: 10px;
+  `}
 `
