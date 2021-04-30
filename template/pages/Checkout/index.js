@@ -78,11 +78,11 @@ export const CheckoutPage = (props) => {
     validationFieldsType: 'checkout',
     onPlaceOrderClick: (data, paymethod, cart) => {
       if (cart?.order?.uuid) {
-        events.emit('go_to_page', { page: 'order_detail', params: { orderId: cart.order?.uuid } })
+        events.emit('go_to_page', { page: 'order_detail', params: { orderId: cart.order?.uuid }, replace: true })
       }
     },
     handleOrderRedirect: (uuid) => {
-      events.emit('go_to_page', { page: 'order_detail', params: { orderId: uuid } })
+      events.emit('go_to_page', { page: 'order_detail', params: { orderId: uuid }, replace: true })
     },
     handleCheckoutRedirect: (uuid) => {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid: uuid } })
