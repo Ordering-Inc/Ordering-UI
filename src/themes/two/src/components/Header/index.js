@@ -85,26 +85,6 @@ export const Header = (props) => {
     return () => events.off('cart_product_added', handleAddProduct)
   }, [windowSize.width])
 
-  const handleChangePage = (orderType) => {
-    switch (orderType) {
-      case 1:
-        handleGoToPage({ page: 'delivery' })
-        break
-      case 2:
-        handleGoToPage({ page: 'pickup' })
-        break
-      case 3:
-        handleGoToPage({ page: 'eatin' })
-        break
-      case 4:
-        handleGoToPage({ page: 'curbside' })
-        break
-      case 5:
-        handleGoToPage({ page: 'drivethru' })
-        break
-    }
-  }
-
   return (
     <>
       <HeaderContainer isHome={isHome} auth={auth} isAuthPage={isAuthPage}>
@@ -119,7 +99,6 @@ export const Header = (props) => {
               <OrderTypeSelectorHeader
                 dropDownStyle
                 configTypes={configTypes}
-                handleChangePage={handleChangePage}
               />
             )}
             {onlineStatus && (isBusinessListingPage || (isHome && auth)) && (
@@ -229,7 +208,6 @@ export const Header = (props) => {
                 <OrderTypeSelectorHeader
                   dropDownStyle
                   configTypes={configTypes}
-                  handleChangePage={handleChangePage}
                 />
               )}
               <WrapMomentAndAddress>
