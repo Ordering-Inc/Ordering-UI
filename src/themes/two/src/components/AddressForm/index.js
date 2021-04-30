@@ -100,8 +100,8 @@ const AddressFormUI = (props) => {
     props.forEach(prop => {
       if (addressToCompare[prop]) {
         if (prop === 'location') {
-          values.push(address[prop].lat === addressToCompare[prop].lat &&
-            address[prop].lng === addressToCompare[prop].lng)
+          values.push(address[prop]?.lat === addressToCompare[prop]?.lat &&
+            address[prop]?.lng === addressToCompare[prop]?.lng)
         } else {
           values.push(address[prop] === addressToCompare[prop])
         }
@@ -290,9 +290,9 @@ const AddressFormUI = (props) => {
 
     if (isEditing) {
       if (formState?.changes?.location) {
-        const prevLocation = { lat: Math.trunc(locationChange.lat), lng: Math.trunc(locationChange.lng) }
+        const prevLocation = { lat: Math.trunc(locationChange?.lat), lng: Math.trunc(locationChange?.lng) }
         const newLocation = { lat: Math.trunc(formState?.changes?.location?.lat), lng: Math.trunc(formState?.changes?.location?.lng) }
-        if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
+        if (prevLocation.lat !== newLocation?.lat && prevLocation.lng !== newLocation?.lng) {
           setLocationChange(formState?.changes?.location)
         }
       }
@@ -353,7 +353,7 @@ const AddressFormUI = (props) => {
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
         >
-          {locationChange && isAddressEdit && (
+          {locationChange && (isAddressEdit || formState?.changes?.location) && (
             <WrapperMap mapView={toggleMap}>
               {toggleMap ? (
                 <GoogleMapsMap
@@ -373,7 +373,7 @@ const AddressFormUI = (props) => {
               )}
             </WrapperMap>
           )}
-          {isAddressEdit && !toggleMap && (
+          {(isAddressEdit || formState?.changes?.location) && !toggleMap && (
             <WrapAdjustPin>
               <span>{addressValue}</span>
               <Button
