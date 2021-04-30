@@ -148,9 +148,9 @@ var capitalize = function capitalize(str) {
 
 exports.capitalize = capitalize;
 
-var getGoogleMapImage = function getGoogleMapImage(_ref, apiKey) {
-  var lat = _ref.lat,
-      lng = _ref.lng;
+var getGoogleMapImage = function getGoogleMapImage(location, apiKey) {
+  var lat = location === null || location === void 0 ? void 0 : location.lat;
+  var lng = location === null || location === void 0 ? void 0 : location.lng;
   return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(lat, ",").concat(lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(lat, ",").concat(lng, "&key=").concat(apiKey);
 };
 /**
@@ -162,9 +162,9 @@ var getGoogleMapImage = function getGoogleMapImage(_ref, apiKey) {
 exports.getGoogleMapImage = getGoogleMapImage;
 
 var flatArray = function flatArray(arr) {
-  var _ref2;
+  var _ref;
 
-  return (_ref2 = []).concat.apply(_ref2, _toConsumableArray(arr));
+  return (_ref = []).concat.apply(_ref, _toConsumableArray(arr));
 };
 /**
  * Function to return the traduction depending of a key 't'
@@ -238,16 +238,16 @@ var getHourMin = function getHourMin(hour, min) {
 exports.getHourMin = getHourMin;
 var fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
 /**
- * Function to return a array sorted by certain fields
- * @param fields Array with right order
- * @param array Array to sort
- */
+  * Function to return a array sorted by certain fields
+  * @param fields Array with right order
+  * @param array Array to sort
+  */
 
 exports.fieldsToSort = fieldsToSort;
 
-var sortInputFields = function sortInputFields(_ref3) {
-  var fields = _ref3.fields,
-      values = _ref3.values;
+var sortInputFields = function sortInputFields(_ref2) {
+  var fields = _ref2.fields,
+      values = _ref2.values;
   var fieldsBase = fields;
   var fieldsSorted = [];
   var fieldsArray = Array.isArray(values) ? values : Object.values(values);

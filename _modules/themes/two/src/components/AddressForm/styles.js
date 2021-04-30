@@ -75,9 +75,7 @@ var WrapperSkeleton = _styledComponents.default.div(_templateObject13 || (_templ
 
 exports.WrapperSkeleton = WrapperSkeleton;
 
-var WrapAdjustPin = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  padding: 20px 0;\n  column-gap: 5px;\n  border-bottom: 15px solid ", ";\n\n  > span {\n    color: ", ";\n    font-weight: 500;\n  }\n\n  button {\n    font-weight: 500;\n    min-width: 112px;\n    padding: 5px 10px;\n  }\n"])), function (props) {
-  return props.theme.colors.lightGrayColor;
-}, function (props) {
+var WrapAdjustPin = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  padding: 20px 0;\n  column-gap: 5px;\n  > span {\n    color: ", ";\n    font-weight: 500;\n  }\n\n  button {\n    font-weight: 500;\n    min-width: 112px;\n    padding: 5px 10px;\n  }\n"])), function (props) {
   return props.theme.colors.grayTextColor;
 });
 
