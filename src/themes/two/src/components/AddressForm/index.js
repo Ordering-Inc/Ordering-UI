@@ -431,6 +431,7 @@ const AddressFormUI = (props) => {
                   handleChangeInput({ target: { name: 'internal_number', value: e.target.value } })
                 }}
                 autoComplete='new-field'
+                maxLength={30}
               />
               <Input
                 className='zipcode'
@@ -441,6 +442,7 @@ const AddressFormUI = (props) => {
                   handleChangeInput({ target: { name: 'zipcode', value: e.target.value } })
                 }}
                 autoComplete='new-field'
+                maxLength={30}
               />
               <TextArea
                 rows={4}
@@ -451,6 +453,7 @@ const AddressFormUI = (props) => {
                   handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
                 }}
                 autoComplete='new-field'
+                maxLength={250}
               />
               {!isAddressEdit && (
                 <AddressTagSection>
