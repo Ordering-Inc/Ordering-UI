@@ -26,9 +26,8 @@ import {
   useOrder,
   useSession,
   useLanguage,
-  // BusinessList as BusinessListController
+  BusinessList as BusinessListController
 } from 'ordering-components'
-import { BusinessList as BusinessListController } from './test'
 
 const PIXELS_TO_SCROLL = 300
 
