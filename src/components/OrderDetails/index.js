@@ -199,6 +199,8 @@ const OrderDetailsUI = (props) => {
                   <BusinessInfo>
                     <h1>{order?.business?.name}</h1>
                     <p>{order?.business?.address}</p>
+                    <p>{order?.business?.cellphone}</p>
+                    <p>{order?.business?.email}</p>
                   </BusinessInfo>
                 </BusinessWrapper>
                 <ActionsBlock>
