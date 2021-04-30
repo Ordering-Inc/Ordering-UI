@@ -64,6 +64,7 @@ const AddressFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
+  const [validPhoneNumberState, setValidPhoneNumber] = useState({validPhoneNumber: true});
   const [toggleMap, setToggleMap] = useState(false)
   const isEditing = !!addressState.address?.id
 
@@ -245,6 +246,11 @@ const AddressFormUI = (props) => {
       return
     }
     onCancel()
+  }
+
+  const handlePhoneNumberValidation = (value) => {
+    const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+    setValidPhoneNumber(value === '' ? true : regex.test(value));
   }
 
   useEffect(() => {
@@ -429,8 +435,11 @@ const AddressFormUI = (props) => {
                 onChange={(e) => {
                   formMethods.setValue('internal_number', e.target.value)
                   handleChangeInput({ target: { name: 'internal_number', value: e.target.value } })
+                  handlePhoneNumberValidation(e.target.value)
                 }}
                 autoComplete='new-field'
+                hasError={!validPhoneNumberState}
+                maxLength={30}
               />
               <Input
                 className='zipcode'
@@ -441,6 +450,7 @@ const AddressFormUI = (props) => {
                   handleChangeInput({ target: { name: 'zipcode', value: e.target.value } })
                 }}
                 autoComplete='new-field'
+                maxLength={30}
               />
               <TextArea
                 rows={4}
@@ -451,6 +461,7 @@ const AddressFormUI = (props) => {
                   handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
                 }}
                 autoComplete='new-field'
+                maxLength={250}
               />
               {!isAddressEdit && (
                 <AddressTagSection>
@@ -488,7 +499,7 @@ const AddressFormUI = (props) => {
               <Button
                 id='submit-btn'
                 type='submit'
-                disabled={formState.loading}
+                disabled={formState.loading || !validPhoneNumberState}
                 color='primary'
               >
                 {!formState.loading ? (
