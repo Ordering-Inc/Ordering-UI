@@ -600,7 +600,8 @@ var AddressFormUI = function AddressFormUI(props) {
         }
       });
     },
-    autoComplete: "new-field"
+    autoComplete: "new-field",
+    maxLength: 30
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "zipcode",
     placeholder: t('ZIP_CODE', 'Zip code'),
@@ -614,7 +615,8 @@ var AddressFormUI = function AddressFormUI(props) {
         }
       });
     },
-    autoComplete: "new-field"
+    autoComplete: "new-field",
+    maxLength: 30
   }), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     placeholder: t('ADDRESS_NOTES', 'Address Notes'),
@@ -628,7 +630,8 @@ var AddressFormUI = function AddressFormUI(props) {
         }
       });
     },
-    autoComplete: "new-field"
+    autoComplete: "new-field",
+    maxLength: 250
   }), !isAddressEdit && /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'home' ? 'active' : '',
     type: "button",
