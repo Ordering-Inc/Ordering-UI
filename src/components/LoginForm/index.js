@@ -28,6 +28,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { AppleLogin } from '../AppleLogin'
+import { SMSLoginButton } from '../SMSLogin'
 import { useTheme } from 'styled-components'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
@@ -262,11 +263,22 @@ const LoginFormUI = (props) => {
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               )}
+              
+              {useLoginByCellphone && loginTab === 'cellphone' && (
+                <SMSLoginButton
+                  handleSMSLogin={() => {
+                    console.log('sms login');
+                  }}
+                />
+              )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
                 <Skeleton height={43} />
                 <Skeleton height={43} />
+                {useLoginByCellphone && loginTab === 'cellphone' && (
+                  <Skeleton height={43} />
+                )}
               </SkeletonSocialWrapper>
             )
           )}
