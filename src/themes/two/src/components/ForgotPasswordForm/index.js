@@ -108,8 +108,8 @@ const ForgotPasswordUI = (props) => {
           </InputGroup>
           <Button
             color={alertState.success ? 'secondary' : 'primary'}
-            type='submit'
-            disabled={formState.loading}
+            type='subm(it'
+            disabled={(alertState.success && formState.result.result) || formState.loading}
           >
             {formState.loading
               ? t('LOADING', 'Loading...')
