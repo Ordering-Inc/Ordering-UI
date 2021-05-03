@@ -291,25 +291,25 @@ const CheckoutUI = (props) => {
                     </Button>
                   </WrapperPlaceOrderButton>
                 )}
+                {!cart?.valid_address && cart?.status !== 2 && (
+                  <WarningText>
+                    {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
+                  </WarningText>
+                )}
+
+                {!paymethodSelected && cart?.status !== 2 && (
+                  <WarningText>
+                    {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
+                  </WarningText>
+                )}
+
+                {!cart?.valid_products && cart?.status !== 2 && (
+                  <WarningText>
+                    {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+                  </WarningText>
+                )}
               </ActionContainer>
 
-              {!cart?.valid_address && cart?.status !== 2 && (
-                <WarningText>
-                  {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
-                </WarningText>
-              )}
-
-              {!paymethodSelected && cart?.status !== 2 && (
-                <WarningText>
-                  {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
-                </WarningText>
-              )}
-
-              {!cart?.valid_products && cart?.status !== 2 && (
-                <WarningText>
-                  {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
-                </WarningText>
-              )}
             </CheckoutActionInnerContent>
           </CheckoutActionContent>
         </WrappContainer>
