@@ -6,7 +6,6 @@ import {
   useLanguage,
   useConfig,
   useSession,
-  useEvent,
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import {
@@ -20,7 +19,8 @@ import {
   LoginWith,
   SkeletonSocialWrapper,
   WrapperPassword,
-  TogglePassword
+  TogglePassword,
+  OtpWrapper
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -31,6 +31,7 @@ import { FacebookLoginButton } from '../FacebookLogin'
 import { AppleLogin } from '../AppleLogin'
 import { SmsLoginButton } from '../SmsLogin'
 import { useTheme } from 'styled-components'
+import OtpInput from 'react-otp-input';
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 
@@ -45,7 +46,8 @@ const LoginFormUI = (props) => {
     elementLinkToForgotPassword,
     formState,
     loginTab,
-    isPopup
+    isPopup,
+    credentials,
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -57,6 +59,8 @@ const LoginFormUI = (props) => {
   const emailInput = useRef(null)
   const cellphoneInput = useRef(null)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false);
+  const [willVerifyOtpState, setWillVerifyOtpState] = useState(false);
+  const [otpState, setOtpState] = useState('');
 
   const onSubmit = async () => {
     handleButtonLoginClick()
@@ -133,8 +137,12 @@ const LoginFormUI = (props) => {
         <HeroSide>
           <TitleHeroSide>
             <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
-            {loginWithOtpState
-              ? <p>{t('SUBTITLE_REQUEST_OTP', 'Enter your cellphone to get verify code.')}</p> 
+            {(loginWithOtpState)
+              ? willVerifyOtpState
+                ? <p>
+                    {`${t('SUBTITLE_ENTER_OTP', 'Please enter the verification code we sent to your mobile')} **${credentials?.cellphone?.substring(credentials?.cellphone?.length - 2)}`}
+                  </p>
+                : <p>{t('SUBTITLE_REQUEST_OTP', 'Enter your cellphone to get verify code.')}</p>
               : <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
             }
           </TitleHeroSide>
@@ -169,7 +177,6 @@ const LoginFormUI = (props) => {
             <FormInput
               noValidate
               isPopup={isPopup}
-              onSubmit={formMethods.handleSubmit(onSubmit)}
             >
               {
               props.beforeMidElements?.map((BeforeMidElements, i) => (
@@ -192,7 +199,7 @@ const LoginFormUI = (props) => {
                   autoComplete='off'
                 />
               )}
-              {useLoginByCellphone && loginTab === 'cellphone' && (
+              {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
                 <Input
                   type='tel'
                   name='cellphone'
@@ -203,6 +210,22 @@ const LoginFormUI = (props) => {
                   autoComplete='off'
                 />
               )}
+
+              {willVerifyOtpState && (
+                <OtpWrapper>
+                  <OtpInput
+                    value={otpState}
+                    onChange={otp => setOtpState(otp)}
+                    numInputs={4}
+                    containerStyle='otp-container'
+                    inputStyle='otp-input'
+                    placeholder='0000'
+                    isInputNum
+                    shouldAutoFocus
+                  />
+                </OtpWrapper>
+              )}
+
               {!loginWithOtpState && (
                 <WrapperPassword>
                   <Input
@@ -236,19 +259,27 @@ const LoginFormUI = (props) => {
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
-              <Button
-                color='primary'
-                type='submit'
-                disabled={formState.loading}
-              >
+              {(!willVerifyOtpState &&
+                <Button
+                  color='primary'
+                  onClick={
+                    loginWithOtpState
+                      ? () => {
+                        setWillVerifyOtpState(true)
+                      }
+                      : formMethods.handleSubmit(onSubmit)
+                  }
+                  disabled={formState.loading}
+                >
                 {formState.loading
                   ? `${t('LOADING', 'Loading')}...`
                   : loginWithOtpState
                     ? t('GET_VERIFY_CODE', 'Get verify code')
                     : t('LOGIN', 'Login')
                 }
-              </Button>
-              {loginWithOtpState && (
+                </Button>
+              )}
+              {(loginWithOtpState && !willVerifyOtpState) && (
                 <Button
                   type='button'
                   color='secundary'

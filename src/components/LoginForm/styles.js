@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const LoginContainer = styled.div`
   width: 100%;
@@ -214,5 +215,36 @@ export const WrapperPassword = styled.div`
     box-sizing: border-box;
     width: 100%;
     padding-right: 40px;
+  }
+`
+export const OtpWrapper = styled.div`
+  .otp-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+    
+    .otp-input{
+      width: 30px;
+      height: 30px;
+      padding: 12px 20px;
+      border: 2px solid #CCC;
+      border-radius: 16px;
+      background-color: #FFF;
+      outline: none;
+      font-size: 20px;
+      font-weight: bold; 
+
+      &:focus{
+        border-color: ${() => darken(0.07, '#CCC')} !important;
+      }
+
+      &::placeholder,
+      &::-webkit-input-placeholder {
+        color: #DBDCDB;
+      }
+      &:-ms-input-placeholder {
+        color: #DBDCDB;
+      }
+    }
   }
 `
