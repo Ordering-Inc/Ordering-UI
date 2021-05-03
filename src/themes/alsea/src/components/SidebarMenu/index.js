@@ -246,38 +246,40 @@ export const SidebarMenu = (props) => {
                   </MenuLinkSeparator>
                 </WrappContent>
               </MenuLink>
-
-              <MenuLink
+            </>
+          )}
+          <MenuLink
+            isHome={isHome}
+            onClick={() => handleGoToPage({ page: 'profile' })}
+          >
+            <WrappContent>
+              <MenuLinkIcon
                 isHome={isHome}
-                onClick={() => handleGoToPage({ page: 'profile' })}
+                active={
+                  window.location.pathname === '/profile'
+                }
               >
-                <WrappContent>
-                  <MenuLinkIcon
-                    isHome={isHome}
-                    active={
-                      window.location.pathname === '/profile'
-                    }
-                  >
-                    <FaRegAddressCard />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
-                      isHome={isHome}
-                      active={
-                        window.location.pathname === '/profile'
-                      }
-                    >
-                      {t('PROFILE', 'Profile')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
-
+                <FaRegAddressCard />
+              </MenuLinkIcon>
+              <MenuLinkText>
+                <TextInfo
+                  isHome={isHome}
+                  active={
+                    window.location.pathname === '/profile'
+                  }
+                >
+                  {t('PROFILE', 'Profile')}
+                </TextInfo>
+              </MenuLinkText>
+              <MenuLinkSeparator>
+                <div>
+                  <hr />
+                </div>
+              </MenuLinkSeparator>
+            </WrappContent>
+          </MenuLink>
+          {auth && (
+            <>
               <MenuLink
                 isHome={isHome}
                 // onClick={() => handleGoToPage({ page: 'orders' })}
