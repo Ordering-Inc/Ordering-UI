@@ -5,7 +5,8 @@ import {
   LoginForm as LoginFormController,
   useLanguage,
   useConfig,
-  useSession
+  useSession,
+  useEvent,
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import {
@@ -28,7 +29,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { AppleLogin } from '../AppleLogin'
-import { SMSLoginButton } from '../SMSLogin'
+import { SmsLoginButton } from '../SmsLogin'
 import { useTheme } from 'styled-components'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
@@ -55,6 +56,7 @@ const LoginFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
   const emailInput = useRef(null)
   const cellphoneInput = useRef(null)
+  const [loginWithOtpState, setLoginWithOtpState] = useState(false);
 
   const onSubmit = async () => {
     handleButtonLoginClick()
@@ -131,13 +133,16 @@ const LoginFormUI = (props) => {
         <HeroSide>
           <TitleHeroSide>
             <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
-            <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
+            {loginWithOtpState
+              ? <p>{t('SUBTITLE_REQUEST_OTP', 'Enter your cellphone to get verify code.')}</p> 
+              : <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
+            }
           </TitleHeroSide>
         </HeroSide>
         <FormSide isPopup={isPopup}>
           <img src={theme?.images?.logos?.logotype} alt='Logo login' width='200' height='66' loading='lazy' />
 
-          {useLoginByEmail && useLoginByCellphone && (
+          {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 {useLoginByEmail && (
@@ -198,21 +203,23 @@ const LoginFormUI = (props) => {
                   autoComplete='off'
                 />
               )}
-              <WrapperPassword>
-                <Input
-                  type={!passwordSee ? 'password' : 'text'}
-                  name='password'
-                  aria-label='password'
-                  placeholder={t('PASSWORD', 'Password')}
-                  ref={formMethods.register({
-                    required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                  })}
-                  onChange={(e) => handleChangeInput(e)}
-                />
-                <TogglePassword onClick={togglePasswordView}>
-                  {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                </TogglePassword>
-              </WrapperPassword>
+              {!loginWithOtpState && (
+                <WrapperPassword>
+                  <Input
+                    type={!passwordSee ? 'password' : 'text'}
+                    name='password'
+                    aria-label='password'
+                    placeholder={t('PASSWORD', 'Password')}
+                    ref={formMethods.register({
+                      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                    })}
+                    onChange={(e) => handleChangeInput(e)}
+                  />
+                  <TogglePassword onClick={togglePasswordView}>
+                    {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                  </TogglePassword>
+                </WrapperPassword>
+              )}
               {
               props.afterMidElements?.map((MidElement, i) => (
                 <React.Fragment key={i}>
@@ -223,28 +230,47 @@ const LoginFormUI = (props) => {
               props.afterMidComponents?.map((MidComponent, i) => (
                 <MidComponent key={i} {...props} />))
               }
-              <RedirectLink isPopup={isPopup}>
-                <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
-                {elementLinkToForgotPassword}
-              </RedirectLink>
+              {!loginWithOtpState && (
+                <RedirectLink isPopup={isPopup}>
+                  <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
+                  {elementLinkToForgotPassword}
+                </RedirectLink>
+              )}
               <Button
                 color='primary'
                 type='submit'
                 disabled={formState.loading}
               >
-                {formState.loading ? `${t('LOADING', 'Loading')}...` : t('LOGIN', 'Login')}
+                {formState.loading
+                  ? `${t('LOADING', 'Loading')}...`
+                  : loginWithOtpState
+                    ? t('GET_VERIFY_CODE', 'Get verify code')
+                    : t('LOGIN', 'Login')
+                }
               </Button>
+              {loginWithOtpState && (
+                <Button
+                  type='button'
+                  color='secundary'
+                  disabled={formState.loading}
+                  onClick={() => {
+                    setLoginWithOtpState(false)
+                  }}
+                >
+                  {t('CANCEL', 'Cancel')}
+                </Button>
+              )}
             </FormInput>
           )}
 
-          {elementLinkToSignup && (
+          {(elementLinkToSignup && !loginWithOtpState) && (
             <RedirectLink register isPopup={isPopup}>
               <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
               {elementLinkToSignup}
             </RedirectLink>
           )}
 
-          {!props.isDisableButtons && (
+          {(!props.isDisableButtons && !loginWithOtpState) && (
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
                 {(configs?.facebook_login?.value === 'true' ||
@@ -265,9 +291,9 @@ const LoginFormUI = (props) => {
               )}
               
               {useLoginByCellphone && loginTab === 'cellphone' && (
-                <SMSLoginButton
-                  handleSMSLogin={() => {
-                    console.log('sms login');
+                <SmsLoginButton
+                  handleSmsLogin={() => {
+                    setLoginWithOtpState(true);
                   }}
                 />
               )}

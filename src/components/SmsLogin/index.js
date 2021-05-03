@@ -6,14 +6,14 @@ import {
 import MdSms from '@meronex/icons/md/MdSms'
 import { SMSButton } from './styles'
 
-const SMSLoginButtonUI = (props) => {
+const SmsLoginButtonUI = (props) => {
   const [, t] = useLanguage()
-  const { handleSMSLogin } = props
+  const { handleSmsLogin } = props
   return (
     <SMSButton
       initialIcon
       color='secondary'
-      onClick={() => handleSMSLogin()}
+      onClick={() => handleSmsLogin()}
     >
       <MdSms />
       <div>{t('LOGIN_WITH_SMS', 'Login with SMS')}</div>
@@ -21,10 +21,10 @@ const SMSLoginButtonUI = (props) => {
   )
 }
 
-export const SMSLoginButton = (props) => {
+export const SmsLoginButton = (props) => {
   const smsLoginProps = {
     ...props,
-    UIComponent: SMSLoginButtonUI
+    UIComponent: SmsLoginButtonUI
   }
   return <LoginFormController {...smsLoginProps} />
 }
