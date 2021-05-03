@@ -118,7 +118,7 @@ export const BusinessTypeFilter = (props) => {
     images: props.images || [
       { image: theme.images?.categories?.all, value: 'all' },
       { image: theme.images?.categories?.food, value: 'food' },
-      { image: theme.images?.categories?.grocery, value: 'groceries' },
+      { image: theme.images?.categories?.groceries, value: 'groceries' },
       { image: theme.images?.categories?.alcohol, value: 'alcohol' },
       { image: theme.images?.categories?.laundry, value: 'laundry' }
     ],

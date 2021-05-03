@@ -163,7 +163,7 @@ const CartUI = (props) => {
                       {t('DRIVER_TIP', 'Driver tip')}
                       {cart?.driver_tip_rate > 0 &&
                         configs?.driver_tip_type?.value === 2 &&
-                        !!!configs?.driver_tip_use_custom?.value &&
+                        !configs?.driver_tip_use_custom?.value &&
                       (
                         <span>{`(${parseNumber(cart?.driver_tip_rate)}%)`}</span>
                       )}
@@ -247,6 +247,7 @@ const CartUI = (props) => {
         padding='0'
         closeOnBackdrop
         onClose={() => setModalIsOpen(false)}
+        isProductForm
       >
         <ProductForm
           isCartProduct
