@@ -633,6 +633,12 @@ Object.defineProperty(exports, "DriverTipsOptions", {
     return _utils.DriverTipsOptions;
   }
 });
+Object.defineProperty(exports, "bytesConverter", {
+  enumerable: true,
+  get: function get() {
+    return _utils.bytesConverter;
+  }
+});
 
 var _AddressDetails = require("./components/AddressDetails");
 

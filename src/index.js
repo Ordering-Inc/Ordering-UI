@@ -92,7 +92,8 @@ import {
   capitalize,
   convertHoursToMinutes,
   scrollTo,
-  DriverTipsOptions
+  DriverTipsOptions,
+  bytesConverter
 } from './utils'
 
 export {
@@ -205,5 +206,6 @@ export {
   capitalize,
   convertHoursToMinutes,
   scrollTo,
-  DriverTipsOptions
+  DriverTipsOptions,
+  bytesConverter
 }
