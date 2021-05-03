@@ -48,7 +48,7 @@ const BusinessTypeFilterUI = (props) => {
         {!loading && !error && types && types.length > 0 && (
           <Tabs variant='primary'>
             <AutoScroll>
-              {types.map((type, i) => (
+              {types.map((type, i) => type.enabled && (
                 <Tab
                   key={type.id}
                   active={type.id === currentTypeSelected}
