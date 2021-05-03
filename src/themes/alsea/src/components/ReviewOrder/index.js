@@ -5,7 +5,7 @@ import AiFillStar from '@meronex/icons/ai/AiFillStar'
 
 import { Alert } from '../../../../../components/Confirm'
 import { TextArea } from '../../../../../styles/Inputs'
-import { capitalize } from '.../../../../../utils'
+import { capitalize } from '../../../../../utils'
 import { Button } from '../../styles/Buttons'
 
 import {

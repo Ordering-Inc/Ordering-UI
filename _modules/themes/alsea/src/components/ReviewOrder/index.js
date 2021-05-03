@@ -19,7 +19,7 @@ var _Confirm = require("../../../../../components/Confirm");
 
 var _Inputs = require("../../../../../styles/Inputs");
 
-var _utils = require(".../../../../../utils");
+var _utils = require("../../../../../utils");
 
 var _Buttons = require("../../styles/Buttons");
 
