@@ -171,7 +171,7 @@ var BusinessTypeFilter = function BusinessTypeFilter(props) {
       image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$catego = _theme$images2.categories) === null || _theme$images2$catego === void 0 ? void 0 : _theme$images2$catego.food,
       value: 'food'
     }, {
-      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$catego = _theme$images3.categories) === null || _theme$images3$catego === void 0 ? void 0 : _theme$images3$catego.grocery,
+      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$catego = _theme$images3.categories) === null || _theme$images3$catego === void 0 ? void 0 : _theme$images3$catego.groceries,
       value: 'groceries'
     }, {
       image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$catego = _theme$images4.categories) === null || _theme$images4$catego === void 0 ? void 0 : _theme$images4$catego.alcohol,

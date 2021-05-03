@@ -151,41 +151,6 @@ var Header = function Header(props) {
       return events.off('cart_product_added', handleAddProduct);
     };
   }, [windowSize.width]);
-
-  var handleChangePage = function handleChangePage(orderType) {
-    switch (orderType) {
-      case 1:
-        handleGoToPage({
-          page: 'delivery'
-        });
-        break;
-
-      case 2:
-        handleGoToPage({
-          page: 'pickup'
-        });
-        break;
-
-      case 3:
-        handleGoToPage({
-          page: 'eatin'
-        });
-        break;
-
-      case 4:
-        handleGoToPage({
-          page: 'curbside'
-        });
-        break;
-
-      case 5:
-        handleGoToPage({
-          page: 'drivethru'
-        });
-        break;
-    }
-  };
-
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     isHome: isHome,
     auth: auth,
@@ -195,8 +160,7 @@ var Header = function Header(props) {
     configTypes: configTypes
   }), !auth && !isAuthPage && /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && isBusinessListingPage && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     dropDownStyle: true,
-    configTypes: configTypes,
-    handleChangePage: handleChangePage
+    configTypes: configTypes
   }), onlineStatus && (isBusinessListingPage || isHome && auth) && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
@@ -306,8 +270,7 @@ var Header = function Header(props) {
     }
   })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null))), onlineStatus && isBusinessListingPage && windowSize.width <= 992 && /*#__PURE__*/_react.default.createElement(_styles.HeaderMobileViewBottom, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderMobileViewInnerBottom, null, !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && isBusinessListingPage && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     dropDownStyle: true,
-    configTypes: configTypes,
-    handleChangePage: handleChangePage
+    configTypes: configTypes
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapMomentAndAddress, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
     momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.moment,

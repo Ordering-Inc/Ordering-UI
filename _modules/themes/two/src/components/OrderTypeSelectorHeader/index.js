@@ -61,7 +61,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
     }),
     defaultValue: defaultType || defaultValue || typeSelected,
     onChange: function onChange(orderType) {
-      return handleChangePage(orderType);
+      return handleChangeOrderType(orderType);
     }
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, options.map(function (type) {
     return /*#__PURE__*/_react.default.createElement(_styles.Option, {

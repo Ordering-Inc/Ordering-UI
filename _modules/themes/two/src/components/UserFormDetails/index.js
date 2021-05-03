@@ -70,7 +70,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
       isCheckout = props.isCheckout,
-      externalUserData = props.externalUserData;
+      externalUserData = props.externalUserData,
+      closeModal = props.closeModal;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -185,6 +186,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         };
       }
 
+      closeModal && closeModal();
       handleButtonUpdateClick(changes);
     }
   };
@@ -296,7 +298,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: handleSubmit(onSubmit),
     isCheckout: isCheckout
-  }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCheckout && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, validationFieldsSorted.map(function (field) {
+  }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, validationFieldsSorted.map(function (field) {
     var _formState$result3, _formState$result4, _ref, _formState$changes$fi;
 
     return !notValidationFields.includes(field.code) && showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -318,7 +320,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     })));
-  })), !!showInputPhoneNumber && !externalUserData && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && !externalUserData && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,

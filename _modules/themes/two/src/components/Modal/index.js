@@ -50,7 +50,8 @@ var ModalUI = function ModalUI(props) {
       acceptText = props.acceptText,
       cancelText = props.cancelText,
       isTransparent = props.isTransparent,
-      hideCloseDefault = props.hideCloseDefault;
+      hideCloseDefault = props.hideCloseDefault,
+      isProductForm = props.isProductForm;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -77,7 +78,8 @@ var ModalUI = function ModalUI(props) {
     width: props.width,
     height: props.height,
     padding: props.padding,
-    isTransparent: isTransparent
+    isTransparent: isTransparent,
+    isProductForm: isProductForm
   }, !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onClose();

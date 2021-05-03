@@ -315,7 +315,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClose: function onClose() {
       return closeModalProductForm();
     },
-    padding: "0"
+    padding: "0",
+    isProductForm: true
   }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

@@ -21,8 +21,6 @@ var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _styledComponents = require("styled-components");
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -46,14 +44,12 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ForgotPasswordUI = function ForgotPasswordUI(props) {
-  var _theme$images, _theme$images$logos;
-
   var hanldeChangeInput = props.hanldeChangeInput,
       handleButtonForgotPasswordClick = props.handleButtonForgotPasswordClick,
       formState = props.formState,
       formData = props.formData,
-      elementLinkToLogin = props.elementLinkToLogin,
-      isPopup = props.isPopup;
+      isPopup = props.isPopup,
+      elementLinkToLogin = props.elementLinkToLogin;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -74,7 +70,6 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var theme = (0, _styledComponents.useTheme)();
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
@@ -126,29 +121,18 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.ForgotPasswordContainer, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_FORGOT_PASSWORD', 'Enter your email addres and we\'ll send you a link to reset your password.')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
-    isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
-    alt: "Logo",
-    width: "200",
-    height: "66",
-    loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, null, t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_FORGOT_PASSWORD', 'Enter your email addres and we\'ll send you a link to reset your password.')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    type: "text",
+  }, /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    type: "email",
     name: "email",
     "aria-label": "email",
-    spellcheck: "false",
     placeholder: t('EMAIL', 'Email'),
-    onChange: function onChange(e) {
-      return hanldeChangeInput(e);
-    },
+    tabindex: "1",
     ref: register({
       required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
       pattern: {
@@ -156,16 +140,19 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
         message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
       }
     }),
+    onChange: function onChange(e) {
+      return hanldeChangeInput(e);
+    },
     autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: formState.loading || alertState.success ? 'secondary' : 'primary',
-    type: "submit",
-    disabled: formState.loading || alertState.success
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: alertState.success ? 'secondary' : 'primary',
+    type: "subm(it",
+    disabled: alertState.success && formState.result.result || formState.loading
   }, formState.loading ? t('LOADING', 'Loading...') : alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD', 'Link Sent') : t('FRONT_RECOVER_PASSWORD', 'Recover Password'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('SIGN_IN_MESSAGE', 'Do you want to sign in?')), elementLinkToLogin)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: alertState.title,
+    title: t('LOGIN', 'Login'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

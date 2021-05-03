@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _formState$result, _formState$result2;
+  var _formState$result;
 
   var externalUserData = props.userData,
       isEdit = props.isEdit,
@@ -69,7 +69,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       openModal = _useState2[0],
       setOpenModal = _useState2[1];
 
-  var userData = (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result : externalUserData;
+  var userData = externalUserData || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) || user;
   (0, _react.useEffect)(function () {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit();
@@ -86,11 +86,11 @@ var UserDetailsUI = function UserDetailsUI(props) {
     height: 25
   })), !(validationFields.loading || formState.loading || externalLoading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('PHONE_NUMBER', 'Phone number')), /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer details')), /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setOpenModal(true);
     }
-  }, t('CHANGE', 'Change'))), /*#__PURE__*/_react.default.createElement(_styles.UserData, null, ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('CHANGE', 'Change'))), /*#__PURE__*/_react.default.createElement(_styles.UserData, null, ((userData === null || userData === void 0 ? void 0 : userData.name) || (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userData === null || userData === void 0 ? void 0 : userData.second_lastname)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('NAME', 'Name'), ":"), " ", userData === null || userData === void 0 ? void 0 : userData.name, " ", userData === null || userData === void 0 ? void 0 : userData.middle_name, " ", userData === null || userData === void 0 ? void 0 : userData.lastname, " ", userData === null || userData === void 0 ? void 0 : userData.second_lastname), (userData === null || userData === void 0 ? void 0 : userData.email) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('EMAIL', 'Email'), ":"), " ", userData === null || userData === void 0 ? void 0 : userData.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CELLPHONE', 'Cellphone'), ":"), (userData === null || userData === void 0 ? void 0 : userData.country_phone_code) && "+".concat(userData === null || userData === void 0 ? void 0 : userData.country_phone_code, " "), userData === null || userData === void 0 ? void 0 : userData.cellphone))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('EDIT_PHONE_NUMBER', 'Edit phone number'),
     open: openModal,
     onClose: function onClose() {
@@ -100,6 +100,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     isCheckout: true
   }, props, {
     onCancel: function onCancel() {
+      return setOpenModal(false);
+    },
+    closeModal: function closeModal() {
       return setOpenModal(false);
     }
   }))));
