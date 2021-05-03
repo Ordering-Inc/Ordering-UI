@@ -83,7 +83,7 @@ var LoginWith = _styledComponents.default.div(_templateObject8 || (_templateObje
 
 exports.LoginWith = LoginWith;
 
-var FormInput = _styledComponents.default.form(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  > div {\n    margin: 10px 0px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n    font-weight: 600;\n  }\n"])), function (_ref9) {
+var FormInput = _styledComponents.default.form(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  > div {\n    margin: 10px 0px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n    font-weight: 600;\n  }\n\n  input {\n    width: 100%;\n    box-sizing: border-box;\n  }\n"])), function (_ref9) {
   var isPopup = _ref9.isPopup;
   return isPopup ? '90%' : '80%';
 });

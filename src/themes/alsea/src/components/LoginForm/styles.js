@@ -114,6 +114,11 @@ export const FormInput = styled.form`
     padding: 5px;
     font-weight: 600;
   }
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+  }
 `
 
 export const RedirectLink = styled.div`
