@@ -8,6 +8,7 @@ import {
   useSession,
 } from 'ordering-components'
 import { Alert } from '../Confirm'
+import { SpinnerLoader } from '../SpinnerLoader';
 import {
   LoginContainer,
   FormSide,
@@ -45,13 +46,18 @@ const LoginFormUI = (props) => {
     handleChangeInput,
     handleChangeTab,
     handleButtonLoginClick,
+    handleSendVerifyCode,
+    handleCheckPhoneCode,
     elementLinkToSignup,
     elementLinkToForgotPassword,
     formState,
+    verifyPhoneState,
+    checkPhoneCodeState,
     loginTab,
     isPopup,
-    credentials,
+    credentials
   } = props
+  const numOtpInputs = 4; 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
@@ -64,7 +70,8 @@ const LoginFormUI = (props) => {
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [otpState, setOtpState] = useState('')
-  const [otpLeftTime] = useCountdownTimer(600, willVerifyOtpState)
+  const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
+    600, !checkPhoneCodeState?.loading && willVerifyOtpState)
 
   const onSubmit = async () => {
     handleButtonLoginClick()
@@ -128,6 +135,43 @@ const LoginFormUI = (props) => {
         : null
     })
   }, [formMethods])
+
+  useEffect(() => {
+    if (willVerifyOtpState) {
+      handleSendVerifyCode({
+        cellphone: credentials?.cellphone,
+        country_phone_code: '+58'
+      })
+        .then(() => {
+          
+        })
+        .catch((error) => {
+          
+        })
+        .finally(() => {
+          
+        })
+    }
+  }, [willVerifyOtpState])
+
+  useEffect(() => {
+    if (otpState?.length == numOtpInputs) {
+      handleCheckPhoneCode({
+        cellphone: credentials?.cellphone,
+        country_phone_code: '+58',
+        otp: otpState
+      })
+        .then(() => {
+          resetOtpLeftTime()
+        })
+        .catch((error) => {
+          
+        })
+        .finally(() => {
+  
+        })
+    }
+  }, [otpState])
 
   return (
     <>
@@ -215,7 +259,7 @@ const LoginFormUI = (props) => {
                 />
               )}
 
-              {willVerifyOtpState && (
+              {(!verifyPhoneState?.loading && willVerifyOtpState && !checkPhoneCodeState?.loading) && (
                 <>
                   <CountdownTimer>
                     <span>{formatSeconds(otpLeftTime)}</span>
@@ -226,7 +270,7 @@ const LoginFormUI = (props) => {
                     <OtpInput
                       value={otpState}
                       onChange={otp => setOtpState(otp)}
-                      numInputs={4}
+                      numInputs={numOtpInputs}
                       containerStyle='otp-container'
                       inputStyle='otp-input'
                       placeholder='0000'
@@ -235,6 +279,12 @@ const LoginFormUI = (props) => {
                     />
                   </OtpWrapper>
                 </>
+              )}
+
+              {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
+                <SpinnerLoader
+                  style={{height: 160}}
+                />
               )}
 
               {!loginWithOtpState && (

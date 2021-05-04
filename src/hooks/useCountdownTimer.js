@@ -17,5 +17,10 @@ export function useCountdownTimer(initialCount, start) {
     }
   }, [start]);
 
-  return [count, setCount];
+  return [
+    count,
+    setCount,
+    /** reset */
+    () => {setCount(initialCount)}
+  ];
 }
