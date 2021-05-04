@@ -20,7 +20,8 @@ import {
   SkeletonSocialWrapper,
   WrapperPassword,
   TogglePassword,
-  OtpWrapper
+  OtpWrapper,
+  CountdownTimer
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -30,6 +31,8 @@ import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { AppleLogin } from '../AppleLogin'
 import { SmsLoginButton } from '../SmsLogin'
+import { useCountdownTimer } from '../../hooks/useCountdownTimer';
+import { formatSeconds } from '../../utils';
 import { useTheme } from 'styled-components'
 import OtpInput from 'react-otp-input';
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
@@ -58,9 +61,10 @@ const LoginFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
   const emailInput = useRef(null)
   const cellphoneInput = useRef(null)
-  const [loginWithOtpState, setLoginWithOtpState] = useState(false);
-  const [willVerifyOtpState, setWillVerifyOtpState] = useState(false);
-  const [otpState, setOtpState] = useState('');
+  const [loginWithOtpState, setLoginWithOtpState] = useState(false)
+  const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+  const [otpState, setOtpState] = useState('')
+  const [otpLeftTime] = useCountdownTimer(600, willVerifyOtpState)
 
   const onSubmit = async () => {
     handleButtonLoginClick()
@@ -212,18 +216,25 @@ const LoginFormUI = (props) => {
               )}
 
               {willVerifyOtpState && (
-                <OtpWrapper>
-                  <OtpInput
-                    value={otpState}
-                    onChange={otp => setOtpState(otp)}
-                    numInputs={4}
-                    containerStyle='otp-container'
-                    inputStyle='otp-input'
-                    placeholder='0000'
-                    isInputNum
-                    shouldAutoFocus
-                  />
-                </OtpWrapper>
+                <>
+                  <CountdownTimer>
+                    <span>{formatSeconds(otpLeftTime)}</span>
+                    <span>{t('RESEND_AGAIN', 'Resend again')}?</span>
+                  </CountdownTimer>
+
+                  <OtpWrapper>
+                    <OtpInput
+                      value={otpState}
+                      onChange={otp => setOtpState(otp)}
+                      numInputs={4}
+                      containerStyle='otp-container'
+                      inputStyle='otp-input'
+                      placeholder='0000'
+                      isInputNum
+                      shouldAutoFocus
+                    />
+                  </OtpWrapper>
+                </>
               )}
 
               {!loginWithOtpState && (

@@ -248,3 +248,24 @@ export const OtpWrapper = styled.div`
     }
   }
 `
+
+export const CountdownTimer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 20px;
+  
+  span {
+    &:first-child {
+      font-size: 30px;
+      font-weight: bold;
+      color: ${props => props.theme.colors.primary}
+    }
+    &:last-child {
+      font-size: 24px;
+      color: #DBDCDB;
+    }
+  }
+
+`
