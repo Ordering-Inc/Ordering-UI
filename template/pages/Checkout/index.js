@@ -20,12 +20,12 @@ export const CheckoutPage = (props) => {
       case 'stripe':
       case 'stripe_connect':
       case 'stripe_direct': {
-        const stripe = await loadStripe(paymethod.paymethod.credentials.publishable)
+        const stripe = await loadStripe(paymethod.paymethod?.credentials?.publishable)
         await stripe.confirmCardPayment(cart.paymethod_data.result.client_secret)
         return true
       }
       case 'stripe_redirect': {
-        const stripe = await loadStripe(paymethod.paymethod.credentials.publishable)
+        const stripe = await loadStripe(paymethod.paymethod?.credentials?.publishable)
         const confirmOption = {
           bancontact: {
             name: 'confirmBancontactPayment',
