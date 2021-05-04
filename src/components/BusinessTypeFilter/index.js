@@ -47,7 +47,7 @@ const BusinessTypeFilterUI = (props) => {
                     />
                   </ImageContainer>)
                   : ''}
-                {images.map(image => (
+                {images.length > 0 && images.map(image => (
                   <React.Fragment key={image.value}>
                     {image.value === type.value ? (
                       <ImageContainer active={type.value === currentTypeSelected} load={load}>
