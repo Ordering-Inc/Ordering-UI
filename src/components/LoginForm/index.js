@@ -66,6 +66,13 @@ const LoginFormUI = (props) => {
     })
   }
 
+  const handleSuccessApple = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+  }
+
   const togglePasswordView = () => {
     setPasswordSee(!passwordSee)
   }
@@ -258,7 +265,7 @@ const LoginFormUI = (props) => {
                 {configs?.apple_login_client_id?.value &&
               (
                 <AppleLogin
-                  onSuccess={(data) => console.log('onSuccess', data)}
+                  onSuccess={handleSuccessApple}
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               )}
