@@ -693,6 +693,12 @@ Object.defineProperty(exports, "useWindowSize", {
     return _useWindowSize.useWindowSize;
   }
 });
+Object.defineProperty(exports, "getHourMin", {
+  enumerable: true,
+  get: function get() {
+    return _utils.getHourMin;
+  }
+});
 
 var _AccountManage = require("./src/components/AccountManage");
 
@@ -901,3 +907,5 @@ var _Tabs = require("./src/styles/Tabs");
 var _useOnlineStatus = require("../../hooks/useOnlineStatus");
 
 var _useWindowSize = require("../../hooks/useWindowSize");
+
+var _utils = require("../../utils");

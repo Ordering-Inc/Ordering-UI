@@ -104,6 +104,7 @@ import { Tab, Tabs } from './src/styles/Tabs'
 
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
 import { useWindowSize } from '../../hooks/useWindowSize'
+import { getHourMin } from '../../utils'
 
 export {
   AccountManage,
@@ -224,4 +225,5 @@ export {
   // Hooks
   useOnlineStatus,
   useWindowSize,
+  getHourMin
 }
