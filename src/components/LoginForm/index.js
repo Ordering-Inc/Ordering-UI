@@ -8,7 +8,8 @@ import {
   useSession,
 } from 'ordering-components'
 import { Alert } from '../Confirm'
-import { SpinnerLoader } from '../SpinnerLoader';
+import { SpinnerLoader } from '../SpinnerLoader'
+import { InputPhoneNumber } from '../InputPhoneNumber'
 import {
   LoginContainer,
   FormSide,
@@ -32,9 +33,10 @@ import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { AppleLogin } from '../AppleLogin'
 import { SmsLoginButton } from '../SmsLogin'
-import { useCountdownTimer } from '../../hooks/useCountdownTimer';
+import { useCountdownTimer } from '../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../utils';
 import { useTheme } from 'styled-components'
+import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input';
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
@@ -101,6 +103,11 @@ const LoginFormUI = (props) => {
     emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
   }
 
+  const handleChangePhoneNumber = (number, isValid) => {
+    handleChangeInput({ target: { name: 'cellphone', value: number } })
+    formMethods.setValue('cellphone', number, '')
+  }
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
@@ -138,15 +145,22 @@ const LoginFormUI = (props) => {
 
   useEffect(() => {
     if (willVerifyOtpState) {
+
+      const parsedNumber = parsePhoneNumber(credentials?.cellphone)
+      const cellphone = parsedNumber?.nationalNumber
+      const countryPhoneCode = +(parsedNumber?.countryCallingCode)
+
       handleSendVerifyCode({
-        cellphone: credentials?.cellphone,
-        country_phone_code: '+58'
+        cellphone: cellphone,
+        country_phone_code: countryPhoneCode
       })
         .then(() => {
+
+          console.log(verifyPhoneState);
           
         })
         .catch((error) => {
-          
+          console.log(error, verifyPhoneState);
         })
         .finally(() => {
           
@@ -156,16 +170,22 @@ const LoginFormUI = (props) => {
 
   useEffect(() => {
     if (otpState?.length == numOtpInputs) {
+      
+      const parsedNumber = parsePhoneNumber(credentials?.cellphone)
+      const cellphone = parsedNumber?.nationalNumber
+      const countryPhoneCode = +(parsedNumber?.countryCallingCode)
+
       handleCheckPhoneCode({
-        cellphone: credentials?.cellphone,
-        country_phone_code: '+58',
-        otp: otpState
+        cellphone: cellphone,
+        country_phone_code: countryPhoneCode,
+        code: otpState
       })
         .then(() => {
+          console.log(checkPhoneCodeState);
           resetOtpLeftTime()
         })
         .catch((error) => {
-          
+          console.log(error, checkPhoneCodeState);
         })
         .finally(() => {
   
@@ -247,15 +267,23 @@ const LoginFormUI = (props) => {
                   autoComplete='off'
                 />
               )}
+              
+              
+              {/* <Input
+                type='tel'
+                name='cellphone'
+                aria-label='cellphone'
+                placeholder='Cellphone'
+                ref={(e) => cellphoneInput.current = e}
+                onChange={(e) => handleChangeInput(e)}
+                autoComplete='off'
+              /> */}
+
               {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
-                <Input
-                  type='tel'
-                  name='cellphone'
-                  aria-label='cellphone'
-                  placeholder='Cellphone'
-                  ref={(e) => cellphoneInput.current = e}
-                  onChange={(e) => handleChangeInput(e)}
-                  autoComplete='off'
+                <InputPhoneNumber
+                  value={credentials?.cellphone}
+                  setValue={handleChangePhoneNumber}
+                  handleIsValid={() => {}}
                 />
               )}
 
