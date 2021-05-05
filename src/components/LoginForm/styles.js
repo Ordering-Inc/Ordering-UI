@@ -265,6 +265,13 @@ export const CountdownTimer = styled.div`
     &:last-child {
       font-size: 24px;
       color: #DBDCDB;
+      cursor: pointer;
+      :hover {
+        color: ${() => darken(0.07, '#DBDCDB')} !important;
+      }
+      :active {
+        color: ${() => darken(0.09, '#DBDCDB')} !important;
+      }
     }
   }
 

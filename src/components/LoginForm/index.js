@@ -137,6 +137,38 @@ const LoginFormUI = (props) => {
     formMethods.setValue('cellphone', number, '')
   }
 
+  const handleSendOtp = () => {
+    if (willVerifyOtpState) {
+
+      const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
+
+      resetOtpLeftTime()
+
+      handleSendVerifyCode({
+        cellphone: cellphone,
+        country_phone_code: countryPhoneCode
+      })
+        .then(() => {
+          if (verifyPhoneState?.result?.error) {
+
+            setAlertState({
+              open: true,
+              content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
+            })
+
+          } else {
+            resetOtpLeftTime()
+          }
+        })
+        .catch(() => {
+          setAlertState({
+            open: true,
+            content: verifyPhoneState.result?.error || [t('ERROR', 'Error')]
+          })
+        })
+    }
+  }
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
@@ -175,33 +207,7 @@ const LoginFormUI = (props) => {
   }, [formMethods])
 
   useEffect(() => {
-    if (willVerifyOtpState) {
-
-      const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
-
-      handleSendVerifyCode({
-        cellphone: cellphone,
-        country_phone_code: countryPhoneCode
-      })
-        .then(() => {
-          if (verifyPhoneState?.result?.error) {
-
-            setAlertState({
-              open: true,
-              content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
-            })
-
-          } else {
-            resetOtpLeftTime()
-          }
-        })
-        .catch(() => {
-          setAlertState({
-            open: true,
-            content: verifyPhoneState.result?.error || [t('ERROR', 'Error')]
-          })
-        })
-    }
+    handleSendOtp()
   }, [willVerifyOtpState])
 
   useEffect(() => {
@@ -323,7 +329,9 @@ const LoginFormUI = (props) => {
                 <>
                   <CountdownTimer>
                     <span>{formatSeconds(otpLeftTime)}</span>
-                    <span>{t('RESEND_AGAIN', 'Resend again')}?</span>
+                    <span onClick={handleSendOtp}>
+                      {t('RESEND_AGAIN', 'Resend again')}?
+                    </span>
                   </CountdownTimer>
 
                   <OtpWrapper>
