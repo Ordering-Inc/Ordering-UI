@@ -96,7 +96,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       width: "150px",
       height: "150px",
       loading: "lazy"
-    })) : '', images.map(function (image) {
+    })) : '', images && images.length > 0 && images.map(function (image) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: image.value
       }, image.value === type.value ? /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {

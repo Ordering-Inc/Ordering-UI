@@ -133,7 +133,7 @@ var paypalBtnStyle = {
 };
 
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _paymethodData$card, _paymethodData$card2, _paymethodsList$error, _paymethodSelected$cr, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _paymethodData$card, _paymethodData$card2, _paymethodsList$error, _paymethodSelected$cr, _paymethodSelected$cr2, _paymethodSelected$cr3, _paymethodSelected$cr4, _paymethodSelected$cr5, _paymethodSelected$cr6, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       _onClose = props.onClose,
@@ -258,7 +258,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     paymethod: paymethodSelected,
     businessId: props.businessId,
-    publicKey: paymethodSelected.credentials.publishable,
+    publicKey: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr2 = paymethodSelected.credentials) === null || _paymethodSelected$cr2 === void 0 ? void 0 : _paymethodSelected$cr2.publishable,
     payType: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.name,
     onSelectCard: handlePaymethodDataChange,
     onCancel: function onCancel() {
@@ -274,8 +274,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_connect' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     paymethod: paymethodSelected,
     businessId: props.businessId,
-    publicKey: paymethodSelected.credentials.stripe.publishable,
-    clientSecret: paymethodSelected.credentials.publishable,
+    publicKey: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr3 = paymethodSelected.credentials) === null || _paymethodSelected$cr3 === void 0 ? void 0 : (_paymethodSelected$cr4 = _paymethodSelected$cr3.stripe) === null || _paymethodSelected$cr4 === void 0 ? void 0 : _paymethodSelected$cr4.publishable,
+    clientSecret: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr5 = paymethodSelected.credentials) === null || _paymethodSelected$cr5 === void 0 ? void 0 : _paymethodSelected$cr5.publishable,
     payType: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.name,
     onSelectCard: handlePaymethodDataChange,
     onCancel: function onCancel() {
@@ -290,7 +290,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }
   }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_direct' && /*#__PURE__*/_react.default.createElement(_StripeElementsForm.StripeElementsForm, {
     businessId: props.businessId,
-    publicKey: paymethodSelected.credentials.publishable,
+    publicKey: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr6 = paymethodSelected.credentials) === null || _paymethodSelected$cr6 === void 0 ? void 0 : _paymethodSelected$cr6.publishable,
     handleSource: handlePaymethodDataChange,
     onCancel: function onCancel() {
       return handlePaymethodClick(null);

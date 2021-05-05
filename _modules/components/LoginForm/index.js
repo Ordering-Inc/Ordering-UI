@@ -143,6 +143,15 @@ var LoginFormUI = function LoginFormUI(props) {
     });
   };
 
+  var handleSuccessApple = function handleSuccessApple(user) {
+    var _user$session2;
+
+    login({
+      user: user,
+      token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
+    });
+  };
+
   var togglePasswordView = function togglePasswordView() {
     setPasswordSee(!passwordSee);
   };
@@ -301,9 +310,7 @@ var LoginFormUI = function LoginFormUI(props) {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
   }), (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
-    onSuccess: function onSuccess(data) {
-      return console.log('onSuccess', data);
-    },
+    onSuccess: handleSuccessApple,
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
