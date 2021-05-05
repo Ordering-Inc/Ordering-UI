@@ -34,10 +34,10 @@ import { FacebookLoginButton } from '../FacebookLogin'
 import { AppleLogin } from '../AppleLogin'
 import { SmsLoginButton } from '../SmsLogin'
 import { useCountdownTimer } from '../../hooks/useCountdownTimer'
-import { formatSeconds } from '../../utils';
+import { formatSeconds } from '../../utils'
 import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
-import OtpInput from 'react-otp-input';
+import OtpInput from 'react-otp-input'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 
@@ -59,7 +59,7 @@ const LoginFormUI = (props) => {
     isPopup,
     credentials
   } = props
-  const numOtpInputs = 4; 
+  const numOtpInputs = 4
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
@@ -68,15 +68,30 @@ const LoginFormUI = (props) => {
   const theme = useTheme()
   const [passwordSee, setPasswordSee] = useState(false)
   const emailInput = useRef(null)
-  const cellphoneInput = useRef(null)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+  const [validPhoneFieldState, setValidPhoneField] = useState(false)
   const [otpState, setOtpState] = useState('')
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
 
   const onSubmit = async () => {
-    handleButtonLoginClick()
+    if (loginWithOtpState) {
+      
+      if (!validPhoneFieldState) {
+        setAlertState({
+          open: true,
+          content: [t('INVALID_PHONE_NUMBER', 'Invalid phone number')]
+        })
+
+        return
+      }
+      
+      setWillVerifyOtpState(true)
+    
+    } else {
+      handleButtonLoginClick()
+    }
   }
 
   const handleSuccessFacebook = (user) => {
@@ -97,6 +112,19 @@ const LoginFormUI = (props) => {
     })
   }
 
+  const parseNumber = (unparsedNumber) => {
+    if (!unparsedNumber) return {}
+
+    const parsedNumber = parsePhoneNumber(unparsedNumber)
+    const cellphone = parsedNumber?.nationalNumber
+    const countryPhoneCode = +(parsedNumber?.countryCallingCode)
+
+    return {
+      cellphone,
+      countryPhoneCode,
+    };
+  }
+
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
@@ -104,6 +132,7 @@ const LoginFormUI = (props) => {
   }
 
   const handleChangePhoneNumber = (number, isValid) => {
+    setValidPhoneField(isValid)
     handleChangeInput({ target: { name: 'cellphone', value: number } })
     formMethods.setValue('cellphone', number, '')
   }
@@ -114,6 +143,8 @@ const LoginFormUI = (props) => {
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
+
+      return
     }
   }, [formState])
 
@@ -146,34 +177,37 @@ const LoginFormUI = (props) => {
   useEffect(() => {
     if (willVerifyOtpState) {
 
-      const parsedNumber = parsePhoneNumber(credentials?.cellphone)
-      const cellphone = parsedNumber?.nationalNumber
-      const countryPhoneCode = +(parsedNumber?.countryCallingCode)
+      const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
 
       handleSendVerifyCode({
         cellphone: cellphone,
         country_phone_code: countryPhoneCode
       })
         .then(() => {
+          if (verifyPhoneState?.result?.error) {
 
-          console.log(verifyPhoneState);
-          
+            setAlertState({
+              open: true,
+              content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
+            })
+
+          } else {
+            resetOtpLeftTime()
+          }
         })
-        .catch((error) => {
-          console.log(error, verifyPhoneState);
-        })
-        .finally(() => {
-          
+        .catch(() => {
+          setAlertState({
+            open: true,
+            content: verifyPhoneState.result?.error || [t('ERROR', 'Error')]
+          })
         })
     }
   }, [willVerifyOtpState])
 
   useEffect(() => {
     if (otpState?.length == numOtpInputs) {
-      
-      const parsedNumber = parsePhoneNumber(credentials?.cellphone)
-      const cellphone = parsedNumber?.nationalNumber
-      const countryPhoneCode = +(parsedNumber?.countryCallingCode)
+
+      const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
 
       handleCheckPhoneCode({
         cellphone: cellphone,
@@ -182,13 +216,22 @@ const LoginFormUI = (props) => {
       })
         .then(() => {
           console.log(checkPhoneCodeState);
-          resetOtpLeftTime()
+          if (checkPhoneCodeState?.result?.error) {
+
+            setAlertState({
+              open: true,
+              content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
+            })
+
+          } else {
+            resetOtpLeftTime()
+          }
         })
-        .catch((error) => {
-          console.log(error, checkPhoneCodeState);
-        })
-        .finally(() => {
-  
+        .catch(() => {
+          setAlertState({
+            open: true,
+            content: [checkPhoneCodeState.result?.error] || [t('ERROR', 'Error')]
+          })
         })
     }
   }, [otpState])
@@ -268,17 +311,6 @@ const LoginFormUI = (props) => {
                 />
               )}
               
-              
-              {/* <Input
-                type='tel'
-                name='cellphone'
-                aria-label='cellphone'
-                placeholder='Cellphone'
-                ref={(e) => cellphoneInput.current = e}
-                onChange={(e) => handleChangeInput(e)}
-                autoComplete='off'
-              /> */}
-
               {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
                 <InputPhoneNumber
                   value={credentials?.cellphone}
@@ -351,13 +383,7 @@ const LoginFormUI = (props) => {
               {(!willVerifyOtpState &&
                 <Button
                   color='primary'
-                  onClick={
-                    loginWithOtpState
-                      ? () => {
-                        setWillVerifyOtpState(true)
-                      }
-                      : formMethods.handleSubmit(onSubmit)
-                  }
+                  onClick={formMethods.handleSubmit(onSubmit)}
                   disabled={formState.loading}
                 >
                 {formState.loading
@@ -412,9 +438,7 @@ const LoginFormUI = (props) => {
               
               {useLoginByCellphone && loginTab === 'cellphone' && (
                 <SmsLoginButton
-                  handleSmsLogin={() => {
-                    setLoginWithOtpState(true);
-                  }}
+                  handleSmsLogin={() => {setLoginWithOtpState(true)}}
                 />
               )}
               </SocialButtons>
