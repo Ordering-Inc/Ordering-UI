@@ -3,11 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ActiveOrdersLayout = void 0;
+exports.PreOrdersLayout = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
+var _MdcClockTimeThree = _interopRequireDefault(require("@meronex/icons/mdc/MdcClockTimeThree"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -41,18 +43,18 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var ActiveOrdersLayout = function ActiveOrdersLayout(props) {
+var PreOrdersLayout = function PreOrdersLayout(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var isProfile = props.isProfile,
       isSkeleton = props.isSkeleton,
+      businessesIds = props.businessesIds,
       pagination = props.pagination,
       loadMoreOrders = props.loadMoreOrders,
       isBusinessesPage = props.isBusinessesPage,
       customArray = props.customArray,
       handleOrderDetails = props.handleOrderDetails,
-      handleOrderHelp = props.handleOrderHelp,
-      businessesIds = props.businessesIds;
+      handleOrderHelp = props.handleOrderHelp;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -80,7 +82,7 @@ var ActiveOrdersLayout = function ActiveOrdersLayout(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderContainer, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.Card, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderContent, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrderContent, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 75,
       height: 75
     }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -96,27 +98,31 @@ var ActiveOrdersLayout = function ActiveOrdersLayout(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,
       height: 30
+    }))), /*#__PURE__*/_react.default.createElement(_styles.CardBottom, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 60
+    })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100,
+      height: 30
     })));
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.length > 0 && ordersToShow.map(function (order) {
-    var _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _order$business3, _order$summary;
+    var _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _order$business3, _order$customer, _order$summary;
 
     return /*#__PURE__*/_react.default.createElement(_styles.Card, {
       key: order.id || order.uuid
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderContent, null, (((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && !isBusinessesPage && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrderContent, null, (((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && !isBusinessesPage && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
       src: ((_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo),
       alt: "business-logo",
       width: "75px",
       height: "75px"
     })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), /*#__PURE__*/_react.default.createElement("p", {
       name: "order_number"
-    }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-      utc: false
-    })))), /*#__PURE__*/_react.default.createElement(_styles.ActionContent, null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || 0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-      color: "primary",
+    }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionContent, null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || 0)), /*#__PURE__*/_react.default.createElement("span", {
       onClick: function onClick() {
-        return !isProfile ? handleOrderDetails(order.uuid) : handleOrderHelp(order.uuid);
+        return !isProfile ? handleOrderDetails(order.uuid) : handleOrderHelp(order);
       }
-    }, !isProfile ? t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order') : t('HELP', 'Help'))));
+    }, !isProfile ? t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order') : t('HELP', 'Help')))), /*#__PURE__*/_react.default.createElement(_styles.CardBottom, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryTime, null, /*#__PURE__*/_react.default.createElement(_MdcClockTimeThree.default, null), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+      utc: false
+    })))));
   }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.LoadMoreButtonWrap, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "load-orders",
     color: "primary",
@@ -133,4 +139,4 @@ var ActiveOrdersLayout = function ActiveOrdersLayout(props) {
   }));
 };
 
-exports.ActiveOrdersLayout = ActiveOrdersLayout;
+exports.PreOrdersLayout = PreOrdersLayout;

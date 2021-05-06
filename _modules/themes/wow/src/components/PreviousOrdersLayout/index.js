@@ -146,7 +146,7 @@ var PreviousOrdersLayout = function PreviousOrdersLayout(props) {
     }, /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605")), /*#__PURE__*/_react.default.createElement(_styles.StarRatingLower, null, /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605")))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
-        return !isProfile ? handleReorder(order.id) : handleOrderHelp(order.uuid);
+        return !isProfile ? handleReorder(order.id) : handleOrderHelp(order);
       },
       disabled: reorderLoading
     }, !isProfile ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('HELP', 'Help')))));
