@@ -60,7 +60,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersOptionUI = function OrdersOptionUI(props) {
   var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
-  var activeOrders = props.activeOrders,
+  var isProfile = props.isProfile,
+      activeOrders = props.activeOrders,
       previousOrders = props.previousOrders,
       preOrders = props.preOrders,
       orderList = props.orderList,
@@ -71,7 +72,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       onRedirectPage = props.onRedirectPage,
       businessesIds = props.businessesIds,
       handleOrdersTotal = props.handleOrdersTotal,
-      handleOrderDetails = props.handleOrderDetails;
+      handleOrderDetails = props.handleOrderDetails,
+      handleOrderHelp = props.handleOrderHelp;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -215,7 +217,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   }, [orders]);
   (0, _react.useEffect)(function () {
     if (loading) return;
-    handleOrdersTotal(pagination === null || pagination === void 0 ? void 0 : pagination.total);
+    handleOrdersTotal && handleOrdersTotal(pagination === null || pagination === void 0 ? void 0 : pagination.total);
   }, [loading, pagination]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -239,6 +241,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       });
     }
   }, t('MAKE_FIRST_ORDER', 'Make your first order')))), activeOrders && /*#__PURE__*/_react.default.createElement(_ActiveOrdersLayout.ActiveOrdersLayout, {
+    isProfile: isProfile,
     isSkeleton: loading,
     businessesIds: businessesIds,
     orders: ordersSorted,
@@ -247,8 +250,10 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     loadMoreOrders: loadMoreOrders,
     isBusinessesPage: isBusinessesPage,
     customArray: customArray,
-    getOrderStatus: getOrderStatus
+    getOrderStatus: getOrderStatus,
+    handleOrderHelp: handleOrderHelp
   }), previousOrders && /*#__PURE__*/_react.default.createElement(_PreviousOrdersLayout.PreviousOrdersLayout, {
+    isProfile: isProfile,
     isSkeleton: loading,
     businessesIds: businessesIds,
     orders: ordersSorted,
@@ -260,8 +265,10 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     customArray: customArray,
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder,
-    handleOrderDetails: handleOrderDetails
+    handleOrderDetails: handleOrderDetails,
+    handleOrderHelp: handleOrderHelp
   }), preOrders && /*#__PURE__*/_react.default.createElement(_PreOrdersLayout.PreOrdersLayout, {
+    isProfile: isProfile,
     isSkeleton: loading,
     businessesIds: businessesIds,
     orders: ordersSorted,
@@ -273,7 +280,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     customArray: customArray,
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder,
-    handleOrderDetails: handleOrderDetails
+    handleOrderDetails: handleOrderDetails,
+    handleOrderHelp: handleOrderHelp
   })), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

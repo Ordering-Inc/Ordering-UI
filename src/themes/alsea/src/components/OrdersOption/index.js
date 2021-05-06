@@ -13,6 +13,7 @@ import {
 
 export const OrdersOptionUI = (props) => {
   const {
+    isProfile,
     activeOrders,
     previousOrders,
     preOrders,
@@ -24,7 +25,8 @@ export const OrdersOptionUI = (props) => {
     onRedirectPage,
     businessesIds,
     handleOrdersTotal,
-    handleOrderDetails
+    handleOrderDetails,
+    handleOrderHelp
   } = props
 
   const [, t] = useLanguage()
@@ -92,7 +94,7 @@ export const OrdersOptionUI = (props) => {
 
   useEffect(() => {
     if (loading) return
-    handleOrdersTotal(pagination?.total)
+    handleOrdersTotal && handleOrdersTotal(pagination?.total)
   }, [loading, pagination])
 
   return (
@@ -126,6 +128,7 @@ export const OrdersOptionUI = (props) => {
         )}
         {activeOrders && (
           <ActiveOrdersLayout
+            isProfile={isProfile}
             isSkeleton={loading}
             businessesIds={businessesIds}
             orders={ordersSorted}
@@ -135,10 +138,12 @@ export const OrdersOptionUI = (props) => {
             isBusinessesPage={isBusinessesPage}
             customArray={customArray}
             getOrderStatus={getOrderStatus}
+            handleOrderHelp={handleOrderHelp}
           />
         )}
         {previousOrders && (
           <PreviousOrdersLayout
+            isProfile={isProfile}
             isSkeleton={loading}
             businessesIds={businessesIds}
             orders={ordersSorted}
@@ -151,10 +156,12 @@ export const OrdersOptionUI = (props) => {
             getOrderStatus={getOrderStatus}
             handleReorder={handleReorder}
             handleOrderDetails={handleOrderDetails}
+            handleOrderHelp={handleOrderHelp}
           />
         )}
         {preOrders && (
           <PreOrdersLayout
+            isProfile={isProfile}
             isSkeleton={loading}
             businessesIds={businessesIds}
             orders={ordersSorted}
@@ -167,6 +174,7 @@ export const OrdersOptionUI = (props) => {
             getOrderStatus={getOrderStatus}
             handleReorder={handleReorder}
             handleOrderDetails={handleOrderDetails}
+            handleOrderHelp={handleOrderHelp}
           />
         )}
       </Container>

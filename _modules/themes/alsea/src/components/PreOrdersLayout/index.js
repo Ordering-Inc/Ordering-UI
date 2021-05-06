@@ -46,13 +46,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PreOrdersLayout = function PreOrdersLayout(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
-  var isSkeleton = props.isSkeleton,
+  var isProfile = props.isProfile,
+      isSkeleton = props.isSkeleton,
       businessesIds = props.businessesIds,
       pagination = props.pagination,
       loadMoreOrders = props.loadMoreOrders,
       isBusinessesPage = props.isBusinessesPage,
       customArray = props.customArray,
-      handleOrderDetails = props.handleOrderDetails;
+      handleOrderDetails = props.handleOrderDetails,
+      handleOrderHelp = props.handleOrderHelp;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -116,9 +118,9 @@ var PreOrdersLayout = function PreOrdersLayout(props) {
       name: "order_number"
     }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.address))), /*#__PURE__*/_react.default.createElement(_styles.ActionContent, null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || 0)), /*#__PURE__*/_react.default.createElement("span", {
       onClick: function onClick() {
-        return handleOrderDetails(order.uuid);
+        return !isProfile ? handleOrderDetails(order.uuid) : handleOrderHelp(order.uuid);
       }
-    }, t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')))), /*#__PURE__*/_react.default.createElement(_styles.CardBottom, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryTime, null, /*#__PURE__*/_react.default.createElement(_MdcClockTimeThree.default, null), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    }, !isProfile ? t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order') : t('HELP', 'Help')))), /*#__PURE__*/_react.default.createElement(_styles.CardBottom, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryTime, null, /*#__PURE__*/_react.default.createElement(_MdcClockTimeThree.default, null), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     })))));
   }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.LoadMoreButtonWrap, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

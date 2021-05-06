@@ -44,7 +44,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PreviousOrdersLayout = function PreviousOrdersLayout(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
-  var isSkeleton = props.isSkeleton,
+  var isProfile = props.isProfile,
+      isSkeleton = props.isSkeleton,
       businessesIds = props.businessesIds,
       pagination = props.pagination,
       loadMoreOrders = props.loadMoreOrders,
@@ -53,7 +54,8 @@ var PreviousOrdersLayout = function PreviousOrdersLayout(props) {
       customArray = props.customArray,
       handleReorder = props.handleReorder,
       orderID = props.orderID,
-      handleOrderDetails = props.handleOrderDetails;
+      handleOrderDetails = props.handleOrderDetails,
+      handleOrderHelp = props.handleOrderHelp;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -131,7 +133,7 @@ var PreviousOrdersLayout = function PreviousOrdersLayout(props) {
       name: "order_number"
     }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
-    })))), /*#__PURE__*/_react.default.createElement(_styles.ActionContent, null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || 0)), /*#__PURE__*/_react.default.createElement("span", {
+    })))), /*#__PURE__*/_react.default.createElement(_styles.ActionContent, null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || 0)), !isProfile && /*#__PURE__*/_react.default.createElement("span", {
       onClick: function onClick() {
         return handleOrderDetails(order.uuid);
       }
@@ -144,10 +146,10 @@ var PreviousOrdersLayout = function PreviousOrdersLayout(props) {
     }, /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605")), /*#__PURE__*/_react.default.createElement(_styles.StarRatingLower, null, /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605"), /*#__PURE__*/_react.default.createElement("span", null, "\u2605")))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
-        return handleReorder(order.id);
+        return !isProfile ? handleReorder(order.id) : handleOrderHelp(order.uuid);
       },
       disabled: reorderLoading
-    }, orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder'))));
+    }, !isProfile ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('HELP', 'Help')))));
   }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.LoadMoreButtonWrap, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "load-orders",
     color: "primary",

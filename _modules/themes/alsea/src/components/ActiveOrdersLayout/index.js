@@ -44,12 +44,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ActiveOrdersLayout = function ActiveOrdersLayout(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
-  var isSkeleton = props.isSkeleton,
+  var isProfile = props.isProfile,
+      isSkeleton = props.isSkeleton,
       pagination = props.pagination,
       loadMoreOrders = props.loadMoreOrders,
       isBusinessesPage = props.isBusinessesPage,
       customArray = props.customArray,
       handleOrderDetails = props.handleOrderDetails,
+      handleOrderHelp = props.handleOrderHelp,
       businessesIds = props.businessesIds;
   var theme = (0, _styledComponents.useTheme)();
 
@@ -112,9 +114,9 @@ var ActiveOrdersLayout = function ActiveOrdersLayout(props) {
     })))), /*#__PURE__*/_react.default.createElement(_styles.ActionContent, null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || 0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
-        return handleOrderDetails(order.uuid);
+        return !isProfile ? handleOrderDetails(order.uuid) : handleOrderHelp(order.uuid);
       }
-    }, t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order'))));
+    }, !isProfile ? t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order') : t('HELP', 'Help'))));
   }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.LoadMoreButtonWrap, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "load-orders",
     color: "primary",

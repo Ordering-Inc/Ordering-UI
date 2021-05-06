@@ -20,13 +20,15 @@ import {
 
 export const PreOrdersLayout = (props) => {
   const {
+    isProfile,
     isSkeleton,
     businessesIds,
     pagination,
     loadMoreOrders,
     isBusinessesPage,
     customArray,
-    handleOrderDetails
+    handleOrderDetails,
+    handleOrderHelp
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -93,9 +95,9 @@ export const PreOrdersLayout = (props) => {
                   <ActionContent>
                     <p>{parsePrice(order?.summary?.total || 0)}</p>
                     <span
-                      onClick={() => handleOrderDetails(order.uuid)}
+                      onClick={() => !isProfile ? handleOrderDetails(order.uuid) : handleOrderHelp(order.uuid)}
                     >
-                      {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
+                      {!isProfile ? t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order') : t('HELP', 'Help')}
                     </span>
                   </ActionContent>
                 </CardContent>

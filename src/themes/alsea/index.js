@@ -29,6 +29,7 @@ import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeade
 import { OurBusinesses } from './src/components/OurBusinesses'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { PreorderConfirm } from './src/components/PreorderConfirm'
+import { PreviousOrdersLayout } from './src/components/PreviousOrdersLayout'
 import { PreOrdersLayout } from './src/components/PreOrdersLayout'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductIngredient } from './src/components/ProductIngredient'
@@ -78,6 +79,7 @@ export {
   OurBusinesses,
   PaymentOptions,
   PreorderConfirm,
+  PreviousOrdersLayout,
   PreOrdersLayout,
   ProductForm,
   ProductIngredient,

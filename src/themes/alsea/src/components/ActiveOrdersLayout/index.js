@@ -15,12 +15,14 @@ import {
 
 export const ActiveOrdersLayout = (props) => {
   const {
+    isProfile,
     isSkeleton,
     pagination,
     loadMoreOrders,
     isBusinessesPage,
     customArray,
     handleOrderDetails,
+    handleOrderHelp,
     businessesIds
   } = props
   const theme = useTheme()
@@ -80,9 +82,9 @@ export const ActiveOrdersLayout = (props) => {
                   <p>{parsePrice(order?.summary?.total || 0)}</p>
                   <Button
                     color='primary'
-                    onClick={() => handleOrderDetails(order.uuid)}
+                    onClick={() => !isProfile ? handleOrderDetails(order.uuid) : handleOrderHelp(order.uuid)}
                   >
-                    {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
+                    {!isProfile ? t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order') : t('HELP', 'Help')}
                   </Button>
                 </ActionContent>
               </Card>

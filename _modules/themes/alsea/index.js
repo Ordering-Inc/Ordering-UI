@@ -189,6 +189,12 @@ Object.defineProperty(exports, "PreorderConfirm", {
     return _PreorderConfirm.PreorderConfirm;
   }
 });
+Object.defineProperty(exports, "PreviousOrdersLayout", {
+  enumerable: true,
+  get: function get() {
+    return _PreviousOrdersLayout.PreviousOrdersLayout;
+  }
+});
 Object.defineProperty(exports, "PreOrdersLayout", {
   enumerable: true,
   get: function get() {
@@ -353,6 +359,8 @@ var _OurBusinesses = require("./src/components/OurBusinesses");
 var _PaymentOptions = require("./src/components/PaymentOptions");
 
 var _PreorderConfirm = require("./src/components/PreorderConfirm");
+
+var _PreviousOrdersLayout = require("./src/components/PreviousOrdersLayout");
 
 var _PreOrdersLayout = require("./src/components/PreOrdersLayout");
 

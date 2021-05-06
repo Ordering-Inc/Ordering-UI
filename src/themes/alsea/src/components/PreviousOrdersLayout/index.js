@@ -21,6 +21,7 @@ import {
 
 export const PreviousOrdersLayout = (props) => {
   const {
+    isProfile,
     isSkeleton,
     businessesIds,
     pagination,
@@ -30,7 +31,8 @@ export const PreviousOrdersLayout = (props) => {
     customArray,
     handleReorder,
     orderID,
-    handleOrderDetails
+    handleOrderDetails,
+    handleOrderHelp
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -107,11 +109,13 @@ export const PreviousOrdersLayout = (props) => {
                   </OrderContent>
                   <ActionContent>
                     <p>{parsePrice(order?.summary?.total || 0)}</p>
-                    <span
-                      onClick={() => handleOrderDetails(order.uuid)}
-                    >
-                      {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
-                    </span>
+                    {!isProfile && (
+                      <span
+                        onClick={() => handleOrderDetails(order.uuid)}
+                      >
+                        {t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order')}
+                      </span>
+                    )}
                   </ActionContent>
                 </CardContent>
                 <CardBottom reviewState={order?.review}>
@@ -138,10 +142,18 @@ export const PreviousOrdersLayout = (props) => {
                   )}
                   <Button
                     color='primary'
-                    onClick={() => handleReorder(order.id)}
+                    onClick={() => !isProfile ? handleReorder(order.id) : handleOrderHelp(order.uuid)}
                     disabled={reorderLoading}
                   >
-                    {orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
+                    {!isProfile ? (
+                      <>
+                        {orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
+                      </>
+                    ) : (
+                      <>
+                        {t('HELP', 'Help')}
+                      </>
+                    )}
                   </Button>
                 </CardBottom>
               </Card>
@@ -160,7 +172,6 @@ export const PreviousOrdersLayout = (props) => {
             )}
           </>
         )}
-
       </OrderContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
