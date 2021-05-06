@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HelpSection = exports.HelpItemContent = exports.HelpItemHeader = exports.HelpItem = exports.CancelButtonContainer = exports.BusinessInformation = exports.Logo = exports.OrderInfo = exports.InnerContainer = exports.Container = void 0;
+exports.HelpSection = exports.HelpItemHeader = exports.HelpItem = exports.HelpContent = exports.CancelButtonContainer = exports.BusinessInformation = exports.Logo = exports.OrderInfo = exports.InnerContainer = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -49,7 +49,11 @@ var CancelButtonContainer = _styledComponents.default.div(_templateObject8 || (_
 
 exports.CancelButtonContainer = CancelButtonContainer;
 
-var HelpItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+var HelpContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n"])));
+
+exports.HelpContent = HelpContent;
+
+var HelpItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.grayColor;
@@ -57,15 +61,11 @@ var HelpItem = _styledComponents.default.div(_templateObject9 || (_templateObjec
 
 exports.HelpItem = HelpItem;
 
-var HelpItemHeader = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  color: ", ";\n  padding: 15px;\n\n  svg {\n    font-size: 24px;\n  }\n"])), function (props) {
+var HelpItemHeader = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  color: ", ";\n  padding: 15px;\n\n  svg {\n    font-size: 24px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
 exports.HelpItemHeader = HelpItemHeader;
-
-var HelpItemContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n"])));
-
-exports.HelpItemContent = HelpItemContent;
 
 var HelpSection = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  h1 {\n    color: ", ";\n    font-size: 24px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;

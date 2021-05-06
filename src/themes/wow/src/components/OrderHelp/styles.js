@@ -76,6 +76,8 @@ export const CancelButtonContainer = styled.div`
     max-width: 300px;
   }
 `
+export const HelpContent = styled.div`
+`
 
 export const HelpItem = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors?.grayColor};
@@ -92,10 +94,6 @@ export const HelpItemHeader = styled.div`
     font-size: 24px;
   }
 `
-
-export const HelpItemContent = styled.div`
-`
-
 export const HelpSection = styled.div`
   margin-top: 30px;
   h1 {

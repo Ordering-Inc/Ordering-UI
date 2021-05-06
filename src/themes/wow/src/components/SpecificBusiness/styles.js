@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components'
 import React from 'react'
 
 export const Container = styled.div`
+  max-width: 500px;
+  margin: 20px auto;
 `
 
 export const BuisinessInfo = styled.div`
@@ -82,4 +84,3 @@ export const BusinessLogo = (props) => {
     </BusinessLogoStyled>
   )
 }
-
