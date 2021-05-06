@@ -82,7 +82,7 @@ export const ActiveOrdersLayout = (props) => {
                   <p>{parsePrice(order?.summary?.total || 0)}</p>
                   <Button
                     color='primary'
-                    onClick={() => !isProfile ? handleOrderDetails(order.uuid) : handleOrderHelp(order.uuid)}
+                    onClick={() => !isProfile ? handleOrderDetails(order.uuid) : handleOrderHelp(order)}
                   >
                     {!isProfile ? t('MOBILE_FRONT_BUTTON_VIEW_ORDER', 'View order') : t('HELP', 'Help')}
                   </Button>

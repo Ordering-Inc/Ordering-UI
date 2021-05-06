@@ -142,7 +142,7 @@ export const PreviousOrdersLayout = (props) => {
                   )}
                   <Button
                     color='primary'
-                    onClick={() => !isProfile ? handleReorder(order.id) : handleOrderHelp(order.uuid)}
+                    onClick={() => !isProfile ? handleReorder(order.id) : handleOrderHelp(order)}
                     disabled={reorderLoading}
                   >
                     {!isProfile ? (
