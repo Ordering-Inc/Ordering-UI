@@ -62,7 +62,7 @@ const CartUI = (props) => {
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
       handleOnAccept: () => {
-        removeProduct(product)
+        removeProduct(product, cart)
         setConfirm({ ...confirm, open: false })
       }
     })
