@@ -62,7 +62,7 @@ const DriverTipsUI = (props) => {
                 </TipCard>
               ))}
             </WrapperTips>
-            {!driverTipsOptions.includes(driverTip) && (
+            {!driverTipsOptions.includes(driverTip) && driverTip > 0 && (
               <DriverTipMessage>
                 {t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')}
               </DriverTipMessage>

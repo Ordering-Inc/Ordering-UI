@@ -67,7 +67,7 @@ const CheckoutUI = (props) => {
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  const [{ options, carts }] = useOrder()
+  const [{ options }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
@@ -182,15 +182,6 @@ const CheckoutUI = (props) => {
               </h1>
             </WarningMessage>
           )}
-          {!cartState.loading && cart?.status === 4 && (
-            <WarningMessage>
-              <VscWarning />
-              <h1>
-                {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
-              </h1>
-            </WarningMessage>
-          )}
-
           {props.beforeElementsSectionOne?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
@@ -319,8 +310,7 @@ const CheckoutUI = (props) => {
                   isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
                   driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)
                     ? cart?.driver_tip
-                    : cart?.driver_tip_rate
-                  }
+                    : cart?.driver_tip_rate}
                   useOrderContext
                 />
               </DriverTipContainer>
@@ -336,6 +326,14 @@ const CheckoutUI = (props) => {
           {!props.isHideSectionFive && !cartState.loading && cart && (
             <PaymentMethodContainer>
               <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+              {!cartState.loading && cart?.status === 4 && (
+                <WarningMessage style={{ marginTop: 20 }}>
+                  <VscWarning />
+                  <h1>
+                    {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
+                  </h1>
+                </WarningMessage>
+              )}
               <PaymentOptions
                 cart={cart}
                 isDisabled={cart?.status === 2}
@@ -456,7 +454,7 @@ export const Checkout = (props) => {
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const cartsWithProducts = orderState?.carts && Object.values(orderState?.carts)?.filter(cart => cart?.products?.length) || null
+  const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products?.length) || null)
 
   const closeAlert = () => {
     setAlertState({
