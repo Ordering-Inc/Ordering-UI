@@ -17,6 +17,7 @@ import {
   CheckoutAction,
   CouponContainer
 } from './styles'
+import { verifyDecimals } from '../../utils'
 
 const CartUI = (props) => {
   const {
@@ -113,14 +114,6 @@ const CartUI = (props) => {
     setOpenUpselling(false)
     setCanOpenUpselling(false)
     handleClickCheckout()
-  }
-
-  const verifyDecimals = (value, parser) => {
-    if (value % 1 === 0) {
-      return value
-    } else {
-      return parser(value)
-    }
   }
 
   return (
