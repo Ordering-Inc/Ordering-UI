@@ -92,7 +92,7 @@ var optionsDefault = [{
   pathname: '/profile/orders'
 }, {
   name: 'profits',
-  pathname: '/'
+  pathname: '/profits'
 }, {
   name: 'profile',
   pathname: '/profile'
@@ -101,7 +101,7 @@ var optionsDefault = [{
   pathname: '/'
 }, {
   name: 'help',
-  pathname: '/'
+  pathname: '/help'
 }];
 
 var UserPopover = function UserPopover(props) {

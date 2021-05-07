@@ -46,10 +46,10 @@ const IconOption = ({ value }) => {
 
 const optionsDefault = [
   { name: 'orders', pathname: '/profile/orders' },
-  { name: 'profits', pathname: '/' },
+  { name: 'profits', pathname: '/profits' },
   { name: 'profile', pathname: '/profile' },
   { name: 'favorites', pathname: '/' },
-  { name: 'help', pathname: '/' }
+  { name: 'help', pathname: '/help' }
 ]
 
 export const UserPopover = (props) => {
