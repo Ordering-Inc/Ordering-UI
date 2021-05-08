@@ -61,12 +61,12 @@ var SidebarContent = _styledComponents.default.div(_templateObject9 || (_templat
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    border-top-right-radius: 20px;\n  "]))) : "\n    border-top-left-radius: 20px;\n  ";
+}, function (props) {
+  var _props$theme$colors;
+
+  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage;
 }, function (_ref3) {
-  var isHome = _ref3.isHome,
-      theme = _ref3.theme;
-  return isHome ? '#333' : "".concat(theme.colors.backgroundPage);
-}, function (_ref4) {
-  var isHome = _ref4.isHome;
+  var isHome = _ref3.isHome;
   return isHome ? 'rgba(0, 0, 0, 0.7) 0px 8px 24px;' : 'rgba(0, 0, 0, 0.2) 0px 8px 24px;';
 }, function (props) {
   var _props$theme3;
@@ -82,12 +82,12 @@ var MenuClose = _styledComponents.default.button(_templateObject13 || (_template
 
 exports.MenuClose = MenuClose;
 
-var MenuLink = _styledComponents.default.a(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  overflow: hidden;\n  text-decoration: none;\n  appearance: none;\n  border: none;\n  padding: 0 16px;\n  box-sizing: border-box;\n  margin: 0px;\n  text-align: inherit;\n  display: block;\n  width: 100%;\n  background: ", ";\n  outline: none !important;\n\n  &:hover {\n    color: #f1f1f1;\n  }\n\n  ", ";\n\n  @media (max-height: 450px) {\n    font-size: 18px;\n  }\n"])), function (_ref5) {
-  var isHome = _ref5.isHome,
-      theme = _ref5.theme;
-  return isHome ? '#333' : "".concat(theme.colors.backgroundPage);
-}, function (_ref6) {
-  var isCustomer = _ref6.isCustomer;
+var MenuLink = _styledComponents.default.a(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  overflow: hidden;\n  text-decoration: none;\n  appearance: none;\n  border: none;\n  padding: 0 16px;\n  box-sizing: border-box;\n  margin: 0px;\n  text-align: inherit;\n  display: block;\n  width: 100%;\n  background: ", ";\n  outline: none !important;\n\n  &:hover {\n    color: #f1f1f1;\n  }\n\n  ", ";\n\n  @media (max-height: 450px) {\n    font-size: 18px;\n  }\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage;
+}, function (_ref4) {
+  var isCustomer = _ref4.isCustomer;
   return isCustomer && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    border-bottom: 1px solid black;\n\n    @media (min-width: 451px) {\n      display: none;\n    }\n  "])));
 });
 
@@ -97,9 +97,9 @@ var WrappContent = _styledComponents.default.div(_templateObject16 || (_template
 
 exports.WrappContent = WrappContent;
 
-var MenuLinkIcon = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  grid-area: 2 / 1 / auto / auto;\n  flex-shrink: 0;\n  line-height: 0;\n  display: flex;\n  align-items: center;\n  margin: 0px;\n\n  svg {\n    flex-shrink: 0;\n    color: #000;\n    width: 24px;\n    height: 24px;\n    color: ", ";\n  }\n"])), function (_ref7) {
-  var active = _ref7.active,
-      theme = _ref7.theme;
+var MenuLinkIcon = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  grid-area: 2 / 1 / auto / auto;\n  flex-shrink: 0;\n  line-height: 0;\n  display: flex;\n  align-items: center;\n  margin: 0px;\n\n  svg {\n    flex-shrink: 0;\n    color: #000;\n    width: 24px;\n    height: 24px;\n    color: ", ";\n  }\n"])), function (_ref5) {
+  var active = _ref5.active,
+      theme = _ref5.theme;
   return active ? (0, _polished.lighten)(0.2, theme.colors.primary) : theme.colors.primary;
 });
 
@@ -109,9 +109,9 @@ var MenuLinkText = _styledComponents.default.div(_templateObject18 || (_template
 
 exports.MenuLinkText = MenuLinkText;
 
-var TextInfo = _styledComponents.default.span(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  font-weight: 500;\n  line-height: 24px;\n  letter-spacing: -0.04ch;\n  text-transform: capitalize;\n  text-align: left;\n  margin: 0px;\n  padding: 0px;\n  display: block;\n  font-variant-ligatures: no-common-ligatures;\n  max-width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: ", ";\n\n  ", "\n"])), function (_ref8) {
-  var active = _ref8.active,
-      theme = _ref8.theme;
+var TextInfo = _styledComponents.default.span(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  font-weight: 500;\n  line-height: 24px;\n  letter-spacing: -0.04ch;\n  text-transform: capitalize;\n  text-align: left;\n  margin: 0px;\n  padding: 0px;\n  display: block;\n  font-variant-ligatures: no-common-ligatures;\n  max-width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: ", ";\n\n  ", "\n"])), function (_ref6) {
+  var active = _ref6.active,
+      theme = _ref6.theme;
   return active ? (0, _polished.lighten)(0.2, theme.colors.primary) : theme.colors.primary;
 }, function (props) {
   var _props$theme4;

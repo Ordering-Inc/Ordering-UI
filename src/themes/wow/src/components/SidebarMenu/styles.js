@@ -101,7 +101,7 @@ export const SidebarContent = styled.div`
   ` : `
     border-top-left-radius: 20px;
   `}
-  background-color: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};
+  background-color: ${props => props.theme.colors?.backgroundPage};
   overflow-x: hidden;
   transition: 0.5s;
   box-shadow: ${({ isHome }) => isHome ? 'rgba(0, 0, 0, 0.7) 0px 8px 24px;' : 'rgba(0, 0, 0, 0.2) 0px 8px 24px;'};
@@ -162,7 +162,7 @@ export const MenuLink = styled.a`
   text-align: inherit;
   display: block;
   width: 100%;
-  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};
+  background: ${props => props.theme.colors?.backgroundPage};
   outline: none !important;
 
   &:hover {
