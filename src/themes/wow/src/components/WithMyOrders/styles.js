@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
+  @media (min-width: 992px) {
+    width: calc(100% - 320px);
+  }
 `
 
 export const OrdersOptionTabsContainer = styled.div`
