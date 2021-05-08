@@ -99,11 +99,15 @@ export const SidebarMenu = (props) => {
         >
           <TopContainer>
             <CustomerInfo>
-              <DropDownCircleImage
-                src={sessionState?.user?.photo}
-                fallback={<FaUserAlt />}
-              />
-              <span>{sessionState?.user?.name}</span>
+              {auth && (
+                <>
+                  <DropDownCircleImage
+                    src={sessionState?.user?.photo}
+                    fallback={<FaUserAlt />}
+                  />
+                  <span>{sessionState?.user?.name}</span>
+                </>
+              )}
             </CustomerInfo>
             <MenuClose
               isHome={isHome}
