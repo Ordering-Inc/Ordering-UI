@@ -115,7 +115,8 @@ export const getTraduction = key => {
     INTERNAL_ERROR: 'Server Error, please wait, we are working to fix it',
     PREPARED_IN: 'Preparation time',
     DELIVERY_DATETIME: 'Delivery datetime',
-    ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook'
+    ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook',
+    INVALID_CODE: 'Invalid verify code'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)

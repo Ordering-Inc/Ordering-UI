@@ -121,8 +121,8 @@ const LoginFormUI = (props) => {
 
     return {
       cellphone,
-      countryPhoneCode,
-    };
+      countryPhoneCode
+    }
   }
 
   const handleChangeInputEmail = (e) => {
@@ -220,27 +220,28 @@ const LoginFormUI = (props) => {
         country_phone_code: countryPhoneCode,
         code: otpState
       })
-        .then(() => {
-          console.log(checkPhoneCodeState);
-          if (checkPhoneCodeState?.result?.error) {
-
-            setAlertState({
-              open: true,
-              content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
-            })
-
-          } else {
-            resetOtpLeftTime()
-          }
-        })
-        .catch(() => {
-          setAlertState({
-            open: true,
-            content: [checkPhoneCodeState.result?.error] || [t('ERROR', 'Error')]
-          })
-        })
     }
   }, [otpState])
+
+  useEffect(() => {
+    if (checkPhoneCodeState?.result?.error)
+      setAlertState({
+        open: true,
+        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
+      })
+    
+    else
+      resetOtpLeftTime()
+
+  }, [checkPhoneCodeState])
+
+  useEffect(() => {
+    if (verifyPhoneState?.result?.error)
+      setAlertState({
+        open: true,
+        content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
+      })
+  }, [verifyPhoneState])
 
   return (
     <>
