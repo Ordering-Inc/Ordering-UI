@@ -124,7 +124,7 @@ const BusinessControllerUI = (props) => {
                     {orderType === 1 && (
                       <>
                         {business?.delivery_price >= 0 ? (
-                          <p>
+                          <p className='bullet'>
                             <GrDeliver />
                             {business && parsePrice(business?.delivery_price)}
                           </p>

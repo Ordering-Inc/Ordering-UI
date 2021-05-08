@@ -74,7 +74,10 @@ export const BusinessTags = styled.div`
     font-size: 20px;
     display: flex;
     align-items: center;
-    color: #FFC917;
+    
+    svg {
+      color: #FFC917;
+    }
   }
 
   div {
