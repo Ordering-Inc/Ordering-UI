@@ -15,8 +15,6 @@ import { Modal } from '../../../../../components/Modal'
 import { AddressList } from '../AddressList'
 import { UserProfileDropDown } from '../UserProfileDropDown'
 import { ProfileBusinesses } from '../ProfileBusinesses'
-import { Help } from '../Help'
-import { HelpList } from '../HelpList'
 
 import {
   UserFormDetails as UserProfileController,
@@ -104,46 +102,40 @@ export const UserProfileUI = (props) => {
           </GoBackContainer>
         )}
         <ProfileSidebarInnerContainer>
-          {selectedItem !== 'help' ? (
-            <>
-              <Header
-                className={`accordion ${setActive}`}
-                onClick={(e) => toggleAccordion(e)}
-                mobileView={windowSize.width < 992}
-              >
-                {auth && windowSize?.width < 992 ? (
-                  <>
-                    <UserHeaderInfo>
-                      <DropDownCircleImage
-                        src={user?.photo}
-                        fallback={<FaUserAlt />}
-                      />
-                      <span>{userData?.name || user?.name} {userData?.lastname || user?.lastname}</span>
-                    </UserHeaderInfo>
-                    <p>
-                      <IosArrowDown
-                        className={`${setRotate}`}
-                      />
-                    </p>
-                  </>
-                ) : (
-                  <h1>{t('MY_PROFILE', 'My profile')}</h1>
-                )}
-              </Header>
-              <AccordionContent
-                ref={content}
-                style={{ maxHeight: !setActive && '0px' }}
-              >
-                <UserProfileDropDown
-                  auth={auth}
-                  selectedItem={selectedItem}
-                  handleChangeItem={handleChangeItem}
-                />
-              </AccordionContent>
-            </>
-          ) : (
-            <HelpList />
-          )}
+          <Header
+            className={`accordion ${setActive}`}
+            onClick={(e) => toggleAccordion(e)}
+            mobileView={windowSize.width < 992}
+          >
+            {auth && windowSize?.width < 992 ? (
+              <>
+                <UserHeaderInfo>
+                  <DropDownCircleImage
+                    src={user?.photo}
+                    fallback={<FaUserAlt />}
+                  />
+                  <span>{userData?.name || user?.name} {userData?.lastname || user?.lastname}</span>
+                </UserHeaderInfo>
+                <p>
+                  <IosArrowDown
+                    className={`${setRotate}`}
+                  />
+                </p>
+              </>
+            ) : (
+              <h1>{t('MY_PROFILE', 'My profile')}</h1>
+            )}
+          </Header>
+          <AccordionContent
+            ref={content}
+            style={{ maxHeight: !setActive && '0px' }}
+          >
+            <UserProfileDropDown
+              auth={auth}
+              selectedItem={selectedItem}
+              handleChangeItem={handleChangeItem}
+            />
+          </AccordionContent>
         </ProfileSidebarInnerContainer>
       </ProfileSidebar>
       <ProfileContent>
@@ -212,9 +204,6 @@ export const UserProfileUI = (props) => {
             )}
             {selectedItem === 'businesses' && (
               <ProfileBusinesses />
-            )}
-            {selectedItem === 'help' && (
-              <Help />
             )}
           </>
         )}

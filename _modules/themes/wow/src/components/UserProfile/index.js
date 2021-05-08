@@ -35,10 +35,6 @@ var _UserProfileDropDown = require("../UserProfileDropDown");
 
 var _ProfileBusinesses = require("../ProfileBusinesses");
 
-var _Help = require("../Help");
-
-var _HelpList = require("../HelpList");
-
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
@@ -151,7 +147,7 @@ var UserProfileUI = function UserProfileUI(props) {
     onClick: function onClick() {
       return setSelectedItem('myProfile');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BiArrowBack.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('BACK', 'Back'))), /*#__PURE__*/_react.default.createElement(_styles.ProfileSidebarInnerContainer, null, selectedItem !== 'help' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
+  }, /*#__PURE__*/_react.default.createElement(_BiArrowBack.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('BACK', 'Back'))), /*#__PURE__*/_react.default.createElement(_styles.ProfileSidebarInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "accordion ".concat(setActive),
     onClick: function onClick(e) {
       return toggleAccordion(e);
@@ -171,7 +167,7 @@ var UserProfileUI = function UserProfileUI(props) {
     auth: auth,
     selectedItem: selectedItem,
     handleChangeItem: handleChangeItem
-  }))) : /*#__PURE__*/_react.default.createElement(_HelpList.HelpList, null))), /*#__PURE__*/_react.default.createElement(_styles.ProfileContent, null, selectedItem === 'myProfile' && /*#__PURE__*/_react.default.createElement(_styles.MyProfileInfo, null, /*#__PURE__*/_react.default.createElement(_styles.MyProfileInnerContainer, null, auth ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MY_PROFILE', 'My profile')), /*#__PURE__*/_react.default.createElement(_styles.UserHeaderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.DropDownCircleImage, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ProfileContent, null, selectedItem === 'myProfile' && /*#__PURE__*/_react.default.createElement(_styles.MyProfileInfo, null, /*#__PURE__*/_react.default.createElement(_styles.MyProfileInnerContainer, null, auth ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MY_PROFILE', 'My profile')), /*#__PURE__*/_react.default.createElement(_styles.UserHeaderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.DropDownCircleImage, {
     src: user === null || user === void 0 ? void 0 : user.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }), /*#__PURE__*/_react.default.createElement("span", null, (userData === null || userData === void 0 ? void 0 : userData.name) || (user === null || user === void 0 ? void 0 : user.name), " ", (userData === null || userData === void 0 ? void 0 : userData.lastname) || (user === null || user === void 0 ? void 0 : user.lastname)), /*#__PURE__*/_react.default.createElement(_styles.EditProfileButton, {
@@ -184,7 +180,7 @@ var UserProfileUI = function UserProfileUI(props) {
   })))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedItem === 'savedAddress' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOUR_ADDRESSES', 'Your addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses
-  }))), selectedItem === 'businesses' && /*#__PURE__*/_react.default.createElement(_ProfileBusinesses.ProfileBusinesses, null), selectedItem === 'help' && /*#__PURE__*/_react.default.createElement(_Help.Help, null))), openEditModal && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), selectedItem === 'businesses' && /*#__PURE__*/_react.default.createElement(_ProfileBusinesses.ProfileBusinesses, null))), openEditModal && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openEditModal,
     onClose: function onClose() {
       return setOpenEditModal(false);

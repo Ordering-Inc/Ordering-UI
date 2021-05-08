@@ -93,7 +93,9 @@ var UserProfileDropDown = function UserProfileDropDown(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_BiStore.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('BUSINESSES', 'Businesses'))), /*#__PURE__*/_react.default.createElement("h1", null, t('INFORMATION_AND_SUPPORT', 'Information and support')), /*#__PURE__*/_react.default.createElement(_styles.Item, {
     active: selectedItem === 'help',
     onClick: function onClick() {
-      return handleChangeItem('help');
+      return handleGoToPage({
+        page: 'help'
+      });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_HiLocationMarker.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('HELP', 'Help'))), /*#__PURE__*/_react.default.createElement(_styles.Item, null, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_FaHandHoldingHeart.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('MY_OWN', 'My Own'))), /*#__PURE__*/_react.default.createElement(_styles.Item, null, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_AiFillExclamationCircle.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('ABOUT_WOW', 'About Wow'))), auth && /*#__PURE__*/_react.default.createElement(ProfileLogout, null));
 };

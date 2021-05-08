@@ -78,7 +78,7 @@ export const UserProfileDropDown = (props) => {
       <h1>{t('INFORMATION_AND_SUPPORT', 'Information and support')}</h1>
       <Item
         active={selectedItem === 'help'}
-        onClick={() => handleChangeItem('help')}
+        onClick={() => handleGoToPage({ page: 'help' })}
       >
         <IconWrap><HiLocationMarker /></IconWrap>
         <span>{t('HELP', 'Help')}</span>
