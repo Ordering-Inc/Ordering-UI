@@ -80,7 +80,7 @@ var WrapInput = _styledComponents.default.div(_templateObject9 || (_templateObje
 
 exports.WrapInput = WrapInput;
 
-var SearchAddress = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  margin: 0 10px;\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n\n  span {\n    padding: 0 5px;\n    color: ", ";\n  }\n"])), function (props) {
+var SearchAddress = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  margin: 0 10px;\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n\n  span {\n    padding: 0 5px;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 50px;\n  }\n\n  @media (min-width: 768px) {\n    span {\n      max-width: initial;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.grayColor;
 }, function (props) {
   return props.theme.colors.grayColor;

@@ -145,5 +145,15 @@ export const SearchAddress = styled.div`
   span {
     padding: 0 5px;
     color: ${props => props.theme.colors.grayColor};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 50px;
+  }
+
+  @media (min-width: 768px) {
+    span {
+      max-width: initial;
+    }
   }
 `
