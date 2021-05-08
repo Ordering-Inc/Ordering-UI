@@ -117,29 +117,7 @@ var UserProfileUI = function UserProfileUI(props) {
       setRotate = _useState10[0],
       setRotateState = _useState10[1];
 
-  var content = (0, _react.useRef)(null); // const handleClickImage = () => {
-  //   inputRef.current.click()
-  // }
-  // const handleFiles = (files) => {
-  //   if (files.length === 1) {
-  //     const type = files[0].type.split('/')[0]
-  //     if (type !== 'image') {
-  //       setAlertState({
-  //         open: true,
-  //         content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-  //       })
-  //       return
-  //     }
-  //     if (bytesConverter(files[0]?.size) > 2048) {
-  //       setAlertState({
-  //         open: true,
-  //         content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-  //       })
-  //       return
-  //     }
-  //     handlechangeImage(files[0])
-  //   }
-  // }
+  var content = (0, _react.useRef)(null);
 
   var toggleAccordion = function toggleAccordion(e) {
     if (windowSize.width > 992) return;

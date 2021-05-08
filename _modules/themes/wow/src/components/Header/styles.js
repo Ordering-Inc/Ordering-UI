@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SearchBarContainer = exports.WrapSearchBar = exports.UserEdit = exports.CustomerInfo = exports.SubMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.Header = void 0;
+exports.SearchBarContainer = exports.WrapSearchBar = exports.UserEdit = exports.CustomerInfo = exports.MenuLink = exports.MenuItem = exports.Menu = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.Header = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -71,10 +71,8 @@ var MenuLink = _styledComponents.default.a(_templateObject11 || (_templateObject
 });
 
 exports.MenuLink = MenuLink;
-var SubMenu = (0, _styledComponents.default)(InnerHeader)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  padding: 0px 20px 7px;\n  box-sizing: border-box;\n  margin: 0px;\n\n  @media (min-width: 821px) {\n    display: none;\n  }\n"])));
-exports.SubMenu = SubMenu;
 
-var CustomerInfo = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: none;\n  cursor: pointer;\n\n  @media (min-width: 450px) {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n\n    span {\n      display: flex;\n      align-items: center;\n      height: 30px;\n      p {\n        color: ", ";\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n        max-width: 50px;\n\n        @media (min-width: 768px) {\n          max-width: 70px;\n        }\n      }\n      svg {\n        color: ", ";\n        font-size: 30px;\n        margin-right: 5px;\n      }\n    }\n  }\n"])), function (props) {
+var CustomerInfo = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: none;\n  cursor: pointer;\n\n  @media (min-width: 450px) {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n\n    span {\n      display: flex;\n      align-items: center;\n      height: 30px;\n      p {\n        color: ", ";\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n        max-width: 50px;\n\n        @media (min-width: 768px) {\n          max-width: 70px;\n        }\n      }\n      svg {\n        color: ", ";\n        font-size: 30px;\n        margin-right: 5px;\n      }\n    }\n  }\n"])), function (props) {
   return props.isHome ? '#FFF' : '#333';
 }, function (props) {
   return props.theme.colors.primary;
@@ -82,19 +80,19 @@ var CustomerInfo = _styledComponents.default.div(_templateObject14 || (_template
 
 exports.CustomerInfo = CustomerInfo;
 
-var UserEdit = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  > :first-child{\n     margin-bottom: 20px;  \n  }\n"])));
+var UserEdit = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  > :first-child{\n     margin-bottom: 20px;  \n  }\n"])));
 
 exports.UserEdit = UserEdit;
 
-var WrapSearchBar = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 5px;\n  box-sizing: border-box;\n  justify-content: flex-end;\n  @media (max-width: 1200px) {\n    width: 91%;\n    margin: 0px auto;\n  }\n"])));
+var WrapSearchBar = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 5px;\n  box-sizing: border-box;\n  justify-content: flex-end;\n  @media (max-width: 1200px) {\n    width: 91%;\n    margin: 0px auto;\n  }\n"])));
 
 exports.WrapSearchBar = WrapSearchBar;
 
-var SearchBarContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  width: 100%;\n  padding: 10px 0;\n  position: sticky;\n  top: 0px;\n  z-index: 1000;\n  @media (max-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
+var SearchBarContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  width: 100%;\n  padding: 10px 0;\n  position: sticky;\n  top: 0px;\n  z-index: 1000;\n  @media (max-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 }, function (_ref4) {
   var home = _ref4.home;
-  return !home && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      border-bottom-right-radius: 15px;\n      border-bottom-left-radius: 15px;\n    "])));
+  return !home && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      border-bottom-right-radius: 15px;\n      border-bottom-left-radius: 15px;\n    "])));
 });
 
 exports.SearchBarContainer = SearchBarContainer;

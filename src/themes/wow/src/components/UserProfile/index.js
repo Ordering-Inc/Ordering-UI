@@ -60,31 +60,6 @@ export const UserProfileUI = (props) => {
   const [setRotate, setRotateState] = useState('accordion__icon')
   const content = useRef(null)
 
-  // const handleClickImage = () => {
-  //   inputRef.current.click()
-  // }
-  // const handleFiles = (files) => {
-  //   if (files.length === 1) {
-  //     const type = files[0].type.split('/')[0]
-  //     if (type !== 'image') {
-  //       setAlertState({
-  //         open: true,
-  //         content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-  //       })
-  //       return
-  //     }
-
-  //     if (bytesConverter(files[0]?.size) > 2048) {
-  //       setAlertState({
-  //         open: true,
-  //         content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-  //       })
-  //       return
-  //     }
-  //     handlechangeImage(files[0])
-  //   }
-  // }
-
   const toggleAccordion = (e) => {
     if (windowSize.width > 992) return
     setActiveState(setActive === '' ? 'active' : '')

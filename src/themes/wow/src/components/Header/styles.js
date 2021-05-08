@@ -116,19 +116,6 @@ export const MenuLink = styled.a`
   `}
 `
 
-export const SubMenu = styled(InnerHeader)`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 0px 20px 7px;
-  box-sizing: border-box;
-  margin: 0px;
-
-  @media (min-width: 821px) {
-    display: none;
-  }
-`
-
 export const CustomerInfo = styled.div`
   display: none;
   cursor: pointer;

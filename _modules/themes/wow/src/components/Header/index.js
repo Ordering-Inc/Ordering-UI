@@ -27,10 +27,6 @@ var _LanguageSelector = require("../../../../../components/LanguageSelector");
 
 var _AddressesPopover = require("../../../../../components/AddressesPopover");
 
-var _MomentPopover = require("../../../../../components/MomentPopover");
-
-var _CartPopover = require("../../../../../components/CartPopover");
-
 var _Modal = require("../../../../../components/Modal");
 
 var _MomentContent = require("../../../../../components/MomentContent");
@@ -118,10 +114,6 @@ var Header = function Header(props) {
       setOpenPopover = _useState2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
 
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
       _useCustomer2 = _slicedToArray(_useCustomer, 2),
@@ -276,7 +268,7 @@ var Header = function Header(props) {
       return openModal(variant);
     },
     isHome: isHome
-  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, windowSize.width > 1200 && /*#__PURE__*/_react.default.createElement(_styles.WrapSearchBar, null, isSearchPage && /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, !isHome && windowSize.width > 1200 && /*#__PURE__*/_react.default.createElement(_styles.WrapSearchBar, null, isSearchPage && /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses')
   }), /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
@@ -314,7 +306,7 @@ var Header = function Header(props) {
     auth: auth,
     isHideSignup: isHideSignup,
     userCustomer: userCustomer
-  })))), onlineStatus && windowSize.width <= 1200 && /*#__PURE__*/_react.default.createElement(_styles.SearchBarContainer, {
+  })))), onlineStatus && !isHome && windowSize.width <= 1200 && /*#__PURE__*/_react.default.createElement(_styles.SearchBarContainer, {
     home: isHome
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapSearchBar, null, isSearchPage && /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,

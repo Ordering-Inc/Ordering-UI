@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
@@ -9,8 +9,6 @@ import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 import { capitalize } from '../../../../../utils'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { AddressesPopover } from '../../../../../components/AddressesPopover'
-import { MomentPopover } from '../../../../../components/MomentPopover'
-import { CartPopover } from '../../../../../components/CartPopover'
 import { Modal } from '../../../../../components/Modal'
 import { MomentContent } from '../../../../../components/MomentContent'
 import { AddressList } from '../../../../../components/AddressList'
@@ -34,7 +32,6 @@ import {
   RightHeader,
   Menu,
   MenuLink,
-  SubMenu,
   CustomerInfo,
   UserEdit,
   WrapSearchBar,
@@ -57,7 +54,6 @@ export const Header = (props) => {
   const [orderState, { refreshOrderOptions }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
-  const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
   const isSearchPage = location.pathname === '/search'
 
@@ -168,12 +164,6 @@ export const Header = (props) => {
                 )}
                 {onlineStatus && windowSize.width > 820 ? (
                   <>
-                    {/* <MomentPopover
-                      open={openPopover.moment}
-                      onClick={() => handleTogglePopover('moment')}
-                      onClose={() => handleClosePopover('moment')}
-                      isHome={isHome}
-                    /> */}
                     <AddressesPopover
                       auth={auth}
                       addressState={orderState?.options?.address}
@@ -196,7 +186,7 @@ export const Header = (props) => {
           </LeftHeader>
           {onlineStatus && (
             <RightHeader>
-              {windowSize.width > 1200 && (
+              {!isHome && windowSize.width > 1200 && (
                 <WrapSearchBar>
                   {isSearchPage && (
                     <SearchBar
@@ -250,45 +240,8 @@ export const Header = (props) => {
             </RightHeader>
           )}
         </InnerHeader>
-        {/* {onlineStatus && isShowOrderOptions && (
-          windowSize.width <= 820 && windowSize.width > 768 ? (
-            <SubMenu>
-              <AddressesPopover
-                auth={auth}
-                addressState={orderState?.options?.address}
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-                isHome={isHome}
-              />
-              <MomentPopover
-                open={openPopover.moment}
-                onClick={() => handleTogglePopover('moment')}
-                onClose={() => handleClosePopover('moment')}
-                isHome={isHome}
-              />
-            </SubMenu>
-          ) : (
-            <SubMenu>
-              <HeaderOption
-                variant='address'
-                addressState={orderState?.options?.address?.address?.split(',')?.[0]}
-                onClick={(variant) => openModal(variant)}
-                isHome={isHome}
-              />
-              <HeaderOption
-                variant='moment'
-                momentState={orderState?.options?.moment}
-                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                  ? null
-                  : (variant) => openModal(variant)}
-                isHome={isHome}
-              />
-            </SubMenu>
-          )
-        )} */}
       </HeaderContainer>
-      {onlineStatus && windowSize.width <= 1200 && (
+      {onlineStatus && !isHome && windowSize.width <= 1200 && (
         <SearchBarContainer home={isHome}>
           <WrapSearchBar>
             {isSearchPage && (
