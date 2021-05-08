@@ -115,7 +115,8 @@ export const getTraduction = key => {
     INTERNAL_ERROR: 'Server Error, please wait, we are working to fix it',
     PREPARED_IN: 'Preparation time',
     DELIVERY_DATETIME: 'Delivery datetime',
-    ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook'
+    ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook',
+    INVALID_CODE: 'Invalid verify code'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)
@@ -186,4 +187,23 @@ export const verifyDecimals = (value, parser) => {
   } else {
     return parser(value)
   }
+}
+/**
+ * Format seconds to hh:mm:ss
+ * @param {number} seconds
+ */
+export const formatSeconds = (seconds) => {   
+ // Hours, minutes and seconds
+ var hrs = ~~(seconds / 3600);
+ var mins = ~~((seconds % 3600) / 60);
+ var secs = ~~seconds % 60;
+
+ // Output like "1:01" or "4:03:59" or "123:03:59"
+ var ret = "";
+ if (hrs > 0) {
+     ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+ }
+ ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+ ret += "" + secs;
+ return ret;
 }

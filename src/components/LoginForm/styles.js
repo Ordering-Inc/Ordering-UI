@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const LoginContainer = styled.div`
   width: 100%;
@@ -215,4 +216,63 @@ export const WrapperPassword = styled.div`
     width: 100%;
     padding-right: 40px;
   }
+`
+export const OtpWrapper = styled.div`
+  .otp-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+    
+    .otp-input{
+      width: 30px;
+      height: 30px;
+      padding: 12px 20px;
+      border: 2px solid #CCC;
+      border-radius: 16px;
+      background-color: #FFF;
+      outline: none;
+      font-size: 20px;
+      font-weight: bold; 
+
+      &:focus{
+        border-color: ${() => darken(0.07, '#CCC')} !important;
+      }
+
+      &::placeholder,
+      &::-webkit-input-placeholder {
+        color: #DBDCDB;
+      }
+      &:-ms-input-placeholder {
+        color: #DBDCDB;
+      }
+    }
+  }
+`
+
+export const CountdownTimer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 20px;
+  
+  span {
+    &:first-child {
+      font-size: 30px;
+      font-weight: bold;
+      color: ${props => props.theme.colors.primary}
+    }
+    &:last-child {
+      font-size: 24px;
+      color: #DBDCDB;
+      cursor: pointer;
+      :hover {
+        color: ${() => darken(0.07, '#DBDCDB')} !important;
+      }
+      :active {
+        color: ${() => darken(0.09, '#DBDCDB')} !important;
+      }
+    }
+  }
+
 `
