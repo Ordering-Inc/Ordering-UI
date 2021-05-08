@@ -107,15 +107,10 @@ var UserProfileUI = function UserProfileUI(props) {
       setActive = _useState6[0],
       setActiveState = _useState6[1];
 
-  var _useState7 = (0, _react.useState)('0px'),
+  var _useState7 = (0, _react.useState)('accordion__icon'),
       _useState8 = _slicedToArray(_useState7, 2),
-      setHeight = _useState8[0],
-      setHeightState = _useState8[1];
-
-  var _useState9 = (0, _react.useState)('accordion__icon'),
-      _useState10 = _slicedToArray(_useState9, 2),
-      setRotate = _useState10[0],
-      setRotateState = _useState10[1];
+      setRotate = _useState8[0],
+      setRotateState = _useState8[1];
 
   var content = (0, _react.useRef)(null);
 
@@ -148,6 +143,10 @@ var UserProfileUI = function UserProfileUI(props) {
       setRotateState('accordion__icon');
     }
   }, [windowSize === null || windowSize === void 0 ? void 0 : windowSize.width]);
+  (0, _react.useEffect)(function () {
+    if (auth) return;
+    setSelectedItem('myProfile');
+  }, [auth]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ProfileSidebar, null, selectedItem === 'help' && /*#__PURE__*/_react.default.createElement(_styles.GoBackContainer, {
     onClick: function onClick() {
       return setSelectedItem('myProfile');
@@ -166,7 +165,6 @@ var UserProfileUI = function UserProfileUI(props) {
   }))) : /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PROFILE', 'My profile'))), /*#__PURE__*/_react.default.createElement(_styles.AccordionContent, {
     ref: content,
     style: {
-      minHeight: "".concat(setHeight),
       maxHeight: !setActive && '0px'
     }
   }, /*#__PURE__*/_react.default.createElement(_UserProfileDropDown.UserProfileDropDown, {
@@ -183,10 +181,10 @@ var UserProfileUI = function UserProfileUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_BisPencil.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ProfileItem, null, /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement("span", null, (userData === null || userData === void 0 ? void 0 : userData.email) || user.email))), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement(_styles.ProfileItem, null, /*#__PURE__*/_react.default.createElement(_BiPhone.default, null), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement("span", null, ((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code)) && "+".concat((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code), " "), (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)))), ((userData === null || userData === void 0 ? void 0 : userData.birthdate) || (user === null || user === void 0 ? void 0 : user.birthdate)) && /*#__PURE__*/_react.default.createElement(_styles.ProfileItem, null, /*#__PURE__*/_react.default.createElement(_VscCalendar.default, null), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement("span", null, (userData === null || userData === void 0 ? void 0 : userData.birthdate) || (user === null || user === void 0 ? void 0 : user.birthdate))))) : /*#__PURE__*/_react.default.createElement(_styles.GuestProfileContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WOW_GUEST_USER_PROFILE_TITLE', 'What are you waiting for to enjoy all the benefits that Wow + has for you?')), /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.guestUser,
     alt: "guest user"
-  })))), selectedItem === 'savedAddress' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOUR_ADDRESSES', 'Your addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+  })))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedItem === 'savedAddress' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOUR_ADDRESSES', 'Your addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses
-  }))), selectedItem === 'businesses' && /*#__PURE__*/_react.default.createElement(_ProfileBusinesses.ProfileBusinesses, null), selectedItem === 'help' && /*#__PURE__*/_react.default.createElement(_Help.Help, null)), openEditModal && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), selectedItem === 'businesses' && /*#__PURE__*/_react.default.createElement(_ProfileBusinesses.ProfileBusinesses, null), selectedItem === 'help' && /*#__PURE__*/_react.default.createElement(_Help.Help, null))), openEditModal && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openEditModal,
     onClose: function onClose() {
       return setOpenEditModal(false);

@@ -56,7 +56,6 @@ export const UserProfileUI = (props) => {
   const [selectedItem, setSelectedItem] = useState('myProfile')
   const [openEditModal, setOpenEditModal] = useState(false)
   const [setActive, setActiveState] = useState('')
-  const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
   const content = useRef(null)
 
@@ -90,6 +89,11 @@ export const UserProfileUI = (props) => {
       setRotateState('accordion__icon')
     }
   }, [windowSize?.width])
+
+  useEffect(() => {
+    if (auth) return
+    setSelectedItem('myProfile')
+  }, [auth])
   return (
     <Container>
       <ProfileSidebar>
@@ -128,7 +132,7 @@ export const UserProfileUI = (props) => {
               </Header>
               <AccordionContent
                 ref={content}
-                style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
+                style={{ maxHeight: !setActive && '0px' }}
               >
                 <UserProfileDropDown
                   auth={auth}
@@ -194,21 +198,25 @@ export const UserProfileUI = (props) => {
             </MyProfileInnerContainer>
           </MyProfileInfo>
         )}
-        {selectedItem === 'savedAddress' && (
+        {auth && (
           <>
-            {(userData?.addresses || user?.addresses) && !isHiddenAddress && (
-              <SavedPlaces>
-                <p>{t('YOUR_ADDRESSES', 'Your addresses')}</p>
-                <AddressList isModal addressList={user?.addresses} />
-              </SavedPlaces>
+            {selectedItem === 'savedAddress' && (
+              <>
+                {(userData?.addresses || user?.addresses) && !isHiddenAddress && (
+                  <SavedPlaces>
+                    <p>{t('YOUR_ADDRESSES', 'Your addresses')}</p>
+                    <AddressList isModal addressList={user?.addresses} />
+                  </SavedPlaces>
+                )}
+              </>
+            )}
+            {selectedItem === 'businesses' && (
+              <ProfileBusinesses />
+            )}
+            {selectedItem === 'help' && (
+              <Help />
             )}
           </>
-        )}
-        {selectedItem === 'businesses' && (
-          <ProfileBusinesses />
-        )}
-        {selectedItem === 'help' && (
-          <Help />
         )}
       </ProfileContent>
       {openEditModal && (
