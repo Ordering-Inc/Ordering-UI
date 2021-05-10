@@ -14,7 +14,7 @@ import {
   PositionedContainer
 } from './styles'
 
-const FeaturedBusinessListingUI = (props) => {
+export const FeaturedBusinessListingUI = (props) => {
   const {
     twoColumnView,
     isFeaturePage,

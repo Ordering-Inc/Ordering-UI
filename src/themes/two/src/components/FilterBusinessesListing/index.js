@@ -232,10 +232,10 @@ const FilterBusinessesListingUI = (props) => {
 }
 
 export const FilterBusinessesListing = (props) => {
-  const AllBusinessesListingProps = {
+  const FilterBusinessesListingProps = {
     ...props,
     UIComponent: FilterBusinessesListingUI
   }
 
-  return <BusinessListController {...AllBusinessesListingProps} />
+  return <BusinessListController {...FilterBusinessesListingProps} />
 }
