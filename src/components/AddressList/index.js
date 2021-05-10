@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import TiPencil from '@meronex/icons/ti/TiPencil'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
+import FaHome from '@meronex/icons/fa/FaHome'
+import FaPlus from '@meronex/icons/fa/FaPlus'
+import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
+import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 
@@ -128,15 +132,15 @@ const AddressListUI = (props) => {
       return address.default
     }
     props.forEach(prop => {
-      if (address[prop]) {
+      if (address?.[prop]) {
         if (prop === 'location') {
-          values.push(address[prop].lat === orderState?.options?.address[prop]?.lat &&
-            address[prop].lng === orderState?.options?.address[prop]?.lng)
+          values.push(address?.[prop].lat === orderState?.options?.address?.[prop]?.lat &&
+            address?.[prop].lng === orderState?.options?.address?.[prop]?.lng)
         } else {
-          values.push(address[prop] === orderState?.options?.address[prop])
+          values.push(address?.[prop] === orderState?.options?.address?.[prop])
         }
       } else {
-        values.push(orderState?.options?.address[prop] === null || orderState?.options?.address[prop] === '')
+        values.push(orderState?.options?.address?.[prop] === null || orderState?.options?.address?.[prop] === '')
       }
     })
     return values.every(value => value)
@@ -221,6 +225,12 @@ const AddressListUI = (props) => {
                     <span className='radio'>
                       {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
                     </span>
+                    <span className='tag'>
+                      {address?.tag === 'home' && <FaHome />}
+                      {address?.tag === 'office' && <FaRegBuilding />}
+                      {address?.tag === 'favorite' && <FaRegHeart />}
+                      {address?.tag === 'other' && <FaPlus />}
+                    </span>
                     <div className='address'>
                       <span>{address.address}</span>
                       <span>{address.internal_number} {address.zipcode}</span>
@@ -247,14 +257,18 @@ const AddressListUI = (props) => {
           )
         }
 
-        {!addressList.loading && !addressList.error && addressList?.addresses?.length === 0 && !isProductForm && (
+        {!(addressList.loading || actionStatus.loading || orderState.loading) &&
+          !addressList.error &&
+          addressList?.addresses?.length === 0 &&
+          !isProductForm &&
+        (
           <WrappNotAddresses>
             <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
             <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
           </WrappNotAddresses>
         )}
 
-        {!addressList.loading && addressList.error && (
+        {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
           addressList.error.length > 0 && (
             <NotFoundSource
               content={addressList.error[0]?.message || addressList.error[0]}
@@ -262,7 +276,7 @@ const AddressListUI = (props) => {
           )
         )}
 
-        {!addressList.loading && (typeof orderState.options?.address !== 'object') && !addressList.error && (
+        {!(addressList.loading || actionStatus.loading || orderState.loading) && (typeof orderState.options?.address !== 'object') && !addressList.error && (
           <NotFoundSource
             content={t('NETWORK_ERROR', 'Network error, please reload the page')}
           />

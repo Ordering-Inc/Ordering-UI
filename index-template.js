@@ -38,6 +38,7 @@ import orderStatus9 from './template/assets/images/order/status-9.svg'
 import orderStatus10 from './template/assets/images/order/status-10.svg'
 import orderStatus11 from './template/assets/images/order/status-11.svg'
 import orderStatus12 from './template/assets/images/order/status-12.svg'
+import orderStatus13 from './template/assets/images/order/status-13.svg'
 
 import categoryFood from './template/assets/images/categories/category-food.png'
 import categoryGroceries from './template/assets/images/categories/category-groceries.png'
@@ -62,7 +63,7 @@ const configFile = {
 }
 
 Sentry.init({
-  environment: process.env.NODE_ENV,
+  environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
   dsn: 'https://ab508d2c6990411c8da375c997f9f3d6@o460529.ingest.sentry.io/5496646',
   integrations: [
     new Integrations.BrowserTracing()
@@ -106,7 +107,8 @@ theme.images = {
     status9: orderStatus9,
     status10: orderStatus10,
     status11: orderStatus11,
-    status12: orderStatus12
+    status12: orderStatus12,
+    status13: orderStatus13
   },
   categories: {
     food: categoryFood,
