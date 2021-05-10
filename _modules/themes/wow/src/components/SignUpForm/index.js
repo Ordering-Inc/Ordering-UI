@@ -29,7 +29,7 @@ var _styledComponents = require("styled-components");
 
 var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
 
-var _Inputs = require(".../../../../../styles/Inputs");
+var _Inputs = require("../../../../../styles/Inputs");
 
 var _Confirm = require("../../../../../components/Confirm");
 

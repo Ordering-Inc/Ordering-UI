@@ -15,7 +15,7 @@ import parsePhoneNumber from 'libphonenumber-js'
 import { useTheme } from 'styled-components'
 
 import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
-import { Input } from '.../../../../../styles/Inputs'
+import { Input } from '../../../../../styles/Inputs'
 import { Alert } from '../../../../../components/Confirm'
 import { Modal } from '../../../../../components/Modal'
 import { sortInputFields } from '../../../../../utils'
