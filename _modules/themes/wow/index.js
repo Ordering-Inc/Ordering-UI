@@ -129,6 +129,12 @@ Object.defineProperty(exports, "DriverTips", {
     return _DriverTips.DriverTips;
   }
 });
+Object.defineProperty(exports, "FacebookLoginButton", {
+  enumerable: true,
+  get: function get() {
+    return _FacebookLogin.FacebookLoginButton;
+  }
+});
 Object.defineProperty(exports, "Footer", {
   enumerable: true,
   get: function get() {
@@ -291,6 +297,12 @@ Object.defineProperty(exports, "PromotionsBusinesses", {
     return _PromotionsBusinesses.PromotionsBusinesses;
   }
 });
+Object.defineProperty(exports, "RegisterWelcomeContent", {
+  enumerable: true,
+  get: function get() {
+    return _RegisterWelcomeContent.RegisterWelcomeContent;
+  }
+});
 Object.defineProperty(exports, "ReviewOrder", {
   enumerable: true,
   get: function get() {
@@ -313,6 +325,12 @@ Object.defineProperty(exports, "SingleProductCard", {
   enumerable: true,
   get: function get() {
     return _SingleProductCard.SingleProductCard;
+  }
+});
+Object.defineProperty(exports, "SignUpForm", {
+  enumerable: true,
+  get: function get() {
+    return _SignUpForm.SignUpForm;
   }
 });
 Object.defineProperty(exports, "SpecificBusiness", {
@@ -418,6 +436,8 @@ var _DiscountedBusinesses = require("./src/components/DiscountedBusinesses");
 
 var _DriverTips = require("./src/components/DriverTips");
 
+var _FacebookLogin = require("./src/components/FacebookLogin");
+
 var _Footer = require("./src/components/Footer");
 
 var _Header = require("./src/components/Header");
@@ -472,6 +492,8 @@ var _ProfileEdit = require("./src/components/ProfileEdit");
 
 var _PromotionsBusinesses = require("./src/components/PromotionsBusinesses");
 
+var _RegisterWelcomeContent = require("./src/components/RegisterWelcomeContent");
+
 var _ReviewOrder = require("./src/components/ReviewOrder");
 
 var _SearchBar = require("./src/components/SearchBar");
@@ -479,6 +501,8 @@ var _SearchBar = require("./src/components/SearchBar");
 var _SidebarMenu = require("./src/components/SidebarMenu");
 
 var _SingleProductCard = require("./src/components/SingleProductCard");
+
+var _SignUpForm = require("./src/components/SignUpForm");
 
 var _SpecificBusiness = require("./src/components/SpecificBusiness");
 

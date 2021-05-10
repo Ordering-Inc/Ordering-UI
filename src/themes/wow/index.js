@@ -19,6 +19,7 @@ import { CouponControl } from './src/components/CouponControl'
 import { DeliveryDetails } from './src/components/DeliveryDetails'
 import { DiscountedBusinesses } from './src/components/DiscountedBusinesses'
 import { DriverTips } from './src/components/DriverTips'
+import { FacebookLoginButton } from './src/components/FacebookLogin'
 import { Footer } from './src/components/Footer'
 import { Header } from './src/components/Header'
 import { Help } from './src/components/Help'
@@ -46,10 +47,12 @@ import { ProfileBusinesBasicInformation } from './src/components/ProfileBusinesB
 import { ProfileBusinesses } from './src/components/ProfileBusinesses'
 import { ProfileEdit } from './src/components/ProfileEdit'
 import { PromotionsBusinesses } from './src/components/PromotionsBusinesses'
+import { RegisterWelcomeContent } from './src/components/RegisterWelcomeContent'
 import { ReviewOrder } from './src/components/ReviewOrder'
 import { SearchBar } from './src/components/SearchBar'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SingleProductCard } from './src/components/SingleProductCard'
+import { SignUpForm } from './src/components/SignUpForm'
 import { SpecificBusiness } from './src/components/SpecificBusiness'
 import { UserFormDetailsUI } from './src/components/UserFormDetails'
 import { UserPopover } from './src/components/UserPopover'
@@ -82,6 +85,7 @@ export {
   DeliveryDetails,
   DiscountedBusinesses,
   DriverTips,
+  FacebookLoginButton,
   Footer,
   Header,
   Help,
@@ -109,10 +113,12 @@ export {
   ProfileBusinesses,
   ProfileEdit,
   PromotionsBusinesses,
+  RegisterWelcomeContent,
   ReviewOrder,
   SearchBar,
   SidebarMenu,
   SingleProductCard,
+  SignUpForm,
   SpecificBusiness,
   UserFormDetailsUI,
   UserPopover,
