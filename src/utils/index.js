@@ -116,7 +116,8 @@ export const getTraduction = key => {
     PREPARED_IN: 'Preparation time',
     DELIVERY_DATETIME: 'Delivery datetime',
     ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook',
-    INVALID_CODE: 'Invalid verify code'
+    INVALID_CODE: 'Invalid verify code',
+    ERROR_YOU_HAVE_NOT_CART: 'Cart not found'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)
