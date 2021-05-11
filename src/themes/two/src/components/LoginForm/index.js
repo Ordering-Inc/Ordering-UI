@@ -249,15 +249,20 @@ const LoginFormUI = (props) => {
                   {t('LOGIN_WITH_EMAIL', 'Login with Email')}
                 </Tab>
               )}
-              <Tab
-                onClick={() => {
-                  setLoginWithOtpState(true)
-                  handleChangeTab('cellphone')
-                }}
-                active={loginTab === 'cellphone'}
-              >
-                {t('LOGIN_WITH_SMS', 'Login with SMS')}
-              </Tab>
+
+              {configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
+                configs?.twilio_service_enabled?.value === '1')  && (
+                  <Tab
+                    onClick={() => {
+                      setLoginWithOtpState(true)
+                      handleChangeTab('cellphone')
+                    }}
+                    active={loginTab === 'cellphone'}
+                  >
+                    {t('LOGIN_WITH_SMS', 'Login with SMS')}
+                  </Tab>
+              )}
+
             </Tabs>
           </LoginWith>
         )}
