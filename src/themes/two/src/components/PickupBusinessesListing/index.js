@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useOrder, useSession, useConfig, useEvent } from 'ordering-components'
+import { useLanguage, useOrder, useSession, useConfig, useEvent, BusinessList as BusinessListController } from 'ordering-components'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { Button } from '../../styles/Buttons'
 import { SearchBar } from '../SearchBar'
@@ -11,7 +11,6 @@ import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
 import { BusinessesMap } from '../BusinessesMap'
 import { PickupOrderTypeToggleButton } from '../PickupOrderTypeToggleButton'
-import { BusinessList as BusinessListController } from './test'
 
 import {
   PickupBusinessContainer,
