@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
+import { Confirm } from '../../../../../components/Confirm'
+import { Modal } from '../../../../../components/Modal'
+import { UpsellingPage } from '../../../../../components/UpsellingPage'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { ProductForm } from '../ProductForm'
+
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-
-import { Confirm } from '../Confirm'
-import { Modal } from '../Modal'
-import { CouponControl } from '../CouponControl'
-import { ProductForm } from '../ProductForm'
-import { UpsellingPage } from '../UpsellingPage'
-import { useWindowSize } from '../../hooks/useWindowSize'
-
 import {
   CartContainer,
   OrderBill,
   CheckoutAction,
-  CouponContainer
+  TotalProducts,
+  ProductQuantity
 } from './styles'
-import { verifyDecimals } from '../../utils'
 
 const CartUI = (props) => {
   const {
@@ -32,7 +30,6 @@ const CartUI = (props) => {
     onClickCheckout,
     isCheckout,
     isCartPending,
-    isCartPopover,
     isForceOpenCart,
     isCartOnProductsList,
     handleCartOpen
@@ -41,9 +38,7 @@ const CartUI = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
-  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
-  const [validationFields] = useValidationFields()
-  const [{ configs }] = useConfig()
+  const [{ parsePrice, parseDate }] = useUtils()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
@@ -51,7 +46,6 @@ const CartUI = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const windowSize = useWindowSize()
-  const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -62,7 +56,7 @@ const CartUI = (props) => {
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
       handleOnAccept: () => {
-        removeProduct(product, cart)
+        removeProduct(product)
         setConfirm({ ...confirm, open: false })
       }
     })
@@ -105,6 +99,7 @@ const CartUI = (props) => {
       content: t('QUESTION_DELETE_PRODUCTS', 'Are you sure that you want to delete all products?'),
       handleOnAccept: () => {
         clearCart(cart?.uuid)
+        props.handleRemoveAllProducts && props.handleRemoveAllProducts()
         setConfirm({ ...confirm, open: false })
       }
     })
@@ -121,9 +116,11 @@ const CartUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))}
+        </React.Fragment>
+      ))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
+        <BeforeComponent key={i} {...props} />
+      ))}
       <CartContainer className='cart'>
         <BusinessItemAccordion
           isCartPending={isCartPending}
@@ -155,82 +152,22 @@ const CartUI = (props) => {
               onEditProduct={handleEditProduct}
             />
           ))}
-          {cart?.valid_products && (
+          {cart?.valid_products && !isCheckout && (
             <OrderBill>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                    <td>{cart.business.tax_type === 1 ? parsePrice((cart?.subtotal + cart?.tax) || 0) : parsePrice(cart?.subtotal || 0)}</td>
-                  </tr>
-                  {cart?.discount > 0 && cart?.total >= 0 && (
-                    <tr>
-                      {cart?.discount_type === 1 ? (
-                        <td>
-                          {t('DISCOUNT', 'Discount')}
-                          <span>{`(${verifyDecimals(cart?.discount_rate, parsePrice)}%)`}</span>
-                        </td>
-                      ) : (
-                        <td>{t('DISCOUNT', 'Discount')}</td>
-                      )}
-                      <td>- {parsePrice(cart?.discount || 0)}</td>
-                    </tr>
-                  )}
-                  {
-                    cart.business.tax_type !== 1 && (
-                      <tr>
-                        <td>
-                          {t('TAX', 'Tax')}
-                          <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
-                        </td>
-                        <td>{parsePrice(cart?.tax || 0)}</td>
-                      </tr>
-                    )
-                  }
-                  {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
-                    <tr>
-                      <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                      <td>{parsePrice(cart?.delivery_price)}</td>
-                    </tr>
-                  )}
-                  {cart?.driver_tip > 0 && (
-                    <tr>
-                      <td>
-                        {t('DRIVER_TIP', 'Driver tip')}
-                        {cart?.driver_tip_rate > 0 &&
-                          parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                          !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                        (
-                          <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>
-                        )}
-                      </td>
-                      <td>{parsePrice(cart?.driver_tip)}</td>
-                    </tr>
-                  )}
-                  {cart?.service_fee > 0 && (
-                    <tr>
-                      <td>
-                        {t('SERVICE_FEE', 'Service Fee')}
-                        <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
-                      </td>
-                      <td>{parsePrice(cart?.service_fee)}</td>
-                    </tr>
-                  )}
-
-                </tbody>
-              </table>
-              {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
-                <CouponContainer>
-                  <CouponControl
-                    businessId={cart.business_id}
-                    price={cart.total}
-                  />
-                </CouponContainer>
-              )}
               <table className='total'>
                 <tbody>
                   <tr>
-                    <td>{t('TOTAL', 'Total')}</td>
+                    <td>
+                      <TotalProducts>
+                        <span>{t('TOTAL', 'Total')}</span>
+                        {cart?.products?.length && (
+                          <ProductQuantity>
+                            <span>{cart?.products?.length}</span>
+                            <span>{t('PRODUCTS', 'Products')}</span>
+                          </ProductQuantity>
+                        )}
+                      </TotalProducts>
+                    </td>
                     <td>{cart?.total >= 1 && parsePrice(cart?.total)}</td>
                   </tr>
                 </tbody>
@@ -276,7 +213,7 @@ const CartUI = (props) => {
             isCartProduct
             productCart={curProduct}
             businessSlug={cart?.business?.slug}
-            businessId={cart?.business_id}
+            businessId={curProduct?.business_id}
             categoryId={curProduct?.category_id}
             productId={curProduct?.id}
             onSave={handlerProductAction}
@@ -295,11 +232,13 @@ const CartUI = (props) => {
         )}
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
+        <AfterComponent key={i} {...props} />
+      ))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))}
+        </React.Fragment>
+      ))}
     </>
   )
 }
