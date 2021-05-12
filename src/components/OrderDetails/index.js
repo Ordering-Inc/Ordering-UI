@@ -62,6 +62,7 @@ import {
   ExclamationWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
+import { verifyDecimals } from '../../utils'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -343,46 +344,12 @@ const OrderDetailsUI = (props) => {
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>
                       <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                     </tr>
-                    <tr>
-                      <td>
-                        {order?.tax_type === 1
-                          ? t('TAX_INCLUDED', 'Tax (included)')
-                          : t('TAX', 'Tax')}
-                        <span>{`(${parseNumber(order?.tax)}%)`}</span>
-                      </td>
-                      <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
-                    </tr>
-                    {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
-                      <tr>
-                        <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                        <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
-                      </tr>
-                    )}
-                    <tr>
-                      <td>
-                        {t('DRIVER_TIP', 'Driver tip')}
-                        {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
-                          parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                          !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                        (
-                          <span>{`(${parseNumber(order?.driver_tip)}%)`}</span>
-                        )}
-                      </td>
-                      <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        {t('SERVICE_FEE', 'Service Fee')}
-                        <span>{`(${parseNumber(order?.service_fee)}%)`}</span>
-                      </td>
-                      <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
-                    </tr>
                     {(order?.summary?.discount > 0 || order?.discount > 0) && (
                       <tr>
                         {order?.offer_type === 1 ? (
                           <td>
                             {t('DISCOUNT', 'Discount')}
-                            <span>{`(${parseNumber(order?.offer_rate)}%)`}</span>
+                            <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
                           </td>
                         ) : (
                           <td>{t('DISCOUNT', 'Discount')}</td>
@@ -390,6 +357,44 @@ const OrderDetailsUI = (props) => {
                         <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
                       </tr>
                     )}
+                    {
+                      order?.tax_type !== 1 && (
+                        <tr>
+                          <td>
+                            {t('TAX', 'Tax')}
+                            <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
+                          </td>
+                          <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
+                        </tr>
+                      )
+                    }
+                    {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
+                      <tr>
+                        <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                        <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
+                      </tr>
+                    )}
+                    {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                      <tr>
+                        <td>
+                          {t('DRIVER_TIP', 'Driver tip')}
+                          {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
+                            parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
+                            !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                          (
+                            <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
+                          )}
+                        </td>
+                        <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
+                      </tr>
+                    )}
+                    <tr>
+                      <td>
+                        {t('SERVICE_FEE', 'Service Fee')}
+                        <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
+                      </td>
+                      <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
+                    </tr>
                   </tbody>
                 </table>
                 <table className='total'>

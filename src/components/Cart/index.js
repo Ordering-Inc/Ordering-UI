@@ -17,6 +17,7 @@ import {
   CheckoutAction,
   CouponContainer
 } from './styles'
+import { verifyDecimals } from '../../utils'
 
 const CartUI = (props) => {
   const {
@@ -61,7 +62,7 @@ const CartUI = (props) => {
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
       handleOnAccept: () => {
-        removeProduct(product)
+        removeProduct(product, cart)
         setConfirm({ ...confirm, open: false })
       }
     })
@@ -113,14 +114,6 @@ const CartUI = (props) => {
     setOpenUpselling(false)
     setCanOpenUpselling(false)
     handleClickCheckout()
-  }
-
-  const verifyDecimals = (value, parser) => {
-    if (value % 1 === 0) {
-      return value
-    } else {
-      return parser(value)
-    }
   }
 
   return (
@@ -283,7 +276,7 @@ const CartUI = (props) => {
             isCartProduct
             productCart={curProduct}
             businessSlug={cart?.business?.slug}
-            businessId={curProduct?.business_id}
+            businessId={cart?.business_id}
             categoryId={curProduct?.category_id}
             productId={curProduct?.id}
             onSave={handlerProductAction}
