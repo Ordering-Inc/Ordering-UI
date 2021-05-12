@@ -192,3 +192,7 @@ export const HeroContainerStyled = styled.div`
     }
   }
 `
+
+export const InnerContainerAllBusiness = styled.div`
+  width: 91%;
+`

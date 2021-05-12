@@ -25,7 +25,8 @@ import {
   WrapPickupButton,
   BusinessContainer,
   WrappperButtonGroup,
-  WrapperOrderingPass
+  WrapperOrderingPass,
+  InnerContainerAllBusiness
 } from './styles'
 import { FeaturedBusinessListingUI } from '../FeaturedBusinessListing'
 import { AllBusinessesListing } from '../AllBusinessesListing'
@@ -113,9 +114,10 @@ const PickupBusinessesListingUI = (props) => {
             onSearch={(val) => handleGoToPage(`search=${val}`)}
           />
           <BusinessContainer>
-            <InnerContainer>
+            <InnerContainerAllBusiness>
               <BusinessTypeFilter
                 handleChangeBusinessType={handleChangeCategory}
+                noAutoScroll
               />
               <WrappperButtonGroup>
                 <PickupOrderTypeToggleButton
@@ -144,7 +146,7 @@ const PickupBusinessesListingUI = (props) => {
                 twoColumnView
                 defaultShowNumber={4}
               />
-            </InnerContainer>
+            </InnerContainerAllBusiness>
             <AllBusinessesListing
               {...props}
               setIsPickupClicked={setIsPickupClicked}
@@ -154,7 +156,6 @@ const PickupBusinessesListingUI = (props) => {
           </BusinessContainer>
         </>
       ) : (
-
         <PickupBusinessContainer>
           <SearchBar
             lazyLoad
