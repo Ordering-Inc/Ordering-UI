@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.LoginForm = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactHookForm = require("react-hook-form");
@@ -17,9 +15,23 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
+var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+
+var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
+
 var _Confirm = require("../Confirm");
 
+var _SpinnerLoader = require("../SpinnerLoader");
+
+var _InputPhoneNumber = require("../InputPhoneNumber");
+
+var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
+
+var _utils = require("../../../../../utils");
+
 var _styles = require("./styles");
+
+var _Tabs = require("../../styles/Tabs");
 
 var _Inputs = require("../../styles/Inputs");
 
@@ -27,11 +39,11 @@ var _Buttons = require("../../styles/Buttons");
 
 var _FacebookLogin = require("../FacebookLogin");
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -39,9 +51,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -56,15 +66,24 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2;
+  var _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$twilio_servi, _configs$twilio_servi2, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon;
 
   var useLoginByEmail = props.useLoginByEmail,
+      useLoginByCellphone = props.useLoginByCellphone,
       handleChangeInput = props.handleChangeInput,
+      handleChangeTab = props.handleChangeTab,
       handleButtonLoginClick = props.handleButtonLoginClick,
+      handleSendVerifyCode = props.handleSendVerifyCode,
+      handleCheckPhoneCode = props.handleCheckPhoneCode,
       elementLinkToSignup = props.elementLinkToSignup,
       elementLinkToForgotPassword = props.elementLinkToForgotPassword,
       formState = props.formState,
-      isPopup = props.isPopup;
+      verifyPhoneState = props.verifyPhoneState,
+      checkPhoneCodeState = props.checkPhoneCodeState,
+      loginTab = props.loginTab,
+      isPopup = props.isPopup,
+      credentials = props.credentials;
+  var numOtpInputs = 4;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -75,9 +94,9 @@ var LoginFormUI = function LoginFormUI(props) {
       configs = _useConfig2[0].configs;
 
   var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
-      errors = _useForm.errors;
+      errors = _useForm.errors,
+      setValue = _useForm.setValue;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -91,26 +110,47 @@ var LoginFormUI = function LoginFormUI(props) {
       _useSession2 = _slicedToArray(_useSession, 2),
       login = _useSession2[1].login;
 
-  var onSubmit = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              handleButtonLoginClick();
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loginWithOtpState = _useState4[0],
+      setLoginWithOtpState = _useState4[1];
 
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      willVerifyOtpState = _useState6[0],
+      setWillVerifyOtpState = _useState6[1];
 
-    return function onSubmit() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      validPhoneFieldState = _useState8[0],
+      setValidPhoneField = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      otpState = _useState10[0],
+      setOtpState = _useState10[1];
+
+  var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
+      _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
+      otpLeftTime = _useCountdownTimer2[0],
+      _ = _useCountdownTimer2[1],
+      resetOtpLeftTime = _useCountdownTimer2[2];
+
+  var onSubmit = function onSubmit() {
+    if (loginWithOtpState) {
+      if (!validPhoneFieldState) {
+        setAlertState({
+          open: true,
+          content: [t('INVALID_PHONE_NUMBER', 'Invalid phone number')]
+        });
+        return;
+      }
+
+      setWillVerifyOtpState(true);
+    } else {
+      handleButtonLoginClick();
+    }
+  };
 
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
     var _user$session;
@@ -154,11 +194,79 @@ var LoginFormUI = function LoginFormUI(props) {
     });
   };
 
+  var parseNumber = function parseNumber(unparsedNumber) {
+    if (!unparsedNumber) return {};
+    var parsedNumber = (0, _libphonenumberJs.default)(unparsedNumber);
+    var cellphone = parsedNumber === null || parsedNumber === void 0 ? void 0 : parsedNumber.nationalNumber;
+    var countryPhoneCode = +(parsedNumber === null || parsedNumber === void 0 ? void 0 : parsedNumber.countryCallingCode);
+    return {
+      cellphone: cellphone,
+      countryPhoneCode: countryPhoneCode
+    };
+  };
+
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+    setValidPhoneField(isValid);
+    handleChangeInput({
+      target: {
+        name: 'cellphone',
+        value: number
+      }
+    });
+    setValue('cellphone', number, '');
+  };
+
+  var handleSendOtp = function handleSendOtp() {
+    if (willVerifyOtpState) {
+      var _parseNumber = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone),
+          cellphone = _parseNumber.cellphone,
+          countryPhoneCode = _parseNumber.countryPhoneCode;
+
+      resetOtpLeftTime();
+      handleSendVerifyCode({
+        cellphone: cellphone,
+        country_phone_code: countryPhoneCode
+      });
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    handleSendOtp();
+  }, [willVerifyOtpState]);
+  (0, _react.useEffect)(function () {
+    if ((otpState === null || otpState === void 0 ? void 0 : otpState.length) == numOtpInputs) {
+      var _parseNumber2 = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone),
+          cellphone = _parseNumber2.cellphone,
+          countryPhoneCode = _parseNumber2.countryPhoneCode;
+
+      handleCheckPhoneCode({
+        cellphone: cellphone,
+        country_phone_code: countryPhoneCode,
+        code: otpState
+      });
+    }
+  }, [otpState]);
+  (0, _react.useEffect)(function () {
+    var _checkPhoneCodeState$, _checkPhoneCodeState$2;
+
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) setAlertState({
+      open: true,
+      content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
+    });else resetOtpLeftTime();
+  }, [checkPhoneCodeState]);
+  (0, _react.useEffect)(function () {
+    var _verifyPhoneState$res, _verifyPhoneState$res2;
+
+    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) setAlertState({
+      open: true,
+      content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
+    });else resetOtpLeftTime();
+  }, [verifyPhoneState]);
   return /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, null, t('SIGN_IN', 'Sign in')), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, !willVerifyOtpState ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, null, t('SIGN_IN', 'Sign in')), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_ORDERING', 'Are you new to Ordering?')), elementLinkToSignup), Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
@@ -168,11 +276,34 @@ var LoginFormUI = function LoginFormUI(props) {
     handleSuccessFacebookLogin: handleSuccessFacebook
   })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43
-  })), /*#__PURE__*/_react.default.createElement(_styles.LoginWithEmail, null, /*#__PURE__*/_react.default.createElement(_styles.Line, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR_CONTINUE_WITH_EMAIL', 'or continue with email')), /*#__PURE__*/_react.default.createElement(_styles.Line, null)), useLoginByEmail && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.LoginWithEmail, null, /*#__PURE__*/_react.default.createElement(_styles.Line, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.Line, null))) : /*#__PURE__*/_react.default.createElement(_styles.FormTitle, null, t('VERIFY_PHONE', 'Verify Phone')), !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+    variant: "primary"
+  }, useLoginByEmail && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      setLoginWithOtpState(false);
+      handleChangeTab('email');
+    },
+    active: loginTab === 'email'
+  }, t('LOGIN_WITH_EMAIL', 'Login with Email')), configs && Object.keys(configs).length > 0 && ((configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1') && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      setLoginWithOtpState(true);
+      handleChangeTab('cellphone');
+    },
+    active: loginTab === 'cellphone'
+  }, t('LOGIN_WITH_SMS', 'Login with SMS')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
-    isPopup: isPopup,
-    onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), useLoginByEmail && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    isPopup: isPopup
+  }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeMidElements);
+  }), (_props$beforeMidCompo = props.beforeMidComponents) === null || _props$beforeMidCompo === void 0 ? void 0 : _props$beforeMidCompo.map(function (BeforeMidComponents, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
+      key: i
+    }, props));
+  }), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), useLoginByEmail && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "email",
     name: "email",
     "aria-label": "email",
@@ -189,7 +320,28 @@ var LoginFormUI = function LoginFormUI(props) {
       return handleChangeInput(e);
     },
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  })), loginTab === 'cellphone' && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.WrapperInputPhoneNumber, null, /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    value: credentials === null || credentials === void 0 ? void 0 : credentials.cellphone,
+    setValue: handleChangePhoneNumber,
+    handleIsValid: function handleIsValid() {}
+  })), !(verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.loading) && willVerifyOtpState && !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CountdownTimer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _utils.formatSeconds)(otpLeftTime)), /*#__PURE__*/_react.default.createElement("span", {
+    onClick: handleSendOtp
+  }, t('RESEND_AGAIN', 'Resend again'), "?")), /*#__PURE__*/_react.default.createElement(_styles.OtpWrapper, null, /*#__PURE__*/_react.default.createElement(_reactOtpInput.default, {
+    value: otpState,
+    onChange: function onChange(otp) {
+      return setOtpState(otp);
+    },
+    numInputs: numOtpInputs,
+    containerStyle: "otp-container",
+    inputStyle: "otp-input",
+    placeholder: "0000",
+    isInputNum: true,
+    shouldAutoFocus: true
+  }))), ((verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : verifyPhoneState.loading) || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+    style: {
+      height: 160
+    }
+  }), useLoginByEmail && loginTab === 'email' && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     isPopup: isPopup,
     className: "wrap-reset"
   }, elementLinkToForgotPassword)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -204,11 +356,22 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, MidElement);
+  }), (_props$afterMidCompon = props.afterMidComponents) === null || _props$afterMidCompon === void 0 ? void 0 : _props$afterMidCompon.map(function (MidComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
+      key: i
+    }, props));
+  }), !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    type: "button",
     color: "primary",
-    type: "submit",
+    onClick: onSubmit,
     disabled: formState.loading
-  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_IN', 'Sign in')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : loginWithOtpState ? t('GET_VERIFY_CODE', 'Get verify code') : t('LOGIN', 'Login')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('LOGIN', 'Login'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

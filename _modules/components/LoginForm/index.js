@@ -82,7 +82,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _credentials$cellphon, _credentials$cellphon2, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _credentials$cellphon, _credentials$cellphon2, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _props$afterComponent, _props$afterElements;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -273,26 +273,6 @@ var LoginFormUI = function LoginFormUI(props) {
       handleSendVerifyCode({
         cellphone: cellphone,
         country_phone_code: countryPhoneCode
-      }).then(function () {
-        var _verifyPhoneState$res;
-
-        if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) {
-          var _verifyPhoneState$res2;
-
-          setAlertState({
-            open: true,
-            content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
-          });
-        } else {
-          resetOtpLeftTime();
-        }
-      }).catch(function () {
-        var _verifyPhoneState$res3;
-
-        setAlertState({
-          open: true,
-          content: ((_verifyPhoneState$res3 = verifyPhoneState.result) === null || _verifyPhoneState$res3 === void 0 ? void 0 : _verifyPhoneState$res3.error) || [t('ERROR', 'Error')]
-        });
       });
     }
   };
@@ -357,12 +337,12 @@ var LoginFormUI = function LoginFormUI(props) {
     });else resetOtpLeftTime();
   }, [checkPhoneCodeState]);
   (0, _react.useEffect)(function () {
-    var _verifyPhoneState$res4, _verifyPhoneState$res5;
+    var _verifyPhoneState$res, _verifyPhoneState$res2;
 
-    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res4 = verifyPhoneState.result) !== null && _verifyPhoneState$res4 !== void 0 && _verifyPhoneState$res4.error) setAlertState({
+    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) setAlertState({
       open: true,
-      content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res5 = verifyPhoneState.result) === null || _verifyPhoneState$res5 === void 0 ? void 0 : _verifyPhoneState$res5.result) || [t('ERROR', 'Error')]
-    });
+      content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
+    });else resetOtpLeftTime();
   }, [verifyPhoneState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -485,7 +465,7 @@ var LoginFormUI = function LoginFormUI(props) {
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
-  }), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_SmsLogin.SmsLoginButton, {
+  }), useLoginByCellphone && loginTab === 'cellphone' && configs && Object.keys(configs).length > 0 && ((configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1') && /*#__PURE__*/_react.default.createElement(_SmsLogin.SmsLoginButton, {
     handleSmsLogin: function handleSmsLogin() {
       setLoginWithOtpState(true);
     }
