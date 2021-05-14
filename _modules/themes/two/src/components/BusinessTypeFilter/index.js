@@ -120,12 +120,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       height: "150px",
       loading: "lazy"
     })), t("BUSINESS_TYPE_".concat(type.name.replace(/\s/g, '_').toUpperCase()), type.name));
-  })) : /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'row'
-    }
-  }, types.map(function (type, i) {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, types.map(function (type, i) {
     return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       key: type.id,
       active: type.id === currentTypeSelected,

@@ -35,6 +35,12 @@ var _PickupOrderTypeToggleButton = require("../PickupOrderTypeToggleButton");
 
 var _styles = require("./styles");
 
+var _FeaturedBusinessListing = require("../FeaturedBusinessListing");
+
+var _AllBusinessesListing = require("../AllBusinessesListing");
+
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -48,6 +54,8 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -68,7 +76,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
-  var _document$getElementB, _businessesList$busin, _orderState$options4, _orderState$options4$, _orderState$options5;
+  var _document$getElementB, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _businessesList$busin, _orderState$options4, _orderState$options4$, _orderState$options5;
 
   var initialOrderType = props.initialOrderType,
       businessesList = props.businessesList,
@@ -77,7 +85,8 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
       getBusinesses = props.getBusinesses,
       handleChangeSearch = props.handleChangeSearch,
       handleBusinessClick = props.handleBusinessClick,
-      handleChangeBusinessType = props.handleChangeBusinessType;
+      handleChangeBusinessType = props.handleChangeBusinessType,
+      type = props.type;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -95,6 +104,11 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
 
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
+  var theme = (0, _styledComponents.useTheme)();
   var PIXELS_TO_SCROLL = ((_document$getElementB = document.getElementById('footer')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.offsetHeight) + 100 || 700;
 
   var _useState = (0, _react.useState)({
@@ -104,6 +118,11 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       modals = _useState2[0],
       setModals = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isPickupClicked = _useState4[0],
+      setIsPickupClicked = _useState4[1];
 
   var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
 
@@ -144,13 +163,76 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
     if (badScrollPosition || businessesList.loading || !hasMore) return;
     getBusinesses();
   }, [businessesList, paginationProps]);
+
+  var handleGoToPage = function handleGoToPage(search) {
+    events.emit('go_to_page', {
+      page: 'filter',
+      search: "?".concat(search)
+    });
+  };
+
+  var handleChangeCategory = function handleChangeCategory(value) {
+    handleGoToPage("category=".concat(value));
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!isPickupClicked) return;
+
+    if (type === 2) {
+      events.emit('go_to_page', {
+        page: 'filter'
+      });
+    }
+  }, [type, isPickupClicked]);
   (0, _react.useEffect)(function () {
     window.addEventListener('scroll', handleScroll);
     return function () {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
-  return /*#__PURE__*/_react.default.createElement(_styles.PickupBusinessContainer, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, type === 1 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    isCustomMode: true,
+    isEnterKeyLoad: true,
+    placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
+    onSearch: function onSearch(val) {
+      return handleGoToPage("search=".concat(val));
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainerAllBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+    handleChangeBusinessType: handleChangeCategory,
+    noAutoScroll: true
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrappperButtonGroup, null, /*#__PURE__*/_react.default.createElement(_PickupOrderTypeToggleButton.PickupOrderTypeToggleButton, {
+    initialOrderType: 1,
+    handleCustomClick: function handleCustomClick() {
+      return setIsPickupClicked(true);
+    }
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "secondary",
+    onClick: function onClick() {
+      return handleGoToPage('timeLimit=0:30');
+    }
+  }, t('UNDER_30_MIN', 'Under 30 min'))), /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderingPass, {
+    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.orderingPass,
+    onClick: function onClick() {
+      return !auth && events.emit('go_to_page', {
+        page: 'signup'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "Logotype",
+    width: "130px",
+    height: "30px",
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotypeInvert,
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement("p", null, t('$_0_DELIVERY_FEES_REDUCED_SERVICE_FEES', '$ 0 delivery fees, reduced service fees.')), /*#__PURE__*/_react.default.createElement("p", null, t('SIGN_UP_FOR_ORDERING_PASS', 'Sign Up for Ordering Pass'))), /*#__PURE__*/_react.default.createElement(_FeaturedBusinessListing.FeaturedBusinessListingUI, _extends({}, props, {
+    orderType: 1,
+    isSortByReview: true,
+    twoColumnView: true,
+    defaultShowNumber: 4
+  }))), /*#__PURE__*/_react.default.createElement(_AllBusinessesListing.AllBusinessesListing, _extends({}, props, {
+    setIsPickupClicked: setIsPickupClicked,
+    handleGoToPage: handleGoToPage,
+    handleChangeCategory: handleChangeCategory
+  })))) : /*#__PURE__*/_react.default.createElement(_styles.PickupBusinessContainer, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     isCustomMode: true,
     search: searchValue,
@@ -243,7 +325,7 @@ var PickupBusinessesListingUI = function PickupBusinessesListingUI(props) {
     onAccept: function onAccept() {
       return handleFindBusinesses();
     }
-  })));
+  }))));
 };
 
 var PickupBusinessesListing = function PickupBusinessesListing(props) {

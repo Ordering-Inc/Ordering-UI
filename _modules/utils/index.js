@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.fieldsToSort = exports.getHourMin = exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.getIconCard = void 0;
+exports.formatSeconds = exports.verifyDecimals = exports.sortInputFields = exports.fieldsToSort = exports.getHourMin = exports.bytesConverter = exports.getTraduction = exports.flatArray = exports.getGoogleMapImage = exports.capitalize = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.getIconCard = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -191,6 +191,7 @@ var getTraduction = function getTraduction(key) {
     PREPARED_IN: 'Preparation time',
     DELIVERY_DATETIME: 'Delivery datetime',
     ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook',
+    INVALID_CODE: 'Invalid verify code',
     ERROR_YOU_HAVE_NOT_CART: 'Cart not found'
   };
   return keyList[key] ? t(key, keyList[key]) : t(key);
@@ -283,5 +284,29 @@ var verifyDecimals = function verifyDecimals(value, parser) {
     return parser(value);
   }
 };
+/**
+ * Format seconds to hh:mm:ss
+ * @param {number} seconds
+ */
+
 
 exports.verifyDecimals = verifyDecimals;
+
+var formatSeconds = function formatSeconds(seconds) {
+  // Hours, minutes and seconds
+  var hrs = ~~(seconds / 3600);
+  var mins = ~~(seconds % 3600 / 60);
+  var secs = ~~seconds % 60; // Output like "1:01" or "4:03:59" or "123:03:59"
+
+  var ret = "";
+
+  if (hrs > 0) {
+    ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+  }
+
+  ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+  ret += "" + secs;
+  return ret;
+};
+
+exports.formatSeconds = formatSeconds;

@@ -13,6 +13,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _BusinessTypeFilter = require("../BusinessTypeFilter");
 
 var _Buttons = require("../../styles/Buttons");
@@ -86,13 +88,11 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var history = (0, _reactRouterDom.useHistory)();
+
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
-
-  var _useEvent = (0, _orderingComponents.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -116,9 +116,7 @@ var FilterBusinessesListingUI = function FilterBusinessesListingUI(props) {
       setIsGoBackClicked = _useState4[1];
 
   var handleGoToPage = function handleGoToPage() {
-    events.emit('go_to_page', {
-      page: 'search'
-    });
+    history.goBack();
   };
 
   var handleClickAddress = function handleClickAddress(e) {

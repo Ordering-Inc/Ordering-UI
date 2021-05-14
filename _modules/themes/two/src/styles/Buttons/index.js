@@ -19,7 +19,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Button = _styledComponents.default.button(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #CCC;\n  color: #FFF;\n\n  border: 1px solid #CCC;\n  border-radius: 30px;\n  line-height: 30px;\n  padding-left: 20px;\n  padding-right: 20px;\n  font-size: 16px;\n  cursor: pointer;\n  outline: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n\n  &:hover {\n    background: ", ";\n    color: #FFF;\n  }\n\n  &:active {\n    background: ", ";\n  }\n\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), (0, _polished.darken)(0.07, '#CCC'), function () {
+var Button = _styledComponents.default.button(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #CCC;\n  color: #FFF;\n\n  border: 1px solid #CCC;\n  border-radius: 30px;\n  line-height: 30px;\n  padding-left: 20px;\n  padding-right: 20px;\n  font-size: 16px;\n  cursor: pointer;\n  outline: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n\n  &:active {\n    background: ", ";\n  }\n\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref) {
   var bgtransparent = _ref.bgtransparent;
@@ -59,19 +59,23 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   });
 }, function (_ref8) {
   var color = _ref8.color;
-  return color === 'dark' && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #fff;\n\n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
+  return color === 'dark' && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #fff;\n\n    &:active {\n      background: ", ";\n    }\n\n    &:hover {\n      background: ", ";\n    }\n  "])), function (props) {
     return props.theme.colors.darkTextColor;
+  }, function (props) {
+    return (0, _polished.darken)(0.07, props.theme.colors.darkTextColor);
   }, function (props) {
     return (0, _polished.darken)(0.07, props.theme.colors.darkTextColor);
   });
 }, function (_ref9) {
   var color = _ref9.color;
-  return color === 'primary' && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n\n    &:active {\n      background: ", ";\n    }\n\n    ", "\n\n    ", "\n\n    ", "\n  "])), function (props) {
+  return color === 'primary' && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n\n    &:active {\n      background: ", ";\n    }\n\n    &:hover {\n      background: ", ";\n    }\n\n    ", "\n\n    ", "\n\n    ", "\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
     return props.theme.colors.primaryContrast;
   }, function (props) {
     return props.theme.colors.primary;
+  }, function (props) {
+    return (0, _polished.darken)(0.07, props.theme.colors.primary);
   }, function (props) {
     return (0, _polished.darken)(0.07, props.theme.colors.primary);
   }, function (_ref10) {
@@ -117,12 +121,16 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   });
 }, function (_ref13) {
   var color = _ref13.color;
-  return color === 'secondary' && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n\n    &:active {\n      background: ", ";\n      color: ", ";\n    }\n\n    ", "\n\n    ", "\n\n    ", "\n  "])), function (props) {
+  return color === 'secondary' && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n\n    &:active {\n      background: ", ";\n      color: ", ";\n    }\n\n    &:hover {\n      background: ", ";\n      color: ", ";\n    }\n\n    ", "\n\n    ", "\n\n    ", "\n  "])), function (props) {
     return props.theme.colors.secondary;
   }, function (props) {
     return props.theme.colors.secondaryContrast;
   }, function (props) {
     return props.theme.colors.secondary;
+  }, function (props) {
+    return (0, _polished.darken)(0.07, props.theme.colors.secondary);
+  }, function (props) {
+    return props.theme.colors.secondaryContrast;
   }, function (props) {
     return (0, _polished.darken)(0.07, props.theme.colors.secondary);
   }, function (props) {
