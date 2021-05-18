@@ -282,4 +282,4 @@ var _Buttons = require("./src/styles/Buttons");
 
 var _Inputs = require("./src/styles/Inputs");
 
-var _Select = require("./styles/Select");
+var _Select = require("./src/styles/Select");
