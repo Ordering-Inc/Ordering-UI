@@ -7,7 +7,8 @@
     ".": "./_modules/index.js",
     "./theme_two": "./_modules/themes/two/index.js",
     "./theme_three": "./_modules/themes/three/index.js",
-    "./theme_wow": "./_modules/themes/wow/index.js"
+    "./theme_wow": "./_modules/themes/wow/index.js",
+    "./theme_instacart": "./_modules/themes/instacart/index.js"
   },
   "scripts": {
     "clean": "shx rm -rf _bundles _modules",
