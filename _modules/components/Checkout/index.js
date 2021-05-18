@@ -550,7 +550,7 @@ var Checkout = function Checkout(props) {
 
   var getOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(cartId) {
-      var _result$order, _result$paymethod_dat, userCustomer, url, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart;
+      var _result$order, userCustomer, url, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart;
 
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -593,7 +593,7 @@ var Checkout = function Checkout(props) {
               break;
 
             case 16:
-              if (!(result.status === 2 && ((_result$paymethod_dat = result.paymethod_data) === null || _result$paymethod_dat === void 0 ? void 0 : _result$paymethod_dat.gateway) === 'stripe_redirect' && query.get('payment_intent'))) {
+              if (!(result.status === 2)) {
                 _context.next = 31;
                 break;
               }
