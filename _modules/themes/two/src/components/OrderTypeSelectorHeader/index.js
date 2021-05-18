@@ -45,8 +45,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
       typeSelected = props.typeSelected,
       defaultValue = props.defaultValue,
       configTypes = props.configTypes,
-      orderTypes = props.orderTypes,
-      handleChangePage = props.handleChangePage;
+      orderTypes = props.orderTypes;
   var options = orderTypes.filter(function (type) {
     return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
   });

@@ -145,7 +145,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
 
 var BusinessesListing = function BusinessesListing(props) {
   var BusinessesListingProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BusinessesListingUI
+    UIComponent: BusinessesListingUI,
+    windowPathname: window.location.pathname
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, BusinessesListingProps);

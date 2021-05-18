@@ -90,9 +90,9 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     height: 150
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoRow, null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoRow, null, Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("span", null, getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoRow, null, business && Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("span", null, getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }), Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("span", {
+  }), business && Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("span", {
     className: "bullet"
   }, (0, _utils.convertHoursToMinutes)((orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? business === null || business === void 0 ? void 0 : business.delivery_time : business === null || business === void 0 ? void 0 : business.pickup_time) || /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
