@@ -276,3 +276,7 @@ export const CountdownTimer = styled.div`
   }
 
 `
+
+export const ReCaptchaComponent = styled.div`
+  margin: 0 auto;
+`

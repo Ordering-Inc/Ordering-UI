@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
+import { ReCaptcha } from './recap'
 import {
-  LoginForm as LoginFormController,
+  // LoginForm as LoginFormController,
   useLanguage,
   useConfig,
-  useSession,
+  useSession
 } from 'ordering-components'
+import { LoginForm as LoginFormController } from './test'
 import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../SpinnerLoader'
 import { InputPhoneNumber } from '../InputPhoneNumber'
@@ -382,6 +384,15 @@ const LoginFormUI = (props) => {
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
+              {/*/!*configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_auth?.value === '1' &&*/ }
+              {/*  <ReCaptchaComponent>*/}
+              {/*    <ReCAPTCHA*/}
+              {/*      sitekey='Your client site key'*/}
+              {/*      onChange={onSubmit}*/}
+              {/*    />*/}
+              {/*  </ReCaptchaComponent>*/}
+              {/*)}*/}
+              <ReCaptcha />
               {(!willVerifyOtpState &&
                 <Button
                   color='primary'
