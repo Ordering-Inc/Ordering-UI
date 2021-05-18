@@ -30,7 +30,7 @@ import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../../../../../components/Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
-import { Cart } from '../../../../../components/Cart'
+import { Cart } from '../Cart'
 
 const PIXELS_TO_SCROLL = 300
 
