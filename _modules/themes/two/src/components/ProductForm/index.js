@@ -215,29 +215,29 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     isProductSoldout: isSoldOut || maxProductQuantity <= 0
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
-      key: ingredient.id,
+      key: ingredient === null || ingredient === void 0 ? void 0 : ingredient.id,
       ingredient: ingredient,
-      state: productCart.ingredients["id:".concat(ingredient.id)],
+      state: productCart.ingredients["id:".concat(ingredient === null || ingredient === void 0 ? void 0 : ingredient.id)],
       onChange: handleChangeIngredientState
     });
   })), product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
     return extra.options.map(function (option) {
-      var currentState = productCart.options["id:".concat(option.id)] || {};
+      var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
-        key: option.id
+        key: option === null || option === void 0 ? void 0 : option.id
       }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
         option: option,
         currentState: currentState,
-        error: errors["id:".concat(option.id)]
+        error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)]
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
-        className: isError(option.id)
+        className: isError(option === null || option === void 0 ? void 0 : option.id)
       }, option.suboptions.map(function (suboption) {
         var _productCart$options$, _productCart$options$2;
 
-        var currentState = ((_productCart$options$ = productCart.options["id:".concat(option.id)]) === null || _productCart$options$ === void 0 ? void 0 : _productCart$options$.suboptions["id:".concat(suboption.id)]) || {};
-        var balance = ((_productCart$options$2 = productCart.options["id:".concat(option.id)]) === null || _productCart$options$2 === void 0 ? void 0 : _productCart$options$2.balance) || 0;
+        var currentState = ((_productCart$options$ = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$ === void 0 ? void 0 : _productCart$options$.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
+        var balance = ((_productCart$options$2 = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$2 === void 0 ? void 0 : _productCart$options$2.balance) || 0;
         return /*#__PURE__*/_react.default.createElement(_ProductOptionSubOption.ProductOptionSubOption, {
-          key: suboption.id,
+          key: suboption === null || suboption === void 0 ? void 0 : suboption.id,
           onChange: handleChangeSuboptionState,
           balance: balance,
           option: option,
