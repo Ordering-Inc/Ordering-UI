@@ -89,6 +89,14 @@ const BusinessTypeFilterUI = (props) => {
   )
 }
 
+const styles = {
+  wrapperSkeleton: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  }
+}
+
 export const BusinessTypeFilter = (props) => {
   const businessTypeFilterProps = {
     ...props,
