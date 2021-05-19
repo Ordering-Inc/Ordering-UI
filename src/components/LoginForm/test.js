@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import parsePhoneNumber from 'libphonenumber-js'
-import { useSession, useApi, useEvent } from 'ordering-components'
+import { useSession, useApi, useEvent, useConfig } from 'ordering-components'
 
 /**
  * Component to manage login behavior without UI component
@@ -26,6 +25,8 @@ export const LoginForm = (props) => {
   const [verifyPhoneState, setVerifyPhoneState] = useState({ loading: false, result: { error: false } })
   const [checkPhoneCodeState, setCheckPhoneCodeState] = useState({ loading: false, result: { error: false } })
   const [events] = useEvent()
+  const [{ configs }] = useConfig()
+  const [reCaptchaValue, setReCaptchaValue] = useState(null)
 
   if (!useLoginByEmail && !useLoginByCellphone) {
     defaultLoginTab = 'none'
@@ -52,6 +53,21 @@ export const LoginForm = (props) => {
       const _credentials = {
         [loginTab]: values && values[loginTab] || credentials[loginTab],
         password: values && values?.password || credentials.password
+      }
+      if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_auth?.value === '1') {
+        if (reCaptchaValue === null) {
+          setFormState({
+            result: {
+              error: true,
+              result: 'The captcha field is required'
+            },
+            loading: false
+          })
+          return
+        } else {
+          _credentials.reCaptcha = reCaptchaValue
+          console.log(reCaptchaValue)
+        }
       }
       setFormState({ ...formState, loading: true })
 
@@ -124,6 +140,14 @@ export const LoginForm = (props) => {
         loading: false
       })
     }
+  }
+
+  /**
+   * Update recaptcha value
+   * @param {string} value of recaptcha
+   */
+  const setReCaptcha = (value) => {
+    setReCaptchaValue(value)
   }
 
   /**
@@ -237,6 +261,7 @@ export const LoginForm = (props) => {
           handleChangeTab={handleChangeTab}
           handleSendVerifyCode={sendVerifyPhoneCode}
           handleCheckPhoneCode={checkVerifyPhoneCode}
+          handleReCaptcha={setReCaptcha}
         />
       )}
     </>

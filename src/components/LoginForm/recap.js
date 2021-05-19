@@ -4,9 +4,9 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { useConfig } from 'ordering-components'
 
 export const ReCaptcha = (props) => {
-  // const {
-  //   UIComponent
-  // } = props
+  const {
+    handleReCaptcha
+  } = props
 
   const [{ configs }] = useConfig()
 
@@ -14,7 +14,7 @@ export const ReCaptcha = (props) => {
    * Change reCaptcha
    */
   const onChange = (value) => {
-    console.log('Captcha value:', value)
+    handleReCaptcha(value)
   }
 
   return (
@@ -22,7 +22,7 @@ export const ReCaptcha = (props) => {
       {configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_auth?.value === '1' &&
       (<ReCaptchaComponent>
           <ReCAPTCHA
-            sitekey='Your client site key'
+            sitekey='6LdBOtsaAAAAAMwRUxicO0YeupKxNUyhG2TfTMPu'
             onChange={onChange}
           />
         </ReCaptchaComponent>

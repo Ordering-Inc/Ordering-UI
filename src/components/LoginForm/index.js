@@ -48,6 +48,7 @@ const LoginFormUI = (props) => {
     useLoginByEmail,
     useLoginByCellphone,
     handleChangeInput,
+    handleReCaptcha,
     handleChangeTab,
     handleButtonLoginClick,
     handleSendVerifyCode,
@@ -384,15 +385,7 @@ const LoginFormUI = (props) => {
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
-              {/*/!*configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_auth?.value === '1' &&*/ }
-              {/*  <ReCaptchaComponent>*/}
-              {/*    <ReCAPTCHA*/}
-              {/*      sitekey='Your client site key'*/}
-              {/*      onChange={onSubmit}*/}
-              {/*    />*/}
-              {/*  </ReCaptchaComponent>*/}
-              {/*)}*/}
-              <ReCaptcha />
+              <ReCaptcha handleReCaptcha={handleReCaptcha} />
               {(!willVerifyOtpState &&
                 <Button
                   color='primary'
