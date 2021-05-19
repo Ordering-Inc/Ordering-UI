@@ -41,7 +41,7 @@ const BusinessTypeFilterUI = (props) => {
             <AutoScroll>
               <Tab className='category' style={styles.wrapperSkeleton}>
                 {[...Array(4)].map((_, i) => (
-                  <Skeleton id='skeleton' key={i} circle={true} height={150} width={150} />
+                  <Skeleton id='skeleton' key={i} circle height={150} width={150} />
                 ))}
               </Tab>
             </AutoScroll>
