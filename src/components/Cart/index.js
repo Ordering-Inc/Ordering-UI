@@ -167,7 +167,7 @@ const CartUI = (props) => {
                     <tr>
                       {cart?.discount_type === 1 ? (
                         <td>
-                          {t('DISCOUNT', 'Discount')}
+                          {t('DISCOUNT', 'Discount')}{' '}
                           <span>{`(${verifyDecimals(cart?.discount_rate, parsePrice)}%)`}</span>
                         </td>
                       ) : (
@@ -180,7 +180,7 @@ const CartUI = (props) => {
                     cart.business.tax_type !== 1 && (
                       <tr>
                         <td>
-                          {t('TAX', 'Tax')}
+                          {t('TAX', 'Tax')}{' '}
                           <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
                         </td>
                         <td>{parsePrice(cart?.tax || 0)}</td>
@@ -196,7 +196,7 @@ const CartUI = (props) => {
                   {cart?.driver_tip > 0 && (
                     <tr>
                       <td>
-                        {t('DRIVER_TIP', 'Driver tip')}
+                        {t('DRIVER_TIP', 'Driver tip')}{' '}
                         {cart?.driver_tip_rate > 0 &&
                           parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
                           !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
@@ -210,7 +210,7 @@ const CartUI = (props) => {
                   {cart?.service_fee > 0 && (
                     <tr>
                       <td>
-                        {t('SERVICE_FEE', 'Service Fee')}
+                        {t('SERVICE_FEE', 'Service Fee')}{' '}
                         <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
                       </td>
                       <td>{parsePrice(cart?.service_fee)}</td>
