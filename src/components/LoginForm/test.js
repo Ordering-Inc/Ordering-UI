@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useSession, useApi, useEvent, useConfig } from 'ordering-components'
 
@@ -27,6 +27,7 @@ export const LoginForm = (props) => {
   const [events] = useEvent()
   const [{ configs }] = useConfig()
   const [reCaptchaValue, setReCaptchaValue] = useState(null)
+  const [isReCaptchaEnable, setIsReCaptchaEnable] = useState(false)
 
   if (!useLoginByEmail && !useLoginByCellphone) {
     defaultLoginTab = 'none'
@@ -65,7 +66,7 @@ export const LoginForm = (props) => {
           })
           return
         } else {
-          _credentials.reCaptcha = reCaptchaValue
+          _credentials.verification_code = reCaptchaValue
           console.log(reCaptchaValue)
         }
       }
@@ -149,6 +150,12 @@ export const LoginForm = (props) => {
   const setReCaptcha = (value) => {
     setReCaptchaValue(value)
   }
+
+  useEffect(() => {
+    setIsReCaptchaEnable(configs &&
+      Object.keys(configs).length > 0 &&
+      configs?.security_recaptcha_auth?.value === '1')
+  }, [configs])
 
   /**
    * Update credential data
@@ -261,6 +268,7 @@ export const LoginForm = (props) => {
           handleChangeTab={handleChangeTab}
           handleSendVerifyCode={sendVerifyPhoneCode}
           handleCheckPhoneCode={checkVerifyPhoneCode}
+          enableReCaptcha={isReCaptchaEnable}
           handleReCaptcha={setReCaptcha}
         />
       )}

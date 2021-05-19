@@ -277,6 +277,6 @@ export const CountdownTimer = styled.div`
 
 `
 
-export const ReCaptchaComponent = styled.div`
-  margin: 0 auto;
+export const ReCaptchaWrapper = styled.div`
+  margin: 12px auto;
 `

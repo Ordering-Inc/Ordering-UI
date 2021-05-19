@@ -25,7 +25,8 @@ import {
   WrapperPassword,
   TogglePassword,
   OtpWrapper,
-  CountdownTimer
+  CountdownTimer,
+  ReCaptchaWrapper
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -385,7 +386,9 @@ const LoginFormUI = (props) => {
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
-              <ReCaptcha handleReCaptcha={handleReCaptcha} />
+              <ReCaptchaWrapper>
+                <ReCaptcha handleReCaptcha={handleReCaptcha} requestType='login' />
+              </ReCaptchaWrapper>
               {(!willVerifyOtpState &&
                 <Button
                   color='primary'
