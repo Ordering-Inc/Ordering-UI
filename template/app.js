@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
-import { Header } from '../src/components/Header'
+import { Header } from '../src/themes/doordash/src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -57,6 +57,7 @@ export const App = () => {
     window.location.reload()
   }
 
+  const hasLogo = true
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const isFooterPage = location.pathname === '/pages/footer'
 
@@ -105,7 +106,7 @@ export const App = () => {
       {
         loaded && (
           <>
-            <Header isHome={isHome} location={location} />
+            <Header isHome={isHome} location={location} hasLogo={hasLogo} />
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
