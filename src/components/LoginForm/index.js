@@ -61,7 +61,8 @@ const LoginFormUI = (props) => {
     checkPhoneCodeState,
     loginTab,
     isPopup,
-    credentials
+    credentials,
+    enableReCaptcha
   } = props
   const numOtpInputs = 4
   const [, t] = useLanguage()
@@ -386,9 +387,11 @@ const LoginFormUI = (props) => {
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
-              <ReCaptchaWrapper>
-                <ReCaptcha handleReCaptcha={handleReCaptcha} requestType='login' />
-              </ReCaptchaWrapper>
+              {enableReCaptcha && (
+                <ReCaptchaWrapper>
+                  <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                </ReCaptchaWrapper>
+              )}
               {(!willVerifyOtpState &&
                 <Button
                   color='primary'
