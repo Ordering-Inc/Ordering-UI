@@ -332,7 +332,7 @@ const SignUpFormUI = (props) => {
                 </>
               )
             }
-            {enableReCaptcha && (
+            {props.isRecaptchaEnable && enableReCaptcha && (
               <ReCaptchaWrapper>
                 <ReCaptcha handleReCaptcha={handleReCaptcha} />
               </ReCaptchaWrapper>

@@ -386,7 +386,7 @@ const LoginFormUI = (props) => {
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
-              {enableReCaptcha && (
+              {props.isRecaptchaEnable && enableReCaptcha && (
                 <ReCaptchaWrapper>
                   <ReCaptcha handleReCaptcha={handleReCaptcha} />
                 </ReCaptchaWrapper>
