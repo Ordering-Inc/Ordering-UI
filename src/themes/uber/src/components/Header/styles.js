@@ -4,7 +4,8 @@ import { Select } from '../../styles/Selects'
 export const Header = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;  
+  width: 100%;
+  border-bottom: 1px solid #F2F2F2;
 
   ${props => props.home ? css`
     background-color: #FFF;

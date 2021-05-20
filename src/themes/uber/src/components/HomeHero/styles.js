@@ -15,6 +15,7 @@ export const HeroContainerStyled = styled.div`
     background-size: cover;
     object-fit: cover;
     background-position: center;
+    background-attachment: fixed;
   `}
 
   @media (min-width: 821px) {
