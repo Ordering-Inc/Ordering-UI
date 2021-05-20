@@ -4,6 +4,7 @@ import { AddressList } from './src/components/AddressList'
 import { Footer } from './src/components/Footer'
 import { Header } from './src/components/Header'
 import { HomeHero } from './src/components/HomeHero'
+import { LoginForm } from './src/components/LoginForm'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MomentPopover } from './src/components/MomentPopover'
@@ -20,6 +21,7 @@ export {
   Footer,
   Header,
   HomeHero,
+  LoginForm,
   MomentContent,
   MomentControl,
   MomentPopover,

@@ -479,6 +479,7 @@ const AddressFormUI = (props) => {
           <FormActions>
             <Button
               outline
+              rectangle
               type='button'
               disabled={formState.loading}
               onClick={() => onCancel()}
@@ -487,6 +488,7 @@ const AddressFormUI = (props) => {
             </Button>
             {Object.keys(formState?.changes).length > 0 && (
               <Button
+                rectangle
                 id='submit-btn'
                 type='submit'
                 disabled={formState.loading}
