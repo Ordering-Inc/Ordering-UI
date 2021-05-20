@@ -139,6 +139,14 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
   }));
 };
 
+var styles = {
+  wrapperSkeleton: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  }
+};
+
 var BusinessTypeFilter = function BusinessTypeFilter(props) {
   var businessTypeFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessTypeFilterUI,
