@@ -38,7 +38,7 @@ export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
   const [orderStatus] = useOrder()
   const [{ configs }] = useConfig()
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
@@ -98,12 +98,12 @@ export const App = () => {
       )}
       <ListenPageChanges />
       {
-        !loaded && (
+        (!loaded || languageState.loading) && (
           <SpinnerLoader />
         )
       }
       {
-        loaded && (
+        loaded && !languageState.loading && (
           <>
             <Header isHome={isHome} location={location} />
             <NotNetworkConnectivity />
@@ -194,7 +194,7 @@ export const App = () => {
                   <Route exact path='/password/reset' component={ResetPassword} />
                   <Route exact path='/profile'>
                     {auth
-                      ? (<Profile userId={user.id} accessToken={user?.session?.access_token} useValidationFields />)
+                      ? (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/profile/orders'>

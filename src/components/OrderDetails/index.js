@@ -107,6 +107,14 @@ const OrderDetailsUI = (props) => {
       { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver'), slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
       { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver'), slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
       { key: 13, value: t('PREORDER', 'PreOrder'), slug: 'PREORDER', percentage: 0 },
+      { key: 14, value: t('ORDER_NOT_READY', 'Order not ready'), slug: 'ORDER_NOT_READY', percentage: 65 },
+      { key: 15, value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Order picked up completed by customer'), slug: 'ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
+      { key: 16, value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Order cancelled by customer'), slug: 'ORDER_STATUS_CANCELLED_BY_CUSTOMER', percentage: 0 },
+      { key: 17, value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Order not picked up by customer'), slug: 'ORDER_NOT_PICKEDUP_BY_CUSTOMER', percentage: 0 },
+      { key: 18, value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business'), slug: 'ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', percentage: 55 },
+      { key: 19, value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer'), slug: 'ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', percentage: 90 },
+      { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business'), slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', percentage: 90 },
+      { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business'), slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS', percentage: 95 }
     ]
 
     const objectStatus = orderStatus.find((o) => o.key === status)
@@ -348,7 +356,7 @@ const OrderDetailsUI = (props) => {
                       <tr>
                         {order?.offer_type === 1 ? (
                           <td>
-                            {t('DISCOUNT', 'Discount')}
+                            {t('DISCOUNT', 'Discount')}{' '}
                             <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
                           </td>
                         ) : (
@@ -361,7 +369,7 @@ const OrderDetailsUI = (props) => {
                       order?.tax_type !== 1 && (
                         <tr>
                           <td>
-                            {t('TAX', 'Tax')}
+                            {t('TAX', 'Tax')}{' '}
                             <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
                           </td>
                           <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
@@ -377,7 +385,7 @@ const OrderDetailsUI = (props) => {
                     {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
                       <tr>
                         <td>
-                          {t('DRIVER_TIP', 'Driver tip')}
+                          {t('DRIVER_TIP', 'Driver tip')}{' '}
                           {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
                             parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
                             !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
@@ -390,7 +398,7 @@ const OrderDetailsUI = (props) => {
                     )}
                     <tr>
                       <td>
-                        {t('SERVICE_FEE', 'Service Fee')}
+                        {t('SERVICE_FEE', 'Service Fee')}{' '}
                         <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
                       </td>
                       <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>

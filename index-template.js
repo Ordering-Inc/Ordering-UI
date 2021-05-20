@@ -39,6 +39,14 @@ import orderStatus10 from './template/assets/images/order/status-10.svg'
 import orderStatus11 from './template/assets/images/order/status-11.svg'
 import orderStatus12 from './template/assets/images/order/status-12.svg'
 import orderStatus13 from './template/assets/images/order/status-13.svg'
+import orderStatus14 from './template/assets/images/order/status-14.svg'
+import orderStatus15 from './template/assets/images/order/status-15.svg'
+import orderStatus16 from './template/assets/images/order/status-16.svg'
+import orderStatus17 from './template/assets/images/order/status-17.svg'
+import orderStatus18 from './template/assets/images/order/status-18.svg'
+import orderStatus19 from './template/assets/images/order/status-19.svg'
+import orderStatus20 from './template/assets/images/order/status-20.svg'
+import orderStatus21 from './template/assets/images/order/status-21.svg'
 
 import categoryFood from './template/assets/images/categories/category-food.png'
 import categoryGroceries from './template/assets/images/categories/category-groceries.png'
@@ -65,6 +73,7 @@ const configFile = {
 Sentry.init({
   environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
   dsn: 'https://ab508d2c6990411c8da375c997f9f3d6@o460529.ingest.sentry.io/5496646',
+  release: 'ordering-ui@' + process.env.npm_package_version,
   integrations: [
     new Integrations.BrowserTracing()
   ],
@@ -108,7 +117,15 @@ theme.images = {
     status10: orderStatus10,
     status11: orderStatus11,
     status12: orderStatus12,
-    status13: orderStatus13
+    status13: orderStatus13,
+    status14: orderStatus14,
+    status15: orderStatus15,
+    status16: orderStatus16,
+    status17: orderStatus17,
+    status18: orderStatus18,
+    status19: orderStatus19,
+    status20: orderStatus20,
+    status21: orderStatus21
   },
   categories: {
     food: categoryFood,
