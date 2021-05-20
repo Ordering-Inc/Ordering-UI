@@ -356,7 +356,7 @@ const OrderDetailsUI = (props) => {
                       <tr>
                         {order?.offer_type === 1 ? (
                           <td>
-                            {t('DISCOUNT', 'Discount')}
+                            {t('DISCOUNT', 'Discount')}{' '}
                             <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
                           </td>
                         ) : (
@@ -369,7 +369,7 @@ const OrderDetailsUI = (props) => {
                       order?.tax_type !== 1 && (
                         <tr>
                           <td>
-                            {t('TAX', 'Tax')}
+                            {t('TAX', 'Tax')}{' '}
                             <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
                           </td>
                           <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
@@ -385,7 +385,7 @@ const OrderDetailsUI = (props) => {
                     {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
                       <tr>
                         <td>
-                          {t('DRIVER_TIP', 'Driver tip')}
+                          {t('DRIVER_TIP', 'Driver tip')}{' '}
                           {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
                             parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
                             !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
@@ -398,7 +398,7 @@ const OrderDetailsUI = (props) => {
                     )}
                     <tr>
                       <td>
-                        {t('SERVICE_FEE', 'Service Fee')}
+                        {t('SERVICE_FEE', 'Service Fee')}{' '}
                         <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
                       </td>
                       <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
