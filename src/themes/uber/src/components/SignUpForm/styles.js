@@ -22,11 +22,9 @@ export const FormSide = styled(Side)`
   align-items: center;
   margin: auto;
 
-  @media (min-width: 769px) {
-    ${({ isPopup }) => isPopup && css`
-      margin: 20px 0px;
-    `}
-  }
+  ${({ isPopup }) => isPopup && css`
+    margin: 20px auto;
+  `}
 
   @media (min-width: 992px) {
     width: 45%;

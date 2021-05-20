@@ -133,7 +133,7 @@ const BusinessesListingUI = (props) => {
       content: [t(errKey, mapErrors[errKey])]
     })
   }
-  const toggleAccordion = (e) => {
+  const toggleAccordion = () => {
     setActiveState(setActive === '' ? 'active' : '')
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
