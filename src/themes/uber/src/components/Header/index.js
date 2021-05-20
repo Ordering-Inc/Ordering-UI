@@ -34,7 +34,7 @@ import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../../../../../components/HeaderOption'
 import { SidebarMenu } from '../../../../../components/SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
-import { Confirm } from '../../../../../components/Confirm'
+import { Confirm } from '../Confirm'
 
 export const Header = (props) => {
   const {

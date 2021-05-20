@@ -31,7 +31,7 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../../../../../components/Modal'
 import { AddressForm } from '../AddressForm'
-import { Confirm } from '../../../../../components/Confirm'
+import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../../../../utils'
 
