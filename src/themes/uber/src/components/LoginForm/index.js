@@ -12,6 +12,7 @@ import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
 import {
   LoginContainer,
+  Title,
   FormSide,
   FormInput,
   RedirectLink,
@@ -245,7 +246,7 @@ const LoginFormUI = (props) => {
       <LoginContainer isPopup={isPopup}>
         <FormSide isPopup={isPopup}>
           <img src={theme?.images?.logos?.logotype} alt='Logo login' width='200' height='66' loading='lazy' />
-
+          <Title isPopup={isPopup}>{t('WELCOME_AGAIN', 'Welcome again')}</Title>
           {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>

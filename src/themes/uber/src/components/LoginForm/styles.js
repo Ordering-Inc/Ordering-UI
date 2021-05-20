@@ -13,6 +13,18 @@ export const LoginContainer = styled.div`
     flex-direction: row;
   }
 `
+
+export const Title = styled.h1`
+  font-size: 24px;
+  margin-bottom: 0;
+  margin-top: 10px;
+  font-weight: 400;
+  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
+  @media (min-width: 768px) {
+    font-size: 32px;
+  }
+`
+
 const Side = styled.div`
   display: flex;
   width: 100%;
@@ -45,7 +57,18 @@ export const FormSide = styled(Side)`
 `
 
 export const LoginWith = styled.div`
+  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   font-size: 14px;
+  > div {
+    > div {
+      padding: 10px 0;
+      ${props => props.theme?.rtl ? css`
+        margin-left: 20px;
+      ` : css`
+        margin-right: 20px;
+      `}
+    }
+  }
 
   @media (min-width: 425px) {
     font-size: 18px;
