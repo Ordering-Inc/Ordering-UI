@@ -9,7 +9,8 @@ import {
   SignupForm as SignUpController,
   useLanguage,
   useConfig,
-  useSession
+  useSession,
+  ReCaptcha
 } from 'ordering-components'
 import {
   SignUpContainer,
@@ -22,7 +23,8 @@ import {
   SkeletonWrapper,
   SkeletonSocialWrapper,
   WrapperPassword,
-  TogglePassword
+  TogglePassword,
+  ReCaptchaWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -42,6 +44,7 @@ const SignUpFormUI = (props) => {
   const {
     handleChangeInput,
     handleButtonSignupClick,
+    handleReCaptcha,
     elementLinkToLogin,
     useChekoutFileds,
     validationFields,
@@ -53,7 +56,8 @@ const SignUpFormUI = (props) => {
     externalPhoneNumber,
     saveCustomerUser,
     fieldsNotValid,
-    signupData
+    signupData,
+    enableReCaptcha
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -328,6 +332,11 @@ const SignUpFormUI = (props) => {
                 </>
               )
             }
+            {enableReCaptcha && (
+              <ReCaptchaWrapper>
+                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+              </ReCaptchaWrapper>
+            )}
             <Button
               color='primary'
               type='submit'
