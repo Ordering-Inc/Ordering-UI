@@ -92,7 +92,7 @@ export const AddressesPopover = (props) => {
         <BeforeComponent key={i} {...props} />))
       }
       <HeaderItem ref={referenceElement} onClick={props.onClick} isHome={props.isHome}>
-        <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
+        <FaMapMarkerAlt className='addresses-icon' /> {orderState.options?.address?.address?.split(',')?.[0] || t('SELECT_AN_ADDRESS', 'Select an address')}
       </HeaderItem>
       <PopoverBody className='form_edit' ref={popperElement} style={popStyle} {...attributes.popper}>
         {open && (

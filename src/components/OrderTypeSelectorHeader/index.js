@@ -41,28 +41,28 @@ export const OrderTypeSelectorHeader = (props) => {
     orderTypes: props.orderTypes || [
       {
         value: 1,
-        content: <Option><MdcTruckDeliveryOutline /><ContentOption>{t('DELIVERY', 'Delivery')}</ContentOption></Option>,
-        showOnSelected: <Option><MdcTruckDeliveryOutline /><SelectedOption>{t('DELIVERY', 'Delivery')}</SelectedOption></Option>
+        content: <Option><MdcTruckDeliveryOutline className='order-type-icon' /><ContentOption>{t('DELIVERY', 'Delivery')}</ContentOption></Option>,
+        showOnSelected: <Option><MdcTruckDeliveryOutline className='order-type-icon' /><SelectedOption>{t('DELIVERY', 'Delivery')}</SelectedOption></Option>
       },
       {
         value: 2,
-        content: <Option><FaTruckPickup /><ContentOption>{t('PICKUP', 'Pickup')}</ContentOption></Option>,
-        showOnSelected: <Option><FaTruckPickup /><SelectedOption>{t('PICKUP', 'Pickup')}</SelectedOption></Option>
+        content: <Option><FaTruckPickup className='order-type-icon' /><ContentOption>{t('PICKUP', 'Pickup')}</ContentOption></Option>,
+        showOnSelected: <Option><FaTruckPickup className='order-type-icon' /><SelectedOption>{t('PICKUP', 'Pickup')}</SelectedOption></Option>
       },
       {
         value: 3,
-        content: <Option><AiFillShop /><ContentOption>{t('EAT_IN', 'Eat in')}</ContentOption></Option>,
-        showOnSelected: <Option><AiFillShop /><SelectedOption>{t('EAT_IN', 'Eat in')}</SelectedOption></Option>
+        content: <Option><AiFillShop className='order-type-icon' /><ContentOption>{t('EAT_IN', 'Eat in')}</ContentOption></Option>,
+        showOnSelected: <Option><AiFillShop className='order-type-icon' /><SelectedOption>{t('EAT_IN', 'Eat in')}</SelectedOption></Option>
       },
       {
         value: 4,
-        content: <Option><GiFoodTruck /><ContentOption>{t('CURBSIDE', 'Curbside')}</ContentOption></Option>,
-        showOnSelected: <Option><GiFoodTruck /><SelectedOption>{t('CURBSIDE', 'Curbside')}</SelectedOption></Option>
+        content: <Option><GiFoodTruck className='order-type-icon' /><ContentOption>{t('CURBSIDE', 'Curbside')}</ContentOption></Option>,
+        showOnSelected: <Option><GiFoodTruck className='order-type-icon' /><SelectedOption>{t('CURBSIDE', 'Curbside')}</SelectedOption></Option>
       },
       {
         value: 5,
-        content: <Option><FaCarSide /><ContentOption>{t('DRIVE_THRU', 'Drive thru')}</ContentOption></Option>,
-        showOnSelected: <Option><FaCarSide /><SelectedOption>{t('DRIVE_THRU', 'Drive thru')}</SelectedOption></Option>
+        content: <Option><FaCarSide className='orderTypeIcon' /><ContentOption>{t('DRIVE_THRU', 'Drive thru')}</ContentOption></Option>,
+        showOnSelected: <Option><FaCarSide className='orderTypeIcon' /><SelectedOption>{t('DRIVE_THRU', 'Drive thru')}</SelectedOption></Option>
       }
     ]
   }

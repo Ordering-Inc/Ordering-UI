@@ -20,8 +20,7 @@ import { AddressList } from '../../../../../components/AddressList'
 export const HomeHero = (props) => {
   const {
     onFindBusiness,
-    heroAlignment,
-    hasLogoHero
+    heroAlignment
   } = props
 
   const [{ auth }] = useSession()
@@ -64,9 +63,10 @@ export const HomeHero = (props) => {
       ))}
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper heroAlignment={heroAlignment}>
-          <LogoHeader hasLogoHero={hasLogoHero}>
-            <img alt='Logotype' src={theme?.images?.logos?.logotypeInvert} loading='lazy' />
-          </LogoHeader>
+          {theme.template?.heroHasLogo &&
+            <LogoHeader>
+              <img alt='Logotype' src={theme?.images?.logos?.logotypeInvert} loading='lazy' />
+            </LogoHeader>}
           <Title heroAlignment={heroAlignment}>{t('HERO_LINE_1', 'Restaurants and more,')}</Title>
           <Slogan heroAlignment={heroAlignment}>{t('HERO_LINE_2', 'delivered to your door')}</Slogan>
           <WrapInput onClick={handleAddressInput} withIcon>

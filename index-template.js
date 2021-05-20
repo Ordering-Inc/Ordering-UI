@@ -49,6 +49,8 @@ import categoryAll from './template/assets/images/categories/category-all.png'
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
 
+import { BsFillCaretDownFill } from '@meronex/icons/bs/'
+
 const configFile = {
   app_id: 'ordering-react',
   project: 'luisv4',
@@ -116,6 +118,9 @@ theme.images = {
     alcohol: categoryAlcohol,
     laundry: categoryLaundry,
     all: categoryAll
+  },
+  icons: {
+    SelectDown: BsFillCaretDownFill
   },
   dummies: {
     product: productDummy,

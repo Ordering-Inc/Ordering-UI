@@ -193,14 +193,14 @@ export const WrapInput = styled.label`
     padding: 9px;
     top: -8px;
     ${props => props.theme?.rtl ? css`
-      left: 0px;
+      left: 2px;
     ` : css`
-      right: 0px;
+      right: 2px;
     `}
 
     @media (min-width: 768px) {
-      padding: 12px;
-      top: -11px;
+      padding: 10px;
+      top: -9px;
     }
   }
 
@@ -233,9 +233,6 @@ export const InputSpan = styled.span`
 export const LogoHeader = styled.div`
 
   img {
-    ${props => !props.hasLogoHero && css`
-      display: none;
-    `}
     width: 150px;
     margin: 0;
     vertical-align: middle;

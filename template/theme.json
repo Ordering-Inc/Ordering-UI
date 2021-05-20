@@ -10,7 +10,7 @@
     }
   },
   "colors": {
-    "primary": "#D83520",
+    "primary": "#EB1700",
     "primaryContrast": "#FFF",
     "secundary": "#EFEFEF",
     "secundaryContrast": "#000",
@@ -18,5 +18,12 @@
     "disabledContrast": "#000",
     "backgroundPage": "#F8F8F8",
     "colorPage": "#333"
+  },
+  "template": {
+    "headerHasLogo": false,
+    "heroHasLogo": true,
+    "orderTypeIcons": false,
+    "momentIcon": false,
+    "addressesIcon": false
   }
 }

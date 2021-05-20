@@ -14,7 +14,8 @@ import {
   MenuLink,
   SubMenu,
   CustomerInfo,
-  UserEdit
+  UserEdit,
+  To
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -146,12 +147,11 @@ export const Header = (props) => {
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
             />
-            {
-              <LogoHeader hasLogo={hasLogo} onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}>
+            {hasLogo &&
+              <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}>
                 <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} loading='lazy' />
                 <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
-              </LogoHeader>
-            }
+              </LogoHeader>}
             {isShowOrderOptions && (
               <Menu className='left-header'>
                 {isCustomerMode && windowSize.width > 450 && (
@@ -182,6 +182,7 @@ export const Header = (props) => {
                       onClose={() => handleClosePopover('moment')}
                       isHome={isHome}
                     />
+                    <To>to </To>
                     <AddressesPopover
                       auth={auth}
                       addressState={orderState?.options?.address}
@@ -198,6 +199,7 @@ export const Header = (props) => {
           {onlineStatus && (
             <RightHeader>
               <Menu>
+                <LanguageSelector />
                 {
                   !auth && windowSize.width > 870 && (
                     <>
@@ -242,7 +244,6 @@ export const Header = (props) => {
                     </>
                   )
                 }
-                <LanguageSelector />
               </Menu>
             </RightHeader>
           )}

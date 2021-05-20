@@ -1,19 +1,50 @@
 import styled, { css } from 'styled-components'
-import { Select } from '../../../../../styles/Selects'
+import { Select, Selected } from '../../../../../styles/Selects'
 
 export const Header = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;  
+  width: 100%;
+
+  .order-type-icon {
+    font-size: 18px;
+    ${props => !props.theme?.template?.orderTypeIcons && css`
+      display: none;
+    `}
+  }
+
+  .moment-icon {
+    font-size: 18px;
+    ${props => !props.theme?.template?.momentIcon && css`
+      display: none;
+    `}
+  }
+
+  .addresses-icon {
+    font-size: 18px;
+    ${props => !props.theme?.template?.addressesIcon && css`
+      display: none;
+    `}
+  }
 
   ${props => props.home ? css`
+    width: 100%;
     background-color: transparent;
     position: absolute;
 
+    & .select-down {
+      font-size: 10px;
+    }
+
   & ${Select} {
-    background-color: transparent;
+    background-color: transparent !important;
     border-color: transparent;
     color: ${props => props.theme.colors.primaryContrast}
+  }
+
+  & ${Selected} {
+    font-size: 17px;
+    font-weight: 500;
   }
 
   & ${MenuLink} {
@@ -32,19 +63,14 @@ export const Header = styled.div`
 
 export const InnerHeader = styled.div`
   display: flex;
-  width: 100%;
   color: #FFF;
   justify-content: space-between;
-  width: 98%;
-  margin: 10px auto;
+  width: 92%;
+  margin: 18px auto;
 `
 
 export const LogoHeader = styled.div`
   cursor: pointer;
-  
-  ${props => !props.hasLogo && css`
-    display:none;
-  `}
 
   img {
     width: 35px;
@@ -90,6 +116,8 @@ export const RightHeader = styled.div`
 export const Menu = styled.div`
   display: flex;
   align-items: center;
+  font-size: 17px;
+  font-weight: 500;
 
   &.left-header {
     > :first-child {
@@ -128,10 +156,12 @@ export const MenuLink = styled.a`
   padding: 10px;
   color: #333;
   cursor: pointer;
+  font-weight: 500;
 
   ${({ highlight }) => highlight && css`
-    background-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.primaryContrast};
+    background-color: ${props => props.theme.colors.primaryContrast};
+    color: #ABABAB !important;
+    font-weight: 500;
     border-radius: 100px;
     padding: 5px 15px;
   `}
@@ -187,4 +217,8 @@ export const UserEdit = styled.div`
   > :first-child{
      margin-bottom: 20px;  
   }
+`
+
+export const To = styled.div`
+  font-weight: 300;
 `

@@ -32,7 +32,7 @@ export const HomePage = (props) => {
     try {
       const source = {}
       requestsState.page = source
-      const { content: { error, result } } = await ordering.pages('orderingHome').get({ cancelToken: source })
+      const { content: { error, result } } = await ordering.pages('homedoordash').get({ cancelToken: source })
       setHomeState({ ...homeState, loading: false })
       if (!error) {
         setHomeState({ ...homeState, body: result.body })

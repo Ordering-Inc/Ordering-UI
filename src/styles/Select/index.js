@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useOrder } from 'ordering-components'
-import BsChevronDown from '@meronex/icons/bs/BsChevronDown'
+
+import { useTheme } from 'styled-components'
 
 import {
   Select as SelectInput,
@@ -20,6 +21,9 @@ export const Select = (props) => {
     notAsync,
     notReload
   } = props
+
+  const theme = useTheme()
+  const SelectDown = theme.images?.icons?.SelectDown
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
   const [open, setOpen] = useState(false)
@@ -79,14 +83,14 @@ export const Select = (props) => {
       disabled={orderState.loading && !notReload}
       onMouseUp={handleSelectClick}
     >
-      {!selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>}
+      {!selectedOption && <Selected>{placeholder || ''}<Chevron><SelectDown className='select-down' /></Chevron></Selected>}
       {selectedOption && (
         <Selected>
           <Header>
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>
           <Chevron>
-            <BsChevronDown />
+            <SelectDown className='select-down' />
           </Chevron>
         </Selected>
       )}

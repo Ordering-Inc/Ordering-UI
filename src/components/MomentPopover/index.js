@@ -78,7 +78,7 @@ export const MomentPopover = (props) => {
         onClick={configs?.max_days_preorder?.value === -1 || configs?.max_days_preorder?.value === 0 ? null : props.onClick}
         isHome={props.isHome}
       >
-        <FaRegClock />
+        <FaRegClock className='moment-icon' />
         {orderStatus.options?.moment
           ? parseDate(orderStatus.options?.moment, { outputFormat: configs?.dates_moment_format?.value })
           : t('ASAP_ABBREVIATION', 'ASAP')}

@@ -34,6 +34,8 @@ import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
 
+import { useTheme } from 'styled-components'
+
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
   const [orderStatus] = useOrder()
@@ -44,6 +46,7 @@ export const App = () => {
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
+  const theme = useTheme()
 
   const closeAlert = () => {
     setAlertState({
@@ -57,7 +60,6 @@ export const App = () => {
     window.location.reload()
   }
 
-  const hasLogo = true
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const isFooterPage = location.pathname === '/pages/footer'
 
@@ -106,7 +108,7 @@ export const App = () => {
       {
         loaded && (
           <>
-            <Header isHome={isHome} location={location} hasLogo={hasLogo} />
+            <Header isHome={isHome} location={location} hasLogo={theme.template?.headerHasLogo} />
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
