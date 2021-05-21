@@ -157,6 +157,7 @@ export const BusinessListContainer = styled.div`
 export const BusinessList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 `
 
 export const WrapBusinessSort = styled.div`
