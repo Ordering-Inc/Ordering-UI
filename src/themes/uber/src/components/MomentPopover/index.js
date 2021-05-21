@@ -60,7 +60,7 @@ export const MomentPopover = (props) => {
     }
   }, [open])
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
+  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '350px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
@@ -83,7 +83,7 @@ export const MomentPopover = (props) => {
           : t('ASAP_ABBREVIATION', 'ASAP')}
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <MomentContent />
+        <MomentContent onClose={props.onClose} />
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
       {props.afterComponents?.map((AfterComponent, i) => (

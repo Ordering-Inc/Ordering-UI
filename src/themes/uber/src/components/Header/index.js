@@ -21,7 +21,7 @@ import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 import { capitalize } from '../../../../../utils'
 
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
-import { AddressesPopover } from '../../../../../components/AddressesPopover'
+import { AddressesPopover } from '../AddressesPopover'
 import { UserPopover } from '../../../../../components/UserPopover'
 import { MomentPopover } from '../MomentPopover'
 import { CartPopover } from '../../../../../components/CartPopover'

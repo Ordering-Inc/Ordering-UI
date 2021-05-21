@@ -168,6 +168,7 @@ const AddressListUI = (props) => {
         {
           (!isPopover || !addressOpen) && (
             <Button
+              rectangle
               className='add'
               color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
               onClick={() => openAddress({})}
@@ -248,7 +249,7 @@ const AddressListUI = (props) => {
               ))}
               {isEnableContinueButton && uniqueAddressesList.map(address => address.default && (
                 <ContinueButton key={address.id}>
-                  <Button color='primary' onClick={() => handleSetAddress(address)}>
+                  <Button rectangle color='primary' onClick={() => handleSetAddress(address)}>
                     {t('CONTINUE_WITH', 'Continue with')}: {address.address}
                   </Button>
                 </ContinueButton>
@@ -292,6 +293,7 @@ const AddressListUI = (props) => {
           <FormActions>
             <Button
               outline
+              rectangle
               type='button'
               disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
               onClick={() => onCancel()}
@@ -299,6 +301,7 @@ const AddressListUI = (props) => {
               {t('CANCEL', 'Cancel')}
             </Button>
             <Button
+              rectangle
               disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
               id='second-btn'
               color='primary'

@@ -36,7 +36,7 @@ export const MomentContent = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container isLoading={orderState?.loading}>
-        <MomentControl {...momentProps} />
+        <MomentControl {...momentProps} onClose={props.onClose} />
         {orderState?.loading && (
           <Layer height={momentControl?.height && `${momentControl?.height}px`}>
             {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
