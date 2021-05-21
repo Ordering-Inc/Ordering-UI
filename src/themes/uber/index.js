@@ -3,8 +3,12 @@ import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './sc/components/AddressList'
 import { BusinessController } from './src/components/BusinessController'
 import { BusinessesListing } from './src/components/BusinessesListing'
+import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
+import { Cart } from './src/components/Cart'
+import { CartContent } from './src/components/CartContent'
+import { CartPopover } from './src/components/CartPopover'
 import { Footer } from './src/components/Footer'
 import { Header } from './src/components/Header'
 import { HomeHero } from './src/components/HomeHero'
@@ -13,6 +17,7 @@ import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MomentPopover } from './src/components/MomentPopover'
 import { ProductForm } from './src/components/ProductForm'
+import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { ProductOption } from './src/components/ProductOption'
 
 import { Button } from './styles/Buttons'
@@ -26,8 +31,12 @@ export {
   AddressList,
   BusinessController,
   BusinessesListing,
+  BusinessItemAccordion,
   BusinessProductsList,
   BusinessProductsListing,
+  Cart,
+  CartContent,
+  CartPopover,
   Footer,
   Header,
   HomeHero,
@@ -36,6 +45,7 @@ export {
   MomentControl,
   MomentPopover,
   ProductForm,
+  ProductItemAccordion,
   ProductOption,
 
   // styles
