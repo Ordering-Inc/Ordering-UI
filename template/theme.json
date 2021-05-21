@@ -20,7 +20,7 @@
     "colorPage": "#333"
   },
   "template": {
-    "headerHasLogo": false,
+    "headerHasLogo": true,
     "heroHasLogo": true,
     "orderTypeIcons": false,
     "momentIcon": false,

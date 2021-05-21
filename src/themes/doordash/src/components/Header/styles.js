@@ -71,6 +71,9 @@ export const InnerHeader = styled.div`
 
 export const LogoHeader = styled.div`
   cursor: pointer;
+  ${props => props.home && css`
+    display: none;
+  `}
 
   img {
     width: 35px;

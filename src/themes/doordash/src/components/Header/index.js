@@ -26,7 +26,7 @@ import { AddressesPopover } from '../../../../../components/AddressesPopover'
 import { UserPopover } from '../../../../../components/UserPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
 import { CartPopover } from '../../../../../components/CartPopover'
-import { OrderTypeSelectorHeader } from '../../../../../components/OrderTypeSelectorHeader'
+import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { CartContent } from '../../../../../components/CartContent'
 import { Modal } from '../../../../../components/Modal'
 import { MomentContent } from '../../../../../components/MomentContent'
@@ -148,7 +148,7 @@ export const Header = (props) => {
               userCustomer={userCustomer}
             />
             {hasLogo &&
-              <LogoHeader onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}>
+              <LogoHeader home={isHome} onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}>
                 <img alt='Logotype' width='170px' height='45px' src={isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} loading='lazy' />
                 <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
               </LogoHeader>}
