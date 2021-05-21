@@ -16,7 +16,7 @@ import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../../../../../components/ProductIngredient'
-import { ProductOption } from '../../../../../components/ProductOption'
+import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../../../../../components/ProductOptionSubOption'
 import { ProductShare } from '../../../../../components/ProductShare'
 import { LoginForm } from '../LoginForm'

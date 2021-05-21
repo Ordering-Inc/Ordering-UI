@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ProductOption as ProductOptionController, useLanguage } from 'ordering-components'
+import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 
 import {
   Container,
@@ -7,16 +8,22 @@ import {
   TitleContainer,
   Title,
   Flag,
-  OptionThumbnail
+  OptionThumbnail,
+  WrapTitle,
+  WrapperOption
 } from './styles'
 
 const ProductOptionUI = (props) => {
   const {
     children,
-    option
+    option,
+    error
   } = props
 
   const [, t] = useLanguage()
+
+  const [setActive, setActiveState] = useState('active')
+  const [setRotate, setRotateState] = useState('accordion__icon rotate')
 
   let maxMin = `(${t('MIN', 'Min')}: ${option.min} / ${t('MAX', 'Max')}: ${option.max})`
   if (option.min === 1 && option.max === 1) {
@@ -27,37 +34,51 @@ const ProductOptionUI = (props) => {
     maxMin = `(${t('MIN', 'Min')}: ${option.min})`
   }
 
+  const toggleAccordion = () => {
+    setActiveState(setActive === '' ? 'active' : '')
+    setRotateState(
+      setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
+    )
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <Container>
-        <WrapHeader>
+        <WrapHeader
+          className={`accordion ${setActive} ${error && 'error'}`}
+          onClick={() => toggleAccordion()}
+        >
           <TitleContainer>
             {option.image && (
               <OptionThumbnail src={option.image} />
             )}
-            <Title><span>{option.name}</span></Title>
+            <WrapTitle>
+              <Title><span>{option.name}</span></Title>
+              <Flag error={error}>{maxMin}</Flag>
+            </WrapTitle>
           </TitleContainer>
-
-          <Flag>{maxMin}</Flag>
+          <span>
+            <IosArrowDown className={`${setRotate}`} />
+          </span>
         </WrapHeader>
-        {children}
+        <WrapperOption
+          style={{ maxHeight: !setActive && '0px' }}
+        >
+          {children}
+        </WrapperOption>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

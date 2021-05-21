@@ -26,7 +26,6 @@ export const ProductContainer = styled.div`
 export const WrapperImage = styled.div`
   width: 100%;
   position: relative;
-  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,7 +44,6 @@ export const ProductImage = styled.div`
   height: 300px;
 
   img {
-    border-radius: 16px;
     object-fit: contain;
     height: 100%;
     box-sizing: border-box;
@@ -269,7 +267,6 @@ export const SkeletonBlock = styled.div`
 `
 
 export const WrapperSubOption = styled.div`
-  border-radius: 10px;
   &.error {
     background-color: ${lighten(0.58, '#A52121')};
   }
@@ -321,10 +318,7 @@ export const IngredientHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  svg {
-    font-size: 24px;
+    border: 1px solid #e2e2e2;
   }
 
   .rotate {

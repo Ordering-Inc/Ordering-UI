@@ -14,7 +14,6 @@ import { MomentControl } from './src/components/MomentControl'
 import { MomentPopover } from './src/components/MomentPopover'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductOption } from './src/components/ProductOption'
-import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
 
 import { Button } from './styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
@@ -38,7 +37,6 @@ export {
   MomentPopover,
   ProductForm,
   ProductOption,
-  ProductOptionSubOption,
 
   // styles
   Button,
