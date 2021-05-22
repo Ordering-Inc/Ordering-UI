@@ -566,8 +566,8 @@ const CheckoutUI = (props) => {
           <CouponContainer>
             <h2>{t('QUESTION_COUPON', 'Do you have a promo code?')}</h2>
             <CouponControl
-              businessId={cart.business_id}
-              price={cart.total}
+              businessId={cart?.business_id}
+              price={cart?.total}
             />
           </CouponContainer>
         </Modal>
