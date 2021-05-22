@@ -32,7 +32,7 @@ import { MomentContent } from '../MomentContent'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../../../../../components/HeaderOption'
-import { SidebarMenu } from '../../../../../components/SidebarMenu'
+import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../Confirm'
 
@@ -48,7 +48,7 @@ export const Header = (props) => {
 
   const [events] = useEvent()
   const [, t] = useLanguage()
-  const [{ auth }] = useSession()
+  const [{ auth, user }] = useSession()
   const [orderState, { refreshOrderOptions }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
@@ -141,6 +141,7 @@ export const Header = (props) => {
         <InnerHeader>
           <LeftHeader>
             <SidebarMenu
+              user={user}
               auth={auth}
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
