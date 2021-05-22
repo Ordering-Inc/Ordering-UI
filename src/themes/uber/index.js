@@ -18,6 +18,7 @@ import { LoginForm } from './src/components/LoginForm'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MomentPopover } from './src/components/MomentPopover'
+import { OrderDetails } from './src/components/OrderDetails'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
@@ -49,6 +50,7 @@ export {
   MomentContent,
   MomentControl,
   MomentPopover,
+  OrderDetails,
   PaymentOptions,
   ProductForm,
   ProductItemAccordion,
