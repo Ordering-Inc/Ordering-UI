@@ -155,7 +155,7 @@ const CartUI = (props) => {
               onEditProduct={handleEditProduct}
             />
           ))}
-          {cart?.valid_products && (
+          {cart?.valid_products && !isCheckout && (
             <OrderBill>
               <table>
                 <tbody>

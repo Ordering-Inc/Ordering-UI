@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js/pure'
 import { useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 
-import { Checkout } from '../../../src/components/Checkout'
+import { Checkout } from '../../../src/themes/uber/src/components/Checkout'
 import { useEvent, useOrder, useLanguage } from 'ordering-components'
 
 export const CheckoutPage = (props) => {
@@ -94,6 +94,7 @@ export const CheckoutPage = (props) => {
     clearErrors: () => setErrors([]),
     useValidationFields: true,
     validationFieldsType: 'checkout',
+    propsToFetch: ['id', 'name', 'email', 'cellphone', 'delivery_time', 'pickup_time', 'address', 'paymethods', 'logo', 'location', 'slug'],
     onPlaceOrderClick: (data, paymethod, cart) => {
       if (cart?.order?.uuid) {
         events.emit('go_to_page', { page: 'order_detail', params: { orderId: cart.order?.uuid }, replace: true })
