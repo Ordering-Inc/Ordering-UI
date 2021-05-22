@@ -18,11 +18,14 @@ import { LoginForm } from './src/components/LoginForm'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MomentPopover } from './src/components/MomentPopover'
+import { MyOrders } from './src/components/MyOrders'
 import { OrderDetails } from './src/components/OrderDetails'
+import { OrdersOption } from './src/components/OrdersOption'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { ProductOption } from './src/components/ProductOption'
+import { VerticalOrdersLayout } from './src/components/VerticalOrdersLayout'
 
 import { Button } from './styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
@@ -50,11 +53,14 @@ export {
   MomentContent,
   MomentControl,
   MomentPopover,
+  MyOrders,
   OrderDetails,
+  OrdersOption,
   PaymentOptions,
   ProductForm,
   ProductItemAccordion,
   ProductOption,
+  VerticalOrdersLayout,
 
   // styles
   Button,
