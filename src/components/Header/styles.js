@@ -6,6 +6,24 @@ export const Header = styled.div`
   flex-direction: column;
   width: 100%;  
 
+  .order-type-icon {
+    ${props => !props.theme?.template?.orderTypeIcons && css`
+      display: none;
+    `}
+  }
+
+  .moment-icon {
+    ${props => !props.theme?.template?.momentIcon && css`
+      display: none;
+    `}
+  }
+
+  .addresses-icon {
+    ${props => !props.theme?.template?.addressesIcon && css`
+      display: none;
+    `}
+  }
+
   ${props => props.home ? css`
     background-color: #333;
 
@@ -41,6 +59,9 @@ export const InnerHeader = styled.div`
 export const LogoHeader = styled.div`
   cursor: pointer;
 
+  ${props => !props.theme?.template?.headerHasLogo && css`
+    display: none;
+  `}
   img {
     width: 35px;
     height: 45px;

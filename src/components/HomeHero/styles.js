@@ -48,6 +48,16 @@ export const ContentWrapper = styled.div`
       padding: 0px 20px 0px;
     `}
 
+    ${props => props.theme.template.heroAlignment === 'left' && css`
+      align-items: flex-start;
+    `}
+    ${props => props.theme.template.heroAlignment === 'center' && css`
+      align-items: center;
+    `}
+    ${props => props.theme.template.heroAlignment === 'right' && css`
+      align-items: flex-end;
+    `}
+
     button {
       width: 180px;
     }
@@ -82,8 +92,18 @@ export const Title = styled.h1`
   opacity: 1;
   font-size: 35px;
 
-  ${props => props.theme?.rtl && css`
-      text-align: right;
+  ${props => (props.theme?.rtl && !(props.theme.template.heroAlignment === 'center')) && css`
+    text-align: right;
+  `}
+
+  ${props => props.theme.template.heroAlignment === 'center' && css`
+    text-align: center;
+  `}
+  ${props => props.theme.template.heroAlignment === 'left' && css`
+    text-align: left;
+  `}
+  ${props => props.theme.template.heroAlignment === 'right' && css`
+    text-align: right;
   `}
 `
 
@@ -96,8 +116,18 @@ export const Slogan = styled.p`
   opacity: 1;
   margin-bottom: 15px;
 
-  ${props => props.theme?.rtl && css`
-      text-align: right;
+  ${props => (props.theme?.rtl && !(props.theme.template.heroAlignment === 'center')) && css`
+    text-align: right;
+  `}
+
+  ${props => props.theme.template.heroAlignment === 'center' && css`
+    text-align: center;
+  `}
+  ${props => props.theme.template.heroAlignment === 'left' && css`
+    text-align: left;
+  `}
+  ${props => props.theme.template.heroAlignment === 'right' && css`
+    text-align: right;
   `}
 
   @media (min-width: 480px) {

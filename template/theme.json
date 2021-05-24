@@ -22,8 +22,9 @@
   "template": {
     "headerHasLogo": true,
     "heroHasLogo": true,
-    "orderTypeIcons": false,
-    "momentIcon": false,
-    "addressesIcon": false
+    "heroAlignment": "left",
+    "orderTypeIcons": true,
+    "momentIcon": true,
+    "addressesIcon": true
   }
 }

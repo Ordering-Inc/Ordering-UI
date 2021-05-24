@@ -48,13 +48,13 @@ export const ContentWrapper = styled.div`
       padding: 0px 20px 0px;
     `}
 
-    ${props => props.heroAlignment === 'left' && css`
+    ${props => props.theme.template.heroAlignment === 'left' && css`
       align-items: flex-start;
     `}
-    ${props => props.heroAlignment === 'center' && css`
+    ${props => props.theme.template.heroAlignment === 'center' && css`
       align-items: center;
     `}
-    ${props => props.heroAlignment === 'right' && css`
+    ${props => props.theme.template.heroAlignment === 'right' && css`
       align-items: flex-end;
     `}
 
@@ -91,17 +91,17 @@ export const Title = styled.h1`
   font-size: 25px;
   font-weight: 500;
 
-  ${props => (props.theme?.rtl && !(props.heroAlignment === 'center')) && css`
+  ${props => (props.theme?.rtl && !(props.theme.template.heroAlignment === 'center')) && css`
     text-align: right;
   `}
 
-  ${props => props.heroAlignment === 'center' && css`
+  ${props => props.theme.template.heroAlignment === 'center' && css`
     text-align: center;
   `}
-  ${props => props.heroAlignment === 'left' && css`
+  ${props => props.theme.template.heroAlignment === 'left' && css`
     text-align: left;
   `}
-  ${props => props.heroAlignment === 'right' && css`
+  ${props => props.theme.template.heroAlignment === 'right' && css`
     text-align: right;
   `}
 
@@ -120,17 +120,17 @@ export const Slogan = styled.h1`
   opacity: 1;
   margin-bottom: 40px;
 
-  ${props => (props.theme?.rtl && !(props.heroAlignment === 'center')) && css`
+  ${props => (props.theme?.rtl && !(props.theme.template.heroAlignment === 'center')) && css`
     text-align: right;
   `}
 
-  ${props => props.heroAlignment === 'center' && css`
+  ${props => props.theme.template.heroAlignment === 'center' && css`
     text-align: center;
   `}
-  ${props => props.heroAlignment === 'left' && css`
+  ${props => props.theme.template.heroAlignment === 'left' && css`
     text-align: left;
   `}
-  ${props => props.heroAlignment === 'right' && css`
+  ${props => props.theme.template.heroAlignment === 'right' && css`
     text-align: right;
   `}
 

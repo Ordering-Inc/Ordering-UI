@@ -49,7 +49,7 @@ import categoryAll from './template/assets/images/categories/category-all.png'
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
 
-import { BsFillCaretDownFill } from '@meronex/icons/bs/'
+import { HiOutlineChevronDown } from '@meronex/icons/hi/'
 
 const configFile = {
   app_id: 'ordering-react',
@@ -120,7 +120,7 @@ theme.images = {
     all: categoryAll
   },
   icons: {
-    SelectDown: BsFillCaretDownFill
+    SelectDown: HiOutlineChevronDown
   },
   dummies: {
     product: productDummy,
