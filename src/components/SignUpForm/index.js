@@ -29,6 +29,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
+import { GoogleLoginButton } from '../GoogleLogin'
 import { AppleLogin } from '../AppleLogin'
 import { useTheme } from 'styled-components'
 
@@ -69,6 +70,13 @@ const SignUpFormUI = (props) => {
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
+  const initParams = {
+    apiKey: 'AIzaSyB-aDD3TIBR5tBCNM-lb1u0jadsaY-LIjs',
+    client_id: configs?.google_login_client_id?.value,
+    cookiepolicy: 'single_host_origin',
+    scope: 'profile'
+  }
+
   const handleSuccessFacebook = (user) => {
     login({
       user,
@@ -80,6 +88,13 @@ const SignUpFormUI = (props) => {
     login({
       user,
       token: user?.session?.access_token
+    })
+  }
+
+  const handleSuccessGoogle = (user) => {
+    login({
+      user,
+      token: user?.accessToken
     })
   }
 
@@ -359,6 +374,13 @@ const SignUpFormUI = (props) => {
                    onFailure={(data) => console.log('onFailure', data)}
                  />
                )}
+
+                  <GoogleLoginButton
+                    initParams={initParams}
+                    handleSuccessGoogleLogin={(data) => console.log('handleSuccessGoogleLogin', data)}
+                    onSuccess={handleSuccessGoogle}
+                    onFailure={(data) => console.log('onFailure', data)}
+                  />
                 </SocialButtons>
               ) : (
                 <SkeletonSocialWrapper>

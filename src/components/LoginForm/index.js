@@ -40,6 +40,7 @@ import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
+import { GoogleLoginButton } from '../GoogleLogin'
 
 const LoginFormUI = (props) => {
   const {
@@ -75,6 +76,13 @@ const LoginFormUI = (props) => {
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
 
+  const initParams = {
+    apiKey: 'AIzaSyB-aDD3TIBR5tBCNM-lb1u0jadsaY-LIjs',
+    client_id: configs?.google_login_client_id?.value,
+    cookiepolicy: 'single_host_origin',
+    scope: 'profile'
+  }
+
   const onSubmit = async () => {
     if (loginWithOtpState) {
       
@@ -105,6 +113,13 @@ const LoginFormUI = (props) => {
     login({
       user,
       token: user?.session?.access_token
+    })
+  }
+
+  const handleSuccessGoogle = (user) => {
+    login({
+      user,
+      token: user?.accessToken
     })
   }
 
@@ -437,7 +452,12 @@ const LoginFormUI = (props) => {
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               )}
-              
+                <GoogleLoginButton
+                  initParams={initParams}
+                  handleSuccessGoogleLogin={(data) => console.log('handleSuccessGoogleLogin', data)}
+                  onSuccess={handleSuccessGoogle}
+                  onFailure={(data) => console.log('onFailure', data)}
+                />
               {useLoginByCellphone && loginTab === 'cellphone' &&
                configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
                 configs?.twilio_service_enabled?.value === '1')  && (
