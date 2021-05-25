@@ -63,3 +63,11 @@ export const BusinessesTitle = styled.h1`
   font-size: 18px;
   margin: 0px 20px;
 `
+
+export const SkeletonWrapper = styled.div`
+  span{
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 30px;
+  }
+`

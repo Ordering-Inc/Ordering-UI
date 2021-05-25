@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import FiMap from '@meronex/icons/fi/FiMap'
+import Skeleton from 'react-loading-skeleton'
 import {
   BusinessContainer,
   BusinessList,
   ErrorMessage,
   WrapperSearch,
-  BusinessesTitle
+  BusinessesTitle,
+  SkeletonWrapper
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -43,7 +45,7 @@ const BusinessesListingUI = (props) => {
     handleChangeBusinessType,
     handleBusinessClick
   } = props
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
 
@@ -132,13 +134,16 @@ const BusinessesListingUI = (props) => {
         />
 
         <WrapperSearch isCustomLayout={isCustomLayout}>
-          <SearchBar
-            lazyLoad
-            search={searchValue}
-            isCustomLayout={isCustomLayout}
-            placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-            onSearch={handleChangeSearch}
-          />
+          {!languageState.loading
+            ? <SearchBar
+                lazyLoad
+                search={searchValue}
+                isCustomLayout={isCustomLayout}
+                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                onSearch={handleChangeSearch}
+              />
+            : <SkeletonWrapper><Skeleton width={200} height={41} /></SkeletonWrapper>
+          }
           {isCustomLayout && (
             <FiMap onClick={toggleMap} />
           )}

@@ -15,7 +15,7 @@ const BusinessTypeFilterUI = (props) => {
     handleChangeBusinessType
   } = props
   const { loading, error, types } = typesState
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const theme = useTheme()
   const [load, setLoad] = useState(false)
 
@@ -68,7 +68,10 @@ const BusinessTypeFilterUI = (props) => {
                       loading='lazy'
                     />
                   </ImageContainer>
-                  {t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)}
+                  {languageState.loading
+                    ? <Skeleton width={100} height={15} />
+                    : t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)
+                  }
                 </Tab>
               ))}
             </AutoScroll>
