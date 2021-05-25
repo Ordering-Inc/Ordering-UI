@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
+import Skeleton from 'react-loading-skeleton'
 import {
   ForgotPasswordForm as ForgotPasswordController,
   useLanguage
@@ -30,7 +31,7 @@ const ForgotPasswordUI = (props) => {
 
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, title: '', content: [], success: false })
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const theme = useTheme()
   const emailInput = useRef(null)
 
@@ -106,8 +107,20 @@ const ForgotPasswordUI = (props) => {
       <ForgotPasswordContainer isPopup={isPopup}>
         <HeroSide isPopup={isPopup}>
           <TitleHeroSide>
-            <h1>{t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')}</h1>
-            <p>{t('SUBTITLE_FORGOT_PASSWORD', 'Enter your email addres and we\'ll send you a link to reset your password.')}</p>
+            {languageState.loading
+              ? (
+                <>
+                  <h1><Skeleton width={240} height={45} /></h1>
+                  <p><Skeleton width={300} height={15} /></p>
+                </>
+              )
+              : (
+                <>
+                  <h1>{t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')}</h1>
+                  <p>{t('SUBTITLE_FORGOT_PASSWORD', 'Enter your email addres and we\'ll send you a link to reset your password.')}</p>
+                </>
+              )
+            }
           </TitleHeroSide>
         </HeroSide>
         <FormSide isPopup={isPopup}>
@@ -145,17 +158,25 @@ const ForgotPasswordUI = (props) => {
                 <MidComponent key={i} {...props} />))
             }
             <Button color={formState.loading || alertState.success ? 'secondary' : 'primary'} type='submit' disabled={formState.loading || alertState.success}>
-              {formState.loading
-                ? t('LOADING', 'Loading...')
-                : alertState.success && formState.result.result
-                  ? t('LINK_SEND_FORGOT_PASSWORD', 'Link Sent')
-                  : t('FRONT_RECOVER_PASSWORD', 'Recover Password')}
+              {languageState.loading
+                ? <Skeleton width={80} height={1} />
+                : formState.loading
+                  ? t('LOADING', 'Loading...')
+                  : alertState.success && formState.result.result
+                    ? t('LINK_SEND_FORGOT_PASSWORD', 'Link Sent')
+                    : t('FRONT_RECOVER_PASSWORD', 'Recover Password')
+              }
             </Button>
           </FormInput>
           {elementLinkToLogin && (
             <RedirectLink register isPopup={isPopup}>
-              <span>{t('SIGN_IN_MESSAGE', 'Do you want to sign in?')}</span>
-              {elementLinkToLogin}
+              <span>
+                {languageState.loading
+                  ? <Skeleton width={300} height={15} />
+                  : t('SIGN_IN_MESSAGE', 'Do you want to sign in?')
+                }
+              </span>
+              {!languageState.loading && elementLinkToLogin}
             </RedirectLink>
           )}
         </FormSide>

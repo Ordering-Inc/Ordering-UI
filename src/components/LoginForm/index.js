@@ -252,7 +252,7 @@ const LoginFormUI = (props) => {
       <LoginContainer isPopup={isPopup}>
         <HeroSide>
           <TitleHeroSide>
-          {languageState.loading
+            {languageState.loading
               ? (
                 <>
                   <h1><Skeleton width={250} height={45} /></h1>
