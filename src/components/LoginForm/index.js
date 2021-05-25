@@ -391,9 +391,12 @@ const LoginFormUI = (props) => {
                       />
                     : <SkeletonWrapper><Skeleton height={43} /></SkeletonWrapper>
                   }
-                  <TogglePassword onClick={togglePasswordView}>
-                    {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                  </TogglePassword>
+
+                  {!languageState.loading && (
+                    <TogglePassword onClick={togglePasswordView}>
+                      {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                    </TogglePassword>
+                  )}
                 </WrapperPassword>
               )}
               {
