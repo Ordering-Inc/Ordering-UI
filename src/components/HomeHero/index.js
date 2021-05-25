@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useSession, useOrder, useLanguage } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import Skeleton from 'react-loading-skeleton';
 import {
   HeroContainer,
   ContentWrapper,
@@ -23,7 +24,7 @@ export const HomeHero = (props) => {
 
   const [{ auth }] = useSession()
   const [orderState] = useOrder()
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const theme = useTheme()
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
@@ -61,8 +62,18 @@ export const HomeHero = (props) => {
       }
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
-          <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-          <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
+          <Title>
+            {languageState.loading
+              ? <Skeleton width={150} />
+              : t('TITLE_HOME', 'All We need is Food.')
+            }
+          </Title>
+          <Slogan>
+            {languageState.loading
+              ? <Skeleton width={300} height={30} />
+              : t('SUBTITLE_HOME', 'Let\'s start to order food now')
+            }
+          </Slogan>
           <WrapInput onClick={handleAddressInput} withIcon>
             <HiOutlineLocationMarker />
             <InputSpan
@@ -72,7 +83,10 @@ export const HomeHero = (props) => {
               placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
             />
             <div>
-              {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
+              {(languageState.loading && !orderState?.options?.address?.address)
+                ? <Skeleton width={200} height={20} />
+                : t('TYPE_AN_ADDRESS', 'Type an address')
+              }
             </div>
           </WrapInput>
           <Button
@@ -80,7 +94,10 @@ export const HomeHero = (props) => {
             name='find-business'
             onClick={handleFindBusinesses}
           >
-            {t('FIND_BUSINESSES', 'Find businesses')}
+            {languageState.loading
+              ? <Skeleton width={100} height={20} />
+              : t('FIND_BUSINESSES', 'Find businesses')
+            }
           </Button>
         </ContentWrapper>
 

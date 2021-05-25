@@ -3,6 +3,7 @@ import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } f
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
+import Skeleton from 'react-loading-skeleton';
 
 import {
   Header as HeaderContainer,
@@ -47,7 +48,7 @@ export const Header = (props) => {
   } = props
 
   const [events] = useEvent()
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [{ auth }] = useSession()
   const [orderState, { refreshOrderOptions }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
@@ -170,27 +171,31 @@ export const Header = (props) => {
                     </span>
                   </CustomerInfo>
                 )}
-                {!configState?.loading && configTypes.length > 0 && (
-                  <OrderTypeSelectorHeader configTypes={configTypes} />
-                )}
-                {onlineStatus && windowSize.width > 820 && (
-                  <>
-                    <MomentPopover
-                      open={openPopover.moment}
-                      onClick={() => handleTogglePopover('moment')}
-                      onClose={() => handleClosePopover('moment')}
-                      isHome={isHome}
-                    />
-                    <AddressesPopover
-                      auth={auth}
-                      addressState={orderState?.options?.address}
-                      open={openPopover.addresses}
-                      onClick={() => handleTogglePopover('addresses')}
-                      onClose={() => handleClosePopover('addresses')}
-                      isHome={isHome}
-                    />
-                  </>
-                )}
+                {(!configState?.loading && configTypes.length > 0 && !languageState.loading)
+                  ? <OrderTypeSelectorHeader configTypes={configTypes} />
+                  : <Skeleton width={120} height={36} />
+                }
+                {(onlineStatus && windowSize.width > 820 && !languageState.loading)
+                  ? (
+                      <>
+                        <MomentPopover
+                          open={openPopover.moment}
+                          onClick={() => handleTogglePopover('moment')}
+                          onClose={() => handleClosePopover('moment')}
+                          isHome={isHome}
+                        />
+                        <AddressesPopover
+                          auth={auth}
+                          addressState={orderState?.options?.address}
+                          open={openPopover.addresses}
+                          onClick={() => handleTogglePopover('addresses')}
+                          onClose={() => handleClosePopover('addresses')}
+                          isHome={isHome}
+                        />
+                      </>
+                    )
+                  : <Skeleton width={170} height={36} />
+                }
               </Menu>
             )}
           </LeftHeader>
@@ -200,9 +205,20 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 870 && (
                     <>
-                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', 'Sign in')}</MenuLink>
+                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>
+                        {languageState.loading
+                          ? <Skeleton width={60} height={15} />
+                          : t('SIGN_IN', 'Sign in')
+                        }
+                      </MenuLink>
+                      
                       {!isHideSignup && (
-                        <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', 'Sign up')}</MenuLink>
+                        <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>
+                          {languageState.loading
+                            ? <Skeleton width={60} height={15} />
+                            : t('SIGN_UP', 'Sign up')
+                          }
+                        </MenuLink>
                       )}
                     </>
                   )

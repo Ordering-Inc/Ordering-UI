@@ -38,7 +38,7 @@ export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
   const [orderStatus] = useOrder()
   const [{ configs }] = useConfig()
-  const [languageState, t] = useLanguage()
+  const [, t] = useLanguage()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
@@ -98,12 +98,12 @@ export const App = () => {
       )}
       <ListenPageChanges />
       {
-        (!loaded || languageState.loading) && (
+        !loaded && (
           <SpinnerLoader />
         )
       }
       {
-        loaded && !languageState.loading && (
+        loaded && (
           <>
             <Header isHome={isHome} location={location} />
             <NotNetworkConnectivity />
