@@ -87,6 +87,7 @@ var LoginFormUI = function LoginFormUI(props) {
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
       handleChangeInput = props.handleChangeInput,
+      handleReCaptcha = props.handleReCaptcha,
       handleChangeTab = props.handleChangeTab,
       handleButtonLoginClick = props.handleButtonLoginClick,
       handleSendVerifyCode = props.handleSendVerifyCode,
@@ -98,7 +99,8 @@ var LoginFormUI = function LoginFormUI(props) {
       checkPhoneCodeState = props.checkPhoneCodeState,
       loginTab = props.loginTab,
       isPopup = props.isPopup,
-      credentials = props.credentials;
+      credentials = props.credentials,
+      enableReCaptcha = props.enableReCaptcha;
   var numOtpInputs = 4;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -441,7 +443,9 @@ var LoginFormUI = function LoginFormUI(props) {
     }, props));
   }), !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
+    handleReCaptcha: handleReCaptcha
+  })), !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: formMethods.handleSubmit(onSubmit),
     disabled: formState.loading

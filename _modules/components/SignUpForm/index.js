@@ -80,6 +80,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
+      handleReCaptcha = props.handleReCaptcha,
       elementLinkToLogin = props.elementLinkToLogin,
       useChekoutFileds = props.useChekoutFileds,
       validationFields = props.validationFields,
@@ -91,7 +92,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       externalPhoneNumber = props.externalPhoneNumber,
       saveCustomerUser = props.saveCustomerUser,
       fieldsNotValid = props.fieldsNotValid,
-      signupData = props.signupData;
+      signupData = props.signupData,
+      enableReCaptcha = props.enableReCaptcha;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -385,6 +387,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 43
     }));
+  })), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
+    handleReCaptcha: handleReCaptcha
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
