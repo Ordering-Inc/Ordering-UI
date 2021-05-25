@@ -352,13 +352,21 @@ const SignUpFormUI = (props) => {
               type='submit'
               disabled={formState.loading || validationFields?.loading}
             >
-              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
+              {languageState.loading
+                ? <Skeleton width={80} height={15} />
+                : formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')
+              }
             </Button>
           </FormInput>
           {elementLinkToLogin && (
             <RedirectLink register isPopup={isPopup}>
-              <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')}</span>
-              {elementLinkToLogin}
+              <span>
+                {languageState.loading
+                  ? <Skeleton width={300} height={15} />
+                  : t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')
+                }
+              </span>
+              {!languageState.loading && elementLinkToLogin}
             </RedirectLink>
           )}
           {!externalPhoneNumber && (
