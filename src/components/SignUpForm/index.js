@@ -337,13 +337,9 @@ const SignUpFormUI = (props) => {
                     <MidComponent key={i} {...props} />))}
                 </>
               ) : (
-                <>
-                  {[...Array(5)].map((_, i) => (
-                    <SkeletonWrapper key={i}>
-                      <Skeleton height={43} />
-                    </SkeletonWrapper>
-                  ))}
-                </>
+                <SkeletonWrapper>
+                  <Skeleton height={43} count={7} />
+                </SkeletonWrapper>
               )
             }
             {props.isRecaptchaEnable && enableReCaptcha && (
