@@ -20,6 +20,7 @@ import {
   TitleHeroSide,
   SocialButtons,
   LoginWith,
+  SkeletonWrapper,
   SkeletonSocialWrapper,
   WrapperPassword,
   TogglePassword,
@@ -64,7 +65,7 @@ const LoginFormUI = (props) => {
     enableReCaptcha
   } = props
   const numOtpInputs = 4
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -251,14 +252,26 @@ const LoginFormUI = (props) => {
       <LoginContainer isPopup={isPopup}>
         <HeroSide>
           <TitleHeroSide>
-            <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
-            {(loginWithOtpState)
-              ? willVerifyOtpState
-                ? <p>
-                    {`${t('SUBTITLE_ENTER_OTP', 'Please enter the verification code we sent to your mobile')} **${credentials?.cellphone?.substring(credentials?.cellphone?.length - 2)}`}
-                  </p>
-                : <p>{t('SUBTITLE_REQUEST_OTP', 'Enter your cellphone to get verify code.')}</p>
-              : <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
+          {languageState.loading
+              ? (
+                <>
+                  <h1><Skeleton width={250} height={45} /></h1>
+                  <p><Skeleton width={400} height={15} /></p>
+                </>
+              )
+              : (
+                <>
+                  <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
+                  {(loginWithOtpState)
+                    ? willVerifyOtpState
+                      ? <p>
+                          {`${t('SUBTITLE_ENTER_OTP', 'Please enter the verification code we sent to your mobile')} **${credentials?.cellphone?.substring(credentials?.cellphone?.length - 2)}`}
+                        </p>
+                      : <p>{t('SUBTITLE_REQUEST_OTP', 'Enter your cellphone to get verify code.')}</p>
+                    : <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
+                  }
+                </>
+              )
             }
           </TitleHeroSide>
         </HeroSide>
@@ -273,7 +286,10 @@ const LoginFormUI = (props) => {
                     onClick={() => handleChangeTab('email')}
                     active={loginTab === 'email'}
                   >
-                    {t('LOGIN_WITH_EMAIL', 'Login with Email')}
+                    {languageState.loading
+                      ? <Skeleton width={200} height={15} />
+                      : t('LOGIN_WITH_EMAIL', 'Login with Email')
+                    }
                   </Tab>
                 )}
                 {useLoginByCellphone && (
@@ -281,7 +297,10 @@ const LoginFormUI = (props) => {
                     onClick={() => handleChangeTab('cellphone')}
                     active={loginTab === 'cellphone'}
                   >
-                    {t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}
+                    {languageState.loading
+                      ? <Skeleton width={200} height={15} />
+                      : t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')
+                    }
                   </Tab>
                 )}
               </Tabs>
@@ -304,23 +323,27 @@ const LoginFormUI = (props) => {
                 <BeforeMidComponents key={i} {...props} />))
               }
               {useLoginByEmail && loginTab === 'email' && (
-                <Input
-                  type='email'
-                  name='email'
-                  aria-label='email'
-                  placeholder={t('EMAIL', 'Email')}
-                  ref={(e) => emailInput.current = e}
-                  onChange={handleChangeInputEmail}
-                  autoComplete='off'
-                />
+                !languageState.loading
+                  ? <Input
+                      type='email'
+                      name='email'
+                      aria-label='email'
+                      placeholder={t('EMAIL', 'Email')}
+                      ref={(e) => emailInput.current = e}
+                      onChange={handleChangeInputEmail}
+                      autoComplete='off'
+                    />
+                  : <SkeletonWrapper><Skeleton height={43} /></SkeletonWrapper>
               )}
               
               {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
-                <InputPhoneNumber
-                  value={credentials?.cellphone}
-                  setValue={handleChangePhoneNumber}
-                  handleIsValid={() => {}}
-                />
+                !languageState.loading
+                  ? <InputPhoneNumber
+                      value={credentials?.cellphone}
+                      setValue={handleChangePhoneNumber}
+                      handleIsValid={() => {}}
+                    />
+                  : <SkeletonWrapper><Skeleton height={43} /></SkeletonWrapper>
               )}
 
               {(!verifyPhoneState?.loading && willVerifyOtpState && !checkPhoneCodeState?.loading) && (
@@ -355,16 +378,19 @@ const LoginFormUI = (props) => {
 
               {!loginWithOtpState && (
                 <WrapperPassword>
-                  <Input
-                    type={!passwordSee ? 'password' : 'text'}
-                    name='password'
-                    aria-label='password'
-                    placeholder={t('PASSWORD', 'Password')}
-                    ref={formMethods.register({
-                      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                    })}
-                    onChange={(e) => handleChangeInput(e)}
-                  />
+                  {!languageState.loading
+                    ? <Input
+                        type={!passwordSee ? 'password' : 'text'}
+                        name='password'
+                        aria-label='password'
+                        placeholder={t('PASSWORD', 'Password')}
+                        ref={formMethods.register({
+                          required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                        })}
+                        onChange={(e) => handleChangeInput(e)}
+                      />
+                    : <SkeletonWrapper><Skeleton height={43} /></SkeletonWrapper>
+                  }
                   <TogglePassword onClick={togglePasswordView}>
                     {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                   </TogglePassword>
@@ -382,8 +408,13 @@ const LoginFormUI = (props) => {
               }
               {!loginWithOtpState && (
                 <RedirectLink isPopup={isPopup}>
-                  <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
-                  {elementLinkToForgotPassword}
+                  <span>
+                    {languageState.loading
+                      ? <Skeleton width={300} height={15} />
+                      : t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')
+                    }
+                  </span>
+                  {!languageState.loading && elementLinkToForgotPassword}
                 </RedirectLink>
               )}
               {props.isRecaptchaEnable && enableReCaptcha && (
@@ -397,12 +428,14 @@ const LoginFormUI = (props) => {
                   onClick={formMethods.handleSubmit(onSubmit)}
                   disabled={formState.loading}
                 >
-                {formState.loading
-                  ? `${t('LOADING', 'Loading')}...`
-                  : loginWithOtpState
-                    ? t('GET_VERIFY_CODE', 'Get verify code')
-                    : t('LOGIN', 'Login')
-                }
+                  {languageState.loading
+                    ? <Skeleton width={80} height={15} />
+                    : formState.loading
+                      ? `${t('LOADING', 'Loading')}...`
+                      : loginWithOtpState
+                        ? t('GET_VERIFY_CODE', 'Get verify code')
+                        : t('LOGIN', 'Login')
+                  }
                 </Button>
               )}
               {(loginWithOtpState && !willVerifyOtpState) && (
@@ -422,13 +455,18 @@ const LoginFormUI = (props) => {
 
           {(elementLinkToSignup && !loginWithOtpState) && (
             <RedirectLink register isPopup={isPopup}>
-              <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
-              {elementLinkToSignup}
+              <span>
+                {languageState.loading
+                  ? <Skeleton width={300} height={15} />
+                  : t('NEW_ON_PLATFORM', 'New on Ordering?')
+                }
+              </span>
+              {!languageState.loading && elementLinkToSignup}
             </RedirectLink>
           )}
 
           {(!props.isDisableButtons && !loginWithOtpState) && (
-            Object.keys(configs).length > 0 ? (
+            (Object.keys(configs).length > 0 && !languageState.loading) ? (
               <SocialButtons isPopup={isPopup}>
                 {(configs?.facebook_login?.value === 'true' ||
                 configs?.facebook_login?.value === '1') &&
@@ -457,8 +495,7 @@ const LoginFormUI = (props) => {
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
-                <Skeleton height={43} />
-                <Skeleton height={43} />
+                <Skeleton height={43} count={2} />
                 {useLoginByCellphone && loginTab === 'cellphone' && (
                   <Skeleton height={43} />
                 )}

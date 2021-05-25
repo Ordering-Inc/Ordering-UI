@@ -184,6 +184,13 @@ export const SocialButtons = styled.div`
   }
 `
 
+export const SkeletonWrapper = styled.div`
+  span{
+    margin: 10px 0;
+    border-radius: 30px;
+  }
+`
+
 export const SkeletonSocialWrapper = styled.div`
   width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
   span{
