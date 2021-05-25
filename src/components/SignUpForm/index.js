@@ -59,7 +59,7 @@ const SignUpFormUI = (props) => {
     signupData,
     enableReCaptcha
   } = props
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -229,8 +229,22 @@ const SignUpFormUI = (props) => {
       <SignUpContainer isPopup={isPopup}>
         <HeroSide>
           <TitleHeroSide>
-            <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
-            <p>{t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}</p>
+            {languageState.loading
+              ? (
+                <>
+                  <h1><Skeleton width={250} height={40} /></h1>
+                  <p><Skeleton width={400} height={15} /></p>
+                </>
+              )
+              : (
+                <>
+                  <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
+                  <p>
+                    {t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}
+                  </p>
+                </>
+              )
+            }
           </TitleHeroSide>
         </HeroSide>
         <FormSide isPopup={isPopup}>
@@ -248,7 +262,7 @@ const SignUpFormUI = (props) => {
             {props.beforeMidComponents?.map((BeforeMidComponents, i) => (
               <BeforeMidComponents key={i} {...props} />))}
             {
-              !(useChekoutFileds && validationFields?.loading) ? (
+              !(useChekoutFileds && validationFields?.loading || languageState.loading) ? (
                 <>
                   {validationFields?.fields?.checkout &&
                     sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
@@ -353,7 +367,7 @@ const SignUpFormUI = (props) => {
           )}
           {!externalPhoneNumber && (
             <>
-              {Object.keys(configs).length > 0 ? (
+              {(!languageState.loading  && Object.keys(configs).length > 0) ? (
                 <SocialButtons isPopup={isPopup}>
                   {configs?.facebook_login?.value && configs?.facebook_id?.value && (
                     <FacebookLoginButton
@@ -371,7 +385,7 @@ const SignUpFormUI = (props) => {
                 </SocialButtons>
               ) : (
                 <SkeletonSocialWrapper>
-                  <Skeleton height={43} />
+                  <Skeleton height={43} count={2} />
                 </SkeletonSocialWrapper>
               )}
             </>

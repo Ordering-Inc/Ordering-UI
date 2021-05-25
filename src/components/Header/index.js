@@ -194,7 +194,7 @@ export const Header = (props) => {
                         />
                       </>
                     )
-                  : <Skeleton width={170} height={36} />
+                  : windowSize.width > 820 ? <Skeleton width={170} height={36} /> : null
                 }
               </Menu>
             )}
