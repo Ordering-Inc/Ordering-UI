@@ -71,7 +71,6 @@ const SignUpFormUI = (props) => {
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   const initParams = {
-    apiKey: 'AIzaSyB-aDD3TIBR5tBCNM-lb1u0jadsaY-LIjs',
     client_id: configs?.google_login_client_id?.value,
     cookiepolicy: 'single_host_origin',
     scope: 'profile'
@@ -94,7 +93,7 @@ const SignUpFormUI = (props) => {
   const handleSuccessGoogle = (user) => {
     login({
       user,
-      token: user?.accessToken
+      token: user?.session?.access_token
     })
   }
 
@@ -377,8 +376,7 @@ const SignUpFormUI = (props) => {
 
                   <GoogleLoginButton
                     initParams={initParams}
-                    handleSuccessGoogleLogin={(data) => console.log('handleSuccessGoogleLogin', data)}
-                    onSuccess={handleSuccessGoogle}
+                    handleSuccessGoogleLogin={handleSuccessGoogle}
                     onFailure={(data) => console.log('onFailure', data)}
                   />
                 </SocialButtons>

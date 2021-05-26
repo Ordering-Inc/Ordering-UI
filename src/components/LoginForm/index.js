@@ -77,7 +77,6 @@ const LoginFormUI = (props) => {
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
 
   const initParams = {
-    apiKey: 'AIzaSyB-aDD3TIBR5tBCNM-lb1u0jadsaY-LIjs',
     client_id: configs?.google_login_client_id?.value,
     cookiepolicy: 'single_host_origin',
     scope: 'profile'
@@ -119,7 +118,7 @@ const LoginFormUI = (props) => {
   const handleSuccessGoogle = (user) => {
     login({
       user,
-      token: user?.accessToken
+      token: user?.session?.access_token
     })
   }
 
@@ -454,8 +453,7 @@ const LoginFormUI = (props) => {
               )}
                 <GoogleLoginButton
                   initParams={initParams}
-                  handleSuccessGoogleLogin={(data) => console.log('handleSuccessGoogleLogin', data)}
-                  onSuccess={handleSuccessGoogle}
+                  handleSuccessGoogleLogin={handleSuccessGoogle}
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               {useLoginByCellphone && loginTab === 'cellphone' &&
