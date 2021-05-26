@@ -3,7 +3,6 @@ import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } f
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
-import Skeleton from 'react-loading-skeleton';
 
 import {
   Header as HeaderContainer,
@@ -171,31 +170,27 @@ export const Header = (props) => {
                     </span>
                   </CustomerInfo>
                 )}
-                {(!configState?.loading && configTypes.length > 0 && !languageState.loading)
-                  ? <OrderTypeSelectorHeader configTypes={configTypes} />
-                  : <Skeleton width={120} height={36} />
-                }
-                {(onlineStatus && windowSize.width > 820 && !languageState.loading)
-                  ? (
-                      <>
-                        <MomentPopover
-                          open={openPopover.moment}
-                          onClick={() => handleTogglePopover('moment')}
-                          onClose={() => handleClosePopover('moment')}
-                          isHome={isHome}
-                        />
-                        <AddressesPopover
-                          auth={auth}
-                          addressState={orderState?.options?.address}
-                          open={openPopover.addresses}
-                          onClick={() => handleTogglePopover('addresses')}
-                          onClose={() => handleClosePopover('addresses')}
-                          isHome={isHome}
-                        />
-                      </>
-                    )
-                  : windowSize.width > 820 ? <Skeleton width={170} height={36} /> : null
-                }
+                {(!configState?.loading && configTypes.length > 0 && !languageState.loading) && (
+                  <OrderTypeSelectorHeader configTypes={configTypes} />
+                )}
+                {(onlineStatus && windowSize.width > 820 && !languageState.loading) && (
+                  <>
+                    <MomentPopover
+                      open={openPopover.moment}
+                      onClick={() => handleTogglePopover('moment')}
+                      onClose={() => handleClosePopover('moment')}
+                      isHome={isHome}
+                    />
+                    <AddressesPopover
+                      auth={auth}
+                      addressState={orderState?.options?.address}
+                      open={openPopover.addresses}
+                      onClick={() => handleTogglePopover('addresses')}
+                      onClose={() => handleClosePopover('addresses')}
+                      isHome={isHome}
+                    />
+                  </>
+                )}
               </Menu>
             )}
           </LeftHeader>
@@ -206,17 +201,17 @@ export const Header = (props) => {
                   !auth && windowSize.width > 870 && (
                     <>
                       <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>
-                        {languageState.loading
-                          ? <Skeleton width={60} height={15} />
-                          : t('SIGN_IN', 'Sign in')
+                        {!languageState.loading
+                          ? t('SIGN_IN', 'Sign in')
+                          : <span>&nbsp;</span>
                         }
                       </MenuLink>
                       
                       {!isHideSignup && (
                         <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>
-                          {languageState.loading
-                            ? <Skeleton width={60} height={15} />
-                            : t('SIGN_UP', 'Sign up')
+                          {!languageState.loading
+                            ? t('SIGN_UP', 'Sign up')
+                            : <span>&nbsp;</span>
                           }
                         </MenuLink>
                       )}

@@ -68,9 +68,9 @@ const BusinessTypeFilterUI = (props) => {
                       loading='lazy'
                     />
                   </ImageContainer>
-                  {languageState.loading
-                    ? <Skeleton width={100} height={15} />
-                    : t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)
+                  {!languageState.loading
+                    ? t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)
+                    : <span>&nbsp;</span>
                   }
                 </Tab>
               ))}

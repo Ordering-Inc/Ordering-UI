@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useSession, useOrder, useLanguage } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
-import Skeleton from 'react-loading-skeleton'
 import {
   HeroContainer,
   ContentWrapper,
@@ -63,16 +62,10 @@ export const HomeHero = (props) => {
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
           <Title>
-            {languageState.loading
-              ? <Skeleton width={150} />
-              : t('TITLE_HOME', 'All We need is Food.')
-            }
+            {!languageState.loading && t('TITLE_HOME', 'All We need is Food.')}
           </Title>
           <Slogan>
-            {languageState.loading
-              ? <Skeleton width={300} height={30} />
-              : t('SUBTITLE_HOME', 'Let\'s start to order food now')
-            }
+            {!languageState.loading && t('SUBTITLE_HOME', 'Let\'s start to order food now')}
           </Slogan>
           <WrapInput onClick={handleAddressInput} withIcon>
             <HiOutlineLocationMarker />
@@ -83,9 +76,9 @@ export const HomeHero = (props) => {
               placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
             />
             <div>
-              {(languageState.loading && !orderState?.options?.address?.address)
-                ? <Skeleton width={200} height={20} />
-                : t('TYPE_AN_ADDRESS', 'Type an address')
+              {(!languageState.loading && !orderState?.options?.address?.address)
+                ? t('TYPE_AN_ADDRESS', 'Type an address')
+                : <span>&nbsp;</span> 
               }
             </div>
           </WrapInput>
@@ -94,9 +87,9 @@ export const HomeHero = (props) => {
             name='find-business'
             onClick={handleFindBusinesses}
           >
-            {languageState.loading
-              ? <Skeleton width={100} height={20} />
-              : t('FIND_BUSINESSES', 'Find businesses')
+            {!languageState.loading
+              ? t('FIND_BUSINESSES', 'Find businesses')
+              : <span>&nbsp;</span>
             }
           </Button>
         </ContentWrapper>

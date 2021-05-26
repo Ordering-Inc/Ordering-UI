@@ -252,14 +252,8 @@ const LoginFormUI = (props) => {
       <LoginContainer isPopup={isPopup}>
         <HeroSide>
           <TitleHeroSide>
-            {languageState.loading
+            {!languageState.loading
               ? (
-                <>
-                  <h1><Skeleton width={250} height={45} /></h1>
-                  <p><Skeleton width={400} height={15} /></p>
-                </>
-              )
-              : (
                 <>
                   <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
                   {(loginWithOtpState)
@@ -272,6 +266,7 @@ const LoginFormUI = (props) => {
                   }
                 </>
               )
+              : <span>&nbsp;</span>
             }
           </TitleHeroSide>
         </HeroSide>
@@ -286,9 +281,9 @@ const LoginFormUI = (props) => {
                     onClick={() => handleChangeTab('email')}
                     active={loginTab === 'email'}
                   >
-                    {languageState.loading
-                      ? <Skeleton width={200} height={15} />
-                      : t('LOGIN_WITH_EMAIL', 'Login with Email')
+                    {!languageState.loading
+                      ? t('LOGIN_WITH_EMAIL', 'Login with Email')
+                      : <span>&nbsp;</span>
                     }
                   </Tab>
                 )}
@@ -297,9 +292,9 @@ const LoginFormUI = (props) => {
                     onClick={() => handleChangeTab('cellphone')}
                     active={loginTab === 'cellphone'}
                   >
-                    {languageState.loading
-                      ? <Skeleton width={200} height={15} />
-                      : t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')
+                    {!languageState.loading
+                      ? t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')
+                      : <span>&nbsp;</span>
                     }
                   </Tab>
                 )}
@@ -412,9 +407,9 @@ const LoginFormUI = (props) => {
               {!loginWithOtpState && (
                 <RedirectLink isPopup={isPopup}>
                   <span>
-                    {languageState.loading
-                      ? <Skeleton width={300} height={15} />
-                      : t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')
+                    {!languageState.loading
+                      ? t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')
+                      : <span>&nbsp;</span>
                     }
                   </span>
                   {!languageState.loading && elementLinkToForgotPassword}
@@ -431,13 +426,13 @@ const LoginFormUI = (props) => {
                   onClick={formMethods.handleSubmit(onSubmit)}
                   disabled={formState.loading}
                 >
-                  {languageState.loading
-                    ? <Skeleton width={80} height={15} />
-                    : formState.loading
+                  {!languageState.loading
+                    ? formState.loading
                       ? `${t('LOADING', 'Loading')}...`
                       : loginWithOtpState
                         ? t('GET_VERIFY_CODE', 'Get verify code')
                         : t('LOGIN', 'Login')
+                    : <span>&nbsp;</span>
                   }
                 </Button>
               )}
@@ -459,9 +454,9 @@ const LoginFormUI = (props) => {
           {(elementLinkToSignup && !loginWithOtpState) && (
             <RedirectLink register isPopup={isPopup}>
               <span>
-                {languageState.loading
-                  ? <Skeleton width={300} height={15} />
-                  : t('NEW_ON_PLATFORM', 'New on Ordering?')
+                {!languageState.loading
+                  ? t('NEW_ON_PLATFORM', 'New on Ordering?')
+                  : <span>&nbsp;</span>
                 }
               </span>
               {!languageState.loading && elementLinkToSignup}
@@ -499,7 +494,9 @@ const LoginFormUI = (props) => {
             ) : (
               <SkeletonSocialWrapper>
                 <Skeleton height={43} count={2} />
-                {useLoginByCellphone && loginTab === 'cellphone' && (
+                {useLoginByCellphone && loginTab === 'cellphone' &&
+                  configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
+                  configs?.twilio_service_enabled?.value === '1')  && (
                   <Skeleton height={43} />
                 )}
               </SkeletonSocialWrapper>
