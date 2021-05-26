@@ -229,22 +229,14 @@ const SignUpFormUI = (props) => {
       <SignUpContainer isPopup={isPopup}>
         <HeroSide>
           <TitleHeroSide>
-            {languageState.loading
-              ? (
-                <>
-                  <h1><Skeleton width={250} height={40} /></h1>
-                  <p><Skeleton width={400} height={15} /></p>
-                </>
-              )
-              : (
-                <>
-                  <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
-                  <p>
-                    {t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}
-                  </p>
-                </>
-              )
-            }
+            {!languageState.loading && (
+              <>
+                <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
+                <p>
+                  {t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}
+                </p>
+              </>
+            )}
           </TitleHeroSide>
         </HeroSide>
         <FormSide isPopup={isPopup}>
@@ -352,18 +344,18 @@ const SignUpFormUI = (props) => {
               type='submit'
               disabled={formState.loading || validationFields?.loading}
             >
-              {languageState.loading
-                ? <Skeleton width={80} height={15} />
-                : formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')
+              {!languageState.loading
+                ? formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')
+                : <span>&nbsp;</span>
               }
             </Button>
           </FormInput>
           {elementLinkToLogin && (
             <RedirectLink register isPopup={isPopup}>
               <span>
-                {languageState.loading
-                  ? <Skeleton width={300} height={15} />
-                  : t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')
+                {!languageState.loading
+                  ? t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')
+                  : <span>&nbsp;</span>
                 }
               </span>
               {!languageState.loading && elementLinkToLogin}

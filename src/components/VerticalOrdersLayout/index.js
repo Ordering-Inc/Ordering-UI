@@ -27,7 +27,7 @@ export const VerticalOrdersLayout = (props) => {
   } = props
 
   const theme = useTheme()
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [{ parseDate }] = useUtils()
 
   return (
@@ -63,13 +63,21 @@ export const VerticalOrdersLayout = (props) => {
               </BusinessInformation>
             </OrderPastContent>
             <Reorder>
-              <p>{getOrderStatus(order.status)?.value}</p>
+              <p>
+                {!languageState.loading
+                  ? getOrderStatus(order.status)?.value
+                  : <span>&nbsp;</span>
+                }
+              </p>
               <Button
                 color='primary'
                 onClick={() => handleReorder(order.id)}
                 disabled={reorderLoading}
               >
-                {orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
+                {!languageState.loading
+                  ? orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')
+                  : <span>&nbsp;</span>
+                }
               </Button>
             </Reorder>
           </SingleCard>
@@ -83,7 +91,10 @@ export const VerticalOrdersLayout = (props) => {
             bgtransparent
             onClick={loadMoreOrders}
           >
-            {t('LOAD_MORE_ORDERS', 'Load more orders')}
+            {!languageState.loading
+              ? t('LOAD_MORE_ORDERS', 'Load more orders')
+              : <span>&nbsp;</span>
+            }
           </Button>
         </WrappButton>
       )}

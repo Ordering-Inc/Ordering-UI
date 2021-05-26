@@ -32,7 +32,7 @@ export const HorizontalOrdersLayout = (props) => {
   const orders = customArray || props.orders
 
   const theme = useTheme()
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
 
@@ -123,7 +123,10 @@ export const HorizontalOrdersLayout = (props) => {
                   color='primary'
                   onClick={() => onRedirectPage({ page: 'order_detail', params: { orderId: order?.uuid } })}
                 >
-                  {t('OPEN_ORDER', 'Open order')}
+                  {!languageState.loading
+                    ? t('OPEN_ORDER', 'Open order')
+                    : <span>&nbsp;</span>
+                  }
                 </Button>
               </OpenOrder>
             )}

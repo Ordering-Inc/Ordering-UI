@@ -45,7 +45,7 @@ const UserProfileFormUI = (props) => {
     isHiddenAddress
   } = props
 
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [{ user }] = useSession()
   const [edit, setEdit] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -156,7 +156,10 @@ const UserProfileFormUI = (props) => {
                     outline
                     onClick={() => toggleEditState(true)}
                   >
-                    {t('EDIT', 'Edit')}
+                    {!languageState.loading
+                      ? t('EDIT', 'Edit')
+                      : <span>&nbsp;</span>
+                    }
                   </Button>
                 </UserData>
               )
@@ -175,7 +178,10 @@ const UserProfileFormUI = (props) => {
         </UserProfileContainer>
         {(userData?.addresses || user?.addresses) && !isHiddenAddress && (
           <SavedPlaces>
-            <h1>Saved Places</h1>
+            {!languageState.loading
+              ? <h1>{t('SAVED_PLACES', 'Saved Places')}</h1>
+              : <span>&nbsp;</span>
+            }
             <AddressList isModal addressList={user?.addresses} />
           </SavedPlaces>
         )}

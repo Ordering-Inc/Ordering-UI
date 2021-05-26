@@ -1,6 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
+import { BusinessProductsCategories as ProductsCategories, useLanguage} from 'ordering-components'
 import { AutoScroll } from '../AutoScroll'
 
 import { CategoriesContainer } from './styles'
@@ -15,6 +15,7 @@ const BusinessProductsCategoriesUI = (props) => {
     featured,
     openBusinessInformation
   } = props
+  const [languageState] = useLanguage()
 
   const ProductCategories = () => {
     return (
@@ -42,7 +43,7 @@ const BusinessProductsCategoriesUI = (props) => {
         <BeforeComponent key={i} {...props} />))
       }
       <CategoriesContainer featured={featured}>
-        {!isSkeleton ? (
+        {!isSkeleton && !languageState.loading ? (
           <Tabs variant='primary'>
             {openBusinessInformation ? (
               <>

@@ -35,7 +35,7 @@ const OrdersOptionUI = (props) => {
     businessesIds
   } = props
 
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const theme = useTheme()
   const [, { reorder }] = useOrder()
   const { loading, error, orders: values } = orderList
@@ -110,11 +110,16 @@ const OrdersOptionUI = (props) => {
       {(isShowTitles || !isBusinessesPage) && (
         <>
           <OptionTitle isBusinessesPage={isBusinessesPage}>
-            <h1>
-              {titleContent || (activeOrders
-                ? t('ACTIVE_ORDERS', 'Active Orders')
-                : t('PREVIOUS_ORDERS', 'Previous Orders'))}
-            </h1>
+            {!languageState.loading
+              ? (
+                <h1>
+                  {titleContent || (activeOrders
+                    ? t('ACTIVE_ORDERS', 'Active Orders')
+                    : t('PREVIOUS_ORDERS', 'Previous Orders'))}
+                </h1>
+              )
+              : <span>&nbsp;</span>
+            }
           </OptionTitle>
           {!loading && ordersSorted.length === 0 && (
             <NotFoundSource

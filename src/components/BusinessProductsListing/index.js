@@ -62,7 +62,7 @@ const BusinessProductsListingUI = (props) => {
   } = props
 
   const { business, loading, error } = businessState
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
@@ -187,7 +187,7 @@ const BusinessProductsListingUI = (props) => {
                   setOpenBusinessInformation={setOpenBusinessInformation}
                   openBusinessInformation={openBusinessInformation}
                 />
-                {(categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && (
+                {(categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && !languageState.loading && (
                   <WrapperSearch>
                     <SearchBar
                       onSearch={handleChangeSearch}

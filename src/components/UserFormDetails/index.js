@@ -30,7 +30,7 @@ export const UserFormDetailsUI = (props) => {
   } = props
 
   const formMethods = useForm()
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
 
   const [{ user: userSession }] = useSession()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -323,7 +323,10 @@ export const UserFormDetailsUI = (props) => {
                   onClick={() => onCancel(false)}
                   disabled={formState.loading}
                 >
-                  {t('CANCEL', 'Cancel')}
+                  {!languageState.loading
+                    ? t('CANCEL', 'Cancel')
+                    : <span>&nbsp;</span>
+                  }
                 </Button>
               )}
 
@@ -334,7 +337,10 @@ export const UserFormDetailsUI = (props) => {
                   type='submit'
                   disabled={formState.loading}
                 >
-                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
+                  {!languageState.loading
+                    ? formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')
+                    : <span>&nbsp;</span>
+                  }
                 </Button>
               )}
             </ActionsForm>

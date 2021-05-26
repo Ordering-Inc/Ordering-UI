@@ -7,7 +7,7 @@ import { useEvent, useLanguage } from 'ordering-components'
 
 export const ProfileOptions = ({ value }) => {
   const [tabValue] = useState(value)
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [events] = useEvent()
 
   const handleGoToPage = (data) => {
@@ -19,12 +19,22 @@ export const ProfileOptions = ({ value }) => {
       <Tabs variant='primary'>
         <Tab active={tabValue === 'account'}>
           <a onClick={() => handleGoToPage({ page: 'profile' })}>
-            <BsPerson /> {t('MY_ACCOUNT', 'My Account')}
+            <BsPerson />
+            <span>&nbsp;</span>
+            {!languageState.loading
+              ? t('MY_ACCOUNT', 'My Account')
+              : <span>&nbsp;</span>
+            }
           </a>
         </Tab>
         <Tab active={tabValue === 'orders'}>
           <a onClick={() => handleGoToPage({ page: 'orders' })}>
-            <AiOutlineUnorderedList /> {t('MY_ORDERS', 'My orders')}
+            <AiOutlineUnorderedList />
+            <span>&nbsp;</span>
+            {!languageState.loading
+              ? t('MY_ORDERS', 'My orders')
+              : <span>&nbsp;</span>
+            }
           </a>
         </Tab>
       </Tabs>

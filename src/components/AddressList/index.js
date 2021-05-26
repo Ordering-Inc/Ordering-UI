@@ -53,7 +53,7 @@ const AddressListUI = (props) => {
     setCustomerModalOpen
   } = props
 
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
 
@@ -173,7 +173,10 @@ const AddressListUI = (props) => {
               onClick={() => openAddress({})}
               disabled={orderState?.loading || actionStatus.loading}
             >
-              {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')}
+              {!languageState.loading
+                ? (orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')
+                : <span>&nbsp;</span>
+              }
             </Button>
           )
         }

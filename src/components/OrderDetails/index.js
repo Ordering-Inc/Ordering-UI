@@ -77,7 +77,7 @@ const OrderDetailsUI = (props) => {
     readMessages,
     messagesReadList
   } = props
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
@@ -195,8 +195,12 @@ const OrderDetailsUI = (props) => {
                 </HeaderImg>
                 <HeaderInfo className='order-header'>
                   <HeaderText column>
-                    <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
-                    <p>{t('ORDER_MESSAGE_HEADER_TEXT', 'Once business accepts your order, we will send you an email, thank you!')}</p>
+                    {!languageState.loading && (
+                      <>
+                        <h1>{t('ORDER_MESSAGE_RECEIVED', 'Your order has been received')}</h1>
+                        <p>{t('ORDER_MESSAGE_HEADER_TEXT', 'Once business accepts your order, we will send you an email, thank you!')}</p>
+                      </>
+                    )}
                   </HeaderText>
                 </HeaderInfo>
               </Header>
@@ -233,8 +237,8 @@ const OrderDetailsUI = (props) => {
 
               <OrderInfo>
                 <OrderData>
-                  <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
-                  <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
+                  <h1>{!languageState.loading && t('ORDER', 'Order')} #{order?.id}</h1>
+                  <p>{!languageState.loading && t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                   <p className='date'>
                     {
                       order?.delivery_datetime_utc
@@ -245,7 +249,10 @@ const OrderDetailsUI = (props) => {
                   <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 </OrderData>
                 <OrderStatus>
-                  <span>{getOrderStatus(order?.status)?.value}</span>
+                  {!languageState.loading
+                    ? <span>{getOrderStatus(order?.status)?.value}</span>
+                    : <span>&nbsp;</span>
+                  }
                   <StatusImage>
                     <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' loading='lazy' />
                   </StatusImage>
@@ -253,7 +260,7 @@ const OrderDetailsUI = (props) => {
               </OrderInfo>
 
               <SectionTitle>
-                {t('CUSTOMER', 'Customer')}
+                {!languageState.loading && t('CUSTOMER', 'Customer')}
               </SectionTitle>
               <OrderCustomer>
                 <div className='photo'>
@@ -278,7 +285,7 @@ const OrderDetailsUI = (props) => {
                   <div className='wrap'>
                     <ProductShare
                       withBtn
-                      btnText={t('SHARE', 'Share')}
+                      btnText={!languageState.loading ? t('SHARE', 'Share') : '.'}
                       defaultUrl={urlToShare(order?.hash_key)}
                     />
                   </div>
@@ -299,7 +306,7 @@ const OrderDetailsUI = (props) => {
                   )}
                   <>
                     <SectionTitle>
-                      {t('YOUR_DRIVER', 'Your Driver')}
+                      {!languageState.loading && t('YOUR_DRIVER', 'Your Driver')}
                     </SectionTitle>
                     <OrderDriver>
                       <WrapperDriver>
@@ -335,7 +342,7 @@ const OrderDetailsUI = (props) => {
               )}
 
               <SectionTitle>
-                {t('YOUR_ORDER', 'Your Order')}
+                {!languageState.loading && t('YOUR_ORDER', 'Your Order')}
               </SectionTitle>
               <OrderProducts>
                 {order?.products?.length && order?.products.map(product => (
@@ -349,18 +356,18 @@ const OrderDetailsUI = (props) => {
                 <table>
                   <tbody>
                     <tr>
-                      <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                      <td>{!languageState.loading && t('SUBTOTAL', 'Subtotal')}</td>
                       <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                     </tr>
                     {(order?.summary?.discount > 0 || order?.discount > 0) && (
                       <tr>
                         {order?.offer_type === 1 ? (
                           <td>
-                            {t('DISCOUNT', 'Discount')}{' '}
+                            {!languageState.loading && t('DISCOUNT', 'Discount')}{' '}
                             <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
                           </td>
                         ) : (
-                          <td>{t('DISCOUNT', 'Discount')}</td>
+                          <td>{!languageState.loading && t('DISCOUNT', 'Discount')}</td>
                         )}
                         <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
                       </tr>
@@ -378,14 +385,14 @@ const OrderDetailsUI = (props) => {
                     }
                     {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
                       <tr>
-                        <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                        <td>{!languageState.loading && t('DELIVERY_FEE', 'Delivery Fee')}</td>
                         <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
                       </tr>
                     )}
                     {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
                       <tr>
                         <td>
-                          {t('DRIVER_TIP', 'Driver tip')}{' '}
+                          {!languageState.loading && t('DRIVER_TIP', 'Driver tip')}{' '}
                           {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
                             parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
                             !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
@@ -398,7 +405,7 @@ const OrderDetailsUI = (props) => {
                     )}
                     <tr>
                       <td>
-                        {t('SERVICE_FEE', 'Service Fee')}{' '}
+                        {!languageState.loading && t('SERVICE_FEE', 'Service Fee')}{' '}
                         <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
                       </td>
                       <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
@@ -408,7 +415,7 @@ const OrderDetailsUI = (props) => {
                 <table className='total'>
                   <tbody>
                     <tr>
-                      <td>{t('TOTAL', 'Total')}</td>
+                      <td>{!languageState.loading && t('TOTAL', 'Total')}</td>
                       <td>{parsePrice(order?.summary?.total || order?.total)}</td>
                     </tr>
                   </tbody>
