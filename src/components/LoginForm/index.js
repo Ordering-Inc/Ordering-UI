@@ -6,6 +6,7 @@ import {
   useLanguage,
   useConfig,
   useSession,
+  ReCaptcha
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../SpinnerLoader'
@@ -23,7 +24,8 @@ import {
   WrapperPassword,
   TogglePassword,
   OtpWrapper,
-  CountdownTimer
+  CountdownTimer,
+  ReCaptchaWrapper
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -47,6 +49,7 @@ const LoginFormUI = (props) => {
     useLoginByEmail,
     useLoginByCellphone,
     handleChangeInput,
+    handleReCaptcha,
     handleChangeTab,
     handleButtonLoginClick,
     handleSendVerifyCode,
@@ -58,7 +61,8 @@ const LoginFormUI = (props) => {
     checkPhoneCodeState,
     loginTab,
     isPopup,
-    credentials
+    credentials,
+    enableReCaptcha
   } = props
   const numOtpInputs = 4
   const [, t] = useLanguage()
@@ -395,6 +399,11 @@ const LoginFormUI = (props) => {
                   <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                   {elementLinkToForgotPassword}
                 </RedirectLink>
+              )}
+              {props.isRecaptchaEnable && enableReCaptcha && (
+                <ReCaptchaWrapper>
+                  <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                </ReCaptchaWrapper>
               )}
               {(!willVerifyOtpState &&
                 <Button

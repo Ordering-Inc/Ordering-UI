@@ -3,3 +3,4 @@ node_modules/
 cypress/integration/examples
 .DS_Store
 debug.log
+.idea/

@@ -203,5 +203,8 @@ export const TogglePassword = styled.span`
   span{
     cursor: pointer;
   }
+`
 
+export const ReCaptchaWrapper = styled.div`
+  margin: 12px auto;
 `
