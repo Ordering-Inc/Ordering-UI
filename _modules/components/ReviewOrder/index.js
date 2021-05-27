@@ -117,7 +117,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
         title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
         content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
       }));
-      setIsReviewed(true);
+      setIsReviewed && setIsReviewed(true);
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
@@ -245,9 +245,6 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
-    ref: register({
-      required: t('FIELD_COMMENT_REQUIRED', 'The field comments is required')
-    }),
     autoComplete: "off"
   })), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
