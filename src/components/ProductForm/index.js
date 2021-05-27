@@ -60,7 +60,8 @@ const ProductOptionsUI = (props) => {
     handleSave,
     handleChangeIngredientState,
     handleChangeSuboptionState,
-    handleChangeCommentState
+    handleChangeCommentState,
+    langFallbacks
   } = props
 
   const { product, loading, error } = productObject
@@ -177,13 +178,13 @@ const ProductOptionsUI = (props) => {
                 {product?.description && <p>{product?.description}</p>}
                 {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
                   <SkuContent>
-                    <h2>{t('SKU', 'Sku')}</h2>
+                    <h2>{t('SKU', langFallbacks?.SKU || 'Sku')}</h2>
                     <p>{product?.sku}</p>
                   </SkuContent>
                 )}
               </ProductFormTitle>
               <ProductEdition>
-                {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', 'Ingredients')}</SectionTitle>)}
+                {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', langFallbacks?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                 <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
                   {product?.ingredients.map(ingredient => (
                     <ProductIngredient
@@ -232,10 +233,10 @@ const ProductOptionsUI = (props) => {
                   }))
                 }
                 <ProductComment>
-                  <SectionTitle>{t('SPECIAL_COMMENT', 'Special comment')}</SectionTitle>
+                  <SectionTitle>{t('SPECIAL_COMMENT', langFallbacks?.SPECIAL_COMMENT || 'Special comment')}</SectionTitle>
                   <TextArea
                     rows={4}
-                    placeholder={t('SPECIAL_COMMENT', 'Special comment')}
+                    placeholder={t('SPECIAL_COMMENT', langFallbacks?.SPECIAL_COMMENT || 'Special comment')}
                     defaultValue={productCart.comment}
                     onChange={handleChangeCommentState}
                     disabled={!(productCart && !isSoldOut && maxProductQuantity)}
@@ -277,10 +278,10 @@ const ProductOptionsUI = (props) => {
                     disabled={orderState.loading}
                   >
                     {orderState.loading ? (
-                      <span>{t('LOADING', 'Loading')}</span>
+                      <span>{t('LOADING', langFallbacks?.LOADING || 'Loading')}</span>
                     ) : (
                       <span>
-                        {editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')}
+                        {editMode ? t('UPDATE', langFallbacks?.UPDATE || 'Update') : t('ADD_TO_CART', langFallbacks?.ADD_TO_CART || 'Add to Cart')}
                       </span>
                     )}
                     <span>{productCart.total && parsePrice(productCart.total)}</span>
@@ -294,7 +295,7 @@ const ProductOptionsUI = (props) => {
                       color='primary'
                       disabled
                     >
-                      {t('LOADING', 'Loading')}
+                      {t('LOADING', langFallbacks?.LOADING || 'Loading')}
                     </Button>
                   ) : (
                     <AddressList
@@ -314,7 +315,7 @@ const ProductOptionsUI = (props) => {
                     disabled={isSoldOut || maxProductQuantity <= 0}
                     onClick={() => setModalIsOpen(true)}
                   >
-                    {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')}
+                    {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', langFallbacks?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', langFallbacks?.LOGIN_SIGNUP || 'Login / Sign Up')}
                   </Button>
                 )}
               </ProductActions>
@@ -337,7 +338,7 @@ const ProductOptionsUI = (props) => {
                     onClick={
                       (e) => handleCustomModalClick(e, { page: 'signup' })
                     } href='#'
-                  >{t('CREATE_ACCOUNT', 'Create account')}
+                  >{t('CREATE_ACCOUNT', langFallbacks?.CREATE_ACCOUNT || 'Create account')}
                   </a>
                 }
                 elementLinkToForgotPassword={
@@ -345,7 +346,7 @@ const ProductOptionsUI = (props) => {
                     onClick={
                       (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
                     } href='#'
-                  >{t('RESET_PASSWORD', 'Reset password')}
+                  >{t('RESET_PASSWORD', langFallbacks?.RESET_PASSWORD || 'Reset password')}
                   </a>
                 }
                 useLoginByCellphone
@@ -359,7 +360,7 @@ const ProductOptionsUI = (props) => {
                     onClick={
                       (e) => handleCustomModalClick(e, { page: 'login' })
                     } href='#'
-                  >{t('LOGIN', 'Login')}
+                  >{t('LOGIN', langFallbacks?.LOGIN || 'Login')}
                   </a>
                 }
                 useLoginByCellphone
@@ -375,7 +376,7 @@ const ProductOptionsUI = (props) => {
                     onClick={
                       (e) => handleCustomModalClick(e, { page: 'login' })
                     } href='#'
-                  >{t('LOGIN', 'Login')}
+                  >{t('LOGIN', langFallbacks?.LOGIN || 'Login')}
                   </a>
                 }
                 isPopup

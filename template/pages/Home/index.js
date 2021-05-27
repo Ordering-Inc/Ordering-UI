@@ -4,6 +4,7 @@ import { HomeHero } from '../../../src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 import Skeleton from 'react-loading-skeleton'
+import langFallbacks from '../../language.json'
 
 import {
   HomeContainer,
@@ -52,13 +53,18 @@ export const HomePage = (props) => {
     }
   }, [])
 
+  const homeHeroProps = {
+    ...props,
+    onFindBusiness: handlerFindBusiness,
+    langFallbacks,
+  }
+
   return (
     <>
       <HelmetTags page='home' />
       <HomeContainer>
         <HomeHero
-          {...props}
-          onFindBusiness={handlerFindBusiness}
+          {...homeHeroProps}
         />
         {
           homeState.loading && (

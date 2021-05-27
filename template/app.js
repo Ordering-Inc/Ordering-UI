@@ -33,12 +33,13 @@ import { SignUp } from './pages/SignUp'
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
+import langFallbacks from './language.json';
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
   const [orderStatus] = useOrder()
   const [{ configs }] = useConfig()
-  const [languageState, t] = useLanguage()
+  const [, t] = useLanguage()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
@@ -98,14 +99,18 @@ export const App = () => {
       )}
       <ListenPageChanges />
       {
-        (!loaded || languageState.loading) && (
+        !loaded && (
           <SpinnerLoader />
         )
       }
       {
-        loaded && !languageState.loading && (
+        loaded && (
           <>
-            <Header isHome={isHome} location={location} />
+            <Header
+              isHome={isHome}
+              location={location}
+              langFallbacks={langFallbacks}
+            />
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
