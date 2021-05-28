@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import {
   BusinessAndProductList,
@@ -58,11 +59,11 @@ const BusinessProductsListingUI = (props) => {
     featuredProducts,
     handleChangeSortBy,
     isCartOnProductsList,
-    errorQuantityProducts,
-    langFallbacks
+    errorQuantityProducts
   } = props
 
   const { business, loading, error } = businessState
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
@@ -80,9 +81,9 @@ const BusinessProductsListingUI = (props) => {
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
   const sortByOptions = [
-    { value: null, content: t('SORT_BY', langFallbacks?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', langFallbacks?.SORT_BY || 'Sort By') },
-    { value: 'rank', content: t('RANK', langFallbacks?.RANK || 'Rank'), showOnSelected: t('RANK', langFallbacks?.RANK || 'Rank') },
-    { value: 'a-z', content: t('A_to_Z', langFallbacks?.A_to_Z || 'A-Z'), showOnSelected: t('A_to_Z', langFallbacks?.A_to_Z || 'A-Z') }
+    { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
+    { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
+    { value: 'a-z', content: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z'), showOnSelected: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z') }
   ]
 
   const handler = () => {
@@ -193,7 +194,7 @@ const BusinessProductsListingUI = (props) => {
                     <SearchBar
                       onSearch={handleChangeSearch}
                       search={searchValue}
-                      placeholder={t('SEARCH_PRODUCTS', langFallbacks?.SEARCH_PRODUCTS || 'Search Products')}
+                      placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
                       lazyLoad={businessState?.business?.lazy_load_products_recommended}
                     />
                     <Select
@@ -207,7 +208,7 @@ const BusinessProductsListingUI = (props) => {
                 )}
                 {!(business?.categories?.length === 0 && !categoryId) && (
                   <BusinessProductsCategories
-                    categories={[{ id: null, name: t('ALL', langFallbacks?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', langFallbacks?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                    categories={[{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                     categorySelected={categorySelected}
                     onClickCategory={handleChangeCategory}
                     featured={featuredProducts}
@@ -218,8 +219,8 @@ const BusinessProductsListingUI = (props) => {
                 <WrapContent>
                   <BusinessProductsList
                     categories={[
-                      { id: null, name: t('ALL', langFallbacks?.ALL || 'All') },
-                      { id: 'featured', name: t('FEATURED', langFallbacks?.FEATURED || 'Featured') },
+                      { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                      { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
                       ...business?.categories.sort((a, b) => a.rank - b.rank)
                     ]}
                     category={categorySelected}
@@ -278,8 +279,8 @@ const BusinessProductsListingUI = (props) => {
         {
           !loading && business && !Object.keys(business).length && (
             <NotFoundSource
-              content={t('NOT_FOUND_BUSINESS_PRODUCTS', langFallbacks?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
-              btnTitle={t('SEARCH_REDIRECT', langFallbacks?.SEARCH_REDIRECT || 'Go to Businesses')}
+              content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
+              btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
               onClickButton={() => handleSearchRedirect()}
             />
           )
@@ -288,8 +289,8 @@ const BusinessProductsListingUI = (props) => {
         {
           !loading && !business && location.pathname.includes('/store/') && (
             <NotFoundSource
-              content={t('ERROR_NOT_FOUND_STORE', langFallbacks?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
-              btnTitle={t('SEARCH_REDIRECT', langFallbacks?.SEARCH_REDIRECT || 'Go to Businesses')}
+              content={t('ERROR_NOT_FOUND_STORE', theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
+              btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
               onClickButton={handleSearchRedirect}
             />
           )
@@ -304,7 +305,7 @@ const BusinessProductsListingUI = (props) => {
         {error && error.length > 0 && Object.keys(business).length && (
           <NotFoundSource
             content={error[0]?.message || error[0]}
-            btnTitle={t('SEARCH_REDIRECT', langFallbacks?.SEARCH_REDIRECT || 'Go to Businesses')}
+            btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
             onClickButton={handleSearchRedirect}
           />
         )}
@@ -314,10 +315,10 @@ const BusinessProductsListingUI = (props) => {
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (
-              `${t('MAXIMUM_SUBTOTAL_ORDER', langFallbacks?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
+              `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
             ) : !currentCart?.valid_minimum ? (
-              `${t('MINIMUN_SUBTOTAL_ORDER', langFallbacks?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
-            ) : !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', langFallbacks?.LOADING || 'Loading')
+              `${t('MINIMUN_SUBTOTAL_ORDER', theme?.defaultLanguages?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
+            ) : !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')
           }
           isSecondaryBtn={!currentCart?.valid_maximum || !currentCart?.valid_minimum}
           btnValue={currentCart?.products?.length}
@@ -351,7 +352,7 @@ const BusinessProductsListingUI = (props) => {
 
         {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
           <NotFoundSource
-            content={t('ERROR_GET_PRODUCT', langFallbacks?.ERROR_GET_PRODUCT || 'Sorry, we couldn\'t find the requested product.')}
+            content={t('ERROR_GET_PRODUCT', theme?.defaultLanguages?.ERROR_GET_PRODUCT || 'Sorry, we couldn\'t find the requested product.')}
           />
         )}
         {(productModal.product || curProduct) && (
@@ -360,7 +361,6 @@ const BusinessProductsListingUI = (props) => {
             product={productModal.product || curProduct}
             businessId={business?.id}
             onSave={handlerProductAction}
-            langFallbacks={langFallbacks}
           />
         )}
       </Modal>
