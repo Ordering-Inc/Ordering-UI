@@ -17,7 +17,8 @@
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
     "backgroundPage": "#F8F8F8",
-    "colorPage": "#333"
+    "colorPage": "#333",
+    "colorTextSignForm": "#FFFFFF"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
