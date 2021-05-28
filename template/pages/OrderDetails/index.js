@@ -3,6 +3,7 @@ import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 
 import { OrderDetails } from '../../../src/components/OrderDetails'
+import langFallbacks from '../../language.json'
 
 export const OrderDetailsPage = (props) => {
   const history = useHistory()
@@ -13,6 +14,7 @@ export const OrderDetailsPage = (props) => {
     ...props,
     orderId,
     hashKey,
+    langFallbacks,
     urlToShare: (hashKey) => hashKey ? `${window.location.origin}/orders/${orderId}?hash=${hashKey}` : null,
     handleOrderRedirect: () => {
       history.push('/profile/orders')
