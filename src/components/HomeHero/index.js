@@ -18,7 +18,8 @@ import { AddressList } from '../AddressList'
 
 export const HomeHero = (props) => {
   const {
-    onFindBusiness
+    onFindBusiness,
+    langFallbacks
   } = props
 
   const [{ auth }] = useSession()
@@ -61,18 +62,18 @@ export const HomeHero = (props) => {
       }
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
-          <Title>{t('TITLE_HOME', 'All We need is Food.')}</Title>
-          <Slogan>{t('SUBTITLE_HOME', 'Let\'s start to order food now')}</Slogan>
+          <Title>{t('TITLE_HOME', langFallbacks?.TITLE_HOME || 'All We need is Food.')}</Title>
+          <Slogan>{t('SUBTITLE_HOME', langFallbacks?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan>
           <WrapInput onClick={handleAddressInput} withIcon>
             <HiOutlineLocationMarker />
             <InputSpan
               name='address-selection'
               aria-label='address selection'
               type='text'
-              placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
+              placeholder={orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', langFallbacks?.TYPE_AN_ADDRESS || 'Type an address')}
             />
             <div>
-              {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', 'Type an address')}
+              {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', langFallbacks?.TYPE_AN_ADDRESS || 'Type an address')}
             </div>
           </WrapInput>
           <Button
@@ -80,12 +81,12 @@ export const HomeHero = (props) => {
             name='find-business'
             onClick={handleFindBusinesses}
           >
-            {t('FIND_BUSINESSES', 'Find businesses')}
+            {t('FIND_BUSINESSES', langFallbacks?.FIND_BUSINESSES || 'Find businesses')}
           </Button>
         </ContentWrapper>
 
         <Modal
-          title={t('ADDRESS', 'Address')}
+          title={t('ADDRESS', langFallbacks?.ADDRESS || 'Address')}
           open={modals.formOpen}
           onClose={() => setModals({ ...modals, formOpen: false })}
         >
@@ -98,7 +99,7 @@ export const HomeHero = (props) => {
           />
         </Modal>
         <Modal
-          title={t('ADDRESSES', 'Addresses')}
+          title={t('ADDRESSES', langFallbacks?.ADDRESSES || 'Addresses')}
           open={modals.listOpen}
           width='70%'
           onClose={() => setModals({ ...modals, listOpen: false })}
