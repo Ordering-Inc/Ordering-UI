@@ -43,8 +43,7 @@ export const Header = (props) => {
     closeCartPopover,
     isShowOrderOptions,
     isHideSignup,
-    isCustomerMode,
-    langFallbacks
+    isCustomerMode
   } = props
 
   const [events] = useEvent()
@@ -77,7 +76,7 @@ export const Header = (props) => {
     if (isActionsClick) {
       setConfirm({
         open: true,
-        content: t('QUESTION_CLEAR_CUSTOMER', langFallbacks?.QUESTION_CLEAR_CUSTOMER || 'Are you sure that you want to clear the customer?'),
+        content: t('QUESTION_CLEAR_CUSTOMER', theme?.defaultLanguages?.QUESTION_CLEAR_CUSTOMER || 'Are you sure that you want to clear the customer?'),
         handleOnAccept: () => {
           deleteUserCustomer(true)
           refreshOrderOptions()
@@ -201,9 +200,9 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 870 && (
                     <>
-                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', langFallbacks?.SIGN_IN || 'Sign in')}</MenuLink>
+                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
                       {!isHideSignup && (
-                        <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', langFallbacks?.SIGN_UP || 'Sign up')}</MenuLink>
+                        <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}</MenuLink>
                       )}
                     </>
                   )
@@ -349,9 +348,9 @@ export const Header = (props) => {
           </Modal>
         )}
         <Confirm
-          title={t('CUSTOMER', langFallbacks?.CUSTOMER || 'Customer')}
+          title={t('CUSTOMER', theme?.defaultLanguages?.CUSTOMER || 'Customer')}
           content={confirm.content}
-          acceptText={t('ACCEPT', langFallbacks?.ACCEPT || 'Accept')}
+          acceptText={t('ACCEPT', theme?.defaultLanguages?.ACCEPT || 'Accept')}
           open={isCustomerMode && confirm.open}
           onClose={() => setConfirm({ ...confirm, open: false })}
           onCancel={() => setConfirm({ ...confirm, open: false })}

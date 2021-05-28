@@ -33,7 +33,6 @@ import { SignUp } from './pages/SignUp'
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
-import langFallbacks from './language.json';
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
@@ -109,7 +108,6 @@ export const App = () => {
             <Header
               isHome={isHome}
               location={location}
-              langFallbacks={langFallbacks}
             />
             <NotNetworkConnectivity />
             {onlineStatus && (

@@ -4,7 +4,6 @@ import { useApi, useEvent } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
 import { capitalize } from '../../../src/utils'
-import langFallbacks from '../../language.json'
 
 export const BusinessProductsList = (props) => {
   const { store } = useParams()
@@ -32,7 +31,6 @@ export const BusinessProductsList = (props) => {
     slug: store,
     categoryId,
     productId,
-    langFallbacks,
     businessProps: [
       'id',
       'name',
