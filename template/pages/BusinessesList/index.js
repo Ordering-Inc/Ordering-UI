@@ -2,7 +2,6 @@ import React from 'react'
 import { BusinessesListing } from '../../../src/components/BusinessesListing'
 import { useEvent } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
-import langFallbacks from '../../language.json'
 
 export const BusinessesList = (props) => {
   const [events] = useEvent()
@@ -15,7 +14,6 @@ export const BusinessesList = (props) => {
       events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     },
     propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'menus'],
-    langFallbacks,
   }
 
   return (
