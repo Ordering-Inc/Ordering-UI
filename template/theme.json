@@ -17,6 +17,7 @@
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
     "backgroundPage": "#F8F8F8",
-    "colorPage": "#333"
+    "colorPage": "#333",
+    "colorTextSignForm": "#FFFFFF"
   }
 }
