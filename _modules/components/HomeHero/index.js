@@ -54,7 +54,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var HomeHero = function HomeHero(props) {
   var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _orderState$options2, _orderState$options2$, _orderState$options3, _orderState$options3$, _orderState$options4, _props$afterComponent, _props$afterElements;
 
-  var onFindBusiness = props.onFindBusiness;
+  var onFindBusiness = props.onFindBusiness,
+      langFallbacks = props.langFallbacks;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -126,20 +127,20 @@ var HomeHero = function HomeHero(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SUBTITLE_HOME) || 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
     onClick: handleAddressInput,
     withIcon: true
   }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement(_styles.InputSpan, {
     name: "address-selection",
     "aria-label": "address selection",
     type: "text",
-    placeholder: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_AN_ADDRESS', 'Type an address')
-  }), /*#__PURE__*/_react.default.createElement("div", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address) || t('TYPE_AN_ADDRESS', 'Type an address'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    placeholder: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_AN_ADDRESS', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.TYPE_AN_ADDRESS) || 'Type an address')
+  }), /*#__PURE__*/_react.default.createElement("div", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address) || t('TYPE_AN_ADDRESS', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.TYPE_AN_ADDRESS) || 'Type an address'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     name: "find-business",
     onClick: handleFindBusinesses
-  }, t('FIND_BUSINESSES', 'Find businesses'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS', 'Address'),
+  }, t('FIND_BUSINESSES', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.FIND_BUSINESSES) || 'Find businesses'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESS', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.ADDRESS) || 'Address'),
     open: modals.formOpen,
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -165,7 +166,7 @@ var HomeHero = function HomeHero(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES', 'Addresses'),
+    title: t('ADDRESSES', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.ADDRESSES) || 'Addresses'),
     open: modals.listOpen,
     width: "70%",
     onClose: function onClose() {

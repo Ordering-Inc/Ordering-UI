@@ -89,7 +89,8 @@ var Header = function Header(props) {
       closeCartPopover = props.closeCartPopover,
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      langFallbacks = props.langFallbacks;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -168,7 +169,7 @@ var Header = function Header(props) {
     if (isActionsClick) {
       setConfirm({
         open: true,
-        content: t('QUESTION_CLEAR_CUSTOMER', 'Are you sure that you want to clear the customer?'),
+        content: t('QUESTION_CLEAR_CUSTOMER', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.QUESTION_CLEAR_CUSTOMER) || 'Are you sure that you want to clear the customer?'),
         handleOnAccept: function handleOnAccept() {
           deleteUserCustomer(true);
           refreshOrderOptions();
@@ -295,7 +296,7 @@ var Header = function Header(props) {
       });
     },
     name: "signin"
-  }, t('SIGN_IN', 'Sign in')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('SIGN_IN', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SIGN_IN) || 'Sign in')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signup'
@@ -303,7 +304,7 @@ var Header = function Header(props) {
     },
     highlight: 1,
     name: "signup"
-  }, t('SIGN_UP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  }, t('SIGN_UP', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     withLogout: true,
     isCustomerMode: isCustomerMode,
     open: openPopover.user,
@@ -415,9 +416,9 @@ var Header = function Header(props) {
     userCustomerSetup: customerState.user,
     setCustomerModalOpen: setCustomerModalOpen
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('CUSTOMER', 'Customer'),
+    title: t('CUSTOMER', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.CUSTOMER) || 'Customer'),
     content: confirm.content,
-    acceptText: t('ACCEPT', 'Accept'),
+    acceptText: t('ACCEPT', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.ACCEPT) || 'Accept'),
     open: isCustomerMode && confirm.open,
     onClose: function onClose() {
       return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {

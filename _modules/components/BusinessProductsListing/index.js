@@ -101,7 +101,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       featuredProducts = props.featuredProducts,
       handleChangeSortBy = props.handleChangeSortBy,
       isCartOnProductsList = props.isCartOnProductsList,
-      errorQuantityProducts = props.errorQuantityProducts;
+      errorQuantityProducts = props.errorQuantityProducts,
+      langFallbacks = props.langFallbacks;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -165,16 +166,16 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
   var sortByOptions = [{
     value: null,
-    content: t('SORT_BY', 'Sort By'),
-    showOnSelected: t('SORT_BY', 'Sort By')
+    content: t('SORT_BY', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SORT_BY) || 'Sort By'),
+    showOnSelected: t('SORT_BY', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SORT_BY) || 'Sort By')
   }, {
     value: 'rank',
-    content: t('RANK', 'Rank'),
-    showOnSelected: t('RANK', 'Rank')
+    content: t('RANK', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.RANK) || 'Rank'),
+    showOnSelected: t('RANK', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.RANK) || 'Rank')
   }, {
     value: 'a-z',
-    content: t('A_to_Z', 'A-Z'),
-    showOnSelected: t('A_to_Z', 'A-Z')
+    content: t('A_to_Z', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.A_to_Z) || 'A-Z'),
+    showOnSelected: t('A_to_Z', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.A_to_Z) || 'A-Z')
   }];
 
   var handler = function handler() {
@@ -284,7 +285,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }), (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
-    placeholder: t('SEARCH_PRODUCTS', 'Search Products'),
+    placeholder: t('SEARCH_PRODUCTS', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SEARCH_PRODUCTS) || 'Search Products'),
     lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
   }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     notAsync: true,
@@ -297,10 +298,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   })), !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [{
       id: null,
-      name: t('ALL', 'All')
+      name: t('ALL', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', 'Featured')
+      name: t('FEATURED', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
@@ -311,10 +312,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
     categories: [{
       id: null,
-      name: t('ALL', 'All')
+      name: t('ALL', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', 'Featured')
+      name: t('FEATURED', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
@@ -357,21 +358,21 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     isBusinessLoading: loading,
     errorQuantityProducts: errorQuantityProducts
   }))), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.'),
-    btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
+    content: t('NOT_FOUND_BUSINESS_PRODUCTS', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
+    btnTitle: t('SEARCH_REDIRECT', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: function onClickButton() {
       return handleSearchRedirect();
     }
   }), !loading && !business && location.pathname.includes('/store/') && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.'),
-    btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
+    content: t('ERROR_NOT_FOUND_STORE', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.ERROR_NOT_FOUND_STORE) || 'Sorry, an error has occurred with business selected.'),
+    btnTitle: t('SEARCH_REDIRECT', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: handleSearchRedirect
   }), !loading && !business && !location.pathname.includes('/store/') && /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null), error && error.length > 0 && Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0],
-    btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
+    btnTitle: t('SEARCH_REDIRECT', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: handleSearchRedirect
   })), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products5 = currentCart.products) === null || _currentCart$products5 === void 0 ? void 0 : _currentCart$products5.length) > 0 && auth && !isCartOpen && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
-    btnText: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.maximum)) : !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)) : !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading'),
+    btnText: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.MAXIMUM_SUBTOTAL_ORDER) || 'Maximum subtotal order'), ": ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.maximum)) : !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.MINIMUN_SUBTOTAL_ORDER) || 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)) : !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.LOADING) || 'Loading'),
     isSecondaryBtn: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum),
     btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.length,
     handleClick: function handleClick() {
@@ -393,12 +394,13 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
   }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')
+    content: t('ERROR_GET_PRODUCT', (langFallbacks === null || langFallbacks === void 0 ? void 0 : langFallbacks.ERROR_GET_PRODUCT) || 'Sorry, we couldn\'t find the requested product.')
   }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
-    onSave: handlerProductAction
+    onSave: handlerProductAction,
+    langFallbacks: langFallbacks
   })), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && openUpselling && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
     business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,
