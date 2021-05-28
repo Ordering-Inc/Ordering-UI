@@ -43,7 +43,7 @@ export const TitleHeroSide = styled.div`
   h1,
   p {
     margin: 0px;
-    color: #FFF;
+    color: ${props => props.theme.colors.colorTextSignForm};
   }
 `
 
