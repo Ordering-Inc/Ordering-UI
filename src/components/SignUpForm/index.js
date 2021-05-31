@@ -9,7 +9,8 @@ import {
   SignupForm as SignUpController,
   useLanguage,
   useConfig,
-  useSession
+  useSession,
+  ReCaptcha
 } from 'ordering-components'
 import {
   SignUpContainer,
@@ -22,13 +23,15 @@ import {
   SkeletonWrapper,
   SkeletonSocialWrapper,
   WrapperPassword,
-  TogglePassword
+  TogglePassword,
+  ReCaptchaWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
+import { GoogleLoginButton } from '../GoogleLogin'
 import { AppleLogin } from '../AppleLogin'
 import { useTheme } from 'styled-components'
 
@@ -42,6 +45,7 @@ const SignUpFormUI = (props) => {
   const {
     handleChangeInput,
     handleButtonSignupClick,
+    handleReCaptcha,
     elementLinkToLogin,
     useChekoutFileds,
     validationFields,
@@ -53,7 +57,8 @@ const SignUpFormUI = (props) => {
     externalPhoneNumber,
     saveCustomerUser,
     fieldsNotValid,
-    signupData
+    signupData,
+    enableReCaptcha
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -69,6 +74,12 @@ const SignUpFormUI = (props) => {
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
+  const initParams = {
+    client_id: configs?.google_login_client_id?.value,
+    cookiepolicy: 'single_host_origin',
+    scope: 'profile'
+  }
+
   const handleSuccessFacebook = (user) => {
     login({
       user,
@@ -77,6 +88,13 @@ const SignUpFormUI = (props) => {
   }
 
   const handleSuccessApple = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+  }
+
+  const handleSuccessGoogle = (user) => {
     login({
       user,
       token: user?.session?.access_token
@@ -328,6 +346,11 @@ const SignUpFormUI = (props) => {
                 </>
               )
             }
+            {props.isRecaptchaEnable && enableReCaptcha && (
+              <ReCaptchaWrapper>
+                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+              </ReCaptchaWrapper>
+            )}
             <Button
               color='primary'
               type='submit'
@@ -352,13 +375,19 @@ const SignUpFormUI = (props) => {
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
-                  {configs?.apple_login_client_id?.value &&
-               (
-                 <AppleLogin
-                   onSuccess={handleSuccessApple}
-                   onFailure={(data) => console.log('onFailure', data)}
-                 />
-               )}
+                  {configs?.apple_login_client_id?.value && (
+                    <AppleLogin
+                      onSuccess={handleSuccessApple}
+                      onFailure={(data) => console.log('onFailure', data)}
+                    />
+                  )}
+                  {configs?.google_login_client_id?.value && (
+                    <GoogleLoginButton
+                    initParams={initParams}
+                    handleSuccessGoogleLogin={handleSuccessGoogle}
+                    onFailure={(data) => console.log('onFailure', data)}
+                    />
+                  )}
                 </SocialButtons>
               ) : (
                 <SkeletonSocialWrapper>

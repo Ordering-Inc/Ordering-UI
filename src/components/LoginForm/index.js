@@ -6,6 +6,7 @@ import {
   useLanguage,
   useConfig,
   useSession,
+  ReCaptcha
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../SpinnerLoader'
@@ -23,7 +24,8 @@ import {
   WrapperPassword,
   TogglePassword,
   OtpWrapper,
-  CountdownTimer
+  CountdownTimer,
+  ReCaptchaWrapper
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -40,12 +42,14 @@ import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
+import { GoogleLoginButton } from '../GoogleLogin'
 
 const LoginFormUI = (props) => {
   const {
     useLoginByEmail,
     useLoginByCellphone,
     handleChangeInput,
+    handleReCaptcha,
     handleChangeTab,
     handleButtonLoginClick,
     handleSendVerifyCode,
@@ -57,7 +61,8 @@ const LoginFormUI = (props) => {
     checkPhoneCodeState,
     loginTab,
     isPopup,
-    credentials
+    credentials,
+    enableReCaptcha
   } = props
   const numOtpInputs = 4
   const [, t] = useLanguage()
@@ -74,6 +79,12 @@ const LoginFormUI = (props) => {
   const [otpState, setOtpState] = useState('')
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
+
+  const initParams = {
+    client_id: configs?.google_login_client_id?.value,
+    cookiepolicy: 'single_host_origin',
+    scope: 'profile'
+  }
 
   const onSubmit = async () => {
     if (loginWithOtpState) {
@@ -102,6 +113,13 @@ const LoginFormUI = (props) => {
   }
 
   const handleSuccessApple = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+  }
+
+  const handleSuccessGoogle = (user) => {
     login({
       user,
       token: user?.session?.access_token
@@ -382,6 +400,11 @@ const LoginFormUI = (props) => {
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
+              {props.isRecaptchaEnable && enableReCaptcha && (
+                <ReCaptchaWrapper>
+                  <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                </ReCaptchaWrapper>
+              )}
               {(!willVerifyOtpState &&
                 <Button
                   color='primary'
@@ -437,7 +460,13 @@ const LoginFormUI = (props) => {
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               )}
-              
+              {configs?.google_login_client_id?.value && (
+                <GoogleLoginButton
+                  initParams={initParams}
+                  handleSuccessGoogleLogin={handleSuccessGoogle}
+                  onFailure={(data) => console.log('onFailure', data)}
+                />
+              )}
               {useLoginByCellphone && loginTab === 'cellphone' &&
                configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
                 configs?.twilio_service_enabled?.value === '1')  && (

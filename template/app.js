@@ -38,7 +38,7 @@ export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
   const [orderStatus] = useOrder()
   const [{ configs }] = useConfig()
-  const [languageState, t] = useLanguage()
+  const [, t] = useLanguage()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
@@ -98,14 +98,17 @@ export const App = () => {
       )}
       <ListenPageChanges />
       {
-        (!loaded || languageState.loading) && (
+        !loaded && (
           <SpinnerLoader />
         )
       }
       {
-        loaded && !languageState.loading && (
+        loaded && (
           <>
-            <Header isHome={isHome} location={location} />
+            <Header
+              isHome={isHome}
+              location={location}
+            />
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
@@ -134,6 +137,7 @@ export const App = () => {
                             useLoginByCellphone
                             useChekoutFileds
                             handleSuccessSignup={handleSuccessSignup}
+                            isRecaptchaEnable
                           />
                         )
                         : <Redirect to='/' />
@@ -147,6 +151,7 @@ export const App = () => {
                             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
                             elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
+                            isRecaptchaEnable
                           />
                         )
                         : (
@@ -168,6 +173,7 @@ export const App = () => {
                             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
                             elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
+                            isRecaptchaEnable
                           />
                         )
                         : (

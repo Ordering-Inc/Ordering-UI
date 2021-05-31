@@ -52,13 +52,17 @@ export const HomePage = (props) => {
     }
   }, [])
 
+  const homeHeroProps = {
+    ...props,
+    onFindBusiness: handlerFindBusiness,
+  }
+
   return (
     <>
       <HelmetTags page='home' />
       <HomeContainer>
         <HomeHero
-          {...props}
-          onFindBusiness={handlerFindBusiness}
+          {...homeHeroProps}
         />
         {
           homeState.loading && (
