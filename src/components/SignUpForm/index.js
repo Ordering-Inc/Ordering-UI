@@ -375,19 +375,19 @@ const SignUpFormUI = (props) => {
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
-                  {configs?.apple_login_client_id?.value &&
-               (
-                 <AppleLogin
-                   onSuccess={handleSuccessApple}
-                   onFailure={(data) => console.log('onFailure', data)}
-                 />
-               )}
-
-                  <GoogleLoginButton
+                  {configs?.apple_login_client_id?.value && (
+                    <AppleLogin
+                      onSuccess={handleSuccessApple}
+                      onFailure={(data) => console.log('onFailure', data)}
+                    />
+                  )}
+                  {configs?.google_login_client_id?.value && (
+                    <GoogleLoginButton
                     initParams={initParams}
                     handleSuccessGoogleLogin={handleSuccessGoogle}
                     onFailure={(data) => console.log('onFailure', data)}
-                  />
+                    />
+                  )}
                 </SocialButtons>
               ) : (
                 <SkeletonSocialWrapper>

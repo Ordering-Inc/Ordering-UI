@@ -460,11 +460,13 @@ const LoginFormUI = (props) => {
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               )}
+              {configs?.google_login_client_id?.value && (
                 <GoogleLoginButton
                   initParams={initParams}
                   handleSuccessGoogleLogin={handleSuccessGoogle}
                   onFailure={(data) => console.log('onFailure', data)}
                 />
+              )}
               {useLoginByCellphone && loginTab === 'cellphone' &&
                configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
                 configs?.twilio_service_enabled?.value === '1')  && (
