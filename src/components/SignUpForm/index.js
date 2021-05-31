@@ -31,6 +31,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 
 import { FacebookLoginButton } from '../FacebookLogin'
+import { GoogleLoginButton } from '../GoogleLogin'
 import { AppleLogin } from '../AppleLogin'
 import { useTheme } from 'styled-components'
 
@@ -73,6 +74,12 @@ const SignUpFormUI = (props) => {
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
+  const initParams = {
+    client_id: configs?.google_login_client_id?.value,
+    cookiepolicy: 'single_host_origin',
+    scope: 'profile'
+  }
+
   const handleSuccessFacebook = (user) => {
     login({
       user,
@@ -81,6 +88,13 @@ const SignUpFormUI = (props) => {
   }
 
   const handleSuccessApple = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+  }
+
+  const handleSuccessGoogle = (user) => {
     login({
       user,
       token: user?.session?.access_token
@@ -361,13 +375,19 @@ const SignUpFormUI = (props) => {
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
-                  {configs?.apple_login_client_id?.value &&
-               (
-                 <AppleLogin
-                   onSuccess={handleSuccessApple}
-                   onFailure={(data) => console.log('onFailure', data)}
-                 />
-               )}
+                  {configs?.apple_login_client_id?.value && (
+                    <AppleLogin
+                      onSuccess={handleSuccessApple}
+                      onFailure={(data) => console.log('onFailure', data)}
+                    />
+                  )}
+                  {configs?.google_login_client_id?.value && (
+                    <GoogleLoginButton
+                    initParams={initParams}
+                    handleSuccessGoogleLogin={handleSuccessGoogle}
+                    onFailure={(data) => console.log('onFailure', data)}
+                    />
+                  )}
                 </SocialButtons>
               ) : (
                 <SkeletonSocialWrapper>
