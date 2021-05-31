@@ -3,15 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LogoutButton = void 0;
+exports.GoogleLoginButton = exports.GoogleLoginButtonUI = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _FaSignOutAlt = _interopRequireDefault(require("@meronex/icons/fa/FaSignOutAlt"));
+var _FcGoogle = _interopRequireDefault(require("@meronex/icons/fc/FcGoogle"));
 
-var _styles = require("../SidebarMenu/styles");
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,53 +33,27 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var LogoutButtonUI = function LogoutButtonUI(props) {
-  var onCustomClick = props.onCustomClick;
-
+var GoogleLoginButtonUI = function GoogleLoginButtonUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
-
-  var handleLogOutClick = function handleLogOutClick() {
-    window.FB.getLoginStatus(function (response) {
-      if (response.status === 'connected') {
-        window.FB.logout();
-      }
-    });
-    var GoogleAuth = window.gapi.auth2.getAuthInstance();
-
-    if (GoogleAuth) {
-      var signedIn = GoogleAuth.isSignedIn.get();
-
-      if (signedIn) {
-        GoogleAuth.signOut().then(function () {
-          GoogleAuth.disconnect();
-        });
-      }
-    }
-
-    props.handleLogoutClick();
-    onCustomClick && onCustomClick();
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    onClick: handleLogOutClick,
-    isHome: isHome
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome
-  }, /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome
-  }, t('LOGOUT', 'Logout'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
+  var signIn = props.signIn;
+  return /*#__PURE__*/_react.default.createElement(_styles.GoogleButton, {
+    initialIcon: true,
+    color: "secondary",
+    onClick: signIn
+  }, /*#__PURE__*/_react.default.createElement(_FcGoogle.default, null), /*#__PURE__*/_react.default.createElement("div", null, t('LOGIN_WITH_GOOGLE', 'Login with Google')));
 };
 
-var LogoutButton = function LogoutButton(props) {
-  var logoutButtonProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: LogoutButtonUI
+exports.GoogleLoginButtonUI = GoogleLoginButtonUI;
+
+var GoogleLoginButton = function GoogleLoginButton(props) {
+  var googleLoginProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: GoogleLoginButtonUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.LogoutAction, logoutButtonProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleLoginButton, googleLoginProps);
 };
 
-exports.LogoutButton = LogoutButton;
+exports.GoogleLoginButton = GoogleLoginButton;

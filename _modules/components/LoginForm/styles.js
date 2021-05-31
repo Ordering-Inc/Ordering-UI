@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CountdownTimer = exports.OtpWrapper = exports.WrapperPassword = exports.TogglePassword = exports.SkeletonSocialWrapper = exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.LoginWith = exports.FormSide = exports.TitleHeroSide = exports.HeroSide = exports.LoginContainer = void 0;
+exports.ReCaptchaWrapper = exports.CountdownTimer = exports.OtpWrapper = exports.WrapperPassword = exports.TogglePassword = exports.SkeletonSocialWrapper = exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.LoginWith = exports.FormSide = exports.TitleHeroSide = exports.HeroSide = exports.LoginContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -132,3 +132,7 @@ var CountdownTimer = _styledComponents.default.div(_templateObject20 || (_templa
 });
 
 exports.CountdownTimer = CountdownTimer;
+
+var ReCaptchaWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  margin: 12px auto;\n"])));
+
+exports.ReCaptchaWrapper = ReCaptchaWrapper;
