@@ -1,4 +1,5 @@
 node_modules/
+.idea/
 cypress/integration/examples
 .DS_Store
 debug.log
