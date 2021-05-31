@@ -231,6 +231,18 @@ var LogoutActionUI = function LogoutActionUI(props) {
       deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
 
   var handleClick = function handleClick() {
+    var GoogleAuth = window.gapi.auth2.getAuthInstance();
+
+    if (GoogleAuth) {
+      var signedIn = GoogleAuth.isSignedIn.get();
+
+      if (signedIn) {
+        GoogleAuth.signOut().then(function () {
+          GoogleAuth.disconnect();
+        });
+      }
+    }
+
     deleteUserCustomer(true);
     props.handleLogoutClick();
     props.onClose && props.onClose();

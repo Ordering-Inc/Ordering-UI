@@ -29,6 +29,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _FacebookLogin = require("../FacebookLogin");
 
+var _GoogleLogin = require("../GoogleLogin");
+
 var _AppleLogin = require("../AppleLogin");
 
 var _styledComponents = require("styled-components");
@@ -76,7 +78,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$google_login, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -136,6 +138,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
       setPasswordSee = _useState8[1];
 
   var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+  var initParams = {
+    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
+    cookiepolicy: 'single_host_origin',
+    scope: 'profile'
+  };
 
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
     var _user$session;
@@ -152,6 +159,15 @@ var SignUpFormUI = function SignUpFormUI(props) {
     login({
       user: user,
       token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
+    });
+  };
+
+  var handleSuccessGoogle = function handleSuccessGoogle(user) {
+    var _user$session3;
+
+    login({
+      user: user,
+      token: user === null || user === void 0 ? void 0 : (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
     });
   };
 
@@ -403,6 +419,12 @@ var SignUpFormUI = function SignUpFormUI(props) {
     handleSuccessFacebookLogin: handleSuccessFacebook
   }), (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
     onSuccess: handleSuccessApple,
+    onFailure: function onFailure(data) {
+      return console.log('onFailure', data);
+    }
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
+    initParams: initParams,
+    handleSuccessGoogleLogin: handleSuccessGoogle,
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }

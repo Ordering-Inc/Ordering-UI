@@ -51,6 +51,8 @@ var _AiOutlineEye = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineE
 
 var _AiOutlineEyeInvisible = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEyeInvisible"));
 
+var _GoogleLogin = require("../GoogleLogin");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -82,7 +84,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _credentials$cellphon, _credentials$cellphon2, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _props$afterComponent, _props$afterElements;
+  var _configs$google_login, _props$beforeElements, _props$beforeComponen, _credentials$cellphon, _credentials$cellphon2, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _configs$twilio_servi, _configs$twilio_servi2, _props$afterComponent, _props$afterElements;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -160,6 +162,12 @@ var LoginFormUI = function LoginFormUI(props) {
       _ = _useCountdownTimer2[1],
       resetOtpLeftTime = _useCountdownTimer2[2];
 
+  var initParams = {
+    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
+    cookiepolicy: 'single_host_origin',
+    scope: 'profile'
+  };
+
   var onSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
       return _regenerator.default.wrap(function _callee$(_context) {
@@ -218,6 +226,15 @@ var LoginFormUI = function LoginFormUI(props) {
     login({
       user: user,
       token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
+    });
+  };
+
+  var handleSuccessGoogle = function handleSuccessGoogle(user) {
+    var _user$session3;
+
+    login({
+      user: user,
+      token: user === null || user === void 0 ? void 0 : (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
     });
   };
 
@@ -466,6 +483,12 @@ var LoginFormUI = function LoginFormUI(props) {
     handleSuccessFacebookLogin: handleSuccessFacebook
   }), (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
     onSuccess: handleSuccessApple,
+    onFailure: function onFailure(data) {
+      return console.log('onFailure', data);
+    }
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
+    initParams: initParams,
+    handleSuccessGoogleLogin: handleSuccessGoogle,
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
