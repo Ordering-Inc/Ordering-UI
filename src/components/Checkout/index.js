@@ -160,7 +160,11 @@ const CheckoutUI = (props) => {
   useEffect(() => {
     const paymethods = businessDetails?.business?.paymethods || []
     if (paymethods && paymethods.length > 1) {
-      handlePaymethodChange(paymethodSelected)
+      if (cart?.business_id === businessDetails?.business?.id) {
+        handlePaymethodChange(paymethodSelected)
+      } else {
+        handlePaymethodChange(null)
+      }
     }
   }, [cart?.total])
 

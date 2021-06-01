@@ -20,12 +20,19 @@ export const PaymentOptionCash = (props) => {
   const [{ parsePrice }] = useUtils()
 
   const [value, setvalue] = useState(null)
+  let timeout
 
   const handleChangeCash = (e) => {
-    let cash = parseFloat(e?.target?.value)
-    cash = isNaN(cash) ? null : cash
-    setvalue(cash)
-    onChangeData && onChangeData({ cash })
+    if (timeout) {
+      clearTimeout(timeout)
+    }
+    timeout = setTimeout(() => {
+      let cash = parseFloat(e?.target?.value)
+      cash = isNaN(cash) ? null : cash
+      setvalue(cash)
+      onChangeData && onChangeData({ cash })
+      // delay to update payment method when write cash amount
+    }, 1000)
   }
 
   useEffect(() => {
