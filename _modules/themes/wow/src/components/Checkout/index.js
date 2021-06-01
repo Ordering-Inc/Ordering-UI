@@ -27,8 +27,6 @@ var _Confirm = require("../../../../../components/Confirm");
 
 var _CartContent = require("../../../../../components/CartContent");
 
-var _utils = require("../../../../../utils");
-
 var _Buttons = require("../../styles/Buttons");
 
 var _PaymentOptions = require("../PaymentOptions");
@@ -84,7 +82,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CheckoutUI = function CheckoutUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _cart$products, _props$beforeElements3, _props$beforeComponen3, _props$beforeElements4, _props$beforeComponen4, _businessDetails$busi2, _businessDetails$busi3, _props$beforeElements5, _props$beforeComponen5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _props$beforeElements6, _props$beforeComponen6, _cart$products2, _cart$products3, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _cart$products, _props$beforeElements3, _props$beforeComponen3, _props$beforeElements4, _props$beforeComponen4, _businessDetails$busi2, _businessDetails$busi3, _props$beforeElements5, _props$beforeComponen5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _props$beforeElements6, _props$beforeComponen6, _cart$products2, _cart$products3, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errors = props.errors,
@@ -121,6 +119,10 @@ var CheckoutUI = function CheckoutUI(props) {
       _useCustomer2 = _slicedToArray(_useCustomer, 1),
       customerState = _useCustomer2[0];
 
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       errorCash = _useState2[0],
@@ -138,6 +140,8 @@ var CheckoutUI = function CheckoutUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       alertState = _useState6[0],
       setAlertState = _useState6[1];
+
+  var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
 
   var handlePlaceOrder = function handlePlaceOrder() {
     if (!userErrors.length) {
@@ -279,7 +283,7 @@ var CheckoutUI = function CheckoutUI(props) {
     }, props));
   }), !props.isHideSectionFour && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.checkout) === null || _validationFields$fie7 === void 0 ? void 0 : (_validationFields$fie8 = _validationFields$fie7.driver_tip) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.enabled) && /*#__PURE__*/_react.default.createElement(_styles.SectionContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
-    driverTipsOptions: _utils.DriverTipsOptions,
+    driverTipsOptions: driverTipsOptions,
     useOrderContext: true
   }))), /*#__PURE__*/_react.default.createElement(_styles.CheckoutActionContent, null, /*#__PURE__*/_react.default.createElement(_styles.CheckoutActionInnerContent, null, (_props$beforeElements6 = props.beforeElementsSectionFive) === null || _props$beforeElements6 === void 0 ? void 0 : _props$beforeElements6.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
