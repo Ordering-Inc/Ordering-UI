@@ -50,10 +50,10 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
       configTypes = props.configTypes,
       orderTypes = props.orderTypes;
   var defaultType = configTypes !== null && configTypes !== void 0 && configTypes.includes(typeSelected) ? null : configTypes === null || configTypes === void 0 ? void 0 : configTypes[0];
-  return typeSelected !== undefined && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    options: orderTypes.filter(function (type) {
+  return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    options: configTypes ? orderTypes.filter(function (type) {
       return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
-    }),
+    }) : orderTypes,
     defaultValue: defaultType || defaultValue || typeSelected,
     onChange: function onChange(orderType) {
       return handleChangeOrderType(orderType);

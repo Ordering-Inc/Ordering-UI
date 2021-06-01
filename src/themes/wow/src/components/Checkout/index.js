@@ -17,7 +17,6 @@ import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Alert } from '../../../../../components/Confirm'
 import { CartContent } from '../../../../../components/CartContent'
-import { DriverTipsOptions } from '../../../../../utils'
 
 import { Button } from '../../styles/Buttons'
 import { PaymentOptions } from '../PaymentOptions'
@@ -55,6 +54,10 @@ const CheckoutUI = (props) => {
     handleOrderRedirect,
     isCustomerMode
   } = props
+
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
 
   const [validationFields] = useValidationFields()
   const [{ options }] = useOrder()
