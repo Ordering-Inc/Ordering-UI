@@ -56,10 +56,6 @@ const CheckoutUI = (props) => {
     isCustomerMode
   } = props
 
-  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
-    ? JSON.parse(configs?.driver_tip_options?.value) || []
-    : configs?.driver_tip_options?.value || []
-
   const [validationFields] = useValidationFields()
   const [{ options }] = useOrder()
   const [, t] = useLanguage()
