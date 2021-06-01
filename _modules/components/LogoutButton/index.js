@@ -43,12 +43,14 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
   var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
 
   var handleLogOutClick = function handleLogOutClick() {
+    var _window$gapi, _window$gapi$auth;
+
     window.FB.getLoginStatus(function (response) {
       if (response.status === 'connected') {
         window.FB.logout();
       }
     });
-    var GoogleAuth = window.gapi.auth2.getAuthInstance();
+    var GoogleAuth = (_window$gapi = window.gapi) === null || _window$gapi === void 0 ? void 0 : (_window$gapi$auth = _window$gapi.auth2) === null || _window$gapi$auth === void 0 ? void 0 : _window$gapi$auth.getAuthInstance();
 
     if (GoogleAuth) {
       var signedIn = GoogleAuth.isSignedIn.get();
