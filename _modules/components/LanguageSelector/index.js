@@ -13,7 +13,11 @@ var _Select = require("../../styles/Select");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var LanguageSelectorUI = function LanguageSelectorUI(props) {
   var _languagesState$langu;
@@ -21,7 +25,9 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
   var languagesState = props.languagesState,
       currentLanguage = props.currentLanguage,
       handleChangeLanguage = props.handleChangeLanguage,
-      notReload = props.notReload;
+      notReload = props.notReload,
+      defaultLanguages = props.defaultLanguages,
+      defaultCurrentLanguage = props.defaultCurrentLanguage;
 
   var _languages = languagesState === null || languagesState === void 0 ? void 0 : (_languagesState$langu = languagesState.languages) === null || _languagesState$langu === void 0 ? void 0 : _languagesState$langu.map(function (language) {
     var _language$code;
@@ -37,8 +43,8 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     return a.content > b.content ? 1 : b.content > a.content ? -1 : 0;
   });
   return /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    options: _languages,
-    defaultValue: currentLanguage,
+    options: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultLanguages : _languages,
+    defaultValue: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultCurrentLanguage : currentLanguage,
     onChange: function onChange(languageId) {
       return handleChangeLanguage(languageId);
     },
@@ -49,10 +55,18 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
 var LanguageSelector = function LanguageSelector(props) {
   var DefaultChangeLanguage = function DefaultChangeLanguage() {};
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.LanguageSelector, _extends({}, props, {
+  var langProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LanguageSelectorUI,
-    onChangeLanguage: props.onChangeLanguage || DefaultChangeLanguage
-  }));
+    onChangeLanguage: props.onChangeLanguage || DefaultChangeLanguage,
+    defaultLanguages: [{
+      content: 'English',
+      showOnSelected: 'EN',
+      value: 'en'
+    }],
+    defaultCurrentLanguage: 'en'
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.LanguageSelector, langProps);
 };
 
 exports.LanguageSelector = LanguageSelector;
