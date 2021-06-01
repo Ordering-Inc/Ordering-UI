@@ -9,7 +9,8 @@ import {
   useLanguage,
   useUtils,
   useValidationFields,
-  useCustomer
+  useCustomer,
+  useConfig
 } from 'ordering-components'
 import parsePhoneNumber from 'libphonenumber-js'
 
@@ -17,7 +18,6 @@ import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Alert } from '../../../../../components/Confirm'
 import { CartContent } from '../../../../../components/CartContent'
-import { DriverTipsOptions } from '../../../../../utils'
 
 import { Button } from '../../styles/Buttons'
 import { PaymentOptions } from '../PaymentOptions'
@@ -62,10 +62,15 @@ const CheckoutUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
   const [customerState] = useCustomer()
+  const [{ configs }] = useConfig()
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -243,7 +248,7 @@ const CheckoutUI = (props) => {
                   <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                   <DriverTips
                     businessId={cart?.business_id}
-                    driverTipsOptions={DriverTipsOptions}
+                    driverTipsOptions={driverTipsOptions}
                     useOrderContext
                   />
                 </SectionContainer>
