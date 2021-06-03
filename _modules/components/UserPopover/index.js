@@ -231,7 +231,9 @@ var LogoutActionUI = function LogoutActionUI(props) {
       deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
 
   var handleClick = function handleClick() {
-    var GoogleAuth = window.gapi.auth2.getAuthInstance();
+    var _window, _window$gapi, _window$gapi$auth;
+
+    var GoogleAuth = (_window = window) === null || _window === void 0 ? void 0 : (_window$gapi = _window.gapi) === null || _window$gapi === void 0 ? void 0 : (_window$gapi$auth = _window$gapi.auth2) === null || _window$gapi$auth === void 0 ? void 0 : _window$gapi$auth.getAuthInstance();
 
     if (GoogleAuth) {
       var signedIn = GoogleAuth.isSignedIn.get();
