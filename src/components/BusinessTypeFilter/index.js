@@ -25,6 +25,13 @@ const BusinessTypeFilterUI = (props) => {
     handleChangeBusinessType && handleChangeBusinessType(category)
   }
 
+  const type = types.filter(type => type.enabled !== false);
+  var errorBusinessTypes = false;
+    if(type.length != 1){
+      errorBusinessTypes=(true)
+    }else{
+      errorBusinessTypes=(false);
+    }
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -45,7 +52,7 @@ const BusinessTypeFilterUI = (props) => {
             </AutoScroll>
           </Tabs>
         )}
-        {!loading && !error && types && types.length > 0 && (
+        {!loading && !error && types && types.length > 1 && errorBusinessTypes && (
           <Tabs variant='primary'>
             <AutoScroll>
               {types.map((type, i) => type.enabled && (
