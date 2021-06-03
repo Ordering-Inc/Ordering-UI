@@ -156,7 +156,7 @@ const LogoutActionUI = (props) => {
   const [, { deleteUserCustomer }] = useCustomer()
 
   const handleClick = () => {
-    const GoogleAuth = window.gapi.auth2.getAuthInstance()
+    const GoogleAuth = window?.gapi?.auth2?.getAuthInstance()
     if (GoogleAuth) {
       const signedIn = GoogleAuth.isSignedIn.get()
       if (signedIn) {
