@@ -237,7 +237,7 @@ const CartUI = (props) => {
               </table>
             </OrderBill>
           )}
-          {(onClickCheckout || isForceOpenCart) && !isCheckout && (
+          {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
             <CheckoutAction>
               <Button
                 color={(!cart?.valid_maximum || !cart?.valid_minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
