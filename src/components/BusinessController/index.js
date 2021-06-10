@@ -62,8 +62,10 @@ const BusinessControllerUI = (props) => {
       <ContainerCard isSkeleton={isSkeleton}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleClick(business)}>
           <BusinessHero>
-            {business?.header ? (
-              <BusinessHeader bgimage={optimizeImage(business?.header, 'h_400,c_limit')} isClosed={!business?.open}>
+            {isSkeleton ? (
+              <Skeleton height={100} />
+            ) : (
+              <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!business?.open}>
                 <BusinessTags>
                   {business?.featured &&
                     <span className='crown'>
@@ -76,8 +78,6 @@ const BusinessControllerUI = (props) => {
                 </BusinessTags>
                 {!business?.open && <h1>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>
-            ) : (
-              <Skeleton height={100} />
             )}
           </BusinessHero>
           <BusinessContent>
