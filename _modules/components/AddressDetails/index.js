@@ -53,7 +53,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   var addressToShow = props.addressToShow,
       isCartPending = props.isCartPending,
       googleMapsUrl = props.googleMapsUrl,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      apiKey = props.apiKey;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -113,7 +114,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     onClick: function onClick() {
       return setOpenModal(true);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+  }))), apiKey && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
     id: "google-maps-image",
     alt: "google-maps-location",
