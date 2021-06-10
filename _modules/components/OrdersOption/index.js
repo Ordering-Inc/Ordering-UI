@@ -98,15 +98,10 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return !i;
   }) : orders.length > 0;
 
-  var _useState = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      ordersSorted = _useState2[0],
-      setOrdersSorted = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      reorderLoading = _useState4[0],
-      setReorderLoading = _useState4[1];
+      reorderLoading = _useState2[0],
+      setReorderLoading = _useState2[1];
 
   var handleReorder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(orderId) {
@@ -210,16 +205,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return objectStatus && objectStatus;
   };
 
-  (0, _react.useEffect)(function () {
-    var ordersSorted = orders.sort(function (a, b) {
-      if (activeOrders) {
-        return new Date(b.created_at) - new Date(a.created_at);
-      }
-
-      return new Date(a.created_at) - new Date(b.created_at);
-    });
-    setOrdersSorted(ordersSorted);
-  }, [orders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -230,7 +215,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }, props));
   }), (isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
     isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders')))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders')))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
@@ -271,7 +256,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   })), !loading && !error && orders.length > 0 && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     businessesIds: businessesIds,
-    orders: ordersSorted,
+    orders: orders,
     pagination: pagination,
     onRedirectPage: onRedirectPage,
     loadMoreOrders: loadMoreOrders,
@@ -282,7 +267,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     handleReorder: handleReorder
   }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderLoading,
-    orders: ordersSorted,
+    orders: orders,
     pagination: pagination,
     loadMoreOrders: loadMoreOrders,
     onRedirectPage: onRedirectPage,
@@ -302,7 +287,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
 var OrdersOption = function OrdersOption(props) {
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOptionUI,
-    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9] : [1, 2, 5, 6, 10, 11, 12],
+    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21] : [1, 2, 5, 6, 10, 11, 12, 16, 17],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
