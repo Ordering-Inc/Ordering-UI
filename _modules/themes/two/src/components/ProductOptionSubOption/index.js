@@ -21,17 +21,13 @@ var _BsPlusCircle = _interopRequireDefault(require("@meronex/icons/bs/BsPlusCirc
 
 var _styles = require("./styles");
 
-var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
-
-var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
-
-var _MdRadioButtonChecked = _interopRequireDefault(require("@meronex/icons/md/MdRadioButtonChecked"));
+var _RiRadioButtonFill = _interopRequireDefault(require("@meronex/icons/ri/RiRadioButtonFill"));
 
 var _MdRadioButtonUnchecked = _interopRequireDefault(require("@meronex/icons/md/MdRadioButtonUnchecked"));
 
-var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevronRight"));
+var _styles2 = require("../ProductIngredient/styles");
 
-var _Modal = require("../Modal");
+var _BsCheck = _interopRequireDefault(require("@meronex/icons/bs/BsCheck"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,6 +40,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -58,6 +56,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+
   var state = props.state,
       increment = props.increment,
       decrement = props.decrement,
@@ -65,8 +65,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
       option = props.option,
       suboption = props.suboption,
       toggleSelect = props.toggleSelect,
-      changePosition = props.changePosition,
-      productName = props.productName;
+      changePosition = props.changePosition;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -80,11 +79,6 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       showMessage = _useState2[0],
       setShowMessage = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      openModal = _useState4[0],
-      setOpenModal = _useState4[1];
 
   var handleIncrement = function handleIncrement(e) {
     e.stopPropagation();
@@ -120,17 +114,29 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
   }, [balance]);
   var disableIncrement = option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
   var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapSubOption, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     onClick: function onClick() {
       return handleSuboptionClick();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
-    disabled: true
-  }) : state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
-    disabled: true
-  })), suboption.image && /*#__PURE__*/_react.default.createElement(_styles.SubOptionThumbnail, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxContainer, {
+    active: true
+  }, /*#__PURE__*/_react.default.createElement(_BsCheck.default, null)) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxContainer, null) : state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, null)), suboption.image && /*#__PURE__*/_react.default.createElement(_styles.SubOptionThumbnail, {
     src: suboption.image
-  }), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))), (option === null || option === void 0 ? void 0 : option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))), (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
+    disabled: state.quantity === 0,
+    onClick: handleDecrement
+  }), state.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {
+    disabled: disableIncrement,
+    onClick: handleIncrement
+  })), (option === null || option === void 0 ? void 0 : option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
     className: ['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
@@ -151,22 +157,15 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     onClick: function onClick(e) {
       return handlePosition(e, 'right');
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, "+ ", parsePrice(price))), (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement("span", {
-    onClick: function onClick() {
-      return setOpenModal(true);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_BsChevronRight.default, null))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openModal,
-    onClose: function onClose() {
-      return setOpenModal(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.SuboptionQuanitySelectContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, productName), /*#__PURE__*/_react.default.createElement("p", null, option === null || option === void 0 ? void 0 : option.name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('CHOOSE_YOUR_QUANTITY', 'Choose your quantity')), (suboption === null || suboption === void 0 ? void 0 : suboption.max) && /*#__PURE__*/_react.default.createElement("span", null, t('MAX', 'Max'), " ", suboption === null || suboption === void 0 ? void 0 : suboption.max)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
-    disabled: state.quantity === 0,
-    onClick: handleDecrement
-  }), /*#__PURE__*/_react.default.createElement("span", null, state.quantity), /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {
-    disabled: disableIncrement,
-    onClick: handleIncrement
-  }))))));
+  })), /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, "+ ", parsePrice(price))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 var ProductOptionSubOption = function ProductOptionSubOption(props) {

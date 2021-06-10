@@ -15,11 +15,11 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
+var _HorizontalOrdersLayout = require("../../../../../components/HorizontalOrdersLayout");
 
 var _VerticalOrdersLayout = require("../VerticalOrdersLayout");
 
-var _NotFoundSource = require("../NotFoundSource");
+var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _styledComponents = require("styled-components");
 
@@ -45,6 +45,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -62,15 +64,18 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersOptionUI = function OrdersOptionUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera;
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
-  var orderList = props.orderList,
-      pagination = props.pagination,
+  var horizontal = props.horizontal,
       activeOrders = props.activeOrders,
-      onOrderClick = props.onOrderClick,
+      orderList = props.orderList,
+      pagination = props.pagination,
+      isBusinessesPage = props.isBusinessesPage,
       loadMoreOrders = props.loadMoreOrders,
-      horizontal = props.horizontal,
-      isBusinessList = props.isBusinessList;
+      titleContent = props.titleContent,
+      customArray = props.customArray,
+      onRedirectPage = props.onRedirectPage,
+      businessesIds = props.businessesIds;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -78,18 +83,20 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
-  var _useEvent = (0, _orderingComponents.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
-
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 2),
       reorder = _useOrder2[1].reorder;
 
   var loading = orderList.loading,
       error = orderList.error,
-      orders = orderList.orders;
+      values = orderList.orders;
   var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
+  var orders = customArray || values;
+  var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
+    return businessesIds && businessesIds.includes(order.business_id);
+  }).every(function (i) {
+    return !i;
+  }) : orders.length > 0;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -101,11 +108,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       reorderLoading = _useState4[0],
       setReorderLoading = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      orderID = _useState6[0],
-      setOrderID = _useState6[1];
-
   var handleReorder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(orderId) {
       var _yield$reorder, _error, result;
@@ -115,39 +117,44 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
           switch (_context.prev = _context.next) {
             case 0:
               setReorderLoading(true);
-              setOrderID(orderId);
-              _context.prev = 2;
-              _context.next = 5;
+              _context.prev = 1;
+              _context.next = 4;
               return reorder(orderId);
 
-            case 5:
+            case 4:
               _yield$reorder = _context.sent;
               _error = _yield$reorder.error;
               result = _yield$reorder.result;
 
-              if (!_error) {
-                events.emit('go_to_page', {
-                  page: 'checkout',
-                  params: {
-                    cartUuid: result.uuid
-                  }
-                });
+              if (_error) {
+                _context.next = 10;
+                break;
               }
 
-              _context.next = 14;
+              onRedirectPage && onRedirectPage({
+                page: 'checkout',
+                params: {
+                  cartUuid: result.uuid
+                }
+              });
+              return _context.abrupt("return");
+
+            case 10:
+              setReorderLoading(false);
+              _context.next = 16;
               break;
 
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](2);
+            case 13:
+              _context.prev = 13;
+              _context.t0 = _context["catch"](1);
               setReorderLoading(false);
 
-            case 14:
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 11]]);
+      }, _callee, null, [[1, 13]]);
     }));
 
     return function handleReorder(_x) {
@@ -213,20 +220,28 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     });
     setOrdersSorted(ordersSorted);
   }, [orders]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orders.length > 0 || !isBusinessList) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
-    isBusinessList: isBusinessList
-  }, /*#__PURE__*/_react.default.createElement("h1", null, activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), (isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
+    isBusinessesPage: isBusinessesPage
+  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders')))), !loading && ordersSorted.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
   })), loading && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
-    activeOrders: horizontal,
     isSkeleton: true,
-    isBusinessList: isBusinessList
+    activeOrders: horizontal,
+    isBusinessesPage: isBusinessesPage
   }, horizontal ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
     activeOrders: horizontal,
-    isBusinessList: isBusinessList
-  }, _toConsumableArray(Array(6)).map(function (item, i) {
+    isBusinessesPage: isBusinessesPage
+  }, _toConsumableArray(Array(3)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonCard, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonMap, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, {
@@ -241,36 +256,47 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonButton, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)));
-  })) : _toConsumableArray(Array(6)).map(function (item, i) {
+  })) : _toConsumableArray(Array(3)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonInformation, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonText, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonInformation, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 70,
+      height: 70
+    })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonText, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 200
+      width: 80
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   })), !loading && !error && orders.length > 0 && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
+    businessesIds: businessesIds,
     orders: ordersSorted,
     pagination: pagination,
-    onOrderClick: onOrderClick,
+    onRedirectPage: onRedirectPage,
     loadMoreOrders: loadMoreOrders,
-    getOrderStatus: getOrderStatus,
-    isBusinessList: isBusinessList,
-    handleReorder: handleReorder,
+    isBusinessesPage: isBusinessesPage,
     reorderLoading: reorderLoading,
-    orderID: orderID
+    customArray: customArray,
+    getOrderStatus: getOrderStatus,
+    handleReorder: handleReorder
   }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
+    reorderLoading: reorderLoading,
     orders: ordersSorted,
     pagination: pagination,
-    onOrderClick: onOrderClick,
     loadMoreOrders: loadMoreOrders,
+    onRedirectPage: onRedirectPage,
     getOrderStatus: getOrderStatus,
-    handleReorder: handleReorder,
-    reorderLoading: reorderLoading,
-    orderID: orderID
-  })));
+    handleReorder: handleReorder
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 var OrdersOption = function OrdersOption(props) {

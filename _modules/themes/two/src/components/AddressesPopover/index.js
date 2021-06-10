@@ -15,7 +15,13 @@ var _reactPopper = require("react-popper");
 
 var _styles = require("./styles");
 
-var _AddressContent = require("../AddressContent");
+var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
+
+var _AddressList = require("../../../../../components/AddressList");
+
+var _AddressForm = require("../../../../../components/AddressForm");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -42,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressesPopover = function AddressesPopover(props) {
-  var _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options$a3;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options$a3, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       auth = props.auth,
@@ -78,6 +84,7 @@ var AddressesPopover = function AddressesPopover(props) {
       }
     }]
   });
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var styles = popper.styles,
       attributes = popper.attributes,
       forceUpdate = popper.forceUpdate;
@@ -142,23 +149,52 @@ var AddressesPopover = function AddressesPopover(props) {
     style: {
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+  }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
     onClick: props.onClick,
     isHome: props.isHome
-  }, ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.address) === null || _orderState$options$a2 === void 0 ? void 0 : (_orderState$options$a3 = _orderState$options$a2.split(',')) === null || _orderState$options$a3 === void 0 ? void 0 : _orderState$options$a3[0]) || t('SELECT_AN_ADDRESS', 'Select an address')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.address) === null || _orderState$options$a2 === void 0 ? void 0 : (_orderState$options$a3 = _orderState$options$a2.split(',')) === null || _orderState$options$a3 === void 0 ? void 0 : _orderState$options$a3[0]) || t('SELECT_AN_ADDRESS', 'Select an address')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "form_edit",
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), open && /*#__PURE__*/_react.default.createElement(_AddressContent.AddressContent, {
-    auth: auth,
-    onClose: props.onClose,
-    addressState: addressState
-  }), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
+  }, attributes.popper), open && /*#__PURE__*/_react.default.createElement(_styles.Container, null, auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESSES', 'Addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    isPopover: true,
+    changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
+    onClosePopover: props.onClose
+  })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    useValidationFileds: true,
+    address: addressState || {},
+    onClose: function onClose() {
+      return props.onClose && props.onClose();
+    },
+    onCancel: function onCancel() {
+      return props.onClose && props.onClose();
+    },
+    onSaveAddress: function onSaveAddress() {
+      return props.onClose && props.onClose();
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow
-  })));
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.AddressesPopover = AddressesPopover;

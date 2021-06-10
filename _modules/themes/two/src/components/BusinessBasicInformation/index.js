@@ -9,21 +9,25 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _AiFillStar = _interopRequireDefault(require("@meronex/icons/ai/AiFillStar"));
+var _ZoLocation = _interopRequireDefault(require("@meronex/icons/zo/ZoLocation"));
 
-var _BsDot = _interopRequireDefault(require("@meronex/icons/bs/BsDot"));
+var _FaStar = _interopRequireDefault(require("@meronex/icons/fa/FaStar"));
 
-var _orderingComponents = require("ordering-components");
-
-var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
+var _BsExclamationCircle = _interopRequireDefault(require("@meronex/icons/bs/BsExclamationCircle"));
 
 var _styledComponents = require("styled-components");
 
-var _utils = require("../../../../../utils");
+var _Modal = require("../../../../../components/Modal");
+
+var _BusinessInformation = require("../../../../../components/BusinessInformation");
+
+var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -37,11 +41,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var types = ['food', 'laundry', 'alcohol', 'groceries'];
+
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _configState$configs, _configState$configs$, _theme$images, _theme$images$dummies, _business$reviews, _business$reviews2, _orderState$options;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _business$reviews, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
-      businessState = props.businessState;
+      businessState = props.businessState,
+      setOpenBusinessInformation = props.setOpenBusinessInformation,
+      openBusinessInformation = props.openBusinessInformation;
   var business = businessState.business,
       loading = businessState.loading;
   var theme = (0, _styledComponents.useTheme)();
@@ -54,55 +62,84 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
-
-  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
-    return Number(value);
-  })) || [];
-
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
+      parseDistance = _useUtils2$.parseDistance,
       optimizeImage = _useUtils2$.optimizeImage;
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
+  var getBusinessType = function getBusinessType() {
+    if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
+    var _types = [];
+    types.forEach(function (type) {
+      var _type$replace;
+
+      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
+    });
+    return _types.join(', ');
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
     bgimage: business === null || business === void 0 ? void 0 : business.header,
     isSkeleton: isSkeleton,
-    id: "container"
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    id: "container",
+    isClosed: !(business !== null && business !== void 0 && business.open)
+  }, !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 90,
     width: 90
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "info"
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, !loading ? /*#__PURE__*/_react.default.createElement("p", {
+    className: "bold"
+  }, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetail, null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0), " ", t('DELIVERY', 'delivery')), /*#__PURE__*/_react.default.createElement(_BsDot.default, null))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 200
-  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total, /*#__PURE__*/_react.default.createElement(_AiFillStar.default, null)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement("div", null, !loading ? /*#__PURE__*/_react.default.createElement("p", {
+    className: "type"
+  }, getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, "(", business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews.length, " ", t('RATINGS', 'ratings'), ")"), /*#__PURE__*/_react.default.createElement(_BsDot.default, null)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 150
-  }), !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FaStar.default, {
+    className: "start"
+  }), business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 100
+  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_ZoLocation.default, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperBottom, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryAndMin, null, (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement("div", {
-    className: "delivery"
-  }, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)), /*#__PURE__*/_react.default.createElement("p", null, t('DELIVERY_FEE', 'Delivery fee'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
-  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
-  })))), /*#__PURE__*/_react.default.createElement("div", null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("p", null, t('MINUTES', 'Minutes'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
-  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
-  }))))), !loading && /*#__PURE__*/_react.default.createElement(_styles.GroupAndSelector, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
-    configTypes: configTypes,
-    toggle: true
-  }))));
+  }), !loading && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_BsExclamationCircle.default, {
+    className: "popup",
+    onClick: function onClick() {
+      return setOpenBusinessInformation(true);
+    }
+  })))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "70%",
+    open: openBusinessInformation,
+    onClose: setOpenBusinessInformation,
+    padding: "0",
+    hideCloseDefault: true,
+    isTransparent: true
+  }, /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
+    business: business,
+    getBusinessType: getBusinessType,
+    optimizeImage: optimizeImage,
+    onClose: setOpenBusinessInformation
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.BusinessBasicInformation = BusinessBasicInformation;

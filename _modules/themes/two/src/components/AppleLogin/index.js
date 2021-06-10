@@ -5,21 +5,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CouponControl = void 0;
+exports.AppleLogin = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
 
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _Inputs = require("../../styles/Inputs");
+var _FaApple = _interopRequireDefault(require("@meronex/icons/fa/FaApple"));
 
-var _Buttons = require("../../styles/Buttons");
-
-var _Confirm = require("../Confirm");
-
-var _Modal = require("../Modal");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -43,105 +41,54 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var CouponControlUI = function CouponControlUI(props) {
-  var couponDefault = props.couponDefault,
-      couponInput = props.couponInput,
-      handleButtonApplyClick = props.handleButtonApplyClick,
-      handleRemoveCouponClick = props.handleRemoveCouponClick,
-      onChangeInputCoupon = props.onChangeInputCoupon,
-      confirm = props.confirm,
-      setConfirm = props.setConfirm;
+var AppleLoginUI = function AppleLoginUI(props) {
+  var initLoginApple = props.initLoginApple,
+      handleAppleLoginClick = props.handleAppleLoginClick;
+  var location = (0, _reactRouterDom.useLocation)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      openPromoModal = _useState2[0],
-      setOpenPromoModal = _useState2[1];
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
-  var onRemoveCoupon = function onRemoveCoupon() {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_COUPON', 'Are you sure that you want to delete the coupon?')
-    });
-  };
+  (0, _react.useEffect)(function () {
+    var result = location.hash;
 
-  var handleOnAccept = function handleOnAccept() {
-    if (!confirm.error) {
-      handleRemoveCouponClick && handleRemoveCouponClick();
+    if (result) {
+      var _divisions$, _divisions$$split, _divisions$2, _divisions$2$split, _divisions$3, _divisions$3$split;
+
+      var divisions = result === null || result === void 0 ? void 0 : result.split('&', 4);
+      var state = divisions === null || divisions === void 0 ? void 0 : (_divisions$ = divisions[0]) === null || _divisions$ === void 0 ? void 0 : (_divisions$$split = _divisions$.split('state=', 2)) === null || _divisions$$split === void 0 ? void 0 : _divisions$$split[1];
+      var code = divisions === null || divisions === void 0 ? void 0 : (_divisions$2 = divisions[1]) === null || _divisions$2 === void 0 ? void 0 : (_divisions$2$split = _divisions$2.split('code=', 2)) === null || _divisions$2$split === void 0 ? void 0 : _divisions$2$split[1];
+      var idToken = divisions === null || divisions === void 0 ? void 0 : (_divisions$3 = divisions[2]) === null || _divisions$3 === void 0 ? void 0 : (_divisions$3$split = _divisions$3.split('id_token=', 2)) === null || _divisions$3$split === void 0 ? void 0 : _divisions$3$split[1];
+
+      if (code) {
+        handleAppleLoginClick({
+          state: state,
+          code: code,
+          idToken: idToken
+        });
+      }
     }
-
-    setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-      open: false,
-      error: false
-    }));
-    onChangeInputCoupon('');
-  };
-
-  var handleClose = function handleClose() {
-    setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-      open: false,
-      error: false
-    }));
-    onChangeInputCoupon('');
-  };
-
-  var handleApply = function handleApply() {
-    handleButtonApplyClick();
-    setOpenPromoModal(false);
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, couponDefault ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    onClick: function onClick() {
-      return onRemoveCoupon();
-    }
-  }, t('REMOVE_COUPON', 'Remove Coupon'), " ", couponDefault) : /*#__PURE__*/_react.default.createElement("a", {
-    onClick: function onClick() {
-      return setOpenPromoModal(true);
-    }
-  }, t('CHANGE_PROMO_CODE', 'Change promo code')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openPromoModal,
-    onClose: function onClose() {
-      return setOpenPromoModal(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapPromoCodeApply, null, /*#__PURE__*/_react.default.createElement("p", null, t('ENTER_PROMO_CODE', 'Enter Promo Code')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    placeholder: t('DISCOUNT_COUPON', 'Discount coupon'),
-    onChange: function onChange(e) {
-      return onChangeInputCoupon(e.target.value);
-    },
-    autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, [Object.keys(configs).length]);
+  return /*#__PURE__*/_react.default.createElement(_styles.AppleButton, {
+    initialIcon: true,
     color: "secondary",
-    borderRounded: true,
-    disabled: !couponInput,
     onClick: function onClick() {
-      return handleApply();
+      return initLoginApple();
     }
-  }, t('APPLY', 'Apply'))))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('COUPON', 'Coupon'),
-    content: confirm === null || confirm === void 0 ? void 0 : confirm.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: confirm === null || confirm === void 0 ? void 0 : confirm.open,
-    onClose: handleClose,
-    onCancel: !(confirm !== null && confirm !== void 0 && confirm.error) ? function () {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false,
-        error: false
-      }));
-    } : null,
-    onAccept: handleOnAccept,
-    closeOnBackdrop: false
-  }));
+  }, /*#__PURE__*/_react.default.createElement(_FaApple.default, null), /*#__PURE__*/_react.default.createElement("div", null, t('LOGIN_WITH_APPLE', 'Login with Apple')));
 };
 
-var CouponControl = function CouponControl(props) {
-  var couponProp = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: CouponControlUI
+var AppleLogin = function AppleLogin(props) {
+  var propss = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: AppleLoginUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.CouponControl, couponProp);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.AppleLogin, propss);
 };
 
-exports.CouponControl = CouponControl;
+exports.AppleLogin = AppleLogin;

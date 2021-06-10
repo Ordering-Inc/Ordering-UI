@@ -27,17 +27,19 @@ var _ProductOption = require("../ProductOption");
 
 var _ProductOptionSubOption = require("../ProductOptionSubOption");
 
+var _ProductShare = require("../ProductShare");
+
 var _LoginForm = require("../LoginForm");
 
 var _SignUpForm = require("../SignUpForm");
 
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
-var _AddressList = require("../AddressList");
+var _AddressList = require("../../../../../components/AddressList");
 
 var _Modal = require("../Modal");
 
-var _Buttons = require("../../styles/Buttons");
+var _Buttons = require("../../../../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -45,7 +47,7 @@ var _styledComponents = require("styled-components");
 
 var _Inputs = require("../../styles/Inputs");
 
-var _NotFoundSource = require("../NotFoundSource");
+var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59,6 +61,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -71,11 +75,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// import { SoldOutRecommendationSelector } from '../SoldOutRecommendationSelector'
 var ProductOptionsUI = function ProductOptionsUI(props) {
-  var _theme$images, _theme$images$dummies, _orderState$options, _orderState$options2, _error$;
+  var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$dummies, _props$afterMidElemen, _props$afterMidCompon, _orderState$options, _orderState$options2, _error$, _props$afterComponent, _props$afterElements;
 
-  var editMode = props.editMode,
+  var businessSlug = props.businessSlug,
+      editMode = props.editMode,
       isSoldOut = props.isSoldOut,
       productObject = props.productObject,
       productCart = props.productCart,
@@ -123,6 +127,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       modalPageToShow = _useState4[0],
       setModalPageToShow = _useState4[1];
+
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -190,20 +196,36 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return classnames;
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
     className: "product-container"
   }, loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
+    height: 50
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
+    height: 50
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
     height: 200
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    variant: "rect",
-    height: 50
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    variant: "rect",
-    height: 50
-  })), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductHeader, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
+  })), (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeMidElements);
+  }), (_props$beforeMidCompo = props.beforeMidComponents) === null || _props$beforeMidCompo === void 0 ? void 0 : _props$beforeMidCompo.map(function (BeforeMidComponents, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
+      key: i
+    }, props));
+  }), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     id: "product_image"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
@@ -211,7 +233,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     width: "300px",
     height: "300px",
     loading: "lazy"
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
+  })), product && !loading && !error && /*#__PURE__*/_react.default.createElement(_styles.WrapProductShare, null, /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
+    slug: businessSlug,
+    categoryId: product === null || product === void 0 ? void 0 : product.category_id,
+    productId: product === null || product === void 0 ? void 0 : product.id
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
     isProductSoldout: isSoldOut || maxProductQuantity <= 0
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
@@ -242,23 +268,30 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           balance: balance,
           option: option,
           suboption: suboption,
-          state: currentState,
-          productName: product === null || product === void 0 ? void 0 : product.name
+          state: currentState
         });
       }))));
     });
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('PREFERENCES', 'Preferences')), /*#__PURE__*/_react.default.createElement(_styles.SectionDescription, null, /*#__PURE__*/_react.default.createElement("span", null, t('EXTRA_INSTRUCTIONS', 'Extra instructions')), /*#__PURE__*/_react.default.createElement("span", null, t('LIST_ANY_SPECIAL_REQUEST', 'List any special request'))), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('SPECIAL_COMMENT', 'Special comment')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
-    placeholder: t('E_G_ALLERGIES_EXTRA_SPICY_ETC', 'e.g. allergies, extra spicy, etc.'),
+    placeholder: t('SPECIAL_COMMENT', 'Special comment'),
     defaultValue: productCart.comment,
     onChange: handleChangeCommentState,
     disabled: !(productCart && !isSoldOut && maxProductQuantity)
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
+  })), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, MidElement);
+  }), (_props$afterMidCompon = props.afterMidComponents) === null || _props$afterMidCompon === void 0 ? void 0 : _props$afterMidCompon.map(function (MidComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
+      key: i
+    }, props));
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
     className: "incdec-control"
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: decrement,
     className: "".concat(productCart.quantity === 1 || isSoldOut ? 'disabled' : '')
-  }), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
   })), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -267,34 +300,32 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: function onClick() {
       return handleSaveProduct();
     },
-    disabled: orderState.loading,
-    borderRounded: true
-  }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading ')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')), !orderState.loading && /*#__PURE__*/_react.default.createElement("span", null, " - "), /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))), auth && !((_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    disabled: orderState.loading
+  }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')), /*#__PURE__*/_react.default.createElement("span", null, " - "), /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))), auth && !((_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     color: "primary",
-    disabled: true,
-    borderRounded: true
-  }, t('LOADING', 'Loading ')) : /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    disabled: true
+  }, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
-    addressList: user.addresses,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
+    addressList: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? user.addresses : null,
     isProductForm: true
   })), (!auth || isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''),
     color: "primary",
     outline: true,
-    borderRounded: true,
     disabled: isSoldOut || maxProductQuantity <= 0,
     onClick: function onClick() {
       return setModalIsOpen(true);
     }
-  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up')))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up'))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();
     },
-    width: "55%",
+    width: "750px",
     padding: "0"
-  }, /*#__PURE__*/_react.default.createElement(_styles.AuthContainer, null, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+  }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
@@ -337,8 +368,16 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       href: "#"
     }, t('LOGIN', 'Login')),
     isPopup: true
-  }))), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0]
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
   }));
 };
 

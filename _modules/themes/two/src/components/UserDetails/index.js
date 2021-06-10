@@ -11,13 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _Modal = require("../Modal");
+var _styles = require("./styles");
 
 var _orderingComponents = require("ordering-components");
 
-var _UserFormDetails = require("../UserFormDetails");
+var _UserFormDetails = require("../../../../../components/UserFormDetails");
 
-var _styles = require("./styles");
+var _Modal = require("../../../../../components/Modal");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46,15 +46,16 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _formState$result;
+  var _formState$result, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
-  var externalUserData = props.userData,
-      isEdit = props.isEdit,
+  var isEdit = props.isEdit,
       formState = props.formState,
+      cleanFormState = props.cleanFormState,
+      cartStatus = props.cartStatus,
       toggleIsEdit = props.toggleIsEdit,
       validationFields = props.validationFields,
       isUserDetailsEdit = props.isUserDetailsEdit,
-      externalLoading = props.externalLoading;
+      isCustomerMode = props.isCustomerMode;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -64,18 +65,29 @@ var UserDetailsUI = function UserDetailsUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      openModal = _useState2[0],
-      setOpenModal = _useState2[1];
-
-  var userData = externalUserData || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) || user;
+  var userData = props.userData || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) || user;
   (0, _react.useEffect)(function () {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit();
     }
   }, [isUserDetailsEdit]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields.loading || formState.loading || externalLoading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+
+  var toggleEditState = function toggleEditState() {
+    toggleIsEdit();
+    cleanFormState({
+      changes: {}
+    });
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), (validationFields.loading || formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 250,
     height: 25
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -84,28 +96,29 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 210,
     height: 25
-  })), !(validationFields.loading || formState.loading || externalLoading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
+  })), !(validationFields.loading || formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer details')), /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {
-      return setOpenModal(true);
+      return toggleIsEdit();
     }
   }, t('CHANGE', 'Change'))), /*#__PURE__*/_react.default.createElement(_styles.UserData, null, ((userData === null || userData === void 0 ? void 0 : userData.name) || (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userData === null || userData === void 0 ? void 0 : userData.second_lastname)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('NAME', 'Name'), ":"), " ", userData === null || userData === void 0 ? void 0 : userData.name, " ", userData === null || userData === void 0 ? void 0 : userData.middle_name, " ", userData === null || userData === void 0 ? void 0 : userData.lastname, " ", userData === null || userData === void 0 ? void 0 : userData.second_lastname), (userData === null || userData === void 0 ? void 0 : userData.email) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('EMAIL', 'Email'), ":"), " ", userData === null || userData === void 0 ? void 0 : userData.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CELLPHONE', 'Cellphone'), ":"), (userData === null || userData === void 0 ? void 0 : userData.country_phone_code) && "+".concat(userData === null || userData === void 0 ? void 0 : userData.country_phone_code, " "), userData === null || userData === void 0 ? void 0 : userData.cellphone))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('EDIT_PHONE_NUMBER', 'Edit phone number'),
-    open: openModal,
+    open: isEdit,
     onClose: function onClose() {
-      return setOpenModal(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({
-    isCheckout: true
-  }, props, {
-    onCancel: function onCancel() {
-      return setOpenModal(false);
+      return toggleEditState();
     },
-    closeModal: function closeModal() {
-      return setOpenModal(false);
-    }
-  }))));
+    title: t('CUSTOMER_DETAILS', 'Customer Details')
+  }, /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+    isCustomerMode: isCustomerMode
+  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 var UserDetails = function UserDetails(props) {

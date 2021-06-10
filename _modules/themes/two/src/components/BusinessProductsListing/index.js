@@ -17,7 +17,7 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _NotFoundSource = require("../NotFoundSource");
+var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _BusinessBasicInformation = require("../BusinessBasicInformation");
 
@@ -25,27 +25,39 @@ var _BusinessProductsCategories = require("../BusinessProductsCategories");
 
 var _BusinessProductsList = require("../BusinessProductsList");
 
-var _PageNotFound = require("../PageNotFound");
+var _PageNotFound = require("../../../../../components/PageNotFound");
 
 var _ProductForm = require("../ProductForm");
 
+var _FloatingButton = require("../../../../../components/FloatingButton");
+
 var _Modal = require("../Modal");
 
-var _BusinessCartContent = require("../BusinessCartContent");
+var _SearchBar = require("../SearchBar");
 
-var _GroupOrderForm = require("../GroupOrderForm");
+var _UpsellingPage = require("../../../../../components/UpsellingPage");
 
-var _AllDayPopover = require("../AllDayPopover");
+var _Cart = require("../../../../../components/Cart");
 
-var _FloatingButton = require("../FloatingButton");
+var _Select = require("../../../../../styles/Select");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
+
+var _utils = require("../../../../../utils");
+
+var _styledComponents = require("styled-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -55,11 +67,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -76,13 +84,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _business$categories, _productModal$error$, _error$, _options$address, _currentCart$products, _currentCart$products2;
+  var _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _business$categories, _currentCart$products2, _error$, _currentCart$products3, _currentCart$products4, _theme$images$general, _currentCart$products5, _currentCart$products6, _productModal$error$, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
       businessState = props.businessState,
       categorySelected = props.categorySelected,
       searchValue = props.searchValue,
+      sortByValue = props.sortByValue,
       categoryState = props.categoryState,
       categoryId = props.categoryId,
       productId = props.productId,
@@ -96,10 +105,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleChangeSearch = props.handleChangeSearch,
       handleSearchRedirect = props.handleSearchRedirect,
       featuredProducts = props.featuredProducts,
-      filterByMenus = props.filterByMenus,
-      handleChangeFilterByMenus = props.handleChangeFilterByMenus;
+      handleChangeSortBy = props.handleChangeSortBy,
+      isCartOnProductsList = props.isCartOnProductsList,
+      errorQuantityProducts = props.errorQuantityProducts;
   var business = businessState.business,
-      menus = businessState.menus,
       loading = businessState.loading,
       error = businessState.error;
 
@@ -110,17 +119,23 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       _useOrder2$ = _useOrder2[0],
-      carts = _useOrder2$.carts,
-      options = _useOrder2$.options;
+      options = _useOrder2$.options,
+      carts = _useOrder2$.carts;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       auth = _useSession2[0].auth;
 
+  var location = (0, _reactRouterDom.useLocation)();
+  var theme = (0, _styledComponents.useTheme)();
   var windowSize = (0, _useWindowSize.useWindowSize)();
 
   var _useState = (0, _react.useState)(false),
@@ -128,43 +143,52 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       openProduct = _useState2[0],
       setModalIsOpen = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)(props.product),
       _useState4 = _slicedToArray(_useState3, 2),
-      openGroupOrder = _useState4[0],
-      setOpenGroupOrder = _useState4[1];
+      curProduct = _useState4[0],
+      setCurProduct = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(props.product),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      curProduct = _useState6[0],
-      setCurProduct = _useState6[1];
+      openUpselling = _useState6[0],
+      setOpenUpselling = _useState6[1];
 
   var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      openBusinessInformation = _useState8[0],
-      setOpenBusinessInformation = _useState8[1];
+      canOpenUpselling = _useState8[0],
+      setCanOpenUpselling = _useState8[1];
 
-  var _useState9 = (0, _react.useState)({}),
+  var _useState9 = (0, _react.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      openPopover = _useState10[0],
-      setOpenPopover = _useState10[1];
+      openBusinessInformation = _useState10[0],
+      setOpenBusinessInformation = _useState10[1];
 
-  var _useEvent = (0, _orderingComponents.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isCartOpen = _useState12[0],
+      setIsCartOpen = _useState12[1];
 
-  var location = (0, _reactRouterDom.useLocation)();
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
 
     return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (business === null || business === void 0 ? void 0 : business.slug);
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
+  var sortByOptions = [{
+    value: null,
+    content: t('SORT_BY', 'Sort By'),
+    showOnSelected: t('SORT_BY', 'Sort By')
+  }, {
+    value: 'rank',
+    content: t('RANK', 'Rank'),
+    showOnSelected: t('RANK', 'Rank')
+  }, {
+    value: 'a-z',
+    content: t('A_to_Z', 'A-Z'),
+    showOnSelected: t('A_to_Z', 'A-Z')
+  }];
 
   var handler = function handler() {
     setOpenBusinessInformation(true);
-  };
-
-  var OnGroupOrderClick = function OnGroupOrderClick() {
-    setOpenGroupOrder(true);
   };
 
   var onProductClick = function onProductClick(product) {
@@ -197,10 +221,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     });
   };
 
-  var closeModalGroupOrderForm = function closeModalGroupOrderForm() {
-    setOpenGroupOrder(false);
-  };
-
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2;
 
@@ -217,12 +237,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     }
   };
 
-  var handleTogglePopover = function handleTogglePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, !openPopover[type])));
-  };
-
-  var handleClosePopover = function handleClosePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
+  var handleUpsellingPage = function handleUpsellingPage() {
+    onCheckoutRedirect(currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid);
+    setOpenUpselling(false);
+    setCanOpenUpselling(false);
   };
 
   (0, _react.useEffect)(function () {
@@ -257,24 +275,45 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
+    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "bp-list"
+  }, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
-    openBusinessInformation: openBusinessInformation,
-    OnGroupOrderClick: OnGroupOrderClick
-  }), /*#__PURE__*/_react.default.createElement(_AllDayPopover.AllDayPopover, {
-    menus: menus,
-    filterByMenus: filterByMenus,
-    handleChangeFilterByMenus: handleChangeFilterByMenus,
-    allTime: business === null || business === void 0 ? void 0 : business.today,
-    open: openPopover.allDay,
-    onClick: function onClick() {
-      return handleTogglePopover('allDay');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('allDay');
+    openBusinessInformation: openBusinessInformation
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsHeader, {
+    isDelivery: options.type === 1
+  }, options.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.DeliveryInfo, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryPrice, null, !(businessState !== null && businessState !== void 0 && businessState.loading) ? /*#__PURE__*/_react.default.createElement("h2", null, (businessState === null || businessState === void 0 ? void 0 : businessState.business) && parsePrice((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70
+  }), /*#__PURE__*/_react.default.createElement("p", null, t('DELIVERY_FEE', 'Delivery fee'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryTime, null, !(businessState !== null && businessState !== void 0 && businessState.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (options === null || options === void 0 ? void 0 : options.type) === 1 ? /*#__PURE__*/_react.default.createElement("h2", null, parseInt((0, _utils.convertHoursToMinutes)(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.delivery_time))) : /*#__PURE__*/_react.default.createElement("h5", null, parseInt((0, _utils.convertHoursToMinutes)(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.pickup_time)))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70
+  }), /*#__PURE__*/_react.default.createElement("p", null, t('MINUTES', 'minutes')))), (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+    isDelivery: options.type === 1
+  }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    isCustomLayout: true,
+    onSearch: handleChangeSearch,
+    search: searchValue,
+    placeholder: t('SEARCH', 'Search'),
+    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.lazy_load_products_recommended
+  }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    notAsync: true,
+    notReload: true,
+    options: sortByOptions,
+    defaultValue: sortByValue,
+    onChange: function onChange(val) {
+      return handleChangeSortBy && handleChangeSortBy(val);
     }
-  }), !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
+  }))), !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [{
       id: null,
       name: t('ALL', 'All')
@@ -287,7 +326,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categorySelected: categorySelected,
     onClickCategory: handleChangeCategory,
     featured: featuredProducts,
-    allTime: business === null || business === void 0 ? void 0 : business.today,
     openBusinessInformation: openBusinessInformation
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
     categories: [{
@@ -307,49 +345,17 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleSearchRedirect: handleSearchRedirect,
     featured: featuredProducts,
     searchValue: searchValue,
-    handleClearSearch: handleChangeSearch
-  })), /*#__PURE__*/_react.default.createElement(_styles.WrapBottomSection, null, /*#__PURE__*/_react.default.createElement("p", null, t('PRICES_ON_THIS_MENU_ARE_SET_DIRECTLY_BY_THE_MERCHANT', 'Prices on this menu are set directly by the Merchant.')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "55%",
-    open: openProduct,
-    closeOnBackdrop: true,
-    onClose: function onClose() {
-      return closeModalProductForm();
-    },
-    padding: "0",
-    isProductForm: true
-  }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 45
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 250
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 45,
-    count: 8
-  }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
-  }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')
-  }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
-    businessSlug: business === null || business === void 0 ? void 0 : business.slug,
-    product: productModal.product || curProduct,
-    businessId: business === null || business === void 0 ? void 0 : business.id,
-    onSave: handlerProductAction
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
-    open: openGroupOrder,
-    closeOnBackdrop: true,
-    onClose: function onClose() {
-      return closeModalGroupOrderForm();
-    },
-    padding: "0"
-  }, /*#__PURE__*/_react.default.createElement(_GroupOrderForm.GroupOrderForm, null)), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0,
+    handleClearSearch: handleChangeSearch,
+    errorQuantityProducts: errorQuantityProducts
+  })))), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: {
       business: {},
       loading: true
     },
     isSkeleton: true,
     handler: handler,
-    openBusinessInformation: openBusinessInformation,
-    OnGroupOrderClick: OnGroupOrderClick
+    openBusinessInformation: openBusinessInformation
   }), /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [],
     isSkeleton: true,
@@ -358,7 +364,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categories: [],
     category: categorySelected,
     categoryState: categoryState,
-    isBusinessLoading: loading
+    isBusinessLoading: loading,
+    errorQuantityProducts: errorQuantityProducts
   }))), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
@@ -373,30 +380,73 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0],
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  })), !loading && business !== null && business !== void 0 && business.id ? /*#__PURE__*/_react.default.createElement(_BusinessCartContent.BusinessCartContent, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInnerContainer, null, loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 250
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+    isForceOpenCart: true,
     cart: currentCart,
-    orderType: (options === null || options === void 0 ? void 0 : options.type) || 1,
-    business: business,
-    userLocation: options === null || options === void 0 ? void 0 : (_options$address = options.address) === null || _options$address === void 0 ? void 0 : _options$address.location,
-    categoryState: categoryState
-  }) : /*#__PURE__*/_react.default.createElement(_BusinessCartContent.BusinessCartContent, {
-    isSkeleton: true
-  }), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && auth && windowSize.width < 768 && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
-    btnText: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.maximum)) : !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)) : t('VIEW_ORDER', 'View Order'),
+    isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,
+    isProducts: currentCart.products.length,
+    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.length) > 0,
+    handleCartOpen: function handleCartOpen(val) {
+      return setIsCartOpen(val);
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: (_theme$images$general = theme.images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.businessEmptyCart,
+    alt: "empty cart"
+  }), /*#__PURE__*/_react.default.createElement("p", null, t('YOUR_CART_EMPTY', 'Your cart is empty')), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_ITEMS_TO_GET_STARTED', 'Add items to get started'))))))), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products5 = currentCart.products) === null || _currentCart$products5 === void 0 ? void 0 : _currentCart$products5.length) > 0 && auth && windowSize.width < 1024 && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
+    btnText: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.maximum)) : !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)) : !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading'),
     isSecondaryBtn: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum),
-    btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length,
+    btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.length,
     handleClick: function handleClick() {
-      return onCheckoutRedirect(currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid);
+      return setOpenUpselling(true);
     },
-    disabled: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum)
+    disabled: openUpselling || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum)
+  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "750px",
+    open: openProduct,
+    closeOnBackdrop: true,
+    onClose: function onClose() {
+      return closeModalProductForm();
+    },
+    padding: "0",
+    isProductForm: true
+  }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 45,
+    count: 8
+  }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
+  }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')
+  }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+    businessSlug: business === null || business === void 0 ? void 0 : business.slug,
+    product: productModal.product || curProduct,
+    businessId: business === null || business === void 0 ? void 0 : business.id,
+    onSave: handlerProductAction
+  })), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && openUpselling && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+    businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
+    business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,
+    cartProducts: currentCart === null || currentCart === void 0 ? void 0 : currentCart.products,
+    handleUpsellingPage: handleUpsellingPage,
+    openUpselling: openUpselling,
+    canOpenUpselling: canOpenUpselling,
+    setCanOpenUpselling: setCanOpenUpselling
+  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
   }));
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isInitialRender = _useState12[0],
-      setIsInitialRender = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isInitialRender = _useState14[0],
+      setIsInitialRender = _useState14[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

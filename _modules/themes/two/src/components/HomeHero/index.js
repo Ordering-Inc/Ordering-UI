@@ -15,19 +15,23 @@ var _orderingComponents = require("ordering-components");
 
 var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
 
-var _Modal = require("../Modal");
-
-var _AddressForm = require("../AddressForm");
-
-var _AddressList = require("../AddressList");
+var _BiRightArrowAlt = _interopRequireDefault(require("@meronex/icons/bi/BiRightArrowAlt"));
 
 var _styles = require("./styles");
+
+var _Modal = require("../Modal");
+
+var _AddressForm = require("../../../../../components/AddressForm");
+
+var _AddressList = require("../../../../../components/AddressList");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -48,23 +52,21 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _theme$images, _theme$images$general, _orderState$options2, _orderState$options2$, _orderState$options3;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _orderState$options2, _orderState$options2$, _orderState$options3, _props$afterComponent, _props$afterElements;
 
   var onFindBusiness = props.onFindBusiness;
 
-  var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
-  var theme = (0, _styledComponents.useTheme)();
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      auth = _useSession2[0].auth;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
   var _useState = (0, _react.useState)({
     listOpen: false,
@@ -74,19 +76,8 @@ var HomeHero = function HomeHero(props) {
       modals = _useState2[0],
       setModals = _useState2[1];
 
+  var theme = (0, _styledComponents.useTheme)();
   var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
-
-  var handleAddressInput = function handleAddressInput() {
-    if (auth) {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: true
-      }));
-    } else {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: true
-      }));
-    }
-  };
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -105,11 +96,43 @@ var HomeHero = function HomeHero(props) {
     onFindBusiness && onFindBusiness();
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
+  var handleAddressInput = function handleAddressInput() {
+    if (auth) {
+      setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: true
+      }));
+    } else {
+      setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        formOpen: true
+      }));
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    return function () {
+      return setModals({
+        listOpen: false,
+        formOpen: false
+      });
+    };
+  }, []);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_FAVORITE_RESTURANTS', 'Your favorite restaurants, delivered')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "Isotype",
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotypeInvert,
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_DOORDASH', 'Restaurants and more, delivered to your door')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
     onClick: handleAddressInput
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("div", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_AN_ADDRESS', 'Type an address')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("div", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_AN_ADDRESS', 'Type an address')), /*#__PURE__*/_react.default.createElement(_styles.WrappArrow, null, /*#__PURE__*/_react.default.createElement(_BiRightArrowAlt.default, null)))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS', 'Address'),
     open: modals.formOpen,
     onClose: function onClose() {
@@ -156,7 +179,15 @@ var HomeHero = function HomeHero(props) {
     onAccept: function onAccept() {
       return handleFindBusinesses();
     }
-  })));
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.HomeHero = HomeHero;

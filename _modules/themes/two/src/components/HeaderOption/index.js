@@ -9,11 +9,17 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _FaShoppingCart = _interopRequireDefault(require("@meronex/icons/fa/FaShoppingCart"));
+var _IosBasket = _interopRequireDefault(require("@meronex/icons/ios/IosBasket"));
+
+var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
+
+var _FaRegClock = _interopRequireDefault(require("@meronex/icons/fa/FaRegClock"));
 
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -28,10 +34,16 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HeaderOption = function HeaderOption(props) {
+  var _props$beforeElements, _props$beforeComponen, _configs$dates_moment, _props$afterComponent, _props$afterElements;
+
   var variant = props.variant,
       addressState = props.addressState,
       momentState = props.momentState,
       totalCarts = props.totalCarts;
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -41,17 +53,37 @@ var HeaderOption = function HeaderOption(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     variant: variant,
     onClick: function onClick() {
       return props.onClick(variant);
     },
     isHome: props.isHome
-  }, variant === 'cart' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaShoppingCart.default, {
+  }, variant === 'cart' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosBasket.default, {
     id: "icon"
-  }), totalCarts > 0 && /*#__PURE__*/_react.default.createElement("p", null, totalCarts)), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, momentState ? parseDate(momentState, {
-    outputFormat: 'MM/DD hh:mma'
-  }) : t('ASAP_ABBREVIATION', 'ASAP')), variant === 'address' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, addressState || t('SELECT_AN_ADDRESS', 'Select an address')));
+  }), totalCarts > 0 && /*#__PURE__*/_react.default.createElement("p", null, totalCarts)), variant === 'address' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, {
+    id: "icon"
+  }), addressState || t('SELECT_AN_ADDRESS', 'Select an address')), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, {
+    id: "icon"
+  }), momentState ? parseDate(momentState, {
+    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
+  }) : t('ASAP_ABBREVIATION', 'ASAP'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.HeaderOption = HeaderOption;
