@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Button } from '../../styles/Buttons'
+import { Button } from '../../../../../styles/Buttons'
 
-export const SMSButton = styled(Button)`
-  background-color: #EFEFEF;
+export const AppleButton = styled(Button)`
+  background: #181818;
   border-color: #EFEFEF;
   font-size: 16px;
   font-weight: 400;
@@ -11,12 +11,15 @@ export const SMSButton = styled(Button)`
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+
   svg {
     font-size: 28px;
-    color: #616A6B;
+    color: #FFF;
   }
 
   div {
     margin: 0 auto;
+    color: #FFF;
+    text-transform: uppercase;
   }
 `
