@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styles = require("./styles");
 
-var _Tabs = require("../../../styles/Tabs");
+var _Tabs = require("../../../../../../styles/Tabs");
 
 var _BsPerson = _interopRequireDefault(require("@meronex/icons/bs/BsPerson"));
 

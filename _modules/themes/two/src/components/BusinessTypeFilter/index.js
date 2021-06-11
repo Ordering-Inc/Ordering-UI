@@ -13,11 +13,11 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _Tabs = require("../../styles/Tabs");
+var _Tabs = require("../../../../../styles/Tabs");
 
 var _styles = require("./styles");
 
-var _AutoScroll = require("../AutoScroll");
+var _AutoScroll = require("../../../../../components/AutoScroll");
 
 var _styledComponents = require("styled-components");
 
@@ -41,6 +41,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -54,12 +56,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
-  var _theme$images, _theme$images$categor;
+  var _theme$images, _theme$images$categor, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var typesState = props.typesState,
       currentTypeSelected = props.currentTypeSelected,
-      handleChangeBusinessType = props.handleChangeBusinessType,
-      noAutoScroll = props.noAutoScroll;
+      handleChangeBusinessType = props.handleChangeBusinessType;
   var loading = typesState.loading,
       error = typesState.error,
       types = typesState.types;
@@ -81,9 +82,16 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     handleChangeBusinessType && handleChangeBusinessType(category);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
-    id: "container",
-    noAutoScroll: noAutoScroll
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
+    id: "container"
   }, loading && /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
@@ -99,8 +107,8 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     });
   })))), !loading && !error && types && types.length > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
-  }, !noAutoScroll ? /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, types.map(function (type, i) {
-    return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, types.map(function (type, i) {
+    return type.enabled && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       key: type.id,
       active: type.id === currentTypeSelected,
       className: "category"
@@ -120,28 +128,15 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       height: "150px",
       loading: "lazy"
     })), t("BUSINESS_TYPE_".concat(type.name.replace(/\s/g, '_').toUpperCase()), type.name));
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, types.map(function (type, i) {
-    return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
-      key: type.id,
-      active: type.id === currentTypeSelected,
-      className: "category"
-    }, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
-      active: type.id === currentTypeSelected,
-      load: load
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: type.image || defaultImage,
-      alt: type.name.toLowerCase(),
-      onLoad: function onLoad() {
-        return setLoad(true);
-      },
-      onClick: function onClick() {
-        return handleChangeCategory(type.id);
-      },
-      width: "150px",
-      height: "150px",
-      loading: "lazy"
-    })), t("BUSINESS_TYPE_".concat(type.name.replace(/\s/g, '_').toUpperCase()), type.name));
-  }))));
+  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 var styles = {

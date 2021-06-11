@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactHookForm = require("react-hook-form");
 
-var _Confirm = require("../Confirm");
+var _Confirm = require("../../../../../components/Confirm");
 
 var _orderingComponents = require("ordering-components");
 
@@ -19,11 +19,13 @@ var _styles = require("./styles");
 
 var _Inputs = require("../../styles/Inputs");
 
-var _Buttons = require("../../styles/Buttons");
+var _Buttons = require("../../../../../styles/Buttons");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -44,17 +46,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ForgotPasswordUI = function ForgotPasswordUI(props) {
+  var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+
   var hanldeChangeInput = props.hanldeChangeInput,
       handleButtonForgotPasswordClick = props.handleButtonForgotPasswordClick,
       formState = props.formState,
       formData = props.formData,
-      isPopup = props.isPopup,
-      elementLinkToLogin = props.elementLinkToLogin;
-
-  var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors;
+      elementLinkToLogin = props.elementLinkToLogin,
+      isPopup = props.isPopup;
+  var formMethods = (0, _reactHookForm.useForm)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -70,18 +70,45 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var emailInput = (0, _react.useRef)(null);
+
+  var onSubmit = function onSubmit() {
+    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+      success: true
+    }));
+    handleButtonForgotPasswordClick();
+  };
+
+  var closeAlert = function closeAlert() {
+    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+      open: false,
+      content: []
+    }));
+  };
+
+  var handleChangeInputEmail = function handleChangeInputEmail(e) {
+    hanldeChangeInput({
+      target: {
+        name: 'email',
+        value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+      }
+    });
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
+  };
+
   (0, _react.useEffect)(function () {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(formMethods.errors).length > 0) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         success: false,
         open: true,
         title: t('ERROR_UNKNOWN', 'An error has ocurred'),
-        content: Object.values(errors).map(function (error) {
+        content: Object.values(formMethods.errors).map(function (error) {
           return error.message;
         })
       }));
     }
-  }, [errors]);
+  }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result3;
 
@@ -104,55 +131,66 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       }));
     }
   }, [formState.loading]);
-
-  var onSubmit = function onSubmit() {
-    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-      success: true
-    }));
-    handleButtonForgotPasswordClick();
-  };
-
-  var closeAlert = function closeAlert() {
-    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-      open: false,
-      content: []
-    }));
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_styles.ForgotPasswordContainer, {
-    isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
-    isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, null, t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_FORGOT_PASSWORD', 'Enter your email addres and we\'ll send you a link to reset your password.')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
-    noValidate: true,
-    isPopup: isPopup,
-    onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    type: "email",
-    name: "email",
-    "aria-label": "email",
-    placeholder: t('EMAIL', 'Email'),
-    tabindex: "1",
-    ref: register({
+  (0, _react.useEffect)(function () {
+    formMethods.register('email', {
       required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
       pattern: {
         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
         message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
       }
-    }),
-    onChange: function onChange(e) {
-      return hanldeChangeInput(e);
+    });
+  }, [formMethods]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.ForgotPasswordContainer, {
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
+    isPopup: isPopup
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+    noValidate: true,
+    isPopup: isPopup,
+    onSubmit: formMethods.handleSubmit(onSubmit)
+  }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeMidElements);
+  }), (_props$beforeMidCompo = props.beforeMidComponents) === null || _props$beforeMidCompo === void 0 ? void 0 : _props$beforeMidCompo.map(function (BeforeMidComponents, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    type: "email",
+    name: "email",
+    "aria-label": "email",
+    placeholder: t('EMAIL', 'Email'),
+    ref: function ref(e) {
+      emailInput.current = e;
     },
+    onChange: handleChangeInputEmail,
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: alertState.success ? 'secondary' : 'primary',
-    type: "subm(it",
-    disabled: alertState.success && formState.result.result || formState.loading
+  }), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, MidElement);
+  }), (_props$afterMidCompon = props.afterMidComponents) === null || _props$afterMidCompon === void 0 ? void 0 : _props$afterMidCompon.map(function (MidComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: formState.loading || alertState.success ? 'secondary' : 'primary',
+    type: "submit",
+    disabled: formState.loading || alertState.success
   }, formState.loading ? t('LOADING', 'Loading...') : alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD', 'Link Sent') : t('FRONT_RECOVER_PASSWORD', 'Recover Password'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('SIGN_IN_MESSAGE', 'Do you want to sign in?')), elementLinkToLogin)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('LOGIN', 'Login'),
+    title: alertState.title,
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -163,6 +201,14 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
   }));
 };
 

@@ -13,11 +13,11 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _Modal = require("../Modal");
+var _Modal = require("../../../../../components/Modal");
 
-var _Confirm = require("../Confirm");
+var _Confirm = require("../../../../../components/Confirm");
 
-var _AddressList = require("../AddressList");
+var _AddressList = require("../../../../../components/AddressList");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -28,6 +28,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -42,11 +44,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _orderState$options2, _orderState$options2$;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options3, _orderState$options3$, _props$afterComponent, _props$afterElements;
 
-  var isCartView = props.isCartView,
-      addressToShow = props.addressToShow,
-      googleMapsUrl = props.googleMapsUrl;
+  var addressToShow = props.addressToShow,
+      isCartPending = props.isCartPending,
+      googleMapsUrl = props.googleMapsUrl,
+      isCustomerMode = props.isCustomerMode;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -58,8 +61,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      openChangeAddressModal = _useState2[0],
-      setOpenChangeAddressModal = _useState2[1];
+      openModal = _useState2[0],
+      setOpenModal = _useState2[1];
 
   var _useState3 = (0, _react.useState)({
     open: false,
@@ -68,6 +71,12 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       alertState = _useState4[0],
       setAlertState = _useState4[1];
+
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 1),
+      user = _useCustomer2[0].user;
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -80,19 +89,25 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       return;
     }
 
-    setOpenChangeAddressModal(false);
+    setOpenModal(false);
   };
 
   (0, _react.useEffect)(function () {
     return function () {
-      return setOpenChangeAddressModal(false);
+      return setOpenModal(false);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, {
-    isCartView: isCartView
-  }, !isCartView && /*#__PURE__*/_react.default.createElement(_styles.UserAddress, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement("span", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADDRESS', 'Address')), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {
-      return setOpenChangeAddressModal(true);
+      return setOpenModal(true);
     }
   }, t('CHANGE', 'Change'))), /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
@@ -101,22 +116,24 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     width: "288px",
     height: "162px",
     loading: "lazy"
-  })), !isCartView && /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('CHANGE_ADDRESS', 'Change Address'),
-    open: openChangeAddressModal,
+  })), /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESSES', 'Addresses'),
+    open: openModal,
     width: "70%",
     onClose: function onClose() {
-      return setOpenChangeAddressModal(false);
+      return setOpenModal(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     onCancel: function onCancel() {
-      return setOpenChangeAddressModal(false);
+      return setOpenModal(false);
     },
     onAccept: function onAccept() {
       return handleFindBusinesses();
-    }
+    },
+    userCustomerSetup: isCustomerMode && user
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,
@@ -135,6 +152,14 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       });
     },
     closeOnBackdrop: false
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
   }));
 };
 

@@ -15,11 +15,17 @@ var _ThemeContext = require("../../../../../contexts/ThemeContext");
 
 var _orderingComponents = require("ordering-components");
 
+var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
+
 var _styles = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -34,15 +40,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SearchBar = function SearchBar(props) {
-  var _el$current, _theme$images, _theme$images$general, _el$current2, _theme$images2, _theme$images2$genera;
+  var _props$beforeElements, _props$beforeComponen, _el$current, _el$current2, _theme$images, _theme$images$general, _props$afterComponent, _props$afterElements;
 
   var onSearch = props.onSearch,
       search = props.search,
       placeholder = props.placeholder,
       lazyLoad = props.lazyLoad,
-      isEnterKeyLoad = props.isEnterKeyLoad,
-      isCustomMode = props.isCustomMode,
-      externalBusinessMap = props.externalBusinessMap;
+      isCustomLayout = props.isCustomLayout;
 
   var _useTheme = (0, _ThemeContext.useTheme)(),
       _useTheme2 = _slicedToArray(_useTheme, 1),
@@ -57,22 +61,16 @@ var SearchBar = function SearchBar(props) {
   var el = (0, _react.useRef)();
 
   var onChangeSearch = function onChangeSearch(e) {
-    if (isEnterKeyLoad) {
-      if (e.keyCode === 13) {
-        onSearch(e.target.value);
-      }
-    } else {
-      if (e.keyCode === 13) return;
+    if (e.keyCode === 13) return;
 
-      if (previousSearch !== e.target.value) {
-        if (!lazyLoad) {
+    if (previousSearch !== e.target.value) {
+      if (!lazyLoad) {
+        onSearch(e.target.value);
+      } else {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
           onSearch(e.target.value);
-        } else {
-          clearTimeout(timeout);
-          timeout = setTimeout(function () {
-            onSearch(e.target.value);
-          }, 750);
-        }
+        }, 750);
       }
     }
 
@@ -91,24 +89,38 @@ var SearchBar = function SearchBar(props) {
       el.current.value = '';
     }
   }, [search]);
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, {
-    className: !externalBusinessMap && 'search-bar',
-    externalBusinessMap: externalBusinessMap,
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, {
+    className: !isCustomLayout && 'search-bar',
+    isCustomLayout: isCustomLayout,
     hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value
-  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, null, (_el$current2 = el.current) !== null && _el$current2 !== void 0 && _el$current2.value ? /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
+    onClick: handleClear
+  }) : /*#__PURE__*/_react.default.createElement("img", {
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.searchIcon
+  })), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: el,
     name: "search",
     "aria-label": "search",
     placeholder: placeholder,
     autoComplete: "off",
     maxLength: "500"
-  }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, null, isCustomMode ? /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.searchIcon
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_el$current2 = el.current) !== null && _el$current2 !== void 0 && _el$current2.value ? /*#__PURE__*/_react.default.createElement("span", {
-    onClick: handleClear
-  }, t('CLEAR', 'Clear')) : /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.searchIcon
-  }))));
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.SearchBar = SearchBar;

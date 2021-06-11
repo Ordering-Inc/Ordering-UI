@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrderTypeWrapper = exports.Option = void 0;
+exports.OrderTypeItem = exports.ContentOption = exports.SelectedOption = exports.OrderTypeWrapper = exports.Option = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -17,42 +17,32 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  padding: 15px  5px;\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.darkTextColor;
-}, function (_ref) {
-  var selected = _ref.selected;
-  return selected && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    border-bottom: 3px solid ", ";\n    font-weight: 500;\n    ", "\n    ", "\n  "])), function (props) {
-    return props.theme.colors.primary;
-  }, function (_ref2) {
-    var toggle = _ref2.toggle;
-    return toggle && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      border-bottom: none;\n      background: ", ";\n      color: #fff;\n    "])), function (props) {
-      return props.theme.colors.darkTextColor;
-    });
-  }, function (_ref3) {
-    var radioStyle = _ref3.radioStyle;
-    return radioStyle && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      border-bottom: none;\n    "])));
-  });
-}, function (_ref4) {
-  var toggle = _ref4.toggle;
-  return toggle && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    padding: 0px 10px;\n    width: 50%;\n    border-radius: 25px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    white-space: nowrap;\n  "])));
-}, function (_ref5) {
-  var radioStyle = _ref5.radioStyle;
-  return radioStyle && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    column-gap: 10px;\n    padding: 0px;\n    svg {\n      font-size: 24px;\n    }\n  "])));
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  svg {\n    min-width: 14px;\n    margin-right: 5px;\n    ", "\n  }  \n"])), function (props) {
+  var _props$theme;
+
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n    "])));
 });
 
 exports.Option = Option;
 
-var OrderTypeWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0 10px;\n\n  ", "\n  ", "\n  @media (max-width: 576px) {\n    ", "\n  }\n"])), function (_ref6) {
-  var toggle = _ref6.toggle;
-  return toggle && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    border-right: none;\n    background: ", ";\n    height: 42px;\n    border-radius: 25px;\n    padding: 0px;\n  "])), function (props) {
-    return props.theme.colors.secondary;
-  });
-}, function (_ref7) {
-  var radioStyle = _ref7.radioStyle;
-  return radioStyle && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    border-right: none;\n    flex-direction: column;\n    row-gap: 20px;\n    padding: 10px 0;\n  "])));
-}, function (_ref8) {
-  var dropDownStyle = _ref8.dropDownStyle;
-  return dropDownStyle && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      padding: 0;\n\n      #item {\n        padding-left: 5px;\n        padding-right: 5px;\n      }\n    "])));
+var OrderTypeWrapper = _styledComponents.default.span(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  div {\n    max-width: 120px;\n  }\n\n  #list {\n    ", "\n  }\n  @media (min-width: 380px) {\n    div{\n      max-width: initial;\n    }\n  }\n"])), function (props) {
+  var _props$theme2;
+
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      left: inherit;\n    "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      right: inherit;\n    "])));
 });
 
 exports.OrderTypeWrapper = OrderTypeWrapper;
+
+var SelectedOption = _styledComponents.default.p(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["  \n  margin: 0;\n  max-width: 80px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  \n  @media (min-width: 380px) {\n      max-width: initial;\n  }\n"])));
+
+exports.SelectedOption = SelectedOption;
+var ContentOption = (0, _styledComponents.default)(SelectedOption)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  max-width: 80px;\n"])));
+exports.ContentOption = ContentOption;
+
+var OrderTypeItem = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  cursor: pointer;\n  width: fit-content;\n\n  svg {\n    font-size: 24px;\n\n    ", "\n  }\n\n  > div {\n    svg {\n      display: none;\n    }\n  }\n"])), function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "])));
+});
+
+exports.OrderTypeItem = OrderTypeItem;

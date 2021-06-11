@@ -29,19 +29,19 @@ var _EnPaypal = _interopRequireDefault(require("@meronex/icons/en/EnPaypal"));
 
 var _orderingComponents = require("ordering-components");
 
-var _Modal = require("../Modal");
+var _Modal = require("../../../../../components/Modal");
 
-var _PaymentOptionCash = require("../PaymentOptionCash");
+var _PaymentOptionCash = require("../../../../../components/PaymentOptionCash");
 
-var _PaymentOptionStripe = require("../PaymentOptionStripe");
+var _PaymentOptionStripe = require("../../../../../components/PaymentOptionStripe");
 
-var _PaymentOptionPaypal = require("../PaymentOptionPaypal");
+var _PaymentOptionPaypal = require("../../../../../components/PaymentOptionPaypal");
 
-var _StripeElementsForm = require("../StripeElementsForm");
+var _StripeElementsForm = require("../../../../../components/StripeElementsForm");
 
-var _StripeRedirectForm = require("../StripeRedirectForm");
+var _StripeRedirectForm = require("../../../../../components/StripeRedirectForm");
 
-var _NotFoundSource = require("../NotFoundSource");
+var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _utils = require("../../../../../utils");
 
@@ -66,6 +66,8 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -127,7 +129,7 @@ var paypalBtnStyle = {
 };
 
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _paymethodsList$error, _paymethodData$card, _paymethodData$card2, _paymethodSelected$cr, _paymethodSelected$cr2, _paymethodSelected$cr3, _paymethodSelected$cr4, _paymethodSelected$cr5, _paymethodSelected$cr6;
+  var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _paymethodData$card, _paymethodData$card2, _paymethodSelected$cr, _paymethodSelected$cr2, _paymethodSelected$cr3, _paymethodSelected$cr4, _paymethodSelected$cr5, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errorCash = props.errorCash,
@@ -139,7 +141,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       isPaymethodNull = props.isPaymethodNull,
       handleOrderRedirect = props.handleOrderRedirect,
       handlePaymethodClick = props.handlePaymethodClick,
-      handlePaymethodDataChange = props.handlePaymethodDataChange;
+      handlePaymethodDataChange = props.handlePaymethodDataChange,
+      isCustomerMode = props.isCustomerMode;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -162,22 +165,28 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   (0, _react.useEffect)(function () {
     !isPaymethodNull && handlePaymethodClick && handlePaymethodClick(isPaymethodNull);
   }, [isPaymethodNull]);
-  return /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
     className: "payments-list"
   }, paymethodsList.paymethods.length > 0 && paymethodsList.paymethods.sort(function (a, b) {
     return a.id - b.id;
   }).map(function (paymethod) {
-    var _paymethod$credential;
-
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: paymethod.id
-    }, (paymethod.gateway !== 'paypal' || paymethod.gateway === 'paypal' && (paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$credential = paymethod.credentials) === null || _paymethod$credential === void 0 ? void 0 : _paymethod$credential.client_id)) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
+    }, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled,
       className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {
         return handlePaymethodClick(paymethod);
       }
-    }, getPayIcon(paymethod.id), /*#__PURE__*/_react.default.createElement("p", null, paymethod.name)));
+    }, getPayIcon(paymethod.id), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name))));
   }), (paymethodsList.loading || isLoading) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: i,
@@ -196,7 +205,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     orderTotal: cart.total,
     onChangeData: handlePaymethodDataChange,
     setErrorCash: props.setErrorCash
-  }), stripeOptions.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && (paymethodData === null || paymethodData === void 0 ? void 0 : paymethodData.card) && /*#__PURE__*/_react.default.createElement(_styles.PayCardSelected, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("span", {
+  }), stripeOptions.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && (paymethodData === null || paymethodData === void 0 ? void 0 : paymethodData.card) && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.PayCardSelected, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "checks"
   }, /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null)), /*#__PURE__*/_react.default.createElement("span", {
     className: "brand"
@@ -247,7 +256,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     paymethod: paymethodSelected,
     businessId: props.businessId,
     publicKey: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr3 = paymethodSelected.credentials) === null || _paymethodSelected$cr3 === void 0 ? void 0 : (_paymethodSelected$cr4 = _paymethodSelected$cr3.stripe) === null || _paymethodSelected$cr4 === void 0 ? void 0 : _paymethodSelected$cr4.publishable,
-    clientSecret: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr5 = paymethodSelected.credentials) === null || _paymethodSelected$cr5 === void 0 ? void 0 : _paymethodSelected$cr5.publishable,
+    clientSecret: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.credentials.publishable,
     payType: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.name,
     onSelectCard: handlePaymethodDataChange,
     onCancel: function onCancel() {
@@ -262,7 +271,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }
   }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_direct' && /*#__PURE__*/_react.default.createElement(_StripeElementsForm.StripeElementsForm, {
     businessId: props.businessId,
-    publicKey: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr6 = paymethodSelected.credentials) === null || _paymethodSelected$cr6 === void 0 ? void 0 : _paymethodSelected$cr6.publishable,
+    publicKey: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr5 = paymethodSelected.credentials) === null || _paymethodSelected$cr5 === void 0 ? void 0 : _paymethodSelected$cr5.publishable,
     handleSource: handlePaymethodDataChange,
     onCancel: function onCancel() {
       return handlePaymethodClick(null);
@@ -279,7 +288,15 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     currency: props.currency,
     paymethods: stripeRedirectOptions,
     handleStripeRedirect: handlePaymethodDataChange
-  })));
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 var PaymentOptions = function PaymentOptions(props) {

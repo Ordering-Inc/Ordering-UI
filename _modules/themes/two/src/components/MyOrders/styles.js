@@ -13,6 +13,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 91%;\n  margin: 0 auto;\n  overflow: hidden;\n  padding-top: 60px;\n  padding-bottom: 30px;\n\n  > h1 {\n    font-size: 32px;\n\n    @media (max-width: 576px) {\n      font-size: 24px;\n    }\n  }\n"])));
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: hidden;\n"])));
 
 exports.Container = Container;

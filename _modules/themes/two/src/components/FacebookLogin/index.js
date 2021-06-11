@@ -1,29 +1,19 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.FacebookLoginButton = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
 var _EnFacebook = _interopRequireDefault(require("@meronex/icons/en/EnFacebook"));
 
-var _Modal = require("../Modal");
-
-var _FacebookLoginContent = require("../FacebookLoginContent");
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -44,40 +34,18 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var FacebookLoginButtonUI = function FacebookLoginButtonUI(props) {
-  var isCustomTitle = props.isCustomTitle,
-      handleFacebookLogin = props.handleFacebookLogin;
-
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      openModal = _useState2[0],
-      setOpenModal = _useState2[1];
-
-  var onClickFacebookButton = function onClickFacebookButton() {
-    setOpenModal(true);
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FacebookButton, {
+  var handleFacebookLogin = props.handleFacebookLogin;
+  return /*#__PURE__*/_react.default.createElement(_styles.FacebookButton, {
     initialIcon: true,
-    isCustomTitle: isCustomTitle,
+    color: "secondary",
     onClick: function onClick() {
-      return onClickFacebookButton();
+      return handleFacebookLogin();
     }
-  }, !isCustomTitle ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_EnFacebook.default, null), " ", t('CONTINUE_WITH_FACEBOOK', 'Continue with Facebook')) : /*#__PURE__*/_react.default.createElement("div", null, isCustomTitle)), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openModal,
-    onClose: function onClose() {
-      return setOpenModal(false);
-    },
-    hideCloseDefault: true
-  }, /*#__PURE__*/_react.default.createElement(_FacebookLoginContent.FacebookLoginContent, {
-    handleFacebookLogin: handleFacebookLogin,
-    onCancel: function onCancel() {
-      return setOpenModal(false);
-    }
-  })));
+  }, /*#__PURE__*/_react.default.createElement(_EnFacebook.default, null), /*#__PURE__*/_react.default.createElement("div", null, t('LOGIN_WITH_FACEBOOK', 'Login with Facebook')));
 };
 
 var FacebookLoginButton = function FacebookLoginButton(props) {

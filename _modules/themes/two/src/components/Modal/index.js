@@ -15,7 +15,7 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _Buttons = require("../../styles/Buttons");
+var _Buttons = require("../../../../../styles/Buttons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,6 +64,12 @@ var ModalUI = function ModalUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    if (window.innerWidth > document.body.clientWidth) {
+      var scrollbarWidth = window.innerWidth - document.body.clientWidth;
+      var bodyPaddingRight = window.document.body.style.paddingRight;
+      document.body.style.paddingRight = props.open ? "".concat(bodyPaddingRight + scrollbarWidth, "px") : "".concat(bodyPaddingRight, "px");
+    }
+
     document.body.style.overflow = props.open ? 'hidden' : 'auto';
 
     if (props.open) {
@@ -78,9 +84,8 @@ var ModalUI = function ModalUI(props) {
     width: props.width,
     height: props.height,
     padding: props.padding,
-    isTransparent: isTransparent,
-    isProductForm: isProductForm
-  }, !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    isTransparent: isTransparent
+  }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onClose();
     }

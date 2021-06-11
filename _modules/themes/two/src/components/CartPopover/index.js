@@ -9,7 +9,7 @@ exports.CartPopover = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _FaShoppingCart = _interopRequireDefault(require("@meronex/icons/fa/FaShoppingCart"));
+var _MdcCart = _interopRequireDefault(require("@meronex/icons/mdc/MdcCart"));
 
 var _reactPopper = require("react-popper");
 
@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartPopover = function CartPopover(props) {
-  var _props$carts;
+  var _props$beforeElements, _props$beforeComponen, _props$carts, _props$carts2, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       auth = props.auth,
@@ -128,7 +128,15 @@ var CartPopover = function CartPopover(props) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)';
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement("div", {
     style: {
       overflow: 'hidden'
     }
@@ -136,7 +144,7 @@ var CartPopover = function CartPopover(props) {
     ref: referenceElement,
     onClick: props.onClick,
     name: "cart-popover"
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaShoppingCart.default, null), /*#__PURE__*/_react.default.createElement("p", null, (_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, /*#__PURE__*/_react.default.createElement(_MdcCart.default, null), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 && /*#__PURE__*/_react.default.createElement("p", null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length)), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "cart-popover",
     ref: popperElement,
     style: popStyle
@@ -149,7 +157,15 @@ var CartPopover = function CartPopover(props) {
     key: "arrow",
     ref: arrowElement,
     style: styles.arrow
-  })));
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.CartPopover = CartPopover;
