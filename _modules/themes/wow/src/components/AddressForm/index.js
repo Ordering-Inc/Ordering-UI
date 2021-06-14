@@ -88,7 +88,7 @@ var inputNames = [{
 }];
 
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _configState$configs8, _configState$configs9, _ref8, _formState$changes$in, _formState$changes25, _ref9, _formState$changes$zi, _formState$changes26, _ref10, _formState$changes$ad5, _formState$changes27, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _configState$configs8, _configState$configs9, _ref9, _formState$changes$in, _formState$changes26, _ref10, _formState$changes$zi, _formState$changes27, _ref11, _formState$changes$ad5, _formState$changes28, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
 
   var addressesList = props.addressesList,
       googleMapsControls = props.googleMapsControls,
@@ -503,9 +503,12 @@ var AddressFormUI = function AddressFormUI(props) {
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     inputNames.forEach(function (field) {
+      var _ref8, _formState$changes$fi, _formState$changes25, _addressState$address11;
+
       formMethods.register(field.name, {
         required: isRequiredField(field.name) ? t("VALIDATION_ERROR_".concat(field.name, "_REQUIRED"), "The field ".concat(field.code, " is required")) : null
       });
+      formMethods.setValue(field.name, (_ref8 = (_formState$changes$fi = (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11[field.name]) !== null && _ref8 !== void 0 ? _ref8 : '');
     });
   }, [formMethods]);
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -581,7 +584,7 @@ var AddressFormUI = function AddressFormUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "internal_number",
     placeholder: t('INTERNAL_NUMBER', 'Internal number'),
-    value: (_ref8 = (_formState$changes$in = (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.internal_number) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : addressState.address.internal_number) !== null && _ref8 !== void 0 ? _ref8 : '',
+    value: (_ref9 = (_formState$changes$in = (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.internal_number) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : addressState.address.internal_number) !== null && _ref9 !== void 0 ? _ref9 : '',
     onChange: function onChange(e) {
       formMethods.setValue('internal_number', e.target.value);
       handleChangeInput({
@@ -595,7 +598,7 @@ var AddressFormUI = function AddressFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "zipcode",
     placeholder: t('ZIP_CODE', 'Zip code'),
-    value: (_ref9 = (_formState$changes$zi = (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : addressState.address.zipcode) !== null && _ref9 !== void 0 ? _ref9 : '',
+    value: (_ref10 = (_formState$changes$zi = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : addressState.address.zipcode) !== null && _ref10 !== void 0 ? _ref10 : '',
     onChange: function onChange(e) {
       formMethods.setValue('zipcode', e.target.value);
       handleChangeInput({
@@ -609,7 +612,7 @@ var AddressFormUI = function AddressFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     placeholder: t('ADDRESS_NOTES', 'Address Notes'),
-    value: (_ref10 = (_formState$changes$ad5 = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',
+    value: (_ref11 = (_formState$changes$ad5 = (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref11 !== void 0 ? _ref11 : '',
     onChange: function onChange(e) {
       formMethods.setValue('address_notes', e.target.value);
       handleChangeInput({
