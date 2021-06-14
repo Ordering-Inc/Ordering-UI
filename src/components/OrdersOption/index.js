@@ -45,7 +45,7 @@ const OrdersOptionUI = (props) => {
     ? theme.images?.general?.emptyActiveOrders
     : theme.images?.general?.emptyPastOrders
 
-  const orders = customArray || values
+  const orders = customArray || values || []
   const isShowTitles = businessesIds
     ? orders && orders.length > 0 && !orders.map(order => businessesIds && businessesIds.includes(order.business_id)).every(i => !i)
     : orders.length > 0
