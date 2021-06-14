@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  display: flex;\n  align-items: center;\n\n  ", "\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n"])), function (props) {
+var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  display: flex;\n  align-items: center;\n\n  span {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  ", "\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n\n  @media (min-width: 992px) {\n    span {\n      max-width: 105px;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    span {\n      max-width: 200px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.isHome && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    color: #FFF;\n  "])));
