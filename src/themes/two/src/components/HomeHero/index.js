@@ -11,7 +11,7 @@ import {
   WrappArrow
 } from './styles'
 
-import { Modal } from '../Modal'
+import { Modal } from '../../../../../components/Modal'
 import { AddressForm } from '../../../../../components/AddressForm'
 import { AddressList } from '../../../../../components/AddressList'
 
