@@ -58,10 +58,24 @@ export const RightInnerContainer = styled.div`
 export const OrderInfo = styled.div`
   border-bottom: 1px solid #E7E7E7;
   padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
+  > div:first-child {
+    flex: 1;
+  }
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `
 
-export const OrderBusiness = styled(OrderInfo)`
+export const OrderBusiness = styled.div`
+  border-bottom: 1px solid #E7E7E7;
+  padding-bottom: 20px;
   padding-top: 20px;
+  display: block;
 `
 
 export const BusinessHeader = styled.div`
@@ -107,24 +121,26 @@ export const BusinessInfo = styled.div`
 `
 
 export const ActionsBlock = styled.div`
+  > * {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 5px;
+    ` : css`
+      margin-right: 5px;
+    `}
+  }
   display: flex;
   span {
     font-size: 12px;
     white-space: nowrap;
     cursor: pointer;
-
-    &.store {
-      color: #00838A;
-    }
   }
   svg {
     cursor: pointer;
+    font-size: 24px;
   }
 `
 
 export const OrderData = styled.div`
-  display: flex;
-  justify-content: space-between;
   h1, p {
     margin: 0px;
   }
@@ -368,7 +384,19 @@ export const FootActions = styled.div`
     color: ${props => props.theme.colors.primary};
     cursor: pointer;
     font-weight: bold;
-  } 
+  }
+
+  padding-top: 10px;
+
+  @media (min-width: 768px) {
+    padding-top: 0px;
+
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
+  }
 `
 
 export const ShareOrder = styled.div`
@@ -393,6 +421,9 @@ export const ShareOrder = styled.div`
   div.wrap {
     width: 40px;
     z-index: 1;
+    > div {
+      position: relative;
+    }
 
     svg {
       color: ${props => props.theme.colors.primary};
@@ -408,7 +439,12 @@ export const MessagesIcon = styled.span`
 export const ExclamationWrapper = styled.div`
   position: absolute;
   top: -5px;
-  right: -10px;
+
+  ${props => props.theme.rtl ? css`
+    left: -5px;
+  ` : css`
+    right: -5px;
+  `}
   svg{
     font-size: 16px;
     color: ${props => props.theme?.colors?.primary}

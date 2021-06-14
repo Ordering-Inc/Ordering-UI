@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { OrderList, useLanguage, useOrder } from 'ordering-components'
 
-import { HorizontalOrdersLayout } from '../../../../../components/HorizontalOrdersLayout'
+import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../VerticalOrdersLayout'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 

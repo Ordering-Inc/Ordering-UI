@@ -6,6 +6,12 @@ export const HeaderItem = styled.div`
   display: flex;
   align-items: center;
 
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   ${props => props.isHome && css`
     color: #FFF;
   `}
@@ -16,6 +22,18 @@ export const HeaderItem = styled.div`
       margin-left: 5px;
       margin-right: 0px;
     `} 
+  }
+
+  @media (min-width: 992px) {
+    span {
+      max-width: 105px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    span {
+      max-width: 200px;
+    }
   }
 `
 

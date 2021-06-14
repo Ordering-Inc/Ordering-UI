@@ -146,7 +146,7 @@ export const SubMenu = styled(InnerHeader)`
   box-sizing: border-box;
   margin: 0px;
 
-  @media (min-width: 951px) {
+  @media (min-width: 993px) {
     display: none;
   }
 `
