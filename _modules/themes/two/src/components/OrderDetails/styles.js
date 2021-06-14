@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -67,7 +67,7 @@ var BusinessInfo = _styledComponents.default.div(_templateObject13 || (_template
 
 exports.BusinessInfo = BusinessInfo;
 
-var ActionsBlock = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  span {\n    font-size: 12px;\n    white-space: nowrap;\n    cursor: pointer;\n\n    &.store {\n      color: #00838A;\n    }\n  }\n  svg {\n    cursor: pointer;\n  }\n"])));
+var ActionsBlock = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  span {\n    font-size: 12px;\n    white-space: nowrap;\n    cursor: pointer;\n  }\n  svg {\n    cursor: pointer;\n    font-size: 24px;\n  }\n"])));
 
 exports.ActionsBlock = ActionsBlock;
 
@@ -183,7 +183,9 @@ var MessagesIcon = _styledComponents.default.span(_templateObject35 || (_templat
 
 exports.MessagesIcon = MessagesIcon;
 
-var ExclamationWrapper = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: -5px;\n  right: -10px;\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
+var ExclamationWrapper = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: -5px;\n\n  ", "\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
+  return props.theme.rtl ? (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    left: -5px;\n  "]))) : (0, _styledComponents.css)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n    right: -5px;\n  "])));
+}, function (props) {
   var _props$theme8, _props$theme8$colors;
 
   return (_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : (_props$theme8$colors = _props$theme8.colors) === null || _props$theme8$colors === void 0 ? void 0 : _props$theme8$colors.primary;
@@ -191,6 +193,6 @@ var ExclamationWrapper = _styledComponents.default.div(_templateObject36 || (_te
 
 exports.ExclamationWrapper = ExclamationWrapper;
 
-var DriverInfo = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  border-top: 1px solid #E7E7E7;\n  padding: 20px 0;\n"])));
+var DriverInfo = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  border-top: 1px solid #E7E7E7;\n  padding: 20px 0;\n"])));
 
 exports.DriverInfo = DriverInfo;

@@ -112,13 +112,10 @@ export const ActionsBlock = styled.div`
     font-size: 12px;
     white-space: nowrap;
     cursor: pointer;
-
-    &.store {
-      color: #00838A;
-    }
   }
   svg {
     cursor: pointer;
+    font-size: 24px;
   }
 `
 
@@ -408,7 +405,12 @@ export const MessagesIcon = styled.span`
 export const ExclamationWrapper = styled.div`
   position: absolute;
   top: -5px;
-  right: -10px;
+
+  ${props => props.theme.rtl ? css`
+    left: -5px;
+  ` : css`
+    right: -5px;
+  `}
   svg{
     font-size: 16px;
     color: ${props => props.theme?.colors?.primary}
