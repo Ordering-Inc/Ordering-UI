@@ -29,7 +29,7 @@ export const Price = styled.div`
   text-align: end;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: 30%;
+  width: 29%;
   h2 {
     font-size: 14px;
     margin-block-end: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
