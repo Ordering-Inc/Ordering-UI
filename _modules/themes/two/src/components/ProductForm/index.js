@@ -301,7 +301,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleSaveProduct();
     },
     disabled: orderState.loading
-  }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')), /*#__PURE__*/_react.default.createElement("span", null, " - "), /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))), auth && !((_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')), /*#__PURE__*/_react.default.createElement("span", {
+    className: "total"
+  }, productCart.total && parsePrice(productCart.total))), auth && !((_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     color: "primary",
     disabled: true

@@ -31,7 +31,7 @@ var LeftContainer = _styledComponents.default.div(_templateObject2 || (_template
 
 exports.LeftContainer = LeftContainer;
 
-var RightContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px 10px;\n  box-sizing: border-box;\n  border-top: 1px solid #CCC;\n\n  @media (min-width: 768px) {\n    padding: 20px;\n  }\n\n  @media (min-width: 1024px) {\n    width: 350px;\n    padding: 30px 20px;\n    border-top: none;\n\n    ", "\n  }\n"])), function (props) {
+var RightContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px 10px;\n  box-sizing: border-box;\n  border-top: 1px solid #CCC;\n\n  @media (min-width: 768px) {\n    padding: 20px;\n  }\n\n  @media (min-width: 1024px) {\n    width: 350px;\n    padding: 20px;\n    border-top: none;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      border-right: 1px solid #CCC;\n    "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      border-left: 1px solid #CCC;\n    "])));
@@ -67,7 +67,7 @@ exports.BusinessDetailsContainer = BusinessDetailsContainer;
 var PaymentMethodContainer = (0, _styledComponents.default)(WrapOrderType)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n"])));
 exports.PaymentMethodContainer = PaymentMethodContainer;
 
-var DriverTipContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  border-top: 1px solid #CCC;\n  h1 {\n    font-size: 18px;\n    margin: 10px 0;\n  }\n"])));
+var DriverTipContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #CCC;\n  padding-bottom: 20px;\n  margin-bottom: 20px;\n  h1 {\n    font-size: 18px;\n    margin: 0 0 10px 0;\n  }\n"])));
 
 exports.DriverTipContainer = DriverTipContainer;
 var CartContainer = (0, _styledComponents.default)(PaymentMethodContainer)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border-bottom: none;\n\n  > div {\n    border-bottom: none;\n  }\n"])));

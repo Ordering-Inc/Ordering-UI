@@ -11,7 +11,7 @@ var _polished = require("polished");
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -59,44 +59,48 @@ var ProductComment = _styledComponents.default.div(_templateObject10 || (_templa
 
 exports.ProductComment = ProductComment;
 
-var ProductActions = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 10px 0px;\n  width: 100%;\n  box-shadow: 0px -2px 3px #ccc;\n\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  div.incdec-control {\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    svg {\n      width: 30px;\n      height: 30px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    padding: 5px 15px;\n    margin: 10px 0px 0px;\n    width: 91%;\n\n    &.soldout {\n      position: relative;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 577px) {\n    flex-direction: row;\n\n    div:last-child {\n      width: 75%;\n    }\n    button.add {\n      width: initial;\n      margin: 0 10px;\n\n      &.soldout {\n        width: 100%;\n      }\n    }\n\n    button {\n      position: absolute;\n  \n      ", "\n    }\n  }\n\n  @media (min-width: 769px) {\n    position: sticky;\n    bottom: 0px;\n    right: initial;\n  }\n\n  @media (min-width: 1201px) {\n    padding: 10px 0px;\n\n    div:last-child {\n      width: 70%;\n      button {\n        width: 100%;\n      }\n    }\n  }\n"])), function (props) {
+var ProductActions = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 10px 0px;\n  width: 100%;\n  box-shadow: 0px -2px 3px #ccc;\n\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  div.incdec-control {\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    svg {\n      width: 30px;\n      height: 30px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    padding: 5px 15px;\n    margin: 10px 0px 0px;\n    width: 91%;\n\n    &.soldout {\n      position: relative;\n      pointer-events: none;\n    }\n\n    > span.total {\n      ", "\n    }\n  }\n\n  @media (min-width: 577px) {\n    flex-direction: row;\n\n    div:last-child {\n      width: 75%;\n    }\n    button.add {\n      width: initial;\n      margin: 0 10px;\n\n      &.soldout {\n        width: 100%;\n      }\n    }\n\n    button {\n      position: absolute;\n  \n      ", "\n    }\n  }\n\n  @media (min-width: 769px) {\n    position: sticky;\n    bottom: 0px;\n    right: initial;\n  }\n\n  @media (min-width: 1201px) {\n    padding: 10px 0px;\n\n    div:last-child {\n      width: 70%;\n      button {\n        width: 100%;\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        left: 0px;\n      "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        right: 0px;\n      "])));
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        padding-right: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        padding-left: 20px;\n      "])));
+}, function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n        left: 0px;\n      "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n        right: 0px;\n      "])));
 });
 
 exports.ProductActions = ProductActions;
 
-var SkeletonBlock = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin: auto;\n\n  span {\n    margin-bottom: 10px;\n  }\n"])), function (_ref) {
+var SkeletonBlock = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin: auto;\n\n  span {\n    margin-bottom: 10px;\n  }\n"])), function (_ref) {
   var width = _ref.width;
   return width && "".concat(width, "%");
 });
 
 exports.SkeletonBlock = SkeletonBlock;
 
-var WrapperSubOption = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  border-radius: 10px;\n  &.error {\n    background-color: ", ";\n  }\n  &.soldout {\n    pointer-events: none;\n    background-color: hsl(0, 0%, 72%);\n  }\n\n  > div:last-child {\n    border-bottom: none;\n  }\n"])), (0, _polished.lighten)(0.58, '#A52121'));
+var WrapperSubOption = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border-radius: 10px;\n  &.error {\n    background-color: ", ";\n  }\n  &.soldout {\n    pointer-events: none;\n    background-color: hsl(0, 0%, 72%);\n  }\n\n  > div:last-child {\n    border-bottom: none;\n  }\n"])), (0, _polished.lighten)(0.58, '#A52121'));
 
 exports.WrapperSubOption = WrapperSubOption;
 
-var SkuContent = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  h2 {\n    font-size: 16px;\n    font-weight: 500;\n    margin-bottom: 0px;\n  }\n\n  p {\n    font-size: 14px;\n  }\n"])));
+var SkuContent = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  h2 {\n    font-size: 16px;\n    font-weight: 500;\n    margin-bottom: 0px;\n  }\n\n  p {\n    font-size: 14px;\n  }\n"])));
 
 exports.SkuContent = SkuContent;
 
-var WrapperIngredients = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref2) {
+var WrapperIngredients = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref2) {
   var isProductSoldout = _ref2.isProductSoldout;
-  return isProductSoldout && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    pointer-events: none;\n    background: hsl(0, 0%, 72%);\n  "])));
+  return isProductSoldout && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    pointer-events: none;\n    background: hsl(0, 0%, 72%);\n  "])));
 });
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var WrapProductShare = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  ", "\n"])), function (props) {
-  var _props$theme3;
+var WrapProductShare = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  ", "\n"])), function (props) {
+  var _props$theme4;
 
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    right: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    left: 10px;\n  "])));
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    right: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    left: 10px;\n  "])));
 });
 
 exports.WrapProductShare = WrapProductShare;
 
-var ProductQuantity = _styledComponents.default.span(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  background: #F7F7F7;\n  border-radius: 8px;\n  width: 65px;\n  height: 45px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin: 0 15px;\n"])));
+var ProductQuantity = _styledComponents.default.span(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  background: #F7F7F7;\n  border-radius: 8px;\n  width: 65px;\n  height: 45px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin: 0 15px;\n"])));
 
 exports.ProductQuantity = ProductQuantity;

@@ -19,7 +19,7 @@ var _BiRightArrowAlt = _interopRequireDefault(require("@meronex/icons/bi/BiRight
 
 var _styles = require("./styles");
 
-var _Modal = require("../Modal");
+var _Modal = require("../../../../../components/Modal");
 
 var _AddressForm = require("../../../../../components/AddressForm");
 
