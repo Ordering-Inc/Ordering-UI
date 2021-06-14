@@ -157,12 +157,17 @@ const CheckoutUI = (props) => {
     }
   }, [errors])
 
-  useEffect(() => {
-    const paymethods = businessDetails?.business?.paymethods || []
-    if (paymethods && paymethods.length > 1) {
-      handlePaymethodChange(null)
-    }
-  }, [cart?.total])
+  // useEffect(() => {
+  //   const paymethods = businessDetails?.business?.paymethods || []
+  //   if (paymethods && paymethods.length > 1) {
+  //     handlePaymethodChange(null)
+  //     // if (cart?.business_id === businessDetails?.business?.id) {
+  //     //   handlePaymethodChange(paymethodSelected)
+  //     // } else {
+  //     //   handlePaymethodChange(null)
+  //     // }
+  //   }
+  // }, [cart?.total])
 
   return (
     <>
@@ -346,6 +351,7 @@ const CheckoutUI = (props) => {
                 handleOrderRedirect={handleOrderRedirect}
                 isPaymethodNull={paymethodSelected}
                 isCustomerMode={isCustomerMode}
+                paymethodSelected={paymethodSelected}
               />
             </PaymentMethodContainer>
           )}
