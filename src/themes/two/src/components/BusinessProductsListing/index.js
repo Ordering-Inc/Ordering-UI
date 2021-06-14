@@ -370,7 +370,6 @@ const BusinessProductsListingUI = (props) => {
                 ) : (
                   <>
                     <img src={theme.images.general?.businessEmptyCart} alt='empty cart' />
-                    <p>{t('YOUR_CART_EMPTY', 'Your cart is empty')}</p>
                     <p>{t('ADD_ITEMS_TO_GET_STARTED', 'Add items to get started')}</p>
                   </>
                 )}
