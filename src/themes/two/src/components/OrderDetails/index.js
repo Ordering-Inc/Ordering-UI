@@ -11,11 +11,15 @@ import {
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
 import BsDot from '@meronex/icons/bs/BsDot'
+import FiPhone from '@meronex/icons/fi/FiPhone'
+import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
+import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
+
 import { Button } from '../../../../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
-import { Modal } from '../Modal'
+import { Modal } from '../../../../../components/Modal'
 import { Messages } from '../../../../../components/Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
 import { ProductShare } from '../ProductShare'
@@ -169,33 +173,35 @@ const OrderDetailsUI = (props) => {
           <WrapperContainer className='order-content'>
             <LeftContainer>
               <OrderInfo>
-                <OrderData>
-                  <div>
-                    <h1>{t('ORDER', 'Order')} {order?.id}</h1>
-                    <p className='date'>
-                      <span>{order?.business?.name}</span>
-                      <BsDot />
-                      <span>
-                        {
-                          order?.delivery_datetime_utc
-                            ? parseDate(order?.delivery_datetime_utc)
-                            : parseDate(order?.delivery_datetime, { utc: false })
-                        }
-                      </span>
-                    </p>
-                  </div>
-                  {!userCustomerId && (
-                    <FootActions>
-                      <a onClick={() => handleGoToPage({ page: 'orders' })}>
-                        {t('MY_ORDERS', 'My Orders')}
-                      </a>
-                    </FootActions>
-                  )}
-                </OrderData>
-                <OrderStatus>
-                  <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-                  <span>{getOrderStatus(order?.status)?.value}</span>
-                </OrderStatus>
+                <div>
+                  <OrderData>
+                    <div>
+                      <h1>{t('ORDER', 'Order')} {order?.id}</h1>
+                      <p className='date'>
+                        <span>{order?.business?.name}</span>
+                        <BsDot />
+                        <span>
+                          {
+                            order?.delivery_datetime_utc
+                              ? parseDate(order?.delivery_datetime_utc)
+                              : parseDate(order?.delivery_datetime, { utc: false })
+                          }
+                        </span>
+                      </p>
+                    </div>
+                  </OrderData>
+                  <OrderStatus>
+                    <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                    <span>{getOrderStatus(order?.status)?.value}</span>
+                  </OrderStatus>
+                </div>
+                {!userCustomerId && (
+                  <FootActions>
+                    <a onClick={() => handleGoToPage({ page: 'orders' })}>
+                      {t('MY_ORDERS', 'My Orders')}
+                    </a>
+                  </FootActions>
+                )}
               </OrderInfo>
 
               <OrderBusiness>
@@ -203,19 +209,15 @@ const OrderDetailsUI = (props) => {
                   <h1>{order?.business?.name}</h1>
                   <ActionsBlock>
                     {order.driver && order.driver.phone && (
-                      <>
-                        <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                          {t('CALL', 'Call')}
-                        </span>
-                        <BsDot />
-                      </>
+                      <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                        <FiPhone />
+                      </span>
                     )}
-                    <span className='store' onClick={() => handleBusinessRedirect(businessData?.slug)}>
-                      {t('GO_TO_STORE', 'Go to store')}
+                    <span className='store'>
+                      <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
                     </span>
-                    <BsDot />
                     <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                      {t('CHAT', 'Chat')}
+                      <HiOutlineChat />
                       {order?.unread_count > 0 && unreadAlert.business && (
                         <ExclamationWrapper>
                           <AiFillExclamationCircle />
@@ -290,15 +292,12 @@ const OrderDetailsUI = (props) => {
                     </WrapperDriver>
                     <ActionsBlock>
                       {order.driver && order.driver.phone && (
-                        <>
-                          <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                            {t('CALL', 'Call')}
-                          </span>
-                          <BsDot />
-                        </>
+                        <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                          <FiPhone />
+                        </span>
                       )}
                       <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
-                        {t('CHAT', 'Chat')}
+                        <HiOutlineChat />
                         {order?.unread_count > 0 && unreadAlert.driver && (
                           <ExclamationWrapper>
                             <AiFillExclamationCircle />

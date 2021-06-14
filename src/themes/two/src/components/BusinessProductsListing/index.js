@@ -19,7 +19,7 @@ import {
   WrapperSearch,
   WrappLayout,
   BusinessCartContainer,
-  BusinessInnerContainer,
+  BusinessCartInnerContainer,
   ProductsHeader,
   DeliveryInfo,
   DeliveryTime,
@@ -353,7 +353,7 @@ const BusinessProductsListingUI = (props) => {
           )}
         </ProductsContainer>
         <BusinessCartContainer>
-          <BusinessInnerContainer>
+          <BusinessCartInnerContainer>
             {loading ? (
               <Skeleton height={250} />
             ) : (
@@ -370,13 +370,12 @@ const BusinessProductsListingUI = (props) => {
                 ) : (
                   <>
                     <img src={theme.images.general?.businessEmptyCart} alt='empty cart' />
-                    <p>{t('YOUR_CART_EMPTY', 'Your cart is empty')}</p>
                     <p>{t('ADD_ITEMS_TO_GET_STARTED', 'Add items to get started')}</p>
                   </>
                 )}
               </>
             )}
-          </BusinessInnerContainer>
+          </BusinessCartInnerContainer>
         </BusinessCartContainer>
       </Container>
       {currentCart?.products?.length > 0 && auth && windowSize.width < 1024 && (
