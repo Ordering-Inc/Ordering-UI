@@ -58,10 +58,24 @@ export const RightInnerContainer = styled.div`
 export const OrderInfo = styled.div`
   border-bottom: 1px solid #E7E7E7;
   padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
+  > div:first-child {
+    flex: 1;
+  }
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `
 
-export const OrderBusiness = styled(OrderInfo)`
+export const OrderBusiness = styled.div`
+  border-bottom: 1px solid #E7E7E7;
+  padding-bottom: 20px;
   padding-top: 20px;
+  display: block;
 `
 
 export const BusinessHeader = styled.div`
@@ -127,8 +141,6 @@ export const ActionsBlock = styled.div`
 `
 
 export const OrderData = styled.div`
-  display: flex;
-  justify-content: space-between;
   h1, p {
     margin: 0px;
   }
@@ -372,7 +384,19 @@ export const FootActions = styled.div`
     color: ${props => props.theme.colors.primary};
     cursor: pointer;
     font-weight: bold;
-  } 
+  }
+
+  padding-top: 10px;
+
+  @media (min-width: 768px) {
+    padding-top: 0px;
+
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
+  }
 `
 
 export const ShareOrder = styled.div`

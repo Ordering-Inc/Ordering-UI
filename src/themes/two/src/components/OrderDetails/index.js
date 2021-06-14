@@ -173,33 +173,35 @@ const OrderDetailsUI = (props) => {
           <WrapperContainer className='order-content'>
             <LeftContainer>
               <OrderInfo>
-                <OrderData>
-                  <div>
-                    <h1>{t('ORDER', 'Order')} {order?.id}</h1>
-                    <p className='date'>
-                      <span>{order?.business?.name}</span>
-                      <BsDot />
-                      <span>
-                        {
-                          order?.delivery_datetime_utc
-                            ? parseDate(order?.delivery_datetime_utc)
-                            : parseDate(order?.delivery_datetime, { utc: false })
-                        }
-                      </span>
-                    </p>
-                  </div>
-                  {!userCustomerId && (
-                    <FootActions>
-                      <a onClick={() => handleGoToPage({ page: 'orders' })}>
-                        {t('MY_ORDERS', 'My Orders')}
-                      </a>
-                    </FootActions>
-                  )}
-                </OrderData>
-                <OrderStatus>
-                  <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-                  <span>{getOrderStatus(order?.status)?.value}</span>
-                </OrderStatus>
+                <div>
+                  <OrderData>
+                    <div>
+                      <h1>{t('ORDER', 'Order')} {order?.id}</h1>
+                      <p className='date'>
+                        <span>{order?.business?.name}</span>
+                        <BsDot />
+                        <span>
+                          {
+                            order?.delivery_datetime_utc
+                              ? parseDate(order?.delivery_datetime_utc)
+                              : parseDate(order?.delivery_datetime, { utc: false })
+                          }
+                        </span>
+                      </p>
+                    </div>
+                  </OrderData>
+                  <OrderStatus>
+                    <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                    <span>{getOrderStatus(order?.status)?.value}</span>
+                  </OrderStatus>
+                </div>
+                {!userCustomerId && (
+                  <FootActions>
+                    <a onClick={() => handleGoToPage({ page: 'orders' })}>
+                      {t('MY_ORDERS', 'My Orders')}
+                    </a>
+                  </FootActions>
+                )}
               </OrderInfo>
 
               <OrderBusiness>
