@@ -163,8 +163,14 @@ export const MenuLinkIcon = styled.div`
     color: #000;
     width: 24px;
     height: 24px;
-    color: ${props => props.theme.colors?.primary};
+    color: ${props => props.theme.colors?.darkBlack};
   }
+
+  ${({ active }) => active && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+  `}
 `
 
 export const MenuLinkText = styled.div`
@@ -190,12 +196,15 @@ export const TextInfo = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${props => props.theme.colors?.primary};
+  color: ${props => props.theme.colors?.darkBlack};
 
   ${props => props.theme?.rtl && css`
     text-align: right;
     display: inline-block;
-    color: #000;
+  `}
+
+  ${({ active }) => active && css`
+    color: ${props => props.theme.colors?.primary};
   `}
 `
 
