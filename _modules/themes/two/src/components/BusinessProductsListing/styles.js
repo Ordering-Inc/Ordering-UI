@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DeliveryPrice = exports.DeliveryTime = exports.DeliveryInfo = exports.ProductsHeader = exports.WrappLayout = exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapperSearch = exports.WrapContent = exports.BusinessInnerContainer = exports.BusinessCartContainer = exports.ProductsContainer = exports.Container = void 0;
+exports.DeliveryPrice = exports.DeliveryTime = exports.DeliveryInfo = exports.ProductsHeader = exports.WrappLayout = exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapperSearch = exports.WrapContent = exports.BusinessCartInnerContainer = exports.BusinessCartContainer = exports.ProductsContainer = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -37,13 +37,13 @@ var BusinessCartContainer = _styledComponents.default.div(_templateObject3 || (_
 
 exports.BusinessCartContainer = BusinessCartContainer;
 
-var BusinessInnerContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  box-sizing: border-box;\n\n  > div.cart {\n    border-bottom: none;\n    width: 100%;\n    box-sizing: border-box;\n\n    > div {\n      box-shadow: none;\n    }\n  }\n\n  img {\n    width: 200px;\n  }\n\n  > span {\n    width: 100%;\n  }\n\n  p {\n    color: ", ";\n    margin: 5px 0;\n  }\n"])), function (props) {
+var BusinessCartInnerContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  box-sizing: border-box;\n\n  > div.cart {\n    border-bottom: none;\n    width: 100%;\n    box-sizing: border-box;\n\n    > div {\n      box-shadow: none;\n    }\n  }\n\n  img {\n    width: 200px;\n  }\n\n  > span {\n    width: 100%;\n  }\n\n  p {\n    color: ", ";\n    margin: 5px 0;\n  }\n\n  @media (min-width: 1024px) {\n    max-height: calc(100vh - 60px);\n    overflow: auto;\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.darkGray;
 });
 
-exports.BusinessInnerContainer = BusinessInnerContainer;
+exports.BusinessCartInnerContainer = BusinessCartInnerContainer;
 
 var WrapContent = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
