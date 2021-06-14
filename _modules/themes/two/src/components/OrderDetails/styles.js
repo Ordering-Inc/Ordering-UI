@@ -173,7 +173,7 @@ var FootActions = _styledComponents.default.div(_templateObject35 || (_templateO
 
 exports.FootActions = FootActions;
 
-var ShareOrder = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  padding: 20px 0;\n  border-top: 1px solid #E7E7E7;\n  display: flex;\n  margin: 0 0 20px;\n  justify-content: space-between;\n  z-index: 1;\n\n  h1 {\n    font-size: 18px;\n    margin: 0px;\n  }\n\n  p {\n    font-size: 14px;\n    margin: 0px;\n    color: ", ";\n  }\n\n  div.wrap {\n    width: 40px;\n    z-index: 1;\n\n    svg {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var ShareOrder = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  padding: 20px 0;\n  border-top: 1px solid #E7E7E7;\n  display: flex;\n  margin: 0 0 20px;\n  justify-content: space-between;\n  z-index: 1;\n\n  h1 {\n    font-size: 18px;\n    margin: 0px;\n  }\n\n  p {\n    font-size: 14px;\n    margin: 0px;\n    color: ", ";\n  }\n\n  div.wrap {\n    width: 40px;\n    z-index: 1;\n    > div {\n      position: relative;\n    }\n\n    svg {\n      color: ", ";\n    }\n  }\n"])), function (props) {
   var _props$theme$colors5;
 
   return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.darkGray;

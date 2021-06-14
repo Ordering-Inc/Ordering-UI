@@ -397,6 +397,9 @@ export const ShareOrder = styled.div`
   div.wrap {
     width: 40px;
     z-index: 1;
+    > div {
+      position: relative;
+    }
 
     svg {
       color: ${props => props.theme.colors.primary};
