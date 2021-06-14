@@ -107,6 +107,13 @@ export const BusinessInfo = styled.div`
 `
 
 export const ActionsBlock = styled.div`
+  > * {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 5px;
+    ` : css`
+      margin-right: 5px;
+    `}
+  }
   display: flex;
   span {
     font-size: 12px;
