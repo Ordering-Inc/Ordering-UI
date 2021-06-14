@@ -46,7 +46,7 @@ export const BusinessCartContainer = styled.div`
   }
 `
 
-export const BusinessInnerContainer = styled.div`
+export const BusinessCartInnerContainer = styled.div`
   position: sticky;
   top: 20px;
   display: flex;
@@ -76,6 +76,11 @@ export const BusinessInnerContainer = styled.div`
   p {
     color: ${props => props.theme.colors?.darkGray};
     margin: 5px 0;
+  }
+
+  @media (min-width: 1024px) {
+    max-height: calc(100vh - 60px);
+    overflow: auto;
   }
 `
 

@@ -19,7 +19,7 @@ import {
   WrapperSearch,
   WrappLayout,
   BusinessCartContainer,
-  BusinessInnerContainer,
+  BusinessCartInnerContainer,
   ProductsHeader,
   DeliveryInfo,
   DeliveryTime,
@@ -353,7 +353,7 @@ const BusinessProductsListingUI = (props) => {
           )}
         </ProductsContainer>
         <BusinessCartContainer>
-          <BusinessInnerContainer>
+          <BusinessCartInnerContainer>
             {loading ? (
               <Skeleton height={250} />
             ) : (
@@ -376,7 +376,7 @@ const BusinessProductsListingUI = (props) => {
                 )}
               </>
             )}
-          </BusinessInnerContainer>
+          </BusinessCartInnerContainer>
         </BusinessCartContainer>
       </Container>
       {currentCart?.products?.length > 0 && auth && windowSize.width < 1024 && (
