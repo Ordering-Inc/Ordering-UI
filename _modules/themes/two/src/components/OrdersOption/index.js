@@ -15,7 +15,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _HorizontalOrdersLayout = require("../../../../../components/HorizontalOrdersLayout");
+var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 
 var _VerticalOrdersLayout = require("../VerticalOrdersLayout");
 
