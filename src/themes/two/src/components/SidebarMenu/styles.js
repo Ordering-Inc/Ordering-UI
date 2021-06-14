@@ -163,7 +163,7 @@ export const MenuLinkIcon = styled.div`
     color: #000;
     width: 24px;
     height: 24px;
-    color: ${props => props.theme.colors?.darkBlack};
+    color: ${props => props.theme.colors?.primary};
   }
 `
 
@@ -190,7 +190,7 @@ export const TextInfo = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${props => props.theme.colors?.darkBlack};
+  color: ${props => props.theme.colors?.primary};
 
   ${props => props.theme?.rtl && css`
     text-align: right;
