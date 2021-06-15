@@ -15,9 +15,11 @@ var _styles = require("./styles");
 
 var _Modal = require("../../../../../components/Modal");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _AddressList = require("../AddressList");
+
+var _Buttons = require("../../styles/Buttons");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -44,9 +46,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _orderState$options3, _props$afterComponent, _props$afterElements;
 
-  var addressToShow = props.addressToShow;
+  var addressToShow = props.addressToShow,
+      isCartPending = props.isCartPending,
+      googleMapsUrl = props.googleMapsUrl,
+      isCustomerMode = props.isCustomerMode;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -70,6 +75,10 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       setAlertState = _useState4[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 1),
+      user = _useCustomer2[0].user;
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -98,7 +107,18 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("p", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setOpenModal(true);
+    }
+  }, t('EDIT', 'Edit'))), /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: googleMapsUrl,
+    id: "google-maps-image",
+    alt: "google-maps-location",
+    width: "288px",
+    height: "162px",
+    loading: "lazy"
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESSES', 'Addresses'),
     open: openModal,
     width: "70%",
@@ -114,7 +134,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     },
     onAccept: function onAccept() {
       return handleFindBusinesses();
-    }
+    },
+    userCustomerSetup: isCustomerMode && user
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,

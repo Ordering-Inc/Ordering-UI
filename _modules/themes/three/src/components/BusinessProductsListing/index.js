@@ -29,13 +29,17 @@ var _PageNotFound = require("../../../../../components/PageNotFound");
 
 var _ProductForm = require("../ProductForm");
 
-var _FloatingButton = require("../../../../../components/FloatingButton");
+var _FloatingButton = require("../FloatingButton");
 
 var _Modal = require("../../../../../components/Modal");
+
+var _SearchBar = require("../../../../../components/SearchBar");
 
 var _UpsellingPage = require("../../../../../components/UpsellingPage");
 
 var _Cart = require("../../../../../components/Cart");
+
+var _Select = require("../../styles/Select");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -71,16 +75,17 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var PIXELS_TO_SCROLL = 500;
+var PIXELS_TO_SCROLL = 600;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _business$categories, _currentCart$products2, _currentCart$products3, _currentCart$products4, _error$, _currentCart$products5, _currentCart$products6, _productModal$error$, _props$afterComponent, _props$afterElements;
+  var _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _businessState$busine, _business$categories, _currentCart$products2, _currentCart$products3, _currentCart$products4, _error$, _currentCart$products5, _currentCart$products6, _productModal$error$, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
       businessState = props.businessState,
       categorySelected = props.categorySelected,
       searchValue = props.searchValue,
+      sortByValue = props.sortByValue,
       categoryState = props.categoryState,
       categoryId = props.categoryId,
       productId = props.productId,
@@ -94,7 +99,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleChangeSearch = props.handleChangeSearch,
       handleSearchRedirect = props.handleSearchRedirect,
       featuredProducts = props.featuredProducts,
-      isCartOnProductsList = props.isCartOnProductsList;
+      handleChangeSortBy = props.handleChangeSortBy,
+      isCartOnProductsList = props.isCartOnProductsList,
+      errorQuantityProducts = props.errorQuantityProducts;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -156,6 +163,19 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
     return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (business === null || business === void 0 ? void 0 : business.slug);
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
+  var sortByOptions = [{
+    value: null,
+    content: t('SORT_BY', 'Sort By'),
+    showOnSelected: t('SORT_BY', 'Sort By')
+  }, {
+    value: 'rank',
+    content: t('RANK', 'Rank'),
+    showOnSelected: t('RANK', 'Rank')
+  }, {
+    value: 'a-z',
+    content: t('A_to_Z', 'A-Z'),
+    showOnSelected: t('A_to_Z', 'A-Z')
+  }];
 
   var handler = function handler() {
     setOpenBusinessInformation(true);
@@ -261,7 +281,20 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation
-  }), /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessProductsContent, null, (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    onSearch: handleChangeSearch,
+    search: searchValue,
+    placeholder: t('SEARCH_PRODUCTS', 'Search Products'),
+    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
+  }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    notAsync: true,
+    notReload: true,
+    options: sortByOptions,
+    defaultValue: sortByValue,
+    onChange: function onChange(val) {
+      return handleChangeSortBy && handleChangeSortBy(val);
+    }
+  })), !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [{
       id: null,
       name: t('ALL', 'All')
@@ -294,8 +327,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     featured: featuredProducts,
     searchValue: searchValue,
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0,
-    handleClearSearch: handleChangeSearch
-  })))), isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+    handleClearSearch: handleChangeSearch,
+    errorQuantityProducts: errorQuantityProducts
+  })), isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isForceOpenCart: true,
     cart: currentCart,
     isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,
@@ -304,7 +338,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleCartOpen: function handleCartOpen(val) {
       return setIsCartOpen(val);
     }
-  })), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  })))), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: {
       business: {},
       loading: true
@@ -312,7 +346,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     isSkeleton: true,
     handler: handler,
     openBusinessInformation: openBusinessInformation
-  }), /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessProductsContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [],
     isSkeleton: true,
     openBusinessInformation: openBusinessInformation
@@ -320,8 +354,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categories: [],
     category: categorySelected,
     categoryState: categoryState,
-    isBusinessLoading: loading
-  }))), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    isBusinessLoading: loading,
+    errorQuantityProducts: errorQuantityProducts
+  })))), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: function onClickButton() {
@@ -344,13 +379,14 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     },
     disabled: openUpselling || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum)
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "50%",
+    width: "70%",
     open: openProduct,
     closeOnBackdrop: true,
     onClose: function onClose() {
       return closeModalProductForm();
     },
-    padding: "0"
+    padding: "0",
+    isProductForm: true
   }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: 8

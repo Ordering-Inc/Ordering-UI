@@ -11,13 +11,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _HiOutlineChevronDown = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineChevronDown"));
-
-var _HiOutlineChevronUp = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineChevronUp"));
+var _IosArrowDown = _interopRequireDefault(require("@meronex/icons/ios/IosArrowDown"));
 
 var _styles = require("./styles");
-
-var _styles2 = require("../ProductForm/styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49,16 +45,22 @@ var ProductOptionUI = function ProductOptionUI(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var children = props.children,
-      option = props.option;
+      option = props.option,
+      error = props.error;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(true),
+  var _useState = (0, _react.useState)('active'),
       _useState2 = _slicedToArray(_useState, 2),
-      openOption = _useState2[0],
-      setOpenOption = _useState2[1];
+      setActive = _useState2[0],
+      setActiveState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)('accordion__icon rotate'),
+      _useState4 = _slicedToArray(_useState3, 2),
+      setRotate = _useState4[0],
+      setRotateState = _useState4[1];
 
   var maxMin = "(".concat(t('MIN', 'Min'), ": ").concat(option.min, " / ").concat(t('MAX', 'Max'), ": ").concat(option.max, ")");
 
@@ -70,6 +72,11 @@ var ProductOptionUI = function ProductOptionUI(props) {
     maxMin = "(".concat(t('MIN', 'Min'), ": ").concat(option.min, ")");
   }
 
+  var toggleAccordion = function toggleAccordion() {
+    setActiveState(setActive === '' ? 'active' : '');
+    setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -78,11 +85,22 @@ var ProductOptionUI = function ProductOptionUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapHeader, null, /*#__PURE__*/_react.default.createElement(_styles.WrapOptionTitle, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, option.name), /*#__PURE__*/_react.default.createElement(_styles.Flag, null, maxMin)), /*#__PURE__*/_react.default.createElement(_styles2.WrapButton, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapHeader, {
+    className: "accordion ".concat(setActive, " ").concat(error && 'error'),
     onClick: function onClick() {
-      return setOpenOption(!openOption);
+      return toggleAccordion();
     }
-  }, openOption ? /*#__PURE__*/_react.default.createElement(_HiOutlineChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_HiOutlineChevronUp.default, null))), openOption && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, option.image && /*#__PURE__*/_react.default.createElement(_styles.OptionThumbnail, {
+    src: option.image
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapTitle, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("span", null, option.name)), /*#__PURE__*/_react.default.createElement(_styles.Flag, {
+    error: error
+  }, maxMin))), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+    className: "".concat(setRotate)
+  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperOption, {
+    style: {
+      maxHeight: !setActive && '0px'
+    }
+  }, children)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

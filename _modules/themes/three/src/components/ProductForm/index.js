@@ -15,9 +15,7 @@ var _FiMinusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiMinusCi
 
 var _FiPlusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiPlusCircle"));
 
-var _HiOutlineChevronDown = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineChevronDown"));
-
-var _HiOutlineChevronUp = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineChevronUp"));
+var _IosArrowDown = _interopRequireDefault(require("@meronex/icons/ios/IosArrowDown"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -31,11 +29,13 @@ var _ProductOption = require("../ProductOption");
 
 var _ProductOptionSubOption = require("../../../../../components/ProductOptionSubOption");
 
-var _LoginForm = require("../../../../../components/LoginForm");
+var _ProductShare = require("../../../../../components/ProductShare");
 
-var _SignUpForm = require("../../../../../components/SignUpForm");
+var _LoginForm = require("../LoginForm");
 
-var _ForgotPasswordForm = require("../../../../../components/ForgotPasswordForm");
+var _SignUpForm = require("../SignUpForm");
+
+var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
 var _AddressList = require("../AddressList");
 
@@ -80,7 +80,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductOptionsUI = function ProductOptionsUI(props) {
   var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$dummies, _props$afterMidElemen, _props$afterMidCompon, _orderState$options, _orderState$options2, _error$, _props$afterComponent, _props$afterElements;
 
-  var editMode = props.editMode,
+  var businessSlug = props.businessSlug,
+      editMode = props.editMode,
       isSoldOut = props.isSoldOut,
       productObject = props.productObject,
       productCart = props.productCart,
@@ -129,12 +130,17 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       modalPageToShow = _useState4[0],
       setModalPageToShow = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(true),
-      _useState6 = _slicedToArray(_useState5, 2),
-      openIngredient = _useState6[0],
-      setOpenIngredient = _useState6[1];
-
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
+  var _useState5 = (0, _react.useState)('active'),
+      _useState6 = _slicedToArray(_useState5, 2),
+      setActive = _useState6[0],
+      setActiveState = _useState6[1];
+
+  var _useState7 = (0, _react.useState)('accordion__icon rotate'),
+      _useState8 = _slicedToArray(_useState7, 2),
+      setRotate = _useState8[0],
+      setRotateState = _useState8[1];
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -157,6 +163,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
     var myElement = document.getElementsByClassName('error')[0];
     var productContainer = document.getElementsByClassName('product-container')[0];
+
+    if (!myElement || !productContainer) {
+      return;
+    }
+
     var topPos = myElement.offsetTop - productContainer.offsetTop;
 
     if (windowSize.width <= 768) {
@@ -197,6 +208,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return classnames;
   };
 
+  var toggleAccordion = function toggleAccordion() {
+    setActiveState(setActive === '' ? 'active' : '');
+    setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -218,7 +234,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
     height: 200
-  })), (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
+  })), product && !loading && !error && /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
+    slug: businessSlug,
+    categoryId: product === null || product === void 0 ? void 0 : product.category_id,
+    productId: product === null || product === void 0 ? void 0 : product.id
+  }), (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, BeforeMidElements);
@@ -234,37 +254,43 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     width: "300px",
     height: "300px",
     loading: "lazy"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapSectionTitle, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.IngredientHeader, {
+    className: "accordion ".concat(setActive),
     onClick: function onClick() {
-      return setOpenIngredient(!openIngredient);
+      return toggleAccordion();
     }
-  }, openIngredient ? /*#__PURE__*/_react.default.createElement(_HiOutlineChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_HiOutlineChevronUp.default, null))), openIngredient && /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
-    isProductSoldout: isSoldOut || maxProductQuantity <= 0
+  }, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+    className: "".concat(setRotate)
+  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
+    isProductSoldout: isSoldOut || maxProductQuantity <= 0,
+    style: {
+      maxHeight: !setActive && '0px'
+    }
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
-      key: ingredient === null || ingredient === void 0 ? void 0 : ingredient.id,
+      key: ingredient.id,
       ingredient: ingredient,
-      state: productCart.ingredients["id:".concat(ingredient === null || ingredient === void 0 ? void 0 : ingredient.id)],
+      state: productCart.ingredients["id:".concat(ingredient.id)],
       onChange: handleChangeIngredientState
     });
   })), product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
     return extra.options.map(function (option) {
-      var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
+      var currentState = productCart.options["id:".concat(option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
-        key: option === null || option === void 0 ? void 0 : option.id
+        key: option.id
       }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
         option: option,
         currentState: currentState,
-        error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)]
+        error: errors["id:".concat(option.id)]
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
-        className: isError(option === null || option === void 0 ? void 0 : option.id)
+        className: isError(option.id)
       }, option.suboptions.map(function (suboption) {
         var _productCart$options$, _productCart$options$2;
 
-        var currentState = ((_productCart$options$ = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$ === void 0 ? void 0 : _productCart$options$.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
-        var balance = ((_productCart$options$2 = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$2 === void 0 ? void 0 : _productCart$options$2.balance) || 0;
+        var currentState = ((_productCart$options$ = productCart.options["id:".concat(option.id)]) === null || _productCart$options$ === void 0 ? void 0 : _productCart$options$.suboptions["id:".concat(suboption.id)]) || {};
+        var balance = ((_productCart$options$2 = productCart.options["id:".concat(option.id)]) === null || _productCart$options$2 === void 0 ? void 0 : _productCart$options$2.balance) || 0;
         return /*#__PURE__*/_react.default.createElement(_ProductOptionSubOption.ProductOptionSubOption, {
-          key: suboption === null || suboption === void 0 ? void 0 : suboption.id,
+          key: suboption.id,
           onChange: handleChangeSuboptionState,
           balance: balance,
           option: option,
@@ -296,6 +322,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
   })), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    rectangle: true,
     className: "add ".concat(maxProductQuantity === 0 || Object.keys(errors).length > 0 ? 'disabled' : ''),
     color: "primary",
     onClick: function onClick() {
@@ -303,6 +330,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     },
     disabled: orderState.loading
   }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')), /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))), auth && !((_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    rectangle: true,
     className: "add",
     color: "primary",
     disabled: true
@@ -312,6 +340,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     addressList: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? user.addresses : null,
     isProductForm: true
   })), (!auth || isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    rectangle: true,
     className: "add ".concat(!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''),
     color: "primary",
     outline: true,
@@ -319,7 +348,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: function onClick() {
       return setModalIsOpen(true);
     }
-  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up'))))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', 'Sold out') : t('LOGIN_SIGNUP', 'Login / Sign Up'))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();

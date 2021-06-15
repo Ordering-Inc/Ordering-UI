@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styles = require("./styles");
 
+var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
+
 var _OrdersOption = require("../OrdersOption");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26,6 +28,8 @@ var MyOrders = function MyOrders(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
+  }), /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
+    value: "orders"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     activeOrders: true,
     horizontal: true

@@ -1,13 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CouponControl = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -17,13 +15,11 @@ var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
-var _Modal = require("../../../../../components/Modal");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -44,6 +40,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CouponControlUI = function CouponControlUI(props) {
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+
   var couponDefault = props.couponDefault,
       couponInput = props.couponInput,
       handleButtonApplyClick = props.handleButtonApplyClick,
@@ -55,11 +53,6 @@ var CouponControlUI = function CouponControlUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      openPromoModal = _useState2[0],
-      setOpenPromoModal = _useState2[1];
 
   var onRemoveCoupon = function onRemoveCoupon() {
     setConfirm({
@@ -88,39 +81,30 @@ var CouponControlUI = function CouponControlUI(props) {
     onChangeInputCoupon('');
   };
 
-  var handleApply = function handleApply() {
-    handleButtonApplyClick();
-    setOpenPromoModal(false);
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, couponDefault ? /*#__PURE__*/_react.default.createElement("a", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, couponDefault ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return onRemoveCoupon();
     }
-  }, t('REMOVE_COUPON', 'Remove Coupon')) : /*#__PURE__*/_react.default.createElement("a", {
-    onClick: function onClick() {
-      return setOpenPromoModal(true);
-    }
-  }, t('ADD_PROMO_CODE', 'Add promo code')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('DO_YOU_HAVE_PROMO_CODE', 'Do you have a promo code?'),
-    open: openPromoModal,
-    onClose: function onClose() {
-      return setOpenPromoModal(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapPromoCodeApply, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, t('REMOVE_COUPON', 'Remove Coupon'), " ", couponDefault) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: t('DISCOUNT_COUPON', 'Discount coupon'),
     onChange: function onChange(e) {
       return onChangeInputCoupon(e.target.value);
     },
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
     rectangle: true,
+    color: "primary",
     disabled: !couponInput,
-    onClick: function onClick() {
-      return handleApply();
-    }
-  }, t('APPLY', 'Apply')))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    onClick: handleButtonApplyClick
+  }, t('APPLY', 'Apply'))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('COUPON', 'Coupon'),
     content: confirm === null || confirm === void 0 ? void 0 : confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -134,6 +118,14 @@ var CouponControlUI = function CouponControlUI(props) {
     } : null,
     onAccept: handleOnAccept,
     closeOnBackdrop: false
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
   }));
 };
 

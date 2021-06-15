@@ -32,7 +32,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleProductCard = function SingleProductCard(props) {
-  var _cart$products, _cart$products2, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _props$afterComponent, _props$afterElements;
+  var _orderState$carts, _cart$products, _cart$products2, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _props$afterComponent, _props$afterElements;
 
   var businessId = props.businessId,
       product = props.product,
@@ -62,7 +62,7 @@ var SingleProductCard = function SingleProductCard(props) {
   var theme = (0, _styledComponents.useTheme)();
   var editMode = typeof (product === null || product === void 0 ? void 0 : product.code) !== 'undefined';
   var removeToBalance = editMode ? product === null || product === void 0 ? void 0 : product.quantity : 0;
-  var cart = orderState.carts["businessId:".concat(businessId)];
+  var cart = (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(businessId)];
   var productCart = cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.find(function (prod) {
     return prod.id === (product === null || product === void 0 ? void 0 : product.id);
   });
@@ -101,8 +101,8 @@ var SingleProductCard = function SingleProductCard(props) {
     soldOut: isSoldOut || maxProductQuantity <= 0,
     bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_200,c_limit')
   })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 75,
-    width: 75
+    height: 100,
+    width: 100
   }), (isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_styles.SoldOut, null, t('SOLD_OUT', 'SOLD OUT'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

@@ -9,7 +9,7 @@ exports.CartPopover = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _HiOutlineShoppingBag = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineShoppingBag"));
+var _RiShoppingBagFill = _interopRequireDefault(require("@meronex/icons/ri/RiShoppingBagFill"));
 
 var _reactPopper = require("react-popper");
 
@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartPopover = function CartPopover(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$carts, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$carts, _props$carts2, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       auth = props.auth,
@@ -144,7 +144,7 @@ var CartPopover = function CartPopover(props) {
     ref: referenceElement,
     onClick: props.onClick,
     name: "cart-popover"
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineShoppingBag.default, null), /*#__PURE__*/_react.default.createElement("p", null, (_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length)), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, /*#__PURE__*/_react.default.createElement(_RiShoppingBagFill.default, null), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 && /*#__PURE__*/_react.default.createElement("p", null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length)), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "cart-popover",
     ref: popperElement,
     style: popStyle
