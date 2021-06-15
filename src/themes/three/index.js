@@ -38,10 +38,10 @@ import { SingleProductCard } from './src/components/SingleProductCard'
 import { UserDetails } from './src/components/UserDetails'
 import { VerticalOrdersLayout } from './src/components/VerticalOrdersLayout'
 
-import { Button } from './styles/Buttons'
-import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
-import { Select } from './styles/Select'
-import { Tab, Tabs } from './styles/Tabs'
+import { Button } from './src/styles/Buttons'
+import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './src/styles/Inputs'
+import { Select } from './src/styles/Select'
+import { Tab, Tabs } from './src/styles/Tabs'
 
 export {
   AddressDetails,
