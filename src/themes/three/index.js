@@ -1,7 +1,7 @@
 import { AddressDetails } from './src/components/AddressDetails'
 import { AddressesPopover } from './src/components/AddressesPopover'
 import { AddressForm } from './src/components/AddressForm'
-import { AddressList } from './sc/components/AddressList'
+import { AddressList } from './src/components/AddressList'
 import { BusinessBasicInformation } from './src/components/BusinessBasicInformation'
 import { BusinessController } from './src/components/BusinessController'
 import { BusinessesListing } from './src/components/BusinessesListing'

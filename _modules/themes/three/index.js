@@ -316,7 +316,7 @@ var _AddressesPopover = require("./src/components/AddressesPopover");
 
 var _AddressForm = require("./src/components/AddressForm");
 
-var _AddressList = require("./sc/components/AddressList");
+var _AddressList = require("./src/components/AddressList");
 
 var _BusinessBasicInformation = require("./src/components/BusinessBasicInformation");
 
