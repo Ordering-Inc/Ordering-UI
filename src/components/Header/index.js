@@ -189,6 +189,7 @@ export const Header = (props) => {
                       onClick={() => handleTogglePopover('addresses')}
                       onClose={() => handleClosePopover('addresses')}
                       isHome={isHome}
+                      isCustomerMode={isCustomerMode}
                     />
                   </>
                 )}
