@@ -388,10 +388,10 @@ var _UserDetails = require("./src/components/UserDetails");
 
 var _VerticalOrdersLayout = require("./src/components/VerticalOrdersLayout");
 
-var _Buttons = require("./styles/Buttons");
+var _Buttons = require("./src/styles/Buttons");
 
-var _Inputs = require("./styles/Inputs");
+var _Inputs = require("./src/styles/Inputs");
 
-var _Select = require("./styles/Select");
+var _Select = require("./src/styles/Select");
 
-var _Tabs = require("./styles/Tabs");
+var _Tabs = require("./src/styles/Tabs");
