@@ -38,7 +38,7 @@ export const RightContainer = styled.div`
 
   @media (min-width: 1024px) {
     width: 350px;
-    padding: 30px 20px;
+    padding: 20px;
     border-top: none;
 
     ${props => props.theme?.rtl ? css`
@@ -109,10 +109,12 @@ export const PaymentMethodContainer = styled(WrapOrderType)`
 `
 
 export const DriverTipContainer = styled.div`
-  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
   h1 {
     font-size: 18px;
-    margin: 10px 0;
+    margin: 0 0 10px 0;
   }
 `
 

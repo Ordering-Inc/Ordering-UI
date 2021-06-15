@@ -15,6 +15,7 @@ import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -76,6 +77,7 @@ const OrderDetailsUI = (props) => {
     setMessages,
     readMessages,
     messagesReadList,
+    isCustomerMode
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -180,16 +182,20 @@ const OrderDetailsUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <Container>
         {order && Object.keys(order).length > 0 && (
           <WrapperContainer>
             <Content className='order-content'>
               <Header>
+                {isCustomerMode && (
+                  <Button onClick={() => handleGoToPage({ page: 'search' })}>
+                    <BsArrowLeft />
+                    {t('GO_TO_BUSINESSLIST', 'Go to business list')}
+                  </Button>
+                )}
                 <HeaderImg>
                   <img src={businessData?.header} alt='business-header' height='200px' width='355px' loading='lazy' />
                 </HeaderImg>
@@ -350,11 +356,7 @@ const OrderDetailsUI = (props) => {
                   <tbody>
                     <tr>
                       <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
-                      <td>
-                        {order.tax_type === 1
-                          ? parsePrice(((order?.summary?.subtotal || order?.subtotal) + (order?.summary?.tax || order?.tax)) || 0)
-                          : parsePrice((order?.summary?.subtotal || order?.subtotal)|| 0)}
-                      </td>
+                      <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                     </tr>
                     {(order?.summary?.discount > 0 || order?.discount > 0) && (
                       <tr>
@@ -392,7 +394,7 @@ const OrderDetailsUI = (props) => {
                           {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}{' '}
                           {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
                             parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                            !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                            !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
                           (
                             <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
                           )}
@@ -505,13 +507,11 @@ const OrderDetailsUI = (props) => {
         )}
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

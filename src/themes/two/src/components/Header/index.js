@@ -181,7 +181,7 @@ export const Header = (props) => {
                 {!configState?.loading && configTypes.length > 0 && (
                   <OrderTypeSelectorHeader configTypes={configTypes} />
                 )}
-                {onlineStatus && windowSize.width > 950 && (
+                {onlineStatus && windowSize.width > 992 && (
                   <>
                     <MomentPopover
                       open={openPopover.moment}
@@ -258,7 +258,7 @@ export const Header = (props) => {
           )}
         </InnerHeader>
         {onlineStatus && isShowOrderOptions && (
-          windowSize.width > 768 && windowSize.width <= 950 ? (
+          windowSize.width > 768 && windowSize.width <= 992 ? (
             <SubMenu>
               <AddressesPopover
                 auth={auth}
