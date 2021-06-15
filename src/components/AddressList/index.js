@@ -110,6 +110,15 @@ const AddressListUI = (props) => {
       setCustomerModalOpen && setCustomerModalOpen(false)
       return
     }
+
+    // Callcenter
+    if (checkAddress(address) && user?.id) {
+      events.emit('go_to_page', { page: 'search' })
+      handleSetDefault(address, userCustomerSetup, true)
+      setCustomerModalOpen && setCustomerModalOpen(false)
+      return
+    }
+
     setAddressOpen(false)
     handleSetDefault(address, userCustomerSetup)
   }
