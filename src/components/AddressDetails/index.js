@@ -20,7 +20,8 @@ const AddressDetailsUI = (props) => {
     isCartPending,
     googleMapsUrl,
     isCustomerMode,
-    apiKey
+    apiKey,
+    isFromCheckout
   } = props
 
   const [orderState] = useOrder()
@@ -81,6 +82,7 @@ const AddressDetailsUI = (props) => {
             onCancel={() => setOpenModal(false)}
             onAccept={() => handleFindBusinesses()}
             userCustomerSetup={isCustomerMode && user}
+            isFromCheckout={isFromCheckout}
           />
         </Modal>
 

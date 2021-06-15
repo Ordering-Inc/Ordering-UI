@@ -51,7 +51,8 @@ const AddressListUI = (props) => {
     userCustomerSetup,
     isEnableContinueButton,
     setCustomerModalOpen,
-    isCustomerMode
+    isCustomerMode,
+    isFromCheckout
   } = props
 
   const [, t] = useLanguage()
@@ -106,14 +107,14 @@ const AddressListUI = (props) => {
   }
 
   const handleSetAddress = (address) => {
-    if (checkAddress(address) && userCustomerSetup?.id === user?.id) {
+    if (checkAddress(address) && userCustomerSetup?.id === user?.id && !isFromCheckout) {
       events.emit('go_to_page', { page: 'search' })
       setCustomerModalOpen && setCustomerModalOpen(false)
       return
     }
 
     // Callcenter
-    if (checkAddress(address) && isCustomerMode) {
+    if (checkAddress(address) && isCustomerMode && !isFromCheckout) {
       events.emit('go_to_page', { page: 'search' })
       handleSetDefault(address, userCustomerSetup, true)
       setCustomerModalOpen && setCustomerModalOpen(false)
