@@ -9,6 +9,8 @@ exports.Header = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _orderingComponents = require("ordering-components");
 
 var _styledComponents = require("styled-components");
@@ -90,6 +92,9 @@ var Header = function Header(props) {
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
       isCustomerMode = props.isCustomerMode;
+
+  var _useLocation = (0, _reactRouterDom.useLocation)(),
+      pathname = _useLocation.pathname;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -209,6 +214,11 @@ var Header = function Header(props) {
 
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
+
+    if (isCustomerMode && pathname.includes('/orders')) {
+      deleteUserCustomer(true);
+      refreshOrderOptions();
+    }
   };
 
   (0, _react.useEffect)(function () {
