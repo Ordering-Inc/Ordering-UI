@@ -15,7 +15,7 @@ export const BusinessSearch = styled.div`
     box-sizing: border-box;
 
     ${props => props.theme?.rtl ? css`
-      padding-rgith: 50px;
+      padding-right: 50px;
     ` : css`
       padding-left: 50px;
     `}

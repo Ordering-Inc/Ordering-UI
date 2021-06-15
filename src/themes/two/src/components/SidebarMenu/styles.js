@@ -165,6 +165,12 @@ export const MenuLinkIcon = styled.div`
     height: 24px;
     color: ${props => props.theme.colors?.darkBlack};
   }
+
+  ${({ active }) => active && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+  `}
 `
 
 export const MenuLinkText = styled.div`
@@ -195,7 +201,10 @@ export const TextInfo = styled.span`
   ${props => props.theme?.rtl && css`
     text-align: right;
     display: inline-block;
-    color: #000;
+  `}
+
+  ${({ active }) => active && css`
+    color: ${props => props.theme.colors?.primary};
   `}
 `
 

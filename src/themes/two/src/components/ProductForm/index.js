@@ -291,8 +291,7 @@ const ProductOptionsUI = (props) => {
                         {editMode ? t('UPDATE', 'Update') : t('ADD_TO_CART', 'Add to Cart')}
                       </span>
                     )}
-                    <span> - </span>
-                    <span>{productCart.total && parsePrice(productCart.total)}</span>
+                    <span className='total'>{productCart.total && parsePrice(productCart.total)}</span>
                   </Button>
                 )}
 

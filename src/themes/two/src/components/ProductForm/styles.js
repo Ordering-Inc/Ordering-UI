@@ -177,6 +177,14 @@ export const ProductActions = styled.div`
       position: relative;
       pointer-events: none;
     }
+
+    > span.total {
+      ${props => props.theme?.rtl ? css`
+        padding-right: 20px;
+      ` : css`
+        padding-left: 20px;
+      `}
+    }
   }
 
   @media (min-width: 577px) {

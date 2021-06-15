@@ -370,6 +370,37 @@ const CheckoutUI = (props) => {
         </LeftContainer>
         <RightContainer>
           <RightInnerContainer>
+            {props.beforeElementsSectionSix?.map((BeforeElement, i) => (
+              <React.Fragment key={i}>
+                {BeforeElement}
+              </React.Fragment>))}
+            {props.beforeComponentsSectionSix?.map((BeforeComponent, i) => (
+              <BeforeComponent key={i} {...props} />))}
+
+            {!props.isHideSectionFour &&
+              !cartState.loading &&
+              cart &&
+              cart?.business_id &&
+              options.type === 1 &&
+              cart?.status !== 2 &&
+              validationFields?.fields?.checkout?.driver_tip?.enabled &&
+              driverTipsOptions.length > 0 &&
+              (
+                <DriverTipContainer>
+                  <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                  <DriverTips
+                    businessId={cart?.business_id}
+                    driverTipsOptions={driverTipsOptions}
+                    isFixedPrice={parseInt(configState.configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configState.configs?.driver_tip_use_custom?.value, 10)}
+                    isDriverTipUseCustom={!!parseInt(configState.configs?.driver_tip_use_custom?.value, 10)}
+                    driverTip={parseInt(configState.configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configState.configs?.driver_tip_use_custom?.value, 10)
+                      ? cart?.driver_tip
+                      : cart?.driver_tip_rate}
+                    useOrderContext
+                  />
+                </DriverTipContainer>
+              )}
+
             <WrapBusinessLogo>
               {(businessDetails?.loading || cartState.loading) ? (
                 <Skeleton width={65} height={65} />
@@ -386,11 +417,11 @@ const CheckoutUI = (props) => {
               </BusinessName>
             </WrapBusinessLogo>
 
-            {props.beforeElementsSectionSix?.map((BeforeElement, i) => (
+            {props.beforeElementsSectionSeven?.map((BeforeElement, i) => (
               <React.Fragment key={i}>
                 {BeforeElement}
               </React.Fragment>))}
-            {props.beforeComponentsSectionSix?.map((BeforeComponent, i) => (
+            {props.beforeComponentsSectionSeven?.map((BeforeComponent, i) => (
               <BeforeComponent key={i} {...props} />))}
 
             {!props.isHideSectionSeven && !cartState.loading && cart && cart?.status !== 2 && (
@@ -509,36 +540,6 @@ const CheckoutUI = (props) => {
               </OrderBill>
             )}
 
-            {props.beforeElementsSectionSeven?.map((BeforeElement, i) => (
-              <React.Fragment key={i}>
-                {BeforeElement}
-              </React.Fragment>))}
-            {props.beforeComponentsSectionSeven?.map((BeforeComponent, i) => (
-              <BeforeComponent key={i} {...props} />))}
-
-            {!props.isHideSectionFour &&
-              !cartState.loading &&
-              cart &&
-              cart?.business_id &&
-              options.type === 1 &&
-              cart?.status !== 2 &&
-              validationFields?.fields?.checkout?.driver_tip?.enabled &&
-              driverTipsOptions.length > 0 &&
-              (
-                <DriverTipContainer>
-                  <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                  <DriverTips
-                    businessId={cart?.business_id}
-                    driverTipsOptions={driverTipsOptions}
-                    isFixedPrice={parseInt(configState.configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configState.configs?.driver_tip_use_custom?.value, 10)}
-                    isDriverTipUseCustom={!!parseInt(configState.configs?.driver_tip_use_custom?.value, 10)}
-                    driverTip={parseInt(configState.configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configState.configs?.driver_tip_use_custom?.value, 10)
-                      ? cart?.driver_tip
-                      : cart?.driver_tip_rate}
-                    useOrderContext
-                  />
-                </DriverTipContainer>
-              )}
           </RightInnerContainer>
         </RightContainer>
         <Alert
