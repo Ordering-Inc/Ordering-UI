@@ -87,6 +87,12 @@ Object.defineProperty(exports, "Checkout", {
     return _Checkout.Checkout;
   }
 });
+Object.defineProperty(exports, "Alert", {
+  enumerable: true,
+  get: function get() {
+    return _Confirm.Alert;
+  }
+});
 Object.defineProperty(exports, "Confirm", {
   enumerable: true,
   get: function get() {
