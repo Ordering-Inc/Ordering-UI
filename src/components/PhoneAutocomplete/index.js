@@ -200,6 +200,7 @@ const PhoneAutocompleteUI = (props) => {
                   phone
                 }}
                 isEnableContinueButton
+                isCustomerMode
               />
             </>
           )}
