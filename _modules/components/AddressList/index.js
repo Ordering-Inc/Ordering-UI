@@ -87,7 +87,9 @@ var AddressListUI = function AddressListUI(props) {
       userId = props.userId,
       userCustomerSetup = props.userCustomerSetup,
       isEnableContinueButton = props.isEnableContinueButton,
-      setCustomerModalOpen = props.setCustomerModalOpen;
+      setCustomerModalOpen = props.setCustomerModalOpen,
+      isCustomerMode = props.isCustomerMode,
+      isFromCheckout = props.isFromCheckout;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -169,7 +171,7 @@ var AddressListUI = function AddressListUI(props) {
   };
 
   var handleSetAddress = function handleSetAddress(address) {
-    if (checkAddress(address) && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id)) {
+    if (checkAddress(address) && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id) && !isFromCheckout) {
       events.emit('go_to_page', {
         page: 'search'
       });
@@ -178,7 +180,7 @@ var AddressListUI = function AddressListUI(props) {
     } // Callcenter
 
 
-    if (checkAddress(address) && user !== null && user !== void 0 && user.id) {
+    if (checkAddress(address) && isCustomerMode && !isFromCheckout) {
       events.emit('go_to_page', {
         page: 'search'
       });

@@ -300,7 +300,8 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('addresses');
     },
-    isHome: isHome
+    isHome: isHome,
+    isCustomerMode: isCustomerMode
   })))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 870 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({

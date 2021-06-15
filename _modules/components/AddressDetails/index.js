@@ -54,7 +54,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       isCartPending = props.isCartPending,
       googleMapsUrl = props.googleMapsUrl,
       isCustomerMode = props.isCustomerMode,
-      apiKey = props.apiKey;
+      apiKey = props.apiKey,
+      isFromCheckout = props.isFromCheckout;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -138,7 +139,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     onAccept: function onAccept() {
       return handleFindBusinesses();
     },
-    userCustomerSetup: isCustomerMode && user
+    userCustomerSetup: isCustomerMode && user,
+    isFromCheckout: isFromCheckout
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,

@@ -290,7 +290,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     userCustomerSetup: _objectSpread(_objectSpread({}, customerState === null || customerState === void 0 ? void 0 : customerState.result), {}, {
       phone: phone
     }),
-    isEnableContinueButton: true
+    isEnableContinueButton: true,
+    isCustomerMode: true
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,
