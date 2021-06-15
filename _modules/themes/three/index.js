@@ -9,6 +9,12 @@ Object.defineProperty(exports, "AddressDetails", {
     return _AddressDetails.AddressDetails;
   }
 });
+Object.defineProperty(exports, "AddressesPopover", {
+  enumerable: true,
+  get: function get() {
+    return _AddressesPopover.AddressesPopover;
+  }
+});
 Object.defineProperty(exports, "AddressForm", {
   enumerable: true,
   get: function get() {
@@ -19,12 +25,6 @@ Object.defineProperty(exports, "AddressList", {
   enumerable: true,
   get: function get() {
     return _AddressList.AddressList;
-  }
-});
-Object.defineProperty(exports, "AllBusinessesListing", {
-  enumerable: true,
-  get: function get() {
-    return _AllBusinessesListing.AllBusinessesListing;
   }
 });
 Object.defineProperty(exports, "BusinessBasicInformation", {
@@ -39,28 +39,16 @@ Object.defineProperty(exports, "BusinessController", {
     return _BusinessController.BusinessController;
   }
 });
-Object.defineProperty(exports, "BusinessesFilter", {
+Object.defineProperty(exports, "BusinessesListing", {
   enumerable: true,
   get: function get() {
-    return _BusinessesFilter.BusinessesFilter;
-  }
-});
-Object.defineProperty(exports, "BusinessInformation", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessInformation.BusinessInformation;
+    return _BusinessesListing.BusinessesListing;
   }
 });
 Object.defineProperty(exports, "BusinessItemAccordion", {
   enumerable: true,
   get: function get() {
     return _BusinessItemAccordion.BusinessItemAccordion;
-  }
-});
-Object.defineProperty(exports, "BusinessesListing", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessesListing.BusinessesListing;
   }
 });
 Object.defineProperty(exports, "BusinessProductsList", {
@@ -73,18 +61,6 @@ Object.defineProperty(exports, "BusinessProductsListing", {
   enumerable: true,
   get: function get() {
     return _BusinessProductsListing.BusinessProductsListing;
-  }
-});
-Object.defineProperty(exports, "BusinessTypeFilter", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessTypeFilter.BusinessTypeFilter;
-  }
-});
-Object.defineProperty(exports, "CardForm", {
-  enumerable: true,
-  get: function get() {
-    return _CardForm.CardForm;
   }
 });
 Object.defineProperty(exports, "Cart", {
@@ -111,16 +87,16 @@ Object.defineProperty(exports, "Checkout", {
     return _Checkout.Checkout;
   }
 });
-Object.defineProperty(exports, "CheckoutBill", {
+Object.defineProperty(exports, "Alert", {
   enumerable: true,
   get: function get() {
-    return _CheckoutBill.CheckoutBill;
+    return _Confirm.Alert;
   }
 });
-Object.defineProperty(exports, "CheckoutDeliveryDetails", {
+Object.defineProperty(exports, "Confirm", {
   enumerable: true,
   get: function get() {
-    return _CheckoutDeliveryDetails.CheckoutDeliveryDetails;
+    return _Confirm.Confirm;
   }
 });
 Object.defineProperty(exports, "CouponControl", {
@@ -129,34 +105,16 @@ Object.defineProperty(exports, "CouponControl", {
     return _CouponControl.CouponControl;
   }
 });
-Object.defineProperty(exports, "DeliveryDetailsPopover", {
-  enumerable: true,
-  get: function get() {
-    return _DeliveryDetailsPopover.DeliveryDetailsPopover;
-  }
-});
 Object.defineProperty(exports, "DriverTips", {
   enumerable: true,
   get: function get() {
     return _DriverTips.DriverTips;
   }
 });
-Object.defineProperty(exports, "FeaturedBuinessesListing", {
+Object.defineProperty(exports, "FloatingButton", {
   enumerable: true,
   get: function get() {
-    return _FeaturedBuinessesListing.FeaturedBuinessesListing;
-  }
-});
-Object.defineProperty(exports, "FilterBusinessesListing", {
-  enumerable: true,
-  get: function get() {
-    return _FilterBusinessesListing.FilterBusinessesListing;
-  }
-});
-Object.defineProperty(exports, "FindAddressForm", {
-  enumerable: true,
-  get: function get() {
-    return _FindAddressForm.FindAddressForm;
+    return _FloatingButton.FloatingButton;
   }
 });
 Object.defineProperty(exports, "Footer", {
@@ -183,6 +141,12 @@ Object.defineProperty(exports, "HomeHero", {
     return _HomeHero.HomeHero;
   }
 });
+Object.defineProperty(exports, "HorizontalOrdersLayout", {
+  enumerable: true,
+  get: function get() {
+    return _HorizontalOrdersLayout.HorizontalOrdersLayout;
+  }
+});
 Object.defineProperty(exports, "LoginForm", {
   enumerable: true,
   get: function get() {
@@ -201,16 +165,16 @@ Object.defineProperty(exports, "MomentControl", {
     return _MomentControl.MomentControl;
   }
 });
+Object.defineProperty(exports, "MomentPopover", {
+  enumerable: true,
+  get: function get() {
+    return _MomentPopover.MomentPopover;
+  }
+});
 Object.defineProperty(exports, "MyOrders", {
   enumerable: true,
   get: function get() {
     return _MyOrders.MyOrders;
-  }
-});
-Object.defineProperty(exports, "OrderBill", {
-  enumerable: true,
-  get: function get() {
-    return _OrderBill.OrderBill;
   }
 });
 Object.defineProperty(exports, "OrderDetails", {
@@ -225,22 +189,10 @@ Object.defineProperty(exports, "OrdersOption", {
     return _OrdersOption.OrdersOption;
   }
 });
-Object.defineProperty(exports, "OrderTypeSelectorHeader", {
-  enumerable: true,
-  get: function get() {
-    return _OrderTypeSelectorHeader.OrderTypeSelectorHeader;
-  }
-});
 Object.defineProperty(exports, "PaymentOptions", {
   enumerable: true,
   get: function get() {
     return _PaymentOptions.PaymentOptions;
-  }
-});
-Object.defineProperty(exports, "PaymentOptionStripe", {
-  enumerable: true,
-  get: function get() {
-    return _PaymentOptionStripe.PaymentOptionStripe;
   }
 });
 Object.defineProperty(exports, "ProductForm", {
@@ -261,28 +213,10 @@ Object.defineProperty(exports, "ProductOption", {
     return _ProductOption.ProductOption;
   }
 });
-Object.defineProperty(exports, "ReviewOrder", {
-  enumerable: true,
-  get: function get() {
-    return _ReviewOrder.ReviewOrder;
-  }
-});
-Object.defineProperty(exports, "SearchBar", {
-  enumerable: true,
-  get: function get() {
-    return _SearchBar.SearchBar;
-  }
-});
 Object.defineProperty(exports, "SidebarMenu", {
   enumerable: true,
   get: function get() {
     return _SidebarMenu.SidebarMenu;
-  }
-});
-Object.defineProperty(exports, "SingleProductCard", {
-  enumerable: true,
-  get: function get() {
-    return _SingleProductCard.SingleProductCard;
   }
 });
 Object.defineProperty(exports, "SignUpForm", {
@@ -291,22 +225,16 @@ Object.defineProperty(exports, "SignUpForm", {
     return _SignUpForm.SignUpForm;
   }
 });
-Object.defineProperty(exports, "StripeElementsForm", {
+Object.defineProperty(exports, "SingleProductCard", {
   enumerable: true,
   get: function get() {
-    return _StripeElementsForm.StripeElementsForm;
+    return _SingleProductCard.SingleProductCard;
   }
 });
-Object.defineProperty(exports, "Ticket", {
+Object.defineProperty(exports, "UserDetails", {
   enumerable: true,
   get: function get() {
-    return _Ticket.Ticket;
-  }
-});
-Object.defineProperty(exports, "UserProfileForm", {
-  enumerable: true,
-  get: function get() {
-    return _UserProfileForm.UserProfileForm;
+    return _UserDetails.UserDetails;
   }
 });
 Object.defineProperty(exports, "VerticalOrdersLayout", {
@@ -319,18 +247,6 @@ Object.defineProperty(exports, "Button", {
   enumerable: true,
   get: function get() {
     return _Buttons.Button;
-  }
-});
-Object.defineProperty(exports, "Tabs", {
-  enumerable: true,
-  get: function get() {
-    return _Tabs.Tabs;
-  }
-});
-Object.defineProperty(exports, "Tab", {
-  enumerable: true,
-  get: function get() {
-    return _Tabs.Tab;
   }
 });
 Object.defineProperty(exports, "Input", {
@@ -387,34 +303,38 @@ Object.defineProperty(exports, "Select", {
     return _Select.Select;
   }
 });
+Object.defineProperty(exports, "Tab", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.Tab;
+  }
+});
+Object.defineProperty(exports, "Tabs", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.Tabs;
+  }
+});
 
 var _AddressDetails = require("./src/components/AddressDetails");
+
+var _AddressesPopover = require("./src/components/AddressesPopover");
 
 var _AddressForm = require("./src/components/AddressForm");
 
 var _AddressList = require("./src/components/AddressList");
 
-var _AllBusinessesListing = require("./src/components/AllBusinessesListing");
-
 var _BusinessBasicInformation = require("./src/components/BusinessBasicInformation");
 
 var _BusinessController = require("./src/components/BusinessController");
 
-var _BusinessesFilter = require("./src/components/BusinessesFilter");
-
-var _BusinessInformation = require("./src/components/BusinessInformation");
+var _BusinessesListing = require("./src/components/BusinessesListing");
 
 var _BusinessItemAccordion = require("./src/components/BusinessItemAccordion");
-
-var _BusinessesListing = require("./src/components/BusinessesListing");
 
 var _BusinessProductsList = require("./src/components/BusinessProductsList");
 
 var _BusinessProductsListing = require("./src/components/BusinessProductsListing");
-
-var _BusinessTypeFilter = require("./src/components/BusinessTypeFilter");
-
-var _CardForm = require("./src/components/CardForm");
 
 var _Cart = require("./src/components/Cart");
 
@@ -424,21 +344,13 @@ var _CartPopover = require("./src/components/CartPopover");
 
 var _Checkout = require("./src/components/Checkout");
 
-var _CheckoutBill = require("./src/components/CheckoutBill");
-
-var _CheckoutDeliveryDetails = require("./src/components/CheckoutDeliveryDetails");
+var _Confirm = require("./src/components/Confirm");
 
 var _CouponControl = require("./src/components/CouponControl");
 
-var _DeliveryDetailsPopover = require("./src/components/DeliveryDetailsPopover");
-
 var _DriverTips = require("./src/components/DriverTips");
 
-var _FeaturedBuinessesListing = require("./src/components/FeaturedBuinessesListing");
-
-var _FilterBusinessesListing = require("./src/components/FilterBusinessesListing");
-
-var _FindAddressForm = require("./src/components/FindAddressForm");
+var _FloatingButton = require("./src/components/FloatingButton");
 
 var _Footer = require("./src/components/Footer");
 
@@ -448,25 +360,23 @@ var _Header = require("./src/components/Header");
 
 var _HomeHero = require("./src/components/HomeHero");
 
+var _HorizontalOrdersLayout = require("./src/components/HorizontalOrdersLayout");
+
 var _LoginForm = require("./src/components/LoginForm");
 
 var _MomentContent = require("./src/components/MomentContent");
 
 var _MomentControl = require("./src/components/MomentControl");
 
-var _MyOrders = require("./src/components/MyOrders");
+var _MomentPopover = require("./src/components/MomentPopover");
 
-var _OrderBill = require("./src/components/OrderBill");
+var _MyOrders = require("./src/components/MyOrders");
 
 var _OrderDetails = require("./src/components/OrderDetails");
 
 var _OrdersOption = require("./src/components/OrdersOption");
 
-var _OrderTypeSelectorHeader = require("./src/components/OrderTypeSelectorHeader");
-
 var _PaymentOptions = require("./src/components/PaymentOptions");
-
-var _PaymentOptionStripe = require("./src/components/PaymentOptionStripe");
 
 var _ProductForm = require("./src/components/ProductForm");
 
@@ -474,28 +384,20 @@ var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
 
 var _ProductOption = require("./src/components/ProductOption");
 
-var _ReviewOrder = require("./src/components/ReviewOrder");
-
-var _SearchBar = require("./src/components/SearchBar");
-
 var _SidebarMenu = require("./src/components/SidebarMenu");
-
-var _SingleProductCard = require("./src/components/SingleProductCard");
 
 var _SignUpForm = require("./src/components/SignUpForm");
 
-var _StripeElementsForm = require("./src/components/StripeElementsForm");
+var _SingleProductCard = require("./src/components/SingleProductCard");
 
-var _Ticket = require("./src/components/Ticket");
-
-var _UserProfileForm = require("./src/components/UserProfileForm");
+var _UserDetails = require("./src/components/UserDetails");
 
 var _VerticalOrdersLayout = require("./src/components/VerticalOrdersLayout");
 
 var _Buttons = require("./src/styles/Buttons");
 
-var _Tabs = require("./src/styles/Tabs");
-
 var _Inputs = require("./src/styles/Inputs");
 
 var _Select = require("./src/styles/Select");
+
+var _Tabs = require("./src/styles/Tabs");

@@ -17,19 +17,15 @@ var _AiOutlineLogin = _interopRequireDefault(require("@meronex/icons/ai/AiOutlin
 
 var _AiOutlineUserAdd = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineUserAdd"));
 
+var _FaRegAddressCard = _interopRequireDefault(require("@meronex/icons/fa/FaRegAddressCard"));
+
 var _FaRegListAlt = _interopRequireDefault(require("@meronex/icons/fa/FaRegListAlt"));
 
 var _AiOutlineHome = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineHome"));
 
 var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 
-var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
-
-var _AiFillAndroid = _interopRequireDefault(require("@meronex/icons/ai/AiFillAndroid"));
-
-var _FaApple = _interopRequireDefault(require("@meronex/icons/fa/FaApple"));
-
-var _style = require("../../../../../components/Dropdown/style");
+var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -37,17 +33,15 @@ var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
 var _LogoutButton = require("../../../../../components/LogoutButton");
 
-var _Buttons = require("../../styles/Buttons");
-
-var _styledComponents = require("styled-components");
+var _style = require("../../../../../components/Dropdown/style");
 
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -59,16 +53,17 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _theme$images, _theme$images$logos, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _props$afterComponent, _props$afterElements;
 
   var auth = props.auth,
-      user = props.user;
-  var theme = (0, _styledComponents.useTheme)();
+      user = props.user,
+      isHideSignup = props.isHideSignup,
+      userCustomer = props.userCustomer;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -100,7 +95,7 @@ var SidebarMenu = function SidebarMenu(props) {
 
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
-    document.getElementById('sidebar_menu').style.width = value ? width > 489 ? '300px' : '100vw' : '0';
+    document.getElementById('sidebar_menu').style.width = value ? width > 489 ? '340px' : '100vw' : '0';
   };
 
   (0, _react.useEffect)(function () {
@@ -108,7 +103,7 @@ var SidebarMenu = function SidebarMenu(props) {
       if (width <= 489) {
         document.getElementById('sidebar_menu').style.width = '100vh';
       } else {
-        document.getElementById('sidebar_menu').style.width = '300px';
+        document.getElementById('sidebar_menu').style.width = '340px';
       }
     }
   }, [width]);
@@ -120,7 +115,9 @@ var SidebarMenu = function SidebarMenu(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    auth: auth
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
     isHome: isHome,
     "aria-label": "menu",
     onClick: function onClick() {
@@ -135,16 +132,18 @@ var SidebarMenu = function SidebarMenu(props) {
     onClick: function onClick() {
       return actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), auth && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'profile'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappUserAccountContent, null, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
-    src: user === null || user === void 0 ? void 0 : user.photo,
-    fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrappAccountText, null, /*#__PURE__*/_react.default.createElement("span", null, user.name, " ", user.lastname), /*#__PURE__*/_react.default.createElement("span", null, t('VIEW_ACCOUNT', 'View account'))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), auth && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserAccountContent, null, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
+    src: user === null || user === void 0 ? void 0 : user.photo
+  }), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, user.name, " ", user.lastname)))), userCustomer && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    isCustomer: userCustomer
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: false
+  }, /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: false
+  }, "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       var _options$address;
@@ -154,10 +153,25 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'profile'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: window.location.pathname === '/profile'
+  }, /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: window.location.pathname === '/profile'
+  }, t('PROFILE', 'Profile'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({
@@ -165,8 +179,10 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
     active: window.location.pathname === '/profile/orders'
   }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
     active: window.location.pathname === '/profile/orders'
   }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     onCustomClick: function onCustomClick() {
@@ -180,10 +196,12 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
     active: window.location.pathname === '/signin' || window.location.pathname === '/login'
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineLogin.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
     active: window.location.pathname === '/signin' || window.location.pathname === '/login'
-  }, t('SIGN_IN', 'Sign in'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('SIGN_IN', 'Sign in'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({
@@ -191,22 +209,12 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
     active: window.location.pathname === '/signup'
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineUserAdd.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
     active: window.location.pathname === '/signup'
-  }, t('SIGNUP', 'Sign up'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))))), /*#__PURE__*/_react.default.createElement(_styles.WrapDownloadAppLink, null, /*#__PURE__*/_react.default.createElement(_styles.DownloadAppDescription, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrap, null, /*#__PURE__*/_react.default.createElement("img", {
-    alt: "Isotype",
-    width: "45px",
-    height: "45px",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.isotype,
-    loading: "lazy"
-  })), /*#__PURE__*/_react.default.createElement("p", null, t('LOVE_IN_THE_APP', 'There’s more to love in the app.'))), /*#__PURE__*/_react.default.createElement(_styles.DownloadButtonGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "secundary",
-    initialIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_FaApple.default, null), t('IPHONE', 'iPhone')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "secundary",
-    initialIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_AiFillAndroid.default, null), t('ANDROID', 'Android')))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, t('SIGNUP', 'Sign up'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
