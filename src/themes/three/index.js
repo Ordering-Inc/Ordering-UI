@@ -12,7 +12,7 @@ import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
-import { Confirm } from './src/components/Confirm'
+import { Alert, Confirm } from './src/components/Confirm'
 import { CouponControl } from './src/components/CouponControl'
 import { DriverTips } from './src/components/DriverTips'
 import { FloatingButton } from './src/components/FloatingButton'
@@ -48,6 +48,7 @@ export {
   AddressesPopover,
   AddressForm,
   AddressList,
+  Alert,
   BusinessBasicInformation,
   BusinessController,
   BusinessesListing,
