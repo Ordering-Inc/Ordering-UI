@@ -351,7 +351,7 @@ const CheckoutUI = (props) => {
                 handleOrderRedirect={handleOrderRedirect}
                 isPaymethodNull={paymethodSelected}
                 isCustomerMode={isCustomerMode}
-                paymethodSelected={paymethodSelected}
+                paySelected={paymethodSelected}
               />
             </PaymentMethodContainer>
           )}
