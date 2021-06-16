@@ -157,18 +157,6 @@ const CheckoutUI = (props) => {
     }
   }, [errors])
 
-  // useEffect(() => {
-  //   const paymethods = businessDetails?.business?.paymethods || []
-  //   if (paymethods && paymethods.length > 1) {
-  //     handlePaymethodChange(null)
-  //     // if (cart?.business_id === businessDetails?.business?.id) {
-  //     //   handlePaymethodChange(paymethodSelected)
-  //     // } else {
-  //     //   handlePaymethodChange(null)
-  //     // }
-  //   }
-  // }, [cart?.total])
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
