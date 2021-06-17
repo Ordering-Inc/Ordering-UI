@@ -36,7 +36,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOptionCash = function PaymentOptionCash(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
-  var orderTotal = props.orderTotal,
+  var defaultValue = props.defaultValue,
+      orderTotal = props.orderTotal,
       onChangeData = props.onChangeData,
       setErrorCash = props.setErrorCash;
 
@@ -48,22 +49,37 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
-  var _useState = (0, _react.useState)(null),
+  var _useState = (0, _react.useState)(defaultValue),
       _useState2 = _slicedToArray(_useState, 2),
       value = _useState2[0],
       setvalue = _useState2[1];
 
-  var handleChangeCash = function handleChangeCash(e) {
-    var _e$target;
+  var el = (0, _react.useRef)();
+  var timeout = null;
 
-    var cash = parseFloat(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
-    cash = isNaN(cash) ? null : cash;
-    setvalue(cash);
-    onChangeData && onChangeData({
-      cash: cash
-    });
+  var onChangeCash = function onChangeCash(e) {
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      var _e$target;
+
+      var cash = parseFloat(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
+      cash = isNaN(cash) ? null : cash;
+      setvalue(cash);
+
+      if (cash >= orderTotal || !cash) {
+        onChangeData && onChangeData({
+          cash: cash
+        });
+      }
+    }, 1000);
   };
 
+  (0, _react.useEffect)(function () {
+    el.current.onkeyup = onChangeCash;
+  }, []);
+  (0, _react.useEffect)(function () {
+    el.current.value = value || '';
+  }, [value]);
   (0, _react.useEffect)(function () {
     if (value && parseFloat(value) < orderTotal) {
       setErrorCash && setErrorCash(true);
@@ -80,10 +96,10 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.PaymentCashContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormCash, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    ref: el,
     name: "cash",
     type: "text",
-    placeholder: "0",
-    onChange: handleChangeCash
+    placeholder: "0"
   })), value && parseFloat(value) < orderTotal && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total'), ": ", parsePrice(orderTotal)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
@@ -96,3 +112,6 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
 };
 
 exports.PaymentOptionCash = PaymentOptionCash;
+PaymentOptionCash.defaultProps = {
+  defaultValue: null
+};
