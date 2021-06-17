@@ -208,8 +208,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
 
   var optionsToSelect = customersPhones.users.map(function (user) {
     var obj = {};
-    obj.value = user.cellphone;
-    obj.label = "".concat(user.cellphone, " (").concat(user.name, ")");
+    obj.value = user.cellphone || user.phone;
+    obj.label = "".concat(user.cellphone || user.phone, " (").concat(user.name, ")");
     return obj;
   }) || [];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
