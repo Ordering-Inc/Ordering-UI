@@ -52,7 +52,8 @@ var AddressesPopover = function AddressesPopover(props) {
 
   var open = props.open,
       auth = props.auth,
-      addressState = props.addressState;
+      addressState = props.addressState,
+      isCustomerMode = props.isCustomerMode;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -169,7 +170,8 @@ var AddressesPopover = function AddressesPopover(props) {
     isPopover: true,
     changeOrderAddressWithDefault: true,
     userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
-    onClosePopover: props.onClose
+    onClosePopover: props.onClose,
+    isCustomerMode: isCustomerMode
   })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
     address: addressState || {},
