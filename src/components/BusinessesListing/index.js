@@ -165,6 +165,8 @@ const BusinessesListingUI = (props) => {
               customArray={
                 getCustomArray(orderState.carts)?.filter(cart => cart.products.length > 0)
               }
+              isCustomLayout
+              isBusinessesLoading={businessesList.loading}
             />
             <OrdersOption
               horizontal
@@ -173,6 +175,8 @@ const BusinessesListingUI = (props) => {
               businessesIds={businessesIds}
               onRedirectPage={onRedirectPage}
               userCustomerId={userCustomer?.id}
+              isCustomLayout
+              isBusinessesLoading={businessesList.loading}
             />
           </>
         )}
