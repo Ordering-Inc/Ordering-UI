@@ -33,7 +33,9 @@ const OrdersOptionUI = (props) => {
     customArray,
     onRedirectPage,
     businessesIds,
-    orderStatus
+    orderStatus,
+    isCustomLayout,
+    isBusinessesLoading
   } = props
 
   const [, t] = useLanguage()
@@ -51,6 +53,7 @@ const OrdersOptionUI = (props) => {
     : orders.length > 0
 
   const [reorderLoading, setReorderLoading] = useState(false)
+  const [loadingOrders, setLoadingOrders] = useState(true)
 
   const handleReorder = async (orderId) => {
     setReorderLoading(true)
@@ -98,6 +101,18 @@ const OrdersOptionUI = (props) => {
     return objectStatus && objectStatus
   }
 
+  useEffect(() => {
+    let timeout
+    if (isCustomLayout) {
+      timeout = setTimeout(() => {
+        setLoadingOrders(false)
+      }, 2000)
+    }
+    return () => {
+      typeof timeout === 'number' && clearTimeout(timeout)
+    }
+  }, [])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -106,7 +121,7 @@ const OrdersOptionUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {(isShowTitles || !isBusinessesPage) && (
+      {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : (isShowTitles || !isBusinessesPage)) && (
         <>
           <OptionTitle isBusinessesPage={isBusinessesPage}>
             <h1>
@@ -125,7 +140,7 @@ const OrdersOptionUI = (props) => {
         </>
       )}
 
-      {loading && (
+      {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : loading) && (
         <OrdersContainer
           isSkeleton
           activeOrders={horizontal}
@@ -179,20 +194,22 @@ const OrdersOptionUI = (props) => {
         </OrdersContainer>
       )}
 
-      {!loading && !error && orders.length > 0 && (
+      {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (
         horizontal ? (
-          <HorizontalOrdersLayout
-            businessesIds={businessesIds}
-            orders={orders.filter(order => orderStatus.includes(order.status))}
-            pagination={pagination}
-            onRedirectPage={onRedirectPage}
-            loadMoreOrders={loadMoreOrders}
-            isBusinessesPage={isBusinessesPage}
-            reorderLoading={reorderLoading}
-            customArray={customArray}
-            getOrderStatus={getOrderStatus}
-            handleReorder={handleReorder}
-          />
+          <>
+            <HorizontalOrdersLayout
+              businessesIds={businessesIds}
+              orders={orders.filter(order => orderStatus.includes(order.status))}
+              pagination={pagination}
+              onRedirectPage={onRedirectPage}
+              loadMoreOrders={loadMoreOrders}
+              isBusinessesPage={isBusinessesPage}
+              reorderLoading={reorderLoading}
+              customArray={customArray}
+              getOrderStatus={getOrderStatus}
+              handleReorder={handleReorder}
+            />
+          </>
         ) : (
           <VerticalOrdersLayout
             reorderLoading={reorderLoading}

@@ -240,6 +240,9 @@ const OrderDetailsUI = (props) => {
               <OrderInfo>
                 <OrderData>
                   <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                  {order?.status !== 0 && order?.integration_id && (
+                    <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                  )}
                   <p>{t('DATE_TIME_FOR_ORDER', theme?.defaultLanguages?.DATE_TIME_FOR_ORDER || 'Date and time for your order')}</p>
                   <p className='date'>
                     {
