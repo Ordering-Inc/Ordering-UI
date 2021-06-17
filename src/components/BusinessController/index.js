@@ -56,7 +56,7 @@ const BusinessControllerUI = (props) => {
   }
 
   const handleShowAlert = () => {
-    setAlertState({ open: true, content: [t('BUSINESS_CLOSED_ERROR', 'The Business is closed at the moment')] })
+    setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   }
 
   return (
