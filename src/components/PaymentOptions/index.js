@@ -273,7 +273,7 @@ const PaymentOptionsUI = (props) => {
         {/* Stripe Redirect */}
         <Modal
           title={t('STRIPE_REDIRECT', 'Stripe Redirect')}
-          open={['stripe_redirect'].includes(isOpenMethod.paymethod?.gateway) && !paymethodData.type}
+          open={isOpenMethod.paymethod?.gateway === 'stripe_redirect' && !paymethodData.type}
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >

@@ -62,12 +62,14 @@ const CheckoutUI = (props) => {
     handlePaymethodChange,
     handlerClickPlaceOrder,
     handleOrderRedirect,
-    isCustomerMode
+    isCustomerMode,
+    isResetPaymethod,
+    setIsResetPaymethod
   } = props
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  const [{ options }] = useOrder()
+  const [{ options, loading }, { changePaymethod }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
@@ -156,6 +158,14 @@ const CheckoutUI = (props) => {
       })
     }
   }, [errors])
+
+  useEffect(() => {
+    if (isResetPaymethod) {
+      handlePaymethodChange(null)
+      setIsResetPaymethod(true)
+      // changePaymethod(cart?.business_id, null, null)
+    }
+  }, [isResetPaymethod])
 
   return (
     <>
@@ -337,7 +347,6 @@ const CheckoutUI = (props) => {
                 errorCash={errorCash}
                 setErrorCash={setErrorCash}
                 handleOrderRedirect={handleOrderRedirect}
-                isPaymethodNull={paymethodSelected}
                 isCustomerMode={isCustomerMode}
                 paySelected={paymethodSelected}
               />
@@ -373,7 +382,7 @@ const CheckoutUI = (props) => {
             <WrapperPlaceOrderButton>
               <Button
                 color={(!cart?.valid_maximum || !cart?.valid_minimum) ? 'secundary' : 'primary'}
-                disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || !cart?.valid_minimum}
+                disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || !cart?.valid_minimum || loading}
                 onClick={() => handlePlaceOrder()}
               >
                 {!cart?.valid_maximum ? (
@@ -428,7 +437,7 @@ export const Checkout = (props) => {
   const {
     errors,
     clearErrors,
-    query,
+    // query,
     cartUuid,
     handleOrderRedirect,
     handleCheckoutRedirect,
@@ -447,6 +456,7 @@ export const Checkout = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products?.length) || null)
 
@@ -511,8 +521,11 @@ export const Checkout = (props) => {
           if (confirmCartRes.error) {
             setAlertState({
               open: true,
-              content: [confirmCartRes.error.message]
+              content: typeof confirmCartRes.result === 'string'
+                ? [confirmCartRes.result]
+                : confirmCartRes.result
             })
+            setIsResetPaymethod(true)
           }
           if (confirmCartRes.result.order?.uuid) {
             handleOrderRedirect(confirmCartRes.result.order.uuid)
@@ -556,7 +569,9 @@ export const Checkout = (props) => {
     ...props,
     UIComponent: CheckoutUI,
     cartState,
-    businessId: cartState.cart?.business_id
+    businessId: cartState.cart?.business_id,
+    isResetPaymethod,
+    setIsResetPaymethod
   }
 
   return (
