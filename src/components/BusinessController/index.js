@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BusinessController as BusinessSingleCard, useLanguage, useUtils } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
+import { Alert } from '../Confirm'
 
 import { convertHoursToMinutes } from '../../utils'
 
@@ -41,6 +42,8 @@ const BusinessControllerUI = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, parseNumber, optimizeImage }] = useUtils()
 
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const types = ['food', 'alcohol', 'groceries', 'laundry']
 
   const businessType = () => {
@@ -52,6 +55,10 @@ const BusinessControllerUI = (props) => {
     return _types.join(', ')
   }
 
+  const handleShowAlert = () => {
+    setAlertState({ open: true, content: [t('BUSINESS_CLOSED_ERROR', 'The Business is closed at the moment')] })
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -61,7 +68,7 @@ const BusinessControllerUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton}>
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleClick(business)}>
+        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!business?.open && isCustomLayout ? handleShowAlert() : handleClick(business))}>
           <BusinessHero>
             {isSkeleton ? (
               <Skeleton height={100} />
@@ -152,6 +159,15 @@ const BusinessControllerUI = (props) => {
           </BusinessContent>
         </WrapperBusinessCard>
       </ContainerCard>
+      <Alert
+        title={t('BUSINESS_CLOSED', 'Business Closed')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
