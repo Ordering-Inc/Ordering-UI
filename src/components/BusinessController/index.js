@@ -33,7 +33,8 @@ const BusinessControllerUI = (props) => {
     getBusinessOffer,
     orderState,
     handleClick,
-    orderType
+    orderType,
+    isCustomLayout
   } = props
 
   const theme = useTheme()
@@ -71,10 +72,12 @@ const BusinessControllerUI = (props) => {
                     <span className='crown'>
                       <FaCrown />
                     </span>}
-                  <div>
-                    {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
-                    {!business?.open && <span>{t('PREORDER', 'PreOrder')}</span>}
-                  </div>
+                  {!isCustomLayout && (
+                    <div>
+                      {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
+                      {!business?.open && <span>{t('PREORDER', 'PreOrder')}</span>}
+                    </div>
+                  )}
                 </BusinessTags>
                 {!business?.open && <h1>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>

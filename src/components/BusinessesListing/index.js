@@ -211,6 +211,7 @@ const BusinessesListingUI = (props) => {
                 business={business}
                 handleCustomClick={handleBusinessClick}
                 orderType={orderState?.options?.type}
+                isCustomLayout={isCustomLayout}
               />
             ))
           }
