@@ -168,7 +168,14 @@ const ProductOptionsUI = (props) => {
           <>
             <WrapperImage>
               <ProductImage id='product_image'>
-                <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
+                <img
+                  src={product?.images || theme.images?.dummies?.product}
+                  alt='product'
+                  width='300px'
+                  height='300px'
+                  loading='lazy'
+                  onError={(e)=>{e.target.onerror = null; e.target.src=theme.images?.dummies?.product}}
+                />
               </ProductImage>
             </WrapperImage>
             <ProductInfo>
