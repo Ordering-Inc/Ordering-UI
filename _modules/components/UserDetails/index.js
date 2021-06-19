@@ -68,7 +68,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
-  var userData = ((_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : _userState$result.result) || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) || user;
+  var userData = ((_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : _userState$result.result) || props.userData || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) || user;
   (0, _react.useEffect)(function () {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit();
