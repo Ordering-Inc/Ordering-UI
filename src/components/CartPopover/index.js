@@ -12,7 +12,7 @@ import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
 
 export const CartPopover = (props) => {
-  const { open, auth, location } = props
+  const { open, auth, location, isCustomerMode } = props
   const [orderState] = useOrder()
   const theme = useTheme()
   const [events] = useEvent()
@@ -65,6 +65,21 @@ export const CartPopover = (props) => {
     }
   }, [location])
 
+  const getScrollTop = () => {
+    if (document.documentElement?.scrollTop > 80) {
+      props.onClose && props.onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (location && location.pathname.includes('/store/') && isCustomerMode) {
+      window.addEventListener('scroll', getScrollTop)
+    }
+    return () => {
+      window.removeEventListener('scroll', getScrollTop)
+    }
+  }, [])
+
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
@@ -75,11 +90,9 @@ export const CartPopover = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <div style={{ overflow: 'hidden' }}>
         <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover'>
           <span>
@@ -98,13 +111,11 @@ export const CartPopover = (props) => {
         </PopoverBody>
       </div>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
