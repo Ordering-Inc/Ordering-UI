@@ -5,7 +5,6 @@ import {
   useLanguage,
   useOrder
 } from 'ordering-components'
-import { PhoneAutocomplete as PhoneAutocompleteController } from './test'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
