@@ -199,7 +199,7 @@ const CartUI = (props) => {
                         {t('DRIVER_TIP', 'Driver tip')}{' '}
                         {cart?.driver_tip_rate > 0 &&
                           parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                          !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                          !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
                         (
                           <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>
                         )}

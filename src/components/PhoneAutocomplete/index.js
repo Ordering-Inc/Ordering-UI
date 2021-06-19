@@ -5,6 +5,7 @@ import {
   useLanguage,
   useOrder
 } from 'ordering-components'
+import { PhoneAutocomplete as PhoneAutocompleteController } from './test'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
@@ -137,6 +138,7 @@ const PhoneAutocompleteUI = (props) => {
                 classNamePrefix='select'
                 placeholder={t('PHONE', 'Phone')}
                 value={optSelected}
+                noOptionsMessage={() => t('NO_OPTIONS', 'No options')}
                 inputValue={!optSelected ? inputValue : ''}
                 onChange={onChange}
                 onInputChange={onInputChange}
