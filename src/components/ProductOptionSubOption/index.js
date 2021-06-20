@@ -74,11 +74,9 @@ const ProductOptionSubOptionUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <Container onClick={() => handleSuboptionClick()}>
         <IconControl>
           {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
@@ -95,7 +93,7 @@ const ProductOptionSubOptionUI = (props) => {
             )
           )}
         </IconControl>
-        {suboption.image && (
+        {suboption.image && suboption.image !== '-' && (
           <SubOptionThumbnail src={suboption.image} />
         )}
         <Text>
