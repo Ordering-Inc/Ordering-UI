@@ -28,7 +28,7 @@ import {
 } from './styles'
 
 export const SidebarMenu = (props) => {
-  const { auth, isHideSignup, userCustomer } = props
+  const { auth, isHideSignup, userCustomer, isCustomerMode } = props
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
@@ -190,7 +190,7 @@ export const SidebarMenu = (props) => {
                 </WrappContent>
               </MenuLink>
               {
-                !userCustomer && (
+                !isCustomerMode && (
                   <MenuLink
                     isHome={isHome}
                     onClick={() => handleGoToPage({ page: 'orders' })}

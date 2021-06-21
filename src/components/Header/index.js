@@ -149,6 +149,7 @@ export const Header = (props) => {
               auth={auth}
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
+              isCustomerMode={isCustomerMode}
             />
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
