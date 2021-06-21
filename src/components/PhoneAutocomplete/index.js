@@ -137,6 +137,7 @@ const PhoneAutocompleteUI = (props) => {
                 classNamePrefix='select'
                 placeholder={t('PHONE', 'Phone')}
                 value={optSelected}
+                noOptionsMessage={() => t('NO_OPTIONS', 'No options')}
                 inputValue={!optSelected ? inputValue : ''}
                 onChange={onChange}
                 onInputChange={onInputChange}
