@@ -245,7 +245,6 @@ const BusinessProductsListingUI = (props) => {
                   isProducts={currentCart.products.length}
                   isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
                   handleCartOpen={(val) => setIsCartOpen(val)}
-                  isSticky
                 />
               )}
             </WrappLayout>

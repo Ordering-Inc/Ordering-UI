@@ -36,8 +36,7 @@ const CartUI = (props) => {
     isCartPopover,
     isForceOpenCart,
     isCartOnProductsList,
-    handleCartOpen,
-    isSticky
+    handleCartOpen
   } = props
 
   const [, t] = useLanguage()
@@ -127,7 +126,7 @@ const CartUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <CartContainer className='cart'>
-        <CartSticky isSticky={isSticky}>
+        <CartSticky isCartOnProductsList={isCartOnProductsList}>
           <BusinessItemAccordion
             isCartPending={isCartPending}
             currentCartUuid={currentCartUuid}
