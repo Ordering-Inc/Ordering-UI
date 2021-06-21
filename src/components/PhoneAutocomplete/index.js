@@ -111,8 +111,8 @@ const PhoneAutocompleteUI = (props) => {
 
   const optionsToSelect = customersPhones.users.map(user => {
     const obj = {}
-    obj.value = user.cellphone
-    obj.label = `${user.cellphone} (${user.name})`
+    obj.value = user.cellphone || user.phone
+    obj.label = `${user.cellphone || user.phone} (${user.name})`
     return obj
   }) || []
 
@@ -137,6 +137,7 @@ const PhoneAutocompleteUI = (props) => {
                 classNamePrefix='select'
                 placeholder={t('PHONE', 'Phone')}
                 value={optSelected}
+                noOptionsMessage={() => t('NO_OPTIONS', 'No options')}
                 inputValue={!optSelected ? inputValue : ''}
                 onChange={onChange}
                 onInputChange={onInputChange}
@@ -176,6 +177,7 @@ const PhoneAutocompleteUI = (props) => {
           saveCustomerUser={saveCustomerUser}
           fieldsNotValid={props.fieldsNotValid}
           useChekoutFileds
+          isCustomerMode={props.isCustomerMode}
         />
       </Modal>
       <Modal
@@ -187,7 +189,6 @@ const PhoneAutocompleteUI = (props) => {
           {!customerState?.loading && (
             <>
               <UserDetails
-                userData={customerState?.result}
                 userId={customerState?.result?.id}
                 isCustomerMode
               />
@@ -200,6 +201,7 @@ const PhoneAutocompleteUI = (props) => {
                   phone
                 }}
                 isEnableContinueButton
+                isCustomerMode
               />
             </>
           )}
