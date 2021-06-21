@@ -76,7 +76,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       customArray = props.customArray,
       onRedirectPage = props.onRedirectPage,
       businessesIds = props.businessesIds,
-      orderStatus = props.orderStatus;
+      orderStatus = props.orderStatus,
+      isCustomLayout = props.isCustomLayout,
+      isBusinessesLoading = props.isBusinessesLoading;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -103,6 +105,11 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       reorderLoading = _useState2[0],
       setReorderLoading = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loadingOrders = _useState4[0],
+      setLoadingOrders = _useState4[1];
 
   var handleReorder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(orderId) {
@@ -235,6 +242,19 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return objectStatus && objectStatus;
   };
 
+  (0, _react.useEffect)(function () {
+    var timeout;
+
+    if (isCustomLayout) {
+      timeout = setTimeout(function () {
+        setLoadingOrders(false);
+      }, 2000);
+    }
+
+    return function () {
+      typeof timeout === 'number' && clearTimeout(timeout);
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -243,13 +263,13 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), (isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
+  }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
     isBusinessesPage: isBusinessesPage
   }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders')))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
-  })), loading && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
+  })), (isCustomLayout ? loadingOrders || loading || isBusinessesLoading : loading) && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     isSkeleton: true,
     activeOrders: horizontal,
     isBusinessesPage: isBusinessesPage
@@ -284,7 +304,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 80
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
-  })), !loading && !error && orders.length > 0 && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
+  })), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (horizontal ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     businessesIds: businessesIds,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);
@@ -297,7 +317,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     customArray: customArray,
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder
-  }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
+  })) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderLoading,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);

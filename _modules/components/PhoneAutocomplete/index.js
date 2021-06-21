@@ -208,8 +208,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
 
   var optionsToSelect = customersPhones.users.map(function (user) {
     var obj = {};
-    obj.value = user.cellphone;
-    obj.label = "".concat(user.cellphone, " (").concat(user.name, ")");
+    obj.value = user.cellphone || user.phone;
+    obj.label = "".concat(user.cellphone || user.phone, " (").concat(user.name, ")");
     return obj;
   }) || [];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -234,6 +234,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     classNamePrefix: "select",
     placeholder: t('PHONE', 'Phone'),
     value: optSelected,
+    noOptionsMessage: function noOptionsMessage() {
+      return t('NO_OPTIONS', 'No options');
+    },
     inputValue: !optSelected ? inputValue : '',
     onChange: onChange,
     onInputChange: onInputChange,
@@ -269,7 +272,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     externalPhoneNumber: "".concat(countryCallingCode, " ").concat((optSelected === null || optSelected === void 0 ? void 0 : optSelected.value) || phone),
     saveCustomerUser: saveCustomerUser,
     fieldsNotValid: props.fieldsNotValid,
-    useChekoutFileds: true
+    useChekoutFileds: true,
+    isCustomerMode: props.isCustomerMode
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.customer,
     width: "60%",
@@ -280,7 +284,6 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
-    userData: customerState === null || customerState === void 0 ? void 0 : customerState.result,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
     isCustomerMode: true
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
@@ -290,7 +293,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     userCustomerSetup: _objectSpread(_objectSpread({}, customerState === null || customerState === void 0 ? void 0 : customerState.result), {}, {
       phone: phone
     }),
-    isEnableContinueButton: true
+    isEnableContinueButton: true,
+    isCustomerMode: true
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,

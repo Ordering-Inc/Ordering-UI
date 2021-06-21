@@ -351,7 +351,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       name: field.code,
       "aria-label": field.code,
       className: "form",
-      placeholder: t(field.name),
+      placeholder: t(field.code.toUpperCase(), field.name),
       onChange: handleChangeInputEmail,
       ref: function ref(e) {
         emailInput.current = e;
@@ -363,7 +363,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       name: field.code,
       "aria-label": field.code,
       className: "form",
-      placeholder: t(field.name),
+      placeholder: t(field.code.toUpperCase(), field.name),
       onChange: handleChangeInput,
       required: field.required,
       autoComplete: "off"
