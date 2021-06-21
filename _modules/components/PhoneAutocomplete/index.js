@@ -234,6 +234,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     classNamePrefix: "select",
     placeholder: t('PHONE', 'Phone'),
     value: optSelected,
+    noOptionsMessage: function noOptionsMessage() {
+      return t('NO_OPTIONS', 'No options');
+    },
     inputValue: !optSelected ? inputValue : '',
     onChange: onChange,
     onInputChange: onInputChange,
