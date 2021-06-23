@@ -272,7 +272,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       business: business,
       handleCustomClick: handleBusinessClick,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type,
-      isCustomLayout: isCustomLayout
+      isCustomLayout: isCustomLayout,
+      isShowCallcenterInformation: isCustomLayout
     });
   }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
     var _orderState$options4;

@@ -245,7 +245,8 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
     auth: auth,
     isHideSignup: isHideSignup,
-    userCustomer: userCustomer
+    userCustomer: userCustomer,
+    isCustomerMode: isCustomerMode
   }), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       var _orderState$options, _orderState$options$a;
@@ -281,7 +282,7 @@ var Header = function Header(props) {
   }))), /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
     defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1
-  }), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
+  }), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
       return handleTogglePopover('moment');
@@ -338,7 +339,8 @@ var Header = function Header(props) {
       return handleClosePopover('cart');
     },
     auth: auth,
-    location: location
+    location: location,
+    isCustomerMode: isCustomerMode
   }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "cart",
     totalCarts: cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length,
@@ -356,7 +358,7 @@ var Header = function Header(props) {
       return handleClosePopover('addresses');
     },
     isHome: isHome
-  }), /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
+  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
       return handleTogglePopover('moment');
@@ -372,7 +374,7 @@ var Header = function Header(props) {
       return openModal(variant);
     },
     isHome: isHome
-  }), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
     momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function (variant) {

@@ -54,6 +54,10 @@ var CouponControlUI = function CouponControlUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
+
   var onRemoveCoupon = function onRemoveCoupon() {
     setConfirm({
       open: true,
@@ -101,7 +105,7 @@ var CouponControlUI = function CouponControlUI(props) {
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    disabled: !couponInput,
+    disabled: !couponInput || orderState.loading,
     onClick: handleButtonApplyClick
   }, t('APPLY', 'Apply'))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('COUPON', 'Coupon'),

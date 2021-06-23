@@ -31,6 +31,10 @@ var _GrStar = _interopRequireDefault(require("@meronex/icons/gr/GrStar"));
 
 var _FaCrown = _interopRequireDefault(require("@meronex/icons/fa/FaCrown"));
 
+var _BiCar = _interopRequireDefault(require("@meronex/icons/bi/BiCar"));
+
+var _BiBasket = _interopRequireDefault(require("@meronex/icons/bi/BiBasket"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -58,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessControllerUI = function BusinessControllerUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options, _business$available_d, _business$busy_driver, _business$active_orde, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       business = props.business,
@@ -66,7 +70,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       orderState = props.orderState,
       handleClick = props.handleClick,
       orderType = props.orderType,
-      isCustomLayout = props.isCustomLayout;
+      isCustomLayout = props.isCustomLayout,
+      isShowCallcenterInformation = props.isShowCallcenterInformation;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -146,9 +151,11 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "reviews"
   }, /*#__PURE__*/_react.default.createElement(_GrStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : (business === null || business === void 0 ? void 0 : (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total) !== 0 && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })), /*#__PURE__*/_react.default.createElement(_styles.Categories, null, Object.keys(business).length > 0 ? businessType() : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), !isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles.Categories, null, Object.keys(business).length > 0 ? businessType() : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), /*#__PURE__*/_react.default.createElement(_styles.Medadata, null, Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("p", {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Medadata, {
+    isCustomerMode: isShowCallcenterInformation
+  }, Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("p", {
     className: "bullet"
   }, /*#__PURE__*/_react.default.createElement(_GrClock.default, null), (0, _utils.convertHoursToMinutes)((orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? business === null || business === void 0 ? void 0 : business.delivery_time : business === null || business === void 0 ? void 0 : business.pickup_time) || /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
@@ -160,7 +167,13 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     width: 70
   }), orderType === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  })))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformation, null, /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
+    bgcolor: "green"
+  }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 ? void 0 : (_business$available_d = business.available_drivers) === null || _business$available_d === void 0 ? void 0 : _business$available_d.length), /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
+    bgcolor: "red"
+  }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 ? void 0 : (_business$busy_driver = business.busy_drivers) === null || _business$busy_driver === void 0 ? void 0 : _business$busy_driver.length), /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
+    bgcolor: "rgb(252,225,5)"
+  }, /*#__PURE__*/_react.default.createElement(_BiBasket.default, null), business === null || business === void 0 ? void 0 : (_business$active_orde = business.active_orders) === null || _business$active_orde === void 0 ? void 0 : _business$active_orde.length)))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_CLOSED', 'Business Closed'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

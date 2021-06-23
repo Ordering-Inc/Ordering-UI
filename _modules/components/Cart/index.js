@@ -224,6 +224,8 @@ var CartUI = function CartUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.CartContainer, {
     className: "cart"
+  }, /*#__PURE__*/_react.default.createElement(_styles.CartSticky, {
+    isCartOnProductsList: isCartOnProductsList
   }, /*#__PURE__*/_react.default.createElement(_BusinessItemAccordion.BusinessItemAccordion, {
     isCartPending: isCartPending,
     currentCartUuid: currentCartUuid,
@@ -304,7 +306,7 @@ var CartUI = function CartUI(props) {
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -60,7 +60,8 @@ var SidebarMenu = function SidebarMenu(props) {
 
   var auth = props.auth,
       isHideSignup = props.isHideSignup,
-      userCustomer = props.userCustomer;
+      userCustomer = props.userCustomer,
+      isCustomerMode = props.isCustomerMode;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -166,7 +167,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
     active: window.location.pathname === '/profile'
-  }, t('PROFILE', 'Profile'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('PROFILE', 'Profile'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({
