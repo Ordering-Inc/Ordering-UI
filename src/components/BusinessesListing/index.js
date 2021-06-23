@@ -212,6 +212,7 @@ const BusinessesListingUI = (props) => {
                 handleCustomClick={handleBusinessClick}
                 orderType={orderState?.options?.type}
                 isCustomLayout={isCustomLayout}
+                isShowCallcenterInformation={isCustomLayout}
               />
             ))
           }

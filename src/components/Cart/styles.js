@@ -4,6 +4,15 @@ export const CartContainer = styled.div`
   border-bottom: 1px solid #F0F0F0;
 `
 
+export const CartSticky = styled.div`
+  ${({ isCartOnProductsList }) => isCartOnProductsList && css`
+    overflow-y: auto;
+    max-height: 70vh;
+    position: sticky;
+    top: 20px;
+  `}
+`
+
 export const OrderBill = styled.div`
   display: flex;
   align-items: center;
