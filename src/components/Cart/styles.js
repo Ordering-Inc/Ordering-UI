@@ -5,7 +5,7 @@ export const CartContainer = styled.div`
 `
 
 export const CartSticky = styled.div`
-  ${({ isSticky }) => isSticky && css`
+  ${({ isCartOnProductsList }) => isCartOnProductsList && css`
     overflow-y: auto;
     max-height: 70vh;
     position: sticky;
