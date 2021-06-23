@@ -28,7 +28,7 @@ import {
 } from './styles'
 
 export const SidebarMenu = (props) => {
-  const { auth, isHideSignup, userCustomer } = props
+  const { auth, isHideSignup, userCustomer, isCustomerMode } = props
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
@@ -189,37 +189,40 @@ export const SidebarMenu = (props) => {
                   </MenuLinkSeparator>
                 </WrappContent>
               </MenuLink>
-
-              <MenuLink
-                isHome={isHome}
-                onClick={() => handleGoToPage({ page: 'orders' })}
-              >
-                <WrappContent>
-                  <MenuLinkIcon
+              {
+                !isCustomerMode && (
+                  <MenuLink
                     isHome={isHome}
-                    active={
-                      window.location.pathname === '/profile/orders'
-                    }
+                    onClick={() => handleGoToPage({ page: 'orders' })}
                   >
-                    <FaRegListAlt />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
-                      isHome={isHome}
-                      active={
-                        window.location.pathname === '/profile/orders'
-                      }
-                    >
-                      {t('ORDERS', 'Orders')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
+                    <WrappContent>
+                      <MenuLinkIcon
+                        isHome={isHome}
+                        active={
+                          window.location.pathname === '/profile/orders'
+                        }
+                      >
+                        <FaRegListAlt />
+                      </MenuLinkIcon>
+                      <MenuLinkText>
+                        <TextInfo
+                          isHome={isHome}
+                          active={
+                            window.location.pathname === '/profile/orders'
+                          }
+                        >
+                          {t('ORDERS', 'Orders')}
+                        </TextInfo>
+                      </MenuLinkText>
+                      <MenuLinkSeparator>
+                        <div>
+                          <hr />
+                        </div>
+                      </MenuLinkSeparator>
+                    </WrappContent>
+                  </MenuLink>
+                )
+              }
 
               <LogoutButton onCustomClick={() => actionSidebar(false)} />
             </>
