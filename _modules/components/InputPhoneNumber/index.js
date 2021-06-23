@@ -61,7 +61,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
   var isValidPhoneNumber = function isValidPhoneNumber(number) {
     if (!number) return;
 
-    if (parseInt((configs === null || configs === void 0 ? void 0 : configs.validation_phone_number_lib) || 0, 10)) {
+    if (!parseInt((configs === null || configs === void 0 ? void 0 : configs.validation_phone_number_lib) || 1, 10)) {
       return true;
     }
 
