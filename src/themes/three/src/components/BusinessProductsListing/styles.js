@@ -39,6 +39,10 @@ export const WrapperSearch = styled.div`
     `}
   }
 
+  #select-input {
+    border-radius: 5px;
+  }
+
   div:last-child {
     text-align: right;
 

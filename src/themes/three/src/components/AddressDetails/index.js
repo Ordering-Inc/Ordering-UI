@@ -53,6 +53,7 @@ const AddressDetailsUI = (props) => {
           <h4>{addressToShow || orderState?.options?.address?.address}</h4>
           {orderState?.options?.type === 1 && !isCartPending &&
             <Button
+              rectangle
               onClick={() => setOpenModal(true)}
             >
               {t('EDIT', 'Edit')}
