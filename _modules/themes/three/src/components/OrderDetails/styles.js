@@ -133,7 +133,7 @@ var StatusBar = function StatusBar(props) {
 exports.StatusBar = StatusBar;
 
 var OrderStatus = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 45%;\n  max-width: 45%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  span {\n    padding: 5px 10px 0;\n    color: ", ";\n    text-align: center;\n    border-radius: 10px;\n    font-weight: 500;\n    text-transform: uppercase;\n    font-size: 13px;\n    width: 100%;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    box-sizing: border-box;\n  }\n\n  @media (min-width: 410px) {\n    span {\n      font-size: 18px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    width: 25%;\n    max-width: 25%;\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.secundary;
 });
 
 exports.OrderStatus = OrderStatus;

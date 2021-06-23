@@ -289,7 +289,7 @@ export const OrderStatus = styled.div`
   flex-direction: column;
   span {
     padding: 5px 10px 0;
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.secundary};
     text-align: center;
     border-radius: 10px;
     font-weight: 500;
