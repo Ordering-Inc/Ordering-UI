@@ -149,6 +149,7 @@ export const Header = (props) => {
               auth={auth}
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
+              isCustomerMode={isCustomerMode}
             />
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
@@ -181,12 +182,14 @@ export const Header = (props) => {
                 />
                 {onlineStatus && windowSize.width > 820 && (
                   <>
-                    <MomentPopover
-                      open={openPopover.moment}
-                      onClick={() => handleTogglePopover('moment')}
-                      onClose={() => handleClosePopover('moment')}
-                      isHome={isHome}
-                    />
+                    {!isCustomerMode && (
+                      <MomentPopover
+                        open={openPopover.moment}
+                        onClick={() => handleTogglePopover('moment')}
+                        onClose={() => handleClosePopover('moment')}
+                        isHome={isHome}
+                      />
+                    )}
                     <AddressesPopover
                       auth={auth}
                       addressState={orderState?.options?.address}
@@ -236,6 +239,7 @@ export const Header = (props) => {
                             onClose={() => handleClosePopover('cart')}
                             auth={auth}
                             location={location}
+                            isCustomerMode={isCustomerMode}
                           />
                         ) : (
                           <HeaderOption
@@ -264,12 +268,14 @@ export const Header = (props) => {
                 onClose={() => handleClosePopover('addresses')}
                 isHome={isHome}
               />
-              <MomentPopover
-                open={openPopover.moment}
-                onClick={() => handleTogglePopover('moment')}
-                onClose={() => handleClosePopover('moment')}
-                isHome={isHome}
-              />
+              {!isCustomerMode && (
+                <MomentPopover
+                  open={openPopover.moment}
+                  onClick={() => handleTogglePopover('moment')}
+                  onClose={() => handleClosePopover('moment')}
+                  isHome={isHome}
+                />
+              )}
             </SubMenu>
           ) : (
             <SubMenu>
@@ -279,14 +285,16 @@ export const Header = (props) => {
                 onClick={(variant) => openModal(variant)}
                 isHome={isHome}
               />
-              <HeaderOption
-                variant='moment'
-                momentState={orderState?.options?.moment}
-                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                  ? null
-                  : (variant) => openModal(variant)}
-                isHome={isHome}
-              />
+              {!isCustomerMode && (
+                <HeaderOption
+                  variant='moment'
+                  momentState={orderState?.options?.moment}
+                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                    ? null
+                    : (variant) => openModal(variant)}
+                  isHome={isHome}
+                />
+              )}
             </SubMenu>
           )
         )}

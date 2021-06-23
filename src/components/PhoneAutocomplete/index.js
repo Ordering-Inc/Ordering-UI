@@ -3,7 +3,8 @@ import Select from 'react-select'
 import {
   PhoneAutocomplete as PhoneAutocompleteController,
   useLanguage,
-  useOrder
+  useOrder,
+  useCustomer
 } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
@@ -39,6 +40,7 @@ const PhoneAutocompleteUI = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [, { deleteUserCustomer }] = useCustomer()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [inputValue, setInputValue] = useState('')
   const [optSelected, setOptSelected] = useState(null)
@@ -109,10 +111,16 @@ const PhoneAutocompleteUI = (props) => {
     }
   }
 
+  const handleCloseAddressList = () => {
+    setOpenModal({ openModal, customer: false })
+    setCustomerState({ ...customerState, result: { error: false } })
+    deleteUserCustomer(true)
+  }
+
   const optionsToSelect = customersPhones.users.map(user => {
     const obj = {}
     obj.value = user.cellphone || user.phone
-    obj.label = `${user.cellphone || user.phone} (${user.name})`
+    obj.label = `${user?.phone ? `${t('PHONE', 'Phone')}: ${user?.phone}` : ''} ${user?.cellphone ? `${t('CELLPHONE', 'Cellphone')}: ${user.cellphone}` : ''} (${user.name})`
     return obj
   }) || []
 
@@ -183,7 +191,7 @@ const PhoneAutocompleteUI = (props) => {
       <Modal
         open={openModal.customer}
         width='60%'
-        onClose={() => setOpenModal({ openModal, customer: false })}
+        onClose={() => handleCloseAddressList()}
       >
         <UserEdit>
           {!customerState?.loading && (

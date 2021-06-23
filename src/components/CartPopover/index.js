@@ -12,7 +12,7 @@ import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
 
 export const CartPopover = (props) => {
-  const { open, auth, location } = props
+  const { open, auth, location, isCustomerMode } = props
   const [orderState] = useOrder()
   const theme = useTheme()
   const [events] = useEvent()
@@ -64,6 +64,21 @@ export const CartPopover = (props) => {
       props.onClose && props.onClose()
     }
   }, [location])
+
+  const getScrollTop = () => {
+    if (document.documentElement?.scrollTop > 80) {
+      props.onClose && props.onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (location && location.pathname.includes('/store/') && isCustomerMode) {
+      window.addEventListener('scroll', getScrollTop)
+    }
+    return () => {
+      window.removeEventListener('scroll', getScrollTop)
+    }
+  }, [])
 
   const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', width: '450px', maxHeight: '70vh', overflowY: 'auto' }
   if (!open) {
