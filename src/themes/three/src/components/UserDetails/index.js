@@ -60,9 +60,9 @@ const UserDetailsUI = (props) => {
             <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
             {cartStatus !== 2 && (
               !isEdit ? (
-                <Button onClick={() => toggleIsEdit()}>{t('EDIT', 'Edit')}</Button>
+                <Button rectangle onClick={() => toggleIsEdit()}>{t('EDIT', 'Edit')}</Button>
               ) : (
-                <Button onClick={() => toggleEditState()}>{t('CANCEL', 'Cancel')}</Button>
+                <Button rectangle onClick={() => toggleEditState()}>{t('CANCEL', 'Cancel')}</Button>
               )
             )}
           </Header>
