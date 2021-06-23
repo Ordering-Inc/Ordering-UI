@@ -110,15 +110,15 @@ var ActionsBlock = _styledComponents.default.div(_templateObject16 || (_template
 
 exports.ActionsBlock = ActionsBlock;
 
-var OrderInfo = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  margin: 10px 0px 20px;\n"])));
+var OrderInfo = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  margin: 10px 0px 30px;\n"])));
 
 exports.OrderInfo = OrderInfo;
 
-var OrderData = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: 55%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  h1, p {\n    margin: 0px;\n  }\n  h1 {\n    margin-bottom: 5px;\n    font-size: 24px;\n  }\n  p {\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n  }\n  p:nth-child(1) {\n    opacity: 0.8;\n  }\n  p.date {\n    font-weight: bold;\n  }\n  p.uuid {\n    display: none;\n  }\n\n  @media (min-width: 768px){\n    width: 75%;\n  }\n\n  @media (min-width: 512px) {\n    p.uuid {\n      display: block;\n    }\n  }\n\n  @media (min-width: 425px) {\n    p {\n      font-size: 18px;\n    }\n  }\n"])));
+var OrderData = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: 55%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  padding-bottom: 7px;\n  h1, p {\n    margin: 0px;\n  }\n  h1 {\n    margin-bottom: 5px;\n    font-size: 24px;\n  }\n  p {\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n  }\n  p.description {\n    opacity: 0.8;\n    text-transform: uppercase;\n  }\n  p.date {\n    font-weight: bold;\n  }\n  p.uuid {\n    display: none;\n  }\n\n  @media (min-width: 768px){\n    width: 75%;\n  }\n\n  @media (min-width: 512px) {\n    p.uuid {\n      display: block;\n    }\n  }\n"])));
 
 exports.OrderData = OrderData;
 
-var StatusBarStyled = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  height: 7px;\n  margin: 10px 0px 0px;\n  background: ", ";\n  ", "\n"])), function (props) {
+var StatusBarStyled = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  height: 10px;\n  border-radius: 5px;\n  margin: 10px 0px 0px;\n  background: ", ";\n  ", "\n"])), function (props) {
   return "linear-gradient(to right, ".concat(props.theme.colors.secundary, " ").concat(props.percentage, "%, ").concat(props.theme.colors.disabled, " ").concat(props.percentage, "%)");
 }, function (props) {
   var _props$theme4;
@@ -132,9 +132,7 @@ var StatusBar = function StatusBar(props) {
 
 exports.StatusBar = StatusBar;
 
-var OrderStatus = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 45%;\n  max-width: 45%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  span {\n    padding: 5px 10px;\n    border: 1px solid ", ";\n    color: ", ";\n    text-align: center;\n    border-radius: 10px;\n    font-weight: bold;\n    text-transform: uppercase;\n    font-size: 13px;\n    width: 100%;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    box-sizing: border-box;\n  }\n\n  @media (min-width: 410px) {\n    span {\n      font-size: initial;\n    }\n  }\n\n  @media (min-width: 768px) {\n    width: 25%;\n    max-width: 25%;\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
-}, function (props) {
+var OrderStatus = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 45%;\n  max-width: 45%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  span {\n    padding: 5px 10px 0;\n    color: ", ";\n    text-align: center;\n    border-radius: 10px;\n    font-weight: 500;\n    text-transform: uppercase;\n    font-size: 13px;\n    width: 100%;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    box-sizing: border-box;\n  }\n\n  @media (min-width: 410px) {\n    span {\n      font-size: 18px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    width: 25%;\n    max-width: 25%;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
@@ -144,11 +142,11 @@ var StatusImage = _styledComponents.default.div(_templateObject23 || (_templateO
 
 exports.StatusImage = StatusImage;
 
-var SectionTitle = _styledComponents.default.h1(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin: 0px;\n  font-size: 26px;\n\n  @media (max-width: 410px) {\n    font-size: 24px;\n  }\n"])));
+var SectionTitle = _styledComponents.default.h1(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin: 0px;\n  font-size: 24px;\n  font-weight: 500;\n"])));
 
 exports.SectionTitle = SectionTitle;
 
-var OrderCustomer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 10px 0px 20px;\n  width: 100%;\n\n  div.photo {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\n    svg {\n      width: 70px;\n      height: 70px;\n      margin: 0 10px;\n      ", "\n    }\n  }\n\n"])), function (props) {
+var OrderCustomer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 10px 0px 30px;\n  width: 100%;\n\n  div.photo {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\n    svg {\n      width: 70px;\n      height: 70px;\n      margin: 0 10px;\n      box-shadow: 0px 3px 6px #00000029;\n      padding: 10px;\n      box-sizing: border-box;\n      border-radius: 8px;\n      ", "\n    }\n  }\n\n"])), function (props) {
   var _props$theme5;
 
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
@@ -156,7 +154,7 @@ var OrderCustomer = _styledComponents.default.div(_templateObject25 || (_templat
 
 exports.OrderCustomer = OrderCustomer;
 
-var PhotoBlock = _styledComponents.default.img(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  border-radius: 50%;\n  object-fit: cover;\n  margin: 0 10px;\n  ", "\n"])), function (props) {
+var PhotoBlock = _styledComponents.default.img(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  border-radius: 8px;\n  object-fit: cover;\n  margin: 0 10px;\n  ", "\n"])), function (props) {
   var _props$theme6;
 
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n    margin-right: 0;\n  "])));
@@ -164,7 +162,7 @@ var PhotoBlock = _styledComponents.default.img(_templateObject27 || (_templateOb
 
 exports.PhotoBlock = PhotoBlock;
 
-var InfoBlock = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 70%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-transform: capitalize;\n  h1,\n  span {\n    margin: 0px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  h1 {\n    font-size: 20px;\n  }\n\n  span {\n    font-size: 18px;\n    opacity: 0.8;\n  }\n"])));
+var InfoBlock = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 70%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-transform: capitalize;\n  h1,\n  span {\n    margin: 0px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  h1 {\n    font-size: 20px;\n  }\n\n  span {\n    font-size: 16px;\n    opacity: 0.8;\n  }\n"])));
 
 exports.InfoBlock = InfoBlock;
 
@@ -184,12 +182,12 @@ exports.WrapperDriver = WrapperDriver;
 var OrderProducts = (0, _styledComponents.default)(OrderCustomer)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  flex-direction: column;\n"])));
 exports.OrderProducts = OrderProducts;
 
-var OrderBill = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  table {\n    width: 90%;\n    font-size: 12px;\n    td span {\n      unicode-bidi: bidi-override;\n    }\n    tr td:nth-child(2) {\n      text-align: right;\n      ", "\n    }\n  }\n\n  table.total {\n    border-top: 1px solid #BFBFBF;\n    margin-top: 15px;\n    tr {\n      font-size: 20px;\n      td:nth-child(1) {\n        font-weight: bold;\n        padding-top: 10px;\n      }\n      td:nth-child(2) {\n        font-weight: bold;\n        color: ", ";\n        padding-top: 10px;\n      }\n    }\n  }\n\n  @media (min-width: 678px) {\n    table {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
+var OrderBill = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  table {\n    width: 98%;\n    font-size: 12px;\n    td span {\n      unicode-bidi: bidi-override;\n    }\n    tr td:nth-child(2) {\n      text-align: right;\n      ", "\n    }\n  }\n\n  table.total {\n    border-top: 1px solid #BFBFBF;\n    margin-top: 15px;\n    tr {\n      font-size: 20px;\n      td:nth-child(1) {\n        font-weight: bold;\n        padding-top: 10px;\n      }\n      td:nth-child(2) {\n        font-weight: bold;\n        color: ", ";\n        padding-top: 10px;\n      }\n    }\n  }\n\n  @media (min-width: 678px) {\n    table {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
   var _props$theme8;
 
   return ((_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.rtl) && (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n        text-align: left;\n      "])));
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.secundary;
 });
 
 exports.OrderBill = OrderBill;
@@ -199,7 +197,7 @@ var ReviewsAction = _styledComponents.default.div(_templateObject37 || (_templat
 exports.ReviewsAction = ReviewsAction;
 
 var FootActions = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  margin-top: 50px;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n  a {\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n    color: ", ";\n    cursor: pointer;\n    font-weight: bold;\n  }\n  svg {\n    margin-left: 5px;\n    transform: rotate(90deg)\n    ", "\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.secundary;
 }, function (props) {
   var _props$theme9;
 
@@ -219,10 +217,10 @@ var SkeletonBlockWrapp = _styledComponents.default.div(_templateObject41 || (_te
 
 exports.SkeletonBlockWrapp = SkeletonBlockWrapp;
 
-var ShareOrder = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 0 0 20px;\n  justify-content: space-between;\n  z-index: 1;\n\n  h1 {\n    font-size: 15px;\n    margin: 0px;\n  }\n\n  p {\n    font-size: 13px;\n    margin: 0px;\n  }\n\n  button {\n    display: flex;\n    justify-content: center;\n    position: relative;\n    font-size: 14px;\n    align-items: center;\n    background: ", ";\n\n    svg {\n      left: 0;\n      margin-right: 6px;\n      color: ", ";\n    }\n\n    &:hover {\n      svg {\n        color: #FFFFFF;\n      }\n    }\n  }\n\n  div.text {\n    width: 60%;\n  }\n\n  div.wrap {\n    display: flex;\n    align-items: center;\n\n    & > div:first-child {\n      width: 100%;\n      position: relative;\n      div {\n        right: 0px;\n        left: initial;\n        top: 35px;\n      }\n    }\n  }\n\n  @media (min-width: 1201px) {\n    div.wrap {\n      & > div:first-child {\n        left: 0;\n      }\n    }\n  }\n\n  @media (min-width: 768px) {\n    div.wrap {\n      width: 30%;\n    }\n\n    h1 {\n      font-size: 20px;\n    }\n\n    p {\n      font-size: 18px;\n    }\n\n    button {\n      font-size: 18px;\n      width: 100%;\n      svg {\n        position: absolute;\n        margin-left: 10px;\n      }\n    }\n  }\n\n  @media (min-width: 425px) {\n    div.text {\n      width: 70%;\n    }\n\n    h1 {\n      font-size: 18px;\n    }\n\n    p {\n      font-size: 15px;\n    }\n  }\n"])), function (props) {
+var ShareOrder = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 0 0 30px;\n  justify-content: space-between;\n  z-index: 1;\n\n  h1 {\n    font-size: 24px;\n    font-weight: 500;\n    margin: 0px;\n  }\n\n  p {\n    font-size: 18px;\n    opacity: 0.8;\n    margin: 0px;\n  }\n\n  button {\n    display: flex;\n    justify-content: center;\n    position: relative;\n    font-size: 14px;\n    align-items: center;\n    background: ", ";\n\n    svg {\n      left: 0;\n      margin-right: 6px;\n      color: ", ";\n    }\n\n    &:hover {\n      svg {\n        color: #FFFFFF;\n      }\n    }\n  }\n\n  div.text {\n    width: 60%;\n  }\n\n  div.wrap {\n    display: flex;\n    align-items: center;\n\n    & > div:first-child {\n      width: 100%;\n      position: relative;\n      div {\n        right: 0px;\n        left: initial;\n        top: 35px;\n      }\n    }\n  }\n\n  @media (min-width: 1201px) {\n    div.wrap {\n      & > div:first-child {\n        left: 0;\n      }\n    }\n  }\n\n  @media (min-width: 768px) {\n    div.wrap {\n      width: 30%;\n    }\n\n    button {\n      font-size: 18px;\n      width: 100%;\n      svg {\n        position: absolute;\n        margin-left: 10px;\n      }\n    }\n  }\n\n  @media (min-width: 425px) {\n    div.text {\n      width: 70%;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.secundary;
 });
 
 exports.ShareOrder = ShareOrder;
