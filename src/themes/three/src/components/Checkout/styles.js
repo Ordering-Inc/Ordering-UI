@@ -14,7 +14,6 @@ export const WrappContainer = styled.div`
   background-color: #FFF;
 
   @media (min-width: 992px) {
-    width: 80%;
     flex-direction: row;
     justify-content: space-between;
     background-color: transparent;

@@ -25,6 +25,7 @@ export const Header = styled.div`
 
   #select-input {
     color: ${props => props.theme.colors.primary} !important;
+    border-radius: 5px;
   }
 `
 

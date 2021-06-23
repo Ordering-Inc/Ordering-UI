@@ -239,7 +239,6 @@ const MessagesUI = (props) => {
   }
 
   const MapMessages = ({ messages }) => {
-    console.log('messages name: ', messages.messages[4].author.name);
     return (
       <>
         {props.beforeElements?.map((BeforeElement, i) => (

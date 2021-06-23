@@ -82,10 +82,10 @@ const BusinessesListingUI = (props) => {
 
   const businessSortTypes = [
     { value: null, content: t('PICKED_FOR_YOU_(DEFAULT)', 'Picked for you (default)') },
-    { value: 'name', content: t('NAME)', 'Name') },
+    { value: 'name', content: t('NAME', 'Name') },
     { value: 'rating', content: t('RATING', 'Rating') },
     { value: 'distance', content: t('DISTANCE', 'Distance') },
-    { value: 'minimun', content: t('MINIMUM_PURCHASE', 'Minimum purchase') },
+    { value: 'minimun', content: t('MINIMUN_PURCHASED', 'Minimum purchase') },
     { value: 'newest', content: t('NEWER_STORE', 'Newer store') }
   ]
 
@@ -246,7 +246,7 @@ const BusinessesListingUI = (props) => {
                 className={`accordion ${setActive}`}
                 onClick={() => toggleAccordion()}
               >
-                <span>{t('SORT', 'Sort')}</span>
+                <span>{t('SORT_BY', 'Sort by')}</span>
                 <IosArrowDown className={`${setRotate}`} />
               </BusinessSortHeader>
               <BusinessSortContent
