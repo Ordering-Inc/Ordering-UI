@@ -20,6 +20,9 @@ export const InputPhoneNumber = (props) => {
 
   const isValidPhoneNumber = (number) => {
     if (!number) return
+    if (parseInt(configs?.validation_phone_number_lib, 10)) {
+      return true
+    }
     const numberParser = parsePhoneNumber(number)
     return numberParser?.isValid()
   }
