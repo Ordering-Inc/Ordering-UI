@@ -155,7 +155,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     content: t('PICKED_FOR_YOU_(DEFAULT)', 'Picked for you (default)')
   }, {
     value: 'name',
-    content: t('NAME)', 'Name')
+    content: t('NAME', 'Name')
   }, {
     value: 'rating',
     content: t('RATING', 'Rating')
@@ -164,7 +164,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     content: t('DISTANCE', 'Distance')
   }, {
     value: 'minimun',
-    content: t('MINIMUM_PURCHASE', 'Minimum purchase')
+    content: t('MINIMUN_PURCHASED', 'Minimum purchase')
   }, {
     value: 'newest',
     content: t('NEWER_STORE', 'Newer store')
@@ -300,7 +300,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: function onClick() {
       return toggleAccordion();
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('SORT', 'Sort')), /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('SORT_BY', 'Sort by')), /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessSortContent, {
     style: {

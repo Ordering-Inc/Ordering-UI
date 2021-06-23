@@ -99,10 +99,12 @@ var UserDetailsUI = function UserDetailsUI(props) {
   })), !(validationFields.loading || formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
   }, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    rectangle: true,
     onClick: function onClick() {
       return toggleIsEdit();
     }
   }, t('EDIT', 'Edit')) : /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    rectangle: true,
     onClick: function onClick() {
       return toggleEditState();
     }

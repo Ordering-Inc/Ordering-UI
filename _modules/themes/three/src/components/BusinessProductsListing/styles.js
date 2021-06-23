@@ -31,7 +31,7 @@ var WrapContent = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.WrapContent = WrapContent;
 
-var WrapperSearch = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  input {\n    border: none;\n    border-radius: unset;\n    border-bottom: 1px solid #CCC;\n    background-color: ", ";\n  }\n\n  .search-bar {\n    margin-right: 10px;\n    ", "\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n"])), function (props) {
+var WrapperSearch = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  input {\n    border: none;\n    border-radius: unset;\n    border-bottom: 1px solid #CCC;\n    background-color: ", ";\n  }\n\n  .search-bar {\n    margin-right: 10px;\n    ", "\n  }\n\n  #select-input {\n    border-radius: 5px;\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.lightGray;
