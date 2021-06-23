@@ -60,7 +60,7 @@ const ProductOptionsUI = (props) => {
     handleSave,
     handleChangeIngredientState,
     handleChangeSuboptionState,
-    handleChangeCommentState,
+    handleChangeCommentState
   } = props
 
   const { product, loading, error } = productObject
@@ -174,7 +174,7 @@ const ProductOptionsUI = (props) => {
                   width='300px'
                   height='300px'
                   loading='lazy'
-                  onError={(e)=>{e.target.onerror = null; e.target.src=theme.images?.dummies?.product}}
+                  onError={(e) => { e.target.onerror = null; e.target.src = theme.images?.dummies?.product }}
                 />
               </ProductImage>
             </WrapperImage>

@@ -236,6 +236,7 @@ export const Header = (props) => {
                             onClose={() => handleClosePopover('cart')}
                             auth={auth}
                             location={location}
+                            isCustomerMode={isCustomerMode}
                           />
                         ) : (
                           <HeaderOption

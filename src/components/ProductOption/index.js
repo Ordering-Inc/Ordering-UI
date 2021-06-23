@@ -32,15 +32,13 @@ const ProductOptionUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <Container>
         <WrapHeader>
           <TitleContainer>
-            {option.image && (
+            {option.image && option.image !== '-' && (
               <OptionThumbnail src={option.image} />
             )}
             <Title><span>{option.name}</span></Title>
@@ -51,13 +49,11 @@ const ProductOptionUI = (props) => {
         {children}
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
