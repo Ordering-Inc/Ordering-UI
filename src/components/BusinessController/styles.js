@@ -115,7 +115,7 @@ export const BusinessTags = styled.div`
 export const BusinessContent = styled.div`
   display: flex;
   margin-top: 15px;
-  max-height: 75px;
+  max-height: 115px;
 `
 
 export const WrapperBusinessLogo = styled.div`
@@ -266,7 +266,11 @@ export const Medadata = styled.div`
   display: flex;
   font-weight: 300;
   font-size: 12px;
-
+  ${({ isCustomerMode }) => isCustomerMode && css`
+    > div {
+      flex-direction: column;
+    }
+  `}
   p {
     svg {
       margin-right: 3px;
@@ -279,5 +283,26 @@ export const Medadata = styled.div`
 
   @media (min-width: 481px) {
     font-size: 14px;
+  }
+`
+
+export const CallCenterInformation = styled.div`
+  display: flex;
+  flex-direction: column;
+  div{
+    justify-content: space-evenly;
+  }
+`
+
+export const CallCenterInformationBullet = styled.div`
+  display: flex;
+  padding: 2px;
+  margin-bottom: 2px;
+  border-radius: 16px;
+  background: ${({ bgcolor }) => bgcolor};
+  width: 50px;
+  color: #fff;
+  svg{
+    font-size: 18px;
   }
 `

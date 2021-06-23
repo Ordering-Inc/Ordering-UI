@@ -19,13 +19,17 @@ import {
   BusinessInfoItem,
   BusinessName,
   Categories,
-  Medadata
+  Medadata,
+  CallCenterInformation,
+  CallCenterInformationBullet
 } from './styles'
 import GrClock from '@meronex/icons/gr/GrClock'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrStar from '@meronex/icons/gr/GrStar'
 import FaCrown from '@meronex/icons/fa/FaCrown'
+import BiCar from '@meronex/icons/bi/BiCar'
+import BiBasket from '@meronex/icons/bi/BiBasket'
 
 const BusinessControllerUI = (props) => {
   const {
@@ -35,7 +39,8 @@ const BusinessControllerUI = (props) => {
     orderState,
     handleClick,
     orderType,
-    isCustomLayout
+    isCustomLayout,
+    isShowCallcenterInformation
   } = props
 
   const theme = useTheme()
@@ -115,16 +120,18 @@ const BusinessControllerUI = (props) => {
                     business?.reviews?.total !== 0 && <Skeleton width={50} />
                   )}
                 </div>
-                <Categories>
-                  {
-                    Object.keys(business).length > 0 ? (
-                      businessType()
-                    ) : (
-                      <Skeleton width={100} />
-                    )
-                  }
-                </Categories>
-                <Medadata>
+                {!isShowCallcenterInformation && (
+                  <Categories>
+                    {
+                      Object.keys(business).length > 0 ? (
+                        businessType()
+                      ) : (
+                        <Skeleton width={100} />
+                      )
+                    }
+                  </Categories>
+                )}
+                <Medadata isCustomerMode={isShowCallcenterInformation}>
                   {Object.keys(business).length > 0 ? (
                     <p className='bullet'>
                       <GrClock />
@@ -152,6 +159,22 @@ const BusinessControllerUI = (props) => {
                         <Skeleton width={70} />
                       )}
                     </>
+                  )}
+                  {isShowCallcenterInformation && (
+                    <CallCenterInformation>
+                      <CallCenterInformationBullet bgcolor='green'>
+                        <BiCar />
+                        {business?.available_drivers?.length}
+                      </CallCenterInformationBullet>
+                      <CallCenterInformationBullet bgcolor='red'>
+                        <BiCar />
+                        {business?.busy_drivers?.length}
+                      </CallCenterInformationBullet>
+                      <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
+                        <BiBasket />
+                        {business?.active_orders?.length}
+                      </CallCenterInformationBullet>
+                    </CallCenterInformation>
                   )}
                 </Medadata>
               </BusinessInfoItem>
