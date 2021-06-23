@@ -21,7 +21,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var WrappContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 91%;\n  margin: 30px auto;\n  display: flex;\n  flex-direction: column;\n  background-color: #FFF;\n\n  @media (min-width: 992px) {\n    width: 80%;\n    flex-direction: row;\n    justify-content: space-between;\n    background-color: transparent;\n  }\n"])));
+var WrappContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 91%;\n  margin: 30px auto;\n  display: flex;\n  flex-direction: column;\n  background-color: #FFF;\n\n  @media (min-width: 992px) {\n    flex-direction: row;\n    justify-content: space-between;\n    background-color: transparent;\n  }\n"])));
 
 exports.WrappContainer = WrappContainer;
 

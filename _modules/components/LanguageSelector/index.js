@@ -42,14 +42,14 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
   _languages && _languages.sort(function (a, b) {
     return a.content > b.content ? 1 : b.content > a.content ? -1 : 0;
   });
-  return /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  return _languages && _languages.length > 1 ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultLanguages : _languages,
     defaultValue: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultCurrentLanguage : currentLanguage,
     onChange: function onChange(languageId) {
       return handleChangeLanguage(languageId);
     },
     notReload: notReload
-  });
+  }) : null;
 };
 
 var LanguageSelector = function LanguageSelector(props) {

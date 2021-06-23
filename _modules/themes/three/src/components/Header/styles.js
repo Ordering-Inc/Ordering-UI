@@ -19,7 +19,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  border-bottom: 1px solid #F2F2F2;\n\n  ", "\n\n  #select-input {\n    color: ", " !important;\n  }\n"])), function (props) {
+var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  border-bottom: 1px solid #F2F2F2;\n\n  ", "\n\n  #select-input {\n    color: ", " !important;\n    border-radius: 5px;\n  }\n"])), function (props) {
   return props.home ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-color: #FFF;\n\n  & ", " {\n    background-color: transparent;\n    color: ", ";\n  }\n  "])), _Selects.Select, function (props) {
     return props.theme.colors.primary;
   }) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    & ", "{\n      div{\n        color: #333;\n      }\n    }\n  "])), SubMenu);

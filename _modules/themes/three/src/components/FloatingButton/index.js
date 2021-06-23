@@ -40,6 +40,7 @@ var FloatingButtonUI = function FloatingButtonUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    rectangle: true,
     color: isSecondaryBtn ? 'secundary' : 'primary',
     onClick: handleButtonClick,
     disabled: disabled
