@@ -52,7 +52,8 @@ var CartPopover = function CartPopover(props) {
 
   var open = props.open,
       auth = props.auth,
-      location = props.location;
+      location = props.location,
+      isCustomerMode = props.isCustomerMode;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -116,6 +117,24 @@ var CartPopover = function CartPopover(props) {
       props.onClose && props.onClose();
     }
   }, [location]);
+
+  var getScrollTop = function getScrollTop() {
+    var _document$documentEle;
+
+    if (((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) > 80) {
+      props.onClose && props.onClose();
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (location && location.pathname.includes('/store/') && isCustomerMode) {
+      window.addEventListener('scroll', getScrollTop);
+    }
+
+    return function () {
+      window.removeEventListener('scroll', getScrollTop);
+    };
+  }, []);
 
   var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
     visibility: open ? 'visible' : 'hidden',

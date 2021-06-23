@@ -87,6 +87,10 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 2),
+      deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -206,10 +210,23 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     }
   };
 
+  var handleCloseAddressList = function handleCloseAddressList() {
+    setOpenModal({
+      openModal: openModal,
+      customer: false
+    });
+    setCustomerState(_objectSpread(_objectSpread({}, customerState), {}, {
+      result: {
+        error: false
+      }
+    }));
+    deleteUserCustomer(true);
+  };
+
   var optionsToSelect = customersPhones.users.map(function (user) {
     var obj = {};
     obj.value = user.cellphone || user.phone;
-    obj.label = "".concat(user.cellphone || user.phone, " (").concat(user.name, ")");
+    obj.label = "".concat(user !== null && user !== void 0 && user.phone ? "".concat(t('PHONE', 'Phone'), ": ").concat(user === null || user === void 0 ? void 0 : user.phone) : '', " ").concat(user !== null && user !== void 0 && user.cellphone ? "".concat(t('CELLPHONE', 'Cellphone'), ": ").concat(user.cellphone) : '', " (").concat(user.name, ")");
     return obj;
   }) || [];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -278,10 +295,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     open: openModal.customer,
     width: "60%",
     onClose: function onClose() {
-      return setOpenModal({
-        openModal: openModal,
-        customer: false
-      });
+      return handleCloseAddressList();
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
