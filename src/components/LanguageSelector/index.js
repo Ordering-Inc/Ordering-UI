@@ -20,12 +20,14 @@ const LanguageSelectorUI = (props) => {
     (a.content > b.content) ? 1 : ((b.content > a.content) ? -1 : 0)
   )
   return (
-    <Select
-      options={languagesState?.loading ? defaultLanguages : _languages}
-      defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
-      onChange={(languageId) => handleChangeLanguage(languageId)}
-      notReload={notReload}
-    />
+    _languages && _languages.length > 1 ? (
+      <Select
+        options={languagesState?.loading ? defaultLanguages : _languages}
+        defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
+        onChange={(languageId) => handleChangeLanguage(languageId)}
+        notReload={notReload}
+      />
+    ) : null
   )
 }
 
