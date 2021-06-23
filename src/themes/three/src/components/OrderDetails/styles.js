@@ -215,7 +215,7 @@ export const OrderInfo = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 10px 0px 20px;
+  margin: 10px 0px 30px;
 `
 
 export const OrderData = styled.div`
@@ -223,6 +223,7 @@ export const OrderData = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-bottom: 7px;
   h1, p {
     margin: 0px;
   }
@@ -236,8 +237,9 @@ export const OrderData = styled.div`
     overflow: hidden;
     white-space: nowrap;
   }
-  p:nth-child(1) {
+  p.description {
     opacity: 0.8;
+    text-transform: uppercase;
   }
   p.date {
     font-weight: bold;
@@ -255,16 +257,11 @@ export const OrderData = styled.div`
       display: block;
     }
   }
-
-  @media (min-width: 425px) {
-    p {
-      font-size: 18px;
-    }
-  }
 `
 
 const StatusBarStyled = styled.div`
-  height: 7px;
+  height: 10px;
+  border-radius: 5px;
   margin: 10px 0px 0px;
   background: ${props => `linear-gradient(to right, ${props.theme.colors.secundary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
   ${props => props.theme?.rtl && css`
@@ -291,12 +288,11 @@ export const OrderStatus = styled.div`
   align-items: center;
   flex-direction: column;
   span {
-    padding: 5px 10px;
-    border: 1px solid ${props => props.theme.colors.primary};
+    padding: 5px 10px 0;
     color: ${props => props.theme.colors.primary};
     text-align: center;
     border-radius: 10px;
-    font-weight: bold;
+    font-weight: 500;
     text-transform: uppercase;
     font-size: 13px;
     width: 100%;
@@ -307,7 +303,7 @@ export const OrderStatus = styled.div`
 
   @media (min-width: 410px) {
     span {
-      font-size: initial;
+      font-size: 18px;
     }
   }
 
@@ -341,16 +337,13 @@ export const StatusImage = styled.div`
 
 export const SectionTitle = styled.h1`
   margin: 0px;
-  font-size: 26px;
-
-  @media (max-width: 410px) {
-    font-size: 24px;
-  }
+  font-size: 24px;
+  font-weight: 500;
 `
 
 export const OrderCustomer = styled.div`
   display: flex;
-  margin: 10px 0px 20px;
+  margin: 10px 0px 30px;
   width: 100%;
 
   div.photo {
@@ -362,6 +355,10 @@ export const OrderCustomer = styled.div`
       width: 70px;
       height: 70px;
       margin: 0 10px;
+      box-shadow: 0px 3px 6px #00000029;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 8px;
       ${props => props.theme?.rtl && css`
         margin-left: 10px;
         margin-right: 0;
@@ -372,7 +369,7 @@ export const OrderCustomer = styled.div`
 `
 
 export const PhotoBlock = styled.img`
-  border-radius: 50%;
+  border-radius: 8px;
   object-fit: cover;
   margin: 0 10px;
   ${props => props.theme?.rtl && css`
@@ -400,7 +397,7 @@ export const InfoBlock = styled.div`
   }
 
   span {
-    font-size: 18px;
+    font-size: 16px;
     opacity: 0.8;
   }
 `
@@ -454,7 +451,7 @@ export const OrderBill = styled.div`
   align-items: center;
   flex-direction: column;
   table {
-    width: 90%;
+    width: 98%;
     font-size: 12px;
     td span {
       unicode-bidi: bidi-override;
@@ -478,7 +475,7 @@ export const OrderBill = styled.div`
       }
       td:nth-child(2) {
         font-weight: bold;
-        color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.secundary};
         padding-top: 10px;
       }
     }
@@ -520,7 +517,7 @@ export const FootActions = styled.div`
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.secundary};
     cursor: pointer;
     font-weight: bold;
   }
@@ -562,17 +559,19 @@ export const SkeletonBlockWrapp = styled.div`
 
 export const ShareOrder = styled.div`
   display: flex;
-  margin: 0 0 20px;
+  margin: 0 0 30px;
   justify-content: space-between;
   z-index: 1;
 
   h1 {
-    font-size: 15px;
+    font-size: 24px;
+    font-weight: 500;
     margin: 0px;
   }
 
   p {
-    font-size: 13px;
+    font-size: 18px;
+    opacity: 0.8;
     margin: 0px;
   }
 
@@ -587,7 +586,7 @@ export const ShareOrder = styled.div`
     svg {
       left: 0;
       margin-right: 6px;
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.secundary};
     }
 
     &:hover {
@@ -629,14 +628,6 @@ export const ShareOrder = styled.div`
       width: 30%;
     }
 
-    h1 {
-      font-size: 20px;
-    }
-
-    p {
-      font-size: 18px;
-    }
-
     button {
       font-size: 18px;
       width: 100%;
@@ -650,14 +641,6 @@ export const ShareOrder = styled.div`
   @media (min-width: 425px) {
     div.text {
       width: 70%;
-    }
-
-    h1 {
-      font-size: 18px;
-    }
-
-    p {
-      font-size: 15px;
     }
   }
 `
