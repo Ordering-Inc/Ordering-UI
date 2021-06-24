@@ -41,7 +41,7 @@ import { VerticalOrdersLayout } from './src/components/VerticalOrdersLayout'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
-import { Select } from './styles/Select'
+import { Select } from './src/styles/Select'
 
 export {
   AddressDetails,
