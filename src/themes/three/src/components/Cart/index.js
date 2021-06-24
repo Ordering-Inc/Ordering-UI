@@ -8,7 +8,7 @@ import { Confirm } from '../Confirm'
 import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../CouponControl'
 import { ProductForm } from '../ProductForm'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
+import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
