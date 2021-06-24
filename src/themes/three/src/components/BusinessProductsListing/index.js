@@ -30,7 +30,7 @@ import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../../../../../components/Modal'
 import { SearchBar } from '../../../../../components/SearchBar'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
+import { UpsellingPage } from '../UpsellingPage'
 import { Cart } from '../../../../../components/Cart'
 import { Select } from '../../styles/Select'
 

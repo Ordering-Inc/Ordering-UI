@@ -17,7 +17,7 @@ import {
   useCustomer,
   useEvent
 } from 'ordering-components'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
+import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../CouponControl'
@@ -417,7 +417,7 @@ const CheckoutUI = (props) => {
               <CheckoutConfirmInfo>
                 <ConfirmInfoItem
                   link
-                  onClick={() => handleStoreRedirect(businessDetails?.business?.slug)}
+                  onClick={() => handleStoreRedirect(cart?.business?.slug)}
                 >
                   <RiShoppingBagFill />
                   <span>
