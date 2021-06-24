@@ -63,7 +63,7 @@ exports.MenuItem = MenuItem;
 
 var MenuLink = _styledComponents.default.a(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 16px;\n  padding: 10px;\n  color: #333;\n  cursor: pointer;\n\n  ", "\n"])), function (_ref) {
   var highlight = _ref.highlight;
-  return highlight && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    color: ", ";\n    border-radius: 100px;\n    padding: 5px 15px;\n  "])), function (props) {
+  return highlight && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    color: ", ";\n    border-radius: 5px;\n    padding: 5px 15px;\n  "])), function (props) {
     var _props$theme$colors;
 
     return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.lightGray;

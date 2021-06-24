@@ -25,7 +25,7 @@ var _CouponControl = require("../CouponControl");
 
 var _ProductForm = require("../ProductForm");
 
-var _UpsellingPage = require("../../../../../components/UpsellingPage");
+var _UpsellingPage = require("../UpsellingPage");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
