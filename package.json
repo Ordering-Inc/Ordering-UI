@@ -7,6 +7,7 @@
     ".": "./_modules/index.js",
     "./theme_two": "./_modules/themes/two/index.js",
     "./theme_three": "./_modules/themes/three/index.js",
+    "./theme_four": "./_modules/themes/three/index.js",
     "./theme_wow": "./_modules/themes/wow/index.js"
   },
   "scripts": {
