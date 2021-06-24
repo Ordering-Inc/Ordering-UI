@@ -417,7 +417,7 @@ const CheckoutUI = (props) => {
               <CheckoutConfirmInfo>
                 <ConfirmInfoItem
                   link
-                  onClick={() => handleStoreRedirect(businessDetails?.business?.slug)}
+                  onClick={() => handleStoreRedirect(cart?.business?.slug)}
                 >
                   <RiShoppingBagFill />
                   <span>
