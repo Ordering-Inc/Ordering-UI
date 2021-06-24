@@ -35,7 +35,7 @@ var _Modal = require("../../../../../components/Modal");
 
 var _SearchBar = require("../../../../../components/SearchBar");
 
-var _UpsellingPage = require("../../../../../components/UpsellingPage");
+var _UpsellingPage = require("../UpsellingPage");
 
 var _Cart = require("../../../../../components/Cart");
 
