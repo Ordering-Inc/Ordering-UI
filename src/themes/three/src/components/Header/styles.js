@@ -127,7 +127,7 @@ export const MenuLink = styled.a`
   ${({ highlight }) => highlight && css`
     background-color: ${props => props.theme.colors?.lightGray};
     color: ${props => props.theme.colors.primary};
-    border-radius: 100px;
+    border-radius: 5px;
     padding: 5px 15px;
   `}
 `
