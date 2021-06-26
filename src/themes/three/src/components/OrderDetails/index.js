@@ -9,7 +9,7 @@ import {
   GoogleMapsMap
 } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
-import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -23,7 +23,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../../../../../components/Modal'
 import { Messages } from '../../../../../components/Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
-import { ProductShare } from '../../../../../components/ProductShare'
+import { ProductShare } from '../ProductShare'
 
 import {
   Container,
@@ -234,7 +234,7 @@ const OrderDetailsUI = (props) => {
               <OrderInfo>
                 <OrderData>
                   <h1>{t('ORDER', 'Order')} #{order?.id}</h1>
-                  <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
+                  <p className='description'>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                   <p className='date'>
                     {
                       order?.delivery_datetime_utc
@@ -245,10 +245,10 @@ const OrderDetailsUI = (props) => {
                   <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 </OrderData>
                 <OrderStatus>
-                  <span>{getOrderStatus(order?.status)?.value}</span>
                   <StatusImage>
                     <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' loading='lazy' />
                   </StatusImage>
+                  <span>{getOrderStatus(order?.status)?.value}</span>
                 </OrderStatus>
               </OrderInfo>
 
@@ -260,7 +260,7 @@ const OrderDetailsUI = (props) => {
                   {order?.customer?.photo ? (
                     <PhotoBlock src={order?.customer?.photo} />
                   ) : (
-                    <FaUserCircle />
+                    <FaUserAlt />
                   )}
                 </div>
                 <InfoBlock>

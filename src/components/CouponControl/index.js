@@ -1,5 +1,5 @@
 import React from 'react'
-import { CouponControl as CouponController, useLanguage } from 'ordering-components'
+import { CouponControl as CouponController, useLanguage, useOrder } from 'ordering-components'
 
 import {
   CouponContainer
@@ -22,6 +22,7 @@ const CouponControlUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [orderState] = useOrder()
 
   const onRemoveCoupon = () => {
     setConfirm({
@@ -48,11 +49,9 @@ const CouponControlUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <CouponContainer>
         {couponDefault ? (
           <Button onClick={() => onRemoveCoupon()}>
@@ -67,7 +66,7 @@ const CouponControlUI = (props) => {
             />
             <Button
               color='primary'
-              disabled={!couponInput}
+              disabled={!couponInput || orderState.loading}
               onClick={handleButtonApplyClick}
             >
               {t('APPLY', 'Apply')}
@@ -86,13 +85,11 @@ const CouponControlUI = (props) => {
         />
       </CouponContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

@@ -28,6 +28,7 @@ const FloatingButtonUI = (props) => {
       }
       <Container>
         <Button
+          rectangle
           color={isSecondaryBtn ? 'secundary' : 'primary'}
           onClick={handleButtonClick}
           disabled={disabled}

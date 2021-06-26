@@ -25,6 +25,7 @@ export const Header = styled.div`
 
   #select-input {
     color: ${props => props.theme.colors.primary} !important;
+    border-radius: 5px;
   }
 `
 
@@ -126,7 +127,7 @@ export const MenuLink = styled.a`
   ${({ highlight }) => highlight && css`
     background-color: ${props => props.theme.colors?.lightGray};
     color: ${props => props.theme.colors.primary};
-    border-radius: 100px;
+    border-radius: 5px;
     padding: 5px 15px;
   `}
 `
