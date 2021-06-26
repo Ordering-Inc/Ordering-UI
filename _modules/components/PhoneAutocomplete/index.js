@@ -182,7 +182,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     setOptSelected(option);
     setInputValue(option ? option === null || option === void 0 ? void 0 : option.value : '');
     var user = (_customersPhones$user = customersPhones.users) === null || _customersPhones$user === void 0 ? void 0 : _customersPhones$user.find(function (user) {
-      return user.cellphone === (option === null || option === void 0 ? void 0 : option.value);
+      return user.cellphone === (option === null || option === void 0 ? void 0 : option.value) || user.phone === (option === null || option === void 0 ? void 0 : option.value);
     });
 
     if (user) {
