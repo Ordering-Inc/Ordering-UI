@@ -93,7 +93,7 @@ const PhoneAutocompleteUI = (props) => {
   const onChange = (option) => {
     setOptSelected(option)
     setInputValue(option ? option?.value : '')
-    const user = customersPhones.users?.find(user => user.cellphone === option?.value)
+    const user = customersPhones.users?.find(user => user.cellphone === option?.value || user.phone === option?.value)
     if (user) {
       setCustomerState({ ...customerState, result: user })
       setOpenModal({ ...openModal, customer: true })
