@@ -458,7 +458,7 @@ export const Checkout = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
-  const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products?.length) || null)
+  const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length) || null)
 
   const closeAlert = () => {
     setAlertState({
