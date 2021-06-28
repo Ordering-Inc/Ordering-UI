@@ -381,13 +381,13 @@ const CheckoutUI = (props) => {
           {!props.isHideSectionSeven && !cartState.loading && cart && cart?.status !== 2 && (
             <WrapperPlaceOrderButton>
               <Button
-                color={(!cart?.valid_maximum || !cart?.valid_minimum) ? 'secundary' : 'primary'}
-                disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || !cart?.valid_minimum || loading}
+                color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
+                disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading}
                 onClick={() => handlePlaceOrder()}
               >
                 {!cart?.valid_maximum ? (
                   `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
-                ) : !cart?.valid_minimum ? (
+                ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
                   `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
                 ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
               </Button>
@@ -458,7 +458,7 @@ export const Checkout = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
-  const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products?.length) || null)
+  const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length) || null)
 
   const closeAlert = () => {
     setAlertState({
