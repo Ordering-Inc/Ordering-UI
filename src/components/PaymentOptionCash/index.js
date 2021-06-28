@@ -69,7 +69,7 @@ export const PaymentOptionCash = (props) => {
             <Input
               ref={el}
               name='cash'
-              type='text'
+              type='number'
               placeholder='0'
             />
           </WrapperInput>
