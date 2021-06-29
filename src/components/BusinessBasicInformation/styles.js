@@ -123,6 +123,7 @@ export const BusinessInfoItem = styled.div`
       margin: 0px;
       overflow: hidden;
       /* white-space: nowrap; */
+      text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 1; /* number of lines to show */
       -webkit-box-orient: vertical;
