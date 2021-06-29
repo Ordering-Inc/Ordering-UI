@@ -82,8 +82,9 @@ export const WrapperPlaceOrderButton = styled.div`
 
 export const WarningMessage = styled.div`
   width: 100%;
-  height: 150px;
-  max-height: 300px;
+  height: fit-content;
+  max-height: fit-content;
+  min-height: 150px;
   background-color: #F2BB40;
   display: flex;
   justify-content: center;
