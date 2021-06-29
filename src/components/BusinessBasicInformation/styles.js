@@ -51,7 +51,8 @@ export const BusinessContent = styled.div`
   padding: 10px;
   border-radius: 10px;
   margin: 10px;
-  max-height: 90px;
+  max-height: fit-content;
+  height: fit-content;
   width: 340px;
 
   @media (min-width: 426px) {
