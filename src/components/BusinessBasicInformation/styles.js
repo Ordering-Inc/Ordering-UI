@@ -119,12 +119,14 @@ export const BusinessInfoItem = styled.div`
 
     h5,
     p {
-      display: flex;
       align-items: center;
       margin: 0px;
       overflow: hidden;
       /* white-space: nowrap; */
       text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1; /* number of lines to show */
+      -webkit-box-orient: vertical;
 
       svg {
         margin-right: 4px;
