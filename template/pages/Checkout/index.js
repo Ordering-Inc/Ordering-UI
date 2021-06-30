@@ -10,7 +10,7 @@ export const CheckoutPage = (props) => {
   const { cartUuid } = useParams()
   const [events] = useEvent()
   const [errors, setErrors] = useState([])
-  const [, { confirmCart }] = useOrder()
+  const [orderState, { confirmCart, changeMoment }] = useOrder()
   const [, t] = useLanguage()
   const stripePayments = ['stripe', 'stripe_connect', 'stripe_direct']
 
@@ -99,6 +99,9 @@ export const CheckoutPage = (props) => {
     validationFieldsType: 'checkout',
     onPlaceOrderClick: (data, paymethod, cart) => {
       if (cart?.order?.uuid) {
+        if (orderState?.options?.moment) {
+          changeMoment(null)
+        }
         events.emit('go_to_page', { page: 'order_detail', params: { orderId: cart.order?.uuid }, replace: true })
       }
     },
