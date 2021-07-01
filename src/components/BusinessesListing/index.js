@@ -205,19 +205,16 @@ const BusinessesListingUI = (props) => {
           }
           {
             businessesList.businesses?.map((business) => (
-              <React.Fragment key={business.id}>
-                {console.log(business?.open, business?.slug, 2)}
-                <BusinessController
-                  key={business.id}
-                  className='card'
-                  business={business}
-                  isBusinessOpen={business.open}
-                  handleCustomClick={handleBusinessClick}
-                  orderType={orderState?.options?.type}
-                  isCustomLayout={isCustomLayout}
-                  isShowCallcenterInformation={isCustomLayout}
-                />
-              </React.Fragment>
+              <BusinessController
+                key={business.id}
+                className='card'
+                business={business}
+                isBusinessOpen={business.open}
+                handleCustomClick={handleBusinessClick}
+                orderType={orderState?.options?.type}
+                isCustomLayout={isCustomLayout}
+                isShowCallcenterInformation={isCustomLayout}
+              />
             ))
           }
           {businessesList.loading && (
