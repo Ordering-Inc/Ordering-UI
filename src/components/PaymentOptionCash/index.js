@@ -21,7 +21,6 @@ export const PaymentOptionCash = (props) => {
   const [{ parsePrice }] = useUtils()
 
   const [value, setvalue] = useState(defaultValue)
-  const [input, setinput] = useState("");
   const el = useRef()
   let timeout = null
 
@@ -30,11 +29,12 @@ export const PaymentOptionCash = (props) => {
     timeout = setTimeout(() => {
       let cash = parseFloat(e?.target?.value)
       cash = isNaN(cash) ? null : cash
+      if (cash === null) setvalue('')
       setvalue(cash)
       if (cash >= orderTotal || !cash) {
         onChangeData && onChangeData({ cash })
       }
-    }, 1000)
+    }, 500)
   }
 
   useEffect(() => {
@@ -70,10 +70,8 @@ export const PaymentOptionCash = (props) => {
             <Input
               ref={el}
               name='cash'
-              type='text'
-              placeholder='0' 
-              value={input}
-              onChange={e => setinput(e.target.value.replace(/[^0-9]/g, ""))}
+              type='number'
+              placeholder='0'
             />
           </WrapperInput>
           {value && parseFloat(value) < orderTotal && (
