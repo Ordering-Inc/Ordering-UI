@@ -25,7 +25,7 @@ export const OrderTypeWrapper = styled.span`
   }
 `
 
-export const SelectedOption = styled.p`  
+export const SelectedOption = styled.p`
   margin: 0;
   max-width: 60px;
   overflow: hidden;
@@ -37,5 +37,5 @@ export const SelectedOption = styled.p`
 `
 
 export const ContentOption = styled(SelectedOption)`
-  max-width: 80px;
+  max-width: initial;
 `
