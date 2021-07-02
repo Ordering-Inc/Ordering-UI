@@ -79,6 +79,10 @@ export const Reorder = styled.div`
     color: #53ad26;
     margin-block-start: 0;
     margin-block-end: 0;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
   }
   button {
     margin: 5px 0;
@@ -122,6 +126,10 @@ export const WrappButton = styled.div`
   button {
     padding: 10px 0px;
     width: 100%;
+  }
+
+  button:hover{
+    color: black
   }
 
   @media (min-width: 768px) {
