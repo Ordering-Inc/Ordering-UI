@@ -25,16 +25,16 @@ export const PaymentOptionCash = (props) => {
   let timeout = null
 
   const onChangeCash = (e) => {
+    el.current.value = el.current.value.replace(/[^0-9]/g, "")
     clearTimeout(timeout)
     timeout = setTimeout(() => {
       let cash = parseFloat(e?.target?.value)
       cash = isNaN(cash) ? null : cash
-      if (cash === null) setvalue('')
       setvalue(cash)
       if (cash >= orderTotal || !cash) {
         onChangeData && onChangeData({ cash })
       }
-    }, 500)
+    }, 1000)
   }
 
   useEffect(() => {
