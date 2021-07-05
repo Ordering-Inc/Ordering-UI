@@ -32,7 +32,7 @@ export const WrapperBusinessCard = styled.div`
 export const BusinessTags = styled.div`
   display: flex;
   position: absolute;
-  justify-content: space-between;
+  justify-content: ${({ isFeatured }) => isFeatured ? 'space-between' : 'flex-end'};
   align-items: center;
   top: 0;
   margin: 7px 15px;
