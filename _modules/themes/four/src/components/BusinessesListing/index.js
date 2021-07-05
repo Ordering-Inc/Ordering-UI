@@ -265,7 +265,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       handleCustomClick: handleBusinessClick,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
     });
-  }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
+  }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 20).keys()).map(function (i) {
     var _orderState$options4;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
@@ -351,7 +351,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
 
 var BusinessesListing = function BusinessesListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BusinessesListingUI
+    UIComponent: BusinessesListingUI,
+    paginationSettings: {
+      pageSize: 20
+    }
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
