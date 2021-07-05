@@ -34,6 +34,11 @@ export const Header = styled.div`
 
     #list {
       right: initial;
+      svg {
+        path {
+          fill: initial !important;
+        }
+      }
     }
   }
 
@@ -64,6 +69,14 @@ export const Header = styled.div`
       svg {
         path {
           fill: #FFF !important;
+        }
+      }
+
+      #list {
+        svg {
+          path {
+            fill: initial !important;
+          }
         }
       }
     }

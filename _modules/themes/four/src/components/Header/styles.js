@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  box-shadow: 1px 1px 5px #00000029;\n  border: 1px solid #CCC;\n  ", "\n  top: 0px;\n  z-index: 1001;\n\n  #select-input {\n    border-radius: 8px;\n    background-color: #FFF !important;\n    color: ", " !important;\n    border: 1px solid ", ";\n\n    svg {\n      path {\n        fill: ", " !important;\n      }\n    }\n\n    ", "\n\n    #list {\n      right: initial;\n    }\n  }\n\n  .moment-popover,\n  .address-popover {\n    > div:first-child {\n      color: ", ";\n    }\n  }\n  ", "\n"])), function (_ref) {
+var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  box-shadow: 1px 1px 5px #00000029;\n  border: 1px solid #CCC;\n  ", "\n  top: 0px;\n  z-index: 1001;\n\n  #select-input {\n    border-radius: 8px;\n    background-color: #FFF !important;\n    color: ", " !important;\n    border: 1px solid ", ";\n\n    svg {\n      path {\n        fill: ", " !important;\n      }\n    }\n\n    ", "\n\n    #list {\n      right: initial;\n      svg {\n        path {\n          fill: initial !important;\n        }\n      }\n    }\n  }\n\n  .moment-popover,\n  .address-popover {\n    > div:first-child {\n      color: ", ";\n    }\n  }\n  ", "\n"])), function (_ref) {
   var isHero = _ref.isHero;
   return isHero && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    box-shadow: none;\n    border: none;\n    position: absolute;\n  "])));
 }, function (props) {
@@ -34,7 +34,7 @@ var Header = _styledComponents.default.div(_templateObject || (_templateObject =
   return props.theme.colors.primary;
 }, function (_ref2) {
   var isStorePage = _ref2.isStorePage;
-  return isStorePage && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    position: absolute;\n    box-shadow: none;\n    border: none;\n\n    .address-popover,\n    .moment-popover,\n    .user-popover {\n      > div:first-child {\n        color: #FFF;\n      }\n    }\n\n    #select-input {\n      background-color: transparent !important;\n      border-radius: 8px;\n      color: #FFF !important;\n      border: 1px solid #FFF;\n      svg {\n        path {\n          fill: #FFF !important;\n        }\n      }\n    }\n  "])));
+  return isStorePage && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    position: absolute;\n    box-shadow: none;\n    border: none;\n\n    .address-popover,\n    .moment-popover,\n    .user-popover {\n      > div:first-child {\n        color: #FFF;\n      }\n    }\n\n    #select-input {\n      background-color: transparent !important;\n      border-radius: 8px;\n      color: #FFF !important;\n      border: 1px solid #FFF;\n      svg {\n        path {\n          fill: #FFF !important;\n        }\n      }\n\n      #list {\n        svg {\n          path {\n            fill: initial !important;\n          }\n        }\n      }\n    }\n  "])));
 });
 
 exports.Header = Header;
