@@ -12,6 +12,8 @@ export const Option = styled.div`
       margin-right: 0px;
     `}
   }
+
+  
 `
 
 export const OrderTypeWrapper = styled.span`
@@ -25,17 +27,17 @@ export const OrderTypeWrapper = styled.span`
   }
 `
 
-export const SelectedOption = styled.p`
+export const SelectedOption = styled.p`  
   margin: 0;
   max-width: 60px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  
   @media (min-width: 380px) {
       max-width: initial;
   }
 `
 
 export const ContentOption = styled(SelectedOption)`
-  max-width: initial;
+  max-width: 80px;
 `

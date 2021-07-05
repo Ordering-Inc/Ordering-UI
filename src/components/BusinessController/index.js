@@ -40,8 +40,7 @@ const BusinessControllerUI = (props) => {
     handleClick,
     orderType,
     isCustomLayout,
-    isShowCallcenterInformation,
-    isBusinessOpen
+    isShowCallcenterInformation
   } = props
 
   const theme = useTheme()
@@ -74,12 +73,12 @@ const BusinessControllerUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton}>
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}>
+        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!business?.open && isCustomLayout ? handleShowAlert() : handleClick(business))}>
           <BusinessHero>
             {isSkeleton ? (
               <Skeleton height={100} />
             ) : (
-              <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!isBusinessOpen}>
+              <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!business?.open}>
                 <BusinessTags>
                   {business?.featured &&
                     <span className='crown'>
@@ -88,11 +87,11 @@ const BusinessControllerUI = (props) => {
                   {!isCustomLayout && (
                     <div>
                       {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
-                      {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
+                      {!business?.open && <span>{t('PREORDER', 'PreOrder')}</span>}
                     </div>
                   )}
                 </BusinessTags>
-                {!isBusinessOpen && <h1>{t('CLOSED', 'Closed')}</h1>}
+                {!business?.open && <h1>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>
             )}
           </BusinessHero>

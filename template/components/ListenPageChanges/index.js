@@ -11,6 +11,8 @@ export const ListenPageChanges = ({ children }) => {
 
   const routes = {
     home: '/',
+    mytest:'/testpage',
+
     search: '/search',
     delivery: '/delivery',
     pickup: '/pickup',
@@ -27,11 +29,12 @@ export const ListenPageChanges = ({ children }) => {
     business: '/store/:store',
     business_slug: '/:store',
     forgot_password: '/password/forgot',
-    reset_password: '/password/reset'
+    reset_password: '/password/reset',
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
     let path = routes[page]
+    
     if (path) {
       Object.entries(params).forEach(([key, value]) => {
         path = path.replace(`:${key}`, value)

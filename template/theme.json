@@ -10,24 +10,26 @@
     }
   },
   "colors": {
-    "primary": "#D83520",
+    "primary": "#016341",
     "primaryContrast": "#FFF",
-    "secundary": "#EFEFEF",
-    "secundaryContrast": "#000",
+    "secundary": "#000000",
+    "secundaryContrast": "#FFF",
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
     "backgroundPage": "#F8F8F8",
     "colorPage": "#333",
-    "colorTextSignForm": "#FFFFFF"
+    "colorTextSignForm": "#FFFFFF",
+    "black": "#000000",
+    "gray": "#ADB5BD"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
     "SIGN_IN": "Sign in",
-    "SIGN_UP": "Sign up",
+    "SIGN_UP": "Join now",
     "ACCEPT": "Accept",
 
-    "TITLE_HOME": "All We need is Food",
-    "SUBTITLE_HOME": "Let's start to order food now",
+    "TITLE_HOME": "What type of order can we get started for you?",
+    "SUBTITLE_HOME": "Order ahead for pickup or let us deliver to your location.",
     "TYPE_AN_ADDRESS": "Type an addres",
     "FIND_BUSINESSES": "Find businesse",
     "ADDRESS": "Address",
