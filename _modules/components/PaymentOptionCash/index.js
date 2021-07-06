@@ -58,20 +58,26 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
   var timeout = null;
 
   var onChangeCash = function onChangeCash(e) {
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-      var _e$target;
+    var _e$target;
 
-      var cash = parseFloat(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
-      cash = isNaN(cash) ? null : cash;
-      setvalue(cash);
+    if (!/^(?=.)([+-]?([0-9]*)(\.([0-9]+))?)$/.test(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value)) {
+      return;
+    } else {
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
+        var _e$target2;
 
-      if (cash >= orderTotal || !cash) {
-        onChangeData && onChangeData({
-          cash: cash
-        });
-      }
-    }, 1000);
+        var cash = parseFloat(e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
+        cash = isNaN(cash) ? null : cash;
+        setvalue(cash);
+
+        if (cash >= orderTotal || !cash) {
+          onChangeData && onChangeData({
+            cash: cash
+          });
+        }
+      }, 1000);
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -98,8 +104,13 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.PaymentCashContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormCash, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: el,
     name: "cash",
-    type: "number",
-    placeholder: "0"
+    type: "text",
+    placeholder: "0",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9 .]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   })), value && parseFloat(value) < orderTotal && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total'), ": ", parsePrice(orderTotal)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
