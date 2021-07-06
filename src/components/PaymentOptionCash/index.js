@@ -74,9 +74,9 @@ export const PaymentOptionCash = (props) => {
               name='cash'
               type='text'
               placeholder='0'
-              onKeyPress={(event) => {
-                if (!/^[0-9 .]$/.test(event.key)) {
-                  event.preventDefault();
+              onKeyPress={(e) => {
+                if (!/^[0-9 .]$/.test(e.key)) {
+                  e.preventDefault();
                 }
               }}
             />
