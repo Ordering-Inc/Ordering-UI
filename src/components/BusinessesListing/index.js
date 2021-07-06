@@ -209,6 +209,7 @@ const BusinessesListingUI = (props) => {
                 key={business.id}
                 className='card'
                 business={business}
+                isBusinessOpen={business.open}
                 handleCustomClick={handleBusinessClick}
                 orderType={orderState?.options?.type}
                 isCustomLayout={isCustomLayout}
