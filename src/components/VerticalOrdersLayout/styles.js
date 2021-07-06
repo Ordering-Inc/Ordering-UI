@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const SingleCard = styled.div`
   width: 100%;
@@ -129,7 +130,7 @@ export const WrappButton = styled.div`
   }
 
   button:hover{
-    color: black
+    color: ${props => darken(0.07, props.theme.colors.primary)};
   }
 
   @media (min-width: 768px) {
