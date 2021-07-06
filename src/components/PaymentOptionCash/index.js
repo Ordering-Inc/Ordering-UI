@@ -24,15 +24,19 @@ export const PaymentOptionCash = (props) => {
   const el = useRef()
   let timeout = null
   const onChangeCash = (e) => {
-    clearTimeout(timeout)
-    timeout = setTimeout(() => {
-      let cash = parseFloat(e?.target?.value)
-      cash = isNaN(cash) ? null : cash
-      setvalue(cash)
-      if (cash >= orderTotal || !cash) {
-        onChangeData && onChangeData({ cash })
-      }
-    }, 1000)
+    if(!/^(?=.)([+-]?([0-9]*)(\.([0-9]+))?)$/.test(e?.target?.value)) {
+      return
+    } else {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        let cash = parseFloat(e?.target?.value)
+        cash = isNaN(cash) ? null : cash
+        setvalue(cash)
+        if (cash >= orderTotal || !cash) {
+          onChangeData && onChangeData({ cash })
+        }
+      }, 1000)
+    }
   }
 
   useEffect(() => {
