@@ -43,8 +43,6 @@ const BusinessControllerUI = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  // const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
-  // const [selectedBusiness, setSelectedBusiness] = useState()
   const types = ['food', 'alcohol', 'groceries', 'laundry']
   const businessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -57,12 +55,6 @@ const BusinessControllerUI = (props) => {
   const handleShowAlert = () => {
     setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   }
-  // const openBusinessInfo = (business) => {
-  //   event.preventDefault()
-  //   console.log(business)
-  //   setOpenBusinessInformation(true)
-  //   setSelectedBusiness(business)
-  // }
 
   return (
     <>
@@ -163,9 +155,7 @@ const BusinessControllerUI = (props) => {
         <BusinessInfomation>
           {
             business?.name ? (
-              <BsExclamationCircle
-                // onClick={() => openBusinessInfo(business)}
-              />
+              <BsExclamationCircle />
             ) : (
               <Skeleton width={20} />
             )
@@ -187,10 +177,6 @@ const BusinessControllerUI = (props) => {
         <React.Fragment key={i}>
           {AfterElement}
         </React.Fragment>))}
-      {/* {openBusinessInformation &&
-        <BusinessInformation
-          business={selectedBusiness}
-        />} */}
     </>
   )
 }

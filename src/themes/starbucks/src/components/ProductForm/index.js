@@ -11,20 +11,21 @@ import {
   useUtils
 } from 'ordering-components'
 
-import { scrollTo } from '../../utils'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import { scrollTo } from '../../../../../utils'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { ProductIngredient } from '../../../../../components/ProductIngredient'
+import { ProductShare } from '../../../../../components/ProductShare'
+import { LoginForm } from '../../../../../components/LoginForm'
+import { SignUpForm } from '../../../../../components/SignUpForm'
+import { ForgotPasswordForm } from '../../../../../components/ForgotPasswordForm'
+import { AddressList } from '../../../../../components/AddressList'
+import { Modal } from '../../../../../components/Modal'
+import { Button } from '../../../../../styles/Buttons'
+import { TextArea } from '../../../../../styles/Inputs'
+import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
-import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
-import { ProductShare } from '../ProductShare'
-import { LoginForm } from '../LoginForm'
-import { SignUpForm } from '../SignUpForm'
-import { ForgotPasswordForm } from '../ForgotPasswordForm'
-import { AddressList } from '../AddressList'
-
-import { Modal } from '../Modal'
-import { Button } from '../../styles/Buttons'
 
 import {
   ProductContainer,
@@ -42,8 +43,6 @@ import {
   WrapperIngredients
 } from './styles'
 import { useTheme } from 'styled-components'
-import { TextArea } from '../../styles/Inputs'
-import { NotFoundSource } from '../NotFoundSource'
 
 const ProductOptionsUI = (props) => {
   const {
@@ -177,10 +176,8 @@ const ProductOptionsUI = (props) => {
                   onError={(e) => { e.target.onerror = null; e.target.src = theme.images?.dummies?.product }}
                 />
               </ProductImage>
-            </WrapperImage>
-            <ProductInfo>
               <ProductFormTitle>
-                <h1>{product?.name}</h1>
+                <h2>{product?.name}</h2>
                 {product?.description && <p>{product?.description}</p>}
                 {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
                   <SkuContent>
@@ -189,6 +186,8 @@ const ProductOptionsUI = (props) => {
                   </SkuContent>
                 )}
               </ProductFormTitle>
+            </WrapperImage>
+            <ProductInfo>
               <ProductEdition>
                 {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                 <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
@@ -316,8 +315,7 @@ const ProductOptionsUI = (props) => {
                 {(!auth || isSoldOut || maxProductQuantity <= 0) && (
                   <Button
                     className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
-                    color='primary'
-                    outline
+                    color='secundary'
                     disabled={isSoldOut || maxProductQuantity <= 0}
                     onClick={() => setModalIsOpen(true)}
                   >

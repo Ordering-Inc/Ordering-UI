@@ -35,7 +35,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
-import { ProductForm } from '../components/ProductForm'
+import { ProductForm } from '../ProductForm'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -236,7 +236,7 @@ const BusinessProductsListingUI = (props) => {
                       />
                     )}
                   </WrapProductsCategroy>
-                  <WrapBusinessList className='test-mark'>
+                  <WrapBusinessList>
                     {windowSize.width > 850 &&
                       <>
                         <BusinessBasicInformation
