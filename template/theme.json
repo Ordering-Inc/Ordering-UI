@@ -16,11 +16,9 @@
     "secundaryContrast": "#FFF",
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
-    "backgroundPage": "#F8F8F8",
-    "colorPage": "#333",
-    "colorTextSignForm": "#FFFFFF",
-    "black": "#000000",
-    "gray": "#ADB5BD"
+    "backgroundPage":"#fff",
+    "fontPrimary": "#000000",
+    "fontSecundary": "#6C757D"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",

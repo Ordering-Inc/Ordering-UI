@@ -4,6 +4,7 @@ export const Header = styled.div`
   flex-direction: column;
   width: 100%; 
   background-color: #fff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 `
 export const InnerHeader = styled.div`
   display: flex;
