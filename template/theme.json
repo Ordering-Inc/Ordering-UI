@@ -18,7 +18,8 @@
     "disabledContrast": "#000",
     "backgroundPage":"#fff",
     "fontPrimary": "#000000",
-    "fontSecundary": "#6C757D"
+    "fontSecundary": "#6C757D",
+    "borderColor":"#CBCBCB"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",

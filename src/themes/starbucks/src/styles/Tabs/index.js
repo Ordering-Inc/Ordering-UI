@@ -10,9 +10,12 @@ export const Tabs = styled.div`
   ${({ vertical }) => vertical
     ? css`
         flex-direction: column;
+        align-items: flex-start;
       `
       : css`
         flex-direction: row;
+        border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+        width: 100%;
       `
   }
 `
@@ -20,6 +23,7 @@ export const Tabs = styled.div`
 export const Tab = styled.div`
   padding: 10px 15px;
   cursor: pointer;
+  font-weight: 500;
   ${({ active }) => active && css`
     ${({ borderBottom }) => borderBottom && css`
       border-bottom: 2px solid;

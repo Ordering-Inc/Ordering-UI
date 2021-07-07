@@ -23,9 +23,7 @@ import {
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-import { BusinessProductsList } from '../../../../../components/BusinessProductsList'
 import { PageNotFound } from '../../../../../components/PageNotFound'
-import { ProductForm } from '../../../../../components/ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../../../../../components/Modal'
 import { SearchBar } from '../../../../../components/SearchBar'
@@ -36,6 +34,8 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
+import { BusinessProductsList } from '../BusinessProductsList'
+import { ProductForm } from '../components/ProductForm'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -357,7 +357,7 @@ const BusinessProductsListingUI = (props) => {
       )}
 
       <Modal
-        width='70%'
+        width='80%'
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
