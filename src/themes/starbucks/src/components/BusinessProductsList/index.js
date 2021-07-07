@@ -2,7 +2,7 @@ import React from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
-import { NotFoundSource } from '../NotFoundSource'
+import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import {
   ProductsContainer,
@@ -40,22 +40,25 @@ const BusinessProductsListUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
-        <h2> Menu </h2>
+        <h2>{t('MENU', 'Menu')} </h2>
         {category?.id && (
-          <ProductsListing>
-            {
-              categoryState.products?.map(product => (
-                <SingleProductCard
-                  key={product?.id}
-                  isSoldOut={(product.inventoried && !product.quantity)}
-                  product={product}
-                  businessId={businessId}
-                  onProductClick={onProductClick}
-                  isCartOnProductsList={isCartOnProductsList}
-                />
-              ))
-            }
-          </ProductsListing>
+          <>
+            <h3>{category?.name}</h3>
+            <ProductsListing>
+              {
+                categoryState.products?.map(product => (
+                  <SingleProductCard
+                    key={product?.id}
+                    isSoldOut={(product.inventoried && !product.quantity)}
+                    product={product}
+                    businessId={businessId}
+                    onProductClick={onProductClick}
+                    isCartOnProductsList={isCartOnProductsList}
+                  />
+                ))
+              }
+            </ProductsListing>
+          </>
         )}
 
         {

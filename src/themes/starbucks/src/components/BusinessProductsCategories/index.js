@@ -25,7 +25,7 @@ const BusinessProductsCategoriesUI = (props) => {
           className={`category ${category.id === 'featured' ? 'special' : ''}`}
           active={categorySelected?.id === category.id}
           onClick={() => handlerClickCategory(category)}
-          borderBottom
+          borderBottom={!sideCategory}
         >
           {category.name}
         </Tab>
