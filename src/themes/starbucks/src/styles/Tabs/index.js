@@ -26,7 +26,7 @@ export const Tab = styled.div`
   font-weight: 500;
   ${({ active }) => active && css`
     ${({ borderBottom }) => borderBottom && css`
-      border-bottom: 2px solid;
+      border-bottom: 2px solid ${props => props.theme.colors.primary};
     `}
   `}
 
