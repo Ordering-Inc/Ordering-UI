@@ -8,7 +8,8 @@ import {
   useLanguage,
   useOrder,
   useSession,
-  useUtils
+  useUtils,
+  useConfig
 } from 'ordering-components'
 
 import {
@@ -62,10 +63,12 @@ const BusinessProductsListingUI = (props) => {
     errorQuantityProducts
   } = props
 
+  const [{ configs }] = useConfig()
+  const { add_product_with_one_click } = configs
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }] = useOrder()
+  const [{ carts }, { addProduct }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const [{ auth }] = useSession()
@@ -89,18 +92,20 @@ const BusinessProductsListingUI = (props) => {
   const handler = () => {
     setOpenBusinessInformation(true)
   }
-
   const onProductClick = (product) => {
-    onProductRedirect({
-      slug: business?.slug,
-      product: product.id,
-      category: product.category_id
-    })
-    setCurProduct(product)
-    setModalIsOpen(true)
-    events.emit('product_clicked', product)
+    if(product.extras.length === 0 && !product.inventoried) {
+        addProduct(product, currentCart)
+    } else {
+      onProductRedirect({
+        slug: business?.slug,
+        product: product.id,
+        category: product.category_id
+      })
+      setCurProduct(product)
+      setModalIsOpen(true)
+      events.emit('product_clicked', product)
+    }
   }
-
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
