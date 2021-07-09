@@ -18,6 +18,7 @@ import {
   OrderType,
   OrderDescription
 } from './styles'
+
 const OrderTypeSelectorHeaderUI = (props) => {
   const {
     handleChangeOrderType,

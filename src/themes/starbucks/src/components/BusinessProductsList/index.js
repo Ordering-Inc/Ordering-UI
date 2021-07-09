@@ -1,8 +1,10 @@
 import React from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
+import Skeleton from 'react-loading-skeleton'
 
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   ProductsContainer,
@@ -30,6 +32,7 @@ const BusinessProductsListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const windowSize = useWindowSize()
 
   return (
     <>
@@ -40,10 +43,14 @@ const BusinessProductsListUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
-        <h2>{t('MENU', 'Menu')} </h2>
+        {windowSize.width > 850 &&
+          <>
+            {isBusinessLoading ? <Skeleton width={100} height={30} /> : <h2>{t('MENU', 'Menu')} </h2>}
+          </>}
         {category?.id && (
           <>
-            <h3>{category?.name}</h3>
+            {windowSize.width > 850 &&
+              <h3>{category?.name}</h3>}
             <ProductsListing>
               {
                 categoryState.products?.map(product => (

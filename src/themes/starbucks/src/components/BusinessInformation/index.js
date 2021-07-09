@@ -43,7 +43,6 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import MdClose from '@meronex/icons/md/MdClose'
 import { AutoScroll } from '../../../../../components/AutoScroll'
-
 export const BusinessInformationUI = (props) => {
   const {
     business,
@@ -55,13 +54,11 @@ export const BusinessInformationUI = (props) => {
     businessVideos,
     onClose
   } = props
-
   const theme = useTheme()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [tabValue, setTabValue] = useState('General Info')
-
   const daysOfWeek = [
     t('SUNDAY_ABBREVIATION', 'Sun'),
     t('MONDAY_ABBREVIATION', 'Mon'),
@@ -74,17 +71,14 @@ export const BusinessInformationUI = (props) => {
   const [{ parsePrice, parseDistance }] = useUtils()
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
-
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
     return `${checkTime(hour)}:${checkTime(minute)}`
   }
-
   const handleModalImage = (src) => {
     setImage(src)
     setModalImage(true)
   }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -172,7 +166,6 @@ export const BusinessInformationUI = (props) => {
               </Tabs>
             </FlexTabs>
           )}
-
           {tabValue === 'General Info' && (
             <>
               {business.about && (
@@ -257,7 +250,6 @@ export const BusinessInformationUI = (props) => {
               )}
             </>
           )}
-
           {tabValue === 'Reviews' && (
             <>
               {business.reviews?.reviews && (
@@ -270,7 +262,6 @@ export const BusinessInformationUI = (props) => {
               )}
             </>
           )}
-
           {tabValue === 'Offers' && (
             <OffersSection>
               <OfferText>
@@ -325,17 +316,14 @@ export const BusinessInformationUI = (props) => {
         </Modal>
       </BusinessInformationContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
-
 export const BusinessInformation = (props) => {
   const googleMapsControls = {
     defaultZoom: 15,
@@ -348,7 +336,6 @@ export const BusinessInformation = (props) => {
       mapTypeIds: ['roadmap', 'satellite']
     }
   }
-
   const BusinessInformationProps = {
     ...props,
     UIComponent: BusinessInformationUI,

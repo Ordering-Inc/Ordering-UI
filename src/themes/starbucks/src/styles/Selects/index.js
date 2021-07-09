@@ -59,9 +59,14 @@ export const Options = styled.div`
         right: initial;
     `}
   `}
+
+  ${({ fullwidth }) => fullwidth && css`
+    width: 100%;    
+  `}
 `
 
 export const Selected = styled.div`
+ 
   padding-left: 9px;
   padding-right: 9px;
   font-size: 16px;
@@ -83,6 +88,12 @@ export const Selected = styled.div`
     padding-left: 15px;
     padding-right: 15px;
   }
+
+  ${({ fullwidth }) => fullwidth && css`
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+  `}
 `
 
 export const Select = styled.div`
@@ -96,7 +107,17 @@ export const Select = styled.div`
   font-weight: bold;
   ${props => props.disabled && css`
     pointer-events: none;
-  `}  
+  `} 
+  
+  ${({ fullwidth }) => fullwidth && css`
+    width: 100%;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    border-radius: 7px;
+    @media (min-width: 768px) {
+      height: 40px;
+      line-height: 40px;
+    }
+  `} 
 `
 
 export const Chevron = styled.div`

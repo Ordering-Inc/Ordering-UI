@@ -4,31 +4,24 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import FaStar from '@meronex/icons/fa/FaStar'
-
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
-
 import { convertHoursToMinutes } from '../../../../../utils'
-
 import {
   BusinessContainer,
   BusinessContent,
   BusinessInfo,
   BusinessInfoItem
 } from './styles'
-
 const types = ['food', 'laundry', 'alcohol', 'groceries']
-
 export const BusinessBasicInformation = (props) => {
   const {
     isSkeleton,
     businessState
   } = props
   const { business, loading } = businessState
-
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance }] = useUtils()
-
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -37,7 +30,6 @@ export const BusinessBasicInformation = (props) => {
     ))
     return _types.join(', ')
   }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -46,8 +38,14 @@ export const BusinessBasicInformation = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <BusinessContainer isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
-        {!business?.open && <h1>{t('CLOSED', 'Closed')}</h1>}
+      <BusinessContainer isClosed={!business?.open} isSkeleton={isSkeleton} id='container'>
+        {!loading ? (
+          <>
+            {!business?.open && <h1>{t('CLOSED', 'Closed')}</h1>}
+          </>
+        ) : (
+          <h1><Skeleton width={100} /></h1>
+        )}
         <BusinessContent>
           <BusinessInfo className='info'>
             <BusinessInfoItem>
@@ -55,7 +53,7 @@ export const BusinessBasicInformation = (props) => {
                 {!loading ? (
                   <h2 className='bold'>{business?.name}</h2>
                 ) : (
-                  <Skeleton width={100} />
+                  <Skeleton width={150} height={30} />
                 )}
               </div>
               <div>
@@ -81,16 +79,15 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 ) : (
-                  <Skeleton width={70} />
+                  <Skeleton width={50} />
                 )}
-
                 {!loading ? (
                   <p>
                     <GrLocation />
                     {parseDistance(business?.distance || 0)}
                   </p>
                 ) : (
-                  <Skeleton width={70} />
+                  <Skeleton width={50} />
                 )}
                 {orderState?.options.type === 1 && (
                   <>
@@ -100,7 +97,7 @@ export const BusinessBasicInformation = (props) => {
                         {business && parsePrice(business?.delivery_price || 0)}
                       </p>
                     ) : (
-                      <Skeleton width={70} />
+                      <Skeleton width={50} />
                     )}
                   </>
                 )}
@@ -110,7 +107,7 @@ export const BusinessBasicInformation = (props) => {
                     {business?.reviews?.total}
                   </p>
                 ) : (
-                  <Skeleton width={100} />
+                  <Skeleton width={50} />
                 )}
               </div>
             </BusinessInfoItem>

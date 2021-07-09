@@ -2,10 +2,8 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
-
 import { CategoriesContainer } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
-
 const BusinessProductsCategoriesUI = (props) => {
   const {
     isSkeleton,
@@ -16,7 +14,6 @@ const BusinessProductsCategoriesUI = (props) => {
     openBusinessInformation,
     sideCategory
   } = props
-
   const ProductCategories = () => {
     return (
       categories && categories.length && categories.map(category => (
@@ -32,7 +29,6 @@ const BusinessProductsCategoriesUI = (props) => {
       ))
     )
   }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -61,7 +57,7 @@ const BusinessProductsCategoriesUI = (props) => {
             )}
           </Tabs>
         ) : (
-          <Tabs variant='primary'>
+          <Tabs variant='primary' vertical={sideCategory}>
             {[...Array(4).keys()].map(i => (
               <Tab key={i}>
                 <Skeleton width={100} />
@@ -79,13 +75,11 @@ const BusinessProductsCategoriesUI = (props) => {
     </>
   )
 }
-
 export const BusinessProductsCategories = (props) => {
   const businessProductsCategoriesProps = {
     ...props,
     UIComponent: BusinessProductsCategoriesUI
   }
-
   return (
     <ProductsCategories {...businessProductsCategoriesProps} />
   )

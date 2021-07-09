@@ -10,6 +10,10 @@ export const WrapContent = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
   display:  flex;
 
+  ${({ isLoading }) => isLoading && css`
+    display:  block;
+  `}
+
   @media (min-width: 381px) {
     padding: 15px;
   }

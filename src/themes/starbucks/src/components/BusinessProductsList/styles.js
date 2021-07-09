@@ -4,10 +4,12 @@ export const ProductsContainer = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
   h2 {
     padding: 0 7px;
+    margin-bottom: 0;
   }
    h3 {
-     padding: 7px;
-     border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+    padding: 7px;
+    margin-top: 0;
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
    }
 `
 

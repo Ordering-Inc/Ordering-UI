@@ -279,29 +279,65 @@ const BusinessProductsListingUI = (props) => {
             </WrappLayout>
           )
         }
-
         {loading && !error && (
           <>
-            <BusinessBasicInformation
-              businessState={{ business: {}, loading: true }}
-              isSkeleton
-              handler={handler}
-              openBusinessInformation={openBusinessInformation}
-            />
-            <BusinessProductsCategories
-              categories={[]}
-              isSkeleton
-              openBusinessInformation={openBusinessInformation}
-            />
-            <WrapContent>
-              <BusinessProductsList
-                categories={[]}
-                category={categorySelected}
-                categoryState={categoryState}
-                isBusinessLoading={loading}
-                errorQuantityProducts={errorQuantityProducts}
-              />
-            </WrapContent>
+            <WrappLayout>
+              <div className='bp-list'>
+                {windowSize.width < 850 &&
+                  <>
+                    <BusinessBasicInformation
+                      businessState={{ business: {}, loading: true }}
+                      isSkeleton
+                      handler={handler}
+                      openBusinessInformation={openBusinessInformation}
+                    />
+                  </>}
+                {
+                  <WrapperSearch>
+                    <Skeleton width={200} height={30} />
+                    {'  '}
+                    <Skeleton width={100} height={30} />
+                  </WrapperSearch>
+                }
+                {!(business?.categories?.length === 0 && !categoryId) && (
+                  <BusinessProductsCategories
+                    categories={[]}
+                    isSkeleton
+                    openBusinessInformation={openBusinessInformation}
+                  />
+                )}
+                <WrapContent className='wrap-content'>
+                  <WrapProductsCategroy>
+                    {windowSize.width > 850 && (
+                      <BusinessProductsCategories
+                        categories={[]}
+                        isSkeleton
+                        openBusinessInformation={openBusinessInformation}
+                        sideCategory
+                      />
+                    )}
+                  </WrapProductsCategroy>
+                  <WrapBusinessList>
+                    {windowSize.width > 850 &&
+                      <>
+                        <BusinessBasicInformation
+                          businessState={{ business: {}, loading: true }}
+                          isSkeleton
+                          handler={handler}
+                          openBusinessInformation={openBusinessInformation}
+                        />
+                      </>}
+                    <BusinessProductsList
+                      categories={[]}
+                      category={categorySelected}
+                      categoryState={categoryState}
+                      isBusinessLoading={loading}
+                      errorQuantityProducts={errorQuantityProducts}
+                    />
+                  </WrapBusinessList>
+                </WrapContent>
+              </div>
+            </WrappLayout>
           </>
         )}
 

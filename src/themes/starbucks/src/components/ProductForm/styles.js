@@ -30,6 +30,7 @@ export const WrapperImage = styled.div`
     flex-direction: column;
     align-items: center;
     border-right: 1px solid ${props => props.theme.colors.borderColor};
+    overflow-y: auto;
     ${props => props.theme?.rtl && css`
       border-left: 1px solid ${props => props.theme.colors.borderColor};
     `}
@@ -104,12 +105,6 @@ export const ProductInfo = styled.div`
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
   padding: 0 7px;
-  h2 {
-    text-align: center;
-  }
-  p {
-    text-align: left;
-  }
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
   }

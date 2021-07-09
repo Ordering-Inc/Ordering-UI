@@ -12,11 +12,11 @@ export const Tabs = styled.div`
         flex-direction: column;
         align-items: flex-start;
       `
-      : css`
-        flex-direction: row;
-        border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-        width: 100%;
-      `
+    : css`
+      flex-direction: row;
+      border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+      width: 100%;
+    `
   }
 `
 

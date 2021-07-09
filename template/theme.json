@@ -20,6 +20,7 @@
     "fontPrimary": "#000000",
     "fontSecundary": "#6C757D",
     "borderColor":"#CBCBCB",
+    "primarybackground":"#016341",
     "emptyPagebackground":"#c9c9c9"
   },
   "defaultLanguages": {
@@ -27,14 +28,12 @@
     "SIGN_IN": "Sign in",
     "SIGN_UP": "Join now",
     "ACCEPT": "Accept",
-
     "TITLE_HOME": "What type of order can we get started for you?",
     "SUBTITLE_HOME": "Order ahead for pickup or let us deliver to your location.",
     "TYPE_AN_ADDRESS": "Type an addres",
     "FIND_BUSINESSES": "Find businesse",
     "ADDRESS": "Address",
     "ADDRESSES": "Addresses",
-
     "SORT_BY": "Sort By",
     "RANK": "Rank",
     "A_to_Z": "A-Z",
@@ -48,7 +47,6 @@
     "NOT_FOUND_BUSINESS_PRODUCTS": "No products to show at this business, please try with other business",
     "SEARCH_REDIRECT": "Go to Businesses",
     "ERROR_NOT_FOUND_STORE": "Sorry, an error has occurred with business selected",
-
     "SKU": "Sku",
     "INGREDIENTS": "Ingredients",
     "SPECIAL_COMMENT": "Special comment",
@@ -58,7 +56,6 @@
     "RESET_PASSWORD": "Reset password",
     "LOGIN": "Login",
     "LOGIN_SIGNUP": "Login / Sign Up",
-
     "PENDING": "Pending",
     "COMPLETED": "Completed",
     "REJECTED": "Rejected",
