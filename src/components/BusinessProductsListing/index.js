@@ -93,7 +93,7 @@ const BusinessProductsListingUI = (props) => {
     setOpenBusinessInformation(true)
   }
   const onProductClick = (product) => {
-    if(product.extras.length === 0 && !product.inventoried) {
+    if(product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && add_product_with_one_click.value) {
         addProduct(product, currentCart)
     } else {
       onProductRedirect({
