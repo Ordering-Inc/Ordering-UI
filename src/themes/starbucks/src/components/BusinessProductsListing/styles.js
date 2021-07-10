@@ -33,6 +33,17 @@ export const WrapperSearch = styled.div`
     `}
   }
 
+  #select-input {
+    border: none;
+    background-color: #fff !important;
+    border-radius: 0;
+    text-transform: uppercase;
+
+    #list {
+      border-radius: 0;
+    }
+  }
+
   div:last-child {
     text-align: right;
 

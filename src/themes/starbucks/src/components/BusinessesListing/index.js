@@ -18,12 +18,12 @@ import { Modal } from '../../../../../components/Modal'
 import { Alert } from '../../../../../components/Confirm'
 import { AddressForm } from '../../../../../components/AddressForm'
 import { AddressList } from '../../../../../components/AddressList'
-import { SearchBar } from '../../../../../components/SearchBar'
 import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
 import { OrdersOption } from '../../../../../components/OrdersOption'
 
 import { BusinessesMap } from '../BusinessesMap'
 import { BusinessController } from '../BusinessController'
+import { SearchBar } from '../SearchBar'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
@@ -144,7 +144,7 @@ const BusinessesListingUI = (props) => {
                 <SearchBar
                   lazyLoad
                   search={searchValue}
-                  isCustomLayout={isCustomLayout}
+                  isCustomLayout
                   placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
                   onSearch={handleChangeSearch}
                 />

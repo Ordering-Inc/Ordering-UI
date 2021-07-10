@@ -26,7 +26,6 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../../../../../components/Modal'
-import { SearchBar } from '../../../../../components/SearchBar'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { Cart } from '../../../../../components/Cart'
 import { Select } from '../../../../../styles/Select'
@@ -36,6 +35,7 @@ import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { ProductForm } from '../ProductForm'
+import { SearchBar } from '../SearchBar'
 
 const PIXELS_TO_SCROLL = 300
 
