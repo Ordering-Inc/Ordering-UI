@@ -45,7 +45,7 @@ export const BusinessItemAccordion = (props) => {
   const [events] = useEvent()
 
   const [setActive, setActiveState] = useState('')
-  const [setHeight, setHeightState] = useState('0px')
+  const [setHeight] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
   const [cartProductUpdated, setCartProductUpdated] = useState(null)
 

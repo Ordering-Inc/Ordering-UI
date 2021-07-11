@@ -5,10 +5,10 @@ export const CategoriesContainer = styled.div`
   overflow-x: auto;
   padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
-  z-index: 1000;
   position: sticky;
   top: 0;
   text-align: center;
+  z-index: 5;
 
   div.category {
     text-overflow: ellipsis;

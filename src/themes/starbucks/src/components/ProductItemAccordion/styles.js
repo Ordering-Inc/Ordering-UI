@@ -54,8 +54,8 @@ export const Accordion = (props) => {
 }
 
 export const WrapperProductImage = styled.div`
-  max-width: 55px;
-  max-height: 55px;
+  min-width: 55px;
+  min-height: 55px;
   height: 55px;
   width: 55px;
   padding: 3px;
@@ -63,22 +63,22 @@ export const WrapperProductImage = styled.div`
   border-radius: 50%;
 
   @media (min-width: 361px) {
-    max-width: 65px;
-    max-height: 65px;
+    min-width: 65px;
+    min-height: 65px;
     height: 65px;
     width: 65px;
   }
 
   @media (min-width: 411px) {
-    max-width: 75px;
-    max-height: 75px;
+    min-width: 75px;
+    min-height: 75px;
     height: 75px;
     width: 75px;
   }
 
   @media (min-width: 1024px) {
-    max-width: 120px;
-    max-height: 120px;
+    min-width: 120px;
+    min-height: 120px;
     height: 120px;
     width: 120px;
   }
@@ -114,11 +114,8 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 55%;
+  width: 65%;
 
-  @media (min-width: 411px) {
-    width: calc(65% - 60px);
-  }
 
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
@@ -320,8 +317,7 @@ export const ProductPrice = styled.div`
 `
 
 export const ProductSelect = styled.select`
-  max-width: 55px;
-  height: 50px;
+  height: 30px;
   border: none;
   background-color: transparent;
   font-size: 17px;
@@ -330,12 +326,14 @@ export const ProductSelect = styled.select`
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-progress-appearance: none;
-
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  border-radius: 7px;
   background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
   background-repeat: no-repeat, repeat;
   background-position: right .7em top 50%, 0 0;
   background-size: .65em auto, 100%;
-  margin:0 10px;
+  margin: 0 10px;
+  padding: 0 7px;
 `
 
 export const ProductNotAvailable = styled.span`
@@ -378,4 +376,10 @@ export const ProductOptionsList = styled.ul`
 export const ProductQuantity = styled.span`
   margin:0 10px;
  
+`
+
+export const CartActions = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 `

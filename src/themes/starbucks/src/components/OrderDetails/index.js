@@ -50,8 +50,6 @@ import {
   OrderBill,
   ReviewsAction,
   FootActions,
-  SkeletonBlockWrapp,
-  SkeletonBlock,
   ShareOrder,
   MessagesIcon,
   ExclamationWrapper,
@@ -441,18 +439,67 @@ const OrderDetailsUI = (props) => {
             </RightPanel>
           </WrapperContainer>
         )}
+
         {loading && !error && (
           <WrapperContainer isLoading className='skeleton-loading'>
-            <SkeletonBlockWrapp>
-              <SkeletonBlock width={80}>
-                <Skeleton height={300} />
-                <Skeleton />
-                <Skeleton height={100} />
-                <Skeleton height={100} />
-                <Skeleton />
-                <Skeleton height={200} />
-              </SkeletonBlock>
-            </SkeletonBlockWrapp>
+            <WrapperContainer>
+              <LeftPanel>
+                <LeftContentWrapper>
+                  {windowSize.width < 1020 &&
+                    <Skeleton width={400} height={100} />}
+                  <OrderInfo>
+                    <OrderData>
+                      <Skeleton height={30} />
+                      <Skeleton width={100} height={15} />
+                      <Skeleton width={100} height={15} />
+                      <Skeleton width={100} height={15} />
+                    </OrderData>
+                  </OrderInfo>
+                  <SectionTitle>
+                    {t('FROM', 'From')}
+                  </SectionTitle>
+                  <OrderBusiness>
+                    <BusinessWrapper>
+                      <LogoWrapper>
+                        <Skeleton style={{ margin: '7px' }} width={75} height={45} />
+                      </LogoWrapper>
+                      <BusinessInfo>
+                        <Skeleton width={200} height={30} />
+                        <Skeleton width={100} height={15} />
+                        <Skeleton width={100} height={15} />
+                        <Skeleton width={100} height={15} />
+                      </BusinessInfo>
+                    </BusinessWrapper>
+                    <ActionsBlock />
+                  </OrderBusiness>
+                  <SectionTitle>
+                    {t('TO', 'To')}
+                  </SectionTitle>
+                  <OrderCustomer>
+                    <CustomerInfo>
+                      <Skeleton style={{ margin: '7px' }} width={75} height={30} />
+                      <Skeleton width={100} height={15} />
+                      <Skeleton width={100} height={15} />
+                      <Skeleton width={100} height={15} />
+                    </CustomerInfo>
+                    <ShareOrderWrapper>
+                      <Skeleton width={100} height={15} />
+                    </ShareOrderWrapper>
+                  </OrderCustomer>
+                </LeftContentWrapper>
+              </LeftPanel>
+              <RightPanel>
+                <RightContentWrapper>
+                  <Content className='order-content'>
+                    {windowSize.width > 1020 &&
+                      <Skeleton height={100} />}
+                    <Skeleton height={100} />
+                    <Skeleton height={100} />
+                    <Skeleton height={40} />
+                  </Content>
+                </RightContentWrapper>
+              </RightPanel>
+            </WrapperContainer>
           </WrapperContainer>
         )}
         {!loading && error && (

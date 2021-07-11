@@ -22,8 +22,6 @@ import { capitalize } from '../../../../../utils'
 import { AddressesPopover } from '../../../../../components/AddressesPopover'
 import { UserPopover } from '../../../../../components/UserPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
-import { CartPopover } from '../../../../../components/CartPopover'
-import { CartContent } from '../../../../../components/CartContent'
 import { Modal } from '../../../../../components/Modal'
 import { MomentContent } from '../../../../../components/MomentContent'
 import { AddressList } from '../../../../../components/AddressList'
@@ -32,8 +30,11 @@ import { HeaderOption } from '../../../../../components/HeaderOption'
 import { SidebarMenu } from '../../../../../components/SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
+
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
+import { CartSidebar } from '../CartSidebar'
 import { LanguageSelector } from '../LanguageSelector'
+import { CartContent } from '../CartContent'
 export const Header = (props) => {
   const {
     isHome,
@@ -211,7 +212,7 @@ export const Header = (props) => {
                       )}
                       {isShowOrderOptions && (
                         windowSize.width > 768 ? (
-                          <CartPopover
+                          <CartSidebar
                             open={openPopover.cart}
                             carts={cartsWithProducts}
                             onClick={() => handleTogglePopover('cart')}
@@ -279,7 +280,7 @@ export const Header = (props) => {
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             width='70%'
-            padding={modalSelected === 'address' ? '20px' : '5px'}
+            padding={modalSelected === 'address' ? '15px' : '5px'}
           >
             {modalSelected === 'cart' && (
               <CartContent

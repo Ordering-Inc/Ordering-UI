@@ -5,7 +5,6 @@ export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid #BFBFBF;
   box-shadow: 0px 0px 6px #00000029;
   opacity: 1;
 

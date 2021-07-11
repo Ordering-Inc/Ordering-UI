@@ -24,6 +24,7 @@ import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import searchIcon from './template/assets/images/search-icon.svg'
 import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
+import emptyCart from './template/assets/images/empty-cart.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -100,7 +101,8 @@ theme.images = {
     searchIcon,
     notNetwork,
     emptyActiveOrders,
-    emptyPastOrders
+    emptyPastOrders,
+    emptyCart
   },
 
   order: {

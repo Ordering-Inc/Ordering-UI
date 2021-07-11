@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig } from 'ordering-components'
 import { Button } from '../../../../../styles/Buttons'
-import { ProductItemAccordion } from '../../../../../components/ProductItemAccordion'
 import { Confirm } from '../../../../../components/Confirm'
 import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
@@ -9,6 +8,7 @@ import { ProductForm } from '../../../../../components/ProductForm'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
+import { ProductItemAccordion } from '../ProductItemAccordion'
 import {
   CartContainer,
   OrderBill,

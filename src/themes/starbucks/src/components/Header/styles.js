@@ -9,7 +9,7 @@ export const Header = styled.div`
 export const InnerHeader = styled.div`
   display: flex;
   width: 100%;
-  color: #FFF;
+  color: #000;
   justify-content: space-between;
   width: 98%;
   margin: 10px auto;

@@ -397,7 +397,8 @@ export const OrderBill = styled.div`
   border-radius: 7px;
   overflow: hidden;
   padding: 20px;
-  margin-top: 30px;
+  margin-top: 25px;
+  margin-bottom:20px;
   @media (min-width: 1024px) {
     margin-top: 45px;
   }
@@ -481,6 +482,7 @@ export const SkeletonBlockWrapp = styled.div`
   align-items: center;
   margin-top: 20px;
   line-height: 40px;
+  width: 100%;
 `
 export const ShareOrder = styled.div`
   display: flex;

@@ -23,7 +23,8 @@ import {
   ProductNotAvailable,
   ProductSelect,
   ProductOptionsList,
-  ProductQuantity
+  ProductQuantity,
+  CartActions
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -114,48 +115,51 @@ export const ProductItemAccordion = (props) => {
                 <ProductImage bgimage={product?.images} />
               </WrapperProductImage>
             )}
-            {isCartProduct && !isCartPending && getProductMax ? (
-              <ProductSelect
-                ref={productSelect}
-                value={product.quantity}
-                onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-              >
-                {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                  <option
-                    key={i}
-                    value={i}
-                    disabled={offsetDisabled(product) < i && i !== 0}
-                  >
-                    {i === 0 ? t('REMOVE', 'Remove') : i}
-                  </option>
-                ))}
-              </ProductSelect>
-            ) : (
-              <ProductQuantity>
-                {product?.quantity}
-              </ProductQuantity>
-            )}
+
             <ContentInfo>
               <h3>{product.name}</h3>
-              {windowSize.width <= 410 && (
-                <span>
-                  <p>{parsePrice(product.total || product.price)}</p>
-                  {isCartProduct && !isCartPending && (
-                    <div>
-                      {onEditProduct && (
-                        <span ref={productActionsEdit}>
-                          <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
-                        </span>
-                      )}
-                      {onDeleteProduct && (
-                        <span ref={productActionsDelete}>
-                          <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </span>
-              )}
+              <CartActions>
+                {isCartProduct && !isCartPending && getProductMax ? (
+                  <ProductSelect
+                    ref={productSelect}
+                    value={product.quantity}
+                    onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+                  >
+                    {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                      <option
+                        key={i}
+                        value={i}
+                        disabled={offsetDisabled(product) < i && i !== 0}
+                      >
+                        {i === 0 ? t('REMOVE', 'Remove') : i}
+                      </option>
+                    ))}
+                  </ProductSelect>
+                ) : (
+                  <ProductQuantity>
+                    {product?.quantity}
+                  </ProductQuantity>
+                )}
+
+                {isCartProduct && !isCartPending && (
+                  <ProductActions>
+                    <ProductActionsEdit
+                      ref={productActionsEdit}
+                      onClick={() => onEditProduct(product)}
+                      disabled={orderState.loading}
+                    >
+                      <TiPencil color='#F2BB40' />
+                    </ProductActionsEdit>
+                    <ProductActionsDelete
+                      ref={productActionsDelete}
+                      onClick={() => onDeleteProduct(product)}
+                      disabled={orderState.loading}
+                    >
+                      <VscTrash color='#D81212' />
+                    </ProductActionsDelete>
+                  </ProductActions>
+                )}
+              </CartActions>
             </ContentInfo>
           </ProductInfo>
 
@@ -171,24 +175,7 @@ export const ProductItemAccordion = (props) => {
                   </p>
                 )}
               </ProductPrice>
-              {isCartProduct && !isCartPending && (
-                <ProductActions>
-                  <ProductActionsEdit
-                    ref={productActionsEdit}
-                    onClick={() => onEditProduct(product)}
-                    disabled={orderState.loading}
-                  >
-                    <TiPencil color='#F2BB40' />
-                  </ProductActionsEdit>
-                  <ProductActionsDelete
-                    ref={productActionsDelete}
-                    onClick={() => onDeleteProduct(product)}
-                    disabled={orderState.loading}
-                  >
-                    <VscTrash color='#D81212' />
-                  </ProductActionsDelete>
-                </ProductActions>
-              )}
+
             </ProductPriceSection>
           )}
 

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 export const CartContainer = styled.div`
-  border-bottom: 1px solid #F0F0F0;
+  /* border-bottom: 1px solid #F0F0F0; */
 `
 export const CartSticky = styled.div`
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
