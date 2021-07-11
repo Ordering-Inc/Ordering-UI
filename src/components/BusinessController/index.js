@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils, useOrder } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrder } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
 
 import { convertHoursToMinutes } from '../../utils'
-
-import { BusinessController as BusinessSingleCard } from './test'
 
 import {
   ContainerCard,
