@@ -64,7 +64,7 @@ const BusinessProductsListingUI = (props) => {
   } = props
 
   const [{ configs }] = useConfig()
-  const { add_product_with_one_click } = configs
+  const addProductWithOneClick = configs?.add_product_with_one_click?.value
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -93,7 +93,7 @@ const BusinessProductsListingUI = (props) => {
     setOpenBusinessInformation(true)
   }
   const onProductClick = (product) => {
-    if(product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && add_product_with_one_click.value) {
+    if(product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
         addProduct(product, currentCart)
     } else {
       onProductRedirect({
