@@ -36,11 +36,7 @@ var HeaderImg = _styledComponents.default.div(_templateObject4 || (_templateObje
 
 exports.HeaderImg = HeaderImg;
 
-var HeaderInfo = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  background-color: #DCFFDB;\n  display: flex;\n  padding: 20px;\n  border-radius: 7px;\n  \n  @media (min-width: 678px) {\n    align-items: center;\n    justify-content: space-between;\n    border-radius: ", ";\n  }\n"])), function (props) {
-  var _props$theme;
-
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? '0 7px 7px 0' : '7px 0 0 7px';
-});
+var HeaderInfo = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  background-color: #DCFFDB;\n  display: flex;\n  padding: 20px;\n  \n  @media (min-width: 678px) {\n    align-items: center;\n    justify-content: space-between;\n  }\n"])));
 
 exports.HeaderInfo = HeaderInfo;
 
@@ -71,9 +67,9 @@ var BusinessInfo = _styledComponents.default.div(_templateObject12 || (_template
 exports.BusinessInfo = BusinessInfo;
 
 var ActionsBlock = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  > * {\n    margin-right: 5px;\n    ", "\n  }\n  svg {\n    font-size: 20px;\n    cursor: pointer;\n    color: ", ";\n  }\n\n  @media (min-width: 380px) {\n    flex-direction: row;\n\n    svg {\n      font-size: 24px;\n    }\n  }\n"])), function (props) {
-  var _props$theme2;
+  var _props$theme;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n  "])));
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n  "])));
 }, function (props) {
   return props.theme.colors.primary;
 });
@@ -95,9 +91,9 @@ var OrderDriver = (0, _styledComponents.default)(OrderCustomer)(_templateObject1
 exports.OrderDriver = OrderDriver;
 
 var WrapperDriver = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n\n  div.photo {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\n    svg {\n      width: 70px;\n      height: 70px;\n      margin: 0px 10px;\n      ", "\n    }\n  }\n\n"])), function (props) {
-  var _props$theme3;
+  var _props$theme2;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
 });
 
 exports.WrapperDriver = WrapperDriver;
@@ -105,9 +101,9 @@ var OrderProducts = (0, _styledComponents.default)(OrderCustomer)(_templateObjec
 exports.OrderProducts = OrderProducts;
 
 var OrderBill = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  display: flex;\n  flex-direction: column;\n  table {\n    margin: 10px 0;\n    flex: 1;\n    font-size: 12px;\n    td span {\n      unicode-bidi: bidi-override;\n    }\n    tr td:nth-child(2) {\n      text-align: right;\n      ", "\n    }\n  }\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    table {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
-  var _props$theme4;
+  var _props$theme3;
 
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n        text-align: left;\n      "])));
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n        text-align: left;\n      "])));
 });
 
 exports.OrderBill = OrderBill;
@@ -146,17 +142,17 @@ var MessagesIcon = _styledComponents.default.span(_templateObject29 || (_templat
 exports.MessagesIcon = MessagesIcon;
 
 var ExclamationWrapper = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
-  var _props$theme5, _props$theme5$colors;
+  var _props$theme4, _props$theme4$colors;
 
-  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : (_props$theme5$colors = _props$theme5.colors) === null || _props$theme5$colors === void 0 ? void 0 : _props$theme5$colors.primary;
+  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : (_props$theme4$colors = _props$theme4.colors) === null || _props$theme4$colors === void 0 ? void 0 : _props$theme4$colors.primary;
 });
 
 exports.ExclamationWrapper = ExclamationWrapper;
 
 var OrderPayInfoWrapper = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  margin: 10px 0;\n  ", "\n  h3 {\n    font-size: 18px;\n    margin: 0px;\n  }\n"])), function (props) {
-  var _props$theme6;
+  var _props$theme5;
 
-  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    padding-left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    padding-right: 20px;\n  "])));
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    padding-left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    padding-right: 20px;\n  "])));
 });
 
 exports.OrderPayInfoWrapper = OrderPayInfoWrapper;
@@ -166,9 +162,9 @@ var OrderPayInfoContent = _styledComponents.default.div(_templateObject34 || (_t
 exports.OrderPayInfoContent = OrderPayInfoContent;
 
 var OrderPayMethodIcon = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  border: 1px solid #B1BCCC;\n  padding: 3px 10px;\n  border-radius: 2px;\n  ", "\n  svg {\n    font-size: 20px;\n  }\n"])), function (props) {
-  var _props$theme7;
+  var _props$theme6;
 
-  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    margin-right: 20px;\n  "])));
+  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    margin-right: 20px;\n  "])));
 });
 
 exports.OrderPayMethodIcon = OrderPayMethodIcon;

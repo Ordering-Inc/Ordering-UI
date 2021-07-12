@@ -54,12 +54,10 @@ export const HeaderInfo = styled.div`
   background-color: #DCFFDB;
   display: flex;
   padding: 20px;
-  border-radius: 7px;
   
   @media (min-width: 678px) {
     align-items: center;
     justify-content: space-between;
-    border-radius: ${props => props.theme?.rtl ? '0 7px 7px 0' : '7px 0 0 7px'};
   }
 `
 
