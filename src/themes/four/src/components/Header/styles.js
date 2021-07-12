@@ -34,11 +34,14 @@ export const Header = styled.div`
 
     #list {
       right: initial;
-      svg {
-        path {
-          fill: initial !important;
+      ${({ isStorePage }) => !isStorePage && css`
+        border-color: ${props => props.theme.colors.primary};
+        background-color: #FFF;
+        border-radius: 8px;
+        #item {
+          color: ${props => props.theme.colors.primary};
         }
-      }
+      `}
     }
   }
 
