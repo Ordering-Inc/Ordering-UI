@@ -146,11 +146,14 @@ const BusinessesListingUI = (props) => {
           )}
         </WrapperSearch>
 
-        <BusinessesMap
-          businessList={businessesList.businesses}
-          userLocation={orderState?.options?.address?.location}
-          setErrors={setMapErrors}
-        />
+        {activeMap && (
+          <BusinessesMap
+            businessList={businessesList.businesses}
+            userLocation={orderState?.options?.address?.location}
+            setErrors={setMapErrors}
+          />
+        )}
+
         {isCustomLayout && onRedirectPage && (
           <>
             <OrdersOption
@@ -206,6 +209,7 @@ const BusinessesListingUI = (props) => {
                 key={business.id}
                 className='card'
                 business={business}
+                isBusinessOpen={business.open}
                 handleCustomClick={handleBusinessClick}
                 orderType={orderState?.options?.type}
                 isCustomLayout={isCustomLayout}

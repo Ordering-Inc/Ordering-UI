@@ -49,14 +49,12 @@ export const HomeHero = (props) => {
 
   return (
     <>
-      {
-      props.beforeElements?.map((BeforeElement, i) => (
+      {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
         </React.Fragment>))
       }
-      {
-      props.beforeComponents?.map((BeforeComponent, i) => (
+      {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))
       }
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
@@ -112,15 +110,13 @@ export const HomeHero = (props) => {
           />
         </Modal>
       </HeroContainer>
-      {
-        props.afterComponents?.map((AfterComponent, i) => (
-          <AfterComponent key={i} {...props} />))
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))
       }
-      {
-        props.afterElements?.map((AfterElement, i) => (
-          <React.Fragment key={i}>
-            {AfterElement}
-          </React.Fragment>))
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))
       }
     </>
   )

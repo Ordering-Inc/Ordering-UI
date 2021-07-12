@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js/pure'
 import { useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
-import { Checkout } from '../../../src/themes/starbucks/src/components/Checkout'
+
+import { Checkout } from '../../../src/components/Checkout'
 import { useEvent, useOrder, useLanguage } from 'ordering-components'
+
 export const CheckoutPage = (props) => {
   const { cartUuid } = useParams()
   const [events] = useEvent()
@@ -11,9 +13,11 @@ export const CheckoutPage = (props) => {
   const [orderState, { confirmCart, changeMoment }] = useOrder()
   const [, t] = useLanguage()
   const stripePayments = ['stripe', 'stripe_connect', 'stripe_direct']
+
   const useQuery = () => {
     return new URLSearchParams(useLocation().search)
   }
+
   const actionsBeforePlace = async (paymethod, cart) => {
     console.log('actionsBeforePlace', paymethod, cart)
     if (stripePayments.includes(paymethod.gateway)) {
@@ -83,6 +87,7 @@ export const CheckoutPage = (props) => {
       })
     }
   }
+
   const checkoutProps = {
     ...props,
     cartUuid,

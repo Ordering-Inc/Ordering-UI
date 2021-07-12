@@ -22,10 +22,9 @@ const OrderTypeSelectorHeaderUI = (props) => {
   return (
     <OrderTypeWrapper>
       <Select
-        options={
-          configTypes
-            ? orderTypes.filter(type => configTypes?.includes(type.value))
-            : orderTypes
+        options={configTypes
+          ? orderTypes.filter(type => configTypes?.includes(type.value))
+          : orderTypes
         }
         defaultValue={defaultType || defaultValue || typeSelected}
         onChange={(orderType) => handleChangeOrderType(orderType)}

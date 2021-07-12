@@ -40,7 +40,6 @@ const BusinessProductsListUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
-        <h2> Menu </h2>
         {category?.id && (
           <ProductsListing>
             {
