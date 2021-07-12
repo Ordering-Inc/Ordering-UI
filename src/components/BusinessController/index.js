@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage, useUtils } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrder } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
@@ -36,17 +36,18 @@ const BusinessControllerUI = (props) => {
     isSkeleton,
     business,
     getBusinessOffer,
-    orderState,
     handleClick,
     orderType,
     isCustomLayout,
     isShowCallcenterInformation,
-    isBusinessOpen
+    isBusinessOpen,
+    businessWillCloseSoonMinutes
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, parseNumber, optimizeImage }] = useUtils()
+  const [orderState] = useOrder()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -92,6 +93,9 @@ const BusinessControllerUI = (props) => {
                     </div>
                   )}
                 </BusinessTags>
+                {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
+                  <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
+                )}
                 {!isBusinessOpen && <h1>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>
             )}
