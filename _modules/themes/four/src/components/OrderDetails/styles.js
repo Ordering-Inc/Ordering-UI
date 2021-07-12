@@ -28,7 +28,7 @@ var WrapperContainer = _styledComponents.default.div(_templateObject2 || (_templ
 
 exports.WrapperContainer = WrapperContainer;
 
-var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  position: relative;\n  margin-bottom: 50px;\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    position: absolute;\n    z-index: 10;\n    top: 10px;\n    left: 10px;\n    color: #000;\n\n    svg {\n      width: 20px;\n      height: 20px;\n      margin-right: 10px\n    }\n  }\n"])));
+var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  position: relative;\n  margin-bottom: 50px;\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    position: absolute;\n    z-index: 10;\n    top: 10px;\n    left: 10px;\n    color: #000;\n\n    svg {\n      width: 20px;\n      height: 20px;\n      margin-right: 10px;\n    }\n  }\n"])));
 
 exports.Header = Header;
 

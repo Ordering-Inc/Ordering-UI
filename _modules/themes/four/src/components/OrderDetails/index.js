@@ -454,11 +454,25 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 80
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 300
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
+    height: 150,
+    style: {
+      marginBottom: '40px'
+    }
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
+    height: 300,
+    style: {
+      marginBottom: '20px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 100,
+    style: {
+      marginBottom: '20px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 100,
+    style: {
+      marginBottom: '20px'
+    }
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 200
   })))), !loading && error && (error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

@@ -441,10 +441,10 @@ const OrderDetailsUI = (props) => {
           <WrapperContainer isLoading className='skeleton-loading'>
             <SkeletonBlockWrapp>
               <SkeletonBlock width={80}>
-                <Skeleton height={300} />
-                <Skeleton />
-                <Skeleton height={100} />
-                <Skeleton height={100} />
+                <Skeleton height={150} style={{ marginBottom: '40px' }} />
+                <Skeleton height={300} style={{ marginBottom: '20px' }} />
+                <Skeleton height={100} style={{ marginBottom: '20px' }} />
+                <Skeleton height={100} style={{ marginBottom: '20px' }} />
                 <Skeleton />
                 <Skeleton height={200} />
               </SkeletonBlock>
