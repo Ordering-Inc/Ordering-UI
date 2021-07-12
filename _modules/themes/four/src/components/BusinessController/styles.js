@@ -118,7 +118,7 @@ exports.Medadata = Medadata;
 
 var CLosedMark = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 9px;\n  ", "\n"])), function (_ref4) {
   var isClosed = _ref4.isClosed;
-  return isClosed && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    background: rgb(80 80 80 / 50%);\n  "])));
+  return isClosed && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    background: rgb(0 0 0 / 30%);\n    h1 {\n      color: #FFF;\n      text-transform: uppercase;\n      font-size: 24px;\n    }\n  "])));
 });
 
 exports.CLosedMark = CLosedMark;
