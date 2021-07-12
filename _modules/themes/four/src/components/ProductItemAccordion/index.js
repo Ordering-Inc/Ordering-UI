@@ -59,6 +59,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var isCheckout = props.isCheckout,
       isCartPending = props.isCartPending,
       isCartProduct = props.isCartProduct,
+      isOrderDetails = props.isOrderDetails,
       product = props.product,
       changeQuantity = props.changeQuantity,
       getProductMax = props.getProductMax,
@@ -158,7 +159,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     className: "info"
   }, (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     bgimage: product === null || product === void 0 ? void 0 : product.images
-  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfoLeftWrapper, null, isOrderDetails && /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement("h3", null, product.name)), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
     onClick: function onClick() {
       return onEditProduct(product);
@@ -188,7 +189,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       return onDeleteProduct(product);
     },
     disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, null), " ", (!isCheckout && windowSize.width > 500 || isCheckout && windowSize.width > 1200) && t('REMOVE', 'Remove'))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))))), isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
+  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, null), " ", (!isCheckout && windowSize.width > 500 || isCheckout && windowSize.width > 1200) && t('REMOVE', 'Remove'))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))))), !isOrderDetails && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
     ref: productSelect,
     value: product.quantity,
     onChange: function onChange(e) {
@@ -200,7 +201,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       value: i,
       disabled: offsetDisabled(product) < i && i !== 0
     }, i === 0 ? t('REMOVE', 'Remove') : i);
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity)), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
   }))), /*#__PURE__*/_react.default.createElement(_styles.AccordionContent, {
     ref: content,
