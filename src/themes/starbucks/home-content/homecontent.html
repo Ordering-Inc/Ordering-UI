@@ -1,0 +1,169 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home|content</title>
+</head>
+<body>
+    <div class="star-bucks-home-content">
+        <div class="content-baner middle">
+            <div class="baner-title-section">
+                <div class="banner-title">
+                    Learn how you order ahead online
+                </div>
+            </div>
+            <div class="baner-image-section">
+                <img src="https://res.cloudinary.com/ordering2/image/upload/v1625256865/pcfz8o2mtbvgblq8lohv.png"
+                    alt=" ">
+            </div>
+        </div>
+        <div class="content-baner bottom">
+            <div class="baner-image-section">
+                <img src="https://res.cloudinary.com/ordering2/image/upload/v1625256898/yqweh1v94srnbxgh71kf.png"
+                    alt=" ">
+            </div>
+            <div class="baner-title-section">
+                <div class="banner-title">Order and pick up. Easy as that.</div>
+                <div class="baner-sub-title">Just open the app, order your favorites, and enjoy contactless pay. From
+                    there, choose whichever
+                    pickup method is best for you.
+                </div>
+                <div class="downloads-app">
+                    <div class="download-btns">
+                        <img src="https://res.cloudinary.com/ordering2/image/upload/v1625257796/sqg8pztfgwalfj4g4grh.png"
+                            alt="app store">
+                    </div>
+                    <div class="download-btns">
+                        <img src="https://res.cloudinary.com/ordering2/image/upload/v1625257882/vdzbhvtaxstgmeu9ws3l.png"
+                            alt="google play">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .content-baner {
+            display: flex;
+        }
+        .middle {
+            margin-bottom: 79px;
+            max-height: 435px;
+        }
+        .middle .banner-title {
+            width: 590px;
+        }
+        .baner-title-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: #E8F0ED;
+            width: 50%;
+        }
+        .baner-title-section div{
+            margin-bottom: 25px;
+        }
+        .baner-image-section {
+            display: block;
+            width: 50%;
+        }
+        .baner-image-section img {
+            width: 100%;
+            height: 100%;
+        }
+        .banner-title {
+            text-transform: uppercase;
+            font-size: 2.3rem;
+            color: #233E37;
+        }
+        .downloads-app {
+            display: flex;
+            margin: 10px;
+        }
+        .download-btns {
+            margin: 0 15px;
+        }
+        .baner-sub-title {
+            width: 625px;
+            color: #233E37;
+            font-size: 1.25rem;
+        }
+        @media(max-width: 1450px) {
+            .banner-title{
+                width: 93% !important;
+            }
+            .baner-sub-title{
+                width: 93%;
+            }
+        }
+
+        @media(max-width: 1200px) {
+            .banner-title{
+                font-size: 28px;
+            }
+
+            .baner-sub-title{
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            .download-btns img{
+                width: 145px;
+            }
+        }
+
+        @media(max-width: 850px) {
+            .content-baner.middle{
+                height: 220px;
+            }
+            .content-baner.bottom{
+                height: 280px;
+            }
+            .baner-title-section div{
+                margin-bottom: 0;
+            }
+            .banner-title{
+                font-size: 1.5rem;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 15px !important;
+            }
+            .baner-sub-title{
+                font-size: 1rem;
+            }
+            .download-btns img{
+                width: 130px;
+            }
+        }
+        @media(max-width: 480px) {
+            .content-baner{
+                flex-direction: column-reverse;
+            }
+            .content-baner.middle{
+                flex-direction: column;
+                height: unset;
+            }
+            .content-baner.bottom{
+                height: unset;
+            }
+            .banner-title{
+                width: 83% !important;
+            }
+            .baner-sub-title{
+                margin-bottom: 25px !important;
+            }
+            .baner-title-section{
+                width: 100%;
+                padding: 50px 0;
+            }
+            .baner-image-section{
+                width: 100%;
+            }
+            .baner-image-section img{
+                height: auto;
+            }
+        }
+    </style>
+</body>
+</html>
