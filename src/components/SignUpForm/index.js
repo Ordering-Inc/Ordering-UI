@@ -69,14 +69,14 @@ const SignUpFormUI = (props) => {
   const theme = useTheme()
   const emailInput = useRef(null)
   const [events] = useEvent()
-  
+
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
-  const isBusinessSignUp = configs?.business_signup_allow?.value === '1'
+  const [isSignupBusiness, setIsSignupBusiness] = useState(false)
 
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
@@ -235,9 +235,7 @@ const SignUpFormUI = (props) => {
       handleChangePhoneNumber(externalPhoneNumber, true)
     }
   }, [externalPhoneNumber])
-  const handleGoToPage = (data) => {
-    events.emit('go_to_page', data)
-  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -251,14 +249,28 @@ const SignUpFormUI = (props) => {
           <TitleHeroSide>
             <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
             <p>{t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}</p>
-            {
-            isBusinessSignUp ? 
-            ( <Button
-              color='primary'
-              onClick={() => handleGoToPage({ page: 'signupbusiness' })} name='signupbusiness'
-            >
-              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP_AS_BUSINESS', 'Sign up as business')}
-            </Button> ) : null}
+            {configs?.business_signup_allow?.value === '1' && (
+              <Button
+                color='primary'
+                name='signupbusiness'
+                onClick={() => {
+                  setIsSignupBusiness(!isSignupBusiness)
+                  handleChangeInput({
+                    target: {
+                      name: 'level',
+                      value: !isSignupBusiness === true ? 2 : 3
+                    }
+                  })
+                }}
+              >
+                {formState.loading
+                  ? `${t('LOADING', 'Loading')}...`
+                  : !isSignupBusiness
+                    ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
+                    : t('SIGN_UP', 'Sign up')
+                }
+              </Button>
+            )}
           </TitleHeroSide>
         </HeroSide>
         <FormSide isPopup={isPopup}>
