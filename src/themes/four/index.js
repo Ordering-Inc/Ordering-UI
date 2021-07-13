@@ -28,6 +28,7 @@ import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MomentPopover } from './src/components/MomentPopover'
 import { MyOrders } from './src/components/MyOrders'
+import { OrderDetails } from './src/components/OrderDetails'
 import { OrdersOption } from './src/components/OrdersOption'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
@@ -74,6 +75,7 @@ export {
   MomentControl,
   MomentContent,
   MyOrders,
+  OrderDetails,
   OrdersOption,
   ProductForm,
   ProductItemAccordion,

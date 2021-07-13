@@ -386,3 +386,12 @@ export const ProductQuantity = styled.span`
     margin-right: 0px;
   `}
 `
+
+export const ContentInfoLeftWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  > span {
+    margin: 0 15px;
+  }
+`
