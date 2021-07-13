@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProductQuantity = exports.ProductOptionsList = exports.ProductNotAvailable = exports.ProductSelect = exports.ProductPrice = exports.ProductPriceSection = exports.ProductActionsDelete = exports.ProductActionsEdit = exports.ProductActions = exports.ProductError = exports.ProductInfo = exports.ProductComment = exports.AccordionText = exports.AccordionContent = exports.ContentInfo = exports.ProductImage = exports.WrapperProductImage = exports.Accordion = exports.AccordionSection = void 0;
+exports.ContentInfoLeftWrapper = exports.ProductQuantity = exports.ProductOptionsList = exports.ProductNotAvailable = exports.ProductSelect = exports.ProductPrice = exports.ProductPriceSection = exports.ProductActionsDelete = exports.ProductActionsEdit = exports.ProductActions = exports.ProductError = exports.ProductInfo = exports.ProductComment = exports.AccordionText = exports.AccordionContent = exports.ContentInfo = exports.ProductImage = exports.WrapperProductImage = exports.Accordion = exports.AccordionSection = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -178,3 +178,7 @@ var ProductQuantity = _styledComponents.default.span(_templateObject30 || (_temp
 });
 
 exports.ProductQuantity = ProductQuantity;
+
+var ContentInfoLeftWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > span {\n    margin: 0 15px;\n  }\n"])));
+
+exports.ContentInfoLeftWrapper = ContentInfoLeftWrapper;

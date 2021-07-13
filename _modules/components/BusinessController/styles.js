@@ -41,7 +41,7 @@ var BusinessHero = _styledComponents.default.div(_templateObject3 || (_templateO
 
 exports.BusinessHero = BusinessHero;
 
-var BusinessHeaderStyled = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  min-height: 175px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 10px;\n\n  h1 {\n    color: #FFF;\n    opacity: 0.5;\n  }\n\n  @media (min-width: 481px) {\n    min-height: 200px;\n  }\n"])));
+var BusinessHeaderStyled = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  min-height: 175px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 10px;\n\n  h1 {\n    color: #FFF;\n    opacity: 0.7;\n  }\n\n  @media (min-width: 481px) {\n    min-height: 200px;\n  }\n"])));
 
 var BusinessHeader = function BusinessHeader(props) {
   var style = {};
