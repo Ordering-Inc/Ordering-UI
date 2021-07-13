@@ -45,6 +45,12 @@ export const TitleHeroSide = styled.div`
     margin: 0px;
     color: ${props => props.theme.colors.colorTextSignForm};
   }
+  
+  button {
+    margin-top: 15%;
+    padding: 1% 20%;
+    border-color: ${props => props.theme.colors.colorTextSignForm};
+  }
 `
 
 export const FormSide = styled(Side)`
