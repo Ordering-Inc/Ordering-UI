@@ -20,6 +20,12 @@ export const Header = styled.div`
     color: ${props => props.theme.colors.primary} !important;
     border: 1px solid ${props => props.theme.colors.primary};
 
+    svg {
+      path {
+        fill: ${props => props.theme.colors.primary} !important;
+      }
+    }
+
     ${props => props.theme?.rtl ? css`
       margin-right: 10px;
     ` : css`
@@ -28,6 +34,14 @@ export const Header = styled.div`
 
     #list {
       right: initial;
+      ${({ isStorePage }) => !isStorePage && css`
+        border-color: ${props => props.theme.colors.primary};
+        background-color: #FFF;
+        border-radius: 8px;
+        #item {
+          color: ${props => props.theme.colors.primary};
+        }
+      `}
     }
   }
 
@@ -55,6 +69,19 @@ export const Header = styled.div`
       border-radius: 8px;
       color: #FFF !important;
       border: 1px solid #FFF;
+      svg {
+        path {
+          fill: #FFF !important;
+        }
+      }
+
+      #list {
+        svg {
+          path {
+            fill: initial !important;
+          }
+        }
+      }
     }
   `}
 `

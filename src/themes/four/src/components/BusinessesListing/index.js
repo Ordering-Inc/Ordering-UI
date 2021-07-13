@@ -211,7 +211,7 @@ const BusinessesListingUI = (props) => {
             ))
           }
           {businessesList.loading && (
-            [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()].map(i => (
+            [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 20).keys()].map(i => (
               <BusinessController
                 key={i}
                 className='card'
@@ -280,7 +280,10 @@ const BusinessesListingUI = (props) => {
 export const BusinessesListing = (props) => {
   const businessListingProps = {
     ...props,
-    UIComponent: BusinessesListingUI
+    UIComponent: BusinessesListingUI,
+    paginationSettings: {
+      pageSize: 20
+    }
   }
 
   return <BusinessListController {...businessListingProps} />
