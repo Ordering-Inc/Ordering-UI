@@ -74,8 +74,8 @@ const SignUpFormUI = (props) => {
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
-  const isBusinessSignUp = (configs?.business_signup_allow?.value === "1" ? true : false)
-  
+  const isBusinessSignUp = configs?.business_signup_allow?.value === '1'
+
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
     cookiepolicy: 'single_host_origin',
