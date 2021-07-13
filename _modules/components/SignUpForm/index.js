@@ -78,7 +78,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$google_login, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$business_sig, _configs$google_login, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -138,6 +138,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       setPasswordSee = _useState8[1];
 
   var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+  var isBusinessSignUp = (configs === null || configs === void 0 ? void 0 : (_configs$business_sig = configs.business_signup_allow) === null || _configs$business_sig === void 0 ? void 0 : _configs$business_sig.value) === '1';
   var initParams = {
     client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
     cookiepolicy: 'single_host_origin',
@@ -319,7 +320,10 @@ var SignUpFormUI = function SignUpFormUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_SIGN_UP', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement(_styles.TitleHeroSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_SIGN_UP', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')), isBusinessSignUp ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    type: "submit"
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_UP_AS_BUSINESS', 'Sign up as business')) : null)), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("img", {
     id: "logo",
