@@ -10,7 +10,8 @@ import {
   useLanguage,
   useConfig,
   useSession,
-  ReCaptcha
+  ReCaptcha,
+  useEvent
 } from 'ordering-components'
 import {
   SignUpContainer,
@@ -67,7 +68,8 @@ const SignUpFormUI = (props) => {
   const [, { login }] = useSession()
   const theme = useTheme()
   const emailInput = useRef(null)
-
+  const [events] = useEvent()
+  
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
@@ -233,7 +235,9 @@ const SignUpFormUI = (props) => {
       handleChangePhoneNumber(externalPhoneNumber, true)
     }
   }, [externalPhoneNumber])
-
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
+  }
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -250,11 +254,11 @@ const SignUpFormUI = (props) => {
             {
             isBusinessSignUp ? 
             ( <Button
-                color='primary'
-                type='submit'
-              >
-                {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP_AS_BUSINESS', 'Sign up as business')}
-              </Button> ) : null}
+              color='primary'
+              onClick={() => handleGoToPage({ page: 'signupbusiness' })} name='signupbusiness'
+            >
+              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP_AS_BUSINESS', 'Sign up as business')}
+            </Button> ) : null}
           </TitleHeroSide>
         </HeroSide>
         <FormSide isPopup={isPopup}>

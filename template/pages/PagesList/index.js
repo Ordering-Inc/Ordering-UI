@@ -5,6 +5,7 @@ export const PagesList = (props) => {
   const routes = [
     { name: 'Home', slug: '/home' },
     { name: 'Sign Up', slug: '/signup' },
+    { name: 'Sign Up', slug: '/signupbusiness' },
     { name: 'Login', slug: '/login' },
     { name: 'Sign In', slug: '/signin' },
     { name: 'Forgot Password', slug: '/password/forgot' },
