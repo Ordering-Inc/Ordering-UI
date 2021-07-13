@@ -44,7 +44,7 @@ const BusinessHeaderStyled = styled.div`
 
   h1 {
     color: #FFF;
-    opacity: 0.5;
+    opacity: 0.7;
   }
 
   @media (min-width: 481px) {

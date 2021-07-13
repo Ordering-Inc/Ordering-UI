@@ -22,7 +22,8 @@ import {
   ProductNotAvailable,
   ProductSelect,
   ProductOptionsList,
-  ProductQuantity
+  ProductQuantity,
+  ContentInfoLeftWrapper
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -30,6 +31,7 @@ export const ProductItemAccordion = (props) => {
     isCheckout,
     isCartPending,
     isCartProduct,
+    isOrderDetails,
     product,
     changeQuantity,
     getProductMax,
@@ -109,7 +111,12 @@ export const ProductItemAccordion = (props) => {
               </WrapperProductImage>
             )}
             <ContentInfo>
-              <h3>{product.name}</h3>
+              <ContentInfoLeftWrapper>
+                {isOrderDetails && (
+                  <ProductQuantity>{product?.quantity}</ProductQuantity>
+                )}
+                <h3>{product.name}</h3>
+              </ContentInfoLeftWrapper>
               {(product?.valid || !isCartProduct) && (
                 <ProductPriceSection>
                   {isCartProduct && !isCartPending && (
@@ -176,26 +183,30 @@ export const ProductItemAccordion = (props) => {
             </ContentInfo>
           </ProductInfo>
 
-          {isCartProduct && !isCartPending && getProductMax ? (
-            <ProductSelect
-              ref={productSelect}
-              value={product.quantity}
-              onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-            >
-              {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                <option
-                  key={i}
-                  value={i}
-                  disabled={offsetDisabled(product) < i && i !== 0}
+          {!isOrderDetails && (
+            <>
+              {isCartProduct && !isCartPending && getProductMax ? (
+                <ProductSelect
+                  ref={productSelect}
+                  value={product.quantity}
+                  onChange={(e) => handleChangeQuantity(Number(e.target.value))}
                 >
-                  {i === 0 ? t('REMOVE', 'Remove') : i}
-                </option>
-              ))}
-            </ProductSelect>
-          ) : (
-            <ProductQuantity>
-              {product?.quantity}
-            </ProductQuantity>
+                  {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                    <option
+                      key={i}
+                      value={i}
+                      disabled={offsetDisabled(product) < i && i !== 0}
+                    >
+                      {i === 0 ? t('REMOVE', 'Remove') : i}
+                    </option>
+                  ))}
+                </ProductSelect>
+              ) : (
+                <ProductQuantity>
+                  {product?.quantity}
+                </ProductQuantity>
+              )}
+            </>
           )}
           <p>{parsePrice(product.total || product.price)}</p>
           {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (

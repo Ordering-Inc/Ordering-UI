@@ -131,7 +131,9 @@ const BusinessControllerUI = (props) => {
         </WrapperBusinessCard>
         {!isSkeleton && (
           <>
-            <BusinessTags>
+            <BusinessTags
+              isFeatured={business?.featured}
+            >
               {business?.featured &&
                 <span className='crown'>
                   <FaCrown />
