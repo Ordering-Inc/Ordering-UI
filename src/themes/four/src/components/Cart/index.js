@@ -161,18 +161,18 @@ const CartUI = (props) => {
               <table>
                 <tbody>
                   <tr>
-                    <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                    <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
                     <td>{cart.business.tax_type === 1 ? parsePrice((cart?.subtotal + cart?.tax) || 0) : parsePrice(cart?.subtotal || 0)}</td>
                   </tr>
                   {cart?.discount > 0 && cart?.total >= 0 && (
                     <tr>
                       {cart?.discount_type === 1 ? (
                         <td>
-                          {t('DISCOUNT', 'Discount')}
+                          {t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}
                           <span>{`(${verifyDecimals(cart?.discount_rate, parsePrice)}%)`}</span>
                         </td>
                       ) : (
-                        <td>{t('DISCOUNT', 'Discount')}</td>
+                        <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
                       )}
                       <td>- {parsePrice(cart?.discount || 0)}</td>
                     </tr>
@@ -181,7 +181,7 @@ const CartUI = (props) => {
                     cart.business.tax_type !== 1 && (
                       <tr>
                         <td>
-                          {t('TAX', 'Tax')}
+                          {t('TAX', theme?.defaultLanguages?.TAX || 'Tax')}
                           <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
                         </td>
                         <td>{parsePrice(cart?.tax || 0)}</td>
@@ -190,14 +190,14 @@ const CartUI = (props) => {
                   }
                   {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                     <tr>
-                      <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                      <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
                       <td>{parsePrice(cart?.delivery_price)}</td>
                     </tr>
                   )}
                   {cart?.driver_tip > 0 && (
                     <tr>
                       <td>
-                        {t('DRIVER_TIP', 'Driver tip')}
+                        {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}
                         {cart?.driver_tip_rate > 0 &&
                           parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
                           !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
@@ -211,7 +211,7 @@ const CartUI = (props) => {
                   {cart?.service_fee > 0 && (
                     <tr>
                       <td>
-                        {t('SERVICE_FEE', 'Service Fee')}
+                        {t('SERVICE_FEE', theme?.defaultLanguages?.SERVICE_FEE || 'Service Fee')}
                         <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
                       </td>
                       <td>{parsePrice(cart?.service_fee)}</td>
@@ -231,7 +231,7 @@ const CartUI = (props) => {
               <table className='total'>
                 <tbody>
                   <tr>
-                    <td>{t('TOTAL', 'Total')}</td>
+                    <td>{t('TOTAL', theme?.defaultLanguages?.TOTAL || 'Total')}</td>
                     <td>{cart?.total >= 1 && parsePrice(cart?.total)}</td>
                   </tr>
                 </tbody>
@@ -248,9 +248,9 @@ const CartUI = (props) => {
                 {!cart?.valid_address ? (
                   t('OUT_OF_COVERAGE', 'Out of Coverage')
                 ) : !cart?.valid_maximum ? (
-                  `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+                  `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
                 ) : !cart?.valid_minimum ? (
-                  `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+                  `${t('MINIMUN_SUBTOTAL_ORDER', theme?.defaultLanguages?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
                 ) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
               </Button>
             </CheckoutAction>
@@ -259,7 +259,7 @@ const CartUI = (props) => {
         <Confirm
           title={t('PRODUCT', 'Product')}
           content={confirm.content}
-          acceptText={t('ACCEPT', 'Accept')}
+          acceptText={t('ACCEPT', theme?.defaultLanguages?.ACCEPT || 'Accept')}
           open={confirm.open}
           onClose={() => setConfirm({ ...confirm, open: false })}
           onCancel={() => setConfirm({ ...confirm, open: false })}

@@ -140,7 +140,7 @@ const BusinessControllerUI = (props) => {
                 </span>}
               <div>
                 {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
-                {!business?.open && <span>{t('PREORDER', 'PreOrder')}</span>}
+                {!business?.open && <span>{t('PREORDER', theme?.defaultLanguages?.PREORDER || 'PreOrder')}</span>}
               </div>
             </BusinessTags>
             <CLosedMark isClosed={!isSkeleton && !business?.open}>
