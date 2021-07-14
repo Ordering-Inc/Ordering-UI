@@ -380,7 +380,12 @@ const SignUpFormUI = (props) => {
               type='submit'
               disabled={formState.loading || validationFields?.loading}
             >
-              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
+              {formState.loading
+                  ? `${t('LOADING', 'Loading')}...`
+                  : isSignupBusiness
+                    ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
+                    : t('SIGN_UP', 'Sign up')
+                }
             </Button>
           </FormInput>
           {elementLinkToLogin && (
