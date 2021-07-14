@@ -6,6 +6,7 @@ import { Alert } from './src/components/Confirm'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
+import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
 
 /**
@@ -147,6 +148,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <OrderingProvider Alert={Alert} settings={configFile}>
       <Router />
+      <Toast />
     </OrderingProvider>
   </ThemeProvider>
   , wrapper)
