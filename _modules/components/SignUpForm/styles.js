@@ -33,7 +33,9 @@ var HeroSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templa
 });
 exports.HeroSide = HeroSide;
 
-var TitleHeroSide = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n\n  h1 {\n    font-size: 50px;\n  }\n\n  h1,\n  p {\n    margin: 0px;\n    color: ", ";\n  }\n"])), function (props) {
+var TitleHeroSide = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n\n  h1 {\n    font-size: 50px;\n  }\n\n  h1,\n  p {\n    margin: 0px;\n    color: ", ";\n  }\n  \n  button {\n    margin-top: 15%;\n    padding: 1% 20%;\n    border-color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.colorTextSignForm;
+}, function (props) {
   return props.theme.colors.colorTextSignForm;
 });
 

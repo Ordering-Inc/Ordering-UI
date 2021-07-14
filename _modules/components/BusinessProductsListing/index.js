@@ -80,7 +80,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _props$beforeElements, _props$beforeComponen, _currentCart$products, _theme$defaultLanguag7, _businessState$busine, _business$categories, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _currentCart$products2, _currentCart$products3, _currentCart$products4, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _error$, _theme$defaultLanguag16, _currentCart$products5, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _currentCart$products6, _productModal$error$, _theme$defaultLanguag21, _props$afterComponent, _props$afterElements;
+  var _configs$add_product_, _Object$values$find, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _props$beforeElements, _props$beforeComponen, _currentCart$products, _theme$defaultLanguag7, _businessState$busine, _business$categories, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _currentCart$products2, _currentCart$products3, _currentCart$products4, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _error$, _theme$defaultLanguag16, _currentCart$products5, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _currentCart$products6, _productModal$error$, _theme$defaultLanguag21, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -104,6 +104,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleChangeSortBy = props.handleChangeSortBy,
       isCartOnProductsList = props.isCartOnProductsList,
       errorQuantityProducts = props.errorQuantityProducts;
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var addProductWithOneClick = configs === null || configs === void 0 ? void 0 : (_configs$add_product_ = configs.add_product_with_one_click) === null || _configs$add_product_ === void 0 ? void 0 : _configs$add_product_.value;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -114,8 +120,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       t = _useLanguage2[1];
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      carts = _useOrder2[0].carts;
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      carts = _useOrder2[0].carts,
+      addProduct = _useOrder2[1].addProduct;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -185,14 +192,18 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var onProductClick = function onProductClick(product) {
-    onProductRedirect({
-      slug: business === null || business === void 0 ? void 0 : business.slug,
-      product: product.id,
-      category: product.category_id
-    });
-    setCurProduct(product);
-    setModalIsOpen(true);
-    events.emit('product_clicked', product);
+    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
+      addProduct(product, currentCart);
+    } else {
+      onProductRedirect({
+        slug: business === null || business === void 0 ? void 0 : business.slug,
+        product: product.id,
+        category: product.category_id
+      });
+      setCurProduct(product);
+      setModalIsOpen(true);
+      events.emit('product_clicked', product);
+    }
   };
 
   var handlerProductAction = function handlerProductAction(product) {
