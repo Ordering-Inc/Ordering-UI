@@ -10,14 +10,12 @@ import {
 } from 'ordering-components'
 import { Alert } from '../../../../../components/Confirm'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
-import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
+import { InputPhoneNumber } from '../InputPhoneNumber'
 import {
   LoginContainer,
   FormSide,
-  HeroSide,
   FormInput,
   RedirectLink,
-  TitleHeroSide,
   SocialButtons,
   LoginWith,
   SkeletonSocialWrapper,
@@ -27,7 +25,9 @@ import {
   ReCaptchaWrapper,
   InputBeforeIcon,
   InputWrapper,
-  LoginDivider
+  LoginDivider,
+  DividerLine,
+  Title
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -45,7 +45,7 @@ import OtpInput from 'react-otp-input'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 import BsLock from '@meronex/icons/bs/BsLock'
-import GoMail from '@meronex/icons/go/GoMail';
+import GoMail from '@meronex/icons/go/GoMail'
 import { GoogleLoginButton } from '../GoogleLogin'
 
 const LoginFormUI = (props) => {
@@ -254,21 +254,8 @@ const LoginFormUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <LoginContainer isPopup={isPopup}>
-        {/* <HeroSide>
-          <TitleHeroSide>
-            <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
-            {(loginWithOtpState)
-              ? willVerifyOtpState
-                ? (
-                  <p>
-                    {`${t('SUBTITLE_ENTER_OTP', 'Please enter the verification code we sent to your mobile')} **${credentials?.cellphone?.substring(credentials?.cellphone?.length - 2)}`}
-                  </p>)
-                : <p>{t('SUBTITLE_REQUEST_OTP', 'Enter your cellphone to get verify code.')}</p>
-              : <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>}
-          </TitleHeroSide>
-        </HeroSide> */}
         <FormSide isPopup={isPopup}>
-          <img src={theme?.images?.logos?.logotype} alt='Logo login' width='200' height='66' loading='lazy' />
+          <Title>{t('LOGIN', 'Login')}</Title>
 
           {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
             <LoginWith isPopup={isPopup}>
@@ -440,7 +427,9 @@ const LoginFormUI = (props) => {
             </RedirectLink>
           )}
           <LoginDivider>
-            login with
+            <DividerLine />
+            <p>{t('OR', 'or')}</p>
+            <DividerLine />
           </LoginDivider>
           {(!props.isDisableButtons && !loginWithOtpState) && (
             Object.keys(configs).length > 0 ? (

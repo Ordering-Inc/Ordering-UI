@@ -5,6 +5,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  border-bottom: 1px solid #E9ECEF;
 `
 
 export const InnerHeader = styled.div`
@@ -124,29 +125,41 @@ export const Menu = styled.div`
     margin: 0 5px;
   }
 
+  > span {
+    #select-input {
+      background: transparent !important;
+    }
+  }
+
   .moment-popover {
     border-left: 1px solid #DEE2E6;
     border-right: 1px solid #DEE2E6;
     height: 100%;
     justify-content: center;
-    width: 400px;
-    margin-left: 0px;
     width: 200px;
+    display: none;
 
     @media (min-width: 1175px) {
       width: 250px;
-      margin-left: 50px;
     }
     
     @media (min-width: 1400px) {
       width: 400px;
-      margin-left: 100px;
+    }
+
+    > div: first-child {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 
-  .moment-popover,
   .address-popover {
+    flex-grow: 1;
     display: none;
+    > div: first-child {
+      width: 100%;
+    }
   }
 
   @media (min-width: 821px) {

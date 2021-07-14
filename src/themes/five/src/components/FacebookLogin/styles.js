@@ -11,9 +11,23 @@ export const FacebookButton = styled(Button)`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  justify-content: space-around;
+
+  &: active {
+    background: ${props => props.theme.colors.primaryContrast};
+  }
 
   svg {
     font-size: 16px;
     color: #1977F2;
+  }
+
+  div {
+    width: 80%;
+    text-align: left;
+
+    @media (min-width: 576px) {
+      width: 50%;
+    }
   }
 `
