@@ -10,8 +10,7 @@ import {
   useLanguage,
   useConfig,
   useSession,
-  ReCaptcha,
-  useEvent
+  ReCaptcha
 } from 'ordering-components'
 import {
   SignUpContainer,
@@ -68,7 +67,6 @@ const SignUpFormUI = (props) => {
   const [, { login }] = useSession()
   const theme = useTheme()
   const emailInput = useRef(null)
-  const [events] = useEvent()
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
