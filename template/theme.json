@@ -10,15 +10,18 @@
     }
   },
   "colors": {
-    "primary": "#D83520",
+    "primary": "#2C7BE5",
     "primaryContrast": "#FFF",
     "secundary": "#EFEFEF",
     "secundaryContrast": "#000",
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
     "backgroundPage": "#F8F8F8",
-    "colorPage": "#333",
-    "colorTextSignForm": "#FFFFFF"
+    "colorPage": "#FFFFFF",
+    "colorTextSignForm": "#FFFFFF",
+    "headingColor": "#344050",
+    "darkGray": "#909BA9",
+    "darkTextColor": "#344050"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
@@ -32,6 +35,7 @@
     "FIND_BUSINESSES": "Find businesse",
     "ADDRESS": "Address",
     "ADDRESSES": "Addresses",
+    "WHERE_DO_WE_DELIVERY": "Where do we delivery?",
 
     "SORT_BY": "Sort By",
     "RANK": "Rank",
