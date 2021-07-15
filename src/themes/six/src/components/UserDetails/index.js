@@ -58,9 +58,8 @@ const UserDetailsUI = (props) => {
         <Container>
           <Header className='user-form'>
             <h2>{t('CUSTOMER_DETAILS', 'Customer Details')}</h2>
-            <Button outline color='primary' className='edit' onClick={() => toggleIsEdit()}>{t('EDIT', 'Edit')}</Button>
+            {!isEdit && <Button outline color='primary' className='edit' onClick={() => toggleIsEdit()}>{t('EDIT', 'Edit')}</Button>}
           </Header>
-
           {!isEdit ? (
             <UserData>
               {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (
