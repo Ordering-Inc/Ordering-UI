@@ -19,6 +19,7 @@ import {
 } from 'ordering-components'
 import { Alert } from '../../../../../components/Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
+import { useTheme } from 'styled-components'
 
 import {
   FormControl,
@@ -60,6 +61,7 @@ const AddressFormUI = (props) => {
   const [configState] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const theme = useTheme()
   const formMethods = useForm()
   const [{ auth }] = useSession()
 
@@ -508,7 +510,7 @@ const AddressFormUI = (props) => {
       <Alert
         title={t('ADDRESS', 'Address')}
         content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
+        acceptText={t('ACCEPT', theme?.defaultLanguages?.ACCEPT || 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}

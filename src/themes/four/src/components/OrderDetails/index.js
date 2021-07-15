@@ -210,7 +210,7 @@ const OrderDetailsUI = (props) => {
                 )}
                 <HeaderInfo className='order-header'>
                   <HeaderText column>
-                    <h1>{t('ORDER_THANKS', 'Thanks for your order')}</h1>
+                    <h1>{t('ORDER_THANKS', theme?.defaultLanguages?.ORDER_THANKS || 'Thanks for your order')}</h1>
                     <p>{t('YOUR_ORDER_IS', 'Your order is :order_status:').replace(':order_status:', getOrderStatus(order?.status)?.value)}</p>
                   </HeaderText>
                   <HeaderImg>
@@ -291,7 +291,7 @@ const OrderDetailsUI = (props) => {
                   </table>
                   <OrderBillDivider />
                   <OrderPayInfoWrapper>
-                    <h3>{t('EXPORT_PAYMENT_METHOD', 'Payment Method')}</h3>
+                    <h3>{t('EXPORT_PAYMENT_METHOD', theme?.defaultLanguages?.EXPORT_PAYMENT_METHOD || 'Payment Method')}</h3>
                     <OrderPayInfoContent>
                       <OrderPayMethodIcon>
                         {getPayIcon(order?.paymethod?.id)}
