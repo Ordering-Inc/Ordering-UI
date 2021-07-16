@@ -5,6 +5,7 @@ import { HeaderItem, PopoverBody, PopoverArrow, Container, Title } from './style
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
+import { useTheme } from 'styled-components'
 
 export const AddressesPopover = (props) => {
   const {
@@ -16,6 +17,7 @@ export const AddressesPopover = (props) => {
   const [events] = useEvent()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const theme = useTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -99,7 +101,7 @@ export const AddressesPopover = (props) => {
           <Container>
             {auth && (
               <>
-                <Title>{t('ADDRESSES', 'Addresses')}</Title>
+                <Title>{t('ADDRESSES', theme?.defaultLanguages?.ADDRESSES || 'Addresses')}</Title>
                 <AddressList
                   isPopover
                   changeOrderAddressWithDefault
@@ -109,7 +111,7 @@ export const AddressesPopover = (props) => {
               </>)}
             {!auth && (
               <>
-                <Title>{t('ADDRESS', 'Address')}</Title>
+                <Title>{t('ADDRESS', theme?.defaultLanguages?.ADDRESSES || 'Address')}</Title>
                 <AddressForm
                   useValidationFileds
                   address={addressState || {}}
