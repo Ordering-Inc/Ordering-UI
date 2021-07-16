@@ -21,7 +21,7 @@ var PaymentMethodsContainer = _styledComponents.default.div(_templateObject || (
 
 exports.PaymentMethodsContainer = PaymentMethodsContainer;
 
-var PaymentMethodsList = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  flex-wrap: wrap;\n  @media (min-width: 841px) {\n    justify-content: space-around;\n  }\n"])));
+var PaymentMethodsList = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  flex-wrap: wrap;\n  @media (min-width: 841px) {\n    justify-content: space-around;\n  }\n\n  #select-input {\n    padding: 0 10px;\n\n    @media (min-width: 381px) {\n      padding: 0;\n    }\n  }\n"])));
 
 exports.PaymentMethodsList = PaymentMethodsList;
 

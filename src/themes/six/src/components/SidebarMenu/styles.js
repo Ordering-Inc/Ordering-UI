@@ -70,7 +70,7 @@ export const MenuLink = styled.div`
   text-align: inherit;
   display: block;
   width: 100%;
-  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};;
+  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};
   outline: none !important;
   box-sizing: border-box;
 
@@ -81,6 +81,16 @@ export const MenuLink = styled.div`
       display: none;
     }
   `};
+
+  ${({ inSide }) => inSide && css`
+    display: inline-flex;
+    padding: 0px 15px 5px;
+    border: 1px solid #000000;
+    width: fit-content;
+    float: right;
+    border-radius: 100px;
+    margin: 0 20px;
+  `}
 
   button:nth-child(2) {
     margin: 0 10px;
@@ -190,6 +200,6 @@ export const SideBarOver = styled.div`
   display: flex;
   width: 100vw;
   height: 100%;
-  z-index: 1;
+  z-index: 10;
   background-color: #1f1f1fb3;
 `

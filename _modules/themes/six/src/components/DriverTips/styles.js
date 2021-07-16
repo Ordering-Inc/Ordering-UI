@@ -21,7 +21,7 @@ var DriverTipContainer = _styledComponents.default.div(_templateObject || (_temp
 
 exports.DriverTipContainer = DriverTipContainer;
 
-var TipCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 16px;\n  padding: 10px;\n  border: 1px solid ", ";\n  cursor: pointer;\n  text-transform: capitalize;\n  height: 30px;\n  min-width: 30px;\n  font-size: 14px;\n  padding: 5px 20px;\n  &.active {\n    background-color: ", ";\n    color: ", ";\n  }\n  @media (min-width: 768px) {\n    padding: 5px 30px;\n  }\n"])), function (props) {
+var TipCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 16px;\n  padding: 10px;\n  border: 1px solid ", ";\n  cursor: pointer;\n  text-transform: capitalize;\n  height: 30px;\n  min-width: 30px;\n  font-size: 14px;\n  padding: 2px 20px;\n  &.active {\n    background-color: ", ";\n    color: ", ";\n  }\n  @media (min-width: 768px) {\n    padding: 5px 30px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primary;

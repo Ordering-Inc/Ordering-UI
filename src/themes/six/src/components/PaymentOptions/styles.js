@@ -13,6 +13,14 @@ export const PaymentMethodsList = styled.div`
   @media (min-width: 841px) {
     justify-content: space-around;
   }
+
+  #select-input {
+    padding: 0 10px;
+
+    @media (min-width: 381px) {
+      padding: 0;
+    }
+  }
 `
 export const PayCard = styled.div`
   cursor: pointer;

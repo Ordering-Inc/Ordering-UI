@@ -25,8 +25,6 @@ var _PageNotFound = require("../../../../../components/PageNotFound");
 
 var _FloatingButton = require("../../../../../components/FloatingButton");
 
-var _UpsellingPage = require("../../../../../components/UpsellingPage");
-
 var _Cart = require("../../../../../components/Cart");
 
 var _Select = require("../../../../../styles/Select");
@@ -40,6 +38,8 @@ var _BusinessBasicInformation = require("../BusinessBasicInformation");
 var _BusinessProductsCategories = require("../BusinessProductsCategories");
 
 var _BusinessProductsList = require("../BusinessProductsList");
+
+var _UpsellingPage = require("../UpsellingPage");
 
 var _ProductForm = require("../ProductForm");
 

@@ -195,26 +195,7 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
-  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
-    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
-    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1
-  })), /*#__PURE__*/_react.default.createElement(_styles.Hr, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    style: {
-      marginTop: '25px'
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
-    variant: "address",
-    addressState: options === null || options === void 0 ? void 0 : (_options$address4 = options.address) === null || _options$address4 === void 0 ? void 0 : (_options$address4$add = _options$address4.address) === null || _options$address4$add === void 0 ? void 0 : (_options$address4$add2 = _options$address4$add.split(',')) === null || _options$address4$add2 === void 0 ? void 0 : _options$address4$add2[0],
-    onClick: function onClick(variant) {
-      return openModal(variant);
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
-    variant: "moment",
-    momentState: options === null || options === void 0 ? void 0 : options.moment,
-    onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function (variant) {
-      return openModal(variant);
-    }
-  }))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'profile'
@@ -234,11 +215,31 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/profile/orders'
   }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/profile/orders'
-  }, t('ORDERS', 'Orders'))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
+  }, t('ORDERS', 'Orders')))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
+    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
+    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1
+  })), /*#__PURE__*/_react.default.createElement(_styles.Hr, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    style: {
+      marginTop: '25px'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+    variant: "address",
+    addressState: options === null || options === void 0 ? void 0 : (_options$address4 = options.address) === null || _options$address4 === void 0 ? void 0 : (_options$address4$add = _options$address4.address) === null || _options$address4$add === void 0 ? void 0 : (_options$address4$add2 = _options$address4$add.split(',')) === null || _options$address4$add2 === void 0 ? void 0 : _options$address4$add2[0],
+    onClick: function onClick(variant) {
+      return openModal(variant);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+    variant: "moment",
+    momentState: options === null || options === void 0 ? void 0 : options.moment,
+    onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function (variant) {
+      return openModal(variant);
+    }
+  }))), auth && /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     onCustomClick: function onCustomClick() {
       return actionSidebar(false);
-    }
-  })), !auth && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    },
+    inSide: "SideMenu"
+  }), !auth && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     style: {
       marginTop: '25px'
     }

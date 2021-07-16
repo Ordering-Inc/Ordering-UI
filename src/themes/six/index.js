@@ -37,6 +37,7 @@ import { SearchBar } from './src/components/SearchBar'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SingleProductCard } from './src/components/SingleProductCard'
+import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
 import { UserFormDetails } from './src/components/UserFormDetails'
 
@@ -85,6 +86,7 @@ export {
   SidebarMenu,
   SignUpForm,
   SingleProductCard,
+  UpsellingPage,
   UserDetails,
   UserFormDetails,
 

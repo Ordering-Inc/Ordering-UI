@@ -34,13 +34,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LogoutButtonUI = function LogoutButtonUI(props) {
-  var onCustomClick = props.onCustomClick;
+  var onCustomClick = props.onCustomClick,
+      inSide = props.inSide;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
 
   var handleLogOutClick = function handleLogOutClick() {
     var _window, _window$gapi, _window$gapi$auth;
@@ -68,12 +67,10 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: handleLogOutClick,
-    isHome: isHome
+    inSide: inSide
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome
-  }, /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome
-  }, t('LOGOUT', 'Logout')))));
+    inSide: inSide
+  }, !inSide && /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, null, t('LOGOUT', 'Logout')))));
 };
 
 var LogoutButton = function LogoutButton(props) {

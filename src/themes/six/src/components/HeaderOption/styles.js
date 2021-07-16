@@ -8,6 +8,7 @@ export const Container = styled.div`
       display: flex;
       align-items: flex-end;
       position: relative;
+      margin: 0px 7px;
       p {
         position: absolute;
         height: 15px;

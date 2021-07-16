@@ -25,7 +25,6 @@ import {
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { FloatingButton } from '../../../../../components/FloatingButton'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { Cart } from '../../../../../components/Cart'
 import { Select } from '../../../../../styles/Select'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -34,6 +33,7 @@ import { Modal } from '../Modal'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
+import { UpsellingPage } from '../UpsellingPage'
 import { ProductForm } from '../ProductForm'
 import { SearchBar } from '../SearchBar'
 
@@ -390,6 +390,7 @@ const BusinessProductsListingUI = (props) => {
           handleClick={() => setOpenUpselling(true)}
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
+
       )}
 
       <Modal

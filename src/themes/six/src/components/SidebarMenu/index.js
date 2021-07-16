@@ -150,35 +150,7 @@ export const SidebarMenu = (props) => {
               </MenuLinkText>
             </WrappContent>
           </MenuLink>
-          <MenuLink>
-            <WrappContent>
-              <OrderTypeSelectorHeader
-                configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
-              />
-            </WrappContent>
-            <Hr />
-          </MenuLink>
-          <MenuLink style={{ marginTop: '25px' }}>
-            <WrappContent>
-              <HeaderOption
-                variant='address'
-                addressState={options?.address?.address?.split(',')?.[0]}
-                onClick={(variant) => openModal(variant)}
-              />
-            </WrappContent>
-          </MenuLink>
-          <MenuLink>
-            <WrappContent>
-              <HeaderOption
-                variant='moment'
-                momentState={options?.moment}
-                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                  ? null
-                  : (variant) => openModal(variant)}
-              />
-            </WrappContent>
-          </MenuLink>
+
           {auth && (
             <>
               <MenuLink
@@ -229,9 +201,42 @@ export const SidebarMenu = (props) => {
                   </MenuLink>
                 )
               }
-              <LogoutButton onCustomClick={() => actionSidebar(false)} />
             </>
           )}
+
+          <MenuLink>
+            <WrappContent>
+              <OrderTypeSelectorHeader
+                configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
+                defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+              />
+            </WrappContent>
+            <Hr />
+          </MenuLink>
+          <MenuLink style={{ marginTop: '25px' }}>
+            <WrappContent>
+              <HeaderOption
+                variant='address'
+                addressState={options?.address?.address?.split(',')?.[0]}
+                onClick={(variant) => openModal(variant)}
+              />
+            </WrappContent>
+          </MenuLink>
+          <MenuLink>
+            <WrappContent>
+              <HeaderOption
+                variant='moment'
+                momentState={options?.moment}
+                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                  ? null
+                  : (variant) => openModal(variant)}
+              />
+            </WrappContent>
+          </MenuLink>
+          {auth && (
+            <LogoutButton onCustomClick={() => actionSidebar(false)} inSide='SideMenu' />
+          )}
+
           {!auth && (
             <MenuLink style={{ marginTop: '25px' }}>
               <Button outline color='secundary' onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t(theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</Button>

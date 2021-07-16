@@ -237,6 +237,12 @@ Object.defineProperty(exports, "SingleProductCard", {
     return _SingleProductCard.SingleProductCard;
   }
 });
+Object.defineProperty(exports, "UpsellingPage", {
+  enumerable: true,
+  get: function get() {
+    return _UpsellingPage.UpsellingPage;
+  }
+});
 Object.defineProperty(exports, "UserDetails", {
   enumerable: true,
   get: function get() {
@@ -351,6 +357,8 @@ var _SidebarMenu = require("./src/components/SidebarMenu");
 var _SignUpForm = require("./src/components/SignUpForm");
 
 var _SingleProductCard = require("./src/components/SingleProductCard");
+
+var _UpsellingPage = require("./src/components/UpsellingPage");
 
 var _UserDetails = require("./src/components/UserDetails");
 

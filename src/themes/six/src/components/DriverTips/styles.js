@@ -20,7 +20,7 @@ export const TipCard = styled.div`
   height: 30px;
   min-width: 30px;
   font-size: 14px;
-  padding: 5px 20px;
+  padding: 2px 20px;
   &.active {
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};

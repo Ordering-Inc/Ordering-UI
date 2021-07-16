@@ -19,7 +19,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (_ref) {
   var variant = _ref.variant;
-  return variant === 'cart' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    span {\n      display: flex;\n      align-items: flex-end;\n      position: relative;\n      p {\n        position: absolute;\n        height: 15px;\n        width: 15px;\n        margin: 0;\n        background: ", ";\n        border-radius: 100%;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        font-size: 10px;\n        ", "\n      }\n      svg {\n        color: ", ";\n        font-size: 30px;\n      }\n    }\n  "])), function (props) {
+  return variant === 'cart' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    span {\n      display: flex;\n      align-items: flex-end;\n      position: relative;\n      margin: 0px 7px;\n      p {\n        position: absolute;\n        height: 15px;\n        width: 15px;\n        margin: 0;\n        background: ", ";\n        border-radius: 100%;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        font-size: 10px;\n        ", "\n      }\n      svg {\n        color: ", ";\n        font-size: 30px;\n      }\n    }\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
     var _props$theme;

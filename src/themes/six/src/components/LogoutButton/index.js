@@ -1,6 +1,5 @@
 import React from 'react'
 import { LogoutAction, useLanguage } from 'ordering-components'
-
 import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
 
 import {
@@ -8,16 +7,12 @@ import {
   WrappContent,
   MenuLinkIcon,
   MenuLinkText,
-  TextInfo,
-  MenuLinkSeparator
+  TextInfo
 } from '../SidebarMenu/styles'
 
 const LogoutButtonUI = (props) => {
-  const { onCustomClick } = props
+  const { onCustomClick, inSide } = props
   const [, t] = useLanguage()
-
-  const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
-
   const handleLogOutClick = () => {
     window.FB.getLoginStatus((response) => {
       if (response.status === 'connected') {
@@ -40,13 +35,13 @@ const LogoutButtonUI = (props) => {
   }
 
   return (
-    <MenuLink onClick={handleLogOutClick} isHome={isHome}>
+    <MenuLink onClick={handleLogOutClick} inSide={inSide}>
       <WrappContent>
-        <MenuLinkIcon isHome={isHome}>
-          <FaSignOutAlt />
+        <MenuLinkIcon inSide={inSide}>
+          {!inSide && <FaSignOutAlt />}
         </MenuLinkIcon>
         <MenuLinkText>
-          <TextInfo isHome={isHome}>
+          <TextInfo>
             {t('LOGOUT', 'Logout')}
           </TextInfo>
         </MenuLinkText>
