@@ -21,6 +21,8 @@ var _AddressList = require("../AddressList");
 
 var _AddressForm = require("../AddressForm");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -48,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressesPopover = function AddressesPopover(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options$a3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options$a3, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       auth = props.auth,
@@ -66,6 +68,7 @@ var AddressesPopover = function AddressesPopover(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var theme = (0, _styledComponents.useTheme)();
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
@@ -165,12 +168,12 @@ var AddressesPopover = function AddressesPopover(props) {
     className: "form_edit",
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), open && /*#__PURE__*/_react.default.createElement(_styles.Container, null, auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESSES', 'Addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+  }, attributes.popper), open && /*#__PURE__*/_react.default.createElement(_styles.Container, null, auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ADDRESSES) || 'Addresses')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isPopover: true,
     changeOrderAddressWithDefault: true,
     userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     onClosePopover: props.onClose
-  })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+  })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ADDRESSES) || 'Address')), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
     address: addressState || {},
     onClose: function onClose() {

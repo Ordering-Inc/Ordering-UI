@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessControllerUI = function BusinessControllerUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options, _theme$defaultLanguag, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       business = props.business,
@@ -131,7 +131,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     isFeatured: business === null || business === void 0 ? void 0 : business.featured
   }, (business === null || business === void 0 ? void 0 : business.featured) && /*#__PURE__*/_react.default.createElement("span", {
     className: "crown"
-  }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), /*#__PURE__*/_react.default.createElement("div", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'PreOrder')))), /*#__PURE__*/_react.default.createElement(_styles.CLosedMark, {
+  }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), /*#__PURE__*/_react.default.createElement("div", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.PREORDER) || 'PreOrder')))), /*#__PURE__*/_react.default.createElement(_styles.CLosedMark, {
     isClosed: !isSkeleton && !(business !== null && business !== void 0 && business.open)
   }, !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed'))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({

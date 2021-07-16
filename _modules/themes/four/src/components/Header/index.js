@@ -82,7 +82,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _theme$images5, _theme$images5$logos, _theme$images6, _theme$images6$logos, _theme$images7, _theme$images7$logos, _theme$images8, _theme$images8$logos, _orderState$options2, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _customerState$user2, _customerState$user3, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _theme$images5, _theme$images5$logos, _theme$images6, _theme$images6$logos, _theme$images7, _theme$images7$logos, _theme$images8, _theme$images8$logos, _orderState$options2, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _customerState$user2, _customerState$user3, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
@@ -310,7 +310,7 @@ var Header = function Header(props) {
       });
     },
     name: "signin"
-  }, t('SIGN_IN', 'Sign in')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('SIGN_IN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SIGN_IN) || 'Sign in')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signup'
@@ -318,7 +318,7 @@ var Header = function Header(props) {
     },
     highlight: 1,
     name: "signup"
-  }, t('SIGN_UP', 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     withLogout: true,
     isCustomerMode: isCustomerMode,
     open: openPopover.user,

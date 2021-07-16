@@ -52,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _orderState$options2, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _orderState$options2, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
 
   var onFindBusiness = props.onFindBusiness,
       elementLinkToLogin = props.elementLinkToLogin;
@@ -131,15 +131,15 @@ var HomeHero = function HomeHero(props) {
     alt: "Logotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype,
     loading: "lazy"
-  })), /*#__PURE__*/_react.default.createElement("h1", null, t('GROCERIES_DELIVERED_IN_HOUR', 'Groceries delivered in as little as 1 hour')), /*#__PURE__*/_react.default.createElement(_styles.InputContainer, {
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_HOME_TEMPLATE_4', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME_TEMPLATE_4) || 'Groceries delivered in as little as 1 hour')), /*#__PURE__*/_react.default.createElement(_styles.InputContainer, {
     onClick: function onClick() {
       return handleAddressInput();
     }
-  }, /*#__PURE__*/_react.default.createElement(_FaLocationArrow.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('ADDRESS_OR_ZIPCODE', 'Address or zip code'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_FaLocationArrow.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_VISUALS_ADDRESS_OR_ZIPCODE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.MOBILE_FRONT_VISUALS_ADDRESS_OR_ZIPCODE) || 'Address or zip code'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: handleFindBusinesses
-  }, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, null, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS', 'Address'),
+  }, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, null, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT) || 'Already have an account?')), elementLinkToLogin))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.ADDRESS) || 'Address'),
     open: modals.formOpen,
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -165,7 +165,7 @@ var HomeHero = function HomeHero(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES', 'Addresses'),
+    title: t('ADDRESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.ADDRESSES) || 'Addresses'),
     open: modals.listOpen,
     width: "70%",
     onClose: function onClose() {

@@ -15,6 +15,8 @@ var _IosArrowDown = _interopRequireDefault(require("@meronex/icons/ios/IosArrowD
 
 var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
 
+var _styledComponents = require("styled-components");
+
 var _styles = require("./styles");
 
 var _Confirm = require("../../../../../components/Confirm");
@@ -48,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options5, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options5, _theme$defaultLanguag, _props$afterComponent, _props$afterElements;
 
   var addressToShow = props.addressToShow,
       isCartPending = props.isCartPending,
@@ -62,6 +64,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -152,7 +156,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
+    acceptText: t('ACCEPT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ACCEPT) || 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return setAlertState({

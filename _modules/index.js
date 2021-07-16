@@ -603,6 +603,12 @@ Object.defineProperty(exports, "Tabs", {
     return _Tabs.Tabs;
   }
 });
+Object.defineProperty(exports, "Toast", {
+  enumerable: true,
+  get: function get() {
+    return _Toast.Toast;
+  }
+});
 Object.defineProperty(exports, "sortInputFields", {
   enumerable: true,
   get: function get() {
@@ -811,5 +817,7 @@ var _Inputs = require("./styles/Inputs");
 var _Select = require("./styles/Select");
 
 var _Tabs = require("./styles/Tabs");
+
+var _Toast = require("./styles/Toast");
 
 var _utils = require("./utils");

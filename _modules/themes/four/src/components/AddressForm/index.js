@@ -35,6 +35,8 @@ var _Confirm = require("../../../../../components/Confirm");
 
 var _GoogleGpsButton = require("../../../../../components/GoogleGpsButton");
 
+var _styledComponents = require("styled-components");
+
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
@@ -88,7 +90,7 @@ var inputNames = [{
 }];
 
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _theme$defaultLanguag, _props$afterComponent, _props$afterElements;
 
   var addressesList = props.addressesList,
       googleMapsControls = props.googleMapsControls,
@@ -115,6 +117,7 @@ var AddressFormUI = function AddressFormUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var theme = (0, _styledComponents.useTheme)();
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useSession = (0, _orderingComponents.useSession)(),
@@ -686,7 +689,7 @@ var AddressFormUI = function AddressFormUI(props) {
   }, !formState.loading ? isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('ADD', 'Add') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ADDRESS', 'Address'),
     content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
+    acceptText: t('ACCEPT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ACCEPT) || 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return closeAlert();
