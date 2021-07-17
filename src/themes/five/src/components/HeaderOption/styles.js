@@ -65,3 +65,11 @@ export const Container = styled.div`
     color: #FFF;
   `}
 `
+
+export const DeliveryType = styled.p`
+  user-select: none;
+  cursor: pointer;
+  margin: 0;
+  font-size: 14px;
+  color: #909BA9;
+`

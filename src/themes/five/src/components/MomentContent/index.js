@@ -3,7 +3,7 @@ import { useOrder, useConfig } from 'ordering-components'
 
 import { Container, Layer } from './styles'
 
-import { MomentControl } from '../../../../../components/MomentControl'
+import { MomentControl } from '../MomentControl'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 

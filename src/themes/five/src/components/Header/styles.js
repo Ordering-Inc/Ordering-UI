@@ -102,23 +102,6 @@ export const Menu = styled.div`
       padding: 0 30px;
       margin: 0 130px;
     }
-
-    > span {
-      > div {
-        border: none;
-        > div: first-child {
-
-          svg {
-            color: #909BA9;
-          }
-
-          p {
-            font-size: 14px;
-            color: #909BA9;
-          }
-        }
-      }
-    }
   }
 
   > *:not(:last-child) {
@@ -160,6 +143,10 @@ export const Menu = styled.div`
     > div: first-child {
       width: 100%;
     }
+  }
+
+  .order-type {
+    padding: 0 20px;
   }
 
   @media (min-width: 821px) {

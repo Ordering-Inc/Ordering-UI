@@ -4,6 +4,7 @@ import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } f
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
+import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
 
 import {
   Header as HeaderContainer,
@@ -23,17 +24,17 @@ import { capitalize } from '../../../../../utils'
 
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { AddressesPopover } from '../AddressesPopover'
-import { UserPopover } from '../../../../../components/UserPopover'
+import { UserPopover } from '../UserPopover'
 import { MomentPopover } from '../MomentPopover'
-import { CartPopover } from '../../../../../components/CartPopover'
-import { OrderTypeSelectorHeader } from '../../../../../components/OrderTypeSelectorHeader'
+import { CartPopover } from '../CartPopover'
+import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { CartContent } from '../../../../../components/CartContent'
 import { Modal } from '../../../../../components/Modal'
-import { MomentContent } from '../../../../../components/MomentContent'
+import { MomentContent } from '../MomentContent'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
-import { SidebarMenu } from '../../../../../components/SidebarMenu'
+import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
 
@@ -71,6 +72,7 @@ export const Header = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
 
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
@@ -195,10 +197,22 @@ export const Header = (props) => {
                   )}
                 </>
               )}
-              <OrderTypeSelectorHeader
-                configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
-              />
+              {windowSize.width > 768 ? (
+                <OrderTypeSelectorHeader
+                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
+                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+                  open={openPopover.type}
+                  orderTypeList={orderTypeList}
+                  onClick={() => handleTogglePopover('type')}
+                  onClose={() => handleClosePopover('type')}
+                />
+              ) : (
+                <HeaderOption
+                  variant='delivery'
+                  onClick={(variant) => openModal(variant)}
+                  orderTypeList={orderTypeList}
+                />
+              )}
             </Menu>
           )}
           {onlineStatus && (
@@ -223,15 +237,6 @@ export const Header = (props) => {
                 {
                   auth && (
                     <>
-                      {windowSize.width > 768 && (
-                        <UserPopover
-                          withLogout
-                          isCustomerMode={isCustomerMode}
-                          open={openPopover.user}
-                          onClick={() => handleTogglePopover('user')}
-                          onClose={() => handleClosePopover('user')}
-                        />
-                      )}
                       {isShowOrderOptions && (
                         windowSize.width > 768 ? (
                           <CartPopover
@@ -250,6 +255,15 @@ export const Header = (props) => {
                             onClick={(variant) => openModal(variant)}
                           />
                         )
+                      )}
+                      {windowSize.width > 768 && (
+                        <UserPopover
+                          withLogout
+                          isCustomerMode={isCustomerMode}
+                          open={openPopover.user}
+                          onClick={() => handleTogglePopover('user')}
+                          onClose={() => handleClosePopover('user')}
+                        />
                       )}
                     </>
                   )
@@ -331,6 +345,11 @@ export const Header = (props) => {
             )}
             {modalSelected === 'moment' && (
               <MomentContent />
+            )}
+            {modalSelected === 'delivery' && (
+              <OrderTypeSelectorContent
+                onClose={() => setModalIsOpen(false)}
+              />
             )}
           </Modal>
         )}

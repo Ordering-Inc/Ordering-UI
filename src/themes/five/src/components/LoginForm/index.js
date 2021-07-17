@@ -39,7 +39,6 @@ import { AppleLogin } from '../AppleLogin'
 import { SmsLoginButton } from '../../../../../components/SmsLogin'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../../../../utils'
-import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
@@ -74,7 +73,6 @@ const LoginFormUI = (props) => {
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
-  const theme = useTheme()
   const [passwordSee, setPasswordSee] = useState(false)
   const emailInput = useRef(null)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)

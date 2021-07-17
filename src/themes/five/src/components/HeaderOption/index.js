@@ -1,11 +1,12 @@
 import React from 'react'
-import { useUtils, useLanguage, useConfig } from 'ordering-components'
+import { useUtils, useLanguage, useConfig, useOrder } from 'ordering-components'
 import IosBasket from '@meronex/icons/ios/IosBasket'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
 import {
-  Container
+  Container,
+  DeliveryType
 } from './styles'
 
 export const HeaderOption = (props) => {
@@ -13,12 +14,15 @@ export const HeaderOption = (props) => {
     variant,
     addressState,
     momentState,
-    totalCarts
+    totalCarts,
+    orderTypeList
   } = props
 
   const [{ configs }] = useConfig()
   const [{ parseDate }] = useUtils()
   const [, t] = useLanguage()
+  const [orderStatus] = useOrder()
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -54,6 +58,13 @@ export const HeaderOption = (props) => {
               : t('ASAP_ABBREVIATION', 'ASAP')}
           </>
         )}
+        {
+          variant === 'delivery' && (
+            <DeliveryType>
+              {(orderTypeList && orderTypeList[orderStatus?.options.type - 1]) || t('DELIVERY', 'Delivery')}
+            </DeliveryType>
+          )
+        }
       </Container>
       {
       props.afterComponents?.map((AfterComponent, i) => (
