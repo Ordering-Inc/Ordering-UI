@@ -374,6 +374,12 @@ const OrderDetailsUI = (props) => {
                         <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
                       </tr>
                     )}
+                    {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
+                      <tr>
+                        <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                        <td>{parsePrice(order?.summary?.subtotal_with_discount || 0)}</td>
+                      </tr>
+                    )}
                     {
                       order?.tax_type !== 1 && (
                         <tr>
