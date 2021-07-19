@@ -9,7 +9,7 @@ import {
 
 import { useOrder, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import { CartContent } from '../../../../../components/CartContent'
+import { CartContent } from '../CartContent'
 
 export const CartPopover = (props) => {
   const { open, auth, location, isCustomerMode } = props

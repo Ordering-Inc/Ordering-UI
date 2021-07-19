@@ -4,30 +4,27 @@ export const Container = styled.div`
   cursor: pointer;
 
   ${({ variant }) => variant === 'cart' && css`
-    span {
+    > span {
+      cursor: pointer;
+      height: 20px;
+      padding: 10px 9px;
       display: flex;
-      align-items: flex-end;
-      position: relative;
-      p {
-        position: absolute;
-        height: 15px;
-        width: 15px;
+      align-items: center;
+      background: ${props => props.theme.colors.primary};
+      color: #FFFFFF;
+      border-radius: 7.6px;
+
+      span {
         margin: 0;
-        background: ${props => props.theme.colors.primary};
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 10px;
+        font-size: 14px;
         ${props => props.theme?.rtl ? css`
-          left: 0;
+          margin-right: 10px;
         ` : css`
-          right: 0;
-        `}
+          margin-left: 10px;
+        `} 
       }
       svg {
-        color: ${props => props.theme.colors.primary};
-        font-size: 30px;
+        font-size: 17px;
       }
     }
   `}

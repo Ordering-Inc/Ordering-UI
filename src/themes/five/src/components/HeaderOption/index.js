@@ -1,6 +1,6 @@
 import React from 'react'
 import { useUtils, useLanguage, useConfig, useOrder } from 'ordering-components'
-import IosBasket from '@meronex/icons/ios/IosBasket'
+import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
@@ -40,7 +40,7 @@ export const HeaderOption = (props) => {
       >
         {variant === 'cart' && (
           <span>
-            <IosBasket id='icon' />
+            <AiOutlineShoppingCart id='icon' />
             {totalCarts > 0 && <p>{totalCarts}</p>}
           </span>
         )}

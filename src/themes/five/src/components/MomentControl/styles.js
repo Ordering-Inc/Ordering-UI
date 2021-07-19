@@ -5,6 +5,7 @@ export const Title = styled.div`
   font-weight: 500;
   text-align: center;
   margin-bottom: 40px;
+  color: ${props => props.theme.colors.darkTextColor};
 `
 
 export const DatePickerWrapper = styled.div`
@@ -112,6 +113,12 @@ export const HourListWrapper = styled.div`
 
     #list {
       width: 100%;
+    }
+  }
+
+  #select-input {
+    > div: first-child {
+      color: ${props => props.theme.colors.darkTextColor};
     }
   }
 `
