@@ -69,10 +69,10 @@ export const HomeHero = (props) => {
             <LogoWrapper>
               <img alt='Logotype' src={theme?.images?.logos?.logotype} loading='lazy' />
             </LogoWrapper>
-            <h1>{t('GROCERIES_DELIVERED_IN_HOUR', 'Groceries delivered in as little as 1 hour')}</h1>
+            <h1>{t('TITLE_HOME_TEMPLATE_4', theme?.defaultLanguages?.TITLE_HOME_TEMPLATE_4 || 'Groceries delivered in as little as 1 hour')}</h1>
             <InputContainer onClick={() => handleAddressInput()}>
               <FaLocationArrow />
-              <span>{t('ADDRESS_OR_ZIPCODE', 'Address or zip code')}</span>
+              <span>{t('MOBILE_FRONT_VISUALS_ADDRESS_OR_ZIPCODE', theme?.defaultLanguages?.MOBILE_FRONT_VISUALS_ADDRESS_OR_ZIPCODE || 'Address or zip code')}</span>
             </InputContainer>
             <Button
               color='primary'
@@ -81,13 +81,13 @@ export const HomeHero = (props) => {
               {t('CONTINUE', 'Continue')}
             </Button>
             <RedirectLink>
-              <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')}</span>
+              <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', theme?.defaultLanguages?.MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT || 'Already have an account?')}</span>
               {elementLinkToLogin}
             </RedirectLink>
           </FormWrapper>
         </FormContainer>
         <Modal
-          title={t('ADDRESS', 'Address')}
+          title={t('ADDRESS', theme?.defaultLanguages?.ADDRESS || 'Address')}
           open={modals.formOpen}
           onClose={() => setModals({ ...modals, formOpen: false })}
         >
@@ -100,7 +100,7 @@ export const HomeHero = (props) => {
           />
         </Modal>
         <Modal
-          title={t('ADDRESSES', 'Addresses')}
+          title={t('ADDRESSES', theme?.defaultLanguages?.ADDRESSES || 'Addresses')}
           open={modals.listOpen}
           width='70%'
           onClose={() => setModals({ ...modals, listOpen: false })}

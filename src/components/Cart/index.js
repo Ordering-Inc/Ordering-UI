@@ -178,6 +178,21 @@ const CartUI = (props) => {
                         <td>- {parsePrice(cart?.discount || 0)}</td>
                       </tr>
                     )}
+                    {cart?.subtotal_with_discount > 0 && cart?.discount > 0 && cart?.total >= 0 && (
+                      <tr>
+                        {cart?.discount_type === 1 ? (
+                          <>
+                            <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                            <td>{parsePrice(cart?.subtotal_with_discount + cart?.tax || 0)}</td>
+                          </>
+                        ) : (
+                          <>
+                            <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                            <td>{parsePrice(cart?.subtotal_with_discount || 0)}</td>
+                          </>
+                        )}
+                      </tr>
+                    )}
                     {
                       cart.business.tax_type !== 1 && (
                         <tr>

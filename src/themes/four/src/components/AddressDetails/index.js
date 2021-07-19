@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AddressDetails as AddressDetailsController, useOrder, useLanguage, useCustomer } from 'ordering-components'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
+import { useTheme } from 'styled-components'
 
 import {
   AddressContainer,
@@ -25,6 +26,7 @@ const AddressDetailsUI = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [{ user }] = useCustomer()
@@ -92,7 +94,7 @@ const AddressDetailsUI = (props) => {
         <Alert
           title={t('SEARCH', 'Search')}
           content={alertState.content}
-          acceptText={t('ACCEPT', 'Accept')}
+          acceptText={t('ACCEPT', theme?.defaultLanguages?.ACCEPT || 'Accept')}
           open={alertState.open}
           onClose={() => setAlertState({ open: false, content: [] })}
           onAccept={() => setAlertState({ open: false, content: [] })}
