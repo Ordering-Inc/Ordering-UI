@@ -173,7 +173,7 @@ var OrderBillDivider = _styledComponents.default.div(_templateObject38 || (_temp
 
 exports.OrderBillDivider = OrderBillDivider;
 
-var SectionContainer = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  background: #FFF;\n  margin-bottom: ", ";\n  padding: 15px 20px;\n\n  div.accordion {\n    margin: 0px;\n  }\n"])), function (_ref5) {
+var SectionContainer = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  background: #FFF;\n  margin-bottom: ", ";\n  padding: 15px 0px;\n\n  div.accordion {\n    margin: 0px;\n  }\n"])), function (_ref5) {
   var marginBottom = _ref5.marginBottom;
   return marginBottom || '25px';
 });

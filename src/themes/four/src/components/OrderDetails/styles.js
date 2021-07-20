@@ -490,7 +490,7 @@ export const OrderBillDivider = styled.div`
 export const SectionContainer = styled.div`
   background: #FFF;
   margin-bottom: ${({ marginBottom }) => marginBottom || '25px'};
-  padding: 15px 20px;
+  padding: 15px 0px;
 
   div.accordion {
     margin: 0px;
