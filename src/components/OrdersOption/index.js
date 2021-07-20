@@ -220,7 +220,7 @@ const OrdersOptionUI = (props) => {
               customArray={customArray}
               getOrderStatus={getOrderStatus}
               handleReorder={handleReorder}
-              preOrders={filterForOrders === 'preorders'}
+              isPreorders={filterForOrders === 'preorders'}
             />
           </>
         ) : (

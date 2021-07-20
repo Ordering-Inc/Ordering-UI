@@ -27,7 +27,7 @@ export const HorizontalOrdersLayout = (props) => {
     customArray,
     onRedirectPage,
     businessesIds,
-    preOrders
+    isPreorders
   } = props
 
   const orders = customArray || props.orders
@@ -128,7 +128,7 @@ export const HorizontalOrdersLayout = (props) => {
             )}
           </Card>
         ))}
-        {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && !preOrders && (
+        {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && !isPreorders && (
           <Card
             flex
             nobg
