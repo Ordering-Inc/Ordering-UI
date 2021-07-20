@@ -26,7 +26,8 @@ export const HorizontalOrdersLayout = (props) => {
     handleReorder,
     customArray,
     onRedirectPage,
-    businessesIds
+    businessesIds,
+    preOrders
   } = props
 
   const orders = customArray || props.orders
@@ -54,11 +55,9 @@ export const HorizontalOrdersLayout = (props) => {
         {props.beforeElements?.map((BeforeElement, i) => (
           <React.Fragment key={i}>
             {BeforeElement}
-          </React.Fragment>))
-        }
+          </React.Fragment>))}
         {props.beforeComponents?.map((BeforeComponent, i) => (
-          <BeforeComponent key={i} {...props} />))
-        }
+          <BeforeComponent key={i} {...props} />))}
         {orders.length > 0 && ordersToShow.map(order => (
           <Card
             key={order.id || order.uuid}
@@ -129,7 +128,7 @@ export const HorizontalOrdersLayout = (props) => {
             )}
           </Card>
         ))}
-        {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
+        {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && !preOrders && (
           <Card
             flex
             nobg
@@ -147,13 +146,11 @@ export const HorizontalOrdersLayout = (props) => {
           </Card>
         )}
         {props.afterComponents?.map((AfterComponent, i) => (
-          <AfterComponent key={i} {...props} />))
-        }
+          <AfterComponent key={i} {...props} />))}
         {props.afterElements?.map((AfterElement, i) => (
           <React.Fragment key={i}>
             {AfterElement}
-          </React.Fragment>))
-        }
+          </React.Fragment>))}
       </>
     )
   }
