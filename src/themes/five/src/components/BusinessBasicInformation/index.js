@@ -7,7 +7,7 @@ import { useTheme } from 'styled-components'
 import { Modal } from '../../../../../components/Modal'
 import { BusinessInformation } from '../BusinessInformation'
 import { SearchBar } from '../SearchBar'
-import { BusinessReviews } from '../../../../../components/BusinessReviews'
+import { BusinessReviews } from '../BusinessReviews'
 import { MomentContent } from '../MomentContent'
 
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
@@ -54,6 +54,7 @@ export const BusinessBasicInformation = (props) => {
   const [isBusinessReviews, setIsBusinessReviews] = useState(false)
   const [isPreOrder, setIsPreOrder] = useState(false)
 
+  console.log(business)
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
