@@ -60,8 +60,7 @@ import {
   OrderBillDivider,
   OrderPayMethodIcon,
   SectionContainer,
-  OrderBusinessHeaderImage,
-  OrderCartInfo
+  OrderBusinessHeaderImage
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -84,7 +83,7 @@ const OrderDetailsUI = (props) => {
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
-  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const [{ parsePrice, parseNumber }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [openReview, setOpenReview] = useState(false)
@@ -218,7 +217,7 @@ const OrderDetailsUI = (props) => {
                   </HeaderImg>
                 </HeaderInfo>
               </Header>
-              
+
               <SectionContainer>
                 <OrderProducts>
                   {order?.products?.length && order?.products.map(product => (
@@ -321,45 +320,45 @@ const OrderDetailsUI = (props) => {
                 )}
               </SectionContainer>
 
-                {order?.driver && (
-                  <>
-                    <SectionContainer marginBottom='0px'>
-                      <OrderDriver>
-                        <WrapperDriver>
-                          <InfoBlock>
-                            <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                            <span>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</span>
-                          </InfoBlock>
-                        </WrapperDriver>
-                        <ActionsBlock>
-                          {order.driver && order.driver.phone &&
-                            <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                              <BsPhone />
-                            </span>}
-                          <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
-                            {order?.unread_count > 0 && unreadAlert.driver && (
-                              <ExclamationWrapper>
-                                <AiFillExclamationCircle />
-                              </ExclamationWrapper>
-                            )}
-                            <BsChat />
-                          </MessagesIcon>
-                        </ActionsBlock>
-                      </OrderDriver>
-                    </SectionContainer>
-                    {order?.driver?.location && parseInt(order?.status) === 9 && (
-                      <Map>
-                        <GoogleMapsMap
-                          apiKey={configs?.google_maps_api_key?.value}
-                          location={order?.driver?.location}
-                          locations={locations}
-                          mapControls={googleMapsControls}
-                        />
-                      </Map>
-                    )}
-                  </>
-                )}
-              
+              {order?.driver && (
+                <>
+                  <SectionContainer marginBottom='0px'>
+                    <OrderDriver>
+                      <WrapperDriver>
+                        <InfoBlock>
+                          <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                          <span>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</span>
+                        </InfoBlock>
+                      </WrapperDriver>
+                      <ActionsBlock>
+                        {order.driver && order.driver.phone &&
+                          <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                            <BsPhone />
+                          </span>}
+                        <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
+                          {order?.unread_count > 0 && unreadAlert.driver && (
+                            <ExclamationWrapper>
+                              <AiFillExclamationCircle />
+                            </ExclamationWrapper>
+                          )}
+                          <BsChat />
+                        </MessagesIcon>
+                      </ActionsBlock>
+                    </OrderDriver>
+                  </SectionContainer>
+                  {order?.driver?.location && parseInt(order?.status) === 9 && (
+                    <Map>
+                      <GoogleMapsMap
+                        apiKey={configs?.google_maps_api_key?.value}
+                        location={order?.driver?.location}
+                        locations={locations}
+                        mapControls={googleMapsControls}
+                      />
+                    </Map>
+                  )}
+                </>
+              )}
+
               <SectionContainer marginBottom='0px'>
                 <OrderBusiness>
                   <BusinessWrapper>
