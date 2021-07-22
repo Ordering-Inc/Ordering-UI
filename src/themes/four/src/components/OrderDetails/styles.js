@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
-  background: #E5E5E5;
 `
 
 export const WrapperContainer = styled.div`
@@ -490,8 +489,8 @@ export const OrderBillDivider = styled.div`
 
 export const SectionContainer = styled.div`
   background: #FFF;
-  margin-bottom: ${({ marginBottom }) => marginBottom ? marginBottom : '25px'};
-  padding: 15px 20px;
+  margin-bottom: ${({ marginBottom }) => marginBottom || '25px'};
+  padding: 15px 0px;
 
   div.accordion {
     margin: 0px;

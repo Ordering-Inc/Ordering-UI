@@ -4,11 +4,22 @@ export const OptionTitle = styled.div`
   width: ${({ isBusinessesPage }) => isBusinessesPage ? '80%' : '100%'};
   margin: ${({ isBusinessesPage }) => isBusinessesPage ? '10px 20px 0' : '0 auto'};
   padding: ${({ isBusinessesPage }) => !isBusinessesPage && '0 15px'};
-
+  display: flex;
+  flex-direction: row;
   h1{
     text-transform: capitalize;
     font-size: 18px;
     margin: 18px 0;
+    cursor: pointer;
+  }
+
+  h1:nth-child(1){
+    color: ${({ isActive }) => isActive === 'preorders' ? '#ccc' : '#333'};
+    margin-right: 10px
+  }
+
+  h1:nth-child(2){
+    color: ${({ isActive }) => isActive === 'preorders' ? '#333' : '#ccc'};
   }
 
   @media (min-width: 768px){
