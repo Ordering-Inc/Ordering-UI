@@ -47,7 +47,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       handleReorder = props.handleReorder,
       customArray = props.customArray,
       onRedirectPage = props.onRedirectPage,
-      businessesIds = props.businessesIds;
+      businessesIds = props.businessesIds,
+      isPreorders = props.isPreorders;
   var orders = customArray || props.orders;
   var theme = (0, _styledComponents.useTheme)();
 
@@ -151,7 +152,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
           });
         }
       }, t('OPEN_ORDER', 'Open order'))));
-    }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {
+    }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && !isPreorders && /*#__PURE__*/_react.default.createElement(_styles.Card, {
       flex: true,
       nobg: true,
       isBusinessesPage: isBusinessesPage

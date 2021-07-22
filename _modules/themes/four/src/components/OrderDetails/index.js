@@ -118,8 +118,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
-      parseNumber = _useUtils2$.parseNumber,
-      parseDate = _useUtils2$.parseDate;
+      parseNumber = _useUtils2$.parseNumber;
 
   var _useState = (0, _react.useState)({
     business: false,

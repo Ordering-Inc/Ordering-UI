@@ -248,7 +248,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     return !ingredient.selected && /*#__PURE__*/_react.default.createElement("li", {
       className: "ingredient",
       key: ingredient.id
-    }, /*#__PURE__*/_react.default.createElement("span", null, t('NO', 'No'), " ", ingredient.name));
+    }, /*#__PURE__*/_react.default.createElement("span", null, ingredient.selected !== undefined && t('NO', 'No'), " ", ingredient.name));
   })), productInfo().options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo().options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: option.id

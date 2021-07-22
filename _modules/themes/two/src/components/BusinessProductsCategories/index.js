@@ -11,7 +11,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _AutoScroll = require("../../../../../components/AutoScroll");
+var _AutoScroll = require("../AutoScroll");
 
 var _styles = require("./styles");
 

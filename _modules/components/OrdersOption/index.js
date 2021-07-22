@@ -64,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersOptionUI = function OrdersOptionUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _orders$filter, _props$afterComponent, _props$afterElements;
 
   var horizontal = props.horizontal,
       activeOrders = props.activeOrders,
@@ -95,11 +95,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       values = orderList.orders;
   var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
   var orders = customArray || values || [];
-  var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
-    return businessesIds && businessesIds.includes(order.business_id);
-  }).every(function (i) {
-    return !i;
-  }) : orders.length > 0;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -110,6 +105,24 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       loadingOrders = _useState4[0],
       setLoadingOrders = _useState4[1];
+
+  var _useState5 = (0, _react.useState)('active-orders'),
+      _useState6 = _slicedToArray(_useState5, 2),
+      filterForOrders = _useState6[0],
+      setFilterForOrders = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(orders.filter(function (order) {
+    return orderStatus.includes(order.status);
+  })),
+      _useState8 = _slicedToArray(_useState7, 2),
+      ordersFiltered = _useState8[0],
+      setOrdersFiltered = _useState8[1];
+
+  var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
+    return businessesIds && businessesIds.includes(order.business_id);
+  }).every(function (i) {
+    return !i;
+  }) : orders.length > 0;
 
   var handleReorder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(orderId) {
@@ -255,6 +268,13 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       typeof timeout === 'number' && clearTimeout(timeout);
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    setOrdersFiltered(filterForOrders === 'preorders' ? orders.filter(function (order) {
+      return order.status === 13;
+    }) : orders.filter(function (order) {
+      return orderStatus.includes(order.status) && order.status !== 13;
+    }));
+  }, [filterForOrders, orders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -264,8 +284,19 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       key: i
     }, props));
   }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
-    isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders')))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    isBusinessesPage: isBusinessesPage,
+    isActive: filterForOrders
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    onClick: function onClick() {
+      return setFilterForOrders('active-orders');
+    }
+  }, titleContent || (activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), horizontal && ((_orders$filter = orders.filter(function (order) {
+    return order.status === 13;
+  })) === null || _orders$filter === void 0 ? void 0 : _orders$filter.length) > 0 && /*#__PURE__*/_react.default.createElement("h1", {
+    onClick: function onClick() {
+      return setFilterForOrders('preorders');
+    }
+  }, t('PREORDERS', 'Preorders'))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
@@ -306,9 +337,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   })), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (horizontal ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     businessesIds: businessesIds,
-    orders: orders.filter(function (order) {
-      return orderStatus.includes(order.status);
-    }),
+    orders: ordersFiltered,
     pagination: pagination,
     onRedirectPage: onRedirectPage,
     loadMoreOrders: loadMoreOrders,
@@ -316,12 +345,11 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     reorderLoading: reorderLoading,
     customArray: customArray,
     getOrderStatus: getOrderStatus,
-    handleReorder: handleReorder
+    handleReorder: handleReorder,
+    isPreorders: filterForOrders === 'preorders'
   })) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderLoading,
-    orders: orders.filter(function (order) {
-      return orderStatus.includes(order.status);
-    }),
+    orders: ordersFiltered,
     pagination: pagination,
     loadMoreOrders: loadMoreOrders,
     onRedirectPage: onRedirectPage,

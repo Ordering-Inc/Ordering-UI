@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  margin-top: 20px;\n  background: #E5E5E5;\n"])));
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  margin-top: 20px;\n"])));
 
 exports.Container = Container;
 
@@ -173,9 +173,9 @@ var OrderBillDivider = _styledComponents.default.div(_templateObject38 || (_temp
 
 exports.OrderBillDivider = OrderBillDivider;
 
-var SectionContainer = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  background: #FFF;\n  margin-bottom: ", ";\n  padding: 15px 20px;\n\n  div.accordion {\n    margin: 0px;\n  }\n"])), function (_ref5) {
+var SectionContainer = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  background: #FFF;\n  margin-bottom: ", ";\n  padding: 15px 0px;\n\n  div.accordion {\n    margin: 0px;\n  }\n"])), function (_ref5) {
   var marginBottom = _ref5.marginBottom;
-  return marginBottom ? marginBottom : '25px';
+  return marginBottom || '25px';
 });
 
 exports.SectionContainer = SectionContainer;
