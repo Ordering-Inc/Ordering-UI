@@ -216,6 +216,7 @@ export const BusinessMoreDetail = styled.div`
   position: absolute;
   
   svg {
+    cursor: pointer;
     font-size: 24px;
     color: white;
   }

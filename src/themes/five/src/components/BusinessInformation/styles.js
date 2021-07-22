@@ -6,31 +6,6 @@ export const BusinessInformationContainer = styled.div`
   position: relative;
   overflow: auto;
 `
-export const BusinessHeader = styled.div`
-  display: flex;
-  width: 100%;
-  height: 20%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  background-position: center;
-  min-height: 200px;
-  justify-content: left;
-  align-items: flex-end;
-  position: relative;
-  background-color: #FFF;
-
-  img{
-    object-fit: cover;
-    position: absolute;
-    width: 100%;
-    height: calc(100% + 50px);
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    aspect-ratio: attr(width) / attr(height)
-  }
-`
 
 export const BussinessTitle = styled.div`
   z-index: 1000;
@@ -55,24 +30,6 @@ export const HeaderImage = styled.div`
     width: 100%;
     height: 100%;
   }
-`
-
-export const BusinessBasicContent = styled.div`
-  display: flex;
-  background-color: #FFF;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 20px;
-  max-height: 90px;
-  width: 340px;
-  z-index: 1;
-`
-
-export const WrapperBusinessLogo = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
 `
 
 const BusinessLogoStyled = styled.div`
@@ -100,60 +57,6 @@ export const BusinessLogo = (props) => {
   )
 }
 
-export const BusinessInfo = styled.div`
-  display: flex;
-  width: calc(100% - 75px);
-`
-
-export const BusinessInfoItem = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0px 5px 0px 16px;
-  ${props => props.theme?.rtl && css`
-    padding: 0px 16px 0px 5px;
-  `}
-  div {
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-
-    h5,
-    p {
-      display: flex;
-      align-items: center;
-      margin: 0px;
-      text-transform: capitalize;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-weight: 300;
-      svg {
-        margin-right: 4px;
-        margin-bottom: 1px;
-        ${props => props.theme?.rtl && css`
-          margin-left: 4px;
-          margin-right: 0px;
-        `}
-        &.start {
-          color: #FFC917;
-        }
-        &.popup {
-          color: ${props => props.theme.colors.primary};
-          cursor: pointer;
-          transform: rotate(180deg);
-        }
-      }
-    }
-    p.bold {
-      font-weight: 600;
-    }
-    @media (min-width: 481px) {
-      font-size: 16px;
-    }
-  }
-`
-
 export const Information = styled.div`
   display: inline-flex;
   flex-direction: column;
@@ -176,77 +79,78 @@ export const BusinessContent = styled.div`
   background: #FFF;
   @media(min-width: 768px){
     padding: 0 20px;
+    padding-top: 30px;
   }
 `
 
-export const FlexTabs = styled.div`
-  display: flex;
-  justify-content: space-around;
-  height: 10%;
-  padding-top: 30px;
-`
-
 export const SectionTitle = styled.h3`
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 16px;
+  color: ${props => props.theme.colors.darkTextColor};
+  margin: 25px 0 20px 0;
 `
 
 export const Map = styled.div`
-  width: 100%;
-  height: 50vh;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+  height: 250px;
   > div {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
-    border-radius: 15px;
+  }
+  @media(min-width: 768px){
+    width: calc(100% + 40px);
+    margin-left: -20px;
   }
 `
 
 export const ScheduleSection = styled.div`
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 `
 
 export const ScheduleContainer = styled.div`
-  width: 100%;
-  display: flex;
-  overflow-x: auto;
-  > div {
-    width: 100%;
-  }
+  width: 300px;
 
 `
 
 export const ScheduleBlock = styled.div`
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 0px 15px;
-  border-right: 1px solid #CCC;
-  width: 10%;
-  min-width: 80px;
-  ${props => props.theme?.rtl && css`
-    border-left: 1px solid #CCC;
-    border-right: none;
-  `}
+  margin-bottom: 16px;
+  align-items: center;
+  justify-content: space-between;
+
   h4 {
-    margin: 0px 0px 3px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: ${props => props.theme?.colors?.primary};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  p {
-    margin: 0px;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: ${props => props.theme.colors.darkTextColor};
+    margin: 0;
   }
 
-  &:last-child {
-    border: 0;
+  p {
+    font-size: 14px;
+    margin: 0;
+    color: ${props => props.theme.colors.darkTextColor};
+
+    &.close {
+      color: #E63757;
+      margin-right: 20px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 20px;
+        margin-left: 0;
+      `}
+    }
   }
-  @media(min-width: 768px){
-    min-width: initial;
+
+  > div {
+    display: flex;
+    align-items: center;
+
+    > div {
+      margin: 0 5px;
+    }
   }
 `
 
@@ -255,8 +159,6 @@ export const DeliveryInfo = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-top: 10px;
-  border-top: 1px solid #CCC;
-  border-bottom: 1px solid #CCC;
 
   div {
     width: 100%;
@@ -280,6 +182,7 @@ export const DeliveryInfo = styled.div`
   }
 `
 export const BusinessMediaContent = styled.div`
+  padding-bottom: 20px;
   > div {
     display: flex;
     justify-content: flex-start;
@@ -293,12 +196,8 @@ export const BusinessMediaContent = styled.div`
       width: calc(100% - 12px);
       cursor: pointer;
 
-      @media (min-width: 481px) {
-        width: calc(50% - 20px);
-      }
-
       @media (min-width: 681px) {
-        width: calc(33% - 20px);
+        width: calc(50% - 20px);
       }
 
       @media (min-width: 993px) {
@@ -355,62 +254,30 @@ export const ImageContainer = styled.div`
     border-bottom-right-radius: 10px;
   }
 `
-export const OffersSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 0 20px;
+
+export const BusinessTitle = styled.h2`
+  font-weight: 600;
+  font-size: 24px;
+  color: ${props => props.theme.colors.darkTextColor};
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 36px;
 `
 
-export const OfferText = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-export const OfferTextP = styled.div`
-  margin: 0;
-  padding: 0;
+export const BusinessAddress = styled.p`
   font-size: 14px;
+  color: ${props => props.theme.colors.darkTextColor};
+  margin-bottom: 25px;
 `
 
-export const OfferTable = styled.div`
-  width: 100%;
-  margin-top: 15px;
+export const Divider = styled.div`
+  background: #F8F9FA;
+  height: 8px;
+  width: calc(100% + 20px);
+  margin-left: -10px;
 
-  table>tbody>tr>td, table>tbody>tr>th,
-  table>thead>tr>td, table>thead>tr>th
-  {
-    border-top: 0
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border-style: hidden;
-    border: 1px solid  ${props => props.theme.colors.disabled};
-
-    thead {
-      background-color: ${props => props.theme.colors.disabled};
-    }
-    tr th {
-      font-size: 15px;
-    }
-    tr td {
-      font-size: 12px;
-    }
-    td span {
-      unicode-bidi: bidi-override;
-    }
-    tr td,
-    tr th {
-      text-align: left;
-      padding: 10px;
-      ${props => props.theme?.rtl && css`
-        text-align: right;
-      `}
-    }
+  @media (min-width: 768px) {
+    width: calc(100% + 40px);
+    margin-left: -20px;
   }
 `

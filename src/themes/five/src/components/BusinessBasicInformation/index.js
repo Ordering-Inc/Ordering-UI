@@ -131,10 +131,16 @@ export const BusinessBasicInformation = (props) => {
                   <Skeleton width={100} />
                 )}
               </BusinessDetail>
-              <div className='preorder-Reviews'>
-                <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
-                {business.reviews?.reviews && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
-              </div>
+              {
+                !loading ? (
+                  <div className='preorder-Reviews'>
+                    <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
+                    {business.reviews?.reviews && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
+                  </div>
+                ) : (
+                  <Skeleton width={100} />
+                )
+              }
             </BusinessInfoItem>
           </BusinessInfo>
         </BusinessInfoContent>
