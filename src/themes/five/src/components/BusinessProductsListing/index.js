@@ -22,8 +22,8 @@ import {
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
-import { BusinessProductsCategories } from '../../../../../components/BusinessProductsCategories'
-import { BusinessProductsList } from '../../../../../components/BusinessProductsList'
+import { BusinessProductsCategories } from '../BusinessProductsCategories'
+import { BusinessProductsList } from '../BusinessProductsList'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../../../../../components/ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'

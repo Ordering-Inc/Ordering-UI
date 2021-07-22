@@ -7,8 +7,8 @@ export const BusinessContainer = styled.div`
   height: 100%;
   box-sizing: border-box;
   position: relative;
-  max-height: 260px;
-  height: 260px;
+  max-height: 324px;
+  height: 324px;
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
@@ -16,7 +16,7 @@ export const BusinessContainer = styled.div`
   min-height: 200px;
   justify-content: center;
   align-items: flex-end;
-  border-radius: 20px;
+  border-radius: 7.6px;
 
   ${props => props.isSkeleton && css`
     background-color: #F8F8F8;
@@ -97,9 +97,10 @@ export const BusinessInfoItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0px 5px 0px 16px;
+  padding-right:5px;
   ${props => props.theme?.rtl && css`
-    padding: 0px 16px 0px 5px;
+    padding-left: 5px;
+    padding-right: 0;
   `}
 
   h2 {
