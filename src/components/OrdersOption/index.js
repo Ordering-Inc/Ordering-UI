@@ -42,18 +42,19 @@ const OrdersOptionUI = (props) => {
   const theme = useTheme()
   const [, { reorder }] = useOrder()
   const { loading, error, orders: values } = orderList
-
   const imageFails = activeOrders
     ? theme.images?.general?.emptyActiveOrders
     : theme.images?.general?.emptyPastOrders
 
   const orders = customArray || values || []
+  const [reorderLoading, setReorderLoading] = useState(false)
+  const [loadingOrders, setLoadingOrders] = useState(true)
+  const [filterForOrders, setFilterForOrders] = useState('active-orders')
+
+  const [ordersFiltered, setOrdersFiltered] = useState(orders.filter(order => orderStatus.includes(order.status)))
   const isShowTitles = businessesIds
     ? orders && orders.length > 0 && !orders.map(order => businessesIds && businessesIds.includes(order.business_id)).every(i => !i)
     : orders.length > 0
-
-  const [reorderLoading, setReorderLoading] = useState(false)
-  const [loadingOrders, setLoadingOrders] = useState(true)
 
   const handleReorder = async (orderId) => {
     setReorderLoading(true)
@@ -113,6 +114,10 @@ const OrdersOptionUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    setOrdersFiltered(filterForOrders === 'preorders' ? orders.filter(order => order.status === 13) : orders.filter(order => orderStatus.includes(order.status) && order.status !== 13))
+  }, [filterForOrders, orders])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -123,12 +128,19 @@ const OrdersOptionUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : (isShowTitles || !isBusinessesPage)) && (
         <>
-          <OptionTitle isBusinessesPage={isBusinessesPage}>
-            <h1>
+          <OptionTitle isBusinessesPage={isBusinessesPage} isActive={filterForOrders}>
+            <h1 onClick={() => setFilterForOrders('active-orders')}>
               {titleContent || (activeOrders
                 ? t('ACTIVE_ORDERS', 'Active Orders')
                 : t('PREVIOUS_ORDERS', 'Previous Orders'))}
             </h1>
+            {
+              horizontal && orders.filter(order => order.status === 13)?.length > 0 && (
+                <h1 onClick={() => setFilterForOrders('preorders')}>
+                  {t('PREORDERS', 'Preorders')}
+                </h1>
+              )
+            }
           </OptionTitle>
           {!loading && orders.length === 0 && (
             <NotFoundSource
@@ -199,7 +211,7 @@ const OrdersOptionUI = (props) => {
           <>
             <HorizontalOrdersLayout
               businessesIds={businessesIds}
-              orders={orders.filter(order => orderStatus.includes(order.status))}
+              orders={ordersFiltered}
               pagination={pagination}
               onRedirectPage={onRedirectPage}
               loadMoreOrders={loadMoreOrders}
@@ -208,12 +220,13 @@ const OrdersOptionUI = (props) => {
               customArray={customArray}
               getOrderStatus={getOrderStatus}
               handleReorder={handleReorder}
+              isPreorders={filterForOrders === 'preorders'}
             />
           </>
         ) : (
           <VerticalOrdersLayout
             reorderLoading={reorderLoading}
-            orders={orders.filter(order => orderStatus.includes(order.status))}
+            orders={ordersFiltered}
             pagination={pagination}
             loadMoreOrders={loadMoreOrders}
             onRedirectPage={onRedirectPage}
