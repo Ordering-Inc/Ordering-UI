@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const CartContainer = styled.div`
-  border-bottom: 1px solid #F0F0F0;
+  width: 100%;
 `
 
 export const CartSticky = styled.div`
@@ -11,6 +11,7 @@ export const CartSticky = styled.div`
     position: sticky;
     top: 20px;
   `}
+  width: 100%;
 `
 
 export const OrderBill = styled.div`
@@ -40,12 +41,9 @@ export const OrderBill = styled.div`
     border-top: 1px solid #EAEAEA;
     padding-top: 10px;
     tr {
-      td:nth-child(1) {
+      td {
         font-weight: bold;
-      }
-      td:nth-child(2) {
-        font-weight: bold;
-        color: #D81212;
+        color: ${props => props.theme.colors.darkTextColor};
       }
     }
   }
@@ -65,17 +63,61 @@ export const CouponContainer = styled.div`
 export const CheckoutAction = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+    color: ${props => props.theme.colors.darkTextColor};
+  }
+
   button {
     padding: 10px 30px;
-    width: 90%;
+    width: 50%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed
     }
+  }
+`
+
+export const Divider = styled.div`
+  background: #F8F9FA;
+  height: 8px;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+
+  @media (min-width: 768px) {
+    width: calc(100% + 60px);
+    margin-left: -30px;
+  }
+`
+
+export const UpsellingPageTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  p {
+    font-weight: 500;
+    font-size: 16px;
+    color: ${props => props.theme?.colors.darkTextColor};
+  }
+
+  svg {
+    font-size: 20px;
+    cursor: pointer;
+    color: #748194;
+    margin-left: 30px;
+
+    ${props => props.theme?.rtl && css`
+      margin-right: 30px;
+      margin-left: 0px;
+    `}
   }
 `

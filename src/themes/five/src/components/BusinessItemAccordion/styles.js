@@ -4,8 +4,6 @@ export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid #BFBFBF;
-  box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
 
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
@@ -27,7 +25,6 @@ export const Accordion = styled.div`
   transition: background-color 0.6s ease;
   position: relative;
   padding: 10px;
-  background: #F8F8F8;
 
   ${props => props.isClosed && css`
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
@@ -47,7 +44,6 @@ export const ContentInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   text-transform: capitalize;
-  margin-left: 10px;
   width: 65%;
 
   > div {

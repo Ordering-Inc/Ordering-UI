@@ -91,7 +91,14 @@ const BusinessProductsListUI = (props) => {
                 {
                   products.length > 0 && (
                     <WrapAllCategories id='container'>
-                      <h3>{category.name}</h3>
+                      <div className='category-title'>
+                        {
+                          category?.image && (
+                            <img src={category.image} />
+                          )
+                        }
+                        <h3>{category.name}</h3>
+                      </div>
                       <ProductsListing>
                         {
                           products.map(product => (

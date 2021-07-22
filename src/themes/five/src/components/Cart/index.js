@@ -3,12 +3,13 @@ import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useV
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
+import MdClose from '@meronex/icons/md/MdClose'
 
 import { Confirm } from '../../../../../components/Confirm'
 import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../../../../../components/ProductForm'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
+import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
@@ -16,7 +17,9 @@ import {
   OrderBill,
   CheckoutAction,
   CouponContainer,
-  CartSticky
+  CartSticky,
+  Divider,
+  UpsellingPageTitleWrapper
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
 
@@ -36,7 +39,8 @@ const CartUI = (props) => {
     isCartPopover,
     isForceOpenCart,
     isCartOnProductsList,
-    handleCartOpen
+    handleCartOpen,
+    isCustomMode
   } = props
 
   const [, t] = useLanguage()
@@ -52,6 +56,7 @@ const CartUI = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const windowSize = useWindowSize()
+  const [isUpselling, setIsUpselling] = useState(false)
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
   const momentFormatted = !orderState?.option?.moment
@@ -117,6 +122,14 @@ const CartUI = (props) => {
     handleClickCheckout()
   }
 
+  const checkOutBtnClick = () => {
+    if (isCustomMode) handleClickCheckout()
+    else setOpenUpselling(true)
+  }
+
+  useEffect(() => {
+    if (isCustomMode) setIsUpselling(true)
+  }, [isCustomMode])
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -241,9 +254,10 @@ const CartUI = (props) => {
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
               <CheckoutAction>
+                <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 <Button
                   color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
-                  onClick={() => setOpenUpselling(true)}
+                  onClick={checkOutBtnClick}
                   disabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
                 >
                   {!cart?.valid_address ? (
@@ -257,6 +271,7 @@ const CartUI = (props) => {
               </CheckoutAction>
             )}
           </BusinessItemAccordion>
+          <Divider />
           <Confirm
             title={t('PRODUCT', 'Product')}
             content={confirm.content}
@@ -284,16 +299,23 @@ const CartUI = (props) => {
               onSave={handlerProductAction}
             />
           </Modal>
-          {openUpselling && (
-            <UpsellingPage
-              businessId={cart.business_id}
-              cartProducts={cart.products}
-              business={cart.business}
-              handleUpsellingPage={handleUpsellingPage}
-              openUpselling={openUpselling}
-              canOpenUpselling={canOpenUpselling}
-              setCanOpenUpselling={setCanOpenUpselling}
-            />
+          {(openUpselling || isUpselling) && (
+            <>
+              <UpsellingPageTitleWrapper>
+                <p>{t('DO_YOU_WANT_SOMETHING_ELSE', 'Do you want something else?')}</p>
+                <MdClose onClick={() => setIsUpselling(false)} />
+              </UpsellingPageTitleWrapper>
+              <UpsellingPage
+                businessId={cart.business_id}
+                isCustomMode={isCustomMode}
+                cartProducts={cart.products}
+                business={cart.business}
+                handleUpsellingPage={handleUpsellingPage}
+                openUpselling={openUpselling}
+                canOpenUpselling={canOpenUpselling}
+                setCanOpenUpselling={setCanOpenUpselling}
+              />
+            </>
           )}
         </CartSticky>
       </CartContainer>

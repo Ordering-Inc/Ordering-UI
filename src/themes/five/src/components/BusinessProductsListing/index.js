@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
+import { Button } from '../../styles/Buttons'
 import {
   BusinessAndProductList,
   useEvent,
@@ -16,7 +17,14 @@ import {
   WrapContent,
   ProductLoading,
   SkeletonItem,
-  WrappLayout
+  WrappLayout,
+  BusinessContent,
+  BusinessCategoryProductWrapper,
+  BusinessCartContainer,
+  BusinessCartContent,
+  EmptyCart,
+  EmptyBtnWrapper,
+  Title
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -25,11 +33,12 @@ import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { PageNotFound } from '../../../../../components/PageNotFound'
-import { ProductForm } from '../../../../../components/ProductForm'
+import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../../../../../components/Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
-import { Cart } from '../../../../../components/Cart'
+import { Cart } from '../Cart'
+import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -193,47 +202,70 @@ const BusinessProductsListingUI = (props) => {
                   errorQuantityProducts={errorQuantityProducts}
                   sortByValue={sortByValue}
                 />
-                {!(business?.categories?.length === 0 && !categoryId) && (
-                  <BusinessProductsCategories
-                    categories={[{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                    categorySelected={categorySelected}
-                    onClickCategory={handleChangeCategory}
-                    featured={featuredProducts}
-                    openBusinessInformation={openBusinessInformation}
-                  />
-                )}
+                <BusinessContent>
+                  <BusinessCategoryProductWrapper>
+                    {!(business?.categories?.length === 0 && !categoryId) && (
+                      <BusinessProductsCategories
+                        categories={[{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                        categorySelected={categorySelected}
+                        onClickCategory={handleChangeCategory}
+                        featured={featuredProducts}
+                        openBusinessInformation={openBusinessInformation}
+                      />
+                    )}
 
-                <WrapContent>
-                  <BusinessProductsList
-                    categories={[
-                      { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                      { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                      ...business?.categories.sort((a, b) => a.rank - b.rank)
-                    ]}
-                    category={categorySelected}
-                    categoryState={categoryState}
-                    businessId={business.id}
-                    errors={errors}
-                    onProductClick={onProductClick}
-                    handleSearchRedirect={handleSearchRedirect}
-                    featured={featuredProducts}
-                    searchValue={searchValue}
-                    isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                    handleClearSearch={handleChangeSearch}
-                    errorQuantityProducts={errorQuantityProducts}
-                  />
-                </WrapContent>
+                    <WrapContent>
+                      <BusinessProductsList
+                        categories={[
+                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                          ...business?.categories.sort((a, b) => a.rank - b.rank)
+                        ]}
+                        category={categorySelected}
+                        categoryState={categoryState}
+                        businessId={business.id}
+                        errors={errors}
+                        onProductClick={onProductClick}
+                        handleSearchRedirect={handleSearchRedirect}
+                        featured={featuredProducts}
+                        searchValue={searchValue}
+                        isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                        handleClearSearch={handleChangeSearch}
+                        errorQuantityProducts={errorQuantityProducts}
+                      />
+                    </WrapContent>
+                  </BusinessCategoryProductWrapper>
+                  <BusinessCartContainer>
+                    <BusinessCartContent>
+                      {currentCart?.products?.length > 0 ? (
+                        <>
+                          <Title>{t('YOUR_CART', 'Your cart')}</Title>
+                          <Cart
+                            isForceOpenCart
+                            cart={currentCart}
+                            isCartPending={currentCart?.status === 2}
+                            isProducts={currentCart.products.length}
+                            isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                            handleCartOpen={(val) => setIsCartOpen(val)}
+                            isCustomMode
+                          />
+                        </>
+                      ) : (
+                        <EmptyCart>
+                          <div className='empty-content'>
+                            <AiOutlineShoppingCart />
+                            <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
+                          </div>
+                          <EmptyBtnWrapper>
+                            <span>$0.00</span>
+                            <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
+                          </EmptyBtnWrapper>
+                        </EmptyCart>
+                      )}
+                    </BusinessCartContent>
+                  </BusinessCartContainer>
+                </BusinessContent>
               </div>
-              {isCartOnProductsList && currentCart?.products?.length > 0 && (
-                <Cart
-                  isForceOpenCart
-                  cart={currentCart}
-                  isCartPending={currentCart?.status === 2}
-                  isProducts={currentCart.products.length}
-                  isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                  handleCartOpen={(val) => setIsCartOpen(val)}
-                />
-              )}
             </WrappLayout>
           )
         }
@@ -315,7 +347,7 @@ const BusinessProductsListingUI = (props) => {
       )}
 
       <Modal
-        width='70%'
+        width='50%'
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}

@@ -310,13 +310,15 @@ export const ProductPrice = styled.div`
 `
 
 export const ProductSelect = styled.select`
-  max-width: 55px;
-  height: 50px;
+  background: #F8F9FA;
+  border-radius: 7.6px;
+  max-width: 45px;
+  height: 25px;
   border: none;
-  background-color: transparent;
-  font-size: 17px;
+  font-size: 12px;
   outline: none;
-  margin-right: 5px;
+  margin: 0 5px;
+  padding: 0 3px;
   cursor: pointer;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -326,11 +328,6 @@ export const ProductSelect = styled.select`
   background-repeat: no-repeat, repeat;
   background-position: right .7em top 50%, 0 0;
   background-size: .65em auto, 100%;
-
-  ${props => props.theme?.rtl && css`
-    margin-left: 5px;
-    margin-right: 0px;
-  `}
 `
 
 export const ProductNotAvailable = styled.span`
