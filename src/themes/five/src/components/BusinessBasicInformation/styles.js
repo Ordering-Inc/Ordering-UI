@@ -19,7 +19,7 @@ export const BusinessContainer = styled.div`
   border-radius: 7.6px;
 
   ${props => props.isSkeleton && css`
-    background-color: #F8F8F8;
+    background-color: #cccccc;
   `}
 
   ${props => props.bgimage && !props.isClosed && css`

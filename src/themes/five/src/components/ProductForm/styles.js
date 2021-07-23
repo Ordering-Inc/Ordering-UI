@@ -108,7 +108,7 @@ export const SectionTitle = styled.h3`
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 115px;
+  margin-bottom: 130px;
 
   p {
     font-weight: 300;
@@ -185,6 +185,10 @@ export const ProductActions = styled.div`
   }
 
   @media (min-width: 577px) {
+    position: sticky;
+    flex-direction: row;
+    justify-content: space-between;
+
     div.price {
       width: 20%;
     }
@@ -197,12 +201,6 @@ export const ProductActions = styled.div`
     div.incdec-control {
       width: 20%;
     }
-  }
-
-  @media (min-width: 1201px) {
-    position: sticky;
-    flex-direction: row;
-    justify-content: space-between;
   }
 `
 export const SkeletonBlock = styled.div`

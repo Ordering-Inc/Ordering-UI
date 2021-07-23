@@ -17,7 +17,7 @@ import {
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../../../../../components/Modal'
-import { ProductForm } from '../../../../../components/ProductForm'
+import { ProductForm } from '../ProductForm'
 import { AutoScroll } from '../AutoScroll'
 
 const UpsellingPageUI = (props) => {
