@@ -35,7 +35,8 @@ export const ProductItemAccordion = (props) => {
     getProductMax,
     offsetDisabled,
     onDeleteProduct,
-    onEditProduct
+    onEditProduct,
+    isCheckout
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -102,7 +103,7 @@ export const ProductItemAccordion = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <AccordionSection>
+      <AccordionSection isCheckout={isCheckout}>
         <Accordion
           isValid={product?.valid ?? true}
           className={`product accordion ${setActive}`}
@@ -118,6 +119,7 @@ export const ProductItemAccordion = (props) => {
               <ProductSelect
                 ref={productSelect}
                 value={product.quantity}
+                isCheckout={isCheckout}
                 onChange={(e) => handleChangeQuantity(Number(e.target.value))}
               >
                 {[...Array(getProductMax(product) + 1)].map((v, i) => (

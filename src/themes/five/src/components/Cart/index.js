@@ -163,6 +163,7 @@ const CartUI = (props) => {
                 isCartPending={isCartPending}
                 isCartProduct
                 product={product}
+                isCheckout={isCheckout}
                 changeQuantity={changeQuantity}
                 getProductMax={getProductMax}
                 offsetDisabled={offsetDisabled}
@@ -171,7 +172,7 @@ const CartUI = (props) => {
               />
             ))}
             {cart?.valid_products && (
-              <OrderBill>
+              <OrderBill isCheckout={isCheckout}>
                 <table>
                   <tbody>
                     <tr>

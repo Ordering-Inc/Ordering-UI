@@ -8,6 +8,7 @@ export const AccordionSection = styled.div`
   padding: 10px 0px;
   background: #FFF;
   border-bottom: 1px solid #D9D9D9;
+  background: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
 `
 
 const AccordionStyled = styled.div`
@@ -310,7 +311,7 @@ export const ProductPrice = styled.div`
 `
 
 export const ProductSelect = styled.select`
-  background: #F8F9FA;
+  background: ${isCheckout => isCheckout ? '#FFFFFF' : '#F8F9FA'};
   border-radius: 7.6px;
   max-width: 45px;
   height: 25px;

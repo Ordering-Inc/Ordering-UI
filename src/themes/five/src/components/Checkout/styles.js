@@ -2,28 +2,32 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  width: 95%;
-  margin: 0 auto 0;
+  width: 100%;
   flex-direction: column;
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     flex-direction: row;
   }
 `
 
 export const WrapperLeftContainer = styled.div`
   width: 100%;
+  padding: 40 20px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     width: 55%;
+    padding: 55px 60px 55px 40px;
   }
 `
 
 export const WrapperRightContainer = styled.div`
   width: 100%;
-    
-  @media (min-width: 768px) {
+  background: #F8F9FA;
+  padding: 40px 20px;
+
+  @media (min-width: 769px) {
     width: 45%;
+    padding: 55px 40px;
   }
 `
 
@@ -34,16 +38,25 @@ export const WrapperUserDetails = styled.div`
 export const UserDetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 30px 0px 20px;
+  margin-top: 25px;
   flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E9ECEF;
 `
 
 export const BusinessDetailsContainer = styled(UserDetailsContainer)`
+  border: none;
   div {
     h1 {
       text-transform: capitalize;
       margin: 0px;
-      font-size: 24px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    p {
+      font-size: 14px;
+      margin: 5px 0;
+      color: ${props => props.theme.colors.darkTextColor};
     }
   }
 `
@@ -54,11 +67,19 @@ export const PaymentMethodContainer = styled.div`
   margin: 20px 0px 0px;
   h1 {
     margin: 0px;
-    font-size: 24px;
+    font-weight: 500;
+    font-size: 20px;
+    color: ${props => props.theme.colors.darkTextColor};
   }
 `
 
-export const DriverTipContainer = styled(PaymentMethodContainer)``
+export const DriverTipContainer = styled(PaymentMethodContainer)`
+  > p {
+    margin: 0;
+    font-size: 16px;
+    color: #909BA9;
+  }
+`
 
 export const CartContainer = styled(PaymentMethodContainer)`
   margin-bottom: 20px;
@@ -71,7 +92,8 @@ export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0px 10px;
+  margin: 50px 0px 10px;
+  padding: 0 10px;
 
   button {
     width: 100%;
@@ -81,12 +103,6 @@ export const WrapperPlaceOrderButton = styled.div`
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
-    }
-  }
-
-  @media (min-width: 513px) {
-    button {
-      width: 70%;
     }
   }
 `
@@ -151,14 +167,33 @@ export const WarningText = styled.p`
 export const WrapperLeftContent = styled.div`
   width: 100%;
 
-  @media (min-width: 768px) {
-    width: 90%;
-  }
-
   .checkout-title {
-    margin-top: 55px;
+    margin: 0;
     font-weight: 600;
     font-size: 32px;
     color: ${props => props.theme?.colors.darkTextColor};
+  }
+`
+export const CheckOutDivider = styled.div`
+  height: 8px;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  background: #F8F9FA;
+
+  @media(min-width: 769px) {
+    width: calc(100% + 100px);
+    margin-left: -40px;
+  }
+`
+
+export const DriverTipDivider = styled.div`
+  height: 8px;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  background: #E9ECEF;
+
+  @media(min-width: 769px) {
+    width: calc(100% + 80px);
+    margin-left: -40px;
   }
 `

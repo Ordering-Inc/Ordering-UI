@@ -30,7 +30,9 @@ import {
   WarningText,
   WrapperUserDetails,
   WrapperRightContainer,
-  WrapperLeftContent
+  WrapperLeftContent,
+  CheckOutDivider,
+  DriverTipDivider
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -38,9 +40,9 @@ import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { AddressDetails } from '../../../../../components/AddressDetails'
-import { UserDetails } from '../../../../../components/UserDetails'
-import { PaymentOptions } from '../../../../../components/PaymentOptions'
-import { DriverTips } from '../../../../../components/DriverTips'
+import { UserDetails } from '../UserDetails'
+import { PaymentOptions } from '../PaymentOptions'
+import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 import { Alert } from '../../../../../components/Confirm'
 import { CartContent } from '../CartContent'
@@ -71,7 +73,8 @@ const CheckoutUI = (props) => {
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  const [{ options, loading }, { changePaymethod }] = useOrder()
+  // const [{ options, loading }, { changePaymethod }] = useOrder()
+  const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
@@ -274,10 +277,10 @@ const CheckoutUI = (props) => {
                   <div>
                     <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
                     <div>
-                      <p><strong>{t('NAME', 'Name')}:</strong> {businessDetails?.business?.name}</p>
-                      <p><strong>{t('EMAIL', 'Email')}:</strong> {businessDetails?.business?.email}</p>
-                      <p><strong>{t('CELLPHONE', 'Cellphone')}:</strong> {businessDetails?.business?.cellphone}</p>
-                      <p><strong>{t('ADDRESS', 'Address')}:</strong> {businessDetails?.business?.address}</p>
+                      <p>{businessDetails?.business?.address}</p>
+                      <p>{businessDetails?.business?.name}</p>
+                      <p>{businessDetails?.business?.email}</p>
+                      <p>{businessDetails?.business?.cellphone}</p>
                     </div>
                   </div>
                 )}
@@ -290,6 +293,40 @@ const CheckoutUI = (props) => {
                   </div>
                 )}
               </BusinessDetailsContainer>
+            )}
+            <CheckOutDivider />
+            {props.beforeElementsSectionFive?.map((BeforeElement, i) => (
+              <React.Fragment key={i}>
+                {BeforeElement}
+              </React.Fragment>))}
+            {props.beforeComponentsSectionFive?.map((BeforeComponent, i) => (
+              <BeforeComponent key={i} {...props} />))}
+
+            {!props.isHideSectionFive && !cartState.loading && cart && (
+              <PaymentMethodContainer>
+                <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                {!cartState.loading && cart?.status === 4 && (
+                  <WarningMessage style={{ marginTop: 20 }}>
+                    <VscWarning />
+                    <h1>
+                      {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
+                    </h1>
+                  </WarningMessage>
+                )}
+                <PaymentOptions
+                  cart={cart}
+                  isDisabled={cart?.status === 2}
+                  businessId={businessDetails?.business?.id}
+                  isLoading={businessDetails.loading}
+                  paymethods={businessDetails?.business?.paymethods}
+                  onPaymentChange={handlePaymethodChange}
+                  errorCash={errorCash}
+                  setErrorCash={setErrorCash}
+                  handleOrderRedirect={handleOrderRedirect}
+                  isCustomerMode={isCustomerMode}
+                  paySelected={paymethodSelected}
+                />
+              </PaymentMethodContainer>
             )}
           </WrapperLeftContent>
         </WrapperLeftContainer>
@@ -310,54 +347,23 @@ const CheckoutUI = (props) => {
             validationFields?.fields?.checkout?.driver_tip?.enabled &&
             driverTipsOptions.length > 0 &&
             (
-              <DriverTipContainer>
-                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                <DriverTips
-                  businessId={cart?.business_id}
-                  driverTipsOptions={driverTipsOptions}
-                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)
-                    ? cart?.driver_tip
-                    : cart?.driver_tip_rate}
-                  useOrderContext
-                />
-              </DriverTipContainer>
+              <>
+                <DriverTipContainer>
+                  <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                  <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                  <DriverTips
+                    businessId={cart?.business_id}
+                    driverTipsOptions={driverTipsOptions}
+                    isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                    driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)
+                      ? cart?.driver_tip
+                      : cart?.driver_tip_rate}
+                    useOrderContext
+                  />
+                </DriverTipContainer>
+                <DriverTipDivider />
+              </>
             )}
-
-          {props.beforeElementsSectionFive?.map((BeforeElement, i) => (
-            <React.Fragment key={i}>
-              {BeforeElement}
-            </React.Fragment>))}
-          {props.beforeComponentsSectionFive?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))}
-
-          {!props.isHideSectionFive && !cartState.loading && cart && (
-            <PaymentMethodContainer>
-              <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
-              {!cartState.loading && cart?.status === 4 && (
-                <WarningMessage style={{ marginTop: 20 }}>
-                  <VscWarning />
-                  <h1>
-                    {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
-                  </h1>
-                </WarningMessage>
-              )}
-              <PaymentOptions
-                cart={cart}
-                isDisabled={cart?.status === 2}
-                businessId={businessDetails?.business?.id}
-                isLoading={businessDetails.loading}
-                paymethods={businessDetails?.business?.paymethods}
-                onPaymentChange={handlePaymethodChange}
-                errorCash={errorCash}
-                setErrorCash={setErrorCash}
-                handleOrderRedirect={handleOrderRedirect}
-                isCustomerMode={isCustomerMode}
-                paySelected={paymethodSelected}
-              />
-            </PaymentMethodContainer>
-          )}
           {props.beforeElementsSectionSix?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
