@@ -12,7 +12,8 @@ export const Container = styled.div`
 
 export const WrapperLeftContainer = styled.div`
   width: 100%;
-  padding: 40 20px;
+  box-sizing: border-box;
+  padding: 40px 20px;
 
   @media (min-width: 769px) {
     width: 55%;
@@ -23,6 +24,7 @@ export const WrapperLeftContainer = styled.div`
 export const WrapperRightContainer = styled.div`
   width: 100%;
   background: #F8F9FA;
+  box-sizing: border-box;
   padding: 40px 20px;
 
   @media (min-width: 769px) {

@@ -52,7 +52,8 @@ import {
   WrapperRightContainer,
   Divider,
   MyOrderActions,
-  ReviewOrderLink
+  ReviewOrderLink,
+  SkeletonWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -171,7 +172,7 @@ const OrderDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container>
-        {order && Object.keys(order).length > 0 && (
+        {!loading && order && Object.keys(order).length > 0 && (
           <WrapperContainer>
             <WrapperLeftContainer>
               <OrderInfo>
@@ -408,7 +409,7 @@ const OrderDetailsUI = (props) => {
         )}
 
         {loading && !error && (
-          <WrapperContainer isLoading className='skeleton-loading'>
+          <SkeletonWrapper>
             <SkeletonBlockWrapp>
               <SkeletonBlock width={80}>
                 <Skeleton height={300} />
@@ -419,7 +420,7 @@ const OrderDetailsUI = (props) => {
                 <Skeleton height={200} />
               </SkeletonBlock>
             </SkeletonBlockWrapp>
-          </WrapperContainer>
+          </SkeletonWrapper>
         )}
 
         {!loading && error && (

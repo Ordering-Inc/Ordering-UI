@@ -2,18 +2,25 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
 `
 
 export const WrapperContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 
   @media (min-width: 769px) {
     flex-direction: row;
   }
+`
+
+export const SkeletonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `
 
 export const HeaderInfo = styled.div`
@@ -443,6 +450,7 @@ export const ExclamationWrapper = styled.div`
 export const WrapperLeftContainer = styled.div`
   width: 100%;
   padding: 20px;
+  box-sizing: border-box;
 
   @media (min-width: 769px) {
     width: 50%;
