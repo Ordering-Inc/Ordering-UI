@@ -54,7 +54,6 @@ export const BusinessBasicInformation = (props) => {
   const [isBusinessReviews, setIsBusinessReviews] = useState(false)
   const [isPreOrder, setIsPreOrder] = useState(false)
 
-  console.log(business)
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []

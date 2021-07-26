@@ -161,8 +161,6 @@ const OrderDetailsUI = (props) => {
     }
   }, [messagesReadList])
 
-  console.log(order)
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (

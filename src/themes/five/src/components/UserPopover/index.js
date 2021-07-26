@@ -16,15 +16,13 @@ import { capitalize } from '../../../../../utils'
 import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
 
 const optionsDefault = [
-  { name: 'explore', pathname: '/explore' },
-  { name: 'promotions', pathname: '/promotions' },
-  { name: 'orders', pathname: '/profile/orders' }
+  { name: 'search', pathname: '/explore', displayName: 'explore' },
+  { name: 'orders', pathname: '/profile/orders', displayName: 'orders' }
 ]
 
 const extraOptions = [
-  { name: 'my saved places', pathname: '/profile' },
-  { name: 'view account', pathname: '/profile' },
-  { name: 'help', pathname: '/help' }
+  { name: 'profile', pathname: '/profile', displayName: 'My saved places' },
+  { name: 'profile', pathname: '/profile', displayName: 'view account' }
 ]
 
 export const UserPopover = (props) => {
@@ -45,7 +43,6 @@ export const UserPopover = (props) => {
   const options = isCustomerMode
     ? optionsDefault.filter(option => option.name === 'profile')
     : optionsList || optionsDefault
-
   const popper = usePopper(referenceElement.current, popperElement.current, {
     placement: 'auto',
     modifiers: [
@@ -121,13 +118,13 @@ export const UserPopover = (props) => {
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
           {options && options.length > 0 && (
-            options.map(option => (
+            options.map((option, i) => (
               <PopoverListLink
-                key={option.name}
+                key={i}
                 active={window.location.pathname === option.pathname}
                 onClick={() => handleGoToPage(option.name)}
               >
-                {t(option.name.toUpperCase(), capitalize(option.name))}
+                {t((option.displayName || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
               </PopoverListLink>
             ))
           )}
@@ -135,13 +132,13 @@ export const UserPopover = (props) => {
           <ExtraOptions>
             {
               extraOptions && extraOptions.length > 0 && (
-                extraOptions.map(option => (
+                extraOptions.map((option, i) => (
                   <PopoverListLink
-                    key={option.name}
+                    key={i}
                     active={window.location.pathname === option.pathname}
                     onClick={() => handleGoToPage(option.name)}
                   >
-                    {t(option.name.toUpperCase(), capitalize(option.name))}
+                    {t((option.displayName || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
                   </PopoverListLink>
                 ))
               )

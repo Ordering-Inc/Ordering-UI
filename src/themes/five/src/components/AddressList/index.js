@@ -58,7 +58,6 @@ const AddressListUI = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
-  console.log(addressList)
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })

@@ -27,7 +27,6 @@ const UserDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const userData = userState.result?.result || props.userData || formState.result?.result || user
-  console.log(userData, 'this is userData')
 
   useEffect(() => {
     if (isUserDetailsEdit) {
