@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const CheckoutContainer = styled.div`
-  background-color: #F7F7F7;
+  background-color: ${props => props.theme.colors.backgroundPage};
 `
 
 export const Container = styled.div`

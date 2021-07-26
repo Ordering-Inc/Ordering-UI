@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignUpForm } from '../../../src/themes/five/src/components/SignUpForm'
+import { SignUpForm } from '../../../src/components/SignUpForm'
 import { HelmetTags } from '../../components/HelmetTags'
 
 export const SignUp = (props) => {

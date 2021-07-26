@@ -50,9 +50,9 @@ export const BusinessBasicInformation = (props) => {
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
 
   const sortByOptions = [
-    { value: null, content: t('SORT_BY', 'Sort By'), showOnSelected: t('SORT_BY', 'Sort By') },
-    { value: 'rank', content: t('RANK', 'Rank'), showOnSelected: t('RANK', 'Rank') },
-    { value: 'a-z', content: t('A_to_Z', 'A-Z'), showOnSelected: t('A_to_Z', 'A-Z') }
+    { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
+    { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
+    { value: 'a-z', content: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z'), showOnSelected: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z') }
   ]
 
   const getBusinessType = () => {
@@ -166,7 +166,7 @@ export const BusinessBasicInformation = (props) => {
                   <SearchBar
                     onSearch={handleChangeSearch}
                     search={searchValue}
-                    placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
+                    placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
                     lazyLoad={businessState?.business?.lazy_load_products_recommended}
                   />
                   <Select

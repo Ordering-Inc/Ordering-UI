@@ -6,6 +6,7 @@ import { Alert } from './src/components/Confirm'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
+import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
 
 /**
@@ -17,7 +18,6 @@ import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
 
 import homeHero from './template/assets/images/home-hero.png'
-import businessHero from './template/assets/images/business-hero.png'
 import notFound from './template/assets/images/not-found.svg'
 import notNetwork from './template/assets/images/not-network.svg'
 import notFound404 from './template/assets/images/not-found-404.svg'
@@ -58,12 +58,6 @@ import categoryAll from './template/assets/images/categories/category-all.png'
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
 
-import delivery from './template/assets/images/delivery-types/delivery.png'
-import curbside from './template/assets/images/delivery-types/curbside.png'
-import driveThru from './template/assets/images/delivery-types/drive_thru.png'
-import eatIn from './template/assets/images/delivery-types/eat_in.png'
-import pickUp from './template/assets/images/delivery-types/pickup.png'
-
 const configFile = {
   app_id: 'ordering-react',
   project: 'luisv4',
@@ -101,7 +95,6 @@ theme.images = {
   logos,
   general: {
     homeHero,
-    businessHero,
     notFound,
     notFound404,
     notFoundLighting,
@@ -147,13 +140,6 @@ theme.images = {
     driverPhoto: 'https://res.cloudinary.com/demo/image/fetch/c_thumb,g_face,r_max/https://www.freeiconspng.com/thumbs/driver-icon/driver-icon-14.png',
     businessLogo: storeDummy,
     customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
-  },
-  deliveryTypes: {
-    delivery: delivery,
-    curbside: curbside,
-    driveThru: driveThru,
-    eatIn: eatIn,
-    pickUp: pickUp
   }
 }
 
@@ -162,6 +148,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <OrderingProvider Alert={Alert} settings={configFile}>
       <Router />
+      <Toast />
     </OrderingProvider>
   </ThemeProvider>
   , wrapper)

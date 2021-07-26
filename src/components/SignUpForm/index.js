@@ -74,6 +74,8 @@ const SignUpFormUI = (props) => {
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
+  const [isSignupBusiness, setIsSignupBusiness] = useState(false)
+
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
     cookiepolicy: 'single_host_origin',
@@ -245,6 +247,28 @@ const SignUpFormUI = (props) => {
           <TitleHeroSide>
             <h1>{t('TITLE_SIGN_UP', 'Welcome!')}</h1>
             <p>{t('SUBTITLE_SIGN_UP', 'Enter your personal details and start journey with us.')}</p>
+            {configs?.business_signup_allow?.value === '1' && (
+              <Button
+                color='primary'
+                name='signupbusiness'
+                onClick={() => {
+                  setIsSignupBusiness(!isSignupBusiness)
+                  handleChangeInput({
+                    target: {
+                      name: 'level',
+                      value: !isSignupBusiness === true ? 2 : 3
+                    }
+                  })
+                }}
+              >
+                {formState.loading
+                  ? `${t('LOADING', 'Loading')}...`
+                  : !isSignupBusiness
+                    ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
+                    : t('SIGN_UP', 'Sign up')
+                }
+              </Button>
+            )}
           </TitleHeroSide>
         </HeroSide>
         <FormSide isPopup={isPopup}>
@@ -356,7 +380,12 @@ const SignUpFormUI = (props) => {
               type='submit'
               disabled={formState.loading || validationFields?.loading}
             >
-              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
+              {formState.loading
+                  ? `${t('LOADING', 'Loading')}...`
+                  : isSignupBusiness
+                    ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
+                    : t('SIGN_UP', 'Sign up')
+                }
             </Button>
           </FormInput>
           {elementLinkToLogin && (

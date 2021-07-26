@@ -85,7 +85,7 @@ import { Button } from './styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
 import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
-
+import { Toast } from './styles/Toast'
 // additional
 import {
   sortInputFields,
@@ -200,7 +200,7 @@ export {
   Tab,
   Tabs,
   TextArea,
-
+  Toast,
   // additional
   sortInputFields,
   capitalize,

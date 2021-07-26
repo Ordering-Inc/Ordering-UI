@@ -99,11 +99,9 @@ export const ProductItemAccordion = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <AccordionSection>
         <Accordion
           isValid={product?.valid ?? true}
@@ -245,7 +243,7 @@ export const ProductItemAccordion = (props) => {
               <p>{t('INGREDIENTS', 'Ingredients')}</p>
               {productInfo().ingredients.map(ingredient => !ingredient.selected && (
                 <li className='ingredient' key={ingredient.id}>
-                  <span>{t('NO', 'No')} {ingredient.name}</span>
+                  <span>{ingredient.selected !== undefined && t('NO', 'No')} {ingredient.name}</span>
                 </li>
               ))}
             </ProductOptionsList>
@@ -282,13 +280,11 @@ export const ProductItemAccordion = (props) => {
         </AccordionContent>
       </AccordionSection>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

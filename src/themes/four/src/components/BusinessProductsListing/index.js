@@ -31,6 +31,7 @@ import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../../../../../components/Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { Cart } from '../Cart'
+import { useTheme } from 'styled-components'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -62,6 +63,7 @@ const BusinessProductsListingUI = (props) => {
 
   const { business, loading, error } = businessState
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
@@ -190,7 +192,7 @@ const BusinessProductsListingUI = (props) => {
                   <WrapProductsCategroy>
                     {!(business?.categories?.length === 0 && !categoryId) && (
                       <BusinessProductsCategories
-                        categories={[{ id: null, name: t('ALL', 'All') }, { id: 'featured', name: t('FEATURED', 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                        categories={[{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                         categorySelected={categorySelected}
                         onClickCategory={handleChangeCategory}
                         featured={featuredProducts}
@@ -201,8 +203,8 @@ const BusinessProductsListingUI = (props) => {
                   <WrapProducts>
                     <BusinessProductsList
                       categories={[
-                        { id: null, name: t('ALL', 'All') },
-                        { id: 'featured', name: t('FEATURED', 'Featured') },
+                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
                         ...business?.categories.sort((a, b) => a.rank - b.rank)
                       ]}
                       category={categorySelected}
@@ -267,7 +269,7 @@ const BusinessProductsListingUI = (props) => {
         {
           !loading && business && !Object.keys(business).length && (
             <NotFoundSource
-              content={t('NOT_FOUND_BUSINESS_PRODUCTS', 'No products to show at this business, please try with other business.')}
+              content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
               btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
               onClickButton={() => handleSearchRedirect()}
             />
@@ -277,8 +279,8 @@ const BusinessProductsListingUI = (props) => {
         {
           !loading && !business && location.pathname.includes('/store/') && (
             <NotFoundSource
-              content={t('ERROR_NOT_FOUND_STORE', 'Sorry, an error has occurred with business selected.')}
-              btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+              content={t('ERROR_NOT_FOUND_STORE', theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
+              btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
               onClickButton={handleSearchRedirect}
             />
           )
@@ -293,7 +295,7 @@ const BusinessProductsListingUI = (props) => {
         {error && error.length > 0 && Object.keys(business).length && (
           <NotFoundSource
             content={error[0]?.message || error[0]}
-            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+            btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
             onClickButton={handleSearchRedirect}
           />
         )}
@@ -303,9 +305,9 @@ const BusinessProductsListingUI = (props) => {
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (
-              `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
+              `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
             ) : !currentCart?.valid_minimum ? (
-              `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
+              `${t('MINIMUN_SUBTOTAL_ORDER', theme?.defaultLanguages?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
             ) : !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')
           }
           isSecondaryBtn={!currentCart?.valid_maximum || !currentCart?.valid_minimum}
@@ -340,7 +342,7 @@ const BusinessProductsListingUI = (props) => {
 
         {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
           <NotFoundSource
-            content={t('ERROR_GET_PRODUCT', 'Sorry, we couldn\'t find the requested product.')}
+            content={t('ERROR_GET_PRODUCT', theme?.defaultLanguages?.ERROR_GET_PRODUCT || 'Sorry, we couldn\'t find the requested product.')}
           />
         )}
         {(productModal.product || curProduct) && (

@@ -41,12 +41,13 @@ const BusinessControllerUI = (props) => {
     isCustomLayout,
     isShowCallcenterInformation,
     isBusinessOpen,
-    businessWillCloseSoonMinutes
+    businessWillCloseSoonMinutes,
+    isBusinessClose
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ parsePrice, parseDistance, parseNumber, optimizeImage }] = useUtils()
+  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -80,7 +81,7 @@ const BusinessControllerUI = (props) => {
             {isSkeleton ? (
               <Skeleton height={100} />
             ) : (
-              <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!isBusinessOpen}>
+              <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!isBusinessOpen || isBusinessClose}>
                 <BusinessTags>
                   {business?.featured &&
                     <span className='crown'>
@@ -89,14 +90,14 @@ const BusinessControllerUI = (props) => {
                   {!isCustomLayout && (
                     <div>
                       {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
-                      {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
+                      {(!isBusinessOpen || isBusinessClose) && <span>{t('PREORDER', 'PreOrder')}</span>}
                     </div>
                   )}
                 </BusinessTags>
-                {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
+                {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && !isBusinessClose && (
                   <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
                 )}
-                {!isBusinessOpen && <h1>{t('CLOSED', 'Closed')}</h1>}
+                {(!isBusinessOpen || isBusinessClose) && <h1>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>
             )}
           </BusinessHero>
