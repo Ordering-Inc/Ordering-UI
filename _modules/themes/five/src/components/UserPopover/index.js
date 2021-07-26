@@ -61,10 +61,6 @@ var optionsDefault = [{
 var extraOptions = [{
   name: 'profile',
   pathname: '/profile',
-  displayName: 'My saved places'
-}, {
-  name: 'profile',
-  pathname: '/profile',
   displayName: 'view account'
 }];
 
