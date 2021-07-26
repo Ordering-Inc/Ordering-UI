@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import TiPencil from '@meronex/icons/ti/TiPencil'
+import VscEdit from '@meronex/icons/vsc/VscEdit'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
@@ -58,7 +58,7 @@ const AddressListUI = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
-
+  console.log(addressList)
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -178,11 +178,12 @@ const AddressListUI = (props) => {
           (!isPopover || !addressOpen) && (
             <Button
               className='add'
+              outline
               color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
               onClick={() => openAddress({})}
               disabled={orderState?.loading || actionStatus.loading}
             >
-              {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')}
+              {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
             </Button>
           )
         }
@@ -247,7 +248,7 @@ const AddressListUI = (props) => {
                   </div>
                   <AddressItemActions className='form'>
                     <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                      <TiPencil />
+                      <VscEdit />
                     </a>
                     <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
                       <VscTrash />

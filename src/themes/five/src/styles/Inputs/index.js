@@ -23,6 +23,11 @@ export const Input = styled.input`
   &:-ms-input-placeholder {
     color: #DBDCDB;
   }
+  ${({ borderBottom }) => borderBottom && css`
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid #E9ECEF;
+  `}
 `
 
 export const InputGroup = styled.div`

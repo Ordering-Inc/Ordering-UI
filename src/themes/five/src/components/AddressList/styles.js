@@ -86,17 +86,9 @@ export const AddressItemActions = styled.div`
     cursor: pointer;
     margin: 0px 5px;
     font-size: 30px;
-
-    &:nth-child(1) {
-      svg {
-        color: #F2BB40;
-      }
-    }
-
-    &:nth-child(2) {
-      svg {
-        color: #D81212;
-      }
+    
+    svg {
+      color: #B1BCCC;
     }
   }
   a.disabled {
