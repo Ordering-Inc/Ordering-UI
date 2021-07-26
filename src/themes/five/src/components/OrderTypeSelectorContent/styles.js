@@ -16,6 +16,10 @@ export const OrderTypeListItemContainerStyled = styled.div`
     object-fit: cover;
     background-position: center;
   `}
+
+  ${({ active }) => active && css`
+    opacity: 0.6;
+  `}
 `
 
 export const OrderTypeListItemContainer = (props) => {

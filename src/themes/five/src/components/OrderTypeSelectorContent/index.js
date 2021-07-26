@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, OrderTypeControl } from 'ordering-components'
+import { useLanguage, OrderTypeControl, useOrder } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import {
@@ -19,6 +19,7 @@ export const OrderTypeSelectorContentUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [orderStatus] = useOrder()
 
   const handleClickOrderType = (orderType) => {
     onClose && onClose()
@@ -41,6 +42,7 @@ export const OrderTypeSelectorContentUI = (props) => {
               key={i}
               bgimage={item?.image}
               onClick={() => handleClickOrderType(item.value)}
+              active={orderStatus?.options?.type === item?.value}
             >
               <OrderTypeTitle>{item.text}</OrderTypeTitle>
               <OrderTypeDescription>{item.description}</OrderTypeDescription>

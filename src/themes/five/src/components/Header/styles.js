@@ -71,6 +71,14 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
 
+  #select-input {
+    border-radius: 7.6px;
+
+    #list {
+      border-radius: 7.6px;
+    }
+  }
+
   &.left-header {
     background: #F8F9FA;
     border: none;
