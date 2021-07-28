@@ -21,8 +21,6 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _Confirm = require("../../../../../components/Confirm");
 
-var _BusinessTypeFilter = require("../../../../../components/BusinessTypeFilter");
-
 var _OrdersOption = require("../../../../../components/OrdersOption");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
@@ -87,7 +85,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       isCustomLayout = props.isCustomLayout,
       onRedirectPage = props.onRedirectPage,
       handleChangeSearch = props.handleChangeSearch,
-      handleChangeBusinessType = props.handleChangeBusinessType,
       handleBusinessClick = props.handleBusinessClick;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -221,12 +218,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
-    images: props.images,
-    businessTypes: props.businessTypes,
-    defaultBusinessType: props.defaultBusinessType,
-    handleChangeBusinessType: handleChangeBusinessType
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.ListWrapper, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.ListWrapper, {
     id: "list_wrapper",
     className: "list-wrapper"
   }, windowSize.width > 850 && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
@@ -311,7 +303,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     isCustomLayout: true,
     isBusinessesLoading: businessesList.loading
-  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses'), "sdfdsfdsfdsf"), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,
     onClose: function onClose() {

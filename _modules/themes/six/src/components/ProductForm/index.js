@@ -25,10 +25,6 @@ var _ProductIngredient = require("../../../../../components/ProductIngredient");
 
 var _ProductShare = require("../../../../../components/ProductShare");
 
-var _LoginForm = require("../../../../../components/LoginForm");
-
-var _SignUpForm = require("../../../../../components/SignUpForm");
-
 var _ForgotPasswordForm = require("../../../../../components/ForgotPasswordForm");
 
 var _AddressList = require("../../../../../components/AddressList");
@@ -44,6 +40,10 @@ var _Modal = require("../Modal");
 var _ProductOption = require("../ProductOption");
 
 var _ProductOptionSubOption = require("../ProductOptionSubOption");
+
+var _LoginForm = require("../LoginForm");
+
+var _SignUpForm = require("../SignUpForm");
 
 var _styles = require("./styles");
 
@@ -328,7 +328,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClose: function onClose() {
       return closeModal();
     },
-    width: "70%",
+    width: "50%",
     padding: "0"
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,

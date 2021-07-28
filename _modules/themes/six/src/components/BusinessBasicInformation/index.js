@@ -17,9 +17,15 @@ var _GrDeliver = _interopRequireDefault(require("@meronex/icons/gr/GrDeliver"));
 
 var _FaStar = _interopRequireDefault(require("@meronex/icons/fa/FaStar"));
 
+var _BsExclamationCircle = _interopRequireDefault(require("@meronex/icons/bs/BsExclamationCircle"));
+
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../../../../utils");
+
+var _Modal = require("../Modal");
+
+var _BusinessInformation = require("../BusinessInformation");
 
 var _styles = require("./styles");
 
@@ -45,7 +51,9 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   var _props$beforeElements, _props$beforeComponen, _orderState$options, _business$reviews, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
-      businessState = props.businessState;
+      businessState = props.businessState,
+      setOpenBusinessInformation = props.setOpenBusinessInformation,
+      openBusinessInformation = props.openBusinessInformation;
   var business = businessState.business,
       loading = businessState.loading;
 
@@ -61,7 +69,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
-      parseDistance = _useUtils2$.parseDistance;
+      parseDistance = _useUtils2$.parseDistance,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
@@ -111,7 +120,26 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     className: "start"
   }), business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfomation, null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_BsExclamationCircle.default, {
+    className: "popup",
+    onClick: function onClick() {
+      return setOpenBusinessInformation(true);
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 20
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "80%",
+    open: openBusinessInformation,
+    onClose: setOpenBusinessInformation,
+    padding: "0",
+    hideCloseDefault: true,
+    isTransparent: true
+  }, /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
+    business: business,
+    getBusinessType: getBusinessType,
+    optimizeImage: optimizeImage,
+    onClose: setOpenBusinessInformation
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

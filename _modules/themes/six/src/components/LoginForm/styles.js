@@ -39,23 +39,35 @@ var TitleHeroSide = _styledComponents.default.div(_templateObject4 || (_template
 });
 
 exports.TitleHeroSide = TitleHeroSide;
-var FormSide = (0, _styledComponents.default)(Side)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: auto;\n  background-color: #fff;\n\n  @media (min-width: 769px) {\n    ", "\n  }  \n\n  @media (min-width: 992px) {\n    width: 50%;\n    padding: 4% 0 3%;\n    margin: 4% auto;\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px){\n    font-size: ", ";\n    width: 35%;\n  }\n\n  @media (min-width: 1450px){\n    width: 29%;\n  }\n"])), function (_ref) {
+var FormSide = (0, _styledComponents.default)(Side)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: auto;\n  background-color: #fff;\n\n  @media (min-width: 769px) {\n    ", "\n  }  \n\n  @media (min-width: 992px) {\n    padding: 4% 0 3%;\n    margin: ", ";\n    font-size: ", ";\n    width: ", ";\n  }\n\n  @media (min-width: 1200px){\n    font-size: ", ";\n    width: ", ";\n  }\n\n  @media (min-width: 1450px){\n    width: ", ";\n  }\n"])), function (_ref) {
   var isPopup = _ref.isPopup;
   return isPopup && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      margin: 20px 0px;\n    "])));
 }, function (_ref2) {
   var isPopup = _ref2.isPopup;
-  return isPopup ? '12px' : '1em';
+  return isPopup ? '0' : '4% auto';
 }, function (_ref3) {
   var isPopup = _ref3.isPopup;
+  return isPopup ? '12px' : '1em';
+}, function (_ref4) {
+  var isPopup = _ref4.isPopup;
+  return isPopup ? '100%' : '50%';
+}, function (_ref5) {
+  var isPopup = _ref5.isPopup;
   return isPopup ? '0.9em' : '1em';
+}, function (_ref6) {
+  var isPopup = _ref6.isPopup;
+  return isPopup ? '100%' : '35%';
+}, function (_ref7) {
+  var isPopup = _ref7.isPopup;
+  return isPopup ? '100%' : '30%';
 });
 exports.FormSide = FormSide;
 
-var LoginWith = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  width: 90%;\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (_ref4) {
-  var isPopup = _ref4.isPopup;
+var LoginWith = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  width: 90%;\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (_ref8) {
+  var isPopup = _ref8.isPopup;
   return isPopup ? '13px' : '18px';
-}, function (_ref5) {
-  var isPopup = _ref5.isPopup;
+}, function (_ref9) {
+  var isPopup = _ref9.isPopup;
   return isPopup && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      font-size: 17px;\n    "])));
 });
 
@@ -77,14 +89,14 @@ var RedirectLink = _styledComponents.default.div(_templateObject11 || (_template
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n    "])));
 }, function (props) {
   return props.theme.colors.primary;
-}, function (_ref6) {
-  var register = _ref6.register;
+}, function (_ref10) {
+  var register = _ref10.register;
   return register && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    width: 90%;\n\n    @media (min-width: 481px) {\n      width: 90%;\n    }\n  "])));
-}, function (_ref7) {
-  var isPopup = _ref7.isPopup;
+}, function (_ref11) {
+  var isPopup = _ref11.isPopup;
   return isPopup ? '13px' : '18px';
-}, function (_ref8) {
-  var isPopup = _ref8.isPopup;
+}, function (_ref12) {
+  var isPopup = _ref12.isPopup;
   return isPopup && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      font-size: 16px;\n    "])));
 });
 
