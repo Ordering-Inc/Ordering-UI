@@ -17,11 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 95%;\n  margin: 20px auto 0px;\n"])));
+var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 
 exports.ProductsContainer = ProductsContainer;
 
-var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n  display:  flex;\n\n  ", "\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n"])), function (props) {
+var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n  display:  flex;\n\n  ", "\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n\n  @media (min-width: 1024px) {\n    max-width: 1200px;\n    padding: 15px 35px;\n    margin: 0 auto;\n  }\n\n  @media (min-width: 1405px) {\n    max-width: 1420px;\n  }\n\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (_ref) {
   var isLoading = _ref.isLoading;
@@ -30,7 +30,7 @@ var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateOb
 
 exports.WrapContent = WrapContent;
 
-var WrapperSearch = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  .search-bar {\n    margin-right: 10px;\n    ", "\n  }\n\n  #select-input {\n    border: none;\n    background-color: #fff !important;\n    border-radius: 0;\n    text-transform: uppercase;\n\n    #list {\n      border-radius: 0;\n    }\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n"])), function (props) {
+var WrapperSearch = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  display: none;\n  .search-bar {\n    margin-right: 10px;\n    ", "\n  }\n\n  #select-input {\n    border: none;\n    background-color: #fff !important;\n    border-radius: 0;\n    text-transform: uppercase;\n\n    #list {\n      border-radius: 0;\n    }\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
@@ -65,6 +65,6 @@ var WrapProductsCategroy = _styledComponents.default.div(_templateObject12 || (_
 
 exports.WrapProductsCategroy = WrapProductsCategroy;
 
-var WrapBusinessList = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
+var WrapBusinessList = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  @media (min-width: 1024px) {\n    &.right-list-panel {\n      padding-left: 25px;\n    }\n  } \n\n  @media (min-width: 1405px) {\n    &.right-list-panel {\n      padding-left: 45px;\n    }\n  } \n  \n"])));
 
 exports.WrapBusinessList = WrapBusinessList;

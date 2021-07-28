@@ -39,7 +39,7 @@ var OrderTypeBoxGroup = _styledComponents.default.div(_templateObject6 || (_temp
 
 exports.OrderTypeBoxGroup = OrderTypeBoxGroup;
 
-var OrderItem = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display:flex;\n  justify-content: center;\n  box-sizing: border-box;\n  width: 100%;\n  padding: 15px;\n  @media (min-width: 576px) {\n    width: 50%;\n  }\n  @media (min-width: 850px) {\n    width: 20%;\n    padding: 10px;\n  }\n"])));
+var OrderItem = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display:flex;\n  justify-content: center;\n  box-sizing: border-box;\n  width: 100%;\n  padding: 15px;\n  cursor: pointer;\n\n  @media (min-width: 576px) {\n    width: 50%;\n  }\n  @media (min-width: 850px) {\n    width: 20%;\n    padding: 10px;\n  }\n"])));
 
 exports.OrderItem = OrderItem;
 

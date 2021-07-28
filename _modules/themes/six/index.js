@@ -81,6 +81,12 @@ Object.defineProperty(exports, "BusinessProductsListing", {
     return _BusinessProductsListing.BusinessProductsListing;
   }
 });
+Object.defineProperty(exports, "BusinessReviews", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessReviews.BusinessReviews;
+  }
+});
 Object.defineProperty(exports, "Cart", {
   enumerable: true,
   get: function get() {
@@ -305,6 +311,8 @@ var _BusinessProductsCategories = require("./src/components/BusinessProductsCate
 var _BusinessProductsList = require("./src/components/BusinessProductsList");
 
 var _BusinessProductsListing = require("./src/components/BusinessProductsListing");
+
+var _BusinessReviews = require("./src/components/BusinessReviews");
 
 var _Cart = require("./src/components/Cart");
 

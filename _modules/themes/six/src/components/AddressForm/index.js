@@ -13,11 +13,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _FaHome = _interopRequireDefault(require("@meronex/icons/fa/FaHome"));
+var _BiHome = _interopRequireDefault(require("@meronex/icons/bi/BiHome"));
 
-var _FaPlus = _interopRequireDefault(require("@meronex/icons/fa/FaPlus"));
+var _RiBuildingLine = _interopRequireDefault(require("@meronex/icons/ri/RiBuildingLine"));
 
-var _FaRegBuilding = _interopRequireDefault(require("@meronex/icons/fa/FaRegBuilding"));
+var _AiOutlinePlus = _interopRequireDefault(require("@meronex/icons/ai/AiOutlinePlus"));
 
 var _FaRegHeart = _interopRequireDefault(require("@meronex/icons/fa/FaRegHeart"));
 
@@ -633,7 +633,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return handleAddressTag('home');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaHome.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BiHome.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'office' ? 'active' : '',
     type: "button",
     outline: true,
@@ -641,7 +641,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return handleAddressTag('office');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaRegBuilding.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_RiBuildingLine.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'favorite' ? 'active' : '',
     type: "button",
     outline: true,
@@ -657,7 +657,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return handleAddressTag('other');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaPlus.default, null)))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_AiOutlinePlus.default, null)))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);

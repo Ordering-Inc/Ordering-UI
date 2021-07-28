@@ -331,7 +331,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     featured: featuredProducts,
     openBusinessInformation: openBusinessInformation,
     sideCategory: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.WrapBusinessList, null, windowSize.width > 850 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapBusinessList, {
+    className: "right-list-panel"
+  }, windowSize.width > 850 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation
@@ -392,7 +394,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     isSkeleton: true,
     openBusinessInformation: openBusinessInformation,
     sideCategory: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.WrapBusinessList, null, windowSize.width > 850 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapBusinessList, {
+    className: "right-list-panel"
+  }, windowSize.width > 850 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: {
       business: {},
       loading: true

@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: ", ";\n  h2 {\n    padding: 0 7px;\n    margin-bottom: 0;\n  }\n   h3 {\n    padding: 7px;\n    margin-top: 0;\n    border-bottom: 1px solid ", ";\n   }\n"])), function (props) {
+var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: ", ";\n  h2 {\n    margin-bottom: 0;\n  }\n   h3 {\n    padding: 7px;\n    margin-top: 0;\n    border-bottom: 1px solid ", ";\n   }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (props) {
   return props.theme.colors.borderColor;
