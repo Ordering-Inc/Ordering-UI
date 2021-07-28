@@ -46,6 +46,8 @@ export const OrderItem = styled.div`
   box-sizing: border-box;
   width: 100%;
   padding: 15px;
+  cursor: pointer;
+
   @media (min-width: 576px) {
     width: 50%;
   }

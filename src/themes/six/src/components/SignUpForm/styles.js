@@ -31,19 +31,19 @@ export const FormSide = styled(Side)`
   }  
 
   @media (min-width: 992px) {
-    width: 50%;
     padding: 4% 0 3%;
-    margin: 4% auto;
+    margin: ${({ isPopup }) => isPopup ? '0' : '4% auto'};
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
+    width: ${({ isPopup }) => isPopup ? '100%' : '50%'};
   }
 
   @media (min-width: 1200px){
     font-size: ${({ isPopup }) => isPopup ? '0.9em' : '1em'};
-    width: 35%;
+    width: ${({ isPopup }) => isPopup ? '100%' : '35%'};
   }
 
   @media (min-width: 1450px){
-    width: 29%;
+    width: ${({ isPopup }) => isPopup ? '100%' : '30%'};
   }
 `
 

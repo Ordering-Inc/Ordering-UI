@@ -1,11 +1,16 @@
-import React from 'react'
-import { OrderTypeControl, useLanguage } from 'ordering-components'
+import React, { useState } from 'react'
+import { OrderTypeControl, useLanguage, useSession, useOrder } from 'ordering-components'
 import { Select } from '../../styles/Select'
 import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import FaTruckPickup from '@meronex/icons/fa/FaTruckPickup'
 import MdcTruckDeliveryOutline from '@meronex/icons/mdc/MdcTruckDeliveryOutline'
 import AiFillShop from '@meronex/icons/ai/AiFillShop'
 import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
+
+import { Modal } from '../Modal'
+import { AddressList } from '../AddressList'
+import { AddressForm } from '../AddressForm'
+
 import {
   Option,
   OrderTypeWrapper,
@@ -29,6 +34,15 @@ const OrderTypeSelectorHeaderUI = (props) => {
     orderTypeStyle
   } = props
   const defaultType = configTypes?.includes(typeSelected) ? null : configTypes?.[0]
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [, t] = useLanguage()
+  const [{ auth }] = useSession()
+  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+  const [orderState] = useOrder()
+
+  const openModal = () => {
+    setModalIsOpen(true)
+  }
 
   return (
     <OrderTypeWrapper>
@@ -39,7 +53,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
               {
                 orderTypes && orderTypes.map((orderType) => {
                   return (
-                    <OrderItem key={orderType.value}>
+                    <OrderItem key={orderType.value} onClick={openModal}>
                       <OrderItemWraper>
                         {orderType.itemcontent}
                         {orderType.itemdescription}
@@ -60,6 +74,33 @@ const OrderTypeSelectorHeaderUI = (props) => {
               onChange={(orderType) => handleChangeOrderType(orderType)}
             />)
       }
+      {modalIsOpen && (
+        <Modal
+          title={t('ADDRESS', 'Address')}
+          open={modalIsOpen}
+          onClose={() => setModalIsOpen(false)}
+          width='60%'
+        >
+          {(
+            auth ? (
+              <AddressList
+                isModal
+                changeOrderAddressWithDefault
+                userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                onCancel={() => setModalIsOpen(false)}
+                onAccept={() => setModalIsOpen(false)}
+              />
+            ) : (
+              <AddressForm
+                useValidationFileds
+                address={orderState?.options?.address || {}}
+                onCancel={() => setModalIsOpen(false)}
+                onSaveAddress={() => setModalIsOpen(false)}
+              />
+            )
+          )}
+        </Modal>
+      )}
     </OrderTypeWrapper>
   )
 }

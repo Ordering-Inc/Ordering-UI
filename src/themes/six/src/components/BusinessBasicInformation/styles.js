@@ -5,8 +5,7 @@ export const BusinessContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 7px;
-  /* border: 1px solid red; */
+  padding: 10px 20px;
   ${props => props.isClosed && css`
     background-color: #B8B8B8;
   `}
@@ -25,15 +24,16 @@ export const BusinessContainer = styled.div`
     margin: 0 10px;
     padding: 0;
   }
-  /* @media (min-width: 490px) {
-    justify-content: flex-start;
-  } */
+  @media (min-width: 381px) {
+    padding: 10px 35px;
+  }
+  @media (min-width: 1024px) {
+    padding: 0;
+  }
 `
 export const BusinessContent = styled.div`
   display: flex;
-  /* @media (min-width: 426px) {
-    margin: 15px;
-  } */
+  position: relative;
 `
 export const BusinessInfo = styled.div`
   display: flex;
@@ -90,5 +90,29 @@ export const BusinessInfoItem = styled.div`
   }
   .meta {
     width: 300px;
+    @media (min-width: 381px) {
+      width: 350px;
+    }
+  }
+`
+
+export const BusinessInfomation = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+
+  svg {
+    font-size: 20px;
+  }
+
+  &:hover svg{
+    font-size: 21px;
   }
 `

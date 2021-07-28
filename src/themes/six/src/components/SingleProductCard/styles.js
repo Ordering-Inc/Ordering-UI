@@ -20,20 +20,10 @@ export const CardContainer = styled.div`
   ) && css`
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
   `}
-
-  ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
-    @media (min-width: 993px) {
-      width: calc(50% - 40px);
-    }
-  ` : css`
-    @media (min-width: 681px) {
-      width: calc(50% - 40px);
-    }
-
-    @media (min-width: 993px) {
-      width: calc(33% - 40px);
-    }
-  `}
+  
+  @media (min-width: 681px) {
+    width: calc(50% - 40px);
+  }
 `
 
 export const SoldOut = styled.span`

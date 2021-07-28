@@ -4,11 +4,29 @@ export const CategoriesContainer = styled.div`
   display: flex;
   overflow-x: auto;
   padding: 5px;
-  background: ${props => props.theme.colors.backgroundPage};
-  position: sticky;
-  top: 0;
   text-align: center;
-  z-index: 5;
+  position: sticky;
+
+  ${({ vertical }) => vertical
+    ? css`
+        top: 65px;
+        z-index: 4;
+        box-shadow: none;
+        padding: 0px;
+      `
+    : css`
+        top: 0px;
+        z-index: 5;
+        border-bottom: 1px solid #DEE2E6;
+        
+        @media (min-width: 381px) {
+          padding: 0 15px;
+        }
+        @media (min-width: 1024px) {
+          background-color: #F7F7F7;
+        }
+    `
+  }
 
   div.category {
     text-overflow: ellipsis;
@@ -22,7 +40,8 @@ export const CategoriesContainer = styled.div`
     `}
   }
 
-  @media (min-width: 381px) {
-    padding: 15px;
-  }
+  
+
+  
+  
 `
