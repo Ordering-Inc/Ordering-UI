@@ -14,14 +14,22 @@ export const Tabs = styled.div`
       `
     : css`
       flex-direction: row;
-      border-bottom: 1px solid ${props => props.theme.colors.borderColor};
       width: 100%;
+
+      @media (min-width: 1024px) {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      @media (min-width: 1405px) {
+        max-width: 1420px;
+      }
     `
   }
 `
 
 export const Tab = styled.div`
-  padding: 10px 15px;
+  padding: ${({ vertical }) => vertical ? '10px 0' : '10px 15px'};
   cursor: pointer;
   font-weight: 500;
   ${({ active }) => active && css`
