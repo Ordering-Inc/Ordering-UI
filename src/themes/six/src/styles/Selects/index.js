@@ -10,12 +10,12 @@ export const Option = styled.div`
   font-size: 14px;
   font-weight: 100;
   &:hover {
-    background-color: ${darken(0.03, '#CCC')};
+    background-color: ${darken(0.03, '#E8F0ED')};
   }
   ${props => props.selected && css`
-    background-color: ${darken(0.07, '#CCC')};
+    background-color: ${darken(0.05, '#E8F0ED')};
     &:hover {
-      background-color: ${darken(0.07, '#CCC')};
+      background-color: ${darken(0.03, '#E8F0ED')};
     }
   `}
   svg {
@@ -37,12 +37,11 @@ export const Option = styled.div`
 
 export const Options = styled.div`
   position: absolute;
-  background-color: #CCC;
+  background-color: #fff;
   margin-top: 7px;
   z-index: 10000;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #CCC;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   overflow: hidden;
 
   ${({ position }) => position?.toLowerCase() === 'left' && css`

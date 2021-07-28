@@ -236,7 +236,7 @@ const BusinessProductsListingUI = (props) => {
                       />
                     )}
                   </WrapProductsCategroy>
-                  <WrapBusinessList>
+                  <WrapBusinessList className='right-list-panel'>
                     {windowSize.width > 850 &&
                       <>
                         <BusinessBasicInformation
@@ -317,7 +317,7 @@ const BusinessProductsListingUI = (props) => {
                       />
                     )}
                   </WrapProductsCategroy>
-                  <WrapBusinessList>
+                  <WrapBusinessList className='right-list-panel'>
                     {windowSize.width > 850 &&
                       <>
                         <BusinessBasicInformation

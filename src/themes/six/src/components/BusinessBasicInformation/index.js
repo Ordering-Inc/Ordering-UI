@@ -4,24 +4,32 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import FaStar from '@meronex/icons/fa/FaStar'
+import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
 import { convertHoursToMinutes } from '../../../../../utils'
+
+import { Modal } from '../Modal'
+import { BusinessInformation } from '../BusinessInformation'
+
 import {
   BusinessContainer,
   BusinessContent,
   BusinessInfo,
-  BusinessInfoItem
+  BusinessInfoItem,
+  BusinessInfomation
 } from './styles'
 const types = ['food', 'laundry', 'alcohol', 'groceries']
 export const BusinessBasicInformation = (props) => {
   const {
     isSkeleton,
-    businessState
+    businessState,
+    setOpenBusinessInformation,
+    openBusinessInformation
   } = props
   const { business, loading } = businessState
   const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const [{ parsePrice, parseDistance }] = useUtils()
+  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -112,7 +120,34 @@ export const BusinessBasicInformation = (props) => {
               </div>
             </BusinessInfoItem>
           </BusinessInfo>
+          <BusinessInfomation>
+            {
+              business?.name ? (
+                <BsExclamationCircle
+                  className='popup'
+                  onClick={() => setOpenBusinessInformation(true)}
+                />
+              ) : (
+                <Skeleton width={20} />
+              )
+            }
+          </BusinessInfomation>
         </BusinessContent>
+        <Modal
+          width='80%'
+          open={openBusinessInformation}
+          onClose={setOpenBusinessInformation}
+          padding='0'
+          hideCloseDefault
+          isTransparent
+        >
+          <BusinessInformation
+            business={business}
+            getBusinessType={getBusinessType}
+            optimizeImage={optimizeImage}
+            onClose={setOpenBusinessInformation}
+          />
+        </Modal>
       </BusinessContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

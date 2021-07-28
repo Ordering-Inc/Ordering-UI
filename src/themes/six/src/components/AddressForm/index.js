@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import FaHome from '@meronex/icons/fa/FaHome'
-import FaPlus from '@meronex/icons/fa/FaPlus'
-import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
+import BiHome from '@meronex/icons/bi/BiHome'
+import RiBuildingLine from '@meronex/icons/ri/RiBuildingLine'
+import AiOutlinePlus from '@meronex/icons/ai/AiOutlinePlus'
 import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
@@ -451,16 +451,16 @@ const AddressFormUI = (props) => {
 
           <AddressTagSection>
             <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
-              <span><FaHome /></span>
+              <span><BiHome /></span>
             </Button>
             <Button className={addressTag === 'office' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('office')}>
-              <span><FaRegBuilding /></span>
+              <span><RiBuildingLine /></span>
             </Button>
             <Button className={addressTag === 'favorite' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('favorite')}>
               <span><FaRegHeart /></span>
             </Button>
             <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
-              <span><FaPlus /></span>
+              <span><AiOutlinePlus /></span>
             </Button>
           </AddressTagSection>
           {
