@@ -11,6 +11,7 @@ import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessProductsCategories } from './src/components/BusinessProductsCategories'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
+import { BusinessReviews } from './src/components/BusinessReviews'
 import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
 import { CartSidebar } from './src/components/CartSidebar'
@@ -55,6 +56,7 @@ export {
   BusinessController,
   BusinessesListing,
   BusinessesMap,
+  BusinessReviews,
   BusinessInformation,
   BusinessItemAccordion,
   BusinessProductsCategories,

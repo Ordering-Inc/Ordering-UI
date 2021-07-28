@@ -15,8 +15,6 @@ import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { ProductIngredient } from '../../../../../components/ProductIngredient'
 import { ProductShare } from '../../../../../components/ProductShare'
-import { LoginForm } from '../../../../../components/LoginForm'
-import { SignUpForm } from '../../../../../components/SignUpForm'
 import { ForgotPasswordForm } from '../../../../../components/ForgotPasswordForm'
 import { AddressList } from '../../../../../components/AddressList'
 import { Button } from '../../../../../styles/Buttons'
@@ -26,6 +24,8 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Modal } from '../Modal'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
+import { LoginForm } from '../LoginForm'
+import { SignUpForm } from '../SignUpForm'
 
 import {
   ProductContainer,
@@ -331,7 +331,7 @@ const ProductOptionsUI = (props) => {
           <Modal
             open={modalIsOpen}
             onClose={() => closeModal()}
-            width='70%'
+            width='50%'
             padding='0'
           >
             {modalPageToShow === 'login' && (

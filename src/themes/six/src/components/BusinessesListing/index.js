@@ -15,7 +15,7 @@ import {
 import { Button } from '../../../../../../src/styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Alert } from '../../../../../components/Confirm'
-import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
+// import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
 import { OrdersOption } from '../../../../../components/OrdersOption'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
@@ -44,7 +44,6 @@ const BusinessesListingUI = (props) => {
     isCustomLayout,
     onRedirectPage,
     handleChangeSearch,
-    handleChangeBusinessType,
     handleBusinessClick
   } = props
   const [, t] = useLanguage()
@@ -129,14 +128,6 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
-          <BusinessTypeFilter
-            images={props.images}
-            businessTypes={props.businessTypes}
-            defaultBusinessType={props.defaultBusinessType}
-            handleChangeBusinessType={handleChangeBusinessType}
-          />
-        )}
         <BusinessContent>
           <ListWrapper id='list_wrapper' className='list-wrapper'>
             {windowSize.width > 850 && (
@@ -256,7 +247,7 @@ const BusinessesListingUI = (props) => {
 
         {isCustomLayout && businessesList?.businesses?.length > 0 && (
           <BusinessesTitle>
-            {t('BUSINESSES', 'Businesses')}sdfdsfdsfdsf
+            {t('BUSINESSES', 'Businesses')}
           </BusinessesTitle>
         )}
 

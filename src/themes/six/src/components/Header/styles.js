@@ -13,6 +13,12 @@ export const InnerHeader = styled.div`
   justify-content: space-between;
   width: 93%;
   margin: 10px auto;
+  @media (min-width: 1024px) {
+    width: 96%;
+  }
+  @media (min-width: 1405px) {
+    width: 93%;
+  }
 `
 export const LogoHeader = styled.div`
   cursor: pointer;
@@ -111,9 +117,9 @@ export const MenuLink = styled.a`
   }
 
   @media (min-width: 1200px) {
-    width: 96px;
-    padding: 10px 0;
-    margin: 0 15px;
+    width: 85px;
+    padding: 5px 0;
+    margin: 0 1vw;
   }
 
 `
@@ -160,5 +166,12 @@ export const CustomerInfo = styled.div`
 export const UserEdit = styled.div`
   > :first-child{
      margin-bottom: 20px;  
+  }
+`
+export const DesktopSubmenu = styled.div`
+  display: flex;
+  > div {
+    font-weight: bold;
+    margin: 0 1vw;
   }
 `

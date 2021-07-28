@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 export const ProductsContainer = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
   h2 {
-    padding: 0 7px;
     margin-bottom: 0;
   }
    h3 {
