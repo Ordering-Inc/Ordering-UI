@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserEdit = exports.CustomerInfo = exports.SubMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.Header = void 0;
+exports.DesktopSubmenu = exports.UserEdit = exports.CustomerInfo = exports.SubMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.Header = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,7 +21,7 @@ var Header = _styledComponents.default.div(_templateObject || (_templateObject =
 
 exports.Header = Header;
 
-var InnerHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  color: #000;\n  justify-content: space-between;\n  width: 93%;\n  margin: 10px auto;\n"])));
+var InnerHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  color: #000;\n  justify-content: space-between;\n  width: 93%;\n  margin: 10px auto;\n  @media (min-width: 1024px) {\n    width: 96%;\n  }\n  @media (min-width: 1405px) {\n    width: 93%;\n  }\n"])));
 
 exports.InnerHeader = InnerHeader;
 
@@ -53,7 +53,7 @@ var MenuItem = _styledComponents.default.div(_templateObject9 || (_templateObjec
 
 exports.MenuItem = MenuItem;
 
-var MenuLink = _styledComponents.default.a(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 14px;\n  padding: 5px 0;\n  color: #333;\n  border: 1px solid #000000;\n  border-radius: 100px;\n  cursor: pointer;\n  width: 75px;\n  text-align: center;\n  margin: 0 7px;\n  ", "\n\n  @media (min-width: 920px) {\n    width: 80px;\n    padding: 7px 0;\n  }\n\n  @media (min-width: 1200px) {\n    width: 96px;\n    padding: 10px 0;\n    margin: 0 15px;\n  }\n\n"])), function (_ref) {
+var MenuLink = _styledComponents.default.a(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 14px;\n  padding: 5px 0;\n  color: #333;\n  border: 1px solid #000000;\n  border-radius: 100px;\n  cursor: pointer;\n  width: 75px;\n  text-align: center;\n  margin: 0 7px;\n  ", "\n\n  @media (min-width: 920px) {\n    width: 80px;\n    padding: 7px 0;\n  }\n\n  @media (min-width: 1200px) {\n    width: 85px;\n    padding: 5px 0;\n    margin: 0 1vw;\n  }\n\n"])), function (_ref) {
   var highlight = _ref.highlight;
   return highlight && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.secundary;
@@ -77,3 +77,7 @@ exports.CustomerInfo = CustomerInfo;
 var UserEdit = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  > :first-child{\n     margin-bottom: 20px;  \n  }\n"])));
 
 exports.UserEdit = UserEdit;
+
+var DesktopSubmenu = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  > div {\n    font-weight: bold;\n    margin: 0 1vw;\n  }\n"])));
+
+exports.DesktopSubmenu = DesktopSubmenu;

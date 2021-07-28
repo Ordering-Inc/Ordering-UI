@@ -59,7 +59,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         onClick: function onClick() {
           return handlerClickCategory(category);
         },
-        borderBottom: !sideCategory
+        borderBottom: !sideCategory,
+        vertical: sideCategory
       }, category.name);
     });
   };
@@ -73,7 +74,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
-    featured: featured
+    featured: featured,
+    vertical: sideCategory
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary",
     vertical: sideCategory
