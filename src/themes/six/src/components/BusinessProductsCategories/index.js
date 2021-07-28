@@ -23,6 +23,7 @@ const BusinessProductsCategoriesUI = (props) => {
           active={categorySelected?.id === category.id}
           onClick={() => handlerClickCategory(category)}
           borderBottom={!sideCategory}
+          vertical={sideCategory}
         >
           {category.name}
         </Tab>
@@ -37,7 +38,7 @@ const BusinessProductsCategoriesUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <CategoriesContainer featured={featured}>
+      <CategoriesContainer featured={featured} vertical={sideCategory}>
         {!isSkeleton ? (
           <Tabs variant='primary' vertical={sideCategory}>
             {openBusinessInformation ? (

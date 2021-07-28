@@ -145,6 +145,8 @@ export const AddressTagSection = styled.div`
     align-items: center;
     width: 46px;
     height: 46px;
+    border: none;
+    background-color: transparent;
 
     img {
       width: 22px;
@@ -155,12 +157,16 @@ export const AddressTagSection = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 22px;
+      font-size: 26px;
     }
+
+    &:hover {
+      background-color: transparent;
+      color: ${props => props.theme.colors.primary};
+    }    
   }
 
   button.active {
-    border: 1px solid ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
   }
 `

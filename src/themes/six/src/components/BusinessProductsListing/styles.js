@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
-  width: 95%;
-  margin: 20px auto 0px;
+  width: 100%;
 `
 
 export const WrapContent = styled.div`
@@ -17,6 +16,17 @@ export const WrapContent = styled.div`
   @media (min-width: 381px) {
     padding: 15px;
   }
+
+  @media (min-width: 1024px) {
+    max-width: 1200px;
+    padding: 15px 35px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 1405px) {
+    max-width: 1420px;
+  }
+
 `
 
 export const WrapperSearch = styled.div`
@@ -24,7 +34,7 @@ export const WrapperSearch = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
+  display: none;
   .search-bar {
     margin-right: 10px;
     ${props => props.theme?.rtl && css`
@@ -138,4 +148,17 @@ export const WrapProductsCategroy = styled.div`
 
 export const WrapBusinessList = styled.div`
   width: 100%;
+
+  @media (min-width: 1024px) {
+    &.right-list-panel {
+      padding-left: 25px;
+    }
+  } 
+
+  @media (min-width: 1405px) {
+    &.right-list-panel {
+      padding-left: 45px;
+    }
+  } 
+  
 `

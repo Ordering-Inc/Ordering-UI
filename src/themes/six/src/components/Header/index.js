@@ -14,7 +14,8 @@ import {
   MenuLink,
   CustomerInfo,
   UserEdit,
-  SubMenu
+  SubMenu,
+  DesktopSubmenu
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -167,21 +168,20 @@ export const Header = (props) => {
             <RightHeader className='test-mark'>
               <Menu>
                 {onlineStatus && windowSize.width > 820 && (
-                  <>
-                    <MomentPopover
-                      open={openPopover.moment}
-                      onClick={() => handleTogglePopover('moment')}
-                      onClose={() => handleClosePopover('moment')}
+                  <DesktopSubmenu>
+                    <HeaderOption
+                      variant='moment'
+                      momentState={orderState?.options?.moment}
+                      onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                        ? null
+                        : (variant) => openModal(variant)}
                     />
-                    <AddressesPopover
-                      auth={auth}
-                      addressState={orderState?.options?.address}
-                      open={openPopover.addresses}
-                      onClick={() => handleTogglePopover('addresses')}
-                      onClose={() => handleClosePopover('addresses')}
-                      isCustomerMode={isCustomerMode}
+                    <HeaderOption
+                      variant='address'
+                      addressState={orderState?.options?.address?.address?.split(',')?.[0]}
+                      onClick={(variant) => openModal(variant)}
                     />
-                  </>
+                  </DesktopSubmenu>
                 )}
                 {
                   !auth && windowSize.width > 768 && (
@@ -263,8 +263,8 @@ export const Header = (props) => {
             title={t(modalSelected.toUpperCase(), capitalize(modalSelected))}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            width='70%'
-            padding={modalSelected === 'address' ? '15px' : '5px'}
+            width='60%'
+            padding={modalSelected === '20px'}
           >
             {modalSelected === 'cart' && (
               <CartContent
