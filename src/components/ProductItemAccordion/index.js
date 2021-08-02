@@ -243,7 +243,7 @@ export const ProductItemAccordion = (props) => {
               <p>{t('INGREDIENTS', 'Ingredients')}</p>
               {productInfo().ingredients.map(ingredient => !ingredient.selected && (
                 <li className='ingredient' key={ingredient.id}>
-                  <span>{ingredient.selected !== undefined && t('NO', 'No')} {ingredient.name}</span>
+                  <span>{t('NO', 'No')} {ingredient.name}</span>
                 </li>
               ))}
             </ProductOptionsList>
