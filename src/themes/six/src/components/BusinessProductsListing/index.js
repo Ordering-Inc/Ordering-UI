@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
+import MdClose from '@meronex/icons/md/MdClose'
+
 import {
   BusinessAndProductList,
   useEvent,
@@ -14,12 +16,12 @@ import {
 import {
   ProductsContainer,
   WrapContent,
-  ProductLoading,
-  SkeletonItem,
   WrapperSearch,
   WrappLayout,
   WrapProductsCategroy,
-  WrapBusinessList
+  WrapBusinessList,
+  ProductDetail,
+  BackMenu
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -29,7 +31,6 @@ import { Cart } from '../../../../../components/Cart'
 import { Select } from '../../../../../styles/Select'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
-import { Modal } from '../Modal'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
@@ -101,7 +102,7 @@ const BusinessProductsListingUI = (props) => {
       category: product.category_id
     })
     setCurProduct(product)
-    setModalIsOpen(true)
+    // setModalIsOpen(true)
     events.emit('product_clicked', product)
   }
 
@@ -172,6 +173,12 @@ const BusinessProductsListingUI = (props) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  useEffect(() => {
+    if (curProduct) {
+      window.scrollTo(0, 0)
+    }
+  }, [curProduct])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -182,7 +189,7 @@ const BusinessProductsListingUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
         {
-          !loading && business?.id && (
+          !loading && business?.id && !curProduct && (
             <WrappLayout
               isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
             >
@@ -279,6 +286,22 @@ const BusinessProductsListingUI = (props) => {
             </WrappLayout>
           )
         }
+
+        {(!loading && business?.id && curProduct) && (
+          <ProductDetail>
+            <BackMenu>
+              <MdClose onClick={() => closeModalProductForm()} />
+            </BackMenu>
+            <ProductForm
+              businessSlug={business?.slug}
+              product={productModal.product || curProduct}
+              businessId={business?.id}
+              onSave={handlerProductAction}
+            />
+          </ProductDetail>
+
+        )}
+
         {loading && !error && (
           <>
             <WrappLayout>
@@ -390,46 +413,7 @@ const BusinessProductsListingUI = (props) => {
           handleClick={() => setOpenUpselling(true)}
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
-
       )}
-
-      <Modal
-        width='80%'
-        open={openProduct}
-        closeOnBackdrop
-        onClose={() => closeModalProductForm()}
-        padding='0'
-        isProductForm
-      >
-
-        {productModal.loading && !productModal.error && (
-          <ProductLoading>
-            <SkeletonItem>
-              <Skeleton height={45} count={8} />
-            </SkeletonItem>
-          </ProductLoading>
-        )}
-
-        {productModal.error && productModal.error.length > 0 && (
-          <NotFoundSource
-            content={productModal.error[0]?.message || productModal.error[0]}
-          />
-        )}
-
-        {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
-          <NotFoundSource
-            content={t('ERROR_GET_PRODUCT', theme?.defaultLanguages?.ERROR_GET_PRODUCT || 'Sorry, we couldn\'t find the requested product.')}
-          />
-        )}
-        {(productModal.product || curProduct) && (
-          <ProductForm
-            businessSlug={business?.slug}
-            product={productModal.product || curProduct}
-            businessId={business?.id}
-            onSave={handlerProductAction}
-          />
-        )}
-      </Modal>
 
       {currentCart?.products && openUpselling && (
         <UpsellingPage

@@ -3,26 +3,26 @@ import styled, { css } from 'styled-components'
 export const ProductContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-height: 100vh;
   position: relative;
   padding: 50px 10px 10px;
+  width: 100%;
   @media (min-width: 768px) {
     height: 100%;
+    padding: 50px 30px 10px;
   }
-  @media (min-width: 769px) {
-    padding: 10px;
-  }
-  @media (min-width: 1201px) {
+  @media (min-width: 1024px) {
     flex-wrap: nowrap;
     overflow: auto;
-    max-height: 70vh;
-}
+    padding: 0;
+    height: 70vh;
+    overflow-y: scroll;
+  }
 `
 export const WrapperImage = styled.div`
   width: 100%;
   position: relative;
   margin-top: 10px;
-  @media (min-width: 1201px) {
+  @media (min-width: 1024px) {
     display: flex;
     width: calc(40% - 10px);
     position: sticky;
@@ -34,6 +34,8 @@ export const WrapperImage = styled.div`
     ${props => props.theme?.rtl && css`
       border-left: 1px solid ${props => props.theme.colors.borderColor};
     `}
+    margin-top: 0px;
+    padding: 25px 4vw;
   }
 `
 export const ProductImage = styled.div`
@@ -46,8 +48,8 @@ export const ProductImage = styled.div`
     width: 100%;
     object-fit: cover;
   }
-  @media (min-width: 1201px) {
-    justify-content: center;
+  @media (min-width: 1024px) {
+    justify-content: flex-start;
     padding-top: 4vh;
     img {
       width: 280px;
@@ -95,17 +97,20 @@ export const ProductInfo = styled.div`
   @media (min-width: 411px) {
     padding: 10px 0px;
   }
-  @media (min-width: 1201px) {
+  @media (min-width: 1024px) {
     width: calc(60% - 100px);
-    padding: 0 50px;
+    padding: 25px 6vw;
     top: 0;
-    margin-top: 0px;
+    margin-top: 0px;   
+    background-color: #F8F9FA;
+    height: fit-content;
+    min-height: 65vh;
   }
 `
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
   padding: 0 7px;
-  @media (min-width: 1201px) {
+  @media (min-width: 1024px) {
     width: calc(100% - 25px);
   }
 `
@@ -117,17 +122,22 @@ export const SectionTitle = styled.h3`
   margin: 0px;
   font-weight: 600;
   color: #333333;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  margin-bottom: 20px;
 `
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 115px;
+  margin-bottom: 25px;
   h3 {
     color: ${props => props.theme.colors.fontSecundary};
   }
   p {
     font-weight: 300;
     margin-bottom: 5px;
+  }
+  textarea {
+    background-color: transparent;
   }
   @media (min-width: 577px) {
     margin-bottom: 62px;
@@ -138,23 +148,24 @@ export const ProductComment = styled.div`
 `
 export const ProductActions = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 10px 0px;
-  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
   position: fixed;
   bottom: 0;
   right: 0;
   width: 100%;
   background-color: #FFF;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-sizing: border-box;
   div.incdec-control {
-    width: 50%;
+    width: 30%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     svg {
-      width: 35px;
-      height: 35px;
+      width: 25px;
+      height: 25px;
       cursor: pointer;
     }
   }
@@ -166,62 +177,40 @@ export const ProductActions = styled.div`
   button:disabled,
   button.disabled,
   svg.disabled {
-    opacity: 0.5;
+    opacity: 0.7;
   }
   svg.disabled {
     pointer-events: none;
   }
   button.add {
-    width: 90%;
+    width: 48%;
     padding: 5px 10px;
-    margin: 10px 0px 0px;
+    margin: 0px 0px;
     position: relative;
-    span:last-child {
-      position: absolute;
-      right: 0;
-      margin-right: 10px;
-      ${props => props.theme?.rtl && css`
-        position: absolute;
-        left: 0;
-        right: initial;
-        margin-left: 10px;
-        margin-right: 0px;
-      `}
-    }
+    
     &.soldout {
       width: 100%;
       pointer-events: none;
     }
   }
-  @media (min-width: 577px) {
-    justify-content: space-between;
-    flex-direction: row;
-    div.incdec-control {
-      width: 25%;
-    }
-    div:last-child {
-      width: 75%;
-    }
-    button.add {
-      width: 75%;
-      margin: 0 10px;
-    }
-  }
+
   @media (min-width: 769px) {
     position: relative;
     bottom: initial;
     right: initial;
-    button.add {
-      width: 100%;
-      margin: 0px;
-    }
   }
-  @media (min-width: 1201px) {
+  @media (min-width: 1024px) {
     position: sticky;
     top: 100%;
-    padding: 10px 0px;
+    background-color: transparent;
+    box-shadow: none;
+    justify-content: flex-end;
     div.incdec-control {
-      width: 30%;
+      svg {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
     }
     div:last-child {
       width: 70%;
@@ -230,7 +219,7 @@ export const ProductActions = styled.div`
       }
     }
     button.add {
-      width: 68%;
+      width: 30%;
     }
   }
 `
@@ -244,9 +233,9 @@ export const SkeletonBlock = styled.div`
 `
 export const WrapperSubOption = styled.div`
   border-radius: 10px;
-  &.error {
+  /* &.error {
     background-color: ${lighten(0.58, '#A52121')};
-  }
+  } */
   &.soldout {
     pointer-events: none;
     background-color: hsl(0, 0%, 72%);
@@ -270,4 +259,38 @@ export const WrapperIngredients = styled.div`
     pointer-events: none;
     background: hsl(0, 0%, 72%);
   `}
+`
+
+export const ShareWrapper = styled.div`
+  position: fixed;
+  top: 100px;
+  left: 10px;
+  ${props => props.theme?.rtl && css`
+    right: 10px;
+  `}
+  width: fit-content;
+  height: fit-content;
+  z-index: 20;
+  cursor: pointer;
+  
+  .product-share {    
+    .a2a_vertical_style {
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      width: 40px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    left: 25px;
+    ${props => props.theme?.rtl && css`
+      right: 25px;
+    `}
+  }
+
+
+
+
 `

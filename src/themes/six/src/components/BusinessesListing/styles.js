@@ -3,6 +3,7 @@ export const BusinessContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding-top: 1.5px;
 `
 export const BusinessList = styled.div`
   display: flex;
@@ -13,7 +14,6 @@ export const WrapperSearch = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  box-shadow: inset 0 2px 4px -3px #464646;
   
   @media (min-width: 850px) {
     width: 100%;
@@ -69,15 +69,14 @@ export const BusinessContent = styled.div`
   overflow: hidden;
   position: relative;
   z-index: 1;
-  height: 100%;
   @media(min-width: 850px){
     flex-direction: row;
+    height: 100vh;
   }
 `
 export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;  
-  background-color: #fff;
   min-height: 70vh;
   overflow: auto;
   box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 12%);

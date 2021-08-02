@@ -460,8 +460,8 @@ const OrderDetailsUI = (props) => {
                   </SectionTitle>
                   <OrderBusiness>
                     <BusinessWrapper>
-                      <LogoWrapper>
-                        <Skeleton style={{ margin: '7px' }} width={75} height={45} />
+                      <LogoWrapper style={{ margin: '0 7px' }}>
+                        <Skeleton height={45} />
                       </LogoWrapper>
                       <BusinessInfo>
                         <Skeleton width={200} height={30} />
@@ -475,21 +475,24 @@ const OrderDetailsUI = (props) => {
                   <SectionTitle>
                     {t('TO', 'To')}
                   </SectionTitle>
-                  <OrderCustomer>
-                    <CustomerInfo>
-                      <Skeleton style={{ margin: '7px' }} width={75} height={30} />
-                      <Skeleton width={100} height={15} />
-                      <Skeleton width={100} height={15} />
-                      <Skeleton width={100} height={15} />
-                    </CustomerInfo>
-                    <ShareOrderWrapper>
-                      <Skeleton width={100} height={15} />
-                    </ShareOrderWrapper>
-                  </OrderCustomer>
+                  <OrderBusiness>
+                    <BusinessWrapper>
+                      <LogoWrapper style={{ margin: '0 7px' }}>
+                        <Skeleton height={45} />
+                      </LogoWrapper>
+                      <BusinessInfo>
+                        <Skeleton width={200} height={30} />
+                        <Skeleton width={100} height={15} />
+                        <Skeleton width={100} height={15} />
+                        <Skeleton width={100} height={15} />
+                      </BusinessInfo>
+                    </BusinessWrapper>
+                    <ActionsBlock />
+                  </OrderBusiness>
                 </LeftContentWrapper>
               </LeftPanel>
               <RightPanel>
-                <RightContentWrapper>
+                <RightContentWrapper style={{ paddingTop: '20px' }}>
                   <Content className='order-content'>
                     {windowSize.width > 1020 &&
                       <Skeleton height={100} />}

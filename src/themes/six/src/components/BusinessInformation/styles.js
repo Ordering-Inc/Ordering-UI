@@ -1,67 +1,13 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 export const BusinessInformationContainer = styled.div`
   width: 100%;
   position: relative;
   overflow: auto;
 `
-export const BussinessTitle = styled.div`
-  z-index: 1000;
-  display: inline-flex;
-  width: 50%;
-  background: #ffffff;
-  align-items: center;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  border-radius: 16px;
-  padding: 10px;
-  ${props => props.theme?.rtl && css`
-    margin-right: 10px;
-    margin-left: 0px;
-  `}
-`
-export const HeaderImage = styled.div`
-  width: 20%;
-  margin-top: auto;
-  > img {
-    width: 100%;
-    height: 100%;
-  }
-`
 export const BusinessBasicContent = styled.div`
   display: flex;
   padding: 25px 20px 15px;
 `
-export const WrapperBusinessLogo = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
-`
-const BusinessLogoStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  min-height: 75px;
-  border-radius: 10px;
-`
-export const BusinessLogo = (props) => {
-  const style = {}
-  if (props.bgimage) {
-    style.backgroundImage = `url(${props.bgimage})`
-  }
-  return (
-    <BusinessLogoStyled {...props} style={style}>
-      {props.children}
-    </BusinessLogoStyled>
-  )
-}
 export const BusinessInfo = styled.div`
   display: flex;
   width: calc(100% - 75px);
@@ -75,72 +21,32 @@ export const BusinessInfoItem = styled.div`
   ${props => props.theme?.rtl && css`
     padding: 0px 10px 0px 5px;
   `}
-  .meta-info {
-    max-width: 320px;
+  .bold {
+    margin: 0;
+    margin-top: 20px;    
+    font-weight: 600;
   }
-  div {
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    h5,
-    p {
+  .get-direction {
+    margin-top: 20px;
+    button {
+      font-weight: 500;
       display: flex;
       align-items: center;
-      margin: 0px;
-      text-transform: capitalize;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-weight: 300;
-      svg {
-        margin-right: 4px;
-        margin-bottom: 1px;
-        ${props => props.theme?.rtl && css`
-          margin-left: 4px;
-          margin-right: 0px;
-        `}
-        &.start {
-          color: #FFC917;
-        }
-        &.popup {
-          color: ${props => props.theme.colors.primary};
-          cursor: pointer;
-          transform: rotate(180deg);
-        }
-      }
-    }
-    .bold {
-      margin: 0;
-      font-weight: 600;
-    }
-    @media (min-width: 481px) {
-      font-size: 16px;
     }
   }
-`
-export const Information = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  flex: 1;
-  > h5 {
-    margin-block-end: 0.8em;
-    margin-block-start: 0.8em;
-  }
-  > p {
-    margin-block-end: 0;
-    margin-block-start: 0.3em;
-    > svg {
-      vertical-align: middle;
-    }
+
+  @media (min-width: 481px) {
+    font-size: 16px;
   }
 `
 export const BusinessReviewContent = styled.div`
-  padding:20px;  
+  
 `
 export const FlexTabs = styled.div`
   display: flex;
   padding: 7px 20px 0;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: bold;
   background-color: #F7F7F7;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -228,16 +134,15 @@ export const ModalIcon = styled.span`
   position: absolute;
   width: 30px;
   height: 30px;
-  font-size: 30px;
+  font-size: 24px;
   cursor: pointer;
-  color: white;
+  color: #6C757D;
   border-radius: 50%;
-  right: 5px;
-  top: 5px;
+  right: 10px;
+  top: 60px;
   z-index: 1;
-  background: rgba(0,0,0,0.3);
   ${props => props.theme?.rtl && css`
-    left: 5px;
+    left: 10px;
     right: initial;
   `}
   @media (min-width: 578px){
@@ -331,7 +236,8 @@ export const BusinessInfoWrapper = styled.div`
 `
 export const LeftPanel = styled.div`
   width: 100%;
-  @media (min-width: 768px){
+  position: relative;
+  @media (min-width: 850px){
     width: 40%;
     height: 90vh;
     overflow-x: auto;
@@ -340,7 +246,7 @@ export const LeftPanel = styled.div`
 export const RightPanel = styled.div`
   display: none; 
   background-color: ${props => props.theme.colors.emptyPagebackground};
-  @media (min-width: 768px){
+  @media (min-width: 850px){
     width: 60%;    
     overflow: hidden;
     display: flex;
@@ -355,5 +261,48 @@ export const DeliveryInfoSection = styled.div`
     padding: 0 30px;
     font-size: .9rem;
     font-weight: 100;
+  }
+`
+export const GoOrder = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px 20px;
+  button {
+    margin-left: auto;
+    ${props => props.theme?.rtl && css`
+      margin-right: auto;
+    `}
+  }
+`
+export const BusinessName = styled.div`
+ h2 {
+  margin: 0;
+ }
+`
+
+export const TodayEnablTime = styled.p`
+  color: ${props => props.theme.colors.fontSecundary};
+  margin: 0;
+`
+export const BusinessAddress = styled.p`
+  margin: 0;
+  margin-top: 20px;
+  font-size: 1.1rem;
+`
+export const BusinessPhone = styled.p`
+  margin: 0;
+  margin-top: 20px;
+  color: ${props => props.theme.colors.primary};
+  font-weight: 600;
+  border-radius: 100px;
+  width: fit-content;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  padding: 7px 16px;
+  transform: translateX(-15px);
+  transition: all .2s ease;
+  &:hover {
+    background-color: rgba(0,130,72,.1);
   }
 `

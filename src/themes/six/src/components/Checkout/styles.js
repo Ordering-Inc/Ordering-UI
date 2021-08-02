@@ -3,6 +3,7 @@ import React from 'react'
 export const Container = styled.div`
   display: flex;
   width: 100%;
+  padding-top: 75px;
 `
 export const WrappSumarry = styled.div`
   display:flex;
@@ -18,7 +19,7 @@ export const WrappSumarry = styled.div`
          background-color: transparent; 
         `
       : css`
-         background-color: ${props => props.theme.colors.primarybackground};
+         background-color: #233E37;
       `
     } 
     ${({ skeleton }) => skeleton && css`

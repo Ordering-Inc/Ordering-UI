@@ -42,7 +42,7 @@ const ProductShareUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <IconShare ref={iconElement} name='icon-share'>
+      <IconShare ref={iconElement} name='icon-share' className='product-share'>
         <FiShare2 onClick={handleClickShare} />
         <ShareButtons
           ref={contentElement}

@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   width: 100%;
 `
+
 export const WrapperContainer = styled.div`
   display: flex;
   width: 100%;
@@ -184,7 +185,7 @@ export const OrderInfo = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 10px 0px 20px;
+  margin: 20px 0px;
 `
 export const OrderData = styled.div`
   width: 100%;
@@ -292,6 +293,7 @@ export const OrderCustomer = styled.div`
 `
 export const CustomerInfo = styled.div`
   width:93%;
+  display: flex;
   .photo {
     display: inline-flex;
     align-items: center;
@@ -377,8 +379,8 @@ export const OrderProducts = styled(OrderCustomer)`
   width: 100%;
   margin: 0 auto;
   padding: 20px;
-  box-shadow: 0 0 6px #c4c0c0;
-  border-radius: 7px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 7.6px;
   overflow: hidden;
   margin-top: 30px;
   box-sizing: border-box;
@@ -393,8 +395,8 @@ export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  box-shadow: 0 0 6px #c4c0c0;
-  border-radius: 7px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 7.6px;
   overflow: hidden;
   padding: 20px;
   margin-top: 25px;

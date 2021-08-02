@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components'
 export const Header = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
   width: 100%; 
+  height: 75px;
   background-color: #fff;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 6%), 0 0 2px rgb(0 0 0 / 7%);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 10%), 0 0 2px rgb(0 0 0 / 10%);
+  z-index: 10;
 `
 export const InnerHeader = styled.div`
   display: flex;
@@ -12,7 +14,7 @@ export const InnerHeader = styled.div`
   color: #000;
   justify-content: space-between;
   width: 93%;
-  margin: 10px auto;
+  margin: 15px auto;
   @media (min-width: 1024px) {
     width: 96%;
   }

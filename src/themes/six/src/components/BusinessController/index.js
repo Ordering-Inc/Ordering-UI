@@ -37,7 +37,8 @@ const BusinessControllerUI = (props) => {
     handleClick,
     orderType,
     isCustomLayout,
-    isShowCallcenterInformation
+    isShowCallcenterInformation,
+    handleShowBusinessInfo
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -55,7 +56,6 @@ const BusinessControllerUI = (props) => {
   const handleShowAlert = () => {
     setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -154,8 +154,8 @@ const BusinessControllerUI = (props) => {
         </WrapperBusinessCard>
         <BusinessInfomation>
           {
-            business?.name ? (
-              <BsExclamationCircle />
+            business ? (
+              <BsExclamationCircle onClick={() => handleShowBusinessInfo(business)} />
             ) : (
               <Skeleton width={20} />
             )
@@ -180,6 +180,7 @@ const BusinessControllerUI = (props) => {
     </>
   )
 }
+
 export const BusinessController = (props) => {
   const businessControllerProps = {
     ...props,

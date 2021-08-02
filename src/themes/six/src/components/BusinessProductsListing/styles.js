@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
   width: 100%;
+  padding-top: 1.5px;
 `
 
 export const WrapContent = styled.div`
   padding: 5px;
-  background: ${props => props.theme.colors.backgroundPage};
   display:  flex;
 
   ${({ isLoading }) => isLoading && css`
@@ -85,21 +85,6 @@ export const ProductsNotFound = styled.div`
   }
 `
 
-export const ProductLoading = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`
-
-export const SkeletonItem = styled.div`
-  width: 80%;
-  margin: 30px auto;
-
-  span {
-    margin-bottom: 10px;
-  }
-`
-
 export const WrappLayout = styled.div`
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
     display: flex;
@@ -161,4 +146,35 @@ export const WrapBusinessList = styled.div`
     }
   } 
   
+`
+export const ProductDetail = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;  
+`
+export const BackMenu = styled.div`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 15px;
+  right: 10px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  cursor: pointer;  
+  svg {    
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    right: 25px;
+  }
+
+  @media (min-width: 1024px) {
+    right: unset;
+    left: calc(40% - 30px);
+  }
 `

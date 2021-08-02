@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
-import HiClock from '@meronex/icons/hi/HiClock'
 import Skeleton from 'react-loading-skeleton'
 
 import { useTheme } from 'styled-components'
@@ -189,11 +188,10 @@ const CheckoutUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container className='test-mark'>
+      <Container>
         {windowSize.width > 1023 &&
           <WrappSumarry>
             <ConfirmInfoItem>
-              <h5 className='confirmInfo-title'>{t('STORE', 'Store')}</h5>
               <WrapBusinessLogo
                 link
                 onClick={() => handleStoreRedirect(cart?.business?.slug)}
@@ -223,8 +221,6 @@ const CheckoutUI = (props) => {
             <ConfirmInfoItem>
               <h5 className='confirmInfo-title'>{t('DELIVERY_DATE', 'Delivery Date')}</h5>
               <InfoWrapper>
-                <HiClock />
-                {' : '}
                 {options?.moment
                   ? parseDate(options?.moment, { outputFormat: configs?.dates_moment_format?.value })
                   : t('ASAP_ABBREVIATION', 'ASAP')}

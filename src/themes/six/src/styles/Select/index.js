@@ -83,7 +83,7 @@ export const Select = (props) => {
     >
       {!selectedOption && <Selected fullwidth={isFullWidth}>{placeholder || ''}<Chevron><BisDownArrow /></Chevron></Selected>}
       {selectedOption && (
-        <Selected fullwidth={isFullWidth}>
+        <Selected fullwidth={isFullWidth} className='selected-option'>
           <Header>
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>

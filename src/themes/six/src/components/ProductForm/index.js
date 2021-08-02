@@ -7,14 +7,12 @@ import {
   ProductForm as ProductOptions,
   useSession,
   useLanguage,
-  useOrder,
-  useUtils
+  useOrder
 } from 'ordering-components'
 
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { ProductIngredient } from '../../../../../components/ProductIngredient'
-import { ProductShare } from '../../../../../components/ProductShare'
 import { ForgotPasswordForm } from '../../../../../components/ForgotPasswordForm'
 import { AddressList } from '../../../../../components/AddressList'
 import { Button } from '../../../../../styles/Buttons'
@@ -26,6 +24,7 @@ import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
+import { ProductShare } from '../ProductShare'
 
 import {
   ProductContainer,
@@ -40,7 +39,8 @@ import {
   WrapperSubOption,
   SkuContent,
   ProductFormTitle,
-  WrapperIngredients
+  WrapperIngredients,
+  ShareWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -69,7 +69,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  // const [{ parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
 
@@ -147,11 +147,13 @@ const ProductOptionsUI = (props) => {
         )}
 
         {product && !loading && !error && (
-          <ProductShare
-            slug={businessSlug}
-            categoryId={product?.category_id}
-            productId={product?.id}
-          />
+          <ShareWrapper>
+            <ProductShare
+              slug={businessSlug}
+              categoryId={product?.category_id}
+              productId={product?.id}
+            />
+          </ShareWrapper>
         )}
         {
         props.beforeMidElements?.map((BeforeMidElements, i) => (
@@ -289,7 +291,6 @@ const ProductOptionsUI = (props) => {
                         {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD_TO_CART', theme?.defaultLanguages?.ADD_TO_CART || 'Add to Cart')}
                       </span>
                     )}
-                    <span>{productCart.total && parsePrice(productCart.total)}</span>
                   </Button>
                 )}
 

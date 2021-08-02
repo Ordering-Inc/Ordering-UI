@@ -165,7 +165,7 @@ export const Header = (props) => {
             )}
           </LeftHeader>
           {onlineStatus && (
-            <RightHeader className='test-mark'>
+            <RightHeader>
               <Menu>
                 {onlineStatus && windowSize.width > 820 && (
                   <DesktopSubmenu>
