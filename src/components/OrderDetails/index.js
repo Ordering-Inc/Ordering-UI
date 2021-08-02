@@ -380,8 +380,17 @@ const OrderDetailsUI = (props) => {
                     )}
                     {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
                       <tr>
-                        <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
-                        <td>{parsePrice(order?.summary?.subtotal_with_discount || 0)}</td>
+                        {order?.offer_type === 1 ? (
+                          <>
+                            <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                            <td>{parsePrice((order?.summary?.subtotal_with_discount + (order?.summary?.tax || order?.tax)) || 0)}</td>
+                          </>
+                        ) : (
+                          <>
+                            <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                            <td>{parsePrice(order?.summary?.subtotal_with_discount || 0)}</td>
+                          </>
+                        )}
                       </tr>
                     )}
                     {
