@@ -159,7 +159,6 @@ var LoginFormUI = function LoginFormUI(props) {
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
       _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
       otpLeftTime = _useCountdownTimer2[0],
-      _ = _useCountdownTimer2[1],
       resetOtpLeftTime = _useCountdownTimer2[2];
 
   var initParams = {
@@ -306,7 +305,6 @@ var LoginFormUI = function LoginFormUI(props) {
         open: true,
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
-      return;
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
@@ -335,7 +333,7 @@ var LoginFormUI = function LoginFormUI(props) {
     handleSendOtp();
   }, [willVerifyOtpState]);
   (0, _react.useEffect)(function () {
-    if ((otpState === null || otpState === void 0 ? void 0 : otpState.length) == numOtpInputs) {
+    if ((otpState === null || otpState === void 0 ? void 0 : otpState.length) === numOtpInputs) {
       var _parseNumber2 = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone),
           cellphone = _parseNumber2.cellphone,
           countryPhoneCode = _parseNumber2.countryPhoneCode;
@@ -348,20 +346,32 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, [otpState]);
   (0, _react.useEffect)(function () {
-    var _checkPhoneCodeState$, _checkPhoneCodeState$2;
+    var _checkPhoneCodeState$;
 
-    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) setAlertState({
-      open: true,
-      content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
-    });else resetOtpLeftTime();
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) {
+      var _checkPhoneCodeState$2;
+
+      setAlertState({
+        open: true,
+        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
+      });
+    } else {
+      resetOtpLeftTime();
+    }
   }, [checkPhoneCodeState]);
   (0, _react.useEffect)(function () {
-    var _verifyPhoneState$res, _verifyPhoneState$res2;
+    var _verifyPhoneState$res;
 
-    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) setAlertState({
-      open: true,
-      content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
-    });else resetOtpLeftTime();
+    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) {
+      var _verifyPhoneState$res2;
+
+      setAlertState({
+        open: true,
+        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
+      });
+    } else {
+      resetOtpLeftTime();
+    }
   }, [verifyPhoneState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -411,9 +421,7 @@ var LoginFormUI = function LoginFormUI(props) {
     name: "email",
     "aria-label": "email",
     placeholder: t('EMAIL', 'Email'),
-    ref: function ref(e) {
-      return emailInput.current = e;
-    },
+    ref: emailInput,
     onChange: handleChangeInputEmail,
     autoComplete: "off"
   }), useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
