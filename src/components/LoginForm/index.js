@@ -77,7 +77,7 @@ const LoginFormUI = (props) => {
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
   const [otpState, setOtpState] = useState('')
-  const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
+  const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
 
   const initParams = {
@@ -88,7 +88,6 @@ const LoginFormUI = (props) => {
 
   const onSubmit = async () => {
     if (loginWithOtpState) {
-      
       if (!validPhoneFieldState) {
         setAlertState({
           open: true,
@@ -97,9 +96,8 @@ const LoginFormUI = (props) => {
 
         return
       }
-      
+
       setWillVerifyOtpState(true)
-    
     } else {
       handleButtonLoginClick()
     }
@@ -164,7 +162,6 @@ const LoginFormUI = (props) => {
 
   const handleSendOtp = () => {
     if (willVerifyOtpState) {
-
       const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
 
       resetOtpLeftTime()
@@ -182,8 +179,6 @@ const LoginFormUI = (props) => {
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
-
-      return
     }
   }, [formState])
 
@@ -218,8 +213,7 @@ const LoginFormUI = (props) => {
   }, [willVerifyOtpState])
 
   useEffect(() => {
-    if (otpState?.length == numOtpInputs) {
-
+    if (otpState?.length === numOtpInputs) {
       const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
 
       handleCheckPhoneCode({
@@ -231,27 +225,21 @@ const LoginFormUI = (props) => {
   }, [otpState])
 
   useEffect(() => {
-    if (checkPhoneCodeState?.result?.error)
+    if (checkPhoneCodeState?.result?.error) {
       setAlertState({
         open: true,
         content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
       })
-    
-    else
-      resetOtpLeftTime()
-
+    } else { resetOtpLeftTime() }
   }, [checkPhoneCodeState])
 
   useEffect(() => {
-    if (verifyPhoneState?.result?.error)
+    if (verifyPhoneState?.result?.error) {
       setAlertState({
         open: true,
         content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
       })
-    
-    else
-      resetOtpLeftTime()
-      
+    } else { resetOtpLeftTime() }
   }, [verifyPhoneState])
 
   return (
@@ -268,12 +256,13 @@ const LoginFormUI = (props) => {
             <h1>{t('TITLE_LOGIN', 'Hello Friend!')}</h1>
             {(loginWithOtpState)
               ? willVerifyOtpState
-                ? <p>
+                ? (
+                  <p>
                     {`${t('SUBTITLE_ENTER_OTP', 'Please enter the verification code we sent to your mobile')} **${credentials?.cellphone?.substring(credentials?.cellphone?.length - 2)}`}
                   </p>
+                )
                 : <p>{t('SUBTITLE_REQUEST_OTP', 'Enter your cellphone to get verify code.')}</p>
-              : <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>
-            }
+              : <p>{t('SUBTITLE_LOGIN', 'Enter your credentials and start journey with us.')}</p>}
           </TitleHeroSide>
         </HeroSide>
         <FormSide isPopup={isPopup}>
@@ -323,12 +312,12 @@ const LoginFormUI = (props) => {
                   name='email'
                   aria-label='email'
                   placeholder={t('EMAIL', 'Email')}
-                  ref={(e) => emailInput.current = e}
+                  ref={emailInput}
                   onChange={handleChangeInputEmail}
                   autoComplete='off'
                 />
               )}
-              
+
               {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
                 <InputPhoneNumber
                   value={credentials?.cellphone}
@@ -363,7 +352,7 @@ const LoginFormUI = (props) => {
 
               {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
                 <SpinnerLoader
-                  style={{height: 160}}
+                  style={{ height: 160 }}
                 />
               )}
 
@@ -411,12 +400,11 @@ const LoginFormUI = (props) => {
                   onClick={formMethods.handleSubmit(onSubmit)}
                   disabled={formState.loading}
                 >
-                {formState.loading
-                  ? `${t('LOADING', 'Loading')}...`
-                  : loginWithOtpState
-                    ? t('GET_VERIFY_CODE', 'Get verify code')
-                    : t('LOGIN', 'Login')
-                }
+                  {formState.loading
+                    ? `${t('LOADING', 'Loading')}...`
+                    : loginWithOtpState
+                      ? t('GET_VERIFY_CODE', 'Get verify code')
+                      : t('LOGIN', 'Login')}
                 </Button>
               )}
               {(loginWithOtpState && !willVerifyOtpState) && (
@@ -460,20 +448,20 @@ const LoginFormUI = (props) => {
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               )}
-              {configs?.google_login_client_id?.value && (
-                <GoogleLoginButton
-                  initParams={initParams}
-                  handleSuccessGoogleLogin={handleSuccessGoogle}
-                  onFailure={(data) => console.log('onFailure', data)}
-                />
-              )}
-              {useLoginByCellphone && loginTab === 'cellphone' &&
+                {configs?.google_login_client_id?.value && (
+                  <GoogleLoginButton
+                    initParams={initParams}
+                    handleSuccessGoogleLogin={handleSuccessGoogle}
+                    onFailure={(data) => console.log('onFailure', data)}
+                  />
+                )}
+                {useLoginByCellphone && loginTab === 'cellphone' &&
                configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
-                configs?.twilio_service_enabled?.value === '1')  && (
-                <SmsLoginButton
-                  handleSmsLogin={() => {setLoginWithOtpState(true)}}
-                />
-              )}
+                configs?.twilio_service_enabled?.value === '1') && (
+                  <SmsLoginButton
+                    handleSmsLogin={() => { setLoginWithOtpState(true) }}
+                  />
+                )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
