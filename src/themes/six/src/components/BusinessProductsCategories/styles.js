@@ -8,13 +8,13 @@ export const CategoriesContainer = styled.div`
   
   ${({ vertical }) => vertical
     ? css`
-        top: 65px;
+        top: 75px;
         z-index: 4;
         box-shadow: none;
         padding: 0px;
       `
     : css`
-        top: 0px;
+        top: -1px;
         z-index: 5;
         border-bottom: 1px solid #DEE2E6;
         background-color: #FFF;

@@ -1,15 +1,23 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-
 export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px 0px;
+  padding: 15px;
   background: #FFF;
-  border-bottom: 1px solid #D9D9D9;
-`
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 7.6px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  @media (min-width: 411px){
+    min-height: 130px;
+  }
 
+  @media (min-width: 1024px){
+    min-height: 152px;
+  }
+`
 const AccordionStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,12 +25,9 @@ const AccordionStyled = styled.div`
   justify-content: space-between;
   cursor: initial;
   transition: background-color 0.6s ease;
-  margin: 0px 10px;
-
   .rotate {
     transform: rotate(180deg);
   }
-
   .accordion__icon {
     margin-left: auto;
     transition: transform 0.6s ease;
@@ -31,13 +36,10 @@ const AccordionStyled = styled.div`
       margin-left: initial;
     `}
   }
-
   @media (min-width: 411px){
     flex-direction: row;
   }
-
 `
-
 export const Accordion = (props) => {
   const style = {}
   if (!props.isValid) {
@@ -52,7 +54,6 @@ export const Accordion = (props) => {
     </AccordionStyled>
   )
 }
-
 export const WrapperProductImage = styled.div`
   min-width: 55px;
   min-height: 55px;
@@ -61,29 +62,20 @@ export const WrapperProductImage = styled.div`
   padding: 3px;
   border: 1px solid ${props => props.theme.colors.primary};
   border-radius: 50%;
-
+  box-sizing: border-box;
   @media (min-width: 361px) {
-    min-width: 65px;
-    min-height: 65px;
-    height: 65px;
-    width: 65px;
+    height: 80px;
+    width: 80px;
   }
-
   @media (min-width: 411px) {
-    min-width: 75px;
-    min-height: 75px;
-    height: 75px;
-    width: 75px;
+    height: 100px;
+    width: 100px;
   }
-
   @media (min-width: 1024px) {
-    min-width: 120px;
-    min-height: 120px;
     height: 120px;
     width: 120px;
   }
 `
-
 const ProductImageStyled = styled.div`
   display: flex;
   width: 100%;
@@ -96,7 +88,6 @@ const ProductImageStyled = styled.div`
   background-position: center;
   border-radius: 50%;
 `
-
 export const ProductImage = (props) => {
   return (
     <ProductImageStyled
@@ -107,40 +98,37 @@ export const ProductImage = (props) => {
     </ProductImageStyled>
   )
 }
-
 export const ContentInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-transform: capitalize;
-  margin-left: 10px;
-  width: 65%;
-
-
+  padding-left: 10px;
+  width: calc(100% - 55px);
+  overflow: hidden;
+  padding-top: 20px;
+  box-sizing: border-box;
   ${props => props.theme?.rtl && css`
-    margin-right: 10px;
-    margin-left: 0px;
+    padding-right: 10px;
+    padding-left: 0px;
   `}
-
   h3 {
-    font-size: 14px;
-    margin: 0px;
-    font-weight: 600;
-  }
-
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 500;
+      margin: 0;
+      margin-bottom: 8px;
+    }
   span {
     display: flex;
     justify-content: space-between;
     margin: 0px;
-
     p {
       margin: 0px;
       font-size: 14px;
     }
-
     div {
       display: flex;
-
       span {
         height: 20px;
         svg {
@@ -156,11 +144,29 @@ export const ContentInfo = styled.div`
       }
     }
   }
-
-  @media (min-width: 577px) {
-    h3 {
-      font-size: 18px;
+  @media (min-width: 361px) {
+    width: calc(100% - 80px);
+  }
+  @media (min-width: 411px) {
+    width: calc(100% - 100px);
+    flex-direction: row;
+    justify-content: space-between;
+    h3 {      
+      ${({ isSidebar }) => isSidebar
+        ? css`
+            max-width: 150px;
+          `
+        : css`
+          max-width: 350px;
+        `
+      }
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
+  }
+  @media (min-width: 1024px) {
+    width: calc(100% - 120px);
   }
 `
 
@@ -169,204 +175,157 @@ export const AccordionContent = styled.div`
   transition: max-height 0.6s ease;
   width: 100%;
   margin: auto;
-
   @media (min-width: 361px) {
-    padding-left: 55px;
   }
-
   @media (min-width: 411px) {
-    padding-left: 75px;
+    width: calc(100% - 116px);
+    margin-left: auto;
+    margin-right: 0px;
+    margin-top: -50px;
   }
-
   @media (min-width: 1024px) {
-    padding-left: 150px;
+    width: calc(100% - 130px);
+    margin-top: -70px;
+
   }
 `
-
 export const AccordionText = styled.div`
   font-weight: 400;
   font-size: 14px;
   padding: 18px;
 `
-
 export const ProductComment = styled.div`
   p {
     margin: 0px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #343A40;
   }
-
   span {
-    font-weight: 300;
+    font-size: 14px;
+    line-height: 24px;
     text-transform: capitalize;
-    margin-left: 25px;
+    padding-left: 25px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    color: #000000;
+    font-weight: 500;
     ${props => props.theme?.rtl && css`
-      margin-right: 25px;
+    padding-right: 25px;
     `}
   }
 `
-
 export const ProductInfo = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-
-  h1,
-  h3 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  p {
-    font-size: 20px;
-    margin: 0px 5px;
-  }
-
   @media (min-width: 411px) {
-    width: 80%;
   }
-
   @media (min-width: 481px) {
-    width: 70%;
   }
 `
-
 export const ProductError = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   span {
     font-size: 18px;
     text-align: center;
   }
-
   @media (min-width: 411px){
     width: 35%;
-
     span{
       text-align: right;
     }
   }
 `
-
 export const ProductActions = styled.div`
   display: flex;
   justify-content: flex-end;
 `
-
 export const ProductActionsEdit = styled.span`
   svg {
-    font-size: 20px;
-    margin-right: 5px;
+    font-size: 22px;
+    margin-right: 10px;
     cursor: pointer;
     ${props => props.theme?.rtl && css`
-      margin-left: 5px;
+      margin-left: 10px;
       margin-right: 0px;
     `}
   }
 `
-
 export const ProductActionsDelete = styled(ProductActionsEdit)`
   display: none;
   svg {
     margin-right: 0px;
   }
-
   @media (min-width: 411px){
     display: block;
   }
 `
-
-export const ProductPriceSection = styled.div`
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-`
-
 export const ProductPrice = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-
+  justify-content: space-between;
   p,
   span {
-    font-size: 14px;
   }
-
   span {
-    font-weight: 500;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 20px;
   }
-
   p {
     margin: 0px 5px;
   }
-
   svg {
     cursor: pointer;
   }
-
   @media (min-width: 512px) {
-    span,
-    p {
-      font-size: 18px;
-    }
+    width: fit-content;
   }
 `
-
-export const ProductSelect = styled.select`
-  height: 30px;
-  border: none;
-  background-color: transparent;
-  font-size: 17px;
-  outline: none;
-  cursor: pointer;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -ms-progress-appearance: none;
-  border: 1px solid ${props => props.theme.colors.borderColor};
-  border-radius: 7px;
-  background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
-  background-repeat: no-repeat, repeat;
-  background-position: right .7em top 50%, 0 0;
-  background-size: .65em auto, 100%;
-  margin: 0 10px;
-  padding: 0 7px;
-`
-
 export const ProductNotAvailable = styled.span`
   color: #D81212;
 `
-
 export const ProductOptionsList = styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 0;
   .suboption {
-    margin-left: 25px;
+    padding-left: 25px;
     ${props => props.theme?.rtl && css`
-      margin-right: 25px;
-      margin-left: 0px;
+      padding-right: 25px;
+      padding-left: 0px;
   `}
   }
-
   p:nth-child(1) {
     margin-bottom: 0;
   }
-
   p {
-    font-weight: 400;
     margin: 0px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #343A40;
   }
-
   li span {
-    font-weight: 300;
+    font-size: 14px;
+    line-height: 24px;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    color: #000000;
+    font-weight: 500;
   }
-
   li.ingredient {
     padding-left: 15px;
     ${props => props.theme?.rtl && css`
@@ -375,14 +334,46 @@ export const ProductOptionsList = styled.ul`
     `}
   }
 `
-
 export const ProductQuantity = styled.span`
-  margin:0 10px;
- 
+  margin:0 10px;  
 `
-
 export const CartActions = styled.div`
   display: flex;
   align-items: center;
   margin-top: 10px;
+  width: 100%;
+  .disabled {
+    pointer-events: none;
+    color: ${props => props.theme.colors.disabled};
+  }
+  .incdec-control {
+    display: flex;
+    align-items: center;
+    color: #6C757D;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 0px;
+      margin-left: 20px;
+    `}
+    svg {
+      font-size: 20px;
+      cursor: pointer;
+    }
+    span {
+      margin: 0 8px;
+      font-size: 22px;
+      line-height: 24px;
+    }
+  }
+
+  @media (min-width: 411px) {
+    width: calc(100% - 116px);
+    margin-left: auto;
+    margin-right: 0px;
+  }
+
+  @media (min-width: 1024px) {
+    width: calc(100% - 130px);
+  }
 `

@@ -175,6 +175,16 @@ export const BackMenu = styled.div`
 
   @media (min-width: 1024px) {
     right: unset;
-    left: calc(40% - 30px);
+    left: calc(40% - 45px);
+  }
+
+  @media (min-width: 1200px) {
+    right: unset;
+    left: calc(40% - 50px);
+  }
+
+  @media (min-width: 1440px) {
+    right: unset;
+    left: calc(40% - 60px);
   }
 `

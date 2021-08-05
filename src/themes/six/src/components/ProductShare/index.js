@@ -1,22 +1,18 @@
 import React, { useEffect, useRef } from 'react'
 import FiShare2 from '@meronex/icons/fi/FiShare2'
 import { ProductShare as ProductShareController } from 'ordering-components'
-
 import {
   IconShare,
   ShareButtons
 } from './styles'
-
 const ProductShareUI = (props) => {
   const {
     updateShowValue,
     showShareButton,
     urlToShare
   } = props
-
   const iconElement = useRef()
   const contentElement = useRef()
-
   const handleClickOutside = (e) => {
     const outsideIcon = !iconElement.current?.contains(e.target)
     const outsideButtonsShare = !contentElement.current?.contains(e.target)
@@ -24,16 +20,13 @@ const ProductShareUI = (props) => {
       updateShowValue && updateShowValue(false)
     }
   }
-
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [])
-
   const handleClickShare = () => {
     updateShowValue(!showShareButton)
   }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -67,7 +60,6 @@ const ProductShareUI = (props) => {
     </>
   )
 }
-
 export const ProductShare = (props) => {
   const productShareProps = {
     ...props,

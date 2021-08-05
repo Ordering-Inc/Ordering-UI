@@ -6,6 +6,7 @@ export const ProductContainer = styled.div`
   position: relative;
   padding: 50px 10px 10px;
   width: 100%;
+  box-sizing: border-box;
   @media (min-width: 768px) {
     height: 100%;
     padding: 50px 30px 10px;
@@ -14,7 +15,7 @@ export const ProductContainer = styled.div`
     flex-wrap: nowrap;
     overflow: auto;
     padding: 0;
-    height: 70vh;
+    height: 84vh;
     overflow-y: scroll;
   }
 `
@@ -24,7 +25,7 @@ export const WrapperImage = styled.div`
   margin-top: 10px;
   @media (min-width: 1024px) {
     display: flex;
-    width: calc(40% - 10px);
+    width: 40%;
     position: sticky;
     top: 0;
     flex-direction: column;
@@ -36,6 +37,7 @@ export const WrapperImage = styled.div`
     `}
     margin-top: 0px;
     padding: 25px 4vw;
+    box-sizing: border-box;
   }
 `
 export const ProductImage = styled.div`
@@ -52,8 +54,8 @@ export const ProductImage = styled.div`
     justify-content: flex-start;
     padding-top: 4vh;
     img {
-      width: 280px;
-      height: 280px;
+      width: 260px;
+      height: 260px;
       border-radius: 50%;
       box-sizing: border-box;
       padding: 4px;
@@ -68,6 +70,7 @@ export const ProductInfo = styled.div`
   padding: 0px;
   position: relative;
   margin-top: 20px;
+  box-sizing: border-box;
   h1 {
     font-size: 20px;
     font-weight: 500;
@@ -98,13 +101,14 @@ export const ProductInfo = styled.div`
     padding: 10px 0px;
   }
   @media (min-width: 1024px) {
-    width: calc(60% - 100px);
+    width: 60%;
     padding: 25px 6vw;
     top: 0;
     margin-top: 0px;   
     background-color: #F8F9FA;
     height: fit-content;
-    min-height: 65vh;
+    min-height: 100%;
+    box-sizing: border-box;
   }
 `
 export const ProductFormTitle = styled.div`
@@ -152,12 +156,19 @@ export const ProductActions = styled.div`
   justify-content: space-between;
   padding: 10px;
   position: fixed;
-  bottom: 0;
+  bottom: 76px;
   right: 0;
   width: 100%;
   background-color: #FFF;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   box-sizing: border-box;
+  &.isIndividualBusinessCart-ProductAction {
+    bottom: 0;
+    @media (min-width: 1024px) {
+      padding: 0;
+    }
+    
+  }
   div.incdec-control {
     width: 30%;
     display: flex;
@@ -218,9 +229,6 @@ export const ProductActions = styled.div`
         width: 100%;
       }
     }
-    button.add {
-      width: 30%;
-    }
   }
 `
 export const SkeletonBlock = styled.div`
@@ -262,9 +270,9 @@ export const WrapperIngredients = styled.div`
 `
 
 export const ShareWrapper = styled.div`
-  position: fixed;
-  top: 100px;
-  left: 10px;
+  position: absolute;
+  top: -40px;
+  left: -5px;
   ${props => props.theme?.rtl && css`
     right: 10px;
   `}
@@ -275,6 +283,7 @@ export const ShareWrapper = styled.div`
   
   .product-share {    
     .a2a_vertical_style {
+      top: 36px;
       left: 0;
       display: flex;
       flex-direction: column;
@@ -284,11 +293,31 @@ export const ShareWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    left: 25px;
+    left: -8px;
     ${props => props.theme?.rtl && css`
+      left: unset; 
       right: 25px;
     `}
   }
+
+  @media (min-width: 1024px) {
+    left: -25px;
+    top: -8px;
+    ${props => props.theme?.rtl && css`
+      left: unset; 
+      right: -25px;
+    `}
+  }
+
+  /* @media (min-width: 1024px) {
+    position: relative;
+    top: 15px;
+    left: 30px;
+    ${props => props.theme?.rtl && css`
+      left: unset; 
+      right: 30px;
+    `}
+  } */
 
 
 
