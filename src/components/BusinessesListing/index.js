@@ -5,7 +5,8 @@ import {
   BusinessList,
   ErrorMessage,
   WrapperSearch,
-  BusinessesTitle
+  BusinessesTitle,
+  PreviousButtonWrapper
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -230,11 +231,13 @@ const BusinessesListingUI = (props) => {
           </BusinessesTitle>
         )}
         {
-          paginationProps.currentPage !== 1 && prevPage.page !== 1 && (
-            <Button onClick={() => handleClickPrevItems()}>
-              {t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses')}
-            </Button>
-          )
+          <PreviousButtonWrapper>
+            {paginationProps.currentPage !== 1 && prevPage.page !== 1 && (
+              <Button onClick={() => handleClickPrevItems()} color='primary'>
+                {t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses...')}
+              </Button>
+            )}
+          </PreviousButtonWrapper>
         }
         <BusinessList>
           {businessesList.loading && prevPage.loading && (
