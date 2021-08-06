@@ -63,3 +63,19 @@ export const BusinessesTitle = styled.h1`
   font-size: 18px;
   margin: 0px 20px;
 `
+
+export const PreviousButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  button{
+    width: 80%;
+  }
+
+  @media(min-width: 681px){
+      button{
+      width: 40%;
+    }
+  }
+`
