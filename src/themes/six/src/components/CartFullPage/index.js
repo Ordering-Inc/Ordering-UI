@@ -44,7 +44,7 @@ export const CartFullPage = (props) => {
       <Container>
         <Layout className='fullpage-layout'>
           <LeftPanel>
-            <CartInfo handleGoBackPage={goBack} currentCart={currentCart} businessName={business.name} />
+            <CartInfo handleGoBackPage={goBack} cart={currentCart} businessName={business.name} />
           </LeftPanel>
           <RightPanel>
             <Cart

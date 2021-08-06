@@ -46,7 +46,6 @@ export const ProductItemAccordion = (props) => {
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
   const productActionsDelete = useRef(null)
-  const maxProductQuantity = (getProductMax(product))
   const productInfo = () => {
     if (isCartProduct) {
       const ingredients = JSON.parse(JSON.stringify(Object.values(product.ingredients ?? {})))
@@ -98,7 +97,7 @@ export const ProductItemAccordion = (props) => {
     handleChangeQuantity(productQuantity)
   }
   useEffect(() => {
-    if (props.individualBusinessCart) {
+    if (props?.individualBusinessCart || props?.isOrderPage) {
       setActiveState('active')
       setHeightState(`${content.current.scrollHeight}px`)
       setRotateState('accordion__icon rotate')
@@ -107,7 +106,7 @@ export const ProductItemAccordion = (props) => {
       setHeightState('0px')
       setRotateState('accordion__icon')
     }
-  }, [props.individualBusinessCart])
+  }, [props?.individualBusinessCart, props?.isOrderPage])
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -129,7 +128,14 @@ export const ProductItemAccordion = (props) => {
               </WrapperProductImage>
             )}
             <ContentInfo isSidebar={isSidebar}>
-              <h3>{product.name}</h3>
+              <h3>
+                {!(isCartProduct && !isCartPending && getProductMax) && (
+                  <ProductQuantity>
+                    {product?.quantity}
+                  </ProductQuantity>
+                )}
+                {product.name}
+              </h3>
               {(product?.valid || !isCartProduct) && (
                 <ProductPrice className='prod-price'>
                   <span>
@@ -229,10 +235,10 @@ export const ProductItemAccordion = (props) => {
           )}
         </AccordionContent>
         <CartActions>
-          {isCartProduct && !isCartPending && getProductMax ? (
+          {isCartProduct && !isCartPending && getProductMax && (
             <>
               {
-                product && maxProductQuantity > 0 && (
+                product && getProductMax(product) > 0 && (
                   <div className='incdec-control'>
                     <FiMinusCircle
                       onClick={Decrement}
@@ -241,16 +247,12 @@ export const ProductItemAccordion = (props) => {
                     <span>{productQuantity}</span>
                     <FiPlusCircle
                       onClick={Increment}
-                      className={`${maxProductQuantity <= 0 || product.quantity >= maxProductQuantity ? 'disabled' : ''}`}
+                      className={`${getProductMax(product) <= 0 || product.quantity >= getProductMax(product) ? 'disabled' : ''}`}
                     />
                   </div>
                 )
               }
             </>
-          ) : (
-            <ProductQuantity>
-              {product?.quantity}
-            </ProductQuantity>
           )}
           {isCartProduct && !isCartPending && (
             <ProductActions>

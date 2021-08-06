@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components'
 export const PaymentCashContainer = styled.div`
-  margin: 20px 0px 0px;
+  margin: 15px 0px 0px;
 `
 export const FormCash = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   label {
-    font-size: 16px;
-    margin-right: 20px;
+    font-size: 13px;
     ${props => props.theme?.rtl && css`
         margin-left: 20px;
         margin-right: 0;
     `}
+    color: ${props => props.theme.colors.fontSecundary};
   }
   @media (min-width: 381px) {
     label {
@@ -31,7 +31,6 @@ export const WrapperInput = styled.div`
     width: 100%;
     box-sizing: border-box;
     border-radius: 7px;
-    max-width: 240px;
   }
   @media (min-width: 768px) {
     flex-direction: row;

@@ -124,7 +124,7 @@ const CartUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <CartContainer className='cart'>
+      <CartContainer className='cart' isCheckout={isCheckout}>
         {((Object.keys(cart).length === 0) || cart?.products?.length === 0) && (
           <NotCarts>
             <img src={theme.images?.general?.emptyCart} alt='Empty cart' width='150px' loading='lazy' />
@@ -161,7 +161,7 @@ const CartUI = (props) => {
               handleCartOpen={handleCartOpen}
               individualBusinessCart={individualBusinessCart}
             >
-              {cart?.products?.length > 0 && cart?.products.map(product => (
+              {!isCheckout && cart?.products?.length > 0 && cart?.products.map(product => (
                 <ProductItemAccordion
                   key={product.code}
                   isCartPending={isCartPending}
@@ -174,10 +174,11 @@ const CartUI = (props) => {
                   onEditProduct={handleEditProduct}
                   individualBusinessCart={individualBusinessCart}
                   isSidebar={isSidebar}
+                  isCheckout={isCheckout}
                 />
               ))}
               {cart?.valid_products && (
-                <OrderBill>
+                <OrderBill isCheckout={isCheckout}>
                   <table>
                     <tbody>
                       <tr>
@@ -265,7 +266,7 @@ const CartUI = (props) => {
                 </OrderBill>
               )}
               {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
-                <CheckoutAction className={individualBusinessCart ? 'floting' : ''}>
+                <CheckoutAction className={(individualBusinessCart) ? 'floting' : ''}>
                   <Button
                     color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
                     onClick={() => setOpenUpselling(true)}

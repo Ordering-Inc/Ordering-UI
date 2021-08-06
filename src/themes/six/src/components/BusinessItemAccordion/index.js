@@ -111,7 +111,7 @@ export const BusinessItemAccordion = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <AccordionSection className='businessItemAccordion' isClosed={isClosed} isCartOnProductsList={isCartOnProductsList}>
-        {!individualBusinessCart && (
+        {!individualBusinessCart && !isCheckout && (
           <Accordion
             isClosed={isClosed}
             className={`accordion ${setActive}`}

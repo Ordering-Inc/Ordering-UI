@@ -9,7 +9,6 @@ import {
   GoogleMapsMap
 } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
-import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
@@ -32,8 +31,6 @@ import {
   Content,
   OrderBusiness,
   BusinessWrapper,
-  LogoWrapper,
-  BusinessLogo,
   BusinessInfo,
   ActionsBlock,
   OrderInfo,
@@ -59,7 +56,8 @@ import {
   LeftContentWrapper,
   RightContentWrapper,
   CustomerInfo,
-  ShareOrderWrapper
+  ShareOrderWrapper,
+  DashLine
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -165,26 +163,11 @@ const OrderDetailsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container>
+      <Container className='order-detail-page'>
         {order && Object.keys(order).length > 0 && (
           <WrapperContainer>
             <LeftPanel>
-              <LeftContentWrapper>
-                {windowSize.width < 1020 &&
-                  <Header>
-                    {isCustomerMode && (
-                      <Button onClick={() => handleGoToPage({ page: 'search' })}>
-                        <BsArrowLeft />
-                        {t('GO_TO_BUSINESSLIST', 'Go to business list')}
-                      </Button>
-                    )}
-                    <HeaderInfo className='order-header'>
-                      <HeaderText column>
-                        <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-                        <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
-                      </HeaderText>
-                    </HeaderInfo>
-                  </Header>}
+              <LeftContentWrapper className='left-contentwrappre'>
                 <OrderInfo>
                   <OrderData>
                     <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
@@ -207,9 +190,6 @@ const OrderDetailsUI = (props) => {
                 </SectionTitle>
                 <OrderBusiness>
                   <BusinessWrapper>
-                    <LogoWrapper>
-                      <BusinessLogo bgimage={order?.business?.logo || theme.images?.dummies?.businessLogo} />
-                    </LogoWrapper>
                     <BusinessInfo>
                       <h1>{order?.business?.name}</h1>
                       <p>{order?.business?.address}</p>
@@ -240,13 +220,6 @@ const OrderDetailsUI = (props) => {
                 </SectionTitle>
                 <OrderCustomer>
                   <CustomerInfo>
-                    <div className='photo'>
-                      {order?.customer?.photo ? (
-                        <PhotoBlock src={order?.customer?.photo} />
-                      ) : (
-                        <FaUserCircle />
-                      )}
-                    </div>
                     <InfoBlock>
                       <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                       <span>{order?.customer?.address}</span>
@@ -313,24 +286,23 @@ const OrderDetailsUI = (props) => {
               </LeftContentWrapper>
             </LeftPanel>
             <RightPanel>
-              <RightContentWrapper>
+              <RightContentWrapper className='left-contentwrappre'>
                 <Content className='order-content'>
-                  {windowSize.width > 1020 &&
-                    <Header>
-                      {isCustomerMode && (
-                        <Button onClick={() => handleGoToPage({ page: 'search' })}>
-                          <BsArrowLeft />
-                          {t('GO_TO_BUSINESSLIST', 'Go to business list')}
-                        </Button>
-                      )}
-                      <HeaderInfo className='order-header'>
-                        <HeaderText column>
-                          <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-                          <p>{t('ORDER_MESSAGE_HEADER_TEXT_FIRSTLINE', 'Once business accepts your order, we will send you an email,')}</p>
-                          <p>{t('ORDER_MESSAGE_HEADER_TEXT_SECONDLINE', 'thank you!')}</p>
-                        </HeaderText>
-                      </HeaderInfo>
-                    </Header>}
+                  <Header>
+                    {isCustomerMode && (
+                      <Button onClick={() => handleGoToPage({ page: 'search' })}>
+                        <BsArrowLeft />
+                        {t('GO_TO_BUSINESSLIST', 'Go to business list')}
+                      </Button>
+                    )}
+                    <HeaderInfo className='order-header'>
+                      <HeaderText column>
+                        <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
+                        <p>{t('ORDER_MESSAGE_HEADER_TEXT_FIRSTLINE', 'Once business accepts your order, we will send you an email,')}</p>
+                        <p>{t('ORDER_MESSAGE_HEADER_TEXT_SECONDLINE', 'thank you!')}</p>
+                      </HeaderText>
+                    </HeaderInfo>
+                  </Header>
                   {!userCustomerId && (
                     <FootActions>
                       <Button
@@ -347,6 +319,7 @@ const OrderDetailsUI = (props) => {
                       <ProductItemAccordion
                         key={product.id}
                         product={product}
+                        isOrderPage
                       />
                     ))}
                   </OrderProducts>
@@ -355,6 +328,7 @@ const OrderDetailsUI = (props) => {
                       <tbody>
                         <tr>
                           <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
+                          <td><DashLine /></td>
                           <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                         </tr>
                         {(order?.summary?.discount > 0 || order?.discount > 0) && (
@@ -367,6 +341,7 @@ const OrderDetailsUI = (props) => {
                             ) : (
                               <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
                             )}
+                            <td><DashLine /></td>
                             <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
                           </tr>
                         )}
@@ -377,6 +352,7 @@ const OrderDetailsUI = (props) => {
                                 {t('TAX', theme?.defaultLanguages?.TAX || 'Tax')}{' '}
                                 <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
                               </td>
+                              <td><DashLine /></td>
                               <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
                             </tr>
                           )
@@ -384,6 +360,7 @@ const OrderDetailsUI = (props) => {
                         {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
                           <tr>
                             <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
+                            <td><DashLine /></td>
                             <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
                           </tr>
                         )}
@@ -398,6 +375,7 @@ const OrderDetailsUI = (props) => {
                             <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
                           )}
                             </td>
+                            <td><DashLine /></td>
                             <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
                           </tr>
                         )}
@@ -406,6 +384,7 @@ const OrderDetailsUI = (props) => {
                             {t('SERVICE_FEE', theme?.defaultLanguages?.SERVICE_FEE || 'Service Fee')}{' '}
                             <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
                           </td>
+                          <td><DashLine /></td>
                           <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
                         </tr>
                       </tbody>
@@ -414,6 +393,7 @@ const OrderDetailsUI = (props) => {
                       <tbody>
                         <tr>
                           <td>{t('TOTAL', theme?.defaultLanguages?.TOTAL || 'Total')}</td>
+                          <td><DashLine /></td>
                           <td>{parsePrice(order?.summary?.total || order?.total)}</td>
                         </tr>
                       </tbody>
@@ -460,9 +440,6 @@ const OrderDetailsUI = (props) => {
                   </SectionTitle>
                   <OrderBusiness>
                     <BusinessWrapper>
-                      <LogoWrapper style={{ margin: '0 7px' }}>
-                        <Skeleton height={45} />
-                      </LogoWrapper>
                       <BusinessInfo>
                         <Skeleton width={200} height={30} />
                         <Skeleton width={100} height={15} />
@@ -477,9 +454,6 @@ const OrderDetailsUI = (props) => {
                   </SectionTitle>
                   <OrderBusiness>
                     <BusinessWrapper>
-                      <LogoWrapper style={{ margin: '0 7px' }}>
-                        <Skeleton height={45} />
-                      </LogoWrapper>
                       <BusinessInfo>
                         <Skeleton width={200} height={30} />
                         <Skeleton width={100} height={15} />

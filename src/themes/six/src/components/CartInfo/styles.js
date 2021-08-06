@@ -16,7 +16,7 @@ export const BackHeader = styled.div`
 
   @media (min-width: 1024px) {
     position: absolute;
-    top: 0;
+    top: ${({ isCheckout }) => isCheckout ? '80px' : '0'};
     left: 0;
     padding: 20px;
   }

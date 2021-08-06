@@ -155,7 +155,7 @@ export const Header = (props) => {
           {onlineStatus && (
             <RightHeader>
               <Menu>
-                {onlineStatus && windowSize.width > 820 && (
+                {onlineStatus && windowSize.width > 768 && (
                   <DesktopSubmenu>
                     <HeaderOption
                       variant='moment'
@@ -227,25 +227,6 @@ export const Header = (props) => {
             </RightHeader>
           )}
         </InnerHeader>
-        {onlineStatus && isShowOrderOptions && (
-          windowSize.width > 768 && windowSize.width <= 820 && (
-            <SubMenu>
-              <AddressesPopover
-                auth={auth}
-                addressState={orderState?.options?.address}
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-              />
-              {!isCustomerMode && (
-                <MomentPopover
-                  open={openPopover.moment}
-                  onClick={() => handleTogglePopover('moment')}
-                  onClose={() => handleClosePopover('moment')}
-                />
-              )}
-            </SubMenu>)
-        )}
         {modalIsOpen && (
           <Modal
             title={t(modalSelected.toUpperCase(), capitalize(modalSelected))}

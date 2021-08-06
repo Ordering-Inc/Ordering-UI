@@ -5,7 +5,7 @@ export const CartContainer = styled.div`
     box-sizing: border-box;
   }
   @media (min-width: 1024px) {
-   max-width: 45vw;
+   max-width: ${({ isCheckout }) => isCheckout ? 'unset' : '45vw'};
    margin: 0 auto;
   }
   /* border-bottom: 1px solid #F0F0F0; */
@@ -25,10 +25,23 @@ export const OrderBill = styled.div`
   flex-direction: column;
   padding: 25px 15px 20px;
   background-color: #FFF;
-  margin-top: 35px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
   box-sizing: border-box;
+
+  ${({ isCheckout }) => isCheckout
+    ? css`
+        padding: 0;
+        box-shadow: none;
+        margin-top: 10px;
+      `
+    : css`
+      margin-top: 35px;
+      padding: 25px 15px 20px;
+      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+
+    `
+  }
   
   table {
     width: 100%;
@@ -102,7 +115,7 @@ export const CheckoutAction = styled.div`
     button {
       width: 45%;
       @media (min-width: 1024px) {
-        width: 214px;
+        width: 25%;
       }
     }
   }

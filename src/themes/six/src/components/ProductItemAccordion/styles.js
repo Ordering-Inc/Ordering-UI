@@ -151,6 +151,7 @@ export const ContentInfo = styled.div`
     width: calc(100% - 100px);
     flex-direction: row;
     justify-content: space-between;
+    padding-left: 20px;
     h3 {      
       ${({ isSidebar }) => isSidebar
         ? css`
@@ -167,6 +168,7 @@ export const ContentInfo = styled.div`
   }
   @media (min-width: 1024px) {
     width: calc(100% - 120px);
+    padding-left: 25px;
   }
 `
 
@@ -178,13 +180,13 @@ export const AccordionContent = styled.div`
   @media (min-width: 361px) {
   }
   @media (min-width: 411px) {
-    width: calc(100% - 116px);
+    width: calc(100% - 120px);
     margin-left: auto;
     margin-right: 0px;
     margin-top: -50px;
   }
   @media (min-width: 1024px) {
-    width: calc(100% - 130px);
+    width: calc(100% - 145px);
     margin-top: -70px;
 
   }
@@ -335,7 +337,10 @@ export const ProductOptionsList = styled.ul`
   }
 `
 export const ProductQuantity = styled.span`
-  margin:0 10px;  
+  display: inline-block !important;
+  margin-right: 5px !important; 
+  font-size: 1.1rem;
+  color: #585858;
 `
 export const CartActions = styled.div`
   display: flex;
@@ -368,12 +373,12 @@ export const CartActions = styled.div`
   }
 
   @media (min-width: 411px) {
-    width: calc(100% - 116px);
+    width: calc(100% - 120px);
     margin-left: auto;
     margin-right: 0px;
   }
 
   @media (min-width: 1024px) {
-    width: calc(100% - 130px);
+    width: calc(100% - 145px);
   }
 `

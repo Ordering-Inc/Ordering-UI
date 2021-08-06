@@ -21,7 +21,12 @@ import {
 } from './styles'
 
 export const CartInfo = (props) => {
-  const { handleGoBackPage, currentCart, businessName } = props
+  const {
+    handleGoBackPage,
+    cart,
+    businessName,
+    isCheckout
+  } = props
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
@@ -88,7 +93,7 @@ export const CartInfo = (props) => {
 
   return (
     <Container>
-      <BackHeader>
+      <BackHeader isCheckout={isCheckout}>
         {windowSize.width > 768 && (
           <Logo>
             <img alt='Isotype' width='35px' height='45px' src={theme?.images?.logos?.isotype} loading='lazy' />
@@ -105,7 +110,7 @@ export const CartInfo = (props) => {
         </HeaderText>
       </BackHeader>
       <InfoWrapper>
-        <OrderReview>{t('REVIEW_ORDER', 'Review Order')} &nbsp; ({' '}{currentCart?.products?.length}{' '})</OrderReview>
+        <OrderReview>{t('REVIEW_ORDER', 'Review Order')} &nbsp; ({' '}{cart?.products?.length}{' '})</OrderReview>
         <PreTime>
           {t('PREP_TIME', 'Prep time')}{' '}{':'}{' '}
           {options?.moment
