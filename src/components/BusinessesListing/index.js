@@ -5,7 +5,8 @@ import {
   BusinessList,
   ErrorMessage,
   WrapperSearch,
-  BusinessesTitle
+  BusinessesTitle,
+  PreviousButtonWrapper
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -21,6 +22,7 @@ import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
 import { OrdersOption } from '../OrdersOption'
 import { BusinessesMap } from '../BusinessesMap'
+import { useLocation, useHistory } from 'react-router-dom'
 
 import {
   useOrder,
@@ -42,7 +44,8 @@ const BusinessesListingUI = (props) => {
     onRedirectPage,
     handleChangeSearch,
     handleChangeBusinessType,
-    handleBusinessClick
+    handleBusinessClick,
+    currentPageParam
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -52,9 +55,11 @@ const BusinessesListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
   const [mapErrors, setMapErrors] = useState('')
-
+  const [prevPage, setPrevPage] = useState({ page: currentPageParam || 1, loading: false })
+  const [nextPage, setNextPage] = useState({ page: currentPageParam || 1, loading: false })
+  const location = useLocation()
+  const history = useHistory()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
@@ -63,14 +68,40 @@ const BusinessesListingUI = (props) => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
-    if (badScrollPosition || businessesList.loading || !hasMore) return
-    getBusinesses()
+    const nextPageHasMore = !(paginationProps.totalPages === nextPage.page)
+    if (badScrollPosition || businessesList.loading || !hasMore || !nextPageHasMore) return
+    handleClickNextItems(false, nextPage.page + 1, false)
   }, [businessesList, paginationProps])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
+
+  useEffect(() => {
+    if (!businessesList.loading) {
+      setNextPage({ ...nextPage, loading: false })
+      setPrevPage({ ...prevPage, loading: false })
+    }
+  }, [businessesList.loading])
+
+  useEffect(() => {
+    if (mapErrors) {
+      handleMapErrors(mapErrors)
+      setActiveMap(false)
+    }
+  }, [mapErrors])
+
+  useEffect(() => {
+    if (orderState.loading && !businessesList.loading) {
+    //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
+    //  window.history.pushState({ path: newurl }, '', newurl)
+      const params = new URLSearchParams()
+      history.replace({ pathname: location.pathname, search: params.toString() })
+      setPrevPage({ loading: true, page: 1 })
+      setNextPage({ loading: true, page: 1 })
+    }
+  }, [orderState.loading])
 
   const handleClickAddress = (e) => {
     if (auth) {
@@ -104,16 +135,29 @@ const BusinessesListingUI = (props) => {
     })
   }
 
-  useEffect(() => {
-    if (mapErrors) {
-      handleMapErrors(mapErrors)
-      setActiveMap(false)
-    }
-  }, [mapErrors])
-
   const getCustomArray = (list) => {
     const isArray = Array.isArray(list)
     return isArray ? list : Object.values(list)
+  }
+
+  const handleClickNextItems = () => {
+    getBusinesses(false, nextPage.page + 1, false)
+    const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + `?page=${nextPage.page + 1}`
+    window.history.pushState({ path: newurl }, '', newurl)
+    setNextPage({ loading: true, page: nextPage.page + 1 })
+  }
+
+  const handleClickPrevItems = () => {
+    getBusinesses(false, prevPage.page - 1, true)
+    setPrevPage({ loading: true, page: prevPage.page - 1 })
+  }
+
+  const changeBusinessType = (category) => {
+    setNextPage({ loading: true, page: 1 })
+    setPrevPage({ loading: true, page: 1 })
+    const params = new URLSearchParams({ page: 1 })
+    history.replace({ pathname: location.pathname, search: params.toString() })
+    handleChangeBusinessType(category)
   }
 
   return (
@@ -130,7 +174,7 @@ const BusinessesListingUI = (props) => {
             images={props.images}
             businessTypes={props.businessTypes}
             defaultBusinessType={props.defaultBusinessType}
-            handleChangeBusinessType={handleChangeBusinessType}
+            handleChangeBusinessType={changeBusinessType}
           />
         )}
         <WrapperSearch isCustomLayout={isCustomLayout}>
@@ -186,8 +230,27 @@ const BusinessesListingUI = (props) => {
             {t('BUSINESSES', 'Businesses')}
           </BusinessesTitle>
         )}
-
+        {
+          <PreviousButtonWrapper>
+            {paginationProps.currentPage !== 1 && prevPage.page !== 1 && (
+              <Button onClick={() => handleClickPrevItems()} color='primary'>
+                {t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses...')}
+              </Button>
+            )}
+          </PreviousButtonWrapper>
+        }
         <BusinessList>
+          {businessesList.loading && prevPage.loading && (
+            [...Array(paginationProps.pageSize).keys()].map(i => (
+              <BusinessController
+                key={i}
+                className='card'
+                business={{}}
+                isSkeleton
+                orderType={orderState?.options?.type}
+              />
+            ))
+          )}
           {
             !businessesList.loading && businessesList.businesses.length === 0 && (
               <NotFoundSource
@@ -217,7 +280,7 @@ const BusinessesListingUI = (props) => {
               />
             ))
           }
-          {businessesList.loading && (
+          {businessesList.loading && nextPage.loading && (
             [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()].map(i => (
               <BusinessController
                 key={i}
