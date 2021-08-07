@@ -14,19 +14,15 @@ import {
   MenuLink,
   CustomerInfo,
   UserEdit,
-  SubMenu,
   DesktopSubmenu
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 import { capitalize } from '../../../../../utils'
 import { UserPopover } from '../../../../../components/UserPopover'
-import { MomentPopover } from '../../../../../components/MomentPopover'
 import { MomentContent } from '../../../../../components/MomentContent'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
-
-import { AddressesPopover } from '../AddressesPopover'
 import { Modal } from '../Modal'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
@@ -40,7 +36,6 @@ export const Header = (props) => {
   const {
     isHome,
     location,
-    closeCartPopover,
     isShowOrderOptions,
     isHideSignup,
     isCustomerMode
@@ -64,7 +59,6 @@ export const Header = (props) => {
   const onlineStatus = useOnlineStatus()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
-
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
     if (isActionsClick) {
@@ -98,11 +92,6 @@ export const Header = (props) => {
       [type]: false
     })
   }
-  const handleAddProduct = () => {
-    if (!closeCartPopover) {
-      handleTogglePopover('cart')
-    }
-  }
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
     if (isCustomerMode && pathname.includes('/orders')) {
@@ -110,10 +99,6 @@ export const Header = (props) => {
       refreshOrderOptions()
     }
   }
-  useEffect(() => {
-    events.on('cart_product_added', handleAddProduct)
-    return () => events.off('cart_product_added', handleAddProduct)
-  }, [])
   useEffect(() => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
@@ -165,9 +150,9 @@ export const Header = (props) => {
             )}
           </LeftHeader>
           {onlineStatus && (
-            <RightHeader className='test-mark'>
+            <RightHeader>
               <Menu>
-                {onlineStatus && windowSize.width > 820 && (
+                {onlineStatus && windowSize.width > 768 && (
                   <DesktopSubmenu>
                     <HeaderOption
                       variant='moment'
@@ -239,25 +224,6 @@ export const Header = (props) => {
             </RightHeader>
           )}
         </InnerHeader>
-        {onlineStatus && isShowOrderOptions && (
-          windowSize.width > 768 && windowSize.width <= 820 && (
-            <SubMenu>
-              <AddressesPopover
-                auth={auth}
-                addressState={orderState?.options?.address}
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-              />
-              {!isCustomerMode && (
-                <MomentPopover
-                  open={openPopover.moment}
-                  onClick={() => handleTogglePopover('moment')}
-                  onClose={() => handleClosePopover('moment')}
-                />
-              )}
-            </SubMenu>)
-        )}
         {modalIsOpen && (
           <Modal
             title={t(modalSelected.toUpperCase(), capitalize(modalSelected))}
@@ -342,7 +308,6 @@ export const Header = (props) => {
     </>
   )
 }
-
 const styles = {
   headCustomer: {
     margin: 0,
@@ -357,7 +322,6 @@ const styles = {
     fontSize: 20
   }
 }
-
 Header.defaultProps = {
   isShowOrderOptions: true
 }

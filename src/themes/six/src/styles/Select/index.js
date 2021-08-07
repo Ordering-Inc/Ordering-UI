@@ -21,7 +21,6 @@ export const Select = (props) => {
     notReload,
     isFullWidth
   } = props
-
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(option => option.value === defaultValue)
@@ -29,11 +28,9 @@ export const Select = (props) => {
   const [value, setValue] = useState(defaultValue)
   const dropdownReference = useRef()
   const [orderState] = useOrder()
-
   const handleSelectClick = (e) => {
     !open && setOpen(true)
   }
-
   const closeSelect = (e) => {
     if (open) {
       const outsideDropdown = !dropdownReference.current?.contains(e.target)
@@ -42,13 +39,11 @@ export const Select = (props) => {
       }
     }
   }
-
   const handleKeyDown = (e) => {
     if (e.keyCode === 27) {
       setOpen(false)
     }
   }
-
   useEffect(() => {
     document.addEventListener('mouseup', closeSelect)
     document.addEventListener('keydown', handleKeyDown)
@@ -57,7 +52,6 @@ export const Select = (props) => {
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [open])
-
   useEffect(() => {
     if (!notAsync) {
       const _defaultOption = options?.find(option => option.value === defaultValue)
@@ -65,7 +59,6 @@ export const Select = (props) => {
       setValue(defaultValue)
     }
   }, [defaultValue, options])
-
   const handleChangeOption = (option) => {
     setSelectedOption(option)
     setValue(option.value)
@@ -81,9 +74,9 @@ export const Select = (props) => {
       onMouseUp={handleSelectClick}
       fullwidth={isFullWidth}
     >
-      {!selectedOption && <Selected fullwidth={isFullWidth}>{placeholder || ''}<Chevron><BisDownArrow /></Chevron></Selected>}
+      {!selectedOption && <Selected className='selected-option' fullwidth={isFullWidth}>{placeholder || ''}<Chevron><BisDownArrow /></Chevron></Selected>}
       {selectedOption && (
-        <Selected fullwidth={isFullWidth}>
+        <Selected fullwidth={isFullWidth} className='selected-option'>
           <Header>
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>

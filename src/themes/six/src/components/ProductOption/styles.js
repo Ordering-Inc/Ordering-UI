@@ -10,7 +10,6 @@ export const WrapHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #FFF;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   margin-bottom: 10px;
 `

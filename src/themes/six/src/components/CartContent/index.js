@@ -11,9 +11,9 @@ export const CartContent = (props) => {
     carts,
     isOrderStateCarts,
     isCartPopover,
-    isForceOpenCart
+    isForceOpenCart,
+    isSidebar
   } = props
-
   const [, t] = useLanguage()
   const theme = useTheme()
   const [events] = useEvent()
@@ -29,7 +29,7 @@ export const CartContent = (props) => {
   }
 
   const handleGoToPage = (data) => {
-    props.onClose()
+    // props.onClose()
     events.emit('go_to_page', data)
   }
 
@@ -65,6 +65,7 @@ export const CartContent = (props) => {
                     currentCartUuid={currentCartUuid}
                     isProducts={cart.products.length}
                     onClickCheckout={props.onClose}
+                    isSidebar={isSidebar}
                   />
                 </>
               )}

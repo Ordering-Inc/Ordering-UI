@@ -6,13 +6,15 @@ export const WrapperMap = styled.div`
   justify-content: center;
   box-sizing: border-box;
   min-height: 30vh;
-  
   height:100%;
   
   > div {
     width: 100% !important;
     height: 100% !important; 
-    box-shadow: inset 0 7px 9px -7px rgb(0 0 0 / 40%);   
+  }
+
+  #map {
+    top: 1px;
   }
 
   ${({ disabled }) => disabled && css`
