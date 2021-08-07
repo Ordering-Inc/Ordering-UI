@@ -14,18 +14,15 @@ import {
   MenuLink,
   CustomerInfo,
   UserEdit,
-  SubMenu,
   DesktopSubmenu
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 import { capitalize } from '../../../../../utils'
 import { UserPopover } from '../../../../../components/UserPopover'
-import { MomentPopover } from '../../../../../components/MomentPopover'
 import { MomentContent } from '../../../../../components/MomentContent'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
-import { AddressesPopover } from '../AddressesPopover'
 import { Modal } from '../Modal'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'

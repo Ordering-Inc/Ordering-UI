@@ -23,7 +23,7 @@ export const WrappSumarry = styled.div`
       `
     } 
     ${({ skeleton }) => skeleton && css`
-      padding: 0 5%;
+      padding: 20px 5%;
       align-items: flex-start;
     `}    
   }
@@ -31,7 +31,7 @@ export const WrappSumarry = styled.div`
 export const WrappContainer = styled.div`
   width: 100%;
   margin: 0 auto;
-  padding: 0 5%;
+  padding: 20px 5%;
   box-sizing: border-box;
  
   @media (min-width: 1024px) {

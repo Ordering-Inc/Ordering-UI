@@ -154,7 +154,7 @@ const BusinessControllerUI = (props) => {
         </WrapperBusinessCard>
         <BusinessInfomation>
           {
-            business ? (
+            (business && handleShowBusinessInfo) ? (
               <BsExclamationCircle onClick={() => handleShowBusinessInfo(business)} />
             ) : (
               <Skeleton width={20} />

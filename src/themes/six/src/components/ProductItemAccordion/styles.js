@@ -376,6 +376,10 @@ export const CartActions = styled.div`
     width: calc(100% - 120px);
     margin-left: auto;
     margin-right: 0px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 0px;
+      margin-right: auto;
+    `}
   }
 
   @media (min-width: 1024px) {

@@ -2,12 +2,13 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
+  position: relative;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: auto;
+  height: 100%;
   box-sizing: border-box;
 `
 export const BackHeader = styled.div`
@@ -16,9 +17,12 @@ export const BackHeader = styled.div`
 
   @media (min-width: 1024px) {
     position: absolute;
-    top: ${({ isCheckout }) => isCheckout ? '80px' : '0'};
+    top: 0;
     left: 0;
-    padding: 20px;
+    ${props => props.theme?.rtl && css`
+      left: unset;
+      right: 0;
+    `}
   }
 `
 export const Logo = styled.div`

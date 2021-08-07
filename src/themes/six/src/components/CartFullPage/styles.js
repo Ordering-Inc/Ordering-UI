@@ -3,11 +3,11 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 75px);
   position: fixed;
-  top: 0;
+  top: 76px;
   z-index: 999;
-  background-color: #F8F9FA;
+  background-color: ${props => props.theme.colors.secundaryBackground};
   box-sizing: border-box;  
   overflow: hidden;
 `

@@ -313,6 +313,12 @@ export const BusinessInfomation = styled.div`
   cursor: pointer;
   z-index: 2;
 
+  
+  ${props => props.theme?.rtl && css`
+    right: unset;
+    left: 0;
+  `}
+
   svg {
     font-size: 20px;
   }

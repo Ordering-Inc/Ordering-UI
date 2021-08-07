@@ -69,7 +69,8 @@ const BusinessesListingUI = (props) => {
     businessesList.businesses?.map(business => business.id)
 
   const handleScroll = useCallback(() => {
-    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
+    const listWindows = document.querySelector('#list_wrapper')
+    const innerHeightScrolltop = listWindows.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (badScrollPosition || businessesList.loading || !hasMore) return
@@ -77,8 +78,9 @@ const BusinessesListingUI = (props) => {
   }, [businessesList, paginationProps])
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const listWindows = document.querySelector('#list_wrapper')
+    listWindows.addEventListener('scroll', handleScroll)
+    return () => listWindows.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
   const handleClickAddress = (e) => {

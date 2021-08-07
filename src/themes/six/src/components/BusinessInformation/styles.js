@@ -270,6 +270,7 @@ export const GoOrder = styled.div`
   button {
     margin-left: auto;
     ${props => props.theme?.rtl && css`
+      margin-left: unset;
       margin-right: auto;
     `}
   }

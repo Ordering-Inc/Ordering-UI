@@ -171,20 +171,37 @@ export const BackMenu = styled.div`
 
   @media (min-width: 768px) {
     right: 25px;
+    ${props => props.theme?.rtl && css`
+      left: 25px;
+      right: unset;
+    `}
+
   }
 
   @media (min-width: 1024px) {
     right: unset;
     left: calc(40% - 45px);
+    ${props => props.theme?.rtl && css`
+      left: unset;
+      right: calc(40% - 45px);
+    `}
   }
 
   @media (min-width: 1200px) {
     right: unset;
     left: calc(40% - 50px);
+    ${props => props.theme?.rtl && css`
+      left: unset;
+      right: calc(40% - 50px);
+    `}
   }
 
   @media (min-width: 1440px) {
     right: unset;
     left: calc(40% - 60px);
+    ${props => props.theme?.rtl && css`
+      left: unset;
+      right: calc(40% - 60px);
+    `}
   }
 `

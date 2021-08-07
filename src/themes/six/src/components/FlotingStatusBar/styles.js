@@ -138,6 +138,9 @@ export const BaseShape = styled.div`
   position: relative;
   box-sizing: border-box;
   border: 1px solid ${props => props.theme.colors.primary};
+  ${props => props.theme?.rtl && css`
+    transform: rotate(45deg) translate(0px, 7px);
+  `}
   img {
     width: 100%;
     opacity: 1;

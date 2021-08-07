@@ -105,7 +105,7 @@ export const ProductInfo = styled.div`
     padding: 25px 6vw;
     top: 0;
     margin-top: 0px;   
-    background-color: #F8F9FA;
+    background-color: ${props => props.theme.colors.secundaryBackground};
     height: fit-content;
     min-height: 100%;
     box-sizing: border-box;
@@ -162,6 +162,7 @@ export const ProductActions = styled.div`
   background-color: #FFF;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   box-sizing: border-box;
+  margin-top: 20px;
   &.isIndividualBusinessCart-ProductAction {
     bottom: 0;
     @media (min-width: 1024px) {

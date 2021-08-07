@@ -92,7 +92,7 @@ export const CartInfo = (props) => {
   }
 
   return (
-    <Container>
+    <Container className='test-mark'>
       <BackHeader isCheckout={isCheckout}>
         {windowSize.width > 768 && (
           <Logo>

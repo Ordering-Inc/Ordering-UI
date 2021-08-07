@@ -20,7 +20,10 @@ export const Layer = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  height: ${({ height }) => height || '100vh'};
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${props => props.theme?.rtl ? css`
     right: 0;
   ` : css`
