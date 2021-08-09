@@ -20,6 +20,7 @@ export const CartSidebar = (props) => {
     open,
     carts
   } = props
+
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -78,6 +79,7 @@ export const CartSidebar = (props) => {
           <CartContentWrapper>
             <CartContent
               isCartPopover
+              isSidebar
               carts={props.carts}
               isOrderStateCarts={!!orderState.carts}
               onClose={() => actionSidebar(false)}

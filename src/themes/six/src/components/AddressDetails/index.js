@@ -54,14 +54,6 @@ const AddressDetailsUI = (props) => {
       <AddressContainer>
         <Header>
           <h2>{t('DELIVERY_ADDRESS', 'Delivery address')}</h2>
-          {orderState?.options?.type === 1 && !isCartPending &&
-            <Button
-              onClick={() => setOpenModal(true)}
-              outline
-              color='primary'
-            >
-              {t('CHANGE', 'Change')}
-            </Button>}
         </Header>
         {apiKey && (
           <WrappMap>
@@ -72,6 +64,14 @@ const AddressDetailsUI = (props) => {
         )}
         <Header>
           <h4>{addressToShow || orderState?.options?.address?.address}</h4>
+          {orderState?.options?.type === 1 && !isCartPending &&
+            <Button
+              onClick={() => setOpenModal(true)}
+              outline
+              color='primary'
+            >
+              {t('CHANGE', 'Change')}
+            </Button>}
         </Header>
         <Modal
           title={t('ADDRESSES', 'Addresses')}

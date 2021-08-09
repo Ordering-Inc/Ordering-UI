@@ -11,33 +11,32 @@ export const WrappSumarry = styled.div`
   align-items: center;
   height: 100%;
   @media (min-width: 1024px) {
-    width: 40%;
-    height: calc(100vh - 60px);
+    width: 40vw;
+    padding: 2vw;
+    height: calc(100vh - 75px);
     ${({ skeleton }) => skeleton
       ? css`
          background-color: transparent; 
         `
       : css`
-         background-color: ${props => props.theme.colors.primarybackground};
+         background-color: ${props => props.theme.colors.primaryDarkBackground};
       `
     } 
     ${({ skeleton }) => skeleton && css`
-      padding: 0 5%;
+      padding: 20px 5%;
       align-items: flex-start;
     `}    
   }
 `
 export const WrappContainer = styled.div`
   width: 100%;
-  margin: auto;
-  padding: 0 5%;
+  margin: 0 auto;
+  padding: 20px 5%;
   box-sizing: border-box;
-  @media (min-width: 513px) {
-    width: 90%;
-  }
+ 
   @media (min-width: 1024px) {
-    width: 60%;
-    height: calc(100vh - 60px);
+    width: 60vw;
+    height: calc(100vh - 75px);
     overflow-y: scroll;
   }
 `
@@ -75,6 +74,9 @@ export const PaymentMethodContainer = styled.div`
     font-weight: 200;
     margin: 0px 0 10px;
   }
+  .selected-option {
+    font-weight: 300;
+  }
 `
 export const DriverTipContainer = styled(PaymentMethodContainer)``
 export const CartContainer = styled(PaymentMethodContainer)`
@@ -86,12 +88,23 @@ export const CartContainer = styled(PaymentMethodContainer)`
   }
 `
 export const WrapperPlaceOrderButton = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin: 20px 0px 20px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  @media (min-width: 513px) {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 15px;
+  }
+
   button {
-    width: 100%;
+    width: 45%;
     padding: 5px 20px;
     cursor: pointer;
     &:disabled {
@@ -99,11 +112,7 @@ export const WrapperPlaceOrderButton = styled.div`
       cursor: not-allowed;
     }
   }
-  @media (min-width: 513px) {
-    button {
-      width: 350px;
-    }
-  }
+  
 `
 export const WarningMessage = styled.div`
   width: 100%;
@@ -233,5 +242,17 @@ export const InfoWrapper = styled.div`
     fill: ${props => props.theme.colors.fontSecundary};
   }
 `
-export const WrapBusinessAddress = styled.div`
+
+export const MomentWrapper = styled.div`
+`
+
+export const SectionTitle = styled.div`
+  display: flex;
+  width: 100%;
+  h2 {
+    font-size: 18px;
+    line-height: 21px;
+    color: #495057;
+    font-weight: 300;
+  }
 `

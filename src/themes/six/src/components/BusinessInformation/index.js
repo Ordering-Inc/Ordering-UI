@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../../../../utils'
-import { useTheme } from 'styled-components'
+import GoLinkExternal from '@meronex/icons/go/GoLinkExternal'
 import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
-  useOrder,
   useLanguage,
   useUtils,
   useConfig
@@ -24,8 +23,6 @@ import {
   BusinessMediaContent,
   BusinessInfo,
   BusinessInfoItem,
-  WrapperBusinessLogo,
-  BusinessLogo,
   ModalIcon,
   Description,
   ImageContainer,
@@ -39,31 +36,31 @@ import {
   DeliveryInfoSection,
   ScheduleName,
   ScheduleDate,
-  ScheduleTime
+  ScheduleTime,
+  GoOrder,
+  BusinessName,
+  TodayEnablTime,
+  BusinessAddress,
+  BusinessPhone
+
 } from './styles'
 import { Tabs, Tab } from '../../../../../styles/Tabs'
-import GrDeliver from '@meronex/icons/gr/GrDeliver'
-import FaStar from '@meronex/icons/fa/FaStar'
-import FiClock from '@meronex/icons/fi/FiClock'
-import GrLocation from '@meronex/icons/gr/GrLocation'
 import MdClose from '@meronex/icons/md/MdClose'
+import { Button } from '../../../../../styles/Buttons'
 export const BusinessInformationUI = (props) => {
   const {
     business,
-    getBusinessType,
-    optimizeImage,
     businessLocation,
     businessSchedule,
     businessPhotos,
     businessVideos,
-    onClose
+    onClose,
+    goBusiness
   } = props
-  const theme = useTheme()
-  const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [tabValue, setTabValue] = useState('General Info')
-  const [{ parsePrice, parseDistance }] = useUtils()
+  const [{ parsePrice }] = useUtils()
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
   const arrayOfWeekdays = [
@@ -89,6 +86,7 @@ export const BusinessInformationUI = (props) => {
     setImage(src)
     setModalImage(true)
   }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -98,11 +96,11 @@ export const BusinessInformationUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessInformationContainer>
-        <ModalIcon>
-          <MdClose onClick={() => onClose(false)} />
-        </ModalIcon>
         <BusinessInfoWrapper>
           <LeftPanel>
+            <ModalIcon>
+              <MdClose onClick={() => onClose(false)} />
+            </ModalIcon>
             {business.reviews && (
               <FlexTabs>
                 <Tabs variant='primary'>
@@ -125,54 +123,35 @@ export const BusinessInformationUI = (props) => {
             {tabValue === 'General Info' && (
               <>
                 <BusinessBasicContent>
-                  {(business?.logo || theme.images?.dummies?.businessLogo) && (
-                    <WrapperBusinessLogo>
-                      <BusinessLogo
-                        bgimage={
-                          optimizeImage
-                            ? optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')
-                            : business?.logo || theme.images?.dummies?.businessLogo
-                        }
-                      />
-                    </WrapperBusinessLogo>
-                  )}
                   <BusinessInfo className='info'>
                     <BusinessInfoItem>
-                      <div>
-                        <h2 className='bold'>{business?.name}</h2>
-                        <p>
-                          <FaStar className='start' />
-                          {business?.reviews?.total}
-                        </p>
-                      </div>
-                      {getBusinessType && (
-                        <div>
-                          <p>{getBusinessType()}</p>
-                        </div>
+                      {business && (
+                        <BusinessName>
+                          <h2 className='bold'>{business?.name}</h2>
+                        </BusinessName>
                       )}
-                      <div className='meta-info'>
-                        <>
-                          {orderState?.options?.type === 1 ? (
-                            <h5>
-                              <FiClock />
-                              {convertHoursToMinutes(business?.delivery_time)}
-                            </h5>
-                          ) : (
-                            <h5>
-                              <FiClock />
-                              {convertHoursToMinutes(business?.pickup_time)}
-                            </h5>
-                          )}
-                        </>
-                        <h5>
-                          <GrLocation />
-                          {parseDistance(business?.distance || 0)}
-                        </h5>
-                        <h5>
-                          <GrDeliver />
-                          {business && parsePrice(business?.delivery_price || 0)}
-                        </h5>
-                      </div>
+                      {business && (
+                        business?.today
+                          ? <TodayEnablTime>{t('OPEN_UNTIL', 'Open until')} {scheduleFormatted(business?.today.lapses[0].close)}</TodayEnablTime>
+                          : <TodayEnablTime>{t('CLOSED_TODAY', 'Closed Today')}</TodayEnablTime>
+                      )}
+                      {business && (
+                        business?.address &&
+                          <BusinessAddress>{business?.address}</BusinessAddress>
+                      )}
+                      {business && business?.phone && (
+                        <a href={`tel:${business?.phone}`}>
+                          <BusinessPhone>{t('CALL', 'Call')}:&nbsp;{business?.phone}</BusinessPhone>
+                        </a>
+                      )}
+                      {business && business.location && (
+                        <a className='get-direction' href={`https://www.google.com/maps/dir/Current+Location/${business.location.lat},${business.location.lng}/data=!3m1!4b1`} target='_blank' rel='noopener noreferrer' aria-describedby='externalLink2'>
+                          <Button color='primary' outline>
+                            {t('GET_DIRECTION', 'Get Direction')}<GoLinkExternal />
+                          </Button>
+                        </a>
+                      )}
+
                     </BusinessInfoItem>
                   </BusinessInfo>
                 </BusinessBasicContent>
@@ -241,6 +220,10 @@ export const BusinessInformationUI = (props) => {
                     </div>
                   </BusinessMediaContent>
                 )}
+                {business &&
+                  <GoOrder>
+                    <Button type='button' color='primary' onClick={() => goBusiness(business)}>{t('ORDER_HEAR', 'Order Here')}</Button>
+                  </GoOrder>}
               </>
             )}
             {tabValue === 'Reviews' && (

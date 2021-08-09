@@ -2,7 +2,7 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessReviews as BusinessReviewController, useLanguage } from 'ordering-components'
 
-import { BusinessReviewsContainer, ReviewOf, WrapperSelect, WrapperStars, Content, Review, ReviewContainer, Comments, ReviewsNotFound, Comment, ScoresContainer, Scores, ScoreDiv, SkeletonContainer } from './styles'
+import { BusinessReviewsContainer, ReviewOf, WrapperStars, Content, ReviewContainer, Comments, ReviewsNotFound, Comment, ScoresContainer, Scores, ScoreDiv, SkeletonContainer, TotalStar } from './styles'
 import { Select } from '../../styles/Select'
 
 import AiOutlineStar from '@meronex/icons/ai/AiOutlineStar'
@@ -47,37 +47,33 @@ export const BusinessReviewsUI = (props) => {
         {reviewsList.error ? <h2>{t('ERROR_UNKNOWN', 'An error has ocurred')}</h2> : (
           <>
             <ReviewOf>
-              {!reviewsList.loading ? <h3>{t('REVIEWS_OF', 'Reviews of')} {businessName}</h3> : <Skeleton width={200} />}
-              {!reviewsList.loading
-                ? (
-                  <span>
-                    <Select
-                      name='desktop'
-                      options={options}
-                      defaultValue={options[0].value}
-                      onChange={(val) => handleClickOption(val)}
-                      notAsync
-                      InitialIcon={AiOutlineStar}
-                    />
-                  </span>
-                )
-                : <Skeleton width={200} height={30} />}
+              {!reviewsList.loading ? <h2>{t('REVIEWS_OF', 'Reviews of')} {businessName}</h2> : <Skeleton width={200} />}
               <WrapperStars>
-                {!reviewsList.loading ? <><AiOutlineStar color='#D81212' />{stars}</> : <Skeleton width={100} height={30} />}
+                {!reviewsList.loading ? <h3><AiOutlineStar color='#D81212' />{stars}</h3> : <Skeleton width={100} height={30} />}
+                {!reviewsList.loading
+                  ? (
+                    <span>
+                      <Select
+                        name='desktop'
+                        options={options}
+                        defaultValue={options[0].value}
+                        onChange={(val) => handleClickOption(val)}
+                        notAsync
+                        InitialIcon={AiOutlineStar}
+                      />
+                    </span>
+                  )
+                  : <Skeleton width={200} height={30} />}
               </WrapperStars>
             </ReviewOf>
-            <WrapperSelect>
-              {!reviewsList.loading ? <Select options={options} defaultValue={options[0].value} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} /> : <Skeleton width={200} height={30} />}
-            </WrapperSelect>
             <Content id='content'>
-              <h3>{!reviewsList.loading ? <><AiOutlineStar color='#D81212' />{stars}</> : <Skeleton width={100} height={30} />}</h3>
               {!reviewsList.loading ? reviewsList?.reviews.map((review) => (
-                <Review key={review.id} id='review'>
+                <div key={review.id} id='review'>
                   <ReviewContainer>
                     <Comments>
-                      <div>
-                        <p><AiOutlineStar color='#D81212' /> {review.total}</p>
-                      </div>
+                      <TotalStar>
+                        <AiOutlineStar color='#D81212' /> {review.total}
+                      </TotalStar>
                       <Comment>
                         <p title={review.comment}>{review.comment}</p>
                       </Comment>
@@ -91,7 +87,7 @@ export const BusinessReviewsUI = (props) => {
                       <Score star={review.package} text={t('REVIEW_PRODUCT_PACKAGING', 'Product Packaging')} />
                     </Scores>
                   </ScoresContainer>
-                </Review>
+                </div>
               )) : (
                 <>
                   {[...Array(2)].map((item, i) => (
