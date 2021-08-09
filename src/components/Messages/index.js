@@ -268,7 +268,7 @@ const MessagesUI = (props) => {
                   ) : (
                   <BubbleConsole>
                     {t('ORDER', 'Order')} {' '}
-                    <strong>{message.change.attribute}</strong> {}
+                    <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> {}
                     {t('CHANGED_FROM', 'Changed from')} {' '}
                     {message.change.old !== null && (
                       <>
