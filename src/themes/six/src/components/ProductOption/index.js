@@ -43,7 +43,6 @@ const ProductOptionUI = (props) => {
             )}
             <Title><span>{option.name}</span></Title>
           </TitleContainer>
-
           <Flag>{maxMin}</Flag>
         </WrapHeader>
         {children}

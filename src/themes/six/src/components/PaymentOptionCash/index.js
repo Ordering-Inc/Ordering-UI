@@ -68,7 +68,7 @@ export const PaymentOptionCash = (props) => {
               ref={el}
               name='cash'
               type='number'
-              placeholder='0'
+              placeholder='$ 0.00'
             />
           </WrapperInput>
           {value && parseFloat(value) < orderTotal && (

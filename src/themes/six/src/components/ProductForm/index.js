@@ -2,31 +2,26 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
-
 import {
   ProductForm as ProductOptions,
   useSession,
   useLanguage,
-  useOrder,
-  useUtils
+  useOrder
 } from 'ordering-components'
-
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { ProductIngredient } from '../../../../../components/ProductIngredient'
-import { ProductShare } from '../../../../../components/ProductShare'
 import { ForgotPasswordForm } from '../../../../../components/ForgotPasswordForm'
 import { AddressList } from '../../../../../components/AddressList'
 import { Button } from '../../../../../styles/Buttons'
 import { TextArea } from '../../styles/inputs'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-
 import { Modal } from '../Modal'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
-
+import { ProductShare } from '../ProductShare'
 import {
   ProductContainer,
   WrapperImage,
@@ -40,10 +35,10 @@ import {
   WrapperSubOption,
   SkuContent,
   ProductFormTitle,
-  WrapperIngredients
+  WrapperIngredients,
+  ShareWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
-
 const ProductOptionsUI = (props) => {
   const {
     businessSlug,
@@ -59,33 +54,28 @@ const ProductOptionsUI = (props) => {
     handleSave,
     handleChangeIngredientState,
     handleChangeSuboptionState,
-    handleChangeCommentState
+    handleChangeCommentState,
+    isIndividualBusinessCart
   } = props
-
   const { product, loading, error } = productObject
-
   const windowSize = useWindowSize()
   const [{ auth, user }, { login }] = useSession()
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  // const [{ parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
-
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-
   const closeModal = () => {
     setModalIsOpen(false)
     setModalPageToShow('login')
   }
-
   const handleSuccessLogin = (user) => {
     if (user) {
       closeModal()
     }
   }
-
   const handleSaveProduct = () => {
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
@@ -104,12 +94,10 @@ const ProductOptionsUI = (props) => {
     }
     scrollTo(productContainer, topPos, 1250)
   }
-
   const handleCustomModalClick = (e, { page }) => {
     e.preventDefault()
     setModalPageToShow(page)
   }
-
   const handleSuccessSignup = (user) => {
     login({
       user,
@@ -117,7 +105,6 @@ const ProductOptionsUI = (props) => {
     })
     closeModal()
   }
-
   const isError = (id) => {
     let classnames = ''
     if (errors[`id:${id}`]) {
@@ -128,7 +115,6 @@ const ProductOptionsUI = (props) => {
     }
     return classnames
   }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -145,14 +131,6 @@ const ProductOptionsUI = (props) => {
             <Skeleton variant='rect' height={200} />
           </SkeletonBlock>
         )}
-
-        {product && !loading && !error && (
-          <ProductShare
-            slug={businessSlug}
-            categoryId={product?.category_id}
-            productId={product?.id}
-          />
-        )}
         {
         props.beforeMidElements?.map((BeforeMidElements, i) => (
           <React.Fragment key={i}>
@@ -167,6 +145,15 @@ const ProductOptionsUI = (props) => {
           <>
             <WrapperImage>
               <ProductImage id='product_image'>
+                {product && !loading && !error && (
+                  <ShareWrapper>
+                    <ProductShare
+                      slug={businessSlug}
+                      categoryId={product?.category_id}
+                      productId={product?.id}
+                    />
+                  </ShareWrapper>
+                )}
                 <img
                   src={product?.images || theme.images?.dummies?.product}
                   alt='product'
@@ -258,7 +245,7 @@ const ProductOptionsUI = (props) => {
                   <MidComponent key={i} {...props} />))
                 }
               </ProductEdition>
-              <ProductActions>
+              <ProductActions className={isIndividualBusinessCart && 'isIndividualBusinessCart-ProductAction'}>
                 {
                   productCart && !isSoldOut && maxProductQuantity > 0 && (
                     <div className='incdec-control'>
@@ -274,7 +261,6 @@ const ProductOptionsUI = (props) => {
                     </div>
                   )
                 }
-
                 {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                   <Button
                     className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
@@ -289,10 +275,8 @@ const ProductOptionsUI = (props) => {
                         {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD_TO_CART', theme?.defaultLanguages?.ADD_TO_CART || 'Add to Cart')}
                       </span>
                     )}
-                    <span>{productCart.total && parsePrice(productCart.total)}</span>
                   </Button>
                 )}
-
                 {auth && !orderState.options?.address_id && (
                   orderState.loading ? (
                     <Button
@@ -311,7 +295,6 @@ const ProductOptionsUI = (props) => {
                     />
                   )
                 )}
-
                 {(!auth || isSoldOut || maxProductQuantity <= 0) && (
                   <Button
                     className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
@@ -326,7 +309,6 @@ const ProductOptionsUI = (props) => {
             </ProductInfo>
           </>
         )}
-
         {modalIsOpen && !auth && (
           <Modal
             open={modalIsOpen}
@@ -388,7 +370,6 @@ const ProductOptionsUI = (props) => {
             )}
           </Modal>
         )}
-
         {error && error.length > 0 && (
           <NotFoundSource
             content={error[0]?.message || error[0]}
@@ -404,13 +385,11 @@ const ProductOptionsUI = (props) => {
     </>
   )
 }
-
 export const ProductForm = (props) => {
   const productOptionsProps = {
     ...props,
     UIComponent: ProductOptionsUI
   }
-
   return (
     <ProductOptions {...productOptionsProps} />
   )

@@ -5,7 +5,6 @@ export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-shadow: 0px 0px 6px #00000029;
   opacity: 1;
 
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
@@ -16,6 +15,10 @@ export const AccordionSection = styled.div`
   &:last-child {
     border-bottom: 0;
     margin-bottom: 10px;
+  }
+
+  .individualBusinessCart-accordionContent{
+    margin-bottom: 74px;
   }
 `
 

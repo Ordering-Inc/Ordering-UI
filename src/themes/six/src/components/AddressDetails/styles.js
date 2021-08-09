@@ -3,18 +3,30 @@ import styled, { css } from 'styled-components'
 export const AddressContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
 `
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   h2 {
-    color: ${props => props.theme.colors.fontSecundary};
-    font-weight: 200;
+    font-size: 18px;
+    line-height: 21px;
+    color: #495057;
+    font-weight: 300;
   }
   button {
-    height: 40px;
+    font-size: 12px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  h4 {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 300;
+    color: #000000;
+    margin: 14px 0;
   }
 `
 
