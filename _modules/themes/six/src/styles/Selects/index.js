@@ -19,8 +19,8 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding-left: 15px;\n  padding-right: 15px;\n  min-width: 100px;\n  color: #333;\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 100;\n  &:hover {\n    background-color: ", ";\n  }\n  ", "\n  svg {\n    vertical-align: text-top;\n  }\n  ", "\n"])), (0, _polished.darken)(0.03, '#E8F0ED'), function (props) {
-  return props.selected && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n  "])), (0, _polished.darken)(0.05, '#E8F0ED'), (0, _polished.darken)(0.03, '#E8F0ED'));
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding-left: 15px;\n  padding-right: 15px;\n  min-width: 100px;\n  color: #333;\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 100;\n  &:hover {\n    background-color: ", ";\n  }\n  ", "\n  svg {\n    vertical-align: text-top;\n  }\n  ", "\n"])), (0, _polished.darken)(0.03, '#DEE2E6'), function (props) {
+  return props.selected && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n  "])), (0, _polished.darken)(0.05, '#DEE2E6'), (0, _polished.darken)(0.03, '#DEE2E6'));
 }, function (_ref) {
   var withIcons = _ref.withIcons;
   return withIcons && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      display: flex;\n      align-items: center;\n      justify-content: flex-start;\n      svg {\n        margin-right: 3px;\n        ", "\n      }\n  "])), function (props) {

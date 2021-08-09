@@ -15,6 +15,8 @@ var _styledComponents = require("styled-components");
 
 var _reactRouterDom = require("react-router-dom");
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
@@ -23,15 +25,11 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _PageNotFound = require("../../../../../components/PageNotFound");
 
-var _FloatingButton = require("../../../../../components/FloatingButton");
-
 var _Cart = require("../../../../../components/Cart");
 
 var _Select = require("../../../../../styles/Select");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
-var _Modal = require("../Modal");
 
 var _BusinessBasicInformation = require("../BusinessBasicInformation");
 
@@ -39,11 +37,13 @@ var _BusinessProductsCategories = require("../BusinessProductsCategories");
 
 var _BusinessProductsList = require("../BusinessProductsList");
 
-var _UpsellingPage = require("../UpsellingPage");
-
 var _ProductForm = require("../ProductForm");
 
 var _SearchBar = require("../SearchBar");
+
+var _CartFullPage = require("../CartFullPage");
+
+var _FlotingStatusBar = require("../FlotingStatusBar");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -82,7 +82,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _props$beforeElements, _props$beforeComponen, _currentCart$products, _theme$defaultLanguag7, _businessState$busine, _business$categories, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _business$categories2, _theme$defaultLanguag12, _theme$defaultLanguag13, _currentCart$products2, _currentCart$products3, _currentCart$products4, _business$categories3, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _error$, _theme$defaultLanguag18, _currentCart$products5, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _currentCart$products6, _productModal$error$, _theme$defaultLanguag22, _props$afterComponent, _props$afterElements;
+  var _Object$values$find, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _props$beforeElements, _props$beforeComponen, _currentCart$products, _theme$defaultLanguag7, _businessState$busine, _business$categories, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _business$categories2, _theme$defaultLanguag12, _theme$defaultLanguag13, _currentCart$products2, _currentCart$products3, _currentCart$products4, _business$categories3, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _error$, _theme$defaultLanguag18, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -97,9 +97,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       getNextProducts = props.getNextProducts,
       handleChangeCategory = props.handleChangeCategory,
       handleUpdateInitialRender = props.handleUpdateInitialRender,
-      updateProductModal = props.updateProductModal,
       onProductRedirect = props.onProductRedirect,
-      onCheckoutRedirect = props.onCheckoutRedirect,
       handleChangeSearch = props.handleChangeSearch,
       handleSearchRedirect = props.handleSearchRedirect,
       featuredProducts = props.featuredProducts,
@@ -119,17 +117,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       carts = _useOrder2[0].carts;
 
-  var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
-
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
-
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
 
   var location = (0, _reactRouterDom.useLocation)();
 
@@ -145,23 +135,18 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      openUpselling = _useState6[0],
-      setOpenUpselling = _useState6[1];
+      openBusinessInformation = _useState6[0],
+      setOpenBusinessInformation = _useState6[1];
 
   var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      canOpenUpselling = _useState8[0],
-      setCanOpenUpselling = _useState8[1];
+      isCartOpen = _useState8[0],
+      setIsCartOpen = _useState8[1];
 
   var _useState9 = (0, _react.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      openBusinessInformation = _useState10[0],
-      setOpenBusinessInformation = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isCartOpen = _useState12[0],
-      setIsCartOpen = _useState12[1];
+      cartFullPage = _useState10[0],
+      setCartFullPage = _useState10[1];
 
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
@@ -194,27 +179,34 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       category: product.category_id
     });
     setCurProduct(product);
-    setModalIsOpen(true);
     events.emit('product_clicked', product);
   };
 
   var handlerProductAction = function handlerProductAction(product) {
     if (Object.keys(product).length) {
-      setModalIsOpen(false);
       onProductRedirect({
         slug: business === null || business === void 0 ? void 0 : business.slug
       });
     }
+
+    closeModalProductForm();
   };
 
   var closeModalProductForm = function closeModalProductForm() {
-    setModalIsOpen(false);
     handleUpdateInitialRender(false);
-    updateProductModal(null);
     setCurProduct(null);
     onProductRedirect({
       slug: business === null || business === void 0 ? void 0 : business.slug
     });
+  };
+
+  var openFullCart = function openFullCart() {
+    setCartFullPage(true);
+  };
+
+  var handleGoBackPage = function handleGoBackPage() {
+    closeModalProductForm();
+    setCartFullPage(false);
   };
 
   var handleScroll = (0, _react.useCallback)(function () {
@@ -231,12 +223,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     if (Object.entries(data.query).length === 0 && openProduct) {
       setModalIsOpen(false);
     }
-  };
-
-  var handleUpsellingPage = function handleUpsellingPage() {
-    onCheckoutRedirect(currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid);
-    setOpenUpselling(false);
-    setCanOpenUpselling(false);
   };
 
   (0, _react.useEffect)(function () {
@@ -271,6 +257,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
+  (0, _react.useEffect)(function () {
+    if (curProduct) {
+      window.scrollTo(0, 0);
+    }
+  }, [curProduct]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -279,7 +270,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !loading && (business === null || business === void 0 ? void 0 : business.id) && !curProduct && !cartFullPage && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
@@ -367,7 +358,23 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleCartOpen: function handleCartOpen(val) {
       return setIsCartOpen(val);
     }
-  })), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, null, /*#__PURE__*/_react.default.createElement("div", {
+  })), !loading && (business === null || business === void 0 ? void 0 : business.id) && !cartFullPage && curProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductDetail, null, /*#__PURE__*/_react.default.createElement(_styles.BackMenu, {
+    className: "productDetail-close"
+  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return closeModalProductForm();
+    }
+  })), /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+    businessSlug: business === null || business === void 0 ? void 0 : business.slug,
+    product: productModal.product || curProduct,
+    businessId: business === null || business === void 0 ? void 0 : business.id,
+    onSave: handlerProductAction
+  })), !loading && (business === null || business === void 0 ? void 0 : business.id) && cartFullPage && /*#__PURE__*/_react.default.createElement(_CartFullPage.CartFullPage, {
+    goBack: handleGoBackPage,
+    currentCart: currentCart,
+    business: business,
+    individualBusinessCart: true
+  }), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
   }, windowSize.width < 850 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: {
@@ -424,43 +431,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0],
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag18 = theme.defaultLanguages) === null || _theme$defaultLanguag18 === void 0 ? void 0 : _theme$defaultLanguag18.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  })), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products5 = currentCart.products) === null || _currentCart$products5 === void 0 ? void 0 : _currentCart$products5.length) > 0 && auth && !isCartOpen && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
-    btnText: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag19 = theme.defaultLanguages) === null || _theme$defaultLanguag19 === void 0 ? void 0 : _theme$defaultLanguag19.MAXIMUM_SUBTOTAL_ORDER) || 'Maximum subtotal order'), ": ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.maximum)) : !(!(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100)) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag20 = theme.defaultLanguages) === null || _theme$defaultLanguag20 === void 0 ? void 0 : _theme$defaultLanguag20.MINIMUN_SUBTOTAL_ORDER) || 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)) : !openUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag21 = theme.defaultLanguages) === null || _theme$defaultLanguag21 === void 0 ? void 0 : _theme$defaultLanguag21.LOADING) || 'Loading'),
-    isSecondaryBtn: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100),
-    btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.length,
-    handleClick: function handleClick() {
-      return setOpenUpselling(true);
-    },
-    disabled: openUpselling || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100)
-  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "80%",
-    open: openProduct,
-    closeOnBackdrop: true,
-    onClose: function onClose() {
-      return closeModalProductForm();
-    },
-    padding: "0",
-    isProductForm: true
-  }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 45,
-    count: 8
-  }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
-  }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_GET_PRODUCT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag22 = theme.defaultLanguages) === null || _theme$defaultLanguag22 === void 0 ? void 0 : _theme$defaultLanguag22.ERROR_GET_PRODUCT) || 'Sorry, we couldn\'t find the requested product.')
-  }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
-    businessSlug: business === null || business === void 0 ? void 0 : business.slug,
-    product: productModal.product || curProduct,
-    businessId: business === null || business === void 0 ? void 0 : business.id,
-    onSave: handlerProductAction
-  })), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && openUpselling && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
-    businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
-    business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,
-    cartProducts: currentCart === null || currentCart === void 0 ? void 0 : currentCart.products,
-    handleUpsellingPage: handleUpsellingPage,
-    openUpselling: openUpselling,
-    canOpenUpselling: canOpenUpselling,
-    setCanOpenUpselling: setCanOpenUpselling
+  })), /*#__PURE__*/_react.default.createElement(_FlotingStatusBar.FlotingStatusBar, {
+    currentCart: currentCart,
+    goToCart: openFullCart,
+    businessName: business === null || business === void 0 ? void 0 : business.name
   }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
@@ -473,10 +447,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState13 = (0, _react.useState)(false),
-      _useState14 = _slicedToArray(_useState13, 2),
-      isInitialRender = _useState14[0],
-      setIsInitialRender = _useState14[1];
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isInitialRender = _useState12[0],
+      setIsInitialRender = _useState12[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

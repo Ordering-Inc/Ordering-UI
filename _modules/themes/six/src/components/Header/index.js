@@ -29,15 +29,11 @@ var _utils = require("../../../../../utils");
 
 var _UserPopover = require("../../../../../components/UserPopover");
 
-var _MomentPopover = require("../../../../../components/MomentPopover");
-
 var _MomentContent = require("../../../../../components/MomentContent");
 
 var _UserDetails = require("../../../../../components/UserDetails");
 
 var _Confirm = require("../../../../../components/Confirm");
-
-var _AddressesPopover = require("../AddressesPopover");
 
 var _Modal = require("../Modal");
 
@@ -84,11 +80,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _orderState$options2, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options3, _orderState$options3$, _orderState$options3$2, _orderState$options3$3, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options4, _orderState$options5, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _orderState$options2, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options3, _orderState$options3$, _orderState$options3$2, _orderState$options3$3, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options4, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
-      closeCartPopover = props.closeCartPopover,
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
       isCustomerMode = props.isCustomerMode;
@@ -208,12 +203,6 @@ var Header = function Header(props) {
     setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
   };
 
-  var handleAddProduct = function handleAddProduct() {
-    if (!closeCartPopover) {
-      handleTogglePopover('cart');
-    }
-  };
-
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
 
@@ -223,12 +212,6 @@ var Header = function Header(props) {
     }
   };
 
-  (0, _react.useEffect)(function () {
-    events.on('cart_product_added', handleAddProduct);
-    return function () {
-      return events.off('cart_product_added', handleAddProduct);
-    };
-  }, []);
   (0, _react.useEffect)(function () {
     if (isCustomerMode) {
       setCustomerModalOpen(false);
@@ -277,9 +260,7 @@ var Header = function Header(props) {
   }))), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
     defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1
-  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, {
-    className: "test-mark"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_styles.DesktopSubmenu, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, onlineStatus && windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_styles.DesktopSubmenu, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
     momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function (variant) {
@@ -340,25 +321,7 @@ var Header = function Header(props) {
     isHideSignup: isHideSignup,
     userCustomer: userCustomer,
     isCustomerMode: isCustomerMode
-  }))), onlineStatus && isShowOrderOptions && windowSize.width > 768 && windowSize.width <= 820 && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
-    auth: auth,
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address,
-    open: openPopover.addresses,
-    onClick: function onClick() {
-      return handleTogglePopover('addresses');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('addresses');
-    }
-  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
-    open: openPopover.moment,
-    onClick: function onClick() {
-      return handleTogglePopover('moment');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('moment');
-    }
-  })), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t(modalSelected.toUpperCase(), (0, _utils.capitalize)(modalSelected)),
     open: modalIsOpen,
     onClose: function onClose() {
@@ -384,7 +347,7 @@ var Header = function Header(props) {
     }
   }) : /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },

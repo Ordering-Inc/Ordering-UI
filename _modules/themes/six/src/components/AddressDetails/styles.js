@@ -17,13 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var AddressContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 15px;\n"])));
+var AddressContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
 
 exports.AddressContainer = AddressContainer;
 
-var Header = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  h2 {\n    color: ", ";\n    font-weight: 200;\n  }\n  button {\n    height: 40px;\n  }\n"])), function (props) {
-  return props.theme.colors.fontSecundary;
-});
+var Header = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  h2 {\n    font-size: 18px;\n    line-height: 21px;\n    color: #495057;\n    font-weight: 300;\n  }\n  button {\n    font-size: 12px;\n    height: 30px;\n    display: flex;\n    align-items: center;\n  }\n\n  h4 {\n    font-size: 14px;\n    line-height: 24px;\n    font-weight: 300;\n    color: #000000;\n    margin: 14px 0;\n  }\n"])));
 
 exports.Header = Header;
 

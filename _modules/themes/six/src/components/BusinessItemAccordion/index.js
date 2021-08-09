@@ -62,7 +62,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       isCartOnProductsList = props.isCartOnProductsList,
       handleClearProducts = props.handleClearProducts,
       handleStoreRedirect = props.handleStoreRedirect,
-      handleCartOpen = props.handleCartOpen;
+      handleCartOpen = props.handleCartOpen,
+      individualBusinessCart = props.individualBusinessCart;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
@@ -181,9 +182,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, {
+    className: "businessItemAccordion",
     isClosed: isClosed,
     isCartOnProductsList: isCartOnProductsList
-  }, /*#__PURE__*/_react.default.createElement(_styles.Accordion, {
+  }, !individualBusinessCart && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.Accordion, {
     isClosed: isClosed,
     className: "accordion ".concat(setActive),
     onClick: function onClick(e) {
@@ -219,7 +221,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     style: {
       minHeight: "".concat(setHeight),
       maxHeight: !setActive && '0px'
-    }
+    },
+    className: individualBusinessCart ? 'individualBusinessCart-accordionContent' : 'accordionContent'
   }, props.children)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

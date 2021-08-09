@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _utils = require("../../../../../utils");
 
-var _styledComponents = require("styled-components");
+var _GoLinkExternal = _interopRequireDefault(require("@meronex/icons/go/GoLinkExternal"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -23,15 +23,9 @@ var _styles = require("./styles");
 
 var _Tabs = require("../../../../../styles/Tabs");
 
-var _GrDeliver = _interopRequireDefault(require("@meronex/icons/gr/GrDeliver"));
-
-var _FaStar = _interopRequireDefault(require("@meronex/icons/fa/FaStar"));
-
-var _FiClock = _interopRequireDefault(require("@meronex/icons/fi/FiClock"));
-
-var _GrLocation = _interopRequireDefault(require("@meronex/icons/gr/GrLocation"));
-
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
+var _Buttons = require("../../../../../styles/Buttons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60,21 +54,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessInformationUI = function BusinessInformationUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _business$reviews, _business$offers, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews2, _orderState$options, _business$reviews3, _business$reviews4, _business$reviews5, _business$offers2, _configs$google_maps_, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _business$reviews, _business$offers, _business$reviews2, _business$reviews3, _business$reviews4, _business$offers2, _configs$google_maps_, _props$afterComponent, _props$afterElements;
 
   var business = props.business,
-      getBusinessType = props.getBusinessType,
-      optimizeImage = props.optimizeImage,
       businessLocation = props.businessLocation,
       businessSchedule = props.businessSchedule,
       businessPhotos = props.businessPhotos,
       businessVideos = props.businessVideos,
-      onClose = props.onClose;
-  var theme = (0, _styledComponents.useTheme)();
-
-  var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
+      onClose = props.onClose,
+      goBusiness = props.goBusiness;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -91,9 +79,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parsePrice = _useUtils2$.parsePrice,
-      parseDistance = _useUtils2$.parseDistance;
+      parsePrice = _useUtils2[0].parsePrice;
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -136,11 +122,11 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformationContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformationContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LeftPanel, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onClose(false);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LeftPanel, null, business.reviews && /*#__PURE__*/_react.default.createElement(_styles.FlexTabs, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+  })), business.reviews && /*#__PURE__*/_react.default.createElement(_styles.FlexTabs, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
@@ -157,17 +143,22 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return setTabValue('Offers');
     },
     active: tabValue === 'Offers'
-  }, t('OFFERS', 'Offers')))), tabValue === 'General Info' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessBasicContent, null, ((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage ? optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit') : (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo)
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
+  }, t('OFFERS', 'Offers')))), tabValue === 'General Info' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessBasicContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "info"
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, business && /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold"
-  }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FaStar.default, {
-    className: "start"
-  }), business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)), getBusinessType && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, getBusinessType())), /*#__PURE__*/_react.default.createElement("div", {
-    className: "meta-info"
-  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))), /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_GrLocation.default, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)), /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)))))), business.about && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_ABOUT', 'Business short description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.about)), business.description && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.description)), (businessSchedule === null || businessSchedule === void 0 ? void 0 : businessSchedule.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_OPENING_TIME', 'Business Opening Time')), /*#__PURE__*/_react.default.createElement(_styles.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleContainer, null, businessSchedule.map(function (schedule, i) {
+  }, business === null || business === void 0 ? void 0 : business.name)), business && (business !== null && business !== void 0 && business.today ? /*#__PURE__*/_react.default.createElement(_styles.TodayEnablTime, null, t('OPEN_UNTIL', 'Open until'), " ", scheduleFormatted(business === null || business === void 0 ? void 0 : business.today.lapses[0].close)) : /*#__PURE__*/_react.default.createElement(_styles.TodayEnablTime, null, t('CLOSED_TODAY', 'Closed Today'))), business && (business === null || business === void 0 ? void 0 : business.address) && /*#__PURE__*/_react.default.createElement(_styles.BusinessAddress, null, business === null || business === void 0 ? void 0 : business.address), business && (business === null || business === void 0 ? void 0 : business.phone) && /*#__PURE__*/_react.default.createElement("a", {
+    href: "tel:".concat(business === null || business === void 0 ? void 0 : business.phone)
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessPhone, null, t('CALL', 'Call'), ":\xA0", business === null || business === void 0 ? void 0 : business.phone)), business && business.location && /*#__PURE__*/_react.default.createElement("a", {
+    className: "get-direction",
+    href: "https://www.google.com/maps/dir/Current+Location/".concat(business.location.lat, ",").concat(business.location.lng, "/data=!3m1!4b1"),
+    target: "_blank",
+    rel: "noopener noreferrer",
+    "aria-describedby": "externalLink2"
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    outline: true
+  }, t('GET_DIRECTION', 'Get Direction'), /*#__PURE__*/_react.default.createElement(_GoLinkExternal.default, null)))))), business.about && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_ABOUT', 'Business short description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.about)), business.description && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, business.description)), (businessSchedule === null || businessSchedule === void 0 ? void 0 : businessSchedule.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_OPENING_TIME', 'Business Opening Time')), /*#__PURE__*/_react.default.createElement(_styles.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleContainer, null, businessSchedule.map(function (schedule, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ScheduleBlock, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.ScheduleName, {
@@ -204,11 +195,17 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       allow: "autoplay; encrypted-media",
       allowFullScreen: true
     });
-  })))), tabValue === 'Reviews' && /*#__PURE__*/_react.default.createElement(_styles.BusinessReviewContent, null, ((_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.reviews) && /*#__PURE__*/_react.default.createElement(_BusinessReviews.BusinessReviews, {
+  }))), business && /*#__PURE__*/_react.default.createElement(_styles.GoOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    type: "button",
+    color: "primary",
+    onClick: function onClick() {
+      return goBusiness(business);
+    }
+  }, t('ORDER_HEAR', 'Order Here')))), tabValue === 'Reviews' && /*#__PURE__*/_react.default.createElement(_styles.BusinessReviewContent, null, ((_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews) && /*#__PURE__*/_react.default.createElement(_BusinessReviews.BusinessReviews, {
     businessId: business.id,
-    reviews: (_business$reviews4 = business.reviews) === null || _business$reviews4 === void 0 ? void 0 : _business$reviews4.reviews,
+    reviews: (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.reviews,
     businessName: business.name,
-    stars: (_business$reviews5 = business.reviews) === null || _business$reviews5 === void 0 ? void 0 : _business$reviews5.total
+    stars: (_business$reviews4 = business.reviews) === null || _business$reviews4 === void 0 ? void 0 : _business$reviews4.total
   })), tabValue === 'Offers' && /*#__PURE__*/_react.default.createElement(_styles.OffersSection, null, /*#__PURE__*/_react.default.createElement(_styles.OfferText, null, /*#__PURE__*/_react.default.createElement(_styles.OfferTextP, null, t('DISCOUNTS_OF', 'Discounts of'), " ", business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement(_styles.OfferTextP, null, business === null || business === void 0 ? void 0 : business.address)), /*#__PURE__*/_react.default.createElement(_styles.OfferTable, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_NAME', 'Offer Name')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_PRICE', 'Offer Price')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_START_DATE', 'Start Date')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_END_DATE', 'End Date')))), /*#__PURE__*/_react.default.createElement("tbody", null, business === null || business === void 0 ? void 0 : (_business$offers2 = business.offers) === null || _business$offers2 === void 0 ? void 0 : _business$offers2.map(function (offer) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id

@@ -17,11 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%; \n  background-color: #fff;\n  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 6%), 0 0 2px rgb(0 0 0 / 7%);\n"])));
+var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%; \n  height: 75px;\n  background-color: #fff;\n  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 10%), 0 0 2px rgb(0 0 0 / 10%);\n  z-index: 10;\n"])));
 
 exports.Header = Header;
 
-var InnerHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  color: #000;\n  justify-content: space-between;\n  width: 93%;\n  margin: 10px auto;\n  @media (min-width: 1024px) {\n    width: 96%;\n  }\n  @media (min-width: 1405px) {\n    width: 93%;\n  }\n"])));
+var InnerHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  color: #000;\n  justify-content: space-between;\n  width: 93%;\n  margin: 15px auto;\n  @media (min-width: 1024px) {\n    width: 96%;\n  }\n  @media (min-width: 1405px) {\n    width: 93%;\n  }\n"])));
 
 exports.InnerHeader = InnerHeader;
 

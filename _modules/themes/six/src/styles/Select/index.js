@@ -123,9 +123,11 @@ var Select = function Select(props) {
     onMouseUp: handleSelectClick,
     fullwidth: isFullWidth
   }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
+    className: "selected-option",
     fullwidth: isFullWidth
   }, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BisDownArrow.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
-    fullwidth: isFullWidth
+    fullwidth: isFullWidth,
+    className: "selected-option"
   }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BisDownArrow.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     id: "list",
     position: "right",

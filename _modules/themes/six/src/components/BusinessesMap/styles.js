@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var WrapperMap = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;  \n  justify-content: center;\n  box-sizing: border-box;\n  min-height: 30vh;\n  \n  height:100%;\n  \n  > div {\n    width: 100% !important;\n    height: 100% !important; \n    box-shadow: inset 0 7px 9px -7px rgb(0 0 0 / 40%);   \n  }\n\n  ", "\n\n  @media(min-width: 850px){\n    width:60vw;    \n  }\n\n  @media(min-width: 1201px){\n    \n  }\n\n"])), function (_ref) {
+var WrapperMap = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;  \n  justify-content: center;\n  box-sizing: border-box;\n  min-height: 30vh;\n  height:100%;\n  \n  > div {\n    width: 100% !important;\n    height: 100% !important; \n  }\n\n  #map {\n    top: 1px;\n  }\n\n  ", "\n\n  @media(min-width: 850px){\n    width:60vw;    \n  }\n\n  @media(min-width: 1201px){\n    \n  }\n\n"])), function (_ref) {
   var disabled = _ref.disabled;
   return disabled && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    pointer-events: none\n  "])));
 });

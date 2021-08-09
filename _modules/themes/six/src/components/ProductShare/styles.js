@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var IconShare = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin: 0px;\n  font-size: 22px;\n  z-index: 9999995;\n  background: rgba(255,255,255,0.5);\n  border-radius: 50%;\n  svg {\n    cursor: pointer\n  }\n  \n"])));
+var IconShare = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin: 0px;\n  font-size: 22px;\n  z-index: 9999995;\n  background: rgba(255,255,255,0.5);\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 30px;\n  height: 30px;\n  svg {\n    cursor: pointer\n  }\n  \n"])));
 
 exports.IconShare = IconShare;
 

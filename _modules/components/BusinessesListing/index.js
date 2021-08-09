@@ -35,6 +35,8 @@ var _OrdersOption = require("../OrdersOption");
 
 var _BusinessesMap = require("../BusinessesMap");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _orderingComponents = require("ordering-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -74,7 +76,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _getCustomArray, _businessesList$busin2, _businessesList$busin3, _orderState$options5, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _getCustomArray, _businessesList$busin2, _businessesList$busin3, _orderState$options6, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -84,7 +86,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       onRedirectPage = props.onRedirectPage,
       handleChangeSearch = props.handleChangeSearch,
       handleChangeBusinessType = props.handleChangeBusinessType,
-      handleBusinessClick = props.handleBusinessClick;
+      handleBusinessClick = props.handleBusinessClick,
+      currentPageParam = props.currentPageParam;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -128,6 +131,24 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       mapErrors = _useState8[0],
       setMapErrors = _useState8[1];
 
+  var _useState9 = (0, _react.useState)({
+    page: currentPageParam || 1,
+    loading: false
+  }),
+      _useState10 = _slicedToArray(_useState9, 2),
+      prevPage = _useState10[0],
+      setPrevPage = _useState10[1];
+
+  var _useState11 = (0, _react.useState)({
+    page: currentPageParam || 1,
+    loading: false
+  }),
+      _useState12 = _slicedToArray(_useState11, 2),
+      nextPage = _useState12[0],
+      setNextPage = _useState12[1];
+
+  var location = (0, _reactRouterDom.useLocation)();
+  var history = (0, _reactRouterDom.useHistory)();
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
@@ -138,8 +159,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
     var hasMore = !(paginationProps.totalPages === paginationProps.currentPage);
-    if (badScrollPosition || businessesList.loading || !hasMore) return;
-    getBusinesses();
+    var nextPageHasMore = !(paginationProps.totalPages === nextPage.page);
+    if (badScrollPosition || businessesList.loading || !hasMore || !nextPageHasMore) return;
+    handleClickNextItems(false, nextPage.page + 1, false);
   }, [businessesList, paginationProps]);
   (0, _react.useEffect)(function () {
     window.addEventListener('scroll', handleScroll);
@@ -147,6 +169,41 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
+  (0, _react.useEffect)(function () {
+    if (!businessesList.loading) {
+      setNextPage(_objectSpread(_objectSpread({}, nextPage), {}, {
+        loading: false
+      }));
+      setPrevPage(_objectSpread(_objectSpread({}, prevPage), {}, {
+        loading: false
+      }));
+    }
+  }, [businessesList.loading]);
+  (0, _react.useEffect)(function () {
+    if (mapErrors) {
+      handleMapErrors(mapErrors);
+      setActiveMap(false);
+    }
+  }, [mapErrors]);
+  (0, _react.useEffect)(function () {
+    if (orderState.loading && !businessesList.loading) {
+      //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
+      //  window.history.pushState({ path: newurl }, '', newurl)
+      var params = new URLSearchParams();
+      history.replace({
+        pathname: location.pathname,
+        search: params.toString()
+      });
+      setPrevPage({
+        loading: true,
+        page: 1
+      });
+      setNextPage({
+        loading: true,
+        page: 1
+      });
+    }
+  }, [orderState.loading]);
 
   var handleClickAddress = function handleClickAddress(e) {
     if (auth) {
@@ -196,16 +253,48 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     });
   };
 
-  (0, _react.useEffect)(function () {
-    if (mapErrors) {
-      handleMapErrors(mapErrors);
-      setActiveMap(false);
-    }
-  }, [mapErrors]);
-
   var getCustomArray = function getCustomArray(list) {
     var isArray = Array.isArray(list);
     return isArray ? list : Object.values(list);
+  };
+
+  var handleClickNextItems = function handleClickNextItems() {
+    getBusinesses(false, nextPage.page + 1, false);
+    var newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + "?page=".concat(nextPage.page + 1);
+    window.history.pushState({
+      path: newurl
+    }, '', newurl);
+    setNextPage({
+      loading: true,
+      page: nextPage.page + 1
+    });
+  };
+
+  var handleClickPrevItems = function handleClickPrevItems() {
+    getBusinesses(false, prevPage.page - 1, true);
+    setPrevPage({
+      loading: true,
+      page: prevPage.page - 1
+    });
+  };
+
+  var changeBusinessType = function changeBusinessType(category) {
+    setNextPage({
+      loading: true,
+      page: 1
+    });
+    setPrevPage({
+      loading: true,
+      page: 1
+    });
+    var params = new URLSearchParams({
+      page: 1
+    });
+    history.replace({
+      pathname: location.pathname,
+      search: params.toString()
+    });
+    handleChangeBusinessType(category);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -220,7 +309,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     images: props.images,
     businessTypes: props.businessTypes,
     defaultBusinessType: props.defaultBusinessType,
-    handleChangeBusinessType: handleChangeBusinessType
+    handleChangeBusinessType: changeBusinessType
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
@@ -255,7 +344,22 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     isCustomLayout: true,
     isBusinessesLoading: businessesList.loading
-  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin2 = businessesList.businesses) === null || _businessesList$busin2 === void 0 ? void 0 : _businessesList$busin2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin2 = businessesList.businesses) === null || _businessesList$busin2 === void 0 ? void 0 : _businessesList$busin2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.PreviousButtonWrapper, null, paginationProps.currentPage !== 1 && prevPage.page !== 1 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return handleClickPrevItems();
+    },
+    color: "primary"
+  }, t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses...'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, businessesList.loading && prevPage.loading && _toConsumableArray(Array(paginationProps.pageSize).keys()).map(function (i) {
+    var _orderState$options3;
+
+    return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
+      key: i,
+      className: "card",
+      business: {},
+      isSkeleton: true,
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
+    });
+  }), !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
@@ -264,7 +368,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleClickAddress();
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.map(function (business) {
-    var _orderState$options3;
+    var _orderState$options4;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
@@ -272,19 +376,19 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       business: business,
       isBusinessOpen: business.open,
       handleCustomClick: handleBusinessClick,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type,
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type,
       isCustomLayout: isCustomLayout,
       isShowCallcenterInformation: isCustomLayout
     });
-  }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
-    var _orderState$options4;
+  }), businessesList.loading && nextPage.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
+    var _orderState$options5;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type
     });
   }), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
@@ -300,7 +404,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false

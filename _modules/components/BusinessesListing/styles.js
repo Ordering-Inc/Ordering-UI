@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessesTitle = exports.PreviousOrders = exports.ErrorMessage = exports.WrapperSearch = exports.BusinessList = exports.BusinessContainer = void 0;
+exports.PreviousButtonWrapper = exports.BusinessesTitle = exports.PreviousOrders = exports.ErrorMessage = exports.WrapperSearch = exports.BusinessList = exports.BusinessContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -47,3 +47,7 @@ exports.PreviousOrders = PreviousOrders;
 var BusinessesTitle = _styledComponents.default.h1(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  margin: 0px 20px;\n"])));
 
 exports.BusinessesTitle = BusinessesTitle;
+
+var PreviousButtonWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  margin-top: 10px;\n  button{\n    width: 80%;\n  }\n\n  @media(min-width: 681px){\n      button{\n      width: 40%;\n    }\n  }\n"])));
+
+exports.PreviousButtonWrapper = PreviousButtonWrapper;

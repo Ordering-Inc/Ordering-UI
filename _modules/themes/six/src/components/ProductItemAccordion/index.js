@@ -15,9 +15,11 @@ var _IosArrowDown = _interopRequireDefault(require("@meronex/icons/ios/IosArrowD
 
 var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
 
-var _orderingComponents = require("ordering-components");
+var _FiMinusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiMinusCircle"));
 
-var _useWindowSize = require("../../../../../hooks/useWindowSize");
+var _FiPlusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiPlusCircle"));
+
+var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
@@ -26,14 +28,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -60,10 +54,10 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
 
   var isCartPending = props.isCartPending,
       isCartProduct = props.isCartProduct,
+      isSidebar = props.isSidebar,
       product = props.product,
       changeQuantity = props.changeQuantity,
       getProductMax = props.getProductMax,
-      offsetDisabled = props.offsetDisabled,
       onDeleteProduct = props.onDeleteProduct,
       onEditProduct = props.onEditProduct;
 
@@ -79,8 +73,6 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
-  var windowSize = (0, _useWindowSize.useWindowSize)();
-
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       setActive = _useState2[0],
@@ -95,6 +87,11 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       setRotate = _useState6[0],
       setRotateState = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(product.quantity),
+      _useState8 = _slicedToArray(_useState7, 2),
+      productQuantity = _useState8[0],
+      setProductQuantity = _useState8[1];
 
   var content = (0, _react.useRef)(null);
   var productSelect = (0, _react.useRef)(null);
@@ -133,7 +130,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   };
 
   var handleChangeQuantity = function handleChangeQuantity(value) {
-    if (parseInt(value) === 0) {
+    if (parseInt(value) <= 0) {
       onDeleteProduct(product);
     } else {
       changeQuantity(product, parseInt(value));
@@ -149,6 +146,31 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     return "".concat(quantity, " x ").concat(name, " ").concat(pos, " +").concat(price);
   };
 
+  var Increment = function Increment() {
+    var _productQuantity = productQuantity;
+    _productQuantity++;
+    setProductQuantity(_productQuantity);
+    handleChangeQuantity(productQuantity);
+  };
+
+  var Decrement = function Decrement() {
+    var _productQuantity = productQuantity;
+    _productQuantity--;
+    setProductQuantity(_productQuantity);
+    handleChangeQuantity(productQuantity);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (props !== null && props !== void 0 && props.individualBusinessCart || props !== null && props !== void 0 && props.isOrderPage) {
+      setActiveState('active');
+      setHeightState("".concat(content.current.scrollHeight, "px"));
+      setRotateState('accordion__icon rotate');
+    } else {
+      setActiveState('');
+      setHeightState('0px');
+      setRotateState('accordion__icon');
+    }
+  }, [props === null || props === void 0 ? void 0 : props.individualBusinessCart, props === null || props === void 0 ? void 0 : props.isOrderPage]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -167,46 +189,20 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     className: "info"
   }, (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     bgimage: product === null || product === void 0 ? void 0 : product.images
-  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), /*#__PURE__*/_react.default.createElement(_styles.CartActions, null, isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
-    ref: productSelect,
-    value: product.quantity,
-    onChange: function onChange(e) {
-      return handleChangeQuantity(Number(e.target.value));
-    }
-  }, _toConsumableArray(Array(getProductMax(product) + 1)).map(function (v, i) {
-    return /*#__PURE__*/_react.default.createElement("option", {
-      key: i,
-      value: i,
-      disabled: offsetDisabled(product) < i && i !== 0
-    }, i === 0 ? t('REMOVE', 'Remove') : i);
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
-    ref: productActionsEdit,
-    onClick: function onClick() {
-      return onEditProduct(product);
-    },
-    disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
-    color: "#F2BB40"
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
-    ref: productActionsDelete,
-    onClick: function onClick() {
-      return onDeleteProduct(product);
-    },
-    disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
-    color: "#D81212"
-  })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
+    isSidebar: isSidebar
+  }, /*#__PURE__*/_react.default.createElement("h3", null, !(isCartProduct && !isCartPending && getProductMax) && /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), product.name), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
     className: "prod-price"
   }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
-  })))), isCartProduct && !isCartPending && (product === null || product === void 0 ? void 0 : product.valid_menu) && !(product !== null && product !== void 0 && product.valid_quantity) && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
+  }))))), isCartProduct && !isCartPending && (product === null || product === void 0 ? void 0 : product.valid_menu) && !(product !== null && product !== void 0 && product.valid_quantity) && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
     onClick: function onClick() {
       return onEditProduct(product);
     },
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
-    color: "#F2BB40"
+    color: "#6C757D"
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
@@ -214,7 +210,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     },
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
-    color: "#D81212"
+    color: "#6C757D"
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))), !(product !== null && product !== void 0 && product.valid_menu) && isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
@@ -222,7 +218,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     },
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
-    color: "#D81212"
+    color: "#6C757D"
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available')))), /*#__PURE__*/_react.default.createElement(_styles.AccordionContent, {
     ref: content,
     style: {
@@ -250,7 +246,31 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
         price: parsePrice(suboption.price)
       })));
     })));
-  })), product.comment && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement("p", null, t('SPECIAL_COMMENT', 'Special Comment')), /*#__PURE__*/_react.default.createElement("span", null, product.comment)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), product.comment && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement("p", null, t('SPECIAL_COMMENT', 'Special Comment')), /*#__PURE__*/_react.default.createElement("span", null, product.comment))), /*#__PURE__*/_react.default.createElement(_styles.CartActions, null, isCartProduct && !isCartPending && getProductMax && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, product && getProductMax(product) > 0 && /*#__PURE__*/_react.default.createElement("div", {
+    className: "incdec-control"
+  }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
+    onClick: Decrement,
+    className: "".concat(product.quantity === 1 ? 'disabled' : '')
+  }), /*#__PURE__*/_react.default.createElement("span", null, productQuantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
+    onClick: Increment,
+    className: "".concat(getProductMax(product) <= 0 || product.quantity >= getProductMax(product) ? 'disabled' : '')
+  }))), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
+    ref: productActionsEdit,
+    onClick: function onClick() {
+      return onEditProduct(product);
+    },
+    disabled: orderState.loading
+  }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+    color: "#6C757D"
+  })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+    ref: productActionsDelete,
+    onClick: function onClick() {
+      return onDeleteProduct(product);
+    },
+    disabled: orderState.loading
+  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
+    color: "#6C757D"
+  }))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
