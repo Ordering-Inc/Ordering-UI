@@ -70,7 +70,8 @@ var ProductShareUI = function ProductShareUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.IconShare, {
     ref: iconElement,
-    name: "icon-share"
+    name: "icon-share",
+    className: "product-share"
   }, /*#__PURE__*/_react.default.createElement(_FiShare.default, {
     onClick: handleClickShare
   }), /*#__PURE__*/_react.default.createElement(_styles.ShareButtons, {

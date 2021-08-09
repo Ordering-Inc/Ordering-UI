@@ -5,23 +5,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CartSidebar = void 0;
+exports.CartFullPage = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _CartInfo = require("../CartInfo");
+
+var _Cart = require("../Cart");
+
 var _orderingComponents = require("ordering-components");
 
-var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
-
-var _MdCart = _interopRequireDefault(require("@meronex/icons/ios/MdCart"));
-
-var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
-
-var _CartContent = require("../CartContent");
-
 var _styles = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -39,74 +33,55 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var CartSidebar = function CartSidebar(props) {
-  var _props$carts;
+var CartFullPage = function CartFullPage(props) {
+  var _currentCart$products;
 
-  var open = props.open,
-      carts = props.carts;
+  var goBack = props.goBack,
+      currentCart = props.currentCart,
+      business = props.business,
+      individualBusinessCart = props.individualBusinessCart;
 
-  var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
 
-  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
-
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      isMenuOpen = _useState2[0],
-      setIsMenuOpen = _useState2[1];
+      currentCartUuid = _useState2[0],
+      setCurrentCartUuid = _useState2[1];
 
-  var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
+  var handleAddProduct = function handleAddProduct(product, cart) {
+    setCurrentCartUuid(cart === null || cart === void 0 ? void 0 : cart.uuid);
+  };
 
-  var actionSidebar = function actionSidebar(value) {
-    if (!value) {
-      props.onClose();
-    }
-
-    setIsMenuOpen(value);
-    document.getElementById('cartSidebar').style.width = value ? width > 489 ? '500px' : '100vw' : '0';
+  var handleSetCurrentCartUuid = function handleSetCurrentCartUuid() {
+    setCurrentCartUuid(null);
   };
 
   (0, _react.useEffect)(function () {
-    if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('cartSidebar').style.width = '100vw';
-      } else {
-        document.getElementById('cartSidebar').style.width = '500px';
-      }
-    }
-  }, [width]);
-  (0, _react.useEffect)(function () {
-    if (!open) return;
-    actionSidebar(true);
-  }, [open]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
-    onClick: function onClick() {
-      return actionSidebar(true);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_MdCart.default, null), (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, (_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length)), isMenuOpen && /*#__PURE__*/_react.default.createElement(_styles.BackDropContainer, {
-    onClick: function onClick() {
-      return actionSidebar(false);
-    }
-  }), /*#__PURE__*/_react.default.createElement(_styles.SidebarContent, {
-    id: "cartSidebar"
-  }, /*#__PURE__*/_react.default.createElement(_styles.TopContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MY_CART', 'My cart')), /*#__PURE__*/_react.default.createElement(_styles.MenuClose, {
-    "aria-label": "close",
-    onClick: function onClick() {
-      return actionSidebar(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null), t('CLOSE', 'close'))), /*#__PURE__*/_react.default.createElement(_styles.CartContentWrapper, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
-    isCartPopover: true,
-    isSidebar: true,
-    carts: props.carts,
-    isOrderStateCarts: !!orderState.carts,
-    onClose: function onClose() {
-      return actionSidebar(false);
-    }
+    events.on('cart_popover_closed', handleSetCurrentCartUuid);
+    events.on('cart_product_added', handleAddProduct);
+    return function () {
+      events.off('cart_popover_closed', handleSetCurrentCartUuid);
+      events.off('cart_product_added', handleAddProduct);
+    };
+  }, []);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Layout, {
+    className: "fullpage-layout"
+  }, /*#__PURE__*/_react.default.createElement(_styles.LeftPanel, null, /*#__PURE__*/_react.default.createElement(_CartInfo.CartInfo, {
+    handleGoBackPage: goBack,
+    cart: currentCart,
+    businessName: business.name
+  })), /*#__PURE__*/_react.default.createElement(_styles.RightPanel, null, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+    isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,
+    cart: currentCart,
+    isCheckout: window.location.pathname === "/checkout/".concat(currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid),
+    isForceOpenCart: "true",
+    currentCartUuid: currentCartUuid,
+    isProducts: (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length,
+    onClickCheckout: props.onClose,
+    individualBusinessCart: individualBusinessCart
   })))));
 };
 
-exports.CartSidebar = CartSidebar;
+exports.CartFullPage = CartFullPage;

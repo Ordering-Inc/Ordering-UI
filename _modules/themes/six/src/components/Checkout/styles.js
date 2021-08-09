@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapBusinessAddress = exports.InfoWrapper = exports.ConfirmInfoItem = exports.BusinessName = exports.BusinessLogo = exports.WrapBusinessLogo = exports.WarningText = exports.CartsList = exports.NotFoundImage = exports.WarningMessage = exports.WrapperPlaceOrderButton = exports.CartContainer = exports.DriverTipContainer = exports.PaymentMethodContainer = exports.BusinessDetailInfo = exports.BusinessDetailsContainer = exports.UserDetailsContainer = exports.WrapperUserDetails = exports.WrappContainer = exports.WrappSumarry = exports.Container = void 0;
+exports.SectionTitle = exports.MomentWrapper = exports.InfoWrapper = exports.ConfirmInfoItem = exports.BusinessName = exports.BusinessLogo = exports.WrapBusinessLogo = exports.WarningText = exports.CartsList = exports.NotFoundImage = exports.WarningMessage = exports.WrapperPlaceOrderButton = exports.CartContainer = exports.DriverTipContainer = exports.PaymentMethodContainer = exports.BusinessDetailInfo = exports.BusinessDetailsContainer = exports.UserDetailsContainer = exports.WrapperUserDetails = exports.WrappContainer = exports.WrappSumarry = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27,19 +27,19 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var WrappSumarry = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display:flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  @media (min-width: 1024px) {\n    width: 40%;\n    height: calc(100vh - 60px);\n    ", " \n    ", "    \n  }\n"])), function (_ref) {
+var WrappSumarry = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display:flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  @media (min-width: 1024px) {\n    width: 40vw;\n    padding: 2vw;\n    height: calc(100vh - 75px);\n    ", " \n    ", "    \n  }\n"])), function (_ref) {
   var skeleton = _ref.skeleton;
   return skeleton ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n         background-color: transparent; \n        "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n         background-color: ", ";\n      "])), function (props) {
-    return props.theme.colors.primarybackground;
+    return props.theme.colors.primaryDarkBackground;
   });
 }, function (_ref2) {
   var skeleton = _ref2.skeleton;
-  return skeleton && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      padding: 0 5%;\n      align-items: flex-start;\n    "])));
+  return skeleton && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      padding: 20px 5%;\n      align-items: flex-start;\n    "])));
 });
 
 exports.WrappSumarry = WrappSumarry;
 
-var WrappContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: auto;\n  padding: 0 5%;\n  box-sizing: border-box;\n  @media (min-width: 513px) {\n    width: 90%;\n  }\n  @media (min-width: 1024px) {\n    width: 60%;\n    height: calc(100vh - 60px);\n    overflow-y: scroll;\n  }\n"])));
+var WrappContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px 5%;\n  box-sizing: border-box;\n \n  @media (min-width: 1024px) {\n    width: 60vw;\n    height: calc(100vh - 75px);\n    overflow-y: scroll;\n  }\n"])));
 
 exports.WrappContainer = WrappContainer;
 
@@ -59,7 +59,7 @@ var BusinessDetailInfo = _styledComponents.default.div(_templateObject10 || (_te
 
 exports.BusinessDetailInfo = BusinessDetailInfo;
 
-var PaymentMethodContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 20px;\n  h2 {\n    color: ", ";\n    font-weight: 200;\n    margin: 0px 0 10px;\n  }\n"])), function (props) {
+var PaymentMethodContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 20px;\n  h2 {\n    color: ", ";\n    font-weight: 200;\n    margin: 0px 0 10px;\n  }\n  .selected-option {\n    font-weight: 300;\n  }\n"])), function (props) {
   return props.theme.colors.fontSecundary;
 });
 
@@ -71,7 +71,7 @@ var CartContainer = (0, _styledComponents.default)(PaymentMethodContainer)(_temp
 });
 exports.CartContainer = CartContainer;
 
-var WrapperPlaceOrderButton = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: flex-end;\n  margin: 20px 0px 20px;\n  button {\n    width: 100%;\n    padding: 5px 20px;\n    cursor: pointer;\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n  @media (min-width: 513px) {\n    button {\n      width: 350px;\n    }\n  }\n"])));
+var WrapperPlaceOrderButton = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  display: flex;\n  justify-content: flex-end;\n  padding: 20px;\n  box-sizing: border-box;\n\n  @media (min-width: 513px) {\n    position: relative;\n    padding: 0px;\n    margin-bottom: 15px;\n  }\n\n  button {\n    width: 45%;\n    padding: 5px 20px;\n    cursor: pointer;\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n  \n"])));
 
 exports.WrapperPlaceOrderButton = WrapperPlaceOrderButton;
 
@@ -147,6 +147,10 @@ var InfoWrapper = _styledComponents.default.div(_templateObject26 || (_templateO
 
 exports.InfoWrapper = InfoWrapper;
 
-var WrapBusinessAddress = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n"])));
+var MomentWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n"])));
 
-exports.WrapBusinessAddress = WrapBusinessAddress;
+exports.MomentWrapper = MomentWrapper;
+
+var SectionTitle = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  h2 {\n    font-size: 18px;\n    line-height: 21px;\n    color: #495057;\n    font-weight: 300;\n  }\n"])));
+
+exports.SectionTitle = SectionTitle;

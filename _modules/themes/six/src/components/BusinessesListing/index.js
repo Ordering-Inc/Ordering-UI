@@ -37,6 +37,8 @@ var _AddressList = require("../AddressList");
 
 var _AddressForm = require("../AddressForm");
 
+var _BusinessInformation = require("../BusinessInformation");
+
 var _orderingComponents = require("ordering-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -73,7 +75,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var PIXELS_TO_SCROLL = 300;
+var PIXELS_TO_SCROLL = 500;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
   var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _configs$google_maps_, _orderState$options4, _orderState$options4$, _getCustomArray, _businessesList$busin3, _orderState$options5, _props$afterComponent, _props$afterElements;
@@ -129,7 +131,22 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       mapErrors = _useState8[0],
       setMapErrors = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      showBusinessInfo = _useState10[0],
+      setShowBusinessInfo = _useState10[1];
+
+  var _useState11 = (0, _react.useState)({}),
+      _useState12 = _slicedToArray(_useState11, 2),
+      businessInfoById = _useState12[0],
+      setBusinessInfoById = _useState12[1];
+
   var windowSize = (0, _useWindowSize.useWindowSize)();
+
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      optimizeImage = _useUtils2[0].optimizeImage;
+
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
@@ -137,16 +154,18 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2;
 
-    var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
+    var listWindows = document.querySelector('#list_wrapper');
+    var innerHeightScrolltop = listWindows.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
     var hasMore = !(paginationProps.totalPages === paginationProps.currentPage);
     if (badScrollPosition || businessesList.loading || !hasMore) return;
     getBusinesses();
   }, [businessesList, paginationProps]);
   (0, _react.useEffect)(function () {
-    window.addEventListener('scroll', handleScroll);
+    var listWindows = document.querySelector('#list_wrapper');
+    listWindows.addEventListener('scroll', handleScroll);
     return function () {
-      return window.removeEventListener('scroll', handleScroll);
+      return listWindows.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
 
@@ -210,6 +229,24 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return isArray ? list : Object.values(list);
   };
 
+  var _handleShowBusinessInfo = function handleShowBusinessInfo(business) {
+    setShowBusinessInfo(true);
+    setBusinessInfoById(business);
+  };
+
+  var types = ['food', 'laundry', 'alcohol', 'groceries'];
+
+  var getBusinessType = function getBusinessType() {
+    if (Object.keys(businessInfoById).length <= 0) return t('GENERAL', 'General');
+    var _types = [];
+    types.forEach(function (type) {
+      var _type$replace;
+
+      return businessInfoById[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
+    });
+    return _types.join(', ');
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -218,10 +255,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.ListWrapper, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, !showBusinessInfo ? /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.ListWrapper, {
     id: "list_wrapper",
     className: "list-wrapper"
-  }, windowSize.width > 850 && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 850 && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
@@ -247,6 +284,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       className: "card",
       business: business,
       handleCustomClick: handleBusinessClick,
+      handleShowBusinessInfo: function handleShowBusinessInfo(business) {
+        return _handleShowBusinessInfo(business);
+      },
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type,
       isCustomLayout: isCustomLayout,
       isShowCallcenterInformation: isCustomLayout
@@ -265,7 +305,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
-  }))), /*#__PURE__*/_react.default.createElement(_styles.MapWrapper, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.MapWrapper, {
     className: "map-wrapper"
   }, windowSize.width < 850 && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout
@@ -283,7 +323,13 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setErrors: setMapErrors
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  }))), isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessInfoById && /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
+    business: businessInfoById,
+    getBusinessType: getBusinessType,
+    optimizeImage: optimizeImage,
+    onClose: setShowBusinessInfo,
+    goBusiness: handleBusinessClick
+  })), isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
     horizontal: true,
     isBusinessesPage: true,
     onRedirectPage: onRedirectPage,

@@ -17,7 +17,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var WrapHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background-color: #FFF;\n  border-bottom: 1px solid ", ";\n  margin-bottom: 10px;\n"])), function (props) {
+var WrapHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid ", ";\n  margin-bottom: 10px;\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 

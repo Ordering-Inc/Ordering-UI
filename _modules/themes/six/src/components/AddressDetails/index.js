@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options3, _orderState$options3$, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _orderState$options3, _props$afterComponent, _props$afterElements;
 
   var addressToShow = props.addressToShow,
       isCartPending = props.isCartPending,
@@ -109,20 +109,20 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_ADDRESS', 'Delivery address')), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    onClick: function onClick() {
-      return setOpenModal(true);
-    },
-    outline: true,
-    color: "primary"
-  }, t('CHANGE', 'Change'))), apiKey && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_ADDRESS', 'Delivery address'))), apiKey && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
     id: "google-maps-image",
     alt: "google-maps-location",
     width: "288px",
     height: "162px",
     loading: "lazy"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setOpenModal(true);
+    },
+    outline: true,
+    color: "primary"
+  }, t('CHANGE', 'Change'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESSES', 'Addresses'),
     open: openModal,
     width: "70%",

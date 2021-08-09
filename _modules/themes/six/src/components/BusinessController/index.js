@@ -71,7 +71,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       handleClick = props.handleClick,
       orderType = props.orderType,
       isCustomLayout = props.isCustomLayout,
-      isShowCallcenterInformation = props.isShowCallcenterInformation;
+      isShowCallcenterInformation = props.isShowCallcenterInformation,
+      handleShowBusinessInfo = props.handleShowBusinessInfo;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -165,7 +166,11 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "reviews"
   }, /*#__PURE__*/_react.default.createElement(_GrStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : (business === null || business === void 0 ? void 0 : (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total) !== 0 && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfomation, null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_BsExclamationCircle.default, null) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfomation, null, business && handleShowBusinessInfo ? /*#__PURE__*/_react.default.createElement(_BsExclamationCircle.default, {
+    onClick: function onClick() {
+      return handleShowBusinessInfo(business);
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 20
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_CLOSED', 'Business Closed'),

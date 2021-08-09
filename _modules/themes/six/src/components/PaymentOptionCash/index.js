@@ -99,7 +99,7 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
     ref: el,
     name: "cash",
     type: "number",
-    placeholder: "0"
+    placeholder: "$ 0.00"
   })), value && parseFloat(value) < orderTotal && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total'), ": ", parsePrice(orderTotal)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

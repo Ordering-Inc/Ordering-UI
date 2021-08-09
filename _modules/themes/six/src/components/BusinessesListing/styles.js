@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n"])));
+var BusinessContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding-top: 1.5px;\n"])));
 
 exports.BusinessContainer = BusinessContainer;
 
@@ -25,7 +25,7 @@ var BusinessList = _styledComponents.default.div(_templateObject2 || (_templateO
 
 exports.BusinessList = BusinessList;
 
-var WrapperSearch = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 10px 20px 10px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: space-between;\n  box-shadow: inset 0 2px 4px -3px #464646;\n  \n  @media (min-width: 850px) {\n    width: 100%;\n  }\n  \n  ", "\n"])), function (_ref) {
+var WrapperSearch = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 10px 20px 10px;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: space-between;\n  \n  @media (min-width: 850px) {\n    width: 100%;\n  }\n  \n  ", "\n"])), function (_ref) {
   var isCustomLayout = _ref.isCustomLayout;
   return isCustomLayout && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    box-sizing: border-box;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: relative;\n    margin: 0 auto;\n    margin-top: 10px;\n    margin-bottom: 20px;\n    width: 100%; \n    padding: 0 20px;\n    svg {\n      font-size: 26px;\n      color: ", ";\n      margin-left: 10px;\n      cursor: pointer;\n    }\n    @media(min-width: 681px){\n      width: 75%;\n      padding: 0;\n    }\n    @media(min-width: 1201px){\n      width: 50%;\n    }\n  "])), function (props) {
     var _props$theme, _props$theme$colors;
@@ -48,11 +48,11 @@ var BusinessesTitle = _styledComponents.default.h1(_templateObject7 || (_templat
 
 exports.BusinessesTitle = BusinessesTitle;
 
-var BusinessContent = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  overflow: hidden;\n  position: relative;\n  z-index: 1;\n  height: 100%;\n  @media(min-width: 850px){\n    flex-direction: row;\n  }\n"])));
+var BusinessContent = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  overflow: hidden;\n  position: relative;\n  z-index: 1;\n  @media(min-width: 850px){\n    flex-direction: row;\n    height: 100vh;\n  }\n"])));
 
 exports.BusinessContent = BusinessContent;
 
-var ListWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;  \n  background-color: #fff;\n  min-height: 70vh;\n  overflow: auto;\n  box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 12%);\n  @media(min-width: 850px){\n    width: 40vw;\n  }\n"])));
+var ListWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;  \n  min-height: 70vh;\n  overflow: auto;\n  box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 12%);\n  @media(min-width: 850px){\n    width: 40vw;\n  }\n"])));
 
 exports.ListWrapper = ListWrapper;
 
