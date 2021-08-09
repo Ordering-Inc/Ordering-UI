@@ -10,12 +10,12 @@ export const Option = styled.div`
   font-size: 14px;
   font-weight: 100;
   &:hover {
-    background-color: ${darken(0.03, '#E8F0ED')};
+    background-color: ${darken(0.03, '#DEE2E6')};
   }
   ${props => props.selected && css`
-    background-color: ${darken(0.05, '#E8F0ED')};
+    background-color: ${darken(0.05, '#DEE2E6')};
     &:hover {
-      background-color: ${darken(0.03, '#E8F0ED')};
+      background-color: ${darken(0.03, '#DEE2E6')};
     }
   `}
   svg {

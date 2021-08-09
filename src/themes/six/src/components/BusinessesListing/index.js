@@ -25,16 +25,18 @@ import { BusinessController } from '../BusinessController'
 import { SearchBar } from '../SearchBar'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
+import { BusinessInformation } from '../BusinessInformation'
 
 import {
   useOrder,
   useSession,
   useLanguage,
   useConfig,
+  useUtils,
   BusinessList as BusinessListController
 } from 'ordering-components'
 
-const PIXELS_TO_SCROLL = 300
+const PIXELS_TO_SCROLL = 500
 const BusinessesListingUI = (props) => {
   const {
     businessesList,
@@ -46,6 +48,7 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleBusinessClick
   } = props
+
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
@@ -54,7 +57,10 @@ const BusinessesListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
   const [mapErrors, setMapErrors] = useState('')
+  const [showBusinessInfo, setShowBusinessInfo] = useState(false)
+  const [businessInfoById, setBusinessInfoById] = useState({})
   const windowSize = useWindowSize()
+  const [{ optimizeImage }] = useUtils()
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -63,7 +69,8 @@ const BusinessesListingUI = (props) => {
     businessesList.businesses?.map(business => business.id)
 
   const handleScroll = useCallback(() => {
-    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
+    const listWindows = document.querySelector('#list_wrapper')
+    const innerHeightScrolltop = listWindows.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (badScrollPosition || businessesList.loading || !hasMore) return
@@ -71,8 +78,9 @@ const BusinessesListingUI = (props) => {
   }, [businessesList, paginationProps])
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const listWindows = document.querySelector('#list_wrapper')
+    listWindows.addEventListener('scroll', handleScroll)
+    return () => listWindows.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
   const handleClickAddress = (e) => {
@@ -119,6 +127,21 @@ const BusinessesListingUI = (props) => {
     return isArray ? list : Object.values(list)
   }
 
+  const handleShowBusinessInfo = (business) => {
+    setShowBusinessInfo(true)
+    setBusinessInfoById(business)
+  }
+
+  const types = ['food', 'laundry', 'alcohol', 'groceries']
+  const getBusinessType = () => {
+    if (Object.keys(businessInfoById).length <= 0) return t('GENERAL', 'General')
+    const _types = []
+    types.forEach(type => businessInfoById[type] && _types.push(
+      t(`BUSINESS_TYPE_${type?.replace(/\s/g, '_')?.toUpperCase()}`, type)
+    ))
+    return _types.join(', ')
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -127,96 +150,114 @@ const BusinessesListingUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
+
       <BusinessContainer>
-        <BusinessContent>
-          <ListWrapper id='list_wrapper' className='list-wrapper'>
-            {windowSize.width > 850 && (
-              <WrapperSearch isCustomLayout={isCustomLayout}>
-                <SearchBar
-                  lazyLoad
-                  search={searchValue}
-                  isCustomLayout
-                  placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-                  onSearch={handleChangeSearch}
-                />
-                {isCustomLayout && (
-                  <FiMap onClick={toggleMap} />
+        {!showBusinessInfo
+          ? (
+            <BusinessContent>
+              <ListWrapper id='list_wrapper' className='list-wrapper'>
+                <>
+                  {windowSize.width > 850 && (
+                    <WrapperSearch isCustomLayout={isCustomLayout}>
+                      <SearchBar
+                        lazyLoad
+                        search={searchValue}
+                        isCustomLayout
+                        placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                        onSearch={handleChangeSearch}
+                      />
+                      {isCustomLayout && (
+                        <FiMap onClick={toggleMap} />
+                      )}
+                    </WrapperSearch>
+                  )}
+                  <BusinessList>
+                    {
+                      !businessesList.loading && businessesList.businesses.length === 0 && (
+                        <NotFoundSource
+                          content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
+                        >
+                          <Button
+                            outline
+                            color='primary'
+                            onClick={() => handleClickAddress()}
+                          >
+                            {t('CHANGE_ADDRESS', 'Select other Address')}
+                          </Button>
+                        </NotFoundSource>
+                      )
+                    }
+                    {businessesList.businesses?.map((business) => (
+                      <BusinessController
+                        key={business.id}
+                        className='card'
+                        business={business}
+                        handleCustomClick={handleBusinessClick}
+                        handleShowBusinessInfo={(business) => handleShowBusinessInfo(business)}
+                        orderType={orderState?.options?.type}
+                        isCustomLayout={isCustomLayout}
+                        isShowCallcenterInformation={isCustomLayout}
+                      />
+                    ))}
+                    {businessesList.loading && (
+                      [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()].map(i => (
+                        <BusinessController
+                          key={i}
+                          className='card'
+                          business={{}}
+                          isSkeleton
+                          orderType={orderState?.options?.type}
+                        />
+                      ))
+                    )}
+                    {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
+                      businessesList.error.map((e, i) => (
+                        <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+                      ))
+                    )}
+                  </BusinessList>
+                </>
+              </ListWrapper>
+              <MapWrapper className='map-wrapper'>
+                {windowSize.width < 850 && (
+                  <WrapperSearch isCustomLayout={isCustomLayout}>
+                    <SearchBar
+                      lazyLoad
+                      search={searchValue}
+                      isCustomLayout={isCustomLayout}
+                      placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                      onSearch={handleChangeSearch}
+                    />
+                    {isCustomLayout && (
+                      <FiMap onClick={toggleMap} />
+                    )}
+                  </WrapperSearch>
                 )}
-              </WrapperSearch>
-            )}
-            <BusinessList>
-              {
-                !businessesList.loading && businessesList.businesses.length === 0 && (
-                  <NotFoundSource
-                    content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-                  >
-                    <Button
-                      outline
-                      color='primary'
-                      onClick={() => handleClickAddress()}
-                    >
-                      {t('CHANGE_ADDRESS', 'Select other Address')}
-                    </Button>
-                  </NotFoundSource>
-                )
-              }
-              {
-                businessesList.businesses?.map((business) => (
-                  <BusinessController
-                    key={business.id}
-                    className='card'
-                    business={business}
-                    handleCustomClick={handleBusinessClick}
-                    orderType={orderState?.options?.type}
-                    isCustomLayout={isCustomLayout}
-                    isShowCallcenterInformation={isCustomLayout}
+                {configs?.google_maps_api_key?.value ? (
+                  <BusinessesMap
+                    businessList={businessesList.businesses}
+                    userLocation={orderState?.options?.address?.location}
+                    setErrors={setMapErrors}
                   />
-                ))
-              }
-              {businessesList.loading && (
-                [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()].map(i => (
-                  <BusinessController
-                    key={i}
-                    className='card'
-                    business={{}}
-                    isSkeleton
-                    orderType={orderState?.options?.type}
-                  />
-                ))
-              )}
-              {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
-                businessesList.error.map((e, i) => (
-                  <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-                ))
-              )}
-            </BusinessList>
-          </ListWrapper>
-          <MapWrapper className='map-wrapper'>
-            {windowSize.width < 850 && (
-              <WrapperSearch isCustomLayout={isCustomLayout}>
-                <SearchBar
-                  lazyLoad
-                  search={searchValue}
-                  isCustomLayout={isCustomLayout}
-                  placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-                  onSearch={handleChangeSearch}
-                />
-                {isCustomLayout && (
-                  <FiMap onClick={toggleMap} />
+                ) : (
+                  <Skeleton width={70} />
                 )}
-              </WrapperSearch>
-            )}
-            {configs?.google_maps_api_key?.value ? (
-              <BusinessesMap
-                businessList={businessesList.businesses}
-                userLocation={orderState?.options?.address?.location}
-                setErrors={setMapErrors}
-              />
-            ) : (
-              <Skeleton width={70} />
-            )}
-          </MapWrapper>
-        </BusinessContent>
+              </MapWrapper>
+            </BusinessContent>
+          ) : (
+            <>
+              {
+                businessInfoById &&
+                  <BusinessInformation
+                    business={businessInfoById}
+                    getBusinessType={getBusinessType}
+                    optimizeImage={optimizeImage}
+                    onClose={setShowBusinessInfo}
+                    goBusiness={handleBusinessClick}
+                  />
+              }
+            </>
+          )}
 
         {isCustomLayout && onRedirectPage && (
           <>

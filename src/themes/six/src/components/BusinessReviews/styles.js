@@ -7,81 +7,28 @@ export const BusinessReviewsContainer = styled.div`
 
 export const ReviewOf = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0px; 
-  h3 {
-    margin: 0px;
-    font-size: 16px;
-  }
-
-  > div {
-    width: 30%;
-  }
-
-  span {
-    display: none;
-  }
-
-  @media (min-width: 480px){
-    span{
-      display: block;
-    } 
-  }
+  flex-direction: column ;
+  padding: 25px 25px 12px;
 `
 
 export const WrapperStars = styled.div`
-  width: 40%;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
   color: ${props => props.theme.colors.primary};
-  svg{
-    font-size: 28px;
-    vertical-align: bottom;
+  h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    svg {
+      font-size: 1.2rem
+    }
   }
-  @media (min-width: 480px){
-    display: none;
-  }
-`
-
-export const WrapperSelect = styled.div`
-  width: 95%;
-  margin: 10px 0px;
-  > div {
-    width: 100%;
-  }
-  @media (min-width: 480px){
-    width: 45%;
-    display: none;
-  }
+ 
 `
 
 export const Content = styled.div`
-
   display: flex;
   flex-direction: column;
-  
-  h3{
-    display: none;
-  }
-
-  @media (min-width: 480px){
-    h3 {
-      display: block;
-      color: ${props => props.theme.colors.primary};
-      margin: 0px;
-      svg{
-        font-size: 26px;
-        vertical-align: text-top;
-      }
-    }
-  }
-`
-
-export const Review = styled.div`
-  margin: 20px 0;
-  @media (min-width: 480px){
-    margin: 40px 0;
-  }
 `
 
 export const ReviewsNotFound = styled.h2`
@@ -97,51 +44,43 @@ export const ReviewContainer = styled.div`
 
 export const Comments = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
   overflow: hidden;
-
-  h4 {
-    margin: 10px 0 5px 0;
-  }
-
-  div p {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0;
-    svg {
-      margin-right: 5px;
-      font-size: 24px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 5px;
-        margin-right: 0;
-    `}
-    }
+`
+export const TotalStar = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 1rem;
+  background: #DEE2E6;
+  padding: 7px 25px;
+  color: #6C757D;
+  font-weight: bold;
+  svg {
+    margin: 0 3px;
   }
 `
 export const Comment = styled.div`
   width: 100%;
-  @media (min-width: 480px){
-    width: 60%;
-  }
+  padding: 0px 25px;
 `
 
 export const ScoresContainer = styled.div`
   overflow-x: auto;
+  padding: 0px 25px;
 `
 
 export const Scores = styled.div`
   display: flex;
   justify-content: space-between;
   text-align: center;
-  width: 800px;
+  width: 736px;
   margin: 10px auto;
 
-  @media (min-width: 768px){
+  @media (min-width: 1024px){
     width: 100%;
+    flex-wrap: wrap;
   }
 `
 
@@ -150,7 +89,7 @@ export const ScoreDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid #ccc;
-  width: 20%;
+  width: 21%;
   height: auto;
   border: 1px solid #ccc;
   border-radius: 16px;
@@ -159,7 +98,7 @@ export const ScoreDiv = styled.div`
   font-size: 16px;
 
   p {
-    margin: 0px;
+    margin: 0px;    
   }
 
   span {
@@ -174,6 +113,14 @@ export const ScoreDiv = styled.div`
        margin-right: 0;
     `}
     }
+  }
+
+  @media (min-width: 1024px){
+    width: 42%;
+  }
+
+  @media (min-width: 1200px){
+    width: 44%;
   }
 `
 

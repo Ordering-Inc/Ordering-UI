@@ -8,8 +8,9 @@ export const FormActions = styled.div`
   width: 100%;
   button {
     height: 45px;
-    flex: 1;
-
+    width: 24%;
+    margin-left: auto;
+    min-width: 111px;
     &:last-child#submit-btn {
       margin-left: 10px;
       ${props => props.theme?.rtl && css`

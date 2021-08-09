@@ -14,9 +14,12 @@ import { BusinessProductsListing } from './src/components/BusinessProductsListin
 import { BusinessReviews } from './src/components/BusinessReviews'
 import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
+import { CartFullPage } from './src/components/CartFullPage'
+import { CartInfo } from './src/components/CartInfo'
 import { CartSidebar } from './src/components/CartSidebar'
 import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
+import { FlotingStatusBar } from './src/components/FlotingStatusBar'
 import { Footer } from './src/components/Footer'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
@@ -25,6 +28,8 @@ import { LanguageSelector } from './src/components/LanguageSelector'
 import { LoginForm } from './src/components/LoginForm'
 import { LogoutButton } from './src/components/LogoutButton'
 import { Modal } from './src/components/Modal'
+import { MomentContent } from './src/components/MomentContent'
+import { MomentControl } from './src/components/MomentControl'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
@@ -64,9 +69,12 @@ export {
   BusinessProductsListing,
   Cart,
   CartContent,
+  CartFullPage,
+  CartInfo,
   CartSidebar,
   Checkout,
   DriverTips,
+  FlotingStatusBar,
   Footer,
   Header,
   HeaderOption,
@@ -75,6 +83,8 @@ export {
   LoginForm,
   LogoutButton,
   Modal,
+  MomentContent,
+  MomentControl,
   OrderDetails,
   OrderTypeSelectorHeader,
   PaymentOptionCash,
