@@ -252,25 +252,9 @@ const MessagesUI = (props) => {
             {message.type === 1 && (
               <MessageConsole key={message.id}>
                 {message.change?.attribute !== 'driver_id' ? (
-                  message.change?.attribute === 'prepared_in' ||  message.change?.attribute === 'delivered_in' ? (
-                    <BubbleConsole>
-                    {t('ORDER', 'Order')} {' '}
-                    {message.change?.attribute === 'prepared_in' ? (
-                      <strong>{t('PREPARED_IN', 'Prepared in')} </strong>
-                    ) : ( <strong>{t('DELIVERED_IN', 'Delivery time')} </strong> )}
-                    {t('CHANGED_FROM', 'Changed from')} {' '}
-                    {message.change.old === null ?  <strong>0</strong> : (
-                      <>
-                        <strong>{ message.change.old }</strong> {' '}
-                      </>
-                    )}
-                    <> {t('TO', 'to')} {' '} <strong>{ message.change.new }</strong> {t('MINUTES', 'Minutes')}</>
-                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                  </BubbleConsole>
-                  ) : (
                   <BubbleConsole>
                     {t('ORDER', 'Order')} {' '}
-                    <strong>{message.change.attribute}</strong> {}
+                    <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> {}
                     {t('CHANGED_FROM', 'Changed from')} {' '}
                     {message.change.old !== null && (
                       <>
@@ -280,12 +264,11 @@ const MessagesUI = (props) => {
                     <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
                     <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                   </BubbleConsole>
-                  )
                 ) : (
                   <BubbleConsole>
                     {message.change.new ? (
                       <>
-                        <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname} </strong>
+                        <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
                         {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
                         {message.comment && (<><br /> {message.comment.length}</>)}
                       </>
