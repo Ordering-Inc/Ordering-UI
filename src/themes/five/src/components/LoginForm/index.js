@@ -424,7 +424,7 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
-          <LoginDivider>
+          <LoginDivider isPopup={isPopup}>
             <DividerLine />
             <p>{t('OR', 'or')}</p>
             <DividerLine />

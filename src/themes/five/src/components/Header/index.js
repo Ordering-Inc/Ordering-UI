@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
@@ -29,7 +29,7 @@ import { MomentPopover } from '../MomentPopover'
 import { CartPopover } from '../CartPopover'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { CartContent } from '../CartContent'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { MomentContent } from '../MomentContent'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
@@ -37,6 +37,8 @@ import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
+import { LoginForm } from '../LoginForm'
+import { SignUpForm } from '../SignUpForm'
 
 export const Header = (props) => {
   const {
@@ -51,7 +53,7 @@ export const Header = (props) => {
   const { pathname } = useLocation()
   const [events] = useEvent()
   const [, t] = useLanguage()
-  const [{ auth }] = useSession()
+  const [{ auth }, { login }] = useSession()
   const [orderState, { refreshOrderOptions }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
@@ -61,6 +63,8 @@ export const Header = (props) => {
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
+  const [loginModalOpen, setLoginModalOpen] = useState(false)
+  const [signUpModalOpen, setSignUpModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
@@ -73,6 +77,13 @@ export const Header = (props) => {
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+  }
 
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
@@ -221,11 +232,11 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 870 && (
                     <>
-                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} highlight={location.pathname === '/signin'} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                      <MenuLink onClick={() => setLoginModalOpen(true)} highlight={loginModalOpen} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
                       {!isHideSignup && (
                         <MenuLink
-                          onClick={() => handleGoToPage({ page: 'signup' })}
-                          highlight={location.pathname === '/signup' || location.pathname === '/'}
+                          onClick={() => setSignUpModalOpen(true)}
+                          highlight={signUpModalOpen}
                           name='signup'
                         >
                           {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
@@ -379,6 +390,33 @@ export const Header = (props) => {
             </UserEdit>
           </Modal>
         )}
+        <Modal
+          open={loginModalOpen}
+          width='50%'
+          onClose={() => setLoginModalOpen(false)}
+        >
+          <LoginForm
+            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
+            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+            useLoginByCellphone
+            isRecaptchaEnable
+            isPopup
+          />
+        </Modal>
+        <Modal
+          open={signUpModalOpen}
+          width='50%'
+          onClose={() => setSignUpModalOpen(false)}
+        >
+          <SignUpForm
+            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+            useLoginByCellphone
+            useChekoutFileds
+            handleSuccessSignup={handleSuccessSignup}
+            isRecaptchaEnable
+            isPopup
+          />
+        </Modal>
         <Confirm
           title={t('CUSTOMER', theme?.defaultLanguages?.CUSTOMER || 'Customer')}
           content={confirm.content}

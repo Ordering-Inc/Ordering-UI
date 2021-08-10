@@ -32,6 +32,7 @@ import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MomentPopover } from './src/components/MomentPopover'
 import { MyOrders } from './src/components/MyOrders'
+import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrdersOption } from './src/components/OrdersOption'
 import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorContent'
@@ -89,6 +90,7 @@ export {
   MomentControl,
   MomentPopover,
   MyOrders,
+  Modal,
   OrderDetails,
   OrdersOption,
   OrderTypeSelectorContent,
