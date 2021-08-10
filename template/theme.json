@@ -103,6 +103,7 @@
     "ORDERS_REDIRECT": "Go to Orders",
     "WRITE_A_REVIEW": "Write a Review",
     "LOGIN_WITH_CELLPHONE": "Login with Cellphone",
-    "NEW_ON_PLATFORM": "New on the Plafrom?"
+    "NEW_ON_PLATFORM": "New on the Plafrom?",
+    "PHONE_NUMBER": "Phone number"
   }
 }
