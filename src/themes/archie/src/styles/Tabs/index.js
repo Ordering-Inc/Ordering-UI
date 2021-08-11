@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Tabs = styled.div`
   display: flex;  
   ${({ variant }) => variant === 'primary' && css`
-    color: ${props => props.theme.colors.darkTextColor};
+    color: ${props => props.theme.colors.primary};
   `}
   
 `
@@ -18,6 +18,6 @@ export const Tab = styled.div`
   `}
 
   ${({ active }) => !active && css`
-    color: ${props => props.theme.colors.disabled};
+    color: #000000;
   `}
 `

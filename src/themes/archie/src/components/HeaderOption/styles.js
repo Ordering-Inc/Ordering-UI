@@ -50,6 +50,7 @@ export const AddressInput = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  background-color: ${props => props.theme.colors.secundaryBackground};
   ${props => props.theme?.rtl
     ? css`
       border-left: none;
@@ -82,6 +83,8 @@ export const DeliverytimeInput = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  background-color: ${props => props.theme.colors.secundaryBackground};
+
   svg {
     margin-right: 15px;
     color: ${props => props.theme.colors.primary};
