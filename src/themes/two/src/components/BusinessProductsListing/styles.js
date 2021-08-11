@@ -218,10 +218,6 @@ export const ProductsHeader = styled.div`
   flex-wrap: wrap;
   align-items: flex-end;
   margin: 25px 0px 10px 0;
-
-  ${({ isDelivery }) => !isDelivery && css`
-    justify-content: flex-end;
-  `}
 `
 
 export const DeliveryInfo = styled.div`
@@ -233,6 +229,10 @@ export const DeliveryInfo = styled.div`
   width: 45%;
   max-width: 450px;
   min-width: 300px;
+  ${({ isDelivery }) => !isDelivery && css`
+    max-width: 200px;
+    min-width: 150px;
+  `}
   box-sizing: border-box;
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
@@ -246,7 +246,7 @@ export const DeliveryTime = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 30px;
-  width: 50%;
+  width: ${({ isDelivery }) => isDelivery ? '50%' : '100%'};
 
   h2,
   p {
@@ -265,10 +265,10 @@ export const DeliveryTime = styled.div`
 `
 
 export const DeliveryPrice = styled(DeliveryTime)`
+  width: 50%;
   ${props => props.theme?.rtl ? css`
     border-left: 1px solid #E7E7E7;
   ` : css`
     border-right: 1px solid #E7E7E7;
   `}
 `
-
