@@ -80,7 +80,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme, _theme$defaultLanguag, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _theme2, _theme2$defaultLangua, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -354,7 +354,7 @@ var LoginFormUI = function LoginFormUI(props) {
   }, /*#__PURE__*/_react.default.createElement("h1", null, t('SIGN_IN', 'Sign in')), elementLinkToSignup && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', 'New on Ordering?')), elementLinkToSignup), !props.isDisableButtons && !loginWithOtpState && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', ((_theme = theme) === null || _theme === void 0 ? void 0 : (_theme$defaultLanguag = _theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.NEW_ON_PLATFORM) || 'New on Ordering?')), elementLinkToSignup), !props.isDisableButtons && !loginWithOtpState && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
   }, ((configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log2 = configs.facebook_login) === null || _configs$facebook_log2 === void 0 ? void 0 : _configs$facebook_log2.value) === '1') && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
@@ -388,7 +388,7 @@ var LoginFormUI = function LoginFormUI(props) {
       return handleChangeTab('cellphone');
     },
     active: loginTab === 'cellphone'
-  }, t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, t('LOGIN_WITH_CELLPHONE', ((_theme2 = theme) === null || _theme2 === void 0 ? void 0 : (_theme2$defaultLangua = _theme2.defaultLanguages) === null || _theme2$defaultLangua === void 0 ? void 0 : _theme2$defaultLangua.LOGIN_WITH_CELLPHONE) || 'Login with Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup
   }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {

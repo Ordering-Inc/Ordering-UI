@@ -15,6 +15,8 @@ var _reactPhoneNumberInput = _interopRequireDefault(require("react-phone-number-
 
 var _orderingComponents = require("ordering-components");
 
+var _styledComponents = require("styled-components");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -38,13 +40,14 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var InputPhoneNumber = function InputPhoneNumber(props) {
-  var _props$beforeElements, _props$beforeComponen, _configs$default_coun, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _configs$default_coun, _props$afterComponent, _props$afterElements;
 
   var user = props.user,
       value = props.value,
       setValue = props.setValue,
       handleIsValid = props.handleIsValid,
       disabled = props.disabled;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -90,7 +93,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     disabled: disabled,
-    placeholder: t('PHONE_NUMBER', 'Phone number'),
+    placeholder: t('PHONE_NUMBER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.PHONE_NUMBER) || 'Phone number'),
     defaultCountry: configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.value,
     value: value,
     displayInitialValueAsLocalNumber: true,

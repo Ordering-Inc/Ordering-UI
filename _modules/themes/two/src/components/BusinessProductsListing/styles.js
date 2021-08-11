@@ -89,14 +89,14 @@ var WrappLayout = _styledComponents.default.div(_templateObject18 || (_templateO
 
 exports.WrappLayout = WrappLayout;
 
-var ProductsHeader = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  align-items: flex-end;\n  margin: 25px 0px 10px 0;\n\n  ", "\n"])), function (_ref3) {
-  var isDelivery = _ref3.isDelivery;
-  return !isDelivery && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    justify-content: flex-end;\n  "])));
-});
+var ProductsHeader = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  align-items: flex-end;\n  margin: 25px 0px 10px 0;\n"])));
 
 exports.ProductsHeader = ProductsHeader;
 
-var DeliveryInfo = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  border: 1px solid #E7E7E7;\n  box-sizing: border-box;\n  border-radius: 8px;\n  padding: 10px 0;\n  display: flex;\n  width: 45%;\n  max-width: 450px;\n  min-width: 300px;\n  box-sizing: border-box;\n  ", "\n"])), function (props) {
+var DeliveryInfo = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  border: 1px solid #E7E7E7;\n  box-sizing: border-box;\n  border-radius: 8px;\n  padding: 10px 0;\n  display: flex;\n  width: 45%;\n  max-width: 450px;\n  min-width: 300px;\n  ", "\n  box-sizing: border-box;\n  ", "\n"])), function (_ref3) {
+  var isDelivery = _ref3.isDelivery;
+  return !isDelivery && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    max-width: 200px;\n    min-width: 150px;\n  "])));
+}, function (props) {
   var _props$theme6;
 
   return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "])));
@@ -104,12 +104,15 @@ var DeliveryInfo = _styledComponents.default.div(_templateObject22 || (_template
 
 exports.DeliveryInfo = DeliveryInfo;
 
-var DeliveryTime = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 0 30px;\n  width: 50%;\n\n  h2,\n  p {\n    margin: 0px;\n  }\n\n  h2 {\n    font-size: 20px;\n  }\n\n  p {\n    margin-top: 5px;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
+var DeliveryTime = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 0 30px;\n  width: ", ";\n\n  h2,\n  p {\n    margin: 0px;\n  }\n\n  h2 {\n    font-size: 20px;\n  }\n\n  p {\n    margin-top: 5px;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (_ref4) {
+  var isDelivery = _ref4.isDelivery;
+  return isDelivery ? '50%' : '100%';
+}, function (props) {
   return props.theme.colors.darkGray;
 });
 
 exports.DeliveryTime = DeliveryTime;
-var DeliveryPrice = (0, _styledComponents.default)(DeliveryTime)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  ", "\n"])), function (props) {
+var DeliveryPrice = (0, _styledComponents.default)(DeliveryTime)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  width: 50%;\n  ", "\n"])), function (props) {
   var _props$theme7;
 
   return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E7E7E7;\n  "]))) : (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E7E7E7;\n  "])));
