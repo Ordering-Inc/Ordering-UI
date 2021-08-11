@@ -133,7 +133,7 @@ export const ProductActions = styled.div`
   width: 100%;
 
   position: fixed;
-  bottom: 0;
+  bottom: -19px;
   right: 0;
   width: 100%;
   background-color: #FFF;
@@ -256,4 +256,24 @@ export const Divider = styled.div`
   width: calc(100% + 40px);
   margin-left: -20px;
   background: #F8F9FA;
+`
+
+export const ProductShareWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  ${props => props.theme?.rtl && css`
+    padding-left: 20px;
+    padding-right: 0;
+  `}
+
+  @media (max-width: 768px) {
+    > div {
+      right: 16px;
+      top: 33px;
+      left: auto;
+    }
+  }
+
 `

@@ -8,7 +8,7 @@ import MdClose from '@meronex/icons/md/MdClose'
 import { Confirm } from '../../../../../components/Confirm'
 import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
-import { ProductForm } from '../../../../../components/ProductForm'
+import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
@@ -284,7 +284,7 @@ const CartUI = (props) => {
             closeOnBackdrop={false}
           />
           <Modal
-            width='70%'
+            width='40%'
             open={openProduct}
             padding='0'
             closeOnBackdrop

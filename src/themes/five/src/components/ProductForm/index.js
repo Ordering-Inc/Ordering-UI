@@ -42,7 +42,8 @@ import {
   ProductFormTitle,
   WrapperIngredients,
   ProductTabContainer,
-  Divider
+  Divider,
+  ProductShareWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -156,11 +157,14 @@ const ProductOptionsUI = (props) => {
         )}
 
         {product && !loading && !error && (
-          <ProductShare
-            slug={businessSlug}
-            categoryId={product?.category_id}
-            productId={product?.id}
-          />
+          <ProductShareWrapper>
+            <ProductShare
+              slug={businessSlug}
+              categoryId={product?.category_id}
+              productId={product?.id}
+            />
+          </ProductShareWrapper>
+
         )}
         {
         props.beforeMidElements?.map((BeforeMidElements, i) => (
