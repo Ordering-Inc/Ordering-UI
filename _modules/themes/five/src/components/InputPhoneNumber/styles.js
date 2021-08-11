@@ -34,6 +34,6 @@ var ErrorMsg = _styledComponents.default.span(_templateObject4 || (_templateObje
 
 exports.ErrorMsg = ErrorMsg;
 
-var InputBeforeIconWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  display: flex;\n  align-items: center;\n  height: 100%;\n  top: 0;\n  left: 100px;\n\n  svg {\n    color: #B1BCCC;\n    font-size: 16px;\n  }\n"])));
+var InputBeforeIconWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  height: 100%;\n  top: 13px;\n  left: 100px;\n\n  svg {\n    color: #B1BCCC;\n    font-size: 16px;\n  }\n"])));
 
 exports.InputBeforeIconWrapper = InputBeforeIconWrapper;

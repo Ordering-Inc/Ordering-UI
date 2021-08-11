@@ -51,6 +51,7 @@ export const Header = (props) => {
   } = props
 
   const { pathname } = useLocation()
+  const location1 = useLocation()
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ auth }, { login }] = useSession()
@@ -401,6 +402,7 @@ export const Header = (props) => {
             useLoginByCellphone
             isRecaptchaEnable
             isPopup
+            urlToRedirect={location1?.state?.from || null}
           />
         </Modal>
         <Modal

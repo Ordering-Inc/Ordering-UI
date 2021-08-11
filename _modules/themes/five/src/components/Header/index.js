@@ -90,7 +90,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options2, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options2, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _customerState$user2, _customerState$user3, _location1$state, _theme$defaultLanguag4, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
@@ -101,6 +101,8 @@ var Header = function Header(props) {
 
   var _useLocation = (0, _reactRouterDom.useLocation)(),
       pathname = _useLocation.pathname;
+
+  var location1 = (0, _reactRouterDom.useLocation)();
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -479,7 +481,8 @@ var Header = function Header(props) {
     }, t('RESET_PASSWORD', 'Reset password')),
     useLoginByCellphone: true,
     isRecaptchaEnable: true,
-    isPopup: true
+    isPopup: true,
+    urlToRedirect: (location1 === null || location1 === void 0 ? void 0 : (_location1$state = location1.state) === null || _location1$state === void 0 ? void 0 : _location1$state.from) || null
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: signUpModalOpen,
     width: "50%",
