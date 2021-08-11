@@ -98,10 +98,6 @@ var Header = function Header(props) {
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
       isCustomerMode = props.isCustomerMode;
-
-  var _useLocation = (0, _reactRouterDom.useLocation)(),
-      pathname = _useLocation.pathname;
-
   var location1 = (0, _reactRouterDom.useLocation)();
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -246,7 +242,7 @@ var Header = function Header(props) {
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
 
-    if (isCustomerMode && pathname.includes('/orders')) {
+    if (isCustomerMode && location1.pathname.includes('/orders')) {
       deleteUserCustomer(true);
       refreshOrderOptions();
     }

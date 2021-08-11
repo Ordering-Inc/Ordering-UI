@@ -50,7 +50,6 @@ export const Header = (props) => {
     isCustomerMode
   } = props
 
-  const { pathname } = useLocation()
   const location1 = useLocation()
   const [events] = useEvent()
   const [, t] = useLanguage()
@@ -131,7 +130,7 @@ export const Header = (props) => {
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
-    if (isCustomerMode && pathname.includes('/orders')) {
+    if (isCustomerMode && location1.pathname.includes('/orders')) {
       deleteUserCustomer(true)
       refreshOrderOptions()
     }
