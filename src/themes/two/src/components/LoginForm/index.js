@@ -238,7 +238,7 @@ const LoginFormUI = (props) => {
           <h1>{t('SIGN_IN', 'Sign in')}</h1>
           {(elementLinkToSignup && !loginWithOtpState) && (
             <RedirectLink register isPopup={isPopup}>
-              <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
+              <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
               {elementLinkToSignup}
             </RedirectLink>
           )}
@@ -299,7 +299,7 @@ const LoginFormUI = (props) => {
                     onClick={() => handleChangeTab('cellphone')}
                     active={loginTab === 'cellphone'}
                   >
-                    {t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}
+                    {t('LOGIN_WITH_CELLPHONE', theme?.defaultLanguages?.LOGIN_WITH_CELLPHONE || 'Login with Cellphone')}
                   </Tab>
                 )}
               </Tabs>

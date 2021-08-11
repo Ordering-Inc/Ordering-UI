@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import parsePhoneNumber from 'libphonenumber-js'
 import PhoneInput from 'react-phone-number-input'
 import { useLanguage, useConfig, useSession } from 'ordering-components'
-
+import { useTheme } from 'styled-components'
 import { Container, ErrorMsg } from './styles'
 
 export const InputPhoneNumber = (props) => {
@@ -14,6 +14,7 @@ export const InputPhoneNumber = (props) => {
     disabled
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
@@ -44,7 +45,7 @@ export const InputPhoneNumber = (props) => {
           <BeforeComponent key={i} {...props} />))}
         <PhoneInput
           disabled={disabled}
-          placeholder={t('PHONE_NUMBER', 'Phone number')}
+          placeholder={t('PHONE_NUMBER', theme?.defaultLanguages?.PHONE_NUMBER ||'Phone number')}
           defaultCountry={configs?.default_country_code?.value}
           value={value}
           displayInitialValueAsLocalNumber
