@@ -37,6 +37,6 @@ var Container = _styledComponents.default.div(_templateObject5 || (_templateObje
 
 exports.Container = Container;
 
-var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin: 0px;\n  font-size: 30px;\n  font-weight: 600;\n  padding: 0px 10px 15px;\n"])));
+var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin: 0px;\n  font-size: 24px;\n  font-weight: 600;\n  padding: 0px 10px 15px;\n"])));
 
 exports.Title = Title;

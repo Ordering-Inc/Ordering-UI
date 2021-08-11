@@ -2,10 +2,18 @@ import styled, { css } from 'styled-components'
 
 export const Title = styled.div`
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 40px;
   color: ${props => props.theme.colors.darkTextColor};
+
+  @media (max-width: 450px) {
+    padding-left: 30px;
+    ${props => props.theme.rtl && css`
+      padding-right: 30px;
+      padding-left: 0;
+    `}
+  }
 `
 
 export const DatePickerWrapper = styled.div`

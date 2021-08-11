@@ -74,5 +74,13 @@ export const OrderTypeListTitle = styled.h1`
   font-weight: 600;
   font-size: 24px;
   color: ${props => props.theme.colors.darkTextColor};
-  margin: 10px 0 30px;
+  margin: 0 0 30px;
+
+  @media (max-width: 450px) {
+    padding-left: 30px;
+    ${props => props.theme.rtl && css`
+      padding-right: 30px;
+      padding-left: 0;
+    `}
+  }
 `

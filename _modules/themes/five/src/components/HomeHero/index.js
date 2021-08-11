@@ -17,7 +17,7 @@ var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi
 
 var _styles = require("./styles");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _Buttons = require("../../styles/Buttons");
 
@@ -160,7 +160,7 @@ var HomeHero = function HomeHero(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.ADDRESSES) || 'Addresses'),
+    title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
     open: modals.listOpen,
     width: "70%",
     onClose: function onClose() {

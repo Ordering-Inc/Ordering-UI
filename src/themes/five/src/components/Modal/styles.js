@@ -53,8 +53,9 @@ export const ModalHeader = styled.div`
 `
 
 export const ModalTitle = styled.h2`
+  font-weight: 600;
+  font-size: 24px;
   text-align: center;
-  font-size: 30px;
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;

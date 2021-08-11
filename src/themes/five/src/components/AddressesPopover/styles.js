@@ -44,8 +44,9 @@ export const Container = styled.div`
 `
 
 export const Title = styled.h1`
+  text-align: center;
   margin: 0px;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 600;
   padding: 0px 10px 15px;
 `

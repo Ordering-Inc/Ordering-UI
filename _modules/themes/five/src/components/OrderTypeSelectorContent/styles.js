@@ -11,7 +11,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,8 +63,10 @@ var OrderStartWrapper = _styledComponents.default.div(_templateObject7 || (_temp
 
 exports.OrderStartWrapper = OrderStartWrapper;
 
-var OrderTypeListTitle = _styledComponents.default.h1(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  margin: 10px 0 30px;\n"])), function (props) {
+var OrderTypeListTitle = _styledComponents.default.h1(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  margin: 0 0 30px;\n\n  @media (max-width: 450px) {\n    padding-left: 30px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      padding-right: 30px;\n      padding-left: 0;\n    "])));
 });
 
 exports.OrderTypeListTitle = OrderTypeListTitle;

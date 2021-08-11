@@ -27,8 +27,6 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
 var _useOnlineStatus = require("../../../../../hooks/useOnlineStatus");
 
-var _utils = require("../../../../../utils");
-
 var _LanguageSelector = require("../../../../../components/LanguageSelector");
 
 var _AddressesPopover = require("../AddressesPopover");
@@ -434,13 +432,12 @@ var Header = function Header(props) {
       return openModal(variant);
     }
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t(modalSelected.toUpperCase(), (0, _utils.capitalize)(modalSelected)),
+    title: modalSelected === 'address' && t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?'),
     open: modalIsOpen,
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    width: "70%",
-    padding: modalSelected === 'address' ? '20px' : '5px'
+    width: "70%"
   }, modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
     carts: cartsWithProducts,
     isOrderStateCarts: !!orderState.carts,

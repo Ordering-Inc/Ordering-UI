@@ -25,6 +25,6 @@ var PopoverArrow = _styledComponents.default.div(_templateObject3 || (_templateO
 
 exports.PopoverArrow = PopoverArrow;
 
-var CloseBtn = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  user-select: none;\n  position: absolute;\n  cursor: pointer;\n  top: 30px;\n  left: 20px;\n\n  svg {\n    font-size: 15px;\n    color: #748194;\n  }\n"])));
+var CloseBtn = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  user-select: none;\n  position: absolute;\n  cursor: pointer;\n  top: 20px;\n  left: 20px;\n\n  svg {\n    font-size: 15px;\n    color: #748194;\n  }\n"])));
 
 exports.CloseBtn = CloseBtn;

@@ -5,6 +5,10 @@ export const ForgotPasswordContainer = styled.div`
   height: ${({ isPopup }) => isPopup ? '100vh' : 'auto'};
 
   h1 {
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 30px;
     text-align: center;
   }
   @media (min-width: 992px) {

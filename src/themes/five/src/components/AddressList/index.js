@@ -29,7 +29,7 @@ import {
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Button } from '../../styles/Buttons'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { Confirm } from '../../../../../components/Confirm'
 import { useTheme } from 'styled-components'
@@ -202,7 +202,7 @@ const AddressListUI = (props) => {
         {
           !isPopover && (
             <Modal
-              title={t('ADDRESS', 'Address')}
+              title={t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
               open={!isPopover && addressOpen}
               onClose={() => setAddressOpen(false)}
             >

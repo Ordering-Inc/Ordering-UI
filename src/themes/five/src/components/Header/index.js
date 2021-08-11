@@ -20,7 +20,6 @@ import {
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
-import { capitalize } from '../../../../../utils'
 
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { AddressesPopover } from '../AddressesPopover'
@@ -345,11 +344,10 @@ export const Header = (props) => {
         )}
         {modalIsOpen && (
           <Modal
-            title={t(modalSelected.toUpperCase(), capitalize(modalSelected))}
+            title={modalSelected === 'address' && t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             width='70%'
-            padding={modalSelected === 'address' ? '20px' : '5px'}
           >
             {modalSelected === 'cart' && (
               <CartContent
@@ -472,34 +470,6 @@ export const Header = (props) => {
             )}
           </Modal>
         )}
-        {/* <Modal
-          open={loginModalOpen}
-          width='50%'
-          onClose={() => setLoginModalOpen(false)}
-        >
-          <LoginForm
-            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-            useLoginByCellphone
-            isRecaptchaEnable
-            isPopup
-            urlToRedirect={location1?.state?.from || null}
-          />
-        </Modal>
-        <Modal
-          open={signUpModalOpen}
-          width='50%'
-          onClose={() => setSignUpModalOpen(false)}
-        >
-          <SignUpForm
-            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-            useLoginByCellphone
-            useChekoutFileds
-            handleSuccessSignup={handleSuccessSignup}
-            isRecaptchaEnable
-            isPopup
-          />
-        </Modal> */}
         <Confirm
           title={t('CUSTOMER', theme?.defaultLanguages?.CUSTOMER || 'Customer')}
           content={confirm.content}

@@ -30,7 +30,7 @@ export const CloseBtn = styled.div`
   user-select: none;
   position: absolute;
   cursor: pointer;
-  top: 30px;
+  top: 20px;
   left: 20px;
 
   svg {
