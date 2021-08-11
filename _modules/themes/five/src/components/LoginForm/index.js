@@ -53,7 +53,7 @@ var _BsLock = _interopRequireDefault(require("@meronex/icons/bs/BsLock"));
 
 var _GoMail = _interopRequireDefault(require("@meronex/icons/go/GoMail"));
 
-var _GoogleLogin = require("../GoogleLogin");
+var _GoogleLogin = require("../../../../../components/GoogleLogin");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
