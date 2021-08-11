@@ -78,10 +78,12 @@ const BusinessesListingUI = (props) => {
   }, [businessesList, paginationProps])
 
   useEffect(() => {
-    const listWindows = document.querySelector('#list_wrapper')
-    listWindows.addEventListener('scroll', handleScroll)
-    return () => listWindows.removeEventListener('scroll', handleScroll)
-  }, [handleScroll])
+    if (!showBusinessInfo) {
+      const listWindows = document.querySelector('#list_wrapper')
+      listWindows.addEventListener('scroll', handleScroll)
+      return () => listWindows.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll, showBusinessInfo])
 
   const handleClickAddress = (e) => {
     if (auth) {
