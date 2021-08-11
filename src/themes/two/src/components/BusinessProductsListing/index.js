@@ -201,11 +201,11 @@ const BusinessProductsListingUI = (props) => {
                     setOpenBusinessInformation={setOpenBusinessInformation}
                     openBusinessInformation={openBusinessInformation}
                   />
-                  <ProductsHeader
-                    isDelivery={options.type === 1}
-                  >
-                    {options.type === 1 && (
-                      <DeliveryInfo>
+                  <ProductsHeader>
+                    <DeliveryInfo
+                      isDelivery={options.type === 1}
+                    >
+                      {options.type === 1 && (
                         <DeliveryPrice>
                           {!businessState?.loading ? (
                             <h2>
@@ -216,26 +216,26 @@ const BusinessProductsListingUI = (props) => {
                           )}
                           <p>{t('DELIVERY_FEE', 'Delivery fee')}</p>
                         </DeliveryPrice>
-                        <DeliveryTime>
-                          {!businessState?.loading ? (
-                            <>
-                              {options?.type === 1 ? (
-                                <h2>
-                                  {parseInt(convertHoursToMinutes(businessState?.business?.delivery_time))}
-                                </h2>
-                              ) : (
-                                <h5>
-                                  {parseInt(convertHoursToMinutes(businessState?.business?.pickup_time))}
-                                </h5>
-                              )}
-                            </>
-                          ) : (
-                            <Skeleton width={70} />
-                          )}
-                          <p>{t('MINUTES', 'minutes')}</p>
-                        </DeliveryTime>
-                      </DeliveryInfo>
-                    )}
+                      )}
+                      <DeliveryTime isDelivery={options.type === 1}>
+                        {!businessState?.loading ? (
+                          <>
+                            {options?.type === 1 ? (
+                              <h2>
+                                {parseInt(convertHoursToMinutes(businessState?.business?.delivery_time))}
+                              </h2>
+                            ) : (
+                              <h2>
+                                {parseInt(convertHoursToMinutes(businessState?.business?.pickup_time))}
+                              </h2>
+                            )}
+                          </>
+                        ) : (
+                          <Skeleton width={70} />
+                        )}
+                        <p>{t('MINUTES', 'minutes')}</p>
+                      </DeliveryTime>
+                    </DeliveryInfo>
 
                     {(categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && (
                       <WrapperSearch
