@@ -37,7 +37,7 @@ import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
-import { LoginForm } from '../LoginForm'
+import { LoginForm } from '../../../../../components/LoginForm'
 import { SignUpForm } from '../SignUpForm'
 
 export const Header = (props) => {

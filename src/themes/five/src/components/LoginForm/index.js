@@ -45,7 +45,7 @@ import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 import BsLock from '@meronex/icons/bs/BsLock'
 import GoMail from '@meronex/icons/go/GoMail'
-import { GoogleLoginButton } from '../../../../../components/GoogleLogin'
+import { GoogleLoginButton } from '../GoogleLogin'
 
 const LoginFormUI = (props) => {
   const {

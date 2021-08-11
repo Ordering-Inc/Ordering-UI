@@ -59,7 +59,7 @@ var _UserDetails = require("../../../../../components/UserDetails");
 
 var _Confirm = require("../../../../../components/Confirm");
 
-var _LoginForm = require("../LoginForm");
+var _LoginForm = require("../../../../../components/LoginForm");
 
 var _SignUpForm = require("../SignUpForm");
 
