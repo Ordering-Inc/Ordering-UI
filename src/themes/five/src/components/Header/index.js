@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
@@ -39,6 +39,7 @@ import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
+import { ForgotPasswordForm } from '../ForgotPasswordForm'
 
 export const Header = (props) => {
   const {
@@ -63,9 +64,9 @@ export const Header = (props) => {
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
-  const [loginModalOpen, setLoginModalOpen] = useState(false)
-  const [signUpModalOpen, setSignUpModalOpen] = useState(false)
+  const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
+  const [modalPageToShow, setModalPageToShow] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
@@ -134,6 +135,27 @@ export const Header = (props) => {
       deleteUserCustomer(true)
       refreshOrderOptions()
     }
+  }
+
+  const handleCustomModalClick = (e, { page }) => {
+    e.preventDefault()
+    setModalPageToShow(page)
+  }
+
+  const closeAuthModal = () => {
+    setAuthModalOpen(false)
+    setModalPageToShow(null)
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      closeAuthModal()
+    }
+  }
+
+  const handleOpenLoginSignUp = (index) => {
+    setModalPageToShow(index)
+    setAuthModalOpen(true)
   }
 
   useEffect(() => {
@@ -232,11 +254,11 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 870 && (
                     <>
-                      <MenuLink onClick={() => setLoginModalOpen(true)} highlight={loginModalOpen} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} highlight={modalPageToShow === 'login'} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
                       {!isHideSignup && (
                         <MenuLink
-                          onClick={() => setSignUpModalOpen(true)}
-                          highlight={signUpModalOpen}
+                          onClick={() => handleOpenLoginSignUp('signup')}
+                          highlight={modalPageToShow === 'signup'}
                           name='signup'
                         >
                           {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
@@ -390,7 +412,67 @@ export const Header = (props) => {
             </UserEdit>
           </Modal>
         )}
-        <Modal
+        {authModalOpen && !auth && (
+          <Modal
+            open={authModalOpen}
+            onClose={() => closeAuthModal()}
+            width='50%'
+          >
+            {modalPageToShow === 'login' && (
+              <LoginForm
+                handleSuccessLogin={handleSuccessLogin}
+                elementLinkToSignup={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'signup' })
+                    } href='#'
+                  >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+                  </a>
+                }
+                elementLinkToForgotPassword={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                    } href='#'
+                  >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+                  </a>
+                }
+                useLoginByCellphone
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'signup' && (
+              <SignUpForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                  </a>
+                }
+                useLoginByCellphone
+                useChekoutFileds
+                handleSuccessSignup={handleSuccessSignup}
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'forgotpassword' && (
+              <ForgotPasswordForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                  </a>
+                }
+                isPopup
+              />
+            )}
+          </Modal>
+        )}
+        {/* <Modal
           open={loginModalOpen}
           width='50%'
           onClose={() => setLoginModalOpen(false)}
@@ -417,7 +499,7 @@ export const Header = (props) => {
             isRecaptchaEnable
             isPopup
           />
-        </Modal>
+        </Modal> */}
         <Confirm
           title={t('CUSTOMER', theme?.defaultLanguages?.CUSTOMER || 'Customer')}
           content={confirm.content}

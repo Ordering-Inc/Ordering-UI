@@ -141,6 +141,12 @@ Object.defineProperty(exports, "Footer", {
     return _Footer.Footer;
   }
 });
+Object.defineProperty(exports, "ForgotPasswordForm", {
+  enumerable: true,
+  get: function get() {
+    return _ForgotPasswordForm.ForgotPasswordForm;
+  }
+});
 Object.defineProperty(exports, "GoogleLogin", {
   enumerable: true,
   get: function get() {
@@ -385,6 +391,8 @@ var _DriverTips = require("./src/components/DriverTips");
 var _FacebookLogin = require("./src/components/FacebookLogin");
 
 var _Footer = require("./src/components/Footer");
+
+var _ForgotPasswordForm = require("./src/components/ForgotPasswordForm");
 
 var _GoogleLogin = require("./src/components/GoogleLogin");
 

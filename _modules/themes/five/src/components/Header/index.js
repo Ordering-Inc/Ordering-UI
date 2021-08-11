@@ -63,6 +63,8 @@ var _LoginForm = require("../LoginForm");
 
 var _SignUpForm = require("../SignUpForm");
 
+var _ForgotPasswordForm = require("../ForgotPasswordForm");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -90,7 +92,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options2, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _customerState$user2, _customerState$user3, _location1$state, _theme$defaultLanguag4, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options2, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
@@ -148,18 +150,18 @@ var Header = function Header(props) {
 
   var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      loginModalOpen = _useState8[0],
-      setLoginModalOpen = _useState8[1];
+      authModalOpen = _useState8[0],
+      setAuthModalOpen = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(false),
+  var _useState9 = (0, _react.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      signUpModalOpen = _useState10[0],
-      setSignUpModalOpen = _useState10[1];
+      modalSelected = _useState10[0],
+      setModalSelected = _useState10[1];
 
   var _useState11 = (0, _react.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      modalSelected = _useState12[0],
-      setModalSelected = _useState12[1];
+      modalPageToShow = _useState12[0],
+      setModalPageToShow = _useState12[1];
 
   var _useState13 = (0, _react.useState)({
     open: false,
@@ -246,6 +248,28 @@ var Header = function Header(props) {
       deleteUserCustomer(true);
       refreshOrderOptions();
     }
+  };
+
+  var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
+    var page = _ref.page;
+    e.preventDefault();
+    setModalPageToShow(page);
+  };
+
+  var closeAuthModal = function closeAuthModal() {
+    setAuthModalOpen(false);
+    setModalPageToShow(null);
+  };
+
+  var handleSuccessLogin = function handleSuccessLogin(user) {
+    if (user) {
+      closeAuthModal();
+    }
+  };
+
+  var handleOpenLoginSignUp = function handleOpenLoginSignUp(index) {
+    setModalPageToShow(index);
+    setAuthModalOpen(true);
   };
 
   (0, _react.useEffect)(function () {
@@ -341,15 +365,15 @@ var Header = function Header(props) {
     orderTypeList: orderTypeList
   })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 870 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
-      return setLoginModalOpen(true);
+      return handleOpenLoginSignUp('login');
     },
-    highlight: loginModalOpen,
+    highlight: modalPageToShow === 'login',
     name: "signin"
   }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN) || 'Login')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
-      return setSignUpModalOpen(true);
+      return handleOpenLoginSignUp('signup');
     },
-    highlight: signUpModalOpen,
+    highlight: modalPageToShow === 'signup',
     name: "signup"
   }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
@@ -462,42 +486,59 @@ var Header = function Header(props) {
     changeOrderAddressWithDefault: true,
     userCustomerSetup: customerState.user,
     setCustomerModalOpen: setCustomerModalOpen
-  })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: loginModalOpen,
-    width: "50%",
+  })))), authModalOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: authModalOpen,
     onClose: function onClose() {
-      return setLoginModalOpen(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
-    elementLinkToSignup: /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: "/signup"
-    }, t('CREATE_ACCOUNT', 'Create account')),
-    elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: "/password/forgot"
-    }, t('RESET_PASSWORD', 'Reset password')),
+      return closeAuthModal();
+    },
+    width: "50%"
+  }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+    handleSuccessLogin: handleSuccessLogin,
+    elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'signup'
+        });
+      },
+      href: "#"
+    }, t('CREATE_ACCOUNT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CREATE_ACCOUNT) || 'Create account')),
+    elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'forgotpassword'
+        });
+      },
+      href: "#"
+    }, t('RESET_PASSWORD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.RESET_PASSWORD) || 'Reset password')),
     useLoginByCellphone: true,
-    isRecaptchaEnable: true,
-    isPopup: true,
-    urlToRedirect: (location1 === null || location1 === void 0 ? void 0 : (_location1$state = location1.state) === null || _location1$state === void 0 ? void 0 : _location1$state.from) || null
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: signUpModalOpen,
-    width: "50%",
-    onClose: function onClose() {
-      return setSignUpModalOpen(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
-    elementLinkToLogin: /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: "/login"
-    }, t('LOGIN', 'Login')),
+    isPopup: true
+  }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.LOGIN) || 'Login')),
     useLoginByCellphone: true,
     useChekoutFileds: true,
     handleSuccessSignup: handleSuccessSignup,
-    isRecaptchaEnable: true,
+    isPopup: true
+  }), modalPageToShow === 'forgotpassword' && /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.LOGIN) || 'Login')),
     isPopup: true
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CUSTOMER) || 'Customer'),
+    title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.CUSTOMER) || 'Customer'),
     content: confirm.content,
-    acceptText: t('ACCEPT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.ACCEPT) || 'Accept'),
+    acceptText: t('ACCEPT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.ACCEPT) || 'Accept'),
     open: isCustomerMode && confirm.open,
     onClose: function onClose() {
       return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {

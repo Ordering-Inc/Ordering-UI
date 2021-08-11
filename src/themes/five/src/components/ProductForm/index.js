@@ -18,12 +18,12 @@ import { ProductIngredient } from '../../../../../components/ProductIngredient'
 import { ProductOption } from '../../../../../components/ProductOption'
 import { ProductOptionSubOption } from '../../../../../components/ProductOptionSubOption'
 import { ProductShare } from '../../../../../components/ProductShare'
-import { LoginForm } from '../../../../../components/LoginForm'
-import { SignUpForm } from '../../../../../components/SignUpForm'
-import { ForgotPasswordForm } from '../../../../../components/ForgotPasswordForm'
+import { LoginForm } from '../LoginForm'
+import { SignUpForm } from '../SignUpForm'
+import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { AddressList } from '../../../../../components/AddressList'
 
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import { Tabs, Tab } from '../../styles/Tabs'
 
@@ -387,8 +387,7 @@ const ProductOptionsUI = (props) => {
           <Modal
             open={modalIsOpen}
             onClose={() => closeModal()}
-            width='70%'
-            padding='0'
+            width='50%'
           >
             {modalPageToShow === 'login' && (
               <LoginForm
