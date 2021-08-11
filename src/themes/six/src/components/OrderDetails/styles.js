@@ -3,6 +3,12 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   display: flex;
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100vh;
+  overflow-y: scroll;
 `
 
 export const WrapperContainer = styled.div`
@@ -19,12 +25,15 @@ export const LeftPanel = styled.div`
   padding: 5%;
   display: flex;
   align-items: center;
+  flex-direction: column;
   padding-top: 25px;
-  @media (min-width: 1024px) {
+  position: relative;
+  background-color: #fff;
+    @media (min-width: 1024px) {
     width: 40vw;
+    height: 100vh;
     padding: 0 50px;
     border-right: 1px solid ${props => props.theme.colors.borderColor};
-    max-height: calc(100vh - 75px);
     overflow-y: auto;
   }
 `
@@ -34,12 +43,10 @@ export const RightPanel = styled.div`
   padding: 5%;
   box-sizing: border-box;
   background-color: ${props => props.theme.colors.secundaryBackground};
-  margin-top: 1.5px;
-  margin-bottom: 1.5px;
   @media (min-width: 1024px) {
     width: 60vw;
+    height: 100vh;
     padding: 0 100px;
-    max-height: calc(100vh - 65px);
     overflow-y: auto;
   }
 `
@@ -52,6 +59,7 @@ export const RightContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   height: fit-content;
+  padding-top: 20px;
 `
 export const Header = styled.div`
   width: 100%;
@@ -376,6 +384,7 @@ export const OrderProducts = styled(OrderCustomer)`
   overflow: hidden;
   margin-top: 30px;
   box-sizing: border-box;
+  padding: 2px;
   @media (min-width: 1024px) {
     margin-top: 45px;
   }
@@ -394,6 +403,7 @@ export const OrderBill = styled.div`
   margin-top: 25px;
   margin-bottom:20px;
   background-color: #fff;
+  margin: 2px;
   @media (min-width: 1024px) {
     margin-top: 45px;
     margin-bottom: 30px;
@@ -591,4 +601,31 @@ export const DashLine = styled.span`
   width: 100%;
   height: 70%;
   border-bottom: 1px dashed ${props => props.theme.colors.borderColor};;
+`
+
+export const BackHeader = styled.div`
+  display: flex;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    margin-top: 25px;
+    margin-left: -20px;
+
+    ${props => props.theme?.rtl && css`
+      left: unset;
+      right: 0;
+    `}
+  }
+`
+export const Logo = styled.div`
+  margin: 0px 5px;
+`
+
+export const LinkText = styled.p`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  svg {
+    margin: 0 5px;
+  }
 `
