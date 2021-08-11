@@ -184,7 +184,6 @@ export const SkeletonSocialWrapper = styled.div`
   @media (min-width: 768px) {
     margin-top: 40px;
   }
-
 `
 
 export const TogglePassword = styled.span`
@@ -283,10 +282,23 @@ export const FormTitle = styled.div`
   line-height: 28px;
   text-transform: uppercase;
   color: ${props => props.theme.colors.primary};
+  margin-top: 10px;
+  margin-bottom: 20px;
   @media (min-width: 768px) {
     font-size: 24px;
     line-height: 34px;
     margin-top: 30px;
+    margin-bottom: 25px;
+    width: 100%;
+  }
+
+  @media (min-width: 1440px) {
+    width: 75%;
+    margin-right: auto;
+    ${props => props.theme?.rtl && css`
+        margin-right: unset;
+        margin-left: auto;
+    `}
   }
 `
 export const FormInline = styled.div`
