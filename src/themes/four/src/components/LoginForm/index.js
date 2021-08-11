@@ -263,7 +263,7 @@ const LoginFormUI = (props) => {
               <img src={theme?.images?.logos?.logotype} alt='Logo login' width='200' height='66' loading='lazy' />
               <Slogan>
                 {loginTab === 'email' && t('LOGIN_WITH_EMAIL', 'Login with Email')}
-                {loginTab === 'cellphone' && t('LOGIN_WITH_CELLPHONE', 'Log in with your cellphone')}
+                {loginTab === 'cellphone' && t('LOGIN_WITH_CELLPHONE', theme?.defaultLanguages?.LOGIN_WITH_CELLPHONE || 'Login with Cellphone')}
               </Slogan>
               {(useLoginByCellphone || useLoginByEmail) && (
                 <FormInput
@@ -401,7 +401,7 @@ const LoginFormUI = (props) => {
                   {loginTab === 'cellphone' && <GoMail />}
                   {loginTab === 'cellphone' && <div>{t('LOGIN_WITH_EMAIL', 'Login with Email')}</div>}
                   {loginTab === 'email' && <RiPhoneLine />}
-                  {loginTab === 'email' && <div>{t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}</div>}
+                  {loginTab === 'email' && <div>{t('LOGIN_WITH_CELLPHONE', theme?.defaultLanguages?.LOGIN_WITH_CELLPHONE || 'Login with Cellphone')}</div>}
                 </LoginWithButton>
               )}
 
@@ -445,7 +445,7 @@ const LoginFormUI = (props) => {
               )}
               {(elementLinkToSignup && !loginWithOtpState) && (
                 <RedirectLink register isPopup={isPopup}>
-                  <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
+                  <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
                   {elementLinkToSignup}
                 </RedirectLink>
               )}
