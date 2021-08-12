@@ -69,7 +69,7 @@ var MomentContent = function MomentContent(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, momentProps), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
+  }, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, momentProps), !(orderState !== null && orderState !== void 0 && orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
     height: (momentControl === null || momentControl === void 0 ? void 0 : momentControl.height) && "".concat(momentControl === null || momentControl === void 0 ? void 0 : momentControl.height, "px")
   }, (window.location.pathname !== '/search' || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
