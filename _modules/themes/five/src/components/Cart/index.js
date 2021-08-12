@@ -21,7 +21,7 @@ var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _Confirm = require("../../../../../components/Confirm");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _CouponControl = require("../../../../../components/CouponControl");
 

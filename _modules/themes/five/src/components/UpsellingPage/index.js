@@ -17,7 +17,7 @@ var _Buttons = require("../../styles/Buttons");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _ProductForm = require("../ProductForm");
 

@@ -16,7 +16,7 @@ import {
 } from './styles'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { ProductForm } from '../ProductForm'
 import { AutoScroll } from '../AutoScroll'
 

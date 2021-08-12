@@ -6,7 +6,7 @@ import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import MdClose from '@meronex/icons/md/MdClose'
 
 import { Confirm } from '../../../../../components/Confirm'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
