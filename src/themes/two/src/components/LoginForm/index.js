@@ -37,6 +37,7 @@ import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
+import { useTheme } from 'styled-components'
 
 const LoginFormUI = (props) => {
   const {
@@ -57,6 +58,7 @@ const LoginFormUI = (props) => {
     credentials
   } = props
   const numOtpInputs = 4
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
