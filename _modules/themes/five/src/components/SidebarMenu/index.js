@@ -29,9 +29,19 @@ var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCirc
 
 var _orderingComponents = require("ordering-components");
 
+var _styledComponents = require("styled-components");
+
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
 var _LogoutButton = require("../../../../../components/LogoutButton");
+
+var _Modal = require("../Modal");
+
+var _SignUpForm = require("../SignUpForm");
+
+var _LoginForm = require("../LoginForm");
+
+var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
 var _styles = require("./styles");
 
@@ -56,12 +66,16 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
 
   var auth = props.auth,
       isHideSignup = props.isHideSignup,
       userCustomer = props.userCustomer,
       isCustomerMode = props.isCustomerMode;
+
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      login = _useSession2[0].login;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -75,6 +89,8 @@ var SidebarMenu = function SidebarMenu(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       options = _useOrder2[0].options;
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
@@ -83,7 +99,34 @@ var SidebarMenu = function SidebarMenu(props) {
       isMenuOpen = _useState2[0],
       setIsMenuOpen = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      modalIsOpen = _useState4[0],
+      setModalIsOpen = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      modalPageToShow = _useState6[0],
+      setModalPageToShow = _useState6[1];
+
   var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
+
+  var closeModal = function closeModal() {
+    setModalIsOpen(false);
+    setModalPageToShow(null);
+    actionSidebar(false);
+  };
+
+  var handleSuccessLogin = function handleSuccessLogin(user) {
+    if (user) {
+      closeModal();
+    }
+  };
+
+  var handleOpenLoginSignUp = function handleOpenLoginSignUp(index) {
+    setModalPageToShow(index);
+    setModalIsOpen(true);
+  };
 
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
@@ -94,6 +137,22 @@ var SidebarMenu = function SidebarMenu(props) {
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
     document.getElementById('sidebar_menu').style.width = value ? width > 489 ? '340px' : '100vw' : '0';
+  };
+
+  var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
+    var page = _ref.page;
+    e.preventDefault();
+    setModalPageToShow(page);
+  };
+
+  var handleSuccessSignup = function handleSuccessSignup(user) {
+    var _user$session;
+
+    login({
+      user: user,
+      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+    });
+    closeModal();
   };
 
   (0, _react.useEffect)(function () {
@@ -187,30 +246,75 @@ var SidebarMenu = function SidebarMenu(props) {
   })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
-      return handleGoToPage({
-        page: 'signin'
-      });
+      return handleOpenLoginSignUp('login');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
     isHome: isHome,
-    active: window.location.pathname === '/signin' || window.location.pathname === '/login'
+    active: modalPageToShow === 'login'
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineLogin.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
-    active: window.location.pathname === '/signin' || window.location.pathname === '/login'
+    active: modalPageToShow === 'login'
   }, t('SIGN_IN', 'Sign in'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
-      return handleGoToPage({
-        page: 'signup'
-      });
+      return handleOpenLoginSignUp('signup');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
     isHome: isHome,
-    active: window.location.pathname === '/signup'
+    active: modalPageToShow === 'signup'
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineUserAdd.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     isHome: isHome,
-    active: window.location.pathname === '/signup'
-  }, t('SIGNUP', 'Sign up'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    active: modalPageToShow === 'signup'
+  }, t('SIGNUP', 'Sign up'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: modalIsOpen,
+    onClose: function onClose() {
+      return closeModal();
+    },
+    width: "50%"
+  }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+    handleSuccessLogin: handleSuccessLogin,
+    elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'signup'
+        });
+      },
+      href: "#"
+    }, t('CREATE_ACCOUNT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.CREATE_ACCOUNT) || 'Create account')),
+    elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'forgotpassword'
+        });
+      },
+      href: "#"
+    }, t('RESET_PASSWORD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.RESET_PASSWORD) || 'Reset password')),
+    useLoginByCellphone: true,
+    isPopup: true
+  }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.LOGIN) || 'Login')),
+    useLoginByCellphone: true,
+    useChekoutFileds: true,
+    handleSuccessSignup: handleSuccessSignup,
+    isPopup: true
+  }), modalPageToShow === 'forgotpassword' && /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.LOGIN) || 'Login')),
+    isPopup: true
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

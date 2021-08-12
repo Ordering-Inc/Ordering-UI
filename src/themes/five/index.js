@@ -1,4 +1,3 @@
-import { AddressesPopover } from './src/components/AddressesPopover'
 import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AppleLogin } from './src/components/AppleLogin'
@@ -31,7 +30,6 @@ import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LoginForm } from './src/components/LoginForm'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
-import { MomentPopover } from './src/components/MomentPopover'
 import { MyOrders } from './src/components/MyOrders'
 import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
@@ -57,7 +55,6 @@ import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
 
 export {
-  AddressesPopover,
   AddressForm,
   AddressList,
   AppleLogin,
@@ -90,7 +87,6 @@ export {
   LoginForm,
   MomentContent,
   MomentControl,
-  MomentPopover,
   MyOrders,
   Modal,
   OrderDetails,

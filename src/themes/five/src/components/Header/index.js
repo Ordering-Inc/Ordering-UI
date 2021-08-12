@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
+import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
 
 import {
@@ -16,15 +17,15 @@ import {
   MenuLink,
   SubMenu,
   CustomerInfo,
-  UserEdit
+  UserEdit,
+  AddressMenu,
+  MomentMenu
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
-import { AddressesPopover } from '../AddressesPopover'
 import { UserPopover } from '../UserPopover'
-import { MomentPopover } from '../MomentPopover'
 import { CartPopover } from '../CartPopover'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { CartContent } from '../CartContent'
@@ -52,6 +53,7 @@ export const Header = (props) => {
 
   const location1 = useLocation()
   const [events] = useEvent()
+  const [{ parseDate }] = useUtils()
   const [, t] = useLanguage()
   const [{ auth }, { login }] = useSession()
   const [orderState, { refreshOrderOptions }] = useOrder()
@@ -75,7 +77,6 @@ export const Header = (props) => {
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
-  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
 
   const handleSuccessSignup = (user) => {
@@ -212,31 +213,30 @@ export const Header = (props) => {
               )}
               {onlineStatus && windowSize.width > 820 && (
                 <>
-                  <AddressesPopover
-                    auth={auth}
-                    addressState={orderState?.options?.address}
-                    open={openPopover.addresses}
-                    onClick={() => handleTogglePopover('addresses')}
-                    onClose={() => handleClosePopover('addresses')}
-                    isCustomerMode={isCustomerMode}
-                  />
+                  <AddressMenu
+                    onClick={() => openModal('address')}
+                  >
+                    <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+                  </AddressMenu>
                   {!isCustomerMode && (
-                    <MomentPopover
-                      open={openPopover.moment}
-                      onClick={() => handleTogglePopover('moment')}
-                      onClose={() => handleClosePopover('moment')}
-                    />
+                    <MomentMenu
+                      onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                        ? null
+                        : () => openModal('moment')}
+                    >
+                      <div>
+                        {orderState.options?.moment
+                          ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
+                          : t('ASAP_ABBREVIATION', 'ASAP')}
+                      </div>
+                    </MomentMenu>
                   )}
                 </>
               )}
               {windowSize.width > 768 ? (
                 <OrderTypeSelectorHeader
-                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
-                  open={openPopover.type}
                   orderTypeList={orderTypeList}
-                  onClick={() => handleTogglePopover('type')}
-                  onClose={() => handleClosePopover('type')}
+                  onClick={() => openModal('delivery')}
                 />
               ) : (
                 <HeaderOption
@@ -308,18 +308,18 @@ export const Header = (props) => {
         {onlineStatus && isShowOrderOptions && (
           windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
-              <AddressesPopover
-                auth={auth}
-                addressState={orderState?.options?.address}
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-              />
+              <AddressMenu
+                onClick={() => openModal('address')}
+              >
+                <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+              </AddressMenu>
               {!isCustomerMode && (
-                <MomentPopover
-                  open={openPopover.moment}
-                  onClick={() => handleTogglePopover('moment')}
-                  onClose={() => handleClosePopover('moment')}
+                <HeaderOption
+                  variant='moment'
+                  momentState={orderState?.options?.moment}
+                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                    ? null
+                    : (variant) => openModal(variant)}
                 />
               )}
             </SubMenu>
@@ -347,7 +347,7 @@ export const Header = (props) => {
             title={modalSelected === 'address' && t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            width='70%'
+            width='50%'
           >
             {modalSelected === 'cart' && (
               <CartContent

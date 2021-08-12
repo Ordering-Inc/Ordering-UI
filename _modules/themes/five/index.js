@@ -3,12 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "AddressesPopover", {
-  enumerable: true,
-  get: function get() {
-    return _AddressesPopover.AddressesPopover;
-  }
-});
 Object.defineProperty(exports, "AddressForm", {
   enumerable: true,
   get: function get() {
@@ -201,12 +195,6 @@ Object.defineProperty(exports, "MomentControl", {
     return _MomentControl.MomentControl;
   }
 });
-Object.defineProperty(exports, "MomentPopover", {
-  enumerable: true,
-  get: function get() {
-    return _MomentPopover.MomentPopover;
-  }
-});
 Object.defineProperty(exports, "MyOrders", {
   enumerable: true,
   get: function get() {
@@ -346,8 +334,6 @@ Object.defineProperty(exports, "Select", {
   }
 });
 
-var _AddressesPopover = require("./src/components/AddressesPopover");
-
 var _AddressForm = require("./src/components/AddressForm");
 
 var _AddressList = require("./src/components/AddressList");
@@ -411,8 +397,6 @@ var _LoginForm = require("./src/components/LoginForm");
 var _MomentContent = require("./src/components/MomentContent");
 
 var _MomentControl = require("./src/components/MomentControl");
-
-var _MomentPopover = require("./src/components/MomentPopover");
 
 var _MyOrders = require("./src/components/MyOrders");
 

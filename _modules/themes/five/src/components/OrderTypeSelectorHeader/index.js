@@ -11,27 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _reactPopper = require("react-popper");
-
-var _OrderTypeSelectorContent = require("../OrderTypeSelectorContent");
-
-var _GrClose = _interopRequireDefault(require("@meronex/icons/gr/GrClose"));
-
 var _styles = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -48,9 +34,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
   var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _props$afterComponent, _props$afterElements;
 
-  var onClose = props.onClose,
-      orderTypeList = props.orderTypeList;
-  var open = props.open;
+  var orderTypeList = props.orderTypeList;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -65,74 +49,8 @@ var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
       t = _useLanguage2[1];
 
   var referenceElement = (0, _react.useRef)();
-  var popperElement = (0, _react.useRef)();
-  var arrowElement = (0, _react.useRef)();
-  var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
-    placement: 'auto',
-    modifiers: [{
-      name: 'arrow',
-      options: {
-        element: arrowElement.current
-      }
-    }, {
-      name: 'offset',
-      options: {
-        offset: [0, 12]
-      }
-    }]
-  });
-  var styles = popper.styles,
-      attributes = popper.attributes,
-      forceUpdate = popper.forceUpdate;
-  (0, _react.useEffect)(function () {
-    if (orderStatus.loading) return;
-    forceUpdate && forceUpdate();
-  }, [open, orderStatus]);
-
-  var handleClickOutside = function handleClickOutside(e) {
-    var _popperElement$curren, _referenceElement$cur;
-
-    if (!open) return;
-    var outsidePopover = !((_popperElement$curren = popperElement.current) !== null && _popperElement$curren !== void 0 && _popperElement$curren.contains(e.target));
-    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) !== null && _referenceElement$cur !== void 0 && _referenceElement$cur.contains(e.target));
-    var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
-
-    if (outsidePopover && outsidePopoverMenu && outsideModal) {
-      props.onClose && props.onClose();
-    }
-  };
-
-  var handleKeyDown = function handleKeyDown(e) {
-    if (e.keyCode === 27) {
-      props.onClose && props.onClose();
-    }
-  };
-
-  (0, _react.useEffect)(function () {
-    window.addEventListener('mouseup', handleClickOutside);
-    window.addEventListener('keydown', handleKeyDown);
-    return function () {
-      window.removeEventListener('mouseup', handleClickOutside);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [open]);
-
-  var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
-    visibility: open ? 'visible' : 'hidden',
-    width: '450px',
-    maxHeight: '70vh',
-    overflowY: 'auto'
-  });
-
-  if (!open) {
-    popStyle.transform = 'translate3d(0px, 0px, 0px)';
-  }
-
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "order-type",
-    style: {
-      overflow: 'hidden'
-    }
+    className: "order-type"
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -145,18 +63,7 @@ var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
     ref: referenceElement,
     onClick: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) === -1 || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) === 0 ? null : props.onClick,
     isHome: props.isHome
-  }, orderTypeList && orderTypeList[(orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.options.type) - 1] || t('DELIVERY', 'Delivery')), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
-    ref: popperElement,
-    style: popStyle
-  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.CloseBtn, {
-    onClick: onClose
-  }, /*#__PURE__*/_react.default.createElement(_GrClose.default, null)), /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
-    onClose: onClose
-  }), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
-    key: "arrow",
-    ref: arrowElement,
-    style: styles.arrow
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, orderTypeList && orderTypeList[(orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.options.type) - 1] || t('DELIVERY', 'Delivery')), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
