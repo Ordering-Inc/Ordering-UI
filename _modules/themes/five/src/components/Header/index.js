@@ -408,7 +408,7 @@ var Header = function Header(props) {
       return openModal(variant);
     }
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: modalSelected === 'address' ? t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?') : '',
+    title: modalSelected === 'address' ? t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?') : null,
     open: modalIsOpen,
     onClose: function onClose() {
       return setModalIsOpen(false);

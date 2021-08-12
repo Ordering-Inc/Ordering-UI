@@ -63,7 +63,7 @@ const ModalUI = (props) => {
         </ModalIcon>
       )}
       <ModalHeader>
-        {(title || title !== '') && (
+        {title && (
           <ModalTitle>
             {title}
           </ModalTitle>
