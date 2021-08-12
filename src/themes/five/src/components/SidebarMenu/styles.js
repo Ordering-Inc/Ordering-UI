@@ -40,7 +40,6 @@ export const IconContent = styled.button`
   justify-content: center;
 
   &:hover {
-    background-color: ${({ isHome }) => isHome ? 'rgba(255,255,255,0.1)' : 'rgb(255, 255, 255)'};
     box-shadow: transparent 0px 0px 0px 1px inset;
   }
 

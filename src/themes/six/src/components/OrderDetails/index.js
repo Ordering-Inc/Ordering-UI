@@ -8,6 +8,7 @@ import {
   useConfig,
   GoogleMapsMap
 } from 'ordering-components'
+import AiOutlineLeft from '@meronex/icons/ai/AiOutlineLeft'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -18,7 +19,6 @@ import { Button } from '../../../../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Messages } from '../../../../../components/Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
-
 import { Modal } from '../Modal'
 import { ProductShare } from '../ProductShare'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -57,7 +57,10 @@ import {
   RightContentWrapper,
   CustomerInfo,
   ShareOrderWrapper,
-  DashLine
+  DashLine,
+  BackHeader,
+  Logo,
+  LinkText
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -86,6 +89,7 @@ const OrderDetailsUI = (props) => {
   const [openReview, setOpenReview] = useState(false)
   const [isReviewed, setIsReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
+  const [showAction, setShowAction] = useState(false)
   const { order, loading, businessData, error } = props.order
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -167,6 +171,22 @@ const OrderDetailsUI = (props) => {
         {order && Object.keys(order).length > 0 && (
           <WrapperContainer>
             <LeftPanel>
+              <BackHeader>
+                {windowSize.width > 768 && (
+                  <Logo>
+                    <img alt='Isotype' width='35px' height='45px' src={theme?.images?.logos?.isotype} loading='lazy' />
+                  </Logo>
+                )}
+
+                <LinkText onClick={() => handleGoToPage({ page: 'search' })}>
+                  <AiOutlineLeft />
+                  {windowSize.width > 768 && (
+                    <>
+                      {t('BACK_HOME', 'Back to Home')}
+                    </>
+                  )}
+                </LinkText>
+              </BackHeader>
               <LeftContentWrapper className='left-contentwrappre'>
                 <OrderInfo>
                   <OrderData>
@@ -197,23 +217,25 @@ const OrderDetailsUI = (props) => {
                       <p>{order?.business?.email}</p>
                     </BusinessInfo>
                   </BusinessWrapper>
-                  <ActionsBlock>
-                    {order.driver && order.driver.phone &&
-                      <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                        <FiPhone />
-                      </span>}
-                    <span>
-                      <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
-                    </span>
-                    <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                      {order?.unread_count > 0 && unreadAlert.business && (
-                        <ExclamationWrapper>
-                          <AiFillExclamationCircle />
-                        </ExclamationWrapper>
-                      )}
-                      <HiOutlineChat />
-                    </MessagesIcon>
-                  </ActionsBlock>
+                  {showAction && (
+                    <ActionsBlock>
+                      {order.driver && order.driver.phone &&
+                        <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                          <FiPhone />
+                        </span>}
+                      <span>
+                        <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
+                      </span>
+                      <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
+                        {order?.unread_count > 0 && unreadAlert.business && (
+                          <ExclamationWrapper>
+                            <AiFillExclamationCircle />
+                          </ExclamationWrapper>
+                        )}
+                        <HiOutlineChat />
+                      </MessagesIcon>
+                    </ActionsBlock>
+                  )}
                 </OrderBusiness>
                 <SectionTitle>
                   {t('TO', 'To')}
@@ -227,16 +249,18 @@ const OrderDetailsUI = (props) => {
                       <span>{order?.customer?.email}</span>
                     </InfoBlock>
                   </CustomerInfo>
-                  <ShareOrderWrapper>
-                    {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                      <ShareOrder>
-                        <ProductShare
-                          withBtn
-                          defaultUrl={urlToShare(order?.hash_key)}
-                        />
-                      </ShareOrder>
-                    )}
-                  </ShareOrderWrapper>
+                  {showAction && (
+                    <ShareOrderWrapper>
+                      {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                        <ShareOrder>
+                          <ProductShare
+                            withBtn
+                            defaultUrl={urlToShare(order?.hash_key)}
+                          />
+                        </ShareOrder>
+                      )}
+                    </ShareOrderWrapper>
+                  )}
                 </OrderCustomer>
                 {order?.driver && (
                   <>
@@ -295,6 +319,7 @@ const OrderDetailsUI = (props) => {
                         {t('GO_TO_BUSINESSLIST', 'Go to business list')}
                       </Button>
                     )}
+
                     <HeaderInfo className='order-header'>
                       <HeaderText column>
                         <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>

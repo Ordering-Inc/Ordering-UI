@@ -88,13 +88,13 @@ export const ProductItemAccordion = (props) => {
     let _productQuantity = productQuantity
     _productQuantity++
     setProductQuantity(_productQuantity)
-    handleChangeQuantity(productQuantity)
+    handleChangeQuantity(_productQuantity)
   }
   const Decrement = () => {
     let _productQuantity = productQuantity
     _productQuantity--
     setProductQuantity(_productQuantity)
-    handleChangeQuantity(productQuantity)
+    handleChangeQuantity(_productQuantity)
   }
   useEffect(() => {
     if (props?.individualBusinessCart || props?.isOrderPage) {
@@ -242,7 +242,7 @@ export const ProductItemAccordion = (props) => {
                   <div className='incdec-control'>
                     <FiMinusCircle
                       onClick={Decrement}
-                      className={`${product.quantity === 1 ? 'disabled' : ''}`}
+                      className={`${productQuantity <= 1 ? 'disabled' : ''}`}
                     />
                     <span>{productQuantity}</span>
                     <FiPlusCircle

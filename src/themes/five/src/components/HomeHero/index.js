@@ -10,7 +10,7 @@ import {
   WrapInput
 } from './styles'
 
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import { AddressForm } from '../../components/AddressForm'
 import { AddressList } from '../../components/AddressList'
@@ -87,7 +87,7 @@ export const HomeHero = (props) => {
           />
         </Modal>
         <Modal
-          title={t('ADDRESSES', theme?.defaultLanguages?.ADDRESSES || 'Addresses')}
+          title={t('WHERE_DO_WE_DELIVERY', theme?.defaultLanguages?.WHERE_DO_WE_DELIVERY || 'Where do we delivery?')}
           open={modals.listOpen}
           width='70%'
           onClose={() => setModals({ ...modals, listOpen: false })}

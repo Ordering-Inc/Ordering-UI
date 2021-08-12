@@ -81,6 +81,8 @@ import { VerticalOrdersLayout } from './components/VerticalOrdersLayout'
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
+import { useCountdownTimer } from './hooks/useCountdownTimer'
+
 import { Button } from './styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
 import { Select } from './styles/Select'
@@ -93,7 +95,8 @@ import {
   convertHoursToMinutes,
   scrollTo,
   DriverTipsOptions,
-  bytesConverter
+  bytesConverter,
+  formatSeconds
 } from './utils'
 
 export {
@@ -187,6 +190,7 @@ export {
   // Hooks
   useOnlineStatus,
   useWindowSize,
+  useCountdownTimer,
   // Styles
   Button,
   Input,
@@ -207,5 +211,6 @@ export {
   convertHoursToMinutes,
   scrollTo,
   DriverTipsOptions,
-  bytesConverter
+  bytesConverter,
+  formatSeconds
 }

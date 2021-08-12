@@ -6,7 +6,7 @@ import {
   useLanguage,
   useConfig
 } from 'ordering-components'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import {
   BusinessInformationContainer,
   BusinessContent,

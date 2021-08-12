@@ -154,10 +154,8 @@ export const ErrorMsg = styled.span`
 
 export const InputBeforeIconWrapper = styled.div`
   position: absolute;
-  display: flex;
-  align-items: center;
   height: 100%;
-  top: 0;
+  top: 13px;
   left: 100px;
 
   svg {

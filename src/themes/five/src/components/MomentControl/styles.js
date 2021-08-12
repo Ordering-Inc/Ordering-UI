@@ -2,10 +2,18 @@ import styled, { css } from 'styled-components'
 
 export const Title = styled.div`
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 40px;
   color: ${props => props.theme.colors.darkTextColor};
+
+  @media (max-width: 450px) {
+    padding-left: 30px;
+    ${props => props.theme.rtl && css`
+      padding-right: 30px;
+      padding-left: 0;
+    `}
+  }
 `
 
 export const DatePickerWrapper = styled.div`
@@ -24,6 +32,10 @@ export const DatePickerWrapper = styled.div`
     outline: none;
   }
 
+  .react-datepicker {
+    border: 1px solid #E9ECEF;
+  }
+
   .react-datepicker__triangle {
     display: none;
   }
@@ -37,6 +49,15 @@ export const DatePickerWrapper = styled.div`
     background-color: ${props => props.theme.colors.primaryContrast};
     color: ${props => props.theme.colors.darkTextColor};
     border-radius: 50%;
+  }
+
+  .react-datepicker__input-container {
+    text-align: center;
+  }
+
+  .react-datepicker__header {
+    border: none;
+    background-color: white;
   }
 `
 

@@ -9,10 +9,15 @@ import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 
-import { useEvent, useLanguage, useOrder } from 'ordering-components'
+import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { LogoutButton } from '../../../../../components/LogoutButton'
+import { Modal } from '../Modal'
+import { SignUpForm } from '../SignUpForm'
+import { LoginForm } from '../LoginForm'
+import { ForgotPasswordForm } from '../ForgotPasswordForm'
 
 import {
   Container,
@@ -29,13 +34,34 @@ import {
 
 export const SidebarMenu = (props) => {
   const { auth, isHideSignup, userCustomer, isCustomerMode } = props
+  const [{ login }] = useSession()
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
+  const theme = useTheme()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+    setModalPageToShow(null)
+    actionSidebar(false)
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      closeModal()
+    }
+  }
+
+  const handleOpenLoginSignUp = (index) => {
+    setModalPageToShow(index)
+    setModalIsOpen(true)
+  }
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
@@ -48,6 +74,19 @@ export const SidebarMenu = (props) => {
     document.getElementById('sidebar_menu').style.width = value
       ? width > 489 ? '340px' : '100vw'
       : '0'
+  }
+
+  const handleCustomModalClick = (e, { page }) => {
+    e.preventDefault()
+    setModalPageToShow(page)
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+    closeModal()
   }
 
   useEffect(() => {
@@ -231,25 +270,19 @@ export const SidebarMenu = (props) => {
             <>
               <MenuLink
                 isHome={isHome}
-                onClick={() => handleGoToPage({ page: 'signin' })}
+                onClick={() => handleOpenLoginSignUp('login')}
               >
                 <WrappContent>
                   <MenuLinkIcon
                     isHome={isHome}
-                    active={
-                      window.location.pathname === '/signin' ||
-                      window.location.pathname === '/login'
-                    }
+                    active={modalPageToShow === 'login'}
                   >
                     <AiOutlineLogin />
                   </MenuLinkIcon>
                   <MenuLinkText>
                     <TextInfo
                       isHome={isHome}
-                      active={
-                        window.location.pathname === '/signin' ||
-                        window.location.pathname === '/login'
-                      }
+                      active={modalPageToShow === 'login'}
                     >
                       {t('SIGN_IN', 'Sign in')}
                     </TextInfo>
@@ -264,23 +297,19 @@ export const SidebarMenu = (props) => {
               {!isHideSignup && (
                 <MenuLink
                   isHome={isHome}
-                  onClick={() => handleGoToPage({ page: 'signup' })}
+                  onClick={() => handleOpenLoginSignUp('signup')}
                 >
                   <WrappContent>
                     <MenuLinkIcon
                       isHome={isHome}
-                      active={
-                        window.location.pathname === '/signup'
-                      }
+                      active={modalPageToShow === 'signup'}
                     >
                       <AiOutlineUserAdd />
                     </MenuLinkIcon>
                     <MenuLinkText>
                       <TextInfo
                         isHome={isHome}
-                        active={
-                          window.location.pathname === '/signup'
-                        }
+                        active={modalPageToShow === 'signup'}
                       >
                         {t('SIGNUP', 'Sign up')}
                       </TextInfo>
@@ -296,6 +325,66 @@ export const SidebarMenu = (props) => {
             </>
           )}
         </SidebarContent>
+        {modalIsOpen && !auth && (
+          <Modal
+            open={modalIsOpen}
+            onClose={() => closeModal()}
+            width='50%'
+          >
+            {modalPageToShow === 'login' && (
+              <LoginForm
+                handleSuccessLogin={handleSuccessLogin}
+                elementLinkToSignup={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'signup' })
+                    } href='#'
+                  >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+                  </a>
+                }
+                elementLinkToForgotPassword={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                    } href='#'
+                  >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+                  </a>
+                }
+                useLoginByCellphone
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'signup' && (
+              <SignUpForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                  </a>
+                }
+                useLoginByCellphone
+                useChekoutFileds
+                handleSuccessSignup={handleSuccessSignup}
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'forgotpassword' && (
+              <ForgotPasswordForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                  </a>
+                }
+                isPopup
+              />
+            )}
+          </Modal>
+        )}
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
