@@ -17,7 +17,7 @@ var _Select = require("../../styles/Select");
 
 var _orderingComponents = require("ordering-components");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _PaymentOptionCash = require("../PaymentOptionCash");
 

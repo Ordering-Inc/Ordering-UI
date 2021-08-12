@@ -33,7 +33,7 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _AddressForm = require("../AddressForm");
 
@@ -269,7 +269,7 @@ var AddressListUI = function AddressListUI(props) {
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup
   }), !isPopover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS', 'Address'),
+    title: t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?'),
     open: !isPopover && addressOpen,
     onClose: function onClose() {
       return setAddressOpen(false);

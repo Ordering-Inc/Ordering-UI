@@ -150,14 +150,14 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     var _productQuantity = productQuantity;
     _productQuantity++;
     setProductQuantity(_productQuantity);
-    handleChangeQuantity(productQuantity);
+    handleChangeQuantity(_productQuantity);
   };
 
   var Decrement = function Decrement() {
     var _productQuantity = productQuantity;
     _productQuantity--;
     setProductQuantity(_productQuantity);
-    handleChangeQuantity(productQuantity);
+    handleChangeQuantity(_productQuantity);
   };
 
   (0, _react.useEffect)(function () {
@@ -250,7 +250,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     className: "incdec-control"
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: Decrement,
-    className: "".concat(product.quantity === 1 ? 'disabled' : '')
+    className: "".concat(productQuantity <= 1 ? 'disabled' : '')
   }), /*#__PURE__*/_react.default.createElement("span", null, productQuantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: Increment,
     className: "".concat(getProductMax(product) <= 0 || product.quantity >= getProductMax(product) ? 'disabled' : '')

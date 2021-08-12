@@ -35,7 +35,7 @@ var _ProductForm = require("../ProductForm");
 
 var _FloatingButton = require("../../../../../components/FloatingButton");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _UpsellingPage = require("../../../../../components/UpsellingPage");
 
@@ -379,7 +379,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     },
     disabled: openUpselling || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100)
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "50%",
+    width: "40%",
     open: openProduct,
     closeOnBackdrop: true,
     onClose: function onClose() {

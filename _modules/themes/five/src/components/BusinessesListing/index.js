@@ -19,7 +19,7 @@ var _Buttons = require("../../styles/Buttons");
 
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _Confirm = require("../../../../../components/Confirm");
 

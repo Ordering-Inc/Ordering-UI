@@ -19,6 +19,8 @@ var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCirc
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
+var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
+
 var _OrderTypeSelectorContent = require("../OrderTypeSelectorContent");
 
 var _styles = require("./styles");
@@ -27,15 +29,9 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
 var _useOnlineStatus = require("../../../../../hooks/useOnlineStatus");
 
-var _utils = require("../../../../../utils");
-
 var _LanguageSelector = require("../../../../../components/LanguageSelector");
 
-var _AddressesPopover = require("../AddressesPopover");
-
 var _UserPopover = require("../UserPopover");
-
-var _MomentPopover = require("../MomentPopover");
 
 var _CartPopover = require("../CartPopover");
 
@@ -43,7 +39,7 @@ var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
 
 var _CartContent = require("../CartContent");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _MomentContent = require("../MomentContent");
 
@@ -58,6 +54,12 @@ var _SidebarMenu = require("../SidebarMenu");
 var _UserDetails = require("../../../../../components/UserDetails");
 
 var _Confirm = require("../../../../../components/Confirm");
+
+var _LoginForm = require("../LoginForm");
+
+var _SignUpForm = require("../SignUpForm");
+
+var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -86,7 +88,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options2, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options4$2, _orderState$options4$3, _orderState$options5, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
+  var _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options2, _orderState$options2$, _orderState$options2$2, _orderState$options2$3, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderState$options3, _orderState$options4, _configState$configs4, _configState$configs5, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options5, _orderState$options5$, _orderState$options5$2, _orderState$options5$3, _orderState$options6, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options7$, _orderState$options7$2, _orderState$options7$3, _orderState$options8, _configState$configs10, _configState$configs11, _configState$configs12, _configState$configs13, _orderState$options9, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
@@ -94,21 +96,24 @@ var Header = function Header(props) {
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
       isCustomerMode = props.isCustomerMode;
-
-  var _useLocation = (0, _reactRouterDom.useLocation)(),
-      pathname = _useLocation.pathname;
+  var location1 = (0, _reactRouterDom.useLocation)();
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
+
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parseDate = _useUtils2[0].parseDate;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
+      _useSession2 = _slicedToArray(_useSession, 2),
+      auth = _useSession2[0].auth,
+      login = _useSession2[1].login;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 2),
@@ -143,19 +148,29 @@ var Header = function Header(props) {
       customerModalOpen = _useState6[0],
       setCustomerModalOpen = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(null),
+  var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      modalSelected = _useState8[0],
-      setModalSelected = _useState8[1];
+      authModalOpen = _useState8[0],
+      setAuthModalOpen = _useState8[1];
 
-  var _useState9 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      modalSelected = _useState10[0],
+      setModalSelected = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      modalPageToShow = _useState12[0],
+      setModalPageToShow = _useState12[1];
+
+  var _useState13 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      confirm = _useState10[0],
-      setConfirm = _useState10[1];
+      _useState14 = _slicedToArray(_useState13, 2),
+      confirm = _useState14[0],
+      setConfirm = _useState14[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
@@ -165,10 +180,16 @@ var Header = function Header(props) {
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
-  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
-    return Number(value);
-  })) || [];
   var orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')];
+
+  var handleSuccessSignup = function handleSuccessSignup(user) {
+    var _user$session;
+
+    login({
+      user: user,
+      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+    });
+  };
 
   var handleClickUserCustomer = function handleClickUserCustomer(e) {
     var _clearCustomer$curren;
@@ -220,10 +241,32 @@ var Header = function Header(props) {
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
 
-    if (isCustomerMode && pathname.includes('/orders')) {
+    if (isCustomerMode && location1.pathname.includes('/orders')) {
       deleteUserCustomer(true);
       refreshOrderOptions();
     }
+  };
+
+  var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
+    var page = _ref.page;
+    e.preventDefault();
+    setModalPageToShow(page);
+  };
+
+  var closeAuthModal = function closeAuthModal() {
+    setAuthModalOpen(false);
+    setModalPageToShow(null);
+  };
+
+  var handleSuccessLogin = function handleSuccessLogin(user) {
+    if (user) {
+      closeAuthModal();
+    }
+  };
+
+  var handleOpenLoginSignUp = function handleOpenLoginSignUp(index) {
+    setModalPageToShow(index);
+    setAuthModalOpen(true);
   };
 
   (0, _react.useEffect)(function () {
@@ -281,35 +324,20 @@ var Header = function Header(props) {
     ref: clearCustomer
   }, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     style: styles.clearCustomer
-  }))), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
-    auth: auth,
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address,
-    open: openPopover.addresses,
+  }))), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
-      return handleTogglePopover('addresses');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('addresses');
-    },
-    isCustomerMode: isCustomerMode
-  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
-    open: openPopover.moment,
-    onClick: function onClick() {
-      return handleTogglePopover('moment');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('moment');
+      return openModal('address');
     }
-  })), windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
-    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
-    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1,
-    open: openPopover.type,
+  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : (_orderState$options2$2 = _orderState$options2$.address) === null || _orderState$options2$2 === void 0 ? void 0 : (_orderState$options2$3 = _orderState$options2$2.split(',')) === null || _orderState$options2$3 === void 0 ? void 0 : _orderState$options2$3[0]) || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MomentMenu, {
+    onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.max_days_preorder) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === 0 ? null : function () {
+      return openModal('moment');
+    }
+  }, /*#__PURE__*/_react.default.createElement("div", null, (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && _orderState$options3.moment ? parseDate((_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.moment, {
+    outputFormat: configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.dates_moment_format) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value
+  }) : t('ASAP_ABBREVIATION', 'ASAP')))), windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     orderTypeList: orderTypeList,
     onClick: function onClick() {
-      return handleTogglePopover('type');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('type');
+      return openModal('delivery');
     }
   }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "delivery",
@@ -319,19 +347,15 @@ var Header = function Header(props) {
     orderTypeList: orderTypeList
   })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 870 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
-      return handleGoToPage({
-        page: 'signin'
-      });
+      return handleOpenLoginSignUp('login');
     },
-    highlight: location.pathname === '/signin',
+    highlight: modalPageToShow === 'login',
     name: "signin"
   }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN) || 'Login')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
-      return handleGoToPage({
-        page: 'signup'
-      });
+      return handleOpenLoginSignUp('signup');
     },
-    highlight: location.pathname === '/signup' || location.pathname === '/',
+    highlight: modalPageToShow === 'signup',
     name: "signup"
   }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
@@ -361,44 +385,35 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
-    auth: auth,
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address,
-    open: openPopover.addresses,
+  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
-      return handleTogglePopover('addresses');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('addresses');
+      return openModal('address');
     }
-  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
-    open: openPopover.moment,
-    onClick: function onClick() {
-      return handleTogglePopover('moment');
-    },
-    onClose: function onClose() {
-      return handleClosePopover('moment');
+  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : (_orderState$options5$2 = _orderState$options5$.address) === null || _orderState$options5$2 === void 0 ? void 0 : (_orderState$options5$3 = _orderState$options5$2.split(',')) === null || _orderState$options5$3 === void 0 ? void 0 : _orderState$options5$3[0]) || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+    variant: "moment",
+    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.moment,
+    onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.max_days_preorder) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.max_days_preorder) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === 0 ? null : function (variant) {
+      return openModal(variant);
     }
   })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : (_orderState$options4$2 = _orderState$options4$.address) === null || _orderState$options4$2 === void 0 ? void 0 : (_orderState$options4$3 = _orderState$options4$2.split(',')) === null || _orderState$options4$3 === void 0 ? void 0 : _orderState$options4$3[0],
+    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : (_orderState$options7$2 = _orderState$options7$.address) === null || _orderState$options7$2 === void 0 ? void 0 : (_orderState$options7$3 = _orderState$options7$2.split(',')) === null || _orderState$options7$3 === void 0 ? void 0 : _orderState$options7$3[0],
     onClick: function onClick(variant) {
       return openModal(variant);
     }
   }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.moment,
-    onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function (variant) {
+    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.moment,
+    onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 ? void 0 : (_configState$configs11 = _configState$configs10.max_days_preorder) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.max_days_preorder) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t(modalSelected.toUpperCase(), (0, _utils.capitalize)(modalSelected)),
+    title: modalSelected === 'address' ? t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?') : null,
     open: modalIsOpen,
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    width: "70%",
-    padding: modalSelected === 'address' ? '20px' : '5px'
+    width: "50%"
   }, modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
     carts: cartsWithProducts,
     isOrderStateCarts: !!orderState.carts,
@@ -417,7 +432,7 @@ var Header = function Header(props) {
     }
   }) : /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },
@@ -444,10 +459,59 @@ var Header = function Header(props) {
     changeOrderAddressWithDefault: true,
     userCustomerSetup: customerState.user,
     setCustomerModalOpen: setCustomerModalOpen
-  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CUSTOMER) || 'Customer'),
+  })))), authModalOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: authModalOpen,
+    onClose: function onClose() {
+      return closeAuthModal();
+    },
+    width: "50%"
+  }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+    handleSuccessLogin: handleSuccessLogin,
+    elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'signup'
+        });
+      },
+      href: "#"
+    }, t('CREATE_ACCOUNT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CREATE_ACCOUNT) || 'Create account')),
+    elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'forgotpassword'
+        });
+      },
+      href: "#"
+    }, t('RESET_PASSWORD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.RESET_PASSWORD) || 'Reset password')),
+    useLoginByCellphone: true,
+    isPopup: true
+  }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.LOGIN) || 'Login')),
+    useLoginByCellphone: true,
+    useChekoutFileds: true,
+    handleSuccessSignup: handleSuccessSignup,
+    isPopup: true
+  }), modalPageToShow === 'forgotpassword' && /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.LOGIN) || 'Login')),
+    isPopup: true
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.CUSTOMER) || 'Customer'),
     content: confirm.content,
-    acceptText: t('ACCEPT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.ACCEPT) || 'Accept'),
+    acceptText: t('ACCEPT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.ACCEPT) || 'Accept'),
     open: isCustomerMode && confirm.open,
     onClose: function onClose() {
       return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {

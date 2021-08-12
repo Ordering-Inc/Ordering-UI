@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DashLine = exports.ExclamationWrapper = exports.MessagesIcon = exports.ShareOrder = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.FootActions = exports.ReviewsAction = exports.OrderBill = exports.OrderProducts = exports.WrapperDriver = exports.OrderDriver = exports.Map = exports.InfoBlock = exports.PhotoBlock = exports.ShareOrderWrapper = exports.CustomerInfo = exports.OrderCustomer = exports.SectionTitle = exports.StatusImage = exports.OrderStatus = exports.StatusBar = exports.OrderData = exports.OrderInfo = exports.ActionsBlock = exports.BusinessInfo = exports.BusinessLogo = exports.LogoWrapper = exports.BusinessWrapper = exports.OrderBusiness = exports.Content = exports.HeaderText = exports.HeaderInfo = exports.Header = exports.RightContentWrapper = exports.LeftContentWrapper = exports.RightPanel = exports.LeftPanel = exports.WrapperContainer = exports.Container = void 0;
+exports.LinkText = exports.Logo = exports.BackHeader = exports.DashLine = exports.ExclamationWrapper = exports.MessagesIcon = exports.ShareOrder = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.FootActions = exports.ReviewsAction = exports.OrderBill = exports.OrderProducts = exports.WrapperDriver = exports.OrderDriver = exports.Map = exports.InfoBlock = exports.PhotoBlock = exports.ShareOrderWrapper = exports.CustomerInfo = exports.OrderCustomer = exports.SectionTitle = exports.StatusImage = exports.OrderStatus = exports.StatusBar = exports.OrderData = exports.OrderInfo = exports.ActionsBlock = exports.BusinessInfo = exports.BusinessLogo = exports.LogoWrapper = exports.BusinessWrapper = exports.OrderBusiness = exports.Content = exports.HeaderText = exports.HeaderInfo = exports.Header = exports.RightContentWrapper = exports.LeftContentWrapper = exports.RightPanel = exports.LeftPanel = exports.WrapperContainer = exports.Container = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n"])));
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999;\n  height: 100vh;\n  overflow-y: scroll;\n"])));
 
 exports.Container = Container;
 
@@ -31,13 +31,13 @@ var WrapperContainer = _styledComponents.default.div(_templateObject2 || (_templ
 
 exports.WrapperContainer = WrapperContainer;
 
-var LeftPanel = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  padding: 5%;\n  display: flex;\n  align-items: center;\n  padding-top: 25px;\n  @media (min-width: 1024px) {\n    width: 40vw;\n    padding: 0 50px;\n    border-right: 1px solid ", ";\n    max-height: calc(100vh - 75px);\n    overflow-y: auto;\n  }\n"])), function (props) {
+var LeftPanel = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  padding: 5%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  padding-top: 25px;\n  position: relative;\n  background-color: #fff;\n    @media (min-width: 1024px) {\n    width: 40vw;\n    height: 100vh;\n    padding: 0 50px;\n    border-right: 1px solid ", ";\n    overflow-y: auto;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 
 exports.LeftPanel = LeftPanel;
 
-var RightPanel = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  padding: 5%;\n  box-sizing: border-box;\n  background-color: ", ";\n  margin-top: 1.5px;\n  margin-bottom: 1.5px;\n  @media (min-width: 1024px) {\n    width: 60vw;\n    padding: 0 100px;\n    max-height: calc(100vh - 65px);\n    overflow-y: auto;\n  }\n"])), function (props) {
+var RightPanel = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  padding: 5%;\n  box-sizing: border-box;\n  background-color: ", ";\n  @media (min-width: 1024px) {\n    width: 60vw;\n    height: 100vh;\n    padding: 0 100px;\n    overflow-y: auto;\n  }\n"])), function (props) {
   return props.theme.colors.secundaryBackground;
 });
 
@@ -47,7 +47,7 @@ var LeftContentWrapper = _styledComponents.default.div(_templateObject5 || (_tem
 
 exports.LeftContentWrapper = LeftContentWrapper;
 
-var RightContentWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0 auto;\n  height: fit-content;\n"])));
+var RightContentWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0 auto;\n  height: fit-content;\n  padding-top: 20px;\n"])));
 
 exports.RightContentWrapper = RightContentWrapper;
 
@@ -184,10 +184,10 @@ var WrapperDriver = _styledComponents.default.div(_templateObject35 || (_templat
 });
 
 exports.WrapperDriver = WrapperDriver;
-var OrderProducts = (0, _styledComponents.default)(OrderCustomer)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  width: 100%;\n  margin: 0 auto;\n  overflow: hidden;\n  margin-top: 30px;\n  box-sizing: border-box;\n  @media (min-width: 1024px) {\n    margin-top: 45px;\n  }\n  div:last-child {\n    border-bottom: none;\n  }\n"])));
+var OrderProducts = (0, _styledComponents.default)(OrderCustomer)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  width: 100%;\n  margin: 0 auto;\n  overflow: hidden;\n  margin-top: 30px;\n  box-sizing: border-box;\n  padding: 2px;\n  @media (min-width: 1024px) {\n    margin-top: 45px;\n  }\n  div:last-child {\n    border-bottom: none;\n  }\n"])));
 exports.OrderProducts = OrderProducts;
 
-var OrderBill = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n  border-radius: 7.6px;\n  overflow: hidden;\n  padding: 20px;\n  margin-top: 25px;\n  margin-bottom:20px;\n  background-color: #fff;\n  @media (min-width: 1024px) {\n    margin-top: 45px;\n    margin-bottom: 30px;\n  }\n  table {\n    width: 100%;\n    font-size: 16px;\n    line-height: 19px;\n    tr{\n      display: flex;\n      margin-bottom: 10px;\n    }\n    tr td:nth-child(1),\n    tr td:nth-child(3) {\n      width: fit-content;\n      white-space: nowrap;\n    }\n\n    tr td:nth-child(2) {\n      flex-grow: 1;\n      padding: 0 15px;\n    }\n\n    tr td:nth-child(3) {\n      font-weight: bold;\n    }\n\n    \n  }\n  table.total {\n    padding-top: 10px;\n    font-size: 24px;\n    line-height: 29px;\n    tr {\n      td {\n        font-weight: bold;\n      }\n    }\n  }\n"])));
+var OrderBill = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n  border-radius: 7.6px;\n  overflow: hidden;\n  padding: 20px;\n  margin-top: 25px;\n  margin-bottom:20px;\n  background-color: #fff;\n  margin: 2px;\n  @media (min-width: 1024px) {\n    margin-top: 45px;\n    margin-bottom: 30px;\n  }\n  table {\n    width: 100%;\n    font-size: 16px;\n    line-height: 19px;\n    tr{\n      display: flex;\n      margin-bottom: 10px;\n    }\n    tr td:nth-child(1),\n    tr td:nth-child(3) {\n      width: fit-content;\n      white-space: nowrap;\n    }\n\n    tr td:nth-child(2) {\n      flex-grow: 1;\n      padding: 0 15px;\n    }\n\n    tr td:nth-child(3) {\n      font-weight: bold;\n    }\n\n    \n  }\n  table.total {\n    padding-top: 10px;\n    font-size: 24px;\n    line-height: 29px;\n    tr {\n      td {\n        font-weight: bold;\n      }\n    }\n  }\n"])));
 
 exports.OrderBill = OrderBill;
 
@@ -235,3 +235,19 @@ var DashLine = _styledComponents.default.span(_templateObject46 || (_templateObj
 });
 
 exports.DashLine = DashLine;
+
+var BackHeader = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n\n  @media (min-width: 1024px) {\n    margin-top: 25px;\n    margin-left: -20px;\n\n    ", "\n  }\n"])), function (props) {
+  var _props$theme6;
+
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n      left: unset;\n      right: 0;\n    "])));
+});
+
+exports.BackHeader = BackHeader;
+
+var Logo = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  margin: 0px 5px;\n"])));
+
+exports.Logo = Logo;
+
+var LinkText = _styledComponents.default.p(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  svg {\n    margin: 0 5px;\n  }\n"])));
+
+exports.LinkText = LinkText;

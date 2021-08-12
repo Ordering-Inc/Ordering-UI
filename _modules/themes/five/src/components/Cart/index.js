@@ -21,11 +21,11 @@ var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _Confirm = require("../../../../../components/Confirm");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _CouponControl = require("../../../../../components/CouponControl");
 
-var _ProductForm = require("../../../../../components/ProductForm");
+var _ProductForm = require("../ProductForm");
 
 var _UpsellingPage = require("../UpsellingPage");
 
@@ -302,7 +302,7 @@ var CartUI = function CartUI(props) {
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
+    width: "40%",
     open: openProduct,
     padding: "0",
     closeOnBackdrop: true,

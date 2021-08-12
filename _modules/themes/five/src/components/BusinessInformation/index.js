@@ -13,7 +13,7 @@ var _utils = require("../../../../../utils");
 
 var _orderingComponents = require("ordering-components");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _styles = require("./styles");
 

@@ -118,7 +118,7 @@ var TogglePassword = _styledComponents.default.span(_templateObject17 || (_templ
 
 exports.TogglePassword = TogglePassword;
 
-var WrapperPassword = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  position: relative;\n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px;\n  }\n"])));
+var WrapperPassword = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  position: relative;\n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px;\n  }\n  .reveal::-ms-reveal {\n      display: none;\n  }\n"])));
 
 exports.WrapperPassword = WrapperPassword;
 
