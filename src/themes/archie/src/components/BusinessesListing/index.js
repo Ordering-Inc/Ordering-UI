@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import FiMap from '@meronex/icons/fi/FiMap'
+import { useTheme } from 'styled-components'
 import {
   BusinessContainer,
   BusinessList,
   ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
-  PreviousButtonWrapper
+  PreviousButtonWrapper,
+  Banner
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -16,12 +18,12 @@ import { Modal } from '../../../../../components/Modal'
 import { Alert } from '../../../../../components/Confirm'
 import { AddressForm } from '../../../../../components/AddressForm'
 import { AddressList } from '../../../../../components/AddressList'
-import { SearchBar } from '../../../../../components/SearchBar'
-
 import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
-import { BusinessController } from '../BusinessController'
 import { OrdersOption } from '../../../../../components/OrdersOption'
 import { BusinessesMap } from '../../../../../components/BusinessesMap'
+
+import { BusinessController } from '../BusinessController'
+import { SearchBar } from '../SearchBar'
 import { useLocation, useHistory } from 'react-router-dom'
 
 import {
@@ -51,12 +53,14 @@ const BusinessesListingUI = (props) => {
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
+  const theme = useTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
   const [mapErrors, setMapErrors] = useState('')
   const [prevPage, setPrevPage] = useState({ page: currentPageParam || 1, loading: false })
   const [nextPage, setNextPage] = useState({ page: currentPageParam || 1, loading: false })
+  const [categoryShow] = useState(false)
   const location = useLocation()
   const history = useHistory()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
@@ -169,26 +173,23 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
-          <BusinessTypeFilter
-            images={props.images}
-            businessTypes={props.businessTypes}
-            defaultBusinessType={props.defaultBusinessType}
-            handleChangeBusinessType={changeBusinessType}
-          />
+        {categoryShow && (
+          <>
+            {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
+              <BusinessTypeFilter
+                images={props.images}
+                businessTypes={props.businessTypes}
+                defaultBusinessType={props.defaultBusinessType}
+                handleChangeBusinessType={changeBusinessType}
+              />
+            )}
+          </>
         )}
-        <WrapperSearch isCustomLayout={isCustomLayout}>
-          <SearchBar
-            lazyLoad
-            search={searchValue}
-            isCustomLayout={isCustomLayout}
-            placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-            onSearch={handleChangeSearch}
-          />
-          {isCustomLayout && (
-            <FiMap onClick={toggleMap} />
+        <Banner bgimage={theme.images?.general?.businessListBaner}>
+          {!(theme.images?.general?.businessListBaner) && (
+            <p>1440px X  539px banner image</p>
           )}
-        </WrapperSearch>
+        </Banner>
 
         {activeMap && (
           <BusinessesMap
@@ -198,48 +199,24 @@ const BusinessesListingUI = (props) => {
           />
         )}
 
-        {isCustomLayout && onRedirectPage && (
-          <>
-            <OrdersOption
-              horizontal
-              isBusinessesPage
-              onRedirectPage={onRedirectPage}
-              titleContent={t('CARTS', 'Carts')}
-              businessesIds={businessesIds}
-              customArray={
-                getCustomArray(orderState.carts)?.filter(cart => cart.products.length > 0)
-              }
-              isCustomLayout
-              isBusinessesLoading={businessesList.loading}
-            />
-            <OrdersOption
-              horizontal
-              asDashboard
-              isBusinessesPage
-              businessesIds={businessesIds}
-              onRedirectPage={onRedirectPage}
-              userCustomerId={userCustomer?.id}
-              isCustomLayout
-              isBusinessesLoading={businessesList.loading}
-            />
-          </>
-        )}
-
-        {isCustomLayout && businessesList?.businesses?.length > 0 && (
-          <BusinessesTitle>
-            {t('BUSINESSES', 'Businesses')}
-          </BusinessesTitle>
-        )}
-        {
-          <PreviousButtonWrapper>
-            {paginationProps.currentPage !== 1 && prevPage.page !== 1 && (
-              <Button onClick={() => handleClickPrevItems()} color='primary'>
-                {t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses...')}
-              </Button>
-            )}
-          </PreviousButtonWrapper>
-        }
         <BusinessList>
+          <WrapperSearch isCustomLayout={isCustomLayout}>
+            <SearchBar
+              lazyLoad
+              search={searchValue}
+              isCustomLayout={isCustomLayout}
+              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+              onSearch={handleChangeSearch}
+            />
+            {isCustomLayout && (
+              <FiMap onClick={toggleMap} />
+            )}
+          </WrapperSearch>
+          {businessesList?.businesses?.length > 0 && (
+            <BusinessesTitle>
+              {t('FEATURES_BUSINESS', 'Features Businesses')}
+            </BusinessesTitle>
+          )}
           {businessesList.loading && prevPage.loading && (
             [...Array(paginationProps.pageSize).keys()].map(i => (
               <BusinessController

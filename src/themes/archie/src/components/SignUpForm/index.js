@@ -15,10 +15,8 @@ import {
 import {
   SignUpContainer,
   FormSide,
-  HeroSide,
   FormInput,
   SocialButtons,
-  TitleHeroSide,
   RedirectLink,
   SkeletonWrapper,
   SkeletonSocialWrapper,
@@ -33,12 +31,9 @@ import {
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-
 import { FacebookLoginButton } from '../../../../../components/FacebookLogin'
 import { GoogleLoginButton } from '../../../../../components/GoogleLogin'
 import { AppleLogin } from '../../../../../components/AppleLogin'
-import { useTheme } from 'styled-components'
-
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 import { sortInputFields } from '../../../../../utils'
@@ -69,7 +64,6 @@ const SignUpFormUI = (props) => {
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
-  const theme = useTheme()
   const emailInput = useRef(null)
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')

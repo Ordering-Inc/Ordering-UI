@@ -29,42 +29,6 @@ const Side = styled.div`
   display: flex;
   width: 100%;
 `
-export const HeroSide = styled(Side)`
-  display: none;
-
-  @media (min-width: 992px) {
-    width: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: ${props => props.theme.colors.primaryContrast};
-    background-color:  ${props => props.theme.colors.primary};
-  }
-`
-
-export const TitleHeroSide = styled.div`
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-  h1 {
-    font-size: 50px;
-  }
-
-  h1,
-  p {
-    margin: 0px;
-    color: ${props => props.theme.colors.colorTextSignForm};
-  }
-  
-  button {
-    margin-top: 15%;
-    padding: 1% 20%;
-    border-color: ${props => props.theme.colors.colorTextSignForm};
-  }
-`
 
 export const FormSide = styled(Side)`
   flex-direction: column;

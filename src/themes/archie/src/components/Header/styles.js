@@ -33,21 +33,22 @@ export const InnerHeader = styled.div`
 
 export const LogoHeader = styled.div`
   cursor: pointer;
-
   img {
     width: 35px;
-    height: 45px;
     margin: 0;
     vertical-align: middle;
-    margin-left: 10px;
-
-    ${props => props.theme?.rtl && css`
-      margin-right: 10px;
-      margin-left: 0;
-    `}
-
     @media (min-width: 768px) {
       width: 150px;
+      height: 45px;
+      margin-top: 10px;
+    }
+    @media (min-width: 1024px) {
+      width: 180px;
+      height: auto;
+    }
+    @media (min-width: 1200px) {
+      width: 200px;
+      height: auto;
     }
   }
 

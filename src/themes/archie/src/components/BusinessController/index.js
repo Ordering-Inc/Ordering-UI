@@ -21,7 +21,9 @@ import {
   Categories,
   Medadata,
   CallCenterInformation,
-  CallCenterInformationBullet
+  CallCenterInformationBullet,
+  BuinessMeta,
+  MetaItem
 } from './styles'
 import GrClock from '@meronex/icons/gr/GrClock'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
@@ -30,6 +32,7 @@ import GrStar from '@meronex/icons/gr/GrStar'
 import FaCrown from '@meronex/icons/fa/FaCrown'
 import BiCar from '@meronex/icons/bi/BiCar'
 import BiBasket from '@meronex/icons/bi/BiBasket'
+import { Button } from '../../styles/Buttons'
 
 const BusinessControllerUI = (props) => {
   const {
@@ -44,6 +47,9 @@ const BusinessControllerUI = (props) => {
     businessWillCloseSoonMinutes,
     isBusinessClose
   } = props
+
+  console.log('business')
+  console.log(business)
 
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -75,7 +81,7 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton}>
+      <ContainerCard isSkeleton={isSkeleton} className='test-mark'>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}>
           <BusinessHero>
             {isSkeleton ? (
@@ -102,13 +108,6 @@ const BusinessControllerUI = (props) => {
             )}
           </BusinessHero>
           <BusinessContent>
-            <WrapperBusinessLogo isSkeleton={isSkeleton}>
-              {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
-                <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-              ) : (
-                <Skeleton height={70} width={70} />
-              )}
-            </WrapperBusinessLogo>
             <BusinessInfo className='info'>
               <BusinessInfoItem>
                 <div>
@@ -126,63 +125,42 @@ const BusinessControllerUI = (props) => {
                     business?.reviews?.total !== 0 && <Skeleton width={50} />
                   )}
                 </div>
-                {!isShowCallcenterInformation && (
-                  <Categories>
-                    {
-                      Object.keys(business).length > 0 ? (
-                        businessType()
-                      ) : (
-                        <Skeleton width={100} />
-                      )
-                    }
-                  </Categories>
-                )}
-                <Medadata isCustomerMode={isShowCallcenterInformation}>
-                  {Object.keys(business).length > 0 ? (
-                    <p className='bullet'>
-                      <GrClock />
-                      {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {business?.distance >= 0 ? (
-                    <p className='bullet'>
-                      <GrLocation />
-                      {parseDistance(business?.distance)}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {orderType === 1 && (
-                    <>
-                      {business?.delivery_price >= 0 ? (
-                        <p>
-                          <GrDeliver />
+                {(
+                  <BuinessMeta>
+                    {business?.delivery_price >= 0 ? (
+                      <>
+                        <MetaItem>
+                          {t('DELIVERY_PRICE', 'Delivery Price')}{' '}
                           {business && parsePrice(business?.delivery_price)}
-                        </p>
-                      ) : (
-                        <Skeleton width={70} />
-                      )}
-                    </>
-                  )}
-                  {isShowCallcenterInformation && (
-                    <CallCenterInformation>
-                      <CallCenterInformationBullet bgcolor='green'>
-                        <BiCar />
-                        {business?.available_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='red'>
-                        <BiCar />
-                        {business?.busy_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
-                        <BiBasket />
-                        {business?.active_orders?.length}
-                      </CallCenterInformationBullet>
-                    </CallCenterInformation>
-                  )}
-                </Medadata>
+                        </MetaItem>
+                        {' ◦ '}
+                      </>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+                    {Object.keys(business).length > 0 ? (
+                      <MetaItem>
+                        {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
+                      </MetaItem>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+                    {business?.distance >= 0 ? (
+                      <>
+                        {' ◦ '}
+                        <MetaItem>
+                          {parseDistance(business?.distance)}
+                        </MetaItem>
+                      </>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+
+                  </BuinessMeta>
+                )}
+                <Button outline color='primary'>
+                  Go to Store
+                </Button>
               </BusinessInfoItem>
             </BusinessInfo>
           </BusinessContent>
