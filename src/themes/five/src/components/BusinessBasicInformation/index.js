@@ -4,7 +4,7 @@ import FaStar from '@meronex/icons/fa/FaStar'
 import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
 import { useTheme } from 'styled-components'
 
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 import { SearchBar } from '../SearchBar'
 import { BusinessReviews } from '../BusinessReviews'

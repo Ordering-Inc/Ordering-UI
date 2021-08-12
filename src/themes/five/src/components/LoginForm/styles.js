@@ -21,16 +21,9 @@ const Side = styled.div`
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
-  margin: auto;
-
-  @media (min-width: 769px) {
-    ${({ isPopup }) => isPopup && css`
-      margin: 20px 0px;
-    `}
-  }
 
   @media (min-width: 992px) {
-    width: 45%;
+    width: 100%;
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }
 
@@ -42,11 +35,13 @@ export const FormSide = styled(Side)`
 export const Title = styled.h1`
   font-weight: 600;
   font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 30px;
   color: ${props => props.theme.colors.darkTextColor};
 `
 
 export const LoginWith = styled.div`
-  width: 80%;
+  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
   border-bottom: 1px solid #E9ECEF;
   font-size: 14px;
 
@@ -70,7 +65,7 @@ export const LoginWith = styled.div`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
   display: flex;
   flex-direction: column;
 
@@ -118,10 +113,10 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: calc(90% - 20px);
+    width: calc(95% - 20px);
 
     @media (min-width: 481px) {
-      width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
+      width: ${({ isPopup }) => isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)'};
     }
   `}
 
@@ -146,7 +141,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-   width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
+   width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
    margin-top: 10px;
 
   button {
@@ -165,7 +160,7 @@ export const SocialButtons = styled.div`
 `
 
 export const SkeletonSocialWrapper = styled.div`
-  width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
   span{
     border-radius: 30px;
     margin-bottom: 10px
@@ -282,7 +277,7 @@ export const InputBeforeIcon = styled.div`
 export const LoginDivider = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
+  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
   margin: 30px 0;
 
   p {

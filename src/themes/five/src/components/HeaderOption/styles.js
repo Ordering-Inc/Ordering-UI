@@ -30,7 +30,7 @@ export const Container = styled.div`
   `}
 
   ${({ variant }) => variant === 'address' && css`
-    color: #333;
+    color: #909BA9;
     display: flex;
     align-items: center;
 
@@ -45,7 +45,7 @@ export const Container = styled.div`
   `}
 
   ${({ variant }) => variant === 'moment' && css`
-    color: #333;
+    color: #909BA9;
     display: flex;
     align-items: center;
 

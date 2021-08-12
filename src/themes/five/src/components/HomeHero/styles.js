@@ -80,7 +80,7 @@ export const Title = styled.h1`
   font-size: 65px;
   letter-spacing: 0px;
   color: #FFFFFF;
-  text-shadow: 0px 3px 6px #00000029;
+  text-shadow: 0px 3px 6px #2c2e33;
   opacity: 1;
 
   ${props => props.theme?.rtl && css`
@@ -99,6 +99,7 @@ export const Slogan = styled.p`
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
+  text-shadow: 0px 3px 6px #2c2e33;
   margin-bottom: 37px;
 
   ${props => props.theme?.rtl && css`
