@@ -18,7 +18,7 @@ import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { Messages } from '../../../../../components/Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
 import { ProductShare } from '../../../../../components/ProductShare'

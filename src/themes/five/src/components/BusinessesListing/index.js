@@ -13,7 +13,7 @@ import {
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { Alert } from '../../../../../components/Confirm'
 import { AddressForm } from '../../../../../components/AddressForm'
 import { AddressList } from '../../../../../components/AddressList'

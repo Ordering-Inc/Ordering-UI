@@ -8,7 +8,7 @@ import {
   useSession
 } from 'ordering-components'
 
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../../../../../components/PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'

@@ -2,7 +2,6 @@ import React from 'react'
 import { useUtils, useLanguage, useConfig, useOrder } from 'ordering-components'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
-import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
 import {
   Container,
@@ -52,7 +51,6 @@ export const HeaderOption = (props) => {
         )}
         {variant === 'moment' && (
           <>
-            <FaRegClock id='icon' />
             {momentState
               ? parseDate(momentState, { outputFormat: configs?.dates_moment_format?.value })
               : t('ASAP_ABBREVIATION', 'ASAP')}
