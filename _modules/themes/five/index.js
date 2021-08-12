@@ -3,12 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "AddressesPopover", {
-  enumerable: true,
-  get: function get() {
-    return _AddressesPopover.AddressesPopover;
-  }
-});
 Object.defineProperty(exports, "AddressForm", {
   enumerable: true,
   get: function get() {
@@ -141,6 +135,12 @@ Object.defineProperty(exports, "Footer", {
     return _Footer.Footer;
   }
 });
+Object.defineProperty(exports, "ForgotPasswordForm", {
+  enumerable: true,
+  get: function get() {
+    return _ForgotPasswordForm.ForgotPasswordForm;
+  }
+});
 Object.defineProperty(exports, "GoogleLogin", {
   enumerable: true,
   get: function get() {
@@ -195,16 +195,16 @@ Object.defineProperty(exports, "MomentControl", {
     return _MomentControl.MomentControl;
   }
 });
-Object.defineProperty(exports, "MomentPopover", {
-  enumerable: true,
-  get: function get() {
-    return _MomentPopover.MomentPopover;
-  }
-});
 Object.defineProperty(exports, "MyOrders", {
   enumerable: true,
   get: function get() {
     return _MyOrders.MyOrders;
+  }
+});
+Object.defineProperty(exports, "Modal", {
+  enumerable: true,
+  get: function get() {
+    return _Modal.Modal;
   }
 });
 Object.defineProperty(exports, "OrderDetails", {
@@ -334,8 +334,6 @@ Object.defineProperty(exports, "Select", {
   }
 });
 
-var _AddressesPopover = require("./src/components/AddressesPopover");
-
 var _AddressForm = require("./src/components/AddressForm");
 
 var _AddressList = require("./src/components/AddressList");
@@ -380,6 +378,8 @@ var _FacebookLogin = require("./src/components/FacebookLogin");
 
 var _Footer = require("./src/components/Footer");
 
+var _ForgotPasswordForm = require("./src/components/ForgotPasswordForm");
+
 var _GoogleLogin = require("./src/components/GoogleLogin");
 
 var _Header = require("./src/components/Header");
@@ -398,9 +398,9 @@ var _MomentContent = require("./src/components/MomentContent");
 
 var _MomentControl = require("./src/components/MomentControl");
 
-var _MomentPopover = require("./src/components/MomentPopover");
-
 var _MyOrders = require("./src/components/MyOrders");
+
+var _Modal = require("./src/components/Modal");
 
 var _OrderDetails = require("./src/components/OrderDetails");
 

@@ -29,7 +29,7 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _ProductItemAccordion = require("../ProductItemAccordion");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _Messages = require("../../../../../components/Messages");
 

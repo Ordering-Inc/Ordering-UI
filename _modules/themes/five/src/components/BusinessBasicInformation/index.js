@@ -17,7 +17,7 @@ var _BsExclamationCircle = _interopRequireDefault(require("@meronex/icons/bs/BsE
 
 var _styledComponents = require("styled-components");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _BusinessInformation = require("../BusinessInformation");
 

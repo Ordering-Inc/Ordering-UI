@@ -162,12 +162,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     getBusinesses();
   }, [businessesList, paginationProps]);
   (0, _react.useEffect)(function () {
-    var listWindows = document.querySelector('#list_wrapper');
-    listWindows.addEventListener('scroll', handleScroll);
-    return function () {
-      return listWindows.removeEventListener('scroll', handleScroll);
-    };
-  }, [handleScroll]);
+    if (!showBusinessInfo) {
+      var listWindows = document.querySelector('#list_wrapper');
+      listWindows.addEventListener('scroll', handleScroll);
+      return function () {
+        return listWindows.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [handleScroll, showBusinessInfo]);
 
   var handleClickAddress = function handleClickAddress(e) {
     if (auth) {

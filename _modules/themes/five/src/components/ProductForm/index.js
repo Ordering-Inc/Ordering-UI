@@ -29,15 +29,15 @@ var _ProductOptionSubOption = require("../../../../../components/ProductOptionSu
 
 var _ProductShare = require("../../../../../components/ProductShare");
 
-var _LoginForm = require("../../../../../components/LoginForm");
+var _LoginForm = require("../LoginForm");
 
-var _SignUpForm = require("../../../../../components/SignUpForm");
+var _SignUpForm = require("../SignUpForm");
 
-var _ForgotPasswordForm = require("../../../../../components/ForgotPasswordForm");
+var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
 var _AddressList = require("../../../../../components/AddressList");
 
-var _Modal = require("../../../../../components/Modal");
+var _Modal = require("../Modal");
 
 var _Buttons = require("../../styles/Buttons");
 
@@ -228,11 +228,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
     height: 200
-  })), product && !loading && !error && /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
+  })), product && !loading && !error && /*#__PURE__*/_react.default.createElement(_styles.ProductShareWrapper, null, /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
     slug: businessSlug,
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
     productId: product === null || product === void 0 ? void 0 : product.id
-  }), (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
+  })), (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, BeforeMidElements);
@@ -369,8 +369,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClose: function onClose() {
       return closeModal();
     },
-    width: "70%",
-    padding: "0"
+    width: "50%"
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {

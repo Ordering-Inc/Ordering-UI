@@ -21,7 +21,7 @@ var NotCarts = _styledComponents.default.div(_templateObject2 || (_templateObjec
 
 exports.NotCarts = NotCarts;
 
-var Title = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 20px;\n  color: ", ";\n  margin-bottom: 18px;\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 600;\n  font-size: 20px;\n  color: ", ";\n  margin-bottom: 18px;\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
