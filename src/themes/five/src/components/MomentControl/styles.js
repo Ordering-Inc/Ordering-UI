@@ -32,6 +32,10 @@ export const DatePickerWrapper = styled.div`
     outline: none;
   }
 
+  .react-datepicker {
+    border: 1px solid #E9ECEF;
+  }
+
   .react-datepicker__triangle {
     display: none;
   }
@@ -45,6 +49,15 @@ export const DatePickerWrapper = styled.div`
     background-color: ${props => props.theme.colors.primaryContrast};
     color: ${props => props.theme.colors.darkTextColor};
     border-radius: 50%;
+  }
+
+  .react-datepicker__input-container {
+    text-align: center;
+  }
+
+  .react-datepicker__header {
+    border: none;
+    background-color: white;
   }
 `
 

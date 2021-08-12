@@ -344,7 +344,7 @@ export const Header = (props) => {
         )}
         {modalIsOpen && (
           <Modal
-            title={modalSelected === 'address' && t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+            title={(modalSelected === 'address') ? t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?') : ''}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             width='50%'

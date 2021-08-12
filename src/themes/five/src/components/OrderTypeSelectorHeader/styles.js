@@ -6,4 +6,5 @@ export const HeaderItem = styled.div`
   color: #909BA9;
   display: flex;
   align-items: center;
+  min-width: 70px;
 `
