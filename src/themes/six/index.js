@@ -46,11 +46,16 @@ import { SingleProductCard } from './src/components/SingleProductCard'
 import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
 import { UserFormDetails } from './src/components/UserFormDetails'
+import { NotFoundSource } from './src/components/NotFoundSource'
+import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
+import { ProductIngredient } from './src/components/ProductIngredient'
 
 import { Inputs } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
 import { Selects } from './src/styles/Selects'
 import { Tabs } from './src/styles/Tabs'
+import { Button } from '../../styles/Buttons'
+import { TextArea } from '../../styles/Inputs'
 
 export {
   AddressDetails,
@@ -101,10 +106,15 @@ export {
   UpsellingPage,
   UserDetails,
   UserFormDetails,
-
+  NotFoundSource,
+  ForgotPasswordForm,
+  ProductIngredient,
+  
   // styles
   Inputs,
   Select,
   Selects,
-  Tabs
+  Tabs,
+  Button,
+  TextArea
 }
