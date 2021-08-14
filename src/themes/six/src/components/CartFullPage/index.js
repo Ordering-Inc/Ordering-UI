@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
-
 import { CartInfo } from '../CartInfo'
 import { Cart } from '../Cart'
 import { useEvent } from 'ordering-components'
-
 import {
   Container,
   Layout,
   LeftPanel,
   RightPanel
 } from './styles'
-
 export const CartFullPage = (props) => {
   const {
     goBack,
@@ -18,18 +15,14 @@ export const CartFullPage = (props) => {
     business,
     individualBusinessCart
   } = props
-
   const [events] = useEvent()
   const [currentCartUuid, setCurrentCartUuid] = useState(null)
-
   const handleAddProduct = (product, cart) => {
     setCurrentCartUuid(cart?.uuid)
   }
-
   const handleSetCurrentCartUuid = () => {
     setCurrentCartUuid(null)
   }
-
   useEffect(() => {
     events.on('cart_popover_closed', handleSetCurrentCartUuid)
     events.on('cart_product_added', handleAddProduct)
@@ -38,7 +31,6 @@ export const CartFullPage = (props) => {
       events.off('cart_product_added', handleAddProduct)
     }
   }, [])
-
   return (
     <>
       <Container>

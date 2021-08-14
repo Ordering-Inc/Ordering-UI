@@ -41,11 +41,12 @@ export const ProductItemAccordion = (props) => {
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
-  const [productQuantity, setProductQuantity] = useState(product.quantity)
+  const [productQuantity, setProductQuantity] = useState(1)
   const content = useRef(null)
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
   const productActionsDelete = useRef(null)
+
   const productInfo = () => {
     if (isCartProduct) {
       const ingredients = JSON.parse(JSON.stringify(Object.values(product.ingredients ?? {})))
@@ -62,6 +63,7 @@ export const ProductItemAccordion = (props) => {
     }
     return product
   }
+
   const toggleAccordion = (e) => {
     const isActionsClick = productSelect.current?.contains(e.target) || productActionsEdit.current?.contains(e.target) || productActionsDelete.current?.contains(e.target)
     if ((!product?.valid_menu && isCartProduct) || isActionsClick) return
@@ -73,6 +75,7 @@ export const ProductItemAccordion = (props) => {
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
   }
+
   const handleChangeQuantity = (value) => {
     if (parseInt(value) <= 0) {
       onDeleteProduct(product)
@@ -80,22 +83,30 @@ export const ProductItemAccordion = (props) => {
       changeQuantity(product, parseInt(value))
     }
   }
+
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     const pos = position ? `(${position})` : ''
     return `${quantity} x ${name} ${pos} +${price}`
   }
+
   const Increment = () => {
     let _productQuantity = productQuantity
     _productQuantity++
     setProductQuantity(_productQuantity)
     handleChangeQuantity(_productQuantity)
   }
+
   const Decrement = () => {
     let _productQuantity = productQuantity
     _productQuantity--
     setProductQuantity(_productQuantity)
     handleChangeQuantity(_productQuantity)
   }
+
+  useEffect(() => {
+    setProductQuantity(product.quantity)
+  }, [product])
+
   useEffect(() => {
     if (props?.individualBusinessCart || props?.isOrderPage) {
       setActiveState('active')
@@ -107,6 +118,7 @@ export const ProductItemAccordion = (props) => {
       setRotateState('accordion__icon')
     }
   }, [props?.individualBusinessCart, props?.isOrderPage])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
