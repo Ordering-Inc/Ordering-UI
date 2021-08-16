@@ -74,7 +74,7 @@ const LoginFormUI = (props) => {
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
   const [otpState, setOtpState] = useState('')
-  const [otpLeftTime, resetOtpLeftTime] = useCountdownTimer(
+  const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
