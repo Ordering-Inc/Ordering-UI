@@ -157,9 +157,10 @@ var LoginFormUI = function LoginFormUI(props) {
       setOtpState = _useState12[1];
 
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
-      _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 2),
+      _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
       otpLeftTime = _useCountdownTimer2[0],
-      resetOtpLeftTime = _useCountdownTimer2[1];
+      _ = _useCountdownTimer2[1],
+      resetOtpLeftTime = _useCountdownTimer2[2];
 
   var initParams = {
     client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
