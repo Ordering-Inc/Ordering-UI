@@ -1,7 +1,15 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const ProductsContainer = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
+  @media (min-width: 1024px) {
+    max-width: 85%;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 75%;
+  }
 `
 
 export const ErrorMessage = styled.div`
@@ -14,17 +22,14 @@ export const ErrorMessage = styled.div`
 `
 
 export const ProductsListing = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  
 `
 
 export const WrapAllCategories = styled.div`
   h3 {
-    margin-left: 10px;
-    ${props => props.theme?.rtl && css`
-      margin-right: 10px;
-      margin-left: 0;
-    `}
+    padding: 10px 0;
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+    color:  ${props => props.theme.colors.primary};
   }
 `
 

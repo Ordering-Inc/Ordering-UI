@@ -3,6 +3,9 @@ import styled, { css } from 'styled-components'
 export const BusinessSearch = styled.div`
   width: 100%;
   position: relative;
+  min-width: 250px;
+  margin-left: auto;
+    
 
   input {
     width: 100%;
@@ -16,7 +19,6 @@ export const BusinessSearch = styled.div`
     background-color: transparent;
     font-size: 16px;
     line-height: 24px;
-
     ${({ isCustomLayout }) => !isCustomLayout && css`
       justify-content: center;
       -webkit-transition: width 0.4s ease-in-out;

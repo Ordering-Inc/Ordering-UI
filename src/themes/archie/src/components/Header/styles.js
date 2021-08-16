@@ -12,6 +12,7 @@ export const Header = styled.div`
       border-bottom: 1px solid ${props => props.theme.colors.borderColor};
     `
   } 
+  background-color: #fff;
 
   @media (min-width: 850px) {
     height: 70px;
@@ -24,7 +25,6 @@ export const Header = styled.div`
 `
 export const InnerHeader = styled.div`
   display: flex;
-  width: 100%;
   color: #000;
   justify-content: space-between;
   width: 96%;
@@ -79,6 +79,8 @@ export const RightHeader = styled.div`
 export const Menu = styled.div`
   display: flex;
   align-items: center;
+
+  
 
   .moment-popover,
   .address-popover {

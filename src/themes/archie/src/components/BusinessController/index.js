@@ -48,9 +48,6 @@ const BusinessControllerUI = (props) => {
     isBusinessClose
   } = props
 
-  console.log('business')
-  console.log(business)
-
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()

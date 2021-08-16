@@ -7,25 +7,19 @@ import {
   ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
-  PreviousButtonWrapper,
   Banner
 } from './styles'
-
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-
 import { Modal } from '../../../../../components/Modal'
 import { Alert } from '../../../../../components/Confirm'
 import { AddressForm } from '../../../../../components/AddressForm'
 import { AddressList } from '../../../../../components/AddressList'
 import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
-import { OrdersOption } from '../../../../../components/OrdersOption'
 import { BusinessesMap } from '../../../../../components/BusinessesMap'
-
 import { BusinessController } from '../BusinessController'
 import { SearchBar } from '../SearchBar'
 import { useLocation, useHistory } from 'react-router-dom'
-
 import {
   useOrder,
   useSession,
@@ -43,7 +37,6 @@ const BusinessesListingUI = (props) => {
     searchValue,
     getBusinesses,
     isCustomLayout,
-    onRedirectPage,
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
@@ -64,10 +57,6 @@ const BusinessesListingUI = (props) => {
   const location = useLocation()
   const history = useHistory()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-  const businessesIds = isCustomLayout &&
-    businessesList.businesses &&
-    businessesList.businesses?.map(business => business.id)
-
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
@@ -139,21 +128,11 @@ const BusinessesListingUI = (props) => {
     })
   }
 
-  const getCustomArray = (list) => {
-    const isArray = Array.isArray(list)
-    return isArray ? list : Object.values(list)
-  }
-
   const handleClickNextItems = () => {
     getBusinesses(false, nextPage.page + 1, false)
     const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + `?page=${nextPage.page + 1}`
     window.history.pushState({ path: newurl }, '', newurl)
     setNextPage({ loading: true, page: nextPage.page + 1 })
-  }
-
-  const handleClickPrevItems = () => {
-    getBusinesses(false, prevPage.page - 1, true)
-    setPrevPage({ loading: true, page: prevPage.page - 1 })
   }
 
   const changeBusinessType = (category) => {
@@ -190,7 +169,6 @@ const BusinessesListingUI = (props) => {
             <p>1440px X  539px banner image</p>
           )}
         </Banner>
-
         {activeMap && (
           <BusinessesMap
             businessList={businessesList.businesses}
@@ -198,7 +176,6 @@ const BusinessesListingUI = (props) => {
             setErrors={setMapErrors}
           />
         )}
-
         <BusinessList>
           <WrapperSearch isCustomLayout={isCustomLayout}>
             <SearchBar
@@ -274,7 +251,6 @@ const BusinessesListingUI = (props) => {
             ))
           )}
         </BusinessList>
-
         <Modal
           title={t('ADDRESS_FORM', 'Address Form')}
           open={modals.formOpen}
@@ -288,7 +264,6 @@ const BusinessesListingUI = (props) => {
             onSaveAddress={() => setModals({ ...modals, formOpen: false })}
           />
         </Modal>
-
         <Modal
           title={t('ADDRESSES', 'Address List')}
           open={modals.listOpen}
@@ -303,7 +278,6 @@ const BusinessesListingUI = (props) => {
             onAccept={() => handleFindBusinesses()}
           />
         </Modal>
-
         <Alert
           title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}
           content={alertState.content}

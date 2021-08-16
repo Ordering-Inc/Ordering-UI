@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
-
 import {
   Header as HeaderContainer,
   InnerHeader,
@@ -19,12 +18,8 @@ import {
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 import { capitalize } from '../../../../../utils'
-
 import { AddressesPopover } from '../../../../../components/AddressesPopover'
-import { UserPopover } from '../../../../../components/UserPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
-import { CartPopover } from '../../../../../components/CartPopover'
-import { CartContent } from '../../../../../components/CartContent'
 import { Modal } from '../../../../../components/Modal'
 import { MomentContent } from '../../../../../components/MomentContent'
 import { AddressList } from '../../../../../components/AddressList'
@@ -32,10 +27,12 @@ import { AddressForm } from '../../../../../components/AddressForm'
 import { SidebarMenu } from '../../../../../components/SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
-
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { LanguageSelector } from '../LanguageSelector'
 import { HeaderOption } from '../HeaderOption'
+import { UserPopover } from '../UserPopover'
+import { CartPopover } from '../CartPopover'
+import { CartContent } from '../CartContent'
 
 export const Header = (props) => {
   const {
@@ -56,39 +53,16 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
-
   // const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
-
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
-
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
-
-  // const handleClickUserCustomer = (e) => {
-  //   const isActionsClick = clearCustomer.current?.contains(e?.target)
-  //   if (isActionsClick) {
-  //     setConfirm({
-  //       open: true,
-  //       content: t('QUESTION_CLEAR_CUSTOMER', theme?.defaultLanguages?.QUESTION_CLEAR_CUSTOMER || 'Are you sure that you want to clear the customer?'),
-  //       handleOnAccept: () => {
-  //         deleteUserCustomer(true)
-  //         refreshOrderOptions()
-  //         handleGoToPage({ page: 'home' })
-  //         setConfirm({ ...confirm, open: false })
-  //       }
-  //     })
-  //     return
-  //   }
-  //   setCustomerModalOpen(true)
-  // }
 
   const openModal = (opt) => {
     setModalSelected(opt)
@@ -157,7 +131,6 @@ export const Header = (props) => {
               <img alt='Logotype' src={theme?.images?.logos?.logotype} loading='lazy' />
               <img alt='Isotype' width='35px' height='45px' src={theme?.images?.logos?.isotype} loading='lazy' />
             </LogoHeader>
-
           </LeftHeader>
           <CenterHeader>
             {isShowOrderOptions && (
@@ -363,21 +336,6 @@ export const Header = (props) => {
     </>
   )
 }
-
-// const styles = {
-//   headCustomer: {
-//     margin: 0,
-//     height: 20,
-//     width: 20,
-//     backgroundColor: '#CCCCCC',
-//     borderRadius: '100%',
-//     marginLeft: 5
-//   },
-//   clearCustomer: {
-//     margin: 0,
-//     fontSize: 20
-//   }
-// }
 
 Header.defaultProps = {
   isShowOrderOptions: true

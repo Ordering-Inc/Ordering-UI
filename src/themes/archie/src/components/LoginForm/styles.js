@@ -61,7 +61,7 @@ export const LoginWith = styled.div`
   .consume-side-padding {
     padding-left: 0px;
     ${props => props.theme?.rtl && css`
-      padding-left: 15px;
+      padding-left: 10px;
       padding-right: 0px;
     `}
   }
@@ -102,7 +102,7 @@ export const FormInput = styled.form`
   input:not(:last-child) {
     margin: 10px 0px;
     @media (min-width: 768px) {
-      margin: 0px 0px 20px;
+      margin: 0px 0px 25px;
     }
   }
 
