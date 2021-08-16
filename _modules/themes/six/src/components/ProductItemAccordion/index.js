@@ -88,7 +88,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       setRotate = _useState6[0],
       setRotateState = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(product.quantity),
+  var _useState7 = (0, _react.useState)(1),
       _useState8 = _slicedToArray(_useState7, 2),
       productQuantity = _useState8[0],
       setProductQuantity = _useState8[1];
@@ -160,6 +160,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     handleChangeQuantity(_productQuantity);
   };
 
+  (0, _react.useEffect)(function () {
+    setProductQuantity(product.quantity);
+  }, [product]);
   (0, _react.useEffect)(function () {
     if (props !== null && props !== void 0 && props.individualBusinessCart || props !== null && props !== void 0 && props.isOrderPage) {
       setActiveState('active');

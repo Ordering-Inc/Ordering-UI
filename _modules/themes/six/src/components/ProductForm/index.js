@@ -29,7 +29,7 @@ var _AddressList = require("../../../../../components/AddressList");
 
 var _Buttons = require("../../../../../styles/Buttons");
 
-var _inputs = require("../../styles/inputs");
+var _inputs = require("../../../../../styles/inputs");
 
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
