@@ -8,10 +8,8 @@ import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import { ProductItemAccordion } from '../ProductItemAccordion'
-
 import { Modal } from '../Modal'
 import { ProductForm } from '../ProductForm'
-
 import {
   CartContainer,
   OrderBill,
@@ -55,7 +53,6 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const windowSize = useWindowSize()
   const theme = useTheme()
-
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -111,11 +108,9 @@ const CartUI = (props) => {
     setCanOpenUpselling(false)
     handleClickCheckout()
   }
-
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
   }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -324,7 +319,6 @@ const CartUI = (props) => {
             )}
           </CartSticky>
         )}
-
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

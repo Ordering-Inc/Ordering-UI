@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import {
   LoginForm as LoginFormController,
@@ -69,6 +70,7 @@ const LoginFormUI = (props) => {
   } = props
   const numOtpInputs = 4
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
