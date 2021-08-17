@@ -45,8 +45,8 @@ import { Button } from '../../styles/Buttons'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
-import { AddressDetails } from '../../../../../components/AddressDetails'
 import { Alert } from '../../../../../components/Confirm'
+import { AddressDetails } from '../AddressDetails'
 import { Cart } from '../Cart'
 import { CartContent } from '../CartContent'
 import { UserDetails } from '../UserDetails'
