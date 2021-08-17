@@ -2,31 +2,43 @@ import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
-  color: #333;
+  width: 86px;
+  height: 48px;
+  background-color: ${props => props.theme.colors.primary};
   display: flex;
   align-items: center;
-
-  ${props => props.isHome && css`
-    color: #FFF;
-  `}
-
+  justify-content: center;
+  position: relative;
+  color: #fff;
+  span {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    margin: 0;
+  }
   svg {
-    margin-right: 5px;
+    font-size: 24px;
+    margin-right: 10px;
     ${props => props.theme?.rtl && css`
-      margin-left: 5px;
-      margin-right: 0px;
-    `} 
+        margin-right: 0px;
+        margin-left: 10px;
+    `}
+
+    path {
+      fill: #fff;
+    }
   }
 `
 
 export const PopoverBody = styled.div`
   background-color: #FFF;
   color: #333;
-  padding: 15px;
   border-radius: 10px;
-  max-width: 500px;
+  max-width: 520px;
   z-index: 1001;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  padding: 15px;
+  box-sizing: border-box;
 `
 
 export const PopoverArrow = styled.div`
@@ -36,19 +48,4 @@ export const PopoverArrow = styled.div`
   border-right: 7px solid transparent;
   border-bottom: 8px solid #FFF;
   top: -8px;
-`
-
-export const Container = styled.div`
-  padding: 20px 10px;
-
-  @media (min-width: 769px) {
-    padding: 0px;
-  }
-`
-
-export const Title = styled.h1`
-  margin: 0px;
-  font-size: 30px;
-  font-weight: 600;
-  padding: 0px 10px 15px;
 `

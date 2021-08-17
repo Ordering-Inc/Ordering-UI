@@ -28,13 +28,12 @@ import {
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-import { Button } from '../../../../../styles/Buttons'
+import { Modal } from '../../../../../components/Modal'
 import { Confirm } from '../../../../../components/Confirm'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../../../../utils'
-
+import { Button } from '../../styles/Buttons'
 import { AddressForm } from '../AddressForm'
-import { Modal } from '../Modal'
 
 const AddressListUI = (props) => {
   const {

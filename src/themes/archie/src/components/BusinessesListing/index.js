@@ -1,31 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import FiMap from '@meronex/icons/fi/FiMap'
-import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 import {
   BusinessContainer,
   BusinessList,
   ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
-  ListWrapper,
-  BusinessContent,
-  MapWrapper
+  Banner
 } from './styles'
-
-import { Button } from '../../../../../../src/styles/Buttons'
+import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { Modal } from '../../../../../components/Modal'
 import { Alert } from '../../../../../components/Confirm'
-// import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
-import { OrdersOption } from '../../../../../components/OrdersOption'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
-
-import { Modal } from '../Modal'
-import { BusinessesMap } from '../BusinessesMap'
+import { AddressForm } from '../../../../../components/AddressForm'
+import { AddressList } from '../../../../../components/AddressList'
+import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
+import { BusinessesMap } from '../../../../../components/BusinessesMap'
 import { BusinessController } from '../BusinessController'
 import { SearchBar } from '../SearchBar'
-import { AddressList } from '../AddressList'
-import { AddressForm } from '../AddressForm'
-
+import { useLocation, useHistory } from 'react-router-dom'
 import {
   useOrder,
   useSession,
@@ -35,6 +29,7 @@ import {
 } from 'ordering-components'
 
 const PIXELS_TO_SCROLL = 300
+
 const BusinessesListingUI = (props) => {
   const {
     businessesList,
@@ -42,38 +37,64 @@ const BusinessesListingUI = (props) => {
     searchValue,
     getBusinesses,
     isCustomLayout,
-    onRedirectPage,
     handleChangeSearch,
-    handleBusinessClick
+    handleChangeBusinessType,
+    handleBusinessClick,
+    currentPageParam
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
+  const theme = useTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
   const [mapErrors, setMapErrors] = useState('')
-  const windowSize = useWindowSize()
-
+  const [prevPage, setPrevPage] = useState({ page: currentPageParam || 1, loading: false })
+  const [nextPage, setNextPage] = useState({ page: currentPageParam || 1, loading: false })
+  const [categoryShow] = useState(false)
+  const location = useLocation()
+  const history = useHistory()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-
-  const businessesIds = isCustomLayout &&
-    businessesList.businesses &&
-    businessesList.businesses?.map(business => business.id)
-
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
-    if (badScrollPosition || businessesList.loading || !hasMore) return
-    getBusinesses()
+    const nextPageHasMore = !(paginationProps.totalPages === nextPage.page)
+    if (badScrollPosition || businessesList.loading || !hasMore || !nextPageHasMore) return
+    handleClickNextItems(false, nextPage.page + 1, false)
   }, [businessesList, paginationProps])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
+
+  useEffect(() => {
+    if (!businessesList.loading) {
+      setNextPage({ ...nextPage, loading: false })
+      setPrevPage({ ...prevPage, loading: false })
+    }
+  }, [businessesList.loading])
+
+  useEffect(() => {
+    if (mapErrors) {
+      handleMapErrors(mapErrors)
+      setActiveMap(false)
+    }
+  }, [mapErrors])
+
+  useEffect(() => {
+    if (orderState.loading && !businessesList.loading) {
+    //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
+    //  window.history.pushState({ path: newurl }, '', newurl)
+      const params = new URLSearchParams()
+      history.replace({ pathname: location.pathname, search: params.toString() })
+      setPrevPage({ loading: true, page: 1 })
+      setNextPage({ loading: true, page: 1 })
+    }
+  }, [orderState.loading])
 
   const handleClickAddress = (e) => {
     if (auth) {
@@ -107,16 +128,19 @@ const BusinessesListingUI = (props) => {
     })
   }
 
-  useEffect(() => {
-    if (mapErrors) {
-      handleMapErrors(mapErrors)
-      setActiveMap(false)
-    }
-  }, [mapErrors])
+  const handleClickNextItems = () => {
+    getBusinesses(false, nextPage.page + 1, false)
+    const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + `?page=${nextPage.page + 1}`
+    window.history.pushState({ path: newurl }, '', newurl)
+    setNextPage({ loading: true, page: nextPage.page + 1 })
+  }
 
-  const getCustomArray = (list) => {
-    const isArray = Array.isArray(list)
-    return isArray ? list : Object.values(list)
+  const changeBusinessType = (category) => {
+    setNextPage({ loading: true, page: 1 })
+    setPrevPage({ loading: true, page: 1 })
+    const params = new URLSearchParams({ page: 1 })
+    history.replace({ pathname: location.pathname, search: params.toString() })
+    handleChangeBusinessType(category)
   }
 
   return (
@@ -128,129 +152,105 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        <BusinessContent>
-          <ListWrapper id='list_wrapper' className='list-wrapper'>
-            {windowSize.width > 850 && (
-              <WrapperSearch isCustomLayout={isCustomLayout}>
-                <SearchBar
-                  lazyLoad
-                  search={searchValue}
-                  isCustomLayout
-                  placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-                  onSearch={handleChangeSearch}
-                />
-                {isCustomLayout && (
-                  <FiMap onClick={toggleMap} />
-                )}
-              </WrapperSearch>
-            )}
-            <BusinessList>
-              {
-                !businessesList.loading && businessesList.businesses.length === 0 && (
-                  <NotFoundSource
-                    content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-                  >
-                    <Button
-                      outline
-                      color='primary'
-                      onClick={() => handleClickAddress()}
-                    >
-                      {t('CHANGE_ADDRESS', 'Select other Address')}
-                    </Button>
-                  </NotFoundSource>
-                )
-              }
-              {
-                businessesList.businesses?.map((business) => (
-                  <BusinessController
-                    key={business.id}
-                    className='card'
-                    business={business}
-                    handleCustomClick={handleBusinessClick}
-                    orderType={orderState?.options?.type}
-                    isCustomLayout={isCustomLayout}
-                    isShowCallcenterInformation={isCustomLayout}
-                  />
-                ))
-              }
-              {businessesList.loading && (
-                [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()].map(i => (
-                  <BusinessController
-                    key={i}
-                    className='card'
-                    business={{}}
-                    isSkeleton
-                    orderType={orderState?.options?.type}
-                  />
-                ))
-              )}
-              {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
-                businessesList.error.map((e, i) => (
-                  <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-                ))
-              )}
-            </BusinessList>
-          </ListWrapper>
-          <MapWrapper className='map-wrapper'>
-            {windowSize.width < 850 && (
-              <WrapperSearch isCustomLayout={isCustomLayout}>
-                <SearchBar
-                  lazyLoad
-                  search={searchValue}
-                  isCustomLayout={isCustomLayout}
-                  placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-                  onSearch={handleChangeSearch}
-                />
-                {isCustomLayout && (
-                  <FiMap onClick={toggleMap} />
-                )}
-              </WrapperSearch>
-            )}
-            {configs?.google_maps_api_key?.value ? (
-              <BusinessesMap
-                businessList={businessesList.businesses}
-                userLocation={orderState?.options?.address?.location}
-                setErrors={setMapErrors}
-              />
-            ) : (
-              <Skeleton width={70} />
-            )}
-          </MapWrapper>
-        </BusinessContent>
-
-        {isCustomLayout && onRedirectPage && (
+        {categoryShow && (
           <>
-            <OrdersOption
-              horizontal
-              isBusinessesPage
-              onRedirectPage={onRedirectPage}
-              titleContent={t('CARTS', 'Carts')}
-              businessesIds={businessesIds}
-              customArray={
-                getCustomArray(orderState.carts)?.filter(cart => cart.products.length > 0)
-              }
-              isCustomLayout
-              isBusinessesLoading={businessesList.loading}
-            />
-            <OrdersOption
-              horizontal
-              asDashboard
-              isBusinessesPage
-              businessesIds={businessesIds}
-              onRedirectPage={onRedirectPage}
-              userCustomerId={userCustomer?.id}
-              isCustomLayout
-              isBusinessesLoading={businessesList.loading}
-            />
+            {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
+              <BusinessTypeFilter
+                images={props.images}
+                businessTypes={props.businessTypes}
+                defaultBusinessType={props.defaultBusinessType}
+                handleChangeBusinessType={changeBusinessType}
+              />
+            )}
           </>
         )}
-
-        {isCustomLayout && businessesList?.businesses?.length > 0 && (
-          <BusinessesTitle>
-            {t('BUSINESSES', 'Businesses')}
-          </BusinessesTitle>
+        <Banner bgimage={theme.images?.general?.businessListBaner}>
+          {!(theme.images?.general?.businessListBaner) && (
+            <p>1440px X  539px banner image</p>
+          )}
+        </Banner>
+        {activeMap && (
+          <BusinessesMap
+            businessList={businessesList.businesses}
+            userLocation={orderState?.options?.address?.location}
+            setErrors={setMapErrors}
+          />
         )}
-
+        <BusinessList>
+          <WrapperSearch isCustomLayout={isCustomLayout}>
+            <SearchBar
+              lazyLoad
+              search={searchValue}
+              isCustomLayout={isCustomLayout}
+              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+              onSearch={handleChangeSearch}
+            />
+            {isCustomLayout && (
+              <FiMap onClick={toggleMap} />
+            )}
+          </WrapperSearch>
+          {businessesList?.businesses?.length > 0 && (
+            <BusinessesTitle>
+              {t('FEATURES_BUSINESS', 'Features Businesses')}
+            </BusinessesTitle>
+          )}
+          {businessesList.loading && prevPage.loading && (
+            [...Array(paginationProps.pageSize).keys()].map(i => (
+              <BusinessController
+                key={i}
+                className='card'
+                business={{}}
+                isSkeleton
+                orderType={orderState?.options?.type}
+              />
+            ))
+          )}
+          {
+            !businessesList.loading && businessesList.businesses.length === 0 && (
+              <NotFoundSource
+                content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
+              >
+                <Button
+                  outline
+                  color='primary'
+                  onClick={() => handleClickAddress()}
+                >
+                  {t('CHANGE_ADDRESS', 'Select other Address')}
+                </Button>
+              </NotFoundSource>
+            )
+          }
+          {
+            businessesList.businesses?.map((business) => (
+              <BusinessController
+                key={business.id}
+                className='card'
+                business={business}
+                isBusinessOpen={business.open}
+                handleCustomClick={handleBusinessClick}
+                orderType={orderState?.options?.type}
+                isCustomLayout={isCustomLayout}
+                isShowCallcenterInformation={isCustomLayout}
+              />
+            ))
+          }
+          {businessesList.loading && nextPage.loading && (
+            [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()].map(i => (
+              <BusinessController
+                key={i}
+                className='card'
+                business={{}}
+                isSkeleton
+                orderType={orderState?.options?.type}
+              />
+            ))
+          )}
+          {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
+            businessesList.error.map((e, i) => (
+              <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+            ))
+          )}
+        </BusinessList>
         <Modal
           title={t('ADDRESS_FORM', 'Address Form')}
           open={modals.formOpen}
@@ -264,7 +264,6 @@ const BusinessesListingUI = (props) => {
             onSaveAddress={() => setModals({ ...modals, formOpen: false })}
           />
         </Modal>
-
         <Modal
           title={t('ADDRESSES', 'Address List')}
           open={modals.listOpen}
@@ -279,7 +278,6 @@ const BusinessesListingUI = (props) => {
             onAccept={() => handleFindBusinesses()}
           />
         </Modal>
-
         <Alert
           title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}
           content={alertState.content}

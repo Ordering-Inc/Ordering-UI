@@ -2,20 +2,19 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const Option = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 7px 15px;
   min-width: 100px;
   color: #333;
   cursor: pointer;
   font-size: 14px;
   font-weight: 100;
   &:hover {
-    background-color: ${darken(0.03, '#E8F0ED')};
+    background-color: #dddddd;
   }
   ${props => props.selected && css`
-    background-color: ${darken(0.05, '#E8F0ED')};
+    background-color: #dddddd;
     &:hover {
-      background-color: ${darken(0.03, '#E8F0ED')};
+      background-color: #dddddd;
     }
   `}
   svg {
@@ -40,6 +39,7 @@ export const Options = styled.div`
   background-color: #fff;
   margin-top: 7px;
   z-index: 10000;
+  width: auto;
   border-top: 1px solid ${props => props.theme.colors.borderColor};
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   overflow: hidden;
@@ -73,6 +73,7 @@ export const Selected = styled.div`
   flex: 1;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: ${props => props.theme.colors.primary};
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -93,9 +94,7 @@ export const Selected = styled.div`
 `
 
 export const Select = styled.div`
-  display: inline-block;
-  height: 34px;
-  line-height: 34px;
+  padding: 11px 16px;
   color: #000000;  
   background-color: transparent;
   position: relative;
@@ -104,11 +103,16 @@ export const Select = styled.div`
   ${props => props.disabled && css`
     pointer-events: none;
   `} 
-  
+  border: 1px solid ${props => props.theme.colors.primary};
+  ${({ noborder }) => noborder && css`
+    border: none;
+  `}
+
   ${({ fullwidth }) => fullwidth && css`
     width: 100%;
-    border: 1px solid ${props => props.theme.colors.borderColor};
-    border-radius: 7px;
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
     @media (min-width: 768px) {
       height: 40px;
       line-height: 40px;

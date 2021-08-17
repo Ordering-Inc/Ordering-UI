@@ -19,9 +19,9 @@ import { StripeElementsForm } from '../../../../../components/StripeElementsForm
 import { StripeRedirectForm } from '../../../../../components/StripeRedirectForm'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { getIconCard } from '../../../../../utils'
-import { Select } from '../../styles/Select'
+import { Modal } from '../../../../../components/Modal'
 
-import { Modal } from '../Modal'
+import { Select } from '../../styles/Select'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import {
   PaymentMethodsContainer,
@@ -141,11 +141,9 @@ const PaymentOptionsUI = (props) => {
               isFullWidth
             />}
           {(paymethodsList.loading || isLoading) && (
-            [...Array(5).keys()].map(i => (
-              <PayCard key={i} isSkeleton>
-                <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
-              </PayCard>
-            ))
+            <PaymentMethodsContainer>
+              <Skeleton height={38} />
+            </PaymentMethodsContainer>
           )}
           {paymethodsList.error && paymethodsList.error.length > 0 && (
             <NotFoundSource

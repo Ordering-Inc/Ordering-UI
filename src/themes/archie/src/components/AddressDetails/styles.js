@@ -3,18 +3,23 @@ import styled, { css } from 'styled-components'
 export const AddressContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `
+
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  h2 {
-    color: ${props => props.theme.colors.fontSecundary};
-    font-weight: 200;
-  }
-  button {
-    height: 40px;
+  width: 100%;
+
+  svg {
+    color: #F2BB40;
+    margin-left: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    ${props => props.theme?.rtl && css`
+      margin-right: 5px;
+      margin-left: initial;
+    `}
   }
 `
 
@@ -45,23 +50,7 @@ export const Text = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  h4{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
-  }
-
-  svg {
-    color: #F2BB40;
-    margin-left: 5px;
-    font-size: 24px;
-    cursor: pointer;
-    ${props => props.theme?.rtl && css`
-      margin-right: 5px;
-      margin-left: initial;
-    `}
-  }
+  
   span {
     font-size: 14px;
     color: ${props => props.theme.colors.primary};

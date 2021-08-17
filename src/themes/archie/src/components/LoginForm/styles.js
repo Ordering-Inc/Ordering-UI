@@ -5,80 +5,66 @@ export const LoginContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  box-sizing: border-box;
+  padding: 20px;
+  min-height: ${({ isPopup }) => isPopup ? '500px' : 'auto'};
   flex-direction: column;
 
   @media (min-width: 768px) {
     flex-direction: row;
-    background-color: ${props => props.theme.colors.emptyPagebackground}; 
+  }
+
+  @media (min-width: 850px) {
+    min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(94vh - 70px)'};
+  }
+
+  @media (min-width: 1200px) {
+    min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(80vh - 90px)'};
+  }
+
+  >* {
+    box-sizing: border-box;
   }
 `
 const Side = styled.div`
   display: flex;
   width: 100%;
 `
-export const HeroSide = styled(Side)`
-  display: none;
-
-  @media (min-width: 992px) {
-    width: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: ${props => props.theme.colors.primaryContrast};
-    background-color:  ${props => props.theme.colors.primary};
-  }
-`
-
-export const TitleHeroSide = styled.div`
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-  h1 {
-    font-size: 50px;
-  }
-
-  h1,
-  p {
-    margin: 0px;
-    color: ${props => props.theme.colors.colorTextSignForm};
-  }
-`
 
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
   margin: auto;
-  background-color: #fff;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     ${({ isPopup }) => isPopup && css`
       margin: 20px 0px;
     `}
-  }  
+
+    width: ${({ isPopup }) => isPopup ? '100%' : '70%'};
+  }
 
   @media (min-width: 992px) {
-    padding: 4% 0 3%;
-    margin: ${({ isPopup }) => isPopup ? '0' : '4% auto'};
+    width: ${({ isPopup }) => isPopup ? '100%' : '45%'};
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
-    width: ${({ isPopup }) => isPopup ? '100%' : '50%'};
   }
 
   @media (min-width: 1200px){
     font-size: ${({ isPopup }) => isPopup ? '0.9em' : '1em'};
-    width: ${({ isPopup }) => isPopup ? '100%' : '35%'};
-  }
-
-  @media (min-width: 1450px){
-    width: ${({ isPopup }) => isPopup ? '100%' : '30%'};
   }
 `
 
 export const LoginWith = styled.div`
   font-size: 14px;
-  width: 90%;
+  width: 100%;
+
+  .consume-side-padding {
+    padding-left: 0px;
+    ${props => props.theme?.rtl && css`
+      padding-left: 10px;
+      padding-right: 0px;
+    `}
+  }
 
   @media (min-width: 425px) {
     font-size: 18px;
@@ -100,134 +86,129 @@ export const LoginWith = styled.div`
 `
 
 export const FormInput = styled.form`
-  width: 90%;
-  margin-top: 10px;
+  width: 100%;
   display: flex;
   flex-direction: column;
+
+  input {
+    height: 38px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+  }
 
   input:not(:last-child) {
-    margin: 11px 0px;
-    padding: 10px 20px;
-    border-radius: 7px;
-  }
-
-  input.PhoneInputInput{
-    margin: 11px 0px;
-    border-radius: 7px;
-  }
-
-  button {
-    margin-top: 10px;
-    padding: 7px;
-    width: 135px;
-    margin-left: auto;
-
-    ${props => props.theme?.rtl && css`
-      margin-right: auto;
-    `}
-  }
-`
-
-export const RedirectLink = styled.div`
-  margin: 10px 0;
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  width: 90%;
-
-  span {
-    margin-right: 5px;
-    color: ${props => props.theme.colors.primary};
-    ${props => props.theme?.rtl && css`
-      margin-left: 5px;
-      margin-right: 0px;
-    `}
-  }
-
-  a {
-    color: ${props => props.theme.colors.primary} !important;
-    text-decoration: underline !important;
-  }
-
-  ${({ register }) => register && css`
-    width: 90%;
-
-    @media (min-width: 481px) {
-      width: 90%;
+    margin: 10px 0px;
+    @media (min-width: 768px) {
+      margin: 0px 0px 25px;
     }
-  `}
-
-  @media (min-width: 425px) {
-    flex-direction: row;
   }
 
   @media (min-width: 768px) {
-    font-size: 14px;
-  }
-
-  @media (min-width: 992px) {
-    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
-  @media (min-width: 1200px) {
-    ${({ isPopup }) => isPopup && css`
-      font-size: 16px;
-    `};
-  }
+`
+
+export const RedirectLink = styled.div`
+  position: relative;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px;
+  width: 100%;
 `
 
 export const SocialButtons = styled.div`
-   width: 90%;
+   width: 100%;
    margin-top: 10px;
 
   button {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     width: 100%;
     padding: 5px 30px;
     color: #000000;
-
+    border-radius: 0px;
+    background-color: transparent;
+    border: 1px solid;
     img {
       width: 30px;
     }
 
     div {
       font-size: 0.8em;
+      margin: 0 10px;
     }
+  }
+
+  button:first-child{
+    border-color: #365988;
+    color: #365988;
+    font-weight: 700;
+  }
+
+  button:nth-child(2){
+    border-color: #000000;
+    color: #000000;
+    font-weight: 700;
+  }
+
+  button:nth-child(2){
+    border-color: #666666;
+    color: #666666;
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 40px;
   }
 `
 
 export const SkeletonSocialWrapper = styled.div`
-  width: 90%;
+  width: 100%;
   span{
-    border-radius: 30px;
+    border-radius: 0px;
     margin-bottom: 10px
+  }
+
+  @media (min-width: 768px) {
+    margin-top: 40px;
   }
 `
 
 export const TogglePassword = styled.span`
   position: absolute;
+  top: 14px;
+  right: 10px;
   font-weight: 300;
-  padding: 10px 0;
   color: #333;
   font-size: 26px;
-  transform: translate(-150%, 10%);
   max-height: 100%;
-  ${props => props.theme?.rtl && css`
-    transform: translate(150%, 10%);
-  `}
+  
   span{
     cursor: pointer;
   }
- 
+
+  @media (min-width: 768px) {
+    top: 4px;
+  } 
 `
 
 export const WrapperPassword = styled.div`
   position: relative;
+  width: 100%;
   input{
     box-sizing: border-box;
-    width: 100%;
     padding-right: 40px;
   }
 `
@@ -293,4 +274,96 @@ export const CountdownTimer = styled.div`
 
 export const ReCaptchaWrapper = styled.div`
   margin: 12px auto;
+`
+export const FormTitle = styled.div`
+  display: flex;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 28px;
+  text-transform: uppercase;
+  color: ${props => props.theme.colors.primary};
+  margin-top: 10px;
+  margin-bottom: 20px;
+  @media (min-width: 768px) {
+    font-size: 24px;
+    line-height: 34px;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    width: 100%;
+  }
+
+  @media (min-width: 1440px) {
+    width: 75%;
+    margin-right: auto;
+    ${props => props.theme?.rtl && css`
+        margin-right: unset;
+        margin-left: auto;
+    `}
+  }
+`
+export const FormInline = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  button {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .forgot {
+    span {
+      color: ${props => props.theme.colors.primary};
+      width: 100%;
+    }
+
+    a {
+      position: absolute;
+      z-index: 10;
+      opacity: 0;
+      text-decoration: none;
+      width: 100%;
+    }
+  }
+
+  .phone_number {
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    width: 48.6795%;
+  }
+`
+
+export const FormBottom = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 0;
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  border-left: none;
+  border-right: none;
+  align-items: center;
+  margin-top: 25px;
+`
+
+export const CreateAccount = styled.div`
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  a {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+  button {
+    font-size: 16px;
+    line-height: 26px;
+    color: #666666;
+    padding: 11px 14px;
+    border-radius: 0;
+    background-color: transparent;
+  }
 `

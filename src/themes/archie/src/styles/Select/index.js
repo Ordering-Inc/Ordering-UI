@@ -19,7 +19,8 @@ export const Select = (props) => {
     onChange,
     notAsync,
     notReload,
-    isFullWidth
+    isFullWidth,
+    noborder
   } = props
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
@@ -79,6 +80,7 @@ export const Select = (props) => {
       isHome={isHome}
       disabled={orderState.loading && !notReload}
       onMouseUp={handleSelectClick}
+      noborder={noborder}
       fullwidth={isFullWidth}
     >
       {!selectedOption && <Selected fullwidth={isFullWidth}>{placeholder || ''}<Chevron><BisDownArrow /></Chevron></Selected>}

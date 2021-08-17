@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
-import MdClose from '@meronex/icons/md/MdClose'
 import {
   Header as HeaderContainer,
   InnerHeader,
@@ -12,30 +10,31 @@ import {
   RightHeader,
   Menu,
   MenuLink,
-  CustomerInfo,
-  UserEdit,
   SubMenu,
-  DesktopSubmenu
+  UserEdit,
+  CenterHeader,
+  HeaderOptions,
+  OrderTypes
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 import { capitalize } from '../../../../../utils'
-import { UserPopover } from '../../../../../components/UserPopover'
+import { AddressesPopover } from '../../../../../components/AddressesPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
+import { Modal } from '../../../../../components/Modal'
 import { MomentContent } from '../../../../../components/MomentContent'
+import { AddressList } from '../../../../../components/AddressList'
+import { AddressForm } from '../../../../../components/AddressForm'
+import { SidebarMenu } from '../../../../../components/SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
-
-import { AddressesPopover } from '../AddressesPopover'
-import { Modal } from '../Modal'
-import { AddressList } from '../AddressList'
-import { AddressForm } from '../AddressForm'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
-import { CartSidebar } from '../CartSidebar'
 import { LanguageSelector } from '../LanguageSelector'
-import { CartContent } from '../CartContent'
-import { SidebarMenu } from '../SidebarMenu'
 import { HeaderOption } from '../HeaderOption'
+import { UserPopover } from '../UserPopover'
+import { CartPopover } from '../CartPopover'
+import { CartContent } from '../CartContent'
+
 export const Header = (props) => {
   const {
     isHome,
@@ -45,6 +44,7 @@ export const Header = (props) => {
     isHideSignup,
     isCustomerMode
   } = props
+
   const { pathname } = useLocation()
   const [events] = useEvent()
   const [, t] = useLanguage()
@@ -54,7 +54,7 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
-  const clearCustomer = useRef(null)
+  // const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
@@ -65,44 +65,31 @@ export const Header = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
-  const handleClickUserCustomer = (e) => {
-    const isActionsClick = clearCustomer.current?.contains(e?.target)
-    if (isActionsClick) {
-      setConfirm({
-        open: true,
-        content: t('QUESTION_CLEAR_CUSTOMER', theme?.defaultLanguages?.QUESTION_CLEAR_CUSTOMER || 'Are you sure that you want to clear the customer?'),
-        handleOnAccept: () => {
-          deleteUserCustomer(true)
-          refreshOrderOptions()
-          handleGoToPage({ page: 'home' })
-          setConfirm({ ...confirm, open: false })
-        }
-      })
-      return
-    }
-    setCustomerModalOpen(true)
-  }
   const openModal = (opt) => {
     setModalSelected(opt)
     setModalIsOpen(true)
   }
+
   const handleTogglePopover = (type) => {
     setOpenPopover({
       ...openPopover,
       [type]: !openPopover[type]
     })
   }
+
   const handleClosePopover = (type) => {
     setOpenPopover({
       ...openPopover,
       [type]: false
     })
   }
+
   const handleAddProduct = () => {
     if (!closeCartPopover) {
       handleTogglePopover('cart')
     }
   }
+
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
     if (isCustomerMode && pathname.includes('/orders')) {
@@ -110,15 +97,18 @@ export const Header = (props) => {
       refreshOrderOptions()
     }
   }
+
   useEffect(() => {
     events.on('cart_product_added', handleAddProduct)
     return () => events.off('cart_product_added', handleAddProduct)
   }, [])
+
   useEffect(() => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
     }
   }, [customerState?.user?.address])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -127,68 +117,63 @@ export const Header = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <HeaderContainer>
+      <HeaderContainer home={isHome}>
         <InnerHeader>
           <LeftHeader>
+            <SidebarMenu
+              auth={auth}
+              isHideSignup={isHideSignup}
+              userCustomer={userCustomer}
+              isCustomerMode={isCustomerMode}
+            />
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
             >
-              <img alt='Logotype' width='170px' height='45px' src={theme?.images?.logos?.logotype} loading='lazy' />
+              <img alt='Logotype' src={theme?.images?.logos?.logotype} loading='lazy' />
               <img alt='Isotype' width='35px' height='45px' src={theme?.images?.logos?.isotype} loading='lazy' />
             </LogoHeader>
-            {isShowOrderOptions && windowSize.width > 768 && (
-              <Menu className='left-header'>
-                {isCustomerMode && windowSize.width > 450 && (
-                  <CustomerInfo
-                    isHome={isHome}
-                    onClick={(e) => handleClickUserCustomer(e)}
-                  >
-                    <span>
-                      <FaUserCircle />
-                      <p>{userCustomer?.name} {userCustomer?.lastname}</p>
-                    </span>
-                    <span
-                      style={styles.headCustomer}
-                      ref={clearCustomer}
-                    >
-                      <MdClose style={styles.clearCustomer} />
-                    </span>
-                  </CustomerInfo>
-                )}
-                {!configState?.loading && configTypes.length > 0 && (
-                  <OrderTypeSelectorHeader
-                    configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                    defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
-                  />
-                )}
-              </Menu>
-            )}
           </LeftHeader>
-          {onlineStatus && (
-            <RightHeader className='test-mark'>
-              <Menu>
+          <CenterHeader>
+            {isShowOrderOptions && (
+              <>
                 {onlineStatus && windowSize.width > 820 && (
-                  <DesktopSubmenu>
-                    <HeaderOption
-                      variant='moment'
-                      momentState={orderState?.options?.moment}
-                      onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                        ? null
-                        : (variant) => openModal(variant)}
-                    />
+                  <HeaderOptions>
                     <HeaderOption
                       variant='address'
                       addressState={orderState?.options?.address?.address?.split(',')?.[0]}
                       onClick={(variant) => openModal(variant)}
                     />
-                  </DesktopSubmenu>
+                    {!isCustomerMode && (
+                      <HeaderOption
+                        variant='moment'
+                        momentState={orderState?.options?.moment}
+                        onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                          ? null
+                          : (variant) => openModal(variant)}
+                      />
+                    )}
+                  </HeaderOptions>
                 )}
+              </>
+            )}
+            {windowSize.width > 850 && (
+              <OrderTypes>
+                <OrderTypeSelectorHeader
+                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
+                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+                />
+              </OrderTypes>
+            )}
+          </CenterHeader>
+          {onlineStatus && (
+            <RightHeader>
+              <Menu>
                 {
-                  !auth && windowSize.width > 768 && (
+                  !auth && windowSize.width > 870 && (
                     <>
-                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t(theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
+                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', theme?.defaultLanguages?.SIGN_IN || 'LogIn')}</MenuLink>
                       {!isHideSignup && (
-                        <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t(theme?.defaultLanguages?.SIGN_UP || 'Join now')}</MenuLink>
+                        <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign Up')}</MenuLink>
                       )}
                     </>
                   )
@@ -208,7 +193,7 @@ export const Header = (props) => {
                       )}
                       {isShowOrderOptions && (
                         windowSize.width > 768 ? (
-                          <CartSidebar
+                          <CartPopover
                             open={openPopover.cart}
                             carts={cartsWithProducts}
                             onClick={() => handleTogglePopover('cart')}
@@ -230,17 +215,11 @@ export const Header = (props) => {
                 }
                 <LanguageSelector />
               </Menu>
-              <SidebarMenu
-                auth={auth}
-                isHideSignup={isHideSignup}
-                userCustomer={userCustomer}
-                isCustomerMode={isCustomerMode}
-              />
             </RightHeader>
           )}
         </InnerHeader>
         {onlineStatus && isShowOrderOptions && (
-          windowSize.width > 768 && windowSize.width <= 820 && (
+          windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
               <AddressesPopover
                 auth={auth}
@@ -256,15 +235,33 @@ export const Header = (props) => {
                   onClose={() => handleClosePopover('moment')}
                 />
               )}
-            </SubMenu>)
+            </SubMenu>
+          ) : (
+            <SubMenu>
+              <HeaderOption
+                variant='address'
+                addressState={orderState?.options?.address?.address?.split(',')?.[0]}
+                onClick={(variant) => openModal(variant)}
+              />
+              {!isCustomerMode && (
+                <HeaderOption
+                  variant='moment'
+                  momentState={orderState?.options?.moment}
+                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                    ? null
+                    : (variant) => openModal(variant)}
+                />
+              )}
+            </SubMenu>
+          )
         )}
         {modalIsOpen && (
           <Modal
             title={t(modalSelected.toUpperCase(), capitalize(modalSelected))}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            width='60%'
-            padding={modalSelected === '20px'}
+            width='70%'
+            padding={modalSelected === 'address' ? '20px' : '5px'}
           >
             {modalSelected === 'cart' && (
               <CartContent
@@ -341,21 +338,6 @@ export const Header = (props) => {
         </React.Fragment>))}
     </>
   )
-}
-
-const styles = {
-  headCustomer: {
-    margin: 0,
-    height: 20,
-    width: 20,
-    backgroundColor: '#CCCCCC',
-    borderRadius: '100%',
-    marginLeft: 5
-  },
-  clearCustomer: {
-    margin: 0,
-    fontSize: 20
-  }
 }
 
 Header.defaultProps = {

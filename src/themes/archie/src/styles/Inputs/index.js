@@ -1,14 +1,15 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
-import { Button } from '../../../../../styles/Buttons'
+import { Button } from '../Buttons'
 
 export const Input = styled.input`
-  background: #FFF;
-  color: #010300;
-  border: 1px solid #DBDCDB;
-  border-radius: 7px;
-  font-size: 16px;
-  padding: 7px 15px;
+  background: transparent;
+  color: ${props => props.theme.colors.secundaryFontColor};;
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  border-radius: 0px;
+  font-size: .86rem;
+  line-height: 24px;
+  padding: 7px 11px;
   outline: none;
   &:focus {
     border-color: ${() => darken(0.07, '#CCC')};

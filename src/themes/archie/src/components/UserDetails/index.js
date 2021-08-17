@@ -1,28 +1,25 @@
 import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { Container, Header, SideForm, UserData } from './styles'
-
 import {
   UserFormDetails as UserFormController,
   useLanguage,
   useSession
 } from 'ordering-components'
-
 import { UserFormDetailsUI } from '../UserFormDetails'
-import { Button } from '../../../../../styles/Buttons'
 
 const UserDetailsUI = (props) => {
   const {
     isEdit,
     formState,
     cleanFormState,
+    cartStatus,
     toggleIsEdit,
     validationFields,
     isUserDetailsEdit,
     isCustomerMode,
     userState
   } = props
-
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const userData = userState.result?.result || props.userData || formState.result?.result || user
@@ -57,8 +54,14 @@ const UserDetailsUI = (props) => {
       {!(validationFields.loading || formState.loading || userState.loading) && (
         <Container>
           <Header className='user-form'>
-            <h2>{t('CUSTOMER_DETAILS', 'Customer Details')}</h2>
-            {!isEdit && <Button outline color='primary' className='edit' onClick={() => toggleIsEdit()}>{t('EDIT', 'Edit')}</Button>}
+            <h4>{t('CUSTOMER_DETAILS', 'Customer Details')}</h4>
+            {cartStatus !== 2 && (
+              !isEdit ? (
+                <span className='edit' onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</span>
+              ) : (
+                <span className='cancel' onClick={() => toggleEditState()}>{t('CLEAR', 'Clear')}</span>
+              )
+            )}
           </Header>
           {!isEdit ? (
             <UserData>
@@ -88,7 +91,6 @@ const UserDetailsUI = (props) => {
               <UserFormDetailsUI
                 {...props}
                 userData={userData}
-                onCancel={toggleEditState}
                 isCustomerMode={isCustomerMode}
               />
             </SideForm>

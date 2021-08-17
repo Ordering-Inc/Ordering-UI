@@ -45,7 +45,7 @@ export const BusinessItemAccordion = (props) => {
   const [events] = useEvent()
 
   const [setActive, setActiveState] = useState('')
-  const [setHeight] = useState('0px')
+  const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
   const [cartProductUpdated, setCartProductUpdated] = useState(null)
 
@@ -129,6 +129,7 @@ export const BusinessItemAccordion = (props) => {
           isClosed={isClosed}
           className={`accordion ${setActive}`}
           onClick={(e) => toggleAccordion(e)}
+          isCheckout={isCheckout}
         >
           <BusinessInfo>
             {(business?.logo || theme.images?.dummies?.businessLogo) && !isCartOnProductsList && (
@@ -201,6 +202,7 @@ export const BusinessItemAccordion = (props) => {
         <AccordionContent
           ref={content}
           style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
+          isCheckout={isCheckout}
         >
           {props.children}
         </AccordionContent>

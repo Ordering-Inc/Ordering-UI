@@ -1,11 +1,13 @@
 import React from 'react'
 import { useUtils, useLanguage, useConfig } from 'ordering-components'
-import IosBasket from '@meronex/icons/ios/IosBasket'
-import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
+import BiCart from '@meronex/icons/bi/BiCart'
 import FaRegClock from '@meronex/icons/fa/FaRegClock'
+import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 
 import {
-  Container
+  Container,
+  AddressInput,
+  DeliverytimeInput
 } from './styles'
 
 export const HeaderOption = (props) => {
@@ -34,23 +36,23 @@ export const HeaderOption = (props) => {
       >
         {variant === 'cart' && (
           <span>
-            <IosBasket id='icon' />
+            <BiCart id='icon' />
             {totalCarts > 0 && <p>{totalCarts}</p>}
           </span>
         )}
         {variant === 'address' && (
-          <>
-            <FaMapMarkerAlt id='icon' />
+          <AddressInput>
+            <HiOutlineLocationMarker id='icon' />
             {addressState || t('SELECT_AN_ADDRESS', 'Select an address')}
-          </>
+          </AddressInput>
         )}
         {variant === 'moment' && (
-          <>
+          <DeliverytimeInput>
             <FaRegClock id='icon' />
             {momentState
               ? parseDate(momentState, { outputFormat: configs?.dates_moment_format?.value })
               : t('ASAP_ABBREVIATION', 'ASAP')}
-          </>
+          </DeliverytimeInput>
         )}
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (

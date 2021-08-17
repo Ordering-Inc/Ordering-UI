@@ -24,12 +24,6 @@ export const FormInput = styled.form`
     width: 100%;
     padding: 7px 0;
   }
-  input {
-    border-radius: 7px;
-  }
-  input.PhoneInputInput{
-    border-radius: 7px;
-  }
   @media (min-width: 769px) {
     flex-wrap: wrap;
     flex-direction: row;
@@ -87,7 +81,6 @@ export const SkeletonForm = styled.div`
   flex-wrap: wrap;
   padding: 0;
   margin-top: 0px;
-  
   > * {
     width: 100%;
     margin: 10px 0;

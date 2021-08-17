@@ -1,47 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { AddressDetails as AddressDetailsController, useOrder, useLanguage, useCustomer } from 'ordering-components'
-
+import React, { useState } from 'react'
+import { AddressDetails as AddressDetailsController, useLanguage } from 'ordering-components'
 import {
   AddressContainer,
-  Header,
   Map,
   WrappMap
 } from './styles'
-
 import { Alert } from '../../../../../components/Confirm'
-import { Button } from '../../../../../styles/Buttons'
-
-import { Modal } from '../Modal'
-import { AddressList } from '../AddressList'
 
 const AddressDetailsUI = (props) => {
   const {
-    addressToShow,
-    isCartPending,
     googleMapsUrl,
-    isCustomerMode,
-    apiKey,
-    isFromCheckout
+    apiKey
   } = props
-
-  const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const [openModal, setOpenModal] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-  const [{ user }] = useCustomer()
-
-  const handleFindBusinesses = () => {
-    if (!orderState?.options?.address?.location) {
-      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')] })
-      return
-    }
-    setOpenModal(false)
-  }
-
-  useEffect(() => {
-    return () => setOpenModal(false)
-  }, [])
 
   return (
     <>
@@ -52,17 +24,6 @@ const AddressDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <AddressContainer>
-        <Header>
-          <h2>{t('DELIVERY_ADDRESS', 'Delivery address')}</h2>
-          {orderState?.options?.type === 1 && !isCartPending &&
-            <Button
-              onClick={() => setOpenModal(true)}
-              outline
-              color='primary'
-            >
-              {t('CHANGE', 'Change')}
-            </Button>}
-        </Header>
         {apiKey && (
           <WrappMap>
             <Map>
@@ -70,26 +31,6 @@ const AddressDetailsUI = (props) => {
             </Map>
           </WrappMap>
         )}
-        <Header>
-          <h4>{addressToShow || orderState?.options?.address?.address}</h4>
-        </Header>
-        <Modal
-          title={t('ADDRESSES', 'Addresses')}
-          open={openModal}
-          width='70%'
-          onClose={() => setOpenModal(false)}
-        >
-          <AddressList
-            isModal
-            changeOrderAddressWithDefault
-            userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-            onCancel={() => setOpenModal(false)}
-            onAccept={() => handleFindBusinesses()}
-            userCustomerSetup={isCustomerMode && user}
-            isFromCheckout={isFromCheckout}
-          />
-        </Modal>
-
         <Alert
           title={t('SEARCH', 'Search')}
           content={alertState.content}

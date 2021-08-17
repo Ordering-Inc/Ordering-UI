@@ -1,18 +1,53 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage } from 'ordering-components'
+import { useSession, useOrder, useLanguage } from 'ordering-components'
+import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import {
   HeroContainer,
   ContentWrapper,
   Title,
   Slogan,
-  OrderTypes
+  WrapInput,
+  AddressInput
 } from './styles'
-import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
+
+import { Modal } from '../../../../../components/Modal'
+import { AddressForm } from '../../../../../components/AddressForm'
+import { AddressList } from '../../../../../components/AddressList'
+
+import { Button } from '../../styles/Buttons'
+
 export const HomeHero = (props) => {
+  const { onFindBusiness } = props
+
+  const [{ auth }] = useSession()
+  const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const theme = useTheme()
-  const orderTypeStyle = 'Rectangle'
+  const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
+
+  const handleFindBusinesses = () => {
+    if (!orderState?.options?.address?.location) {
+      setModals({ ...modals, formOpen: true })
+      return
+    }
+    setModals({ listOpen: false, formOpen: false })
+    onFindBusiness && onFindBusiness()
+  }
+
+  const handleAddressInput = () => {
+    if (auth) {
+      setModals({ ...modals, listOpen: true })
+    } else {
+      setModals({ ...modals, formOpen: true })
+    }
+  }
+
+  useEffect(() => {
+    return () => setModals({ listOpen: false, formOpen: false })
+  }, [])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -23,12 +58,54 @@ export const HomeHero = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
-          <Title>{t(theme?.defaultLanguages?.TITLE_HOME || 'What type of order can we get started for you?')}</Title>
-          <Slogan>{t(theme?.defaultLanguages?.SUBTITLE_HOME || 'Order ahead for pickup or let us deliver to your location.')}</Slogan>
+          <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
+          <Slogan>{t('SUBTITLE_HOME', theme?.defaultLanguages?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan>
+          <WrapInput onClick={handleAddressInput} withIcon>
+            <AddressInput
+              name='address-selection'
+              aria-label='address selection'
+              type='text'
+            >
+              <HiOutlineLocationMarker />
+              {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', theme?.defaultLanguages?.TYPE_AN_ADDRESS || 'Type an address')}
+              <Button
+                color='primary'
+                name='find-business'
+                onClick={handleFindBusinesses}
+              >
+                {t('FIND', 'Find')}
+              </Button>
+            </AddressInput>
+          </WrapInput>
         </ContentWrapper>
-        <OrderTypes>
-          <OrderTypeSelectorHeader orderTypeStyle={orderTypeStyle} />
-        </OrderTypes>
+
+        <Modal
+          title={t('ADDRESS', theme?.defaultLanguages?.ADDRESS || 'Address')}
+          open={modals.formOpen}
+          onClose={() => setModals({ ...modals, formOpen: false })}
+        >
+          <AddressForm
+            useValidationFileds
+            address={orderState?.options?.address || {}}
+            onClose={() => setModals({ ...modals, formOpen: false })}
+            onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+            onCancel={() => setModals({ ...modals, formOpen: false })}
+          />
+        </Modal>
+        <Modal
+          title={t('ADDRESSES', theme?.defaultLanguages?.ADDRESSES || 'Addresses')}
+          open={modals.listOpen}
+          width='70%'
+          onClose={() => setModals({ ...modals, listOpen: false })}
+        >
+          <AddressList
+            isModal
+            changeOrderAddressWithDefault
+            userId={isNaN(userCustomer) ? null : userCustomer}
+            onCancel={() => setModals({ ...modals, listOpen: false })}
+            onAccept={() => handleFindBusinesses()}
+          />
+        </Modal>
       </HeroContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

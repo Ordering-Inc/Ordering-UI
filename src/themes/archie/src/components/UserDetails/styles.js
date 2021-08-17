@@ -1,20 +1,36 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  padding-bottom: 20px;
+`
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 5px;
   justify-content: space-between;
-
-  h2 {
-    color: ${props => props.theme.colors.fontSecundary};
-    font-weight: 200;
-    margin: 0px 0 10px;
+  width: 100%;
+  h4 {
+    margin: 0px 10px 0px 0px;
+    ${props => props.theme?.rtl && css`
+      margin: 0px 0px 0px 10px;
+    `}
+    font-size: 20px;
+    line-height: 30px;
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase;
   }
-  button {
-    height :40px;
-    width: 100px;
+  span {
+    color: ${props => props.theme.colors.primary};
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    text-transform: capitalize;
+    padding-bottom: 3px;
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+    cursor: pointer;
   }
 `
 
@@ -28,19 +44,17 @@ export const SideForm = styled.div`
 `
 
 export const UserData = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   text-align: left;
-  
   ${props => props.theme?.rtl && css`
     text-align: right;
   `}
-  > * {
-    margin: 8px 0;
-    width: 75%;
+  p {
+    font-size: 14px;
+    line-height: 24px;
+    color: #212629;
+    margin: 0;
   }
-
-  
 `

@@ -42,10 +42,10 @@ export const FormControl = styled.form`
     box-sizing: border-box;
     margin: 10px 0px;
     height: 43px;
-    border-radius: 7px;
+    width: 100%;
     &.internal_number,
     &.zipcode {
-      width: 47% 
+      flex: auto;
     }
     &::placeholder{
       color: #CBCBCB
@@ -55,13 +55,12 @@ export const FormControl = styled.form`
   textarea {
     width: 100%;
     margin: 10px 0;
-    border-radius: 7px;
   }
 
   .input-autocomplete {
     width: 100%;
     background: #FFF;
-    border: 1px solid ${props => props.theme.colors.borderColor};
+    border: 1px solid #BBB;
     border-radius: 30px;
     font-size: 16px;
     padding: 7px 15px;
@@ -93,12 +92,6 @@ export const AddressWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-
-  .gps-button {
-    right: 7px;
-    width: 35px;
-    height: 35px;
-  }
 `
 
 export const WrapAddressInput = styled.div`
@@ -126,7 +119,6 @@ export const WrapAddressInput = styled.div`
     background-repeat: no-repeat !important;
     background-size: 13px !important;
     padding: 7px 15px 7px 30px !important;
-    border-radius: 7px !important;
     ${props => props.theme?.rtl && css`
       padding: 7px 30px 7px 15px !important;
     `}
@@ -145,8 +137,6 @@ export const AddressTagSection = styled.div`
     align-items: center;
     width: 46px;
     height: 46px;
-    border: none;
-    background-color: transparent;
 
     img {
       width: 22px;
@@ -157,16 +147,12 @@ export const AddressTagSection = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 26px;
+      font-size: 22px;
     }
-
-    &:hover {
-      background-color: transparent;
-      color: ${props => props.theme.colors.primary};
-    }    
   }
 
   button.active {
+    border: 1px solid ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
   }
 `
@@ -174,12 +160,11 @@ export const AddressTagSection = styled.div`
 export const WrapperMap = styled.div`
   width: 100%;
   height: 250px;
-  margin: 10px auto;
   > div {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
-    border-radius: 7px;
+    border-radius: 15px;
   }
 `
 
@@ -188,7 +173,7 @@ export const ShowMap = styled.p`
   color: #000;
   width: 100%;
   font-weight: 600;
-  cursor: pointer;
+  cursor: pointer
 `
 
 export const WrapperSkeleton = styled.div`

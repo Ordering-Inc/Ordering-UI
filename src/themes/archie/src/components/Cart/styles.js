@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components'
+
 export const CartContainer = styled.div`
-  /* border-bottom: 1px solid #F0F0F0; */
+  margin-bottom: 5px;
 `
+
 export const CartSticky = styled.div`
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
     overflow-y: auto;
@@ -10,19 +12,17 @@ export const CartSticky = styled.div`
     top: 20px;
   `}
 `
+
 export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
-  background-color: #FFF;
   table {
     width: 100%;
-    font-size: 16px;
-    font-weight: 300;
     td span {
       unicode-bidi: bidi-override;
     }
+
     tr td:nth-child(2) {
       font-weight: 500;
       text-align: right;
@@ -31,29 +31,38 @@ export const OrderBill = styled.div`
     `}
     }
   }
+
+  table.bill-sub-option {
+    tr td{
+      font-size: 12px;
+      line-height: 22px;
+      color: #212629;
+    }
+    padding-top: 20px;
+  }
+  
   table.total {
-    border-top: 1px solid #EAEAEA;
     padding-top: 10px;
-    tr {
-      td:nth-child(1) {
-        font-weight: bold;
-      }
-      td:nth-child(2) {
-        font-weight: bold;
-        color: #D81212;
-      }
+    tr td {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 24px;
+      color: #212629;
     }
   }
+
   @media (min-width: 411px) {
     table {
       font-size: 18px;
     }
   }
 `
+
 export const CouponContainer = styled.div`
   width: 100%;
   margin: 10px;
 `
+
 export const CheckoutAction = styled.div`
   width: 100%;
   display: flex;
@@ -64,10 +73,26 @@ export const CheckoutAction = styled.div`
   margin-bottom: 10px;
   button {
     padding: 10px 30px;
-    width: 90%;
+    width: 100%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed
     }
+  }
+`
+export const CouponQuestion = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 0 5px;
+  box-sizing: border-box;
+  p {
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 0px;
+  } 
+  span {
+    margin: 0 10px;
+    cursor: pointer;
+    color: ${props => props.theme.colors.primary};
   }
 `

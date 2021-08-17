@@ -5,28 +5,20 @@ export const ProductsContainer = styled.div`
 `
 
 export const WrapContent = styled.div`
-  padding: 5px;
+  padding: 0 15px;
   background: ${props => props.theme.colors.backgroundPage};
-  display:  flex;
 
-  ${({ isLoading }) => isLoading && css`
-    display:  block;
-  `}
-
-  @media (min-width: 381px) {
-    padding: 15px;
+  @media (min-width: 768px) {
+    padding: 0px;
+    width: 75%;
+    overflow-x: hidden;
+    padding: 0 20px 30px;
+    box-sizing: border-box;
   }
 
-  @media (min-width: 1024px) {
-    max-width: 1200px;
-    padding: 15px 35px;
-    margin: 0 auto;
+  @media (min-width: 1200px) {
+    width: 80%;
   }
-
-  @media (min-width: 1405px) {
-    max-width: 1420px;
-  }
-
 `
 
 export const WrapperSearch = styled.div`
@@ -34,24 +26,13 @@ export const WrapperSearch = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  display: none;
+
   .search-bar {
     margin-right: 10px;
     ${props => props.theme?.rtl && css`
       margin-left: 10px;
       margin-right: 0;
     `}
-  }
-
-  #select-input {
-    border: none;
-    background-color: #fff !important;
-    border-radius: 0;
-    text-transform: uppercase;
-
-    #list {
-      border-radius: 0;
-    }
   }
 
   div:last-child {
@@ -101,6 +82,11 @@ export const SkeletonItem = styled.div`
 `
 
 export const WrappLayout = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    width: 100vw;
+  }
+
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
     display: flex;
     flex-direction: column;
@@ -141,24 +127,37 @@ export const WrappLayout = styled.div`
     }  
   `}
 `
-
-export const WrapProductsCategroy = styled.div`
-  
+export const BusinessProductsCategorieWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    width: 25%;
+  }
+  @media (min-width: 1200px) {
+    width: 20%;
+  }
 `
-
-export const WrapBusinessList = styled.div`
-  width: 100%;
-
+export const CartegoryTitle = styled.div`
+  display: flex;
+  background-color: ${props => props.theme.colors.primary};
+  font-size: 20px;
+  line-height: 30px;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 15px;
+  @media (min-width: 768px) {
+    background-color: ${props => props.theme.colors.primaryDark};
+    padding-left: 10%;
+    ${props => props.theme?.rtl && css`
+      padding-right: 10%;
+      padding-left: unset;
+    `}
+  }
   @media (min-width: 1024px) {
-    &.right-list-panel {
-      padding-left: 25px;
-    }
-  } 
-
-  @media (min-width: 1405px) {
-    &.right-list-panel {
-      padding-left: 45px;
-    }
-  } 
-  
+    padding-left: 15%;
+    ${props => props.theme?.rtl && css`
+      padding-right: 15%;
+      padding-left: unset;
+    `}
+  }
 `

@@ -5,18 +5,12 @@ export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-shadow: 0px 0px 6px #00000029;
   opacity: 1;
 
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
     position: sticky;
     top: 20px;
   `}
-
-  &:last-child {
-    border-bottom: 0;
-    margin-bottom: 10px;
-  }
 `
 
 export const Accordion = styled.div`
@@ -31,6 +25,10 @@ export const Accordion = styled.div`
 
   ${props => props.isClosed && css`
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  `}
+
+  ${({ isCheckout }) => isCheckout && css`
+    display: none;
   `}
 
   .rotate {

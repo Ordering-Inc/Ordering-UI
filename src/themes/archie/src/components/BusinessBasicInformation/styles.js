@@ -1,118 +1,84 @@
 import styled, { css } from 'styled-components'
+
 export const BusinessContainer = styled.div`
-  position: relative;  
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 10px 20px;
-  ${props => props.isClosed && css`
-    background-color: #B8B8B8;
-  `}
-  ${props => props.isSkeleton && css`
-    background-color: transparent ;
-    span {
-      margin: 2px 0;
-    }
-  `}
-  h1 {
-    color: #FFF;
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0 10px;
-    padding: 0;
-  }
-  @media (min-width: 381px) {
-    padding: 10px 35px;
-  }
-  @media (min-width: 1024px) {
-    padding: 0;
-  }
-`
-export const BusinessContent = styled.div`
-  display: flex;
-  position: relative;
-`
-export const BusinessInfo = styled.div`
-  display: flex;
-`
-export const BusinessInfoItem = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  div {
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    h2 {
-      margin-top: 0;
-      margin-bottom: 5px;
-    }
-    p {
-      align-items: center;
-      margin: 0px;
-      overflow: hidden;
-      /* white-space: nowrap; */
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 1; /* number of lines to show */
-      -webkit-box-orient: vertical;
-      svg {
-        margin-right: 4px;
-        ${props => props.theme?.rtl && css`
-          margin-left: 4px;
-          margin-right: 0px;
-        `}
-        &.start {
-          color: #FFC917;
-        }
-      }
-      &.bold {
-        font-weight: 600;
-      }
-      &.type {
-        margin-bottom: 5px;
-        ${props => props.theme?.colors.fontSecundary
-            ? css`
-                color: ${props => props.theme?.colors.fontSecundary};
-            `
-            : css`
-                color: #b5b4b4;;
-            `
-        }        
-      }
-    }
-    @media (min-width: 481px) {
-      font-size: 16px;
-    }
+  width: 100%;
+  position: relative;
+  ${props => props.isSkeleton && css`
+    background-color: #F8F8F8;
+  `}
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
-  .meta {
-    width: 300px;
-    @media (min-width: 381px) {
-      width: 350px;
+`
+export const BusinessName = styled.div`
+  position: relative;
+  padding: 50px 20px;
+  background-color: ${props => props.theme.colors.primary};
+  p {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 35px;
+    color: #fff;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  ${props => props.isClosed && css`
+    p {
+      opacity: 0.5;
+    }
+  `}
+  @media (min-width: 768px) {
+    display: flex;
+    width: 35%;
+    align-items: center;
+    padding-left: 3%;
+  }
+  @media (min-width: 1024px) {
+    p {
+      font-size: 32px;
+      line-height: 42px; 
     }
   }
 `
-
-export const BusinessInfomation = styled.div`
-  position: absolute;
-  top: 0px;
-  right: 0;
-  width: 30px;
-  height: 30px;
+export const BusinessHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
-  z-index: 2;
-
-  svg {
-    font-size: 20px;
+  box-sizing: border-box;
+  position: relative;
+  max-height: 260px;
+  height: 260px;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  min-height: 200px;
+  border-radius: 0px;
+  ${props => props.bgimage && !props.isClosed && css`
+    background-image: url(${props.bgimage});
+  `}
+  ${props => props.bgimage && props.isClosed && css`
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url(${props.bgimage});
+  `}
+  @media (min-width: 768px) {
+    width: 65%;
   }
-
-  &:hover svg{
-    font-size: 21px;
+`
+export const CloseOverall = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000082;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: #FFF;
+    opacity: 0.7;
   }
 `

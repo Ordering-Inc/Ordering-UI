@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { DriverTips as DriverTipsController, useUtils, useLanguage, useConfig } from 'ordering-components'
+
 import {
   DriverTipContainer,
   TipCard,
@@ -9,8 +10,9 @@ import {
   DriverTipLabel,
   WrapperTips
 } from './styles'
-import { Input } from '../../styles/inputs'
-import { Button } from '../../../../../styles/Buttons'
+import { Input } from '../../styles/Inputs'
+import { Button } from '../../styles/Buttons'
+
 const DriverTipsUI = (props) => {
   const {
     driverTip,
@@ -23,15 +25,19 @@ const DriverTipsUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
+
   const [value, setvalue] = useState(0)
+
   const handleChangeDriverTip = (e) => {
     let tip = parseFloat(e?.target?.value)
     tip = isNaN(tip) ? 0 : tip
     setvalue(tip)
   }
+
   const placeholderCurrency = (configs?.currency_position?.value || 'left') === 'left'
     ? `${configs?.format_number_currency?.value}0`
     : `0${configs?.format_number_currency?.value}`
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -100,10 +106,12 @@ const DriverTipsUI = (props) => {
     </>
   )
 }
+
 export const DriverTips = (props) => {
   const driverTipsProps = {
     ...props,
     UIComponent: DriverTipsUI
   }
+
   return <DriverTipsController {...driverTipsProps} />
 }

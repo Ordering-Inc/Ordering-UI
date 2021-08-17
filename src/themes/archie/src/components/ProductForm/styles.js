@@ -2,61 +2,56 @@ import { lighten } from 'polished'
 import styled, { css } from 'styled-components'
 export const ProductContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   max-height: 100vh;
   position: relative;
-  padding: 50px 10px 10px;
+  padding: 50px 0px 20px;
+  color: ${props => props.theme.colors.secundaryFontColor};
   @media (min-width: 768px) {
     height: 100%;
   }
   @media (min-width: 769px) {
-    padding: 10px;
   }
   @media (min-width: 1201px) {
-    flex-wrap: nowrap;
-    overflow: auto;
-    max-height: 70vh;
-}
+  }
 `
 export const WrapperImage = styled.div`
   width: 100%;
+  overflow: hidden;
   position: relative;
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  height: 150px;
+  @media (min-width: 768px) {
+    min-height: 200px;
+    height: 200px;
+  }
   @media (min-width: 1201px) {
-    display: flex;
-    width: calc(40% - 10px);
-    position: sticky;
-    top: 0;
-    flex-direction: column;
-    align-items: center;
-    border-right: 1px solid ${props => props.theme.colors.borderColor};
-    overflow-y: auto;
-    ${props => props.theme?.rtl && css`
-      border-left: 1px solid ${props => props.theme.colors.borderColor};
-    `}
+    min-height: 300px;
+    height: 300px;
   }
 `
 export const ProductImage = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  height: 300px;
   width: 100%;
+  min-height: 150px;
+  height: 150px;
+  overflow: hidden;
   img {
+    box-sizing: border-box;
     width: 100%;
-    object-fit: cover;
+  }
+  @media (min-width: 768px) {
+    min-height: 200px;
+    height: 200px;
   }
   @media (min-width: 1201px) {
-    justify-content: center;
-    padding-top: 4vh;
-    img {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      box-sizing: border-box;
-      padding: 4px;
-      border: 1px solid ${props => props.theme.colors.primary};
-    }
+    min-height: 300px;
+    height: 300px;
   }
 `
 export const ProductInfo = styled.div`
@@ -65,14 +60,6 @@ export const ProductInfo = styled.div`
   width: 100%;
   padding: 0px;
   position: relative;
-  margin-top: 20px;
-  h1 {
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-    color: #263238;
-    margin-top: 0px;
-  }
   p {
     font-size: 14px;
     font-weight: 200;
@@ -92,76 +79,95 @@ export const ProductInfo = styled.div`
       font-size: 16px;
     }
   }
-  @media (min-width: 411px) {
-    padding: 10px 0px;
-  }
-  @media (min-width: 1201px) {
-    width: calc(60% - 100px);
-    padding: 0 50px;
-    top: 0;
+`
+export const ProductMeta = styled.div`
+  padding: 0 20px;
+  margin: 25px 0 15px;
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #263238;
     margin-top: 0px;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-transform: uppercase;
+    color: ${props => props.theme.colors.secundaryFontColor};
+  }
+  h5 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 100;
+    color: ${props => props.theme.colors.secundaryFontColor};
   }
 `
-export const ProductFormTitle = styled.div`
-  overflow-wrap: break-word;
-  padding: 0 7px;
-  @media (min-width: 1201px) {
-    width: calc(100% - 25px);
-  }
+export const ProductEdition = styled.div`
+  padding: 20px;
+  max-height: 34vh;
+  overflow-y: scroll;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 `
-export const ProductEdition = styled.div``
 export const SectionTitle = styled.h3`
   text-transform: capitalize;
-  font-size: 18px;
-  padding: 15px 0px;
+  font-size: 20px;
+  line-height: 30px;
   margin: 0px;
   font-weight: 600;
-  color: #333333;
+  color: #666666;
 `
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 115px;
-  h3 {
-    color: ${props => props.theme.colors.fontSecundary};
-  }
+  padding: 20px;
+  margin-bottom: 40px;
   p {
     font-weight: 300;
     margin-bottom: 5px;
   }
-  @media (min-width: 577px) {
-    margin-bottom: 62px;
-  }
-  @media (min-width: 769px) {
-    margin-bottom: 0px;
+  textarea {
+    margin-top: 20px;
   }
 `
 export const ProductActions = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 0px;
+  padding: 10px 20px;
   width: 100%;
+  box-sizing: border-box;
   position: fixed;
   bottom: 0;
   right: 0;
   width: 100%;
   background-color: #FFF;
+  @media (min-width: 577px) {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  @media (min-width: 1024px) {
+    position: relative;
+    bottom: initial;
+    right: initial;
+  }
+`
+export const ActionItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   div.incdec-control {
-    width: 50%;
+    width: 25%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     svg {
-      width: 35px;
-      height: 35px;
+      width: 25px;
+      height: 25px;
       cursor: pointer;
     }
-  }
-  div:last-child {
-    width: 100%;
-    display: flex;
-    align-items: center;
   }
   button:disabled,
   button.disabled,
@@ -172,65 +178,34 @@ export const ProductActions = styled.div`
     pointer-events: none;
   }
   button.add {
-    width: 90%;
+    width: 55%;
     padding: 5px 10px;
-    margin: 10px 0px 0px;
     position: relative;
-    span:last-child {
-      position: absolute;
-      right: 0;
-      margin-right: 10px;
-      ${props => props.theme?.rtl && css`
-        position: absolute;
-        left: 0;
-        right: initial;
-        margin-left: 10px;
-        margin-right: 0px;
-      `}
-    }
     &.soldout {
-      width: 100%;
       pointer-events: none;
     }
   }
+  .total-price {
+    font-size: 20px;
+    line-height: 30px;
+    color: #666666;
+    font-weight: 600;
+  }
   @media (min-width: 577px) {
-    justify-content: space-between;
-    flex-direction: row;
-    div.incdec-control {
-      width: 25%;
-    }
-    div:last-child {
-      width: 75%;
-    }
-    button.add {
-      width: 75%;
-      margin: 0 10px;
-    }
+    width: 50%;
   }
-  @media (min-width: 769px) {
-    position: relative;
-    bottom: initial;
-    right: initial;
-    button.add {
-      width: 100%;
-      margin: 0px;
+  @media (min-width: 1024px) {
+    &:first-child {
+      width:40%;
     }
-  }
-  @media (min-width: 1201px) {
-    position: sticky;
-    top: 100%;
-    padding: 10px 0px;
+    &:last-child {
+      width:60%;
+    }
     div.incdec-control {
-      width: 30%;
-    }
-    div:last-child {
-      width: 70%;
-      button {
-        width: 100%;
-      }
+      width: 32%;
     }
     button.add {
-      width: 68%;
+      width: 45%;
     }
   }
 `
@@ -265,9 +240,19 @@ export const SkuContent = styled.div`
   }
 `
 export const WrapperIngredients = styled.div`
+  padding: 20px;
   ${({ isProductSoldout }) => isProductSoldout && css`
     border-radius: 10px;
     pointer-events: none;
     background: hsl(0, 0%, 72%);
   `}
+`
+export const CategoriesContainer = styled.div`
+  box-sizing: border-box;
+  overflow-x : scroll;
+`
+export const Hr = styled.div`
+  width: 100%;
+  height: ${({ height }) => height ? `${height}px` : '10px'};
+  background: ${({ color }) => color ? `${color}` : '#DDDDDD'};
 `

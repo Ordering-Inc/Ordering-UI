@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import BiHome from '@meronex/icons/bi/BiHome'
-import RiBuildingLine from '@meronex/icons/ri/RiBuildingLine'
-import AiOutlinePlus from '@meronex/icons/ai/AiOutlinePlus'
+import FaHome from '@meronex/icons/fa/FaHome'
+import FaPlus from '@meronex/icons/fa/FaPlus'
+import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
 import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
@@ -27,11 +27,12 @@ import {
   WrapAddressInput,
   AddressTagSection,
   WrapperMap,
+  ShowMap,
   WrapperSkeleton
 } from './styles'
 
-import { Button } from '../../../../../styles/Buttons'
-import { Input, TextArea } from '../../styles/inputs'
+import { Button } from '../../styles/Buttons'
+import { Input, TextArea } from '../../styles/Inputs'
 
 const inputNames = [
   { name: 'address', code: 'Address' },
@@ -64,6 +65,7 @@ const AddressFormUI = (props) => {
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
+  const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
@@ -193,6 +195,7 @@ const AddressFormUI = (props) => {
       return
     }
 
+    setToggleMap(false)
     const arrayList = isEditing
       ? addressesList?.filter(address => address?.id !== addressState?.address?.id) || []
       : addressesList || []
@@ -352,7 +355,6 @@ const AddressFormUI = (props) => {
           onSubmit={formMethods.handleSubmit(onSubmit)}
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
-          className='add-address-form'
         >
           {
             props.beforeMidElements?.map((BeforeMidElements, i) => (
@@ -364,6 +366,19 @@ const AddressFormUI = (props) => {
             props.beforeMidComponents?.map((BeforeMidComponents, i) => (
               <BeforeMidComponents key={i} {...props} />))
           }
+          {locationChange && toggleMap && (
+            <WrapperMap>
+              <GoogleMapsMap
+                apiKey={googleMapsApiKey}
+                location={locationChange}
+                fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
+                mapControls={googleMapsControls}
+                handleChangeAddressMap={handleChangeAddress}
+                setErrors={setMapErrors}
+                maxLimitLocation={maxLimitLocation}
+              />
+            </WrapperMap>
+          )}
 
           {inputNames.map(field => showField && showField(field.name) && (
             field.name === 'address' ? (
@@ -401,48 +416,37 @@ const AddressFormUI = (props) => {
                   />
                 </AddressWrap>
 
-                {(addressState?.address?.location || formState?.changes?.location) && (
-                  <WrapperMap>
-                    <GoogleMapsMap
-                      apiKey={googleMapsApiKey}
-                      location={locationChange}
-                      fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
-                      mapControls={googleMapsControls}
-                      handleChangeAddressMap={handleChangeAddress}
-                      setErrors={setMapErrors}
-                      maxLimitLocation={maxLimitLocation}
-                    />
-                  </WrapperMap>
+                {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
+                  <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
                 )}
               </React.Fragment>
             ) : (
               <React.Fragment key={field.name}>
-                {field.name !== 'address_notes'
-                  ? (
-                    <Input
-                      className={field.name}
-                      placeholder={t(field.name.toUpperCase(), field.code)}
-                      value={formState.changes?.[field.name] ?? addressState.address?.[field.name] ?? ''}
-                      onChange={(e) => {
-                        formMethods.setValue(field.name, e.target.value)
-                        handleChangeInput({ target: { name: field.name, value: e.target.value } })
-                      }}
-                      autoComplete='new-field'
-                      maxLength={30}
-                    />
-                  ) : (
-                    <TextArea
-                      rows={4}
-                      placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-                      value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
-                      onChange={(e) => {
-                        formMethods.setValue('address_notes', e.target.value)
-                        handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
-                      }}
-                      autoComplete='new-field'
-                      maxLength={250}
-                    />
-                  )}
+                {field.name !== 'address_notes' ? (
+                  <Input
+                    className={field.name}
+                    placeholder={t(field.name.toUpperCase(), field.code)}
+                    value={formState.changes?.[field.name] ?? addressState.address?.[field.name] ?? ''}
+                    onChange={(e) => {
+                      formMethods.setValue(field.name, e.target.value)
+                      handleChangeInput({ target: { name: field.name, value: e.target.value } })
+                    }}
+                    autoComplete='new-field'
+                    maxLength={30}
+                  />
+                ) : (
+                  <TextArea
+                    rows={4}
+                    placeholder={t('ADDRESS_NOTES', 'Address Notes')}
+                    value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
+                    onChange={(e) => {
+                      formMethods.setValue('address_notes', e.target.value)
+                      handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+                    }}
+                    autoComplete='new-field'
+                    maxLength={250}
+                  />
+                )}
               </React.Fragment>
             )
           ))}
@@ -451,16 +455,16 @@ const AddressFormUI = (props) => {
 
           <AddressTagSection>
             <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
-              <span><BiHome /></span>
+              <span><FaHome /></span>
             </Button>
             <Button className={addressTag === 'office' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('office')}>
-              <span><RiBuildingLine /></span>
+              <span><FaRegBuilding /></span>
             </Button>
             <Button className={addressTag === 'favorite' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('favorite')}>
               <span><FaRegHeart /></span>
             </Button>
             <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
-              <span><AiOutlinePlus /></span>
+              <span><FaPlus /></span>
             </Button>
           </AddressTagSection>
           {

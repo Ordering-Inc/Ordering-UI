@@ -1,20 +1,28 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const ContainerCard = styled.div` 
-  margin: 12px 24px;
-  width: 100%;
-  position: relative;
+export const ContainerCard = styled.div`
+  border-radius: 10px;
+  margin: 30px 20px;
 
+  width: calc(100% - 40px);
+
+  @media (min-width: 681px) {
+    width: calc(50% - 40px);
+  }
+
+  @media (min-width: 993px) {
+    width: calc(33% - 40px);
+  }
 `
 
 export const WrapperBusinessCard = styled.div`
-  border-radius: 10px;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   cursor: ${({ isSkeleton }) => isSkeleton ? 'default' : 'pointer'};
 `
 
 export const BusinessHero = styled.div`
-  border-radius: 10px;
+
 `
 
 const BusinessHeaderStyled = styled.div`
@@ -30,11 +38,10 @@ const BusinessHeaderStyled = styled.div`
   min-height: 175px;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
 
   h1 {
     color: #FFF;
-    opacity: 0.5;
+    opacity: 0.7;
   }
 
   @media (min-width: 481px) {
@@ -104,8 +111,8 @@ export const BusinessTags = styled.div`
 
 export const BusinessContent = styled.div`
   display: flex;
-  margin-top: 15px;
-  max-height: 115px;
+  box-sizing: border-box;
+  padding: 30px 15px 20px 10px;
 `
 
 export const WrapperBusinessLogo = styled.div`
@@ -163,36 +170,39 @@ export const BusinessLogo = (props) => {
 
 export const BusinessInfo = styled.div`
   display: flex;
-  width: calc(100% - 65px);
-
-  @media (min-width: 481px){
-    width: calc(100% - 75px);
-  }
+  width: 100%;
 `
 
 export const BusinessInfoItem = styled.div`
-  width: 92%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0px 5px 0px 10px;
   font-size: 12px;
-  ${props => props.theme?.rtl && css`
-    padding: 0px 10px 0px 5px;
-  `}
+
+  button {
+    width: 186px;
+    height: 48px;
+    background-color: transparent;
+  }
+
   .reviews {
     display: flex;
     align-items: center;
     svg {
       margin-right: 3px;
       font-size: 22px;
-      color: #FDC918;
+      color: #414954;      
       ${props => props.theme?.rtl && css`
         margin-left: 3px;
         margin-right: 0;
     `}
+    polygon {
+      fill: #414954;
+    }
     }
   }
+
 
   div {
     display: flex;
@@ -233,13 +243,15 @@ export const BusinessInfoItem = styled.div`
 `
 
 export const BusinessName = styled.h6`
-  font-size: 18px;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 34px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 500;
   margin-block-start: 0;
   margin-block-end: 0;
+  color: ${props => props.theme.colors.primaryDark};
 `
 
 export const Categories = styled.div`
@@ -296,28 +308,18 @@ export const CallCenterInformationBullet = styled.div`
     font-size: 18px;
   }
 `
-export const NameWrapper = styled.div`
-  display: flex;
+export const BuinessMeta = styled.p`
+  font-size: 16px;
+  line-height: 26px;
+  color: #000000;
+  margin: 9px 0 27.8px;
   width: 100%;
-  justify-content: space-between;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
 `
-export const BusinessInfomation = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 2;
 
-  svg {
-    font-size: 20px;
-  }
+export const MetaItem = styled.span`
 
-  &:hover svg{
-    font-size: 21px;
-  }
 `

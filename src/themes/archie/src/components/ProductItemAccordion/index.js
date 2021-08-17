@@ -4,13 +4,10 @@ import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-
 import {
   AccordionSection,
   Accordion,
   AccordionContent,
-  WrapperProductImage,
-  ProductImage,
   ContentInfo,
   ProductComment,
   ProductInfo,
@@ -24,7 +21,7 @@ import {
   ProductSelect,
   ProductOptionsList,
   ProductQuantity,
-  CartActions
+  SubOption
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -36,17 +33,16 @@ export const ProductItemAccordion = (props) => {
     getProductMax,
     offsetDisabled,
     onDeleteProduct,
-    onEditProduct
+    onEditProduct,
+    isCheckout
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
   const windowSize = useWindowSize()
-
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
-
   const content = useRef(null)
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
@@ -110,72 +106,62 @@ export const ProductItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <ProductInfo className='info'>
-            {product?.images && (
-              <WrapperProductImage>
-                <ProductImage bgimage={product?.images} />
-              </WrapperProductImage>
+            {isCartProduct && !isCartPending && getProductMax ? (
+              <ProductSelect
+                ref={productSelect}
+                value={product.quantity}
+                onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+              >
+                {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                  <option
+                    key={i}
+                    value={i}
+                    disabled={offsetDisabled(product) < i && i !== 0}
+                  >
+                    {i === 0 ? t('REMOVE', 'Remove') : i}
+                  </option>
+                ))}
+              </ProductSelect>
+            ) : (
+              <ProductQuantity>
+                {product?.quantity}
+              </ProductQuantity>
             )}
-
             <ContentInfo>
               <h3>{product.name}</h3>
-              <CartActions>
-                {isCartProduct && !isCartPending && getProductMax ? (
-                  <ProductSelect
-                    ref={productSelect}
-                    value={product.quantity}
-                    onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-                  >
-                    {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                      <option
-                        key={i}
-                        value={i}
-                        disabled={offsetDisabled(product) < i && i !== 0}
-                      >
-                        {i === 0 ? t('REMOVE', 'Remove') : i}
-                      </option>
-                    ))}
-                  </ProductSelect>
-                ) : (
-                  <ProductQuantity>
-                    {product?.quantity}
-                  </ProductQuantity>
-                )}
-
-                {isCartProduct && !isCartPending && (
-                  <ProductActions>
-                    <ProductActionsEdit
-                      ref={productActionsEdit}
-                      onClick={() => onEditProduct(product)}
-                      disabled={orderState.loading}
-                    >
-                      <TiPencil color='#F2BB40' />
-                    </ProductActionsEdit>
-                    <ProductActionsDelete
-                      ref={productActionsDelete}
-                      onClick={() => onDeleteProduct(product)}
-                      disabled={orderState.loading}
-                    >
-                      <VscTrash color='#D81212' />
-                    </ProductActionsDelete>
-                  </ProductActions>
-                )}
-              </CartActions>
+              <span>
+                <p>{parsePrice(product.total || product.price)}</p>
+              </span>
             </ContentInfo>
           </ProductInfo>
 
           {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
             <ProductPriceSection>
               <ProductPrice className='prod-price'>
-                <span>
-                  {parsePrice(product.total || product.price)}
-                </span>
                 {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
                   <p>
                     <IosArrowDown className={`${setRotate}`} />
                   </p>
                 )}
               </ProductPrice>
-
+              {isCartProduct && !isCartPending && (
+                <ProductActions>
+                  <ProductActionsEdit
+                    ref={productActionsEdit}
+                    onClick={() => onEditProduct(product)}
+                    disabled={orderState.loading}
+                  >
+                    <TiPencil />
+                  </ProductActionsEdit>
+                  <ProductActionsDelete
+                    ref={productActionsDelete}
+                    onClick={() => onDeleteProduct(product)}
+                    disabled={orderState.loading}
+                  >
+                    <VscTrash />
+                  </ProductActionsDelete>
+                </ProductActions>
+              )}
             </ProductPriceSection>
           )}
 
@@ -187,14 +173,14 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onEditProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <TiPencil color='#F2BB40' />
+                  <TiPencil />
                 </ProductActionsEdit>
                 <ProductActionsDelete
                   ref={productActionsDelete}
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <VscTrash color='#D81212' />
+                  <VscTrash />
                 </ProductActionsDelete>
               </ProductActions>
               <ProductNotAvailable>
@@ -211,7 +197,7 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <VscTrash color='#D81212' />
+                  <VscTrash />
                 </ProductActionsDelete>
               </ProductActions>
               <ProductNotAvailable>
@@ -224,6 +210,7 @@ export const ProductItemAccordion = (props) => {
         <AccordionContent
           ref={content}
           style={{ maxHeight: `${setHeight}` }}
+          isCheckout={isCheckout}
         >
           {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
             <ProductOptionsList>
@@ -240,7 +227,7 @@ export const ProductItemAccordion = (props) => {
               {productInfo().options.map(option => (
                 <li key={option.id}>
                   <p>{option.name}</p>
-                  <ProductOptionsList className='suboption'>
+                  <SubOption>
                     {option.suboptions.map(suboption => (
                       <li key={suboption.id}>
                         <span>
@@ -253,7 +240,7 @@ export const ProductItemAccordion = (props) => {
                         </span>
                       </li>
                     ))}
-                  </ProductOptionsList>
+                  </SubOption>
                 </li>
               ))}
             </ProductOptionsList>

@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig } from 'ordering-components'
-import { Button } from '../../../../../styles/Buttons'
+import { Button } from '../../styles/Buttons'
+import { ProductItemAccordion } from '../ProductItemAccordion'
+import { BusinessItemAccordion } from '../BusinessItemAccordion'
+
 import { Confirm } from '../../../../../components/Confirm'
+import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
+import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { BusinessItemAccordion } from '../BusinessItemAccordion'
-import { ProductItemAccordion } from '../ProductItemAccordion'
-
-import { Modal } from '../Modal'
-import { ProductForm } from '../ProductForm'
 
 import {
   CartContainer,
   OrderBill,
   CheckoutAction,
   CouponContainer,
-  CartSticky
+  CartSticky,
+  CouponQuestion
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
+
 const CartUI = (props) => {
   const {
     currentCartUuid,
@@ -37,22 +39,27 @@ const CartUI = (props) => {
     isCartOnProductsList,
     handleCartOpen
   } = props
+
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
+
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const windowSize = useWindowSize()
+  const [couponShow, setCouponShow] = useState(false)
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
+
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
     : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
+
   const handleDeleteClick = (product) => {
     setConfirm({
       open: true,
@@ -63,32 +70,38 @@ const CartUI = (props) => {
       }
     })
   }
+
   const handleEditProduct = (product) => {
     setCurProduct(product)
     setModalIsOpen(true)
   }
+
   const handleClickCheckout = () => {
     events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
     events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
   }
+
   const handleStoreRedirect = (slug) => {
     events.emit('go_to_page', { page: 'business', params: { store: slug } })
     if (windowSize.width <= 768) {
       onClickCheckout && onClickCheckout()
     }
   }
+
   useEffect(() => {
     events.emit('get_current_view')
     return () => {
       setConfirm({ ...confirm, open: false })
     }
   }, [])
+
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
     }
   }
+
   const handleClearProducts = () => {
     setConfirm({
       open: true,
@@ -99,11 +112,17 @@ const CartUI = (props) => {
       }
     })
   }
+
   const handleUpsellingPage = () => {
     setOpenUpselling(false)
     setCanOpenUpselling(false)
     handleClickCheckout()
   }
+
+  const showCouponInput = () => {
+    setCouponShow(true)
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -142,11 +161,12 @@ const CartUI = (props) => {
                 offsetDisabled={offsetDisabled}
                 onDeleteProduct={handleDeleteClick}
                 onEditProduct={handleEditProduct}
+                isCheckout={isCheckout}
               />
             ))}
             {cart?.valid_products && (
               <OrderBill>
-                <table>
+                <table className='bill-sub-option'>
                   <tbody>
                     <tr>
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>
@@ -163,6 +183,21 @@ const CartUI = (props) => {
                           <td>{t('DISCOUNT', 'Discount')}</td>
                         )}
                         <td>- {parsePrice(cart?.discount || 0)}</td>
+                      </tr>
+                    )}
+                    {cart?.subtotal_with_discount > 0 && cart?.discount > 0 && cart?.total >= 0 && (
+                      <tr>
+                        {cart?.business?.tax_type === 1 ? (
+                          <>
+                            <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                            <td>{parsePrice(cart?.subtotal_with_discount + cart?.tax || 0)}</td>
+                          </>
+                        ) : (
+                          <>
+                            <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                            <td>{parsePrice(cart?.subtotal_with_discount || 0)}</td>
+                          </>
+                        )}
                       </tr>
                     )}
                     {
@@ -205,16 +240,9 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.service_fee)}</td>
                       </tr>
                     )}
+
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
-                  <CouponContainer>
-                    <CouponControl
-                      businessId={cart.business_id}
-                      price={cart.total}
-                    />
-                  </CouponContainer>
-                )}
                 <table className='total'>
                   <tbody>
                     <tr>
@@ -223,6 +251,19 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
+                {!couponShow && (
+                  <CouponQuestion>
+                    <p>{t('COUPON_QUESTION', 'Do you have a coupon?')}<span className='coupon-apply' onClick={showCouponInput}>Apply</span></p>
+                  </CouponQuestion>
+                )}
+                {isCouponEnabled && !isCartPending && couponShow && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
+                  <CouponContainer>
+                    <CouponControl
+                      businessId={cart.business_id}
+                      price={cart.total}
+                    />
+                  </CouponContainer>
+                )}
               </OrderBill>
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
@@ -292,11 +333,13 @@ const CartUI = (props) => {
     </>
   )
 }
+
 export const Cart = (props) => {
   const cartProps = {
     ...props,
     UIComponent: CartUI
   }
+
   return (
     <CartController {...cartProps} />
   )

@@ -11,7 +11,7 @@ export const Footer = () => {
     try {
       const source = {}
       requestsState.page = source
-      const { content: { error, result } } = await ordering.pages('starbucksFooter').get({ cancelToken: source })
+      const { content: { error, result } } = await ordering.pages('archiesFooter').get({ cancelToken: source })
       setfooterState({ ...footerState, loading: false })
       if (!error) {
         setfooterState({ ...footerState, body: result.body })

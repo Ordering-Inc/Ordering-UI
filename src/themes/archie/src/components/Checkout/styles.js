@@ -1,55 +1,21 @@
 import styled, { css } from 'styled-components'
-import React from 'react'
+
 export const Container = styled.div`
   display: flex;
-  width: 100%;
-`
-export const WrappSumarry = styled.div`
-  display:flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  @media (min-width: 1024px) {
-    width: 40%;
-    height: calc(100vh - 60px);
-    ${({ skeleton }) => skeleton
-      ? css`
-         background-color: transparent; 
-        `
-      : css`
-         background-color: ${props => props.theme.colors.primarybackground};
-      `
-    } 
-    ${({ skeleton }) => skeleton && css`
-      padding: 0 5%;
-      align-items: flex-start;
-    `}    
-  }
-`
-export const WrappContainer = styled.div`
   width: 100%;
-  margin: auto;
-  padding: 0 5%;
-  box-sizing: border-box;
-  @media (min-width: 513px) {
-    width: 90%;
-  }
-  @media (min-width: 1024px) {
-    width: 60%;
-    height: calc(100vh - 60px);
-    overflow-y: scroll;
-  }
 `
 export const WrapperUserDetails = styled.div`
   width: 100%;
 `
+
 export const UserDetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0px 0px 20px;
+  margin: 30px 0px 20px;
   flex-wrap: wrap;
 `
+
 export const BusinessDetailsContainer = styled(UserDetailsContainer)`
   div {
     h1 {
@@ -59,52 +25,48 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
     }
   }
 `
-export const BusinessDetailInfo = styled.div`
-  h2 {
-    color: ${props => props.theme.colors.fontSecundary};
-    font-weight: 200;
-    margin: 0px 0 10px;
-  }
-`
+
 export const PaymentMethodContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
-  h2 {
-    color: ${props => props.theme.colors.fontSecundary};
-    font-weight: 200;
-    margin: 0px 0 10px;
+  @media (min-width: 1024px) {
+    margin-bottom: 242px;
   }
 `
-export const DriverTipContainer = styled(PaymentMethodContainer)``
-export const CartContainer = styled(PaymentMethodContainer)`
+
+export const DriverTipContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+`
+export const CartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
-  h2 {
-    color: ${props => props.theme.colors.fontSecundary};
-    font-weight: 200;
-    margin: 0px 0 10px;
+  h1 {
+    margin: 20px 0px;
   }
 `
+
 export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  margin: 20px 0px 20px;
+  justify-content: center;
+  margin: 40px 0px 10px;
+  padding: 0;
+  box-sizing: border-box;
   button {
     width: 100%;
     padding: 5px 20px;
     cursor: pointer;
+
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
   }
-  @media (min-width: 513px) {
-    button {
-      width: 350px;
-    }
-  }
 `
+
 export const WarningMessage = styled.div`
   width: 100%;
   height: fit-content;
@@ -117,6 +79,7 @@ export const WarningMessage = styled.div`
   opacity: 0.8;
   border-radius: 10px;
   position: relative;
+
   svg {
     position: absolute;
     font-size: 30px;
@@ -128,110 +91,123 @@ export const WarningMessage = styled.div`
         left: initial;
     `}
   }
+
   h1 {
     font-size: 20px;
     margin: 0px 60px;
     text-align: center;
   }
 `
+
 export const NotFoundImage = styled.div`
   max-width: 300px;
+
   img {
     width: 300px;
   }
 `
+
 export const CartsList = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
   margin: auto;
+
   @media (min-width: 381px) {
     width: 80%;
   }
 `
+
 export const WarningText = styled.p`
   margin: 10px auto;
   text-align: center;
   color: ${props => props.theme.colors.primary};
 `
-export const WrapBusinessLogo = styled.div`
+
+export const Layout = styled.div`
+  width: 100%;
   display: flex;
-  align-items: center;
-  cursor: pointer;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 `
-const BusinessLogoStyled = styled.div`
-  display: flex;
-  width: 65px;
-  height: 65px;
-  box-sizing: border-box;
+export const LeftPanel = styled.div`
+  width: 100%;
+  @media (min-width: 1024px) {
+    width: 50%;
+  }
+  @media (min-width: 1200px) {
+    height: 100vh;
+    overflow-y: scroll;
+  }
+`
+export const RightPanel = styled.div`
+  width: 100%;
+  background: ${props => props.theme.colors.secundaryBackground};
   position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  min-height: 65px;
-  border-radius: 5px;
-  border: 1px solid #909090;
-`
-export const BusinessLogo = (props) => {
-  const style = {}
-  if (props.bgimage) {
-    style.backgroundImage = `url(${props.bgimage})`
+
+  @media (min-width: 1024px) {
+    width: 50%;
   }
-  return (
-    <BusinessLogoStyled {...props} style={style}>
-      {props.children}
-    </BusinessLogoStyled>
-  )
-}
-export const BusinessName = styled.div`
+  @media (min-width: 1200px) {
+    height: 100vh;
+    overflow-y: scroll;
+  }
+`
+export const PanelTop = styled.div`
+  padding: 6%;
+`
+
+export const PanelBottom = styled.div`
+  padding: 6%;
+`
+export const PageTitle = styled.div`
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 34px;
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+`
+
+export const SectionHeader = styled.div`
   display: flex;
-  flex-direction: column;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 10px;
-  ` : css`
-    margin-left: 10px;
-  `}
-  span:first-child {
-    color: ${props => props.theme.colors?.grayColor};
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+  span {
+    color: ${props => props.theme.colors.primary};
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    text-transform: capitalize;
+    padding-bottom: 3px;
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+    cursor: pointer;
+  }
+`
+
+export const SectionTitle = styled.div`
+  margin: 0px 10px 0px 0px;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+  font-weight: bold;
+  text-transform: uppercase;
+`
+export const SectionInfo = styled.div`
+  p {
     font-size: 14px;
-    font-weight: 500;
-    color: ${props => props.theme.colors.fontSecundary};
-  }
-  span:last-child {
-    font-weight: 500;
-    font-size: 20px;
-    color: #fff;
+    line-height: 24px;
+    margin: 0;
+    color: #212629;
   }
 `
-export const ConfirmInfoItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 80%;
-  color: #fff;
-  margin-bottom: 10px;
-  .confirmInfo-title{    
-    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-    width: 100%;
-  }
-  h4 {
-    margin: 10px 0;
-  } 
-`
-export const InfoWrapper = styled.div`
-  display: flex;
-  svg {
-    font-size: 24px;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 5px;
-    ` : css`
-      margin-right: 5px;
-    `}
-  }
-  svg path {
-    fill: ${props => props.theme.colors.fontSecundary};
-  }
-`
-export const WrapBusinessAddress = styled.div`
+export const Hr = styled.div`
+  width: 100%;
+  height: ${({ height }) => height ? `${height}px` : '10px'};
+  background: ${({ color }) => color ? `${color}` : '#DDDDDD'};
 `
