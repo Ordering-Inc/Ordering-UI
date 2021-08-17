@@ -2,10 +2,9 @@ import styled, { css } from 'styled-components'
 
 export const BusinessSearch = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
   position: relative;
-  min-width: 250px;
-  margin-left: auto;
-    
 
   input {
     width: 100%;
@@ -13,26 +12,31 @@ export const BusinessSearch = styled.div`
     background-repeat: no-repeat;
     background-size: 15px;
     box-sizing: border-box;
-    padding: 7px 22px;
-    border: none;
+    border:none;
     border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-    background-color: transparent;
-    font-size: 16px;
-    line-height: 24px;
+    border-radius: 0px;
+
+    ${props => props.theme?.rtl ? css`
+      padding-left: 60px;
+    ` : css`
+      padding-right: 60px;
+    `}
+
     ${({ isCustomLayout }) => !isCustomLayout && css`
       justify-content: center;
       -webkit-transition: width 0.4s ease-in-out;
       transition: width 0.4s ease-in-out; 
     `}
-  }
 
-  @media(min-width: 481px){
-    width: 50%;
-    margin-left: calc(100% - 51.5793654%);
-    ${props => props.theme?.rtl && css`
-      margin-left: unset;
-      margin-right: auto;
-    `}
+    @media (min-width: 681px) {
+      width: 100%;
+      ${({ isCustomLayout }) => !isCustomLayout && css`
+        width: 200px;
+        &:focus {
+          width: 50%;
+        }
+      `}
+    }
   }
 `
 
@@ -41,13 +45,12 @@ export const DeleteContent = styled.span`
   font-weight: 300;
   padding: 10px 0;
   color: #333;
-  font-size: 1rem;
-  right: 0;
+  font-size: 14px;
+  transform: translate(-30%, 0%);
   border-radius: 25%;
   max-height: 100%;
   ${props => props.theme?.rtl && css`
-    right: unset;
-    left: 0;
+    transform: translate(30%, 0%);
   `}
   span{
     cursor: pointer;
@@ -61,15 +64,10 @@ export const DeleteContent = styled.span`
   }
 `
 export const SearchIcon = styled.div`
-  position: absolute;
-  bottom: 7px;
-  left: 0;
-  ${props => props.theme?.rtl && css`
-    left: unset;
-    right: 0;
-  `}
+  background-image: url(${props => props.theme?.images?.general?.searchIcon});
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-color: ${props => props.theme?.colors?.backgroundPage};
 
-  svg {
-    color: ${props => props.theme.colors.disabled};
-  }
 `

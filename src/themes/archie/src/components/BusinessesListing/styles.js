@@ -1,30 +1,49 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
-
 export const BusinessContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `
-
 export const BusinessList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  @media(min-width: 768px){
-    max-width: 98%;
-    margin: 0 auto;
-  }
-
-  @media(min-width: 1201px){
-    max-width: 96%;
-  }
-
 `
-
 export const WrapperSearch = styled.div`
-  width: 100%;
+  padding: 10px 20px 10px;
   box-sizing: border-box;
-  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: inset 0 2px 4px -3px #464646;
+  
+  @media (min-width: 850px) {
+    width: 100%;
+  }
+  
+  ${({ isCustomLayout }) => isCustomLayout && css`
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%; 
+    padding: 0 20px;
+    svg {
+      font-size: 26px;
+      color: ${props => props.theme?.colors?.primary};
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    @media(min-width: 681px){
+      width: 75%;
+      padding: 0;
+    }
+    @media(min-width: 1201px){
+      width: 50%;
+    }
+  `}
 `
 
 export const ErrorMessage = styled.span`
@@ -35,77 +54,45 @@ export const ErrorMessage = styled.span`
   color: #D81313;
   font-weight: bold;
 `
-
 export const PreviousOrders = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 10px 20px 0px;
-
 `
-
 export const BusinessesTitle = styled.h1`
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 34px;
-  color: ${props => props.theme?.colors?.primary};
-  margin: 0 auto;
-  width: 100%;
-  margin: 0 20px;
+  font-size: 18px;
+  margin: 0px 20px;
 `
-
-export const PreviousButtonWrapper = styled.div`
-  width: 100%;
+export const BusinessContent = styled.div`
   display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  button{
-    width: 80%;
-  }
-
-  @media(min-width: 681px){
-      button{
-      width: 40%;
-    }
+  flex-direction: column-reverse;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  @media(min-width: 850px){
+    flex-direction: row;
   }
 `
-
-export const BannerStyled = styled.div`
-  width: 100%;
-  min-height: 200px;
+export const ListWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  ${({ bgimage }) => bgimage && css`
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
-    object-fit: cover;
-    background-position: center;
+  flex-direction: column;  
+  background-color: #fff;
+  min-height: 70vh;
+  overflow: auto;
+  box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 12%);
+  @media(min-width: 850px){
+    width: 40vw;
+  }
+`
+export const MapWrapper = styled.div`
+  position: relative;
+  /* height: 100vh; */
+`
+export const BusinessFilter = styled.div`
+  display: flex;  
+  padding-left: 20px;
+  ${props => props.theme?.rtl && css`
+    padding-right: 20px;
   `}
-
-  p {
-    text-shadow: 0px 1px 1px #4d4d4d; color: #222; 
-    font: 3vw;
-    text-transform: capitalize;
-  }
-
-  @media (min-width: 768px) {
-    min-height: 30vw;
-    overflow: hidden;
-  }
-
 `
-
-export const Banner = (props) => {
-  const style = {}
-  if (props.bgimage && !props.isClosed) {
-    style.backgroundImage = `url(${props.bgimage})`
-  } else {
-    style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage})`
-  }
-
-  return (
-    <BannerStyled {...props} style={style}>
-      {props.children}
-    </BannerStyled>
-  )
-}

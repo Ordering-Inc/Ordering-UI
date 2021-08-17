@@ -5,12 +5,18 @@ export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  box-shadow: 0px 0px 6px #00000029;
   opacity: 1;
 
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
     position: sticky;
     top: 20px;
   `}
+
+  &:last-child {
+    border-bottom: 0;
+    margin-bottom: 10px;
+  }
 `
 
 export const Accordion = styled.div`
@@ -146,7 +152,6 @@ export const ContentInfo = styled.div`
 export const AccordionContent = styled.div`
   overflow: hidden;
   transition: min-height 0.6s ease;
-  padding: 0 15px;
 `
 
 export const AccordionText = styled.div`

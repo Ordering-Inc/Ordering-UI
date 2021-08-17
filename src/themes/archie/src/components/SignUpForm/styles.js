@@ -4,25 +4,13 @@ export const SignUpContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  box-sizing: border-box;
-  padding: 20px;
-  min-height: ${({ isPopup }) => isPopup ? '500px' : 'auto'};
+  min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
+
   flex-direction: column;
 
   @media (min-width: 768px) {
     flex-direction: row;
-  }
-
-  @media (min-width: 850px) {
-    min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(94vh - 70px)'};
-  }
-
-  @media (min-width: 1200px) {
-    min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(80vh - 90px)'};
-  }
-
-  >* {
-    box-sizing: border-box;
+    background-color: ${props => props.theme.colors.emptyPagebackground}; 
   }
 `
 const Side = styled.div`
@@ -34,244 +22,173 @@ export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
   margin: auto;
+  background-color: #fff;
 
   @media (min-width: 769px) {
     ${({ isPopup }) => isPopup && css`
       margin: 20px 0px;
     `}
-  }
+  }  
 
   @media (min-width: 992px) {
-    width: ${({ isPopup }) => isPopup ? '100%' : '45%'};
+    padding: 4% 0 3%;
+    margin: ${({ isPopup }) => isPopup ? '0' : '4% auto'};
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
+    width: ${({ isPopup }) => isPopup ? '100%' : '50%'};
   }
 
   @media (min-width: 1200px){
     font-size: ${({ isPopup }) => isPopup ? '0.9em' : '1em'};
+    width: ${({ isPopup }) => isPopup ? '100%' : '35%'};
+  }
+
+  @media (min-width: 1450px){
+    width: ${({ isPopup }) => isPopup ? '100%' : '30%'};
   }
 `
 
 export const FormInput = styled.form`
-  width: 100%;
+  width: 90%;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
 
-  input {
-    height: 38px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    position: relative;
-  }
-  
-  @media (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  input:not(:last-child) {
+    margin: 11px 0px;
+    padding: 10px 20px;
+    border-radius: 7px;
   }
 
+  input.PhoneInputInput{
+    margin: 11px 0px;
+    border-radius: 7px;
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 7px;
+    width: 135px;
+    margin-left: auto;
+
+    ${props => props.theme?.rtl && css`
+      margin-right: auto;
+    `}
+  }
 `
 
 export const RedirectLink = styled.div`
-  position: relative;
-  padding: 10px 0px;
+  margin: 10px 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  margin: 0px;
-  width: 100%;
+  font-size: 16px;
+  width: 90%;
+
+  span {
+    margin-right: 5px;
+    color: ${props => props.theme.colors.primary};
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
+  }
+
+  a {
+    color: ${props => props.theme.colors.primary} !important;
+    text-decoration: underline !important;
+  }
+
+  ${({ register }) => register && css`
+    width: 90%;
+
+    @media (min-width: 481px) {
+      width: 90%;
+    }
+  `}
+
+  @media (min-width: 425px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media (min-width: 992px) {
+    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
+    flex-direction: row;
+  }
+
+  @media (min-width: 1200px) {
+    ${({ isPopup }) => isPopup && css`
+      font-size: 16px;
+    `};
+  }
 `
 
 export const SocialButtons = styled.div`
-   width: 100%;
-   margin-top: 10px;
+  width: 90%;
+  margin-top: 25px;
 
   button {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     width: 100%;
     padding: 5px 30px;
     color: #000000;
-    border-radius: 0px;
-    background-color: transparent;
-    border: 1px solid;
+    margin-bottom: 15px;
+
     img {
       width: 30px;
     }
 
     div {
       font-size: 0.8em;
-      margin: 0 10px;
     }
   }
-
-  button:first-child{
-    border-color: #365988;
-    color: #365988;
-    font-weight: 700;
-  }
-
-  button:nth-child(2){
-    border-color: #000000;
-    color: #000000;
-    font-weight: 700;
-  }
-
-  button:nth-child(2){
-    border-color: #666666;
-    color: #666666;
-    font-weight: 700;
-  }
-
-  @media (min-width: 768px) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 40px;
-  }
 `
+
 export const SkeletonWrapper = styled.div`
-  width: 100%;
   span{
     margin: 10px 0;
-    border-radius: 0px;
+    border-radius: 30px;
   }
 `
 
 export const SkeletonSocialWrapper = styled.div`
-  width: 100%;
-  span{
-    border-radius: 0px;
-    margin-bottom: 10px
-  }
+  width: 90%;
+  margin-top: 25px;
 
-  @media (min-width: 768px) {
-    margin-top: 40px;
+  span{
+    border-radius: 30px;
+    margin-bottom: 10px
   }
 `
 
 export const WrapperPassword = styled.div`
   position: relative;
-  width: 100%;
   input{
     box-sizing: border-box;
+    width: 100%;
     padding-right: 40px;
   }
 `
 
 export const TogglePassword = styled.span`
   position: absolute;
-  top: 4px;
-  right: 10px;
   font-weight: 300;
+  padding: 10px 0;
   color: #333;
   font-size: 26px;
+  transform: translate(-150%, 10%);
   max-height: 100%;
-  
+  ${props => props.theme?.rtl && css`
+    transform: translate(150%, 10%);
+  `}
   span{
     cursor: pointer;
   }
-
-  @media (min-width: 768px) {
-    top: 4px;
-  } 
 `
 
 export const ReCaptchaWrapper = styled.div`
   margin: 12px auto;
-`
-export const FormTitle = styled.div`
-  display: flex;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 28px;
-  text-transform: uppercase;
-  color: ${props => props.theme.colors.primary};
-  margin-top: 10px;
-  margin-bottom: 20px;
-  @media (min-width: 768px) {
-    font-size: 24px;
-    line-height: 34px;
-    margin-top: 30px;
-    margin-bottom: 25px;
-    width: 100%;
-  }
-
-  @media (min-width: 1440px) {
-    width: 75%;
-    margin-right: auto;
-    ${props => props.theme?.rtl && css`
-        margin-right: unset;
-        margin-left: auto;
-    `}
-  }
-`
-
-export const FormInline = styled.div`
-  display: flex;
-  position: relative;
-  width: 100%;
-  margin-bottom: 15px;
-
-  button {
-    width: 100%;
-    padding: 5px;
-  }
-
-  .forgot {
-    span {
-      color: ${props => props.theme.colors.primary};
-      width: 100%;
-    }
-
-    a {
-      position: absolute;
-      z-index: 10;
-      opacity: 0;
-      text-decoration: none;
-      width: 100%;
-    }
-  }
-
-  .phone_number {
-    width: 100%;
-  }
-
-  @media (min-width: 768px) {
-    width: 48.6795%;
-  }
-`
-export const FormBottom = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 10px 0;
-  border: 1px solid ${props => props.theme.colors.borderColor};
-  border-left: none;
-  border-right: none;
-  align-items: center;
-  margin-top: 25px;
-`
-
-export const AccountLogin = styled.div`
-  display: flex;
-  position: relative;
-  box-sizing: border-box;
-  a {
-    position: absolute;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-  }
-  button {
-    font-size: 16px;
-    line-height: 26px;
-    color: #666666;
-    padding: 11px 14px;
-    border-radius: 0;
-    background-color: transparent;
-  }
 `

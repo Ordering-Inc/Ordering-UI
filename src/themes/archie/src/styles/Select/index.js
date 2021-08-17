@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useOrder } from 'ordering-components'
-import BsChevronDown from '@meronex/icons/bs/BsChevronDown'
+import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 
 import {
   Select as SelectInput,
@@ -19,7 +19,7 @@ export const Select = (props) => {
     onChange,
     notAsync,
     notReload,
-    noborder
+    isFullWidth
   } = props
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
@@ -79,21 +79,21 @@ export const Select = (props) => {
       isHome={isHome}
       disabled={orderState.loading && !notReload}
       onMouseUp={handleSelectClick}
-      noborder={noborder}
+      fullwidth={isFullWidth}
     >
-      {!selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>}
+      {!selectedOption && <Selected fullwidth={isFullWidth}>{placeholder || ''}<Chevron><BisDownArrow /></Chevron></Selected>}
       {selectedOption && (
-        <Selected>
+        <Selected fullwidth={isFullWidth}>
           <Header>
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>
-          <Chevron className='chevron'>
-            <BsChevronDown />
+          <Chevron>
+            <BisDownArrow />
           </Chevron>
         </Selected>
       )}
       {open && options && (
-        <Options id='list' position='right' ref={dropdownReference}>
+        <Options id='list' position='right' ref={dropdownReference} fullwidth={isFullWidth}>
           {
             options.map(option => (
               <Option
@@ -101,6 +101,7 @@ export const Select = (props) => {
                 key={option.value}
                 selected={value === option.value}
                 onClick={() => handleChangeOption(option)}
+                fullwidth={isFullWidth}
               >
                 {option.content}
               </Option>

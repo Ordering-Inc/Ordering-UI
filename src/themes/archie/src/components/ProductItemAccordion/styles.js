@@ -6,6 +6,7 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 10px 0px;
+  background: #FFF;
   border-bottom: 1px solid #D9D9D9;
 `
 
@@ -16,6 +17,7 @@ const AccordionStyled = styled.div`
   justify-content: space-between;
   cursor: initial;
   transition: background-color 0.6s ease;
+  margin: 0px 10px;
 
   .rotate {
     transform: rotate(180deg);
@@ -52,23 +54,33 @@ export const Accordion = (props) => {
 }
 
 export const WrapperProductImage = styled.div`
-  max-width: 55px;
-  max-height: 55px;
+  min-width: 55px;
+  min-height: 55px;
   height: 55px;
   width: 55px;
+  padding: 3px;
+  border: 1px solid ${props => props.theme.colors.primary};
+  border-radius: 50%;
 
   @media (min-width: 361px) {
-    max-width: 65px;
-    max-height: 65px;
+    min-width: 65px;
+    min-height: 65px;
     height: 65px;
     width: 65px;
   }
 
   @media (min-width: 411px) {
-    max-width: 75px;
-    max-height: 75px;
+    min-width: 75px;
+    min-height: 75px;
     height: 75px;
     width: 75px;
+  }
+
+  @media (min-width: 1024px) {
+    min-width: 120px;
+    min-height: 120px;
+    height: 120px;
+    width: 120px;
   }
 `
 
@@ -82,7 +94,7 @@ const ProductImageStyled = styled.div`
   background-size: contain;
   object-fit: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 50%;
 `
 
 export const ProductImage = (props) => {
@@ -102,7 +114,8 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 55%;
+  width: 65%;
+
 
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
@@ -111,14 +124,8 @@ export const ContentInfo = styled.div`
 
   h3 {
     font-size: 14px;
-    line-height: 24px;
-    color: #000000;
     margin: 0px;
     font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-transform: uppercase;
   }
 
   span {
@@ -149,6 +156,12 @@ export const ContentInfo = styled.div`
       }
     }
   }
+
+  @media (min-width: 577px) {
+    h3 {
+      font-size: 18px;
+    }
+  }
 `
 
 export const AccordionContent = styled.div`
@@ -156,8 +169,17 @@ export const AccordionContent = styled.div`
   transition: max-height 0.6s ease;
   width: 100%;
   margin: auto;
-  @media (min-width: 481px) {
-    width: 85%;
+
+  @media (min-width: 361px) {
+    padding-left: 55px;
+  }
+
+  @media (min-width: 411px) {
+    padding-left: 75px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 150px;
   }
 `
 
@@ -168,25 +190,19 @@ export const AccordionText = styled.div`
 `
 
 export const ProductComment = styled.div`
-  padding-left: 40px;
-  ${props => props.theme?.rtl && css`
-    padding-right: 40px;
-    padding-left: 0px;
-  `}
   p {
-    font-weight: bold;
     margin: 0px;
   }
 
-  h3 {
-    font-weight: normal;
+  span {
+    font-weight: 300;
     text-transform: capitalize;
-    margin: 0px 20px 0px 40px;
+    margin-left: 25px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     ${props => props.theme?.rtl && css`
-      margin: 0px 40px 0px 20px;
+      margin-right: 25px;
     `}
   }
 `
@@ -195,6 +211,13 @@ export const ProductInfo = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+
+  h1,
+  h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   p {
     font-size: 20px;
@@ -233,12 +256,11 @@ export const ProductError = styled.div`
 export const ProductActions = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: -5px;
 `
 
 export const ProductActionsEdit = styled.span`
   svg {
-    font-size: 19px;
+    font-size: 20px;
     margin-right: 5px;
     cursor: pointer;
     ${props => props.theme?.rtl && css`
@@ -270,7 +292,6 @@ export const ProductPrice = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 0px !important;
 
   p,
   span {
@@ -298,28 +319,23 @@ export const ProductPrice = styled.div`
 `
 
 export const ProductSelect = styled.select`
-  max-width: 55px;
-  height: 38px;
-  padding: 0 10px;
-  border: 1px solid ${props => props.theme.colors.borderColor};
+  height: 30px;
+  border: none;
   background-color: transparent;
-  font-size: 14px;
+  font-size: 17px;
   outline: none;
-  margin-right: 5px;
   cursor: pointer;
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-progress-appearance: none;
-
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  border-radius: 7px;
   background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
   background-repeat: no-repeat, repeat;
-  background-position: right .5em top 50%, 0 0;
+  background-position: right .7em top 50%, 0 0;
   background-size: .65em auto, 100%;
-
-  ${props => props.theme?.rtl && css`
-    margin-left: 5px;
-    margin-right: 0px;
-  `}
+  margin: 0 10px;
+  padding: 0 7px;
 `
 
 export const ProductNotAvailable = styled.span`
@@ -328,14 +344,12 @@ export const ProductNotAvailable = styled.span`
 
 export const ProductOptionsList = styled.ul`
   list-style-type: none;
+  padding: 0;
   margin: 0;
-  margin-bottom: 15px;
-
   .suboption {
-    margin-left: -25px;
-    margin-bottom: 0px;
+    margin-left: 25px;
     ${props => props.theme?.rtl && css`
-      margin-right: -25px;
+      margin-right: 25px;
       margin-left: 0px;
   `}
   }
@@ -345,15 +359,12 @@ export const ProductOptionsList = styled.ul`
   }
 
   p {
-    font-size: 12px;
-    line-height: 22px;
-    color: #666666;
+    font-weight: 400;
+    margin: 0px;
   }
 
   li span {
-    font-size: 12px;
-    line-height: 22px;
-    color: #666666;
+    font-weight: 300;
   }
 
   li.ingredient {
@@ -366,9 +377,12 @@ export const ProductOptionsList = styled.ul`
 `
 
 export const ProductQuantity = styled.span`
-  margin-right: 5px;
-  ${props => props.theme?.rtl && css`
-    margin-left: 5px;
-    margin-right: 0px;
-  `}
+  margin:0 10px;
+ 
+`
+
+export const CartActions = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 `

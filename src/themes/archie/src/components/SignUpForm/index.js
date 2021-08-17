@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../../../../../components/Confirm'
-import { InputPhoneNumber } from '../InputPhoneNumber'
+import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
 
 import {
@@ -22,18 +22,17 @@ import {
   SkeletonSocialWrapper,
   WrapperPassword,
   TogglePassword,
-  ReCaptchaWrapper,
-  FormTitle,
-  FormInline,
-  FormBottom,
-  AccountLogin
+  ReCaptchaWrapper
 } from './styles'
 
-import { Input } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
+import { Input } from '../../styles/inputs'
+import { Button } from '../../../../../styles/Buttons'
+
 import { FacebookLoginButton } from '../../../../../components/FacebookLogin'
 import { GoogleLoginButton } from '../../../../../components/GoogleLogin'
 import { AppleLogin } from '../../../../../components/AppleLogin'
+import { useTheme } from 'styled-components'
+
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 import { sortInputFields } from '../../../../../utils'
@@ -64,6 +63,7 @@ const SignUpFormUI = (props) => {
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
+  const theme = useTheme()
   const emailInput = useRef(null)
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
@@ -71,8 +71,6 @@ const SignUpFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
-
-  const [isSignupBusiness, setIsSignupBusiness] = useState(false)
 
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
@@ -241,95 +239,86 @@ const SignUpFormUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <SignUpContainer isPopup={isPopup}>
-        <FormSide isPopup={isPopup} className='test-marker'>
-          <FormTitle>{t('SIGN_UP_FORM_TITLE', 'Register in archies and enjoy the benefits we have for you.')}</FormTitle>
-          {
-            !(useChekoutFileds && validationFields?.loading) ? (
-              <FormInput
-                noValidate
-                isPopup={isPopup}
-                onSubmit={formMethods.handleSubmit(onSubmit)}
-                isSkeleton={useChekoutFileds && validationFields?.loading}
-              >
-                {props.beforeMidElements?.map((BeforeMidElements, i) => (
-                  <React.Fragment key={i}>
-                    {BeforeMidElements}
-                  </React.Fragment>))}
-                {props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-                  <BeforeMidComponents key={i} {...props} />))}
-
+        <FormSide isPopup={isPopup}>
+          <img id='logo' src={theme?.images?.logos?.logotype} alt='Logo sign up' width='200' height='66' loading='lazy' />
+          <FormInput
+            noValidate
+            isPopup={isPopup}
+            onSubmit={formMethods.handleSubmit(onSubmit)}
+            isSkeleton={useChekoutFileds && validationFields?.loading}
+          >
+            {props.beforeMidElements?.map((BeforeMidElements, i) => (
+              <React.Fragment key={i}>
+                {BeforeMidElements}
+              </React.Fragment>))}
+            {props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+              <BeforeMidComponents key={i} {...props} />))}
+            {
+              !(useChekoutFileds && validationFields?.loading) ? (
                 <>
                   {validationFields?.fields?.checkout &&
                     sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
                       showField && showField(field.code) && (
                         <React.Fragment key={field.id}>
                           {field.code === 'email' ? (
-                            <FormInline>
-                              <Input
-                                type={field.type}
-                                name={field.code}
-                                aria-label={field.code}
-                                className='form'
-                                placeholder={t(field.code.toUpperCase(), field.name)}
-                                onChange={handleChangeInputEmail}
-                                ref={(e) => {
-                                  emailInput.current = e
-                                }}
-                                required={!!field.required}
-                                autoComplete='off'
-                              />
-                            </FormInline>
+                            <Input
+                              type={field.type}
+                              name={field.code}
+                              aria-label={field.code}
+                              className='form'
+                              placeholder={t(field.code.toUpperCase(), field.name)}
+                              onChange={handleChangeInputEmail}
+                              ref={(e) => {
+                                emailInput.current = e
+                              }}
+                              required={!!field.required}
+                              autoComplete='off'
+                            />
                           ) : (
-                            <FormInline>
-                              <Input
-                                type={field.type}
-                                name={field.code}
-                                aria-label={field.code}
-                                className='form'
-                                placeholder={t(field.code.toUpperCase(), field.name)}
-                                onChange={handleChangeInput}
-                                required={field.required}
-                                autoComplete='off'
-                              />
-                            </FormInline>
+                            <Input
+                              type={field.type}
+                              name={field.code}
+                              aria-label={field.code}
+                              className='form'
+                              placeholder={t(field.code.toUpperCase(), field.name)}
+                              onChange={handleChangeInput}
+                              required={field.required}
+                              autoComplete='off'
+                            />
                           )}
                         </React.Fragment>
                       )
                     )}
                   {!!showInputPhoneNumber && (
-                    <FormInline>
-                      <InputPhoneNumber
-                        value={userPhoneNumber}
-                        setValue={handleChangePhoneNumber}
-                        handleIsValid={setIsValidPhoneNumber}
-                      />
-                    </FormInline>
+                    <InputPhoneNumber
+                      value={userPhoneNumber}
+                      setValue={handleChangePhoneNumber}
+                      handleIsValid={setIsValidPhoneNumber}
+                    />
                   )}
 
                   {(!fieldsNotValid || (fieldsNotValid && !fieldsNotValid.includes('password'))) && (
-                    <FormInline>
-                      <WrapperPassword>
-                        <Input
-                          type={!passwordSee ? 'password' : 'text'}
-                          name='password'
-                          aria-label='password'
-                          className='form'
-                          placeholder={t('PASSWORD', 'Password')}
-                          onChange={handleChangeInput}
-                          required
-                          ref={formMethods.register({
-                            required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
-                            minLength: {
-                              value: 8,
-                              message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                            }
-                          })}
-                        />
-                        <TogglePassword onClick={togglePasswordView}>
-                          {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                        </TogglePassword>
-                      </WrapperPassword>
-                    </FormInline>
+                    <WrapperPassword>
+                      <Input
+                        type={!passwordSee ? 'password' : 'text'}
+                        name='password'
+                        aria-label='password'
+                        className='form'
+                        placeholder={t('PASSWORD', 'Password')}
+                        onChange={handleChangeInput}
+                        required
+                        ref={formMethods.register({
+                          required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                          minLength: {
+                            value: 8,
+                            message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                          }
+                        })}
+                      />
+                      <TogglePassword onClick={togglePasswordView}>
+                        {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                      </TogglePassword>
+                    </WrapperPassword>
                   )}
 
                   {props.afterMidElements?.map((MidElement, i) => (
@@ -339,90 +328,65 @@ const SignUpFormUI = (props) => {
                   {props.afterMidComponents?.map((MidComponent, i) => (
                     <MidComponent key={i} {...props} />))}
                 </>
-
-                {props.isRecaptchaEnable && enableReCaptcha && (
-                  <FormInline>
-                    <ReCaptchaWrapper>
-                      <ReCaptcha handleReCaptcha={handleReCaptcha} />
-                    </ReCaptchaWrapper>
-                  </FormInline>
-                )}
-                <FormInline>
-                  <Button
-                    color='primary'
-                    type='submit'
-                    disabled={formState.loading || validationFields?.loading}
-                  >
-                    {formState.loading
-                      ? `${t('LOADING', 'Loading')}...`
-                      : isSignupBusiness
-                        ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
-                        : t('SIGN_UP', 'Sign up')}
-                  </Button>
-                </FormInline>
-              </FormInput>
-            ) : (
-              <>
-                {[...Array(5)].map((_, i) => (
-                  <SkeletonWrapper key={i}>
-                    <Skeleton height={43} />
-                  </SkeletonWrapper>
-                ))}
-              </>
-            )
-          }
-
+              ) : (
+                <>
+                  {[...Array(5)].map((_, i) => (
+                    <SkeletonWrapper key={i}>
+                      <Skeleton height={43} />
+                    </SkeletonWrapper>
+                  ))}
+                </>
+              )
+            }
+            {props.isRecaptchaEnable && enableReCaptcha && (
+              <ReCaptchaWrapper>
+                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+              </ReCaptchaWrapper>
+            )}
+            {elementLinkToLogin && (
+              <RedirectLink register isPopup={isPopup}>
+                <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')}</span>
+                {elementLinkToLogin}
+              </RedirectLink>
+            )}
+            <Button
+              color='primary'
+              type='submit'
+              disabled={formState.loading || validationFields?.loading}
+            >
+              {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
+            </Button>
+          </FormInput>
           {!externalPhoneNumber && (
             <>
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
                   {configs?.facebook_login?.value && configs?.facebook_id?.value && (
-                    <FormInline>
-                      <FacebookLoginButton
-                        appId={configs?.facebook_id?.value}
-                        handleSuccessFacebookLogin={handleSuccessFacebook}
-                      />
-                    </FormInline>
+                    <FacebookLoginButton
+                      appId={configs?.facebook_id?.value}
+                      handleSuccessFacebookLogin={handleSuccessFacebook}
+                    />
                   )}
                   {configs?.apple_login_client_id?.value && (
-                    <FormInline>
-                      <AppleLogin
-                        onSuccess={handleSuccessApple}
-                        onFailure={(data) => console.log('onFailure', data)}
-                      />
-                    </FormInline>
+                    <AppleLogin
+                      onSuccess={handleSuccessApple}
+                      onFailure={(data) => console.log('onFailure', data)}
+                    />
                   )}
                   {configs?.google_login_client_id?.value && (
-                    <FormInline>
-                      <GoogleLoginButton
-                        initParams={initParams}
-                        handleSuccessGoogleLogin={handleSuccessGoogle}
-                        onFailure={(data) => console.log('onFailure', data)}
-                      />
-                    </FormInline>
-
+                    <GoogleLoginButton
+                      initParams={initParams}
+                      handleSuccessGoogleLogin={handleSuccessGoogle}
+                      onFailure={(data) => console.log('onFailure', data)}
+                    />
                   )}
                 </SocialButtons>
               ) : (
                 <SkeletonSocialWrapper>
-                  <Skeleton height={40} />
-                  <Skeleton height={40} />
-                  <Skeleton height={40} />
+                  <Skeleton height={43} />
                 </SkeletonSocialWrapper>
               )}
             </>
-          )}
-
-          {elementLinkToLogin && (
-            <RedirectLink register isPopup={isPopup}>
-              <FormBottom>
-                <span>{t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')}</span>
-                <AccountLogin>
-                  {elementLinkToLogin}
-                  <Button outline>{t('SIGN_IN', 'Log In')}</Button>
-                </AccountLogin>
-              </FormBottom>
-            </RedirectLink>
           )}
         </FormSide>
         <Alert

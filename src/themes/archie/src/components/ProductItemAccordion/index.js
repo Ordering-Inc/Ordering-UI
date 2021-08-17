@@ -23,7 +23,8 @@ import {
   ProductNotAvailable,
   ProductSelect,
   ProductOptionsList,
-  ProductQuantity
+  ProductQuantity,
+  CartActions
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -109,62 +110,72 @@ export const ProductItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <ProductInfo className='info'>
-            {isCartProduct && !isCartPending && getProductMax ? (
-              <ProductSelect
-                ref={productSelect}
-                value={product.quantity}
-                onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-              >
-                {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                  <option
-                    key={i}
-                    value={i}
-                    disabled={offsetDisabled(product) < i && i !== 0}
-                  >
-                    {i === 0 ? t('REMOVE', 'Remove') : i}
-                  </option>
-                ))}
-              </ProductSelect>
-            ) : (
-              <ProductQuantity>
-                {product?.quantity}
-              </ProductQuantity>
+            {product?.images && (
+              <WrapperProductImage>
+                <ProductImage bgimage={product?.images} />
+              </WrapperProductImage>
             )}
+
             <ContentInfo>
               <h3>{product.name}</h3>
-              <span>
-                <p>{parsePrice(product.total || product.price)}</p>
-              </span>
+              <CartActions>
+                {isCartProduct && !isCartPending && getProductMax ? (
+                  <ProductSelect
+                    ref={productSelect}
+                    value={product.quantity}
+                    onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+                  >
+                    {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                      <option
+                        key={i}
+                        value={i}
+                        disabled={offsetDisabled(product) < i && i !== 0}
+                      >
+                        {i === 0 ? t('REMOVE', 'Remove') : i}
+                      </option>
+                    ))}
+                  </ProductSelect>
+                ) : (
+                  <ProductQuantity>
+                    {product?.quantity}
+                  </ProductQuantity>
+                )}
+
+                {isCartProduct && !isCartPending && (
+                  <ProductActions>
+                    <ProductActionsEdit
+                      ref={productActionsEdit}
+                      onClick={() => onEditProduct(product)}
+                      disabled={orderState.loading}
+                    >
+                      <TiPencil color='#F2BB40' />
+                    </ProductActionsEdit>
+                    <ProductActionsDelete
+                      ref={productActionsDelete}
+                      onClick={() => onDeleteProduct(product)}
+                      disabled={orderState.loading}
+                    >
+                      <VscTrash color='#D81212' />
+                    </ProductActionsDelete>
+                  </ProductActions>
+                )}
+              </CartActions>
             </ContentInfo>
           </ProductInfo>
 
           {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
             <ProductPriceSection>
               <ProductPrice className='prod-price'>
+                <span>
+                  {parsePrice(product.total || product.price)}
+                </span>
                 {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
                   <p>
                     <IosArrowDown className={`${setRotate}`} />
                   </p>
                 )}
               </ProductPrice>
-              {isCartProduct && !isCartPending && (
-                <ProductActions>
-                  <ProductActionsEdit
-                    ref={productActionsEdit}
-                    onClick={() => onEditProduct(product)}
-                    disabled={orderState.loading}
-                  >
-                    <TiPencil />
-                  </ProductActionsEdit>
-                  <ProductActionsDelete
-                    ref={productActionsDelete}
-                    onClick={() => onDeleteProduct(product)}
-                    disabled={orderState.loading}
-                  >
-                    <VscTrash />
-                  </ProductActionsDelete>
-                </ProductActions>
-              )}
+
             </ProductPriceSection>
           )}
 
@@ -176,14 +187,14 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onEditProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <TiPencil />
+                  <TiPencil color='#F2BB40' />
                 </ProductActionsEdit>
                 <ProductActionsDelete
                   ref={productActionsDelete}
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <VscTrash />
+                  <VscTrash color='#D81212' />
                 </ProductActionsDelete>
               </ProductActions>
               <ProductNotAvailable>
@@ -200,7 +211,7 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <VscTrash />
+                  <VscTrash color='#D81212' />
                 </ProductActionsDelete>
               </ProductActions>
               <ProductNotAvailable>
@@ -250,7 +261,7 @@ export const ProductItemAccordion = (props) => {
           {product.comment && (
             <ProductComment>
               <p>{t('SPECIAL_COMMENT', 'Special Comment')}</p>
-              <h3>{product.comment}</h3>
+              <span>{product.comment}</span>
             </ProductComment>
           )}
         </AccordionContent>

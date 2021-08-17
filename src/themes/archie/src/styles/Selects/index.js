@@ -7,13 +7,15 @@ export const Option = styled.div`
   min-width: 100px;
   color: #333;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 100;
   &:hover {
-    background-color: ${darken(0.03, '#CCC')};
+    background-color: ${darken(0.03, '#E8F0ED')};
   }
   ${props => props.selected && css`
-    background-color: ${darken(0.07, '#CCC')};
+    background-color: ${darken(0.05, '#E8F0ED')};
     &:hover {
-      background-color: ${darken(0.07, '#CCC')};
+      background-color: ${darken(0.03, '#E8F0ED')};
     }
   `}
   svg {
@@ -35,25 +37,17 @@ export const Option = styled.div`
 
 export const Options = styled.div`
   position: absolute;
-  background-color: #CCC;
+  background-color: #fff;
   margin-top: 7px;
   z-index: 10000;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #CCC;
-  border-radius: 0;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   overflow: hidden;
+
   ${({ position }) => position?.toLowerCase() === 'left' && css`
     left: 0;
     margin-left: -1px;
-    ${props => props.theme?.rtl && css`
-        margin-right: -1px;
-        margin-left: 0px;
-        right: 0;
-        left: initial;
-    `}
   `}
-
   ${({ position }) => position?.toLowerCase() === 'right' && css`
     right: 0;
     margin-right: -1px;
@@ -64,11 +58,14 @@ export const Options = styled.div`
         right: initial;
     `}
   `}
+
+  ${({ fullwidth }) => fullwidth && css`
+    width: 100%;    
+  `}
 `
 
 export const Selected = styled.div`
-  padding: 11px;
-  text-transform: uppercase;
+  font-size: 16px;
   cursor: pointer;
   position: relative;
   display: flex;
@@ -83,56 +80,49 @@ export const Selected = styled.div`
   -ms-user-select: none;
   user-select: none;
   z-index: 11;
-  font-size: .86rem;
-  line-height: 26px;
-  color: ${props => props.theme.colors.primary};
   @media (min-width: 381px) {
-    padding: 6px 12px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
-  @media (min-width: 1200px) {
-    padding: 11px 16px;
-    font-size: 1rem;
-  }
+  ${({ fullwidth }) => fullwidth && css`
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+  `}
 `
 
 export const Select = styled.div`
   display: inline-block;
-  border-radius: 0;
-  border-width: 1px;
-  border-style: solid;
-  border-color: ${props => props.theme.colors.primary};
+  height: 34px;
+  line-height: 34px;
+  color: #000000;  
   background-color: transparent;
-  color: #000000;
   position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
   ${props => props.disabled && css`
     pointer-events: none;
-  `}
-
-  ${props => props.open && css`
-    background-color: ${darken(0.07, '#CCC')};
-  `}
-
-  ${props => props.noborder && css`
-    border:none;
-    .chevron {
-      margin-left: 5px;
-      ${props => props.theme?.rtl && css`
-            margin-right: 5px;
-            margin-left: 0;
-        `}
-      }
-  `}
-
+  `} 
+  
+  ${({ fullwidth }) => fullwidth && css`
+    width: 100%;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    border-radius: 7px;
+    @media (min-width: 768px) {
+      height: 40px;
+      line-height: 40px;
+    }
+  `} 
 `
 
 export const Chevron = styled.div`
-  font-size: 1rem;
+  font-size: 10px;
   display: flex;
   align-items: center;
-  margin-left: 18px;
+  margin-left: 5px;
   ${props => props.theme?.rtl && css`
-        margin-right: 18px;
+        margin-right: 5px;
         margin-left: 0;
     `}
 `

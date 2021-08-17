@@ -22,11 +22,11 @@ const LanguageSelectorUI = (props) => {
   return (
     _languages && _languages.length > 1 ? (
       <Select
+        style={styles.languageSelect}
         options={languagesState?.loading ? defaultLanguages : _languages}
         defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
         onChange={(languageId) => handleChangeLanguage(languageId)}
         notReload={notReload}
-        noborder
       />
     ) : null
   )
@@ -48,4 +48,10 @@ export const LanguageSelector = (props) => {
   return (
     <LanguageSelectorController {...langProps} />
   )
+}
+
+const styles = {
+  languageSelect: {
+    fontSize: 14
+  }
 }

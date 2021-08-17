@@ -1,7 +1,11 @@
 import React from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
+import Skeleton from 'react-loading-skeleton'
+
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+
 import {
   ProductsContainer,
   ProductsListing,
@@ -26,7 +30,9 @@ const BusinessProductsListUI = (props) => {
     handleClearSearch,
     errorQuantityProducts
   } = props
+
   const [, t] = useLanguage()
+  const windowSize = useWindowSize()
 
   return (
     <>
@@ -37,9 +43,14 @@ const BusinessProductsListUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
+        {windowSize.width > 850 &&
+          <>
+            {isBusinessLoading ? <Skeleton width={100} height={30} /> : <h2>{t('MENU', 'Menu')} </h2>}
+          </>}
         {category?.id && (
-          <WrapAllCategories>
-            <h3>{category?.name}</h3>
+          <>
+            {windowSize.width > 850 &&
+              <h3>{category?.name}</h3>}
             <ProductsListing>
               {
                 categoryState.products?.map(product => (
@@ -54,8 +65,9 @@ const BusinessProductsListUI = (props) => {
                 ))
               }
             </ProductsListing>
-          </WrapAllCategories>
+          </>
         )}
+
         {
           !category?.id && (
             <>
@@ -81,6 +93,7 @@ const BusinessProductsListUI = (props) => {
             </>
           )
         }
+
         {
           !category?.id && categories.filter(category => category?.id !== null).map((category, i, _categories) => {
             const products = categoryState.products?.filter(product => product?.category_id === category?.id) || []
@@ -119,20 +132,20 @@ const BusinessProductsListUI = (props) => {
             )
           })
         }
+
         {
           (categoryState.loading || isBusinessLoading) && (
-            <WrapAllCategories id='container'>
-              <ProductsListing>
-                {[...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
-                  <SingleProductCard
-                    key={`skeleton:${i}`}
-                    isSkeleton
-                  />
-                ))}
-              </ProductsListing>
-            </WrapAllCategories>
+            <ProductsListing>
+              {[...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+                <SingleProductCard
+                  key={`skeleton:${i}`}
+                  isSkeleton
+                />
+              ))}
+            </ProductsListing>
           )
         }
+
         {
           !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (
             <WrapperNotFound>
@@ -144,6 +157,7 @@ const BusinessProductsListUI = (props) => {
             </WrapperNotFound>
           )
         }
+
         {errors && errors.length > 0 && (
           errors.map((e, i) => (
             <ErrorMessage key={i}>ERROR: [{e}]</ErrorMessage>
