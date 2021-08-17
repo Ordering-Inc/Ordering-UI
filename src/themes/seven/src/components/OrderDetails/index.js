@@ -425,36 +425,6 @@ const OrderDetailsUI = (props) => {
             </RightPanel>
           </Layout>
         )}
-        {/* <WrapperContainer>
-          <Content className='order-content'>
-
-            {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-              <ShareOrder>
-                <div className='text'>
-                  <h1>{t('SHARE_THIS_DELIVERY', theme?.defaultLanguages?.SHARE_THIS_DELIVERY || 'Share this delivery')}</h1>
-                  <p>{t('LET_SOMEONE_FOLLOW_ALONG', theme?.defaultLanguages?.LET_SOMEONE_FOLLOW_ALONG || 'Let someone follow along')}</p>
-                </div>
-                <div className='wrap'>
-                  <ProductShare
-                    withBtn
-                    btnText={t('SHARE', theme?.defaultLanguages?.SHARE || 'Share')}
-                    defaultUrl={urlToShare(order?.hash_key)}
-                  />
-                </div>
-              </ShareOrder>
-            )}
-
-            {!userCustomerId && (
-              <FootActions>
-                <a onClick={() => handleGoToPage({ page: 'orders' })}>
-                  {t('MY_ORDERS', theme?.defaultLanguages?.MY_ORDERS || 'My Orders')}
-                  <BiCaretUp />
-                </a>
-              </FootActions>
-            )}
-          </Content>
-        </WrapperContainer> */}
-
         {loading && !error && (
           <WrapperContainer isLoading className='skeleton-loading'>
             <SkeletonBlockWrapp>

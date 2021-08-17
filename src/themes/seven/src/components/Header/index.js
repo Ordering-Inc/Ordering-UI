@@ -23,8 +23,6 @@ import { AddressesPopover } from '../../../../../components/AddressesPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
 import { Modal } from '../../../../../components/Modal'
 import { MomentContent } from '../../../../../components/MomentContent'
-import { AddressList } from '../../../../../components/AddressList'
-import { AddressForm } from '../../../../../components/AddressForm'
 import { SidebarMenu } from '../../../../../components/SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
@@ -34,6 +32,8 @@ import { HeaderOption } from '../HeaderOption'
 import { UserPopover } from '../UserPopover'
 import { CartPopover } from '../CartPopover'
 import { CartContent } from '../CartContent'
+import { AddressList } from '../AddressList'
+import { AddressForm } from '../AddressForm'
 
 export const Header = (props) => {
   const {

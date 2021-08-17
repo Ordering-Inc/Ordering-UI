@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { darken } from 'polished'
 
 export const Option = styled.div`
   padding: 7px 15px;
