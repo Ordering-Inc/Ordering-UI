@@ -235,3 +235,49 @@ export const UserEdit = styled.div`
      margin-bottom: 20px;  
   }
 `
+
+export const AddressMenu = styled.div`
+  cursor: pointer;
+  font-size: 14px;
+  color: #909BA9;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  svg {
+    margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0;
+    `}
+  }
+`
+
+export const MomentMenu = styled.div`
+  border-left: 1px solid #DEE2E6;
+  border-right: 1px solid #DEE2E6;
+  height: 100%;
+  justify-content: center;
+  width: 200px;
+  display: none;
+  
+  @media (min-width: 821px) {
+    display: flex;
+  }
+
+  @media (min-width: 1175px) {
+    width: 250px;
+  }
+
+  @media (min-width: 1400px) {
+    width: 400px;
+  }
+
+  > div {
+    cursor: pointer;
+    font-size: 14px;
+    color: #909BA9;
+    display: flex;
+    align-items: center;
+  }
+`

@@ -3,7 +3,14 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   display: flex;
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100vh;
+  overflow-y: scroll;
 `
+
 export const WrapperContainer = styled.div`
   display: flex;
   width: 100%;
@@ -14,24 +21,32 @@ export const WrapperContainer = styled.div`
 `
 export const LeftPanel = styled.div`
   box-sizing: border-box;
-  margin: 0 auto;
-  width: 90%;
-  @media (min-width: 1024px) {
+  width: 100%;
+  padding: 5%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 25px;
+  position: relative;
+  background-color: #fff;
+    @media (min-width: 1024px) {
     width: 40vw;
+    height: 100vh;
     padding: 0 50px;
     border-right: 1px solid ${props => props.theme.colors.borderColor};
-    max-height: calc(100vh - 65px);
     overflow-y: auto;
   }
 `
 export const RightPanel = styled.div`
   box-sizing: border-box;
-  margin: 0 auto;
-  width: 90%;
+  width: 100%;
+  padding: 5%;
+  box-sizing: border-box;
+  background-color: ${props => props.theme.colors.secundaryBackground};
   @media (min-width: 1024px) {
     width: 60vw;
+    height: 100vh;
     padding: 0 100px;
-    max-height: calc(100vh - 65px);
     overflow-y: auto;
   }
 `
@@ -44,6 +59,7 @@ export const RightContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   height: fit-content;
+  padding-top: 20px;
 `
 export const Header = styled.div`
   width: 100%;
@@ -104,10 +120,9 @@ export const OrderBusiness = styled.div`
   justify-content: space-between;
   opacity: 1;
   margin: 20px 0px;
-  padding: 10px;
 `
 export const BusinessWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   display: flex;
 `
 export const LogoWrapper = styled.div`
@@ -143,10 +158,10 @@ export const BusinessInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 65%;
+  width: 100%;
   h1,
   p {
-    margin: 3px 15px;
+    margin: 5px 0px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -156,11 +171,13 @@ export const BusinessInfo = styled.div`
   }
 `
 export const ActionsBlock = styled.div`
-  width: 10%;
+  width: 20%;
+  padding-top: 10px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  /* justify-content: center;
+  flex-direction: column; */
   > * {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
@@ -184,7 +201,7 @@ export const OrderInfo = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 10px 0px 20px;
+  margin: 20px 0px;
 `
 export const OrderData = styled.div`
   width: 100%;
@@ -286,32 +303,21 @@ export const SectionTitle = styled.div`
 `
 export const OrderCustomer = styled.div`
   display: flex;
-  margin: 10px 0px 20px;
+  margin: 20px 0px;
   width: 100%;
   position: relative;
 `
 export const CustomerInfo = styled.div`
-  width:93%;
-  .photo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 65px;
-    height: 65px;
-  }
-  svg {
-    width: 65px;
-    height: 65px;
-    margin: 0 10px;
-    ${props => props.theme?.rtl && css`
-      margin-left: 10px;
-      margin-right: 0;
-    `}
-  }
+  width:80%;
+  display: flex;
+  
 `
 export const ShareOrderWrapper = styled.div`
   display: flex;
   padding-top: 15px;
+  width: 20%;
+  justify-content: flex-end;
+
 `
 export const PhotoBlock = styled.img`
   border-radius: 50%;
@@ -323,14 +329,13 @@ export const PhotoBlock = styled.img`
   `}
 `
 export const InfoBlock = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-transform: capitalize;
+  width: 100%;
   h1,
-  span {
-    margin: 3px 15px;
+  p {
+    margin: 5px 0px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -376,12 +381,10 @@ export const OrderProducts = styled(OrderCustomer)`
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  padding: 20px;
-  box-shadow: 0 0 6px #c4c0c0;
-  border-radius: 7px;
   overflow: hidden;
   margin-top: 30px;
   box-sizing: border-box;
+  padding: 2px;
   @media (min-width: 1024px) {
     margin-top: 45px;
   }
@@ -393,47 +396,51 @@ export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  box-shadow: 0 0 6px #c4c0c0;
-  border-radius: 7px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 7.6px;
   overflow: hidden;
   padding: 20px;
   margin-top: 25px;
   margin-bottom:20px;
+  background-color: #fff;
+  margin: 2px;
   @media (min-width: 1024px) {
     margin-top: 45px;
+    margin-bottom: 30px;
   }
   table {
     width: 100%;
-    font-size: 12px;
-    td span {
-      unicode-bidi: bidi-override;
+    font-size: 16px;
+    line-height: 19px;
+    tr{
+      display: flex;
+      margin-bottom: 10px;
     }
+    tr td:nth-child(1),
+    tr td:nth-child(3) {
+      width: fit-content;
+      white-space: nowrap;
+    }
+
     tr td:nth-child(2) {
-      text-align: right;
-      ${props => props.theme?.rtl && css`
-        text-align: left;
-      `}
+      flex-grow: 1;
+      padding: 0 15px;
     }
+
+    tr td:nth-child(3) {
+      font-weight: bold;
+    }
+
+    
   }
   table.total {
-    border-top: 1px solid #BFBFBF;
-    margin-top: 15px;
+    padding-top: 10px;
+    font-size: 24px;
+    line-height: 29px;
     tr {
-      font-size: 20px;
-      td:nth-child(1) {
+      td {
         font-weight: bold;
-        padding-top: 10px;
       }
-      td:nth-child(2) {
-        font-weight: bold;
-        color: ${props => props.theme.colors.primary};
-        padding-top: 10px;
-      }
-    }
-  }
-  @media (min-width: 678px) {
-    table {
-      font-size: 18px;
     }
   }
 `
@@ -489,6 +496,11 @@ export const ShareOrder = styled.div`
   margin: 0 0 20px;
   justify-content: space-between;
   z-index: 1;
+
+  .a2a_floating_style {
+    top: 47px;
+    right: 0;
+  }
   h1 {
     font-size: 15px;
     margin: 0px;
@@ -579,5 +591,41 @@ export const ExclamationWrapper = styled.div`
   svg{
     font-size: 16px;
     color: ${props => props.theme?.colors?.primary}
+  }
+`
+
+export const DashLine = styled.span`
+  padding: 0 15px;
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  height: 70%;
+  border-bottom: 1px dashed ${props => props.theme.colors.borderColor};;
+`
+
+export const BackHeader = styled.div`
+  display: flex;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    margin-top: 25px;
+    margin-left: -20px;
+
+    ${props => props.theme?.rtl && css`
+      left: unset;
+      right: 0;
+    `}
+  }
+`
+export const Logo = styled.div`
+  margin: 0px 5px;
+`
+
+export const LinkText = styled.p`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  svg {
+    margin: 0 5px;
   }
 `

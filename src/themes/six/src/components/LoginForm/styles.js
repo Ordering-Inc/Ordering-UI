@@ -230,6 +230,9 @@ export const WrapperPassword = styled.div`
     width: 100%;
     padding-right: 40px;
   }
+  .reveal::-ms-reveal {
+      display: none;
+  }
 `
 export const OtpWrapper = styled.div`
   .otp-container{

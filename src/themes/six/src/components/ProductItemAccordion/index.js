@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import TiPencil from '@meronex/icons/ti/TiPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
+import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
+import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
-
 import {
   AccordionSection,
   Accordion,
@@ -18,35 +18,30 @@ import {
   ProductActions,
   ProductActionsEdit,
   ProductActionsDelete,
-  ProductPriceSection,
   ProductPrice,
   ProductNotAvailable,
-  ProductSelect,
   ProductOptionsList,
   ProductQuantity,
   CartActions
 } from './styles'
-
 export const ProductItemAccordion = (props) => {
   const {
     isCartPending,
     isCartProduct,
+    isSidebar,
     product,
     changeQuantity,
     getProductMax,
-    offsetDisabled,
     onDeleteProduct,
     onEditProduct
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
-  const windowSize = useWindowSize()
-
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
-
+  const [productQuantity, setProductQuantity] = useState(1)
   const content = useRef(null)
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
@@ -56,7 +51,6 @@ export const ProductItemAccordion = (props) => {
     if (isCartProduct) {
       const ingredients = JSON.parse(JSON.stringify(Object.values(product.ingredients ?? {})))
       let options = JSON.parse(JSON.stringify(Object.values(product.options ?? {})))
-
       options = options.map(option => {
         option.suboptions = Object.values(option.suboptions ?? {})
         return option
@@ -83,7 +77,7 @@ export const ProductItemAccordion = (props) => {
   }
 
   const handleChangeQuantity = (value) => {
-    if (parseInt(value) === 0) {
+    if (parseInt(value) <= 0) {
       onDeleteProduct(product)
     } else {
       changeQuantity(product, parseInt(value))
@@ -94,6 +88,36 @@ export const ProductItemAccordion = (props) => {
     const pos = position ? `(${position})` : ''
     return `${quantity} x ${name} ${pos} +${price}`
   }
+
+  const Increment = () => {
+    let _productQuantity = productQuantity
+    _productQuantity++
+    setProductQuantity(_productQuantity)
+    handleChangeQuantity(_productQuantity)
+  }
+
+  const Decrement = () => {
+    let _productQuantity = productQuantity
+    _productQuantity--
+    setProductQuantity(_productQuantity)
+    handleChangeQuantity(_productQuantity)
+  }
+
+  useEffect(() => {
+    setProductQuantity(product.quantity)
+  }, [product])
+
+  useEffect(() => {
+    if (props?.individualBusinessCart || props?.isOrderPage) {
+      setActiveState('active')
+      setHeightState(`${content.current.scrollHeight}px`)
+      setRotateState('accordion__icon rotate')
+    } else {
+      setActiveState('')
+      setHeightState('0px')
+      setRotateState('accordion__icon')
+    }
+  }, [props?.individualBusinessCart, props?.isOrderPage])
 
   return (
     <>
@@ -115,70 +139,29 @@ export const ProductItemAccordion = (props) => {
                 <ProductImage bgimage={product?.images} />
               </WrapperProductImage>
             )}
-
-            <ContentInfo>
-              <h3>{product.name}</h3>
-              <CartActions>
-                {isCartProduct && !isCartPending && getProductMax ? (
-                  <ProductSelect
-                    ref={productSelect}
-                    value={product.quantity}
-                    onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-                  >
-                    {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                      <option
-                        key={i}
-                        value={i}
-                        disabled={offsetDisabled(product) < i && i !== 0}
-                      >
-                        {i === 0 ? t('REMOVE', 'Remove') : i}
-                      </option>
-                    ))}
-                  </ProductSelect>
-                ) : (
+            <ContentInfo isSidebar={isSidebar}>
+              <h3>
+                {!(isCartProduct && !isCartPending && getProductMax) && (
                   <ProductQuantity>
                     {product?.quantity}
                   </ProductQuantity>
                 )}
-
-                {isCartProduct && !isCartPending && (
-                  <ProductActions>
-                    <ProductActionsEdit
-                      ref={productActionsEdit}
-                      onClick={() => onEditProduct(product)}
-                      disabled={orderState.loading}
-                    >
-                      <TiPencil color='#F2BB40' />
-                    </ProductActionsEdit>
-                    <ProductActionsDelete
-                      ref={productActionsDelete}
-                      onClick={() => onDeleteProduct(product)}
-                      disabled={orderState.loading}
-                    >
-                      <VscTrash color='#D81212' />
-                    </ProductActionsDelete>
-                  </ProductActions>
-                )}
-              </CartActions>
+                {product.name}
+              </h3>
+              {(product?.valid || !isCartProduct) && (
+                <ProductPrice className='prod-price'>
+                  <span>
+                    {parsePrice(product.total || product.price)}
+                  </span>
+                  {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
+                    <p>
+                      <IosArrowDown className={`${setRotate}`} />
+                    </p>
+                  )}
+                </ProductPrice>
+              )}
             </ContentInfo>
           </ProductInfo>
-
-          {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
-            <ProductPriceSection>
-              <ProductPrice className='prod-price'>
-                <span>
-                  {parsePrice(product.total || product.price)}
-                </span>
-                {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
-                  <p>
-                    <IosArrowDown className={`${setRotate}`} />
-                  </p>
-                )}
-              </ProductPrice>
-
-            </ProductPriceSection>
-          )}
-
           {isCartProduct && !isCartPending && product?.valid_menu && !product?.valid_quantity && (
             <ProductError>
               <ProductActions>
@@ -187,14 +170,14 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onEditProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <TiPencil color='#F2BB40' />
+                  <TiPencil color='#6C757D' />
                 </ProductActionsEdit>
                 <ProductActionsDelete
                   ref={productActionsDelete}
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <VscTrash color='#D81212' />
+                  <VscTrash color='#6C757D' />
                 </ProductActionsDelete>
               </ProductActions>
               <ProductNotAvailable>
@@ -202,7 +185,6 @@ export const ProductItemAccordion = (props) => {
               </ProductNotAvailable>
             </ProductError>
           )}
-
           {!product?.valid_menu && isCartProduct && !isCartPending && (
             <ProductError>
               <ProductActions>
@@ -211,7 +193,7 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <VscTrash color='#D81212' />
+                  <VscTrash color='#6C757D' />
                 </ProductActionsDelete>
               </ProductActions>
               <ProductNotAvailable>
@@ -220,7 +202,6 @@ export const ProductItemAccordion = (props) => {
             </ProductError>
           )}
         </Accordion>
-
         <AccordionContent
           ref={content}
           style={{ maxHeight: `${setHeight}` }}
@@ -265,6 +246,45 @@ export const ProductItemAccordion = (props) => {
             </ProductComment>
           )}
         </AccordionContent>
+        <CartActions>
+          {isCartProduct && !isCartPending && getProductMax && (
+            <>
+              {
+                product && getProductMax(product) > 0 && (
+                  <div className='incdec-control'>
+                    <FiMinusCircle
+                      onClick={Decrement}
+                      className={`${productQuantity <= 1 ? 'disabled' : ''}`}
+                    />
+                    <span>{productQuantity}</span>
+                    <FiPlusCircle
+                      onClick={Increment}
+                      className={`${getProductMax(product) <= 0 || product.quantity >= getProductMax(product) ? 'disabled' : ''}`}
+                    />
+                  </div>
+                )
+              }
+            </>
+          )}
+          {isCartProduct && !isCartPending && (
+            <ProductActions>
+              <ProductActionsEdit
+                ref={productActionsEdit}
+                onClick={() => onEditProduct(product)}
+                disabled={orderState.loading}
+              >
+                <TiPencil color='#6C757D' />
+              </ProductActionsEdit>
+              <ProductActionsDelete
+                ref={productActionsDelete}
+                onClick={() => onDeleteProduct(product)}
+                disabled={orderState.loading}
+              >
+                <VscTrash color='#6C757D' />
+              </ProductActionsDelete>
+            </ProductActions>
+          )}
+        </CartActions>
       </AccordionSection>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

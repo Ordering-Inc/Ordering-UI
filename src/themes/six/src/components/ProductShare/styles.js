@@ -6,6 +6,11 @@ export const IconShare = styled.div`
   z-index: 9999995;
   background: rgba(255,255,255,0.5);
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
   svg {
     cursor: pointer
   }

@@ -19,7 +19,6 @@ import {
 } from 'ordering-components'
 import { Alert } from '../../../../../components/Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
-
 import {
   FormControl,
   FormActions,
@@ -29,10 +28,8 @@ import {
   WrapperMap,
   WrapperSkeleton
 } from './styles'
-
 import { Button } from '../../../../../styles/Buttons'
 import { Input, TextArea } from '../../styles/inputs'
-
 const inputNames = [
   { name: 'address', code: 'Address' },
   { name: 'internal_number', code: 'Internal number' },
@@ -55,36 +52,30 @@ const AddressFormUI = (props) => {
     setIsEdit,
     userCustomerSetup
   } = props
-
   const [configState] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
-
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
   const isEditing = !!addressState.address?.id
-
   const [locationChange, setLocationChange] = useState(
     isEditing
       ? addressState?.address?.location
       : formState.changes?.location ?? null
   )
-
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
                               configState.configs?.google_autocomplete_selection_required?.value === 'true'
-
   const mapErrors = {
     ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
     ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
   }
-
   const closeAlert = () => {
     setAlertState({
       open: false,

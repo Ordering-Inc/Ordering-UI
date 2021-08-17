@@ -246,7 +246,7 @@ const LoginFormUI = (props) => {
                     active={loginTab === 'cellphone'}
                     borderBottom
                   >
-                    {t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}
+                    {t('LOGIN_WITH_CELLPHONE', theme?.defaultLanguages?.LOGIN_WITH_CELLPHONE || 'Login with Cellphone')}
                   </Tab>
                 )}
               </Tabs>
@@ -319,6 +319,7 @@ const LoginFormUI = (props) => {
                     name='password'
                     aria-label='password'
                     placeholder={t('PASSWORD', 'Password')}
+                    className='reveal'
                     ref={formMethods.register({
                       required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
                     })}
@@ -379,7 +380,7 @@ const LoginFormUI = (props) => {
           )}
           {(elementLinkToSignup && !loginWithOtpState) && (
             <RedirectLink register isPopup={isPopup}>
-              <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
+              <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
               {elementLinkToSignup}
             </RedirectLink>
           )}

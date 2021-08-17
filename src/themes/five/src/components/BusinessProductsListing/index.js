@@ -35,7 +35,7 @@ import { BusinessProductsList } from '../BusinessProductsList'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { Cart } from '../Cart'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
@@ -347,7 +347,7 @@ const BusinessProductsListingUI = (props) => {
       )}
 
       <Modal
-        width='50%'
+        width='40%'
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}

@@ -8,8 +8,8 @@ import {
   useConfig,
   GoogleMapsMap
 } from 'ordering-components'
+import AiOutlineLeft from '@meronex/icons/ai/AiOutlineLeft'
 import FiPhone from '@meronex/icons/fi/FiPhone'
-import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
@@ -19,7 +19,6 @@ import { Button } from '../../../../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Messages } from '../../../../../components/Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
-
 import { Modal } from '../Modal'
 import { ProductShare } from '../ProductShare'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -32,8 +31,6 @@ import {
   Content,
   OrderBusiness,
   BusinessWrapper,
-  LogoWrapper,
-  BusinessLogo,
   BusinessInfo,
   ActionsBlock,
   OrderInfo,
@@ -59,7 +56,11 @@ import {
   LeftContentWrapper,
   RightContentWrapper,
   CustomerInfo,
-  ShareOrderWrapper
+  ShareOrderWrapper,
+  DashLine,
+  BackHeader,
+  Logo,
+  LinkText
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -88,6 +89,7 @@ const OrderDetailsUI = (props) => {
   const [openReview, setOpenReview] = useState(false)
   const [isReviewed, setIsReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
+  const [showAction, setShowAction] = useState(false)
   const { order, loading, businessData, error } = props.order
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -165,26 +167,27 @@ const OrderDetailsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container>
+      <Container className='order-detail-page'>
         {order && Object.keys(order).length > 0 && (
           <WrapperContainer>
             <LeftPanel>
-              <LeftContentWrapper>
-                {windowSize.width < 1020 &&
-                  <Header>
-                    {isCustomerMode && (
-                      <Button onClick={() => handleGoToPage({ page: 'search' })}>
-                        <BsArrowLeft />
-                        {t('GO_TO_BUSINESSLIST', 'Go to business list')}
-                      </Button>
-                    )}
-                    <HeaderInfo className='order-header'>
-                      <HeaderText column>
-                        <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-                        <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
-                      </HeaderText>
-                    </HeaderInfo>
-                  </Header>}
+              <BackHeader>
+                {windowSize.width > 768 && (
+                  <Logo>
+                    <img alt='Isotype' width='35px' height='45px' src={theme?.images?.logos?.isotype} loading='lazy' />
+                  </Logo>
+                )}
+
+                <LinkText onClick={() => handleGoToPage({ page: 'search' })}>
+                  <AiOutlineLeft />
+                  {windowSize.width > 768 && (
+                    <>
+                      {t('BACK_HOME', 'Back to Home')}
+                    </>
+                  )}
+                </LinkText>
+              </BackHeader>
+              <LeftContentWrapper className='left-contentwrappre'>
                 <OrderInfo>
                   <OrderData>
                     <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
@@ -207,9 +210,6 @@ const OrderDetailsUI = (props) => {
                 </SectionTitle>
                 <OrderBusiness>
                   <BusinessWrapper>
-                    <LogoWrapper>
-                      <BusinessLogo bgimage={order?.business?.logo || theme.images?.dummies?.businessLogo} />
-                    </LogoWrapper>
                     <BusinessInfo>
                       <h1>{order?.business?.name}</h1>
                       <p>{order?.business?.address}</p>
@@ -217,36 +217,31 @@ const OrderDetailsUI = (props) => {
                       <p>{order?.business?.email}</p>
                     </BusinessInfo>
                   </BusinessWrapper>
-                  <ActionsBlock>
-                    {order.driver && order.driver.phone &&
-                      <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                        <FiPhone />
-                      </span>}
-                    <span>
-                      <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
-                    </span>
-                    <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                      {order?.unread_count > 0 && unreadAlert.business && (
-                        <ExclamationWrapper>
-                          <AiFillExclamationCircle />
-                        </ExclamationWrapper>
-                      )}
-                      <HiOutlineChat />
-                    </MessagesIcon>
-                  </ActionsBlock>
+                  {showAction && (
+                    <ActionsBlock>
+                      {order.driver && order.driver.phone &&
+                        <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                          <FiPhone />
+                        </span>}
+                      <span>
+                        <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
+                      </span>
+                      <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
+                        {order?.unread_count > 0 && unreadAlert.business && (
+                          <ExclamationWrapper>
+                            <AiFillExclamationCircle />
+                          </ExclamationWrapper>
+                        )}
+                        <HiOutlineChat />
+                      </MessagesIcon>
+                    </ActionsBlock>
+                  )}
                 </OrderBusiness>
                 <SectionTitle>
                   {t('TO', 'To')}
                 </SectionTitle>
                 <OrderCustomer>
                   <CustomerInfo>
-                    <div className='photo'>
-                      {order?.customer?.photo ? (
-                        <PhotoBlock src={order?.customer?.photo} />
-                      ) : (
-                        <FaUserCircle />
-                      )}
-                    </div>
                     <InfoBlock>
                       <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                       <span>{order?.customer?.address}</span>
@@ -254,16 +249,18 @@ const OrderDetailsUI = (props) => {
                       <span>{order?.customer?.email}</span>
                     </InfoBlock>
                   </CustomerInfo>
-                  <ShareOrderWrapper>
-                    {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                      <ShareOrder>
-                        <ProductShare
-                          withBtn
-                          defaultUrl={urlToShare(order?.hash_key)}
-                        />
-                      </ShareOrder>
-                    )}
-                  </ShareOrderWrapper>
+                  {showAction && (
+                    <ShareOrderWrapper>
+                      {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                        <ShareOrder>
+                          <ProductShare
+                            withBtn
+                            defaultUrl={urlToShare(order?.hash_key)}
+                          />
+                        </ShareOrder>
+                      )}
+                    </ShareOrderWrapper>
+                  )}
                 </OrderCustomer>
                 {order?.driver && (
                   <>
@@ -313,24 +310,24 @@ const OrderDetailsUI = (props) => {
               </LeftContentWrapper>
             </LeftPanel>
             <RightPanel>
-              <RightContentWrapper>
+              <RightContentWrapper className='left-contentwrappre'>
                 <Content className='order-content'>
-                  {windowSize.width > 1020 &&
-                    <Header>
-                      {isCustomerMode && (
-                        <Button onClick={() => handleGoToPage({ page: 'search' })}>
-                          <BsArrowLeft />
-                          {t('GO_TO_BUSINESSLIST', 'Go to business list')}
-                        </Button>
-                      )}
-                      <HeaderInfo className='order-header'>
-                        <HeaderText column>
-                          <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-                          <p>{t('ORDER_MESSAGE_HEADER_TEXT_FIRSTLINE', 'Once business accepts your order, we will send you an email,')}</p>
-                          <p>{t('ORDER_MESSAGE_HEADER_TEXT_SECONDLINE', 'thank you!')}</p>
-                        </HeaderText>
-                      </HeaderInfo>
-                    </Header>}
+                  <Header>
+                    {isCustomerMode && (
+                      <Button onClick={() => handleGoToPage({ page: 'search' })}>
+                        <BsArrowLeft />
+                        {t('GO_TO_BUSINESSLIST', 'Go to business list')}
+                      </Button>
+                    )}
+
+                    <HeaderInfo className='order-header'>
+                      <HeaderText column>
+                        <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
+                        <p>{t('ORDER_MESSAGE_HEADER_TEXT_FIRSTLINE', 'Once business accepts your order, we will send you an email,')}</p>
+                        <p>{t('ORDER_MESSAGE_HEADER_TEXT_SECONDLINE', 'thank you!')}</p>
+                      </HeaderText>
+                    </HeaderInfo>
+                  </Header>
                   {!userCustomerId && (
                     <FootActions>
                       <Button
@@ -347,6 +344,7 @@ const OrderDetailsUI = (props) => {
                       <ProductItemAccordion
                         key={product.id}
                         product={product}
+                        isOrderPage
                       />
                     ))}
                   </OrderProducts>
@@ -355,6 +353,7 @@ const OrderDetailsUI = (props) => {
                       <tbody>
                         <tr>
                           <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
+                          <td><DashLine /></td>
                           <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
                         </tr>
                         {(order?.summary?.discount > 0 || order?.discount > 0) && (
@@ -367,6 +366,7 @@ const OrderDetailsUI = (props) => {
                             ) : (
                               <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
                             )}
+                            <td><DashLine /></td>
                             <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
                           </tr>
                         )}
@@ -377,6 +377,7 @@ const OrderDetailsUI = (props) => {
                                 {t('TAX', theme?.defaultLanguages?.TAX || 'Tax')}{' '}
                                 <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
                               </td>
+                              <td><DashLine /></td>
                               <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
                             </tr>
                           )
@@ -384,6 +385,7 @@ const OrderDetailsUI = (props) => {
                         {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
                           <tr>
                             <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
+                            <td><DashLine /></td>
                             <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
                           </tr>
                         )}
@@ -398,6 +400,7 @@ const OrderDetailsUI = (props) => {
                             <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
                           )}
                             </td>
+                            <td><DashLine /></td>
                             <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
                           </tr>
                         )}
@@ -406,6 +409,7 @@ const OrderDetailsUI = (props) => {
                             {t('SERVICE_FEE', theme?.defaultLanguages?.SERVICE_FEE || 'Service Fee')}{' '}
                             <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
                           </td>
+                          <td><DashLine /></td>
                           <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
                         </tr>
                       </tbody>
@@ -414,6 +418,7 @@ const OrderDetailsUI = (props) => {
                       <tbody>
                         <tr>
                           <td>{t('TOTAL', theme?.defaultLanguages?.TOTAL || 'Total')}</td>
+                          <td><DashLine /></td>
                           <td>{parsePrice(order?.summary?.total || order?.total)}</td>
                         </tr>
                       </tbody>
@@ -460,9 +465,6 @@ const OrderDetailsUI = (props) => {
                   </SectionTitle>
                   <OrderBusiness>
                     <BusinessWrapper>
-                      <LogoWrapper>
-                        <Skeleton style={{ margin: '7px' }} width={75} height={45} />
-                      </LogoWrapper>
                       <BusinessInfo>
                         <Skeleton width={200} height={30} />
                         <Skeleton width={100} height={15} />
@@ -475,21 +477,21 @@ const OrderDetailsUI = (props) => {
                   <SectionTitle>
                     {t('TO', 'To')}
                   </SectionTitle>
-                  <OrderCustomer>
-                    <CustomerInfo>
-                      <Skeleton style={{ margin: '7px' }} width={75} height={30} />
-                      <Skeleton width={100} height={15} />
-                      <Skeleton width={100} height={15} />
-                      <Skeleton width={100} height={15} />
-                    </CustomerInfo>
-                    <ShareOrderWrapper>
-                      <Skeleton width={100} height={15} />
-                    </ShareOrderWrapper>
-                  </OrderCustomer>
+                  <OrderBusiness>
+                    <BusinessWrapper>
+                      <BusinessInfo>
+                        <Skeleton width={200} height={30} />
+                        <Skeleton width={100} height={15} />
+                        <Skeleton width={100} height={15} />
+                        <Skeleton width={100} height={15} />
+                      </BusinessInfo>
+                    </BusinessWrapper>
+                    <ActionsBlock />
+                  </OrderBusiness>
                 </LeftContentWrapper>
               </LeftPanel>
               <RightPanel>
-                <RightContentWrapper>
+                <RightContentWrapper style={{ paddingTop: '20px' }}>
                   <Content className='order-content'>
                     {windowSize.width > 1020 &&
                       <Skeleton height={100} />}
