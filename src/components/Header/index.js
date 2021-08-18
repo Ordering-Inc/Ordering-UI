@@ -182,7 +182,7 @@ export const Header = (props) => {
                 />
                 {onlineStatus && windowSize.width > 820 && (
                   <>
-                    {!isCustomerMode && (
+                    {!isCustomerMode && (configState?.configs?.preorder_status_enabled?.value || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                       <MomentPopover
                         open={openPopover.moment}
                         onClick={() => handleTogglePopover('moment')}
@@ -268,7 +268,7 @@ export const Header = (props) => {
                 onClose={() => handleClosePopover('addresses')}
                 isHome={isHome}
               />
-              {!isCustomerMode && (
+              {!isCustomerMode && (configState?.configs?.preorder_status_enabled?.value || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <MomentPopover
                   open={openPopover.moment}
                   onClick={() => handleTogglePopover('moment')}
@@ -285,7 +285,7 @@ export const Header = (props) => {
                 onClick={(variant) => openModal(variant)}
                 isHome={isHome}
               />
-              {!isCustomerMode && (
+              {!isCustomerMode && (configState?.configs?.preorder_status_enabled?.value || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
                   variant='moment'
                   momentState={orderState?.options?.moment}
