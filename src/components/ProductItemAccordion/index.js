@@ -139,7 +139,7 @@ export const ProductItemAccordion = (props) => {
               <h3>{product.name}</h3>
               {windowSize.width <= 410 && (
                 <span>
-                  <p>{parsePrice(product.total || product.price)}</p>
+                  <p>{parsePrice(product.total ?? product.price)}</p>
                   {isCartProduct && !isCartPending && (
                     <div>
                       {onEditProduct && (
