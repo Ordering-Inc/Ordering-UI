@@ -14,10 +14,8 @@ export const OrderTypeListItemContainerStyled = styled.div`
   border-radius: 7.6px;
   margin-bottom: 25px;
   background: #000000;
-  padding: 30px;
   cursor: pointer;
-  max-width: 100%;
-
+  width: 95%;
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
     background-size: cover;
@@ -47,6 +45,8 @@ export const OrderTypeTitle = styled.h2`
   color: #FFFFFF;
   margin-top: 0;
   margin-bottom: 5px;
+  padding: 0px 15%;
+  padding-top: 20px;
 `
 
 export const OrderTypeDescription = styled.p`
@@ -54,7 +54,7 @@ export const OrderTypeDescription = styled.p`
   color: #FFFFFF;
   margin-top: 0;
   margin-bottom: 20px;
-  text-align: center;
+  padding: 0px 15%;
 `
 
 export const OrderStartWrapper = styled.div`
@@ -62,6 +62,8 @@ export const OrderStartWrapper = styled.div`
   align-items: center;
   user-select: none;
   cursor: pointer;
+  padding-bottom: 20px;
+  padding-left: 15%;
 
   span {
     color: #FFFFFF;
@@ -90,6 +92,29 @@ export const Logo = styled.div`
   width: 65px;
   height: 65px;
   img {
+    width: 100%;
+  }
+`
+
+export const TypeContainer = styled.div`
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  button: {
+    width: 100%;
+  }
+`
+
+export const ModalIcon = styled.div`
+
+`
+
+export const InputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  input{
     width: 100%;
   }
 `

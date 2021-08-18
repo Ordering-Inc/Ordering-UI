@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLanguage, OrderTypeControl, useOrder } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
+import { Modal } from '../Modal'
 import {
   OrderTypeSelectorContainer,
   OrderTypeListItemContainer,
@@ -9,8 +11,13 @@ import {
   OrderTypeDescription,
   OrderStartWrapper,
   OrderTypeListTitle,
-  Logo
+  Logo,
+  TypeContainer,
+  ModalIcon,
+  InputWrapper
 } from './styles'
+import { Input } from '../../../../../styles/Inputs'
+import { Button } from '../../styles/Buttons'
 
 export const OrderTypeSelectorContentUI = (props) => {
   const {
@@ -22,10 +29,11 @@ export const OrderTypeSelectorContentUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderStatus] = useOrder()
-
-  const handleClickOrderType = (orderType) => {
+  const [orderTypeSelected, setOrderTypeSelected] = useState(null)
+  const handleClickOrderType = ({ value, text }) => {
     onClose && onClose()
-    handleChangeOrderType && handleChangeOrderType(orderType)
+    handleChangeOrderType && handleChangeOrderType(value)
+    setOrderTypeSelected({ open: true, type: text })
   }
 
   return (
@@ -48,7 +56,7 @@ export const OrderTypeSelectorContentUI = (props) => {
             <OrderTypeListItemContainer
               key={i}
               bgimage={item?.image}
-              onClick={() => handleClickOrderType(item.value)}
+              onClick={() => handleClickOrderType({ value: item.value, text: item.text })}
               active={orderStatus?.options?.type === item?.value}
             >
               <OrderTypeTitle>{item.text}</OrderTypeTitle>
@@ -60,6 +68,25 @@ export const OrderTypeSelectorContentUI = (props) => {
             </OrderTypeListItemContainer>
           ))
         }
+        <Modal
+          open={orderTypeSelected?.open}
+          onClose={() => setOrderTypeSelected({ ...orderTypeSelected, open: false })}
+          hideCloseDefault
+        >
+          <ModalIcon>
+            <BsArrowLeft size={20} />
+          </ModalIcon>
+          <TypeContainer>
+            <h1>{orderTypeSelected?.type}</h1>
+            <label>{t('TABLE_NUMBER', 'Table number')}</label>
+            <InputWrapper>
+              <Input placeholder='#' />
+            </InputWrapper>
+          </TypeContainer>
+          <Button color='primary' style={{ width: '100%' }}>
+            {t('CONTINUE', 'Continue')}
+          </Button>
+        </Modal>
       </OrderTypeSelectorContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
