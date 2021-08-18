@@ -119,53 +119,59 @@ const AddressFormUI = (props) => {
   const getAddressFormatted = (addressChange) => {
     const data = { address: null, error: null }
     const geocoder = window.google && new window.google.maps.Geocoder()
-
-    geocoder.geocode({ address: addressChange }, (results, status) => {
-      let postalCode = null
-      if (status === 'OK' && results && results.length > 0) {
-        for (const component of results?.[0].address_components) {
-          const addressType = component.types?.[0]
-          if (addressType === 'postal_code') {
-            postalCode = component.short_name
-            break
+    if (geocoder) {
+      geocoder.geocode({ address: addressChange }, (results, status) => {
+        let postalCode = null
+        if (status === 'OK' && results && results.length > 0) {
+          for (const component of results?.[0].address_components) {
+            const addressType = component.types?.[0]
+            if (addressType === 'postal_code') {
+              postalCode = component.short_name
+              break
+            }
           }
-        }
-        data.address = {
-          address: addressChange,
-          location: { lat: results?.[0].geometry.location.lat(), lng: results?.[0].geometry.location.lng() },
-          utc_offset: results?.[0].utc_offset_minutes ?? 0,
-          map_data: {
-            library: 'google',
-            place_id: results?.[0].place_id
+          data.address = {
+            address: addressChange,
+            location: { lat: results?.[0].geometry.location.lat(), lng: results?.[0].geometry.location.lng() },
+            utc_offset: results?.[0].utc_offset_minutes ?? 0,
+            map_data: {
+              library: 'google',
+              place_id: results?.[0].place_id
+            }
           }
-        }
-        if (postalCode) {
-          data.address.zipcode = postalCode
-        }
-        const arrayList = isEditing
-          ? addressesList.filter(address => address.id !== addressState.address?.id) || []
-          : addressesList || []
-        const addressToCompare = isEditing
-          ? { ...addressState.address, ...data.address, ...formState?.changes }
-          : { ...data.address, ...formState?.changes }
+          if (postalCode) {
+            data.address.zipcode = postalCode
+          }
+          const arrayList = isEditing
+            ? addressesList.filter(address => address.id !== addressState.address?.id) || []
+            : addressesList || []
+          const addressToCompare = isEditing
+            ? { ...addressState.address, ...data.address, ...formState?.changes }
+            : { ...data.address, ...formState?.changes }
 
-        const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
-        if (!isAddressAlreadyExist) {
-          saveAddress(data.address, userCustomerSetup)
-          return
-        }
+          const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
+          if (!isAddressAlreadyExist) {
+            saveAddress(data.address, userCustomerSetup)
+            return
+          }
 
-        setAlertState({
-          open: true,
-          content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
-        })
-      } else {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_NOT_FOUND_ADDRESS', 'Error, address not found')]
-        })
-      }
-    })
+          setAlertState({
+            open: true,
+            content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
+          })
+        } else {
+          setAlertState({
+            open: true,
+            content: [t('ERROR_NOT_FOUND_ADDRESS', 'Error, address not found')]
+          })
+        }
+      })
+    } else {
+      setAlertState({
+        open: true,
+        content: [t('ERROR_FAILED_LOAD_GEOCODER', 'Failed to load geocoder, please try again.')]
+      })
+    }
   }
 
   const checkKeyDown = (e) => {
