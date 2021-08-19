@@ -10,7 +10,7 @@ import {
 
 import { Modal } from '../Modal'
 import { PaymentOptionCash } from '../PaymentOptionCash'
-import { PaymentOptionStripe } from '../../../../../components/PaymentOptionStripe'
+import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../../../../../components/StripeRedirectForm'

@@ -60,8 +60,7 @@ var CardFormUI = function CardFormUI(props) {
   var error = props.error,
       loading = props.loading,
       handleSubmit = props.handleSubmit,
-      handleChange = props.handleChange,
-      handleCancel = props.handleCancel;
+      handleChange = props.handleChange;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,15 +80,10 @@ var CardFormUI = function CardFormUI(props) {
     options: CARD_ELEMENT_OPTIONS,
     onChange: handleChange
   }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, error)), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    type: "button",
-    onClick: function onClick() {
-      return handleCancel();
-    }
-  }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
     disabled: loading
-  }, loading ? t('LOADING', 'Loading...') : t('ADD', 'Add')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, loading ? t('LOADING', 'Loading...') : t('ADD_CARD', 'Add card')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

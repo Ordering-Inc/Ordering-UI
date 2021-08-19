@@ -21,7 +21,7 @@ var _Modal = require("../Modal");
 
 var _PaymentOptionCash = require("../PaymentOptionCash");
 
-var _PaymentOptionStripe = require("../../../../../components/PaymentOptionStripe");
+var _PaymentOptionStripe = require("../PaymentOptionStripe");
 
 var _PaymentOptionPaypal = require("../../../../../components/PaymentOptionPaypal");
 

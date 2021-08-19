@@ -33,8 +33,7 @@ const CardFormUI = (props) => {
     error,
     loading,
     handleSubmit,
-    handleChange,
-    handleCancel
+    handleChange
   } = props
 
   const [, t] = useLanguage()
@@ -56,13 +55,12 @@ const CardFormUI = (props) => {
           <ErrorMessage>{error}</ErrorMessage>
         </FormRow>
         <FormActions>
-          <Button type='button' onClick={() => handleCancel()}>{t('CANCEL', 'Cancel')}</Button>
           <Button
             color='primary'
             type='submit'
             disabled={loading}
           >
-            {loading ? t('LOADING', 'Loading...') : t('ADD', 'Add')}
+            {loading ? t('LOADING', 'Loading...') : t('ADD_CARD', 'Add card')}
           </Button>
         </FormActions>
       </FormStripe>

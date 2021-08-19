@@ -39,6 +39,7 @@ import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorCont
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
+import { PaymentOptionStripe } from './src/components/PaymentOptionStripe'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { SearchBar } from './src/components/SearchBar'
@@ -96,6 +97,7 @@ export {
   OrderTypeSelectorContent,
   OrderTypeSelectorHeader,
   PaymentOptionCash,
+  PaymentOptionStripe,
   PaymentOptions,
   ProductForm,
   ProductItemAccordion,

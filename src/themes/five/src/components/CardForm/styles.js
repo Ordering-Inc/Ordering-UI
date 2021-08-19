@@ -70,12 +70,11 @@ export const ErrorMessage = styled.div`
 
 export const FormActions = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-between;
   margin-top: 20px;
 
   button {
-    width: 48%;
+    height: 44px;
+    width: 100%;
     padding-top: 8px;
     padding-bottom: 8px;
     border-radius: 7.6px;

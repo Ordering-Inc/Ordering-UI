@@ -249,6 +249,12 @@ Object.defineProperty(exports, "PaymentOptions", {
     return _PaymentOptions.PaymentOptions;
   }
 });
+Object.defineProperty(exports, "PaymentOptionStripe", {
+  enumerable: true,
+  get: function get() {
+    return _PaymentOptionStripe.PaymentOptionStripe;
+  }
+});
 Object.defineProperty(exports, "ProductForm", {
   enumerable: true,
   get: function get() {
@@ -421,6 +427,8 @@ var _OrderTypeSelectorHeader = require("./src/components/OrderTypeSelectorHeader
 var _PaymentOptionCash = require("./src/components/PaymentOptionCash");
 
 var _PaymentOptions = require("./src/components/PaymentOptions");
+
+var _PaymentOptionStripe = require("./src/components/PaymentOptionStripe");
 
 var _ProductForm = require("./src/components/ProductForm");
 

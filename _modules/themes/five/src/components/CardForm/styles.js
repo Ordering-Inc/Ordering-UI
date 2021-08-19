@@ -33,6 +33,6 @@ var ErrorMessage = _styledComponents.default.div(_templateObject3 || (_templateO
 
 exports.ErrorMessage = ErrorMessage;
 
-var FormActions = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  margin-top: 20px;\n\n  button {\n    width: 48%;\n    padding-top: 8px;\n    padding-bottom: 8px;\n    border-radius: 7.6px;\n\n    &:disabled {\n      opacity: 0.5;\n    }\n  }\n"])));
+var FormActions = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 20px;\n\n  button {\n    height: 44px;\n    width: 100%;\n    padding-top: 8px;\n    padding-bottom: 8px;\n    border-radius: 7.6px;\n\n    &:disabled {\n      opacity: 0.5;\n    }\n  }\n"])));
 
 exports.FormActions = FormActions;
