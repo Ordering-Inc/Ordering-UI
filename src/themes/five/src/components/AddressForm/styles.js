@@ -7,27 +7,19 @@ export const FormActions = styled.div`
   justify-content: space-between;
   width: 100%;
   button {
-    height: 45px;
-    flex: 1;
+    height: 44px;
+    width: 100%;
+    position: relative;
 
-    &:last-child#submit-btn {
-      margin-left: 10px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 0;
-        margin-right: 10px;
+    svg {
+      font-size: 25px;
+      position: absolute;
+      ${props => props.theme?.rtl ? css`
+        left: 30px;  
+      ` : css`
+        right: 30px; 
       `}
-    }
-  }
-
-  @media (min-width: 769px) {
-    button {
-      &:last-child#submit-btn {
-        margin-left: 25px;
-        ${props => props.theme?.rtl && css`
-        margin-left: 0;
-        margin-right: 25px;
-      `}
-      }
+      top: 8px;
     }
   }
 `
@@ -55,6 +47,7 @@ export const FormControl = styled.form`
   textarea {
     width: 100%;
     margin: 10px 0;
+    border-radius: 7.6px;
   }
 
   .input-autocomplete {

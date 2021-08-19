@@ -7,6 +7,7 @@ import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
+import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
@@ -478,14 +479,19 @@ const AddressFormUI = (props) => {
               <MidComponent key={i} {...props} />))
           }
           <FormActions>
-            <Button
-              outline
-              type='button'
-              disabled={formState.loading}
-              onClick={() => onCancel()}
-            >
-              {t('CANCEL', 'Cancel')}
-            </Button>
+            {
+              Object.keys(formState?.changes).length === 0 && (
+                <Button
+                  outline
+                  type='button'
+                  disabled={formState.loading}
+                  onClick={() => onCancel()}
+                >
+                  {t('CANCEL', 'Cancel')}
+                </Button>
+              )
+            }
+
             {Object.keys(formState?.changes).length > 0 && (
               <Button
                 id='submit-btn'
@@ -494,9 +500,14 @@ const AddressFormUI = (props) => {
                 color='primary'
               >
                 {!formState.loading ? (
-                  isEditing || (!auth && orderState.options?.address?.address)
-                    ? t('UPDATE', 'Update')
-                    : t('ADD', 'Add')
+                  <>
+                    {
+                      isEditing || (!auth && orderState.options?.address?.address)
+                        ? t('UPDATE', 'Update')
+                        : t('CONTINUE', 'Continue')
+                    }
+                    <BsArrowRight />
+                  </>
                 ) : (
                   t('LOADING', 'Loading')
                 )}

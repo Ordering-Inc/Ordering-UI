@@ -27,6 +27,8 @@ var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi
 
 var _CgSearchLoading = _interopRequireDefault(require("@meronex/icons/cg/CgSearchLoading"));
 
+var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
+
 var _reactHookForm = require("react-hook-form");
 
 var _orderingComponents = require("ordering-components");
@@ -670,7 +672,7 @@ var AddressFormUI = function AddressFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",
     disabled: formState.loading,
@@ -682,7 +684,7 @@ var AddressFormUI = function AddressFormUI(props) {
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, !formState.loading ? isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('ADD', 'Add') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('CONTINUE', 'Continue'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ADDRESS', 'Address'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
