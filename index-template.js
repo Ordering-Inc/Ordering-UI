@@ -78,7 +78,13 @@ Sentry.init({
   integrations: [
     new Integrations.BrowserTracing()
   ],
-
+  ignoreErrors: [
+    'is not defined',
+    'is not a function',
+    'can\'t find variable',
+    'objects are not valid',
+    'element type is invalid'
+  ],
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
   tracesSampleRate: 1.0
