@@ -93,8 +93,7 @@ var CartContent = function CartContent(props) {
       isForceOpenCart: isForceOpenCart,
       currentCartUuid: currentCartUuid,
       isProducts: cart.products.length,
-      onClickCheckout: props.onClose,
-      isCustomMode: true
+      onClickCheckout: props.onClose
     }));
   }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0) && /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,

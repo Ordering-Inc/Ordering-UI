@@ -226,7 +226,7 @@ var CartUI = function CartUI(props) {
   };
 
   var checkOutBtnClick = function checkOutBtnClick() {
-    if (isCustomMode) handleClickCheckout();else setOpenUpselling(true);
+    handleClickCheckout();
   };
 
   (0, _react.useEffect)(function () {

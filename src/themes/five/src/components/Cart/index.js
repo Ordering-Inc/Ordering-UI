@@ -123,8 +123,7 @@ const CartUI = (props) => {
   }
 
   const checkOutBtnClick = () => {
-    if (isCustomMode) handleClickCheckout()
-    else setOpenUpselling(true)
+    handleClickCheckout()
   }
 
   useEffect(() => {

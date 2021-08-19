@@ -63,7 +63,6 @@ export const CartContent = (props) => {
                   currentCartUuid={currentCartUuid}
                   isProducts={cart.products.length}
                   onClickCheckout={props.onClose}
-                  isCustomMode
                 />
               )}
             </React.Fragment>
