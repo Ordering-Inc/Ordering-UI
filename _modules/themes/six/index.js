@@ -309,6 +309,24 @@ Object.defineProperty(exports, "ProductIngredient", {
     return _ProductIngredient.ProductIngredient;
   }
 });
+Object.defineProperty(exports, "GoogleLoginButton", {
+  enumerable: true,
+  get: function get() {
+    return _GoogleLogin.GoogleLoginButton;
+  }
+});
+Object.defineProperty(exports, "AppleLogin", {
+  enumerable: true,
+  get: function get() {
+    return _AppleLogin.AppleLogin;
+  }
+});
+Object.defineProperty(exports, "SmsLoginButton", {
+  enumerable: true,
+  get: function get() {
+    return _SmsLogin.SmsLoginButton;
+  }
+});
 Object.defineProperty(exports, "Inputs", {
   enumerable: true,
   get: function get() {
@@ -331,6 +349,12 @@ Object.defineProperty(exports, "Tabs", {
   enumerable: true,
   get: function get() {
     return _Tabs.Tabs;
+  }
+});
+Object.defineProperty(exports, "Tab", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.Tab;
   }
 });
 Object.defineProperty(exports, "Button", {
@@ -447,6 +471,12 @@ var _NotFoundSource = require("./src/components/NotFoundSource");
 var _ForgotPasswordForm = require("./src/components/ForgotPasswordForm");
 
 var _ProductIngredient = require("./src/components/ProductIngredient");
+
+var _GoogleLogin = require("./src/components/GoogleLogin");
+
+var _AppleLogin = require("./src/components/AppleLogin");
+
+var _SmsLogin = require("./src/components/SmsLogin");
 
 var _Inputs = require("./src/styles/Inputs");
 
