@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var FormStripe = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-width: 800px;\n  display: flex;\n  flex-direction: column;\n\n  .StripeElement,\n  .StripeElementIdeal {\n    display: block;\n    margin: 0 10px;\n    padding: 10px 14px;\n    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,\n      rgba(0, 0, 0, 0.0196078) 0px 1px 0px;\n    border-radius: 4px;\n    background: white;\n  }\n\n  .StripeElement--focus,\n  .StripeElementIdeal--focus {\n    box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,\n      rgba(0, 0, 0, 0.0784314) 0px 1px 3px;\n    -webkit-transition: all 150ms ease;\n    transition: all 150ms ease;\n  }\n\n  .StripeElement.loading {\n    height: 41.6px;\n    opacity: 0.6;\n  }\n\n  .StripeElementIdeal {\n    padding: 0;\n  }\n"])));
+var FormStripe = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  .StripeElement,\n  .StripeElementIdeal {\n    display: block;\n    padding: 10px 14px;\n    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,\n      rgba(0, 0, 0, 0.0196078) 0px 1px 0px;\n    border-radius: 4px;\n    background: white;\n  }\n\n  .StripeElement--focus,\n  .StripeElementIdeal--focus {\n    box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,\n      rgba(0, 0, 0, 0.0784314) 0px 1px 3px;\n    -webkit-transition: all 150ms ease;\n    transition: all 150ms ease;\n  }\n\n  .StripeElement.loading {\n    height: 41.6px;\n    opacity: 0.6;\n  }\n\n  .StripeElementIdeal {\n    padding: 0;\n  }\n"])));
 
 exports.FormStripe = FormStripe;
 
@@ -33,6 +33,6 @@ var ErrorMessage = _styledComponents.default.div(_templateObject3 || (_templateO
 
 exports.ErrorMessage = ErrorMessage;
 
-var FormActions = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 20px;\n\n  button {\n    height: 44px;\n    width: 100%;\n    padding-top: 8px;\n    padding-bottom: 8px;\n    border-radius: 7.6px;\n\n    &:disabled {\n      opacity: 0.5;\n    }\n  }\n"])));
+var FormActions = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 20px;\n\n  button {\n    height: 44px;\n    width: 100%;\n    border-radius: 7.6px;\n\n    &:disabled {\n      opacity: 0.5;\n    }\n  }\n"])));
 
 exports.FormActions = FormActions;
