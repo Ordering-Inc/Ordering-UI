@@ -268,12 +268,6 @@ var Header = function Header(props) {
   };
 
   (0, _react.useEffect)(function () {
-    events.on('cart_product_added', handleAddProduct);
-    return function () {
-      return events.off('cart_product_added', handleAddProduct);
-    };
-  }, []);
-  (0, _react.useEffect)(function () {
     if (isCustomerMode) {
       setCustomerModalOpen(false);
     }

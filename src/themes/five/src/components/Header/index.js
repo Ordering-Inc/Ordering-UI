@@ -158,11 +158,6 @@ export const Header = (props) => {
   }
 
   useEffect(() => {
-    events.on('cart_product_added', handleAddProduct)
-    return () => events.off('cart_product_added', handleAddProduct)
-  }, [])
-
-  useEffect(() => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
     }
