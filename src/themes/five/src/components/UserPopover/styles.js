@@ -102,3 +102,17 @@ export const Divider = styled.div`
   height: 1px;
   background: #E9ECEF;
 `
+
+export const UserImgWrapper = styled.div`
+  position: relative;
+`
+
+export const RoundMark = styled.div`
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #E63757;
+  top: -3px;
+  right: -6px;
+`
