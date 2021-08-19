@@ -49,11 +49,14 @@ import { UserFormDetails } from './src/components/UserFormDetails'
 import { NotFoundSource } from './src/components/NotFoundSource'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { ProductIngredient } from './src/components/ProductIngredient'
+import { GoogleLoginButton } from './src/components/GoogleLogin'
+import { AppleLogin } from './src/components/AppleLogin'
+import { SmsLoginButton } from './src/components/SmsLogin'
 
 import { Inputs } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
 import { Selects } from './src/styles/Selects'
-import { Tabs } from './src/styles/Tabs'
+import { Tabs, Tab } from './src/styles/Tabs'
 import { Button } from '../../styles/Buttons'
 import { TextArea } from '../../styles/Inputs'
 
@@ -109,12 +112,15 @@ export {
   NotFoundSource,
   ForgotPasswordForm,
   ProductIngredient,
-  
+  GoogleLoginButton,
+  AppleLogin,
+  SmsLoginButton,
   // styles
   Inputs,
   Select,
   Selects,
   Tabs,
+  Tab,
   Button,
   TextArea
 }
