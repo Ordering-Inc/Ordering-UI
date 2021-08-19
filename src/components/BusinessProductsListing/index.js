@@ -27,8 +27,7 @@ import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { PageNotFound } from '../PageNotFound'
-import { ProductForm } from '../../themes/five/src/components/ProductForm'
-// import { ProductForm } from '../ProductForm'
+import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
@@ -94,8 +93,8 @@ const BusinessProductsListingUI = (props) => {
     setOpenBusinessInformation(true)
   }
   const onProductClick = (product) => {
-    if(product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
-        addProduct(product, currentCart)
+    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
+      addProduct(product, currentCart)
     } else {
       onProductRedirect({
         slug: business?.slug,

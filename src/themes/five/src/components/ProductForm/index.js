@@ -142,7 +142,7 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     if (document.getElementById(`${tabValue}`)) {
-      const top = tabValue === 'all' ? document.getElementById(`${tabValue}`).offsetTop : document.getElementById(`${tabValue}`).offsetTop + 350
+      const top = (tabValue === 'all') ? 0 : document.getElementById(`${tabValue}`).offsetTop + 350
       let scrollElement = document.querySelector('.popup-dialog')
       if (windowSize.width >= 1200) {
         scrollElement = productContainerRef.current

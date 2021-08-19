@@ -93,7 +93,7 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject14 || (_te
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ProductTabContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 50px;\n  background: white;\n\n  @media (min-width: 769px) {\n    top: 0;\n  }\n"])));
+var ProductTabContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 50px;\n  background: white;\n  z-index: 999;\n\n  @media (min-width: 769px) {\n    top: 0;\n  }\n"])));
 
 exports.ProductTabContainer = ProductTabContainer;
 

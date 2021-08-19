@@ -28,7 +28,7 @@ export const CardContainer = styled.div`
     }
   ` : css`
     @media (min-width: 681px) {
-      width: calc(50% - 40px);
+      width: calc(49% - 40px);
     }
 
     @media (min-width: 993px) {

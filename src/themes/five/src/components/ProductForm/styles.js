@@ -252,6 +252,7 @@ export const ProductTabContainer = styled.div`
   position: sticky;
   top: 50px;
   background: white;
+  z-index: 999;
 
   @media (min-width: 769px) {
     top: 0;

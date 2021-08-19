@@ -210,7 +210,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   (0, _react.useEffect)(function () {
     if (document.getElementById("".concat(tabValue))) {
-      var top = tabValue === 'all' ? document.getElementById("".concat(tabValue)).offsetTop : document.getElementById("".concat(tabValue)).offsetTop + 350;
+      var top = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop + 350;
       var scrollElement = document.querySelector('.popup-dialog');
 
       if (windowSize.width >= 1200) {
