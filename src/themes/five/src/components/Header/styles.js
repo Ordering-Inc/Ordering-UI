@@ -14,7 +14,7 @@ export const InnerHeader = styled.div`
   color: #FFF;
   justify-content: space-between;
   width: 98%;
-  margin: 10px auto;
+  margin: 15px auto;
 `
 
 export const LogoHeader = styled.div`
@@ -171,7 +171,7 @@ export const MenuItem = styled.div`
 
 export const MenuLink = styled.a`
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px;
   color: #333;
   cursor: pointer;
@@ -179,8 +179,8 @@ export const MenuLink = styled.a`
   ${({ highlight }) => highlight && css`
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
-    border-radius: 100px;
-    padding: 5px 15px;
+    border-radius: 7.6px;
+    padding: 14px 15px;
   `}
 `
 

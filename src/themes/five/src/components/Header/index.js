@@ -24,7 +24,6 @@ import {
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 
-import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { UserPopover } from '../UserPopover'
 import { CartPopover } from '../CartPopover'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
@@ -253,11 +252,11 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 870 && (
                     <>
-                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} highlight={modalPageToShow === 'login'} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
                       {!isHideSignup && (
                         <MenuLink
                           onClick={() => handleOpenLoginSignUp('signup')}
-                          highlight={modalPageToShow === 'signup'}
+                          highlight={1}
                           name='signup'
                         >
                           {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
@@ -300,7 +299,6 @@ export const Header = (props) => {
                     </>
                   )
                 }
-                <LanguageSelector />
               </Menu>
             </RightHeader>
           )}

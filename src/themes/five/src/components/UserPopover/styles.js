@@ -2,9 +2,12 @@ import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
-  height: ${({ isPhoto }) => isPhoto ? 'auto' : '25px'};
   display: flex;
   align-items: center;
+  background: #F8F9FA;
+  border-radius: 7.6px;
+  padding: 7px 13px;
+  margin: 0 10px;
 
   svg {
     color: ${({ isHome }) => isHome ? '#FFF' : '#000'};
@@ -16,8 +19,18 @@ export const HeaderItem = styled.div`
     font-size: 16px;
     width: auto;
     height: auto;
-    margin: 0 10px;
+    margin-right: 20px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 20px;
+      margin-right: 0;
+    `}
     color: ${props => props.theme.colors.darkTextColor};
+  }
+
+  img {
+    width: 42px;
+    height: 42px;
+    border-radius: 7.6px;
   }
 `
 
