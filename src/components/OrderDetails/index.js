@@ -219,8 +219,8 @@ const OrderDetailsUI = (props) => {
                   </BusinessInfo>
                 </BusinessWrapper>
                 <ActionsBlock>
-                  {order.driver && order.driver.phone &&
-                    <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                  {order?.driver && order?.driver.phone &&
+                    <span onClick={() => window.open(`tel:${order?.driver.phone}`)}>
                       <FiPhone />
                     </span>}
                   <span>
@@ -325,12 +325,12 @@ const OrderDetailsUI = (props) => {
                         </InfoBlock>
                       </WrapperDriver>
                       <ActionsBlock>
-                        {order.driver && order.driver.phone &&
+                        {order.driver && order.driver?.phone &&
                           <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
                             <FiPhone />
                           </span>}
                         <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
-                          {order?.unread_count > 0 && unreadAlert.driver && (
+                          {order?.unread_count > 0 && unreadAlert?.driver && (
                             <ExclamationWrapper>
                               <AiFillExclamationCircle />
                             </ExclamationWrapper>
