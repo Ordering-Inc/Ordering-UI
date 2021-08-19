@@ -29,7 +29,7 @@ var _BusinessProductsList = require("../BusinessProductsList");
 
 var _PageNotFound = require("../PageNotFound");
 
-var _ProductForm = require("../ProductForm");
+var _ProductForm = require("../../themes/five/src/components/ProductForm");
 
 var _FloatingButton = require("../FloatingButton");
 

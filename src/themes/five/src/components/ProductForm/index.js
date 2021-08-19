@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
@@ -78,6 +78,7 @@ const ProductOptionsUI = (props) => {
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [tabValue, setTabValue] = useState('all')
+  const productContainerRef = useRef(null)
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -139,6 +140,20 @@ const ProductOptionsUI = (props) => {
     setTabValue(value)
   }
 
+  useEffect(() => {
+    if (document.getElementById(`${tabValue}`)) {
+      const top = tabValue === 'all' ? document.getElementById(`${tabValue}`).offsetTop : document.getElementById(`${tabValue}`).offsetTop + 350
+      let scrollElement = document.querySelector('.popup-dialog')
+      if (windowSize.width >= 1200) {
+        scrollElement = productContainerRef.current
+      }
+      scrollElement.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      })
+    }
+  }, [tabValue])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -147,7 +162,7 @@ const ProductOptionsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ProductContainer className='product-container'>
+      <ProductContainer className='product-container' ref={productContainerRef}>
         {loading && !error && (
           <SkeletonBlock width={90}>
             <Skeleton variant='rect' height={50} />
@@ -209,7 +224,7 @@ const ProductOptionsUI = (props) => {
               </ProductFormTitle>
               <Divider />
               <ProductEdition>
-                <ProductTabContainer>
+                <ProductTabContainer id='all'>
                   <Tabs variant='primary'>
                     <Tab
                       key='all'
@@ -237,61 +252,59 @@ const ProductOptionsUI = (props) => {
                     </Tab>
                   </Tabs>
                 </ProductTabContainer>
+                <div id='ingredients'>
+                  {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                  <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                    {product?.ingredients.map(ingredient => (
+                      <ProductIngredient
+                        key={ingredient?.id}
+                        ingredient={ingredient}
+                        state={productCart.ingredients[`id:${ingredient?.id}`]}
+                        onChange={handleChangeIngredientState}
+                      />
+                    ))}
+                  </WrapperIngredients>
+                </div>
+                <div id='extra'>
+                  {
+                    product?.extras.map(extra => extra.options.map(option => {
+                      const currentState = productCart.options[`id:${option?.id}`] || {}
+                      return (
+                        <div key={option?.id}>
+                          {
+                            showOption(option) && (
+                              <ProductOption
+                                option={option}
+                                currentState={currentState}
+                                error={errors[`id:${option?.id}`]}
+                              >
+                                <WrapperSubOption className={isError(option?.id)}>
+                                  {
+                                    option.suboptions.map(suboption => {
+                                      const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                      const balance = productCart.options[`id:${option?.id}`]?.balance || 0
+                                      return suboption?.enabled ? (
+                                        <ProductOptionSubOption
+                                          key={suboption?.id}
+                                          onChange={handleChangeSuboptionState}
+                                          balance={balance}
+                                          option={option}
+                                          suboption={suboption}
+                                          state={currentState}
+                                        />
+                                      ) : null
+                                    })
+                                  }
+                                </WrapperSubOption>
+                              </ProductOption>
+                            )
+                          }
+                        </div>
+                      )
+                    }))
+                  }
+                </div>
 
-                {
-                  (tabValue === 'ingredients' || tabValue === 'all') && (
-                    <>
-                      {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
-                      <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
-                        {product?.ingredients.map(ingredient => (
-                          <ProductIngredient
-                            key={ingredient?.id}
-                            ingredient={ingredient}
-                            state={productCart.ingredients[`id:${ingredient?.id}`]}
-                            onChange={handleChangeIngredientState}
-                          />
-                        ))}
-                      </WrapperIngredients>
-                    </>
-                  )
-                }
-                {
-                  (tabValue === 'extra' || tabValue === 'all') && product?.extras.map(extra => extra.options.map(option => {
-                    const currentState = productCart.options[`id:${option?.id}`] || {}
-                    return (
-                      <div key={option?.id}>
-                        {
-                          showOption(option) && (
-                            <ProductOption
-                              option={option}
-                              currentState={currentState}
-                              error={errors[`id:${option?.id}`]}
-                            >
-                              <WrapperSubOption className={isError(option?.id)}>
-                                {
-                                  option.suboptions.map(suboption => {
-                                    const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                    const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                    return suboption?.enabled ? (
-                                      <ProductOptionSubOption
-                                        key={suboption?.id}
-                                        onChange={handleChangeSuboptionState}
-                                        balance={balance}
-                                        option={option}
-                                        suboption={suboption}
-                                        state={currentState}
-                                      />
-                                    ) : null
-                                  })
-                                }
-                              </WrapperSubOption>
-                            </ProductOption>
-                          )
-                        }
-                      </div>
-                    )
-                  }))
-                }
                 <ProductComment>
                   <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
                   <TextArea
