@@ -90,7 +90,6 @@ var Header = function Header(props) {
 
   var isHome = props.isHome,
       location = props.location,
-      closeCartPopover = props.closeCartPopover,
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
       isCustomerMode = props.isCustomerMode;
@@ -228,12 +227,6 @@ var Header = function Header(props) {
 
   var handleClosePopover = function handleClosePopover(type) {
     setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
-  };
-
-  var handleAddProduct = function handleAddProduct() {
-    if (!closeCartPopover) {
-      handleTogglePopover('cart');
-    }
   };
 
   var handleGoToPage = function handleGoToPage(data) {

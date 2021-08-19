@@ -44,7 +44,6 @@ export const Header = (props) => {
   const {
     isHome,
     location,
-    closeCartPopover,
     isShowOrderOptions,
     isHideSignup,
     isCustomerMode
@@ -120,12 +119,6 @@ export const Header = (props) => {
       ...openPopover,
       [type]: false
     })
-  }
-
-  const handleAddProduct = () => {
-    if (!closeCartPopover) {
-      handleTogglePopover('cart')
-    }
   }
 
   const handleGoToPage = (data) => {
