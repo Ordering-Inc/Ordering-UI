@@ -180,7 +180,7 @@ export const MenuLink = styled.a`
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
     border-radius: 7.6px;
-    padding: 14px 15px;
+    padding: 11px 15px;
   `}
 `
 
