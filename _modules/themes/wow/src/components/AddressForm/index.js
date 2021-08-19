@@ -206,80 +206,88 @@ var AddressFormUI = function AddressFormUI(props) {
       error: null
     };
     var geocoder = window.google && new window.google.maps.Geocoder();
-    geocoder.geocode({
-      address: addressChange
-    }, function (results, status) {
-      var postalCode = null;
 
-      if (status === 'OK' && results && results.length > 0) {
-        var _results$0$utc_offset, _arrayList$map$some;
+    if (geocoder) {
+      geocoder.geocode({
+        address: addressChange
+      }, function (results, status) {
+        var postalCode = null;
 
-        var _iterator = _createForOfIteratorHelper(results === null || results === void 0 ? void 0 : results[0].address_components),
-            _step;
+        if (status === 'OK' && results && results.length > 0) {
+          var _results$0$utc_offset, _arrayList$map$some;
 
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var _component$types;
+          var _iterator = _createForOfIteratorHelper(results === null || results === void 0 ? void 0 : results[0].address_components),
+              _step;
 
-            var component = _step.value;
-            var addressType = (_component$types = component.types) === null || _component$types === void 0 ? void 0 : _component$types[0];
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var _component$types;
 
-            if (addressType === 'postal_code') {
-              postalCode = component.short_name;
-              break;
+              var component = _step.value;
+              var addressType = (_component$types = component.types) === null || _component$types === void 0 ? void 0 : _component$types[0];
+
+              if (addressType === 'postal_code') {
+                postalCode = component.short_name;
+                break;
+              }
             }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
           }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
 
-        data.address = {
-          address: addressChange,
-          location: {
-            lat: results === null || results === void 0 ? void 0 : results[0].geometry.location.lat(),
-            lng: results === null || results === void 0 ? void 0 : results[0].geometry.location.lng()
-          },
-          utc_offset: (_results$0$utc_offset = results === null || results === void 0 ? void 0 : results[0].utc_offset_minutes) !== null && _results$0$utc_offset !== void 0 ? _results$0$utc_offset : 0,
-          map_data: {
-            library: 'google',
-            place_id: results === null || results === void 0 ? void 0 : results[0].place_id
+          data.address = {
+            address: addressChange,
+            location: {
+              lat: results === null || results === void 0 ? void 0 : results[0].geometry.location.lat(),
+              lng: results === null || results === void 0 ? void 0 : results[0].geometry.location.lng()
+            },
+            utc_offset: (_results$0$utc_offset = results === null || results === void 0 ? void 0 : results[0].utc_offset_minutes) !== null && _results$0$utc_offset !== void 0 ? _results$0$utc_offset : 0,
+            map_data: {
+              library: 'google',
+              place_id: results === null || results === void 0 ? void 0 : results[0].place_id
+            }
+          };
+
+          if (postalCode) {
+            data.address.zipcode = postalCode;
           }
-        };
 
-        if (postalCode) {
-          data.address.zipcode = postalCode;
+          var arrayList = isEditing ? addressesList.filter(function (address) {
+            var _addressState$address5;
+
+            return address.id !== ((_addressState$address5 = addressState.address) === null || _addressState$address5 === void 0 ? void 0 : _addressState$address5.id);
+          }) || [] : addressesList || [];
+          var addressToCompare = isEditing ? _objectSpread(_objectSpread(_objectSpread({}, addressState.address), data.address), formState === null || formState === void 0 ? void 0 : formState.changes) : _objectSpread(_objectSpread({}, data.address), formState === null || formState === void 0 ? void 0 : formState.changes);
+          var isAddressAlreadyExist = (_arrayList$map$some = arrayList.map(function (address) {
+            return checkAddress(address, addressToCompare);
+          }).some(function (value) {
+            return value;
+          })) !== null && _arrayList$map$some !== void 0 ? _arrayList$map$some : false;
+
+          if (!isAddressAlreadyExist) {
+            saveAddress(data.address, userCustomerSetup);
+            return;
+          }
+
+          setAlertState({
+            open: true,
+            content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
+          });
+        } else {
+          setAlertState({
+            open: true,
+            content: [t('ERROR_NOT_FOUND_ADDRESS', 'Error, address not found')]
+          });
         }
-
-        var arrayList = isEditing ? addressesList.filter(function (address) {
-          var _addressState$address5;
-
-          return address.id !== ((_addressState$address5 = addressState.address) === null || _addressState$address5 === void 0 ? void 0 : _addressState$address5.id);
-        }) || [] : addressesList || [];
-        var addressToCompare = isEditing ? _objectSpread(_objectSpread(_objectSpread({}, addressState.address), data.address), formState === null || formState === void 0 ? void 0 : formState.changes) : _objectSpread(_objectSpread({}, data.address), formState === null || formState === void 0 ? void 0 : formState.changes);
-        var isAddressAlreadyExist = (_arrayList$map$some = arrayList.map(function (address) {
-          return checkAddress(address, addressToCompare);
-        }).some(function (value) {
-          return value;
-        })) !== null && _arrayList$map$some !== void 0 ? _arrayList$map$some : false;
-
-        if (!isAddressAlreadyExist) {
-          saveAddress(data.address, userCustomerSetup);
-          return;
-        }
-
-        setAlertState({
-          open: true,
-          content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
-        });
-      } else {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_NOT_FOUND_ADDRESS', 'Error, address not found')]
-        });
-      }
-    });
+      });
+    } else {
+      setAlertState({
+        open: true,
+        content: [t('ERROR_FAILED_LOAD_GEOCODER', 'Failed to load geocoder, please try again.')]
+      });
+    }
   };
 
   var checkKeyDown = function checkKeyDown(e) {
