@@ -132,7 +132,7 @@ export const WrapAddressInput = styled.div`
 
   svg {
     position: absolute;
-    color: #9A9A9A;
+    color: ${props => props.theme.colors.primary};
     top: 21px;
     left: 10px;
     font-size: 20px;
@@ -165,22 +165,26 @@ export const AddressTagSection = styled.div`
     align-items: center;
     width: 46px;
     height: 46px;
+    border: none;
+    color: #B1BCCC;
 
     img {
-      width: 22px;
-      height: 22px;
+      width: 25px;
+      height: 25px;
     }
 
     span {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 22px;
+
+      svg {
+        font-size: 25px;
+      }
     }
   }
 
   button.active {
-    border: 1px solid ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
   }
 `

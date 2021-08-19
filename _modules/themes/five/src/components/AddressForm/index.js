@@ -13,11 +13,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _FaHome = _interopRequireDefault(require("@meronex/icons/fa/FaHome"));
+var _BsBuilding = _interopRequireDefault(require("@meronex/icons/bs/BsBuilding"));
+
+var _BsHouse = _interopRequireDefault(require("@meronex/icons/bs/BsHouse"));
 
 var _FaPlus = _interopRequireDefault(require("@meronex/icons/fa/FaPlus"));
-
-var _FaRegBuilding = _interopRequireDefault(require("@meronex/icons/fa/FaRegBuilding"));
 
 var _FaRegHeart = _interopRequireDefault(require("@meronex/icons/fa/FaRegHeart"));
 
@@ -636,33 +636,29 @@ var AddressFormUI = function AddressFormUI(props) {
     }
   }, formState.error), /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'home' ? 'active' : '',
+    bgtransparent: true,
     type: "button",
-    outline: true,
-    circle: true,
     onClick: function onClick() {
       return handleAddressTag('home');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaHome.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BsHouse.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'office' ? 'active' : '',
+    bgtransparent: true,
     type: "button",
-    outline: true,
-    circle: true,
     onClick: function onClick() {
       return handleAddressTag('office');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaRegBuilding.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BsBuilding.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'favorite' ? 'active' : '',
+    bgtransparent: true,
     type: "button",
-    outline: true,
-    circle: true,
     onClick: function onClick() {
       return handleAddressTag('favorite');
     }
   }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaRegHeart.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'other' ? 'active' : '',
+    bgtransparent: true,
     type: "button",
-    outline: true,
-    circle: true,
     onClick: function onClick() {
       return handleAddressTag('other');
     }
