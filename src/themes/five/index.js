@@ -28,6 +28,7 @@ import { HomeHero } from './src/components/HomeHero'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LoginForm } from './src/components/LoginForm'
+import { Messages } from './src/components/Messages'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MyOrders } from './src/components/MyOrders'
@@ -85,6 +86,7 @@ export {
   HorizontalOrdersLayout,
   InputPhoneNumber,
   LoginForm,
+  Messages,
   MomentContent,
   MomentControl,
   MyOrders,

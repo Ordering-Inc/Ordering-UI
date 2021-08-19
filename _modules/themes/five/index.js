@@ -183,6 +183,12 @@ Object.defineProperty(exports, "LoginForm", {
     return _LoginForm.LoginForm;
   }
 });
+Object.defineProperty(exports, "Messages", {
+  enumerable: true,
+  get: function get() {
+    return _Messages.Messages;
+  }
+});
 Object.defineProperty(exports, "MomentContent", {
   enumerable: true,
   get: function get() {
@@ -393,6 +399,8 @@ var _HorizontalOrdersLayout = require("./src/components/HorizontalOrdersLayout")
 var _InputPhoneNumber = require("./src/components/InputPhoneNumber");
 
 var _LoginForm = require("./src/components/LoginForm");
+
+var _Messages = require("./src/components/Messages");
 
 var _MomentContent = require("./src/components/MomentContent");
 
