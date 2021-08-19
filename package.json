@@ -10,6 +10,7 @@
     "./theme_four": "./_modules/themes/four/index.js",
     "./theme_five": "./_modules/themes/five/index.js",
     "./theme_six": "./_modules/themes/six/index.js",
+    "./theme_seven": "./_modules/themes/seven/index.js",
     "./theme_wow": "./_modules/themes/wow/index.js"
   },
   "scripts": {
