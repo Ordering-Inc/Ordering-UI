@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const FormActions = styled.div`
+  margin-top: 35px;
   padding: 10px 0px;
   display: flex;
   justify-content: space-between;

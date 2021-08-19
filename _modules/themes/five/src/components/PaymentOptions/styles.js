@@ -21,7 +21,7 @@ var PaymentMethodsContainer = _styledComponents.default.div(_templateObject || (
 
 exports.PaymentMethodsContainer = PaymentMethodsContainer;
 
-var PaymentMethodsList = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n\n  #select-input {\n    width: 100%;\n    background: #F8F9FA;\n    border-radius: 7.6px;\n\n    > div: first-child {\n      display: flex;\n      justify-content: space-between;\n    }\n\n    #list {\n      width: 100%;\n    }\n  }\n"])));
+var PaymentMethodsList = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n\n  #select-input {\n    width: 100%;\n    background-color: #F8F9FA !important;\n    border-color: #f8f9fa;\n    border-radius: 7.6px;\n    height: 44px;\n\n    > div: first-child {\n      display: flex;\n      justify-content: space-between;\n      height: 44px;\n      font-size: 14px;\n    }\n\n    #list {\n      width: 100%;\n      background-color: #F8F9FA !important;\n      border-color: #f8f9fa;\n      border-radius: 7.6px;\n    }\n  }\n"])));
 
 exports.PaymentMethodsList = PaymentMethodsList;
 
