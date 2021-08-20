@@ -17,9 +17,7 @@ var _UserFormDetails = require("../UserFormDetails");
 
 var _AddressList = require("../AddressList");
 
-var _Confirm = require("../../../../../components/Confirm");
-
-var _Buttons = require("../../styles/Buttons");
+var _Confirm = require("../Confirm");
 
 var _ProfileOptions = require("./ProfileOptions");
 

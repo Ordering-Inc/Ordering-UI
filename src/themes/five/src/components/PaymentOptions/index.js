@@ -14,7 +14,7 @@ import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
 import { StripeElementsForm } from '../StripeElementsForm'
-import { StripeRedirectForm } from '../../../../../components/StripeRedirectForm'
+import { StripeRedirectForm } from '../StripeRedirectForm'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import {
@@ -59,8 +59,6 @@ const PaymentOptionsUI = (props) => {
   const theme = useTheme()
 
   const paymethodSelected = props.paymethodSelected || props.paySelected
-  console.log(props.paymethodSelected, 'payment select')
-  console.log(props.paySelected, 'pay select')
 
   const paymentOptionsList = paymethodsList?.paymethods?.sort((a, b) => a.id - b.id).map(paymethod => {
     return (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && { value: paymethod?.id, content: paymethod?.name }

@@ -19,7 +19,7 @@ var _styledComponents = require("styled-components");
 
 var _Modal = require("../Modal");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _StripeElementsForm = require("../StripeElementsForm");
 

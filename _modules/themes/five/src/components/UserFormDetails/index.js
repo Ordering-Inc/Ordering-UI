@@ -27,7 +27,7 @@ var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
 
 var _LanguageSelector = require("../../../../../components/LanguageSelector");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _utils = require("../../../../../utils");
 

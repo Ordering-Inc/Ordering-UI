@@ -37,7 +37,7 @@ var _Modal = require("../Modal");
 
 var _AddressForm = require("../AddressForm");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _styledComponents = require("styled-components");
 

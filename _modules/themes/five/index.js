@@ -297,6 +297,12 @@ Object.defineProperty(exports, "StripeElementsForm", {
     return _StripeElementsForm.StripeElementsForm;
   }
 });
+Object.defineProperty(exports, "StripeRedirectForm", {
+  enumerable: true,
+  get: function get() {
+    return _StripeRedirectForm.StripeRedirectForm;
+  }
+});
 Object.defineProperty(exports, "UpsellingPage", {
   enumerable: true,
   get: function get() {
@@ -443,6 +449,8 @@ var _SignUpForm = require("./src/components/SignUpForm");
 var _SingleProductCard = require("./src/components/SingleProductCard");
 
 var _StripeElementsForm = require("./src/components/StripeElementsForm");
+
+var _StripeRedirectForm = require("./src/components/StripeRedirectForm");
 
 var _UpsellingPage = require("./src/components/UpsellingPage");
 

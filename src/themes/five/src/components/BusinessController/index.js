@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrder } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 
 import { convertHoursToMinutes } from '../../../../../utils'
 

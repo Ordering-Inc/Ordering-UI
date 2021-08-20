@@ -19,7 +19,7 @@ var _BusinessItemAccordion = require("../BusinessItemAccordion");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _Modal = require("../Modal");
 

@@ -15,7 +15,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _styledComponents = require("styled-components");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _utils = require("../../../../../utils");
 

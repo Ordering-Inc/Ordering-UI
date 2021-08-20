@@ -5,7 +5,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import MdClose from '@meronex/icons/md/MdClose'
 
-import { Confirm } from '../../../../../components/Confirm'
+import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'

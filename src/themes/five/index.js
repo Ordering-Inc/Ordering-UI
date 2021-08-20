@@ -47,6 +47,7 @@ import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { StripeElementsForm } from './src/components/StripeElementsForm'
+import { StripeRedirectForm } from './src/components/StripeRedirectForm'
 import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
 import { UserPopover } from './src/components/UserPopover'
@@ -106,6 +107,7 @@ export {
   SignUpForm,
   SingleProductCard,
   StripeElementsForm,
+  StripeRedirectForm,
   UpsellingPage,
   UserDetails,
   UserPopover,

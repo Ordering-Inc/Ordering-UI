@@ -39,7 +39,7 @@ var _DriverTips = require("../DriverTips");
 
 var _Cart = require("../Cart");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _CartContent = require("../CartContent");
 

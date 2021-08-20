@@ -29,7 +29,7 @@ var _PaymentOptionPaypal = require("../../../../../components/PaymentOptionPaypa
 
 var _StripeElementsForm = require("../StripeElementsForm");
 
-var _StripeRedirectForm = require("../../../../../components/StripeRedirectForm");
+var _StripeRedirectForm = require("../StripeRedirectForm");
 
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
@@ -115,8 +115,6 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
   var paymethodSelected = props.paymethodSelected || props.paySelected;
-  console.log(props.paymethodSelected, 'payment select');
-  console.log(props.paySelected, 'pay select');
   var paymentOptionsList = paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$payme = paymethodsList.paymethods) === null || _paymethodsList$payme === void 0 ? void 0 : _paymethodsList$payme.sort(function (a, b) {
     return a.id - b.id;
   }).map(function (paymethod) {

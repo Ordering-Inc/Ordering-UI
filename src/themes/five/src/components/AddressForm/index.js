@@ -18,7 +18,7 @@ import {
   useOrder,
   useConfig
 } from 'ordering-components'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
 
 import {

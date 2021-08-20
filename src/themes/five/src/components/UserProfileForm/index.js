@@ -10,9 +10,8 @@ import {
 
 import { UserFormDetailsUI } from '../UserFormDetails'
 import { AddressList } from '../AddressList'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 
-import { Button } from '../../styles/Buttons'
 import { ProfileOptions } from './ProfileOptions'
 
 import { bytesConverter } from '../../../../../utils'

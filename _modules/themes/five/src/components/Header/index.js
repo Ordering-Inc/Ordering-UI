@@ -51,7 +51,7 @@ var _SidebarMenu = require("../SidebarMenu");
 
 var _UserDetails = require("../../../../../components/UserDetails");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _LoginForm = require("../LoginForm");
 

@@ -21,11 +21,11 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _Modal = require("../Modal");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
-var _AddressForm = require("../../../../../components/AddressForm");
+var _AddressForm = require("../AddressForm");
 
-var _AddressList = require("../../../../../components/AddressList");
+var _AddressList = require("../AddressList");
 
 var _SearchBar = require("../SearchBar");
 
@@ -33,7 +33,7 @@ var _BusinessTypeFilter = require("../BusinessTypeFilter");
 
 var _BusinessController = require("../BusinessController");
 
-var _OrdersOption = require("../../../../../components/OrdersOption");
+var _OrdersOption = require("../OrdersOption");
 
 var _BusinessesMap = require("../../../../../components/BusinessesMap");
 

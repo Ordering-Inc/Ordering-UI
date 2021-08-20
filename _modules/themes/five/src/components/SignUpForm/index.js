@@ -13,7 +13,7 @@ var _reactHookForm = require("react-hook-form");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _InputPhoneNumber = require("../InputPhoneNumber");
 

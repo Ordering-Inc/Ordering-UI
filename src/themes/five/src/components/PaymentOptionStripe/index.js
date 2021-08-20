@@ -9,7 +9,7 @@ import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
-import { Confirm } from '../../../../../components/Confirm'
+import { Confirm } from '../Confirm'
 import { StripeElementsForm } from '../StripeElementsForm'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'

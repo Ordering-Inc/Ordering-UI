@@ -42,7 +42,7 @@ import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
 import { bytesConverter, getTraduction } from '../../../../../utils'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 
 const filterSpecialStatus = ['prepared_in', 'delivered_in']
