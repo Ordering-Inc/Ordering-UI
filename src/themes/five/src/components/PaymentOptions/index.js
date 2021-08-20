@@ -58,16 +58,17 @@ const PaymentOptionsUI = (props) => {
   const [{ token }] = useSession()
   const theme = useTheme()
 
-  const paymethodSelected = props.paySelected || props.paymethodSelected
+  const paymethodSelected = props.paymethodSelected || props.paySelected
+  console.log(props.paymethodSelected, 'payment select')
+  console.log(props.paySelected, 'pay select')
 
   const paymentOptionsList = paymethodsList?.paymethods?.sort((a, b) => a.id - b.id).map(paymethod => {
     return (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && { value: paymethod?.id, content: paymethod?.name }
   })
 
   const handlePaymentMethodChange = (id) => {
-    const paymethod = paymethodsList?.paymethods?.find(item => item.id === id)
+    const paymethod = paymethodsList?.paymethods?.find(item => item?.id === id)
     const isPopupMethod = ['stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod?.gateway)
-    console.log(paymethod, isPopupMethod)
     handlePaymethodClick(paymethod, isPopupMethod)
   }
 
@@ -152,7 +153,7 @@ const PaymentOptionsUI = (props) => {
         )}
 
         {
-          isOpenMethod?.paymethod?.gateway === 'stripe' && !paymethodData.id && (
+          isOpenMethod?.paymethod?.gateway === 'stripe' && !paymethodData?.id && (
             <PaymentOptionStripe
               paymethod={isOpenMethod?.paymethod}
               businessId={props.businessId}
@@ -170,7 +171,6 @@ const PaymentOptionsUI = (props) => {
                 <IosRadioButtonOn />
               </span>
               <div className='brand'>
-                {getIconCard(paymethodData?.card?.brand)}
                 <img src={getIconCard(paymethodData?.card?.brand)} alt={paymethodData?.card?.brand} />
               </div>
               <span>
@@ -183,7 +183,7 @@ const PaymentOptionsUI = (props) => {
         {/* Paypal */}
         <Modal
           className='modal-info'
-          open={isOpenMethod?.paymethod?.gateway === 'paypal' && !paymethodData.id}
+          open={isOpenMethod?.paymethod?.gateway === 'paypal' && !paymethodData?.id}
           onClose={() => handlePaymethodClick(null)}
           title={t('PAY_WITH_PAYPAL', 'Pay with PayPal')}
         >
@@ -210,7 +210,7 @@ const PaymentOptionsUI = (props) => {
         {/* Stripe Connect */}
         <Modal
           title={t('SELECT_A_CARD', 'Select a card')}
-          open={isOpenMethod?.paymethod?.gateway === 'stripe_connect' && !paymethodData.id}
+          open={isOpenMethod?.paymethod?.gateway === 'stripe_connect' && !paymethodData?.id}
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >
@@ -230,7 +230,7 @@ const PaymentOptionsUI = (props) => {
         {/* Stripe direct */}
         <Modal
           title={t('ADD_NEW_CARD', 'Add new card')}
-          open={isOpenMethod?.paymethod?.gateway === 'stripe_direct' && !paymethodData.id}
+          open={isOpenMethod?.paymethod?.gateway === 'stripe_direct' && !paymethodData?.id}
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >

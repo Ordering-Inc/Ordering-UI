@@ -67,9 +67,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   var deleteCard = props.deleteCard,
       cardsList = props.cardsList,
       _handleCardClick = props.handleCardClick,
-      handleNewCard = props.handleNewCard,
-      onSelectCard = props.onSelectCard,
-      cardSelected = props.cardSelected;
+      handleNewCard = props.handleNewCard;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -96,7 +94,6 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   var _handleNewCard = function _handleNewCard(card) {
     setAddCardOpen(false);
     handleNewCard(card);
-    onSelectCard(cardSelected);
   };
 
   var _handleDeleteCard = function handleDeleteCard(card) {
@@ -108,7 +105,6 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
-        onSelectCard(cardSelected);
       }
     });
   };
@@ -189,12 +185,10 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
 };
 
 var PaymentCard = function PaymentCard(props) {
-  var handleCardClick = props.handleCardClick,
-      handleDeleteCard = props.handleDeleteCard,
+  var handleDeleteCard = props.handleDeleteCard,
       card = props.card,
-      onSelectCard = props.onSelectCard,
-      cardSelected = props.cardSelected,
-      setDefaultCard = props.setDefaultCard;
+      setDefaultCard = props.setDefaultCard,
+      cardDefault = props.cardDefault;
 
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
@@ -240,20 +234,18 @@ var PaymentCard = function PaymentCard(props) {
 
   var handleChangeDefaultCard = function handleChangeDefaultCard() {
     setDefaultCard(card);
-    handleCardClick();
-    onSelectCard(cardSelected);
   };
 
   (0, _react.useEffect)(function () {
-    window.addEventListener('mouseup', handleClickOutside);
+    window.addEventListener('click', handleClickOutside);
     return function () {
-      return window.removeEventListener('mouseup', handleClickOutside);
+      return window.removeEventListener('click', handleClickOutside);
     };
   }, [isShowActions]);
   return /*#__PURE__*/_react.default.createElement(_styles.CardItem, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
     src: getIconCard(card === null || card === void 0 ? void 0 : card.brand),
     alt: card === null || card === void 0 ? void 0 : card.brand
-  })), /*#__PURE__*/_react.default.createElement("span", null, card === null || card === void 0 ? void 0 : card.brand, " ", card === null || card === void 0 ? void 0 : card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, (card === null || card === void 0 ? void 0 : card.default) && /*#__PURE__*/_react.default.createElement("span", null, t('DEFAULT', 'Default')), /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  })), /*#__PURE__*/_react.default.createElement("span", null, card === null || card === void 0 ? void 0 : card.brand, " ", card === null || card === void 0 ? void 0 : card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, (card === null || card === void 0 ? void 0 : card.id) === (cardDefault === null || cardDefault === void 0 ? void 0 : cardDefault.id) && /*#__PURE__*/_react.default.createElement("span", null, t('DEFAULT', 'Default')), /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     ref: cardActionsRef
   }, /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, {
     onClick: function onClick() {
