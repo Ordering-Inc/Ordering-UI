@@ -21,7 +21,7 @@ export const CardItem = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 0;
   border-bottom: 1px solid #EAEAEA;
 `
 

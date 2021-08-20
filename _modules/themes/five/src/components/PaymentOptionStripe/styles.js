@@ -29,7 +29,7 @@ var WarningMessage = _styledComponents.default.p(_templateObject2 || (_templateO
 
 exports.WarningMessage = WarningMessage;
 
-var CardItem = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  padding: 10px;\n  border-bottom: 1px solid #EAEAEA;\n"])));
+var CardItem = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  padding: 10px 0;\n  border-bottom: 1px solid #EAEAEA;\n"])));
 
 exports.CardItem = CardItem;
 

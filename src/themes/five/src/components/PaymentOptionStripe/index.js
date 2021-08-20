@@ -31,7 +31,9 @@ const PaymentOptionStripeUI = (props) => {
     deleteCard,
     cardsList,
     handleCardClick,
-    handleNewCard
+    handleNewCard,
+    onSelectCard,
+    cardSelected
   } = props
   const [{ token }] = useSession()
   const [, t] = useLanguage()
@@ -42,6 +44,7 @@ const PaymentOptionStripeUI = (props) => {
   const _handleNewCard = (card) => {
     setAddCardOpen(false)
     handleNewCard(card)
+    onSelectCard(cardSelected)
   }
 
   const handleDeleteCard = (card) => {
@@ -51,33 +54,10 @@ const PaymentOptionStripeUI = (props) => {
       handleOnAccept: () => {
         deleteCard(card)
         setConfirm({ ...confirm, open: false })
+        onSelectCard(cardSelected)
       }
     })
   }
-
-  const test = [
-    {
-      "id": "card_1DjExyGPakYLcrA2PLQfyx83",
-      "last4": "4242",
-      "brand": "Visa",
-      "default": false,
-      "customer_id": 9
-    },
-    {
-      "id": "card_1DjExyGPakYLcrA2PLQfyx83",
-      "last4": "1234",
-      "brand": "Credit",
-      "default": true,
-      "customer_id": 9
-    },
-    {
-      "id": "card_1DjExyGPakYLcrA2PLQfyx83",
-      "last4": "5879",
-      "brand": "mastercard",
-      "default": true,
-      "customer_id": 9
-    },
-  ]
 
   return (
     <>
@@ -101,19 +81,19 @@ const PaymentOptionStripeUI = (props) => {
             content={cardsList?.error[0]?.message || cardsList?.error[0]}
           />
         )}
-        {/* {token && cardsList.cards && cardsList.cards.length > 0 && ( */}
-        <>
-          {test.map((card, i) => (
-            <PaymentCard
-              {...props}
-              key={i}
-              handleCardClick={() => handleCardClick(card)}
-              handleDeleteCard={() => handleDeleteCard(card)}
-              card={card}
-            />
-          ))}
-        </>
-        {/* )} */}
+        {token && cardsList.cards && cardsList.cards.length > 0 && (
+          <>
+            {cardsList?.cards?.map((card, i) => (
+              <PaymentCard
+                {...props}
+                key={i}
+                handleCardClick={() => handleCardClick(card)}
+                handleDeleteCard={() => handleDeleteCard(card)}
+                card={card}
+              />
+            ))}
+          </>
+        )}
         {token && !cardsList.loading && (
           <AddNewCard>
             <span onClick={() => setAddCardOpen(true)}>{t('ADD_NEW_CARD', 'Add new card')}</span>
@@ -171,7 +151,8 @@ export const PaymentCard = (props) => {
     handleDeleteCard,
     card,
     onSelectCard,
-    cardSelected
+    cardSelected,
+    setDefaultCard
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -199,14 +180,8 @@ export const PaymentCard = (props) => {
   }
 
   const handleChangeDefaultCard = () => {
+    setDefaultCard(card)
     handleCardClick()
-    setIsShowActions(false)
-    onSelectCard(cardSelected)
-  }
-
-  const handleDeleteCardItem = () => {
-    handleDeleteCard()
-    setIsShowActions(false)
     onSelectCard(cardSelected)
   }
 
@@ -219,7 +194,7 @@ export const PaymentCard = (props) => {
     <CardItem>
       <CardItemContent>
         <div>
-          <img src={getIconCard(card?.brand)} alt='card' />
+          <img src={getIconCard(card?.brand)} alt={card?.brand} />
         </div>
         <span>
           {card?.brand} {card?.last4}
@@ -231,15 +206,15 @@ export const PaymentCard = (props) => {
             <span>{t('DEFAULT', 'Default')}</span>
           )
         }
-        <CardItemActionsWrapper ref={cardActionsRef}>
-          <span>
+        <CardItemActionsWrapper>
+          <span ref={cardActionsRef}>
             <FiMoreVertical onClick={() => setIsShowActions(true)} />
           </span>
           {
             isShowActions && (
               <ActionsContent>
                 <div onClick={handleChangeDefaultCard}>{t('USE_AS_DEFAULT', 'Use as default')}</div>
-                <div className='delete' onClick={handleDeleteCardItem}>{t('DELETE', 'Delete')}</div>
+                <div className='delete' onClick={handleDeleteCard}>{t('DELETE', 'Delete')}</div>
               </ActionsContent>
             )
           }

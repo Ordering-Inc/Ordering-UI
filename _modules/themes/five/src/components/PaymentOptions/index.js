@@ -17,6 +17,8 @@ var _Select = require("../../styles/Select");
 
 var _orderingComponents = require("ordering-components");
 
+var _styledComponents = require("styled-components");
+
 var _Modal = require("../Modal");
 
 var _PaymentOptionCash = require("../PaymentOptionCash");
@@ -30,8 +32,6 @@ var _StripeElementsForm = require("../StripeElementsForm");
 var _StripeRedirectForm = require("../../../../../components/StripeRedirectForm");
 
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
-
-var _utils = require("../../../../../utils");
 
 var _styles = require("./styles");
 
@@ -91,7 +91,7 @@ var paypalBtnStyle = {
 };
 
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _paymethodsList$payme, _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _paymethodSelected$da, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _paymethodData$card, _paymethodData$card2, _isOpenMethod$paymeth5, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _props$afterComponent, _props$afterElements;
+  var _paymethodsList$payme, _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _paymethodSelected$da, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _paymethodData$card4, _isOpenMethod$paymeth5, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errorCash = props.errorCash,
@@ -113,6 +113,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       token = _useSession2[0].token;
 
+  var theme = (0, _styledComponents.useTheme)();
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var paymentOptionsList = paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$payme = paymethodsList.paymethods) === null || _paymethodsList$payme === void 0 ? void 0 : _paymethodsList$payme.sort(function (a, b) {
     return a.id - b.id;
@@ -129,8 +130,27 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     var paymethod = paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$payme2 = paymethodsList.paymethods) === null || _paymethodsList$payme2 === void 0 ? void 0 : _paymethodsList$payme2.find(function (item) {
       return item.id === id;
     });
-    var isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
+    var isPopupMethod = ['stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
+    console.log(paymethod, isPopupMethod);
     handlePaymethodClick(paymethod, isPopupMethod);
+  };
+
+  var getIconCard = function getIconCard() {
+    var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera;
+
+    var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var value = brand.toLowerCase();
+
+    switch (value) {
+      case 'visa':
+        return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.visa;
+
+      case 'mastercard':
+        return (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.mastercard;
+
+      default:
+        return (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.credit;
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -193,15 +213,15 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     businessId: props.businessId,
     publicKey: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth2 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth2 === void 0 ? void 0 : (_isOpenMethod$paymeth3 = _isOpenMethod$paymeth2.credentials) === null || _isOpenMethod$paymeth3 === void 0 ? void 0 : _isOpenMethod$paymeth3.publishable,
     payType: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth4 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth4 === void 0 ? void 0 : _isOpenMethod$paymeth4.name,
-    onSelectCard: handlePaymethodDataChange,
-    onCancel: function onCancel() {
-      return handlePaymethodClick(null);
-    }
+    onSelectCard: handlePaymethodDataChange
   }), stripeOptions.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && (paymethodData === null || paymethodData === void 0 ? void 0 : paymethodData.card) && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.PayCardSelected, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "checks"
-  }, /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null)), /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null)), /*#__PURE__*/_react.default.createElement("div", {
     className: "brand"
-  }, (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand)), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.last4))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, getIconCard(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand), /*#__PURE__*/_react.default.createElement("img", {
+    src: getIconCard(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.brand),
+    alt: paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card3 = paymethodData.card) === null || _paymethodData$card3 === void 0 ? void 0 : _paymethodData$card3.brand
+  })), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card4 = paymethodData.card) === null || _paymethodData$card4 === void 0 ? void 0 : _paymethodData$card4.last4))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     className: "modal-info",
     open: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth5 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth5 === void 0 ? void 0 : _isOpenMethod$paymeth5.gateway) === 'paypal' && !paymethodData.id,
     onClose: function onClose() {

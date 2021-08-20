@@ -7,6 +7,7 @@ import {
   useLanguage,
   useSession
 } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
 import { PaymentOptionCash } from '../PaymentOptionCash'
@@ -15,8 +16,6 @@ import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPayp
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../../../../../components/StripeRedirectForm'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-
-import { getIconCard } from '../../../../../utils'
 
 import {
   PaymentMethodsContainer,
@@ -57,6 +56,7 @@ const PaymentOptionsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
+  const theme = useTheme()
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
@@ -66,8 +66,21 @@ const PaymentOptionsUI = (props) => {
 
   const handlePaymentMethodChange = (id) => {
     const paymethod = paymethodsList?.paymethods?.find(item => item.id === id)
-    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod?.gateway)
+    const isPopupMethod = ['stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod?.gateway)
+    console.log(paymethod, isPopupMethod)
     handlePaymethodClick(paymethod, isPopupMethod)
+  }
+
+  const getIconCard = (brand = '') => {
+    const value = brand.toLowerCase()
+    switch (value) {
+      case 'visa':
+        return theme.images?.general?.visa
+      case 'mastercard':
+        return theme.images?.general?.mastercard
+      default:
+        return theme.images?.general?.credit
+    }
   }
 
   useEffect(() => {
@@ -146,7 +159,6 @@ const PaymentOptionsUI = (props) => {
               publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
               payType={isOpenMethod?.paymethod?.name}
               onSelectCard={handlePaymethodDataChange}
-              onCancel={() => handlePaymethodClick(null)}
             />
           )
         }
@@ -157,9 +169,10 @@ const PaymentOptionsUI = (props) => {
               <span className='checks'>
                 <IosRadioButtonOn />
               </span>
-              <span className='brand'>
+              <div className='brand'>
                 {getIconCard(paymethodData?.card?.brand)}
-              </span>
+                <img src={getIconCard(paymethodData?.card?.brand)} alt={paymethodData?.card?.brand} />
+              </div>
               <span>
                 XXXX-XXXX-XXXX-{paymethodData?.card?.last4}
               </span>
@@ -193,25 +206,6 @@ const PaymentOptionsUI = (props) => {
             />
           )}
         </Modal>
-
-        {/* Stripe */}
-        {/* <Modal
-          className='modal-info'
-          open={isOpenMethod?.paymethod?.gateway === 'stripe' && !paymethodData.id}
-          onClose={() => handlePaymethodClick(null)}
-          title={t('SELECT_A_CARD', 'Select a card')}
-        >
-          {isOpenMethod.paymethod?.gateway === 'stripe' && (
-            <PaymentOptionStripe
-              paymethod={isOpenMethod?.paymethod}
-              businessId={props.businessId}
-              publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
-              payType={isOpenMethod?.paymethod?.name}
-              onSelectCard={handlePaymethodDataChange}
-              onCancel={() => handlePaymethodClick(null)}
-            />
-          )}
-        </Modal> */}
 
         {/* Stripe Connect */}
         <Modal

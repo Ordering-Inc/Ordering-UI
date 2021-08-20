@@ -62,12 +62,14 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _cardsList$error$, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _cardsList$error$, _cardsList$cards, _props$afterComponent, _props$afterElements;
 
   var deleteCard = props.deleteCard,
       cardsList = props.cardsList,
       _handleCardClick = props.handleCardClick,
-      handleNewCard = props.handleNewCard;
+      handleNewCard = props.handleNewCard,
+      onSelectCard = props.onSelectCard,
+      cardSelected = props.cardSelected;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -94,6 +96,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   var _handleNewCard = function _handleNewCard(card) {
     setAddCardOpen(false);
     handleNewCard(card);
+    onSelectCard(cardSelected);
   };
 
   var _handleDeleteCard = function handleDeleteCard(card) {
@@ -105,29 +108,11 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
+        onSelectCard(cardSelected);
       }
     });
   };
 
-  var test = [{
-    "id": "card_1DjExyGPakYLcrA2PLQfyx83",
-    "last4": "4242",
-    "brand": "Visa",
-    "default": false,
-    "customer_id": 9
-  }, {
-    "id": "card_1DjExyGPakYLcrA2PLQfyx83",
-    "last4": "1234",
-    "brand": "Credit",
-    "default": true,
-    "customer_id": 9
-  }, {
-    "id": "card_1DjExyGPakYLcrA2PLQfyx83",
-    "last4": "5879",
-    "brand": "mastercard",
-    "default": true,
-    "customer_id": 9
-  }];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -138,7 +123,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.OptionStripeContainer, null, !token && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')), token && !cardsList.loading && cardsList.cards && cardsList.cards.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.CardItem, null, /*#__PURE__*/_react.default.createElement("span", null, t('NO_CARDS', 'No cards'))), token && cardsList.error && cardsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$error$ = cardsList.error[0]) === null || _cardsList$error$ === void 0 ? void 0 : _cardsList$error$.message) || (cardsList === null || cardsList === void 0 ? void 0 : cardsList.error[0])
-  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, test.map(function (card, i) {
+  }), token && cardsList.cards && cardsList.cards.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.map(function (card, i) {
     return /*#__PURE__*/_react.default.createElement(PaymentCard, _extends({}, props, {
       key: i,
       handleCardClick: function handleCardClick() {
@@ -208,7 +193,8 @@ var PaymentCard = function PaymentCard(props) {
       handleDeleteCard = props.handleDeleteCard,
       card = props.card,
       onSelectCard = props.onSelectCard,
-      cardSelected = props.cardSelected;
+      cardSelected = props.cardSelected,
+      setDefaultCard = props.setDefaultCard;
 
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
@@ -253,14 +239,8 @@ var PaymentCard = function PaymentCard(props) {
   };
 
   var handleChangeDefaultCard = function handleChangeDefaultCard() {
+    setDefaultCard(card);
     handleCardClick();
-    setIsShowActions(false);
-    onSelectCard(cardSelected);
-  };
-
-  var handleDeleteCardItem = function handleDeleteCardItem() {
-    handleDeleteCard();
-    setIsShowActions(false);
     onSelectCard(cardSelected);
   };
 
@@ -272,10 +252,10 @@ var PaymentCard = function PaymentCard(props) {
   }, [isShowActions]);
   return /*#__PURE__*/_react.default.createElement(_styles.CardItem, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
     src: getIconCard(card === null || card === void 0 ? void 0 : card.brand),
-    alt: "card"
-  })), /*#__PURE__*/_react.default.createElement("span", null, card === null || card === void 0 ? void 0 : card.brand, " ", card === null || card === void 0 ? void 0 : card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, (card === null || card === void 0 ? void 0 : card.default) && /*#__PURE__*/_react.default.createElement("span", null, t('DEFAULT', 'Default')), /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, {
+    alt: card === null || card === void 0 ? void 0 : card.brand
+  })), /*#__PURE__*/_react.default.createElement("span", null, card === null || card === void 0 ? void 0 : card.brand, " ", card === null || card === void 0 ? void 0 : card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, (card === null || card === void 0 ? void 0 : card.default) && /*#__PURE__*/_react.default.createElement("span", null, t('DEFAULT', 'Default')), /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     ref: cardActionsRef
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, {
+  }, /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, {
     onClick: function onClick() {
       return setIsShowActions(true);
     }
@@ -283,7 +263,7 @@ var PaymentCard = function PaymentCard(props) {
     onClick: handleChangeDefaultCard
   }, t('USE_AS_DEFAULT', 'Use as default')), /*#__PURE__*/_react.default.createElement("div", {
     className: "delete",
-    onClick: handleDeleteCardItem
+    onClick: handleDeleteCard
   }, t('DELETE', 'Delete'))))));
 };
 
