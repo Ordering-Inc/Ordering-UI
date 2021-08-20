@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button } from '../../styles/Buttons'
+import { Button } from '../../../../../styles/Buttons'
 
 export const GoogleButton = styled(Button)`
   background-color: #EFEFEF;
