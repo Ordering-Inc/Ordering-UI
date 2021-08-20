@@ -7,7 +7,7 @@ exports.GoogleButton = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _Buttons = require("../../styles/Buttons");
+var _Buttons = require("../../../../../styles/Buttons");
 
 var _templateObject;
 
