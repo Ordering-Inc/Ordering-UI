@@ -131,6 +131,7 @@ export const ProductActions = styled.div`
   align-items: center;
   padding: 10px 0px;
   width: 100%;
+  z-index: 999;
 
   position: fixed;
   bottom: -19px;
@@ -252,7 +253,7 @@ export const ProductTabContainer = styled.div`
   position: sticky;
   top: 50px;
   background: white;
-  z-index: 999;
+  z-index: 900;
 
   @media (min-width: 769px) {
     top: 0;

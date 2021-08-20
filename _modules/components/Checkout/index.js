@@ -33,7 +33,7 @@ var _AddressDetails = require("../AddressDetails");
 
 var _UserDetails = require("../UserDetails");
 
-var _PaymentOptions = require("../../themes/five/src/components/PaymentOptions");
+var _PaymentOptions = require("../PaymentOptions");
 
 var _DriverTips = require("../DriverTips");
 

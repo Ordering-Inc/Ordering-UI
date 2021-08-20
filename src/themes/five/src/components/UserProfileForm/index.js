@@ -99,6 +99,10 @@ const UserProfileFormUI = (props) => {
     }
   }, [formState.changes?.photo])
 
+  useEffect(() => {
+    toggleIsEdit()
+  }, [])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -136,41 +140,14 @@ const UserProfileFormUI = (props) => {
             <Camera><FiCamera /></Camera>
           </UserImage>
           <SideForm className='user-form'>
-            {!edit ? (
-              formState.loading ? (
-                <UserData>
-                  <Skeleton width={250} height={25} />
-                  <Skeleton width={180} height={25} />
-                  <Skeleton width={210} height={25} />
-                  <Skeleton width={100} height={40} />
-                </UserData>
-              ) : (
-                <UserData>
-                  <h1>{userData?.name || user?.name} {userData?.lastname || user?.lastname}</h1>
-                  <p>{userData?.email || user.email}</p>
-                  {(userData?.cellphone || user?.cellphone) && (
-                    <p>{(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}</p>
-                  )}
-                  <Button
-                    color='primary'
-                    outline
-                    onClick={() => toggleEditState(true)}
-                  >
-                    {t('EDIT', 'Edit')}
-                  </Button>
-                </UserData>
-              )
-            ) : (
-              <WrapperForm>
-                <UserFormDetailsUI
-                  {...props}
-                  onCancel={toggleEditState}
-                  onCloseProfile={() => setEdit(false)}
-                  isHiddenAddress={isHiddenAddress}
-                />
-              </WrapperForm>
-            )}
-
+            <WrapperForm>
+              <UserFormDetailsUI
+                {...props}
+                onCancel={toggleEditState}
+                onCloseProfile={() => setEdit(false)}
+                isHiddenAddress={isHiddenAddress}
+              />
+            </WrapperForm>
           </SideForm>
         </UserProfileContainer>
         {(userData?.addresses || user?.addresses) && !isHiddenAddress && (

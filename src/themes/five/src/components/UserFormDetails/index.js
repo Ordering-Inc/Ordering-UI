@@ -195,6 +195,7 @@ export const UserFormDetailsUI = (props) => {
         setUserCellPhone(true)
       }
     }
+    if (!isEdit) onCancel()
   }, [user, isEdit])
 
   useEffect(() => {
@@ -346,17 +347,6 @@ export const UserFormDetailsUI = (props) => {
                <MidComponent key={i} {...props} />))
             }
             <ActionsForm>
-              {onCancel && (
-                <Button
-                  outline
-                  type='button'
-                  onClick={() => onCancel(false)}
-                  disabled={formState.loading}
-                >
-                  {t('CANCEL', 'Cancel')}
-                </Button>
-              )}
-
               {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
                 <Button
                   id='form-btn'
