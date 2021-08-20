@@ -138,6 +138,19 @@ const PaymentOptionsUI = (props) => {
           />
         )}
 
+        {
+          isOpenMethod?.paymethod?.gateway === 'stripe' && !paymethodData.id && (
+            <PaymentOptionStripe
+              paymethod={isOpenMethod?.paymethod}
+              businessId={props.businessId}
+              publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
+              payType={isOpenMethod?.paymethod?.name}
+              onSelectCard={handlePaymethodDataChange}
+              onCancel={() => handlePaymethodClick(null)}
+            />
+          )
+        }
+
         {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && !isCustomerMode && (
           <PayCardSelected>
             <CardItemContent>
@@ -182,7 +195,7 @@ const PaymentOptionsUI = (props) => {
         </Modal>
 
         {/* Stripe */}
-        <Modal
+        {/* <Modal
           className='modal-info'
           open={isOpenMethod?.paymethod?.gateway === 'stripe' && !paymethodData.id}
           onClose={() => handlePaymethodClick(null)}
@@ -198,7 +211,7 @@ const PaymentOptionsUI = (props) => {
               onCancel={() => handlePaymethodClick(null)}
             />
           )}
-        </Modal>
+        </Modal> */}
 
         {/* Stripe Connect */}
         <Modal

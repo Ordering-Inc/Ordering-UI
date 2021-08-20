@@ -1,22 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   PaymentOptionStripe as PaymentOptionStripeController,
   useSession,
   useLanguage
 } from 'ordering-components'
-
-import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
-import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
-import VscTrash from '@meronex/icons/vsc/VscTrash'
-
-import { getIconCard } from '../../../../../utils'
+import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
 import { Confirm } from '../../../../../components/Confirm'
 import { StripeElementsForm } from '../StripeElementsForm'
 
-import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import {
@@ -25,17 +20,15 @@ import {
   CardItem,
   CardItemContent,
   CardItemActions,
-  WrapperItems,
-  ActionsModal,
-  BlockLoading
+  BlockLoading,
+  AddNewCard,
+  ActionsContent,
+  CardItemActionsWrapper
 } from './styles'
 
 const PaymentOptionStripeUI = (props) => {
   const {
-    onSelectCard,
-    onCancel,
     deleteCard,
-    cardSelected,
     cardsList,
     handleCardClick,
     handleNewCard
@@ -62,6 +55,30 @@ const PaymentOptionStripeUI = (props) => {
     })
   }
 
+  const test = [
+    {
+      "id": "card_1DjExyGPakYLcrA2PLQfyx83",
+      "last4": "4242",
+      "brand": "Visa",
+      "default": false,
+      "customer_id": 9
+    },
+    {
+      "id": "card_1DjExyGPakYLcrA2PLQfyx83",
+      "last4": "1234",
+      "brand": "Credit",
+      "default": true,
+      "customer_id": 9
+    },
+    {
+      "id": "card_1DjExyGPakYLcrA2PLQfyx83",
+      "last4": "5879",
+      "brand": "mastercard",
+      "default": true,
+      "customer_id": 9
+    },
+  ]
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -84,48 +101,23 @@ const PaymentOptionStripeUI = (props) => {
             content={cardsList?.error[0]?.message || cardsList?.error[0]}
           />
         )}
-
-        {token && cardsList.cards && cardsList.cards.length > 0 && (
-          <WrapperItems>
-            {cardsList.cards.map((card, i) => (
-              <CardItem key={i}>
-                <CardItemContent onClick={() => handleCardClick(card)}>
-                  <span className='checks'>
-                    {card.id === cardSelected?.id ? (
-                      <IosRadioButtonOn />
-                    ) : (
-                      <IosRadioButtonOff />
-                    )}
-                  </span>
-                  <span className='brand'>
-                    {getIconCard(card.brand)}
-                  </span>
-                  <span>
-                    XXXX-XXXX-XXXX-{card.last4}
-                  </span>
-                </CardItemContent>
-                <CardItemActions>
-                  <VscTrash onClick={() => handleDeleteCard(card)} />
-                </CardItemActions>
-              </CardItem>
-            ))}
-          </WrapperItems>
-        )}
-
+        {/* {token && cardsList.cards && cardsList.cards.length > 0 && ( */}
+        <>
+          {test.map((card, i) => (
+            <PaymentCard
+              {...props}
+              key={i}
+              handleCardClick={() => handleCardClick(card)}
+              handleDeleteCard={() => handleDeleteCard(card)}
+              card={card}
+            />
+          ))}
+        </>
+        {/* )} */}
         {token && !cardsList.loading && (
-          <WrapperItems>
-            <Button className='addcard' color='primary' onClick={() => setAddCardOpen(true)}>
-              {t('ADD_PAYMENT_CARD', 'Add New Payment Card')}
-            </Button>
-            <ActionsModal>
-              <Button onClick={() => onCancel()}>
-                {t('CANCEL', 'Cancel')}
-              </Button>
-              <Button color='primary' onClick={() => onSelectCard(cardSelected)} disabled={!cardSelected}>
-                {t('ACCEPT', 'Accept')}
-              </Button>
-            </ActionsModal>
-          </WrapperItems>
+          <AddNewCard>
+            <span onClick={() => setAddCardOpen(true)}>{t('ADD_NEW_CARD', 'Add new card')}</span>
+          </AddNewCard>
         )}
 
         <Modal
@@ -170,6 +162,90 @@ const PaymentOptionStripeUI = (props) => {
           {AfterElement}
         </React.Fragment>))}
     </>
+  )
+}
+
+export const PaymentCard = (props) => {
+  const {
+    handleCardClick,
+    handleDeleteCard,
+    card,
+    onSelectCard,
+    cardSelected
+  } = props
+  const [, t] = useLanguage()
+  const theme = useTheme()
+  const [isShowActions, setIsShowActions] = useState(false)
+  const cardActionsRef = useRef(null)
+
+  const getIconCard = (brand = '') => {
+    const value = brand.toLowerCase()
+    switch (value) {
+      case 'visa':
+        return theme.images?.general?.visa
+      case 'mastercard':
+        return theme.images?.general?.mastercard
+      default:
+        return theme.images?.general?.credit
+    }
+  }
+
+  const handleClickOutside = (e) => {
+    if (!isShowActions) return
+    const outsideCalendar = !cardActionsRef.current?.contains(e.target)
+    if (outsideCalendar) {
+      setIsShowActions(false)
+    }
+  }
+
+  const handleChangeDefaultCard = () => {
+    handleCardClick()
+    setIsShowActions(false)
+    onSelectCard(cardSelected)
+  }
+
+  const handleDeleteCardItem = () => {
+    handleDeleteCard()
+    setIsShowActions(false)
+    onSelectCard(cardSelected)
+  }
+
+  useEffect(() => {
+    window.addEventListener('mouseup', handleClickOutside)
+    return () => window.removeEventListener('mouseup', handleClickOutside)
+  }, [isShowActions])
+
+  return (
+    <CardItem>
+      <CardItemContent>
+        <div>
+          <img src={getIconCard(card?.brand)} alt='card' />
+        </div>
+        <span>
+          {card?.brand} {card?.last4}
+        </span>
+      </CardItemContent>
+      <CardItemActions>
+        {
+          card?.default && (
+            <span>{t('DEFAULT', 'Default')}</span>
+          )
+        }
+        <CardItemActionsWrapper ref={cardActionsRef}>
+          <span>
+            <FiMoreVertical onClick={() => setIsShowActions(true)} />
+          </span>
+          {
+            isShowActions && (
+              <ActionsContent>
+                <div onClick={handleChangeDefaultCard}>{t('USE_AS_DEFAULT', 'Use as default')}</div>
+                <div className='delete' onClick={handleDeleteCardItem}>{t('DELETE', 'Delete')}</div>
+              </ActionsContent>
+            )
+          }
+        </CardItemActionsWrapper>
+      </CardItemActions>
+    </CardItem>
   )
 }
 
