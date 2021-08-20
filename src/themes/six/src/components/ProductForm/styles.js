@@ -210,12 +210,12 @@ export const ProductActions = styled.div`
     position: relative;
     bottom: initial;
     right: initial;
+    background-color: transparent;
+    box-shadow: none;
   }
   @media (min-width: 1024px) {
     position: sticky;
     top: 100%;
-    background-color: transparent;
-    box-shadow: none;
     justify-content: flex-end;
     div.incdec-control {
       svg {
@@ -309,18 +309,5 @@ export const ShareWrapper = styled.div`
       right: -25px;
     `}
   }
-
-  /* @media (min-width: 1024px) {
-    position: relative;
-    top: 15px;
-    left: 30px;
-    ${props => props.theme?.rtl && css`
-      left: unset; 
-      right: 30px;
-    `}
-  } */
-
-
-
 
 `
