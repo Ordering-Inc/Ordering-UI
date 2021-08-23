@@ -29,11 +29,6 @@ export const FormInput = styled.form`
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
-    ${({ isCheckout }) => isCheckout && css`
-      div.phone_number  {
-        width: 49%;
-      }
-    `}
   }
 `
 

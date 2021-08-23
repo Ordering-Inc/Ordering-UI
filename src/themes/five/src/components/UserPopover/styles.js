@@ -11,8 +11,8 @@ export const HeaderItem = styled.div`
 
   svg {
     color: ${({ isHome }) => isHome ? '#FFF' : '#000'};
-    height: 25px;
-    width: 25px;
+    height: 40px;
+    width: 40px;
   }
 
   .menu-list {
@@ -105,6 +105,7 @@ export const Divider = styled.div`
 
 export const UserImgWrapper = styled.div`
   position: relative;
+  display: flex;
 `
 
 export const RoundMark = styled.div`

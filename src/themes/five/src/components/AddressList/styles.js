@@ -91,6 +91,11 @@ export const AddressItemActions = styled.div`
       color: #B1BCCC;
     }
   }
+  a:last-child {
+    svg {
+      color: #D83520;
+    }
+  }
   a.disabled {
     svg {
       color: #CCC;

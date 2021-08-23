@@ -247,6 +247,7 @@ const CheckoutUI = (props) => {
                       isCustomerMode={isCustomerMode}
                       userData={isCustomerMode && customerState.user}
                       userId={isCustomerMode && customerState?.user?.id}
+                      isCheckout
                     />
                   )}
                 </WrapperUserDetails>
