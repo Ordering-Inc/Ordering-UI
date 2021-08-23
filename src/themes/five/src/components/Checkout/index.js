@@ -44,7 +44,7 @@ import { UserDetails } from '../UserDetails'
 import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 
 const mapConfigs = {
@@ -247,6 +247,7 @@ const CheckoutUI = (props) => {
                       isCustomerMode={isCustomerMode}
                       userData={isCustomerMode && customerState.user}
                       userId={isCustomerMode && customerState?.user?.id}
+                      isCheckout
                     />
                   )}
                 </WrapperUserDetails>

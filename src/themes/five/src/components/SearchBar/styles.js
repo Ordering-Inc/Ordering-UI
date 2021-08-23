@@ -28,10 +28,7 @@ export const BusinessSearch = styled.div`
     @media (min-width: 681px) {
       width: 100%;
       ${({ isCustomLayout }) => !isCustomLayout && css`
-        width: 230px;
-        &:focus {
-          width: 50%;
-        }
+        width: 50%;
       `}
     }
 

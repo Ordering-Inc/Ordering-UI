@@ -39,16 +39,21 @@ export const CartInfo = (props) => {
     events.emit('go_to_page', data)
   }
 
-  const OrderTypeSelectorUI = (props) => {
+  const OrderTypeSelectorHeaderUI = (props) => {
     const {
       handleChangeOrderType,
       typeSelected,
       orderTypes
     } = props
+
+    const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+    const filteredOrderTypes = configTypes ? orderTypes.filter(type => configTypes?.includes(type.value)) : orderTypes
+
     return (
       <DeliveryItems>
         {
-          orderTypes && orderTypes.map((orderType) => {
+
+          filteredOrderTypes && filteredOrderTypes.map((orderType) => {
             return (
               <Item key={orderType.value} onClick={() => handleChangeOrderType(orderType.value)} className={typeSelected === orderType.value ? 'active' : ''}>
                 {orderType.itemcontent}
@@ -60,11 +65,11 @@ export const CartInfo = (props) => {
     )
   }
 
-  const OrderTypeSelector = (props) => {
+  const OrderTypeSelectorHeader = (props) => {
     const [, t] = useLanguage()
     const orderTypeProps = {
       ...props,
-      UIComponent: OrderTypeSelectorUI,
+      UIComponent: OrderTypeSelectorHeaderUI,
       orderTypes: props.orderTypes || [
         {
           value: 1,
@@ -80,11 +85,11 @@ export const CartInfo = (props) => {
         },
         {
           value: 4,
-          itemcontent: <>{t('DRIVE_THRU', 'Drive thru')}</>
+          itemcontent: <>{t('CURBSIDE', 'Curbside')}</>
         },
         {
           value: 5,
-          itemcontent: <>{t('CURBSIDE', 'Curbside')}</>
+          itemcontent: <>{t('DRIVE_THRU', 'Drive thru')}</>
         }
       ]
     }
@@ -128,7 +133,7 @@ export const CartInfo = (props) => {
         </PickStore>
         <SubTitle>{t('DELIVERY_TYPE', 'Delivery type')}{':'}</SubTitle>
         <div className='order-types'>
-          <OrderTypeSelector />
+          <OrderTypeSelectorHeader />
         </div>
       </InfoWrapper>
     </Container>

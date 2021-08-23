@@ -7,7 +7,6 @@ import moment from 'moment'
 import {
   BusinessReviewsContainer,
   ReviewOf,
-  WrapperSelect,
   Content,
   Review,
   ReviewsNotFound,
@@ -22,31 +21,13 @@ import {
   ReviewItemContent,
   SearchContainer
 } from './styles'
-import { Select } from '../../styles/Select'
 
-import AiOutlineStar from '@meronex/icons/ai/AiOutlineStar'
 import BsFillStarFill from '@meronex/icons/bs/BsFillStarFill'
 
 export const BusinessReviewsUI = (props) => {
   const { stars, reviewsList, handleClickOption } = props
   const [, t] = useLanguage()
   const [theme] = useTheme()
-  const values = ['all', 1, 2, 3, 4, 5]
-  const options = reviewsList.loading ? [] : values.map(value => {
-    if (value === 'all') {
-      return {
-        value: value,
-        content: value.toUpperCase(),
-        showOnSelected: value.toUpperCase()
-      }
-    } else {
-      return {
-        value: value,
-        content: value,
-        showOnSelected: value
-      }
-    }
-  })
 
   const handleOnChange = (evt) => {
     if (evt.target.value === '') handleClickOption('all')
@@ -103,9 +84,6 @@ export const BusinessReviewsUI = (props) => {
                 <ReviewsMarkPoint style={{ right: '0' }}>{t('GREAT', 'Great')}</ReviewsMarkPoint>
               </ReviewsProgressContent>
             </ReviewsProgressWrapper>
-            <WrapperSelect>
-              {!reviewsList.loading ? <Select options={options} defaultValue={options[0].value} onChange={(val) => handleClickOption(val)} notAsync InitialIcon={AiOutlineStar} /> : <Skeleton width={200} height={30} />}
-            </WrapperSelect>
             <Content id='content'>
               {!reviewsList.loading ? reviewsList?.reviews.map((review) => (
                 <Review key={review.id} id='review'>

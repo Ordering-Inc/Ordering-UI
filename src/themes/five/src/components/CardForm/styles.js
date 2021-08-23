@@ -1,14 +1,12 @@
 import styled, { css } from 'styled-components'
 
 export const FormStripe = styled.form`
-  max-width: 800px;
   display: flex;
   flex-direction: column;
 
   .StripeElement,
   .StripeElementIdeal {
     display: block;
-    margin: 0 10px;
     padding: 10px 14px;
     box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
       rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
@@ -70,14 +68,11 @@ export const ErrorMessage = styled.div`
 
 export const FormActions = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-between;
   margin-top: 20px;
 
   button {
-    width: 48%;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    height: 44px;
+    width: 100%;
     border-radius: 7.6px;
 
     &:disabled {

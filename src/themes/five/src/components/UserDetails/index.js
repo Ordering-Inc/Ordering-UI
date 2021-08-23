@@ -9,7 +9,7 @@ import {
   useSession
 } from 'ordering-components'
 
-import { UserFormDetailsUI } from '../../../../../components/UserFormDetails'
+import { UserFormDetailsUI } from '../UserFormDetails'
 
 const UserDetailsUI = (props) => {
   const {

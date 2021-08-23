@@ -14,14 +14,14 @@ import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { Modal } from '../Modal'
-import { Alert } from '../../../../../components/Confirm'
-import { AddressForm } from '../../../../../components/AddressForm'
-import { AddressList } from '../../../../../components/AddressList'
+import { Alert } from '../Confirm'
+import { AddressForm } from '../AddressForm'
+import { AddressList } from '../AddressList'
 import { SearchBar } from '../SearchBar'
 
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
-import { OrdersOption } from '../../../../../components/OrdersOption'
+import { OrdersOption } from '../OrdersOption'
 import { BusinessesMap } from '../../../../../components/BusinessesMap'
 
 import {

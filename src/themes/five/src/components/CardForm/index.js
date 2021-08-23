@@ -33,8 +33,7 @@ const CardFormUI = (props) => {
     error,
     loading,
     handleSubmit,
-    handleChange,
-    handleCancel
+    handleChange
   } = props
 
   const [, t] = useLanguage()
@@ -44,11 +43,9 @@ const CardFormUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <FormStripe onSubmit={handleSubmit}>
         <FormRow>
           <CardElement
@@ -58,24 +55,21 @@ const CardFormUI = (props) => {
           <ErrorMessage>{error}</ErrorMessage>
         </FormRow>
         <FormActions>
-          <Button type='button' onClick={() => handleCancel()}>{t('CANCEL', 'Cancel')}</Button>
           <Button
             color='primary'
             type='submit'
             disabled={loading}
           >
-            {loading ? t('LOADING', 'Loading...') : t('ADD', 'Add')}
+            {loading ? t('LOADING', 'Loading...') : t('ADD_CARD', 'Add card')}
           </Button>
         </FormActions>
       </FormStripe>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }

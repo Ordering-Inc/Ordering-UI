@@ -19,7 +19,7 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
-import { Messages } from '../../../../../components/Messages'
+import { Messages } from '../Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
 import { ProductShare } from '../../../../../components/ProductShare'
 

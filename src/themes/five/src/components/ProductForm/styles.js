@@ -131,6 +131,7 @@ export const ProductActions = styled.div`
   align-items: center;
   padding: 10px 0px;
   width: 100%;
+  z-index: 999;
 
   position: fixed;
   bottom: -19px;
@@ -249,6 +250,14 @@ export const WrapperIngredients = styled.div`
 
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid #E9ECEF;
+  position: sticky;
+  top: 50px;
+  background: white;
+  z-index: 900;
+
+  @media (min-width: 769px) {
+    top: 0;
+  }
 `
 
 export const Divider = styled.div`

@@ -7,18 +7,6 @@ export const BusinessReviewsContainer = styled.div`
 
 export const ReviewOf = styled.div``
 
-export const WrapperSelect = styled.div`
-  width: 95%;
-  margin: 10px 0px;
-  > div {
-    width: 100%;
-  }
-  @media (min-width: 480px){
-    width: 45%;
-    display: none;
-  }
-`
-
 export const Content = styled.div`
 
   display: flex;
@@ -74,6 +62,11 @@ export const ReviewsHeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 30px;
+  ${props => props.theme?.rtl && css`
+    padding-right: 30px;
+    padding-left: 0;
+  `}
 
   svg {
     font-size: 30px;
@@ -87,6 +80,7 @@ export const ReviewsHeaderWrapper = styled.div`
   h2 {
     font-weight: 600;
     font-size: 24px;
+    margin: 10px 0;
     color: ${props => props.theme?.colors.darkTextColor};
   }
 
@@ -117,7 +111,7 @@ export const ReviewsProgressContent = styled.div`
 export const ReviewsProgressBar = styled.div`
   height: 4px;
   border-radius: 50px;
-  background: ${props => props.theme?.colors.darkTextColor};
+  background: #344050;
 `
 
 export const ReviewsMarkPoint = styled.span`

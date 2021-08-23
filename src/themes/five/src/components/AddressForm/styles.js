@@ -2,32 +2,25 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const FormActions = styled.div`
+  margin-top: 35px;
   padding: 10px 0px;
   display: flex;
   justify-content: space-between;
   width: 100%;
   button {
-    height: 45px;
-    flex: 1;
+    height: 44px;
+    width: 100%;
+    position: relative;
 
-    &:last-child#submit-btn {
-      margin-left: 10px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 0;
-        margin-right: 10px;
+    svg {
+      font-size: 25px;
+      position: absolute;
+      ${props => props.theme?.rtl ? css`
+        left: 30px;  
+      ` : css`
+        right: 30px; 
       `}
-    }
-  }
-
-  @media (min-width: 769px) {
-    button {
-      &:last-child#submit-btn {
-        margin-left: 25px;
-        ${props => props.theme?.rtl && css`
-        margin-left: 0;
-        margin-right: 25px;
-      `}
-      }
+      top: 8px;
     }
   }
 `
@@ -55,6 +48,7 @@ export const FormControl = styled.form`
   textarea {
     width: 100%;
     margin: 10px 0;
+    border-radius: 7.6px;
   }
 
   .input-autocomplete {
@@ -132,7 +126,7 @@ export const WrapAddressInput = styled.div`
 
   svg {
     position: absolute;
-    color: #9A9A9A;
+    color: ${props => props.theme.colors.primary};
     top: 21px;
     left: 10px;
     font-size: 20px;
@@ -165,22 +159,26 @@ export const AddressTagSection = styled.div`
     align-items: center;
     width: 46px;
     height: 46px;
+    border: none;
+    color: #B1BCCC;
 
     img {
-      width: 22px;
-      height: 22px;
+      width: 25px;
+      height: 25px;
     }
 
     span {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 22px;
+
+      svg {
+        font-size: 25px;
+      }
     }
   }
 
   button.active {
-    border: 1px solid ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
   }
 `
