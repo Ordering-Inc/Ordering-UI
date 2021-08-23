@@ -195,7 +195,7 @@ var ReviewsAction = _styledComponents.default.div(_templateObject39 || (_templat
 
 exports.ReviewsAction = ReviewsAction;
 
-var FootActions = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  width: 100%;\n  display: flex;\n"])));
+var FootActions = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  width: 100%;\n  display: flex;\n  button {\n    background: transparent;\n  }\n"])));
 
 exports.FootActions = FootActions;
 

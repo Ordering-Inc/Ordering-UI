@@ -29,8 +29,6 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
 var _useOnlineStatus = require("../../../../../hooks/useOnlineStatus");
 
-var _LanguageSelector = require("../../../../../components/LanguageSelector");
-
 var _UserPopover = require("../UserPopover");
 
 var _CartPopover = require("../CartPopover");
@@ -53,7 +51,7 @@ var _SidebarMenu = require("../SidebarMenu");
 
 var _UserDetails = require("../../../../../components/UserDetails");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _LoginForm = require("../LoginForm");
 
@@ -92,7 +90,6 @@ var Header = function Header(props) {
 
   var isHome = props.isHome,
       location = props.location,
-      closeCartPopover = props.closeCartPopover,
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
       isCustomerMode = props.isCustomerMode;
@@ -232,12 +229,6 @@ var Header = function Header(props) {
     setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
   };
 
-  var handleAddProduct = function handleAddProduct() {
-    if (!closeCartPopover) {
-      handleTogglePopover('cart');
-    }
-  };
-
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
 
@@ -269,12 +260,6 @@ var Header = function Header(props) {
     setAuthModalOpen(true);
   };
 
-  (0, _react.useEffect)(function () {
-    events.on('cart_product_added', handleAddProduct);
-    return function () {
-      return events.off('cart_product_added', handleAddProduct);
-    };
-  }, []);
   (0, _react.useEffect)(function () {
     if (isCustomerMode) {
       setCustomerModalOpen(false);
@@ -349,13 +334,12 @@ var Header = function Header(props) {
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
     },
-    highlight: modalPageToShow === 'login',
     name: "signin"
   }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN) || 'Login')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleOpenLoginSignUp('signup');
     },
-    highlight: modalPageToShow === 'signup',
+    highlight: 1,
     name: "signup"
   }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
@@ -385,7 +369,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+  }))))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
       return openModal('address');
     }

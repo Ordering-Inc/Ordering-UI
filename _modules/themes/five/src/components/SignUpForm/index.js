@@ -13,7 +13,7 @@ var _reactHookForm = require("react-hook-form");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _InputPhoneNumber = require("../InputPhoneNumber");
 
@@ -294,6 +294,12 @@ var SignUpFormUI = function SignUpFormUI(props) {
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+          }
+        }) : field.code.includes('name') ? formMethods.register(field.code, {
+          required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null,
+          pattern: {
+            value: /^[a-zA-Z\s]*$/,
+            message: t("INVALID_".concat(field.code.toUpperCase()), "Invalid ".concat(field.name)).replace('_attribute_', t(field.name, field.code))
           }
         }) : formMethods.register(field.code, {
           required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null

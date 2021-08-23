@@ -29,7 +29,7 @@ var FormCash = _styledComponents.default.div(_templateObject2 || (_templateObjec
 
 exports.FormCash = FormCash;
 
-var WrapperInput = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  label {\n    font-size: 16px;\n  }\n  \n  input {\n    margin-top: 10px;\n    width: 100%;\n    box-sizing: border-box;\n  }\n"])));
+var WrapperInput = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  label {\n    font-size: 16px;\n  }\n  \n  input {\n    margin-top: 10px;\n    width: 100%;\n    box-sizing: border-box;\n    height: 44px;\n  }\n"])));
 
 exports.WrapperInput = WrapperInput;
 

@@ -39,7 +39,7 @@ var _DriverTips = require("../DriverTips");
 
 var _Cart = require("../Cart");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _CartContent = require("../CartContent");
 
@@ -322,7 +322,8 @@ var CheckoutUI = function CheckoutUI(props) {
     useSessionUser: !isCustomerMode,
     isCustomerMode: isCustomerMode,
     userData: isCustomerMode && customerState.user,
-    userId: isCustomerMode && (customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id)
+    userId: isCustomerMode && (customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id),
+    isCheckout: true
   }))), (_props$beforeElements4 = props.beforeElementsSectionThree) === null || _props$beforeElements4 === void 0 ? void 0 : _props$beforeElements4.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

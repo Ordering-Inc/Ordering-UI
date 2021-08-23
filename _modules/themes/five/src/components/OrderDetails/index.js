@@ -31,7 +31,7 @@ var _ProductItemAccordion = require("../ProductItemAccordion");
 
 var _Modal = require("../Modal");
 
-var _Messages = require("../../../../../components/Messages");
+var _Messages = require("../Messages");
 
 var _ReviewOrder = require("../../../../../components/ReviewOrder");
 

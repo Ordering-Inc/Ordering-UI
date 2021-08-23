@@ -78,7 +78,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 500;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _configs$google_maps_, _orderState$options4, _orderState$options4$, _getCustomArray, _businessesList$busin3, _orderState$options5, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _configs$google_maps_, _businessesList$busin3, _orderState$options4, _orderState$options4$, _getCustomArray, _businessesList$busin4, _orderState$options5, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -319,7 +319,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onSearch: handleChangeSearch
   }), isCustomLayout && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
     onClick: toggleMap
-  })), configs !== null && configs !== void 0 && (_configs$google_maps_ = configs.google_maps_api_key) !== null && _configs$google_maps_ !== void 0 && _configs$google_maps_.value ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
+  })), configs !== null && configs !== void 0 && (_configs$google_maps_ = configs.google_maps_api_key) !== null && _configs$google_maps_ !== void 0 && _configs$google_maps_.value && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location,
     setErrors: setMapErrors
@@ -351,7 +351,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     isCustomLayout: true,
     isBusinessesLoading: businessesList.loading
-  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin4 = businessesList.businesses) === null || _businessesList$busin4 === void 0 ? void 0 : _businessesList$busin4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,
     onClose: function onClose() {

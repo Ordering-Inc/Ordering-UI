@@ -26,7 +26,7 @@ var BusinessSearch = _styledComponents.default.div(_templateObject || (_template
   return !isCustomLayout && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      justify-content: center;\n      -webkit-transition: width 0.4s ease-in-out;\n      transition: width 0.4s ease-in-out; \n    "])));
 }, function (_ref2) {
   var isCustomLayout = _ref2.isCustomLayout;
-  return !isCustomLayout && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        width: 230px;\n        &:focus {\n          width: 50%;\n        }\n      "])));
+  return !isCustomLayout && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        width: 50%;\n      "])));
 });
 
 exports.BusinessSearch = BusinessSearch;

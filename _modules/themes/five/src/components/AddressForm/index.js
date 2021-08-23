@@ -13,11 +13,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _FaHome = _interopRequireDefault(require("@meronex/icons/fa/FaHome"));
+var _BsBuilding = _interopRequireDefault(require("@meronex/icons/bs/BsBuilding"));
+
+var _BsHouse = _interopRequireDefault(require("@meronex/icons/bs/BsHouse"));
 
 var _FaPlus = _interopRequireDefault(require("@meronex/icons/fa/FaPlus"));
-
-var _FaRegBuilding = _interopRequireDefault(require("@meronex/icons/fa/FaRegBuilding"));
 
 var _FaRegHeart = _interopRequireDefault(require("@meronex/icons/fa/FaRegHeart"));
 
@@ -27,11 +27,13 @@ var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi
 
 var _CgSearchLoading = _interopRequireDefault(require("@meronex/icons/cg/CgSearchLoading"));
 
+var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
+
 var _reactHookForm = require("react-hook-form");
 
 var _orderingComponents = require("ordering-components");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _GoogleGpsButton = require("../../../../../components/GoogleGpsButton");
 
@@ -644,33 +646,29 @@ var AddressFormUI = function AddressFormUI(props) {
     }
   }, formState.error), /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'home' ? 'active' : '',
+    bgtransparent: true,
     type: "button",
-    outline: true,
-    circle: true,
     onClick: function onClick() {
       return handleAddressTag('home');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaHome.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BsHouse.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'office' ? 'active' : '',
+    bgtransparent: true,
     type: "button",
-    outline: true,
-    circle: true,
     onClick: function onClick() {
       return handleAddressTag('office');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaRegBuilding.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BsBuilding.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'favorite' ? 'active' : '',
+    bgtransparent: true,
     type: "button",
-    outline: true,
-    circle: true,
     onClick: function onClick() {
       return handleAddressTag('favorite');
     }
   }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FaRegHeart.default, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: addressTag === 'other' ? 'active' : '',
+    bgtransparent: true,
     type: "button",
-    outline: true,
-    circle: true,
     onClick: function onClick() {
       return handleAddressTag('other');
     }
@@ -682,7 +680,7 @@ var AddressFormUI = function AddressFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",
     disabled: formState.loading,
@@ -694,7 +692,7 @@ var AddressFormUI = function AddressFormUI(props) {
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, !formState.loading ? isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('ADD', 'Add') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('CONTINUE', 'Continue'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ADDRESS', 'Address'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

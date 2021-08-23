@@ -335,7 +335,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleCartOpen: function handleCartOpen(val) {
       return setIsCartOpen(val);
     },
-    isCustomMode: true
+    isCustomMode: true,
+    isStore: true
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, "$0.00"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart'))))))))), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {

@@ -17,9 +17,7 @@ var _UserFormDetails = require("../UserFormDetails");
 
 var _AddressList = require("../AddressList");
 
-var _Confirm = require("../../../../../components/Confirm");
-
-var _Buttons = require("../../styles/Buttons");
+var _Confirm = require("../Confirm");
 
 var _ProfileOptions = require("./ProfileOptions");
 
@@ -147,6 +145,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       handleButtonUpdateClick(null, isImage);
     }
   }, [(_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo]);
+  (0, _react.useEffect)(function () {
+    toggleIsEdit();
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -191,25 +192,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     loading: "lazy"
   })))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, {
     className: "user-form"
-  }, !edit ? formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 250,
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 180,
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 210,
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100,
-    height: 40
-  })) : /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement("h1", null, (userData === null || userData === void 0 ? void 0 : userData.name) || (user === null || user === void 0 ? void 0 : user.name), " ", (userData === null || userData === void 0 ? void 0 : userData.lastname) || (user === null || user === void 0 ? void 0 : user.lastname)), /*#__PURE__*/_react.default.createElement("p", null, (userData === null || userData === void 0 ? void 0 : userData.email) || user.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, ((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code)) && "+".concat((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code), " "), (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    outline: true,
-    onClick: function onClick() {
-      return toggleEditState(true);
-    }
-  }, t('EDIT', 'Edit'))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
     onCancel: toggleEditState,
     onCloseProfile: function onCloseProfile() {
       return setEdit(false);
