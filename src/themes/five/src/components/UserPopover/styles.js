@@ -2,22 +2,35 @@ import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
-  height: ${({ isPhoto }) => isPhoto ? 'auto' : '25px'};
   display: flex;
   align-items: center;
+  background: #F8F9FA;
+  border-radius: 7.6px;
+  padding: 7px 13px;
+  margin: 0 10px;
 
   svg {
     color: ${({ isHome }) => isHome ? '#FFF' : '#000'};
-    height: 25px;
-    width: 25px;
+    height: 40px;
+    width: 40px;
   }
 
   .menu-list {
     font-size: 16px;
     width: auto;
     height: auto;
-    margin: 0 10px;
+    margin-right: 20px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 20px;
+      margin-right: 0;
+    `}
     color: ${props => props.theme.colors.darkTextColor};
+  }
+
+  img {
+    width: 42px;
+    height: 42px;
+    border-radius: 7.6px;
   }
 `
 
@@ -88,4 +101,19 @@ export const Divider = styled.div`
   margin-left: -15px;
   height: 1px;
   background: #E9ECEF;
+`
+
+export const UserImgWrapper = styled.div`
+  position: relative;
+  display: flex;
+`
+
+export const RoundMark = styled.div`
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #E63757;
+  top: -3px;
+  right: -6px;
 `

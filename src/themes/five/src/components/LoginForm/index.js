@@ -9,7 +9,7 @@ import {
   useSession,
   ReCaptcha
 } from 'ordering-components'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import {

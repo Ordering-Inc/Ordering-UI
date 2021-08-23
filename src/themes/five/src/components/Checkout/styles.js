@@ -4,9 +4,15 @@ export const Container = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
+  min-height: auto;
 
   @media (min-width: 769px) {
     flex-direction: row;
+  }
+
+  @media (min-width: 993px) {
+    min-height: calc(100vh - 337px);
+    box-sizing: border-box;
   }
 `
 

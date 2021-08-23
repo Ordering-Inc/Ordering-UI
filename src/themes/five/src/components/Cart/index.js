@@ -5,7 +5,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
 import MdClose from '@meronex/icons/md/MdClose'
 
-import { Confirm } from '../../../../../components/Confirm'
+import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
@@ -40,7 +40,8 @@ const CartUI = (props) => {
     isForceOpenCart,
     isCartOnProductsList,
     handleCartOpen,
-    isCustomMode
+    isCustomMode,
+    isStore
   } = props
 
   const [, t] = useLanguage()
@@ -123,8 +124,7 @@ const CartUI = (props) => {
   }
 
   const checkOutBtnClick = () => {
-    if (isCustomMode) handleClickCheckout()
-    else setOpenUpselling(true)
+    handleClickCheckout()
   }
 
   useEffect(() => {
@@ -156,6 +156,7 @@ const CartUI = (props) => {
             handleClearProducts={handleClearProducts}
             handleStoreRedirect={handleStoreRedirect}
             handleCartOpen={handleCartOpen}
+            isStore={isStore}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion

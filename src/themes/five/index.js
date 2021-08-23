@@ -28,6 +28,7 @@ import { HomeHero } from './src/components/HomeHero'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LoginForm } from './src/components/LoginForm'
+import { Messages } from './src/components/Messages'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MyOrders } from './src/components/MyOrders'
@@ -38,6 +39,7 @@ import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorCont
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
+import { PaymentOptionStripe } from './src/components/PaymentOptionStripe'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { SearchBar } from './src/components/SearchBar'
@@ -45,6 +47,7 @@ import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { StripeElementsForm } from './src/components/StripeElementsForm'
+import { StripeRedirectForm } from './src/components/StripeRedirectForm'
 import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
 import { UserPopover } from './src/components/UserPopover'
@@ -85,6 +88,7 @@ export {
   HorizontalOrdersLayout,
   InputPhoneNumber,
   LoginForm,
+  Messages,
   MomentContent,
   MomentControl,
   MyOrders,
@@ -94,6 +98,7 @@ export {
   OrderTypeSelectorContent,
   OrderTypeSelectorHeader,
   PaymentOptionCash,
+  PaymentOptionStripe,
   PaymentOptions,
   ProductForm,
   ProductItemAccordion,
@@ -102,6 +107,7 @@ export {
   SignUpForm,
   SingleProductCard,
   StripeElementsForm,
+  StripeRedirectForm,
   UpsellingPage,
   UserDetails,
   UserPopover,

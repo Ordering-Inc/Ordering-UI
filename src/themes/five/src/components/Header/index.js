@@ -24,7 +24,6 @@ import {
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 
-import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { UserPopover } from '../UserPopover'
 import { CartPopover } from '../CartPopover'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
@@ -36,7 +35,7 @@ import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
-import { Confirm } from '../../../../../components/Confirm'
+import { Confirm } from '../Confirm'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
@@ -45,7 +44,6 @@ export const Header = (props) => {
   const {
     isHome,
     location,
-    closeCartPopover,
     isShowOrderOptions,
     isHideSignup,
     isCustomerMode
@@ -123,12 +121,6 @@ export const Header = (props) => {
     })
   }
 
-  const handleAddProduct = () => {
-    if (!closeCartPopover) {
-      handleTogglePopover('cart')
-    }
-  }
-
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
     if (isCustomerMode && location1.pathname.includes('/orders')) {
@@ -157,11 +149,6 @@ export const Header = (props) => {
     setModalPageToShow(index)
     setAuthModalOpen(true)
   }
-
-  useEffect(() => {
-    events.on('cart_product_added', handleAddProduct)
-    return () => events.off('cart_product_added', handleAddProduct)
-  }, [])
 
   useEffect(() => {
     if (isCustomerMode) {
@@ -253,11 +240,11 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 870 && (
                     <>
-                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} highlight={modalPageToShow === 'login'} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
                       {!isHideSignup && (
                         <MenuLink
                           onClick={() => handleOpenLoginSignUp('signup')}
-                          highlight={modalPageToShow === 'signup'}
+                          highlight={1}
                           name='signup'
                         >
                           {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
@@ -300,7 +287,6 @@ export const Header = (props) => {
                     </>
                   )
                 }
-                <LanguageSelector />
               </Menu>
             </RightHeader>
           )}

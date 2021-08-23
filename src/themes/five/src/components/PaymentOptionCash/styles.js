@@ -25,6 +25,7 @@ export const FormCash = styled.div`
 `
 
 export const WrapperInput = styled.div`
+  width: 100%;
   label {
     font-size: 16px;
   }
@@ -33,6 +34,7 @@ export const WrapperInput = styled.div`
     margin-top: 10px;
     width: 100%;
     box-sizing: border-box;
+    height: 44px;
   }
 `
 

@@ -18,7 +18,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 import { sortInputFields } from '../../../../../utils'
 
 export const UserFormDetailsUI = (props) => {
@@ -195,6 +195,7 @@ export const UserFormDetailsUI = (props) => {
         setUserCellPhone(true)
       }
     }
+    if (!isEdit) onCancel()
   }, [user, isEdit])
 
   useEffect(() => {
@@ -346,17 +347,6 @@ export const UserFormDetailsUI = (props) => {
                <MidComponent key={i} {...props} />))
             }
             <ActionsForm>
-              {onCancel && (
-                <Button
-                  outline
-                  type='button'
-                  onClick={() => onCancel(false)}
-                  disabled={formState.loading}
-                >
-                  {t('CANCEL', 'Cancel')}
-                </Button>
-              )}
-
               {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
                 <Button
                   id='form-btn'

@@ -19,6 +19,10 @@ export const ContainerCard = styled.div`
   @media (min-width: 993px) {
     width: calc(33% - 40px);
   }
+
+  @media (min-width: 1200px) {
+    width: calc(25% - 40px);
+  }
 `
 
 export const WrapperBusinessCard = styled.div`

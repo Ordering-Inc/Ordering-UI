@@ -11,9 +11,15 @@ export const WrapperContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  min-height: auto;
 
   @media (min-width: 769px) {
     flex-direction: row;
+  }
+
+  @media (min-width: 993px) {
+    min-height: calc(100vh - 337px);
+    box-sizing: border-box;
   }
 `
 
