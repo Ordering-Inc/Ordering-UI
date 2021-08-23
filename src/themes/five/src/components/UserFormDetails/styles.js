@@ -29,11 +29,6 @@ export const FormInput = styled.form`
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
-    ${({ isCheckout }) => isCheckout && css`
-      div.phone_number  {
-        width: 49%;
-      }
-    `}
   }
 `
 
@@ -139,12 +134,18 @@ export const LanguageSelectorWrapper = styled(InputGroup)`
     text-align: left;
     background: #F8F9FA !important;
     border-color: #F8F9FA;
+    height: 44px;
+
+    > div:first-child {
+      height: 44px;
+    }
 
     #list {
       width: 100%;
       border-radius: 7.6px;
       background: #F8F9FA !important;
       border-color: #F8F9FA;
+      box-shadow: 0px 10px 12px 1px #e6e6e6;
     }
   }
 `

@@ -9,7 +9,6 @@ export const UserProfileContainer = styled.div`
   align-items: center;
   text-align: center;
   width: 90%;
-  overflow-x: hidden;
   margin: 25px auto ${props => props.mbottom ? `${props.mbottom}px` : 'auto'};
 
   @media (min-width: 768px) {
@@ -24,6 +23,7 @@ export const UserImage = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  position: relative;
 
   @media (min-width: 768px){
     width: auto;
@@ -37,7 +37,6 @@ export const Image = styled.div`
   border-radius: 7.6px;
   overflow: hidden;
   padding: 20px;
-  background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};
   cursor: -webkit-grab;
   cursor: grab;
 
@@ -55,13 +54,8 @@ export const Image = styled.div`
   }
 
   @media (min-width: 480px){
-    width: 200px;
-    height: 200px;
-  }
-
-  @media (min-width: 768px){
-    width: 170px;
-    height: 170px;
+    width: 196px;
+    height: 196px;
   }
 `
 
@@ -80,19 +74,13 @@ export const SideForm = styled.div`
 `
 
 export const Camera = styled.div`
-  width:212px;
-  > * {
-    margin-top: 10px;
-    width: 30px;
-    height: 30px;
-  }
+  position: absolute;
+  left: calc(50% - 12px);
+  bottom: 25px;
 
-  @media (min-width: 480px){
-    width:242px;
-  }
-
-  @media (min-width: 768px){
-    width:212px;
+  svg {
+    font-size: 25px;
+    color: white;
   }
 `
 

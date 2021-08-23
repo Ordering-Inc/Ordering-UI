@@ -31,7 +31,8 @@ export const BusinessItemAccordion = (props) => {
     isCartOnProductsList,
     handleClearProducts,
     handleStoreRedirect,
-    handleCartOpen
+    handleCartOpen,
+    isStore
   } = props
 
   const [orderState] = useOrder()
@@ -107,6 +108,10 @@ export const BusinessItemAccordion = (props) => {
     }
   }, [])
 
+  const handleChangeStore = () => {
+    events.emit('go_to_page', { page: 'search' })
+  }
+
   useEffect(() => {
     handleCartOpen && handleCartOpen(!!setActive)
   }, [setActive])
@@ -131,7 +136,7 @@ export const BusinessItemAccordion = (props) => {
                 <ContentInfo className='info'>
                   <h2>{business?.name}</h2>
                   <div>
-                    {handleStoreRedirect && !isCartOnProductsList && (
+                    {handleStoreRedirect && !isCartOnProductsList && !isStore && (
                       <span
                         ref={businessStore}
                         onClick={() => handleStoreRedirect(business?.slug)}
@@ -140,7 +145,7 @@ export const BusinessItemAccordion = (props) => {
                         {t('GO_TO_STORE', 'Go to store')}
                       </span>
                     )}
-                    {!isClosed && !!isProducts && !isCartPending && (
+                    {!isClosed && !!isProducts && !isCartPending && !isStore && (
                       <span
                         ref={businessDelete}
                         onClick={() => handleClearProducts()}
@@ -148,6 +153,9 @@ export const BusinessItemAccordion = (props) => {
                       >
                         {t('CLEAR_CART', 'Clear cart')}
                       </span>
+                    )}
+                    {isStore && (
+                      <span onClick={handleChangeStore} className='change-store'>{t('CHANGE_STORE', 'Change store')}</span>
                     )}
                   </div>
                 </ContentInfo>

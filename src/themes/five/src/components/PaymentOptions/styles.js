@@ -13,16 +13,23 @@ export const PaymentMethodsList = styled.div`
 
   #select-input {
     width: 100%;
-    background: #F8F9FA;
+    background-color: #F8F9FA !important;
+    border-color: #f8f9fa;
     border-radius: 7.6px;
+    height: 44px;
 
     > div: first-child {
       display: flex;
       justify-content: space-between;
+      height: 44px;
+      font-size: 14px;
     }
 
     #list {
       width: 100%;
+      background-color: #F8F9FA !important;
+      border-color: #f8f9fa;
+      border-radius: 7.6px;
     }
   }
 `
@@ -103,8 +110,9 @@ export const CardItemContent = styled.div`
     font-size: 22px;
   }
 
-  .brand svg {
-    font-size: 26px;
+  .brand img {
+    width: 24px;
+    height: 20px;
   }
 
   > * {

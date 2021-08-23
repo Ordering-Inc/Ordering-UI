@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const HeaderItem = styled.div`
   cursor: pointer;
   > span {
-    padding: 10px 9px;
+    padding: 10px;
     display: flex;
     align-items: center;
     background: ${props => props.theme.colors.primary};
