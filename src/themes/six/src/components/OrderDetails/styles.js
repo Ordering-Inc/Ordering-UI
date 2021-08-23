@@ -465,6 +465,9 @@ export const FootActions = styled.div`
   margin-top: 20px;
   width: 100%;
   display: flex;
+  button {
+    background: transparent;
+  }
 `
 export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};

@@ -235,7 +235,7 @@ const BusinessesListingUI = (props) => {
                     )}
                   </WrapperSearch>
                 )}
-                {configs?.google_maps_api_key?.value ? (
+                {(configs?.google_maps_api_key?.value && businessesList?.businesses?.length > 0) ? (
                   <BusinessesMap
                     businessList={businessesList.businesses}
                     userLocation={orderState?.options?.address?.location}
