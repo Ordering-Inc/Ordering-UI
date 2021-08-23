@@ -40,7 +40,8 @@ const CartUI = (props) => {
     isForceOpenCart,
     isCartOnProductsList,
     handleCartOpen,
-    isCustomMode
+    isCustomMode,
+    isStore
   } = props
 
   const [, t] = useLanguage()
@@ -155,6 +156,7 @@ const CartUI = (props) => {
             handleClearProducts={handleClearProducts}
             handleStoreRedirect={handleStoreRedirect}
             handleCartOpen={handleCartOpen}
+            isStore={isStore}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
