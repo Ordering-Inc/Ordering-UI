@@ -17,7 +17,7 @@ var _styles = require("./styles");
 
 var _orderingComponents = require("ordering-components");
 
-var _UserFormDetails = require("../../../../../components/UserFormDetails");
+var _UserFormDetails = require("../UserFormDetails");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

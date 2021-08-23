@@ -27,7 +27,7 @@ var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
 
 var _LanguageSelector = require("../../../../../components/LanguageSelector");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _utils = require("../../../../../utils");
 
@@ -293,6 +293,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         setUserCellPhone(true);
       }
     }
+
+    if (!isEdit) onCancel();
   }, [user, isEdit]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading && emailInput.current) {
@@ -394,14 +396,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    outline: true,
-    type: "button",
-    onClick: function onClick() {
-      return onCancel(false);
-    },
-    disabled: formState.loading
-  }, t('CANCEL', 'Cancel')), (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && isEdit || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && isEdit || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "form-btn",
     color: "primary",
     type: "submit",

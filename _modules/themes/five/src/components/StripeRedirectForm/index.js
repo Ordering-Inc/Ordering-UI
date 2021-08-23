@@ -3,17 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CardForm = void 0;
+exports.StripeRedirectForm = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactStripeJs = require("@stripe/react-stripe-js");
+var _reactHookForm = require("react-hook-form");
 
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
+
+var _Inputs = require("../../styles/Inputs");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,30 +39,21 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var CARD_ELEMENT_OPTIONS = {
-  style: {
-    base: {
-      color: '#32325d',
-      fontSmoothing: 'antialiased',
-      fontSize: '16px',
-      '::placeholder': {
-        color: '#aab7c4'
-      }
-    },
-    invalid: {
-      color: '#fa755a',
-      iconColor: '#fa755a'
-    }
-  }
-};
-
-var CardFormUI = function CardFormUI(props) {
+var StripeRedirectFormUI = function StripeRedirectFormUI(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
-  var error = props.error,
-      loading = props.loading,
-      handleSubmit = props.handleSubmit,
-      handleChange = props.handleChange;
+  var paymethods = props.paymethods,
+      handleSubmitPaymentMethod = props.handleSubmitPaymentMethod;
+
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
+  var _useForm = (0, _reactHookForm.useForm)(),
+      handleSubmit = _useForm.handleSubmit,
+      register = _useForm.register,
+      errors = _useForm.errors,
+      formState = _useForm.formState;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -74,16 +67,42 @@ var CardFormUI = function CardFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.FormStripe, {
-    onSubmit: handleSubmit
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormRow, null, /*#__PURE__*/_react.default.createElement(_reactStripeJs.CardElement, {
-    options: CARD_ELEMENT_OPTIONS,
-    onChange: handleChange
-  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, error)), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormRedirect, {
+    onSubmit: handleSubmit(handleSubmitPaymentMethod)
+  }, /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')), /*#__PURE__*/_react.default.createElement("select", {
+    name: "type",
+    ref: register({
+      required: true
+    })
+  }, /*#__PURE__*/_react.default.createElement("option", {
+    value: ""
+  }, t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')), (paymethods === null || paymethods === void 0 ? void 0 : paymethods.length) > 0 && paymethods.map(function (paymethod, i) {
+    return /*#__PURE__*/_react.default.createElement("option", {
+      key: i,
+      value: paymethod.value
+    }, paymethod.name);
+  })), errors.type && errors.type.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('FIELD_REQUIRED', 'This field is required'))), /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('ACCOUNT_HOLDER', 'Account holder')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    name: "name",
+    defaultValue: user === null || user === void 0 ? void 0 : user.name,
+    placeholder: t('TYPE_ACCOUNT_HOLDER', 'Type an Account holder'),
+    ref: register({
+      required: true
+    }),
+    autoComplete: "off"
+  }), errors.name && errors.name.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('FIELD_REQUIRED', 'This field is required'))), /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    name: "email",
+    type: "email",
+    defaultValue: user === null || user === void 0 ? void 0 : user.email,
+    placeholder: t('TYPE_AN_EMAIL', 'Type an email'),
+    ref: register({
+      required: true
+    }),
+    autoComplete: "off"
+  }), errors.email && errors.email.type === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('FIELD_REQUIRED', 'This field is required'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
-    disabled: loading
-  }, loading ? t('LOADING', 'Loading...') : t('ADD_CARD', 'Add card')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    disabled: formState.isSubmitting
+  }, formState.isSubmitting ? t('LOADING', 'Loading...') : t('OK', 'OK'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
@@ -94,12 +113,12 @@ var CardFormUI = function CardFormUI(props) {
   }));
 };
 
-var CardForm = function CardForm(props) {
-  var cardFormProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: CardFormUI
+var StripeRedirectForm = function StripeRedirectForm(props) {
+  var stripeRedirectFormProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: StripeRedirectFormUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.CardForm, cardFormProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.StripeRedirectForm, stripeRedirectFormProps);
 };
 
-exports.CardForm = CardForm;
+exports.StripeRedirectForm = StripeRedirectForm;

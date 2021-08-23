@@ -21,7 +21,7 @@ var PaymentMethodsContainer = _styledComponents.default.div(_templateObject || (
 
 exports.PaymentMethodsContainer = PaymentMethodsContainer;
 
-var PaymentMethodsList = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n\n  #select-input {\n    width: 100%;\n    background: #F8F9FA;\n    border-radius: 7.6px;\n\n    > div: first-child {\n      display: flex;\n      justify-content: space-between;\n    }\n\n    #list {\n      width: 100%;\n    }\n  }\n"])));
+var PaymentMethodsList = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n\n  #select-input {\n    width: 100%;\n    background-color: #F8F9FA !important;\n    border-color: #f8f9fa;\n    border-radius: 7.6px;\n    height: 44px;\n\n    > div: first-child {\n      display: flex;\n      justify-content: space-between;\n      height: 44px;\n      font-size: 14px;\n    }\n\n    #list {\n      width: 100%;\n      background-color: #F8F9FA !important;\n      border-color: #f8f9fa;\n      border-radius: 7.6px;\n    }\n  }\n"])));
 
 exports.PaymentMethodsList = PaymentMethodsList;
 
@@ -44,7 +44,7 @@ var PayCardSelected = _styledComponents.default.div(_templateObject6 || (_templa
 
 exports.PayCardSelected = PayCardSelected;
 
-var CardItemContent = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  font-weight: bold;\n\n  .checks svg {\n    color: ", ";\n    font-size: 22px;\n  }\n\n  .brand svg {\n    font-size: 26px;\n  }\n\n  > * {\n    margin-right: 10px\n    ", "\n  }\n"])), function (props) {
+var CardItemContent = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  font-weight: bold;\n\n  .checks svg {\n    color: ", ";\n    font-size: 22px;\n  }\n\n  .brand img {\n    width: 24px;\n    height: 20px;\n  }\n\n  > * {\n    margin-right: 10px\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme2;

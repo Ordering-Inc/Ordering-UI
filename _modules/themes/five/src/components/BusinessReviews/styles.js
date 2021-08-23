@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SearchContainer = exports.ReviewItemContent = exports.ReviewItemHeader = exports.ReviewTime = exports.ReviewsMarkPoint = exports.ReviewsProgressBar = exports.ReviewsProgressContent = exports.ReviewsProgressWrapper = exports.ReviewsHeaderWrapper = exports.SkeletonContainer = exports.ReviewsNotFound = exports.Review = exports.Content = exports.WrapperSelect = exports.ReviewOf = exports.BusinessReviewsContainer = void 0;
+exports.SearchContainer = exports.ReviewItemContent = exports.ReviewItemHeader = exports.ReviewTime = exports.ReviewsMarkPoint = exports.ReviewsProgressBar = exports.ReviewsProgressContent = exports.ReviewsProgressWrapper = exports.ReviewsHeaderWrapper = exports.SkeletonContainer = exports.ReviewsNotFound = exports.Review = exports.Content = exports.ReviewOf = exports.BusinessReviewsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -25,40 +25,40 @@ var ReviewOf = _styledComponents.default.div(_templateObject2 || (_templateObjec
 
 exports.ReviewOf = ReviewOf;
 
-var WrapperSelect = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 95%;\n  margin: 10px 0px;\n  > div {\n    width: 100%;\n  }\n  @media (min-width: 480px){\n    width: 45%;\n    display: none;\n  }\n"])));
-
-exports.WrapperSelect = WrapperSelect;
-
-var Content = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n\n  display: flex;\n  flex-direction: column;\n  \n  h3{\n    display: none;\n  }\n\n  @media (min-width: 480px){\n    h3 {\n      display: block;\n      color: ", ";\n      margin: 0px;\n      svg{\n        font-size: 26px;\n        vertical-align: text-top;\n      }\n    }\n  }\n"])), function (props) {
+var Content = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n\n  display: flex;\n  flex-direction: column;\n  \n  h3{\n    display: none;\n  }\n\n  @media (min-width: 480px){\n    h3 {\n      display: block;\n      color: ", ";\n      margin: 0px;\n      svg{\n        font-size: 26px;\n        vertical-align: text-top;\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
 exports.Content = Content;
 
-var Review = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 10px 0;\n  @media (min-width: 480px){\n    margin: 20px 0;\n  }\n"])));
+var Review = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 10px 0;\n  @media (min-width: 480px){\n    margin: 20px 0;\n  }\n"])));
 
 exports.Review = Review;
 
-var ReviewsNotFound = _styledComponents.default.h2(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin: 65px 0;\n  font-size: 14px;\n  color: #B1BCCC;\n  text-align: center;\n"])));
+var ReviewsNotFound = _styledComponents.default.h2(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 65px 0;\n  font-size: 14px;\n  color: #B1BCCC;\n  text-align: center;\n"])));
 
 exports.ReviewsNotFound = ReviewsNotFound;
 
-var SkeletonContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    flex: 1;\n\n    > div{\n      display: flex;\n      width: 100%;\n      justify-content: space-between;\n      align-items: center;\n    }\n"])));
+var SkeletonContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    flex: 1;\n\n    > div{\n      display: flex;\n      width: 100%;\n      justify-content: space-between;\n      align-items: center;\n    }\n"])));
 
 exports.SkeletonContainer = SkeletonContainer;
 
-var ReviewsHeaderWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    font-size: 30px;\n    color: ", ";\n    margin-right: 13px;\n    ", "\n  }\n  h2 {\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
+var ReviewsHeaderWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding-left: 30px;\n  ", "\n\n  svg {\n    font-size: 30px;\n    color: ", ";\n    margin-right: 13px;\n    ", "\n  }\n  h2 {\n    font-weight: 600;\n    font-size: 24px;\n    margin: 10px 0;\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
   var _props$theme;
 
-  return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.colors.primary;
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    padding-right: 30px;\n    padding-left: 0;\n  "])));
 }, function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n       margin-left: 13px;\n       margin-right: 0;\n    "])));
+  return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.primary;
 }, function (props) {
   var _props$theme3;
 
-  return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.darkTextColor;
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n       margin-left: 13px;\n       margin-right: 0;\n    "])));
+}, function (props) {
+  var _props$theme4;
+
+  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.colors.darkTextColor;
 }, function (_ref) {
   var noReviews = _ref.noReviews;
   return noReviews && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    svg {\n      color: #B1BCCC;\n    }\n  "])));
@@ -67,9 +67,9 @@ var ReviewsHeaderWrapper = _styledComponents.default.div(_templateObject8 || (_t
 exports.ReviewsHeaderWrapper = ReviewsHeaderWrapper;
 
 var ReviewsProgressWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  p {\n    margin-top: 0;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
-  var _props$theme4;
+  var _props$theme5;
 
-  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.colors.darkTextColor;
+  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.colors.darkTextColor;
 });
 
 exports.ReviewsProgressWrapper = ReviewsProgressWrapper;
@@ -78,11 +78,7 @@ var ReviewsProgressContent = _styledComponents.default.div(_templateObject12 || 
 
 exports.ReviewsProgressContent = ReviewsProgressContent;
 
-var ReviewsProgressBar = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  height: 4px;\n  border-radius: 50px;\n  background: ", ";\n"])), function (props) {
-  var _props$theme5;
-
-  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.colors.darkTextColor;
-});
+var ReviewsProgressBar = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  height: 4px;\n  border-radius: 50px;\n  background: #344050;\n"])));
 
 exports.ReviewsProgressBar = ReviewsProgressBar;
 

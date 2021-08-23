@@ -74,11 +74,19 @@ var CartInfo = function CartInfo(props) {
     events.emit('go_to_page', data);
   };
 
-  var OrderTypeSelectorUI = function OrderTypeSelectorUI(props) {
+  var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
+    var _configs$order_types_;
+
     var handleChangeOrderType = props.handleChangeOrderType,
         typeSelected = props.typeSelected,
         orderTypes = props.orderTypes;
-    return /*#__PURE__*/_react.default.createElement(_styles.DeliveryItems, null, orderTypes && orderTypes.map(function (orderType) {
+    var configTypes = (configs === null || configs === void 0 ? void 0 : (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : _configs$order_types_.value.split('|').map(function (value) {
+      return Number(value);
+    })) || [];
+    var filteredOrderTypes = configTypes ? orderTypes.filter(function (type) {
+      return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
+    }) : orderTypes;
+    return /*#__PURE__*/_react.default.createElement(_styles.DeliveryItems, null, filteredOrderTypes && filteredOrderTypes.map(function (orderType) {
       return /*#__PURE__*/_react.default.createElement(_styles.Item, {
         key: orderType.value,
         onClick: function onClick() {
@@ -89,13 +97,13 @@ var CartInfo = function CartInfo(props) {
     }));
   };
 
-  var OrderTypeSelector = function OrderTypeSelector(props) {
+  var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
     var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
         _useLanguage4 = _slicedToArray(_useLanguage3, 2),
         t = _useLanguage4[1];
 
     var orderTypeProps = _objectSpread(_objectSpread({}, props), {}, {
-      UIComponent: OrderTypeSelectorUI,
+      UIComponent: OrderTypeSelectorHeaderUI,
       orderTypes: props.orderTypes || [{
         value: 1,
         itemcontent: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DELIVERY', 'Delivery'))
@@ -107,10 +115,10 @@ var CartInfo = function CartInfo(props) {
         itemcontent: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('EAT_IN', 'Eat in'))
       }, {
         value: 4,
-        itemcontent: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVE_THRU', 'Drive thru'))
+        itemcontent: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('CURBSIDE', 'Curbside'))
       }, {
         value: 5,
-        itemcontent: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('CURBSIDE', 'Curbside'))
+        itemcontent: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVE_THRU', 'Drive thru'))
       }]
     });
 
@@ -139,7 +147,7 @@ var CartInfo = function CartInfo(props) {
     }
   }, !businessName ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('SELECT_STORE', 'Select Store')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessName), /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SubTitle, null, t('DELIVERY_TYPE', 'Delivery type'), ':'), /*#__PURE__*/_react.default.createElement("div", {
     className: "order-types"
-  }, /*#__PURE__*/_react.default.createElement(OrderTypeSelector, null))));
+  }, /*#__PURE__*/_react.default.createElement(OrderTypeSelectorHeader, null))));
 };
 
 exports.CartInfo = CartInfo;

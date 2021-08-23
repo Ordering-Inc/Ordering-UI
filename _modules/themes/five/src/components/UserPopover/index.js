@@ -174,10 +174,10 @@ var UserPopover = function UserPopover(props) {
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineMenu.default, {
     className: "menu-list"
-  }), /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.UserImgWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.RoundMark, null), /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
     src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  })), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, options && options.length > 0 && options.map(function (option, i) {

@@ -17,10 +17,6 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _styles = require("./styles");
 
-var _Select = require("../../styles/Select");
-
-var _AiOutlineStar = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineStar"));
-
 var _BsFillStarFill = _interopRequireDefault(require("@meronex/icons/bs/BsFillStarFill"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -67,23 +63,6 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
   var _useTheme = (0, _ThemeContext.useTheme)(),
       _useTheme2 = _slicedToArray(_useTheme, 1),
       theme = _useTheme2[0];
-
-  var values = ['all', 1, 2, 3, 4, 5];
-  var options = reviewsList.loading ? [] : values.map(function (value) {
-    if (value === 'all') {
-      return {
-        value: value,
-        content: value.toUpperCase(),
-        showOnSelected: value.toUpperCase()
-      };
-    } else {
-      return {
-        value: value,
-        content: value,
-        showOnSelected: value
-      };
-    }
-  });
 
   var handleOnChange = function handleOnChange(evt) {
     if (evt.target.value === '') handleClickOption('all');else handleClickOption(evt.target.value);
@@ -138,18 +117,7 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
     style: {
       right: '0'
     }
-  }, t('GREAT', 'Great')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperSelect, null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    options: options,
-    defaultValue: options[0].value,
-    onChange: function onChange(val) {
-      return handleClickOption(val);
-    },
-    notAsync: true,
-    InitialIcon: _AiOutlineStar.default
-  }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 200,
-    height: 30
-  })), /*#__PURE__*/_react.default.createElement(_styles.Content, {
+  }, t('GREAT', 'Great')))), /*#__PURE__*/_react.default.createElement(_styles.Content, {
     id: "content"
   }, !reviewsList.loading ? reviewsList === null || reviewsList === void 0 ? void 0 : reviewsList.reviews.map(function (review) {
     return /*#__PURE__*/_react.default.createElement(_styles.Review, {

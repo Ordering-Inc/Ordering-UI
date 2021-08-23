@@ -56,7 +56,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       isCartOnProductsList = props.isCartOnProductsList,
       handleClearProducts = props.handleClearProducts,
       handleStoreRedirect = props.handleStoreRedirect,
-      handleCartOpen = props.handleCartOpen;
+      handleCartOpen = props.handleCartOpen,
+      isStore = props.isStore;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -163,6 +164,13 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       events.off('cart_product_updated', handleCartProductUpdated);
     };
   }, []);
+
+  var handleChangeStore = function handleChangeStore() {
+    events.emit('go_to_page', {
+      page: 'search'
+    });
+  };
+
   (0, _react.useEffect)(function () {
     handleCartOpen && handleCartOpen(!!setActive);
   }, [setActive]);
@@ -185,19 +193,22 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
     className: "info"
-  }, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("div", null, handleStoreRedirect && !isCartOnProductsList && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("div", null, handleStoreRedirect && !isCartOnProductsList && !isStore && /*#__PURE__*/_react.default.createElement("span", {
     ref: businessStore,
     onClick: function onClick() {
       return handleStoreRedirect(business === null || business === void 0 ? void 0 : business.slug);
     },
     className: "go-store"
-  }, t('GO_TO_STORE', 'Go to store')), !isClosed && !!isProducts && !isCartPending && /*#__PURE__*/_react.default.createElement("span", {
+  }, t('GO_TO_STORE', 'Go to store')), !isClosed && !!isProducts && !isCartPending && !isStore && /*#__PURE__*/_react.default.createElement("span", {
     ref: businessDelete,
     onClick: function onClick() {
       return handleClearProducts();
     },
     className: "clear-cart"
-  }, t('CLEAR_CART', 'Clear cart')))), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement(_styles.TimeInfo, null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement(_styles.TimeInfo, null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))), !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
+  }, t('CLEAR_CART', 'Clear cart')), isStore && /*#__PURE__*/_react.default.createElement("span", {
+    onClick: handleChangeStore,
+    className: "change-store"
+  }, t('CHANGE_STORE', 'Change store')))), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement(_styles.TimeInfo, null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement(_styles.TimeInfo, null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))), !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
     className: "total",
     isCartOnProductsList: isCartOnProductsList
   }, isValidProducts && orderTotal > 0 && /*#__PURE__*/_react.default.createElement("p", null, parsePrice(orderTotal)), /*#__PURE__*/_react.default.createElement("p", null, t('CART_TOTAL', 'Total'))), isClosed && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {

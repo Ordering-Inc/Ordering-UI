@@ -30,7 +30,7 @@ var CardContainer = _styledComponents.default.div(_templateObject || (_templateO
   return (props.theme.colors.backgroundPage === '#FFF' || props.theme.colors.backgroundPage === '#FFFFFF') && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n  "])));
 }, function (_ref2) {
   var isCartOnProductsList = _ref2.isCartOnProductsList;
-  return isCartOnProductsList ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    @media (min-width: 993px) {\n      width: calc(50% - 40px);\n    }\n  "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(50% - 40px);\n    }\n\n    @media (min-width: 993px) {\n      width: calc(33% - 40px);\n    }\n  "])));
+  return isCartOnProductsList ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    @media (min-width: 993px) {\n      width: calc(50% - 40px);\n    }\n  "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(49% - 40px);\n    }\n\n    @media (min-width: 993px) {\n      width: calc(33% - 40px);\n    }\n  "])));
 });
 
 exports.CardContainer = CardContainer;

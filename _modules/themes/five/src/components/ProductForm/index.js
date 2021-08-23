@@ -135,6 +135,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       tabValue = _useState6[0],
       setTabValue = _useState6[1];
 
+  var productContainerRef = (0, _react.useRef)(null);
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
   var closeModal = function closeModal() {
@@ -207,6 +208,21 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     setTabValue(value);
   };
 
+  (0, _react.useEffect)(function () {
+    if (document.getElementById("".concat(tabValue))) {
+      var top = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop + 350;
+      var scrollElement = document.querySelector('.popup-dialog');
+
+      if (windowSize.width >= 1200) {
+        scrollElement = productContainerRef.current;
+      }
+
+      scrollElement.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      });
+    }
+  }, [tabValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -216,7 +232,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
-    className: "product-container"
+    className: "product-container",
+    ref: productContainerRef
   }, loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -258,7 +275,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     className: "price-wrapper"
   }, /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total)), /*#__PURE__*/_react.default.createElement("span", {
     className: "price-discount"
-  }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+  }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, {
+    id: "all"
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "all",
@@ -281,7 +300,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleChangeTabValue('extra');
     },
     borderBottom: true
-  }, t('EXTRA', 'Extra')))), (tabValue === 'ingredients' || tabValue === 'all') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
+  }, t('EXTRA', 'Extra')))), /*#__PURE__*/_react.default.createElement("div", {
+    id: "ingredients"
+  }, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
     isProductSoldout: isSoldOut || maxProductQuantity <= 0
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
@@ -290,7 +311,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       state: productCart.ingredients["id:".concat(ingredient === null || ingredient === void 0 ? void 0 : ingredient.id)],
       onChange: handleChangeIngredientState
     });
-  }))), (tabValue === 'extra' || tabValue === 'all') && (product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    id: "extra"
+  }, product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
     return extra.options.map(function (option) {
       var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {

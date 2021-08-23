@@ -42,7 +42,7 @@ var AddressItem = _styledComponents.default.li(_templateObject4 || (_templateObj
 
 exports.AddressItem = AddressItem;
 
-var AddressItemActions = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  a {\n    display: flex;\n    cursor: pointer;\n    margin: 0px 5px;\n    font-size: 30px;\n    \n    svg {\n      color: #B1BCCC;\n    }\n  }\n  a.disabled {\n    svg {\n      color: #CCC;\n    }\n    pointer-events: none;\n  }\n"])));
+var AddressItemActions = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  a {\n    display: flex;\n    cursor: pointer;\n    margin: 0px 5px;\n    font-size: 30px;\n    \n    svg {\n      color: #B1BCCC;\n    }\n  }\n  a:last-child {\n    svg {\n      color: #D83520;\n    }\n  }\n  a.disabled {\n    svg {\n      color: #CCC;\n    }\n    pointer-events: none;\n  }\n"])));
 
 exports.AddressItemActions = AddressItemActions;
 

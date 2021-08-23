@@ -19,7 +19,7 @@ var _BusinessItemAccordion = require("../BusinessItemAccordion");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _Modal = require("../Modal");
 
@@ -79,7 +79,8 @@ var CartUI = function CartUI(props) {
       isForceOpenCart = props.isForceOpenCart,
       isCartOnProductsList = props.isCartOnProductsList,
       handleCartOpen = props.handleCartOpen,
-      isCustomMode = props.isCustomMode;
+      isCustomMode = props.isCustomMode,
+      isStore = props.isStore;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -226,7 +227,7 @@ var CartUI = function CartUI(props) {
   };
 
   var checkOutBtnClick = function checkOutBtnClick() {
-    if (isCustomMode) handleClickCheckout();else setOpenUpselling(true);
+    handleClickCheckout();
   };
 
   (0, _react.useEffect)(function () {
@@ -259,7 +260,8 @@ var CartUI = function CartUI(props) {
     isCartOnProductsList: isCartOnProductsList,
     handleClearProducts: handleClearProducts,
     handleStoreRedirect: handleStoreRedirect,
-    handleCartOpen: handleCartOpen
+    handleCartOpen: handleCartOpen,
+    isStore: isStore
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,

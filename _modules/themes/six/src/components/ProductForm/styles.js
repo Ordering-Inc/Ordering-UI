@@ -11,7 +11,7 @@ var _polished = require("polished");
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -71,7 +71,7 @@ var ProductComment = _styledComponents.default.div(_templateObject10 || (_templa
 
 exports.ProductComment = ProductComment;
 
-var ProductActions = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 10px;\n  position: fixed;\n  bottom: 76px;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;\n  box-sizing: border-box;\n  margin-top: 20px;\n  &.isIndividualBusinessCart-ProductAction {\n    bottom: 0;\n    @media (min-width: 1024px) {\n      padding: 0;\n    }\n    \n  }\n  div.incdec-control {\n    width: 30%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    svg {\n      width: 25px;\n      height: 25px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.7;\n  }\n  svg.disabled {\n    pointer-events: none;\n  }\n  button.add {\n    width: 48%;\n    padding: 5px 10px;\n    margin: 0px 0px;\n    position: relative;\n    \n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 769px) {\n    position: relative;\n    bottom: initial;\n    right: initial;\n  }\n  @media (min-width: 1024px) {\n    position: sticky;\n    top: 100%;\n    background-color: transparent;\n    box-shadow: none;\n    justify-content: flex-end;\n    div.incdec-control {\n      svg {\n        width: 30px;\n        height: 30px;\n        cursor: pointer;\n      }\n    }\n    div:last-child {\n      width: 70%;\n      button {\n        width: 100%;\n      }\n    }\n  }\n"])));
+var ProductActions = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 10px;\n  position: fixed;\n  bottom: 76px;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;\n  box-sizing: border-box;\n  margin-top: 20px;\n  &.isIndividualBusinessCart-ProductAction {\n    bottom: 0;\n    @media (min-width: 1024px) {\n      padding: 0;\n    }\n    \n  }\n  div.incdec-control {\n    width: 30%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    svg {\n      width: 25px;\n      height: 25px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.7;\n  }\n  svg.disabled {\n    pointer-events: none;\n  }\n  button.add {\n    width: 48%;\n    padding: 5px 10px;\n    margin: 0px 0px;\n    position: relative;\n    \n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 769px) {\n    position: relative;\n    bottom: initial;\n    right: initial;\n    background-color: transparent;\n    box-shadow: none;\n  }\n  @media (min-width: 1024px) {\n    position: sticky;\n    top: 100%;\n    justify-content: flex-end;\n    div.incdec-control {\n      svg {\n        width: 30px;\n        height: 30px;\n        cursor: pointer;\n      }\n    }\n    div:last-child {\n      width: 70%;\n      button {\n        width: 100%;\n      }\n    }\n  }\n"])));
 
 exports.ProductActions = ProductActions;
 
@@ -97,7 +97,7 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject15 || (_te
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ShareWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: -40px;\n  left: -5px;\n  ", "\n  width: fit-content;\n  height: fit-content;\n  z-index: 20;\n  cursor: pointer;\n  \n  .product-share {    \n    .a2a_vertical_style {\n      top: 36px;\n      left: 0;\n      display: flex;\n      flex-direction: column;\n      width: 40px;\n      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    left: -8px;\n    ", "\n  }\n\n  @media (min-width: 1024px) {\n    left: -25px;\n    top: -8px;\n    ", "\n  }\n\n  /* @media (min-width: 1024px) {\n    position: relative;\n    top: 15px;\n    left: 30px;\n    ", "\n  } */\n\n\n\n\n"])), function (props) {
+var ShareWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: -40px;\n  left: -5px;\n  ", "\n  width: fit-content;\n  height: fit-content;\n  z-index: 20;\n  cursor: pointer;\n  \n  .product-share {    \n    .a2a_vertical_style {\n      top: 36px;\n      left: 0;\n      display: flex;\n      flex-direction: column;\n      width: 40px;\n      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    left: -8px;\n    ", "\n  }\n\n  @media (min-width: 1024px) {\n    left: -25px;\n    top: -8px;\n    ", "\n  }\n\n"])), function (props) {
   var _props$theme3;
 
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    right: 10px;\n  "])));
@@ -109,10 +109,6 @@ var ShareWrapper = _styledComponents.default.div(_templateObject17 || (_template
   var _props$theme5;
 
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      left: unset; \n      right: -25px;\n    "])));
-}, function (props) {
-  var _props$theme6;
-
-  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      left: unset; \n      right: 30px;\n    "])));
 });
 
 exports.ShareWrapper = ShareWrapper;
