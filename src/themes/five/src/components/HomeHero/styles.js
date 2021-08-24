@@ -77,7 +77,7 @@ export const Title = styled.h1`
   margin: 0px;
   text-align: left;
   font-weight: 500;
-  font-size: 65px;
+  font-size: 50px;
   letter-spacing: 0px;
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #2c2e33;
@@ -86,7 +86,11 @@ export const Title = styled.h1`
   ${props => props.theme?.rtl && css`
       text-align: right;
   `}
-  
+
+  @media (min-width: 400px) {
+    font-size: 65px;
+  }
+
   @media (min-width: 576px) {
     font-size: 72px;
   }

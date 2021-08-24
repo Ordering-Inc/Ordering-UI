@@ -399,8 +399,9 @@ export const Header = (props) => {
         {authModalOpen && !auth && (
           <Modal
             open={authModalOpen}
-            onClose={() => closeAuthModal()}
+            onRemove={() => closeAuthModal()}
             width='50%'
+            authModal
           >
             {modalPageToShow === 'login' && (
               <LoginForm
