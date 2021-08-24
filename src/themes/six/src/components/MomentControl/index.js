@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
 import { MomentOption, useLanguage, useUtils, useConfig, useOrder } from 'ordering-components'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
@@ -35,6 +35,10 @@ const MomentControlUI = (props) => {
     handleChangeTime,
     isCheckout
   } = props
+
+  console.log('isAsap')
+  console.log(isAsap)
+
   const [{ configs }] = useConfig()
   const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()
@@ -76,6 +80,18 @@ const MomentControlUI = (props) => {
   })
   const Dateplaceholder = <OptionItem>{t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')}</OptionItem>
   const Timeplaceholder = <OptionItem>{t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')}</OptionItem>
+
+  const [showTimeOption, setShowTimeOption] = useState(false)
+
+  const handleCheckbox = () => {
+    console.log('checkbox click')
+    if (showTimeOption) {
+      handleAsap()
+      setShowTimeOption(false)
+    } else {
+      setShowTimeOption(true)
+    }
+  }
 
   return (
     <div id='moment_control'>
@@ -145,15 +161,14 @@ const MomentControlUI = (props) => {
           <CheckOutPageSelectTimePicker>
             <CheckBoxItem className='asap-select'>
               <span>
-                {isAsap ? (
+                {(isAsap && !showTimeOption) ? (
                   <MdCheckBox />
                 ) : (
                   <MdCheckBoxOutlineBlank disabled />
                 )}
               </span>
               <AsapLabel
-                selected={isAsap}
-                onClick={() => !orderState.loading && handleAsap()}
+                onClick={handleCheckbox}
               >
                 {windowSize.width > 410 ? (
                   t('ASAP', 'As soon as possible')
@@ -162,25 +177,29 @@ const MomentControlUI = (props) => {
                 )}
               </AsapLabel>
             </CheckBoxItem>
-            <SubTitle>
-              {t('PREORDER', 'Preorder')}
-            </SubTitle>
-            <PreorderPicker>
-              <Select
-                placeholder={Dateplaceholder}
-                options={DateOption}
-                onChange={(date) => handleChangeDate(date)}
-                isFullWidth
-                defaultValue={dateSelected}
-              />
-              <Select
-                placeholder={Timeplaceholder}
-                options={TimeOption}
-                isFullWidth
-                onChange={(time) => handleChangeTime(time)}
-                defaultValue={timeSelected}
-              />
-            </PreorderPicker>
+            {showTimeOption && (
+              <>
+                <SubTitle>
+                  {t('PREORDER', 'Preorder')}
+                </SubTitle>
+                <PreorderPicker>
+                  <Select
+                    placeholder={Dateplaceholder}
+                    options={DateOption}
+                    onChange={(date) => handleChangeDate(date)}
+                    isFullWidth
+                    defaultValue={dateSelected}
+                  />
+                  <Select
+                    placeholder={Timeplaceholder}
+                    options={TimeOption}
+                    isFullWidth
+                    onChange={(time) => handleChangeTime(time)}
+                    defaultValue={timeSelected}
+                  />
+                </PreorderPicker>
+              </>
+            )}
           </CheckOutPageSelectTimePicker>
         </>
       )}

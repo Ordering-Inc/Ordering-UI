@@ -79,7 +79,7 @@ export const Selected = styled.div`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  z-index: 11;
+  /* z-index: 11; */
   @media (min-width: 381px) {
     padding-left: 15px;
     padding-right: 15px;

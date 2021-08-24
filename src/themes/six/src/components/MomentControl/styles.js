@@ -197,6 +197,7 @@ export const CheckBoxItem = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 10px;
   svg {
     color: ${props => props.theme.colors.primary};
     font-size: 25px;
@@ -212,12 +213,5 @@ export const CheckBoxItem = styled.div`
 
 export const AsapLabel = styled.span`
   margin: 0 10px 7px;
-  ${({ selected }) => selected
-    ? css`
-      color: ${props => props.theme.colors.primary};
-    `
-    : css`
-      color: #000000;
-    `
-  }
+  color: #000000;
 `
