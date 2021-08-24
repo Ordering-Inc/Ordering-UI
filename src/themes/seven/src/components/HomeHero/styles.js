@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 export const HeroContainerStyled = styled.div`
   width: 100%;
-  height: 62.562132vh;
+  height: 43.562132vh;
 
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
@@ -70,27 +70,42 @@ export const Title = styled.h1`
   text-shadow: 0px 3px 6px #00000029;
   opacity: 1;
   font-weight: bold;
-  font-size: 48px;
+  font-size: 36px;
   line-height: 48px;
-
   ${props => props.theme?.rtl && css`
       text-align: right;
   `}
+
+  @media (min-width: 768px) {
+    font-size: 48px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 40px;
+  }
+
 `
 
 export const Slogan = styled.p`
   margin: 0px;
   text-align: left;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 34px;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
   margin-bottom: 15px;
-
   ${props => props.theme?.rtl && css`
       text-align: right;
   `}
+
+  @media (min-width: 768px) {
+    font-size: 23px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 24px;
+  }
 `
 
 export const WrapInput = styled.label`

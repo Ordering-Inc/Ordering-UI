@@ -43,15 +43,19 @@ export const HeaderOption = (props) => {
         {variant === 'address' && (
           <AddressInput>
             <HiOutlineLocationMarker id='icon' />
-            {addressState || t('SELECT_AN_ADDRESS', 'Select an address')}
+            <span>
+              {addressState || t('SELECT_AN_ADDRESS', 'Select an address')}
+            </span>
           </AddressInput>
         )}
         {variant === 'moment' && (
           <DeliverytimeInput>
             <FaRegClock id='icon' />
-            {momentState
-              ? parseDate(momentState, { outputFormat: configs?.dates_moment_format?.value })
-              : t('ASAP_ABBREVIATION', 'ASAP')}
+            <span>
+              {momentState
+                ? parseDate(momentState, { outputFormat: configs?.dates_moment_format?.value })
+                : t('ASAP_ABBREVIATION', 'ASAP')}
+            </span>
           </DeliverytimeInput>
         )}
       </Container>

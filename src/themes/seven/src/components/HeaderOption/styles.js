@@ -42,15 +42,16 @@ export const Container = styled.div`
 `
 
 export const AddressInput = styled.div`
-  border: 1px solid ${props => props.theme.colors.borderColor};
-  font-size: .86rem;
-  line-height: 26px;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  box-sizing: border-box;
   display: flex;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   background-color: ${props => props.theme.colors.secundaryBackground};
+
   ${props => props.theme?.rtl
     ? css`
       border-left: none;
@@ -59,43 +60,52 @@ export const AddressInput = styled.div`
       border-right: none;
     `
   }
+  span {
+    width: 75%;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+  }
   svg {
-      color: ${props => props.theme.colors.primary};
-      margin-right: 5px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 5px;
-        margin-right: 0px;
-      `}
-    }
+    margin: 0 5px;
+    font-size: .9rem;
+    color: ${props => props.theme.colors.primary};
+  }
 
   @media (min-width: 1200px) {
-    padding: 11px 16px;
+    height: 48px;
     font-size: 1rem;
   }
 `
 
 export const DeliverytimeInput = styled.div`
-  border: 1px solid ${props => props.theme.colors.borderColor};
-  font-size: .86rem;
-  line-height: 26px;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  box-sizing: border-box;
   display: flex;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   background-color: ${props => props.theme.colors.secundaryBackground};
-
+  span {
+    width: 75%;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+  }
   svg {
-    margin-right: 15px;
+    margin: 0 5px;
+    font-size: .86rem;
     color: ${props => props.theme.colors.primary};
-    ${props => props.theme?.rtl && css`
-      margin-left: 15px;
-      margin-right: 0px;
-    `}
   }
 
   @media (min-width: 1200px) {
-    padding: 11px 19px;
+    height: 48px;
     font-size: 1rem;
   }
 `

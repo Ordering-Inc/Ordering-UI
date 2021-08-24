@@ -33,8 +33,4 @@ export const ErrorText = styled.p`
   margin: 10px 0px 0px;
   color: #D81212;
   font-size: 14px;
-  font-weight: bold;
-  @media (min-width: 381px) {
-    font-size: 20px;
-  }
 `

@@ -84,8 +84,9 @@ export const ProductMeta = styled.div`
   padding: 0 20px;
   margin: 25px 0 15px;
   h1 {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 700;
     color: #263238;
     margin-top: 0px;
     width: 100%;
@@ -181,6 +182,8 @@ export const ActionItem = styled.div`
     width: 55%;
     padding: 5px 10px;
     position: relative;
+    overflow: hidden;
+    white-space: nowrap;
     &.soldout {
       pointer-events: none;
     }

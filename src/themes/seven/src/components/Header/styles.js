@@ -38,16 +38,16 @@ export const LogoHeader = styled.div`
     margin: 0;
     vertical-align: middle;
     @media (min-width: 768px) {
-      width: 150px;
+      width: 120px;
       height: 45px;
       margin-top: 10px;
     }
     @media (min-width: 1024px) {
-      width: 180px;
+      width: 150px;
       height: auto;
     }
     @media (min-width: 1200px) {
-      width: 200px;
+      width: 180px;
       height: auto;
     }
   }
@@ -107,6 +107,11 @@ export const MenuLink = styled.a`
   cursor: pointer;
   text-transform: uppercase;
   padding: 6px 11px;
+  max-width: 115px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
 
   ${({ highlight }) => highlight && css`
     background-color: ${props => props.theme.colors.primary};
@@ -174,13 +179,25 @@ export const UserEdit = styled.div`
 export const CenterHeader = styled.div`
   display: flex;
   align-items: center;
+  #select-input {
+    height: 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 13vw;
+    font-size: .86rem;
+  }
   @media (min-width: 1024px) {
     width: 50%;
     justify-content: space-around;
   }
   @media (min-width: 1200px) {
-    width: 60%;
     justify-content: space-between;
+    #select-input {
+      height: 48px;
+      width: auto;
+    }
   }
 `
 export const HeaderOptions = styled.div`
@@ -196,5 +213,32 @@ export const HeaderOptions = styled.div`
 export const OrderTypes = styled.div`
   #list {
     width: 100%;
+    top: 33px;
+      @media (min-width: 1200px) {
+      top: 40px;
+    }
+  }  
+`
+
+export const PopoverWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 96%;
+  align-items: center;
+  margin: 10px auto 0;
+  padding: 5px 0;
+  box-sizing: border-box;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
+  
+  .address-popover {
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
   }
+  .moment-popover {
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+
 `

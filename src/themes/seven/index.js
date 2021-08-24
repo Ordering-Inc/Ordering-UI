@@ -15,12 +15,14 @@ import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
 import { Footer } from './src/components/Footer'
+import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
 import { HomeHero } from './src/components/HomeHero'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LanguageSelector } from './src/components/LanguageSelector'
 import { LoginForm } from './src/components/LoginForm'
+import { MyOrders } from './src/components/MyOrders'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
@@ -29,11 +31,13 @@ import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { ProductShare } from './src/components/ProductShare'
 import { SearchBar } from './src/components/SearchBar'
+import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { UserDetails } from './src/components/UserDetails'
 import { UserFormDetails } from './src/components/UserFormDetails'
 import { UserPopover } from './src/components/UserPopover'
+import { UserProfileForm } from './src/components/UserProfileForm'
 import { Buttons } from './src/styles/Buttons'
 import { Inputs } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
@@ -58,12 +62,14 @@ export {
   Checkout,
   DriverTips,
   Footer,
+  ForgotPasswordForm,
   Header,
   HeaderOption,
   HomeHero,
   InputPhoneNumber,
   LanguageSelector,
   LoginForm,
+  MyOrders,
   OrderDetails,
   OrderTypeSelectorHeader,
   PaymentOptionCash,
@@ -72,11 +78,13 @@ export {
   ProductItemAccordion,
   ProductShare,
   SearchBar,
+  SidebarMenu,
   SignUpForm,
   SingleProductCard,
   UserDetails,
   UserFormDetails,
   UserPopover,
+  UserProfileForm,
   // styles
   Buttons,
   Inputs,

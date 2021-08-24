@@ -43,30 +43,8 @@ export const Header = styled.div`
     justify-content: space-between;
     background-color: transparent;
     box-sizing: border-box;
-    padding: 11px 50px;
-  }
-`
-
-export const HeaderImg = styled.div`
-  img {
-    display: none;
-
-    @media (min-width: 678px) {
-      display: block;
-      height: 200px;
-      object-fit: cover;
-      width: 100%;
-      border-radius: 10px;
-      aspect-ratio: attr(width) / attr(height)
-
-      ${props => props.theme?.rtl && css`
-        transform: scaleX(-1);
-      `}
-    }
-
-    @media (min-width: 768px) {
-      height: 340px;
-    }
+    padding: 7px 16px;
+    font-size: .86rem;
   }
 `
 
@@ -91,12 +69,6 @@ export const HeaderInfo = styled.div`
   }
 `
 
-export const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0px;
-`
-
 export const OrderBusiness = styled.div`
   display: flex;
   justify-content: space-between;
@@ -105,43 +77,6 @@ export const OrderBusiness = styled.div`
   margin: 10px 0px 20px;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 `
-
-export const BusinessWrapper = styled.div`
-  width: 90%;
-  display: flex;
-`
-
-export const LogoWrapper = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
-`
-
-const BusinessLogoStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  min-height: 75px;
-  border-radius: 10px;
-`
-
-export const BusinessLogo = (props) => {
-  return (
-    <BusinessLogoStyled
-      {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
-    >
-      {props.children}
-    </BusinessLogoStyled>
-  )
-}
 
 export const BusinessInfo = styled.div`
   display: flex;
@@ -169,9 +104,11 @@ export const ActionsBlock = styled.div`
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
+
   svg {
     font-size: 20px;
     cursor: pointer;
+    color: ${props => props.theme.colors.primary};
   }
 
   @media (min-width: 380px) {
@@ -238,28 +175,6 @@ export const OrderStatus = styled.div`
     margin-top: 16px;
     color: #000000;
     text-transform: uppercase;
-  }
-`
-
-export const StatusImage = styled.div`
-  img {
-    display: flex;
-    width: 70px;
-    height: 70px;
-    box-sizing: border-box;
-    position: relative;
-    background-repeat: no-repeat, repeat;
-    background-size: contain;
-    object-fit: contain;
-    border-radius: 10px;
-    margin-top: 15px;
-  }
-
-  @media (min-width: 410px) {
-    img {
-      width: 80px;
-      height: 80px;
-    }
   }
 `
 
@@ -332,25 +247,36 @@ export const Map = styled.div`
 export const OrderDriver = styled(OrderCustomer)`
   justify-content: space-between;
   align-items: center;
+  margin-top: 15px;
 `
 
 export const WrapperDriver = styled.div`
   display: flex;
   width: 100%;
+  align-items: center;
 
   div.photo {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    width: 48px;
+    height: 47px;
+    border-radius: 7px;
+    overflow: hidden;
 
     svg {
-      width: 70px;
-      height: 70px;
-      margin: 0px 10px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 10px;
-        margin-right: 0;
-      `}
+      width: 48px;
+      height: 47px;
+    }
+  }
+
+  div.name {
+    margin: 0 10px;
+    p {
+      font-size: 16px;
+      line-height: 26px;
+      color: #212629;
     }
   }
 
@@ -413,29 +339,6 @@ export const ReviewsAction = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.primary};
 `
 
-export const FootActions = styled.div`
-  margin-top: 50px;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: ${props => props.theme.colors.primary};
-    cursor: pointer;
-    font-weight: bold;
-  }
-  svg {
-    margin-left: 5px;
-    transform: rotate(90deg)
-    ${props => props.theme?.rtl && css`
-      margin-right: 5px;
-      margin-left: 0px;
-      transform: rotate(-90deg);
-    `}
-  }
-`
 export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
   border-radius: 16px;
@@ -460,108 +363,6 @@ export const SkeletonBlockWrapp = styled.div`
   align-items: center;
   margin-top: 20px;
   line-height: 40px;
-`
-
-export const ShareOrder = styled.div`
-  display: flex;
-  margin: 0 0 20px;
-  justify-content: space-between;
-  z-index: 1;
-
-  h1 {
-    font-size: 15px;
-    margin: 0px;
-  }
-
-  p {
-    font-size: 13px;
-    margin: 0px;
-  }
-
-  button {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    font-size: 14px;
-    align-items: center;
-    background: ${props => props.theme.colors.backgroundPage};
-
-    svg {
-      left: 0;
-      margin-right: 6px;
-      color: ${props => props.theme.colors.primary};
-    }
-
-    &:hover {
-      svg {
-        color: #FFFFFF;
-      }
-    }
-  }
-
-  div.text {
-    width: 60%;
-  }
-
-  div.wrap {
-    display: flex;
-    align-items: center;
-
-    & > div:first-child {
-      width: 100%;
-      position: relative;
-      div {
-        right: 0px;
-        left: initial;
-        top: 35px;
-      }
-    }
-  }
-
-  @media (min-width: 1201px) {
-    div.wrap {
-      & > div:first-child {
-        left: 0;
-      }
-    }
-  }
-
-  @media (min-width: 768px) {
-    div.wrap {
-      width: 30%;
-    }
-
-    h1 {
-      font-size: 20px;
-    }
-
-    p {
-      font-size: 18px;
-    }
-
-    button {
-      font-size: 18px;
-      width: 100%;
-      svg {
-        position: absolute;
-        margin-left: 10px;
-      }
-    }
-  }
-
-  @media (min-width: 425px) {
-    div.text {
-      width: 70%;
-    }
-
-    h1 {
-      font-size: 18px;
-    }
-
-    p {
-      font-size: 15px;
-    }
-  }
 `
 
 export const MessagesIcon = styled.span`
