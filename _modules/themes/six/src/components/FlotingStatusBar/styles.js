@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var StatusFloting = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: -1px;\n  left: 0;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  width: 100%;  \n  padding: 12px 0 14px;\n  color: #fff;\n  background-color: ", ";\n  box-sizing: border-box;\n"])), function (props) {
+var StatusFloting = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: -1px;\n  left: 0;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  width: 100%;  \n  padding: 12px 0 14px;\n  color: #fff;\n  background-color: ", ";\n  box-sizing: border-box;\n  z-index: 50;\n"])), function (props) {
   return props.theme.colors.primaryDarkBackground;
 });
 

@@ -68,7 +68,7 @@ var WrapLogo = _styledComponents.default.div(_templateObject7 || (_templateObjec
 
 exports.WrapLogo = WrapLogo;
 
-var CardLogoStyled = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 75px;\n  border-radius: 100px;\n  border: 1px solid ", ";\n  \n"])), function (props) {
+var CardLogoStyled = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 75px;\n  min-width: 75px;\n  width: 75px;\n  height: 75px;\n  border-radius: 100px;\n  border: 1px solid ", ";\n  \n"])), function (props) {
   return props.theme.colors.primary;
 });
 

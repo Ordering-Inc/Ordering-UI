@@ -39,7 +39,7 @@ var WrappSumarry = _styledComponents.default.div(_templateObject2 || (_templateO
 
 exports.WrappSumarry = WrappSumarry;
 
-var WrappContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px 5%;\n  box-sizing: border-box;\n \n  @media (min-width: 1024px) {\n    width: 60vw;\n    height: calc(100vh - 75px);\n    overflow-y: scroll;\n  }\n"])));
+var WrappContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px 5%;\n  box-sizing: border-box;\n \n  @media (min-width: 1024px) {\n    width: 60vw;\n    height: calc(100vh - 75px);\n    overflow-y: scroll;\n  }\n\n  .selected-option {\n    z-index: 0;\n  }\n"])));
 
 exports.WrappContainer = WrappContainer;
 
