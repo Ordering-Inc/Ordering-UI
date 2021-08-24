@@ -18,7 +18,7 @@ export const PaymentMethodsList = styled.div`
     border-radius: 7.6px;
     height: 44px;
 
-    > div: first-child {
+    > div:first-child {
       display: flex;
       justify-content: space-between;
       height: 44px;
