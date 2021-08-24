@@ -39,6 +39,10 @@ export const WrappContainer = styled.div`
     height: calc(100vh - 75px);
     overflow-y: scroll;
   }
+
+  .selected-option {
+    z-index: 0;
+  }
 `
 export const WrapperUserDetails = styled.div`
   width: 100%;

@@ -118,6 +118,9 @@ const CardLogoStyled = styled.div`
   background-position: center;
   object-fit: cover;
   min-height: 75px;
+  min-width: 75px;
+  width: 75px;
+  height: 75px;
   border-radius: 100px;
   border: 1px solid ${props => props.theme.colors.primary};
   
