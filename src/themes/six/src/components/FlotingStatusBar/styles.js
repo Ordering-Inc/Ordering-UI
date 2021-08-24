@@ -12,6 +12,7 @@ export const StatusFloting = styled.div`
   color: #fff;
   background-color: ${props => props.theme.colors.primaryDarkBackground};
   box-sizing: border-box;
+  z-index: 50;
 `
 
 export const BusinessPicker = styled.div`
