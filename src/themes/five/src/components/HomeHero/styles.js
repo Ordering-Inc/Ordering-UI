@@ -125,7 +125,7 @@ export const WrapInput = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 50px;
   display: flex;
-  aligin-items: center;
+  align-items: center;
   margin-bottom: 27px;
 
   ${({ withIcon }) => withIcon && css`
