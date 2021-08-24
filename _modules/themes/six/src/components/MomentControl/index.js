@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.MomentControl = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
@@ -22,6 +24,10 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _Select = require("../../styles/Select");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -55,6 +61,8 @@ var MomentControlUI = function MomentControlUI(props) {
       handleChangeDate = props.handleChangeDate,
       handleChangeTime = props.handleChangeTime,
       isCheckout = props.isCheckout;
+  console.log('isAsap');
+  console.log(isAsap);
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -109,6 +117,22 @@ var MomentControlUI = function MomentControlUI(props) {
   var Dateplaceholder = /*#__PURE__*/_react.default.createElement(_styles.OptionItem, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date'));
 
   var Timeplaceholder = /*#__PURE__*/_react.default.createElement(_styles.OptionItem, null, t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time'));
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      showTimeOption = _useState2[0],
+      setShowTimeOption = _useState2[1];
+
+  var handleCheckbox = function handleCheckbox() {
+    console.log('checkbox click');
+
+    if (showTimeOption) {
+      handleAsap();
+      setShowTimeOption(false);
+    } else {
+      setShowTimeOption(true);
+    }
+  };
 
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
@@ -165,14 +189,11 @@ var MomentControlUI = function MomentControlUI(props) {
     }));
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CheckOutPageSelectTimePicker, null, /*#__PURE__*/_react.default.createElement(_styles.CheckBoxItem, {
     className: "asap-select"
-  }, /*#__PURE__*/_react.default.createElement("span", null, isAsap ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, isAsap && !showTimeOption ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
   })), /*#__PURE__*/_react.default.createElement(_styles.AsapLabel, {
-    selected: isAsap,
-    onClick: function onClick() {
-      return !orderState.loading && handleAsap();
-    }
-  }, windowSize.width > 410 ? t('ASAP', 'As soon as possible') : t('ASAP_ABBREVIATION', 'ASAP'))), /*#__PURE__*/_react.default.createElement(_styles.SubTitle, null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.PreorderPicker, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    onClick: handleCheckbox
+  }, windowSize.width > 410 ? t('ASAP', 'As soon as possible') : t('ASAP_ABBREVIATION', 'ASAP'))), showTimeOption && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SubTitle, null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.PreorderPicker, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     placeholder: Dateplaceholder,
     options: DateOption,
     onChange: function onChange(date) {
@@ -188,7 +209,7 @@ var MomentControlUI = function MomentControlUI(props) {
       return handleChangeTime(time);
     },
     defaultValue: timeSelected
-  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

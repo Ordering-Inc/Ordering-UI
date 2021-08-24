@@ -9,7 +9,7 @@ exports.AsapLabel = exports.CheckBoxItem = exports.OptionItem = exports.Preorder
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -106,17 +106,12 @@ var OptionItem = _styledComponents.default.div(_templateObject23 || (_templateOb
 
 exports.OptionItem = OptionItem;
 
-var CheckBoxItem = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  svg {\n    color: ", ";\n    font-size: 25px;\n    &[disabled] {\n      color: #CBCBCB;\n    }\n  }\n\n  .asap-item-label {\n    margin: 0 10px 7px;\n  }\n"])), function (props) {
+var CheckBoxItem = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  margin-bottom: 10px;\n  svg {\n    color: ", ";\n    font-size: 25px;\n    &[disabled] {\n      color: #CBCBCB;\n    }\n  }\n\n  .asap-item-label {\n    margin: 0 10px 7px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
 exports.CheckBoxItem = CheckBoxItem;
 
-var AsapLabel = _styledComponents.default.span(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  margin: 0 10px 7px;\n  ", "\n"])), function (_ref4) {
-  var selected = _ref4.selected;
-  return selected ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
-    return props.theme.colors.primary;
-  }) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      color: #000000;\n    "])));
-});
+var AsapLabel = _styledComponents.default.span(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  margin: 0 10px 7px;\n  color: #000000;\n"])));
 
 exports.AsapLabel = AsapLabel;
