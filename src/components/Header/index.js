@@ -71,6 +71,7 @@ export const Header = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
@@ -182,7 +183,7 @@ export const Header = (props) => {
                 />
                 {onlineStatus && windowSize.width > 820 && (
                   <>
-                    {!isCustomerMode && (configState?.configs?.preorder_status_enabled?.value || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+                    {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                       <MomentPopover
                         open={openPopover.moment}
                         onClick={() => handleTogglePopover('moment')}
@@ -268,7 +269,7 @@ export const Header = (props) => {
                 onClose={() => handleClosePopover('addresses')}
                 isHome={isHome}
               />
-              {!isCustomerMode && (configState?.configs?.preorder_status_enabled?.value || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <MomentPopover
                   open={openPopover.moment}
                   onClick={() => handleTogglePopover('moment')}
@@ -285,7 +286,7 @@ export const Header = (props) => {
                 onClick={(variant) => openModal(variant)}
                 isHome={isHome}
               />
-              {!isCustomerMode && (configState?.configs?.preorder_status_enabled?.value || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
                   variant='moment'
                   momentState={orderState?.options?.moment}
