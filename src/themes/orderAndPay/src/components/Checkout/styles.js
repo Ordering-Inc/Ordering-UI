@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const WrapperLeftContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 40px 20px;
+  padding: 0px 20px 40px 20px;
 
   @media (min-width: 769px) {
     width: 55%;
@@ -91,7 +91,6 @@ export const CartContainer = styled(PaymentMethodContainer)`
 `
 
 export const WrapperPlaceOrderButton = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   margin: 50px 0px 10px;
@@ -198,4 +197,7 @@ export const DriverTipDivider = styled.div`
     width: calc(100% + 80px);
     margin-left: -40px;
   }
+`
+export const ModalIcon = styled.div`
+  margin: 15px;
 `

@@ -118,3 +118,16 @@ export const InputWrapper = styled.div`
     width: 100%;
   }
 `
+
+export const Table = styled.div`
+ display: flex;
+ flex-direction: column;
+`
+
+export const PlaceName = styled.div`
+  opacity: ${({ isDisabled }) => isDisabled ? 0.5 : 1};
+`
+
+export const PlaceNumber = styled.div`
+
+`

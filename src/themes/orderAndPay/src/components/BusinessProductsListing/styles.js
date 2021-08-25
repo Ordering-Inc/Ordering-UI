@@ -141,3 +141,17 @@ export const Title = styled.h1`
   color: ${props => props.theme.colors.darkTextColor};
   margin-bottom: 18px;
 `
+
+export const ModalIcon = styled.div`
+  display: flex;
+  align-items: center;
+  width: 65%;
+  img{
+    margin: 0 5px;
+    width: 40px;
+    height: 40px;
+  }
+  h1{
+    font-size: 1em;
+  }
+`
