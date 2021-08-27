@@ -214,10 +214,16 @@ export const BusinessInformationUI = (props) => {
                             <ScheduleBlock key={i}>
                               <h4>{daysOfWeek[i]}</h4>
                               {schedule.enabled ? (
-                                <>
-                                  <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
-                                  <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
-                                </>
+                                schedule.lapses.map( (time, k) => (
+                                  <React.Fragment key={k}>
+                                    <p>{scheduleFormatted(time.open)}</p>
+                                    <p style={{
+                                      borderBottom: '2px solid',
+                                      borderBottomColor: theme.colors.primary,
+                                      marginBottom: 10
+                                    }} >{scheduleFormatted(time.close)}</p>
+                                  </React.Fragment>
+                                ))
                               ) : (
                                 <p style={{ fontWeight: 500 }}>{t('CLOSED_TODAY', 'Closed Today')}</p>
                               )}
