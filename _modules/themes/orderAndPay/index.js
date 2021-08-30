@@ -15,18 +15,6 @@ Object.defineProperty(exports, "AutoScroll", {
     return _AutoScroll.AutoScroll;
   }
 });
-Object.defineProperty(exports, "BusinessBasicInformation", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessBasicInformation.BusinessBasicInformation;
-  }
-});
-Object.defineProperty(exports, "BusinessInformation", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessInformation.BusinessInformation;
-  }
-});
 Object.defineProperty(exports, "BusinessItemAccordion", {
   enumerable: true,
   get: function get() {
@@ -247,10 +235,6 @@ Object.defineProperty(exports, "Select", {
 var _AppleLogin = require("./src/components/AppleLogin");
 
 var _AutoScroll = require("./src/components/AutoScroll");
-
-var _BusinessBasicInformation = require("./src/components/BusinessBasicInformation");
-
-var _BusinessInformation = require("./src/components/BusinessInformation");
 
 var _BusinessItemAccordion = require("./src/components/BusinessItemAccordion");
 
