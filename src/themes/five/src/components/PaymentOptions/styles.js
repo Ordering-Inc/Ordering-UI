@@ -18,7 +18,7 @@ export const PaymentMethodsList = styled.div`
     border-radius: 7.6px;
     height: 44px;
 
-    > div: first-child {
+    > div:first-child {
       display: flex;
       justify-content: space-between;
       height: 44px;
@@ -30,6 +30,7 @@ export const PaymentMethodsList = styled.div`
       background-color: #F8F9FA !important;
       border-color: #f8f9fa;
       border-radius: 7.6px;
+      box-shadow: 0px 10px 12px 1px #e6e6e6;
     }
   }
 `
