@@ -25,45 +25,6 @@ export const OrderTypeWrapper = styled.span`
     }
   }
 `
-export const SelectOne = styled.div`
-  display: inline-block;
-  height: 34px;
-  border-radius: 34px;
-  line-height: 34px;
-  border-width: 0px;
-  border-style: solid;
-  background-color: ${({ isHome }) => isHome ? 'rgba(247,247,247,0.3)' : '#CCC'} !important;
-  color: ${({ isHome }) => isHome ? '#FFF' : '#333'} !important;
-  position: relative;
-`
-export const Selected = styled.div`
-  padding-left: 9px;
-  padding-right: 9px;
-  font-size: 13px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  z-index: 11;
-  @media (min-width: 381px) {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-`
-export const Header = styled.div`
-  flex: 1;
-  svg {
-    font-size: 18px;
-  }
-`
 export const SelectedOption = styled.p`
   margin: 0;
   max-width: 60px;
