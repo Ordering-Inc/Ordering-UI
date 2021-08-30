@@ -6,7 +6,6 @@ export const OrderTypeSelectorContainer = styled.div``
 export const OrderTypeListItemContainerStyled = styled.div`
   border-radius: 7.6px;
   margin-bottom: 25px;
-  background: #000000;
   padding: 30px;
   cursor: pointer;
 
