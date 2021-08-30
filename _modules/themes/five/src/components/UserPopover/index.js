@@ -52,16 +52,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var optionsDefault = [{
   name: 'search',
   pathname: '/explore',
-  displayName: 'explore'
+  displayName: 'explore',
+  key: 'explore'
 }, {
   name: 'orders',
   pathname: '/profile/orders',
-  displayName: 'orders'
+  displayName: 'orders',
+  key: 'orders'
 }];
 var extraOptions = [{
   name: 'profile',
   pathname: '/profile',
-  displayName: 'view account'
+  displayName: 'view account',
+  key: 'view_account'
 }];
 
 var UserPopover = function UserPopover(props) {
@@ -187,7 +190,7 @@ var UserPopover = function UserPopover(props) {
       onClick: function onClick() {
         return handleGoToPage(option.name);
       }
-    }, t((option.displayName || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)));
+    }, t((option.key || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)));
   }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ExtraOptions, null, extraOptions && extraOptions.length > 0 && extraOptions.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
       key: i,
@@ -195,7 +198,7 @@ var UserPopover = function UserPopover(props) {
       onClick: function onClick() {
         return handleGoToPage(option.name);
       }
-    }, t((option.displayName || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)));
+    }, t((option.key || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)));
   }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), withLogout && /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {
     onClose: props.onClose
   })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {

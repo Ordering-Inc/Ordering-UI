@@ -177,7 +177,17 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   }, businessSchedule.map(function (schedule, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ScheduleBlock, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("h4", null, daysOfWeek[i]), schedule.enabled ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, scheduleFormatted(schedule.lapses[0].open)), /*#__PURE__*/_react.default.createElement("p", null, scheduleFormatted(schedule.lapses[0].close))) : /*#__PURE__*/_react.default.createElement("p", {
+    }, /*#__PURE__*/_react.default.createElement("h4", null, daysOfWeek[i]), schedule.enabled ? schedule.lapses.map(function (time, k) {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: k
+      }, /*#__PURE__*/_react.default.createElement("p", null, scheduleFormatted(time.open)), /*#__PURE__*/_react.default.createElement("p", {
+        style: {
+          borderBottom: '2px solid',
+          borderBottomColor: theme.colors.primary,
+          marginBottom: 10
+        }
+      }, scheduleFormatted(time.close)));
+    }) : /*#__PURE__*/_react.default.createElement("p", {
       style: {
         fontWeight: 500
       }

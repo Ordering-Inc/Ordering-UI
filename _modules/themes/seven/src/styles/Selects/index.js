@@ -49,11 +49,11 @@ var Options = _styledComponents.default.div(_templateObject5 || (_templateObject
 
 exports.Options = Options;
 
-var Selected = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex: 1;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  color: ", ";\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  z-index: 11;\n  @media (min-width: 381px) {\n    padding-left: 15px;\n    padding-right: 15px;\n  }\n\n  ", "\n"])), function (props) {
+var Selected = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex: 1;\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  color: ", ";\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  z-index: 11;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (_ref5) {
   var fullwidth = _ref5.fullwidth;
-  return fullwidth && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    width: 100%;\n    box-sizing: border-box;\n    justify-content: space-between;\n  "])));
+  return fullwidth && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    width: 100%;\n    box-sizing: border-box;\n    justify-content: space-between;\n    padding-left: 15px;\n    padding-right: 15px;\n  "])));
 });
 
 exports.Selected = Selected;

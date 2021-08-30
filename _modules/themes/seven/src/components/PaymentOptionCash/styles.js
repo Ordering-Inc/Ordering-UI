@@ -27,6 +27,6 @@ var WrapperInput = _styledComponents.default.div(_templateObject3 || (_templateO
 
 exports.WrapperInput = WrapperInput;
 
-var ErrorText = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 10px 0px 0px;\n  color: #D81212;\n  font-size: 14px;\n  font-weight: bold;\n  @media (min-width: 381px) {\n    font-size: 20px;\n  }\n"])));
+var ErrorText = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 10px 0px 0px;\n  color: #D81212;\n  font-size: 14px;\n"])));
 
 exports.ErrorText = ErrorText;

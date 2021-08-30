@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.InputWrapper = exports.ModalIcon = exports.TypeContainer = exports.Logo = exports.OrderTypeListTitle = exports.OrderStartWrapper = exports.OrderTypeDescription = exports.OrderTypeTitle = exports.OrderTypeListItemContainer = exports.OrderTypeListItemContainerStyled = exports.OrderTypeSelectorContainer = void 0;
+exports.PlaceNumber = exports.PlaceName = exports.Table = exports.InputWrapper = exports.ModalIcon = exports.TypeContainer = exports.Logo = exports.OrderTypeListTitle = exports.OrderStartWrapper = exports.OrderTypeDescription = exports.OrderTypeTitle = exports.OrderTypeListItemContainer = exports.OrderTypeListItemContainerStyled = exports.OrderTypeSelectorContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84,3 +84,18 @@ exports.ModalIcon = ModalIcon;
 var InputWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  input{\n    width: 100%;\n  }\n"])));
 
 exports.InputWrapper = InputWrapper;
+
+var Table = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n display: flex;\n flex-direction: column;\n"])));
+
+exports.Table = Table;
+
+var PlaceName = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  opacity: ", ";\n"])), function (_ref3) {
+  var isDisabled = _ref3.isDisabled;
+  return isDisabled ? 0.5 : 1;
+});
+
+exports.PlaceName = PlaceName;
+
+var PlaceNumber = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n\n"])));
+
+exports.PlaceNumber = PlaceNumber;

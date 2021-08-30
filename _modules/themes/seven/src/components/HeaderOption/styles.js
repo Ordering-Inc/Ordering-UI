@@ -9,7 +9,7 @@ exports.DeliverytimeInput = exports.AddressInput = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -38,7 +38,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var AddressInput = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  font-size: .86rem;\n  line-height: 26px;\n  text-transform: uppercase;\n  padding: 6px 12px;\n  box-sizing: border-box;\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  ", "\n  svg {\n      color: ", ";\n      margin-right: 5px;\n      ", "\n    }\n\n  @media (min-width: 1200px) {\n    padding: 11px 16px;\n    font-size: 1rem;\n  }\n"])), function (props) {
+var AddressInput = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 40px;\n  box-sizing: border-box;\n  overflow: hidden;\n  border: 1px solid ", ";\n  background-color: ", ";\n\n  ", "\n  span {\n    width: 75%;\n    white-space: nowrap;\n    display: block;\n    overflow: hidden;\n    text-transform: capitalize;\n    text-overflow: ellipsis;\n  }\n  svg {\n    margin: 0 5px;\n    font-size: .9rem;\n    color: ", ";\n  }\n\n  @media (min-width: 1200px) {\n    height: 48px;\n    font-size: 1rem;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.secundaryBackground;
@@ -48,24 +48,16 @@ var AddressInput = _styledComponents.default.div(_templateObject7 || (_templateO
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      border-left: none;\n    "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      border-right: none;\n    "])));
 }, function (props) {
   return props.theme.colors.primary;
-}, function (props) {
-  var _props$theme3;
-
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0px;\n      "])));
 });
 
 exports.AddressInput = AddressInput;
 
-var DeliverytimeInput = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  font-size: .86rem;\n  line-height: 26px;\n  text-transform: uppercase;\n  padding: 6px 12px;\n  box-sizing: border-box;\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n\n  svg {\n    margin-right: 15px;\n    color: ", ";\n    ", "\n  }\n\n  @media (min-width: 1200px) {\n    padding: 11px 19px;\n    font-size: 1rem;\n  }\n"])), function (props) {
+var DeliverytimeInput = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 40px;\n  box-sizing: border-box;\n  overflow: hidden;\n  border: 1px solid ", ";\n  background-color: ", ";\n  span {\n    width: 75%;\n    white-space: nowrap;\n    display: block;\n    overflow: hidden;\n    text-transform: capitalize;\n    text-overflow: ellipsis;\n  }\n  svg {\n    margin: 0 5px;\n    font-size: .86rem;\n    color: ", ";\n  }\n\n  @media (min-width: 1200px) {\n    height: 48px;\n    font-size: 1rem;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.secundaryBackground;
 }, function (props) {
   return props.theme.colors.primary;
-}, function (props) {
-  var _props$theme4;
-
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n      margin-right: 0px;\n    "])));
 });
 
 exports.DeliverytimeInput = DeliverytimeInput;

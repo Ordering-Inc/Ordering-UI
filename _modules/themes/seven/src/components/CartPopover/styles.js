@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PopoverArrow = exports.PopoverBody = exports.HeaderItem = void 0;
+exports.Header = exports.PopoverArrow = exports.PopoverBody = exports.HeaderItem = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -34,3 +34,9 @@ exports.PopoverBody = PopoverBody;
 var PopoverArrow = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 0;\n  height: 0;\n  border-left: 7px solid transparent;\n  border-right: 7px solid transparent;\n  border-bottom: 8px solid #FFF;\n  top: -8px;\n"])));
 
 exports.PopoverArrow = PopoverArrow;
+
+var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: relative;  \n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n\n  h2 {\n    font-weight: bold;\n    font-size: 24px;\n    line-height: 34px;\n    color: ", "\n  }\n\n  svg {\n    position: absolute;\n    top: 7px;\n    right: 7px;\n    cursor: pointer;\n    font-size: 20px;\n    font-weight: bold;\n    transition: 0.1s ease-in-out;\n    &:hover {\n      transform: scale(1.05);\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.Header = Header;

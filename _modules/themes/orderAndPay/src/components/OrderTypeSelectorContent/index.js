@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrderTypeSelectorContent = exports.OrderTypeSelectorContentUI = void 0;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
@@ -25,11 +27,13 @@ var _Inputs = require("../../../../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Confirm = require("../../../../../../src/components/Confirm");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -38,6 +42,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -57,7 +65,9 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
   var handleChangeOrderType = props.handleChangeOrderType,
       orderTypes = props.orderTypes,
       onClose = props.onClose,
-      logo = props.logo;
+      logo = props.logo,
+      handleBusinessPage = props.handleBusinessPage,
+      businessId = props.businessId;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -72,17 +82,220 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       orderTypeSelected = _useState2[0],
       setOrderTypeSelected = _useState2[1];
 
+  var _useApi = (0, _orderingComponents.useApi)(),
+      _useApi2 = _slicedToArray(_useApi, 1),
+      ordering = _useApi2[0];
+
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      token = _useSession2[0].token;
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isLoading = _useState4[0],
+      setIsLoading = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      alertState = _useState6[0],
+      setAlertState = _useState6[1]; // const [pagination, setPagination] = useState({})
+
+
+  var _useState7 = (0, _react.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      places = _useState8[0],
+      setPlaces = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      placeId = _useState10[0],
+      setPlaceId = _useState10[1];
+
   var handleClickOrderType = function handleClickOrderType(_ref) {
     var value = _ref.value,
-        text = _ref.text;
+        text = _ref.text,
+        label = _ref.label;
+
+    if (!label) {
+      handleBusinessPage();
+      return;
+    }
+
     onClose && onClose();
     handleChangeOrderType && handleChangeOrderType(value);
     setOrderTypeSelected({
       open: true,
-      type: text
+      type: text,
+      label: label
     });
   };
 
+  console.log(places);
+
+  var getPlaces = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var response, _yield$response$json, result, error;
+
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return fetch("".concat(ordering.root, "/business/").concat(businessId, "/places"));
+
+            case 3:
+              response = _context.sent;
+              _context.next = 6;
+              return response.json();
+
+            case 6:
+              _yield$response$json = _context.sent;
+              result = _yield$response$json.result;
+              error = _yield$response$json.error;
+
+              if (error) {
+                setAlertState({
+                  open: true,
+                  content: [result]
+                });
+              } else {
+                setPlaces(result.map(function (place) {
+                  return {
+                    name: place.name,
+                    id: place.id,
+                    enabled: place.enabled
+                  };
+                }));
+              }
+
+              _context.next = 15;
+              break;
+
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](0);
+              setAlertState({
+                open: true,
+                content: [_context.t0.message]
+              });
+
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 12]]);
+    }));
+
+    return function getPlaces() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var handleChangePlace = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+      var response, _yield$response$json2, result, error;
+
+      return _regenerator.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (placeId) {
+                _context2.next = 3;
+                break;
+              }
+
+              setAlertState({
+                open: true,
+                content: [t('PLACE_ID_REQURED', 'Place id is required')]
+              });
+              return _context2.abrupt("return");
+
+            case 3:
+              setIsLoading(true);
+              _context2.prev = 4;
+              _context2.next = 7;
+              return fetch("".concat(ordering.root, "/carts/change_place"), {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: "Bearer ".concat(token)
+                },
+                body: JSON.stringify({
+                  place_id: placeId,
+                  business_id: businessId
+                })
+              });
+
+            case 7:
+              response = _context2.sent;
+              _context2.next = 10;
+              return response.json();
+
+            case 10:
+              _yield$response$json2 = _context2.sent;
+              result = _yield$response$json2.result;
+              error = _yield$response$json2.error;
+
+              if (!(error && result[0] !== 'ERROR_YOU_HAVE_NOT_CART')) {
+                _context2.next = 17;
+                break;
+              }
+
+              setAlertState({
+                open: true,
+                content: [result]
+              });
+              _context2.next = 20;
+              break;
+
+            case 17:
+              _context2.next = 19;
+              return window.localStorage.setItem('place_id', placeId);
+
+            case 19:
+              handleBusinessPage();
+
+            case 20:
+              setIsLoading(false);
+              _context2.next = 26;
+              break;
+
+            case 23:
+              _context2.prev = 23;
+              _context2.t0 = _context2["catch"](4);
+              setAlertState({
+                open: true,
+                content: [_context2.t0.message]
+              });
+
+            case 26:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[4, 23]]);
+    }));
+
+    return function handleChangePlace() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
+  (0, _react.useEffect)(function () {
+    getPlaces();
+  }, []);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "order-type",
     style: {
@@ -107,7 +320,8 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       onClick: function onClick() {
         return handleClickOrderType({
           value: item.value,
-          text: item.text
+          text: item.text,
+          label: item.label
         });
       },
       active: (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === (item === null || item === void 0 ? void 0 : item.value)
@@ -127,14 +341,37 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
         open: false
       }));
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.type), /*#__PURE__*/_react.default.createElement("label", null, t('TABLE_NUMBER', 'Table number')), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    placeholder: "#"
+  })), /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.type), /*#__PURE__*/_react.default.createElement("label", null, orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.label), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    placeholder: "#",
+    onChange: function onChange(e) {
+      return setPlaceId(e.target.value);
+    },
+    type: "number"
+  })), /*#__PURE__*/_react.default.createElement(_styles.Table, null, /*#__PURE__*/_react.default.createElement("h2", null, t('AVAILABLE_PLACES', 'Available places')), places.map(function (place) {
+    return /*#__PURE__*/_react.default.createElement(_styles.PlaceName, {
+      key: place.id,
+      isDisabled: !place.enabled
+    }, place.name, " #", place.id);
   }))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     style: {
       width: '100%'
-    }
-  }, t('CONTINUE', 'Continue')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    },
+    onClick: handleChangePlace,
+    disabled: isLoading
+  }, t('CONTINUE', 'Continue')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('LOGIN', 'Login'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
@@ -148,7 +385,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
 exports.OrderTypeSelectorContentUI = OrderTypeSelectorContentUI;
 
 var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
-  var _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$delive, _theme$images3, _theme$images3$delive, _theme$images4, _theme$images4$delive, _theme$images5, _theme$images5$delive, _theme$images6, _theme$images6$delive;
+  var _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$delive, _theme$images3, _theme$images3$delive, _theme$images4, _theme$images4$delive, _theme$images5, _theme$images5$delive;
 
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
@@ -160,30 +397,27 @@ var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
     UIComponent: OrderTypeSelectorContentUI,
     logo: props.logo || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
     orderTypes: props.orderTypes || [{
-      value: 1,
-      text: t('DELIVERY', 'Delivery'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$delive = _theme$images2.deliveryTypes) === null || _theme$images2$delive === void 0 ? void 0 : _theme$images2$delive.delivery
-    }, {
       value: 2,
       text: t('PICKUP', 'Pickup'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$delive = _theme$images3.deliveryTypes) === null || _theme$images3$delive === void 0 ? void 0 : _theme$images3$delive.pickUp
+      image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$delive = _theme$images2.deliveryTypes) === null || _theme$images2$delive === void 0 ? void 0 : _theme$images2$delive.pickUp
     }, {
       value: 3,
       text: t('EAT_IN', 'Eat in'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$delive = _theme$images4.deliveryTypes) === null || _theme$images4$delive === void 0 ? void 0 : _theme$images4$delive.eatIn
+      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$delive = _theme$images3.deliveryTypes) === null || _theme$images3$delive === void 0 ? void 0 : _theme$images3$delive.eatIn,
+      label: t('TABLE_NUMBER', 'Table number')
     }, {
       value: 4,
       text: t('CURBSIDE', 'Curbside'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$delive = _theme$images5.deliveryTypes) === null || _theme$images5$delive === void 0 ? void 0 : _theme$images5$delive.curbside
+      image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$delive = _theme$images4.deliveryTypes) === null || _theme$images4$delive === void 0 ? void 0 : _theme$images4$delive.curbside,
+      label: t('Spot', 'Spot')
     }, {
       value: 5,
       text: t('DRIVE_THRU', 'Drive thru'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images6 = theme.images) === null || _theme$images6 === void 0 ? void 0 : (_theme$images6$delive = _theme$images6.deliveryTypes) === null || _theme$images6$delive === void 0 ? void 0 : _theme$images6$delive.driveThru
+      image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$delive = _theme$images5.deliveryTypes) === null || _theme$images5$delive === void 0 ? void 0 : _theme$images5$delive.driveThru
     }]
   });
 

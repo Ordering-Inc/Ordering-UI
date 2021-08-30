@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _BiCart = _interopRequireDefault(require("@meronex/icons/bi/BiCart"));
 
+var _AiOutlineClose = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineClose"));
+
 var _reactPopper = require("react-popper");
 
 var _styles = require("./styles");
@@ -64,6 +66,10 @@ var CartPopover = function CartPopover(props) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
+
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
@@ -167,7 +173,9 @@ var CartPopover = function CartPopover(props) {
     className: "cart-popover",
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h2", null, t('YOUR_CART', 'Your Cart')), /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, {
+    onClick: props.onClose
+  })), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
     isCartPopover: true,
     carts: props.carts,
     isOrderStateCarts: !!orderState.carts,
