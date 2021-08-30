@@ -238,13 +238,14 @@ export const Header = (props) => {
             <RightHeader>
               <Menu>
                 {
-                  !auth && windowSize.width > 870 && (
+                  !auth && windowSize.width > 920 && (
                     <>
-                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
                       {!isHideSignup && (
                         <MenuLink
                           onClick={() => handleOpenLoginSignUp('signup')}
                           highlight={1}
+                          style={{ whiteSpace: 'nowrap' }}
                           name='signup'
                         >
                           {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}

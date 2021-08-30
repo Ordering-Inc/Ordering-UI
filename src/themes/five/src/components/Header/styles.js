@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-// import { Select } from '../../styles/Selects'
 
 export const Header = styled.div`
   display: flex;
@@ -138,7 +137,7 @@ export const Menu = styled.div`
       width: 400px;
     }
 
-    > div: first-child {
+    > div:first-child {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -148,7 +147,7 @@ export const Menu = styled.div`
   .address-popover {
     flex-grow: 1;
     display: none;
-    > div: first-child {
+    > div:first-child {
       width: 100%;
     }
   }

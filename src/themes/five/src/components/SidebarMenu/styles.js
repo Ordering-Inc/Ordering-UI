@@ -12,7 +12,7 @@ export const Container = styled.div`
   `}
 
   ${({ auth }) => !auth && css`
-    @media (min-width: 871px) {
+    @media (min-width: 921px) {
       display: none;
     }
   `}
