@@ -6,7 +6,7 @@ import FaTruckPickup from '@meronex/icons/fa/FaTruckPickup'
 import MdcTruckDeliveryOutline from '@meronex/icons/mdc/MdcTruckDeliveryOutline'
 import AiFillShop from '@meronex/icons/ai/AiFillShop'
 import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
-import { Option, OrderTypeWrapper, SelectedOption, ContentOption } from './styles'
+import { Option, OrderTypeWrapper, SelectedOption, ContentOption, Selected, Header, SelectOne } from './styles'
 
 const OrderTypeSelectorHeaderUI = (props) => {
   const {
@@ -17,18 +17,29 @@ const OrderTypeSelectorHeaderUI = (props) => {
     orderTypes
   } = props
 
+  const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
   const defaultType = configTypes?.includes(typeSelected) ? null : configTypes?.[0]
-
+  const isOneOrderType = configTypes?.length === 1;
   return (
     <OrderTypeWrapper>
-      <Select
-        options={configTypes
-          ? orderTypes.filter(type => configTypes?.includes(type.value))
-          : orderTypes
-        }
-        defaultValue={defaultType || defaultValue || typeSelected}
-        onChange={(orderType) => handleChangeOrderType(orderType)}
-      />
+      { isOneOrderType ? (
+        <SelectOne isHome={isHome} >
+          <Selected>
+            <Header>
+            {orderTypes?.filter(type => configTypes?.includes(type.value))[0].content}
+            </Header>
+          </Selected>
+        </SelectOne>
+      ): (
+        <Select
+          options={configTypes
+            ? orderTypes.filter(type => configTypes?.includes(type.value))
+            : orderTypes
+          }
+          defaultValue={defaultType || defaultValue || typeSelected}
+          onChange={(orderType) => handleChangeOrderType(orderType)}
+          />
+      )}
     </OrderTypeWrapper>
   )
 }
