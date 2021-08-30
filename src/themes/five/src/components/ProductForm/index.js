@@ -224,34 +224,47 @@ const ProductOptionsUI = (props) => {
               </ProductFormTitle>
               <Divider />
               <ProductEdition>
-                <ProductTabContainer id='all'>
-                  <Tabs variant='primary'>
-                    <Tab
-                      key='all'
-                      active={tabValue === 'all'}
-                      onClick={() => handleChangeTabValue('all')}
-                      borderBottom
-                    >
-                      {t('ALL', 'All')}
-                    </Tab>
-                    <Tab
-                      key='ingredients'
-                      active={tabValue === 'ingredients'}
-                      onClick={() => handleChangeTabValue('ingredients')}
-                      borderBottom
-                    >
-                      {t('INGREDIENTS', 'ingredients')}
-                    </Tab>
-                    <Tab
-                      key='extra'
-                      active={tabValue === 'extra'}
-                      onClick={() => handleChangeTabValue('extra')}
-                      borderBottom
-                    >
-                      {t('EXTRA', 'Extra')}
-                    </Tab>
-                  </Tabs>
-                </ProductTabContainer>
+                {
+                  (product?.ingredients.length > 0 || product?.extras.length > 0) && (
+                    <ProductTabContainer id='all'>
+                      <Tabs variant='primary'>
+                        <Tab
+                          key='all'
+                          active={tabValue === 'all'}
+                          onClick={() => handleChangeTabValue('all')}
+                          borderBottom
+                        >
+                          {t('ALL', 'All')}
+                        </Tab>
+                        {
+                          product?.ingredients.length > 0 && (
+                            <Tab
+                              key='ingredients'
+                              active={tabValue === 'ingredients'}
+                              onClick={() => handleChangeTabValue('ingredients')}
+                              borderBottom
+                            >
+                              {t('INGREDIENTS', 'ingredients')}
+                            </Tab>
+                          )
+                        }
+                        {
+                          product?.extras.length > 0 && (
+                            <Tab
+                              key='extra'
+                              active={tabValue === 'extra'}
+                              onClick={() => handleChangeTabValue('extra')}
+                              borderBottom
+                            >
+                              {t('EXTRA', 'Extra')}
+                            </Tab>
+                          )
+                        }
+                      </Tabs>
+                    </ProductTabContainer>
+                  )
+                }
+
                 <div id='ingredients'>
                   {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                   <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
