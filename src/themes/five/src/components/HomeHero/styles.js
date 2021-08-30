@@ -151,7 +151,7 @@ export const WrapInput = styled.div`
     }
   `}
   
-  p{
+  p {
     color: ${props => props.theme.colors.darkTextColor};
     position: relative;
     margin: 0;
@@ -159,7 +159,9 @@ export const WrapInput = styled.div`
 
   svg {
     color: ${props => props.theme.colors.primary};
-    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
 
     ${props => props.theme?.rtl ? css`
       margin-left: 20px;
