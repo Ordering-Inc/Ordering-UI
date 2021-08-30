@@ -58,7 +58,7 @@ var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templat
 
 exports.ContentWrapper = ContentWrapper;
 
-var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 65px;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  text-shadow: 0px 3px 6px #2c2e33;\n  opacity: 1;\n\n  ", "\n  \n  @media (min-width: 576px) {\n    font-size: 72px;\n  }\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 50px;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  text-shadow: 0px 3px 6px #2c2e33;\n  opacity: 1;\n\n  ", "\n\n  @media (min-width: 400px) {\n    font-size: 65px;\n  }\n\n  @media (min-width: 576px) {\n    font-size: 72px;\n  }\n"])), function (props) {
   var _props$theme3;
 
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      text-align: right;\n  "])));
@@ -74,7 +74,7 @@ var Slogan = _styledComponents.default.p(_templateObject8 || (_templateObject8 =
 
 exports.Slogan = Slogan;
 
-var WrapInput = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  padding: 10px 25px;\n  background: #FFFFFF;\n  border: 1px solid #DEE2E6;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 50px;\n  display: flex;\n  aligin-items: center;\n  margin-bottom: 27px;\n\n  ", "\n  \n  p{\n    color: ", ";\n    position: relative;\n    margin: 0;\n  }\n\n  svg {\n    color: ", ";\n    font-size: 22px;\n\n    ", "\n\n  }\n"])), function (_ref2) {
+var WrapInput = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  padding: 10px 25px;\n  background: #FFFFFF;\n  border: 1px solid #DEE2E6;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 50px;\n  display: flex;\n  align-items: center;\n  margin-bottom: 27px;\n\n  ", "\n  \n  p {\n    color: ", ";\n    position: relative;\n    margin: 0;\n  }\n\n  svg {\n    color: ", ";\n    width: 22px;\n    height: 22px;\n    min-width: 22px;\n\n    ", "\n\n  }\n"])), function (_ref2) {
   var withIcon = _ref2.withIcon;
   return withIcon && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    width: calc(100% - 20px);\n    box-sizing: border-box;\n\n    &::before {\n      content: \"\";\n      position: absolute;\n      right: 5px;\n      top: 0;\n      bottom: 18px;\n      width: 15px;\n\n      ", "\n    }\n\n    @media (min-width: 1024px) {\n      width: calc(50% - 20px);\n    }\n  "])), function (props) {
     var _props$theme5;

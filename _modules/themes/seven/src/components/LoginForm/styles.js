@@ -120,7 +120,7 @@ var FormTitle = _styledComponents.default.div(_templateObject17 || (_templateObj
 
 exports.FormTitle = FormTitle;
 
-var FormInline = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  width: 100%;\n\n  button {\n    width: 100%;\n    padding: 5px;\n  }\n\n  .forgot {\n    span {\n      color: ", ";\n      width: 100%;\n    }\n\n    a {\n      position: absolute;\n      z-index: 10;\n      opacity: 0;\n      text-decoration: none;\n      width: 100%;\n    }\n  }\n\n  .phone_number {\n    width: 100%;\n  }\n\n  @media (min-width: 768px) {\n    width: 48.6795%;\n  }\n"])), function (props) {
+var FormInline = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  width: 100%;\n\n  button {\n    width: 100%;\n    padding: 5px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  .forgot {\n    span {\n      color: ", ";\n      width: 100%;\n    }\n\n    a {\n      position: absolute;\n      z-index: 10;\n      opacity: 0;\n      text-decoration: none;\n      width: 100%;\n    }\n  }\n\n  .phone_number {\n    width: 100%;\n  }\n\n  @media (min-width: 768px) {\n    width: 48.6795%;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

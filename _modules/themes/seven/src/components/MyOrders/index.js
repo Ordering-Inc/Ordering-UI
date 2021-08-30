@@ -9,9 +9,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styles = require("./styles");
 
-var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
+var _ProfileOptions = require("../UserProfileForm/ProfileOptions");
 
-var _OrdersOption = require("../OrdersOption");
+var _OrdersOption = require("../../../../../components/OrdersOption");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,10 +33,7 @@ var MyOrders = function MyOrders(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     activeOrders: true,
     horizontal: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
-    pastOrders: true,
-    horizontal: true
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, props)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -101,7 +101,7 @@ var CartContent = function CartContent(props) {
     width: "200px",
     height: "122px",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement("h1", null, t('CARTS_NOT_FOUND', 'You don\'t have carts available')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NO_PRODUCTS_TO_CART', 'You have no products added to the cart')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

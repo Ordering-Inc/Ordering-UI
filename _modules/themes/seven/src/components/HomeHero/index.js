@@ -19,9 +19,9 @@ var _styles = require("./styles");
 
 var _Modal = require("../../../../../components/Modal");
 
-var _AddressForm = require("../../../../../components/AddressForm");
+var _AddressForm = require("../AddressForm");
 
-var _AddressList = require("../../../../../components/AddressList");
+var _AddressList = require("../AddressList");
 
 var _Buttons = require("../../styles/Buttons");
 

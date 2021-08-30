@@ -215,7 +215,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       return setEdit(false);
     },
     isHiddenAddress: isHiddenAddress
-  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MY_SAVED_PLACES', 'My Saved places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SAVED_PLACES', 'Saved places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {

@@ -134,12 +134,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       passwordSee = _useState8[0],
       setPasswordSee = _useState8[1];
 
-  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
-
-  var _useState9 = (0, _react.useState)(false),
-      _useState10 = _slicedToArray(_useState9, 2),
-      isSignupBusiness = _useState10[0],
-      setIsSignupBusiness = _useState10[1];
+  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false; // const [isSignupBusiness, setIsSignupBusiness] = useState(false)
 
   var initParams = {
     client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
@@ -400,7 +395,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading || (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
-  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : isSignupBusiness ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business') : t('SIGN_UP', 'Sign up')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5)).map(function (_, i) {
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") // : isSignupBusiness
+  //   ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
+  : t('SIGN_UP', 'Sign up')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5)).map(function (_, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

@@ -105,6 +105,12 @@ Object.defineProperty(exports, "Footer", {
     return _Footer.Footer;
   }
 });
+Object.defineProperty(exports, "ForgotPasswordForm", {
+  enumerable: true,
+  get: function get() {
+    return _ForgotPasswordForm.ForgotPasswordForm;
+  }
+});
 Object.defineProperty(exports, "Header", {
   enumerable: true,
   get: function get() {
@@ -139,6 +145,12 @@ Object.defineProperty(exports, "LoginForm", {
   enumerable: true,
   get: function get() {
     return _LoginForm.LoginForm;
+  }
+});
+Object.defineProperty(exports, "MyOrders", {
+  enumerable: true,
+  get: function get() {
+    return _MyOrders.MyOrders;
   }
 });
 Object.defineProperty(exports, "OrderDetails", {
@@ -189,6 +201,12 @@ Object.defineProperty(exports, "SearchBar", {
     return _SearchBar.SearchBar;
   }
 });
+Object.defineProperty(exports, "SidebarMenu", {
+  enumerable: true,
+  get: function get() {
+    return _SidebarMenu.SidebarMenu;
+  }
+});
 Object.defineProperty(exports, "SignUpForm", {
   enumerable: true,
   get: function get() {
@@ -217,6 +235,12 @@ Object.defineProperty(exports, "UserPopover", {
   enumerable: true,
   get: function get() {
     return _UserPopover.UserPopover;
+  }
+});
+Object.defineProperty(exports, "UserProfileForm", {
+  enumerable: true,
+  get: function get() {
+    return _UserProfileForm.UserProfileForm;
   }
 });
 Object.defineProperty(exports, "Buttons", {
@@ -284,6 +308,8 @@ var _DriverTips = require("./src/components/DriverTips");
 
 var _Footer = require("./src/components/Footer");
 
+var _ForgotPasswordForm = require("./src/components/ForgotPasswordForm");
+
 var _Header = require("./src/components/Header");
 
 var _HeaderOption = require("./src/components/HeaderOption");
@@ -295,6 +321,8 @@ var _InputPhoneNumber = require("./src/components/InputPhoneNumber");
 var _LanguageSelector = require("./src/components/LanguageSelector");
 
 var _LoginForm = require("./src/components/LoginForm");
+
+var _MyOrders = require("./src/components/MyOrders");
 
 var _OrderDetails = require("./src/components/OrderDetails");
 
@@ -312,6 +340,8 @@ var _ProductShare = require("./src/components/ProductShare");
 
 var _SearchBar = require("./src/components/SearchBar");
 
+var _SidebarMenu = require("./src/components/SidebarMenu");
+
 var _SignUpForm = require("./src/components/SignUpForm");
 
 var _SingleProductCard = require("./src/components/SingleProductCard");
@@ -321,6 +351,8 @@ var _UserDetails = require("./src/components/UserDetails");
 var _UserFormDetails = require("./src/components/UserFormDetails");
 
 var _UserPopover = require("./src/components/UserPopover");
+
+var _UserProfileForm = require("./src/components/UserProfileForm");
 
 var _Buttons = require("./src/styles/Buttons");
 

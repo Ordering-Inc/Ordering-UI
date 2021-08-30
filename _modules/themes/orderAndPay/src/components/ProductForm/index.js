@@ -27,8 +27,6 @@ var _ProductOption = require("../../../../../components/ProductOption");
 
 var _ProductOptionSubOption = require("../../../../../components/ProductOptionSubOption");
 
-var _ProductShare = require("../../../../../components/ProductShare");
-
 var _LoginForm = require("../LoginForm");
 
 var _SignUpForm = require("../SignUpForm");
@@ -80,8 +78,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductOptionsUI = function ProductOptionsUI(props) {
   var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$dummies, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _props$afterMidElemen, _props$afterMidCompon, _orderState$options, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _orderState$options2, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _error$, _props$afterComponent, _props$afterElements;
 
-  var businessSlug = props.businessSlug,
-      editMode = props.editMode,
+  var editMode = props.editMode,
       isSoldOut = props.isSoldOut,
       productObject = props.productObject,
       productCart = props.productCart,
@@ -228,10 +225,6 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
     height: 200
-  })), product && !loading && !error && /*#__PURE__*/_react.default.createElement(_styles.ProductShareWrapper, null, /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
-    slug: businessSlug,
-    categoryId: product === null || product === void 0 ? void 0 : product.category_id,
-    productId: product === null || product === void 0 ? void 0 : product.id
   })), (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

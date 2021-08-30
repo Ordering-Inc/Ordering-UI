@@ -82,7 +82,6 @@ var UserPopover = function UserPopover(props) {
   var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
-      isHome = props.isHome,
       optionsList = props.optionsList,
       withLogout = props.withLogout,
       isCustomerMode = props.isCustomerMode;
@@ -183,7 +182,6 @@ var UserPopover = function UserPopover(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     isPhoto: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
-    isHome: isHome,
     ref: referenceElement,
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {

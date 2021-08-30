@@ -330,9 +330,12 @@ var Header = function Header(props) {
       return openModal(variant);
     },
     orderTypeList: orderTypeList
-  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 870 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 920 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
+    },
+    style: {
+      whiteSpace: 'nowrap'
     },
     name: "signin"
   }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN) || 'Login')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
@@ -340,6 +343,9 @@ var Header = function Header(props) {
       return handleOpenLoginSignUp('signup');
     },
     highlight: 1,
+    style: {
+      whiteSpace: 'nowrap'
+    },
     name: "signup"
   }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
@@ -445,10 +451,11 @@ var Header = function Header(props) {
     setCustomerModalOpen: setCustomerModalOpen
   })))), authModalOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: authModalOpen,
-    onClose: function onClose() {
+    onRemove: function onRemove() {
       return closeAuthModal();
     },
-    width: "50%"
+    width: "50%",
+    authModal: true
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {

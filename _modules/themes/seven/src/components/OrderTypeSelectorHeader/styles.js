@@ -29,7 +29,7 @@ var OrderTypeWrapper = _styledComponents.default.span(_templateObject3 || (_temp
 
 exports.OrderTypeWrapper = OrderTypeWrapper;
 
-var SelectedOption = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-width: 60px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  @media (min-width: 380px) {\n      max-width: initial;\n  }\n"])));
+var SelectedOption = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-width: 30px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n\n  @media (min-width: 768px) {\n      max-width: 50px;\n  }\n\n  @media (min-width: 1024px) {\n    max-width: 80px;\n  }\n\n  @media (min-width: 1200px) {\n    max-width: initial;\n  }\n"])));
 
 exports.SelectedOption = SelectedOption;
 var ContentOption = (0, _styledComponents.default)(SelectedOption)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  max-width: initial;\n"])));

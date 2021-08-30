@@ -21,12 +21,16 @@ var DriverTipContainer = _styledComponents.default.div(_templateObject || (_temp
 
 exports.DriverTipContainer = DriverTipContainer;
 
-var TipCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 11px 13px;\n  border: 1px solid ", ";\n  cursor: pointer;\n  text-transform: capitalize;\n  font-size: 16px;\n  line-height: 26px;\n  min-width: 50px;\n\n  &.active {\n    background-color: ", ";\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
+var TipCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 11px 13px;\n  border: 1px solid ", ";\n  color: ", ";\n  cursor: pointer;\n  text-transform: capitalize;\n  font-size: 16px;\n  line-height: 26px;\n  min-width: 50px;\n  font-weight: bold;\n  &.active {\n    background-color: ", ";\n    color: ", ";\n    border-color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primaryContrast;
+}, function (props) {
+  return props.theme.colors.primary;
 });
 
 exports.TipCard = TipCard;
@@ -43,11 +47,11 @@ var DriverTipLabel = _styledComponents.default.label(_templateObject4 || (_templ
 
 exports.DriverTipLabel = DriverTipLabel;
 
-var WrapperInput = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  margin-top: 10px;\n\n  input {\n    width: 65%;\n    padding: 4px 15px;\n    box-sizing: border-box;\n    flex: 1;\n    margin-right: 10px;\n  }\n\n  @media (min-width: 768px) {\n    input {\n      width: 80%;\n    }\n  }\n"])));
+var WrapperInput = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  margin-top: 10px;\n\n  input {\n    width: 65%;\n    padding: 4px 15px;\n    box-sizing: border-box;\n    flex: 1;\n    margin-right: 10px;\n  }\n\n  button {\n    min-height: 34px;\n  }\n\n  @media (min-width: 768px) {\n    input {\n      width: 80%;\n    }\n  }\n"])));
 
 exports.WrapperInput = WrapperInput;
 
-var DriverTipMessage = _styledComponents.default.p(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-weight: 600;\n"])), function (props) {
+var DriverTipMessage = _styledComponents.default.p(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-weight: 600;\n  width: 100%;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

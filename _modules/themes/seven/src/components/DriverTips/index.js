@@ -68,6 +68,10 @@ var DriverTipsUI = function DriverTipsUI(props) {
       value = _useState2[0],
       setvalue = _useState2[1];
 
+  var _driverTipsOptions = driverTipsOptions === null || driverTipsOptions === void 0 ? void 0 : driverTipsOptions.sort(function (a, b) {
+    return a - b;
+  });
+
   var handleChangeDriverTip = function handleChangeDriverTip(e) {
     var _e$target;
 
@@ -87,7 +91,7 @@ var DriverTipsUI = function DriverTipsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, {
     id: "driver-tip-container"
-  }, !isDriverTipUseCustom ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperTips, null, driverTipsOptions.map(function (option, i) {
+  }, !isDriverTipUseCustom ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperTips, null, driverTipsOptions && _driverTipsOptions.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TipCard, {
       key: i,
       className: "".concat(option === optionSelected ? 'active' : ''),
