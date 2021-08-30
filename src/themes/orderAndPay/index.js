@@ -1,7 +1,5 @@
 import { AppleLogin } from './src/components/AppleLogin'
 import { AutoScroll } from './src/components/AutoScroll'
-import { BusinessBasicInformation } from './src/components/BusinessBasicInformation'
-import { BusinessInformation } from './src/components/BusinessInformation'
 import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessProductsCategories } from './src/components/BusinessProductsCategories'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
@@ -42,8 +40,6 @@ import { Select } from './src/styles/Select'
 export {
   AppleLogin,
   AutoScroll,
-  BusinessBasicInformation,
-  BusinessInformation,
   BusinessItemAccordion,
   BusinessProductsCategories,
   BusinessProductsList,
