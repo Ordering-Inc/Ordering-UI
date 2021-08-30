@@ -20,7 +20,7 @@ import {
 } from './styles'
 import { Input } from '../../../../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { Alert } from '../../../../../../src/components/Confirm'
+import { Alert } from '../Confirm'
 
 export const OrderTypeSelectorContentUI = (props) => {
   const {
