@@ -27,7 +27,7 @@ var _Inputs = require("../../../../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _Confirm = require("../../../../../../src/components/Confirm");
+var _Confirm = require("../Confirm");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
