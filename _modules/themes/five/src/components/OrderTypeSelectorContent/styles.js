@@ -27,7 +27,7 @@ var OrderTypeSelectorContainer = _styledComponents.default.div(_templateObject |
 
 exports.OrderTypeSelectorContainer = OrderTypeSelectorContainer;
 
-var OrderTypeListItemContainerStyled = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-radius: 7.6px;\n  margin-bottom: 25px;\n  background: #000000;\n  padding: 30px;\n  cursor: pointer;\n\n  ", "\n\n  ", "\n"])), function (_ref) {
+var OrderTypeListItemContainerStyled = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-radius: 7.6px;\n  margin-bottom: 25px;\n  padding: 30px;\n  cursor: pointer;\n\n  ", "\n\n  ", "\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 }, function (_ref2) {
