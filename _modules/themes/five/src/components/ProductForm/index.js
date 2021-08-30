@@ -275,7 +275,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     className: "price-wrapper"
   }, /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total)), /*#__PURE__*/_react.default.createElement("span", {
     className: "price-discount"
-  }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, {
+  }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : product.extras.length) > 0) && /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, {
     id: "all"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
@@ -286,14 +286,14 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleChangeTabValue('all');
     },
     borderBottom: true
-  }, t('ALL', 'All')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, t('ALL', 'All')), (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "ingredients",
     active: tabValue === 'ingredients',
     onClick: function onClick() {
       return handleChangeTabValue('ingredients');
     },
     borderBottom: true
-  }, t('INGREDIENTS', 'ingredients')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, t('INGREDIENTS', 'ingredients')), (product === null || product === void 0 ? void 0 : product.extras.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "extra",
     active: tabValue === 'extra',
     onClick: function onClick() {
