@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const Option = styled.div`
   display: flex;
@@ -24,7 +25,6 @@ export const OrderTypeWrapper = styled.span`
     }
   }
 `
-
 export const SelectedOption = styled.p`
   margin: 0;
   max-width: 60px;

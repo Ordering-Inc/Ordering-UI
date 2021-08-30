@@ -98,7 +98,10 @@ export const Divider = styled.div`
   margin-top: 20px;
   margin-bottom: 15px;
   width: calc(100% + 30px);
-  margin-left: -15px;
+  ${props => props.theme?.rtl && css`
+    margin-right: -15px;
+    margin-left: 0;
+  `}
   height: 1px;
   background: #E9ECEF;
 `
