@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
-import { Button } from '../../styles/Buttons'
 import {
   BusinessAndProductList,
   useEvent,
@@ -20,25 +19,19 @@ import {
   WrappLayout,
   BusinessContent,
   BusinessCategoryProductWrapper,
-  BusinessCartContainer,
-  BusinessCartContent,
-  EmptyCart,
-  EmptyBtnWrapper,
-  Title
+  ModalIcon
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
-import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
-import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../Modal'
+import { FloatingButton } from '../FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
-import { Cart } from '../Cart'
-import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -49,7 +42,7 @@ const BusinessProductsListingUI = (props) => {
     businessState,
     categorySelected,
     searchValue,
-    sortByValue,
+    // sortByValue,
     categoryState,
     categoryId,
     productId,
@@ -63,9 +56,11 @@ const BusinessProductsListingUI = (props) => {
     handleChangeSearch,
     handleSearchRedirect,
     featuredProducts,
-    handleChangeSortBy,
+    // handleChangeSortBy,
     isCartOnProductsList,
-    errorQuantityProducts
+    errorQuantityProducts,
+    handleGoBack,
+    handleGoToCart
   } = props
 
   const { business, loading, error } = businessState
@@ -81,20 +76,14 @@ const BusinessProductsListingUI = (props) => {
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
-  const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
-  const [isCartOpen, setIsCartOpen] = useState(false)
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
-  const sortByOptions = [
-    { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
-    { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
-    { value: 'a-z', content: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z'), showOnSelected: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z') }
-  ]
-
-  const handler = () => {
-    setOpenBusinessInformation(true)
-  }
+  // const sortByOptions = [
+  //   { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
+  //   { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
+  //   { value: 'a-z', content: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z'), showOnSelected: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z') }
+  // ]
 
   const onProductClick = (product) => {
     onProductRedirect({
@@ -184,24 +173,17 @@ const BusinessProductsListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
+        <ModalIcon>
+          <BsArrowLeft size={20} onClick={() => handleGoBack()} />
+          <img src={business?.logo} />
+          <h1>{business?.name}</h1>
+        </ModalIcon>
         {
           !loading && business?.id && (
             <WrappLayout
               isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
             >
               <div className='bp-list'>
-                <BusinessBasicInformation
-                  businessState={businessState}
-                  setOpenBusinessInformation={setOpenBusinessInformation}
-                  openBusinessInformation={openBusinessInformation}
-                  handleChangeSearch={handleChangeSearch}
-                  searchValue={searchValue}
-                  sortByOptions={sortByOptions}
-                  handleChangeSortBy={handleChangeSortBy}
-                  categoryState={categoryState}
-                  errorQuantityProducts={errorQuantityProducts}
-                  sortByValue={sortByValue}
-                />
                 <BusinessContent>
                   <BusinessCategoryProductWrapper>
                     {!(business?.categories?.length === 0 && !categoryId) && (
@@ -210,7 +192,6 @@ const BusinessProductsListingUI = (props) => {
                         categorySelected={categorySelected}
                         onClickCategory={handleChangeCategory}
                         featured={featuredProducts}
-                        openBusinessInformation={openBusinessInformation}
                       />
                     )}
 
@@ -235,35 +216,6 @@ const BusinessProductsListingUI = (props) => {
                       />
                     </WrapContent>
                   </BusinessCategoryProductWrapper>
-                  <BusinessCartContainer>
-                    <BusinessCartContent>
-                      {currentCart?.products?.length > 0 ? (
-                        <>
-                          <Title>{t('YOUR_CART', 'Your cart')}</Title>
-                          <Cart
-                            isForceOpenCart
-                            cart={currentCart}
-                            isCartPending={currentCart?.status === 2}
-                            isProducts={currentCart.products.length}
-                            isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                            handleCartOpen={(val) => setIsCartOpen(val)}
-                            isCustomMode
-                          />
-                        </>
-                      ) : (
-                        <EmptyCart>
-                          <div className='empty-content'>
-                            <AiOutlineShoppingCart />
-                            <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
-                          </div>
-                          <EmptyBtnWrapper>
-                            <span>$0.00</span>
-                            <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
-                          </EmptyBtnWrapper>
-                        </EmptyCart>
-                      )}
-                    </BusinessCartContent>
-                  </BusinessCartContainer>
                 </BusinessContent>
               </div>
             </WrappLayout>
@@ -272,16 +224,9 @@ const BusinessProductsListingUI = (props) => {
 
         {loading && !error && (
           <>
-            <BusinessBasicInformation
-              businessState={{ business: {}, loading: true }}
-              isSkeleton
-              handler={handler}
-              openBusinessInformation={openBusinessInformation}
-            />
             <BusinessProductsCategories
               categories={[]}
               isSkeleton
-              openBusinessInformation={openBusinessInformation}
             />
             <WrapContent>
               <BusinessProductsList
@@ -330,8 +275,9 @@ const BusinessProductsListingUI = (props) => {
         )}
       </ProductsContainer>
 
-      {currentCart?.products?.length > 0 && auth && !isCartOpen && (
+      {currentCart?.products?.length > 0 && auth && (
         <FloatingButton
+          title={parsePrice(currentCart?.total)}
           btnText={
             !currentCart?.valid_maximum ? (
               `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
@@ -341,7 +287,7 @@ const BusinessProductsListingUI = (props) => {
           }
           isSecondaryBtn={!currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
           btnValue={currentCart?.products?.length}
-          handleClick={() => setOpenUpselling(true)}
+          handleClick={() => handleGoToCart(currentCart?.uuid)}
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
       )}
@@ -383,6 +329,43 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </Modal>
+
+      {/* <Modal
+        open={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        padding='0'
+        isProductForm
+      >
+        <BusinessCartContainer>
+          <BusinessCartContent>
+            {currentCart?.products?.length > 0 ? (
+              <>
+                <Title>{t('YOUR_CART', 'Your cart')}</Title>
+                <Cart
+                  isForceOpenCart
+                  cart={currentCart}
+                  isCartPending={currentCart?.status === 2}
+                  isProducts={currentCart.products.length}
+                  isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                  handleCartOpen={(val) => setIsCartOpen(val)}
+                  isCustomMode
+                />
+              </>
+            ) : (
+              <EmptyCart>
+                <div className='empty-content'>
+                  <AiOutlineShoppingCart />
+                  <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
+                </div>
+                <EmptyBtnWrapper>
+                  <span>$0.00</span>
+                  <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
+                </EmptyBtnWrapper>
+              </EmptyCart>
+            )}
+          </BusinessCartContent>
+        </BusinessCartContainer>
+      </Modal> */}
 
       {currentCart?.products && openUpselling && (
         <UpsellingPage

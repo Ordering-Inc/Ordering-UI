@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 import {
   LoginForm as LoginFormController,
   useLanguage,
@@ -69,6 +70,7 @@ const LoginFormUI = (props) => {
   } = props
   const numOtpInputs = 4
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -79,7 +81,7 @@ const LoginFormUI = (props) => {
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
   const [otpState, setOtpState] = useState('')
-  const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
+  const [otpLeftTime,, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
 
   const initParams = {
