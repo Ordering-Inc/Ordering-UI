@@ -31,7 +31,7 @@ const optionsDefault = [
 export const UserPopover = (props) => {
   const {
     open,
-    isHome,
+    // isHome,
     optionsList,
     withLogout,
     isCustomerMode
@@ -111,7 +111,6 @@ export const UserPopover = (props) => {
       )}
       <HeaderItem
         isPhoto={sessionState?.user?.photo}
-        isHome={isHome}
         ref={referenceElement}
         onClick={props.onClick}
       >

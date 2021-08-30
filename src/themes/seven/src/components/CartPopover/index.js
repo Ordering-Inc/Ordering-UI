@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from 'react'
 import BiCart from '@meronex/icons/bi/BiCart'
+import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
   PopoverBody,
-  PopoverArrow
+  PopoverArrow,
+  Header
 } from './styles'
 
-import { useOrder, useEvent } from 'ordering-components'
+import { useOrder, useEvent, useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
 
@@ -16,6 +18,7 @@ export const CartPopover = (props) => {
   const [orderState] = useOrder()
   const theme = useTheme()
   const [events] = useEvent()
+  const [, t] = useLanguage()
 
   const referenceElement = useRef()
   const popperElement = useRef()
@@ -99,6 +102,10 @@ export const CartPopover = (props) => {
           {props.carts?.length > 0 && <span>{props.carts?.length}</span>}
         </HeaderItem>
         <PopoverBody className='cart-popover' ref={popperElement} style={popStyle} {...attributes.popper}>
+          <Header>
+            <h2>{t('YOUR_CART', 'Your Cart')}</h2>
+            <AiOutlineClose onClick={props.onClose} />
+          </Header>
           <CartContent
             isCartPopover
             carts={props.carts}

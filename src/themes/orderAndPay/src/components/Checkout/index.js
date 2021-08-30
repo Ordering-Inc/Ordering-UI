@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import {
@@ -32,7 +33,8 @@ import {
   WrapperRightContainer,
   WrapperLeftContent,
   CheckOutDivider,
-  DriverTipDivider
+  DriverTipDivider,
+  ModalIcon
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -57,6 +59,7 @@ const mapConfigs = {
 
 const CheckoutUI = (props) => {
   const {
+    businessId,
     cart,
     errors,
     placing,
@@ -68,7 +71,8 @@ const CheckoutUI = (props) => {
     handleOrderRedirect,
     isCustomerMode,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    handleStoreRedirect
   } = props
 
   const theme = useTheme()
@@ -77,14 +81,17 @@ const CheckoutUI = (props) => {
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [{ user }] = useSession()
+  const [{ user, token }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
+  const [ordering] = useApi()
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
+  const [isLoadingPlace, setIsLoadingPlace] = useState(false)
+  const [placeId, setPlaceId] = useState(null)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -172,6 +179,48 @@ const CheckoutUI = (props) => {
     }
   }, [isResetPaymethod])
 
+  useEffect(() => {
+    const getPlaceId = async () => {
+      const id = await window.localStorage.getItem('place_id')
+      setPlaceId(id)
+    }
+    getPlaceId()
+  }, [])
+
+  useEffect(() => {
+    const handleChangePlace = async () => {
+      if (cart?.products?.length > 0) {
+        setIsLoadingPlace(true)
+        try {
+          const response = await fetch(`${ordering.root}/carts/change_place`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            body: JSON.stringify({
+              place_id: placeId,
+              business_id: businessId
+            })
+          })
+          const { result, error } = await response.json()
+          if (error && result[0] !== 'ERROR_YOU_HAVE_NOT_CART') {
+            setAlertState({
+              open: true,
+              content: [result]
+            })
+          }
+          setIsLoadingPlace(false)
+        } catch (err) {
+          setAlertState({
+            open: true,
+            content: [err.message]
+          })
+        }
+      }
+    }
+    if (placeId) {
+      handleChangePlace()
+    }
+  }, [placeId])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -181,6 +230,9 @@ const CheckoutUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container>
+        <ModalIcon>
+          <BsArrowLeft size={20} onClick={() => handleStoreRedirect(cart?.business?.slug)} />
+        </ModalIcon>
         <WrapperLeftContainer>
           <WrapperLeftContent>
             {!cartState.loading && cart?.status === 2 && (
@@ -247,6 +299,7 @@ const CheckoutUI = (props) => {
                       isCustomerMode={isCustomerMode}
                       userData={isCustomerMode && customerState.user}
                       userId={isCustomerMode && customerState?.user?.id}
+                      isHideAddress
                     />
                   )}
                 </WrapperUserDetails>
@@ -394,7 +447,7 @@ const CheckoutUI = (props) => {
             <WrapperPlaceOrderButton>
               <Button
                 color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-                disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading}
+                disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading || isLoadingPlace}
                 onClick={() => handlePlaceOrder()}
               >
                 {!cart?.valid_maximum ? (

@@ -12,7 +12,7 @@ export const Container = styled.div`
   `}
 
   ${({ auth }) => !auth && css`
-    @media (min-width: 921px) {
+    @media (min-width: 871px) {
       display: none;
     }
   `}
@@ -40,6 +40,7 @@ export const IconContent = styled.button`
   justify-content: center;
 
   &:hover {
+    background-color: ${({ isHome }) => isHome ? 'rgba(255,255,255,0.1)' : 'rgb(255, 255, 255)'};
     box-shadow: transparent 0px 0px 0px 1px inset;
   }
 
@@ -162,7 +163,7 @@ export const MenuLinkIcon = styled.div`
     color: #000;
     width: 24px;
     height: 24px;
-    color: ${({ active, theme, isHome }) => active ? theme.colors.primary : isHome ? '#FFF' : '#000'}
+    color: ${({ active, theme }) => active ? theme.colors.primary : '#000'}
   }
 `
 
@@ -189,7 +190,7 @@ export const TextInfo = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${({ active, theme, isHome }) => active ? theme.colors.primary : isHome ? '#FFF' : '#000'}
+  color: ${({ active, theme }) => active ? theme.colors.primary : '#000'}
 
   ${props => props.theme?.rtl && css`
     text-align: right;

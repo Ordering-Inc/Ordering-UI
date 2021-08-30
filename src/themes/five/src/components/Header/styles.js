@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-// import { Select } from '../../styles/Selects'
 
 export const Header = styled.div`
   display: flex;
@@ -138,7 +137,7 @@ export const Menu = styled.div`
       width: 400px;
     }
 
-    > div: first-child {
+    > div:first-child {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -148,14 +147,19 @@ export const Menu = styled.div`
   .address-popover {
     flex-grow: 1;
     display: none;
-    > div: first-child {
+    > div:first-child {
       width: 100%;
     }
   }
 
   .order-type {
-    padding: 0 20px;
+    padding: 0 10px;
+
+    @media (min-width: 1200px) {
+      padding: 0 20px;
+    }
   }
+
 
   @media (min-width: 821px) {
     .moment-popover,
@@ -279,5 +283,8 @@ export const MomentMenu = styled.div`
     color: #909BA9;
     display: flex;
     align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0 10px;
   }
 `

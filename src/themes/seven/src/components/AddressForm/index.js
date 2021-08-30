@@ -80,7 +80,7 @@ const AddressFormUI = (props) => {
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
-                              configState.configs?.google_autocomplete_selection_required?.value === 'true'
+    configState.configs?.google_autocomplete_selection_required?.value === 'true'
 
   const mapErrors = {
     ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
@@ -251,8 +251,8 @@ const AddressFormUI = (props) => {
         formMethods.setValue(
           field.name,
           formState?.changes[field.name] ||
-            (orderState?.options?.address && orderState?.options?.address[field.name]) ||
-            ''
+          (orderState?.options?.address && orderState?.options?.address[field.name]) ||
+          ''
         )
       )
       return

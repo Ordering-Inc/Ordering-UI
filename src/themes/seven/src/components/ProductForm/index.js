@@ -19,7 +19,7 @@ import { ProductOption } from '../../../../../components/ProductOption'
 import { ProductOptionSubOption } from '../../../../../components/ProductOptionSubOption'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
-import { ForgotPasswordForm } from '../../../../../components/ForgotPasswordForm'
+import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { AddressList } from '../../../../../components/AddressList'
 import { Modal } from '../../../../../components/Modal'
 
@@ -159,8 +159,6 @@ const ProductOptionsUI = (props) => {
       ))
     )
   }
-
-  console.log(product)
 
   return (
     <>

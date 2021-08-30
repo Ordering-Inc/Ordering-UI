@@ -21,7 +21,8 @@ const UserDetailsUI = (props) => {
     validationFields,
     isUserDetailsEdit,
     isCustomerMode,
-    userState
+    userState,
+    isHideAddress
   } = props
 
   const [, t] = useLanguage()
@@ -70,7 +71,7 @@ const UserDetailsUI = (props) => {
 
           {!isEdit ? (
             <UserData>
-              {userData?.address && (
+              {userData?.address && !isHideAddress && (
                 <p>{userData?.address}</p>
               )}
               {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (

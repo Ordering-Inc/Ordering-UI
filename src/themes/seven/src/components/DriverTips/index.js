@@ -25,8 +25,8 @@ const DriverTipsUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-
   const [value, setvalue] = useState(0)
+  const _driverTipsOptions = driverTipsOptions?.sort((a, b) => a - b)
 
   const handleChangeDriverTip = (e) => {
     let tip = parseFloat(e?.target?.value)
@@ -50,7 +50,7 @@ const DriverTipsUI = (props) => {
         {!isDriverTipUseCustom ? (
           <>
             <WrapperTips>
-              {driverTipsOptions.map((option, i) => (
+              {driverTipsOptions && _driverTipsOptions.map((option, i) => (
                 <TipCard
                   key={i}
                   className={`${option === optionSelected ? 'active' : ''}`}

@@ -8,13 +8,14 @@ export const UserProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 90%;
+  width: 94%;
   overflow-x: hidden;
   margin: 25px auto ${props => props.mbottom ? `${props.mbottom}px` : 'auto'};
 
   @media (min-width: 768px) {
     align-items: flex-start;
     flex-direction: row;
+    justify-content: flex-start;
   }
 `
 
@@ -34,7 +35,8 @@ export const UserImage = styled.div`
 export const Image = styled.div`
   width: 170px;
   height: 170px;
-  border-radius: 7.6px;
+  border: 2px solid ${props => props.theme.colors.primary};
+  border-radius: 100%;
   overflow: hidden;
   padding: 20px;
   background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};
@@ -44,7 +46,7 @@ export const Image = styled.div`
   img,
   div {
     width: 100%;
-    border-radius: 7.6px;
+    border-radius: 50%;
     height: 100%;
     border: none;
     overflow: hidden;
@@ -69,7 +71,6 @@ export const SideForm = styled.div`
   width: 100%;
 
   @media (min-width: 768px) {
-    width: 70%;
     display: flex;
     align-items: center;
     margin: 30px 0px 0px 30px;
@@ -136,10 +137,13 @@ export const SavedPlaces = styled.div`
 
 
   h1{
-    font-size: 24px;
+    font-size: 20px;
+    margin: 0;
     text-align: left;
+    padding: 0 10px;
+    box-sizing: border-box;
     ${props => props.theme?.rtl && css`
-    text-align: right;
+      text-align: right;
     `}
   }
 
@@ -155,20 +159,23 @@ export const SavedPlaces = styled.div`
   }
 
   @media (min-width: 768px){
-    width: 90%;
-    margin-top: 40px;
-    h1 {
-      text-align: center;
-    }
     ul{
       width: 100%;
     }
     button {
-      width: 50%;
-      align-self: flex-end;
+      width: 65%;
     }
   }
 
+  @media (min-width: 1024px){
+    width: 96%;
+
+    #address_control button {
+      width: 40%;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+  }
 `
 
 export const UploadImageIcon = styled.div`
