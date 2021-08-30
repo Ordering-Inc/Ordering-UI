@@ -12,8 +12,8 @@ import {
 } from './styles'
 
 import { Modal } from '../../../../../components/Modal'
-import { AddressForm } from '../../../../../components/AddressForm'
-import { AddressList } from '../../../../../components/AddressList'
+import { AddressForm } from '../AddressForm'
+import { AddressList } from '../AddressList'
 
 import { Button } from '../../styles/Buttons'
 

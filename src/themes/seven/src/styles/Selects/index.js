@@ -70,6 +70,7 @@ export const Selected = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: ${props => props.theme.colors.primary};
@@ -80,15 +81,13 @@ export const Selected = styled.div`
   -ms-user-select: none;
   user-select: none;
   z-index: 11;
-  @media (min-width: 381px) {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 
   ${({ fullwidth }) => fullwidth && css`
     width: 100%;
     box-sizing: border-box;
     justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
   `}
 `
 

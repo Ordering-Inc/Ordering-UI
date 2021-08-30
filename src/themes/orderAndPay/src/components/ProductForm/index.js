@@ -17,7 +17,6 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { ProductIngredient } from '../../../../../components/ProductIngredient'
 import { ProductOption } from '../../../../../components/ProductOption'
 import { ProductOptionSubOption } from '../../../../../components/ProductOptionSubOption'
-import { ProductShare } from '../../../../../components/ProductShare'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
@@ -42,8 +41,7 @@ import {
   ProductFormTitle,
   WrapperIngredients,
   ProductTabContainer,
-  Divider,
-  ProductShareWrapper
+  Divider
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -51,7 +49,6 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 const ProductOptionsUI = (props) => {
   const {
-    businessSlug,
     editMode,
     isSoldOut,
     productObject,
@@ -156,16 +153,6 @@ const ProductOptionsUI = (props) => {
           </SkeletonBlock>
         )}
 
-        {product && !loading && !error && (
-          <ProductShareWrapper>
-            <ProductShare
-              slug={businessSlug}
-              categoryId={product?.category_id}
-              productId={product?.id}
-            />
-          </ProductShareWrapper>
-
-        )}
         {
         props.beforeMidElements?.map((BeforeMidElements, i) => (
           <React.Fragment key={i}>

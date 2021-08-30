@@ -55,13 +55,13 @@ export const FormControl = styled.form`
   textarea {
     width: 100%;
     margin: 10px 0;
+    border-radius: 0;
   }
 
   .input-autocomplete {
     width: 100%;
     background: #FFF;
     border: 1px solid #BBB;
-    border-radius: 30px;
     font-size: 16px;
     padding: 7px 15px;
     outline: none;
@@ -92,6 +92,19 @@ export const AddressWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  .gps-button {
+    width: 30px;
+    height: 30px;
+    right: 7px;
+    ${props => props.theme?.rtl && css`
+      right: unset;
+      left: 7px;
+    `}
+
+    svg {
+      font-size: 22px;
+    }
+  }
 `
 
 export const WrapAddressInput = styled.div`

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Container, Divider } from './styles'
+import { Container } from './styles'
 
-import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
-import { OrdersOption } from '../OrdersOption'
+import { ProfileOptions } from '../UserProfileForm/ProfileOptions'
+import { OrdersOption } from '../../../../../components/OrdersOption'
 
 export const MyOrders = (props) => {
   return (
@@ -16,8 +16,7 @@ export const MyOrders = (props) => {
       <ProfileOptions value='orders' />
       <Container>
         <OrdersOption {...props} activeOrders horizontal />
-        <Divider />
-        <OrdersOption {...props} pastOrders horizontal />
+        <OrdersOption {...props} />
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

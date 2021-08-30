@@ -23,7 +23,9 @@ const ModalUI = (props) => {
     cancelText,
     isTransparent,
     hideCloseDefault,
-    isProductForm
+    isProductForm,
+    authModal,
+    onRemove
   } = props
   const [, t] = useLanguage()
 
@@ -59,7 +61,9 @@ const ModalUI = (props) => {
       )}
       {!hideCloseDefault && (
         <ModalIcon>
-          <MdClose onClick={() => onClose()} />
+          {
+            (authModal && onRemove) ? <MdClose onClick={() => onRemove()} /> : <MdClose onClick={() => onClose()} />
+          }
         </ModalIcon>
       )}
       <ModalHeader>

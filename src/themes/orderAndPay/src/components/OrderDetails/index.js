@@ -3,86 +3,68 @@ import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
   OrderDetails as OrderDetailsController,
-  useEvent,
   useUtils,
   useConfig,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
-import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
 import BsPhone from '@meronex/icons/bs/BsPhone'
 import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 
-import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../../../../../components/Messages'
-import { ReviewOrder } from '../../../../../components/ReviewOrder'
-import { ProductShare } from '../../../../../components/ProductShare'
 
 import {
   Container,
   WrapperContainer,
-  HeaderInfo,
-  Content,
-  OrderBusiness,
-  BusinessWrapper,
-  BusinessInfo,
   ActionsBlock,
   OrderInfo,
   StatusBar,
   SectionTitle,
-  OrderCustomer,
   PhotoBlock,
   Map,
   OrderDriver,
   WrapperDriver,
   OrderProducts,
   OrderBill,
-  ReviewsAction,
   SkeletonBlockWrapp,
   SkeletonBlock,
-  ShareOrder,
   MessagesIcon,
   ExclamationWrapper,
   WrapperLeftContainer,
   WrapperRightContainer,
   Divider,
-  MyOrderActions,
-  ReviewOrderLink,
-  SkeletonWrapper
+  SkeletonWrapper,
+  ModalIcon
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
 
 const OrderDetailsUI = (props) => {
   const {
-    userCustomerId,
-    handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
     driverLocation,
-    urlToShare,
     messages,
     setMessages,
     readMessages,
-    messagesReadList
+    messagesReadList,
+    handleGoToOrderTypes
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const theme = useTheme()
-  const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
-  const [openReview, setOpenReview] = useState(false)
-  const [isReviewed, setIsReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
 
-  const { order, loading, businessData, error } = props.order
+  const { order, loading, error } = props.order
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -114,10 +96,6 @@ const OrderDetailsUI = (props) => {
     const objectStatus = orderStatus.find((o) => o.key === status)
 
     return objectStatus && objectStatus
-  }
-
-  const handleGoToPage = (data) => {
-    events.emit('go_to_page', data)
   }
 
   const handleOpenMessages = (data) => {
@@ -170,6 +148,19 @@ const OrderDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container>
+        <ModalIcon>
+          <BsArrowLeft size={20} onClick={() => handleGoToOrderTypes()} />
+          <ActionsBlock>
+            <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
+              {order?.unread_count > 0 && unreadAlert.business && (
+                <ExclamationWrapper>
+                  <AiFillExclamationCircle />
+                </ExclamationWrapper>
+              )}
+              <BiMessageRounded />
+            </MessagesIcon>
+          </ActionsBlock>
+        </ModalIcon>
         {!loading && order && Object.keys(order).length > 0 && (
           <WrapperContainer>
             <WrapperLeftContainer>
@@ -185,51 +176,10 @@ const OrderDetailsUI = (props) => {
                       : parseDate(order?.delivery_datetime, { utc: false })
                   }
                 </p>
-                <ReviewOrderLink
-                  className='Review-order'
-                  active={order?.status === 1}
-                >
-                  {t('REVIEW_ORDER', 'Review order')}
-                </ReviewOrderLink>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
               </OrderInfo>
               <Divider />
-              <OrderBusiness>
-                <BusinessWrapper>
-                  <BusinessInfo>
-                    <h2>{t('FROM', 'From')}</h2>
-                    <p>{order?.business?.name}</p>
-                    <p>{order?.business?.email}</p>
-                    <p>{order?.business?.cellphone}</p>
-                    <p>{order?.business?.address}</p>
-                  </BusinessInfo>
-                </BusinessWrapper>
-                <ActionsBlock>
-                  {order.driver && order.driver.phone &&
-                    <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                      <BsPhone />
-                    </span>}
-                  <span>
-                    <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
-                  </span>
-                  <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                    {order?.unread_count > 0 && unreadAlert.business && (
-                      <ExclamationWrapper>
-                        <AiFillExclamationCircle />
-                      </ExclamationWrapper>
-                    )}
-                    <BiMessageRounded />
-                  </MessagesIcon>
-                </ActionsBlock>
-              </OrderBusiness>
-              <Divider />
-              <OrderCustomer>
-                <h2>{t('TO', 'To')}</h2>
-                <p>{order?.customer?.name} {order?.customer?.lastname}</p>
-                <p>{order?.customer?.email}</p>
-                <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
-              </OrderCustomer>
               {order?.driver && (
                 <>
                   <>
@@ -278,21 +228,6 @@ const OrderDetailsUI = (props) => {
               )}
             </WrapperLeftContainer>
             <WrapperRightContainer>
-              <HeaderInfo>
-                <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-                <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
-              </HeaderInfo>
-              {!userCustomerId && (
-                <MyOrderActions>
-                  <Button
-                    color='primary'
-                    outline
-                    onClick={() => handleGoToPage({ page: 'orders' })}
-                  >
-                    {t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
-                  </Button>
-                </MyOrderActions>
-              )}
               <OrderProducts>
                 {order?.products?.length && order?.products.map(product => (
                   <ProductItemAccordion
@@ -370,38 +305,6 @@ const OrderDetailsUI = (props) => {
                   </tbody>
                 </table>
               </OrderBill>
-              <Content className='order-content'>
-                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                  <ShareOrder>
-                    <div className='text'>
-                      <h1>{t('SHARE_THIS_DELIVERY', theme?.defaultLanguages?.SHARE_THIS_DELIVERY || 'Share this delivery')}</h1>
-                      <p>{t('LET_SOMEONE_FOLLOW_ALONG', theme?.defaultLanguages?.LET_SOMEONE_FOLLOW_ALONG || 'Let someone follow along')}</p>
-                    </div>
-                    <div className='wrap'>
-                      <ProductShare
-                        withBtn
-                        btnText={t('SHARE', theme?.defaultLanguages?.SHARE || 'Share')}
-                        defaultUrl={urlToShare(order?.hash_key)}
-                      />
-                    </div>
-                  </ShareOrder>
-                )}
-                {(
-                  parseInt(order?.status) === 1 ||
-                  parseInt(order?.status) === 2 ||
-                  parseInt(order?.status) === 5 ||
-                  parseInt(order?.status) === 6 ||
-                  parseInt(order?.status) === 10 ||
-                  parseInt(order?.status) === 11 ||
-                  parseInt(order?.status) === 12
-                ) && !order.review && !isReviewed && (
-                  <ReviewsAction>
-                    <Button color='primary' onClick={() => setOpenReview(true)}>
-                      {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
-                    </Button>
-                  </ReviewsAction>
-                )}
-              </Content>
             </WrapperRightContainer>
           </WrapperContainer>
         )}
@@ -451,15 +354,6 @@ const OrderDetailsUI = (props) => {
               setMessages={setMessages}
               readMessages={readMessages}
             />
-          </Modal>
-        )}
-        {openReview && (
-          <Modal
-            open={openReview}
-            onClose={() => setOpenReview(false)}
-            title={order ? `${t('WRITE_A_REVIEW', theme?.defaultLanguages?.WRITE_A_REVIEW || 'Write a Review')} #${order?.id}` : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
-          >
-            <ReviewOrder order={order} closeReviewOrder={() => setOpenReview(false)} setIsReviewed={setIsReviewed} />
           </Modal>
         )}
       </Container>

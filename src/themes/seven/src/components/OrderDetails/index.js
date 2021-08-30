@@ -8,57 +8,39 @@ import {
   useConfig,
   GoogleMapsMap
 } from 'ordering-components'
-import FiPhone from '@meronex/icons/fi/FiPhone'
-import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
+import BsPhone from '@meronex/icons/bs/BsPhone'
 import HiOutlineChat from '@meronex/icons/hi/HiOutlineChat'
-import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
-import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
-import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
-
-import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../../../../../components/Modal'
 import { Messages } from '../../../../../components/Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
-import { ProductShare } from '../../../../../components/ProductShare'
+import { Button } from '../../styles/Buttons'
 
 import {
   Container,
-  WrapperContainer,
   Header,
   HeaderInfo,
-  HeaderText,
-  Content,
   OrderBusiness,
-  BusinessWrapper,
-  LogoWrapper,
-  BusinessLogo,
   BusinessInfo,
   ActionsBlock,
   OrderInfo,
   OrderData,
   StatusBar,
   OrderStatus,
-  StatusImage,
   SectionTitle,
   OrderCustomer,
   PhotoBlock,
-  InfoBlock,
   Map,
   OrderDriver,
   WrapperDriver,
   OrderProducts,
   OrderBill,
   ReviewsAction,
-  FootActions,
   SkeletonBlockWrapp,
   SkeletonBlock,
-  HeaderImg,
-  ShareOrder,
   MessagesIcon,
   ExclamationWrapper,
   Layout,
@@ -74,17 +56,13 @@ import { verifyDecimals } from '../../../../../utils'
 
 const OrderDetailsUI = (props) => {
   const {
-    userCustomerId,
-    handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
     driverLocation,
-    urlToShare,
     messages,
     setMessages,
     readMessages,
-    messagesReadList,
-    isCustomerMode
+    messagesReadList
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -97,7 +75,7 @@ const OrderDetailsUI = (props) => {
   const [isReviewed, setIsReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
 
-  const { order, loading, businessData, error } = props.order
+  const { order, loading, error } = props.order
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -131,16 +109,8 @@ const OrderDetailsUI = (props) => {
     return objectStatus && objectStatus
   }
 
-  const getImage = (status) => {
-    try {
-      return theme.images?.order?.[`status${status}`]
-    } catch (error) {
-      return 'https://picsum.photos/75'
-    }
-  }
-
-  const handleGoToPage = (data) => {
-    events.emit('go_to_page', data)
+  const handleGoToPage = (page) => {
+    events.emit('go_to_page', { page })
   }
 
   const handleOpenMessages = (data) => {
@@ -184,9 +154,6 @@ const OrderDetailsUI = (props) => {
     }
   }, [messagesReadList])
 
-  console.log('order.customer')
-  console.log(order?.customer)
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -210,20 +177,20 @@ const OrderDetailsUI = (props) => {
                     )}
                     <p className='date'>
                       {
-                      order?.delivery_datetime_utc
-                        ? parseDate(order?.delivery_datetime_utc)
-                        : parseDate(order?.delivery_datetime, { utc: false })
+                        order?.delivery_datetime_utc
+                          ? parseDate(order?.delivery_datetime_utc)
+                          : parseDate(order?.delivery_datetime, { utc: false })
                       }
                     </p>
                   </OrderData>
                   {(
                     parseInt(order?.status) === 1 ||
-                      parseInt(order?.status) === 2 ||
-                      parseInt(order?.status) === 5 ||
-                      parseInt(order?.status) === 6 ||
-                      parseInt(order?.status) === 10 ||
-                      parseInt(order?.status) === 11 ||
-                      parseInt(order?.status) === 12
+                    parseInt(order?.status) === 2 ||
+                    parseInt(order?.status) === 5 ||
+                    parseInt(order?.status) === 6 ||
+                    parseInt(order?.status) === 10 ||
+                    parseInt(order?.status) === 11 ||
+                    parseInt(order?.status) === 12
                   ) && !order.review && !isReviewed && (
                     <ReviewsAction>
                       <Button color='primary' onClick={() => setOpenReview(true)}>
@@ -270,8 +237,8 @@ const OrderDetailsUI = (props) => {
                 <>
                   <Hr height={8} color='#DDDDDD' />
                   <PanelRow>
-                    <SectionTitle>
-                      {t('YOUR_DRIVER', theme?.defaultLanguages?.YOUR_DRIVER || 'Your Driver')}
+                    <SectionTitle style={{ marginBottom: '15px' }}>
+                      {t('DRIVER', 'Driver')}
                     </SectionTitle>
                     {order?.driver?.location && parseInt(order?.status) === 9 && (
                       <Map>
@@ -293,14 +260,14 @@ const OrderDetailsUI = (props) => {
                               <RiUser2Fill />
                             )}
                           </div>
-                          <div>
+                          <div className='name'>
                             <p style={{ margin: '0' }}>{order?.driver?.name} {order?.driver?.lastname}</p>
                           </div>
                         </WrapperDriver>
                         <ActionsBlock>
                           {order.driver && order.driver.phone &&
                             <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                              <FiPhone />
+                              <BsPhone />
                             </span>}
                           <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
                             {order?.unread_count > 0 && unreadAlert.driver && (
@@ -324,7 +291,7 @@ const OrderDetailsUI = (props) => {
                     <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
                     <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
                   </HeaderInfo>
-                  <Button color='primary' outline>
+                  <Button outline color='primary' onClick={() => handleGoToPage('orders')}>
                     {t('YOUR_ORDERS', 'Your Orders')}
                   </Button>
                 </Header>
@@ -394,11 +361,11 @@ const OrderDetailsUI = (props) => {
                           <td>
                             {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}{' '}
                             {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
-                            parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                            !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                          (
-                            <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
-                          )}
+                              parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
+                              !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                              (
+                                <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
+                              )}
                           </td>
                           <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
                         </tr>
@@ -426,18 +393,28 @@ const OrderDetailsUI = (props) => {
           </Layout>
         )}
         {loading && !error && (
-          <WrapperContainer isLoading className='skeleton-loading'>
-            <SkeletonBlockWrapp>
-              <SkeletonBlock width={80}>
-                <Skeleton height={300} />
-                <Skeleton />
-                <Skeleton height={100} />
-                <Skeleton height={100} />
-                <Skeleton />
-                <Skeleton height={200} />
-              </SkeletonBlock>
-            </SkeletonBlockWrapp>
-          </WrapperContainer>
+          <Layout>
+            <LeftPanel>
+              <SkeletonBlockWrapp>
+                <SkeletonBlock width={80}>
+                  <Skeleton height={100} />
+                  <Skeleton height={100} />
+                  <Skeleton height={100} />
+                  <Skeleton height={100} />
+                </SkeletonBlock>
+              </SkeletonBlockWrapp>
+            </LeftPanel>
+            <RightPanel>
+              <SkeletonBlockWrapp>
+                <SkeletonBlock width={80}>
+                  <Skeleton height={100} />
+                  <Skeleton height={100} />
+                  <Skeleton height={100} />
+                  <Skeleton height={100} />
+                </SkeletonBlock>
+              </SkeletonBlockWrapp>
+            </RightPanel>
+          </Layout>
         )}
 
         {!loading && error && (

@@ -77,7 +77,7 @@ export const ActionsBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   > * {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
@@ -102,7 +102,6 @@ export const ActionsBlock = styled.div`
 
 export const OrderInfo = styled.div`
   width: 100%;
-  margin: 0px 0px 35px;
   h1, p {
     margin: 0px;
     color: ${props => props.theme.colors.darkTextColor};
@@ -449,7 +448,7 @@ export const ExclamationWrapper = styled.div`
 
 export const WrapperLeftContainer = styled.div`
   width: 100%;
-  padding: 20px;
+  padding: 0px 20px;
   box-sizing: border-box;
 
   @media (min-width: 769px) {
@@ -465,7 +464,7 @@ export const WrapperRightContainer = styled(WrapperLeftContainer)`
 export const Divider = styled.div`
   height: 8px;
   background: #F8F9FA;
-  width: calc(100% + 40px)
+  width: calc(100% + 40px);
   margin-left: -20px;
 
   @media(min-width: 769px) {
@@ -476,4 +475,10 @@ export const Divider = styled.div`
 
 export const MyOrderActions = styled.div`
 
+`
+
+export const ModalIcon = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
 `

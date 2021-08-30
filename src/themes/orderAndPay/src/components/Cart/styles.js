@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components'
 
+export const Container = styled.div`
+  padding: ${({ isCheckout }) => isCheckout ? '0px' : '10px'};
+`
+
 export const CartContainer = styled.div`
   width: 100%;
 `
@@ -79,7 +83,7 @@ export const CheckoutAction = styled.div`
 
   button {
     padding: 10px 30px;
-    width: 50%;
+    width: 100%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed
@@ -120,4 +124,15 @@ export const UpsellingPageTitleWrapper = styled.div`
       margin-left: 0px;
     `}
   }
+`
+
+export const Title = styled.h1`
+  font-weight: 600;
+  font-size: 20px;
+  color: ${props => props.theme.colors.darkTextColor};
+  margin-bottom: 18px;
+`
+
+export const ModalIcon = styled.div`
+  margin: 5px;
 `

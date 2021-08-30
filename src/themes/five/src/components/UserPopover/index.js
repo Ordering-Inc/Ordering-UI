@@ -18,12 +18,12 @@ import { capitalize } from '../../../../../utils'
 import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
 
 const optionsDefault = [
-  { name: 'search', pathname: '/explore', displayName: 'explore' },
-  { name: 'orders', pathname: '/profile/orders', displayName: 'orders' }
+  { name: 'search', pathname: '/explore', displayName: 'explore', key: 'explore' },
+  { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders' }
 ]
 
 const extraOptions = [
-  { name: 'profile', pathname: '/profile', displayName: 'view account' }
+  { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account' }
 ]
 
 export const UserPopover = (props) => {
@@ -129,7 +129,7 @@ export const UserPopover = (props) => {
                 active={window.location.pathname === option.pathname}
                 onClick={() => handleGoToPage(option.name)}
               >
-                {t((option.displayName || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
+                {t((option.key || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
               </PopoverListLink>
             ))
           )}
@@ -143,7 +143,7 @@ export const UserPopover = (props) => {
                     active={window.location.pathname === option.pathname}
                     onClick={() => handleGoToPage(option.name)}
                   >
-                    {t((option.displayName || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
+                    {t((option.key || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
                   </PopoverListLink>
                 ))
               )

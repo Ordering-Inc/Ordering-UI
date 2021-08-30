@@ -134,7 +134,7 @@ export const ProductActions = styled.div`
   z-index: 999;
 
   position: fixed;
-  bottom: -19px;
+  bottom: 0;
   right: 0;
   width: 100%;
   background-color: #FFF;
@@ -202,6 +202,9 @@ export const ProductActions = styled.div`
     div.incdec-control {
       width: 20%;
     }
+  }
+  @media (min-width: 1200px) {
+    bottom: -20px;
   }
 `
 export const SkeletonBlock = styled.div`

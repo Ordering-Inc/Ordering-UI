@@ -77,7 +77,7 @@ export const Title = styled.h1`
   margin: 0px;
   text-align: left;
   font-weight: 500;
-  font-size: 65px;
+  font-size: 50px;
   letter-spacing: 0px;
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #2c2e33;
@@ -86,7 +86,11 @@ export const Title = styled.h1`
   ${props => props.theme?.rtl && css`
       text-align: right;
   `}
-  
+
+  @media (min-width: 400px) {
+    font-size: 65px;
+  }
+
   @media (min-width: 576px) {
     font-size: 72px;
   }
@@ -121,7 +125,7 @@ export const WrapInput = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 50px;
   display: flex;
-  aligin-items: center;
+  align-items: center;
   margin-bottom: 27px;
 
   ${({ withIcon }) => withIcon && css`
@@ -147,7 +151,7 @@ export const WrapInput = styled.div`
     }
   `}
   
-  p{
+  p {
     color: ${props => props.theme.colors.darkTextColor};
     position: relative;
     margin: 0;
@@ -155,7 +159,9 @@ export const WrapInput = styled.div`
 
   svg {
     color: ${props => props.theme.colors.primary};
-    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
 
     ${props => props.theme?.rtl ? css`
       margin-left: 20px;
