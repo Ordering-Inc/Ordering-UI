@@ -49,3 +49,30 @@ export const PopoverArrow = styled.div`
   border-bottom: 8px solid #FFF;
   top: -8px;
 `
+export const Header = styled.div`
+  position: relative;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  h2 {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 34px;
+    color: ${props => props.theme.colors.primary}
+  }
+
+  svg {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.1s ease-in-out;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+`

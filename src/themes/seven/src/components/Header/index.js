@@ -14,7 +14,8 @@ import {
   UserEdit,
   CenterHeader,
   HeaderOptions,
-  OrderTypes
+  OrderTypes,
+  PopoverWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -23,7 +24,6 @@ import { AddressesPopover } from '../../../../../components/AddressesPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
 import { Modal } from '../../../../../components/Modal'
 import { MomentContent } from '../../../../../components/MomentContent'
-import { SidebarMenu } from '../../../../../components/SidebarMenu'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
@@ -34,6 +34,7 @@ import { CartPopover } from '../CartPopover'
 import { CartContent } from '../CartContent'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
+import { SidebarMenu } from '../SidebarMenu'
 
 export const Header = (props) => {
   const {
@@ -186,7 +187,6 @@ export const Header = (props) => {
                           withLogout
                           isCustomerMode={isCustomerMode}
                           open={openPopover.user}
-                          isHome={isHome}
                           onClick={() => handleTogglePopover('user')}
                           onClose={() => handleClosePopover('user')}
                         />
@@ -221,20 +221,22 @@ export const Header = (props) => {
         {onlineStatus && isShowOrderOptions && (
           windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
-              <AddressesPopover
-                auth={auth}
-                addressState={orderState?.options?.address}
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-              />
-              {!isCustomerMode && (
-                <MomentPopover
-                  open={openPopover.moment}
-                  onClick={() => handleTogglePopover('moment')}
-                  onClose={() => handleClosePopover('moment')}
+              <PopoverWrapper>
+                <AddressesPopover
+                  auth={auth}
+                  addressState={orderState?.options?.address}
+                  open={openPopover.addresses}
+                  onClick={() => handleTogglePopover('addresses')}
+                  onClose={() => handleClosePopover('addresses')}
                 />
-              )}
+                {!isCustomerMode && (
+                  <MomentPopover
+                    open={openPopover.moment}
+                    onClick={() => handleTogglePopover('moment')}
+                    onClose={() => handleClosePopover('moment')}
+                  />
+                )}
+              </PopoverWrapper>
             </SubMenu>
           ) : (
             <SubMenu>
@@ -261,7 +263,7 @@ export const Header = (props) => {
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             width='70%'
-            padding={modalSelected === 'address' ? '20px' : '5px'}
+            padding='20px'
           >
             {modalSelected === 'cart' && (
               <CartContent

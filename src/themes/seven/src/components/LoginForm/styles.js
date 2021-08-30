@@ -309,6 +309,12 @@ export const FormInline = styled.div`
   button {
     width: 100%;
     padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .forgot {

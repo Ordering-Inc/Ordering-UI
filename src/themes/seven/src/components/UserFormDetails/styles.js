@@ -6,10 +6,12 @@ export const FormInput = styled.form`
   align-items: center;
   width: 100%;
   margin: 0 auto;
+
   div.phone_number {
     margin-bottom: 20px;
     width: 100%;
   }
+
   input.form {
     padding: 10px 15px;
     width: 100%;

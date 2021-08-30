@@ -59,7 +59,7 @@ const UserDetailsUI = (props) => {
               !isEdit ? (
                 <span className='edit' onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</span>
               ) : (
-                <span className='cancel' onClick={() => toggleEditState()}>{t('CLEAR', 'Clear')}</span>
+                <span className='cancel' onClick={() => toggleEditState()}>{t('CANCEL', 'Cancel')}</span>
               )
             )}
           </Header>
@@ -92,6 +92,7 @@ const UserDetailsUI = (props) => {
                 {...props}
                 userData={userData}
                 isCustomerMode={isCustomerMode}
+                isCheckout
               />
             </SideForm>
           )}

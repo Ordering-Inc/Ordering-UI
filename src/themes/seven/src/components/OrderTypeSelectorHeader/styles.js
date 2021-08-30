@@ -27,12 +27,21 @@ export const OrderTypeWrapper = styled.span`
 
 export const SelectedOption = styled.p`
   margin: 0;
-  max-width: 60px;
+  max-width: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  @media (min-width: 380px) {
-      max-width: initial;
+
+  @media (min-width: 768px) {
+      max-width: 50px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 80px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: initial;
   }
 `
 

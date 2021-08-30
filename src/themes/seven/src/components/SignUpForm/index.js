@@ -4,7 +4,6 @@ import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../../../../../components/Confirm'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
-
 import {
   SignupForm as SignUpController,
   useLanguage,
@@ -28,7 +27,6 @@ import {
   FormBottom,
   AccountLogin
 } from './styles'
-
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { FacebookLoginButton } from '../../../../../components/FacebookLogin'
@@ -39,7 +37,6 @@ import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 import { sortInputFields } from '../../../../../utils'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
-
 const SignUpFormUI = (props) => {
   const {
     handleChangeInput,
@@ -65,14 +62,12 @@ const SignUpFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const emailInput = useRef(null)
-
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
-
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
-  const [isSignupBusiness, setIsSignupBusiness] = useState(false)
+  // const [isSignupBusiness, setIsSignupBusiness] = useState(false)
 
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
@@ -355,9 +350,9 @@ const SignUpFormUI = (props) => {
                   >
                     {formState.loading
                       ? `${t('LOADING', 'Loading')}...`
-                      : isSignupBusiness
-                        ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
-                        : t('SIGN_UP', 'Sign up')}
+                      // : isSignupBusiness
+                      //   ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
+                      : t('SIGN_UP', 'Sign up')}
                   </Button>
                 </FormInline>
               </FormInput>
