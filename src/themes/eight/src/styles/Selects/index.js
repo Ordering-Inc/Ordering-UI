@@ -50,7 +50,7 @@ export const Options = styled.div`
         margin-right: -1px;
         margin-left: 0px;
         right: 0;
-        left: initial
+        left: initial;
     `}
   `}
   ${({ position }) => position?.toLowerCase() === 'right' && css`
@@ -68,7 +68,7 @@ export const Options = styled.div`
 export const Selected = styled.div`
   padding-left: 9px;
   padding-right: 9px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   position: relative;
   display: flex;
@@ -97,8 +97,8 @@ export const Select = styled.div`
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;
-  background-color: ${({ isHome }) => isHome ? 'rgba(247,247,247,0.3)' : '#CCC'} !important;
-  color: ${({ isHome }) => isHome ? '#FFF' : '#333'} !important;
+  background-color: #CCC;
+  color: #485259;
   position: relative;
   ${props => props.disabled && css`
     pointer-events: none;

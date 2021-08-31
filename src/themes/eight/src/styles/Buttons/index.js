@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { darken } from 'polished'
+import { darken, lighten } from 'polished'
 
 export const Button = styled.button`
   background: #CCC;
@@ -7,13 +7,13 @@ export const Button = styled.button`
   border: 1px solid #CCC;
   border-radius: 30px;
   line-height: 30px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 6px 20px;
   font-size: 16px;
   cursor: pointer;
   outline: none;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all .3s ease-in-out;
   &:active {
     background: ${() => darken(0.07, '#CCC')};
   }
@@ -21,8 +21,12 @@ export const Button = styled.button`
     opacity: 0.5;
     cursor: not-allowed;
   }
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 18px 0 rgb(0 0 0 / 20%);
+  }
   ${({ bgtransparent }) => bgtransparent && css`
-      background: transparent !important;
+    background: transparent !important;
   `}
   ${({ initialIcon }) => initialIcon && css`
     text-align: left;
@@ -81,6 +85,24 @@ export const Button = styled.button`
     &:active {
       color: #FFF;
       background: ${darken(0.07, '#CCC')};
+    }
+  `}
+  ${({ color }) => color === 'primaryGradient' && css`
+    background: linear-gradient(${props => lighten(0.1, props.theme.colors.primary)}, ${props => darken(0.1, props.theme.colors.primary)});
+    color: ${props => props.theme.colors.primaryContrast};
+    border-color: ${props => props.theme.colors.primary};
+    &:active {
+      background: linear-gradient(${props => props.theme.colors.primary}, ${props => darken(0.2, props.theme.colors.primary)})
+    }
+  `}
+  ${({ color }) => color === 'primaryContrast' && css`
+    background: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
+    border-color: transparent;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    &:active {
+      background: ${props => darken(0.07, props.theme.colors.primary)};
+      color: ${props => props.theme.colors.primaryContrast};
     }
   `}
   ${({ color }) => color === 'primary' && css`
