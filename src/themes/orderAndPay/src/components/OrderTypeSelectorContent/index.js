@@ -185,7 +185,7 @@ export const OrderTypeSelectorContent = (props) => {
   const orderTypeProps = {
     ...props,
     UIComponent: OrderTypeSelectorContentUI,
-    logo: props.logo || theme.images?.dummies?.businessLogo,
+    logo: theme.images?.businessLogo || props.logo || theme.images?.dummies?.businessLogo,
     orderTypes: props.orderTypes || [
       {
         value: 2,
