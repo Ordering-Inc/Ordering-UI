@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, OrderTypeControl, useOrder, useApi, useSession } from 'ordering-components'
+import { useLanguage, OrderTypeControl, useOrder, useApi } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
@@ -36,8 +36,6 @@ export const OrderTypeSelectorContentUI = (props) => {
   const [orderStatus] = useOrder()
   const [orderTypeSelected, setOrderTypeSelected] = useState(null)
   const [ordering] = useApi()
-  const [{ token }] = useSession()
-  const [isLoading, setIsLoading] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   // const [pagination, setPagination] = useState({})
   const [places, setPlaces] = useState([])
@@ -52,7 +50,7 @@ export const OrderTypeSelectorContentUI = (props) => {
     handleChangeOrderType && handleChangeOrderType(value)
     setOrderTypeSelected({ open: true, type: text, label })
   }
-  console.log(places)
+
   const getPlaces = async () => {
     try {
       const response = await fetch(`${ordering.root}/business/${businessId}/places`)
@@ -60,7 +58,7 @@ export const OrderTypeSelectorContentUI = (props) => {
       if (error) {
         setAlertState({
           open: true,
-          content: [result]
+          content: result
         })
       } else {
         setPlaces(result.map(place => ({
@@ -72,7 +70,7 @@ export const OrderTypeSelectorContentUI = (props) => {
     } catch (err) {
       setAlertState({
         open: true,
-        content: [err.message]
+        content: err.message
       })
     }
   }
@@ -85,32 +83,9 @@ export const OrderTypeSelectorContentUI = (props) => {
       })
       return
     }
-    setIsLoading(true)
-    try {
-      const response = await fetch(`${ordering.root}/carts/change_place`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({
-          place_id: placeId,
-          business_id: businessId
-        })
-      })
-      const { result, error } = await response.json()
-      if (error && result[0] !== 'ERROR_YOU_HAVE_NOT_CART') {
-        setAlertState({
-          open: true,
-          content: [result]
-        })
-      } else {
-        await window.localStorage.setItem('place_id', placeId)
-        handleBusinessPage()
-      }
-      setIsLoading(false)
-    } catch (err) {
-      setAlertState({
-        open: true,
-        content: [err.message]
-      })
+    if (places.some(place => place.id === parseInt(placeId))) {
+      await window.localStorage.setItem('place_id', placeId)
+      handleBusinessPage()
     }
   }
 
@@ -180,19 +155,18 @@ export const OrderTypeSelectorContentUI = (props) => {
               ))}
             </Table>
           </TypeContainer>
-          <Button color='primary' style={{ width: '100%' }} onClick={handleChangePlace} disabled={isLoading}>
+          <Button color='primary' style={{ width: '100%' }} onClick={handleChangePlace}>
             {t('CONTINUE', 'Continue')}
           </Button>
         </Modal>
       </OrderTypeSelectorContainer>
       <Alert
-        title={t('LOGIN', 'Login')}
+        title={t('ERROR', 'Error')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
       />
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

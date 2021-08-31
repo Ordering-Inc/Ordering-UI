@@ -77,7 +77,6 @@ const CheckoutUI = (props) => {
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  // const [{ options, loading }, { changePaymethod }] = useOrder()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -97,9 +96,10 @@ const CheckoutUI = (props) => {
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder()
+      await window.localStorage.removeItem('place_id')
       return
     }
     setAlertState({
@@ -201,7 +201,7 @@ const CheckoutUI = (props) => {
             })
           })
           const { result, error } = await response.json()
-          if (error && result[0] !== 'ERROR_YOU_HAVE_NOT_CART') {
+          if (error) {
             setAlertState({
               open: true,
               content: [result]
