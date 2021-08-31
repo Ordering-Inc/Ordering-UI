@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useApi } from 'ordering-components'
+import { useApi } from 'ordering-components'
 import { HomeHero } from '../../../src/themes/eight/src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
@@ -8,10 +8,7 @@ import Skeleton from 'react-loading-skeleton'
 import {
   HomeContainer,
   SkeletonContainer,
-  SkeletonHeader,
-  SkeletonContent,
-  SkeletonInformation,
-  SkeletonSide
+  SkeletonContent
 } from './styles'
 
 export const HomePage = (props) => {
@@ -67,19 +64,11 @@ export const HomePage = (props) => {
         {
           homeState.loading && (
             <SkeletonContainer>
-              <SkeletonHeader>
-                <Skeleton width='100%' height='100%' />
-              </SkeletonHeader>
               <SkeletonContent>
-                <SkeletonInformation>
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                </SkeletonInformation>
-                <SkeletonSide>
-                  <Skeleton width='100%' height='100%' />
-                </SkeletonSide>
+                <Skeleton width='100%' height='100%' />
+              </SkeletonContent>
+              <SkeletonContent>
+                <Skeleton width='100%' height='100%' />
               </SkeletonContent>
             </SkeletonContainer>
           )
