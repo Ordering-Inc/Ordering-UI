@@ -13,7 +13,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import MdClose from '@meronex/icons/md/MdClose'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 
-import { Confirm } from '../../../../../components/Confirm'
+import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
