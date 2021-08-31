@@ -1,7 +1,5 @@
 import { AppleLogin } from './src/components/AppleLogin'
 import { AutoScroll } from './src/components/AutoScroll'
-import { BusinessBasicInformation } from './src/components/BusinessBasicInformation'
-import { BusinessInformation } from './src/components/BusinessInformation'
 import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessProductsCategories } from './src/components/BusinessProductsCategories'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
@@ -21,13 +19,11 @@ import { LoginForm } from './src/components/LoginForm'
 import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorContent'
-import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { SearchBar } from './src/components/SearchBar'
-import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { StripeElementsForm } from './src/components/StripeElementsForm'
@@ -42,8 +38,6 @@ import { Select } from './src/styles/Select'
 export {
   AppleLogin,
   AutoScroll,
-  BusinessBasicInformation,
-  BusinessInformation,
   BusinessItemAccordion,
   BusinessProductsCategories,
   BusinessProductsList,
@@ -63,13 +57,11 @@ export {
   Modal,
   OrderDetails,
   OrderTypeSelectorContent,
-  OrderTypeSelectorHeader,
   PaymentOptionCash,
   PaymentOptions,
   ProductForm,
   ProductItemAccordion,
   SearchBar,
-  SidebarMenu,
   SignUpForm,
   SingleProductCard,
   StripeElementsForm,
