@@ -19,7 +19,7 @@ var _styledComponents = require("styled-components");
 
 var _orderingComponents = require("ordering-components");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
 

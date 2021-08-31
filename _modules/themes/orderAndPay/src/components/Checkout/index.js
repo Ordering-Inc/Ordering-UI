@@ -41,7 +41,7 @@ var _DriverTips = require("../DriverTips");
 
 var _Cart = require("../Cart");
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _CartContent = require("../CartContent");
 
@@ -112,8 +112,7 @@ var CheckoutUI = function CheckoutUI(props) {
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
       _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
-      validationFields = _useValidationFields2[0]; // const [{ options, loading }, { changePaymethod }] = useOrder()
-
+      validationFields = _useValidationFields2[0];
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -182,20 +181,45 @@ var CheckoutUI = function CheckoutUI(props) {
 
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
 
-  var handlePlaceOrder = function handlePlaceOrder() {
-    if (!userErrors.length) {
-      handlerClickPlaceOrder && handlerClickPlaceOrder();
-      return;
-    }
+  var handlePlaceOrder = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (userErrors.length) {
+                _context.next = 5;
+                break;
+              }
 
-    setAlertState({
-      open: true,
-      content: Object.values(userErrors).map(function (error) {
-        return error;
-      })
-    });
-    setIsUserDetailsEdit(true);
-  };
+              handlerClickPlaceOrder && handlerClickPlaceOrder();
+              _context.next = 4;
+              return window.localStorage.removeItem('place_id');
+
+            case 4:
+              return _context.abrupt("return");
+
+            case 5:
+              setAlertState({
+                open: true,
+                content: Object.values(userErrors).map(function (error) {
+                  return error;
+                })
+              });
+              setIsUserDetailsEdit(true);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handlePlaceOrder() {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -264,29 +288,29 @@ var CheckoutUI = function CheckoutUI(props) {
   }, [isResetPaymethod]);
   (0, _react.useEffect)(function () {
     var getPlaceId = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
         var id;
-        return _regenerator.default.wrap(function _callee$(_context) {
+        return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.next = 2;
+                _context2.next = 2;
                 return window.localStorage.getItem('place_id');
 
               case 2:
-                id = _context.sent;
+                id = _context2.sent;
                 setPlaceId(id);
 
               case 4:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }));
 
       return function getPlaceId() {
-        return _ref.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       };
     }();
 
@@ -294,23 +318,23 @@ var CheckoutUI = function CheckoutUI(props) {
   }, []);
   (0, _react.useEffect)(function () {
     var handleChangePlace = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
         var _cart$products;
 
         var response, _yield$response$json, result, error;
 
-        return _regenerator.default.wrap(function _callee2$(_context2) {
+        return _regenerator.default.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 if (!((cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0)) {
-                  _context2.next = 18;
+                  _context3.next = 18;
                   break;
                 }
 
                 setIsLoadingPlace(true);
-                _context2.prev = 2;
-                _context2.next = 5;
+                _context3.prev = 2;
+                _context3.next = 5;
                 return fetch("".concat(ordering.root, "/carts/change_place"), {
                   method: 'POST',
                   headers: {
@@ -324,16 +348,16 @@ var CheckoutUI = function CheckoutUI(props) {
                 });
 
               case 5:
-                response = _context2.sent;
-                _context2.next = 8;
+                response = _context3.sent;
+                _context3.next = 8;
                 return response.json();
 
               case 8:
-                _yield$response$json = _context2.sent;
+                _yield$response$json = _context3.sent;
                 result = _yield$response$json.result;
                 error = _yield$response$json.error;
 
-                if (error && result[0] !== 'ERROR_YOU_HAVE_NOT_CART') {
+                if (error) {
                   setAlertState({
                     open: true,
                     content: [result]
@@ -341,27 +365,27 @@ var CheckoutUI = function CheckoutUI(props) {
                 }
 
                 setIsLoadingPlace(false);
-                _context2.next = 18;
+                _context3.next = 18;
                 break;
 
               case 15:
-                _context2.prev = 15;
-                _context2.t0 = _context2["catch"](2);
+                _context3.prev = 15;
+                _context3.t0 = _context3["catch"](2);
                 setAlertState({
                   open: true,
-                  content: [_context2.t0.message]
+                  content: [_context3.t0.message]
                 });
 
               case 18:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[2, 15]]);
+        }, _callee3, null, [[2, 15]]);
       }));
 
       return function handleChangePlace() {
-        return _ref2.apply(this, arguments);
+        return _ref3.apply(this, arguments);
       };
     }();
 
@@ -691,20 +715,20 @@ var Checkout = function Checkout(props) {
   }, [errors]);
 
   var getOrder = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(cartId) {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4(cartId) {
       var _result$order, userCustomer, url, response, _yield$response$json2, result, _confirmCartRes$resul, confirmCartRes, cart;
 
-      return _regenerator.default.wrap(function _callee3$(_context3) {
+      return _regenerator.default.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              _context3.prev = 0;
+              _context4.prev = 0;
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: true
               }));
               userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
               url = userCustomer ? "".concat(ordering.root, "/carts/").concat(cartId, "?user_id=").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) : "".concat(ordering.root, "/carts/").concat(cartId);
-              _context3.next = 6;
+              _context4.next = 6;
               return fetch(url, {
                 method: 'GET',
                 headers: {
@@ -714,16 +738,16 @@ var Checkout = function Checkout(props) {
               });
 
             case 6:
-              response = _context3.sent;
-              _context3.next = 9;
+              response = _context4.sent;
+              _context4.next = 9;
               return response.json();
 
             case 9:
-              _yield$response$json2 = _context3.sent;
+              _yield$response$json2 = _context4.sent;
               result = _yield$response$json2.result;
 
               if (!(result.status === 1 && (_result$order = result.order) !== null && _result$order !== void 0 && _result$order.uuid)) {
-                _context3.next = 16;
+                _context4.next = 16;
                 break;
               }
 
@@ -731,21 +755,21 @@ var Checkout = function Checkout(props) {
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false
               }));
-              _context3.next = 33;
+              _context4.next = 33;
               break;
 
             case 16:
               if (!(result.status === 2)) {
-                _context3.next = 31;
+                _context4.next = 31;
                 break;
               }
 
-              _context3.prev = 17;
-              _context3.next = 20;
+              _context4.prev = 17;
+              _context4.next = 20;
               return confirmCart(cartUuid);
 
             case 20:
-              confirmCartRes = _context3.sent;
+              confirmCartRes = _context4.sent;
 
               if (confirmCartRes.error) {
                 setAlertState({
@@ -763,19 +787,19 @@ var Checkout = function Checkout(props) {
                 loading: false,
                 cart: result
               }));
-              _context3.next = 29;
+              _context4.next = 29;
               break;
 
             case 26:
-              _context3.prev = 26;
-              _context3.t0 = _context3["catch"](17);
+              _context4.prev = 26;
+              _context4.t0 = _context4["catch"](17);
               setAlertState({
                 open: true,
-                content: [_context3.t0.message]
+                content: [_context4.t0.message]
               });
 
             case 29:
-              _context3.next = 33;
+              _context4.next = 33;
               break;
 
             case 31:
@@ -787,27 +811,27 @@ var Checkout = function Checkout(props) {
               }));
 
             case 33:
-              _context3.next = 38;
+              _context4.next = 38;
               break;
 
             case 35:
-              _context3.prev = 35;
-              _context3.t1 = _context3["catch"](0);
+              _context4.prev = 35;
+              _context4.t1 = _context4["catch"](0);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
-                error: [_context3.t1.toString()]
+                error: [_context4.t1.toString()]
               }));
 
             case 38:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3, null, [[0, 35], [17, 26]]);
+      }, _callee4, null, [[0, 35], [17, 26]]);
     }));
 
     return function getOrder(_x) {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
 
