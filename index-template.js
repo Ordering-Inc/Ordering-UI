@@ -58,6 +58,12 @@ import categoryAll from './template/assets/images/categories/category-all.png'
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
 
+import delivery from './template/assets/images/delivery-types/delivery.png'
+import curbside from './template/assets/images/delivery-types/curbside.png'
+import driveThru from './template/assets/images/delivery-types/drive_thru.png'
+import eatIn from './template/assets/images/delivery-types/eat_in.png'
+import pickUp from './template/assets/images/delivery-types/pickup.png'
+
 const configFile = {
   app_id: 'ordering-react',
   project: 'luisv4',
@@ -146,6 +152,13 @@ theme.images = {
     driverPhoto: 'https://res.cloudinary.com/demo/image/fetch/c_thumb,g_face,r_max/https://www.freeiconspng.com/thumbs/driver-icon/driver-icon-14.png',
     businessLogo: storeDummy,
     customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
+  },
+  deliveryTypes: {
+    delivery: delivery,
+    curbside: curbside,
+    driveThru: driveThru,
+    eatIn: eatIn,
+    pickUp: pickUp
   }
 }
 
