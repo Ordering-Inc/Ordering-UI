@@ -657,6 +657,12 @@ Object.defineProperty(exports, "formatSeconds", {
     return _utils.formatSeconds;
   }
 });
+Object.defineProperty(exports, "verifyDecimals", {
+  enumerable: true,
+  get: function get() {
+    return _utils.verifyDecimals;
+  }
+});
 
 var _AddressDetails = require("./components/AddressDetails");
 
