@@ -19,7 +19,7 @@ var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _BsArrowLeft = _interopRequireDefault(require("@meronex/icons/bs/BsArrowLeft"));
 
-var _Confirm = require("../../../../../components/Confirm");
+var _Confirm = require("../Confirm");
 
 var _Modal = require("../Modal");
 
