@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useSession, useOrder, useLanguage } from 'ordering-components'
-import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import {
   HeroContainer,
   ContentWrapper,
@@ -9,14 +8,10 @@ import {
   Slogan,
   OrderTypeSelectContainer,
   OrderTypeItem,
-  OrderTypeInfo,
-
-  WrapInput,
-  InputSpan
+  OrderTypeInfo
 } from './styles'
 
 import { Modal } from '../../../../../components/Modal'
-import { Button } from '../../styles/Buttons'
 import { AddressForm } from '../../../../../components/AddressForm'
 import { AddressList } from '../../../../../components/AddressList'
 
@@ -56,11 +51,9 @@ export const HomeHero = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <HeroContainer>
         <ContentWrapper>
           <Title>{t('TITLE_HOME_8', theme?.defaultLanguages?.TITLE_HOME || 'What type of order can we get started for you?')}</Title>
@@ -133,13 +126,11 @@ export const HomeHero = (props) => {
         </Modal>
       </HeroContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </>
   )
 }
