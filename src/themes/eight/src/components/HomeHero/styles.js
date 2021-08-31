@@ -20,6 +20,7 @@ export const ContentWrapper = styled.div`
   @media (min-width: 992px) {
     font-size: 50px;
     margin-bottom: 80px;
+    width: 50%;
   }
 `
 
