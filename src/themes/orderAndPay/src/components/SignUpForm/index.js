@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
 

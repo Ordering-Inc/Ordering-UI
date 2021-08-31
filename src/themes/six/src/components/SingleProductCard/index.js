@@ -58,7 +58,6 @@ export const SingleProductCard = (props) => {
         {!isSkeleton ? (
           <WrapLogo>
             <CardLogo
-              className='image'
               soldOut={isSoldOut || maxProductQuantity <= 0}
               bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
             />
