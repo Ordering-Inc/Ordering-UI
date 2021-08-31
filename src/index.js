@@ -96,7 +96,8 @@ import {
   scrollTo,
   DriverTipsOptions,
   bytesConverter,
-  formatSeconds
+  formatSeconds,
+  verifyDecimals
 } from './utils'
 
 export {
@@ -212,5 +213,6 @@ export {
   scrollTo,
   DriverTipsOptions,
   bytesConverter,
-  formatSeconds
+  formatSeconds,
+  verifyDecimals
 }
