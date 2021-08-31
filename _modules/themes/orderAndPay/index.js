@@ -129,12 +129,6 @@ Object.defineProperty(exports, "OrderTypeSelectorContent", {
     return _OrderTypeSelectorContent.OrderTypeSelectorContent;
   }
 });
-Object.defineProperty(exports, "OrderTypeSelectorHeader", {
-  enumerable: true,
-  get: function get() {
-    return _OrderTypeSelectorHeader.OrderTypeSelectorHeader;
-  }
-});
 Object.defineProperty(exports, "PaymentOptionCash", {
   enumerable: true,
   get: function get() {
@@ -163,12 +157,6 @@ Object.defineProperty(exports, "SearchBar", {
   enumerable: true,
   get: function get() {
     return _SearchBar.SearchBar;
-  }
-});
-Object.defineProperty(exports, "SidebarMenu", {
-  enumerable: true,
-  get: function get() {
-    return _SidebarMenu.SidebarMenu;
   }
 });
 Object.defineProperty(exports, "SignUpForm", {
@@ -274,8 +262,6 @@ var _OrderDetails = require("./src/components/OrderDetails");
 
 var _OrderTypeSelectorContent = require("./src/components/OrderTypeSelectorContent");
 
-var _OrderTypeSelectorHeader = require("./src/components/OrderTypeSelectorHeader");
-
 var _PaymentOptionCash = require("./src/components/PaymentOptionCash");
 
 var _PaymentOptions = require("./src/components/PaymentOptions");
@@ -285,8 +271,6 @@ var _ProductForm = require("./src/components/ProductForm");
 var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
 
 var _SearchBar = require("./src/components/SearchBar");
-
-var _SidebarMenu = require("./src/components/SidebarMenu");
 
 var _SignUpForm = require("./src/components/SignUpForm");
 

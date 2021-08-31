@@ -86,33 +86,24 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       _useApi2 = _slicedToArray(_useApi, 1),
       ordering = _useApi2[0];
 
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      token = _useSession2[0].token;
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isLoading = _useState4[0],
-      setIsLoading = _useState4[1];
-
-  var _useState5 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: []
   }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1]; // const [pagination, setPagination] = useState({})
+
+
+  var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      alertState = _useState6[0],
-      setAlertState = _useState6[1]; // const [pagination, setPagination] = useState({})
+      places = _useState6[0],
+      setPlaces = _useState6[1];
 
-
-  var _useState7 = (0, _react.useState)([]),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      places = _useState8[0],
-      setPlaces = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      placeId = _useState10[0],
-      setPlaceId = _useState10[1];
+      placeId = _useState8[0],
+      setPlaceId = _useState8[1];
 
   var handleClickOrderType = function handleClickOrderType(_ref) {
     var value = _ref.value,
@@ -132,8 +123,6 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       label: label
     });
   };
-
-  console.log(places);
 
   var getPlaces = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
@@ -160,7 +149,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
               if (error) {
                 setAlertState({
                   open: true,
-                  content: [result]
+                  content: result
                 });
               } else {
                 setPlaces(result.map(function (place) {
@@ -180,7 +169,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
               _context.t0 = _context["catch"](0);
               setAlertState({
                 open: true,
-                content: [_context.t0.message]
+                content: _context.t0.message
               });
 
             case 15:
@@ -198,8 +187,6 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
 
   var handleChangePlace = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-      var response, _yield$response$json2, result, error;
-
       return _regenerator.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -216,69 +203,25 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
               return _context2.abrupt("return");
 
             case 3:
-              setIsLoading(true);
-              _context2.prev = 4;
-              _context2.next = 7;
-              return fetch("".concat(ordering.root, "/carts/change_place"), {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: "Bearer ".concat(token)
-                },
-                body: JSON.stringify({
-                  place_id: placeId,
-                  business_id: businessId
-                })
-              });
-
-            case 7:
-              response = _context2.sent;
-              _context2.next = 10;
-              return response.json();
-
-            case 10:
-              _yield$response$json2 = _context2.sent;
-              result = _yield$response$json2.result;
-              error = _yield$response$json2.error;
-
-              if (!(error && result[0] !== 'ERROR_YOU_HAVE_NOT_CART')) {
-                _context2.next = 17;
+              if (!places.some(function (place) {
+                return place.id === parseInt(placeId);
+              })) {
+                _context2.next = 7;
                 break;
               }
 
-              setAlertState({
-                open: true,
-                content: [result]
-              });
-              _context2.next = 20;
-              break;
-
-            case 17:
-              _context2.next = 19;
+              _context2.next = 6;
               return window.localStorage.setItem('place_id', placeId);
 
-            case 19:
+            case 6:
               handleBusinessPage();
 
-            case 20:
-              setIsLoading(false);
-              _context2.next = 26;
-              break;
-
-            case 23:
-              _context2.prev = 23;
-              _context2.t0 = _context2["catch"](4);
-              setAlertState({
-                open: true,
-                content: [_context2.t0.message]
-              });
-
-            case 26:
+            case 7:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[4, 23]]);
+      }, _callee2);
     }));
 
     return function handleChangePlace() {
@@ -357,10 +300,9 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     style: {
       width: '100%'
     },
-    onClick: handleChangePlace,
-    disabled: isLoading
+    onClick: handleChangePlace
   }, t('CONTINUE', 'Continue')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('LOGIN', 'Login'),
+    title: t('ERROR', 'Error'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -369,8 +311,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     },
     onAccept: function onAccept() {
       return closeAlert();
-    },
-    closeOnBackdrop: false
+    }
   }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
