@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
 import SuLocation from '@meronex/icons/su/SuLocation'
+import FaRegClock from '@meronex/icons/fa/FaRegClock'
 
-import { MomentPopover } from '../MomentPopover'
 import { MomentContent } from '../MomentContent'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { LanguageSelector } from '../LanguageSelector'
@@ -38,7 +38,8 @@ import {
   SubMenu,
   CustomerInfo,
   UserEdit,
-  VerticalBorderLine
+  VerticalBorderLine,
+  MomentItem
 } from './styles'
 
 export const Header = (props) => {
@@ -60,6 +61,7 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
+  const [{ parseDate }] = useUtils()
 
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -136,6 +138,12 @@ export const Header = (props) => {
     }
   }
 
+  const handleMoment = () => {
+    if (configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0) return
+    console.log('moment')
+    handleGoToPage({ page: 'moment' })
+  }
+
   useEffect(() => {
     events.on('cart_product_added', handleAddProduct)
     return () => events.off('cart_product_added', handleAddProduct)
@@ -197,11 +205,14 @@ export const Header = (props) => {
                     </AddressItem>
                     <VerticalBorderLine />
                     {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                      <MomentPopover
-                        open={openPopover.moment}
-                        onClick={() => handleTogglePopover('moment')}
-                        onClose={() => handleClosePopover('moment')}
-                      />
+                      <MomentItem
+                        onClick={() => handleMoment()}
+                      >
+                        <FaRegClock />
+                        {orderState.options?.moment
+                          ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
+                          : t('ASAP_ABBREVIATION', 'ASAP')}
+                      </MomentItem>
                     )}
                   </>
                 )}
@@ -278,11 +289,14 @@ export const Header = (props) => {
                 <SuLocation /> {orderState.options?.address?.address?.split(',')?.[0] || t('FIND_RESTAURANT', 'Find a restaurant')}
               </AddressItem>
               {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                <MomentPopover
-                  open={openPopover.moment}
-                  onClick={() => handleTogglePopover('moment')}
-                  onClose={() => handleClosePopover('moment')}
-                />
+                <MomentItem
+                  onClick={() => handleMoment()}
+                >
+                  <FaRegClock />
+                  {orderState.options?.moment
+                    ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
+                    : t('ASAP_ABBREVIATION', 'ASAP')}
+                </MomentItem>
               )}
             </SubMenu>
           ) : (

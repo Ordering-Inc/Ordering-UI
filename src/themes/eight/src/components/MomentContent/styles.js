@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   position: relative;
   padding: 20px 10px;
+  min-height: calc(100vh - 330px);
 
   @media (min-width: 769px) {
     padding: 0px;

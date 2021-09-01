@@ -29,7 +29,8 @@ export const ListenPageChanges = ({ children }) => {
     forgot_password: '/password/forgot',
     reset_password: '/password/reset',
     address: '/address',
-    address_list: '/address-list'
+    address_list: '/address-list',
+    moment: '/moment'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

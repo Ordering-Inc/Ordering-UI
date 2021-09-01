@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useApi } from 'ordering-components'
 
 export const Footer = () => {
+  const location = useLocation()
   const [footerState, setfooterState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
   const requestsState = {}
@@ -9,9 +11,15 @@ export const Footer = () => {
   const getPage = async () => {
     setfooterState({ ...footerState, loading: true })
     try {
+      let footerPage
+      if (location.pathname === '/' || location.pathname === '/home') {
+        footerPage = 'chickFillAFooter'
+      } else {
+        footerPage = 'chickFillAPrivacyFooter'
+      }
       const source = {}
       requestsState.page = source
-      const { content: { error, result } } = await ordering.pages('chickFillAFooter').get({ cancelToken: source })
+      const { content: { error, result } } = await ordering.pages(`${footerPage}`).get({ cancelToken: source })
       setfooterState({ ...footerState, loading: false })
       if (!error) {
         setfooterState({ ...footerState, body: result.body })
@@ -32,7 +40,7 @@ export const Footer = () => {
         requestsState.page.cancel()
       }
     }
-  }, [])
+  }, [location.pathname])
 
   return (
     <>

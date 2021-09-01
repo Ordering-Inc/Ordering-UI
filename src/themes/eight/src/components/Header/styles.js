@@ -175,3 +175,20 @@ export const VerticalBorderLine = styled.div`
   height: 30px;
   background-color: ${props => props.theme.colors.grayMedium};
 `
+
+export const MomentItem = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: ${props => props.theme.colors.grayDark};
+  font-size: 14px;
+  
+  svg {
+    font-size: 14px;
+    margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `} 
+  }
+`

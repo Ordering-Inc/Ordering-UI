@@ -1,13 +1,15 @@
 import React from 'react'
-import { useOrder, useConfig } from 'ordering-components'
+import { useOrder, useConfig, useLanguage } from 'ordering-components'
 
 import { Container, Layer } from './styles'
 
-import { MomentControl } from '../../../../../components/MomentControl'
+import { MomentControl } from '../MomentControl'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { NavBar } from '../NavBar'
 
 export const MomentContent = (props) => {
+  const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const limitDays = parseInt(configs?.max_days_preorder?.value, 10)
   const [orderState] = useOrder()
@@ -35,6 +37,7 @@ export const MomentContent = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
+      <NavBar title={t('SELECT_DELIVERY_DATE_TIME', 'Select date & time  for your delivery')} />
       <Container isLoading={orderState?.loading}>
         <MomentControl {...momentProps} />
         {orderState?.loading && (

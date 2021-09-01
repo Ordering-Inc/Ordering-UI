@@ -41,7 +41,7 @@ export const Options = styled.div`
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;
-  border-radius: 15px;
+  border-radius: 7.6px;
   overflow: hidden;
   ${({ position }) => position?.toLowerCase() === 'left' && css`
     left: 0;

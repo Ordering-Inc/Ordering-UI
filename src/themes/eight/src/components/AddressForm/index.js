@@ -155,7 +155,9 @@ const AddressFormUI = (props) => {
           const isAddressAlreadyExist = arrayList.map(address => checkAddress(address, addressToCompare)).some(value => value) ?? false
           if (!isAddressAlreadyExist) {
             saveAddress(data.address, userCustomerSetup)
-            history.goBack()
+            if (!auth) {
+              history.goBack()
+            }
             return
           }
           setAlertState({
@@ -216,7 +218,9 @@ const AddressFormUI = (props) => {
 
     if (!isAddressAlreadyExist) {
       saveAddress({}, userCustomerSetup)
-      history.goBack()
+      if (!auth) {
+        history.goBack()
+      }
       return
     }
 
