@@ -4,8 +4,8 @@ import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } f
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
+import SuLocation from '@meronex/icons/su/SuLocation'
 
-import { AddressesPopover } from '../AddressesPopover'
 import { MomentPopover } from '../MomentPopover'
 import { MomentContent } from '../MomentContent'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
@@ -29,6 +29,7 @@ import { Confirm } from '../../../../../components/Confirm'
 import {
   Header as HeaderContainer,
   InnerHeader,
+  AddressItem,
   LogoHeader,
   LeftHeader,
   RightHeader,
@@ -127,6 +128,14 @@ export const Header = (props) => {
     }
   }
 
+  const handleAddress = () => {
+    if (auth) {
+      handleGoToPage({ page: 'address_list' })
+    } else {
+      handleGoToPage({ page: 'address' })
+    }
+  }
+
   useEffect(() => {
     events.on('cart_product_added', handleAddProduct)
     return () => events.off('cart_product_added', handleAddProduct)
@@ -183,14 +192,9 @@ export const Header = (props) => {
                 {onlineStatus && windowSize.width > 820 && (
                   <>
                     <VerticalBorderLine />
-                    <AddressesPopover
-                      auth={auth}
-                      addressState={orderState?.options?.address}
-                      open={openPopover.addresses}
-                      onClick={() => handleTogglePopover('addresses')}
-                      onClose={() => handleClosePopover('addresses')}
-                      isCustomerMode={isCustomerMode}
-                    />
+                    <AddressItem onClick={() => handleAddress()}>
+                      <SuLocation /> {orderState.options?.address?.address?.split(',')?.[0] || t('FIND_RESTAURANT', 'Find a restaurant')}
+                    </AddressItem>
                     <VerticalBorderLine />
                     {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                       <MomentPopover
@@ -270,13 +274,9 @@ export const Header = (props) => {
         {onlineStatus && isShowOrderOptions && (
           windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
-              <AddressesPopover
-                auth={auth}
-                addressState={orderState?.options?.address}
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-              />
+              <AddressItem onClick={() => handleAddress()}>
+                <SuLocation /> {orderState.options?.address?.address?.split(',')?.[0] || t('FIND_RESTAURANT', 'Find a restaurant')}
+              </AddressItem>
               {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <MomentPopover
                   open={openPopover.moment}

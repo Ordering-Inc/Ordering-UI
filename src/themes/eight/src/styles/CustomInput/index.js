@@ -8,7 +8,7 @@ const CustomInputContainer = styled.div`
     font-size: 14px;
     color: ${props => props.theme.colors.grayMedium};
     position: absolute;
-    top: 10px;
+    top: 15px;
     ${props => props.theme?.rtl ? css`
       margin-right: 20px;
     ` : css`
@@ -16,10 +16,11 @@ const CustomInputContainer = styled.div`
     `}
   }
 
-  > input {
+  > input,
+  > textarea {
     width: 100%;
     border: 2px solid ${props => props.theme.colors.grayDark};
-    padding: 30px 20px 15px 20px;
+    padding: 40px 20px 10px 20px;
     box-sizing: border-box;
     font-size: 16px;
     border-radius: 7.6px;
@@ -29,6 +30,10 @@ const CustomInputContainer = styled.div`
     &:focus {
       border-color: ${props => props.theme.colors.secundary};
     }
+  }
+
+  > textarea {
+    resize: none;
   }
 `
 

@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components'
 import { darken, lighten } from 'polished'
 
 export const Button = styled.button`
-  background: #CCC;
+  background: #ACB2B6;
   color: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #ACB2B6;
   border-radius: 30px;
   line-height: 30px;
   padding: 6px 20px;
@@ -16,7 +16,7 @@ export const Button = styled.button`
   transition: all .3s ease-in-out;
   font-weight: 500;
   &:active {
-    background: ${() => darken(0.07, '#CCC')};
+    background: ${() => darken(0.07, '#ACB2B6')};
   }
   &:disabled {
     opacity: 0.5;

@@ -20,7 +20,7 @@
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
     "backgroundPage": "#FFF",
-    "colorPage": "#333",
+    "colorPage": "#485259",
     "colorTextSignForm": "#FFFFFF",
     "grayMedium": "#ACB2B6",
     "grayDark": "#485259"
@@ -37,6 +37,13 @@
     "ADDRESS": "Address",
     "ADDRESSES": "Addresses",
     "FIND_RESTAURANT": "Find a restaurant",
+
+    "TITLE_ADDRESS_FORM": "Enter your address for delivery options",
+    "SUBTITLE_ADDRESS_FORM": "Select your address from suggetions",
+    "ADDRESS_LIST": "Address List",
+    "DELIVERYA_V21": "Delivery address",
+
+    "SHOPPING_SECOND_WHERE_BACK_BUTTON": "Back",
 
     "SORT_BY": "Sort By",
     "RANK": "Rank",

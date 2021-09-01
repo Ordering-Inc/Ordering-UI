@@ -29,6 +29,8 @@ import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
+import { AddressForm } from './pages/AddressForm'
+import { AddressList } from './pages/AddressList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -241,6 +243,18 @@ export const App = () => {
                         }}
                         />
                       )}
+                  </Route>
+                  <Route exact path='/address'>
+                    {/* {orderStatus.options?.address?.location
+                    } */}
+                    <AddressForm />
+                  </Route>
+                  <Route exact path='/address-list'>
+                    {
+                      auth
+                        ? <AddressList />
+                        : <Redirect to='/address' />
+                    }
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />

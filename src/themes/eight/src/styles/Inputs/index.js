@@ -68,14 +68,14 @@ export const InputGroupLeft = styled.div`
 export const TextArea = styled.textarea`
   background: #FFF;
   color: #010300;
-  border: 1px solid #DBDCDB;
-  border-radius: 16px;
+  border: 2px solid ${props => props.theme.colors.grayDark};
+  border-radius: 7.6px;
   font-size: 16px;
   padding: 7px 15px;
   outline: none;
   resize: none;
   &:focus {
-    border-color: ${() => darken(0.07, '#CCC')};
+    border-color: ${props => props.theme.colors.secundary};
   }
   ${({ w }) => w && css`
     width: 20%;

@@ -7,11 +7,30 @@ export const Header = styled.div`
   width: 100%;  
   background-color: ${props => props.theme.colors.backgroudPage};
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 3px;
+  border: 1px solid #E9ECEF;
 
   & ${Select} {
     background-color: transparent;
     border-color: transparent;
+  }
+`
+
+export const AddressItem = styled.div`
+  cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  svg {
+    font-size: 20px;
+    g {
+      stroke: ${props => props.theme.colors.primary};
+    }
+    margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `} 
   }
 `
 

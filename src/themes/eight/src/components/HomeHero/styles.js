@@ -30,7 +30,7 @@ export const Title = styled.h1`
   text-align: center;
   margin: 50px auto 16px;
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     font-size: 32px;
   }
 
