@@ -9,7 +9,8 @@ import {
   BusinessesTitle,
   PreviousButtonWrapper,
   BusinessListWrapper,
-  BusinessMapWrapper
+  BusinessMapWrapper,
+  BranchListWrapper
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -32,6 +33,7 @@ import {
   useConfig,
   BusinessList as BusinessListController
 } from 'ordering-components'
+import { BusinessBranchListing } from '../BusinessBranchListing'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -183,7 +185,10 @@ const BusinessesListingUI = (props) => {
               <FiMap onClick={toggleMap} />
             )}
           </WrapperSearch>
-          <BusinessList>
+          <BranchListWrapper>
+            <BusinessBranchListing />
+          </BranchListWrapper>
+          {/* <BusinessList>
             {businessesList.loading && prevPage.loading && (
               [...Array(paginationProps.pageSize).keys()].map(i => (
                 <BusinessController
@@ -240,7 +245,7 @@ const BusinessesListingUI = (props) => {
                 <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
               ))
             )}
-          </BusinessList>
+          </BusinessList> */}
         </BusinessListWrapper>
         <BusinessMapWrapper>
           {(configs?.google_maps_api_key?.value && businessesList?.businesses?.length > 0) ? (
@@ -250,7 +255,7 @@ const BusinessesListingUI = (props) => {
               setErrors={setMapErrors}
             />
           ) : (
-            <Skeleton width={70} />
+            <Skeleton height={350} />
           )}
         </BusinessMapWrapper>
 

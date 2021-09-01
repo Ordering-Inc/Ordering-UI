@@ -2,35 +2,37 @@ import styled, { css } from 'styled-components'
 
 export const BusinessContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   width: 100%;
 
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
     flex-direction: row;
   }
 `
 
 export const BusinessListWrapper = styled.div`
   width: 100%;
-  padding: 40px 25px 20px 70px;
-  height: 100vh;
+  padding: 20px 15px;
   overflow: auto;
   box-sizing: border-box;
 
-  ${props => props.theme?.rtl && css`
-    padding: 40px 70px 20px 25px;
-  `}
-
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
     width: 50%;
+    height: calc(100vh - 331px);
+    padding: 40px 25px 20px 70px;
+    ${props => props.theme?.rtl && css`
+      padding: 40px 70px 20px 25px;
+    `}
   }
 `
 
 export const BusinessMapWrapper = styled.div`
   width: 100%;
-
-  @media (min-width: 768px) {
+  height: 350px;
+  
+  @media (min-width: 850px) {
     width: 50%;
+    height: calc(100vh - 331px);
   }
 `
 
@@ -108,4 +110,8 @@ export const PreviousButtonWrapper = styled.div`
       width: 40%;
     }
   }
+`
+
+export const BranchListWrapper = styled.div`
+  margin-top: 43px;
 `
