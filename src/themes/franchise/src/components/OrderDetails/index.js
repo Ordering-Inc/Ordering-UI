@@ -53,7 +53,8 @@ import {
   Divider,
   MyOrderActions,
   ReviewOrderLink,
-  SkeletonWrapper
+  SkeletonWrapper,
+  TrackRealPosition
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -170,7 +171,7 @@ const OrderDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container>
-        {!loading && order && Object.keys(order).length > 0 && (
+        {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
           <WrapperContainer>
             <WrapperLeftContainer>
               <OrderInfo>
@@ -265,14 +266,17 @@ const OrderDetailsUI = (props) => {
                     </OrderDriver>
                   </>
                   {order?.driver?.location && parseInt(order?.status) === 9 && (
-                    <Map>
-                      <GoogleMapsMap
-                        apiKey={configs?.google_maps_api_key?.value}
-                        location={order?.driver?.location}
-                        locations={locations}
-                        mapControls={googleMapsControls}
-                      />
-                    </Map>
+                    <>
+                      <Map>
+                        <GoogleMapsMap
+                          apiKey={configs?.google_maps_api_key?.value}
+                          location={order?.driver?.location}
+                          locations={locations}
+                          mapControls={googleMapsControls}
+                        />
+                      </Map>
+                      <TrackRealPosition>{t('TRACK_REAL_TIME_POSITION', 'Track real time position')}</TrackRealPosition>
+                    </>
                   )}
                 </>
               )}
@@ -406,6 +410,20 @@ const OrderDetailsUI = (props) => {
           </WrapperContainer>
         )}
 
+        {
+          (openMessages.driver || openMessages.business) && (
+            <Messages
+              orderId={order?.id}
+              order={order}
+              business={openMessages.business}
+              driver={openMessages.driver}
+              messages={messages}
+              setMessages={setMessages}
+              readMessages={readMessages}
+            />
+          )
+        }
+
         {loading && !error && (
           <SkeletonWrapper>
             <SkeletonBlockWrapp>
@@ -435,7 +453,7 @@ const OrderDetailsUI = (props) => {
           )
         )}
 
-        {(openMessages.driver || openMessages.business) && (
+        {/* {(openMessages.driver || openMessages.business) && (
           <Modal
             open={openMessages.driver || openMessages.business}
             onClose={() => setOpenMessages({ driver: false, business: false })}
@@ -452,7 +470,7 @@ const OrderDetailsUI = (props) => {
               readMessages={readMessages}
             />
           </Modal>
-        )}
+        )} */}
         {openReview && (
           <Modal
             open={openReview}

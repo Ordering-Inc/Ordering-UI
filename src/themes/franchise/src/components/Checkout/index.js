@@ -39,7 +39,7 @@ import { Button } from '../../styles/Buttons'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
-import { AddressDetails } from '../../../../../components/AddressDetails'
+import { AddressDetails } from '../AddressDetails'
 import { UserDetails } from '../UserDetails'
 import { PaymentOptions } from '../PaymentOptions'
 import { DriverTips } from '../DriverTips'

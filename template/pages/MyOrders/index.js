@@ -1,5 +1,5 @@
 import React from 'react'
-import { MyOrders as MyOrdersController } from '../../../src/components/MyOrders'
+import { MyOrders as MyOrdersController } from '../../../src/themes/franchise/src/components/MyOrders'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components'
 

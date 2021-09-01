@@ -471,7 +471,7 @@ export const WrapperRightContainer = styled(WrapperLeftContainer)`
 export const Divider = styled.div`
   height: 8px;
   background: #F8F9FA;
-  width: calc(100% + 40px)
+  width: calc(100% + 40px);
   margin-left: -20px;
 
   @media(min-width: 769px) {
@@ -480,6 +480,12 @@ export const Divider = styled.div`
   }
 `
 
-export const MyOrderActions = styled.div`
+export const MyOrderActions = styled.div``
 
+export const TrackRealPosition = styled.span`
+  user-select: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: ${props => props.theme?.colors.primary};
+  text-decoration: underline;
 `

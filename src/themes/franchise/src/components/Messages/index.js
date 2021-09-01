@@ -31,7 +31,12 @@ import {
   WrapperSendMessageButton,
   HeaderOnline,
   ImageContainer,
-  ModalIcon
+  ModalIcon,
+  MessagesLayoutWrapper,
+  MessagesLeftLayout,
+  MessagesRightLayout,
+  MessagesTitle,
+  CustomerList
 } from './styles'
 import { Image as ImageWithFallback } from '../../../../../components/Image'
 import { Input } from '../../styles/Inputs'
@@ -372,143 +377,186 @@ const MessagesUI = (props) => {
 
   return (
     <MessagesContainer>
-      <HeaderProfile>
-        <Image>
-          {
-            business && (
-              <ImageWithFallback
-                src={order.business?.logo || theme.images?.dummies?.businessLogo}
-                fallback={<FaUserAlt />}
-              />
-            )
-          }
-          {
-            driver && (
-              <ImageWithFallback
-                src={order.driver?.photo}
-                fallback={<RiUser2Fill />}
-              />
-            )
-          }
-        </Image>
-        {business && (
-          <HeaderOnline>
-            <h1>{order.business?.name}</h1>
-            <span>{t('ONLINE', 'Online')}</span>
-          </HeaderOnline>
-        )}
-        {driver && (
-          <HeaderOnline>
-            <h1>{order.driver?.name}</h1>
-            <span>{t('ONLINE', 'Online')}</span>
-          </HeaderOnline>
-        )}
-      </HeaderProfile>
-      <Chat id='chat'>
-        {
-          messages?.loading && (
-            <>
-              <MessageBusiness>
-                <SkeletonBubbleBusiness>
-                  <Skeleton width={200} height={100} />
-                </SkeletonBubbleBusiness>
-              </MessageBusiness>
-              <MessageCustomer>
-                <SkeletonBubbleCustomer>
-                  <Skeleton width={250} height={100} />
-                </SkeletonBubbleCustomer>
-              </MessageCustomer>
-              <MessageBusiness>
-                <SkeletonBubbleBusiness>
-                  <Skeleton width={150} height={100} />
-                </SkeletonBubbleBusiness>
-              </MessageBusiness>
-              <MessageCustomer>
-                <SkeletonBubbleCustomer>
-                  <Skeleton width={200} height={100} />
-                </SkeletonBubbleCustomer>
-              </MessageCustomer>
-            </>
-          )
-        }
-        {
-          !messages?.loading && order && (
-            <>
-              <MessageConsole>
-                <BubbleConsole>
-                  {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-                  <strong>{parseDate(order.created_at)}</strong> {' '}
-                  {t('VIA', 'Via')}{' '}
-                  <strong>
-                    {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
-                  </strong>{' '}
-                  <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
-                </BubbleConsole>
-              </MessageConsole>
-              <MapMessages messages={messagesToShow?.messages?.length ? messagesToShow : messages} />
-            </>
-          )
-        }
-      </Chat>
-      <SendForm>
-        <Send onSubmit={handleSubmit(onSubmit)} noValidate>
-          <Input
-            placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
-            onChange={onChangeMessage}
-            name='message'
-            id='message'
-            ref={register({
-              required: !image
-            })}
-            autoComplete='off'
-          />
-          <SendImage htmlFor='chat_image' hidden={image}>
-            <input
-              type='file'
-              name='image'
-              id='chat_image'
-              accept='image/png,image/jpg,image/jpeg'
-              onChange={onChangeImage}
-              ref={imageRef}
-            />
-            <BsCardImage />
-          </SendImage>
-          {image && (
-            <WrapperDeleteImage>
-              <Button
-                circle
-                onClick={removeImage}
-                type='reset'
-              >
-                <MdClose />
-              </Button>
-              <img
-                src={image}
-                loading='lazy'
-              />
-            </WrapperDeleteImage>
-          )}
-          <WrapperSendMessageButton>
-            <Button
-              color='primary'
-              type='submit'
-              disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
-              ref={buttonRef}
-            >
-              <IosSend />
-              {sendMessage.loading ? (
-                <span>
-                  {t('SENDING_MESSAGE', 'Sending...')}
-                </span>
+      <MessagesLayoutWrapper>
+        <MessagesLeftLayout>
+          <MessagesTitle>
+            <h1>{t('MESSAGES', 'Messages')}</h1>
+          </MessagesTitle>
+          <CustomerList>
+            <HeaderProfile>
+              <Image>
+                {
+                  business && (
+                    <ImageWithFallback
+                      src={order.business?.logo || theme.images?.dummies?.businessLogo}
+                      fallback={<FaUserAlt />}
+                    />
+                  )
+                }
+                {
+                  driver && (
+                    <ImageWithFallback
+                      src={order.driver?.photo}
+                      fallback={<RiUser2Fill />}
+                    />
+                  )
+                }
+              </Image>
+              {business && (
+                <HeaderOnline>
+                  <h1>{order.business?.name}</h1>
+                  <span>{t('BUSINESS', 'Business')}</span>
+                </HeaderOnline>
+              )}
+              {driver && (
+                <HeaderOnline>
+                  <h1>{order.driver?.name}</h1>
+                  <span>{t('DRIVER', 'Driver')}</span>
+                </HeaderOnline>
+              )}
+            </HeaderProfile>
+          </CustomerList>
+        </MessagesLeftLayout>
+        <MessagesRightLayout>
+          <HeaderProfile>
+            <Image>
+              {
+                business && (
+                  <ImageWithFallback
+                    src={order.business?.logo || theme.images?.dummies?.businessLogo}
+                    fallback={<FaUserAlt />}
+                  />
+                )
+              }
+              {
+                driver && (
+                  <ImageWithFallback
+                    src={order.driver?.photo}
+                    fallback={<RiUser2Fill />}
+                  />
+                )
+              }
+            </Image>
+            {business && (
+              <HeaderOnline>
+                <h1>{order.business?.name}</h1>
+                <span>{t('BUSINESS', 'Business')}</span>
+              </HeaderOnline>
+            )}
+            {driver && (
+              <HeaderOnline>
+                <h1>{order.driver?.name}</h1>
+                <span>{t('DRIVER', 'Driver')}</span>
+              </HeaderOnline>
+            )}
+          </HeaderProfile>
+          <Chat id='chat'>
+            {
+              messages?.loading && (
+                <>
+                  <MessageBusiness>
+                    <SkeletonBubbleBusiness>
+                      <Skeleton width={200} height={100} />
+                    </SkeletonBubbleBusiness>
+                  </MessageBusiness>
+                  <MessageCustomer>
+                    <SkeletonBubbleCustomer>
+                      <Skeleton width={250} height={100} />
+                    </SkeletonBubbleCustomer>
+                  </MessageCustomer>
+                  <MessageBusiness>
+                    <SkeletonBubbleBusiness>
+                      <Skeleton width={150} height={100} />
+                    </SkeletonBubbleBusiness>
+                  </MessageBusiness>
+                  <MessageCustomer>
+                    <SkeletonBubbleCustomer>
+                      <Skeleton width={200} height={100} />
+                    </SkeletonBubbleCustomer>
+                  </MessageCustomer>
+                </>
               )
-                : (
-                  <span>
-                    {t('SEND', 'Send')}
-                  </span>)}
-            </Button>
-          </WrapperSendMessageButton>
-        </Send>
-      </SendForm>
+            }
+            {
+              !messages?.loading && order && (
+                <>
+                  <MessageConsole>
+                    <BubbleConsole>
+                      {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                      <strong>{parseDate(order.created_at)}</strong> {' '}
+                      {t('VIA', 'Via')}{' '}
+                      <strong>
+                        {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
+                      </strong>{' '}
+                      <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
+                    </BubbleConsole>
+                  </MessageConsole>
+                  <MapMessages messages={messagesToShow?.messages?.length ? messagesToShow : messages} />
+                </>
+              )
+            }
+          </Chat>
+          <SendForm>
+            <Send onSubmit={handleSubmit(onSubmit)} noValidate>
+              <Input
+                placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
+                onChange={onChangeMessage}
+                name='message'
+                id='message'
+                ref={register({
+                  required: !image
+                })}
+                autoComplete='off'
+              />
+              <SendImage htmlFor='chat_image' hidden={image}>
+                <input
+                  type='file'
+                  name='image'
+                  id='chat_image'
+                  accept='image/png,image/jpg,image/jpeg'
+                  onChange={onChangeImage}
+                  ref={imageRef}
+                />
+                <BsCardImage />
+              </SendImage>
+              {image && (
+                <WrapperDeleteImage>
+                  <Button
+                    circle
+                    onClick={removeImage}
+                    type='reset'
+                  >
+                    <MdClose />
+                  </Button>
+                  <img
+                    src={image}
+                    loading='lazy'
+                  />
+                </WrapperDeleteImage>
+              )}
+              <WrapperSendMessageButton>
+                <Button
+                  color='primary'
+                  type='submit'
+                  disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
+                  ref={buttonRef}
+                >
+                  <IosSend />
+                  {sendMessage.loading ? (
+                    <span>
+                      {t('SENDING_MESSAGE', 'Sending...')}
+                    </span>
+                  )
+                    : (
+                      <span>
+                        {t('SEND', 'Send')}
+                      </span>)}
+                </Button>
+              </WrapperSendMessageButton>
+            </Send>
+          </SendForm>
+        </MessagesRightLayout>
+      </MessagesLayoutWrapper>
       <Alert
         title={t('ERROR', 'Error')}
         content={alertState.content}

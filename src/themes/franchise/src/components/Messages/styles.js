@@ -3,18 +3,22 @@ import styled, { css } from 'styled-components'
 export const MessagesContainer = styled.div`
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   overflow: hidden;
+  padding: 0 15px;
+
+  @media (min-width: 769px) {
+    padding: 0 40px;
+  }
 `
 
 export const HeaderProfile = styled.div`
   display: flex;
+  align-items: center;
   padding: 15px 20px;
-  ${props => props.theme?.rtl ? css`
-    padding: 15px 60px 15px 20px;
-  ` : css`
-    padding: 15px 20px 15px 60px;
-  `}
   border-bottom: 1px solid #EEEEEE;
+  height: 70px;
+  box-sizing: border-box;
 
   div {
      p {
@@ -49,16 +53,17 @@ export const Status = styled.p`
 `
 
 export const Image = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid ${props => props.theme?.colors?.primary};
-  border-radius: 50%;
+  border-radius: 7.6px;
   padding: 5px;
   box-sizing: border-box;
   overflow: hidden;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 
   img {
     width: 100%;
@@ -74,18 +79,15 @@ export const Image = styled.div`
   }
 
   svg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 6px;
+    width: 36px;
+    height: 36px;
   }
 `
 
 export const HeaderOnline = styled.div`
   display: flex;
   flex-direction: column;
-  height: 60px;
-  line-height: 1.5;
+  height: 36px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -103,12 +105,12 @@ export const HeaderOnline = styled.div`
   }
 
   h1 {
-    font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 14px;
   }
 
   span {
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 300;
   }
 `
@@ -472,5 +474,47 @@ export const ModalIcon = styled.span`
     left: 5px;
     right: initial;
   `}
+  }
+`
+
+export const MessagesLayoutWrapper = styled.div`
+  display: flex;
+  border-left: 1px solid #DEE2E6;
+  border-right: 1px solid #DEE2E6;
+`
+
+export const MessagesLeftLayout = styled.div`
+  width: 30%;
+  border-right: 1px solid #DEE2E6;
+
+  ${props => props.theme?.rtl && css`
+    border-left: 1px solid #DEE2E6;
+    border-right: none;
+  `}
+`
+
+export const MessagesRightLayout = styled.div`
+  width: 70%;
+`
+
+export const MessagesTitle = styled.div`
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #DEE2E6;
+  padding: 15px 20px;
+  height: 70px;
+  box-sizing: border-box;
+
+  h1 {
+    font-weight: 600;
+    font-size: 20px;
+    color: ${props => props.theme?.colors.headingColor};
+    margin: 0;
+  }
+`
+
+export const CustomerList = styled.div`
+  > div {
+    border: none;
   }
 `
