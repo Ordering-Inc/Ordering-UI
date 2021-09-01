@@ -1,8 +1,11 @@
 import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
-  width: 95%;
-  margin: 20px auto 0px;
+  padding: 20px 15px 0px 15px;
+
+  @media (min-width: 769px) {
+    padding: 20px 40px 0px 40px;
+  }
 `
 
 export const WrapContent = styled.div`
@@ -60,7 +63,7 @@ export const WrappLayout = styled.div``
 export const BusinessContent = styled.div`
   margin-top: 30px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   @media (min-width: 1200px) {
     flex-direction: row;
@@ -135,9 +138,21 @@ export const EmptyBtnWrapper = styled.div`
   }
 `
 
-export const Title = styled.h1`
-  font-weight: 600;
-  font-size: 20px;
-  color: ${props => props.theme.colors.darkTextColor};
-  margin-bottom: 18px;
+export const Divider = styled.div`
+  width: 100vw;
+  height: 8px;
+  background-color: ${props => props.theme?.colors.grayDividerColor};
+  margin-left: -15px;
+  ${props => props.theme?.rtl && css`
+    margin-right: -15px;
+    margin-left: 0;
+  `}
+
+  @media (min-width: 769px) {
+    margin-left: -40px;
+    ${props => props.theme?.rtl && css`
+      margin-right: -40px;
+      margin-left: 0;
+    `}
+  }
 `

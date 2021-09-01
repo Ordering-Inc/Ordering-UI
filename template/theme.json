@@ -23,7 +23,8 @@
     "darkGray": "#909BA9",
     "darkTextColor": "#344050",
     "lightGray": "#B1BCCC",
-    "darkPrimaryColor": "#03459E"
+    "darkPrimaryColor": "#03459E",
+    "grayDividerColor": "#F8F9FA"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",

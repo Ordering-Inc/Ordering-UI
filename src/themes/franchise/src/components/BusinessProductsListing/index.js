@@ -24,7 +24,7 @@ import {
   BusinessCartContent,
   EmptyCart,
   EmptyBtnWrapper,
-  Title
+  Divider
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -202,6 +202,7 @@ const BusinessProductsListingUI = (props) => {
                   errorQuantityProducts={errorQuantityProducts}
                   sortByValue={sortByValue}
                 />
+                <Divider />
                 <BusinessContent>
                   <BusinessCategoryProductWrapper>
                     {!(business?.categories?.length === 0 && !categoryId) && (
@@ -238,19 +239,16 @@ const BusinessProductsListingUI = (props) => {
                   <BusinessCartContainer>
                     <BusinessCartContent>
                       {currentCart?.products?.length > 0 ? (
-                        <>
-                          <Title>{t('YOUR_CART', 'Your cart')}</Title>
-                          <Cart
-                            isForceOpenCart
-                            cart={currentCart}
-                            isCartPending={currentCart?.status === 2}
-                            isProducts={currentCart.products.length}
-                            isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                            handleCartOpen={(val) => setIsCartOpen(val)}
-                            isCustomMode
-                            isStore
-                          />
-                        </>
+                        <Cart
+                          isForceOpenCart
+                          cart={currentCart}
+                          isCartPending={currentCart?.status === 2}
+                          isProducts={currentCart.products.length}
+                          isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                          handleCartOpen={(val) => setIsCartOpen(val)}
+                          isCustomMode
+                          isStore
+                        />
                       ) : (
                         <EmptyCart>
                           <div className='empty-content'>

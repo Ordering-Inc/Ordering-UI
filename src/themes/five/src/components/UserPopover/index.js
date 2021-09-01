@@ -107,6 +107,7 @@ export const UserPopover = (props) => {
       <HeaderItem
         isPhoto={sessionState?.user?.photo}
         isHome={isHome}
+        isOpen={open}
         ref={referenceElement}
         onClick={props.onClick}
       >

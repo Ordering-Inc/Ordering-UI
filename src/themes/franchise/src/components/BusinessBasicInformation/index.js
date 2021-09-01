@@ -16,24 +16,20 @@ import { convertHoursToMinutes } from '../../../../../utils'
 import { Select } from '../../styles/Select'
 
 import {
-  BusinessContainer,
-  BusinessContent,
-  WrapperBusinessLogo,
-  BusinessLogo,
   BusinessInfo,
   BusinessInfoItem,
   BusinessInfoContainer,
   BusinessInfoContent,
   WrapperSearch,
   BusinessDetail,
-  BusinessMoreDetail
+  BusinessMoreDetail,
+  BusinessTitleWrapper
 } from './styles'
 
 const types = ['food', 'laundry', 'alcohol', 'groceries']
 
 export const BusinessBasicInformation = (props) => {
   const {
-    isSkeleton,
     businessState,
     setOpenBusinessInformation,
     openBusinessInformation,
@@ -75,13 +71,24 @@ export const BusinessBasicInformation = (props) => {
         <BusinessInfoContent>
           <BusinessInfo className='info'>
             <BusinessInfoItem>
+              <BusinessTitleWrapper>
+                {!loading ? (
+                  <h2 className='bold'>{business?.name}</h2>
+                ) : (
+                  <Skeleton width={100} />
+                )}
+                {!loading && (
+                  <BusinessMoreDetail>
+                    <BsExclamationCircle
+                      className='popup'
+                      onClick={() => setOpenBusinessInformation(true)}
+                    />
+                  </BusinessMoreDetail>
+                )}
+              </BusinessTitleWrapper>
+
               {!loading ? (
-                <h2 className='bold'>{business?.name}</h2>
-              ) : (
-                <Skeleton width={100} />
-              )}
-              {!loading ? (
-                <p className='type'>{getBusinessType()}</p>
+                <p className='type'>{business?.address}</p>
               ) : (
                 <Skeleton width={100} />
               )}
@@ -161,62 +168,42 @@ export const BusinessBasicInformation = (props) => {
           </WrapperSearch>
         )}
       </BusinessInfoContainer>
-      <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
-        {(!loading && !business?.open) && <h1>{t('CLOSED', 'Closed')}</h1>}
-        <BusinessContent>
-          <WrapperBusinessLogo>
-            {!loading ? (
-              <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-            ) : (
-              <Skeleton height={70} width={70} />
-            )}
-          </WrapperBusinessLogo>
-        </BusinessContent>
-        {!loading && (
-          <BusinessMoreDetail>
-            <BsExclamationCircle
-              className='popup'
-              onClick={() => setOpenBusinessInformation(true)}
-            />
-          </BusinessMoreDetail>
-        )}
-        <Modal
-          width='70%'
-          open={openBusinessInformation}
+      <Modal
+        width='70%'
+        open={openBusinessInformation}
+        onClose={setOpenBusinessInformation}
+        padding='0'
+        hideCloseDefault
+        isTransparent
+      >
+        <BusinessInformation
+          business={business}
+          getBusinessType={getBusinessType}
+          optimizeImage={optimizeImage}
           onClose={setOpenBusinessInformation}
-          padding='0'
-          hideCloseDefault
-          isTransparent
-        >
-          <BusinessInformation
-            business={business}
-            getBusinessType={getBusinessType}
-            optimizeImage={optimizeImage}
-            onClose={setOpenBusinessInformation}
-          />
-        </Modal>
-        <Modal
-          width='70%'
-          open={isBusinessReviews}
-          onClose={() => setIsBusinessReviews(false)}
-          padding='20px'
-        >
-          <BusinessReviews
-            businessId={business.id}
-            reviews={business.reviews?.reviews}
-            businessName={business.name}
-            stars={business.reviews?.total}
-          />
-        </Modal>
-        <Modal
-          width='70%'
-          open={isPreOrder}
-          onClose={() => setIsPreOrder(false)}
-          padding='20px'
-        >
-          <MomentContent />
-        </Modal>
-      </BusinessContainer>
+        />
+      </Modal>
+      <Modal
+        width='70%'
+        open={isBusinessReviews}
+        onClose={() => setIsBusinessReviews(false)}
+        padding='20px'
+      >
+        <BusinessReviews
+          businessId={business.id}
+          reviews={business.reviews?.reviews}
+          businessName={business.name}
+          stars={business.reviews?.total}
+        />
+      </Modal>
+      <Modal
+        width='70%'
+        open={isPreOrder}
+        onClose={() => setIsPreOrder(false)}
+        padding='20px'
+      >
+        <MomentContent />
+      </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

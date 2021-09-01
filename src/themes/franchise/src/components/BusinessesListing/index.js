@@ -9,8 +9,7 @@ import {
   BusinessesTitle,
   PreviousButtonWrapper,
   BusinessListWrapper,
-  BusinessMapWrapper,
-  BranchListWrapper
+  BusinessMapWrapper
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -33,7 +32,6 @@ import {
   useConfig,
   BusinessList as BusinessListController
 } from 'ordering-components'
-import { BusinessBranchListing } from '../BusinessBranchListing'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -185,10 +183,18 @@ const BusinessesListingUI = (props) => {
               <FiMap onClick={toggleMap} />
             )}
           </WrapperSearch>
-          <BranchListWrapper>
-            <BusinessBranchListing />
-          </BranchListWrapper>
-          {/* <BusinessList>
+          <BusinessList>
+            {businessesList.loading && (!prevPage.loading || !nextPage.loading) && (
+              [...Array(paginationProps.pageSize).keys()].map(i => (
+                <BusinessController
+                  key={i}
+                  className='card'
+                  business={{}}
+                  isSkeleton
+                  orderType={orderState?.options?.type}
+                />
+              ))
+            )}
             {businessesList.loading && prevPage.loading && (
               [...Array(paginationProps.pageSize).keys()].map(i => (
                 <BusinessController
@@ -245,7 +251,7 @@ const BusinessesListingUI = (props) => {
                 <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
               ))
             )}
-          </BusinessList> */}
+          </BusinessList>
         </BusinessListWrapper>
         <BusinessMapWrapper>
           {(configs?.google_maps_api_key?.value && businessesList?.businesses?.length > 0) ? (
@@ -352,6 +358,7 @@ const BusinessesListingUI = (props) => {
 export const BusinessesListing = (props) => {
   const businessListingProps = {
     ...props,
+    propsToFetch: ['id', 'name', 'header', 'logo', 'address', 'location', 'timezone', 'schedule', 'open', 'phone', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'menus'],
     UIComponent: BusinessesListingUI
   }
 

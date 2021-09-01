@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useEvent } from 'ordering-components'
-import { Container, NotCarts, Title } from './styles'
+import { Container, NotCarts } from './styles'
 
 import { Cart } from '../Cart'
 
@@ -49,7 +49,6 @@ export const CartContent = (props) => {
         <BeforeComponent key={i} {...props} />))
       }
       <Container>
-        <Title>{t('YOUR_CART', 'Your cart')}</Title>
         {isOrderStateCarts && carts?.length > 0 &&
           carts.map(cart => (
             <React.Fragment key={cart.uuid}>

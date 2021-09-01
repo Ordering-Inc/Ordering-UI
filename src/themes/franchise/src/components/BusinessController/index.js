@@ -3,6 +3,7 @@ import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrd
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
+import { Button } from '../../styles/Buttons'
 
 import { convertHoursToMinutes } from '../../../../../utils'
 
@@ -23,7 +24,14 @@ import {
   CallCenterInformation,
   CallCenterInformationBullet,
   BusinessLogoWrapper,
-  BusinessStarInfo
+  BusinessStarInfo,
+  BranchListContainer,
+  BranchTitle,
+  BranchContent,
+  BranchInfoBlock,
+  OrderBtnWrapper,
+  OrderTypeList,
+  OrderType
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import BisStar from '@meronex/icons/bi/BisStar'
@@ -52,6 +60,7 @@ const BusinessControllerUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const types = ['food', 'alcohol', 'groceries', 'laundry']
+  const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
 
   const businessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -74,123 +83,176 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton}>
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}>
-          <BusinessHero>
-            {isSkeleton ? (
-              <Skeleton height={100} />
-            ) : (
-              <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!isBusinessOpen}>
-                <BusinessTags>
-                  {business?.featured &&
-                    <span className='crown'>
-                      <FaCrown />
-                    </span>}
-                  {!isCustomLayout && (
-                    <div>
-                      {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
-                      {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
-                    </div>
-                  )}
-                </BusinessTags>
-                {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
-                  <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
-                )}
-                {!isBusinessOpen && <h1>{t('CLOSED', 'Closed')}</h1>}
-              </BusinessHeader>
-            )}
-          </BusinessHero>
-          <BusinessContent>
-            <BusinessLogoWrapper>
-              <WrapperBusinessLogo isSkeleton={isSkeleton}>
-                {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
-                  <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-                ) : (
-                  <Skeleton height={70} width={70} />
-                )}
-              </WrapperBusinessLogo>
-              <BusinessStarInfo>
-                {business?.reviews?.total > 0 ? (
-                  <div className='reviews'>
-                    <BisStar />
-                    <span>{business?.reviews?.total}</span>
-                  </div>
-                ) : (
-                  business?.reviews?.total !== 0 && <Skeleton width={50} />
-                )}
-              </BusinessStarInfo>
-            </BusinessLogoWrapper>
-            <BusinessInfo className='info'>
-              <BusinessInfoItem>
-                <div>
-                  {business?.name ? (
-                    <BusinessName>{business?.name}</BusinessName>
-                  ) : (
-                    <Skeleton width={100} />
-                  )}
-                </div>
-                {!isShowCallcenterInformation && (
-                  <Categories>
+      <BranchListContainer>
+        {
+          isSkeleton ? (
+            <>
+              <BranchTitle>
+                <Skeleton width={200} height={30} />
+              </BranchTitle>
+              <BranchContent>
+                <BranchInfoBlock>
+                  <Skeleton width={250} />
+                  <OrderTypeList>
+                    {[...Array(4).keys()].map(i => (
+                      <OrderType isSkeleton={isSkeleton} key={i}>
+                        <Skeleton width={40} height={20} />
+                      </OrderType>
+                    ))}
+                  </OrderTypeList>
+                  <Skeleton width={100} height={25} />
+                </BranchInfoBlock>
+                <OrderBtnWrapper>
+                  <Skeleton width={100} height={35} />
+                </OrderBtnWrapper>
+              </BranchContent>
+            </>
+          ) : (
+            <>
+              <BranchTitle>{business?.name}</BranchTitle>
+              <BranchContent>
+                <BranchInfoBlock>
+                  <p>{business?.address}</p>
+                  <OrderTypeList>
                     {
-                      Object.keys(business).length > 0 ? (
-                        businessType()
-                      ) : (
-                        <Skeleton width={100} />
-                      )
+                      orderTypeList.map((orderType, i) => (
+                        <OrderType key={i}>{orderType}</OrderType>
+                      ))
                     }
-                  </Categories>
+                  </OrderTypeList>
+                  {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
+                </BranchInfoBlock>
+                <OrderBtnWrapper>
+                  <Button
+                    outline
+                    color='primary'
+                    onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}
+                  >
+                    {t('START_ORDER', 'Start order')}
+                  </Button>
+                </OrderBtnWrapper>
+              </BranchContent>
+            </>
+          )
+        }
+      </BranchListContainer>
+      {/* <ContainerCard isSkeleton={isSkeleton}> */}
+      {/* <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}>
+        <BusinessHero>
+          {isSkeleton ? (
+            <Skeleton height={100} />
+          ) : (
+            <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!isBusinessOpen}>
+              <BusinessTags>
+                {business?.featured &&
+                  <span className='crown'>
+                    <FaCrown />
+                  </span>}
+                {!isCustomLayout && (
+                  <div>
+                    {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
+                    {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
+                  </div>
                 )}
-                <Medadata isCustomerMode={isShowCallcenterInformation}>
-                  {orderType === 1 && (
-                    <>
-                      {business?.delivery_price >= 0 ? (
-                        <p>
-                          <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
-                          {business && parsePrice(business?.delivery_price)}
-                        </p>
-                      ) : (
-                        <Skeleton width={70} />
-                      )}
-                    </>
-                  )}
-                  {Object.keys(business).length > 0 ? (
-                    <p className='bullet'>
-                      <GoPrimitiveDot />
-                      {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {business?.distance >= 0 ? (
-                    <p className='bullet'>
-                      <GoPrimitiveDot />
-                      {parseDistance(business?.distance)}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {isShowCallcenterInformation && (
-                    <CallCenterInformation>
-                      <CallCenterInformationBullet bgcolor='green'>
-                        <BiCar />
-                        {business?.available_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='red'>
-                        <BiCar />
-                        {business?.busy_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
-                        <BiBasket />
-                        {business?.active_orders?.length}
-                      </CallCenterInformationBullet>
-                    </CallCenterInformation>
-                  )}
-                </Medadata>
-              </BusinessInfoItem>
-            </BusinessInfo>
-          </BusinessContent>
-        </WrapperBusinessCard>
-      </ContainerCard>
+              </BusinessTags>
+              {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
+                <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
+              )}
+              {!isBusinessOpen && <h1>{t('CLOSED', 'Closed')}</h1>}
+            </BusinessHeader>
+          )}
+        </BusinessHero>
+        <BusinessContent>
+          <BusinessLogoWrapper>
+            <WrapperBusinessLogo isSkeleton={isSkeleton}>
+              {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
+                <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+              ) : (
+                <Skeleton height={70} width={70} />
+              )}
+            </WrapperBusinessLogo>
+            <BusinessStarInfo>
+              {business?.reviews?.total > 0 ? (
+                <div className='reviews'>
+                  <BisStar />
+                  <span>{business?.reviews?.total}</span>
+                </div>
+              ) : (
+                business?.reviews?.total !== 0 && <Skeleton width={50} />
+              )}
+            </BusinessStarInfo>
+          </BusinessLogoWrapper>
+          <BusinessInfo className='info'>
+            <BusinessInfoItem>
+              <div>
+                {business?.name ? (
+                  <BusinessName>{business?.name}</BusinessName>
+                ) : (
+                  <Skeleton width={100} />
+                )}
+              </div>
+              {!isShowCallcenterInformation && (
+                <Categories>
+                  {
+                    Object.keys(business).length > 0 ? (
+                      businessType()
+                    ) : (
+                      <Skeleton width={100} />
+                    )
+                  }
+                </Categories>
+              )}
+              <Medadata isCustomerMode={isShowCallcenterInformation}>
+                {orderType === 1 && (
+                  <>
+                    {business?.delivery_price >= 0 ? (
+                      <p>
+                        <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
+                        {business && parsePrice(business?.delivery_price)}
+                      </p>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+                  </>
+                )}
+                {Object.keys(business).length > 0 ? (
+                  <p className='bullet'>
+                    <GoPrimitiveDot />
+                    {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
+                  </p>
+                ) : (
+                  <Skeleton width={70} />
+                )}
+                {business?.distance >= 0 ? (
+                  <p className='bullet'>
+                    <GoPrimitiveDot />
+                    {parseDistance(business?.distance)}
+                  </p>
+                ) : (
+                  <Skeleton width={70} />
+                )}
+                {isShowCallcenterInformation && (
+                  <CallCenterInformation>
+                    <CallCenterInformationBullet bgcolor='green'>
+                      <BiCar />
+                      {business?.available_drivers?.length}
+                    </CallCenterInformationBullet>
+                    <CallCenterInformationBullet bgcolor='red'>
+                      <BiCar />
+                      {business?.busy_drivers?.length}
+                    </CallCenterInformationBullet>
+                    <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
+                      <BiBasket />
+                      {business?.active_orders?.length}
+                    </CallCenterInformationBullet>
+                  </CallCenterInformation>
+                )}
+              </Medadata>
+            </BusinessInfoItem>
+          </BusinessInfo>
+        </BusinessContent>
+      </WrapperBusinessCard>
+    </ContainerCard> */}
       <Alert
         title={t('BUSINESS_CLOSED', 'Business Closed')}
         content={alertState.content}

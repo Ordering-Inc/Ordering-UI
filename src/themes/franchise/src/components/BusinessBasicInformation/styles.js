@@ -1,92 +1,4 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
-
-export const BusinessContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  max-height: 324px;
-  height: 324px;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  min-height: 200px;
-  justify-content: center;
-  align-items: flex-end;
-  border-radius: 7.6px;
-
-  ${props => props.isSkeleton && css`
-    background-color: #cccccc;
-  `}
-
-  ${props => props.bgimage && !props.isClosed && css`
-    background-image: url(${props.bgimage});
-  `}
-
-  ${props => props.bgimage && props.isClosed && css`
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage});
-  `}
-
-  h1 {
-    color: #FFF;
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0 10px;
-    padding: 0;
-  }
-
-  @media (min-width: 490px) {
-    justify-content: flex-start;
-  }
-`
-
-export const BusinessContent = styled.div`
-  border-radius: 10px;
-  margin: 10px;
-  max-height: 124px;
-  width: 124px;
-
-  @media (min-width: 426px) {
-    margin: 25px;
-  }
-`
-
-export const WrapperBusinessLogo = styled.div`
-  max-width: 124px;
-  max-height: 124px;
-  height: 124px;
-  width: 124px;
-`
-
-const BusinessLogoStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  min-height: 124px;
-  border-radius: 7.6px;
-`
-export const BusinessLogo = (props) => {
-  const style = {}
-  if (props.bgimage) {
-    style.backgroundImage = `url(${props.bgimage})`
-  }
-  return (
-    <BusinessLogoStyled {...props} style={style}>
-      {props.children}
-    </BusinessLogoStyled>
-  )
-}
 
 export const BusinessInfo = styled.div`
   display: flex;
@@ -134,21 +46,15 @@ export const BusinessInfoItem = styled.div`
 `
 
 export const BusinessInfoContainer = styled.div`
-  margin-bottom: 25px;
+  margin-bottom: 43px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   flex-direction: column;
-
-  @media (min-width: 700px) {
-    flex-direction: row;
-  }
 `
 
 export const BusinessInfoContent = styled.div``
 
 export const WrapperSearch = styled.div`
-  margin: 15px 0px 0px;
+  margin: 30px 0px 0px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -159,8 +65,8 @@ export const WrapperSearch = styled.div`
       margin-left: 10px;
       margin-right: 0;
     `}
-    input: focus {
-      width: 250px;
+    input {
+      width: 100%;
     }
   }
 
@@ -212,13 +118,20 @@ export const BusinessDetail = styled.div`
 `
 
 export const BusinessMoreDetail = styled.div`
-  top: 30px;
-  right: 30px;
-  position: absolute;
-  
+  margin-left: 12px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 12px;
+    margin-left: 0;
+  `}
   svg {
+    color: ${props => props.theme?.colors.primary};
     cursor: pointer;
     font-size: 24px;
-    color: white;
   }
+`
+
+export const BusinessTitleWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 `

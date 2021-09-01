@@ -42,6 +42,7 @@ export const BusinessList = styled.div`
 `
 
 export const WrapperSearch = styled.div`
+  margin-bottom: 43px;
   input {
     width: 100%!important;
   }
@@ -110,8 +111,4 @@ export const PreviousButtonWrapper = styled.div`
       width: 40%;
     }
   }
-`
-
-export const BranchListWrapper = styled.div`
-  margin-top: 43px;
 `
