@@ -14,7 +14,7 @@ import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
 
-import { Tabs, Tab, Input, Button, CustomInputContainer } from '../../styles'
+import { Tabs, Tab, Button, CustomInputContainer } from '../../styles'
 import { GoogleLoginButton } from '../GoogleLogin'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { AppleLogin } from '../AppleLogin'
@@ -349,6 +349,7 @@ const LoginFormUI = (props) => {
                     name='email'
                     aria-label='email'
                     ref={emailInput}
+                    placeholder={t('EMAIL', 'Email')}
                     onChange={handleChangeInputEmail}
                     autoComplete='off'
                   />
@@ -398,10 +399,11 @@ const LoginFormUI = (props) => {
                   <CustomInputContainer
                     placeholder={t('PASSWORD', 'Password')}
                   >
-                    <Input
+                    <input
                       type={!passwordSee ? 'password' : 'text'}
                       name='password'
                       aria-label='password'
+                      placeholder={t('PASSWORD', 'Password')}
                       ref={formMethods.register({
                         required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
                       })}

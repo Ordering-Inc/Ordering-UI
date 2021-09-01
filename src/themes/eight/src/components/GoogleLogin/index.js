@@ -11,14 +11,18 @@ import {
 } from './styles'
 
 export const GoogleLoginButtonUI = (props) => {
+  const {
+    isSignup
+  } = props
   const [, t] = useLanguage()
   const { signIn } = props
 
   return (
     <GoogleButton
       onClick={signIn}
+      isSignup={isSignup}
     >
-      <Content>
+      <Content isSignup={isSignup}>
         <IconWrapper>
           <FcGoogle />
         </IconWrapper>

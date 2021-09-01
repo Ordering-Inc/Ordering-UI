@@ -10,6 +10,7 @@ import {
 
 const AppleLoginUI = (props) => {
   const {
+    isSignup,
     initLoginApple,
     handleAppleLoginClick
   } = props
@@ -34,8 +35,9 @@ const AppleLoginUI = (props) => {
   return (
     <AppleButton
       onClick={() => initLoginApple()}
+      isSignup={isSignup}
     >
-      <Content>
+      <Content isSignup={isSignup}>
         <IconWrapper>
           <FaApple />
         </IconWrapper>

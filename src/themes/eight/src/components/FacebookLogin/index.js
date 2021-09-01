@@ -11,14 +11,17 @@ import {
 } from './styles'
 
 const FacebookLoginButtonUI = (props) => {
+  const {
+    isSignup
+  } = props
   const [, t] = useLanguage()
   const { handleFacebookLogin } = props
   return (
     <FacebookButton
-      color='secondary'
+      isSignup={isSignup}
       onClick={() => handleFacebookLogin()}
     >
-      <Content>
+      <Content isSignup={isSignup}>
         <IconWrapper>
           <FaFacebook />
         </IconWrapper>

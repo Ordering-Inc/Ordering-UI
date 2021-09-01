@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const AppleButton = styled.button`
@@ -9,9 +9,6 @@ export const AppleButton = styled.button`
   overflow: hidden;
   text-overflow: ellipsis;
   transition: all .3s ease-in-out;
-
-  background-color: #000;
-  border: 1px solid #000;
   font-size: 16px;
   font-weight: 400;
   text-align: center;
@@ -19,15 +16,26 @@ export const AppleButton = styled.button`
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
-
-  &:active {
-    background: ${() => darken(0.07, '#000')};
-  }
-
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 18px 0 rgb(0 0 0 / 20%);
   }
+
+  ${({ isSignup }) => isSignup ? css`
+    background-color: #FFF;
+    border-color: transparent;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    &:active {
+      background: ${darken(0.07, '#FFF')};
+    }
+    ` : css`
+    background-color: #000;
+    border: 1px solid #000;
+    &:active {
+      background: ${() => darken(0.07, '#000')};
+    }
+  `}
+
 `
 
 export const Content = styled.div`
@@ -41,11 +49,20 @@ export const Content = styled.div`
   }
 
   div {
-    color: #FFF;
     font-weight: 500;
     font-size: 14px;
     margin: 0 28px;
   }
+
+  ${({ isSignup }) => isSignup ? css`
+    div {
+      color: ${props => props.theme.colors.grayDark};
+    }
+  ` : css`
+    div {
+      color: #FFF;
+    }
+  `}
 `
 
 export const IconWrapper = styled.span`
