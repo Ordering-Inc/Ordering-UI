@@ -13,7 +13,6 @@ import { HomeHero } from './src/components/HomeHero'
 import { LanguageSelector } from './src/components/LanguageSelector'
 import { LoginForm } from './src/components/LoginForm'
 import { MomentContent } from './src/components/MomentContent'
-import { MomentPopover } from './src/components/MomentPopover'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
@@ -34,7 +33,6 @@ export {
   LanguageSelector,
   LoginForm,
   MomentContent,
-  MomentPopover,
   OrderTypeSelectorHeader,
   SidebarMenu,
   SignUpForm

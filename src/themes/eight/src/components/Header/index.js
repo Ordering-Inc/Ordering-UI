@@ -140,7 +140,6 @@ export const Header = (props) => {
 
   const handleMoment = () => {
     if (configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0) return
-    console.log('moment')
     handleGoToPage({ page: 'moment' })
   }
 
@@ -268,6 +267,7 @@ export const Header = (props) => {
                           />
                         ) : (
                           <HeaderOption
+                            auth={auth}
                             variant='cart'
                             totalCarts={cartsWithProducts?.length}
                             onClick={(variant) => openModal(variant)}
@@ -302,17 +302,17 @@ export const Header = (props) => {
           ) : (
             <SubMenu>
               <HeaderOption
+                auth={auth}
                 variant='address'
                 addressState={orderState?.options?.address?.address?.split(',')?.[0]}
-                onClick={(variant) => openModal(variant)}
+                onClick={() => handleAddress()}
               />
               {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
+                  auth={auth}
                   variant='moment'
                   momentState={orderState?.options?.moment}
-                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                    ? null
-                    : (variant) => openModal(variant)}
+                  onClick={() => handleMoment()}
                 />
               )}
             </SubMenu>
