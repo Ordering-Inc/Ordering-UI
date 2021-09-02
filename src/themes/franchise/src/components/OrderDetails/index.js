@@ -20,7 +20,7 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
-import { ReviewOrder } from '../../../../../components/ReviewOrder'
+import { ReviewOrder } from '../ReviewOrder'
 import { ProductShare } from '../../../../../components/ProductShare'
 
 import {
@@ -42,7 +42,6 @@ import {
   WrapperDriver,
   OrderProducts,
   OrderBill,
-  ReviewsAction,
   SkeletonBlockWrapp,
   SkeletonBlock,
   ShareOrder,
@@ -188,9 +187,17 @@ const OrderDetailsUI = (props) => {
                 </p>
                 <ReviewOrderLink
                   className='Review-order'
-                  active={order?.status === 1}
+                  active={(
+                    parseInt(order?.status) === 1 ||
+                    parseInt(order?.status) === 2 ||
+                    parseInt(order?.status) === 5 ||
+                    parseInt(order?.status) === 6 ||
+                    parseInt(order?.status) === 10 ||
+                    parseInt(order?.status) === 11 ||
+                    parseInt(order?.status) === 12
+                  ) && !order.review && !isReviewed}
                 >
-                  {t('REVIEW_ORDER', 'Review order')}
+                  <span onClick={() => setOpenReview(true)}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                 </ReviewOrderLink>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
@@ -390,7 +397,7 @@ const OrderDetailsUI = (props) => {
                     </div>
                   </ShareOrder>
                 )}
-                {(
+                {/* {(
                   parseInt(order?.status) === 1 ||
                   parseInt(order?.status) === 2 ||
                   parseInt(order?.status) === 5 ||
@@ -404,7 +411,7 @@ const OrderDetailsUI = (props) => {
                       {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
                     </Button>
                   </ReviewsAction>
-                )}
+                )} */}
               </Content>
             </WrapperRightContainer>
           </WrapperContainer>
@@ -420,6 +427,8 @@ const OrderDetailsUI = (props) => {
               messages={messages}
               setMessages={setMessages}
               readMessages={readMessages}
+              onMessages={setOpenMessages}
+              onClose={() => setOpenMessages({ driver: false, business: false })}
             />
           )
         }
@@ -452,25 +461,6 @@ const OrderDetailsUI = (props) => {
             />
           )
         )}
-
-        {/* {(openMessages.driver || openMessages.business) && (
-          <Modal
-            open={openMessages.driver || openMessages.business}
-            onClose={() => setOpenMessages({ driver: false, business: false })}
-            padding='0'
-            width='70%'
-          >
-            <Messages
-              orderId={order?.id}
-              order={order}
-              business={openMessages.business}
-              driver={openMessages.driver}
-              messages={messages}
-              setMessages={setMessages}
-              readMessages={readMessages}
-            />
-          </Modal>
-        )} */}
         {openReview && (
           <Modal
             open={openReview}

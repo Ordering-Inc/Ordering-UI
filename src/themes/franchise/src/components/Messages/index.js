@@ -7,6 +7,7 @@ import {
   useSession
 } from 'ordering-components'
 import { useForm } from 'react-hook-form'
+import IosSend from '@meronex/icons/ios/IosSend'
 import Skeleton from 'react-loading-skeleton'
 import {
   MessagesContainer,
@@ -36,13 +37,17 @@ import {
   MessagesLeftLayout,
   MessagesRightLayout,
   MessagesTitle,
-  CustomerList
+  CustomerList,
+  MessagesClose,
+  InputWrapper,
+  MessageContentWrapper,
+  MessageCreatedDate,
+  TimeofSentByAdmin
 } from './styles'
 import { Image as ImageWithFallback } from '../../../../../components/Image'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
-import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
@@ -65,7 +70,10 @@ const MessagesUI = (props) => {
     business,
     driver,
     messagesToShow,
-    readMessages
+    readMessages,
+    onClose,
+    onMessages,
+    setCanRead
   } = props
 
   const theme = useTheme()
@@ -73,7 +81,7 @@ const MessagesUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
-  const [{ parseDate, getTimeAgo }] = useUtils()
+  const [{ parseDate, parseTime }] = useUtils()
   const buttonRef = useRef(null)
   const [modalImage, setModalImage] = useState({ open: false, src: '' })
   const imageRef = useRef(null)
@@ -102,6 +110,11 @@ const MessagesUI = (props) => {
       clearInputs()
     }
   }, [sendMessage])
+
+  useEffect(() => {
+    if (business) setCanRead({ business: true, administrator: true, customer: true, driver: false })
+    else if (driver) setCanRead({ business: false, administrator: true, customer: true, driver: true })
+  }, [business, driver])
 
   useEffect(() => {
     const chat = document.getElementById('chat')
@@ -256,110 +269,146 @@ const MessagesUI = (props) => {
         {messages?.messages.map((message) => (
           <React.Fragment key={message.id}>
             {message.type === 1 && (
-              <MessageConsole key={message.id}>
+              <MessageContentWrapper key={message.id}>
                 {message.change?.attribute !== 'driver_id' ? (
-                  <BubbleConsole>
-                    {t('ORDER', 'Order')} {' '}
-                    <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> {}
-                    {t('CHANGED_FROM', 'Changed from')} {' '}
-                    {filterSpecialStatus.includes(message.change.attribute) ? (
-                      <>
-                        {message.change.old === null ? <strong>0</strong> : (
+                  <>
+                    <MessageCreatedDate>
+                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
+                    </MessageCreatedDate>
+                    <MessageConsole>
+                      <BubbleConsole>
+                        {t('ORDER', 'Order')} {' '}
+                        <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> {}
+                        {t('CHANGED_FROM', 'Changed from')} {' '}
+                        {filterSpecialStatus.includes(message.change.attribute) ? (
                           <>
-                            <strong>{ message.change.old }</strong> {' '}
+                            {message.change.old === null ? <strong>0</strong> : (
+                              <>
+                                <strong>{ message.change.old }</strong> {' '}
+                              </>
+                            )}
+                            <> {t('TO', 'to')} {' '} <strong>{ message.change.new }</strong> {t('MINUTES', 'Minutes')}</>
+                          </>
+                        ) : (
+                          <>
+                            {message.change.old !== null && (
+                              <>
+                                <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                              </>
+                            )}
+                            <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
                           </>
                         )}
-                        <> {t('TO', 'to')} {' '} <strong>{ message.change.new }</strong> {t('MINUTES', 'Minutes')}</>
-                      </>
-                    ) : (
-                      <>
-                        {message.change.old !== null && (
-                          <>
-                            <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
-                          </>
-                        )}
-                        <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
-                      </>
-                    )}
-                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                  </BubbleConsole>
+                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
+                      </BubbleConsole>
+                    </MessageConsole>
+                  </>
                 ) : (
-                  <BubbleConsole>
-                    {message.change.new ? (
-                      <>
-                        <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname} </strong>
-                        {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
-                        {message.comment && (<><br /> {message.comment.length}</>)}
-                      </>
-                    ) : <>{t('DRIVER_UNASSIGNED', 'Driver unassigned')}</>}
-                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                  </BubbleConsole>
+                  <>
+                    <MessageCreatedDate>
+                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
+                    </MessageCreatedDate>
+                    <MessageConsole>
+                      <BubbleConsole>
+                        {message.change.new ? (
+                          <>
+                            <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname} </strong>
+                            {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
+                            {message.comment && (<><br /> {message.comment.length}</>)}
+                          </>
+                        ) : <>{t('DRIVER_UNASSIGNED', 'Driver unassigned')}</>}
+                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
+                      </BubbleConsole>
+                    </MessageConsole>
+                  </>
                 )}
-              </MessageConsole>
+              </MessageContentWrapper>
+
             )}
             {(messagesToShow?.messages?.length || (message?.can_see?.includes('2') && business) || (message?.can_see?.includes('4') && driver)) && (
               <>
                 {message.type === 2 && user?.id === message.author_id && (
-                  <MessageCustomer>
-                    <BubbleCustomer>
-                      <strong>
-                        <MyName>
-                          {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                        </MyName>
-                      </strong>
-                      {message.comment}
-                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                    </BubbleCustomer>
-                  </MessageCustomer>
+                  <MessageContentWrapper>
+                    <MessageCreatedDate>
+                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
+                    </MessageCreatedDate>
+                    <MessageCustomer>
+                      <BubbleCustomer>
+                        <strong>
+                          <MyName>
+                            {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
+                          </MyName>
+                        </strong>
+                        {message.comment}
+                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
+                      </BubbleCustomer>
+                    </MessageCustomer>
+                  </MessageContentWrapper>
                 )}
                 {message.type === 3 && user.id === message.author_id && (
-                  <MessageCustomer>
-                    <BubbleCustomer name='image'>
-                      <strong>
-                        <MyName>
-                          {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                        </MyName>
-                      </strong>
-                      <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
-                      {message.comment && (
-                        <>
-                          {message.comment}
-                        </>
-                      )}
-                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                    </BubbleCustomer>
-                  </MessageCustomer>
+                  <MessageContentWrapper>
+                    <MessageCreatedDate>
+                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
+                    </MessageCreatedDate>
+                    <MessageCustomer>
+                      <BubbleCustomer name='image'>
+                        <strong>
+                          <MyName>
+                            {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
+                          </MyName>
+                        </strong>
+                        <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
+                        {message.comment && (
+                          <>
+                            {message.comment}
+                          </>
+                        )}
+                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
+                      </BubbleCustomer>
+                    </MessageCustomer>
+                  </MessageContentWrapper>
+
                 )}
                 {message.type === 2 && user?.id !== message.author_id && (
-                  <MessageBusiness>
-                    <BubbleBusines>
-                      <strong>
-                        <MyName>
-                          {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                        </MyName>
-                      </strong>
-                      {message.comment}
-                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                    </BubbleBusines>
-                  </MessageBusiness>
+                  <MessageContentWrapper>
+                    <MessageCreatedDate>
+                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
+                    </MessageCreatedDate>
+                    <MessageBusiness>
+                      <BubbleBusines>
+                        <strong>
+                          <MyName>
+                            {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
+                          </MyName>
+                        </strong>
+                        {message.comment}
+                        <TimeofSentByAdmin>{parseTime(message.created_at)}</TimeofSentByAdmin>
+                      </BubbleBusines>
+                    </MessageBusiness>
+                  </MessageContentWrapper>
                 )}
                 {message.type === 3 && user.id !== message.author_id && (
-                  <MessageBusiness>
-                    <BubbleBusines name='image'>
-                      <strong>
-                        <MyName>
-                          {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                        </MyName>
-                      </strong>
-                      <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
-                      {message.comment && (
-                        <>
-                          {message.comment}
-                        </>
-                      )}
-                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                    </BubbleBusines>
-                  </MessageBusiness>
+                  <MessageContentWrapper>
+                    <MessageCreatedDate>
+                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
+                    </MessageCreatedDate>
+                    <MessageBusiness>
+                      <BubbleBusines name='image'>
+                        <strong>
+                          <MyName>
+                            {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
+                          </MyName>
+                        </strong>
+                        <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
+                        {message.comment && (
+                          <>
+                            {message.comment}
+                          </>
+                        )}
+                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
+                      </BubbleBusines>
+                    </MessageBusiness>
+                  </MessageContentWrapper>
                 )}
               </>
             )}
@@ -378,43 +427,54 @@ const MessagesUI = (props) => {
   return (
     <MessagesContainer>
       <MessagesLayoutWrapper>
+        <MessagesClose onClick={onClose}>
+          <MdClose />
+        </MessagesClose>
         <MessagesLeftLayout>
           <MessagesTitle>
             <h1>{t('MESSAGES', 'Messages')}</h1>
           </MessagesTitle>
           <CustomerList>
-            <HeaderProfile>
-              <Image>
-                {
-                  business && (
+            {
+              order.business && (
+                <HeaderProfile
+                  active={business}
+                  onClick={() => onMessages({ business: true, driver: false })}
+                  isCursor
+                >
+                  <Image>
                     <ImageWithFallback
                       src={order.business?.logo || theme.images?.dummies?.businessLogo}
                       fallback={<FaUserAlt />}
                     />
-                  )
-                }
-                {
-                  driver && (
+                  </Image>
+                  <HeaderOnline>
+                    <h1>{order.business?.name}</h1>
+                    <span>{t('BUSINESS', 'Business')}</span>
+                  </HeaderOnline>
+                </HeaderProfile>
+              )
+            }
+            {
+              order?.driver && (
+                <HeaderProfile
+                  active={driver}
+                  onClick={() => onMessages({ business: false, driver: true })}
+                  isCursor
+                >
+                  <Image>
                     <ImageWithFallback
                       src={order.driver?.photo}
                       fallback={<RiUser2Fill />}
                     />
-                  )
-                }
-              </Image>
-              {business && (
-                <HeaderOnline>
-                  <h1>{order.business?.name}</h1>
-                  <span>{t('BUSINESS', 'Business')}</span>
-                </HeaderOnline>
-              )}
-              {driver && (
-                <HeaderOnline>
-                  <h1>{order.driver?.name}</h1>
-                  <span>{t('DRIVER', 'Driver')}</span>
-                </HeaderOnline>
-              )}
-            </HeaderProfile>
+                  </Image>
+                  <HeaderOnline>
+                    <h1>{order.driver?.name}</h1>
+                    <span>{t('DRIVER', 'Driver')}</span>
+                  </HeaderOnline>
+                </HeaderProfile>
+              )
+            }
           </CustomerList>
         </MessagesLeftLayout>
         <MessagesRightLayout>
@@ -479,7 +539,10 @@ const MessagesUI = (props) => {
             }
             {
               !messages?.loading && order && (
-                <>
+                <MessageContentWrapper>
+                  <MessageCreatedDate>
+                    <span>{parseDate(order.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
+                  </MessageCreatedDate>
                   <MessageConsole>
                     <BubbleConsole>
                       {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
@@ -488,52 +551,56 @@ const MessagesUI = (props) => {
                       <strong>
                         {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
                       </strong>{' '}
-                      <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
+                      <TimeofSent>{parseTime(order.created_at)}</TimeofSent>
                     </BubbleConsole>
                   </MessageConsole>
                   <MapMessages messages={messagesToShow?.messages?.length ? messagesToShow : messages} />
-                </>
+                </MessageContentWrapper>
               )
             }
           </Chat>
           <SendForm>
             <Send onSubmit={handleSubmit(onSubmit)} noValidate>
-              <Input
-                placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
-                onChange={onChangeMessage}
-                name='message'
-                id='message'
-                ref={register({
-                  required: !image
-                })}
-                autoComplete='off'
-              />
-              <SendImage htmlFor='chat_image' hidden={image}>
-                <input
-                  type='file'
-                  name='image'
-                  id='chat_image'
-                  accept='image/png,image/jpg,image/jpeg'
-                  onChange={onChangeImage}
-                  ref={imageRef}
+              <InputWrapper>
+                <Input
+                  placeholder={t('TYPE_YOUR_MESSAGE_HERE', 'Type your message here')}
+                  onChange={onChangeMessage}
+                  name='message'
+                  id='message'
+                  ref={register({
+                    required: !image
+                  })}
+                  autoComplete='off'
                 />
-                <BsCardImage />
-              </SendImage>
-              {image && (
-                <WrapperDeleteImage>
-                  <Button
-                    circle
-                    onClick={removeImage}
-                    type='reset'
-                  >
-                    <MdClose />
-                  </Button>
-                  <img
-                    src={image}
-                    loading='lazy'
+                <SendImage htmlFor='chat_image' hidden={image}>
+                  <input
+                    type='file'
+                    name='image'
+                    id='chat_image'
+                    accept='image/png,image/jpg,image/jpeg'
+                    onChange={onChangeImage}
+                    ref={imageRef}
                   />
-                </WrapperDeleteImage>
-              )}
+                  <BsCardImage />
+                </SendImage>
+                {image && (
+                  <WrapperDeleteImage>
+                    <div>
+                      <Button
+                        circle
+                        onClick={removeImage}
+                        type='reset'
+                      >
+                        <MdClose />
+                      </Button>
+                      <img
+                        src={image}
+                        loading='lazy'
+                      />
+                    </div>
+                  </WrapperDeleteImage>
+                )}
+              </InputWrapper>
               <WrapperSendMessageButton>
                 <Button
                   color='primary'
