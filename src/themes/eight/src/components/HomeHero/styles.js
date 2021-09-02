@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const HeroContainer = styled.div`
   width: 100%;
-  background-color: ${props => props.theme.colors.backgroundPage};
   display: flex;
   justify-content: center;
 `

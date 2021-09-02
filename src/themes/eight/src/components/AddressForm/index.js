@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
@@ -15,7 +15,8 @@ import {
   GoogleMapsMap,
   useSession,
   useOrder,
-  useConfig
+  useConfig,
+  useEvent
 } from 'ordering-components'
 import { Alert } from '../../../../../components/Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
@@ -65,7 +66,8 @@ const AddressFormUI = (props) => {
   const formMethods = useForm()
   const [{ auth }] = useSession()
   const theme = useTheme()
-  const history = useHistory()
+  // const history = useHistory()
+  const [events] = useEvent()
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
@@ -156,7 +158,8 @@ const AddressFormUI = (props) => {
           if (!isAddressAlreadyExist) {
             saveAddress(data.address, userCustomerSetup)
             if (!auth) {
-              history.goBack()
+              handleGoToPage({ page: 'search' })
+              // history.goBack()
             }
             return
           }
@@ -182,6 +185,10 @@ const AddressFormUI = (props) => {
   const checkKeyDown = (e) => {
     const keyCode = e.keyCode ? e.keyCode : e.which
     if (keyCode === 13) { e.preventDefault() }
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
   }
 
   const onSubmit = async () => {
@@ -219,7 +226,8 @@ const AddressFormUI = (props) => {
     if (!isAddressAlreadyExist) {
       saveAddress({}, userCustomerSetup)
       if (!auth) {
-        history.goBack()
+        handleGoToPage({ page: 'search' })
+        // history.goBack()
       }
       return
     }
@@ -371,7 +379,7 @@ const AddressFormUI = (props) => {
         )}
         {(configState.loading || addressState.loading) && (
           <WrapperSkeleton>
-            <Skeleton height={50} count={5} style={{ marginBottom: '10px' }} />
+            <Skeleton height={80} count={5} style={{ marginBottom: '10px' }} />
           </WrapperSkeleton>
         )}
         {!configState.loading && !addressState.loading && (

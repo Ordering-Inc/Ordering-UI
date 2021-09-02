@@ -41,4 +41,5 @@ export const NavBarTitle = styled.p`
   text-align: center;
   font-size: 16px;
   padding: 18px;
+  color: ${props => props.theme.colors.grayDark};
 `

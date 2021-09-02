@@ -27,7 +27,6 @@ export const MomentContent = (props) => {
   }
 
   const { width } = useWindowSize()
-  const momentControl = document?.getElementById('moment_control')?.getBoundingClientRect()
 
   return (
     <>
@@ -41,7 +40,7 @@ export const MomentContent = (props) => {
       <Container isLoading={orderState?.loading}>
         <MomentControl {...momentProps} />
         {orderState?.loading && (
-          <Layer height={momentControl?.height && `${momentControl?.height}px`}>
+          <Layer>
             {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
               <SpinnerLoader
                 style={{

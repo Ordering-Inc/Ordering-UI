@@ -13,7 +13,7 @@ export const AddressListContainer = styled.div`
     height: 50px;
   }
 
-  ${({ isPopup }) => isPopup ? css`
+  ${({ isModal }) => isModal ? css`
     width: 100%;
   ` : css`
     width: 90%;
@@ -29,7 +29,7 @@ export const AddressListContainer = styled.div`
   }
 
   @media (min-width: 768px) {
-    ${({ isPopup }) => isPopup ? css`
+    ${({ isModal }) => isModal ? css`
       width: 100%;
     ` : css`
       width: 60%;

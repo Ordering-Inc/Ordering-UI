@@ -1,6 +1,7 @@
 import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AppleLogin } from './src/components/AppleLogin'
+import { BusinessesListing } from './src/components/BusinessesListing'
 import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
@@ -21,6 +22,7 @@ export {
   AddressForm,
   AddressList,
   AppleLogin,
+  BusinessesListing,
   Cart,
   CartContent,
   CartPopover,

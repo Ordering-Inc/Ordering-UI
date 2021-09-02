@@ -38,6 +38,7 @@ import { NavBar } from '../NavBar'
 
 const AddressListUI = (props) => {
   const {
+    isModal,
     actionStatus,
     addressList,
     handleDelete,
@@ -178,6 +179,7 @@ const AddressListUI = (props) => {
       <AddressListContainer
         id='address_control'
         isLoading={actionStatus?.loading || orderState?.loading}
+        isModal={isModal}
       >
         <h1>{t('ADDRESS_LIST', theme?.defaultLanguages?.ADDRESS_LIST || 'Address List')}</h1>
         {

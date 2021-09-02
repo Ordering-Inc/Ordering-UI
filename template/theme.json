@@ -15,6 +15,7 @@
     "primaryContrast": "#FFF",
     "secundary": "#005071",
     "secundaryDark": "#F4F8F9",
+    "secundaryLight": "#DEE2E6",
     "secundaryContrast": "#000",
     "third": "#FCF9F4",
     "disabled": "#CBCBCB",
@@ -23,7 +24,8 @@
     "colorPage": "#344050",
     "colorTextSignForm": "#FFFFFF",
     "grayMedium": "#ACB2B6",
-    "grayDark": "#485259"
+    "grayDark": "#485259",
+    "green": "#027100"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
