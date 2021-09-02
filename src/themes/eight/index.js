@@ -3,6 +3,7 @@ import { AddressList } from './src/components/AddressList'
 import { AppleLogin } from './src/components/AppleLogin'
 import { BusinessController } from './src/components/BusinessController'
 import { BusinessesListing } from './src/components/BusinessesListing'
+import { BusinessProductsList } from './src/components/BusinessProductsList'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
 import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
@@ -20,6 +21,7 @@ import { MomentControl } from './src/components/MomentControl'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
+import { SingleProductCard } from './src/components/SingleProductCard'
 
 export {
   AddressForm,
@@ -27,6 +29,7 @@ export {
   AppleLogin,
   BusinessController,
   BusinessesListing,
+  BusinessProductsList,
   BusinessProductsListing,
   Cart,
   CartContent,
@@ -43,5 +46,6 @@ export {
   MomentControl,
   OrderTypeSelectorHeader,
   SidebarMenu,
-  SignUpForm
+  SignUpForm,
+  SingleProductCard
 }

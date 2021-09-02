@@ -13,7 +13,6 @@ import {
 } from 'ordering-components'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-import { BusinessProductsList } from '../../../../../components/BusinessProductsList'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../../../../../components/ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
@@ -22,6 +21,7 @@ import { UpsellingPage } from '../../../../../components/UpsellingPage'
 
 import { Cart } from '../Cart'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
+import { BusinessProductsList } from '../BusinessProductsList'
 import { NavBar } from '../NavBar'
 
 import {

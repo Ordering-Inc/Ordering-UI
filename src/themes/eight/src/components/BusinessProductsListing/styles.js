@@ -1,8 +1,13 @@
 import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
-  width: 80%;
-  margin: 50px auto 0px;
+  width: 90%;
+  margin: 30px auto 0px;
+
+  @media (min-width: 768px) {
+    width: 80%;
+    margin: 50px auto 0px;
+  }
 `
 
 export const WrapContent = styled.div`
