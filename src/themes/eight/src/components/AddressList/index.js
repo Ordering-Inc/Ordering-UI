@@ -181,7 +181,9 @@ const AddressListUI = (props) => {
         isLoading={actionStatus?.loading || orderState?.loading}
         isModal={isModal}
       >
-        <h1>{t('ADDRESS_LIST', theme?.defaultLanguages?.ADDRESS_LIST || 'Address List')}</h1>
+        {!isModal && (
+          <h1>{t('ADDRESS_LIST', theme?.defaultLanguages?.ADDRESS_LIST || 'Address List')}</h1>
+        )}
         {
           (!isPopover || !addressOpen) && (
             <Button

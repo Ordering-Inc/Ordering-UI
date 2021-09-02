@@ -116,7 +116,7 @@ const CardLogoStyled = styled.div`
   object-fit: cover;
   min-height: 75px;
   width: 100%;
-  padding-top: 70%;
+  padding-top: 100%;
 `
 export const CardLogo = (props) => {
   const style = {}

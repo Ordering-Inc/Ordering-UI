@@ -97,3 +97,54 @@ export const WrappLayout = styled.div`
     }  
   `}
 `
+
+export const ProductDetailsHeader = styled.div`
+  border: 1px solid #E9ECEF;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 0 5%;
+  min-height: 62px;
+  p {
+    margin: 0px 30px;
+    text-align: center;
+    font-size: 16px;
+    padding: 18px;
+    color: ${props => props.theme.colors.grayDark};
+  }
+
+  svg {
+    color: ${props => props.theme.colors.primary};
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+
+    ${props => props.theme?.rtl ? css`
+      left: 5%;
+    ` : css`
+      right: 5%;
+    `}
+  }
+
+  @media (min-width: 992px) {
+    padding: 0 10%;
+    svg {
+      ${props => props.theme?.rtl ? css`
+        left: 10%;
+      ` : css`
+        right: 10%;
+      `}
+    }
+  }
+
+  @media (min-width: 1200px) {
+    padding: 0 20%;
+    svg {
+      ${props => props.theme?.rtl ? css`
+        left: 20%;
+      ` : css`
+        right: 20%;
+      `}
+    }
+  }
+`
