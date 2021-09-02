@@ -163,21 +163,26 @@ const BusinessControllerUI = (props) => {
                 <BusinessAddress>
                   {business?.address}
                 </BusinessAddress>
-                {business?.featured && (
-                  <GreenDataItem>{t('BLIST_FEATURED', 'Featured')}</GreenDataItem>
+                {!isSkeleton && (
+                  <>
+                    {business?.featured && (
+                      <GreenDataItem>{t('BLIST_FEATURED', 'Featured')}</GreenDataItem>
+                    )}
+                    {getBusinessOffer(business?.offers) && <GreenDataItem>{t('OFFER', 'Offer')}: {getBusinessOffer(business?.offers) || parsePrice(0)}</GreenDataItem>}
+                    {(!isBusinessOpen || isBusinessClose) && <GreenDataItem>{t('PREORDER', 'PreOrder')}</GreenDataItem>}
+                    {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && !isBusinessClose && (
+                      <BusinessClosed>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</BusinessClosed>
+                    )}
+                    {(!isBusinessOpen || isBusinessClose) && <BusinessClosed>{t('CLOSED', 'Closed')}</BusinessClosed>}
+                  </>
                 )}
-                {getBusinessOffer(business?.offers) && <GreenDataItem>{t('OFFER', 'Offer')}: {getBusinessOffer(business?.offers) || parsePrice(0)}</GreenDataItem>}
-                {(!isBusinessOpen || isBusinessClose) && <GreenDataItem>{t('PREORDER', 'PreOrder')}</GreenDataItem>}
-                {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && !isBusinessClose && (
-                  <BusinessClosed>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</BusinessClosed>
-                )}
-                {(!isBusinessOpen || isBusinessClose) && <BusinessClosed>{t('CLOSED', 'Closed')}</BusinessClosed>}
               </BusinessInfoItem>
             </BusinessInfo>
           </BusinessContent>
           <BusinessActions>
             <Button
               color='primaryGradient'
+              disabled={isSkeleton}
               onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}
             >
               {t('SELECT_THIS_RESTAURANT', 'Select this restaurant')}

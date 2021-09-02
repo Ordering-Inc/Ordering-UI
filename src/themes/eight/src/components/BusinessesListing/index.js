@@ -199,7 +199,7 @@ const BusinessesListingUI = (props) => {
           </PreviousButtonWrapper>
         }
         <BusinessList>
-          {businessesList.loading && prevPage.loading && (
+          {(businessesList.loading || prevPage.loading) && (
             [...Array(paginationProps.pageSize).keys()].map(i => (
               <BusinessController
                 key={i}

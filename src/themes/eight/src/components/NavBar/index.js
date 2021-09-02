@@ -12,7 +12,8 @@ import {
 
 export const NavBar = (props) => {
   const {
-    title
+    title,
+    handleGoBack
   } = props
 
   const history = useHistory()
@@ -22,7 +23,7 @@ export const NavBar = (props) => {
   return (
     <NavBarContainer>
       <BackButton
-        onClick={() => history.goBack()}
+        onClick={() => handleGoBack ? handleGoBack() : history.goBack()}
       >
         <BsChevronLeft />
         <span>{t('SHOPPING_SECOND_WHERE_BACK_BUTTON', theme.defaultLanguages?.SHOPPING_SECOND_WHERE_BACK_BUTTON || 'Back')}</span>
