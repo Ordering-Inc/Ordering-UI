@@ -225,15 +225,12 @@ export const Header = (props) => {
                 <OrderTypeSelectorHeader
                   orderTypeList={orderTypeList}
                   onClick={() => openModal('delivery')}
-                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
                 />
               ) : (
                 <HeaderOption
                   variant='delivery'
                   onClick={(variant) => openModal(variant)}
                   orderTypeList={orderTypeList}
-                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
                 />
               )}
             </Menu>

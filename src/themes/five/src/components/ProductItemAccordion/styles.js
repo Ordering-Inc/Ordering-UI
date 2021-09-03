@@ -122,6 +122,13 @@ export const ContentInfo = styled.div`
     font-weight: 600;
   }
 
+  > div {
+    > p {
+      font-size: 10px;
+      color: ${props => props.theme?.colors.darkGray};
+    }
+  }
+
   span {
     display: flex;
     justify-content: space-between;
@@ -311,7 +318,11 @@ export const ProductPrice = styled.div`
 `
 
 export const ProductSelect = styled.select`
-  background: ${isCheckout => isCheckout ? '#FFFFFF' : '#F8F9FA'};
+  ${({ isCheckout }) => isCheckout ? css`
+    background: ${props => props.theme?.colors.backgroundPage};
+  ` : css`
+    background: ${props => props.theme?.colors.grayDividerColor};
+  `}
   border-radius: 7.6px;
   max-width: 45px;
   height: 25px;

@@ -32,7 +32,11 @@ var OrderTypeListItemContainerStyled = _styledComponents.default.div(_templateOb
   return bgimage && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 }, function (_ref2) {
   var active = _ref2.active;
-  return active && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    opacity: 0.6;\n  "])));
+  return active && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), function (props) {
+    var _props$theme;
+
+    return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.colors.primary;
+  });
 });
 
 exports.OrderTypeListItemContainerStyled = OrderTypeListItemContainerStyled;
@@ -56,9 +60,9 @@ var OrderTypeDescription = _styledComponents.default.p(_templateObject6 || (_tem
 exports.OrderTypeDescription = OrderTypeDescription;
 
 var OrderStartWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  user-select: none;\n  cursor: pointer;\n\n  span {\n    color: #FFFFFF;\n    ", "\n  }\n\n  svg {\n    font-size: 16px;\n    color: #FFFFFF;\n  }\n"])), function (props) {
-  var _props$theme;
+  var _props$theme2;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "])));
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "])));
 });
 
 exports.OrderStartWrapper = OrderStartWrapper;

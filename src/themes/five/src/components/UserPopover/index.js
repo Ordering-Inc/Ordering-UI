@@ -108,6 +108,7 @@ export const UserPopover = (props) => {
         isPhoto={sessionState?.user?.photo}
         isHome={isHome}
         ref={referenceElement}
+        isOpen={open}
         onClick={props.onClick}
       >
         <AiOutlineMenu className='menu-list' />

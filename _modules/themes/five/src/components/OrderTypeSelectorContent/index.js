@@ -38,7 +38,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _orderStatus$options, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var handleChangeOrderType = props.handleChangeOrderType,
       orderTypes = props.orderTypes,
@@ -52,6 +52,9 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderStatus = _useOrder2[0];
+
+  console.log(configTypes);
+  console.log(orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type);
 
   var handleClickOrderType = function handleClickOrderType(orderType) {
     onClose && onClose();
@@ -74,7 +77,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && (configTypes ? orderTypes.filter(function (type) {
     return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
   }) : orderTypes).map(function (item, i) {
-    var _orderStatus$options;
+    var _orderStatus$options2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListItemContainer, {
       key: i,
@@ -82,7 +85,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       onClick: function onClick() {
         return handleClickOrderType(item.value);
       },
-      active: (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === (item === null || item === void 0 ? void 0 : item.value)
+      active: (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options2 = orderStatus.options) === null || _orderStatus$options2 === void 0 ? void 0 : _orderStatus$options2.type) === (item === null || item === void 0 ? void 0 : item.value)
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeTitle, null, item.text), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeDescription, null, item.description), /*#__PURE__*/_react.default.createElement(_styles.OrderStartWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('START_MY_ORDER', 'start my order')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)));
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
