@@ -21,6 +21,8 @@ export const OrderBill = styled.div`
   flex-direction: column;
   padding: 10px;
   background-color: #FFF;
+  margin-top: 30px;
+
   table {
     width: 100%;
     font-size: 16px;

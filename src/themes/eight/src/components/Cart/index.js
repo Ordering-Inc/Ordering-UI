@@ -165,6 +165,18 @@ const CartUI = (props) => {
                 onEditProduct={handleEditProduct}
               />
             ))}
+            {(openUpselling || isCustomMode) && (
+              <UpsellingPage
+                isCustomMode={isCustomMode}
+                businessId={cart.business_id}
+                cartProducts={cart.products}
+                business={cart.business}
+                handleUpsellingPage={handleUpsellingPage}
+                openUpselling={openUpselling}
+                canOpenUpselling={canOpenUpselling}
+                setCanOpenUpselling={setCanOpenUpselling}
+              />
+            )}
             {cart?.valid_products && (
               <OrderBill>
                 <table>
@@ -307,18 +319,6 @@ const CartUI = (props) => {
               onSave={handlerProductAction}
             />
           </Modal>
-          {(openUpselling || isCustomMode) && (
-            <UpsellingPage
-              isCustomMode={isCustomMode}
-              businessId={cart.business_id}
-              cartProducts={cart.products}
-              business={cart.business}
-              handleUpsellingPage={handleUpsellingPage}
-              openUpselling={openUpselling}
-              canOpenUpselling={canOpenUpselling}
-              setCanOpenUpselling={setCanOpenUpselling}
-            />
-          )}
         </CartSticky>
       </CartContainer>
       {isCustomMode && (

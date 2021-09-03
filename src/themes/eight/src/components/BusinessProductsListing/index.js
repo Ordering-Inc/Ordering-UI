@@ -343,7 +343,7 @@ const BusinessProductsListingUI = (props) => {
         </>
       )}
 
-      {currentCart?.products?.length > 0 && auth && !isCartOpen && currentCart?.valid_schedule && showOption !== 'productForm' && showOption !== 'cart' && (
+      {currentCart?.products?.length > 0 && auth && !isCartOpen && currentCart?.valid_schedule && currentCart?.valid_products && showOption !== 'productForm' && showOption !== 'cart' && (
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (

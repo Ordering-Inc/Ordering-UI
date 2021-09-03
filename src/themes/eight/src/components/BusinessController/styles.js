@@ -22,15 +22,16 @@ export const WrapperBusinessCard = styled.div`
 
 export const BusinessContent = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-top: 15px;
   flex: 1;
 `
 
 export const WrapperBusinessLogo = styled.div`
-  width: 60px;
-  height: 60px;
-  min-height: 60px;
-  max-width: 60px;
+  width: 70px;
+  height: 70px;
+  min-height: 70px;
+  max-width: 70px;
   ${({ isSkeleton }) => !isSkeleton && css`
     border: 1px solid ${props => props.theme.colors.secundaryLight};
   `}
@@ -48,15 +49,15 @@ export const WrapperBusinessLogo = styled.div`
 
 const BusinessLogoStyled = styled.div`
   display: flex;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  min-height: 60px;
+  min-height: 70px;
   border-radius: 50%;
 `
 
@@ -75,18 +76,15 @@ export const BusinessLogo = (props) => {
 
 export const BusinessInfo = styled.div`
   display: flex;
+  width: calc(100% - 90px);
 `
 
 export const BusinessInfoItem = styled.div`
-  width: 92%;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0px 5px 0px 10px;
-  font-size: 12px;
-  ${props => props.theme?.rtl && css`
-    padding: 0px 10px 0px 5px;
-  `}
   .reviews {
     display: flex;
     align-items: center;
@@ -124,17 +122,8 @@ export const BusinessInfoItem = styled.div`
     }
   }
 
-  @media (min-width: 1201px) {
-    width: 95%;
-  }
-
   @media (min-width: 481px){
-    padding: 0px 5px 0px 16px;
     font-size: 16px;
-
-    ${props => props.theme?.rtl && css`
-        padding: 0px 16px 0px 5px;
-    `}
   }
 `
 
