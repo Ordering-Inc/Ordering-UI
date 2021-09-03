@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-
 import { ProductItemAccordion } from '../ProductItemAccordion'
+import { ProductForm } from '../ProductForm'
+import { UpsellingPage } from '../UpsellingPage'
+
 import { Confirm } from '../../../../../components/Confirm'
 import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
-import { ProductForm } from '../../../../../components/ProductForm'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { verifyDecimals } from '../../../../../utils'
 
@@ -17,7 +17,9 @@ import {
   OrderBill,
   CheckoutAction,
   CouponContainer,
-  CartSticky
+  CartSticky,
+  CustomCartBottom,
+  CartActionsGroupContainer
 } from './styles'
 
 const CartUI = (props) => {
@@ -38,7 +40,8 @@ const CartUI = (props) => {
     isCartOnProductsList,
     handleCartOpen,
 
-    isCustomLayout
+    isCustomMode,
+    handleGoBack
   } = props
 
   const [, t] = useLanguage()
@@ -108,6 +111,7 @@ const CartUI = (props) => {
       content: t('QUESTION_DELETE_PRODUCTS', 'Are you sure that you want to delete all products?'),
       handleOnAccept: () => {
         clearCart(cart?.uuid)
+        handleGoBack && handleGoBack()
         setConfirm({ ...confirm, open: false })
       }
     })
@@ -127,10 +131,10 @@ const CartUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <CartContainer className='cart' isCustomLayout={isCustomLayout}>
+      <CartContainer className='cart' isCustomMode={isCustomMode}>
         <CartSticky isCartOnProductsList={isCartOnProductsList}>
           <BusinessItemAccordion
-            isCustomLayout={isCustomLayout}
+            isCustomMode={isCustomMode}
             isCartPending={isCartPending}
             currentCartUuid={currentCartUuid}
             uuid={cart?.uuid}
@@ -150,7 +154,7 @@ const CartUI = (props) => {
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
                 key={product.code}
-                isCustomLayout={isCustomLayout}
+                isCustomMode={isCustomMode}
                 isCartPending={isCartPending}
                 isCartProduct
                 product={product}
@@ -258,7 +262,7 @@ const CartUI = (props) => {
                 </table>
               </OrderBill>
             )}
-            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
+            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && !isCustomMode && (
               <CheckoutAction>
                 <Button
                   color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
@@ -303,8 +307,9 @@ const CartUI = (props) => {
               onSave={handlerProductAction}
             />
           </Modal>
-          {openUpselling && (
+          {(openUpselling || isCustomMode) && (
             <UpsellingPage
+              isCustomMode={isCustomMode}
               businessId={cart.business_id}
               cartProducts={cart.products}
               business={cart.business}
@@ -316,6 +321,31 @@ const CartUI = (props) => {
           )}
         </CartSticky>
       </CartContainer>
+      {isCustomMode && (
+        <CustomCartBottom>
+          <CartActionsGroupContainer>
+            <Button
+              color='primaryContrast'
+              onClick={() => handleClearProducts()}
+            >
+              {t('CANCEL_ORDER', 'Cancel order')}
+            </Button>
+            <Button
+              color='primaryGradient'
+              onClick={() => handleClickCheckout()}
+              disabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
+            >
+              {!cart?.valid_address ? (
+                t('OUT_OF_COVERAGE', 'Out of Coverage')
+              ) : !cart?.valid_maximum ? (
+              `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+              ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
+              `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+              ) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
+            </Button>
+          </CartActionsGroupContainer>
+        </CustomCartBottom>
+      )}
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

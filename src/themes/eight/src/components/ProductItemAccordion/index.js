@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import BsPencil from '@meronex/icons/bs/BsPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import BsTrash from '@meronex/icons/bs/BsTrash'
@@ -26,13 +26,14 @@ import {
   ProductQuantity,
 
   ProductCardContainer,
+  ProductInfoContainer,
   ProductInfoContent,
   IncDecActions
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
   const {
-    isCustomLayout,
+    isCustomMode,
     isCartPending,
     isCartProduct,
     product,
@@ -55,6 +56,9 @@ export const ProductItemAccordion = (props) => {
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
   const productActionsDelete = useRef(null)
+
+  const [productQuantity, setProductQuantity] = useState(product?.quantity)
+  const isSoldOut = product?.inventoried && product?.quantity === 0
 
   const productInfo = () => {
     if (isCartProduct) {
@@ -99,6 +103,20 @@ export const ProductItemAccordion = (props) => {
     return `${quantity} x ${name} ${pos} +${price}`
   }
 
+  const decreaseQuantity = () => {
+    if (productQuantity > 1) setProductQuantity(productQuantity - 1)
+  }
+
+  const incrementQuantity = () => {
+    const maxQuantity = getProductMax(product)
+    if (productQuantity < maxQuantity) setProductQuantity(productQuantity + 1)
+  }
+
+  useEffect(() => {
+    if (!isCustomMode) return
+    handleChangeQuantity(productQuantity)
+  }, [productQuantity, isCustomMode])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -107,7 +125,7 @@ export const ProductItemAccordion = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {isCustomLayout ? (
+      {isCustomMode ? (
         <ProductCardContainer>
           <WrapperProductImage isBigSize>
             <ProductImage bgimage={product?.images} />
@@ -115,91 +133,93 @@ export const ProductItemAccordion = (props) => {
               <IncDecActions>
                 <button
                   className='decrease'
-                  // onClick={decrement}
-                  // disabled={product.quantity === 1 || isSoldOut}
+                  onClick={() => decreaseQuantity()}
+                  disabled={productQuantity === 1 || isSoldOut}
                 >
                   -
                 </button>
-                <span>{product?.quantity}</span>
+                <span>{productQuantity}</span>
                 <button
                   className='increase'
-                  // onClick={increment}
-                  // disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
+                  onClick={() => incrementQuantity()}
+                  disabled={getProductMax(product) <= 0 || productQuantity >= getProductMax(product) || isSoldOut}
                 >
                   +
                 </button>
               </IncDecActions>
             )}
           </WrapperProductImage>
-          <ProductInfoContent>
-            <h1>{product.name}</h1>
-            {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
-              <ProductOptionsList isCustomLayout={isCustomLayout}>
-                <p>{t('INGREDIENTS', 'Ingredients')}</p>
-                {productInfo().ingredients.map(ingredient => !ingredient.selected && (
-                  <li className='ingredient' key={ingredient.id}>
-                    <span>{t('NO', 'No')} {ingredient.name}</span>
-                  </li>
-                ))}
-              </ProductOptionsList>
-            )}
-            {productInfo().options.length > 0 && (
-              <ProductOptionsList isCustomLayout={isCustomLayout}>
-                {productInfo().options.map(option => (
-                  <li key={option.id}>
-                    <p>{option.name}</p>
-                    <ProductOptionsList className='suboption'>
-                      {option.suboptions.map(suboption => (
-                        <li key={suboption.id}>
-                          <span>
-                            {getFormattedSubOptionName({
-                              quantity: suboption.quantity,
-                              name: suboption.name,
-                              position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
-                              price: parsePrice(suboption.price)
-                            })}
-                          </span>
-                        </li>
-                      ))}
-                    </ProductOptionsList>
-                  </li>
-                ))}
-              </ProductOptionsList>
-            )}
-            {product.comment && (
-              <ProductComment>
-                <p>{t('SPECIAL_COMMENT', 'Special Comment')}</p>
-                <h3>{product.comment}</h3>
-              </ProductComment>
-            )}
-          </ProductInfoContent>
-          {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
-            <ProductPriceSection>
-              <ProductPrice className='prod-price'>
-                <span>
-                  {parsePrice(product.total || product.price)}
-                </span>
-              </ProductPrice>
-              {isCartProduct && !isCartPending && (
-                <ProductActions>
-                  <ProductActionsEdit
-                    ref={productActionsEdit}
-                    onClick={() => onEditProduct(product)}
-                    disabled={orderState.loading}
-                  >
-                    <BsPencil color='#B1BCCC' />
-                  </ProductActionsEdit>
-                  <ProductActionsDelete
-                    ref={productActionsDelete}
-                    onClick={() => onDeleteProduct(product)}
-                    disabled={orderState.loading}
-                  >
-                    <BsTrash color='#B1BCCC' />
-                  </ProductActionsDelete>
-                </ProductActions>
+          <ProductInfoContainer>
+            <ProductInfoContent>
+              <h1>{product.name}</h1>
+              {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
+                <ProductOptionsList isCustomMode={isCustomMode}>
+                  <p>{t('INGREDIENTS', 'Ingredients')}</p>
+                  {productInfo().ingredients.map(ingredient => !ingredient.selected && (
+                    <li className='ingredient' key={ingredient.id}>
+                      <span>{t('NO', 'No')} {ingredient.name}</span>
+                    </li>
+                  ))}
+                </ProductOptionsList>
               )}
-            </ProductPriceSection>
-          )}
+              {productInfo().options.length > 0 && (
+                <ProductOptionsList isCustomMode={isCustomMode}>
+                  {productInfo().options.map(option => (
+                    <li key={option.id}>
+                      <p>{option.name}</p>
+                      <ProductOptionsList className='suboption'>
+                        {option.suboptions.map(suboption => (
+                          <li key={suboption.id}>
+                            <span>
+                              {getFormattedSubOptionName({
+                                quantity: suboption.quantity,
+                                name: suboption.name,
+                                position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
+                                price: parsePrice(suboption.price)
+                              })}
+                            </span>
+                          </li>
+                        ))}
+                      </ProductOptionsList>
+                    </li>
+                  ))}
+                </ProductOptionsList>
+              )}
+              {product.comment && (
+                <ProductComment>
+                  <p>{t('SPECIAL_COMMENT', 'Special Comment')}</p>
+                  <h3>{product.comment}</h3>
+                </ProductComment>
+              )}
+            </ProductInfoContent>
+            {(product?.valid || !isCartProduct) && (
+              <ProductPriceSection>
+                <ProductPrice className='prod-price'>
+                  <span>
+                    {parsePrice(product.total || product.price)}
+                  </span>
+                </ProductPrice>
+                {isCartProduct && !isCartPending && (
+                  <ProductActions>
+                    <ProductActionsEdit
+                      ref={productActionsEdit}
+                      onClick={() => onEditProduct(product)}
+                      disabled={orderState.loading}
+                    >
+                      <BsPencil color='#B1BCCC' />
+                    </ProductActionsEdit>
+                    <ProductActionsDelete
+                      ref={productActionsDelete}
+                      onClick={() => onDeleteProduct(product)}
+                      disabled={orderState.loading}
+                    >
+                      <BsTrash color='#B1BCCC' />
+                    </ProductActionsDelete>
+                  </ProductActions>
+                )}
+              </ProductPriceSection>
+            )}
+          </ProductInfoContainer>
         </ProductCardContainer>
       ) : (
         <AccordionSection>

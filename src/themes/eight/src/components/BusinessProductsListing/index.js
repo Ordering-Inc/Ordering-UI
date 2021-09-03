@@ -73,7 +73,6 @@ const BusinessProductsListingUI = (props) => {
   const [{ auth }] = useSession()
   const location = useLocation()
 
-  // const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
@@ -180,6 +179,12 @@ const BusinessProductsListingUI = (props) => {
     handleChangeCategory(category)
     handleShowOption('products')
   }
+
+  useEffect(() => {
+    if (currentCart?.products?.length > 0 || !isCartOpen) return
+    handleBackShowOption()
+    setIsCartOpen(false)
+  }, [currentCart?.products?.length, isCartOpen])
 
   return (
     <>
@@ -322,19 +327,23 @@ const BusinessProductsListingUI = (props) => {
             <WrapCart>
               <Cart
                 isForceOpenCart
-                isCustomLayout
+                isCustomMode
                 cart={currentCart}
                 isCartPending={currentCart?.status === 2}
                 isProducts={currentCart.products.length}
                 isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
                 handleCartOpen={(val) => setIsCartOpen(val)}
+                handleGoBack={() => {
+                  handleBackShowOption()
+                  setIsCartOpen(false)
+                }}
               />
             </WrapCart>
           )}
         </>
       )}
 
-      {currentCart?.products?.length > 0 && auth && !isCartOpen && showOption !== 'productForm' && showOption !== 'cart' && (
+      {currentCart?.products?.length > 0 && auth && !isCartOpen && currentCart?.valid_schedule && showOption !== 'productForm' && showOption !== 'cart' && (
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (

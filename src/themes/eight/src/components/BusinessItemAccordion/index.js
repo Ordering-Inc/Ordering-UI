@@ -21,7 +21,7 @@ import {
 
 export const BusinessItemAccordion = (props) => {
   const {
-    isCustomLayout,
+    isCustomMode,
     uuid,
     isCartPending,
     currentCartUuid,
@@ -128,9 +128,9 @@ export const BusinessItemAccordion = (props) => {
       <AccordionSection
         isClosed={isClosed}
         isCartOnProductsList={isCartOnProductsList}
-        isCustomLayout={isCustomLayout}
+        isCustomMode={isCustomMode}
       >
-        {!isCustomLayout && (
+        {!isCustomMode && (
           <Accordion
             isClosed={isClosed}
             className={`accordion ${setActive}`}
@@ -208,7 +208,7 @@ export const BusinessItemAccordion = (props) => {
         <AccordionContent
           ref={content}
           style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
-          isCustomLayout={isCustomLayout}
+          isCustomMode={isCustomMode}
         >
           {props.children}
         </AccordionContent>

@@ -5,7 +5,7 @@ export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  ${({ isCustomLayout }) => !isCustomLayout && css`
+  ${({ isCustomMode }) => !isCustomMode && css`
     border-bottom: 1px solid #BFBFBF;
     box-shadow: 0px 3px 6px #00000029;
   `}
@@ -153,7 +153,7 @@ export const ContentInfo = styled.div`
 `
 
 export const AccordionContent = styled.div`
-  ${({ isCustomLayout }) => !isCustomLayout && css`
+  ${({ isCustomMode }) => !isCustomMode && css`
     overflow: hidden;
   `}
   transition: min-height 0.6s ease;

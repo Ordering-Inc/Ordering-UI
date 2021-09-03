@@ -102,8 +102,8 @@ export const Button = styled.button`
     border-color: transparent;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     &:active {
-      background: ${props => darken(0.07, props.theme.colors.primary)};
-      color: ${props => props.theme.colors.primaryContrast};
+      background: ${props => darken(0.07, props.theme.colors.primaryContrast)};
+      border-color: ${props => props.theme.colors.primary};
     }
   `}
   ${({ color }) => color === 'primary' && css`

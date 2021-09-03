@@ -102,7 +102,6 @@ const ProductImageStyled = styled.div`
   object-fit: cover;
   background-position: center;
   border-radius: 7.6px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 `
 
 export const ProductImage = (props) => {
@@ -364,7 +363,7 @@ export const ProductOptionsList = styled.ul`
   color: ${props => props.theme.colors.secundaryLight};
   font-size: 14px;
 
-  ${({ isCustomLayout }) => isCustomLayout && css`
+  ${({ isCustomMode }) => isCustomMode && css`
     padding: 0px;
     margin: 0px;
   `}
@@ -410,14 +409,45 @@ export const ProductQuantity = styled.span`
 export const ProductCardContainer = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 20px;
-  padding: 20px 30px;
+  padding: 20px 30px 30px 30px;
   display: flex;
   margin-bottom: 40px;
+  justify-content: space-between;
+`
+
+export const ProductInfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 100px);
+  flex-direction: column;
+
+  > div:last-child {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+
+    > div {
+      span {
+        font-size: 16px;
+        margin: 0 5px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: calc(100% - 140px);
+    flex-direction: row;
+
+    > div:last-child {
+      flex-direction: column;
+      width: 25%;
+      align-items: flex-end;
+    }
+  }
 `
 
 export const ProductInfoContent = styled.div`
-  margin: 0 20px;
-  width: calc(75% - 140px);
+  width: 100%;
   h1 {
     color: ${props => props.theme.colors.secundary};
     font-weight: 500;
@@ -426,6 +456,10 @@ export const ProductInfoContent = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    width: calc(75% - 20px);
   }
 `
 

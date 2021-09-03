@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const CartContainer = styled.div`
-  ${({ isCustomLayout }) => !isCustomLayout && css`
+  ${({ isCustomMode }) => !isCustomMode && css`
     border-bottom: 1px solid #F0F0F0;
   `}
 `
@@ -80,4 +80,28 @@ export const CheckoutAction = styled.div`
       cursor: not-allowed
     }
   }
+`
+
+export const CustomCartBottom = styled.div`
+  position: fixed;
+  bottom: 0px;
+  background: #FFF;
+  box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 25px 20px;
+  z-index: 1000;
+  box-sizing: border-box;
+
+  ${props => props.theme?.rtl ? css`
+    right: 0px;
+  ` : css`
+    left: 0px;
+  `}
+`
+
+export const CartActionsGroupContainer = styled.div`
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
 `
