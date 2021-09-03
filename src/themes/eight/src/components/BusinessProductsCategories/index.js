@@ -9,6 +9,7 @@ import { useTheme } from 'styled-components'
 import {
   CategoriesContainer,
   CategoryCard,
+  WrapImage,
   CategoryImage,
   CategoryName
 } from './styles'
@@ -40,9 +41,10 @@ const BusinessProductsCategoriesUI = (props) => {
                 key={category.id}
                 onClick={() => handlerClickCategory(category)}
               >
-                <CategoryImage bgimage={optimizeImage(category.image || theme.images?.dummies?.businessLogo)}>
-                  <CategoryName>{category.name}</CategoryName>
-                </CategoryImage>
+                <WrapImage>
+                  <CategoryImage bgimage={optimizeImage(category.image || theme.images?.dummies?.businessLogo)} />
+                </WrapImage>
+                <CategoryName>{category.name}</CategoryName>
               </CategoryCard>
             ))}
           </>
@@ -50,16 +52,18 @@ const BusinessProductsCategoriesUI = (props) => {
           <>
             {[...Array(10).keys()].map(i => (
               <CategoryCard key={i}>
-                <CategoryImage>
-                  <CategoryName>
-                    <Skeleton width={100} />
-                  </CategoryName>
-                </CategoryImage>
+                <WrapImage>
+                  <CategoryImage />
+                </WrapImage>
+                <CategoryName>
+                  <Skeleton width={100} />
+                </CategoryName>
               </CategoryCard>
             ))}
           </>
         )}
       </CategoriesContainer>
+
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
