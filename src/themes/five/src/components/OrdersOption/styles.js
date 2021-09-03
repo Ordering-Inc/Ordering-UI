@@ -270,6 +270,10 @@ export const BusinessInformation = styled.div`
     white-space: nowrap;
   }
 
+  p[name='order_number']{
+      display: none;
+    }
+
   p[name='view_order'] {
     color: ${props => props.theme.colors.primary};
     cursor: pointer;
@@ -290,6 +294,7 @@ export const BusinessInformation = styled.div`
     }
     p[name='order_number']{
       width: 230px;
+      display: inline-block;
     }
   }
 

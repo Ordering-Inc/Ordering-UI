@@ -76,6 +76,7 @@ export const Header = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const handleSuccessSignup = (user) => {
     login({
@@ -224,12 +225,15 @@ export const Header = (props) => {
                 <OrderTypeSelectorHeader
                   orderTypeList={orderTypeList}
                   onClick={() => openModal('delivery')}
+                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
+                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
                 />
               ) : (
                 <HeaderOption
                   variant='delivery'
                   onClick={(variant) => openModal(variant)}
                   orderTypeList={orderTypeList}
+                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
                 />
               )}
             </Menu>
@@ -367,6 +371,8 @@ export const Header = (props) => {
             {modalSelected === 'delivery' && (
               <OrderTypeSelectorContent
                 onClose={() => setModalIsOpen(false)}
+                configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
+                defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
               />
             )}
           </Modal>

@@ -4,7 +4,6 @@ import BsBuilding from '@meronex/icons/bs/BsBuilding'
 import BsHouse from '@meronex/icons/bs/BsHouse'
 import FaPlus from '@meronex/icons/fa/FaPlus'
 import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
-import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
@@ -28,7 +27,6 @@ import {
   WrapAddressInput,
   AddressTagSection,
   WrapperMap,
-  ShowMap,
   WrapperSkeleton
 } from './styles'
 
@@ -66,7 +64,6 @@ const AddressFormUI = (props) => {
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
-  const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
@@ -202,7 +199,6 @@ const AddressFormUI = (props) => {
       return
     }
 
-    setToggleMap(false)
     const arrayList = isEditing
       ? addressesList?.filter(address => address?.id !== addressState?.address?.id) || []
       : addressesList || []
@@ -379,7 +375,6 @@ const AddressFormUI = (props) => {
               <React.Fragment key={field.name}>
                 <AddressWrap className='google-control'>
                   <WrapAddressInput>
-                    <HiOutlineLocationMarker />
                     <GoogleAutocompleteInput
                       className='input-autocomplete'
                       apiKey={googleMapsApiKey}
@@ -405,15 +400,12 @@ const AddressFormUI = (props) => {
                       handleChangeAddress(e)
                     }}
                     onError={setMapErrors}
-                    IconButton={BiCurrentLocation}
+                    IconButton={HiOutlineLocationMarker}
                     IconLoadingButton={CgSearchLoading}
                   />
                 </AddressWrap>
 
-                {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
-                  <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
-                )}
-                {locationChange && toggleMap && (
+                {locationChange && (addressState?.address?.location || formState?.changes?.location) && (
                   <WrapperMap>
                     <GoogleMapsMap
                       apiKey={googleMapsApiKey}
