@@ -5,6 +5,7 @@ import {
   useUtils
 } from 'ordering-components'
 import { useTheme } from 'styled-components'
+
 import {
   CategoriesContainer,
   CategoryCard,

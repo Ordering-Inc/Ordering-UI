@@ -23,7 +23,7 @@ export const SingleProductCard = (props) => {
 
   const [, t] = useLanguage()
   const [stateConfig] = useConfig()
-  const [{ parsePrice, optimizeImage }] = useUtils()
+  const [{ optimizeImage }] = useUtils()
   const [orderState] = useOrder()
   const theme = useTheme()
 
@@ -68,12 +68,6 @@ export const SingleProductCard = (props) => {
         )}
         <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
           {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-          {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
-          {!isSkeleton ? (
-            <span>{parsePrice(product?.price)}</span>
-          ) : (
-            <Skeleton width={100} />
-          )}
         </CardInfo>
         {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
       </CardContainer>

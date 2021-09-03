@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
-import { ProductItemAccordion } from '../../../../../components/ProductItemAccordion'
-import { BusinessItemAccordion } from '../../../../../components/BusinessItemAccordion'
+import { BusinessItemAccordion } from '../BusinessItemAccordion'
 
+import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Confirm } from '../../../../../components/Confirm'
 import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
@@ -36,7 +36,9 @@ const CartUI = (props) => {
     isCartPopover,
     isForceOpenCart,
     isCartOnProductsList,
-    handleCartOpen
+    handleCartOpen,
+
+    isCustomLayout
   } = props
 
   const [, t] = useLanguage()
@@ -125,9 +127,10 @@ const CartUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <CartContainer className='cart'>
+      <CartContainer className='cart' isCustomLayout={isCustomLayout}>
         <CartSticky isCartOnProductsList={isCartOnProductsList}>
           <BusinessItemAccordion
+            isCustomLayout={isCustomLayout}
             isCartPending={isCartPending}
             currentCartUuid={currentCartUuid}
             uuid={cart?.uuid}
@@ -147,6 +150,7 @@ const CartUI = (props) => {
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
                 key={product.code}
+                isCustomLayout={isCustomLayout}
                 isCartPending={isCartPending}
                 isCartProduct
                 product={product}

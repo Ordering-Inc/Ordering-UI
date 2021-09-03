@@ -22,12 +22,6 @@ export const FormSide = styled(Side)`
   align-items: center;
   margin: 50px auto;
 
-  @media (min-width: 769px) {
-    ${({ isPopup }) => isPopup && css`
-      margin: 20px 0px;
-    `}
-  }
-
   @media (min-width: 992px) {
     ${({ isSignupEmail }) => isSignupEmail && css`
       width: 55%;
@@ -167,7 +161,11 @@ export const SocialButtons = styled.div`
   }
 
   @media (min-width: 1300px) {
-    flex-direction: row;
+    ${({ isPopup }) => isPopup ? css`
+      flex-direction: column;
+    ` : css`
+      flex-direction: row;
+    `}
   }
 `
 

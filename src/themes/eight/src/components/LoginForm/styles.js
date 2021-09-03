@@ -23,12 +23,6 @@ export const FormSide = styled(Side)`
   align-items: center;
   margin: 50px auto;
 
-  @media (min-width: 769px) {
-    ${({ isPopup }) => isPopup && css`
-      margin: 20px 0px;
-    `}
-  }
-
   @media (min-width: 992px) {
     width: 55%;
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};

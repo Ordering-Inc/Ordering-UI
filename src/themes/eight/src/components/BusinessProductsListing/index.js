@@ -17,7 +17,6 @@ import {
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { FloatingButton } from '../../../../../components/FloatingButton'
-import { Modal } from '../../../../../components/Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 
 import { ProductForm } from '../ProductForm'
@@ -32,7 +31,9 @@ import {
   ProductLoading,
   SkeletonItem,
   WrappLayout,
-  ProductDetailsHeader
+  ProductDetailsHeader,
+  WrapperNotFound,
+  WrapCart
 } from './styles'
 
 const PIXELS_TO_SCROLL = 300
@@ -72,15 +73,25 @@ const BusinessProductsListingUI = (props) => {
   const [{ auth }] = useSession()
   const location = useLocation()
 
-  const [openProduct, setModalIsOpen] = useState(false)
+  // const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
 
-  const [isMenuShow, setIsMenuShow] = useState(true)
+  const [showOption, setShowOption] = useState('categories')
+  const [previousShowOption, setPreviousShowOption] = useState('categories')
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
+
+  const handleBackShowOption = () => {
+    setShowOption(previousShowOption)
+  }
+
+  const handleShowOption = (option) => {
+    setPreviousShowOption(showOption)
+    setShowOption(option)
+  }
 
   const onProductClick = (product) => {
     if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
@@ -92,13 +103,13 @@ const BusinessProductsListingUI = (props) => {
         category: product.category_id
       })
       setCurProduct(product)
-      setModalIsOpen(true)
+      handleShowOption('productForm')
       events.emit('product_clicked', product)
     }
   }
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
-      setModalIsOpen(false)
+      handleBackShowOption()
       onProductRedirect({
         slug: business?.slug
       })
@@ -106,7 +117,7 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const closeModalProductForm = () => {
-    setModalIsOpen(false)
+    handleBackShowOption()
     handleUpdateInitialRender(false)
     updateProductModal(null)
     setCurProduct(null)
@@ -124,8 +135,8 @@ const BusinessProductsListingUI = (props) => {
   }, [categoryState])
 
   const handleChangePage = (data) => {
-    if (Object.entries(data.query).length === 0 && openProduct) {
-      setModalIsOpen(false)
+    if (Object.entries(data.query).length === 0 && showOption === 'productForm') {
+      handleBackShowOption()
     }
   }
 
@@ -140,7 +151,7 @@ const BusinessProductsListingUI = (props) => {
       if (productModal?.product?.id) {
         setCurProduct(productModal.product)
       }
-      setModalIsOpen(true)
+      handleShowOption('productForm')
     }
   }, [productModal])
 
@@ -153,11 +164,12 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    if (showOption !== 'productForm') return
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
     }
-  }, [openProduct])
+  }, [showOption])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -166,7 +178,7 @@ const BusinessProductsListingUI = (props) => {
 
   const onClickCategory = (category) => {
     handleChangeCategory(category)
-    setIsMenuShow(false)
+    handleShowOption('products')
   }
 
   return (
@@ -177,152 +189,169 @@ const BusinessProductsListingUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {!openProduct ? (
-        <>
-          {!isMenuShow && (
-            <NavBar
-              title={categorySelected?.name}
-              handleGoBack={() => setIsMenuShow(true)}
-            />
-          )}
-          <ProductsContainer>
-            {
-              !loading && business?.id && (
-                <WrappLayout
-                  isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                >
-                  <div className='bp-list'>
-                    {isMenuShow ? (
-                      <>
-                        {!(business?.categories?.length === 0 && !categoryId) && (
-                          <BusinessProductsCategories
-                            categories={[...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                            categorySelected={categorySelected}
-                            onClickCategory={onClickCategory}
-                            featured={featuredProducts}
+      {showOption === 'products' && (
+        <NavBar
+          title={categorySelected?.name}
+          handleGoBack={() => handleShowOption('categories')}
+        />
+      )}
+      {(showOption === 'categories' || showOption === 'products') && (
+        <ProductsContainer>
+          {
+            !loading && business?.id && (
+              <WrappLayout
+                isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+              >
+                <div className='bp-list'>
+                  {showOption === 'categories' && (
+                    <>
+                      {!(business?.categories?.length === 0 && !categoryId) ? (
+                        <BusinessProductsCategories
+                          categories={[...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                          categorySelected={categorySelected}
+                          onClickCategory={onClickCategory}
+                          featured={featuredProducts}
+                        />
+                      ) : (
+                        <WrapperNotFound>
+                          <NotFoundSource
+                            content={t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time')}
+                            btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+                            onClickButton={() => handleSearchRedirect()}
                           />
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        <WrapContent>
-                          <BusinessProductsList
-                            categories={[
-                              { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                              { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                              ...business?.categories.sort((a, b) => a.rank - b.rank)
-                            ]}
-                            category={categorySelected}
-                            categoryState={categoryState}
-                            businessId={business.id}
-                            errors={errors}
-                            onProductClick={onProductClick}
-                            handleSearchRedirect={handleSearchRedirect}
-                            featured={featuredProducts}
-                            searchValue={searchValue}
-                            isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                            handleClearSearch={handleChangeSearch}
-                            errorQuantityProducts={errorQuantityProducts}
-                          />
-                        </WrapContent>
-                      </>
-                    )}
-                  </div>
-                  {isCartOnProductsList && currentCart?.products?.length > 0 && (
-                    <Cart
-                      isForceOpenCart
-                      cart={currentCart}
-                      isCartPending={currentCart?.status === 2}
-                      isProducts={currentCart.products.length}
-                      isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                      handleCartOpen={(val) => setIsCartOpen(val)}
-                    />
+                        </WrapperNotFound>
+                      )}
+                    </>
                   )}
-                </WrappLayout>
-              )
-            }
+                  {showOption === 'products' && (
+                    <WrapContent>
+                      <BusinessProductsList
+                        categories={[
+                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                          ...business?.categories.sort((a, b) => a.rank - b.rank)
+                        ]}
+                        isOpen={showOption === 'products'}
+                        category={categorySelected}
+                        categoryState={categoryState}
+                        businessId={business.id}
+                        errors={errors}
+                        onProductClick={onProductClick}
+                        handleSearchRedirect={handleSearchRedirect}
+                        featured={featuredProducts}
+                        searchValue={searchValue}
+                        isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                        handleClearSearch={handleChangeSearch}
+                        errorQuantityProducts={errorQuantityProducts}
+                      />
+                    </WrapContent>
+                  )}
+                </div>
+              </WrappLayout>
+            )
+          }
 
-            {loading && !error && (
-              <>
-                {isMenuShow ? (
-                  <BusinessProductsCategories
+          {loading && !error && (
+            <>
+              {showOption === 'categories' && (
+                <BusinessProductsCategories
+                  categories={[]}
+                  isSkeleton
+                />
+              )}
+              {showOption === 'products' && (
+                <WrapContent>
+                  <BusinessProductsList
                     categories={[]}
-                    isSkeleton
+                    category={categorySelected}
+                    categoryState={categoryState}
+                    isBusinessLoading={loading}
+                    errorQuantityProducts={errorQuantityProducts}
                   />
-                ) : (
-                  <WrapContent>
-                    <BusinessProductsList
-                      categories={[]}
-                      category={categorySelected}
-                      categoryState={categoryState}
-                      isBusinessLoading={loading}
-                      errorQuantityProducts={errorQuantityProducts}
-                    />
-                  </WrapContent>
-                )}
-              </>
-            )}
+                </WrapContent>
+              )}
+            </>
+          )}
+        </ProductsContainer>
+      )}
 
-            {
-              !loading && business && !Object.keys(business).length && (
-                <NotFoundSource
-                  content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
-                  btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-                  onClickButton={() => handleSearchRedirect()}
-                />
-              )
-            }
+      {
+        !loading && business && !Object.keys(business).length && (
+          <NotFoundSource
+            content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
+            btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
+            onClickButton={() => handleSearchRedirect()}
+          />
+        )
+      }
 
-            {
-              !loading && !business && location.pathname.includes('/store/') && (
-                <NotFoundSource
-                  content={t('ERROR_NOT_FOUND_STORE', theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
-                  btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-                  onClickButton={handleSearchRedirect}
-                />
-              )
-            }
+      {
+        !loading && !business && location.pathname.includes('/store/') && (
+          <NotFoundSource
+            content={t('ERROR_NOT_FOUND_STORE', theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
+            btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
+            onClickButton={handleSearchRedirect}
+          />
+        )
+      }
 
-            {
-              !loading && !business && !location.pathname.includes('/store/') && (
-                <PageNotFound />
-              )
-            }
+      {
+        !loading && !business && !location.pathname.includes('/store/') && (
+          <PageNotFound />
+        )
+      }
 
-            {error && error.length > 0 && Object.keys(business).length && (
-              <NotFoundSource
-                content={error[0]?.message || error[0]}
-                btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-                onClickButton={handleSearchRedirect}
+      {error && error.length > 0 && Object.keys(business).length && (
+        <NotFoundSource
+          content={error[0]?.message || error[0]}
+          btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
+          onClickButton={handleSearchRedirect}
+        />
+      )}
+
+      {showOption === 'cart' && (
+        <>
+          <NavBar
+            title={t('REVIEW_YOUR_MEAL', 'Review your meal')}
+            handleGoBack={() => {
+              handleBackShowOption()
+              setIsCartOpen(false)
+            }}
+          />
+          {currentCart?.products?.length > 0 && (
+            <WrapCart>
+              <Cart
+                isForceOpenCart
+                isCustomLayout
+                cart={currentCart}
+                isCartPending={currentCart?.status === 2}
+                isProducts={currentCart.products.length}
+                isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                handleCartOpen={(val) => setIsCartOpen(val)}
               />
-            )}
-          </ProductsContainer>
-
-          {currentCart?.products?.length > 0 && auth && !isCartOpen && (
-            <FloatingButton
-              btnText={
-                !currentCart?.valid_maximum ? (
-                  `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
-                ) : (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100)) ? (
-                  `${t('MINIMUN_SUBTOTAL_ORDER', theme?.defaultLanguages?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
-                ) : !openUpselling ^ canOpenUpselling ? t('VIEW_ORDER', theme?.defaultLanguages?.VIEW_ORDER || 'View Order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')
-              }
-              isSecondaryBtn={!currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
-              btnValue={currentCart?.products?.length}
-              handleClick={() => setOpenUpselling(true)}
-              disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
-            />
+            </WrapCart>
           )}
         </>
-      ) : (
-        // <Modal
-        //   width='70%'
-        //   open={openProduct}
-        //   closeOnBackdrop
-        //   onClose={() => closeModalProductForm()}
-        //   padding='0'
-        //   isProductForm
-        // >
+      )}
+
+      {currentCart?.products?.length > 0 && auth && !isCartOpen && showOption !== 'productForm' && showOption !== 'cart' && (
+        <FloatingButton
+          btnText={
+            !currentCart?.valid_maximum ? (
+              `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
+            ) : (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100)) ? (
+              `${t('MINIMUN_SUBTOTAL_ORDER', theme?.defaultLanguages?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
+            ) : !openUpselling ^ canOpenUpselling ? t('VIEW_ORDER', theme?.defaultLanguages?.VIEW_ORDER || 'View Order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')
+          }
+          isSecondaryBtn={!currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
+          btnValue={currentCart?.products?.length}
+          // handleClick={() => setOpenUpselling(true)}
+          handleClick={() => handleShowOption('cart')}
+          disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
+        />
+      )}
+
+      {showOption === 'productForm' && (
         <>
           <ProductDetailsHeader>
             <p>{productModal.product?.name || curProduct?.name}</p>
@@ -358,7 +387,6 @@ const BusinessProductsListingUI = (props) => {
             />
           )}
         </>
-        // </Modal>
       )}
 
       {currentCart?.products && openUpselling && (

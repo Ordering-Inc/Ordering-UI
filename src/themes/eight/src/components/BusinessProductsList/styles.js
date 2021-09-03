@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const ProductsContainer = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
   min-height: calc(100vh - 330px);
-  max-width: 900px;
+  max-width: 700px;
   margin: 0 auto;
 `
 

@@ -8,13 +8,17 @@ export const CategoriesContainer = styled.div`
 
 export const CategoryCard = styled.div`
   cursor: pointer;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
   overflow: hidden;
   background-color: ${props => props.theme.colors.third};
   margin: 30px 20px;
 
   width: calc(100% - 40px);
+
+  &:hover {
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;
+  }
 
   @media (min-width: 681px) {
     width: calc(50% - 40px);

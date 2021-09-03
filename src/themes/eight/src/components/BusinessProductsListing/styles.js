@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const ProductsContainer = styled.div`
   width: 90%;
   margin: 30px auto 0px;
+  min-height: calc(100vh - 300px);
 
   @media (min-width: 768px) {
     width: 80%;
@@ -147,4 +148,16 @@ export const ProductDetailsHeader = styled.div`
       `}
     }
   }
+`
+
+export const WrapperNotFound = styled.div`
+  height: 500px;
+  > div{
+    height: 100%;
+  }
+`
+
+export const WrapCart = styled.div`
+  max-width: 800px;
+  margin: 50px auto;
 `

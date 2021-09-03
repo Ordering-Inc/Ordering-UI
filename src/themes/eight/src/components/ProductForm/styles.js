@@ -31,6 +31,7 @@ export const ProductImage = styled.div`
     object-fit: contain;
     height: 100%;
     box-sizing: border-box;
+    border-radius: 7.6px;
   }
 
   @media (min-width: 1201px) {

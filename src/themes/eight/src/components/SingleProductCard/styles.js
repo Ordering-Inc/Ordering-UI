@@ -9,19 +9,27 @@ export const CardContainer = styled.div`
   cursor: pointer;
   position: relative;
   background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
-  margin: 20px;
+  margin: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 7.6px;
+
+  &:hover {
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;
+    background-color: ${props => props.theme.colors.third};
+  }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
-      width: calc(50% - 40px);
+      width: calc(50% - 20px);
     }
   ` : css`
     @media (min-width: 681px) {
-      width: calc(50% - 40px);
+      width: calc(50% - 20px);
     }
 
     @media (min-width: 993px) {
-      width: calc(33% - 40px);
+      width: calc(33% - 20px);
     }
   `}
 `
@@ -45,20 +53,17 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  > * {
-    margin: 5px;
-  }
-
   h1 {
     font-size: 16px;
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '500'};
     text-align: left;
-    color: #263238;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center;
     color: ${props => props.theme.colors.secundary};
+    margin: 0px;
+    padding-top: 10px;
   }
 
   p {
@@ -84,10 +89,6 @@ export const CardInfo = styled.div`
   }
 
   @media (min-width: 1024px) {
-    h1 {
-      font-size: 18px;
-    }
-
     p {
       font-size: 16px;
     }
@@ -100,11 +101,6 @@ export const CardInfo = styled.div`
 
 export const WrapLogo = styled.div`
   width: 100%;
-  margin-right: 5px;
-  ${props => props.theme?.rtl && css`
-    margin-left: 5px;
-    margin-right: 0px;
-  `}
 `
 
 const CardLogoStyled = styled.div`
@@ -117,6 +113,7 @@ const CardLogoStyled = styled.div`
   min-height: 75px;
   width: 100%;
   padding-top: 100%;
+  border-radius: 7.6px;
 `
 export const CardLogo = (props) => {
   const style = {}
