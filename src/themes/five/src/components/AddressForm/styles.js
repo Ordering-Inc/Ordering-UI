@@ -16,7 +16,8 @@ export const FormActions = styled.div`
       font-size: 25px;
       position: absolute;
       ${props => props.theme?.rtl ? css`
-        left: 30px;  
+        left: 30px;
+        transform: rotateZ(180deg);
       ` : css`
         right: 30px; 
       `}
@@ -119,6 +120,11 @@ export const AddressWrap = styled.div`
     height: 41px;
     right: 1px;
     border: none;
+
+    ${props => props.theme?.rtl && css`
+      left: 1px;
+      right: initial;
+    `}
 
     svg {
       font-size: 18px;

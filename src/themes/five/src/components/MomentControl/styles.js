@@ -100,6 +100,10 @@ export const CalendarWrapper = styled.div`
 
         svg {
           font-size: 24px;
+
+          ${props => props.theme.rtl && css`
+            transform: rotateZ(180deg);
+          `}
         }
 
         span {
@@ -138,6 +142,11 @@ export const DatePickerWrapper = styled.div`
     top: 11px;
     color: #B1BCCC;
     position: absolute;
+
+    ${props => props.theme.rtl && css`
+      left: 5px;
+      right: initial;
+    `}
   }
 `
 

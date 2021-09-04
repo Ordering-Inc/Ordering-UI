@@ -127,6 +127,10 @@ export const Container = styled.div`
     padding: 8px 15px 8px 40px;
     border-radius: 7.6px;
 
+    ${props => props.theme.rtl && css`
+      padding: 8px 40px 8px 15px;
+    `}
+
     &::placeholder {
       color: #DBDCDB;
       opacity: 1;
@@ -157,6 +161,11 @@ export const InputBeforeIconWrapper = styled.div`
   height: 100%;
   top: 13px;
   left: 100px;
+
+  ${props => props.theme.rtl && css`
+    right: 100px;
+    left: initial;
+  `}
 
   svg {
     color: #B1BCCC;
