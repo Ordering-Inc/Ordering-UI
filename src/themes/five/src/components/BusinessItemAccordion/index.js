@@ -50,7 +50,6 @@ export const BusinessItemAccordion = (props) => {
   const businessDelete = useRef(null)
 
   const toggleAccordion = (e) => {
-    if (isStore) return
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
     if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')

@@ -102,7 +102,6 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   var toggleAccordion = function toggleAccordion(e) {
     var _businessStore$curren, _businessDelete$curre;
 
-    if (isStore) return;
     var isActionsClick = ((_businessStore$curren = businessStore.current) === null || _businessStore$curren === void 0 ? void 0 : _businessStore$curren.contains(e === null || e === void 0 ? void 0 : e.target)) || ((_businessDelete$curre = businessDelete.current) === null || _businessDelete$curre === void 0 ? void 0 : _businessDelete$curre.contains(e === null || e === void 0 ? void 0 : e.target));
     if (isClosed || !isProducts || isActionsClick) return;
     setActiveState(setActive === '' ? 'active' : ''); // setHeightState(

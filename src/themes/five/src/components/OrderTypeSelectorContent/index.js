@@ -21,8 +21,6 @@ export const OrderTypeSelectorContentUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderStatus] = useOrder()
-  console.log(configTypes)
-  console.log(orderStatus?.options?.type)
 
   const handleClickOrderType = (orderType) => {
     onClose && onClose()

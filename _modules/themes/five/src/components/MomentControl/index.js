@@ -17,7 +17,19 @@ var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 
 require("react-datepicker/dist/react-datepicker.css");
 
+require("react-calendar/dist/Calendar.css");
+
+var _reactCalendar = _interopRequireDefault(require("react-calendar"));
+
 var _Select = require("../../styles/Select");
+
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
+var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowLeft"));
+
+var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
+
+var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
 var _styles = require("./styles");
 
@@ -77,6 +89,8 @@ var MomentControlUI = function MomentControlUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var windowSize = (0, _useWindowSize.useWindowSize)();
+
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
@@ -123,6 +137,11 @@ var MomentControlUI = function MomentControlUI(props) {
       !orderState.loading && handleAsap();
       setIsASP(true);
     } else setIsASP(false);
+  };
+
+  var handleRemoveDate = function handleRemoveDate() {
+    !orderState.loading && handleAsap();
+    setIsASP(true);
   };
 
   (0, _react.useEffect)(function () {
@@ -191,11 +210,25 @@ var MomentControlUI = function MomentControlUI(props) {
     onClick: function onClick() {
       return handleCheckBoxChange(null);
     }
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_CgRadioChecked.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DatePickerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_CgRadioChecked.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DatePickerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
     selected: value,
-    onChange: function onChange(date) {
-      return onDateChange(date);
+    onChange: function onChange(val) {
+      return onDateChange(val);
     },
+    minDate: minDate,
+    maxDate: maxDate
+  }), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: handleRemoveDate
+  })), /*#__PURE__*/_react.default.createElement(_reactCalendar.default, {
+    onChange: function onChange(val) {
+      return onDateChange(val);
+    },
+    value: value,
+    showDoubleView: windowSize.width > 1200,
+    next2Label: "",
+    prev2Label: "",
+    prevLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, null),
+    nextLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null),
     minDate: minDate,
     maxDate: maxDate
   })), /*#__PURE__*/_react.default.createElement(_styles.HourListWrapper, {
