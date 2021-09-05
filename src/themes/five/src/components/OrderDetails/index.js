@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
-  OrderDetails as OrderDetailsController,
+  // OrderDetails as OrderDetailsController,
   useEvent,
   useUtils,
   useConfig,
   GoogleMapsMap
 } from 'ordering-components'
+import { OrderDetails as OrderDetailsController } from './naked'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
