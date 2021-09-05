@@ -13,8 +13,6 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _naked = require("./naked");
-
 var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
 
 var _BiStoreAlt = _interopRequireDefault(require("@meronex/icons/bi/BiStoreAlt"));
@@ -483,7 +481,7 @@ var OrderDetails = function OrderDetails(props) {
     UIComponent: OrderDetailsUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_naked.OrderDetails, orderDetailsProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
 };
 
 exports.OrderDetails = OrderDetails;
