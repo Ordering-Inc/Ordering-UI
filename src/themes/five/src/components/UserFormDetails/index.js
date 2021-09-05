@@ -217,7 +217,6 @@ export const UserFormDetailsUI = (props) => {
       }
     })
   }, [formMethods])
-  console.log(validationFields?.fields?.checkout)
 
   return (
     <>
