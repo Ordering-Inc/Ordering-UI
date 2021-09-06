@@ -18,7 +18,6 @@ import { Modal } from '../../../../../components/Modal'
 import { Messages } from '../../../../../components/Messages'
 import { ReviewOrder } from '../ReviewOrder'
 import { Button } from '../../styles/Buttons'
-import { AddressDetails } from '../AddressDetails'
 
 import {
   Container,
@@ -287,11 +286,6 @@ const OrderDetailsUI = (props) => {
             </LeftPanel>
             <RightPanel>
               <PanelRow>
-                {configs?.google_maps_api_key && (
-                  <AddressDetails
-                    apiKey={configs?.google_maps_api_key?.value}
-                  />
-                )}
                 <Header>
                   <HeaderInfo className='order-header'>
                     <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>

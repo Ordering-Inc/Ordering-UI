@@ -37,7 +37,6 @@ export const WrapperContainer = styled.div`
 
 export const Header = styled.div`
   width: 100%;
-  margin-top: 30px;
   button {
     display: flex;
     align-items: center;
