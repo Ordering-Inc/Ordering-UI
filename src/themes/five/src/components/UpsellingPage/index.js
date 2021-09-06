@@ -152,7 +152,7 @@ const UpsellingPageUI = (props) => {
         <>
           {!canOpenUpselling || upsellingProducts?.products?.length === 0 ? '' : (
             <Modal
-              title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
+              title={t('UPSELLING_QUESTION', 'Do you want something else?')}
               open={openUpselling}
               onClose={() => handleUpsellingPage()}
               width='70%'

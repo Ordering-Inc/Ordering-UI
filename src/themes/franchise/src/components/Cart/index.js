@@ -304,7 +304,7 @@ const CartUI = (props) => {
           {(openUpselling || isUpselling) && (
             <>
               <UpsellingPageTitleWrapper>
-                <p>{t('DO_YOU_WANT_SOMETHING_ELSE', 'Do you want something else?')}</p>
+                <p>{t('UPSELLING_QUESTION', 'Do you want something else?')}</p>
                 <MdClose onClick={() => setIsUpselling(false)} />
               </UpsellingPageTitleWrapper>
               <UpsellingPage
