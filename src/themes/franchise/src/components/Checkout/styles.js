@@ -91,9 +91,6 @@ export const DriverTipContainer = styled(PaymentMethodContainer)`
 
 export const CartContainer = styled(PaymentMethodContainer)`
   margin-bottom: 20px;
-  h1 {
-    margin: 20px 0px;
-  }
 `
 
 export const WrapperPlaceOrderButton = styled.div`

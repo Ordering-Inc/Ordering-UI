@@ -374,7 +374,6 @@ const CheckoutUI = (props) => {
 
           {!props.isHideSectionSix && !cartState.loading && cart && (
             <CartContainer>
-              <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
               <Cart
                 isCartPending={cart?.status === 2}
                 cart={cart}

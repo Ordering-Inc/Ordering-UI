@@ -132,7 +132,6 @@ const BusinessControllerUI = (props) => {
                   {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
                     <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
                   )}
-                  {!isBusinessOpen && <h1>{t('CLOSED', 'Closed')}</h1>}
                 </BranchInfoBlock>
                 <OrderBtnWrapper>
                   <Button

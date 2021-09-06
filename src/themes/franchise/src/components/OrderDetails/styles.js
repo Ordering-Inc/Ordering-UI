@@ -465,11 +465,3 @@ export const Divider = styled.div`
 `
 
 export const MyOrderActions = styled.div``
-
-export const TrackRealPosition = styled.span`
-  user-select: none;
-  cursor: pointer;
-  font-size: 14px;
-  color: ${props => props.theme?.colors.primary};
-  text-decoration: underline;
-`

@@ -12,7 +12,6 @@ import { BusinessProductsCategories } from './src/components/BusinessProductsCat
 import { BusinessProductsList } from './src/components/BusinessProductsList'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
 import { BusinessReviews } from './src/components/BusinessReviews'
-import { BusinessTypeFilter } from './src/components/BusinessTypeFilter'
 import { CardForm } from './src/components/CardForm'
 import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
@@ -73,7 +72,6 @@ export {
   BusinessProductsList,
   BusinessProductsListing,
   BusinessReviews,
-  BusinessTypeFilter,
   CardForm,
   Cart,
   CartContent,

@@ -30,9 +30,9 @@ import {
   useOrder,
   useSession,
   useLanguage,
-  useConfig,
-  BusinessList as BusinessListController
+  useConfig
 } from 'ordering-components'
+import { BusinessList as BusinessListController } from './naked'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -159,8 +159,8 @@ const BusinessesListingUI = (props) => {
 
   const handleClickNextItems = () => {
     getBusinesses(false, nextPage.page + 1, false)
-    const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + `?page=${nextPage.page + 1}`
-    window.history.pushState({ path: newurl }, '', newurl)
+    // const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + `?page=${nextPage.page + 1}`
+    // window.history.pushState({ path: newurl }, '', newurl)
     setNextPage({ loading: true, page: nextPage.page + 1 })
   }
 

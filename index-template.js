@@ -25,9 +25,6 @@ import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import searchIcon from './template/assets/images/search-icon.svg'
 import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
-import visa from './template/assets/images/visa.png'
-import mastercard from './template/assets/images/mastercard.png'
-import credit from './template/assets/images/credit.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -60,12 +57,6 @@ import categoryAll from './template/assets/images/categories/category-all.png'
 
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
-
-import delivery from './template/assets/images/delivery-types/delivery.png'
-import curbside from './template/assets/images/delivery-types/curbside.png'
-import driveThru from './template/assets/images/delivery-types/drive_thru.png'
-import eatIn from './template/assets/images/delivery-types/eat_in.png'
-import pickUp from './template/assets/images/delivery-types/pickup.png'
 
 const configFile = {
   app_id: 'ordering-react',
@@ -116,10 +107,7 @@ theme.images = {
     searchIcon,
     notNetwork,
     emptyActiveOrders,
-    emptyPastOrders,
-    visa,
-    mastercard,
-    credit
+    emptyPastOrders
   },
 
   order: {
@@ -158,13 +146,6 @@ theme.images = {
     driverPhoto: 'https://res.cloudinary.com/demo/image/fetch/c_thumb,g_face,r_max/https://www.freeiconspng.com/thumbs/driver-icon/driver-icon-14.png',
     businessLogo: storeDummy,
     customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
-  },
-  deliveryTypes: {
-    delivery: delivery,
-    curbside: curbside,
-    driveThru: driveThru,
-    eatIn: eatIn,
-    pickUp: pickUp
   }
 }
 

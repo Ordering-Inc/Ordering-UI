@@ -52,8 +52,7 @@ import {
   Divider,
   MyOrderActions,
   ReviewOrderLink,
-  SkeletonWrapper,
-  TrackRealPosition
+  SkeletonWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -282,7 +281,6 @@ const OrderDetailsUI = (props) => {
                           mapControls={googleMapsControls}
                         />
                       </Map>
-                      <TrackRealPosition>{t('TRACK_REAL_TIME_POSITION', 'Track real time position')}</TrackRealPosition>
                     </>
                   )}
                 </>
