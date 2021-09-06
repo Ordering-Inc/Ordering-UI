@@ -84,6 +84,7 @@ export const Header = styled.div`
   width: 100%;
   position: relative;
   margin-bottom: 40px;
+  margin-top: 10px;
 
   > button {
     background: transparent;
@@ -104,20 +105,20 @@ export const HeaderText = styled.div`
 
   h1 {
     margin: 0;
-    font-size: 32px;
+    font-size: 24px;
   }
 
   p {
     font-size: 14px;
   }
 
-  @media (min-width: 769px) {
-    h1 {
-      font-size: 26px;
-    }
-
+  @media (min-width: 768px) {
     p {
       font-size: 18px;
+    }
+
+    h1 {
+      font-size: 32px;
     }
   }
 `
