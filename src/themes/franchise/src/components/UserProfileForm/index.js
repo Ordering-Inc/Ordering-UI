@@ -26,7 +26,6 @@ import {
   Image,
   SideForm,
   Camera,
-  UserData,
   SavedPlaces,
   UploadImageIcon,
   SkeletonWrapper,
@@ -151,7 +150,7 @@ const UserProfileFormUI = (props) => {
         </UserProfileContainer>
         {(userData?.addresses || user?.addresses) && !isHiddenAddress && (
           <SavedPlaces>
-            <h1>{t('MY_SAVED_PLACES', 'My Saved places')}</h1>
+            <h1>{t('MY_ADDRESSES', 'My Saved places')}</h1>
             <AddressList isModal addressList={user?.addresses} />
           </SavedPlaces>
         )}

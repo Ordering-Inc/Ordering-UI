@@ -30,9 +30,9 @@ import {
   useOrder,
   useSession,
   useLanguage,
-  useConfig
+  useConfig,
+  BusinessList as BusinessListController
 } from 'ordering-components'
-import { BusinessList as BusinessListController } from './naked'
 
 const PIXELS_TO_SCROLL = 300
 

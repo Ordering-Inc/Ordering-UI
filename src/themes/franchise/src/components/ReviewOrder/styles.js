@@ -48,6 +48,7 @@ export const Send = styled.div`
       ${props => props.theme?.rtl && css`
         margin-left: 0;
         margin-right: 8px;
+        transform: rotateZ(180deg);
       `}
     }
   }

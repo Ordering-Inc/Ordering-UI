@@ -383,6 +383,11 @@ export const SendImage = styled.label`
   right: 16px;
   top: 11px;
 
+  ${props => props.theme?.rtl && css`
+    left: 16px;
+    right: initial;
+  `}
+
   input {
     display: none;
   }
