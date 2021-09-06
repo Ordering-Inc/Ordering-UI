@@ -3,6 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+Object.defineProperty(exports, "AddressDetails", {
+  enumerable: true,
+  get: function get() {
+    return _AddressDetails.AddressDetails;
+  }
+});
 Object.defineProperty(exports, "AddressForm", {
   enumerable: true,
   get: function get() {
@@ -351,6 +357,8 @@ Object.defineProperty(exports, "Select", {
     return _Select.Select;
   }
 });
+
+var _AddressDetails = require("./src/components/AddressDetails");
 
 var _AddressForm = require("./src/components/AddressForm");
 

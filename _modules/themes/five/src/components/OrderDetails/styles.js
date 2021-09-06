@@ -51,7 +51,7 @@ var BusinessWrapper = _styledComponents.default.div(_templateObject7 || (_templa
 
 exports.BusinessWrapper = BusinessWrapper;
 
-var BusinessInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  h1,\n  p {\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    color: ", ";\n  }\n\n  h2 {\n    font-weight: 500;\n    font-size: 20px;\n    margin-bottom: 15px;\n  }\n  p {\n    font-size: 14px;\n  }\n"])), function (props) {
+var BusinessInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  h1,\n  p {\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    color: ", ";\n  }\n\n  h2 {\n    font-weight: 500;\n    font-size: 20px;\n    margin-bottom: 15px;\n  }\n  p {\n    font-size: 14px;\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
@@ -175,7 +175,7 @@ exports.WrapperLeftContainer = WrapperLeftContainer;
 var WrapperRightContainer = (0, _styledComponents.default)(WrapperLeftContainer)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n"])));
 exports.WrapperRightContainer = WrapperRightContainer;
 
-var Divider = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  height: 8px;\n  background: #F8F9FA;\n  width: calc(100% + 40px)\n  margin-left: -20px;\n\n  @media(min-width: 769px) {\n    width: calc(100% + 80px);\n    margin-left: -40px;\n  }\n"])));
+var Divider = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  height: 8px;\n  background: #F8F9FA;\n  width: calc(100% + 40px);\n  margin-left: -20px;\n\n  @media(min-width: 769px) {\n    width: calc(100% + 80px);\n    margin-left: -40px;\n  }\n"])));
 
 exports.Divider = Divider;
 

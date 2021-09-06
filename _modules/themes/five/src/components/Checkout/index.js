@@ -29,7 +29,7 @@ var _Buttons = require("../../styles/Buttons");
 
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
-var _AddressDetails = require("../../../../../components/AddressDetails");
+var _AddressDetails = require("../AddressDetails");
 
 var _UserDetails = require("../UserDetails");
 

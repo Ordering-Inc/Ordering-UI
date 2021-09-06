@@ -43,7 +43,7 @@ var WrappLayout = _styledComponents.default.div(_templateObject6 || (_templateOb
 
 exports.WrappLayout = WrappLayout;
 
-var BusinessContent = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 1200px) {\n    flex-direction: row;\n  }\n"])));
+var BusinessContent = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  display: flex;\n  flex-direction: column-reverse;\n\n  @media (min-width: 1200px) {\n    flex-direction: row;\n  }\n"])));
 
 exports.BusinessContent = BusinessContent;
 

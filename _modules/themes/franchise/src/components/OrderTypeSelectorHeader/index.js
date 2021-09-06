@@ -5,15 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrderTypeControl = void 0;
+exports.OrderTypeSelectorHeader = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireWildcard(require("prop-types"));
-
 var _orderingComponents = require("ordering-components");
 
-var _ConfigContext = require("ordering-components/_modules/contexts/ConfigContext");
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -33,95 +31,47 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var OrderTypeControl = function OrderTypeControl(props) {
-  var _configState$configs, _configState$configs$;
+var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
+  var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _props$afterComponent, _props$afterElements;
 
-  var UIComponent = props.UIComponent;
+  var orderTypeList = props.orderTypeList;
 
-  var _useConfig = (0, _ConfigContext.useConfig)(),
+  var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
+      configs = _useConfig2[0].configs;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 2),
-      orderState = _useOrder2[0],
-      changeType = _useOrder2[1].changeType;
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderStatus = _useOrder2[0];
 
-  var _useState = (0, _react.useState)(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      typeSelected = _useState2[0],
-      setTypeSelected = _useState2[1];
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
-  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
-    return Number(value);
-  })) || [];
-
-  var handleChangeOrderType = function handleChangeOrderType(orderType) {
-    setTypeSelected(orderType);
-    changeType(orderType);
-  };
-
-  (0, _react.useEffect)(function () {
-    setTypeSelected(orderState.options.type);
-  }, [orderState.options.type]); // useEffect(() => {
-  //   if (configTypes.length > 0 && !configTypes.includes(typeSelected)) {
-  //     // const validDefaultValue = configTypes.includes(configState?.configs?.default_order_type?.type)
-  //     handleChangeOrderType(configTypes[0])
-  //   }
-  // }, [configTypes])
-
-  console.log(configTypes);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, UIComponent && /*#__PURE__*/_react.default.createElement(UIComponent, _extends({}, props, {
-    typeSelected: typeSelected || orderState.options.type,
-    handleChangeOrderType: props.handleChangeOrderType || handleChangeOrderType
-  })));
+  var referenceElement = (0, _react.useRef)();
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "order-type"
+  }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+    ref: referenceElement,
+    onClick: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) === -1 || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) === 0 ? null : props.onClick,
+    isHome: props.isHome
+  }, orderTypeList && orderTypeList[(orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.options.type) - 1] || t('DELIVERY', 'Delivery')), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
-exports.OrderTypeControl = OrderTypeControl;
-OrderTypeControl.propTypes = {
-  /**
-   * UI Component, this must be containt all graphic elements and use parent props
-   */
-  UIComponent: _propTypes.default.elementType,
-
-  /**
-   * Order availables to the control
-   */
-  orderTypes: _propTypes.default.arrayOf(_propTypes.object),
-
-  /**
-   * Custom function to control order type changes
-   */
-  handleChangeOrderType: _propTypes.default.func,
-
-  /**
-   * Components types before order type control
-   * Array of type components, the parent props will pass to these components
-   */
-  beforeComponents: _propTypes.default.arrayOf(_propTypes.default.elementType),
-
-  /**
-   * Components types after order type control
-   * Array of type components, the parent props will pass to these components
-   */
-  afterComponents: _propTypes.default.arrayOf(_propTypes.default.elementType),
-
-  /**
-   * Elements before order type control
-   * Array of HTML/Components elements, these components will not get the parent props
-   */
-  beforeElements: _propTypes.default.arrayOf(_propTypes.default.element),
-
-  /**
-   * Elements after order type control
-   * Array of HTML/Components elements, these components will not get the parent props
-   */
-  afterElements: _propTypes.default.arrayOf(_propTypes.default.element)
-};
-OrderTypeControl.defaultProps = {
-  orderTypes: [1, 2, 3, 4, 5],
-  beforeComponents: [],
-  afterComponents: [],
-  beforeElements: [],
-  afterElements: []
-};
+exports.OrderTypeSelectorHeader = OrderTypeSelectorHeader;
