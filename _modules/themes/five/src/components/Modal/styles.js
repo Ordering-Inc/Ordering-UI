@@ -55,7 +55,7 @@ exports.ModalHeader = ModalHeader;
 var ModalTitle = _styledComponents.default.h2(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  text-align: center;\n  letter-spacing: 0px;\n  color: #010300;\n  opacity: 1;\n  margin: 0px 0px;\n  margin-bottom: 20px;\n  padding-left: 10px;\n  text-transform: capitalize;\n  flex: 1;\n  ", "\n"])), function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    text-align: right;\n    padding-right: 10px;\n    padding-left: 0px;\n  "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    text-align: left;\n    padding-right: 10px;\n    padding-left: 0px;\n  "])));
 });
 
 exports.ModalTitle = ModalTitle;
@@ -71,7 +71,7 @@ exports.ModalOrderTypes = ModalOrderTypes;
 var ModalIcon = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: fixed;\n  left: 25px;\n  top: 30px;\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 2;\n  ", "\n  svg{\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"])), function (props) {
   var _props$theme4;
 
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "])));
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    right: 25px;\n    left: initial;\n  "])));
 });
 
 exports.ModalIcon = ModalIcon;

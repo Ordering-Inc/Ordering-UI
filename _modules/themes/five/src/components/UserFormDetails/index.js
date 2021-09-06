@@ -338,7 +338,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
 
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
-    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, field === null || field === void 0 ? void 0 : field.name), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       name: field.code,
@@ -352,7 +352,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         emailInput.current = e;
       },
       autoComplete: "off"
-    })) : /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, field === null || field === void 0 ? void 0 : field.name), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    })) : /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       borderBottom: true,

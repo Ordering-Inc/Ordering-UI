@@ -174,6 +174,7 @@ var UserPopover = function UserPopover(props) {
     isPhoto: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     isHome: isHome,
     ref: referenceElement,
+    isOpen: open,
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineMenu.default, {
     className: "menu-list"

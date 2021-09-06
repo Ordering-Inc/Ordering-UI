@@ -42,7 +42,8 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
 
   var handleChangeOrderType = props.handleChangeOrderType,
       orderTypes = props.orderTypes,
-      onClose = props.onClose;
+      onClose = props.onClose,
+      configTypes = props.configTypes;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -70,7 +71,9 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && orderTypes.map(function (item, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && (configTypes ? orderTypes.filter(function (type) {
+    return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
+  }) : orderTypes).map(function (item, i) {
     var _orderStatus$options;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListItemContainer, {

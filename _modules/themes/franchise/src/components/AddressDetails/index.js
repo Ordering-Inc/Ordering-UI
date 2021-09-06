@@ -5,39 +5,31 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HomeHero = void 0;
+exports.AddressDetails = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = require("styled-components");
-
 var _orderingComponents = require("ordering-components");
-
-var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
 
 var _styles = require("./styles");
 
 var _Modal = require("../Modal");
 
-var _Buttons = require("../../styles/Buttons");
+var _Confirm = require("../Confirm");
 
-var _AddressForm = require("../../components/AddressForm");
-
-var _AddressList = require("../../components/AddressList");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _AddressList = require("../AddressList");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -51,14 +43,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var HomeHero = function HomeHero(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options2, _orderState$options2$, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _orderState$options3, _theme$defaultLanguag6, _props$afterComponent, _props$afterElements;
+var AddressDetailsUI = function AddressDetailsUI(props) {
+  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _orderState$options3, _props$afterComponent, _props$afterElements;
 
-  var onFindBusiness = props.onFindBusiness;
-
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
+  var addressToShow = props.addressToShow,
+      isCartPending = props.isCartPending,
+      googleMapsUrl = props.googleMapsUrl,
+      isCustomerMode = props.isCustomerMode,
+      apiKey = props.apiKey,
+      isFromCheckout = props.isFromCheckout;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -68,52 +61,42 @@ var HomeHero = function HomeHero(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({
-    listOpen: false,
-    formOpen: false
-  }),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      modals = _useState2[0],
-      setModals = _useState2[1];
+      openModal = _useState2[0],
+      setOpenModal = _useState2[1];
 
-  var theme = (0, _styledComponents.useTheme)();
-  var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
+  var _useState3 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
+
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 1),
+      user = _useCustomer2[0].user;
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
 
     if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: true
-      }));
+      setAlertState({
+        open: true,
+        content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
+      });
       return;
     }
 
-    setModals({
-      listOpen: false,
-      formOpen: false
-    });
-    onFindBusiness && onFindBusiness();
-  };
-
-  var handleAddressInput = function handleAddressInput() {
-    if (auth) {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: true
-      }));
-    } else {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: true
-      }));
-    }
+    setOpenModal(false);
   };
 
   (0, _react.useEffect)(function () {
     return function () {
-      return setModals({
-        listOpen: false,
-        formOpen: false
-      });
+      return setOpenModal(false);
     };
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -124,63 +107,55 @@ var HomeHero = function HomeHero(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
-    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
-    onClick: handleAddressInput,
-    withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    name: "find-business",
-    onClick: handleFindBusinesses
-  }, t('FIND_BUSINESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.FIND_BUSINESSES) || 'Find businesses'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
-    open: modals.formOpen,
-    onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
+  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h1", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return setOpenModal(true);
     }
-  }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) || {},
-    onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    },
-    onSaveAddress: function onSaveAddress() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    },
-    onCancel: function onCancel() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    }
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
-    open: modals.listOpen,
+  }, t('CHANGE', 'Change')))), apiKey && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: googleMapsUrl,
+    id: "google-maps-image",
+    alt: "google-maps-location",
+    width: "288px",
+    height: "162px",
+    loading: "lazy"
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESSES', 'Addresses'),
+    open: openModal,
     width: "70%",
     onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: false
-      }));
+      return setOpenModal(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     changeOrderAddressWithDefault: true,
-    userId: isNaN(userCustomer) ? null : userCustomer,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     onCancel: function onCancel() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: false
-      }));
+      return setOpenModal(false);
     },
     onAccept: function onAccept() {
       return handleFindBusinesses();
-    }
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    },
+    userCustomerSetup: isCustomerMode && user,
+    isFromCheckout: isFromCheckout
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('SEARCH', 'Search'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
@@ -191,4 +166,12 @@ var HomeHero = function HomeHero(props) {
   }));
 };
 
-exports.HomeHero = HomeHero;
+var AddressDetails = function AddressDetails(props) {
+  var addressDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: AddressDetailsUI
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.AddressDetails, addressDetailsProps);
+};
+
+exports.AddressDetails = AddressDetails;

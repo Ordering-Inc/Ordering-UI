@@ -99,23 +99,28 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
     style: {
-      left: '0'
+      left: theme.rtl ? 'initial' : '0',
+      right: theme !== null && theme !== void 0 && theme.rtl ? '0' : 'initial'
     }
   }, t('TERRIBLE', 'Terrible')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
     style: {
-      left: '25%'
+      left: theme.rtl ? 'initial' : '25%',
+      right: theme !== null && theme !== void 0 && theme.rtl ? '25%' : 'initial'
     }
   }, t('BAD', 'Bad')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
     style: {
-      left: '50%'
+      left: theme.rtl ? 'initial' : '50%',
+      right: theme !== null && theme !== void 0 && theme.rtl ? '50%' : 'initial'
     }
   }, t('OKAY', 'Okay')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
     style: {
-      left: '75%'
+      left: theme.rtl ? 'initial' : '75%',
+      right: theme !== null && theme !== void 0 && theme.rtl ? '75%' : 'initial'
     }
   }, t('GOOD', 'Good')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
     style: {
-      right: '0'
+      left: theme.rtl ? '0' : 'initial',
+      right: theme !== null && theme !== void 0 && theme.rtl ? 'initial' : '0'
     }
   }, t('GREAT', 'Great')))), /*#__PURE__*/_react.default.createElement(_styles.Content, {
     id: "content"

@@ -319,7 +319,7 @@ var CartUI = function CartUI(props) {
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
     onSave: handlerProductAction
-  })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingPageTitleWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('DO_YOU_WANT_SOMETHING_ELSE', 'Do you want something else?')), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingPageTitleWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('UPSELLING_QUESTION', 'Do you want something else?')), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return setIsUpselling(false);
     }
