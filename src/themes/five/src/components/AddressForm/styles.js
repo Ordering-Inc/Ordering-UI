@@ -16,7 +16,8 @@ export const FormActions = styled.div`
       font-size: 25px;
       position: absolute;
       ${props => props.theme?.rtl ? css`
-        left: 30px;  
+        left: 30px;
+        transform: rotateZ(180deg);
       ` : css`
         right: 30px; 
       `}
@@ -114,6 +115,21 @@ export const AddressWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+
+  button {
+    height: 41px;
+    right: 1px;
+    border: none;
+
+    ${props => props.theme?.rtl && css`
+      left: 1px;
+      right: initial;
+    `}
+
+    svg {
+      font-size: 18px;
+    }
+  }
 `
 
 export const WrapAddressInput = styled.div`
@@ -140,9 +156,9 @@ export const WrapAddressInput = styled.div`
     background-position: left 10px center !important;
     background-repeat: no-repeat !important;
     background-size: 13px !important;
-    padding: 7px 15px 7px 30px !important;
+    padding: 7px 30px 7px 15px !important;
     ${props => props.theme?.rtl && css`
-      padding: 7px 30px 7px 15px !important;
+      padding: 7px 15px 7px 30px !important;
     `}
   }
 `
@@ -192,14 +208,6 @@ export const WrapperMap = styled.div`
     height: 100% !important;
     border-radius: 15px;
   }
-`
-
-export const ShowMap = styled.p`
-  text-align: center;
-  color: #000;
-  width: 100%;
-  font-weight: 600;
-  cursor: pointer
 `
 
 export const WrapperSkeleton = styled.div`

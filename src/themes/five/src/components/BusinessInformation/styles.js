@@ -111,8 +111,11 @@ export const ScheduleSection = styled.div`
 `
 
 export const ScheduleContainer = styled.div`
-  width: 300px;
+  width: 100%;
 
+  @media (min-width: 576px) {
+    width: 300px;
+  }
 `
 
 export const ScheduleBlock = styled.div`
@@ -214,12 +217,11 @@ export const ModalIcon = styled.span`
   height: 30px;
   font-size: 30px;
   cursor: pointer;
-  color: white;
+  color: ${props => props.theme?.colors.headingColor};
   border-radius: 50%;
-  right: 5px;
+  left: 5px;
   top: 5px;
   z-index: 1;
-  background: rgba(0,0,0,0.3);
   ${props => props.theme?.rtl && css`
     left: 5px;
     right: initial;
@@ -232,10 +234,11 @@ export const ModalIcon = styled.span`
   `}
   }
   @media (min-width: 768px){
-    right: 5px;
+    left: 25px;
+    top: 30px;
     ${props => props.theme?.rtl && css`
-    left: 5px;
-    right: initial;
+    right: 25px;
+    left: initial;
   `}
   }
 `
@@ -262,6 +265,12 @@ export const BusinessTitle = styled.h2`
   text-align: center;
   margin-top: 0;
   margin-bottom: 36px;
+  padding-left: 30px;
+
+  ${props => props.theme?.rtl && css`
+    padding-right: 30px;
+    padding-left: 0;
+  `}
 `
 
 export const BusinessAddress = styled.p`

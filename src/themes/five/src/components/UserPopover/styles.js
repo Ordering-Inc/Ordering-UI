@@ -4,10 +4,13 @@ export const HeaderItem = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  background: #F8F9FA;
   border-radius: 7.6px;
   padding: 7px 13px;
   margin: 0 10px;
+
+  ${({ isOpen }) => isOpen && css`
+    background: #F8F9FA;
+  `}
 
   svg {
     color: ${({ isHome }) => isHome ? '#FFF' : '#000'};

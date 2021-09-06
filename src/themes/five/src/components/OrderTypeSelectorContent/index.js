@@ -15,7 +15,8 @@ export const OrderTypeSelectorContentUI = (props) => {
   const {
     handleChangeOrderType,
     orderTypes,
-    onClose
+    onClose,
+    configTypes
   } = props
 
   const [, t] = useLanguage()
@@ -37,7 +38,7 @@ export const OrderTypeSelectorContentUI = (props) => {
       <OrderTypeSelectorContainer>
         <OrderTypeListTitle>{t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')}</OrderTypeListTitle>
         {
-          orderTypes && orderTypes.map((item, i) => (
+          orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value)) : orderTypes).map((item, i) => (
             <OrderTypeListItemContainer
               key={i}
               bgimage={item?.image}
