@@ -12,7 +12,8 @@
     "./theme_six": "./_modules/themes/six/index.js",
     "./theme_seven": "./_modules/themes/seven/index.js",
     "./theme_wow": "./_modules/themes/wow/index.js",
-    "./order_and_pay": "./_modules/themes/orderAndPay/index.js"
+    "./order_and_pay": "./_modules/themes/orderAndPay/index.js",
+    "./theme_franchise": "./_modules/themes/franchise/index.js"
   },
   "scripts": {
     "clean": "shx rm -rf _bundles _modules",

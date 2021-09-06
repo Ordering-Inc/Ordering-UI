@@ -60,7 +60,7 @@ export const WrappLayout = styled.div``
 export const BusinessContent = styled.div`
   margin-top: 30px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   @media (min-width: 1200px) {
     flex-direction: row;

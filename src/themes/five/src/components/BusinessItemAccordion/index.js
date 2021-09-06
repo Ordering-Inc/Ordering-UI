@@ -159,31 +159,35 @@ export const BusinessItemAccordion = (props) => {
                     )}
                   </div>
                 </ContentInfo>
-                {orderState?.options?.type === 1 ? (
-                  <TimeInfo>
-                    <FiClock />
-                    {convertHoursToMinutes(business?.delivery_time)}
-                  </TimeInfo>
-                ) : (
-                  <TimeInfo>
-                    <FiClock />
-                    {convertHoursToMinutes(business?.pickup_time)}
-                  </TimeInfo>
-                )}
+                {
+                  !isStore && (
+                    orderState?.options?.type === 1 ? (
+                      <TimeInfo>
+                        <FiClock />
+                        {convertHoursToMinutes(business?.delivery_time)}
+                      </TimeInfo>
+                    ) : (
+                      <TimeInfo>
+                        <FiClock />
+                        {convertHoursToMinutes(business?.pickup_time)}
+                      </TimeInfo>
+                    )
+                  )
+                }
               </BusinessInfo>
-              {!isClosed && !!isProducts && (
+              {!isClosed && !!isProducts && !isStore && (
                 <BusinessTotal className='total' isCartOnProductsList={isCartOnProductsList}>
                   {isValidProducts && orderTotal > 0 && <p>{parsePrice(orderTotal)}</p>}
                   <p>{t('CART_TOTAL', 'Total')}</p>
                 </BusinessTotal>
               )}
-              {isClosed && (
+              {isClosed && !isStore && (
                 <BusinessTotal className='closed'>
                   <p>{t('CLOSED', 'Closed')} {moment}</p>
                 </BusinessTotal>
               )}
 
-              {!isClosed && !isProducts && (
+              {!isClosed && !isProducts && !isStore && (
                 <BusinessTotal>
                   <p>{t('NO_PRODUCTS', 'No products')}</p>
                 </BusinessTotal>

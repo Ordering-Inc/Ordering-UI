@@ -1,0 +1,152 @@
+import styled, { css } from 'styled-components'
+
+export const Medadata = styled.div`
+  margin-top: 5px;
+  display: flex;
+  font-weight: 300;
+  font-size: 12px;
+  color: #909BA9;
+  ${({ isCustomerMode }) => isCustomerMode && css`
+    > div {
+      flex-direction: column;
+    }
+  `}
+  p {
+    color: #909BA9;
+    svg {
+      margin-right: 3px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 3px;
+        margin-right: 0;
+    `}
+    }
+
+    span {
+      margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
+    }
+  }
+
+  @media (min-width: 481px) {
+    font-size: 14px;
+  }
+`
+
+export const CallCenterInformation = styled.div`
+  display: flex;
+  flex-direction: column;
+  div{
+    justify-content: space-evenly;
+  }
+`
+
+export const CallCenterInformationBullet = styled.div`
+  display: flex;
+  padding: 2px;
+  margin-bottom: 2px;
+  border-radius: 16px;
+  background: ${({ bgcolor }) => bgcolor};
+  width: 50px;
+  color: #fff;
+  svg{
+    font-size: 18px;
+  }
+`
+
+export const BranchListContainer = styled.div`
+  margin-bottom: 30px;
+  width: 100%;
+`
+
+export const BranchTitle = styled.h2`
+  font-weight: 500;
+  font-size: 16px;
+  color: ${props => props.theme?.colors.headingColor};
+  margin-top: 0;
+  margin-bottom: 10px;
+`
+
+export const BranchContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
+
+export const BranchInfoBlock = styled.div`
+  margin-bottom: 20px;
+  p {
+    font-size: 14px;
+    color: ${props => props.theme?.colors.darkGray};
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+
+  span {
+    font-size: 14px;
+    color: ${props => props.theme?.colors.darkPrimaryColor};
+  }
+
+  h1 {
+    font-size: 14px;
+    margin: 0;
+  }
+`
+
+export const OrderBtnWrapper = styled.div`
+  margin-bottom: 20px;
+`
+
+export const OrderTypeList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+export const OrderType = styled.div`
+  padding: 0 10px;
+  border-right: 1px solid ${props => props.theme?.colors.lightGray};
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+
+  ${props => props.theme.rtl && css`
+    border-left: 1px solid ${props => props.theme?.colors.lightGray};
+    border-right: none;
+  `}
+
+  svg {
+    margin-right: 5px;
+    ${props => props.theme.rtl && css`
+      margin-left: 5px;
+      margin-right: 0;
+    `}
+  }
+
+  span {
+    color: ${props => props.theme?.colors.lightGray};
+    font-size: 14px;
+  }
+
+  &:first-child {
+    padding-left: 0;
+   ${props => props.theme?.rtl && css`
+      padding-right: 0;
+      padding-left: 10px;
+   `}
+  }
+
+  &:last-child {
+    padding-right: 0;
+    border: none;
+   ${props => props.theme?.rtl && css`
+      padding-left: 0;
+      padding-right: 10px;
+   `}
+  }
+
+  ${({ isSkeleton }) => isSkeleton && css`
+    border: none;
+  `}
+`
