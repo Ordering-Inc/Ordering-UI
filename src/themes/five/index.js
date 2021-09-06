@@ -1,3 +1,4 @@
+import { AddressDetails } from './src/components/AddressDetails'
 import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AppleLogin } from './src/components/AppleLogin'
@@ -58,6 +59,7 @@ import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
 
 export {
+  AddressDetails,
   AddressForm,
   AddressList,
   AppleLogin,
