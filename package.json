@@ -11,6 +11,7 @@
     "./theme_five": "./_modules/themes/five/index.js",
     "./theme_six": "./_modules/themes/six/index.js",
     "./theme_seven": "./_modules/themes/seven/index.js",
+    "./theme_eight": "./_modules/themes/eight/index.js",
     "./theme_wow": "./_modules/themes/wow/index.js",
     "./order_and_pay": "./_modules/themes/orderAndPay/index.js"
   },

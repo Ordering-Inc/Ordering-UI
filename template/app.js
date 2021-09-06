@@ -8,8 +8,8 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
-import { Header } from '../src/themes/eight/src/components/Header'
-import { Footer } from '../src/themes/eight/src/components/Footer'
+import { Header } from '../src/components/Header'
+import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
@@ -29,9 +29,6 @@ import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
-import { AddressForm } from './pages/AddressForm'
-import { AddressList } from './pages/AddressList'
-import { MomentOption } from './pages/MomentOption'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -244,19 +241,6 @@ export const App = () => {
                         }}
                         />
                       )}
-                  </Route>
-                  <Route exact path='/address'>
-                    <AddressForm />
-                  </Route>
-                  <Route exact path='/address-list'>
-                    {
-                      auth
-                        ? <AddressList />
-                        : <Redirect to='/address' />
-                    }
-                  </Route>
-                  <Route exact path='/moment'>
-                    <MomentOption />
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />
