@@ -6,6 +6,7 @@ export const HeaderItem = styled.div`
     display: flex;
     align-items: flex-end;
     position: relative;
+    padding: 5px;
     img {
       width: 28px;
       height: 30px;
@@ -13,11 +14,12 @@ export const HeaderItem = styled.div`
     p {
       position: absolute;
       right: 0;
+      top: 0px;
       height: 15px;
       width: 15px;
       margin: 0;
-      border:1px solid ${props => props.theme.colors.primary};
-      background: #FFF;
+      background: ${props => props.theme.colors.primary};
+      color: #fff;
       border-radius: 100%;
       display: flex;
       justify-content: center;

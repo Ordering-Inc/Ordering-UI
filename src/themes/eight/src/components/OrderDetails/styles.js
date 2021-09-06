@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid ${props => props.theme.colors.gray};
+  border-bottom: 1px solid #F8F9FA;
 
   @media (min-width: 1024px) {
     flex-direction: row;
@@ -128,7 +128,7 @@ export const OrderBusiness = styled.div`
   opacity: 1;
   margin-bottom: 20px;
   padding-bottom: 35px;
-  border-bottom: 8px solid ${props => props.theme.colors.gray};
+  border-bottom: 8px solid #F8F9FA;
 `
 
 export const BusinessWrapper = styled.div`
@@ -191,7 +191,7 @@ export const OrderData = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-bottom: 8px solid ${props => props.theme.colors.gray};
+  border-bottom: 8px solid #F8F9FA;
   padding-bottom: 35px;
 
   h1, p {
@@ -267,7 +267,7 @@ export const OrderCustomer = styled.div`
   margin: 0px 0px 20px;
   width: 100%;
   padding-bottom: 35px;
-  border-bottom: 8px solid ${props => props.theme.colors.gray};
+  border-bottom: 8px solid #F8F9FA;
 `
 
 export const InfoBlock = styled.div`
