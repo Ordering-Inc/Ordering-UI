@@ -25,7 +25,6 @@ import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import searchIcon from './template/assets/images/search-icon.svg'
 import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
-import cartIcon from './template/assets/images/cart.svg'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -49,12 +48,6 @@ import orderStatus18 from './template/assets/images/order/status-18.svg'
 import orderStatus19 from './template/assets/images/order/status-19.svg'
 import orderStatus20 from './template/assets/images/order/status-20.svg'
 import orderStatus21 from './template/assets/images/order/status-21.svg'
-
-import pickup from './template/assets/images/orderTypes/pickup.svg'
-import delivery from './template/assets/images/orderTypes/delivery.svg'
-import eatIn from './template/assets/images/orderTypes/eat-in.svg'
-import curbside from './template/assets/images/orderTypes/curbside.svg'
-import driveThru from './template/assets/images/orderTypes/drive-thru.svg'
 
 import categoryFood from './template/assets/images/categories/category-food.png'
 import categoryGroceries from './template/assets/images/categories/category-groceries.png'
@@ -114,8 +107,7 @@ theme.images = {
     searchIcon,
     notNetwork,
     emptyActiveOrders,
-    emptyPastOrders,
-    cartIcon
+    emptyPastOrders
   },
 
   order: {
@@ -142,15 +134,6 @@ theme.images = {
     status20: orderStatus20,
     status21: orderStatus21
   },
-
-  orderTypes: {
-    pickup: pickup,
-    delivery: delivery,
-    eatIn: eatIn,
-    curbside: curbside,
-    driveThru: driveThru
-  },
-
   categories: {
     food: categoryFood,
     groceries: categoryGroceries,
