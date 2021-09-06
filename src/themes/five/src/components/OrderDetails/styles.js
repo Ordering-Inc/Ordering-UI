@@ -59,6 +59,7 @@ export const BusinessWrapper = styled.div`
 `
 
 export const BusinessInfo = styled.div`
+  width: 100%;
   h1,
   p {
     margin: 0;
@@ -471,7 +472,7 @@ export const WrapperRightContainer = styled(WrapperLeftContainer)`
 export const Divider = styled.div`
   height: 8px;
   background: #F8F9FA;
-  width: calc(100% + 40px)
+  width: calc(100% + 40px);
   margin-left: -20px;
 
   @media(min-width: 769px) {

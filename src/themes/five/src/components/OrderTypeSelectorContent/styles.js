@@ -17,7 +17,7 @@ export const OrderTypeListItemContainerStyled = styled.div`
   `}
 
   ${({ active }) => active && css`
-    opacity: 0.6;
+    border: 1px solid ${props => props.theme?.colors.primary};
   `}
 `
 

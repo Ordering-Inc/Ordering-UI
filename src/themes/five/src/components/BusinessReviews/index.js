@@ -77,11 +77,11 @@ export const BusinessReviewsUI = (props) => {
               <p>{t('REVIEW_ORDER', 'Review order')}</p>
               <ReviewsProgressContent>
                 <ReviewsProgressBar style={{ width: `${(stars / 5) * 100}%` }} />
-                <ReviewsMarkPoint style={{ left: '0' }}>{t('TERRIBLE', 'Terrible')}</ReviewsMarkPoint>
-                <ReviewsMarkPoint style={{ left: '25%' }}>{t('BAD', 'Bad')}</ReviewsMarkPoint>
-                <ReviewsMarkPoint style={{ left: '50%' }}>{t('OKAY', 'Okay')}</ReviewsMarkPoint>
-                <ReviewsMarkPoint style={{ left: '75%' }}>{t('GOOD', 'Good')}</ReviewsMarkPoint>
-                <ReviewsMarkPoint style={{ right: '0' }}>{t('GREAT', 'Great')}</ReviewsMarkPoint>
+                <ReviewsMarkPoint style={{ left: theme.rtl ? 'initial' : '0', right: theme?.rtl ? '0' : 'initial' }}>{t('TERRIBLE', 'Terrible')}</ReviewsMarkPoint>
+                <ReviewsMarkPoint style={{ left: theme.rtl ? 'initial' : '25%', right: theme?.rtl ? '25%' : 'initial' }}>{t('BAD', 'Bad')}</ReviewsMarkPoint>
+                <ReviewsMarkPoint style={{ left: theme.rtl ? 'initial' : '50%', right: theme?.rtl ? '50%' : 'initial' }}>{t('OKAY', 'Okay')}</ReviewsMarkPoint>
+                <ReviewsMarkPoint style={{ left: theme.rtl ? 'initial' : '75%', right: theme?.rtl ? '75%' : 'initial' }}>{t('GOOD', 'Good')}</ReviewsMarkPoint>
+                <ReviewsMarkPoint style={{ left: theme.rtl ? '0' : 'initial', right: theme?.rtl ? 'initial' : '0' }}>{t('GREAT', 'Great')}</ReviewsMarkPoint>
               </ReviewsProgressContent>
             </ReviewsProgressWrapper>
             <Content id='content'>

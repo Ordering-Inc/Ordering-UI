@@ -107,8 +107,8 @@ export const UserPopover = (props) => {
       <HeaderItem
         isPhoto={sessionState?.user?.photo}
         isHome={isHome}
-        isOpen={open}
         ref={referenceElement}
+        isOpen={open}
         onClick={props.onClick}
       >
         <AiOutlineMenu className='menu-list' />

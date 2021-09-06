@@ -18,7 +18,7 @@ export const AppleButton = styled(Button)`
 
   svg {
     font-size: 16px;
-    color: #1977F2;
+    color: ${props => props.theme?.colors.headingColor};
   }
 
   div {

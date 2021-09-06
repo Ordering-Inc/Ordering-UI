@@ -65,7 +65,7 @@ export const ModalTitle = styled.h2`
   text-transform: capitalize;
   flex: 1;
   ${props => props.theme?.rtl && css`
-    text-align: right;
+    text-align: left;
     padding-right: 10px;
     padding-left: 0px;
   `}
@@ -86,8 +86,8 @@ export const ModalIcon = styled.span`
   cursor: pointer;
   z-index: 2;
   ${props => props.theme?.rtl && css`
-    left: 5px;
-    right: initial;
+    right: 25px;
+    left: initial;
   `}
   svg{
     background: rgba(255,255,255,0.5);
