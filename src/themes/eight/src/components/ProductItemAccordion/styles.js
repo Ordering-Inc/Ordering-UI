@@ -360,7 +360,7 @@ export const ProductNotAvailable = styled.span`
 
 export const ProductOptionsList = styled.ul`
   list-style-type: none;
-  color: ${props => props.theme.colors.secundaryLight};
+  color: ${props => props.theme.colors.grayDark};
   font-size: 14px;
 
   ${({ isCustomMode }) => isCustomMode && css`

@@ -4,14 +4,14 @@ import { Button } from '../Buttons'
 
 export const Input = styled.input`
   background: #FFF;
-  color: #010300;
-  border: 1px solid #DBDCDB;
-  border-radius: 30px;
+  color: ${props => props.theme.colors.grayDark};
+  border: 2px solid #485259;
+  border-radius: 7.6px;
   font-size: 16px;
   padding: 7px 15px;
   outline: none;
   &:focus {
-    border-color: ${() => darken(0.07, '#CCC')};
+    border-color: ${props => props.theme.colors.secundary};
   }
   ${({ w }) => w && css`
     width: 20%;

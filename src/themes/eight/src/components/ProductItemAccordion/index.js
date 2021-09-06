@@ -126,7 +126,7 @@ export const ProductItemAccordion = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       {isCustomMode ? (
-        <ProductCardContainer>
+        <ProductCardContainer className='product-item'>
           <WrapperProductImage isBigSize>
             <ProductImage bgimage={product?.images} />
             {isCartProduct && !isCartPending && getProductMax && (
@@ -222,7 +222,7 @@ export const ProductItemAccordion = (props) => {
           </ProductInfoContainer>
         </ProductCardContainer>
       ) : (
-        <AccordionSection>
+        <AccordionSection className='product-item'>
           <Accordion
             isValid={product?.valid ?? true}
             className={`product accordion ${setActive}`}

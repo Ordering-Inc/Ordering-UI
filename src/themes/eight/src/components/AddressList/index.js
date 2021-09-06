@@ -175,7 +175,9 @@ const AddressListUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
 
-      <NavBar title={t('ADDRESS_LIST', theme?.defaultLanguages?.ADDRESS_LIST || 'Address List')} />
+      {!isModal && (
+        <NavBar title={t('ADDRESS_LIST', theme?.defaultLanguages?.ADDRESS_LIST || 'Address List')} />
+      )}
       <AddressListContainer
         id='address_control'
         isLoading={actionStatus?.loading || orderState?.loading}

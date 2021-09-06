@@ -178,7 +178,7 @@ const CartUI = (props) => {
               />
             )}
             {cart?.valid_products && (
-              <OrderBill>
+              <OrderBill className='order-bill'>
                 <table>
                   <tbody>
                     <tr>
@@ -256,7 +256,7 @@ const CartUI = (props) => {
 
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
+                {isCouponEnabled && !isCartPending && (isCartPopover && !(isCheckout && isCartPopover)) && (
                   <CouponContainer>
                     <CouponControl
                       businessId={cart.business_id}

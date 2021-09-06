@@ -317,7 +317,7 @@ const BusinessProductsListingUI = (props) => {
       {showOption === 'cart' && (
         <>
           <NavBar
-            title={t('REVIEW_YOUR_MEAL', 'Review your meal')}
+            title={t('LOGIN_LINK_MY_ORDERS', 'My Orders')}
             handleGoBack={() => {
               handleBackShowOption()
               setIsCartOpen(false)

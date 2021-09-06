@@ -33,7 +33,7 @@ export const WrapperBusinessLogo = styled.div`
   min-height: 70px;
   max-width: 70px;
   ${({ isSkeleton }) => !isSkeleton && css`
-    border: 1px solid ${props => props.theme.colors.secundaryLight};
+    border: 1px solid ${props => props.theme.colors.gray};
   `}
   border-radius: 50%;
 

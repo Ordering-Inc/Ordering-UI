@@ -133,7 +133,7 @@ export const BusinessItemAccordion = (props) => {
         {!isCustomMode && (
           <Accordion
             isClosed={isClosed}
-            className={`accordion ${setActive}`}
+            className={`accordion ${setActive} business-item`}
             onClick={(e) => toggleAccordion(e)}
           >
             <BusinessInfo>
