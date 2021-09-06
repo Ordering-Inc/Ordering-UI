@@ -333,8 +333,8 @@ const CheckoutUI = (props) => {
               <CouponContainer>
                 <h1>{t('PROMOTION', 'Promotion')}</h1>
                 <CouponControl
-                  businessId={cart.business_id}
-                  price={cart.total}
+                  businessId={cart?.business_id}
+                  price={cart?.total}
                 />
               </CouponContainer>
             )}

@@ -20,8 +20,16 @@ export const WrapLeftContainer = styled.div`
 
 export const WrapLeftInnerContainer = styled.div`
   width: 100%;
+
+  @media (min-width: 768px) {
+    width: 90%;
+    margin: 0 auto;
+  }
+
   @media (min-width: 1024px) {
     max-width: 500px;
+    width: 100%;
+    margin: initial;
   }
   @media (min-width: 1400px) {
     max-width: 600px;
@@ -29,10 +37,15 @@ export const WrapLeftInnerContainer = styled.div`
 `
 
 export const WrapRightInnerContainer = styled.div`
-  padding: 0 20px;
-
+  @media (min-width: 768px) {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
   @media (min-width: 1024px) {
     max-width: 500px;
+    margin: initial;
   }
   @media (min-width: 1024px) {
     ${props => props.theme?.rtl ? css`
@@ -55,7 +68,11 @@ export const WrapRightInnerContainer = styled.div`
 export const WrapRightContainer = styled.div`
   flex: 1;
   background-color: ${props => props.theme.colors.secundaryLight};
-  padding: 30px 0px;
+  padding: 30px 20px;
+
+  @media (min-width: 1024px) {
+    padding: 30px 0px;
+  }
 `
 
 export const WrapperUserDetails = styled.div`
