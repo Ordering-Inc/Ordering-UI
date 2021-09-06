@@ -245,7 +245,7 @@ export const UserFormDetailsUI = (props) => {
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
                     <InputGroup>
-                      <p>{field?.name}</p>
+                      <p>{t(field.code.toUpperCase(), field?.name)}</p>
                       <Input
                         key={field.id}
                         type={field.type}
@@ -268,7 +268,7 @@ export const UserFormDetailsUI = (props) => {
                     </InputGroup>
                   ) : (
                     <InputGroup>
-                      <p>{field?.name}</p>
+                      <p>{t(field.code.toUpperCase(), field?.name)}</p>
                       <Input
                         key={field.id}
                         type={field.type}

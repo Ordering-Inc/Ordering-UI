@@ -13,11 +13,16 @@ export const BusinessSearch = styled.div`
     width: 100%;
     background-repeat: no-repeat;
     background-size: 30px 18px;
-    background-position: left center;
     box-sizing: border-box;
     padding-left: 30px;
     padding-right: 50px;
     background-color: ${props => props.theme?.colors?.backgroundPage};
+
+    ${props => props.theme?.rtl ? css`
+      background-position: right center;
+    ` : css`
+      background-position: left center;
+    `}
 
     ${({ isCustomLayout }) => !isCustomLayout && css`
       justify-content: center;

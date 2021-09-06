@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
 import FiMap from '@meronex/icons/fi/FiMap'
 import Skeleton from 'react-loading-skeleton'
 import {
@@ -14,6 +14,7 @@ import {
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import { Modal } from '../Modal'
 import { Alert } from '../Confirm'
@@ -29,9 +30,9 @@ import {
   useOrder,
   useSession,
   useLanguage,
-  useConfig,
-  BusinessList as BusinessListController
+  useConfig
 } from 'ordering-components'
+import { BusinessList as BusinessListController } from './naked'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -44,7 +45,6 @@ const BusinessesListingUI = (props) => {
     isCustomLayout,
     onRedirectPage,
     handleChangeSearch,
-    handleChangeBusinessType,
     handleBusinessClick,
     currentPageParam
   } = props
@@ -60,23 +60,39 @@ const BusinessesListingUI = (props) => {
   const [nextPage, setNextPage] = useState({ page: currentPageParam || 1, loading: false })
   const location = useLocation()
   const history = useHistory()
+  const windowSize = useWindowSize()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
+  const businessListRef = useRef(null)
 
   const handleScroll = useCallback(() => {
-    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
-    const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
-    const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
-    const nextPageHasMore = !(paginationProps.totalPages === nextPage.page)
-    if (badScrollPosition || businessesList.loading || !hasMore || !nextPageHasMore) return
-    handleClickNextItems(false, nextPage.page + 1, false)
+    if (windowSize.width > 850) {
+      const innerHeightScrolltop = businessListRef?.current?.clientHeight + businessListRef?.current?.scrollTop + 50
+      const badScrollPosition = innerHeightScrolltop < businessListRef?.current?.scrollHeight
+      const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
+      const nextPageHasMore = !(paginationProps.totalPages === nextPage.page)
+      if (badScrollPosition || businessesList.loading || !hasMore || !nextPageHasMore) return
+      handleClickNextItems(false, nextPage.page + 1, false)
+    } else {
+      const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
+      const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
+      const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
+      const nextPageHasMore = !(paginationProps.totalPages === nextPage.page)
+      if (badScrollPosition || businessesList.loading || !hasMore || !nextPageHasMore) return
+      handleClickNextItems(false, nextPage.page + 1, false)
+    }
   }, [businessesList, paginationProps])
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    if (windowSize.width > 850) {
+      businessListRef.current.addEventListener('scroll', handleScroll)
+      return () => businessListRef.current.removeEventListener('scroll', handleScroll)
+    } else {
+      window.addEventListener('scroll', handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
   }, [handleScroll])
 
   useEffect(() => {
@@ -152,14 +168,7 @@ const BusinessesListingUI = (props) => {
     getBusinesses(false, prevPage.page - 1, true)
     setPrevPage({ loading: true, page: prevPage.page - 1 })
   }
-
-  const changeBusinessType = (category) => {
-    setNextPage({ loading: true, page: 1 })
-    setPrevPage({ loading: true, page: 1 })
-    const params = new URLSearchParams({ page: 1 })
-    history.replace({ pathname: location.pathname, search: params.toString() })
-    handleChangeBusinessType(category)
-  }
+  console.log(businessesList)
 
   return (
     <>
@@ -170,7 +179,7 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        <BusinessListWrapper>
+        <BusinessListWrapper ref={businessListRef}>
           <WrapperSearch isCustomLayout={isCustomLayout}>
             <SearchBar
               lazyLoad
@@ -183,6 +192,13 @@ const BusinessesListingUI = (props) => {
               <FiMap onClick={toggleMap} />
             )}
           </WrapperSearch>
+          {paginationProps.currentPage !== 1 && prevPage.page !== 1 && (
+            <PreviousButtonWrapper>
+              <Button onClick={() => handleClickPrevItems()} color='primary'>
+                {t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses...')}
+              </Button>
+            </PreviousButtonWrapper>
+          )}
           <BusinessList>
             {businessesList.loading && (!prevPage.loading || !nextPage.loading) && (
               [...Array(paginationProps.pageSize).keys()].map(i => (
@@ -254,7 +270,7 @@ const BusinessesListingUI = (props) => {
           </BusinessList>
         </BusinessListWrapper>
         <BusinessMapWrapper>
-          {(configs?.google_maps_api_key?.value && businessesList?.businesses?.length > 0) ? (
+          {(configs?.google_maps_api_key?.value && orderState?.options?.address?.location) ? (
             <BusinessesMap
               businessList={businessesList.businesses}
               userLocation={orderState?.options?.address?.location}
@@ -265,7 +281,7 @@ const BusinessesListingUI = (props) => {
           )}
         </BusinessMapWrapper>
 
-        {/* {isCustomLayout && onRedirectPage && (
+        {isCustomLayout && onRedirectPage && (
           <>
             <OrdersOption
               horizontal
@@ -297,15 +313,6 @@ const BusinessesListingUI = (props) => {
             {t('BUSINESSES', 'Businesses')}
           </BusinessesTitle>
         )}
-        {
-          <PreviousButtonWrapper>
-            {paginationProps.currentPage !== 1 && prevPage.page !== 1 && (
-              <Button onClick={() => handleClickPrevItems()} color='primary'>
-                {t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses...')}
-              </Button>
-            )}
-          </PreviousButtonWrapper>
-        } */}
         <Modal
           title={t('ADDRESS_FORM', 'Address Form')}
           open={modals.formOpen}
@@ -358,7 +365,7 @@ const BusinessesListingUI = (props) => {
 export const BusinessesListing = (props) => {
   const businessListingProps = {
     ...props,
-    propsToFetch: ['id', 'name', 'header', 'logo', 'address', 'location', 'timezone', 'schedule', 'open', 'phone', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'menus'],
+    franchiseId: 1,
     UIComponent: BusinessesListingUI
   }
 

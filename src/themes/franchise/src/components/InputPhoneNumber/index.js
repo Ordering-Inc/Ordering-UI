@@ -48,7 +48,7 @@ export const InputPhoneNumber = (props) => {
         </InputBeforeIconWrapper>
         <PhoneInput
           disabled={disabled}
-          placeholder={t('PHONE', 'Phone')}
+          placeholder={t('PHONE_NUMBER', 'Phone number')}
           defaultCountry={configs?.default_country_code?.value}
           value={value}
           displayInitialValueAsLocalNumber

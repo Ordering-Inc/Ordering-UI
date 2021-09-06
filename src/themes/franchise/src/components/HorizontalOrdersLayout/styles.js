@@ -9,10 +9,16 @@ export const Content = styled.div`
 `
 
 export const Price = styled.div`
-  text-align: end;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: flex;
+  justify-content: flex-end;
   width: 35%;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    align-items: center;
+  }
   h2 {
     font-size: 14px;
     margin-block-end: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
@@ -27,27 +33,21 @@ export const Price = styled.div`
     text-overflow: ellipsis;
     margin-left: 5px;
   }
-  p[name='view-cart']{
-    color: ${props => props.theme.colors.primary};
-    cursor: pointer;
-  }
-`
 
-export const Logo = styled.div`
-  width: 55px;
-  height: 55px;
-  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
-  border-radius: 7.6px;
+  button {
+    border-radius: 50px;
+    font-size: 10px;
+    line-height: 19px;
+    padding: 4px 8px;
+    border: 1px solid ${props => props.theme.colors.primaryContrast};
+    margin: 5px;
 
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 7.6px;
-  }
-
-  @media (min-width: 480px){
-    width: 86px;
-    height: 86px;
+    &.reorder {
+      background: ${props => props.theme.colors.primaryContrast};
+      &:hover {
+        background: ${props => props.theme.colors.primary};
+      }
+    }
   }
 `
 
@@ -81,13 +81,6 @@ export const Card = styled.div`
     justify-content: center;
   `}
 
-  ${props => (
-    props.theme.colors.backgroundPage === '#FFF' ||
-    props.theme.colors.backgroundPage === '#FFFFFF'
-  ) && css`
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
-  `}
-
   @media (min-width: 480px){
     min-width: 430px;
     max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '250px'};;
@@ -101,13 +94,4 @@ export const Card = styled.div`
     `}
   }
 
-`
-
-export const Reorder = styled.div`
-  margin-bottom: 10px;
-  button{
-    line-height: 0;
-    height: 30px;
-    font-size: 14px;
-  }
 `

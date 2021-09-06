@@ -288,9 +288,6 @@ export const BusinessInformation = styled.div`
         font-size: 0.9em;
       `}
     }
-    p[name='order_number']{
-      width: 230px;
-    }
   }
 
   @media (min-width: 768px){

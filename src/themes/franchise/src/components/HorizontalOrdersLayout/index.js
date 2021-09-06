@@ -1,12 +1,9 @@
 import React from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
-import { useTheme } from 'styled-components'
 import {
   Content,
   Price,
-  Logo,
-  Card,
-  Reorder
+  Card
 } from './styles'
 import { OrdersContainer, BusinessInformation } from '../OrdersOption/styles'
 
@@ -31,7 +28,6 @@ export const HorizontalOrdersLayout = (props) => {
 
   const orders = customArray || props.orders
 
-  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDate }] = useUtils()
 
@@ -64,42 +60,40 @@ export const HorizontalOrdersLayout = (props) => {
             onClick={() => handleClickCard(order?.uuid)}
           >
             <Content>
-              {(order.business?.logo || theme.images?.dummies?.businessLogo) && !isBusinessesPage && (
-                <Logo>
-                  <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='75px' height='75px' />
-                </Logo>
-              )}
-
               <BusinessInformation activeOrders>
                 <h2>{order.business?.name}</h2>
                 <div className='orders-detail'>
                   <p name='order_number'>{t('ORDER_NUM', 'Order No.')} {order.id}</p>
                   <BsDot />
                   <p>{order?.delivery_datetime_utc
-                    ? parseDate(order?.delivery_datetime_utc)
+                    ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
                     : parseDate(order?.delivery_datetime, { utc: false })}
                   </p>
                 </div>
-                {order?.status !== 0 && (
-                  <p className='order-status'>{getOrderStatus(order.status)?.value}</p>
-                )}
+                <p className='order-status'>{getOrderStatus(order.status)?.value}</p>
               </BusinessInformation>
 
               <Price isBusinessesPage={isBusinessesPage}>
-                <h2>
-                  {parsePrice(order?.summary?.total || order?.total)}
-                </h2>
-                {customArray && (
-                  <p name='view-cart' onClick={() => handleClickCard(order.uuid)}>
-                    {t('VIEW_ORDER', 'View Order')}
-                  </p>
+                {
+                  !pastOrders && (
+                    <h2>
+                      {parsePrice(order?.summary?.total || order?.total)}
+                    </h2>
+                  )
+                }
+                {pastOrders && (
+                  <Button
+                    outline
+                    color='primary'
+                    onClick={() => handleClickCard(order.uuid)}
+                  >
+                    {t('REVIEW', 'Review')}
+                  </Button>
                 )}
-                {isBusinessesPage && !customArray && (
-                  <Reorder>
-                    <Button color='primary' onClick={() => handleReorder(order.id)}>
-                      {t('REORDER', 'Reorder')}
-                    </Button>
-                  </Reorder>
+                {pastOrders && (
+                  <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
+                    {t('REORDER', 'Reorder')}
+                  </Button>
                 )}
               </Price>
             </Content>

@@ -268,6 +268,11 @@ export const InputBeforeIcon = styled.div`
   align-items: center;
   height: 100%;
 
+  ${props => props.theme.rtl && css`
+    right: 15px;
+    left: initial;
+  `}
+
   svg {
     font-size: 16px;
     color: #B1BCCC;

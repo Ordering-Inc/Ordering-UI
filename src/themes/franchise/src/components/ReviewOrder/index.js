@@ -137,35 +137,35 @@ const ReviewOrderUI = (props) => {
             <ReviewsProgressContent>
               <ReviewsProgressBar style={{ width: `${((stars?.quality - 1) / 4) * 100}%` }} />
               <ReviewsMarkPoint
-                style={{ left: '0' }}
+                style={{ left: theme.rtl ? 'initial' : '0', right: theme?.rtl ? '0' : 'initial' }}
                 active={stars?.quality === 1}
                 onClick={() => handleChangeStars('terrible')}
               >
                 {t('TERRIBLE', 'Terrible')}
               </ReviewsMarkPoint>
               <ReviewsMarkPoint
-                style={{ left: '25%' }}
+                style={{ left: theme.rtl ? 'initial' : '25%', right: theme?.rtl ? '25%' : 'initial' }}
                 active={stars?.quality === 2}
                 onClick={() => handleChangeStars('bad')}
               >
                 {t('BAD', 'Bad')}
               </ReviewsMarkPoint>
               <ReviewsMarkPoint
-                style={{ left: '50%' }}
+                style={{ left: theme.rtl ? 'initial' : '50%', right: theme?.rtl ? '50%' : 'initial' }}
                 active={stars?.quality === 3}
                 onClick={() => handleChangeStars('okay')}
               >
                 {t('OKAY', 'Okay')}
               </ReviewsMarkPoint>
               <ReviewsMarkPoint
-                style={{ left: '75%' }}
+                style={{ left: theme.rtl ? 'initial' : '75%', right: theme?.rtl ? '75%' : 'initial' }}
                 active={stars?.quality === 4}
                 onClick={() => handleChangeStars('good')}
               >
                 {t('GOOD', 'Good')}
               </ReviewsMarkPoint>
               <ReviewsMarkPoint
-                style={{ right: '0' }}
+                style={{ left: theme.rtl ? '0' : 'initial', right: theme?.rtl ? 'initial' : '0' }}
                 active={stars?.quality === 5}
                 onClick={() => handleChangeStars('great')}
               >

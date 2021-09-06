@@ -102,13 +102,14 @@ export const PreviousButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  margin-bottom: 20px;
   button{
-    width: 80%;
+    width: 100%;
   }
 
   @media(min-width: 681px){
       button{
-      width: 40%;
+      width: 80%;
     }
   }
 `

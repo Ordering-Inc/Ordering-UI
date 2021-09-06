@@ -205,7 +205,12 @@ export const InputWrapper = styled.div`
   input{
     box-sizing: border-box;
     width: 100%;
-    padding-left: 40px !important;
+
+    ${props => props.theme.rtl ? css`
+      padding-right: 40px !important;
+    ` : css`
+      padding-left: 40px !important;
+    `}
     margin: 10px 0;
   }
 `
@@ -216,6 +221,11 @@ export const InputBeforeIcon = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
+
+  ${props => props.theme?.rtl && css`
+    right: 15px;
+    left: initial;
+  `}
 
   svg {
     font-size: 16px;

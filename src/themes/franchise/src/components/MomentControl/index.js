@@ -9,14 +9,21 @@ import {
 } from 'ordering-components'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import 'react-calendar/dist/Calendar.css'
+import Calendar from 'react-calendar'
 import { Select } from '../../styles/Select'
+import MdClose from '@meronex/icons/md/MdClose'
+import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
+import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   Title,
   Option,
   DatePickerWrapper,
   CheckBoxWrapper,
-  HourListWrapper
+  HourListWrapper,
+  CalendarWrapper
 } from './styles'
 import CgRadioCheck from '@meronex/icons/cg/CgRadioCheck'
 import CgRadioChecked from '@meronex/icons/cg/CgRadioChecked'
@@ -37,6 +44,7 @@ const MomentControlUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()
+  const windowSize = useWindowSize()
   const [orderState] = useOrder()
   const [value, onChange] = useState(new Date())
   const [minDate, setMinDate] = useState(new Date())
@@ -60,6 +68,11 @@ const MomentControlUI = (props) => {
       !orderState.loading && handleAsap()
       setIsASP(true)
     } else setIsASP(false)
+  }
+
+  const handleRemoveDate = () => {
+    !orderState.loading && handleAsap()
+    setIsASP(true)
   }
 
   useEffect(() => {
@@ -134,14 +147,30 @@ const MomentControlUI = (props) => {
       {
         !isASP && (
           <>
-            <DatePickerWrapper>
-              <DatePicker
-                selected={value}
-                onChange={(date) => onDateChange(date)}
+            <CalendarWrapper>
+              <DatePickerWrapper>
+                <DatePicker
+                  selected={value}
+                  onChange={(val) => onDateChange(val)}
+                  minDate={minDate}
+                  maxDate={maxDate}
+                />
+                <MdClose
+                  onClick={handleRemoveDate}
+                />
+              </DatePickerWrapper>
+              <Calendar
+                onChange={(val) => onDateChange(val)}
+                value={value}
+                showDoubleView={windowSize.width > 1200}
+                next2Label=''
+                prev2Label=''
+                prevLabel={<MdKeyboardArrowLeft />}
+                nextLabel={<MdKeyboardArrowRight />}
                 minDate={minDate}
                 maxDate={maxDate}
               />
-            </DatePickerWrapper>
+            </CalendarWrapper>
             <HourListWrapper
               isLoading={orderState?.loading}
             >
