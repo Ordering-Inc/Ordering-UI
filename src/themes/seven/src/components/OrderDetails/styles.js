@@ -37,6 +37,7 @@ export const WrapperContainer = styled.div`
 
 export const Header = styled.div`
   width: 100%;
+  margin-top: 30px;
   button {
     display: flex;
     align-items: center;
@@ -66,6 +67,7 @@ export const HeaderInfo = styled.div`
     font-size: 16px;
     line-height: 26px;
     color: #212629;
+    margin: 0px;
   }
 `
 
@@ -336,7 +338,6 @@ export const ReviewsAction = styled.div`
   line-height: 26px;
   color: ${props => props.theme.colors.primary};
   padding-bottom: 5px;
-  border-bottom: 1px solid ${props => props.theme.colors.primary};
 `
 
 export const SkeletonBlock = styled.div`

@@ -16,8 +16,9 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../../../../../components/Modal'
 import { Messages } from '../../../../../components/Messages'
-import { ReviewOrder } from '../../../../../components/ReviewOrder'
+import { ReviewOrder } from '../ReviewOrder'
 import { Button } from '../../styles/Buttons'
+import { AddressDetails } from '../AddressDetails'
 
 import {
   Container,
@@ -191,7 +192,7 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && !order.review && !isReviewed && (
+                  ) && (!order.review && !isReviewed) && (
                     <ReviewsAction>
                       <Button color='primary' onClick={() => setOpenReview(true)}>
                         {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
@@ -286,6 +287,11 @@ const OrderDetailsUI = (props) => {
             </LeftPanel>
             <RightPanel>
               <PanelRow>
+                {configs?.google_maps_api_key && (
+                  <AddressDetails
+                    apiKey={configs?.google_maps_api_key?.value}
+                  />
+                )}
                 <Header>
                   <HeaderInfo className='order-header'>
                     <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>

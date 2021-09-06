@@ -55,6 +55,8 @@ export const FormInput = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
+
 
   input {
     height: 38px;
@@ -86,8 +88,6 @@ export const RedirectLink = styled.div`
 
 export const SocialButtons = styled.div`
    width: 100%;
-   margin-top: 10px;
-
   button {
     display: flex;
     justify-content: center;
@@ -129,7 +129,6 @@ export const SocialButtons = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 40px;
   }
 `
 export const SkeletonWrapper = styled.div`
@@ -252,7 +251,6 @@ export const FormBottom = styled.div`
   border-left: none;
   border-right: none;
   align-items: center;
-  margin-top: 25px;
 `
 
 export const AccountLogin = styled.div`
@@ -274,4 +272,33 @@ export const AccountLogin = styled.div`
     border-radius: 0;
     background-color: transparent;
   }
+`
+export const WrapperBirthday = styled.div`
+  width: 100%;
+`
+export const ConditionCheck = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+  span {
+    display: flex;
+  }
+  .condition-checkbox {
+    color: ${props => props.theme.colors.primary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+  }
+  .condition-link-text {
+    margin: 0 6px;
+  }
+  .condition-link {
+    color: ${props => props.theme.colors.primary};
+  }
+`
+export const Terms = styled.div`
+  margin-bottom: 15px;
 `

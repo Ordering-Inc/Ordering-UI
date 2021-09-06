@@ -16,27 +16,38 @@ export const BusinessName = styled.div`
   position: relative;
   padding: 50px 20px;
   background-color: ${props => props.theme.colors.primary};
-  p {
+  
+  h2 {
     font-weight: bold;
     font-size: 24px;
     line-height: 35px;
     color: #fff;
     box-sizing: border-box;
     margin: 0;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
   }
   ${props => props.isClosed && css`
-    p {
+    h2 {
       opacity: 0.5;
     }
   `}
+
   @media (min-width: 768px) {
     display: flex;
     width: 35%;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
     padding-left: 3%;
+
   }
   @media (min-width: 1024px) {
-    p {
+    h2 {
       font-size: 32px;
       line-height: 42px; 
     }
@@ -81,4 +92,50 @@ export const CloseOverall = styled.div`
     color: #FFF;
     opacity: 0.7;
   }
+`
+
+export const BuinessMeta = styled.div`
+  font-size: 14px;
+  line-height: 26px;
+  color: #fff;
+  margin:0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+`
+
+export const MetaItem = styled.div`
+  display: flex;
+  span {
+    margin-right: 7px;
+    ${props => props.theme?.rtl && css`
+        margin-right: 0px;
+        margin-left: 7px;
+    `}
+  }
+`
+
+export const ScheduleDate = styled.div`
+  display: flex;
+  align-items: center;
+  color: #fff;
+`
+export const ScheduleTime = styled.p`
+  margin: 0px;
+  font-size: 14px;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+`
+
+export const ScheduleTitle = styled.span`
+  margin-right: 7px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 0px;
+    margin-left: 7px;
+ `}
 `

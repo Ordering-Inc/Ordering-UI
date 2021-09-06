@@ -2,9 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const ContainerCard = styled.div`
-  border-radius: 10px;
-  margin: 30px 20px;
-
+  margin: 20px 20px;
   width: calc(100% - 40px);
 
   @media (min-width: 681px) {
@@ -13,6 +11,9 @@ export const ContainerCard = styled.div`
 
   @media (min-width: 993px) {
     width: calc(33% - 40px);
+    ${({ isPickup }) => isPickup && css`
+      width: calc(100% - 40px);
+    `}
   }
 `
 
@@ -112,7 +113,7 @@ export const BusinessTags = styled.div`
 export const BusinessContent = styled.div`
   display: flex;
   box-sizing: border-box;
-  padding: 30px 15px 20px 10px;
+  padding: 30px 20px 20px;
 `
 
 export const WrapperBusinessLogo = styled.div`
@@ -227,18 +228,13 @@ export const BusinessInfoItem = styled.div`
       font-weight: bold;
     }
   }
+  
+  @media (min-width: 481px){
+    font-size: 16px;
+  }
 
   @media (min-width: 1201px) {
     width: 95%;
-  }
-
-  @media (min-width: 481px){
-    padding: 0px 5px 0px 16px;
-    font-size: 16px;
-
-    ${props => props.theme?.rtl && css`
-        padding: 0px 16px 0px 5px;
-    `}
   }
 `
 
@@ -317,7 +313,6 @@ export const BuinessMeta = styled.p`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-
 `
 
 export const MetaItem = styled.span`

@@ -46,6 +46,18 @@ export const SingleProductCard = (props) => {
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig
   const maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory)
 
+  const checkProdcutImage = () => {
+    let bgImage
+    if (product?.images) {
+      if (product?.images.indexOf('http') > -1) {
+        bgImage = optimizeImage(product.images, 'h_200,c_limit')
+      } else {
+        bgImage = optimizeImage(theme.images?.dummies?.product, 'h_200,c_limit')
+      }
+      return bgImage
+    }
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -65,7 +77,7 @@ export const SingleProductCard = (props) => {
               <CardLogo
                 className='image'
                 soldOut={isSoldOut || maxProductQuantity <= 0}
-                bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
+                bgimage={checkProdcutImage()}
               />
             </WrapLogo>
           ) : (

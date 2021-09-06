@@ -179,14 +179,21 @@ export const UserEdit = styled.div`
 export const CenterHeader = styled.div`
   display: flex;
   align-items: center;
+  flex-grow: 1;
+  justify-content: flex-end;
+  padding: 0 15px;
+
   #select-input {
     height: 40px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 13vw;
     font-size: .86rem;
+    border: none;
+    @media (min-width: 768px) {
+      border: 1px solid ${props => props.theme.colors.primary};;
+    }
   }
   @media (min-width: 1024px) {
     width: 50%;

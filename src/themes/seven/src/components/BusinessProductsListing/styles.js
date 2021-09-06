@@ -85,6 +85,7 @@ export const WrappLayout = styled.div`
   @media (min-width: 768px) {
     display: flex;
     width: 100vw;
+    min-height: 60vh;
   }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`

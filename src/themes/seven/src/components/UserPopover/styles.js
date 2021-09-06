@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border: 1px solid ${props => props.theme.colors.primary};
   display: flex;
   justify-content: center;
@@ -21,9 +21,18 @@ export const HeaderItem = styled.div`
   }
 
   img {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+  }
+
+  @media (min-width: 1200px) {
+    width: 48px;
+    height: 48px;
+    img {
     width: 35px;
     height: 35px;
-    margin: 0;
+  }
   }
 `
 
