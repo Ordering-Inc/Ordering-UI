@@ -258,41 +258,41 @@ const ProductOptionsUI = (props) => {
                 ) : (
                   <div className='all-options'>
                     {
-                    product?.extras.map(extra => extra.options.map(option => {
-                      const currentState = productCart.options[`id:${option?.id}`] || {}
-                      return (
-                        <div key={option?.id}>
-                          {
-                            showOption(option) && (
-                              <ProductOption
-                                option={option}
-                                currentState={currentState}
-                                error={errors[`id:${option?.id}`]}
-                              >
-                                <WrapperSubOption className={isError(option?.id)}>
-                                  {
-                                    option.suboptions.map(suboption => {
-                                      const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                      const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                      return suboption?.enabled ? (
-                                        <ProductOptionSubOption
-                                          key={suboption?.id}
-                                          onChange={handleChangeSuboptionState}
-                                          balance={balance}
-                                          option={option}
-                                          suboption={suboption}
-                                          state={currentState}
-                                        />
-                                      ) : null
-                                    })
-                                  }
-                                </WrapperSubOption>
-                              </ProductOption>
-                            )
-                          }
-                        </div>
-                      )
-                    }))
+                      product?.extras.map(extra => extra.options.map(option => {
+                        const currentState = productCart.options[`id:${option?.id}`] || {}
+                        return (
+                          <div key={option?.id}>
+                            {
+                              showOption(option) && (
+                                <ProductOption
+                                  option={option}
+                                  currentState={currentState}
+                                  error={errors[`id:${option?.id}`]}
+                                >
+                                  <WrapperSubOption className={isError(option?.id)}>
+                                    {
+                                      option.suboptions.map(suboption => {
+                                        const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                        const balance = productCart.options[`id:${option?.id}`]?.balance || 0
+                                        return suboption?.enabled ? (
+                                          <ProductOptionSubOption
+                                            key={suboption?.id}
+                                            onChange={handleChangeSuboptionState}
+                                            balance={balance}
+                                            option={option}
+                                            suboption={suboption}
+                                            state={currentState}
+                                          />
+                                        ) : null
+                                      })
+                                    }
+                                  </WrapperSubOption>
+                                </ProductOption>
+                              )
+                            }
+                          </div>
+                        )
+                      }))
                     }
                   </div>
                 )}

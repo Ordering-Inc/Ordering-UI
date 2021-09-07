@@ -18,7 +18,7 @@ import {
   useConfig
 } from 'ordering-components'
 import { Alert } from '../../../../../components/Confirm'
-import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
+import { GoogleGpsButton } from '../GoogleGpsButton'
 
 import {
   FormControl,
@@ -27,7 +27,6 @@ import {
   WrapAddressInput,
   AddressTagSection,
   WrapperMap,
-  ShowMap,
   WrapperSkeleton
 } from './styles'
 
@@ -62,22 +61,19 @@ const AddressFormUI = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
-
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
-  const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
   const isEditing = !!addressState.address?.id
-
   const [locationChange, setLocationChange] = useState(
     isEditing
       ? addressState?.address?.location
       : formState.changes?.location ?? null
   )
 
-  const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
+  const maxLimitLocation = parseFloat(configState?.configs?.meters_to_change_address?.value)
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
     configState.configs?.google_autocomplete_selection_required?.value === 'true'
@@ -195,7 +191,6 @@ const AddressFormUI = (props) => {
       return
     }
 
-    setToggleMap(false)
     const arrayList = isEditing
       ? addressesList?.filter(address => address?.id !== addressState?.address?.id) || []
       : addressesList || []
@@ -366,7 +361,7 @@ const AddressFormUI = (props) => {
             props.beforeMidComponents?.map((BeforeMidComponents, i) => (
               <BeforeMidComponents key={i} {...props} />))
           }
-          {locationChange && toggleMap && (
+          {locationChange ? (
             <WrapperMap>
               <GoogleMapsMap
                 apiKey={googleMapsApiKey}
@@ -378,8 +373,11 @@ const AddressFormUI = (props) => {
                 maxLimitLocation={maxLimitLocation}
               />
             </WrapperMap>
+          ) : (
+            <div style={{ width: '100%' }}>
+              <Skeleton height={250} />
+            </div>
           )}
-
           {inputNames.map(field => showField && showField(field.name) && (
             field.name === 'address' ? (
               <React.Fragment key={field.name}>
@@ -415,10 +413,6 @@ const AddressFormUI = (props) => {
                     IconLoadingButton={CgSearchLoading}
                   />
                 </AddressWrap>
-
-                {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
-                  <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
-                )}
               </React.Fragment>
             ) : (
               <React.Fragment key={field.name}>

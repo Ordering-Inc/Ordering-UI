@@ -16,7 +16,7 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../../../../../components/Modal'
 import { Messages } from '../../../../../components/Messages'
-import { ReviewOrder } from '../../../../../components/ReviewOrder'
+import { ReviewOrder } from '../ReviewOrder'
 import { Button } from '../../styles/Buttons'
 
 import {
@@ -191,7 +191,7 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && !order.review && !isReviewed && (
+                  ) && (!order.review && !isReviewed) && (
                     <ReviewsAction>
                       <Button color='primary' onClick={() => setOpenReview(true)}>
                         {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
