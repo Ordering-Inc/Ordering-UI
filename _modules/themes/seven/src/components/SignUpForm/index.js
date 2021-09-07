@@ -19,6 +19,10 @@ var _InputPhoneNumber = require("../InputPhoneNumber");
 
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
+var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
+
+var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
+
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
@@ -133,6 +137,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       passwordSee = _useState8[0],
       setPasswordSee = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      conditionCheck = _useState10[0],
+      setConditionCheck = _useState10[1];
 
   var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false; // const [isSignupBusiness, setIsSignupBusiness] = useState(false)
 
@@ -251,6 +260,10 @@ var SignUpFormUI = function SignUpFormUI(props) {
     });
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
     emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
+  };
+
+  var toggleSelect = function toggleSelect() {
+    setConditionCheck(!conditionCheck);
   };
 
   (0, _react.useEffect)(function () {
@@ -381,7 +394,26 @@ var SignUpFormUI = function SignUpFormUI(props) {
     })
   }), /*#__PURE__*/_react.default.createElement(_styles.TogglePassword, {
     onClick: togglePasswordView
-  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_AiOutlineEye.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineEyeInvisible.default, null)))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_AiOutlineEye.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineEyeInvisible.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.FormInline, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBirthday, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    type: "text",
+    name: "birthday",
+    className: "form",
+    placeholder: t('BIRTHDAY', 'dd/mm/yyyy'),
+    onChange: handleChangeInput
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ConditionCheck, null, /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return toggleSelect();
+    }
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: "condition-checkbox"
+  }, conditionCheck ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
+    disabled: true
+  })), /*#__PURE__*/_react.default.createElement("span", {
+    className: "condition-link-text"
+  }, t('FOOTER_ARCHIES_PRIVACY_POLICY_LINK_TEXT', 'You must agree with'))), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://tupedidostarbucks.co/pages/privacidad-starbucks",
+    className: "condition-link"
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('FOOTER_ARCHIES_PRIVACY_POLICY_LINK', 'Terms and Conditions')))), /*#__PURE__*/_react.default.createElement(_styles.Terms, null, t('TERMS_WEB_PF', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);
@@ -394,7 +426,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles.FormInline, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
-    disabled: formState.loading || (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
+    disabled: formState.loading || (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading) || !conditionCheck
   }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") // : isSignupBusiness
   //   ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
   : t('SIGN_UP', 'Sign up')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5)).map(function (_, i) {

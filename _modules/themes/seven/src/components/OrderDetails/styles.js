@@ -54,7 +54,7 @@ var Header = _styledComponents.default.div(_templateObject7 || (_templateObject7
 
 exports.Header = Header;
 
-var HeaderInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 20px;\n  h1 {\n    font-weight: bold;\n    font-size: 24px;\n    line-height: 34px;\n    color: #000000;\n    margin: 0;\n    margin-bottom: 12px;\n    text-transform: uppercase;\n  }\n\n  p {\n    font-size: 16px;\n    line-height: 26px;\n    color: #212629;\n  }\n"])));
+var HeaderInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 20px;\n  h1 {\n    font-weight: bold;\n    font-size: 24px;\n    line-height: 34px;\n    color: #000000;\n    margin: 0;\n    margin-bottom: 12px;\n    text-transform: uppercase;\n  }\n\n  p {\n    font-size: 16px;\n    line-height: 26px;\n    color: #212629;\n    margin: 0px;\n  }\n"])));
 
 exports.HeaderInfo = HeaderInfo;
 
@@ -146,9 +146,7 @@ var OrderBill = _styledComponents.default.div(_templateObject27 || (_templateObj
 
 exports.OrderBill = OrderBill;
 
-var ReviewsAction = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 20px 0px;\n  font-size: 16px;\n  line-height: 26px;\n  color: ", ";\n  padding-bottom: 5px;\n  border-bottom: 1px solid ", ";\n"])), function (props) {
-  return props.theme.colors.primary;
-}, function (props) {
+var ReviewsAction = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 20px 0px;\n  font-size: 16px;\n  line-height: 26px;\n  color: ", ";\n  padding-bottom: 5px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

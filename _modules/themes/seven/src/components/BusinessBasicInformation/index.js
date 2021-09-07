@@ -30,7 +30,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _business$today, _orderState$options, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       businessState = props.businessState;
@@ -40,6 +40,25 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
+
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
+
+  var scheduleFormatted = function scheduleFormatted(_ref) {
+    var hour = _ref.hour,
+        minute = _ref.minute;
+
+    var checkTime = function checkTime(val) {
+      return val < 10 ? "0".concat(val) : val;
+    };
+
+    return "".concat(checkTime(hour), ":").concat(checkTime(minute));
+  };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -54,9 +73,13 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     id: "container"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessName, {
     isClosed: !(business !== null && business !== void 0 && business.open)
-  }, !loading ? /*#__PURE__*/_react.default.createElement("p", {
+  }, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold"
-  }, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, business === null || business === void 0 ? void 0 : business.name), (business === null || business === void 0 ? void 0 : (_business$today = business.today) === null || _business$today === void 0 ? void 0 : _business$today.enabled) && /*#__PURE__*/_react.default.createElement(_styles.ScheduleDate, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, " ", t('TODAY_DATE', "Today's Hours"), ' : ', " "), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, scheduleFormatted(business.today.lapses[0].open)), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, " ", ' - '), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, scheduleFormatted(business.today.lapses[0].close))), /*#__PURE__*/_react.default.createElement(_styles.BuinessMeta, null, (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.MetaItem, null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_PRICE', 'Delivery Price'), ' : '), business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70
+  }), (business === null || business === void 0 ? void 0 : business.distance) >= 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MetaItem, null, /*#__PURE__*/_react.default.createElement("span", null, t('DISTANCE', 'Distance'), ' : '), business === null || business === void 0 ? void 0 : business.distance.toFixed(2))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70
+  }))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150,
     height: 25
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {

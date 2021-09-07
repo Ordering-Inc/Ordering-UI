@@ -66,7 +66,7 @@ var LoginWith = _styledComponents.default.div(_templateObject5 || (_templateObje
 
 exports.LoginWith = LoginWith;
 
-var FormInput = _styledComponents.default.form(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n\n  input {\n    height: 38px;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    box-sizing: border-box;\n    position: relative;\n  }\n\n  input:not(:last-child) {\n    margin: 10px 0px;\n    @media (min-width: 768px) {\n      margin: 0px 0px 25px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-between;\n  }\n\n"])));
+var FormInput = _styledComponents.default.form(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 20px;\n\n  input {\n    height: 38px;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    box-sizing: border-box;\n    position: relative;\n  }\n\n  input:not(:last-child) {\n    margin: 10px 0px;\n    @media (min-width: 768px) {\n      margin: 0px 0px 25px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-between;\n  }\n\n"])));
 
 exports.FormInput = FormInput;
 
@@ -74,7 +74,7 @@ var RedirectLink = _styledComponents.default.div(_templateObject9 || (_templateO
 
 exports.RedirectLink = RedirectLink;
 
-var SocialButtons = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n   width: 100%;\n   margin-top: 10px;\n\n  button {\n    display: flex;\n    justify-content: center;\n    width: 100%;\n    padding: 5px 30px;\n    color: #000000;\n    border-radius: 0px;\n    background-color: transparent;\n    border: 1px solid;\n    img {\n      width: 30px;\n    }\n\n    div {\n      font-size: 0.8em;\n      margin: 0 10px;\n    }\n  }\n\n  button:first-child{\n    border-color: #365988;\n    color: #365988;\n    font-weight: 700;\n  }\n\n  button:nth-child(2){\n    border-color: #000000;\n    color: #000000;\n    font-weight: 700;\n  }\n\n  button:nth-child(2){\n    border-color: #666666;\n    color: #666666;\n    font-weight: 700;\n  }\n\n  @media (min-width: 768px) {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n    margin-top: 40px;\n  }\n"])));
+var SocialButtons = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n   width: 100%;\n\n  button {\n    display: flex;\n    justify-content: center;\n    width: 100%;\n    padding: 5px 30px;\n    color: #000000;\n    border-radius: 0px;\n    background-color: transparent;\n    border: 1px solid;\n    img {\n      width: 30px;\n    }\n\n    div {\n      font-size: 0.8em;\n      margin: 0 10px;\n    }\n  }\n\n  button:first-child{\n    border-color: #365988;\n    color: #365988;\n    font-weight: 700;\n  }\n\n  button:nth-child(2){\n    border-color: #000000;\n    color: #000000;\n    font-weight: 700;\n  }\n\n  button:nth-child(2){\n    border-color: #666666;\n    color: #666666;\n    font-weight: 700;\n  }\n\n  @media (min-width: 768px) {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n  }\n"])));
 
 exports.SocialButtons = SocialButtons;
 
@@ -126,7 +126,7 @@ var FormInline = _styledComponents.default.div(_templateObject19 || (_templateOb
 
 exports.FormInline = FormInline;
 
-var FormBottom = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  padding: 10px 0;\n  border: 1px solid ", ";\n  border-left: none;\n  border-right: none;\n  align-items: center;\n  margin-top: 25px;\n"])), function (props) {
+var FormBottom = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  padding: 10px 0;\n  border: 1px solid ", ";\n  border-left: none;\n  border-right: none;\n  align-items: center;\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 

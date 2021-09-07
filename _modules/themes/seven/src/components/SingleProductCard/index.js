@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleProductCard = function SingleProductCard(props) {
-  var _orderState$carts, _cart$products, _cart$products2, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _props$afterComponent, _props$afterElements;
+  var _orderState$carts, _cart$products, _cart$products2, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var businessId = props.businessId,
       product = props.product,
@@ -88,6 +88,23 @@ var SingleProductCard = function SingleProductCard(props) {
   var maxCartProductInventory = (product !== null && product !== void 0 && product.inventoried ? product === null || product === void 0 ? void 0 : product.quantity : undefined) - productBalance;
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig;
   var maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory);
+
+  var checkProdcutImage = function checkProdcutImage() {
+    var bgImage;
+
+    if (product !== null && product !== void 0 && product.images) {
+      if ((product === null || product === void 0 ? void 0 : product.images.indexOf('http')) > -1) {
+        bgImage = optimizeImage(product.images, 'h_200,c_limit');
+      } else {
+        var _theme$images, _theme$images$dummies;
+
+        bgImage = optimizeImage((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product, 'h_200,c_limit');
+      }
+
+      return bgImage;
+    }
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -105,7 +122,7 @@ var SingleProductCard = function SingleProductCard(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, null, /*#__PURE__*/_react.default.createElement(_styles.CardLogo, {
     className: "image",
     soldOut: isSoldOut || maxProductQuantity <= 0,
-    bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_200,c_limit')
+    bgimage: checkProdcutImage()
   })) : /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 195,
     width: 195

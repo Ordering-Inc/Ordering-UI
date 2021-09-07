@@ -31,7 +31,7 @@ var UserImage = _styledComponents.default.div(_templateObject3 || (_templateObje
 
 exports.UserImage = UserImage;
 
-var Image = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 170px;\n  height: 170px;\n  border: 2px solid ", ";\n  border-radius: 100%;\n  overflow: hidden;\n  padding: 20px;\n  background: ", ";\n  cursor: -webkit-grab;\n  cursor: grab;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 50%;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 480px){\n    width: 200px;\n    height: 200px;\n  }\n\n  @media (min-width: 768px){\n    width: 170px;\n    height: 170px;\n  }\n"])), function (props) {
+var Image = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 170px;\n  height: 170px;\n  border: 2px solid ", ";\n  overflow: hidden;\n  padding: 20px;\n  background: ", ";\n  cursor: -webkit-grab;\n  cursor: grab;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 50%;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 480px){\n    width: 200px;\n    height: 200px;\n  }\n\n  @media (min-width: 768px){\n    width: 170px;\n    height: 170px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (_ref) {
   var isImage = _ref.isImage,
@@ -63,7 +63,7 @@ var UserData = _styledComponents.default.div(_templateObject8 || (_templateObjec
 
 exports.UserData = UserData;
 
-var SavedPlaces = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 90%;\n  text-align: center;\n  margin: 0 auto;\n  margin-top: 40px;\n  margin-bottom: 20px;\n\n\n  h1{\n    font-size: 20px;\n    margin: 0;\n    text-align: left;\n    padding: 0 10px;\n    box-sizing: border-box;\n    ", "\n  }\n\n  > div{\n    display: flex;\n    flex-direction: column-reverse;\n    align-items: center;\n  }\n\n  button{\n    width: 100%;\n    align-self: center;\n  }\n\n  @media (min-width: 768px){\n    ul{\n      width: 100%;\n    }\n    button {\n      width: 65%;\n    }\n  }\n\n  @media (min-width: 1024px){\n    width: 96%;\n\n    #address_control button {\n      width: 40%;\n      margin-left: auto;\n      white-space: nowrap;\n    }\n  }\n"])), function (props) {
+var SavedPlaces = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 90%;\n  text-align: center;\n  margin: 0 auto;\n  margin-top: 40px;\n  margin-bottom: 20px;\n\n\n\n  h1{\n    font-size: 20px;\n    margin: 0;\n    text-align: left;\n    padding: 0 10px;\n    box-sizing: border-box;\n    ", "\n  }\n\n  > div{\n    display: flex;\n    flex-direction: column-reverse;\n    align-items: center;\n  }\n\n  button{\n    width: 100%;\n    align-self: center;\n  }\n\n  @media (min-width: 768px){\n    width: 94%;\n    ul{\n      width: 100%;\n    }\n  }\n\n  @media (min-width: 1024px){\n    width: 96%;\n\n    #address_control button {\n      width: 40%;\n      margin-left: auto;\n      white-space: nowrap;\n    }\n  }\n"])), function (props) {
   var _props$theme3;
 
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      text-align: right;\n    "])));

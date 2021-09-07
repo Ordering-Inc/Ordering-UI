@@ -33,7 +33,7 @@ var _orderingComponents = require("ordering-components");
 
 var _Confirm = require("../../../../../components/Confirm");
 
-var _GoogleGpsButton = require("../../../../../components/GoogleGpsButton");
+var _GoogleGpsButton = require("../GoogleGpsButton");
 
 var _styles = require("./styles");
 
@@ -133,39 +133,34 @@ var AddressFormUI = function AddressFormUI(props) {
       addressTag = _useState4[0],
       setAddressTag = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      toggleMap = _useState6[0],
-      setToggleMap = _useState6[1];
-
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: []
   }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      alertState = _useState6[0],
+      setAlertState = _useState6[1];
+
+  var _useState7 = (0, _react.useState)((_ref = (_formState$changes$ad = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : (_addressState$address2 = addressState.address) === null || _addressState$address2 === void 0 ? void 0 : _addressState$address2.address) !== null && _ref !== void 0 ? _ref : ''),
       _useState8 = _slicedToArray(_useState7, 2),
-      alertState = _useState8[0],
-      setAlertState = _useState8[1];
+      addressValue = _useState8[0],
+      setAddressValue = _useState8[1];
 
-  var _useState9 = (0, _react.useState)((_ref = (_formState$changes$ad = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : (_addressState$address2 = addressState.address) === null || _addressState$address2 === void 0 ? void 0 : _addressState$address2.address) !== null && _ref !== void 0 ? _ref : ''),
-      _useState10 = _slicedToArray(_useState9, 2),
-      addressValue = _useState10[0],
-      setAddressValue = _useState10[1];
-
-  var _useState11 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)({
     value: null
   }),
-      _useState12 = _slicedToArray(_useState11, 2),
-      firstLocationNoEdit = _useState12[0],
-      setFirstLocationNoEdit = _useState12[1];
+      _useState10 = _slicedToArray(_useState9, 2),
+      firstLocationNoEdit = _useState10[0],
+      setFirstLocationNoEdit = _useState10[1];
 
   var isEditing = !!((_addressState$address3 = addressState.address) !== null && _addressState$address3 !== void 0 && _addressState$address3.id);
 
-  var _useState13 = (0, _react.useState)(isEditing ? addressState === null || addressState === void 0 ? void 0 : (_addressState$address4 = addressState.address) === null || _addressState$address4 === void 0 ? void 0 : _addressState$address4.location : (_formState$changes$lo = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : null),
-      _useState14 = _slicedToArray(_useState13, 2),
-      locationChange = _useState14[0],
-      setLocationChange = _useState14[1];
+  var _useState11 = (0, _react.useState)(isEditing ? addressState === null || addressState === void 0 ? void 0 : (_addressState$address4 = addressState.address) === null || _addressState$address4 === void 0 ? void 0 : _addressState$address4.location : (_formState$changes$lo = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      locationChange = _useState12[0],
+      setLocationChange = _useState12[1];
 
-  var maxLimitLocation = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.meters_to_change_address) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+  var maxLimitLocation = parseFloat(configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.meters_to_change_address) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value);
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
   var isLocationRequired = ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === '1' || ((_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.google_autocomplete_selection_required) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === 'true';
   var mapErrors = {
@@ -340,7 +335,6 @@ var AddressFormUI = function AddressFormUI(props) {
               return _context.abrupt("return");
 
             case 10:
-              setToggleMap(false);
               arrayList = isEditing ? (addressesList === null || addressesList === void 0 ? void 0 : addressesList.filter(function (address) {
                 var _addressState$address7;
 
@@ -354,20 +348,20 @@ var AddressFormUI = function AddressFormUI(props) {
               })) !== null && _arrayList$map$some2 !== void 0 ? _arrayList$map$some2 : false;
 
               if (isAddressAlreadyExist) {
-                _context.next = 17;
+                _context.next = 16;
                 break;
               }
 
               saveAddress({}, userCustomerSetup);
               return _context.abrupt("return");
 
-            case 17:
+            case 16:
               setAlertState({
                 open: true,
                 content: [t('ADDRESS_ALREADY_EXIST', 'The address already exists')]
               });
 
-            case 18:
+            case 17:
             case "end":
               return _context.stop();
           }
@@ -548,7 +542,7 @@ var AddressFormUI = function AddressFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), locationChange && toggleMap && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+  }), locationChange ? /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: googleMapsApiKey,
     location: locationChange,
     fixedLocation: !isEditing ? firstLocationNoEdit.value : null,
@@ -556,8 +550,14 @@ var AddressFormUI = function AddressFormUI(props) {
     handleChangeAddressMap: handleChangeAddress,
     setErrors: setMapErrors,
     maxLimitLocation: maxLimitLocation
+  })) : /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 250
   })), inputNames.map(function (field) {
-    var _configState$configs8, _configState$configs9, _addressState$address12, _formState$changes26, _ref9, _formState$changes$fi2, _formState$changes27, _addressState$address13, _ref10, _formState$changes$ad5, _formState$changes28;
+    var _configState$configs8, _configState$configs9, _ref9, _formState$changes$fi2, _formState$changes26, _addressState$address12, _ref10, _formState$changes$ad5, _formState$changes27;
 
     return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
@@ -593,16 +593,12 @@ var AddressFormUI = function AddressFormUI(props) {
       onError: setMapErrors,
       IconButton: _BiCurrentLocation.default,
       IconLoadingButton: _CgSearchLoading.default
-    })), ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.location)) && !toggleMap && /*#__PURE__*/_react.default.createElement(_styles.ShowMap, {
-      onClick: function onClick() {
-        return setToggleMap(!toggleMap);
-      }
-    }, t('VIEW_MAP', 'View map to modify the exact location'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       className: field.name,
       placeholder: t(field.name.toUpperCase(), field.code),
-      value: (_ref9 = (_formState$changes$fi2 = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27[field.name]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : (_addressState$address13 = addressState.address) === null || _addressState$address13 === void 0 ? void 0 : _addressState$address13[field.name]) !== null && _ref9 !== void 0 ? _ref9 : '',
+      value: (_ref9 = (_formState$changes$fi2 = (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26[field.name]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12[field.name]) !== null && _ref9 !== void 0 ? _ref9 : '',
       onChange: function onChange(e) {
         formMethods.setValue(field.name, e.target.value);
         handleChangeInput({
@@ -617,7 +613,7 @@ var AddressFormUI = function AddressFormUI(props) {
     }) : /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
       rows: 4,
       placeholder: t('ADDRESS_NOTES', 'Address Notes'),
-      value: (_ref10 = (_formState$changes$ad5 = (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',
+      value: (_ref10 = (_formState$changes$ad5 = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',
       onChange: function onChange(e) {
         formMethods.setValue('address_notes', e.target.value);
         handleChangeInput({
