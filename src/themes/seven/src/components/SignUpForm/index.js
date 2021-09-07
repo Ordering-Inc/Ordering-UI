@@ -4,6 +4,8 @@ import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../../../../../components/Confirm'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
+import MdCheckBox from '@meronex/icons/md/MdCheckBox'
+import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import {
   SignupForm as SignUpController,
   useLanguage,
@@ -25,7 +27,10 @@ import {
   FormTitle,
   FormInline,
   FormBottom,
-  AccountLogin
+  AccountLogin,
+  WrapperBirthday,
+  ConditionCheck,
+  Terms
 } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -65,6 +70,7 @@ const SignUpFormUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
+  const [conditionCheck, setConditionCheck] = useState(false)
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   // const [isSignupBusiness, setIsSignupBusiness] = useState(false)
@@ -168,6 +174,10 @@ const SignUpFormUI = (props) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
     emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+  }
+
+  const toggleSelect = () => {
+    setConditionCheck(!conditionCheck)
   }
 
   useEffect(() => {
@@ -327,6 +337,42 @@ const SignUpFormUI = (props) => {
                     </FormInline>
                   )}
 
+                  <FormInline>
+                    <WrapperBirthday>
+                      <Input
+                        type='text'
+                        name='birthday'
+                        className='form'
+                        placeholder={t('BIRTHDAY', 'dd/mm/yyyy')}
+                        onChange={handleChangeInput}
+                      />
+                    </WrapperBirthday>
+                  </FormInline>
+
+                  <ConditionCheck>
+                    <span onClick={() => toggleSelect()}>
+                      <span className='condition-checkbox'>
+                        {conditionCheck ? (
+                          <MdCheckBox />
+                        ) : (
+                          <MdCheckBoxOutlineBlank disabled />
+                        )}
+                      </span>
+                      <span className='condition-link-text'>
+                        {t('FOOTER_ARCHIES_PRIVACY_POLICY_LINK_TEXT', 'You must agree with')}
+                      </span>
+                    </span>
+                    <a href='https://tupedidostarbucks.co/pages/privacidad-starbucks' className='condition-link'>
+                      <span>
+                        {t('FOOTER_ARCHIES_PRIVACY_POLICY_LINK', 'Terms and Conditions')}
+                      </span>
+                    </a>
+                  </ConditionCheck>
+
+                  <Terms>
+                    {t('TERMS_WEB_PF', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')}
+                  </Terms>
+
                   {props.afterMidElements?.map((MidElement, i) => (
                     <React.Fragment key={i}>
                       {MidElement}
@@ -346,7 +392,7 @@ const SignUpFormUI = (props) => {
                   <Button
                     color='primary'
                     type='submit'
-                    disabled={formState.loading || validationFields?.loading}
+                    disabled={formState.loading || validationFields?.loading || !conditionCheck}
                   >
                     {formState.loading
                       ? `${t('LOADING', 'Loading')}...`

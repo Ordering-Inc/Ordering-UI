@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import {
@@ -23,7 +23,6 @@ import { capitalize } from '../../../../../utils'
 import { AddressesPopover } from '../../../../../components/AddressesPopover'
 import { MomentPopover } from '../../../../../components/MomentPopover'
 import { Modal } from '../../../../../components/Modal'
-import { MomentContent } from '../../../../../components/MomentContent'
 import { UserDetails } from '../../../../../components/UserDetails'
 import { Confirm } from '../../../../../components/Confirm'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
@@ -35,6 +34,7 @@ import { CartContent } from '../CartContent'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
 import { SidebarMenu } from '../SidebarMenu'
+import { MomentContent } from '../MomentContent'
 
 export const Header = (props) => {
   const {
@@ -65,7 +65,7 @@ export const Header = (props) => {
   const onlineStatus = useOnlineStatus()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
-
+  // const configTypes = [1, 2, 3]
   const openModal = (opt) => {
     setModalSelected(opt)
     setModalIsOpen(true)
@@ -110,6 +110,11 @@ export const Header = (props) => {
     }
   }, [customerState?.user?.address])
 
+  const history = useHistory()
+  const handleGotoHome = () => {
+    history.push('/home')
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -128,7 +133,7 @@ export const Header = (props) => {
               isCustomerMode={isCustomerMode}
             />
             <LogoHeader
-              onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+              onClick={() => handleGotoHome()}
             >
               <img alt='Logotype' src={theme?.images?.logos?.logotype} loading='lazy' />
               <img alt='Isotype' width='35px' height='45px' src={theme?.images?.logos?.isotype} loading='lazy' />
@@ -157,14 +162,12 @@ export const Header = (props) => {
                 )}
               </>
             )}
-            {windowSize.width > 850 && (
-              <OrderTypes>
-                <OrderTypeSelectorHeader
-                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
-                />
-              </OrderTypes>
-            )}
+            <OrderTypes>
+              <OrderTypeSelectorHeader
+                configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
+                defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+              />
+            </OrderTypes>
           </CenterHeader>
           {onlineStatus && (
             <RightHeader>

@@ -16,20 +16,26 @@ import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
 import { Footer } from './src/components/Footer'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
+import { GoogleGpsButton } from './src/components/GoogleGpsButton'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
 import { HomeHero } from './src/components/HomeHero'
+import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LanguageSelector } from './src/components/LanguageSelector'
 import { LoginForm } from './src/components/LoginForm'
+import { MomentContent } from './src/components/MomentContent'
+import { MomentControl } from './src/components/MomentControl'
 import { MyOrders } from './src/components/MyOrders'
 import { OrderDetails } from './src/components/OrderDetails'
+import { OrdersOption } from './src/components/OrdersOption'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { ProductShare } from './src/components/ProductShare'
+import { ReviewOrder } from './src/components/ReviewOrder'
 import { SearchBar } from './src/components/SearchBar'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
@@ -38,6 +44,8 @@ import { UserDetails } from './src/components/UserDetails'
 import { UserFormDetails } from './src/components/UserFormDetails'
 import { UserPopover } from './src/components/UserPopover'
 import { UserProfileForm } from './src/components/UserProfileForm'
+import { VerticalOrdersLayout } from './src/components/VerticalOrdersLayout'
+
 import { Buttons } from './src/styles/Buttons'
 import { Inputs } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
@@ -63,20 +71,26 @@ export {
   DriverTips,
   Footer,
   ForgotPasswordForm,
+  GoogleGpsButton,
   Header,
   HeaderOption,
   HomeHero,
+  HorizontalOrdersLayout,
   InputPhoneNumber,
   LanguageSelector,
   LoginForm,
+  MomentContent,
+  MomentControl,
   MyOrders,
   OrderDetails,
+  OrdersOption,
   OrderTypeSelectorHeader,
   PaymentOptionCash,
   PaymentOptions,
   ProductForm,
   ProductItemAccordion,
   ProductShare,
+  ReviewOrder,
   SearchBar,
   SidebarMenu,
   SignUpForm,
@@ -85,6 +99,7 @@ export {
   UserFormDetails,
   UserPopover,
   UserProfileForm,
+  VerticalOrdersLayout,
   // styles
   Buttons,
   Inputs,

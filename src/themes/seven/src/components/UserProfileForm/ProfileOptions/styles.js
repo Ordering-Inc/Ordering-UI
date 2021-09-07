@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
 export const FlexTabs = styled.div`
-  width: 100%;
+  width: 96%;
+  margin: 0 auto;
   div{
-    justify-content: space-evenly
+    justify-content: space-evenly;
   }
   
   a{
@@ -16,12 +17,16 @@ export const FlexTabs = styled.div`
     top: 2px;
   }
 
-  @media (min-width: 480px){
+  /* @media (min-width: 480px){
     width: 70%;
     margin: 0 auto;
-  }
+  } */
 
   @media (min-width: 768px){
-    width: 50%;
+    width: 94%;
+    margin-bottom: 15px;
+    div{
+      justify-content: flex-start;
+    }
   }
 `

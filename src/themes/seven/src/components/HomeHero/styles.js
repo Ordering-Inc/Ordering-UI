@@ -13,8 +13,13 @@ export const HeroContainerStyled = styled.div`
   `}
 
   @media (min-width: 768px) {
+    height: 55vw;
     max-height: 55vw;
     overflow: hidden;
+  }
+
+  @media (min-width: 1200px) {
+    height: 65.562132vh;
   }
 `
 
@@ -78,10 +83,15 @@ export const Title = styled.h1`
 
   @media (min-width: 768px) {
     font-size: 48px;
+    margin-bottom: 1vw;
   }
 
   @media (min-width: 1024px) {
-    font-size: 40px;
+    font-size: 5vw;
+  }
+
+  @media (min-width: 1450px) {
+    font-size: 66px;
   }
 
 `
@@ -104,70 +114,79 @@ export const Slogan = styled.p`
   }
 
   @media (min-width: 1024px) {
+    font-size: 2vw;
+  }
+
+  @media (min-width: 1450px) {
     font-size: 24px;
   }
 `
 
-export const WrapInput = styled.label`
-  position: relative;
-  cursor: pointer;
-
-  ${({ withIcon }) => withIcon && css`
-    width: calc(100% - 20px);
-    box-sizing: border-box;
-
-    &::before {
-      content: "";
-      position: absolute;
-      right: 5px;
-      top: 0;
-      bottom: 18px;
-      width: 15px;
-
-      ${props => props.theme?.rtl && css`
-        left: 5px;
-        right: initial;
-     `}
-    }
-
-    @media (min-width: 1024px) {
-      width: calc(50% - 20px);
-    }
-  `}
-  
+export const WrapOrderyType = styled.div`
+  display: flex;
+  border: 1px inset ${props => props.theme.colors.borderColor};
+  border-radius: 4.6px;
+  padding: 1px;
+  box-sizing: border-box;
+  width: fit-content;
+  background-color: #fff;
 `
-
-export const AddressInput = styled.div`
+export const OrderTypeItem = styled.div`
   position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
-  color: #212629;
-  outline: none;
-  font-size: .86rem;
-  line-height: 26px;
+  width: 100px;
+  height: 40px;
   padding: 6px 12px;
-  background: #FAFAFA;
-  border: 1px solid #DDDDDD;
   box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.primaryContrast};
 
-  button {
+  &:before {
+    background-color: initial;
+    background-image: linear-gradient(#fff 0,rgba(255,255,255,0) 100%);
+    border-radius: 2px;
+    content: "";
+    height: 47%;
+    left: 1%;
+    opacity: .5;
     position: absolute;
-    right: -1px;
-    top: -1px;
-    font-size: .86rem;
-    line-height: 26px;
-    padding: 6px 12px;
-    @media (min-width: 1200px) {
-      padding: 11px 19px;
-      font-size: 1rem;
-    }
+    top: 1%;
+    transition: all .3;
+    width: 98%;
   }
 
+  &:after {
 
-  @media (min-width: 1200px) {
-    padding: 11px 19px;
-    font-size: 1rem;
+  }
+  
+  &:first-child {
+    border-radius: 4px 0px 0px 4px;
+  }
+  &:nth-child(2){
+    background-color: ${props => props.theme.colors.secundary};
+    color: ${props => props.theme.colors.secundaryContrast};
+    border-radius: 0px 4px 4px 0px;
   }
 
+  @media (min-width: 768px) {
+    font-size: 18px;
+    width: 120px;
+    height: 45px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 12vw;
+    height: 4vw;
+  }
+
+  @media (min-width: 1450px) {
+    width: 140px;
+    height: 45px;
+  }
   
 `

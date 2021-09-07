@@ -11,27 +11,16 @@ import {
   WrapperBusinessCard,
   BusinessHero,
   BusinessHeader,
-  WrapperBusinessLogo,
   BusinessTags,
   BusinessContent,
-  BusinessLogo,
   BusinessInfo,
   BusinessInfoItem,
   BusinessName,
-  Categories,
-  Medadata,
-  CallCenterInformation,
-  CallCenterInformationBullet,
   BuinessMeta,
   MetaItem
 } from './styles'
-import GrClock from '@meronex/icons/gr/GrClock'
-import GrDeliver from '@meronex/icons/gr/GrDeliver'
-import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrStar from '@meronex/icons/gr/GrStar'
 import FaCrown from '@meronex/icons/fa/FaCrown'
-import BiCar from '@meronex/icons/bi/BiCar'
-import BiBasket from '@meronex/icons/bi/BiBasket'
 import { Button } from '../../styles/Buttons'
 
 const BusinessControllerUI = (props) => {
@@ -40,31 +29,17 @@ const BusinessControllerUI = (props) => {
     business,
     getBusinessOffer,
     handleClick,
-    orderType,
     isCustomLayout,
-    isShowCallcenterInformation,
     isBusinessOpen,
     businessWillCloseSoonMinutes,
-    isBusinessClose
+    isBusinessClose,
+    isPickup
   } = props
-
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
-
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-
-  const types = ['food', 'alcohol', 'groceries', 'laundry']
-
-  const businessType = () => {
-    if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
-    const _types = []
-    types.forEach(type => business[type] && _types.push(
-      t(`BUSINESS_TYPE_${type?.replace(/\s/g, '_')?.toUpperCase()}`, type)
-    ))
-    return _types.join(', ')
-  }
 
   const handleShowAlert = () => {
     setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
@@ -78,7 +53,7 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton} className='test-mark'>
+      <ContainerCard isSkeleton={isSkeleton} isPickup={isPickup}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}>
           <BusinessHero>
             {isSkeleton ? (
