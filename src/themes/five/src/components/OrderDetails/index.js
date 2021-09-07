@@ -187,9 +187,17 @@ const OrderDetailsUI = (props) => {
                 </p>
                 <ReviewOrderLink
                   className='Review-order'
-                  active={order?.status === 1}
+                  active={(
+                    parseInt(order?.status) === 1 ||
+                    parseInt(order?.status) === 2 ||
+                    parseInt(order?.status) === 5 ||
+                    parseInt(order?.status) === 6 ||
+                    parseInt(order?.status) === 10 ||
+                    parseInt(order?.status) === 11 ||
+                    parseInt(order?.status) === 12
+                  ) && !order.review && !isReviewed}
                 >
-                  {t('REVIEW_ORDER', 'Review order')}
+                  <span onClick={() => setOpenReview(true)}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review Order')}</span>
                 </ReviewOrderLink>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
