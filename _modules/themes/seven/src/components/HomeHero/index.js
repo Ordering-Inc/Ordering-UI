@@ -5,15 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HomeHero = void 0;
+exports.ArchiesOrderTypes = exports.HomeHero = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = require("styled-components");
 
 var _orderingComponents = require("ordering-components");
-
-var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
 
 var _styles = require("./styles");
 
@@ -22,10 +20,6 @@ var _Modal = require("../../../../../components/Modal");
 var _AddressForm = require("../AddressForm");
 
 var _AddressList = require("../AddressList");
-
-var _Buttons = require("../../styles/Buttons");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -52,9 +46,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options2, _orderState$options2$, _theme$defaultLanguag3, _theme$defaultLanguag4, _orderState$options3, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options2, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
 
   var onFindBusiness = props.onFindBusiness;
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -78,6 +76,9 @@ var HomeHero = function HomeHero(props) {
 
   var theme = (0, _styledComponents.useTheme)();
   var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
+  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
+    return Number(value);
+  })) || []; // const configTypes = [1, 2, 3]
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -126,19 +127,12 @@ var HomeHero = function HomeHero(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
-    onClick: handleAddressInput,
-    withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_styles.AddressInput, {
-    name: "address-selection",
-    "aria-label": "address selection",
-    type: "text"
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_AN_ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.TYPE_AN_ADDRESS) || 'Type an address'), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    name: "find-business",
-    onClick: handleFindBusinesses
-  }, t('FIND', 'Find'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.ADDRESS) || 'Address'),
+  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(ArchiesOrderTypes, {
+    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
+    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1,
+    handleAddressInput: handleAddressInput
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ADDRESS) || 'Address'),
     open: modals.formOpen,
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -147,7 +141,7 @@ var HomeHero = function HomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
@@ -164,7 +158,7 @@ var HomeHero = function HomeHero(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.ADDRESSES) || 'Addresses'),
+    title: t('ADDRESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.ADDRESSES) || 'Addresses'),
     open: modals.listOpen,
     width: "70%",
     onClose: function onClose() {
@@ -196,3 +190,50 @@ var HomeHero = function HomeHero(props) {
 };
 
 exports.HomeHero = HomeHero;
+
+var ArchiesOrderTypeUI = function ArchiesOrderTypeUI(props) {
+  var handleChangeOrderType = props.handleChangeOrderType,
+      configTypes = props.configTypes,
+      orderTypes = props.orderTypes,
+      handleAddressInput = props.handleAddressInput;
+
+  var handleOrderType = function handleOrderType(orderType) {
+    if (configTypes && configTypes.includes(orderType.value)) {
+      handleChangeOrderType(orderType.value);
+    }
+
+    handleAddressInput(); // if (orderType.value === configTypes[0]) {
+    //   handleAddressInput()
+    // }
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles.WrapOrderyType, null, orderTypes && orderTypes.map(function (orderType) {
+    return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
+      key: orderType.value,
+      onClick: function onClick() {
+        return handleOrderType(orderType);
+      }
+    }, orderType.content);
+  }));
+};
+
+var ArchiesOrderTypes = function ArchiesOrderTypes(props) {
+  var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
+  var orderTypeProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: ArchiesOrderTypeUI,
+    orderTypes: props.orderTypes || [{
+      value: 1,
+      content: /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY', 'Delivery'))
+    }, {
+      value: 2,
+      content: /*#__PURE__*/_react.default.createElement("span", null, t('PICKUP', 'Pickup'))
+    }]
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderTypeControl, orderTypeProps);
+};
+
+exports.ArchiesOrderTypes = ArchiesOrderTypes;

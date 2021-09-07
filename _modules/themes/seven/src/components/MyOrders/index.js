@@ -11,7 +11,7 @@ var _styles = require("./styles");
 
 var _ProfileOptions = require("../UserProfileForm/ProfileOptions");
 
-var _OrdersOption = require("../../../../../components/OrdersOption");
+var _OrdersOption = require("../OrdersOption");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

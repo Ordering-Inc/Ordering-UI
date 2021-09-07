@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 48px;\n  height: 48px;\n  border: 1px solid ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-right: 20px;\n  ", "\n\n  svg {\n    color: ", ";\n    height: 25px;\n    width: 25px;\n  }\n\n  img {\n    width: 35px;\n    height: 35px;\n    margin: 0;\n  }\n"])), function (props) {
+var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 40px;\n  height: 40px;\n  border: 1px solid ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-right: 20px;\n  ", "\n\n  svg {\n    color: ", ";\n    height: 25px;\n    width: 25px;\n  }\n\n  img {\n    width: 30px;\n    height: 30px;\n    margin: 0;\n  }\n\n  @media (min-width: 1200px) {\n    width: 48px;\n    height: 48px;\n    img {\n    width: 35px;\n    height: 35px;\n  }\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;

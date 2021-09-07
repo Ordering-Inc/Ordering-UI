@@ -29,7 +29,7 @@ var Tabs = _styledComponents.default.div(_templateObject || (_templateObject = _
   });
 }, function (_ref3) {
   var isVerticalList = _ref3.isVerticalList;
-  return isVerticalList && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    flex-direction: column;\n    width: 100%;\n    padding: 0 15px;\n    box-sizing: border-box;\n    border-bottom: 2px solid ", ";\n    @media (min-width: 768px) {\n      justify-content: flex-start;\n      padding-right: 0;\n      padding-left: 10%;\n      ", "\n      border-bottom: none;\n    }\n    @media (min-width: 1024px) {\n      padding-right: 0;\n      padding-left: 15%;\n      ", "\n    }\n  "])), function (props) {
+  return isVerticalList && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    padding: 0 15px;\n    box-sizing: border-box;\n    border-bottom: 2px solid ", ";\n    margin-bottom: 25px;\n    @media (min-width: 768px) {\n      justify-content: flex-start;\n      padding-right: 0;\n      padding-left: 10%;\n      ", "\n      border-bottom: none;\n    }\n    @media (min-width: 1024px) {\n      padding-right: 0;\n      padding-left: 15%;\n      ", "\n    }\n  "])), function (props) {
     return props.theme.colors.borderColor;
   }, function (props) {
     var _props$theme;

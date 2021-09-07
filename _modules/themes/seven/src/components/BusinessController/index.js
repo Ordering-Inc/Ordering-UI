@@ -21,19 +21,9 @@ var _utils = require("../../../../../utils");
 
 var _styles = require("./styles");
 
-var _GrClock = _interopRequireDefault(require("@meronex/icons/gr/GrClock"));
-
-var _GrDeliver = _interopRequireDefault(require("@meronex/icons/gr/GrDeliver"));
-
-var _GrLocation = _interopRequireDefault(require("@meronex/icons/gr/GrLocation"));
-
 var _GrStar = _interopRequireDefault(require("@meronex/icons/gr/GrStar"));
 
 var _FaCrown = _interopRequireDefault(require("@meronex/icons/fa/FaCrown"));
-
-var _BiCar = _interopRequireDefault(require("@meronex/icons/bi/BiCar"));
-
-var _BiBasket = _interopRequireDefault(require("@meronex/icons/bi/BiBasket"));
 
 var _Buttons = require("../../styles/Buttons");
 
@@ -70,12 +60,11 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       business = props.business,
       getBusinessOffer = props.getBusinessOffer,
       handleClick = props.handleClick,
-      orderType = props.orderType,
       isCustomLayout = props.isCustomLayout,
-      isShowCallcenterInformation = props.isShowCallcenterInformation,
       isBusinessOpen = props.isBusinessOpen,
       businessWillCloseSoonMinutes = props.businessWillCloseSoonMinutes,
-      isBusinessClose = props.isBusinessClose;
+      isBusinessClose = props.isBusinessClose,
+      isPickup = props.isPickup;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -101,19 +90,6 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var types = ['food', 'alcohol', 'groceries', 'laundry'];
-
-  var businessType = function businessType() {
-    if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
-    var _types = [];
-    types.forEach(function (type) {
-      var _type$replace;
-
-      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
-    });
-    return _types.join(', ');
-  };
-
   var handleShowAlert = function handleShowAlert() {
     setAlertState({
       open: true,
@@ -131,7 +107,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ContainerCard, {
     isSkeleton: isSkeleton,
-    className: "test-mark"
+    isPickup: isPickup
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
     isSkeleton: isSkeleton,
     onClick: function onClick() {

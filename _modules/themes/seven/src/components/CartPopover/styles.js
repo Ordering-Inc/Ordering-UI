@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 86px;\n  height: 48px;\n  background-color: ", ";\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  color: #fff;\n  span {\n    font-weight: bold;\n    font-size: 16px;\n    line-height: 26px;\n    margin: 0;\n  }\n  svg {\n    font-size: 24px;\n    margin-right: 10px;\n    ", "\n\n    path {\n      fill: #fff;\n    }\n  }\n"])), function (props) {
+var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 86px;\n  height: 40px;\n  background-color: ", ";\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  color: #fff;\n  span {\n    font-weight: bold;\n    font-size: 16px;\n    line-height: 26px;\n    margin: 0;\n  }\n  svg {\n    font-size: 24px;\n    margin-right: 10px;\n    ", "\n\n    path {\n      fill: #fff;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    height: 48px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;

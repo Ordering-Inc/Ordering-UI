@@ -29,7 +29,7 @@ var _Modal = require("../../../../../components/Modal");
 
 var _Messages = require("../../../../../components/Messages");
 
-var _ReviewOrder = require("../../../../../components/ReviewOrder");
+var _ReviewOrder = require("../ReviewOrder");
 
 var _Buttons = require("../../styles/Buttons");
 

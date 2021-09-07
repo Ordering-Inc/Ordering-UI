@@ -51,7 +51,7 @@ var SkeletonItem = _styledComponents.default.div(_templateObject8 || (_templateO
 
 exports.SkeletonItem = SkeletonItem;
 
-var WrappLayout = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  @media (min-width: 768px) {\n    display: flex;\n    width: 100vw;\n  }\n\n  ", "\n"])), function (_ref) {
+var WrappLayout = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  @media (min-width: 768px) {\n    display: flex;\n    width: 100vw;\n    min-height: 60vh;\n  }\n\n  ", "\n"])), function (_ref) {
   var isCartOnProductsList = _ref.isCartOnProductsList;
   return isCartOnProductsList && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n\n    .bp-list,\n    .cart {\n      width: 100%;\n    }\n\n    @media (min-width: 870px) {\n      flex-direction: row;\n      .bp-list {\n        width: 55%;\n      }\n      .cart {\n        width: calc(45% - 20px);\n        margin-left: 20px;\n      }\n    }\n\n    @media (min-width: 1024px) {\n      .bp-list {\n        width: 60%;\n      }\n      .cart {\n        width: calc(40% - 20px);\n      }\n    }  \n\n    @media (min-width: 1200px) {\n      .bp-list {\n        width: 70%;\n      }\n      .cart {\n        width: calc(30% - 20px);\n      }\n    }  \n  "])));
 });

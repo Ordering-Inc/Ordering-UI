@@ -334,7 +334,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: handleSearchRedirect
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "50%",
+    width: "60%",
     open: openProduct,
     closeOnBackdrop: true,
     onClose: function onClose() {

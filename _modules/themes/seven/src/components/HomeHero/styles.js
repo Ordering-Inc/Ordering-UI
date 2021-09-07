@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddressInput = exports.WrapInput = exports.Slogan = exports.Title = exports.ContentWrapper = exports.HeroContainer = exports.HeroContainerStyled = void 0;
+exports.OrderTypeItem = exports.WrapOrderyType = exports.Slogan = exports.Title = exports.ContentWrapper = exports.HeroContainer = exports.HeroContainerStyled = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 43.562132vh;\n\n  ", "\n\n  @media (min-width: 768px) {\n    max-height: 55vw;\n    overflow: hidden;\n  }\n"])), function (_ref) {
+var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 43.562132vh;\n\n  ", "\n\n  @media (min-width: 768px) {\n    height: 55vw;\n    max-height: 55vw;\n    overflow: hidden;\n  }\n\n  @media (min-width: 1200px) {\n    height: 65.562132vh;\n  }\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 });
@@ -54,7 +54,7 @@ var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templat
 
 exports.ContentWrapper = ContentWrapper;
 
-var Title = _styledComponents.default.h1(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  text-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 48px;\n  ", "\n\n  @media (min-width: 768px) {\n    font-size: 48px;\n  }\n\n  @media (min-width: 1024px) {\n    font-size: 40px;\n  }\n\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  text-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 48px;\n  ", "\n\n  @media (min-width: 768px) {\n    font-size: 48px;\n    margin-bottom: 1vw;\n  }\n\n  @media (min-width: 1024px) {\n    font-size: 5vw;\n  }\n\n  @media (min-width: 1450px) {\n    font-size: 66px;\n  }\n\n"])), function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      text-align: right;\n  "])));
@@ -62,7 +62,7 @@ var Title = _styledComponents.default.h1(_templateObject5 || (_templateObject5 =
 
 exports.Title = Title;
 
-var Slogan = _styledComponents.default.p(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-size: 22px;\n  line-height: 34px;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  opacity: 1;\n  margin-bottom: 15px;\n  ", "\n\n  @media (min-width: 768px) {\n    font-size: 23px;\n  }\n\n  @media (min-width: 1024px) {\n    font-size: 24px;\n  }\n"])), function (props) {
+var Slogan = _styledComponents.default.p(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-size: 22px;\n  line-height: 34px;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  opacity: 1;\n  margin-bottom: 15px;\n  ", "\n\n  @media (min-width: 768px) {\n    font-size: 23px;\n  }\n\n  @media (min-width: 1024px) {\n    font-size: 2vw;\n  }\n\n  @media (min-width: 1450px) {\n    font-size: 24px;\n  }\n"])), function (props) {
   var _props$theme3;
 
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      text-align: right;\n  "])));
@@ -70,17 +70,20 @@ var Slogan = _styledComponents.default.p(_templateObject7 || (_templateObject7 =
 
 exports.Slogan = Slogan;
 
-var WrapInput = _styledComponents.default.label(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n\n  ", "\n  \n"])), function (_ref2) {
-  var withIcon = _ref2.withIcon;
-  return withIcon && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    width: calc(100% - 20px);\n    box-sizing: border-box;\n\n    &::before {\n      content: \"\";\n      position: absolute;\n      right: 5px;\n      top: 0;\n      bottom: 18px;\n      width: 15px;\n\n      ", "\n    }\n\n    @media (min-width: 1024px) {\n      width: calc(50% - 20px);\n    }\n  "])), function (props) {
-    var _props$theme4;
-
-    return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        left: 5px;\n        right: initial;\n     "])));
-  });
+var WrapOrderyType = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  border: 1px inset ", ";\n  border-radius: 4.6px;\n  padding: 1px;\n  box-sizing: border-box;\n  width: fit-content;\n  background-color: #fff;\n"])), function (props) {
+  return props.theme.colors.borderColor;
 });
 
-exports.WrapInput = WrapInput;
+exports.WrapOrderyType = WrapOrderyType;
 
-var AddressInput = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  color: #212629;\n  outline: none;\n  font-size: .86rem;\n  line-height: 26px;\n  padding: 6px 12px;\n  background: #FAFAFA;\n  border: 1px solid #DDDDDD;\n  box-sizing: border-box;\n\n  button {\n    position: absolute;\n    right: -1px;\n    top: -1px;\n    font-size: .86rem;\n    line-height: 26px;\n    padding: 6px 12px;\n    @media (min-width: 1200px) {\n      padding: 11px 19px;\n      font-size: 1rem;\n    }\n  }\n\n\n  @media (min-width: 1200px) {\n    padding: 11px 19px;\n    font-size: 1rem;\n  }\n\n  \n"])));
+var OrderTypeItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100px;\n  height: 40px;\n  padding: 6px 12px;\n  box-sizing: border-box;\n  cursor: pointer;\n  font-size: 16px;\n  font-weight: 500;\n  background-color: ", ";\n  color: ", ";\n\n  &:before {\n    background-color: initial;\n    background-image: linear-gradient(#fff 0,rgba(255,255,255,0) 100%);\n    border-radius: 2px;\n    content: \"\";\n    height: 47%;\n    left: 1%;\n    opacity: .5;\n    position: absolute;\n    top: 1%;\n    transition: all .3;\n    width: 98%;\n  }\n\n  &:after {\n\n  }\n  \n  &:first-child {\n    border-radius: 4px 0px 0px 4px;\n  }\n  &:nth-child(2){\n    background-color: ", ";\n    color: ", ";\n    border-radius: 0px 4px 4px 0px;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 18px;\n    width: 120px;\n    height: 45px;\n  }\n\n  @media (min-width: 1024px) {\n    width: 12vw;\n    height: 4vw;\n  }\n\n  @media (min-width: 1450px) {\n    width: 140px;\n    height: 45px;\n  }\n  \n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.colors.primaryContrast;
+}, function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.secundaryContrast;
+});
 
-exports.AddressInput = AddressInput;
+exports.OrderTypeItem = OrderTypeItem;
