@@ -36,7 +36,6 @@ export const Image = styled.div`
   width: 170px;
   height: 170px;
   border: 2px solid ${props => props.theme.colors.primary};
-  border-radius: 100%;
   overflow: hidden;
   padding: 20px;
   background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};
@@ -136,6 +135,7 @@ export const SavedPlaces = styled.div`
   margin-bottom: 20px;
 
 
+
   h1{
     font-size: 20px;
     margin: 0;
@@ -159,11 +159,9 @@ export const SavedPlaces = styled.div`
   }
 
   @media (min-width: 768px){
+    width: 94%;
     ul{
       width: 100%;
-    }
-    button {
-      width: 65%;
     }
   }
 

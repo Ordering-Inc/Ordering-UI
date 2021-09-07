@@ -89,6 +89,7 @@ export const FormInput = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 
   input {
     height: 38px;
@@ -127,7 +128,6 @@ export const RedirectLink = styled.div`
 
 export const SocialButtons = styled.div`
    width: 100%;
-   margin-top: 10px;
 
   button {
     display: flex;
@@ -170,7 +170,6 @@ export const SocialButtons = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 40px;
   }
 `
 
@@ -350,7 +349,6 @@ export const FormBottom = styled.div`
   border-left: none;
   border-right: none;
   align-items: center;
-  margin-top: 25px;
 `
 
 export const CreateAccount = styled.div`
