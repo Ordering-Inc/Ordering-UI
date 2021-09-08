@@ -17,6 +17,7 @@ import { FacebookLoginButton } from './src/components/FacebookLogin'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
+import { Help } from './src/components/Help'
 import { HomeHero } from './src/components/HomeHero'
 import { LanguageSelector } from './src/components/LanguageSelector'
 import { LoginForm } from './src/components/LoginForm'
@@ -67,6 +68,7 @@ export {
   ForgotPasswordForm,
   Header,
   HeaderOption,
+  Help,
   HomeHero,
   LanguageSelector,
   LoginForm,
