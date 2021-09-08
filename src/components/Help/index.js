@@ -16,7 +16,7 @@ import {
   OrderInfoBlock,
   SubTitle
 } from './styles'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 
 const HelpUI = (props) => {
   const {
@@ -163,7 +163,7 @@ const HelpUI = (props) => {
                               )}
                               {(orderList?.orders[0]?.delivery_datetime_utc || orderList?.orders[0]?.delivery_datetime) && (
                                 <p>
-                                  <span>{t('TUTORIAL_ORDER_COMPLETED', 'Order Completed')} {('ON', 'on')} </span>
+                                  <span>{t('TUTORIAL_ORDER_COMPLETED', 'Order Completed')} </span>
                                   {orderList?.orders[0]?.delivery_datetime_utc
                                     ? parseDate(orderList?.orders[0]?.delivery_datetime_utc, { outputFormat: 'MMM DD, YY - hh:mm A' })
                                     : parseDate(orderList?.orders[0]?.delivery_datetime, { utc: false })}
