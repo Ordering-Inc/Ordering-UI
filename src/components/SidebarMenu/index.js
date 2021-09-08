@@ -190,36 +190,6 @@ export const SidebarMenu = (props) => {
                   </MenuLinkSeparator>
                 </WrappContent>
               </MenuLink>
-              <MenuLink
-                isHome={isHome}
-                onClick={() => handleGoToPage({ page: 'help' })}
-              >
-                <WrappContent>
-                  <MenuLinkIcon
-                    isHome={isHome}
-                    active={
-                      window.location.pathname === '/help'
-                    }
-                  >
-                    <BiHelpCircle />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
-                      isHome={isHome}
-                      active={
-                        window.location.pathname === '/help'
-                      }
-                    >
-                      {t('HELP', 'help')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
               {
                 !isCustomerMode && (
                   <MenuLink
@@ -254,6 +224,36 @@ export const SidebarMenu = (props) => {
                   </MenuLink>
                 )
               }
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: 'help' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    isHome={isHome}
+                    active={
+                      window.location.pathname === '/help'
+                    }
+                  >
+                    <BiHelpCircle />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/help'
+                      }
+                    >
+                      {t('HELP', 'help')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
 
               <LogoutButton onCustomClick={() => actionSidebar(false)} />
             </>
