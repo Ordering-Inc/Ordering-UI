@@ -1,10 +1,60 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useApi, useSession } from 'ordering-components'
 
 export const Help = (props) => {
   const {
-    UIComponent
+    UIComponent,
+    asDashboard,
+    orderStatus
   } = props
+
+  const [ordering] = useApi()
+  const [session] = useSession()
+  const [orderState, setOrderState] = useState({ loading: false, error: null, order: {} })
+  const requestsState = {}
+
+  /**
+   * Function to get last order from API
+   */
+  const getLastOrder = async () => {
+    try {
+      setOrderState({
+        ...orderState,
+        loading: true
+      })
+      const options = {
+        query: {
+          orderBy: '-id',
+          limit: 1
+        }
+      }
+      if (orderStatus) {
+        options.query.where = []
+        options.query.where.push({ attribute: 'status', value: orderStatus })
+      }
+      const source = {}
+      requestsState.orders = source
+      options.cancelToken = source
+      const functionFetch = asDashboard
+        ? ordering.setAccessToken(session.token).orders().asDashboard()
+        : ordering.setAccessToken(session.token).orders()
+      const response = await functionFetch.get(options)
+      setOrderState({
+        loading: false,
+        order: response.content.error ? {} : response.content.result[0],
+        error: response.content.error ? response.content.result : null
+      })
+    } catch (err) {
+      if (err.constructor.name !== 'Cancel') {
+        setOrderState({ ...orderState, loading: false, error: [err.message] })
+      }
+    }
+  }
+
+  useEffect(() => {
+    getLastOrder()
+  }, [])
 
   return (
     <>
@@ -12,6 +62,7 @@ export const Help = (props) => {
         UIComponent && (
           <UIComponent
             {...props}
+            orderState={orderState}
           />
         )
       }

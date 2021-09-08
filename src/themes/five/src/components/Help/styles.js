@@ -15,13 +15,26 @@ export const HelpContainer = styled.div`
 
 export const BreadCrumbContainer = styled.div`
   margin-bottom: 23px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 13px;
+    color: #909BA9;
+    margin: 0 7px;
+
+    ${props => props.theme?.rtl && css`
+      transform: rotateZ(180deg);
+    `}
+  }
 
   span {
     font-size: 12px;
-    color: #909BA9;
+    color: #344050;
 
-    &.active {
-      color: #344050;
+    &.deactive {
+      color: #909BA9;
+      cursor: pointer;
     }
   }
 `
@@ -60,6 +73,8 @@ export const SubPage = styled.div`
 `
 
 export const OrdersInfoWrapper = styled.div`
+  margin-bottom: 100px;
+
   h2 {
     font-weight: 500;
     font-size: 20px;
@@ -81,7 +96,7 @@ const BusinessHeaderStyled = styled.div`
   background-position: center;
   min-height: 145px;
   align-items: center;
-  border-radius: 7.6px 7.6px 0px 0px;
+  border-radius: 7.6px;
 
   h1 {
     color: #FFF;
@@ -89,7 +104,11 @@ const BusinessHeaderStyled = styled.div`
   }
 
   @media (min-width: 481px) {
-    min-height: 150px;
+    height: 150px;
+  }
+
+  @media (min-width: 1200px) {
+    height: 170px;
   }
 `
 
