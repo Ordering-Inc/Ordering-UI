@@ -8,6 +8,7 @@ import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
 import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
 import MdcMenuRightOutline from '@meronex/icons/mdc/MdcMenuRightOutline'
+import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
 import { capitalize } from '../../utils'
 
 const IconOption = ({ value }) => {
@@ -18,6 +19,9 @@ const IconOption = ({ value }) => {
     case 'orders':
       return <FaRegListAlt />
 
+    case 'help':
+      return <BiHelpCircle />
+
     default:
       return <MdcMenuRightOutline />
   }
@@ -25,7 +29,8 @@ const IconOption = ({ value }) => {
 
 const optionsDefault = [
   { name: 'profile', pathname: '/profile' },
-  { name: 'orders', pathname: '/profile/orders' }
+  { name: 'orders', pathname: '/profile/orders' },
+  { name: 'help', pathname: '/help' }
 ]
 
 export const UserPopover = (props) => {
