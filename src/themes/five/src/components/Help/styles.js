@@ -7,6 +7,7 @@ export const HelpContainer = styled.div`
   margin-right: auto;
   padding: 15px;
   box-sizing: border-box;
+  min-height: calc(100vh - 310px);
 
   @media (min-width: 769px) {
     width: 70%;
@@ -73,7 +74,7 @@ export const SubPage = styled.div`
 `
 
 export const OrdersInfoWrapper = styled.div`
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 
   h2 {
     font-weight: 500;
