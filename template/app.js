@@ -8,8 +8,6 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
-// import { Header } from '../src/themes/five/src/components/Header'
-// import { Footer } from '../src/themes/two/src/components/Footer'
 import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
