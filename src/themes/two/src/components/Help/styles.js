@@ -4,7 +4,7 @@ export const HelpContainer = styled.div`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: 15px;
+  padding: 30px 15px 15px 15px;
   box-sizing: border-box;
   min-height: calc(100vh - 280px);
 
