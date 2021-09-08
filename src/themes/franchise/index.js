@@ -24,6 +24,7 @@ import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { GoogleLogin } from './src/components/GoogleLogin'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
+import { Help } from './src/components/Help'
 import { HomeHero } from './src/components/HomeHero'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
@@ -84,6 +85,7 @@ export {
   GoogleLogin,
   Header,
   HeaderOption,
+  Help,
   HomeHero,
   HorizontalOrdersLayout,
   InputPhoneNumber,

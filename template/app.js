@@ -8,10 +8,10 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
-import { Header } from '../src/themes/five/src/components/Header'
-import { Footer } from '../src/themes/five/src/components/Footer'
+import { Header } from '../src/themes/two/src/components/Header'
+// import { Footer } from '../src/themes/two/src/components/Footer'
 // import { Header } from '../src/components/Header'
-// import { Footer } from '../src/components/Footer'
+import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
