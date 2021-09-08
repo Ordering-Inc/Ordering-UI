@@ -72,8 +72,8 @@ export const Help = (props) => {
           )
         }
         {selectedPage?.id === 1 && <HelpStaticPage slug='helpOrder' />}
-        {selectedPage?.id === 2 && <HelpStaticPage slug='orderingHome' />}
-        {selectedPage?.id === 3 && <HelpStaticPage slug='homeInstacart' />}
+        {selectedPage?.id === 2 && <HelpStaticPage slug='helpAccountAndPayment' />}
+        {selectedPage?.id === 3 && <HelpStaticPage slug='helpOrderingGuide' />}
       </HelpContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
