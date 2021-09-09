@@ -39,7 +39,7 @@ var CalendarWrapper = _styledComponents.default.div(_templateObject3 || (_templa
 
 exports.CalendarWrapper = CalendarWrapper;
 
-var DatePickerWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: relative;\n\n  .react-datepicker-popper {\n    display: none;\n  }\n\n  > svg {\n    cursor: pointer;\n    font-size: 20px;\n    right: 5px;\n    top: 11px;\n    color: #B1BCCC;\n    position: absolute;\n\n    ", "\n  }\n"])), function (props) {
+var DatePickerWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  margin-bottom: 10px;\n\n  @media (min-width: 430px) {\n    width: 300px;\n  }\n\n  .react-datepicker-popper {\n    display: none;\n  }\n\n  .react-datepicker-wrapper {\n    width: 100%;\n  }\n\n  > svg {\n    cursor: pointer;\n    font-size: 20px;\n    right: 5px;\n    top: 11px;\n    color: #B1BCCC;\n    position: absolute;\n\n    ", "\n  }\n\n  input {\n    width: 100%;\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      left: 5px;\n      right: initial;\n    "])));
 });
 
