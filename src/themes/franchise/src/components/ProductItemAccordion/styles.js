@@ -55,23 +55,23 @@ export const Accordion = (props) => {
 }
 
 export const WrapperProductImage = styled.div`
-  max-width: 55px;
-  max-height: 55px;
-  height: 55px;
-  width: 55px;
+  max-width: 50px;
+  max-height: 50px;
+  height: 50px;
+  width: 50px;
 
   @media (min-width: 361px) {
+    max-width: 55px;
+    max-height: 55px;
+    height: 55px;
+    width: 55px;
+  }
+
+  @media (min-width: 411px) {
     max-width: 65px;
     max-height: 65px;
     height: 65px;
     width: 65px;
-  }
-
-  @media (min-width: 411px) {
-    max-width: 75px;
-    max-height: 75px;
-    height: 75px;
-    width: 75px;
   }
 `
 
@@ -85,7 +85,7 @@ const ProductImageStyled = styled.div`
   background-size: contain;
   object-fit: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 7.6px;
 `
 
 export const ProductImage = (props) => {
@@ -126,6 +126,7 @@ export const ContentInfo = styled.div`
     > p {
       font-size: 10px;
       color: ${props => props.theme?.colors.darkGray};
+      overflow-wrap: break-word;
     }
   }
 
@@ -155,12 +156,6 @@ export const ContentInfo = styled.div`
           }
         }
       }
-    }
-  }
-
-  @media (min-width: 577px) {
-    h3 {
-      font-size: 18px;
     }
   }
 `
@@ -307,13 +302,6 @@ export const ProductPrice = styled.div`
 
   svg {
     cursor: pointer;
-  }
-
-  @media (min-width: 512px) {
-    span,
-    p {
-      font-size: 18px;
-    }
   }
 `
 
