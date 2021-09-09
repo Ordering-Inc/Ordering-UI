@@ -13,9 +13,11 @@ export const Tabs = styled.div`
   ${({ isVerticalList }) => isVerticalList && css`
     flex-direction: column;
     width: 100%;
+    height: 100%;
     padding: 0 15px;
     box-sizing: border-box;
     border-bottom: 2px solid ${props => props.theme.colors.borderColor};
+    margin-bottom: 25px;
     @media (min-width: 768px) {
       justify-content: flex-start;
       padding-right: 0;

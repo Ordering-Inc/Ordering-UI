@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
-import { useSession, useOrder, useLanguage } from 'ordering-components'
-import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import { useSession, useOrder, useLanguage, OrderTypeControl, useConfig } from 'ordering-components'
 import {
   HeroContainer,
   ContentWrapper,
   Title,
   Slogan,
-  WrapInput,
-  AddressInput
+  WrapOrderyType,
+  OrderTypeItem
 } from './styles'
 
 import { Modal } from '../../../../../components/Modal'
 import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
 
-import { Button } from '../../styles/Buttons'
-
 export const HomeHero = (props) => {
   const { onFindBusiness } = props
+  const [configState] = useConfig()
 
   const [{ auth }] = useSession()
   const [orderState] = useOrder()
@@ -26,6 +24,8 @@ export const HomeHero = (props) => {
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const theme = useTheme()
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  // const configTypes = [1, 2, 3]
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -60,25 +60,12 @@ export const HomeHero = (props) => {
         <ContentWrapper>
           <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
           <Slogan>{t('SUBTITLE_HOME', theme?.defaultLanguages?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan>
-          <WrapInput onClick={handleAddressInput} withIcon>
-            <AddressInput
-              name='address-selection'
-              aria-label='address selection'
-              type='text'
-            >
-              <HiOutlineLocationMarker />
-              {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', theme?.defaultLanguages?.TYPE_AN_ADDRESS || 'Type an address')}
-              <Button
-                color='primary'
-                name='find-business'
-                onClick={handleFindBusinesses}
-              >
-                {t('FIND', 'Find')}
-              </Button>
-            </AddressInput>
-          </WrapInput>
+          <ArchiesOrderTypes
+            configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
+            defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+            handleAddressInput={handleAddressInput}
+          />
         </ContentWrapper>
-
         <Modal
           title={t('ADDRESS', theme?.defaultLanguages?.ADDRESS || 'Address')}
           open={modals.formOpen}
@@ -115,4 +102,57 @@ export const HomeHero = (props) => {
         </React.Fragment>))}
     </>
   )
+}
+
+const ArchiesOrderTypeUI = (props) => {
+  const {
+    handleChangeOrderType,
+    configTypes,
+    orderTypes,
+    handleAddressInput
+  } = props
+
+  const handleOrderType = (orderType) => {
+    if (configTypes && configTypes.includes(orderType.value)) {
+      handleChangeOrderType(orderType.value)
+    }
+    handleAddressInput()
+
+    // if (orderType.value === configTypes[0]) {
+    //   handleAddressInput()
+    // }
+  }
+
+  return (
+    <WrapOrderyType>
+      {
+        orderTypes && orderTypes.map((orderType) => {
+          return (
+            <OrderTypeItem key={orderType.value} onClick={() => handleOrderType(orderType)}>
+              {orderType.content}
+            </OrderTypeItem>
+          )
+        })
+      }
+    </WrapOrderyType>
+  )
+}
+
+export const ArchiesOrderTypes = (props) => {
+  const [, t] = useLanguage()
+  const orderTypeProps = {
+    ...props,
+    UIComponent: ArchiesOrderTypeUI,
+    orderTypes: props.orderTypes || [
+      {
+        value: 1,
+        content: <span>{t('DELIVERY', 'Delivery')}</span>
+      },
+      {
+        value: 2,
+        content: <span>{t('PICKUP', 'Pickup')}</span>
+      }
+    ]
+  }
+  return <OrderTypeControl {...orderTypeProps} />
 }

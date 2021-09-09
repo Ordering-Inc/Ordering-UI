@@ -66,6 +66,7 @@ export const HeaderInfo = styled.div`
     font-size: 16px;
     line-height: 26px;
     color: #212629;
+    margin: 0px;
   }
 `
 
@@ -336,7 +337,6 @@ export const ReviewsAction = styled.div`
   line-height: 26px;
   color: ${props => props.theme.colors.primary};
   padding-bottom: 5px;
-  border-bottom: 1px solid ${props => props.theme.colors.primary};
 `
 
 export const SkeletonBlock = styled.div`

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const HeaderItem = styled.div`
   cursor: pointer;
   width: 86px;
-  height: 48px;
+  height: 40px;
   background-color: ${props => props.theme.colors.primary};
   display: flex;
   align-items: center;
@@ -27,6 +27,10 @@ export const HeaderItem = styled.div`
     path {
       fill: #fff;
     }
+  }
+
+  @media (min-width: 1200px) {
+    height: 48px;
   }
 `
 
