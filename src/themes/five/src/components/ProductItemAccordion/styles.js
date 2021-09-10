@@ -305,6 +305,21 @@ export const ProductPrice = styled.div`
   }
 `
 
+export const ProductSelectWrapper = styled.div`
+  position: relative;
+
+  > svg {
+    font-size: 10px;
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    ${props => props.theme?.rtl && css`
+      left: 10px;
+      right: initial;
+    `}
+  }
+`
+
 export const ProductSelect = styled.select`
   ${({ isCheckout }) => isCheckout ? css`
     background: ${props => props.theme?.colors.backgroundPage};
@@ -323,11 +338,6 @@ export const ProductSelect = styled.select`
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-progress-appearance: none;
-
-  background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
-  background-repeat: no-repeat, repeat;
-  background-position: right .7em top 50%, 0 0;
-  background-size: .65em auto, 100%;
 `
 
 export const ProductNotAvailable = styled.span`

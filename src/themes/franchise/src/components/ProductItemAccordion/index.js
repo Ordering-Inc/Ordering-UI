@@ -23,7 +23,8 @@ import {
   ProductNotAvailable,
   ProductSelect,
   ProductOptionsList,
-  ProductQuantity
+  ProductQuantity,
+  ProductSelectWrapper
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -116,22 +117,25 @@ export const ProductItemAccordion = (props) => {
               </WrapperProductImage>
             )}
             {isCartProduct && !isCartPending && getProductMax ? (
-              <ProductSelect
-                ref={productSelect}
-                value={product.quantity}
-                isCheckout={isCheckout}
-                onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-              >
-                {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                  <option
-                    key={i}
-                    value={i}
-                    disabled={offsetDisabled(product) < i && i !== 0}
-                  >
-                    {i === 0 ? t('REMOVE', 'Remove') : i}
-                  </option>
-                ))}
-              </ProductSelect>
+              <ProductSelectWrapper>
+                <IosArrowDown />
+                <ProductSelect
+                  ref={productSelect}
+                  value={product.quantity}
+                  isCheckout={isCheckout}
+                  onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+                >
+                  {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                    <option
+                      key={i}
+                      value={i}
+                      disabled={offsetDisabled(product) < i && i !== 0}
+                    >
+                      {i === 0 ? t('REMOVE', 'Remove') : i}
+                    </option>
+                  ))}
+                </ProductSelect>
+              </ProductSelectWrapper>
             ) : (
               <ProductQuantity>
                 {product?.quantity}
