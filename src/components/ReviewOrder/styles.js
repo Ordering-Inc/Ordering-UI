@@ -4,7 +4,7 @@ export const ReviewOrderContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%
+  width: 100%;
 `
 
 export const Reviews = styled.div`
