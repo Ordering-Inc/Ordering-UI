@@ -9,7 +9,7 @@ exports.ProductItemAccordion = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _TiPencil = _interopRequireDefault(require("@meronex/icons/ti/TiPencil"));
+var _BsPencil = _interopRequireDefault(require("@meronex/icons/bs/BsPencil"));
 
 var _IosArrowDown = _interopRequireDefault(require("@meronex/icons/ios/IosArrowDown"));
 
@@ -170,7 +170,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     className: "info"
   }, (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     bgimage: product === null || product === void 0 ? void 0 : product.images
-  })), isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
+  })), isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, null), /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
     ref: productSelect,
     value: product.quantity,
     isCheckout: isCheckout,
@@ -183,9 +183,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       value: i,
       disabled: offsetDisabled(product) < i && i !== 0
     }, i === 0 ? t('REMOVE', 'Remove') : i);
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), (product === null || product === void 0 ? void 0 : product.comment) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.comment)), windowSize.width <= 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
+  }))) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), (product === null || product === void 0 ? void 0 : product.comment) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.comment)), windowSize.width <= 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsEdit
-  }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, {
     color: "#F2BB40",
     onClick: function onClick() {
       return onEditProduct(product);
@@ -207,7 +207,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       return onEditProduct(product);
     },
     disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, {
     color: "#B1BCCC"
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
@@ -223,7 +223,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       return onEditProduct(product);
     },
     disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, {
     color: "#F2BB40"
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,

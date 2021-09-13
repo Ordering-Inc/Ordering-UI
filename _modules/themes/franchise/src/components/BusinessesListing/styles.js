@@ -29,7 +29,7 @@ var BusinessListWrapper = _styledComponents.default.div(_templateObject2 || (_te
 
 exports.BusinessListWrapper = BusinessListWrapper;
 
-var BusinessMapWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 350px;\n  \n  @media (min-width: 850px) {\n    width: 50%;\n    height: calc(100vh - 331px);\n  }\n"])));
+var BusinessMapWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 350px;\n  position: relative;\n  \n  @media (min-width: 850px) {\n    width: 50%;\n    height: calc(100vh - 331px);\n  }\n\n  > div {\n    height: 100% !important;\n    width: 100% !important;\n  }\n"])));
 
 exports.BusinessMapWrapper = BusinessMapWrapper;
 

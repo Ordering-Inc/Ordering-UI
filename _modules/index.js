@@ -219,6 +219,18 @@ Object.defineProperty(exports, "Header", {
     return _Header.Header;
   }
 });
+Object.defineProperty(exports, "Help", {
+  enumerable: true,
+  get: function get() {
+    return _Help.Help;
+  }
+});
+Object.defineProperty(exports, "HelpStaticPage", {
+  enumerable: true,
+  get: function get() {
+    return _HelpStaticPage.HelpStaticPage;
+  }
+});
 Object.defineProperty(exports, "HeaderOption", {
   enumerable: true,
   get: function get() {
@@ -247,6 +259,12 @@ Object.defineProperty(exports, "InputPhoneNumber", {
   enumerable: true,
   get: function get() {
     return _InputPhoneNumber.InputPhoneNumber;
+  }
+});
+Object.defineProperty(exports, "LastOrders", {
+  enumerable: true,
+  get: function get() {
+    return _LastOrders.LastOrders;
   }
 });
 Object.defineProperty(exports, "LanguageSelector", {
@@ -728,6 +746,10 @@ var _GoogleGpsButton = require("./components/GoogleGpsButton");
 
 var _Header = require("./components/Header");
 
+var _Help = require("./components/Help");
+
+var _HelpStaticPage = require("./components/HelpStaticPage");
+
 var _HeaderOption = require("./components/HeaderOption");
 
 var _HomeHero = require("./components/HomeHero");
@@ -737,6 +759,8 @@ var _HorizontalOrdersLayout = require("./components/HorizontalOrdersLayout");
 var _Image = require("./components/Image");
 
 var _InputPhoneNumber = require("./components/InputPhoneNumber");
+
+var _LastOrders = require("./components/LastOrders");
 
 var _LanguageSelector = require("./components/LanguageSelector");
 

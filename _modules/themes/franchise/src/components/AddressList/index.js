@@ -9,7 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _VscEdit = _interopRequireDefault(require("@meronex/icons/vsc/VscEdit"));
+var _BsPencil = _interopRequireDefault(require("@meronex/icons/bs/BsPencil"));
 
 var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
 
@@ -307,7 +307,7 @@ var AddressListUI = function AddressListUI(props) {
       onClick: function onClick() {
         return openAddress(address);
       }
-    }, /*#__PURE__*/_react.default.createElement(_VscEdit.default, null)), /*#__PURE__*/_react.default.createElement("a", {
+    }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, null)), /*#__PURE__*/_react.default.createElement("a", {
       className: actionStatus.loading || address.default ? 'disabled' : '',
       onClick: function onClick() {
         return handleDeleteClick(address);
