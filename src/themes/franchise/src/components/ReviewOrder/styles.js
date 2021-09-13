@@ -123,6 +123,7 @@ export const ReviewsProgressBar = styled.div`
   height: 4px;
   border-radius: 50px;
   background: #344050;
+  transition: all 0.2s linear;
 `
 
 export const ReviewsMarkPoint = styled.span`

@@ -56,6 +56,7 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
+import { ReviewProduct } from '../ReviewProduct'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -77,9 +78,11 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
-  const [openReview, setOpenReview] = useState(false)
-  const [isReviewed, setIsReviewed] = useState(false)
+  const [isOrderReviewed, setIsOrderReviewed] = useState(false)
+  const [isProductReviewed, setIsProductReviewed] = useState(false)
+  const [isDriverReviewed, setIsDriverReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
+  const [isReviewOpen, setIsReviewOpen] = useState(false)
 
   const { order, loading, businessData, error } = props.order
 
@@ -144,6 +147,10 @@ const OrderDetailsUI = (props) => {
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
 
+  const handleCloseReview = () => {
+    setIsReviewOpen(false)
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -194,9 +201,9 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && !order.review && !isReviewed}
+                  ) && (!isOrderReviewed || !isProductReviewed)}
                 >
-                  <span onClick={() => setOpenReview(true)}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                  <span onClick={() => setIsReviewOpen(true)}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                 </ReviewOrderLink>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
@@ -395,21 +402,6 @@ const OrderDetailsUI = (props) => {
                     </div>
                   </ShareOrder>
                 )}
-                {/* {(
-                  parseInt(order?.status) === 1 ||
-                  parseInt(order?.status) === 2 ||
-                  parseInt(order?.status) === 5 ||
-                  parseInt(order?.status) === 6 ||
-                  parseInt(order?.status) === 10 ||
-                  parseInt(order?.status) === 11 ||
-                  parseInt(order?.status) === 12
-                ) && !order.review && !isReviewed && (
-                  <ReviewsAction>
-                    <Button color='primary' onClick={() => setOpenReview(true)}>
-                      {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
-                    </Button>
-                  </ReviewsAction>
-                )} */}
               </Content>
             </WrapperRightContainer>
           </WrapperContainer>
@@ -459,13 +451,16 @@ const OrderDetailsUI = (props) => {
             />
           )
         )}
-        {openReview && (
+        {isReviewOpen && (!isOrderReviewed || !isProductReviewed) && (
           <Modal
-            open={openReview}
-            onClose={() => setOpenReview(false)}
+            open={isReviewOpen}
+            onClose={handleCloseReview}
             title={order ? t('REVIEW_ORDER', 'Review order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
           >
-            <ReviewOrder order={order} closeReviewOrder={() => setOpenReview(false)} setIsReviewed={setIsReviewed} />
+            {
+              (!isOrderReviewed && !order.review) ? (<ReviewOrder order={order} closeReviewOrder={() => setIsOrderReviewed(false)} setIsReviewed={setIsOrderReviewed} />)
+                : (!isProductReviewed ? (<ReviewProduct />) : <div>Review Driver</div>)
+            }
           </Modal>
         )}
       </Container>
