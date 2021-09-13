@@ -49,7 +49,7 @@ const MomentControlUI = (props) => {
   const [value, onChange] = useState(new Date())
   const [minDate, setMinDate] = useState(new Date())
   const [maxDate, setMaxDate] = useState(new Date())
-  const [isASP, setIsASP] = useState(isAsap)
+  const [isASP, setIsASP] = useState(true)
   const [timeLists, setTimeLists] = useState(null)
 
   const onDateChange = (value) => {
@@ -119,6 +119,10 @@ const MomentControlUI = (props) => {
       setTimeLists(_timeLists)
     }
   }, [hoursList])
+
+  useEffect(() => {
+    if (isASP) handleCheckBoxChange(true)
+  }, [isAsap])
 
   return (
     <div id='moment_control'>
