@@ -64,7 +64,7 @@ const BusinessProductsListingUI = (props) => {
   } = props
 
   const [{ configs }] = useConfig()
-  const addProductWithOneClick = configs?.add_product_with_one_click?.value
+  const addProductWithOneClick = configs?.add_product_with_one_click?.value === '1'
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
