@@ -91,6 +91,7 @@ const CheckoutUI = (props) => {
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
   const [isLoadingPlace, setIsLoadingPlace] = useState(false)
   const [placeId, setPlaceId] = useState(null)
+  const [paymethodSelectedChanged, setPaymethodSelectedChanged] = useState(false)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -178,6 +179,14 @@ const CheckoutUI = (props) => {
       // changePaymethod(cart?.business_id, null, null)
     }
   }, [isResetPaymethod])
+
+  useEffect(() => {
+    if (paymethodSelected && !cartState.loading && cart?.status === 4) {
+      setPaymethodSelectedChanged(true)
+    } else {
+      setPaymethodSelectedChanged(false)
+    }
+  }, [paymethodSelected])
 
   useEffect(() => {
     const getPlaceId = async () => {
@@ -358,7 +367,7 @@ const CheckoutUI = (props) => {
             {!props.isHideSectionFive && !cartState.loading && cart && (
               <PaymentMethodContainer>
                 <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
-                {!cartState.loading && cart?.status === 4 && (
+                {!cartState.loading && cart?.status === 4 && !paymethodSelectedChanged && !businessDetails.loading && (
                   <WarningMessage style={{ marginTop: 20 }}>
                     <VscWarning />
                     <h1>

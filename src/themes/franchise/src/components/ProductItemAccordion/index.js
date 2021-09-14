@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import TiPencil from '@meronex/icons/ti/TiPencil'
+import BsPencil from '@meronex/icons/bs/BsPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
@@ -23,7 +23,8 @@ import {
   ProductNotAvailable,
   ProductSelect,
   ProductOptionsList,
-  ProductQuantity
+  ProductQuantity,
+  ProductSelectWrapper
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -116,22 +117,25 @@ export const ProductItemAccordion = (props) => {
               </WrapperProductImage>
             )}
             {isCartProduct && !isCartPending && getProductMax ? (
-              <ProductSelect
-                ref={productSelect}
-                value={product.quantity}
-                isCheckout={isCheckout}
-                onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-              >
-                {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                  <option
-                    key={i}
-                    value={i}
-                    disabled={offsetDisabled(product) < i && i !== 0}
-                  >
-                    {i === 0 ? t('REMOVE', 'Remove') : i}
-                  </option>
-                ))}
-              </ProductSelect>
+              <ProductSelectWrapper>
+                <IosArrowDown />
+                <ProductSelect
+                  ref={productSelect}
+                  value={product.quantity}
+                  isCheckout={isCheckout}
+                  onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+                >
+                  {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                    <option
+                      key={i}
+                      value={i}
+                      disabled={offsetDisabled(product) < i && i !== 0}
+                    >
+                      {i === 0 ? t('REMOVE', 'Remove') : i}
+                    </option>
+                  ))}
+                </ProductSelect>
+              </ProductSelectWrapper>
             ) : (
               <ProductQuantity>
                 {product?.quantity}
@@ -154,7 +158,7 @@ export const ProductItemAccordion = (props) => {
                     <div>
                       {onEditProduct && (
                         <span ref={productActionsEdit}>
-                          <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
+                          <BsPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
                         </span>
                       )}
                       {onDeleteProduct && (
@@ -188,7 +192,7 @@ export const ProductItemAccordion = (props) => {
                     onClick={() => onEditProduct(product)}
                     disabled={orderState.loading}
                   >
-                    <TiPencil color='#B1BCCC' />
+                    <BsPencil color='#B1BCCC' />
                   </ProductActionsEdit>
                   <ProductActionsDelete
                     ref={productActionsDelete}
@@ -210,7 +214,7 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onEditProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <TiPencil color='#F2BB40' />
+                  <BsPencil color='#F2BB40' />
                 </ProductActionsEdit>
                 <ProductActionsDelete
                   ref={productActionsDelete}

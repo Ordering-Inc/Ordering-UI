@@ -60,6 +60,7 @@ const PopoverListItemStyles = css`
   font-weight: 600;
   font-size: 14px;
   color: #000000;
+  border-radius: 7.6px;
 
   svg {
     margin-right: 5px;
@@ -71,7 +72,7 @@ const PopoverListItemStyles = css`
 
   :hover {
     cursor: pointer;
-    background-color: #eee;
+    background-color: #f8f8f8;
   }
 
   :last-child {
@@ -86,6 +87,7 @@ export const PopoverListItem = styled.div`
 export const PopoverListLink = styled.a`
   ${PopoverListItemStyles}
   text-decoration: none;
+
   ${({ active }) => active && css`
     background-color: #eee;
   `}
@@ -101,12 +103,14 @@ export const Divider = styled.div`
   margin-top: 20px;
   margin-bottom: 15px;
   width: calc(100% + 30px);
+  margin-left: -15px;
+  height: 1px;
+  background: #E9ECEF;
+
   ${props => props.theme?.rtl && css`
     margin-right: -15px;
     margin-left: 0;
   `}
-  height: 1px;
-  background: #E9ECEF;
 `
 
 export const UserImgWrapper = styled.div`

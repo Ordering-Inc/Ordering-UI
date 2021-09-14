@@ -136,7 +136,7 @@ export const BusinessItemAccordion = (props) => {
                 <BusinessLogo bgimage={business?.logo || theme.images?.dummies?.businessLogo} />
               </WrapperBusinessLogo>
             )}
-            <ContentInfo className='info'>
+            <ContentInfo className='info' isHasTotal={(!isClosed && !!isProducts && isValidProducts && orderTotal > 0) || isClosed || (!isClosed && !isProducts)}>
               <h2>{business?.name}</h2>
               {orderState?.options?.type === 1 ? (
                 <span>
@@ -152,9 +152,9 @@ export const BusinessItemAccordion = (props) => {
             </ContentInfo>
           </BusinessInfo>
 
-          {!isClosed && !!isProducts && (
+          {!isClosed && !!isProducts && isValidProducts && orderTotal > 0 && (
             <BusinessTotal className='total' isCartOnProductsList={isCartOnProductsList}>
-              {isValidProducts && orderTotal > 0 && <p>{parsePrice(orderTotal)}</p>}
+              <p>{parsePrice(orderTotal)}</p>
               <p>{t('CART_TOTAL', 'Total')}</p>
             </BusinessTotal>
           )}

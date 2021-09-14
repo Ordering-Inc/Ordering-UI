@@ -29,6 +29,7 @@ import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
+import { Help } from './pages/Help'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -247,6 +248,17 @@ export const App = () => {
                   </Route>
                   <Route exact path='/pages'>
                     <PagesList />
+                  </Route>
+                  <Route exact path='/help'>
+                    {auth
+                      ? <Help />
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
                   </Route>
                   <Route exact path='/:store'>
                     <BusinessProductsList />

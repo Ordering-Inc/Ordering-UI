@@ -55,23 +55,23 @@ export const Accordion = (props) => {
 }
 
 export const WrapperProductImage = styled.div`
-  max-width: 55px;
-  max-height: 55px;
-  height: 55px;
-  width: 55px;
+  max-width: 50px;
+  max-height: 50px;
+  height: 50px;
+  width: 50px;
 
   @media (min-width: 361px) {
+    max-width: 55px;
+    max-height: 55px;
+    height: 55px;
+    width: 55px;
+  }
+
+  @media (min-width: 411px) {
     max-width: 65px;
     max-height: 65px;
     height: 65px;
     width: 65px;
-  }
-
-  @media (min-width: 411px) {
-    max-width: 75px;
-    max-height: 75px;
-    height: 75px;
-    width: 75px;
   }
 `
 
@@ -85,7 +85,7 @@ const ProductImageStyled = styled.div`
   background-size: contain;
   object-fit: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 7.6px;
 `
 
 export const ProductImage = (props) => {
@@ -126,6 +126,7 @@ export const ContentInfo = styled.div`
     > p {
       font-size: 10px;
       color: ${props => props.theme?.colors.darkGray};
+      overflow-wrap: break-word;
     }
   }
 
@@ -155,12 +156,6 @@ export const ContentInfo = styled.div`
           }
         }
       }
-    }
-  }
-
-  @media (min-width: 577px) {
-    h3 {
-      font-size: 18px;
     }
   }
 `
@@ -308,12 +303,20 @@ export const ProductPrice = styled.div`
   svg {
     cursor: pointer;
   }
+`
 
-  @media (min-width: 512px) {
-    span,
-    p {
-      font-size: 18px;
-    }
+export const ProductSelectWrapper = styled.div`
+  position: relative;
+
+  > svg {
+    font-size: 10px;
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    ${props => props.theme?.rtl && css`
+      left: 10px;
+      right: initial;
+    `}
   }
 `
 
@@ -335,11 +338,6 @@ export const ProductSelect = styled.select`
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-progress-appearance: none;
-
-  background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
-  background-repeat: no-repeat, repeat;
-  background-position: right .7em top 50%, 0 0;
-  background-size: .65em auto, 100%;
 `
 
 export const ProductNotAvailable = styled.span`

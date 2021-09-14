@@ -30,11 +30,14 @@ import { Footer } from './components/Footer'
 import { ForgotPasswordForm } from './components/ForgotPasswordForm'
 import { GoogleGpsButton } from './components/GoogleGpsButton'
 import { Header } from './components/Header'
+import { Help } from './components/Help'
+import { HelpStaticPage } from './components/HelpStaticPage'
 import { HeaderOption } from './components/HeaderOption'
 import { HomeHero } from './components/HomeHero'
 import { HorizontalOrdersLayout } from './components/HorizontalOrdersLayout'
 import { Image } from './components/Image'
 import { InputPhoneNumber } from './components/InputPhoneNumber'
+import { LastOrders } from './components/LastOrders'
 import { LanguageSelector } from './components/LanguageSelector'
 import { LoginForm } from './components/LoginForm'
 import { LogoutButton } from './components/LogoutButton'
@@ -137,12 +140,15 @@ export {
   FloatingButton,
   GoogleGpsButton,
   HeaderOption,
+  Help,
+  HelpStaticPage,
   HorizontalOrdersLayout,
   Header,
   HomeHero,
   Image,
   InputPhoneNumber,
   LanguageSelector,
+  LastOrders,
   LoginForm,
   LogoutButton,
   Messages,

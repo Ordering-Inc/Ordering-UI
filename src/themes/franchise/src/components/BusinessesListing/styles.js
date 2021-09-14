@@ -29,10 +29,16 @@ export const BusinessListWrapper = styled.div`
 export const BusinessMapWrapper = styled.div`
   width: 100%;
   height: 350px;
+  position: relative;
   
   @media (min-width: 850px) {
     width: 50%;
     height: calc(100vh - 331px);
+  }
+
+  > div {
+    height: 100% !important;
+    width: 100% !important;
   }
 `
 

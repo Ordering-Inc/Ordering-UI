@@ -1,28 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
-import { Select } from '../../styles/Select'
 import {
   PaymentOptions as PaymentOptionsController,
   useLanguage,
   useSession
 } from 'ordering-components'
-import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
-import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
+import { getIconCard } from '../../../../../utils'
+
+import { PaymentOptionCash } from '../PaymentOptionCash'
+import { Select } from '../../styles/Select'
+
 import {
   PaymentMethodsContainer,
   PaymentMethodsList,
-  PayCard,
   PayCardSelected,
-  CardItemContent
+  CardItemContent,
+  PayCardOption,
+  WrapPaymethodSelect
 } from './styles'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
@@ -45,6 +48,7 @@ const PaymentOptionsUI = (props) => {
     cart,
     errorCash,
     isLoading,
+    isDisabled,
     paymethodData,
     paymethodsList,
     setPaymethodData,
@@ -52,34 +56,25 @@ const PaymentOptionsUI = (props) => {
     handlePaymethodClick,
     handlePaymethodDataChange,
     isCustomerMode,
-    isOpenMethod
+    isOpenMethod,
+    onPaymentChange
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
-  const theme = useTheme()
 
-  const paymethodSelected = props.paymethodSelected || props.paySelected
+  const [paymethodsOptions, setPaymethodsOptions] = useState([])
 
-  const paymentOptionsList = paymethodsList?.paymethods?.sort((a, b) => a.id - b.id).map(paymethod => {
-    return (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && { value: paymethod?.id, content: paymethod?.name }
-  })
+  const paymethodSelected = props.paySelected || props.paymethodSelected
 
-  const handlePaymentMethodChange = (id) => {
-    const paymethod = paymethodsList?.paymethods?.find(item => item?.id === id)
-    const isPopupMethod = ['stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod?.gateway)
+  const handlePaymentMethodClick = (paymethod) => {
+    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod?.gateway)
     handlePaymethodClick(paymethod, isPopupMethod)
   }
 
-  const getIconCard = (brand = '') => {
-    const value = brand.toLowerCase()
-    switch (value) {
-      case 'visa':
-        return theme.images?.general?.visa
-      case 'mastercard':
-        return theme.images?.general?.mastercard
-      default:
-        return theme.images?.general?.credit
-    }
+  const handleChangePaymethod = (paymethodId) => {
+    if (isDisabled) return
+    const selectedPaymethod = paymethodsList.paymethods.find(paymethod => paymethod.id === paymethodId)
+    handlePaymentMethodClick(selectedPaymethod)
   }
 
   useEffect(() => {
@@ -100,6 +95,18 @@ const PaymentOptionsUI = (props) => {
     }
   }, [props.paySelected])
 
+  useEffect(() => {
+    if (paymethodsList.loading) return
+    const _filteredPaymethods = paymethodsList.paymethods.sort((a, b) => a.id - b.id).filter(paymethod => (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))))
+    const _paymethodsOptions = _filteredPaymethods.map(paymethod => {
+      return {
+        value: paymethod.id,
+        content: <PayCardOption>{t(paymethod.gateway.toUpperCase(), paymethod.name)}</PayCardOption>
+      }
+    })
+    setPaymethodsOptions(_paymethodsOptions)
+  }, [paymethodsList])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -110,21 +117,21 @@ const PaymentOptionsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
-          {paymethodsList.paymethods.length > 0 && (
-            <Select
-              defaultValue={paymethodSelected?.id}
-              options={paymentOptionsList}
-              onChange={(value) => handlePaymentMethodChange(value)}
-              placeholder={t('SELECT_A_PAYMENT_METHOD', 'Select a payment method')}
-            />
+          {paymethodsOptions.length > 0 && (
+            <WrapPaymethodSelect>
+              <Select
+                options={paymethodsOptions}
+                defaultValue={paymethodSelected?.id}
+                placeholder={<PayCardOption>{t('SELECT_PAYMETHOD', 'Select paymethod')}</PayCardOption>}
+                onChange={paymethodId => handleChangePaymethod(paymethodId)}
+              />
+            </WrapPaymethodSelect>
           )}
 
           {(paymethodsList.loading || isLoading) && (
-            [...Array(5).keys()].map(i => (
-              <PayCard key={i} isSkeleton>
-                <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
-              </PayCard>
-            ))
+            <PayCardOption isSkeleton>
+              <Skeleton height={44} />
+            </PayCardOption>
           )}
 
           {paymethodsList.error && paymethodsList.error.length > 0 && (
@@ -150,17 +157,17 @@ const PaymentOptionsUI = (props) => {
           />
         )}
 
-        {
-          isOpenMethod?.paymethod?.gateway === 'stripe' && !paymethodData?.id && (
-            <PaymentOptionStripe
-              paymethod={isOpenMethod?.paymethod}
-              businessId={props.businessId}
-              publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
-              payType={isOpenMethod?.paymethod?.name}
-              onSelectCard={handlePaymethodDataChange}
-            />
-          )
-        }
+        {isOpenMethod?.paymethod?.gateway === 'stripe' && isOpenMethod.paymethod?.gateway === 'stripe' && (
+          <PaymentOptionStripe
+            paymethod={isOpenMethod?.paymethod}
+            businessId={props.businessId}
+            publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
+            onPaymentChange={onPaymentChange}
+            payType={isOpenMethod?.paymethod?.name}
+            onSelectCard={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+          />
+        )}
 
         {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && !isCustomerMode && (
           <PayCardSelected>
@@ -168,9 +175,9 @@ const PaymentOptionsUI = (props) => {
               <span className='checks'>
                 <IosRadioButtonOn />
               </span>
-              <div className='brand'>
-                <img src={getIconCard(paymethodData?.card?.brand)} alt={paymethodData?.card?.brand} />
-              </div>
+              <span className='brand'>
+                {getIconCard(paymethodData?.card?.brand)}
+              </span>
               <span>
                 XXXX-XXXX-XXXX-{paymethodData?.card?.last4}
               </span>
@@ -181,7 +188,7 @@ const PaymentOptionsUI = (props) => {
         {/* Paypal */}
         <Modal
           className='modal-info'
-          open={isOpenMethod?.paymethod?.gateway === 'paypal' && !paymethodData?.id}
+          open={isOpenMethod?.paymethod?.gateway === 'paypal' && !paymethodData.id}
           onClose={() => handlePaymethodClick(null)}
           title={t('PAY_WITH_PAYPAL', 'Pay with PayPal')}
         >
@@ -208,7 +215,7 @@ const PaymentOptionsUI = (props) => {
         {/* Stripe Connect */}
         <Modal
           title={t('SELECT_A_CARD', 'Select a card')}
-          open={isOpenMethod?.paymethod?.gateway === 'stripe_connect' && !paymethodData?.id}
+          open={isOpenMethod?.paymethod?.gateway === 'stripe_connect' && !paymethodData.id}
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >
@@ -227,8 +234,8 @@ const PaymentOptionsUI = (props) => {
 
         {/* Stripe direct */}
         <Modal
-          title={t('ADD_NEW_CARD', 'Add new card')}
-          open={isOpenMethod?.paymethod?.gateway === 'stripe_direct' && !paymethodData?.id}
+          title={t('ADD_CARD', 'Add card')}
+          open={isOpenMethod?.paymethod?.gateway === 'stripe_direct' && !paymethodData.id}
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >

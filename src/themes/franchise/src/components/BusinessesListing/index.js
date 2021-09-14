@@ -31,6 +31,7 @@ import {
   useSession,
   useLanguage,
   useConfig,
+  GoogleMapsMap,
   BusinessList as BusinessListController
 } from 'ordering-components'
 
@@ -66,6 +67,19 @@ const BusinessesListingUI = (props) => {
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
   const businessListRef = useRef(null)
+
+  const googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    },
+    isMarkerDraggable: true
+  }
 
   const handleScroll = useCallback(() => {
     if (windowSize.width > 850) {
@@ -270,11 +284,20 @@ const BusinessesListingUI = (props) => {
         </BusinessListWrapper>
         <BusinessMapWrapper>
           {(configs?.google_maps_api_key?.value && orderState?.options?.address?.location) ? (
-            <BusinessesMap
-              businessList={businessesList.businesses}
-              userLocation={orderState?.options?.address?.location}
-              setErrors={setMapErrors}
-            />
+            businessesList?.businesses?.length > 0 ? (
+              <BusinessesMap
+                businessList={businessesList.businesses}
+                userLocation={orderState?.options?.address?.location}
+                setErrors={setMapErrors}
+              />
+            ) : (
+              <GoogleMapsMap
+                apiKey={configs?.google_maps_api_key?.value}
+                location={orderState?.options?.address?.location}
+                mapControls={googleMapsControls}
+                setErrors={setMapErrors}
+              />
+            )
           ) : (
             <Skeleton height={350} />
           )}

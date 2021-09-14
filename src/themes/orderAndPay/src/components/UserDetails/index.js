@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import FcCancel from '@meronex/icons/fc/FcCancel'
+import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import Skeleton from 'react-loading-skeleton'
 import { Container, Header, SideForm, UserData } from './styles'
 
@@ -10,6 +10,7 @@ import {
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../../../../../components/UserFormDetails'
+import { Button } from '../../styles/Buttons'
 
 const UserDetailsUI = (props) => {
   const {
@@ -62,9 +63,9 @@ const UserDetailsUI = (props) => {
             <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
             {cartStatus !== 2 && (
               !isEdit ? (
-                <span onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</span>
+                <Button color='primary' onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</Button>
               ) : (
-                <FcCancel className='cancel' onClick={() => toggleEditState()} />
+                <AiOutlineClose className='cancel' onClick={() => toggleEditState()} />
               )
             )}
           </Header>

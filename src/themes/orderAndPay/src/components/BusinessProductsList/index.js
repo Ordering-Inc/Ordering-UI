@@ -21,11 +21,9 @@ const BusinessProductsListUI = (props) => {
     categoryState,
     isBusinessLoading,
     onProductClick,
-    handleSearchRedirect,
     featured,
     searchValue,
     isCartOnProductsList,
-    handleClearSearch,
     errorQuantityProducts
   } = props
 
@@ -147,8 +145,6 @@ const BusinessProductsListUI = (props) => {
             <WrapperNotFound>
               <NotFoundSource
                 content={!searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
-                btnTitle={!searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters')}
-                onClickButton={() => !searchValue ? handleSearchRedirect() : handleClearSearch('')}
               />
             </WrapperNotFound>
           )
