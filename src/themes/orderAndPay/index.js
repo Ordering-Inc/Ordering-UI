@@ -11,9 +11,9 @@ import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
-import { FacebookLogin } from './src/components/FacebookLogin'
+import { FacebookLoginButton } from './src/components/FacebookLogin'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
-import { GoogleLogin } from './src/components/GoogleLogin'
+import { GoogleLoginButton } from './src/components/GoogleLogin'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LoginForm } from './src/components/LoginForm'
 import { Modal } from './src/components/Modal'
@@ -49,9 +49,9 @@ export {
   CartPopover,
   Checkout,
   DriverTips,
-  FacebookLogin,
+  FacebookLoginButton,
   ForgotPasswordForm,
-  GoogleLogin,
+  GoogleLoginButton,
   InputPhoneNumber,
   LoginForm,
   Modal,

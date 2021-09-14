@@ -8,7 +8,7 @@ export const ProductsContainer = styled.div`
 export const WrapContent = styled.div`
   padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
-
+  margin-bottom: 50px;
   @media (min-width: 381px) {
     padding: 15px;
   }
@@ -143,6 +143,12 @@ export const Title = styled.h1`
 `
 
 export const ModalIcon = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const GoBackContainer = styled.div`
   display: flex;
   align-items: center;
   width: 65%;
