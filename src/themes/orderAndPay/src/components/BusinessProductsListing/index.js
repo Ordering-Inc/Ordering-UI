@@ -19,7 +19,8 @@ import {
   WrappLayout,
   BusinessContent,
   BusinessCategoryProductWrapper,
-  ModalIcon
+  ModalIcon,
+  GoBackContainer
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -32,6 +33,7 @@ import { Modal } from '../Modal'
 import { FloatingButton } from '../FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
+import { LogoutButton } from '../LogoutButton'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -174,9 +176,16 @@ const BusinessProductsListingUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
         <ModalIcon>
-          <BsArrowLeft size={20} onClick={() => handleGoBack()} />
-          <img src={business?.logo} />
-          <h1>{business?.name}</h1>
+          <GoBackContainer>
+            <BsArrowLeft size={20} onClick={() => handleGoBack()} />
+            <img src={business?.logo} />
+            <h1>{business?.name}</h1>
+          </GoBackContainer>
+          {auth && (
+            <div>
+              <LogoutButton />
+            </div>
+          )}
         </ModalIcon>
         {
           !loading && business?.id && (
@@ -244,8 +253,6 @@ const BusinessProductsListingUI = (props) => {
           !loading && business && !Object.keys(business).length && (
             <NotFoundSource
               content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
-              btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-              onClickButton={() => handleSearchRedirect()}
             />
           )
         }
