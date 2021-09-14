@@ -291,6 +291,7 @@ const CartUI = (props) => {
                 <MdClose onClick={() => setIsUpselling(false)} />
               </UpsellingPageTitleWrapper>
               <UpsellingPage
+                setIsUpselling={setIsUpselling}
                 businessId={cart.business_id}
                 isCustomMode={isCustomMode}
                 cartProducts={cart.products}
