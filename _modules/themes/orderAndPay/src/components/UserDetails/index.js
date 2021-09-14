@@ -9,7 +9,7 @@ exports.UserDetails = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _FcCancel = _interopRequireDefault(require("@meronex/icons/fc/FcCancel"));
+var _AiOutlineClose = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineClose"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
@@ -18,6 +18,8 @@ var _styles = require("./styles");
 var _orderingComponents = require("ordering-components");
 
 var _UserFormDetails = require("../../../../../components/UserFormDetails");
+
+var _Buttons = require("../../styles/Buttons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -100,11 +102,12 @@ var UserDetailsUI = function UserDetailsUI(props) {
     height: 25
   })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
     onClick: function onClick() {
       return toggleIsEdit();
     }
-  }, t('CHANGE', 'Change')) : /*#__PURE__*/_react.default.createElement(_FcCancel.default, {
+  }, t('CHANGE', 'Change')) : /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, {
     className: "cancel",
     onClick: function onClick() {
       return toggleEditState();

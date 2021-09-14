@@ -100,10 +100,12 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       places = _useState6[0],
       setPlaces = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(null),
+  var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       placeId = _useState8[0],
       setPlaceId = _useState8[1];
+
+  var inputRef = (0, _react.useRef)();
 
   var handleClickOrderType = function handleClickOrderType(_ref) {
     var value = _ref.value,
@@ -206,7 +208,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
               if (!places.some(function (place) {
                 return place.id === parseInt(placeId);
               })) {
-                _context2.next = 7;
+                _context2.next = 9;
                 break;
               }
 
@@ -215,8 +217,16 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
 
             case 6:
               handleBusinessPage();
+              _context2.next = 10;
+              break;
 
-            case 7:
+            case 9:
+              setAlertState({
+                open: true,
+                content: [t('THE_PLACES_NOT_EXISTS', 'The place does not exists')]
+              });
+
+            case 10:
             case "end":
               return _context2.stop();
           }
@@ -234,6 +244,11 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       open: false,
       content: []
     });
+  };
+
+  var onChangePlaceId = function onChangePlaceId(e) {
+    inputRef.current.value = inputRef.current.value.replace(/[^0-9.]+/g, '');
+    setPlaceId(e.target.value.replace(/[^0-9.]+/g, ''));
   };
 
   (0, _react.useEffect)(function () {
@@ -287,10 +302,12 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.type), /*#__PURE__*/_react.default.createElement("label", null, orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.label), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: "#",
     onChange: function onChange(e) {
-      return setPlaceId(e.target.value);
+      return onChangePlaceId(e);
     },
-    type: "number"
-  })), /*#__PURE__*/_react.default.createElement(_styles.Table, null, /*#__PURE__*/_react.default.createElement("h2", null, t('AVAILABLE_PLACES', 'Available places')), places.map(function (place) {
+    type: "text",
+    ref: inputRef,
+    min: 0
+  })), /*#__PURE__*/_react.default.createElement(_styles.Table, null, places.length > 0 && /*#__PURE__*/_react.default.createElement("h2", null, t('AVAILABLE_PLACES', 'Available places')), places.map(function (place) {
     return /*#__PURE__*/_react.default.createElement(_styles.PlaceName, {
       key: place.id,
       isDisabled: !place.enabled

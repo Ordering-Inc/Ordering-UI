@@ -286,6 +286,7 @@ var CartUI = function CartUI(props) {
       return setIsUpselling(false);
     }
   })), /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+    setIsUpselling: setIsUpselling,
     businessId: cart.business_id,
     isCustomMode: isCustomMode,
     cartProducts: cart.products,
