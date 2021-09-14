@@ -15,6 +15,8 @@ import {
 } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 
 import {
   Container,
@@ -55,6 +57,7 @@ const CheckoutUI = (props) => {
   const {
     cart,
     errors,
+    paymentRequest,
     placing,
     cartState,
     businessDetails,
@@ -81,20 +84,25 @@ const CheckoutUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
 
+  const payMethodsWithStripe = ['google_pay', 'apple_pay', 'microsoft_pay']
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
   const handlePlaceOrder = () => {
-    if (!userErrors.length) {
-      handlerClickPlaceOrder && handlerClickPlaceOrder()
-      return
+    if (payMethodsWithStripe.includes(paymethodSelected?.gateway)) {
+      paymentRequest?.show()
+    } else {
+      if (!userErrors.length) {
+        handlerClickPlaceOrder && handlerClickPlaceOrder()
+        return
+      }
+      setAlertState({
+        open: true,
+        content: Object.values(userErrors).map(error => error)
+      })
+      setIsUserDetailsEdit(true)
     }
-    setAlertState({
-      open: true,
-      content: Object.values(userErrors).map(error => error)
-    })
-    setIsUserDetailsEdit(true)
   }
 
   const closeAlert = () => {
@@ -338,6 +346,8 @@ const CheckoutUI = (props) => {
                 </WarningMessage>
               )}
               <PaymentOptions
+                payMethodsWithStripe={payMethodsWithStripe}
+                paymentRequest={paymentRequest}
                 cart={cart}
                 isDisabled={cart?.status === 2}
                 businessId={businessDetails?.business?.id}
@@ -457,6 +467,7 @@ export const Checkout = (props) => {
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isResetPaymethod, setIsResetPaymethod] = useState(false)
+  const [publicKey, setPublicKey] = useState(null)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length) || null)
 
@@ -559,6 +570,24 @@ export const Checkout = (props) => {
     }
   }
 
+  /**
+   * Method to get stripe credentials from API
+   */
+  const getCredentials = async () => {
+    try {
+      const { content: { result } } = await ordering.setAccessToken(token).paymentCards().getCredentials()
+      setPublicKey(result.publishable)
+    } catch (err) {
+      setPublicKey(null)
+    }
+  }
+
+  useEffect(() => {
+    if (token) {
+      getCredentials()
+    }
+  }, [token])
+
   useEffect(() => {
     if (token && cartUuid) {
       getOrder(cartUuid)
@@ -567,6 +596,7 @@ export const Checkout = (props) => {
 
   const checkoutProps = {
     ...props,
+    isEnabledStripe: publicKey,
     UIComponent: CheckoutUI,
     cartState,
     businessId: cartState.cart?.business_id,
@@ -609,7 +639,11 @@ export const Checkout = (props) => {
         </div>
       )}
 
-      {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}
+      {cartUuid && cartState.cart && cartState.cart?.status !== 1 && (
+        <Elements stripe={loadStripe(publicKey)}>
+          <CheckoutController {...checkoutProps} />
+        </Elements>
+      )}
 
       {currentCart?.products && (
         <UpsellingPage

@@ -105,3 +105,15 @@ export const CardItemContent = styled.div`
     `}
   }
 `
+
+export const Pay = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`
+
+export const PayText = styled.div`
+  font-weight: bold;
+  padding-left: 5px;
+`

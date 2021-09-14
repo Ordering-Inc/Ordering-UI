@@ -8,6 +8,14 @@ import FaCcStripe from '@meronex/icons/fa/FaCcStripe'
 import FaStripeS from '@meronex/icons/fa/FaStripeS'
 import GrStripe from '@meronex/icons/gr/GrStripe'
 import EnPaypal from '@meronex/icons/en/EnPaypal'
+import SiApplepay from '@meronex/icons/si/SiApplepay'
+import SiMicrosoft from '@meronex/icons/si/SiMicrosoft'
+import SiGooglepay from '@meronex/icons/si/SiGooglepay'
+import {
+  isChrome,
+  isSafari,
+  isEdge,
+} from "react-device-detect";
 import {
   PaymentOptions as PaymentOptionsController,
   useLanguage,
@@ -29,7 +37,9 @@ import {
   PaymentMethodsList,
   PayCard,
   PayCardSelected,
-  CardItemContent
+  CardItemContent,
+  Pay,
+  PayText,
 } from './styles'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
@@ -54,6 +64,14 @@ const getPayIcon = (method) => {
       return <GrStripe />
     case 3:
       return <EnPaypal />
+    case 99:
+      return isChrome ? <SiGooglepay size={50} /> : isEdge ? <SiMicrosoft size={25} /> : isSafari ? <SiApplepay size={50} /> : <IosCard />
+    case 132:
+      return isChrome ? <SiGooglepay size={50} /> : <IosCard />
+    case 133:
+      return isSafari ? <SiApplepay size={50} /> : <IosCard />
+    case 134:
+      return isEdge ? <Pay><SiMicrosoft size={25} /><PayText>Pay</PayText></Pay> : <IosCard />
     default:
       return <IosCard />
   }
@@ -68,6 +86,8 @@ const paypalBtnStyle = {
 
 const PaymentOptionsUI = (props) => {
   const {
+    payMethodsWithStripe,
+    paymentRequest,
     cart,
     errorCash,
     isLoading,
@@ -85,6 +105,7 @@ const PaymentOptionsUI = (props) => {
   const [{ token }] = useSession()
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
+  const excludePayMethods = [!isChrome && 'google_pay', !isSafari && 'apple_pay', !isEdge && 'microsoft_pay'].filter(payMethod => payMethod)
 
   const handlePaymentMethodClick = (paymethod) => {
     const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod?.gateway)
@@ -120,10 +141,16 @@ const PaymentOptionsUI = (props) => {
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
           {paymethodsList.paymethods.length > 0 && (
-            paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
+            paymethodsList.paymethods
+              .sort((a, b) => a.id - b.id)
+              .filter(paymethod => !excludePayMethods.includes(paymethod.gateway))
+              .map(paymethod => (
               <React.Fragment key={paymethod.id}>
                 {
-                  (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                  (
+                    !isCustomerMode ||
+                    (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) &&
+                    (!payMethodsWithStripe.includes(paymethod.gateway) || paymentRequest) && (
                     <PayCard
                       isDisabled={isDisabled}
                       className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
