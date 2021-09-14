@@ -86,6 +86,11 @@ export const OrderTypeSelectorContentUI = (props) => {
     if (places.some(place => place.id === parseInt(placeId))) {
       await window.localStorage.setItem('place_id', placeId)
       handleBusinessPage()
+    } else {
+      setAlertState({
+        open: true,
+        content: [t('THE_PLACES_NOT_EXISTS', 'The place does not exists')]
+      })
     }
   }
 
@@ -158,7 +163,9 @@ export const OrderTypeSelectorContentUI = (props) => {
               />
             </InputWrapper>
             <Table>
-              <h2>{t('AVAILABLE_PLACES', 'Available places')}</h2>
+              {places.length > 0 && (
+                <h2>{t('AVAILABLE_PLACES', 'Available places')}</h2>
+              )}
               {places.map(place => (
                 <PlaceName key={place.id} isDisabled={!place.enabled}>
                   {place.name} #{place.id}
