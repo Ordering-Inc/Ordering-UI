@@ -194,6 +194,7 @@ export const DatePickerInput = styled.div`
   width: 200px;
   margin-bottom: 10px;
   font-size: 14px;
+  text-align: center;
 
   @media (min-width: 375px) {
     width: 250px;
