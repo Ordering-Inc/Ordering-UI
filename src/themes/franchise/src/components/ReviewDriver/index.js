@@ -143,26 +143,38 @@ const ReviewDriverUI = (props) => {
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? 'initial' : '25%', right: theme?.rtl ? '25%' : 'initial' }}
                 active={reviews?.qualification === 2}
+                pass={reviews?.qualification > 2}
                 onClick={() => handleChangeReviews('bad')}
                 className='mark-point'
               >
-                <span>{t('BAD', 'Bad')}</span>
+                <span>
+                  {t('BAD', 'Bad')}
+                  <span />
+                </span>
               </ReviewsMarkPoint>
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? 'initial' : '50%', right: theme?.rtl ? '50%' : 'initial' }}
                 active={reviews?.qualification === 3}
+                pass={reviews?.qualification > 3}
                 onClick={() => handleChangeReviews('okay')}
                 className='mark-point'
               >
-                <span>{t('OKAY', 'Okay')}</span>
+                <span>
+                  {t('OKAY', 'Okay')}
+                  <span />
+                </span>
               </ReviewsMarkPoint>
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? 'initial' : '75%', right: theme?.rtl ? '75%' : 'initial' }}
                 active={reviews?.qualification === 4}
+                pass={reviews?.qualification > 4}
                 onClick={() => handleChangeReviews('good')}
                 className='mark-point'
               >
-                <span>{t('GOOD', 'Good')}</span>
+                <span>
+                  {t('GOOD', 'Good')}
+                  <span />
+                </span>
               </ReviewsMarkPoint>
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? '0' : 'initial', right: theme?.rtl ? 'initial' : '0' }}

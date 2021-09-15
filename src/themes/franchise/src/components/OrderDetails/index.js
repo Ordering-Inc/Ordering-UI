@@ -452,7 +452,7 @@ const OrderDetailsUI = (props) => {
             />
           )
         )}
-        {isReviewOpen && (!isOrderReviewed || !isProductReviewed) && (
+        {isReviewOpen && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed) && (
           <Modal
             open={isReviewOpen}
             onClose={handleCloseReview}

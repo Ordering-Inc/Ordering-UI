@@ -116,19 +116,38 @@ export const ReviewsMarkPoint = styled.div`
   cursor: pointer;
 
   ${({ active }) => active && css`
-    color: ${props => props.theme?.colors.headingColor};
+    > span {
+      color: #344050;
+    }
   `}
 
   &.mark-point {
     span {
+      position: relative;
       margin-left: -50%;
       ${props => props.theme?.rtl && css`
         margin-right: 50%;
         margin-left: 0;
       `}
+
+      > span {
+        position: absolute;
+        height: 4px;
+        top: -15px;
+        width: 2px;
+        background: #CED4DA;
+        transition: all 0.3s;
+      }
     }
   }
-  
+
+  ${({ pass }) => pass && css`
+    span {
+      > span {
+        background: transparent !important;
+      }
+    }
+  `}
 `
 
 export const LogoAndReviewWrapper = styled.div`
