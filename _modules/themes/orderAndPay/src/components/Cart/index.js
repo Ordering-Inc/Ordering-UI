@@ -266,13 +266,14 @@ var CartUI = function CartUI(props) {
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "40%",
+    width: "60%",
     open: openProduct,
     padding: "0",
     closeOnBackdrop: true,
     onClose: function onClose() {
       return setModalIsOpen(false);
-    }
+    },
+    hideCloseDefault: true
   }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     isCartProduct: true,
     productCart: curProduct,
@@ -280,7 +281,10 @@ var CartUI = function CartUI(props) {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
-    onSave: handlerProductAction
+    onSave: handlerProductAction,
+    onClose: function onClose() {
+      return setModalIsOpen(false);
+    }
   })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingPageTitleWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('DO_YOU_WANT_SOMETHING_ELSE', 'Do you want something else?')), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return setIsUpselling(false);

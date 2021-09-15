@@ -15,6 +15,8 @@ var _FiMinusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiMinusCi
 
 var _FiPlusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiPlusCircle"));
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../../../../utils");
@@ -90,7 +92,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       handleSave = props.handleSave,
       handleChangeIngredientState = props.handleChangeIngredientState,
       handleChangeSuboptionState = props.handleChangeSuboptionState,
-      handleChangeCommentState = props.handleChangeCommentState;
+      handleChangeCommentState = props.handleChangeCommentState,
+      onClose = props.onClose;
   var product = productObject.product,
       loading = productObject.loading,
       error = productObject.error;
@@ -214,7 +217,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
     className: "product-container"
-  }, loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return onClose();
+    }
+  })), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",

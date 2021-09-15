@@ -323,14 +323,15 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     },
     disabled: openUpselling || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100)
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "40%",
+    width: "60%",
     open: openProduct,
     closeOnBackdrop: true,
     onClose: function onClose() {
       return closeModalProductForm();
     },
     padding: "0",
-    isProductForm: true
+    isProductForm: true,
+    hideCloseDefault: productModal.product || curProduct
   }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: 8
@@ -342,7 +343,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
-    onSave: handlerProductAction
+    onSave: handlerProductAction,
+    onClose: closeModalProductForm
   })), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && openUpselling && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
     business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,
