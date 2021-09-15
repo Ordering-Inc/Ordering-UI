@@ -9,7 +9,7 @@ export const ReviewDriver = (props) => {
 
   // const [ordering] = useApi()
   // const [session] = useSession()
-  const [reviews, setReviews] = useState({ qualification: 1, comment: '' })
+  const [reviews, setReviews] = useState({ qualification: 0, comment: '' })
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: false } })
 
   const handleChangeFormState = (currentChanges) => {

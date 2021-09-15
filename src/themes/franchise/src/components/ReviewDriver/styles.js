@@ -126,7 +126,7 @@ export const ReviewsMarkPoint = styled.div`
       position: relative;
       margin-left: -50%;
       ${props => props.theme?.rtl && css`
-        margin-right: 50%;
+        margin-right: -50%;
         margin-left: 0;
       `}
 

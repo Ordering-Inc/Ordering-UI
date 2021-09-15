@@ -40,6 +40,14 @@ const ReviewDriverUI = (props) => {
     { key: 3, content: t('CORDIAL_SERVICE', 'Cordial service') }
   ]
 
+  const qualificationList = [
+    { key: 1, text: t('TERRIBLE', 'Terrible'), middleNode: false, left: 0, right: 'initial' },
+    { key: 2, text: t('BAD', 'Bad'), middleNode: true, left: '25%', right: '75%' },
+    { key: 3, text: t('OKAY', 'Okay'), middleNode: true, left: '50%', right: '50%' },
+    { key: 4, text: t('GOOD', 'Good'), middleNode: true, left: '75%', right: '25%' },
+    { key: 5, text: t('GREAT', 'Great'), middleNode: false, left: 'initial', right: 0 }
+  ]
+
   const handleChangeReviews = (index) => {
     switch (index) {
       case 1:
@@ -90,6 +98,13 @@ const ReviewDriverUI = (props) => {
   }, [errors])
 
   const onSubmit = values => {
+    if (reviews?.qualification === 0) {
+      setAlertState({
+        open: true,
+        content: [`${t('REVIEW_QUALIFICATION_REQUIRED', 'Review qualification is required')}`]
+      })
+      return
+    }
     setAlertState({ ...alertState, success: true })
     handleSendDriverReview()
   }
@@ -146,57 +161,27 @@ const ReviewDriverUI = (props) => {
           <ReviewsProgressWrapper>
             <p>{t('HOW_WAS_YOUR_DRIVER', 'How was your driver?')}</p>
             <ReviewsProgressContent>
-              <ReviewsProgressBar style={{ width: `${((reviews?.qualification - 1) / 4) * 100}%` }} />
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? 'initial' : '0', right: theme?.rtl ? '0' : 'initial' }}
-                active={reviews?.qualification === 1}
-                onClick={() => handleChangeReviews(1)}
-              >
-                <span>{t('TERRIBLE', 'Terrible')}</span>
-              </ReviewsMarkPoint>
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? 'initial' : '25%', right: theme?.rtl ? '25%' : 'initial' }}
-                active={reviews?.qualification === 2}
-                pass={reviews?.qualification >= 2}
-                onClick={() => handleChangeReviews(2)}
-                className='mark-point'
-              >
-                <span>
-                  {t('BAD', 'Bad')}
-                  <span />
-                </span>
-              </ReviewsMarkPoint>
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? 'initial' : '50%', right: theme?.rtl ? '50%' : 'initial' }}
-                active={reviews?.qualification === 3}
-                pass={reviews?.qualification >= 3}
-                onClick={() => handleChangeReviews(3)}
-                className='mark-point'
-              >
-                <span>
-                  {t('OKAY', 'Okay')}
-                  <span />
-                </span>
-              </ReviewsMarkPoint>
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? 'initial' : '75%', right: theme?.rtl ? '75%' : 'initial' }}
-                active={reviews?.qualification === 4}
-                pass={reviews?.qualification >= 4}
-                onClick={() => handleChangeReviews(4)}
-                className='mark-point'
-              >
-                <span>
-                  {t('GOOD', 'Good')}
-                  <span />
-                </span>
-              </ReviewsMarkPoint>
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? '0' : 'initial', right: theme?.rtl ? 'initial' : '0' }}
-                active={reviews?.qualification === 5}
-                onClick={() => handleChangeReviews(5)}
-              >
-                <span>{t('GREAT', 'Great')}</span>
-              </ReviewsMarkPoint>
+              <ReviewsProgressBar style={{ width: `${(reviews?.qualification === 0 ? 0 : (reviews?.qualification - 1) / 4) * 100}%` }} />
+              {
+                qualificationList?.map(qualification => (
+                  <ReviewsMarkPoint
+                    key={qualification?.key}
+                    style={{
+                      left: theme.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
+                      right: theme?.rtl ? qualification?.left : (qualification?.middleNode ? 'initial' : qualification?.right)
+                    }}
+                    active={reviews?.qualification === qualification?.key}
+                    pass={reviews?.qualification >= qualification?.key}
+                    className={qualification?.middleNode ? 'mark-point' : ''}
+                    onClick={() => handleChangeReviews(qualification?.key)}
+                  >
+                    <span>
+                      {qualification?.text}
+                      <span />
+                    </span>
+                  </ReviewsMarkPoint>
+                ))
+              }
             </ReviewsProgressContent>
           </ReviewsProgressWrapper>
           <CommentsList>
