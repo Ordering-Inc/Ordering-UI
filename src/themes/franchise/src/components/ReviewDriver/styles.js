@@ -25,7 +25,7 @@ export const Comments = styled.div`
     min-height: 104px;
   }
 `
-export const Send = styled.div`
+export const ActionBtnWrapper = styled.div`
   margin-top: 30px;
   width: 100%;
 

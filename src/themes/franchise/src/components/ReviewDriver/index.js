@@ -12,7 +12,7 @@ import { useTheme } from 'styled-components'
 import {
   ReviewDriverContainer,
   Comments,
-  Send,
+  ActionBtnWrapper,
   BusinessLogo,
   WrapperBusinessLogo,
   ReviewsProgressWrapper,
@@ -207,7 +207,6 @@ const ReviewDriverUI = (props) => {
           <Comments>
             <p>{t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')}</p>
             <TextArea
-              placeholder={t('COMMENTS', 'Comments')}
               name='comment'
               value={extraComment}
               onChange={(e) => setExtraComment(e.target.value)}
@@ -224,7 +223,7 @@ const ReviewDriverUI = (props) => {
             props.afterMidComponents?.map((MidComponent, i) => (
               <MidComponent key={i} {...props} />))
           }
-          <Send>
+          <ActionBtnWrapper>
             <Button
               color={!formState.loading ? 'primary' : 'secondary'}
               type='submit'
@@ -234,7 +233,7 @@ const ReviewDriverUI = (props) => {
                 t('SEND_REVIEW', 'Send review')
               ) : t('LOADING', 'Loading')}
             </Button>
-          </Send>
+          </ActionBtnWrapper>
           <Alert
             title={t('ORDER_REVIEW', 'Order Review')}
             content={alertState.content}
