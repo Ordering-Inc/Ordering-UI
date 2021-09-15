@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-
 import { useLanguage, useUtils } from 'ordering-components'
 import { ReviewDriver as ReviewDriverController } from './naked'
 import MdClose from '@meronex/icons/md/MdClose'
+
+import { Alert } from '../Confirm'
+import { TextArea } from '../../styles/Inputs'
+import { Button } from '../../styles/Buttons'
+import { useTheme } from 'styled-components'
+
 import {
   ReviewDriverContainer,
   Comments,
@@ -17,11 +22,6 @@ import {
   LogoAndReviewWrapper,
   CommentsList
 } from './styles'
-import { Alert } from '../Confirm'
-
-import { TextArea } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
-import { useTheme } from 'styled-components'
 
 const ReviewDriverUI = (props) => {
   const { reviews, order, handleSendDriverReview, formState, closeReviewDriver, setIsDriverReviewed, setReviews } = props
@@ -30,31 +30,31 @@ const ReviewDriverUI = (props) => {
   const theme = useTheme()
   const { handleSubmit, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
-  const [comment, setComment] = useState(null)
   const [extraComment, setExtraComment] = useState('')
+  const [comments, setComments] = useState([])
 
   const commentsList = [
-    t('FAST_AND_EFFICIENT', 'Fast and efficient'),
-    t('DELIVERY_PERFECT', 'Delivery perfect'),
-    t('EXCELLENT_COMMUNICATION', 'Excellent communication'),
-    t('CORDIAL_SERVICE', 'Cordial service')
+    { key: 0, content: t('FAST_AND_EFFICIENT', 'Fast and efficient') },
+    { key: 1, content: t('DELIVERY_PERFECT', 'Delivery perfect') },
+    { key: 2, content: t('EXCELLENT_COMMUNICATION', 'Excellent communication') },
+    { key: 3, content: t('CORDIAL_SERVICE', 'Cordial service') }
   ]
 
   const handleChangeReviews = (index) => {
     switch (index) {
-      case 'terrible':
+      case 1:
         setReviews({ ...reviews, qualification: 1 })
         break
-      case 'bad':
+      case 2:
         setReviews({ ...reviews, qualification: 2 })
         break
-      case 'okay':
+      case 3:
         setReviews({ ...reviews, qualification: 3 })
         break
-      case 'good':
+      case 4:
         setReviews({ ...reviews, qualification: 4 })
         break
-      case 'great':
+      case 5:
         setReviews({ ...reviews, qualification: 5 })
         break
     }
@@ -94,9 +94,14 @@ const ReviewDriverUI = (props) => {
     handleSendDriverReview()
   }
 
-  const handleChangeComments = (text) => {
-    if (comment === text) setComment(null)
-    else setComment(text)
+  const handleChangeComment = (commentItem) => {
+    const found = comments.find((comment) => comment?.key === commentItem.key)
+    if (found) {
+      const _comments = comments.filter((comment) => comment?.key !== commentItem.key)
+      setComments(_comments)
+    } else {
+      setComments([...comments, commentItem])
+    }
   }
 
   const closeAlert = () => {
@@ -109,10 +114,19 @@ const ReviewDriverUI = (props) => {
     }
   }
 
+  const isSelectedComment = (commentKey) => {
+    const found = comments.find((comment) => comment?.key === commentKey)
+    return found
+  }
+
   useEffect(() => {
-    const _comment = comment ? (extraComment !== '' ? `${comment}. ${extraComment}` : `${comment}.`) : extraComment
+    let _comments = ''
+    if (comments.length > 0) {
+      comments.map(comment => (_comments += comment.content + '. '))
+    }
+    const _comment = _comments + extraComment
     setReviews({ ...reviews, comment: _comment })
-  }, [comment, extraComment])
+  }, [comments, extraComment])
 
   return (
     <>
@@ -136,15 +150,15 @@ const ReviewDriverUI = (props) => {
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? 'initial' : '0', right: theme?.rtl ? '0' : 'initial' }}
                 active={reviews?.qualification === 1}
-                onClick={() => handleChangeReviews('terrible')}
+                onClick={() => handleChangeReviews(1)}
               >
                 <span>{t('TERRIBLE', 'Terrible')}</span>
               </ReviewsMarkPoint>
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? 'initial' : '25%', right: theme?.rtl ? '25%' : 'initial' }}
                 active={reviews?.qualification === 2}
-                pass={reviews?.qualification > 2}
-                onClick={() => handleChangeReviews('bad')}
+                pass={reviews?.qualification >= 2}
+                onClick={() => handleChangeReviews(2)}
                 className='mark-point'
               >
                 <span>
@@ -155,8 +169,8 @@ const ReviewDriverUI = (props) => {
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? 'initial' : '50%', right: theme?.rtl ? '50%' : 'initial' }}
                 active={reviews?.qualification === 3}
-                pass={reviews?.qualification > 3}
-                onClick={() => handleChangeReviews('okay')}
+                pass={reviews?.qualification >= 3}
+                onClick={() => handleChangeReviews(3)}
                 className='mark-point'
               >
                 <span>
@@ -167,8 +181,8 @@ const ReviewDriverUI = (props) => {
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? 'initial' : '75%', right: theme?.rtl ? '75%' : 'initial' }}
                 active={reviews?.qualification === 4}
-                pass={reviews?.qualification > 4}
-                onClick={() => handleChangeReviews('good')}
+                pass={reviews?.qualification >= 4}
+                onClick={() => handleChangeReviews(4)}
                 className='mark-point'
               >
                 <span>
@@ -179,7 +193,7 @@ const ReviewDriverUI = (props) => {
               <ReviewsMarkPoint
                 style={{ left: theme.rtl ? '0' : 'initial', right: theme?.rtl ? 'initial' : '0' }}
                 active={reviews?.qualification === 5}
-                onClick={() => handleChangeReviews('great')}
+                onClick={() => handleChangeReviews(5)}
               >
                 <span>{t('GREAT', 'Great')}</span>
               </ReviewsMarkPoint>
@@ -191,13 +205,13 @@ const ReviewDriverUI = (props) => {
               commentsList?.map((commentItem, i) => (
                 <Button
                   key={i}
-                  color={comment === commentItem ? 'primary' : 'secundary'}
-                  onClick={() => handleChangeComments(commentItem)}
+                  color={isSelectedComment(commentItem.key) ? 'primary' : 'secundary'}
+                  onClick={() => handleChangeComment(commentItem)}
                   initialIcon
                 >
-                  {commentItem}
+                  {commentItem.content}
                   {
-                    comment === commentItem && <MdClose />
+                    isSelectedComment(commentItem.key) && <MdClose />
                   }
                 </Button>
               ))

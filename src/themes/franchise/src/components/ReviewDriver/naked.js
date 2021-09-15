@@ -20,6 +20,7 @@ export const ReviewDriver = (props) => {
    * Function that load and send the product review to ordering
    */
   const handleSendDriverReview = async () => {
+    console.log(reviews)
     // setFormState({ ...formState, loading: true })
     // try {
     //   const response = await fetch(`${ordering.root}/orders/${order?.id}/product_reviews`, {
