@@ -292,6 +292,7 @@ export const ProductPrice = styled.div`
 
   span {
     font-weight: 500;
+    white-space: nowrap;
   }
 
   p {

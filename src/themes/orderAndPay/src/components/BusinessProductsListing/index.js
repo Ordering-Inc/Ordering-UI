@@ -300,12 +300,13 @@ const BusinessProductsListingUI = (props) => {
       )}
 
       <Modal
-        width='40%'
+        width='60%'
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
         padding='0'
         isProductForm
+        hideCloseDefault={productModal.product || curProduct}
       >
 
         {productModal.loading && !productModal.error && (
@@ -333,46 +334,10 @@ const BusinessProductsListingUI = (props) => {
             product={productModal.product || curProduct}
             businessId={business?.id}
             onSave={handlerProductAction}
+            onClose={closeModalProductForm}
           />
         )}
       </Modal>
-
-      {/* <Modal
-        open={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        padding='0'
-        isProductForm
-      >
-        <BusinessCartContainer>
-          <BusinessCartContent>
-            {currentCart?.products?.length > 0 ? (
-              <>
-                <Title>{t('YOUR_CART', 'Your cart')}</Title>
-                <Cart
-                  isForceOpenCart
-                  cart={currentCart}
-                  isCartPending={currentCart?.status === 2}
-                  isProducts={currentCart.products.length}
-                  isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                  handleCartOpen={(val) => setIsCartOpen(val)}
-                  isCustomMode
-                />
-              </>
-            ) : (
-              <EmptyCart>
-                <div className='empty-content'>
-                  <AiOutlineShoppingCart />
-                  <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
-                </div>
-                <EmptyBtnWrapper>
-                  <span>$0.00</span>
-                  <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
-                </EmptyBtnWrapper>
-              </EmptyCart>
-            )}
-          </BusinessCartContent>
-        </BusinessCartContainer>
-      </Modal> */}
 
       {currentCart?.products && openUpselling && (
         <UpsellingPage
