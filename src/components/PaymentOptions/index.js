@@ -65,7 +65,7 @@ const getPayIcon = (method) => {
     case 3:
       return <EnPaypal />
     case 99:
-      return isChrome ? <SiGooglepay size={50} /> : isEdge ? <SiMicrosoft size={25} /> : isSafari ? <SiApplepay size={50} /> : <IosCard />
+      return isChrome ? <SiGooglepay size={50} /> : isEdge ? <Pay><SiMicrosoft size={25} /><PayText>Pay</PayText></Pay> : isSafari ? <SiApplepay size={50} /> : <IosCard />
     case 132:
       return isChrome ? <SiGooglepay size={50} /> : <IosCard />
     case 133:

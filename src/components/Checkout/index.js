@@ -452,7 +452,8 @@ export const Checkout = (props) => {
     handleOrderRedirect,
     handleCheckoutRedirect,
     handleSearchRedirect,
-    handleCheckoutListRedirect
+    handleCheckoutListRedirect,
+    isEnabledStripe,
   } = props
 
   const [orderState, { confirmCart }] = useOrder()
@@ -470,6 +471,24 @@ export const Checkout = (props) => {
   const [publicKey, setPublicKey] = useState(null)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length) || null)
+
+  /**
+   * Method to get stripe credentials from API
+   */
+   const getCredentials = async () => {
+    try {
+      const { content: { result } } = await ordering.setAccessToken(token).paymentCards().getCredentials()
+      setPublicKey(result.publishable)
+    } catch (err) {
+      setPublicKey(null)
+    }
+  }
+
+  useEffect(() => {
+    if (token) {
+      getCredentials()
+    }
+  }, [token])
 
   const closeAlert = () => {
     setAlertState({
@@ -570,24 +589,6 @@ export const Checkout = (props) => {
     }
   }
 
-  /**
-   * Method to get stripe credentials from API
-   */
-  const getCredentials = async () => {
-    try {
-      const { content: { result } } = await ordering.setAccessToken(token).paymentCards().getCredentials()
-      setPublicKey(result.publishable)
-    } catch (err) {
-      setPublicKey(null)
-    }
-  }
-
-  useEffect(() => {
-    if (token) {
-      getCredentials()
-    }
-  }, [token])
-
   useEffect(() => {
     if (token && cartUuid) {
       getOrder(cartUuid)
@@ -596,7 +597,6 @@ export const Checkout = (props) => {
 
   const checkoutProps = {
     ...props,
-    isEnabledStripe: publicKey,
     UIComponent: CheckoutUI,
     cartState,
     businessId: cartState.cart?.business_id,
@@ -639,7 +639,7 @@ export const Checkout = (props) => {
         </div>
       )}
 
-      {cartUuid && cartState.cart && cartState.cart?.status !== 1 && (
+      {cartUuid && cartState.cart && cartState.cart?.status !== 1 && (!isEnabledStripe || publicKey) && (
         <Elements stripe={loadStripe(publicKey)}>
           <CheckoutController {...checkoutProps} />
         </Elements>
