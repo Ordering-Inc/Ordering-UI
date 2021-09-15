@@ -213,7 +213,7 @@ const ReviewOrderUI = (props) => {
               <MidComponent key={i} {...props} />))
           }
           <Send>
-            <span onClick={closeReviewOrder}>{t('SKIP', 'Skip')}</span>
+            <span onClick={() => setIsReviewed(true)}>{t('SKIP', 'Skip')}</span>
             <Button
               color={!formState.loading ? 'primary' : 'secondary'}
               type='submit'

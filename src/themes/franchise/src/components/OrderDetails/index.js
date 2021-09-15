@@ -57,6 +57,7 @@ import {
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
 import { ReviewProduct } from '../ReviewProduct'
+import { ReviewDriver } from '../ReviewDriver'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -467,7 +468,7 @@ const OrderDetailsUI = (props) => {
               (!isOrderReviewed && !order.review) ? (<ReviewOrder order={order} closeReviewOrder={() => setIsOrderReviewed(false)} setIsReviewed={setIsOrderReviewed} />)
                 : (!isProductReviewed
                   ? <ReviewProduct order={order} closeReviewProduct={() => setIsProductReviewed(false)} setIsProductReviewed={setIsProductReviewed} />
-                  : <div>Review Driver</div>)
+                  : <ReviewDriver order={order} closeReviewDriver={() => setIsDriverReviewed(false)} setIsDriverReviewed={setIsDriverReviewed} />)
             }
           </Modal>
         )}
