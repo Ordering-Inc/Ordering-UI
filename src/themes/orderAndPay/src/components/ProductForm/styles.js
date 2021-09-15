@@ -87,6 +87,9 @@ export const ProductInfo = styled.div`
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
   margin-bottom: 20px;
+  span{
+    white-space: nowrap;
+  }
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
   }
@@ -133,7 +136,7 @@ export const ProductActions = styled.div`
   width: 100%;
 
   position: fixed;
-  bottom: -19px;
+  bottom: -5px;
   right: 0;
   width: 100%;
   background-color: #FFF;
@@ -142,6 +145,7 @@ export const ProductActions = styled.div`
     font-weight: 600;
     font-size: 20px;
     color: ${props => props.theme?.colors.darkTextColor};
+    white-space: nowrap;
   }
 
   div.incdec-control {
@@ -276,4 +280,26 @@ export const ProductShareWrapper = styled.div`
     }
   }
 
+`
+
+export const ModalIcon = styled.span`
+  position: fixed;
+  left: 25px;
+  top: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 2;
+  ${props => props.theme?.rtl && css`
+    left: 5px;
+    right: initial;
+  `}
+  svg{
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+  }
+
+  @media(min-width: 769px){
+    position: absolute;
+    top: 5px;
+  }
 `

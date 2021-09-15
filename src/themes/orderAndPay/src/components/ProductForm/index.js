@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
+import MdClose from '@meronex/icons/md/MdClose'
 
 import {
   ProductForm as ProductOptions,
@@ -41,7 +42,8 @@ import {
   ProductFormTitle,
   WrapperIngredients,
   ProductTabContainer,
-  Divider
+  Divider,
+  ModalIcon
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -61,7 +63,8 @@ const ProductOptionsUI = (props) => {
     handleSave,
     handleChangeIngredientState,
     handleChangeSuboptionState,
-    handleChangeCommentState
+    handleChangeCommentState,
+    onClose
   } = props
 
   const { product, loading, error } = productObject
@@ -144,7 +147,11 @@ const ProductOptionsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
+
       <ProductContainer className='product-container'>
+        <ModalIcon>
+          <MdClose onClick={() => onClose()} />
+        </ModalIcon>
         {loading && !error && (
           <SkeletonBlock width={90}>
             <Skeleton variant='rect' height={50} />

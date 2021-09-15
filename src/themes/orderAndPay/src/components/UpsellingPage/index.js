@@ -175,13 +175,21 @@ const UpsellingPageUI = (props) => {
           )}
         </>
       )}
-      <Modal open={modalIsOpen} onClose={() => setModalIsOpen(false)} width='70%' padding='0' closeOnBackdrop>
+      <Modal
+        open={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+        width='70%'
+        padding='0'
+        closeOnBackdrop
+        hideCloseDefault
+      >
         {actualProduct && (
           <ProductForm
             product={actualProduct}
             businessId={actualProduct.api.businessId}
             businessSlug={business.slug}
             onSave={() => handleSaveProduct()}
+            onClose={() => setModalIsOpen(false)}
           />
         )}
       </Modal>
