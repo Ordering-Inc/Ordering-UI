@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useLanguage, useUtils } from 'ordering-components'
 import { ReviewDriver as ReviewDriverController } from './naked'
 import MdClose from '@meronex/icons/md/MdClose'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import { Alert } from '../Confirm'
 import { TextArea } from '../../styles/Inputs'
@@ -20,18 +21,28 @@ import {
   ReviewsProgressBar,
   ReviewsMarkPoint,
   LogoAndReviewWrapper,
-  CommentsList
+  CommentsList,
+  DriverInfoBlock
 } from './styles'
 
 const ReviewDriverUI = (props) => {
-  const { reviews, order, handleSendDriverReview, formState, closeReviewDriver, setIsDriverReviewed, setReviews } = props
+  const {
+    reviews,
+    order,
+    formState,
+    setReviews,
+    closeReviewDriver,
+    setIsDriverReviewed,
+    handleSendDriverReview
+  } = props
+
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
-  const theme = useTheme()
   const { handleSubmit, errors } = useForm()
-  const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
-  const [extraComment, setExtraComment] = useState('')
   const [comments, setComments] = useState([])
+  const [extraComment, setExtraComment] = useState('')
+  const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
   const commentsList = [
     { key: 0, content: t('FAST_AND_EFFICIENT', 'Fast and efficient') },
@@ -154,10 +165,15 @@ const ReviewDriverUI = (props) => {
       <>
         <LogoAndReviewWrapper>
           <WrapperBusinessLogo>
-            {(order?.business?.logo || theme.images?.dummies?.businessLogo) && (
-              <BusinessLogo bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-            )}
+            {(order?.driver?.photo) ? (
+              <BusinessLogo bgimage={optimizeImage(order?.driver?.photo, 'h_200,c_limit')} />
+            ) : <FaUserAlt />}
           </WrapperBusinessLogo>
+          {
+            order?.driver?.name && (
+              <DriverInfoBlock>{order?.driver?.name}</DriverInfoBlock>
+            )
+          }
           <ReviewsProgressWrapper>
             <p>{t('HOW_WAS_YOUR_DRIVER', 'How was your driver?')}</p>
             <ReviewsProgressContent>
@@ -235,7 +251,7 @@ const ReviewDriverUI = (props) => {
             </Button>
           </ActionBtnWrapper>
           <Alert
-            title={t('ORDER_REVIEW', 'Order Review')}
+            title={t('DRIVER_REVIEW', 'Driver Review')}
             content={alertState.content}
             acceptText={t('ACCEPT', 'Accept')}
             open={alertState.open}

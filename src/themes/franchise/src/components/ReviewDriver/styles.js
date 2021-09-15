@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
 import React from 'react'
+import styled, { css } from 'styled-components'
 
 export const ReviewDriverContainer = styled.form`
   display: flex;
@@ -77,6 +77,11 @@ export const WrapperBusinessLogo = styled.div`
   max-width: 124px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
+
+  svg {
+    width: 124px;
+    height: 124px;
+  }
 `
 
 export const ReviewsProgressWrapper = styled.div`
@@ -184,4 +189,12 @@ export const CommentsList = styled.div`
       `}
     }
   }
+`
+
+export const DriverInfoBlock = styled.p`
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-size: 14px;
+  text-align: center;
+  color: #344050;
 `
