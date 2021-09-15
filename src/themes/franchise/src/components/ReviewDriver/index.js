@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { useLanguage, useUtils } from 'ordering-components'
 import { ReviewDriver as ReviewDriverController } from './naked'
 import MdClose from '@meronex/icons/md/MdClose'
-import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import {
   ReviewDriverContainer,
   Comments,
