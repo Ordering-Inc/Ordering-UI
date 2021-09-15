@@ -459,7 +459,9 @@ const OrderDetailsUI = (props) => {
           >
             {
               (!isOrderReviewed && !order.review) ? (<ReviewOrder order={order} closeReviewOrder={() => setIsOrderReviewed(false)} setIsReviewed={setIsOrderReviewed} />)
-                : (!isProductReviewed ? (<ReviewProduct />) : <div>Review Driver</div>)
+                : (!isProductReviewed
+                  ? <ReviewProduct order={order} closeReviewProduct={() => setIsProductReviewed(false)} setIsProductReviewed={setIsProductReviewed} />
+                  : <div>Review Driver</div>)
             }
           </Modal>
         )}

@@ -1,21 +1,77 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
+import { useSession, useApi } from 'ordering-components'
 
 export const ReviewProduct = (props) => {
-  const { UIComponent } = props
+  const { UIComponent, order } = props
 
-  // const [ordering] = useApi()
-  // const [session] = useSession()
-  // const [stars, setStars] = useState({ quality: 1, punctiality: 1, service: 1, packaging: 1, comments: '' })
-  // const [formState, setFormState] = useState({ loading: false, result: { error: false } })
+  const [ordering] = useApi()
+  const [session] = useSession()
+  const [formState, setFormState] = useState({ loading: false, changes: [], result: { error: false } })
+
+  const handleChangeFormState = (changes) => {
+    const _changes = [...changes]
+    setFormState({ ...formState, changes: _changes })
+  }
+  /**
+   * Function that load and send the product review to ordering
+   */
+  const handleSendProductReview = async () => {
+    setFormState({ ...formState, loading: true })
+    try {
+      const response = await fetch(`${ordering.root}/orders/${order?.id}/product_reviews`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${session.token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ reviews: JSON.stringify(formState?.changes) })
+      })
+      const { result, error } = await response.json()
+      if (!error) {
+        setFormState({
+          loading: false,
+          changes: [],
+          result: {
+            result: result,
+            error: false
+          }
+        })
+      } else {
+        setFormState({
+          ...formState,
+          loading: false,
+          result: {
+            result: result,
+            error: true
+          }
+        })
+      }
+    } catch (err) {
+      setFormState({
+        ...formState,
+        result: {
+          error: true,
+          result: err.message
+        },
+        loading: false
+      })
+    }
+  }
+  useEffect(() => {
+    console.log(formState, 'this is changes')
+  }, [formState])
 
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
+          formState={formState}
+          handleChangeFormState={handleChangeFormState}
+          handleSendProductReview={handleSendProductReview}
         />
       )}
     </>
@@ -27,6 +83,10 @@ ReviewProduct.propTypes = {
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
+  /**
+   * Getting the order that can be review
+  */
+  order: PropTypes.object,
   /**
    * Components types before payment option cash
    * Array of type components, the parent props will pass to these components
