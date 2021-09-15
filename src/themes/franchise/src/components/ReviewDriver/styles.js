@@ -36,7 +36,7 @@ export const ActionBtnWrapper = styled.div`
   }
 `
 
-const BusinessLogoStyled = styled.div`
+const DriverPhotoStyled = styled.div`
   display: flex;
   width: 124px;
   height: 124px;
@@ -56,20 +56,20 @@ const BusinessLogoStyled = styled.div`
   }
 `
 
-export const BusinessLogo = (props) => {
+export const DriverPhoto = (props) => {
   const style = {}
   if (props.bgimage) {
     style.backgroundImage = `url(${props.bgimage})`
   }
 
   return (
-    <BusinessLogoStyled {...props} style={style}>
+    <DriverPhotoStyled {...props} style={style}>
       {props.children}
-    </BusinessLogoStyled>
+    </DriverPhotoStyled>
   )
 }
 
-export const WrapperBusinessLogo = styled.div`
+export const WrapperDriverPhoto = styled.div`
   align-self: center;
   width: 124px;
   height: 124px;

@@ -14,8 +14,8 @@ import {
   ReviewDriverContainer,
   Comments,
   ActionBtnWrapper,
-  BusinessLogo,
-  WrapperBusinessLogo,
+  DriverPhoto,
+  WrapperDriverPhoto,
   ReviewsProgressWrapper,
   ReviewsProgressContent,
   ReviewsProgressBar,
@@ -164,11 +164,11 @@ const ReviewDriverUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <>
         <LogoAndReviewWrapper>
-          <WrapperBusinessLogo>
+          <WrapperDriverPhoto>
             {(order?.driver?.photo) ? (
-              <BusinessLogo bgimage={optimizeImage(order?.driver?.photo, 'h_200,c_limit')} />
+              <DriverPhoto bgimage={optimizeImage(order?.driver?.photo, 'h_200,c_limit')} />
             ) : <FaUserAlt />}
-          </WrapperBusinessLogo>
+          </WrapperDriverPhoto>
           {
             order?.driver?.name && (
               <DriverInfoBlock>{order?.driver?.name}</DriverInfoBlock>
