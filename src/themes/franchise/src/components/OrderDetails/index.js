@@ -455,7 +455,13 @@ const OrderDetailsUI = (props) => {
           <Modal
             open={isReviewOpen}
             onClose={handleCloseReview}
-            title={order ? t('REVIEW_ORDER', 'Review order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
+            title={order
+              ? ((!isOrderReviewed && !order.review)
+                ? t('REVIEW_ORDER', 'Review order')
+                : (!isProductReviewed
+                  ? t('REVIEW_PRODUCT', 'Review Product')
+                  : t('REVIEW_DRIVER', 'Review Driver')))
+              : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
           >
             {
               (!isOrderReviewed && !order.review) ? (<ReviewOrder order={order} closeReviewOrder={() => setIsOrderReviewed(false)} setIsReviewed={setIsOrderReviewed} />)

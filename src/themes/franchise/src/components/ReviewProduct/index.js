@@ -205,7 +205,7 @@ const ReviewProductUI = (props) => {
           />
         ))}
         <ActionBlock>
-          <span onClick={closeReviewProduct}>{t('SKIP', 'Skip')}</span>
+          <span onClick={() => setIsProductReviewed(true)}>{t('SKIP', 'Skip')}</span>
           <Button
             color={!formState.loading ? 'primary' : 'secondary'}
             type='submit'
