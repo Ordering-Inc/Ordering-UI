@@ -34,25 +34,39 @@ const SingleProductReview = (props) => {
   const [, t] = useLanguage()
   const [isLike, setIsLike] = useState(true)
   const [isExtraComment, setIsExtraComment] = useState(false)
-  const [comment, setComment] = useState(null)
+  const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
 
   const commentsList = [
-    t('IT_WASNT_TASTY', "It wasn't tasty"),
-    t('SMALL_PORTION', 'Small portion'),
-    t('WET_OR_LEAKY', 'Wet or leaky'),
-    t('SLOPPY_PRESENTATION', 'Sloppy presentation'),
-    t('COLD_OR_MELTED', 'Cold or melted')
+    { key: 0, content: t('IT_WASNT_TASTY', "It wasn't tasty") },
+    { key: 1, content: t('SMALL_PORTION', 'Small portion') },
+    { key: 2, content: t('WET_OR_LEAKY', 'Wet or leaky') },
+    { key: 3, content: t('SLOPPY_PRESENTATION', 'Sloppy presentation') },
+    { key: 4, content: t('COLD_OR_MELTED', 'Cold or melted') }
   ]
 
-  const handleChangeComments = (text) => {
-    if (comment === text) setComment(null)
-    else setComment(text)
+  const handleChangeComment = (commentItem) => {
+    const found = comments.find((comment) => comment?.key === commentItem.key)
+    if (found) {
+      const _comments = comments.filter((comment) => comment?.key !== commentItem.key)
+      setComments(_comments)
+    } else {
+      setComments([...comments, commentItem])
+    }
+  }
+
+  const isSelectedComment = (commentKey) => {
+    const found = comments.find((comment) => comment?.key === commentKey)
+    return found
   }
 
   useEffect(() => {
-    if (!comment && !extraComment && formState.changes?.length === 0 && isLike) return
-    const _comment = comment ? (extraComment !== '' ? `${comment}. ${extraComment}` : `${comment}.`) : extraComment
+    if (comments?.length === 0 && !extraComment && formState.changes?.length === 0 && isLike) return
+    let _comments = ''
+    if (comments.length > 0) {
+      comments.map(comment => (_comments += comment.content + '. '))
+    }
+    const _comment = _comments + extraComment
     let found = false
     const _changes = formState.changes.map(item => {
       if (item?.product_id === product?.id) {
@@ -73,7 +87,7 @@ const SingleProductReview = (props) => {
       })
     }
     handleChangeFormState && handleChangeFormState(_changes)
-  }, [comment, extraComment, isLike])
+  }, [comments, extraComment, isLike])
 
   return (
     <SingleProductReviewContainer>
@@ -94,13 +108,13 @@ const SingleProductReview = (props) => {
             <ButtonCustomized
               key={i}
               type='button'
-              active={comment === commentItem}
-              onClick={() => handleChangeComments(commentItem)}
+              active={isSelectedComment(commentItem.key)}
+              onClick={() => handleChangeComment(commentItem)}
               initialIcon
             >
-              {commentItem}
+              {commentItem.content}
               {
-                comment === commentItem && <MdClose />
+                isSelectedComment(commentItem.key) && <MdClose />
               }
             </ButtonCustomized>
           ))
@@ -205,7 +219,7 @@ const ReviewProductUI = (props) => {
           />
         ))}
         <ActionBlock>
-          <span onClick={() => setIsProductReviewed(true)}>{t('SKIP', 'Skip')}</span>
+          <span onClick={closeReviewProduct}>{t('SKIP', 'Skip')}</span>
           <Button
             color={!formState.loading ? 'primary' : 'secondary'}
             type='submit'

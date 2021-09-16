@@ -148,8 +148,8 @@ const OrderDetailsUI = (props) => {
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
 
-  const handleCloseReview = () => {
-    setIsReviewOpen(false)
+  const handleCloseProductReview = () => {
+    if (!order?.driver) setIsReviewOpen(false)
   }
 
   useEffect(() => {
@@ -455,7 +455,7 @@ const OrderDetailsUI = (props) => {
         {isReviewOpen && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed) && (
           <Modal
             open={isReviewOpen}
-            onClose={handleCloseReview}
+            onClose={() => setIsReviewOpen(false)}
             title={order
               ? ((!isOrderReviewed && !order.review)
                 ? t('REVIEW_ORDER', 'Review order')
@@ -465,10 +465,10 @@ const OrderDetailsUI = (props) => {
               : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
           >
             {
-              (!isOrderReviewed && !order.review) ? (<ReviewOrder order={order} closeReviewOrder={() => setIsOrderReviewed(false)} setIsReviewed={setIsOrderReviewed} />)
+              (!isOrderReviewed && !order.review) ? (<ReviewOrder order={order} closeReviewOrder={() => setIsOrderReviewed(true)} setIsReviewed={setIsOrderReviewed} />)
                 : (!isProductReviewed
-                  ? <ReviewProduct order={order} closeReviewProduct={() => setIsProductReviewed(false)} setIsProductReviewed={setIsProductReviewed} />
-                  : (!isDriverReviewed && order?.driver && <ReviewDriver order={order} closeReviewDriver={() => setIsDriverReviewed(false)} setIsDriverReviewed={setIsDriverReviewed} />))
+                  ? <ReviewProduct order={order} closeReviewProduct={handleCloseProductReview} setIsProductReviewed={setIsProductReviewed} />
+                  : (!isDriverReviewed && order?.driver && <ReviewDriver order={order} closeReviewDriver={() => setIsReviewOpen(false)} setIsDriverReviewed={setIsDriverReviewed} />))
             }
           </Modal>
         )}

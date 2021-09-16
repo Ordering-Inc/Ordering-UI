@@ -79,35 +79,6 @@ const ReviewDriverUI = (props) => {
     }
   }
 
-  useEffect(() => {
-    if (!formState.loading && formState.result?.error) {
-      setAlertState({
-        open: true,
-        success: false,
-        content: formState.result?.result || [t('ERROR', 'Error')]
-      })
-    }
-    if (!formState.loading && !formState.result?.error && alertState.success) {
-      setAlertState({
-        ...alertState,
-        open: true,
-        title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
-        content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
-      })
-      setIsDriverReviewed && setIsDriverReviewed(true)
-    }
-  }, [formState])
-
-  useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      setAlertState({
-        open: true,
-        success: false,
-        content: Object.values(errors).map(error => error.message)
-      })
-    }
-  }, [errors])
-
   const onSubmit = values => {
     if (reviews?.qualification === 0) {
       setAlertState({
@@ -144,6 +115,35 @@ const ReviewDriverUI = (props) => {
     const found = comments.find((comment) => comment?.key === commentKey)
     return found
   }
+
+  useEffect(() => {
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        success: false,
+        content: formState.result?.result || [t('ERROR', 'Error')]
+      })
+    }
+    if (!formState.loading && !formState.result?.error && alertState.success) {
+      setAlertState({
+        ...alertState,
+        open: true,
+        title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
+        content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
+      })
+      setIsDriverReviewed && setIsDriverReviewed(true)
+    }
+  }, [formState])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        success: false,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
 
   useEffect(() => {
     let _comments = ''
